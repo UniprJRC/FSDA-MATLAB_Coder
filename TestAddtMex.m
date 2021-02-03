@@ -10,16 +10,25 @@ y=randn(n,1)+10;
 X=randn(n,3);
 w=randn(n,1);
 
-units=1;
-%
 
-la=1.5;
-%la1=NaN;
+
 %la=[];
 %  uncomment the following line to set lambda parameter for data
 %  transformation
-%  la =0.5;
-[out]=addt_mex(y, X, w, 'plots', 0, 'textlab',{'test string'}, 'units', units, ...
-    'intercept', 1, 'la', la, 'FontSize', 14, 'SizeAxesNum', 12, 'nocheck', 0);
+la=1.1;
+
+
+% parameters not used by C Coder
+defScalar=1;
+defCell ={'1'};
+
+[out]=addt_mex(y, X, w, 'intercept', 1, 'la', la,  'nocheck', 0, ...
+    'FontSize', defScalar, 'plots',defScalar,  'SizeAxesNum',defScalar, ...
+    'textlab', defCell, 'units', defScalar);
+
+[out1]=addt(y, X, w, 'plots', 0, 'intercept', 1, 'la', la, 'nocheck', 0, ...
+    'FontSize', 12, 'SizeAxesNum', 10);
+
 
 disp(out)
+disp(out1)

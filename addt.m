@@ -196,34 +196,30 @@ if nargin > 3
   
      
     la=options.la;
- %   la1=options.la1;
+    nocheck=options.nocheck;
+    intercept=options.intercept;
     
-  %  if ~isnan(la1)
-  %      la=la1;
-  %    %  coder.varsize('la',1);
-  %  end
+     
     
+
     plots=options.plots;
     textlab=options.textlab;
-    units=options.units;
-
     
     % FontSize = font size of the axes labels
      FontSize=options.FontSize;
     % FontSizeAxes = font size for the axes numbers
      SizeAxesNum=options.SizeAxesNum;
-     nocheck=options.nocheck;
-     intercept=options.intercept;
+     units=options.units; 
 end
 %% t test for an additional explanatory variable
 
-% nnargin=nargin;
-% vvarargin=varargin;
-% [y,X,n,p] = chkinputR(y,X,nnargin,vvarargin); % We were unable to
+ nnargin=nargin;
+ vvarargin=varargin;
+[y,X,n,p] = chkinputR(y,X,nnargin,vvarargin); % We were unable to
 % translate this function in C Coder.
 
-n=length(y);
-p=size(X,2);
+%n=length(y);
+%p=size(X,2);
 [~, R] = qr(X,0);
 E = X/R;
 A = -E*E';
@@ -252,11 +248,6 @@ if ~isempty(la)
         z=G*log(y);
     else
         z=(y.^la1-1)/(la*G^(la1-1));
-       %disp(y)
-       %disp(G)
-       %disp(la)
-       % z=(y.^la-1);
-        %/(la*G^(la-1));
     end
 else
     z=y;
@@ -294,15 +285,17 @@ end
 
 
 % Store results in structure out.
-out=struct('b', b, 'S2add',Sz_square, 'Tadd', Tl, 'pval',pval, 'plots', plots, ...
-    'textlab', textlab, 'units', units, 'intercept', intercept, 'la',la, ...
-    'FontSize', FontSize, 'SizeAxesNum', SizeAxesNum, 'nocheck', nocheck);
+out.b=b;
+out.S2add=Sz_square;
+out.Tadd=Tl;
+out.pval=pval;
+
 
 %% Added variable plot
 
 
 
-if plots==1 && coder.target('MATLAB')    
+if coder.target('MATLAB') && plots==1 
     if ~isempty(units)
         sel=setdiff(1:length(y),units);
         [outsel]=addt(y(sel),X(sel,2:end),w(sel),'plots',0, 'la', la, ...
