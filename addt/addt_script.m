@@ -35,6 +35,5 @@ ARGS{1}{18} = coder.Constant('units');
 ARGS{1}{19} = coder.typeof(0, [10 1], [1 0]);
 
 
-
 %% Invoke MATLAB Coder.
 codegen -config cfg addt -args ARGS{1}
