@@ -153,7 +153,6 @@ end
 
 
 la=1.5;
-%la1=NaN;
 
 
 plots=0;
@@ -170,8 +169,6 @@ nocheck=0;
 % coder.varsize tells MATLAB Coder to set 'textlab' as a
 % variable-size cell array of 0 up to 100 elements
 coder.varsize('textlab{:}', [1 100], [0 1]);
-
-
 
 
 if nargin > 3
@@ -213,13 +210,10 @@ if nargin > 3
 end
 %% t test for an additional explanatory variable
 
- nnargin=nargin;
- vvarargin=varargin;
-[y,X,n,p] = chkinputR(y,X,nnargin,vvarargin); % We were unable to
-% translate this function in C Coder.
+nnargin=nargin;
+vvarargin=varargin;
+[y,X,n,p] = chkinputR(y,X,nnargin,vvarargin); 
 
-%n=length(y);
-%p=size(X,2);
 [~, R] = qr(X,0);
 E = X/R;
 A = -E*E';
@@ -240,7 +234,6 @@ A(linind)=1+A(linind);
  
 if ~isempty(la)
     la1=la(1);
-    % la1=coder.varsize('la',1);
     %geometric mean of the y
     G=exp(mean(log(y)))+ 0i; %G is complex;
   %  if la1==0
