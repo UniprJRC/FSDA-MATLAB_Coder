@@ -144,7 +144,8 @@ function [out]=addt(y,X,w,varargin)
 %
 %
 %% Beginning of code 
-
+disp(y)
+disp('-----')
 % User options
 
 if nargin<3
@@ -285,7 +286,6 @@ out.pval=pval;
 
 
 %% Added variable plot
-
 
 
 if coder.target('MATLAB') && plots==1 
