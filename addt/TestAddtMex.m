@@ -17,14 +17,14 @@ la=1.1;
 
 % parameters not used by C Coder
 defScalar=1;
-defCell ={'1'};
+defCell =false;
 
 [out]=addt_mex(y, X, w, 'intercept', 1, 'la', la,  'nocheck', 0, ...
     'FontSize', defScalar, 'plots',defScalar,  'SizeAxesNum',defScalar, ...
     'textlab', defCell, 'units', defScalar);
 
-[out1]=addt(y, X, w, 'plots', 0, 'intercept', 1, 'la', la, 'nocheck', 0, ...
-    'FontSize', 12, 'SizeAxesNum', 10);
+[out1]=addt(y, X, w, 'plots', 1, 'intercept', 1, 'la', la, 'nocheck', 0, ...
+    'FontSize', 12, 'SizeAxesNum', 10,'textlab',false,'units',1:2);
 
 disp(out)
 disp(out1)
