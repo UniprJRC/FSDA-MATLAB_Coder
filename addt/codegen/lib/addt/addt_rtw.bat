@@ -1,12 +1,12 @@
 @echo off
 
-@if not "%MINGW_ROOT%" == "" (@set "PATH=%PATH%;%MINGW_ROOT%")
+call "setup_msvc.bat"
 
 cd .
 
 chcp 1252
 
-if "%1"=="" ("C:\PROGRA~1\MATLAB\R2020b\bin\win64\gmake"  -f addt_rtw.mk all) else ("C:\PROGRA~1\MATLAB\R2020b\bin\win64\gmake"  -f addt_rtw.mk %1)
+if "%1"=="" (nmake  -f addt_rtw.mk all) else (nmake  -f addt_rtw.mk %1)
 @if errorlevel 1 goto error_exit
 
 exit 0

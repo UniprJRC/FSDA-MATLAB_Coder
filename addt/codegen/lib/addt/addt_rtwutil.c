@@ -1,7 +1,6 @@
 /*
- * Academic License - for use in teaching, academic research, and meeting
- * course requirements at degree granting institutions only.  Not for
- * government, commercial, or other organizational use.
+ * Prerelease License - for engineering feedback and testing purposes
+ * only. Not for sale.
  *
  * addt_rtwutil.c
  *
@@ -28,12 +27,9 @@ double rt_hypotd_snf(double u0, double u1)
   } else if (a > y) {
     y /= a;
     y = a * sqrt(y * y + 1.0);
-  } else {
-    if (!rtIsNaN(y)) {
-      y = a * 1.4142135623730951;
-    }
+  } else if (!rtIsNaN(y)) {
+    y = a * 1.4142135623730951;
   }
-
   return y;
 }
 
@@ -79,7 +75,6 @@ double rt_powd_snf(double u0, double u1)
       y = pow(u0, u1);
     }
   }
-
   return y;
 }
 

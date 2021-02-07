@@ -1,7 +1,6 @@
 /*
- * Academic License - for use in teaching, academic research, and meeting
- * course requirements at degree granting institutions only.  Not for
- * government, commercial, or other organizational use.
+ * Prerelease License - for engineering feedback and testing purposes
+ * only. Not for sale.
  *
  * svd.h
  *
@@ -17,19 +16,17 @@
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
+
 #ifdef __cplusplus
-
 extern "C" {
-
 #endif
 
-  /* Function Declarations */
-  void svd(const emxArray_real_T *A, emxArray_real_T *U);
+/* Function Declarations */
+void svd(const emxArray_real_T *A, emxArray_real_T *U);
 
 #ifdef __cplusplus
-
 }
 #endif
-#endif
 
+#endif
 /* End of code generation (svd.h) */

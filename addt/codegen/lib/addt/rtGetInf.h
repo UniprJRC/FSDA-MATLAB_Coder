@@ -1,7 +1,6 @@
 /*
- * Academic License - for use in teaching, academic research, and meeting
- * course requirements at degree granting institutions only.  Not for
- * government, commercial, or other organizational use.
+ * Prerelease License - for engineering feedback and testing purposes
+ * only. Not for sale.
  *
  * rtGetInf.h
  *
@@ -14,21 +13,18 @@
 
 /* Include files */
 #include "rtwtypes.h"
+
 #ifdef __cplusplus
-
 extern "C" {
-
 #endif
 
-  extern real_T rtGetInf(void);
-  extern real32_T rtGetInfF(void);
-  extern real_T rtGetMinusInf(void);
-  extern real32_T rtGetMinusInfF(void);
+extern real_T rtGetInf(void);
+extern real32_T rtGetInfF(void);
+extern real_T rtGetMinusInf(void);
+extern real32_T rtGetMinusInfF(void);
 
 #ifdef __cplusplus
-
 }
 #endif
 #endif
-
 /* End of code generation (rtGetInf.h) */

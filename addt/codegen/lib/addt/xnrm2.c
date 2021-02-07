@@ -1,7 +1,6 @@
 /*
- * Academic License - for use in teaching, academic research, and meeting
- * course requirements at degree granting institutions only.  Not for
- * government, commercial, or other organizational use.
+ * Prerelease License - for engineering feedback and testing purposes
+ * only. Not for sale.
  *
  * xnrm2.c
  *
@@ -42,11 +41,9 @@ double xnrm2(int n, const emxArray_real_T *x, int ix0)
           y += t * t;
         }
       }
-
       y = scale * sqrt(y);
     }
   }
-
   return y;
 }
 

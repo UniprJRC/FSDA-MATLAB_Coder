@@ -1,7 +1,6 @@
 /*
- * Academic License - for use in teaching, academic research, and meeting
- * course requirements at degree granting institutions only.  Not for
- * government, commercial, or other organizational use.
+ * Prerelease License - for engineering feedback and testing purposes
+ * only. Not for sale.
  *
  * mrdivide_helper.c
  *
@@ -19,8 +18,8 @@
 #include <math.h>
 
 /* Function Definitions */
-void b_mrdiv(const emxArray_real_T *A, const creal_T B_data[], const int B_size
-             [2], emxArray_creal_T *Y)
+void b_mrdiv(const emxArray_real_T *A, const creal_T B_data[],
+             const int B_size[2], emxArray_creal_T *Y)
 {
   emxArray_creal_T *b_Y;
   double ar;
@@ -72,13 +71,11 @@ void b_mrdiv(const emxArray_real_T *A, const creal_T B_data[], const int B_size
           } else {
             bim = -0.5;
           }
-
           if (B_data[0].im > 0.0) {
             d = 0.5;
           } else {
             d = -0.5;
           }
-
           b_Y->data[i].re = (ar * bim + 0.0 * d) / brm;
           b_Y->data[i].im = (0.0 * bim - ar * d) / brm;
         } else {
@@ -89,7 +86,6 @@ void b_mrdiv(const emxArray_real_T *A, const creal_T B_data[], const int B_size
         }
       }
     }
-
     i = Y->size[0] * Y->size[1];
     Y->size[0] = b_Y->size[0];
     Y->size[1] = 1;
@@ -99,12 +95,11 @@ void b_mrdiv(const emxArray_real_T *A, const creal_T B_data[], const int B_size
       Y->data[i] = b_Y->data[i];
     }
   }
-
   emxFree_creal_T(&b_Y);
 }
 
-void mrdiv(const emxArray_real_T *A, const emxArray_real_T *B, emxArray_real_T
-           *Y)
+void mrdiv(const emxArray_real_T *A, const emxArray_real_T *B,
+           emxArray_real_T *Y)
 {
   emxArray_int32_T *ipiv;
   emxArray_real_T *b_A;
@@ -116,11 +111,12 @@ void mrdiv(const emxArray_real_T *A, const emxArray_real_T *B, emxArray_real_T
   int b_n;
   int i;
   int i1;
-  int ix;
   int j;
+  int jA;
   int jj;
   int jp1j;
   int k;
+  int kBcol;
   int ldap1;
   int mmj_tmp;
   int n;
@@ -130,8 +126,8 @@ void mrdiv(const emxArray_real_T *A, const emxArray_real_T *B, emxArray_real_T
   emxInit_int32_T(&ipiv, 2);
   emxInit_real_T(&b_B, 2);
   emxInit_real_T(&c_A, 2);
-  if ((A->size[0] == 0) || (A->size[1] == 0) || ((B->size[0] == 0) || (B->size[1]
-        == 0))) {
+  if ((A->size[0] == 0) || (A->size[1] == 0) ||
+      ((B->size[0] == 0) || (B->size[1] == 0))) {
     i = Y->size[0] * Y->size[1];
     Y->size[0] = A->size[0];
     Y->size[1] = B->size[0];
@@ -149,7 +145,6 @@ void mrdiv(const emxArray_real_T *A, const emxArray_real_T *B, emxArray_real_T
     for (i = 0; i < n; i++) {
       Y->data[i] = A->data[i];
     }
-
     b_n = B->size[1];
     i = b_A->size[0] * b_A->size[1];
     b_A->size[0] = B->size[0];
@@ -159,7 +154,6 @@ void mrdiv(const emxArray_real_T *A, const emxArray_real_T *B, emxArray_real_T
     for (i = 0; i < n; i++) {
       b_A->data[i] = B->data[i];
     }
-
     n = B->size[1];
     i = ipiv->size[0] * ipiv->size[1];
     ipiv->size[0] = 1;
@@ -171,29 +165,25 @@ void mrdiv(const emxArray_real_T *A, const emxArray_real_T *B, emxArray_real_T
       yk++;
       ipiv->data[k - 1] = yk;
     }
-
     ldap1 = B->size[1];
     yk = B->size[1] - 1;
     u1 = B->size[1];
     if (yk < u1) {
       u1 = yk;
     }
-
     for (j = 0; j < u1; j++) {
       mmj_tmp = b_n - j;
-      n = j * (b_n + 1);
+      kBcol = j * (b_n + 1);
       jj = j * (ldap1 + 1);
-      jp1j = n + 2;
+      jp1j = kBcol + 2;
       if (mmj_tmp < 1) {
         yk = -1;
       } else {
         yk = 0;
         if (mmj_tmp > 1) {
-          ix = n;
           smax = fabs(b_A->data[jj]);
           for (k = 2; k <= mmj_tmp; k++) {
-            ix++;
-            s = fabs(b_A->data[ix]);
+            s = fabs(b_A->data[(kBcol + k) - 1]);
             if (s > smax) {
               yk = k - 1;
               smax = s;
@@ -201,92 +191,82 @@ void mrdiv(const emxArray_real_T *A, const emxArray_real_T *B, emxArray_real_T
           }
         }
       }
-
       if (b_A->data[jj + yk] != 0.0) {
         if (yk != 0) {
-          yk += j;
-          ipiv->data[j] = yk + 1;
-          ix = j;
+          n = j + yk;
+          ipiv->data[j] = n + 1;
           for (k = 0; k < b_n; k++) {
-            smax = b_A->data[ix];
-            b_A->data[ix] = b_A->data[yk];
-            b_A->data[yk] = smax;
-            ix += b_n;
-            yk += b_n;
+            yk = k * b_n;
+            jA = j + yk;
+            smax = b_A->data[jA];
+            i = n + yk;
+            b_A->data[jA] = b_A->data[i];
+            b_A->data[i] = smax;
           }
         }
-
         i = jj + mmj_tmp;
         for (b_i = jp1j; b_i <= i; b_i++) {
           b_A->data[b_i - 1] /= b_A->data[jj];
         }
       }
-
-      yk = n + b_n;
-      n = jj + ldap1;
-      for (jp1j = 0; jp1j <= mmj_tmp - 2; jp1j++) {
+      n = kBcol + b_n;
+      jA = jj + ldap1;
+      for (kBcol = 0; kBcol <= mmj_tmp - 2; kBcol++) {
+        yk = n + kBcol * b_n;
         smax = b_A->data[yk];
         if (b_A->data[yk] != 0.0) {
-          ix = jj + 1;
-          i = n + 2;
-          i1 = mmj_tmp + n;
-          for (b_i = i; b_i <= i1; b_i++) {
-            b_A->data[b_i - 1] += b_A->data[ix] * -smax;
-            ix++;
+          i = jA + 2;
+          i1 = mmj_tmp + jA;
+          for (yk = i; yk <= i1; yk++) {
+            b_A->data[yk - 1] += b_A->data[((jj + yk) - jA) - 1] * -smax;
           }
         }
-
-        yk += b_n;
-        n += b_n;
+        jA += b_n;
       }
     }
-
     yk = A->size[0];
     for (j = 0; j < b_n; j++) {
       n = yk * j - 1;
-      jp1j = b_n * j;
+      jA = b_n * j;
       for (k = 0; k < j; k++) {
-        ix = yk * k;
-        i = k + jp1j;
+        kBcol = yk * k;
+        i = k + jA;
         if (b_A->data[i] != 0.0) {
           for (b_i = 0; b_i < yk; b_i++) {
             i1 = (b_i + n) + 1;
-            Y->data[i1] -= b_A->data[i] * Y->data[b_i + ix];
+            Y->data[i1] -= b_A->data[i] * Y->data[b_i + kBcol];
           }
         }
       }
-
-      smax = 1.0 / b_A->data[j + jp1j];
+      smax = 1.0 / b_A->data[j + jA];
       for (b_i = 0; b_i < yk; b_i++) {
         i = (b_i + n) + 1;
         Y->data[i] *= smax;
       }
     }
-
     for (j = b_n; j >= 1; j--) {
       n = yk * (j - 1) - 1;
-      jp1j = b_n * (j - 1) - 1;
+      jA = b_n * (j - 1) - 1;
       i = j + 1;
       for (k = i; k <= b_n; k++) {
-        ix = yk * (k - 1);
-        i1 = k + jp1j;
+        kBcol = yk * (k - 1);
+        i1 = k + jA;
         if (b_A->data[i1] != 0.0) {
           for (b_i = 0; b_i < yk; b_i++) {
-            mmj_tmp = (b_i + n) + 1;
-            Y->data[mmj_tmp] -= b_A->data[i1] * Y->data[b_i + ix];
+            jp1j = (b_i + n) + 1;
+            Y->data[jp1j] -= b_A->data[i1] * Y->data[b_i + kBcol];
           }
         }
       }
     }
-
     i = B->size[1] - 1;
     for (j = i; j >= 1; j--) {
       i1 = ipiv->data[j - 1];
       if (i1 != j) {
         for (b_i = 0; b_i < yk; b_i++) {
           smax = Y->data[b_i + Y->size[0] * (j - 1)];
-          Y->data[b_i + Y->size[0] * (j - 1)] = Y->data[b_i + Y->size[0] * (i1 -
-            1)];
+          Y->data[b_i + Y->size[0] * (j - 1)] =
+              Y->data[b_i + Y->size[0] * (i1 - 1)];
           Y->data[b_i + Y->size[0] * (i1 - 1)] = smax;
         }
       }
@@ -303,7 +283,6 @@ void mrdiv(const emxArray_real_T *A, const emxArray_real_T *B, emxArray_real_T
         b_B->data[i1 + b_B->size[0] * i] = B->data[i + B->size[0] * i1];
       }
     }
-
     i = c_A->size[0] * c_A->size[1];
     c_A->size[0] = A->size[1];
     c_A->size[1] = A->size[0];
@@ -315,7 +294,6 @@ void mrdiv(const emxArray_real_T *A, const emxArray_real_T *B, emxArray_real_T
         c_A->data[i1 + c_A->size[0] * i] = A->data[i + A->size[0] * i1];
       }
     }
-
     qrsolve(b_B, c_A, b_A);
     i = Y->size[0] * Y->size[1];
     Y->size[0] = b_A->size[1];
@@ -329,7 +307,6 @@ void mrdiv(const emxArray_real_T *A, const emxArray_real_T *B, emxArray_real_T
       }
     }
   }
-
   emxFree_real_T(&c_A);
   emxFree_real_T(&b_B);
   emxFree_int32_T(&ipiv);

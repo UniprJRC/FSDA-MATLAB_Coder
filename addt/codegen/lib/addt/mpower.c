@@ -1,7 +1,6 @@
 /*
- * Academic License - for use in teaching, academic research, and meeting
- * course requirements at degree granting institutions only.  Not for
- * government, commercial, or other organizational use.
+ * Prerelease License - for engineering feedback and testing purposes
+ * only. Not for sale.
  *
  * mpower.c
  *
@@ -19,7 +18,6 @@
 
 /* Function Declarations */
 static double rt_atan2d_snf(double u0, double u1);
-static double rt_roundd_snf(double u);
 
 /* Function Definitions */
 static double rt_atan2d_snf(double u0, double u1)
@@ -35,13 +33,11 @@ static double rt_atan2d_snf(double u0, double u1)
     } else {
       b_u0 = -1;
     }
-
     if (u1 > 0.0) {
       b_u1 = 1;
     } else {
       b_u1 = -1;
     }
-
     y = atan2(b_u0, b_u1);
   } else if (u1 == 0.0) {
     if (u0 > 0.0) {
@@ -54,32 +50,13 @@ static double rt_atan2d_snf(double u0, double u1)
   } else {
     y = atan2(u0, u1);
   }
-
-  return y;
-}
-
-static double rt_roundd_snf(double u)
-{
-  double y;
-  if (fabs(u) < 4.503599627370496E+15) {
-    if (u >= 0.5) {
-      y = floor(u + 0.5);
-    } else if (u > -0.5) {
-      y = u * 0.0;
-    } else {
-      y = ceil(u - 0.5);
-    }
-  } else {
-    y = u;
-  }
-
   return y;
 }
 
 creal_T mpower(const creal_T a, double b)
 {
   creal_T c;
-  double d;
+  double b_im;
   double r;
   double ytmp;
   signed char i;
@@ -88,28 +65,21 @@ creal_T mpower(const creal_T a, double b)
     c.im = 0.0;
   } else if ((a.re == 0.0) && (floor(b) == b)) {
     ytmp = rt_powd_snf(a.im, b);
-    if (rtIsNaN(b) || rtIsInf(b)) {
-      r = rtNaN;
-    } else if (b == 0.0) {
-      r = 0.0;
+    if (rtIsInf(b)) {
+      i = 0;
     } else {
-      r = fmod(b, 4.0);
-      if (r == 0.0) {
+      if (b == 0.0) {
         r = 0.0;
       } else {
-        if (b < 0.0) {
+        r = fmod(b, 4.0);
+        if (r == 0.0) {
+          r = 0.0;
+        } else if (b < 0.0) {
           r += 4.0;
         }
       }
+      i = (signed char)r;
     }
-
-    d = rt_roundd_snf(r);
-    if (d < 128.0) {
-      i = (signed char)d;
-    } else {
-      i = 0;
-    }
-
     if (i == 3) {
       c.re = 0.0;
       c.im = -ytmp;
@@ -129,34 +99,32 @@ creal_T mpower(const creal_T a, double b)
   } else {
     if (a.im == 0.0) {
       ytmp = log(a.re);
-      r = 0.0;
-    } else if ((a.re > 8.9884656743115785E+307) || (a.im >
-                8.9884656743115785E+307)) {
+      b_im = 0.0;
+    } else if ((a.re > 8.9884656743115785E+307) ||
+               (a.im > 8.9884656743115785E+307)) {
       ytmp = log(rt_hypotd_snf(a.re / 2.0, a.im / 2.0)) + 0.69314718055994529;
-      r = rt_atan2d_snf(a.im, a.re);
+      b_im = rt_atan2d_snf(a.im, a.re);
     } else {
       ytmp = log(rt_hypotd_snf(a.re, a.im));
-      r = rt_atan2d_snf(a.im, a.re);
+      b_im = rt_atan2d_snf(a.im, a.re);
     }
-
     c.re = b * ytmp;
-    c.im = b * r;
+    c.im = b * b_im;
     if (c.im == 0.0) {
-      d = c.re;
-      c.re = exp(d);
+      b_im = c.re;
+      c.re = exp(b_im);
       c.im = 0.0;
     } else if (rtIsInf(c.im) && rtIsInf(c.re) && (c.re < 0.0)) {
       c.re = 0.0;
       c.im = 0.0;
     } else {
       r = exp(c.re / 2.0);
-      d = c.im;
+      b_im = c.im;
       ytmp = c.im;
-      c.re = r * (r * cos(d));
+      c.re = r * (r * cos(b_im));
       c.im = r * (r * sin(ytmp));
     }
   }
-
   return c;
 }
 

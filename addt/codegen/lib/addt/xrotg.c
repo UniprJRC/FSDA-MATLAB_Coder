@@ -1,7 +1,6 @@
 /*
- * Academic License - for use in teaching, academic research, and meeting
- * course requirements at degree granting institutions only.  Not for
- * government, commercial, or other organizational use.
+ * Prerelease License - for engineering feedback and testing purposes
+ * only. Not for sale.
  *
  * xrotg.c
  *
@@ -29,7 +28,6 @@ void xrotg(double *a, double *b, double *c, double *s)
   if (absa > absb) {
     roe = *a;
   }
-
   scale = absa + absb;
   if (scale == 0.0) {
     *s = 0.0;
@@ -43,7 +41,6 @@ void xrotg(double *a, double *b, double *c, double *s)
     if (roe < 0.0) {
       scale = -scale;
     }
-
     *c = *a / scale;
     *s = *b / scale;
     if (absa > absb) {
@@ -53,7 +50,6 @@ void xrotg(double *a, double *b, double *c, double *s)
     } else {
       *b = 1.0;
     }
-
     *a = scale;
   }
 }

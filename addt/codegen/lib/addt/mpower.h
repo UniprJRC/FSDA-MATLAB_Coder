@@ -1,7 +1,6 @@
 /*
- * Academic License - for use in teaching, academic research, and meeting
- * course requirements at degree granting institutions only.  Not for
- * government, commercial, or other organizational use.
+ * Prerelease License - for engineering feedback and testing purposes
+ * only. Not for sale.
  *
  * mpower.h
  *
@@ -16,19 +15,17 @@
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
+
 #ifdef __cplusplus
-
 extern "C" {
-
 #endif
 
-  /* Function Declarations */
-  creal_T mpower(const creal_T a, double b);
+/* Function Declarations */
+creal_T mpower(const creal_T a, double b);
 
 #ifdef __cplusplus
-
 }
 #endif
-#endif
 
+#endif
 /* End of code generation (mpower.h) */
