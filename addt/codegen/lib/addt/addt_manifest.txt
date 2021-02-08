@@ -14,7 +14,6 @@ F:\FSDA-MATLAB_Coder\addt\codegen\lib\addt\xnrm2.c
 F:\FSDA-MATLAB_Coder\addt\codegen\lib\addt\qr.c
 F:\FSDA-MATLAB_Coder\addt\codegen\lib\addt\mrdivide_helper.c
 F:\FSDA-MATLAB_Coder\addt\codegen\lib\addt\qrsolve.c
-F:\FSDA-MATLAB_Coder\addt\codegen\lib\addt\mean.c
 F:\FSDA-MATLAB_Coder\addt\codegen\lib\addt\mpower.c
 F:\FSDA-MATLAB_Coder\addt\codegen\lib\addt\tcdf.c
 F:\FSDA-MATLAB_Coder\addt\codegen\lib\addt\eml_betainc.c
@@ -48,7 +47,6 @@ F:\FSDA-MATLAB_Coder\addt\codegen\lib\addt\xnrm2.h
 F:\FSDA-MATLAB_Coder\addt\codegen\lib\addt\qr.h
 F:\FSDA-MATLAB_Coder\addt\codegen\lib\addt\mrdivide_helper.h
 F:\FSDA-MATLAB_Coder\addt\codegen\lib\addt\qrsolve.h
-F:\FSDA-MATLAB_Coder\addt\codegen\lib\addt\mean.h
 F:\FSDA-MATLAB_Coder\addt\codegen\lib\addt\mpower.h
 F:\FSDA-MATLAB_Coder\addt\codegen\lib\addt\tcdf.h
 F:\FSDA-MATLAB_Coder\addt\codegen\lib\addt\eml_betainc.h
@@ -64,35 +62,6 @@ F:\FSDA-MATLAB_Coder\addt\codegen\lib\addt\gammaln.h
 F:\FSDA-MATLAB_Coder\addt\codegen\lib\addt\addt_emxutil.h
 F:\FSDA-MATLAB_Coder\addt\codegen\lib\addt\addt_emxAPI.h
 F:\FSDA-MATLAB_Coder\addt\codegen\lib\addt\addt_rtwutil.h
-C:\Program Files\MATLAB\R2021a\extern\include\blas.h
-C:\Program Files\MATLAB\R2021a\extern\include\blascompat32.h
-C:\Program Files\MATLAB\R2021a\extern\include\covrt.h
-C:\Program Files\MATLAB\R2021a\extern\include\emlrt.h
-C:\Program Files\MATLAB\R2021a\extern\include\engine.h
-C:\Program Files\MATLAB\R2021a\extern\include\fintrf.h
-C:\Program Files\MATLAB\R2021a\extern\include\io64.h
-C:\Program Files\MATLAB\R2021a\extern\include\lapack.h
-C:\Program Files\MATLAB\R2021a\extern\include\lapacke.h
-C:\Program Files\MATLAB\R2021a\extern\include\lapacke_config.h
-C:\Program Files\MATLAB\R2021a\extern\include\libmwjpegreader.h
-C:\Program Files\MATLAB\R2021a\extern\include\libmwrgb2gray_tbb.h
-C:\Program Files\MATLAB\R2021a\extern\include\libmwrgb2hsv_tbb.h
-C:\Program Files\MATLAB\R2021a\extern\include\mat.h
-C:\Program Files\MATLAB\R2021a\extern\include\matrix.h
-C:\Program Files\MATLAB\R2021a\extern\include\mex.h
-C:\Program Files\MATLAB\R2021a\extern\include\mwmathutil.h
-C:\Program Files\MATLAB\R2021a\extern\include\mwslpointerutil.h
-C:\Program Files\MATLAB\R2021a\extern\include\mwstringutil.h
-C:\Program Files\MATLAB\R2021a\extern\include\polygonBoolean.h
-C:\Program Files\MATLAB\R2021a\extern\include\tmwtypes.h
-C:\Program Files\MATLAB\R2021a\extern\include\MatlabDataArray.hpp
-C:\Program Files\MATLAB\R2021a\extern\include\MatlabEngine.hpp
-C:\Program Files\MATLAB\R2021a\extern\include\MatlabExecutionInterface.hpp
-C:\Program Files\MATLAB\R2021a\extern\include\MatlabTypesInterface.hpp
-C:\Program Files\MATLAB\R2021a\extern\include\mex.hpp
-C:\Program Files\MATLAB\R2021a\extern\include\mexAdapter.hpp
-F:\FSDA-MATLAB_Coder\addt\codegen\lib\addt\_clang-format
 F:\FSDA-MATLAB_Coder\addt\codegen\lib\addt\rtw_proj.tmw
 F:\FSDA-MATLAB_Coder\addt\codegen\lib\addt\defines.txt
-F:\FSDA-MATLAB_Coder\addt\codegen\lib\addt\addt.lib
 F:\FSDA-MATLAB_Coder\addt\codegen\lib\addt\addt_manifest.txt

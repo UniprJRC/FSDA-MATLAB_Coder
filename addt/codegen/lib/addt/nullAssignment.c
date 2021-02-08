@@ -1,6 +1,7 @@
 /*
- * Prerelease License - for engineering feedback and testing purposes
- * only. Not for sale.
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  *
  * nullAssignment.c
  *
@@ -18,6 +19,7 @@
 void nullAssignment(emxArray_real_T *x, const emxArray_int32_T *idx)
 {
   emxArray_boolean_T *b;
+  emxArray_real_T *b_x;
   int b_i;
   int i;
   int j;
@@ -45,15 +47,18 @@ void nullAssignment(emxArray_real_T *x, const emxArray_int32_T *idx)
     for (i = 0; i < j; i++) {
       b->data[i] = false;
     }
+
     i = idx->size[1];
     for (k = 0; k < i; k++) {
       b->data[idx->data[k] - 1] = true;
     }
+
     ncols = 0;
     i = b->size[1];
     for (k = 0; k < i; k++) {
       ncols += b->data[k];
     }
+
     ncols = x->size[1] - ncols;
     j = 0;
     for (k = 0; k < ncolx; k++) {
@@ -61,27 +66,45 @@ void nullAssignment(emxArray_real_T *x, const emxArray_int32_T *idx)
         for (b_i = 0; b_i <= nrowx; b_i++) {
           x->data[b_i + x->size[0] * j] = x->data[b_i + x->size[0] * k];
         }
+
         j++;
       }
     }
+
     emxFree_boolean_T(&b);
   }
+
+  emxInit_real_T(&b_x, 2);
   if (1 > ncols) {
     j = 0;
   } else {
     j = ncols;
   }
+
   ncols = x->size[0] - 1;
-  nrowx = x->size[0];
+  i = b_x->size[0] * b_x->size[1];
+  b_x->size[0] = ncols + 1;
+  b_x->size[1] = j;
+  emxEnsureCapacity_real_T(b_x, i);
   for (i = 0; i < j; i++) {
-    for (ncolx = 0; ncolx < nrowx; ncolx++) {
-      x->data[ncolx + (ncols + 1) * i] = x->data[ncolx + x->size[0] * i];
+    for (nrowx = 0; nrowx <= ncols; nrowx++) {
+      b_x->data[nrowx + b_x->size[0] * i] = x->data[nrowx + x->size[0] * i];
     }
   }
+
   i = x->size[0] * x->size[1];
-  x->size[0] = ncols + 1;
-  x->size[1] = j;
+  x->size[0] = b_x->size[0];
+  x->size[1] = b_x->size[1];
   emxEnsureCapacity_real_T(x, i);
+  j = b_x->size[1];
+  for (i = 0; i < j; i++) {
+    ncols = b_x->size[0];
+    for (nrowx = 0; nrowx < ncols; nrowx++) {
+      x->data[nrowx + x->size[0] * i] = b_x->data[nrowx + b_x->size[0] * i];
+    }
+  }
+
+  emxFree_real_T(&b_x);
 }
 
 /* End of code generation (nullAssignment.c) */

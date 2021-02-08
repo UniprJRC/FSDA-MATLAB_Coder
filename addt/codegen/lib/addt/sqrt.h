@@ -1,6 +1,7 @@
 /*
- * Prerelease License - for engineering feedback and testing purposes
- * only. Not for sale.
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  *
  * sqrt.h
  *
@@ -15,17 +16,19 @@
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
-
 #ifdef __cplusplus
+
 extern "C" {
+
 #endif
 
-/* Function Declarations */
-void b_sqrt(creal_T x_data[], const int *x_size);
+  /* Function Declarations */
+  void b_sqrt(creal_T x_data[], const int x_size[1]);
 
 #ifdef __cplusplus
+
 }
 #endif
-
 #endif
+
 /* End of code generation (sqrt.h) */

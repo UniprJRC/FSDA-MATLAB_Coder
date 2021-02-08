@@ -1,6 +1,7 @@
 /*
- * Prerelease License - for engineering feedback and testing purposes
- * only. Not for sale.
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  *
  * addt_emxAPI.c
  *
@@ -27,6 +28,7 @@ emxArray_real_T *emxCreateND_real_T(int numDimensions, const int *size)
     numEl *= size[i];
     emx->size[i] = size[i];
   }
+
   emx->data = (double *)calloc((unsigned int)numEl, sizeof(double));
   emx->numDimensions = numDimensions;
   emx->allocatedSize = numEl;
@@ -34,7 +36,7 @@ emxArray_real_T *emxCreateND_real_T(int numDimensions, const int *size)
 }
 
 emxArray_real_T *emxCreateWrapperND_real_T(double *data, int numDimensions,
-                                           const int *size)
+  const int *size)
 {
   emxArray_real_T *emx;
   int i;
@@ -45,6 +47,7 @@ emxArray_real_T *emxCreateWrapperND_real_T(double *data, int numDimensions,
     numEl *= size[i];
     emx->size[i] = size[i];
   }
+
   emx->data = data;
   emx->numDimensions = numDimensions;
   emx->allocatedSize = numEl;

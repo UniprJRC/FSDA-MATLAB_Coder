@@ -1,6 +1,7 @@
 /*
- * Prerelease License - for engineering feedback and testing purposes
- * only. Not for sale.
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  *
  * sqrt.c
  *
@@ -16,14 +17,16 @@
 #include <math.h>
 
 /* Function Definitions */
-void b_sqrt(creal_T x_data[], const int *x_size)
+void b_sqrt(creal_T x_data[], const int x_size[1])
 {
   double absxi;
   double absxr;
   double xi;
   double xr;
   int k;
-  for (k = 0; k < *x_size; k++) {
+  int nx;
+  nx = x_size[0];
+  for (k = 0; k < nx; k++) {
     xr = x_data[0].re;
     xi = x_data[0].im;
     if (xi == 0.0) {
@@ -61,8 +64,8 @@ void b_sqrt(creal_T x_data[], const int *x_size)
     } else {
       absxr = fabs(xr);
       absxi = fabs(xi);
-      if ((absxr > 4.4942328371557893E+307) ||
-          (absxi > 4.4942328371557893E+307)) {
+      if ((absxr > 4.4942328371557893E+307) || (absxi > 4.4942328371557893E+307))
+      {
         absxr *= 0.5;
         absxi = rt_hypotd_snf(absxr, absxi * 0.5);
         if (absxi > absxr) {
@@ -73,6 +76,7 @@ void b_sqrt(creal_T x_data[], const int *x_size)
       } else {
         absxi = sqrt((rt_hypotd_snf(absxr, absxi) + absxr) * 0.5);
       }
+
       if (xr > 0.0) {
         xr = 0.5 * (xi / absxi);
       } else {
@@ -81,9 +85,11 @@ void b_sqrt(creal_T x_data[], const int *x_size)
         } else {
           xr = absxi;
         }
+
         absxi = 0.5 * (xi / xr);
       }
     }
+
     x_data[0].re = absxi;
     x_data[0].im = xr;
   }

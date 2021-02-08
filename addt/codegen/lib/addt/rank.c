@@ -1,6 +1,7 @@
 /*
- * Prerelease License - for engineering feedback and testing purposes
- * only. Not for sale.
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  *
  * rank.c
  *
@@ -28,7 +29,7 @@ int local_rank(const emxArray_real_T *A)
   int irank;
   int k;
   int nx;
-  boolean_T p;
+  bool p;
   irank = 0;
   if ((A->size[0] != 0) && (A->size[1] != 0)) {
     nx = A->size[0] * A->size[1];
@@ -38,6 +39,7 @@ int local_rank(const emxArray_real_T *A)
         p = false;
       }
     }
+
     emxInit_real_T(&s, 1);
     if (p) {
       svd(A, s);
@@ -51,6 +53,7 @@ int local_rank(const emxArray_real_T *A)
       for (i = 0; i < k; i++) {
         r->data[i] = 0.0;
       }
+
       svd(r, s);
       nx = s->size[0];
       i = s->size[0];
@@ -61,6 +64,7 @@ int local_rank(const emxArray_real_T *A)
         s->data[i] = rtNaN;
       }
     }
+
     absx = fabs(s->data[0]);
     if ((!rtIsInf(absx)) && (!rtIsNaN(absx))) {
       if (absx <= 2.2250738585072014E-308) {
@@ -72,19 +76,23 @@ int local_rank(const emxArray_real_T *A)
     } else {
       absx = rtNaN;
     }
+
     nx = A->size[0];
     k = A->size[1];
     if (nx > k) {
       k = nx;
     }
+
     absx *= (double)k;
     k = 0;
     while ((k <= s->size[0] - 1) && (s->data[k] > absx)) {
       irank++;
       k++;
     }
+
     emxFree_real_T(&s);
   }
+
   return irank;
 }
 

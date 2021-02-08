@@ -1,6 +1,7 @@
 /*
- * Prerelease License - for engineering feedback and testing purposes
- * only. Not for sale.
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  *
  * main.h
  *
@@ -32,7 +33,6 @@
 /* otherwise use them as required by your application.                   */
 /*                                                                       */
 /*************************************************************************/
-
 #ifndef MAIN_H
 #define MAIN_H
 
@@ -40,17 +40,19 @@
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
-
 #ifdef __cplusplus
+
 extern "C" {
+
 #endif
 
-/* Function Declarations */
-extern int main(int argc, char **argv);
+  /* Function Declarations */
+  extern int main(int argc, const char * const argv[]);
 
 #ifdef __cplusplus
+
 }
 #endif
-
 #endif
+
 /* End of code generation (main.h) */
