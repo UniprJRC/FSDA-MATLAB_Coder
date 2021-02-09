@@ -1,7 +1,6 @@
 /*
- * Academic License - for use in teaching, academic research, and meeting
- * course requirements at degree granting institutions only.  Not for
- * government, commercial, or other organizational use.
+ * Prerelease License - for engineering feedback and testing purposes
+ * only. Not for sale.
  *
  * addt_data.h
  *
@@ -16,6 +15,6 @@
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
-#endif
 
+#endif
 /* End of code generation (addt_data.h) */

@@ -2,7 +2,7 @@
 ## Makefile generated for component 'addt'. 
 ## 
 ## Makefile     : addt_rtw.mk
-## Generated on : Mon Feb 08 23:34:46 2021
+## Generated on : Tue Feb 09 15:43:22 2021
 ## Final product: ./addt.lib
 ## Product type : static-library
 ## 
@@ -21,10 +21,10 @@
 
 PRODUCT_NAME              = addt
 MAKEFILE                  = addt_rtw.mk
-MATLAB_ROOT               = C:/PROGRA~1/MATLAB/R2020b
-MATLAB_BIN                = C:/PROGRA~1/MATLAB/R2020b/bin
+MATLAB_ROOT               = C:/PROGRA~1/MATLAB/R2021a
+MATLAB_BIN                = C:/PROGRA~1/MATLAB/R2021a/bin
 MATLAB_ARCH_BIN           = $(MATLAB_BIN)/win64
-START_DIR                 = F:/FSDA-MATLAB_Coder/addt/codegen/lib/addt
+START_DIR                 = E:/FSDA-MLCoder/addt/codegen/lib/addt
 TGT_FCN_LIB               = ISO_C
 SOLVER_OBJ                = 
 CLASSIC_INTERFACE         = 0
@@ -42,7 +42,7 @@ MODELLIB                  = addt.lib
 
 # Toolchain Name:          MinGW64 | gmake (64-bit Windows)
 # Supported Version(s):    6.x
-# ToolchainInfo Version:   2020b
+# ToolchainInfo Version:   2021a
 # Specification Revision:  1.0
 # 
 #-------------------------------------------
@@ -137,24 +137,24 @@ ARFLAGS              = ruvs \
 CFLAGS               = -c $(MINGW_C_STANDARD_OPTS) -m64 \
                        -O0 \
                        $(CDEBUG)
-CPPFLAGS             = -c $(CPP_STANDARD_OPTS) -m64 -std=c++11 \
+CPPFLAGS             = -c $(CPP_STANDARD_OPTS) -m64 \
                        -O0 \
                        $(CPPDEBUG)
-CPP_LDFLAGS          = -Wl,-rpath,"$(MATLAB_ARCH_BIN)",-L"$(MATLAB_ARCH_BIN)" -static -m64 \
+CPP_LDFLAGS          =  -static -m64 \
                        $(CPPLDDEBUG)
-CPP_SHAREDLIB_LDFLAGS  = -shared -Wl,-rpath,"$(MATLAB_ARCH_BIN)",-L"$(MATLAB_ARCH_BIN)" -Wl,--no-undefined \
+CPP_SHAREDLIB_LDFLAGS  = -shared -Wl,--no-undefined \
                          $(CPPLDDEBUG) \
                          -Wl,--out-implib,$(basename $(PRODUCT)).lib
 DOWNLOAD_FLAGS       =
 EXECUTE_FLAGS        =
-LDFLAGS              = -Wl,-rpath,"$(MATLAB_ARCH_BIN)",-L"$(MATLAB_ARCH_BIN)" -static -m64 \
+LDFLAGS              =  -static -m64 \
                        $(LDDEBUG)
 MEX_CPPFLAGS         =
 MEX_CPPLDFLAGS       =
 MEX_CFLAGS           =
 MEX_LDFLAGS          =
 MAKE_FLAGS           = -f $(MAKEFILE)
-SHAREDLIB_LDFLAGS    = -shared -Wl,-rpath,"$(MATLAB_ARCH_BIN)",-L"$(MATLAB_ARCH_BIN)" -Wl,--no-undefined \
+SHAREDLIB_LDFLAGS    = -shared -Wl,--no-undefined \
                        $(LDDEBUG) \
                        -Wl,--out-implib,$(basename $(PRODUCT)).lib
 
@@ -190,7 +190,7 @@ DEFINES = $(DEFINES_) $(DEFINES_CUSTOM) $(DEFINES_STANDARD)
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(START_DIR)/addt_data.c $(START_DIR)/rt_nonfinite.c $(START_DIR)/rtGetNaN.c $(START_DIR)/rtGetInf.c $(START_DIR)/addt_initialize.c $(START_DIR)/addt_terminate.c $(START_DIR)/addt.c $(START_DIR)/find.c $(START_DIR)/int2str.c $(START_DIR)/rank.c $(START_DIR)/svd.c $(START_DIR)/xnrm2.c $(START_DIR)/qr.c $(START_DIR)/mrdivide_helper.c $(START_DIR)/qrsolve.c $(START_DIR)/mpower.c $(START_DIR)/tcdf.c $(START_DIR)/eml_betainc.c $(START_DIR)/eml_gammainc.c $(START_DIR)/nullAssignment.c $(START_DIR)/xaxpy.c $(START_DIR)/xrotg.c $(START_DIR)/xzlarfg.c $(START_DIR)/xzlarf.c $(START_DIR)/xgerc.c $(START_DIR)/sqrt.c $(START_DIR)/gammaln.c $(START_DIR)/addt_emxutil.c $(START_DIR)/addt_emxAPI.c $(START_DIR)/addt_rtwutil.c
+SRCS = $(START_DIR)/addt_data.c $(START_DIR)/rt_nonfinite.c $(START_DIR)/rtGetNaN.c $(START_DIR)/rtGetInf.c $(START_DIR)/addt_initialize.c $(START_DIR)/addt_terminate.c $(START_DIR)/addt.c $(START_DIR)/minOrMax.c $(START_DIR)/find.c $(START_DIR)/int2str.c $(START_DIR)/rank.c $(START_DIR)/svd.c $(START_DIR)/xnrm2.c $(START_DIR)/qr.c $(START_DIR)/qrsolve.c $(START_DIR)/mean.c $(START_DIR)/mrdivide_helper.c $(START_DIR)/tcdf.c $(START_DIR)/eml_betainc.c $(START_DIR)/betainc.c $(START_DIR)/nullAssignment.c $(START_DIR)/xaxpy.c $(START_DIR)/xrotg.c $(START_DIR)/xzlarfg.c $(START_DIR)/xzlarf.c $(START_DIR)/xgerc.c $(START_DIR)/xgeqp3.c $(START_DIR)/gammaln.c $(START_DIR)/addt_emxutil.c $(START_DIR)/addt_emxAPI.c $(START_DIR)/addt_rtwutil.c
 
 ALL_SRCS = $(SRCS)
 
@@ -198,7 +198,7 @@ ALL_SRCS = $(SRCS)
 ## OBJECTS
 ###########################################################################
 
-OBJS = addt_data.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj addt_initialize.obj addt_terminate.obj addt.obj find.obj int2str.obj rank.obj svd.obj xnrm2.obj qr.obj mrdivide_helper.obj qrsolve.obj mpower.obj tcdf.obj eml_betainc.obj eml_gammainc.obj nullAssignment.obj xaxpy.obj xrotg.obj xzlarfg.obj xzlarf.obj xgerc.obj sqrt.obj gammaln.obj addt_emxutil.obj addt_emxAPI.obj addt_rtwutil.obj
+OBJS = addt_data.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj addt_initialize.obj addt_terminate.obj addt.obj minOrMax.obj find.obj int2str.obj rank.obj svd.obj xnrm2.obj qr.obj qrsolve.obj mean.obj mrdivide_helper.obj tcdf.obj eml_betainc.obj betainc.obj nullAssignment.obj xaxpy.obj xrotg.obj xzlarfg.obj xzlarf.obj xgerc.obj xgeqp3.obj gammaln.obj addt_emxutil.obj addt_emxAPI.obj addt_rtwutil.obj
 
 ALL_OBJS = $(OBJS)
 
@@ -333,11 +333,11 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : F:/FSDA-MATLAB_Coder/addt/%.c
+%.obj : E:/FSDA-MLCoder/addt/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.obj : F:/FSDA-MATLAB_Coder/addt/%.cpp
+%.obj : E:/FSDA-MLCoder/addt/%.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
@@ -369,6 +369,10 @@ addt.obj : $(START_DIR)/addt.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
+minOrMax.obj : $(START_DIR)/minOrMax.c
+	$(CC) $(CFLAGS) -o "$@" "$<"
+
+
 find.obj : $(START_DIR)/find.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
@@ -393,15 +397,15 @@ qr.obj : $(START_DIR)/qr.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-mrdivide_helper.obj : $(START_DIR)/mrdivide_helper.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
 qrsolve.obj : $(START_DIR)/qrsolve.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-mpower.obj : $(START_DIR)/mpower.c
+mean.obj : $(START_DIR)/mean.c
+	$(CC) $(CFLAGS) -o "$@" "$<"
+
+
+mrdivide_helper.obj : $(START_DIR)/mrdivide_helper.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
@@ -413,7 +417,7 @@ eml_betainc.obj : $(START_DIR)/eml_betainc.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-eml_gammainc.obj : $(START_DIR)/eml_gammainc.c
+betainc.obj : $(START_DIR)/betainc.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
@@ -441,7 +445,7 @@ xgerc.obj : $(START_DIR)/xgerc.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-sqrt.obj : $(START_DIR)/sqrt.c
+xgeqp3.obj : $(START_DIR)/xgeqp3.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 

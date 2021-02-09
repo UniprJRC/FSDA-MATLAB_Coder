@@ -1,7 +1,6 @@
 /*
- * Academic License - for use in teaching, academic research, and meeting
- * course requirements at degree granting institutions only.  Not for
- * government, commercial, or other organizational use.
+ * Prerelease License - for engineering feedback and testing purposes
+ * only. Not for sale.
  *
  * eml_betainc.c
  *
@@ -38,13 +37,13 @@ double betainc_cf(double x, double a, double b)
       yold = y;
       twom = (m + 1) << 1;
       d_tmp = a + (double)twom;
-      d = ((double)m + 1.0) * (b - ((double)m + 1.0)) * x / (((a - 1.0) +
-        (double)twom) * d_tmp);
+      d = ((double)m + 1.0) * (b - ((double)m + 1.0)) * x /
+          (((a - 1.0) + (double)twom) * d_tmp);
       C = d / C + 1.0;
       Dinv = d / Dinv + 1.0;
       y *= C / Dinv;
-      d = -(a + ((double)m + 1.0)) * (aplusb + ((double)m + 1.0)) * x / (d_tmp *
-        ((a + 1.0) + (double)twom));
+      d = -(a + ((double)m + 1.0)) * (aplusb + ((double)m + 1.0)) * x /
+          (d_tmp * ((a + 1.0) + (double)twom));
       C = d / C + 1.0;
       Dinv = d / Dinv + 1.0;
       y *= C / Dinv;
@@ -58,7 +57,6 @@ double betainc_cf(double x, double a, double b)
       exitg1 = 1;
     }
   } while (exitg1 == 0);
-
   return y;
 }
 

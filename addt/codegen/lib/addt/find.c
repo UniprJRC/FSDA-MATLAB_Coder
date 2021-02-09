@@ -1,7 +1,6 @@
 /*
- * Academic License - for use in teaching, academic research, and meeting
- * course requirements at degree granting institutions only.  Not for
- * government, commercial, or other organizational use.
+ * Prerelease License - for engineering feedback and testing purposes
+ * only. Not for sale.
  *
  * find.c
  *
@@ -43,7 +42,6 @@ void eml_find(const emxArray_boolean_T *x, emxArray_int32_T *i)
       ii++;
     }
   }
-
   if (x->size[1] == 1) {
     if (idx == 0) {
       i->size[0] = 1;
@@ -56,7 +54,6 @@ void eml_find(const emxArray_boolean_T *x, emxArray_int32_T *i)
     } else {
       i->size[1] = idx;
     }
-
     emxEnsureCapacity_int32_T(i, ii);
   }
 }
