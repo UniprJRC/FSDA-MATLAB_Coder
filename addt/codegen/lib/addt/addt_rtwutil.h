@@ -1,6 +1,7 @@
 /*
- * Prerelease License - for engineering feedback and testing purposes
- * only. Not for sale.
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  *
  * addt_rtwutil.h
  *
@@ -15,17 +16,19 @@
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
-
 #ifdef __cplusplus
+
 extern "C" {
+
 #endif
 
-/* Function Declarations */
-extern double rt_powd_snf(double u0, double u1);
+  /* Function Declarations */
+  extern double rt_powd_snf(double u0, double u1);
 
 #ifdef __cplusplus
+
 }
 #endif
-
 #endif
+
 /* End of code generation (addt_rtwutil.h) */

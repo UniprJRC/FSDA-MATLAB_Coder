@@ -1,6 +1,7 @@
 /*
- * Prerelease License - for engineering feedback and testing purposes
- * only. Not for sale.
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  *
  * mrdivide_helper.h
  *
@@ -16,20 +17,21 @@
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
-
 #ifdef __cplusplus
+
 extern "C" {
+
 #endif
 
-/* Function Declarations */
-void b_mrdiv(emxArray_real_T *A, const emxArray_real_T *B);
-
-void mrdiv(const emxArray_real_T *A, const double B_data[], const int B_size[2],
-           emxArray_real_T *Y);
+  /* Function Declarations */
+  void b_mrdiv(emxArray_real_T *A, const emxArray_real_T *B);
+  void mrdiv(const emxArray_real_T *A, const double B_data[], const int B_size[2],
+             emxArray_real_T *Y);
 
 #ifdef __cplusplus
+
 }
 #endif
-
 #endif
+
 /* End of code generation (mrdivide_helper.h) */

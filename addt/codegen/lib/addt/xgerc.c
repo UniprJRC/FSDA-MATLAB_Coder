@@ -1,6 +1,7 @@
 /*
- * Prerelease License - for engineering feedback and testing purposes
- * only. Not for sale.
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  *
  * xgerc.c
  *
@@ -20,18 +21,25 @@ void xgerc(int m, int n, double alpha1, int ix0, const emxArray_real_T *y,
   double temp;
   int i;
   int ijA;
+  int ix;
   int j;
   int jA;
+  int jy;
   if (!(alpha1 == 0.0)) {
     jA = ia0;
+    jy = 0;
     for (j = 0; j < n; j++) {
-      if (y->data[j] != 0.0) {
-        temp = y->data[j] * alpha1;
+      if (y->data[jy] != 0.0) {
+        temp = y->data[jy] * alpha1;
+        ix = ix0;
         i = m + jA;
         for (ijA = jA; ijA < i; ijA++) {
-          A->data[ijA - 1] += A->data[((ix0 + ijA) - jA) - 1] * temp;
+          A->data[ijA - 1] += A->data[ix - 1] * temp;
+          ix++;
         }
       }
+
+      jy++;
       jA += lda;
     }
   }

@@ -1,6 +1,7 @@
 /*
- * Prerelease License - for engineering feedback and testing purposes
- * only. Not for sale.
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  *
  * addt_emxutil.c
  *
@@ -24,15 +25,18 @@ void emxEnsureCapacity_boolean_T(emxArray_boolean_T *emxArray, int oldNumel)
   if (oldNumel < 0) {
     oldNumel = 0;
   }
+
   newNumel = 1;
   for (i = 0; i < emxArray->numDimensions; i++) {
     newNumel *= emxArray->size[i];
   }
+
   if (newNumel > emxArray->allocatedSize) {
     i = emxArray->allocatedSize;
     if (i < 16) {
       i = 16;
     }
+
     while (i < newNumel) {
       if (i > 1073741823) {
         i = MAX_int32_T;
@@ -40,6 +44,7 @@ void emxEnsureCapacity_boolean_T(emxArray_boolean_T *emxArray, int oldNumel)
         i *= 2;
       }
     }
+
     newData = calloc((unsigned int)i, sizeof(bool));
     if (emxArray->data != NULL) {
       memcpy(newData, emxArray->data, sizeof(bool) * oldNumel);
@@ -47,6 +52,7 @@ void emxEnsureCapacity_boolean_T(emxArray_boolean_T *emxArray, int oldNumel)
         free(emxArray->data);
       }
     }
+
     emxArray->data = (bool *)newData;
     emxArray->allocatedSize = i;
     emxArray->canFreeData = true;
@@ -61,15 +67,18 @@ void emxEnsureCapacity_int32_T(emxArray_int32_T *emxArray, int oldNumel)
   if (oldNumel < 0) {
     oldNumel = 0;
   }
+
   newNumel = 1;
   for (i = 0; i < emxArray->numDimensions; i++) {
     newNumel *= emxArray->size[i];
   }
+
   if (newNumel > emxArray->allocatedSize) {
     i = emxArray->allocatedSize;
     if (i < 16) {
       i = 16;
     }
+
     while (i < newNumel) {
       if (i > 1073741823) {
         i = MAX_int32_T;
@@ -77,6 +86,7 @@ void emxEnsureCapacity_int32_T(emxArray_int32_T *emxArray, int oldNumel)
         i *= 2;
       }
     }
+
     newData = calloc((unsigned int)i, sizeof(int));
     if (emxArray->data != NULL) {
       memcpy(newData, emxArray->data, sizeof(int) * oldNumel);
@@ -84,6 +94,7 @@ void emxEnsureCapacity_int32_T(emxArray_int32_T *emxArray, int oldNumel)
         free(emxArray->data);
       }
     }
+
     emxArray->data = (int *)newData;
     emxArray->allocatedSize = i;
     emxArray->canFreeData = true;
@@ -98,15 +109,18 @@ void emxEnsureCapacity_real_T(emxArray_real_T *emxArray, int oldNumel)
   if (oldNumel < 0) {
     oldNumel = 0;
   }
+
   newNumel = 1;
   for (i = 0; i < emxArray->numDimensions; i++) {
     newNumel *= emxArray->size[i];
   }
+
   if (newNumel > emxArray->allocatedSize) {
     i = emxArray->allocatedSize;
     if (i < 16) {
       i = 16;
     }
+
     while (i < newNumel) {
       if (i > 1073741823) {
         i = MAX_int32_T;
@@ -114,6 +128,7 @@ void emxEnsureCapacity_real_T(emxArray_real_T *emxArray, int oldNumel)
         i *= 2;
       }
     }
+
     newData = calloc((unsigned int)i, sizeof(double));
     if (emxArray->data != NULL) {
       memcpy(newData, emxArray->data, sizeof(double) * oldNumel);
@@ -121,6 +136,7 @@ void emxEnsureCapacity_real_T(emxArray_real_T *emxArray, int oldNumel)
         free(emxArray->data);
       }
     }
+
     emxArray->data = (double *)newData;
     emxArray->allocatedSize = i;
     emxArray->canFreeData = true;
@@ -133,6 +149,7 @@ void emxFree_boolean_T(emxArray_boolean_T **pEmxArray)
     if (((*pEmxArray)->data != (bool *)NULL) && (*pEmxArray)->canFreeData) {
       free((*pEmxArray)->data);
     }
+
     free((*pEmxArray)->size);
     free(*pEmxArray);
     *pEmxArray = (emxArray_boolean_T *)NULL;
@@ -145,6 +162,7 @@ void emxFree_int32_T(emxArray_int32_T **pEmxArray)
     if (((*pEmxArray)->data != (int *)NULL) && (*pEmxArray)->canFreeData) {
       free((*pEmxArray)->data);
     }
+
     free((*pEmxArray)->size);
     free(*pEmxArray);
     *pEmxArray = (emxArray_int32_T *)NULL;
@@ -157,6 +175,7 @@ void emxFree_real_T(emxArray_real_T **pEmxArray)
     if (((*pEmxArray)->data != (double *)NULL) && (*pEmxArray)->canFreeData) {
       free((*pEmxArray)->data);
     }
+
     free((*pEmxArray)->size);
     free(*pEmxArray);
     *pEmxArray = (emxArray_real_T *)NULL;

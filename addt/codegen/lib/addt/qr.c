@@ -1,6 +1,7 @@
 /*
- * Prerelease License - for engineering feedback and testing purposes
- * only. Not for sale.
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  *
  * qr.c
  *
@@ -34,6 +35,7 @@ void qr(const emxArray_real_T *A, emxArray_real_T *Q, emxArray_real_T *R)
   int ii;
   int itau;
   int iy;
+  int lastv;
   int lda;
   int m;
   int minmana;
@@ -49,25 +51,29 @@ void qr(const emxArray_real_T *A, emxArray_real_T *Q, emxArray_real_T *R)
   for (i = 0; i < minmana; i++) {
     b_A->data[i] = A->data[i];
   }
+
   emxInit_real_T(&tau, 1);
   m = A->size[0];
-  iaii = A->size[1];
+  lastv = A->size[1];
   ii = A->size[0];
   minmana = A->size[1];
   if (ii < minmana) {
     minmana = ii;
   }
+
   ii = A->size[0];
   minmn = A->size[1];
   if (ii < minmn) {
     minmn = ii;
   }
+
   i = tau->size[0];
   tau->size[0] = minmana;
   emxEnsureCapacity_real_T(tau, i);
   for (i = 0; i < minmana; i++) {
     tau->data[i] = 0.0;
   }
+
   emxInit_real_T(&work, 1);
   if ((A->size[0] != 0) && (A->size[1] != 0) && (minmn >= 1)) {
     lda = A->size[0];
@@ -78,6 +84,7 @@ void qr(const emxArray_real_T *A, emxArray_real_T *Q, emxArray_real_T *R)
     for (i = 0; i < minmana; i++) {
       work->data[i] = 0.0;
     }
+
     for (b_i = 0; b_i < minmn; b_i++) {
       ii = b_i * lda + b_i;
       minmana = m - b_i;
@@ -90,52 +97,61 @@ void qr(const emxArray_real_T *A, emxArray_real_T *Q, emxArray_real_T *R)
         c = 0.0;
         tau->data[b_i] = 0.0;
       }
-      if (b_i + 1 < iaii) {
+
+      if (b_i + 1 < lastv) {
         atmp = b_A->data[ii];
         b_A->data[ii] = 1.0;
-        xzlarf(minmana, (iaii - b_i) - 1, ii + 1, c, b_A, (ii + lda) + 1, lda,
+        xzlarf(minmana, (lastv - b_i) - 1, ii + 1, c, b_A, (ii + lda) + 1, lda,
                work);
         b_A->data[ii] = atmp;
       }
     }
   }
+
   m = b_A->size[0];
-  iaii = b_A->size[1];
+  lastv = b_A->size[1];
   ii = b_A->size[0];
   minsz = b_A->size[1];
   if (ii < minsz) {
     minsz = ii;
   }
+
   i = R->size[0] * R->size[1];
   R->size[0] = minsz;
   R->size[1] = b_A->size[1];
   emxEnsureCapacity_real_T(R, i);
-  for (ii = 0; ii < minsz; ii++) {
-    for (b_i = 0; b_i <= ii; b_i++) {
-      R->data[b_i + R->size[0] * ii] = b_A->data[b_i + b_A->size[0] * ii];
+  for (minmana = 0; minmana < minsz; minmana++) {
+    for (b_i = 0; b_i <= minmana; b_i++) {
+      R->data[b_i + R->size[0] * minmana] = b_A->data[b_i + b_A->size[0] *
+        minmana];
     }
-    i = ii + 2;
+
+    i = minmana + 2;
     for (b_i = i; b_i <= minsz; b_i++) {
-      R->data[(b_i + R->size[0] * ii) - 1] = 0.0;
+      R->data[(b_i + R->size[0] * minmana) - 1] = 0.0;
     }
   }
+
   i = b_A->size[0] + 1;
-  for (ii = i; ii <= iaii; ii++) {
+  for (minmana = i; minmana <= lastv; minmana++) {
     for (b_i = 0; b_i < minsz; b_i++) {
-      R->data[b_i + R->size[0] * (ii - 1)] =
-          b_A->data[b_i + b_A->size[0] * (ii - 1)];
+      R->data[b_i + R->size[0] * (minmana - 1)] = b_A->data[b_i + b_A->size[0] *
+        (minmana - 1)];
     }
   }
+
   if (minsz >= 1) {
     i = minsz - 1;
-    for (ii = minsz; ii <= i; ii++) {
-      ia = ii * m;
-      minmana = m - 1;
-      for (b_i = 0; b_i <= minmana; b_i++) {
+    for (minmana = minsz; minmana <= i; minmana++) {
+      ia = minmana * m;
+      ii = m - 1;
+      for (b_i = 0; b_i <= ii; b_i++) {
         b_A->data[ia + b_i] = 0.0;
       }
-      b_A->data[ia + ii] = 1.0;
+
+      b_A->data[ia + minmana] = 1.0;
     }
+
     itau = minsz - 1;
     i = work->size[0];
     work->size[0] = b_A->size[1];
@@ -144,64 +160,74 @@ void qr(const emxArray_real_T *A, emxArray_real_T *Q, emxArray_real_T *R)
     for (i = 0; i < minmana; i++) {
       work->data[i] = 0.0;
     }
+
     for (b_i = minsz; b_i >= 1; b_i--) {
       iaii = b_i + (b_i - 1) * m;
       if (b_i < minsz) {
         b_A->data[iaii - 1] = 1.0;
-        lda = iaii + m;
+        minmn = iaii + m;
         if (tau->data[itau] != 0.0) {
-          minmn = (m - b_i) + 1;
+          lastv = (m - b_i) + 1;
           minmana = (iaii + m) - b_i;
-          while ((minmn > 0) && (b_A->data[minmana - 1] == 0.0)) {
-            minmn--;
+          while ((lastv > 0) && (b_A->data[minmana - 1] == 0.0)) {
+            lastv--;
             minmana--;
           }
-          ii = minsz - b_i;
+
+          lda = minsz - b_i;
           exitg2 = false;
-          while ((!exitg2) && (ii > 0)) {
-            minmana = lda + (ii - 1) * m;
+          while ((!exitg2) && (lda > 0)) {
+            minmana = minmn + (lda - 1) * m;
             ia = minmana;
             do {
               exitg1 = 0;
-              if (ia <= (minmana + minmn) - 1) {
+              if (ia <= (minmana + lastv) - 1) {
                 if (b_A->data[ia - 1] != 0.0) {
                   exitg1 = 1;
                 } else {
                   ia++;
                 }
               } else {
-                ii--;
+                lda--;
                 exitg1 = 2;
               }
             } while (exitg1 == 0);
+
             if (exitg1 == 1) {
               exitg2 = true;
             }
           }
         } else {
-          minmn = 0;
-          ii = 0;
+          lastv = 0;
+          lda = 0;
         }
-        if (minmn > 0) {
-          if (ii != 0) {
-            for (iy = 0; iy < ii; iy++) {
+
+        if (lastv > 0) {
+          if (lda != 0) {
+            for (iy = 0; iy < lda; iy++) {
               work->data[iy] = 0.0;
             }
+
             iy = 0;
-            i = lda + m * (ii - 1);
-            for (iac = lda; m < 0 ? iac >= i : iac <= i; iac += m) {
+            i = minmn + m * (lda - 1);
+            for (iac = minmn; m < 0 ? iac >= i : iac <= i; iac += m) {
+              minmana = iaii;
               c = 0.0;
-              minmana = (iac + minmn) - 1;
-              for (ia = iac; ia <= minmana; ia++) {
-                c += b_A->data[ia - 1] * b_A->data[((iaii + ia) - iac) - 1];
+              ii = (iac + lastv) - 1;
+              for (ia = iac; ia <= ii; ia++) {
+                c += b_A->data[ia - 1] * b_A->data[minmana - 1];
+                minmana++;
               }
+
               work->data[iy] += c;
               iy++;
             }
           }
-          xgerc(minmn, ii, -tau->data[itau], iaii, work, b_A, lda, m);
+
+          xgerc(lastv, lda, -tau->data[itau], iaii, work, b_A, minmn, m);
         }
       }
+
       if (b_i < m) {
         minmana = iaii + 1;
         i = (iaii + m) - b_i;
@@ -209,24 +235,29 @@ void qr(const emxArray_real_T *A, emxArray_real_T *Q, emxArray_real_T *R)
           b_A->data[ii - 1] *= -tau->data[itau];
         }
       }
+
       b_A->data[iaii - 1] = 1.0 - tau->data[itau];
-      for (ii = 0; ii <= b_i - 2; ii++) {
-        b_A->data[(iaii - ii) - 2] = 0.0;
+      for (minmana = 0; minmana <= b_i - 2; minmana++) {
+        b_A->data[(iaii - minmana) - 2] = 0.0;
       }
+
       itau--;
     }
   }
+
   emxFree_real_T(&work);
   emxFree_real_T(&tau);
   i = Q->size[0] * Q->size[1];
   Q->size[0] = m;
   Q->size[1] = minsz;
   emxEnsureCapacity_real_T(Q, i);
-  for (ii = 0; ii < minsz; ii++) {
+  for (minmana = 0; minmana < minsz; minmana++) {
     for (b_i = 0; b_i < m; b_i++) {
-      Q->data[b_i + Q->size[0] * ii] = b_A->data[b_i + b_A->size[0] * ii];
+      Q->data[b_i + Q->size[0] * minmana] = b_A->data[b_i + b_A->size[0] *
+        minmana];
     }
   }
+
   emxFree_real_T(&b_A);
 }
 

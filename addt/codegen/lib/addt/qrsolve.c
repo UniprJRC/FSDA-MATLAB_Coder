@@ -1,6 +1,7 @@
 /*
- * Prerelease License - for engineering feedback and testing purposes
- * only. Not for sale.
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
  *
  * qrsolve.c
  *
@@ -29,13 +30,15 @@ int rankFromQR(const emxArray_real_T *A)
     minmn = A->size[1];
     maxmn = A->size[0];
   }
+
   if (minmn > 0) {
     tol = fmin(1.4901161193847656E-8, 2.2204460492503131E-15 * (double)maxmn) *
-          fabs(A->data[0]);
+      fabs(A->data[0]);
     while ((r < minmn) && (!(fabs(A->data[r + A->size[0] * r]) <= tol))) {
       r++;
     }
   }
+
   return r;
 }
 
