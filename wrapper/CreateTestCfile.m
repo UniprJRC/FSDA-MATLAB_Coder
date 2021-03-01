@@ -44,9 +44,8 @@ eval(['codegen -config cfg ' fn]) % -d addt
 %% Create additional necessary header files for compilation
 % load buildInfo.mat
 load(['codegen/lib/' FileName '_wrapper/buildInfo.mat'],'build*')
-% , char(["buildInfo";"buildOpts"]))
 
-packNGo(buildInfo,'packType', 'hierarchical', 'minimalHeaders',true, 'fileName',fn);
+packNGo(buildInfo,'packType', 'hierarchical', 'minimalHeaders',true, 'fileName',['zipSourceCode' filesep fn]);
 
 %% Remove mex files
 disp('Remove mex files and associated folders')

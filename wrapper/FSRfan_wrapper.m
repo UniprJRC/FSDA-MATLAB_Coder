@@ -49,7 +49,9 @@ assert(isscalar(init));
 % This is something to ask RL
 assert(isa(family, 'char'));
 % assert(size(family,1) == 1);
-assert(all(size(family) <= [Inf Inf]));
+% assert(all(size(family) <= [Inf Inf]));
+assert(all(size(family) <= [1 Inf]));
+
 
 % msg is a boolean
 assert(isa(msg, 'logical'));

@@ -236,6 +236,8 @@ void addt(const emxArray_real_T *y, const emxArray_real_T *X, const
   /*  Beginning of code */
   /*  User options */
   /*  t test for an additional explanatory variable */
+  /*  if coder.target('Custom') */
+  /*  end */
   i = E->size[0] * E->size[1];
   E->size[0] = X->size[0];
   E->size[1] = X->size[1];

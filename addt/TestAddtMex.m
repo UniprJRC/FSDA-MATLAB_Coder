@@ -20,13 +20,13 @@ defScalar=1;
 defCell =false;
 intercept=true;
 
-[out]=addt_mex(y, X, w, 'intercept', intercept, 'la', la, 'nocheck', 0);
+% [out]=addt_mex(y, X, w, 'intercept', intercept); % , 'la', la, 'nocheck', 0);
 
-if exist('addt','file')==2
-    [out1]=addt(y, X, w,'intercept', intercept, 'la', la, 'nocheck', 0);
-
-else
-    error('FSDA:addt:missingFile','addt is inside FSDA.')
-end
-disp(out)
+%if exist('addt','file')==2
+   [out1]=addt(y, X, w,'intercept', intercept); % , 'la', la, 'nocheck', 0);
+out=out1;
+%else
+%    error('FSDA:addt:missingFile','addt is inside FSDA.')
+%end
+% disp(out)
 disp(out1)
