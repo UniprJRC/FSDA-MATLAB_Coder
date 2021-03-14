@@ -1,4 +1,4 @@
-%% Test for FSRbsb
+%% Test for LXS (when input option lms is a scalar)
 % LXS with default input and output.
 % Compute LMS estimator without reweighting, add intercept to matrix X
 % and do not produce plots.
