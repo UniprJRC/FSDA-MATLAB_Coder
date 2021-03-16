@@ -1,4 +1,4 @@
-function [Un, BB]=addt_wrapper(y,X,w,intercept,la,nocheck)
+function [out]=addt_wrapper(y,X,w, intercept,la,nocheck)
 % Example wrapper function for addt. NV pair names are not taken as
 % inputs. Instead, just the values are taken as inputs.
 
@@ -32,12 +32,8 @@ assert(isa(intercept, 'logical'));
 assert(isa(la, 'double'));
 assert(all(size(la) <= [1 1]));
 
-% nocheck a scalar of type double (third varargin)
-% ARGS{1}{8} = coder.Constant('nocheck');
-% RemarK: coder.typeof(0) is equivalent to coder.typeof(0, [1 1], [0 0])
-% ARGS{1}{9} = coder.typeof(0);
-assert(isa(nocheck, 'double'));
-assert(isscalar(nocheck));
+% nocheck a logical
+assert(isa(nocheck, 'logical'));
 
-[Un, BB] = addt(y,X,w,'intercept',intercept,'la',la,'nocheck',nocheck);
+[out] = addt(y,X,w,'intercept',intercept,'la',la,'nocheck',nocheck);
 end

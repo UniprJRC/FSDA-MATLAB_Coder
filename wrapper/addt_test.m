@@ -1,28 +1,27 @@
-%% addt with optional arguments.
+%% Test for addt
 
-% rng('default')
-% rng(100)
 n=50;
 
 y=randn(n,1)+10;
 X=randn(n,3);
 w=randn(n,1);
 
-
-%la=[];
-%  uncomment the following line to set lambda parameter for data
-%  transformation
-la=0;
 intercept=true;
-nocheck=1;
+la=0;  %la=[];
+nocheck=false;
 
-% % parameters not used by C Coder
-% defScalar=1;
-% defCell =false;
-% intercept=true;
-
-[outMEX]=addt_wrapper_mex(y, X, w, intercept, la, nocheck);
+tic
 [out]=addt(y,X,w,'intercept',intercept,'la',la,'nocheck',nocheck);
+tottime=toc;
+
+tic
+[outMEX]=addt_wrapper_mex(y, X, w, intercept, la, nocheck);
+tottimeMEX=toc;
+
+% Compare mex time with .m time
+disp(array2table([tottime tottimeMEX],'VariableNames',{'.m time' 'mex time'}))
+
+% Compare equality of the two outputs
 tol=1e-9;
 assert(max(abs(out.b-outMEX.b))<tol,'b is different')
 assert(max(abs(out.S2add-out.S2add))<tol,'S2 is different')
