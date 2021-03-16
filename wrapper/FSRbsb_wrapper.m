@@ -29,7 +29,6 @@ assert(isa(intercept, 'logical'));
 % msg is a boolean
 assert(isa(msg, 'logical'));
 
-% Optional input arguments (name / pairs)
 % nocheck is a boolean
 assert(isa(nocheck, 'logical'));
 
