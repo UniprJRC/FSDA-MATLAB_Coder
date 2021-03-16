@@ -23,7 +23,7 @@ function status = CreateTestCfile(FileName, varargin)
 %
 %  Optional input arguments:
 %
-%     Suffix  : Character. If for example Suffix is '1' then it is assumed
+%     Suffix  : FileName suffix. Character. If for example Suffix is '1' then it is assumed
 %               that there is in the current folder:
 %               1) a file named FileName1_wrapper.m which contains (throught the assert)
 %               the definition of the input types
@@ -42,6 +42,13 @@ function status = CreateTestCfile(FileName, varargin)
 %                 Example - 'Nargout',2
 %                 Data Types - double
 %
+% DeleteMexSubfoler  : Delete mex subfolder. Boolean.
+%               If DeleteMexSubfoler is true command
+%               rmdir 'codegen/mex' s is invoked and subfolder dodegen/mex
+%               is deleted. The default value of DeleteMexSubfoler is false
+%               that is mex subfolder is not deleted.
+%                 Example - 'DeleteMexSubfoler',true
+%                 Data Types - logical
 %
 % Output:
 %
@@ -87,9 +94,11 @@ function status = CreateTestCfile(FileName, varargin)
 
 Suffix='';
 Nargout=1;
+DeleteMexSubfoler=false;
 
 if nargin>1
-    options=struct('Suffix',Suffix,'Nargout',Nargout);
+    options=struct('Suffix',Suffix,'Nargout',Nargout,...
+        'DeleteMexSubfoler',DeleteMexSubfoler);
     
     UserOptions=varargin(1:2:length(varargin));
     if ~isempty(UserOptions)
@@ -106,6 +115,7 @@ if nargin>1
     end
     Suffix=options.Suffix;
     Nargout=options.Nargout;
+    DeleteMexSubfoler=options.DeleteMexSubfoler;
 end
 
 
@@ -143,10 +153,15 @@ load(['codegen/lib/' FileName '_wrapper' Suffix '/buildInfo.mat'],'build*')
 packNGo(buildInfo,'packType', 'hierarchical', 'minimalHeaders',true, 'fileName',['zipSourceCode' filesep fn]);
 
 %% Remove mex files
-disp('Remove mex files and associated folders')
-delete([FileName '_wrapper' Suffix '_mex.mexw64'])
-rmdir 'codegen/mex' s
-
+if DeleteMexSubfoler == true
+    disp('Remove mex files and associated folders')
+    delete([FileName '_wrapper' Suffix '_mex.mexw64'])
+    try
+        rmdir 'codegen/mex' s
+    catch
+        warning('FSDA:CreateTestCfile:CouldNotDelete','Subolder codegen/mex could not be deleted.');
+    end
+end
 status =true;
 end
 
