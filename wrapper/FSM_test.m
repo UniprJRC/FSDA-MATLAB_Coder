@@ -1,4 +1,4 @@
-%% Test for FSm
+%% Test for FSM
 
 % FSM with plots showing envelope superimposition.
 n=200;
@@ -22,7 +22,7 @@ rng('default')
 rng(100);
 
 tic
-% Check whether mex and .m produce the same results
+% Check whether .mex and .m produce the same results
 [out] = FSM(Y, ...
     'bonflev',bonflev,'crit',crit,'init',init,'m0',m0,'msg',msg,...
     'nocheck',nocheck,'rf',rf,'plots',1);
