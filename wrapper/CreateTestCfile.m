@@ -42,7 +42,7 @@ function status = CreateTestCfile(FileName, varargin)
 %                 Example - 'Nargout',2
 %                 Data Types - double
 %
-% DeleteMexSubfoler  : Delete mex subfolder. Boolean.
+% DeleteMexSubfolder  : Delete mex subfolder. Boolean.
 %               If DeleteMexSubfoler is true command
 %               rmdir 'codegen/mex' s is invoked and subfolder dodegen/mex
 %               is deleted. The default value of DeleteMexSubfoler is false
@@ -94,11 +94,11 @@ function status = CreateTestCfile(FileName, varargin)
 
 Suffix='';
 Nargout=1;
-DeleteMexSubfoler=false;
+DeleteMexSubfolder=false;
 
 if nargin>1
     options=struct('Suffix',Suffix,'Nargout',Nargout,...
-        'DeleteMexSubfoler',DeleteMexSubfoler);
+        'DeleteMexSubfolder',DeleteMexSubfolder);
     
     UserOptions=varargin(1:2:length(varargin));
     if ~isempty(UserOptions)
@@ -115,7 +115,7 @@ if nargin>1
     end
     Suffix=options.Suffix;
     Nargout=options.Nargout;
-    DeleteMexSubfoler=options.DeleteMexSubfoler;
+    DeleteMexSubfolder=options.DeleteMexSubfolder;
 end
 
 
@@ -153,7 +153,7 @@ load(['codegen/lib/' FileName '_wrapper' Suffix '/buildInfo.mat'],'build*')
 packNGo(buildInfo,'packType', 'hierarchical', 'minimalHeaders',true, 'fileName',['zipSourceCode' filesep fn]);
 
 %% Remove mex files
-if DeleteMexSubfoler == true
+if DeleteMexSubfolder == true
     disp('Remove mex files and associated folders')
     delete([FileName '_wrapper' Suffix '_mex.mexw64'])
     try
