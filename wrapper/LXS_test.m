@@ -18,19 +18,20 @@ nomes=false;
 bonflevoutX=[]; % scalar or empty
 conflev=0.99;
 msg=true;
+yxsave=true;
 rng('default')
 rng(100);
 
 tic
 % Check whether mex and .m produce the same results
 [out,C]=LXS(y,X,  'bonflevoutX',bonflevoutX,'conflev',conflev,'h',h,'intercept',intercept,'lms',lms,...
-    'nocheck',nocheck,'msg',msg,'nomes',nomes,'nsamp',nsamp','rew',rew);
+    'nocheck',nocheck,'msg',msg,'nomes',nomes,'nsamp',nsamp','rew',rew,'yxsave',yxsave);
 tottime=toc;
 
 % LXS wrapper when lms is a scalar
 tic
 rng(100);
-[outMEX,CMEX]=LXS_wrapper_mex(y,X,    bonflevoutX,conflev,h,intercept,lms,msg,nocheck,nomes,nsamp,rew);
+[outMEX,CMEX]=LXS_wrapper_mex(y,X,    bonflevoutX,conflev,h,intercept,lms,msg,nocheck,nomes,nsamp,rew,yxsave);
 tottimeMEX=toc;
 
 % Compare mex time with .m time
@@ -52,6 +53,10 @@ assert(isequal(out.conflev,outMEX.conflev),'conflev not equal')
 assert(isequal(out.h,outMEX.h),'h not equal')
 assert(isequal(out.class,outMEX.class),'class not equal')
 assert(isequal(C,CMEX),'C not equal')
+if yxsave==true
+    assert(isequal(out.y,outMEX.y),'y not equal')
+    assert(isequal(out.X,outMEX.X),'X not equal')
+end
 
 %% Test option bonflevoutX
 rng('default')
@@ -70,6 +75,7 @@ X=[X;Xadd];
 y=[y;yadd];
 bonflevoutX=0.99; % scalar or empty
 h=round(length(y)*0.7);
+nocheck=false;
 rng(100);
 
 tic
@@ -81,7 +87,8 @@ tottime=toc;
 % LXS wrapper when lms is a scalar
 tic
 rng(100);
-[outMEX,CMEX]=LXS_wrapper_mex(y,X,    bonflevoutX,conflev,h,intercept,lms,msg,nocheck,nomes,nsamp,rew);
+[outMEX,CMEX]=LXS_wrapper_mex(y,X,    bonflevoutX,conflev,h,intercept...
+    ,lms,msg,nocheck,nomes,nsamp,rew,yxsave);
 tottimeMEX=toc;
 
 % Compare mex time with .m time

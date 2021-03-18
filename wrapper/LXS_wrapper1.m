@@ -1,4 +1,4 @@
-function [out,C]=LXS_wrapper1(y,X,  bonflevoutX,conflev,h,intercept,lms,msg,nocheck,nomes,nsamp,rew)
+function [out,C]=LXS_wrapper1(y,X,  bonflevoutX,conflev,h,intercept,lms,msg,nocheck,nomes,nsamp,rew,yxsave)
 % Wrapper function for LXS (when lms is a struct). NV pair names are not taken as
 % inputs. Instead, just the values are taken as inputs.
 
@@ -72,7 +72,10 @@ assert(isscalar(nsamp));
 % rew is a boolean
 assert(isa(rew, 'logical'));
 
+% yxsave is a boolean
+assert(isa(yxsave, 'logical'));
+
 [out,C] = LXS(y,X, ...
     'bonflevoutX',bonflevoutX,'conflev',conflev,'h',h,'intercept',intercept,'lms',lms,...
-    'nocheck',nocheck,'msg',msg,'nomes',nomes,'nsamp',nsamp','rew',rew);
+    'nocheck',nocheck,'msg',msg,'nomes',nomes,'nsamp',nsamp','rew',rew,'yxsave',yxsave);
 end
