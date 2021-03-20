@@ -35,7 +35,10 @@ rng(100);
 tottimeMEX=toc;
 
 % Compare mex time with .m time
-disp(array2table([tottime tottimeMEX],'VariableNames',{'.m time' 'mex time'}))
+CompTimes=array2table([tottime tottimeMEX],'VariableNames',{'.m time' 'mex time'});
+disp(CompTimes)
+% Save table CompTimes
+save('CompTimes','CompTimes')
 
 % assert(isequal(out,outMEX),'out structure not equal')
 % assert(isequaln(BB,BBMEX),'BB not equal')
