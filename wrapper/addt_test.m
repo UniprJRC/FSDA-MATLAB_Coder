@@ -1,6 +1,6 @@
 %% Test for addt
 
-n=50;
+n=2000;
 
 y=randn(n,1)+10;
 X=randn(n,3);
@@ -18,9 +18,13 @@ tic
 [outMEX]=addt_wrapper_mex(y, X, w, intercept, la, nocheck);
 tottimeMEX=toc;
 
-% Compare mex time with .m time
-disp(array2table([tottime tottimeMEX],'VariableNames',{'.m time' 'mex time'}))
 
+% Compare mex time with .m time
+CompTimes=array2table([tottime tottimeMEX],'VariableNames',{'.m time' 'mex time'},...
+    'RowNames',{'addt'});
+disp(CompTimes)
+% Save table CompTimes
+save('CompTimes','CompTimes')
 % Compare equality of the two outputs
 tol=1e-9;
 assert(max(abs(out.b-outMEX.b))<tol,'b is different')

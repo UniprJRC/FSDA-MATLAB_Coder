@@ -1,5 +1,5 @@
 %% Test for FSRbsb
-n=50;
+n=5000;
 y=randn(n,1)+10;
 X=randn(n,3);
 
@@ -24,7 +24,11 @@ tottimeMEX=toc;
 
 
 % Compare mex time with .m time
-disp(array2table([tottime tottimeMEX],'VariableNames',{'.m time' 'mex time'}))
+CompTimes=array2table([tottime tottimeMEX],'VariableNames',{'.m time' 'mex time'},...
+    'RowNames',{'FSRbsb'});
+disp(CompTimes)
+% Save table CompTimes
+save('CompTimes','CompTimes')
 
 % Compare equality of the two outputs
 assert(isequaln(Un,UnMEX),'Un not equal')

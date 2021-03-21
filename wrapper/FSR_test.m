@@ -43,18 +43,22 @@ tic
 % Check whether .mex and .m produce the same results
 [out] = FSR(y,X,   'bsbmfullrank',bsbmfullrank,'bonflev',bonflev,...
     'h',h,'init',init,'intercept',intercept,'lms',lms,'msg',msg,...
-    'nocheck',nocheck,'nsamp',nsamp','threshoutX',threshoutX,'weak',weak);
+    'nocheck',nocheck,'nsamp',nsamp','threshoutX',threshoutX,'weak',weak,'plots',0);
 tottime=toc;
 
-% FSM wrapper
+% FSR wrapper
 tic
 rng(100);
-[outMEX]=FSR_wrapper(y,X,   bsbmfullrank,bonflev,h,init,intercept,...
+[outMEX]=FSR_wrapper_mex(y,X,   bsbmfullrank,bonflev,h,init,intercept,...
     lms,msg,nocheck,nsamp,threshoutX,weak);
 tottimeMEX=toc;
 
 % Compare mex time with .m time
-disp(array2table([tottime tottimeMEX],'VariableNames',{'.m time' '.mex time'}))
+CompTimes=array2table([tottime tottimeMEX],'VariableNames',{'.m time' 'mex time'},...
+    'RowNames',{'FSR'});
+disp(CompTimes)
+% Save table CompTimes
+save('CompTimes','CompTimes')
 
 tol=1e-7;
 assert(isequaln(out.ListOut,outMEX.ListOut),'ListOut not equal')

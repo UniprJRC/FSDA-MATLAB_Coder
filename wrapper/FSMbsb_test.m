@@ -28,5 +28,12 @@ tic
 [UnMEX,BBMEX]=FSMbsb_wrapper_mex(Y,bsb,  bsbsteps,init,msg,nocheck);
 tottimeMEX=toc;
 
+% Compare mex time with .m time
+CompTimes=array2table([tottime tottimeMEX],'VariableNames',{'.m time' 'mex time'},...
+    'RowNames',{'FSMbsb'});
+disp(CompTimes)
+% Save table CompTimes
+save('CompTimes','CompTimes')
+
 assert(isequaln(Un,UnMEX),'Un not equal')
 assert(isequaln(BB,BBMEX),'BB not equal')

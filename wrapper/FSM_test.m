@@ -25,7 +25,7 @@ tic
 % Check whether .mex and .m produce the same results
 [out] = FSM(Y, ...
     'bonflev',bonflev,'crit',crit,'init',init,'m0',m0,'msg',msg,...
-    'nocheck',nocheck,'rf',rf,'plots',1);
+    'nocheck',nocheck,'rf',rf,'plots',0);
 tottime=toc;
 
 % FSM wrapper
@@ -36,7 +36,11 @@ rng(100);
 tottimeMEX=toc;
 
 % Compare mex time with .m time
-disp(array2table([tottime tottimeMEX],'VariableNames',{'.m time' '.mex time'}))
+CompTimes=array2table([tottime tottimeMEX],'VariableNames',{'.m time' 'mex time'},...
+    'RowNames',{'FSM'});
+disp(CompTimes)
+% Save table CompTimes
+save('CompTimes','CompTimes')
 
 tol=1e-7;
 assert(isequal(out.outliers,outMEX.outliers),'outliers not equal')

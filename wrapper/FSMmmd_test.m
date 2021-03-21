@@ -20,18 +20,22 @@ nocheck=false;
 
 tic
 [mmd,Un,BB] = FSMmmd(Y,bsb,   'bsbsteps',bsbsteps,...
-    'init',init,'msg',msg,'nocheck',nocheck);
+    'init',init,'msg',msg,'nocheck',nocheck,'plots',0);
 
 tottime=toc;
 
 % FSMmmd wrapper
 tic
-[mmdMEX,UnMEX,BBMEX] = FSMmmd_wrapper(Y,bsb,   bsbsteps,...
+[mmdMEX,UnMEX,BBMEX] = FSMmmd_wrapper_mex(Y,bsb,   bsbsteps,...
     init,msg,nocheck);
 tottimeMEX=toc;
 
 % Compare mex time with .m time
-disp(array2table([tottime tottimeMEX],'VariableNames',{'.m time' 'mex time'}))
+CompTimes=array2table([tottime tottimeMEX],'VariableNames',{'.m time' 'mex time'},...
+    'RowNames',{'FSMmmd'});
+disp(CompTimes)
+% Save table CompTimes
+save('CompTimes','CompTimes')
 
 % Compare equality of the two outputs
 tol=1e-7;

@@ -43,7 +43,11 @@ tic
 tottimeMEX=toc;
 
 % Compare mex time with .m time
-disp(array2table([tottime tottimeMEX],'VariableNames',{'.m time' 'mex time'}))
+CompTimes=array2table([tottime tottimeMEX],'VariableNames',{'.m time' 'mex time'},...
+    'RowNames',{'FSRmdr'});
+disp(CompTimes)
+% Save table CompTimes
+save('CompTimes','CompTimes')
 
 % Compare equality of the two outputs
 tol=1e-7;
