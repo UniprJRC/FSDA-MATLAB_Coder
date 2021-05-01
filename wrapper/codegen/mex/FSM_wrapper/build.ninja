@@ -1,0 +1,126 @@
+# CompilerName=mingw64
+# Mode=optim
+ninja_required_version = 1.3
+
+# Basic folders
+root = .
+builddir = $root/build/win64
+matlabdir = C:/Program Files/MATLAB/R2021a
+startdir = D:/MATLAB/FSDAgit/FSDA-MATLAB_Coder/wrapper
+
+# Toolchain information
+cc = C:\ProgramData\MATLAB\SupportPackages\R2017b\3P.instrset\mingw_w64.instrset\bin\gcc
+cxx = C:\ProgramData\MATLAB\SupportPackages\R2017b\3P.instrset\mingw_w64.instrset\bin\g++
+linker = C:\ProgramData\MATLAB\SupportPackages\R2017b\3P.instrset\mingw_w64.instrset\bin\gcc
+linkerxx = C:\ProgramData\MATLAB\SupportPackages\R2017b\3P.instrset\mingw_w64.instrset\bin\g++
+
+cflags =  -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I "D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\mex\FSM_wrapper" -I "D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper" -I "D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\mex\FSM_wrapper\interface" -I "C:\Program Files\MATLAB\R2021a\extern\include" -I "." -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=FSM_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1  
+
+cxxflags =  -c -fexceptions -fno-omit-frame-pointer -std=c++11 -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c++11 -I "D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\mex\FSM_wrapper" -I "D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper" -I "D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\mex\FSM_wrapper\interface" -I "C:\Program Files\MATLAB\R2021a\extern\include" -I "." -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=FSM_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1  
+
+ldflags =  -m64 -Wl,--no-undefined -shared -static -L"C:\Program Files\MATLAB\R2021a\extern\lib\win64\mingw64" -llibmx -llibmex -llibmat -lm -llibmwlapack -llibmwblas -o "FSM_wrapper_mex.mexw64" -L"$matlabdir\extern\lib\win64\mingw64" -llibmwblas -llibmwlapack -llibemlrt -llibcovrt -llibut -llibmwmathutil  -Wl,--version-script,FSM_wrapper_mex.map
+
+# Build Rules
+rule cc
+    command = $cc $cflags $in -o $out
+
+rule cxx
+    command = $cxx $cxxflags $in -o $out
+
+rule link
+    command = $linker @$out.rsp $ldflags
+    rspfile = $out.rsp
+    rspfile_content = $in
+
+rule linkxx
+    command = $linkerxx $in $ldflags
+
+# Build
+build $builddir/FSM_wrapper_data.o : cc $root/FSM_wrapper_data.c
+build $builddir/rt_nonfinite.o : cc $root/rt_nonfinite.c
+build $builddir/FSM_wrapper_initialize.o : cc $root/FSM_wrapper_initialize.c
+build $builddir/FSM_wrapper_terminate.o : cc $root/FSM_wrapper_terminate.c
+build $builddir/FSM_wrapper.o : cc $root/FSM_wrapper.c
+build $builddir/eml_mtimes_helper.o : cc $root/eml_mtimes_helper.c
+build $builddir/mtimes.o : cc $root/mtimes.c
+build $builddir/eml_int_forloop_overflow_check.o : cc $root/eml_int_forloop_overflow_check.c
+build $builddir/int2str.o : cc $root/int2str.c
+build $builddir/rank.o : cc $root/rank.c
+build $builddir/vAllOrAny.o : cc $root/vAllOrAny.c
+build $builddir/svd.o : cc $root/svd.c
+build $builddir/unibiv.o : cc $root/unibiv.c
+build $builddir/error.o : cc $root/error.c
+build $builddir/median.o : cc $root/median.c
+build $builddir/quickselect.o : cc $root/quickselect.c
+build $builddir/mad.o : cc $root/mad.c
+build $builddir/sumMatrixIncludeNaN.o : cc $root/sumMatrixIncludeNaN.c
+build $builddir/nanmedian.o : cc $root/nanmedian.c
+build $builddir/sortIdx.o : cc $root/sortIdx.c
+build $builddir/abs.o : cc $root/abs.c
+build $builddir/iqr.o : cc $root/iqr.c
+build $builddir/nanmean.o : cc $root/nanmean.c
+build $builddir/quantile.o : cc $root/quantile.c
+build $builddir/combineVectorElements.o : cc $root/combineVectorElements.c
+build $builddir/indexShapeCheck.o : cc $root/indexShapeCheck.c
+build $builddir/find.o : cc $root/find.c
+build $builddir/sum.o : cc $root/sum.c
+build $builddir/blockedSummation.o : cc $root/blockedSummation.c
+build $builddir/mean.o : cc $root/mean.c
+build $builddir/std.o : cc $root/std.c
+build $builddir/power.o : cc $root/power.c
+build $builddir/finv.o : cc $root/finv.c
+build $builddir/gammaincinv.o : cc $root/gammaincinv.c
+build $builddir/eml_gammainc.o : cc $root/eml_gammainc.c
+build $builddir/warning.o : cc $root/warning.c
+build $builddir/gammainc.o : cc $root/gammainc.c
+build $builddir/betainc.o : cc $root/betainc.c
+build $builddir/eml_betainc.o : cc $root/eml_betainc.c
+build $builddir/betaincinv.o : cc $root/betaincinv.c
+build $builddir/eig.o : cc $root/eig.c
+build $builddir/eigStandard.o : cc $root/eigStandard.c
+build $builddir/xzhgeqz.o : cc $root/xzhgeqz.c
+build $builddir/xzlanhs.o : cc $root/xzlanhs.c
+build $builddir/xzlartg.o : cc $root/xzlartg.c
+build $builddir/strcmp.o : cc $root/strcmp.c
+build $builddir/sortrowsLE.o : cc $root/sortrowsLE.c
+build $builddir/FSMmmd.o : cc $root/FSMmmd.c
+build $builddir/ifWhileCond.o : cc $root/ifWhileCond.c
+build $builddir/randsample.o : cc $root/randsample.c
+build $builddir/rand.o : cc $root/rand.c
+build $builddir/cov.o : cc $root/cov.c
+build $builddir/colon.o : cc $root/colon.c
+build $builddir/mod.o : cc $root/mod.c
+build $builddir/cat.o : cc $root/cat.c
+build $builddir/bsxfun.o : cc $root/bsxfun.c
+build $builddir/inv.o : cc $root/inv.c
+build $builddir/repmat.o : cc $root/repmat.c
+build $builddir/norm.o : cc $root/norm.c
+build $builddir/qr.o : cc $root/qr.c
+build $builddir/mrdivide_helper.o : cc $root/mrdivide_helper.c
+build $builddir/qrsolve.o : cc $root/qrsolve.c
+build $builddir/quickselectFS.o : cc $root/quickselectFS.c
+build $builddir/FSMbonfbound.o : cc $root/FSMbonfbound.c
+build $builddir/chi2inv.o : cc $root/chi2inv.c
+build $builddir/FSMenvmmd.o : cc $root/FSMenvmmd.c
+build $builddir/chi2cdf.o : cc $root/chi2cdf.c
+build $builddir/FSMbsb.o : cc $root/FSMbsb.c
+build $builddir/eml_setop.o : cc $root/eml_setop.c
+build $builddir/issorted.o : cc $root/issorted.c
+build $builddir/mahalFS.o : cc $root/mahalFS.c
+build $builddir/_coder_FSM_wrapper_api.o : cc $root/interface/_coder_FSM_wrapper_api.c
+build $builddir/_coder_FSM_wrapper_mex.o : cc $root/interface/_coder_FSM_wrapper_mex.c
+build $builddir/chkinputM.o : cc $root/chkinputM.c
+build $builddir/nullAssignment.o : cc $root/nullAssignment.c
+build $builddir/sort.o : cc $root/sort.c
+build $builddir/sqrt.o : cc $root/sqrt.c
+build $builddir/gammaln.o : cc $root/gammaln.c
+build $builddir/xhseqr.o : cc $root/xhseqr.c
+build $builddir/xzgghrd.o : cc $root/xzgghrd.c
+build $builddir/sortrows.o : cc $root/sortrows.c
+build $builddir/FSM_wrapper_emxutil.o : cc $root/FSM_wrapper_emxutil.c
+build $builddir/FSM_wrapper_mexutil.o : cc $root/FSM_wrapper_mexutil.c
+build $builddir/_coder_FSM_wrapper_info.o : cc $root/interface/_coder_FSM_wrapper_info.c
+build $builddir/c_mexapi_version.o : cc $matlabdir/extern/version/c_mexapi_version.c
+
+# Link
+build $root\FSM_wrapper_mex.mexw64 : link $builddir/FSM_wrapper_data.o $builddir/rt_nonfinite.o $builddir/FSM_wrapper_initialize.o $builddir/FSM_wrapper_terminate.o $builddir/FSM_wrapper.o $builddir/eml_mtimes_helper.o $builddir/mtimes.o $builddir/eml_int_forloop_overflow_check.o $builddir/int2str.o $builddir/rank.o $builddir/vAllOrAny.o $builddir/svd.o $builddir/unibiv.o $builddir/error.o $builddir/median.o $builddir/quickselect.o $builddir/mad.o $builddir/sumMatrixIncludeNaN.o $builddir/nanmedian.o $builddir/sortIdx.o $builddir/abs.o $builddir/iqr.o $builddir/nanmean.o $builddir/quantile.o $builddir/combineVectorElements.o $builddir/indexShapeCheck.o $builddir/find.o $builddir/sum.o $builddir/blockedSummation.o $builddir/mean.o $builddir/std.o $builddir/power.o $builddir/finv.o $builddir/gammaincinv.o $builddir/eml_gammainc.o $builddir/warning.o $builddir/gammainc.o $builddir/betainc.o $builddir/eml_betainc.o $builddir/betaincinv.o $builddir/eig.o $builddir/eigStandard.o $builddir/xzhgeqz.o $builddir/xzlanhs.o $builddir/xzlartg.o $builddir/strcmp.o $builddir/sortrowsLE.o $builddir/FSMmmd.o $builddir/ifWhileCond.o $builddir/randsample.o $builddir/rand.o $builddir/cov.o $builddir/colon.o $builddir/mod.o $builddir/cat.o $builddir/bsxfun.o $builddir/inv.o $builddir/repmat.o $builddir/norm.o $builddir/qr.o $builddir/mrdivide_helper.o $builddir/qrsolve.o $builddir/quickselectFS.o $builddir/FSMbonfbound.o $builddir/chi2inv.o $builddir/FSMenvmmd.o $builddir/chi2cdf.o $builddir/FSMbsb.o $builddir/eml_setop.o $builddir/issorted.o $builddir/mahalFS.o $builddir/_coder_FSM_wrapper_api.o $builddir/_coder_FSM_wrapper_mex.o $builddir/chkinputM.o $builddir/nullAssignment.o $builddir/sort.o $builddir/sqrt.o $builddir/gammaln.o $builddir/xhseqr.o $builddir/xzgghrd.o $builddir/sortrows.o $builddir/FSM_wrapper_emxutil.o $builddir/FSM_wrapper_mexutil.o $builddir/_coder_FSM_wrapper_info.o $builddir/c_mexapi_version.o 

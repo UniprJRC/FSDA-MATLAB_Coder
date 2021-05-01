@@ -1,0 +1,114 @@
+# CompilerName=mingw64
+# Mode=optim
+ninja_required_version = 1.3
+
+# Basic folders
+root = .
+builddir = $root/build/win64
+matlabdir = C:/Program Files/MATLAB/R2021a
+startdir = D:/MATLAB/FSDAgit/FSDA-MATLAB_Coder/wrapper
+
+# Toolchain information
+cc = C:\ProgramData\MATLAB\SupportPackages\R2017b\3P.instrset\mingw_w64.instrset\bin\gcc
+cxx = C:\ProgramData\MATLAB\SupportPackages\R2017b\3P.instrset\mingw_w64.instrset\bin\g++
+linker = C:\ProgramData\MATLAB\SupportPackages\R2017b\3P.instrset\mingw_w64.instrset\bin\gcc
+linkerxx = C:\ProgramData\MATLAB\SupportPackages\R2017b\3P.instrset\mingw_w64.instrset\bin\g++
+
+cflags =  -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I "D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\mex\FSRfan_wrapper" -I "D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper" -I "D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\mex\FSRfan_wrapper\interface" -I "C:\Program Files\MATLAB\R2021a\extern\include" -I "." -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=FSRfan_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1  
+
+cxxflags =  -c -fexceptions -fno-omit-frame-pointer -std=c++11 -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c++11 -I "D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\mex\FSRfan_wrapper" -I "D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper" -I "D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\mex\FSRfan_wrapper\interface" -I "C:\Program Files\MATLAB\R2021a\extern\include" -I "." -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=FSRfan_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1  
+
+ldflags =  -m64 -Wl,--no-undefined -shared -static -L"C:\Program Files\MATLAB\R2021a\extern\lib\win64\mingw64" -llibmx -llibmex -llibmat -lm -llibmwlapack -llibmwblas -o "FSRfan_wrapper_mex.mexw64" -L"$matlabdir\extern\lib\win64\mingw64" -llibmwblas -llibmwlapack -llibemlrt -llibcovrt -llibut -llibmwmathutil  -Wl,--version-script,FSRfan_wrapper_mex.map
+
+# Build Rules
+rule cc
+    command = $cc $cflags $in -o $out
+
+rule cxx
+    command = $cxx $cxxflags $in -o $out
+
+rule link
+    command = $linker @$out.rsp $ldflags
+    rspfile = $out.rsp
+    rspfile_content = $in
+
+rule linkxx
+    command = $linkerxx $in $ldflags
+
+# Build
+build $builddir/FSRfan_wrapper_data.o : cc $root/FSRfan_wrapper_data.c
+build $builddir/rt_nonfinite.o : cc $root/rt_nonfinite.c
+build $builddir/FSRfan_wrapper_initialize.o : cc $root/FSRfan_wrapper_initialize.c
+build $builddir/FSRfan_wrapper_terminate.o : cc $root/FSRfan_wrapper_terminate.c
+build $builddir/FSRfan_wrapper.o : cc $root/FSRfan_wrapper.c
+build $builddir/isequal.o : cc $root/isequal.c
+build $builddir/eml_mtimes_helper.o : cc $root/eml_mtimes_helper.c
+build $builddir/mtimes.o : cc $root/mtimes.c
+build $builddir/eml_int_forloop_overflow_check.o : cc $root/eml_int_forloop_overflow_check.c
+build $builddir/cat.o : cc $root/cat.c
+build $builddir/find.o : cc $root/find.c
+build $builddir/nullAssignment.o : cc $root/nullAssignment.c
+build $builddir/int2str.o : cc $root/int2str.c
+build $builddir/rank.o : cc $root/rank.c
+build $builddir/svd.o : cc $root/svd.c
+build $builddir/error.o : cc $root/error.c
+build $builddir/bc.o : cc $root/bc.c
+build $builddir/colon.o : cc $root/colon.c
+build $builddir/strcmp.o : cc $root/strcmp.c
+build $builddir/subsets.o : cc $root/subsets.c
+build $builddir/combsFS.o : cc $root/combsFS.c
+build $builddir/indexShapeCheck.o : cc $root/indexShapeCheck.c
+build $builddir/randperm.o : cc $root/randperm.c
+build $builddir/rand.o : cc $root/rand.c
+build $builddir/mod.o : cc $root/mod.c
+build $builddir/pascal.o : cc $root/pascal.c
+build $builddir/lexunrank.o : cc $root/lexunrank.c
+build $builddir/power.o : cc $root/power.c
+build $builddir/normYJ.o : cc $root/normYJ.c
+build $builddir/LXS.o : cc $root/LXS.c
+build $builddir/ifWhileCond.o : cc $root/ifWhileCond.c
+build $builddir/tic.o : cc $root/tic.c
+build $builddir/mldivide.o : cc $root/mldivide.c
+build $builddir/repmat.o : cc $root/repmat.c
+build $builddir/warning.o : cc $root/warning.c
+build $builddir/qrsolve.o : cc $root/qrsolve.c
+build $builddir/infocheck.o : cc $root/infocheck.c
+build $builddir/sum.o : cc $root/sum.c
+build $builddir/sumMatrixIncludeNaN.o : cc $root/sumMatrixIncludeNaN.c
+build $builddir/toc.o : cc $root/toc.c
+build $builddir/median.o : cc $root/median.c
+build $builddir/quickselect.o : cc $root/quickselect.c
+build $builddir/norminv.o : cc $root/norminv.c
+build $builddir/log2.o : cc $root/log2.c
+build $builddir/mpower.o : cc $root/mpower.c
+build $builddir/gammaincinv.o : cc $root/gammaincinv.c
+build $builddir/eml_gammainc.o : cc $root/eml_gammainc.c
+build $builddir/gammainc.o : cc $root/gammainc.c
+build $builddir/tinv.o : cc $root/tinv.c
+build $builddir/eml_betainc.o : cc $root/eml_betainc.c
+build $builddir/abs.o : cc $root/abs.c
+build $builddir/Score.o : cc $root/Score.c
+build $builddir/qr.o : cc $root/qr.c
+build $builddir/norm.o : cc $root/norm.c
+build $builddir/eye.o : cc $root/eye.c
+build $builddir/diag.o : cc $root/diag.c
+build $builddir/ScoreYJ.o : cc $root/ScoreYJ.c
+build $builddir/ScoreYJall.o : cc $root/ScoreYJall.c
+build $builddir/_coder_FSRfan_wrapper_api.o : cc $root/interface/_coder_FSRfan_wrapper_api.c
+build $builddir/_coder_FSRfan_wrapper_mex.o : cc $root/interface/_coder_FSRfan_wrapper_mex.c
+build $builddir/chkinputR.o : cc $root/chkinputR.c
+build $builddir/log.o : cc $root/log.c
+build $builddir/xgeqp3.o : cc $root/xgeqp3.c
+build $builddir/sort.o : cc $root/sort.c
+build $builddir/sortIdx.o : cc $root/sortIdx.c
+build $builddir/gammaln.o : cc $root/gammaln.c
+build $builddir/exp.o : cc $root/exp.c
+build $builddir/sqrt.o : cc $root/sqrt.c
+build $builddir/sign.o : cc $root/sign.c
+build $builddir/FSRfan_wrapper_emxutil.o : cc $root/FSRfan_wrapper_emxutil.c
+build $builddir/FSRfan_wrapper_mexutil.o : cc $root/FSRfan_wrapper_mexutil.c
+build $builddir/_coder_FSRfan_wrapper_info.o : cc $root/interface/_coder_FSRfan_wrapper_info.c
+build $builddir/c_mexapi_version.o : cc $matlabdir/extern/version/c_mexapi_version.c
+
+# Link
+build $root\FSRfan_wrapper_mex.mexw64 : link $builddir/FSRfan_wrapper_data.o $builddir/rt_nonfinite.o $builddir/FSRfan_wrapper_initialize.o $builddir/FSRfan_wrapper_terminate.o $builddir/FSRfan_wrapper.o $builddir/isequal.o $builddir/eml_mtimes_helper.o $builddir/mtimes.o $builddir/eml_int_forloop_overflow_check.o $builddir/cat.o $builddir/find.o $builddir/nullAssignment.o $builddir/int2str.o $builddir/rank.o $builddir/svd.o $builddir/error.o $builddir/bc.o $builddir/colon.o $builddir/strcmp.o $builddir/subsets.o $builddir/combsFS.o $builddir/indexShapeCheck.o $builddir/randperm.o $builddir/rand.o $builddir/mod.o $builddir/pascal.o $builddir/lexunrank.o $builddir/power.o $builddir/normYJ.o $builddir/LXS.o $builddir/ifWhileCond.o $builddir/tic.o $builddir/mldivide.o $builddir/repmat.o $builddir/warning.o $builddir/qrsolve.o $builddir/infocheck.o $builddir/sum.o $builddir/sumMatrixIncludeNaN.o $builddir/toc.o $builddir/median.o $builddir/quickselect.o $builddir/norminv.o $builddir/log2.o $builddir/mpower.o $builddir/gammaincinv.o $builddir/eml_gammainc.o $builddir/gammainc.o $builddir/tinv.o $builddir/eml_betainc.o $builddir/abs.o $builddir/Score.o $builddir/qr.o $builddir/norm.o $builddir/eye.o $builddir/diag.o $builddir/ScoreYJ.o $builddir/ScoreYJall.o $builddir/_coder_FSRfan_wrapper_api.o $builddir/_coder_FSRfan_wrapper_mex.o $builddir/chkinputR.o $builddir/log.o $builddir/xgeqp3.o $builddir/sort.o $builddir/sortIdx.o $builddir/gammaln.o $builddir/exp.o $builddir/sqrt.o $builddir/sign.o $builddir/FSRfan_wrapper_emxutil.o $builddir/FSRfan_wrapper_mexutil.o $builddir/_coder_FSRfan_wrapper_info.o $builddir/c_mexapi_version.o 

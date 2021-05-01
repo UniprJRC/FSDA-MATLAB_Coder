@@ -1,0 +1,127 @@
+# CompilerName=mingw64
+# Mode=optim
+ninja_required_version = 1.3
+
+# Basic folders
+root = .
+builddir = $root/build/win64
+matlabdir = C:/Program Files/MATLAB/R2021a
+startdir = D:/MATLAB/FSDAgit/FSDA-MATLAB_Coder/wrapper
+
+# Toolchain information
+cc = C:\ProgramData\MATLAB\SupportPackages\R2017b\3P.instrset\mingw_w64.instrset\bin\gcc
+cxx = C:\ProgramData\MATLAB\SupportPackages\R2017b\3P.instrset\mingw_w64.instrset\bin\g++
+linker = C:\ProgramData\MATLAB\SupportPackages\R2017b\3P.instrset\mingw_w64.instrset\bin\gcc
+linkerxx = C:\ProgramData\MATLAB\SupportPackages\R2017b\3P.instrset\mingw_w64.instrset\bin\g++
+
+cflags =  -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I "D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\mex\LTSts_wrapper" -I "D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper" -I "D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\mex\LTSts_wrapper\interface" -I "C:\Program Files\MATLAB\R2021a\extern\include" -I "." -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=LTSts_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1 -fopenmp 
+
+cxxflags =  -c -fexceptions -fno-omit-frame-pointer -std=c++11 -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c++11 -I "D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\mex\LTSts_wrapper" -I "D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper" -I "D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\mex\LTSts_wrapper\interface" -I "C:\Program Files\MATLAB\R2021a\extern\include" -I "." -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=LTSts_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1 -fopenmp 
+
+ldflags =  -m64 -Wl,--no-undefined -shared -static -L"C:\Program Files\MATLAB\R2021a\extern\lib\win64\mingw64" -llibmx -llibmex -llibmat -lm -llibmwlapack -llibmwblas -o "LTSts_wrapper_mex.mexw64" -L"$matlabdir\extern\lib\win64\mingw64" -llibmwblas -llibmwlapack -llibemlrt -llibcovrt -llibut -llibmwmathutil -fopenmp -Wl,--version-script,LTSts_wrapper_mex.map
+
+# Build Rules
+rule cc
+    command = $cc $cflags $in -o $out
+
+rule cxx
+    command = $cxx $cxxflags $in -o $out
+
+rule link
+    command = $linker @$out.rsp $ldflags
+    rspfile = $out.rsp
+    rspfile_content = $in
+
+rule linkxx
+    command = $linkerxx $in $ldflags
+
+# Build
+build $builddir/LTSts_wrapper_data.o : cc $root/LTSts_wrapper_data.c
+build $builddir/rt_nonfinite.o : cc $root/rt_nonfinite.c
+build $builddir/LTSts_wrapper_initialize.o : cc $root/LTSts_wrapper_initialize.c
+build $builddir/LTSts_wrapper_terminate.o : cc $root/LTSts_wrapper_terminate.c
+build $builddir/LTSts_wrapper.o : cc $root/LTSts_wrapper.c
+build $builddir/error.o : cc $root/error.c
+build $builddir/eml_setop.o : cc $root/eml_setop.c
+build $builddir/power.o : cc $root/power.c
+build $builddir/eml_int_forloop_overflow_check.o : cc $root/eml_int_forloop_overflow_check.c
+build $builddir/sprintf.o : cc $root/sprintf.c
+build $builddir/str2double.o : cc $root/str2double.c
+build $builddir/indexShapeCheck.o : cc $root/indexShapeCheck.c
+build $builddir/colon.o : cc $root/colon.c
+build $builddir/issorted.o : cc $root/issorted.c
+build $builddir/bc.o : cc $root/bc.c
+build $builddir/int2str.o : cc $root/int2str.c
+build $builddir/ifWhileCond.o : cc $root/ifWhileCond.c
+build $builddir/norminv.o : cc $root/norminv.c
+build $builddir/eml_erfcore.o : cc $root/eml_erfcore.c
+build $builddir/log2.o : cc $root/log2.c
+build $builddir/subsets.o : cc $root/subsets.c
+build $builddir/isequal.o : cc $root/isequal.c
+build $builddir/randperm.o : cc $root/randperm.c
+build $builddir/rand.o : cc $root/rand.c
+build $builddir/mod.o : cc $root/mod.c
+build $builddir/pascal.o : cc $root/pascal.c
+build $builddir/eml_mtimes_helper.o : cc $root/eml_mtimes_helper.c
+build $builddir/find.o : cc $root/find.c
+build $builddir/lexunrank.o : cc $root/lexunrank.c
+build $builddir/combineVectorElements.o : cc $root/combineVectorElements.c
+build $builddir/randsample.o : cc $root/randsample.c
+build $builddir/mldivide.o : cc $root/mldivide.c
+build $builddir/repmat.o : cc $root/repmat.c
+build $builddir/warning.o : cc $root/warning.c
+build $builddir/infocheck.o : cc $root/infocheck.c
+build $builddir/any.o : cc $root/any.c
+build $builddir/mtimes.o : cc $root/mtimes.c
+build $builddir/bsxfun.o : cc $root/bsxfun.c
+build $builddir/LTSts.o : cc $root/LTSts.c
+build $builddir/sum.o : cc $root/sum.c
+build $builddir/blockedSummation.o : cc $root/blockedSummation.c
+build $builddir/sumMatrixIncludeNaN.o : cc $root/sumMatrixIncludeNaN.c
+build $builddir/abs.o : cc $root/abs.c
+build $builddir/HUrho.o : cc $root/HUrho.c
+build $builddir/zscore.o : cc $root/zscore.c
+build $builddir/vvarstd.o : cc $root/vvarstd.c
+build $builddir/rank.o : cc $root/rank.c
+build $builddir/svd.o : cc $root/svd.c
+build $builddir/zscoreFS.o : cc $root/zscoreFS.c
+build $builddir/median.o : cc $root/median.c
+build $builddir/quickselect.o : cc $root/quickselect.c
+build $builddir/pdist.o : cc $root/pdist.c
+build $builddir/scanfornan.o : cc $root/scanfornan.c
+build $builddir/prctile.o : cc $root/prctile.c
+build $builddir/sortIdx.o : cc $root/sortIdx.c
+build $builddir/RobRegrSize.o : cc $root/RobRegrSize.c
+build $builddir/chi2inv.o : cc $root/chi2inv.c
+build $builddir/eml_gammainc.o : cc $root/eml_gammainc.c
+build $builddir/gammainc.o : cc $root/gammainc.c
+build $builddir/GYfilt.o : cc $root/GYfilt.c
+build $builddir/mad.o : cc $root/mad.c
+build $builddir/nanmedian.o : cc $root/nanmedian.c
+build $builddir/inv.o : cc $root/inv.c
+build $builddir/norm.o : cc $root/norm.c
+build $builddir/diag.o : cc $root/diag.c
+build $builddir/tcdf.o : cc $root/tcdf.c
+build $builddir/betainc.o : cc $root/betainc.c
+build $builddir/eml_betainc.o : cc $root/eml_betainc.c
+build $builddir/normcdf.o : cc $root/normcdf.c
+build $builddir/string1.o : cc $root/string1.c
+build $builddir/array2table.o : cc $root/array2table.c
+build $builddir/fcdf.o : cc $root/fcdf.c
+build $builddir/FSRinvmdr.o : cc $root/FSRinvmdr.c
+build $builddir/_coder_LTSts_wrapper_api.o : cc $root/interface/_coder_LTSts_wrapper_api.c
+build $builddir/_coder_LTSts_wrapper_mex.o : cc $root/interface/_coder_LTSts_wrapper_mex.c
+build $builddir/str2double1.o : cc $root/str2double1.c
+build $builddir/cos.o : cc $root/cos.c
+build $builddir/sin.o : cc $root/sin.c
+build $builddir/round.o : cc $root/round.c
+build $builddir/sort.o : cc $root/sort.c
+build $builddir/gammaln.o : cc $root/gammaln.c
+build $builddir/sqrt.o : cc $root/sqrt.c
+build $builddir/LTSts_wrapper_emxutil.o : cc $root/LTSts_wrapper_emxutil.c
+build $builddir/LTSts_wrapper_mexutil.o : cc $root/LTSts_wrapper_mexutil.c
+build $builddir/_coder_LTSts_wrapper_info.o : cc $root/interface/_coder_LTSts_wrapper_info.c
+build $builddir/c_mexapi_version.o : cc $matlabdir/extern/version/c_mexapi_version.c
+
+# Link
+build $root\LTSts_wrapper_mex.mexw64 : link $builddir/LTSts_wrapper_data.o $builddir/rt_nonfinite.o $builddir/LTSts_wrapper_initialize.o $builddir/LTSts_wrapper_terminate.o $builddir/LTSts_wrapper.o $builddir/error.o $builddir/eml_setop.o $builddir/power.o $builddir/eml_int_forloop_overflow_check.o $builddir/sprintf.o $builddir/str2double.o $builddir/indexShapeCheck.o $builddir/colon.o $builddir/issorted.o $builddir/bc.o $builddir/int2str.o $builddir/ifWhileCond.o $builddir/norminv.o $builddir/eml_erfcore.o $builddir/log2.o $builddir/subsets.o $builddir/isequal.o $builddir/randperm.o $builddir/rand.o $builddir/mod.o $builddir/pascal.o $builddir/eml_mtimes_helper.o $builddir/find.o $builddir/lexunrank.o $builddir/combineVectorElements.o $builddir/randsample.o $builddir/mldivide.o $builddir/repmat.o $builddir/warning.o $builddir/infocheck.o $builddir/any.o $builddir/mtimes.o $builddir/bsxfun.o $builddir/LTSts.o $builddir/sum.o $builddir/blockedSummation.o $builddir/sumMatrixIncludeNaN.o $builddir/abs.o $builddir/HUrho.o $builddir/zscore.o $builddir/vvarstd.o $builddir/rank.o $builddir/svd.o $builddir/zscoreFS.o $builddir/median.o $builddir/quickselect.o $builddir/pdist.o $builddir/scanfornan.o $builddir/prctile.o $builddir/sortIdx.o $builddir/RobRegrSize.o $builddir/chi2inv.o $builddir/eml_gammainc.o $builddir/gammainc.o $builddir/GYfilt.o $builddir/mad.o $builddir/nanmedian.o $builddir/inv.o $builddir/norm.o $builddir/diag.o $builddir/tcdf.o $builddir/betainc.o $builddir/eml_betainc.o $builddir/normcdf.o $builddir/string1.o $builddir/array2table.o $builddir/fcdf.o $builddir/FSRinvmdr.o $builddir/_coder_LTSts_wrapper_api.o $builddir/_coder_LTSts_wrapper_mex.o $builddir/str2double1.o $builddir/cos.o $builddir/sin.o $builddir/round.o $builddir/sort.o $builddir/gammaln.o $builddir/sqrt.o $builddir/LTSts_wrapper_emxutil.o $builddir/LTSts_wrapper_mexutil.o $builddir/_coder_LTSts_wrapper_info.o $builddir/c_mexapi_version.o 

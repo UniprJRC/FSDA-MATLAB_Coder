@@ -1,0 +1,81 @@
+# CompilerName=mingw64
+# Mode=optim
+ninja_required_version = 1.3
+
+# Basic folders
+root = .
+builddir = $root/build/win64
+matlabdir = C:/Program Files/MATLAB/R2020b
+startdir = D:/MATLAB/FSDAgit/FSDA-MATLAB_Coder/wrapper
+
+# Toolchain information
+cc = C:\ProgramData\MATLAB\SupportPackages\R2020b\3P.instrset\mingw_w64.instrset\bin\gcc
+cxx = C:\ProgramData\MATLAB\SupportPackages\R2020b\3P.instrset\mingw_w64.instrset\bin\g++
+linker = C:\ProgramData\MATLAB\SupportPackages\R2020b\3P.instrset\mingw_w64.instrset\bin\gcc
+linkerxx = C:\ProgramData\MATLAB\SupportPackages\R2020b\3P.instrset\mingw_w64.instrset\bin\g++
+
+cflags =  -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I "D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\mex\addt_wrapper" -I "D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper" -I "D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\mex\addt_wrapper\interface" -I "C:\Program Files\MATLAB\R2020b\extern\include" -I "." -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=addt_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1  
+
+cxxflags =  -c -fexceptions -fno-omit-frame-pointer -std=c++11 -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c++11 -I "D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\mex\addt_wrapper" -I "D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper" -I "D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\mex\addt_wrapper\interface" -I "C:\Program Files\MATLAB\R2020b\extern\include" -I "." -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=addt_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1  
+
+ldflags =  -m64 -Wl,--no-undefined -shared -static -L"C:\Program Files\MATLAB\R2020b\extern\lib\win64\mingw64" -llibmx -llibmex -llibmat -lm -llibmwlapack -llibmwblas -o "addt_wrapper_mex.mexw64" -L"$matlabdir\extern\lib\win64\mingw64" -llibmwblas -llibmwlapack -llibemlrt -llibcovrt -llibut -llibmwmathutil  -Wl,--version-script,addt_wrapper_mex.map
+
+# Build Rules
+rule cc
+    command = $cc $cflags $in -o $out
+
+rule cxx
+    command = $cxx $cxxflags $in -o $out
+
+rule link
+    command = $linker @$out.rsp $ldflags
+    rspfile = $out.rsp
+    rspfile_content = $in
+
+rule linkxx
+    command = $linkerxx $in $ldflags
+
+# Build
+build $builddir/addt_wrapper_data.o : cc $root/addt_wrapper_data.c
+build $builddir/rt_nonfinite.o : cc $root/rt_nonfinite.c
+build $builddir/addt_wrapper_initialize.o : cc $root/addt_wrapper_initialize.c
+build $builddir/addt_wrapper_terminate.o : cc $root/addt_wrapper_terminate.c
+build $builddir/addt_wrapper.o : cc $root/addt_wrapper.c
+build $builddir/isequal.o : cc $root/isequal.c
+build $builddir/eml_mtimes_helper.o : cc $root/eml_mtimes_helper.c
+build $builddir/mtimes.o : cc $root/mtimes.c
+build $builddir/eml_int_forloop_overflow_check.o : cc $root/eml_int_forloop_overflow_check.c
+build $builddir/cat.o : cc $root/cat.c
+build $builddir/find.o : cc $root/find.c
+build $builddir/int2str.o : cc $root/int2str.c
+build $builddir/rank.o : cc $root/rank.c
+build $builddir/svd.o : cc $root/svd.c
+build $builddir/error.o : cc $root/error.c
+build $builddir/qr.o : cc $root/qr.c
+build $builddir/warning.o : cc $root/warning.c
+build $builddir/qrsolve.o : cc $root/qrsolve.c
+build $builddir/indexShapeCheck.o : cc $root/indexShapeCheck.c
+build $builddir/mean.o : cc $root/mean.c
+build $builddir/ifWhileCond.o : cc $root/ifWhileCond.c
+build $builddir/power.o : cc $root/power.c
+build $builddir/mrdivide_helper.o : cc $root/mrdivide_helper.c
+build $builddir/mpower.o : cc $root/mpower.c
+build $builddir/tcdf.o : cc $root/tcdf.c
+build $builddir/betainc.o : cc $root/betainc.c
+build $builddir/eml_betainc.o : cc $root/eml_betainc.c
+build $builddir/eml_gammainc.o : cc $root/eml_gammainc.c
+build $builddir/_coder_addt_wrapper_api.o : cc $root/interface/_coder_addt_wrapper_api.c
+build $builddir/_coder_addt_wrapper_mex.o : cc $root/interface/_coder_addt_wrapper_mex.c
+build $builddir/chkinputR.o : cc $root/chkinputR.c
+build $builddir/nullAssignment.o : cc $root/nullAssignment.c
+build $builddir/xgeqp3.o : cc $root/xgeqp3.c
+build $builddir/log.o : cc $root/log.c
+build $builddir/sqrt.o : cc $root/sqrt.c
+build $builddir/gammaln.o : cc $root/gammaln.c
+build $builddir/addt_wrapper_emxutil.o : cc $root/addt_wrapper_emxutil.c
+build $builddir/addt_wrapper_mexutil.o : cc $root/addt_wrapper_mexutil.c
+build $builddir/_coder_addt_wrapper_info.o : cc $root/interface/_coder_addt_wrapper_info.c
+build $builddir/c_mexapi_version.o : cc $matlabdir/extern/version/c_mexapi_version.c
+
+# Link
+build $root\addt_wrapper_mex.mexw64 : link $builddir/addt_wrapper_data.o $builddir/rt_nonfinite.o $builddir/addt_wrapper_initialize.o $builddir/addt_wrapper_terminate.o $builddir/addt_wrapper.o $builddir/isequal.o $builddir/eml_mtimes_helper.o $builddir/mtimes.o $builddir/eml_int_forloop_overflow_check.o $builddir/cat.o $builddir/find.o $builddir/int2str.o $builddir/rank.o $builddir/svd.o $builddir/error.o $builddir/qr.o $builddir/warning.o $builddir/qrsolve.o $builddir/indexShapeCheck.o $builddir/mean.o $builddir/ifWhileCond.o $builddir/power.o $builddir/mrdivide_helper.o $builddir/mpower.o $builddir/tcdf.o $builddir/betainc.o $builddir/eml_betainc.o $builddir/eml_gammainc.o $builddir/_coder_addt_wrapper_api.o $builddir/_coder_addt_wrapper_mex.o $builddir/chkinputR.o $builddir/nullAssignment.o $builddir/xgeqp3.o $builddir/log.o $builddir/sqrt.o $builddir/gammaln.o $builddir/addt_wrapper_emxutil.o $builddir/addt_wrapper_mexutil.o $builddir/_coder_addt_wrapper_info.o $builddir/c_mexapi_version.o 
