@@ -113,10 +113,10 @@ function ComptimesAll = CreateTestCallFiles(varargin)
 
 
 %{
-    % CreateTestC with options CreateMexFile and codegenForEachSourceFile
-    % In this case codegen is also done independently for each individual
-    % file
-    ComptimesAll=CreateTestCallFiles('CreateMexFile',false,'codegenForEachSourceFile',true)
+    % CreateTestC with options CreateMexFile and codegenIndependent.
+    % In this example codegen is also done independently for each
+    % individual file.
+    ComptimesAll=CreateTestCallFiles('CreateMexFile',false,'codegenIndependent',true)
 %}
 
 
