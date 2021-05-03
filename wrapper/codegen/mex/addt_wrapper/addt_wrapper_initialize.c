@@ -21,18 +21,18 @@ static const volatile char_T *emlrtBreakCheckR2012bFlagVar = NULL;
 /* Function Definitions */
 void addt_wrapper_initialize(void)
 {
-  emlrtStack st = { NULL,              /* site */
-    NULL,                              /* tls */
-    NULL                               /* prev */
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
   };
-
   mex_InitInfAndNan();
   mexFunctionCreateRootTLS();
   emlrtBreakCheckR2012bFlagVar = emlrtGetBreakCheckFlagAddressR2012b();
   st.tls = emlrtRootTLSGlobal;
-  emlrtClearAllocCountR2012b(&st, false, 0U, 0);
+  emlrtClearAllocCountR2012b(&st, false, 0U, NULL);
   emlrtEnterRtStackR2012b(&st);
-  emlrtLicenseCheckR2012b(&st, "statistics_toolbox", 2);
+  emlrtLicenseCheckR2012b(&st, (const char_T *)"statistics_toolbox", 2);
   emlrtFirstTimeR2012b(emlrtRootTLSGlobal);
 }
 

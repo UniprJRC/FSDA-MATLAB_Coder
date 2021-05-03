@@ -19,52 +19,46 @@
 
 /* Function Definitions */
 void addt_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[1], int32_T nrhs,
-  const mxArray *prhs[6])
+                              const mxArray *prhs[6])
 {
-  emlrtStack st = { NULL,              /* site */
-    NULL,                              /* tls */
-    NULL                               /* prev */
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
   };
-
-  const mxArray *outputs[1];
+  const mxArray *outputs;
   st.tls = emlrtRootTLSGlobal;
-
   /* Check for proper number of arguments. */
   if (nrhs != 6) {
     emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 6, 4,
                         12, "addt_wrapper");
   }
-
   if (nlhs > 1) {
     emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:TooManyOutputArguments", 3, 4, 12,
                         "addt_wrapper");
   }
-
   /* Call the function. */
-  addt_wrapper_api(prhs, outputs);
-
+  addt_wrapper_api(prhs, &outputs);
   /* Copy over outputs to the caller. */
-  emlrtReturnArrays(1, plhs, outputs);
+  emlrtReturnArrays(1, &plhs[0], &outputs);
 }
 
-void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs, const mxArray
-                 *prhs[])
+void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
+                 const mxArray *prhs[])
 {
   mexAtExit(&addt_wrapper_atexit);
-
   /* Module initialization. */
   addt_wrapper_initialize();
-
   /* Dispatch the entry-point. */
   addt_wrapper_mexFunction(nlhs, plhs, nrhs, prhs);
-
   /* Module termination. */
   addt_wrapper_terminate();
 }
 
 emlrtCTX mexFunctionCreateRootTLS(void)
 {
-  emlrtCreateRootTLS(&emlrtRootTLSGlobal, &emlrtContextGlobal, NULL, 1);
+  emlrtCreateRootTLSR2021a(&emlrtRootTLSGlobal, &emlrtContextGlobal, NULL, 1,
+                           NULL);
   return emlrtRootTLSGlobal;
 }
 

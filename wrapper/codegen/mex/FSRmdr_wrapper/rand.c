@@ -16,7 +16,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRTEInfo kf_emlrtRTEI = {
+static emlrtRTEInfo rf_emlrtRTEI = {
     100,    /* lineNo */
     28,     /* colNo */
     "rand", /* fName */
@@ -32,7 +32,7 @@ void b_rand(const emlrtStack *sp, real_T varargin_2, emxArray_real_T *r)
   i = r->size[0] * r->size[1];
   r->size[0] = 1;
   r->size[1] = (int32_T)varargin_2;
-  emxEnsureCapacity_real_T(sp, r, i, &kf_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, r, i, &rf_emlrtRTEI);
   if ((int32_T)varargin_2 != 0) {
     emlrtRandu(&r->data[0], (int32_T)varargin_2);
   }

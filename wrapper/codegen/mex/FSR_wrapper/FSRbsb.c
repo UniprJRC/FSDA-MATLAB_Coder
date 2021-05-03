@@ -32,92 +32,92 @@
 
 /* Variable Definitions */
 static emlrtRSInfo ulb_emlrtRSI = {
-    474,                                              /* lineNo */
+    469,                                              /* lineNo */
     "FSRbsb",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pathName */
 };
 
 static emlrtRSInfo vlb_emlrtRSI = {
-    473,                                              /* lineNo */
+    468,                                              /* lineNo */
     "FSRbsb",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pathName */
 };
 
 static emlrtRSInfo wlb_emlrtRSI = {
-    449,                                              /* lineNo */
+    444,                                              /* lineNo */
     "FSRbsb",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pathName */
 };
 
 static emlrtRSInfo xlb_emlrtRSI = {
-    439,                                              /* lineNo */
+    434,                                              /* lineNo */
     "FSRbsb",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pathName */
 };
 
 static emlrtRSInfo ylb_emlrtRSI = {
-    437,                                              /* lineNo */
+    432,                                              /* lineNo */
     "FSRbsb",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pathName */
 };
 
 static emlrtRSInfo amb_emlrtRSI = {
-    427,                                              /* lineNo */
+    422,                                              /* lineNo */
     "FSRbsb",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pathName */
 };
 
 static emlrtRSInfo bmb_emlrtRSI = {
-    404,                                              /* lineNo */
+    399,                                              /* lineNo */
     "FSRbsb",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pathName */
 };
 
 static emlrtRSInfo cmb_emlrtRSI = {
-    381,                                              /* lineNo */
+    376,                                              /* lineNo */
     "FSRbsb",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pathName */
 };
 
 static emlrtRSInfo dmb_emlrtRSI = {
-    361,                                              /* lineNo */
+    356,                                              /* lineNo */
     "FSRbsb",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pathName */
 };
 
 static emlrtRSInfo emb_emlrtRSI = {
-    337,                                              /* lineNo */
+    332,                                              /* lineNo */
     "FSRbsb",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pathName */
 };
 
 static emlrtRSInfo fmb_emlrtRSI = {
-    282,                                              /* lineNo */
-    "FSRbsb",                                         /* fcnName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pathName */
-};
-
-static emlrtRSInfo gmb_emlrtRSI = {
-    280,                                              /* lineNo */
-    "FSRbsb",                                         /* fcnName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pathName */
-};
-
-static emlrtRSInfo hmb_emlrtRSI = {
     277,                                              /* lineNo */
     "FSRbsb",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pathName */
 };
 
+static emlrtRSInfo gmb_emlrtRSI = {
+    275,                                              /* lineNo */
+    "FSRbsb",                                         /* fcnName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pathName */
+};
+
+static emlrtRSInfo hmb_emlrtRSI = {
+    272,                                              /* lineNo */
+    "FSRbsb",                                         /* fcnName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pathName */
+};
+
 static emlrtMCInfo fd_emlrtMCI = {
-    404,                                              /* lineNo */
+    399,                                              /* lineNo */
     17,                                               /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtMCInfo gd_emlrtMCI = {
-    473,                                              /* lineNo */
+    468,                                              /* lineNo */
     21,                                               /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
@@ -126,7 +126,7 @@ static emlrtMCInfo gd_emlrtMCI = {
 static emlrtBCInfo lfb_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    275,                                               /* lineNo */
+    270,                                               /* lineNo */
     6,                                                 /* colNo */
     "X",                                               /* aName */
     "FSRbsb",                                          /* fName */
@@ -137,7 +137,7 @@ static emlrtBCInfo lfb_emlrtBCI = {
 static emlrtBCInfo mfb_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    275,                                               /* lineNo */
+    270,                                               /* lineNo */
     8,                                                 /* colNo */
     "X",                                               /* aName */
     "FSRbsb",                                          /* fName */
@@ -146,7 +146,7 @@ static emlrtBCInfo mfb_emlrtBCI = {
 };
 
 static emlrtRTEInfo yc_emlrtRTEI = {
-    398,                                              /* lineNo */
+    393,                                              /* lineNo */
     14,                                               /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
@@ -154,7 +154,7 @@ static emlrtRTEInfo yc_emlrtRTEI = {
 
 static emlrtECInfo td_emlrtECI = {
     -1,                                               /* nDims */
-    437,                                              /* lineNo */
+    432,                                              /* lineNo */
     11,                                               /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
@@ -162,7 +162,7 @@ static emlrtECInfo td_emlrtECI = {
 
 static emlrtECInfo ud_emlrtECI = {
     -1,                                               /* nDims */
-    439,                                              /* lineNo */
+    434,                                              /* lineNo */
     9,                                                /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
@@ -171,7 +171,7 @@ static emlrtECInfo ud_emlrtECI = {
 static emlrtBCInfo nfb_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    452,                                               /* lineNo */
+    447,                                               /* lineNo */
     21,                                                /* colNo */
     "ord",                                             /* aName */
     "FSRbsb",                                          /* fName */
@@ -182,7 +182,7 @@ static emlrtBCInfo nfb_emlrtBCI = {
 static emlrtBCInfo ofb_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    452,                                               /* lineNo */
+    447,                                               /* lineNo */
     24,                                                /* colNo */
     "ord",                                             /* aName */
     "FSRbsb",                                          /* fName */
@@ -192,14 +192,14 @@ static emlrtBCInfo ofb_emlrtBCI = {
 
 static emlrtECInfo vd_emlrtECI = {
     -1,                                               /* nDims */
-    466,                                              /* lineNo */
+    461,                                              /* lineNo */
     26,                                               /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtDCInfo de_emlrtDCI = {
-    471,                                               /* lineNo */
+    466,                                               /* lineNo */
     24,                                                /* colNo */
     "FSRbsb",                                          /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m", /* pName */
@@ -209,7 +209,7 @@ static emlrtDCInfo de_emlrtDCI = {
 static emlrtBCInfo pfb_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    471,                                               /* lineNo */
+    466,                                               /* lineNo */
     24,                                                /* colNo */
     "Un",                                              /* aName */
     "FSRbsb",                                          /* fName */
@@ -219,14 +219,14 @@ static emlrtBCInfo pfb_emlrtBCI = {
 
 static emlrtECInfo wd_emlrtECI = {
     -1,                                               /* nDims */
-    471,                                              /* lineNo */
+    466,                                              /* lineNo */
     21,                                               /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtDCInfo ee_emlrtDCI = {
-    474,                                               /* lineNo */
+    469,                                               /* lineNo */
     24,                                                /* colNo */
     "FSRbsb",                                          /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m", /* pName */
@@ -236,7 +236,7 @@ static emlrtDCInfo ee_emlrtDCI = {
 static emlrtBCInfo qfb_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    474,                                               /* lineNo */
+    469,                                               /* lineNo */
     24,                                                /* colNo */
     "Un",                                              /* aName */
     "FSRbsb",                                          /* fName */
@@ -247,7 +247,7 @@ static emlrtBCInfo qfb_emlrtBCI = {
 static emlrtBCInfo rfb_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    413,                                               /* lineNo */
+    408,                                               /* lineNo */
     24,                                                /* colNo */
     "BB",                                              /* aName */
     "FSRbsb",                                          /* fName */
@@ -257,14 +257,14 @@ static emlrtBCInfo rfb_emlrtBCI = {
 
 static emlrtECInfo xd_emlrtECI = {
     -1,                                               /* nDims */
-    413,                                              /* lineNo */
+    408,                                              /* lineNo */
     17,                                               /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtDCInfo fe_emlrtDCI = {
-    362,                                               /* lineNo */
+    357,                                               /* lineNo */
     16,                                                /* colNo */
     "FSRbsb",                                          /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m", /* pName */
@@ -272,7 +272,7 @@ static emlrtDCInfo fe_emlrtDCI = {
 };
 
 static emlrtDCInfo ge_emlrtDCI = {
-    362,                                               /* lineNo */
+    357,                                               /* lineNo */
     16,                                                /* colNo */
     "FSRbsb",                                          /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m", /* pName */
@@ -282,7 +282,7 @@ static emlrtDCInfo ge_emlrtDCI = {
 static emlrtBCInfo sfb_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    292,                                               /* lineNo */
+    287,                                               /* lineNo */
     10,                                                /* colNo */
     "X",                                               /* aName */
     "FSRbsb",                                          /* fName */
@@ -291,7 +291,7 @@ static emlrtBCInfo sfb_emlrtBCI = {
 };
 
 static emlrtDCInfo he_emlrtDCI = {
-    292,                                               /* lineNo */
+    287,                                               /* lineNo */
     10,                                                /* colNo */
     "FSRbsb",                                          /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m", /* pName */
@@ -301,7 +301,7 @@ static emlrtDCInfo he_emlrtDCI = {
 static emlrtBCInfo tfb_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    293,                                               /* lineNo */
+    288,                                               /* lineNo */
     10,                                                /* colNo */
     "y",                                               /* aName */
     "FSRbsb",                                          /* fName */
@@ -312,7 +312,7 @@ static emlrtBCInfo tfb_emlrtBCI = {
 static emlrtBCInfo ufb_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    290,                                               /* lineNo */
+    285,                                               /* lineNo */
     10,                                                /* colNo */
     "y",                                               /* aName */
     "FSRbsb",                                          /* fName */
@@ -321,7 +321,7 @@ static emlrtBCInfo ufb_emlrtBCI = {
 };
 
 static emlrtDCInfo ie_emlrtDCI = {
-    290,                                               /* lineNo */
+    285,                                               /* lineNo */
     10,                                                /* colNo */
     "FSRbsb",                                          /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m", /* pName */
@@ -331,7 +331,7 @@ static emlrtDCInfo ie_emlrtDCI = {
 static emlrtBCInfo vfb_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    281,                                               /* lineNo */
+    276,                                               /* lineNo */
     14,                                                /* colNo */
     "X",                                               /* aName */
     "FSRbsb",                                          /* fName */
@@ -342,7 +342,7 @@ static emlrtBCInfo vfb_emlrtBCI = {
 static emlrtBCInfo wfb_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    330,                                               /* lineNo */
+    325,                                               /* lineNo */
     6,                                                 /* colNo */
     "bsbT",                                            /* aName */
     "FSRbsb",                                          /* fName */
@@ -353,7 +353,7 @@ static emlrtBCInfo wfb_emlrtBCI = {
 static emlrtBCInfo xfb_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    342,                                               /* lineNo */
+    337,                                               /* lineNo */
     8,                                                 /* colNo */
     "seq100",                                          /* aName */
     "FSRbsb",                                          /* fName */
@@ -362,7 +362,7 @@ static emlrtBCInfo xfb_emlrtBCI = {
 };
 
 static emlrtDCInfo je_emlrtDCI = {
-    344,                                               /* lineNo */
+    339,                                               /* lineNo */
     11,                                                /* colNo */
     "FSRbsb",                                          /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m", /* pName */
@@ -372,7 +372,7 @@ static emlrtDCInfo je_emlrtDCI = {
 static emlrtBCInfo yfb_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    344,                                               /* lineNo */
+    339,                                               /* lineNo */
     11,                                                /* colNo */
     "seq100boo",                                       /* aName */
     "FSRbsb",                                          /* fName */
@@ -381,7 +381,7 @@ static emlrtBCInfo yfb_emlrtBCI = {
 };
 
 static emlrtDCInfo ke_emlrtDCI = {
-    362,                                               /* lineNo */
+    357,                                               /* lineNo */
     5,                                                 /* colNo */
     "FSRbsb",                                          /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m", /* pName */
@@ -389,7 +389,7 @@ static emlrtDCInfo ke_emlrtDCI = {
 };
 
 static emlrtDCInfo le_emlrtDCI = {
-    362,                                               /* lineNo */
+    357,                                               /* lineNo */
     5,                                                 /* colNo */
     "FSRbsb",                                          /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m", /* pName */
@@ -397,7 +397,7 @@ static emlrtDCInfo le_emlrtDCI = {
 };
 
 static emlrtDCInfo me_emlrtDCI = {
-    376,                                               /* lineNo */
+    371,                                               /* lineNo */
     13,                                                /* colNo */
     "FSRbsb",                                          /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m", /* pName */
@@ -407,7 +407,7 @@ static emlrtDCInfo me_emlrtDCI = {
 static emlrtBCInfo agb_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    376,                                               /* lineNo */
+    371,                                               /* lineNo */
     13,                                                /* colNo */
     "boobsbsteps",                                     /* aName */
     "FSRbsb",                                          /* fName */
@@ -416,7 +416,7 @@ static emlrtBCInfo agb_emlrtBCI = {
 };
 
 static emlrtDCInfo ne_emlrtDCI = {
-    381,                                               /* lineNo */
+    376,                                               /* lineNo */
     32,                                                /* colNo */
     "FSRbsb",                                          /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m", /* pName */
@@ -424,7 +424,7 @@ static emlrtDCInfo ne_emlrtDCI = {
 };
 
 static emlrtDCInfo oe_emlrtDCI = {
-    381,                                               /* lineNo */
+    376,                                               /* lineNo */
     32,                                                /* colNo */
     "FSRbsb",                                          /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m", /* pName */
@@ -434,7 +434,7 @@ static emlrtDCInfo oe_emlrtDCI = {
 static emlrtBCInfo bgb_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    402,                                               /* lineNo */
+    397,                                               /* lineNo */
     17,                                                /* colNo */
     "seq100boo",                                       /* aName */
     "FSRbsb",                                          /* fName */
@@ -445,7 +445,7 @@ static emlrtBCInfo bgb_emlrtBCI = {
 static emlrtBCInfo cgb_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    410,                                               /* lineNo */
+    405,                                               /* lineNo */
     16,                                                /* colNo */
     "boobsbsteps",                                     /* aName */
     "FSRbsb",                                          /* fName */
@@ -456,7 +456,7 @@ static emlrtBCInfo cgb_emlrtBCI = {
 static emlrtBCInfo dgb_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    413,                                               /* lineNo */
+    408,                                               /* lineNo */
     20,                                                /* colNo */
     "BB",                                              /* aName */
     "FSRbsb",                                          /* fName */
@@ -467,7 +467,7 @@ static emlrtBCInfo dgb_emlrtBCI = {
 static emlrtBCInfo egb_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    455,                                               /* lineNo */
+    450,                                               /* lineNo */
     18,                                                /* colNo */
     "bsbT",                                            /* aName */
     "FSRbsb",                                          /* fName */
@@ -478,7 +478,7 @@ static emlrtBCInfo egb_emlrtBCI = {
 static emlrtBCInfo fgb_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    458,                                               /* lineNo */
+    453,                                               /* lineNo */
     18,                                                /* colNo */
     "X",                                               /* aName */
     "FSRbsb",                                          /* fName */
@@ -489,7 +489,7 @@ static emlrtBCInfo fgb_emlrtBCI = {
 static emlrtBCInfo ggb_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    459,                                               /* lineNo */
+    454,                                               /* lineNo */
     18,                                                /* colNo */
     "y",                                               /* aName */
     "FSRbsb",                                          /* fName */
@@ -500,7 +500,7 @@ static emlrtBCInfo ggb_emlrtBCI = {
 static emlrtBCInfo hgb_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    466,                                               /* lineNo */
+    461,                                               /* lineNo */
     22,                                                /* colNo */
     "seq",                                             /* aName */
     "FSRbsb",                                          /* fName */
@@ -509,77 +509,77 @@ static emlrtBCInfo hgb_emlrtBCI = {
 };
 
 static emlrtRTEInfo dfb_emlrtRTEI = {
-    275,                                              /* lineNo */
+    270,                                              /* lineNo */
     1,                                                /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRTEInfo efb_emlrtRTEI = {
-    277,                                              /* lineNo */
+    272,                                              /* lineNo */
     4,                                                /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRTEInfo ffb_emlrtRTEI = {
-    292,                                              /* lineNo */
+    287,                                              /* lineNo */
     5,                                                /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRTEInfo gfb_emlrtRTEI = {
-    290,                                              /* lineNo */
+    285,                                              /* lineNo */
     5,                                                /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRTEInfo hfb_emlrtRTEI = {
-    293,                                              /* lineNo */
+    288,                                              /* lineNo */
     5,                                                /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRTEInfo ifb_emlrtRTEI = {
-    281,                                              /* lineNo */
+    276,                                              /* lineNo */
     9,                                                /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRTEInfo jfb_emlrtRTEI = {
-    329,                                              /* lineNo */
+    324,                                              /* lineNo */
     1,                                                /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRTEInfo kfb_emlrtRTEI = {
-    330,                                              /* lineNo */
+    325,                                              /* lineNo */
     6,                                                /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRTEInfo lfb_emlrtRTEI = {
-    333,                                              /* lineNo */
+    328,                                              /* lineNo */
     1,                                                /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRTEInfo mfb_emlrtRTEI = {
-    337,                                              /* lineNo */
+    332,                                              /* lineNo */
     1,                                                /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRTEInfo nfb_emlrtRTEI = {
-    341,                                              /* lineNo */
+    336,                                              /* lineNo */
     1,                                                /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
@@ -593,146 +593,146 @@ static emlrtRTEInfo ofb_emlrtRTEI = {
 };
 
 static emlrtRTEInfo pfb_emlrtRTEI = {
-    343,                                              /* lineNo */
+    338,                                              /* lineNo */
     1,                                                /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRTEInfo qfb_emlrtRTEI = {
-    344,                                              /* lineNo */
+    339,                                              /* lineNo */
     11,                                               /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRTEInfo rfb_emlrtRTEI = {
-    362,                                              /* lineNo */
+    357,                                              /* lineNo */
     5,                                                /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRTEInfo sfb_emlrtRTEI = {
-    375,                                              /* lineNo */
+    370,                                              /* lineNo */
     1,                                                /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRTEInfo tfb_emlrtRTEI = {
-    376,                                              /* lineNo */
+    371,                                              /* lineNo */
     13,                                               /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRTEInfo ufb_emlrtRTEI = {
-    381,                                              /* lineNo */
+    376,                                              /* lineNo */
     14,                                               /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRTEInfo vfb_emlrtRTEI = {
-    381,                                              /* lineNo */
+    376,                                              /* lineNo */
     28,                                               /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRTEInfo wfb_emlrtRTEI = {
-    413,                                              /* lineNo */
+    408,                                              /* lineNo */
     20,                                               /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRTEInfo xfb_emlrtRTEI = {
-    437,                                              /* lineNo */
+    432,                                              /* lineNo */
     11,                                               /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRTEInfo yfb_emlrtRTEI = {
-    444,                                              /* lineNo */
+    439,                                              /* lineNo */
     13,                                               /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRTEInfo agb_emlrtRTEI = {
-    452,                                              /* lineNo */
+    447,                                              /* lineNo */
     13,                                               /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRTEInfo bgb_emlrtRTEI = {
-    454,                                              /* lineNo */
+    449,                                              /* lineNo */
     13,                                               /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRTEInfo cgb_emlrtRTEI = {
-    455,                                              /* lineNo */
+    450,                                              /* lineNo */
     18,                                               /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRTEInfo dgb_emlrtRTEI = {
-    458,                                              /* lineNo */
+    453,                                              /* lineNo */
     13,                                               /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRTEInfo egb_emlrtRTEI = {
-    459,                                              /* lineNo */
+    454,                                              /* lineNo */
     13,                                               /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRTEInfo fgb_emlrtRTEI = {
-    427,                                              /* lineNo */
+    422,                                              /* lineNo */
     13,                                               /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRTEInfo ggb_emlrtRTEI = {
-    466,                                              /* lineNo */
+    461,                                              /* lineNo */
     17,                                               /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRTEInfo hgb_emlrtRTEI = {
-    333,                                              /* lineNo */
+    328,                                              /* lineNo */
     8,                                                /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRTEInfo igb_emlrtRTEI = {
-    341,                                              /* lineNo */
+    336,                                              /* lineNo */
     10,                                               /* colNo */
     "FSRbsb",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pName */
 };
 
 static emlrtRSInfo bob_emlrtRSI = {
-    473,                                              /* lineNo */
+    468,                                              /* lineNo */
     "FSRbsb",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pathName */
 };
 
 static emlrtRSInfo cob_emlrtRSI = {
-    404,                                              /* lineNo */
+    399,                                              /* lineNo */
     "FSRbsb",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRbsb.m" /* pathName */
 };
@@ -919,15 +919,9 @@ void FSRbsb(const emlrtStack *sp, const emxArray_real_T *y,
   /*  */
   /*  References: */
   /*  */
-  /*  Chaloner, K. and Brant, R. (1988), A Bayesian Approach to Outlier */
-  /*  Detection and Residual Analysis, "Biometrika", Vol. 75, pp. 651-659. */
-  /*  Riani, M., Corbellini, A. and Atkinson, A.C. (2018), Very Robust Bayesian
-   */
-  /*  Regression for Fraud Detection, "International Statistical Review", */
-  /*  http://dx.doi.org/10.1111/insr.12247 */
-  /*  Atkinson, A.C., Corbellini, A. and Riani, M., (2017), Robust Bayesian */
-  /*  Regression with the Forward Search: Theory and Data Analysis, "Test", */
-  /*  Vol. 26, pp. 869-886, DOI 10.1007/s11749-017-0542-6 */
+  /*  Atkinson, A.C. and Riani, M. (2000), "Robust Diagnostic Regression */
+  /*  Analysis", Springer Verlag, New York. */
+  /*  */
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */

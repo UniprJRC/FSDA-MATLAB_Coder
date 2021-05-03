@@ -15,8 +15,8 @@
 #include "rt_nonfinite.h"
 
 /* Function Definitions */
-boolean_T isequal(const emxArray_real_T *varargin_1, const emxArray_real_T
-                  *varargin_2)
+boolean_T isequal(const emxArray_real_T *varargin_1,
+                  const emxArray_real_T *varargin_2)
 {
   int32_T k;
   boolean_T b_p;
@@ -24,13 +24,12 @@ boolean_T isequal(const emxArray_real_T *varargin_1, const emxArray_real_T
   boolean_T p;
   p = false;
   b_p = false;
-  if ((varargin_1->size[0] == varargin_2->size[0]) && (1 == varargin_2->size[1]))
-  {
+  if ((varargin_1->size[0] == varargin_2->size[0]) &&
+      (1 == varargin_2->size[1])) {
     b_p = true;
   }
-
-  if (b_p && (varargin_1->size[0] != 0) && ((varargin_2->size[0] != 0) &&
-       (varargin_2->size[1] != 0))) {
+  if (b_p && (varargin_1->size[0] != 0) &&
+      ((varargin_2->size[0] != 0) && (varargin_2->size[1] != 0))) {
     k = 0;
     exitg1 = false;
     while ((!exitg1) && (k <= varargin_2->size[0] * varargin_2->size[1] - 1)) {
@@ -42,7 +41,6 @@ boolean_T isequal(const emxArray_real_T *varargin_1, const emxArray_real_T
       }
     }
   }
-
   return b_p || p;
 }
 

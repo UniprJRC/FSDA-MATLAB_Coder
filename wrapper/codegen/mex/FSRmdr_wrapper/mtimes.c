@@ -18,7 +18,7 @@
 #include <stddef.h>
 
 /* Variable Definitions */
-static emlrtRSInfo mc_emlrtRSI = {
+static emlrtRSInfo oc_emlrtRSI = {
     142,      /* lineNo */
     "mtimes", /* fcnName */
     "C:\\Program "
@@ -26,7 +26,7 @@ static emlrtRSInfo mc_emlrtRSI = {
     "blas\\mtimes.m" /* pathName */
 };
 
-static emlrtRSInfo oc_emlrtRSI = {
+static emlrtRSInfo qc_emlrtRSI = {
     178,           /* lineNo */
     "mtimes_blas", /* fcnName */
     "C:\\Program "
@@ -34,7 +34,7 @@ static emlrtRSInfo oc_emlrtRSI = {
     "blas\\mtimes.m" /* pathName */
 };
 
-static emlrtRTEInfo re_emlrtRTEI = {
+static emlrtRTEInfo ye_emlrtRTEI = {
     140,      /* lineNo */
     5,        /* colNo */
     "mtimes", /* fName */
@@ -43,7 +43,7 @@ static emlrtRTEInfo re_emlrtRTEI = {
     "blas\\mtimes.m" /* pName */
 };
 
-static emlrtRTEInfo se_emlrtRTEI = {
+static emlrtRTEInfo af_emlrtRTEI = {
     218,      /* lineNo */
     20,       /* colNo */
     "mtimes", /* fName */
@@ -96,14 +96,14 @@ void c_mtimes(const emlrtStack *sp, const emxArray_real_T *A,
     i = C->size[0] * C->size[1];
     C->size[0] = A->size[1];
     C->size[1] = B->size[1];
-    emxEnsureCapacity_real_T(sp, C, i, &re_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, C, i, &ye_emlrtRTEI);
     loop_ub = A->size[1] * B->size[1];
     for (i = 0; i < loop_ub; i++) {
       C->data[i] = 0.0;
     }
   } else {
-    st.site = &mc_emlrtRSI;
-    b_st.site = &oc_emlrtRSI;
+    st.site = &oc_emlrtRSI;
+    b_st.site = &qc_emlrtRSI;
     TRANSB1 = 'N';
     TRANSA1 = 'T';
     alpha1 = 1.0;
@@ -117,7 +117,7 @@ void c_mtimes(const emlrtStack *sp, const emxArray_real_T *A,
     i = C->size[0] * C->size[1];
     C->size[0] = A->size[1];
     C->size[1] = B->size[1];
-    emxEnsureCapacity_real_T(&b_st, C, i, &se_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, C, i, &af_emlrtRTEI);
     dgemm(&TRANSA1, &TRANSB1, &m_t, &n_t, &k_t, &alpha1, &A->data[0], &lda_t,
           &B->data[0], &ldb_t, &beta1, &C->data[0], &ldc_t);
   }
@@ -147,14 +147,14 @@ void mtimes(const emlrtStack *sp, const emxArray_real_T *A,
   if ((A->size[0] == 0) || (A->size[1] == 0) || (B->size[0] == 0)) {
     i = C->size[0];
     C->size[0] = A->size[0];
-    emxEnsureCapacity_real_T(sp, C, i, &re_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, C, i, &ye_emlrtRTEI);
     loop_ub = A->size[0];
     for (i = 0; i < loop_ub; i++) {
       C->data[i] = 0.0;
     }
   } else {
-    st.site = &mc_emlrtRSI;
-    b_st.site = &oc_emlrtRSI;
+    st.site = &oc_emlrtRSI;
+    b_st.site = &qc_emlrtRSI;
     TRANSB1 = 'N';
     TRANSA1 = 'N';
     alpha1 = 1.0;
@@ -167,7 +167,7 @@ void mtimes(const emlrtStack *sp, const emxArray_real_T *A,
     ldc_t = (ptrdiff_t)A->size[0];
     i = C->size[0];
     C->size[0] = A->size[0];
-    emxEnsureCapacity_real_T(&b_st, C, i, &se_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, C, i, &af_emlrtRTEI);
     dgemm(&TRANSA1, &TRANSB1, &m_t, &n_t, &k_t, &alpha1, &A->data[0], &lda_t,
           &B->data[0], &ldb_t, &beta1, &C->data[0], &ldc_t);
   }

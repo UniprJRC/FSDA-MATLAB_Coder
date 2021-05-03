@@ -17,7 +17,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRSInfo th_emlrtRSI = {
+static emlrtRSInfo vh_emlrtRSI = {
     178,          /* lineNo */
     "sumColumnB", /* fcnName */
     "C:\\Program "
@@ -25,7 +25,7 @@ static emlrtRSInfo th_emlrtRSI = {
     "rixIncludeNaN.m" /* pathName */
 };
 
-static emlrtRSInfo uh_emlrtRSI = {
+static emlrtRSInfo wh_emlrtRSI = {
     182,          /* lineNo */
     "sumColumnB", /* fcnName */
     "C:\\Program "
@@ -33,7 +33,7 @@ static emlrtRSInfo uh_emlrtRSI = {
     "rixIncludeNaN.m" /* pathName */
 };
 
-static emlrtRSInfo vh_emlrtRSI = {
+static emlrtRSInfo xh_emlrtRSI = {
     184,          /* lineNo */
     "sumColumnB", /* fcnName */
     "C:\\Program "
@@ -41,7 +41,7 @@ static emlrtRSInfo vh_emlrtRSI = {
     "rixIncludeNaN.m" /* pathName */
 };
 
-static emlrtRSInfo wh_emlrtRSI = {
+static emlrtRSInfo yh_emlrtRSI = {
     189,          /* lineNo */
     "sumColumnB", /* fcnName */
     "C:\\Program "
@@ -49,7 +49,7 @@ static emlrtRSInfo wh_emlrtRSI = {
     "rixIncludeNaN.m" /* pathName */
 };
 
-static emlrtRSInfo xh_emlrtRSI = {
+static emlrtRSInfo ai_emlrtRSI = {
     210,         /* lineNo */
     "sumColumn", /* fcnName */
     "C:\\Program "
@@ -78,11 +78,11 @@ real_T b_sumColumnB(const emlrtStack *sp, const emxArray_real_T *x,
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   if (vlen <= 1024) {
-    st.site = &th_emlrtRSI;
+    st.site = &vh_emlrtRSI;
     y = x->data[vstart - 1];
-    b_st.site = &xh_emlrtRSI;
+    b_st.site = &ai_emlrtRSI;
     if ((1 <= vlen - 1) && (vlen - 1 > 2147483646)) {
-      c_st.site = &nc_emlrtRSI;
+      c_st.site = &pc_emlrtRSI;
       check_forloop_overflow_error(&c_st);
     }
     for (k = 0; k <= vlen - 2; k++) {
@@ -91,17 +91,17 @@ real_T b_sumColumnB(const emlrtStack *sp, const emxArray_real_T *x,
   } else {
     nfb = vlen / 1024;
     inb = nfb << 10;
-    st.site = &uh_emlrtRSI;
+    st.site = &wh_emlrtRSI;
     y = x->data[vstart - 1];
-    b_st.site = &xh_emlrtRSI;
+    b_st.site = &ai_emlrtRSI;
     for (k = 0; k < 1023; k++) {
       y += x->data[vstart + k];
     }
     for (k = 2; k <= nfb; k++) {
-      st.site = &vh_emlrtRSI;
+      st.site = &xh_emlrtRSI;
       b_vstart = vstart + ((k - 1) << 10);
       b_y = x->data[b_vstart - 1];
-      b_st.site = &xh_emlrtRSI;
+      b_st.site = &ai_emlrtRSI;
       for (b_k = 0; b_k < 1023; b_k++) {
         b_y += x->data[b_vstart + b_k];
       }
@@ -110,11 +110,11 @@ real_T b_sumColumnB(const emlrtStack *sp, const emxArray_real_T *x,
     if (vlen > inb) {
       nfb = vlen - inb;
       b_vstart = vstart + inb;
-      st.site = &wh_emlrtRSI;
+      st.site = &yh_emlrtRSI;
       b_y = x->data[b_vstart - 1];
-      b_st.site = &xh_emlrtRSI;
+      b_st.site = &ai_emlrtRSI;
       if ((1 <= nfb - 1) && (nfb - 1 > 2147483646)) {
-        c_st.site = &nc_emlrtRSI;
+        c_st.site = &pc_emlrtRSI;
         check_forloop_overflow_error(&c_st);
       }
       for (k = 0; k <= nfb - 2; k++) {
@@ -145,11 +145,11 @@ real_T sumColumnB(const emlrtStack *sp, const emxArray_real_T *x, int32_T vlen)
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   if (vlen <= 1024) {
-    st.site = &th_emlrtRSI;
+    st.site = &vh_emlrtRSI;
     y = x->data[0];
-    b_st.site = &xh_emlrtRSI;
+    b_st.site = &ai_emlrtRSI;
     if ((1 <= vlen - 1) && (vlen - 1 > 2147483646)) {
-      c_st.site = &nc_emlrtRSI;
+      c_st.site = &pc_emlrtRSI;
       check_forloop_overflow_error(&c_st);
     }
     for (k = 0; k <= vlen - 2; k++) {
@@ -158,17 +158,17 @@ real_T sumColumnB(const emlrtStack *sp, const emxArray_real_T *x, int32_T vlen)
   } else {
     nfb = vlen / 1024;
     inb = nfb << 10;
-    st.site = &uh_emlrtRSI;
+    st.site = &wh_emlrtRSI;
     y = x->data[0];
-    b_st.site = &xh_emlrtRSI;
+    b_st.site = &ai_emlrtRSI;
     for (k = 0; k < 1023; k++) {
       y += x->data[k + 1];
     }
     for (k = 2; k <= nfb; k++) {
-      st.site = &vh_emlrtRSI;
+      st.site = &xh_emlrtRSI;
       vstart = (k - 1) << 10;
       b_y = x->data[vstart];
-      b_st.site = &xh_emlrtRSI;
+      b_st.site = &ai_emlrtRSI;
       for (b_k = 0; b_k < 1023; b_k++) {
         b_y += x->data[(vstart + b_k) + 1];
       }
@@ -176,11 +176,11 @@ real_T sumColumnB(const emlrtStack *sp, const emxArray_real_T *x, int32_T vlen)
     }
     if (vlen > inb) {
       nfb = vlen - inb;
-      st.site = &wh_emlrtRSI;
+      st.site = &yh_emlrtRSI;
       b_y = x->data[inb];
-      b_st.site = &xh_emlrtRSI;
+      b_st.site = &ai_emlrtRSI;
       if ((1 <= nfb - 1) && (nfb - 1 > 2147483646)) {
-        c_st.site = &nc_emlrtRSI;
+        c_st.site = &pc_emlrtRSI;
         check_forloop_overflow_error(&c_st);
       }
       for (k = 0; k <= nfb - 2; k++) {

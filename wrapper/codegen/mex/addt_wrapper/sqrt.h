@@ -21,6 +21,6 @@
 #include <string.h>
 
 /* Function Declarations */
-void b_sqrt(const emlrtStack *sp, real_T x_data[], const int32_T x_size[1]);
+void b_sqrt(const emlrtStack *sp, real_T x_data[], const int32_T *x_size);
 
 /* End of code generation (sqrt.h) */

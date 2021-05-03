@@ -21,7 +21,7 @@
 #include <string.h>
 
 /* Function Declarations */
-void indexShapeCheck(const emlrtStack *sp, const int32_T matrixSize[2], const
-                     int32_T indexSize[2]);
+void indexShapeCheck(const emlrtStack *sp, const int32_T matrixSize[2],
+                     const int32_T indexSize[2]);
 
 /* End of code generation (indexShapeCheck.h) */

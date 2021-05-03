@@ -20,7 +20,8 @@ void b_error(const emlrtStack *sp, const mxArray *b, const mxArray *c,
   const mxArray *pArrays[2];
   pArrays[0] = b;
   pArrays[1] = c;
-  emlrtCallMATLABR2012b(sp, 0, NULL, 2, pArrays, "error", true, location);
+  emlrtCallMATLABR2012b((emlrtCTX)sp, 0, NULL, 2, &pArrays[0],
+                        (const char_T *)"error", true, location);
 }
 
 /* End of code generation (addt_wrapper_mexutil.c) */

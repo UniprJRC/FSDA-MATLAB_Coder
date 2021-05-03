@@ -17,7 +17,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRSInfo te_emlrtRSI = {
+static emlrtRSInfo ve_emlrtRSI = {
     28,        /* lineNo */
     "sprintf", /* fcnName */
     "C:\\Program "
@@ -53,7 +53,7 @@ static emlrtDCInfo db_emlrtDCI = {
     4 /* checkKind */
 };
 
-static emlrtRTEInfo fg_emlrtRTEI = {
+static emlrtRTEInfo ng_emlrtRTEI = {
     1,         /* lineNo */
     25,        /* colNo */
     "sprintf", /* fName */
@@ -62,7 +62,7 @@ static emlrtRTEInfo fg_emlrtRTEI = {
                                                                            */
 };
 
-static emlrtRSInfo uk_emlrtRSI = {
+static emlrtRSInfo dl_emlrtRSI = {
     52,              /* lineNo */
     "nonConstPrint", /* fcnName */
     "C:\\Program "
@@ -70,7 +70,7 @@ static emlrtRSInfo uk_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRSInfo wk_emlrtRSI = {
+static emlrtRSInfo fl_emlrtRSI = {
     54,              /* lineNo */
     "nonConstPrint", /* fcnName */
     "C:\\Program "
@@ -78,7 +78,7 @@ static emlrtRSInfo wk_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRSInfo al_emlrtRSI = {
+static emlrtRSInfo il_emlrtRSI = {
     57,              /* lineNo */
     "nonConstPrint", /* fcnName */
     "C:\\Program "
@@ -171,7 +171,7 @@ void b_sprintf(const emlrtStack *sp, real_T varargin_1, emxArray_char_T *str)
   real_T strSize;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &te_emlrtRSI;
+  st.site = &ve_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   tmpStr = NULL;
@@ -186,16 +186,16 @@ void b_sprintf(const emlrtStack *sp, real_T varargin_1, emxArray_char_T *str)
   c_y = NULL;
   m = emlrtCreateDoubleScalar(varargin_1);
   emlrtAssign(&c_y, m);
-  b_st.site = &uk_emlrtRSI;
+  b_st.site = &dl_emlrtRSI;
   emlrtAssign(&tmpStr, feval(&b_st, y, b_y, c_y, &n_emlrtMCI));
-  b_st.site = &wk_emlrtRSI;
+  b_st.site = &fl_emlrtRSI;
   strSize =
       c_emlrt_marshallIn(&b_st, length(&b_st, emlrtAlias(tmpStr), &o_emlrtMCI),
                          "<output of length>");
   if (!(strSize >= 0.0)) {
     emlrtNonNegativeCheckR2012b(strSize, &db_emlrtDCI, &st);
   }
-  b_st.site = &al_emlrtRSI;
+  b_st.site = &il_emlrtRSI;
   e_emlrt_marshallIn(&b_st, emlrtAlias(tmpStr), "tmpStr", str);
   emlrtDestroyArray(&tmpStr);
 }
@@ -223,7 +223,7 @@ void c_sprintf(const emlrtStack *sp, real_T varargin_1)
   b_st.prev = &st;
   b_st.tls = st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  st.site = &te_emlrtRSI;
+  st.site = &ve_emlrtRSI;
   tmpStr = NULL;
   y = NULL;
   m = emlrtCreateCharArray(2, &iv[0]);
@@ -236,17 +236,17 @@ void c_sprintf(const emlrtStack *sp, real_T varargin_1)
   c_y = NULL;
   m = emlrtCreateDoubleScalar(varargin_1);
   emlrtAssign(&c_y, m);
-  b_st.site = &uk_emlrtRSI;
+  b_st.site = &dl_emlrtRSI;
   emlrtAssign(&tmpStr, feval(&b_st, y, b_y, c_y, &n_emlrtMCI));
-  b_st.site = &wk_emlrtRSI;
+  b_st.site = &fl_emlrtRSI;
   strSize =
       c_emlrt_marshallIn(&b_st, length(&b_st, emlrtAlias(tmpStr), &o_emlrtMCI),
                          "<output of length>");
   if (!(strSize >= 0.0)) {
     emlrtNonNegativeCheckR2012b(strSize, &db_emlrtDCI, &st);
   }
-  emxInit_char_T(&st, &b_tmpStr, 2, &fg_emlrtRTEI, true);
-  b_st.site = &al_emlrtRSI;
+  emxInit_char_T(&st, &b_tmpStr, 2, &ng_emlrtRTEI, true);
+  b_st.site = &il_emlrtRSI;
   e_emlrt_marshallIn(&b_st, emlrtAlias(tmpStr), "tmpStr", b_tmpStr);
   emlrtDestroyArray(&tmpStr);
   emxFree_char_T(&b_tmpStr);

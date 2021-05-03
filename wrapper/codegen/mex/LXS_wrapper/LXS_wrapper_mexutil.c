@@ -200,18 +200,6 @@ void i_emlrt_marshallIn(const emlrtStack *sp,
   emlrtDestroyArray(&a__output_of_sprintf_);
 }
 
-const mxArray *i_emlrt_marshallOut(const emlrtStack *sp, const char_T u[60])
-{
-  static const int32_T iv[2] = {1, 60};
-  const mxArray *m;
-  const mxArray *y;
-  y = NULL;
-  m = emlrtCreateCharArray(2, &iv[0]);
-  emlrtInitCharArrayR2013a((emlrtCTX)sp, 60, m, &u[0]);
-  emlrtAssign(&y, m);
-  return y;
-}
-
 void j_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
                         const emlrtMsgIdentifier *parentId, char_T y[14])
 {

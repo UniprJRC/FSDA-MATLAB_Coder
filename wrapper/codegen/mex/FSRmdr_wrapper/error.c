@@ -40,7 +40,7 @@ void error(const emlrtStack *sp)
   m = emlrtCreateCharArray(2, &iv1[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 20, m, &varargin_2[0]);
   emlrtAssign(&b_y, m);
-  st.site = &tk_emlrtRSI;
+  st.site = &cl_emlrtRSI;
   b_error(&st, y, b_y, &k_emlrtMCI);
 }
 

@@ -14,20 +14,26 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRSInfo lf_emlrtRSI = { 33, /* lineNo */
-  "indexShapeCheck",                   /* fcnName */
-  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\eml\\+coder\\+internal\\indexShapeCheck.m"/* pathName */
+static emlrtRSInfo qf_emlrtRSI = {
+    33,                /* lineNo */
+    "indexShapeCheck", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
+    "internal\\indexShapeCheck.m" /* pathName */
 };
 
-static emlrtRTEInfo k_emlrtRTEI = { 121,/* lineNo */
-  5,                                   /* colNo */
-  "errOrWarnIf",                       /* fName */
-  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\eml\\+coder\\+internal\\indexShapeCheck.m"/* pName */
+static emlrtRTEInfo k_emlrtRTEI = {
+    121,           /* lineNo */
+    5,             /* colNo */
+    "errOrWarnIf", /* fName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
+    "internal\\indexShapeCheck.m" /* pName */
 };
 
 /* Function Definitions */
-void indexShapeCheck(const emlrtStack *sp, const int32_T matrixSize[2], const
-                     int32_T indexSize[2])
+void indexShapeCheck(const emlrtStack *sp, const int32_T matrixSize[2],
+                     const int32_T indexSize[2])
 {
   emlrtStack st;
   boolean_T nonSingletonDimFound;
@@ -41,7 +47,6 @@ void indexShapeCheck(const emlrtStack *sp, const int32_T matrixSize[2], const
       nonSingletonDimFound = true;
     }
   }
-
   if (nonSingletonDimFound) {
     nonSingletonDimFound = (indexSize[0] != 1);
     if (indexSize[1] != 1) {
@@ -51,20 +56,18 @@ void indexShapeCheck(const emlrtStack *sp, const int32_T matrixSize[2], const
         nonSingletonDimFound = true;
       }
     }
-
     if (nonSingletonDimFound) {
-      if ((matrixSize[0] != 1) || ((matrixSize[1] == 1) != (indexSize[1] == 1)))
-      {
+      if ((matrixSize[0] != 1) ||
+          ((matrixSize[1] == 1) != (indexSize[1] == 1))) {
         nonSingletonDimFound = true;
       } else {
         nonSingletonDimFound = false;
       }
-
-      st.site = &lf_emlrtRSI;
+      st.site = &qf_emlrtRSI;
       if (nonSingletonDimFound) {
         emlrtErrorWithMessageIdR2018a(&st, &k_emlrtRTEI,
-          "Coder:FE:PotentialMatrixMatrix_MV",
-          "Coder:FE:PotentialMatrixMatrix_MV", 0);
+                                      "Coder:FE:PotentialMatrixMatrix_MV",
+                                      "Coder:FE:PotentialMatrixMatrix_MV", 0);
       }
     }
   }

@@ -234,7 +234,6 @@ static const mxArray *l_emlrt_marshallOut(const emlrtStack *sp,
   const mxArray *q_y;
   const mxArray *r_y;
   const mxArray *s_y;
-  const mxArray *t_y;
   const mxArray *y;
   real_T *pData;
   int32_T iv[2];
@@ -428,10 +427,10 @@ static const mxArray *l_emlrt_marshallOut(const emlrtStack *sp,
                       o_emlrt_marshallOut(u->invXX), 20);
   emlrtSetFieldR2017b(y, 0, (const char_T *)"Btable",
                       p_emlrt_marshallOut(sp, &u->Btable), 21);
-  t_y = NULL;
-  m = emlrtCreateDoubleScalar(u->LastHarmonicPval);
-  emlrtAssign(&t_y, m);
-  emlrtSetFieldR2017b(y, 0, (const char_T *)"LastHarmonicPval", t_y, 22);
+  emlrtSetFieldR2017b(
+      y, 0, (const char_T *)"LastHarmonicPval",
+      n_emlrt_marshallOut(u->LastHarmonicPval.data, u->LastHarmonicPval.size),
+      22);
   emlrtSetFieldR2017b(
       y, 0, (const char_T *)"LevelShiftPval",
       n_emlrt_marshallOut(u->LevelShiftPval.data, u->LevelShiftPval.size), 23);

@@ -21,8 +21,9 @@
 #include <string.h>
 
 /* Function Declarations */
-void b_warning(const emlrtStack *sp, int32_T varargin_1, const char_T
-               varargin_2[14]);
+void b_warning(const emlrtStack *sp, int32_T varargin_1,
+               const char_T varargin_2[14]);
+
 void warning(const emlrtStack *sp);
 
 /* End of code generation (warning.h) */

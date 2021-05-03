@@ -71,8 +71,6 @@ void i_emlrt_marshallIn(const emlrtStack *sp,
                         const mxArray *a__output_of_sprintf_,
                         const char_T *identifier, char_T y[14]);
 
-const mxArray *i_emlrt_marshallOut(const emlrtStack *sp, const char_T u[60]);
-
 void j_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
                         const emlrtMsgIdentifier *parentId, char_T y[14]);
 

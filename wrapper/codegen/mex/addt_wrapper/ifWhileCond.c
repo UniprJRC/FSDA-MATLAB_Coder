@@ -34,7 +34,6 @@ boolean_T ifWhileCond(const boolean_T x_data[], const int32_T x_size[2])
       }
     }
   }
-
   return y;
 }
 

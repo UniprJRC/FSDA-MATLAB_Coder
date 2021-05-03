@@ -16,33 +16,35 @@
 #include "rt_nonfinite.h"
 
 /* Function Definitions */
-void b_dynamic_size_checks(const emlrtStack *sp, const emxArray_real_T *a, const
-  emxArray_real_T *b, int32_T innerDimA, int32_T innerDimB)
+void b_dynamic_size_checks(const emlrtStack *sp, const emxArray_real_T *a,
+                           const emxArray_real_T *b, int32_T innerDimA,
+                           int32_T innerDimB)
 {
   if (innerDimA != innerDimB) {
-    if (((a->size[0] == 1) && (a->size[1] == 1)) || ((b->size[0] == 1) &&
-         (b->size[1] == 1))) {
-      emlrtErrorWithMessageIdR2018a(sp, &b_emlrtRTEI,
-        "Coder:toolbox:mtimes_noDynamicScalarExpansion",
-        "Coder:toolbox:mtimes_noDynamicScalarExpansion", 0);
+    if (((a->size[0] == 1) && (a->size[1] == 1)) ||
+        ((b->size[0] == 1) && (b->size[1] == 1))) {
+      emlrtErrorWithMessageIdR2018a(
+          sp, &b_emlrtRTEI, "Coder:toolbox:mtimes_noDynamicScalarExpansion",
+          "Coder:toolbox:mtimes_noDynamicScalarExpansion", 0);
     } else {
       emlrtErrorWithMessageIdR2018a(sp, &c_emlrtRTEI, "MATLAB:innerdim",
-        "MATLAB:innerdim", 0);
+                                    "MATLAB:innerdim", 0);
     }
   }
 }
 
-void dynamic_size_checks(const emlrtStack *sp, const emxArray_real_T *a, const
-  emxArray_real_T *b, int32_T innerDimA, int32_T innerDimB)
+void dynamic_size_checks(const emlrtStack *sp, const emxArray_real_T *a,
+                         const emxArray_real_T *b, int32_T innerDimA,
+                         int32_T innerDimB)
 {
   if (innerDimA != innerDimB) {
     if (((a->size[0] == 1) && (a->size[1] == 1)) || (b->size[0] == 1)) {
-      emlrtErrorWithMessageIdR2018a(sp, &b_emlrtRTEI,
-        "Coder:toolbox:mtimes_noDynamicScalarExpansion",
-        "Coder:toolbox:mtimes_noDynamicScalarExpansion", 0);
+      emlrtErrorWithMessageIdR2018a(
+          sp, &b_emlrtRTEI, "Coder:toolbox:mtimes_noDynamicScalarExpansion",
+          "Coder:toolbox:mtimes_noDynamicScalarExpansion", 0);
     } else {
       emlrtErrorWithMessageIdR2018a(sp, &c_emlrtRTEI, "MATLAB:innerdim",
-        "MATLAB:innerdim", 0);
+                                    "MATLAB:innerdim", 0);
     }
   }
 }

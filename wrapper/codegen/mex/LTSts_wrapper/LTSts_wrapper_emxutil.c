@@ -519,6 +519,8 @@ void emxInitStruct_struct3_T(const emlrtStack *sp, struct3_T *pStruct,
   emxInit_real_T(sp, &pStruct->X, 2, srcLocation, doPush);
   emxInit_real_T(sp, &pStruct->invXX, 2, srcLocation, doPush);
   emxInitStruct_table(sp, &pStruct->Btable, srcLocation, doPush);
+  pStruct->LastHarmonicPval.size[0] = 0;
+  pStruct->LastHarmonicPval.size[1] = 0;
   pStruct->LevelShiftPval.size[0] = 0;
   pStruct->LevelShiftPval.size[1] = 0;
 }

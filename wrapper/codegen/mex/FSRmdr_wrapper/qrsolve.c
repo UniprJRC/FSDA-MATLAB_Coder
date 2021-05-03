@@ -18,7 +18,7 @@
 
 /* Variable Definitions */
 static emlrtRSInfo
-    wg_emlrtRSI =
+    yg_emlrtRSI =
         {
             173,          /* lineNo */
             "rankFromQR", /* fcnName */
@@ -28,7 +28,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    xg_emlrtRSI =
+    ah_emlrtRSI =
         {
             172,          /* lineNo */
             "rankFromQR", /* fcnName */
@@ -49,7 +49,7 @@ static emlrtMCInfo
 };
 
 static emlrtRSInfo
-    yk_emlrtRSI =
+    hl_emlrtRSI =
         {
             53,        /* lineNo */
             "flt2str", /* fcnName */
@@ -151,7 +151,7 @@ int32_T rankFromQR(const emlrtStack *sp, const emxArray_real_T *A)
     }
   }
   if (r < minmn) {
-    st.site = &wg_emlrtRSI;
+    st.site = &yg_emlrtRSI;
     y = NULL;
     m = emlrtCreateCharArray(2, &iv[0]);
     emlrtInitCharArrayR2013a(&st, 6, m, &rfmt[0]);
@@ -159,10 +159,10 @@ int32_T rankFromQR(const emlrtStack *sp, const emxArray_real_T *A)
     b_y = NULL;
     m = emlrtCreateDoubleScalar(tol);
     emlrtAssign(&b_y, m);
-    b_st.site = &yk_emlrtRSI;
+    b_st.site = &hl_emlrtRSI;
     g_emlrt_marshallIn(&b_st, d_sprintf(&b_st, y, b_y, &r_emlrtMCI),
                        "<output of sprintf>", str);
-    st.site = &xg_emlrtRSI;
+    st.site = &ah_emlrtRSI;
     b_warning(&st, r, str);
   }
   return r;

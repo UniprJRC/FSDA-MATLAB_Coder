@@ -18,14 +18,21 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo mf_emlrtRSI = { 17, /* lineNo */
-  "log",                               /* fcnName */
-  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\lib\\matlab\\elfun\\log.m"/* pathName */
+static emlrtRSInfo rf_emlrtRSI =
+    {
+        17,    /* lineNo */
+        "log", /* fcnName */
+        "C:\\Program "
+        "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\elfun\\log.m" /* pathName
+                                                                          */
 };
 
-static emlrtRSInfo nf_emlrtRSI = { 33, /* lineNo */
-  "applyScalarFunctionInPlace",        /* fcnName */
-  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\eml\\+coder\\+internal\\applyScalarFunctionInPlace.m"/* pathName */
+static emlrtRSInfo sf_emlrtRSI = {
+    33,                           /* lineNo */
+    "applyScalarFunctionInPlace", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
+    "internal\\applyScalarFunctionInPlace.m" /* pathName */
 };
 
 /* Function Definitions */
@@ -50,21 +57,18 @@ void b_log(const emlrtStack *sp, emxArray_real_T *x)
       p = true;
     }
   }
-
   if (p) {
-    emlrtErrorWithMessageIdR2018a(sp, &p_emlrtRTEI,
-      "Coder:toolbox:ElFunDomainError", "Coder:toolbox:ElFunDomainError", 3, 4,
-      3, "log");
+    emlrtErrorWithMessageIdR2018a(
+        sp, &p_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+        "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
   }
-
-  st.site = &mf_emlrtRSI;
+  st.site = &rf_emlrtRSI;
   nx = x->size[0];
-  b_st.site = &nf_emlrtRSI;
+  b_st.site = &sf_emlrtRSI;
   if ((1 <= x->size[0]) && (x->size[0] > 2147483646)) {
     c_st.site = &kb_emlrtRSI;
     check_forloop_overflow_error(&c_st);
   }
-
   for (k = 0; k < nx; k++) {
     x->data[k] = muDoubleScalarLog(x->data[k]);
   }

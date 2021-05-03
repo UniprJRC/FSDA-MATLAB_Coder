@@ -21,56 +21,87 @@
 #include <math.h>
 
 /* Variable Definitions */
-static emlrtRSInfo pc_emlrtRSI = { 20, /* lineNo */
-  "local_rank",                        /* fcnName */
-  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\lib\\matlab\\matfun\\rank.m"/* pathName */
+static emlrtRSInfo pc_emlrtRSI = {
+    20,           /* lineNo */
+    "local_rank", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\matfun\\rank.m" /* pathName
+                                                                        */
 };
 
-static emlrtRSInfo qc_emlrtRSI = { 22, /* lineNo */
-  "local_rank",                        /* fcnName */
-  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\lib\\matlab\\matfun\\rank.m"/* pathName */
+static emlrtRSInfo qc_emlrtRSI = {
+    22,           /* lineNo */
+    "local_rank", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\matfun\\rank.m" /* pathName
+                                                                        */
 };
 
-static emlrtRSInfo rc_emlrtRSI = { 31, /* lineNo */
-  "local_rank",                        /* fcnName */
-  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\lib\\matlab\\matfun\\rank.m"/* pathName */
+static emlrtRSInfo rc_emlrtRSI = {
+    31,           /* lineNo */
+    "local_rank", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\matfun\\rank.m" /* pathName
+                                                                        */
 };
 
-static emlrtRSInfo sc_emlrtRSI = { 12, /* lineNo */
-  "svd",                               /* fcnName */
-  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\lib\\matlab\\matfun\\svd.m"/* pathName */
+static emlrtRSInfo sc_emlrtRSI = {
+    12,    /* lineNo */
+    "svd", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\matfun\\svd.m" /* pathName
+                                                                       */
 };
 
-static emlrtRSInfo tc_emlrtRSI = { 15, /* lineNo */
-  "svd",                               /* fcnName */
-  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\lib\\matlab\\matfun\\svd.m"/* pathName */
+static emlrtRSInfo tc_emlrtRSI = {
+    15,    /* lineNo */
+    "svd", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\matfun\\svd.m" /* pathName
+                                                                       */
 };
 
-static emlrtRSInfo uc_emlrtRSI = { 20, /* lineNo */
-  "svd",                               /* fcnName */
-  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\lib\\matlab\\matfun\\svd.m"/* pathName */
+static emlrtRSInfo uc_emlrtRSI = {
+    20,    /* lineNo */
+    "svd", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\matfun\\svd.m" /* pathName
+                                                                       */
 };
 
-static emlrtRSInfo vc_emlrtRSI = { 29, /* lineNo */
-  "anyNonFinite",                      /* fcnName */
-  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\eml\\+coder\\+internal\\anyNonFinite.m"/* pathName */
+static emlrtRSInfo vc_emlrtRSI = {
+    29,             /* lineNo */
+    "anyNonFinite", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\anyNonFinite."
+    "m" /* pathName */
 };
 
-static emlrtRSInfo dd_emlrtRSI = { 46, /* lineNo */
-  "eps",                               /* fcnName */
-  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\lib\\matlab\\elmat\\eps.m"/* pathName */
+static emlrtRSInfo dd_emlrtRSI =
+    {
+        46,    /* lineNo */
+        "eps", /* fcnName */
+        "C:\\Program "
+        "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\elmat\\eps.m" /* pathName
+                                                                          */
 };
 
-static emlrtRTEInfo sb_emlrtRTEI = { 19,/* lineNo */
-  14,                                  /* colNo */
-  "svd",                               /* fName */
-  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\lib\\matlab\\matfun\\svd.m"/* pName */
+static emlrtRTEInfo sb_emlrtRTEI = {
+    19,    /* lineNo */
+    14,    /* colNo */
+    "svd", /* fName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\matfun\\svd.m" /* pName
+                                                                       */
 };
 
-static emlrtRTEInfo tb_emlrtRTEI = { 20,/* lineNo */
-  5,                                   /* colNo */
-  "rank",                              /* fName */
-  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\lib\\matlab\\matfun\\rank.m"/* pName */
+static emlrtRTEInfo tb_emlrtRTEI = {
+    20,     /* lineNo */
+    5,      /* colNo */
+    "rank", /* fName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\matfun\\rank.m" /* pName
+                                                                        */
 };
 
 /* Function Definitions */
@@ -102,7 +133,7 @@ int32_T local_rank(const emlrtStack *sp, const emxArray_real_T *A)
   e_st.tls = d_st.tls;
   f_st.prev = &e_st;
   f_st.tls = e_st.tls;
-  emlrtHeapReferenceStackEnterFcnR2012b(sp);
+  emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
   irank = 0;
   if ((A->size[0] != 0) && (A->size[1] != 0)) {
     st.site = &pc_emlrtRSI;
@@ -116,14 +147,12 @@ int32_T local_rank(const emlrtStack *sp, const emxArray_real_T *A)
       f_st.site = &kb_emlrtRSI;
       check_forloop_overflow_error(&f_st);
     }
-
     for (k = 0; k < nx; k++) {
-      if ((!p) || (muDoubleScalarIsInf(A->data[k]) || muDoubleScalarIsNaN
-                   (A->data[k]))) {
+      if ((!p) || (muDoubleScalarIsInf(A->data[k]) ||
+                   muDoubleScalarIsNaN(A->data[k]))) {
         p = false;
       }
     }
-
     emxInit_real_T(&st, &s, 1, &tb_emlrtRTEI, true);
     if (p) {
       b_st.site = &tc_emlrtRSI;
@@ -138,7 +167,6 @@ int32_T local_rank(const emlrtStack *sp, const emxArray_real_T *A)
       for (k = 0; k < nx; k++) {
         r->data[k] = 0.0;
       }
-
       b_st.site = &uc_emlrtRSI;
       svd(&b_st, r, s);
       nx = s->size[0];
@@ -150,7 +178,6 @@ int32_T local_rank(const emlrtStack *sp, const emxArray_real_T *A)
         s->data[k] = rtNaN;
       }
     }
-
     st.site = &qc_emlrtRSI;
     b_st.site = &dd_emlrtRSI;
     absx = muDoubleScalarAbs(s->data[0]);
@@ -164,24 +191,20 @@ int32_T local_rank(const emlrtStack *sp, const emxArray_real_T *A)
     } else {
       absx = rtNaN;
     }
-
     absx *= (real_T)muIntScalarMax_sint32(A->size[0], A->size[1]);
     st.site = &rc_emlrtRSI;
     if ((1 <= s->size[0]) && (s->size[0] > 2147483646)) {
       b_st.site = &kb_emlrtRSI;
       check_forloop_overflow_error(&b_st);
     }
-
     k = 0;
     while ((k <= s->size[0] - 1) && (s->data[k] > absx)) {
       irank++;
       k++;
     }
-
     emxFree_real_T(&s);
   }
-
-  emlrtHeapReferenceStackLeaveFcnR2012b(sp);
+  emlrtHeapReferenceStackLeaveFcnR2012b((emlrtCTX)sp);
   return irank;
 }
 

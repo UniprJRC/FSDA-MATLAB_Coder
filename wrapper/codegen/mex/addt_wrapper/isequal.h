@@ -22,7 +22,7 @@
 #include <string.h>
 
 /* Function Declarations */
-boolean_T isequal(const emxArray_real_T *varargin_1, const emxArray_real_T
-                  *varargin_2);
+boolean_T isequal(const emxArray_real_T *varargin_1,
+                  const emxArray_real_T *varargin_2);
 
 /* End of code generation (isequal.h) */

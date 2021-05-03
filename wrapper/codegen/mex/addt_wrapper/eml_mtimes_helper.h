@@ -22,9 +22,12 @@
 #include <string.h>
 
 /* Function Declarations */
-void b_dynamic_size_checks(const emlrtStack *sp, const emxArray_real_T *a, const
-  emxArray_real_T *b, int32_T innerDimA, int32_T innerDimB);
-void dynamic_size_checks(const emlrtStack *sp, const emxArray_real_T *a, const
-  emxArray_real_T *b, int32_T innerDimA, int32_T innerDimB);
+void b_dynamic_size_checks(const emlrtStack *sp, const emxArray_real_T *a,
+                           const emxArray_real_T *b, int32_T innerDimA,
+                           int32_T innerDimB);
+
+void dynamic_size_checks(const emlrtStack *sp, const emxArray_real_T *a,
+                         const emxArray_real_T *b, int32_T innerDimA,
+                         int32_T innerDimB);
 
 /* End of code generation (eml_mtimes_helper.h) */

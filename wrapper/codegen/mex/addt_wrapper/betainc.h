@@ -22,6 +22,7 @@
 
 /* Function Declarations */
 creal_T b_betainc(const emlrtStack *sp, real_T x, real_T b);
+
 creal_T betainc(const emlrtStack *sp, real_T x, real_T a);
 
 /* End of code generation (betainc.h) */

@@ -22,7 +22,7 @@
 #include <string.h>
 
 /* Function Declarations */
-void nullAssignment(const emlrtStack *sp, emxArray_real_T *x, const
-                    emxArray_int32_T *idx);
+void nullAssignment(const emlrtStack *sp, emxArray_real_T *x,
+                    const emxArray_int32_T *idx);
 
 /* End of code generation (nullAssignment.h) */

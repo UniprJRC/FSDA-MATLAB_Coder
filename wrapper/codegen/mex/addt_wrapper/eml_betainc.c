@@ -38,13 +38,13 @@ real_T betainc_cf(real_T x, real_T a, real_T b)
       yold = y;
       twom = (m + 1) << 1;
       d_tmp = a + (real_T)twom;
-      d = ((real_T)m + 1.0) * (b - ((real_T)m + 1.0)) * x / (((a - 1.0) +
-        (real_T)twom) * d_tmp);
+      d = ((real_T)m + 1.0) * (b - ((real_T)m + 1.0)) * x /
+          (((a - 1.0) + (real_T)twom) * d_tmp);
       C = d / C + 1.0;
       Dinv = d / Dinv + 1.0;
       y *= C / Dinv;
-      d = -(a + ((real_T)m + 1.0)) * (aplusb + ((real_T)m + 1.0)) * x / (d_tmp *
-        ((a + 1.0) + (real_T)twom));
+      d = -(a + ((real_T)m + 1.0)) * (aplusb + ((real_T)m + 1.0)) * x /
+          (d_tmp * ((a + 1.0) + (real_T)twom));
       C = d / C + 1.0;
       Dinv = d / Dinv + 1.0;
       y *= C / Dinv;
@@ -58,7 +58,6 @@ real_T betainc_cf(real_T x, real_T a, real_T b)
       exitg1 = 1;
     }
   } while (exitg1 == 0);
-
   return y;
 }
 

@@ -16,27 +16,22 @@
 #include "mwmathutil.h"
 
 /* Function Definitions */
-void b_sqrt(const emlrtStack *sp, real_T x_data[], const int32_T x_size[1])
+void b_sqrt(const emlrtStack *sp, real_T x_data[], const int32_T *x_size)
 {
   int32_T k;
-  int32_T nx;
   boolean_T p;
   p = false;
-  nx = x_size[0];
-  for (k = 0; k < nx; k++) {
+  for (k = 0; k < *x_size; k++) {
     if (p || (x_data[0] < 0.0)) {
       p = true;
     }
   }
-
   if (p) {
-    emlrtErrorWithMessageIdR2018a(sp, &emlrtRTEI,
-      "Coder:toolbox:ElFunDomainError", "Coder:toolbox:ElFunDomainError", 3, 4,
-      4, "sqrt");
+    emlrtErrorWithMessageIdR2018a(
+        sp, &emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+        "Coder:toolbox:ElFunDomainError", 3, 4, 4, "sqrt");
   }
-
-  nx = x_size[0];
-  for (k = 0; k < nx; k++) {
+  for (k = 0; k < *x_size; k++) {
     x_data[0] = muDoubleScalarSqrt(x_data[0]);
   }
 }

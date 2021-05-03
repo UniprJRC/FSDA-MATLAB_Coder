@@ -218,6 +218,9 @@ if ~isempty(codegenOverall)
     cfg.BuildConfiguration = 'Debug';
     cfg.HardwareImplementation.ProdHWDeviceType = 'Intel->x86-64 (Mac OS X)';
     cfg.HardwareImplementation.TargetHWDeviceType = 'Intel->x86-64 (Mac OS X)';
+    % Note that the option below is just used for the overall call to
+    % codegen.
+    cfg.EnableOpenMP = 0; % generate single-threaded code for MATLAB parfor loops
     % cfg.CustomBLASCallback ='mklcallback'; % TOASK
     
     tic;
@@ -225,7 +228,7 @@ if ~isempty(codegenOverall)
     t1=toc;
     fprintf('Compilation time = %.1f seconds\n',t1)
     
-    % Create additional necessary header files for compilation
+    % Create additional necessary header files for compilation.
     % load buildInfo.mat
     % [~,FileName]=fileparts(AllFileNames{1});
     load(['codegen/lib/' overallName  '/buildInfo.mat'],'build*')

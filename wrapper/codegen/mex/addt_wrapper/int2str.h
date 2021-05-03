@@ -21,6 +21,7 @@
 #include <string.h>
 
 /* Function Declarations */
-void int2str(const emlrtStack *sp, real_T xin, char_T s_data[], int32_T s_size[2]);
+void int2str(const emlrtStack *sp, real_T xin, char_T s_data[],
+             int32_T s_size[2]);
 
 /* End of code generation (int2str.h) */

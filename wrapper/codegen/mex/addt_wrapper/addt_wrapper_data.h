@@ -28,7 +28,7 @@ extern emlrtRSInfo ib_emlrtRSI;
 extern emlrtRSInfo kb_emlrtRSI;
 extern emlrtRSInfo wc_emlrtRSI;
 extern emlrtRSInfo xc_emlrtRSI;
-extern emlrtRSInfo tf_emlrtRSI;
+extern emlrtRSInfo hg_emlrtRSI;
 extern emlrtMCInfo emlrtMCI;
 extern emlrtRTEInfo emlrtRTEI;
 extern emlrtRTEInfo b_emlrtRTEI;
@@ -37,6 +37,6 @@ extern emlrtRTEInfo i_emlrtRTEI;
 extern emlrtRTEInfo j_emlrtRTEI;
 extern emlrtRTEInfo m_emlrtRTEI;
 extern emlrtRTEInfo p_emlrtRTEI;
-extern emlrtRSInfo hi_emlrtRSI;
+extern emlrtRSInfo vi_emlrtRSI;
 
 /* End of code generation (addt_wrapper_data.h) */

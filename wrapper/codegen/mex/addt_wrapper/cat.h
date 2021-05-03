@@ -22,7 +22,7 @@
 #include <string.h>
 
 /* Function Declarations */
-void cat(const emlrtStack *sp, const emxArray_real_T *varargin_1, const
-         emxArray_real_T *varargin_2, emxArray_real_T *y);
+void cat(const emlrtStack *sp, const emxArray_real_T *varargin_1,
+         const emxArray_real_T *varargin_2, emxArray_real_T *y);
 
 /* End of code generation (cat.h) */

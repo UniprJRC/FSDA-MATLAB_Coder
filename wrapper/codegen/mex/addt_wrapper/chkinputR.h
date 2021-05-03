@@ -23,7 +23,7 @@
 
 /* Function Declarations */
 void chkinputR(const emlrtStack *sp, emxArray_real_T *y, emxArray_real_T *X,
-               boolean_T vvarargin_f2, boolean_T vvarargin_f6, real_T *n, real_T
-               *p);
+               boolean_T vvarargin_f2, boolean_T vvarargin_f6, real_T *n,
+               real_T *p);
 
 /* End of code generation (chkinputR.h) */

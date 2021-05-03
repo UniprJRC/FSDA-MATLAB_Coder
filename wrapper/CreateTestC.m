@@ -119,9 +119,9 @@ function status = CreateTestC(FileName, varargin)
 %}
 
 %{
-    % CreateTestC just to compare .mex and .m computational times.
-    % In this example it is assumed that mex has already been created.
-    % and no C is created
+    % CreateTestC just to compare dot mex and dot m computational times.
+    % In this example it is assumed that mex has already been created
+    % and no C file is created.
     status=CreateTestC('LXS','CreateMexFile',false,'CreateCsourceFile',false);
 %}
 

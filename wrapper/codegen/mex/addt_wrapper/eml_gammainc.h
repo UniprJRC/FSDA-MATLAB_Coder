@@ -23,6 +23,7 @@
 /* Function Declarations */
 real_T b_eml_gammainc(const emlrtStack *sp, real_T x, real_T a, real_T la,
                       real_T lgap1);
+
 real_T eml_gammainc(const emlrtStack *sp, real_T x, real_T lgap1);
 
 /* End of code generation (eml_gammainc.h) */

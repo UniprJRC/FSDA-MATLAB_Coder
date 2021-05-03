@@ -22,15 +22,19 @@
 #include <string.h>
 
 /* Function Declarations */
-void b_mtimes(const emlrtStack *sp, const emxArray_real_T *A, const
-              emxArray_real_T *B, emxArray_real_T *C);
-void c_mtimes(const emlrtStack *sp, const emxArray_real_T *A, const
-              emxArray_real_T *B, emxArray_real_T *C);
-void d_mtimes(const emxArray_real_T *A, const emxArray_real_T *B, real_T C_data[],
-              int32_T C_size[2]);
-void e_mtimes(const emxArray_real_T *A, const emxArray_real_T *B, real_T C_data[],
-              int32_T C_size[1]);
-void mtimes(const emlrtStack *sp, const emxArray_real_T *A, const
-            emxArray_real_T *B, emxArray_real_T *C);
+void b_mtimes(const emlrtStack *sp, const emxArray_real_T *A,
+              const emxArray_real_T *B, emxArray_real_T *C);
+
+void c_mtimes(const emlrtStack *sp, const emxArray_real_T *A,
+              const emxArray_real_T *B, emxArray_real_T *C);
+
+void d_mtimes(const emxArray_real_T *A, const emxArray_real_T *B,
+              real_T C_data[], int32_T C_size[2]);
+
+void e_mtimes(const emxArray_real_T *A, const emxArray_real_T *B,
+              real_T C_data[], int32_T *C_size);
+
+void mtimes(const emlrtStack *sp, const emxArray_real_T *A,
+            const emxArray_real_T *B, emxArray_real_T *C);
 
 /* End of code generation (mtimes.h) */

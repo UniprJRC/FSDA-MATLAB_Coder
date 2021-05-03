@@ -22,8 +22,11 @@
 #include <string.h>
 
 /* Function Declarations */
-void b_mrdiv(const emlrtStack *sp, emxArray_real_T *A, const emxArray_real_T *B);
-void mrdiv(const emlrtStack *sp, const emxArray_real_T *A, const real_T B_data[],
-           const int32_T B_size[2], emxArray_real_T *Y);
+void b_mrdiv(const emlrtStack *sp, const emxArray_real_T *A,
+             const real_T B_data[], const int32_T B_size[2],
+             emxArray_real_T *Y);
+
+void mrdiv(const emlrtStack *sp, const emxArray_real_T *A,
+           const emxArray_real_T *B, emxArray_real_T *Y);
 
 /* End of code generation (mrdivide_helper.h) */

@@ -21,7 +21,7 @@
 #include <string.h>
 
 /* Function Declarations */
-void mpower(const emlrtStack *sp, const real_T a_data[], const int32_T a_size[1],
-            real_T c_data[], int32_T c_size[1]);
+void mpower(const emlrtStack *sp, const real_T a_data[], int32_T a_size,
+            real_T c_data[], int32_T *c_size);
 
 /* End of code generation (mpower.h) */

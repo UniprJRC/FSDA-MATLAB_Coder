@@ -19,7 +19,7 @@
 #include "sortIdx.h"
 
 /* Variable Definitions */
-static emlrtRSInfo gj_emlrtRSI = {
+static emlrtRSInfo oj_emlrtRSI = {
     76,     /* lineNo */
     "sort", /* fcnName */
     "C:\\Program "
@@ -27,7 +27,7 @@ static emlrtRSInfo gj_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRSInfo hj_emlrtRSI = {
+static emlrtRSInfo pj_emlrtRSI = {
     79,     /* lineNo */
     "sort", /* fcnName */
     "C:\\Program "
@@ -35,7 +35,7 @@ static emlrtRSInfo hj_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRSInfo ij_emlrtRSI = {
+static emlrtRSInfo qj_emlrtRSI = {
     81,     /* lineNo */
     "sort", /* fcnName */
     "C:\\Program "
@@ -43,7 +43,7 @@ static emlrtRSInfo ij_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRSInfo jj_emlrtRSI = {
+static emlrtRSInfo rj_emlrtRSI = {
     84,     /* lineNo */
     "sort", /* fcnName */
     "C:\\Program "
@@ -51,7 +51,7 @@ static emlrtRSInfo jj_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRSInfo kj_emlrtRSI = {
+static emlrtRSInfo sj_emlrtRSI = {
     87,     /* lineNo */
     "sort", /* fcnName */
     "C:\\Program "
@@ -59,7 +59,7 @@ static emlrtRSInfo kj_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRSInfo lj_emlrtRSI = {
+static emlrtRSInfo tj_emlrtRSI = {
     90,     /* lineNo */
     "sort", /* fcnName */
     "C:\\Program "
@@ -67,7 +67,7 @@ static emlrtRSInfo lj_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRTEInfo rh_emlrtRTEI = {
+static emlrtRTEInfo ai_emlrtRTEI = {
     56,     /* lineNo */
     24,     /* colNo */
     "sort", /* fName */
@@ -76,7 +76,7 @@ static emlrtRTEInfo rh_emlrtRTEI = {
                                                                            */
 };
 
-static emlrtRTEInfo sh_emlrtRTEI = {
+static emlrtRTEInfo bi_emlrtRTEI = {
     75,     /* lineNo */
     26,     /* colNo */
     "sort", /* fName */
@@ -85,7 +85,7 @@ static emlrtRTEInfo sh_emlrtRTEI = {
                                                                            */
 };
 
-static emlrtRTEInfo th_emlrtRTEI = {
+static emlrtRTEInfo ci_emlrtRTEI = {
     56,     /* lineNo */
     1,      /* colNo */
     "sort", /* fName */
@@ -94,7 +94,7 @@ static emlrtRTEInfo th_emlrtRTEI = {
                                                                            */
 };
 
-static emlrtRTEInfo uh_emlrtRTEI = {
+static emlrtRTEInfo di_emlrtRTEI = {
     1,      /* lineNo */
     20,     /* colNo */
     "sort", /* fName */
@@ -125,7 +125,7 @@ void sort(const emlrtStack *sp, emxArray_real_T *x, emxArray_int32_T *idx)
   if (x->size[0] != 1) {
     dim = -1;
   }
-  emxInit_real_T(sp, &vwork, 1, &th_emlrtRTEI, true);
+  emxInit_real_T(sp, &vwork, 1, &ci_emlrtRTEI, true);
   if (dim + 2 <= 1) {
     i = x->size[0];
   } else {
@@ -134,34 +134,34 @@ void sort(const emlrtStack *sp, emxArray_real_T *x, emxArray_int32_T *idx)
   vlen = i - 1;
   i1 = vwork->size[0];
   vwork->size[0] = i;
-  emxEnsureCapacity_real_T(sp, vwork, i1, &rh_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, vwork, i1, &ai_emlrtRTEI);
   i1 = idx->size[0];
   idx->size[0] = x->size[0];
-  emxEnsureCapacity_int32_T(sp, idx, i1, &sh_emlrtRTEI);
-  st.site = &gj_emlrtRSI;
+  emxEnsureCapacity_int32_T(sp, idx, i1, &bi_emlrtRTEI);
+  st.site = &oj_emlrtRSI;
   vstride = 1;
   for (k = 0; k <= dim; k++) {
     vstride *= x->size[0];
   }
-  st.site = &hj_emlrtRSI;
-  st.site = &ij_emlrtRSI;
+  st.site = &pj_emlrtRSI;
+  st.site = &qj_emlrtRSI;
   if ((1 <= vstride) && (vstride > 2147483646)) {
-    b_st.site = &nc_emlrtRSI;
+    b_st.site = &pc_emlrtRSI;
     check_forloop_overflow_error(&b_st);
   }
-  emxInit_int32_T(sp, &iidx, 1, &uh_emlrtRTEI, true);
+  emxInit_int32_T(sp, &iidx, 1, &di_emlrtRTEI, true);
   for (dim = 0; dim < vstride; dim++) {
-    st.site = &jj_emlrtRSI;
+    st.site = &rj_emlrtRSI;
     if ((1 <= i) && (i > 2147483646)) {
-      b_st.site = &nc_emlrtRSI;
+      b_st.site = &pc_emlrtRSI;
       check_forloop_overflow_error(&b_st);
     }
     for (k = 0; k <= vlen; k++) {
       vwork->data[k] = x->data[dim + k * vstride];
     }
-    st.site = &kj_emlrtRSI;
+    st.site = &sj_emlrtRSI;
     sortIdx(&st, vwork, iidx);
-    st.site = &lj_emlrtRSI;
+    st.site = &tj_emlrtRSI;
     for (k = 0; k <= vlen; k++) {
       i1 = dim + k * vstride;
       x->data[i1] = vwork->data[k];

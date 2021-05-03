@@ -22,6 +22,7 @@
 
 /* Function Declarations */
 void addt_wrapper_atexit(void);
+
 void addt_wrapper_terminate(void);
 
 /* End of code generation (addt_wrapper_terminate.h) */

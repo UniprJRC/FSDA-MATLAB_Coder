@@ -307,7 +307,7 @@ typedef struct {
   emxArray_real_T *X;
   emxArray_real_T *invXX;
   table Btable;
-  real_T LastHarmonicPval;
+  emxArray_real_T_1x1 LastHarmonicPval;
   emxArray_real_T_1x1 LevelShiftPval;
 } struct3_T;
 #endif /* typedef_struct3_T */
