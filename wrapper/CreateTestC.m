@@ -155,7 +155,7 @@ end
 % Remove .m extension from FileName if it exists
 [~,FileName,ext] = fileparts(FileName);
 if ~isempty(ext) && ~strcmp('.m',ext)
-    error('FSDA:publishFS:WrongFileExt','Input file must have m extension')
+    error('FSDA:CreateTestC:WrongFileExt','Input file must have m extension')
 end
 
 FileNameWithSuffix=[FileName '_wrapper' Suffix];
@@ -163,7 +163,7 @@ FileNameWithSuffix=[FileName '_wrapper' Suffix];
 [pathstrcf] = fileparts(which(FileNameWithSuffix));
 
 if isempty(pathstrcf)
-    error('FSDA:publishFS:WrongFile','SourceNotFound');
+    error('FSDA:CreateTestC:WrongFile','SourceNotFound');
 end
 
 
@@ -248,7 +248,7 @@ if DeleteMexSubfolder == true
     try
         rmdir 'codegen/mex' s
     catch
-        warning('FSDA:CreateTestC:CouldNotDelete','Subolder codegen/mex could not be deleted.');
+        warning('FSDA:CreateTestC:CouldNotDelete','Subfolder codegen/mex could not be deleted.');
     end
 end
 status =true;
