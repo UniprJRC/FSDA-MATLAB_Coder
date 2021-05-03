@@ -1,6 +1,10 @@
 function ComptimesAll = CreateTestCallFiles(varargin)
 %CreateTestCallFiles applies procedure CreateTestC to all files in a folder
 %
+%
+%<a href="matlab: docsearchFS('CreateTestCallFiles')">Link to the help function</a>
+%
+%
 % This file applies procedure CreateTestC (that is creates c and mex files)
 % to  all files in the MATLAB path, which in the current folder (or in the
 % InputPath folder) have the corresponding couple: *_test.m and
@@ -18,7 +22,7 @@ function ComptimesAll = CreateTestCallFiles(varargin)
 %                If InputPath is empty all files with extension .m whose
 %                name contains the word wrapper in the current folder will
 %                be converted.
-%                 Example - 'InputPath','C:\Myfolder\tmp\'
+%                 Example - 'InputPath','C:/Myfolder/tmp/'
 %                 Data Types - char
 %
 % CreateMexFile : Create mex file. Boolean.
@@ -69,6 +73,10 @@ function ComptimesAll = CreateTestCallFiles(varargin)
 %                   testing examples in the _test.m files.
 %
 % See also: codegen, CreateTestC
+%
+%
+%
+% References:
 %
 %
 % Copyright 2008-2021.

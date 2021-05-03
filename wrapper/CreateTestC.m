@@ -1,6 +1,9 @@
 function status = CreateTestC(FileName, varargin)
 %CreateTestC creates and tests a file which has to be translated into C
 %
+%<a href="matlab: docsearchFS('CreateTestC')">Link to the help function</a>
+%
+%
 % This file assumes that there is in the current folder
 % 1) a file named FileName_wrapper.m which contains (throught the assert)
 % the definition of the input types
@@ -84,6 +87,9 @@ function status = CreateTestC(FileName, varargin)
 %
 % See also: codegen
 %
+%
+%
+% References:
 %
 % Copyright 2008-2021.
 % Written by FSDA team
