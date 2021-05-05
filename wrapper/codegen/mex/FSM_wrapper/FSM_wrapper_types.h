@@ -56,8 +56,8 @@ struct emxArray_real_T_2x5 {
 typedef struct emxArray_real_T_2x5 emxArray_real_T_2x5;
 #endif /* typedef_emxArray_real_T_2x5 */
 
-#ifndef typedef_struct0_T
-#define typedef_struct0_T
+#ifndef typedef_struct_FSM_T
+#define typedef_struct_FSM_T
 typedef struct {
   emxArray_real_T *outliers;
   emxArray_real_T *loc;
@@ -67,8 +67,8 @@ typedef struct {
   emxArray_real_T *Un;
   emxArray_real_T_2x5 nout;
   emxArray_char_T_1x3 class;
-} struct0_T;
-#endif /* typedef_struct0_T */
+} struct_FSM_T;
+#endif /* typedef_struct_FSM_T */
 
 #ifndef struct_emxArray_int32_T
 #define struct_emxArray_int32_T

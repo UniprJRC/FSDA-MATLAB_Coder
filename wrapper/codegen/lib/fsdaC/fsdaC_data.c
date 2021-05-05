@@ -20,8 +20,6 @@ double freq;
 
 bool freq_not_empty;
 
-omp_nest_lock_t emlrtNestLockGlobal;
-
 const int iv[5] = {1, 99, 999, 9999, 99999};
 
 const double dv2[31] = {0.0,

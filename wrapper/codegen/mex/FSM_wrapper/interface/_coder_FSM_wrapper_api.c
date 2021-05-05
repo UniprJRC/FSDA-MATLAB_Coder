@@ -47,7 +47,7 @@ static boolean_T eb_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
                                      const emlrtMsgIdentifier *msgId);
 
 static const mxArray *gb_emlrt_marshallOut(const emlrtStack *sp,
-                                           const struct0_T *u);
+                                           const struct_FSM_T *u);
 
 static const mxArray *hb_emlrt_marshallOut(const emxArray_real_T *u);
 
@@ -170,7 +170,7 @@ static boolean_T eb_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
 }
 
 static const mxArray *gb_emlrt_marshallOut(const emlrtStack *sp,
-                                           const struct0_T *u)
+                                           const struct_FSM_T *u)
 {
   static const char_T *sv[8] = {"outliers", "loc", "cov",  "md",
                                 "mmd",      "Un",  "nout", "class"};
@@ -399,7 +399,7 @@ void FSM_wrapper_api(FSM_wrapperStackData *SD, const mxArray *const prhs[8],
   };
   emxArray_real_T *Y;
   emxArray_real_T *m0;
-  struct0_T out;
+  struct_FSM_T out;
   real_T init;
   real_T rf;
   real_T *bonflev_data;
@@ -412,7 +412,7 @@ void FSM_wrapper_api(FSM_wrapperStackData *SD, const mxArray *const prhs[8],
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
   emxInit_real_T(&st, &Y, 2, &lt_emlrtRTEI, true);
   emxInit_real_T(&st, &m0, 1, &lt_emlrtRTEI, true);
-  emxInitStruct_struct0_T(&st, &out, &lt_emlrtRTEI, true);
+  emxInitStruct_struct_FSM_T(&st, &out, &lt_emlrtRTEI, true);
   /* Marshall function inputs */
   Y->canFreeData = false;
   k_emlrt_marshallIn(&st, emlrtAlias(prhs[0]), "Y", Y);
@@ -430,7 +430,7 @@ void FSM_wrapper_api(FSM_wrapperStackData *SD, const mxArray *const prhs[8],
               crit_size, init, m0, msg, nocheck, rf, &out);
   /* Marshall function outputs */
   *plhs = gb_emlrt_marshallOut(&st, &out);
-  emxFreeStruct_struct0_T(&out);
+  emxFreeStruct_struct_FSM_T(&out);
   emxFree_real_T(&m0);
   emxFree_real_T(&Y);
   emlrtHeapReferenceStackLeaveFcnR2012b(&st);

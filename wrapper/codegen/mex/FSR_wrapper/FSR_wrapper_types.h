@@ -44,8 +44,8 @@ struct emxArray_real_T_1x1 {
 typedef struct emxArray_real_T_1x1 emxArray_real_T_1x1;
 #endif /* typedef_emxArray_real_T_1x1 */
 
-#ifndef typedef_struct0_T
-#define typedef_struct0_T
+#ifndef typedef_struct_FSR_T
+#define typedef_struct_FSR_T
 typedef struct {
   emxArray_real_T *ListOut;
   emxArray_real_T *outliers;
@@ -60,8 +60,8 @@ typedef struct {
   emxArray_real_T *fittedvalues;
   emxArray_real_T *residuals;
   char_T class[3];
-} struct0_T;
-#endif /* typedef_struct0_T */
+} struct_FSR_T;
+#endif /* typedef_struct_FSR_T */
 
 #ifndef struct_emxArray_boolean_T
 #define struct_emxArray_boolean_T

@@ -47,7 +47,7 @@ static void kb_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
                                 emxArray_real_T *ret);
 
 static const mxArray *l_emlrt_marshallOut(const emlrtStack *sp,
-                                          const struct3_T *u);
+                                          const struct_LTSts_T *u);
 
 static void lb_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
                                 const emlrtMsgIdentifier *msgId,
@@ -187,7 +187,7 @@ static void kb_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
 }
 
 static const mxArray *l_emlrt_marshallOut(const emlrtStack *sp,
-                                          const struct3_T *u)
+                                          const struct_LTSts_T *u)
 {
   static const int32_T iv1[2] = {1, 5};
   static const char_T *sv[24] = {"RES",
@@ -1155,7 +1155,7 @@ void LTSts_wrapper_api(const mxArray *const prhs[16], int32_T nlhs,
   struct0_T lshiftlocref;
   struct1_T lts;
   struct2_T model;
-  struct3_T out;
+  struct_LTSts_T out;
   real_T(*nsamp_data)[2];
   real_T SmallSampleCor;
   real_T conflev;
@@ -1173,7 +1173,7 @@ void LTSts_wrapper_api(const mxArray *const prhs[16], int32_T nlhs,
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
   emxInit_real_T(&st, &y, 1, &kv_emlrtRTEI, true);
   emxInitStruct_struct2_T(&st, &model, &kv_emlrtRTEI, true);
-  emxInitStruct_struct3_T(&st, &out, &kv_emlrtRTEI, true);
+  emxInitStruct_struct_LTSts_T(&st, &out, &kv_emlrtRTEI, true);
   emxInit_real_T(&st, &C, 2, &kv_emlrtRTEI, true);
   /* Marshall function inputs */
   y->canFreeData = false;
@@ -1201,7 +1201,7 @@ void LTSts_wrapper_api(const mxArray *const prhs[16], int32_T nlhs,
                 refstepsALS, reftolALS, SmallSampleCor, yxsave, &out, C);
   /* Marshall function outputs */
   plhs[0] = l_emlrt_marshallOut(&st, &out);
-  emxFreeStruct_struct3_T(&out);
+  emxFreeStruct_struct_LTSts_T(&out);
   emxFreeStruct_struct2_T(&model);
   emxFree_real_T(&y);
   if (nlhs > 1) {

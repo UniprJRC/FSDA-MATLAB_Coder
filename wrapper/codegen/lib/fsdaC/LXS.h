@@ -15,7 +15,6 @@
 /* Include files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
-#include "omp.h"
 #include <stddef.h>
 #include <stdlib.h>
 
@@ -27,7 +26,7 @@ extern "C" {
 void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
          double varargin_4, double varargin_6, bool varargin_10,
          const double varargin_12_data[], const int varargin_12_size[2],
-         struct8_T *out);
+         struct_LXSlmsstruct_T *out);
 
 double asvar(double h, double n);
 
@@ -39,7 +38,8 @@ void b_IRWLSreg(const emxArray_real_T *y, const emxArray_real_T *X,
 
 void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
            const emxArray_real_T *varargin_2, double varargin_4,
-           const emxArray_real_T *varargin_6, bool varargin_10, struct8_T *out);
+           const emxArray_real_T *varargin_6, bool varargin_10,
+           struct_LXSlmsstruct_T *out);
 
 double corfactorRAW(double n, double alpha);
 

@@ -15,7 +15,6 @@
 /* Include files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
-#include "omp.h"
 #include <stddef.h>
 #include <stdlib.h>
 
@@ -28,7 +27,7 @@ extern void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
                         const int bonflev_size[2], const char crit_data[],
                         const int crit_size[2], double init,
                         const emxArray_real_T *m0, bool msg, bool nocheck,
-                        double rf, struct0_T *out);
+                        double rf, struct_FSM_T *out);
 
 #ifdef __cplusplus
 }

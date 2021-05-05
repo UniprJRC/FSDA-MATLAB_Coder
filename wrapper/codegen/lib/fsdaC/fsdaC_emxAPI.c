@@ -360,34 +360,39 @@ void emxDestroyArray_real_T(emxArray_real_T *emxArray)
   emxFree_real_T(&emxArray);
 }
 
-void emxDestroy_struct0_T(struct0_T emxArray)
-{
-  emxFreeStruct_struct0_T(&emxArray);
-}
-
-void emxDestroy_struct1_T(struct1_T emxArray)
-{
-  emxFreeStruct_struct1_T(&emxArray);
-}
-
 void emxDestroy_struct2_T(struct2_T emxArray)
 {
   emxFreeStruct_struct2_T(&emxArray);
 }
 
-void emxDestroy_struct5_T(struct5_T emxArray)
+void emxDestroy_struct_FSM_T(struct_FSM_T emxArray)
 {
-  emxFreeStruct_struct5_T(&emxArray);
+  emxFreeStruct_struct_FSM_T(&emxArray);
 }
 
-void emxDestroy_struct6_T(struct6_T emxArray)
+void emxDestroy_struct_FSR_T(struct_FSR_T emxArray)
 {
-  emxFreeStruct_struct6_T(&emxArray);
+  emxFreeStruct_struct_FSR_T(&emxArray);
 }
 
-void emxDestroy_struct8_T(struct8_T emxArray)
+void emxDestroy_struct_FSRfan_T(struct_FSRfan_T emxArray)
 {
-  emxFreeStruct_struct8_T(&emxArray);
+  emxFreeStruct_struct_FSRfan_T(&emxArray);
+}
+
+void emxDestroy_struct_LTSts_T(struct_LTSts_T emxArray)
+{
+  emxFreeStruct_struct_LTSts_T(&emxArray);
+}
+
+void emxDestroy_struct_LXSlmsscalar_T(struct_LXSlmsscalar_T emxArray)
+{
+  c_emxFreeStruct_struct_LXSlmssc(&emxArray);
+}
+
+void emxDestroy_struct_LXSlmsstruct_T(struct_LXSlmsstruct_T emxArray)
+{
+  c_emxFreeStruct_struct_LXSlmsst(&emxArray);
 }
 
 void emxInitArray_char_T(emxArray_char_T **pEmxArray, int numDimensions)
@@ -405,34 +410,39 @@ void emxInitArray_real_T(emxArray_real_T **pEmxArray, int numDimensions)
   emxInit_real_T(pEmxArray, numDimensions);
 }
 
-void emxInit_struct0_T(struct0_T *pStruct)
-{
-  emxInitStruct_struct0_T(pStruct);
-}
-
-void emxInit_struct1_T(struct1_T *pStruct)
-{
-  emxInitStruct_struct1_T(pStruct);
-}
-
 void emxInit_struct2_T(struct2_T *pStruct)
 {
   emxInitStruct_struct2_T(pStruct);
 }
 
-void emxInit_struct5_T(struct5_T *pStruct)
+void emxInit_struct_FSM_T(struct_FSM_T *pStruct)
 {
-  emxInitStruct_struct5_T(pStruct);
+  emxInitStruct_struct_FSM_T(pStruct);
 }
 
-void emxInit_struct6_T(struct6_T *pStruct)
+void emxInit_struct_FSR_T(struct_FSR_T *pStruct)
 {
-  emxInitStruct_struct6_T(pStruct);
+  emxInitStruct_struct_FSR_T(pStruct);
 }
 
-void emxInit_struct8_T(struct8_T *pStruct)
+void emxInit_struct_FSRfan_T(struct_FSRfan_T *pStruct)
 {
-  emxInitStruct_struct8_T(pStruct);
+  emxInitStruct_struct_FSRfan_T(pStruct);
+}
+
+void emxInit_struct_LTSts_T(struct_LTSts_T *pStruct)
+{
+  emxInitStruct_struct_LTSts_T(pStruct);
+}
+
+void emxInit_struct_LXSlmsscalar_T(struct_LXSlmsscalar_T *pStruct)
+{
+  c_emxInitStruct_struct_LXSlmssc(pStruct);
+}
+
+void emxInit_struct_LXSlmsstruct_T(struct_LXSlmsstruct_T *pStruct)
+{
+  c_emxInitStruct_struct_LXSlmsst(pStruct);
 }
 
 /* End of code generation (fsdaC_emxAPI.c) */

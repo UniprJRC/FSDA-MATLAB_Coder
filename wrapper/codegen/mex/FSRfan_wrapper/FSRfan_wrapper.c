@@ -1257,7 +1257,7 @@ void FSRfan_wrapper(const emlrtStack *sp, const emxArray_real_T *y,
                     boolean_T nocheck, const emxArray_real_T *la, real_T h,
                     real_T nsamp, const emxArray_real_T *lms, real_T init,
                     const emxArray_char_T *family, boolean_T msg,
-                    struct0_T *out)
+                    struct_FSRfan_T *out)
 {
   static const char_T b_cv4[96] = {
       'R', 'a', 'n', 'k', ' ', 'p', 'r', 'o', 'b', 'l', 'e', 'm', ' ', 'i',

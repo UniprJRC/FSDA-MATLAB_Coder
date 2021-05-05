@@ -15,7 +15,6 @@
 /* Include files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
-#include "omp.h"
 #include <stddef.h>
 #include <stdlib.h>
 
@@ -27,9 +26,9 @@ extern "C" {
 extern void LXS_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
                          const double bonflevoutX_data[],
                          const int bonflevoutX_size[2], double conflev,
-                         double h, bool intercept, const struct4_T *lms,
+                         double h, bool intercept, const struct1_T *lms,
                          bool msg, bool nocheck, bool nomes, double nsamp,
-                         bool rew, bool yxsave, struct8_T *out,
+                         bool rew, bool yxsave, struct_LXSlmsstruct_T *out,
                          emxArray_real_T *C);
 
 #ifdef __cplusplus

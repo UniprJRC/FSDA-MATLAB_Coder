@@ -15,7 +15,6 @@
 /* Include files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
-#include "omp.h"
 #include <stddef.h>
 #include <stdlib.h>
 
@@ -27,7 +26,7 @@ extern "C" {
 extern void addt_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                          const emxArray_real_T *w, bool intercept,
                          const double la_data[], const int la_size[2],
-                         bool nocheck, struct9_T *out);
+                         bool nocheck, struct4_T *out);
 
 #ifdef __cplusplus
 }

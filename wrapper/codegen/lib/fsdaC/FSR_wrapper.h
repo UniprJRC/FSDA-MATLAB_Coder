@@ -15,7 +15,6 @@
 /* Include files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
-#include "omp.h"
 #include <stddef.h>
 #include <stdlib.h>
 
@@ -30,7 +29,7 @@ extern void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                         bool intercept, double lms, bool msg, bool nocheck,
                         double nsamp, const double threshoutX_data[],
                         const int threshoutX_size[2], bool weak,
-                        struct1_T *out);
+                        struct_FSR_T *out);
 
 #ifdef __cplusplus
 }

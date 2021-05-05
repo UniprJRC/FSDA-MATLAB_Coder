@@ -250,12 +250,12 @@ typedef struct {
 } cell_wrap_3;
 #endif /* typedef_cell_wrap_3 */
 
-#ifndef typedef_struct4_T
-#define typedef_struct4_T
+#ifndef typedef_struct3_T
+#define typedef_struct3_T
 typedef struct {
   emxArray_char_T_1x0 Description;
-} struct4_T;
-#endif /* typedef_struct4_T */
+} struct3_T;
+#endif /* typedef_struct3_T */
 
 #ifndef typedef_f_matlab_internal_coder_tabular
 #define typedef_f_matlab_internal_coder_tabular
@@ -278,12 +278,12 @@ typedef struct {
   e_matlab_internal_coder_tabular rowDim;
   f_matlab_internal_coder_tabular varDim;
   cell_wrap_4 data[4];
-  struct4_T arrayProps;
+  struct3_T arrayProps;
 } table;
 #endif /* typedef_table */
 
-#ifndef typedef_struct3_T
-#define typedef_struct3_T
+#ifndef typedef_struct_LTSts_T
+#define typedef_struct_LTSts_T
 typedef struct {
   emxArray_real_T *RES;
   emxArray_real_T *Hsubset;
@@ -309,7 +309,7 @@ typedef struct {
   table Btable;
   emxArray_real_T_1x1 LastHarmonicPval;
   emxArray_real_T_1x1 LevelShiftPval;
-} struct3_T;
-#endif /* typedef_struct3_T */
+} struct_LTSts_T;
+#endif /* typedef_struct_LTSts_T */
 
 /* End of code generation (LTSts_wrapper_types.h) */

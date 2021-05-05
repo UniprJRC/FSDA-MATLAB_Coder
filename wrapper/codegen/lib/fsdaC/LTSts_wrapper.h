@@ -15,7 +15,6 @@
 /* Include files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
-#include "omp.h"
 #include <stddef.h>
 #include <stdlib.h>
 
@@ -26,12 +25,12 @@ extern "C" {
 /* Function Declarations */
 extern void LTSts_wrapper(const emxArray_real_T *y, double conflev,
                           bool dispresults, double h, bool intercept,
-                          const struct3_T *lshiftlocref, const struct4_T *lts,
-                          const struct5_T *model, bool msg, double nbestindexes,
+                          const struct0_T *lshiftlocref, const struct1_T *lts,
+                          const struct2_T *model, bool msg, double nbestindexes,
                           bool nocheck, const double nsamp_data[],
                           const int nsamp_size[2], double refstepsALS,
                           double reftolALS, double SmallSampleCor, bool yxsave,
-                          struct6_T *out, emxArray_real_T *C);
+                          struct_LTSts_T *out, emxArray_real_T *C);
 
 #ifdef __cplusplus
 }

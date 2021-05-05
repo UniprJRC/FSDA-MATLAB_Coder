@@ -318,7 +318,7 @@ void emxFreeStruct_struct2_T(struct2_T *pStruct)
   emxFree_real_T(&pStruct->X);
 }
 
-void emxFreeStruct_struct3_T(struct3_T *pStruct)
+void emxFreeStruct_struct_LTSts_T(struct_LTSts_T *pStruct)
 {
   emxFree_real_T(&pStruct->RES);
   emxFree_real_T(&pStruct->Hsubset);
@@ -498,8 +498,15 @@ void emxInitStruct_struct2_T(const emlrtStack *sp, struct2_T *pStruct,
   emxInit_real_T(sp, &pStruct->X, 2, srcLocation, doPush);
 }
 
-void emxInitStruct_struct3_T(const emlrtStack *sp, struct3_T *pStruct,
-                             const emlrtRTEInfo *srcLocation, boolean_T doPush)
+void emxInitStruct_struct3_T(struct3_T *pStruct)
+{
+  pStruct->Description.size[0] = 0;
+  pStruct->Description.size[1] = 0;
+}
+
+void emxInitStruct_struct_LTSts_T(const emlrtStack *sp, struct_LTSts_T *pStruct,
+                                  const emlrtRTEInfo *srcLocation,
+                                  boolean_T doPush)
 {
   emxInit_real_T(sp, &pStruct->RES, 1, srcLocation, doPush);
   emxInit_real_T(sp, &pStruct->Hsubset, 1, srcLocation, doPush);
@@ -525,12 +532,6 @@ void emxInitStruct_struct3_T(const emlrtStack *sp, struct3_T *pStruct,
   pStruct->LevelShiftPval.size[1] = 0;
 }
 
-void emxInitStruct_struct4_T(struct4_T *pStruct)
-{
-  pStruct->Description.size[0] = 0;
-  pStruct->Description.size[1] = 0;
-}
-
 void emxInitStruct_struct_T(const emlrtStack *sp, struct_T *pStruct,
                             const emlrtRTEInfo *srcLocation, boolean_T doPush)
 {
@@ -545,7 +546,7 @@ void emxInitStruct_table(const emlrtStack *sp, table *pStruct,
   c_emxInitStruct_matlab_internal(&pStruct->rowDim);
   d_emxInitStruct_matlab_internal(&pStruct->varDim);
   emxInitMatrix_cell_wrap_4(sp, pStruct->data, srcLocation, doPush);
-  emxInitStruct_struct4_T(&pStruct->arrayProps);
+  emxInitStruct_struct3_T(&pStruct->arrayProps);
 }
 
 void emxInit_boolean_T(const emlrtStack *sp, emxArray_boolean_T **pEmxArray,

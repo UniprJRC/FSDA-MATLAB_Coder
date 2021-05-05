@@ -102,8 +102,6 @@ D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\mldivide.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\HUrho.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\zscore.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\zscoreFS.c
-D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\pdist.c
-D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\scanfornan.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\prctile.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\RobRegrSize.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\GYfilt.c
@@ -243,8 +241,6 @@ D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\mldivide.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\HUrho.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\zscore.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\zscoreFS.h
-D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\pdist.h
-D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\scanfornan.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\prctile.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\RobRegrSize.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\GYfilt.h

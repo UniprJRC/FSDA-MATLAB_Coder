@@ -3866,7 +3866,7 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
                  emxArray_real_T *Y, const real_T bonflev_data[], const int32_T
                  bonflev_size[2], const char_T crit_data[], const int32_T
                  crit_size[2], real_T init, const emxArray_real_T *m0, boolean_T
-                 msg, boolean_T nocheck, real_T rf, struct0_T *out)
+                 msg, boolean_T nocheck, real_T rf, struct_FSM_T *out)
 {
   static const int32_T iv[5] = { 1, 99, 999, 9999, 99999 };
 

@@ -65,8 +65,8 @@ typedef struct {
 } emxArray_cell_wrap_0;
 #endif /* typedef_emxArray_cell_wrap_0 */
 
-#ifndef typedef_struct0_T
-#define typedef_struct0_T
+#ifndef typedef_struct_FSRfan_T
+#define typedef_struct_FSRfan_T
 typedef struct {
   emxArray_real_T *Score;
   emxArray_real_T *la;
@@ -77,8 +77,8 @@ typedef struct {
   emxArray_real_T *Scorep;
   emxArray_real_T *Scoren;
   emxArray_real_T *Scoreb;
-} struct0_T;
-#endif /* typedef_struct0_T */
+} struct_FSRfan_T;
+#endif /* typedef_struct_FSRfan_T */
 
 #ifndef struct_emxArray_boolean_T
 #define struct_emxArray_boolean_T

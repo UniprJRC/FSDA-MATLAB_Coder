@@ -71,11 +71,11 @@ static void argInit_d2xd1_real_T(double result_data[], int result_size[2]);
 
 static double argInit_real_T(void);
 
-static struct3_T argInit_struct3_T(void);
+static struct0_T argInit_struct0_T(void);
 
-static struct4_T argInit_struct4_T(void);
+static struct1_T argInit_struct1_T(void);
 
-static struct5_T argInit_struct5_T(void);
+static struct2_T argInit_struct2_T(void);
 
 static emxArray_real_T *c_argInit_UnboundedxUnbounded_r(void);
 
@@ -210,9 +210,9 @@ static double argInit_real_T(void)
   return 0.0;
 }
 
-static struct3_T argInit_struct3_T(void)
+static struct0_T argInit_struct0_T(void)
 {
-  struct3_T result;
+  struct0_T result;
   double result_tmp;
   /* Set the value of each structure field.
 Change this value to the value that the application requires. */
@@ -223,9 +223,9 @@ Change this value to the value that the application requires. */
   return result;
 }
 
-static struct4_T argInit_struct4_T(void)
+static struct1_T argInit_struct1_T(void)
 {
-  struct4_T result;
+  struct1_T result;
   double result_tmp;
   /* Set the value of each structure field.
 Change this value to the value that the application requires. */
@@ -238,9 +238,9 @@ Change this value to the value that the application requires. */
   return result;
 }
 
-static struct5_T argInit_struct5_T(void)
+static struct2_T argInit_struct2_T(void)
 {
-  struct5_T result;
+  struct2_T result;
   double result_tmp;
   /* Set the value of each structure field.
 Change this value to the value that the application requires. */
@@ -277,14 +277,14 @@ static void main_FSM_wrapper(void)
 {
   emxArray_real_T *Y;
   emxArray_real_T *m0;
-  struct0_T out;
+  struct_FSM_T out;
   double bonflev_data;
   double init_tmp;
   int bonflev_size[2];
   int crit_size[2];
   char crit_data[3];
   bool msg_tmp;
-  emxInit_struct0_T(&out);
+  emxInit_struct_FSM_T(&out);
   /* Initialize function 'FSM_wrapper' input arguments. */
   /* Initialize function input argument 'Y'. */
   Y = c_argInit_UnboundedxUnbounded_r();
@@ -299,7 +299,7 @@ static void main_FSM_wrapper(void)
   /* Call the entry-point 'FSM_wrapper'. */
   FSM_wrapper(Y, (double *)&bonflev_data, bonflev_size, crit_data, crit_size,
               init_tmp, m0, msg_tmp, msg_tmp, init_tmp, &out);
-  emxDestroy_struct0_T(out);
+  emxDestroy_struct_FSM_T(out);
   emxDestroyArray_real_T(m0);
   emxDestroyArray_real_T(Y);
 }
@@ -366,14 +366,14 @@ static void main_FSR_wrapper(void)
 {
   emxArray_real_T *X;
   emxArray_real_T *y;
-  struct1_T out;
+  struct_FSR_T out;
   double bonflev_data;
   double h_tmp;
   double threshoutX_data;
   int bonflev_size[2];
   int threshoutX_size[2];
   bool bsbmfullrank_tmp;
-  emxInit_struct1_T(&out);
+  emxInit_struct_FSR_T(&out);
   /* Initialize function 'FSR_wrapper' input arguments. */
   /* Initialize function input argument 'y'. */
   y = argInit_Unboundedx1_real_T();
@@ -390,7 +390,7 @@ static void main_FSR_wrapper(void)
               h_tmp, h_tmp, bsbmfullrank_tmp, h_tmp, bsbmfullrank_tmp,
               bsbmfullrank_tmp, h_tmp, (double *)&threshoutX_data,
               threshoutX_size, bsbmfullrank_tmp, &out);
-  emxDestroy_struct1_T(out);
+  emxDestroy_struct_FSR_T(out);
   emxDestroyArray_real_T(X);
   emxDestroyArray_real_T(y);
 }
@@ -434,10 +434,10 @@ static void main_FSRfan_wrapper(void)
   emxArray_real_T *la;
   emxArray_real_T *lms;
   emxArray_real_T *y;
-  struct2_T out;
+  struct_FSRfan_T out;
   double h_tmp;
   bool intercept_tmp;
-  emxInit_struct2_T(&out);
+  emxInit_struct_FSRfan_T(&out);
   /* Initialize function 'FSRfan_wrapper' input arguments. */
   /* Initialize function input argument 'y'. */
   y = argInit_Unboundedx1_real_T();
@@ -454,7 +454,7 @@ static void main_FSRfan_wrapper(void)
   /* Call the entry-point 'FSRfan_wrapper'. */
   FSRfan_wrapper(y, X, intercept_tmp, intercept_tmp, la, h_tmp, h_tmp, lms,
                  h_tmp, family, intercept_tmp, &out);
-  emxDestroy_struct2_T(out);
+  emxDestroy_struct_FSRfan_T(out);
   emxDestroyArray_char_T(family);
   emxDestroyArray_real_T(lms);
   emxDestroyArray_real_T(la);
@@ -517,15 +517,15 @@ static void main_LTSts_wrapper(void)
 {
   emxArray_real_T *C;
   emxArray_real_T *y;
-  struct3_T r;
-  struct4_T r1;
-  struct5_T model;
-  struct6_T out;
+  struct0_T r;
+  struct1_T r1;
+  struct2_T model;
+  struct_LTSts_T out;
   double nsamp_data[2];
   double conflev_tmp;
   int nsamp_size[2];
   bool dispresults_tmp;
-  emxInit_struct6_T(&out);
+  emxInit_struct_LTSts_T(&out);
   emxInitArray_real_T(&C, 2);
   /* Initialize function 'LTSts_wrapper' input arguments. */
   /* Initialize function input argument 'y'. */
@@ -535,19 +535,19 @@ static void main_LTSts_wrapper(void)
   /* Initialize function input argument 'lshiftlocref'. */
   /* Initialize function input argument 'lts'. */
   /* Initialize function input argument 'model'. */
-  model = argInit_struct5_T();
+  model = argInit_struct2_T();
   /* Initialize function input argument 'nsamp'. */
   argInit_d2xd1_real_T(nsamp_data, nsamp_size);
   /* Call the entry-point 'LTSts_wrapper'. */
-  r = argInit_struct3_T();
-  r1 = argInit_struct4_T();
+  r = argInit_struct0_T();
+  r1 = argInit_struct1_T();
   LTSts_wrapper(y, conflev_tmp, dispresults_tmp, conflev_tmp, dispresults_tmp,
                 &r, &r1, &model, dispresults_tmp, conflev_tmp, dispresults_tmp,
                 nsamp_data, nsamp_size, conflev_tmp, conflev_tmp, conflev_tmp,
                 dispresults_tmp, &out, C);
   emxDestroyArray_real_T(C);
-  emxDestroy_struct6_T(out);
-  emxDestroy_struct5_T(model);
+  emxDestroy_struct_LTSts_T(out);
+  emxDestroy_struct2_T(model);
   emxDestroyArray_real_T(y);
 }
 
@@ -556,12 +556,12 @@ static void main_LXS_wrapper(void)
   emxArray_real_T *C;
   emxArray_real_T *X;
   emxArray_real_T *y;
-  struct8_T out;
+  struct_LXSlmsscalar_T out;
   double bonflevoutX_data;
   double conflev_tmp;
   int bonflevoutX_size[2];
   bool intercept_tmp;
-  emxInit_struct8_T(&out);
+  emxInit_struct_LXSlmsscalar_T(&out);
   emxInitArray_real_T(&C, 2);
   /* Initialize function 'LXS_wrapper' input arguments. */
   /* Initialize function input argument 'y'. */
@@ -578,7 +578,7 @@ static void main_LXS_wrapper(void)
               intercept_tmp, intercept_tmp, conflev_tmp, intercept_tmp,
               intercept_tmp, &out, C);
   emxDestroyArray_real_T(C);
-  emxDestroy_struct8_T(out);
+  emxDestroy_struct_LXSlmsscalar_T(out);
   emxDestroyArray_real_T(X);
   emxDestroyArray_real_T(y);
 }
@@ -588,13 +588,13 @@ static void main_LXS_wrapper1(void)
   emxArray_real_T *C;
   emxArray_real_T *X;
   emxArray_real_T *y;
-  struct4_T r;
-  struct8_T out;
+  struct1_T r;
+  struct_LXSlmsstruct_T out;
   double bonflevoutX_data;
   double conflev_tmp;
   int bonflevoutX_size[2];
   bool intercept_tmp;
-  emxInit_struct8_T(&out);
+  emxInit_struct_LXSlmsstruct_T(&out);
   emxInitArray_real_T(&C, 2);
   /* Initialize function 'LXS_wrapper1' input arguments. */
   /* Initialize function input argument 'y'. */
@@ -607,13 +607,13 @@ static void main_LXS_wrapper1(void)
   intercept_tmp = argInit_boolean_T();
   /* Initialize function input argument 'lms'. */
   /* Call the entry-point 'LXS_wrapper1'. */
-  r = argInit_struct4_T();
+  r = argInit_struct1_T();
   LXS_wrapper1(y, X, (double *)&bonflevoutX_data, bonflevoutX_size, conflev_tmp,
                conflev_tmp, intercept_tmp, &r, intercept_tmp, intercept_tmp,
                intercept_tmp, conflev_tmp, intercept_tmp, intercept_tmp, &out,
                C);
   emxDestroyArray_real_T(C);
-  emxDestroy_struct8_T(out);
+  emxDestroy_struct_LXSlmsstruct_T(out);
   emxDestroyArray_real_T(X);
   emxDestroyArray_real_T(y);
 }
@@ -623,7 +623,7 @@ static void main_addt_wrapper(void)
   emxArray_real_T *X;
   emxArray_real_T *w;
   emxArray_real_T *y;
-  struct9_T out;
+  struct4_T out;
   double la_data;
   int la_size[2];
   bool intercept_tmp;

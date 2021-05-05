@@ -53,7 +53,7 @@ void emxExpand_cell_wrap_0(const emlrtStack *sp, emxArray_cell_wrap_0 *emxArray,
 
 void emxFreeStruct_cell_wrap_0(cell_wrap_0 *pStruct);
 
-void emxFreeStruct_struct0_T(struct0_T *pStruct);
+void emxFreeStruct_struct_FSRfan_T(struct_FSRfan_T *pStruct);
 
 void emxFreeStruct_struct_T(struct_T *pStruct);
 
@@ -73,8 +73,10 @@ void emxInitStruct_cell_wrap_0(const emlrtStack *sp, cell_wrap_0 *pStruct,
                                const emlrtRTEInfo *srcLocation,
                                boolean_T doPush);
 
-void emxInitStruct_struct0_T(const emlrtStack *sp, struct0_T *pStruct,
-                             const emlrtRTEInfo *srcLocation, boolean_T doPush);
+void emxInitStruct_struct_FSRfan_T(const emlrtStack *sp,
+                                   struct_FSRfan_T *pStruct,
+                                   const emlrtRTEInfo *srcLocation,
+                                   boolean_T doPush);
 
 void emxInitStruct_struct_T(const emlrtStack *sp, struct_T *pStruct,
                             const emlrtRTEInfo *srcLocation, boolean_T doPush);

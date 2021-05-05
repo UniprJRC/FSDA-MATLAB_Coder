@@ -61,7 +61,7 @@ void emxFreeStruct_cell_wrap_4(cell_wrap_4 *pStruct);
 
 void emxFreeStruct_struct2_T(struct2_T *pStruct);
 
-void emxFreeStruct_struct3_T(struct3_T *pStruct);
+void emxFreeStruct_struct_LTSts_T(struct_LTSts_T *pStruct);
 
 void emxFreeStruct_struct_T(struct_T *pStruct);
 
@@ -110,10 +110,11 @@ void emxInitStruct_cell_wrap_4(const emlrtStack *sp, cell_wrap_4 *pStruct,
 void emxInitStruct_struct2_T(const emlrtStack *sp, struct2_T *pStruct,
                              const emlrtRTEInfo *srcLocation, boolean_T doPush);
 
-void emxInitStruct_struct3_T(const emlrtStack *sp, struct3_T *pStruct,
-                             const emlrtRTEInfo *srcLocation, boolean_T doPush);
+void emxInitStruct_struct3_T(struct3_T *pStruct);
 
-void emxInitStruct_struct4_T(struct4_T *pStruct);
+void emxInitStruct_struct_LTSts_T(const emlrtStack *sp, struct_LTSts_T *pStruct,
+                                  const emlrtRTEInfo *srcLocation,
+                                  boolean_T doPush);
 
 void emxInitStruct_struct_T(const emlrtStack *sp, struct_T *pStruct,
                             const emlrtRTEInfo *srcLocation, boolean_T doPush);

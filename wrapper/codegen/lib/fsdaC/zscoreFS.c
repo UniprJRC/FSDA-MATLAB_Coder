@@ -14,10 +14,10 @@
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
 #include "median.h"
-#include "pdist.h"
 #include "rt_nonfinite.h"
 #include "sort.h"
 #include "vvarstd.h"
+#include "rt_nonfinite.h"
 #include <math.h>
 
 /* Function Definitions */
@@ -930,6 +930,7 @@ void c_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
 void zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
               double *sigma)
 {
+  emxArray_boolean_T *logIndX;
   emxArray_real_T *b_xsor;
   emxArray_real_T *distord;
   emxArray_real_T *xbinned;
@@ -940,9 +941,11 @@ void zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   int half;
   int i;
   int i1;
+  int i2;
   int ii;
   int loop_ub;
   int nbins;
+  int x;
   emxInit_real_T(&xsor, 1);
   /* zscoreFS computes (robust) standardized z scores */
   /*  */
@@ -1333,9 +1336,9 @@ void zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
     emxInit_real_T(&xbinned, 1);
     c_sort(xsor);
     nbins = (int)floor((double)X->size[0] / 10.0);
-    half = xbinned->size[0];
+    i1 = xbinned->size[0];
     xbinned->size[0] = nbins;
-    emxEnsureCapacity_real_T(xbinned, half);
+    emxEnsureCapacity_real_T(xbinned, i1);
     ninbins = floor((double)X->size[0] / (double)nbins);
     emxInit_real_T(&b_xsor, 1);
     for (ii = 0; ii < nbins; ii++) {
@@ -1347,36 +1350,36 @@ void zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
       if ((d != 0.0) && (ii + 1 == nbins)) {
         d = (((double)ii + 1.0) - 1.0) * ninbins + 1.0;
         if (d > (double)i + 1.0) {
-          half = 0;
-          i1 = -1;
+          i1 = 0;
+          i2 = -1;
         } else {
-          half = (int)d - 1;
-          i1 = i;
+          i1 = (int)d - 1;
+          i2 = i;
         }
-        loop_ub = i1 - half;
-        i1 = b_xsor->size[0];
+        loop_ub = i2 - i1;
+        i2 = b_xsor->size[0];
         b_xsor->size[0] = loop_ub + 1;
-        emxEnsureCapacity_real_T(b_xsor, i1);
-        for (i1 = 0; i1 <= loop_ub; i1++) {
-          b_xsor->data[i1] = xsor->data[half + i1];
+        emxEnsureCapacity_real_T(b_xsor, i2);
+        for (i2 = 0; i2 <= loop_ub; i2++) {
+          b_xsor->data[i2] = xsor->data[i1 + i2];
         }
         xbinned->data[ii] = median(b_xsor);
       } else {
         d = (((double)ii + 1.0) - 1.0) * ninbins + 1.0;
         d1 = ((double)ii + 1.0) * ninbins;
         if (d > d1) {
-          half = 0;
           i1 = 0;
+          i2 = 0;
         } else {
-          half = (int)d - 1;
-          i1 = (int)d1;
+          i1 = (int)d - 1;
+          i2 = (int)d1;
         }
-        loop_ub = i1 - half;
-        i1 = b_xsor->size[0];
+        loop_ub = i2 - i1;
+        i2 = b_xsor->size[0];
         b_xsor->size[0] = loop_ub;
-        emxEnsureCapacity_real_T(b_xsor, i1);
-        for (i1 = 0; i1 < loop_ub; i1++) {
-          b_xsor->data[i1] = xsor->data[half + i1];
+        emxEnsureCapacity_real_T(b_xsor, i2);
+        for (i2 = 0; i2 < loop_ub; i2++) {
+          b_xsor->data[i2] = xsor->data[i1 + i2];
         }
         xbinned->data[ii] = median(b_xsor);
       }
@@ -1393,11 +1396,52 @@ void zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
     /*  Redefine x with binned x */
     /*  Redefine n with number of bins */
   }
-  emxInit_real_T(&distord, 2);
-  half = (int)floor((double)nbins / 2.0);
+  x = (int)floor((double)nbins / 2.0);
   /*  Compute the n*(n-1)/2 pairwise ordered distances */
   /*  Use function pdist of statistics toolbox */
-  pdist(xsor, distord);
+  half = xsor->size[0] * (xsor->size[0] - 1) / 2;
+  emxInit_real_T(&distord, 2);
+  if (xsor->size[0] == 0) {
+    distord->size[0] = 1;
+    distord->size[1] = 0;
+  } else {
+    emxInit_boolean_T(&logIndX, 2);
+    i = logIndX->size[0] * logIndX->size[1];
+    logIndX->size[0] = 1;
+    logIndX->size[1] = xsor->size[0];
+    emxEnsureCapacity_boolean_T(logIndX, i);
+    loop_ub = xsor->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      logIndX->data[i] = true;
+    }
+    i = xsor->size[0];
+    for (loop_ub = 0; loop_ub < i; loop_ub++) {
+      if (rtIsNaN(xsor->data[loop_ub])) {
+        logIndX->data[loop_ub] = false;
+      }
+    }
+    i = distord->size[0] * distord->size[1];
+    distord->size[0] = 1;
+    distord->size[1] = half;
+    emxEnsureCapacity_real_T(distord, i);
+    for (i = 0; i < half; i++) {
+      distord->data[i] = rtNaN;
+    }
+    half = 0;
+    i = xsor->size[0];
+    for (ii = 0; ii <= i - 2; ii++) {
+      i1 = ii + 2;
+      i2 = xsor->size[0];
+      for (loop_ub = i1; loop_ub <= i2; loop_ub++) {
+        if (logIndX->data[ii] && logIndX->data[loop_ub - 1]) {
+          distord->data[((half + loop_ub) - ii) - 2] =
+              fabs(xsor->data[ii] - xsor->data[loop_ub - 1]);
+        }
+      }
+      half = ((half + xsor->size[0]) - ii) - 1;
+    }
+    emxFree_boolean_T(&logIndX);
+  }
   d_sort(distord);
   /*         If statistic toolbox is not present it is possible to use the
    * following code */
@@ -1455,10 +1499,9 @@ void zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
     }
     break;
   }
-  *sigma =
-      ninbins * (2.2219 * distord->data[(int)(0.5 * ((double)half + 1.0) *
-                                              (((double)half + 1.0) - 1.0)) -
-                                        1]);
+  *sigma = ninbins * (2.2219 * distord->data[(int)(0.5 * ((double)x + 1.0) *
+                                                   (((double)x + 1.0) - 1.0)) -
+                                             1]);
   i = xsor->size[0];
   xsor->size[0] = X->size[0];
   emxEnsureCapacity_real_T(xsor, i);

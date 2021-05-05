@@ -58,4 +58,7 @@ assert(isa(yxsave, 'logical'));
 [out,C] = LXS(y,X, ...
     'bonflevoutX',bonflevoutX,'conflev',conflev,'h',h,'intercept',intercept,'lms',lms,...
     'nocheck',nocheck,'msg',msg,'nomes',nomes,'nsamp',nsamp','rew',rew,'yxsave',yxsave);
+
+coder.cstructname(out,'struct_LXSlmsscalar_T');
+
 end

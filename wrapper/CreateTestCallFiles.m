@@ -92,14 +92,15 @@ function ComptimesAll = CreateTestCallFiles(varargin)
 
 %{
     % CreateTestCallFiles with all default options.
+    % Call codegen for each single file independently and sharing functions.
     % All the files contained in the current folder with extension .m whose
-    % name contains the word wrapper are:
-    % 1) converted into mex and tested whether the output of mex files is
-    % exactly the same as the output of the corresponding m file (the check
-    % is done using the call to the corresponding _test.m file. Subfolder
-    % mex after the check is deleted.
-    % 2) converted into C using just a single call to codegen with option
-    % -o and name fsdaC for the generated library.
+    % name contains the word wrapper are converted into mex and tested
+    % whether the output of mex files is exactly the same as the output of
+    % the corresponding m file (the check is done using the call to the
+    % corresponding _test.m file). Subfolder mex after the check is
+    % deleted. The conversion into C is also done using just a single call
+    % to codegen with option -o and name fsdaC for the generated library is
+    % used.
     ComptimesAll=CreateTestCallFiles();
 %}
 
@@ -107,15 +108,15 @@ function ComptimesAll = CreateTestCallFiles(varargin)
     % CreateTestC with option CreateMexFile set to false.
     % In this case mex files are not generated for testing that the output
     % of the conversion is the same as that of the original .m files.
-    % Just the overall compilation is call.
+    % Just the overall compilation is called.
     ComptimesAll=CreateTestCallFiles('CreateMexFile',false)
 %}
 
 
 %{
     % CreateTestC with options CreateMexFile and codegenIndependent.
-    % In this example codegen is also done independently for each
-    % individual file.
+    % In this example codegen is also called independently for each
+    % individual file and mex files are not generated.
     ComptimesAll=CreateTestCallFiles('CreateMexFile',false,'codegenIndependent',true)
 %}
 

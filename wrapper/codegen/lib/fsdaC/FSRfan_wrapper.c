@@ -43,7 +43,7 @@ void FSRfan_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                     bool intercept, bool nocheck, const emxArray_real_T *la,
                     double h, double nsamp, const emxArray_real_T *lms,
                     double init, const emxArray_char_T *family, bool msg,
-                    struct2_T *out)
+                    struct_FSRfan_T *out)
 {
   emxArray_boolean_T *bsbT;
   emxArray_boolean_T *d_y;
@@ -68,7 +68,7 @@ void FSRfan_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   emxArray_real_T *yb;
   emxArray_real_T *z;
   emxArray_real_T *zb;
-  struct8_T expl_temp;
+  struct_LXSlmsstruct_T expl_temp;
   double outSCpn_Score_data[4];
   double BoxCox;
   double b_expl_temp;
@@ -1154,7 +1154,7 @@ void FSRfan_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   emxInit_real_T(&unit, 1);
   emxInit_int32_T(&iidx, 1);
   emxInit_real_T(&a, 1);
-  emxInitStruct_struct8_T(&expl_temp);
+  c_emxInitStruct_struct_LXSlmsst(&expl_temp);
   for (b_i = 0; b_i < b_n; b_i++) {
     if (BoxCox == 1.0) {
       /*  Construct transformed z according to power tansformation */
@@ -1498,7 +1498,7 @@ void FSRfan_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     }
   }
   emxFree_real_T(&c_y);
-  emxFreeStruct_struct8_T(&expl_temp);
+  c_emxFreeStruct_struct_LXSlmsst(&expl_temp);
   emxFree_real_T(&a);
   emxFree_int32_T(&iidx);
   emxFree_real_T(&unit);

@@ -52,4 +52,7 @@ assert(isa(weak, 'logical'));
 [out] = FSR(y,X,   'bsbmfullrank',bsbmfullrank,'bonflev',bonflev,...
     'h',h,'init',init,'intercept',intercept,'lms',lms,'msg',msg,...
     'nocheck',nocheck,'nsamp',nsamp','threshoutX',threshoutX,'weak',weak);
+
+coder.cstructname(out,'struct_FSR_T');
+
 end

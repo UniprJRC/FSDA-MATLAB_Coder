@@ -17,6 +17,31 @@
 #include <string.h>
 
 /* Function Definitions */
+void c_emxFreeStruct_struct_LXSlmssc(struct_LXSlmsscalar_T *pStruct)
+{
+  emxFree_boolean_T(&pStruct->weights);
+  emxFree_real_T(&pStruct->beta);
+  emxFree_real_T(&pStruct->residuals);
+  emxFree_real_T(&pStruct->bs);
+  emxFree_real_T(&pStruct->outliers);
+  emxFree_real_T(&pStruct->X);
+  emxFree_real_T(&pStruct->y);
+}
+
+void c_emxInitStruct_struct_LXSlmssc(const emlrtStack *sp,
+                                     struct_LXSlmsscalar_T *pStruct,
+                                     const emlrtRTEInfo *srcLocation,
+                                     boolean_T doPush)
+{
+  emxInit_boolean_T(sp, &pStruct->weights, 1, srcLocation, doPush);
+  emxInit_real_T(sp, &pStruct->beta, 1, srcLocation, doPush);
+  emxInit_real_T(sp, &pStruct->residuals, 1, srcLocation, doPush);
+  emxInit_real_T(sp, &pStruct->bs, 2, srcLocation, doPush);
+  emxInit_real_T(sp, &pStruct->outliers, 1, srcLocation, doPush);
+  emxInit_real_T(sp, &pStruct->X, 2, srcLocation, doPush);
+  emxInit_real_T(sp, &pStruct->y, 2, srcLocation, doPush);
+}
+
 void emxEnsureCapacity_boolean_T(const emlrtStack *sp,
                                  emxArray_boolean_T *emxArray, int32_T oldNumel,
                                  const emlrtRTEInfo *srcLocation)
@@ -280,17 +305,6 @@ void emxEnsureCapacity_uint32_T(const emlrtStack *sp,
   }
 }
 
-void emxFreeStruct_struct0_T(struct0_T *pStruct)
-{
-  emxFree_boolean_T(&pStruct->weights);
-  emxFree_real_T(&pStruct->beta);
-  emxFree_real_T(&pStruct->residuals);
-  emxFree_real_T(&pStruct->bs);
-  emxFree_real_T(&pStruct->outliers);
-  emxFree_real_T(&pStruct->X);
-  emxFree_real_T(&pStruct->y);
-}
-
 void emxFree_boolean_T(emxArray_boolean_T **pEmxArray)
 {
   if (*pEmxArray != (emxArray_boolean_T *)NULL) {
@@ -363,18 +377,6 @@ void emxFree_uint32_T(emxArray_uint32_T **pEmxArray)
     emlrtFreeMex(*pEmxArray);
     *pEmxArray = (emxArray_uint32_T *)NULL;
   }
-}
-
-void emxInitStruct_struct0_T(const emlrtStack *sp, struct0_T *pStruct,
-                             const emlrtRTEInfo *srcLocation, boolean_T doPush)
-{
-  emxInit_boolean_T(sp, &pStruct->weights, 1, srcLocation, doPush);
-  emxInit_real_T(sp, &pStruct->beta, 1, srcLocation, doPush);
-  emxInit_real_T(sp, &pStruct->residuals, 1, srcLocation, doPush);
-  emxInit_real_T(sp, &pStruct->bs, 2, srcLocation, doPush);
-  emxInit_real_T(sp, &pStruct->outliers, 1, srcLocation, doPush);
-  emxInit_real_T(sp, &pStruct->X, 2, srcLocation, doPush);
-  emxInit_real_T(sp, &pStruct->y, 2, srcLocation, doPush);
 }
 
 void emxInit_boolean_T(const emlrtStack *sp, emxArray_boolean_T **pEmxArray,

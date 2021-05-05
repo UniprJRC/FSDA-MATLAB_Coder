@@ -16,7 +16,6 @@
 #include "fsdaC_internal_types.h"
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
-#include "omp.h"
 #include <stddef.h>
 #include <stdlib.h>
 

@@ -300,7 +300,7 @@ void emxFreeStruct_cell_wrap_0(cell_wrap_0 *pStruct)
   emxFree_real_T(&pStruct->f1);
 }
 
-void emxFreeStruct_struct0_T(struct0_T *pStruct)
+void emxFreeStruct_struct_FSRfan_T(struct_FSRfan_T *pStruct)
 {
   emxFree_real_T(&pStruct->Score);
   emxFree_real_T(&pStruct->la);
@@ -414,8 +414,10 @@ void emxInitStruct_cell_wrap_0(const emlrtStack *sp, cell_wrap_0 *pStruct,
   emxInit_real_T(sp, &pStruct->f1, 2, srcLocation, doPush);
 }
 
-void emxInitStruct_struct0_T(const emlrtStack *sp, struct0_T *pStruct,
-                             const emlrtRTEInfo *srcLocation, boolean_T doPush)
+void emxInitStruct_struct_FSRfan_T(const emlrtStack *sp,
+                                   struct_FSRfan_T *pStruct,
+                                   const emlrtRTEInfo *srcLocation,
+                                   boolean_T doPush)
 {
   emxInit_real_T(sp, &pStruct->Score, 2, srcLocation, doPush);
   emxInit_real_T(sp, &pStruct->la, 2, srcLocation, doPush);

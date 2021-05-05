@@ -42,4 +42,7 @@ assert(isscalar(rf));
 [out] = FSM(Y, ...
     'bonflev',bonflev,'crit',crit,'init',init,'m0',m0,'msg',msg,...
     'nocheck',nocheck,'rf',rf);
+
+coder.cstructname(out,'struct_FSM_T');
+
 end

@@ -15,7 +15,6 @@
 /* Include files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
-#include "omp.h"
 #include <stddef.h>
 #include <stdlib.h>
 
@@ -87,17 +86,19 @@ extern void emxDestroyArray_real32_T(emxArray_real32_T *emxArray);
 
 extern void emxDestroyArray_real_T(emxArray_real_T *emxArray);
 
-extern void emxDestroy_struct0_T(struct0_T emxArray);
-
-extern void emxDestroy_struct1_T(struct1_T emxArray);
-
 extern void emxDestroy_struct2_T(struct2_T emxArray);
 
-extern void emxDestroy_struct5_T(struct5_T emxArray);
+extern void emxDestroy_struct_FSM_T(struct_FSM_T emxArray);
 
-extern void emxDestroy_struct6_T(struct6_T emxArray);
+extern void emxDestroy_struct_FSR_T(struct_FSR_T emxArray);
 
-extern void emxDestroy_struct8_T(struct8_T emxArray);
+extern void emxDestroy_struct_FSRfan_T(struct_FSRfan_T emxArray);
+
+extern void emxDestroy_struct_LTSts_T(struct_LTSts_T emxArray);
+
+extern void emxDestroy_struct_LXSlmsscalar_T(struct_LXSlmsscalar_T emxArray);
+
+extern void emxDestroy_struct_LXSlmsstruct_T(struct_LXSlmsstruct_T emxArray);
 
 extern void emxInitArray_char_T(emxArray_char_T **pEmxArray, int numDimensions);
 
@@ -106,17 +107,19 @@ extern void emxInitArray_real32_T(emxArray_real32_T **pEmxArray,
 
 extern void emxInitArray_real_T(emxArray_real_T **pEmxArray, int numDimensions);
 
-extern void emxInit_struct0_T(struct0_T *pStruct);
-
-extern void emxInit_struct1_T(struct1_T *pStruct);
-
 extern void emxInit_struct2_T(struct2_T *pStruct);
 
-extern void emxInit_struct5_T(struct5_T *pStruct);
+extern void emxInit_struct_FSM_T(struct_FSM_T *pStruct);
 
-extern void emxInit_struct6_T(struct6_T *pStruct);
+extern void emxInit_struct_FSR_T(struct_FSR_T *pStruct);
 
-extern void emxInit_struct8_T(struct8_T *pStruct);
+extern void emxInit_struct_FSRfan_T(struct_FSRfan_T *pStruct);
+
+extern void emxInit_struct_LTSts_T(struct_LTSts_T *pStruct);
+
+extern void emxInit_struct_LXSlmsscalar_T(struct_LXSlmsscalar_T *pStruct);
+
+extern void emxInit_struct_LXSlmsstruct_T(struct_LXSlmsstruct_T *pStruct);
 
 #ifdef __cplusplus
 }

@@ -57,7 +57,7 @@ static void p_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
                                emxArray_real_T *y);
 
 static const mxArray *pb_emlrt_marshallOut(const emlrtStack *sp,
-                                           const struct0_T *u);
+                                           const struct_FSR_T *u);
 
 static boolean_T q_emlrt_marshallIn(const emlrtStack *sp,
                                     const mxArray *bsbmfullrank,
@@ -186,7 +186,7 @@ static void p_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
 }
 
 static const mxArray *pb_emlrt_marshallOut(const emlrtStack *sp,
-                                           const struct0_T *u)
+                                           const struct_FSR_T *u)
 {
   static const int32_T iv1[2] = {1, 3};
   static const char_T *sv[13] = {
@@ -399,7 +399,7 @@ void FSR_wrapper_api(FSR_wrapperStackData *SD, const mxArray *const prhs[13],
   };
   emxArray_real_T *X;
   emxArray_real_T *y;
-  struct0_T out;
+  struct_FSR_T out;
   real_T h;
   real_T init;
   real_T lms;
@@ -417,7 +417,7 @@ void FSR_wrapper_api(FSR_wrapperStackData *SD, const mxArray *const prhs[13],
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
   emxInit_real_T(&st, &y, 1, &mgb_emlrtRTEI, true);
   emxInit_real_T(&st, &X, 2, &mgb_emlrtRTEI, true);
-  emxInitStruct_struct0_T(&st, &out, &mgb_emlrtRTEI, true);
+  emxInitStruct_struct_FSR_T(&st, &out, &mgb_emlrtRTEI, true);
   /* Marshall function inputs */
   y->canFreeData = false;
   m_emlrt_marshallIn(&st, emlrtAlias(prhs[0]), "y", y);
@@ -442,7 +442,7 @@ void FSR_wrapper_api(FSR_wrapperStackData *SD, const mxArray *const prhs[13],
               (real_T *)threshoutX_data, threshoutX_size, weak, &out);
   /* Marshall function outputs */
   *plhs = pb_emlrt_marshallOut(&st, &out);
-  emxFreeStruct_struct0_T(&out);
+  emxFreeStruct_struct_FSR_T(&out);
   emxFree_real_T(&X);
   emxFree_real_T(&y);
   emlrtHeapReferenceStackLeaveFcnR2012b(&st);

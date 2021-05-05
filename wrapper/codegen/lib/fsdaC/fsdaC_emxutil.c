@@ -17,9 +17,53 @@
 #include <string.h>
 
 /* Function Definitions */
+void c_emxFreeStruct_struct_LXSlmssc(struct_LXSlmsscalar_T *pStruct)
+{
+  emxFree_boolean_T(&pStruct->weights);
+  emxFree_real_T(&pStruct->beta);
+  emxFree_real_T(&pStruct->residuals);
+  emxFree_real_T(&pStruct->bs);
+  emxFree_real_T(&pStruct->outliers);
+  emxFree_real_T(&pStruct->X);
+  emxFree_real_T(&pStruct->y);
+}
+
+void c_emxFreeStruct_struct_LXSlmsst(struct_LXSlmsstruct_T *pStruct)
+{
+  emxFree_boolean_T(&pStruct->weights);
+  emxFree_real_T(&pStruct->beta);
+  emxFree_real_T(&pStruct->residuals);
+  emxFree_real_T(&pStruct->bs);
+  emxFree_real_T(&pStruct->outliers);
+  emxFree_real_T(&pStruct->X);
+  emxFree_real_T(&pStruct->y);
+}
+
 void c_emxInitStruct_matlab_internal(e_matlab_internal_coder_tabular *pStruct)
 {
   emxInitMatrix_cell_wrap_48(&pStruct->labels[0]);
+}
+
+void c_emxInitStruct_struct_LXSlmssc(struct_LXSlmsscalar_T *pStruct)
+{
+  emxInit_boolean_T(&pStruct->weights, 1);
+  emxInit_real_T(&pStruct->beta, 1);
+  emxInit_real_T(&pStruct->residuals, 1);
+  emxInit_real_T(&pStruct->bs, 2);
+  emxInit_real_T(&pStruct->outliers, 1);
+  emxInit_real_T(&pStruct->X, 2);
+  emxInit_real_T(&pStruct->y, 2);
+}
+
+void c_emxInitStruct_struct_LXSlmsst(struct_LXSlmsstruct_T *pStruct)
+{
+  emxInit_boolean_T(&pStruct->weights, 1);
+  emxInit_real_T(&pStruct->beta, 1);
+  emxInit_real_T(&pStruct->residuals, 1);
+  emxInit_real_T(&pStruct->bs, 2);
+  emxInit_real_T(&pStruct->outliers, 1);
+  emxInit_real_T(&pStruct->X, 2);
+  emxInit_real_T(&pStruct->y, 2);
 }
 
 void d_emxInitStruct_matlab_internal(f_matlab_internal_coder_tabular *pStruct)
@@ -367,7 +411,12 @@ void emxFreeStruct_cell_wrap_6(cell_wrap_6 *pStruct)
   emxFree_real_T(&pStruct->f1);
 }
 
-void emxFreeStruct_struct0_T(struct0_T *pStruct)
+void emxFreeStruct_struct2_T(struct2_T *pStruct)
+{
+  emxFree_real_T(&pStruct->X);
+}
+
+void emxFreeStruct_struct_FSM_T(struct_FSM_T *pStruct)
 {
   emxFree_real_T(&pStruct->outliers);
   emxFree_real_T(&pStruct->loc);
@@ -377,7 +426,7 @@ void emxFreeStruct_struct0_T(struct0_T *pStruct)
   emxFree_real_T(&pStruct->Un);
 }
 
-void emxFreeStruct_struct1_T(struct1_T *pStruct)
+void emxFreeStruct_struct_FSR_T(struct_FSR_T *pStruct)
 {
   emxFree_real_T(&pStruct->ListOut);
   emxFree_real_T(&pStruct->outliers);
@@ -392,7 +441,7 @@ void emxFreeStruct_struct1_T(struct1_T *pStruct)
   emxFree_real_T(&pStruct->residuals);
 }
 
-void emxFreeStruct_struct2_T(struct2_T *pStruct)
+void emxFreeStruct_struct_FSRfan_T(struct_FSRfan_T *pStruct)
 {
   emxFree_real_T(&pStruct->Score);
   emxFree_real_T(&pStruct->la);
@@ -405,12 +454,7 @@ void emxFreeStruct_struct2_T(struct2_T *pStruct)
   emxFree_real_T(&pStruct->Scoreb);
 }
 
-void emxFreeStruct_struct5_T(struct5_T *pStruct)
-{
-  emxFree_real_T(&pStruct->X);
-}
-
-void emxFreeStruct_struct6_T(struct6_T *pStruct)
+void emxFreeStruct_struct_LTSts_T(struct_LTSts_T *pStruct)
 {
   emxFree_real_T(&pStruct->RES);
   emxFree_real_T(&pStruct->Hsubset);
@@ -428,17 +472,6 @@ void emxFreeStruct_struct6_T(struct6_T *pStruct)
   emxFree_real_T(&pStruct->X);
   emxFree_real_T(&pStruct->invXX);
   emxFreeStruct_table(&pStruct->Btable);
-}
-
-void emxFreeStruct_struct8_T(struct8_T *pStruct)
-{
-  emxFree_boolean_T(&pStruct->weights);
-  emxFree_real_T(&pStruct->beta);
-  emxFree_real_T(&pStruct->residuals);
-  emxFree_real_T(&pStruct->bs);
-  emxFree_real_T(&pStruct->outliers);
-  emxFree_real_T(&pStruct->X);
-  emxFree_real_T(&pStruct->y);
 }
 
 void emxFreeStruct_struct_T(struct_T *pStruct)
@@ -633,7 +666,20 @@ void emxInitStruct_cell_wrap_6(cell_wrap_6 *pStruct)
   emxInit_real_T(&pStruct->f1, 1);
 }
 
-void emxInitStruct_struct0_T(struct0_T *pStruct)
+void emxInitStruct_struct2_T(struct2_T *pStruct)
+{
+  pStruct->ARp.size[0] = 0;
+  pStruct->ARp.size[1] = 0;
+  emxInit_real_T(&pStruct->X, 2);
+}
+
+void emxInitStruct_struct3_T(struct3_T *pStruct)
+{
+  pStruct->Description.size[0] = 0;
+  pStruct->Description.size[1] = 0;
+}
+
+void emxInitStruct_struct_FSM_T(struct_FSM_T *pStruct)
 {
   emxInit_real_T(&pStruct->outliers, 2);
   emxInit_real_T(&pStruct->loc, 2);
@@ -647,7 +693,7 @@ void emxInitStruct_struct0_T(struct0_T *pStruct)
   pStruct->class.size[1] = 0;
 }
 
-void emxInitStruct_struct1_T(struct1_T *pStruct)
+void emxInitStruct_struct_FSR_T(struct_FSR_T *pStruct)
 {
   emxInit_real_T(&pStruct->ListOut, 2);
   emxInit_real_T(&pStruct->outliers, 2);
@@ -662,7 +708,7 @@ void emxInitStruct_struct1_T(struct1_T *pStruct)
   emxInit_real_T(&pStruct->residuals, 2);
 }
 
-void emxInitStruct_struct2_T(struct2_T *pStruct)
+void emxInitStruct_struct_FSRfan_T(struct_FSRfan_T *pStruct)
 {
   emxInit_real_T(&pStruct->Score, 2);
   emxInit_real_T(&pStruct->la, 2);
@@ -675,14 +721,7 @@ void emxInitStruct_struct2_T(struct2_T *pStruct)
   emxInit_real_T(&pStruct->Scoreb, 2);
 }
 
-void emxInitStruct_struct5_T(struct5_T *pStruct)
-{
-  pStruct->ARp.size[0] = 0;
-  pStruct->ARp.size[1] = 0;
-  emxInit_real_T(&pStruct->X, 2);
-}
-
-void emxInitStruct_struct6_T(struct6_T *pStruct)
+void emxInitStruct_struct_LTSts_T(struct_LTSts_T *pStruct)
 {
   emxInit_real_T(&pStruct->RES, 1);
   emxInit_real_T(&pStruct->Hsubset, 1);
@@ -706,23 +745,6 @@ void emxInitStruct_struct6_T(struct6_T *pStruct)
   pStruct->LastHarmonicPval.size[1] = 0;
   pStruct->LevelShiftPval.size[0] = 0;
   pStruct->LevelShiftPval.size[1] = 0;
-}
-
-void emxInitStruct_struct7_T(struct7_T *pStruct)
-{
-  pStruct->Description.size[0] = 0;
-  pStruct->Description.size[1] = 0;
-}
-
-void emxInitStruct_struct8_T(struct8_T *pStruct)
-{
-  emxInit_boolean_T(&pStruct->weights, 1);
-  emxInit_real_T(&pStruct->beta, 1);
-  emxInit_real_T(&pStruct->residuals, 1);
-  emxInit_real_T(&pStruct->bs, 2);
-  emxInit_real_T(&pStruct->outliers, 1);
-  emxInit_real_T(&pStruct->X, 2);
-  emxInit_real_T(&pStruct->y, 2);
 }
 
 void emxInitStruct_struct_T(struct_T *pStruct)
@@ -752,7 +774,7 @@ void emxInitStruct_table(table *pStruct)
   c_emxInitStruct_matlab_internal(&pStruct->rowDim);
   d_emxInitStruct_matlab_internal(&pStruct->varDim);
   emxInitMatrix_cell_wrap_6(pStruct->data);
-  emxInitStruct_struct7_T(&pStruct->arrayProps);
+  emxInitStruct_struct3_T(&pStruct->arrayProps);
 }
 
 void emxInit_boolean_T(emxArray_boolean_T **pEmxArray, int numDimensions)

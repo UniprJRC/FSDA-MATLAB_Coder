@@ -35,7 +35,7 @@
 void addt_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                   const emxArray_real_T *w, bool intercept,
                   const double la_data[], const int la_size[2], bool nocheck,
-                  struct9_T *out)
+                  struct4_T *out)
 {
   emxArray_boolean_T *b_constcols;
   emxArray_boolean_T *b_r;

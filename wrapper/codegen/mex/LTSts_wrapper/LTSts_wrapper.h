@@ -30,7 +30,7 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y,
                    real_T nbestindexes, boolean_T nocheck,
                    const real_T nsamp_data[], const int32_T nsamp_size[2],
                    real_T refstepsALS, real_T reftolALS, real_T SmallSampleCor,
-                   boolean_T yxsave, struct3_T *out, emxArray_real_T *C);
+                   boolean_T yxsave, struct_LTSts_T *out, emxArray_real_T *C);
 
 emlrtCTX emlrtGetRootTLSGlobal(void);
 

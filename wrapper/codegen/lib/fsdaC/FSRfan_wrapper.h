@@ -15,7 +15,6 @@
 /* Include files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
-#include "omp.h"
 #include <stddef.h>
 #include <stdlib.h>
 
@@ -29,7 +28,7 @@ extern void FSRfan_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                            const emxArray_real_T *la, double h, double nsamp,
                            const emxArray_real_T *lms, double init,
                            const emxArray_char_T *family, bool msg,
-                           struct2_T *out);
+                           struct_FSRfan_T *out);
 
 #ifdef __cplusplus
 }

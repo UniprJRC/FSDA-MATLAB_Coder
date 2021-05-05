@@ -43,9 +43,9 @@
 void LXS_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
                   const double bonflevoutX_data[],
                   const int bonflevoutX_size[2], double conflev, double h,
-                  bool intercept, const struct4_T *lms, bool msg, bool nocheck,
+                  bool intercept, const struct1_T *lms, bool msg, bool nocheck,
                   bool nomes, double nsamp, bool rew, bool yxsave,
-                  struct8_T *out, emxArray_real_T *C)
+                  struct_LXSlmsstruct_T *out, emxArray_real_T *C)
 {
   emxArray_boolean_T *weights;
   emxArray_char_T_1x310 b_p;

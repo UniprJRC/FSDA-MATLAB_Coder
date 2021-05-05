@@ -41,7 +41,7 @@ static void l_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
                                const emlrtMsgIdentifier *parentId,
                                emxArray_real_T *y);
 
-static const mxArray *l_emlrt_marshallOut(const struct0_T *u);
+static const mxArray *l_emlrt_marshallOut(const struct_FSRfan_T *u);
 
 static void m_emlrt_marshallIn(const emlrtStack *sp, const mxArray *X,
                                const char_T *identifier, emxArray_real_T *y);
@@ -124,7 +124,7 @@ static void l_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
   emlrtDestroyArray(&u);
 }
 
-static const mxArray *l_emlrt_marshallOut(const struct0_T *u)
+static const mxArray *l_emlrt_marshallOut(const struct_FSRfan_T *u)
 {
   static const char_T *sv[9] = {"Score", "la",     "bs",     "Un",    "y",
                                 "X",     "Scorep", "Scoren", "Scoreb"};
@@ -337,7 +337,7 @@ void FSRfan_wrapper_api(const mxArray *const prhs[11], const mxArray **plhs)
   emxArray_real_T *la;
   emxArray_real_T *lms;
   emxArray_real_T *y;
-  struct0_T out;
+  struct_FSRfan_T out;
   real_T h;
   real_T init;
   real_T nsamp;
@@ -351,7 +351,7 @@ void FSRfan_wrapper_api(const mxArray *const prhs[11], const mxArray **plhs)
   emxInit_real_T(&st, &la, 1, &al_emlrtRTEI, true);
   emxInit_real_T(&st, &lms, 2, &al_emlrtRTEI, true);
   emxInit_char_T(&st, &family, 2, &al_emlrtRTEI, true);
-  emxInitStruct_struct0_T(&st, &out, &al_emlrtRTEI, true);
+  emxInitStruct_struct_FSRfan_T(&st, &out, &al_emlrtRTEI, true);
   /* Marshall function inputs */
   y->canFreeData = false;
   k_emlrt_marshallIn(&st, emlrtAlias(prhs[0]), "y", y);
@@ -373,7 +373,7 @@ void FSRfan_wrapper_api(const mxArray *const prhs[11], const mxArray **plhs)
                  msg, &out);
   /* Marshall function outputs */
   *plhs = l_emlrt_marshallOut(&out);
-  emxFreeStruct_struct0_T(&out);
+  emxFreeStruct_struct_FSRfan_T(&out);
   emxFree_char_T(&family);
   emxFree_real_T(&lms);
   emxFree_real_T(&la);

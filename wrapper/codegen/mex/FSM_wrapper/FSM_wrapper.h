@@ -27,6 +27,6 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp,
                  const int32_T bonflev_size[2], const char_T crit_data[],
                  const int32_T crit_size[2], real_T init,
                  const emxArray_real_T *m0, boolean_T msg, boolean_T nocheck,
-                 real_T rf, struct0_T *out);
+                 real_T rf, struct_FSM_T *out);
 
 /* End of code generation (FSM_wrapper.h) */

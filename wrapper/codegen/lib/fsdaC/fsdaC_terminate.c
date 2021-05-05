@@ -17,7 +17,7 @@
 /* Function Definitions */
 void fsdaC_terminate(void)
 {
-  omp_destroy_nest_lock(&emlrtNestLockGlobal);
+  /* (no terminate code required) */
   isInitialized_fsdaC = false;
 }
 

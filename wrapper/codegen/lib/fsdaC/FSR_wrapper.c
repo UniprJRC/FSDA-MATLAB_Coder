@@ -30,7 +30,7 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                  const int bonflev_size[2], double h, double init,
                  bool intercept, double lms, bool msg, bool nocheck,
                  double nsamp, const double threshoutX_data[],
-                 const int threshoutX_size[2], bool weak, struct1_T *out)
+                 const int threshoutX_size[2], bool weak, struct_FSR_T *out)
 {
   emxArray_boolean_T *x;
   emxArray_real_T *INP_Bcoeff;
@@ -47,7 +47,7 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   emxArray_real_T *constr;
   emxArray_real_T *d_y;
   emxArray_real_T *iniseq;
-  struct8_T expl_temp;
+  struct_LXSlmsstruct_T expl_temp;
   struct_T c_expl_temp;
   double bonflevoutX_data;
   double initdef;
@@ -759,7 +759,7 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   }
   emxInit_real_T(&INP_mdr, 2);
   emxInit_real_T(&d_y, 2);
-  emxInitStruct_struct8_T(&expl_temp);
+  c_emxInitStruct_struct_LXSlmsst(&expl_temp);
   /*  Start of the forward search */
   /*  Initialization necessary for MATLAB C-Coder */
   /*  Use as initial subset the one supplied by the user or the best according
@@ -886,7 +886,7 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   for (k = 0; k <= aoffset; k++) {
     b_expl_temp->data[k] = expl_temp.bs->data[k];
   }
-  emxFreeStruct_struct8_T(&expl_temp);
+  c_emxFreeStruct_struct_LXSlmsst(&expl_temp);
   emxInit_real_T(&INP_S2, 2);
   emxInit_real_T(&Un, 2);
   FSRmdr(b_y, b_X, b_expl_temp, init, msg, constr,

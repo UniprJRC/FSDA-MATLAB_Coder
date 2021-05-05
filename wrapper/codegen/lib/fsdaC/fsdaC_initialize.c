@@ -19,7 +19,6 @@
 /* Function Definitions */
 void fsdaC_initialize(void)
 {
-  omp_init_nest_lock(&emlrtNestLockGlobal);
   freq_not_empty_init();
   c_eml_rand_mt19937ar_stateful_i();
   isInitialized_fsdaC = true;

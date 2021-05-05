@@ -295,7 +295,7 @@ void FSR_wrapper(FSR_wrapperStackData *SD, const emlrtStack *sp,
                  boolean_T nocheck, real_T nsamp,
                  const real_T threshoutX_data[],
                  const int32_T threshoutX_size[2], boolean_T weak,
-                 struct0_T *out)
+                 struct_FSR_T *out)
 {
   static const int32_T b_iv[2] = {1, 76};
   static const char_T u[76] = {

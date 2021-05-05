@@ -60,4 +60,6 @@ assert(isa(msg, 'logical'));
 [out] = FSRfan(y,X, ...
     'intercept',intercept,'nocheck',nocheck,'la',la,'h',h,...
     'nsamp',nsamp,'lms',lms,'init',init','family',family,'msg',msg);
+
+coder.cstructname(out,'struct_FSRfan_T');
 end

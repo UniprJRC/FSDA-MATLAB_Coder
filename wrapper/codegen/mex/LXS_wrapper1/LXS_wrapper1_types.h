@@ -58,8 +58,8 @@ struct emxArray_boolean_T {
 typedef struct emxArray_boolean_T emxArray_boolean_T;
 #endif /* typedef_emxArray_boolean_T */
 
-#ifndef typedef_struct1_T
-#define typedef_struct1_T
+#ifndef typedef_struct_LXSlmsstruct_T
+#define typedef_struct_LXSlmsstruct_T
 typedef struct {
   emxArray_boolean_T *weights;
   boolean_T rew;
@@ -74,8 +74,8 @@ typedef struct {
   emxArray_real_T *X;
   emxArray_real_T *y;
   char_T class[3];
-} struct1_T;
-#endif /* typedef_struct1_T */
+} struct_LXSlmsstruct_T;
+#endif /* typedef_struct_LXSlmsstruct_T */
 
 #ifndef struct_emxArray_int32_T
 #define struct_emxArray_int32_T

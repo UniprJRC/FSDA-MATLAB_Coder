@@ -54,7 +54,7 @@ void emxEnsureCapacity_uint32_T(const emlrtStack *sp,
                                 emxArray_uint32_T *emxArray, int32_T oldNumel,
                                 const emlrtRTEInfo *srcLocation);
 
-void emxFreeStruct_struct0_T(struct0_T *pStruct);
+void emxFreeStruct_struct_FSR_T(struct_FSR_T *pStruct);
 
 void emxFreeStruct_struct_T(b_struct_T *pStruct);
 
@@ -76,8 +76,9 @@ void emxFree_real_T(emxArray_real_T **pEmxArray);
 
 void emxFree_uint32_T(emxArray_uint32_T **pEmxArray);
 
-void emxInitStruct_struct0_T(const emlrtStack *sp, struct0_T *pStruct,
-                             const emlrtRTEInfo *srcLocation, boolean_T doPush);
+void emxInitStruct_struct_FSR_T(const emlrtStack *sp, struct_FSR_T *pStruct,
+                                const emlrtRTEInfo *srcLocation,
+                                boolean_T doPush);
 
 void emxInitStruct_struct_T(const emlrtStack *sp, b_struct_T *pStruct,
                             const emlrtRTEInfo *srcLocation, boolean_T doPush);
