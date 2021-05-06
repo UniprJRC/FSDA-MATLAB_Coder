@@ -21,7 +21,7 @@
 #include <math.h>
 
 /* Variable Definitions */
-static emlrtRSInfo ef_emlrtRSI =
+static emlrtRSInfo ff_emlrtRSI =
     {
         46,    /* lineNo */
         "eps", /* fcnName */
@@ -30,7 +30,7 @@ static emlrtRSInfo ef_emlrtRSI =
                                                                           */
 };
 
-static emlrtRSInfo it_emlrtRSI = {
+static emlrtRSInfo mt_emlrtRSI = {
     20,           /* lineNo */
     "local_rank", /* fcnName */
     "C:\\Program "
@@ -38,7 +38,7 @@ static emlrtRSInfo it_emlrtRSI = {
                                                                         */
 };
 
-static emlrtRSInfo jt_emlrtRSI = {
+static emlrtRSInfo nt_emlrtRSI = {
     22,           /* lineNo */
     "local_rank", /* fcnName */
     "C:\\Program "
@@ -46,7 +46,7 @@ static emlrtRSInfo jt_emlrtRSI = {
                                                                         */
 };
 
-static emlrtRSInfo kt_emlrtRSI = {
+static emlrtRSInfo ot_emlrtRSI = {
     31,           /* lineNo */
     "local_rank", /* fcnName */
     "C:\\Program "
@@ -54,7 +54,7 @@ static emlrtRSInfo kt_emlrtRSI = {
                                                                         */
 };
 
-static emlrtRSInfo lt_emlrtRSI = {
+static emlrtRSInfo pt_emlrtRSI = {
     12,    /* lineNo */
     "svd", /* fcnName */
     "C:\\Program "
@@ -62,7 +62,7 @@ static emlrtRSInfo lt_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRSInfo mt_emlrtRSI = {
+static emlrtRSInfo qt_emlrtRSI = {
     15,    /* lineNo */
     "svd", /* fcnName */
     "C:\\Program "
@@ -70,7 +70,7 @@ static emlrtRSInfo mt_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRSInfo nt_emlrtRSI = {
+static emlrtRSInfo rt_emlrtRSI = {
     20,    /* lineNo */
     "svd", /* fcnName */
     "C:\\Program "
@@ -78,7 +78,7 @@ static emlrtRSInfo nt_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRSInfo ot_emlrtRSI = {
+static emlrtRSInfo st_emlrtRSI = {
     29,             /* lineNo */
     "anyNonFinite", /* fcnName */
     "C:\\Program "
@@ -86,7 +86,7 @@ static emlrtRSInfo ot_emlrtRSI = {
     "m" /* pathName */
 };
 
-static emlrtRSInfo pt_emlrtRSI =
+static emlrtRSInfo tt_emlrtRSI =
     {
         44,          /* lineNo */
         "vAllOrAny", /* fcnName */
@@ -95,7 +95,7 @@ static emlrtRSInfo pt_emlrtRSI =
         "internal\\vAllOrAny.m" /* pathName */
 };
 
-static emlrtRSInfo qt_emlrtRSI =
+static emlrtRSInfo ut_emlrtRSI =
     {
         103,                  /* lineNo */
         "flatVectorAllOrAny", /* fcnName */
@@ -104,7 +104,7 @@ static emlrtRSInfo qt_emlrtRSI =
         "internal\\vAllOrAny.m" /* pathName */
 };
 
-static emlrtRTEInfo ns_emlrtRTEI = {
+static emlrtRTEInfo jt_emlrtRTEI = {
     19,    /* lineNo */
     14,    /* colNo */
     "svd", /* fName */
@@ -113,7 +113,7 @@ static emlrtRTEInfo ns_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo os_emlrtRTEI = {
+static emlrtRTEInfo kt_emlrtRTEI = {
     20,     /* lineNo */
     5,      /* colNo */
     "rank", /* fName */
@@ -154,15 +154,15 @@ int32_T local_rank(const emlrtStack *sp, const emxArray_real_T *A)
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
   irank = 0;
   if ((A->size[0] != 0) && (A->size[1] != 0)) {
-    st.site = &it_emlrtRSI;
-    b_st.site = &lt_emlrtRSI;
-    c_st.site = &ot_emlrtRSI;
-    d_st.site = &pt_emlrtRSI;
+    st.site = &mt_emlrtRSI;
+    b_st.site = &pt_emlrtRSI;
+    c_st.site = &st_emlrtRSI;
+    d_st.site = &tt_emlrtRSI;
     nx = A->size[0] * A->size[1];
     p = true;
-    e_st.site = &qt_emlrtRSI;
+    e_st.site = &ut_emlrtRSI;
     if ((1 <= nx) && (nx > 2147483646)) {
-      f_st.site = &pf_emlrtRSI;
+      f_st.site = &qf_emlrtRSI;
       check_forloop_overflow_error(&f_st);
     }
     for (k = 0; k < nx; k++) {
@@ -171,33 +171,33 @@ int32_T local_rank(const emlrtStack *sp, const emxArray_real_T *A)
         p = false;
       }
     }
-    emxInit_real_T(&st, &s, 1, &os_emlrtRTEI, true);
+    emxInit_real_T(&st, &s, 1, &kt_emlrtRTEI, true);
     if (p) {
-      b_st.site = &mt_emlrtRSI;
+      b_st.site = &qt_emlrtRSI;
       svd(&b_st, A, s);
     } else {
-      emxInit_real_T(&st, &r, 2, &ns_emlrtRTEI, true);
+      emxInit_real_T(&st, &r, 2, &jt_emlrtRTEI, true);
       k = r->size[0] * r->size[1];
       r->size[0] = A->size[0];
       r->size[1] = A->size[1];
-      emxEnsureCapacity_real_T(&st, r, k, &ns_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, r, k, &jt_emlrtRTEI);
       nx = A->size[0] * A->size[1];
       for (k = 0; k < nx; k++) {
         r->data[k] = 0.0;
       }
-      b_st.site = &nt_emlrtRSI;
+      b_st.site = &rt_emlrtRSI;
       svd(&b_st, r, s);
       nx = s->size[0];
       k = s->size[0];
       s->size[0] = nx;
-      emxEnsureCapacity_real_T(&st, s, k, &os_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, s, k, &kt_emlrtRTEI);
       emxFree_real_T(&r);
       for (k = 0; k < nx; k++) {
         s->data[k] = rtNaN;
       }
     }
-    st.site = &jt_emlrtRSI;
-    b_st.site = &ef_emlrtRSI;
+    st.site = &nt_emlrtRSI;
+    b_st.site = &ff_emlrtRSI;
     absx = muDoubleScalarAbs(s->data[0]);
     if ((!muDoubleScalarIsInf(absx)) && (!muDoubleScalarIsNaN(absx))) {
       if (absx <= 2.2250738585072014E-308) {
@@ -210,9 +210,9 @@ int32_T local_rank(const emlrtStack *sp, const emxArray_real_T *A)
       absx = rtNaN;
     }
     absx *= (real_T)muIntScalarMax_sint32(A->size[0], A->size[1]);
-    st.site = &kt_emlrtRSI;
+    st.site = &ot_emlrtRSI;
     if ((1 <= s->size[0]) && (s->size[0] > 2147483646)) {
-      b_st.site = &pf_emlrtRSI;
+      b_st.site = &qf_emlrtRSI;
       check_forloop_overflow_error(&b_st);
     }
     k = 0;

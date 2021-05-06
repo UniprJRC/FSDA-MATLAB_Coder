@@ -19,7 +19,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo lf_emlrtRSI =
+static emlrtRSInfo mf_emlrtRSI =
     {
         80,         /* lineNo */
         "fltpower", /* fcnName */
@@ -28,21 +28,12 @@ static emlrtRSInfo lf_emlrtRSI =
                                                                           */
 };
 
-static emlrtRSInfo of_emlrtRSI = {
+static emlrtRSInfo pf_emlrtRSI = {
     200,        /* lineNo */
     "flatIter", /* fcnName */
     "C:\\Program "
     "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
     "internal\\applyBinaryScalarFunction.m" /* pathName */
-};
-
-static emlrtRTEInfo fj_emlrtRTEI = {
-    127,                         /* lineNo */
-    6,                           /* colNo */
-    "applyBinaryScalarFunction", /* fName */
-    "C:\\Program "
-    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
-    "internal\\applyBinaryScalarFunction.m" /* pName */
 };
 
 /* Function Definitions */
@@ -58,7 +49,7 @@ void b_power(const emlrtStack *sp, const emxArray_real_T *a, emxArray_real_T *y)
   int32_T nx;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &kf_emlrtRSI;
+  st.site = &lf_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -69,16 +60,16 @@ void b_power(const emlrtStack *sp, const emxArray_real_T *a, emxArray_real_T *y)
   e_st.tls = d_st.tls;
   f_st.prev = &e_st;
   f_st.tls = e_st.tls;
-  b_st.site = &lf_emlrtRSI;
-  c_st.site = &mf_emlrtRSI;
-  d_st.site = &nf_emlrtRSI;
+  b_st.site = &mf_emlrtRSI;
+  c_st.site = &nf_emlrtRSI;
+  d_st.site = &of_emlrtRSI;
   nx = y->size[0];
   y->size[0] = a->size[0];
-  emxEnsureCapacity_real_T(&d_st, y, nx, &fj_emlrtRTEI);
+  emxEnsureCapacity_real_T(&d_st, y, nx, &bk_emlrtRTEI);
   nx = a->size[0];
-  e_st.site = &of_emlrtRSI;
+  e_st.site = &pf_emlrtRSI;
   if ((1 <= a->size[0]) && (a->size[0] > 2147483646)) {
-    f_st.site = &pf_emlrtRSI;
+    f_st.site = &qf_emlrtRSI;
     check_forloop_overflow_error(&f_st);
   }
   for (k = 0; k < nx; k++) {
@@ -98,7 +89,7 @@ void power(const emlrtStack *sp, const emxArray_real_T *a, emxArray_real_T *y)
   int32_T nx;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &kf_emlrtRSI;
+  st.site = &lf_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -109,16 +100,16 @@ void power(const emlrtStack *sp, const emxArray_real_T *a, emxArray_real_T *y)
   e_st.tls = d_st.tls;
   f_st.prev = &e_st;
   f_st.tls = e_st.tls;
-  b_st.site = &lf_emlrtRSI;
-  c_st.site = &mf_emlrtRSI;
-  d_st.site = &nf_emlrtRSI;
+  b_st.site = &mf_emlrtRSI;
+  c_st.site = &nf_emlrtRSI;
+  d_st.site = &of_emlrtRSI;
   nx = y->size[0];
   y->size[0] = a->size[0];
-  emxEnsureCapacity_real_T(&d_st, y, nx, &fj_emlrtRTEI);
+  emxEnsureCapacity_real_T(&d_st, y, nx, &bk_emlrtRTEI);
   nx = a->size[0];
-  e_st.site = &of_emlrtRSI;
+  e_st.site = &pf_emlrtRSI;
   if ((1 <= a->size[0]) && (a->size[0] > 2147483646)) {
-    f_st.site = &pf_emlrtRSI;
+    f_st.site = &qf_emlrtRSI;
     check_forloop_overflow_error(&f_st);
   }
   for (k = 0; k < nx; k++) {

@@ -18,7 +18,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRSInfo vj_emlrtRSI = {
+static emlrtRSInfo wj_emlrtRSI = {
     144,        /* lineNo */
     "eml_find", /* fcnName */
     "C:\\Program "
@@ -26,7 +26,7 @@ static emlrtRSInfo vj_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRSInfo wj_emlrtRSI = {
+static emlrtRSInfo xj_emlrtRSI = {
     402,                  /* lineNo */
     "find_first_indices", /* fcnName */
     "C:\\Program "
@@ -34,7 +34,7 @@ static emlrtRSInfo wj_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRSInfo xj_emlrtRSI = {
+static emlrtRSInfo yj_emlrtRSI = {
     382,                  /* lineNo */
     "find_first_indices", /* fcnName */
     "C:\\Program "
@@ -83,11 +83,11 @@ void eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
                                   "Coder:builtins:AssertionFailed",
                                   "Coder:builtins:AssertionFailed", 0);
   }
-  st.site = &vj_emlrtRSI;
+  st.site = &wj_emlrtRSI;
   idx = 0;
-  b_st.site = &xj_emlrtRSI;
+  b_st.site = &yj_emlrtRSI;
   if ((1 <= x->size[0]) && (x->size[0] > 2147483646)) {
-    c_st.site = &pf_emlrtRSI;
+    c_st.site = &qf_emlrtRSI;
     check_forloop_overflow_error(&c_st);
   }
   ii = 0;
@@ -114,7 +114,7 @@ void eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
     *i_size = (1 <= idx);
     iv[0] = 1;
     iv[1] = *i_size;
-    b_st.site = &wj_emlrtRSI;
+    b_st.site = &xj_emlrtRSI;
     indexShapeCheck(&b_st, 0, iv);
   }
 }

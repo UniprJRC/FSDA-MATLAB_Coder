@@ -55,7 +55,7 @@ static emlrtRTEInfo u_emlrtRTEI = {
     "m" /* pName */
 };
 
-static emlrtRTEInfo dj_emlrtRTEI = {
+static emlrtRTEInfo yj_emlrtRTEI = {
     389,         /* lineNo */
     9,           /* colNo */
     "eml_setop", /* fName */
@@ -64,7 +64,7 @@ static emlrtRTEInfo dj_emlrtRTEI = {
     "m" /* pName */
 };
 
-static emlrtRTEInfo ej_emlrtRTEI = {
+static emlrtRTEInfo ak_emlrtRTEI = {
     423,         /* lineNo */
     9,           /* colNo */
     "eml_setop", /* fName */
@@ -73,7 +73,7 @@ static emlrtRTEInfo ej_emlrtRTEI = {
     "m" /* pName */
 };
 
-static emlrtRTEInfo hj_emlrtRTEI = {
+static emlrtRTEInfo dk_emlrtRTEI = {
     185,         /* lineNo */
     24,          /* colNo */
     "eml_setop", /* fName */
@@ -82,7 +82,7 @@ static emlrtRTEInfo hj_emlrtRTEI = {
     "m" /* pName */
 };
 
-static emlrtRTEInfo ij_emlrtRTEI = {
+static emlrtRTEInfo ek_emlrtRTEI = {
     192,         /* lineNo */
     29,          /* colNo */
     "eml_setop", /* fName */
@@ -152,10 +152,10 @@ void b_do_vectors(const emlrtStack *sp, const emxArray_real_T *a,
   iblast = c->size[0] * c->size[1];
   c->size[0] = 1;
   c->size[1] = a->size[1];
-  emxEnsureCapacity_real_T(sp, c, iblast, &hj_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, c, iblast, &dk_emlrtRTEI);
   iblast = ia->size[0];
   ia->size[0] = a->size[1];
-  emxEnsureCapacity_int32_T(sp, ia, iblast, &ij_emlrtRTEI);
+  emxEnsureCapacity_int32_T(sp, ia, iblast, &ek_emlrtRTEI);
   *ib_size = 0;
   if (!issorted(a)) {
     emlrtErrorWithMessageIdR2018a(sp, &r_emlrtRTEI,
@@ -241,7 +241,7 @@ void b_do_vectors(const emlrtStack *sp, const emxArray_real_T *a,
     } else {
       ia->size[0] = nia;
     }
-    emxEnsureCapacity_int32_T(sp, ia, iblast, &dj_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, ia, iblast, &yj_emlrtRTEI);
     if (nc > a->size[1]) {
       emlrtErrorWithMessageIdR2018a(sp, &u_emlrtRTEI,
                                     "Coder:builtins:AssertionFailed",
@@ -253,7 +253,7 @@ void b_do_vectors(const emlrtStack *sp, const emxArray_real_T *a,
     } else {
       c->size[1] = nc;
     }
-    emxEnsureCapacity_real_T(sp, c, iblast, &ej_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, c, iblast, &ak_emlrtRTEI);
   }
 }
 

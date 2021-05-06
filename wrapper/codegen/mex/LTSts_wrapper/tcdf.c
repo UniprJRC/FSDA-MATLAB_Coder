@@ -20,14 +20,14 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo yy_emlrtRSI = {
+static emlrtRSInfo ybb_emlrtRSI = {
     29,     /* lineNo */
     "tcdf", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\tcdf.m" /* pathName
                                                                       */
 };
 
-static emlrtBCInfo no_emlrtBCI = {
+static emlrtBCInfo ap_emlrtBCI = {
     -1,     /* iFirst */
     -1,     /* iLast */
     21,     /* lineNo */
@@ -39,7 +39,7 @@ static emlrtBCInfo no_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtBCInfo oo_emlrtBCI = {
+static emlrtBCInfo bp_emlrtBCI = {
     -1,     /* iFirst */
     -1,     /* iLast */
     53,     /* lineNo */
@@ -51,7 +51,7 @@ static emlrtBCInfo oo_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtBCInfo po_emlrtBCI = {
+static emlrtBCInfo cp_emlrtBCI = {
     -1,     /* iFirst */
     -1,     /* iLast */
     26,     /* lineNo */
@@ -63,7 +63,7 @@ static emlrtBCInfo po_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtBCInfo qo_emlrtBCI = {
+static emlrtBCInfo dp_emlrtBCI = {
     -1,     /* iFirst */
     -1,     /* iLast */
     34,     /* lineNo */
@@ -75,7 +75,7 @@ static emlrtBCInfo qo_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtBCInfo ro_emlrtBCI = {
+static emlrtBCInfo ep_emlrtBCI = {
     -1,     /* iFirst */
     -1,     /* iLast */
     46,     /* lineNo */
@@ -87,7 +87,7 @@ static emlrtBCInfo ro_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtBCInfo so_emlrtBCI = {
+static emlrtBCInfo fp_emlrtBCI = {
     -1,     /* iFirst */
     -1,     /* iLast */
     44,     /* lineNo */
@@ -99,7 +99,7 @@ static emlrtBCInfo so_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtBCInfo to_emlrtBCI = {
+static emlrtBCInfo gp_emlrtBCI = {
     -1,     /* iFirst */
     -1,     /* iLast */
     29,     /* lineNo */
@@ -111,7 +111,7 @@ static emlrtBCInfo to_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtRTEInfo fv_emlrtRTEI = {
+static emlrtRTEInfo xw_emlrtRTEI = {
     16,     /* lineNo */
     5,      /* colNo */
     "tcdf", /* fName */
@@ -131,49 +131,49 @@ void tcdf(const emlrtStack *sp, const emxArray_real_T *x, real_T v,
   st.tls = sp->tls;
   i = p->size[0];
   p->size[0] = x->size[0];
-  emxEnsureCapacity_real_T(sp, p, i, &fv_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, p, i, &xw_emlrtRTEI);
   i = x->size[0];
   for (k = 0; k < i; k++) {
     if (k + 1 > x->size[0]) {
-      emlrtDynamicBoundsCheckR2012b(k + 1, 1, x->size[0], &no_emlrtBCI,
+      emlrtDynamicBoundsCheckR2012b(k + 1, 1, x->size[0], &ap_emlrtBCI,
                                     (emlrtCTX)sp);
     }
     if ((v > 0.0) && (!muDoubleScalarIsNaN(x->data[k]))) {
       if (x->data[k] == 0.0) {
         if (k + 1 > p->size[0]) {
-          emlrtDynamicBoundsCheckR2012b(k + 1, 1, p->size[0], &po_emlrtBCI,
+          emlrtDynamicBoundsCheckR2012b(k + 1, 1, p->size[0], &cp_emlrtBCI,
                                         (emlrtCTX)sp);
         }
         p->data[k] = 0.5;
       } else if (v > 1.0E+7) {
-        st.site = &yy_emlrtRSI;
+        st.site = &ybb_emlrtRSI;
         xsq = eml_erfcore(-x->data[k] / 1.4142135623730951);
         if (k + 1 > p->size[0]) {
-          emlrtDynamicBoundsCheckR2012b(k + 1, 1, p->size[0], &to_emlrtBCI,
+          emlrtDynamicBoundsCheckR2012b(k + 1, 1, p->size[0], &gp_emlrtBCI,
                                         &st);
         }
         p->data[k] = 0.5 * xsq;
       } else if (v == 1.0) {
         if (k + 1 > p->size[0]) {
-          emlrtDynamicBoundsCheckR2012b(k + 1, 1, p->size[0], &qo_emlrtBCI,
+          emlrtDynamicBoundsCheckR2012b(k + 1, 1, p->size[0], &dp_emlrtBCI,
                                         (emlrtCTX)sp);
         }
         p->data[k] = muDoubleScalarAtan(1.0 / -x->data[k]) / 3.1415926535897931;
       } else {
         xsq = x->data[k] * x->data[k];
         if (v < xsq) {
-          st.site = &xy_emlrtRSI;
+          st.site = &xbb_emlrtRSI;
           dc = betainc(&st, v / (v + xsq), v / 2.0, 0.5);
           if (k + 1 > p->size[0]) {
-            emlrtDynamicBoundsCheckR2012b(k + 1, 1, p->size[0], &so_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(k + 1, 1, p->size[0], &fp_emlrtBCI,
                                           (emlrtCTX)sp);
           }
           p->data[k] = dc.re / 2.0;
         } else {
-          st.site = &wy_emlrtRSI;
+          st.site = &wbb_emlrtRSI;
           dc = b_betainc(&st, xsq / (v + xsq), 0.5, v / 2.0);
           if (k + 1 > p->size[0]) {
-            emlrtDynamicBoundsCheckR2012b(k + 1, 1, p->size[0], &ro_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(k + 1, 1, p->size[0], &ep_emlrtBCI,
                                           (emlrtCTX)sp);
           }
           p->data[k] = dc.re / 2.0;
@@ -181,7 +181,7 @@ void tcdf(const emlrtStack *sp, const emxArray_real_T *x, real_T v,
       }
     } else {
       if (k + 1 > p->size[0]) {
-        emlrtDynamicBoundsCheckR2012b(k + 1, 1, p->size[0], &oo_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b(k + 1, 1, p->size[0], &bp_emlrtBCI,
                                       (emlrtCTX)sp);
       }
       p->data[k] = rtNaN;

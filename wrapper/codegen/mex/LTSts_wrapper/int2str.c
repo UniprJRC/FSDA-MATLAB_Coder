@@ -17,7 +17,7 @@
 #include <stdio.h>
 
 /* Variable Definitions */
-static emlrtRSInfo ph_emlrtRSI = {
+static emlrtRSInfo qh_emlrtRSI = {
     94,        /* lineNo */
     "int2str", /* fcnName */
     "C:\\Program "
@@ -25,7 +25,7 @@ static emlrtRSInfo ph_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRSInfo qh_emlrtRSI = {
+static emlrtRSInfo rh_emlrtRSI = {
     54,        /* lineNo */
     "int2str", /* fcnName */
     "C:\\Program "
@@ -33,7 +33,7 @@ static emlrtRSInfo qh_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRSInfo rh_emlrtRSI = {
+static emlrtRSInfo sh_emlrtRSI = {
     25,                 /* lineNo */
     "printNumToBuffer", /* fcnName */
     "C:\\Program "
@@ -50,7 +50,7 @@ static emlrtMCInfo g_emlrtMCI = {
     "internal\\printNumToBuffer.m" /* pName */
 };
 
-static emlrtDCInfo cd_emlrtDCI = {
+static emlrtDCInfo hd_emlrtDCI = {
     12,       /* lineNo */
     20,       /* colNo */
     "blanks", /* fName */
@@ -60,7 +60,7 @@ static emlrtDCInfo cd_emlrtDCI = {
     4 /* checkKind */
 };
 
-static emlrtRSInfo vcb_emlrtRSI = {
+static emlrtRSInfo veb_emlrtRSI = {
     26,                 /* lineNo */
     "printNumToBuffer", /* fcnName */
     "C:\\Program "
@@ -157,13 +157,13 @@ void int2str(const emlrtStack *sp, real_T xin, char_T s_data[],
     s_data[1] = 'a';
     s_data[2] = 'N';
   } else {
+    st.site = &rh_emlrtRSI;
     st.site = &qh_emlrtRSI;
-    st.site = &ph_emlrtRSI;
-    b_st.site = &rh_emlrtRSI;
+    b_st.site = &sh_emlrtRSI;
     i = (int32_T)(
         muDoubleScalarFloor(muDoubleScalarLog10(muDoubleScalarAbs(x))) + 1.0);
     if (i < 0) {
-      emlrtNonNegativeCheckR2012b(i, &cd_emlrtDCI, &b_st);
+      emlrtNonNegativeCheckR2012b(i, &hd_emlrtDCI, &b_st);
     }
     y = NULL;
     m = emlrtCreateCharArray(2, &iv[0]);
@@ -176,7 +176,7 @@ void int2str(const emlrtStack *sp, real_T xin, char_T s_data[],
     c_y = NULL;
     m = emlrtCreateDoubleScalar(x);
     emlrtAssign(&c_y, m);
-    b_st.site = &vcb_emlrtRSI;
+    b_st.site = &veb_emlrtRSI;
     e_emlrt_marshallIn(&b_st, feval(&b_st, y, b_y, c_y, &g_emlrtMCI),
                        "<output of feval>", s_data, s_size);
   }

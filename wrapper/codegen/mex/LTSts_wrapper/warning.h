@@ -32,6 +32,8 @@ void d_warning(const emlrtStack *sp, const char_T varargin_2[12]);
 
 void e_warning(const emlrtStack *sp, const char_T varargin_1[14]);
 
+void f_warning(const emlrtStack *sp);
+
 void warning(const emlrtStack *sp);
 
 /* End of code generation (warning.h) */

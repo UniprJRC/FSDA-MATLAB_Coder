@@ -19,21 +19,21 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo pu_emlrtRSI = {
+static emlrtRSInfo tu_emlrtRSI = {
     248,     /* lineNo */
     "pdist", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\pdist.m" /* pathName
                                                                        */
 };
 
-static emlrtRSInfo qu_emlrtRSI = {
+static emlrtRSInfo uu_emlrtRSI = {
     249,     /* lineNo */
     "pdist", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\pdist.m" /* pathName
                                                                        */
 };
 
-static emlrtRSInfo su_emlrtRSI = {
+static emlrtRSInfo wu_emlrtRSI = {
     283,     /* lineNo */
     "pdist", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\pdist.m" /* pathName
@@ -64,7 +64,7 @@ static emlrtBCInfo nn_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtDCInfo ji_emlrtDCI = {
+static emlrtDCInfo oi_emlrtDCI = {
     12,    /* lineNo */
     13,    /* colNo */
     "nan", /* fName */
@@ -86,7 +86,7 @@ static emlrtBCInfo on_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtDCInfo ki_emlrtDCI = {
+static emlrtDCInfo pi_emlrtDCI = {
     285,     /* lineNo */
     40,      /* colNo */
     "pdist", /* fName */
@@ -107,7 +107,7 @@ static emlrtBCInfo pn_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtDCInfo li_emlrtDCI = {
+static emlrtDCInfo qi_emlrtDCI = {
     285,     /* lineNo */
     55,      /* colNo */
     "pdist", /* fName */
@@ -128,7 +128,7 @@ static emlrtBCInfo qn_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtRTEInfo gt_emlrtRTEI = {
+static emlrtRTEInfo cu_emlrtRTEI = {
     157,     /* lineNo */
     1,       /* colNo */
     "pdist", /* fName */
@@ -136,7 +136,7 @@ static emlrtRTEInfo gt_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo ht_emlrtRTEI = {
+static emlrtRTEInfo du_emlrtRTEI = {
     157,     /* lineNo */
     5,       /* colNo */
     "pdist", /* fName */
@@ -144,7 +144,7 @@ static emlrtRTEInfo ht_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo it_emlrtRTEI = {
+static emlrtRTEInfo eu_emlrtRTEI = {
     249,     /* lineNo */
     5,       /* colNo */
     "pdist", /* fName */
@@ -152,7 +152,7 @@ static emlrtRTEInfo it_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo jt_emlrtRTEI = {
+static emlrtRTEInfo fu_emlrtRTEI = {
     248,     /* lineNo */
     5,       /* colNo */
     "pdist", /* fName */
@@ -188,38 +188,38 @@ void pdist(const emlrtStack *sp, const emxArray_real_T *Xin, emxArray_real_T *Y)
     Y->size[0] = 1;
     Y->size[1] = 0;
   } else {
-    emxInit_real_T(sp, &X, 2, &gt_emlrtRTEI, true);
+    emxInit_real_T(sp, &X, 2, &cu_emlrtRTEI, true);
     i = X->size[0] * X->size[1];
     X->size[0] = 1;
     X->size[1] = Xin->size[0];
-    emxEnsureCapacity_real_T(sp, X, i, &gt_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, X, i, &cu_emlrtRTEI);
     loop_ub = Xin->size[0];
     for (i = 0; i < loop_ub; i++) {
       X->data[i] = Xin->data[i];
     }
-    emxInit_real_T(sp, &b_Xin, 2, &ht_emlrtRTEI, true);
+    emxInit_real_T(sp, &b_Xin, 2, &du_emlrtRTEI, true);
     i = b_Xin->size[0] * b_Xin->size[1];
     b_Xin->size[0] = 1;
     b_Xin->size[1] = Xin->size[0];
-    emxEnsureCapacity_real_T(sp, b_Xin, i, &ht_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_Xin, i, &du_emlrtRTEI);
     loop_ub = Xin->size[0];
     for (i = 0; i < loop_ub; i++) {
       b_Xin->data[i] = Xin->data[i];
     }
-    emxInit_boolean_T(sp, &logIndX, 2, &jt_emlrtRTEI, true);
-    st.site = &pu_emlrtRSI;
+    emxInit_boolean_T(sp, &logIndX, 2, &fu_emlrtRTEI, true);
+    st.site = &tu_emlrtRSI;
     scanfornan(&st, b_Xin, Xin->size[0], logIndX);
-    st.site = &qu_emlrtRSI;
+    st.site = &uu_emlrtRSI;
     i = Y->size[0] * Y->size[1];
     Y->size[0] = 1;
-    emxEnsureCapacity_real_T(&st, Y, i, &it_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, Y, i, &eu_emlrtRTEI);
     emxFree_real_T(&b_Xin);
     if (nd < 0) {
-      emlrtNonNegativeCheckR2012b(nd, &ji_emlrtDCI, &st);
+      emlrtNonNegativeCheckR2012b(nd, &oi_emlrtDCI, &st);
     }
     i = Y->size[0] * Y->size[1];
     Y->size[1] = nd;
-    emxEnsureCapacity_real_T(&st, Y, i, &it_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, Y, i, &eu_emlrtRTEI);
     for (i = 0; i < nd; i++) {
       Y->data[i] = rtNaN;
     }
@@ -248,7 +248,7 @@ void pdist(const emlrtStack *sp, const emxArray_real_T *Xin, emxArray_real_T *Y)
           continue;
         if (setjmp(emlrtJBEnviron) == 0) {
 
-          c_st.site = &su_emlrtRSI;
+          c_st.site = &wu_emlrtRSI;
           qq = (-8.0 * (((real_T)kk + 1.0) - 1.0) +
                 4.0 * (real_T)nx * ((real_T)nx - 1.0)) -
                7.0;
@@ -264,7 +264,7 @@ void pdist(const emlrtStack *sp, const emxArray_real_T *Xin, emxArray_real_T *Y)
                 (real_T)nx * ((real_T)nx - 1.0) / 2.0) +
                qq * (qq + 1.0) / 2.0;
           if (ii != (int32_T)ii) {
-            emlrtIntegerCheckR2012b(ii, &ki_emlrtDCI, &b_st);
+            emlrtIntegerCheckR2012b(ii, &pi_emlrtDCI, &b_st);
           }
           if (((int32_T)ii < 1) || ((int32_T)ii > logIndX->size[1])) {
             emlrtDynamicBoundsCheckR2012b((int32_T)ii, 1, logIndX->size[1],
@@ -272,7 +272,7 @@ void pdist(const emlrtStack *sp, const emxArray_real_T *Xin, emxArray_real_T *Y)
           }
           if (logIndX->data[(int32_T)ii - 1]) {
             if (qq != (int32_T)muDoubleScalarFloor(qq)) {
-              emlrtIntegerCheckR2012b(qq, &li_emlrtDCI, &b_st);
+              emlrtIntegerCheckR2012b(qq, &qi_emlrtDCI, &b_st);
             }
             if (((int32_T)qq < 1) || ((int32_T)qq > logIndX->size[1])) {
               emlrtDynamicBoundsCheckR2012b((int32_T)qq, 1, logIndX->size[1],

@@ -23,7 +23,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo sh_emlrtRSI =
+static emlrtRSInfo th_emlrtRSI =
     {
         18,            /* lineNo */
         "ifWhileCond", /* fcnName */
@@ -32,7 +32,7 @@ static emlrtRSInfo sh_emlrtRSI =
         "internal\\ifWhileCond.m" /* pathName */
 };
 
-static emlrtRSInfo th_emlrtRSI =
+static emlrtRSInfo uh_emlrtRSI =
     {
         31,            /* lineNo */
         "checkNoNaNs", /* fcnName */
@@ -41,82 +41,62 @@ static emlrtRSInfo th_emlrtRSI =
         "internal\\ifWhileCond.m" /* pathName */
 };
 
-static emlrtRSInfo iv_emlrtRSI = {
+static emlrtRSInfo mv_emlrtRSI = {
     570,                                                   /* lineNo */
     "RobRegrSize",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\RobRegrSize.m" /* pathName */
 };
 
-static emlrtRSInfo jv_emlrtRSI = {
+static emlrtRSInfo nv_emlrtRSI = {
     527,                                                   /* lineNo */
     "RobRegrSize",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\RobRegrSize.m" /* pathName */
 };
 
-static emlrtRSInfo kv_emlrtRSI = {
+static emlrtRSInfo ov_emlrtRSI = {
     525,                                                   /* lineNo */
     "RobRegrSize",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\RobRegrSize.m" /* pathName */
 };
 
-static emlrtRSInfo lv_emlrtRSI = {
+static emlrtRSInfo pv_emlrtRSI = {
     334,                                                   /* lineNo */
     "RobRegrSize",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\RobRegrSize.m" /* pathName */
 };
 
-static emlrtRSInfo mv_emlrtRSI = {
+static emlrtRSInfo qv_emlrtRSI = {
     332,                                                   /* lineNo */
     "RobRegrSize",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\RobRegrSize.m" /* pathName */
 };
 
-static emlrtRSInfo nv_emlrtRSI = {
+static emlrtRSInfo rv_emlrtRSI = {
     325,                                                   /* lineNo */
     "RobRegrSize",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\RobRegrSize.m" /* pathName */
 };
 
-static emlrtRSInfo ov_emlrtRSI = {
+static emlrtRSInfo sv_emlrtRSI = {
     323,                                                   /* lineNo */
     "RobRegrSize",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\RobRegrSize.m" /* pathName */
 };
 
-static emlrtRSInfo pv_emlrtRSI = {
+static emlrtRSInfo tv_emlrtRSI = {
     313,                                                   /* lineNo */
     "RobRegrSize",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\RobRegrSize.m" /* pathName */
 };
 
-static emlrtRSInfo qv_emlrtRSI = {
+static emlrtRSInfo uv_emlrtRSI = {
     245,                                                   /* lineNo */
     "RobRegrSize",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\RobRegrSize.m" /* pathName */
 };
 
 static emlrtRSInfo
-    rv_emlrtRSI =
-        {
-            63,       /* lineNo */
-            "strcmp", /* fcnName */
-            "C:\\Program "
-            "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
-            "internal\\strcmp.m" /* pathName */
-};
-
-static emlrtRSInfo
-    sv_emlrtRSI =
-        {
-            138,          /* lineNo */
-            "loc_strcmp", /* fcnName */
-            "C:\\Program "
-            "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
-            "internal\\strcmp.m" /* pathName */
-};
-
-static emlrtRSInfo
-    tv_emlrtRSI =
+    xv_emlrtRSI =
         {
             209,       /* lineNo */
             "charcmp", /* fcnName */
@@ -143,49 +123,49 @@ static emlrtBCInfo io_emlrtBCI = {
     0                                                       /* checkKind */
 };
 
-static emlrtRTEInfo yt_emlrtRTEI = {
+static emlrtRTEInfo uu_emlrtRTEI = {
     531,                                                   /* lineNo */
     9,                                                     /* colNo */
     "RobRegrSize",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\RobRegrSize.m" /* pName */
 };
 
-static emlrtRTEInfo au_emlrtRTEI = {
+static emlrtRTEInfo vu_emlrtRTEI = {
     539,                                                   /* lineNo */
     17,                                                    /* colNo */
     "RobRegrSize",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\RobRegrSize.m" /* pName */
 };
 
-static emlrtRTEInfo bu_emlrtRTEI = {
+static emlrtRTEInfo wu_emlrtRTEI = {
     536,                                                   /* lineNo */
     17,                                                    /* colNo */
     "RobRegrSize",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\RobRegrSize.m" /* pName */
 };
 
-static emlrtRTEInfo cu_emlrtRTEI = {
+static emlrtRTEInfo xu_emlrtRTEI = {
     527,                                                   /* lineNo */
     9,                                                     /* colNo */
     "RobRegrSize",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\RobRegrSize.m" /* pName */
 };
 
-static emlrtRTEInfo du_emlrtRTEI = {
+static emlrtRTEInfo yu_emlrtRTEI = {
     390,                                                   /* lineNo */
     13,                                                    /* colNo */
     "RobRegrSize",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\RobRegrSize.m" /* pName */
 };
 
-static emlrtRTEInfo eu_emlrtRTEI = {
+static emlrtRTEInfo av_emlrtRTEI = {
     527,                                                   /* lineNo */
     34,                                                    /* colNo */
     "RobRegrSize",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\RobRegrSize.m" /* pName */
 };
 
-static emlrtRSInfo mcb_emlrtRSI = {
+static emlrtRSInfo meb_emlrtRSI = {
     244,                                                   /* lineNo */
     "RobRegrSize",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\RobRegrSize.m" /* pathName */
@@ -223,6 +203,8 @@ void RobRegrSize(const emlrtStack *sp, real_T n, real_T p, real_T bdp)
                                    'd', 'p', '0', '5', '0'};
   static const char_T b_cv3[10] = {'L', 'T', 'S', 'r', 'b',
                                    'd', 'p', '0', '2', '5'};
+  static const char_T b_cv6[10] = {'M', 'M', 'e', 'f', 'f',
+                                   '0', '8', '5', 'T', 'B'};
   static const char_T cv11[10] = {'M', 'M', 'e', 'f', 'f',
                                   '0', '8', '5', 'O', 'P'};
   static const char_T cv12[10] = {'M', 'M', 'e', 'f', 'f',
@@ -241,8 +223,6 @@ void RobRegrSize(const emlrtStack *sp, real_T n, real_T p, real_T bdp)
                                   '0', '9', '0', 'H', 'A'};
   static const char_T cv23[10] = {'M', 'M', 'e', 'f', 'f',
                                   '0', '9', '5', 'H', 'A'};
-  static const char_T cv6[10] = {'M', 'M', 'e', 'f', 'f',
-                                 '0', '8', '5', 'T', 'B'};
   static const char_T cv7[10] = {'M', 'M', 'e', 'f', 'f',
                                  '0', '9', '0', 'T', 'B'};
   static const char_T cv8[10] = {'M', 'M', 'e', 'f', 'f',
@@ -571,9 +551,9 @@ void RobRegrSize(const emlrtStack *sp, real_T n, real_T p, real_T bdp)
     m = emlrtCreateCharArray(2, &iv[0]);
     emlrtInitCharArrayR2013a((emlrtCTX)sp, 56, m, &u[0]);
     emlrtAssign(&y, m);
-    st.site = &mcb_emlrtRSI;
+    st.site = &meb_emlrtRSI;
     disp(&st, y, &v_emlrtMCI);
-    st.site = &qv_emlrtRSI;
+    st.site = &uv_emlrtRSI;
     b_y = NULL;
     m = emlrtCreateCharArray(2, &iv1[0]);
     emlrtInitCharArrayR2013a(&st, 23, m, &varargin_1[0]);
@@ -582,7 +562,7 @@ void RobRegrSize(const emlrtStack *sp, real_T n, real_T p, real_T bdp)
     m = emlrtCreateCharArray(2, &iv2[0]);
     emlrtInitCharArrayR2013a(&st, 37, m, &varargin_2[0]);
     emlrtAssign(&c_y, m);
-    b_st.site = &tcb_emlrtRSI;
+    b_st.site = &teb_emlrtRSI;
     l_error(&b_st, b_y, c_y, &d_emlrtMCI);
   }
   /*  Vector which contains the labels for the estimators whose size has to */
@@ -618,7 +598,7 @@ void RobRegrSize(const emlrtStack *sp, real_T n, real_T p, real_T bdp)
   r8.f1.size[0] = 1;
   r8.f1.size[1] = 10;
   for (ib_data = 0; ib_data < 10; ib_data++) {
-    r6.f1.data[ib_data] = cv6[ib_data];
+    r6.f1.data[ib_data] = b_cv6[ib_data];
     r7.f1.data[ib_data] = cv7[ib_data];
     r8.f1.data[ib_data] = cv8[ib_data];
   }
@@ -706,7 +686,7 @@ void RobRegrSize(const emlrtStack *sp, real_T n, real_T p, real_T bdp)
   /*  check if the estimator which has been provided in the list */
   /*  Check */
   if (bdp > 0.5) {
-    st.site = &pv_emlrtRSI;
+    st.site = &tv_emlrtRSI;
     d_y = NULL;
     m = emlrtCreateCharArray(2, &iv3[0]);
     emlrtInitCharArrayR2013a(&st, 25, m, &b_varargin_1[0]);
@@ -715,13 +695,13 @@ void RobRegrSize(const emlrtStack *sp, real_T n, real_T p, real_T bdp)
     m = emlrtCreateCharArray(2, &iv4[0]);
     emlrtInitCharArrayR2013a(&st, 52, m, &b_varargin_2[0]);
     emlrtAssign(&e_y, m);
-    b_st.site = &tcb_emlrtRSI;
+    b_st.site = &teb_emlrtRSI;
     l_error(&b_st, d_y, e_y, &d_emlrtMCI);
   }
   if (bdp < 0.375) {
-    st.site = &ov_emlrtRSI;
+    st.site = &sv_emlrtRSI;
     a = norminv(0.5 * ((1.0 - bdp) + 1.0));
-    st.site = &nv_emlrtRSI;
+    st.site = &rv_emlrtRSI;
     if (0.36852405098356233 /
             (1.0 - 2.0 * (1.0 / (1.0 - bdp)) * a *
                        (muDoubleScalarExp(-0.5 * a * a) / 2.5066282746310002)) <
@@ -731,9 +711,9 @@ void RobRegrSize(const emlrtStack *sp, real_T n, real_T p, real_T bdp)
           "Coder:toolbox:ElFunDomainError", 3, 4, 4, "sqrt");
     }
   } else {
-    st.site = &mv_emlrtRSI;
+    st.site = &qv_emlrtRSI;
     a = norminv(0.5 * ((1.0 - bdp) + 1.0));
-    st.site = &lv_emlrtRSI;
+    st.site = &pv_emlrtRSI;
     if (0.14265183548851856 /
             (1.0 - 2.0 * (1.0 / (1.0 - bdp)) * a *
                        (muDoubleScalarExp(-0.5 * a * a) / 2.5066282746310002)) <
@@ -751,12 +731,12 @@ void RobRegrSize(const emlrtStack *sp, real_T n, real_T p, real_T bdp)
    * threshold */
   /*  RAW LTS */
   /*  If breakdown point is the one supplied by the user */
-  st.site = &kv_emlrtRSI;
-  b_st.site = &gf_emlrtRSI;
-  c_st.site = &hf_emlrtRSI;
+  st.site = &ov_emlrtRSI;
+  b_st.site = &hf_emlrtRSI;
+  c_st.site = &if_emlrtRSI;
   c_do_vectors(bdp, (real_T *)&a, c_size, (int32_T *)&posint1, &nb,
                (int32_T *)&ib_data, &ib_size);
-  st.site = &kv_emlrtRSI;
+  st.site = &ov_emlrtRSI;
   nb = c_size[1];
   posint1 = c_size[1];
   for (ib_data = 0; ib_data < posint1; ib_data++) {
@@ -764,8 +744,8 @@ void RobRegrSize(const emlrtStack *sp, real_T n, real_T p, real_T bdp)
   }
   f_y = (c_size[1] != 0);
   if (f_y) {
-    b_st.site = &sh_emlrtRSI;
-    c_st.site = &th_emlrtRSI;
+    b_st.site = &th_emlrtRSI;
+    c_st.site = &uh_emlrtRSI;
     posint1 = 0;
     exitg1 = false;
     while ((!exitg1) && (posint1 <= nb - 1)) {
@@ -777,16 +757,16 @@ void RobRegrSize(const emlrtStack *sp, real_T n, real_T p, real_T bdp)
       }
     }
   }
-  emxInit_char_T(sp, &namefile1, 2, &du_emlrtRTEI, true);
+  emxInit_char_T(sp, &namefile1, 2, &yu_emlrtRTEI, true);
   if (f_y) {
-    emxInit_char_T(sp, &r24, 2, &eu_emlrtRTEI, true);
+    emxInit_char_T(sp, &r24, 2, &av_emlrtRTEI, true);
     /*  namefile1=[robest 'bdp0' num2str(100*bdp) rhofunc]; */
-    st.site = &jv_emlrtRSI;
+    st.site = &nv_emlrtRSI;
     b_sprintf(&st, 100.0 * bdp, r24);
     ib_data = namefile1->size[0] * namefile1->size[1];
     namefile1->size[0] = 1;
     namefile1->size[1] = r24->size[1] + 7;
-    emxEnsureCapacity_char_T(sp, namefile1, ib_data, &cu_emlrtRTEI);
+    emxEnsureCapacity_char_T(sp, namefile1, ib_data, &xu_emlrtRTEI);
     namefile1->data[0] = 'L';
     namefile1->data[1] = 'T';
     namefile1->data[2] = 'S';
@@ -803,7 +783,7 @@ void RobRegrSize(const emlrtStack *sp, real_T n, real_T p, real_T bdp)
     ib_data = namefile1->size[0] * namefile1->size[1];
     namefile1->size[0] = 1;
     namefile1->size[1] = 9;
-    emxEnsureCapacity_char_T(sp, namefile1, ib_data, &yt_emlrtRTEI);
+    emxEnsureCapacity_char_T(sp, namefile1, ib_data, &uu_emlrtRTEI);
     for (ib_data = 0; ib_data < 9; ib_data++) {
       namefile1->data[ib_data] = b_cv1[ib_data];
     }
@@ -811,7 +791,7 @@ void RobRegrSize(const emlrtStack *sp, real_T n, real_T p, real_T bdp)
     ib_data = namefile1->size[0] * namefile1->size[1];
     namefile1->size[0] = 1;
     namefile1->size[1] = 9;
-    emxEnsureCapacity_char_T(sp, namefile1, ib_data, &bu_emlrtRTEI);
+    emxEnsureCapacity_char_T(sp, namefile1, ib_data, &wu_emlrtRTEI);
     for (ib_data = 0; ib_data < 9; ib_data++) {
       namefile1->data[ib_data] = b_cv1[ib_data];
     }
@@ -819,7 +799,7 @@ void RobRegrSize(const emlrtStack *sp, real_T n, real_T p, real_T bdp)
     ib_data = namefile1->size[0] * namefile1->size[1];
     namefile1->size[0] = 1;
     namefile1->size[1] = 9;
-    emxEnsureCapacity_char_T(sp, namefile1, ib_data, &au_emlrtRTEI);
+    emxEnsureCapacity_char_T(sp, namefile1, ib_data, &vu_emlrtRTEI);
     for (ib_data = 0; ib_data < 9; ib_data++) {
       namefile1->data[ib_data] = b_cv[ib_data];
     }
@@ -833,14 +813,14 @@ void RobRegrSize(const emlrtStack *sp, real_T n, real_T p, real_T bdp)
   posint1 = 0;
   nb = namefile1->size[1];
   for (ib_size = 0; ib_size < 24; ib_size++) {
-    st.site = &iv_emlrtRSI;
-    b_st.site = &rv_emlrtRSI;
-    c_st.site = &sv_emlrtRSI;
+    st.site = &mv_emlrtRSI;
+    b_st.site = &vv_emlrtRSI;
+    c_st.site = &wv_emlrtRSI;
     x_data = false;
     if (labest[ib_size].f1.size[1] == namefile1->size[1]) {
-      d_st.site = &tv_emlrtRSI;
+      d_st.site = &xv_emlrtRSI;
       if (nb > 2147483646) {
-        e_st.site = &pf_emlrtRSI;
+        e_st.site = &qf_emlrtRSI;
         check_forloop_overflow_error(&e_st);
       }
       ib_data = 0;

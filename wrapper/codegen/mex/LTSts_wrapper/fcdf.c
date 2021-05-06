@@ -19,7 +19,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo qbb_emlrtRSI = {
+static emlrtRSInfo qdb_emlrtRSI = {
     49,     /* lineNo */
     "fcdf", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\fcdf.m" /* pathName
@@ -43,20 +43,20 @@ real_T fcdf(const emlrtStack *sp, real_T x, real_T v2)
       if (muDoubleScalarIsInf(x)) {
         p = 1.0;
       } else if (muDoubleScalarIsInf(v2)) {
-        st.site = &qbb_emlrtRSI;
+        st.site = &qdb_emlrtRSI;
         num = 2.0;
-        b_st.site = &jx_emlrtRSI;
+        b_st.site = &nx_emlrtRSI;
         gammaln(&b_st, &num);
-        b_st.site = &kx_emlrtRSI;
+        b_st.site = &ox_emlrtRSI;
         b = scalar_gammainc(&b_st, 2.0 * x / 2.0, 1.0, 0.0, num);
         p = b.re;
       } else if (v2 <= x * 2.0) {
-        st.site = &rbb_emlrtRSI;
+        st.site = &rdb_emlrtRSI;
         b = b_betainc(&st, v2 / (v2 + x * 2.0), v2 / 2.0, 1.0);
         p = b.re;
       } else {
         num = 2.0 * x;
-        st.site = &sbb_emlrtRSI;
+        st.site = &sdb_emlrtRSI;
         b = betainc(&st, num / (num + v2), 1.0, v2 / 2.0);
         p = b.re;
       }

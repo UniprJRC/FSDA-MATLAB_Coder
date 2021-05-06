@@ -15,7 +15,7 @@
 #include "rt_nonfinite.h"
 
 /* Function Definitions */
-boolean_T b_infocheck(const emlrtStack *sp, int32_T info)
+boolean_T infocheck(const emlrtStack *sp, int32_T info)
 {
   static const char_T fname[14] = {'L', 'A', 'P', 'A', 'C', 'K', 'E',
                                    '_', 'd', 'o', 'r', 'm', 'q', 'r'};
@@ -39,27 +39,6 @@ boolean_T b_infocheck(const emlrtStack *sp, int32_T info)
         emlrtErrorWithMessageIdR2018a(
             sp, &qb_emlrtRTEI, "Coder:toolbox:LAPACKCallErrorInfo",
             "Coder:toolbox:LAPACKCallErrorInfo", 5, 4, 14, &fname[0], 12, info);
-      }
-    }
-  } else {
-    p = false;
-  }
-  return p;
-}
-
-boolean_T infocheck(const emlrtStack *sp, int32_T info)
-{
-  boolean_T p;
-  if (info != 0) {
-    p = true;
-    if (info != -4) {
-      if (info == -1010) {
-        emlrtErrorWithMessageIdR2018a(sp, &rb_emlrtRTEI, "MATLAB:nomem",
-                                      "MATLAB:nomem", 0);
-      } else {
-        emlrtErrorWithMessageIdR2018a(
-            sp, &qb_emlrtRTEI, "Coder:toolbox:LAPACKCallErrorInfo",
-            "Coder:toolbox:LAPACKCallErrorInfo", 5, 4, 14, &cv2[0], 12, info);
       }
     }
   } else {

@@ -25,4 +25,6 @@
 /* Function Declarations */
 boolean_T any(const emlrtStack *sp, const emxArray_boolean_T *x);
 
+boolean_T b_any(const emlrtStack *sp, const emxArray_boolean_T *x);
+
 /* End of code generation (any.h) */

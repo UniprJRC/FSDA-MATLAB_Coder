@@ -36,11 +36,11 @@ int32_T b_combineVectorElements(const emlrtStack *sp,
   if (x->size[0] == 0) {
     y = 0;
   } else {
-    st.site = &nh_emlrtRSI;
+    st.site = &oh_emlrtRSI;
     y = x->data[0];
-    b_st.site = &oh_emlrtRSI;
+    b_st.site = &ph_emlrtRSI;
     if ((2 <= x->size[0]) && (x->size[0] > 2147483646)) {
-      c_st.site = &pf_emlrtRSI;
+      c_st.site = &qf_emlrtRSI;
       check_forloop_overflow_error(&c_st);
     }
     for (k = 2; k <= vlen; k++) {
@@ -68,11 +68,11 @@ int32_T combineVectorElements(const emlrtStack *sp, const emxArray_boolean_T *x)
   if (x->size[1] == 0) {
     y = 0;
   } else {
-    st.site = &nh_emlrtRSI;
+    st.site = &oh_emlrtRSI;
     y = x->data[0];
-    b_st.site = &oh_emlrtRSI;
+    b_st.site = &ph_emlrtRSI;
     if ((2 <= x->size[1]) && (x->size[1] > 2147483646)) {
-      c_st.site = &pf_emlrtRSI;
+      c_st.site = &qf_emlrtRSI;
       check_forloop_overflow_error(&c_st);
     }
     for (k = 2; k <= vlen; k++) {

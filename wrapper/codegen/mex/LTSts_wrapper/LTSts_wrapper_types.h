@@ -59,6 +59,20 @@ typedef struct {
 } d_matlab_internal_coder_tabular;
 #endif /* typedef_d_matlab_internal_coder_tabular */
 
+#ifndef typedef_captured_var
+#define typedef_captured_var
+typedef struct {
+  real_T contents;
+} captured_var;
+#endif /* typedef_captured_var */
+
+#ifndef typedef_b_captured_var
+#define typedef_b_captured_var
+typedef struct {
+  boolean_T contents;
+} b_captured_var;
+#endif /* typedef_b_captured_var */
+
 #ifndef struct_emxArray_real_T
 #define struct_emxArray_real_T
 struct emxArray_real_T {
@@ -150,14 +164,14 @@ typedef struct {
 #ifndef typedef_c_captured_var
 #define typedef_c_captured_var
 typedef struct {
-  emxArray_boolean_T *contents;
+  emxArray_real_T *contents;
 } c_captured_var;
 #endif /* typedef_c_captured_var */
 
 #ifndef typedef_d_captured_var
 #define typedef_d_captured_var
 typedef struct {
-  emxArray_real_T *contents;
+  emxArray_boolean_T *contents;
 } d_captured_var;
 #endif /* typedef_d_captured_var */
 
@@ -232,6 +246,39 @@ struct emxArray_uint32_T {
 typedef struct emxArray_uint32_T emxArray_uint32_T;
 #endif /* typedef_emxArray_uint32_T */
 
+#ifndef typedef_b_struct_T
+#define typedef_b_struct_T
+typedef struct {
+  emxArray_real_T *lower;
+  emxArray_real_T *upper;
+} b_struct_T;
+#endif /* typedef_b_struct_T */
+
+#ifndef typedef_c_struct_T
+#define typedef_c_struct_T
+typedef struct {
+  captured_var *trend;
+  captured_var *seasonal;
+  captured_var *s;
+  c_captured_var *yhatseaso;
+  c_captured_var *Xseasof;
+  captured_var *varampl;
+  c_captured_var *Seqf;
+  captured_var *nexpl;
+  b_captured_var *isemptyX;
+  c_captured_var *Xf;
+  captured_var *lshiftYN;
+  c_captured_var *Xlshiftf;
+} c_struct_T;
+#endif /* typedef_c_struct_T */
+
+#ifndef typedef_nested_function
+#define typedef_nested_function
+typedef struct {
+  c_struct_T workspace;
+} nested_function;
+#endif /* typedef_nested_function */
+
 #ifndef struct_emxArray_char_T_1x0
 #define struct_emxArray_char_T_1x0
 struct emxArray_char_T_1x0 {
@@ -256,6 +303,58 @@ typedef struct {
   emxArray_char_T_1x0 Description;
 } struct3_T;
 #endif /* typedef_struct3_T */
+
+#ifndef typedef_d_struct_T
+#define typedef_d_struct_T
+typedef struct {
+  nested_function fun;
+  emxArray_real_T *xdata;
+  emxArray_real_T *ydata;
+} d_struct_T;
+#endif /* typedef_d_struct_T */
+
+#ifndef typedef_anonymous_function
+#define typedef_anonymous_function
+typedef struct {
+  d_struct_T workspace;
+} anonymous_function;
+#endif /* typedef_anonymous_function */
+
+#ifndef typedef_e_struct_T
+#define typedef_e_struct_T
+typedef struct {
+  anonymous_function fun;
+} e_struct_T;
+#endif /* typedef_e_struct_T */
+
+#ifndef typedef_b_anonymous_function
+#define typedef_b_anonymous_function
+typedef struct {
+  e_struct_T workspace;
+} b_anonymous_function;
+#endif /* typedef_b_anonymous_function */
+
+#ifndef typedef_f_struct_T
+#define typedef_f_struct_T
+typedef struct {
+  b_anonymous_function nonlin;
+  real_T f_1;
+  emxArray_real_T *cEq_1;
+  real_T f_2;
+  emxArray_real_T *cEq_2;
+  int32_T nVar;
+  int32_T mIneq;
+  int32_T mEq;
+  int32_T numEvals;
+  boolean_T SpecifyObjectiveGradient;
+  boolean_T SpecifyConstraintGradient;
+  boolean_T isEmptyNonlcon;
+  emxArray_boolean_T *hasLB;
+  emxArray_boolean_T *hasUB;
+  boolean_T hasBounds;
+  int32_T FiniteDifferenceType;
+} f_struct_T;
+#endif /* typedef_f_struct_T */
 
 #ifndef typedef_f_matlab_internal_coder_tabular
 #define typedef_f_matlab_internal_coder_tabular

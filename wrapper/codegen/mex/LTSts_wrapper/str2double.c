@@ -18,7 +18,7 @@
 
 /* Variable Definitions */
 static emlrtRSInfo
-    tf_emlrtRSI =
+    uf_emlrtRSI =
         {
             9,            /* lineNo */
             "str2double", /* fcnName */
@@ -27,7 +27,7 @@ static emlrtRSInfo
             "le.m" /* pathName */
 };
 
-static emlrtRSInfo uf_emlrtRSI =
+static emlrtRSInfo vf_emlrtRSI =
     {
         36,           /* lineNo */
         "str2double", /* fcnName */
@@ -36,7 +36,7 @@ static emlrtRSInfo uf_emlrtRSI =
         "internal\\str2double.m" /* pathName */
 };
 
-static emlrtRSInfo vf_emlrtRSI =
+static emlrtRSInfo wf_emlrtRSI =
     {
         37,           /* lineNo */
         "str2double", /* fcnName */
@@ -45,7 +45,7 @@ static emlrtRSInfo vf_emlrtRSI =
         "internal\\str2double.m" /* pathName */
 };
 
-static emlrtRSInfo wf_emlrtRSI =
+static emlrtRSInfo xf_emlrtRSI =
     {
         45,           /* lineNo */
         "str2double", /* fcnName */
@@ -54,7 +54,7 @@ static emlrtRSInfo wf_emlrtRSI =
         "internal\\str2double.m" /* pathName */
 };
 
-static emlrtRSInfo xf_emlrtRSI =
+static emlrtRSInfo yf_emlrtRSI =
     {
         60,           /* lineNo */
         "str2double", /* fcnName */
@@ -63,7 +63,7 @@ static emlrtRSInfo xf_emlrtRSI =
         "internal\\str2double.m" /* pathName */
 };
 
-static emlrtRSInfo yf_emlrtRSI =
+static emlrtRSInfo ag_emlrtRSI =
     {
         62,           /* lineNo */
         "str2double", /* fcnName */
@@ -101,7 +101,7 @@ creal_T b_str2double(const emlrtStack *sp, const char_T s[2])
   boolean_T success;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &tf_emlrtRSI;
+  st.site = &uf_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -117,14 +117,14 @@ creal_T b_str2double(const emlrtStack *sp, const char_T s[2])
   x.re = rtNaN;
   x.im = 0.0;
   ntoread = 0;
-  b_st.site = &uf_emlrtRSI;
+  b_st.site = &vf_emlrtRSI;
   k = 0;
   exitg1 = false;
   while ((!exitg1) && (k + 1 <= 2)) {
-    c_st.site = &ag_emlrtRSI;
-    d_st.site = &bg_emlrtRSI;
-    e_st.site = &cg_emlrtRSI;
-    f_st.site = &dg_emlrtRSI;
+    c_st.site = &bg_emlrtRSI;
+    d_st.site = &cg_emlrtRSI;
+    e_st.site = &dg_emlrtRSI;
+    f_st.site = &eg_emlrtRSI;
     nread = (uint8_T)s[k];
     if (nread > 127) {
       emlrtErrorWithMessageIdR2018a(
@@ -137,11 +137,11 @@ creal_T b_str2double(const emlrtStack *sp, const char_T s[2])
       exitg1 = true;
     }
   }
-  b_st.site = &vf_emlrtRSI;
+  b_st.site = &wf_emlrtRSI;
   isimag1 = false;
   b_finite = true;
   scanned1 = 0.0;
-  c_st.site = &ig_emlrtRSI;
+  c_st.site = &jg_emlrtRSI;
   idx = 1;
   s1[0] = '\x00';
   s1[1] = '\x00';
@@ -156,10 +156,10 @@ creal_T b_str2double(const emlrtStack *sp, const char_T s[2])
     } else if ((s[k] == ',') || (s[k] == '+')) {
       k++;
     } else {
-      d_st.site = &jg_emlrtRSI;
-      e_st.site = &bg_emlrtRSI;
-      f_st.site = &cg_emlrtRSI;
-      g_st.site = &dg_emlrtRSI;
+      d_st.site = &kg_emlrtRSI;
+      e_st.site = &cg_emlrtRSI;
+      f_st.site = &dg_emlrtRSI;
+      g_st.site = &eg_emlrtRSI;
       nread = (uint8_T)s[k];
       if (nread > 127) {
         emlrtErrorWithMessageIdR2018a(
@@ -183,11 +183,11 @@ creal_T b_str2double(const emlrtStack *sp, const char_T s[2])
     if ((k + 1 <= 2) && ((s[k] == 'j') || (s[k] == 'i'))) {
       isimag1 = true;
       nread = k + 2;
-      c_st.site = &hg_emlrtRSI;
+      c_st.site = &ig_emlrtRSI;
       b_skipspaces(&c_st, s, &nread);
       if ((nread <= 2) && (s[1] == '*')) {
         nread = 3;
-        c_st.site = &kg_emlrtRSI;
+        c_st.site = &lg_emlrtRSI;
         b_readfloat(&c_st, s1, &idx, s, &nread, false, &isneg, &b_finite,
                     &scanned1, &a__3, &success);
       } else {
@@ -207,11 +207,11 @@ creal_T b_str2double(const emlrtStack *sp, const char_T s[2])
         s1[0] = ' ';
         scanned1 = -scanned1;
       }
-      c_st.site = &gg_emlrtRSI;
+      c_st.site = &hg_emlrtRSI;
       b_skipspaces(&c_st, s, &nread);
       if ((nread <= 2) && (s[nread - 1] == '*')) {
         nread++;
-        c_st.site = &fg_emlrtRSI;
+        c_st.site = &gg_emlrtRSI;
         b_skipspaces(&c_st, s, &nread);
       }
       if (nread <= 2) {
@@ -222,7 +222,7 @@ creal_T b_str2double(const emlrtStack *sp, const char_T s[2])
         }
       }
     }
-    c_st.site = &eg_emlrtRSI;
+    c_st.site = &fg_emlrtRSI;
     b_skipspaces(&c_st, s, &nread);
   }
   if (b_finite) {
@@ -231,7 +231,7 @@ creal_T b_str2double(const emlrtStack *sp, const char_T s[2])
   if (success && (nread <= 2)) {
     s1[idx - 1] = ' ';
     idx++;
-    b_st.site = &wf_emlrtRSI;
+    b_st.site = &xf_emlrtRSI;
     b_readfloat(&b_st, s1, &idx, s, &nread, true, &isneg, &a__3, &scanned2,
                 &foundsign, &success);
     if (a__3) {
@@ -248,14 +248,14 @@ creal_T b_str2double(const emlrtStack *sp, const char_T s[2])
   if (success) {
     s1[idx - 1] = '\x00';
     if (ntoread == 2) {
-      b_st.site = &xf_emlrtRSI;
+      b_st.site = &yf_emlrtRSI;
       nread = sscanf(&s1[0], "%lf %lf", &scanned1, &scanned2);
       if (nread != 2) {
         scanned1 = rtNaN;
         scanned2 = rtNaN;
       }
     } else if (ntoread == 1) {
-      b_st.site = &yf_emlrtRSI;
+      b_st.site = &ag_emlrtRSI;
       nread = sscanf(&s1[0], "%lf", &b_scanned1);
       if (nread != 1) {
         b_scanned1 = rtNaN;
@@ -304,7 +304,7 @@ creal_T str2double(const emlrtStack *sp, char_T s)
   boolean_T success;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &tf_emlrtRSI;
+  st.site = &uf_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -320,12 +320,12 @@ creal_T str2double(const emlrtStack *sp, char_T s)
   x.re = rtNaN;
   x.im = 0.0;
   ntoread = 0;
-  b_st.site = &uf_emlrtRSI;
+  b_st.site = &vf_emlrtRSI;
   k = 1;
-  c_st.site = &ag_emlrtRSI;
-  d_st.site = &bg_emlrtRSI;
-  e_st.site = &cg_emlrtRSI;
-  f_st.site = &dg_emlrtRSI;
+  c_st.site = &bg_emlrtRSI;
+  d_st.site = &cg_emlrtRSI;
+  e_st.site = &dg_emlrtRSI;
+  f_st.site = &eg_emlrtRSI;
   if ((uint8_T)s > 127) {
     emlrtErrorWithMessageIdR2018a(
         &f_st, &o_emlrtRTEI, "Coder:toolbox:unsupportedString",
@@ -335,11 +335,11 @@ creal_T str2double(const emlrtStack *sp, char_T s)
   if (bv[i] || (s == '\x00')) {
     k = 2;
   }
-  b_st.site = &vf_emlrtRSI;
+  b_st.site = &wf_emlrtRSI;
   isimag1 = false;
   b_finite = true;
   scanned1 = 0.0;
-  c_st.site = &ig_emlrtRSI;
+  c_st.site = &jg_emlrtRSI;
   idx = 1;
   s1[0] = '\x00';
   s1[1] = '\x00';
@@ -353,10 +353,10 @@ creal_T str2double(const emlrtStack *sp, char_T s)
     } else if ((s == ',') || (s == '+')) {
       k = 2;
     } else {
-      d_st.site = &jg_emlrtRSI;
-      e_st.site = &bg_emlrtRSI;
-      f_st.site = &cg_emlrtRSI;
-      g_st.site = &dg_emlrtRSI;
+      d_st.site = &kg_emlrtRSI;
+      e_st.site = &cg_emlrtRSI;
+      f_st.site = &dg_emlrtRSI;
+      g_st.site = &eg_emlrtRSI;
       if ((uint8_T)s > 127) {
         emlrtErrorWithMessageIdR2018a(
             &g_st, &o_emlrtRTEI, "Coder:toolbox:unsupportedString",
@@ -382,7 +382,7 @@ creal_T str2double(const emlrtStack *sp, char_T s)
     if (isneg) {
       isimag1 = true;
       k++;
-      c_st.site = &hg_emlrtRSI;
+      c_st.site = &ig_emlrtRSI;
       skipspaces(&c_st, s, &k);
       s1[idx - 1] = '1';
       idx++;
@@ -398,11 +398,11 @@ creal_T str2double(const emlrtStack *sp, char_T s)
         s1[0] = ' ';
         scanned1 = -scanned1;
       }
-      c_st.site = &gg_emlrtRSI;
+      c_st.site = &hg_emlrtRSI;
       skipspaces(&c_st, s, &k);
       if ((k <= 1) && (s == '*')) {
         k = 2;
-        c_st.site = &fg_emlrtRSI;
+        c_st.site = &gg_emlrtRSI;
         skipspaces(&c_st, '*', &k);
       }
       if ((k <= 1) && ((s == 'i') || (s == 'j'))) {
@@ -410,7 +410,7 @@ creal_T str2double(const emlrtStack *sp, char_T s)
         isimag1 = true;
       }
     }
-    c_st.site = &eg_emlrtRSI;
+    c_st.site = &fg_emlrtRSI;
     skipspaces(&c_st, s, &k);
   }
   if (b_finite) {
@@ -420,7 +420,7 @@ creal_T str2double(const emlrtStack *sp, char_T s)
     s1[idx - 1] = ' ';
     idx++;
     k = 1;
-    b_st.site = &wf_emlrtRSI;
+    b_st.site = &xf_emlrtRSI;
     readfloat(&b_st, s1, &idx, s, &k, true, &isneg, &isfinite2, &scanned2,
               &foundsign, &success);
     if (isfinite2) {
@@ -437,14 +437,14 @@ creal_T str2double(const emlrtStack *sp, char_T s)
   if (success) {
     s1[idx - 1] = '\x00';
     if (ntoread == 2) {
-      b_st.site = &xf_emlrtRSI;
+      b_st.site = &yf_emlrtRSI;
       ntoread = sscanf(&s1[0], "%lf %lf", &scanned1, &scanned2);
       if (ntoread != 2) {
         scanned1 = rtNaN;
         scanned2 = rtNaN;
       }
     } else if (ntoread == 1) {
-      b_st.site = &yf_emlrtRSI;
+      b_st.site = &ag_emlrtRSI;
       ntoread = sscanf(&s1[0], "%lf", &b_scanned1);
       if (ntoread != 1) {
         b_scanned1 = rtNaN;

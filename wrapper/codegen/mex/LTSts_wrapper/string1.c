@@ -14,7 +14,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRSInfo uab_emlrtRSI = {
+static emlrtRSInfo ucb_emlrtRSI = {
     21,              /* lineNo */
     "string/string", /* fcnName */
     "C:\\Program "
@@ -22,7 +22,7 @@ static emlrtRSInfo uab_emlrtRSI = {
     "internal\\string.m" /* pathName */
 };
 
-static emlrtRSInfo vab_emlrtRSI = {
+static emlrtRSInfo vcb_emlrtRSI = {
     768,                      /* lineNo */
     "string/convertToString", /* fcnName */
     "C:\\Program "
@@ -30,7 +30,7 @@ static emlrtRSInfo vab_emlrtRSI = {
     "internal\\string.m" /* pathName */
 };
 
-static emlrtRSInfo wab_emlrtRSI = {
+static emlrtRSInfo wcb_emlrtRSI = {
     802,                   /* lineNo */
     "string/getCharValue", /* fcnName */
     "C:\\Program "
@@ -38,7 +38,7 @@ static emlrtRSInfo wab_emlrtRSI = {
     "internal\\string.m" /* pathName */
 };
 
-static emlrtRTEInfo kc_emlrtRTEI = {
+static emlrtRTEInfo qc_emlrtRTEI = {
     1228,            /* lineNo */
     31,              /* colNo */
     "normalizeChar", /* fName */
@@ -62,13 +62,13 @@ void string_string(const emlrtStack *sp, const char_T val_data[],
   boolean_T p;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &uab_emlrtRSI;
+  st.site = &ucb_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
-  b_st.site = &vab_emlrtRSI;
-  c_st.site = &wab_emlrtRSI;
+  b_st.site = &vcb_emlrtRSI;
+  c_st.site = &wcb_emlrtRSI;
   varargin_1[0] = (int8_T)val_size[0];
   varargin_1[1] = 8;
   p = true;
@@ -88,7 +88,7 @@ void string_string(const emlrtStack *sp, const char_T val_data[],
     obj_Value_size[1] = 0;
   } else {
     if (val_size[0] != 1) {
-      emlrtErrorWithMessageIdR2018a(&c_st, &kc_emlrtRTEI,
+      emlrtErrorWithMessageIdR2018a(&c_st, &qc_emlrtRTEI,
                                     "Coder:toolbox:StringMustBeRowVector",
                                     "Coder:toolbox:StringMustBeRowVector", 0);
     }

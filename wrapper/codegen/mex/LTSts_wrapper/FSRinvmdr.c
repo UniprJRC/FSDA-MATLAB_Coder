@@ -19,31 +19,31 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo tbb_emlrtRSI = {
+static emlrtRSInfo tdb_emlrtRSI = {
     207,                                                 /* lineNo */
     "FSRinvmdr",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRinvmdr.m" /* pathName */
 };
 
-static emlrtRSInfo ubb_emlrtRSI = {
+static emlrtRSInfo udb_emlrtRSI = {
     218,                                                 /* lineNo */
     "FSRinvmdr",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRinvmdr.m" /* pathName */
 };
 
-static emlrtRSInfo vbb_emlrtRSI = {
+static emlrtRSInfo vdb_emlrtRSI = {
     221,                                                 /* lineNo */
     "FSRinvmdr",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRinvmdr.m" /* pathName */
 };
 
-static emlrtRSInfo wbb_emlrtRSI = {
+static emlrtRSInfo wdb_emlrtRSI = {
     224,                                                 /* lineNo */
     "FSRinvmdr",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRinvmdr.m" /* pathName */
 };
 
-static emlrtRSInfo xbb_emlrtRSI = {
+static emlrtRSInfo xdb_emlrtRSI = {
     233,                                                 /* lineNo */
     "FSRinvmdr",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRinvmdr.m" /* pathName */
@@ -264,7 +264,7 @@ void FSRinvmdr(const emlrtStack *sp, const real_T mdr[2], real_T p,
   /*  Beginning of code */
   /*  Input parameters checks */
   if (muDoubleScalarIsNaN(p)) {
-    st.site = &tbb_emlrtRSI;
+    st.site = &tdb_emlrtRSI;
     y = NULL;
     m = emlrtCreateCharArray(2, &iv[0]);
     emlrtInitCharArrayR2013a(&st, 28, m, &varargin_1[0]);
@@ -273,25 +273,25 @@ void FSRinvmdr(const emlrtStack *sp, const real_T mdr[2], real_T p,
     m = emlrtCreateCharArray(2, &iv1[0]);
     emlrtInitCharArrayR2013a(&st, 45, m, &varargin_2[0]);
     emlrtAssign(&b_y, m);
-    b_st.site = &tcb_emlrtRSI;
+    b_st.site = &teb_emlrtRSI;
     l_error(&b_st, y, b_y, &d_emlrtMCI);
   }
   /*  Find confidence level of each value of mdr */
   /*  mm = column vector which contains fwd search index. */
   /*  Compute variance of the truncated normal distribution. */
   /*  mm/n is the percentage of observations inside subset. */
-  st.site = &ubb_emlrtRSI;
+  st.site = &udb_emlrtRSI;
   a = norminv(0.75);
   MDRncoord =
       1.0 - 4.0 * a * (muDoubleScalarExp(-0.5 * a * a) / 2.5066282746310002);
-  st.site = &vbb_emlrtRSI;
+  st.site = &vdb_emlrtRSI;
   if (MDRncoord < 0.0) {
     emlrtErrorWithMessageIdR2018a(
         &st, &xb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
         "Coder:toolbox:ElFunDomainError", 3, 4, 4, "sqrt");
   }
   MDRncoord = muDoubleScalarSqrt(MDRncoord);
-  st.site = &vbb_emlrtRSI;
+  st.site = &vdb_emlrtRSI;
   MDRncoord *= mdr[1];
   if ((1.0 - p > 0.0) && (!muDoubleScalarIsNaN(MDRncoord))) {
     if (MDRncoord == 0.0) {
@@ -304,11 +304,11 @@ void FSRinvmdr(const emlrtStack *sp, const real_T mdr[2], real_T p,
     } else {
       a = MDRncoord * MDRncoord;
       if (2.0 < a) {
-        b_st.site = &xy_emlrtRSI;
+        b_st.site = &xbb_emlrtRSI;
         dc = betainc(&b_st, 2.0 / (a + 2.0), 1.0, 0.5);
         a = dc.re / 2.0;
       } else {
-        b_st.site = &wy_emlrtRSI;
+        b_st.site = &wbb_emlrtRSI;
         dc = b_betainc(&b_st, a / (a + 2.0), 0.5, 1.0);
         a = dc.re / 2.0;
       }
@@ -320,19 +320,19 @@ void FSRinvmdr(const emlrtStack *sp, const real_T mdr[2], real_T p,
     a = rtNaN;
   }
   /*  mdr= 1-confidence level */
-  st.site = &wbb_emlrtRSI;
+  st.site = &wdb_emlrtRSI;
   MDRncoord = 2.0 / (2.0 * a - 1.0) + -2.0;
   if (!muDoubleScalarIsNaN(MDRncoord)) {
     if (MDRncoord > 0.0) {
       if (muDoubleScalarIsInf(MDRncoord)) {
         a = 1.0;
       } else if (4.0 <= MDRncoord * 2.0) {
-        b_st.site = &rbb_emlrtRSI;
+        b_st.site = &rdb_emlrtRSI;
         dc = b_betainc(&b_st, 4.0 / (MDRncoord * 2.0 + 4.0), 2.0, 1.0);
         a = dc.re;
       } else {
         a = 2.0 * MDRncoord;
-        b_st.site = &sbb_emlrtRSI;
+        b_st.site = &sdb_emlrtRSI;
         dc = betainc(&b_st, a / (a + 4.0), 1.0, 2.0);
         a = dc.re;
       }
@@ -348,7 +348,7 @@ void FSRinvmdr(const emlrtStack *sp, const real_T mdr[2], real_T p,
   /*  mmdncoo=norminv(mmt); */
   /*  The reason is that while norminv(1-\epsilon)=inf but */
   /*  -norminv(\epsilon) is exact where \epsilon is a very very small number */
-  st.site = &xbb_emlrtRSI;
+  st.site = &xdb_emlrtRSI;
   MDRncoord = -norminv(a);
   MDRinv[0] = 1.0;
   MDRinv[1] = 1.0 - a;

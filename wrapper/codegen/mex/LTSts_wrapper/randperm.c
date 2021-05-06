@@ -21,7 +21,7 @@
 
 /* Variable Definitions */
 static emlrtRSInfo
-    gj_emlrtRSI =
+    hj_emlrtRSI =
         {
             24,         /* lineNo */
             "randperm", /* fcnName */
@@ -97,7 +97,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    dk_emlrtRTEI =
+    yk_emlrtRTEI =
         {
             24,         /* lineNo */
             5,          /* colNo */
@@ -108,7 +108,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    ek_emlrtRTEI =
+    al_emlrtRTEI =
         {
             62,         /* lineNo */
             5,          /* colNo */
@@ -119,7 +119,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    fk_emlrtRTEI =
+    bl_emlrtRTEI =
         {
             63,         /* lineNo */
             5,          /* colNo */
@@ -130,7 +130,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    gk_emlrtRTEI =
+    cl_emlrtRTEI =
         {
             64,         /* lineNo */
             5,          /* colNo */
@@ -141,7 +141,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    hk_emlrtRTEI =
+    dl_emlrtRTEI =
         {
             65,         /* lineNo */
             5,          /* colNo */
@@ -191,14 +191,14 @@ void randperm(const emlrtStack *sp, real_T n, real_T k, emxArray_real_T *p)
                                   "MATLAB:randperm:inputKTooLarge",
                                   "MATLAB:randperm:inputKTooLarge", 0);
   }
-  st.site = &gj_emlrtRSI;
+  st.site = &hj_emlrtRSI;
   i = p->size[0] * p->size[1];
   p->size[0] = 1;
-  emxEnsureCapacity_real_T(&st, p, i, &dk_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, p, i, &yk_emlrtRTEI);
   loop_ub_tmp = (int32_T)k;
   i = p->size[0] * p->size[1];
   p->size[1] = (int32_T)k;
-  emxEnsureCapacity_real_T(&st, p, i, &dk_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, p, i, &yk_emlrtRTEI);
   for (i = 0; i < loop_ub_tmp; i++) {
     p->data[i] = 0.0;
   }
@@ -237,31 +237,31 @@ void randperm(const emlrtStack *sp, real_T n, real_T k, emxArray_real_T *p)
         p->data[(int32_T)(j + 1.0) - 1] = t;
       }
     } else {
-      emxInit_real_T(&st, &hashTbl, 1, &ek_emlrtRTEI, true);
+      emxInit_real_T(&st, &hashTbl, 1, &al_emlrtRTEI, true);
       i = hashTbl->size[0];
       hashTbl->size[0] = (int32_T)k;
-      emxEnsureCapacity_real_T(&st, hashTbl, i, &ek_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, hashTbl, i, &al_emlrtRTEI);
       for (i = 0; i < loop_ub_tmp; i++) {
         hashTbl->data[i] = 0.0;
       }
-      emxInit_real_T(&st, &link, 1, &fk_emlrtRTEI, true);
+      emxInit_real_T(&st, &link, 1, &bl_emlrtRTEI, true);
       i = link->size[0];
       link->size[0] = (int32_T)k;
-      emxEnsureCapacity_real_T(&st, link, i, &fk_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, link, i, &bl_emlrtRTEI);
       for (i = 0; i < loop_ub_tmp; i++) {
         link->data[i] = 0.0;
       }
-      emxInit_real_T(&st, &val, 1, &gk_emlrtRTEI, true);
+      emxInit_real_T(&st, &val, 1, &cl_emlrtRTEI, true);
       i = val->size[0];
       val->size[0] = (int32_T)k;
-      emxEnsureCapacity_real_T(&st, val, i, &gk_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, val, i, &cl_emlrtRTEI);
       for (i = 0; i < loop_ub_tmp; i++) {
         val->data[i] = 0.0;
       }
-      emxInit_real_T(&st, &loc, 1, &hk_emlrtRTEI, true);
+      emxInit_real_T(&st, &loc, 1, &dl_emlrtRTEI, true);
       i = loc->size[0];
       loc->size[0] = (int32_T)k;
-      emxEnsureCapacity_real_T(&st, loc, i, &hk_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, loc, i, &dl_emlrtRTEI);
       for (i = 0; i < loop_ub_tmp; i++) {
         loc->data[i] = 0.0;
       }

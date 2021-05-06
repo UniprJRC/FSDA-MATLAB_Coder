@@ -170,7 +170,7 @@ void b_readfloat(const emlrtStack *sp, char_T s1[4], int32_T *idx,
   *isimag = false;
   *b_finite = true;
   *nfv = 0.0;
-  st.site = &ig_emlrtRSI;
+  st.site = &jg_emlrtRSI;
   b_idx = *idx;
   b_k = *k - 1;
   isneg = false;
@@ -187,10 +187,10 @@ void b_readfloat(const emlrtStack *sp, char_T s1[4], int32_T *idx,
       *foundsign = true;
       b_k++;
     } else {
-      b_st.site = &jg_emlrtRSI;
-      c_st.site = &bg_emlrtRSI;
-      d_st.site = &cg_emlrtRSI;
-      e_st.site = &dg_emlrtRSI;
+      b_st.site = &kg_emlrtRSI;
+      c_st.site = &cg_emlrtRSI;
+      d_st.site = &dg_emlrtRSI;
+      e_st.site = &eg_emlrtRSI;
       i = (uint8_T)s[b_k];
       if (i > 127) {
         emlrtErrorWithMessageIdR2018a(
@@ -220,11 +220,11 @@ void b_readfloat(const emlrtStack *sp, char_T s1[4], int32_T *idx,
       if (allowimag) {
         *isimag = true;
         *k = b_k + 2;
-        st.site = &hg_emlrtRSI;
+        st.site = &ig_emlrtRSI;
         b_skipspaces(&st, s, k);
         if ((*k <= 2) && (s[*k - 1] == '*')) {
           (*k)++;
-          st.site = &kg_emlrtRSI;
+          st.site = &lg_emlrtRSI;
           b_readfloat(&st, s1, idx, s, k, false, &isneg, b_finite, nfv, &a__3,
                       success);
         } else {
@@ -247,11 +247,11 @@ void b_readfloat(const emlrtStack *sp, char_T s1[4], int32_T *idx,
         s1[b_idx - 2] = ' ';
         *nfv = -*nfv;
       }
-      st.site = &gg_emlrtRSI;
+      st.site = &hg_emlrtRSI;
       b_skipspaces(&st, s, k);
       if ((*k <= 2) && (s[*k - 1] == '*')) {
         (*k)++;
-        st.site = &fg_emlrtRSI;
+        st.site = &gg_emlrtRSI;
         b_skipspaces(&st, s, k);
       }
       if (*k <= 2) {
@@ -262,7 +262,7 @@ void b_readfloat(const emlrtStack *sp, char_T s1[4], int32_T *idx,
         }
       }
     }
-    st.site = &eg_emlrtRSI;
+    st.site = &fg_emlrtRSI;
     b_skipspaces(&st, s, k);
   }
 }
@@ -285,10 +285,10 @@ void b_skipspaces(const emlrtStack *sp, const char_T s[2], int32_T *k)
   d_st.tls = c_st.tls;
   exitg1 = false;
   while ((!exitg1) && (*k <= 2)) {
-    st.site = &ag_emlrtRSI;
-    b_st.site = &bg_emlrtRSI;
-    c_st.site = &cg_emlrtRSI;
-    d_st.site = &dg_emlrtRSI;
+    st.site = &bg_emlrtRSI;
+    b_st.site = &cg_emlrtRSI;
+    c_st.site = &dg_emlrtRSI;
+    d_st.site = &eg_emlrtRSI;
     c = s[*k - 1];
     if ((uint8_T)c > 127) {
       emlrtErrorWithMessageIdR2018a(
@@ -433,7 +433,7 @@ void readfloat(const emlrtStack *sp, char_T s1[3], int32_T *idx, char_T s,
   *isimag = false;
   *b_finite = true;
   *nfv = 0.0;
-  st.site = &ig_emlrtRSI;
+  st.site = &jg_emlrtRSI;
   b_idx = *idx - 1;
   isneg = false;
   *foundsign = false;
@@ -449,10 +449,10 @@ void readfloat(const emlrtStack *sp, char_T s1[3], int32_T *idx, char_T s,
       *foundsign = true;
       *k = 2;
     } else {
-      b_st.site = &jg_emlrtRSI;
-      c_st.site = &bg_emlrtRSI;
-      d_st.site = &cg_emlrtRSI;
-      e_st.site = &dg_emlrtRSI;
+      b_st.site = &kg_emlrtRSI;
+      c_st.site = &cg_emlrtRSI;
+      d_st.site = &dg_emlrtRSI;
+      e_st.site = &eg_emlrtRSI;
       if ((uint8_T)s > 127) {
         emlrtErrorWithMessageIdR2018a(
             &e_st, &o_emlrtRTEI, "Coder:toolbox:unsupportedString",
@@ -484,11 +484,11 @@ void readfloat(const emlrtStack *sp, char_T s1[3], int32_T *idx, char_T s,
       if (allowimag) {
         *isimag = true;
         (*k)++;
-        st.site = &hg_emlrtRSI;
+        st.site = &ig_emlrtRSI;
         skipspaces(&st, s, k);
         if ((*k <= 1) && (s == '*')) {
           *k = 2;
-          st.site = &kg_emlrtRSI;
+          st.site = &lg_emlrtRSI;
           readfloat(&st, s1, idx, '*', k, false, &isneg, b_finite, nfv, &a__3,
                     success);
         } else {
@@ -510,11 +510,11 @@ void readfloat(const emlrtStack *sp, char_T s1[3], int32_T *idx, char_T s,
         s1[b_idx - 1] = ' ';
         *nfv = -*nfv;
       }
-      st.site = &gg_emlrtRSI;
+      st.site = &hg_emlrtRSI;
       skipspaces(&st, s, k);
       if ((*k <= 1) && (s == '*')) {
         *k = 2;
-        st.site = &fg_emlrtRSI;
+        st.site = &gg_emlrtRSI;
         skipspaces(&st, '*', k);
       }
       if ((*k <= 1) && ((s == 'i') || (s == 'j'))) {
@@ -522,7 +522,7 @@ void readfloat(const emlrtStack *sp, char_T s1[3], int32_T *idx, char_T s,
         *isimag = true;
       }
     }
-    st.site = &eg_emlrtRSI;
+    st.site = &fg_emlrtRSI;
     skipspaces(&st, s, k);
   }
 }
@@ -544,10 +544,10 @@ void skipspaces(const emlrtStack *sp, char_T s, int32_T *k)
   d_st.tls = c_st.tls;
   exitg1 = false;
   while ((!exitg1) && (*k <= 1)) {
-    st.site = &ag_emlrtRSI;
-    b_st.site = &bg_emlrtRSI;
-    c_st.site = &cg_emlrtRSI;
-    d_st.site = &dg_emlrtRSI;
+    st.site = &bg_emlrtRSI;
+    b_st.site = &cg_emlrtRSI;
+    c_st.site = &dg_emlrtRSI;
+    d_st.site = &eg_emlrtRSI;
     if ((uint8_T)s > 127) {
       emlrtErrorWithMessageIdR2018a(
           &d_st, &o_emlrtRTEI, "Coder:toolbox:unsupportedString",

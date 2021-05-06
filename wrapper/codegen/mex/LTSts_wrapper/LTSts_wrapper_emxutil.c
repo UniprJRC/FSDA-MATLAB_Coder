@@ -17,15 +17,139 @@
 #include <string.h>
 
 /* Function Definitions */
+void c_emxCopyStruct_anonymous_funct(const emlrtStack *sp,
+                                     b_anonymous_function *dst,
+                                     const b_anonymous_function *src,
+                                     const emlrtRTEInfo *srcLocation)
+{
+  emxCopyStruct_struct_T1(sp, &dst->workspace, &src->workspace, srcLocation);
+}
+
+void c_emxFreeStruct_anonymous_funct(anonymous_function *pStruct)
+{
+  emxFreeStruct_struct_T2(&pStruct->workspace);
+}
+
+void c_emxInitStruct_anonymous_funct(const emlrtStack *sp,
+                                     b_anonymous_function *pStruct,
+                                     const emlrtRTEInfo *srcLocation,
+                                     boolean_T doPush)
+{
+  emxInitStruct_struct_T3(sp, &pStruct->workspace, srcLocation, doPush);
+}
+
 void c_emxInitStruct_matlab_internal(e_matlab_internal_coder_tabular *pStruct)
 {
   emxInitMatrix_cell_wrap_1(&pStruct->labels[0]);
+}
+
+void d_emxCopyStruct_anonymous_funct(const emlrtStack *sp,
+                                     anonymous_function *dst,
+                                     const anonymous_function *src,
+                                     const emlrtRTEInfo *srcLocation)
+{
+  emxCopyStruct_struct_T2(sp, &dst->workspace, &src->workspace, srcLocation);
+}
+
+void d_emxFreeStruct_anonymous_funct(b_anonymous_function *pStruct)
+{
+  emxFreeStruct_struct_T3(&pStruct->workspace);
+}
+
+void d_emxInitStruct_anonymous_funct(const emlrtStack *sp,
+                                     anonymous_function *pStruct,
+                                     const emlrtRTEInfo *srcLocation,
+                                     boolean_T doPush)
+{
+  emxInitStruct_struct_T4(sp, &pStruct->workspace, srcLocation, doPush);
 }
 
 void d_emxInitStruct_matlab_internal(f_matlab_internal_coder_tabular *pStruct)
 {
   emxInitMatrix_cell_wrap_3(pStruct->descrs);
   emxInitMatrix_cell_wrap_3(pStruct->units);
+}
+
+void emxCopyStruct_struct_T(const emlrtStack *sp, f_struct_T *dst,
+                            const f_struct_T *src,
+                            const emlrtRTEInfo *srcLocation)
+{
+  c_emxCopyStruct_anonymous_funct(sp, &dst->nonlin, &src->nonlin, srcLocation);
+  dst->f_1 = src->f_1;
+  emxCopy_real_T(sp, &dst->cEq_1, &src->cEq_1, srcLocation);
+  dst->f_2 = src->f_2;
+  emxCopy_real_T(sp, &dst->cEq_2, &src->cEq_2, srcLocation);
+  dst->nVar = src->nVar;
+  dst->mIneq = src->mIneq;
+  dst->mEq = src->mEq;
+  dst->numEvals = src->numEvals;
+  dst->SpecifyObjectiveGradient = src->SpecifyObjectiveGradient;
+  dst->SpecifyConstraintGradient = src->SpecifyConstraintGradient;
+  dst->isEmptyNonlcon = src->isEmptyNonlcon;
+  emxCopy_boolean_T(sp, &dst->hasLB, &src->hasLB, srcLocation);
+  emxCopy_boolean_T(sp, &dst->hasUB, &src->hasUB, srcLocation);
+  dst->hasBounds = src->hasBounds;
+  dst->FiniteDifferenceType = src->FiniteDifferenceType;
+}
+
+void emxCopyStruct_struct_T1(const emlrtStack *sp, e_struct_T *dst,
+                             const e_struct_T *src,
+                             const emlrtRTEInfo *srcLocation)
+{
+  d_emxCopyStruct_anonymous_funct(sp, &dst->fun, &src->fun, srcLocation);
+}
+
+void emxCopyStruct_struct_T2(const emlrtStack *sp, d_struct_T *dst,
+                             const d_struct_T *src,
+                             const emlrtRTEInfo *srcLocation)
+{
+  dst->fun = src->fun;
+  emxCopy_real_T(sp, &dst->xdata, &src->xdata, srcLocation);
+  emxCopy_real_T(sp, &dst->ydata, &src->ydata, srcLocation);
+}
+
+void emxCopy_boolean_T(const emlrtStack *sp, emxArray_boolean_T **dst,
+                       emxArray_boolean_T *const *src,
+                       const emlrtRTEInfo *srcLocation)
+{
+  int32_T i;
+  int32_T numElDst;
+  int32_T numElSrc;
+  numElDst = 1;
+  numElSrc = 1;
+  for (i = 0; i < (*dst)->numDimensions; i++) {
+    numElDst *= (*dst)->size[i];
+    numElSrc *= (*src)->size[i];
+  }
+  for (i = 0; i < (*dst)->numDimensions; i++) {
+    (*dst)->size[i] = (*src)->size[i];
+  }
+  emxEnsureCapacity_boolean_T(sp, *dst, numElDst, srcLocation);
+  for (i = 0; i < numElSrc; i++) {
+    (*dst)->data[i] = (*src)->data[i];
+  }
+}
+
+void emxCopy_real_T(const emlrtStack *sp, emxArray_real_T **dst,
+                    emxArray_real_T *const *src,
+                    const emlrtRTEInfo *srcLocation)
+{
+  int32_T i;
+  int32_T numElDst;
+  int32_T numElSrc;
+  numElDst = 1;
+  numElSrc = 1;
+  for (i = 0; i < (*dst)->numDimensions; i++) {
+    numElDst *= (*dst)->size[i];
+    numElSrc *= (*src)->size[i];
+  }
+  for (i = 0; i < (*dst)->numDimensions; i++) {
+    (*dst)->size[i] = (*src)->size[i];
+  }
+  emxEnsureCapacity_real_T(sp, *dst, numElDst, srcLocation);
+  for (i = 0; i < numElSrc; i++) {
+    (*dst)->data[i] = (*src)->data[i];
+  }
 }
 
 void emxEnsureCapacity_boolean_T(const emlrtStack *sp,
@@ -300,12 +424,12 @@ void emxFreeMatrix_cell_wrap_4(cell_wrap_4 pMatrix[4])
 
 void emxFreeStruct_captured_var(c_captured_var *pStruct)
 {
-  emxFree_boolean_T(&pStruct->contents);
+  emxFree_real_T(&pStruct->contents);
 }
 
 void emxFreeStruct_captured_var1(d_captured_var *pStruct)
 {
-  emxFree_real_T(&pStruct->contents);
+  emxFree_boolean_T(&pStruct->contents);
 }
 
 void emxFreeStruct_cell_wrap_4(cell_wrap_4 *pStruct)
@@ -343,6 +467,32 @@ void emxFreeStruct_struct_T(struct_T *pStruct)
   emxFree_real_T(&pStruct->betarw);
   emxFree_real_T(&pStruct->yhat);
   emxFree_boolean_T(&pStruct->weights);
+}
+
+void emxFreeStruct_struct_T1(b_struct_T *pStruct)
+{
+  emxFree_real_T(&pStruct->lower);
+  emxFree_real_T(&pStruct->upper);
+}
+
+void emxFreeStruct_struct_T2(d_struct_T *pStruct)
+{
+  emxFree_real_T(&pStruct->xdata);
+  emxFree_real_T(&pStruct->ydata);
+}
+
+void emxFreeStruct_struct_T3(e_struct_T *pStruct)
+{
+  c_emxFreeStruct_anonymous_funct(&pStruct->fun);
+}
+
+void emxFreeStruct_struct_T4(f_struct_T *pStruct)
+{
+  d_emxFreeStruct_anonymous_funct(&pStruct->nonlin);
+  emxFree_real_T(&pStruct->cEq_1);
+  emxFree_real_T(&pStruct->cEq_2);
+  emxFree_boolean_T(&pStruct->hasLB);
+  emxFree_boolean_T(&pStruct->hasUB);
 }
 
 void emxFreeStruct_table(table *pStruct)
@@ -454,21 +604,21 @@ void emxInitStruct_captured_var(const emlrtStack *sp, c_captured_var *pStruct,
                                 const emlrtRTEInfo *srcLocation,
                                 boolean_T doPush)
 {
-  emxInit_boolean_T(sp, &pStruct->contents, 1, srcLocation, doPush);
+  emxInit_real_T(sp, &pStruct->contents, 1, srcLocation, doPush);
 }
 
-void emxInitStruct_captured_var1(const emlrtStack *sp, d_captured_var *pStruct,
+void emxInitStruct_captured_var1(const emlrtStack *sp, c_captured_var *pStruct,
                                  const emlrtRTEInfo *srcLocation,
                                  boolean_T doPush)
 {
-  emxInit_real_T(sp, &pStruct->contents, 1, srcLocation, doPush);
+  emxInit_real_T(sp, &pStruct->contents, 2, srcLocation, doPush);
 }
 
 void emxInitStruct_captured_var2(const emlrtStack *sp, d_captured_var *pStruct,
                                  const emlrtRTEInfo *srcLocation,
                                  boolean_T doPush)
 {
-  emxInit_real_T(sp, &pStruct->contents, 2, srcLocation, doPush);
+  emxInit_boolean_T(sp, &pStruct->contents, 1, srcLocation, doPush);
 }
 
 void emxInitStruct_cell_wrap_1(cell_wrap_1 *pStruct)
@@ -538,6 +688,36 @@ void emxInitStruct_struct_T(const emlrtStack *sp, struct_T *pStruct,
   emxInit_real_T(sp, &pStruct->betarw, 1, srcLocation, doPush);
   emxInit_real_T(sp, &pStruct->yhat, 1, srcLocation, doPush);
   emxInit_boolean_T(sp, &pStruct->weights, 1, srcLocation, doPush);
+}
+
+void emxInitStruct_struct_T1(const emlrtStack *sp, b_struct_T *pStruct,
+                             const emlrtRTEInfo *srcLocation, boolean_T doPush)
+{
+  emxInit_real_T(sp, &pStruct->lower, 1, srcLocation, doPush);
+  emxInit_real_T(sp, &pStruct->upper, 1, srcLocation, doPush);
+}
+
+void emxInitStruct_struct_T2(const emlrtStack *sp, f_struct_T *pStruct,
+                             const emlrtRTEInfo *srcLocation, boolean_T doPush)
+{
+  c_emxInitStruct_anonymous_funct(sp, &pStruct->nonlin, srcLocation, doPush);
+  emxInit_real_T(sp, &pStruct->cEq_1, 1, srcLocation, doPush);
+  emxInit_real_T(sp, &pStruct->cEq_2, 1, srcLocation, doPush);
+  emxInit_boolean_T(sp, &pStruct->hasLB, 1, srcLocation, doPush);
+  emxInit_boolean_T(sp, &pStruct->hasUB, 1, srcLocation, doPush);
+}
+
+void emxInitStruct_struct_T3(const emlrtStack *sp, e_struct_T *pStruct,
+                             const emlrtRTEInfo *srcLocation, boolean_T doPush)
+{
+  d_emxInitStruct_anonymous_funct(sp, &pStruct->fun, srcLocation, doPush);
+}
+
+void emxInitStruct_struct_T4(const emlrtStack *sp, d_struct_T *pStruct,
+                             const emlrtRTEInfo *srcLocation, boolean_T doPush)
+{
+  emxInit_real_T(sp, &pStruct->xdata, 2, srcLocation, doPush);
+  emxInit_real_T(sp, &pStruct->ydata, 1, srcLocation, doPush);
 }
 
 void emxInitStruct_table(const emlrtStack *sp, table *pStruct,

@@ -13,7 +13,9 @@
 #include "norm.h"
 #include "LTSts_wrapper_types.h"
 #include "rt_nonfinite.h"
+#include "blas.h"
 #include "mwmathutil.h"
+#include <stddef.h>
 
 /* Function Definitions */
 real_T b_norm(const emxArray_real_T *x)
@@ -52,6 +54,42 @@ real_T b_norm(const emxArray_real_T *x)
         j++;
       }
     }
+  }
+  return y;
+}
+
+real_T c_norm(const emxArray_real_T *x)
+{
+  real_T absx;
+  real_T y;
+  int32_T i;
+  int32_T k;
+  if (x->size[0] == 0) {
+    y = 0.0;
+  } else {
+    y = 0.0;
+    i = x->size[0];
+    for (k = 0; k < i; k++) {
+      absx = muDoubleScalarAbs(x->data[k]);
+      if (muDoubleScalarIsNaN(absx) || (absx > y)) {
+        y = absx;
+      }
+    }
+  }
+  return y;
+}
+
+real_T d_norm(const emxArray_real_T *x)
+{
+  ptrdiff_t incx_t;
+  ptrdiff_t n_t;
+  real_T y;
+  if (x->size[0] == 0) {
+    y = 0.0;
+  } else {
+    n_t = (ptrdiff_t)x->size[0];
+    incx_t = (ptrdiff_t)1;
+    y = dnrm2(&n_t, &x->data[0], &incx_t);
   }
   return y;
 }

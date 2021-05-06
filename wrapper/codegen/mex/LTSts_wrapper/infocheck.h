@@ -22,8 +22,6 @@
 #include <string.h>
 
 /* Function Declarations */
-boolean_T b_infocheck(const emlrtStack *sp, int32_T info);
-
 boolean_T infocheck(const emlrtStack *sp, int32_T info);
 
 /* End of code generation (infocheck.h) */

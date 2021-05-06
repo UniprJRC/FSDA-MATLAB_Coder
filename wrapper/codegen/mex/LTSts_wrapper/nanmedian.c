@@ -19,21 +19,21 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo vx_emlrtRSI = {
+static emlrtRSInfo ay_emlrtRSI = {
     11,          /* lineNo */
     "nanmedian", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\nanmedian.m" /* pathName
                                                                            */
 };
 
-static emlrtRSInfo wx_emlrtRSI = {
+static emlrtRSInfo by_emlrtRSI = {
     56,        /* lineNo */
     "prctile", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\prctile.m" /* pathName
                                                                          */
 };
 
-static emlrtRSInfo xx_emlrtRSI = {
+static emlrtRSInfo cy_emlrtRSI = {
     92,                 /* lineNo */
     "percentile_array", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\prctile.m" /* pathName
@@ -63,13 +63,13 @@ real_T nanmedian(const emlrtStack *sp, const emxArray_real_T *x)
   d_st.prev = &c_st;
   d_st.tls = c_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  emxInit_int32_T(sp, &idx, 1, &vt_emlrtRTEI, true);
-  st.site = &vx_emlrtRSI;
-  b_st.site = &wx_emlrtRSI;
-  c_st.site = &xx_emlrtRSI;
-  d_st.site = &gv_emlrtRSI;
+  emxInit_int32_T(sp, &idx, 1, &ru_emlrtRTEI, true);
+  st.site = &ay_emlrtRSI;
+  b_st.site = &by_emlrtRSI;
+  c_st.site = &cy_emlrtRSI;
+  d_st.site = &kv_emlrtRSI;
   sortIdx(&d_st, x, idx);
-  d_st.site = &hv_emlrtRSI;
+  d_st.site = &lv_emlrtRSI;
   nj = x->size[0];
   exitg1 = false;
   while ((!exitg1) && (nj > 0)) {

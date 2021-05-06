@@ -18,13 +18,13 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRSInfo hs_emlrtRSI = {
+static emlrtRSInfo ls_emlrtRSI = {
     99,                                                  /* lineNo */
     "HUrho",                                             /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\HUrho.m" /* pathName */
 };
 
-static emlrtRSInfo is_emlrtRSI = {
+static emlrtRSInfo ms_emlrtRSI = {
     100,                                                 /* lineNo */
     "HUrho",                                             /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\HUrho.m" /* pathName */
@@ -46,21 +46,21 @@ static emlrtECInfo kc_emlrtECI = {
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\HUrho.m" /* pName */
 };
 
-static emlrtRTEInfo as_emlrtRTEI = {
+static emlrtRTEInfo vs_emlrtRTEI = {
     99,                                                  /* lineNo */
     1,                                                   /* colNo */
     "HUrho",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\HUrho.m" /* pName */
 };
 
-static emlrtRTEInfo bs_emlrtRTEI = {
+static emlrtRTEInfo ws_emlrtRTEI = {
     100,                                                 /* lineNo */
     22,                                                  /* colNo */
     "HUrho",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\HUrho.m" /* pName */
 };
 
-static emlrtRTEInfo cs_emlrtRTEI = {
+static emlrtRTEInfo xs_emlrtRTEI = {
     100,                                                 /* lineNo */
     32,                                                  /* colNo */
     "HUrho",                                             /* fName */
@@ -80,8 +80,8 @@ void HUrho(const emlrtStack *sp, const emxArray_real_T *u, real_T c,
   st.prev = sp;
   st.tls = sp->tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  emxInit_boolean_T(sp, &w, 1, &as_emlrtRTEI, true);
-  emxInit_real_T(sp, &b, 1, &cs_emlrtRTEI, true);
+  emxInit_boolean_T(sp, &w, 1, &vs_emlrtRTEI, true);
+  emxInit_real_T(sp, &b, 1, &xs_emlrtRTEI, true);
   /* HUrho computes rho function for Huber */
   /*  */
   /* <a href="matlab: docsearchFS('HUrho')">Link to the help function</a> */
@@ -176,16 +176,16 @@ void HUrho(const emlrtStack *sp, const emxArray_real_T *u, real_T c,
   /*     plot(x,rhoHU,'-.') */
   /* } */
   /*  Beginning of code */
-  st.site = &hs_emlrtRSI;
+  st.site = &ls_emlrtRSI;
   b_abs(&st, u, b);
   i = w->size[0];
   w->size[0] = b->size[0];
-  emxEnsureCapacity_boolean_T(sp, w, i, &as_emlrtRTEI);
+  emxEnsureCapacity_boolean_T(sp, w, i, &vs_emlrtRTEI);
   loop_ub = b->size[0];
   for (i = 0; i < loop_ub; i++) {
     w->data[i] = (b->data[i] <= c);
   }
-  st.site = &is_emlrtRSI;
+  st.site = &ms_emlrtRSI;
   power(&st, u, rhoHU);
   loop_ub = rhoHU->size[0];
   for (i = 0; i < loop_ub; i++) {
@@ -195,7 +195,7 @@ void HUrho(const emlrtStack *sp, const emxArray_real_T *u, real_T c,
     emlrtSizeEqCheck1DR2012b(rhoHU->size[0], w->size[0], &jc_emlrtECI,
                              (emlrtCTX)sp);
   }
-  st.site = &is_emlrtRSI;
+  st.site = &ms_emlrtRSI;
   b_abs(&st, u, b);
   loop_ub = b->size[0];
   for (i = 0; i < loop_ub; i++) {
@@ -212,7 +212,7 @@ void HUrho(const emlrtStack *sp, const emxArray_real_T *u, real_T c,
   b_c = c * c / 2.0;
   i = b->size[0];
   b->size[0] = w->size[0];
-  emxEnsureCapacity_real_T(sp, b, i, &bs_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, b, i, &ws_emlrtRTEI);
   loop_ub = w->size[0];
   for (i = 0; i < loop_ub; i++) {
     b->data[i] = (1.0 - (real_T)w->data[i]) * (b->data[i] - b_c);

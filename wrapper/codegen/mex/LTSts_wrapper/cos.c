@@ -18,7 +18,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo lg_emlrtRSI =
+static emlrtRSInfo mg_emlrtRSI =
     {
         11,    /* lineNo */
         "cos", /* fcnName */
@@ -37,15 +37,15 @@ void b_cos(const emlrtStack *sp, emxArray_real_T *x)
   int32_T nx;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &lg_emlrtRSI;
+  st.site = &mg_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   nx = x->size[0];
-  b_st.site = &mg_emlrtRSI;
+  b_st.site = &ng_emlrtRSI;
   if ((1 <= x->size[0]) && (x->size[0] > 2147483646)) {
-    c_st.site = &pf_emlrtRSI;
+    c_st.site = &qf_emlrtRSI;
     check_forloop_overflow_error(&c_st);
   }
   for (k = 0; k < nx; k++) {

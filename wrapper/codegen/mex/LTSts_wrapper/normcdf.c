@@ -17,7 +17,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtBCInfo uo_emlrtBCI = {
+static emlrtBCInfo hp_emlrtBCI = {
     -1,        /* iFirst */
     -1,        /* iLast */
     49,        /* lineNo */
@@ -29,7 +29,7 @@ static emlrtBCInfo uo_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtBCInfo vo_emlrtBCI = {
+static emlrtBCInfo ip_emlrtBCI = {
     -1,        /* iFirst */
     -1,        /* iLast */
     79,        /* lineNo */
@@ -41,7 +41,7 @@ static emlrtBCInfo vo_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtRTEInfo gv_emlrtRTEI = {
+static emlrtRTEInfo yw_emlrtRTEI = {
     43,        /* lineNo */
     5,         /* colNo */
     "normcdf", /* fName */
@@ -57,16 +57,16 @@ void normcdf(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *p)
   int32_T k;
   i = p->size[0];
   p->size[0] = x->size[0];
-  emxEnsureCapacity_real_T(sp, p, i, &gv_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, p, i, &yw_emlrtRTEI);
   i = x->size[0];
   for (k = 0; k < i; k++) {
     if (k + 1 > x->size[0]) {
-      emlrtDynamicBoundsCheckR2012b(k + 1, 1, x->size[0], &uo_emlrtBCI,
+      emlrtDynamicBoundsCheckR2012b(k + 1, 1, x->size[0], &hp_emlrtBCI,
                                     (emlrtCTX)sp);
     }
     y = eml_erfcore(-x->data[k] / 1.4142135623730951);
     if (k + 1 > p->size[0]) {
-      emlrtDynamicBoundsCheckR2012b(k + 1, 1, p->size[0], &vo_emlrtBCI,
+      emlrtDynamicBoundsCheckR2012b(k + 1, 1, p->size[0], &ip_emlrtBCI,
                                     (emlrtCTX)sp);
     }
     p->data[k] = 0.5 * y;

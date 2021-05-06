@@ -19,35 +19,35 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRSInfo sx_emlrtRSI = {
+static emlrtRSInfo wx_emlrtRSI = {
     32,    /* lineNo */
     "mad", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\mad.m" /* pathName
                                                                      */
 };
 
-static emlrtRSInfo tx_emlrtRSI = {
+static emlrtRSInfo xx_emlrtRSI = {
     33,    /* lineNo */
     "mad", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\mad.m" /* pathName
                                                                      */
 };
 
-static emlrtRSInfo ux_emlrtRSI = {
+static emlrtRSInfo yx_emlrtRSI = {
     34,    /* lineNo */
     "mad", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\mad.m" /* pathName
                                                                      */
 };
 
-static emlrtRTEInfo ku_emlrtRTEI = {
+static emlrtRTEInfo gv_emlrtRTEI = {
     33,                                                             /* lineNo */
     5,                                                              /* colNo */
     "mad",                                                          /* fName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\mad.m" /* pName */
 };
 
-static emlrtRTEInfo lu_emlrtRTEI = {
+static emlrtRTEInfo hv_emlrtRTEI = {
     33,                                                             /* lineNo */
     14,                                                             /* colNo */
     "mad",                                                          /* fName */
@@ -71,21 +71,21 @@ real_T mad(const emlrtStack *sp, const emxArray_real_T *x)
   if (x->size[0] == 0) {
     y = rtNaN;
   } else {
-    emxInit_real_T(sp, &c, 1, &lu_emlrtRTEI, true);
-    st.site = &sx_emlrtRSI;
+    emxInit_real_T(sp, &c, 1, &hv_emlrtRTEI, true);
+    st.site = &wx_emlrtRSI;
     xm = nanmedian(&st, x);
     i = c->size[0];
     c->size[0] = x->size[0];
-    emxEnsureCapacity_real_T(sp, c, i, &kl_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, c, i, &gm_emlrtRTEI);
     acoef = (x->size[0] != 1);
     i = x->size[0] - 1;
     for (k = 0; k <= i; k++) {
       c->data[k] = x->data[acoef * k] - xm;
     }
-    emxInit_real_T(sp, &xx, 1, &ku_emlrtRTEI, true);
-    st.site = &tx_emlrtRSI;
+    emxInit_real_T(sp, &xx, 1, &gv_emlrtRTEI, true);
+    st.site = &xx_emlrtRSI;
     b_abs(&st, c, xx);
-    st.site = &ux_emlrtRSI;
+    st.site = &yx_emlrtRSI;
     y = nanmedian(&st, xx);
     emxFree_real_T(&c);
     emxFree_real_T(&xx);

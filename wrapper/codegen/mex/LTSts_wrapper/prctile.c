@@ -19,7 +19,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo fv_emlrtRSI = {
+static emlrtRSInfo jv_emlrtRSI = {
     54,        /* lineNo */
     "prctile", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\prctile.m" /* pathName
@@ -55,14 +55,14 @@ real_T prctile(const emlrtStack *sp, const emxArray_real_T *x, real_T p)
   b_st.prev = &st;
   b_st.tls = st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  st.site = &fv_emlrtRSI;
+  st.site = &jv_emlrtRSI;
   if (x->size[0] == 0) {
     y = rtNaN;
   } else {
-    emxInit_int32_T(&st, &idx, 1, &vt_emlrtRTEI, true);
-    b_st.site = &gv_emlrtRSI;
+    emxInit_int32_T(&st, &idx, 1, &ru_emlrtRTEI, true);
+    b_st.site = &kv_emlrtRSI;
     sortIdx(&b_st, x, idx);
-    b_st.site = &hv_emlrtRSI;
+    b_st.site = &lv_emlrtRSI;
     nj = x->size[0];
     exitg1 = false;
     while ((!exitg1) && (nj > 0)) {

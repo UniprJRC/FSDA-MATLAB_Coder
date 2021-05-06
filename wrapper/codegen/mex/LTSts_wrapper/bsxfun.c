@@ -42,7 +42,7 @@ void bsxfun(const emlrtStack *sp, const emxArray_real_T *a,
   i = c->size[0] * c->size[1];
   c->size[0] = csz_idx_0;
   c->size[1] = b->size[1];
-  emxEnsureCapacity_real_T(sp, c, i, &kl_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, c, i, &gm_emlrtRTEI);
   if ((csz_idx_0 != 0) && (b->size[1] != 0)) {
     csz_idx_0 = (b->size[1] != 1);
     i = b->size[1] - 1;

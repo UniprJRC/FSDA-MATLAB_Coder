@@ -17,20 +17,6 @@
 #include "emlrt.h"
 
 /* Type Definitions */
-#ifndef typedef_captured_var
-#define typedef_captured_var
-typedef struct {
-  real_T contents;
-} captured_var;
-#endif /* typedef_captured_var */
-
-#ifndef typedef_b_captured_var
-#define typedef_b_captured_var
-typedef struct {
-  boolean_T contents;
-} b_captured_var;
-#endif /* typedef_b_captured_var */
-
 #ifndef typedef_rtDesignRangeCheckInfo
 #define typedef_rtDesignRangeCheckInfo
 typedef struct {

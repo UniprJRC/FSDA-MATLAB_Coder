@@ -25,4 +25,8 @@
 /* Function Declarations */
 real_T b_norm(const emxArray_real_T *x);
 
+real_T c_norm(const emxArray_real_T *x);
+
+real_T d_norm(const emxArray_real_T *x);
+
 /* End of code generation (norm.h) */

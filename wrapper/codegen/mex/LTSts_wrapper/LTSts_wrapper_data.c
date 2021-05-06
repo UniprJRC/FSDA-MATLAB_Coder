@@ -19,18 +19,18 @@ emlrtCTX emlrtRootTLSGlobal = NULL;
 const volatile char_T *emlrtBreakCheckR2012bFlagVar = NULL;
 
 emlrtContext emlrtContextGlobal = {
-    true,                                               /* bFirstTime */
-    false,                                              /* bInitialized */
-    131610U,                                            /* fVersionInfo */
-    NULL,                                               /* fErrorFunction */
-    "LTSts_wrapper",                                    /* fFunctionName */
-    NULL,                                               /* fRTCallStack */
-    false,                                              /* bDebugMode */
-    {1764267121U, 892124745U, 566995601U, 1444085946U}, /* fSigWrd */
-    NULL                                                /* fSigMem */
+    true,                                                 /* bFirstTime */
+    false,                                                /* bInitialized */
+    131610U,                                              /* fVersionInfo */
+    NULL,                                                 /* fErrorFunction */
+    "LTSts_wrapper",                                      /* fFunctionName */
+    NULL,                                                 /* fRTCallStack */
+    false,                                                /* bDebugMode */
+    {3082074332U, 1523176671U, 1460709218U, 3576369223U}, /* fSigWrd */
+    NULL                                                  /* fSigMem */
 };
 
-emlrtRSInfo gf_emlrtRSI = {
+emlrtRSInfo hf_emlrtRSI = {
     23,          /* lineNo */
     "intersect", /* fcnName */
     "C:\\Program "
@@ -38,7 +38,7 @@ emlrtRSInfo gf_emlrtRSI = {
                                                                           */
 };
 
-emlrtRSInfo hf_emlrtRSI = {
+emlrtRSInfo if_emlrtRSI = {
     70,          /* lineNo */
     "eml_setop", /* fcnName */
     "C:\\Program "
@@ -46,7 +46,7 @@ emlrtRSInfo hf_emlrtRSI = {
     "m" /* pathName */
 };
 
-emlrtRSInfo kf_emlrtRSI =
+emlrtRSInfo lf_emlrtRSI =
     {
         71,      /* lineNo */
         "power", /* fcnName */
@@ -55,7 +55,7 @@ emlrtRSInfo kf_emlrtRSI =
                                                                           */
 };
 
-emlrtRSInfo mf_emlrtRSI = {
+emlrtRSInfo nf_emlrtRSI = {
     52,      /* lineNo */
     "ixfun", /* fcnName */
     "C:\\Program "
@@ -63,7 +63,7 @@ emlrtRSInfo mf_emlrtRSI = {
                                                                             */
 };
 
-emlrtRSInfo nf_emlrtRSI = {
+emlrtRSInfo of_emlrtRSI = {
     66,                          /* lineNo */
     "applyBinaryScalarFunction", /* fcnName */
     "C:\\Program "
@@ -71,7 +71,7 @@ emlrtRSInfo nf_emlrtRSI = {
     "internal\\applyBinaryScalarFunction.m" /* pathName */
 };
 
-emlrtRSInfo pf_emlrtRSI = {
+emlrtRSInfo qf_emlrtRSI = {
     21,                               /* lineNo */
     "eml_int_forloop_overflow_check", /* fcnName */
     "C:\\Program "
@@ -79,7 +79,7 @@ emlrtRSInfo pf_emlrtRSI = {
     "overflow_check.m" /* pathName */
 };
 
-emlrtRSInfo rf_emlrtRSI = {
+emlrtRSInfo sf_emlrtRSI = {
     96,         /* lineNo */
     "cat_impl", /* fcnName */
     "C:\\Program "
@@ -87,7 +87,7 @@ emlrtRSInfo rf_emlrtRSI = {
                                                                           */
 };
 
-emlrtRSInfo ag_emlrtRSI =
+emlrtRSInfo bg_emlrtRSI =
     {
         127,          /* lineNo */
         "skipspaces", /* fcnName */
@@ -96,7 +96,7 @@ emlrtRSInfo ag_emlrtRSI =
         "internal\\str2double.m" /* pathName */
 };
 
-emlrtRSInfo bg_emlrtRSI = {
+emlrtRSInfo cg_emlrtRSI = {
     14,        /* lineNo */
     "isspace", /* fcnName */
     "C:\\Program "
@@ -105,7 +105,7 @@ emlrtRSInfo bg_emlrtRSI = {
 };
 
 emlrtRSInfo
-    cg_emlrtRSI =
+    dg_emlrtRSI =
         {
             15,          /* lineNo */
             "isstrprop", /* fcnName */
@@ -115,7 +115,7 @@ emlrtRSInfo
 };
 
 emlrtRSInfo
-    dg_emlrtRSI =
+    eg_emlrtRSI =
         {
             23,                         /* lineNo */
             "apply_property_predicate", /* fcnName */
@@ -124,7 +124,7 @@ emlrtRSInfo
             "p.m" /* pathName */
 };
 
-emlrtRSInfo eg_emlrtRSI =
+emlrtRSInfo fg_emlrtRSI =
     {
         371,         /* lineNo */
         "readfloat", /* fcnName */
@@ -133,7 +133,7 @@ emlrtRSInfo eg_emlrtRSI =
         "internal\\str2double.m" /* pathName */
 };
 
-emlrtRSInfo fg_emlrtRSI =
+emlrtRSInfo gg_emlrtRSI =
     {
         364,         /* lineNo */
         "readfloat", /* fcnName */
@@ -142,7 +142,7 @@ emlrtRSInfo fg_emlrtRSI =
         "internal\\str2double.m" /* pathName */
 };
 
-emlrtRSInfo gg_emlrtRSI =
+emlrtRSInfo hg_emlrtRSI =
     {
         361,         /* lineNo */
         "readfloat", /* fcnName */
@@ -151,7 +151,7 @@ emlrtRSInfo gg_emlrtRSI =
         "internal\\str2double.m" /* pathName */
 };
 
-emlrtRSInfo hg_emlrtRSI =
+emlrtRSInfo ig_emlrtRSI =
     {
         333,         /* lineNo */
         "readfloat", /* fcnName */
@@ -160,7 +160,7 @@ emlrtRSInfo hg_emlrtRSI =
         "internal\\str2double.m" /* pathName */
 };
 
-emlrtRSInfo ig_emlrtRSI =
+emlrtRSInfo jg_emlrtRSI =
     {
         325,         /* lineNo */
         "readfloat", /* fcnName */
@@ -169,7 +169,7 @@ emlrtRSInfo ig_emlrtRSI =
         "internal\\str2double.m" /* pathName */
 };
 
-emlrtRSInfo jg_emlrtRSI =
+emlrtRSInfo kg_emlrtRSI =
     {
         151,        /* lineNo */
         "copysign", /* fcnName */
@@ -178,7 +178,7 @@ emlrtRSInfo jg_emlrtRSI =
         "internal\\str2double.m" /* pathName */
 };
 
-emlrtRSInfo kg_emlrtRSI =
+emlrtRSInfo lg_emlrtRSI =
     {
         338,         /* lineNo */
         "readfloat", /* fcnName */
@@ -187,7 +187,7 @@ emlrtRSInfo kg_emlrtRSI =
         "internal\\str2double.m" /* pathName */
 };
 
-emlrtRSInfo mg_emlrtRSI = {
+emlrtRSInfo ng_emlrtRSI = {
     33,                           /* lineNo */
     "applyScalarFunctionInPlace", /* fcnName */
     "C:\\Program "
@@ -195,7 +195,7 @@ emlrtRSInfo mg_emlrtRSI = {
     "internal\\applyScalarFunctionInPlace.m" /* pathName */
 };
 
-emlrtRSInfo pg_emlrtRSI = {
+emlrtRSInfo qg_emlrtRSI = {
     24,    /* lineNo */
     "cat", /* fcnName */
     "C:\\Program "
@@ -203,7 +203,7 @@ emlrtRSInfo pg_emlrtRSI = {
                                                                           */
 };
 
-emlrtRSInfo qg_emlrtRSI =
+emlrtRSInfo rg_emlrtRSI =
     {
         28,      /* lineNo */
         "colon", /* fcnName */
@@ -212,7 +212,7 @@ emlrtRSInfo qg_emlrtRSI =
                                                                           */
 };
 
-emlrtRSInfo rg_emlrtRSI =
+emlrtRSInfo sg_emlrtRSI =
     {
         117,     /* lineNo */
         "colon", /* fcnName */
@@ -221,7 +221,7 @@ emlrtRSInfo rg_emlrtRSI =
                                                                           */
 };
 
-emlrtRSInfo fh_emlrtRSI = {
+emlrtRSInfo gh_emlrtRSI = {
     34,               /* lineNo */
     "rdivide_helper", /* fcnName */
     "C:\\Program "
@@ -229,7 +229,7 @@ emlrtRSInfo fh_emlrtRSI = {
     "helper.m" /* pathName */
 };
 
-emlrtRSInfo gh_emlrtRSI = {
+emlrtRSInfo hh_emlrtRSI = {
     51,    /* lineNo */
     "div", /* fcnName */
     "C:\\Program "
@@ -237,7 +237,7 @@ emlrtRSInfo gh_emlrtRSI = {
                                                                           */
 };
 
-emlrtRSInfo hh_emlrtRSI = {
+emlrtRSInfo ih_emlrtRSI = {
     259,                    /* lineNo */
     "assertCompatibleSize", /* fcnName */
     "C:\\Program "
@@ -245,7 +245,7 @@ emlrtRSInfo hh_emlrtRSI = {
                                                                           */
 };
 
-emlrtRSInfo ih_emlrtRSI = {
+emlrtRSInfo jh_emlrtRSI = {
     45,                          /* lineNo */
     "applyBinaryScalarFunction", /* fcnName */
     "C:\\Program "
@@ -253,7 +253,7 @@ emlrtRSInfo ih_emlrtRSI = {
     "internal\\applyBinaryScalarFunction.m" /* pathName */
 };
 
-emlrtRSInfo jh_emlrtRSI = {
+emlrtRSInfo kh_emlrtRSI = {
     127,        /* lineNo */
     "flatIter", /* fcnName */
     "C:\\Program "
@@ -261,7 +261,7 @@ emlrtRSInfo jh_emlrtRSI = {
     "internal\\applyBinaryScalarFunction.m" /* pathName */
 };
 
-emlrtRSInfo kh_emlrtRSI = {
+emlrtRSInfo lh_emlrtRSI = {
     214,        /* lineNo */
     "flatIter", /* fcnName */
     "C:\\Program "
@@ -269,7 +269,7 @@ emlrtRSInfo kh_emlrtRSI = {
     "internal\\applyBinaryScalarFunction.m" /* pathName */
 };
 
-emlrtRSInfo mh_emlrtRSI = {
+emlrtRSInfo nh_emlrtRSI = {
     99,        /* lineNo */
     "sumprod", /* fcnName */
     "C:\\Program "
@@ -277,7 +277,7 @@ emlrtRSInfo mh_emlrtRSI = {
     "d.m" /* pathName */
 };
 
-emlrtRSInfo nh_emlrtRSI = {
+emlrtRSInfo oh_emlrtRSI = {
     138,                     /* lineNo */
     "combineVectorElements", /* fcnName */
     "C:\\Program "
@@ -285,7 +285,7 @@ emlrtRSInfo nh_emlrtRSI = {
     "eVectorElements.m" /* pathName */
 };
 
-emlrtRSInfo oh_emlrtRSI = {
+emlrtRSInfo ph_emlrtRSI = {
     198,                /* lineNo */
     "colMajorFlatIter", /* fcnName */
     "C:\\Program "
@@ -293,7 +293,7 @@ emlrtRSInfo oh_emlrtRSI = {
     "eVectorElements.m" /* pathName */
 };
 
-emlrtRSInfo pj_emlrtRSI =
+emlrtRSInfo qj_emlrtRSI =
     {
         91,                  /* lineNo */
         "eml_mtimes_helper", /* fcnName */
@@ -302,7 +302,7 @@ emlrtRSInfo pj_emlrtRSI =
         "helper.m" /* pathName */
 };
 
-emlrtRSInfo qj_emlrtRSI =
+emlrtRSInfo rj_emlrtRSI =
     {
         60,                  /* lineNo */
         "eml_mtimes_helper", /* fcnName */
@@ -311,7 +311,7 @@ emlrtRSInfo qj_emlrtRSI =
         "helper.m" /* pathName */
 };
 
-emlrtRSInfo rj_emlrtRSI = {
+emlrtRSInfo sj_emlrtRSI = {
     142,      /* lineNo */
     "mtimes", /* fcnName */
     "C:\\Program "
@@ -319,7 +319,7 @@ emlrtRSInfo rj_emlrtRSI = {
     "blas\\mtimes.m" /* pathName */
 };
 
-emlrtRSInfo sj_emlrtRSI = {
+emlrtRSInfo tj_emlrtRSI = {
     178,           /* lineNo */
     "mtimes_blas", /* fcnName */
     "C:\\Program "
@@ -327,7 +327,7 @@ emlrtRSInfo sj_emlrtRSI = {
     "blas\\mtimes.m" /* pathName */
 };
 
-emlrtRSInfo uj_emlrtRSI = {
+emlrtRSInfo vj_emlrtRSI = {
     39,     /* lineNo */
     "find", /* fcnName */
     "C:\\Program "
@@ -335,7 +335,7 @@ emlrtRSInfo uj_emlrtRSI = {
                                                                        */
 };
 
-emlrtRSInfo ck_emlrtRSI = {
+emlrtRSInfo dk_emlrtRSI = {
     15,    /* lineNo */
     "sum", /* fcnName */
     "C:\\Program "
@@ -343,7 +343,96 @@ emlrtRSInfo ck_emlrtRSI = {
                                                                         */
 };
 
-emlrtRSInfo wn_emlrtRSI = {
+emlrtRSInfo nl_emlrtRSI = {
+    63,       /* lineNo */
+    "xgeqp3", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\+"
+    "lapack\\xgeqp3.m" /* pathName */
+};
+
+emlrtRSInfo pl_emlrtRSI = {
+    138,            /* lineNo */
+    "ceval_xgeqp3", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\+"
+    "lapack\\xgeqp3.m" /* pathName */
+};
+
+emlrtRSInfo ql_emlrtRSI = {
+    141,            /* lineNo */
+    "ceval_xgeqp3", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\+"
+    "lapack\\xgeqp3.m" /* pathName */
+};
+
+emlrtRSInfo rl_emlrtRSI = {
+    143,            /* lineNo */
+    "ceval_xgeqp3", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\+"
+    "lapack\\xgeqp3.m" /* pathName */
+};
+
+emlrtRSInfo sl_emlrtRSI = {
+    148,            /* lineNo */
+    "ceval_xgeqp3", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\+"
+    "lapack\\xgeqp3.m" /* pathName */
+};
+
+emlrtRSInfo tl_emlrtRSI = {
+    151,            /* lineNo */
+    "ceval_xgeqp3", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\+"
+    "lapack\\xgeqp3.m" /* pathName */
+};
+
+emlrtRSInfo ul_emlrtRSI = {
+    154,            /* lineNo */
+    "ceval_xgeqp3", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\+"
+    "lapack\\xgeqp3.m" /* pathName */
+};
+
+emlrtRSInfo vl_emlrtRSI = {
+    158,            /* lineNo */
+    "ceval_xgeqp3", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\+"
+    "lapack\\xgeqp3.m" /* pathName */
+};
+
+emlrtRSInfo em_emlrtRSI = {
+    31,         /* lineNo */
+    "xunormqr", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\+"
+    "lapack\\xunormqr.m" /* pathName */
+};
+
+emlrtRSInfo fm_emlrtRSI = {
+    102,              /* lineNo */
+    "ceval_xunormqr", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\+"
+    "lapack\\xunormqr.m" /* pathName */
+};
+
+emlrtRSInfo hm_emlrtRSI =
+    {
+        143,        /* lineNo */
+        "allOrAny", /* fcnName */
+        "C:\\Program "
+        "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\allOrAny."
+        "m" /* pathName */
+};
+
+emlrtRSInfo bo_emlrtRSI = {
     74,                      /* lineNo */
     "combineVectorElements", /* fcnName */
     "C:\\Program "
@@ -351,7 +440,7 @@ emlrtRSInfo wn_emlrtRSI = {
     "eVectorElements.m" /* pathName */
 };
 
-emlrtRSInfo xn_emlrtRSI = {
+emlrtRSInfo co_emlrtRSI = {
     107,                /* lineNo */
     "blockedSummation", /* fcnName */
     "C:\\Program "
@@ -359,7 +448,7 @@ emlrtRSInfo xn_emlrtRSI = {
     "dSummation.m" /* pathName */
 };
 
-emlrtRSInfo yn_emlrtRSI = {
+emlrtRSInfo do_emlrtRSI = {
     22,                    /* lineNo */
     "sumMatrixIncludeNaN", /* fcnName */
     "C:\\Program "
@@ -367,7 +456,7 @@ emlrtRSInfo yn_emlrtRSI = {
     "rixIncludeNaN.m" /* pathName */
 };
 
-emlrtRSInfo ao_emlrtRSI = {
+emlrtRSInfo eo_emlrtRSI = {
     42,                 /* lineNo */
     "sumMatrixColumns", /* fcnName */
     "C:\\Program "
@@ -375,7 +464,7 @@ emlrtRSInfo ao_emlrtRSI = {
     "rixIncludeNaN.m" /* pathName */
 };
 
-emlrtRSInfo co_emlrtRSI = {
+emlrtRSInfo go_emlrtRSI = {
     57,                 /* lineNo */
     "sumMatrixColumns", /* fcnName */
     "C:\\Program "
@@ -383,7 +472,7 @@ emlrtRSInfo co_emlrtRSI = {
     "rixIncludeNaN.m" /* pathName */
 };
 
-emlrtRSInfo xp_emlrtRSI = {
+emlrtRSInfo cq_emlrtRSI = {
     27,     /* lineNo */
     "sort", /* fcnName */
     "C:\\Program "
@@ -392,7 +481,7 @@ emlrtRSInfo xp_emlrtRSI = {
 };
 
 emlrtRSInfo
-    gq_emlrtRSI =
+    kq_emlrtRSI =
         {
             105,       /* lineNo */
             "sortIdx", /* fcnName */
@@ -402,7 +491,7 @@ emlrtRSInfo
 };
 
 emlrtRSInfo
-    hq_emlrtRSI =
+    lq_emlrtRSI =
         {
             308,                /* lineNo */
             "block_merge_sort", /* fcnName */
@@ -412,7 +501,7 @@ emlrtRSInfo
 };
 
 emlrtRSInfo
-    iq_emlrtRSI =
+    mq_emlrtRSI =
         {
             316,                /* lineNo */
             "block_merge_sort", /* fcnName */
@@ -422,7 +511,7 @@ emlrtRSInfo
 };
 
 emlrtRSInfo
-    jq_emlrtRSI =
+    nq_emlrtRSI =
         {
             317,                /* lineNo */
             "block_merge_sort", /* fcnName */
@@ -432,7 +521,7 @@ emlrtRSInfo
 };
 
 emlrtRSInfo
-    kq_emlrtRSI =
+    oq_emlrtRSI =
         {
             325,                /* lineNo */
             "block_merge_sort", /* fcnName */
@@ -442,7 +531,7 @@ emlrtRSInfo
 };
 
 emlrtRSInfo
-    lq_emlrtRSI =
+    pq_emlrtRSI =
         {
             333,                /* lineNo */
             "block_merge_sort", /* fcnName */
@@ -452,7 +541,7 @@ emlrtRSInfo
 };
 
 emlrtRSInfo
-    mq_emlrtRSI =
+    qq_emlrtRSI =
         {
             392,                      /* lineNo */
             "initialize_vector_sort", /* fcnName */
@@ -462,7 +551,7 @@ emlrtRSInfo
 };
 
 emlrtRSInfo
-    nq_emlrtRSI =
+    rq_emlrtRSI =
         {
             420,                      /* lineNo */
             "initialize_vector_sort", /* fcnName */
@@ -472,7 +561,7 @@ emlrtRSInfo
 };
 
 emlrtRSInfo
-    oq_emlrtRSI =
+    sq_emlrtRSI =
         {
             427,                      /* lineNo */
             "initialize_vector_sort", /* fcnName */
@@ -481,7 +570,7 @@ emlrtRSInfo
             "internal\\sortIdx.m" /* pathName */
 };
 
-emlrtRSInfo dr_emlrtRSI = {
+emlrtRSInfo hr_emlrtRSI = {
     62,                      /* lineNo */
     "vectorMinOrMaxInPlace", /* fcnName */
     "C:\\Program "
@@ -489,7 +578,7 @@ emlrtRSInfo dr_emlrtRSI = {
     "internal\\vectorMinOrMaxInPlace.m" /* pathName */
 };
 
-emlrtRSInfo er_emlrtRSI = {
+emlrtRSInfo ir_emlrtRSI = {
     54,                      /* lineNo */
     "vectorMinOrMaxInPlace", /* fcnName */
     "C:\\Program "
@@ -497,7 +586,7 @@ emlrtRSInfo er_emlrtRSI = {
     "internal\\vectorMinOrMaxInPlace.m" /* pathName */
 };
 
-emlrtRSInfo fr_emlrtRSI = {
+emlrtRSInfo jr_emlrtRSI = {
     103,         /* lineNo */
     "findFirst", /* fcnName */
     "C:\\Program "
@@ -505,7 +594,7 @@ emlrtRSInfo fr_emlrtRSI = {
     "internal\\vectorMinOrMaxInPlace.m" /* pathName */
 };
 
-emlrtRSInfo gr_emlrtRSI = {
+emlrtRSInfo kr_emlrtRSI = {
     120,                        /* lineNo */
     "minOrMaxRealVectorKernel", /* fcnName */
     "C:\\Program "
@@ -513,7 +602,7 @@ emlrtRSInfo gr_emlrtRSI = {
     "internal\\vectorMinOrMaxInPlace.m" /* pathName */
 };
 
-emlrtRSInfo hr_emlrtRSI = {
+emlrtRSInfo lr_emlrtRSI = {
     15,    /* lineNo */
     "max", /* fcnName */
     "C:\\Program "
@@ -521,7 +610,7 @@ emlrtRSInfo hr_emlrtRSI = {
                                                                         */
 };
 
-emlrtRSInfo ir_emlrtRSI =
+emlrtRSInfo mr_emlrtRSI =
     {
         44,         /* lineNo */
         "minOrMax", /* fcnName */
@@ -530,7 +619,7 @@ emlrtRSInfo ir_emlrtRSI =
         "m" /* pathName */
 };
 
-emlrtRSInfo jr_emlrtRSI =
+emlrtRSInfo nr_emlrtRSI =
     {
         79,        /* lineNo */
         "maximum", /* fcnName */
@@ -539,7 +628,7 @@ emlrtRSInfo jr_emlrtRSI =
         "m" /* pathName */
 };
 
-emlrtRSInfo kr_emlrtRSI = {
+emlrtRSInfo or_emlrtRSI = {
     175,             /* lineNo */
     "unaryMinOrMax", /* fcnName */
     "C:\\Program "
@@ -547,7 +636,7 @@ emlrtRSInfo kr_emlrtRSI = {
     "internal\\unaryMinOrMax.m" /* pathName */
 };
 
-emlrtRSInfo lr_emlrtRSI = {
+emlrtRSInfo pr_emlrtRSI = {
     871,                    /* lineNo */
     "maxRealVectorOmitNaN", /* fcnName */
     "C:\\Program "
@@ -555,7 +644,7 @@ emlrtRSInfo lr_emlrtRSI = {
     "internal\\unaryMinOrMax.m" /* pathName */
 };
 
-emlrtRSInfo vr_emlrtRSI =
+emlrtRSInfo as_emlrtRSI =
     {
         18,    /* lineNo */
         "abs", /* fcnName */
@@ -564,7 +653,7 @@ emlrtRSInfo vr_emlrtRSI =
                                                                           */
 };
 
-emlrtRSInfo wr_emlrtRSI = {
+emlrtRSInfo bs_emlrtRSI = {
     74,                    /* lineNo */
     "applyScalarFunction", /* fcnName */
     "C:\\Program "
@@ -572,7 +661,7 @@ emlrtRSInfo wr_emlrtRSI = {
     "internal\\applyScalarFunction.m" /* pathName */
 };
 
-emlrtRSInfo xr_emlrtRSI = {
+emlrtRSInfo cs_emlrtRSI = {
     38,        /* lineNo */
     "fprintf", /* fcnName */
     "C:\\Program "
@@ -580,7 +669,49 @@ emlrtRSInfo xr_emlrtRSI = {
                                                                           */
 };
 
-emlrtRSInfo ts_emlrtRSI = {
+emlrtRSInfo gs_emlrtRSI = {
+    15,    /* lineNo */
+    "min", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\datafun\\min.m" /* pathName
+                                                                        */
+};
+
+emlrtRSInfo hs_emlrtRSI =
+    {
+        46,         /* lineNo */
+        "minOrMax", /* fcnName */
+        "C:\\Program "
+        "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\minOrMax."
+        "m" /* pathName */
+};
+
+emlrtRSInfo is_emlrtRSI =
+    {
+        92,        /* lineNo */
+        "minimum", /* fcnName */
+        "C:\\Program "
+        "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\minOrMax."
+        "m" /* pathName */
+};
+
+emlrtRSInfo js_emlrtRSI = {
+    185,             /* lineNo */
+    "unaryMinOrMax", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
+    "internal\\unaryMinOrMax.m" /* pathName */
+};
+
+emlrtRSInfo ks_emlrtRSI = {
+    867,                    /* lineNo */
+    "minRealVectorOmitNaN", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
+    "internal\\unaryMinOrMax.m" /* pathName */
+};
+
+emlrtRSInfo xs_emlrtRSI = {
     9,     /* lineNo */
     "std", /* fcnName */
     "C:\\Program "
@@ -588,21 +719,49 @@ emlrtRSInfo ts_emlrtRSI = {
                                                                         */
 };
 
-emlrtRSInfo gv_emlrtRSI = {
+emlrtRSInfo gt_emlrtRSI = {
+    56,                               /* lineNo */
+    "function_handle/parenReference", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\function_"
+    "handle.m" /* pathName */
+};
+
+emlrtRSInfo kv_emlrtRSI = {
     134,                 /* lineNo */
     "percentile_vector", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\prctile.m" /* pathName
                                                                          */
 };
 
-emlrtRSInfo hv_emlrtRSI = {
+emlrtRSInfo lv_emlrtRSI = {
     136,                 /* lineNo */
     "percentile_vector", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\prctile.m" /* pathName
                                                                          */
 };
 
-emlrtRSInfo vw_emlrtRSI = {
+emlrtRSInfo
+    vv_emlrtRSI =
+        {
+            63,       /* lineNo */
+            "strcmp", /* fcnName */
+            "C:\\Program "
+            "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
+            "internal\\strcmp.m" /* pathName */
+};
+
+emlrtRSInfo
+    wv_emlrtRSI =
+        {
+            138,          /* lineNo */
+            "loc_strcmp", /* fcnName */
+            "C:\\Program "
+            "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
+            "internal\\strcmp.m" /* pathName */
+};
+
+emlrtRSInfo ax_emlrtRSI = {
     374,            /* lineNo */
     "eml_gammainc", /* fcnName */
     "C:\\Program "
@@ -610,7 +769,7 @@ emlrtRSInfo vw_emlrtRSI = {
     "gammainc.m" /* pathName */
 };
 
-emlrtRSInfo yw_emlrtRSI = {
+emlrtRSInfo dx_emlrtRSI = {
     294,            /* lineNo */
     "eml_gammainc", /* fcnName */
     "C:\\Program "
@@ -618,7 +777,7 @@ emlrtRSInfo yw_emlrtRSI = {
     "gammainc.m" /* pathName */
 };
 
-emlrtRSInfo cx_emlrtRSI = {
+emlrtRSInfo gx_emlrtRSI = {
     198,            /* lineNo */
     "eml_gammainc", /* fcnName */
     "C:\\Program "
@@ -627,7 +786,7 @@ emlrtRSInfo cx_emlrtRSI = {
 };
 
 emlrtRSInfo
-    ix_emlrtRSI =
+    mx_emlrtRSI =
         {
             36,         /* lineNo */
             "gammainc", /* fcnName */
@@ -637,7 +796,7 @@ emlrtRSInfo
 };
 
 emlrtRSInfo
-    jx_emlrtRSI =
+    nx_emlrtRSI =
         {
             37,         /* lineNo */
             "gammainc", /* fcnName */
@@ -647,7 +806,7 @@ emlrtRSInfo
 };
 
 emlrtRSInfo
-    kx_emlrtRSI =
+    ox_emlrtRSI =
         {
             40,         /* lineNo */
             "gammainc", /* fcnName */
@@ -656,28 +815,89 @@ emlrtRSInfo
             "c.m" /* pathName */
 };
 
-emlrtRSInfo wy_emlrtRSI = {
+emlrtRSInfo bab_emlrtRSI = {
+    11,                                /* lineNo */
+    "function_handle/function_handle", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\function_"
+    "handle.m" /* pathName */
+};
+
+emlrtRSInfo
+    cab_emlrtRSI =
+        {
+            1,             /* lineNo */
+            "lsqcurvefit", /* fcnName */
+            "C:\\Program "
+            "Files\\MATLAB\\R2021a\\toolbox\\optim\\eml\\lsqcurvefit.p" /* pathName
+                                                                         */
+};
+
+emlrtRSInfo fab_emlrtRSI =
+    {
+        57,         /* lineNo */
+        "allOrAny", /* fcnName */
+        "C:\\Program "
+        "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\allOrAny."
+        "m" /* pathName */
+};
+
+emlrtRSInfo gab_emlrtRSI = {
+    106,                   /* lineNo */
+    "applyToMultipleDims", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
+    "internal\\applyToMultipleDims.m" /* pathName */
+};
+
+emlrtRSInfo hab_emlrtRSI =
+    {
+        56, /* lineNo */
+        "@(x)coder.internal.allOrAny(op,x,coder.internal.indexInt(1))", /* fcnName
+                                                                         */
+        "C:\\Program "
+        "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\allOrAny."
+        "m" /* pathName */
+};
+
+emlrtRSInfo kab_emlrtRSI = {
+    16,                                      /* lineNo */
+    "anonymous_function/anonymous_function", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\anonymous_"
+    "function.m" /* pathName */
+};
+
+emlrtRSInfo bbb_emlrtRSI = {
+    76,                   /* lineNo */
+    "validateattributes", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\lang\\validateattributes"
+    ".m" /* pathName */
+};
+
+emlrtRSInfo wbb_emlrtRSI = {
     46,     /* lineNo */
     "tcdf", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\tcdf.m" /* pathName
                                                                       */
 };
 
-emlrtRSInfo xy_emlrtRSI = {
+emlrtRSInfo xbb_emlrtRSI = {
     44,     /* lineNo */
     "tcdf", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\tcdf.m" /* pathName
                                                                       */
 };
 
-emlrtRSInfo rbb_emlrtRSI = {
+emlrtRSInfo rdb_emlrtRSI = {
     55,     /* lineNo */
     "fcdf", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\fcdf.m" /* pathName
                                                                       */
 };
 
-emlrtRSInfo sbb_emlrtRSI = {
+emlrtRSInfo sdb_emlrtRSI = {
     59,     /* lineNo */
     "fcdf", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\fcdf.m" /* pathName
@@ -753,7 +973,7 @@ emlrtRTEInfo o_emlrtRTEI = {
     "internal\\assertSupportedString.m" /* pName */
 };
 
-emlrtDCInfo md_emlrtDCI = {
+emlrtDCInfo rd_emlrtDCI = {
     283,                                                     /* lineNo */
     17,                                                      /* colNo */
     "lexunrank",                                             /* fName */
@@ -926,7 +1146,19 @@ emlrtRTEInfo fc_emlrtRTEI = {
     "gammainc.m" /* pName */
 };
 
-emlrtRTEInfo oc_emlrtRTEI =
+emlrtECInfo
+    nc_emlrtECI =
+        {
+            -1,            /* nDims */
+            1,             /* lineNo */
+            1,             /* colNo */
+            "lsqcurvefit", /* fName */
+            "C:\\Program "
+            "Files\\MATLAB\\R2021a\\toolbox\\optim\\eml\\lsqcurvefit.p" /* pName
+                                                                         */
+};
+
+emlrtRTEInfo wc_emlrtRTEI =
     {
         28,      /* lineNo */
         9,       /* colNo */
@@ -936,7 +1168,7 @@ emlrtRTEInfo oc_emlrtRTEI =
                                                                           */
 };
 
-emlrtRTEInfo le_emlrtRTEI = {
+emlrtRTEInfo se_emlrtRTEI = {
     27,     /* lineNo */
     6,      /* colNo */
     "sort", /* fName */
@@ -945,7 +1177,7 @@ emlrtRTEInfo le_emlrtRTEI = {
                                                                          */
 };
 
-emlrtRTEInfo ne_emlrtRTEI = {
+emlrtRTEInfo ue_emlrtRTEI = {
     28,     /* lineNo */
     5,      /* colNo */
     "sort", /* fName */
@@ -954,7 +1186,7 @@ emlrtRTEInfo ne_emlrtRTEI = {
                                                                          */
 };
 
-emlrtRTEInfo we_emlrtRTEI = {
+emlrtRTEInfo ef_emlrtRTEI = {
     15,      /* lineNo */
     13,      /* colNo */
     "isnan", /* fName */
@@ -963,7 +1195,16 @@ emlrtRTEInfo we_emlrtRTEI = {
                                                                         */
 };
 
-emlrtRTEInfo lk_emlrtRTEI = {
+emlrtRTEInfo bk_emlrtRTEI = {
+    127,                         /* lineNo */
+    6,                           /* colNo */
+    "applyBinaryScalarFunction", /* fName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
+    "internal\\applyBinaryScalarFunction.m" /* pName */
+};
+
+emlrtRTEInfo hl_emlrtRTEI = {
     218,      /* lineNo */
     20,       /* colNo */
     "mtimes", /* fName */
@@ -972,7 +1213,25 @@ emlrtRTEInfo lk_emlrtRTEI = {
     "blas\\mtimes.m" /* pName */
 };
 
-emlrtRTEInfo kl_emlrtRTEI = {
+emlrtRTEInfo wl_emlrtRTEI = {
+    92,       /* lineNo */
+    22,       /* colNo */
+    "xgeqp3", /* fName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\+"
+    "lapack\\xgeqp3.m" /* pName */
+};
+
+emlrtRTEInfo yl_emlrtRTEI = {
+    105,      /* lineNo */
+    1,        /* colNo */
+    "xgeqp3", /* fName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\+"
+    "lapack\\xgeqp3.m" /* pName */
+};
+
+emlrtRTEInfo gm_emlrtRTEI = {
     60,       /* lineNo */
     20,       /* colNo */
     "bsxfun", /* fName */
@@ -981,7 +1240,7 @@ emlrtRTEInfo kl_emlrtRTEI = {
                                                                          */
 };
 
-emlrtRTEInfo yr_emlrtRTEI = {
+emlrtRTEInfo us_emlrtRTEI = {
     30,                    /* lineNo */
     21,                    /* colNo */
     "applyScalarFunction", /* fName */
@@ -990,7 +1249,7 @@ emlrtRTEInfo yr_emlrtRTEI = {
     "internal\\applyScalarFunction.m" /* pName */
 };
 
-emlrtRTEInfo vt_emlrtRTEI = {
+emlrtRTEInfo ru_emlrtRTEI = {
     134,       /* lineNo */
     5,         /* colNo */
     "prctile", /* fName */
@@ -999,7 +1258,18 @@ emlrtRTEInfo vt_emlrtRTEI = {
 };
 
 emlrtRTEInfo
-    pv_emlrtRTEI =
+    bw_emlrtRTEI =
+        {
+            1,             /* lineNo */
+            1,             /* colNo */
+            "lsqcurvefit", /* fName */
+            "C:\\Program "
+            "Files\\MATLAB\\R2021a\\toolbox\\optim\\eml\\lsqcurvefit.p" /* pName
+                                                                         */
+};
+
+emlrtRTEInfo
+    jx_emlrtRTEI =
         {
             386,       /* lineNo */
             1,         /* colNo */
@@ -1010,7 +1280,7 @@ emlrtRTEInfo
 };
 
 emlrtRTEInfo
-    qv_emlrtRTEI =
+    kx_emlrtRTEI =
         {
             388,       /* lineNo */
             1,         /* colNo */
@@ -1021,7 +1291,7 @@ emlrtRTEInfo
 };
 
 emlrtRTEInfo
-    rv_emlrtRTEI =
+    lx_emlrtRTEI =
         {
             308,       /* lineNo */
             14,        /* colNo */
@@ -1032,7 +1302,7 @@ emlrtRTEInfo
 };
 
 emlrtRTEInfo
-    sv_emlrtRTEI =
+    mx_emlrtRTEI =
         {
             308,       /* lineNo */
             20,        /* colNo */
@@ -1094,7 +1364,7 @@ const real_T dv[31] = {0.0,
                        0.0057462165130101155,
                        0.0055547335519628011};
 
-emlrtRSInfo ybb_emlrtRSI = {
+emlrtRSInfo ydb_emlrtRSI = {
     66,        /* lineNo */
     "fprintf", /* fcnName */
     "C:\\Program "
@@ -1102,7 +1372,7 @@ emlrtRSInfo ybb_emlrtRSI = {
                                                                           */
 };
 
-emlrtRSInfo tcb_emlrtRSI = {
+emlrtRSInfo teb_emlrtRSI = {
     27,      /* lineNo */
     "error", /* fcnName */
     "C:\\Program "
@@ -1111,7 +1381,7 @@ emlrtRSInfo tcb_emlrtRSI = {
 };
 
 emlrtRSInfo
-    ycb_emlrtRSI =
+    yeb_emlrtRSI =
         {
             53,        /* lineNo */
             "flt2str", /* fcnName */

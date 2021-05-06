@@ -19,7 +19,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo tu_emlrtRSI = {
+static emlrtRSInfo xu_emlrtRSI = {
     8,            /* lineNo */
     "scanfornan", /* fcnName */
     "C:\\Program "
@@ -53,7 +53,7 @@ static emlrtBCInfo sn_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtRTEInfo kt_emlrtRTEI = {
+static emlrtRTEInfo gu_emlrtRTEI = {
     7,            /* lineNo */
     1,            /* colNo */
     "scanfornan", /* fName */
@@ -83,13 +83,13 @@ void scanfornan(const emlrtStack *sp, const emxArray_real_T *X, real_T nx,
   nanobs->size[0] = 1;
   loop_ub_tmp = (int32_T)nx;
   nanobs->size[1] = (int32_T)nx;
-  emxEnsureCapacity_boolean_T(sp, nanobs, i, &kt_emlrtRTEI);
+  emxEnsureCapacity_boolean_T(sp, nanobs, i, &gu_emlrtRTEI);
   for (i = 0; i < loop_ub_tmp; i++) {
     nanobs->data[i] = true;
   }
-  st.site = &tu_emlrtRSI;
+  st.site = &xu_emlrtRSI;
   if ((1 <= (int32_T)nx) && ((int32_T)nx > 2147483646)) {
-    b_st.site = &pf_emlrtRSI;
+    b_st.site = &qf_emlrtRSI;
     check_forloop_overflow_error(&b_st);
   }
   loop_ub_tmp = (int32_T)nx - 1;

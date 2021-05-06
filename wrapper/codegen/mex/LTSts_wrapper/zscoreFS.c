@@ -26,25 +26,25 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo vt_emlrtRSI = {
+static emlrtRSInfo au_emlrtRSI = {
     272,                                               /* lineNo */
     "zscoreFS",                                        /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities\\zscoreFS.m" /* pathName */
 };
 
-static emlrtRSInfo wt_emlrtRSI = {
+static emlrtRSInfo bu_emlrtRSI = {
     336,                                               /* lineNo */
     "zscoreFS/zscoreFScore",                           /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities\\zscoreFS.m" /* pathName */
 };
 
-static emlrtRSInfo xt_emlrtRSI = {
+static emlrtRSInfo cu_emlrtRSI = {
     403,                                               /* lineNo */
     "zscoreFS/zscoreFScore",                           /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities\\zscoreFS.m" /* pathName */
 };
 
-static emlrtRSInfo yt_emlrtRSI = {
+static emlrtRSInfo du_emlrtRSI = {
     32,     /* lineNo */
     "sort", /* fcnName */
     "C:\\Program "
@@ -52,91 +52,91 @@ static emlrtRSInfo yt_emlrtRSI = {
                                                                          */
 };
 
-static emlrtRSInfo au_emlrtRSI = {
+static emlrtRSInfo eu_emlrtRSI = {
     98,                                               /* lineNo */
     "Qn",                                             /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\Qn.m" /* pathName */
 };
 
-static emlrtRSInfo bu_emlrtRSI = {
+static emlrtRSInfo fu_emlrtRSI = {
     143,                                              /* lineNo */
     "Qn/Qncore",                                      /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\Qn.m" /* pathName */
 };
 
-static emlrtRSInfo cu_emlrtRSI = {
+static emlrtRSInfo gu_emlrtRSI = {
     149,                                              /* lineNo */
     "Qn/Qncore",                                      /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\Qn.m" /* pathName */
 };
 
-static emlrtRSInfo du_emlrtRSI = {
+static emlrtRSInfo hu_emlrtRSI = {
     151,                                              /* lineNo */
     "Qn/Qncore",                                      /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\Qn.m" /* pathName */
 };
 
-static emlrtRSInfo eu_emlrtRSI = {
+static emlrtRSInfo iu_emlrtRSI = {
     162,                                              /* lineNo */
     "Qn/Qncore",                                      /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\Qn.m" /* pathName */
 };
 
-static emlrtRSInfo fu_emlrtRSI = {
+static emlrtRSInfo ju_emlrtRSI = {
     183,                                              /* lineNo */
     "Qn/Qncore",                                      /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\Qn.m" /* pathName */
 };
 
-static emlrtRSInfo vu_emlrtRSI = {
+static emlrtRSInfo av_emlrtRSI = {
     400,                                               /* lineNo */
     "zscoreFS/zscoreFScore",                           /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities\\zscoreFS.m" /* pathName */
 };
 
-static emlrtRSInfo wu_emlrtRSI = {
+static emlrtRSInfo bv_emlrtRSI = {
     104,                                              /* lineNo */
     "Sn",                                             /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\Sn.m" /* pathName */
 };
 
-static emlrtRSInfo xu_emlrtRSI = {
+static emlrtRSInfo cv_emlrtRSI = {
     149,                                              /* lineNo */
     "Sn/Sncore",                                      /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\Sn.m" /* pathName */
 };
 
-static emlrtRSInfo yu_emlrtRSI = {
+static emlrtRSInfo dv_emlrtRSI = {
     155,                                              /* lineNo */
     "Sn/Sncore",                                      /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\Sn.m" /* pathName */
 };
 
-static emlrtRSInfo av_emlrtRSI = {
+static emlrtRSInfo ev_emlrtRSI = {
     157,                                              /* lineNo */
     "Sn/Sncore",                                      /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\Sn.m" /* pathName */
 };
 
-static emlrtRSInfo bv_emlrtRSI = {
+static emlrtRSInfo fv_emlrtRSI = {
     164,                                              /* lineNo */
     "Sn/Sncore",                                      /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\Sn.m" /* pathName */
 };
 
-static emlrtRSInfo cv_emlrtRSI = {
+static emlrtRSInfo gv_emlrtRSI = {
     170,                                              /* lineNo */
     "Sn/Sncore",                                      /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\Sn.m" /* pathName */
 };
 
-static emlrtRSInfo dv_emlrtRSI = {
+static emlrtRSInfo hv_emlrtRSI = {
     406,                                               /* lineNo */
     "zscoreFS/zscoreFScore",                           /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities\\zscoreFS.m" /* pathName */
 };
 
-static emlrtRSInfo ev_emlrtRSI = {
+static emlrtRSInfo iv_emlrtRSI = {
     102,      /* lineNo */
     "varstd", /* fcnName */
     "C:\\Program "
@@ -155,7 +155,7 @@ static emlrtBCInfo en_emlrtBCI = {
     0                                                  /* checkKind */
 };
 
-static emlrtDCInfo ii_emlrtDCI = {
+static emlrtDCInfo ni_emlrtDCI = {
     174,                                               /* lineNo */
     27,                                                /* colNo */
     "Qn/Qncore",                                       /* fName */
@@ -328,126 +328,126 @@ static emlrtBCInfo bo_emlrtBCI = {
     0                                                  /* checkKind */
 };
 
-static emlrtRTEInfo us_emlrtRTEI = {
+static emlrtRTEInfo qt_emlrtRTEI = {
     336,                                               /* lineNo */
     13,                                                /* colNo */
     "zscoreFS",                                        /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities\\zscoreFS.m" /* pName */
 };
 
-static emlrtRTEInfo vs_emlrtRTEI = {
+static emlrtRTEInfo rt_emlrtRTEI = {
     403,                                               /* lineNo */
     22,                                                /* colNo */
     "zscoreFS",                                        /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities\\zscoreFS.m" /* pName */
 };
 
-static emlrtRTEInfo ws_emlrtRTEI = {
+static emlrtRTEInfo st_emlrtRTEI = {
     98,                                               /* lineNo */
     24,                                               /* colNo */
     "Qn",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\Qn.m" /* pName */
 };
 
-static emlrtRTEInfo xs_emlrtRTEI = {
+static emlrtRTEInfo tt_emlrtRTEI = {
     154,                                              /* lineNo */
     13,                                               /* colNo */
     "Qn",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\Qn.m" /* pName */
 };
 
-static emlrtRTEInfo ys_emlrtRTEI = {
+static emlrtRTEInfo ut_emlrtRTEI = {
     149,                                              /* lineNo */
     40,                                               /* colNo */
     "Qn",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\Qn.m" /* pName */
 };
 
-static emlrtRTEInfo at_emlrtRTEI = {
+static emlrtRTEInfo vt_emlrtRTEI = {
     151,                                              /* lineNo */
     40,                                               /* colNo */
     "Qn",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\Qn.m" /* pName */
 };
 
-static emlrtRTEInfo bt_emlrtRTEI = {
+static emlrtRTEInfo wt_emlrtRTEI = {
     145,                                              /* lineNo */
     13,                                               /* colNo */
     "Qn",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\Qn.m" /* pName */
 };
 
-static emlrtRTEInfo ct_emlrtRTEI = {
+static emlrtRTEInfo xt_emlrtRTEI = {
     162,                                              /* lineNo */
     9,                                                /* colNo */
     "Qn",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\Qn.m" /* pName */
 };
 
-static emlrtRTEInfo lt_emlrtRTEI = {
+static emlrtRTEInfo hu_emlrtRTEI = {
     400,                                               /* lineNo */
     22,                                                /* colNo */
     "zscoreFS",                                        /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities\\zscoreFS.m" /* pName */
 };
 
-static emlrtRTEInfo mt_emlrtRTEI = {
+static emlrtRTEInfo iu_emlrtRTEI = {
     104,                                              /* lineNo */
     24,                                               /* colNo */
     "Sn",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\Sn.m" /* pName */
 };
 
-static emlrtRTEInfo nt_emlrtRTEI = {
+static emlrtRTEInfo ju_emlrtRTEI = {
     160,                                              /* lineNo */
     13,                                               /* colNo */
     "Sn",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\Sn.m" /* pName */
 };
 
-static emlrtRTEInfo ot_emlrtRTEI = {
+static emlrtRTEInfo ku_emlrtRTEI = {
     155,                                              /* lineNo */
     40,                                               /* colNo */
     "Sn",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\Sn.m" /* pName */
 };
 
-static emlrtRTEInfo pt_emlrtRTEI = {
+static emlrtRTEInfo lu_emlrtRTEI = {
     157,                                              /* lineNo */
     40,                                               /* colNo */
     "Sn",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\Sn.m" /* pName */
 };
 
-static emlrtRTEInfo qt_emlrtRTEI = {
+static emlrtRTEInfo mu_emlrtRTEI = {
     170,                                              /* lineNo */
     9,                                                /* colNo */
     "Sn",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\Sn.m" /* pName */
 };
 
-static emlrtRTEInfo rt_emlrtRTEI = {
+static emlrtRTEInfo nu_emlrtRTEI = {
     151,                                              /* lineNo */
     13,                                               /* colNo */
     "Sn",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\Sn.m" /* pName */
 };
 
-static emlrtRTEInfo st_emlrtRTEI = {
+static emlrtRTEInfo ou_emlrtRTEI = {
     164,                                              /* lineNo */
     9,                                                /* colNo */
     "Sn",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\Sn.m" /* pName */
 };
 
-static emlrtRTEInfo tt_emlrtRTEI = {
+static emlrtRTEInfo pu_emlrtRTEI = {
     168,                                              /* lineNo */
     9,                                                /* colNo */
     "Sn",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\Sn.m" /* pName */
 };
 
-static emlrtRTEInfo ut_emlrtRTEI = {
+static emlrtRTEInfo qu_emlrtRTEI = {
     164,                                              /* lineNo */
     33,                                               /* colNo */
     "Sn",                                             /* fName */
@@ -501,7 +501,7 @@ void b_zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
   h_st.prev = &g_st;
   h_st.tls = g_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  emxInit_real_T(sp, &xsor, 1, &us_emlrtRTEI, true);
+  emxInit_real_T(sp, &xsor, 1, &qt_emlrtRTEI, true);
   /* zscoreFS computes (robust) standardized z scores */
   /*  */
   /* <a href="matlab: docsearchFS('zscoreFS')">Link to the help function</a> */
@@ -772,17 +772,17 @@ void b_zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
   /* } */
   /*  Beginning of code */
   /*  Input is a column  vector */
-  st.site = &vt_emlrtRSI;
+  st.site = &au_emlrtRSI;
   half = (int32_T)muDoubleScalarFloor((real_T)X->size[0] / 2.0);
-  b_st.site = &wt_emlrtRSI;
+  b_st.site = &bu_emlrtRSI;
   i = xsor->size[0];
   xsor->size[0] = X->size[0];
-  emxEnsureCapacity_real_T(&b_st, xsor, i, &us_emlrtRTEI);
+  emxEnsureCapacity_real_T(&b_st, xsor, i, &qt_emlrtRTEI);
   loop_ub = X->size[0];
   for (i = 0; i < loop_ub; i++) {
     xsor->data[i] = X->data[i];
   }
-  c_st.site = &yt_emlrtRSI;
+  c_st.site = &du_emlrtRSI;
   b_sort(&c_st, xsor);
   if (half + 1 > xsor->size[0]) {
     emlrtDynamicBoundsCheckR2012b(half + 1, 1, xsor->size[0], &jn_emlrtBCI,
@@ -796,7 +796,7 @@ void b_zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
     }
     *mu = (xsor->data[half - 1] + xsor->data[half]) / 2.0;
   }
-  b_st.site = &vu_emlrtRSI;
+  b_st.site = &av_emlrtRSI;
   /* Sn robust estimator of scale (robust version of Gini's average difference)
    */
   /*  */
@@ -897,11 +897,11 @@ void b_zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
   /*  Beginning of code */
   /*  Input is at least a two dimensional array */
   /*  Input is a matrix  dim=1 compute along columns */
-  c_st.site = &wu_emlrtRSI;
+  c_st.site = &bv_emlrtRSI;
   loop_ub = X->size[0];
   i = xsor->size[0];
   xsor->size[0] = X->size[0];
-  emxEnsureCapacity_real_T(&c_st, xsor, i, &lt_emlrtRTEI);
+  emxEnsureCapacity_real_T(&c_st, xsor, i, &hu_emlrtRTEI);
   for (i = 0; i < loop_ub; i++) {
     xsor->data[i] = X->data[i];
   }
@@ -909,16 +909,16 @@ void b_zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
   nbins = X->size[0];
   /*  Do binning for big n */
   if (X->size[0] > 10000) {
-    emxInit_real_T(&c_st, &xbinned, 1, &rt_emlrtRTEI, true);
-    d_st.site = &xu_emlrtRSI;
-    e_st.site = &yt_emlrtRSI;
+    emxInit_real_T(&c_st, &xbinned, 1, &nu_emlrtRTEI, true);
+    d_st.site = &cv_emlrtRSI;
+    e_st.site = &du_emlrtRSI;
     b_sort(&e_st, xsor);
     nbins = (int32_T)muDoubleScalarFloor((real_T)X->size[0] / 10.0);
     i1 = xbinned->size[0];
     xbinned->size[0] = nbins;
-    emxEnsureCapacity_real_T(&c_st, xbinned, i1, &mt_emlrtRTEI);
+    emxEnsureCapacity_real_T(&c_st, xbinned, i1, &iu_emlrtRTEI);
     ninbins = muDoubleScalarFloor((real_T)X->size[0] / (real_T)nbins);
-    emxInit_real_T(&c_st, &b_xsor, 1, &pt_emlrtRTEI, true);
+    emxInit_real_T(&c_st, &b_xsor, 1, &lu_emlrtRTEI, true);
     for (loop_ub = 0; loop_ub < nbins; loop_ub++) {
       if ((b_mod((real_T)i + 1.0, nbins) != 0.0) && (loop_ub + 1 == nbins)) {
         b_nbins = (((real_T)loop_ub + 1.0) - 1.0) * ninbins + 1.0;
@@ -940,11 +940,11 @@ void b_zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
         c_xsor[0] = 1;
         half = acoef - i1;
         c_xsor[1] = half;
-        d_st.site = &yu_emlrtRSI;
+        d_st.site = &dv_emlrtRSI;
         indexShapeCheck(&d_st, xsor->size[0], c_xsor);
         acoef = b_xsor->size[0];
         b_xsor->size[0] = half;
-        emxEnsureCapacity_real_T(&c_st, b_xsor, acoef, &ot_emlrtRTEI);
+        emxEnsureCapacity_real_T(&c_st, b_xsor, acoef, &ku_emlrtRTEI);
         for (acoef = 0; acoef < half; acoef++) {
           b_xsor->data[acoef] = xsor->data[i1 + acoef];
         }
@@ -952,7 +952,7 @@ void b_zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
           emlrtDynamicBoundsCheckR2012b(loop_ub + 1, 1, xbinned->size[0],
                                         &ao_emlrtBCI, &c_st);
         }
-        d_st.site = &yu_emlrtRSI;
+        d_st.site = &dv_emlrtRSI;
         xbinned->data[loop_ub] = median(&d_st, b_xsor);
       } else {
         b_nbins = (((real_T)loop_ub + 1.0) - 1.0) * ninbins + 1.0;
@@ -975,11 +975,11 @@ void b_zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
         c_xsor[0] = 1;
         half = acoef - i1;
         c_xsor[1] = half;
-        d_st.site = &av_emlrtRSI;
+        d_st.site = &ev_emlrtRSI;
         indexShapeCheck(&d_st, xsor->size[0], c_xsor);
         acoef = b_xsor->size[0];
         b_xsor->size[0] = half;
-        emxEnsureCapacity_real_T(&c_st, b_xsor, acoef, &pt_emlrtRTEI);
+        emxEnsureCapacity_real_T(&c_st, b_xsor, acoef, &lu_emlrtRTEI);
         for (acoef = 0; acoef < half; acoef++) {
           b_xsor->data[acoef] = xsor->data[i1 + acoef];
         }
@@ -987,7 +987,7 @@ void b_zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
           emlrtDynamicBoundsCheckR2012b(loop_ub + 1, 1, xbinned->size[0],
                                         &bo_emlrtBCI, &c_st);
         }
-        d_st.site = &av_emlrtRSI;
+        d_st.site = &ev_emlrtRSI;
         xbinned->data[loop_ub] = median(&d_st, b_xsor);
       }
       if (*emlrtBreakCheckR2012bFlagVar != 0) {
@@ -997,7 +997,7 @@ void b_zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
     emxFree_real_T(&b_xsor);
     i = xsor->size[0];
     xsor->size[0] = xbinned->size[0];
-    emxEnsureCapacity_real_T(&c_st, xsor, i, &nt_emlrtRTEI);
+    emxEnsureCapacity_real_T(&c_st, xsor, i, &ju_emlrtRTEI);
     loop_ub = xbinned->size[0];
     for (i = 0; i < loop_ub; i++) {
       xsor->data[i] = xbinned->data[i];
@@ -1006,12 +1006,12 @@ void b_zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
     /*  Redefine x with binned x */
     /*  Redefine n with number of bins */
   }
-  emxInit_real_T(&c_st, &c, 2, &ut_emlrtRTEI, true);
-  d_st.site = &bv_emlrtRSI;
+  emxInit_real_T(&c_st, &c, 2, &qu_emlrtRTEI, true);
+  d_st.site = &fv_emlrtRSI;
   i = c->size[0] * c->size[1];
   c->size[0] = xsor->size[0];
   c->size[1] = xsor->size[0];
-  emxEnsureCapacity_real_T(&d_st, c, i, &kl_emlrtRTEI);
+  emxEnsureCapacity_real_T(&d_st, c, i, &gm_emlrtRTEI);
   if (xsor->size[0] != 0) {
     half = (xsor->size[0] != 1);
     i = xsor->size[0] - 1;
@@ -1025,24 +1025,24 @@ void b_zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
       }
     }
   }
-  emxInit_real_T(&d_st, &dist_xi_xj_sor, 2, &st_emlrtRTEI, true);
-  e_st.site = &bv_emlrtRSI;
-  f_st.site = &vr_emlrtRSI;
+  emxInit_real_T(&d_st, &dist_xi_xj_sor, 2, &ou_emlrtRTEI, true);
+  e_st.site = &fv_emlrtRSI;
+  f_st.site = &as_emlrtRSI;
   half = c->size[0] * c->size[1];
   i = dist_xi_xj_sor->size[0] * dist_xi_xj_sor->size[1];
   dist_xi_xj_sor->size[0] = c->size[0];
   dist_xi_xj_sor->size[1] = c->size[1];
-  emxEnsureCapacity_real_T(&f_st, dist_xi_xj_sor, i, &yr_emlrtRTEI);
-  g_st.site = &wr_emlrtRSI;
+  emxEnsureCapacity_real_T(&f_st, dist_xi_xj_sor, i, &us_emlrtRTEI);
+  g_st.site = &bs_emlrtRSI;
   if ((1 <= half) && (half > 2147483646)) {
-    h_st.site = &pf_emlrtRSI;
+    h_st.site = &qf_emlrtRSI;
     check_forloop_overflow_error(&h_st);
   }
   for (k = 0; k < half; k++) {
     dist_xi_xj_sor->data[k] = muDoubleScalarAbs(c->data[k]);
   }
   emxFree_real_T(&c);
-  e_st.site = &yt_emlrtRSI;
+  e_st.site = &du_emlrtRSI;
   d_sort(&e_st, dist_xi_xj_sor);
   /*  For each i compute the median of |x_i-x_j| that is take di order */
   /*  statistic of rank [(n+1)/2] */
@@ -1051,19 +1051,19 @@ void b_zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
     emlrtDynamicBoundsCheckR2012b(half, 1, dist_xi_xj_sor->size[0],
                                   &un_emlrtBCI, &c_st);
   }
-  emxInit_real_T(&c_st, &med_j, 2, &tt_emlrtRTEI, true);
-  d_st.site = &cv_emlrtRSI;
+  emxInit_real_T(&c_st, &med_j, 2, &pu_emlrtRTEI, true);
+  d_st.site = &gv_emlrtRSI;
   loop_ub = dist_xi_xj_sor->size[1];
   i = med_j->size[0] * med_j->size[1];
   med_j->size[0] = 1;
   med_j->size[1] = dist_xi_xj_sor->size[1];
-  emxEnsureCapacity_real_T(&d_st, med_j, i, &qt_emlrtRTEI);
+  emxEnsureCapacity_real_T(&d_st, med_j, i, &mu_emlrtRTEI);
   for (i = 0; i < loop_ub; i++) {
     med_j->data[i] =
         dist_xi_xj_sor->data[(half + dist_xi_xj_sor->size[0] * i) - 1];
   }
   emxFree_real_T(&dist_xi_xj_sor);
-  e_st.site = &yt_emlrtRSI;
+  e_st.site = &du_emlrtRSI;
   c_sort(&e_st, med_j);
   half = (int32_T)muDoubleScalarFloor((real_T)nbins / 2.0);
   if (half + 1 > med_j->size[1]) {
@@ -1115,7 +1115,7 @@ void b_zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
   *sigma = ninbins * (1.1926 * med_j->data[half]);
   i = xsor->size[0];
   xsor->size[0] = X->size[0];
-  emxEnsureCapacity_real_T(&st, xsor, i, &kl_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, xsor, i, &gm_emlrtRTEI);
   emxFree_real_T(&med_j);
   if (X->size[0] != 0) {
     acoef = (X->size[0] != 1);
@@ -1126,7 +1126,7 @@ void b_zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
   }
   i = Z->size[0];
   Z->size[0] = xsor->size[0];
-  emxEnsureCapacity_real_T(&st, Z, i, &kl_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, Z, i, &gm_emlrtRTEI);
   if (xsor->size[0] != 0) {
     acoef = (xsor->size[0] != 1);
     i = xsor->size[0] - 1;
@@ -1158,7 +1158,7 @@ void c_zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
   d_st.prev = &c_st;
   d_st.tls = c_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  emxInit_real_T(sp, &xsor, 1, &us_emlrtRTEI, true);
+  emxInit_real_T(sp, &xsor, 1, &qt_emlrtRTEI, true);
   /* zscoreFS computes (robust) standardized z scores */
   /*  */
   /* <a href="matlab: docsearchFS('zscoreFS')">Link to the help function</a> */
@@ -1429,17 +1429,17 @@ void c_zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
   /* } */
   /*  Beginning of code */
   /*  Input is a column  vector */
-  st.site = &vt_emlrtRSI;
+  st.site = &au_emlrtRSI;
   half = (int32_T)muDoubleScalarFloor((real_T)X->size[0] / 2.0);
-  b_st.site = &wt_emlrtRSI;
+  b_st.site = &bu_emlrtRSI;
   i = xsor->size[0];
   xsor->size[0] = X->size[0];
-  emxEnsureCapacity_real_T(&b_st, xsor, i, &us_emlrtRTEI);
+  emxEnsureCapacity_real_T(&b_st, xsor, i, &qt_emlrtRTEI);
   loop_ub = X->size[0];
   for (i = 0; i < loop_ub; i++) {
     xsor->data[i] = X->data[i];
   }
-  c_st.site = &yt_emlrtRSI;
+  c_st.site = &du_emlrtRSI;
   b_sort(&c_st, xsor);
   if (half + 1 > xsor->size[0]) {
     emlrtDynamicBoundsCheckR2012b(half + 1, 1, xsor->size[0], &jn_emlrtBCI,
@@ -1453,13 +1453,13 @@ void c_zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
     }
     *mu = (xsor->data[half - 1] + xsor->data[half]) / 2.0;
   }
-  b_st.site = &dv_emlrtRSI;
-  c_st.site = &ts_emlrtRSI;
-  d_st.site = &ev_emlrtRSI;
+  b_st.site = &hv_emlrtRSI;
+  c_st.site = &xs_emlrtRSI;
+  d_st.site = &iv_emlrtRSI;
   *sigma = vvarstd(&d_st, X, X->size[0]);
   i = xsor->size[0];
   xsor->size[0] = X->size[0];
-  emxEnsureCapacity_real_T(&st, xsor, i, &kl_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, xsor, i, &gm_emlrtRTEI);
   if (X->size[0] != 0) {
     half = (X->size[0] != 1);
     i = X->size[0] - 1;
@@ -1469,7 +1469,7 @@ void c_zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
   }
   i = Z->size[0];
   Z->size[0] = xsor->size[0];
-  emxEnsureCapacity_real_T(&st, Z, i, &kl_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, Z, i, &gm_emlrtRTEI);
   if (xsor->size[0] != 0) {
     half = (xsor->size[0] != 1);
     i = xsor->size[0] - 1;
@@ -1525,7 +1525,7 @@ void zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
   e_st.prev = &d_st;
   e_st.tls = d_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  emxInit_real_T(sp, &xsor, 1, &us_emlrtRTEI, true);
+  emxInit_real_T(sp, &xsor, 1, &qt_emlrtRTEI, true);
   /* zscoreFS computes (robust) standardized z scores */
   /*  */
   /* <a href="matlab: docsearchFS('zscoreFS')">Link to the help function</a> */
@@ -1796,17 +1796,17 @@ void zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
   /* } */
   /*  Beginning of code */
   /*  Input is a column  vector */
-  st.site = &vt_emlrtRSI;
+  st.site = &au_emlrtRSI;
   half = (int32_T)muDoubleScalarFloor((real_T)X->size[0] / 2.0);
-  b_st.site = &wt_emlrtRSI;
+  b_st.site = &bu_emlrtRSI;
   i = xsor->size[0];
   xsor->size[0] = X->size[0];
-  emxEnsureCapacity_real_T(&b_st, xsor, i, &us_emlrtRTEI);
+  emxEnsureCapacity_real_T(&b_st, xsor, i, &qt_emlrtRTEI);
   loop_ub = X->size[0];
   for (i = 0; i < loop_ub; i++) {
     xsor->data[i] = X->data[i];
   }
-  c_st.site = &yt_emlrtRSI;
+  c_st.site = &du_emlrtRSI;
   b_sort(&c_st, xsor);
   if (half + 1 > xsor->size[0]) {
     emlrtDynamicBoundsCheckR2012b(half + 1, 1, xsor->size[0], &jn_emlrtBCI,
@@ -1820,7 +1820,7 @@ void zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
     }
     *mu = (xsor->data[half - 1] + xsor->data[half]) / 2.0;
   }
-  b_st.site = &xt_emlrtRSI;
+  b_st.site = &cu_emlrtRSI;
   /* Qn robust estimator of scale (first quartile of interpoint distances
    * $|x_i-x_j|$) */
   /*  */
@@ -1912,11 +1912,11 @@ void zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
   /*  Beginning of code */
   /*  Input is at least a two dimensional array */
   /*  Input is a matrix  dim=1 compute along columns */
-  c_st.site = &au_emlrtRSI;
+  c_st.site = &eu_emlrtRSI;
   loop_ub = X->size[0];
   i = xsor->size[0];
   xsor->size[0] = X->size[0];
-  emxEnsureCapacity_real_T(&c_st, xsor, i, &vs_emlrtRTEI);
+  emxEnsureCapacity_real_T(&c_st, xsor, i, &rt_emlrtRTEI);
   for (i = 0; i < loop_ub; i++) {
     xsor->data[i] = X->data[i];
   }
@@ -1924,16 +1924,16 @@ void zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
   nbins = X->size[0];
   /*  Do binning for big n */
   if (X->size[0] > 10000) {
-    emxInit_real_T(&c_st, &xbinned, 1, &bt_emlrtRTEI, true);
-    d_st.site = &bu_emlrtRSI;
-    e_st.site = &yt_emlrtRSI;
+    emxInit_real_T(&c_st, &xbinned, 1, &wt_emlrtRTEI, true);
+    d_st.site = &fu_emlrtRSI;
+    e_st.site = &du_emlrtRSI;
     b_sort(&e_st, xsor);
     nbins = (int32_T)muDoubleScalarFloor((real_T)X->size[0] / 10.0);
     half = xbinned->size[0];
     xbinned->size[0] = nbins;
-    emxEnsureCapacity_real_T(&c_st, xbinned, half, &ws_emlrtRTEI);
+    emxEnsureCapacity_real_T(&c_st, xbinned, half, &st_emlrtRTEI);
     ninbins = muDoubleScalarFloor((real_T)X->size[0] / (real_T)nbins);
-    emxInit_real_T(&c_st, &b_xsor, 1, &at_emlrtRTEI, true);
+    emxInit_real_T(&c_st, &b_xsor, 1, &vt_emlrtRTEI, true);
     for (ii = 0; ii < nbins; ii++) {
       if ((b_mod((real_T)i + 1.0, nbins) != 0.0) && (ii + 1 == nbins)) {
         d = (((real_T)ii + 1.0) - 1.0) * ninbins + 1.0;
@@ -1955,11 +1955,11 @@ void zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
         c_xsor[0] = 1;
         loop_ub = i1 - half;
         c_xsor[1] = loop_ub;
-        d_st.site = &cu_emlrtRSI;
+        d_st.site = &gu_emlrtRSI;
         indexShapeCheck(&d_st, xsor->size[0], c_xsor);
         i1 = b_xsor->size[0];
         b_xsor->size[0] = loop_ub;
-        emxEnsureCapacity_real_T(&c_st, b_xsor, i1, &ys_emlrtRTEI);
+        emxEnsureCapacity_real_T(&c_st, b_xsor, i1, &ut_emlrtRTEI);
         for (i1 = 0; i1 < loop_ub; i1++) {
           b_xsor->data[i1] = xsor->data[half + i1];
         }
@@ -1967,7 +1967,7 @@ void zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
           emlrtDynamicBoundsCheckR2012b(ii + 1, 1, xbinned->size[0],
                                         &kn_emlrtBCI, &c_st);
         }
-        d_st.site = &cu_emlrtRSI;
+        d_st.site = &gu_emlrtRSI;
         xbinned->data[ii] = median(&d_st, b_xsor);
       } else {
         d = (((real_T)ii + 1.0) - 1.0) * ninbins + 1.0;
@@ -1990,11 +1990,11 @@ void zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
         c_xsor[0] = 1;
         loop_ub = i1 - half;
         c_xsor[1] = loop_ub;
-        d_st.site = &du_emlrtRSI;
+        d_st.site = &hu_emlrtRSI;
         indexShapeCheck(&d_st, xsor->size[0], c_xsor);
         i1 = b_xsor->size[0];
         b_xsor->size[0] = loop_ub;
-        emxEnsureCapacity_real_T(&c_st, b_xsor, i1, &at_emlrtRTEI);
+        emxEnsureCapacity_real_T(&c_st, b_xsor, i1, &vt_emlrtRTEI);
         for (i1 = 0; i1 < loop_ub; i1++) {
           b_xsor->data[i1] = xsor->data[half + i1];
         }
@@ -2002,7 +2002,7 @@ void zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
           emlrtDynamicBoundsCheckR2012b(ii + 1, 1, xbinned->size[0],
                                         &ln_emlrtBCI, &c_st);
         }
-        d_st.site = &du_emlrtRSI;
+        d_st.site = &hu_emlrtRSI;
         xbinned->data[ii] = median(&d_st, b_xsor);
       }
       if (*emlrtBreakCheckR2012bFlagVar != 0) {
@@ -2012,7 +2012,7 @@ void zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
     emxFree_real_T(&b_xsor);
     i = xsor->size[0];
     xsor->size[0] = xbinned->size[0];
-    emxEnsureCapacity_real_T(&c_st, xsor, i, &xs_emlrtRTEI);
+    emxEnsureCapacity_real_T(&c_st, xsor, i, &tt_emlrtRTEI);
     loop_ub = xbinned->size[0];
     for (i = 0; i < loop_ub; i++) {
       xsor->data[i] = xbinned->data[i];
@@ -2021,14 +2021,14 @@ void zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
     /*  Redefine x with binned x */
     /*  Redefine n with number of bins */
   }
-  emxInit_real_T(&c_st, &distord, 2, &ct_emlrtRTEI, true);
+  emxInit_real_T(&c_st, &distord, 2, &xt_emlrtRTEI, true);
   half = (int32_T)muDoubleScalarFloor((real_T)nbins / 2.0);
   /*  Compute the n*(n-1)/2 pairwise ordered distances */
   /*  Use function pdist of statistics toolbox */
-  d_st.site = &eu_emlrtRSI;
-  e_st.site = &eu_emlrtRSI;
+  d_st.site = &iu_emlrtRSI;
+  e_st.site = &iu_emlrtRSI;
   pdist(&e_st, xsor, distord);
-  e_st.site = &yt_emlrtRSI;
+  e_st.site = &du_emlrtRSI;
   c_sort(&e_st, distord);
   /*         If statistic toolbox is not present it is possible to use the
    * following code */
@@ -2042,7 +2042,7 @@ void zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
   /*          distord=sort(distord); */
   d = 0.5 * ((real_T)half + 1.0) * (((real_T)half + 1.0) - 1.0);
   if (d != (int32_T)muDoubleScalarFloor(d)) {
-    emlrtIntegerCheckR2012b(d, &ii_emlrtDCI, &c_st);
+    emlrtIntegerCheckR2012b(d, &ni_emlrtDCI, &c_st);
   }
   if (((int32_T)d < 1) || ((int32_T)d > distord->size[1])) {
     emlrtDynamicBoundsCheckR2012b((int32_T)d, 1, distord->size[1], &en_emlrtBCI,
@@ -2056,7 +2056,7 @@ void zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
   ninbins = 0.0;
   switch (nbins) {
   case 1:
-    d_st.site = &fu_emlrtRSI;
+    d_st.site = &ju_emlrtRSI;
     y = NULL;
     m = emlrtCreateCharArray(2, &iv[0]);
     emlrtInitCharArrayR2013a(&d_st, 17, m, &varargin_1[0]);
@@ -2065,7 +2065,7 @@ void zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
     m = emlrtCreateCharArray(2, &iv1[0]);
     emlrtInitCharArrayR2013a(&d_st, 21, m, &varargin_2[0]);
     emlrtAssign(&b_y, m);
-    e_st.site = &tcb_emlrtRSI;
+    e_st.site = &teb_emlrtRSI;
     l_error(&e_st, y, b_y, &d_emlrtMCI);
     break;
   case 2:
@@ -2111,7 +2111,7 @@ void zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
                                    1]);
   i = xsor->size[0];
   xsor->size[0] = X->size[0];
-  emxEnsureCapacity_real_T(&st, xsor, i, &kl_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, xsor, i, &gm_emlrtRTEI);
   emxFree_real_T(&distord);
   if (X->size[0] != 0) {
     half = (X->size[0] != 1);
@@ -2122,7 +2122,7 @@ void zscoreFS(const emlrtStack *sp, const emxArray_real_T *X,
   }
   i = Z->size[0];
   Z->size[0] = xsor->size[0];
-  emxEnsureCapacity_real_T(&st, Z, i, &kl_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, Z, i, &gm_emlrtRTEI);
   if (xsor->size[0] != 0) {
     half = (xsor->size[0] != 1);
     i = xsor->size[0] - 1;

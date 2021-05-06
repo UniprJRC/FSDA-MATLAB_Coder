@@ -30,6 +30,7 @@ void LTSts_wrapper_initialize(void)
   emlrtClearAllocCountR2012b(&st, false, 0U, NULL);
   emlrtEnterRtStackR2012b(&st);
   emlrtLicenseCheckR2012b(&st, (const char_T *)"statistics_toolbox", 2);
+  emlrtLicenseCheckR2012b(&st, (const char_T *)"optimization_toolbox", 2);
   emlrtFirstTimeR2012b(emlrtRootTLSGlobal);
 }
 

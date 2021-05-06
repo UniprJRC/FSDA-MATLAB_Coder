@@ -20,7 +20,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo gu_emlrtRSI = {
+static emlrtRSInfo ku_emlrtRSI = {
     88,       /* lineNo */
     "median", /* fcnName */
     "C:\\Program "
@@ -28,7 +28,7 @@ static emlrtRSInfo gu_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRSInfo hu_emlrtRSI = {
+static emlrtRSInfo lu_emlrtRSI = {
     87,        /* lineNo */
     "vmedian", /* fcnName */
     "C:\\Program "
@@ -36,7 +36,7 @@ static emlrtRSInfo hu_emlrtRSI = {
     "n.m" /* pathName */
 };
 
-static emlrtRSInfo iu_emlrtRSI = {
+static emlrtRSInfo mu_emlrtRSI = {
     108,       /* lineNo */
     "vmedian", /* fcnName */
     "C:\\Program "
@@ -44,7 +44,7 @@ static emlrtRSInfo iu_emlrtRSI = {
     "n.m" /* pathName */
 };
 
-static emlrtRSInfo ju_emlrtRSI = {
+static emlrtRSInfo nu_emlrtRSI = {
     113,       /* lineNo */
     "vmedian", /* fcnName */
     "C:\\Program "
@@ -52,7 +52,7 @@ static emlrtRSInfo ju_emlrtRSI = {
     "n.m" /* pathName */
 };
 
-static emlrtRSInfo ku_emlrtRSI = {
+static emlrtRSInfo ou_emlrtRSI = {
     119,       /* lineNo */
     "vmedian", /* fcnName */
     "C:\\Program "
@@ -60,7 +60,7 @@ static emlrtRSInfo ku_emlrtRSI = {
     "n.m" /* pathName */
 };
 
-static emlrtRTEInfo dt_emlrtRTEI = {
+static emlrtRTEInfo yt_emlrtRTEI = {
     119,       /* lineNo */
     15,        /* colNo */
     "vmedian", /* fName */
@@ -69,7 +69,7 @@ static emlrtRTEInfo dt_emlrtRTEI = {
     "n.m" /* pName */
 };
 
-static emlrtRTEInfo et_emlrtRTEI = {
+static emlrtRTEInfo au_emlrtRTEI = {
     108,       /* lineNo */
     15,        /* colNo */
     "vmedian", /* fName */
@@ -78,7 +78,7 @@ static emlrtRTEInfo et_emlrtRTEI = {
     "n.m" /* pName */
 };
 
-static emlrtRTEInfo ft_emlrtRTEI = {
+static emlrtRTEInfo bu_emlrtRTEI = {
     1,        /* lineNo */
     14,       /* colNo */
     "median", /* fName */
@@ -112,14 +112,14 @@ real_T median(const emlrtStack *sp, const emxArray_real_T *x)
   if (x->size[0] == 0) {
     y = rtNaN;
   } else {
-    st.site = &gu_emlrtRSI;
-    b_st.site = &hu_emlrtRSI;
+    st.site = &ku_emlrtRSI;
+    b_st.site = &lu_emlrtRSI;
     if (x->size[0] > 2147483646) {
-      c_st.site = &pf_emlrtRSI;
+      c_st.site = &qf_emlrtRSI;
       check_forloop_overflow_error(&c_st);
     }
     k = 0;
-    emxInit_real_T(&st, &a__4, 1, &ft_emlrtRTEI, true);
+    emxInit_real_T(&st, &a__4, 1, &bu_emlrtRTEI, true);
     do {
       exitg1 = 0;
       if (k <= vlen - 1) {
@@ -213,15 +213,15 @@ real_T median(const emlrtStack *sp, const emxArray_real_T *x)
           if ((vlen & 1) == 0) {
             a__6 = a__4->size[0];
             a__4->size[0] = x->size[0];
-            emxEnsureCapacity_real_T(&st, a__4, a__6, &et_emlrtRTEI);
+            emxEnsureCapacity_real_T(&st, a__4, a__6, &au_emlrtRTEI);
             k = x->size[0];
             for (a__6 = 0; a__6 < k; a__6++) {
               a__4->data[a__6] = x->data[a__6];
             }
-            b_st.site = &iu_emlrtRSI;
+            b_st.site = &mu_emlrtRSI;
             quickselect(a__4, midm1 + 1, vlen, &y, &k, &a__6);
             if (midm1 < k) {
-              b_st.site = &ju_emlrtRSI;
+              b_st.site = &nu_emlrtRSI;
               quickselect(a__4, midm1, a__6 - 1, &b, &k, &vlen);
               if (((y < 0.0) != (b < 0.0)) || muDoubleScalarIsInf(y)) {
                 y = (y + b) / 2.0;
@@ -232,12 +232,12 @@ real_T median(const emlrtStack *sp, const emxArray_real_T *x)
           } else {
             a__6 = a__4->size[0];
             a__4->size[0] = x->size[0];
-            emxEnsureCapacity_real_T(&st, a__4, a__6, &dt_emlrtRTEI);
+            emxEnsureCapacity_real_T(&st, a__4, a__6, &yt_emlrtRTEI);
             k = x->size[0];
             for (a__6 = 0; a__6 < k; a__6++) {
               a__4->data[a__6] = x->data[a__6];
             }
-            b_st.site = &ku_emlrtRSI;
+            b_st.site = &ou_emlrtRSI;
             quickselect(a__4, midm1 + 1, vlen, &y, &k, &a__6);
           }
         }

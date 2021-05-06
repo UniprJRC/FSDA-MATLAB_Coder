@@ -19,7 +19,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRTEInfo kv_emlrtRTEI = {
+static emlrtRTEInfo dx_emlrtRTEI = {
     1,                          /* lineNo */
     1,                          /* colNo */
     "_coder_LTSts_wrapper_api", /* fName */
@@ -1171,10 +1171,10 @@ void LTSts_wrapper_api(const mxArray *const prhs[16], int32_T nlhs,
   boolean_T yxsave;
   st.tls = emlrtRootTLSGlobal;
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
-  emxInit_real_T(&st, &y, 1, &kv_emlrtRTEI, true);
-  emxInitStruct_struct2_T(&st, &model, &kv_emlrtRTEI, true);
-  emxInitStruct_struct_LTSts_T(&st, &out, &kv_emlrtRTEI, true);
-  emxInit_real_T(&st, &C, 2, &kv_emlrtRTEI, true);
+  emxInit_real_T(&st, &y, 1, &dx_emlrtRTEI, true);
+  emxInitStruct_struct2_T(&st, &model, &dx_emlrtRTEI, true);
+  emxInitStruct_struct_LTSts_T(&st, &out, &dx_emlrtRTEI, true);
+  emxInit_real_T(&st, &C, 2, &dx_emlrtRTEI, true);
   /* Marshall function inputs */
   y->canFreeData = false;
   m_emlrt_marshallIn(&st, emlrtAlias(prhs[0]), "y", y);

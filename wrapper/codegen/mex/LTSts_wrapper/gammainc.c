@@ -17,7 +17,7 @@
 
 /* Variable Definitions */
 static emlrtRSInfo
-    lx_emlrtRSI =
+    px_emlrtRSI =
         {
             89,                /* lineNo */
             "scalar_gammainc", /* fcnName */
@@ -27,7 +27,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    mx_emlrtRSI =
+    qx_emlrtRSI =
         {
             91,                /* lineNo */
             "scalar_gammainc", /* fcnName */
@@ -61,7 +61,7 @@ creal_T scalar_gammainc(const emlrtStack *sp, real_T x, real_T a, real_T la,
   b_st.prev = &st;
   b_st.tls = st.tls;
   if (!(x < 0.0)) {
-    st.site = &lx_emlrtRSI;
+    st.site = &px_emlrtRSI;
     if (!(x > 0.0)) {
       if (x == 0.0) {
         i = 0.0;
@@ -203,7 +203,7 @@ creal_T scalar_gammainc(const emlrtStack *sp, real_T x, real_T a, real_T la,
         if (logpax < 709.782712893384) {
           i *= muDoubleScalarExp(logpax);
         } else {
-          b_st.site = &cx_emlrtRSI;
+          b_st.site = &gx_emlrtRSI;
           if (i < 0.0) {
             emlrtErrorWithMessageIdR2018a(
                 &b_st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
@@ -238,7 +238,7 @@ creal_T scalar_gammainc(const emlrtStack *sp, real_T x, real_T a, real_T la,
         if (logpax < 709.782712893384) {
           i = muDoubleScalarExp(logpax) * Iax;
         } else {
-          b_st.site = &yw_emlrtRSI;
+          b_st.site = &dx_emlrtRSI;
           if (Iax < 0.0) {
             emlrtErrorWithMessageIdR2018a(
                 &b_st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
@@ -334,7 +334,7 @@ creal_T scalar_gammainc(const emlrtStack *sp, real_T x, real_T a, real_T la,
         if (logpax < 709.782712893384) {
           i *= muDoubleScalarExp(logpax);
         } else {
-          b_st.site = &vw_emlrtRSI;
+          b_st.site = &ax_emlrtRSI;
           if (i < 0.0) {
             emlrtErrorWithMessageIdR2018a(
                 &b_st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
@@ -351,7 +351,7 @@ creal_T scalar_gammainc(const emlrtStack *sp, real_T x, real_T a, real_T la,
     b.re = i;
     b.im = 0.0;
   } else {
-    st.site = &mx_emlrtRSI;
+    st.site = &qx_emlrtRSI;
     if (x == rtMinusInf) {
       Iax = rtNaN;
       i = rtNaN;

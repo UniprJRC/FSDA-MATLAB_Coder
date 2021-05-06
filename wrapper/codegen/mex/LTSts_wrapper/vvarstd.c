@@ -22,7 +22,7 @@
 #include <stddef.h>
 
 /* Variable Definitions */
-static emlrtRSInfo et_emlrtRSI = {
+static emlrtRSInfo it_emlrtRSI = {
     96,        /* lineNo */
     "vvarstd", /* fcnName */
     "C:\\Program "
@@ -30,7 +30,7 @@ static emlrtRSInfo et_emlrtRSI = {
     "d.m" /* pathName */
 };
 
-static emlrtRSInfo ft_emlrtRSI = {
+static emlrtRSInfo jt_emlrtRSI = {
     127,       /* lineNo */
     "vvarstd", /* fcnName */
     "C:\\Program "
@@ -38,7 +38,7 @@ static emlrtRSInfo ft_emlrtRSI = {
     "d.m" /* pathName */
 };
 
-static emlrtRSInfo gt_emlrtRSI = {
+static emlrtRSInfo kt_emlrtRSI = {
     143,       /* lineNo */
     "vvarstd", /* fcnName */
     "C:\\Program "
@@ -46,7 +46,7 @@ static emlrtRSInfo gt_emlrtRSI = {
     "d.m" /* pathName */
 };
 
-static emlrtRTEInfo ls_emlrtRTEI = {
+static emlrtRTEInfo ht_emlrtRTEI = {
     126,       /* lineNo */
     34,        /* colNo */
     "vvarstd", /* fName */
@@ -55,7 +55,7 @@ static emlrtRTEInfo ls_emlrtRTEI = {
     "d.m" /* pName */
 };
 
-static emlrtRTEInfo ms_emlrtRTEI = {
+static emlrtRTEInfo it_emlrtRTEI = {
     126,       /* lineNo */
     9,         /* colNo */
     "vvarstd", /* fName */
@@ -90,17 +90,17 @@ real_T vvarstd(const emlrtStack *sp, const emxArray_real_T *v, int32_T n)
       s = rtNaN;
     }
   } else {
-    emxInit_real_T(sp, &absdiff, 1, &ms_emlrtRTEI, true);
-    st.site = &et_emlrtRSI;
-    b_st.site = &wn_emlrtRSI;
+    emxInit_real_T(sp, &absdiff, 1, &it_emlrtRTEI, true);
+    st.site = &it_emlrtRSI;
+    b_st.site = &bo_emlrtRSI;
     xbar = blockedSummation(&b_st, v, n);
     xbar /= (real_T)n;
     k = absdiff->size[0];
     absdiff->size[0] = v->size[0];
-    emxEnsureCapacity_real_T(sp, absdiff, k, &ls_emlrtRTEI);
-    st.site = &ft_emlrtRSI;
+    emxEnsureCapacity_real_T(sp, absdiff, k, &ht_emlrtRTEI);
+    st.site = &jt_emlrtRSI;
     if ((1 <= n) && (n > 2147483646)) {
-      b_st.site = &pf_emlrtRSI;
+      b_st.site = &qf_emlrtRSI;
       check_forloop_overflow_error(&b_st);
     }
     for (k = 0; k < n; k++) {
@@ -109,7 +109,7 @@ real_T vvarstd(const emlrtStack *sp, const emxArray_real_T *v, int32_T n)
     n_t = (ptrdiff_t)n;
     incx_t = (ptrdiff_t)1;
     s = dnrm2(&n_t, &absdiff->data[0], &incx_t);
-    st.site = &gt_emlrtRSI;
+    st.site = &kt_emlrtRSI;
     emxFree_real_T(&absdiff);
     if (n - 1 < 0) {
       emlrtErrorWithMessageIdR2018a(

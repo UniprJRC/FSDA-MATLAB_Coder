@@ -17,7 +17,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRTEInfo ic_emlrtRTEI = {
+static emlrtRTEInfo oc_emlrtRTEI = {
     102,    /* lineNo */
     19,     /* colNo */
     "diag", /* fName */
@@ -26,7 +26,7 @@ static emlrtRTEInfo ic_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo dv_emlrtRTEI = {
+static emlrtRTEInfo vw_emlrtRTEI = {
     100,    /* lineNo */
     5,      /* colNo */
     "diag", /* fName */
@@ -35,7 +35,7 @@ static emlrtRTEInfo dv_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo ev_emlrtRTEI = {
+static emlrtRTEInfo ww_emlrtRTEI = {
     109,    /* lineNo */
     24,     /* colNo */
     "diag", /* fName */
@@ -52,12 +52,12 @@ void diag(const emlrtStack *sp, const emxArray_real_T *v, emxArray_real_T *d)
   if ((v->size[0] == 1) && (v->size[1] == 1)) {
     n = d->size[0];
     d->size[0] = 1;
-    emxEnsureCapacity_real_T(sp, d, n, &dv_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, d, n, &vw_emlrtRTEI);
     d->data[0] = v->data[0];
   } else {
     if ((v->size[0] == 1) || (v->size[1] == 1)) {
       emlrtErrorWithMessageIdR2018a(
-          sp, &ic_emlrtRTEI, "Coder:toolbox:diag_varsizedMatrixVector",
+          sp, &oc_emlrtRTEI, "Coder:toolbox:diag_varsizedMatrixVector",
           "Coder:toolbox:diag_varsizedMatrixVector", 0);
     }
     m = v->size[0];
@@ -69,7 +69,7 @@ void diag(const emlrtStack *sp, const emxArray_real_T *v, emxArray_real_T *d)
     }
     n = d->size[0];
     d->size[0] = m;
-    emxEnsureCapacity_real_T(sp, d, n, &ev_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, d, n, &ww_emlrtRTEI);
     n = m - 1;
     for (m = 0; m <= n; m++) {
       d->data[m] = v->data[m + v->size[0] * m];

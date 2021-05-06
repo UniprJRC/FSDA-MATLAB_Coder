@@ -20,7 +20,7 @@
 #include "vvarstd.h"
 
 /* Variable Definitions */
-static emlrtRSInfo bo_emlrtRSI = {
+static emlrtRSInfo fo_emlrtRSI = {
     53,                 /* lineNo */
     "sumMatrixColumns", /* fcnName */
     "C:\\Program "
@@ -28,35 +28,35 @@ static emlrtRSInfo bo_emlrtRSI = {
     "rixIncludeNaN.m" /* pathName */
 };
 
-static emlrtRSInfo ms_emlrtRSI = {
+static emlrtRSInfo qs_emlrtRSI = {
     23,       /* lineNo */
     "zscore", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\zscore.m" /* pathName
                                                                         */
 };
 
-static emlrtRSInfo ns_emlrtRSI = {
+static emlrtRSInfo rs_emlrtRSI = {
     24,       /* lineNo */
     "zscore", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\zscore.m" /* pathName
                                                                         */
 };
 
-static emlrtRSInfo os_emlrtRSI = {
+static emlrtRSInfo ss_emlrtRSI = {
     31,       /* lineNo */
     "zscore", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\zscore.m" /* pathName
                                                                         */
 };
 
-static emlrtRSInfo ps_emlrtRSI = {
+static emlrtRSInfo ts_emlrtRSI = {
     32,       /* lineNo */
     "zscore", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\zscore.m" /* pathName
                                                                         */
 };
 
-static emlrtRSInfo qs_emlrtRSI = {
+static emlrtRSInfo us_emlrtRSI = {
     49,     /* lineNo */
     "mean", /* fcnName */
     "C:\\Program "
@@ -64,7 +64,7 @@ static emlrtRSInfo qs_emlrtRSI = {
                                                                          */
 };
 
-static emlrtRSInfo rs_emlrtRSI = {
+static emlrtRSInfo vs_emlrtRSI = {
     41,                 /* lineNo */
     "sumMatrixColumns", /* fcnName */
     "C:\\Program "
@@ -72,7 +72,7 @@ static emlrtRSInfo rs_emlrtRSI = {
     "rixIncludeNaN.m" /* pathName */
 };
 
-static emlrtRSInfo ss_emlrtRSI = {
+static emlrtRSInfo ws_emlrtRSI = {
     50,                 /* lineNo */
     "sumMatrixColumns", /* fcnName */
     "C:\\Program "
@@ -80,7 +80,7 @@ static emlrtRSInfo ss_emlrtRSI = {
     "rixIncludeNaN.m" /* pathName */
 };
 
-static emlrtRSInfo us_emlrtRSI = {
+static emlrtRSInfo ys_emlrtRSI = {
     113,      /* lineNo */
     "varstd", /* fcnName */
     "C:\\Program "
@@ -88,7 +88,7 @@ static emlrtRSInfo us_emlrtRSI = {
     ".m" /* pathName */
 };
 
-static emlrtRSInfo vs_emlrtRSI = {
+static emlrtRSInfo at_emlrtRSI = {
     69,                    /* lineNo */
     "applyVectorFunction", /* fcnName */
     "C:\\Program "
@@ -96,7 +96,7 @@ static emlrtRSInfo vs_emlrtRSI = {
     "internal\\applyVectorFunction.m" /* pathName */
 };
 
-static emlrtRSInfo ws_emlrtRSI = {
+static emlrtRSInfo bt_emlrtRSI = {
     131,        /* lineNo */
     "looper1D", /* fcnName */
     "C:\\Program "
@@ -104,7 +104,7 @@ static emlrtRSInfo ws_emlrtRSI = {
     "internal\\applyVectorFunction.m" /* pathName */
 };
 
-static emlrtRSInfo xs_emlrtRSI = {
+static emlrtRSInfo ct_emlrtRSI = {
     140,        /* lineNo */
     "looper1D", /* fcnName */
     "C:\\Program "
@@ -112,7 +112,7 @@ static emlrtRSInfo xs_emlrtRSI = {
     "internal\\applyVectorFunction.m" /* pathName */
 };
 
-static emlrtRSInfo ys_emlrtRSI = {
+static emlrtRSInfo dt_emlrtRSI = {
     141,        /* lineNo */
     "looper1D", /* fcnName */
     "C:\\Program "
@@ -120,7 +120,7 @@ static emlrtRSInfo ys_emlrtRSI = {
     "internal\\applyVectorFunction.m" /* pathName */
 };
 
-static emlrtRSInfo at_emlrtRSI = {
+static emlrtRSInfo et_emlrtRSI = {
     154,          /* lineNo */
     "copyVector", /* fcnName */
     "C:\\Program "
@@ -128,7 +128,7 @@ static emlrtRSInfo at_emlrtRSI = {
     "internal\\applyVectorFunction.m" /* pathName */
 };
 
-static emlrtRSInfo bt_emlrtRSI = {
+static emlrtRSInfo ft_emlrtRSI = {
     156,          /* lineNo */
     "copyVector", /* fcnName */
     "C:\\Program "
@@ -136,15 +136,7 @@ static emlrtRSInfo bt_emlrtRSI = {
     "internal\\applyVectorFunction.m" /* pathName */
 };
 
-static emlrtRSInfo ct_emlrtRSI = {
-    56,                               /* lineNo */
-    "function_handle/parenReference", /* fcnName */
-    "C:\\Program "
-    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\function_"
-    "handle.m" /* pathName */
-};
-
-static emlrtRSInfo dt_emlrtRSI = {
+static emlrtRSInfo ht_emlrtRSI = {
     112,                             /* lineNo */
     "@(x)vvarstd(op,x,omitnan,n,w)", /* fcnName */
     "C:\\Program "
@@ -184,7 +176,7 @@ static emlrtBCInfo dn_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtRTEInfo ds_emlrtRTEI = {
+static emlrtRTEInfo ys_emlrtRTEI = {
     74,                      /* lineNo */
     9,                       /* colNo */
     "combineVectorElements", /* fName */
@@ -193,7 +185,7 @@ static emlrtRTEInfo ds_emlrtRTEI = {
     "eVectorElements.m" /* pName */
 };
 
-static emlrtRTEInfo es_emlrtRTEI = {
+static emlrtRTEInfo at_emlrtRTEI = {
     35,                    /* lineNo */
     20,                    /* colNo */
     "sumMatrixIncludeNaN", /* fName */
@@ -202,7 +194,7 @@ static emlrtRTEInfo es_emlrtRTEI = {
     "rixIncludeNaN.m" /* pName */
 };
 
-static emlrtRTEInfo fs_emlrtRTEI = {
+static emlrtRTEInfo bt_emlrtRTEI = {
     23,       /* lineNo */
     1,        /* colNo */
     "zscore", /* fName */
@@ -210,7 +202,7 @@ static emlrtRTEInfo fs_emlrtRTEI = {
                                                                         */
 };
 
-static emlrtRTEInfo gs_emlrtRTEI = {
+static emlrtRTEInfo ct_emlrtRTEI = {
     24,       /* lineNo */
     1,        /* colNo */
     "zscore", /* fName */
@@ -218,7 +210,7 @@ static emlrtRTEInfo gs_emlrtRTEI = {
                                                                         */
 };
 
-static emlrtRTEInfo hs_emlrtRTEI = {
+static emlrtRTEInfo dt_emlrtRTEI = {
     140,                   /* lineNo */
     13,                    /* colNo */
     "applyVectorFunction", /* fName */
@@ -227,7 +219,7 @@ static emlrtRTEInfo hs_emlrtRTEI = {
     "internal\\applyVectorFunction.m" /* pName */
 };
 
-static emlrtRTEInfo is_emlrtRTEI = {
+static emlrtRTEInfo et_emlrtRTEI = {
     32,       /* lineNo */
     21,       /* colNo */
     "zscore", /* fName */
@@ -235,7 +227,7 @@ static emlrtRTEInfo is_emlrtRTEI = {
                                                                         */
 };
 
-static emlrtRTEInfo js_emlrtRTEI = {
+static emlrtRTEInfo ft_emlrtRTEI = {
     1,        /* lineNo */
     13,       /* colNo */
     "zscore", /* fName */
@@ -243,7 +235,7 @@ static emlrtRTEInfo js_emlrtRTEI = {
                                                                         */
 };
 
-static emlrtRTEInfo ks_emlrtRTEI = {
+static emlrtRTEInfo gt_emlrtRTEI = {
     1,        /* lineNo */
     16,       /* colNo */
     "zscore", /* fName */
@@ -297,54 +289,54 @@ void zscore(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *z)
                                   "Coder:toolbox:autoDimIncompatibility",
                                   "Coder:toolbox:autoDimIncompatibility", 0);
   }
-  emxInit_real_T(sp, &mu, 2, &js_emlrtRTEI, true);
-  st.site = &ms_emlrtRSI;
-  b_st.site = &qs_emlrtRSI;
-  c_st.site = &wn_emlrtRSI;
+  emxInit_real_T(sp, &mu, 2, &ft_emlrtRTEI, true);
+  st.site = &qs_emlrtRSI;
+  b_st.site = &us_emlrtRSI;
+  c_st.site = &bo_emlrtRSI;
   if ((x->size[0] == 0) || (x->size[1] == 0)) {
     ib = mu->size[0] * mu->size[1];
     mu->size[0] = 1;
     mu->size[1] = x->size[1];
-    emxEnsureCapacity_real_T(&c_st, mu, ib, &ds_emlrtRTEI);
+    emxEnsureCapacity_real_T(&c_st, mu, ib, &ys_emlrtRTEI);
     ncols = x->size[1];
     for (ib = 0; ib < ncols; ib++) {
       mu->data[ib] = 0.0;
     }
   } else {
-    d_st.site = &xn_emlrtRSI;
-    e_st.site = &yn_emlrtRSI;
+    d_st.site = &co_emlrtRSI;
+    e_st.site = &do_emlrtRSI;
     ib = mu->size[0] * mu->size[1];
     mu->size[0] = 1;
     mu->size[1] = x->size[1];
-    emxEnsureCapacity_real_T(&e_st, mu, ib, &es_emlrtRTEI);
+    emxEnsureCapacity_real_T(&e_st, mu, ib, &at_emlrtRTEI);
     ncols = x->size[1] - 1;
     if (x->size[0] < 4096) {
-      f_st.site = &rs_emlrtRSI;
+      f_st.site = &vs_emlrtRSI;
       if (x->size[1] > 2147483646) {
-        g_st.site = &pf_emlrtRSI;
+        g_st.site = &qf_emlrtRSI;
         check_forloop_overflow_error(&g_st);
       }
       for (col = 0; col <= ncols; col++) {
-        f_st.site = &ao_emlrtRSI;
+        f_st.site = &eo_emlrtRSI;
         mu->data[col] = c_sumColumnB(&f_st, x, col + 1, x->size[0]);
       }
     } else {
       nfb = x->size[0] / 4096;
       inb = nfb << 12;
       nleft = x->size[0] - inb;
-      f_st.site = &ss_emlrtRSI;
+      f_st.site = &ws_emlrtRSI;
       if (x->size[1] > 2147483646) {
-        g_st.site = &pf_emlrtRSI;
+        g_st.site = &qf_emlrtRSI;
         check_forloop_overflow_error(&g_st);
       }
       for (col = 0; col <= ncols; col++) {
         s = b_sumColumnB4(x, col + 1, 1);
-        f_st.site = &bo_emlrtRSI;
+        f_st.site = &fo_emlrtRSI;
         for (ib = 2; ib <= nfb; ib++) {
           s += b_sumColumnB4(x, col + 1, ((ib - 1) << 12) + 1);
         }
         if (nleft > 0) {
-          f_st.site = &co_emlrtRSI;
+          f_st.site = &go_emlrtRSI;
           s += d_sumColumnB(&f_st, x, col + 1, nleft, inb + 1);
         }
         mu->data[col] = s;
@@ -353,29 +345,29 @@ void zscore(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *z)
   }
   ib = mu->size[0] * mu->size[1];
   mu->size[0] = 1;
-  emxEnsureCapacity_real_T(&st, mu, ib, &fs_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, mu, ib, &bt_emlrtRTEI);
   ncols = mu->size[1] - 1;
   for (ib = 0; ib <= ncols; ib++) {
     mu->data[ib] /= (real_T)x->size[0];
   }
-  emxInit_real_T(&st, &sigma, 2, &ks_emlrtRTEI, true);
-  st.site = &ns_emlrtRSI;
-  b_st.site = &ts_emlrtRSI;
-  c_st.site = &us_emlrtRSI;
+  emxInit_real_T(&st, &sigma, 2, &gt_emlrtRTEI, true);
+  st.site = &rs_emlrtRSI;
+  b_st.site = &xs_emlrtRSI;
+  c_st.site = &ys_emlrtRSI;
   ib = sigma->size[0] * sigma->size[1];
   sigma->size[0] = 1;
   sigma->size[1] = x->size[1];
-  emxEnsureCapacity_real_T(&c_st, sigma, ib, &gs_emlrtRTEI);
+  emxEnsureCapacity_real_T(&c_st, sigma, ib, &ct_emlrtRTEI);
   ncols = x->size[1];
   for (ib = 0; ib < ncols; ib++) {
     sigma->data[ib] = 0.0;
   }
-  d_st.site = &vs_emlrtRSI;
+  d_st.site = &at_emlrtRSI;
   ncols = x->size[0];
   nfb = x->size[1];
-  e_st.site = &ws_emlrtRSI;
+  e_st.site = &bt_emlrtRSI;
   if ((1 <= x->size[1]) && (x->size[1] > 2147483646)) {
-    f_st.site = &pf_emlrtRSI;
+    f_st.site = &qf_emlrtRSI;
     check_forloop_overflow_error(&f_st);
   }
   if (0 <= x->size[1] - 1) {
@@ -383,28 +375,28 @@ void zscore(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *z)
     bcoef = x->size[0];
     overflow = ((1 <= x->size[0]) && (x->size[0] > 2147483646));
   }
-  emxInit_real_T(&d_st, &xv, 1, &hs_emlrtRTEI, true);
+  emxInit_real_T(&d_st, &xv, 1, &dt_emlrtRTEI, true);
   for (nleft = 0; nleft < nfb; nleft++) {
     inb = nleft * ncols;
-    e_st.site = &xs_emlrtRSI;
-    f_st.site = &at_emlrtRSI;
+    e_st.site = &ct_emlrtRSI;
+    f_st.site = &et_emlrtRSI;
     ib = xv->size[0];
     xv->size[0] = outsize_idx_0;
-    emxEnsureCapacity_real_T(&f_st, xv, ib, &hs_emlrtRTEI);
+    emxEnsureCapacity_real_T(&f_st, xv, ib, &dt_emlrtRTEI);
     for (ib = 0; ib < bcoef; ib++) {
       xv->data[ib] = 0.0;
     }
-    f_st.site = &bt_emlrtRSI;
+    f_st.site = &ft_emlrtRSI;
     if (overflow) {
-      g_st.site = &pf_emlrtRSI;
+      g_st.site = &qf_emlrtRSI;
       check_forloop_overflow_error(&g_st);
     }
     for (col = 0; col < ncols; col++) {
       xv->data[col] = x->data[inb + col];
     }
-    e_st.site = &ys_emlrtRSI;
-    f_st.site = &ct_emlrtRSI;
-    g_st.site = &dt_emlrtRSI;
+    e_st.site = &dt_emlrtRSI;
+    f_st.site = &gt_emlrtRSI;
+    g_st.site = &ht_emlrtRSI;
     sigma->data[nleft] = vvarstd(&g_st, xv, x->size[0]);
   }
   emxFree_real_T(&xv);
@@ -422,7 +414,7 @@ void zscore(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *z)
       sigma->data[col] = 1.0;
     }
   }
-  st.site = &os_emlrtRSI;
+  st.site = &ss_emlrtRSI;
   if (mu->size[1] == 1) {
     csz_idx_1 = x->size[1];
   } else if (x->size[1] == 1) {
@@ -437,7 +429,7 @@ void zscore(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *z)
   ib = z->size[0] * z->size[1];
   z->size[0] = x->size[0];
   z->size[1] = csz_idx_1;
-  emxEnsureCapacity_real_T(&st, z, ib, &kl_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, z, ib, &gm_emlrtRTEI);
   if ((x->size[0] != 0) && (csz_idx_1 != 0)) {
     outsize_idx_0 = (x->size[1] != 1);
     bcoef = (mu->size[1] != 1);
@@ -454,12 +446,12 @@ void zscore(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *z)
     }
   }
   emxFree_real_T(&mu);
-  emxInit_real_T(&st, &a, 2, &is_emlrtRTEI, true);
-  st.site = &ps_emlrtRSI;
+  emxInit_real_T(&st, &a, 2, &et_emlrtRTEI, true);
+  st.site = &ts_emlrtRSI;
   ib = a->size[0] * a->size[1];
   a->size[0] = z->size[0];
   a->size[1] = z->size[1];
-  emxEnsureCapacity_real_T(&st, a, ib, &is_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, a, ib, &et_emlrtRTEI);
   ncols = z->size[0] * z->size[1];
   for (ib = 0; ib < ncols; ib++) {
     a->data[ib] = z->data[ib];
@@ -479,7 +471,7 @@ void zscore(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *z)
   ib = z->size[0] * z->size[1];
   z->size[0] = ncols;
   z->size[1] = b_csz_idx_1;
-  emxEnsureCapacity_real_T(&st, z, ib, &kl_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, z, ib, &gm_emlrtRTEI);
   if ((ncols != 0) && (b_csz_idx_1 != 0)) {
     outsize_idx_0 = (a->size[1] != 1);
     bcoef = (sigma->size[1] != 1);

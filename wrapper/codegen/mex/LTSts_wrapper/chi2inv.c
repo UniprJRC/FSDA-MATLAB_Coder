@@ -21,42 +21,42 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo uv_emlrtRSI = {
+static emlrtRSInfo yv_emlrtRSI = {
     17,        /* lineNo */
     "chi2inv", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\chi2inv.m" /* pathName
                                                                          */
 };
 
-static emlrtRSInfo vv_emlrtRSI = {
+static emlrtRSInfo aw_emlrtRSI = {
     42,       /* lineNo */
     "gaminv", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\gaminv.m" /* pathName
                                                                         */
 };
 
-static emlrtRSInfo wv_emlrtRSI = {
+static emlrtRSInfo bw_emlrtRSI = {
     44,       /* lineNo */
     "gaminv", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\gaminv.m" /* pathName
                                                                         */
 };
 
-static emlrtRSInfo xv_emlrtRSI = {
+static emlrtRSInfo cw_emlrtRSI = {
     41,       /* lineNo */
     "gaminv", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\gaminv.m" /* pathName
                                                                         */
 };
 
-static emlrtRSInfo yv_emlrtRSI = {
+static emlrtRSInfo dw_emlrtRSI = {
     39,       /* lineNo */
     "gaminv", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\gaminv.m" /* pathName
                                                                         */
 };
 
-static emlrtRSInfo aw_emlrtRSI =
+static emlrtRSInfo ew_emlrtRSI =
     {
         29,            /* lineNo */
         "gammaincinv", /* fcnName */
@@ -65,7 +65,7 @@ static emlrtRSInfo aw_emlrtRSI =
         ".m" /* pathName */
 };
 
-static emlrtRSInfo bw_emlrtRSI =
+static emlrtRSInfo fw_emlrtRSI =
     {
         30,            /* lineNo */
         "gammaincinv", /* fcnName */
@@ -74,7 +74,7 @@ static emlrtRSInfo bw_emlrtRSI =
         ".m" /* pathName */
 };
 
-static emlrtRSInfo cw_emlrtRSI =
+static emlrtRSInfo gw_emlrtRSI =
     {
         31,            /* lineNo */
         "gammaincinv", /* fcnName */
@@ -83,7 +83,7 @@ static emlrtRSInfo cw_emlrtRSI =
         ".m" /* pathName */
 };
 
-static emlrtRSInfo dw_emlrtRSI =
+static emlrtRSInfo hw_emlrtRSI =
     {
         34,            /* lineNo */
         "gammaincinv", /* fcnName */
@@ -92,7 +92,7 @@ static emlrtRSInfo dw_emlrtRSI =
         ".m" /* pathName */
 };
 
-static emlrtRSInfo jw_emlrtRSI =
+static emlrtRSInfo nw_emlrtRSI =
     {
         322,               /* lineNo */
         "eml_gammaincinv", /* fcnName */
@@ -101,7 +101,7 @@ static emlrtRSInfo jw_emlrtRSI =
         ".m" /* pathName */
 };
 
-static emlrtRSInfo kw_emlrtRSI =
+static emlrtRSInfo ow_emlrtRSI =
     {
         323,               /* lineNo */
         "eml_gammaincinv", /* fcnName */
@@ -110,7 +110,7 @@ static emlrtRSInfo kw_emlrtRSI =
         ".m" /* pathName */
 };
 
-static emlrtRSInfo lw_emlrtRSI =
+static emlrtRSInfo pw_emlrtRSI =
     {
         308,               /* lineNo */
         "eml_gammaincinv", /* fcnName */
@@ -119,7 +119,7 @@ static emlrtRSInfo lw_emlrtRSI =
         ".m" /* pathName */
 };
 
-static emlrtRSInfo mw_emlrtRSI =
+static emlrtRSInfo qw_emlrtRSI =
     {
         291,               /* lineNo */
         "eml_gammaincinv", /* fcnName */
@@ -128,7 +128,7 @@ static emlrtRSInfo mw_emlrtRSI =
         ".m" /* pathName */
 };
 
-static emlrtRSInfo nw_emlrtRSI =
+static emlrtRSInfo rw_emlrtRSI =
     {
         284,               /* lineNo */
         "eml_gammaincinv", /* fcnName */
@@ -137,7 +137,7 @@ static emlrtRSInfo nw_emlrtRSI =
         ".m" /* pathName */
 };
 
-static emlrtRSInfo ow_emlrtRSI =
+static emlrtRSInfo sw_emlrtRSI =
     {
         266,               /* lineNo */
         "eml_gammaincinv", /* fcnName */
@@ -146,7 +146,7 @@ static emlrtRSInfo ow_emlrtRSI =
         ".m" /* pathName */
 };
 
-static emlrtRSInfo pw_emlrtRSI =
+static emlrtRSInfo tw_emlrtRSI =
     {
         262,               /* lineNo */
         "eml_gammaincinv", /* fcnName */
@@ -155,7 +155,7 @@ static emlrtRSInfo pw_emlrtRSI =
         ".m" /* pathName */
 };
 
-static emlrtRSInfo qw_emlrtRSI =
+static emlrtRSInfo uw_emlrtRSI =
     {
         233,               /* lineNo */
         "eml_gammaincinv", /* fcnName */
@@ -164,7 +164,7 @@ static emlrtRSInfo qw_emlrtRSI =
         ".m" /* pathName */
 };
 
-static emlrtRSInfo rw_emlrtRSI =
+static emlrtRSInfo vw_emlrtRSI =
     {
         230,               /* lineNo */
         "eml_gammaincinv", /* fcnName */
@@ -173,7 +173,7 @@ static emlrtRSInfo rw_emlrtRSI =
         ".m" /* pathName */
 };
 
-static emlrtRSInfo sw_emlrtRSI =
+static emlrtRSInfo ww_emlrtRSI =
     {
         207,               /* lineNo */
         "eml_gammaincinv", /* fcnName */
@@ -182,7 +182,7 @@ static emlrtRSInfo sw_emlrtRSI =
         ".m" /* pathName */
 };
 
-static emlrtRSInfo tw_emlrtRSI =
+static emlrtRSInfo xw_emlrtRSI =
     {
         196,               /* lineNo */
         "eml_gammaincinv", /* fcnName */
@@ -191,7 +191,7 @@ static emlrtRSInfo tw_emlrtRSI =
         ".m" /* pathName */
 };
 
-static emlrtRSInfo uw_emlrtRSI =
+static emlrtRSInfo yw_emlrtRSI =
     {
         405,      /* lineNo */
         "PHIinv", /* fcnName */
@@ -321,7 +321,7 @@ real_T chi2inv(const emlrtStack *sp)
   boolean_T guard1 = false;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &uv_emlrtRSI;
+  st.site = &yv_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -330,24 +330,24 @@ real_T chi2inv(const emlrtStack *sp)
   d_st.tls = c_st.tls;
   e_st.prev = &d_st;
   e_st.tls = d_st.tls;
-  b_st.site = &yv_emlrtRSI;
-  c_st.site = &aw_emlrtRSI;
+  b_st.site = &dw_emlrtRSI;
+  c_st.site = &ew_emlrtRSI;
   lga = 0.5;
-  c_st.site = &bw_emlrtRSI;
+  c_st.site = &fw_emlrtRSI;
   gammaln(&c_st, &lga);
   lgap1 = 1.5;
-  c_st.site = &cw_emlrtRSI;
+  c_st.site = &gw_emlrtRSI;
   gammaln(&c_st, &lgap1);
-  c_st.site = &dw_emlrtRSI;
+  c_st.site = &hw_emlrtRSI;
   if (lga == rtInf) {
     z = 0.5;
   } else {
-    d_st.site = &tw_emlrtRSI;
-    d_st.site = &sw_emlrtRSI;
-    d_st.site = &rw_emlrtRSI;
-    e_st.site = &uw_emlrtRSI;
-    e_st.site = &uw_emlrtRSI;
-    d_st.site = &qw_emlrtRSI;
+    d_st.site = &xw_emlrtRSI;
+    d_st.site = &ww_emlrtRSI;
+    d_st.site = &vw_emlrtRSI;
+    e_st.site = &yw_emlrtRSI;
+    e_st.site = &yw_emlrtRSI;
+    d_st.site = &uw_emlrtRSI;
     z = 3.2928848298257778;
     oldf = rtInf;
     oldz = rtInf;
@@ -356,12 +356,12 @@ real_T chi2inv(const emlrtStack *sp)
     i = 0;
     exitg1 = false;
     while ((!exitg1) && (i < 1000)) {
-      d_st.site = &pw_emlrtRSI;
+      d_st.site = &tw_emlrtRSI;
       f = -(eml_gammainc(&d_st, z, lgap1, true) - 0.010000000000000009);
       if ((f * oldf < 0.0) &&
           (muDoubleScalarAbs(oldf) <= muDoubleScalarAbs(f))) {
         z = 0.5 * z + 0.5 * oldz;
-        d_st.site = &ow_emlrtRSI;
+        d_st.site = &sw_emlrtRSI;
         f = -(eml_gammainc(&d_st, z, lgap1, true) - 0.010000000000000009);
       }
       if (f > 0.0) {
@@ -378,7 +378,7 @@ real_T chi2inv(const emlrtStack *sp)
         oldf = f;
         guard1 = false;
         if (i < 500) {
-          d_st.site = &nw_emlrtRSI;
+          d_st.site = &rw_emlrtRSI;
           if (z < 0.0) {
             emlrtErrorWithMessageIdR2018a(
                 &d_st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
@@ -389,7 +389,7 @@ real_T chi2inv(const emlrtStack *sp)
                           f * ((z + 1.0) - 0.5) / 2.0);
           if (z <= zlo) {
             if (zlo == 0.0) {
-              d_st.site = &mw_emlrtRSI;
+              d_st.site = &qw_emlrtRSI;
               x = eml_gammainc(&d_st, 2.2250738585072014E-308, lgap1, true) -
                   0.010000000000000009;
               if (0.99 < muDoubleScalarAbs(x)) {
@@ -411,7 +411,7 @@ real_T chi2inv(const emlrtStack *sp)
         } else {
           if (1.0E+8 * zlo < zhi) {
             oldz = 1.0E+8 * zlo;
-            d_st.site = &lw_emlrtRSI;
+            d_st.site = &pw_emlrtRSI;
             oldf = -(eml_gammainc(&d_st, oldz, lgap1, true) -
                      0.010000000000000009);
             if (oldf > 0.0) {
@@ -430,7 +430,7 @@ real_T chi2inv(const emlrtStack *sp)
       }
     }
     if ((i >= 1000) && (!emlrtSetWarningFlag(&c_st))) {
-      d_st.site = &kw_emlrtRSI;
+      d_st.site = &ow_emlrtRSI;
       c_y = NULL;
       m = emlrtCreateCharArray(2, &iv1[0]);
       emlrtInitCharArrayR2013a(&d_st, 7, m, &b_rfmt[0]);
@@ -438,10 +438,10 @@ real_T chi2inv(const emlrtStack *sp)
       d_y = NULL;
       m = emlrtCreateDoubleScalar(0.99);
       emlrtAssign(&d_y, m);
-      e_st.site = &ycb_emlrtRSI;
+      e_st.site = &yeb_emlrtRSI;
       i_emlrt_marshallIn(&e_st, c_sprintf(&e_st, c_y, d_y, &p_emlrtMCI),
                          "<output of sprintf>", b_str);
-      d_st.site = &kw_emlrtRSI;
+      d_st.site = &ow_emlrtRSI;
       e_y = NULL;
       m = emlrtCreateCharArray(2, &iv2[0]);
       emlrtInitCharArrayR2013a(&d_st, 7, m, &b_rfmt[0]);
@@ -449,24 +449,24 @@ real_T chi2inv(const emlrtStack *sp)
       f_y = NULL;
       m = emlrtCreateDoubleScalar(0.5);
       emlrtAssign(&f_y, m);
-      e_st.site = &ycb_emlrtRSI;
+      e_st.site = &yeb_emlrtRSI;
       i_emlrt_marshallIn(&e_st, c_sprintf(&e_st, e_y, f_y, &p_emlrtMCI),
                          "<output of sprintf>", c_str);
-      d_st.site = &jw_emlrtRSI;
+      d_st.site = &nw_emlrtRSI;
       c_warning(&d_st, b_str, c_str);
     }
   }
-  b_st.site = &xv_emlrtRSI;
-  c_st.site = &ix_emlrtRSI;
+  b_st.site = &cw_emlrtRSI;
+  c_st.site = &mx_emlrtRSI;
   zlo = 1.5;
-  c_st.site = &jx_emlrtRSI;
+  c_st.site = &nx_emlrtRSI;
   gammaln(&c_st, &zlo);
-  c_st.site = &kx_emlrtRSI;
+  c_st.site = &ox_emlrtRSI;
   b = scalar_gammainc(&c_st, z, 0.5, -0.69314718055994529, zlo);
   b.re -= 0.99;
-  b_st.site = &xv_emlrtRSI;
+  b_st.site = &cw_emlrtRSI;
   if (muDoubleScalarHypot(b.re, b.im) > 1.475214958190918E-8) {
-    b_st.site = &wv_emlrtRSI;
+    b_st.site = &bw_emlrtRSI;
     y = NULL;
     m = emlrtCreateCharArray(2, &iv[0]);
     emlrtInitCharArrayR2013a(&b_st, 6, m, &rfmt[0]);
@@ -474,10 +474,10 @@ real_T chi2inv(const emlrtStack *sp)
     b_y = NULL;
     m = emlrtCreateDoubleScalar(2.0);
     emlrtAssign(&b_y, m);
-    c_st.site = &ycb_emlrtRSI;
+    c_st.site = &yeb_emlrtRSI;
     k_emlrt_marshallIn(&c_st, c_sprintf(&c_st, y, b_y, &p_emlrtMCI),
                        "<output of sprintf>", str);
-    b_st.site = &vv_emlrtRSI;
+    b_st.site = &aw_emlrtRSI;
     d_warning(&b_st, str);
   }
   return z * 2.0;

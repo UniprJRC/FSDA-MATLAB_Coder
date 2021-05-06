@@ -385,6 +385,54 @@
   },
   {
     "directory": "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2017b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\\interface\" -I \"C:\\Program Files\\MATLAB\\R2021a\\extern\\include\" -I \".\" -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=LTSts_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1 -fopenmp  lsqcurvefit.c -o build/win64/lsqcurvefit.o",
+    "file": "lsqcurvefit.c",
+    "output": "build/win64/lsqcurvefit.o"
+  },
+  {
+    "directory": "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2017b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\\interface\" -I \"C:\\Program Files\\MATLAB\\R2021a\\extern\\include\" -I \".\" -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=LTSts_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1 -fopenmp  allOrAny.c -o build/win64/allOrAny.o",
+    "file": "allOrAny.c",
+    "output": "build/win64/allOrAny.o"
+  },
+  {
+    "directory": "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2017b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\\interface\" -I \"C:\\Program Files\\MATLAB\\R2021a\\extern\\include\" -I \".\" -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=LTSts_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1 -fopenmp  driver.c -o build/win64/driver.o",
+    "file": "driver.c",
+    "output": "build/win64/driver.o"
+  },
+  {
+    "directory": "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2017b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\\interface\" -I \"C:\\Program Files\\MATLAB\\R2021a\\extern\\include\" -I \".\" -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=LTSts_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1 -fopenmp  xdot.c -o build/win64/xdot.o",
+    "file": "xdot.c",
+    "output": "build/win64/xdot.o"
+  },
+  {
+    "directory": "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2017b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\\interface\" -I \"C:\\Program Files\\MATLAB\\R2021a\\extern\\include\" -I \".\" -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=LTSts_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1 -fopenmp  factoryConstruct.c -o build/win64/factoryConstruct.o",
+    "file": "factoryConstruct.c",
+    "output": "build/win64/factoryConstruct.o"
+  },
+  {
+    "directory": "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2017b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\\interface\" -I \"C:\\Program Files\\MATLAB\\R2021a\\extern\\include\" -I \".\" -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=LTSts_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1 -fopenmp  strcmp.c -o build/win64/strcmp.o",
+    "file": "strcmp.c",
+    "output": "build/win64/strcmp.o"
+  },
+  {
+    "directory": "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2017b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\\interface\" -I \"C:\\Program Files\\MATLAB\\R2021a\\extern\\include\" -I \".\" -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=LTSts_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1 -fopenmp  validateattributes.c -o build/win64/validateattributes.o",
+    "file": "validateattributes.c",
+    "output": "build/win64/validateattributes.o"
+  },
+  {
+    "directory": "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2017b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\\interface\" -I \"C:\\Program Files\\MATLAB\\R2021a\\extern\\include\" -I \".\" -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=LTSts_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1 -fopenmp  checkStoppingCriteria.c -o build/win64/checkStoppingCriteria.o",
+    "file": "checkStoppingCriteria.c",
+    "output": "build/win64/checkStoppingCriteria.o"
+  },
+  {
+    "directory": "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper",
     "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2017b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\\interface\" -I \"C:\\Program Files\\MATLAB\\R2021a\\extern\\include\" -I \".\" -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=LTSts_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1 -fopenmp  diag.c -o build/win64/diag.o",
     "file": "diag.c",
     "output": "build/win64/diag.o"
@@ -475,6 +523,12 @@
   },
   {
     "directory": "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2017b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\\interface\" -I \"C:\\Program Files\\MATLAB\\R2021a\\extern\\include\" -I \".\" -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=LTSts_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1 -fopenmp  xunormqr.c -o build/win64/xunormqr.o",
+    "file": "xunormqr.c",
+    "output": "build/win64/xunormqr.o"
+  },
+  {
+    "directory": "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper",
     "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2017b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\\interface\" -I \"C:\\Program Files\\MATLAB\\R2021a\\extern\\include\" -I \".\" -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=LTSts_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1 -fopenmp  sort.c -o build/win64/sort.o",
     "file": "sort.c",
     "output": "build/win64/sort.o"
@@ -484,6 +538,60 @@
     "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2017b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\\interface\" -I \"C:\\Program Files\\MATLAB\\R2021a\\extern\\include\" -I \".\" -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=LTSts_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1 -fopenmp  gammaln.c -o build/win64/gammaln.o",
     "file": "gammaln.c",
     "output": "build/win64/gammaln.o"
+  },
+  {
+    "directory": "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2017b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\\interface\" -I \"C:\\Program Files\\MATLAB\\R2021a\\extern\\include\" -I \".\" -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=LTSts_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1 -fopenmp  hasFiniteBounds.c -o build/win64/hasFiniteBounds.o",
+    "file": "hasFiniteBounds.c",
+    "output": "build/win64/hasFiniteBounds.o"
+  },
+  {
+    "directory": "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2017b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\\interface\" -I \"C:\\Program Files\\MATLAB\\R2021a\\extern\\include\" -I \".\" -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=LTSts_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1 -fopenmp  projectBox.c -o build/win64/projectBox.o",
+    "file": "projectBox.c",
+    "output": "build/win64/projectBox.o"
+  },
+  {
+    "directory": "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2017b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\\interface\" -I \"C:\\Program Files\\MATLAB\\R2021a\\extern\\include\" -I \".\" -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=LTSts_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1 -fopenmp  checkFinite.c -o build/win64/checkFinite.o",
+    "file": "checkFinite.c",
+    "output": "build/win64/checkFinite.o"
+  },
+  {
+    "directory": "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2017b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\\interface\" -I \"C:\\Program Files\\MATLAB\\R2021a\\extern\\include\" -I \".\" -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=LTSts_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1 -fopenmp  jacobianFiniteDifference.c -o build/win64/jacobianFiniteDifference.o",
+    "file": "jacobianFiniteDifference.c",
+    "output": "build/win64/jacobianFiniteDifference.o"
+  },
+  {
+    "directory": "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2017b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\\interface\" -I \"C:\\Program Files\\MATLAB\\R2021a\\extern\\include\" -I \".\" -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=LTSts_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1 -fopenmp  computeFiniteDifferences.c -o build/win64/computeFiniteDifferences.o",
+    "file": "computeFiniteDifferences.c",
+    "output": "build/win64/computeFiniteDifferences.o"
+  },
+  {
+    "directory": "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2017b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\\interface\" -I \"C:\\Program Files\\MATLAB\\R2021a\\extern\\include\" -I \".\" -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=LTSts_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1 -fopenmp  finDiffEvalAndChkErr.c -o build/win64/finDiffEvalAndChkErr.o",
+    "file": "finDiffEvalAndChkErr.c",
+    "output": "build/win64/finDiffEvalAndChkErr.o"
+  },
+  {
+    "directory": "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2017b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\\interface\" -I \"C:\\Program Files\\MATLAB\\R2021a\\extern\\include\" -I \".\" -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=LTSts_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1 -fopenmp  xcopy.c -o build/win64/xcopy.o",
+    "file": "xcopy.c",
+    "output": "build/win64/xcopy.o"
+  },
+  {
+    "directory": "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2017b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\\interface\" -I \"C:\\Program Files\\MATLAB\\R2021a\\extern\\include\" -I \".\" -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=LTSts_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1 -fopenmp  xgemv.c -o build/win64/xgemv.o",
+    "file": "xgemv.c",
+    "output": "build/win64/xgemv.o"
+  },
+  {
+    "directory": "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2017b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper\\interface\" -I \"C:\\Program Files\\MATLAB\\R2021a\\extern\\include\" -I \".\" -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=LTSts_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1 -fopenmp  linearLeastSquares.c -o build/win64/linearLeastSquares.o",
+    "file": "linearLeastSquares.c",
+    "output": "build/win64/linearLeastSquares.o"
   },
   {
     "directory": "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\LTSts_wrapper",
