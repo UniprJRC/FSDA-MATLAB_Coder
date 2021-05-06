@@ -1251,19 +1251,12 @@ void FSRmdr(const emxArray_real_T *y, const emxArray_real_T *X,
       }
     }
     /*  rank is ok */
-    loop_ub = yb->size[0];
-    i1 = b->size[0];
-    b->size[0] = yb->size[0];
-    emxEnsureCapacity_real_T(b, i1);
-    for (i1 = 0; i1 < loop_ub; i1++) {
-      b->data[i1] = yb->data[i1];
-    }
-    c_mldivide(Xb, b);
+    mldivide(Xb, yb, b);
     mtimes(Xb, b, resBSB);
-    loop_ub = yb->size[0];
     i1 = resBSB->size[0];
     resBSB->size[0] = yb->size[0];
     emxEnsureCapacity_real_T(resBSB, i1);
+    loop_ub = yb->size[0];
     for (i1 = 0; i1 < loop_ub; i1++) {
       resBSB->data[i1] = yb->data[i1] - resBSB->data[i1];
     }
@@ -1317,10 +1310,10 @@ void FSRmdr(const emxArray_real_T *y, const emxArray_real_T *X,
       /*  Store R2 */
       /*  S2(mm-init1+1,3)=1-var(resBSB)/var(yb); */
       thpmm_data = blockedSummation(yb, yb->size[0]) / (double)b_mm;
-      loop_ub = yb->size[0];
       i1 = b->size[0];
       b->size[0] = yb->size[0];
       emxEnsureCapacity_real_T(b, i1);
+      loop_ub = yb->size[0];
       for (i1 = 0; i1 < loop_ub; i1++) {
         b->data[i1] = yb->data[i1] - thpmm_data;
       }

@@ -36,6 +36,7 @@
 #include "ifWhileCond.h"
 #include "int2str.h"
 #include "inv.h"
+#include "lsqcurvefit.h"
 #include "minOrMax.h"
 #include "mldivide.h"
 #include "mtimes.h"
@@ -93,14 +94,31 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
 
   static const char cv1[8] = { 'b', '_', 'l', 's', 'h', 'i', 'f', 't' };
 
-  static const char cv[5] = { 'L', 'T', 'S', 't', 's' };
+  static const char b_cv[5] = { 'L', 'T', 'S', 't', 's' };
 
   b_captured_var isemptyX;
   b_captured_var verLess2016b;
-  b_struct_T b_expl_temp;
-  b_struct_T expl_temp;
-  c_captured_var weights;
-  c_captured_var zerT1;
+  b_struct_T a__25;
+  c_captured_var Seq;
+  c_captured_var Seqf;
+  c_captured_var X;
+  c_captured_var Xf;
+  c_captured_var Xlshift;
+  c_captured_var Xlshiftf;
+  c_captured_var Xseaso;
+  c_captured_var Xseasof;
+  c_captured_var Xsel;
+  c_captured_var Xtrend;
+  c_captured_var beta;
+  c_captured_var bsb;
+  c_captured_var indlinsc;
+  c_captured_var otherind;
+  c_captured_var seq;
+  c_captured_var yhat;
+  c_captured_var yhatseaso;
+  c_captured_var yin;
+  c_struct_T b_expl_temp;
+  c_struct_T expl_temp;
   captured_var b_refstepsALS;
   captured_var b_reftolALS;
   captured_var constr;
@@ -110,20 +128,9 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   captured_var seasonal;
   captured_var trend;
   captured_var varampl;
-  d_captured_var Seq;
-  d_captured_var X;
-  d_captured_var Xlshift;
-  d_captured_var Xseaso;
-  d_captured_var Xsel;
-  d_captured_var Xtrend;
-  d_captured_var beta;
-  d_captured_var bsb;
-  d_captured_var indlinsc;
-  d_captured_var otherind;
-  d_captured_var seq;
-  d_captured_var yhat;
-  d_captured_var yhatseaso;
-  d_captured_var yin;
+  d_captured_var weights;
+  d_captured_var zerT1;
+  e_struct_T a__24;
   emxArray_boolean_T b_varargin_22_data;
   emxArray_boolean_T *Weights;
   emxArray_boolean_T *r1;
@@ -140,14 +147,14 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   emxArray_int32_T *r6;
   emxArray_int32_T *r7;
   emxArray_real_T *Cr;
+  emxArray_real_T *RES;
+  emxArray_real_T *WEIibestrdiv2;
   emxArray_real_T *Xfinal;
-  emxArray_real_T *Xseldum;
   emxArray_real_T *Ylagged;
   emxArray_real_T *allnumscale2;
   emxArray_real_T *b_C;
-  emxArray_real_T *b_Xfinal;
   emxArray_real_T *b_out;
-  emxArray_real_T *b_y;
+  emxArray_real_T *b_yin;
   emxArray_real_T *bestnumscale2;
   emxArray_real_T *bestyhat;
   emxArray_real_T *beta0;
@@ -163,14 +170,13 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   double numscale2LSH[3];
   double varargin_22_data[2];
   double ARp;
-  double a;
   double b_h;
   double bdp;
-  double d;
   double factor;
   double ij;
   double lshift;
   double ncomb;
+  double nselected;
   double p;
   double pini;
   double posLS;
@@ -181,6 +187,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   int b_input_sizes_idx_1;
   int b_loop_ub;
   int b_sizes_idx_1;
+  int brob_idx_0;
   int c_loop_ub;
   int d_loop_ub;
   int e_loop_ub;
@@ -219,6 +226,12 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     fsdaC_initialize();
   }
 
+  emxInitStruct_captured_var(&Xlshiftf);
+  emxInitStruct_captured_var1(&Seqf);
+  emxInitStruct_captured_var1(&Xf);
+  emxInitStruct_captured_var1(&Xseasof);
+  emxInitStruct_captured_var(&yhatseaso);
+
   /*  Wrapper function for LTSts. NV pair names are not taken as */
   /*  inputs. Instead, just the values are taken as inputs. */
   /*  Required input arguments */
@@ -240,7 +253,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   /*  field reftol a scalar of type double */
   /*  field reftolbestr a scalar of type double */
   /*  model: a struct (with 6 fields of type scalar double) */
-  /*  field lshift  a scalar of type double */
+  /*  field lshift  a row vector of type double */
   /*  field s a scalar of type double */
   /*  field trend a scalar of type double */
   /*  field seasonal a scalar of type double */
@@ -264,7 +277,11 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     }
   }
 
-  emxInitStruct_captured_var1(&yin);
+  emxInitStruct_captured_var(&yin);
+  Xseasof.contents->size[0] = 0;
+  Xseasof.contents->size[1] = 0;
+  Xf.contents->size[0] = 0;
+  Xf.contents->size[1] = 0;
 
   /* LTSts extends LTS estimator to time series */
   /*  */
@@ -389,9 +406,10 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   /*                model.seasonal = scalar (integer specifying number of */
   /*                         frequencies, i.e. harmonics, in the seasonal */
   /*                         component. Possible values for seasonal are */
-  /*                         $1, 2, ..., [s/2]$, where $[s/2]=floor(s/2)$. */
-  /*                         For example: */
-  /*                         if seasonal =1 (default) we have: */
+  /*                         $0,1, 2, ..., [s/2]$, where $[s/2]=floor(s/2)$. */
+  /*                         If seasonal =0 we assume there is no seasonal */
+  /*                         component. */
+  /*                         If seasonal =1 (default) we have: */
   /*                         $\beta_1 \cos( 2 \pi t/s) + \beta_2 sin ( 2 \pi t/s)$; */
   /*                         if seasonal =2 we have: */
   /*                         $\beta_1 \cos( 2 \pi t/s) + \beta_2 \sin ( 2 \pi t/s) */
@@ -1333,7 +1351,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     }
   }
 
-  emxInitStruct_captured_var1(&seq);
+  emxInitStruct_captured_var(&seq);
   i = seq.contents->size[0];
   seq.contents->size[0] = Cr->size[1];
   emxEnsureCapacity_real_T(seq.contents, i);
@@ -1342,7 +1360,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     seq.contents->data[i] = Cr->data[i];
   }
 
-  emxInitStruct_captured_var(&zerT1);
+  emxInitStruct_captured_var2(&zerT1);
   i = zerT1.contents->size[0];
   zerT1.contents->size[0] = y->size[0];
   emxEnsureCapacity_boolean_T(zerT1.contents, i);
@@ -1383,7 +1401,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     brob->data[i] = -99.0;
   }
 
-  emxInit_real_T(&b_y, 1);
+  emxInit_real_T(&allnumscale2, 1);
 
   /*  Write in structure 'options' the options chosen by the user */
   /*  Default values for the optional parameters are set inside structure */
@@ -1404,17 +1422,18 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   /*  nbestindexes = indexes of the best  nbestindexes solutions for each */
   /*  tentative position of level shift */
   /*  Check if the optional user parameters are valid. */
-  h_do_vectors(model->trend, (double *)&ncomb, c_size, (int *)&nx, &sizes_idx_1,
-               (int *)&vlen, &ib_size);
+  ij = trend.contents;
+  h_do_vectors(ij, (double *)&sworst, c_size, (int *)&nx, &sizes_idx_1, (int *)
+               &vlen, &ib_size);
 
   /*  Construct the matrices which are fixed in each step of the minimization */
   /*  procedure */
-  i = b_y->size[0];
-  b_y->size[0] = seq.contents->size[0];
-  emxEnsureCapacity_real_T(b_y, i);
+  i = allnumscale2->size[0];
+  allnumscale2->size[0] = seq.contents->size[0];
+  emxEnsureCapacity_real_T(allnumscale2, i);
   nx = seq.contents->size[0];
   for (sizes_idx_1 = 0; sizes_idx_1 < nx; sizes_idx_1++) {
-    b_y->data[sizes_idx_1] = seq.contents->data[sizes_idx_1] *
+    allnumscale2->data[sizes_idx_1] = seq.contents->data[sizes_idx_1] *
       seq.contents->data[sizes_idx_1];
   }
 
@@ -1428,7 +1447,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
       3.0);
   }
 
-  emxInitStruct_captured_var2(&Seq);
+  emxInitStruct_captured_var1(&Seq);
   i = Seq.contents->size[0] * Seq.contents->size[1];
   Seq.contents->size[0] = y->size[0];
   Seq.contents->size[1] = 4;
@@ -1443,9 +1462,9 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     Seq.contents->data[i + Seq.contents->size[0]] = seq.contents->data[i];
   }
 
-  loop_ub = b_y->size[0];
+  loop_ub = allnumscale2->size[0];
   for (i = 0; i < loop_ub; i++) {
-    Seq.contents->data[i + Seq.contents->size[0] * 2] = b_y->data[i];
+    Seq.contents->data[i + Seq.contents->size[0] * 2] = allnumscale2->data[i];
   }
 
   loop_ub = betaini->size[0];
@@ -1454,12 +1473,13 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   }
 
   /*  Define matrix which contains linear quadratic of cubic trend */
-  emxInitStruct_captured_var2(&Xtrend);
+  emxInitStruct_captured_var1(&Xtrend);
   if (intercept) {
-    if (1.0 > model->trend + 1.0) {
+    ncomb = trend.contents + 1.0;
+    if (1.0 > ncomb) {
       loop_ub = 0;
     } else {
-      loop_ub = (int)(model->trend + 1.0);
+      loop_ub = (int)ncomb;
     }
 
     vlen = Seq.contents->size[0];
@@ -1474,12 +1494,13 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
       }
     }
   } else {
-    if (2.0 > model->trend + 1.0) {
+    ncomb = trend.contents + 1.0;
+    if (2.0 > ncomb) {
       i = 0;
       i1 = 0;
     } else {
       i = 1;
-      i1 = (int)(model->trend + 1.0);
+      i1 = (int)ncomb;
     }
 
     loop_ub = Seq.contents->size[0];
@@ -1496,21 +1517,19 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     }
   }
 
-  emxInitStruct_captured_var1(&yhatseaso);
-
   /*  seasonal component */
   i = yhatseaso.contents->size[0];
   yhatseaso.contents->size[0] = 1;
   emxEnsureCapacity_real_T(yhatseaso.contents, i);
   yhatseaso.contents->data[0] = 0.0;
-  emxInitStruct_captured_var2(&Xseaso);
+  emxInitStruct_captured_var1(&Xseaso);
   emxInit_real_T(&bestnumscale2, 1);
-  if (model->seasonal > 0.0) {
+  if (seasonal.contents > 0.0) {
     emxInit_char_T(&sstring, 2);
-    d_sprintf(model->seasonal, sstring);
+    d_sprintf(seasonal.contents, sstring);
 
     /*  sstring=num2str(seasonal); TODO */
-    if (model->seasonal > 100.0) {
+    if (seasonal.contents > 100.0) {
       dc = str2double(sstring->data[0]);
       varampl.contents = dc.re;
       dc = b_str2double(*(char (*)[2])&sstring->data[1]);
@@ -1522,24 +1541,24 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     emxFree_char_T(&sstring);
     i = Xseaso.contents->size[0] * Xseaso.contents->size[1];
     Xseaso.contents->size[0] = y->size[0];
-    i1 = (int)(seasonal.contents * 2.0);
-    Xseaso.contents->size[1] = i1;
+    Xseaso.contents->size[1] = (int)(seasonal.contents * 2.0);
     emxEnsureCapacity_real_T(Xseaso.contents, i);
-    loop_ub = y->size[0] * i1;
+    loop_ub = y->size[0] * (int)(seasonal.contents * 2.0);
     for (i = 0; i < loop_ub; i++) {
       Xseaso.contents->data[i] = 0.0;
     }
 
-    i = (int)seasonal.contents;
+    ncomb = seasonal.contents;
+    i = (int)ncomb;
     for (ib_size = 0; ib_size < i; ib_size++) {
-      d = 2.0 * ((double)ib_size + 1.0);
-      ncomb = d * 3.1415926535897931;
+      ncomb = 2.0 * ((double)ib_size + 1.0);
+      sworst = ncomb * 3.1415926535897931;
       loop_ub = seq.contents->size[0];
       i1 = bestnumscale2->size[0];
       bestnumscale2->size[0] = seq.contents->size[0];
       emxEnsureCapacity_real_T(bestnumscale2, i1);
       for (i1 = 0; i1 < loop_ub; i1++) {
-        bestnumscale2->data[i1] = ncomb * seq.contents->data[i1] / s.contents;
+        bestnumscale2->data[i1] = sworst * seq.contents->data[i1] / s.contents;
       }
 
       nx = bestnumscale2->size[0];
@@ -1552,7 +1571,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
       betaini->size[0] = seq.contents->size[0];
       emxEnsureCapacity_real_T(betaini, i1);
       for (i1 = 0; i1 < loop_ub; i1++) {
-        betaini->data[i1] = ncomb * seq.contents->data[i1] / s.contents;
+        betaini->data[i1] = sworst * seq.contents->data[i1] / s.contents;
       }
 
       nx = betaini->size[0];
@@ -1562,20 +1581,20 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
 
       loop_ub = bestnumscale2->size[0];
       for (i1 = 0; i1 < loop_ub; i1++) {
-        Xseaso.contents->data[i1 + Xseaso.contents->size[0] * ((int)(d + -1.0) -
-          1)] = bestnumscale2->data[i1];
+        Xseaso.contents->data[i1 + Xseaso.contents->size[0] * ((int)(ncomb +
+          -1.0) - 1)] = bestnumscale2->data[i1];
       }
 
       loop_ub = betaini->size[0];
       for (i1 = 0; i1 < loop_ub; i1++) {
-        Xseaso.contents->data[i1 + Xseaso.contents->size[0] * ((int)d - 1)] =
+        Xseaso.contents->data[i1 + Xseaso.contents->size[0] * ((int)ncomb - 1)] =
           betaini->data[i1];
       }
     }
 
     /*  Remark: when s is even the sine term disapperas for j=s/2 and so the */
     /*  maximum number of trigonometric terms is s-1 */
-    if (seasonal.contents == model->s / 2.0) {
+    if (seasonal.contents == s.contents / 2.0) {
       if (1 > Xseaso.contents->size[1] - 1) {
         loop_ub = 0;
       } else {
@@ -1605,7 +1624,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     Xseaso.contents->size[1] = 0;
   }
 
-  emxInitStruct_captured_var2(&X);
+  emxInitStruct_captured_var1(&X);
   i = X.contents->size[0] * X.contents->size[1];
   X.contents->size[0] = model->X->size[0];
   X.contents->size[1] = model->X->size[1];
@@ -1732,66 +1751,66 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   }
 
   /*  indexes of linear part of seasonal component */
-  emxInitStruct_captured_var2(&indlinsc);
+  emxInitStruct_captured_var1(&indlinsc);
   if (seasonal.contents < 6.0) {
-    sworst = (model->trend + 1.0) + seasonal.contents * 2.0;
-    if (rtIsNaN(model->trend + 2.0) || rtIsNaN(sworst)) {
+    ij = trend.contents + 2.0;
+    sworst = (trend.contents + 1.0) + seasonal.contents * 2.0;
+    if (rtIsNaN(ij) || rtIsNaN(sworst)) {
       i = indlinsc.contents->size[0] * indlinsc.contents->size[1];
       indlinsc.contents->size[0] = 1;
       indlinsc.contents->size[1] = 1;
       emxEnsureCapacity_real_T(indlinsc.contents, i);
       indlinsc.contents->data[0] = rtNaN;
-    } else if (sworst < model->trend + 2.0) {
+    } else if (sworst < ij) {
       indlinsc.contents->size[0] = 1;
       indlinsc.contents->size[1] = 0;
-    } else if ((rtIsInf(model->trend + 2.0) || rtIsInf(sworst)) && (model->trend
-                + 2.0 == sworst)) {
+    } else if ((rtIsInf(ij) || rtIsInf(sworst)) && (ij == sworst)) {
       i = indlinsc.contents->size[0] * indlinsc.contents->size[1];
       indlinsc.contents->size[0] = 1;
       indlinsc.contents->size[1] = 1;
       emxEnsureCapacity_real_T(indlinsc.contents, i);
       indlinsc.contents->data[0] = rtNaN;
-    } else if (floor(model->trend + 2.0) == model->trend + 2.0) {
+    } else if (floor(ij) == ij) {
       i = indlinsc.contents->size[0] * indlinsc.contents->size[1];
       indlinsc.contents->size[0] = 1;
-      loop_ub = (int)floor(sworst - (model->trend + 2.0));
+      loop_ub = (int)floor(sworst - ij);
       indlinsc.contents->size[1] = loop_ub + 1;
       emxEnsureCapacity_real_T(indlinsc.contents, i);
       for (i = 0; i <= loop_ub; i++) {
-        indlinsc.contents->data[i] = (model->trend + 2.0) + (double)i;
+        indlinsc.contents->data[i] = ij + (double)i;
       }
     } else {
-      eml_float_colon(model->trend + 2.0, sworst, indlinsc.contents);
+      eml_float_colon(ij, sworst, indlinsc.contents);
     }
   } else {
-    sworst = ((model->trend + 1.0) + seasonal.contents * 2.0) - 1.0;
-    if (rtIsNaN(model->trend + 2.0) || rtIsNaN(sworst)) {
+    ij = trend.contents + 2.0;
+    sworst = ((trend.contents + 1.0) + seasonal.contents * 2.0) - 1.0;
+    if (rtIsNaN(ij) || rtIsNaN(sworst)) {
       i = indlinsc.contents->size[0] * indlinsc.contents->size[1];
       indlinsc.contents->size[0] = 1;
       indlinsc.contents->size[1] = 1;
       emxEnsureCapacity_real_T(indlinsc.contents, i);
       indlinsc.contents->data[0] = rtNaN;
-    } else if (sworst < model->trend + 2.0) {
+    } else if (sworst < ij) {
       indlinsc.contents->size[0] = 1;
       indlinsc.contents->size[1] = 0;
-    } else if ((rtIsInf(model->trend + 2.0) || rtIsInf(sworst)) && (model->trend
-                + 2.0 == sworst)) {
+    } else if ((rtIsInf(ij) || rtIsInf(sworst)) && (ij == sworst)) {
       i = indlinsc.contents->size[0] * indlinsc.contents->size[1];
       indlinsc.contents->size[0] = 1;
       indlinsc.contents->size[1] = 1;
       emxEnsureCapacity_real_T(indlinsc.contents, i);
       indlinsc.contents->data[0] = rtNaN;
-    } else if (floor(model->trend + 2.0) == model->trend + 2.0) {
+    } else if (floor(ij) == ij) {
       i = indlinsc.contents->size[0] * indlinsc.contents->size[1];
       indlinsc.contents->size[0] = 1;
-      loop_ub = (int)floor(sworst - (model->trend + 2.0));
+      loop_ub = (int)floor(sworst - ij);
       indlinsc.contents->size[1] = loop_ub + 1;
       emxEnsureCapacity_real_T(indlinsc.contents, i);
       for (i = 0; i <= loop_ub; i++) {
-        indlinsc.contents->data[i] = (model->trend + 2.0) + (double)i;
+        indlinsc.contents->data[i] = ij + (double)i;
       }
     } else {
-      eml_float_colon(model->trend + 2.0, sworst, indlinsc.contents);
+      eml_float_colon(ij, sworst, indlinsc.contents);
     }
   }
 
@@ -1821,7 +1840,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     }
   }
 
-  emxInitStruct_captured_var2(&otherind);
+  emxInitStruct_captured_var1(&otherind);
   emxInit_int32_T(&ia, 1);
   g_do_vectors(Cr, indlinsc.contents, otherind.contents, ia, &ib_size);
   if (lshiftYN.contents == 1.0) {
@@ -1900,8 +1919,6 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     /*  total number of subsets to pass to procedure subsets */
   }
 
-  emxInit_real_T(&allnumscale2, 1);
-
   /*  ScaleLSH= estimate of the squared scale for each value of LSH which has been */
   /*  considered */
   /*  yhatrobLSH = vector of fitted values for each value of LSH */
@@ -1961,7 +1978,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   }
 
   /*  Construct matrix X (called Xsel) which contains the linear part of the model */
-  emxInitStruct_captured_var2(&Xsel);
+  emxInitStruct_captured_var1(&Xsel);
   if (seasonal.contents == 0.0) {
     if (isemptyX.contents) {
       i = Xsel.contents->size[0] * Xsel.contents->size[1];
@@ -2160,19 +2177,18 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   /*  normal distribution. */
   sworst = 0.5 * (b_h / (double)y->size[0] + 1.0);
   if ((sworst >= 0.0) && (sworst <= 1.0)) {
-    a = -1.4142135623730951 * erfcinv(2.0 * sworst);
+    ij = -1.4142135623730951 * erfcinv(2.0 * sworst);
   } else {
-    a = rtNaN;
+    ij = rtNaN;
   }
 
-  emxInitStruct_captured_var1(&bsb);
+  emxInitStruct_captured_var(&bsb);
   emxInit_real_T(&yhatrob, 1);
   emxInit_boolean_T(&weightsst, 1);
-  emxInit_real_T(&Xseldum, 2);
 
   /* factor=1/sqrt(1-(2*a.*normpdf(a))./(2*normcdf(a)-1)); */
-  factor = 1.0 / sqrt(1.0 - 2.0 * ((double)y->size[0] / b_h) * a * (exp(-0.5 * a
-    * a) / 2.5066282746310002));
+  factor = 1.0 / sqrt(1.0 - 2.0 * ((double)y->size[0] / b_h) * ij * (exp(-0.5 *
+    ij * ij) / 2.5066282746310002));
 
   /*  Initialize 2D or 3D array which stores indexes of extracted */
   /*  subsets for each tentative level shift position */
@@ -2195,11 +2211,6 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   out->Likloc->size[1] = 1;
   emxEnsureCapacity_real_T(out->Likloc, i);
   out->Likloc->data[0] = 0.0;
-  i = Xseldum->size[0] * Xseldum->size[1];
-  Xseldum->size[0] = 1;
-  Xseldum->size[1] = 1;
-  emxEnsureCapacity_real_T(Xseldum, i);
-  Xseldum->data[0] = 0.0;
   sworst = rtInf;
 
   /*  Xlshift = explanatory variable associated with */
@@ -2219,7 +2230,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     bestnumscale2->data[i + (int)(lshift - 1.0)] = 1.0;
   }
 
-  emxInitStruct_captured_var2(&Xlshift);
+  emxInitStruct_captured_var1(&Xlshift);
   i = Xlshift.contents->size[0] * Xlshift.contents->size[1];
   Xlshift.contents->size[0] = bestnumscale2->size[0];
   Xlshift.contents->size[1] = 1;
@@ -2255,42 +2266,44 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     bestnumscale2->data[i] = rtInf;
   }
 
+  emxInit_real_T(&WEIibestrdiv2, 2);
   emxInit_real_T(&b_C, 2);
-  emxInit_real_T(&Xfinal, 2);
   if (lshift > 0.0) {
-    i = Xfinal->size[0] * Xfinal->size[1];
-    Xfinal->size[0] = varargin_22_size_idx_0;
-    Xfinal->size[1] = varargin_22_size_idx_1;
-    emxEnsureCapacity_real_T(Xfinal, i);
+    i = WEIibestrdiv2->size[0] * WEIibestrdiv2->size[1];
+    WEIibestrdiv2->size[0] = varargin_22_size_idx_0;
+    WEIibestrdiv2->size[1] = varargin_22_size_idx_1;
+    emxEnsureCapacity_real_T(WEIibestrdiv2, i);
     loop_ub = varargin_22_size_idx_0 * varargin_22_size_idx_1 - 1;
     for (i = 0; i <= loop_ub; i++) {
-      Xfinal->data[i] = varargin_22_data[i];
+      WEIibestrdiv2->data[i] = varargin_22_data[i];
     }
 
-    c_subsets(Xfinal, (double)y->size[0] - 1.0, pini + 1.0, 0.0, C, &a);
-    if ((int)a != 0) {
-      result = (int)a;
-    } else if (((int)a != 0) && ((int)(pini + 1.0) != 0)) {
-      result = (int)a;
+    c_subsets(WEIibestrdiv2, (double)y->size[0] - 1.0, pini + 1.0, 0.0, C,
+              &nselected);
+    if ((int)nselected != 0) {
+      result = (int)nselected;
+    } else if (((int)nselected != 0) && ((int)(pini + 1.0) != 0)) {
+      result = (int)nselected;
     } else {
-      result = (int)a;
+      result = (int)nselected;
       if (result <= 0) {
         result = 0;
       }
 
-      if ((int)a > result) {
-        result = (int)a;
+      if ((int)nselected > result) {
+        result = (int)nselected;
       }
     }
 
     empty_non_axis_sizes = (result == 0);
-    if (empty_non_axis_sizes || ((int)a != 0)) {
+    if (empty_non_axis_sizes || ((int)nselected != 0)) {
       input_sizes_idx_1 = 1;
     } else {
       input_sizes_idx_1 = 0;
     }
 
-    if (empty_non_axis_sizes || (((int)a != 0) && ((int)(pini + 1.0) != 0))) {
+    if (empty_non_axis_sizes || (((int)nselected != 0) && ((int)(pini + 1.0) !=
+          0))) {
       b_sizes_idx_1 = (int)(pini + 1.0);
     } else {
       b_sizes_idx_1 = 0;
@@ -2316,8 +2329,8 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
 
     /*  Make sure that observation lsh is always included in the subset */
     /*  and that the subset contains at least one unit smaller than lsh */
-    i = (int)a;
-    if (0 <= (int)a - 1) {
+    i = (int)nselected;
+    if (0 <= (int)nselected - 1) {
       i2 = C->size[1];
       c_loop_ub = C->size[1];
       end = C->size[1] - 1;
@@ -2335,9 +2348,9 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
       /*  Observations greater or equal than lsh will be increased by one */
       nx = 0;
       for (sizes_idx_1 = 0; sizes_idx_1 < c_loop_ub; sizes_idx_1++) {
-        d = C->data[varargin_22_size_idx_0 + C->size[0] * sizes_idx_1];
-        Cr->data[sizes_idx_1] = d;
-        if (d >= lshift) {
+        ncomb = C->data[varargin_22_size_idx_0 + C->size[0] * sizes_idx_1];
+        Cr->data[sizes_idx_1] = ncomb;
+        if (ncomb >= lshift) {
           nx++;
         }
       }
@@ -2403,16 +2416,16 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     emxFree_int32_T(&r);
   } else {
     /*  If there is no level shift component */
-    i = Xfinal->size[0] * Xfinal->size[1];
-    Xfinal->size[0] = varargin_22_size_idx_0;
-    Xfinal->size[1] = varargin_22_size_idx_1;
-    emxEnsureCapacity_real_T(Xfinal, i);
+    i = WEIibestrdiv2->size[0] * WEIibestrdiv2->size[1];
+    WEIibestrdiv2->size[0] = varargin_22_size_idx_0;
+    WEIibestrdiv2->size[1] = varargin_22_size_idx_1;
+    emxEnsureCapacity_real_T(WEIibestrdiv2, i);
     loop_ub = varargin_22_size_idx_0 * varargin_22_size_idx_1 - 1;
     for (i = 0; i <= loop_ub; i++) {
-      Xfinal->data[i] = varargin_22_data[i];
+      WEIibestrdiv2->data[i] = varargin_22_data[i];
     }
 
-    c_subsets(Xfinal, y->size[0], pini, ncomb, C, &a);
+    c_subsets(WEIibestrdiv2, y->size[0], pini, ncomb, C, &nselected);
     i = b_C->size[0] * b_C->size[1];
     b_C->size[0] = C->size[0];
     b_C->size[1] = C->size[1];
@@ -2435,8 +2448,8 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   ij = 1.0;
 
   /*  Loop through all nselected subsamples */
-  i = (int)a;
-  if (0 <= (int)a - 1) {
+  i = (int)nselected;
+  if (0 <= (int)nselected - 1) {
     b_loop_ub = (int)p;
     if (lshift == 0.0) {
       Xlshift.contents->size[0] = 0;
@@ -2474,17 +2487,19 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     e_loop_ub = b_sizes_idx_1;
     f_loop_ub = b_C->size[1];
     g_loop_ub = b_C->size[1];
+    brob_idx_0 = b_C->size[1];
     h_loop_ub = b_C->size[1];
   }
 
-  emxInitStruct_captured_var(&weights);
-  emxInitStruct_captured_var1(&yhat);
-  emxInitStruct_captured_var1(&beta);
+  emxInitStruct_captured_var2(&weights);
+  emxInitStruct_captured_var(&yhat);
+  emxInitStruct_captured_var(&beta);
   emxInit_real_T(&beta0, 1);
+  emxInit_real_T(&Xfinal, 2);
   emxInit_boolean_T(&r1, 1);
-  emxInitStruct_struct_T1(&expl_temp);
-  emxInitStruct_struct_T1(&b_expl_temp);
-  emxInit_real_T(&b_Xfinal, 2);
+  emxInitStruct_struct_T2(&expl_temp);
+  emxInitStruct_struct_T2(&b_expl_temp);
+  emxInit_real_T(&b_yin, 1);
   for (sizes_idx_1 = 0; sizes_idx_1 < i; sizes_idx_1++) {
     /*  Initialize b0 as vector of zeroes for each subset */
     /*  The order of the elements of b0 is as follows */
@@ -2539,28 +2554,28 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
       bsb.contents->data[i1] = b_C->data[sizes_idx_1 + b_C->size[0] * i1];
     }
 
-    i1 = betaini->size[0];
-    betaini->size[0] = g_loop_ub;
-    emxEnsureCapacity_real_T(betaini, i1);
-    for (i1 = 0; i1 < g_loop_ub; i1++) {
-      betaini->data[i1] = yin.contents->data[(int)b_C->data[sizes_idx_1 +
-        b_C->size[0] * i1] - 1];
-    }
-
     loop_ub = Xfinal->size[1];
-    i1 = b_Xfinal->size[0] * b_Xfinal->size[1];
-    b_Xfinal->size[0] = h_loop_ub;
-    b_Xfinal->size[1] = Xfinal->size[1];
-    emxEnsureCapacity_real_T(b_Xfinal, i1);
+    i1 = WEIibestrdiv2->size[0] * WEIibestrdiv2->size[1];
+    WEIibestrdiv2->size[0] = g_loop_ub;
+    WEIibestrdiv2->size[1] = Xfinal->size[1];
+    emxEnsureCapacity_real_T(WEIibestrdiv2, i1);
     for (i1 = 0; i1 < loop_ub; i1++) {
-      for (ib_size = 0; ib_size < h_loop_ub; ib_size++) {
-        b_Xfinal->data[ib_size + b_Xfinal->size[0] * i1] = Xfinal->data[((int)
-          b_C->data[sizes_idx_1 + b_C->size[0] * ib_size] + Xfinal->size[0] * i1)
-          - 1];
+      for (ib_size = 0; ib_size < g_loop_ub; ib_size++) {
+        WEIibestrdiv2->data[ib_size + WEIibestrdiv2->size[0] * i1] =
+          Xfinal->data[((int)b_C->data[sizes_idx_1 + b_C->size[0] * ib_size] +
+                        Xfinal->size[0] * i1) - 1];
       }
     }
 
-    c_mldivide(b_Xfinal, betaini);
+    i1 = b_yin->size[0];
+    b_yin->size[0] = brob_idx_0;
+    emxEnsureCapacity_real_T(b_yin, i1);
+    for (i1 = 0; i1 < h_loop_ub; i1++) {
+      b_yin->data[i1] = yin.contents->data[(int)b_C->data[sizes_idx_1 +
+        b_C->size[0] * i1] - 1];
+    }
+
+    mldivide(WEIibestrdiv2, b_yin, betaini);
 
     /*  Check if betaini contains NaN */
     i1 = r1->size[0];
@@ -2634,19 +2649,20 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
           &Seq, &nexpl, &isemptyX, &X, &lshiftYN, &Xlshift, &yhat, beta.contents);
 
       /*  1(a) ii. -  Now apply concentration steps */
-      i1 = b_y->size[0];
-      b_y->size[0] = beta.contents->size[0];
-      emxEnsureCapacity_real_T(b_y, i1);
+      i1 = betaini->size[0];
+      betaini->size[0] = beta.contents->size[0];
+      emxEnsureCapacity_real_T(betaini, i1);
       loop_ub = beta.contents->size[0] - 1;
       for (i1 = 0; i1 <= loop_ub; i1++) {
-        b_y->data[i1] = beta.contents->data[i1];
+        betaini->data[i1] = beta.contents->data[i1];
       }
 
       IRWLSreg(&b_reftolALS, &b_refstepsALS, &indlinsc, &Xseaso, &bsb, &isemptyX,
                &lshiftYN, &Xtrend, &Seq, &varampl, &Xlshift, &X, &yin, &trend,
                &nexpl, &otherind, &seasonal, &s, &yhatseaso, &yhat, &beta,
                &constr, &Xsel, &verLess2016b, &seq, &weights, &zerT1,
-               yin.contents, b_y, lts->refsteps, lts->reftol, b_h, &b_expl_temp);
+               yin.contents, betaini, lts->refsteps, lts->reftol, b_h,
+               &b_expl_temp);
       i1 = expl_temp.betarw->size[0];
       expl_temp.betarw->size[0] = b_expl_temp.betarw->size[0];
       emxEnsureCapacity_real_T(expl_temp.betarw, i1);
@@ -2708,8 +2724,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     }
   }
 
-  emxFree_real_T(&b_Xfinal);
-  emxFreeStruct_struct_T1(&b_expl_temp);
+  emxFreeStruct_struct_T2(&b_expl_temp);
   emxFree_boolean_T(&r1);
 
   /*  Store for each tentative level shift the number of times each unit */
@@ -2744,20 +2759,18 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
         sizes_idx_1];
     }
 
-    i = bestnumscale2->size[0];
-    bestnumscale2->size[0] = i4;
-    emxEnsureCapacity_real_T(bestnumscale2, i);
+    i = beta0->size[0];
+    beta0->size[0] = i4;
+    emxEnsureCapacity_real_T(beta0, i);
     for (i = 0; i < j_loop_ub; i++) {
-      bestnumscale2->data[i] = out->invXX->data[sizes_idx_1 + out->invXX->size[0]
-        * i];
+      beta0->data[i] = out->invXX->data[sizes_idx_1 + out->invXX->size[0] * i];
     }
 
     IRWLSreg(&b_reftolALS, &b_refstepsALS, &indlinsc, &Xseaso, &bsb, &isemptyX,
              &lshiftYN, &Xtrend, &Seq, &varampl, &Xlshift, &X, &yin, &trend,
              &nexpl, &otherind, &seasonal, &s, &yhatseaso, &yhat, &beta, &constr,
-             &Xsel, &verLess2016b, &seq, &weights, &zerT1, yin.contents,
-             bestnumscale2, lts->refstepsbestr, lts->reftolbestr, b_h,
-             &expl_temp);
+             &Xsel, &verLess2016b, &seq, &weights, &zerT1, yin.contents, beta0,
+             lts->refstepsbestr, lts->reftolbestr, b_h, &expl_temp);
 
     /*  Store information about the units forming best h subset among the */
     /*  10 best */
@@ -2796,10 +2809,10 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     }
   }
 
-  emxFreeStruct_struct_T1(&expl_temp);
-  emxFreeStruct_captured_var(&zerT1);
-  emxFreeStruct_captured_var1(&indlinsc);
-  emxFreeStruct_captured_var1(&otherind);
+  emxFreeStruct_struct_T2(&expl_temp);
+  emxFreeStruct_captured_var1(&zerT1);
+  emxFreeStruct_captured_var(&indlinsc);
+  emxFreeStruct_captured_var(&otherind);
 
   /*  Store the bestrdiv2 best values of target function */
   i = bestnumscale2->size[0];
@@ -2828,8 +2841,6 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     brobLSH->data[i] = brob->data[i];
   }
 
-  emxFree_real_T(&brob);
-
   /*  plot(seq,[y yhatrob]) */
   /*  title(['Level shift in step t=' num2str(LSH(ilsh))]) */
   loop_ub = allnumscale2->size[0];
@@ -2837,13 +2848,13 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     out->numscale2->data[i] = allnumscale2->data[i];
   }
 
-  ij = sqrt(sworst / b_h);
+  nselected = sqrt(sworst / b_h);
   i = yhatrob->size[0];
   yhatrob->size[0] = yin.contents->size[0];
   emxEnsureCapacity_real_T(yhatrob, i);
   loop_ub = yin.contents->size[0];
   for (i = 0; i < loop_ub; i++) {
-    yhatrob->data[i] = (yin.contents->data[i] - yhatrob->data[i]) / ij;
+    yhatrob->data[i] = (yin.contents->data[i] - yhatrob->data[i]) / nselected;
   }
 
   loop_ub = yhatrob->size[0];
@@ -2852,17 +2863,17 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   }
 
   nx = yhatrob->size[0];
-  i = b_y->size[0];
-  b_y->size[0] = yhatrob->size[0];
-  emxEnsureCapacity_real_T(b_y, i);
+  i = allnumscale2->size[0];
+  allnumscale2->size[0] = yhatrob->size[0];
+  emxEnsureCapacity_real_T(allnumscale2, i);
   for (sizes_idx_1 = 0; sizes_idx_1 < nx; sizes_idx_1++) {
-    b_y->data[sizes_idx_1] = fabs(yhatrob->data[sizes_idx_1]);
+    allnumscale2->data[sizes_idx_1] = fabs(yhatrob->data[sizes_idx_1]);
   }
 
-  d = 2.58 * factor;
+  ncomb = 2.58 * factor;
   loop_ub = weightsst->size[0];
   for (i = 0; i < loop_ub; i++) {
-    Weights->data[i] = (weightsst->data[i] || (b_y->data[i] < d));
+    Weights->data[i] = (weightsst->data[i] || (allnumscale2->data[i] < ncomb));
   }
 
   emxFree_boolean_T(&weightsst);
@@ -2987,51 +2998,51 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   }
 
   loop_ub = brobLSH->size[0];
-  i = yhatrob->size[0];
-  yhatrob->size[0] = brobLSH->size[0];
-  emxEnsureCapacity_real_T(yhatrob, i);
+  i = brob->size[0];
+  brob->size[0] = brobLSH->size[0];
+  emxEnsureCapacity_real_T(brob, i);
   for (i = 0; i < loop_ub; i++) {
-    yhatrob->data[i] = brobLSH->data[i];
+    brob->data[i] = brobLSH->data[i];
   }
 
   /*  Pass from numerator of squared estimate of the scale to proper scale */
   /*  estimate */
   /*  Consistency factor */
   /*  Apply small sample correction factor of Pison et al. */
-  factor = ij * factor * sqrt(b_corfactorRAW(yin.contents->size[0], b_h /
+  factor = nselected * factor * sqrt(b_corfactorRAW(yin.contents->size[0], b_h /
     (double)yin.contents->size[0]));
   if (lshift > 0.0) {
     /*  Compute the residuals locally just changing the position of the level */
     /*  shift */
     ncomb = lshiftlocref->wlength;
-    a = brobLSH->data[brobLSH->size[0] - 1] - lshiftlocref->wlength;
+    ij = brobLSH->data[brobLSH->size[0] - 1] - lshiftlocref->wlength;
     sworst = brobLSH->data[brobLSH->size[0] - 1] + lshiftlocref->wlength;
-    if (rtIsNaN(a) || rtIsNaN(sworst)) {
+    if (rtIsNaN(ij) || rtIsNaN(sworst)) {
       i = Cr->size[0] * Cr->size[1];
       Cr->size[0] = 1;
       Cr->size[1] = 1;
       emxEnsureCapacity_real_T(Cr, i);
       Cr->data[0] = rtNaN;
-    } else if (sworst < a) {
+    } else if (sworst < ij) {
       Cr->size[0] = 1;
       Cr->size[1] = 0;
-    } else if ((rtIsInf(a) || rtIsInf(sworst)) && (a == sworst)) {
+    } else if ((rtIsInf(ij) || rtIsInf(sworst)) && (ij == sworst)) {
       i = Cr->size[0] * Cr->size[1];
       Cr->size[0] = 1;
       Cr->size[1] = 1;
       emxEnsureCapacity_real_T(Cr, i);
       Cr->data[0] = rtNaN;
-    } else if (floor(a) == a) {
+    } else if (floor(ij) == ij) {
       i = Cr->size[0] * Cr->size[1];
       Cr->size[0] = 1;
-      loop_ub = (int)floor(sworst - a);
+      loop_ub = (int)floor(sworst - ij);
       Cr->size[1] = loop_ub + 1;
       emxEnsureCapacity_real_T(Cr, i);
       for (i = 0; i <= loop_ub; i++) {
-        Cr->data[i] = a + (double)i;
+        Cr->data[i] = ij + (double)i;
       }
     } else {
-      eml_float_colon(a, sworst, Cr);
+      eml_float_colon(ij, sworst, Cr);
     }
 
     /*  Reduce width of tloc dinamically */
@@ -3039,34 +3050,34 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     while (((d_maximum(Cr) > lshift) || (b_minimum(Cr) < lshift)) && (!(ncomb ==
              0.0))) {
       ncomb--;
-      a = brobLSH->data[brobLSH->size[0] - 1] - ncomb;
+      ij = brobLSH->data[brobLSH->size[0] - 1] - ncomb;
       sworst = brobLSH->data[brobLSH->size[0] - 1] + ncomb;
-      if (rtIsNaN(a) || rtIsNaN(sworst)) {
+      if (rtIsNaN(ij) || rtIsNaN(sworst)) {
         i = Cr->size[0] * Cr->size[1];
         Cr->size[0] = 1;
         Cr->size[1] = 1;
         emxEnsureCapacity_real_T(Cr, i);
         Cr->data[0] = rtNaN;
-      } else if (sworst < a) {
+      } else if (sworst < ij) {
         Cr->size[0] = 1;
         Cr->size[1] = 0;
-      } else if ((rtIsInf(a) || rtIsInf(sworst)) && (a == sworst)) {
+      } else if ((rtIsInf(ij) || rtIsInf(sworst)) && (ij == sworst)) {
         i = Cr->size[0] * Cr->size[1];
         Cr->size[0] = 1;
         Cr->size[1] = 1;
         emxEnsureCapacity_real_T(Cr, i);
         Cr->data[0] = rtNaN;
-      } else if (floor(a) == a) {
+      } else if (floor(ij) == ij) {
         i = Cr->size[0] * Cr->size[1];
         Cr->size[0] = 1;
-        loop_ub = (int)floor(sworst - a);
+        loop_ub = (int)floor(sworst - ij);
         Cr->size[1] = loop_ub + 1;
         emxEnsureCapacity_real_T(Cr, i);
         for (i = 0; i <= loop_ub; i++) {
-          Cr->data[i] = a + (double)i;
+          Cr->data[i] = ij + (double)i;
         }
       } else {
-        eml_float_colon(a, sworst, Cr);
+        eml_float_colon(ij, sworst, Cr);
       }
     }
 
@@ -3128,12 +3139,12 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     i = (int)(Cr->data[Cr->size[1] - 1] + (1.0 - Cr->data[0]));
     for (ib_size = 0; ib_size < i; ib_size++) {
       ncomb = Cr->data[0] + (double)ib_size;
-      loop_ub = yhatrob->size[0];
+      loop_ub = brob->size[0];
       i1 = betaini->size[0];
-      betaini->size[0] = yhatrob->size[0];
+      betaini->size[0] = brob->size[0];
       emxEnsureCapacity_real_T(betaini, i1);
       for (i1 = 0; i1 < loop_ub; i1++) {
-        betaini->data[i1] = yhatrob->data[i1];
+        betaini->data[i1] = brob->data[i1];
       }
 
       betaini->data[brobLSH->size[0] - 1] = ncomb;
@@ -3162,27 +3173,27 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
 
       lik(&Xtrend, &bsb, &trend, &seasonal, &s, &yhatseaso, &Xseaso, &varampl,
           &Seq, &nexpl, &isemptyX, &X, &lshiftYN, &Xlshift, &yhat, betaini);
-      i1 = bestnumscale2->size[0];
-      bestnumscale2->size[0] = bsb.contents->size[0];
-      emxEnsureCapacity_real_T(bestnumscale2, i1);
+      i1 = b_yin->size[0];
+      b_yin->size[0] = bsb.contents->size[0];
+      emxEnsureCapacity_real_T(b_yin, i1);
       loop_ub = bsb.contents->size[0];
       for (i1 = 0; i1 < loop_ub; i1++) {
-        bestnumscale2->data[i1] = (yin.contents->data[(int)bsb.contents->data[i1]
-          - 1] - yhat.contents->data[i1]) / ij;
+        b_yin->data[i1] = (yin.contents->data[(int)bsb.contents->data[i1] - 1] -
+                           yhat.contents->data[i1]) / nselected;
       }
 
-      HUrho(bestnumscale2, lshiftlocref->huberc, betaini);
-      i1 = b_y->size[0];
-      b_y->size[0] = betaini->size[0];
-      emxEnsureCapacity_real_T(b_y, i1);
+      HUrho(b_yin, lshiftlocref->huberc, betaini);
+      i1 = allnumscale2->size[0];
+      allnumscale2->size[0] = betaini->size[0];
+      emxEnsureCapacity_real_T(allnumscale2, i1);
       nx = betaini->size[0];
       for (sizes_idx_1 = 0; sizes_idx_1 < nx; sizes_idx_1++) {
-        b_y->data[sizes_idx_1] = betaini->data[sizes_idx_1] * betaini->
-          data[sizes_idx_1];
+        allnumscale2->data[sizes_idx_1] = betaini->data[sizes_idx_1] *
+          betaini->data[sizes_idx_1];
       }
 
-      out->Likloc->data[ib_size + out->Likloc->size[0]] = blockedSummation(b_y,
-        b_y->size[0]);
+      out->Likloc->data[ib_size + out->Likloc->size[0]] = blockedSummation
+        (allnumscale2, allnumscale2->size[0]);
       i1 = betaini->size[0];
       betaini->size[0] = bsb.contents->size[0];
       emxEnsureCapacity_real_T(betaini, i1);
@@ -3192,30 +3203,30 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
           - yhat.contents->data[i1];
       }
 
-      i1 = b_y->size[0];
-      b_y->size[0] = betaini->size[0];
-      emxEnsureCapacity_real_T(b_y, i1);
+      i1 = allnumscale2->size[0];
+      allnumscale2->size[0] = betaini->size[0];
+      emxEnsureCapacity_real_T(allnumscale2, i1);
       nx = betaini->size[0];
       for (sizes_idx_1 = 0; sizes_idx_1 < nx; sizes_idx_1++) {
-        b_y->data[sizes_idx_1] = betaini->data[sizes_idx_1] * betaini->
-          data[sizes_idx_1];
+        allnumscale2->data[sizes_idx_1] = betaini->data[sizes_idx_1] *
+          betaini->data[sizes_idx_1];
       }
 
       out->Likloc->data[ib_size + out->Likloc->size[0] * 2] = blockedSummation
-        (b_y, b_y->size[0]);
+        (allnumscale2, allnumscale2->size[0]);
     }
 
     /*  Use Huberized residual sum of squares to find minimum */
     loop_ub = out->Likloc->size[0];
-    i = bestnumscale2->size[0];
-    bestnumscale2->size[0] = out->Likloc->size[0];
-    emxEnsureCapacity_real_T(bestnumscale2, i);
+    i = beta0->size[0];
+    beta0->size[0] = out->Likloc->size[0];
+    emxEnsureCapacity_real_T(beta0, i);
     for (i = 0; i < loop_ub; i++) {
-      bestnumscale2->data[i] = out->Likloc->data[i + out->Likloc->size[0] *
-        ((int)(lshiftlocref->typeres + 1.0) - 1)];
+      beta0->data[i] = out->Likloc->data[i + out->Likloc->size[0] * ((int)
+        (lshiftlocref->typeres + 1.0) - 1)];
     }
 
-    d_minimum(bestnumscale2, &ncomb, &nx);
+    d_minimum(beta0, &ncomb, &nx);
     posLS = out->Likloc->data[nx - 1];
     i = bestnumscale2->size[0];
     bestnumscale2->size[0] = (int)(posLS - 1.0) + (int)(((double)
@@ -3240,10 +3251,9 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
       Xlshift.contents->data[i] = bestnumscale2->data[i];
     }
 
-    yhatrob->data[brobLSH->size[0] - 1] = posLS;
+    brob->data[brobLSH->size[0] - 1] = posLS;
   }
 
-  emxFree_real_T(&brobLSH);
   i = bsb.contents->size[0];
   bsb.contents->size[0] = seq.contents->size[0];
   emxEnsureCapacity_real_T(bsb.contents, i);
@@ -3255,7 +3265,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   /*  Compute fitted values using final estimate of beta for all the */
   /*  observations */
   lik(&Xtrend, &bsb, &trend, &seasonal, &s, &yhatseaso, &Xseaso, &varampl, &Seq,
-      &nexpl, &isemptyX, &X, &lshiftYN, &Xlshift, &yhat, yhatrob);
+      &nexpl, &isemptyX, &X, &lshiftYN, &Xlshift, &yhat, brob);
 
   /*  REWEIGHTING STEP */
   /*  residuals = Raw residuals using final estimate of beta */
@@ -3270,14 +3280,14 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   /*  Find the units with the smallest absolute p+1 residuals (before */
   /*  reweighting step) */
   nx = bestnumscale2->size[0];
-  i = b_y->size[0];
-  b_y->size[0] = bestnumscale2->size[0];
-  emxEnsureCapacity_real_T(b_y, i);
+  i = allnumscale2->size[0];
+  allnumscale2->size[0] = bestnumscale2->size[0];
+  emxEnsureCapacity_real_T(allnumscale2, i);
   for (sizes_idx_1 = 0; sizes_idx_1 < nx; sizes_idx_1++) {
-    b_y->data[sizes_idx_1] = fabs(bestnumscale2->data[sizes_idx_1]);
+    allnumscale2->data[sizes_idx_1] = fabs(bestnumscale2->data[sizes_idx_1]);
   }
 
-  sort(b_y, ia);
+  sort(allnumscale2, ia);
   i = betaini->size[0];
   betaini->size[0] = ia->size[0];
   emxEnsureCapacity_real_T(betaini, i);
@@ -3306,11 +3316,11 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   hmin = i1 - i;
   do {
     exitg1 = 0;
-    d = p + ij;
-    if (1.0 > d) {
+    ncomb = p + ij;
+    if (1.0 > ncomb) {
       loop_ub = 0;
     } else {
-      loop_ub = (int)d;
+      loop_ub = (int)ncomb;
     }
 
     i1 = out->bs->size[0];
@@ -3320,19 +3330,19 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
       out->bs->data[i1] = betaini->data[i1];
     }
 
-    i1 = bestyhat->size[0] * bestyhat->size[1];
-    bestyhat->size[0] = loop_ub;
-    bestyhat->size[1] = hmin;
-    emxEnsureCapacity_real_T(bestyhat, i1);
+    i1 = b_C->size[0] * b_C->size[1];
+    b_C->size[0] = loop_ub;
+    b_C->size[1] = hmin;
+    emxEnsureCapacity_real_T(b_C, i1);
     for (i1 = 0; i1 < hmin; i1++) {
       for (ib_size = 0; ib_size < loop_ub; ib_size++) {
-        bestyhat->data[ib_size + bestyhat->size[0] * i1] = Xsel.contents->data
-          [((int)betaini->data[ib_size] + Xsel.contents->size[0] * (i + i1)) - 1];
+        b_C->data[ib_size + b_C->size[0] * i1] = Xsel.contents->data[((int)
+          betaini->data[ib_size] + Xsel.contents->size[0] * (i + i1)) - 1];
       }
     }
 
-    zscore(bestyhat, Xfinal);
-    nx = local_rank(Xfinal);
+    zscore(b_C, WEIibestrdiv2);
+    nx = local_rank(WEIibestrdiv2);
     if (nx < pini - 1.0) {
       ij++;
     } else {
@@ -3385,6 +3395,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   }
 
   if (SmallSampleCor == 1.0) {
+    ncomb = pini + lshiftYN.contents;
     if (bdp == -99.0) {
       bdp = 1.0 - h / (double)yin.contents->size[0];
     }
@@ -3395,22 +3406,22 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
       varargin_22_size_idx_1 = yin.contents->size[0];
     }
 
-    ncomb = RobRegrSize(varargin_22_size_idx_1, pini + lshiftYN.contents, bdp);
+    sworst = RobRegrSize(varargin_22_size_idx_1, ncomb, bdp);
     nx = bestnumscale2->size[0];
-    i = b_y->size[0];
-    b_y->size[0] = bestnumscale2->size[0];
-    emxEnsureCapacity_real_T(b_y, i);
+    i = allnumscale2->size[0];
+    allnumscale2->size[0] = bestnumscale2->size[0];
+    emxEnsureCapacity_real_T(allnumscale2, i);
     for (sizes_idx_1 = 0; sizes_idx_1 < nx; sizes_idx_1++) {
-      b_y->data[sizes_idx_1] = fabs(bestnumscale2->data[sizes_idx_1]);
+      allnumscale2->data[sizes_idx_1] = fabs(bestnumscale2->data[sizes_idx_1]);
     }
 
-    d = 2.5758293035489004 * sqrt(ncomb / 6.6348966010212136);
+    ncomb = 2.5758293035489004 * sqrt(sworst / 6.6348966010212136);
     i = weights.contents->size[0];
-    weights.contents->size[0] = b_y->size[0];
+    weights.contents->size[0] = allnumscale2->size[0];
     emxEnsureCapacity_boolean_T(weights.contents, i);
-    loop_ub = b_y->size[0];
+    loop_ub = allnumscale2->size[0];
     for (i = 0; i < loop_ub; i++) {
-      weights.contents->data[i] = (b_y->data[i] <= d);
+      weights.contents->data[i] = (allnumscale2->data[i] <= ncomb);
     }
   } else if (SmallSampleCor == 2.0) {
     GYfilt(bestnumscale2, weights.contents);
@@ -3418,19 +3429,19 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     b_GYfilt(bestnumscale2, weights.contents);
   } else if (SmallSampleCor == 4.0) {
     nx = bestnumscale2->size[0];
-    i = b_y->size[0];
-    b_y->size[0] = bestnumscale2->size[0];
-    emxEnsureCapacity_real_T(b_y, i);
+    i = allnumscale2->size[0];
+    allnumscale2->size[0] = bestnumscale2->size[0];
+    emxEnsureCapacity_real_T(allnumscale2, i);
     for (sizes_idx_1 = 0; sizes_idx_1 < nx; sizes_idx_1++) {
-      b_y->data[sizes_idx_1] = fabs(bestnumscale2->data[sizes_idx_1]);
+      allnumscale2->data[sizes_idx_1] = fabs(bestnumscale2->data[sizes_idx_1]);
     }
 
     i = weights.contents->size[0];
-    weights.contents->size[0] = b_y->size[0];
+    weights.contents->size[0] = allnumscale2->size[0];
     emxEnsureCapacity_boolean_T(weights.contents, i);
-    loop_ub = b_y->size[0];
+    loop_ub = allnumscale2->size[0];
     for (i = 0; i < loop_ub; i++) {
-      weights.contents->data[i] = (b_y->data[i] <= 2.5758293035489004);
+      weights.contents->data[i] = (allnumscale2->data[i] <= 2.5758293035489004);
     }
   }
 
@@ -3479,46 +3490,48 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   }
 
   emxFree_int32_T(&r5);
+  emxInit_real_T(&RES, 1);
 
   /*  Store bsb to use in order to find sum of squares of residuals for */
   /*  reduced model. */
-  i = allnumscale2->size[0];
-  allnumscale2->size[0] = bsb.contents->size[0];
-  emxEnsureCapacity_real_T(allnumscale2, i);
+  i = RES->size[0];
+  RES->size[0] = bsb.contents->size[0];
+  emxEnsureCapacity_real_T(RES, i);
   loop_ub = bsb.contents->size[0];
   for (i = 0; i < loop_ub; i++) {
-    allnumscale2->data[i] = bsb.contents->data[i];
+    RES->data[i] = bsb.contents->data[i];
   }
 
   /*  Find new estimate of beta using only observations which have */
   /*  weight equal to 1. Notice that new brob overwrites old brob */
   /*  computed previously. */
+  emxInitStruct_struct_T1(&a__25);
   if ((varampl.contents == 0.0) && (lshiftYN.contents == 0.0)) {
     /*  In this case the model is linear */
     /*  Function lik constructs fitted values and residual sum of */
     /*  squares */
-    i = beta.contents->size[0];
-    beta.contents->size[0] = bsb.contents->size[0];
-    emxEnsureCapacity_real_T(beta.contents, i);
-    loop_ub = bsb.contents->size[0];
-    for (i = 0; i < loop_ub; i++) {
-      beta.contents->data[i] = yin.contents->data[(int)bsb.contents->data[i] - 1];
-    }
-
     loop_ub = Xsel.contents->size[1];
-    i = bestyhat->size[0] * bestyhat->size[1];
-    bestyhat->size[0] = bsb.contents->size[0];
-    bestyhat->size[1] = Xsel.contents->size[1];
-    emxEnsureCapacity_real_T(bestyhat, i);
+    i = b_C->size[0] * b_C->size[1];
+    b_C->size[0] = bsb.contents->size[0];
+    b_C->size[1] = Xsel.contents->size[1];
+    emxEnsureCapacity_real_T(b_C, i);
     for (i = 0; i < loop_ub; i++) {
       vlen = bsb.contents->size[0];
       for (i1 = 0; i1 < vlen; i1++) {
-        bestyhat->data[i1 + bestyhat->size[0] * i] = Xsel.contents->data[((int)
+        b_C->data[i1 + b_C->size[0] * i] = Xsel.contents->data[((int)
           bsb.contents->data[i1] + Xsel.contents->size[0] * i) - 1];
       }
     }
 
-    c_mldivide(bestyhat, beta.contents);
+    i = b_yin->size[0];
+    b_yin->size[0] = bsb.contents->size[0];
+    emxEnsureCapacity_real_T(b_yin, i);
+    loop_ub = bsb.contents->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      b_yin->data[i] = yin.contents->data[(int)bsb.contents->data[i] - 1];
+    }
+
+    mldivide(b_C, b_yin, beta.contents);
 
     /*  update fitted values */
     /*  find fitted values using all observations */
@@ -3532,35 +3545,35 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
       betaini->data[i] = yin.contents->data[nx] - yhat.contents->data[nx];
     }
 
-    i = b_y->size[0];
-    b_y->size[0] = betaini->size[0];
-    emxEnsureCapacity_real_T(b_y, i);
+    i = allnumscale2->size[0];
+    allnumscale2->size[0] = betaini->size[0];
+    emxEnsureCapacity_real_T(allnumscale2, i);
     nx = betaini->size[0];
     for (sizes_idx_1 = 0; sizes_idx_1 < nx; sizes_idx_1++) {
-      b_y->data[sizes_idx_1] = betaini->data[sizes_idx_1] * betaini->
-        data[sizes_idx_1];
+      allnumscale2->data[sizes_idx_1] = betaini->data[sizes_idx_1] *
+        betaini->data[sizes_idx_1];
     }
 
-    a = blockedSummation(b_y, b_y->size[0]) / (b_h - (double)Xsel.contents->
-      size[1]);
-    c_mtimes(Xsel.contents, Xsel.contents, Xfinal);
-    inv(Xfinal, out->invXX);
-    i = Xfinal->size[0] * Xfinal->size[1];
-    Xfinal->size[0] = out->invXX->size[0];
-    Xfinal->size[1] = out->invXX->size[1];
-    emxEnsureCapacity_real_T(Xfinal, i);
+    ij = blockedSummation(allnumscale2, allnumscale2->size[0]) / (b_h - (double)
+      Xsel.contents->size[1]);
+    c_mtimes(Xsel.contents, Xsel.contents, WEIibestrdiv2);
+    inv(WEIibestrdiv2, out->invXX);
+    i = WEIibestrdiv2->size[0] * WEIibestrdiv2->size[1];
+    WEIibestrdiv2->size[0] = out->invXX->size[0];
+    WEIibestrdiv2->size[1] = out->invXX->size[1];
+    emxEnsureCapacity_real_T(WEIibestrdiv2, i);
     loop_ub = out->invXX->size[0] * out->invXX->size[1];
     for (i = 0; i < loop_ub; i++) {
-      Xfinal->data[i] = a * out->invXX->data[i];
+      WEIibestrdiv2->data[i] = ij * out->invXX->data[i];
     }
 
-    i = Xseldum->size[0] * Xseldum->size[1];
-    Xseldum->size[0] = Xsel.contents->size[0];
-    Xseldum->size[1] = Xsel.contents->size[1];
-    emxEnsureCapacity_real_T(Xseldum, i);
+    i = bestyhat->size[0] * bestyhat->size[1];
+    bestyhat->size[0] = Xsel.contents->size[0];
+    bestyhat->size[1] = Xsel.contents->size[1];
+    emxEnsureCapacity_real_T(bestyhat, i);
     loop_ub = Xsel.contents->size[0] * Xsel.contents->size[1];
     for (i = 0; i < loop_ub; i++) {
-      Xseldum->data[i] = Xsel.contents->data[i];
+      bestyhat->data[i] = Xsel.contents->data[i];
     }
   } else if ((varampl.contents == 0.0) && (lshiftYN.contents == 1.0)) {
     /*  In this case there is just level shift however we do not redo */
@@ -3592,49 +3605,49 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
       sizes_idx_1 = 0;
     }
 
-    i = Xseldum->size[0] * Xseldum->size[1];
-    Xseldum->size[0] = result;
-    Xseldum->size[1] = b_input_sizes_idx_1 + sizes_idx_1;
-    emxEnsureCapacity_real_T(Xseldum, i);
+    i = bestyhat->size[0] * bestyhat->size[1];
+    bestyhat->size[0] = result;
+    bestyhat->size[1] = b_input_sizes_idx_1 + sizes_idx_1;
+    emxEnsureCapacity_real_T(bestyhat, i);
     for (i = 0; i < b_input_sizes_idx_1; i++) {
       for (i1 = 0; i1 < result; i1++) {
-        Xseldum->data[i1 + Xseldum->size[0] * i] = Xsel.contents->data[i1 +
+        bestyhat->data[i1 + bestyhat->size[0] * i] = Xsel.contents->data[i1 +
           result * i];
       }
     }
 
     for (i = 0; i < sizes_idx_1; i++) {
       for (i1 = 0; i1 < result; i1++) {
-        Xseldum->data[i1 + Xseldum->size[0] * b_input_sizes_idx_1] =
+        bestyhat->data[i1 + bestyhat->size[0] * b_input_sizes_idx_1] =
           Xlshift.contents->data[i1];
       }
     }
 
-    i = beta.contents->size[0];
-    beta.contents->size[0] = bsb.contents->size[0];
-    emxEnsureCapacity_real_T(beta.contents, i);
-    loop_ub = bsb.contents->size[0];
-    for (i = 0; i < loop_ub; i++) {
-      beta.contents->data[i] = yin.contents->data[(int)bsb.contents->data[i] - 1];
-    }
-
-    loop_ub = Xseldum->size[1];
-    i = bestyhat->size[0] * bestyhat->size[1];
-    bestyhat->size[0] = bsb.contents->size[0];
-    bestyhat->size[1] = Xseldum->size[1];
-    emxEnsureCapacity_real_T(bestyhat, i);
+    loop_ub = bestyhat->size[1];
+    i = b_C->size[0] * b_C->size[1];
+    b_C->size[0] = bsb.contents->size[0];
+    b_C->size[1] = bestyhat->size[1];
+    emxEnsureCapacity_real_T(b_C, i);
     for (i = 0; i < loop_ub; i++) {
       vlen = bsb.contents->size[0];
       for (i1 = 0; i1 < vlen; i1++) {
-        bestyhat->data[i1 + bestyhat->size[0] * i] = Xseldum->data[((int)
-          bsb.contents->data[i1] + Xseldum->size[0] * i) - 1];
+        b_C->data[i1 + b_C->size[0] * i] = bestyhat->data[((int)
+          bsb.contents->data[i1] + bestyhat->size[0] * i) - 1];
       }
     }
 
-    c_mldivide(bestyhat, beta.contents);
+    i = b_yin->size[0];
+    b_yin->size[0] = bsb.contents->size[0];
+    emxEnsureCapacity_real_T(b_yin, i);
+    loop_ub = bsb.contents->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      b_yin->data[i] = yin.contents->data[(int)bsb.contents->data[i] - 1];
+    }
+
+    mldivide(b_C, b_yin, beta.contents);
 
     /*  find fitted values using all observations */
-    mtimes(Xseldum, beta.contents, yhat.contents);
+    mtimes(bestyhat, beta.contents, yhat.contents);
     i = betaini->size[0];
     betaini->size[0] = bsb.contents->size[0];
     emxEnsureCapacity_real_T(betaini, i);
@@ -3644,54 +3657,119 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
       betaini->data[i] = yin.contents->data[nx] - yhat.contents->data[nx];
     }
 
-    i = b_y->size[0];
-    b_y->size[0] = betaini->size[0];
-    emxEnsureCapacity_real_T(b_y, i);
+    i = allnumscale2->size[0];
+    allnumscale2->size[0] = betaini->size[0];
+    emxEnsureCapacity_real_T(allnumscale2, i);
     nx = betaini->size[0];
     for (sizes_idx_1 = 0; sizes_idx_1 < nx; sizes_idx_1++) {
-      b_y->data[sizes_idx_1] = betaini->data[sizes_idx_1] * betaini->
-        data[sizes_idx_1];
+      allnumscale2->data[sizes_idx_1] = betaini->data[sizes_idx_1] *
+        betaini->data[sizes_idx_1];
     }
 
-    a = blockedSummation(b_y, b_y->size[0]) / (b_h - (double)Xseldum->size[1]);
-    loop_ub = Xseldum->size[1];
-    i = bestyhat->size[0] * bestyhat->size[1];
-    bestyhat->size[0] = bsb.contents->size[0];
-    bestyhat->size[1] = Xseldum->size[1];
-    emxEnsureCapacity_real_T(bestyhat, i);
-    for (i = 0; i < loop_ub; i++) {
-      vlen = bsb.contents->size[0];
-      for (i1 = 0; i1 < vlen; i1++) {
-        bestyhat->data[i1 + bestyhat->size[0] * i] = Xseldum->data[((int)
-          bsb.contents->data[i1] + Xseldum->size[0] * i) - 1];
-      }
-    }
-
-    loop_ub = Xseldum->size[1];
+    ij = blockedSummation(allnumscale2, allnumscale2->size[0]) / (b_h - (double)
+      bestyhat->size[1]);
+    loop_ub = bestyhat->size[1];
     i = b_C->size[0] * b_C->size[1];
     b_C->size[0] = bsb.contents->size[0];
-    b_C->size[1] = Xseldum->size[1];
+    b_C->size[1] = bestyhat->size[1];
     emxEnsureCapacity_real_T(b_C, i);
     for (i = 0; i < loop_ub; i++) {
       vlen = bsb.contents->size[0];
       for (i1 = 0; i1 < vlen; i1++) {
-        b_C->data[i1 + b_C->size[0] * i] = Xseldum->data[((int)
-          bsb.contents->data[i1] + Xseldum->size[0] * i) - 1];
+        b_C->data[i1 + b_C->size[0] * i] = bestyhat->data[((int)
+          bsb.contents->data[i1] + bestyhat->size[0] * i) - 1];
       }
     }
 
-    c_mtimes(bestyhat, b_C, Xfinal);
-    inv(Xfinal, out->invXX);
+    loop_ub = bestyhat->size[1];
     i = Xfinal->size[0] * Xfinal->size[1];
-    Xfinal->size[0] = out->invXX->size[0];
-    Xfinal->size[1] = out->invXX->size[1];
+    Xfinal->size[0] = bsb.contents->size[0];
+    Xfinal->size[1] = bestyhat->size[1];
     emxEnsureCapacity_real_T(Xfinal, i);
+    for (i = 0; i < loop_ub; i++) {
+      vlen = bsb.contents->size[0];
+      for (i1 = 0; i1 < vlen; i1++) {
+        Xfinal->data[i1 + Xfinal->size[0] * i] = bestyhat->data[((int)
+          bsb.contents->data[i1] + bestyhat->size[0] * i) - 1];
+      }
+    }
+
+    c_mtimes(b_C, Xfinal, WEIibestrdiv2);
+    inv(WEIibestrdiv2, out->invXX);
+    i = WEIibestrdiv2->size[0] * WEIibestrdiv2->size[1];
+    WEIibestrdiv2->size[0] = out->invXX->size[0];
+    WEIibestrdiv2->size[1] = out->invXX->size[1];
+    emxEnsureCapacity_real_T(WEIibestrdiv2, i);
     loop_ub = out->invXX->size[0] * out->invXX->size[1];
     for (i = 0; i < loop_ub; i++) {
-      Xfinal->data[i] = a * out->invXX->data[i];
+      WEIibestrdiv2->data[i] = ij * out->invXX->data[i];
     }
   } else {
     /*  model is non linear because there is time varying amplitude in seasonal component */
+    loop_ub = Xtrend.contents->size[1];
+    i = WEIibestrdiv2->size[0] * WEIibestrdiv2->size[1];
+    WEIibestrdiv2->size[0] = bsb.contents->size[0];
+    WEIibestrdiv2->size[1] = Xtrend.contents->size[1];
+    emxEnsureCapacity_real_T(WEIibestrdiv2, i);
+    for (i = 0; i < loop_ub; i++) {
+      vlen = bsb.contents->size[0];
+      for (i1 = 0; i1 < vlen; i1++) {
+        WEIibestrdiv2->data[i1 + WEIibestrdiv2->size[0] * i] =
+          Xtrend.contents->data[((int)bsb.contents->data[i1] +
+          Xtrend.contents->size[0] * i) - 1];
+      }
+    }
+
+    loop_ub = Xseaso.contents->size[1];
+    i = Xseasof.contents->size[0] * Xseasof.contents->size[1];
+    Xseasof.contents->size[0] = bsb.contents->size[0];
+    Xseasof.contents->size[1] = Xseaso.contents->size[1];
+    emxEnsureCapacity_real_T(Xseasof.contents, i);
+    for (i = 0; i < loop_ub; i++) {
+      vlen = bsb.contents->size[0];
+      for (i1 = 0; i1 < vlen; i1++) {
+        Xseasof.contents->data[i1 + Xseasof.contents->size[0] * i] =
+          Xseaso.contents->data[((int)bsb.contents->data[i1] +
+          Xseaso.contents->size[0] * i) - 1];
+      }
+    }
+
+    if ((X.contents->size[0] != 0) && (X.contents->size[1] != 0)) {
+      loop_ub = X.contents->size[1];
+      i = Xf.contents->size[0] * Xf.contents->size[1];
+      Xf.contents->size[0] = bsb.contents->size[0];
+      Xf.contents->size[1] = X.contents->size[1];
+      emxEnsureCapacity_real_T(Xf.contents, i);
+      for (i = 0; i < loop_ub; i++) {
+        vlen = bsb.contents->size[0];
+        for (i1 = 0; i1 < vlen; i1++) {
+          Xf.contents->data[i1 + Xf.contents->size[0] * i] = X.contents->data
+            [((int)bsb.contents->data[i1] + X.contents->size[0] * i) - 1];
+        }
+      }
+    }
+
+    i = Seqf.contents->size[0] * Seqf.contents->size[1];
+    Seqf.contents->size[0] = bsb.contents->size[0];
+    Seqf.contents->size[1] = 4;
+    emxEnsureCapacity_real_T(Seqf.contents, i);
+    loop_ub = bsb.contents->size[0];
+    for (i = 0; i < 4; i++) {
+      for (i1 = 0; i1 < loop_ub; i1++) {
+        Seqf.contents->data[i1 + Seqf.contents->size[0] * i] =
+          Seq.contents->data[((int)bsb.contents->data[i1] + Seq.contents->size[0]
+                              * i) - 1];
+      }
+    }
+
+    i = bestnumscale2->size[0];
+    bestnumscale2->size[0] = bsb.contents->size[0];
+    emxEnsureCapacity_real_T(bestnumscale2, i);
+    loop_ub = bsb.contents->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      bestnumscale2->data[i] = yin.contents->data[(int)bsb.contents->data[i] - 1];
+    }
+
     /*  Find new estimate of scale using only observations which have */
     /*  weight equal to 1. */
     i = weights.contents->size[0];
@@ -3715,35 +3793,87 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
       weights.contents->data[r2->data[i] - 1] = true;
     }
 
-    /*  TODO nlinfit not supported by MATLAB C Coder */
+    /*  MATLAB CCODER PART nlinfit replaced by lsqcurvefit */
     if (lshiftYN.contents == 1.0) {
-      if (1 > yhatrob->size[0] - 1) {
+      i = Xlshiftf.contents->size[0];
+      Xlshiftf.contents->size[0] = bsb.contents->size[0];
+      emxEnsureCapacity_real_T(Xlshiftf.contents, i);
+      loop_ub = bsb.contents->size[0];
+      for (i = 0; i < loop_ub; i++) {
+        Xlshiftf.contents->data[i] = Xlshift.contents->data[(int)
+          bsb.contents->data[i] - 1];
+      }
+
+      if (1 > brob->size[0] - 1) {
         loop_ub = 0;
       } else {
-        loop_ub = yhatrob->size[0] - 1;
+        loop_ub = brob->size[0] - 1;
       }
 
-      i = beta.contents->size[0];
-      beta.contents->size[0] = loop_ub;
-      emxEnsureCapacity_real_T(beta.contents, i);
+      i = yhatrob->size[0];
+      yhatrob->size[0] = loop_ub;
+      emxEnsureCapacity_real_T(yhatrob, i);
       for (i = 0; i < loop_ub; i++) {
-        beta.contents->data[i] = yhatrob->data[i];
+        yhatrob->data[i] = brob->data[i];
       }
+
+      i = beta0->size[0];
+      beta0->size[0] = brob->size[0] - 1;
+      emxEnsureCapacity_real_T(beta0, i);
+      loop_ub = brob->size[0] - 1;
+      for (i = 0; i < loop_ub; i++) {
+        beta0->data[i] = rtMinusInf;
+      }
+
+      i = brobLSH->size[0];
+      brobLSH->size[0] = brob->size[0] - 1;
+      emxEnsureCapacity_real_T(brobLSH, i);
+      loop_ub = brob->size[0] - 1;
+      for (i = 0; i < loop_ub; i++) {
+        brobLSH->data[i] = rtInf;
+      }
+
+      lsqcurvefit(&trend, &seasonal, &s, &yhatseaso, &Xseasof, &varampl, &Seqf,
+                  &nexpl, &isemptyX, &Xf, &lshiftYN, &Xlshiftf, yhatrob,
+                  WEIibestrdiv2, bestnumscale2, beta0, brobLSH, beta.contents,
+                  &sworst, betaini, &ncomb, &a__24, &a__25, bestyhat);
     } else {
-      i = beta.contents->size[0];
-      beta.contents->size[0] = yhatrob->size[0];
-      emxEnsureCapacity_real_T(beta.contents, i);
-      loop_ub = yhatrob->size[0];
+      i = Xlshiftf.contents->size[0];
+      Xlshiftf.contents->size[0] = 1;
+      emxEnsureCapacity_real_T(Xlshiftf.contents, i);
+      Xlshiftf.contents->data[0] = 0.0;
+
+      /*  [betaoutCHK,resnorm,residual,exitflag,output,lambda,XlinCHK]= lsqcurvefit(@likyhat,brobfinal,Xtrendf,yf); */
+      i = beta0->size[0];
+      beta0->size[0] = brob->size[0];
+      emxEnsureCapacity_real_T(beta0, i);
+      loop_ub = brob->size[0];
       for (i = 0; i < loop_ub; i++) {
-        beta.contents->data[i] = yhatrob->data[i];
+        beta0->data[i] = rtMinusInf;
       }
+
+      i = brobLSH->size[0];
+      brobLSH->size[0] = brob->size[0];
+      emxEnsureCapacity_real_T(brobLSH, i);
+      loop_ub = brob->size[0];
+      for (i = 0; i < loop_ub; i++) {
+        brobLSH->data[i] = rtInf;
+      }
+
+      lsqcurvefit(&trend, &seasonal, &s, &yhatseaso, &Xseasof, &varampl, &Seqf,
+                  &nexpl, &isemptyX, &Xf, &lshiftYN, &Xlshiftf, brob,
+                  WEIibestrdiv2, bestnumscale2, beta0, brobLSH, beta.contents,
+                  &sworst, betaini, &ncomb, &a__24, &a__25, bestyhat);
     }
 
-    i = Xfinal->size[0] * Xfinal->size[1];
-    Xfinal->size[0] = 1;
-    Xfinal->size[1] = 1;
-    emxEnsureCapacity_real_T(Xfinal, i);
-    Xfinal->data[0] = 1.0 / (double)beta.contents->size[0];
+    i = WEIibestrdiv2->size[0] * WEIibestrdiv2->size[1];
+    WEIibestrdiv2->size[0] = 1;
+    WEIibestrdiv2->size[1] = 1;
+    emxEnsureCapacity_real_T(WEIibestrdiv2, i);
+    WEIibestrdiv2->data[0] = 1.0 / (double)beta.contents->size[0];
+
+    /*          MSE=(residuals'*residuals)/length(betaout); */
+    /*          covB=MSE*inv(XlinCHK'*XlinCHK)*MSE; */
     i = out->invXX->size[0] * out->invXX->size[1];
     out->invXX->size[0] = 1;
     out->invXX->size[1] = 1;
@@ -3763,11 +3893,14 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
         &Seq, &nexpl, &isemptyX, &X, &lshiftYN, &Xlshift, &yhat, beta.contents);
   }
 
+  emxFreeStruct_struct_T1(&a__25);
   emxFree_int32_T(&r2);
-  emxFree_real_T(&b_C);
+  emxFree_real_T(&Xfinal);
+  emxFree_real_T(&yhatrob);
+  emxFree_real_T(&brobLSH);
 
   /*  Store beta standard error, t stat and p values */
-  diag(Xfinal, bestnumscale2);
+  diag(WEIibestrdiv2, bestnumscale2);
   nx = bestnumscale2->size[0];
   for (sizes_idx_1 = 0; sizes_idx_1 < nx; sizes_idx_1++) {
     bestnumscale2->data[sizes_idx_1] = sqrt(bestnumscale2->data[sizes_idx_1]);
@@ -3782,19 +3915,19 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   }
 
   nx = beta0->size[0];
-  i = b_y->size[0];
-  b_y->size[0] = beta0->size[0];
-  emxEnsureCapacity_real_T(b_y, i);
+  i = allnumscale2->size[0];
+  allnumscale2->size[0] = beta0->size[0];
+  emxEnsureCapacity_real_T(allnumscale2, i);
   for (sizes_idx_1 = 0; sizes_idx_1 < nx; sizes_idx_1++) {
-    b_y->data[sizes_idx_1] = fabs(beta0->data[sizes_idx_1]);
+    allnumscale2->data[sizes_idx_1] = fabs(beta0->data[sizes_idx_1]);
   }
 
-  loop_ub = b_y->size[0];
+  loop_ub = allnumscale2->size[0];
   for (i = 0; i < loop_ub; i++) {
-    b_y->data[i] = -b_y->data[i];
+    allnumscale2->data[i] = -allnumscale2->data[i];
   }
 
-  tcdf(b_y, (double)y->size[0] - (double)beta.contents->size[0], betaini);
+  tcdf(allnumscale2, y->size[0] - beta.contents->size[0], betaini);
   i = out->B->size[0] * out->B->size[1];
   out->B->size[0] = beta.contents->size[0];
   out->B->size[1] = 4;
@@ -3840,11 +3973,11 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   }
 
   /*  s2full */
-  ij = 0.0;
-  loop_ub = allnumscale2->size[0];
+  nselected = 0.0;
+  loop_ub = RES->size[0];
   for (i = 0; i < loop_ub; i++) {
-    sworst = bestnumscale2->data[(int)allnumscale2->data[i] - 1];
-    ij += sworst * sworst;
+    sworst = bestnumscale2->data[(int)RES->data[i] - 1];
+    nselected += sworst * sworst;
   }
 
   /*  s0 =sqrt(MSE) */
@@ -3880,36 +4013,36 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     /*  factor=consistencyfactor(hrew,n,1); */
     sworst = 0.5 * (ncomb / (double)yin.contents->size[0] + 1.0);
     if ((sworst >= 0.0) && (sworst <= 1.0)) {
-      a = -1.4142135623730951 * erfcinv(2.0 * sworst);
+      ij = -1.4142135623730951 * erfcinv(2.0 * sworst);
     } else {
-      a = rtNaN;
+      ij = rtNaN;
     }
 
     /* factor=1/sqrt(1-(2*a.*normpdf(a))./(2*normcdf(a)-1)); */
     /*  Apply small sample correction factor to reweighted estimate */
     /*  of sigma */
-    factor = 1.0 / sqrt(1.0 - 2.0 * ((double)yin.contents->size[0] / ncomb) * a *
-                        (exp(-0.5 * a * a) / 2.5066282746310002)) * sqrt
+    factor = 1.0 / sqrt(1.0 - 2.0 * ((double)yin.contents->size[0] / ncomb) * ij
+                        * (exp(-0.5 * ij * ij) / 2.5066282746310002)) * sqrt
       (corfactorREW(yin.contents->size[0], ncomb / (double)yin.contents->size[0]));
   } else {
     factor = 1.0;
   }
 
-  i = b_y->size[0];
-  b_y->size[0] = bestnumscale2->size[0];
-  emxEnsureCapacity_real_T(b_y, i);
+  i = allnumscale2->size[0];
+  allnumscale2->size[0] = bestnumscale2->size[0];
+  emxEnsureCapacity_real_T(allnumscale2, i);
   nx = bestnumscale2->size[0];
   for (sizes_idx_1 = 0; sizes_idx_1 < nx; sizes_idx_1++) {
-    b_y->data[sizes_idx_1] = bestnumscale2->data[sizes_idx_1] *
+    allnumscale2->data[sizes_idx_1] = bestnumscale2->data[sizes_idx_1] *
       bestnumscale2->data[sizes_idx_1];
   }
 
-  i = b_y->size[0];
-  b_y->size[0] = weights.contents->size[0];
-  emxEnsureCapacity_real_T(b_y, i);
+  i = allnumscale2->size[0];
+  allnumscale2->size[0] = weights.contents->size[0];
+  emxEnsureCapacity_real_T(allnumscale2, i);
   loop_ub = weights.contents->size[0];
   for (i = 0; i < loop_ub; i++) {
-    b_y->data[i] *= (double)weights.contents->data[i];
+    allnumscale2->data[i] *= (double)weights.contents->data[i];
   }
 
   vlen = weights.contents->size[0];
@@ -3922,7 +4055,8 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     }
   }
 
-  factor *= sqrt(blockedSummation(b_y, b_y->size[0]) / ((double)ib_size - 1.0));
+  factor *= sqrt(blockedSummation(allnumscale2, allnumscale2->size[0]) /
+                 ((double)ib_size - 1.0));
   if (!(factor == 0.0)) {
     loop_ub = bestnumscale2->size[0];
     for (i = 0; i < loop_ub; i++) {
@@ -3946,11 +4080,11 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
 
   /*  Store quantities in the out structure */
   nx = bestnumscale2->size[0];
-  i = b_y->size[0];
-  b_y->size[0] = bestnumscale2->size[0];
-  emxEnsureCapacity_real_T(b_y, i);
+  i = allnumscale2->size[0];
+  allnumscale2->size[0] = bestnumscale2->size[0];
+  emxEnsureCapacity_real_T(allnumscale2, i);
   for (sizes_idx_1 = 0; sizes_idx_1 < nx; sizes_idx_1++) {
-    b_y->data[sizes_idx_1] = fabs(bestnumscale2->data[sizes_idx_1]);
+    allnumscale2->data[sizes_idx_1] = fabs(bestnumscale2->data[sizes_idx_1]);
   }
 
   sworst = (conflev + 1.0) / 2.0;
@@ -3961,11 +4095,11 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   }
 
   i = Weights->size[0];
-  Weights->size[0] = b_y->size[0];
+  Weights->size[0] = allnumscale2->size[0];
   emxEnsureCapacity_boolean_T(Weights, i);
-  loop_ub = b_y->size[0];
+  loop_ub = allnumscale2->size[0];
   for (i = 0; i < loop_ub; i++) {
-    Weights->data[i] = (b_y->data[i] > sworst);
+    Weights->data[i] = (allnumscale2->data[i] > sworst);
   }
 
   end = Weights->size[0] - 1;
@@ -3997,29 +4131,29 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   }
 
   emxFree_int32_T(&r6);
-  emxFreeStruct_captured_var1(&seq);
+  emxFreeStruct_captured_var(&seq);
 
   /* decomment the following two lines to get outlier pvalues */
   nx = bestnumscale2->size[0];
-  i = b_y->size[0];
-  b_y->size[0] = bestnumscale2->size[0];
-  emxEnsureCapacity_real_T(b_y, i);
+  i = allnumscale2->size[0];
+  allnumscale2->size[0] = bestnumscale2->size[0];
+  emxEnsureCapacity_real_T(allnumscale2, i);
   for (sizes_idx_1 = 0; sizes_idx_1 < nx; sizes_idx_1++) {
-    b_y->data[sizes_idx_1] = fabs(bestnumscale2->data[sizes_idx_1]);
+    allnumscale2->data[sizes_idx_1] = fabs(bestnumscale2->data[sizes_idx_1]);
   }
 
-  loop_ub = b_y->size[0];
+  loop_ub = allnumscale2->size[0];
   for (i = 0; i < loop_ub; i++) {
-    b_y->data[i] = -b_y->data[i];
+    allnumscale2->data[i] = -allnumscale2->data[i];
   }
 
   emxInit_real_T(&p_all, 1);
   i = p_all->size[0];
-  p_all->size[0] = b_y->size[0];
+  p_all->size[0] = allnumscale2->size[0];
   emxEnsureCapacity_real_T(p_all, i);
-  i = b_y->size[0];
+  i = allnumscale2->size[0];
   for (sizes_idx_1 = 0; sizes_idx_1 < i; sizes_idx_1++) {
-    sworst = eml_erfcore(-b_y->data[sizes_idx_1] / 1.4142135623730951);
+    sworst = eml_erfcore(-allnumscale2->data[sizes_idx_1] / 1.4142135623730951);
     p_all->data[sizes_idx_1] = 0.5 * sworst;
   }
 
@@ -4091,14 +4225,14 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     out->weights->data[i] = weights.contents->data[i];
   }
 
-  emxFreeStruct_captured_var(&weights);
+  emxFreeStruct_captured_var1(&weights);
 
   /*  Store number of singular subsets */
   out->singsub = 0.0;
 
   /*  Store information about the class of the object */
   for (i = 0; i < 5; i++) {
-    out->class [i] = cv[i];
+    out->class [i] = b_cv[i];
   }
 
   if (!(lshift > 0.0)) {
@@ -4123,34 +4257,34 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   if (yxsave) {
     if (intercept) {
       /*  Store X (without the column of ones if there is an intercept) */
-      if (2 > Xseldum->size[1]) {
+      if (2 > bestyhat->size[1]) {
         i = 0;
         i1 = 0;
       } else {
         i = 1;
-        i1 = Xseldum->size[1];
+        i1 = bestyhat->size[1];
       }
 
-      loop_ub = Xseldum->size[0];
+      loop_ub = bestyhat->size[0];
       ib_size = out->X->size[0] * out->X->size[1];
-      out->X->size[0] = Xseldum->size[0];
+      out->X->size[0] = bestyhat->size[0];
       vlen = i1 - i;
       out->X->size[1] = vlen;
       emxEnsureCapacity_real_T(out->X, ib_size);
       for (i1 = 0; i1 < vlen; i1++) {
         for (ib_size = 0; ib_size < loop_ub; ib_size++) {
-          out->X->data[ib_size + out->X->size[0] * i1] = Xseldum->data[ib_size +
-            Xseldum->size[0] * (i + i1)];
+          out->X->data[ib_size + out->X->size[0] * i1] = bestyhat->data[ib_size
+            + bestyhat->size[0] * (i + i1)];
         }
       }
     } else {
       i = out->X->size[0] * out->X->size[1];
-      out->X->size[0] = Xseldum->size[0];
-      out->X->size[1] = Xseldum->size[1];
+      out->X->size[0] = bestyhat->size[0];
+      out->X->size[1] = bestyhat->size[1];
       emxEnsureCapacity_real_T(out->X, i);
-      loop_ub = Xseldum->size[0] * Xseldum->size[1];
+      loop_ub = bestyhat->size[0] * bestyhat->size[1];
       for (i = 0; i < loop_ub; i++) {
-        out->X->data[i] = Xseldum->data[i];
+        out->X->data[i] = bestyhat->data[i];
       }
     }
   } else {
@@ -4211,11 +4345,11 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
       loop_ub = (int)ARp;
     }
 
-    d = nexpl.contents - ARp;
-    if (1.0 > d) {
+    ncomb = nexpl.contents - ARp;
+    if (1.0 > ncomb) {
       vlen = 0;
     } else {
-      vlen = (int)d;
+      vlen = (int)ncomb;
     }
 
     nx = loop_ub + vlen;
@@ -4236,12 +4370,12 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   }
 
   if (seasonal.contents > 0.0) {
-    d = 2.0 * seasonal.contents;
-    if (d == model->s) {
-      if (1.0 > model->trend + 1.0) {
+    if (2.0 * seasonal.contents == s.contents) {
+      ncomb = trend.contents + 1.0;
+      if (1.0 > ncomb) {
         loop_ub = 0;
       } else {
-        loop_ub = (int)(model->trend + 1.0);
+        loop_ub = (int)ncomb;
       }
 
       lab_size[0] = loop_ub + 11;
@@ -4256,16 +4390,18 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
         }
       }
     } else {
-      if (1.0 > model->trend + 1.0) {
+      ncomb = trend.contents + 1.0;
+      if (1.0 > ncomb) {
         loop_ub = 0;
       } else {
-        loop_ub = (int)(model->trend + 1.0);
+        loop_ub = (int)ncomb;
       }
 
-      if (1.0 > d) {
+      ncomb = 2.0 * seasonal.contents;
+      if (1.0 > ncomb) {
         vlen = 0;
       } else {
-        vlen = (int)d;
+        vlen = (int)ncomb;
       }
 
       lab_size[0] = loop_ub + vlen;
@@ -4281,10 +4417,11 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
       }
     }
   } else {
-    if (1.0 > model->trend + 1.0) {
+    ncomb = trend.contents + 1.0;
+    if (1.0 > ncomb) {
       loop_ub = 0;
     } else {
-      loop_ub = (int)(model->trend + 1.0);
+      loop_ub = (int)ncomb;
     }
 
     lab_size[0] = loop_ub;
@@ -4297,15 +4434,21 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   }
 
   if (nexpl.contents > 0.0) {
-    hmin = (int)nexpl.contents;
-    sizes_idx_1 = lab_size[0] + hmin;
-    loop_ub = lab_size[0];
+    ncomb = nexpl.contents;
+    if (1.0 > ncomb) {
+      loop_ub = 0;
+    } else {
+      loop_ub = (int)ncomb;
+    }
+
+    sizes_idx_1 = lab_size[0] + loop_ub;
+    vlen = lab_size[0];
     for (i = 0; i < 8; i++) {
-      for (i1 = 0; i1 < loop_ub; i1++) {
+      for (i1 = 0; i1 < vlen; i1++) {
         b_lab_data[i1 + sizes_idx_1 * i] = lab_data[i1 + lab_size[0] * i];
       }
 
-      for (i1 = 0; i1 < hmin; i1++) {
+      for (i1 = 0; i1 < loop_ub; i1++) {
         b_lab_data[(i1 + lab_size[0]) + sizes_idx_1 * i] = b_expl_data[i1 + nx *
           i];
       }
@@ -4321,10 +4464,11 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
 
   emxInit_real_T(&posvarampl, 2);
   if (varampl.contents > 0.0) {
-    if (1.0 > varampl.contents) {
+    ncomb = varampl.contents;
+    if (1.0 > ncomb) {
       loop_ub = 0;
     } else {
-      loop_ub = (int)varampl.contents;
+      loop_ub = (int)ncomb;
     }
 
     sizes_idx_1 = lab_size[0] + loop_ub;
@@ -4368,27 +4512,33 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
       ib_size = 0;
     }
 
-    a = ((double)ib_size - varampl.contents) + 1.0;
-    if (nx < a) {
-      posvarampl->size[0] = 1;
-      posvarampl->size[1] = 0;
-    } else if (rtIsInf(a) && (a == nx)) {
+    ij = ((double)ib_size - varampl.contents) + 1.0;
+    if (rtIsNaN(ij)) {
       i = posvarampl->size[0] * posvarampl->size[1];
       posvarampl->size[0] = 1;
       posvarampl->size[1] = 1;
       emxEnsureCapacity_real_T(posvarampl, i);
       posvarampl->data[0] = rtNaN;
-    } else if (floor(a) == a) {
+    } else if (nx < ij) {
+      posvarampl->size[0] = 1;
+      posvarampl->size[1] = 0;
+    } else if (rtIsInf(ij) && (ij == nx)) {
       i = posvarampl->size[0] * posvarampl->size[1];
       posvarampl->size[0] = 1;
-      loop_ub = (int)((double)nx - a);
+      posvarampl->size[1] = 1;
+      emxEnsureCapacity_real_T(posvarampl, i);
+      posvarampl->data[0] = rtNaN;
+    } else if (floor(ij) == ij) {
+      i = posvarampl->size[0] * posvarampl->size[1];
+      posvarampl->size[0] = 1;
+      loop_ub = (int)((double)nx - ij);
       posvarampl->size[1] = loop_ub + 1;
       emxEnsureCapacity_real_T(posvarampl, i);
       for (i = 0; i <= loop_ub; i++) {
-        posvarampl->data[i] = a + (double)i;
+        posvarampl->data[i] = ij + (double)i;
       }
     } else {
-      eml_float_colon(a, nx, posvarampl);
+      eml_float_colon(ij, nx, posvarampl);
     }
   } else {
     posvarampl->size[0] = 1;
@@ -4457,11 +4607,11 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   /*  Part of the code to find the F test for the final harmonic of the seasonal */
   /*  component part */
   i = bsb.contents->size[0];
-  bsb.contents->size[0] = allnumscale2->size[0];
+  bsb.contents->size[0] = RES->size[0];
   emxEnsureCapacity_real_T(bsb.contents, i);
-  loop_ub = allnumscale2->size[0];
+  loop_ub = RES->size[0];
   for (i = 0; i < loop_ub; i++) {
-    bsb.contents->data[i] = allnumscale2->data[i];
+    bsb.contents->data[i] = RES->data[i];
   }
 
   out->LastHarmonicPval.size[0] = 0;
@@ -4486,21 +4636,21 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
       }
     }
 
-    a = ((double)Xtrend.contents->size[1] + (double)nseaso) + 1.0;
-    if (Xsel.contents->size[1] < a) {
+    ij = ((double)Xtrend.contents->size[1] + (double)nseaso) + 1.0;
+    if (Xsel.contents->size[1] < ij) {
       Cr->size[0] = 1;
       Cr->size[1] = 0;
-    } else if (a == a) {
+    } else if (ij == ij) {
       i = Cr->size[0] * Cr->size[1];
       Cr->size[0] = 1;
-      Cr->size[1] = (int)((double)Xsel.contents->size[1] - a) + 1;
+      Cr->size[1] = (int)((double)Xsel.contents->size[1] - ij) + 1;
       emxEnsureCapacity_real_T(Cr, i);
-      loop_ub = (int)((double)Xsel.contents->size[1] - a);
+      loop_ub = (int)((double)Xsel.contents->size[1] - ij);
       for (i = 0; i <= loop_ub; i++) {
-        Cr->data[i] = a + (double)i;
+        Cr->data[i] = ij + (double)i;
       }
     } else {
-      eml_float_colon(a, Xsel.contents->size[1], Cr);
+      eml_float_colon(ij, Xsel.contents->size[1], Cr);
     }
 
     i = selWithoutLastHarmonic->size[0] * selWithoutLastHarmonic->size[1];
@@ -4532,76 +4682,75 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
       }
 
       /*  update fitted values */
-      i = bestnumscale2->size[0];
-      bestnumscale2->size[0] = allnumscale2->size[0];
-      emxEnsureCapacity_real_T(bestnumscale2, i);
-      loop_ub = allnumscale2->size[0];
-      for (i = 0; i < loop_ub; i++) {
-        bestnumscale2->data[i] = yin.contents->data[(int)allnumscale2->data[i] -
-          1];
-      }
-
-      i = bestyhat->size[0] * bestyhat->size[1];
-      bestyhat->size[0] = allnumscale2->size[0];
-      bestyhat->size[1] = betaini->size[0];
-      emxEnsureCapacity_real_T(bestyhat, i);
+      i = b_C->size[0] * b_C->size[1];
+      b_C->size[0] = RES->size[0];
+      b_C->size[1] = betaini->size[0];
+      emxEnsureCapacity_real_T(b_C, i);
       loop_ub = betaini->size[0];
       for (i = 0; i < loop_ub; i++) {
-        vlen = allnumscale2->size[0];
+        vlen = RES->size[0];
         for (i1 = 0; i1 < vlen; i1++) {
-          bestyhat->data[i1 + bestyhat->size[0] * i] = Xsel.contents->data[((int)
-            allnumscale2->data[i1] + Xsel.contents->size[0] * ((int)
-            betaini->data[i] - 1)) - 1];
+          b_C->data[i1 + b_C->size[0] * i] = Xsel.contents->data[((int)RES->
+            data[i1] + Xsel.contents->size[0] * ((int)betaini->data[i] - 1)) - 1];
         }
       }
 
-      c_mldivide(bestyhat, bestnumscale2);
+      i = b_yin->size[0];
+      b_yin->size[0] = RES->size[0];
+      emxEnsureCapacity_real_T(b_yin, i);
+      loop_ub = RES->size[0];
+      for (i = 0; i < loop_ub; i++) {
+        b_yin->data[i] = yin.contents->data[(int)RES->data[i] - 1];
+      }
+
+      mldivide(b_C, b_yin, bestnumscale2);
       loop_ub = Xsel.contents->size[0];
-      i = bestyhat->size[0] * bestyhat->size[1];
-      bestyhat->size[0] = Xsel.contents->size[0];
-      bestyhat->size[1] = betaini->size[0];
-      emxEnsureCapacity_real_T(bestyhat, i);
+      i = b_C->size[0] * b_C->size[1];
+      b_C->size[0] = Xsel.contents->size[0];
+      b_C->size[1] = betaini->size[0];
+      emxEnsureCapacity_real_T(b_C, i);
       vlen = betaini->size[0];
       for (i = 0; i < vlen; i++) {
         for (i1 = 0; i1 < loop_ub; i1++) {
-          bestyhat->data[i1 + bestyhat->size[0] * i] = Xsel.contents->data[i1 +
+          b_C->data[i1 + b_C->size[0] * i] = Xsel.contents->data[i1 +
             Xsel.contents->size[0] * ((int)betaini->data[i] - 1)];
         }
       }
 
-      mtimes(bestyhat, bestnumscale2, yhat.contents);
+      mtimes(b_C, bestnumscale2, yhat.contents);
       i = betaini->size[0];
-      betaini->size[0] = allnumscale2->size[0];
+      betaini->size[0] = RES->size[0];
       emxEnsureCapacity_real_T(betaini, i);
-      loop_ub = allnumscale2->size[0];
+      loop_ub = RES->size[0];
       for (i = 0; i < loop_ub; i++) {
-        nx = (int)allnumscale2->data[i] - 1;
+        nx = (int)RES->data[i] - 1;
         betaini->data[i] = yin.contents->data[nx] - yhat.contents->data[nx];
       }
 
-      i = b_y->size[0];
-      b_y->size[0] = betaini->size[0];
-      emxEnsureCapacity_real_T(b_y, i);
+      i = allnumscale2->size[0];
+      allnumscale2->size[0] = betaini->size[0];
+      emxEnsureCapacity_real_T(allnumscale2, i);
       nx = betaini->size[0];
       for (sizes_idx_1 = 0; sizes_idx_1 < nx; sizes_idx_1++) {
-        b_y->data[sizes_idx_1] = betaini->data[sizes_idx_1] * betaini->
-          data[sizes_idx_1];
+        allnumscale2->data[sizes_idx_1] = betaini->data[sizes_idx_1] *
+          betaini->data[sizes_idx_1];
       }
 
-      ncomb = blockedSummation(b_y, b_y->size[0]);
+      sworst = blockedSummation(allnumscale2, allnumscale2->size[0]);
     } else if ((varampl.contents == 0.0) && (lshiftYN.contents == 1.0)) {
       /*  In this case there is just level shift however we do not redo */
       /*  the non linear estimation but a simple LS */
       loop_ub = Xsel.contents->size[0];
-      i = Xfinal->size[0] * Xfinal->size[1];
-      Xfinal->size[0] = Xsel.contents->size[0];
-      Xfinal->size[1] = selWithoutLastHarmonic->size[1];
-      emxEnsureCapacity_real_T(Xfinal, i);
+      i = WEIibestrdiv2->size[0] * WEIibestrdiv2->size[1];
+      WEIibestrdiv2->size[0] = Xsel.contents->size[0];
+      WEIibestrdiv2->size[1] = selWithoutLastHarmonic->size[1];
+      emxEnsureCapacity_real_T(WEIibestrdiv2, i);
       vlen = selWithoutLastHarmonic->size[1];
       for (i = 0; i < vlen; i++) {
         for (i1 = 0; i1 < loop_ub; i1++) {
-          Xfinal->data[i1 + Xfinal->size[0] * i] = Xsel.contents->data[i1 +
-            Xsel.contents->size[0] * ((int)selWithoutLastHarmonic->data[i] - 1)];
+          WEIibestrdiv2->data[i1 + WEIibestrdiv2->size[0] * i] =
+            Xsel.contents->data[i1 + Xsel.contents->size[0] * ((int)
+            selWithoutLastHarmonic->data[i] - 1)];
         }
       }
 
@@ -4638,75 +4787,77 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
         b_sizes_idx_1 = 0;
       }
 
-      i = Xseldum->size[0] * Xseldum->size[1];
-      Xseldum->size[0] = result;
-      Xseldum->size[1] = b_input_sizes_idx_1 + b_sizes_idx_1;
-      emxEnsureCapacity_real_T(Xseldum, i);
+      i = bestyhat->size[0] * bestyhat->size[1];
+      bestyhat->size[0] = result;
+      bestyhat->size[1] = b_input_sizes_idx_1 + b_sizes_idx_1;
+      emxEnsureCapacity_real_T(bestyhat, i);
       for (i = 0; i < b_input_sizes_idx_1; i++) {
         for (i1 = 0; i1 < result; i1++) {
-          Xseldum->data[i1 + Xseldum->size[0] * i] = Xfinal->data[i1 + result *
-            i];
+          bestyhat->data[i1 + bestyhat->size[0] * i] = WEIibestrdiv2->data[i1 +
+            result * i];
         }
       }
 
       for (i = 0; i < b_sizes_idx_1; i++) {
         for (i1 = 0; i1 < result; i1++) {
-          Xseldum->data[i1 + Xseldum->size[0] * b_input_sizes_idx_1] =
+          bestyhat->data[i1 + bestyhat->size[0] * b_input_sizes_idx_1] =
             Xlshift.contents->data[i1];
         }
       }
 
       /*  find fitted values using all observations */
-      i = bestnumscale2->size[0];
-      bestnumscale2->size[0] = allnumscale2->size[0];
-      emxEnsureCapacity_real_T(bestnumscale2, i);
-      loop_ub = allnumscale2->size[0];
+      loop_ub = bestyhat->size[1];
+      i = b_C->size[0] * b_C->size[1];
+      b_C->size[0] = RES->size[0];
+      b_C->size[1] = bestyhat->size[1];
+      emxEnsureCapacity_real_T(b_C, i);
       for (i = 0; i < loop_ub; i++) {
-        bestnumscale2->data[i] = yin.contents->data[(int)allnumscale2->data[i] -
-          1];
-      }
-
-      loop_ub = Xseldum->size[1];
-      i = bestyhat->size[0] * bestyhat->size[1];
-      bestyhat->size[0] = allnumscale2->size[0];
-      bestyhat->size[1] = Xseldum->size[1];
-      emxEnsureCapacity_real_T(bestyhat, i);
-      for (i = 0; i < loop_ub; i++) {
-        vlen = allnumscale2->size[0];
+        vlen = RES->size[0];
         for (i1 = 0; i1 < vlen; i1++) {
-          bestyhat->data[i1 + bestyhat->size[0] * i] = Xseldum->data[((int)
-            allnumscale2->data[i1] + Xseldum->size[0] * i) - 1];
+          b_C->data[i1 + b_C->size[0] * i] = bestyhat->data[((int)RES->data[i1]
+            + bestyhat->size[0] * i) - 1];
         }
       }
 
-      c_mldivide(bestyhat, bestnumscale2);
-      mtimes(Xseldum, bestnumscale2, yhat.contents);
-      i = betaini->size[0];
-      betaini->size[0] = allnumscale2->size[0];
-      emxEnsureCapacity_real_T(betaini, i);
-      loop_ub = allnumscale2->size[0];
+      i = b_yin->size[0];
+      b_yin->size[0] = RES->size[0];
+      emxEnsureCapacity_real_T(b_yin, i);
+      loop_ub = RES->size[0];
       for (i = 0; i < loop_ub; i++) {
-        nx = (int)allnumscale2->data[i] - 1;
+        b_yin->data[i] = yin.contents->data[(int)RES->data[i] - 1];
+      }
+
+      mldivide(b_C, b_yin, betaini);
+      mtimes(bestyhat, betaini, yhat.contents);
+      i = betaini->size[0];
+      betaini->size[0] = RES->size[0];
+      emxEnsureCapacity_real_T(betaini, i);
+      loop_ub = RES->size[0];
+      for (i = 0; i < loop_ub; i++) {
+        nx = (int)RES->data[i] - 1;
         betaini->data[i] = yin.contents->data[nx] - yhat.contents->data[nx];
       }
 
-      i = b_y->size[0];
-      b_y->size[0] = betaini->size[0];
-      emxEnsureCapacity_real_T(b_y, i);
+      i = allnumscale2->size[0];
+      allnumscale2->size[0] = betaini->size[0];
+      emxEnsureCapacity_real_T(allnumscale2, i);
       nx = betaini->size[0];
       for (sizes_idx_1 = 0; sizes_idx_1 < nx; sizes_idx_1++) {
-        b_y->data[sizes_idx_1] = betaini->data[sizes_idx_1] * betaini->
-          data[sizes_idx_1];
+        allnumscale2->data[sizes_idx_1] = betaini->data[sizes_idx_1] *
+          betaini->data[sizes_idx_1];
       }
 
-      ncomb = blockedSummation(b_y, b_y->size[0]);
+      sworst = blockedSummation(allnumscale2, allnumscale2->size[0]);
     } else {
       /*  model is non linear because there is time varying amplitude in seasonal component */
       /*  Remove the last harmonic from Xseaso */
-      seasonal.contents--;
+      ncomb = seasonal.contents - 1.0;
+      seasonal.contents = ncomb;
       if (seasonal.contents == 0.0) {
         Xseaso.contents->size[0] = 0;
         Xseaso.contents->size[1] = 0;
+        Xseasof.contents->size[0] = 0;
+        Xseasof.contents->size[1] = 0;
         i = yhatseaso.contents->size[0];
         yhatseaso.contents->size[0] = 1;
         emxEnsureCapacity_real_T(yhatseaso.contents, i);
@@ -4731,23 +4882,63 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
         Xseaso.contents->size[0] = ib_size + 1;
         Xseaso.contents->size[1] = loop_ub;
         emxEnsureCapacity_real_T(Xseaso.contents, i);
+        i = Xseasof.contents->size[0] * Xseasof.contents->size[1];
+        Xseasof.contents->size[0] = RES->size[0];
+        Xseasof.contents->size[1] = loop_ub;
+        emxEnsureCapacity_real_T(Xseasof.contents, i);
+        for (i = 0; i < loop_ub; i++) {
+          vlen = RES->size[0];
+          for (i1 = 0; i1 < vlen; i1++) {
+            Xseasof.contents->data[i1 + Xseasof.contents->size[0] * i] =
+              Xseaso.contents->data[((int)RES->data[i1] + Xseaso.contents->size
+              [0] * i) - 1];
+          }
+        }
       }
 
-      a = ((double)Xtrend.contents->size[1] + (double)nseaso) + 1.0;
-      if (yhatrob->size[0] < a) {
+      if ((X.contents->size[0] != 0) && (X.contents->size[1] != 0)) {
+        loop_ub = X.contents->size[1];
+        i = Xf.contents->size[0] * Xf.contents->size[1];
+        Xf.contents->size[0] = RES->size[0];
+        Xf.contents->size[1] = X.contents->size[1];
+        emxEnsureCapacity_real_T(Xf.contents, i);
+        for (i = 0; i < loop_ub; i++) {
+          vlen = RES->size[0];
+          for (i1 = 0; i1 < vlen; i1++) {
+            Xf.contents->data[i1 + Xf.contents->size[0] * i] = X.contents->data
+              [((int)RES->data[i1] + X.contents->size[0] * i) - 1];
+          }
+        }
+      }
+
+      i = Seqf.contents->size[0] * Seqf.contents->size[1];
+      Seqf.contents->size[0] = RES->size[0];
+      Seqf.contents->size[1] = 4;
+      emxEnsureCapacity_real_T(Seqf.contents, i);
+      loop_ub = RES->size[0];
+      for (i = 0; i < 4; i++) {
+        for (i1 = 0; i1 < loop_ub; i1++) {
+          Seqf.contents->data[i1 + Seqf.contents->size[0] * i] =
+            Seq.contents->data[((int)RES->data[i1] + Seq.contents->size[0] * i)
+            - 1];
+        }
+      }
+
+      ij = ((double)Xtrend.contents->size[1] + (double)nseaso) + 1.0;
+      if (brob->size[0] < ij) {
         Cr->size[0] = 1;
         Cr->size[1] = 0;
-      } else if (a == a) {
+      } else if (ij == ij) {
         i = Cr->size[0] * Cr->size[1];
         Cr->size[0] = 1;
-        Cr->size[1] = (int)((double)yhatrob->size[0] - a) + 1;
+        Cr->size[1] = (int)((double)brob->size[0] - ij) + 1;
         emxEnsureCapacity_real_T(Cr, i);
-        loop_ub = (int)((double)yhatrob->size[0] - a);
+        loop_ub = (int)((double)brob->size[0] - ij);
         for (i = 0; i <= loop_ub; i++) {
-          Cr->data[i] = a + (double)i;
+          Cr->data[i] = ij + (double)i;
         }
       } else {
-        eml_float_colon(a, yhatrob->size[0], Cr);
+        eml_float_colon(ij, brob->size[0], Cr);
       }
 
       i = selWithoutLastHarmonic->size[0] * selWithoutLastHarmonic->size[1];
@@ -4797,8 +4988,8 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
         beta.contents->size[0] = loop_ub;
         emxEnsureCapacity_real_T(beta.contents, i);
         for (i = 0; i < loop_ub; i++) {
-          beta.contents->data[i] = yhatrob->data[(int)
-            selWithoutLastHarmonic->data[i] - 1];
+          beta.contents->data[i] = brob->data[(int)selWithoutLastHarmonic->
+            data[i] - 1];
         }
       } else {
         i = beta.contents->size[0];
@@ -4806,8 +4997,8 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
         emxEnsureCapacity_real_T(beta.contents, i);
         loop_ub = selWithoutLastHarmonic->size[1];
         for (i = 0; i < loop_ub; i++) {
-          beta.contents->data[i] = yhatrob->data[(int)
-            selWithoutLastHarmonic->data[i] - 1];
+          beta.contents->data[i] = brob->data[(int)selWithoutLastHarmonic->
+            data[i] - 1];
         }
       }
 
@@ -4824,23 +5015,23 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
           yhat.contents->data[i];
       }
 
-      i = b_y->size[0];
-      b_y->size[0] = betaini->size[0];
-      emxEnsureCapacity_real_T(b_y, i);
+      i = allnumscale2->size[0];
+      allnumscale2->size[0] = betaini->size[0];
+      emxEnsureCapacity_real_T(allnumscale2, i);
       nx = betaini->size[0];
       for (sizes_idx_1 = 0; sizes_idx_1 < nx; sizes_idx_1++) {
-        b_y->data[sizes_idx_1] = betaini->data[sizes_idx_1] * betaini->
-          data[sizes_idx_1];
+        allnumscale2->data[sizes_idx_1] = betaini->data[sizes_idx_1] *
+          betaini->data[sizes_idx_1];
       }
 
-      ncomb = blockedSummation(b_y, b_y->size[0]);
+      sworst = blockedSummation(allnumscale2, allnumscale2->size[0]);
     }
 
-    sworst = (double)bsb.contents->size[0] - p;
+    ncomb = (double)bsb.contents->size[0] - p;
     out->LastHarmonicPval.size[0] = 1;
     out->LastHarmonicPval.size[1] = 1;
-    out->LastHarmonicPval.data[0] = 1.0 - fcdf((ncomb - ij) / 2.0 / (ij / sworst),
-      sworst);
+    out->LastHarmonicPval.data[0] = 1.0 - fcdf((sworst - nselected) / 2.0 /
+      (nselected / ncomb), ncomb);
   } else if (seasonal.contents > 0.0) {
     /*  In presence of 6 harmonics, the last one is just made up of a single */
     /*  variable, therefore the p value is just the p value of the assocaited */
@@ -4851,30 +5042,30 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
       nseaso) + out->B->size[0] * 3) - 1];
   }
 
-  emxFree_real_T(&b_y);
+  emxFree_real_T(&b_yin);
   emxFree_int32_T(&ia);
   emxFree_real_T(&selWithoutLastHarmonic_tmp);
   emxFree_real_T(&selWithoutLastHarmonic);
   emxFree_real_T(&posvarampl);
-  emxFree_real_T(&Xseldum);
   emxFree_real_T(&betaini);
-  emxFree_real_T(&Xfinal);
   emxFree_real_T(&Cr);
+  emxFree_real_T(&b_C);
   emxFree_real_T(&bestyhat);
   emxFree_real_T(&bestnumscale2);
-  emxFree_real_T(&yhatrob);
+  emxFree_real_T(&RES);
+  emxFree_real_T(&WEIibestrdiv2);
   emxFree_real_T(&allnumscale2);
-  emxFreeStruct_captured_var1(&yin);
-  emxFreeStruct_captured_var1(&Seq);
-  emxFreeStruct_captured_var1(&Xtrend);
-  emxFreeStruct_captured_var1(&yhatseaso);
-  emxFreeStruct_captured_var1(&Xseaso);
-  emxFreeStruct_captured_var1(&X);
-  emxFreeStruct_captured_var1(&Xsel);
-  emxFreeStruct_captured_var1(&bsb);
-  emxFreeStruct_captured_var1(&Xlshift);
-  emxFreeStruct_captured_var1(&beta);
-  emxFreeStruct_captured_var1(&yhat);
+  emxFree_real_T(&brob);
+  emxFreeStruct_captured_var(&yin);
+  emxFreeStruct_captured_var(&Seq);
+  emxFreeStruct_captured_var(&Xtrend);
+  emxFreeStruct_captured_var(&Xseaso);
+  emxFreeStruct_captured_var(&X);
+  emxFreeStruct_captured_var(&Xsel);
+  emxFreeStruct_captured_var(&bsb);
+  emxFreeStruct_captured_var(&Xlshift);
+  emxFreeStruct_captured_var(&beta);
+  emxFreeStruct_captured_var(&yhat);
   if (lshiftYN.contents == 1.0) {
     varargin_22_data[0] = 1.0;
     varargin_22_data[1] = fabs(out->B->data[(out->B->size[0] + out->B->size[0] *
@@ -4889,6 +5080,11 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   }
 
   /*  check about the y global variable */
+  emxFreeStruct_captured_var(&yhatseaso);
+  emxFreeStruct_captured_var(&Xseasof);
+  emxFreeStruct_captured_var(&Xf);
+  emxFreeStruct_captured_var(&Seqf);
+  emxFreeStruct_captured_var(&Xlshiftf);
 }
 
 /* End of code generation (LTSts_wrapper.c) */

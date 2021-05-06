@@ -18,6 +18,7 @@
 #include "rt_nonfinite.h"
 #include "xgeqp3.h"
 #include "xnrm2.h"
+#include "xunormqr.h"
 #include "xzgetrf.h"
 #include <math.h>
 #include <string.h>
@@ -38,7 +39,117 @@ static int div_nde_s32_floor(int numerator, int denominator)
   return numerator / denominator + b_numerator;
 }
 
-void b_mldivide(const double A[27], const double B[9], double Y[3])
+double b_mldivide(const emxArray_real_T *A, const emxArray_real_T *B)
+{
+  emxArray_real_T *b_A;
+  emxArray_real_T *b_B;
+  double Y;
+  double atmp;
+  double beta1;
+  double tau_data;
+  double wj;
+  int i;
+  int knt;
+  int rankA;
+  emxInit_real_T(&b_A, 1);
+  emxInit_real_T(&b_B, 1);
+  if ((A->size[0] == 0) || (B->size[0] == 0)) {
+    Y = 0.0;
+  } else if (A->size[0] == 1) {
+    Y = B->data[0] / A->data[0];
+  } else {
+    i = b_A->size[0];
+    b_A->size[0] = A->size[0];
+    emxEnsureCapacity_real_T(b_A, i);
+    knt = A->size[0];
+    for (i = 0; i < knt; i++) {
+      b_A->data[i] = A->data[i];
+    }
+    atmp = b_A->data[0];
+    tau_data = 0.0;
+    i = A->size[0];
+    wj = c_xnrm2(A->size[0] - 1, b_A);
+    if (wj != 0.0) {
+      beta1 = rt_hypotd_snf(b_A->data[0], wj);
+      if (b_A->data[0] >= 0.0) {
+        beta1 = -beta1;
+      }
+      if (fabs(beta1) < 1.0020841800044864E-292) {
+        knt = -1;
+        do {
+          knt++;
+          for (rankA = 2; rankA <= i; rankA++) {
+            b_A->data[rankA - 1] *= 9.9792015476736E+291;
+          }
+          beta1 *= 9.9792015476736E+291;
+          atmp *= 9.9792015476736E+291;
+        } while (!(fabs(beta1) >= 1.0020841800044864E-292));
+        i = A->size[0];
+        beta1 = rt_hypotd_snf(atmp, c_xnrm2(A->size[0] - 1, b_A));
+        if (atmp >= 0.0) {
+          beta1 = -beta1;
+        }
+        tau_data = (beta1 - atmp) / beta1;
+        wj = 1.0 / (atmp - beta1);
+        for (rankA = 2; rankA <= i; rankA++) {
+          b_A->data[rankA - 1] *= wj;
+        }
+        for (rankA = 0; rankA <= knt; rankA++) {
+          beta1 *= 1.0020841800044864E-292;
+        }
+        atmp = beta1;
+      } else {
+        tau_data = (beta1 - b_A->data[0]) / beta1;
+        wj = 1.0 / (b_A->data[0] - beta1);
+        for (rankA = 2; rankA <= i; rankA++) {
+          b_A->data[rankA - 1] *= wj;
+        }
+        atmp = beta1;
+      }
+    }
+    b_A->data[0] = atmp;
+    rankA = 0;
+    wj = fabs(b_A->data[0]);
+    if (!(wj <= fmin(1.4901161193847656E-8,
+                     2.2204460492503131E-15 * (double)b_A->size[0]) *
+                    wj)) {
+      rankA = 1;
+    }
+    i = b_B->size[0];
+    b_B->size[0] = B->size[0];
+    emxEnsureCapacity_real_T(b_B, i);
+    knt = B->size[0];
+    for (i = 0; i < knt; i++) {
+      b_B->data[i] = B->data[i];
+    }
+    Y = 0.0;
+    knt = b_A->size[0];
+    if (tau_data != 0.0) {
+      wj = b_B->data[0];
+      for (i = 2; i <= knt; i++) {
+        wj += b_A->data[i - 1] * b_B->data[i - 1];
+      }
+      wj *= tau_data;
+      if (wj != 0.0) {
+        b_B->data[0] -= wj;
+        for (i = 2; i <= knt; i++) {
+          b_B->data[i - 1] -= b_A->data[i - 1] * wj;
+        }
+      }
+    }
+    for (i = 0; i < rankA; i++) {
+      Y = b_B->data[0];
+    }
+    for (knt = rankA; knt >= 1; knt--) {
+      Y /= b_A->data[0];
+    }
+  }
+  emxFree_real_T(&b_B);
+  emxFree_real_T(&b_A);
+  return Y;
+}
+
+void c_mldivide(const double A[27], const double B[9], double Y[3])
 {
   double b_A[27];
   double b_B[9];
@@ -294,40 +405,48 @@ void b_mldivide(const double A[27], const double B[9], double Y[3])
   }
 }
 
-void c_mldivide(const emxArray_real_T *A, emxArray_real_T *B)
+void mldivide(const emxArray_real_T *A, const emxArray_real_T *B,
+              emxArray_real_T *Y)
 {
   emxArray_int32_T *jpvt;
   emxArray_real_T *b_A;
   emxArray_real_T *b_B;
   emxArray_real_T *tau;
-  double wj;
+  double temp;
   int LDA;
   int b_i;
   int i;
-  int m;
-  int mn;
-  int rankA;
+  int k;
+  int kAcol;
+  int n;
   emxInit_real_T(&b_A, 2);
   emxInit_real_T(&tau, 1);
   emxInit_int32_T(&jpvt, 2);
   emxInit_real_T(&b_B, 1);
   if ((A->size[0] == 0) || (A->size[1] == 0) || (B->size[0] == 0)) {
-    i = B->size[0];
-    B->size[0] = A->size[1];
-    emxEnsureCapacity_real_T(B, i);
+    i = Y->size[0];
+    Y->size[0] = A->size[1];
+    emxEnsureCapacity_real_T(Y, i);
     LDA = A->size[1];
     for (i = 0; i < LDA; i++) {
-      B->data[i] = 0.0;
+      Y->data[i] = 0.0;
     }
   } else if (A->size[0] == A->size[1]) {
+    i = Y->size[0];
+    Y->size[0] = B->size[0];
+    emxEnsureCapacity_real_T(Y, i);
+    LDA = B->size[0];
+    for (i = 0; i < LDA; i++) {
+      Y->data[i] = B->data[i];
+    }
     LDA = A->size[0];
-    mn = A->size[1];
-    if (LDA < mn) {
-      mn = LDA;
+    n = A->size[1];
+    if (LDA < n) {
+      n = LDA;
     }
     LDA = B->size[0];
-    if (LDA < mn) {
-      mn = LDA;
+    if (LDA < n) {
+      n = LDA;
     }
     i = b_A->size[0] * b_A->size[1];
     b_A->size[0] = A->size[0];
@@ -337,32 +456,32 @@ void c_mldivide(const emxArray_real_T *A, emxArray_real_T *B)
     for (i = 0; i < LDA; i++) {
       b_A->data[i] = A->data[i];
     }
-    xzgetrf(mn, mn, b_A, A->size[0], jpvt, &LDA);
+    xzgetrf(n, n, b_A, A->size[0], jpvt, &LDA);
     LDA = b_A->size[0];
-    for (b_i = 0; b_i <= mn - 2; b_i++) {
+    for (b_i = 0; b_i <= n - 2; b_i++) {
       i = jpvt->data[b_i];
       if (i != b_i + 1) {
-        wj = B->data[b_i];
-        B->data[b_i] = B->data[i - 1];
-        B->data[i - 1] = wj;
+        temp = Y->data[b_i];
+        Y->data[b_i] = Y->data[i - 1];
+        Y->data[i - 1] = temp;
       }
     }
-    for (rankA = 0; rankA < mn; rankA++) {
-      m = LDA * rankA;
-      if (B->data[rankA] != 0.0) {
-        i = rankA + 2;
-        for (b_i = i; b_i <= mn; b_i++) {
-          B->data[b_i - 1] -= B->data[rankA] * b_A->data[(b_i + m) - 1];
+    for (k = 0; k < n; k++) {
+      kAcol = LDA * k;
+      if (Y->data[k] != 0.0) {
+        i = k + 2;
+        for (b_i = i; b_i <= n; b_i++) {
+          Y->data[b_i - 1] -= Y->data[k] * b_A->data[(b_i + kAcol) - 1];
         }
       }
     }
-    for (rankA = mn; rankA >= 1; rankA--) {
-      m = LDA * (rankA - 1);
-      wj = B->data[rankA - 1];
-      if (wj != 0.0) {
-        B->data[rankA - 1] = wj / b_A->data[(rankA + m) - 1];
-        for (b_i = 0; b_i <= rankA - 2; b_i++) {
-          B->data[b_i] -= B->data[rankA - 1] * b_A->data[b_i + m];
+    for (k = n; k >= 1; k--) {
+      kAcol = LDA * (k - 1);
+      temp = Y->data[k - 1];
+      if (temp != 0.0) {
+        Y->data[k - 1] = temp / b_A->data[(k + kAcol) - 1];
+        for (b_i = 0; b_i <= k - 2; b_i++) {
+          Y->data[b_i] -= Y->data[k - 1] * b_A->data[b_i + kAcol];
         }
       }
     }
@@ -376,7 +495,14 @@ void c_mldivide(const emxArray_real_T *A, emxArray_real_T *B)
       b_A->data[i] = A->data[i];
     }
     xgeqp3(b_A, tau, jpvt);
-    rankA = rankFromQR(b_A);
+    kAcol = rankFromQR(b_A);
+    i = Y->size[0];
+    Y->size[0] = b_A->size[1];
+    emxEnsureCapacity_real_T(Y, i);
+    LDA = b_A->size[1];
+    for (i = 0; i < LDA; i++) {
+      Y->data[i] = 0.0;
+    }
     i = b_B->size[0];
     b_B->size[0] = B->size[0];
     emxEnsureCapacity_real_T(b_B, i);
@@ -384,45 +510,16 @@ void c_mldivide(const emxArray_real_T *A, emxArray_real_T *B)
     for (i = 0; i < LDA; i++) {
       b_B->data[i] = B->data[i];
     }
-    i = B->size[0];
-    B->size[0] = b_A->size[1];
-    emxEnsureCapacity_real_T(B, i);
-    LDA = b_A->size[1];
-    for (i = 0; i < LDA; i++) {
-      B->data[i] = 0.0;
+    xunormqr(b_A, b_B, tau);
+    for (b_i = 0; b_i < kAcol; b_i++) {
+      Y->data[jpvt->data[b_i] - 1] = b_B->data[b_i];
     }
-    m = b_A->size[0];
-    LDA = b_A->size[0];
-    mn = b_A->size[1];
-    if (LDA < mn) {
-      mn = LDA;
-    }
-    for (LDA = 0; LDA < mn; LDA++) {
-      if (tau->data[LDA] != 0.0) {
-        wj = b_B->data[LDA];
-        i = LDA + 2;
-        for (b_i = i; b_i <= m; b_i++) {
-          wj += b_A->data[(b_i + b_A->size[0] * LDA) - 1] * b_B->data[b_i - 1];
-        }
-        wj *= tau->data[LDA];
-        if (wj != 0.0) {
-          b_B->data[LDA] -= wj;
-          for (b_i = i; b_i <= m; b_i++) {
-            b_B->data[b_i - 1] -=
-                b_A->data[(b_i + b_A->size[0] * LDA) - 1] * wj;
-          }
-        }
-      }
-    }
-    for (b_i = 0; b_i < rankA; b_i++) {
-      B->data[jpvt->data[b_i] - 1] = b_B->data[b_i];
-    }
-    for (LDA = rankA; LDA >= 1; LDA--) {
+    for (LDA = kAcol; LDA >= 1; LDA--) {
       i = jpvt->data[LDA - 1];
-      B->data[i - 1] /= b_A->data[(LDA + b_A->size[0] * (LDA - 1)) - 1];
+      Y->data[i - 1] /= b_A->data[(LDA + b_A->size[0] * (LDA - 1)) - 1];
       for (b_i = 0; b_i <= LDA - 2; b_i++) {
-        B->data[jpvt->data[b_i] - 1] -=
-            B->data[jpvt->data[LDA - 1] - 1] *
+        Y->data[jpvt->data[b_i] - 1] -=
+            Y->data[jpvt->data[LDA - 1] - 1] *
             b_A->data[b_i + b_A->size[0] * (LDA - 1)];
       }
     }
@@ -431,116 +528,6 @@ void c_mldivide(const emxArray_real_T *A, emxArray_real_T *B)
   emxFree_int32_T(&jpvt);
   emxFree_real_T(&tau);
   emxFree_real_T(&b_A);
-}
-
-double mldivide(const emxArray_real_T *A, const emxArray_real_T *B)
-{
-  emxArray_real_T *b_A;
-  emxArray_real_T *b_B;
-  double Y;
-  double atmp;
-  double beta1;
-  double tau_data;
-  double wj;
-  int i;
-  int knt;
-  int rankA;
-  emxInit_real_T(&b_A, 1);
-  emxInit_real_T(&b_B, 1);
-  if ((A->size[0] == 0) || (B->size[0] == 0)) {
-    Y = 0.0;
-  } else if (A->size[0] == 1) {
-    Y = B->data[0] / A->data[0];
-  } else {
-    i = b_A->size[0];
-    b_A->size[0] = A->size[0];
-    emxEnsureCapacity_real_T(b_A, i);
-    knt = A->size[0];
-    for (i = 0; i < knt; i++) {
-      b_A->data[i] = A->data[i];
-    }
-    atmp = b_A->data[0];
-    tau_data = 0.0;
-    i = A->size[0];
-    wj = c_xnrm2(A->size[0] - 1, b_A);
-    if (wj != 0.0) {
-      beta1 = rt_hypotd_snf(b_A->data[0], wj);
-      if (b_A->data[0] >= 0.0) {
-        beta1 = -beta1;
-      }
-      if (fabs(beta1) < 1.0020841800044864E-292) {
-        knt = -1;
-        do {
-          knt++;
-          for (rankA = 2; rankA <= i; rankA++) {
-            b_A->data[rankA - 1] *= 9.9792015476736E+291;
-          }
-          beta1 *= 9.9792015476736E+291;
-          atmp *= 9.9792015476736E+291;
-        } while (!(fabs(beta1) >= 1.0020841800044864E-292));
-        i = A->size[0];
-        beta1 = rt_hypotd_snf(atmp, c_xnrm2(A->size[0] - 1, b_A));
-        if (atmp >= 0.0) {
-          beta1 = -beta1;
-        }
-        tau_data = (beta1 - atmp) / beta1;
-        wj = 1.0 / (atmp - beta1);
-        for (rankA = 2; rankA <= i; rankA++) {
-          b_A->data[rankA - 1] *= wj;
-        }
-        for (rankA = 0; rankA <= knt; rankA++) {
-          beta1 *= 1.0020841800044864E-292;
-        }
-        atmp = beta1;
-      } else {
-        tau_data = (beta1 - b_A->data[0]) / beta1;
-        wj = 1.0 / (b_A->data[0] - beta1);
-        for (rankA = 2; rankA <= i; rankA++) {
-          b_A->data[rankA - 1] *= wj;
-        }
-        atmp = beta1;
-      }
-    }
-    b_A->data[0] = atmp;
-    rankA = 0;
-    wj = fabs(b_A->data[0]);
-    if (!(wj <= fmin(1.4901161193847656E-8,
-                     2.2204460492503131E-15 * (double)b_A->size[0]) *
-                    wj)) {
-      rankA = 1;
-    }
-    i = b_B->size[0];
-    b_B->size[0] = B->size[0];
-    emxEnsureCapacity_real_T(b_B, i);
-    knt = B->size[0];
-    for (i = 0; i < knt; i++) {
-      b_B->data[i] = B->data[i];
-    }
-    Y = 0.0;
-    knt = b_A->size[0];
-    if (tau_data != 0.0) {
-      wj = b_B->data[0];
-      for (i = 2; i <= knt; i++) {
-        wj += b_A->data[i - 1] * b_B->data[i - 1];
-      }
-      wj *= tau_data;
-      if (wj != 0.0) {
-        b_B->data[0] -= wj;
-        for (i = 2; i <= knt; i++) {
-          b_B->data[i - 1] -= b_A->data[i - 1] * wj;
-        }
-      }
-    }
-    for (i = 0; i < rankA; i++) {
-      Y = b_B->data[0];
-    }
-    for (knt = rankA; knt >= 1; knt--) {
-      Y /= b_A->data[0];
-    }
-  }
-  emxFree_real_T(&b_B);
-  emxFree_real_T(&b_A);
-  return Y;
 }
 
 /* End of code generation (mldivide.c) */

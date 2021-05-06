@@ -51,6 +51,20 @@ enum c_matlab_internal_coder_tabular
 typedef enum c_matlab_internal_coder_tabular c_matlab_internal_coder_tabular;
 #endif /* typedef_c_matlab_internal_coder_tabular */
 
+#ifndef typedef_captured_var
+#define typedef_captured_var
+typedef struct {
+  double contents;
+} captured_var;
+#endif /* typedef_captured_var */
+
+#ifndef typedef_b_captured_var
+#define typedef_b_captured_var
+typedef struct {
+  bool contents;
+} b_captured_var;
+#endif /* typedef_b_captured_var */
+
 #ifndef typedef_d_matlab_internal_coder_tabular
 #define typedef_d_matlab_internal_coder_tabular
 typedef struct {
@@ -210,8 +224,8 @@ typedef struct {
 } struct_FSR_T;
 #endif /* typedef_struct_FSR_T */
 
-#ifndef typedef_struct_LXSlmsstruct_T
-#define typedef_struct_LXSlmsstruct_T
+#ifndef typedef_struct_LXS_T
+#define typedef_struct_LXS_T
 typedef struct {
   emxArray_boolean_T *weights;
   bool rew;
@@ -226,8 +240,8 @@ typedef struct {
   emxArray_real_T *X;
   emxArray_real_T *y;
   char class[3];
-} struct_LXSlmsstruct_T;
-#endif /* typedef_struct_LXSlmsstruct_T */
+} struct_LXS_T;
+#endif /* typedef_struct_LXS_T */
 
 #ifndef typedef_struct_T
 #define typedef_struct_T
@@ -357,56 +371,70 @@ typedef struct {
 #ifndef typedef_c_captured_var
 #define typedef_c_captured_var
 typedef struct {
-  emxArray_boolean_T *contents;
+  emxArray_real_T *contents;
 } c_captured_var;
 #endif /* typedef_c_captured_var */
 
 #ifndef typedef_d_captured_var
 #define typedef_d_captured_var
 typedef struct {
-  emxArray_real_T *contents;
+  emxArray_boolean_T *contents;
 } d_captured_var;
 #endif /* typedef_d_captured_var */
 
 #ifndef typedef_b_struct_T
 #define typedef_b_struct_T
 typedef struct {
+  emxArray_real_T *lower;
+  emxArray_real_T *upper;
+} b_struct_T;
+#endif /* typedef_b_struct_T */
+
+#ifndef typedef_c_struct_T
+#define typedef_c_struct_T
+typedef struct {
   emxArray_real_T *betarw;
   emxArray_real_T *yhat;
   emxArray_boolean_T *weights;
   double exiflag;
   double numscale2rw;
-} b_struct_T;
-#endif /* typedef_b_struct_T */
+} c_struct_T;
+#endif /* typedef_c_struct_T */
 
-#ifndef typedef_struct_LXSlmsscalar_T
-#define typedef_struct_LXSlmsscalar_T
+#ifndef typedef_d_struct_T
+#define typedef_d_struct_T
 typedef struct {
-  emxArray_boolean_T *weights;
-  bool rew;
-  emxArray_real_T *beta;
-  double scale;
-  emxArray_real_T *residuals;
-  emxArray_real_T *bs;
-  emxArray_real_T *outliers;
-  double conflev;
-  double h;
-  double singsub;
-  emxArray_real_T *X;
-  emxArray_real_T *y;
-  char class[3];
-} struct_LXSlmsscalar_T;
-#endif /* typedef_struct_LXSlmsscalar_T */
+  captured_var *trend;
+  captured_var *seasonal;
+  captured_var *s;
+  c_captured_var *yhatseaso;
+  c_captured_var *Xseasof;
+  captured_var *varampl;
+  c_captured_var *Seqf;
+  captured_var *nexpl;
+  b_captured_var *isemptyX;
+  c_captured_var *Xf;
+  captured_var *lshiftYN;
+  c_captured_var *Xlshiftf;
+} d_struct_T;
+#endif /* typedef_d_struct_T */
 
-#ifndef typedef_struct4_T
-#define typedef_struct4_T
+#ifndef typedef_nested_function
+#define typedef_nested_function
+typedef struct {
+  d_struct_T workspace;
+} nested_function;
+#endif /* typedef_nested_function */
+
+#ifndef typedef_struct_addt_T
+#define typedef_struct_addt_T
 typedef struct {
   emxArray_real_T_1 b;
   emxArray_real_T_1 S2add;
   emxArray_real_T_1x1 Tadd;
   emxArray_real_T_1x1 pval;
-} struct4_T;
-#endif /* typedef_struct4_T */
+} struct_addt_T;
+#endif /* typedef_struct_addt_T */
 
 #ifndef struct_emxArray_char_T_1x0
 #define struct_emxArray_char_T_1x0
@@ -432,6 +460,58 @@ typedef struct {
   emxArray_char_T_1x0 Description;
 } struct3_T;
 #endif /* typedef_struct3_T */
+
+#ifndef typedef_f_struct_T
+#define typedef_f_struct_T
+typedef struct {
+  nested_function fun;
+  emxArray_real_T *xdata;
+  emxArray_real_T *ydata;
+} f_struct_T;
+#endif /* typedef_f_struct_T */
+
+#ifndef typedef_anonymous_function
+#define typedef_anonymous_function
+typedef struct {
+  f_struct_T workspace;
+} anonymous_function;
+#endif /* typedef_anonymous_function */
+
+#ifndef typedef_g_struct_T
+#define typedef_g_struct_T
+typedef struct {
+  anonymous_function fun;
+} g_struct_T;
+#endif /* typedef_g_struct_T */
+
+#ifndef typedef_b_anonymous_function
+#define typedef_b_anonymous_function
+typedef struct {
+  g_struct_T workspace;
+} b_anonymous_function;
+#endif /* typedef_b_anonymous_function */
+
+#ifndef typedef_h_struct_T
+#define typedef_h_struct_T
+typedef struct {
+  b_anonymous_function nonlin;
+  double f_1;
+  emxArray_real_T *cEq_1;
+  double f_2;
+  emxArray_real_T *cEq_2;
+  int nVar;
+  int mIneq;
+  int mEq;
+  int numEvals;
+  bool SpecifyObjectiveGradient;
+  bool SpecifyConstraintGradient;
+  bool isEmptyNonlcon;
+  emxArray_boolean_T *hasLB;
+  emxArray_boolean_T *hasUB;
+  bool hasBounds;
+  int FiniteDifferenceType;
+} h_struct_T;
+#endif /* typedef_h_struct_T */
 
 #ifndef typedef_f_matlab_internal_coder_tabular
 #define typedef_f_matlab_internal_coder_tabular

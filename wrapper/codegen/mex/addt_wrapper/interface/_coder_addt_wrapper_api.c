@@ -35,7 +35,7 @@ static const mxArray *c_emlrt_marshallOut(const real_T u_data[],
 static void e_emlrt_marshallIn(const emlrtStack *sp, const mxArray *y,
                                const char_T *identifier, emxArray_real_T *b_y);
 
-static const mxArray *emlrt_marshallOut(const struct0_T u);
+static const mxArray *emlrt_marshallOut(const struct_addt_T u);
 
 static void f_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
                                const emlrtMsgIdentifier *parentId,
@@ -141,7 +141,7 @@ static void e_emlrt_marshallIn(const emlrtStack *sp, const mxArray *y,
   emlrtDestroyArray(&y);
 }
 
-static const mxArray *emlrt_marshallOut(const struct0_T u)
+static const mxArray *emlrt_marshallOut(const struct_addt_T u)
 {
   static const char_T *sv[4] = {"b", "S2add", "Tadd", "pval"};
   const mxArray *y;
@@ -304,7 +304,7 @@ void addt_wrapper_api(const mxArray *const prhs[6], const mxArray **plhs)
   emxArray_real_T *X;
   emxArray_real_T *w;
   emxArray_real_T *y;
-  struct0_T out;
+  struct_addt_T out;
   real_T *la_data;
   int32_T la_size[2];
   boolean_T intercept;

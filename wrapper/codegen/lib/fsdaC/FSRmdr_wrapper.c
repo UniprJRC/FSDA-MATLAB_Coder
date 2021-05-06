@@ -1425,14 +1425,7 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
         guard2 = false;
         if (Ra) {
           /*  rank is ok */
-          i = blast->size[0];
-          blast->size[0] = yb->size[0];
-          emxEnsureCapacity_real_T(blast, i);
-          loop_ub = yb->size[0];
-          for (i = 0; i < loop_ub; i++) {
-            blast->data[i] = yb->data[i];
-          }
-          c_mldivide(Xb, blast);
+          mldivide(Xb, yb, blast);
           mtimes(Xb, blast, resBSB);
           i = resBSB->size[0];
           resBSB->size[0] = yb->size[0];

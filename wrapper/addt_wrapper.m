@@ -36,4 +36,6 @@ assert(all(size(la) <= [1 1]));
 assert(isa(nocheck, 'logical'));
 
 [out] = addt(y,X,w,'intercept',intercept,'la',la,'nocheck',nocheck);
+
+coder.cstructname(out,'struct_addt_T');
 end

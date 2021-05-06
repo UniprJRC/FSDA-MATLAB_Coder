@@ -40,7 +40,7 @@
 void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
          double varargin_4, double varargin_6, bool varargin_10,
          const double varargin_12_data[], const int varargin_12_size[2],
-         struct_LXSlmsstruct_T *out)
+         struct_LXS_T *out)
 {
   emxArray_boolean_T *weights;
   emxArray_char_T_1x310 b_X;
@@ -842,13 +842,13 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
       /*  posteriori control on vector b */
       /*  Compute the vector of coefficients using matrice Xb and yb */
       aoffset = C->size[1];
-      c_i = b->size[0];
-      b->size[0] = C->size[1];
-      emxEnsureCapacity_real_T(b, c_i);
+      c_i = r2->size[0];
+      r2->size[0] = C->size[1];
+      emxEnsureCapacity_real_T(r2, c_i);
       for (c_i = 0; c_i < aoffset; c_i++) {
-        b->data[c_i] = y->data[(int)C->data[b_i + C->size[0] * c_i] - 1];
+        r2->data[c_i] = y->data[(int)C->data[b_i + C->size[0] * c_i] - 1];
       }
-      c_mldivide(Xb, b);
+      mldivide(Xb, r2, b);
     }
     if ((!rtIsNaN(b->data[0])) && (!rtIsInf(b->data[0]))) {
       /*  Residuals for all observations using b based on subset */
@@ -1368,12 +1368,6 @@ void b_IRWLSreg(const emxArray_real_T *y, const emxArray_real_T *X,
     emxEnsureCapacity_int32_T(i_r2s, i);
     /*  new coefficients based on units with smallest h squared */
     /*  residuals */
-    i = outIRWLS_betarw->size[0];
-    outIRWLS_betarw->size[0] = (int)h;
-    emxEnsureCapacity_real_T(outIRWLS_betarw, i);
-    for (i = 0; i < loop_ub_tmp; i++) {
-      outIRWLS_betarw->data[i] = y->data[i_r2s->data[i] - 1];
-    }
     aoffset = X->size[1];
     i = b_X->size[0] * b_X->size[1];
     b_X->size[0] = (int)h;
@@ -1385,7 +1379,13 @@ void b_IRWLSreg(const emxArray_real_T *y, const emxArray_real_T *X,
             X->data[(i_r2s->data[mc] + X->size[0] * i) - 1];
       }
     }
-    c_mldivide(b_X, outIRWLS_betarw);
+    i = r2->size[0];
+    r2->size[0] = (int)h;
+    emxEnsureCapacity_real_T(r2, i);
+    for (i = 0; i < loop_ub_tmp; i++) {
+      r2->data[i] = y->data[i_r2s->data[i] - 1];
+    }
+    mldivide(b_X, r2, outIRWLS_betarw);
     /*  exit from the loop if the new beta has singular values. In such a */
     /*  case, any intermediate estimate is not reliable and we can just */
     /*  keep the initialbeta and initial scale. */
@@ -1528,7 +1528,7 @@ void b_IRWLSreg(const emxArray_real_T *y, const emxArray_real_T *X,
 void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
            const emxArray_real_T *varargin_2, double varargin_4,
            const emxArray_real_T *varargin_6, bool varargin_10,
-           struct_LXSlmsstruct_T *out)
+           struct_LXS_T *out)
 {
   emxArray_boolean_T *weights;
   emxArray_boolean_T *x;
@@ -2311,13 +2311,13 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
     /*  posteriori control on vector b */
     /*  Compute the vector of coefficients using matrice Xb and yb */
     aoffset = nsamp->size[1];
-    c_i = b->size[0];
-    b->size[0] = nsamp->size[1];
-    emxEnsureCapacity_real_T(b, c_i);
+    c_i = r2->size[0];
+    r2->size[0] = nsamp->size[1];
+    emxEnsureCapacity_real_T(r2, c_i);
     for (c_i = 0; c_i < aoffset; c_i++) {
-      b->data[c_i] = y->data[(int)nsamp->data[b_i + nsamp->size[0] * c_i] - 1];
+      r2->data[c_i] = y->data[(int)nsamp->data[b_i + nsamp->size[0] * c_i] - 1];
     }
-    c_mldivide(Xb, b);
+    mldivide(Xb, r2, b);
     if ((!rtIsNaN(b->data[0])) && (!rtIsInf(b->data[0]))) {
       /*  Residuals for all observations using b based on subset */
       /*  Squared residuals for all the observations */

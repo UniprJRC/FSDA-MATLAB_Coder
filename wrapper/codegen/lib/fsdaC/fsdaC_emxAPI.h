@@ -96,9 +96,7 @@ extern void emxDestroy_struct_FSRfan_T(struct_FSRfan_T emxArray);
 
 extern void emxDestroy_struct_LTSts_T(struct_LTSts_T emxArray);
 
-extern void emxDestroy_struct_LXSlmsscalar_T(struct_LXSlmsscalar_T emxArray);
-
-extern void emxDestroy_struct_LXSlmsstruct_T(struct_LXSlmsstruct_T emxArray);
+extern void emxDestroy_struct_LXS_T(struct_LXS_T emxArray);
 
 extern void emxInitArray_char_T(emxArray_char_T **pEmxArray, int numDimensions);
 
@@ -117,9 +115,7 @@ extern void emxInit_struct_FSRfan_T(struct_FSRfan_T *pStruct);
 
 extern void emxInit_struct_LTSts_T(struct_LTSts_T *pStruct);
 
-extern void emxInit_struct_LXSlmsscalar_T(struct_LXSlmsscalar_T *pStruct);
-
-extern void emxInit_struct_LXSlmsstruct_T(struct_LXSlmsstruct_T *pStruct);
+extern void emxInit_struct_LXS_T(struct_LXS_T *pStruct);
 
 #ifdef __cplusplus
 }

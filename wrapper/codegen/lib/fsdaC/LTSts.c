@@ -16,7 +16,6 @@
 #include "bsxfun.h"
 #include "colon.h"
 #include "fsdaC_emxutil.h"
-#include "fsdaC_internal_types.h"
 #include "fsdaC_rtwutil.h"
 #include "fsdaC_types.h"
 #include "mldivide.h"
@@ -29,52 +28,52 @@
 /* Function Declarations */
 static void
 ALSbsxfun(const captured_var *reftolALS, const captured_var *refstepsALS,
-          const d_captured_var *indlinsc, const d_captured_var *Xseaso,
-          const d_captured_var *bsb, const b_captured_var *isemptyX,
-          const captured_var *lshiftYN, const d_captured_var *Xtrend,
-          const d_captured_var *Seq, const captured_var *varampl,
-          const d_captured_var *Xlshift, const d_captured_var *X,
-          const d_captured_var *yin, const captured_var *trend,
-          const captured_var *nexpl, const d_captured_var *otherind,
+          const c_captured_var *indlinsc, const c_captured_var *Xseaso,
+          const c_captured_var *bsb, const b_captured_var *isemptyX,
+          const captured_var *lshiftYN, const c_captured_var *Xtrend,
+          const c_captured_var *Seq, const captured_var *varampl,
+          const c_captured_var *Xlshift, const c_captured_var *X,
+          const c_captured_var *yin, const captured_var *trend,
+          const captured_var *nexpl, const c_captured_var *otherind,
           const emxArray_real_T *beta0, emxArray_real_T *newbeta,
           double *exitflag);
 
-static void b_ALS(const d_captured_var *Seq, const d_captured_var *bsb,
-                  const d_captured_var *Xseaso, const d_captured_var *Xtrend,
-                  const d_captured_var *yin, const captured_var *trend,
+static void b_ALS(const c_captured_var *Seq, const c_captured_var *bsb,
+                  const c_captured_var *Xseaso, const c_captured_var *Xtrend,
+                  const c_captured_var *yin, const captured_var *trend,
                   const captured_var *nexpl, const captured_var *varampl,
                   const b_captured_var *isemptyX, const captured_var *lshiftYN,
-                  const d_captured_var *Xlshift, const d_captured_var *X,
+                  const c_captured_var *Xlshift, const c_captured_var *X,
                   const captured_var *reftolALS,
                   const captured_var *refstepsALS,
-                  const d_captured_var *indlinsc,
-                  const d_captured_var *otherind, const emxArray_real_T *beta0,
+                  const c_captured_var *indlinsc,
+                  const c_captured_var *otherind, const emxArray_real_T *beta0,
                   emxArray_real_T *newbeta, double *exitflag);
 
 /* Function Definitions */
 static void
 ALSbsxfun(const captured_var *reftolALS, const captured_var *refstepsALS,
-          const d_captured_var *indlinsc, const d_captured_var *Xseaso,
-          const d_captured_var *bsb, const b_captured_var *isemptyX,
-          const captured_var *lshiftYN, const d_captured_var *Xtrend,
-          const d_captured_var *Seq, const captured_var *varampl,
-          const d_captured_var *Xlshift, const d_captured_var *X,
-          const d_captured_var *yin, const captured_var *trend,
-          const captured_var *nexpl, const d_captured_var *otherind,
+          const c_captured_var *indlinsc, const c_captured_var *Xseaso,
+          const c_captured_var *bsb, const b_captured_var *isemptyX,
+          const captured_var *lshiftYN, const c_captured_var *Xtrend,
+          const c_captured_var *Seq, const captured_var *varampl,
+          const c_captured_var *Xlshift, const c_captured_var *X,
+          const c_captured_var *yin, const captured_var *trend,
+          const captured_var *nexpl, const c_captured_var *otherind,
           const emxArray_real_T *beta0, emxArray_real_T *newbeta,
           double *exitflag)
 {
-  emxArray_boolean_T *r2;
-  emxArray_int32_T *r;
+  emxArray_boolean_T *r3;
+  emxArray_int32_T *r1;
   emxArray_real_T *a;
   emxArray_real_T *at;
   emxArray_real_T *b0145;
-  emxArray_real_T *b2378;
   emxArray_real_T *b_Seq;
   emxArray_real_T *b_a;
   emxArray_real_T *b_b0145;
   emxArray_real_T *oldbeta;
-  emxArray_real_T *r1;
+  emxArray_real_T *r;
+  emxArray_real_T *r2;
   emxArray_real_T *tr_expl_nls_lshift;
   emxArray_real_T *varargin_1;
   emxArray_real_T *varargin_2;
@@ -115,19 +114,19 @@ ALSbsxfun(const captured_var *reftolALS, const captured_var *refstepsALS,
   /*  exitflag = flag which informs about convergence. exitflag =0 */
   /*  implies normal convergence, else no convergence has been obtained */
   b_exitflag = 0;
-  emxInit_real_T(&b2378, 1);
   emxInit_real_T(&at, 1);
   emxInit_real_T(&tr_expl_nls_lshift, 2);
   emxInit_real_T(&b0145, 1);
   emxInit_real_T(&yhatnlseaso, 1);
-  emxInit_int32_T(&r, 2);
+  emxInit_real_T(&r, 1);
+  emxInit_int32_T(&r1, 2);
   emxInit_real_T(&a, 2);
   emxInit_real_T(&varargin_1, 2);
   emxInit_real_T(&varargin_2, 2);
   emxInit_real_T(&varargin_3, 2);
   emxInit_real_T(&b_a, 1);
-  emxInit_real_T(&r1, 1);
-  emxInit_boolean_T(&r2, 1);
+  emxInit_real_T(&r2, 2);
+  emxInit_boolean_T(&r3, 1);
   emxInit_real_T(&b_Seq, 2);
   emxInit_real_T(&b_b0145, 2);
   exitg1 = false;
@@ -402,14 +401,14 @@ ALSbsxfun(const captured_var *reftolALS, const captured_var *refstepsALS,
                                   1];
         }
       }
-      c_bsxfun(at, b_Seq, a);
+      c_bsxfun(at, b_Seq, r2);
       i = varargin_3->size[0] * varargin_3->size[1];
-      varargin_3->size[0] = a->size[0];
-      varargin_3->size[1] = a->size[1];
+      varargin_3->size[0] = r2->size[0];
+      varargin_3->size[1] = r2->size[1];
       emxEnsureCapacity_real_T(varargin_3, i);
-      loop_ub = a->size[0] * a->size[1];
+      loop_ub = r2->size[0] * r2->size[1];
       for (i = 0; i < loop_ub; i++) {
-        varargin_3->data[i] = a->data[i];
+        varargin_3->data[i] = r2->data[i];
       }
       i = yhatnlseaso->size[0];
       yhatnlseaso->size[0] = bsb->contents->size[0];
@@ -610,18 +609,18 @@ ALSbsxfun(const captured_var *reftolALS, const captured_var *refstepsALS,
     }
     /*  b0145 = coefficients of intercept trend + expl var + non */
     /*  linear part of seasonal component + level shift */
-    i = b0145->size[0];
-    b0145->size[0] = bsb->contents->size[0];
-    emxEnsureCapacity_real_T(b0145, i);
+    i = r->size[0];
+    r->size[0] = bsb->contents->size[0];
+    emxEnsureCapacity_real_T(r, i);
     loop_ub = bsb->contents->size[0];
     for (i = 0; i < loop_ub; i++) {
-      b0145->data[i] = yin->contents->data[(int)bsb->contents->data[i] - 1];
+      r->data[i] = yin->contents->data[(int)bsb->contents->data[i] - 1];
     }
-    loop_ub = b0145->size[0];
+    loop_ub = r->size[0];
     for (i = 0; i < loop_ub; i++) {
-      b0145->data[i] -= at->data[i];
+      r->data[i] -= at->data[i];
     }
-    c_mldivide(tr_expl_nls_lshift, b0145);
+    mldivide(tr_expl_nls_lshift, r, b0145);
     /*  Now find new coefficients of linear part of seasonal */
     /*  component in the regression of y-trend-expl-lsihft versus */
     /*  vector which contains non linear part of seasonal component */
@@ -674,10 +673,10 @@ ALSbsxfun(const captured_var *reftolALS, const captured_var *refstepsALS,
     for (i = 0; i < loop_ub; i++) {
       b_b0145->data[i] = b0145->data[i2 + i];
     }
-    mtimes(a, b_b0145, r1);
+    mtimes(a, b_b0145, r);
     loop_ub = yhatnlseaso->size[0];
     for (i = 0; i < loop_ub; i++) {
-      yhatnlseaso->data[i] += r1->data[i];
+      yhatnlseaso->data[i] += r->data[i];
     }
     if (isemptyX->contents) {
       if (lshiftYN->contents == 1.0) {
@@ -687,12 +686,12 @@ ALSbsxfun(const captured_var *reftolALS, const captured_var *refstepsALS,
         } else {
           loop_ub = (int)betadiff;
         }
-        i = b2378->size[0];
-        b2378->size[0] = bsb->contents->size[0];
-        emxEnsureCapacity_real_T(b2378, i);
+        i = r->size[0];
+        r->size[0] = bsb->contents->size[0];
+        emxEnsureCapacity_real_T(r, i);
         input_sizes_idx_1 = bsb->contents->size[0];
         for (i = 0; i < input_sizes_idx_1; i++) {
-          b2378->data[i] = yin->contents->data[(int)bsb->contents->data[i] - 1];
+          r->data[i] = yin->contents->data[(int)bsb->contents->data[i] - 1];
         }
         input_sizes_idx_1 = Xtrend->contents->size[1];
         i = a->size[0] * a->size[1];
@@ -737,14 +736,14 @@ ALSbsxfun(const captured_var *reftolALS, const captured_var *refstepsALS,
         for (i = 0; i < loop_ub; i++) {
           b_b0145->data[i] = b0145->data[i];
         }
-        mtimes(a, b_b0145, r1);
-        loop_ub = b2378->size[0];
+        mtimes(a, b_b0145, at);
+        loop_ub = r->size[0];
         for (i = 0; i < loop_ub; i++) {
-          b2378->data[i] = (b2378->data[i] - r1->data[i]) -
-                           b_a->data[i] * b0145->data[b0145->size[0] - 1];
+          r->data[i] = (r->data[i] - at->data[i]) -
+                       b_a->data[i] * b0145->data[b0145->size[0] - 1];
         }
-        c_bsxfun(yhatnlseaso, b_Seq, a);
-        c_mldivide(a, b2378);
+        c_bsxfun(yhatnlseaso, b_Seq, r2);
+        mldivide(r2, r, yhatnlseaso);
       } else {
         betadiff = trend->contents + 1.0;
         if (1.0 > betadiff) {
@@ -752,12 +751,12 @@ ALSbsxfun(const captured_var *reftolALS, const captured_var *refstepsALS,
         } else {
           loop_ub = (int)betadiff;
         }
-        i = b2378->size[0];
-        b2378->size[0] = bsb->contents->size[0];
-        emxEnsureCapacity_real_T(b2378, i);
+        i = r->size[0];
+        r->size[0] = bsb->contents->size[0];
+        emxEnsureCapacity_real_T(r, i);
         input_sizes_idx_1 = bsb->contents->size[0];
         for (i = 0; i < input_sizes_idx_1; i++) {
-          b2378->data[i] = yin->contents->data[(int)bsb->contents->data[i] - 1];
+          r->data[i] = yin->contents->data[(int)bsb->contents->data[i] - 1];
         }
         input_sizes_idx_1 = Xtrend->contents->size[1];
         i = a->size[0] * a->size[1];
@@ -794,13 +793,13 @@ ALSbsxfun(const captured_var *reftolALS, const captured_var *refstepsALS,
         for (i = 0; i < loop_ub; i++) {
           b_b0145->data[i] = b0145->data[i];
         }
-        mtimes(a, b_b0145, r1);
-        loop_ub = b2378->size[0];
+        mtimes(a, b_b0145, at);
+        loop_ub = r->size[0];
         for (i = 0; i < loop_ub; i++) {
-          b2378->data[i] -= r1->data[i];
+          r->data[i] -= at->data[i];
         }
-        c_bsxfun(yhatnlseaso, b_Seq, a);
-        c_mldivide(a, b2378);
+        c_bsxfun(yhatnlseaso, b_Seq, r2);
+        mldivide(r2, r, yhatnlseaso);
       }
     } else if (lshiftYN->contents == 1.0) {
       betadiff = trend->contents + 1.0;
@@ -809,12 +808,12 @@ ALSbsxfun(const captured_var *reftolALS, const captured_var *refstepsALS,
       } else {
         loop_ub = (int)betadiff;
       }
-      i = b2378->size[0];
-      b2378->size[0] = bsb->contents->size[0];
-      emxEnsureCapacity_real_T(b2378, i);
+      i = r->size[0];
+      r->size[0] = bsb->contents->size[0];
+      emxEnsureCapacity_real_T(r, i);
       input_sizes_idx_1 = bsb->contents->size[0];
       for (i = 0; i < input_sizes_idx_1; i++) {
-        b2378->data[i] = yin->contents->data[(int)bsb->contents->data[i] - 1];
+        r->data[i] = yin->contents->data[(int)bsb->contents->data[i] - 1];
       }
       input_sizes_idx_1 = Xtrend->contents->size[1];
       i = a->size[0] * a->size[1];
@@ -879,6 +878,7 @@ ALSbsxfun(const captured_var *reftolALS, const captured_var *refstepsALS,
                          1];
         }
       }
+      c_bsxfun(yhatnlseaso, b_Seq, r2);
       i2 = b_b0145->size[0] * b_b0145->size[1];
       b_b0145->size[0] = 1;
       b_b0145->size[1] = loop_ub;
@@ -886,7 +886,7 @@ ALSbsxfun(const captured_var *reftolALS, const captured_var *refstepsALS,
       for (i2 = 0; i2 < loop_ub; i2++) {
         b_b0145->data[i2] = b0145->data[i2];
       }
-      mtimes(a, b_b0145, r1);
+      mtimes(a, b_b0145, at);
       i2 = b_b0145->size[0] * b_b0145->size[1];
       b_b0145->size[0] = 1;
       loop_ub = i1 - i;
@@ -895,14 +895,13 @@ ALSbsxfun(const captured_var *reftolALS, const captured_var *refstepsALS,
       for (i1 = 0; i1 < loop_ub; i1++) {
         b_b0145->data[i1] = b0145->data[i + i1];
       }
-      mtimes(tr_expl_nls_lshift, b_b0145, at);
-      loop_ub = b2378->size[0];
+      mtimes(tr_expl_nls_lshift, b_b0145, yhatnlseaso);
+      loop_ub = r->size[0];
       for (i = 0; i < loop_ub; i++) {
-        b2378->data[i] = ((b2378->data[i] - r1->data[i]) - at->data[i]) -
-                         b_a->data[i] * b0145->data[b0145->size[0] - 1];
+        r->data[i] = ((r->data[i] - at->data[i]) - yhatnlseaso->data[i]) -
+                     b_a->data[i] * b0145->data[b0145->size[0] - 1];
       }
-      c_bsxfun(yhatnlseaso, b_Seq, a);
-      c_mldivide(a, b2378);
+      mldivide(r2, r, yhatnlseaso);
     } else {
       betadiff = trend->contents + 1.0;
       if (1.0 > betadiff) {
@@ -910,12 +909,12 @@ ALSbsxfun(const captured_var *reftolALS, const captured_var *refstepsALS,
       } else {
         loop_ub = (int)betadiff;
       }
-      i = b2378->size[0];
-      b2378->size[0] = bsb->contents->size[0];
-      emxEnsureCapacity_real_T(b2378, i);
+      i = r->size[0];
+      r->size[0] = bsb->contents->size[0];
+      emxEnsureCapacity_real_T(r, i);
       input_sizes_idx_1 = bsb->contents->size[0];
       for (i = 0; i < input_sizes_idx_1; i++) {
-        b2378->data[i] = yin->contents->data[(int)bsb->contents->data[i] - 1];
+        r->data[i] = yin->contents->data[(int)bsb->contents->data[i] - 1];
       }
       input_sizes_idx_1 = Xtrend->contents->size[1];
       i = a->size[0] * a->size[1];
@@ -972,6 +971,7 @@ ALSbsxfun(const captured_var *reftolALS, const captured_var *refstepsALS,
                          1];
         }
       }
+      c_bsxfun(yhatnlseaso, b_Seq, r2);
       i2 = b_b0145->size[0] * b_b0145->size[1];
       b_b0145->size[0] = 1;
       b_b0145->size[1] = loop_ub;
@@ -979,7 +979,7 @@ ALSbsxfun(const captured_var *reftolALS, const captured_var *refstepsALS,
       for (i2 = 0; i2 < loop_ub; i2++) {
         b_b0145->data[i2] = b0145->data[i2];
       }
-      mtimes(a, b_b0145, r1);
+      mtimes(a, b_b0145, at);
       i2 = b_b0145->size[0] * b_b0145->size[1];
       b_b0145->size[0] = 1;
       loop_ub = i1 - i;
@@ -988,37 +988,36 @@ ALSbsxfun(const captured_var *reftolALS, const captured_var *refstepsALS,
       for (i1 = 0; i1 < loop_ub; i1++) {
         b_b0145->data[i1] = b0145->data[i + i1];
       }
-      mtimes(tr_expl_nls_lshift, b_b0145, at);
-      loop_ub = b2378->size[0];
+      mtimes(tr_expl_nls_lshift, b_b0145, yhatnlseaso);
+      loop_ub = r->size[0];
       for (i = 0; i < loop_ub; i++) {
-        b2378->data[i] = (b2378->data[i] - r1->data[i]) - at->data[i];
+        r->data[i] = (r->data[i] - at->data[i]) - yhatnlseaso->data[i];
       }
-      c_bsxfun(yhatnlseaso, b_Seq, a);
-      c_mldivide(a, b2378);
+      mldivide(r2, r, yhatnlseaso);
     }
-    i = r->size[0] * r->size[1];
-    r->size[0] = 1;
-    r->size[1] = indlinsc->contents->size[1];
-    emxEnsureCapacity_int32_T(r, i);
+    i = r1->size[0] * r1->size[1];
+    r1->size[0] = 1;
+    r1->size[1] = indlinsc->contents->size[1];
+    emxEnsureCapacity_int32_T(r1, i);
     loop_ub = indlinsc->contents->size[1];
     for (i = 0; i < loop_ub; i++) {
-      r->data[i] = (int)indlinsc->contents->data[i];
+      r1->data[i] = (int)indlinsc->contents->data[i];
     }
-    loop_ub = r->size[1];
+    loop_ub = r1->size[1];
     for (i = 0; i < loop_ub; i++) {
-      newbeta->data[r->data[i] - 1] = b2378->data[i];
+      newbeta->data[r1->data[i] - 1] = yhatnlseaso->data[i];
     }
-    i = r->size[0] * r->size[1];
-    r->size[0] = 1;
-    r->size[1] = otherind->contents->size[1];
-    emxEnsureCapacity_int32_T(r, i);
+    i = r1->size[0] * r1->size[1];
+    r1->size[0] = 1;
+    r1->size[1] = otherind->contents->size[1];
+    emxEnsureCapacity_int32_T(r1, i);
     loop_ub = otherind->contents->size[1];
     for (i = 0; i < loop_ub; i++) {
-      r->data[i] = (int)otherind->contents->data[i];
+      r1->data[i] = (int)otherind->contents->data[i];
     }
-    loop_ub = r->size[1];
+    loop_ub = r1->size[1];
     for (i = 0; i < loop_ub; i++) {
-      newbeta->data[r->data[i] - 1] = b0145->data[i];
+      newbeta->data[r1->data[i] - 1] = b0145->data[i];
     }
     /*  betadiff is linked to the tolerance (specified in reftol) */
     loop_ub = oldbeta->size[0];
@@ -1051,14 +1050,14 @@ ALSbsxfun(const captured_var *reftolALS, const captured_var *refstepsALS,
     /*  exit from the loop if the new beta has singular values. In */
     /*  such a case, any intermediate estimate is not reliable and we */
     /*  can just keep the initialbeta and initial scale. */
-    i = r2->size[0];
-    r2->size[0] = newbeta->size[0];
-    emxEnsureCapacity_boolean_T(r2, i);
+    i = r3->size[0];
+    r3->size[0] = newbeta->size[0];
+    emxEnsureCapacity_boolean_T(r3, i);
     for (i = 0; i < loop_ub; i++) {
       oldbeta->data[i] = newbeta->data[i];
-      r2->data[i] = rtIsNaN(newbeta->data[i]);
+      r3->data[i] = rtIsNaN(newbeta->data[i]);
     }
-    if (any(r2)) {
+    if (any(r3)) {
       i = newbeta->size[0];
       newbeta->size[0] = beta0->size[0];
       emxEnsureCapacity_real_T(newbeta, i);
@@ -1072,33 +1071,33 @@ ALSbsxfun(const captured_var *reftolALS, const captured_var *refstepsALS,
   }
   emxFree_real_T(&b_b0145);
   emxFree_real_T(&b_Seq);
-  emxFree_boolean_T(&r2);
-  emxFree_real_T(&r1);
+  emxFree_boolean_T(&r3);
+  emxFree_real_T(&r2);
   emxFree_real_T(&b_a);
   emxFree_real_T(&varargin_3);
   emxFree_real_T(&varargin_2);
   emxFree_real_T(&varargin_1);
   emxFree_real_T(&a);
-  emxFree_int32_T(&r);
+  emxFree_int32_T(&r1);
+  emxFree_real_T(&r);
   emxFree_real_T(&yhatnlseaso);
   emxFree_real_T(&b0145);
   emxFree_real_T(&tr_expl_nls_lshift);
   emxFree_real_T(&at);
-  emxFree_real_T(&b2378);
   emxFree_real_T(&oldbeta);
   *exitflag = b_exitflag;
 }
 
-static void b_ALS(const d_captured_var *Seq, const d_captured_var *bsb,
-                  const d_captured_var *Xseaso, const d_captured_var *Xtrend,
-                  const d_captured_var *yin, const captured_var *trend,
+static void b_ALS(const c_captured_var *Seq, const c_captured_var *bsb,
+                  const c_captured_var *Xseaso, const c_captured_var *Xtrend,
+                  const c_captured_var *yin, const captured_var *trend,
                   const captured_var *nexpl, const captured_var *varampl,
                   const b_captured_var *isemptyX, const captured_var *lshiftYN,
-                  const d_captured_var *Xlshift, const d_captured_var *X,
+                  const c_captured_var *Xlshift, const c_captured_var *X,
                   const captured_var *reftolALS,
                   const captured_var *refstepsALS,
-                  const d_captured_var *indlinsc,
-                  const d_captured_var *otherind, const emxArray_real_T *beta0,
+                  const c_captured_var *indlinsc,
+                  const c_captured_var *otherind, const emxArray_real_T *beta0,
                   emxArray_real_T *newbeta, double *exitflag)
 {
   emxArray_boolean_T *r2;
@@ -1112,8 +1111,8 @@ static void b_ALS(const d_captured_var *Seq, const d_captured_var *bsb,
   emxArray_real_T *XtrendXbsbXseasonXlshift;
   emxArray_real_T *Xtrendbsb;
   emxArray_real_T *XtrendbsbXbsb;
+  emxArray_real_T *b_Seqbsb;
   emxArray_real_T *b_Xlshiftbsb;
-  emxArray_real_T *b_yinbsb;
   emxArray_real_T *indnlseaso;
   emxArray_real_T *indnlseasoc;
   emxArray_real_T *oldbeta;
@@ -1801,7 +1800,7 @@ static void b_ALS(const d_captured_var *Seq, const d_captured_var *bsb,
   emxInit_int32_T(&r1, 2);
   emxInit_boolean_T(&r2, 1);
   emxInit_real_T(&b_Xlshiftbsb, 1);
-  emxInit_real_T(&b_yinbsb, 1);
+  emxInit_real_T(&b_Seqbsb, 1);
   exitg1 = false;
   while ((!exitg1) &&
          ((betadiff > reftolALS->contents) && (iter < refstepsALS->contents))) {
@@ -1848,14 +1847,14 @@ static void b_ALS(const d_captured_var *Seq, const d_captured_var *bsb,
     }
     /*  b0145 = coefficients of intercept trend + expl var + non */
     /*  linear part of seasonal component + level shift */
-    i = Xlshiftbsb->size[0];
-    Xlshiftbsb->size[0] = yinbsb->size[0];
-    emxEnsureCapacity_real_T(Xlshiftbsb, i);
+    i = b_Xlshiftbsb->size[0];
+    b_Xlshiftbsb->size[0] = yinbsb->size[0];
+    emxEnsureCapacity_real_T(b_Xlshiftbsb, i);
     sizes_idx_1 = yinbsb->size[0];
     for (i = 0; i < sizes_idx_1; i++) {
-      Xlshiftbsb->data[i] = yinbsb->data[i] - Xlshiftbsb->data[i];
+      b_Xlshiftbsb->data[i] = yinbsb->data[i] - Xlshiftbsb->data[i];
     }
-    c_mldivide(XtrendXbsbXseasonXlshift, Xlshiftbsb);
+    mldivide(XtrendXbsbXseasonXlshift, b_Xlshiftbsb, Xlshiftbsb);
     /*  Now find new coefficients of linear part of seasonal */
     /*  component in the regression of y-trend-expl-lsihft versus */
     /*  vector which contains non linear part of seasonal component */
@@ -1869,7 +1868,7 @@ static void b_ALS(const d_captured_var *Seq, const d_captured_var *bsb,
     for (i = 0; i < sizes_idx_1; i++) {
       y->data[i] = Xlshiftbsb->data[(int)indnlseaso->data[i] - 1];
     }
-    mtimes(Seqbsbvarampl, y, b_Xlshiftbsb);
+    mtimes(Seqbsbvarampl, y, b_Seqbsb);
     i = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = indnlseasoc->size[1];
@@ -1878,23 +1877,23 @@ static void b_ALS(const d_captured_var *Seq, const d_captured_var *bsb,
     for (i = 0; i < sizes_idx_1; i++) {
       y->data[i] = Xlshiftbsb->data[(int)indnlseasoc->data[i] - 1];
     }
-    mtimes(Xtrendbsb, y, b_yinbsb);
-    i = b_Xlshiftbsb->size[0];
-    b_Xlshiftbsb->size[0] = Seqbsb->size[0];
-    emxEnsureCapacity_real_T(b_Xlshiftbsb, i);
+    mtimes(Xtrendbsb, y, b_Xlshiftbsb);
+    i = b_Seqbsb->size[0];
+    b_Seqbsb->size[0] = Seqbsb->size[0];
+    emxEnsureCapacity_real_T(b_Seqbsb, i);
     sizes_idx_1 = Seqbsb->size[0];
     for (i = 0; i < sizes_idx_1; i++) {
-      b_Xlshiftbsb->data[i] =
-          (Seqbsb->data[i] + b_Xlshiftbsb->data[i]) * Xseasobsb->data[i];
+      b_Seqbsb->data[i] =
+          (Seqbsb->data[i] + b_Seqbsb->data[i]) * Xseasobsb->data[i];
     }
-    i = b_yinbsb->size[0];
-    b_yinbsb->size[0] = yinbsb->size[0];
-    emxEnsureCapacity_real_T(b_yinbsb, i);
+    i = b_Xlshiftbsb->size[0];
+    b_Xlshiftbsb->size[0] = yinbsb->size[0];
+    emxEnsureCapacity_real_T(b_Xlshiftbsb, i);
     sizes_idx_1 = yinbsb->size[0];
     for (i = 0; i < sizes_idx_1; i++) {
-      b_yinbsb->data[i] = yinbsb->data[i] - b_yinbsb->data[i];
+      b_Xlshiftbsb->data[i] = yinbsb->data[i] - b_Xlshiftbsb->data[i];
     }
-    b2378 = mldivide(b_Xlshiftbsb, b_yinbsb);
+    b2378 = b_mldivide(b_Seqbsb, b_Xlshiftbsb);
     /*  Store new value of beta */
     i = r1->size[0] * r1->size[1];
     r1->size[0] = 1;
@@ -1971,7 +1970,7 @@ static void b_ALS(const d_captured_var *Seq, const d_captured_var *bsb,
       exitg1 = true;
     }
   }
-  emxFree_real_T(&b_yinbsb);
+  emxFree_real_T(&b_Seqbsb);
   emxFree_real_T(&b_Xlshiftbsb);
   emxFree_boolean_T(&r2);
   emxFree_real_T(&y);
@@ -1990,14 +1989,14 @@ static void b_ALS(const d_captured_var *Seq, const d_captured_var *bsb,
   *exitflag = b_exitflag;
 }
 
-void ALS(const d_captured_var *Seq, const d_captured_var *bsb,
-         const d_captured_var *Xseaso, const d_captured_var *Xtrend,
-         const d_captured_var *yin, const captured_var *trend,
+void ALS(const c_captured_var *Seq, const c_captured_var *bsb,
+         const c_captured_var *Xseaso, const c_captured_var *Xtrend,
+         const c_captured_var *yin, const captured_var *trend,
          const captured_var *nexpl, const captured_var *varampl,
          const b_captured_var *isemptyX, const captured_var *lshiftYN,
-         const d_captured_var *Xlshift, const d_captured_var *X,
+         const c_captured_var *Xlshift, const c_captured_var *X,
          const captured_var *reftolALS, const captured_var *refstepsALS,
-         const d_captured_var *indlinsc, const d_captured_var *otherind,
+         const c_captured_var *indlinsc, const c_captured_var *otherind,
          const emxArray_real_T *beta0, emxArray_real_T *newbeta)
 {
   emxArray_boolean_T *r2;
@@ -2011,8 +2010,8 @@ void ALS(const d_captured_var *Seq, const d_captured_var *bsb,
   emxArray_real_T *XtrendXbsbXseasonXlshift;
   emxArray_real_T *Xtrendbsb;
   emxArray_real_T *XtrendbsbXbsb;
+  emxArray_real_T *b_Seqbsb;
   emxArray_real_T *b_Xlshiftbsb;
-  emxArray_real_T *b_yinbsb;
   emxArray_real_T *indnlseaso;
   emxArray_real_T *indnlseasoc;
   emxArray_real_T *oldbeta;
@@ -2698,7 +2697,7 @@ void ALS(const d_captured_var *Seq, const d_captured_var *bsb,
   emxInit_int32_T(&r1, 2);
   emxInit_boolean_T(&r2, 1);
   emxInit_real_T(&b_Xlshiftbsb, 1);
-  emxInit_real_T(&b_yinbsb, 1);
+  emxInit_real_T(&b_Seqbsb, 1);
   exitg1 = false;
   while ((!exitg1) &&
          ((betadiff > reftolALS->contents) && (iter < refstepsALS->contents))) {
@@ -2745,14 +2744,14 @@ void ALS(const d_captured_var *Seq, const d_captured_var *bsb,
     }
     /*  b0145 = coefficients of intercept trend + expl var + non */
     /*  linear part of seasonal component + level shift */
-    i = Xlshiftbsb->size[0];
-    Xlshiftbsb->size[0] = yinbsb->size[0];
-    emxEnsureCapacity_real_T(Xlshiftbsb, i);
+    i = b_Xlshiftbsb->size[0];
+    b_Xlshiftbsb->size[0] = yinbsb->size[0];
+    emxEnsureCapacity_real_T(b_Xlshiftbsb, i);
     sizes_idx_1 = yinbsb->size[0];
     for (i = 0; i < sizes_idx_1; i++) {
-      Xlshiftbsb->data[i] = yinbsb->data[i] - Xlshiftbsb->data[i];
+      b_Xlshiftbsb->data[i] = yinbsb->data[i] - Xlshiftbsb->data[i];
     }
-    c_mldivide(XtrendXbsbXseasonXlshift, Xlshiftbsb);
+    mldivide(XtrendXbsbXseasonXlshift, b_Xlshiftbsb, Xlshiftbsb);
     /*  Now find new coefficients of linear part of seasonal */
     /*  component in the regression of y-trend-expl-lsihft versus */
     /*  vector which contains non linear part of seasonal component */
@@ -2766,7 +2765,7 @@ void ALS(const d_captured_var *Seq, const d_captured_var *bsb,
     for (i = 0; i < sizes_idx_1; i++) {
       y->data[i] = Xlshiftbsb->data[(int)indnlseaso->data[i] - 1];
     }
-    mtimes(Seqbsbvarampl, y, b_Xlshiftbsb);
+    mtimes(Seqbsbvarampl, y, b_Seqbsb);
     i = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = indnlseasoc->size[1];
@@ -2775,23 +2774,23 @@ void ALS(const d_captured_var *Seq, const d_captured_var *bsb,
     for (i = 0; i < sizes_idx_1; i++) {
       y->data[i] = Xlshiftbsb->data[(int)indnlseasoc->data[i] - 1];
     }
-    mtimes(Xtrendbsb, y, b_yinbsb);
-    i = b_Xlshiftbsb->size[0];
-    b_Xlshiftbsb->size[0] = Seqbsb->size[0];
-    emxEnsureCapacity_real_T(b_Xlshiftbsb, i);
+    mtimes(Xtrendbsb, y, b_Xlshiftbsb);
+    i = b_Seqbsb->size[0];
+    b_Seqbsb->size[0] = Seqbsb->size[0];
+    emxEnsureCapacity_real_T(b_Seqbsb, i);
     sizes_idx_1 = Seqbsb->size[0];
     for (i = 0; i < sizes_idx_1; i++) {
-      b_Xlshiftbsb->data[i] =
-          (Seqbsb->data[i] + b_Xlshiftbsb->data[i]) * Xseasobsb->data[i];
+      b_Seqbsb->data[i] =
+          (Seqbsb->data[i] + b_Seqbsb->data[i]) * Xseasobsb->data[i];
     }
-    i = b_yinbsb->size[0];
-    b_yinbsb->size[0] = yinbsb->size[0];
-    emxEnsureCapacity_real_T(b_yinbsb, i);
+    i = b_Xlshiftbsb->size[0];
+    b_Xlshiftbsb->size[0] = yinbsb->size[0];
+    emxEnsureCapacity_real_T(b_Xlshiftbsb, i);
     sizes_idx_1 = yinbsb->size[0];
     for (i = 0; i < sizes_idx_1; i++) {
-      b_yinbsb->data[i] = yinbsb->data[i] - b_yinbsb->data[i];
+      b_Xlshiftbsb->data[i] = yinbsb->data[i] - b_Xlshiftbsb->data[i];
     }
-    b2378 = mldivide(b_Xlshiftbsb, b_yinbsb);
+    b2378 = b_mldivide(b_Seqbsb, b_Xlshiftbsb);
     /*  Store new value of beta */
     i = r1->size[0] * r1->size[1];
     r1->size[0] = 1;
@@ -2867,7 +2866,7 @@ void ALS(const d_captured_var *Seq, const d_captured_var *bsb,
       exitg1 = true;
     }
   }
-  emxFree_real_T(&b_yinbsb);
+  emxFree_real_T(&b_Seqbsb);
   emxFree_real_T(&b_Xlshiftbsb);
   emxFree_boolean_T(&r2);
   emxFree_real_T(&y);
@@ -2886,30 +2885,31 @@ void ALS(const d_captured_var *Seq, const d_captured_var *bsb,
 }
 
 void IRWLSreg(const captured_var *reftolALS, const captured_var *refstepsALS,
-              const d_captured_var *indlinsc, const d_captured_var *Xseaso,
-              d_captured_var *bsb, const b_captured_var *isemptyX,
-              const captured_var *lshiftYN, const d_captured_var *Xtrend,
-              const d_captured_var *Seq, const captured_var *varampl,
-              const d_captured_var *Xlshift, const d_captured_var *X,
-              const d_captured_var *yin, const captured_var *trend,
-              const captured_var *nexpl, const d_captured_var *otherind,
+              const c_captured_var *indlinsc, const c_captured_var *Xseaso,
+              c_captured_var *bsb, const b_captured_var *isemptyX,
+              const captured_var *lshiftYN, const c_captured_var *Xtrend,
+              const c_captured_var *Seq, const captured_var *varampl,
+              const c_captured_var *Xlshift, const c_captured_var *X,
+              const c_captured_var *yin, const captured_var *trend,
+              const captured_var *nexpl, const c_captured_var *otherind,
               const captured_var *seasonal, const captured_var *s,
-              d_captured_var *yhatseaso, d_captured_var *yhat,
-              d_captured_var *beta, const captured_var *constr,
-              const d_captured_var *Xsel, const b_captured_var *verLess2016b,
-              const d_captured_var *seq, c_captured_var *weights,
-              const c_captured_var *zerT1, const emxArray_real_T *y,
+              c_captured_var *yhatseaso, c_captured_var *yhat,
+              c_captured_var *beta, const captured_var *constr,
+              const c_captured_var *Xsel, const b_captured_var *verLess2016b,
+              const c_captured_var *seq, d_captured_var *weights,
+              const d_captured_var *zerT1, const emxArray_real_T *y,
               const emxArray_real_T *initialbeta, double refsteps,
-              double reftol, double h, b_struct_T *outIRWLS)
+              double reftol, double h, c_struct_T *outIRWLS)
 {
   emxArray_boolean_T *x;
   emxArray_int32_T *i_r2s;
   emxArray_real_T *Xseld;
   emxArray_real_T *b_Xseld;
+  emxArray_real_T *b_y;
   emxArray_real_T *newb;
   emxArray_real_T *r2;
-  double b_y;
   double betadiff;
+  double c_y;
   double exitfl;
   double ininumscale2;
   double iter;
@@ -3034,6 +3034,7 @@ void IRWLSreg(const captured_var *reftolALS, const captured_var *refstepsALS,
   emxInit_real_T(&Xseld, 2);
   emxInit_boolean_T(&x, 1);
   emxInit_real_T(&b_Xseld, 2);
+  emxInit_real_T(&b_y, 1);
   exitg1 = false;
   while ((!exitg1) && ((betadiff > reftol) && (iter < refsteps))) {
     iter++;
@@ -3211,13 +3212,6 @@ void IRWLSreg(const captured_var *reftolALS, const captured_var *refstepsALS,
       /*  In this case the model is linear */
       /*  Function lik constructs fitted values and residual sum of */
       /*  squares */
-      i = outIRWLS->betarw->size[0];
-      outIRWLS->betarw->size[0] = bsb->contents->size[0];
-      emxEnsureCapacity_real_T(outIRWLS->betarw, i);
-      vlen = bsb->contents->size[0];
-      for (i = 0; i < vlen; i++) {
-        outIRWLS->betarw->data[i] = y->data[(int)bsb->contents->data[i] - 1];
-      }
       vlen = Xsel->contents->size[1];
       i = Xseld->size[0] * Xseld->size[1];
       Xseld->size[0] = bsb->contents->size[0];
@@ -3232,7 +3226,14 @@ void IRWLSreg(const captured_var *reftolALS, const captured_var *refstepsALS,
                                    1];
         }
       }
-      c_mldivide(Xseld, outIRWLS->betarw);
+      i = b_y->size[0];
+      b_y->size[0] = bsb->contents->size[0];
+      emxEnsureCapacity_real_T(b_y, i);
+      vlen = bsb->contents->size[0];
+      for (i = 0; i < vlen; i++) {
+        b_y->data[i] = y->data[(int)bsb->contents->data[i] - 1];
+      }
+      mldivide(Xseld, b_y, outIRWLS->betarw);
       /*  update residuals */
       mtimes(Xsel->contents, outIRWLS->betarw, yhat->contents);
       exitfl = 0.0;
@@ -3308,13 +3309,6 @@ void IRWLSreg(const captured_var *reftolALS, const captured_var *refstepsALS,
         /*  newb = new estimate of beta just using units forming */
         /*  subset (newb does not contain the position of level */
         /*  shift in the last position) */
-        i = newb->size[0];
-        newb->size[0] = bsb->contents->size[0];
-        emxEnsureCapacity_real_T(newb, i);
-        vlen = bsb->contents->size[0];
-        for (i = 0; i < vlen; i++) {
-          newb->data[i] = y->data[(int)bsb->contents->data[i] - 1];
-        }
         vlen = Xseld->size[1];
         i = b_Xseld->size[0] * b_Xseld->size[1];
         b_Xseld->size[0] = bsb->contents->size[0];
@@ -3328,7 +3322,14 @@ void IRWLSreg(const captured_var *reftolALS, const captured_var *refstepsALS,
                             1];
           }
         }
-        c_mldivide(b_Xseld, newb);
+        i = b_y->size[0];
+        b_y->size[0] = bsb->contents->size[0];
+        emxEnsureCapacity_real_T(b_y, i);
+        vlen = bsb->contents->size[0];
+        for (i = 0; i < vlen; i++) {
+          b_y->data[i] = y->data[(int)bsb->contents->data[i] - 1];
+        }
+        mldivide(b_Xseld, b_y, newb);
         /*  yhat = vector of fitted values for all obs */
         mtimes(Xseld, newb, yhat->contents);
         /*  newbeta = new estimate of beta  just using units */
@@ -3398,15 +3399,15 @@ void IRWLSreg(const captured_var *reftolALS, const captured_var *refstepsALS,
       newb->data[i] = beta->contents->data[i];
     }
     if (newb->size[0] == 0) {
-      b_y = 0.0;
+      c_y = 0.0;
     } else {
-      b_y = 0.0;
+      c_y = 0.0;
       i = newb->size[0];
       for (k = 0; k < i; k++) {
-        b_y += fabs(newb->data[k]);
+        c_y += fabs(newb->data[k]);
       }
     }
-    betadiff /= b_y;
+    betadiff /= c_y;
     /*  exit from the loop if new beta contains nan In */
     /*  such a case, any intermediate estimate is not reliable and we */
     /*  can just keep the initialbeta and initial scale. */
@@ -3462,6 +3463,7 @@ void IRWLSreg(const captured_var *reftolALS, const captured_var *refstepsALS,
       }
     }
   }
+  emxFree_real_T(&b_y);
   emxFree_real_T(&b_Xseld);
   emxFree_real_T(&Xseld);
   /*  newbeta = the final estimate of beta to be stored in outIRWLS.betarw */
@@ -3720,14 +3722,14 @@ double b_corfactorRAW(double n, double alpha)
   return rawcorfac;
 }
 
-void lik(const d_captured_var *Xtrend, const d_captured_var *bsb,
+void lik(const c_captured_var *Xtrend, const c_captured_var *bsb,
          const captured_var *trend, const captured_var *seasonal,
-         const captured_var *s, d_captured_var *yhatseaso,
-         const d_captured_var *Xseaso, const captured_var *varampl,
-         const d_captured_var *Seq, const captured_var *nexpl,
-         const b_captured_var *isemptyX, const d_captured_var *X,
-         const captured_var *lshiftYN, const d_captured_var *Xlshift,
-         d_captured_var *yhat, const emxArray_real_T *beta0)
+         const captured_var *s, c_captured_var *yhatseaso,
+         const c_captured_var *Xseaso, const captured_var *varampl,
+         const c_captured_var *Seq, const captured_var *nexpl,
+         const b_captured_var *isemptyX, const c_captured_var *X,
+         const captured_var *lshiftYN, const c_captured_var *Xlshift,
+         c_captured_var *yhat, const emxArray_real_T *beta0)
 {
   emxArray_real_T *B;
   emxArray_real_T *C;
@@ -4040,6 +4042,269 @@ void lik(const d_captured_var *Xtrend, const d_captured_var *bsb,
   /*  obj = sum of squares of residuals/2 = negative log likelihood */
   /*  format long */
   /*  disp(obj) */
+}
+
+void likyhat(const captured_var *trend, const captured_var *seasonal,
+             const captured_var *s, c_captured_var *yhatseaso,
+             const c_captured_var *Xseasof, const captured_var *varampl,
+             const c_captured_var *Seqf, const captured_var *nexpl,
+             const b_captured_var *isemptyX, const c_captured_var *Xf,
+             const captured_var *lshiftYN, const c_captured_var *Xlshiftf,
+             const emxArray_real_T *beta0, const emxArray_real_T *Xtrendf,
+             emxArray_real_T *objyhat)
+{
+  emxArray_real_T *A;
+  emxArray_real_T *B;
+  emxArray_real_T *yhatX;
+  emxArray_real_T *yhatlshift;
+  emxArray_uint32_T *r;
+  double d;
+  double npar;
+  int aoffset;
+  int b_i;
+  int i;
+  int i1;
+  int inner;
+  int k;
+  int mc;
+  /*  likyhat computes fitted values using vector of regression coefficients */
+  /*  beta0. Note that matrices Xtrendf, Xseasof, Seqf, Xf contain n-k rows. */
+  /*  This function is called in the very last step of the procedure when */
+  /*  routine nlinfit is invoked. Please, note the difference beween likyhat */
+  /*  and lik */
+  npar = trend->contents + 1.0;
+  emxInit_real_T(&yhatX, 1);
+  emxInit_real_T(&A, 2);
+  if (seasonal->contents > 0.0) {
+    if (seasonal->contents < s->contents / 2.0) {
+      emxInit_uint32_T(&r, 2);
+      d = seasonal->contents * 2.0;
+      i = r->size[0] * r->size[1];
+      r->size[0] = 1;
+      aoffset = (int)floor(d - 1.0);
+      r->size[1] = aoffset + 1;
+      emxEnsureCapacity_uint32_T(r, i);
+      for (i = 0; i <= aoffset; i++) {
+        r->data[i] = (unsigned int)(npar + ((double)i + 1.0));
+      }
+      i = A->size[0] * A->size[1];
+      A->size[0] = Xseasof->contents->size[0];
+      A->size[1] = Xseasof->contents->size[1];
+      emxEnsureCapacity_real_T(A, i);
+      aoffset = Xseasof->contents->size[0] * Xseasof->contents->size[1];
+      for (i = 0; i < aoffset; i++) {
+        A->data[i] = Xseasof->contents->data[i];
+      }
+      emxInit_real_T(&B, 2);
+      i = B->size[0] * B->size[1];
+      B->size[0] = 1;
+      B->size[1] = r->size[1];
+      emxEnsureCapacity_real_T(B, i);
+      aoffset = r->size[1];
+      for (i = 0; i < aoffset; i++) {
+        B->data[i] = beta0->data[(int)r->data[i] - 1];
+      }
+      emxFree_uint32_T(&r);
+      mc = A->size[0] - 1;
+      inner = A->size[1];
+      i = yhatX->size[0];
+      yhatX->size[0] = A->size[0];
+      emxEnsureCapacity_real_T(yhatX, i);
+      for (b_i = 0; b_i <= mc; b_i++) {
+        yhatX->data[b_i] = 0.0;
+      }
+      for (k = 0; k < inner; k++) {
+        aoffset = k * A->size[0];
+        for (b_i = 0; b_i <= mc; b_i++) {
+          yhatX->data[b_i] += A->data[aoffset + b_i] * B->data[k];
+        }
+      }
+      emxFree_real_T(&B);
+      i = yhatseaso->contents->size[0];
+      yhatseaso->contents->size[0] = yhatX->size[0];
+      emxEnsureCapacity_real_T(yhatseaso->contents, i);
+      aoffset = yhatX->size[0];
+      for (i = 0; i < aoffset; i++) {
+        yhatseaso->contents->data[i] = yhatX->data[i];
+      }
+      npar += d;
+    } else {
+      if (npar + 1.0 > (npar + seasonal->contents * 2.0) - 1.0) {
+        i = 1;
+      } else {
+        i = (int)(npar + 1.0);
+      }
+      b_i = A->size[0] * A->size[1];
+      A->size[0] = Xseasof->contents->size[0];
+      A->size[1] = Xseasof->contents->size[1];
+      emxEnsureCapacity_real_T(A, b_i);
+      aoffset = Xseasof->contents->size[0] * Xseasof->contents->size[1];
+      for (b_i = 0; b_i < aoffset; b_i++) {
+        A->data[b_i] = Xseasof->contents->data[b_i];
+      }
+      mc = A->size[0] - 1;
+      inner = A->size[1];
+      b_i = yhatX->size[0];
+      yhatX->size[0] = A->size[0];
+      emxEnsureCapacity_real_T(yhatX, b_i);
+      for (b_i = 0; b_i <= mc; b_i++) {
+        yhatX->data[b_i] = 0.0;
+      }
+      for (k = 0; k < inner; k++) {
+        aoffset = k * A->size[0];
+        for (b_i = 0; b_i <= mc; b_i++) {
+          yhatX->data[b_i] += A->data[aoffset + b_i] * beta0->data[(i + k) - 1];
+        }
+      }
+      i = yhatseaso->contents->size[0];
+      yhatseaso->contents->size[0] = yhatX->size[0];
+      emxEnsureCapacity_real_T(yhatseaso->contents, i);
+      aoffset = yhatX->size[0];
+      for (i = 0; i < aoffset; i++) {
+        yhatseaso->contents->data[i] = yhatX->data[i];
+      }
+      npar = (npar + seasonal->contents * 2.0) - 1.0;
+    }
+    if (varampl->contents > 0.0) {
+      d = varampl->contents + 1.0;
+      if (2.0 > d) {
+        i = 0;
+        b_i = 0;
+      } else {
+        i = 1;
+        b_i = (int)d;
+      }
+      d = (npar + 1.0) + nexpl->contents;
+      if (d > (npar + varampl->contents) + nexpl->contents) {
+        i1 = 1;
+      } else {
+        i1 = (int)d;
+      }
+      aoffset = Seqf->contents->size[0];
+      inner = A->size[0] * A->size[1];
+      A->size[0] = aoffset;
+      mc = b_i - i;
+      A->size[1] = mc;
+      emxEnsureCapacity_real_T(A, inner);
+      for (b_i = 0; b_i < mc; b_i++) {
+        for (inner = 0; inner < aoffset; inner++) {
+          A->data[inner + A->size[0] * b_i] =
+              Seqf->contents->data[inner + Seqf->contents->size[0] * (i + b_i)];
+        }
+      }
+      mc = A->size[0] - 1;
+      inner = A->size[1];
+      i = yhatX->size[0];
+      yhatX->size[0] = A->size[0];
+      emxEnsureCapacity_real_T(yhatX, i);
+      for (b_i = 0; b_i <= mc; b_i++) {
+        yhatX->data[b_i] = 0.0;
+      }
+      for (k = 0; k < inner; k++) {
+        aoffset = k * A->size[0];
+        for (b_i = 0; b_i <= mc; b_i++) {
+          yhatX->data[b_i] +=
+              A->data[aoffset + b_i] * beta0->data[(i1 + k) - 1];
+        }
+      }
+      i = yhatseaso->contents->size[0];
+      yhatseaso->contents->size[0] = yhatX->size[0];
+      emxEnsureCapacity_real_T(yhatseaso->contents, i);
+      aoffset = yhatX->size[0];
+      for (i = 0; i < aoffset; i++) {
+        yhatseaso->contents->data[i] *= yhatX->data[i] + 1.0;
+      }
+      npar += varampl->contents;
+    }
+  }
+  if (isemptyX->contents) {
+    i = yhatX->size[0];
+    yhatX->size[0] = 1;
+    emxEnsureCapacity_real_T(yhatX, i);
+    yhatX->data[0] = 0.0;
+  } else {
+    /*  Note the order of coefficients is trend, linear part of */
+    /*  seasonal component, expl variables, non linear part of */
+    /*  seasonal component, level shift */
+    d = (npar + 1.0) - varampl->contents;
+    if (d > (npar + nexpl->contents) - varampl->contents) {
+      i = 1;
+    } else {
+      i = (int)d;
+    }
+    aoffset = Xf->contents->size[0];
+    mc = Xf->contents->size[1];
+    b_i = A->size[0] * A->size[1];
+    A->size[0] = aoffset;
+    A->size[1] = mc;
+    emxEnsureCapacity_real_T(A, b_i);
+    for (b_i = 0; b_i < mc; b_i++) {
+      for (i1 = 0; i1 < aoffset; i1++) {
+        A->data[i1 + A->size[0] * b_i] =
+            Xf->contents->data[i1 + Xf->contents->size[0] * b_i];
+      }
+    }
+    mc = A->size[0] - 1;
+    inner = A->size[1];
+    b_i = yhatX->size[0];
+    yhatX->size[0] = A->size[0];
+    emxEnsureCapacity_real_T(yhatX, b_i);
+    for (b_i = 0; b_i <= mc; b_i++) {
+      yhatX->data[b_i] = 0.0;
+    }
+    for (k = 0; k < inner; k++) {
+      aoffset = k * A->size[0];
+      for (b_i = 0; b_i <= mc; b_i++) {
+        yhatX->data[b_i] += A->data[aoffset + b_i] * beta0->data[(i + k) - 1];
+      }
+    }
+    npar += nexpl->contents;
+  }
+  emxFree_real_T(&A);
+  emxInit_real_T(&yhatlshift, 1);
+  if (lshiftYN->contents == 1.0) {
+    /*   \beta_(npar+1)* I(t \geq \beta_(npar+2)) where beta_(npar+1) */
+    /*   is a real number and \beta_(npar+2) is a integer which */
+    /*   denotes the period in which level shift shows up */
+    i = yhatlshift->size[0];
+    yhatlshift->size[0] = Xlshiftf->contents->size[0];
+    emxEnsureCapacity_real_T(yhatlshift, i);
+    aoffset = Xlshiftf->contents->size[0];
+    for (i = 0; i < aoffset; i++) {
+      yhatlshift->data[i] =
+          beta0->data[(int)(npar + 1.0) - 1] * Xlshiftf->contents->data[i];
+    }
+  } else {
+    i = yhatlshift->size[0];
+    yhatlshift->size[0] = 1;
+    emxEnsureCapacity_real_T(yhatlshift, i);
+    yhatlshift->data[0] = 0.0;
+  }
+  /*  objhat = fitted values from trend (yhattrend), (time varying) seasonal */
+  /*  (yhatseaso), explanatory variables (yhatX) and level shift */
+  /*  component (yhatlshift) */
+  mc = Xtrendf->size[0] - 1;
+  inner = Xtrendf->size[1];
+  i = objyhat->size[0];
+  objyhat->size[0] = Xtrendf->size[0];
+  emxEnsureCapacity_real_T(objyhat, i);
+  for (b_i = 0; b_i <= mc; b_i++) {
+    objyhat->data[b_i] = 0.0;
+  }
+  for (k = 0; k < inner; k++) {
+    aoffset = k * Xtrendf->size[0];
+    for (b_i = 0; b_i <= mc; b_i++) {
+      objyhat->data[b_i] += Xtrendf->data[aoffset + b_i] * beta0->data[k];
+    }
+  }
+  aoffset = objyhat->size[0];
+  for (i = 0; i < aoffset; i++) {
+    objyhat->data[i] =
+        ((objyhat->data[i] + yhatseaso->contents->data[i]) + yhatX->data[i]) +
+        yhatlshift->data[i];
+  }
+  emxFree_real_T(&yhatlshift);
+  emxFree_real_T(&yhatX);
 }
 
 /* End of code generation (LTSts.c) */

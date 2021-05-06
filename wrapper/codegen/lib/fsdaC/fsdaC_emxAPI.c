@@ -385,14 +385,9 @@ void emxDestroy_struct_LTSts_T(struct_LTSts_T emxArray)
   emxFreeStruct_struct_LTSts_T(&emxArray);
 }
 
-void emxDestroy_struct_LXSlmsscalar_T(struct_LXSlmsscalar_T emxArray)
+void emxDestroy_struct_LXS_T(struct_LXS_T emxArray)
 {
-  c_emxFreeStruct_struct_LXSlmssc(&emxArray);
-}
-
-void emxDestroy_struct_LXSlmsstruct_T(struct_LXSlmsstruct_T emxArray)
-{
-  c_emxFreeStruct_struct_LXSlmsst(&emxArray);
+  emxFreeStruct_struct_LXS_T(&emxArray);
 }
 
 void emxInitArray_char_T(emxArray_char_T **pEmxArray, int numDimensions)
@@ -435,14 +430,9 @@ void emxInit_struct_LTSts_T(struct_LTSts_T *pStruct)
   emxInitStruct_struct_LTSts_T(pStruct);
 }
 
-void emxInit_struct_LXSlmsscalar_T(struct_LXSlmsscalar_T *pStruct)
+void emxInit_struct_LXS_T(struct_LXS_T *pStruct)
 {
-  c_emxInitStruct_struct_LXSlmssc(pStruct);
-}
-
-void emxInit_struct_LXSlmsstruct_T(struct_LXSlmsstruct_T *pStruct)
-{
-  c_emxInitStruct_struct_LXSlmsst(pStruct);
+  emxInitStruct_struct_LXS_T(pStruct);
 }
 
 /* End of code generation (fsdaC_emxAPI.c) */

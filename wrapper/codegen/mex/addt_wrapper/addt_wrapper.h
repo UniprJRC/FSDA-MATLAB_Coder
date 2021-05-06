@@ -25,6 +25,7 @@
 void addt_wrapper(const emlrtStack *sp, const emxArray_real_T *y,
                   const emxArray_real_T *X, const emxArray_real_T *w,
                   boolean_T intercept, const real_T la_data[],
-                  const int32_T la_size[2], boolean_T nocheck, struct0_T *out);
+                  const int32_T la_size[2], boolean_T nocheck,
+                  struct_addt_T *out);
 
 /* End of code generation (addt_wrapper.h) */

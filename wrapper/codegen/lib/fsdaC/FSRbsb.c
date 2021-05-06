@@ -37,7 +37,7 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
   emxArray_char_T_1x310 c_mm;
   emxArray_int32_T *b_r;
   emxArray_int32_T *iidx;
-  emxArray_real_T *B;
+  emxArray_real_T *C;
   emxArray_real_T *Xb;
   emxArray_real_T *b_y;
   emxArray_real_T *c_y;
@@ -50,15 +50,12 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
   emxArray_real_T *yb;
   double init;
   int aoffset;
-  int b_loop_ub;
+  int b_i;
   unsigned int b_mm;
   int i;
-  int i1;
   unsigned int ij;
   int ini0;
-  int inner;
   int loop_ub;
-  int mc;
   int mm;
   int n;
   int nwhile;
@@ -401,8 +398,8 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
   Xb->size[1] = X->size[1];
   emxEnsureCapacity_real_T(Xb, i);
   for (i = 0; i < aoffset; i++) {
-    for (i1 = 0; i1 < loop_ub; i1++) {
-      Xb->data[i1 + Xb->size[0] * i] = X->data[i1 + X->size[0] * i];
+    for (b_i = 0; b_i < loop_ub; b_i++) {
+      Xb->data[b_i + Xb->size[0] * i] = X->data[b_i + X->size[0] * i];
     }
   }
   emxInit_boolean_T(&bsbT, 1);
@@ -415,14 +412,14 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
   }
   Ra = (bsbT->size[0] != 0);
   if (Ra) {
-    nwhile = 0;
+    loop_ub = 0;
     exitg1 = false;
-    while ((!exitg1) && (nwhile <= bsbT->size[0] - 1)) {
-      if (!bsbT->data[nwhile]) {
+    while ((!exitg1) && (loop_ub <= bsbT->size[0] - 1)) {
+      if (!bsbT->data[loop_ub]) {
         Ra = false;
         exitg1 = true;
       } else {
-        nwhile++;
+        loop_ub++;
       }
     }
   }
@@ -439,9 +436,9 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
       emxEnsureCapacity_real_T(Xb, i);
       for (i = 0; i < loop_ub; i++) {
         aoffset = bsb->size[0];
-        for (i1 = 0; i1 < aoffset; i1++) {
-          Xb->data[i1 + Xb->size[0] * i] =
-              X->data[((int)bsb->data[i1] + X->size[0] * i) - 1];
+        for (b_i = 0; b_i < aoffset; b_i++) {
+          Xb->data[b_i + Xb->size[0] * i] =
+              X->data[((int)bsb->data[b_i] + X->size[0] * i) - 1];
         }
       }
       aoffset = local_rank(Xb);
@@ -463,9 +460,9 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
     emxEnsureCapacity_real_T(Xb, i);
     for (i = 0; i < loop_ub; i++) {
       aoffset = bsb->size[0];
-      for (i1 = 0; i1 < aoffset; i1++) {
-        Xb->data[i1 + Xb->size[0] * i] =
-            X->data[((int)bsb->data[i1] + X->size[0] * i) - 1];
+      for (b_i = 0; b_i < aoffset; b_i++) {
+        Xb->data[b_i + Xb->size[0] * i] =
+            X->data[((int)bsb->data[b_i] + X->size[0] * i) - 1];
       }
     }
     i = yb->size[0];
@@ -584,12 +581,12 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
   nwhile = c_y->size[1] - 1;
   p = 0;
   aoffset = 0;
-  for (loop_ub = 0; loop_ub <= nwhile; loop_ub++) {
-    if (c_y->data[loop_ub] <= n) {
+  for (b_i = 0; b_i <= nwhile; b_i++) {
+    if (c_y->data[b_i] <= n) {
       p++;
     }
-    if (seq100->data[loop_ub] <= n) {
-      seq100->data[aoffset] = seq100->data[loop_ub];
+    if (seq100->data[b_i] <= n) {
+      seq100->data[aoffset] = seq100->data[b_i];
       aoffset++;
     }
   }
@@ -734,14 +731,9 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
   ij = 1U;
   i = X->size[0] - bsb->size[0];
   emxFree_real_T(&r1);
-  if (0 <= i) {
-    mc = X->size[0] - 1;
-    inner = X->size[1];
-    b_loop_ub = y->size[0];
-  }
   emxInit_boolean_T(&oldbsbT, 1);
   emxInit_real_T(&unit, 1);
-  emxInit_real_T(&B, 1);
+  emxInit_real_T(&C, 1);
   for (mm = 0; mm <= i; mm++) {
     b_mm = (unsigned int)ini0 + mm;
     /*  if n>200 show every 100 steps the fwd search index */
@@ -754,123 +746,119 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
       /*  OLD CODE */
       /*  intersect(mm,bsbsteps)==mm */
       loop_ub = bsb->size[0];
-      for (i1 = 0; i1 < loop_ub; i1++) {
-        BB->data[((int)bsb->data[i1] + BB->size[0] * ((int)ij - 1)) - 1] =
-            (float)bsb->data[i1];
+      for (b_i = 0; b_i < loop_ub; b_i++) {
+        BB->data[((int)bsb->data[b_i] + BB->size[0] * ((int)ij - 1)) - 1] =
+            (float)bsb->data[b_i];
       }
       ij++;
     }
     /*  Compute beta coefficients using subset */
     /*  rank is ok */
     /*  e= vector of residual for all units using b estimated using subset */
-    loop_ub = yb->size[0];
-    i1 = B->size[0];
-    B->size[0] = yb->size[0];
-    emxEnsureCapacity_real_T(B, i1);
-    for (i1 = 0; i1 < loop_ub; i1++) {
-      B->data[i1] = yb->data[i1];
+    mldivide(Xb, yb, d_y);
+    nwhile = X->size[0] - 1;
+    p = X->size[1];
+    b_i = C->size[0];
+    C->size[0] = X->size[0];
+    emxEnsureCapacity_real_T(C, b_i);
+    for (b_i = 0; b_i <= nwhile; b_i++) {
+      C->data[b_i] = 0.0;
     }
-    c_mldivide(Xb, B);
-    i1 = d_y->size[0];
-    d_y->size[0] = X->size[0];
-    emxEnsureCapacity_real_T(d_y, i1);
-    for (loop_ub = 0; loop_ub <= mc; loop_ub++) {
-      d_y->data[loop_ub] = 0.0;
-    }
-    for (nwhile = 0; nwhile < inner; nwhile++) {
-      aoffset = nwhile * X->size[0];
-      for (loop_ub = 0; loop_ub <= mc; loop_ub++) {
-        d_y->data[loop_ub] += X->data[aoffset + loop_ub] * B->data[nwhile];
+    for (loop_ub = 0; loop_ub < p; loop_ub++) {
+      aoffset = loop_ub * X->size[0];
+      for (b_i = 0; b_i <= nwhile; b_i++) {
+        C->data[b_i] += X->data[aoffset + b_i] * d_y->data[loop_ub];
       }
     }
-    i1 = d_y->size[0];
-    d_y->size[0] = y->size[0];
-    emxEnsureCapacity_real_T(d_y, i1);
-    for (i1 = 0; i1 < b_loop_ub; i1++) {
-      d_y->data[i1] = y->data[i1] - d_y->data[i1];
+    loop_ub = y->size[0];
+    b_i = C->size[0];
+    C->size[0] = y->size[0];
+    emxEnsureCapacity_real_T(C, b_i);
+    for (b_i = 0; b_i < loop_ub; b_i++) {
+      C->data[b_i] = y->data[b_i] - C->data[b_i];
     }
-    i1 = B->size[0];
-    B->size[0] = d_y->size[0];
-    emxEnsureCapacity_real_T(B, i1);
-    aoffset = d_y->size[0];
-    for (nwhile = 0; nwhile < aoffset; nwhile++) {
-      B->data[nwhile] = d_y->data[nwhile] * d_y->data[nwhile];
+    b_i = d_y->size[0];
+    d_y->size[0] = C->size[0];
+    emxEnsureCapacity_real_T(d_y, b_i);
+    aoffset = C->size[0];
+    for (loop_ub = 0; loop_ub < aoffset; loop_ub++) {
+      d_y->data[loop_ub] = C->data[loop_ub] * C->data[loop_ub];
     }
-    loop_ub = B->size[0];
-    for (i1 = 0; i1 < loop_ub; i1++) {
-      r->data[i1 + r->size[0]] = B->data[i1];
+    loop_ub = d_y->size[0];
+    for (b_i = 0; b_i < loop_ub; b_i++) {
+      r->data[b_i + r->size[0]] = d_y->data[b_i];
     }
     if (b_mm < (unsigned int)n) {
       /*  store units forming old subset in vector oldbsb */
       loop_ub = bsbT->size[0];
-      i1 = oldbsbT->size[0];
+      b_i = oldbsbT->size[0];
       oldbsbT->size[0] = bsbT->size[0];
-      emxEnsureCapacity_boolean_T(oldbsbT, i1);
-      for (i1 = 0; i1 < loop_ub; i1++) {
-        oldbsbT->data[i1] = bsbT->data[i1];
+      emxEnsureCapacity_boolean_T(oldbsbT, b_i);
+      for (b_i = 0; b_i < loop_ub; b_i++) {
+        oldbsbT->data[b_i] = bsbT->data[b_i];
       }
       /*  order the r_i and include the smallest among the units forming */
       /*  the group of potential outliers */
       /*  ord=sortrows(r,2); */
       loop_ub = r->size[0];
-      i1 = B->size[0];
-      B->size[0] = r->size[0];
-      emxEnsureCapacity_real_T(B, i1);
-      for (i1 = 0; i1 < loop_ub; i1++) {
-        B->data[i1] = r->data[i1 + r->size[0]];
+      b_i = d_y->size[0];
+      d_y->size[0] = r->size[0];
+      emxEnsureCapacity_real_T(d_y, b_i);
+      for (b_i = 0; b_i < loop_ub; b_i++) {
+        d_y->data[b_i] = r->data[b_i + r->size[0]];
       }
-      sort(B, iidx);
-      i1 = B->size[0];
-      B->size[0] = iidx->size[0];
-      emxEnsureCapacity_real_T(B, i1);
+      sort(d_y, iidx);
+      b_i = d_y->size[0];
+      d_y->size[0] = iidx->size[0];
+      emxEnsureCapacity_real_T(d_y, b_i);
       loop_ub = iidx->size[0];
-      for (i1 = 0; i1 < loop_ub; i1++) {
-        B->data[i1] = iidx->data[i1];
+      for (b_i = 0; b_i < loop_ub; b_i++) {
+        d_y->data[b_i] = iidx->data[b_i];
       }
       /*  bsb= units forming the new subset */
-      i1 = bsb->size[0];
+      b_i = bsb->size[0];
       bsb->size[0] = (int)b_mm + 1;
-      emxEnsureCapacity_real_T(bsb, i1);
+      emxEnsureCapacity_real_T(bsb, b_i);
       loop_ub = (int)b_mm;
-      for (i1 = 0; i1 <= loop_ub; i1++) {
-        bsb->data[i1] = B->data[i1];
+      for (b_i = 0; b_i <= loop_ub; b_i++) {
+        bsb->data[b_i] = d_y->data[b_i];
       }
-      i1 = bsbT->size[0];
+      b_i = bsbT->size[0];
       bsbT->size[0] = n;
-      emxEnsureCapacity_boolean_T(bsbT, i1);
-      for (i1 = 0; i1 < n; i1++) {
-        bsbT->data[i1] = false;
+      emxEnsureCapacity_boolean_T(bsbT, b_i);
+      for (b_i = 0; b_i < n; b_i++) {
+        bsbT->data[b_i] = false;
       }
-      i1 = iidx->size[0];
+      b_i = iidx->size[0];
       iidx->size[0] = (int)b_mm + 1;
-      emxEnsureCapacity_int32_T(iidx, i1);
+      emxEnsureCapacity_int32_T(iidx, b_i);
       loop_ub = (int)b_mm;
-      for (i1 = 0; i1 <= loop_ub; i1++) {
-        iidx->data[i1] = (int)B->data[i1];
+      for (b_i = 0; b_i <= loop_ub; b_i++) {
+        iidx->data[b_i] = (int)d_y->data[b_i];
       }
       loop_ub = iidx->size[0];
-      for (i1 = 0; i1 < loop_ub; i1++) {
-        bsbT->data[iidx->data[i1] - 1] = true;
+      for (b_i = 0; b_i < loop_ub; b_i++) {
+        bsbT->data[iidx->data[b_i] - 1] = true;
       }
       loop_ub = X->size[1];
-      i1 = Xb->size[0] * Xb->size[1];
+      b_i = Xb->size[0] * Xb->size[1];
       Xb->size[0] = (int)b_mm + 1;
       Xb->size[1] = X->size[1];
-      emxEnsureCapacity_real_T(Xb, i1);
-      for (i1 = 0; i1 < loop_ub; i1++) {
+      emxEnsureCapacity_real_T(Xb, b_i);
+      for (b_i = 0; b_i < loop_ub; b_i++) {
         aoffset = (int)b_mm;
         for (p = 0; p <= aoffset; p++) {
-          Xb->data[p + Xb->size[0] * i1] =
-              X->data[((int)B->data[p] + X->size[0] * i1) - 1];
+          Xb->data[p + Xb->size[0] * b_i] =
+              X->data[((int)d_y->data[p] + X->size[0] * b_i) - 1];
         }
       }
       /*  subset of X */
-      i1 = yb->size[0];
+      b_i = yb->size[0];
       yb->size[0] = (int)b_mm + 1;
-      emxEnsureCapacity_real_T(yb, i1);
+      emxEnsureCapacity_real_T(yb, b_i);
       loop_ub = (int)b_mm;
-      for (i1 = 0; i1 <= loop_ub; i1++) {
-        yb->data[i1] = y->data[(int)B->data[i1] - 1];
+      for (b_i = 0; b_i <= loop_ub; b_i++) {
+        yb->data[b_i] = y->data[(int)d_y->data[b_i] - 1];
       }
       /*  subset of y */
       if (b_mm >= init) {
@@ -878,23 +866,23 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
         /*  unit=setdiff(bsb,oldbsb); */
         /*  new instruction to find unit */
         loop_ub = oldbsbT->size[0];
-        for (i1 = 0; i1 < loop_ub; i1++) {
-          oldbsbT->data[i1] = !oldbsbT->data[i1];
+        for (b_i = 0; b_i < loop_ub; b_i++) {
+          oldbsbT->data[b_i] = !oldbsbT->data[b_i];
         }
         nwhile = bsbT->size[0] - 1;
         p = 0;
-        for (loop_ub = 0; loop_ub <= nwhile; loop_ub++) {
-          if (bsbT->data[loop_ub] && oldbsbT->data[loop_ub]) {
+        for (b_i = 0; b_i <= nwhile; b_i++) {
+          if (bsbT->data[b_i] && oldbsbT->data[b_i]) {
             p++;
           }
         }
-        i1 = unit->size[0];
+        b_i = unit->size[0];
         unit->size[0] = p;
-        emxEnsureCapacity_real_T(unit, i1);
+        emxEnsureCapacity_real_T(unit, b_i);
         aoffset = 0;
-        for (loop_ub = 0; loop_ub <= nwhile; loop_ub++) {
-          if (bsbT->data[loop_ub] && oldbsbT->data[loop_ub]) {
-            unit->data[aoffset] = seq->data[loop_ub];
+        for (b_i = 0; b_i <= nwhile; b_i++) {
+          if (bsbT->data[b_i] && oldbsbT->data[b_i]) {
+            unit->data[aoffset] = seq->data[b_i];
             aoffset++;
           }
         }
@@ -902,29 +890,29 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
         /*  first 10. */
         if (unit->size[0] <= 10) {
           if (2 > unit->size[0] + 1) {
-            i1 = -1;
+            b_i = -1;
             p = -1;
           } else {
-            i1 = 0;
+            b_i = 0;
             p = unit->size[0];
           }
           aoffset = (int)(((double)b_mm - init) + 1.0) - 1;
-          nwhile = p - i1;
+          nwhile = p - b_i;
           for (p = 0; p < nwhile; p++) {
-            Un->data[aoffset + Un->size[0] * ((i1 + p) + 1)] = unit->data[p];
+            Un->data[aoffset + Un->size[0] * ((b_i + p) + 1)] = unit->data[p];
           }
         } else {
           int2str(b_mm, c_mm.data, c_mm.size);
           aoffset = (int)(((double)b_mm - init) + 1.0);
-          for (i1 = 0; i1 < 10; i1++) {
-            Un->data[(aoffset + Un->size[0] * (i1 + 1)) - 1] = unit->data[i1];
+          for (b_i = 0; b_i < 10; b_i++) {
+            Un->data[(aoffset + Un->size[0] * (b_i + 1)) - 1] = unit->data[b_i];
           }
         }
       }
     }
   }
   emxFree_real_T(&d_y);
-  emxFree_real_T(&B);
+  emxFree_real_T(&C);
   emxFree_int32_T(&iidx);
   emxFree_real_T(&unit);
   emxFree_boolean_T(&oldbsbT);

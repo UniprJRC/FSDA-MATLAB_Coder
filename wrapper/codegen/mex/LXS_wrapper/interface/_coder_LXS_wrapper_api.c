@@ -32,7 +32,7 @@ static void ab_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
                                 real_T **ret_data, int32_T ret_size[2]);
 
 static const mxArray *ab_emlrt_marshallOut(const emlrtStack *sp,
-                                           const struct_LXSlmsscalar_T *u);
+                                           const struct_LXS_T *u);
 
 static boolean_T bb_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
                                      const emlrtMsgIdentifier *msgId);
@@ -93,7 +93,7 @@ static void ab_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
 }
 
 static const mxArray *ab_emlrt_marshallOut(const emlrtStack *sp,
-                                           const struct_LXSlmsscalar_T *u)
+                                           const struct_LXS_T *u)
 {
   static const int32_T iv1[2] = {1, 3};
   static const char_T *sv[13] = {
@@ -387,7 +387,7 @@ void LXS_wrapper_api(LXS_wrapperStackData *SD, const mxArray *const prhs[13],
   emxArray_real_T *C;
   emxArray_real_T *X;
   emxArray_real_T *y;
-  struct_LXSlmsscalar_T out;
+  struct_LXS_T out;
   real_T conflev;
   real_T h;
   real_T lms;
@@ -404,7 +404,7 @@ void LXS_wrapper_api(LXS_wrapperStackData *SD, const mxArray *const prhs[13],
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
   emxInit_real_T(&st, &y, 1, &xw_emlrtRTEI, true);
   emxInit_real_T(&st, &X, 2, &xw_emlrtRTEI, true);
-  c_emxInitStruct_struct_LXSlmssc(&st, &out, &xw_emlrtRTEI, true);
+  emxInitStruct_struct_LXS_T(&st, &out, &xw_emlrtRTEI, true);
   emxInit_real_T(&st, &C, 2, &xw_emlrtRTEI, true);
   /* Marshall function inputs */
   y->canFreeData = false;
@@ -429,7 +429,7 @@ void LXS_wrapper_api(LXS_wrapperStackData *SD, const mxArray *const prhs[13],
               yxsave, &out, C);
   /* Marshall function outputs */
   plhs[0] = ab_emlrt_marshallOut(&st, &out);
-  c_emxFreeStruct_struct_LXSlmssc(&out);
+  emxFreeStruct_struct_LXS_T(&out);
   emxFree_real_T(&X);
   emxFree_real_T(&y);
   if (nlhs > 1) {

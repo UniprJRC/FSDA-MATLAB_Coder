@@ -925,7 +925,7 @@ double RobRegrSize(double n, double p, double bdp)
                                '0', '9', '0', 'T', 'B'};
   static const char cv8[10] = {'M', 'M', 'e', 'f', 'f',
                                '0', '9', '5', 'T', 'B'};
-  static const char cv[9] = {'L', 'T', 'S', 'b', 'd', 'p', '0', '5', '0'};
+  static const char b_cv[9] = {'L', 'T', 'S', 'b', 'd', 'p', '0', '5', '0'};
   static const char cv1[9] = {'L', 'T', 'S', 'b', 'd', 'p', '0', '2', '5'};
   static const char cv10[9] = {'S', 'b', 'd', 'p', '0', '5', '0', 'O', 'P'};
   static const char cv14[9] = {'S', 'b', 'd', 'p', '0', '2', '5', 'H', 'Y'};
@@ -1243,7 +1243,7 @@ double RobRegrSize(double n, double p, double bdp)
   r1.f1.size[0] = 1;
   r1.f1.size[1] = 9;
   for (ib_size = 0; ib_size < 9; ib_size++) {
-    r.f1.data[ib_size] = cv[ib_size];
+    r.f1.data[ib_size] = b_cv[ib_size];
     r1.f1.data[ib_size] = cv1[ib_size];
   }
   r2.f1.size[0] = 1;
@@ -1466,7 +1466,7 @@ double RobRegrSize(double n, double p, double bdp)
     namefile1->size[1] = 9;
     emxEnsureCapacity_char_T(namefile1, ib_size);
     for (ib_size = 0; ib_size < 9; ib_size++) {
-      namefile1->data[ib_size] = cv[ib_size];
+      namefile1->data[ib_size] = b_cv[ib_size];
     }
   }
   /*  Simulations have been performed for the values of n and p given in */
@@ -1570,12 +1570,12 @@ double RobRegrSize(double n, double p, double bdp)
     for (ib_size = 0; ib_size < 9; ib_size++) {
       b_THseln[ib_size] = THseln[(ib_size + 1) << 1];
     }
-    b_mldivide(b_dv1, b_THseln, b_dv2);
+    c_mldivide(b_dv1, b_THseln, b_dv2);
     yhat_idx_2 = (b_dv2[0] + p * b_dv2[1]) + a * b_dv2[2];
     for (ib_size = 0; ib_size < 9; ib_size++) {
       b_THseln[ib_size] = THseln[((ib_size + 1) << 1) + 1];
     }
-    b_mldivide(b_dv1, b_THseln, b_dv2);
+    c_mldivide(b_dv1, b_THseln, b_dv2);
     a = (b_dv2[0] + p * b_dv2[1]) + a * b_dv2[2];
   } else {
     yhat_idx_0 = THseln[0];

@@ -23,11 +23,12 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void b_mldivide(const double A[27], const double B[9], double Y[3]);
+double b_mldivide(const emxArray_real_T *A, const emxArray_real_T *B);
 
-void c_mldivide(const emxArray_real_T *A, emxArray_real_T *B);
+void c_mldivide(const double A[27], const double B[9], double Y[3]);
 
-double mldivide(const emxArray_real_T *A, const emxArray_real_T *B);
+void mldivide(const emxArray_real_T *A, const emxArray_real_T *B,
+              emxArray_real_T *Y);
 
 #ifdef __cplusplus
 }

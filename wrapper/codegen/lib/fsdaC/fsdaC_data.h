@@ -24,6 +24,7 @@ extern bool freq_not_empty;
 extern const int iv[5];
 extern const double dv2[31];
 extern const bool bv[128];
+extern const char cv[128];
 extern bool isInitialized_fsdaC;
 
 #endif

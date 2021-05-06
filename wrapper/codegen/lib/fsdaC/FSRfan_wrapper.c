@@ -68,7 +68,7 @@ void FSRfan_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   emxArray_real_T *yb;
   emxArray_real_T *z;
   emxArray_real_T *zb;
-  struct_LXSlmsstruct_T expl_temp;
+  struct_LXS_T expl_temp;
   double outSCpn_Score_data[4];
   double BoxCox;
   double b_expl_temp;
@@ -1154,7 +1154,7 @@ void FSRfan_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   emxInit_real_T(&unit, 1);
   emxInit_int32_T(&iidx, 1);
   emxInit_real_T(&a, 1);
-  c_emxInitStruct_struct_LXSlmsst(&expl_temp);
+  emxInitStruct_struct_LXS_T(&expl_temp);
   for (b_i = 0; b_i < b_n; b_i++) {
     if (BoxCox == 1.0) {
       /*  Construct transformed z according to power tansformation */
@@ -1327,14 +1327,7 @@ void FSRfan_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
         }
         if (empty_non_axis_sizes) {
           /*  rank is ok */
-          loop_ub = zb->size[0];
-          i1 = blast->size[0];
-          blast->size[0] = zb->size[0];
-          emxEnsureCapacity_real_T(blast, i1);
-          for (i1 = 0; i1 < loop_ub; i1++) {
-            blast->data[i1] = zb->data[i1];
-          }
-          c_mldivide(Xb, blast);
+          mldivide(Xb, zb, blast);
           /*  Store correctly computed b for the case of rank problem */
         } else {
           /*  number of independent columns is smaller than number of parameters
@@ -1498,7 +1491,7 @@ void FSRfan_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     }
   }
   emxFree_real_T(&c_y);
-  c_emxFreeStruct_struct_LXSlmsst(&expl_temp);
+  emxFreeStruct_struct_LXS_T(&expl_temp);
   emxFree_real_T(&a);
   emxFree_int32_T(&iidx);
   emxFree_real_T(&unit);

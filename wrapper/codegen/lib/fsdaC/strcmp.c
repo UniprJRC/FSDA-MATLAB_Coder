@@ -17,7 +17,7 @@
 /* Function Definitions */
 bool b_strcmp(const char a_data[], const int a_size[2])
 {
-  static const char cv[2] = {'m', 'd'};
+  static const char b_cv[2] = {'m', 'd'};
   int exitg1;
   int kstr;
   bool b_bool;
@@ -27,7 +27,7 @@ bool b_strcmp(const char a_data[], const int a_size[2])
     do {
       exitg1 = 0;
       if (kstr < 2) {
-        if (a_data[kstr] != cv[kstr]) {
+        if (a_data[kstr] != b_cv[kstr]) {
           exitg1 = 1;
         } else {
           kstr++;
@@ -43,7 +43,7 @@ bool b_strcmp(const char a_data[], const int a_size[2])
 
 bool c_strcmp(const char a_data[], const int a_size[2])
 {
-  static const char cv[3] = {'b', 'i', 'v'};
+  static const char b_cv[3] = {'b', 'i', 'v'};
   int exitg1;
   int kstr;
   bool b_bool;
@@ -53,7 +53,7 @@ bool c_strcmp(const char a_data[], const int a_size[2])
     do {
       exitg1 = 0;
       if (kstr < 3) {
-        if (a_data[kstr] != cv[kstr]) {
+        if (a_data[kstr] != b_cv[kstr]) {
           exitg1 = 1;
         } else {
           kstr++;
@@ -69,7 +69,7 @@ bool c_strcmp(const char a_data[], const int a_size[2])
 
 bool d_strcmp(const char a_data[], const int a_size[2])
 {
-  static const char cv[3] = {'u', 'n', 'i'};
+  static const char b_cv[3] = {'u', 'n', 'i'};
   int exitg1;
   int kstr;
   bool b_bool;
@@ -79,7 +79,7 @@ bool d_strcmp(const char a_data[], const int a_size[2])
     do {
       exitg1 = 0;
       if (kstr < 3) {
-        if (a_data[kstr] != cv[kstr]) {
+        if (a_data[kstr] != b_cv[kstr]) {
           exitg1 = 1;
         } else {
           kstr++;
@@ -95,7 +95,7 @@ bool d_strcmp(const char a_data[], const int a_size[2])
 
 bool e_strcmp(const char a_data[], const int a_size[2])
 {
-  static const char cv[2] = {'m', 'd'};
+  static const char b_cv[2] = {'m', 'd'};
   int exitg1;
   int kstr;
   bool b_bool;
@@ -105,7 +105,7 @@ bool e_strcmp(const char a_data[], const int a_size[2])
     do {
       exitg1 = 0;
       if (kstr < 2) {
-        if (a_data[kstr] != cv[kstr]) {
+        if (a_data[kstr] != b_cv[kstr]) {
           exitg1 = 1;
         } else {
           kstr++;
@@ -121,7 +121,7 @@ bool e_strcmp(const char a_data[], const int a_size[2])
 
 bool f_strcmp(const char a_data[], const int a_size[2])
 {
-  static const char cv[3] = {'b', 'i', 'v'};
+  static const char b_cv[3] = {'b', 'i', 'v'};
   int exitg1;
   int kstr;
   bool b_bool;
@@ -131,7 +131,7 @@ bool f_strcmp(const char a_data[], const int a_size[2])
     do {
       exitg1 = 0;
       if (kstr < 3) {
-        if (a_data[kstr] != cv[kstr]) {
+        if (a_data[kstr] != b_cv[kstr]) {
           exitg1 = 1;
         } else {
           kstr++;
@@ -147,7 +147,7 @@ bool f_strcmp(const char a_data[], const int a_size[2])
 
 bool g_strcmp(const char a_data[], const int a_size[2])
 {
-  static const char cv[3] = {'u', 'n', 'i'};
+  static const char b_cv[3] = {'u', 'n', 'i'};
   int exitg1;
   int kstr;
   bool b_bool;
@@ -157,7 +157,7 @@ bool g_strcmp(const char a_data[], const int a_size[2])
     do {
       exitg1 = 0;
       if (kstr < 3) {
-        if (a_data[kstr] != cv[kstr]) {
+        if (a_data[kstr] != b_cv[kstr]) {
           exitg1 = 1;
         } else {
           kstr++;
@@ -173,7 +173,7 @@ bool g_strcmp(const char a_data[], const int a_size[2])
 
 bool h_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[6] = {'B', 'o', 'x', 'C', 'o', 'x'};
+  static const char b_cv[6] = {'B', 'o', 'x', 'C', 'o', 'x'};
   int exitg1;
   int kstr;
   bool b_bool;
@@ -183,7 +183,7 @@ bool h_strcmp(const emxArray_char_T *a)
     do {
       exitg1 = 0;
       if (kstr < 6) {
-        if (a->data[kstr] != cv[kstr]) {
+        if (a->data[kstr] != b_cv[kstr]) {
           exitg1 = 1;
         } else {
           kstr++;
@@ -199,7 +199,7 @@ bool h_strcmp(const emxArray_char_T *a)
 
 bool i_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[2] = {'Y', 'J'};
+  static const char b_cv[2] = {'Y', 'J'};
   int exitg1;
   int kstr;
   bool b_bool;
@@ -209,7 +209,7 @@ bool i_strcmp(const emxArray_char_T *a)
     do {
       exitg1 = 0;
       if (kstr < 2) {
-        if (a->data[kstr] != cv[kstr]) {
+        if (a->data[kstr] != b_cv[kstr]) {
           exitg1 = 1;
         } else {
           kstr++;
@@ -225,7 +225,7 @@ bool i_strcmp(const emxArray_char_T *a)
 
 bool j_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[4] = {'Y', 'J', 'p', 'n'};
+  static const char b_cv[4] = {'Y', 'J', 'p', 'n'};
   int exitg1;
   int kstr;
   bool b_bool;
@@ -235,7 +235,7 @@ bool j_strcmp(const emxArray_char_T *a)
     do {
       exitg1 = 0;
       if (kstr < 4) {
-        if (a->data[kstr] != cv[kstr]) {
+        if (a->data[kstr] != b_cv[kstr]) {
           exitg1 = 1;
         } else {
           kstr++;
@@ -251,7 +251,7 @@ bool j_strcmp(const emxArray_char_T *a)
 
 bool k_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[5] = {'Y', 'J', 'a', 'l', 'l'};
+  static const char b_cv[5] = {'Y', 'J', 'a', 'l', 'l'};
   int exitg1;
   int kstr;
   bool b_bool;
@@ -261,7 +261,7 @@ bool k_strcmp(const emxArray_char_T *a)
     do {
       exitg1 = 0;
       if (kstr < 5) {
-        if (a->data[kstr] != cv[kstr]) {
+        if (a->data[kstr] != b_cv[kstr]) {
           exitg1 = 1;
         } else {
           kstr++;

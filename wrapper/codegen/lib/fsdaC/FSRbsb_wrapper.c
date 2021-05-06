@@ -920,14 +920,7 @@ void FSRbsb_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
       }
       if (Ra) {
         /*  rank is ok */
-        loop_ub = yb->size[0];
-        i1 = blast->size[0];
-        blast->size[0] = yb->size[0];
-        emxEnsureCapacity_real_T(blast, i1);
-        for (i1 = 0; i1 < loop_ub; i1++) {
-          blast->data[i1] = yb->data[i1];
-        }
-        c_mldivide(Xb, blast);
+        mldivide(Xb, yb, blast);
       } else {
         /*  in case of rank problem, the last orrectly computed coefficients are
          * used */

@@ -22,13 +22,6 @@
 #include <string.h>
 
 /* Function Declarations */
-void c_emxFreeStruct_struct_LXSlmsst(struct_LXSlmsstruct_T *pStruct);
-
-void c_emxInitStruct_struct_LXSlmsst(const emlrtStack *sp,
-                                     struct_LXSlmsstruct_T *pStruct,
-                                     const emlrtRTEInfo *srcLocation,
-                                     boolean_T doPush);
-
 void emxEnsureCapacity_boolean_T(const emlrtStack *sp,
                                  emxArray_boolean_T *emxArray, int32_T oldNumel,
                                  const emlrtRTEInfo *srcLocation);
@@ -53,6 +46,8 @@ void emxEnsureCapacity_uint32_T(const emlrtStack *sp,
                                 emxArray_uint32_T *emxArray, int32_T oldNumel,
                                 const emlrtRTEInfo *srcLocation);
 
+void emxFreeStruct_struct_LXS_T(struct_LXS_T *pStruct);
+
 void emxFree_boolean_T(emxArray_boolean_T **pEmxArray);
 
 void emxFree_creal_T(emxArray_creal_T **pEmxArray);
@@ -64,6 +59,10 @@ void emxFree_ptrdiff_t(emxArray_ptrdiff_t **pEmxArray);
 void emxFree_real_T(emxArray_real_T **pEmxArray);
 
 void emxFree_uint32_T(emxArray_uint32_T **pEmxArray);
+
+void emxInitStruct_struct_LXS_T(const emlrtStack *sp, struct_LXS_T *pStruct,
+                                const emlrtRTEInfo *srcLocation,
+                                boolean_T doPush);
 
 void emxInit_boolean_T(const emlrtStack *sp, emxArray_boolean_T **pEmxArray,
                        int32_T numDimensions, const emlrtRTEInfo *srcLocation,

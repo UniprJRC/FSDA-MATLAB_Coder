@@ -56,15 +56,15 @@ struct emxArray_real_T_1 {
 typedef struct emxArray_real_T_1 emxArray_real_T_1;
 #endif /* typedef_emxArray_real_T_1 */
 
-#ifndef typedef_struct0_T
-#define typedef_struct0_T
+#ifndef typedef_struct_addt_T
+#define typedef_struct_addt_T
 typedef struct {
   emxArray_real_T_1 b;
   emxArray_real_T_1 S2add;
   emxArray_real_T_1x1 Tadd;
   emxArray_real_T_1x1 pval;
-} struct0_T;
-#endif /* typedef_struct0_T */
+} struct_addt_T;
+#endif /* typedef_struct_addt_T */
 
 #ifndef struct_emxArray_int32_T
 #define struct_emxArray_int32_T

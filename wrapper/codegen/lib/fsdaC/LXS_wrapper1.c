@@ -45,7 +45,7 @@ void LXS_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
                   const int bonflevoutX_size[2], double conflev, double h,
                   bool intercept, const struct1_T *lms, bool msg, bool nocheck,
                   bool nomes, double nsamp, bool rew, bool yxsave,
-                  struct_LXSlmsstruct_T *out, emxArray_real_T *C)
+                  struct_LXS_T *out, emxArray_real_T *C)
 {
   emxArray_boolean_T *weights;
   emxArray_char_T_1x310 b_p;
@@ -65,6 +65,7 @@ void LXS_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
   emxArray_real_T *c_expl_temp;
   emxArray_real_T *c_y;
   emxArray_real_T *d_expl_temp;
+  emxArray_real_T *d_y;
   emxArray_real_T *e_expl_temp;
   emxArray_real_T *expl_temp;
   emxArray_real_T *f_expl_temp;
@@ -849,6 +850,7 @@ void LXS_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
   emxInit_int32_T(&ia, 1);
   emxInit_int32_T(&ib, 1);
   emxInit_real_T(&expl_temp, 1);
+  emxInit_real_T(&d_y, 1);
   for (b_i = 0; b_i < i; b_i++) {
     if (b_i + 1U <= (unsigned int)tsampling) {
       tic(&ttic_tv_sec, &b_conflev);
@@ -895,13 +897,13 @@ void LXS_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
       /*  posteriori control on vector b */
       /*  Compute the vector of coefficients using matrice Xb and yb */
       loop_ub = C->size[1];
-      i1 = b->size[0];
-      b->size[0] = C->size[1];
-      emxEnsureCapacity_real_T(b, i1);
+      i1 = d_y->size[0];
+      d_y->size[0] = C->size[1];
+      emxEnsureCapacity_real_T(d_y, i1);
       for (i1 = 0; i1 < loop_ub; i1++) {
-        b->data[i1] = b_y->data[(int)C->data[b_i + C->size[0] * i1] - 1];
+        d_y->data[i1] = b_y->data[(int)C->data[b_i + C->size[0] * i1] - 1];
       }
-      c_mldivide(Xwithoutint, b);
+      mldivide(Xwithoutint, d_y, b);
     }
     if ((!rtIsNaN(b->data[0])) && (!rtIsInf(b->data[0]))) {
       /*  in this case the user has chosen the FAST LTS (with concentration
@@ -968,6 +970,7 @@ void LXS_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
   }
   emxFree_int32_T(&ib);
   emxFree_real_T(&c_y);
+  emxFree_real_T(&outliers);
   emxFree_real_T(&Xwithoutint);
   /*  perform C-steps on best 'bestr' solutions, till convergence or for a */
   /*  maximum of refstepsbestr steps using a convergence tolerance as specified
@@ -977,13 +980,13 @@ void LXS_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
   tsampling = rtInf;
   for (b_i = 0; b_i < b_loop_ub_tmp; b_i++) {
     loop_ub = bestbetas->size[1];
-    i = outliers->size[0];
-    outliers->size[0] = bestbetas->size[1];
-    emxEnsureCapacity_real_T(outliers, i);
+    i = d_y->size[0];
+    d_y->size[0] = bestbetas->size[1];
+    emxEnsureCapacity_real_T(d_y, i);
     for (i = 0; i < loop_ub; i++) {
-      outliers->data[i] = bestbetas->data[b_i + bestbetas->size[0] * i];
+      d_y->data[i] = bestbetas->data[b_i + bestbetas->size[0] * i];
     }
-    b_IRWLSreg(b_y, out->X, outliers, lms->refstepsbestr, lms->reftolbestr, h,
+    b_IRWLSreg(b_y, out->X, d_y, lms->refstepsbestr, lms->reftolbestr, h,
                tmp_betarw, &p, expl_temp);
     if (p < ncomb) {
       /*  sh0 = superbestscale */
@@ -1011,7 +1014,6 @@ void LXS_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
   }
   emxFree_real_T(&expl_temp);
   emxFree_real_T(&tmp_betarw);
-  emxFree_real_T(&outliers);
   emxFree_real_T(&bestsubset);
   /*  Pass from numerator of squared estimate of the scale to proper scale */
   /*  estimate */
@@ -1161,13 +1163,6 @@ void LXS_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
           nx++;
         }
       }
-      i = out->beta->size[0];
-      out->beta->size[0] = r2->size[0];
-      emxEnsureCapacity_real_T(out->beta, i);
-      loop_ub = r2->size[0];
-      for (i = 0; i < loop_ub; i++) {
-        out->beta->data[i] = b_y->data[r2->data[i] - 1];
-      }
       loop_ub = out->X->size[1];
       i = bestbetas->size[0] * bestbetas->size[1];
       bestbetas->size[0] = r2->size[0];
@@ -1180,8 +1175,15 @@ void LXS_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
               out->X->data[(r2->data[i1] + out->X->size[0] * i) - 1];
         }
       }
+      i = d_y->size[0];
+      d_y->size[0] = r2->size[0];
+      emxEnsureCapacity_real_T(d_y, i);
+      loop_ub = r2->size[0];
+      for (i = 0; i < loop_ub; i++) {
+        d_y->data[i] = b_y->data[r2->data[i] - 1];
+      }
       emxFree_int32_T(&r2);
-      c_mldivide(bestbetas, out->beta);
+      mldivide(bestbetas, d_y, out->beta);
       /*  The QR decomposition is equivalent to the above but less efficient: */
       /*  [Q,R]=qr(X(weights==1,:),0); */
       /*  brob = R\(Q'*y(weights==1)); */
@@ -1313,6 +1315,7 @@ void LXS_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
     tsampling = 0.0;
     /*  Standardized residuals are artificially set equal to raw residuals. */
   }
+  emxFree_real_T(&d_y);
   emxFree_int32_T(&ia);
   emxFree_real_T(&b);
   emxFree_real_T(&bestbetas);

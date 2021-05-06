@@ -540,14 +540,7 @@ void ScoreYJ(const emxArray_real_T *y, const emxArray_real_T *X,
   }
   emxFree_real_T(&vneg);
   /*  Compute residual sum of squares for null (reduced) model */
-  i = znonnegs->size[0];
-  znonnegs->size[0] = z->size[0];
-  emxEnsureCapacity_real_T(znonnegs, i);
-  loop_ub = z->size[0];
-  for (i = 0; i < loop_ub; i++) {
-    znonnegs->data[i] = z->data[i];
-  }
-  c_mldivide(X, znonnegs);
+  mldivide(X, z, znonnegs);
   i = vposlai->size[0];
   vposlai->size[0] = X->size[0];
   emxEnsureCapacity_real_T(vposlai, i);
@@ -610,14 +603,7 @@ void ScoreYJ(const emxArray_real_T *y, const emxArray_real_T *X,
   }
   emxFree_real_T(&w);
   /*  New code */
-  i = vposlai->size[0];
-  vposlai->size[0] = z->size[0];
-  emxEnsureCapacity_real_T(vposlai, i);
-  loop_ub = z->size[0];
-  for (i = 0; i < loop_ub; i++) {
-    vposlai->data[i] = z->data[i];
-  }
-  c_mldivide(Xw, vposlai);
+  mldivide(Xw, z, vposlai);
   mc = Xw->size[0] - 1;
   inner = Xw->size[1];
   i = znonnegs->size[0];

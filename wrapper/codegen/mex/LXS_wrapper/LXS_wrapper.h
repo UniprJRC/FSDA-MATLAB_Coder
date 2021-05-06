@@ -28,7 +28,7 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
                  const int32_T bonflevoutX_size[2], real_T conflev, real_T h,
                  boolean_T intercept, real_T lms, boolean_T msg,
                  boolean_T nocheck, boolean_T nomes, real_T nsamp,
-                 boolean_T rew, boolean_T yxsave, struct_LXSlmsscalar_T *out,
+                 boolean_T rew, boolean_T yxsave, struct_LXS_T *out,
                  emxArray_real_T *C);
 
 /* End of code generation (LXS_wrapper.h) */

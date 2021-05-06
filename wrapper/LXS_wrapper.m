@@ -59,6 +59,6 @@ assert(isa(yxsave, 'logical'));
     'bonflevoutX',bonflevoutX,'conflev',conflev,'h',h,'intercept',intercept,'lms',lms,...
     'nocheck',nocheck,'msg',msg,'nomes',nomes,'nsamp',nsamp','rew',rew,'yxsave',yxsave);
 
-coder.cstructname(out,'struct_LXSlmsscalar_T');
+coder.cstructname(out,'struct_LXS_T');
 
 end

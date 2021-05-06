@@ -377,18 +377,18 @@ void Score(const emxArray_real_T *y, const emxArray_real_T *X,
   qr(Xw, ri, R);
   temp = ri->size[1] - 1;
   kAcol = ri->size[0];
-  i = ylaim1->size[0];
-  ylaim1->size[0] = ri->size[1];
-  emxEnsureCapacity_real_T(ylaim1, i);
+  i = ylai->size[0];
+  ylai->size[0] = ri->size[1];
+  emxEnsureCapacity_real_T(ylai, i);
   for (b_i = 0; b_i <= temp; b_i++) {
-    ylaim1->data[b_i] = 0.0;
+    ylai->data[b_i] = 0.0;
   }
   for (k = 0; k < kAcol; k++) {
     for (b_i = 0; b_i <= temp; b_i++) {
-      ylaim1->data[b_i] += ri->data[b_i * ri->size[0] + k] * z->data[k];
+      ylai->data[b_i] += ri->data[b_i * ri->size[0] + k] * z->data[k];
     }
   }
-  c_mldivide(R, ylaim1);
+  mldivide(R, ylai, ylaim1);
   temp = Xw->size[0] - 1;
   kAcol = Xw->size[1];
   i = ylai->size[0];

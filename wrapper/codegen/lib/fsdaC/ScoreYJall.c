@@ -826,14 +826,7 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
   }
   emxFree_real_T(&logvneg);
   /*  Compute residual sum of squares for null (reduced) model */
-  i = r->size[0];
-  r->size[0] = vneg->size[0];
-  emxEnsureCapacity_real_T(r, i);
-  loop_ub = vneg->size[0];
-  for (i = 0; i < loop_ub; i++) {
-    r->data[i] = vneg->data[i];
-  }
-  c_mldivide(X, r);
+  mldivide(X, vneg, r);
   mtimes(X, r, znonnegs);
   i = znonnegs->size[0];
   znonnegs->size[0] = vneg->size[0];
@@ -886,14 +879,7 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
   }
   emxFree_real_T(&w);
   /*  New code */
-  i = vposlai->size[0];
-  vposlai->size[0] = vneg->size[0];
-  emxEnsureCapacity_real_T(vposlai, i);
-  loop_ub = vneg->size[0];
-  for (i = 0; i < loop_ub; i++) {
-    vposlai->data[i] = vneg->data[i];
-  }
-  c_mldivide(Xw, vposlai);
+  mldivide(Xw, vneg, vposlai);
   mtimes(Xw, vposlai, znonnegs);
   i = znonnegs->size[0];
   znonnegs->size[0] = vneg->size[0];
@@ -968,14 +954,7 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
     /*          se = sqrt(diag(xtxi*sse/(n-p-1))); */
     /*          Sc(i,1) = -beta(end)/se(end); */
     /*  New code */
-    i = vposlai->size[0];
-    vposlai->size[0] = vneg->size[0];
-    emxEnsureCapacity_real_T(vposlai, i);
-    loop_ub = vneg->size[0];
-    for (i = 0; i < loop_ub; i++) {
-      vposlai->data[i] = vneg->data[i];
-    }
-    c_mldivide(Xw, vposlai);
+    mldivide(Xw, vneg, vposlai);
     mtimes(Xw, vposlai, znonnegs);
     i = znonnegs->size[0];
     znonnegs->size[0] = vneg->size[0];
@@ -1053,14 +1032,7 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
     /*          se = sqrt(diag(xtxi*sse/(n-p-1))); */
     /*          Sc(i,2) = -beta(end)/se(end); */
     /*  New code */
-    i = vposlai->size[0];
-    vposlai->size[0] = vneg->size[0];
-    emxEnsureCapacity_real_T(vposlai, i);
-    loop_ub = vneg->size[0];
-    for (i = 0; i < loop_ub; i++) {
-      vposlai->data[i] = vneg->data[i];
-    }
-    c_mldivide(Xw, vposlai);
+    mldivide(Xw, vneg, vposlai);
     mtimes(Xw, vposlai, znonnegs);
     i = znonnegs->size[0];
     znonnegs->size[0] = vneg->size[0];
@@ -1144,14 +1116,7 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
         Xw->data[i2 + Xw->size[0] * n] = wneg->data[i2];
       }
     }
-    i = r->size[0];
-    r->size[0] = vneg->size[0];
-    emxEnsureCapacity_real_T(r, i);
-    loop_ub = vneg->size[0];
-    for (i = 0; i < loop_ub; i++) {
-      r->data[i] = vneg->data[i];
-    }
-    c_mldivide(Xw, r);
+    mldivide(Xw, vneg, r);
     mtimes(Xw, r, vposlai);
     loop_ub = vneg->size[0];
     for (i = 0; i < loop_ub; i++) {

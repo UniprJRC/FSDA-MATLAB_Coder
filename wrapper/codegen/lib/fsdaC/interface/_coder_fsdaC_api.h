@@ -268,8 +268,8 @@ typedef struct {
 } cell_wrap_6;
 #endif /* typedef_cell_wrap_6 */
 
-#ifndef typedef_struct_LXSlmsscalar_T
-#define typedef_struct_LXSlmsscalar_T
+#ifndef typedef_struct_LXS_T
+#define typedef_struct_LXS_T
 typedef struct {
   emxArray_boolean_T *weights;
   boolean_T rew;
@@ -284,27 +284,8 @@ typedef struct {
   emxArray_real_T *X;
   emxArray_real_T *y;
   char_T class[3];
-} struct_LXSlmsscalar_T;
-#endif /* typedef_struct_LXSlmsscalar_T */
-
-#ifndef typedef_struct_LXSlmsstruct_T
-#define typedef_struct_LXSlmsstruct_T
-typedef struct {
-  emxArray_boolean_T *weights;
-  boolean_T rew;
-  emxArray_real_T *beta;
-  real_T scale;
-  emxArray_real_T *residuals;
-  emxArray_real_T *bs;
-  emxArray_real_T *outliers;
-  real_T conflev;
-  real_T h;
-  real_T singsub;
-  emxArray_real_T *X;
-  emxArray_real_T *y;
-  char_T class[3];
-} struct_LXSlmsstruct_T;
-#endif /* typedef_struct_LXSlmsstruct_T */
+} struct_LXS_T;
+#endif /* typedef_struct_LXS_T */
 
 #ifndef struct_emxArray_real_T_1
 #define struct_emxArray_real_T_1
@@ -318,15 +299,15 @@ struct emxArray_real_T_1 {
 typedef struct emxArray_real_T_1 emxArray_real_T_1;
 #endif /* typedef_emxArray_real_T_1 */
 
-#ifndef typedef_struct4_T
-#define typedef_struct4_T
+#ifndef typedef_struct_addt_T
+#define typedef_struct_addt_T
 typedef struct {
   emxArray_real_T_1 b;
   emxArray_real_T_1 S2add;
   emxArray_real_T_1x1 Tadd;
   emxArray_real_T_1x1 pval;
-} struct4_T;
-#endif /* typedef_struct4_T */
+} struct_addt_T;
+#endif /* typedef_struct_addt_T */
 
 #ifndef struct_emxArray_char_T_1x0
 #define struct_emxArray_char_T_1x0
@@ -495,14 +476,14 @@ void LXS_wrapper(emxArray_real_T *y, emxArray_real_T *X,
                  real_T conflev, real_T h, boolean_T intercept, real_T lms,
                  boolean_T msg, boolean_T nocheck, boolean_T nomes,
                  real_T nsamp, boolean_T rew, boolean_T yxsave,
-                 struct_LXSlmsscalar_T *out, emxArray_real_T *C);
+                 struct_LXS_T *out, emxArray_real_T *C);
 
 void LXS_wrapper1(emxArray_real_T *y, emxArray_real_T *X,
                   real_T bonflevoutX_data[], int32_T bonflevoutX_size[2],
                   real_T conflev, real_T h, boolean_T intercept, struct1_T *lms,
                   boolean_T msg, boolean_T nocheck, boolean_T nomes,
                   real_T nsamp, boolean_T rew, boolean_T yxsave,
-                  struct_LXSlmsstruct_T *out, emxArray_real_T *C);
+                  struct_LXS_T *out, emxArray_real_T *C);
 
 void LXS_wrapper1_api(const mxArray *const prhs[13], int32_T nlhs,
                       const mxArray *plhs[2]);
@@ -512,7 +493,7 @@ void LXS_wrapper_api(const mxArray *const prhs[13], int32_T nlhs,
 
 void addt_wrapper(emxArray_real_T *y, emxArray_real_T *X, emxArray_real_T *w,
                   boolean_T intercept, real_T la_data[], int32_T la_size[2],
-                  boolean_T nocheck, struct4_T *out);
+                  boolean_T nocheck, struct_addt_T *out);
 
 void addt_wrapper_api(const mxArray *const prhs[6], const mxArray **plhs);
 

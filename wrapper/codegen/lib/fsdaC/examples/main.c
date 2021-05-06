@@ -556,12 +556,12 @@ static void main_LXS_wrapper(void)
   emxArray_real_T *C;
   emxArray_real_T *X;
   emxArray_real_T *y;
-  struct_LXSlmsscalar_T out;
+  struct_LXS_T out;
   double bonflevoutX_data;
   double conflev_tmp;
   int bonflevoutX_size[2];
   bool intercept_tmp;
-  emxInit_struct_LXSlmsscalar_T(&out);
+  emxInit_struct_LXS_T(&out);
   emxInitArray_real_T(&C, 2);
   /* Initialize function 'LXS_wrapper' input arguments. */
   /* Initialize function input argument 'y'. */
@@ -578,7 +578,7 @@ static void main_LXS_wrapper(void)
               intercept_tmp, intercept_tmp, conflev_tmp, intercept_tmp,
               intercept_tmp, &out, C);
   emxDestroyArray_real_T(C);
-  emxDestroy_struct_LXSlmsscalar_T(out);
+  emxDestroy_struct_LXS_T(out);
   emxDestroyArray_real_T(X);
   emxDestroyArray_real_T(y);
 }
@@ -589,12 +589,12 @@ static void main_LXS_wrapper1(void)
   emxArray_real_T *X;
   emxArray_real_T *y;
   struct1_T r;
-  struct_LXSlmsstruct_T out;
+  struct_LXS_T out;
   double bonflevoutX_data;
   double conflev_tmp;
   int bonflevoutX_size[2];
   bool intercept_tmp;
-  emxInit_struct_LXSlmsstruct_T(&out);
+  emxInit_struct_LXS_T(&out);
   emxInitArray_real_T(&C, 2);
   /* Initialize function 'LXS_wrapper1' input arguments. */
   /* Initialize function input argument 'y'. */
@@ -613,7 +613,7 @@ static void main_LXS_wrapper1(void)
                intercept_tmp, conflev_tmp, intercept_tmp, intercept_tmp, &out,
                C);
   emxDestroyArray_real_T(C);
-  emxDestroy_struct_LXSlmsstruct_T(out);
+  emxDestroy_struct_LXS_T(out);
   emxDestroyArray_real_T(X);
   emxDestroyArray_real_T(y);
 }
@@ -623,7 +623,7 @@ static void main_addt_wrapper(void)
   emxArray_real_T *X;
   emxArray_real_T *w;
   emxArray_real_T *y;
-  struct4_T out;
+  struct_addt_T out;
   double la_data;
   int la_size[2];
   bool intercept_tmp;
