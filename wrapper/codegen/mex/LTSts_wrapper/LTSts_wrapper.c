@@ -66,654 +66,654 @@
 #include <string.h>
 
 /* Variable Definitions */
-static emlrtRTEInfo emlrtRTEI = { 1845,/* lineNo */
+static emlrtRTEInfo emlrtRTEI = { 1854,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo b_emlrtRTEI = { 2404,/* lineNo */
+static emlrtRTEInfo b_emlrtRTEI = { 2413,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRSInfo emlrtRSI = { 114,   /* lineNo */
+static emlrtRSInfo emlrtRSI = { 116,   /* lineNo */
   "LTSts_wrapper",                     /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\LTSts_wrapper.m"/* pathName */
 };
 
-static emlrtRSInfo b_emlrtRSI = { 2382,/* lineNo */
+static emlrtRSInfo b_emlrtRSI = { 2391,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo c_emlrtRSI = { 2128,/* lineNo */
+static emlrtRSInfo c_emlrtRSI = { 2137,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo d_emlrtRSI = { 2122,/* lineNo */
+static emlrtRSInfo d_emlrtRSI = { 2131,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo e_emlrtRSI = { 2692,/* lineNo */
+static emlrtRSInfo e_emlrtRSI = { 2701,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo f_emlrtRSI = { 2674,/* lineNo */
+static emlrtRSInfo f_emlrtRSI = { 2683,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo g_emlrtRSI = { 2664,/* lineNo */
+static emlrtRSInfo g_emlrtRSI = { 2673,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo h_emlrtRSI = { 2658,/* lineNo */
+static emlrtRSInfo h_emlrtRSI = { 2667,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo i_emlrtRSI = { 2655,/* lineNo */
+static emlrtRSInfo i_emlrtRSI = { 2664,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo j_emlrtRSI = { 2650,/* lineNo */
+static emlrtRSInfo j_emlrtRSI = { 2659,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo k_emlrtRSI = { 2648,/* lineNo */
+static emlrtRSInfo k_emlrtRSI = { 2657,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo l_emlrtRSI = { 2634,/* lineNo */
+static emlrtRSInfo l_emlrtRSI = { 2643,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo m_emlrtRSI = { 2627,/* lineNo */
+static emlrtRSInfo m_emlrtRSI = { 2636,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo n_emlrtRSI = { 2603,/* lineNo */
+static emlrtRSInfo n_emlrtRSI = { 2612,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo o_emlrtRSI = { 2601,/* lineNo */
+static emlrtRSInfo o_emlrtRSI = { 2610,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo p_emlrtRSI = { 2598,/* lineNo */
+static emlrtRSInfo p_emlrtRSI = { 2607,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo q_emlrtRSI = { 2597,/* lineNo */
+static emlrtRSInfo q_emlrtRSI = { 2606,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo r_emlrtRSI = { 2591,/* lineNo */
+static emlrtRSInfo r_emlrtRSI = { 2600,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo s_emlrtRSI = { 2589,/* lineNo */
+static emlrtRSInfo s_emlrtRSI = { 2598,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo t_emlrtRSI = { 2587,/* lineNo */
+static emlrtRSInfo t_emlrtRSI = { 2596,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo u_emlrtRSI = { 2582,/* lineNo */
+static emlrtRSInfo u_emlrtRSI = { 2591,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo v_emlrtRSI = { 2404,/* lineNo */
+static emlrtRSInfo v_emlrtRSI = { 2413,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo w_emlrtRSI = { 2371,/* lineNo */
+static emlrtRSInfo w_emlrtRSI = { 2380,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo x_emlrtRSI = { 2214,/* lineNo */
+static emlrtRSInfo x_emlrtRSI = { 2223,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo y_emlrtRSI = { 2210,/* lineNo */
+static emlrtRSInfo y_emlrtRSI = { 2219,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo ab_emlrtRSI = { 2186,/* lineNo */
+static emlrtRSInfo ab_emlrtRSI = { 2195,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo bb_emlrtRSI = { 2183,/* lineNo */
+static emlrtRSInfo bb_emlrtRSI = { 2192,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo cb_emlrtRSI = { 2181,/* lineNo */
+static emlrtRSInfo cb_emlrtRSI = { 2190,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo db_emlrtRSI = { 2173,/* lineNo */
+static emlrtRSInfo db_emlrtRSI = { 2182,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo eb_emlrtRSI = { 2169,/* lineNo */
+static emlrtRSInfo eb_emlrtRSI = { 2178,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo fb_emlrtRSI = { 2166,/* lineNo */
+static emlrtRSInfo fb_emlrtRSI = { 2175,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo gb_emlrtRSI = { 2149,/* lineNo */
+static emlrtRSInfo gb_emlrtRSI = { 2158,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo hb_emlrtRSI = { 2148,/* lineNo */
+static emlrtRSInfo hb_emlrtRSI = { 2157,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo ib_emlrtRSI = { 2146,/* lineNo */
+static emlrtRSInfo ib_emlrtRSI = { 2155,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo jb_emlrtRSI = { 2145,/* lineNo */
+static emlrtRSInfo jb_emlrtRSI = { 2154,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo kb_emlrtRSI = { 2140,/* lineNo */
+static emlrtRSInfo kb_emlrtRSI = { 2149,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo lb_emlrtRSI = { 2119,/* lineNo */
+static emlrtRSInfo lb_emlrtRSI = { 2128,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo mb_emlrtRSI = { 2082,/* lineNo */
+static emlrtRSInfo mb_emlrtRSI = { 2091,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo nb_emlrtRSI = { 2081,/* lineNo */
+static emlrtRSInfo nb_emlrtRSI = { 2090,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo ob_emlrtRSI = { 2080,/* lineNo */
+static emlrtRSInfo ob_emlrtRSI = { 2089,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo pb_emlrtRSI = { 2077,/* lineNo */
+static emlrtRSInfo pb_emlrtRSI = { 2086,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo qb_emlrtRSI = { 2076,/* lineNo */
+static emlrtRSInfo qb_emlrtRSI = { 2085,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo rb_emlrtRSI = { 2068,/* lineNo */
+static emlrtRSInfo rb_emlrtRSI = { 2077,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo sb_emlrtRSI = { 2067,/* lineNo */
+static emlrtRSInfo sb_emlrtRSI = { 2076,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo tb_emlrtRSI = { 2066,/* lineNo */
+static emlrtRSInfo tb_emlrtRSI = { 2075,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo ub_emlrtRSI = { 2063,/* lineNo */
+static emlrtRSInfo ub_emlrtRSI = { 2072,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo vb_emlrtRSI = { 2061,/* lineNo */
+static emlrtRSInfo vb_emlrtRSI = { 2070,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo wb_emlrtRSI = { 2025,/* lineNo */
+static emlrtRSInfo wb_emlrtRSI = { 2034,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo xb_emlrtRSI = { 2023,/* lineNo */
+static emlrtRSInfo xb_emlrtRSI = { 2032,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo yb_emlrtRSI = { 2021,/* lineNo */
+static emlrtRSInfo yb_emlrtRSI = { 2030,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo ac_emlrtRSI = { 2019,/* lineNo */
+static emlrtRSInfo ac_emlrtRSI = { 2028,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo bc_emlrtRSI = { 2016,/* lineNo */
+static emlrtRSInfo bc_emlrtRSI = { 2025,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo cc_emlrtRSI = { 2015,/* lineNo */
+static emlrtRSInfo cc_emlrtRSI = { 2024,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo dc_emlrtRSI = { 2014,/* lineNo */
+static emlrtRSInfo dc_emlrtRSI = { 2023,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo ec_emlrtRSI = { 1985,/* lineNo */
+static emlrtRSInfo ec_emlrtRSI = { 1994,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo fc_emlrtRSI = { 1983,/* lineNo */
+static emlrtRSInfo fc_emlrtRSI = { 1992,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo gc_emlrtRSI = { 1980,/* lineNo */
+static emlrtRSInfo gc_emlrtRSI = { 1989,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo hc_emlrtRSI = { 1977,/* lineNo */
+static emlrtRSInfo hc_emlrtRSI = { 1986,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo ic_emlrtRSI = { 1975,/* lineNo */
+static emlrtRSInfo ic_emlrtRSI = { 1984,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo jc_emlrtRSI = { 1961,/* lineNo */
+static emlrtRSInfo jc_emlrtRSI = { 1970,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo kc_emlrtRSI = { 1960,/* lineNo */
+static emlrtRSInfo kc_emlrtRSI = { 1969,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo lc_emlrtRSI = { 1956,/* lineNo */
+static emlrtRSInfo lc_emlrtRSI = { 1965,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo mc_emlrtRSI = { 1954,/* lineNo */
+static emlrtRSInfo mc_emlrtRSI = { 1963,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo nc_emlrtRSI = { 1945,/* lineNo */
+static emlrtRSInfo nc_emlrtRSI = { 1954,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo oc_emlrtRSI = { 1933,/* lineNo */
+static emlrtRSInfo oc_emlrtRSI = { 1942,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo pc_emlrtRSI = { 1929,/* lineNo */
+static emlrtRSInfo pc_emlrtRSI = { 1938,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo qc_emlrtRSI = { 1928,/* lineNo */
+static emlrtRSInfo qc_emlrtRSI = { 1937,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo rc_emlrtRSI = { 1925,/* lineNo */
+static emlrtRSInfo rc_emlrtRSI = { 1934,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo sc_emlrtRSI = { 1915,/* lineNo */
+static emlrtRSInfo sc_emlrtRSI = { 1924,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo tc_emlrtRSI = { 1910,/* lineNo */
+static emlrtRSInfo tc_emlrtRSI = { 1919,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo uc_emlrtRSI = { 1905,/* lineNo */
+static emlrtRSInfo uc_emlrtRSI = { 1914,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo vc_emlrtRSI = { 1900,/* lineNo */
+static emlrtRSInfo vc_emlrtRSI = { 1909,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo wc_emlrtRSI = { 1874,/* lineNo */
+static emlrtRSInfo wc_emlrtRSI = { 1883,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo xc_emlrtRSI = { 1868,/* lineNo */
+static emlrtRSInfo xc_emlrtRSI = { 1877,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo yc_emlrtRSI = { 1845,/* lineNo */
+static emlrtRSInfo yc_emlrtRSI = { 1854,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo ad_emlrtRSI = { 1843,/* lineNo */
+static emlrtRSInfo ad_emlrtRSI = { 1852,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo bd_emlrtRSI = { 1841,/* lineNo */
+static emlrtRSInfo bd_emlrtRSI = { 1850,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo cd_emlrtRSI = { 1834,/* lineNo */
+static emlrtRSInfo cd_emlrtRSI = { 1843,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo dd_emlrtRSI = { 1830,/* lineNo */
+static emlrtRSInfo dd_emlrtRSI = { 1839,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo ed_emlrtRSI = { 1820,/* lineNo */
+static emlrtRSInfo ed_emlrtRSI = { 1829,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo fd_emlrtRSI = { 1813,/* lineNo */
+static emlrtRSInfo fd_emlrtRSI = { 1822,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo gd_emlrtRSI = { 1812,/* lineNo */
+static emlrtRSInfo gd_emlrtRSI = { 1821,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo hd_emlrtRSI = { 1811,/* lineNo */
+static emlrtRSInfo hd_emlrtRSI = { 1820,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo id_emlrtRSI = { 1788,/* lineNo */
+static emlrtRSInfo id_emlrtRSI = { 1797,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo jd_emlrtRSI = { 1755,/* lineNo */
+static emlrtRSInfo jd_emlrtRSI = { 1764,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo kd_emlrtRSI = { 1749,/* lineNo */
+static emlrtRSInfo kd_emlrtRSI = { 1758,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo ld_emlrtRSI = { 1741,/* lineNo */
+static emlrtRSInfo ld_emlrtRSI = { 1750,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo md_emlrtRSI = { 1732,/* lineNo */
+static emlrtRSInfo md_emlrtRSI = { 1741,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo nd_emlrtRSI = { 1725,/* lineNo */
+static emlrtRSInfo nd_emlrtRSI = { 1734,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo od_emlrtRSI = { 1703,/* lineNo */
+static emlrtRSInfo od_emlrtRSI = { 1712,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo pd_emlrtRSI = { 1699,/* lineNo */
+static emlrtRSInfo pd_emlrtRSI = { 1708,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo qd_emlrtRSI = { 1680,/* lineNo */
+static emlrtRSInfo qd_emlrtRSI = { 1689,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo rd_emlrtRSI = { 1661,/* lineNo */
+static emlrtRSInfo rd_emlrtRSI = { 1670,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo sd_emlrtRSI = { 1658,/* lineNo */
+static emlrtRSInfo sd_emlrtRSI = { 1667,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo td_emlrtRSI = { 1654,/* lineNo */
+static emlrtRSInfo td_emlrtRSI = { 1663,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo ud_emlrtRSI = { 1603,/* lineNo */
+static emlrtRSInfo ud_emlrtRSI = { 1612,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo vd_emlrtRSI = { 1596,/* lineNo */
+static emlrtRSInfo vd_emlrtRSI = { 1605,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo wd_emlrtRSI = { 1595,/* lineNo */
+static emlrtRSInfo wd_emlrtRSI = { 1604,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo xd_emlrtRSI = { 1581,/* lineNo */
+static emlrtRSInfo xd_emlrtRSI = { 1590,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo yd_emlrtRSI = { 1579,/* lineNo */
+static emlrtRSInfo yd_emlrtRSI = { 1588,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo ae_emlrtRSI = { 1522,/* lineNo */
+static emlrtRSInfo ae_emlrtRSI = { 1531,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo be_emlrtRSI = { 1520,/* lineNo */
+static emlrtRSInfo be_emlrtRSI = { 1529,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo ce_emlrtRSI = { 1500,/* lineNo */
+static emlrtRSInfo ce_emlrtRSI = { 1509,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo de_emlrtRSI = { 1498,/* lineNo */
+static emlrtRSInfo de_emlrtRSI = { 1507,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo ee_emlrtRSI = { 1494,/* lineNo */
+static emlrtRSInfo ee_emlrtRSI = { 1503,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo fe_emlrtRSI = { 1444,/* lineNo */
+static emlrtRSInfo fe_emlrtRSI = { 1453,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo ge_emlrtRSI = { 1360,/* lineNo */
+static emlrtRSInfo ge_emlrtRSI = { 1369,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo he_emlrtRSI = { 1354,/* lineNo */
+static emlrtRSInfo he_emlrtRSI = { 1363,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo ie_emlrtRSI = { 1353,/* lineNo */
+static emlrtRSInfo ie_emlrtRSI = { 1362,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo je_emlrtRSI = { 1348,/* lineNo */
+static emlrtRSInfo je_emlrtRSI = { 1357,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo ke_emlrtRSI = { 1330,/* lineNo */
+static emlrtRSInfo ke_emlrtRSI = { 1339,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo le_emlrtRSI = { 1328,/* lineNo */
+static emlrtRSInfo le_emlrtRSI = { 1337,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo me_emlrtRSI = { 1320,/* lineNo */
+static emlrtRSInfo me_emlrtRSI = { 1329,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo ne_emlrtRSI = { 1311,/* lineNo */
+static emlrtRSInfo ne_emlrtRSI = { 1320,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo oe_emlrtRSI = { 1308,/* lineNo */
+static emlrtRSInfo oe_emlrtRSI = { 1317,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo pe_emlrtRSI = { 1306,/* lineNo */
+static emlrtRSInfo pe_emlrtRSI = { 1315,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo qe_emlrtRSI = { 1267,/* lineNo */
+static emlrtRSInfo qe_emlrtRSI = { 1276,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo re_emlrtRSI = { 1265,/* lineNo */
+static emlrtRSInfo re_emlrtRSI = { 1274,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo se_emlrtRSI = { 1237,/* lineNo */
+static emlrtRSInfo se_emlrtRSI = { 1246,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo te_emlrtRSI = { 1232,/* lineNo */
+static emlrtRSInfo te_emlrtRSI = { 1241,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo ue_emlrtRSI = { 1225,/* lineNo */
+static emlrtRSInfo ue_emlrtRSI = { 1234,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo ve_emlrtRSI = { 1224,/* lineNo */
+static emlrtRSInfo ve_emlrtRSI = { 1233,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo we_emlrtRSI = { 1221,/* lineNo */
+static emlrtRSInfo we_emlrtRSI = { 1230,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo xe_emlrtRSI = { 1207,/* lineNo */
+static emlrtRSInfo xe_emlrtRSI = { 1216,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo ye_emlrtRSI = { 1202,/* lineNo */
+static emlrtRSInfo ye_emlrtRSI = { 1211,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo af_emlrtRSI = { 1201,/* lineNo */
+static emlrtRSInfo af_emlrtRSI = { 1210,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo bf_emlrtRSI = { 1198,/* lineNo */
+static emlrtRSInfo bf_emlrtRSI = { 1207,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo cf_emlrtRSI = { 1062,/* lineNo */
+static emlrtRSInfo cf_emlrtRSI = { 1071,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
@@ -778,19 +778,19 @@ static emlrtRSInfo aab_emlrtRSI = { 16,/* lineNo */
   "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\nested_function.m"/* pathName */
 };
 
-static emlrtMCInfo emlrtMCI = { 1258,  /* lineNo */
+static emlrtMCInfo emlrtMCI = { 1267,  /* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtMCInfo b_emlrtMCI = { 1350,/* lineNo */
+static emlrtMCInfo b_emlrtMCI = { 1359,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtMCInfo c_emlrtMCI = { 1973,/* lineNo */
+static emlrtMCInfo c_emlrtMCI = { 1982,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
@@ -798,7 +798,7 @@ static emlrtMCInfo c_emlrtMCI = { 1973,/* lineNo */
 
 static emlrtBCInfo emlrtBCI = { -1,    /* iFirst */
   -1,                                  /* iLast */
-  2603,                                /* lineNo */
+  2612,                                /* lineNo */
   38,                                  /* colNo */
   "yhat",                              /* aName */
   "LTSts",                             /* fName */
@@ -808,7 +808,7 @@ static emlrtBCInfo emlrtBCI = { -1,    /* iFirst */
 
 static emlrtBCInfo b_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  2603,                                /* lineNo */
+  2612,                                /* lineNo */
   28,                                  /* colNo */
   "yin",                               /* aName */
   "LTSts",                             /* fName */
@@ -816,7 +816,7 @@ static emlrtBCInfo b_emlrtBCI = { -1,  /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo emlrtDCI = { 2648,  /* lineNo */
+static emlrtDCInfo emlrtDCI = { 2657,  /* lineNo */
   36,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -825,7 +825,7 @@ static emlrtDCInfo emlrtDCI = { 2648,  /* lineNo */
 
 static emlrtBCInfo c_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  2648,                                /* lineNo */
+  2657,                                /* lineNo */
   36,                                  /* colNo */
   "brobfinal",                         /* aName */
   "LTSts",                             /* fName */
@@ -835,7 +835,7 @@ static emlrtBCInfo c_emlrtBCI = { -1,  /* iFirst */
 
 static emlrtBCInfo d_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  2657,                                /* lineNo */
+  2666,                                /* lineNo */
   23,                                  /* colNo */
   "yin",                               /* aName */
   "LTSts",                             /* fName */
@@ -843,14 +843,14 @@ static emlrtBCInfo d_emlrtBCI = { -1,  /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo b_emlrtDCI = { 2657,/* lineNo */
+static emlrtDCInfo b_emlrtDCI = { 2666,/* lineNo */
   23,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo c_emlrtDCI = { 2650,/* lineNo */
+static emlrtDCInfo c_emlrtDCI = { 2659,/* lineNo */
   35,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -859,7 +859,7 @@ static emlrtDCInfo c_emlrtDCI = { 2650,/* lineNo */
 
 static emlrtBCInfo e_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  2650,                                /* lineNo */
+  2659,                                /* lineNo */
   35,                                  /* colNo */
   "brobfinal",                         /* aName */
   "LTSts",                             /* fName */
@@ -869,7 +869,7 @@ static emlrtBCInfo e_emlrtBCI = { -1,  /* iFirst */
 
 static emlrtBCInfo f_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  2598,                                /* lineNo */
+  2607,                                /* lineNo */
   40,                                  /* colNo */
   "yin",                               /* aName */
   "LTSts",                             /* fName */
@@ -879,7 +879,7 @@ static emlrtBCInfo f_emlrtBCI = { -1,  /* iFirst */
 
 static emlrtBCInfo g_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  2598,                                /* lineNo */
+  2607,                                /* lineNo */
   27,                                  /* colNo */
   "Xseldum",                           /* aName */
   "LTSts",                             /* fName */
@@ -889,7 +889,7 @@ static emlrtBCInfo g_emlrtBCI = { -1,  /* iFirst */
 
 static emlrtBCInfo h_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  2623,                                /* lineNo */
+  2632,                                /* lineNo */
   16,                                  /* colNo */
   "yin",                               /* aName */
   "LTSts",                             /* fName */
@@ -899,7 +899,7 @@ static emlrtBCInfo h_emlrtBCI = { -1,  /* iFirst */
 
 static emlrtBCInfo i_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  2622,                                /* lineNo */
+  2631,                                /* lineNo */
   18,                                  /* colNo */
   "Seq",                               /* aName */
   "LTSts",                             /* fName */
@@ -909,7 +909,7 @@ static emlrtBCInfo i_emlrtBCI = { -1,  /* iFirst */
 
 static emlrtBCInfo j_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  2620,                                /* lineNo */
+  2629,                                /* lineNo */
   18,                                  /* colNo */
   "X",                                 /* aName */
   "LTSts",                             /* fName */
@@ -919,7 +919,7 @@ static emlrtBCInfo j_emlrtBCI = { -1,  /* iFirst */
 
 static emlrtBCInfo k_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  2591,                                /* lineNo */
+  2600,                                /* lineNo */
   38,                                  /* colNo */
   "yhat",                              /* aName */
   "LTSts",                             /* fName */
@@ -929,7 +929,7 @@ static emlrtBCInfo k_emlrtBCI = { -1,  /* iFirst */
 
 static emlrtBCInfo l_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  2591,                                /* lineNo */
+  2600,                                /* lineNo */
   28,                                  /* colNo */
   "yin",                               /* aName */
   "LTSts",                             /* fName */
@@ -939,7 +939,7 @@ static emlrtBCInfo l_emlrtBCI = { -1,  /* iFirst */
 
 static emlrtBCInfo m_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  2616,                                /* lineNo */
+  2625,                                /* lineNo */
   28,                                  /* colNo */
   "Xseaso",                            /* aName */
   "LTSts",                             /* fName */
@@ -949,7 +949,7 @@ static emlrtBCInfo m_emlrtBCI = { -1,  /* iFirst */
 
 static emlrtBCInfo n_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  2589,                                /* lineNo */
+  2598,                                /* lineNo */
   23,                                  /* colNo */
   "Xsel",                              /* aName */
   "LTSts",                             /* fName */
@@ -959,7 +959,7 @@ static emlrtBCInfo n_emlrtBCI = { -1,  /* iFirst */
 
 static emlrtBCInfo o_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  2587,                                /* lineNo */
+  2596,                                /* lineNo */
   58,                                  /* colNo */
   "yin",                               /* aName */
   "LTSts",                             /* fName */
@@ -967,7 +967,7 @@ static emlrtBCInfo o_emlrtBCI = { -1,  /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo d_emlrtDCI = { 2587,/* lineNo */
+static emlrtDCInfo d_emlrtDCI = { 2596,/* lineNo */
   28,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -976,7 +976,7 @@ static emlrtDCInfo d_emlrtDCI = { 2587,/* lineNo */
 
 static emlrtBCInfo p_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  2587,                                /* lineNo */
+  2596,                                /* lineNo */
   28,                                  /* colNo */
   "Xsel",                              /* aName */
   "LTSts",                             /* fName */
@@ -986,7 +986,7 @@ static emlrtBCInfo p_emlrtBCI = { -1,  /* iFirst */
 
 static emlrtBCInfo q_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  2587,                                /* lineNo */
+  2596,                                /* lineNo */
   24,                                  /* colNo */
   "Xsel",                              /* aName */
   "LTSts",                             /* fName */
@@ -994,7 +994,7 @@ static emlrtBCInfo q_emlrtBCI = { -1,  /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo e_emlrtDCI = { 2596,/* lineNo */
+static emlrtDCInfo e_emlrtDCI = { 2605,/* lineNo */
   29,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -1003,7 +1003,7 @@ static emlrtDCInfo e_emlrtDCI = { 2596,/* lineNo */
 
 static emlrtBCInfo r_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  2596,                                /* lineNo */
+  2605,                                /* lineNo */
   29,                                  /* colNo */
   "Xsel",                              /* aName */
   "LTSts",                             /* fName */
@@ -1013,7 +1013,7 @@ static emlrtBCInfo r_emlrtBCI = { -1,  /* iFirst */
 
 static emlrtBCInfo s_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  2606,                                /* lineNo */
+  2615,                                /* lineNo */
   24,                                  /* colNo */
   "Xtrend",                            /* aName */
   "LTSts",                             /* fName */
@@ -1023,7 +1023,7 @@ static emlrtBCInfo s_emlrtBCI = { -1,  /* iFirst */
 
 static emlrtBCInfo t_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  2669,                                /* lineNo */
+  2678,                                /* lineNo */
   5,                                   /* colNo */
   "B",                                 /* aName */
   "LTSts",                             /* fName */
@@ -1033,7 +1033,7 @@ static emlrtBCInfo t_emlrtBCI = { -1,  /* iFirst */
 
 static emlrtBCInfo u_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  2215,                                /* lineNo */
+  2224,                                /* lineNo */
   26,                                  /* colNo */
   "p_all",                             /* aName */
   "LTSts",                             /* fName */
@@ -1043,7 +1043,7 @@ static emlrtBCInfo u_emlrtBCI = { -1,  /* iFirst */
 
 static emlrtBCInfo v_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  2211,                                /* lineNo */
+  2220,                                /* lineNo */
   20,                                  /* colNo */
   "seq",                               /* aName */
   "LTSts",                             /* fName */
@@ -1053,7 +1053,7 @@ static emlrtBCInfo v_emlrtBCI = { -1,  /* iFirst */
 
 static emlrtBCInfo w_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  2166,                                /* lineNo */
+  2175,                                /* lineNo */
   40,                                  /* colNo */
   "residuals",                         /* aName */
   "LTSts",                             /* fName */
@@ -1061,7 +1061,7 @@ static emlrtBCInfo w_emlrtBCI = { -1,  /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo f_emlrtDCI = { 2166,/* lineNo */
+static emlrtDCInfo f_emlrtDCI = { 2175,/* lineNo */
   18,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -1070,7 +1070,7 @@ static emlrtDCInfo f_emlrtDCI = { 2166,/* lineNo */
 
 static emlrtBCInfo x_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  2166,                                /* lineNo */
+  2175,                                /* lineNo */
   18,                                  /* colNo */
   "residuals",                         /* aName */
   "LTSts",                             /* fName */
@@ -1078,7 +1078,7 @@ static emlrtBCInfo x_emlrtBCI = { -1,  /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo g_emlrtDCI = { 2082,/* lineNo */
+static emlrtDCInfo g_emlrtDCI = { 2091,/* lineNo */
   39,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -1087,7 +1087,7 @@ static emlrtDCInfo g_emlrtDCI = { 2082,/* lineNo */
 
 static emlrtBCInfo y_emlrtBCI = { -1,  /* iFirst */
   -1,                                  /* iLast */
-  2082,                                /* lineNo */
+  2091,                                /* lineNo */
   39,                                  /* colNo */
   "Xseldum",                           /* aName */
   "LTSts",                             /* fName */
@@ -1095,7 +1095,7 @@ static emlrtBCInfo y_emlrtBCI = { -1,  /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo h_emlrtDCI = { 2082,/* lineNo */
+static emlrtDCInfo h_emlrtDCI = { 2091,/* lineNo */
   23,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -1104,7 +1104,7 @@ static emlrtDCInfo h_emlrtDCI = { 2082,/* lineNo */
 
 static emlrtBCInfo ab_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  2082,                                /* lineNo */
+  2091,                                /* lineNo */
   23,                                  /* colNo */
   "Xseldum",                           /* aName */
   "LTSts",                             /* fName */
@@ -1114,7 +1114,7 @@ static emlrtBCInfo ab_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo bb_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  2081,                                /* lineNo */
+  2090,                                /* lineNo */
   27,                                  /* colNo */
   "yhat",                              /* aName */
   "LTSts",                             /* fName */
@@ -1122,7 +1122,7 @@ static emlrtBCInfo bb_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo i_emlrtDCI = { 2081,/* lineNo */
+static emlrtDCInfo i_emlrtDCI = { 2090,/* lineNo */
   27,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -1131,7 +1131,7 @@ static emlrtDCInfo i_emlrtDCI = { 2081,/* lineNo */
 
 static emlrtBCInfo cb_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  2081,                                /* lineNo */
+  2090,                                /* lineNo */
   17,                                  /* colNo */
   "yin",                               /* aName */
   "LTSts",                             /* fName */
@@ -1139,7 +1139,7 @@ static emlrtBCInfo cb_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo j_emlrtDCI = { 2081,/* lineNo */
+static emlrtDCInfo j_emlrtDCI = { 2090,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -1148,7 +1148,7 @@ static emlrtDCInfo j_emlrtDCI = { 2081,/* lineNo */
 
 static emlrtBCInfo db_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1937,                                /* lineNo */
+  1946,                                /* lineNo */
   5,                                   /* colNo */
   "brobfinal",                         /* aName */
   "LTSts",                             /* fName */
@@ -1156,7 +1156,7 @@ static emlrtBCInfo db_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo k_emlrtDCI = { 2077,/* lineNo */
+static emlrtDCInfo k_emlrtDCI = { 2086,/* lineNo */
   36,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -1165,7 +1165,7 @@ static emlrtDCInfo k_emlrtDCI = { 2077,/* lineNo */
 
 static emlrtBCInfo eb_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  2077,                                /* lineNo */
+  2086,                                /* lineNo */
   36,                                  /* colNo */
   "yin",                               /* aName */
   "LTSts",                             /* fName */
@@ -1173,21 +1173,21 @@ static emlrtBCInfo eb_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo l_emlrtDCI = { 1935,/* lineNo */
+static emlrtDCInfo l_emlrtDCI = { 1944,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   4                                    /* checkKind */
 };
 
-static emlrtDCInfo m_emlrtDCI = { 1935,/* lineNo */
+static emlrtDCInfo m_emlrtDCI = { 1944,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo n_emlrtDCI = { 2077,/* lineNo */
+static emlrtDCInfo n_emlrtDCI = { 2086,/* lineNo */
   23,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -1196,7 +1196,7 @@ static emlrtDCInfo n_emlrtDCI = { 2077,/* lineNo */
 
 static emlrtBCInfo fb_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  2077,                                /* lineNo */
+  2086,                                /* lineNo */
   23,                                  /* colNo */
   "Xseldum",                           /* aName */
   "LTSts",                             /* fName */
@@ -1206,7 +1206,7 @@ static emlrtBCInfo fb_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo gb_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1934,                                /* lineNo */
+  1943,                                /* lineNo */
   11,                                  /* colNo */
   "Likloc",                            /* aName */
   "LTSts",                             /* fName */
@@ -1216,7 +1216,7 @@ static emlrtBCInfo gb_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo hb_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1929,                                /* lineNo */
+  1938,                                /* lineNo */
   9,                                   /* colNo */
   "Likloc",                            /* aName */
   "LTSts",                             /* fName */
@@ -1226,7 +1226,7 @@ static emlrtBCInfo hb_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo ib_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1929,                                /* lineNo */
+  1938,                                /* lineNo */
   31,                                  /* colNo */
   "yin",                               /* aName */
   "LTSts",                             /* fName */
@@ -1234,7 +1234,7 @@ static emlrtBCInfo ib_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo o_emlrtDCI = { 1929,/* lineNo */
+static emlrtDCInfo o_emlrtDCI = { 1938,/* lineNo */
   31,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -1243,7 +1243,7 @@ static emlrtDCInfo o_emlrtDCI = { 1929,/* lineNo */
 
 static emlrtBCInfo jb_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1928,                                /* lineNo */
+  1937,                                /* lineNo */
   9,                                   /* colNo */
   "Likloc",                            /* aName */
   "LTSts",                             /* fName */
@@ -1253,7 +1253,7 @@ static emlrtBCInfo jb_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo kb_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  2119,                                /* lineNo */
+  2128,                                /* lineNo */
   30,                                  /* colNo */
   "Xlshift",                           /* aName */
   "LTSts",                             /* fName */
@@ -1261,7 +1261,7 @@ static emlrtBCInfo kb_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo p_emlrtDCI = { 2119,/* lineNo */
+static emlrtDCInfo p_emlrtDCI = { 2128,/* lineNo */
   30,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -1270,7 +1270,7 @@ static emlrtDCInfo p_emlrtDCI = { 2119,/* lineNo */
 
 static emlrtBCInfo lb_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1927,                                /* lineNo */
+  1936,                                /* lineNo */
   21,                                  /* colNo */
   "yin",                               /* aName */
   "LTSts",                             /* fName */
@@ -1278,7 +1278,7 @@ static emlrtBCInfo lb_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo q_emlrtDCI = { 1927,/* lineNo */
+static emlrtDCInfo q_emlrtDCI = { 1936,/* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -1287,7 +1287,7 @@ static emlrtDCInfo q_emlrtDCI = { 1927,/* lineNo */
 
 static emlrtBCInfo mb_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  2067,                                /* lineNo */
+  2076,                                /* lineNo */
   27,                                  /* colNo */
   "yhat",                              /* aName */
   "LTSts",                             /* fName */
@@ -1295,7 +1295,7 @@ static emlrtBCInfo mb_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo r_emlrtDCI = { 2067,/* lineNo */
+static emlrtDCInfo r_emlrtDCI = { 2076,/* lineNo */
   27,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -1304,7 +1304,7 @@ static emlrtDCInfo r_emlrtDCI = { 2067,/* lineNo */
 
 static emlrtBCInfo nb_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  2067,                                /* lineNo */
+  2076,                                /* lineNo */
   17,                                  /* colNo */
   "yin",                               /* aName */
   "LTSts",                             /* fName */
@@ -1312,7 +1312,7 @@ static emlrtBCInfo nb_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo s_emlrtDCI = { 2067,/* lineNo */
+static emlrtDCInfo s_emlrtDCI = { 2076,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -1321,7 +1321,7 @@ static emlrtDCInfo s_emlrtDCI = { 2067,/* lineNo */
 
 static emlrtBCInfo ob_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  2097,                                /* lineNo */
+  2106,                                /* lineNo */
   13,                                  /* colNo */
   "weights",                           /* aName */
   "LTSts",                             /* fName */
@@ -1329,21 +1329,21 @@ static emlrtBCInfo ob_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo t_emlrtDCI = { 2097,/* lineNo */
+static emlrtDCInfo t_emlrtDCI = { 2106,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo u_emlrtDCI = { 1923,/* lineNo */
+static emlrtDCInfo u_emlrtDCI = { 1932,/* lineNo */
   18,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   4                                    /* checkKind */
 };
 
-static emlrtDCInfo v_emlrtDCI = { 1923,/* lineNo */
+static emlrtDCInfo v_emlrtDCI = { 1932,/* lineNo */
   18,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -1352,7 +1352,7 @@ static emlrtDCInfo v_emlrtDCI = { 1923,/* lineNo */
 
 static emlrtBCInfo pb_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1921,                                /* lineNo */
+  1930,                                /* lineNo */
   9,                                   /* colNo */
   "btmp",                              /* aName */
   "LTSts",                             /* fName */
@@ -1360,7 +1360,7 @@ static emlrtBCInfo pb_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo w_emlrtDCI = { 2092,/* lineNo */
+static emlrtDCInfo w_emlrtDCI = { 2101,/* lineNo */
   12,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -1369,7 +1369,7 @@ static emlrtDCInfo w_emlrtDCI = { 2092,/* lineNo */
 
 static emlrtBCInfo qb_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  2092,                                /* lineNo */
+  2101,                                /* lineNo */
   12,                                  /* colNo */
   "yin",                               /* aName */
   "LTSts",                             /* fName */
@@ -1379,7 +1379,7 @@ static emlrtBCInfo qb_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo rb_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  2091,                                /* lineNo */
+  2100,                                /* lineNo */
   14,                                  /* colNo */
   "Seq",                               /* aName */
   "LTSts",                             /* fName */
@@ -1387,7 +1387,7 @@ static emlrtBCInfo rb_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo x_emlrtDCI = { 2091,/* lineNo */
+static emlrtDCInfo x_emlrtDCI = { 2100,/* lineNo */
   14,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -1396,7 +1396,7 @@ static emlrtDCInfo x_emlrtDCI = { 2091,/* lineNo */
 
 static emlrtBCInfo sb_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  2089,                                /* lineNo */
+  2098,                                /* lineNo */
   14,                                  /* colNo */
   "X",                                 /* aName */
   "LTSts",                             /* fName */
@@ -1404,14 +1404,14 @@ static emlrtBCInfo sb_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo y_emlrtDCI = { 2089,/* lineNo */
+static emlrtDCInfo y_emlrtDCI = { 2098,/* lineNo */
   14,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo ab_emlrtDCI = { 2061,/* lineNo */
+static emlrtDCInfo ab_emlrtDCI = { 2070,/* lineNo */
   33,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -1420,7 +1420,7 @@ static emlrtDCInfo ab_emlrtDCI = { 2061,/* lineNo */
 
 static emlrtBCInfo tb_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  2061,                                /* lineNo */
+  2070,                                /* lineNo */
   33,                                  /* colNo */
   "yin",                               /* aName */
   "LTSts",                             /* fName */
@@ -1430,7 +1430,7 @@ static emlrtBCInfo tb_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo ub_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  2087,                                /* lineNo */
+  2096,                                /* lineNo */
   20,                                  /* colNo */
   "Xseaso",                            /* aName */
   "LTSts",                             /* fName */
@@ -1438,14 +1438,14 @@ static emlrtBCInfo ub_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo bb_emlrtDCI = { 2087,/* lineNo */
+static emlrtDCInfo bb_emlrtDCI = { 2096,/* lineNo */
   20,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo cb_emlrtDCI = { 2061,/* lineNo */
+static emlrtDCInfo cb_emlrtDCI = { 2070,/* lineNo */
   20,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -1454,7 +1454,7 @@ static emlrtDCInfo cb_emlrtDCI = { 2061,/* lineNo */
 
 static emlrtBCInfo vb_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  2061,                                /* lineNo */
+  2070,                                /* lineNo */
   20,                                  /* colNo */
   "Xsel",                              /* aName */
   "LTSts",                             /* fName */
@@ -1462,7 +1462,7 @@ static emlrtBCInfo vb_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo db_emlrtDCI = { 2086,/* lineNo */
+static emlrtDCInfo db_emlrtDCI = { 2095,/* lineNo */
   20,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -1471,7 +1471,7 @@ static emlrtDCInfo db_emlrtDCI = { 2086,/* lineNo */
 
 static emlrtBCInfo wb_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  2086,                                /* lineNo */
+  2095,                                /* lineNo */
   20,                                  /* colNo */
   "Xtrend",                            /* aName */
   "LTSts",                             /* fName */
@@ -1481,7 +1481,7 @@ static emlrtBCInfo wb_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo xb_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  2047,                                /* lineNo */
+  2056,                                /* lineNo */
   9,                                   /* colNo */
   "seq",                               /* aName */
   "LTSts",                             /* fName */
@@ -1491,7 +1491,7 @@ static emlrtBCInfo xb_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo yb_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  114,                                 /* lineNo */
+  116,                                 /* lineNo */
   1,                                   /* colNo */
   "bstar",                             /* aName */
   "LTSts_wrapper",                     /* fName */
@@ -1501,7 +1501,7 @@ static emlrtBCInfo yb_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo ac_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1961,                                /* lineNo */
+  1970,                                /* lineNo */
   25,                                  /* colNo */
   "Xsel",                              /* aName */
   "LTSts",                             /* fName */
@@ -1511,7 +1511,7 @@ static emlrtBCInfo ac_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo bc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1857,                                /* lineNo */
+  1866,                                /* lineNo */
   5,                                   /* colNo */
   "Weimod",                            /* aName */
   "LTSts",                             /* fName */
@@ -1521,7 +1521,7 @@ static emlrtBCInfo bc_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo cc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1727,                                /* lineNo */
+  1736,                                /* lineNo */
   21,                                  /* colNo */
   "bestnumscale2",                     /* aName */
   "LTSts",                             /* fName */
@@ -1531,7 +1531,7 @@ static emlrtBCInfo cc_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo dc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1856,                                /* lineNo */
+  1865,                                /* lineNo */
   23,                                  /* colNo */
   "seq",                               /* aName */
   "LTSts",                             /* fName */
@@ -1541,7 +1541,7 @@ static emlrtBCInfo dc_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo ec_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1736,                                /* lineNo */
+  1745,                                /* lineNo */
   17,                                  /* colNo */
   "bestnumscale2",                     /* aName */
   "LTSts",                             /* fName */
@@ -1551,7 +1551,7 @@ static emlrtBCInfo ec_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo fc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1673,                                /* lineNo */
+  1682,                                /* lineNo */
   17,                                  /* colNo */
   "beta0",                             /* aName */
   "LTSts",                             /* fName */
@@ -1561,7 +1561,7 @@ static emlrtBCInfo fc_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo gc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1673,                                /* lineNo */
+  1682,                                /* lineNo */
   35,                                  /* colNo */
   "betaini",                           /* aName */
   "LTSts",                             /* fName */
@@ -1569,7 +1569,7 @@ static emlrtBCInfo gc_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo eb_emlrtDCI = { 1658,/* lineNo */
+static emlrtDCInfo eb_emlrtDCI = { 1667,/* lineNo */
   35,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -1578,7 +1578,7 @@ static emlrtDCInfo eb_emlrtDCI = { 1658,/* lineNo */
 
 static emlrtBCInfo hc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1658,                                /* lineNo */
+  1667,                                /* lineNo */
   35,                                  /* colNo */
   "yin",                               /* aName */
   "LTSts",                             /* fName */
@@ -1586,7 +1586,7 @@ static emlrtBCInfo hc_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo fb_emlrtDCI = { 1658,/* lineNo */
+static emlrtDCInfo fb_emlrtDCI = { 1667,/* lineNo */
   24,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -1595,7 +1595,7 @@ static emlrtDCInfo fb_emlrtDCI = { 1658,/* lineNo */
 
 static emlrtBCInfo ic_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1658,                                /* lineNo */
+  1667,                                /* lineNo */
   24,                                  /* colNo */
   "Xfinal",                            /* aName */
   "LTSts",                             /* fName */
@@ -1605,7 +1605,7 @@ static emlrtBCInfo ic_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo jc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1820,                                /* lineNo */
+  1829,                                /* lineNo */
   35,                                  /* colNo */
   "bestsubsetall",                     /* aName */
   "LTSts",                             /* fName */
@@ -1615,7 +1615,7 @@ static emlrtBCInfo jc_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo kc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1813,                                /* lineNo */
+  1822,                                /* lineNo */
   33,                                  /* colNo */
   "bestbetasall",                      /* aName */
   "LTSts",                             /* fName */
@@ -1625,7 +1625,7 @@ static emlrtBCInfo kc_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo lc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1590,                                /* lineNo */
+  1599,                                /* lineNo */
   13,                                  /* colNo */
   "Cr",                                /* aName */
   "LTSts",                             /* fName */
@@ -1635,7 +1635,7 @@ static emlrtBCInfo lc_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo mc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1794,                                /* lineNo */
+  1803,                                /* lineNo */
   9,                                   /* colNo */
   "allnumscale2",                      /* aName */
   "LTSts",                             /* fName */
@@ -1645,7 +1645,7 @@ static emlrtBCInfo mc_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo nc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1812,                                /* lineNo */
+  1821,                                /* lineNo */
   33,                                  /* colNo */
   "bestyhatall",                       /* aName */
   "LTSts",                             /* fName */
@@ -1653,217 +1653,217 @@ static emlrtBCInfo nc_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo gb_emlrtDCI = { 1645,/* lineNo */
+static emlrtDCInfo gb_emlrtDCI = { 1654,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo hb_emlrtDCI = { 1618,/* lineNo */
+static emlrtDCInfo hb_emlrtDCI = { 1627,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo ib_emlrtDCI = { 1572,/* lineNo */
+static emlrtDCInfo ib_emlrtDCI = { 1581,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   4                                    /* checkKind */
 };
 
-static emlrtDCInfo jb_emlrtDCI = { 1572,/* lineNo */
+static emlrtDCInfo jb_emlrtDCI = { 1581,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo kb_emlrtDCI = { 1571,/* lineNo */
+static emlrtDCInfo kb_emlrtDCI = { 1580,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo lb_emlrtDCI = { 1570,/* lineNo */
+static emlrtDCInfo lb_emlrtDCI = { 1579,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo mb_emlrtDCI = { 1558,/* lineNo */
+static emlrtDCInfo mb_emlrtDCI = { 1567,/* lineNo */
   14,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   4                                    /* checkKind */
 };
 
-static emlrtDCInfo nb_emlrtDCI = { 1558,/* lineNo */
+static emlrtDCInfo nb_emlrtDCI = { 1567,/* lineNo */
   14,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo ob_emlrtDCI = { 1513,/* lineNo */
+static emlrtDCInfo ob_emlrtDCI = { 1522,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo pb_emlrtDCI = { 1487,/* lineNo */
+static emlrtDCInfo pb_emlrtDCI = { 1496,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   4                                    /* checkKind */
 };
 
-static emlrtDCInfo qb_emlrtDCI = { 1487,/* lineNo */
+static emlrtDCInfo qb_emlrtDCI = { 1496,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo rb_emlrtDCI = { 2225,/* lineNo */
+static emlrtDCInfo rb_emlrtDCI = { 2234,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   4                                    /* checkKind */
 };
 
-static emlrtDCInfo sb_emlrtDCI = { 2225,/* lineNo */
+static emlrtDCInfo sb_emlrtDCI = { 2234,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo tb_emlrtDCI = { 2222,/* lineNo */
+static emlrtDCInfo tb_emlrtDCI = { 2231,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo ub_emlrtDCI = { 1469,/* lineNo */
+static emlrtDCInfo ub_emlrtDCI = { 1478,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   4                                    /* checkKind */
 };
 
-static emlrtDCInfo vb_emlrtDCI = { 1469,/* lineNo */
+static emlrtDCInfo vb_emlrtDCI = { 1478,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo wb_emlrtDCI = { 1263,/* lineNo */
+static emlrtDCInfo wb_emlrtDCI = { 1272,/* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo xb_emlrtDCI = { 1235,/* lineNo */
+static emlrtDCInfo xb_emlrtDCI = { 1244,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   4                                    /* checkKind */
 };
 
-static emlrtDCInfo yb_emlrtDCI = { 1235,/* lineNo */
+static emlrtDCInfo yb_emlrtDCI = { 1244,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo ac_emlrtDCI = { 1618,/* lineNo */
+static emlrtDCInfo ac_emlrtDCI = { 1627,/* lineNo */
   18,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   4                                    /* checkKind */
 };
 
-static emlrtDCInfo bc_emlrtDCI = { 1618,/* lineNo */
+static emlrtDCInfo bc_emlrtDCI = { 1627,/* lineNo */
   18,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo cc_emlrtDCI = { 1572,/* lineNo */
+static emlrtDCInfo cc_emlrtDCI = { 1581,/* lineNo */
   34,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   4                                    /* checkKind */
 };
 
-static emlrtDCInfo dc_emlrtDCI = { 1572,/* lineNo */
+static emlrtDCInfo dc_emlrtDCI = { 1581,/* lineNo */
   34,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo ec_emlrtDCI = { 1572,/* lineNo */
+static emlrtDCInfo ec_emlrtDCI = { 1581,/* lineNo */
   28,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo fc_emlrtDCI = { 1571,/* lineNo */
+static emlrtDCInfo fc_emlrtDCI = { 1580,/* lineNo */
   26,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo gc_emlrtDCI = { 1570,/* lineNo */
+static emlrtDCInfo gc_emlrtDCI = { 1579,/* lineNo */
   33,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo hc_emlrtDCI = { 1570,/* lineNo */
+static emlrtDCInfo hc_emlrtDCI = { 1579,/* lineNo */
   27,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo ic_emlrtDCI = { 1513,/* lineNo */
+static emlrtDCInfo ic_emlrtDCI = { 1522,/* lineNo */
   23,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   4                                    /* checkKind */
 };
 
-static emlrtDCInfo jc_emlrtDCI = { 1513,/* lineNo */
+static emlrtDCInfo jc_emlrtDCI = { 1522,/* lineNo */
   23,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo kc_emlrtDCI = { 1235,/* lineNo */
+static emlrtDCInfo kc_emlrtDCI = { 1244,/* lineNo */
   20,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   4                                    /* checkKind */
 };
 
-static emlrtDCInfo lc_emlrtDCI = { 1235,/* lineNo */
+static emlrtDCInfo lc_emlrtDCI = { 1244,/* lineNo */
   20,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -1872,7 +1872,7 @@ static emlrtDCInfo lc_emlrtDCI = { 1235,/* lineNo */
 
 static emlrtBCInfo oc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1856,                                /* lineNo */
+  1865,                                /* lineNo */
   12,                                  /* colNo */
   "Weimod",                            /* aName */
   "LTSts",                             /* fName */
@@ -1882,7 +1882,7 @@ static emlrtBCInfo oc_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo pc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1590,                                /* lineNo */
+  1599,                                /* lineNo */
   24,                                  /* colNo */
   "Cr",                                /* aName */
   "LTSts",                             /* fName */
@@ -1890,7 +1890,7 @@ static emlrtBCInfo pc_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo mc_emlrtDCI = { 1212,/* lineNo */
+static emlrtDCInfo mc_emlrtDCI = { 1221,/* lineNo */
   22,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -1899,7 +1899,7 @@ static emlrtDCInfo mc_emlrtDCI = { 1212,/* lineNo */
 
 static emlrtBCInfo qc_emlrtBCI = { 1,  /* iFirst */
   4,                                   /* iLast */
-  1212,                                /* lineNo */
+  1221,                                /* lineNo */
   22,                                  /* colNo */
   "Seq",                               /* aName */
   "LTSts",                             /* fName */
@@ -1907,7 +1907,7 @@ static emlrtBCInfo qc_emlrtBCI = { 1,  /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo nc_emlrtDCI = { 1214,/* lineNo */
+static emlrtDCInfo nc_emlrtDCI = { 1223,/* lineNo */
   22,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -1916,7 +1916,7 @@ static emlrtDCInfo nc_emlrtDCI = { 1214,/* lineNo */
 
 static emlrtBCInfo rc_emlrtBCI = { 1,  /* iFirst */
   4,                                   /* iLast */
-  1214,                                /* lineNo */
+  1223,                                /* lineNo */
   22,                                  /* colNo */
   "Seq",                               /* aName */
   "LTSts",                             /* fName */
@@ -1926,7 +1926,7 @@ static emlrtBCInfo rc_emlrtBCI = { 1,  /* iFirst */
 
 static emlrtBCInfo sc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1224,                                /* lineNo */
+  1233,                                /* lineNo */
   41,                                  /* colNo */
   "sstring",                           /* aName */
   "LTSts",                             /* fName */
@@ -1934,14 +1934,14 @@ static emlrtBCInfo sc_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtRTEInfo i_emlrtRTEI = { 1236,/* lineNo */
+static emlrtRTEInfo i_emlrtRTEI = { 1245,/* lineNo */
   11,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
 static emlrtECInfo emlrtECI = { -1,    /* nDims */
-  1237,                                /* lineNo */
+  1246,                                /* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
@@ -1949,7 +1949,7 @@ static emlrtECInfo emlrtECI = { -1,    /* nDims */
 
 static emlrtBCInfo tc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1242,                                /* lineNo */
+  1251,                                /* lineNo */
   25,                                  /* colNo */
   "Xseaso",                            /* aName */
   "LTSts",                             /* fName */
@@ -1959,7 +1959,7 @@ static emlrtBCInfo tc_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo uc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1242,                                /* lineNo */
+  1251,                                /* lineNo */
   27,                                  /* colNo */
   "Xseaso",                            /* aName */
   "LTSts",                             /* fName */
@@ -1969,7 +1969,7 @@ static emlrtBCInfo uc_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo vc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1256,                                /* lineNo */
+  1265,                                /* lineNo */
   9,                                   /* colNo */
   "ARp",                               /* aName */
   "LTSts",                             /* fName */
@@ -1979,7 +1979,7 @@ static emlrtBCInfo vc_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo wc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1265,                                /* lineNo */
+  1274,                                /* lineNo */
   25,                                  /* colNo */
   "y",                                 /* aName */
   "LTSts",                             /* fName */
@@ -1989,7 +1989,7 @@ static emlrtBCInfo wc_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo xc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1265,                                /* lineNo */
+  1274,                                /* lineNo */
   27,                                  /* colNo */
   "y",                                 /* aName */
   "LTSts",                             /* fName */
@@ -1999,7 +1999,7 @@ static emlrtBCInfo xc_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo yc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1265,                                /* lineNo */
+  1274,                                /* lineNo */
   33,                                  /* colNo */
   "y",                                 /* aName */
   "LTSts",                             /* fName */
@@ -2009,7 +2009,7 @@ static emlrtBCInfo yc_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo ad_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1265,                                /* lineNo */
+  1274,                                /* lineNo */
   35,                                  /* colNo */
   "y",                                 /* aName */
   "LTSts",                             /* fName */
@@ -2019,7 +2019,7 @@ static emlrtBCInfo ad_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo bd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1265,                                /* lineNo */
+  1274,                                /* lineNo */
   19,                                  /* colNo */
   "Ylagged",                           /* aName */
   "LTSts",                             /* fName */
@@ -2028,7 +2028,7 @@ static emlrtBCInfo bd_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo b_emlrtECI = { -1,  /* nDims */
-  1265,                                /* lineNo */
+  1274,                                /* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
@@ -2036,7 +2036,7 @@ static emlrtECInfo b_emlrtECI = { -1,  /* nDims */
 
 static emlrtBCInfo cd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1313,                                /* lineNo */
+  1322,                                /* lineNo */
   23,                                  /* colNo */
   "otherind",                          /* aName */
   "LTSts",                             /* fName */
@@ -2046,7 +2046,7 @@ static emlrtBCInfo cd_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo dd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1313,                                /* lineNo */
+  1322,                                /* lineNo */
   25,                                  /* colNo */
   "otherind",                          /* aName */
   "LTSts",                             /* fName */
@@ -2054,56 +2054,56 @@ static emlrtBCInfo dd_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo oc_emlrtDCI = { 1529,/* lineNo */
+static emlrtDCInfo oc_emlrtDCI = { 1538,/* lineNo */
   20,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   4                                    /* checkKind */
 };
 
-static emlrtDCInfo pc_emlrtDCI = { 1529,/* lineNo */
+static emlrtDCInfo pc_emlrtDCI = { 1538,/* lineNo */
   20,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo qc_emlrtDCI = { 1573,/* lineNo */
+static emlrtDCInfo qc_emlrtDCI = { 1582,/* lineNo */
   36,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo rc_emlrtDCI = { 1581,/* lineNo */
+static emlrtDCInfo rc_emlrtDCI = { 1590,/* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   4                                    /* checkKind */
 };
 
-static emlrtDCInfo sc_emlrtDCI = { 1581,/* lineNo */
+static emlrtDCInfo sc_emlrtDCI = { 1590,/* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo tc_emlrtDCI = { 1581,/* lineNo */
+static emlrtDCInfo tc_emlrtDCI = { 1590,/* lineNo */
   40,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo uc_emlrtDCI = { 1581,/* lineNo */
+static emlrtDCInfo uc_emlrtDCI = { 1590,/* lineNo */
   50,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtRTEInfo j_emlrtRTEI = { 1586,/* lineNo */
+static emlrtRTEInfo j_emlrtRTEI = { 1595,/* lineNo */
   15,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
@@ -2111,7 +2111,7 @@ static emlrtRTEInfo j_emlrtRTEI = { 1586,/* lineNo */
 
 static emlrtBCInfo ed_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1587,                                /* lineNo */
+  1596,                                /* lineNo */
   21,                                  /* colNo */
   "Cini",                              /* aName */
   "LTSts",                             /* fName */
@@ -2121,7 +2121,7 @@ static emlrtBCInfo ed_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo fd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1596,                                /* lineNo */
+  1605,                                /* lineNo */
   20,                                  /* colNo */
   "Cr",                                /* aName */
   "LTSts",                             /* fName */
@@ -2129,7 +2129,7 @@ static emlrtBCInfo fd_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtRTEInfo k_emlrtRTEI = { 1626,/* lineNo */
+static emlrtRTEInfo k_emlrtRTEI = { 1635,/* lineNo */
   11,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
@@ -2137,7 +2137,7 @@ static emlrtRTEInfo k_emlrtRTEI = { 1626,/* lineNo */
 
 static emlrtBCInfo gd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1598,                                /* lineNo */
+  1607,                                /* lineNo */
   15,                                  /* colNo */
   "C",                                 /* aName */
   "LTSts",                             /* fName */
@@ -2146,7 +2146,7 @@ static emlrtBCInfo gd_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo c_emlrtECI = { -1,  /* nDims */
-  1598,                                /* lineNo */
+  1607,                                /* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
@@ -2154,7 +2154,7 @@ static emlrtECInfo c_emlrtECI = { -1,  /* nDims */
 
 static emlrtBCInfo hd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1648,                                /* lineNo */
+  1657,                                /* lineNo */
   19,                                  /* colNo */
   "C",                                 /* aName */
   "LTSts",                             /* fName */
@@ -2164,7 +2164,7 @@ static emlrtBCInfo hd_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo id_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1666,                                /* lineNo */
+  1675,                                /* lineNo */
   35,                                  /* colNo */
   "betaini",                           /* aName */
   "LTSts",                             /* fName */
@@ -2174,7 +2174,7 @@ static emlrtBCInfo id_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo jd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1666,                                /* lineNo */
+  1675,                                /* lineNo */
   37,                                  /* colNo */
   "betaini",                           /* aName */
   "LTSts",                             /* fName */
@@ -2184,7 +2184,7 @@ static emlrtBCInfo jd_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo kd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1666,                                /* lineNo */
+  1675,                                /* lineNo */
   19,                                  /* colNo */
   "beta0",                             /* aName */
   "LTSts",                             /* fName */
@@ -2194,7 +2194,7 @@ static emlrtBCInfo kd_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo ld_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1666,                                /* lineNo */
+  1675,                                /* lineNo */
   21,                                  /* colNo */
   "beta0",                             /* aName */
   "LTSts",                             /* fName */
@@ -2203,7 +2203,7 @@ static emlrtBCInfo ld_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo d_emlrtECI = { -1,  /* nDims */
-  1666,                                /* lineNo */
+  1675,                                /* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
@@ -2211,7 +2211,7 @@ static emlrtECInfo d_emlrtECI = { -1,  /* nDims */
 
 static emlrtBCInfo md_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1748,                                /* lineNo */
+  1757,                                /* lineNo */
   13,                                  /* colNo */
   "brob",                              /* aName */
   "LTSts",                             /* fName */
@@ -2221,7 +2221,7 @@ static emlrtBCInfo md_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo nd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1706,                                /* lineNo */
+  1715,                                /* lineNo */
   20,                                  /* colNo */
   "WEIi",                              /* aName */
   "LTSts",                             /* fName */
@@ -2230,7 +2230,7 @@ static emlrtBCInfo nd_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo e_emlrtECI = { -1,  /* nDims */
-  1706,                                /* lineNo */
+  1715,                                /* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
@@ -2238,7 +2238,7 @@ static emlrtECInfo e_emlrtECI = { -1,  /* nDims */
 
 static emlrtBCInfo od_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1730,                                /* lineNo */
+  1739,                                /* lineNo */
   32,                                  /* colNo */
   "bestyhat",                          /* aName */
   "LTSts",                             /* fName */
@@ -2247,7 +2247,7 @@ static emlrtBCInfo od_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo f_emlrtECI = { -1,  /* nDims */
-  1730,                                /* lineNo */
+  1739,                                /* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
@@ -2255,7 +2255,7 @@ static emlrtECInfo f_emlrtECI = { -1,  /* nDims */
 
 static emlrtBCInfo pd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1739,                                /* lineNo */
+  1748,                                /* lineNo */
   28,                                  /* colNo */
   "bestyhat",                          /* aName */
   "LTSts",                             /* fName */
@@ -2264,7 +2264,7 @@ static emlrtBCInfo pd_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo g_emlrtECI = { -1,  /* nDims */
-  1739,                                /* lineNo */
+  1748,                                /* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
@@ -2272,7 +2272,7 @@ static emlrtECInfo g_emlrtECI = { -1,  /* nDims */
 
 static emlrtBCInfo qd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1728,                                /* lineNo */
+  1737,                                /* lineNo */
   31,                                  /* colNo */
   "bestbetas",                         /* aName */
   "LTSts",                             /* fName */
@@ -2281,7 +2281,7 @@ static emlrtBCInfo qd_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo h_emlrtECI = { -1,  /* nDims */
-  1728,                                /* lineNo */
+  1737,                                /* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
@@ -2289,7 +2289,7 @@ static emlrtECInfo h_emlrtECI = { -1,  /* nDims */
 
 static emlrtBCInfo rd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1737,                                /* lineNo */
+  1746,                                /* lineNo */
   27,                                  /* colNo */
   "bestbetas",                         /* aName */
   "LTSts",                             /* fName */
@@ -2298,7 +2298,7 @@ static emlrtBCInfo rd_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo i_emlrtECI = { -1,  /* nDims */
-  1737,                                /* lineNo */
+  1746,                                /* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
@@ -2306,7 +2306,7 @@ static emlrtECInfo i_emlrtECI = { -1,  /* nDims */
 
 static emlrtBCInfo sd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1729,                                /* lineNo */
+  1738,                                /* lineNo */
   32,                                  /* colNo */
   "bestsubset",                        /* aName */
   "LTSts",                             /* fName */
@@ -2315,7 +2315,7 @@ static emlrtBCInfo sd_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo j_emlrtECI = { -1,  /* nDims */
-  1729,                                /* lineNo */
+  1738,                                /* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
@@ -2323,7 +2323,7 @@ static emlrtECInfo j_emlrtECI = { -1,  /* nDims */
 
 static emlrtBCInfo td_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1738,                                /* lineNo */
+  1747,                                /* lineNo */
   28,                                  /* colNo */
   "bestsubset",                        /* aName */
   "LTSts",                             /* fName */
@@ -2332,13 +2332,13 @@ static emlrtBCInfo td_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo k_emlrtECI = { -1,  /* nDims */
-  1738,                                /* lineNo */
+  1747,                                /* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo l_emlrtRTEI = { 1786,/* lineNo */
+static emlrtRTEInfo l_emlrtRTEI = { 1795,/* lineNo */
   11,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
@@ -2346,7 +2346,7 @@ static emlrtRTEInfo l_emlrtRTEI = { 1786,/* lineNo */
 
 static emlrtBCInfo ud_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1787,                                /* lineNo */
+  1796,                                /* lineNo */
   28,                                  /* colNo */
   "bestyhatall",                       /* aName */
   "LTSts",                             /* fName */
@@ -2356,7 +2356,7 @@ static emlrtBCInfo ud_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo vd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1788,                                /* lineNo */
+  1797,                                /* lineNo */
   41,                                  /* colNo */
   "bestbetasall",                      /* aName */
   "LTSts",                             /* fName */
@@ -2366,7 +2366,7 @@ static emlrtBCInfo vd_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo wd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1812,                                /* lineNo */
+  1821,                                /* lineNo */
   50,                                  /* colNo */
   "numscale2ssorind",                  /* aName */
   "LTSts",                             /* fName */
@@ -2376,7 +2376,7 @@ static emlrtBCInfo wd_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo xd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1812,                                /* lineNo */
+  1821,                                /* lineNo */
   52,                                  /* colNo */
   "numscale2ssorind",                  /* aName */
   "LTSts",                             /* fName */
@@ -2386,7 +2386,7 @@ static emlrtBCInfo xd_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo yd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1813,                                /* lineNo */
+  1822,                                /* lineNo */
   50,                                  /* colNo */
   "numscale2ssorind",                  /* aName */
   "LTSts",                             /* fName */
@@ -2396,7 +2396,7 @@ static emlrtBCInfo yd_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo ae_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1813,                                /* lineNo */
+  1822,                                /* lineNo */
   52,                                  /* colNo */
   "numscale2ssorind",                  /* aName */
   "LTSts",                             /* fName */
@@ -2406,7 +2406,7 @@ static emlrtBCInfo ae_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo be_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1818,                                /* lineNo */
+  1827,                                /* lineNo */
   44,                                  /* colNo */
   "bestbetastoadd",                    /* aName */
   "LTSts",                             /* fName */
@@ -2416,7 +2416,7 @@ static emlrtBCInfo be_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo ce_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1818,                                /* lineNo */
+  1827,                                /* lineNo */
   22,                                  /* colNo */
   "bestbetastoadd",                    /* aName */
   "LTSts",                             /* fName */
@@ -2425,7 +2425,7 @@ static emlrtBCInfo ce_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo l_emlrtECI = { -1,  /* nDims */
-  1818,                                /* lineNo */
+  1827,                                /* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
@@ -2433,7 +2433,7 @@ static emlrtECInfo l_emlrtECI = { -1,  /* nDims */
 
 static emlrtBCInfo de_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1820,                                /* lineNo */
+  1829,                                /* lineNo */
   52,                                  /* colNo */
   "numscale2ssorind",                  /* aName */
   "LTSts",                             /* fName */
@@ -2443,7 +2443,7 @@ static emlrtBCInfo de_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo ee_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1820,                                /* lineNo */
+  1829,                                /* lineNo */
   54,                                  /* colNo */
   "numscale2ssorind",                  /* aName */
   "LTSts",                             /* fName */
@@ -2452,14 +2452,14 @@ static emlrtBCInfo ee_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo m_emlrtECI = { -1,  /* nDims */
-  1830,                                /* lineNo */
+  1839,                                /* lineNo */
   18,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
 static emlrtECInfo n_emlrtECI = { -1,  /* nDims */
-  1834,                                /* lineNo */
+  1843,                                /* lineNo */
   18,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
@@ -2467,7 +2467,7 @@ static emlrtECInfo n_emlrtECI = { -1,  /* nDims */
 
 static emlrtBCInfo fe_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1841,                                /* lineNo */
+  1850,                                /* lineNo */
   43,                                  /* colNo */
   "numscale2ssorind",                  /* aName */
   "LTSts",                             /* fName */
@@ -2477,7 +2477,7 @@ static emlrtBCInfo fe_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo ge_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1841,                                /* lineNo */
+  1850,                                /* lineNo */
   45,                                  /* colNo */
   "numscale2ssorind",                  /* aName */
   "LTSts",                             /* fName */
@@ -2487,7 +2487,7 @@ static emlrtBCInfo ge_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo he_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1792,                                /* lineNo */
+  1801,                                /* lineNo */
   25,                                  /* colNo */
   "WEIibestrdiv2",                     /* aName */
   "LTSts",                             /* fName */
@@ -2496,61 +2496,61 @@ static emlrtBCInfo he_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo o_emlrtECI = { -1,  /* nDims */
-  1792,                                /* lineNo */
+  1801,                                /* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
 static emlrtECInfo p_emlrtECI = { -1,  /* nDims */
-  1831,                                /* lineNo */
+  1840,                                /* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
 static emlrtECInfo q_emlrtECI = { -1,  /* nDims */
-  1836,                                /* lineNo */
+  1845,                                /* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
 static emlrtECInfo r_emlrtECI = { -1,  /* nDims */
-  1856,                                /* lineNo */
+  1865,                                /* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
 static emlrtECInfo s_emlrtECI = { -1,  /* nDims */
-  1824,                                /* lineNo */
+  1833,                                /* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo m_emlrtRTEI = { 1918,/* lineNo */
+static emlrtRTEInfo m_emlrtRTEI = { 1927,/* lineNo */
   11,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
 static emlrtECInfo t_emlrtECI = { -1,  /* nDims */
-  1927,                                /* lineNo */
+  1936,                                /* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
 static emlrtECInfo u_emlrtECI = { -1,  /* nDims */
-  1929,                                /* lineNo */
+  1938,                                /* lineNo */
   27,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtDCInfo vc_emlrtDCI = { 1933,/* lineNo */
+static emlrtDCInfo vc_emlrtDCI = { 1942,/* lineNo */
   29,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -2559,7 +2559,7 @@ static emlrtDCInfo vc_emlrtDCI = { 1933,/* lineNo */
 
 static emlrtBCInfo ie_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1933,                                /* lineNo */
+  1942,                                /* lineNo */
   29,                                  /* colNo */
   "Likloc",                            /* aName */
   "LTSts",                             /* fName */
@@ -2568,7 +2568,7 @@ static emlrtBCInfo ie_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo v_emlrtECI = { -1,  /* nDims */
-  1950,                                /* lineNo */
+  1959,                                /* lineNo */
   11,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
@@ -2576,7 +2576,7 @@ static emlrtECInfo v_emlrtECI = { -1,  /* nDims */
 
 static emlrtBCInfo je_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1956,                                /* lineNo */
+  1965,                                /* lineNo */
   15,                                  /* colNo */
   "IndBestRes",                        /* aName */
   "LTSts",                             /* fName */
@@ -2586,7 +2586,7 @@ static emlrtBCInfo je_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo ke_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1956,                                /* lineNo */
+  1965,                                /* lineNo */
   17,                                  /* colNo */
   "IndBestRes",                        /* aName */
   "LTSts",                             /* fName */
@@ -2596,7 +2596,7 @@ static emlrtBCInfo ke_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo le_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1960,                                /* lineNo */
+  1969,                                /* lineNo */
   19,                                  /* colNo */
   "IndBestRes",                        /* aName */
   "LTSts",                             /* fName */
@@ -2606,7 +2606,7 @@ static emlrtBCInfo le_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo me_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1960,                                /* lineNo */
+  1969,                                /* lineNo */
   21,                                  /* colNo */
   "IndBestRes",                        /* aName */
   "LTSts",                             /* fName */
@@ -2616,7 +2616,7 @@ static emlrtBCInfo me_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo ne_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1961,                                /* lineNo */
+  1970,                                /* lineNo */
   28,                                  /* colNo */
   "Xsel",                              /* aName */
   "LTSts",                             /* fName */
@@ -2626,7 +2626,7 @@ static emlrtBCInfo ne_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo oe_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1961,                                /* lineNo */
+  1970,                                /* lineNo */
   30,                                  /* colNo */
   "Xsel",                              /* aName */
   "LTSts",                             /* fName */
@@ -2634,7 +2634,7 @@ static emlrtBCInfo oe_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo wc_emlrtDCI = { 2120,/* lineNo */
+static emlrtDCInfo wc_emlrtDCI = { 2129,/* lineNo */
   20,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -2643,7 +2643,7 @@ static emlrtDCInfo wc_emlrtDCI = { 2120,/* lineNo */
 
 static emlrtBCInfo pe_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  2122,                                /* lineNo */
+  2131,                                /* lineNo */
   71,                                  /* colNo */
   "brobfinal",                         /* aName */
   "LTSts",                             /* fName */
@@ -2653,7 +2653,7 @@ static emlrtBCInfo pe_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo qe_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  2122,                                /* lineNo */
+  2131,                                /* lineNo */
   73,                                  /* colNo */
   "brobfinal",                         /* aName */
   "LTSts",                             /* fName */
@@ -2662,41 +2662,41 @@ static emlrtBCInfo qe_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo w_emlrtECI = { -1,  /* nDims */
-  2163,                                /* lineNo */
+  2172,                                /* lineNo */
   11,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
 static emlrtECInfo x_emlrtECI = { -1,  /* nDims */
-  2169,                                /* lineNo */
+  2178,                                /* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
 static emlrtECInfo y_emlrtECI = { -1,  /* nDims */
-  1828,                                /* lineNo */
+  1837,                                /* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
 static emlrtECInfo ab_emlrtECI = { -1, /* nDims */
-  1841,                                /* lineNo */
+  1850,                                /* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtDCInfo xc_emlrtDCI = { 2351,/* lineNo */
+static emlrtDCInfo xc_emlrtDCI = { 2360,/* lineNo */
   20,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo yc_emlrtDCI = { 2351,/* lineNo */
+static emlrtDCInfo yc_emlrtDCI = { 2360,/* lineNo */
   34,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -2705,7 +2705,7 @@ static emlrtDCInfo yc_emlrtDCI = { 2351,/* lineNo */
 
 static emlrtBCInfo re_emlrtBCI = { 1,  /* iFirst */
   6,                                   /* iLast */
-  2351,                                /* lineNo */
+  2360,                                /* lineNo */
   34,                                  /* colNo */
   "b_X",                               /* aName */
   "LTSts",                             /* fName */
@@ -2713,7 +2713,7 @@ static emlrtBCInfo re_emlrtBCI = { 1,  /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo ad_emlrtDCI = { 2358,/* lineNo */
+static emlrtDCInfo ad_emlrtDCI = { 2367,/* lineNo */
   24,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -2722,7 +2722,7 @@ static emlrtDCInfo ad_emlrtDCI = { 2358,/* lineNo */
 
 static emlrtBCInfo se_emlrtBCI = { 1,  /* iFirst */
   4,                                   /* iLast */
-  2358,                                /* lineNo */
+  2367,                                /* lineNo */
   24,                                  /* colNo */
   "b_trend",                           /* aName */
   "LTSts",                             /* fName */
@@ -2730,7 +2730,7 @@ static emlrtBCInfo se_emlrtBCI = { 1,  /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo bd_emlrtDCI = { 2360,/* lineNo */
+static emlrtDCInfo bd_emlrtDCI = { 2369,/* lineNo */
   24,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -2739,7 +2739,7 @@ static emlrtDCInfo bd_emlrtDCI = { 2360,/* lineNo */
 
 static emlrtBCInfo te_emlrtBCI = { 1,  /* iFirst */
   4,                                   /* iLast */
-  2360,                                /* lineNo */
+  2369,                                /* lineNo */
   24,                                  /* colNo */
   "b_trend",                           /* aName */
   "LTSts",                             /* fName */
@@ -2747,7 +2747,7 @@ static emlrtBCInfo te_emlrtBCI = { 1,  /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo cd_emlrtDCI = { 2360,/* lineNo */
+static emlrtDCInfo cd_emlrtDCI = { 2369,/* lineNo */
   46,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -2756,7 +2756,7 @@ static emlrtDCInfo cd_emlrtDCI = { 2360,/* lineNo */
 
 static emlrtBCInfo ue_emlrtBCI = { 1,  /* iFirst */
   11,                                  /* iLast */
-  2360,                                /* lineNo */
+  2369,                                /* lineNo */
   46,                                  /* colNo */
   "b_seaso",                           /* aName */
   "LTSts",                             /* fName */
@@ -2764,7 +2764,7 @@ static emlrtBCInfo ue_emlrtBCI = { 1,  /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo dd_emlrtDCI = { 2363,/* lineNo */
+static emlrtDCInfo dd_emlrtDCI = { 2372,/* lineNo */
   19,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -2773,7 +2773,7 @@ static emlrtDCInfo dd_emlrtDCI = { 2363,/* lineNo */
 
 static emlrtBCInfo ve_emlrtBCI = { 1,  /* iFirst */
   4,                                   /* iLast */
-  2363,                                /* lineNo */
+  2372,                                /* lineNo */
   19,                                  /* colNo */
   "b_trend",                           /* aName */
   "LTSts",                             /* fName */
@@ -2783,7 +2783,7 @@ static emlrtBCInfo ve_emlrtBCI = { 1,  /* iFirst */
 
 static emlrtBCInfo we_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  2367,                                /* lineNo */
+  2376,                                /* lineNo */
   21,                                  /* colNo */
   "b_expl",                            /* aName */
   "LTSts",                             /* fName */
@@ -2791,7 +2791,7 @@ static emlrtBCInfo we_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo ed_emlrtDCI = { 2367,/* lineNo */
+static emlrtDCInfo ed_emlrtDCI = { 2376,/* lineNo */
   23,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -2800,7 +2800,7 @@ static emlrtDCInfo ed_emlrtDCI = { 2367,/* lineNo */
 
 static emlrtBCInfo xe_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  2367,                                /* lineNo */
+  2376,                                /* lineNo */
   23,                                  /* colNo */
   "b_expl",                            /* aName */
   "LTSts",                             /* fName */
@@ -2808,7 +2808,7 @@ static emlrtBCInfo xe_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo fd_emlrtDCI = { 2370,/* lineNo */
+static emlrtDCInfo fd_emlrtDCI = { 2379,/* lineNo */
   26,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m",/* pName */
@@ -2817,7 +2817,7 @@ static emlrtDCInfo fd_emlrtDCI = { 2370,/* lineNo */
 
 static emlrtBCInfo ye_emlrtBCI = { 1,  /* iFirst */
   3,                                   /* iLast */
-  2370,                                /* lineNo */
+  2379,                                /* lineNo */
   26,                                  /* colNo */
   "b_varampl",                         /* aName */
   "LTSts",                             /* fName */
@@ -2827,7 +2827,7 @@ static emlrtBCInfo ye_emlrtBCI = { 1,  /* iFirst */
 
 static emlrtBCInfo af_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  2615,                                /* lineNo */
+  2624,                                /* lineNo */
   29,                                  /* colNo */
   "Xseaso",                            /* aName */
   "LTSts",                             /* fName */
@@ -2837,7 +2837,7 @@ static emlrtBCInfo af_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo bf_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  2615,                                /* lineNo */
+  2624,                                /* lineNo */
   31,                                  /* colNo */
   "Xseaso",                            /* aName */
   "LTSts",                             /* fName */
@@ -2847,7 +2847,7 @@ static emlrtBCInfo bf_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo cf_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  2648,                                /* lineNo */
+  2657,                                /* lineNo */
   59,                                  /* colNo */
   "selWithoutLastHarmonic",            /* aName */
   "LTSts",                             /* fName */
@@ -2857,7 +2857,7 @@ static emlrtBCInfo cf_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo df_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  2648,                                /* lineNo */
+  2657,                                /* lineNo */
   61,                                  /* colNo */
   "selWithoutLastHarmonic",            /* aName */
   "LTSts",                             /* fName */
@@ -2866,7 +2866,7 @@ static emlrtBCInfo df_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo bb_emlrtECI = { -1, /* nDims */
-  2657,                                /* lineNo */
+  2666,                                /* lineNo */
   19,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
@@ -2874,7 +2874,7 @@ static emlrtECInfo bb_emlrtECI = { -1, /* nDims */
 
 static emlrtBCInfo ef_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  2674,                                /* lineNo */
+  2683,                                /* lineNo */
   40,                                  /* colNo */
   "B",                                 /* aName */
   "LTSts",                             /* fName */
@@ -2883,21 +2883,21 @@ static emlrtBCInfo ef_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo cb_emlrtECI = { -1, /* nDims */
-  1823,                                /* lineNo */
+  1832,                                /* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
 static emlrtECInfo db_emlrtECI = { -1, /* nDims */
-  1755,                                /* lineNo */
+  1764,                                /* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
 static emlrtECInfo eb_emlrtECI = { -1, /* nDims */
-  1843,                                /* lineNo */
+  1852,                                /* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
@@ -2905,7 +2905,7 @@ static emlrtECInfo eb_emlrtECI = { -1, /* nDims */
 
 static emlrtBCInfo ff_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1237,                                /* lineNo */
+  1246,                                /* lineNo */
   18,                                  /* colNo */
   "Xseaso",                            /* aName */
   "LTSts",                             /* fName */
@@ -2915,7 +2915,7 @@ static emlrtBCInfo ff_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo gf_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1225,                                /* lineNo */
+  1234,                                /* lineNo */
   42,                                  /* colNo */
   "sstring",                           /* aName */
   "LTSts",                             /* fName */
@@ -2923,907 +2923,907 @@ static emlrtBCInfo gf_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtRTEInfo vc_emlrtRTEI = { 1062,/* lineNo */
+static emlrtRTEInfo vc_emlrtRTEI = { 1071,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo xc_emlrtRTEI = { 1068,/* lineNo */
+static emlrtRTEInfo xc_emlrtRTEI = { 1077,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo yc_emlrtRTEI = { 1070,/* lineNo */
+static emlrtRTEInfo yc_emlrtRTEI = { 1079,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ad_emlrtRTEI = { 1121,/* lineNo */
+static emlrtRTEInfo ad_emlrtRTEI = { 1130,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo bd_emlrtRTEI = { 1207,/* lineNo */
+static emlrtRTEInfo bd_emlrtRTEI = { 1216,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo cd_emlrtRTEI = { 1212,/* lineNo */
+static emlrtRTEInfo cd_emlrtRTEI = { 1221,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo dd_emlrtRTEI = { 1214,/* lineNo */
+static emlrtRTEInfo dd_emlrtRTEI = { 1223,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ed_emlrtRTEI = { 1219,/* lineNo */
+static emlrtRTEInfo ed_emlrtRTEI = { 1228,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo fd_emlrtRTEI = { 1251,/* lineNo */
+static emlrtRTEInfo fd_emlrtRTEI = { 1260,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo gd_emlrtRTEI = { 1235,/* lineNo */
+static emlrtRTEInfo gd_emlrtRTEI = { 1244,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo hd_emlrtRTEI = { 114,/* lineNo */
+static emlrtRTEInfo hd_emlrtRTEI = { 116,/* lineNo */
   1,                                   /* colNo */
   "LTSts_wrapper",                     /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\LTSts_wrapper.m"/* pName */
 };
 
-static emlrtRTEInfo id_emlrtRTEI = { 1242,/* lineNo */
+static emlrtRTEInfo id_emlrtRTEI = { 1251,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo jd_emlrtRTEI = { 1237,/* lineNo */
+static emlrtRTEInfo jd_emlrtRTEI = { 1246,/* lineNo */
   30,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo kd_emlrtRTEI = { 1265,/* lineNo */
+static emlrtRTEInfo kd_emlrtRTEI = { 1274,/* lineNo */
   22,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ld_emlrtRTEI = { 1237,/* lineNo */
+static emlrtRTEInfo ld_emlrtRTEI = { 1317,/* lineNo */
+  5,                                   /* colNo */
+  "LTSts",                             /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
+};
+
+static emlrtRTEInfo md_emlrtRTEI = { 1315,/* lineNo */
+  5,                                   /* colNo */
+  "LTSts",                             /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
+};
+
+static emlrtRTEInfo nd_emlrtRTEI = { 1246,/* lineNo */
   48,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo md_emlrtRTEI = { 1308,/* lineNo */
+static emlrtRTEInfo od_emlrtRTEI = { 1276,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo nd_emlrtRTEI = { 1306,/* lineNo */
-  5,                                   /* colNo */
-  "LTSts",                             /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
-};
-
-static emlrtRTEInfo od_emlrtRTEI = { 1267,/* lineNo */
-  5,                                   /* colNo */
-  "LTSts",                             /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
-};
-
-static emlrtRTEInfo pd_emlrtRTEI = { 1237,/* lineNo */
+static emlrtRTEInfo pd_emlrtRTEI = { 1246,/* lineNo */
   29,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo qd_emlrtRTEI = { 1469,/* lineNo */
+static emlrtRTEInfo qd_emlrtRTEI = { 1478,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo rd_emlrtRTEI = { 2222,/* lineNo */
+static emlrtRTEInfo rd_emlrtRTEI = { 2231,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo sd_emlrtRTEI = { 2225,/* lineNo */
+static emlrtRTEInfo sd_emlrtRTEI = { 2234,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo td_emlrtRTEI = { 1485,/* lineNo */
+static emlrtRTEInfo td_emlrtRTEI = { 1494,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ud_emlrtRTEI = { 1487,/* lineNo */
+static emlrtRTEInfo ud_emlrtRTEI = { 1496,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo vd_emlrtRTEI = { 1492,/* lineNo */
+static emlrtRTEInfo vd_emlrtRTEI = { 1501,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo wd_emlrtRTEI = { 1513,/* lineNo */
+static emlrtRTEInfo wd_emlrtRTEI = { 1522,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo xd_emlrtRTEI = { 1851,/* lineNo */
+static emlrtRTEInfo xd_emlrtRTEI = { 1860,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo yd_emlrtRTEI = { 1498,/* lineNo */
+static emlrtRTEInfo yd_emlrtRTEI = { 1507,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ae_emlrtRTEI = { 1494,/* lineNo */
+static emlrtRTEInfo ae_emlrtRTEI = { 1503,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo be_emlrtRTEI = { 1540,/* lineNo */
+static emlrtRTEInfo be_emlrtRTEI = { 1549,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ce_emlrtRTEI = { 1500,/* lineNo */
+static emlrtRTEInfo ce_emlrtRTEI = { 1509,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo de_emlrtRTEI = { 1542,/* lineNo */
+static emlrtRTEInfo de_emlrtRTEI = { 1551,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ee_emlrtRTEI = { 1543,/* lineNo */
+static emlrtRTEInfo ee_emlrtRTEI = { 1552,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo fe_emlrtRTEI = { 1545,/* lineNo */
+static emlrtRTEInfo fe_emlrtRTEI = { 1554,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ge_emlrtRTEI = { 1558,/* lineNo */
+static emlrtRTEInfo ge_emlrtRTEI = { 1567,/* lineNo */
   14,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo he_emlrtRTEI = { 1558,/* lineNo */
+static emlrtRTEInfo he_emlrtRTEI = { 1567,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ie_emlrtRTEI = { 1570,/* lineNo */
+static emlrtRTEInfo ie_emlrtRTEI = { 1579,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo je_emlrtRTEI = { 1571,/* lineNo */
+static emlrtRTEInfo je_emlrtRTEI = { 1580,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ke_emlrtRTEI = { 1572,/* lineNo */
+static emlrtRTEInfo ke_emlrtRTEI = { 1581,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo le_emlrtRTEI = { 1573,/* lineNo */
+static emlrtRTEInfo le_emlrtRTEI = { 1582,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo me_emlrtRTEI = { 1604,/* lineNo */
+static emlrtRTEInfo me_emlrtRTEI = { 1613,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ne_emlrtRTEI = { 1618,/* lineNo */
+static emlrtRTEInfo ne_emlrtRTEI = { 1627,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo oe_emlrtRTEI = { 1581,/* lineNo */
+static emlrtRTEInfo oe_emlrtRTEI = { 1590,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo pe_emlrtRTEI = { 1645,/* lineNo */
+static emlrtRTEInfo pe_emlrtRTEI = { 1654,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo qe_emlrtRTEI = { 1587,/* lineNo */
+static emlrtRTEInfo qe_emlrtRTEI = { 1596,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo re_emlrtRTEI = { 1787,/* lineNo */
+static emlrtRTEInfo re_emlrtRTEI = { 1796,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo te_emlrtRTEI = { 1788,/* lineNo */
+static emlrtRTEInfo te_emlrtRTEI = { 1797,/* lineNo */
   28,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ve_emlrtRTEI = { 1654,/* lineNo */
+static emlrtRTEInfo ve_emlrtRTEI = { 1663,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo we_emlrtRTEI = { 1592,/* lineNo */
+static emlrtRTEInfo we_emlrtRTEI = { 1601,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo xe_emlrtRTEI = { 1657,/* lineNo */
+static emlrtRTEInfo xe_emlrtRTEI = { 1666,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ye_emlrtRTEI = { 1799,/* lineNo */
+static emlrtRTEInfo ye_emlrtRTEI = { 1808,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo af_emlrtRTEI = { 1658,/* lineNo */
+static emlrtRTEInfo af_emlrtRTEI = { 1667,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo bf_emlrtRTEI = { 1803,/* lineNo */
+static emlrtRTEInfo bf_emlrtRTEI = { 1812,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo cf_emlrtRTEI = { 1658,/* lineNo */
+static emlrtRTEInfo cf_emlrtRTEI = { 1667,/* lineNo */
   31,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo df_emlrtRTEI = { 1806,/* lineNo */
+static emlrtRTEInfo df_emlrtRTEI = { 1815,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ff_emlrtRTEI = { 1685,/* lineNo */
+static emlrtRTEInfo ff_emlrtRTEI = { 1694,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo gf_emlrtRTEI = { 1830,/* lineNo */
+static emlrtRTEInfo gf_emlrtRTEI = { 1839,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo hf_emlrtRTEI = { 1694,/* lineNo */
+static emlrtRTEInfo hf_emlrtRTEI = { 1703,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo if_emlrtRTEI = { 1700,/* lineNo */
+static emlrtRTEInfo if_emlrtRTEI = { 1709,/* lineNo */
   18,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo jf_emlrtRTEI = { 1834,/* lineNo */
+static emlrtRTEInfo jf_emlrtRTEI = { 1843,/* lineNo */
   30,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo kf_emlrtRTEI = { 1703,/* lineNo */
+static emlrtRTEInfo kf_emlrtRTEI = { 1712,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo lf_emlrtRTEI = { 1853,/* lineNo */
+static emlrtRTEInfo lf_emlrtRTEI = { 1862,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo mf_emlrtRTEI = { 1648,/* lineNo */
+static emlrtRTEInfo mf_emlrtRTEI = { 1657,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo nf_emlrtRTEI = { 1855,/* lineNo */
+static emlrtRTEInfo nf_emlrtRTEI = { 1864,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo of_emlrtRTEI = { 1743,/* lineNo */
+static emlrtRTEInfo of_emlrtRTEI = { 1752,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo pf_emlrtRTEI = { 1861,/* lineNo */
+static emlrtRTEInfo pf_emlrtRTEI = { 1870,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo qf_emlrtRTEI = { 1864,/* lineNo */
+static emlrtRTEInfo qf_emlrtRTEI = { 1873,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo rf_emlrtRTEI = { 1941,/* lineNo */
+static emlrtRTEInfo rf_emlrtRTEI = { 1950,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo sf_emlrtRTEI = { 1950,/* lineNo */
+static emlrtRTEInfo sf_emlrtRTEI = { 1959,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo tf_emlrtRTEI = { 1900,/* lineNo */
+static emlrtRTEInfo tf_emlrtRTEI = { 1909,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo uf_emlrtRTEI = { 2231,/* lineNo */
+static emlrtRTEInfo uf_emlrtRTEI = { 2240,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo vf_emlrtRTEI = { 1914,/* lineNo */
+static emlrtRTEInfo vf_emlrtRTEI = { 1923,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo wf_emlrtRTEI = { 1915,/* lineNo */
+static emlrtRTEInfo wf_emlrtRTEI = { 1924,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo xf_emlrtRTEI = { 1961,/* lineNo */
+static emlrtRTEInfo xf_emlrtRTEI = { 1970,/* lineNo */
   20,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo yf_emlrtRTEI = { 1910,/* lineNo */
+static emlrtRTEInfo yf_emlrtRTEI = { 1919,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ag_emlrtRTEI = { 2023,/* lineNo */
+static emlrtRTEInfo ag_emlrtRTEI = { 2032,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo bg_emlrtRTEI = { 2016,/* lineNo */
+static emlrtRTEInfo bg_emlrtRTEI = { 2025,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo cg_emlrtRTEI = { 1915,/* lineNo */
+static emlrtRTEInfo cg_emlrtRTEI = { 1924,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo dg_emlrtRTEI = { 2047,/* lineNo */
+static emlrtRTEInfo dg_emlrtRTEI = { 2056,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo eg_emlrtRTEI = { 1920,/* lineNo */
+static emlrtRTEInfo eg_emlrtRTEI = { 1929,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo fg_emlrtRTEI = { 2051,/* lineNo */
+static emlrtRTEInfo fg_emlrtRTEI = { 2060,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo gg_emlrtRTEI = { 1923,/* lineNo */
+static emlrtRTEInfo gg_emlrtRTEI = { 1932,/* lineNo */
   18,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo hg_emlrtRTEI = { 2086,/* lineNo */
+static emlrtRTEInfo hg_emlrtRTEI = { 2095,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ig_emlrtRTEI = { 2061,/* lineNo */
+static emlrtRTEInfo ig_emlrtRTEI = { 2070,/* lineNo */
   15,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo jg_emlrtRTEI = { 2061,/* lineNo */
+static emlrtRTEInfo jg_emlrtRTEI = { 2070,/* lineNo */
   29,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo kg_emlrtRTEI = { 2087,/* lineNo */
+static emlrtRTEInfo kg_emlrtRTEI = { 2096,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo lg_emlrtRTEI = { 1923,/* lineNo */
+static emlrtRTEInfo lg_emlrtRTEI = { 1932,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo mg_emlrtRTEI = { 1935,/* lineNo */
+static emlrtRTEInfo mg_emlrtRTEI = { 1944,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ng_emlrtRTEI = { 2091,/* lineNo */
+static emlrtRTEInfo ng_emlrtRTEI = { 2100,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo og_emlrtRTEI = { 2089,/* lineNo */
+static emlrtRTEInfo og_emlrtRTEI = { 2098,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo pg_emlrtRTEI = { 2092,/* lineNo */
+static emlrtRTEInfo pg_emlrtRTEI = { 2101,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo qg_emlrtRTEI = { 1927,/* lineNo */
+static emlrtRTEInfo qg_emlrtRTEI = { 1936,/* lineNo */
   16,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo rg_emlrtRTEI = { 2067,/* lineNo */
+static emlrtRTEInfo rg_emlrtRTEI = { 2076,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo sg_emlrtRTEI = { 2096,/* lineNo */
+static emlrtRTEInfo sg_emlrtRTEI = { 2105,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo tg_emlrtRTEI = { 2076,/* lineNo */
+static emlrtRTEInfo tg_emlrtRTEI = { 2085,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ug_emlrtRTEI = { 1935,/* lineNo */
+static emlrtRTEInfo ug_emlrtRTEI = { 1944,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo vg_emlrtRTEI = { 2097,/* lineNo */
+static emlrtRTEInfo vg_emlrtRTEI = { 2106,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo wg_emlrtRTEI = { 1929,/* lineNo */
+static emlrtRTEInfo wg_emlrtRTEI = { 1938,/* lineNo */
   27,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo xg_emlrtRTEI = { 2069,/* lineNo */
+static emlrtRTEInfo xg_emlrtRTEI = { 2078,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo yg_emlrtRTEI = { 2077,/* lineNo */
+static emlrtRTEInfo yg_emlrtRTEI = { 2086,/* lineNo */
   15,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ah_emlrtRTEI = { 2124,/* lineNo */
+static emlrtRTEInfo ah_emlrtRTEI = { 2133,/* lineNo */
   14,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo bh_emlrtRTEI = { 2077,/* lineNo */
+static emlrtRTEInfo bh_emlrtRTEI = { 2086,/* lineNo */
   32,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ch_emlrtRTEI = { 2070,/* lineNo */
+static emlrtRTEInfo ch_emlrtRTEI = { 2079,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo dh_emlrtRTEI = { 2119,/* lineNo */
+static emlrtRTEInfo dh_emlrtRTEI = { 2128,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo eh_emlrtRTEI = { 2127,/* lineNo */
+static emlrtRTEInfo eh_emlrtRTEI = { 2136,/* lineNo */
   16,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo fh_emlrtRTEI = { 2126,/* lineNo */
+static emlrtRTEInfo fh_emlrtRTEI = { 2135,/* lineNo */
   16,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo gh_emlrtRTEI = { 2081,/* lineNo */
+static emlrtRTEInfo gh_emlrtRTEI = { 2090,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo hh_emlrtRTEI = { 2130,/* lineNo */
+static emlrtRTEInfo hh_emlrtRTEI = { 2139,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ih_emlrtRTEI = { 2122,/* lineNo */
+static emlrtRTEInfo ih_emlrtRTEI = { 2131,/* lineNo */
   61,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo jh_emlrtRTEI = { 2082,/* lineNo */
+static emlrtRTEInfo jh_emlrtRTEI = { 2091,/* lineNo */
   15,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo kh_emlrtRTEI = { 2136,/* lineNo */
+static emlrtRTEInfo kh_emlrtRTEI = { 2145,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo lh_emlrtRTEI = { 2121,/* lineNo */
+static emlrtRTEInfo lh_emlrtRTEI = { 2130,/* lineNo */
   16,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo mh_emlrtRTEI = { 2139,/* lineNo */
+static emlrtRTEInfo mh_emlrtRTEI = { 2148,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo nh_emlrtRTEI = { 2082,/* lineNo */
+static emlrtRTEInfo nh_emlrtRTEI = { 2091,/* lineNo */
   31,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo oh_emlrtRTEI = { 2120,/* lineNo */
+static emlrtRTEInfo oh_emlrtRTEI = { 2129,/* lineNo */
   16,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ph_emlrtRTEI = { 2083,/* lineNo */
+static emlrtRTEInfo ph_emlrtRTEI = { 2092,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo qh_emlrtRTEI = { 2146,/* lineNo */
+static emlrtRTEInfo qh_emlrtRTEI = { 2155,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo rh_emlrtRTEI = { 2149,/* lineNo */
+static emlrtRTEInfo rh_emlrtRTEI = { 2158,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo sh_emlrtRTEI = { 2163,/* lineNo */
+static emlrtRTEInfo sh_emlrtRTEI = { 2172,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo th_emlrtRTEI = { 2166,/* lineNo */
+static emlrtRTEInfo th_emlrtRTEI = { 2175,/* lineNo */
   8,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo uh_emlrtRTEI = { 2166,/* lineNo */
+static emlrtRTEInfo uh_emlrtRTEI = { 2175,/* lineNo */
   30,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo vh_emlrtRTEI = { 2169,/* lineNo */
+static emlrtRTEInfo vh_emlrtRTEI = { 2178,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo wh_emlrtRTEI = { 2205,/* lineNo */
+static emlrtRTEInfo wh_emlrtRTEI = { 2214,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo xh_emlrtRTEI = { 2210,/* lineNo */
+static emlrtRTEInfo xh_emlrtRTEI = { 2219,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo yh_emlrtRTEI = { 2211,/* lineNo */
+static emlrtRTEInfo yh_emlrtRTEI = { 2220,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ai_emlrtRTEI = { 2215,/* lineNo */
+static emlrtRTEInfo ai_emlrtRTEI = { 2224,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo bi_emlrtRTEI = { 2246,/* lineNo */
+static emlrtRTEInfo bi_emlrtRTEI = { 2255,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ci_emlrtRTEI = { 2268,/* lineNo */
+static emlrtRTEInfo ci_emlrtRTEI = { 2277,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo di_emlrtRTEI = { 2273,/* lineNo */
+static emlrtRTEInfo di_emlrtRTEI = { 2282,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ei_emlrtRTEI = { 2280,/* lineNo */
+static emlrtRTEInfo ei_emlrtRTEI = { 2289,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo fi_emlrtRTEI = { 2278,/* lineNo */
+static emlrtRTEInfo fi_emlrtRTEI = { 2287,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo gi_emlrtRTEI = { 2382,/* lineNo */
+static emlrtRTEInfo gi_emlrtRTEI = { 2391,/* lineNo */
   24,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo hi_emlrtRTEI = { 2371,/* lineNo */
+static emlrtRTEInfo hi_emlrtRTEI = { 2380,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ii_emlrtRTEI = { 2577,/* lineNo */
+static emlrtRTEInfo ii_emlrtRTEI = { 2586,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ji_emlrtRTEI = { 2582,/* lineNo */
+static emlrtRTEInfo ji_emlrtRTEI = { 2591,/* lineNo */
   29,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ki_emlrtRTEI = { 2582,/* lineNo */
+static emlrtRTEInfo ki_emlrtRTEI = { 2591,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo li_emlrtRTEI = { 2587,/* lineNo */
+static emlrtRTEInfo li_emlrtRTEI = { 2596,/* lineNo */
   19,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo mi_emlrtRTEI = { 2596,/* lineNo */
+static emlrtRTEInfo mi_emlrtRTEI = { 2605,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ni_emlrtRTEI = { 2587,/* lineNo */
+static emlrtRTEInfo ni_emlrtRTEI = { 2596,/* lineNo */
   54,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo oi_emlrtRTEI = { 2613,/* lineNo */
+static emlrtRTEInfo oi_emlrtRTEI = { 2622,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo pi_emlrtRTEI = { 2615,/* lineNo */
+static emlrtRTEInfo pi_emlrtRTEI = { 2624,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo qi_emlrtRTEI = { 2589,/* lineNo */
+static emlrtRTEInfo qi_emlrtRTEI = { 2598,/* lineNo */
   16,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ri_emlrtRTEI = { 2622,/* lineNo */
+static emlrtRTEInfo ri_emlrtRTEI = { 2631,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo si_emlrtRTEI = { 2620,/* lineNo */
+static emlrtRTEInfo si_emlrtRTEI = { 2629,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ti_emlrtRTEI = { 2616,/* lineNo */
+static emlrtRTEInfo ti_emlrtRTEI = { 2625,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ui_emlrtRTEI = { 2591,/* lineNo */
+static emlrtRTEInfo ui_emlrtRTEI = { 2600,/* lineNo */
   24,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo vi_emlrtRTEI = { 2627,/* lineNo */
+static emlrtRTEInfo vi_emlrtRTEI = { 2636,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo wi_emlrtRTEI = { 2597,/* lineNo */
+static emlrtRTEInfo wi_emlrtRTEI = { 2606,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo xi_emlrtRTEI = { 2598,/* lineNo */
+static emlrtRTEInfo xi_emlrtRTEI = { 2607,/* lineNo */
   19,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo yi_emlrtRTEI = { 2598,/* lineNo */
+static emlrtRTEInfo yi_emlrtRTEI = { 2607,/* lineNo */
   36,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo aj_emlrtRTEI = { 2650,/* lineNo */
+static emlrtRTEInfo aj_emlrtRTEI = { 2659,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
@@ -3835,79 +3835,79 @@ static emlrtRTEInfo bj_emlrtRTEI = { 70,/* lineNo */
   "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\ops\\private\\eml_setop.m"/* pName */
 };
 
-static emlrtRTEInfo cj_emlrtRTEI = { 2648,/* lineNo */
+static emlrtRTEInfo cj_emlrtRTEI = { 2657,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo dj_emlrtRTEI = { 2657,/* lineNo */
+static emlrtRTEInfo dj_emlrtRTEI = { 2666,/* lineNo */
   19,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ej_emlrtRTEI = { 2603,/* lineNo */
+static emlrtRTEInfo ej_emlrtRTEI = { 2612,/* lineNo */
   24,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo fj_emlrtRTEI = { 2102,/* lineNo */
+static emlrtRTEInfo fj_emlrtRTEI = { 2111,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo gj_emlrtRTEI = { 1730,/* lineNo */
+static emlrtRTEInfo gj_emlrtRTEI = { 1739,/* lineNo */
   42,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo hj_emlrtRTEI = { 1700,/* lineNo */
+static emlrtRTEInfo hj_emlrtRTEI = { 1709,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ij_emlrtRTEI = { 1311,/* lineNo */
+static emlrtRTEInfo ij_emlrtRTEI = { 1320,/* lineNo */
   1,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo jj_emlrtRTEI = { 1221,/* lineNo */
+static emlrtRTEInfo jj_emlrtRTEI = { 1230,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo kj_emlrtRTEI = { 1263,/* lineNo */
+static emlrtRTEInfo kj_emlrtRTEI = { 1272,/* lineNo */
   5,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo lj_emlrtRTEI = { 1564,/* lineNo */
+static emlrtRTEInfo lj_emlrtRTEI = { 1573,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo mj_emlrtRTEI = { 1566,/* lineNo */
+static emlrtRTEInfo mj_emlrtRTEI = { 1575,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo nj_emlrtRTEI = { 1567,/* lineNo */
+static emlrtRTEInfo nj_emlrtRTEI = { 1576,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo oj_emlrtRTEI = { 1658,/* lineNo */
+static emlrtRTEInfo oj_emlrtRTEI = { 1667,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
@@ -3919,49 +3919,49 @@ static emlrtRTEInfo pj_emlrtRTEI = { 1,/* lineNo */
   "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\LTSts_wrapper.m"/* pName */
 };
 
-static emlrtRTEInfo qj_emlrtRTEI = { 1856,/* lineNo */
+static emlrtRTEInfo qj_emlrtRTEI = { 1865,/* lineNo */
   23,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo rj_emlrtRTEI = { 1856,/* lineNo */
+static emlrtRTEInfo rj_emlrtRTEI = { 1865,/* lineNo */
   12,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo sj_emlrtRTEI = { 1857,/* lineNo */
+static emlrtRTEInfo sj_emlrtRTEI = { 1866,/* lineNo */
   12,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo tj_emlrtRTEI = { 2047,/* lineNo */
+static emlrtRTEInfo tj_emlrtRTEI = { 2056,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo uj_emlrtRTEI = { 2211,/* lineNo */
+static emlrtRTEInfo uj_emlrtRTEI = { 2220,/* lineNo */
   20,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo vj_emlrtRTEI = { 2215,/* lineNo */
+static emlrtRTEInfo vj_emlrtRTEI = { 2224,/* lineNo */
   26,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo wj_emlrtRTEI = { 1590,/* lineNo */
+static emlrtRTEInfo wj_emlrtRTEI = { 1599,/* lineNo */
   16,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo xj_emlrtRTEI = { 1788,/* lineNo */
+static emlrtRTEInfo xj_emlrtRTEI = { 1797,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
@@ -3972,17 +3972,17 @@ static emlrtRSInfo eeb_emlrtRSI = { 68,/* lineNo */
   "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\iofun\\fprintf.m"/* pathName */
 };
 
-static emlrtRSInfo feb_emlrtRSI = { 1973,/* lineNo */
+static emlrtRSInfo feb_emlrtRSI = { 1982,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo geb_emlrtRSI = { 1258,/* lineNo */
+static emlrtRSInfo geb_emlrtRSI = { 1267,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo heb_emlrtRSI = { 1350,/* lineNo */
+static emlrtRSInfo heb_emlrtRSI = { 1359,/* lineNo */
   "LTSts",                             /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
@@ -4256,6 +4256,7 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
   real_T options_nsamp_data[2];
   real_T varargin_22_data[2];
   real_T ARp;
+  real_T LSH;
   real_T a;
   real_T b_h;
   real_T bdp;
@@ -4263,7 +4264,6 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
   real_T d;
   real_T d1;
   real_T factor;
-  real_T lshift;
   real_T ncomb;
   real_T p;
   real_T pini;
@@ -4375,7 +4375,8 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
   /*  field reftol a scalar of type double */
   /*  field reftolbestr a scalar of type double */
   /*  model: a struct (with 6 fields of type scalar double) */
-  /*  field lshift  a row vector of type double */
+  /*  field lshift  a column vector of type double */
+  /*  assert(all(size(model.lshift) <= [Inf Inf])); */
   /*  field s a scalar of type double */
   /*  field trend a scalar of type double */
   /*  field seasonal a scalar of type double */
@@ -4626,27 +4627,35 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
   /*                model.X  =  matrix of size T-by-nexpl containing the */
   /*                          values of nexpl extra covariates which are likely */
   /*                          to affect y. */
-  /*                model.lshift = scalar greater or equal than 0 or equal to -1, */
-  /*                          or vector of positive integer values which */
-  /*                          specifies whether it is necessary to include a */
-  /*                          level shift component. lshift = 0 (default) */
-  /*                          implies no level shift component. lshift = -1 */
-  /*                          specifies the moment to start considering level */
-  /*                          shifts automatically from specification of */
-  /*                          lshift in position floor((T-1-p)/2). If lshift is */
-  /*                          an interger greater then 0 or a vector of positive */
-  /*                          integer values then it specifies the */
-  /*                          moments where the level shift can be located. For */
-  /*                          example if lshift =13 then the following */
-  /*                          additional parameters are estimated */
-  /*                           $\beta_{LS1}* I(t \geq beta_{LS2})$ where */
-  /*                           $\beta_{LS1}$ is a real number and $\beta_{LS2}$ */
-  /*                           is an integer which assumes values 13. */
-  /*                           T-13. If lshift =[13 20] then the following */
-  /*                          additional parameters are estimated */
-  /*                           $\beta_{LS1}* I(t \geq beta_{LS2})$ where */
-  /*                           $\beta_{LS1}$ is a real number and $\beta_{LS2}$ */
-  /*                           is an integer which assumes values 13 or 20. */
+  /*                model.lshift = scalar or vector associated to level shift */
+  /*                        component. lshift=0 (default) implies no level */
+  /*                        shift component. */
+  /*                        If model.lshift is vector of positive integers, */
+  /*                          then it is associated to the positions of level */
+  /*                          shifts which have to be considered. The most */
+  /*                          significant one is included in the fitted model. */
+  /*                          For example if model.lshift =[13 20 36] a */
+  /*                          tentative level shift is imposed in position */
+  /*                          $t=13$, $t=20$ and $t=36$. The most significant */
+  /*                          among these positions in included in the final */
+  /*                          model. In other words, the following extra */
+  /*                          parameters are added to the final model: */
+  /*                          $\beta_{LS1}* I(t \geq \beta_{LS2})$ where */
+  /*                          $\beta_{LS1}$ is a real number (associated with */
+  /*                          the magnitude of the level shift) and */
+  /*                          $\beta_{LS2}$ is an integer which assumes values */
+  /*                          13, 20 or 36 and and $I$ denotes the indicator */
+  /*                          function. */
+  /*                          As a particular case, if model.lshift =13 then a */
+  /*                          level shift in position $t=13$ is added to the */
+  /*                          model. In other words the following additional */
+  /*                          parameters are added: $\beta_{LS1}* I(t \geq 13)$ */
+  /*                          where $\beta_{LS1}$ is a real number and $I$ */
+  /*                          denotes the indicator function. */
+  /*                        If lshift = -1 tentative level shifts are */
+  /*                          considered for positions $p+1,p+2, ..., T-p$ and */
+  /*                          the most significant one is included in the final */
+  /*                          model. */
   /*                        In the paper RPRH $\beta_{LS1}$ is denoted with */
   /*                        symbol $\delta_1$, while, $\beta_{LS2}$ is denoted */
   /*                        with symbol $\delta_2$. */
@@ -4709,22 +4718,23 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
   /*        nsamp : number of subsamples to extract. Scalar or vector of length 2. */
   /*                Vector of length 1 or 2 which controls the number of */
   /*                subsamples which will be extracted to find the robust */
-  /*                estimator. If lshift>0 then nsamp(1) controls the number of */
-  /*                subsets which have to be extracted to find the solution for */
-  /*                t=lshift. nsamp(2) controls the number of subsets which */
-  /*                have to be extracted to find the solution for t=lshift+1, */
-  /*                lshift+2, ..., T-lshift. */
+  /*                estimator. If lshift is not equal to 0 then nsamp(1) */
+  /*                controls the number of subsets which have to be extracted */
+  /*                to find the solution for t=lshift(1). nsamp(2) controls the */
+  /*                number of subsets which have to be extracted to find the */
+  /*                solution for t=lshift(2), lshift(3), ..., lshift(end). */
   /*                Note that nsamp(2) is generally smaller than nsamp(1) */
   /*                because in order to compute the best solution for */
-  /*                t=lshift+1, lshift+2, ..., T-lshift, we use the lts.bestr/2 */
-  /*                best solutions from previous t (after shifting by one the */
+  /*                t=lshift(2), lshift(3), ..., lshift(end), we use the lts.bestr/2 */
+  /*                best solutions from previous t (after shifting the */
   /*                position of the level shift in the estimator of beta). If */
-  /*                lshift is >0 the default value of nsamp is (500 250). If */
-  /*                lshift is >0 and nsamp is supplied as a scalar the default */
-  /*                is to extract [nsamp/2] subsamples for t=lshift+1, */
-  /*                lshift+2, ... Therefore, for example, in order to extract */
-  /*                600 subsamples for t=lshift and 300 subsamples for t= */
-  /*                lshift+1 ... you can use nsamp =600 or nsamp=[600 300]. */
+  /*                lshift is a vector of positive integers the default value */
+  /*                of nsamp is (500 250). If */
+  /*                lshift is a vector of positive integers and nsamp is supplied as a scalar the default */
+  /*                is to extract [nsamp/2] subsamples for t=lshift(1), */
+  /*                lshift(2), ... Therefore, for example, in order to extract */
+  /*                600 subsamples for t=lshift(1) and 300 subsamples for t= */
+  /*                lshift(2) ... you can use nsamp =600 or nsamp=[600 300]. */
   /*                The default value of nsamp is 1000; */
   /*                  Example - 'nsamp',500 */
   /*                  Data Types - double */
@@ -4860,19 +4870,19 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
   /*                        that the design matrix is full rank. */
   /*                        out.bs can be used to initialize the forward */
   /*                        search. */
-  /*          out.Hsubset = matrix of size T-by-(T-2*lshift) */
+  /*          out.Hsubset = matrix of size T-by-r */
   /*                        containing units forming best H subset for each */
-  /*                        tentative level shift which is considered. */
-  /*                        Units belonging to */
-  /*                        subset are given with their row number, units not */
-  /*                        belonging to subset have missing values */
-  /*                        ( Remark: T-2*lshift = length((lshift+1):(T-lshift)) ) */
+  /*                        tentative level shift which is considered. r is */
+  /*                        number of tentative level shift positions whicha re */
+  /*                        considered. For example if model.lshift=[13 21 40] */
+  /*                        r is equal to 3. Units belonging to subset are */
+  /*                        given with their row number, units not belonging to */
+  /*                        subset have missing values */
   /*                        This output is present just if input option */
-  /*                        model.lshift>0. */
+  /*                        model.lshift is not equal to 0. */
   /*            out.posLS = scalar associated with best tentative level shift */
-  /*                        position. */
-  /*                        This output is present just if input option */
-  /*                        model.lshift>0. */
+  /*                        position. This output is present just if input */
+  /*                        option model.lshift is not equal to 0. */
   /*      out.numscale2 = matrix of size lts.bestr-by-(T-2*lshift) containing */
   /*                        (in the columns) the values of the lts.bestr smallest */
   /*                        values of the target function. Target function = truncated */
@@ -4889,7 +4899,7 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
   /*                        index lts.bestr/2+2 is associated with best solution */
   /*                        from previous tentative level shift. */
   /*                        This output is present just if input option */
-  /*                        model.lshift>0. */
+  /*                        model.lshift is not equal to 0. */
   /*          out.Likloc  = matrix of size (2*lshiftlocref.wlength+1)-by-3 */
   /*                        containing local sum of squares of residuals in */
   /*                        order to decide best position of level shift: */
@@ -4897,14 +4907,14 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
   /*                        2nd col = local sum of squares of huberized residuals; */
   /*                        3rd col = local sum of squares of raw residuals. */
   /*                        This output is present just if input option */
-  /*                        model.lshift>0. */
+  /*                        model.lshift is not equal to 0. */
   /*              out.RES = Matrix of size T-by-(T-lshift) containing scaled */
   /*                        residuals for all the T units of the original time */
   /*                        series monitored in steps lshift+1, lshift+2, ..., */
   /*                        T-lshift, where lshift+1 is the first tentative */
   /*                        level shift position, lshift +2 is the second level */
   /*                        shift position, and so on. This output is present */
-  /*                        just if input option model.lshift>0. */
+  /*                        just if input option model.lshift is not equal to 0. */
   /*             out.yhat = vector of fitted values after final (NLS=non linear */
   /*                        least squares) step. */
   /*                        $ (\hat \eta_1, \hat \eta_2, \ldots, \hat \eta_T)'$ */
@@ -5010,21 +5020,21 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
   /*     % Simulated data with linear trend and level shift. */
   /*     % No seasonal component. */
   /*     rng('default') */
-  /*     n=45; */
+  /*     T=45; */
   /*     a=1; */
   /*     b=0.8; */
   /*     sig=1; */
-  /*     seq=(1:n)'; */
-  /*     y=a+b*seq+sig*randn(n,1); */
+  /*     seq=(1:T)'; */
+  /*     y=a+b*seq+sig*randn(T,1); */
   /*     % Add a level shift in the simulated series */
-  /*     y(round(n/2):end)=y(round(n/2):end)+10; */
+  /*     y(round(T/2):end)=y(round(T/2):end)+10; */
   /*     % model with a linear trend, non seasonal and level shift */
   /*     model=struct; */
   /*     model.trend=1; */
   /*     model.seasonal=0; */
   /*     % Potential level shift position is investigated in positions: */
-  /*     % t=10, t=11, ..., t=T-10. */
-  /*     model.lshift=11:n-10; */
+  /*     % t=11, t=12, ..., t=T-10. */
+  /*     model.lshift=11:T-10; */
   /*     out=LTSts(y,'model',model,'plots',1); */
   /*     % Using the notation of the paper RPRH: A=1, B=1, G=0 and $\delta_1>0$. */
   /*     str=strcat('A=1, B=0, G=0, $\delta_2=',num2str(out.posLS),'$'); */
@@ -5606,8 +5616,6 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
   seasonal.contents = model->seasonal;
 
   /*  get number of harmonics */
-  lshift = model->lshift;
-
   /*  get level shift */
   /*  nbestindexes = indexes of the best  nbestindexes solutions for each */
   /*  tentative position of level shift */
@@ -5877,7 +5885,7 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
       b_cos(&c_st, bestnumscale2);
       i1 = betaini->size[0];
       betaini->size[0] = seq.contents->size[0];
-      emxEnsureCapacity_real_T(&b_st, betaini, i1, &ld_emlrtRTEI);
+      emxEnsureCapacity_real_T(&b_st, betaini, i1, &nd_emlrtRTEI);
       for (i1 = 0; i1 < nseaso; i1++) {
         betaini->data[i1] = stoprint * seq.contents->data[i1] / s.contents;
       }
@@ -6152,22 +6160,14 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
   /*  varampl = number of parameters involving time varying trend, */
   /*  + 2 additional parameters if there is a level shift component */
   lshiftYN.contents = 0.0;
-  if ((model->lshift == -1.0) || (model->lshift > 0.0)) {
+  if (model->lshift != 0.0) {
     lshiftYN.contents = 1.0;
   }
 
   p = (pini + varampl.contents) + lshiftYN.contents * 2.0;
 
-  /* automatic specification of lshift which takes into account the fact that */
-  /* at line 217 of FSRinvmdr the degrees of freedom mm-p must be positive. */
-  /* Being mm the length of LSH = (lshift+1):(T-lshift), mm-p>0 can be written as: */
-  /* (T-lshift)-(lshift+1) > p -->  2*lshift < T-1-p  --> lshift < (T-1-p)/2 */
-  if (model->lshift == -1.0) {
-    lshift = muDoubleScalarFloor((((real_T)y->size[0] - 1.0) - p) / 2.0);
-  }
-
   /*  indexes of linear part of seasonal component */
-  emxInitStruct_captured_var1(&st, &indlinsc, &nd_emlrtRTEI, true);
+  emxInitStruct_captured_var1(&st, &indlinsc, &md_emlrtRTEI, true);
   if (seasonal.contents < 6.0) {
     b_st.site = &pe_emlrtRSI;
     a = trend.contents + 2.0;
@@ -6177,7 +6177,7 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
       i = indlinsc.contents->size[0] * indlinsc.contents->size[1];
       indlinsc.contents->size[0] = 1;
       indlinsc.contents->size[1] = 1;
-      emxEnsureCapacity_real_T(&c_st, indlinsc.contents, i, &nd_emlrtRTEI);
+      emxEnsureCapacity_real_T(&c_st, indlinsc.contents, i, &md_emlrtRTEI);
       indlinsc.contents->data[0] = rtNaN;
     } else if (stoprint < a) {
       indlinsc.contents->size[0] = 1;
@@ -6187,14 +6187,14 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
       i = indlinsc.contents->size[0] * indlinsc.contents->size[1];
       indlinsc.contents->size[0] = 1;
       indlinsc.contents->size[1] = 1;
-      emxEnsureCapacity_real_T(&c_st, indlinsc.contents, i, &nd_emlrtRTEI);
+      emxEnsureCapacity_real_T(&c_st, indlinsc.contents, i, &md_emlrtRTEI);
       indlinsc.contents->data[0] = rtNaN;
     } else if (muDoubleScalarFloor(a) == a) {
       i = indlinsc.contents->size[0] * indlinsc.contents->size[1];
       indlinsc.contents->size[0] = 1;
       loop_ub = (int32_T)muDoubleScalarFloor(stoprint - a);
       indlinsc.contents->size[1] = loop_ub + 1;
-      emxEnsureCapacity_real_T(&c_st, indlinsc.contents, i, &nd_emlrtRTEI);
+      emxEnsureCapacity_real_T(&c_st, indlinsc.contents, i, &md_emlrtRTEI);
       for (i = 0; i <= loop_ub; i++) {
         indlinsc.contents->data[i] = a + (real_T)i;
       }
@@ -6211,7 +6211,7 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
       i = indlinsc.contents->size[0] * indlinsc.contents->size[1];
       indlinsc.contents->size[0] = 1;
       indlinsc.contents->size[1] = 1;
-      emxEnsureCapacity_real_T(&c_st, indlinsc.contents, i, &md_emlrtRTEI);
+      emxEnsureCapacity_real_T(&c_st, indlinsc.contents, i, &ld_emlrtRTEI);
       indlinsc.contents->data[0] = rtNaN;
     } else if (stoprint < a) {
       indlinsc.contents->size[0] = 1;
@@ -6221,14 +6221,14 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
       i = indlinsc.contents->size[0] * indlinsc.contents->size[1];
       indlinsc.contents->size[0] = 1;
       indlinsc.contents->size[1] = 1;
-      emxEnsureCapacity_real_T(&c_st, indlinsc.contents, i, &md_emlrtRTEI);
+      emxEnsureCapacity_real_T(&c_st, indlinsc.contents, i, &ld_emlrtRTEI);
       indlinsc.contents->data[0] = rtNaN;
     } else if (muDoubleScalarFloor(a) == a) {
       i = indlinsc.contents->size[0] * indlinsc.contents->size[1];
       indlinsc.contents->size[0] = 1;
       loop_ub = (int32_T)muDoubleScalarFloor(stoprint - a);
       indlinsc.contents->size[1] = loop_ub + 1;
-      emxEnsureCapacity_real_T(&c_st, indlinsc.contents, i, &md_emlrtRTEI);
+      emxEnsureCapacity_real_T(&c_st, indlinsc.contents, i, &ld_emlrtRTEI);
       for (i = 0; i <= loop_ub; i++) {
         indlinsc.contents->data[i] = a + (real_T)i;
       }
@@ -6397,11 +6397,13 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
     /*  level shift and, if  take the one which minimizes the target */
     /*  function (residual sum of squares/2 = negative log */
     /*  likelihood) */
+    LSH = model->lshift;
+
     /*  total number of subsets to pass to procedure subsets */
     b_st.site = &fe_emlrtRSI;
     bc(&b_st, (real_T)y->size[0] - 1.0, pini + 1.0);
   } else {
-    lshift = 0.0;
+    LSH = 0.0;
   }
 
   emxInit_real_T(&st, &allnumscale2, 1, &qd_emlrtRTEI, true);
@@ -6848,7 +6850,7 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
   /*  Xlshift = explanatory variable associated with */
   /*  level shift Xlshift is 0 up to lsh-1 and 1 from */
   /*  lsh to T */
-  d = ((real_T)y->size[0] - lshift) + 1.0;
+  d = ((real_T)y->size[0] - LSH) + 1.0;
   if (!(d >= 0.0)) {
     emlrtNonNegativeCheckR2012b(d, &mb_emlrtDCI, &st);
   }
@@ -6857,32 +6859,32 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
     emlrtIntegerCheckR2012b(d, &nb_emlrtDCI, &st);
   }
 
-  if (!(lshift - 1.0 >= 0.0)) {
-    emlrtNonNegativeCheckR2012b(lshift - 1.0, &mb_emlrtDCI, &st);
+  if (!(LSH - 1.0 >= 0.0)) {
+    emlrtNonNegativeCheckR2012b(LSH - 1.0, &mb_emlrtDCI, &st);
   }
 
-  a = (int32_T)muDoubleScalarFloor(lshift - 1.0);
-  if (lshift - 1.0 != a) {
-    emlrtIntegerCheckR2012b(lshift - 1.0, &nb_emlrtDCI, &st);
+  a = (int32_T)muDoubleScalarFloor(LSH - 1.0);
+  if (LSH - 1.0 != a) {
+    emlrtIntegerCheckR2012b(LSH - 1.0, &nb_emlrtDCI, &st);
   }
 
   i2 = weights->size[0];
-  weights->size[0] = (int32_T)(lshift - 1.0) + (int32_T)d;
+  weights->size[0] = (int32_T)(LSH - 1.0) + (int32_T)d;
   emxEnsureCapacity_real_T(&st, weights, i2, &ge_emlrtRTEI);
-  if (!(lshift - 1.0 >= 0.0)) {
-    emlrtNonNegativeCheckR2012b(lshift - 1.0, &mb_emlrtDCI, &st);
+  if (!(LSH - 1.0 >= 0.0)) {
+    emlrtNonNegativeCheckR2012b(LSH - 1.0, &mb_emlrtDCI, &st);
   }
 
-  if (lshift - 1.0 != a) {
-    emlrtIntegerCheckR2012b(lshift - 1.0, &nb_emlrtDCI, &st);
+  if (LSH - 1.0 != a) {
+    emlrtIntegerCheckR2012b(LSH - 1.0, &nb_emlrtDCI, &st);
   }
 
-  loop_ub = (int32_T)(lshift - 1.0);
+  loop_ub = (int32_T)(LSH - 1.0);
   for (i2 = 0; i2 < loop_ub; i2++) {
     weights->data[i2] = 0.0;
   }
 
-  d = ((real_T)y->size[0] - lshift) + 1.0;
+  d = ((real_T)y->size[0] - LSH) + 1.0;
   if (!(d >= 0.0)) {
     emlrtNonNegativeCheckR2012b(d, &mb_emlrtDCI, &st);
   }
@@ -6893,15 +6895,15 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
 
   loop_ub = (int32_T)d;
   for (i2 = 0; i2 < loop_ub; i2++) {
-    if (!(lshift - 1.0 >= 0.0)) {
-      emlrtNonNegativeCheckR2012b(lshift - 1.0, &mb_emlrtDCI, &st);
+    if (!(LSH - 1.0 >= 0.0)) {
+      emlrtNonNegativeCheckR2012b(LSH - 1.0, &mb_emlrtDCI, &st);
     }
 
-    if (lshift - 1.0 != a) {
-      emlrtIntegerCheckR2012b(lshift - 1.0, &nb_emlrtDCI, &st);
+    if (LSH - 1.0 != a) {
+      emlrtIntegerCheckR2012b(LSH - 1.0, &nb_emlrtDCI, &st);
     }
 
-    weights->data[i2 + (int32_T)(lshift - 1.0)] = 1.0;
+    weights->data[i2 + (int32_T)(LSH - 1.0)] = 1.0;
   }
 
   emxInitStruct_captured_var1(&st, &Xlshift, &he_emlrtRTEI, true);
@@ -7011,7 +7013,7 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
   }
 
   emxInit_real_T(&st, &b_C, 2, &oe_emlrtRTEI, true);
-  if (lshift > 0.0) {
+  if (LSH > 0.0) {
     b_st.site = &yd_emlrtRSI;
     subsets(&b_st, options_nsamp_data, options_nsamp_size, (real_T)y->size[0] -
             1.0, pini + 1.0, 0.0, msg, C, &stoprint);
@@ -7059,7 +7061,7 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
     loop_ub = input_sizes_idx_1;
     for (i = 0; i < loop_ub; i++) {
       for (i2 = 0; i2 < result; i2++) {
-        b_C->data[i2] = lshift;
+        b_C->data[i2] = LSH;
       }
     }
 
@@ -7101,7 +7103,7 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
 
       /*  Observations greater or equal than lsh will be increased by one */
       for (b_i = 0; b_i <= end; b_i++) {
-        if ((Cr->data[b_i] >= lshift) && (b_i + 1 > C->size[1])) {
+        if ((Cr->data[b_i] >= LSH) && (b_i + 1 > C->size[1])) {
           emlrtDynamicBoundsCheckR2012b(b_i + 1, 1, C->size[1], &pc_emlrtBCI,
             &st);
         }
@@ -7109,7 +7111,7 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
 
       nz = 0;
       for (b_i = 0; b_i <= b_end; b_i++) {
-        if (Cr->data[b_i] >= lshift) {
+        if (Cr->data[b_i] >= LSH) {
           nz++;
         }
       }
@@ -7120,7 +7122,7 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
       emxEnsureCapacity_int32_T(&st, r1, i, &hd_emlrtRTEI);
       nz = 0;
       for (b_i = 0; b_i <= b_end; b_i++) {
-        if (Cr->data[b_i] >= lshift) {
+        if (Cr->data[b_i] >= LSH) {
           r1->data[nz] = b_i + 1;
           nz++;
         }
@@ -7146,7 +7148,7 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
       emxEnsureCapacity_boolean_T(&b_st, x, i, &we_emlrtRTEI);
       loop_ub = Cr->size[1];
       for (i = 0; i < loop_ub; i++) {
-        x->data[i] = (Cr->data[i] < lshift);
+        x->data[i] = (Cr->data[i] < LSH);
       }
 
       c_st.site = &dk_emlrtRSI;
@@ -7158,7 +7160,7 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
         }
 
         b_st.site = &vd_emlrtRSI;
-        Cr->data[0] = randsample(&b_st, lshift - 1.0);
+        Cr->data[0] = randsample(&b_st, LSH - 1.0);
       }
 
       if (2 > b_C->size[1]) {
@@ -7246,7 +7248,7 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
   emlrtForLoopVectorCheckR2021a(1.0, 1.0, stoprint, mxDOUBLE_CLASS, (int32_T)
     stoprint, &k_emlrtRTEI, &st);
   if (0.0 <= stoprint - 1.0) {
-    if (lshift == 0.0) {
+    if (LSH == 0.0) {
       Xlshift.contents->size[0] = 0;
       Xlshift.contents->size[1] = 0;
     }
@@ -7474,7 +7476,7 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
         out->residuals->data[i] = betaini->data[i];
       }
 
-      if (lshift > 0.0) {
+      if (LSH > 0.0) {
         /*  The last two components of beta0 are the associated with */
         /*  level shift. More precisely penultimate position is for the */
         /*  coefficient of level shift and, final position is the integer */
@@ -7498,7 +7500,7 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
           emlrtDynamicBoundsCheckR2012b(nz, 1, ia_data, &fc_emlrtBCI, &st);
         }
 
-        out->residuals->data[nz - 1] = lshift;
+        out->residuals->data[nz - 1] = LSH;
       }
 
       if (varampl.contents > 0.0) {
@@ -8301,7 +8303,7 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
   b_sum(&b_st, WEIibestrdiv2, weights);
   emlrtSubAssignSizeCheckR2012b(&y->size[0], 1, &weights->size[0], 1,
     &eb_emlrtECI, &st);
-  if ((lshift > 0.0) && msg) {
+  if ((LSH > 0.0) && msg) {
     emlrtAssertMATLABThread(&st, &emlrtRTEI);
     b_st.site = &yc_emlrtRSI;
     c_st.site = &cs_emlrtRSI;
@@ -8309,7 +8311,7 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
     k_st.site = &eeb_emlrtRSI;
     stoprint = emlrt_marshallIn(&d_st, d_feval(&d_st, b_emlrt_marshallOut(&d_st,
       b_cv4), emlrt_marshallOut(1.0), g_emlrt_marshallOut(&k_st, b_cv5),
-      emlrt_marshallOut(lshift), &q_emlrtMCI), "<output of feval>");
+      emlrt_marshallOut(LSH), &q_emlrtMCI), "<output of feval>");
     emlrtDisplayR2012b(emlrt_marshallOut(stoprint), (char_T *)"ans", &emlrtRTEI,
                        &st);
   }
@@ -8477,7 +8479,7 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
 
   d = muDoubleScalarSqrt(d);
   bestrdiv2 = sworst * factor * d;
-  if (lshift > 0.0) {
+  if (LSH > 0.0) {
     /*  Compute the residuals locally just changing the position of the level */
     /*  shift */
     ncomb = lshiftlocref->wlength;
@@ -8597,7 +8599,7 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
       }
 
       b_guard1 = false;
-      if (stoprint > lshift) {
+      if (stoprint > LSH) {
         b_guard1 = true;
       } else {
         b_st.site = &uc_emlrtRSI;
@@ -8661,7 +8663,7 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
           }
         }
 
-        if (stoprint < lshift) {
+        if (stoprint < LSH) {
           b_guard1 = true;
         } else {
           exitg2 = 1;
@@ -10337,7 +10339,7 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
     out->B->data[i + out->B->size[0] * 3] = betaini->data[i];
   }
 
-  if (lshift > 0.0) {
+  if (LSH > 0.0) {
     /*  Store position of level shift */
     out->posLS.size[0] = 1;
     out->posLS.size[1] = 1;
@@ -10635,7 +10637,7 @@ void LTSts_wrapper(const emlrtStack *sp, const emxArray_real_T *y, real_T
     out->class [i] = cv7[i];
   }
 
-  if (!(lshift > 0.0)) {
+  if (!(LSH > 0.0)) {
     i = out->Likloc->size[0] * out->Likloc->size[1];
     out->Likloc->size[0] = 1;
     out->Likloc->size[1] = 1;

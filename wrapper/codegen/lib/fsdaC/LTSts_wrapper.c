@@ -170,11 +170,11 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   double numscale2LSH[3];
   double varargin_22_data[2];
   double ARp;
+  double LSH;
   double b_h;
   double bdp;
   double factor;
   double ij;
-  double lshift;
   double ncomb;
   double nselected;
   double p;
@@ -253,7 +253,8 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   /*  field reftol a scalar of type double */
   /*  field reftolbestr a scalar of type double */
   /*  model: a struct (with 6 fields of type scalar double) */
-  /*  field lshift  a row vector of type double */
+  /*  field lshift  a column vector of type double */
+  /*  assert(all(size(model.lshift) <= [Inf Inf])); */
   /*  field s a scalar of type double */
   /*  field trend a scalar of type double */
   /*  field seasonal a scalar of type double */
@@ -442,27 +443,37 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   /*                model.X  =  matrix of size T-by-nexpl containing the */
   /*                          values of nexpl extra covariates which are likely */
   /*                          to affect y. */
-  /*                model.lshift = scalar greater or equal than 0 or equal to -1, */
-  /*                          or vector of positive integer values which */
-  /*                          specifies whether it is necessary to include a */
-  /*                          level shift component. lshift = 0 (default) */
-  /*                          implies no level shift component. lshift = -1 */
-  /*                          specifies the moment to start considering level */
-  /*                          shifts automatically from specification of */
-  /*                          lshift in position floor((T-1-p)/2). If lshift is */
-  /*                          an interger greater then 0 or a vector of positive */
-  /*                          integer values then it specifies the */
-  /*                          moments where the level shift can be located. For */
-  /*                          example if lshift =13 then the following */
-  /*                          additional parameters are estimated */
-  /*                           $\beta_{LS1}* I(t \geq beta_{LS2})$ where */
-  /*                           $\beta_{LS1}$ is a real number and $\beta_{LS2}$ */
-  /*                           is an integer which assumes values 13. */
-  /*                           T-13. If lshift =[13 20] then the following */
-  /*                          additional parameters are estimated */
-  /*                           $\beta_{LS1}* I(t \geq beta_{LS2})$ where */
-  /*                           $\beta_{LS1}$ is a real number and $\beta_{LS2}$ */
-  /*                           is an integer which assumes values 13 or 20. */
+  /*                model.lshift = scalar or vector associated to level shift */
+  /*                        component. lshift=0 (default) implies no level */
+  /*                        shift component. */
+  /*                        If model.lshift is vector of positive integers, */
+  /*                          then it is associated to the positions of level */
+  /*                          shifts which have to be considered. The most */
+  /*                          significant one is included in the fitted model. */
+  /*                          For example if model.lshift =[13 20 36] a */
+  /*                          tentative level shift is imposed in position */
+  /*                          $t=13$, $t=20$ and $t=36$. The most significant */
+  /*                          among these positions in included in the final */
+  /*                          model. In other words, the following extra */
+  /*                          parameters are added to the final model: */
+  /*                          $\beta_{LS1}* I(t \geq \beta_{LS2})$ where */
+  /*                          $\beta_{LS1}$ is a real number (associated with */
+  /*                          the magnitude of the level shift) and */
+  /*                          $\beta_{LS2}$ is an integer which assumes values */
+  /*                          13, 20 or 36 and and $I$ denotes the indicator */
+  /*                          function. */
+  /*                          As a particular case, if model.lshift =13 then a */
+  /*                          level shift in position $t=13$ is added to the */
+  /*                          model. In other words the following additional */
+  /*                          parameters are added: $\beta_{LS1}* I(t \geq 13)$ */
+  /*                          where $\beta_{LS1}$ is a real number and $I$ */
+  /*                          denotes the indicator function. */
+  /*                        If lshift = -1 tentative level shifts are */
+  /*                          considered for positions $p+1,p+2, ..., T-p$ and */
+  /*                          the most significant one is included in the final */
+  /*                          model ($p$ is the total number of parameters in */
+  /*                          the fitted model). Note that lshift=-1 is not */
+  /*                          supported for C-coder translation. */
   /*                        In the paper RPRH $\beta_{LS1}$ is denoted with */
   /*                        symbol $\delta_1$, while, $\beta_{LS2}$ is denoted */
   /*                        with symbol $\delta_2$. */
@@ -525,22 +536,23 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   /*        nsamp : number of subsamples to extract. Scalar or vector of length 2. */
   /*                Vector of length 1 or 2 which controls the number of */
   /*                subsamples which will be extracted to find the robust */
-  /*                estimator. If lshift>0 then nsamp(1) controls the number of */
-  /*                subsets which have to be extracted to find the solution for */
-  /*                t=lshift. nsamp(2) controls the number of subsets which */
-  /*                have to be extracted to find the solution for t=lshift+1, */
-  /*                lshift+2, ..., T-lshift. */
+  /*                estimator. If lshift is not equal to 0 then nsamp(1) */
+  /*                controls the number of subsets which have to be extracted */
+  /*                to find the solution for t=lshift(1). nsamp(2) controls the */
+  /*                number of subsets which have to be extracted to find the */
+  /*                solution for t=lshift(2), lshift(3), ..., lshift(end). */
   /*                Note that nsamp(2) is generally smaller than nsamp(1) */
   /*                because in order to compute the best solution for */
-  /*                t=lshift+1, lshift+2, ..., T-lshift, we use the lts.bestr/2 */
-  /*                best solutions from previous t (after shifting by one the */
+  /*                t=lshift(2), lshift(3), ..., lshift(end), we use the lts.bestr/2 */
+  /*                best solutions from previous t (after shifting the */
   /*                position of the level shift in the estimator of beta). If */
-  /*                lshift is >0 the default value of nsamp is (500 250). If */
-  /*                lshift is >0 and nsamp is supplied as a scalar the default */
-  /*                is to extract [nsamp/2] subsamples for t=lshift+1, */
-  /*                lshift+2, ... Therefore, for example, in order to extract */
-  /*                600 subsamples for t=lshift and 300 subsamples for t= */
-  /*                lshift+1 ... you can use nsamp =600 or nsamp=[600 300]. */
+  /*                lshift is a vector of positive integers the default value */
+  /*                of nsamp is (500 250). If */
+  /*                lshift is a vector of positive integers and nsamp is supplied as a scalar the default */
+  /*                is to extract [nsamp/2] subsamples for t=lshift(1), */
+  /*                lshift(2), ... Therefore, for example, in order to extract */
+  /*                600 subsamples for t=lshift(1) and 300 subsamples for t= */
+  /*                lshift(2) ... you can use nsamp =600 or nsamp=[600 300]. */
   /*                The default value of nsamp is 1000; */
   /*                  Example - 'nsamp',500 */
   /*                  Data Types - double */
@@ -676,19 +688,19 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   /*                        that the design matrix is full rank. */
   /*                        out.bs can be used to initialize the forward */
   /*                        search. */
-  /*          out.Hsubset = matrix of size T-by-(T-2*lshift) */
+  /*          out.Hsubset = matrix of size T-by-r */
   /*                        containing units forming best H subset for each */
-  /*                        tentative level shift which is considered. */
-  /*                        Units belonging to */
-  /*                        subset are given with their row number, units not */
-  /*                        belonging to subset have missing values */
-  /*                        ( Remark: T-2*lshift = length((lshift+1):(T-lshift)) ) */
+  /*                        tentative level shift which is considered. r is */
+  /*                        number of tentative level shift positions whicha re */
+  /*                        considered. For example if model.lshift=[13 21 40] */
+  /*                        r is equal to 3. Units belonging to subset are */
+  /*                        given with their row number, units not belonging to */
+  /*                        subset have missing values */
   /*                        This output is present just if input option */
-  /*                        model.lshift>0. */
+  /*                        model.lshift is not equal to 0. */
   /*            out.posLS = scalar associated with best tentative level shift */
-  /*                        position. */
-  /*                        This output is present just if input option */
-  /*                        model.lshift>0. */
+  /*                        position. This output is present just if input */
+  /*                        option model.lshift is not equal to 0. */
   /*      out.numscale2 = matrix of size lts.bestr-by-(T-2*lshift) containing */
   /*                        (in the columns) the values of the lts.bestr smallest */
   /*                        values of the target function. Target function = truncated */
@@ -705,7 +717,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   /*                        index lts.bestr/2+2 is associated with best solution */
   /*                        from previous tentative level shift. */
   /*                        This output is present just if input option */
-  /*                        model.lshift>0. */
+  /*                        model.lshift is not equal to 0. */
   /*          out.Likloc  = matrix of size (2*lshiftlocref.wlength+1)-by-3 */
   /*                        containing local sum of squares of residuals in */
   /*                        order to decide best position of level shift: */
@@ -713,14 +725,14 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   /*                        2nd col = local sum of squares of huberized residuals; */
   /*                        3rd col = local sum of squares of raw residuals. */
   /*                        This output is present just if input option */
-  /*                        model.lshift>0. */
+  /*                        model.lshift is not equal to 0. */
   /*              out.RES = Matrix of size T-by-(T-lshift) containing scaled */
   /*                        residuals for all the T units of the original time */
   /*                        series monitored in steps lshift+1, lshift+2, ..., */
   /*                        T-lshift, where lshift+1 is the first tentative */
   /*                        level shift position, lshift +2 is the second level */
   /*                        shift position, and so on. This output is present */
-  /*                        just if input option model.lshift>0. */
+  /*                        just if input option model.lshift is not equal to 0. */
   /*             out.yhat = vector of fitted values after final (NLS=non linear */
   /*                        least squares) step. */
   /*                        $ (\hat \eta_1, \hat \eta_2, \ldots, \hat \eta_T)'$ */
@@ -826,21 +838,21 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   /*     % Simulated data with linear trend and level shift. */
   /*     % No seasonal component. */
   /*     rng('default') */
-  /*     n=45; */
+  /*     T=45; */
   /*     a=1; */
   /*     b=0.8; */
   /*     sig=1; */
-  /*     seq=(1:n)'; */
-  /*     y=a+b*seq+sig*randn(n,1); */
+  /*     seq=(1:T)'; */
+  /*     y=a+b*seq+sig*randn(T,1); */
   /*     % Add a level shift in the simulated series */
-  /*     y(round(n/2):end)=y(round(n/2):end)+10; */
+  /*     y(round(T/2):end)=y(round(T/2):end)+10; */
   /*     % model with a linear trend, non seasonal and level shift */
   /*     model=struct; */
   /*     model.trend=1; */
   /*     model.seasonal=0; */
   /*     % Potential level shift position is investigated in positions: */
-  /*     % t=10, t=11, ..., t=T-10. */
-  /*     model.lshift=11:n-10; */
+  /*     % t=11, t=12, ..., t=T-10. */
+  /*     model.lshift=11:T-10; */
   /*     out=LTSts(y,'model',model,'plots',1); */
   /*     % Using the notation of the paper RPRH: A=1, B=1, G=0 and $\delta_1>0$. */
   /*     str=strcat('A=1, B=0, G=0, $\delta_2=',num2str(out.posLS),'$'); */
@@ -1416,8 +1428,6 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   seasonal.contents = model->seasonal;
 
   /*  get number of harmonics */
-  lshift = model->lshift;
-
   /*  get level shift */
   /*  nbestindexes = indexes of the best  nbestindexes solutions for each */
   /*  tentative position of level shift */
@@ -1736,20 +1746,13 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   /*  varampl = number of parameters involving time varying trend, */
   /*  + 2 additional parameters if there is a level shift component */
   lshiftYN.contents = 0.0;
-  if ((model->lshift == -1.0) || (model->lshift > 0.0)) {
+  if (model->lshift != 0.0) {
     lshiftYN.contents = 1.0;
   }
 
   p = (pini + varampl.contents) + lshiftYN.contents * 2.0;
 
-  /* automatic specification of lshift which takes into account the fact that */
-  /* at line 217 of FSRinvmdr the degrees of freedom mm-p must be positive. */
-  /* Being mm the length of LSH = (lshift+1):(T-lshift), mm-p>0 can be written as: */
-  /* (T-lshift)-(lshift+1) > p -->  2*lshift < T-1-p  --> lshift < (T-1-p)/2 */
-  if (model->lshift == -1.0) {
-    lshift = floor((((double)y->size[0] - 1.0) - p) / 2.0);
-  }
-
+  /*  lshift=-1 is not valid in MATLAB C coder */
   /*  indexes of linear part of seasonal component */
   emxInitStruct_captured_var1(&indlinsc);
   if (seasonal.contents < 6.0) {
@@ -1908,15 +1911,17 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
 
   /*  Confidence level which is used for outlier detection */
   /*  Scalar which controls the messages displayed on the screen */
-  if (!(lshiftYN.contents == 1.0)) {
-    lshift = 0.0;
-  } else {
+  if (lshiftYN.contents == 1.0) {
     /*  If a level shift is present, it is necessary to */
     /*  reestimate a linear model each time with a different */
     /*  level shift and, if  take the one which minimizes the target */
     /*  function (residual sum of squares/2 = negative log */
     /*  likelihood) */
+    LSH = model->lshift;
+
     /*  total number of subsets to pass to procedure subsets */
+  } else {
+    LSH = 0.0;
   }
 
   /*  ScaleLSH= estimate of the squared scale for each value of LSH which has been */
@@ -2217,17 +2222,17 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   /*  level shift Xlshift is 0 up to lsh-1 and 1 from */
   /*  lsh to T */
   i = bestnumscale2->size[0];
-  bestnumscale2->size[0] = (int)(lshift - 1.0) + (int)(((double)y->size[0] -
-    lshift) + 1.0);
+  bestnumscale2->size[0] = (int)(LSH - 1.0) + (int)(((double)y->size[0] - LSH) +
+    1.0);
   emxEnsureCapacity_real_T(bestnumscale2, i);
-  loop_ub = (int)(lshift - 1.0);
+  loop_ub = (int)(LSH - 1.0);
   for (i = 0; i < loop_ub; i++) {
     bestnumscale2->data[i] = 0.0;
   }
 
-  loop_ub = (int)(((double)y->size[0] - lshift) + 1.0);
+  loop_ub = (int)(((double)y->size[0] - LSH) + 1.0);
   for (i = 0; i < loop_ub; i++) {
-    bestnumscale2->data[i + (int)(lshift - 1.0)] = 1.0;
+    bestnumscale2->data[i + (int)(LSH - 1.0)] = 1.0;
   }
 
   emxInitStruct_captured_var1(&Xlshift);
@@ -2268,7 +2273,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
 
   emxInit_real_T(&WEIibestrdiv2, 2);
   emxInit_real_T(&b_C, 2);
-  if (lshift > 0.0) {
+  if (LSH > 0.0) {
     i = WEIibestrdiv2->size[0] * WEIibestrdiv2->size[1];
     WEIibestrdiv2->size[0] = varargin_22_size_idx_0;
     WEIibestrdiv2->size[1] = varargin_22_size_idx_1;
@@ -2317,7 +2322,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     emxEnsureCapacity_real_T(b_C, i);
     if (0 <= ib_size - 1) {
       for (i = 0; i < result; i++) {
-        b_C->data[i] = lshift;
+        b_C->data[i] = LSH;
       }
     }
 
@@ -2350,7 +2355,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
       for (sizes_idx_1 = 0; sizes_idx_1 < c_loop_ub; sizes_idx_1++) {
         ncomb = C->data[varargin_22_size_idx_0 + C->size[0] * sizes_idx_1];
         Cr->data[sizes_idx_1] = ncomb;
-        if (ncomb >= lshift) {
+        if (ncomb >= LSH) {
           nx++;
         }
       }
@@ -2361,7 +2366,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
       emxEnsureCapacity_int32_T(r, i1);
       nx = 0;
       for (sizes_idx_1 = 0; sizes_idx_1 <= end; sizes_idx_1++) {
-        if (Cr->data[sizes_idx_1] >= lshift) {
+        if (Cr->data[sizes_idx_1] >= LSH) {
           r->data[nx] = sizes_idx_1 + 1;
           nx++;
         }
@@ -2382,7 +2387,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
       emxEnsureCapacity_boolean_T(x, i1);
       loop_ub = Cr->size[1];
       for (i1 = 0; i1 < loop_ub; i1++) {
-        x->data[i1] = (Cr->data[i1] < lshift);
+        x->data[i1] = (Cr->data[i1] < LSH);
       }
 
       vlen = x->size[1];
@@ -2396,7 +2401,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
       }
 
       if (ib_size < 1) {
-        Cr->data[0] = b_randsample(lshift - 1.0);
+        Cr->data[0] = b_randsample(LSH - 1.0);
       }
 
       if (2 > b_C->size[1]) {
@@ -2451,7 +2456,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   i = (int)nselected;
   if (0 <= (int)nselected - 1) {
     b_loop_ub = (int)p;
-    if (lshift == 0.0) {
+    if (LSH == 0.0) {
       Xlshift.contents->size[0] = 0;
       Xlshift.contents->size[1] = 0;
     }
@@ -2600,14 +2605,14 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
         beta0->data[i1] = betaini->data[i1];
       }
 
-      if (lshift > 0.0) {
+      if (LSH > 0.0) {
         /*  The last two components of beta0 are the associated with */
         /*  level shift. More precisely penultimate position is for the */
         /*  coefficient of level shift and, final position is the integer */
         /*  which specifies the starting point of level shift */
         nx = beta0->size[0] - 1;
         beta0->data[beta0->size[0] - 2] = betaini->data[betaini->size[0] - 1];
-        beta0->data[nx] = lshift;
+        beta0->data[nx] = LSH;
       }
 
       if (varampl.contents > 0.0) {
@@ -2892,8 +2897,8 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     out->BestIndexes->data[i] = betaini->data[i];
   }
 
-  if ((lshift > 0.0) && msg) {
-    printf("Level shift for t=%.0f\n", lshift);
+  if ((LSH > 0.0) && msg) {
+    printf("Level shift for t=%.0f\n", LSH);
     fflush(stdout);
   }
 
@@ -3011,7 +3016,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   /*  Apply small sample correction factor of Pison et al. */
   factor = nselected * factor * sqrt(b_corfactorRAW(yin.contents->size[0], b_h /
     (double)yin.contents->size[0]));
-  if (lshift > 0.0) {
+  if (LSH > 0.0) {
     /*  Compute the residuals locally just changing the position of the level */
     /*  shift */
     ncomb = lshiftlocref->wlength;
@@ -3047,8 +3052,8 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
 
     /*  Reduce width of tloc dinamically */
     /*  make sure that tloc is in the range LSHmin and LSHmax */
-    while (((d_maximum(Cr) > lshift) || (b_minimum(Cr) < lshift)) && (!(ncomb ==
-             0.0))) {
+    while (((d_maximum(Cr) > LSH) || (b_minimum(Cr) < LSH)) && (!(ncomb == 0.0)))
+    {
       ncomb--;
       ij = brobLSH->data[brobLSH->size[0] - 1] - ncomb;
       sworst = brobLSH->data[brobLSH->size[0] - 1] + ncomb;
@@ -3953,7 +3958,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     out->B->data[i + out->B->size[0] * 3] = 2.0 * betaini->data[i];
   }
 
-  if (lshift > 0.0) {
+  if (LSH > 0.0) {
     /*  Store position of level shift */
     out->posLS.size[0] = 1;
     out->posLS.size[1] = 1;
@@ -4235,7 +4240,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     out->class [i] = b_cv[i];
   }
 
-  if (!(lshift > 0.0)) {
+  if (!(LSH > 0.0)) {
     i = out->Likloc->size[0] * out->Likloc->size[1];
     out->Likloc->size[0] = 1;
     out->Likloc->size[1] = 1;
