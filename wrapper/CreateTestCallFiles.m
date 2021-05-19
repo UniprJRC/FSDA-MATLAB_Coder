@@ -42,7 +42,7 @@ function ComptimesAll = CreateTestCallFiles(varargin)
 %                 Example - 'codegenIndependent',false
 %                 Data Types - logical
 %
-% codegenOverall : Create C files using just one big call to codegen. 
+% codegenOverall : Create C files using just one big call to codegen.
 %                char (default name fsdaC) | empty character.
 %               codegenOverall contains the name of the overall C library
 %               which is created calling codgen with option -o, that is
@@ -215,7 +215,15 @@ if ~isempty(codegenOverall)
     cfg.GenerateReport = true;
     cfg.ReportPotentialDifferences = false;
     cfg.GenCodeOnly = true;
-    cfg.Toolchain = 'MinGW64 | gmake (64-bit Windows)';
+    if ispc == true
+        cfg.Toolchain = 'MinGW64 | gmake (64-bit Windows)';
+    elseif ismac == true
+        cfg.Toolchain = 'Clang v3.1 | gmake (64-bit Mac)';
+    elseif isunix == true
+        cfg.Toolchain = 'Clang v3.1 | gmake (64-bit Mac)';
+    else
+        disp('Platform not supported')
+    end
     cfg.BuildConfiguration = 'Debug';
     cfg.HardwareImplementation.ProdHWDeviceType = 'Intel->x86-64 (Mac OS X)';
     cfg.HardwareImplementation.TargetHWDeviceType = 'Intel->x86-64 (Mac OS X)';
