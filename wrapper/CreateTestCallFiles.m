@@ -64,6 +64,17 @@ function ComptimesAll = CreateTestCallFiles(varargin)
 %                 Example - 'DeleteMexSubfoler',true
 %                 Data Types - logical
 %
+% UseBlas  :  Use BLAS library. Boolean.
+%               If UseBlas is true command codegen is invoked with 
+%               cfg.CustomBLASCallback ='mklcallback'. Note that we assume that file 
+%               mklcallback is the current folder and the INTEL libraries
+%              libiomp5md.lib,  mkl_core.lib,  mkl_intel_ilp64.lib,
+%              mkl_intel_thread.lib, and header file mkl_cblas.h
+%              are stored inside the folder (pwd)\mkl\WIN\lib\intel64
+%               The default value of UseBlas is false.
+%                 Example - 'UseBlas',true
+%                 Data Types - logical
+%
 % Output:
 %
 %       ComptimesAll : Comparison of execution times. Ttable. table with
@@ -128,11 +139,12 @@ DeleteMexSubfolder=false;
 codegenIndependent=false;
 codegenOverall='fsdaC';
 CreateMexFile=true;
+    UseBlas=false;
 
 if nargin>0
     options=struct('InputPath',InputPath,'DeleteMexSubfolder',DeleteMexSubfolder,...
         'codegenIndependent',codegenIndependent,'CreateMexFile',CreateMexFile,...
-        'codegenOverall',codegenOverall);
+        'codegenOverall',codegenOverall,'UseBlas',UseBlas);
     
     UserOptions=varargin(1:2:length(varargin));
     if ~isempty(UserOptions)
@@ -152,6 +164,7 @@ if nargin>0
     CreateMexFile=options.CreateMexFile;
     InputPath=options.InputPath;
     codegenOverall=options.codegenOverall;
+        UseBlas=options.UseBlas;
 end
 
 FileList=dir([InputPath '*_wrapper*.m']);
@@ -230,8 +243,12 @@ if ~isempty(codegenOverall)
     % Note that the option below is just used for the overall call to
     % codegen.
     cfg.EnableOpenMP = 0; % generate single-threaded code for MATLAB parfor loops
-    % cfg.CustomBLASCallback ='mklcallback'; % TOASK
-    
+    if UseBlas ==true
+        cfg.CustomBLASCallback ='mklcallback'; % COMPILE USING BLAS LIBRARIES
+    end
+    % Suppress warning below in the generated code
+    cfg.CustomSourceCode = '#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"';
+
     tic;
     eval(['codegen -o ' overallName ' -report -config cfg ' AllFileNameschar])
     t1=toc;
