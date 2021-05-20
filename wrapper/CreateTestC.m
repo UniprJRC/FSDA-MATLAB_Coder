@@ -235,6 +235,9 @@ disp("Create c source file")
     cfg.BuildConfiguration = 'Debug';
     cfg.HardwareImplementation.ProdHWDeviceType = 'Intel->x86-64 (Mac OS X)';
     cfg.HardwareImplementation.TargetHWDeviceType = 'Intel->x86-64 (Mac OS X)';
+    % Suppress warning below in the generated code
+    cfg.CustomSourceCode = '#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"';
+
     % build part
     % codegen -config cfg addt_wrapper % -d addt
     fn=[FileName '_wrapper' Suffix];
