@@ -21,6 +21,8 @@
 #include <stddef.h>
 #include <stdio.h>
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 double RobRegrSize(double n, double p, double bdp)
 {

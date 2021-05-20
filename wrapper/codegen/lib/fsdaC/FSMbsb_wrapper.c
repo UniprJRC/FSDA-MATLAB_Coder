@@ -43,6 +43,8 @@
 #include <stdio.h>
 #include <string.h>
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void FSMbsb_wrapper(const emxArray_real_T *Y, const emxArray_real_T *bsb,
                     const emxArray_real_T *bsbsteps, double init, bool msg,

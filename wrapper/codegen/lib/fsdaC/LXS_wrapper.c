@@ -38,6 +38,8 @@
 #include <stdio.h>
 #include <string.h>
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void LXS_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                  const double bonflevoutX_data[], const int bonflevoutX_size[2],

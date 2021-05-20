@@ -20,6 +20,8 @@
 #include "rt_nonfinite.h"
 #include <math.h>
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void b_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
                 double *sigma)

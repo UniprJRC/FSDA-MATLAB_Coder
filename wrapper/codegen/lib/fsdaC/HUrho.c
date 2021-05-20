@@ -16,6 +16,8 @@
 #include "rt_nonfinite.h"
 #include <math.h>
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void HUrho(const emxArray_real_T *u, double c, emxArray_real_T *rhoHU)
 {

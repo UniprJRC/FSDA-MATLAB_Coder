@@ -17,6 +17,8 @@
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void chi2cdf(const emxArray_real_T *x, double v, emxArray_real_T *p)
 {

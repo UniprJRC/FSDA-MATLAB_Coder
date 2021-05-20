@@ -16,6 +16,8 @@
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 double fcdf(double x, double v2)
 {

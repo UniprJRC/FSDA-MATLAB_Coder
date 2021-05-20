@@ -19,6 +19,8 @@
 #include "xrotg.h"
 #include <math.h>
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void svd(const emxArray_real_T *A, emxArray_real_T *U)
 {

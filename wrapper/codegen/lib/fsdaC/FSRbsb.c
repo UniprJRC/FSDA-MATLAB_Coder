@@ -25,6 +25,8 @@
 #include "rt_nonfinite.h"
 #include <math.h>
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
             emxArray_real_T *bsb, double varargin_4, emxArray_real_T *Un,

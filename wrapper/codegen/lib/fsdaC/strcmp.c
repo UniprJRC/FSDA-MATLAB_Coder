@@ -14,6 +14,8 @@
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 bool b_strcmp(const char a_data[], const int a_size[2])
 {

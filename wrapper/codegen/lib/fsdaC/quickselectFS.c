@@ -14,6 +14,8 @@
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 double quickselectFS(emxArray_real_T *A, double k, double kiniindex)
 {

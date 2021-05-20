@@ -16,6 +16,8 @@
 #include "mtimes.h"
 #include "rt_nonfinite.h"
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void pascal(double n, emxArray_real_T *P)
 {

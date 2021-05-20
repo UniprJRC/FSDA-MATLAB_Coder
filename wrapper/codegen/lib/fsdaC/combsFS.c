@@ -20,6 +20,8 @@
 #include "rt_nonfinite.h"
 #include <math.h>
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void combsFS(emxArray_real_T *v, double m, emxArray_real_T *P)
 {

@@ -15,6 +15,8 @@
 #include "rt_nonfinite.h"
 #include "coder_posix_time.h"
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void tic(double *tstart_tv_sec, double *tstart_tv_nsec)
 {

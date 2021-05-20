@@ -17,6 +17,8 @@
 #include "xgerc.h"
 #include "xzgeqp3.h"
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void qr(const emxArray_real_T *A, emxArray_real_T *Q, emxArray_real_T *R)
 {

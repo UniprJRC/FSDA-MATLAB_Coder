@@ -16,6 +16,8 @@
 #include "str2double1.h"
 #include <stdio.h>
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 creal_T b_str2double(const char s[2])
 {

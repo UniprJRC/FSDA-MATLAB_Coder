@@ -14,6 +14,8 @@
 #include "rt_nonfinite.h"
 #include <math.h>
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void xrotg(double *a, double *b, double *c, double *s)
 {

@@ -15,6 +15,8 @@
 #include "rt_nonfinite.h"
 #include "xgerc.h"
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void xzlarf(int m, int n, int iv0, double tau, emxArray_real_T *C, int ic0,
             int ldc, emxArray_real_T *work)

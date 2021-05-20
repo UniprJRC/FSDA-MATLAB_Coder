@@ -19,6 +19,8 @@
 #include "rt_nonfinite.h"
 #include <math.h>
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void b_tcdf(const double x_data[], const int x_size[2], double v,
             double p_data[], int p_size[2])

@@ -17,6 +17,8 @@
 #include <stdio.h>
 #include <string.h>
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void int2str(double xin, char s_data[], int s_size[2])
 {

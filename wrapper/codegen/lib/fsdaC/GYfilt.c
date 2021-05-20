@@ -24,6 +24,8 @@
 #include "rt_nonfinite.h"
 #include <stdio.h>
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Declarations */
 static void gyfiltaux(emxArray_real_T *v);
 

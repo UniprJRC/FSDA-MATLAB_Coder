@@ -17,6 +17,8 @@
 #include "rtGetNaN.h"
 #include "rt_nonfinite.h"
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /*
  * Function: rtGetNaN
  * ======================================================================

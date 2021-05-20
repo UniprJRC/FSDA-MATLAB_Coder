@@ -24,6 +24,8 @@
 #include "rt_nonfinite.h"
 #include <math.h>
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                  bool bsbmfullrank, const double bonflev_data[],

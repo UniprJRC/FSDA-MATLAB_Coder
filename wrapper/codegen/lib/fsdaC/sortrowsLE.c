@@ -15,6 +15,8 @@
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 bool sortrowsLE(const emxArray_real_T *v, const int col[2], int irow1,
                 int irow2)

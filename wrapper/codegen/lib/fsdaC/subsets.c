@@ -22,6 +22,8 @@
 #include "rt_nonfinite.h"
 #include <math.h>
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void b_subsets(double nsamp, double n, double p, emxArray_real_T *C)
 {

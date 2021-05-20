@@ -31,6 +31,10 @@
 #include "rt_nonfinite.h"
 #include <math.h>
 
+/* Custom Source Code */
+
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
+
 /* Variable Definitions */
 static const double dv[3601] = { 1.0, 0.99999847691328769, 0.99999390765779039,
   0.99998629224742674, 0.99997563070539475, 0.99996192306417131,

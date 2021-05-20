@@ -16,6 +16,8 @@
 #include "rt_nonfinite.h"
 #include "xzgetrf.h"
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void inv(const emxArray_real_T *x, emxArray_real_T *y)
 {

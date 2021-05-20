@@ -13,6 +13,8 @@
 #include "print_processing.h"
 #include "rt_nonfinite.h"
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void print_processing(double varargin_1, double varargin_2, double varargin_3,
                       double varargin_4, double varargin_5, double varargin_6,

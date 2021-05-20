@@ -15,6 +15,8 @@
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void repelem(const double x_data[], const int x_size[2], double varargin_1,
              emxArray_real_T *y)

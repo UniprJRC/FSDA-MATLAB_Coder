@@ -17,6 +17,8 @@
 #include "xnrm2.h"
 #include <math.h>
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 double xzlarfg(int n, double *alpha1, emxArray_real_T *x, int ix0)
 {

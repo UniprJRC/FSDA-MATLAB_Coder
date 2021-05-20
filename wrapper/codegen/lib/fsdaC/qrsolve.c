@@ -17,6 +17,8 @@
 #include "xgeqp3.h"
 #include <math.h>
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void qrsolve(const emxArray_real_T *A, const emxArray_real_T *B,
              emxArray_real_T *Y)

@@ -17,6 +17,8 @@
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 double median(const emxArray_real_T *x)
 {

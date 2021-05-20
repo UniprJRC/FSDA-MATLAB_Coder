@@ -18,6 +18,8 @@
 #include <math.h>
 #include <string.h>
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void xzhgeqz(const creal_T A[4], int ilo, int ihi, int *info, creal_T alpha1[2],
              creal_T beta1[2])

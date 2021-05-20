@@ -18,6 +18,9 @@
 #include "rt_nonfinite.h"
 #include <math.h>
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
+
 #if defined(__ICL) && __ICL == 1700
 #pragma warning(disable : 264)
 #endif

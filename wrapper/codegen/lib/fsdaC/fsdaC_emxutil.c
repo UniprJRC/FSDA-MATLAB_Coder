@@ -16,6 +16,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void c_emxCopyStruct_anonymous_funct(b_anonymous_function *dst,
                                      const b_anonymous_function *src)

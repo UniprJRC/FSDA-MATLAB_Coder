@@ -20,6 +20,8 @@
 #include "rt_nonfinite.h"
 #include <math.h>
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Declarations */
 static double rt_atan2d_snf(double u0, double u1);
 

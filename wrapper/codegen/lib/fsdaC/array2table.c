@@ -16,6 +16,8 @@
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void array2table(const emxArray_real_T *x, const char varargin_2_Value_data[],
                  const int varargin_2_Value_size[2], double *t_metaDim_length,

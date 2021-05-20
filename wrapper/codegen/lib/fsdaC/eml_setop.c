@@ -17,6 +17,8 @@
 #include "rt_nonfinite.h"
 #include <math.h>
 
+/* Custom Source Code */
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Declarations */
 static double b_skip_to_last_equal_value(int *k, const emxArray_real_T *x);
 
