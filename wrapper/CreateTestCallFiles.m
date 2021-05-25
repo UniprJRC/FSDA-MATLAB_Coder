@@ -249,7 +249,7 @@ if ~isempty(codegenOverall)
     % Suppress warning below in the generated code
     % cfg.CustomSourceCode = '#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"';
     % Enable runtime checks (esp. out-of-bounds array indexing when callad from R)
-    cfg.RuntimeChecks = true;
+    % cfg.RuntimeChecks = true;
 
     tic;
     eval(['codegen -o ' overallName ' -report -config cfg ' AllFileNameschar])
