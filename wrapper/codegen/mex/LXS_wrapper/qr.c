@@ -182,7 +182,7 @@ static emlrtRSInfo by_emlrtRSI = {
     "lapack\\xorgqr.m" /* pathName */
 };
 
-static emlrtRTEInfo tp_emlrtRTEI = {
+static emlrtRTEInfo sp_emlrtRTEI = {
     35,       /* lineNo */
     25,       /* colNo */
     "eml_qr", /* fName */
@@ -191,7 +191,7 @@ static emlrtRTEInfo tp_emlrtRTEI = {
     "m" /* pName */
 };
 
-static emlrtRTEInfo up_emlrtRTEI = {
+static emlrtRTEInfo tp_emlrtRTEI = {
     73,       /* lineNo */
     22,       /* colNo */
     "xgeqrf", /* fName */
@@ -200,7 +200,7 @@ static emlrtRTEInfo up_emlrtRTEI = {
     "lapack\\xgeqrf.m" /* pName */
 };
 
-static emlrtRTEInfo vp_emlrtRTEI = {
+static emlrtRTEInfo up_emlrtRTEI = {
     75,       /* lineNo */
     5,        /* colNo */
     "xgeqrf", /* fName */
@@ -209,7 +209,7 @@ static emlrtRTEInfo vp_emlrtRTEI = {
     "lapack\\xgeqrf.m" /* pName */
 };
 
-static emlrtRTEInfo wp_emlrtRTEI = {
+static emlrtRTEInfo vp_emlrtRTEI = {
     158,      /* lineNo */
     20,       /* colNo */
     "eml_qr", /* fName */
@@ -218,7 +218,7 @@ static emlrtRTEInfo wp_emlrtRTEI = {
     "m" /* pName */
 };
 
-static emlrtRTEInfo xp_emlrtRTEI = {
+static emlrtRTEInfo wp_emlrtRTEI = {
     175,      /* lineNo */
     20,       /* colNo */
     "eml_qr", /* fName */
@@ -227,7 +227,7 @@ static emlrtRTEInfo xp_emlrtRTEI = {
     "m" /* pName */
 };
 
-static emlrtRTEInfo yp_emlrtRTEI = {
+static emlrtRTEInfo xp_emlrtRTEI = {
     174,      /* lineNo */
     1,        /* colNo */
     "eml_qr", /* fName */
@@ -236,7 +236,7 @@ static emlrtRTEInfo yp_emlrtRTEI = {
     "m" /* pName */
 };
 
-static emlrtRTEInfo aq_emlrtRTEI =
+static emlrtRTEInfo yp_emlrtRTEI =
     {
         1,    /* lineNo */
         20,   /* colNo */
@@ -284,18 +284,18 @@ void qr(const emlrtStack *sp, const emxArray_real_T *A, emxArray_real_T *Q,
   f_st.prev = &e_st;
   f_st.tls = e_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  emxInit_real_T(sp, &b_A, 2, &aq_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_A, 2, &yp_emlrtRTEI, true);
   st.site = &hx_emlrtRSI;
   b_st.site = &ix_emlrtRSI;
   i = b_A->size[0] * b_A->size[1];
   b_A->size[0] = A->size[0];
   b_A->size[1] = A->size[1];
-  emxEnsureCapacity_real_T(&b_st, b_A, i, &tp_emlrtRTEI);
+  emxEnsureCapacity_real_T(&b_st, b_A, i, &sp_emlrtRTEI);
   na = A->size[0] * A->size[1];
   for (i = 0; i < na; i++) {
     b_A->data[i] = A->data[i];
   }
-  emxInit_real_T(&b_st, &tau, 1, &aq_emlrtRTEI, true);
+  emxInit_real_T(&b_st, &tau, 1, &yp_emlrtRTEI, true);
   c_st.site = &jx_emlrtRSI;
   m = b_A->size[0];
   n = b_A->size[1];
@@ -305,11 +305,11 @@ void qr(const emlrtStack *sp, const emxArray_real_T *A, emxArray_real_T *Q,
   minmana = muIntScalarMin_sint32(ma, na);
   i = tau->size[0];
   tau->size[0] = minmana;
-  emxEnsureCapacity_real_T(&d_st, tau, i, &up_emlrtRTEI);
+  emxEnsureCapacity_real_T(&d_st, tau, i, &tp_emlrtRTEI);
   if ((b_A->size[0] == 0) || (b_A->size[1] == 0)) {
     i = tau->size[0];
     tau->size[0] = minmana;
-    emxEnsureCapacity_real_T(&d_st, tau, i, &vp_emlrtRTEI);
+    emxEnsureCapacity_real_T(&d_st, tau, i, &up_emlrtRTEI);
     for (i = 0; i < minmana; i++) {
       tau->data[i] = 0.0;
     }
@@ -372,7 +372,7 @@ void qr(const emlrtStack *sp, const emxArray_real_T *A, emxArray_real_T *Q,
   i = R->size[0] * R->size[1];
   R->size[0] = minmana;
   R->size[1] = b_A->size[1];
-  emxEnsureCapacity_real_T(&b_st, R, i, &wp_emlrtRTEI);
+  emxEnsureCapacity_real_T(&b_st, R, i, &vp_emlrtRTEI);
   c_st.site = &kx_emlrtRSI;
   if ((1 <= minmana) && (minmana > 2147483646)) {
     d_st.site = &ic_emlrtRSI;
@@ -439,7 +439,7 @@ void qr(const emlrtStack *sp, const emxArray_real_T *A, emxArray_real_T *Q,
       i = b_A->size[0] * b_A->size[1];
       b_A->size[0] = na;
       b_A->size[1] = ma;
-      emxEnsureCapacity_real_T(&e_st, b_A, i, &yp_emlrtRTEI);
+      emxEnsureCapacity_real_T(&e_st, b_A, i, &xp_emlrtRTEI);
       na *= ma;
       for (i = 0; i < na; i++) {
         b_A->data[i] = rtNaN;
@@ -450,7 +450,7 @@ void qr(const emlrtStack *sp, const emxArray_real_T *A, emxArray_real_T *Q,
   i = Q->size[0] * Q->size[1];
   Q->size[0] = m;
   Q->size[1] = minmana;
-  emxEnsureCapacity_real_T(&b_st, Q, i, &xp_emlrtRTEI);
+  emxEnsureCapacity_real_T(&b_st, Q, i, &wp_emlrtRTEI);
   c_st.site = &qx_emlrtRSI;
   for (na = 0; na < minmana; na++) {
     c_st.site = &rx_emlrtRSI;

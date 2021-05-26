@@ -637,273 +637,266 @@ static emlrtRTEInfo nc_emlrtRTEI = {
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo pc_emlrtRTEI = {
+static emlrtRTEInfo oc_emlrtRTEI = {
     431,                                           /* lineNo */
     1,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo qc_emlrtRTEI = {
+static emlrtRTEInfo pc_emlrtRTEI = {
     454,                                           /* lineNo */
     1,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo rc_emlrtRTEI = {
+static emlrtRTEInfo qc_emlrtRTEI = {
     701,                                           /* lineNo */
     5,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo sc_emlrtRTEI = {
+static emlrtRTEInfo rc_emlrtRTEI = {
     681,                                           /* lineNo */
     9,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo tc_emlrtRTEI = {
+static emlrtRTEInfo sc_emlrtRTEI = {
     686,                                           /* lineNo */
     13,                                            /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo uc_emlrtRTEI = {
+static emlrtRTEInfo tc_emlrtRTEI = {
     1042,                                          /* lineNo */
     1,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo vc_emlrtRTEI = {
+static emlrtRTEInfo uc_emlrtRTEI = {
     684,                                           /* lineNo */
     13,                                            /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo wc_emlrtRTEI = {
+static emlrtRTEInfo vc_emlrtRTEI = {
     696,                                           /* lineNo */
     16,                                            /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo xc_emlrtRTEI = {
+static emlrtRTEInfo wc_emlrtRTEI = {
     698,                                           /* lineNo */
     5,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo yc_emlrtRTEI = {
+static emlrtRTEInfo xc_emlrtRTEI = {
     720,                                           /* lineNo */
     9,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo ad_emlrtRTEI = {
+static emlrtRTEInfo yc_emlrtRTEI = {
     714,                                           /* lineNo */
     13,                                            /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo bd_emlrtRTEI = {
+static emlrtRTEInfo ad_emlrtRTEI = {
     869,                                           /* lineNo */
     1,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo cd_emlrtRTEI = {
+static emlrtRTEInfo bd_emlrtRTEI = {
     717,                                           /* lineNo */
     9,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo dd_emlrtRTEI = {
+static emlrtRTEInfo cd_emlrtRTEI = {
     721,                                           /* lineNo */
     12,                                            /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo fd_emlrtRTEI = {
+static emlrtRTEInfo ed_emlrtRTEI = {
     1016,                                          /* lineNo */
     5,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo gd_emlrtRTEI = {
+static emlrtRTEInfo fd_emlrtRTEI = {
     734,                                           /* lineNo */
     15,                                            /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo hd_emlrtRTEI = {
+static emlrtRTEInfo gd_emlrtRTEI = {
     1019,                                          /* lineNo */
     5,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo id_emlrtRTEI = {
+static emlrtRTEInfo hd_emlrtRTEI = {
     930,                                           /* lineNo */
     5,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo jd_emlrtRTEI = {
+static emlrtRTEInfo id_emlrtRTEI = {
     924,                                           /* lineNo */
     13,                                            /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo kd_emlrtRTEI = {
+static emlrtRTEInfo jd_emlrtRTEI = {
     747,                                           /* lineNo */
     26,                                            /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo ld_emlrtRTEI = {
+static emlrtRTEInfo kd_emlrtRTEI = {
     755,                                           /* lineNo */
     17,                                            /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo md_emlrtRTEI = {
+static emlrtRTEInfo ld_emlrtRTEI = {
     58,            /* lineNo */
     1,             /* colNo */
     "LXS_wrapper", /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\LXS_wrapper.m" /* pName */
 };
 
-static emlrtRTEInfo nd_emlrtRTEI = {
+static emlrtRTEInfo md_emlrtRTEI = {
     1045,                                          /* lineNo */
     1,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo od_emlrtRTEI = {
+static emlrtRTEInfo nd_emlrtRTEI = {
     948,                                           /* lineNo */
     5,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo pd_emlrtRTEI = {
+static emlrtRTEInfo od_emlrtRTEI = {
     1081,                                          /* lineNo */
     5,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo qd_emlrtRTEI = {
+static emlrtRTEInfo pd_emlrtRTEI = {
     1075,                                          /* lineNo */
     13,                                            /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo rd_emlrtRTEI = {
+static emlrtRTEInfo qd_emlrtRTEI = {
     961,                                           /* lineNo */
     16,                                            /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo sd_emlrtRTEI = {
+static emlrtRTEInfo rd_emlrtRTEI = {
     961,                                           /* lineNo */
     34,                                            /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo td_emlrtRTEI = {
+static emlrtRTEInfo sd_emlrtRTEI = {
     967,                                           /* lineNo */
     9,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo ud_emlrtRTEI = {
+static emlrtRTEInfo td_emlrtRTEI = {
     971,                                           /* lineNo */
     21,                                            /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo vd_emlrtRTEI = {
+static emlrtRTEInfo ud_emlrtRTEI = {
     997,                                           /* lineNo */
     9,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo wd_emlrtRTEI = {
+static emlrtRTEInfo vd_emlrtRTEI = {
     696,                                           /* lineNo */
     5,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo xd_emlrtRTEI = {
+static emlrtRTEInfo wd_emlrtRTEI = {
     737,                                           /* lineNo */
     13,                                            /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo yd_emlrtRTEI = {
+static emlrtRTEInfo xd_emlrtRTEI = {
     923,                                           /* lineNo */
     5,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo ae_emlrtRTEI = {
+static emlrtRTEInfo yd_emlrtRTEI = {
     1,             /* lineNo */
     18,            /* colNo */
     "LXS_wrapper", /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\LXS_wrapper.m" /* pName */
 };
 
-static emlrtRTEInfo be_emlrtRTEI = {
+static emlrtRTEInfo ae_emlrtRTEI = {
     1045,                                          /* lineNo */
     18,                                            /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo ce_emlrtRTEI = {
+static emlrtRTEInfo be_emlrtRTEI = {
     961,                                           /* lineNo */
     18,                                            /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo de_emlrtRTEI = {
-    431,                                           /* lineNo */
-    6,                                             /* colNo */
-    "LXS",                                         /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
-};
-
-static emlrtRTEInfo ee_emlrtRTEI = {
+static emlrtRTEInfo ce_emlrtRTEI = {
     696,                                           /* lineNo */
     12,                                            /* colNo */
     "LXS",                                         /* fName */
@@ -1086,13 +1079,13 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
   emxArray_real_T c_time_data;
   emxArray_real_T d_time_data;
   emxArray_real_T *Xwithoutint;
+  emxArray_real_T *b_C;
   emxArray_real_T *b_Xwithoutint;
   emxArray_real_T *b_expl_temp;
   emxArray_real_T *b_y;
   emxArray_real_T *c_expl_temp;
   emxArray_real_T *c_y;
   emxArray_real_T *d_expl_temp;
-  emxArray_real_T *d_y;
   emxArray_real_T *e_expl_temp;
   emxArray_real_T *f_expl_temp;
   emxArray_real_T *outFSM_outliers;
@@ -1141,7 +1134,7 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
   e_st.prev = &c_st;
   e_st.tls = c_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  emxInit_real_T(sp, &b_y, 1, &ae_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_y, 1, &yd_emlrtRTEI, true);
   /*  Wrapper function for LXS (when lms is a scalar). NV pair names are not
    * taken as */
   /*  inputs. Instead, just the values are taken as inputs. */
@@ -1413,9 +1406,10 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
   /*                out.h = The number of observations that have determined the
    */
   /*                        LTS (LMS) estimator, i.e. the value of h. */
-  /*         out.outliers = vector containing the list of the units declared */
+  /*         out.outliers = row vector containing the list of the units declared
+   */
   /*                        as outliers using confidence level specified in */
-  /*                        input scalar conflev */
+  /*                        input scalar conflev. */
   /*          out.conflev = confidence level which is used to declare outliers.
    */
   /*                        Remark: scalar out.conflev will be used */
@@ -1655,41 +1649,33 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
   for (i = 0; i < loop_ub; i++) {
     out->X->data[i] = X->data[i];
   }
-  emxInit_real_T(&st, &c_y, 2, &de_emlrtRTEI, true);
   b_st.site = &rb_emlrtRSI;
   chkinputR(&b_st, b_y, out->X, intercept, nocheck, &n, &p);
+  emxInit_real_T(&st, &seq, 2, &oc_emlrtRTEI, true);
   if (muDoubleScalarIsNaN(n)) {
-    i = c_y->size[0] * c_y->size[1];
-    c_y->size[0] = 1;
-    c_y->size[1] = 1;
-    emxEnsureCapacity_real_T(&st, c_y, i, &oc_emlrtRTEI);
-    c_y->data[0] = rtNaN;
+    i = seq->size[0] * seq->size[1];
+    seq->size[0] = 1;
+    seq->size[1] = 1;
+    emxEnsureCapacity_real_T(&st, seq, i, &oc_emlrtRTEI);
+    seq->data[0] = rtNaN;
   } else if (n < 1.0) {
-    c_y->size[0] = 1;
-    c_y->size[1] = 0;
+    seq->size[0] = 1;
+    seq->size[1] = 0;
   } else if (muDoubleScalarIsInf(n) && (1.0 == n)) {
-    i = c_y->size[0] * c_y->size[1];
-    c_y->size[0] = 1;
-    c_y->size[1] = 1;
-    emxEnsureCapacity_real_T(&st, c_y, i, &oc_emlrtRTEI);
-    c_y->data[0] = rtNaN;
+    i = seq->size[0] * seq->size[1];
+    seq->size[0] = 1;
+    seq->size[1] = 1;
+    emxEnsureCapacity_real_T(&st, seq, i, &oc_emlrtRTEI);
+    seq->data[0] = rtNaN;
   } else {
-    i = c_y->size[0] * c_y->size[1];
-    c_y->size[0] = 1;
+    i = seq->size[0] * seq->size[1];
+    seq->size[0] = 1;
     loop_ub = (int32_T)muDoubleScalarFloor(n - 1.0);
-    c_y->size[1] = loop_ub + 1;
-    emxEnsureCapacity_real_T(&st, c_y, i, &oc_emlrtRTEI);
+    seq->size[1] = loop_ub + 1;
+    emxEnsureCapacity_real_T(&st, seq, i, &oc_emlrtRTEI);
     for (i = 0; i <= loop_ub; i++) {
-      c_y->data[i] = (real_T)i + 1.0;
+      seq->data[i] = (real_T)i + 1.0;
     }
-  }
-  emxInit_real_T(&st, &seq, 1, &pc_emlrtRTEI, true);
-  i = seq->size[0];
-  seq->size[0] = c_y->size[1];
-  emxEnsureCapacity_real_T(&st, seq, i, &pc_emlrtRTEI);
-  loop_ub = c_y->size[1];
-  for (i = 0; i < loop_ub; i++) {
-    seq->data[i] = c_y->data[i];
   }
   /*  User options */
   /*  singsub= scalar which will contain the number of singular subsets which */
@@ -1708,7 +1694,7 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
   loop_ub_tmp = (int32_T)p;
   i = out->beta->size[0];
   out->beta->size[0] = (int32_T)p;
-  emxEnsureCapacity_real_T(&st, out->beta, i, &qc_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, out->beta, i, &pc_emlrtRTEI);
   for (i = 0; i < loop_ub_tmp; i++) {
     out->beta->data[i] = -99.0;
   }
@@ -1788,15 +1774,15 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
     memset(&time_data[0], 0, loop_ub * sizeof(real_T));
   }
   /*  bonflevoutX option to search for outliers in the X space */
-  emxInit_real_T(&st, &Xwithoutint, 2, &sc_emlrtRTEI, true);
-  emxInit_real_T(&st, &outliers, 1, &xc_emlrtRTEI, true);
+  emxInit_real_T(&st, &Xwithoutint, 2, &rc_emlrtRTEI, true);
+  emxInit_real_T(&st, &outliers, 1, &wc_emlrtRTEI, true);
   if ((bonflevoutX_size[0] != 0) && (bonflevoutX_size[1] != 0)) {
     bonflevout = true;
     if (nocheck) {
       i = Xwithoutint->size[0] * Xwithoutint->size[1];
       Xwithoutint->size[0] = out->X->size[0];
       Xwithoutint->size[1] = out->X->size[1];
-      emxEnsureCapacity_real_T(&st, Xwithoutint, i, &sc_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, Xwithoutint, i, &rc_emlrtRTEI);
       loop_ub = out->X->size[0] * out->X->size[1];
       for (i = 0; i < loop_ub; i++) {
         Xwithoutint->data[i] = out->X->data[i];
@@ -1818,7 +1804,7 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
       Xwithoutint->size[0] = out->X->size[0];
       b_loop_ub = i1 - i;
       Xwithoutint->size[1] = b_loop_ub;
-      emxEnsureCapacity_real_T(&st, Xwithoutint, i2, &vc_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, Xwithoutint, i2, &uc_emlrtRTEI);
       for (i1 = 0; i1 < b_loop_ub; i1++) {
         for (i2 = 0; i2 < loop_ub; i2++) {
           Xwithoutint->data[i2 + Xwithoutint->size[0] * i1] =
@@ -1829,7 +1815,7 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
       i = Xwithoutint->size[0] * Xwithoutint->size[1];
       Xwithoutint->size[0] = out->X->size[0];
       Xwithoutint->size[1] = out->X->size[1];
-      emxEnsureCapacity_real_T(&st, Xwithoutint, i, &tc_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, Xwithoutint, i, &sc_emlrtRTEI);
       loop_ub = out->X->size[0] * out->X->size[1];
       for (i = 0; i < loop_ub; i++) {
         Xwithoutint->data[i] = out->X->data[i];
@@ -1847,21 +1833,21 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
       critdef_data[1] = 'n';
       critdef_data[2] = 'i';
     }
-    emxInit_real_T(&st, &b_Xwithoutint, 2, &wc_emlrtRTEI, true);
+    emxInit_real_T(&st, &b_Xwithoutint, 2, &vc_emlrtRTEI, true);
     i = b_Xwithoutint->size[0] * b_Xwithoutint->size[1];
     b_Xwithoutint->size[0] = Xwithoutint->size[0];
     b_Xwithoutint->size[1] = Xwithoutint->size[1];
-    emxEnsureCapacity_real_T(&st, b_Xwithoutint, i, &wc_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, b_Xwithoutint, i, &vc_emlrtRTEI);
     loop_ub = Xwithoutint->size[0] * Xwithoutint->size[1] - 1;
     for (i = 0; i <= loop_ub; i++) {
       b_Xwithoutint->data[i] = Xwithoutint->data[i];
     }
-    emxInit_real_T(&st, &outFSM_outliers, 2, &wd_emlrtRTEI, true);
-    emxInit_real_T(&st, &b_expl_temp, 2, &ee_emlrtRTEI, true);
-    emxInit_real_T(&st, &c_expl_temp, 2, &ee_emlrtRTEI, true);
-    emxInit_real_T(&st, &d_expl_temp, 2, &ee_emlrtRTEI, true);
-    emxInit_real_T(&st, &e_expl_temp, 2, &ee_emlrtRTEI, true);
-    emxInit_real_T(&st, &f_expl_temp, 2, &ee_emlrtRTEI, true);
+    emxInit_real_T(&st, &outFSM_outliers, 2, &vd_emlrtRTEI, true);
+    emxInit_real_T(&st, &b_expl_temp, 2, &ce_emlrtRTEI, true);
+    emxInit_real_T(&st, &c_expl_temp, 2, &ce_emlrtRTEI, true);
+    emxInit_real_T(&st, &d_expl_temp, 2, &ce_emlrtRTEI, true);
+    emxInit_real_T(&st, &e_expl_temp, 2, &ce_emlrtRTEI, true);
+    emxInit_real_T(&st, &f_expl_temp, 2, &ce_emlrtRTEI, true);
     b_st.site = &lb_emlrtRSI;
     FSM(SD, &b_st, b_Xwithoutint, bonflevoutX_data, bonflevoutX_size,
         muDoubleScalarFloor(n * 0.6), critdef_data, critdef_size,
@@ -1870,7 +1856,7 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
         tmp_size, b_expl_temp_data, b_tmp_size);
     i = outliers->size[0];
     outliers->size[0] = outFSM_outliers->size[0] * outFSM_outliers->size[1];
-    emxEnsureCapacity_real_T(&st, outliers, i, &xc_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, outliers, i, &wc_emlrtRTEI);
     loop_ub = outFSM_outliers->size[0] * outFSM_outliers->size[1];
     emxFree_real_T(&b_Xwithoutint);
     emxFree_real_T(&f_expl_temp);
@@ -1886,7 +1872,7 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
     bonflevout = false;
     i = outliers->size[0];
     outliers->size[0] = 1;
-    emxEnsureCapacity_real_T(&st, outliers, i, &rc_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, outliers, i, &qc_emlrtRTEI);
     outliers->data[0] = 0.0;
   }
   /*  Computation of LMS (LTS) */
@@ -1897,17 +1883,18 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
   i = out->bs->size[0] * out->bs->size[1];
   out->bs->size[0] = 1;
   out->bs->size[1] = (int32_T)p;
-  emxEnsureCapacity_real_T(&st, out->bs, i, &uc_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, out->bs, i, &tc_emlrtRTEI);
   for (i = 0; i < loop_ub_tmp; i++) {
     out->bs->data[i] = 0.0;
   }
   i = (int32_T)nselected;
   emlrtForLoopVectorCheckR2021a(1.0, 1.0, nselected, mxDOUBLE_CLASS,
                                 (int32_T)nselected, &c_emlrtRTEI, &st);
-  emxInit_real_T(&st, &r2, 1, &xd_emlrtRTEI, true);
-  emxInit_int32_T(&st, &ia, 1, &ae_emlrtRTEI, true);
-  emxInit_int32_T(&st, &ib, 1, &ae_emlrtRTEI, true);
-  emxInit_real_T(&st, &d_y, 1, &dd_emlrtRTEI, true);
+  emxInit_real_T(&st, &r2, 1, &wd_emlrtRTEI, true);
+  emxInit_int32_T(&st, &ia, 1, &yd_emlrtRTEI, true);
+  emxInit_int32_T(&st, &ib, 1, &yd_emlrtRTEI, true);
+  emxInit_real_T(&st, &b_C, 2, &yc_emlrtRTEI, true);
+  emxInit_real_T(&st, &c_y, 1, &cd_emlrtRTEI, true);
   for (b_i = 0; b_i < i; b_i++) {
     if (b_i + 1U <= (uint32_T)tsampling) {
       b_st.site = &jb_emlrtRSI;
@@ -1924,19 +1911,19 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
       b_st.site = &ib_emlrtRSI;
       c_st.site = &sdb_emlrtRSI;
       loop_ub = C->size[1];
-      i1 = c_y->size[0] * c_y->size[1];
-      c_y->size[0] = 1;
-      c_y->size[1] = C->size[1];
-      emxEnsureCapacity_real_T(&c_st, c_y, i1, &ad_emlrtRTEI);
+      i1 = b_C->size[0] * b_C->size[1];
+      b_C->size[0] = 1;
+      b_C->size[1] = C->size[1];
+      emxEnsureCapacity_real_T(&c_st, b_C, i1, &yc_emlrtRTEI);
       for (i1 = 0; i1 < loop_ub; i1++) {
-        c_y->data[i1] = C->data[b_i + C->size[0] * i1];
+        b_C->data[i1] = C->data[b_i + C->size[0] * i1];
       }
       d_st.site = &tdb_emlrtRSI;
-      c_do_vectors(&d_st, c_y, outliers, r2, ia, ib);
+      c_do_vectors(&d_st, b_C, outliers, r2, ia, ib);
       if (r2->size[0] != 0) {
         i1 = out->residuals->size[0];
         out->residuals->size[0] = 1;
-        emxEnsureCapacity_real_T(&st, out->residuals, i1, &cd_emlrtRTEI);
+        emxEnsureCapacity_real_T(&st, out->residuals, i1, &bd_emlrtRTEI);
         out->residuals->data[0] = rtNaN;
       } else {
         guard1 = true;
@@ -1950,7 +1937,7 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
       i1 = Xwithoutint->size[0] * Xwithoutint->size[1];
       Xwithoutint->size[0] = C->size[1];
       Xwithoutint->size[1] = out->X->size[1];
-      emxEnsureCapacity_real_T(&st, Xwithoutint, i1, &yc_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, Xwithoutint, i1, &xc_emlrtRTEI);
       for (i1 = 0; i1 < b_loop_ub; i1++) {
         for (i2 = 0; i2 < loop_ub; i2++) {
           if (C->data[b_i + C->size[0] * i2] !=
@@ -1968,15 +1955,15 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
         }
       }
       loop_ub = C->size[1];
-      i1 = c_y->size[0] * c_y->size[1];
-      c_y->size[0] = 1;
-      c_y->size[1] = C->size[1];
-      emxEnsureCapacity_real_T(&st, c_y, i1, &ad_emlrtRTEI);
+      i1 = b_C->size[0] * b_C->size[1];
+      b_C->size[0] = 1;
+      b_C->size[1] = C->size[1];
+      emxEnsureCapacity_real_T(&st, b_C, i1, &yc_emlrtRTEI);
       for (i1 = 0; i1 < loop_ub; i1++) {
-        c_y->data[i1] = C->data[b_i + C->size[0] * i1];
+        b_C->data[i1] = C->data[b_i + C->size[0] * i1];
       }
       b_st.site = &hb_emlrtRSI;
-      b_indexShapeCheck(&b_st, b_y->size[0], *(int32_T(*)[2])c_y->size);
+      b_indexShapeCheck(&b_st, b_y->size[0], *(int32_T(*)[2])b_C->size);
       loop_ub = C->size[1];
       for (i1 = 0; i1 < loop_ub; i1++) {
         i2 = (int32_T)C->data[b_i + C->size[0] * i1];
@@ -1988,14 +1975,14 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
       /*  posteriori control on vector b */
       /*  Compute the vector of coefficients using matrice Xb and yb */
       loop_ub = C->size[1];
-      i1 = d_y->size[0];
-      d_y->size[0] = C->size[1];
-      emxEnsureCapacity_real_T(&st, d_y, i1, &dd_emlrtRTEI);
+      i1 = c_y->size[0];
+      c_y->size[0] = C->size[1];
+      emxEnsureCapacity_real_T(&st, c_y, i1, &cd_emlrtRTEI);
       for (i1 = 0; i1 < loop_ub; i1++) {
-        d_y->data[i1] = b_y->data[(int32_T)C->data[b_i + C->size[0] * i1] - 1];
+        c_y->data[i1] = b_y->data[(int32_T)C->data[b_i + C->size[0] * i1] - 1];
       }
       b_st.site = &gb_emlrtRSI;
-      mldivide(&b_st, Xwithoutint, d_y, out->residuals);
+      mldivide(&b_st, Xwithoutint, c_y, out->residuals);
     }
     if (1 > out->residuals->size[0]) {
       emlrtDynamicBoundsCheckR2012b(1, 1, out->residuals->size[0], &h_emlrtBCI,
@@ -2019,14 +2006,14 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
           emlrtSizeEqCheck1DR2012b(b_y->size[0], r2->size[0], &d_emlrtECI, &st);
         }
         /*  Squared residuals for all the observations */
-        i1 = d_y->size[0];
-        d_y->size[0] = b_y->size[0];
-        emxEnsureCapacity_real_T(&st, d_y, i1, &gd_emlrtRTEI);
+        i1 = c_y->size[0];
+        c_y->size[0] = b_y->size[0];
+        emxEnsureCapacity_real_T(&st, c_y, i1, &fd_emlrtRTEI);
         for (i1 = 0; i1 < loop_ub; i1++) {
-          d_y->data[i1] = b_y->data[i1] - r2->data[i1];
+          c_y->data[i1] = b_y->data[i1] - r2->data[i1];
         }
         b_st.site = &eb_emlrtRSI;
-        power(&b_st, d_y, r2);
+        power(&b_st, c_y, r2);
         /*  Ordering of squared residuals */
         b_st.site = &db_emlrtRSI;
         c_st.site = &veb_emlrtRSI;
@@ -2059,7 +2046,7 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
           b_indexShapeCheck(&b_st, r2->size[0], tmp_size);
           i1 = r2->size[0];
           r2->size[0] = (int32_T)h;
-          emxEnsureCapacity_real_T(&st, r2, i1, &kd_emlrtRTEI);
+          emxEnsureCapacity_real_T(&st, r2, i1, &jd_emlrtRTEI);
           b_st.site = &cb_emlrtRSI;
           ncomb = sum(&b_st, r2);
         }
@@ -2069,7 +2056,7 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
           /*  brob = \beta_lms or \beta_lts */
           i1 = out->beta->size[0];
           out->beta->size[0] = out->residuals->size[0];
-          emxEnsureCapacity_real_T(&st, out->beta, i1, &ld_emlrtRTEI);
+          emxEnsureCapacity_real_T(&st, out->beta, i1, &kd_emlrtRTEI);
           loop_ub = out->residuals->size[0];
           for (i1 = 0; i1 < loop_ub; i1++) {
             out->beta->data[i1] = out->residuals->data[i1];
@@ -2079,7 +2066,7 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
           i1 = out->bs->size[0] * out->bs->size[1];
           out->bs->size[0] = 1;
           out->bs->size[1] = C->size[1];
-          emxEnsureCapacity_real_T(&st, out->bs, i1, &uc_emlrtRTEI);
+          emxEnsureCapacity_real_T(&st, out->bs, i1, &tc_emlrtRTEI);
           for (i1 = 0; i1 < loop_ub; i1++) {
             out->bs->data[i1] = C->data[b_i + C->size[0] * i1];
           }
@@ -2166,8 +2153,8 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
       emlrtBreakCheckR2012b(&st);
     }
   }
+  emxFree_real_T(&b_C);
   emxFree_int32_T(&ib);
-  emxFree_real_T(&c_y);
   emxFree_real_T(&outliers);
   if (1 > out->beta->size[0]) {
     emlrtDynamicBoundsCheckR2012b(1, 1, out->beta->size[0], &d_emlrtBCI, &st);
@@ -2209,7 +2196,7 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
   }
   i = out->residuals->size[0];
   out->residuals->size[0] = b_y->size[0];
-  emxEnsureCapacity_real_T(&st, out->residuals, i, &bd_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, out->residuals, i, &ad_emlrtRTEI);
   loop_ub = b_y->size[0];
   for (i = 0; i < loop_ub; i++) {
     out->residuals->data[i] = b_y->data[i] - out->residuals->data[i];
@@ -2273,7 +2260,7 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
     /*          disp('s0 after') */
     /*          disp(s0) */
   }
-  emxInit_boolean_T(&st, &weights, 1, &yd_emlrtRTEI, true);
+  emxInit_boolean_T(&st, &weights, 1, &xd_emlrtRTEI, true);
   if (muDoubleScalarAbs(tsampling) > 1.0E-7) {
     /*  Assign weight=1 to the h units which show the smallest h squared */
     /*  residuals */
@@ -2284,7 +2271,7 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
     sort(&c_st, r2, ia);
     i = r2->size[0];
     r2->size[0] = ia->size[0];
-    emxEnsureCapacity_real_T(&b_st, r2, i, &ed_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, r2, i, &dd_emlrtRTEI);
     loop_ub = ia->size[0];
     for (i = 0; i < loop_ub; i++) {
       r2->data[i] = ia->data[i];
@@ -2292,7 +2279,7 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
     loop_ub_tmp = (int32_T)n;
     i = out->weights->size[0];
     out->weights->size[0] = (int32_T)n;
-    emxEnsureCapacity_boolean_T(&st, out->weights, i, &id_emlrtRTEI);
+    emxEnsureCapacity_boolean_T(&st, out->weights, i, &hd_emlrtRTEI);
     for (i = 0; i < loop_ub_tmp; i++) {
       out->weights->data[i] = false;
     }
@@ -2307,11 +2294,11 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
       emlrtDynamicBoundsCheckR2012b((int32_T)h, 1, r2->size[0], &b_emlrtBCI,
                                     &st);
     }
-    emxInit_int32_T(&st, &r, 2, &ae_emlrtRTEI, true);
+    emxInit_int32_T(&st, &r, 2, &yd_emlrtRTEI, true);
     i = r->size[0] * r->size[1];
     r->size[0] = 1;
     r->size[1] = (int32_T)h;
-    emxEnsureCapacity_int32_T(&st, r, i, &jd_emlrtRTEI);
+    emxEnsureCapacity_int32_T(&st, r, i, &id_emlrtRTEI);
     for (i = 0; i < loop_ub_tmp; i++) {
       i1 = (int32_T)r2->data[i];
       if ((i1 < 1) || (i1 > (int32_T)n)) {
@@ -2351,7 +2338,7 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
     b_abs(&b_st, out->residuals, r2);
     i = weights->size[0];
     weights->size[0] = r2->size[0];
-    emxEnsureCapacity_boolean_T(&st, weights, i, &od_emlrtRTEI);
+    emxEnsureCapacity_boolean_T(&st, weights, i, &nd_emlrtRTEI);
     loop_ub = r2->size[0];
     for (i = 0; i < loop_ub; i++) {
       weights->data[i] = (r2->data[i] <= ncomb);
@@ -2370,10 +2357,10 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
           nz++;
         }
       }
-      emxInit_int32_T(&st, &b_r2, 1, &ce_emlrtRTEI, true);
+      emxInit_int32_T(&st, &b_r2, 1, &be_emlrtRTEI, true);
       i = b_r2->size[0];
       b_r2->size[0] = nz;
-      emxEnsureCapacity_int32_T(&st, b_r2, i, &md_emlrtRTEI);
+      emxEnsureCapacity_int32_T(&st, b_r2, i, &ld_emlrtRTEI);
       nz = 0;
       for (b_i = 0; b_i <= loop_ub_tmp; b_i++) {
         if (weights->data[b_i]) {
@@ -2385,7 +2372,7 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
       i = Xwithoutint->size[0] * Xwithoutint->size[1];
       Xwithoutint->size[0] = b_r2->size[0];
       Xwithoutint->size[1] = out->X->size[1];
-      emxEnsureCapacity_real_T(&st, Xwithoutint, i, &rd_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, Xwithoutint, i, &qd_emlrtRTEI);
       for (i = 0; i < loop_ub; i++) {
         b_loop_ub = b_r2->size[0];
         for (i1 = 0; i1 < b_loop_ub; i1++) {
@@ -2397,20 +2384,20 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
               out->X->data[(b_r2->data[i1] + out->X->size[0] * i) - 1];
         }
       }
-      i = d_y->size[0];
-      d_y->size[0] = b_r2->size[0];
-      emxEnsureCapacity_real_T(&st, d_y, i, &sd_emlrtRTEI);
+      i = c_y->size[0];
+      c_y->size[0] = b_r2->size[0];
+      emxEnsureCapacity_real_T(&st, c_y, i, &rd_emlrtRTEI);
       loop_ub = b_r2->size[0];
       for (i = 0; i < loop_ub; i++) {
         if (b_r2->data[i] > b_y->size[0]) {
           emlrtDynamicBoundsCheckR2012b(b_r2->data[i], 1, b_y->size[0],
                                         &r_emlrtBCI, &st);
         }
-        d_y->data[i] = b_y->data[b_r2->data[i] - 1];
+        c_y->data[i] = b_y->data[b_r2->data[i] - 1];
       }
       emxFree_int32_T(&b_r2);
       b_st.site = &l_emlrtRSI;
-      mldivide(&b_st, Xwithoutint, d_y, out->beta);
+      mldivide(&b_st, Xwithoutint, c_y, out->beta);
       /*  The QR decomposition is equivalent to the above but less efficient: */
       /*  [Q,R]=qr(X(weights==1,:),0); */
       /*  brob = R\(Q'*y(weights==1)); */
@@ -2427,7 +2414,7 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
       }
       i = out->residuals->size[0];
       out->residuals->size[0] = b_y->size[0];
-      emxEnsureCapacity_real_T(&st, out->residuals, i, &td_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, out->residuals, i, &sd_emlrtRTEI);
       loop_ub = b_y->size[0];
       for (i = 0; i < loop_ub; i++) {
         out->residuals->data[i] = b_y->data[i] - out->residuals->data[i];
@@ -2445,7 +2432,7 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
       nz = combineVectorElements(&d_st, weights);
       i = r2->size[0];
       r2->size[0] = weights->size[0];
-      emxEnsureCapacity_real_T(&st, r2, i, &ud_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, r2, i, &td_emlrtRTEI);
       loop_ub = weights->size[0];
       for (i = 0; i < loop_ub; i++) {
         r2->data[i] *= (real_T)weights->data[i];
@@ -2512,7 +2499,7 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
       rmin = norminv(b_conflev);
       i = weights->size[0];
       weights->size[0] = r2->size[0];
-      emxEnsureCapacity_boolean_T(&st, weights, i, &vd_emlrtRTEI);
+      emxEnsureCapacity_boolean_T(&st, weights, i, &ud_emlrtRTEI);
       loop_ub = r2->size[0];
       for (i = 0; i < loop_ub; i++) {
         weights->data[i] = (r2->data[i] <= rmin);
@@ -2537,7 +2524,7 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
     b_abs(&b_st, out->residuals, r2);
     i = weights->size[0];
     weights->size[0] = r2->size[0];
-    emxEnsureCapacity_boolean_T(&st, weights, i, &fd_emlrtRTEI);
+    emxEnsureCapacity_boolean_T(&st, weights, i, &ed_emlrtRTEI);
     loop_ub = r2->size[0];
     for (i = 0; i < loop_ub; i++) {
       weights->data[i] = (r2->data[i] <= 1.0E-7);
@@ -2545,7 +2532,7 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
     /*  Store the weights */
     i = out->weights->size[0];
     out->weights->size[0] = weights->size[0];
-    emxEnsureCapacity_boolean_T(&st, out->weights, i, &hd_emlrtRTEI);
+    emxEnsureCapacity_boolean_T(&st, out->weights, i, &gd_emlrtRTEI);
     loop_ub = weights->size[0];
     for (i = 0; i < loop_ub; i++) {
       out->weights->data[i] = weights->data[i];
@@ -2555,7 +2542,7 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
     tsampling = 0.0;
     /*  Standardized residuals are artificially set equal to raw residuals. */
   }
-  emxFree_real_T(&d_y);
+  emxFree_real_T(&c_y);
   emxFree_int32_T(&ia);
   emxFree_real_T(&r2);
   emxFree_real_T(&Xwithoutint);
@@ -2573,10 +2560,10 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
       nz++;
     }
   }
-  emxInit_int32_T(&st, &r1, 1, &be_emlrtRTEI, true);
+  emxInit_int32_T(&st, &r1, 1, &ae_emlrtRTEI, true);
   i = r1->size[0];
   r1->size[0] = nz;
-  emxEnsureCapacity_int32_T(&st, r1, i, &md_emlrtRTEI);
+  emxEnsureCapacity_int32_T(&st, r1, i, &ld_emlrtRTEI);
   nz = 0;
   for (b_i = 0; b_i <= loop_ub_tmp; b_i++) {
     if (!weights->data[b_i]) {
@@ -2585,13 +2572,14 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
     }
   }
   emxFree_boolean_T(&weights);
-  i = out->outliers->size[0];
-  out->outliers->size[0] = r1->size[0];
-  emxEnsureCapacity_real_T(&st, out->outliers, i, &nd_emlrtRTEI);
+  i = out->outliers->size[0] * out->outliers->size[1];
+  out->outliers->size[0] = 1;
+  out->outliers->size[1] = r1->size[0];
+  emxEnsureCapacity_real_T(&st, out->outliers, i, &md_emlrtRTEI);
   loop_ub = r1->size[0];
   for (i = 0; i < loop_ub; i++) {
-    if (r1->data[i] > seq->size[0]) {
-      emlrtDynamicBoundsCheckR2012b(r1->data[i], 1, seq->size[0], &p_emlrtBCI,
+    if (r1->data[i] > seq->size[1]) {
+      emlrtDynamicBoundsCheckR2012b(r1->data[i], 1, seq->size[1], &p_emlrtBCI,
                                     &st);
     }
     out->outliers->data[i] = seq->data[r1->data[i] - 1];
@@ -2668,13 +2656,13 @@ void LXS_wrapper(LXS_wrapperStackData *SD, const emlrtStack *sp,
       i = out->X->size[0] * out->X->size[1];
       out->X->size[0] = nz + 1;
       out->X->size[1] = loop_ub_tmp;
-      emxEnsureCapacity_real_T(&st, out->X, i, &qd_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, out->X, i, &pd_emlrtRTEI);
     }
     /*  Store response */
     i = out->y->size[0] * out->y->size[1];
     out->y->size[0] = b_y->size[0];
     out->y->size[1] = 1;
-    emxEnsureCapacity_real_T(&st, out->y, i, &pd_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, out->y, i, &od_emlrtRTEI);
     loop_ub = b_y->size[0];
     for (i = 0; i < loop_ub; i++) {
       out->y->data[i] = b_y->data[i];

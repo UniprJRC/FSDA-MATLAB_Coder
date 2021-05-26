@@ -17,8 +17,6 @@
 #include "rt_nonfinite.h"
 #include <math.h>
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void eig(const double A[4], creal_T V[2])
 {

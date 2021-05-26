@@ -22,8 +22,6 @@
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void chkinputR(emxArray_real_T *y, emxArray_real_T *X, bool vvarargin_f10,
                bool vvarargin_f16, double *n, double *p)

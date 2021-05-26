@@ -19,8 +19,6 @@
 #include "xzlarfg.h"
 #include <math.h>
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void xgeqp3(emxArray_real_T *A, emxArray_real_T *tau, emxArray_int32_T *jpvt)
 {

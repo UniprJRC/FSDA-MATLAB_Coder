@@ -38,8 +38,6 @@
 #include <stdio.h>
 #include <string.h>
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void LXS_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                  const double bonflevoutX_data[], const int bonflevoutX_size[2],
@@ -59,11 +57,11 @@ void LXS_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   emxArray_real_T d_time_data;
   emxArray_real_T *Xwithoutint;
   emxArray_real_T *b;
+  emxArray_real_T *b_C;
   emxArray_real_T *b_Xwithoutint;
   emxArray_real_T *b_expl_temp;
   emxArray_real_T *b_y;
   emxArray_real_T *c_expl_temp;
-  emxArray_real_T *c_y;
   emxArray_real_T *d_expl_temp;
   emxArray_real_T *e_expl_temp;
   emxArray_real_T *expl_temp;
@@ -372,9 +370,10 @@ void LXS_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                out.h = The number of observations that have determined the
    */
   /*                        LTS (LMS) estimator, i.e. the value of h. */
-  /*         out.outliers = vector containing the list of the units declared */
+  /*         out.outliers = row vector containing the list of the units declared
+   */
   /*                        as outliers using confidence level specified in */
-  /*                        input scalar conflev */
+  /*                        input scalar conflev. */
   /*          out.conflev = confidence level which is used to declare outliers.
    */
   /*                        Remark: scalar out.conflev will be used */
@@ -403,7 +402,7 @@ void LXS_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                        formed by units 2, 5 and 20. */
   /*  */
   /*  */
-  /*  See also FSReda, Sreg, MMreg */
+  /*  See also FSReda, Sreg, MMreg, LTSts */
   /*  */
   /*  References: */
   /*  */
@@ -614,40 +613,32 @@ void LXS_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   for (i = 0; i < loop_ub; i++) {
     out->X->data[i] = X->data[i];
   }
-  emxInit_real_T(&c_y, 2);
   chkinputR(b_y, out->X, intercept, nocheck, &n, &p);
+  emxInit_real_T(&seq, 2);
   if (rtIsNaN(n)) {
-    i = c_y->size[0] * c_y->size[1];
-    c_y->size[0] = 1;
-    c_y->size[1] = 1;
-    emxEnsureCapacity_real_T(c_y, i);
-    c_y->data[0] = rtNaN;
+    i = seq->size[0] * seq->size[1];
+    seq->size[0] = 1;
+    seq->size[1] = 1;
+    emxEnsureCapacity_real_T(seq, i);
+    seq->data[0] = rtNaN;
   } else if (n < 1.0) {
-    c_y->size[0] = 1;
-    c_y->size[1] = 0;
+    seq->size[0] = 1;
+    seq->size[1] = 0;
   } else if (rtIsInf(n) && (1.0 == n)) {
-    i = c_y->size[0] * c_y->size[1];
-    c_y->size[0] = 1;
-    c_y->size[1] = 1;
-    emxEnsureCapacity_real_T(c_y, i);
-    c_y->data[0] = rtNaN;
+    i = seq->size[0] * seq->size[1];
+    seq->size[0] = 1;
+    seq->size[1] = 1;
+    emxEnsureCapacity_real_T(seq, i);
+    seq->data[0] = rtNaN;
   } else {
-    i = c_y->size[0] * c_y->size[1];
-    c_y->size[0] = 1;
+    i = seq->size[0] * seq->size[1];
+    seq->size[0] = 1;
     loop_ub = (int)floor(n - 1.0);
-    c_y->size[1] = loop_ub + 1;
-    emxEnsureCapacity_real_T(c_y, i);
+    seq->size[1] = loop_ub + 1;
+    emxEnsureCapacity_real_T(seq, i);
     for (i = 0; i <= loop_ub; i++) {
-      c_y->data[i] = (double)i + 1.0;
+      seq->data[i] = (double)i + 1.0;
     }
-  }
-  emxInit_real_T(&seq, 1);
-  i = seq->size[0];
-  seq->size[0] = c_y->size[1];
-  emxEnsureCapacity_real_T(seq, i);
-  loop_ub = c_y->size[1];
-  for (i = 0; i < loop_ub; i++) {
-    seq->data[i] = c_y->data[i];
   }
   /*  User options */
   /*  singsub= scalar which will contain the number of singular subsets which */
@@ -823,6 +814,7 @@ void LXS_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   emxInit_real_T(&r2, 1);
   emxInit_int32_T(&ia, 1);
   emxInit_int32_T(&ib, 1);
+  emxInit_real_T(&b_C, 2);
   for (b_i = 0; b_i < i; b_i++) {
     if (b_i + 1U <= (unsigned int)tsampling) {
       tic(&ttic_tv_sec, &b_conflev);
@@ -831,14 +823,14 @@ void LXS_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     guard1 = false;
     if (bonflevout) {
       loop_ub = C->size[1];
-      i1 = c_y->size[0] * c_y->size[1];
-      c_y->size[0] = 1;
-      c_y->size[1] = C->size[1];
-      emxEnsureCapacity_real_T(c_y, i1);
+      i1 = b_C->size[0] * b_C->size[1];
+      b_C->size[0] = 1;
+      b_C->size[1] = C->size[1];
+      emxEnsureCapacity_real_T(b_C, i1);
       for (i1 = 0; i1 < loop_ub; i1++) {
-        c_y->data[i1] = C->data[b_i + C->size[0] * i1];
+        b_C->data[i1] = C->data[b_i + C->size[0] * i1];
       }
-      c_do_vectors(c_y, outliers, b, ia, ib);
+      c_do_vectors(b_C, outliers, b, ia, ib);
       if (b->size[0] != 0) {
         i1 = b->size[0];
         b->size[0] = 1;
@@ -973,8 +965,8 @@ void LXS_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
       }
     }
   }
+  emxFree_real_T(&b_C);
   emxFree_int32_T(&ib);
-  emxFree_real_T(&c_y);
   emxFree_real_T(&outliers);
   if (lms == 1.0) {
     /*  Estimate of scale based on h-quantile of all squared residuals */
@@ -1321,8 +1313,9 @@ void LXS_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     }
   }
   emxFree_boolean_T(&weights);
-  i = out->outliers->size[0];
-  out->outliers->size[0] = r1->size[0];
+  i = out->outliers->size[0] * out->outliers->size[1];
+  out->outliers->size[0] = 1;
+  out->outliers->size[1] = r1->size[0];
   emxEnsureCapacity_real_T(out->outliers, i);
   loop_ub = r1->size[0];
   for (i = 0; i < loop_ub; i++) {

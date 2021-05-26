@@ -185,7 +185,7 @@ static emlrtBCInfo up_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtRTEInfo sq_emlrtRTEI = {
+static emlrtRTEInfo rq_emlrtRTEI = {
     11,     /* lineNo */
     5,      /* colNo */
     "finv", /* fName */
@@ -263,7 +263,7 @@ void b_finv(const emlrtStack *sp, const emxArray_real_T *p, real_T v1,
   i = x->size[0] * x->size[1];
   x->size[0] = csz_idx_0;
   x->size[1] = csz_idx_1;
-  emxEnsureCapacity_real_T(&st, x, i, &sq_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, x, i, &rq_emlrtRTEI);
   i = csz_idx_0 * csz_idx_1;
   for (k = 0; k < i; k++) {
     csz_idx_0 = p->size[0] * p->size[1];
@@ -458,7 +458,7 @@ void c_finv(const emlrtStack *sp, const emxArray_real_T *p,
   ztemp_size_idx_1 = x->size[0] * x->size[1];
   x->size[0] = csz_idx_0;
   x->size[1] = csz_idx_1;
-  emxEnsureCapacity_real_T(&st, x, ztemp_size_idx_1, &sq_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, x, ztemp_size_idx_1, &rq_emlrtRTEI);
   ztemp_size_idx_1 = csz_idx_0 * csz_idx_1;
   for (k = 0; k < ztemp_size_idx_1; k++) {
     ztemp_size_idx_0 = p->size[0] * p->size[1];

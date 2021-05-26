@@ -101,7 +101,7 @@ static emlrtBCInfo bq_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtRTEInfo qr_emlrtRTEI = {
+static emlrtRTEInfo pr_emlrtRTEI = {
     27,       /* lineNo */
     5,        /* colNo */
     "gaminv", /* fName */
@@ -147,7 +147,7 @@ void b_chi2inv(const emlrtStack *sp, const emxArray_real_T *p, real_T v,
   i = x->size[0] * x->size[1];
   x->size[0] = p->size[0];
   x->size[1] = p->size[1];
-  emxEnsureCapacity_real_T(&st, x, i, &qr_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, x, i, &pr_emlrtRTEI);
   i = p->size[0] * p->size[1];
   for (k = 0; k < i; k++) {
     i1 = p->size[0] * p->size[1];

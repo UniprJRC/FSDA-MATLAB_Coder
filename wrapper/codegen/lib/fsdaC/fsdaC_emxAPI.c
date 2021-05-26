@@ -16,8 +16,6 @@
 #include "rt_nonfinite.h"
 #include <stdlib.h>
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 emxArray_boolean_T *emxCreateND_boolean_T(int numDimensions, const int *size)
 {

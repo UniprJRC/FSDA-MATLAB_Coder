@@ -15,8 +15,6 @@
 #include "rt_nonfinite.h"
 #include <string.h>
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void c_eml_rand_mt19937ar_stateful_i(void)
 {

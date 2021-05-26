@@ -15,8 +15,6 @@
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void repmat(const double a_data[], const int a_size[2], double varargin_1,
             emxArray_real_T *b)

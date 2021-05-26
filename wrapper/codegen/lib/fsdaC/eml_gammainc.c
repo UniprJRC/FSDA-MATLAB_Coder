@@ -16,8 +16,6 @@
 #include "rt_nonfinite.h"
 #include <math.h>
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 double eml_gammainc(double x, double a, double la, double lgap1, bool upper)
 {

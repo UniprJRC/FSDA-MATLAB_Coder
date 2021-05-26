@@ -46,21 +46,21 @@ static emlrtRSInfo se_emlrtRSI = {
                                                                          */
 };
 
-static emlrtRTEInfo re_emlrtRTEI = {
+static emlrtRTEInfo pe_emlrtRTEI = {
     61,                                              /* lineNo */
     1,                                               /* colNo */
     "bc",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\bc.m" /* pName */
 };
 
-static emlrtRTEInfo se_emlrtRTEI = {
+static emlrtRTEInfo qe_emlrtRTEI = {
     62,                                              /* lineNo */
     1,                                               /* colNo */
     "bc",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\bc.m" /* pName */
 };
 
-static emlrtRTEInfo te_emlrtRTEI = {
+static emlrtRTEInfo re_emlrtRTEI = {
     63,                                              /* lineNo */
     1,                                               /* colNo */
     "bc",                                            /* fName */
@@ -168,12 +168,12 @@ real_T bc(const emlrtStack *sp, real_T n, real_T k)
   st.site = &de_emlrtRSI;
   a = (n - k) + 1.0;
   b_st.site = &ge_emlrtRSI;
-  emxInit_real_T(&b_st, &nums, 2, &re_emlrtRTEI, true);
+  emxInit_real_T(&b_st, &nums, 2, &pe_emlrtRTEI, true);
   if (muDoubleScalarIsNaN(a) || muDoubleScalarIsNaN(n)) {
     b_k = nums->size[0] * nums->size[1];
     nums->size[0] = 1;
     nums->size[1] = 1;
-    emxEnsureCapacity_real_T(&b_st, nums, b_k, &re_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, nums, b_k, &pe_emlrtRTEI);
     nums->data[0] = rtNaN;
   } else if (n < a) {
     nums->size[0] = 1;
@@ -182,14 +182,14 @@ real_T bc(const emlrtStack *sp, real_T n, real_T k)
     b_k = nums->size[0] * nums->size[1];
     nums->size[0] = 1;
     nums->size[1] = 1;
-    emxEnsureCapacity_real_T(&b_st, nums, b_k, &re_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, nums, b_k, &pe_emlrtRTEI);
     nums->data[0] = rtNaN;
   } else if (muDoubleScalarFloor(a) == a) {
     b_k = nums->size[0] * nums->size[1];
     nums->size[0] = 1;
     vlen = (int32_T)muDoubleScalarFloor(n - a);
     nums->size[1] = vlen + 1;
-    emxEnsureCapacity_real_T(&b_st, nums, b_k, &re_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, nums, b_k, &pe_emlrtRTEI);
     for (b_k = 0; b_k <= vlen; b_k++) {
       nums->data[b_k] = a + (real_T)b_k;
     }
@@ -197,12 +197,12 @@ real_T bc(const emlrtStack *sp, real_T n, real_T k)
     c_st.site = &he_emlrtRSI;
     eml_float_colon(&c_st, a, n, nums);
   }
-  emxInit_real_T(sp, &dens, 2, &se_emlrtRTEI, true);
+  emxInit_real_T(sp, &dens, 2, &qe_emlrtRTEI, true);
   if (muDoubleScalarIsNaN(k)) {
     b_k = dens->size[0] * dens->size[1];
     dens->size[0] = 1;
     dens->size[1] = 1;
-    emxEnsureCapacity_real_T(sp, dens, b_k, &se_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, dens, b_k, &qe_emlrtRTEI);
     dens->data[0] = rtNaN;
   } else if (k < 1.0) {
     dens->size[0] = 1;
@@ -211,14 +211,14 @@ real_T bc(const emlrtStack *sp, real_T n, real_T k)
     b_k = dens->size[0] * dens->size[1];
     dens->size[0] = 1;
     dens->size[1] = 1;
-    emxEnsureCapacity_real_T(sp, dens, b_k, &se_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, dens, b_k, &qe_emlrtRTEI);
     dens->data[0] = rtNaN;
   } else {
     b_k = dens->size[0] * dens->size[1];
     dens->size[0] = 1;
     vlen = (int32_T)muDoubleScalarFloor(k - 1.0);
     dens->size[1] = vlen + 1;
-    emxEnsureCapacity_real_T(sp, dens, b_k, &se_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, dens, b_k, &qe_emlrtRTEI);
     for (b_k = 0; b_k <= vlen; b_k++) {
       dens->data[b_k] = (real_T)b_k + 1.0;
     }
@@ -318,7 +318,7 @@ real_T bc(const emlrtStack *sp, real_T n, real_T k)
   }
   b_k = nums->size[0] * nums->size[1];
   nums->size[0] = 1;
-  emxEnsureCapacity_real_T(&b_st, nums, b_k, &te_emlrtRTEI);
+  emxEnsureCapacity_real_T(&b_st, nums, b_k, &re_emlrtRTEI);
   vlen = nums->size[1] - 1;
   for (b_k = 0; b_k <= vlen; b_k++) {
     nums->data[b_k] /= dens->data[b_k];

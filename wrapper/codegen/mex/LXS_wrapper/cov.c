@@ -68,7 +68,7 @@ static emlrtRSInfo vv_emlrtRSI = {
                                                                         */
 };
 
-static emlrtRTEInfo yo_emlrtRTEI = {
+static emlrtRTEInfo xo_emlrtRTEI = {
     73,    /* lineNo */
     20,    /* colNo */
     "cov", /* fName */
@@ -77,7 +77,7 @@ static emlrtRTEInfo yo_emlrtRTEI = {
                                                                         */
 };
 
-static emlrtRTEInfo ap_emlrtRTEI = {
+static emlrtRTEInfo yo_emlrtRTEI = {
     71,    /* lineNo */
     20,    /* colNo */
     "cov", /* fName */
@@ -86,7 +86,7 @@ static emlrtRTEInfo ap_emlrtRTEI = {
                                                                         */
 };
 
-static emlrtRTEInfo bp_emlrtRTEI = {
+static emlrtRTEInfo ap_emlrtRTEI = {
     73,    /* lineNo */
     5,     /* colNo */
     "cov", /* fName */
@@ -95,7 +95,7 @@ static emlrtRTEInfo bp_emlrtRTEI = {
                                                                         */
 };
 
-static emlrtRTEInfo cp_emlrtRTEI = {
+static emlrtRTEInfo bp_emlrtRTEI = {
     71,    /* lineNo */
     5,     /* colNo */
     "cov", /* fName */
@@ -135,12 +135,12 @@ void cov(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *xy)
   c_st.tls = b_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
   if (x->size[0] == 1) {
-    emxInit_real_T(sp, &c_x, 1, &ap_emlrtRTEI, true);
+    emxInit_real_T(sp, &c_x, 1, &yo_emlrtRTEI, true);
     st.site = &ov_emlrtRSI;
     LDA = x->size[1];
     i = c_x->size[0];
     c_x->size[0] = x->size[1];
-    emxEnsureCapacity_real_T(&st, c_x, i, &ap_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, c_x, i, &yo_emlrtRTEI);
     for (i = 0; i < LDA; i++) {
       c_x->data[i] = x->data[x->size[0] * i];
     }
@@ -184,15 +184,15 @@ void cov(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *xy)
     i = xy->size[0] * xy->size[1];
     xy->size[0] = 1;
     xy->size[1] = 1;
-    emxEnsureCapacity_real_T(sp, xy, i, &cp_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, xy, i, &bp_emlrtRTEI);
     xy->data[0] = c;
   } else {
-    emxInit_real_T(sp, &b_x, 2, &yo_emlrtRTEI, true);
+    emxInit_real_T(sp, &b_x, 2, &xo_emlrtRTEI, true);
     st.site = &pv_emlrtRSI;
     i = b_x->size[0] * b_x->size[1];
     b_x->size[0] = x->size[0];
     b_x->size[1] = x->size[1];
-    emxEnsureCapacity_real_T(&st, b_x, i, &yo_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, b_x, i, &xo_emlrtRTEI);
     LDA = x->size[0] * x->size[1];
     for (i = 0; i < LDA; i++) {
       b_x->data[i] = x->data[i];
@@ -202,7 +202,7 @@ void cov(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *xy)
     i = xy->size[0] * xy->size[1];
     xy->size[0] = x->size[1];
     xy->size[1] = x->size[1];
-    emxEnsureCapacity_real_T(&st, xy, i, &bp_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, xy, i, &ap_emlrtRTEI);
     LDA = x->size[1] * x->size[1];
     for (i = 0; i < LDA; i++) {
       xy->data[i] = 0.0;
@@ -211,7 +211,7 @@ void cov(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *xy)
       i = xy->size[0] * xy->size[1];
       xy->size[0] = x->size[1];
       xy->size[1] = x->size[1];
-      emxEnsureCapacity_real_T(&st, xy, i, &bp_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, xy, i, &ap_emlrtRTEI);
       LDA = x->size[1] * x->size[1];
       for (i = 0; i < LDA; i++) {
         xy->data[i] = rtNaN;
@@ -242,7 +242,7 @@ void cov(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *xy)
       i = xy->size[0] * xy->size[1];
       xy->size[0] = x->size[1];
       xy->size[1] = x->size[1];
-      emxEnsureCapacity_real_T(&st, xy, i, &bp_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, xy, i, &ap_emlrtRTEI);
       LDA = x->size[1] * x->size[1];
       for (i = 0; i < LDA; i++) {
         xy->data[i] = 0.0;

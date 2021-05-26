@@ -18,8 +18,6 @@
 #include "rt_nonfinite.h"
 #include <math.h>
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 int local_rank(const emxArray_real_T *A)
 {

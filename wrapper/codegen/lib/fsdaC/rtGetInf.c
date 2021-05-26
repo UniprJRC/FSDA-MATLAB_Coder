@@ -18,8 +18,6 @@
 #include "rtGetInf.h"
 #include "rt_nonfinite.h"
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /*
  * Function: rtGetInf
  * ================================================================== Abstract:

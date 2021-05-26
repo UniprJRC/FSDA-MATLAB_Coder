@@ -15,8 +15,6 @@
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void b_mtimes(const emxArray_real_T *A, const emxArray_real_T *B,
               emxArray_real_T *C)

@@ -14,8 +14,6 @@
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Declarations */
 static int thirdOfFive(const emxArray_real_T *v, int ia, int ib);
 

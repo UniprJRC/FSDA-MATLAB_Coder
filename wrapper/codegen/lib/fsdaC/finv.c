@@ -19,8 +19,6 @@
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void b_finv(const emxArray_real_T *p, const emxArray_real_T *v1,
             const emxArray_real_T *v2, emxArray_real_T *x)

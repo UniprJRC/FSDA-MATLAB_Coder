@@ -38,8 +38,6 @@
 #include "rt_nonfinite.h"
 #include <math.h>
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void FSM(emxArray_real_T *Y, const double varargin_4_data[],
          const int varargin_4_size[2], double varargin_8,

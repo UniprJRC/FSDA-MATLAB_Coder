@@ -79,7 +79,7 @@ static emlrtRSInfo ce_emlrtRSI =
                                                                           */
 };
 
-static emlrtRTEInfo ke_emlrtRTEI = {
+static emlrtRTEInfo ie_emlrtRTEI = {
     19,    /* lineNo */
     14,    /* colNo */
     "svd", /* fName */
@@ -88,7 +88,7 @@ static emlrtRTEInfo ke_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo le_emlrtRTEI = {
+static emlrtRTEInfo je_emlrtRTEI = {
     20,     /* lineNo */
     5,      /* colNo */
     "rank", /* fName */
@@ -128,16 +128,16 @@ int32_T local_rank(const emlrtStack *sp, const emxArray_real_T *A)
     c_st.site = &ud_emlrtRSI;
     d_st.site = &vd_emlrtRSI;
     p = flatVectorAllOrAny(&d_st, A);
-    emxInit_real_T(&st, &s, 1, &le_emlrtRTEI, true);
+    emxInit_real_T(&st, &s, 1, &je_emlrtRTEI, true);
     if (p) {
       b_st.site = &sd_emlrtRSI;
       svd(&b_st, A, s);
     } else {
-      emxInit_real_T(&st, &r, 2, &ke_emlrtRTEI, true);
+      emxInit_real_T(&st, &r, 2, &ie_emlrtRTEI, true);
       i = r->size[0] * r->size[1];
       r->size[0] = A->size[0];
       r->size[1] = A->size[1];
-      emxEnsureCapacity_real_T(&st, r, i, &ke_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, r, i, &ie_emlrtRTEI);
       loop_ub = A->size[0] * A->size[1];
       for (i = 0; i < loop_ub; i++) {
         r->data[i] = 0.0;
@@ -147,7 +147,7 @@ int32_T local_rank(const emlrtStack *sp, const emxArray_real_T *A)
       loop_ub = s->size[0];
       i = s->size[0];
       s->size[0] = loop_ub;
-      emxEnsureCapacity_real_T(&st, s, i, &le_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, s, i, &je_emlrtRTEI);
       emxFree_real_T(&r);
       for (i = 0; i < loop_ub; i++) {
         s->data[i] = rtNaN;

@@ -15,8 +15,6 @@
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void b_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
               emxArray_real_T *c)

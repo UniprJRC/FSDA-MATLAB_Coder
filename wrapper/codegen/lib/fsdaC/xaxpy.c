@@ -14,8 +14,6 @@
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void b_xaxpy(int n, double a, const emxArray_real_T *x, int ix0,
              emxArray_real_T *y, int iy0)

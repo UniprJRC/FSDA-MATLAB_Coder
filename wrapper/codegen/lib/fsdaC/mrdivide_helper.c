@@ -17,8 +17,6 @@
 #include "rt_nonfinite.h"
 #include "xzgetrf.h"
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void mrdiv(const emxArray_real_T *A, const emxArray_real_T *B,
            emxArray_real_T *Y)

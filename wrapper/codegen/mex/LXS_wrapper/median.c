@@ -60,7 +60,7 @@ static emlrtRSInfo pj_emlrtRSI = {
     "n.m" /* pathName */
 };
 
-static emlrtRTEInfo ij_emlrtRTEI = {
+static emlrtRTEInfo hj_emlrtRTEI = {
     119,       /* lineNo */
     15,        /* colNo */
     "vmedian", /* fName */
@@ -69,7 +69,7 @@ static emlrtRTEInfo ij_emlrtRTEI = {
     "n.m" /* pName */
 };
 
-static emlrtRTEInfo jj_emlrtRTEI = {
+static emlrtRTEInfo ij_emlrtRTEI = {
     108,       /* lineNo */
     15,        /* colNo */
     "vmedian", /* fName */
@@ -78,7 +78,7 @@ static emlrtRTEInfo jj_emlrtRTEI = {
     "n.m" /* pName */
 };
 
-static emlrtRTEInfo kj_emlrtRTEI = {
+static emlrtRTEInfo jj_emlrtRTEI = {
     1,        /* lineNo */
     14,       /* colNo */
     "median", /* fName */
@@ -119,7 +119,7 @@ real_T median(const emlrtStack *sp, const emxArray_real_T *x)
       check_forloop_overflow_error(&c_st);
     }
     k = 0;
-    emxInit_real_T(&st, &a__4, 1, &kj_emlrtRTEI, true);
+    emxInit_real_T(&st, &a__4, 1, &jj_emlrtRTEI, true);
     do {
       exitg1 = 0;
       if (k <= vlen - 1) {
@@ -213,7 +213,7 @@ real_T median(const emlrtStack *sp, const emxArray_real_T *x)
           if ((vlen & 1) == 0) {
             a__6 = a__4->size[0];
             a__4->size[0] = x->size[0];
-            emxEnsureCapacity_real_T(&st, a__4, a__6, &jj_emlrtRTEI);
+            emxEnsureCapacity_real_T(&st, a__4, a__6, &ij_emlrtRTEI);
             k = x->size[0];
             for (a__6 = 0; a__6 < k; a__6++) {
               a__4->data[a__6] = x->data[a__6];
@@ -232,7 +232,7 @@ real_T median(const emlrtStack *sp, const emxArray_real_T *x)
           } else {
             a__6 = a__4->size[0];
             a__4->size[0] = x->size[0];
-            emxEnsureCapacity_real_T(&st, a__4, a__6, &ij_emlrtRTEI);
+            emxEnsureCapacity_real_T(&st, a__4, a__6, &hj_emlrtRTEI);
             k = x->size[0];
             for (a__6 = 0; a__6 < k; a__6++) {
               a__4->data[a__6] = x->data[a__6];

@@ -14,8 +14,6 @@
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void xgerc(int m, int n, double alpha1, int ix0, const emxArray_real_T *y,
            emxArray_real_T *A, int ia0, int lda)

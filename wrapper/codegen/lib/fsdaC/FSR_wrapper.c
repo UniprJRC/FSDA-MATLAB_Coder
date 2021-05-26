@@ -24,8 +24,6 @@
 #include "rt_nonfinite.h"
 #include <math.h>
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                  bool bsbmfullrank, const double bonflev_data[],
@@ -450,12 +448,11 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  */
   /*          out:   structure which contains the following fields */
   /*  */
-  /*  out.ListOut  = k x 1 vector containing the list of the units declared as
-   */
+  /*  out.ListOut  = row vector containing the list of the units declared as */
   /*                 outliers or NaN if the sample is homogeneous */
   /*  out.outliers = out.ListOut. This field is added for homogeneity with the
    */
-  /*                 other robust estimators. */
+  /*                 other robust estimators and is equal to out.ListOut. */
   /*  out.beta   =  p-by-1 vector containing the estimated regression */
   /*                parameters (in step n-k). */
   /*  out.scale  =  scalar containing the estimate of the scale (sigma). */

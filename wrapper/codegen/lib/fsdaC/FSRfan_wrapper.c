@@ -38,8 +38,6 @@
 #include <math.h>
 #include <stdio.h>
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void FSRfan_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                     bool intercept, bool nocheck, const emxArray_real_T *la,

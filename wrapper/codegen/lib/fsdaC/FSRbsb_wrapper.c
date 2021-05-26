@@ -31,8 +31,6 @@
 #include "rt_nonfinite.h"
 #include <math.h>
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void FSRbsb_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                     const emxArray_real_T *bsb, const emxArray_real_T *bsbsteps,

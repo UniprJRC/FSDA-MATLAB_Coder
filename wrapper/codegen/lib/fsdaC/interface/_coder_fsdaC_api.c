@@ -1001,7 +1001,7 @@ static void emxInitStruct_struct_LXS_T(const emlrtStack *sp,
   emxInit_real_T(sp, &pStruct->beta, 1, doPush);
   emxInit_real_T(sp, &pStruct->residuals, 1, doPush);
   emxInit_real_T(sp, &pStruct->bs, 2, doPush);
-  emxInit_real_T(sp, &pStruct->outliers, 1, doPush);
+  emxInit_real_T(sp, &pStruct->outliers, 2, doPush);
   emxInit_real_T(sp, &pStruct->X, 2, doPush);
   emxInit_real_T(sp, &pStruct->y, 2, doPush);
 }
@@ -2042,7 +2042,7 @@ static const mxArray *n_emlrt_marshallOut(const emlrtStack *sp,
   emlrtSetFieldR2017b(y, 0, (const char_T *)"bs", f_emlrt_marshallOut(u->bs),
                       5);
   emlrtSetFieldR2017b(y, 0, (const char_T *)"outliers",
-                      g_emlrt_marshallOut(u->outliers), 6);
+                      f_emlrt_marshallOut(u->outliers), 6);
   e_y = NULL;
   m = emlrtCreateDoubleScalar(u->conflev);
   emlrtAssign(&e_y, m);

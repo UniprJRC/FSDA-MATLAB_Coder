@@ -18,8 +18,6 @@
 #include "sortIdx.h"
 #include "rt_nonfinite.h"
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 double iqr(const emxArray_real_T *x)
 {

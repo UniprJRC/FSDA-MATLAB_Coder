@@ -35,8 +35,6 @@
 #include <math.h>
 #include <stdio.h>
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
              double INP_n, double INP_p, const emxArray_real_T *INP_mdr,

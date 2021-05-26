@@ -17,8 +17,6 @@
 #include "rt_nonfinite.h"
 #include <math.h>
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void normYJ(const emxArray_real_T *Y, double la, emxArray_real_T *Ytra)
 {

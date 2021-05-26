@@ -18,8 +18,6 @@
 #include "rt_nonfinite.h"
 #include "vvarstd.h"
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void zscore(const emxArray_real_T *x, emxArray_real_T *z)
 {

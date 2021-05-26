@@ -57,10 +57,6 @@
 #include <stdio.h>
 #include <string.h>
 
-/* Custom Source Code */
-
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
-
 /* Function Definitions */
 void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
                    double h, bool intercept, const struct0_T *lshiftlocref,

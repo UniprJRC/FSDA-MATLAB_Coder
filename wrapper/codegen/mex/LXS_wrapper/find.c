@@ -61,7 +61,7 @@ static emlrtRTEInfo cb_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo ie_emlrtRTEI = {
+static emlrtRTEInfo ge_emlrtRTEI = {
     364,    /* lineNo */
     24,     /* colNo */
     "find", /* fName */
@@ -70,7 +70,7 @@ static emlrtRTEInfo ie_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo je_emlrtRTEI = {
+static emlrtRTEInfo he_emlrtRTEI = {
     144,    /* lineNo */
     9,      /* colNo */
     "find", /* fName */
@@ -79,7 +79,7 @@ static emlrtRTEInfo je_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo uf_emlrtRTEI = {
+static emlrtRTEInfo tf_emlrtRTEI = {
     369,    /* lineNo */
     24,     /* colNo */
     "find", /* fName */
@@ -88,7 +88,7 @@ static emlrtRTEInfo uf_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo vf_emlrtRTEI = {
+static emlrtRTEInfo uf_emlrtRTEI = {
     402,    /* lineNo */
     5,      /* colNo */
     "find", /* fName */
@@ -97,7 +97,7 @@ static emlrtRTEInfo vf_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo wf_emlrtRTEI = {
+static emlrtRTEInfo vf_emlrtRTEI = {
     144,    /* lineNo */
     13,     /* colNo */
     "find", /* fName */
@@ -133,12 +133,12 @@ void b_eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
                                   "Coder:builtins:AssertionFailed",
                                   "Coder:builtins:AssertionFailed", 0);
   }
-  emxInit_int32_T(sp, &i, 1, &wf_emlrtRTEI, true);
+  emxInit_int32_T(sp, &i, 1, &vf_emlrtRTEI, true);
   st.site = &xc_emlrtRSI;
   idx = 0;
   b_i = i->size[0];
   i->size[0] = k;
-  emxEnsureCapacity_int32_T(&st, i, b_i, &uf_emlrtRTEI);
+  emxEnsureCapacity_int32_T(&st, i, b_i, &tf_emlrtRTEI);
   b_st.site = &yc_emlrtRSI;
   if ((1 <= x->size[0]) && (x->size[0] > 2147483646)) {
     c_st.site = &ic_emlrtRSI;
@@ -176,7 +176,7 @@ void b_eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
     b_indexShapeCheck(&b_st, i->size[0], iv);
     ii = i->size[0];
     i->size[0] = b_i;
-    emxEnsureCapacity_int32_T(&st, i, ii, &vf_emlrtRTEI);
+    emxEnsureCapacity_int32_T(&st, i, ii, &uf_emlrtRTEI);
   }
   *i_size = i->size[0];
   ii = i->size[0];
@@ -210,7 +210,7 @@ void c_eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
   idx = 0;
   b_i = i->size[0];
   i->size[0] = x->size[0];
-  emxEnsureCapacity_int32_T(&st, i, b_i, &uf_emlrtRTEI);
+  emxEnsureCapacity_int32_T(&st, i, b_i, &tf_emlrtRTEI);
   b_st.site = &yc_emlrtRSI;
   if ((1 <= x->size[0]) && (x->size[0] > 2147483646)) {
     c_st.site = &ic_emlrtRSI;
@@ -252,7 +252,7 @@ void c_eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
     b_indexShapeCheck(&b_st, i->size[0], iv);
     ii = i->size[0];
     i->size[0] = b_i;
-    emxEnsureCapacity_int32_T(&st, i, ii, &je_emlrtRTEI);
+    emxEnsureCapacity_int32_T(&st, i, ii, &he_emlrtRTEI);
   }
 }
 
@@ -278,7 +278,7 @@ void eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
   ii = i->size[0] * i->size[1];
   i->size[0] = 1;
   i->size[1] = x->size[1];
-  emxEnsureCapacity_int32_T(&st, i, ii, &ie_emlrtRTEI);
+  emxEnsureCapacity_int32_T(&st, i, ii, &ge_emlrtRTEI);
   b_st.site = &yc_emlrtRSI;
   if ((1 <= x->size[1]) && (x->size[1] > 2147483646)) {
     c_st.site = &ic_emlrtRSI;
@@ -316,7 +316,7 @@ void eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
     } else {
       i->size[1] = idx;
     }
-    emxEnsureCapacity_int32_T(&st, i, ii, &je_emlrtRTEI);
+    emxEnsureCapacity_int32_T(&st, i, ii, &he_emlrtRTEI);
   }
 }
 

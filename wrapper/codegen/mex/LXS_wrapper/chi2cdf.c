@@ -86,7 +86,7 @@ static emlrtBCInfo gq_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtRTEInfo rr_emlrtRTEI = {
+static emlrtRTEInfo qr_emlrtRTEI = {
     36,       /* lineNo */
     5,        /* colNo */
     "gamcdf", /* fName */
@@ -94,7 +94,7 @@ static emlrtRTEInfo rr_emlrtRTEI = {
                                                                         */
 };
 
-static emlrtRTEInfo sr_emlrtRTEI = {
+static emlrtRTEInfo rr_emlrtRTEI = {
     37,       /* lineNo */
     22,       /* colNo */
     "gamcdf", /* fName */
@@ -102,7 +102,7 @@ static emlrtRTEInfo sr_emlrtRTEI = {
                                                                         */
 };
 
-static emlrtRTEInfo tr_emlrtRTEI = {
+static emlrtRTEInfo sr_emlrtRTEI = {
     38,       /* lineNo */
     22,       /* colNo */
     "gamcdf", /* fName */
@@ -110,7 +110,7 @@ static emlrtRTEInfo tr_emlrtRTEI = {
                                                                         */
 };
 
-static emlrtRTEInfo ur_emlrtRTEI = {
+static emlrtRTEInfo tr_emlrtRTEI = {
     1,        /* lineNo */
     13,       /* colNo */
     "gamcdf", /* fName */
@@ -118,7 +118,7 @@ static emlrtRTEInfo ur_emlrtRTEI = {
                                                                         */
 };
 
-static emlrtRTEInfo vr_emlrtRTEI = {
+static emlrtRTEInfo ur_emlrtRTEI = {
     1,        /* lineNo */
     17,       /* colNo */
     "gamcdf", /* fName */
@@ -145,22 +145,22 @@ void chi2cdf(const emlrtStack *sp, const emxArray_real_T *x, real_T v,
   b_st.prev = &st;
   b_st.tls = st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  emxInit_real_T(sp, &plo, 2, &ur_emlrtRTEI, true);
-  emxInit_real_T(sp, &pup, 2, &vr_emlrtRTEI, true);
+  emxInit_real_T(sp, &plo, 2, &tr_emlrtRTEI, true);
+  emxInit_real_T(sp, &pup, 2, &ur_emlrtRTEI, true);
   a = v / 2.0;
   st.site = &wbb_emlrtRSI;
   i = p->size[0] * p->size[1];
   p->size[0] = x->size[0];
   p->size[1] = x->size[1];
-  emxEnsureCapacity_real_T(&st, p, i, &rr_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, p, i, &qr_emlrtRTEI);
   i = plo->size[0] * plo->size[1];
   plo->size[0] = x->size[0];
   plo->size[1] = x->size[1];
-  emxEnsureCapacity_real_T(&st, plo, i, &sr_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, plo, i, &rr_emlrtRTEI);
   i = pup->size[0] * pup->size[1];
   pup->size[0] = x->size[0];
   pup->size[1] = x->size[1];
-  emxEnsureCapacity_real_T(&st, pup, i, &tr_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, pup, i, &sr_emlrtRTEI);
   i = x->size[0] * x->size[1];
   for (k = 0; k < i; k++) {
     i1 = x->size[0] * x->size[1];

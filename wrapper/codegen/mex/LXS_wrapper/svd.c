@@ -61,7 +61,7 @@ static emlrtRTEInfo j_emlrtRTEI = {
                                                                           */
 };
 
-static emlrtRTEInfo me_emlrtRTEI = {
+static emlrtRTEInfo ke_emlrtRTEI = {
     31,       /* lineNo */
     33,       /* colNo */
     "xgesvd", /* fName */
@@ -70,7 +70,7 @@ static emlrtRTEInfo me_emlrtRTEI = {
     "lapack\\xgesvd.m" /* pName */
 };
 
-static emlrtRTEInfo ne_emlrtRTEI = {
+static emlrtRTEInfo le_emlrtRTEI = {
     90,       /* lineNo */
     20,       /* colNo */
     "xgesvd", /* fName */
@@ -79,7 +79,7 @@ static emlrtRTEInfo ne_emlrtRTEI = {
     "lapack\\xgesvd.m" /* pName */
 };
 
-static emlrtRTEInfo oe_emlrtRTEI = {
+static emlrtRTEInfo me_emlrtRTEI = {
     123,      /* lineNo */
     9,        /* colNo */
     "xgesvd", /* fName */
@@ -88,7 +88,7 @@ static emlrtRTEInfo oe_emlrtRTEI = {
     "lapack\\xgesvd.m" /* pName */
 };
 
-static emlrtRTEInfo pe_emlrtRTEI = {
+static emlrtRTEInfo ne_emlrtRTEI = {
     121,      /* lineNo */
     33,       /* colNo */
     "xgesvd", /* fName */
@@ -97,7 +97,7 @@ static emlrtRTEInfo pe_emlrtRTEI = {
     "lapack\\xgesvd.m" /* pName */
 };
 
-static emlrtRTEInfo qe_emlrtRTEI = {
+static emlrtRTEInfo oe_emlrtRTEI = {
     121,      /* lineNo */
     9,        /* colNo */
     "xgesvd", /* fName */
@@ -129,14 +129,14 @@ void svd(const emlrtStack *sp, const emxArray_real_T *A, emxArray_real_T *U)
   d_st.prev = &c_st;
   d_st.tls = c_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  emxInit_real_T(sp, &b_A, 2, &me_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_A, 2, &ke_emlrtRTEI, true);
   st.site = &xd_emlrtRSI;
   b_st.site = &yd_emlrtRSI;
   c_st.site = &ae_emlrtRSI;
   n = b_A->size[0] * b_A->size[1];
   b_A->size[0] = A->size[0];
   b_A->size[1] = A->size[1];
-  emxEnsureCapacity_real_T(&c_st, b_A, n, &me_emlrtRTEI);
+  emxEnsureCapacity_real_T(&c_st, b_A, n, &ke_emlrtRTEI);
   m = A->size[0] * A->size[1];
   for (n = 0; n < m; n++) {
     b_A->data[n] = A->data[n];
@@ -146,17 +146,17 @@ void svd(const emlrtStack *sp, const emxArray_real_T *A, emxArray_real_T *U)
   m = muIntScalarMin_sint32(n, m);
   n = U->size[0];
   U->size[0] = m;
-  emxEnsureCapacity_real_T(&c_st, U, n, &ne_emlrtRTEI);
+  emxEnsureCapacity_real_T(&c_st, U, n, &le_emlrtRTEI);
   if ((A->size[0] != 0) && (A->size[1] != 0)) {
-    emxInit_real_T(&c_st, &superb, 1, &qe_emlrtRTEI, true);
+    emxInit_real_T(&c_st, &superb, 1, &oe_emlrtRTEI, true);
     if (m > 1) {
       n = superb->size[0];
       superb->size[0] = m - 1;
-      emxEnsureCapacity_real_T(&c_st, superb, n, &pe_emlrtRTEI);
+      emxEnsureCapacity_real_T(&c_st, superb, n, &ne_emlrtRTEI);
     } else {
       n = superb->size[0];
       superb->size[0] = 1;
-      emxEnsureCapacity_real_T(&c_st, superb, n, &oe_emlrtRTEI);
+      emxEnsureCapacity_real_T(&c_st, superb, n, &me_emlrtRTEI);
     }
     info_t = LAPACKE_dgesvd(102, 'N', 'N', (ptrdiff_t)A->size[0],
                             (ptrdiff_t)A->size[1], &b_A->data[0],

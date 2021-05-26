@@ -14,8 +14,6 @@
 #include "fsdaC_data.h"
 #include "rt_nonfinite.h"
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void freq_not_empty_init(void)
 {

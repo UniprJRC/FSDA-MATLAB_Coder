@@ -17,8 +17,6 @@
 #include <stddef.h>
 #include <stdio.h>
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void b_sprintf(double varargin_1)
 {

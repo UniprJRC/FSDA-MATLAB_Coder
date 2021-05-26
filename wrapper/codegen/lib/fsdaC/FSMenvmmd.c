@@ -22,8 +22,6 @@
 #include "rt_nonfinite.h"
 #include <math.h>
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
 {

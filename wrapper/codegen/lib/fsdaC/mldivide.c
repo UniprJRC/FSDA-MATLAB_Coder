@@ -23,8 +23,6 @@
 #include <math.h>
 #include <string.h>
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Declarations */
 static int div_nde_s32_floor(int numerator, int denominator);
 

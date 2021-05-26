@@ -39,8 +39,6 @@
 #include <math.h>
 #include <stdio.h>
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                     const emxArray_real_T *bsb, bool bsbmfullrank,

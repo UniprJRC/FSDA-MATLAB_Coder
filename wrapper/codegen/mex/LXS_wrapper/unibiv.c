@@ -635,265 +635,265 @@ static emlrtBCInfo jm_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtRTEInfo ai_emlrtRTEI = { 195,/* lineNo */
+static emlrtRTEInfo yh_emlrtRTEI = { 195,/* lineNo */
   1,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo bi_emlrtRTEI = { 197,/* lineNo */
+static emlrtRTEInfo ai_emlrtRTEI = { 197,/* lineNo */
   1,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo ci_emlrtRTEI = { 199,/* lineNo */
+static emlrtRTEInfo bi_emlrtRTEI = { 199,/* lineNo */
   1,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo di_emlrtRTEI = { 203,/* lineNo */
+static emlrtRTEInfo ci_emlrtRTEI = { 203,/* lineNo */
   1,                                   /* colNo */
+  "unibiv",                            /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
+};
+
+static emlrtRTEInfo di_emlrtRTEI = { 207,/* lineNo */
+  5,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
 static emlrtRTEInfo ei_emlrtRTEI = { 207,/* lineNo */
-  5,                                   /* colNo */
-  "unibiv",                            /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
-};
-
-static emlrtRTEInfo fi_emlrtRTEI = { 207,/* lineNo */
   7,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo gi_emlrtRTEI = { 494,/* lineNo */
+static emlrtRTEInfo fi_emlrtRTEI = { 494,/* lineNo */
   1,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo hi_emlrtRTEI = { 213,/* lineNo */
+static emlrtRTEInfo gi_emlrtRTEI = { 213,/* lineNo */
   9,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo ii_emlrtRTEI = { 221,/* lineNo */
+static emlrtRTEInfo hi_emlrtRTEI = { 221,/* lineNo */
   13,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo ji_emlrtRTEI = { 218,/* lineNo */
+static emlrtRTEInfo ii_emlrtRTEI = { 218,/* lineNo */
   13,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo ki_emlrtRTEI = { 235,/* lineNo */
+static emlrtRTEInfo ji_emlrtRTEI = { 235,/* lineNo */
   5,                                   /* colNo */
+  "unibiv",                            /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
+};
+
+static emlrtRTEInfo ki_emlrtRTEI = { 251,/* lineNo */
+  16,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
 static emlrtRTEInfo li_emlrtRTEI = { 251,/* lineNo */
-  16,                                  /* colNo */
-  "unibiv",                            /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
-};
-
-static emlrtRTEInfo mi_emlrtRTEI = { 251,/* lineNo */
   32,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo ni_emlrtRTEI = { 251,/* lineNo */
+static emlrtRTEInfo mi_emlrtRTEI = { 251,/* lineNo */
   53,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo oi_emlrtRTEI = { 251,/* lineNo */
+static emlrtRTEInfo ni_emlrtRTEI = { 251,/* lineNo */
   49,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo pi_emlrtRTEI = { 1,/* lineNo */
+static emlrtRTEInfo oi_emlrtRTEI = { 1,/* lineNo */
   16,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo qi_emlrtRTEI = { 251,/* lineNo */
+static emlrtRTEInfo pi_emlrtRTEI = { 251,/* lineNo */
   5,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo ri_emlrtRTEI = { 257,/* lineNo */
+static emlrtRTEInfo qi_emlrtRTEI = { 257,/* lineNo */
   15,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo si_emlrtRTEI = { 257,/* lineNo */
+static emlrtRTEInfo ri_emlrtRTEI = { 257,/* lineNo */
   26,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo ti_emlrtRTEI = { 290,/* lineNo */
+static emlrtRTEInfo si_emlrtRTEI = { 290,/* lineNo */
   15,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo ui_emlrtRTEI = { 295,/* lineNo */
+static emlrtRTEInfo ti_emlrtRTEI = { 295,/* lineNo */
   17,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo vi_emlrtRTEI = { 328,/* lineNo */
+static emlrtRTEInfo ui_emlrtRTEI = { 328,/* lineNo */
   24,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo wi_emlrtRTEI = { 309,/* lineNo */
+static emlrtRTEInfo vi_emlrtRTEI = { 309,/* lineNo */
   21,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo xi_emlrtRTEI = { 344,/* lineNo */
+static emlrtRTEInfo wi_emlrtRTEI = { 344,/* lineNo */
   24,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo yi_emlrtRTEI = { 323,/* lineNo */
+static emlrtRTEInfo xi_emlrtRTEI = { 323,/* lineNo */
   21,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo aj_emlrtRTEI = { 329,/* lineNo */
+static emlrtRTEInfo yi_emlrtRTEI = { 329,/* lineNo */
   24,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo bj_emlrtRTEI = { 344,/* lineNo */
+static emlrtRTEInfo aj_emlrtRTEI = { 344,/* lineNo */
   45,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo cj_emlrtRTEI = { 390,/* lineNo */
+static emlrtRTEInfo bj_emlrtRTEI = { 390,/* lineNo */
   33,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo dj_emlrtRTEI = { 86,/* lineNo */
+static emlrtRTEInfo cj_emlrtRTEI = { 86,/* lineNo */
   13,                                  /* colNo */
   "eml_mtimes_helper",                 /* fName */
   "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\ops\\eml_mtimes_helper.m"/* pName */
 };
 
-static emlrtRTEInfo ej_emlrtRTEI = { 448,/* lineNo */
+static emlrtRTEInfo dj_emlrtRTEI = { 448,/* lineNo */
   13,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo fj_emlrtRTEI = { 456,/* lineNo */
+static emlrtRTEInfo ej_emlrtRTEI = { 456,/* lineNo */
   13,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo gj_emlrtRTEI = { 342,/* lineNo */
+static emlrtRTEInfo fj_emlrtRTEI = { 342,/* lineNo */
   21,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo hj_emlrtRTEI = { 343,/* lineNo */
+static emlrtRTEInfo gj_emlrtRTEI = { 343,/* lineNo */
   21,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo uj_emlrtRTEI = { 27,/* lineNo */
+static emlrtRTEInfo tj_emlrtRTEI = { 27,/* lineNo */
   6,                                   /* colNo */
   "sort",                              /* fName */
   "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\datafun\\sort.m"/* pName */
 };
 
-static emlrtRTEInfo vj_emlrtRTEI = { 516,/* lineNo */
+static emlrtRTEInfo uj_emlrtRTEI = { 516,/* lineNo */
   15,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo wj_emlrtRTEI = { 520,/* lineNo */
+static emlrtRTEInfo vj_emlrtRTEI = { 520,/* lineNo */
   1,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo xj_emlrtRTEI = { 523,/* lineNo */
+static emlrtRTEInfo wj_emlrtRTEI = { 523,/* lineNo */
   8,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo yj_emlrtRTEI = { 524,/* lineNo */
+static emlrtRTEInfo xj_emlrtRTEI = { 524,/* lineNo */
   1,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo ak_emlrtRTEI = { 527,/* lineNo */
+static emlrtRTEInfo yj_emlrtRTEI = { 527,/* lineNo */
   1,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo bk_emlrtRTEI = { 545,/* lineNo */
+static emlrtRTEInfo ak_emlrtRTEI = { 545,/* lineNo */
   3,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo ck_emlrtRTEI = { 546,/* lineNo */
+static emlrtRTEInfo bk_emlrtRTEI = { 546,/* lineNo */
   1,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo dk_emlrtRTEI = { 540,/* lineNo */
+static emlrtRTEInfo ck_emlrtRTEI = { 540,/* lineNo */
   13,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo ek_emlrtRTEI = { 502,/* lineNo */
+static emlrtRTEInfo dk_emlrtRTEI = { 502,/* lineNo */
   14,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo fk_emlrtRTEI = { 520,/* lineNo */
+static emlrtRTEInfo ek_emlrtRTEI = { 520,/* lineNo */
   10,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
@@ -999,7 +999,7 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  emxInit_real_T(sp, &tieloc, 1, &yj_emlrtRTEI, true);
+  emxInit_real_T(sp, &tieloc, 1, &xj_emlrtRTEI, true);
 
   /*  This function is called just in case of C coder translation */
   /*  tiedrankFS is a simplified version of tiedrank */
@@ -1012,36 +1012,36 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
   st.site = &fl_emlrtRSI;
   i = tieloc->size[0];
   tieloc->size[0] = x->size[0];
-  emxEnsureCapacity_real_T(&st, tieloc, i, &uj_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, tieloc, i, &tj_emlrtRTEI);
   loop_ub = x->size[0];
   for (i = 0; i < loop_ub; i++) {
     tieloc->data[i] = x->data[i];
   }
 
-  emxInit_int32_T(&st, &rowidx, 1, &ek_emlrtRTEI, true);
-  emxInit_int32_T(&st, &ii, 1, &gk_emlrtRTEI, true);
+  emxInit_int32_T(&st, &rowidx, 1, &dk_emlrtRTEI, true);
+  emxInit_int32_T(&st, &ii, 1, &fk_emlrtRTEI, true);
   b_st.site = &ll_emlrtRSI;
   sort(&b_st, tieloc, ii);
   i = rowidx->size[0];
   rowidx->size[0] = ii->size[0];
-  emxEnsureCapacity_int32_T(&st, rowidx, i, &ed_emlrtRTEI);
+  emxEnsureCapacity_int32_T(&st, rowidx, i, &dd_emlrtRTEI);
   loop_ub = ii->size[0];
   for (i = 0; i < loop_ub; i++) {
     rowidx->data[i] = ii->data[i];
   }
 
-  emxInit_boolean_T(&st, &b_x, 1, &vj_emlrtRTEI, true);
+  emxInit_boolean_T(&st, &b_x, 1, &uj_emlrtRTEI, true);
   st.site = &gl_emlrtRSI;
   i = b_x->size[0];
   b_x->size[0] = x->size[0];
-  emxEnsureCapacity_boolean_T(&st, b_x, i, &vj_emlrtRTEI);
+  emxEnsureCapacity_boolean_T(&st, b_x, i, &uj_emlrtRTEI);
   loop_ub = x->size[0];
   for (i = 0; i < loop_ub; i++) {
     b_x->data[i] = muDoubleScalarIsNaN(x->data[i]);
   }
 
   b_st.site = &mm_emlrtRSI;
-  emxInit_real_T(&b_st, &y, 2, &fk_emlrtRTEI, true);
+  emxInit_real_T(&b_st, &y, 2, &ek_emlrtRTEI, true);
   c_st.site = &te_emlrtRSI;
   nz = combineVectorElements(&c_st, b_x);
   xLen = (real_T)x->size[0] - (real_T)nz;
@@ -1054,7 +1054,7 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
     i = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = (int32_T)(xLen - 1.0) + 1;
-    emxEnsureCapacity_real_T(sp, y, i, &oc_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, y, i, &cf_emlrtRTEI);
     loop_ub = (int32_T)(xLen - 1.0);
     for (i = 0; i <= loop_ub; i++) {
       y->data[i] = (real_T)i + 1.0;
@@ -1065,10 +1065,10 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
     emlrtNonNegativeCheckR2012b(nz, &eb_emlrtDCI, (emlrtCTX)sp);
   }
 
-  emxInit_real_T(sp, &ranks, 1, &wj_emlrtRTEI, true);
+  emxInit_real_T(sp, &ranks, 1, &vj_emlrtRTEI, true);
   i = ranks->size[0];
   ranks->size[0] = y->size[1] + nz;
-  emxEnsureCapacity_real_T(sp, ranks, i, &wj_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, ranks, i, &vj_emlrtRTEI);
   loop_ub = y->size[1];
   for (i = 0; i < loop_ub; i++) {
     ranks->data[i] = y->data[i];
@@ -1184,7 +1184,7 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
   st.site = &il_emlrtRSI;
   nz = b_x->size[0];
   b_x->size[0] = loop_ub;
-  emxEnsureCapacity_boolean_T(&st, b_x, nz, &xj_emlrtRTEI);
+  emxEnsureCapacity_boolean_T(&st, b_x, nz, &wj_emlrtRTEI);
   for (nz = 0; nz < loop_ub; nz++) {
     b_x->data[nz] = (tieloc->data[nz] >= tieloc->data[i + nz]);
   }
@@ -1193,7 +1193,7 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
   c_eml_find(&b_st, b_x, ii);
   i = tieloc->size[0];
   tieloc->size[0] = ii->size[0] + 1;
-  emxEnsureCapacity_real_T(sp, tieloc, i, &yj_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, tieloc, i, &xj_emlrtRTEI);
   loop_ub = ii->size[0];
   emxFree_boolean_T(&b_x);
   for (i = 0; i < loop_ub; i++) {
@@ -1203,14 +1203,14 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
   tieloc->data[ii->size[0]] = xLen + 2.0;
   i = r->size[0];
   r->size[0] = x->size[0];
-  emxEnsureCapacity_real_T(sp, r, i, &ak_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, r, i, &yj_emlrtRTEI);
   loop_ub = x->size[0];
   for (i = 0; i < loop_ub; i++) {
     r->data[i] = 0.0;
   }
 
   tiecount = 1U;
-  emxInit_real_T(sp, &b_ranks, 1, &dk_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_ranks, 1, &ck_emlrtRTEI, true);
   while (tiecount < (uint32_T)tieloc->size[0]) {
     if (((int32_T)tiecount < 1) || ((int32_T)tiecount > tieloc->size[0])) {
       emlrtDynamicBoundsCheckR2012b((int32_T)tiecount, 1, tieloc->size[0],
@@ -1289,7 +1289,7 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
 
     i1 = b_ranks->size[0];
     b_ranks->size[0] = loop_ub;
-    emxEnsureCapacity_real_T(sp, b_ranks, i1, &dk_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_ranks, i1, &ck_emlrtRTEI);
     for (i1 = 0; i1 < loop_ub; i1++) {
       b_ranks->data[i1] = ranks->data[i + i1];
     }
@@ -1314,7 +1314,7 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
   /*  Broadcast the ranks back out, including NaN where required. */
   i = ii->size[0];
   ii->size[0] = rowidx->size[0];
-  emxEnsureCapacity_int32_T(sp, ii, i, &bk_emlrtRTEI);
+  emxEnsureCapacity_int32_T(sp, ii, i, &ak_emlrtRTEI);
   loop_ub = rowidx->size[0];
   for (i = 0; i < loop_ub; i++) {
     if ((rowidx->data[i] < 1) || (rowidx->data[i] > x->size[0])) {
@@ -1360,7 +1360,7 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
 
   i = r->size[0];
   r->size[0] = x->size[0];
-  emxEnsureCapacity_real_T(sp, r, i, &ck_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, r, i, &bk_emlrtRTEI);
   emlrtHeapReferenceStackLeaveFcnR2012b((emlrtCTX)sp);
 }
 
@@ -3857,7 +3857,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  emxInit_real_T(sp, &bivT, 1, &ai_emlrtRTEI, true);
+  emxInit_real_T(sp, &bivT, 1, &yh_emlrtRTEI, true);
 
   /* unibiv has the purpose of detecting univariate and bivariate outliers */
   /*  */
@@ -4002,36 +4002,36 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
   /*  bivT contains the frequency distribution of biv. outliers */
   i = bivT->size[0];
   bivT->size[0] = Y->size[0];
-  emxEnsureCapacity_real_T(sp, bivT, i, &ai_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, bivT, i, &yh_emlrtRTEI);
   loop_ub = Y->size[0];
   for (i = 0; i < loop_ub; i++) {
     bivT->data[i] = 0.0;
   }
 
-  emxInit_real_T(sp, &univT, 1, &bi_emlrtRTEI, true);
+  emxInit_real_T(sp, &univT, 1, &ai_emlrtRTEI, true);
 
   /*  univT contains the frequency distribution of univ. outliers */
   i = univT->size[0];
   univT->size[0] = Y->size[0];
-  emxEnsureCapacity_real_T(sp, univT, i, &bi_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, univT, i, &ai_emlrtRTEI);
   loop_ub = Y->size[0];
   for (i = 0; i < loop_ub; i++) {
     univT->data[i] = 0.0;
   }
 
-  emxInit_real_T(sp, &MDbiv, 1, &ci_emlrtRTEI, true);
+  emxInit_real_T(sp, &MDbiv, 1, &bi_emlrtRTEI, true);
 
   /*  MDbiv= vector which contains the sum of the bivaraite Mahalanobis distances for each unit */
   i = MDbiv->size[0];
   MDbiv->size[0] = Y->size[0];
-  emxEnsureCapacity_real_T(sp, MDbiv, i, &ci_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, MDbiv, i, &bi_emlrtRTEI);
   loop_ub = Y->size[0];
   for (i = 0; i < loop_ub; i++) {
     MDbiv->data[i] = 0.0;
   }
 
   /*  madcoef=1; */
-  emxInit_real_T(sp, &biv, 2, &fj_emlrtRTEI, true);
+  emxInit_real_T(sp, &biv, 2, &ej_emlrtRTEI, true);
   if (Y->size[0] < 1) {
     biv->size[0] = 1;
     biv->size[1] = 0;
@@ -4039,38 +4039,38 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
     i = biv->size[0] * biv->size[1];
     biv->size[0] = 1;
     biv->size[1] = Y->size[0];
-    emxEnsureCapacity_real_T(sp, biv, i, &oc_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, biv, i, &cf_emlrtRTEI);
     loop_ub = Y->size[0] - 1;
     for (i = 0; i <= loop_ub; i++) {
       biv->data[i] = (real_T)i + 1.0;
     }
   }
 
-  emxInit_real_T(sp, &seq, 1, &di_emlrtRTEI, true);
+  emxInit_real_T(sp, &seq, 1, &ci_emlrtRTEI, true);
   i = seq->size[0];
   seq->size[0] = biv->size[1];
-  emxEnsureCapacity_real_T(sp, seq, i, &di_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, seq, i, &ci_emlrtRTEI);
   loop_ub = biv->size[1];
   for (i = 0; i < loop_ub; i++) {
     seq->data[i] = biv->data[i];
   }
 
   i = Y->size[1];
-  emxInit_real_T(sp, &y, 1, &ei_emlrtRTEI, true);
-  emxInit_real_T(sp, &Ys, 1, &hi_emlrtRTEI, true);
-  emxInit_real_T(sp, &datax, 2, &ki_emlrtRTEI, true);
-  emxInit_real_T(sp, &outy, 2, &qi_emlrtRTEI, true);
-  emxInit_real_T(sp, &Xs, 1, &ui_emlrtRTEI, true);
-  emxInit_real_T(sp, &xrank, 1, &gj_emlrtRTEI, true);
-  emxInit_real_T(sp, &yrank, 1, &hj_emlrtRTEI, true);
-  emxInit_creal_T(sp, &new2, 2, &ej_emlrtRTEI, true);
-  emxInit_boolean_T(sp, &r, 1, &pi_emlrtRTEI, true);
-  emxInit_boolean_T(sp, &r1, 1, &pi_emlrtRTEI, true);
-  emxInit_int32_T(sp, &r2, 1, &li_emlrtRTEI, true);
-  emxInit_int32_T(sp, &ii, 1, &pi_emlrtRTEI, true);
-  emxInit_real_T(sp, &r3, 1, &oi_emlrtRTEI, true);
-  emxInit_real_T(sp, &b_Y, 1, &fi_emlrtRTEI, true);
-  emxInit_creal_T(sp, &b_Xs, 2, &dj_emlrtRTEI, true);
+  emxInit_real_T(sp, &y, 1, &di_emlrtRTEI, true);
+  emxInit_real_T(sp, &Ys, 1, &gi_emlrtRTEI, true);
+  emxInit_real_T(sp, &datax, 2, &ji_emlrtRTEI, true);
+  emxInit_real_T(sp, &outy, 2, &pi_emlrtRTEI, true);
+  emxInit_real_T(sp, &Xs, 1, &ti_emlrtRTEI, true);
+  emxInit_real_T(sp, &xrank, 1, &fj_emlrtRTEI, true);
+  emxInit_real_T(sp, &yrank, 1, &gj_emlrtRTEI, true);
+  emxInit_creal_T(sp, &new2, 2, &dj_emlrtRTEI, true);
+  emxInit_boolean_T(sp, &r, 1, &oi_emlrtRTEI, true);
+  emxInit_boolean_T(sp, &r1, 1, &oi_emlrtRTEI, true);
+  emxInit_int32_T(sp, &r2, 1, &ki_emlrtRTEI, true);
+  emxInit_int32_T(sp, &ii, 1, &oi_emlrtRTEI, true);
+  emxInit_real_T(sp, &r3, 1, &ni_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_Y, 1, &ei_emlrtRTEI, true);
+  emxInit_creal_T(sp, &b_Xs, 2, &cj_emlrtRTEI, true);
   for (il = 0; il < i; il++) {
     /*  il is linked to the rows */
     /*  Ys = vector which contains standardized data */
@@ -4082,10 +4082,10 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
     loop_ub = Y->size[0];
     i1 = y->size[0];
     y->size[0] = Y->size[0];
-    emxEnsureCapacity_real_T(sp, y, i1, &ei_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, y, i1, &di_emlrtRTEI);
     i1 = b_Y->size[0];
     b_Y->size[0] = Y->size[0];
-    emxEnsureCapacity_real_T(sp, b_Y, i1, &fi_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_Y, i1, &ei_emlrtRTEI);
     for (i1 = 0; i1 < loop_ub; i1++) {
       brm = Y->data[i1 + Y->size[0] * il];
       y->data[i1] = brm;
@@ -4097,7 +4097,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
     loop_ub = Y->size[0];
     i1 = b_Y->size[0];
     b_Y->size[0] = Y->size[0];
-    emxEnsureCapacity_real_T(sp, b_Y, i1, &fi_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_Y, i1, &ei_emlrtRTEI);
     for (i1 = 0; i1 < loop_ub; i1++) {
       b_Y->data[i1] = Y->data[i1 + Y->size[0] * il];
     }
@@ -4109,7 +4109,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
       loop_ub = Y->size[0];
       i1 = Ys->size[0];
       Ys->size[0] = Y->size[0];
-      emxEnsureCapacity_real_T(sp, Ys, i1, &hi_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, Ys, i1, &gi_emlrtRTEI);
       for (i1 = 0; i1 < loop_ub; i1++) {
         Ys->data[i1] = (Y->data[i1 + Y->size[0] * il] - Ty) / brm;
       }
@@ -4117,7 +4117,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
       loop_ub = Y->size[0];
       i1 = b_Y->size[0];
       b_Y->size[0] = Y->size[0];
-      emxEnsureCapacity_real_T(sp, b_Y, i1, &fi_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, b_Y, i1, &ei_emlrtRTEI);
       for (i1 = 0; i1 < loop_ub; i1++) {
         b_Y->data[i1] = Y->data[i1 + Y->size[0] * il];
       }
@@ -4128,7 +4128,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
         loop_ub = Y->size[0];
         i1 = b_Y->size[0];
         b_Y->size[0] = Y->size[0];
-        emxEnsureCapacity_real_T(sp, b_Y, i1, &fi_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, b_Y, i1, &ei_emlrtRTEI);
         for (i1 = 0; i1 < loop_ub; i1++) {
           b_Y->data[i1] = Y->data[i1 + Y->size[0] * il];
         }
@@ -4139,7 +4139,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
         loop_ub = Y->size[0];
         i1 = Ys->size[0];
         Ys->size[0] = Y->size[0];
-        emxEnsureCapacity_real_T(sp, Ys, i1, &ji_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, Ys, i1, &ii_emlrtRTEI);
         for (i1 = 0; i1 < loop_ub; i1++) {
           Ys->data[i1] = (Y->data[i1 + Y->size[0] * il] - Ty) / brm;
         }
@@ -4147,7 +4147,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
         loop_ub = Y->size[0];
         i1 = b_Y->size[0];
         b_Y->size[0] = Y->size[0];
-        emxEnsureCapacity_real_T(sp, b_Y, i1, &fi_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, b_Y, i1, &ei_emlrtRTEI);
         for (i1 = 0; i1 < loop_ub; i1++) {
           b_Y->data[i1] = Y->data[i1 + Y->size[0] * il];
         }
@@ -4158,7 +4158,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
         loop_ub = Y->size[0];
         i1 = Ys->size[0];
         Ys->size[0] = Y->size[0];
-        emxEnsureCapacity_real_T(sp, Ys, i1, &ii_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, Ys, i1, &hi_emlrtRTEI);
         for (i1 = 0; i1 < loop_ub; i1++) {
           Ys->data[i1] = (Y->data[i1 + Y->size[0] * il] - Ty) / brm;
         }
@@ -4179,7 +4179,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
     i1 = datax->size[0] * datax->size[1];
     datax->size[0] = seq->size[0];
     datax->size[1] = 2;
-    emxEnsureCapacity_real_T(&b_st, datax, i1, &ki_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, datax, i1, &ji_emlrtRTEI);
     for (i1 = 0; i1 < loop_ub; i1++) {
       datax->data[i1] = seq->data[i1];
     }
@@ -4210,7 +4210,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
     loop_ub = datax->size[0];
     i1 = r->size[0];
     r->size[0] = datax->size[0];
-    emxEnsureCapacity_boolean_T(sp, r, i1, &li_emlrtRTEI);
+    emxEnsureCapacity_boolean_T(sp, r, i1, &ki_emlrtRTEI);
     for (i1 = 0; i1 < loop_ub; i1++) {
       r->data[i1] = (datax->data[i1 + datax->size[0]] > Ty);
     }
@@ -4218,7 +4218,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
     loop_ub = datax->size[0];
     i1 = r1->size[0];
     r1->size[0] = datax->size[0];
-    emxEnsureCapacity_boolean_T(sp, r1, i1, &mi_emlrtRTEI);
+    emxEnsureCapacity_boolean_T(sp, r1, i1, &li_emlrtRTEI);
     for (i1 = 0; i1 < loop_ub; i1++) {
       r1->data[i1] = (datax->data[i1 + datax->size[0]] < mady);
     }
@@ -4236,7 +4236,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
     loop_ub = datax->size[0];
     i1 = b_Y->size[0];
     b_Y->size[0] = datax->size[0];
-    emxEnsureCapacity_real_T(sp, b_Y, i1, &ni_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_Y, i1, &mi_emlrtRTEI);
     for (i1 = 0; i1 < loop_ub; i1++) {
       b_Y->data[i1] = datax->data[i1 + datax->size[0]];
     }
@@ -4245,7 +4245,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
     b_abs(&st, b_Y, r3);
     i1 = r1->size[0];
     r1->size[0] = r3->size[0];
-    emxEnsureCapacity_boolean_T(sp, r1, i1, &oi_emlrtRTEI);
+    emxEnsureCapacity_boolean_T(sp, r1, i1, &ni_emlrtRTEI);
     loop_ub = r3->size[0];
     for (i1 = 0; i1 < loop_ub; i1++) {
       r1->data[i1] = (r3->data[i1] > 3.0);
@@ -4266,7 +4266,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
 
     i1 = r2->size[0];
     r2->size[0] = loop_ub;
-    emxEnsureCapacity_int32_T(sp, r2, i1, &pi_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, r2, i1, &oi_emlrtRTEI);
     loop_ub = 0;
     for (b_i = 0; b_i <= end; b_i++) {
       if (r->data[b_i] || r1->data[b_i]) {
@@ -4279,7 +4279,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
     i1 = outy->size[0] * outy->size[1];
     outy->size[0] = r2->size[0];
     outy->size[1] = 2;
-    emxEnsureCapacity_real_T(sp, outy, i1, &qi_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, outy, i1, &pi_emlrtRTEI);
     for (i1 = 0; i1 < 2; i1++) {
       for (i2 = 0; i2 < loop_ub; i2++) {
         if (r2->data[i2] > datax->size[0]) {
@@ -4298,7 +4298,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
       /*  univariate outliers in vector univT */
       i1 = ii->size[0];
       ii->size[0] = r2->size[0];
-      emxEnsureCapacity_int32_T(sp, ii, i1, &ri_emlrtRTEI);
+      emxEnsureCapacity_int32_T(sp, ii, i1, &qi_emlrtRTEI);
       for (i1 = 0; i1 < loop_ub; i1++) {
         if (outy->data[i1] != (int32_T)muDoubleScalarFloor(outy->data[i1])) {
           emlrtIntegerCheckR2012b(outy->data[i1], &cb_emlrtDCI, (emlrtCTX)sp);
@@ -4316,7 +4316,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
       loop_ub = r2->size[0];
       i1 = r3->size[0];
       r3->size[0] = r2->size[0];
-      emxEnsureCapacity_real_T(sp, r3, i1, &si_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, r3, i1, &ri_emlrtRTEI);
       for (i1 = 0; i1 < loop_ub; i1++) {
         if (outy->data[i1] != (int32_T)muDoubleScalarFloor(outy->data[i1])) {
           emlrtIntegerCheckR2012b(outy->data[i1], &db_emlrtDCI, (emlrtCTX)sp);
@@ -4358,7 +4358,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
         loop_ub = Y->size[0];
         i2 = b_Y->size[0];
         b_Y->size[0] = Y->size[0];
-        emxEnsureCapacity_real_T(sp, b_Y, i2, &ti_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, b_Y, i2, &si_emlrtRTEI);
         for (i2 = 0; i2 < loop_ub; i2++) {
           b_Y->data[i2] = Y->data[i2 + Y->size[0] * ((int32_T)b_jl - 1)];
         }
@@ -4368,7 +4368,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
         loop_ub = Y->size[0];
         i2 = b_Y->size[0];
         b_Y->size[0] = Y->size[0];
-        emxEnsureCapacity_real_T(sp, b_Y, i2, &ti_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, b_Y, i2, &si_emlrtRTEI);
         for (i2 = 0; i2 < loop_ub; i2++) {
           b_Y->data[i2] = Y->data[i2 + Y->size[0] * ((int32_T)b_jl - 1)];
         }
@@ -4380,7 +4380,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
           loop_ub = Y->size[0];
           i2 = Xs->size[0];
           Xs->size[0] = Y->size[0];
-          emxEnsureCapacity_real_T(sp, Xs, i2, &ui_emlrtRTEI);
+          emxEnsureCapacity_real_T(sp, Xs, i2, &ti_emlrtRTEI);
           for (i2 = 0; i2 < loop_ub; i2++) {
             Xs->data[i2] = (Y->data[i2 + Y->size[0] * ((int32_T)b_jl - 1)] - Ty)
               / brm;
@@ -4396,7 +4396,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
           loop_ub = Y->size[0];
           i2 = b_Y->size[0];
           b_Y->size[0] = Y->size[0];
-          emxEnsureCapacity_real_T(sp, b_Y, i2, &ti_emlrtRTEI);
+          emxEnsureCapacity_real_T(sp, b_Y, i2, &si_emlrtRTEI);
           for (i2 = 0; i2 < loop_ub; i2++) {
             b_Y->data[i2] = Y->data[i2 + Y->size[0] * ((int32_T)b_jl - 1)];
           }
@@ -4408,7 +4408,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
             loop_ub = Y->size[0];
             i2 = Xs->size[0];
             Xs->size[0] = Y->size[0];
-            emxEnsureCapacity_real_T(sp, Xs, i2, &wi_emlrtRTEI);
+            emxEnsureCapacity_real_T(sp, Xs, i2, &vi_emlrtRTEI);
             for (i2 = 0; i2 < loop_ub; i2++) {
               Xs->data[i2] = (Y->data[i2 + Y->size[0] * ((int32_T)b_jl - 1)] -
                               Ty) / brm;
@@ -4424,7 +4424,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
             loop_ub = Y->size[0];
             i2 = b_Y->size[0];
             b_Y->size[0] = Y->size[0];
-            emxEnsureCapacity_real_T(sp, b_Y, i2, &ti_emlrtRTEI);
+            emxEnsureCapacity_real_T(sp, b_Y, i2, &si_emlrtRTEI);
             for (i2 = 0; i2 < loop_ub; i2++) {
               b_Y->data[i2] = Y->data[i2 + Y->size[0] * ((int32_T)b_jl - 1)];
             }
@@ -4435,7 +4435,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
             loop_ub = Y->size[0];
             i2 = Xs->size[0];
             Xs->size[0] = Y->size[0];
-            emxEnsureCapacity_real_T(sp, Xs, i2, &yi_emlrtRTEI);
+            emxEnsureCapacity_real_T(sp, Xs, i2, &xi_emlrtRTEI);
             for (i2 = 0; i2 < loop_ub; i2++) {
               Xs->data[i2] = (Y->data[i2 + Y->size[0] * ((int32_T)b_jl - 1)] -
                               Ty) / brm;
@@ -4451,7 +4451,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
 
           i2 = b_Y->size[0];
           b_Y->size[0] = Xs->size[0];
-          emxEnsureCapacity_real_T(sp, b_Y, i2, &vi_emlrtRTEI);
+          emxEnsureCapacity_real_T(sp, b_Y, i2, &ui_emlrtRTEI);
           loop_ub = Xs->size[0];
           for (i2 = 0; i2 < loop_ub; i2++) {
             b_Y->data[i2] = Xs->data[i2] + Ys->data[i2];
@@ -4466,7 +4466,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
 
           i2 = b_Y->size[0];
           b_Y->size[0] = Xs->size[0];
-          emxEnsureCapacity_real_T(sp, b_Y, i2, &aj_emlrtRTEI);
+          emxEnsureCapacity_real_T(sp, b_Y, i2, &yi_emlrtRTEI);
           loop_ub = Xs->size[0];
           for (i2 = 0; i2 < loop_ub; i2++) {
             b_Y->data[i2] = Xs->data[i2] - Ys->data[i2];
@@ -4493,7 +4493,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
           loop_ub = Y->size[0];
           i2 = b_Y->size[0];
           b_Y->size[0] = Y->size[0];
-          emxEnsureCapacity_real_T(sp, b_Y, i2, &ti_emlrtRTEI);
+          emxEnsureCapacity_real_T(sp, b_Y, i2, &si_emlrtRTEI);
           for (i2 = 0; i2 < loop_ub; i2++) {
             b_Y->data[i2] = Y->data[i2 + Y->size[0] * ((int32_T)b_jl - 1)];
           }
@@ -4506,7 +4506,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
           brm = mean(&st, xrank);
           i2 = r3->size[0];
           r3->size[0] = xrank->size[0];
-          emxEnsureCapacity_real_T(sp, r3, i2, &xi_emlrtRTEI);
+          emxEnsureCapacity_real_T(sp, r3, i2, &wi_emlrtRTEI);
           loop_ub = xrank->size[0];
           for (i2 = 0; i2 < loop_ub; i2++) {
             r3->data[i2] = xrank->data[i2] - brm;
@@ -4517,7 +4517,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
           brm = mean(&b_st, yrank);
           i2 = b_Y->size[0];
           b_Y->size[0] = yrank->size[0];
-          emxEnsureCapacity_real_T(&st, b_Y, i2, &bj_emlrtRTEI);
+          emxEnsureCapacity_real_T(&st, b_Y, i2, &aj_emlrtRTEI);
           loop_ub = yrank->size[0];
           for (i2 = 0; i2 < loop_ub; i2++) {
             b_Y->data[i2] = yrank->data[i2] - brm;
@@ -4555,7 +4555,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
         a = 2.0 * b_r;
         i2 = xrank->size[0];
         xrank->size[0] = Xs->size[0];
-        emxEnsureCapacity_real_T(sp, xrank, i2, &cj_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, xrank, i2, &bj_emlrtRTEI);
         loop_ub = Xs->size[0];
         for (i2 = 0; i2 < loop_ub; i2++) {
           xrank->data[i2] = a * Xs->data[i2];
@@ -4924,7 +4924,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
         i2 = b_Xs->size[0] * b_Xs->size[1];
         b_Xs->size[0] = 2;
         b_Xs->size[1] = Xs->size[0];
-        emxEnsureCapacity_creal_T(sp, b_Xs, i2, &dj_emlrtRTEI);
+        emxEnsureCapacity_creal_T(sp, b_Xs, i2, &cj_emlrtRTEI);
         loop_ub = Xs->size[0];
         for (i2 = 0; i2 < loop_ub; i2++) {
           b_Xs->data[2 * i2].re = Xs->data[i2];
@@ -4941,7 +4941,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
         i2 = new2->size[0] * new2->size[1];
         new2->size[0] = 2;
         new2->size[1] = b_Xs->size[1];
-        emxEnsureCapacity_creal_T(sp, new2, i2, &ej_emlrtRTEI);
+        emxEnsureCapacity_creal_T(sp, new2, i2, &dj_emlrtRTEI);
         loop_ub = b_Xs->size[1];
         for (i2 = 0; i2 < 2; i2++) {
           for (i3 = 0; i3 < loop_ub; i3++) {
@@ -4982,7 +4982,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
         i2 = biv->size[0] * biv->size[1];
         biv->size[0] = 1;
         biv->size[1] = n;
-        emxEnsureCapacity_real_T(sp, biv, i2, &fj_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, biv, i2, &ej_emlrtRTEI);
         for (i2 = 0; i2 < n; i2++) {
           biv->data[i2] = 0.0;
         }
@@ -5126,7 +5126,7 @@ void unibiv(LXS_wrapperStackData *SD, const emlrtStack *sp, const
   i = fre->size[0] * fre->size[1];
   fre->size[0] = seq->size[0];
   fre->size[1] = 4;
-  emxEnsureCapacity_real_T(&b_st, fre, i, &gi_emlrtRTEI);
+  emxEnsureCapacity_real_T(&b_st, fre, i, &fi_emlrtRTEI);
   loop_ub = seq->size[0];
   for (i = 0; i < loop_ub; i++) {
     fre->data[i] = seq->data[i];

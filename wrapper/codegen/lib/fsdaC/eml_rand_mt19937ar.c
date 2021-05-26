@@ -13,8 +13,6 @@
 #include "eml_rand_mt19937ar.h"
 #include "rt_nonfinite.h"
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 double eml_rand_mt19937ar(unsigned int b_state[625])
 {

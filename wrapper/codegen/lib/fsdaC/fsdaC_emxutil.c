@@ -16,8 +16,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void c_emxCopyStruct_anonymous_funct(b_anonymous_function *dst,
                                      const b_anonymous_function *src)
@@ -852,7 +850,7 @@ void emxInitStruct_struct_LXS_T(struct_LXS_T *pStruct)
   emxInit_real_T(&pStruct->beta, 1);
   emxInit_real_T(&pStruct->residuals, 1);
   emxInit_real_T(&pStruct->bs, 2);
-  emxInit_real_T(&pStruct->outliers, 1);
+  emxInit_real_T(&pStruct->outliers, 2);
   emxInit_real_T(&pStruct->X, 2);
   emxInit_real_T(&pStruct->y, 2);
 }

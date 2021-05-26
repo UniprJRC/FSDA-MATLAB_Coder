@@ -37,7 +37,7 @@ static emlrtRTEInfo h_emlrtRTEI =
                                                                           */
 };
 
-static emlrtRTEInfo he_emlrtRTEI =
+static emlrtRTEInfo fe_emlrtRTEI =
     {
         56,    /* lineNo */
         20,    /* colNo */
@@ -64,7 +64,7 @@ void b_cat(const emlrtStack *sp, const emxArray_real_T *varargin_1,
   b = y->size[0] * y->size[1];
   y->size[0] = varargin_1->size[0];
   y->size[1] = 11;
-  emxEnsureCapacity_real_T(sp, y, b, &he_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, y, b, &fe_emlrtRTEI);
   j = 0;
   exitg1 = false;
   while ((!exitg1) && (j < 2)) {
@@ -123,7 +123,7 @@ void cat(const emlrtStack *sp, const emxArray_real_T *varargin_1,
   b = y->size[0] * y->size[1];
   y->size[0] = varargin_1->size[0];
   y->size[1] = varargin_2->size[1] + 1;
-  emxEnsureCapacity_real_T(sp, y, b, &he_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, y, b, &fe_emlrtRTEI);
   j = 0;
   exitg1 = false;
   while ((!exitg1) && (j < 2)) {

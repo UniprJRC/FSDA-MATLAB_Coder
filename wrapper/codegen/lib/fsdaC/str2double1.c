@@ -14,8 +14,6 @@
 #include "fsdaC_data.h"
 #include "rt_nonfinite.h"
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 bool b_copydigits(char s1[4], int *idx, const char s[2], int *k,
                   bool allowpoint)

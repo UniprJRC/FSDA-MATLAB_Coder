@@ -609,112 +609,112 @@ static emlrtBCInfo tb_emlrtBCI = {
     0                                                        /* checkKind */
 };
 
-static emlrtRTEInfo ve_emlrtRTEI = {
+static emlrtRTEInfo te_emlrtRTEI = {
     293,                                                  /* lineNo */
     1,                                                    /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRTEInfo we_emlrtRTEI = {
+static emlrtRTEInfo ue_emlrtRTEI = {
     442,                                                  /* lineNo */
     13,                                                   /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRTEInfo xe_emlrtRTEI = {
+static emlrtRTEInfo ve_emlrtRTEI = {
     443,                                                  /* lineNo */
     13,                                                   /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRTEInfo ye_emlrtRTEI = {
+static emlrtRTEInfo we_emlrtRTEI = {
     449,                                                  /* lineNo */
     11,                                                   /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRTEInfo af_emlrtRTEI = {
+static emlrtRTEInfo xe_emlrtRTEI = {
     69,                                                   /* lineNo */
     5,                                                    /* colNo */
     "combsFS",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pName */
 };
 
-static emlrtRTEInfo bf_emlrtRTEI = {
+static emlrtRTEInfo ye_emlrtRTEI = {
     69,                                                   /* lineNo */
     1,                                                    /* colNo */
     "combsFS",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pName */
 };
 
-static emlrtRTEInfo cf_emlrtRTEI = {
+static emlrtRTEInfo af_emlrtRTEI = {
     96,                                                   /* lineNo */
     9,                                                    /* colNo */
     "combsFS",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pName */
 };
 
-static emlrtRTEInfo df_emlrtRTEI = {
+static emlrtRTEInfo bf_emlrtRTEI = {
     349,                                                  /* lineNo */
     5,                                                    /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRTEInfo ef_emlrtRTEI = {
+static emlrtRTEInfo df_emlrtRTEI = {
     109,                                                  /* lineNo */
     22,                                                   /* colNo */
     "combsFS",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pName */
 };
 
-static emlrtRTEInfo ff_emlrtRTEI = {
+static emlrtRTEInfo ef_emlrtRTEI = {
     439,                                                  /* lineNo */
     17,                                                   /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRTEInfo gf_emlrtRTEI = {
+static emlrtRTEInfo ff_emlrtRTEI = {
     118,                                                  /* lineNo */
     40,                                                   /* colNo */
     "combsFS",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pName */
 };
 
-static emlrtRTEInfo hf_emlrtRTEI = {
+static emlrtRTEInfo gf_emlrtRTEI = {
     363,                                                  /* lineNo */
     13,                                                   /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRTEInfo if_emlrtRTEI = {
+static emlrtRTEInfo hf_emlrtRTEI = {
     363,                                                  /* lineNo */
     9,                                                    /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRTEInfo jf_emlrtRTEI = {
+static emlrtRTEInfo if_emlrtRTEI = {
     455,                                                  /* lineNo */
     21,                                                   /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRTEInfo kf_emlrtRTEI = {
+static emlrtRTEInfo jf_emlrtRTEI = {
     394,                                                  /* lineNo */
     21,                                                   /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRTEInfo lf_emlrtRTEI = {
+static emlrtRTEInfo kf_emlrtRTEI = {
     414,                                                  /* lineNo */
     21,                                                   /* colNo */
     "subsets",                                            /* fName */
@@ -1209,12 +1209,12 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
   /* } */
   /*  Beginning of code */
   /*  We cache the MATLAB memory information for better performance. */
-  emxInit_real_T(sp, &seq, 2, &ve_emlrtRTEI, true);
+  emxInit_real_T(sp, &seq, 2, &te_emlrtRTEI, true);
   if (muDoubleScalarIsNaN(n)) {
     i = seq->size[0] * seq->size[1];
     seq->size[0] = 1;
     seq->size[1] = 1;
-    emxEnsureCapacity_real_T(sp, seq, i, &ve_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, seq, i, &te_emlrtRTEI);
     seq->data[0] = rtNaN;
   } else if (n < 1.0) {
     seq->size[0] = 1;
@@ -1223,14 +1223,14 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
     i = seq->size[0] * seq->size[1];
     seq->size[0] = 1;
     seq->size[1] = 1;
-    emxEnsureCapacity_real_T(sp, seq, i, &ve_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, seq, i, &te_emlrtRTEI);
     seq->data[0] = rtNaN;
   } else {
     i = seq->size[0] * seq->size[1];
     seq->size[0] = 1;
     loop_ub = (int32_T)muDoubleScalarFloor(n - 1.0);
     seq->size[1] = loop_ub + 1;
-    emxEnsureCapacity_real_T(sp, seq, i, &ve_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, seq, i, &te_emlrtRTEI);
     for (i = 0; i <= loop_ub; i++) {
       seq->data[i] = (real_T)i + 1.0;
     }
@@ -1258,9 +1258,9 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
   /*  nselected = size(C,1), number of p-subsets to be selected. */
   /*  rndsi = vector of nselected indexes, randomly chosen between 1 e ncomb. */
   /*  Constants that determine the method used to extract the p-subsets */
-  emxInit_real_T(sp, &pascalM, 2, &kf_emlrtRTEI, true);
-  emxInit_real_T(sp, &s, 2, &lf_emlrtRTEI, true);
-  emxInit_real_T(sp, &b_seq, 1, &cf_emlrtRTEI, true);
+  emxInit_real_T(sp, &pascalM, 2, &jf_emlrtRTEI, true);
+  emxInit_real_T(sp, &s, 2, &kf_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_seq, 1, &af_emlrtRTEI, true);
   if ((nsamp == 0.0) || (ncomb <= 5.0E+7)) {
     if (nsamp == 0.0) {
       if ((ncomb > 100000.0) && msg) {
@@ -1344,7 +1344,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
     i = s->size[0] * s->size[1];
     s->size[0] = 1;
     s->size[1] = seq->size[1];
-    emxEnsureCapacity_real_T(&st, s, i, &af_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, s, i, &xe_emlrtRTEI);
     loop_ub = seq->size[1];
     for (i = 0; i < loop_ub; i++) {
       s->data[i] = seq->data[i];
@@ -1352,7 +1352,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
     i = seq->size[0] * seq->size[1];
     seq->size[0] = 1;
     seq->size[1] = s->size[1];
-    emxEnsureCapacity_real_T(&st, seq, i, &bf_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, seq, i, &ye_emlrtRTEI);
     loop_ub = s->size[1];
     for (i = 0; i < loop_ub; i++) {
       seq->data[i] = s->data[i];
@@ -1367,7 +1367,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
       i = C->size[0] * C->size[1];
       C->size[0] = 1;
       C->size[1] = seq->size[1];
-      emxEnsureCapacity_real_T(&st, C, i, &df_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, C, i, &bf_emlrtRTEI);
       loop_ub = seq->size[1];
       for (i = 0; i < loop_ub; i++) {
         C->data[i] = seq->data[i];
@@ -1375,7 +1375,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
     } else if (p == 1.0) {
       i = b_seq->size[0];
       b_seq->size[0] = seq->size[1];
-      emxEnsureCapacity_real_T(&st, b_seq, i, &cf_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, b_seq, i, &af_emlrtRTEI);
       loop_ub = seq->size[1];
       for (i = 0; i < loop_ub; i++) {
         b_seq->data[i] = seq->data[i];
@@ -1383,7 +1383,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
       i = C->size[0] * C->size[1];
       C->size[0] = seq->size[1];
       C->size[1] = 1;
-      emxEnsureCapacity_real_T(&st, C, i, &df_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, C, i, &bf_emlrtRTEI);
       loop_ub = seq->size[1];
       for (i = 0; i < loop_ub; i++) {
         C->data[i] = b_seq->data[i];
@@ -1408,7 +1408,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
       i = C->size[0] * C->size[1];
       C->size[0] = (int32_T)maxx;
       C->size[1] = (int32_T)p;
-      emxEnsureCapacity_real_T(&st, C, i, &df_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, C, i, &bf_emlrtRTEI);
       if (maxx != d) {
         emlrtIntegerCheckR2012b(maxx, &r_emlrtDCI, &st);
       }
@@ -1441,7 +1441,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
         i1 = s->size[0] * s->size[1];
         s->size[0] = 1;
         s->size[1] = 1;
-        emxEnsureCapacity_real_T(&c_st, s, i1, &oc_emlrtRTEI);
+        emxEnsureCapacity_real_T(&c_st, s, i1, &cf_emlrtRTEI);
         s->data[0] = rtNaN;
       } else if (seq->size[1] < p) {
         s->size[0] = 1;
@@ -1450,7 +1450,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
         i1 = s->size[0] * s->size[1];
         s->size[0] = 1;
         s->size[1] = (int32_T)((real_T)seq->size[1] - p) + 1;
-        emxEnsureCapacity_real_T(&c_st, s, i1, &oc_emlrtRTEI);
+        emxEnsureCapacity_real_T(&c_st, s, i1, &cf_emlrtRTEI);
         loop_ub = (int32_T)((real_T)seq->size[1] - p);
         for (i1 = 0; i1 <= loop_ub; i1++) {
           s->data[i1] = p + (real_T)i1;
@@ -1461,7 +1461,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
       }
       i1 = b_seq->size[0];
       b_seq->size[0] = s->size[1];
-      emxEnsureCapacity_real_T(&st, b_seq, i1, &ef_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, b_seq, i1, &df_emlrtRTEI);
       loop_ub = s->size[1];
       for (i1 = 0; i1 < loop_ub; i1++) {
         b_seq->data[i1] = s->data[i1];
@@ -1600,7 +1600,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
           i3 = pascalM->size[0] * pascalM->size[1];
           pascalM->size[0] = loop_ub;
           pascalM->size[1] = ii_data;
-          emxEnsureCapacity_real_T(&st, pascalM, i3, &gf_emlrtRTEI);
+          emxEnsureCapacity_real_T(&st, pascalM, i3, &ff_emlrtRTEI);
           for (i3 = 0; i3 < ii_data; i3++) {
             for (i4 = 0; i4 < loop_ub; i4++) {
               pascalM->data[i4 + pascalM->size[0] * i3] =
@@ -1661,7 +1661,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
         i = s->size[0] * s->size[1];
         s->size[0] = 1;
         s->size[1] = seq->size[1];
-        emxEnsureCapacity_real_T(&st, s, i, &oc_emlrtRTEI);
+        emxEnsureCapacity_real_T(&st, s, i, &cf_emlrtRTEI);
         loop_ub = seq->size[1] - 1;
         for (i = 0; i <= loop_ub; i++) {
           s->data[i] = (real_T)i + 1.0;
@@ -1892,7 +1892,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
       i = pascalM->size[0] * pascalM->size[1];
       pascalM->size[0] = seq->size[1];
       pascalM->size[1] = C->size[1];
-      emxEnsureCapacity_real_T(sp, pascalM, i, &hf_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, pascalM, i, &gf_emlrtRTEI);
       for (i = 0; i <= ii_data; i++) {
         loop_ub = seq->size[1];
         for (i1 = 0; i1 < loop_ub; i1++) {
@@ -1911,7 +1911,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
       i = C->size[0] * C->size[1];
       C->size[0] = pascalM->size[0];
       C->size[1] = pascalM->size[1];
-      emxEnsureCapacity_real_T(sp, C, i, &if_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, C, i, &hf_emlrtRTEI);
       loop_ub = pascalM->size[0] * pascalM->size[1];
       for (i = 0; i < loop_ub; i++) {
         C->data[i] = pascalM->data[i];
@@ -2138,7 +2138,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
         i = pascalM->size[0] * pascalM->size[1];
         pascalM->size[0] = 1;
         pascalM->size[1] = 1;
-        emxEnsureCapacity_real_T(sp, pascalM, i, &ff_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, pascalM, i, &ef_emlrtRTEI);
         pascalM->data[0] = 0.0;
         /*  C coder initialization */
       }
@@ -2146,13 +2146,13 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
       i = seq->size[0] * seq->size[1];
       seq->size[0] = 1;
       seq->size[1] = 1;
-      emxEnsureCapacity_real_T(sp, seq, i, &we_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, seq, i, &ue_emlrtRTEI);
       seq->data[0] = 0.0;
       /*  C coder initialization */
       i = pascalM->size[0] * pascalM->size[1];
       pascalM->size[0] = 1;
       pascalM->size[1] = 1;
-      emxEnsureCapacity_real_T(sp, pascalM, i, &xe_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, pascalM, i, &ve_emlrtRTEI);
       pascalM->data[0] = 0.0;
       /*  C coder initialization */
     }
@@ -2171,7 +2171,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
     C->size[0] = (int32_T)nsamp;
     b_n = (int32_T)p;
     C->size[1] = (int32_T)p;
-    emxEnsureCapacity_real_T(sp, C, i, &ye_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, C, i, &we_emlrtRTEI);
     emlrtForLoopVectorCheckR2021a(1.0, 1.0, nsamp, mxDOUBLE_CLASS,
                                   (int32_T)nsamp, &r_emlrtRTEI, (emlrtCTX)sp);
     if (0 <= (int32_T)nsamp - 1) {
@@ -2524,7 +2524,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
           i = s->size[0] * s->size[1];
           s->size[0] = 1;
           s->size[1] = (int32_T)p;
-          emxEnsureCapacity_real_T(&st, s, i, &jf_emlrtRTEI);
+          emxEnsureCapacity_real_T(&st, s, i, &if_emlrtRTEI);
           for (i = 0; i < b_n; i++) {
             s->data[i] = 0.0;
           }

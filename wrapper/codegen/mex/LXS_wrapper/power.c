@@ -35,7 +35,7 @@ static emlrtRSInfo bn_emlrtRSI = {
     "internal\\applyBinaryScalarFunction.m" /* pathName */
 };
 
-static emlrtRTEInfo jk_emlrtRTEI = {
+static emlrtRTEInfo ik_emlrtRTEI = {
     127,                         /* lineNo */
     6,                           /* colNo */
     "applyBinaryScalarFunction", /* fName */
@@ -74,7 +74,7 @@ void b_power(const emlrtStack *sp, const emxArray_real_T *a, emxArray_real_T *y)
   nx = y->size[0] * y->size[1];
   y->size[0] = a->size[0];
   y->size[1] = a->size[1];
-  emxEnsureCapacity_real_T(&d_st, y, nx, &jk_emlrtRTEI);
+  emxEnsureCapacity_real_T(&d_st, y, nx, &ik_emlrtRTEI);
   nx = a->size[0] * a->size[1];
   e_st.site = &bn_emlrtRSI;
   if ((1 <= nx) && (nx > 2147483646)) {
@@ -114,7 +114,7 @@ void power(const emlrtStack *sp, const emxArray_real_T *a, emxArray_real_T *y)
   d_st.site = &pe_emlrtRSI;
   nx = y->size[0];
   y->size[0] = a->size[0];
-  emxEnsureCapacity_real_T(&d_st, y, nx, &jk_emlrtRTEI);
+  emxEnsureCapacity_real_T(&d_st, y, nx, &ik_emlrtRTEI);
   nx = a->size[0];
   e_st.site = &bn_emlrtRSI;
   if ((1 <= a->size[0]) && (a->size[0] > 2147483646)) {

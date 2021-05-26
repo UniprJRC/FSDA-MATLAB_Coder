@@ -17,8 +17,6 @@
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void b_chi2inv(const emxArray_real_T *p, double v, emxArray_real_T *x)
 {

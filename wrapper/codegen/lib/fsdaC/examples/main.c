@@ -52,8 +52,6 @@
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Declarations */
 static emxArray_real_T *argInit_Unboundedx1_real_T(void);
 

@@ -100,70 +100,70 @@ static emlrtBCInfo ns_emlrtBCI = {
     0                                                    /* checkKind */
 };
 
-static emlrtRTEInfo rx_emlrtRTEI = {
+static emlrtRTEInfo qx_emlrtRTEI = {
     94,                                                 /* lineNo */
     22,                                                 /* colNo */
     "chkinputM",                                        /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities\\chkinputM.m" /* pName */
 };
 
-static emlrtRTEInfo sx_emlrtRTEI = {
+static emlrtRTEInfo rx_emlrtRTEI = {
     1,                                                  /* lineNo */
     20,                                                 /* colNo */
     "chkinputM",                                        /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities\\chkinputM.m" /* pName */
 };
 
-static emlrtRTEInfo tx_emlrtRTEI = {
+static emlrtRTEInfo sx_emlrtRTEI = {
     98,                                                 /* lineNo */
     7,                                                  /* colNo */
     "chkinputM",                                        /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities\\chkinputM.m" /* pName */
 };
 
-static emlrtRTEInfo ux_emlrtRTEI = {
+static emlrtRTEInfo tx_emlrtRTEI = {
     98,                                                 /* lineNo */
     5,                                                  /* colNo */
     "chkinputM",                                        /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities\\chkinputM.m" /* pName */
 };
 
-static emlrtRTEInfo vx_emlrtRTEI = {
+static emlrtRTEInfo ux_emlrtRTEI = {
     102,                                                /* lineNo */
     22,                                                 /* colNo */
     "chkinputM",                                        /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities\\chkinputM.m" /* pName */
 };
 
-static emlrtRTEInfo wx_emlrtRTEI = {
+static emlrtRTEInfo vx_emlrtRTEI = {
     102,                                                /* lineNo */
     5,                                                  /* colNo */
     "chkinputM",                                        /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities\\chkinputM.m" /* pName */
 };
 
-static emlrtRTEInfo xx_emlrtRTEI = {
+static emlrtRTEInfo wx_emlrtRTEI = {
     104,                                                /* lineNo */
     13,                                                 /* colNo */
     "chkinputM",                                        /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities\\chkinputM.m" /* pName */
 };
 
-static emlrtRTEInfo yx_emlrtRTEI = {
+static emlrtRTEInfo xx_emlrtRTEI = {
     97,                                                 /* lineNo */
     5,                                                  /* colNo */
     "chkinputM",                                        /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities\\chkinputM.m" /* pName */
 };
 
-static emlrtRTEInfo ay_emlrtRTEI = {
+static emlrtRTEInfo yx_emlrtRTEI = {
     98,                                                 /* lineNo */
     9,                                                  /* colNo */
     "chkinputM",                                        /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities\\chkinputM.m" /* pName */
 };
 
-static emlrtRTEInfo by_emlrtRTEI = {
+static emlrtRTEInfo ay_emlrtRTEI = {
     94,                                                 /* lineNo */
     20,                                                 /* colNo */
     "chkinputM",                                        /* fName */
@@ -337,34 +337,34 @@ void chkinputM(const emlrtStack *sp, emxArray_real_T *X)
     b_st.site = &jib_emlrtRSI;
     o_error(&b_st, b_y, c_y, &d_emlrtMCI);
   }
-  emxInit_real_T(sp, &y, 1, &by_emlrtRTEI, true);
-  emxInit_real_T(sp, &r, 1, &rx_emlrtRTEI, true);
+  emxInit_real_T(sp, &y, 1, &ay_emlrtRTEI, true);
+  emxInit_real_T(sp, &r, 1, &qx_emlrtRTEI, true);
   /*  Check dimension consistency of X and y */
   st.site = &th_emlrtRSI;
   b_st.site = &gc_emlrtRSI;
   b_m = X->size[1];
   i = r->size[0];
   r->size[0] = b_m;
-  emxEnsureCapacity_real_T(&st, r, i, &rx_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, r, i, &qx_emlrtRTEI);
   for (i = 0; i < b_m; i++) {
     r->data[i] = 1.0;
   }
-  emxInit_boolean_T(&st, &ok, 1, &yx_emlrtRTEI, true);
+  emxInit_boolean_T(&st, &ok, 1, &xx_emlrtRTEI, true);
   b_st.site = &fc_emlrtRSI;
   mtimes(&b_st, X, r, y);
   /*  Observations with missing or infinite values are removed from X and y */
   i = ok->size[0];
   ok->size[0] = y->size[0];
-  emxEnsureCapacity_boolean_T(sp, ok, i, &ax_emlrtRTEI);
+  emxEnsureCapacity_boolean_T(sp, ok, i, &yw_emlrtRTEI);
   loop_ub = y->size[0];
   emxFree_real_T(&r);
   for (i = 0; i < loop_ub; i++) {
     ok->data[i] = muDoubleScalarIsInf(y->data[i]);
   }
-  emxInit_boolean_T(sp, &r1, 1, &pg_emlrtRTEI, true);
+  emxInit_boolean_T(sp, &r1, 1, &og_emlrtRTEI, true);
   i = r1->size[0];
   r1->size[0] = y->size[0];
-  emxEnsureCapacity_boolean_T(sp, r1, i, &pg_emlrtRTEI);
+  emxEnsureCapacity_boolean_T(sp, r1, i, &og_emlrtRTEI);
   loop_ub = y->size[0];
   for (i = 0; i < loop_ub; i++) {
     r1->data[i] = muDoubleScalarIsNaN(y->data[i]);
@@ -382,10 +382,10 @@ void chkinputM(const emlrtStack *sp, emxArray_real_T *X)
       b_m++;
     }
   }
-  emxInit_int32_T(sp, &r2, 1, &ay_emlrtRTEI, true);
+  emxInit_int32_T(sp, &r2, 1, &yx_emlrtRTEI, true);
   i = r2->size[0];
   r2->size[0] = b_m;
-  emxEnsureCapacity_int32_T(sp, r2, i, &sx_emlrtRTEI);
+  emxEnsureCapacity_int32_T(sp, r2, i, &rx_emlrtRTEI);
   b_m = 0;
   for (i = 0; i <= n; i++) {
     if (ok->data[i]) {
@@ -394,13 +394,13 @@ void chkinputM(const emlrtStack *sp, emxArray_real_T *X)
     }
   }
   emxFree_boolean_T(&ok);
-  emxInit_real_T(sp, &b_X, 2, &tx_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_X, 2, &sx_emlrtRTEI, true);
   b_m = X->size[0];
   n = X->size[1] - 1;
   i = b_X->size[0] * b_X->size[1];
   b_X->size[0] = r2->size[0];
   b_X->size[1] = n + 1;
-  emxEnsureCapacity_real_T(sp, b_X, i, &tx_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, b_X, i, &sx_emlrtRTEI);
   for (i = 0; i <= n; i++) {
     loop_ub = r2->size[0];
     for (b_n = 0; b_n < loop_ub; b_n++) {
@@ -416,7 +416,7 @@ void chkinputM(const emlrtStack *sp, emxArray_real_T *X)
   i = X->size[0] * X->size[1];
   X->size[0] = b_X->size[0];
   X->size[1] = b_X->size[1];
-  emxEnsureCapacity_real_T(sp, X, i, &ux_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, X, i, &tx_emlrtRTEI);
   loop_ub = b_X->size[1];
   for (i = 0; i < loop_ub; i++) {
     b_m = b_X->size[0];
@@ -441,7 +441,7 @@ void chkinputM(const emlrtStack *sp, emxArray_real_T *X)
                                   "Coder:toolbox:eml_min_or_max_varDimZero",
                                   "Coder:toolbox:eml_min_or_max_varDimZero", 0);
   }
-  emxInit_real_T(&d_st, &constcols, 2, &wx_emlrtRTEI, true);
+  emxInit_real_T(&d_st, &constcols, 2, &vx_emlrtRTEI, true);
   e_st.site = &oc_emlrtRSI;
   f_st.site = &pc_emlrtRSI;
   g_st.site = &qc_emlrtRSI;
@@ -450,7 +450,7 @@ void chkinputM(const emlrtStack *sp, emxArray_real_T *X)
   i = constcols->size[0] * constcols->size[1];
   constcols->size[0] = 1;
   constcols->size[1] = X->size[1];
-  emxEnsureCapacity_real_T(&g_st, constcols, i, &kg_emlrtRTEI);
+  emxEnsureCapacity_real_T(&g_st, constcols, i, &jg_emlrtRTEI);
   if (X->size[1] >= 1) {
     h_st.site = &sc_emlrtRSI;
     if ((1 <= X->size[1]) && (X->size[1] > 2147483646)) {
@@ -489,7 +489,7 @@ void chkinputM(const emlrtStack *sp, emxArray_real_T *X)
                                   "Coder:toolbox:eml_min_or_max_varDimZero",
                                   "Coder:toolbox:eml_min_or_max_varDimZero", 0);
   }
-  emxInit_real_T(&d_st, &r3, 2, &sx_emlrtRTEI, true);
+  emxInit_real_T(&d_st, &r3, 2, &rx_emlrtRTEI, true);
   e_st.site = &oc_emlrtRSI;
   f_st.site = &pc_emlrtRSI;
   g_st.site = &qc_emlrtRSI;
@@ -498,7 +498,7 @@ void chkinputM(const emlrtStack *sp, emxArray_real_T *X)
   i = r3->size[0] * r3->size[1];
   r3->size[0] = 1;
   r3->size[1] = X->size[1];
-  emxEnsureCapacity_real_T(&g_st, r3, i, &kg_emlrtRTEI);
+  emxEnsureCapacity_real_T(&g_st, r3, i, &jg_emlrtRTEI);
   if (X->size[1] >= 1) {
     h_st.site = &sc_emlrtRSI;
     if ((1 <= X->size[1]) && (X->size[1] > 2147483646)) {
@@ -528,7 +528,7 @@ void chkinputM(const emlrtStack *sp, emxArray_real_T *X)
       }
     }
   }
-  emxInit_boolean_T(&g_st, &b_constcols, 2, &vx_emlrtRTEI, true);
+  emxInit_boolean_T(&g_st, &b_constcols, 2, &ux_emlrtRTEI, true);
   tmp_size[0] = (*(int32_T(*)[2])constcols->size)[0];
   tmp_size[1] = (*(int32_T(*)[2])constcols->size)[1];
   b_tmp_size[0] = (*(int32_T(*)[2])r3->size)[0];
@@ -539,19 +539,19 @@ void chkinputM(const emlrtStack *sp, emxArray_real_T *X)
   i = b_constcols->size[0] * b_constcols->size[1];
   b_constcols->size[0] = 1;
   b_constcols->size[1] = constcols->size[1];
-  emxEnsureCapacity_boolean_T(&st, b_constcols, i, &vx_emlrtRTEI);
+  emxEnsureCapacity_boolean_T(&st, b_constcols, i, &ux_emlrtRTEI);
   loop_ub = constcols->size[1];
   for (i = 0; i < loop_ub; i++) {
     b_constcols->data[i] = (constcols->data[i] - r3->data[i] == 0.0);
   }
   emxFree_real_T(&r3);
-  emxInit_int32_T(&st, &ii, 2, &gk_emlrtRTEI, true);
+  emxInit_int32_T(&st, &ii, 2, &fk_emlrtRTEI, true);
   b_st.site = &wc_emlrtRSI;
   eml_find(&b_st, b_constcols, ii);
   i = constcols->size[0] * constcols->size[1];
   constcols->size[0] = 1;
   constcols->size[1] = ii->size[1];
-  emxEnsureCapacity_real_T(&st, constcols, i, &wx_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, constcols, i, &vx_emlrtRTEI);
   loop_ub = ii->size[1];
   emxFree_boolean_T(&b_constcols);
   for (i = 0; i < loop_ub; i++) {
@@ -562,7 +562,7 @@ void chkinputM(const emlrtStack *sp, emxArray_real_T *X)
     i = ii->size[0] * ii->size[1];
     ii->size[0] = 1;
     ii->size[1] = constcols->size[1];
-    emxEnsureCapacity_int32_T(sp, ii, i, &xx_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, ii, i, &wx_emlrtRTEI);
     for (i = 0; i < loop_ub; i++) {
       ii->data[i] = (int32_T)constcols->data[i];
     }

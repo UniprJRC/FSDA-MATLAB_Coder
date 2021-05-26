@@ -14,8 +14,6 @@
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 bool isequal(const emxArray_real_T *varargin_1,
              const emxArray_real_T *varargin_2)

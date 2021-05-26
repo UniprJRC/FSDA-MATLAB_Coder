@@ -25,8 +25,6 @@
 #include "rt_nonfinite.h"
 #include <math.h>
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Declarations */
 static void
 ALSbsxfun(const captured_var *reftolALS, const captured_var *refstepsALS,

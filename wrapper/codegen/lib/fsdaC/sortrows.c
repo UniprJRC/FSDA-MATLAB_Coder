@@ -17,8 +17,6 @@
 #include "sortrowsLE.h"
 #include "rt_nonfinite.h"
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void b_sortrows(emxArray_real_T *y)
 {

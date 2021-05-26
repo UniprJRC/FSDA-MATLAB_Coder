@@ -53,7 +53,7 @@ real_T iqr(const emlrtStack *sp, const emxArray_real_T *x)
     y_idx_0_tmp = rtNaN;
     r = rtNaN;
   } else {
-    emxInit_int32_T(&b_st, &idx, 1, &oj_emlrtRTEI, true);
+    emxInit_int32_T(&b_st, &idx, 1, &nj_emlrtRTEI, true);
     c_st.site = &mk_emlrtRSI;
     sortIdx(&c_st, x, idx);
     c_st.site = &lk_emlrtRSI;

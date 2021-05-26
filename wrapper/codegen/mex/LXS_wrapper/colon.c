@@ -36,7 +36,7 @@ static emlrtRTEInfo n_emlrtRTEI =
                                                                           */
 };
 
-static emlrtRTEInfo ue_emlrtRTEI =
+static emlrtRTEInfo se_emlrtRTEI =
     {
         312,     /* lineNo */
         20,      /* colNo */
@@ -77,7 +77,7 @@ void b_eml_float_colon(const emlrtStack *sp, real_T a, real_T b,
   nm1d2 = y->size[0] * y->size[1];
   y->size[0] = 1;
   y->size[1] = n;
-  emxEnsureCapacity_real_T(sp, y, nm1d2, &ue_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, y, nm1d2, &se_emlrtRTEI);
   if (n > 0) {
     y->data[0] = a;
     if (n > 1) {
@@ -137,7 +137,7 @@ void eml_float_colon(const emlrtStack *sp, real_T a, real_T b,
   nm1d2 = y->size[0] * y->size[1];
   y->size[0] = 1;
   y->size[1] = n;
-  emxEnsureCapacity_real_T(sp, y, nm1d2, &ue_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, y, nm1d2, &se_emlrtRTEI);
   if (n > 0) {
     y->data[0] = a;
     if (n > 1) {

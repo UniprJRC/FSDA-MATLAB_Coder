@@ -15,8 +15,6 @@
 #include "rt_nonfinite.h"
 #include <math.h>
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 double b_xnrm2(int n, const emxArray_real_T *x)
 {

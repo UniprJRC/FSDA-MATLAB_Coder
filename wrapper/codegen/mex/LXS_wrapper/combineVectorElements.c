@@ -43,7 +43,7 @@ static emlrtRSInfo yv_emlrtRSI = {
     "rixIncludeNaN.m" /* pathName */
 };
 
-static emlrtRTEInfo dp_emlrtRTEI = {
+static emlrtRTEInfo cp_emlrtRTEI = {
     74,                      /* lineNo */
     9,                       /* colNo */
     "combineVectorElements", /* fName */
@@ -52,7 +52,7 @@ static emlrtRTEInfo dp_emlrtRTEI = {
     "eVectorElements.m" /* pName */
 };
 
-static emlrtRTEInfo ep_emlrtRTEI = {
+static emlrtRTEInfo dp_emlrtRTEI = {
     35,                    /* lineNo */
     20,                    /* colNo */
     "sumMatrixIncludeNaN", /* fName */
@@ -92,7 +92,7 @@ void b_combineVectorElements(const emlrtStack *sp, const emxArray_real_T *x,
     nfb = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = x->size[1];
-    emxEnsureCapacity_real_T(&st, y, nfb, &dp_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, y, nfb, &cp_emlrtRTEI);
     ncols = x->size[1];
     for (nfb = 0; nfb < ncols; nfb++) {
       y->data[nfb] = 0.0;
@@ -103,7 +103,7 @@ void b_combineVectorElements(const emlrtStack *sp, const emxArray_real_T *x,
     nfb = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = x->size[1];
-    emxEnsureCapacity_real_T(&c_st, y, nfb, &ep_emlrtRTEI);
+    emxEnsureCapacity_real_T(&c_st, y, nfb, &dp_emlrtRTEI);
     ncols = x->size[1] - 1;
     if (x->size[0] < 4096) {
       d_st.site = &xv_emlrtRSI;

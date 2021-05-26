@@ -22,8 +22,6 @@
 #include "xnrm2.h"
 #include <math.h>
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
                 double varargin_2, double outSC_Score_data[],

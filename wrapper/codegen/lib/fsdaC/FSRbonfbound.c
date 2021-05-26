@@ -20,8 +20,6 @@
 #include "rt_nonfinite.h"
 #include <math.h>
 
-/* Custom Source Code */
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 /* Function Definitions */
 void FSRbonfbound(double n, double p, const double varargin_2_data[],
                   const int varargin_2_size[2], double varargin_4,
