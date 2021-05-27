@@ -1,6 +1,6 @@
 %% Test for addt
 
-n=2000;
+n=5000;
 
 y=randn(n,1)+10;
 X=randn(n,3);
