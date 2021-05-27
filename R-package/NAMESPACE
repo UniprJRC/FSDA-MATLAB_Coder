@@ -1,0 +1,21 @@
+useDynLib(fsdac)
+
+importFrom("utils", "flush.console")
+
+export(myc, addt, FSRbsb, FSRfan, LXS, FSR
+)
+
+## S3 methods for ``our own'' S3 generics:
+
+## S3method(LXS, default)
+## S3method(LXS, formula)
+
+## S3method(FSR, default)
+## S3method(FSR, formula)
+
+## Register all the methods for S3 generics elsewhere
+## in case namespace is loaded but not currently attached.
+
+S3method(print, LTS)
+S3method(print, LMS)
+S3method(print, FSR)

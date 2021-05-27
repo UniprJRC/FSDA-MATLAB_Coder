@@ -1,0 +1,39 @@
+##  Test for FSRbsb with all default options.
+##  Common part to all examples: load Houses Price Dataset.
+    
+    hprice <- read.table("hprice.txt")
+    head(hprice)
+    
+##  Prepare parameters
+    n <- nrow(hprice)
+    y <- hprice[,1]
+    X <- hprice[,2:5]
+    n0 <- 5
+
+##  Set \beta components
+    beta0 <- rep(0, 5)
+    beta0[2] <- 10
+    beta0[3] <- 5000
+    beta0[4] <- 10000
+    beta0[5] <- 10000
+
+##  $\tau$
+    s02 <- 1/4.0e-8
+    tau0 <- 1/s02
+
+##  R prior settings
+    R <- 2.4*diag(5)
+    R[2,2] <- 6e-7
+    R[3,3] <- .15
+    R[4,4] <- .6
+    R[5,5] <- .6
+    R <- solve(R)
+    
+    out <- FSRBbsb(y, X, beta0, R, tau0, n0);
+
+% Check whether mex and .m produce the same results
+[UnMEX,BBMEX]=FSRbsb_wrapper_mex(y,X,bsb,   init,intercept, nocheck, bsbsteps,msg);
+[Un,BB]=FSRbsb(y,X,bsb,  'init',init,'intercept',intercept, 'nocheck',nocheck,'bsbsteps',bsbsteps,'msg',msg);
+tol=1e-9;
+assert(isequaln(Un,UnMEX),'Un not equal')
+assert(isequaln(BB,BBMEX),'BB not equal')
