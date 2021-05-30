@@ -60,7 +60,10 @@ disp('string to type to install the package in R (Rstudio)')
 disp('----------------')
 disp(['install.packages("fsdac_'  num2str(fsdaCversion) '.tar.gz", repos = NULL, type = "source")'])
 
-% Remark: it is assumed that in R the "R Utils package" is installed')
+% Remark: it is assumed that in R the "R Utils package" and 
+% and the last version of Rtoolchain is installed 
+% For additional info see
+% https://developer.r-project.org/Blog/public/2021/03/12/windows/utf-8-toolchain-and-cran-package-checks/
 
 % navigate to the original folder before switching to documents
 cd(pathCurrentFolder);
