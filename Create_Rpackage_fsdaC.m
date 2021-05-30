@@ -38,7 +38,7 @@ end
 Rversion='4.1.0';
 
 % Read version of fsdaC from file named "DESCRIPTION" inside subfolder R-package
-% Second row of file name DESCTIPRION contains the number whihc identifies
+% Second row of file name DESCRIPTON contains the number which identifies
 % the version of fsdac
 fid = fopen(['R-package' filesep' 'DESCRIPTION']); % open file
 fgetl(fid);
