@@ -4,6 +4,7 @@
 # Force bash scripts to always use lf line endings so that if a repo is accessed
 # in Unix via a file share from Windows, the scripts will work.
 *.sh text eol=lf
+*.c text eol=lf
 
 # Declare files that will always have CRLF line endings on checkout.
 *.m text eol=crlf
