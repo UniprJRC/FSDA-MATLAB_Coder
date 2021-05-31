@@ -19,6 +19,7 @@ if ispc
     myprogpath=fullfile(getenv('ProgramFiles'), 'R');
     mydocpath = fullfile(getenv('USERPROFILE'), 'Documents');
 else
+
     mydocpath='~';
     % myprogpath=  TO ADD
 end
