@@ -10,7 +10,7 @@
 % Note that the version of fsdaC is automatically read from second line of
 % file named DESCRIPTION
 % 4) displays the string to execute in R to install package fsdac
-%
+
 
 %% Get and store current path and Navigate to folder documents
 pathCurrentFolder=pwd;
