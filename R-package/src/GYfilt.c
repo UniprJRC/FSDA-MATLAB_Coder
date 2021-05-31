@@ -9,6 +9,8 @@
  *
  */
 
+#include <R.h>
+
 /* Include files */
 #include "GYfilt.h"
 #include "colon.h"
@@ -655,8 +657,8 @@ void b_GYfilt(const emxArray_real_T *x, emxArray_boolean_T *weights)
   emxFree_int32_T(&r1);
   emxFree_real_T(&xs2);
   /*  disp([' iter = ' num2str(iter)]) */
-  printf(" iter = %.0f\n ", (double)iter);
-  fflush(stdout);
+  Rprintf(" iter = %.0f\n ", (double)iter);
+  //fflush(stdout);
   i = weights->size[0];
   weights->size[0] = x->size[0];
   emxEnsureCapacity_boolean_T(weights, i);

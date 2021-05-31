@@ -59,7 +59,7 @@
 #'  \item the extracted subsets which contain at least one unit declared as outlier in the \code{X} space by
 #'      FSM using a Bonferronized confidence level of 0.99 are removed from the list of candidate subsets
 #'      to find the LXS solution.
-#'  \item imposes the contrainst that \code{h_i(m^*)} cannot exceed \code{10 x p/m}.
+#'  \item imposes the constraint that \eqn{h_i(m^*)} cannot exceed \eqn{10 \times p/m}.
 #'  }
 #' @param weak indicator to use a different decision rule to detect the signal and flag outliers. If \code{weak=FALSE} (default)
 #'  \code{FSRcore} values are used, if \code{weak=TRUE} 'stronger' quantiles are used as

@@ -62,27 +62,8 @@ if(b_trace)
 //    Rprintf("%s ", "family initialized\n");                   
 
     // Initialize the output structure ===========================: 
-    
-    //  - first allocate y and X                  
-    out.y = emxCreateND_real_T(1, nn);
-    out.X = emxCreate_real_T(*nn, *pp);
-    
-    // The following matrices are of size (n-init+1) x length(la)+1
-    out.Score  = emxCreate_real_T(*retn1, *retp1);
-    out.Scorep = emxCreate_real_T(*retn1, *retp1);
-    out.Scoren = emxCreate_real_T(*retn1, *retp1);
-    out.Scoreb = emxCreate_real_T(*retn1, *retp1);
- 
-    // Add bs: p x length(la), la - vector
-    out.bs = emxCreate_real_T(*pp1, *lla);
-    out.la = emxCreateND_real_T(1, lla);
-    
-    // Add Un: one dimensional cell array. Each element is a matrix 
-    out.Un = emxCreateND_cell_wrap_36(1, lla);
-    for(i=0; i < out.Un->size[0]; i++) {
-        out.Un->data[i].f1 = emxCreate_real_T(*retnUn, *retpUn);
-    }
- 
+    emxInit_struct_FSRfan_T(&out);
+
 /*-------------------------------------------------------------  
     Rprintf("\ny dimensions: %d \n", y->size[0]); 
     disp_dble(y->data, y->size[0]);
@@ -97,6 +78,7 @@ if(b_trace)
     Rprintf("\nOther parameters (init, h, nsamp, family): %f %f %f %s\n", *init, *h, *nsamp, family->data); 
     Rprintf("%s ", "Calling FSRfan...\n");                  
 */
+
     FSRfan_wrapper(y, X, b_intercept, b_nocheck, la, *h, *nsamp, lms,
                     *init, family, b_msg, &out);
 
@@ -161,19 +143,12 @@ if(b_trace)
     *nn1 = out.X->size[0];
     *pp1 = out.X->size[1];
 
+    emxDestroy_struct_FSRfan_T(out);
+    emxDestroyArray_char_T(family);  
+    emxDestroyArray_real_T(lms);    
+    emxDestroyArray_real_T(la);    
     emxDestroyArray_real_T(X);
     emxDestroyArray_real_T(y);    
-    emxDestroyArray_real_T(la);    
-    emxDestroyArray_real_T(lms);    
-    emxDestroyArray_char_T(family);  
-    
-    emxDestroyArray_real_T(out.Score);    
-    emxDestroyArray_real_T(out.Scorep);    
-    emxDestroyArray_real_T(out.Scoren);    
-    emxDestroyArray_real_T(out.Scoreb);    
-    emxDestroyArray_real_T(out.bs);    
-    emxDestroyArray_real_T(out.la);    
-    emxDestroyArray_cell_wrap_36(out.Un);
 }
 
 

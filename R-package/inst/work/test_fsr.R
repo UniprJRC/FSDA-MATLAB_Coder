@@ -71,7 +71,7 @@
 
 ##  #5. Extract all possible subsamples in order to find susbet
 ##      to initialize the search.
-    n <- 50
+    n <- 40
     p <- 3
     X <- matrix(rnorm(n*p), nrow=n)
     y=rnorm(n)
@@ -86,7 +86,7 @@
     p <- 3
     X <- matrix(rnorm(n*p), nrow=n)
     y=rnorm(n)
-    (out <- FSR(y, X, nsamp=0))
+    (out <- FSR(y, X))
 
 ##  #7. Example with Hawkins data
     load('hawkins.txt','hawkins');

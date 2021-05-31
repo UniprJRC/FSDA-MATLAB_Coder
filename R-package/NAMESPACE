@@ -1,6 +1,7 @@
-useDynLib(fsdac)
+useDynLib(fsdac, .registration=TRUE)
 
 importFrom("utils", "flush.console")
+importFrom("stats", "coef")
 
 export(myc, addt, FSRbsb, FSRfan, LXS, FSR
 )

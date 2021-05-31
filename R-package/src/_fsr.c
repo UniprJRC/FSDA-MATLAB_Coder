@@ -42,22 +42,9 @@ void r_fsr(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int *in
     argInit_scalar2(bonflev, bonflev_data, bonflev_size);
     argInit_scalar2(threshoutX, threshoutX_data, threshoutX_size);
     
-    // Prepare the output parameters
-
-    // Initialize the output structure ===========================   
-    out.beta = emxCreateND_real_T(1, pp1);
-    out.residuals = emxCreateND_real_T(1, nn1);
-    out.fittedvalues = emxCreateND_real_T(1, nn1);
-    out.outliers = emxCreateND_real_T(1, nn1);
-    out.ListOut = emxCreateND_real_T(1, nn1);
-
-    out.mdr = emxCreate_real_T(*retnUn, *retpmdr);
-    out.Un = emxCreate_real_T(*retnUn, *retpUn);
-    out.nout = emxCreate_real_T(2, 5);
-    out.mdag = emxCreateND_real_T(1, nn1);         // What is this?! fix the dimension
-    out.ListCl = emxCreateND_real_T(1, nn1);       // fix the dimension
-    out.VIOMout = emxCreateND_real_T(1, nn1);      // fix the dimension
-
+    // Initialize the output structure =========================== 
+    emxInit_struct_FSR_T(&out);
+    
     if(b_trace)
     {
         Rprintf("\ny dimensions: %d \n", y->size[0]); 
@@ -159,19 +146,7 @@ void r_fsr(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int *in
     }    
  
     // Destroy the allocated objetcs
-    emxDestroyArray_real_T(out.VIOMout);
-    emxDestroyArray_real_T(out.ListCl);
-    emxDestroyArray_real_T(out.mdag);
-    emxDestroyArray_real_T(out.nout);
-
-    emxDestroyArray_real_T(out.Un);
-    emxDestroyArray_real_T(out.mdr);
-
-    emxDestroyArray_real_T(out.ListOut);
-    emxDestroyArray_real_T(out.outliers);
-    emxDestroyArray_real_T(out.fittedvalues);
-    emxDestroyArray_real_T(out.residuals);    
-    emxDestroyArray_real_T(out.beta);
+    emxDestroy_struct_FSR_T(out);
     emxDestroyArray_real_T(X);    
     emxDestroyArray_real_T(y);    
 }

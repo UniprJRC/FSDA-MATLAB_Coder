@@ -53,23 +53,12 @@ void r_lxs(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int *in
     argInit_scalar(r_bonflevoutX, b_bonflevoutX, bonflevoutX_data, bonflevoutX_size);   //  Initialize function input argument 'bonflevoutX'
 
 
-    // Initialize the output structure ===========================   
-    //  - first allocate y and X                  
-    out.y = emxCreateND_real_T(1, nn);
-    out.X = emxCreate_real_T(*nn, *pp);
-
-    //  - then allocate beta, bs and all the other output vectors
-    out.beta = emxCreateND_real_T(1, pp1);
-    out.bs = emxCreateND_real_T(1, pp1);
-    out.residuals = emxCreateND_real_T(1, nn1);
-    out.weights = emxCreateND_boolean_T(1, nn1);
-    out.outliers = emxCreateND_real_T(1, nn1);
+    // Initialize the output structure =========================== 
+    emxInit_struct_LXS_T(&out);
     
-    //  - finally allcoate the (optional) output matrix C
+    //  Allocate the (optional) output matrix C
     C = emxCreate_real_T(*nC, *pC);
     
-/*-------------------------------------------------------------  
-*/
     if(b_trace)
     {
         Rprintf("\ny dimensions: %d \n", y->size[0]); 
@@ -95,9 +84,6 @@ void r_lxs(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int *in
                     b_nocheck, b_nomes, *nsamp, b_rew, b_yxsave,
                     &out, C);
     
-/*-------------------------------------------------------------  
-*/  
-
     *scale = out.scale;
     *h = out.h;
     *conflev = out.conflev;
@@ -122,13 +108,15 @@ void r_lxs(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int *in
         Rprintf("\nC: %d, %d \n", C->size[0], C->size[1]); 
     }
     
-    // Copy the output vector beta 
+    // Copy the output vectors beta, bs and outliers 
     for(i=0; i < out.beta->size[0]; i++) {
         beta[i] = out.beta->data[i];
     }
+    
     for(i=0; i < out.bs->size[1]; i++) {        // row vector!
         bs[i] = out.bs->data[i];
     }
+    
     for(i=0; i < out.residuals->size[0]; i++) {    
         residuals[i] = out.residuals->data[i];
         weights[i] = out.weights->data[i];
@@ -139,6 +127,7 @@ void r_lxs(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int *in
         outliers[i] = out.outliers->data[i];
     }
     
+    // Copy the optional matrix C
     if(b_csave)
     {
         if(C->size[0] != *nC || C->size[1] != *pC)
@@ -155,15 +144,9 @@ void r_lxs(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int *in
         }
     }
 
+    // Destroy the allocated objetcs
     emxDestroyArray_real_T(C);
-    emxDestroyArray_real_T(out.outliers);
-    emxDestroyArray_boolean_T(out.weights);
-    emxDestroyArray_real_T(out.residuals);    
-    emxDestroyArray_real_T(out.bs);  
-    emxDestroyArray_real_T(out.beta);
-    emxDestroyArray_real_T(out.X);
-    emxDestroyArray_real_T(out.y);    
-
+    emxDestroy_struct_LXS_T(out);
     emxDestroyArray_real_T(X);    
     emxDestroyArray_real_T(y);    
 }

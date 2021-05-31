@@ -8,6 +8,8 @@
  * Code generation for function 'LTSts_wrapper'
  *
  */
+ 
+#include <R.h>
 
 /* Include files */
 #include "LTSts_wrapper.h"
@@ -2898,8 +2900,8 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   }
 
   if ((LSH > 0.0) && msg) {
-    printf("Level shift for t=%.0f\n", LSH);
-    fflush(stdout);
+    Rprintf("Level shift for t=%.0f\n", LSH);
+    //fflush(stdout);
   }
 
   /*  save RES to output structure (these residuals can be used for example to */
@@ -4604,8 +4606,8 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     /*      else */
     /*  disp([table(lab) table(bhat) table(se) table(tstat) table(pval)]); */
     /*      end */
-    printf("Level shift position t=%.0f\n", posLS);
-    fflush(stdout);
+    Rprintf("Level shift position t=%.0f\n", posLS);
+    //fflush(stdout);
   }
 
   /*  Create plots */
