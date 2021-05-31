@@ -35,7 +35,13 @@ end
 % Rversion is the charater which identifies the R version you are using
 % To get R version inside R type
 % paste(R.Version()[c("major", "minor")], collapse = ".")
-Rversion='4.1.0';
+
+
+
+%[systOutput, consOutout]=system(str);
+
+
+
 
 % Read version of fsdaC from file named "DESCRIPTION" inside subfolder R-package
 % Second row of file name DESCRIPTON contains the number which identifies
@@ -50,14 +56,20 @@ disp(['you are building fsdaC number: ' version])
 % run R CMD build
 % This is the windows path. Could you please add the path for other
 % operating systems?
-str=['"c:\Program Files\R\R-' Rversion '\bin\x64\R" CMD build fsdac --no-multiarch"'];
+str=['"c:\Program Files\R\R-' Rversion '\bin\x64\R" CMD build R-package --no-multiarch"'];
 a=system(str);
+
+if a ~= 0
+    disp(str)
+    error('FSDA:Create_Rpackage_fsdaC:Wrongcmd','System command returned an error, check the syntax above.');
+end
 
 % The output of system(str) is file (mydocpath)\fsdac_X.X-X.tar.gz
 
 % Now open R and from the prompt of R (or Rstudio) execute
-disp('string to type to install the package in R (Rstudio)')
+disp('string to remove the previous installation of fsdaC (if present) and to install the package in R (Rstudio)')
 disp('----------------')
+disp(['remove.packages("fsdac")", repos = NULL, type = "source")'])
 disp(['install.packages("fsdac_'  num2str(fsdaCversion) '.tar.gz", repos = NULL, type = "source")'])
 
 % Remark: it is assumed that in R the "R Utils package" and 
