@@ -16,11 +16,14 @@
 pathCurrentFolder=pwd;
 
 if ispc
+    myprogpath=fullfile(getenv('ProgramFiles'), 'R');
     mydocpath = fullfile(getenv('USERPROFILE'), 'Documents');
 else
-    mydocpath='$home/Documents';
+    mydocpath='~';
+    % myprogpath=  TO ADD
 end
 cd(mydocpath)
+
 
 % If folder R-package already exists inside (documents) it is deleted (with
 % the subfolders)
@@ -30,6 +33,11 @@ end
 
 %% retrieve just the content of subfolder R-package
 % of github repo https://github.com/UniprJRC/FSDA-MATLAB_Coder
+
+%  In Linux git svn should be installed as follows:
+% sudo apt update 
+% sudo apt install git-svn
+
 !git svn clone https://github.com/UniprJRC/FSDA-MATLAB_Coder/trunk/R-package
 
 % Rversion is the charater which identifies the R version you are using
@@ -51,12 +59,30 @@ fgetl(fid);
 version=fgetl(fid); % get version from second line of the file
 fsdaCversion=strtrim(version(9:end));
 fclose(fid);
-disp(['you are building fsdaC number: ' version]) 
+disp(['you are building fsdaC number: ' version])
 
 % run R CMD build
 % This is the windows path. Could you please add the path for other
 % operating systems?
-str=['"c:\Program Files\R\R-' Rversion '\bin\x64\R" CMD build R-package --no-multiarch"'];
+
+
+if ispc
+    pathRexeFiles=findFile(myprogpath,'InclFiles','R.exe','InclDir',{'x64'});
+    
+    disp('R versions which are installed in your PC')
+    disp(pathRexeFiles)
+    
+    pathRexe=pathRexeFiles{end};
+    FindFullStops=regexp(pathRexe,'\.');
+    Rversion=pathRexe(FindFullStops(1)-1:FindFullStops(1)+3);
+    
+    disp(['Installing fsdaC in R version: ' Rversion])
+    % str=['"c:\Program Files\R\R-' Rversion '\bin\x64\R" CMD build R-package --no-multiarch"'];
+    str=['"' pathRexe '" CMD build R-package --no-multiarch"'];
+    
+else
+    str='R CMD build R-package --no-multiarch';
+end
 a=system(str);
 
 if a ~= 0
@@ -69,11 +95,11 @@ end
 % Now open R and from the prompt of R (or Rstudio) execute
 disp('string to remove the previous installation of fsdaC (if present) and to install the package in R (Rstudio)')
 disp('----------------')
-disp(['remove.packages("fsdac")", repos = NULL, type = "source")'])
+disp('remove.packages("fsdac")')
 disp(['install.packages("fsdac_'  num2str(fsdaCversion) '.tar.gz", repos = NULL, type = "source")'])
 
-% Remark: it is assumed that in R the "R Utils package" and 
-% and the last version of Rtoolchain is installed 
+% Remark: it is assumed that in R the "R Utils package" and
+% and the last version of Rtoolchain is installed
 % For additional info see
 % https://developer.r-project.org/Blog/public/2021/03/12/windows/utf-8-toolchain-and-cran-package-checks/
 
