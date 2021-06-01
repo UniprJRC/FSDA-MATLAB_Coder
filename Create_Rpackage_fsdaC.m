@@ -106,3 +106,9 @@ disp(['install.packages("fsdac_'  num2str(fsdaCversion) '.tar.gz", repos = NULL,
 
 % navigate to the original folder before switching to documents
 cd(pathCurrentFolder);
+
+%% REMARK
+% All the instructions contained in this file can be done directly in R
+% with the instruction below. Note that devtools package for R must be
+% installed.
+% devtools::install_github("UniprJRC/FSDA-MATLAB_Coder", subdir="R-package")
