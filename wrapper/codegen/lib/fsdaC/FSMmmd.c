@@ -110,7 +110,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   bool exitg1;
   bool guard1 = false;
   emxInit_boolean_T(&MDltminT, 1);
-
   /* FSMmmd monitors minMD */
   /*  */
   /* <a href="matlab: docsearchFS('FSMmmd')">Link to the help function</a> */
@@ -118,15 +117,20 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  Required input arguments: */
   /*  */
   /*  Y :           Input data. Matrix. */
-  /*                n x v data matrix; n observations and v variables. Rows of */
-  /*                Y represent observations, and columns represent variables. */
+  /*                n x v data matrix; n observations and v variables. Rows of
+   */
+  /*                Y represent observations, and columns represent variables.
+   */
   /*                Missing values (NaN's) and infinite values (Inf's) are */
-  /*                allowed, since observations (rows) with missing or infinite */
+  /*                allowed, since observations (rows) with missing or infinite
+   */
   /*                values will automatically be excluded from the */
   /*                computations. */
   /*                 Data Types - single|double */
-  /*  bsb :         Units forming subset. Vector. List of units forming the initial subset. */
-  /*                If bsb=0 (default) then the procedure starts with p units randomly */
+  /*  bsb :         Units forming subset. Vector. List of units forming the
+   * initial subset. */
+  /*                If bsb=0 (default) then the procedure starts with p units
+   * randomly */
   /*                chosen else if bsb is not 0 the search will start with */
   /*                m0=length(bsb) */
   /*                Data Types - single | double */
@@ -136,7 +140,8 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  */
   /*    bsbsteps :  Save the units forming subsets. Vector. It specifies for */
   /*                which steps of the fwd search it */
-  /*                is necessary to save the units forming subsets. If bsbsteps */
+  /*                is necessary to save the units forming subsets. If bsbsteps
+   */
   /*                is 0 we store the units forming subset in all steps. The */
   /*                default is store the units forming subset in all steps if */
   /*                n<=5000, else to store the units forming subset at steps */
@@ -149,7 +154,8 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*                Data Types - double */
   /*  */
   /*  init :       Point where to start monitoring */
-  /*                required diagnostics. Scalar. Note that if bsb is supplied, */
+  /*                required diagnostics. Scalar. Note that if bsb is supplied,
+   */
   /*                init>=length(bsb). If init is not specified it will */
   /*                be set equal to floor(n*0.6). */
   /*                  Example - 'init',50 */
@@ -163,14 +169,17 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*                  Data Types - double */
   /*  */
   /*  nocheck :   It controls wether to perform checks on */
-  /*                matrix Y. Boolean. If nocheck is equal to true no check is */
+  /*                matrix Y. Boolean. If nocheck is equal to true no check is
+   */
   /*                performed on matrix Y. As default nocheck=false. */
   /*                  Example - 'nocheck',false */
   /*                  Data Types - logical */
   /*  */
   /*  */
-  /*  plots :     It specify whether it is necessary to produce the plots of minimum Mahalanobis */
-  /*                  distance. Scalar. If plots=1, a plot of the monitoring of minMD among */
+  /*  plots :     It specify whether it is necessary to produce the plots of
+   * minimum Mahalanobis */
+  /*                  distance. Scalar. If plots=1, a plot of the monitoring of
+   * minMD among */
   /*                the units not belonging to the subset is produced on the */
   /*                screen with 1% 50% and 99% confidence bands */
   /*                else (default) no plot is produced. */
@@ -178,20 +187,23 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*                  Data Types - double */
   /*  */
   /*  */
-  /*  Remark :      The user should only give the input arguments that have to */
+  /*  Remark :      The user should only give the input arguments that have to
+   */
   /*                change their default value. */
   /*                The name of the input arguments needs to be followed by */
   /*                their value. The order of the input arguments is of no */
   /*                importance. */
   /*  */
   /*                Missing values (NaN's) and infinite values (Inf's) are */
-  /*                allowed, since observations (rows) with missing or infinite */
+  /*                allowed, since observations (rows) with missing or infinite
+   */
   /*                values will automatically be excluded from the */
   /*                computations. y can be both a row of column vector. */
   /*  */
   /*  Output: */
   /*  */
-  /*  mmd :         (n-init) x 2 matrix which contains the monitoring of minimum */
+  /*  mmd :         (n-init) x 2 matrix which contains the monitoring of minimum
+   */
   /*                Mahalanobis distance each step of the forward search. */
   /*                1st col = fwd search index (from init to n-1); */
   /*                2nd col = minimum Mahalanobis distance. */
@@ -209,13 +221,15 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  */
   /*  BB :   n x (n-init+1) matrix containing units belonging to subset in */
   /*                each step of the search. Each row is associated to a unit */
-  /*                while each colum is associated to a step of the fwd search. */
+  /*                while each colum is associated to a step of the fwd search.
+   */
   /*  */
   /*  See also FSMenvmmd.m, FSM.m, FSMmmdeasy, quickselectFS.m */
   /*  */
   /*  References: */
   /*  */
-  /*  Atkinson, A.C., Riani, M. and Cerioli, A. (2004), "Exploring multivariate */
+  /*  Atkinson, A.C., Riani, M. and Cerioli, A. (2004), "Exploring multivariate
+   */
   /*  data with the forward search", Springer Verlag, New York. */
   /*  */
   /*  Copyright 2008-2021. */
@@ -227,7 +241,8 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  Examples: */
   /* { */
   /*     %% Minimum Mahalanobis distance. */
-  /*     % Personalized initial subset (small n). Create an initial subset with */
+  /*     % Personalized initial subset (small n). Create an initial subset with
+   */
   /*     % the 4 observations which fell the smallest */
   /*     % number of times outside the robust bivariate ellipses and with the */
   /*     % lowest Mahalanobis Distance. */
@@ -267,7 +282,8 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /* { */
   /*     % Checking the unit(s) included in the subset at each step of the */
   /*     % search. */
-  /*     % Un contains the unit(s) present in the new subset but not in the old one. */
+  /*     % Un contains the unit(s) present in the new subset but not in the old
+   * one. */
   /*     n=200; */
   /*     v=3; */
   /*     m0=4; */
@@ -286,7 +302,8 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /* { */
   /*     % Checking the units belonging to subset in each step of the search. */
   /*     % Personalized initial subset (large n). Each row of BB matrix */
-  /*     % is associated to a unit while each colum is associated to a step of the fwd search. */
+  /*     % is associated to a unit while each colum is associated to a step of
+   * the fwd search. */
   /*     n=20000; */
   /*     v=3; */
   /*     m0=10; */
@@ -303,21 +320,27 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  Beginning of code */
   /*  Input parameters checking */
   /* chkinputM does not do any check if option nocheck=true */
-  /* chkinputM makes some input parameters and user options checking in multivariate analysis */
+  /* chkinputM makes some input parameters and user options checking in
+   * multivariate analysis */
   /*  */
   /*  Required input arguments: */
   /*  */
   /*  X :          Input data. Matrix. */
-  /*                n x v data matrix; n observations and v variables. Rows of */
-  /*                X represent observations, and columns represent variables. */
+  /*                n x v data matrix; n observations and v variables. Rows of
+   */
+  /*                X represent observations, and columns represent variables.
+   */
   /*                Missing values (NaN's) and infinite values (Inf's) are */
-  /*                allowed, since observations (rows) with missing or infinite */
+  /*                allowed, since observations (rows) with missing or infinite
+   */
   /*                values will automatically be excluded from the */
   /*                computations. */
   /*                 Data Types - single|double */
-  /*  nnargin:      nargin. Scalar. The number of input arguments specified for the caller */
+  /*  nnargin:      nargin. Scalar. The number of input arguments specified for
+   * the caller */
   /*                function. */
-  /*  vvarargin:    nvarargin. Scalar. The variable length input argument list */
+  /*  vvarargin:    nvarargin. Scalar. The variable length input argument list
+   */
   /*                specified for the */
   /*                caller function. */
   /*  */
@@ -346,7 +369,8 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  Example: */
   /* { */
   /*     %% example_producing_error */
-  /*     %To examplify the behaviour of chkinputM, we call function FSM with a */
+  /*     %To examplify the behaviour of chkinputM, we call function FSM with a
+   */
   /*     %X with more columns then rows. */
   /*     n=3; */
   /*     p=200; */
@@ -362,7 +386,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  rows(Y) */
   v = Y->size[1];
   n = Y->size[0];
-
   /*  Do not use implicit expansion */
   /*  Input parameters checking */
   /* init1=options.init; */
@@ -375,7 +398,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     MDltminT->data[i] = (bsb->data[i] == 0.0);
   }
-
   emxInit_real_T(&Yb, 2);
   emxInit_real_T(&r, 2);
   if (ifWhileCond(MDltminT)) {
@@ -384,7 +406,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     while (Ra && (nwhile < 100)) {
       /*  Extract a random sample of size v+1 */
       randsample(n, (double)v + 1.0, bsb);
-
       /*  Check if the var-cov matrix of the random sample is full (i.e =v) */
       loop_ub = Y->size[1];
       i = Yb->size[0] * Yb->size[1];
@@ -394,27 +415,24 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
       for (i = 0; i < loop_ub; i++) {
         b_loop_ub = bsb->size[0];
         for (end = 0; end < b_loop_ub; end++) {
-          Yb->data[end + Yb->size[0] * i] = Y->data[((int)bsb->data[end] +
-            Y->size[0] * i) - 1];
+          Yb->data[end + Yb->size[0] * i] =
+              Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
         }
       }
-
       cov(Yb, r);
       irank = local_rank(r);
       Ra = (irank < v);
       nwhile++;
     }
   }
-
   emxInit_real_T(&ym, 2);
-
   /*  percn = scalar which controls up to which point of the search it is */
   /*  better to use linear indexing to extract the units forming subset. For */
-  /*  example percn=0.85*n means that units belonging to susbet are found using */
+  /*  example percn=0.85*n means that units belonging to susbet are found using
+   */
   /*  linear indexing up to step m=0.85*n. After m=0.85*n units belonging to */
   /*  subset are found using a n-by-1 logical vector */
   percn = 0.85 * (double)Y->size[0];
-
   /*  nrepmin = scalar which controls the maximum number of repeated minima */
   /*  which must be taken in order to find new subset */
   if (Y->size[0] < 1) {
@@ -430,7 +448,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
       ym->data[i] = (double)i + 1.0;
     }
   }
-
   emxInit_real_T(&seq, 1);
   i = seq->size[0];
   seq->size[0] = ym->size[1];
@@ -439,11 +456,9 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     seq->data[i] = ym->data[i];
   }
-
   memset(&unitadd[0], 0, 10U * sizeof(double));
   memset(&bsbradd[0], 0, 10U * sizeof(double));
   emxInit_boolean_T(&bsbT, 1);
-
   /*  Initialization of the n x 1 Boolean vector which contains a true in */
   /*  correspondence of the units belonging to subset in each step */
   i = bsbT->size[0];
@@ -453,7 +468,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     bsbT->data[i] = false;
   }
-
   emxInit_int32_T(&r1, 1);
   i = r1->size[0];
   r1->size[0] = bsb->size[0];
@@ -462,14 +476,11 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     r1->data[i] = (int)bsb->data[i];
   }
-
   loop_ub = r1->size[0];
   for (i = 0; i < loop_ub; i++) {
     bsbT->data[r1->data[i] - 1] = true;
   }
-
   emxInit_real_T(&S, 2);
-
   /*  Initialization for Matlab coder */
   rankgap = 0.0;
   i = S->size[0] * S->size[1];
@@ -480,7 +491,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     S->data[i] = 0.0;
   }
-
   emxInit_real_T(&meoldbsb, 2);
   i = meoldbsb->size[0] * meoldbsb->size[1];
   meoldbsb->size[0] = 1;
@@ -490,7 +500,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     meoldbsb->data[i] = 0.0;
   }
-
   emxInit_boolean_T(&oldbsbT, 1);
   i = oldbsbT->size[0];
   oldbsbT->size[0] = bsbT->size[0];
@@ -499,7 +508,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     oldbsbT->data[i] = bsbT->data[i];
   }
-
   emxInit_real_T(&bsbr, 1);
   i = bsbr->size[0];
   bsbr->size[0] = Y->size[0];
@@ -508,7 +516,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     bsbr->data[i] = 0.0;
   }
-
   emxInit_real_T(&unitout, 1);
   i = unitout->size[0];
   unitout->size[0] = Y->size[0];
@@ -517,7 +524,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     unitout->data[i] = 0.0;
   }
-
   emxInit_boolean_T(&bsbriniT, 1);
   i = bsbriniT->size[0];
   bsbriniT->size[0] = bsbT->size[0];
@@ -526,7 +532,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     bsbriniT->data[i] = bsbT->data[i];
   }
-
   emxInit_uint32_T(&bsbrini, 1);
   i = bsbrini->size[0];
   bsbrini->size[0] = Y->size[0];
@@ -535,9 +540,7 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     bsbrini->data[i] = 0U;
   }
-
   ini0 = bsb->size[0];
-
   /*  check init */
   init1 = varargin_2;
   if (varargin_2 < (double)Y->size[1] + 1.0) {
@@ -553,7 +556,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     fflush(stdout);
     init1 = (double)Y->size[0] - 1.0;
   }
-
   /*  Matrix BB will contain the units forming subset in each step (or in */
   /*  selected steps) of the forward search. The first column contains */
   /*  information about units forming subset at step init1. */
@@ -582,7 +584,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
         eml_float_colon(init1, Y->size[0], ym);
         irank = ym->size[1];
       }
-
       if (rtIsInf(init1) && (init1 == Y->size[0])) {
         i = ym->size[0] * ym->size[1];
         ym->size[0] = 1;
@@ -602,7 +603,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
         eml_float_colon(init1, Y->size[0], ym);
       }
     }
-
     i = Szi->size[0];
     Szi->size[0] = ym->size[1];
     emxEnsureCapacity_real_T(Szi, i);
@@ -610,7 +610,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     for (i = 0; i < loop_ub; i++) {
       Szi->data[i] = ym->data[i];
     }
-
     i = bsbsteps->size[0];
     bsbsteps->size[0] = irank;
     emxEnsureCapacity_real_T(bsbsteps, i);
@@ -648,7 +647,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     } else {
       b_eml_float_colon(ksor, irank, y);
     }
-
     i = bsbsteps->size[0];
     bsbsteps->size[0] = y->size[1] + 1;
     emxEnsureCapacity_real_T(bsbsteps, i);
@@ -657,10 +655,8 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     for (i = 0; i < loop_ub; i++) {
       bsbsteps->data[i + 1] = y->data[i];
     }
-
     emxFree_real_T(&y);
   }
-
   i = varargout_1->size[0] * varargout_1->size[1];
   varargout_1->size[0] = Y->size[0];
   varargout_1->size[1] = bsbsteps->size[0];
@@ -669,7 +665,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     varargout_1->data[i] = rtNaN;
   }
-
   /*   Un is a Matrix whose 2nd column:11th col contain the unit(s) just */
   /*   included. */
   if (rtIsNaN(init1 + 1.0)) {
@@ -699,7 +694,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   } else {
     eml_float_colon(init1 + 1.0, Y->size[0], ym);
   }
-
   irank = (int)((double)Y->size[0] - init1);
   i = Szi->size[0];
   Szi->size[0] = ym->size[1];
@@ -708,7 +702,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     Szi->data[i] = ym->data[i];
   }
-
   emxInit_real_T(&r2, 2);
   i = r2->size[0] * r2->size[1];
   r2->size[0] = irank;
@@ -718,7 +711,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     r2->data[i] = rtNaN;
   }
-
   emxInit_real_T(&r3, 2);
   cat(Szi, r2, r3);
   i = Un->size[0] * Un->size[1];
@@ -730,9 +722,7 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     Un->data[i] = r3->data[i];
   }
-
   emxFree_real_T(&r3);
-
   /*   mmd has two columns */
   /*   1st col = dimension of the subset */
   /*   2nd col min. Mahalanobis distances among the units */
@@ -764,7 +754,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   } else {
     eml_float_colon(init1, (double)Y->size[0] - 1.0, ym);
   }
-
   i = Szi->size[0];
   Szi->size[0] = (int)((double)Y->size[0] - init1);
   emxEnsureCapacity_real_T(Szi, i);
@@ -772,7 +761,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     Szi->data[i] = 0.0;
   }
-
   i = mmd->size[0] * mmd->size[1];
   mmd->size[0] = ym->size[1];
   mmd->size[1] = 2;
@@ -781,15 +769,13 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     mmd->data[i] = ym->data[i];
   }
-
   loop_ub = Szi->size[0];
   for (i = 0; i < loop_ub; i++) {
     mmd->data[i + mmd->size[0]] = 0.0;
   }
-
   emxInit_real_T(&unit, 1);
-
-  /*  unit is the vector which will contain the units which enter subset at each */
+  /*  unit is the vector which will contain the units which enter subset at each
+   */
   /*  step. It is initialized as a vector of zeros */
   i = unit->size[0];
   unit->size[0] = bsb->size[0];
@@ -798,10 +784,9 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     unit->data[i] = 0.0;
   }
-
   lunit = bsb->size[0];
-
-  /*  If the subset Y(bsb,:) is not full rank or a column is constant, then we */
+  /*  If the subset Y(bsb,:) is not full rank or a column is constant, then we
+   */
   /*  return as output an empty structure. */
   loop_ub = Y->size[1];
   i = Yb->size[0] * Yb->size[1];
@@ -811,11 +796,10 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     b_loop_ub = bsb->size[0];
     for (end = 0; end < b_loop_ub; end++) {
-      Yb->data[end + Yb->size[0] * i] = Y->data[((int)bsb->data[end] + Y->size[0]
-        * i) - 1];
+      Yb->data[end + Yb->size[0] * i] =
+          Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
     }
   }
-
   irank = local_rank(Yb);
   emxInit_real_T(&Ym, 2);
   emxInit_real_T(&mi, 2);
@@ -845,11 +829,10 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     for (i = 0; i < loop_ub; i++) {
       b_loop_ub = bsb->size[0];
       for (end = 0; end < b_loop_ub; end++) {
-        Yb->data[end + Yb->size[0] * i] = Y->data[((int)bsb->data[end] + Y->
-          size[0] * i) - 1];
+        Yb->data[end + Yb->size[0] * i] =
+            Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
       }
     }
-
     maximum(Yb, ym);
     loop_ub = Y->size[1];
     i = Yb->size[0] * Yb->size[1];
@@ -859,11 +842,10 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     for (i = 0; i < loop_ub; i++) {
       b_loop_ub = bsb->size[0];
       for (end = 0; end < b_loop_ub; end++) {
-        Yb->data[end + Yb->size[0] * i] = Y->data[((int)bsb->data[end] + Y->
-          size[0] * i) - 1];
+        Yb->data[end + Yb->size[0] * i] =
+            Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
       }
     }
-
     minimum(Yb, mibsbr);
     i = mi->size[0] * mi->size[1];
     mi->size[0] = 1;
@@ -873,18 +855,18 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     for (i = 0; i < loop_ub; i++) {
       mi->data[i] = ym->data[i] - mibsbr->data[i];
     }
-
     if (b_minimum(mi) == 0.0) {
       guard1 = true;
     } else {
-      /*  ij = index which is linked with the columns of matrix BB. During the */
-      /*  search every time a subset is stored inside matrix BB ij icreases by one */
+      /*  ij = index which is linked with the columns of matrix BB. During the
+       */
+      /*  search every time a subset is stored inside matrix BB ij icreases by
+       * one */
       ij = 0;
       mm = 0;
       exitg1 = false;
       while ((!exitg1) && (mm <= n - ini0)) {
         b_mm = (double)ini0 + (double)mm;
-
         /*  Extract units forming subset */
         if (b_mm <= percn) {
           loop_ub = Y->size[1];
@@ -895,8 +877,8 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i < loop_ub; i++) {
             b_loop_ub = bsb->size[0];
             for (end = 0; end < b_loop_ub; end++) {
-              Yb->data[end + Yb->size[0] * i] = Y->data[((int)bsb->data[end] +
-                Y->size[0] * i) - 1];
+              Yb->data[end + Yb->size[0] * i] =
+                  Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
             }
           }
         } else {
@@ -907,7 +889,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               trueCount++;
             }
           }
-
           i = r4->size[0];
           r4->size[0] = trueCount;
           emxEnsureCapacity_int32_T(r4, i);
@@ -918,7 +899,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               b_loop_ub++;
             }
           }
-
           loop_ub = Y->size[1];
           i = Yb->size[0] * Yb->size[1];
           Yb->size[0] = r4->size[0];
@@ -927,12 +907,11 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i < loop_ub; i++) {
             b_loop_ub = r4->size[0];
             for (end = 0; end < b_loop_ub; end++) {
-              Yb->data[end + Yb->size[0] * i] = Y->data[(r4->data[end] + Y->
-                size[0] * i) - 1];
+              Yb->data[end + Yb->size[0] * i] =
+                  Y->data[(r4->data[end] + Y->size[0] * i) - 1];
             }
           }
         }
-
         /*  If required, store units forming subset at each step */
         if (b_mm >= init1) {
           i = MD->size[0];
@@ -942,7 +921,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i < loop_ub; i++) {
             MD->data[i] = b_mm - bsbsteps->data[i];
           }
-
           irank = MD->size[0];
           i = Szi->size[0];
           Szi->size[0] = MD->size[0];
@@ -950,14 +928,14 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (b_loop_ub = 0; b_loop_ub < irank; b_loop_ub++) {
             Szi->data[b_loop_ub] = fabs(MD->data[b_loop_ub]);
           }
-
           if (c_minimum(Szi) == 0.0) {
             /*  intersect(mm,bsbsteps)==mm */
             if (b_mm <= percn) {
               loop_ub = bsb->size[0];
               for (i = 0; i < loop_ub; i++) {
-                varargout_1->data[((int)bsb->data[i] + varargout_1->size[0] * ij)
-                  - 1] = bsb->data[i];
+                varargout_1
+                    ->data[((int)bsb->data[i] + varargout_1->size[0] * ij) -
+                           1] = bsb->data[i];
               }
             } else {
               end = bsbT->size[0] - 1;
@@ -967,7 +945,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   trueCount++;
                 }
               }
-
               i = r5->size[0];
               r5->size[0] = trueCount;
               emxEnsureCapacity_int32_T(r5, i);
@@ -978,18 +955,16 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   b_loop_ub++;
                 }
               }
-
               loop_ub = r5->size[0];
               for (i = 0; i < loop_ub; i++) {
-                varargout_1->data[(r5->data[i] + varargout_1->size[0] * ij) - 1]
-                  = seq->data[r5->data[i] - 1];
+                varargout_1
+                    ->data[(r5->data[i] + varargout_1->size[0] * ij) - 1] =
+                    seq->data[r5->data[i] - 1];
               }
             }
-
             ij++;
           }
         }
-
         /*  Find vector of means inside subset */
         /*  Note that ym is a row vector */
         combineVectorElements(Yb, ym);
@@ -1000,7 +975,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
         for (i = 0; i <= loop_ub; i++) {
           ym->data[i] /= b_mm;
         }
-
         /*  Ym = n-by-v matrix containing deviations from the means computed */
         /*  using units forming subset */
         /*  Ym=Y-one*ym; */
@@ -1027,7 +1001,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 MDltminT->data[i] = !bsbT->data[i];
               }
-
               end = oldbsbT->size[0] - 1;
               trueCount = 0;
               for (b_i = 0; b_i <= end; b_i++) {
@@ -1035,7 +1008,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   trueCount++;
                 }
               }
-
               i = unitout->size[0];
               unitout->size[0] = trueCount;
               emxEnsureCapacity_real_T(unitout, i);
@@ -1047,7 +1019,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 }
               }
             }
-
             irank = unitout->size[0];
             loop_ub = Y->size[1];
             i = Yb->size[0] * Yb->size[1];
@@ -1057,11 +1028,10 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = unitout->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                Yb->data[end + Yb->size[0] * i] = Y->data[((int)unitout->
-                  data[end] + Y->size[0] * i) - 1];
+                Yb->data[end + Yb->size[0] * i] =
+                    Y->data[((int)unitout->data[end] + Y->size[0] * i) - 1];
               }
             }
-
             combineVectorElements(Yb, mi);
             i = mi->size[0] * mi->size[1];
             mi->size[0] = 1;
@@ -1070,7 +1040,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i <= loop_ub; i++) {
               mi->data[i] /= (double)unitout->size[0];
             }
-
             /*  bsbr units which remained in subset */
             /*  old inefficient code */
             /*  bsbr=setdiff(oldbsb,unitout); */
@@ -1089,7 +1058,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   trueCount++;
                 }
               }
-
               i = r9->size[0];
               r9->size[0] = trueCount;
               emxEnsureCapacity_int32_T(r9, i);
@@ -1100,7 +1068,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   b_loop_ub++;
                 }
               }
-
               loop_ub = Y->size[1];
               i = Yb->size[0] * Yb->size[1];
               Yb->size[0] = r9->size[0];
@@ -1109,11 +1076,10 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 b_loop_ub = r9->size[0];
                 for (end = 0; end < b_loop_ub; end++) {
-                  Yb->data[end + Yb->size[0] * i] = Y->data[(r9->data[end] +
-                    Y->size[0] * i) - 1];
+                  Yb->data[end + Yb->size[0] * i] =
+                      Y->data[(r9->data[end] + Y->size[0] * i) - 1];
                 }
               }
-
               combineVectorElements(Yb, mibsbr);
               i = mibsbr->size[0] * mibsbr->size[1];
               mibsbr->size[0] = 1;
@@ -1132,11 +1098,10 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 b_loop_ub = bsbr->size[0];
                 for (end = 0; end < b_loop_ub; end++) {
-                  Yb->data[end + Yb->size[0] * i] = Y->data[((int)bsbr->data[end]
-                    + Y->size[0] * i) - 1];
+                  Yb->data[end + Yb->size[0] * i] =
+                      Y->data[((int)bsbr->data[end] + Y->size[0] * i) - 1];
                 }
               }
-
               combineVectorElements(Yb, mibsbr);
               i = mibsbr->size[0] * mibsbr->size[1];
               mibsbr->size[0] = 1;
@@ -1147,9 +1112,9 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 mibsbr->data[i] /= ksor;
               }
             }
-
-            ksor = sqrt((double)unitout->size[0] * ((b_mm - 1.0) - (double)
-              unitout->size[0]) / (b_mm - 1.0));
+            ksor =
+                sqrt((double)unitout->size[0] *
+                     ((b_mm - 1.0) - (double)unitout->size[0]) / (b_mm - 1.0));
             i = zi->size[0] * zi->size[1];
             zi->size[0] = 1;
             zi->size[1] = mi->size[1];
@@ -1158,16 +1123,13 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               zi->data[i] = ksor * (mi->data[i] - mibsbr->data[i]);
             }
-
             mtimes(S, zi, Szi);
-
             /*  S=S+(S*(zi')*zi*S)/(1-zi*S*(zi')); */
             ksor = 0.0;
             loop_ub = zi->size[1];
             for (i = 0; i < loop_ub; i++) {
               ksor += zi->data[i] * Szi->data[i];
             }
-
             i = S->size[0] * S->size[1];
             S->size[0] = Szi->size[0];
             S->size[1] = Szi->size[0];
@@ -1176,11 +1138,10 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = Szi->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                S->data[end + S->size[0] * i] += Szi->data[end] * Szi->data[i] /
-                  (1.0 - ksor);
+                S->data[end + S->size[0] * i] +=
+                    Szi->data[end] * Szi->data[i] / (1.0 - ksor);
               }
             }
-
             if (unitout->size[0] > 1) {
               i = unitout->size[0];
               for (b_i = 0; b_i < i; b_i++) {
@@ -1190,19 +1151,18 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 zi->size[1] = Y->size[1];
                 emxEnsureCapacity_real_T(zi, end);
                 for (end = 0; end < loop_ub; end++) {
-                  zi->data[end] = Y->data[((int)unitout->data[b_i] + Y->size[0] *
-                    end) - 1] - mi->data[end];
+                  zi->data[end] =
+                      Y->data[((int)unitout->data[b_i] + Y->size[0] * end) -
+                              1] -
+                      mi->data[end];
                 }
-
                 mtimes(S, zi, Szi);
-
                 /*  S=S+(S*(zi')*zi*S)/(1-zi*S*(zi')); */
                 ksor = 0.0;
                 loop_ub = zi->size[1];
                 for (end = 0; end < loop_ub; end++) {
                   ksor += zi->data[end] * Szi->data[end];
                 }
-
                 end = S->size[0] * S->size[1];
                 S->size[0] = Szi->size[0];
                 S->size[1] = Szi->size[0];
@@ -1211,8 +1171,8 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (end = 0; end < loop_ub; end++) {
                   b_loop_ub = Szi->size[0];
                   for (nwhile = 0; nwhile < b_loop_ub; nwhile++) {
-                    S->data[nwhile + S->size[0] * end] += Szi->data[nwhile] *
-                      Szi->data[end] / (1.0 - ksor);
+                    S->data[nwhile + S->size[0] * end] +=
+                        Szi->data[nwhile] * Szi->data[end] / (1.0 - ksor);
                   }
                 }
               }
@@ -1228,7 +1188,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               mibsbr->data[i] = meoldbsb->data[i];
             }
           }
-
           /*  mi = mean of units entering subset */
           loop_ub = Y->size[1];
           i = Yb->size[0] * Yb->size[1];
@@ -1238,11 +1197,10 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i < loop_ub; i++) {
             b_loop_ub = unit->size[0];
             for (end = 0; end < b_loop_ub; end++) {
-              Yb->data[end + Yb->size[0] * i] = Y->data[((int)unit->data[end] +
-                Y->size[0] * i) - 1];
+              Yb->data[end + Yb->size[0] * i] =
+                  Y->data[((int)unit->data[end] + Y->size[0] * i) - 1];
             }
           }
-
           combineVectorElements(Yb, mi);
           i = mi->size[0] * mi->size[1];
           mi->size[0] = 1;
@@ -1251,7 +1209,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i <= loop_ub; i++) {
             mi->data[i] /= (double)lunit;
           }
-
           /*  zi=sqrt(kin*(mm-1-k)/(mm-1-k+kin))*(mi-mean(Y(bsbr,:),1)); */
           ksor = (b_mm - 1.0) - (double)irank;
           ksor = sqrt((double)lunit * ksor / (ksor + (double)lunit));
@@ -1263,16 +1220,13 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i < loop_ub; i++) {
             zi->data[i] = ksor * (mi->data[i] - mibsbr->data[i]);
           }
-
           mtimes(S, zi, Szi);
-
           /*  S=S+(S*(zi')*zi*S)/(1-zi*S*(zi')); */
           ksor = 0.0;
           loop_ub = zi->size[1];
           for (i = 0; i < loop_ub; i++) {
             ksor += zi->data[i] * Szi->data[i];
           }
-
           i = S->size[0] * S->size[1];
           S->size[0] = Szi->size[0];
           S->size[1] = Szi->size[0];
@@ -1281,11 +1235,10 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i < loop_ub; i++) {
             b_loop_ub = Szi->size[0];
             for (end = 0; end < b_loop_ub; end++) {
-              S->data[end + S->size[0] * i] -= Szi->data[end] * Szi->data[i] /
-                (ksor + 1.0);
+              S->data[end + S->size[0] * i] -=
+                  Szi->data[end] * Szi->data[i] / (ksor + 1.0);
             }
           }
-
           if (lunit > 1) {
             /* mi=mean(Y(unit,:),1); */
             for (b_i = 0; b_i < lunit; b_i++) {
@@ -1295,19 +1248,17 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               zi->size[1] = Y->size[1];
               emxEnsureCapacity_real_T(zi, i);
               for (i = 0; i < loop_ub; i++) {
-                zi->data[i] = Y->data[((int)unit->data[b_i] + Y->size[0] * i) -
-                  1] - mi->data[i];
+                zi->data[i] =
+                    Y->data[((int)unit->data[b_i] + Y->size[0] * i) - 1] -
+                    mi->data[i];
               }
-
               mtimes(S, zi, Szi);
-
               /*  S=S-(S*(zi')*zi*S)/(1+zi*S*(zi')); */
               ksor = 0.0;
               loop_ub = zi->size[1];
               for (i = 0; i < loop_ub; i++) {
                 ksor += zi->data[i] * Szi->data[i];
               }
-
               i = S->size[0] * S->size[1];
               S->size[0] = Szi->size[0];
               S->size[1] = Szi->size[0];
@@ -1316,13 +1267,12 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 b_loop_ub = Szi->size[0];
                 for (end = 0; end < b_loop_ub; end++) {
-                  S->data[end + S->size[0] * i] -= Szi->data[end] * Szi->data[i]
-                    / (ksor + 1.0);
+                  S->data[end + S->size[0] * i] -=
+                      Szi->data[end] * Szi->data[i] / (ksor + 1.0);
                 }
               }
             }
           }
-
           /*  Compute Mahalanobis distance using updating formulae */
           /*  Note that up for n>30000 it seems faster to use bsxfun rather */
           /*  than .* */
@@ -1336,7 +1286,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               Yb->data[i] = r->data[i] * Ym->data[i];
             }
-
             sum(Yb, MD);
             loop_ub = MD->size[0];
             for (i = 0; i < loop_ub; i++) {
@@ -1351,10 +1300,10 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               MD->data[i] *= b_mm - 1.0;
             }
           }
-
           b_guard1 = true;
         } else {
-          /*  In the initial step of the search the inverse is computed directly */
+          /*  In the initial step of the search the inverse is computed directly
+           */
           if (b_mm > percn) {
             end = bsbT->size[0] - 1;
             trueCount = 0;
@@ -1363,7 +1312,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 trueCount++;
               }
             }
-
             i = r6->size[0];
             r6->size[0] = trueCount;
             emxEnsureCapacity_int32_T(r6, i);
@@ -1374,7 +1322,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 b_loop_ub++;
               }
             }
-
             end = bsbT->size[0] - 1;
             trueCount = 0;
             for (b_i = 0; b_i <= end; b_i++) {
@@ -1382,7 +1329,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 trueCount++;
               }
             }
-
             i = r7->size[0];
             r7->size[0] = trueCount;
             emxEnsureCapacity_int32_T(r7, i);
@@ -1393,7 +1339,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 b_loop_ub++;
               }
             }
-
             loop_ub = Ym->size[1];
             i = b_Ym->size[0] * b_Ym->size[1];
             b_Ym->size[0] = r6->size[0];
@@ -1406,17 +1351,15 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = r6->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] = Ym->data[(r6->data[end] +
-                  Ym->size[0] * i) - 1];
+                b_Ym->data[end + b_Ym->size[0] * i] =
+                    Ym->data[(r6->data[end] + Ym->size[0] * i) - 1];
               }
-
               b_loop_ub = r7->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                Yb->data[end + Yb->size[0] * i] = Ym->data[(r7->data[end] +
-                  Ym->size[0] * i) - 1];
+                Yb->data[end + Yb->size[0] * i] =
+                    Ym->data[(r7->data[end] + Ym->size[0] * i) - 1];
               }
             }
-
             c_mtimes(b_Ym, Yb, r);
             inv(r, S);
             end = bsbT->size[0] - 1;
@@ -1426,7 +1369,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 trueCount++;
               }
             }
-
             i = r8->size[0];
             r8->size[0] = trueCount;
             emxEnsureCapacity_int32_T(r8, i);
@@ -1437,7 +1379,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 b_loop_ub++;
               }
             }
-
             loop_ub = Ym->size[1];
             i = b_Ym->size[0] * b_Ym->size[1];
             b_Ym->size[0] = r8->size[0];
@@ -1446,11 +1387,10 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = r8->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] = Ym->data[(r8->data[end] +
-                  Ym->size[0] * i) - 1];
+                b_Ym->data[end + b_Ym->size[0] * i] =
+                    Ym->data[(r8->data[end] + Ym->size[0] * i) - 1];
               }
             }
-
             qr(b_Ym, Yb, R);
           } else {
             loop_ub = Ym->size[1];
@@ -1465,17 +1405,15 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = bsb->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] = Ym->data[((int)bsb->
-                  data[end] + Ym->size[0] * i) - 1];
+                b_Ym->data[end + b_Ym->size[0] * i] =
+                    Ym->data[((int)bsb->data[end] + Ym->size[0] * i) - 1];
               }
-
               b_loop_ub = bsb->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                Yb->data[end + Yb->size[0] * i] = Ym->data[((int)bsb->data[end]
-                  + Ym->size[0] * i) - 1];
+                Yb->data[end + Yb->size[0] * i] =
+                    Ym->data[((int)bsb->data[end] + Ym->size[0] * i) - 1];
               }
             }
-
             c_mtimes(b_Ym, Yb, r);
             inv(r, S);
             loop_ub = Ym->size[1];
@@ -1486,14 +1424,12 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = bsb->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] = Ym->data[((int)bsb->
-                  data[end] + Ym->size[0] * i) - 1];
+                b_Ym->data[end + b_Ym->size[0] * i] =
+                    Ym->data[((int)bsb->data[end] + Ym->size[0] * i) - 1];
               }
             }
-
             qr(b_Ym, Yb, R);
           }
-
           i = MDltminT->size[0];
           MDltminT->size[0] = S->size[0] * S->size[1];
           emxEnsureCapacity_boolean_T(MDltminT, i);
@@ -1501,7 +1437,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i < loop_ub; i++) {
             MDltminT->data[i] = rtIsInf(S->data[i]);
           }
-
           irank = MDltminT->size[0];
           if (MDltminT->size[0] == 0) {
             nwhile = 0;
@@ -1511,7 +1446,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               nwhile += MDltminT->data[b_loop_ub - 1];
             }
           }
-
           if (nwhile > 0) {
             i = mmd->size[0] * mmd->size[1];
             mmd->size[0] = 1;
@@ -1538,11 +1472,9 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               MD->data[i] *= b_mm - 1.0;
             }
-
             b_guard1 = true;
           }
         }
-
         if (b_guard1) {
           if (b_mm < n) {
             /*  MDmod contains modified Mahalanobis distances. The */
@@ -1556,7 +1488,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               Szi->data[i] = MD->data[i];
             }
-
             if (b_mm > percn) {
               end = bsbT->size[0];
               for (b_i = 0; b_i < end; b_i++) {
@@ -1572,13 +1503,11 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 r1->data[i] = (int)bsb->data[i];
               }
-
               loop_ub = r1->size[0];
               for (i = 0; i < loop_ub; i++) {
                 Szi->data[r1->data[i] - 1] = rtInf;
               }
             }
-
             /*  oldbsbF=bsbF; */
             i = oldbsbT->size[0];
             oldbsbT->size[0] = bsbT->size[0];
@@ -1587,11 +1516,10 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               oldbsbT->data[i] = bsbT->data[i];
             }
-
             /*  Take minimum distance of the units not belonging to subset */
             d_minimum(Szi, &minMD, &lunit);
-
-            /*  MDltminT = n x 1 Boolean vector which is true if corresponding MD is */
+            /*  MDltminT = n x 1 Boolean vector which is true if corresponding
+             * MD is */
             /*  smaller or equal minMD */
             i = MDltminT->size[0];
             MDltminT->size[0] = MD->size[0];
@@ -1600,10 +1528,11 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               MDltminT->data[i] = (MD->data[i] <= minMD);
             }
-
             /*  MDltminbsb = n x 1 Boolean vector (if m>percn) or */
-            /*  int32 vector containing the units which certainly remain inside subset */
-            /*  i.e. those which have a true in MDltminT and belong to previous subset */
+            /*  int32 vector containing the units which certainly remain inside
+             * subset */
+            /*  i.e. those which have a true in MDltminT and belong to previous
+             * subset */
             if (b_mm > percn) {
               i = MDltminbsb->size[0];
               MDltminbsb->size[0] = MDltminT->size[0];
@@ -1621,7 +1550,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 MDltminbsb->data[i] = MDltminT->data[(int)bsb->data[i] - 1];
               }
             }
-
             /*  Find number of units of old subset which have a MD <= minMD */
             /*  rankgap is the difference between m+1 (size of new size) and */
             /*  the number of units of old subset which have a distance <= */
@@ -1636,7 +1564,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 nwhile += MDltminbsb->data[b_loop_ub - 1];
               }
             }
-
             rankgap = (b_mm + 1.0) - (double)nwhile;
             if (rankgap == 1.0) {
               /*  Just one new unit entered subset */
@@ -1644,7 +1571,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               unit->size[0] = 1;
               emxEnsureCapacity_real_T(unit, i);
               unit->data[0] = lunit;
-
               /*  Compute new bsbT and new bsb */
               if (b_mm <= percn) {
                 /*  new bsb is equal to oldbsb plus unit which just entered */
@@ -1654,7 +1580,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 emxEnsureCapacity_real_T(bsb, end);
                 bsb->data[i] = lunit;
               }
-
               /*  bsbT is equal to old bsbT after adding a single true in */
               /*  correspondence of the unit which entered subset */
               bsbT->data[lunit - 1] = true;
@@ -1669,7 +1594,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 Szi->data[i] = MD->data[i];
               }
-
               /*  Find bsbrini, i.e. the vector which will contain the */
               /*  units which remain in the subset in the next step */
               /*  Note that bsbrini is defined using Boolean vector bsbT */
@@ -1688,7 +1612,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     trueCount++;
                   }
                 }
-
                 i = bsbrini->size[0];
                 bsbrini->size[0] = trueCount;
                 emxEnsureCapacity_uint32_T(bsbrini, i);
@@ -1699,7 +1622,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     b_loop_ub++;
                   }
                 }
-
                 /*  unitout = list of the units which potentially left */
                 /*  subset. We say potentially because there are still k */
                 /*  units to be included */
@@ -1711,7 +1633,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     trueCount++;
                   }
                 }
-
                 i = unitout->size[0];
                 unitout->size[0] = trueCount;
                 emxEnsureCapacity_real_T(unitout, i);
@@ -1722,7 +1643,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     b_loop_ub++;
                   }
                 }
-
                 i = r1->size[0];
                 r1->size[0] = bsbrini->size[0];
                 emxEnsureCapacity_int32_T(r1, i);
@@ -1730,7 +1650,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (i = 0; i < loop_ub; i++) {
                   r1->data[i] = (int)bsbrini->data[i];
                 }
-
                 loop_ub = r1->size[0];
                 for (i = 0; i < loop_ub; i++) {
                   Szi->data[r1->data[i] - 1] = rtInf;
@@ -1748,7 +1667,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (i = 0; i < loop_ub; i++) {
                   bsbriniT->data[i] = MDltminbsb->data[i];
                 }
-
                 end = MDltminbsb->size[0];
                 for (b_i = 0; b_i < end; b_i++) {
                   if (MDltminbsb->data[b_i]) {
@@ -1756,19 +1674,17 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   }
                 }
               }
-
               irank = 0;
               nwhile = 0;
-
               /*  In the following loop we add k units to form the new */
               /*  subset of m+1 units Note that if the difference between */
-              /*  m+1 and the rank of the min outside subset is equal to rankgap, */
+              /*  m+1 and the rank of the min outside subset is equal to
+               * rankgap, */
               /*  than at most rankgap minima must be calculated to find */
               /*  the the (m+1)-th order statistic */
               i = (int)rankgap;
               for (loop_ub = 0; loop_ub < i; loop_ub++) {
                 d_minimum(Szi, &ksor, &lunit);
-
                 /*  minMDindex = index of the unit which is about to */
                 /*  enter subset. We check whether unit minMDindex */
                 /*  belonged or not to previous subset If unit minMDindex */
@@ -1780,7 +1696,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   if (b_mm <= percn) {
                     bsbradd[nwhile] = lunit;
                     nwhile++;
-
                     /*  Delete from vector unitout (containing the */
                     /*  list of the units which went out of the */
                     /*  subset) element minMDindex */
@@ -1791,7 +1706,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                         trueCount++;
                       }
                     }
-
                     b_loop_ub = 0;
                     for (b_i = 0; b_i <= end; b_i++) {
                       if ((int)unitout->data[b_i] != lunit) {
@@ -1799,7 +1713,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                         b_loop_ub++;
                       }
                     }
-
                     end = unitout->size[0];
                     unitout->size[0] = trueCount;
                     emxEnsureCapacity_real_T(unitout, end);
@@ -1810,26 +1723,23 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   unitadd[irank] = lunit;
                   irank++;
                 }
-
                 /*  disp(posunit(posncl1)) */
                 Szi->data[lunit - 1] = rtInf;
               }
-
-              /*  unit = vector containing all units which enter the new subset */
+              /*  unit = vector containing all units which enter the new subset
+               */
               /*  but did not belong to previous subset */
               if (1 > irank) {
                 loop_ub = 0;
               } else {
                 loop_ub = irank;
               }
-
               i = unit->size[0];
               unit->size[0] = loop_ub;
               emxEnsureCapacity_real_T(unit, i);
               for (i = 0; i < loop_ub; i++) {
                 unit->data[i] = unitadd[i];
               }
-
               /*  bsbr = vector containing all units which enter the new */
               /*  subset and were also in the previous subset */
               /*  bsb = units forming new subset. */
@@ -1839,7 +1749,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 } else {
                   b_loop_ub = nwhile;
                 }
-
                 i = bsbr->size[0];
                 bsbr->size[0] = bsbrini->size[0] + b_loop_ub;
                 emxEnsureCapacity_real_T(bsbr, i);
@@ -1847,11 +1756,9 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (i = 0; i < irank; i++) {
                   bsbr->data[i] = bsbrini->data[i];
                 }
-
                 for (i = 0; i < b_loop_ub; i++) {
                   bsbr->data[i + bsbrini->size[0]] = bsbradd[i];
                 }
-
                 i = bsb->size[0];
                 bsb->size[0] = bsbr->size[0] + loop_ub;
                 emxEnsureCapacity_real_T(bsb, i);
@@ -1859,18 +1766,15 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (i = 0; i < b_loop_ub; i++) {
                   bsb->data[i] = bsbr->data[i];
                 }
-
                 for (i = 0; i < loop_ub; i++) {
                   bsb->data[i + bsbr->size[0]] = unitadd[i];
                 }
-
                 i = bsbT->size[0];
                 bsbT->size[0] = n;
                 emxEnsureCapacity_boolean_T(bsbT, i);
                 for (i = 0; i < n; i++) {
                   bsbT->data[i] = false;
                 }
-
                 i = r1->size[0];
                 r1->size[0] = bsb->size[0];
                 emxEnsureCapacity_int32_T(r1, i);
@@ -1878,7 +1782,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (i = 0; i < loop_ub; i++) {
                   r1->data[i] = (int)bsb->data[i];
                 }
-
                 loop_ub = r1->size[0];
                 for (i = 0; i < loop_ub; i++) {
                   bsbT->data[r1->data[i] - 1] = true;
@@ -1886,18 +1789,17 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               } else {
                 /*  After the instruction which follows bsbriniT */
                 /*  will be exactly equal to bsbT */
-                /*  Note that bsbT has been computed through the 3 following instructions */
+                /*  Note that bsbT has been computed through the 3 following
+                 * instructions */
                 /*  -----------    bsbriniT=MDltminT & bsbT; */
                 /*  -----------    bsbriniT(minMDindex)=true; */
                 /*  -----------    bsbriniT(unit)=true; */
                 for (i = 0; i < loop_ub; i++) {
                   tmp_data[i] = (int)unitadd[i];
                 }
-
                 for (i = 0; i < loop_ub; i++) {
                   bsbriniT->data[tmp_data[i] - 1] = true;
                 }
-
                 i = bsbT->size[0];
                 bsbT->size[0] = bsbriniT->size[0];
                 emxEnsureCapacity_boolean_T(bsbT, i);
@@ -1906,7 +1808,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   bsbT->data[i] = bsbriniT->data[i];
                 }
               }
-
               /*  Compute bsbT (Boolean vector which identifies new subset) */
             } else {
               /*   rankgap>nrepmin */
@@ -1923,7 +1824,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i <= loop_ub; i++) {
                 Szi->data[i] = MD->data[i];
               }
-
               ksor = quickselectFS(Szi, b_mm + 1.0, lunit);
               i = bsbT->size[0];
               bsbT->size[0] = MD->size[0];
@@ -1932,7 +1832,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 bsbT->data[i] = (MD->data[i] <= ksor);
               }
-
               irank = bsbT->size[0];
               if (bsbT->size[0] == 0) {
                 nwhile = 0;
@@ -1942,7 +1841,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   nwhile += bsbT->data[b_loop_ub - 1];
                 }
               }
-
               if (nwhile == (int)b_mm + 1) {
                 if (b_mm <= percn) {
                   end = bsbT->size[0] - 1;
@@ -1952,7 +1850,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                       trueCount++;
                     }
                   }
-
                   i = bsb->size[0];
                   bsb->size[0] = trueCount;
                   emxEnsureCapacity_real_T(bsb, i);
@@ -1975,14 +1872,12 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     irank++;
                   }
                 }
-
                 d = (b_mm + 1.0) - (double)trueCount;
                 if (1.0 > d) {
                   loop_ub = 0;
                 } else {
                   loop_ub = (int)d;
                 }
-
                 i = r10->size[0];
                 r10->size[0] = irank;
                 emxEnsureCapacity_int32_T(r10, i);
@@ -1994,12 +1889,10 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     r10->data[b_loop_ub] = b_i + 1;
                     b_loop_ub++;
                   }
-
                   if (MD->data[b_i] == ksor) {
                     trueCount++;
                   }
                 }
-
                 i = r11->size[0];
                 r11->size[0] = trueCount;
                 emxEnsureCapacity_int32_T(r11, i);
@@ -2010,7 +1903,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     b_loop_ub++;
                   }
                 }
-
                 i = bsb->size[0];
                 bsb->size[0] = r10->size[0] + loop_ub;
                 emxEnsureCapacity_real_T(bsb, i);
@@ -2018,18 +1910,15 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (i = 0; i < b_loop_ub; i++) {
                   bsb->data[i] = seq->data[r10->data[i] - 1];
                 }
-
                 for (i = 0; i < loop_ub; i++) {
                   bsb->data[i + r10->size[0]] = seq->data[r11->data[i] - 1];
                 }
-
                 i = bsbT->size[0];
                 bsbT->size[0] = n;
                 emxEnsureCapacity_boolean_T(bsbT, i);
                 for (i = 0; i < n; i++) {
                   bsbT->data[i] = false;
                 }
-
                 i = r1->size[0];
                 r1->size[0] = bsb->size[0];
                 emxEnsureCapacity_int32_T(r1, i);
@@ -2037,13 +1926,11 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (i = 0; i < loop_ub; i++) {
                   r1->data[i] = (int)bsb->data[i];
                 }
-
                 loop_ub = r1->size[0];
                 for (i = 0; i < loop_ub; i++) {
                   bsbT->data[r1->data[i] - 1] = true;
                 }
               }
-
               /*  unit = vector containing units which just entered subset; */
               i = MDltminT->size[0];
               MDltminT->size[0] = bsbT->size[0];
@@ -2052,7 +1939,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 MDltminT->data[i] = (bsbT->data[i] && (!oldbsbT->data[i]));
               }
-
               b_eml_find(MDltminT, r1);
               i = unit->size[0];
               unit->size[0] = r1->size[0];
@@ -2062,14 +1948,12 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 unit->data[i] = r1->data[i];
               }
             }
-
             if (b_mm >= init1) {
               /*  mmd contains minimum of Mahalanobis distances among */
               /*  the units which are not in the subset at step m */
-              mmd->data[((int)((b_mm - init1) + 1.0) + mmd->size[0]) - 1] = sqrt
-                (minMD);
+              mmd->data[((int)((b_mm - init1) + 1.0) + mmd->size[0]) - 1] =
+                  sqrt(minMD);
             }
-
             /*  store mean of units forming old subset */
             i = meoldbsb->size[0] * meoldbsb->size[1];
             meoldbsb->size[0] = 1;
@@ -2079,7 +1963,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               meoldbsb->data[i] = ym->data[i];
             }
-
             lunit = unit->size[0];
             if (b_mm >= init1) {
               if (unit->size[0] <= 10) {
@@ -2090,19 +1973,17 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   i = 0;
                   end = unit->size[0];
                 }
-
                 nwhile = (int)((b_mm - init1) + 1.0) - 1;
                 irank = end - i;
                 for (end = 0; end < irank; end++) {
-                  Un->data[nwhile + Un->size[0] * ((i + end) + 1)] = unit->
-                    data[end];
+                  Un->data[nwhile + Un->size[0] * ((i + end) + 1)] =
+                      unit->data[end];
                 }
               } else {
                 if (varargin_6) {
                   int2str(b_mm, c_mm.data, c_mm.size);
                   int2str(unit->size[0], c_mm.data, c_mm.size);
                 }
-
                 i = (int)((b_mm - init1) + 1.0) - 1;
                 for (end = 0; end < 10; end++) {
                   Un->data[i + Un->size[0] * (end + 1)] = unit->data[end];
@@ -2110,13 +1991,11 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               }
             }
           }
-
           mm++;
         }
       }
     }
   }
-
   if (guard1) {
     i = mmd->size[0] * mmd->size[1];
     mmd->size[0] = 1;
@@ -2134,7 +2013,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     emxEnsureCapacity_real_T(varargout_1, i);
     varargout_1->data[0] = rtNaN;
   }
-
   emxFree_real_T(&r);
   emxFree_real_T(&b_Ym);
   emxFree_int32_T(&r11);
@@ -2235,7 +2113,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   bool exitg1;
   bool guard1 = false;
   emxInit_boolean_T(&MDltminT, 1);
-
   /* FSMmmd monitors minMD */
   /*  */
   /* <a href="matlab: docsearchFS('FSMmmd')">Link to the help function</a> */
@@ -2243,15 +2120,20 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  Required input arguments: */
   /*  */
   /*  Y :           Input data. Matrix. */
-  /*                n x v data matrix; n observations and v variables. Rows of */
-  /*                Y represent observations, and columns represent variables. */
+  /*                n x v data matrix; n observations and v variables. Rows of
+   */
+  /*                Y represent observations, and columns represent variables.
+   */
   /*                Missing values (NaN's) and infinite values (Inf's) are */
-  /*                allowed, since observations (rows) with missing or infinite */
+  /*                allowed, since observations (rows) with missing or infinite
+   */
   /*                values will automatically be excluded from the */
   /*                computations. */
   /*                 Data Types - single|double */
-  /*  bsb :         Units forming subset. Vector. List of units forming the initial subset. */
-  /*                If bsb=0 (default) then the procedure starts with p units randomly */
+  /*  bsb :         Units forming subset. Vector. List of units forming the
+   * initial subset. */
+  /*                If bsb=0 (default) then the procedure starts with p units
+   * randomly */
   /*                chosen else if bsb is not 0 the search will start with */
   /*                m0=length(bsb) */
   /*                Data Types - single | double */
@@ -2261,7 +2143,8 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  */
   /*    bsbsteps :  Save the units forming subsets. Vector. It specifies for */
   /*                which steps of the fwd search it */
-  /*                is necessary to save the units forming subsets. If bsbsteps */
+  /*                is necessary to save the units forming subsets. If bsbsteps
+   */
   /*                is 0 we store the units forming subset in all steps. The */
   /*                default is store the units forming subset in all steps if */
   /*                n<=5000, else to store the units forming subset at steps */
@@ -2274,7 +2157,8 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*                Data Types - double */
   /*  */
   /*  init :       Point where to start monitoring */
-  /*                required diagnostics. Scalar. Note that if bsb is supplied, */
+  /*                required diagnostics. Scalar. Note that if bsb is supplied,
+   */
   /*                init>=length(bsb). If init is not specified it will */
   /*                be set equal to floor(n*0.6). */
   /*                  Example - 'init',50 */
@@ -2288,14 +2172,17 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*                  Data Types - double */
   /*  */
   /*  nocheck :   It controls wether to perform checks on */
-  /*                matrix Y. Boolean. If nocheck is equal to true no check is */
+  /*                matrix Y. Boolean. If nocheck is equal to true no check is
+   */
   /*                performed on matrix Y. As default nocheck=false. */
   /*                  Example - 'nocheck',false */
   /*                  Data Types - logical */
   /*  */
   /*  */
-  /*  plots :     It specify whether it is necessary to produce the plots of minimum Mahalanobis */
-  /*                  distance. Scalar. If plots=1, a plot of the monitoring of minMD among */
+  /*  plots :     It specify whether it is necessary to produce the plots of
+   * minimum Mahalanobis */
+  /*                  distance. Scalar. If plots=1, a plot of the monitoring of
+   * minMD among */
   /*                the units not belonging to the subset is produced on the */
   /*                screen with 1% 50% and 99% confidence bands */
   /*                else (default) no plot is produced. */
@@ -2303,20 +2190,23 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*                  Data Types - double */
   /*  */
   /*  */
-  /*  Remark :      The user should only give the input arguments that have to */
+  /*  Remark :      The user should only give the input arguments that have to
+   */
   /*                change their default value. */
   /*                The name of the input arguments needs to be followed by */
   /*                their value. The order of the input arguments is of no */
   /*                importance. */
   /*  */
   /*                Missing values (NaN's) and infinite values (Inf's) are */
-  /*                allowed, since observations (rows) with missing or infinite */
+  /*                allowed, since observations (rows) with missing or infinite
+   */
   /*                values will automatically be excluded from the */
   /*                computations. y can be both a row of column vector. */
   /*  */
   /*  Output: */
   /*  */
-  /*  mmd :         (n-init) x 2 matrix which contains the monitoring of minimum */
+  /*  mmd :         (n-init) x 2 matrix which contains the monitoring of minimum
+   */
   /*                Mahalanobis distance each step of the forward search. */
   /*                1st col = fwd search index (from init to n-1); */
   /*                2nd col = minimum Mahalanobis distance. */
@@ -2334,13 +2224,15 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  */
   /*  BB :   n x (n-init+1) matrix containing units belonging to subset in */
   /*                each step of the search. Each row is associated to a unit */
-  /*                while each colum is associated to a step of the fwd search. */
+  /*                while each colum is associated to a step of the fwd search.
+   */
   /*  */
   /*  See also FSMenvmmd.m, FSM.m, FSMmmdeasy, quickselectFS.m */
   /*  */
   /*  References: */
   /*  */
-  /*  Atkinson, A.C., Riani, M. and Cerioli, A. (2004), "Exploring multivariate */
+  /*  Atkinson, A.C., Riani, M. and Cerioli, A. (2004), "Exploring multivariate
+   */
   /*  data with the forward search", Springer Verlag, New York. */
   /*  */
   /*  Copyright 2008-2021. */
@@ -2352,7 +2244,8 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  Examples: */
   /* { */
   /*     %% Minimum Mahalanobis distance. */
-  /*     % Personalized initial subset (small n). Create an initial subset with */
+  /*     % Personalized initial subset (small n). Create an initial subset with
+   */
   /*     % the 4 observations which fell the smallest */
   /*     % number of times outside the robust bivariate ellipses and with the */
   /*     % lowest Mahalanobis Distance. */
@@ -2392,7 +2285,8 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /* { */
   /*     % Checking the unit(s) included in the subset at each step of the */
   /*     % search. */
-  /*     % Un contains the unit(s) present in the new subset but not in the old one. */
+  /*     % Un contains the unit(s) present in the new subset but not in the old
+   * one. */
   /*     n=200; */
   /*     v=3; */
   /*     m0=4; */
@@ -2411,7 +2305,8 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /* { */
   /*     % Checking the units belonging to subset in each step of the search. */
   /*     % Personalized initial subset (large n). Each row of BB matrix */
-  /*     % is associated to a unit while each colum is associated to a step of the fwd search. */
+  /*     % is associated to a unit while each colum is associated to a step of
+   * the fwd search. */
   /*     n=20000; */
   /*     v=3; */
   /*     m0=10; */
@@ -2428,21 +2323,27 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  Beginning of code */
   /*  Input parameters checking */
   /* chkinputM does not do any check if option nocheck=true */
-  /* chkinputM makes some input parameters and user options checking in multivariate analysis */
+  /* chkinputM makes some input parameters and user options checking in
+   * multivariate analysis */
   /*  */
   /*  Required input arguments: */
   /*  */
   /*  X :          Input data. Matrix. */
-  /*                n x v data matrix; n observations and v variables. Rows of */
-  /*                X represent observations, and columns represent variables. */
+  /*                n x v data matrix; n observations and v variables. Rows of
+   */
+  /*                X represent observations, and columns represent variables.
+   */
   /*                Missing values (NaN's) and infinite values (Inf's) are */
-  /*                allowed, since observations (rows) with missing or infinite */
+  /*                allowed, since observations (rows) with missing or infinite
+   */
   /*                values will automatically be excluded from the */
   /*                computations. */
   /*                 Data Types - single|double */
-  /*  nnargin:      nargin. Scalar. The number of input arguments specified for the caller */
+  /*  nnargin:      nargin. Scalar. The number of input arguments specified for
+   * the caller */
   /*                function. */
-  /*  vvarargin:    nvarargin. Scalar. The variable length input argument list */
+  /*  vvarargin:    nvarargin. Scalar. The variable length input argument list
+   */
   /*                specified for the */
   /*                caller function. */
   /*  */
@@ -2471,7 +2372,8 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  Example: */
   /* { */
   /*     %% example_producing_error */
-  /*     %To examplify the behaviour of chkinputM, we call function FSM with a */
+  /*     %To examplify the behaviour of chkinputM, we call function FSM with a
+   */
   /*     %X with more columns then rows. */
   /*     n=3; */
   /*     p=200; */
@@ -2487,7 +2389,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  rows(Y) */
   v = Y->size[1];
   n = Y->size[0];
-
   /*  Do not use implicit expansion */
   /*  Input parameters checking */
   /* init1=options.init; */
@@ -2500,7 +2401,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     MDltminT->data[i] = (bsb->data[i] == 0.0);
   }
-
   emxInit_real_T(&Yb, 2);
   emxInit_real_T(&r, 2);
   if (ifWhileCond(MDltminT)) {
@@ -2509,7 +2409,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     while (Ra && (nwhile < 100)) {
       /*  Extract a random sample of size v+1 */
       randsample(n, (double)v + 1.0, bsb);
-
       /*  Check if the var-cov matrix of the random sample is full (i.e =v) */
       loop_ub = Y->size[1];
       i = Yb->size[0] * Yb->size[1];
@@ -2519,27 +2418,24 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
       for (i = 0; i < loop_ub; i++) {
         b_loop_ub = bsb->size[0];
         for (end = 0; end < b_loop_ub; end++) {
-          Yb->data[end + Yb->size[0] * i] = Y->data[((int)bsb->data[end] +
-            Y->size[0] * i) - 1];
+          Yb->data[end + Yb->size[0] * i] =
+              Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
         }
       }
-
       cov(Yb, r);
       irank = local_rank(r);
       Ra = (irank < v);
       nwhile++;
     }
   }
-
   emxInit_real_T(&ym, 2);
-
   /*  percn = scalar which controls up to which point of the search it is */
   /*  better to use linear indexing to extract the units forming subset. For */
-  /*  example percn=0.85*n means that units belonging to susbet are found using */
+  /*  example percn=0.85*n means that units belonging to susbet are found using
+   */
   /*  linear indexing up to step m=0.85*n. After m=0.85*n units belonging to */
   /*  subset are found using a n-by-1 logical vector */
   percn = 0.85 * (double)Y->size[0];
-
   /*  nrepmin = scalar which controls the maximum number of repeated minima */
   /*  which must be taken in order to find new subset */
   if (Y->size[0] < 1) {
@@ -2555,7 +2451,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
       ym->data[i] = (double)i + 1.0;
     }
   }
-
   emxInit_real_T(&seq, 1);
   i = seq->size[0];
   seq->size[0] = ym->size[1];
@@ -2564,11 +2459,9 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     seq->data[i] = ym->data[i];
   }
-
   memset(&unitadd[0], 0, 10U * sizeof(double));
   memset(&bsbradd[0], 0, 10U * sizeof(double));
   emxInit_boolean_T(&bsbT, 1);
-
   /*  Initialization of the n x 1 Boolean vector which contains a true in */
   /*  correspondence of the units belonging to subset in each step */
   i = bsbT->size[0];
@@ -2578,7 +2471,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     bsbT->data[i] = false;
   }
-
   emxInit_int32_T(&r1, 1);
   i = r1->size[0];
   r1->size[0] = bsb->size[0];
@@ -2587,14 +2479,11 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     r1->data[i] = (int)bsb->data[i];
   }
-
   loop_ub = r1->size[0];
   for (i = 0; i < loop_ub; i++) {
     bsbT->data[r1->data[i] - 1] = true;
   }
-
   emxInit_real_T(&S, 2);
-
   /*  Initialization for Matlab coder */
   rankgap = 0.0;
   i = S->size[0] * S->size[1];
@@ -2605,7 +2494,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     S->data[i] = 0.0;
   }
-
   emxInit_real_T(&meoldbsb, 2);
   i = meoldbsb->size[0] * meoldbsb->size[1];
   meoldbsb->size[0] = 1;
@@ -2615,7 +2503,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     meoldbsb->data[i] = 0.0;
   }
-
   emxInit_boolean_T(&oldbsbT, 1);
   i = oldbsbT->size[0];
   oldbsbT->size[0] = bsbT->size[0];
@@ -2624,7 +2511,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     oldbsbT->data[i] = bsbT->data[i];
   }
-
   emxInit_real_T(&bsbr, 1);
   i = bsbr->size[0];
   bsbr->size[0] = Y->size[0];
@@ -2633,7 +2519,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     bsbr->data[i] = 0.0;
   }
-
   emxInit_real_T(&unitout, 1);
   i = unitout->size[0];
   unitout->size[0] = Y->size[0];
@@ -2642,7 +2527,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     unitout->data[i] = 0.0;
   }
-
   emxInit_boolean_T(&bsbriniT, 1);
   i = bsbriniT->size[0];
   bsbriniT->size[0] = bsbT->size[0];
@@ -2651,7 +2535,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     bsbriniT->data[i] = bsbT->data[i];
   }
-
   emxInit_uint32_T(&bsbrini, 1);
   i = bsbrini->size[0];
   bsbrini->size[0] = Y->size[0];
@@ -2660,9 +2543,7 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     bsbrini->data[i] = 0U;
   }
-
   ini0 = bsb->size[0];
-
   /*  check init */
   init1 = varargin_2;
   if (varargin_2 < (double)Y->size[1] + 1.0) {
@@ -2678,7 +2559,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     fflush(stdout);
     init1 = (double)Y->size[0] - 1.0;
   }
-
   /*   Un is a Matrix whose 2nd column:11th col contain the unit(s) just */
   /*   included. */
   if (rtIsNaN(init1 + 1.0)) {
@@ -2708,7 +2588,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   } else {
     eml_float_colon(init1 + 1.0, Y->size[0], ym);
   }
-
   emxInit_real_T(&Szi, 1);
   irank = (int)((double)Y->size[0] - init1);
   i = Szi->size[0];
@@ -2718,7 +2597,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     Szi->data[i] = ym->data[i];
   }
-
   emxInit_real_T(&r2, 2);
   i = r2->size[0] * r2->size[1];
   r2->size[0] = irank;
@@ -2728,7 +2606,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     r2->data[i] = rtNaN;
   }
-
   emxInit_real_T(&r3, 2);
   cat(Szi, r2, r3);
   i = Un->size[0] * Un->size[1];
@@ -2740,9 +2617,7 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     Un->data[i] = r3->data[i];
   }
-
   emxFree_real_T(&r3);
-
   /*   mmd has two columns */
   /*   1st col = dimension of the subset */
   /*   2nd col min. Mahalanobis distances among the units */
@@ -2774,7 +2649,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   } else {
     eml_float_colon(init1, (double)Y->size[0] - 1.0, ym);
   }
-
   i = Szi->size[0];
   Szi->size[0] = (int)((double)Y->size[0] - init1);
   emxEnsureCapacity_real_T(Szi, i);
@@ -2782,7 +2656,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     Szi->data[i] = 0.0;
   }
-
   i = mmd->size[0] * mmd->size[1];
   mmd->size[0] = ym->size[1];
   mmd->size[1] = 2;
@@ -2791,15 +2664,13 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     mmd->data[i] = ym->data[i];
   }
-
   loop_ub = Szi->size[0];
   for (i = 0; i < loop_ub; i++) {
     mmd->data[i + mmd->size[0]] = 0.0;
   }
-
   emxInit_real_T(&unit, 1);
-
-  /*  unit is the vector which will contain the units which enter subset at each */
+  /*  unit is the vector which will contain the units which enter subset at each
+   */
   /*  step. It is initialized as a vector of zeros */
   i = unit->size[0];
   unit->size[0] = bsb->size[0];
@@ -2808,10 +2679,9 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     unit->data[i] = 0.0;
   }
-
   lunit = bsb->size[0];
-
-  /*  If the subset Y(bsb,:) is not full rank or a column is constant, then we */
+  /*  If the subset Y(bsb,:) is not full rank or a column is constant, then we
+   */
   /*  return as output an empty structure. */
   loop_ub = Y->size[1];
   i = Yb->size[0] * Yb->size[1];
@@ -2821,11 +2691,10 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     b_loop_ub = bsb->size[0];
     for (end = 0; end < b_loop_ub; end++) {
-      Yb->data[end + Yb->size[0] * i] = Y->data[((int)bsb->data[end] + Y->size[0]
-        * i) - 1];
+      Yb->data[end + Yb->size[0] * i] =
+          Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
     }
   }
-
   irank = local_rank(Yb);
   emxInit_real_T(&Ym, 2);
   emxInit_real_T(&mi, 2);
@@ -2854,11 +2723,10 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     for (i = 0; i < loop_ub; i++) {
       b_loop_ub = bsb->size[0];
       for (end = 0; end < b_loop_ub; end++) {
-        Yb->data[end + Yb->size[0] * i] = Y->data[((int)bsb->data[end] + Y->
-          size[0] * i) - 1];
+        Yb->data[end + Yb->size[0] * i] =
+            Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
       }
     }
-
     maximum(Yb, ym);
     loop_ub = Y->size[1];
     i = Yb->size[0] * Yb->size[1];
@@ -2868,11 +2736,10 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     for (i = 0; i < loop_ub; i++) {
       b_loop_ub = bsb->size[0];
       for (end = 0; end < b_loop_ub; end++) {
-        Yb->data[end + Yb->size[0] * i] = Y->data[((int)bsb->data[end] + Y->
-          size[0] * i) - 1];
+        Yb->data[end + Yb->size[0] * i] =
+            Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
       }
     }
-
     minimum(Yb, mibsbr);
     i = mi->size[0] * mi->size[1];
     mi->size[0] = 1;
@@ -2882,17 +2749,17 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     for (i = 0; i < loop_ub; i++) {
       mi->data[i] = ym->data[i] - mibsbr->data[i];
     }
-
     if (b_minimum(mi) == 0.0) {
       guard1 = true;
     } else {
-      /*  ij = index which is linked with the columns of matrix BB. During the */
-      /*  search every time a subset is stored inside matrix BB ij icreases by one */
+      /*  ij = index which is linked with the columns of matrix BB. During the
+       */
+      /*  search every time a subset is stored inside matrix BB ij icreases by
+       * one */
       mm = 0;
       exitg1 = false;
       while ((!exitg1) && (mm <= n - ini0)) {
         b_mm = (double)ini0 + (double)mm;
-
         /*  Extract units forming subset */
         if (b_mm <= percn) {
           loop_ub = Y->size[1];
@@ -2903,8 +2770,8 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i < loop_ub; i++) {
             b_loop_ub = bsb->size[0];
             for (end = 0; end < b_loop_ub; end++) {
-              Yb->data[end + Yb->size[0] * i] = Y->data[((int)bsb->data[end] +
-                Y->size[0] * i) - 1];
+              Yb->data[end + Yb->size[0] * i] =
+                  Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
             }
           }
         } else {
@@ -2915,7 +2782,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               trueCount++;
             }
           }
-
           i = r4->size[0];
           r4->size[0] = trueCount;
           emxEnsureCapacity_int32_T(r4, i);
@@ -2926,7 +2792,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               b_loop_ub++;
             }
           }
-
           loop_ub = Y->size[1];
           i = Yb->size[0] * Yb->size[1];
           Yb->size[0] = r4->size[0];
@@ -2935,12 +2800,11 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i < loop_ub; i++) {
             b_loop_ub = r4->size[0];
             for (end = 0; end < b_loop_ub; end++) {
-              Yb->data[end + Yb->size[0] * i] = Y->data[(r4->data[end] + Y->
-                size[0] * i) - 1];
+              Yb->data[end + Yb->size[0] * i] =
+                  Y->data[(r4->data[end] + Y->size[0] * i) - 1];
             }
           }
         }
-
         /*  If required, store units forming subset at each step */
         /*  Find vector of means inside subset */
         /*  Note that ym is a row vector */
@@ -2952,7 +2816,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
         for (i = 0; i <= loop_ub; i++) {
           ym->data[i] /= b_mm;
         }
-
         /*  Ym = n-by-v matrix containing deviations from the means computed */
         /*  using units forming subset */
         /*  Ym=Y-one*ym; */
@@ -2979,7 +2842,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 MDltminT->data[i] = !bsbT->data[i];
               }
-
               end = oldbsbT->size[0] - 1;
               trueCount = 0;
               for (b_i = 0; b_i <= end; b_i++) {
@@ -2987,7 +2849,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   trueCount++;
                 }
               }
-
               i = unitout->size[0];
               unitout->size[0] = trueCount;
               emxEnsureCapacity_real_T(unitout, i);
@@ -2999,7 +2860,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 }
               }
             }
-
             irank = unitout->size[0];
             loop_ub = Y->size[1];
             i = Yb->size[0] * Yb->size[1];
@@ -3009,11 +2869,10 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = unitout->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                Yb->data[end + Yb->size[0] * i] = Y->data[((int)unitout->
-                  data[end] + Y->size[0] * i) - 1];
+                Yb->data[end + Yb->size[0] * i] =
+                    Y->data[((int)unitout->data[end] + Y->size[0] * i) - 1];
               }
             }
-
             combineVectorElements(Yb, mi);
             i = mi->size[0] * mi->size[1];
             mi->size[0] = 1;
@@ -3022,7 +2881,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i <= loop_ub; i++) {
               mi->data[i] /= (double)unitout->size[0];
             }
-
             /*  bsbr units which remained in subset */
             /*  old inefficient code */
             /*  bsbr=setdiff(oldbsb,unitout); */
@@ -3041,7 +2899,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   trueCount++;
                 }
               }
-
               i = r8->size[0];
               r8->size[0] = trueCount;
               emxEnsureCapacity_int32_T(r8, i);
@@ -3052,7 +2909,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   b_loop_ub++;
                 }
               }
-
               loop_ub = Y->size[1];
               i = Yb->size[0] * Yb->size[1];
               Yb->size[0] = r8->size[0];
@@ -3061,11 +2917,10 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 b_loop_ub = r8->size[0];
                 for (end = 0; end < b_loop_ub; end++) {
-                  Yb->data[end + Yb->size[0] * i] = Y->data[(r8->data[end] +
-                    Y->size[0] * i) - 1];
+                  Yb->data[end + Yb->size[0] * i] =
+                      Y->data[(r8->data[end] + Y->size[0] * i) - 1];
                 }
               }
-
               combineVectorElements(Yb, mibsbr);
               i = mibsbr->size[0] * mibsbr->size[1];
               mibsbr->size[0] = 1;
@@ -3084,11 +2939,10 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 b_loop_ub = bsbr->size[0];
                 for (end = 0; end < b_loop_ub; end++) {
-                  Yb->data[end + Yb->size[0] * i] = Y->data[((int)bsbr->data[end]
-                    + Y->size[0] * i) - 1];
+                  Yb->data[end + Yb->size[0] * i] =
+                      Y->data[((int)bsbr->data[end] + Y->size[0] * i) - 1];
                 }
               }
-
               combineVectorElements(Yb, mibsbr);
               i = mibsbr->size[0] * mibsbr->size[1];
               mibsbr->size[0] = 1;
@@ -3099,9 +2953,9 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 mibsbr->data[i] /= ksor;
               }
             }
-
-            ksor = sqrt((double)unitout->size[0] * ((b_mm - 1.0) - (double)
-              unitout->size[0]) / (b_mm - 1.0));
+            ksor =
+                sqrt((double)unitout->size[0] *
+                     ((b_mm - 1.0) - (double)unitout->size[0]) / (b_mm - 1.0));
             i = zi->size[0] * zi->size[1];
             zi->size[0] = 1;
             zi->size[1] = mi->size[1];
@@ -3110,16 +2964,13 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               zi->data[i] = ksor * (mi->data[i] - mibsbr->data[i]);
             }
-
             mtimes(S, zi, Szi);
-
             /*  S=S+(S*(zi')*zi*S)/(1-zi*S*(zi')); */
             ksor = 0.0;
             loop_ub = zi->size[1];
             for (i = 0; i < loop_ub; i++) {
               ksor += zi->data[i] * Szi->data[i];
             }
-
             i = S->size[0] * S->size[1];
             S->size[0] = Szi->size[0];
             S->size[1] = Szi->size[0];
@@ -3128,11 +2979,10 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = Szi->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                S->data[end + S->size[0] * i] += Szi->data[end] * Szi->data[i] /
-                  (1.0 - ksor);
+                S->data[end + S->size[0] * i] +=
+                    Szi->data[end] * Szi->data[i] / (1.0 - ksor);
               }
             }
-
             if (unitout->size[0] > 1) {
               i = unitout->size[0];
               for (b_i = 0; b_i < i; b_i++) {
@@ -3142,19 +2992,18 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 zi->size[1] = Y->size[1];
                 emxEnsureCapacity_real_T(zi, end);
                 for (end = 0; end < loop_ub; end++) {
-                  zi->data[end] = Y->data[((int)unitout->data[b_i] + Y->size[0] *
-                    end) - 1] - mi->data[end];
+                  zi->data[end] =
+                      Y->data[((int)unitout->data[b_i] + Y->size[0] * end) -
+                              1] -
+                      mi->data[end];
                 }
-
                 mtimes(S, zi, Szi);
-
                 /*  S=S+(S*(zi')*zi*S)/(1-zi*S*(zi')); */
                 ksor = 0.0;
                 loop_ub = zi->size[1];
                 for (end = 0; end < loop_ub; end++) {
                   ksor += zi->data[end] * Szi->data[end];
                 }
-
                 end = S->size[0] * S->size[1];
                 S->size[0] = Szi->size[0];
                 S->size[1] = Szi->size[0];
@@ -3163,8 +3012,8 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (end = 0; end < loop_ub; end++) {
                   b_loop_ub = Szi->size[0];
                   for (nwhile = 0; nwhile < b_loop_ub; nwhile++) {
-                    S->data[nwhile + S->size[0] * end] += Szi->data[nwhile] *
-                      Szi->data[end] / (1.0 - ksor);
+                    S->data[nwhile + S->size[0] * end] +=
+                        Szi->data[nwhile] * Szi->data[end] / (1.0 - ksor);
                   }
                 }
               }
@@ -3180,7 +3029,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               mibsbr->data[i] = meoldbsb->data[i];
             }
           }
-
           /*  mi = mean of units entering subset */
           loop_ub = Y->size[1];
           i = Yb->size[0] * Yb->size[1];
@@ -3190,11 +3038,10 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i < loop_ub; i++) {
             b_loop_ub = unit->size[0];
             for (end = 0; end < b_loop_ub; end++) {
-              Yb->data[end + Yb->size[0] * i] = Y->data[((int)unit->data[end] +
-                Y->size[0] * i) - 1];
+              Yb->data[end + Yb->size[0] * i] =
+                  Y->data[((int)unit->data[end] + Y->size[0] * i) - 1];
             }
           }
-
           combineVectorElements(Yb, mi);
           i = mi->size[0] * mi->size[1];
           mi->size[0] = 1;
@@ -3203,7 +3050,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i <= loop_ub; i++) {
             mi->data[i] /= (double)lunit;
           }
-
           /*  zi=sqrt(kin*(mm-1-k)/(mm-1-k+kin))*(mi-mean(Y(bsbr,:),1)); */
           ksor = (b_mm - 1.0) - (double)irank;
           ksor = sqrt((double)lunit * ksor / (ksor + (double)lunit));
@@ -3215,16 +3061,13 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i < loop_ub; i++) {
             zi->data[i] = ksor * (mi->data[i] - mibsbr->data[i]);
           }
-
           mtimes(S, zi, Szi);
-
           /*  S=S+(S*(zi')*zi*S)/(1-zi*S*(zi')); */
           ksor = 0.0;
           loop_ub = zi->size[1];
           for (i = 0; i < loop_ub; i++) {
             ksor += zi->data[i] * Szi->data[i];
           }
-
           i = S->size[0] * S->size[1];
           S->size[0] = Szi->size[0];
           S->size[1] = Szi->size[0];
@@ -3233,11 +3076,10 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i < loop_ub; i++) {
             b_loop_ub = Szi->size[0];
             for (end = 0; end < b_loop_ub; end++) {
-              S->data[end + S->size[0] * i] -= Szi->data[end] * Szi->data[i] /
-                (ksor + 1.0);
+              S->data[end + S->size[0] * i] -=
+                  Szi->data[end] * Szi->data[i] / (ksor + 1.0);
             }
           }
-
           if (lunit > 1) {
             /* mi=mean(Y(unit,:),1); */
             for (b_i = 0; b_i < lunit; b_i++) {
@@ -3247,19 +3089,17 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               zi->size[1] = Y->size[1];
               emxEnsureCapacity_real_T(zi, i);
               for (i = 0; i < loop_ub; i++) {
-                zi->data[i] = Y->data[((int)unit->data[b_i] + Y->size[0] * i) -
-                  1] - mi->data[i];
+                zi->data[i] =
+                    Y->data[((int)unit->data[b_i] + Y->size[0] * i) - 1] -
+                    mi->data[i];
               }
-
               mtimes(S, zi, Szi);
-
               /*  S=S-(S*(zi')*zi*S)/(1+zi*S*(zi')); */
               ksor = 0.0;
               loop_ub = zi->size[1];
               for (i = 0; i < loop_ub; i++) {
                 ksor += zi->data[i] * Szi->data[i];
               }
-
               i = S->size[0] * S->size[1];
               S->size[0] = Szi->size[0];
               S->size[1] = Szi->size[0];
@@ -3268,13 +3108,12 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 b_loop_ub = Szi->size[0];
                 for (end = 0; end < b_loop_ub; end++) {
-                  S->data[end + S->size[0] * i] -= Szi->data[end] * Szi->data[i]
-                    / (ksor + 1.0);
+                  S->data[end + S->size[0] * i] -=
+                      Szi->data[end] * Szi->data[i] / (ksor + 1.0);
                 }
               }
             }
           }
-
           /*  Compute Mahalanobis distance using updating formulae */
           /*  Note that up for n>30000 it seems faster to use bsxfun rather */
           /*  than .* */
@@ -3288,7 +3127,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               Yb->data[i] = r->data[i] * Ym->data[i];
             }
-
             sum(Yb, MD);
             loop_ub = MD->size[0];
             for (i = 0; i < loop_ub; i++) {
@@ -3303,10 +3141,10 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               MD->data[i] *= b_mm - 1.0;
             }
           }
-
           b_guard1 = true;
         } else {
-          /*  In the initial step of the search the inverse is computed directly */
+          /*  In the initial step of the search the inverse is computed directly
+           */
           if (b_mm > percn) {
             end = bsbT->size[0] - 1;
             trueCount = 0;
@@ -3315,7 +3153,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 trueCount++;
               }
             }
-
             i = r5->size[0];
             r5->size[0] = trueCount;
             emxEnsureCapacity_int32_T(r5, i);
@@ -3326,7 +3163,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 b_loop_ub++;
               }
             }
-
             end = bsbT->size[0] - 1;
             trueCount = 0;
             for (b_i = 0; b_i <= end; b_i++) {
@@ -3334,7 +3170,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 trueCount++;
               }
             }
-
             i = r6->size[0];
             r6->size[0] = trueCount;
             emxEnsureCapacity_int32_T(r6, i);
@@ -3345,7 +3180,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 b_loop_ub++;
               }
             }
-
             loop_ub = Ym->size[1];
             i = b_Ym->size[0] * b_Ym->size[1];
             b_Ym->size[0] = r5->size[0];
@@ -3358,17 +3192,15 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = r5->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] = Ym->data[(r5->data[end] +
-                  Ym->size[0] * i) - 1];
+                b_Ym->data[end + b_Ym->size[0] * i] =
+                    Ym->data[(r5->data[end] + Ym->size[0] * i) - 1];
               }
-
               b_loop_ub = r6->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                Yb->data[end + Yb->size[0] * i] = Ym->data[(r6->data[end] +
-                  Ym->size[0] * i) - 1];
+                Yb->data[end + Yb->size[0] * i] =
+                    Ym->data[(r6->data[end] + Ym->size[0] * i) - 1];
               }
             }
-
             c_mtimes(b_Ym, Yb, r);
             inv(r, S);
             end = bsbT->size[0] - 1;
@@ -3378,7 +3210,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 trueCount++;
               }
             }
-
             i = r7->size[0];
             r7->size[0] = trueCount;
             emxEnsureCapacity_int32_T(r7, i);
@@ -3389,7 +3220,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 b_loop_ub++;
               }
             }
-
             loop_ub = Ym->size[1];
             i = b_Ym->size[0] * b_Ym->size[1];
             b_Ym->size[0] = r7->size[0];
@@ -3398,11 +3228,10 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = r7->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] = Ym->data[(r7->data[end] +
-                  Ym->size[0] * i) - 1];
+                b_Ym->data[end + b_Ym->size[0] * i] =
+                    Ym->data[(r7->data[end] + Ym->size[0] * i) - 1];
               }
             }
-
             qr(b_Ym, Yb, R);
           } else {
             loop_ub = Ym->size[1];
@@ -3417,17 +3246,15 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = bsb->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] = Ym->data[((int)bsb->
-                  data[end] + Ym->size[0] * i) - 1];
+                b_Ym->data[end + b_Ym->size[0] * i] =
+                    Ym->data[((int)bsb->data[end] + Ym->size[0] * i) - 1];
               }
-
               b_loop_ub = bsb->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                Yb->data[end + Yb->size[0] * i] = Ym->data[((int)bsb->data[end]
-                  + Ym->size[0] * i) - 1];
+                Yb->data[end + Yb->size[0] * i] =
+                    Ym->data[((int)bsb->data[end] + Ym->size[0] * i) - 1];
               }
             }
-
             c_mtimes(b_Ym, Yb, r);
             inv(r, S);
             loop_ub = Ym->size[1];
@@ -3438,14 +3265,12 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = bsb->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] = Ym->data[((int)bsb->
-                  data[end] + Ym->size[0] * i) - 1];
+                b_Ym->data[end + b_Ym->size[0] * i] =
+                    Ym->data[((int)bsb->data[end] + Ym->size[0] * i) - 1];
               }
             }
-
             qr(b_Ym, Yb, R);
           }
-
           i = MDltminT->size[0];
           MDltminT->size[0] = S->size[0] * S->size[1];
           emxEnsureCapacity_boolean_T(MDltminT, i);
@@ -3453,7 +3278,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i < loop_ub; i++) {
             MDltminT->data[i] = rtIsInf(S->data[i]);
           }
-
           irank = MDltminT->size[0];
           if (MDltminT->size[0] == 0) {
             nwhile = 0;
@@ -3463,7 +3287,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               nwhile += MDltminT->data[b_loop_ub - 1];
             }
           }
-
           if (nwhile > 0) {
             i = mmd->size[0] * mmd->size[1];
             mmd->size[0] = 1;
@@ -3485,11 +3308,9 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               MD->data[i] *= b_mm - 1.0;
             }
-
             b_guard1 = true;
           }
         }
-
         if (b_guard1) {
           if (b_mm < n) {
             /*  MDmod contains modified Mahalanobis distances. The */
@@ -3503,7 +3324,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               Szi->data[i] = MD->data[i];
             }
-
             if (b_mm > percn) {
               end = bsbT->size[0];
               for (b_i = 0; b_i < end; b_i++) {
@@ -3519,13 +3339,11 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 r1->data[i] = (int)bsb->data[i];
               }
-
               loop_ub = r1->size[0];
               for (i = 0; i < loop_ub; i++) {
                 Szi->data[r1->data[i] - 1] = rtInf;
               }
             }
-
             /*  oldbsbF=bsbF; */
             i = oldbsbT->size[0];
             oldbsbT->size[0] = bsbT->size[0];
@@ -3534,11 +3352,10 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               oldbsbT->data[i] = bsbT->data[i];
             }
-
             /*  Take minimum distance of the units not belonging to subset */
             d_minimum(Szi, &minMD, &lunit);
-
-            /*  MDltminT = n x 1 Boolean vector which is true if corresponding MD is */
+            /*  MDltminT = n x 1 Boolean vector which is true if corresponding
+             * MD is */
             /*  smaller or equal minMD */
             i = MDltminT->size[0];
             MDltminT->size[0] = MD->size[0];
@@ -3547,10 +3364,11 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               MDltminT->data[i] = (MD->data[i] <= minMD);
             }
-
             /*  MDltminbsb = n x 1 Boolean vector (if m>percn) or */
-            /*  int32 vector containing the units which certainly remain inside subset */
-            /*  i.e. those which have a true in MDltminT and belong to previous subset */
+            /*  int32 vector containing the units which certainly remain inside
+             * subset */
+            /*  i.e. those which have a true in MDltminT and belong to previous
+             * subset */
             if (b_mm > percn) {
               i = MDltminbsb->size[0];
               MDltminbsb->size[0] = MDltminT->size[0];
@@ -3568,7 +3386,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 MDltminbsb->data[i] = MDltminT->data[(int)bsb->data[i] - 1];
               }
             }
-
             /*  Find number of units of old subset which have a MD <= minMD */
             /*  rankgap is the difference between m+1 (size of new size) and */
             /*  the number of units of old subset which have a distance <= */
@@ -3583,7 +3400,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 nwhile += MDltminbsb->data[b_loop_ub - 1];
               }
             }
-
             rankgap = (b_mm + 1.0) - (double)nwhile;
             if (rankgap == 1.0) {
               /*  Just one new unit entered subset */
@@ -3591,7 +3407,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               unit->size[0] = 1;
               emxEnsureCapacity_real_T(unit, i);
               unit->data[0] = lunit;
-
               /*  Compute new bsbT and new bsb */
               if (b_mm <= percn) {
                 /*  new bsb is equal to oldbsb plus unit which just entered */
@@ -3601,7 +3416,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 emxEnsureCapacity_real_T(bsb, end);
                 bsb->data[i] = lunit;
               }
-
               /*  bsbT is equal to old bsbT after adding a single true in */
               /*  correspondence of the unit which entered subset */
               bsbT->data[lunit - 1] = true;
@@ -3616,7 +3430,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 Szi->data[i] = MD->data[i];
               }
-
               /*  Find bsbrini, i.e. the vector which will contain the */
               /*  units which remain in the subset in the next step */
               /*  Note that bsbrini is defined using Boolean vector bsbT */
@@ -3635,7 +3448,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     trueCount++;
                   }
                 }
-
                 i = bsbrini->size[0];
                 bsbrini->size[0] = trueCount;
                 emxEnsureCapacity_uint32_T(bsbrini, i);
@@ -3646,7 +3458,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     b_loop_ub++;
                   }
                 }
-
                 /*  unitout = list of the units which potentially left */
                 /*  subset. We say potentially because there are still k */
                 /*  units to be included */
@@ -3658,7 +3469,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     trueCount++;
                   }
                 }
-
                 i = unitout->size[0];
                 unitout->size[0] = trueCount;
                 emxEnsureCapacity_real_T(unitout, i);
@@ -3669,7 +3479,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     b_loop_ub++;
                   }
                 }
-
                 i = r1->size[0];
                 r1->size[0] = bsbrini->size[0];
                 emxEnsureCapacity_int32_T(r1, i);
@@ -3677,7 +3486,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (i = 0; i < loop_ub; i++) {
                   r1->data[i] = (int)bsbrini->data[i];
                 }
-
                 loop_ub = r1->size[0];
                 for (i = 0; i < loop_ub; i++) {
                   Szi->data[r1->data[i] - 1] = rtInf;
@@ -3695,7 +3503,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (i = 0; i < loop_ub; i++) {
                   bsbriniT->data[i] = MDltminbsb->data[i];
                 }
-
                 end = MDltminbsb->size[0];
                 for (b_i = 0; b_i < end; b_i++) {
                   if (MDltminbsb->data[b_i]) {
@@ -3703,19 +3510,17 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   }
                 }
               }
-
               irank = 0;
               nwhile = 0;
-
               /*  In the following loop we add k units to form the new */
               /*  subset of m+1 units Note that if the difference between */
-              /*  m+1 and the rank of the min outside subset is equal to rankgap, */
+              /*  m+1 and the rank of the min outside subset is equal to
+               * rankgap, */
               /*  than at most rankgap minima must be calculated to find */
               /*  the the (m+1)-th order statistic */
               i = (int)rankgap;
               for (loop_ub = 0; loop_ub < i; loop_ub++) {
                 d_minimum(Szi, &ksor, &lunit);
-
                 /*  minMDindex = index of the unit which is about to */
                 /*  enter subset. We check whether unit minMDindex */
                 /*  belonged or not to previous subset If unit minMDindex */
@@ -3727,7 +3532,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   if (b_mm <= percn) {
                     bsbradd[nwhile] = lunit;
                     nwhile++;
-
                     /*  Delete from vector unitout (containing the */
                     /*  list of the units which went out of the */
                     /*  subset) element minMDindex */
@@ -3738,7 +3542,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                         trueCount++;
                       }
                     }
-
                     b_loop_ub = 0;
                     for (b_i = 0; b_i <= end; b_i++) {
                       if ((int)unitout->data[b_i] != lunit) {
@@ -3746,7 +3549,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                         b_loop_ub++;
                       }
                     }
-
                     end = unitout->size[0];
                     unitout->size[0] = trueCount;
                     emxEnsureCapacity_real_T(unitout, end);
@@ -3757,26 +3559,23 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   unitadd[irank] = lunit;
                   irank++;
                 }
-
                 /*  disp(posunit(posncl1)) */
                 Szi->data[lunit - 1] = rtInf;
               }
-
-              /*  unit = vector containing all units which enter the new subset */
+              /*  unit = vector containing all units which enter the new subset
+               */
               /*  but did not belong to previous subset */
               if (1 > irank) {
                 loop_ub = 0;
               } else {
                 loop_ub = irank;
               }
-
               i = unit->size[0];
               unit->size[0] = loop_ub;
               emxEnsureCapacity_real_T(unit, i);
               for (i = 0; i < loop_ub; i++) {
                 unit->data[i] = unitadd[i];
               }
-
               /*  bsbr = vector containing all units which enter the new */
               /*  subset and were also in the previous subset */
               /*  bsb = units forming new subset. */
@@ -3786,7 +3585,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 } else {
                   b_loop_ub = nwhile;
                 }
-
                 i = bsbr->size[0];
                 bsbr->size[0] = bsbrini->size[0] + b_loop_ub;
                 emxEnsureCapacity_real_T(bsbr, i);
@@ -3794,11 +3592,9 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (i = 0; i < irank; i++) {
                   bsbr->data[i] = bsbrini->data[i];
                 }
-
                 for (i = 0; i < b_loop_ub; i++) {
                   bsbr->data[i + bsbrini->size[0]] = bsbradd[i];
                 }
-
                 i = bsb->size[0];
                 bsb->size[0] = bsbr->size[0] + loop_ub;
                 emxEnsureCapacity_real_T(bsb, i);
@@ -3806,18 +3602,15 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (i = 0; i < b_loop_ub; i++) {
                   bsb->data[i] = bsbr->data[i];
                 }
-
                 for (i = 0; i < loop_ub; i++) {
                   bsb->data[i + bsbr->size[0]] = unitadd[i];
                 }
-
                 i = bsbT->size[0];
                 bsbT->size[0] = n;
                 emxEnsureCapacity_boolean_T(bsbT, i);
                 for (i = 0; i < n; i++) {
                   bsbT->data[i] = false;
                 }
-
                 i = r1->size[0];
                 r1->size[0] = bsb->size[0];
                 emxEnsureCapacity_int32_T(r1, i);
@@ -3825,7 +3618,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (i = 0; i < loop_ub; i++) {
                   r1->data[i] = (int)bsb->data[i];
                 }
-
                 loop_ub = r1->size[0];
                 for (i = 0; i < loop_ub; i++) {
                   bsbT->data[r1->data[i] - 1] = true;
@@ -3833,18 +3625,17 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               } else {
                 /*  After the instruction which follows bsbriniT */
                 /*  will be exactly equal to bsbT */
-                /*  Note that bsbT has been computed through the 3 following instructions */
+                /*  Note that bsbT has been computed through the 3 following
+                 * instructions */
                 /*  -----------    bsbriniT=MDltminT & bsbT; */
                 /*  -----------    bsbriniT(minMDindex)=true; */
                 /*  -----------    bsbriniT(unit)=true; */
                 for (i = 0; i < loop_ub; i++) {
                   tmp_data[i] = (int)unitadd[i];
                 }
-
                 for (i = 0; i < loop_ub; i++) {
                   bsbriniT->data[tmp_data[i] - 1] = true;
                 }
-
                 i = bsbT->size[0];
                 bsbT->size[0] = bsbriniT->size[0];
                 emxEnsureCapacity_boolean_T(bsbT, i);
@@ -3853,7 +3644,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   bsbT->data[i] = bsbriniT->data[i];
                 }
               }
-
               /*  Compute bsbT (Boolean vector which identifies new subset) */
             } else {
               /*   rankgap>nrepmin */
@@ -3870,7 +3660,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i <= loop_ub; i++) {
                 Szi->data[i] = MD->data[i];
               }
-
               ksor = quickselectFS(Szi, b_mm + 1.0, lunit);
               i = bsbT->size[0];
               bsbT->size[0] = MD->size[0];
@@ -3879,7 +3668,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 bsbT->data[i] = (MD->data[i] <= ksor);
               }
-
               irank = bsbT->size[0];
               if (bsbT->size[0] == 0) {
                 nwhile = 0;
@@ -3889,7 +3677,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   nwhile += bsbT->data[b_loop_ub - 1];
                 }
               }
-
               if (nwhile == (int)b_mm + 1) {
                 if (b_mm <= percn) {
                   end = bsbT->size[0] - 1;
@@ -3899,7 +3686,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                       trueCount++;
                     }
                   }
-
                   i = bsb->size[0];
                   bsb->size[0] = trueCount;
                   emxEnsureCapacity_real_T(bsb, i);
@@ -3922,14 +3708,12 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     irank++;
                   }
                 }
-
                 d = (b_mm + 1.0) - (double)trueCount;
                 if (1.0 > d) {
                   loop_ub = 0;
                 } else {
                   loop_ub = (int)d;
                 }
-
                 i = r9->size[0];
                 r9->size[0] = irank;
                 emxEnsureCapacity_int32_T(r9, i);
@@ -3941,12 +3725,10 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     r9->data[b_loop_ub] = b_i + 1;
                     b_loop_ub++;
                   }
-
                   if (MD->data[b_i] == ksor) {
                     trueCount++;
                   }
                 }
-
                 i = r10->size[0];
                 r10->size[0] = trueCount;
                 emxEnsureCapacity_int32_T(r10, i);
@@ -3957,7 +3739,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     b_loop_ub++;
                   }
                 }
-
                 i = bsb->size[0];
                 bsb->size[0] = r9->size[0] + loop_ub;
                 emxEnsureCapacity_real_T(bsb, i);
@@ -3965,18 +3746,15 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (i = 0; i < b_loop_ub; i++) {
                   bsb->data[i] = seq->data[r9->data[i] - 1];
                 }
-
                 for (i = 0; i < loop_ub; i++) {
                   bsb->data[i + r9->size[0]] = seq->data[r10->data[i] - 1];
                 }
-
                 i = bsbT->size[0];
                 bsbT->size[0] = n;
                 emxEnsureCapacity_boolean_T(bsbT, i);
                 for (i = 0; i < n; i++) {
                   bsbT->data[i] = false;
                 }
-
                 i = r1->size[0];
                 r1->size[0] = bsb->size[0];
                 emxEnsureCapacity_int32_T(r1, i);
@@ -3984,13 +3762,11 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (i = 0; i < loop_ub; i++) {
                   r1->data[i] = (int)bsb->data[i];
                 }
-
                 loop_ub = r1->size[0];
                 for (i = 0; i < loop_ub; i++) {
                   bsbT->data[r1->data[i] - 1] = true;
                 }
               }
-
               /*  unit = vector containing units which just entered subset; */
               i = MDltminT->size[0];
               MDltminT->size[0] = bsbT->size[0];
@@ -3999,7 +3775,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 MDltminT->data[i] = (bsbT->data[i] && (!oldbsbT->data[i]));
               }
-
               b_eml_find(MDltminT, r1);
               i = unit->size[0];
               unit->size[0] = r1->size[0];
@@ -4009,14 +3784,12 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 unit->data[i] = r1->data[i];
               }
             }
-
             if (b_mm >= init1) {
               /*  mmd contains minimum of Mahalanobis distances among */
               /*  the units which are not in the subset at step m */
-              mmd->data[((int)((b_mm - init1) + 1.0) + mmd->size[0]) - 1] = sqrt
-                (minMD);
+              mmd->data[((int)((b_mm - init1) + 1.0) + mmd->size[0]) - 1] =
+                  sqrt(minMD);
             }
-
             /*  store mean of units forming old subset */
             i = meoldbsb->size[0] * meoldbsb->size[1];
             meoldbsb->size[0] = 1;
@@ -4026,7 +3799,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               meoldbsb->data[i] = ym->data[i];
             }
-
             lunit = unit->size[0];
             if (b_mm >= init1) {
               if (unit->size[0] <= 10) {
@@ -4037,19 +3809,17 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   i = 0;
                   end = unit->size[0];
                 }
-
                 nwhile = (int)((b_mm - init1) + 1.0) - 1;
                 irank = end - i;
                 for (end = 0; end < irank; end++) {
-                  Un->data[nwhile + Un->size[0] * ((i + end) + 1)] = unit->
-                    data[end];
+                  Un->data[nwhile + Un->size[0] * ((i + end) + 1)] =
+                      unit->data[end];
                 }
               } else {
                 if (varargin_6) {
                   int2str(b_mm, c_mm.data, c_mm.size);
                   int2str(unit->size[0], c_mm.data, c_mm.size);
                 }
-
                 i = (int)((b_mm - init1) + 1.0) - 1;
                 for (end = 0; end < 10; end++) {
                   Un->data[i + Un->size[0] * (end + 1)] = unit->data[end];
@@ -4057,13 +3827,11 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               }
             }
           }
-
           mm++;
         }
       }
     }
   }
-
   if (guard1) {
     i = mmd->size[0] * mmd->size[1];
     mmd->size[0] = 1;
@@ -4076,7 +3844,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     emxEnsureCapacity_real_T(Un, i);
     Un->data[0] = rtNaN;
   }
-
   emxFree_real_T(&r);
   emxFree_real_T(&b_Ym);
   emxFree_int32_T(&r10);
@@ -4111,8 +3878,8 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
 }
 
 void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
-              emxArray_real_T *mmd, emxArray_real_T *Un, emxArray_real_T
-              *varargout_1)
+              emxArray_real_T *mmd, emxArray_real_T *Un,
+              emxArray_real_T *varargout_1)
 {
   emxArray_boolean_T *MDltminT;
   emxArray_boolean_T *MDltminbsb;
@@ -4179,7 +3946,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   bool exitg1;
   bool guard1 = false;
   emxInit_boolean_T(&MDltminT, 1);
-
   /* FSMmmd monitors minMD */
   /*  */
   /* <a href="matlab: docsearchFS('FSMmmd')">Link to the help function</a> */
@@ -4187,15 +3953,20 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  Required input arguments: */
   /*  */
   /*  Y :           Input data. Matrix. */
-  /*                n x v data matrix; n observations and v variables. Rows of */
-  /*                Y represent observations, and columns represent variables. */
+  /*                n x v data matrix; n observations and v variables. Rows of
+   */
+  /*                Y represent observations, and columns represent variables.
+   */
   /*                Missing values (NaN's) and infinite values (Inf's) are */
-  /*                allowed, since observations (rows) with missing or infinite */
+  /*                allowed, since observations (rows) with missing or infinite
+   */
   /*                values will automatically be excluded from the */
   /*                computations. */
   /*                 Data Types - single|double */
-  /*  bsb :         Units forming subset. Vector. List of units forming the initial subset. */
-  /*                If bsb=0 (default) then the procedure starts with p units randomly */
+  /*  bsb :         Units forming subset. Vector. List of units forming the
+   * initial subset. */
+  /*                If bsb=0 (default) then the procedure starts with p units
+   * randomly */
   /*                chosen else if bsb is not 0 the search will start with */
   /*                m0=length(bsb) */
   /*                Data Types - single | double */
@@ -4205,7 +3976,8 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  */
   /*    bsbsteps :  Save the units forming subsets. Vector. It specifies for */
   /*                which steps of the fwd search it */
-  /*                is necessary to save the units forming subsets. If bsbsteps */
+  /*                is necessary to save the units forming subsets. If bsbsteps
+   */
   /*                is 0 we store the units forming subset in all steps. The */
   /*                default is store the units forming subset in all steps if */
   /*                n<=5000, else to store the units forming subset at steps */
@@ -4218,7 +3990,8 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*                Data Types - double */
   /*  */
   /*  init :       Point where to start monitoring */
-  /*                required diagnostics. Scalar. Note that if bsb is supplied, */
+  /*                required diagnostics. Scalar. Note that if bsb is supplied,
+   */
   /*                init>=length(bsb). If init is not specified it will */
   /*                be set equal to floor(n*0.6). */
   /*                  Example - 'init',50 */
@@ -4232,14 +4005,17 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*                  Data Types - double */
   /*  */
   /*  nocheck :   It controls wether to perform checks on */
-  /*                matrix Y. Boolean. If nocheck is equal to true no check is */
+  /*                matrix Y. Boolean. If nocheck is equal to true no check is
+   */
   /*                performed on matrix Y. As default nocheck=false. */
   /*                  Example - 'nocheck',false */
   /*                  Data Types - logical */
   /*  */
   /*  */
-  /*  plots :     It specify whether it is necessary to produce the plots of minimum Mahalanobis */
-  /*                  distance. Scalar. If plots=1, a plot of the monitoring of minMD among */
+  /*  plots :     It specify whether it is necessary to produce the plots of
+   * minimum Mahalanobis */
+  /*                  distance. Scalar. If plots=1, a plot of the monitoring of
+   * minMD among */
   /*                the units not belonging to the subset is produced on the */
   /*                screen with 1% 50% and 99% confidence bands */
   /*                else (default) no plot is produced. */
@@ -4247,20 +4023,23 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*                  Data Types - double */
   /*  */
   /*  */
-  /*  Remark :      The user should only give the input arguments that have to */
+  /*  Remark :      The user should only give the input arguments that have to
+   */
   /*                change their default value. */
   /*                The name of the input arguments needs to be followed by */
   /*                their value. The order of the input arguments is of no */
   /*                importance. */
   /*  */
   /*                Missing values (NaN's) and infinite values (Inf's) are */
-  /*                allowed, since observations (rows) with missing or infinite */
+  /*                allowed, since observations (rows) with missing or infinite
+   */
   /*                values will automatically be excluded from the */
   /*                computations. y can be both a row of column vector. */
   /*  */
   /*  Output: */
   /*  */
-  /*  mmd :         (n-init) x 2 matrix which contains the monitoring of minimum */
+  /*  mmd :         (n-init) x 2 matrix which contains the monitoring of minimum
+   */
   /*                Mahalanobis distance each step of the forward search. */
   /*                1st col = fwd search index (from init to n-1); */
   /*                2nd col = minimum Mahalanobis distance. */
@@ -4278,13 +4057,15 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  */
   /*  BB :   n x (n-init+1) matrix containing units belonging to subset in */
   /*                each step of the search. Each row is associated to a unit */
-  /*                while each colum is associated to a step of the fwd search. */
+  /*                while each colum is associated to a step of the fwd search.
+   */
   /*  */
   /*  See also FSMenvmmd.m, FSM.m, FSMmmdeasy, quickselectFS.m */
   /*  */
   /*  References: */
   /*  */
-  /*  Atkinson, A.C., Riani, M. and Cerioli, A. (2004), "Exploring multivariate */
+  /*  Atkinson, A.C., Riani, M. and Cerioli, A. (2004), "Exploring multivariate
+   */
   /*  data with the forward search", Springer Verlag, New York. */
   /*  */
   /*  Copyright 2008-2021. */
@@ -4296,7 +4077,8 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  Examples: */
   /* { */
   /*     %% Minimum Mahalanobis distance. */
-  /*     % Personalized initial subset (small n). Create an initial subset with */
+  /*     % Personalized initial subset (small n). Create an initial subset with
+   */
   /*     % the 4 observations which fell the smallest */
   /*     % number of times outside the robust bivariate ellipses and with the */
   /*     % lowest Mahalanobis Distance. */
@@ -4336,7 +4118,8 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /* { */
   /*     % Checking the unit(s) included in the subset at each step of the */
   /*     % search. */
-  /*     % Un contains the unit(s) present in the new subset but not in the old one. */
+  /*     % Un contains the unit(s) present in the new subset but not in the old
+   * one. */
   /*     n=200; */
   /*     v=3; */
   /*     m0=4; */
@@ -4355,7 +4138,8 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /* { */
   /*     % Checking the units belonging to subset in each step of the search. */
   /*     % Personalized initial subset (large n). Each row of BB matrix */
-  /*     % is associated to a unit while each colum is associated to a step of the fwd search. */
+  /*     % is associated to a unit while each colum is associated to a step of
+   * the fwd search. */
   /*     n=20000; */
   /*     v=3; */
   /*     m0=10; */
@@ -4372,21 +4156,27 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  Beginning of code */
   /*  Input parameters checking */
   /* chkinputM does not do any check if option nocheck=true */
-  /* chkinputM makes some input parameters and user options checking in multivariate analysis */
+  /* chkinputM makes some input parameters and user options checking in
+   * multivariate analysis */
   /*  */
   /*  Required input arguments: */
   /*  */
   /*  X :          Input data. Matrix. */
-  /*                n x v data matrix; n observations and v variables. Rows of */
-  /*                X represent observations, and columns represent variables. */
+  /*                n x v data matrix; n observations and v variables. Rows of
+   */
+  /*                X represent observations, and columns represent variables.
+   */
   /*                Missing values (NaN's) and infinite values (Inf's) are */
-  /*                allowed, since observations (rows) with missing or infinite */
+  /*                allowed, since observations (rows) with missing or infinite
+   */
   /*                values will automatically be excluded from the */
   /*                computations. */
   /*                 Data Types - single|double */
-  /*  nnargin:      nargin. Scalar. The number of input arguments specified for the caller */
+  /*  nnargin:      nargin. Scalar. The number of input arguments specified for
+   * the caller */
   /*                function. */
-  /*  vvarargin:    nvarargin. Scalar. The variable length input argument list */
+  /*  vvarargin:    nvarargin. Scalar. The variable length input argument list
+   */
   /*                specified for the */
   /*                caller function. */
   /*  */
@@ -4415,7 +4205,8 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  Example: */
   /* { */
   /*     %% example_producing_error */
-  /*     %To examplify the behaviour of chkinputM, we call function FSM with a */
+  /*     %To examplify the behaviour of chkinputM, we call function FSM with a
+   */
   /*     %X with more columns then rows. */
   /*     n=3; */
   /*     p=200; */
@@ -4431,7 +4222,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  rows(Y) */
   v = Y->size[1];
   n = Y->size[0];
-
   /*  Do not use implicit expansion */
   /*  Input parameters checking */
   /* init1=options.init; */
@@ -4444,7 +4234,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     MDltminT->data[i] = (bsb->data[i] == 0.0);
   }
-
   emxInit_real_T(&Yb, 2);
   emxInit_real_T(&r, 2);
   if (ifWhileCond(MDltminT)) {
@@ -4453,7 +4242,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     while (Ra && (nwhile < 100)) {
       /*  Extract a random sample of size v+1 */
       randsample(n, (double)v + 1.0, bsb);
-
       /*  Check if the var-cov matrix of the random sample is full (i.e =v) */
       loop_ub = Y->size[1];
       i = Yb->size[0] * Yb->size[1];
@@ -4463,27 +4251,24 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
       for (i = 0; i < loop_ub; i++) {
         b_loop_ub = bsb->size[0];
         for (end = 0; end < b_loop_ub; end++) {
-          Yb->data[end + Yb->size[0] * i] = Y->data[((int)bsb->data[end] +
-            Y->size[0] * i) - 1];
+          Yb->data[end + Yb->size[0] * i] =
+              Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
         }
       }
-
       cov(Yb, r);
       irank = local_rank(r);
       Ra = (irank < v);
       nwhile++;
     }
   }
-
   emxInit_real_T(&ym, 2);
-
   /*  percn = scalar which controls up to which point of the search it is */
   /*  better to use linear indexing to extract the units forming subset. For */
-  /*  example percn=0.85*n means that units belonging to susbet are found using */
+  /*  example percn=0.85*n means that units belonging to susbet are found using
+   */
   /*  linear indexing up to step m=0.85*n. After m=0.85*n units belonging to */
   /*  subset are found using a n-by-1 logical vector */
   percn = 0.85 * (double)Y->size[0];
-
   /*  nrepmin = scalar which controls the maximum number of repeated minima */
   /*  which must be taken in order to find new subset */
   if (Y->size[0] < 1) {
@@ -4499,7 +4284,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
       ym->data[i] = (double)i + 1.0;
     }
   }
-
   emxInit_real_T(&seq, 1);
   i = seq->size[0];
   seq->size[0] = ym->size[1];
@@ -4508,11 +4292,9 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     seq->data[i] = ym->data[i];
   }
-
   memset(&unitadd[0], 0, 10U * sizeof(double));
   memset(&bsbradd[0], 0, 10U * sizeof(double));
   emxInit_boolean_T(&bsbT, 1);
-
   /*  Initialization of the n x 1 Boolean vector which contains a true in */
   /*  correspondence of the units belonging to subset in each step */
   i = bsbT->size[0];
@@ -4522,7 +4304,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     bsbT->data[i] = false;
   }
-
   emxInit_int32_T(&r1, 1);
   i = r1->size[0];
   r1->size[0] = bsb->size[0];
@@ -4531,14 +4312,11 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     r1->data[i] = (int)bsb->data[i];
   }
-
   loop_ub = r1->size[0];
   for (i = 0; i < loop_ub; i++) {
     bsbT->data[r1->data[i] - 1] = true;
   }
-
   emxInit_real_T(&S, 2);
-
   /*  Initialization for Matlab coder */
   rankgap = 0.0;
   i = S->size[0] * S->size[1];
@@ -4549,7 +4327,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     S->data[i] = 0.0;
   }
-
   emxInit_real_T(&meoldbsb, 2);
   i = meoldbsb->size[0] * meoldbsb->size[1];
   meoldbsb->size[0] = 1;
@@ -4559,7 +4336,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     meoldbsb->data[i] = 0.0;
   }
-
   emxInit_boolean_T(&oldbsbT, 1);
   i = oldbsbT->size[0];
   oldbsbT->size[0] = bsbT->size[0];
@@ -4568,7 +4344,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     oldbsbT->data[i] = bsbT->data[i];
   }
-
   emxInit_real_T(&bsbr, 1);
   i = bsbr->size[0];
   bsbr->size[0] = Y->size[0];
@@ -4577,7 +4352,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     bsbr->data[i] = 0.0;
   }
-
   emxInit_real_T(&unitout, 1);
   i = unitout->size[0];
   unitout->size[0] = Y->size[0];
@@ -4586,7 +4360,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     unitout->data[i] = 0.0;
   }
-
   emxInit_boolean_T(&bsbriniT, 1);
   i = bsbriniT->size[0];
   bsbriniT->size[0] = bsbT->size[0];
@@ -4595,7 +4368,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     bsbriniT->data[i] = bsbT->data[i];
   }
-
   emxInit_uint32_T(&bsbrini, 1);
   i = bsbrini->size[0];
   bsbrini->size[0] = Y->size[0];
@@ -4604,9 +4376,7 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     bsbrini->data[i] = 0U;
   }
-
   ini0 = bsb->size[0];
-
   /*  check init */
   init1 = varargin_2;
   if (varargin_2 < (double)Y->size[1] + 1.0) {
@@ -4622,7 +4392,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     fflush(stdout);
     init1 = (double)Y->size[0] - 1.0;
   }
-
   /*  Matrix BB will contain the units forming subset in each step (or in */
   /*  selected steps) of the forward search. The first column contains */
   /*  information about units forming subset at step init1. */
@@ -4657,7 +4426,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     } else {
       eml_float_colon(init1, Y->size[0], ym);
     }
-
     i = bsbsteps->size[0];
     bsbsteps->size[0] = ym->size[1];
     emxEnsureCapacity_real_T(bsbsteps, i);
@@ -4696,7 +4464,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     } else {
       b_eml_float_colon(ksor, irank, y);
     }
-
     i = bsbsteps->size[0];
     bsbsteps->size[0] = y->size[1] + 1;
     emxEnsureCapacity_real_T(bsbsteps, i);
@@ -4705,10 +4472,8 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     for (i = 0; i < loop_ub; i++) {
       bsbsteps->data[i + 1] = y->data[i];
     }
-
     emxFree_real_T(&y);
   }
-
   i = varargout_1->size[0] * varargout_1->size[1];
   varargout_1->size[0] = Y->size[0];
   varargout_1->size[1] = bsbsteps->size[0];
@@ -4717,7 +4482,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     varargout_1->data[i] = rtNaN;
   }
-
   /*   Un is a Matrix whose 2nd column:11th col contain the unit(s) just */
   /*   included. */
   if (rtIsNaN(init1 + 1.0)) {
@@ -4747,7 +4511,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   } else {
     eml_float_colon(init1 + 1.0, Y->size[0], ym);
   }
-
   emxInit_real_T(&Szi, 1);
   irank = (int)((double)Y->size[0] - init1);
   i = Szi->size[0];
@@ -4757,7 +4520,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     Szi->data[i] = ym->data[i];
   }
-
   emxInit_real_T(&r2, 2);
   i = r2->size[0] * r2->size[1];
   r2->size[0] = irank;
@@ -4767,7 +4529,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     r2->data[i] = rtNaN;
   }
-
   emxInit_real_T(&r3, 2);
   cat(Szi, r2, r3);
   i = Un->size[0] * Un->size[1];
@@ -4779,9 +4540,7 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     Un->data[i] = r3->data[i];
   }
-
   emxFree_real_T(&r3);
-
   /*   mmd has two columns */
   /*   1st col = dimension of the subset */
   /*   2nd col min. Mahalanobis distances among the units */
@@ -4813,7 +4572,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   } else {
     eml_float_colon(init1, (double)Y->size[0] - 1.0, ym);
   }
-
   i = Szi->size[0];
   Szi->size[0] = (int)((double)Y->size[0] - init1);
   emxEnsureCapacity_real_T(Szi, i);
@@ -4821,7 +4579,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     Szi->data[i] = 0.0;
   }
-
   i = mmd->size[0] * mmd->size[1];
   mmd->size[0] = ym->size[1];
   mmd->size[1] = 2;
@@ -4830,15 +4587,13 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     mmd->data[i] = ym->data[i];
   }
-
   loop_ub = Szi->size[0];
   for (i = 0; i < loop_ub; i++) {
     mmd->data[i + mmd->size[0]] = 0.0;
   }
-
   emxInit_real_T(&unit, 1);
-
-  /*  unit is the vector which will contain the units which enter subset at each */
+  /*  unit is the vector which will contain the units which enter subset at each
+   */
   /*  step. It is initialized as a vector of zeros */
   i = unit->size[0];
   unit->size[0] = bsb->size[0];
@@ -4847,10 +4602,9 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     unit->data[i] = 0.0;
   }
-
   lunit = bsb->size[0];
-
-  /*  If the subset Y(bsb,:) is not full rank or a column is constant, then we */
+  /*  If the subset Y(bsb,:) is not full rank or a column is constant, then we
+   */
   /*  return as output an empty structure. */
   loop_ub = Y->size[1];
   i = Yb->size[0] * Yb->size[1];
@@ -4860,11 +4614,10 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     b_loop_ub = bsb->size[0];
     for (end = 0; end < b_loop_ub; end++) {
-      Yb->data[end + Yb->size[0] * i] = Y->data[((int)bsb->data[end] + Y->size[0]
-        * i) - 1];
+      Yb->data[end + Yb->size[0] * i] =
+          Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
     }
   }
-
   irank = local_rank(Yb);
   emxInit_real_T(&Ym, 2);
   emxInit_real_T(&mi, 2);
@@ -4894,11 +4647,10 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     for (i = 0; i < loop_ub; i++) {
       b_loop_ub = bsb->size[0];
       for (end = 0; end < b_loop_ub; end++) {
-        Yb->data[end + Yb->size[0] * i] = Y->data[((int)bsb->data[end] + Y->
-          size[0] * i) - 1];
+        Yb->data[end + Yb->size[0] * i] =
+            Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
       }
     }
-
     maximum(Yb, ym);
     loop_ub = Y->size[1];
     i = Yb->size[0] * Yb->size[1];
@@ -4908,11 +4660,10 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     for (i = 0; i < loop_ub; i++) {
       b_loop_ub = bsb->size[0];
       for (end = 0; end < b_loop_ub; end++) {
-        Yb->data[end + Yb->size[0] * i] = Y->data[((int)bsb->data[end] + Y->
-          size[0] * i) - 1];
+        Yb->data[end + Yb->size[0] * i] =
+            Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
       }
     }
-
     minimum(Yb, mibsbr);
     i = mi->size[0] * mi->size[1];
     mi->size[0] = 1;
@@ -4922,18 +4673,18 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     for (i = 0; i < loop_ub; i++) {
       mi->data[i] = ym->data[i] - mibsbr->data[i];
     }
-
     if (b_minimum(mi) == 0.0) {
       guard1 = true;
     } else {
-      /*  ij = index which is linked with the columns of matrix BB. During the */
-      /*  search every time a subset is stored inside matrix BB ij icreases by one */
+      /*  ij = index which is linked with the columns of matrix BB. During the
+       */
+      /*  search every time a subset is stored inside matrix BB ij icreases by
+       * one */
       ij = 1U;
       mm = 0;
       exitg1 = false;
       while ((!exitg1) && (mm <= n - ini0)) {
         b_mm = (double)ini0 + (double)mm;
-
         /*  Extract units forming subset */
         if (b_mm <= percn) {
           loop_ub = Y->size[1];
@@ -4944,8 +4695,8 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i < loop_ub; i++) {
             b_loop_ub = bsb->size[0];
             for (end = 0; end < b_loop_ub; end++) {
-              Yb->data[end + Yb->size[0] * i] = Y->data[((int)bsb->data[end] +
-                Y->size[0] * i) - 1];
+              Yb->data[end + Yb->size[0] * i] =
+                  Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
             }
           }
         } else {
@@ -4956,7 +4707,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               trueCount++;
             }
           }
-
           i = r4->size[0];
           r4->size[0] = trueCount;
           emxEnsureCapacity_int32_T(r4, i);
@@ -4967,7 +4717,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               b_loop_ub++;
             }
           }
-
           loop_ub = Y->size[1];
           i = Yb->size[0] * Yb->size[1];
           Yb->size[0] = r4->size[0];
@@ -4976,12 +4725,11 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i < loop_ub; i++) {
             b_loop_ub = r4->size[0];
             for (end = 0; end < b_loop_ub; end++) {
-              Yb->data[end + Yb->size[0] * i] = Y->data[(r4->data[end] + Y->
-                size[0] * i) - 1];
+              Yb->data[end + Yb->size[0] * i] =
+                  Y->data[(r4->data[end] + Y->size[0] * i) - 1];
             }
           }
         }
-
         /*  If required, store units forming subset at each step */
         if (b_mm >= init1) {
           i = MD->size[0];
@@ -4991,7 +4739,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i < loop_ub; i++) {
             MD->data[i] = b_mm - bsbsteps->data[i];
           }
-
           irank = MD->size[0];
           i = Szi->size[0];
           Szi->size[0] = MD->size[0];
@@ -4999,14 +4746,14 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (b_loop_ub = 0; b_loop_ub < irank; b_loop_ub++) {
             Szi->data[b_loop_ub] = fabs(MD->data[b_loop_ub]);
           }
-
           if (c_minimum(Szi) == 0.0) {
             /*  intersect(mm,bsbsteps)==mm */
             if (b_mm <= percn) {
               loop_ub = bsb->size[0];
               for (i = 0; i < loop_ub; i++) {
-                varargout_1->data[((int)bsb->data[i] + varargout_1->size[0] *
-                                   ((int)ij - 1)) - 1] = bsb->data[i];
+                varargout_1->data[((int)bsb->data[i] +
+                                   varargout_1->size[0] * ((int)ij - 1)) -
+                                  1] = bsb->data[i];
               }
             } else {
               end = bsbT->size[0] - 1;
@@ -5016,7 +4763,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   trueCount++;
                 }
               }
-
               i = r5->size[0];
               r5->size[0] = trueCount;
               emxEnsureCapacity_int32_T(r5, i);
@@ -5027,18 +4773,16 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   b_loop_ub++;
                 }
               }
-
               loop_ub = r5->size[0];
               for (i = 0; i < loop_ub; i++) {
-                varargout_1->data[(r5->data[i] + varargout_1->size[0] * ((int)ij
-                  - 1)) - 1] = seq->data[r5->data[i] - 1];
+                varargout_1->data[(r5->data[i] +
+                                   varargout_1->size[0] * ((int)ij - 1)) -
+                                  1] = seq->data[r5->data[i] - 1];
               }
             }
-
             ij++;
           }
         }
-
         /*  Find vector of means inside subset */
         /*  Note that ym is a row vector */
         combineVectorElements(Yb, ym);
@@ -5049,7 +4793,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
         for (i = 0; i <= loop_ub; i++) {
           ym->data[i] /= b_mm;
         }
-
         /*  Ym = n-by-v matrix containing deviations from the means computed */
         /*  using units forming subset */
         /*  Ym=Y-one*ym; */
@@ -5076,7 +4819,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 MDltminT->data[i] = !bsbT->data[i];
               }
-
               end = oldbsbT->size[0] - 1;
               trueCount = 0;
               for (b_i = 0; b_i <= end; b_i++) {
@@ -5084,7 +4826,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   trueCount++;
                 }
               }
-
               i = unitout->size[0];
               unitout->size[0] = trueCount;
               emxEnsureCapacity_real_T(unitout, i);
@@ -5096,7 +4837,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 }
               }
             }
-
             irank = unitout->size[0];
             loop_ub = Y->size[1];
             i = Yb->size[0] * Yb->size[1];
@@ -5106,11 +4846,10 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = unitout->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                Yb->data[end + Yb->size[0] * i] = Y->data[((int)unitout->
-                  data[end] + Y->size[0] * i) - 1];
+                Yb->data[end + Yb->size[0] * i] =
+                    Y->data[((int)unitout->data[end] + Y->size[0] * i) - 1];
               }
             }
-
             combineVectorElements(Yb, mi);
             i = mi->size[0] * mi->size[1];
             mi->size[0] = 1;
@@ -5119,7 +4858,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i <= loop_ub; i++) {
               mi->data[i] /= (double)unitout->size[0];
             }
-
             /*  bsbr units which remained in subset */
             /*  old inefficient code */
             /*  bsbr=setdiff(oldbsb,unitout); */
@@ -5138,7 +4876,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   trueCount++;
                 }
               }
-
               i = r9->size[0];
               r9->size[0] = trueCount;
               emxEnsureCapacity_int32_T(r9, i);
@@ -5149,7 +4886,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   b_loop_ub++;
                 }
               }
-
               loop_ub = Y->size[1];
               i = Yb->size[0] * Yb->size[1];
               Yb->size[0] = r9->size[0];
@@ -5158,11 +4894,10 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 b_loop_ub = r9->size[0];
                 for (end = 0; end < b_loop_ub; end++) {
-                  Yb->data[end + Yb->size[0] * i] = Y->data[(r9->data[end] +
-                    Y->size[0] * i) - 1];
+                  Yb->data[end + Yb->size[0] * i] =
+                      Y->data[(r9->data[end] + Y->size[0] * i) - 1];
                 }
               }
-
               combineVectorElements(Yb, mibsbr);
               i = mibsbr->size[0] * mibsbr->size[1];
               mibsbr->size[0] = 1;
@@ -5181,11 +4916,10 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 b_loop_ub = bsbr->size[0];
                 for (end = 0; end < b_loop_ub; end++) {
-                  Yb->data[end + Yb->size[0] * i] = Y->data[((int)bsbr->data[end]
-                    + Y->size[0] * i) - 1];
+                  Yb->data[end + Yb->size[0] * i] =
+                      Y->data[((int)bsbr->data[end] + Y->size[0] * i) - 1];
                 }
               }
-
               combineVectorElements(Yb, mibsbr);
               i = mibsbr->size[0] * mibsbr->size[1];
               mibsbr->size[0] = 1;
@@ -5196,9 +4930,9 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 mibsbr->data[i] /= ksor;
               }
             }
-
-            ksor = sqrt((double)unitout->size[0] * ((b_mm - 1.0) - (double)
-              unitout->size[0]) / (b_mm - 1.0));
+            ksor =
+                sqrt((double)unitout->size[0] *
+                     ((b_mm - 1.0) - (double)unitout->size[0]) / (b_mm - 1.0));
             i = zi->size[0] * zi->size[1];
             zi->size[0] = 1;
             zi->size[1] = mi->size[1];
@@ -5207,16 +4941,13 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               zi->data[i] = ksor * (mi->data[i] - mibsbr->data[i]);
             }
-
             mtimes(S, zi, Szi);
-
             /*  S=S+(S*(zi')*zi*S)/(1-zi*S*(zi')); */
             ksor = 0.0;
             loop_ub = zi->size[1];
             for (i = 0; i < loop_ub; i++) {
               ksor += zi->data[i] * Szi->data[i];
             }
-
             i = S->size[0] * S->size[1];
             S->size[0] = Szi->size[0];
             S->size[1] = Szi->size[0];
@@ -5225,11 +4956,10 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = Szi->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                S->data[end + S->size[0] * i] += Szi->data[end] * Szi->data[i] /
-                  (1.0 - ksor);
+                S->data[end + S->size[0] * i] +=
+                    Szi->data[end] * Szi->data[i] / (1.0 - ksor);
               }
             }
-
             if (unitout->size[0] > 1) {
               i = unitout->size[0];
               for (b_i = 0; b_i < i; b_i++) {
@@ -5239,19 +4969,18 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 zi->size[1] = Y->size[1];
                 emxEnsureCapacity_real_T(zi, end);
                 for (end = 0; end < loop_ub; end++) {
-                  zi->data[end] = Y->data[((int)unitout->data[b_i] + Y->size[0] *
-                    end) - 1] - mi->data[end];
+                  zi->data[end] =
+                      Y->data[((int)unitout->data[b_i] + Y->size[0] * end) -
+                              1] -
+                      mi->data[end];
                 }
-
                 mtimes(S, zi, Szi);
-
                 /*  S=S+(S*(zi')*zi*S)/(1-zi*S*(zi')); */
                 ksor = 0.0;
                 loop_ub = zi->size[1];
                 for (end = 0; end < loop_ub; end++) {
                   ksor += zi->data[end] * Szi->data[end];
                 }
-
                 end = S->size[0] * S->size[1];
                 S->size[0] = Szi->size[0];
                 S->size[1] = Szi->size[0];
@@ -5260,8 +4989,8 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (end = 0; end < loop_ub; end++) {
                   b_loop_ub = Szi->size[0];
                   for (nwhile = 0; nwhile < b_loop_ub; nwhile++) {
-                    S->data[nwhile + S->size[0] * end] += Szi->data[nwhile] *
-                      Szi->data[end] / (1.0 - ksor);
+                    S->data[nwhile + S->size[0] * end] +=
+                        Szi->data[nwhile] * Szi->data[end] / (1.0 - ksor);
                   }
                 }
               }
@@ -5277,7 +5006,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               mibsbr->data[i] = meoldbsb->data[i];
             }
           }
-
           /*  mi = mean of units entering subset */
           loop_ub = Y->size[1];
           i = Yb->size[0] * Yb->size[1];
@@ -5287,11 +5015,10 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i < loop_ub; i++) {
             b_loop_ub = unit->size[0];
             for (end = 0; end < b_loop_ub; end++) {
-              Yb->data[end + Yb->size[0] * i] = Y->data[((int)unit->data[end] +
-                Y->size[0] * i) - 1];
+              Yb->data[end + Yb->size[0] * i] =
+                  Y->data[((int)unit->data[end] + Y->size[0] * i) - 1];
             }
           }
-
           combineVectorElements(Yb, mi);
           i = mi->size[0] * mi->size[1];
           mi->size[0] = 1;
@@ -5300,7 +5027,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i <= loop_ub; i++) {
             mi->data[i] /= (double)lunit;
           }
-
           /*  zi=sqrt(kin*(mm-1-k)/(mm-1-k+kin))*(mi-mean(Y(bsbr,:),1)); */
           ksor = (b_mm - 1.0) - (double)irank;
           ksor = sqrt((double)lunit * ksor / (ksor + (double)lunit));
@@ -5312,16 +5038,13 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i < loop_ub; i++) {
             zi->data[i] = ksor * (mi->data[i] - mibsbr->data[i]);
           }
-
           mtimes(S, zi, Szi);
-
           /*  S=S+(S*(zi')*zi*S)/(1-zi*S*(zi')); */
           ksor = 0.0;
           loop_ub = zi->size[1];
           for (i = 0; i < loop_ub; i++) {
             ksor += zi->data[i] * Szi->data[i];
           }
-
           i = S->size[0] * S->size[1];
           S->size[0] = Szi->size[0];
           S->size[1] = Szi->size[0];
@@ -5330,11 +5053,10 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i < loop_ub; i++) {
             b_loop_ub = Szi->size[0];
             for (end = 0; end < b_loop_ub; end++) {
-              S->data[end + S->size[0] * i] -= Szi->data[end] * Szi->data[i] /
-                (ksor + 1.0);
+              S->data[end + S->size[0] * i] -=
+                  Szi->data[end] * Szi->data[i] / (ksor + 1.0);
             }
           }
-
           if (lunit > 1) {
             /* mi=mean(Y(unit,:),1); */
             for (b_i = 0; b_i < lunit; b_i++) {
@@ -5344,19 +5066,17 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               zi->size[1] = Y->size[1];
               emxEnsureCapacity_real_T(zi, i);
               for (i = 0; i < loop_ub; i++) {
-                zi->data[i] = Y->data[((int)unit->data[b_i] + Y->size[0] * i) -
-                  1] - mi->data[i];
+                zi->data[i] =
+                    Y->data[((int)unit->data[b_i] + Y->size[0] * i) - 1] -
+                    mi->data[i];
               }
-
               mtimes(S, zi, Szi);
-
               /*  S=S-(S*(zi')*zi*S)/(1+zi*S*(zi')); */
               ksor = 0.0;
               loop_ub = zi->size[1];
               for (i = 0; i < loop_ub; i++) {
                 ksor += zi->data[i] * Szi->data[i];
               }
-
               i = S->size[0] * S->size[1];
               S->size[0] = Szi->size[0];
               S->size[1] = Szi->size[0];
@@ -5365,13 +5085,12 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 b_loop_ub = Szi->size[0];
                 for (end = 0; end < b_loop_ub; end++) {
-                  S->data[end + S->size[0] * i] -= Szi->data[end] * Szi->data[i]
-                    / (ksor + 1.0);
+                  S->data[end + S->size[0] * i] -=
+                      Szi->data[end] * Szi->data[i] / (ksor + 1.0);
                 }
               }
             }
           }
-
           /*  Compute Mahalanobis distance using updating formulae */
           /*  Note that up for n>30000 it seems faster to use bsxfun rather */
           /*  than .* */
@@ -5385,7 +5104,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               Yb->data[i] = r->data[i] * Ym->data[i];
             }
-
             sum(Yb, MD);
             loop_ub = MD->size[0];
             for (i = 0; i < loop_ub; i++) {
@@ -5400,10 +5118,10 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               MD->data[i] *= b_mm - 1.0;
             }
           }
-
           b_guard1 = true;
         } else {
-          /*  In the initial step of the search the inverse is computed directly */
+          /*  In the initial step of the search the inverse is computed directly
+           */
           if (b_mm > percn) {
             end = bsbT->size[0] - 1;
             trueCount = 0;
@@ -5412,7 +5130,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 trueCount++;
               }
             }
-
             i = r6->size[0];
             r6->size[0] = trueCount;
             emxEnsureCapacity_int32_T(r6, i);
@@ -5423,7 +5140,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 b_loop_ub++;
               }
             }
-
             end = bsbT->size[0] - 1;
             trueCount = 0;
             for (b_i = 0; b_i <= end; b_i++) {
@@ -5431,7 +5147,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 trueCount++;
               }
             }
-
             i = r7->size[0];
             r7->size[0] = trueCount;
             emxEnsureCapacity_int32_T(r7, i);
@@ -5442,7 +5157,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 b_loop_ub++;
               }
             }
-
             loop_ub = Ym->size[1];
             i = b_Ym->size[0] * b_Ym->size[1];
             b_Ym->size[0] = r6->size[0];
@@ -5455,17 +5169,15 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = r6->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] = Ym->data[(r6->data[end] +
-                  Ym->size[0] * i) - 1];
+                b_Ym->data[end + b_Ym->size[0] * i] =
+                    Ym->data[(r6->data[end] + Ym->size[0] * i) - 1];
               }
-
               b_loop_ub = r7->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                Yb->data[end + Yb->size[0] * i] = Ym->data[(r7->data[end] +
-                  Ym->size[0] * i) - 1];
+                Yb->data[end + Yb->size[0] * i] =
+                    Ym->data[(r7->data[end] + Ym->size[0] * i) - 1];
               }
             }
-
             c_mtimes(b_Ym, Yb, r);
             inv(r, S);
             end = bsbT->size[0] - 1;
@@ -5475,7 +5187,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 trueCount++;
               }
             }
-
             i = r8->size[0];
             r8->size[0] = trueCount;
             emxEnsureCapacity_int32_T(r8, i);
@@ -5486,7 +5197,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 b_loop_ub++;
               }
             }
-
             loop_ub = Ym->size[1];
             i = b_Ym->size[0] * b_Ym->size[1];
             b_Ym->size[0] = r8->size[0];
@@ -5495,11 +5205,10 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = r8->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] = Ym->data[(r8->data[end] +
-                  Ym->size[0] * i) - 1];
+                b_Ym->data[end + b_Ym->size[0] * i] =
+                    Ym->data[(r8->data[end] + Ym->size[0] * i) - 1];
               }
             }
-
             qr(b_Ym, Yb, R);
           } else {
             loop_ub = Ym->size[1];
@@ -5514,17 +5223,15 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = bsb->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] = Ym->data[((int)bsb->
-                  data[end] + Ym->size[0] * i) - 1];
+                b_Ym->data[end + b_Ym->size[0] * i] =
+                    Ym->data[((int)bsb->data[end] + Ym->size[0] * i) - 1];
               }
-
               b_loop_ub = bsb->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                Yb->data[end + Yb->size[0] * i] = Ym->data[((int)bsb->data[end]
-                  + Ym->size[0] * i) - 1];
+                Yb->data[end + Yb->size[0] * i] =
+                    Ym->data[((int)bsb->data[end] + Ym->size[0] * i) - 1];
               }
             }
-
             c_mtimes(b_Ym, Yb, r);
             inv(r, S);
             loop_ub = Ym->size[1];
@@ -5535,14 +5242,12 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = bsb->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] = Ym->data[((int)bsb->
-                  data[end] + Ym->size[0] * i) - 1];
+                b_Ym->data[end + b_Ym->size[0] * i] =
+                    Ym->data[((int)bsb->data[end] + Ym->size[0] * i) - 1];
               }
             }
-
             qr(b_Ym, Yb, R);
           }
-
           i = MDltminT->size[0];
           MDltminT->size[0] = S->size[0] * S->size[1];
           emxEnsureCapacity_boolean_T(MDltminT, i);
@@ -5550,7 +5255,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i < loop_ub; i++) {
             MDltminT->data[i] = rtIsInf(S->data[i]);
           }
-
           irank = MDltminT->size[0];
           if (MDltminT->size[0] == 0) {
             nwhile = 0;
@@ -5560,7 +5264,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               nwhile += MDltminT->data[b_loop_ub - 1];
             }
           }
-
           if (nwhile > 0) {
             i = mmd->size[0] * mmd->size[1];
             mmd->size[0] = 1;
@@ -5587,11 +5290,9 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               MD->data[i] *= b_mm - 1.0;
             }
-
             b_guard1 = true;
           }
         }
-
         if (b_guard1) {
           if (b_mm < n) {
             /*  MDmod contains modified Mahalanobis distances. The */
@@ -5605,7 +5306,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               Szi->data[i] = MD->data[i];
             }
-
             if (b_mm > percn) {
               end = bsbT->size[0];
               for (b_i = 0; b_i < end; b_i++) {
@@ -5621,13 +5321,11 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 r1->data[i] = (int)bsb->data[i];
               }
-
               loop_ub = r1->size[0];
               for (i = 0; i < loop_ub; i++) {
                 Szi->data[r1->data[i] - 1] = rtInf;
               }
             }
-
             /*  oldbsbF=bsbF; */
             i = oldbsbT->size[0];
             oldbsbT->size[0] = bsbT->size[0];
@@ -5636,11 +5334,10 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               oldbsbT->data[i] = bsbT->data[i];
             }
-
             /*  Take minimum distance of the units not belonging to subset */
             d_minimum(Szi, &minMD, &lunit);
-
-            /*  MDltminT = n x 1 Boolean vector which is true if corresponding MD is */
+            /*  MDltminT = n x 1 Boolean vector which is true if corresponding
+             * MD is */
             /*  smaller or equal minMD */
             i = MDltminT->size[0];
             MDltminT->size[0] = MD->size[0];
@@ -5649,10 +5346,11 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               MDltminT->data[i] = (MD->data[i] <= minMD);
             }
-
             /*  MDltminbsb = n x 1 Boolean vector (if m>percn) or */
-            /*  int32 vector containing the units which certainly remain inside subset */
-            /*  i.e. those which have a true in MDltminT and belong to previous subset */
+            /*  int32 vector containing the units which certainly remain inside
+             * subset */
+            /*  i.e. those which have a true in MDltminT and belong to previous
+             * subset */
             if (b_mm > percn) {
               i = MDltminbsb->size[0];
               MDltminbsb->size[0] = MDltminT->size[0];
@@ -5670,7 +5368,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 MDltminbsb->data[i] = MDltminT->data[(int)bsb->data[i] - 1];
               }
             }
-
             /*  Find number of units of old subset which have a MD <= minMD */
             /*  rankgap is the difference between m+1 (size of new size) and */
             /*  the number of units of old subset which have a distance <= */
@@ -5685,7 +5382,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 nwhile += MDltminbsb->data[b_loop_ub - 1];
               }
             }
-
             rankgap = (b_mm + 1.0) - (double)nwhile;
             if (rankgap == 1.0) {
               /*  Just one new unit entered subset */
@@ -5693,7 +5389,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               unit->size[0] = 1;
               emxEnsureCapacity_real_T(unit, i);
               unit->data[0] = lunit;
-
               /*  Compute new bsbT and new bsb */
               if (b_mm <= percn) {
                 /*  new bsb is equal to oldbsb plus unit which just entered */
@@ -5703,7 +5398,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 emxEnsureCapacity_real_T(bsb, end);
                 bsb->data[i] = lunit;
               }
-
               /*  bsbT is equal to old bsbT after adding a single true in */
               /*  correspondence of the unit which entered subset */
               bsbT->data[lunit - 1] = true;
@@ -5718,7 +5412,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 Szi->data[i] = MD->data[i];
               }
-
               /*  Find bsbrini, i.e. the vector which will contain the */
               /*  units which remain in the subset in the next step */
               /*  Note that bsbrini is defined using Boolean vector bsbT */
@@ -5737,7 +5430,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     trueCount++;
                   }
                 }
-
                 i = bsbrini->size[0];
                 bsbrini->size[0] = trueCount;
                 emxEnsureCapacity_uint32_T(bsbrini, i);
@@ -5748,7 +5440,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     b_loop_ub++;
                   }
                 }
-
                 /*  unitout = list of the units which potentially left */
                 /*  subset. We say potentially because there are still k */
                 /*  units to be included */
@@ -5760,7 +5451,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     trueCount++;
                   }
                 }
-
                 i = unitout->size[0];
                 unitout->size[0] = trueCount;
                 emxEnsureCapacity_real_T(unitout, i);
@@ -5771,7 +5461,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     b_loop_ub++;
                   }
                 }
-
                 i = r1->size[0];
                 r1->size[0] = bsbrini->size[0];
                 emxEnsureCapacity_int32_T(r1, i);
@@ -5779,7 +5468,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (i = 0; i < loop_ub; i++) {
                   r1->data[i] = (int)bsbrini->data[i];
                 }
-
                 loop_ub = r1->size[0];
                 for (i = 0; i < loop_ub; i++) {
                   Szi->data[r1->data[i] - 1] = rtInf;
@@ -5797,7 +5485,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (i = 0; i < loop_ub; i++) {
                   bsbriniT->data[i] = MDltminbsb->data[i];
                 }
-
                 end = MDltminbsb->size[0];
                 for (b_i = 0; b_i < end; b_i++) {
                   if (MDltminbsb->data[b_i]) {
@@ -5805,19 +5492,17 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   }
                 }
               }
-
               irank = 0;
               nwhile = 0;
-
               /*  In the following loop we add k units to form the new */
               /*  subset of m+1 units Note that if the difference between */
-              /*  m+1 and the rank of the min outside subset is equal to rankgap, */
+              /*  m+1 and the rank of the min outside subset is equal to
+               * rankgap, */
               /*  than at most rankgap minima must be calculated to find */
               /*  the the (m+1)-th order statistic */
               i = (int)rankgap;
               for (loop_ub = 0; loop_ub < i; loop_ub++) {
                 d_minimum(Szi, &ksor, &lunit);
-
                 /*  minMDindex = index of the unit which is about to */
                 /*  enter subset. We check whether unit minMDindex */
                 /*  belonged or not to previous subset If unit minMDindex */
@@ -5829,7 +5514,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   if (b_mm <= percn) {
                     bsbradd[nwhile] = lunit;
                     nwhile++;
-
                     /*  Delete from vector unitout (containing the */
                     /*  list of the units which went out of the */
                     /*  subset) element minMDindex */
@@ -5840,7 +5524,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                         trueCount++;
                       }
                     }
-
                     b_loop_ub = 0;
                     for (b_i = 0; b_i <= end; b_i++) {
                       if ((int)unitout->data[b_i] != lunit) {
@@ -5848,7 +5531,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                         b_loop_ub++;
                       }
                     }
-
                     end = unitout->size[0];
                     unitout->size[0] = trueCount;
                     emxEnsureCapacity_real_T(unitout, end);
@@ -5859,26 +5541,23 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   unitadd[irank] = lunit;
                   irank++;
                 }
-
                 /*  disp(posunit(posncl1)) */
                 Szi->data[lunit - 1] = rtInf;
               }
-
-              /*  unit = vector containing all units which enter the new subset */
+              /*  unit = vector containing all units which enter the new subset
+               */
               /*  but did not belong to previous subset */
               if (1 > irank) {
                 loop_ub = 0;
               } else {
                 loop_ub = irank;
               }
-
               i = unit->size[0];
               unit->size[0] = loop_ub;
               emxEnsureCapacity_real_T(unit, i);
               for (i = 0; i < loop_ub; i++) {
                 unit->data[i] = unitadd[i];
               }
-
               /*  bsbr = vector containing all units which enter the new */
               /*  subset and were also in the previous subset */
               /*  bsb = units forming new subset. */
@@ -5888,7 +5567,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 } else {
                   b_loop_ub = nwhile;
                 }
-
                 i = bsbr->size[0];
                 bsbr->size[0] = bsbrini->size[0] + b_loop_ub;
                 emxEnsureCapacity_real_T(bsbr, i);
@@ -5896,11 +5574,9 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (i = 0; i < irank; i++) {
                   bsbr->data[i] = bsbrini->data[i];
                 }
-
                 for (i = 0; i < b_loop_ub; i++) {
                   bsbr->data[i + bsbrini->size[0]] = bsbradd[i];
                 }
-
                 i = bsb->size[0];
                 bsb->size[0] = bsbr->size[0] + loop_ub;
                 emxEnsureCapacity_real_T(bsb, i);
@@ -5908,18 +5584,15 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (i = 0; i < b_loop_ub; i++) {
                   bsb->data[i] = bsbr->data[i];
                 }
-
                 for (i = 0; i < loop_ub; i++) {
                   bsb->data[i + bsbr->size[0]] = unitadd[i];
                 }
-
                 i = bsbT->size[0];
                 bsbT->size[0] = n;
                 emxEnsureCapacity_boolean_T(bsbT, i);
                 for (i = 0; i < n; i++) {
                   bsbT->data[i] = false;
                 }
-
                 i = r1->size[0];
                 r1->size[0] = bsb->size[0];
                 emxEnsureCapacity_int32_T(r1, i);
@@ -5927,7 +5600,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (i = 0; i < loop_ub; i++) {
                   r1->data[i] = (int)bsb->data[i];
                 }
-
                 loop_ub = r1->size[0];
                 for (i = 0; i < loop_ub; i++) {
                   bsbT->data[r1->data[i] - 1] = true;
@@ -5935,18 +5607,17 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               } else {
                 /*  After the instruction which follows bsbriniT */
                 /*  will be exactly equal to bsbT */
-                /*  Note that bsbT has been computed through the 3 following instructions */
+                /*  Note that bsbT has been computed through the 3 following
+                 * instructions */
                 /*  -----------    bsbriniT=MDltminT & bsbT; */
                 /*  -----------    bsbriniT(minMDindex)=true; */
                 /*  -----------    bsbriniT(unit)=true; */
                 for (i = 0; i < loop_ub; i++) {
                   tmp_data[i] = (int)unitadd[i];
                 }
-
                 for (i = 0; i < loop_ub; i++) {
                   bsbriniT->data[tmp_data[i] - 1] = true;
                 }
-
                 i = bsbT->size[0];
                 bsbT->size[0] = bsbriniT->size[0];
                 emxEnsureCapacity_boolean_T(bsbT, i);
@@ -5955,7 +5626,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   bsbT->data[i] = bsbriniT->data[i];
                 }
               }
-
               /*  Compute bsbT (Boolean vector which identifies new subset) */
             } else {
               /*   rankgap>nrepmin */
@@ -5972,7 +5642,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i <= loop_ub; i++) {
                 Szi->data[i] = MD->data[i];
               }
-
               ksor = quickselectFS(Szi, b_mm + 1.0, lunit);
               i = bsbT->size[0];
               bsbT->size[0] = MD->size[0];
@@ -5981,7 +5650,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 bsbT->data[i] = (MD->data[i] <= ksor);
               }
-
               irank = bsbT->size[0];
               if (bsbT->size[0] == 0) {
                 nwhile = 0;
@@ -5991,7 +5659,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   nwhile += bsbT->data[b_loop_ub - 1];
                 }
               }
-
               if (nwhile == (int)b_mm + 1) {
                 if (b_mm <= percn) {
                   end = bsbT->size[0] - 1;
@@ -6001,7 +5668,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                       trueCount++;
                     }
                   }
-
                   i = bsb->size[0];
                   bsb->size[0] = trueCount;
                   emxEnsureCapacity_real_T(bsb, i);
@@ -6024,14 +5690,12 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     irank++;
                   }
                 }
-
                 d = (b_mm + 1.0) - (double)trueCount;
                 if (1.0 > d) {
                   loop_ub = 0;
                 } else {
                   loop_ub = (int)d;
                 }
-
                 i = r10->size[0];
                 r10->size[0] = irank;
                 emxEnsureCapacity_int32_T(r10, i);
@@ -6043,12 +5707,10 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     r10->data[b_loop_ub] = b_i + 1;
                     b_loop_ub++;
                   }
-
                   if (MD->data[b_i] == ksor) {
                     trueCount++;
                   }
                 }
-
                 i = r11->size[0];
                 r11->size[0] = trueCount;
                 emxEnsureCapacity_int32_T(r11, i);
@@ -6059,7 +5721,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     b_loop_ub++;
                   }
                 }
-
                 i = bsb->size[0];
                 bsb->size[0] = r10->size[0] + loop_ub;
                 emxEnsureCapacity_real_T(bsb, i);
@@ -6067,18 +5728,15 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (i = 0; i < b_loop_ub; i++) {
                   bsb->data[i] = seq->data[r10->data[i] - 1];
                 }
-
                 for (i = 0; i < loop_ub; i++) {
                   bsb->data[i + r10->size[0]] = seq->data[r11->data[i] - 1];
                 }
-
                 i = bsbT->size[0];
                 bsbT->size[0] = n;
                 emxEnsureCapacity_boolean_T(bsbT, i);
                 for (i = 0; i < n; i++) {
                   bsbT->data[i] = false;
                 }
-
                 i = r1->size[0];
                 r1->size[0] = bsb->size[0];
                 emxEnsureCapacity_int32_T(r1, i);
@@ -6086,13 +5744,11 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (i = 0; i < loop_ub; i++) {
                   r1->data[i] = (int)bsb->data[i];
                 }
-
                 loop_ub = r1->size[0];
                 for (i = 0; i < loop_ub; i++) {
                   bsbT->data[r1->data[i] - 1] = true;
                 }
               }
-
               /*  unit = vector containing units which just entered subset; */
               i = MDltminT->size[0];
               MDltminT->size[0] = bsbT->size[0];
@@ -6101,7 +5757,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 MDltminT->data[i] = (bsbT->data[i] && (!oldbsbT->data[i]));
               }
-
               b_eml_find(MDltminT, r1);
               i = unit->size[0];
               unit->size[0] = r1->size[0];
@@ -6111,14 +5766,12 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 unit->data[i] = r1->data[i];
               }
             }
-
             if (b_mm >= init1) {
               /*  mmd contains minimum of Mahalanobis distances among */
               /*  the units which are not in the subset at step m */
-              mmd->data[((int)((b_mm - init1) + 1.0) + mmd->size[0]) - 1] = sqrt
-                (minMD);
+              mmd->data[((int)((b_mm - init1) + 1.0) + mmd->size[0]) - 1] =
+                  sqrt(minMD);
             }
-
             /*  store mean of units forming old subset */
             i = meoldbsb->size[0] * meoldbsb->size[1];
             meoldbsb->size[0] = 1;
@@ -6128,7 +5781,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               meoldbsb->data[i] = ym->data[i];
             }
-
             lunit = unit->size[0];
             if (b_mm >= init1) {
               if (unit->size[0] <= 10) {
@@ -6139,12 +5791,11 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   i = 0;
                   end = unit->size[0];
                 }
-
                 nwhile = (int)((b_mm - init1) + 1.0) - 1;
                 irank = end - i;
                 for (end = 0; end < irank; end++) {
-                  Un->data[nwhile + Un->size[0] * ((i + end) + 1)] = unit->
-                    data[end];
+                  Un->data[nwhile + Un->size[0] * ((i + end) + 1)] =
+                      unit->data[end];
                 }
               } else {
                 i = (int)((b_mm - init1) + 1.0) - 1;
@@ -6154,13 +5805,11 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               }
             }
           }
-
           mm++;
         }
       }
     }
   }
-
   if (guard1) {
     i = mmd->size[0] * mmd->size[1];
     mmd->size[0] = 1;
@@ -6178,7 +5827,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     emxEnsureCapacity_real_T(varargout_1, i);
     varargout_1->data[0] = rtNaN;
   }
-
   emxFree_real_T(&r);
   emxFree_real_T(&b_Ym);
   emxFree_int32_T(&r11);
@@ -6278,7 +5926,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   bool exitg1;
   bool guard1 = false;
   emxInit_boolean_T(&MDltminT, 1);
-
   /* FSMmmd monitors minMD */
   /*  */
   /* <a href="matlab: docsearchFS('FSMmmd')">Link to the help function</a> */
@@ -6286,15 +5933,20 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  Required input arguments: */
   /*  */
   /*  Y :           Input data. Matrix. */
-  /*                n x v data matrix; n observations and v variables. Rows of */
-  /*                Y represent observations, and columns represent variables. */
+  /*                n x v data matrix; n observations and v variables. Rows of
+   */
+  /*                Y represent observations, and columns represent variables.
+   */
   /*                Missing values (NaN's) and infinite values (Inf's) are */
-  /*                allowed, since observations (rows) with missing or infinite */
+  /*                allowed, since observations (rows) with missing or infinite
+   */
   /*                values will automatically be excluded from the */
   /*                computations. */
   /*                 Data Types - single|double */
-  /*  bsb :         Units forming subset. Vector. List of units forming the initial subset. */
-  /*                If bsb=0 (default) then the procedure starts with p units randomly */
+  /*  bsb :         Units forming subset. Vector. List of units forming the
+   * initial subset. */
+  /*                If bsb=0 (default) then the procedure starts with p units
+   * randomly */
   /*                chosen else if bsb is not 0 the search will start with */
   /*                m0=length(bsb) */
   /*                Data Types - single | double */
@@ -6304,7 +5956,8 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  */
   /*    bsbsteps :  Save the units forming subsets. Vector. It specifies for */
   /*                which steps of the fwd search it */
-  /*                is necessary to save the units forming subsets. If bsbsteps */
+  /*                is necessary to save the units forming subsets. If bsbsteps
+   */
   /*                is 0 we store the units forming subset in all steps. The */
   /*                default is store the units forming subset in all steps if */
   /*                n<=5000, else to store the units forming subset at steps */
@@ -6317,7 +5970,8 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*                Data Types - double */
   /*  */
   /*  init :       Point where to start monitoring */
-  /*                required diagnostics. Scalar. Note that if bsb is supplied, */
+  /*                required diagnostics. Scalar. Note that if bsb is supplied,
+   */
   /*                init>=length(bsb). If init is not specified it will */
   /*                be set equal to floor(n*0.6). */
   /*                  Example - 'init',50 */
@@ -6331,14 +5985,17 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*                  Data Types - double */
   /*  */
   /*  nocheck :   It controls wether to perform checks on */
-  /*                matrix Y. Boolean. If nocheck is equal to true no check is */
+  /*                matrix Y. Boolean. If nocheck is equal to true no check is
+   */
   /*                performed on matrix Y. As default nocheck=false. */
   /*                  Example - 'nocheck',false */
   /*                  Data Types - logical */
   /*  */
   /*  */
-  /*  plots :     It specify whether it is necessary to produce the plots of minimum Mahalanobis */
-  /*                  distance. Scalar. If plots=1, a plot of the monitoring of minMD among */
+  /*  plots :     It specify whether it is necessary to produce the plots of
+   * minimum Mahalanobis */
+  /*                  distance. Scalar. If plots=1, a plot of the monitoring of
+   * minMD among */
   /*                the units not belonging to the subset is produced on the */
   /*                screen with 1% 50% and 99% confidence bands */
   /*                else (default) no plot is produced. */
@@ -6346,20 +6003,23 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*                  Data Types - double */
   /*  */
   /*  */
-  /*  Remark :      The user should only give the input arguments that have to */
+  /*  Remark :      The user should only give the input arguments that have to
+   */
   /*                change their default value. */
   /*                The name of the input arguments needs to be followed by */
   /*                their value. The order of the input arguments is of no */
   /*                importance. */
   /*  */
   /*                Missing values (NaN's) and infinite values (Inf's) are */
-  /*                allowed, since observations (rows) with missing or infinite */
+  /*                allowed, since observations (rows) with missing or infinite
+   */
   /*                values will automatically be excluded from the */
   /*                computations. y can be both a row of column vector. */
   /*  */
   /*  Output: */
   /*  */
-  /*  mmd :         (n-init) x 2 matrix which contains the monitoring of minimum */
+  /*  mmd :         (n-init) x 2 matrix which contains the monitoring of minimum
+   */
   /*                Mahalanobis distance each step of the forward search. */
   /*                1st col = fwd search index (from init to n-1); */
   /*                2nd col = minimum Mahalanobis distance. */
@@ -6377,13 +6037,15 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  */
   /*  BB :   n x (n-init+1) matrix containing units belonging to subset in */
   /*                each step of the search. Each row is associated to a unit */
-  /*                while each colum is associated to a step of the fwd search. */
+  /*                while each colum is associated to a step of the fwd search.
+   */
   /*  */
   /*  See also FSMenvmmd.m, FSM.m, FSMmmdeasy, quickselectFS.m */
   /*  */
   /*  References: */
   /*  */
-  /*  Atkinson, A.C., Riani, M. and Cerioli, A. (2004), "Exploring multivariate */
+  /*  Atkinson, A.C., Riani, M. and Cerioli, A. (2004), "Exploring multivariate
+   */
   /*  data with the forward search", Springer Verlag, New York. */
   /*  */
   /*  Copyright 2008-2021. */
@@ -6395,7 +6057,8 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  Examples: */
   /* { */
   /*     %% Minimum Mahalanobis distance. */
-  /*     % Personalized initial subset (small n). Create an initial subset with */
+  /*     % Personalized initial subset (small n). Create an initial subset with
+   */
   /*     % the 4 observations which fell the smallest */
   /*     % number of times outside the robust bivariate ellipses and with the */
   /*     % lowest Mahalanobis Distance. */
@@ -6435,7 +6098,8 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /* { */
   /*     % Checking the unit(s) included in the subset at each step of the */
   /*     % search. */
-  /*     % Un contains the unit(s) present in the new subset but not in the old one. */
+  /*     % Un contains the unit(s) present in the new subset but not in the old
+   * one. */
   /*     n=200; */
   /*     v=3; */
   /*     m0=4; */
@@ -6454,7 +6118,8 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /* { */
   /*     % Checking the units belonging to subset in each step of the search. */
   /*     % Personalized initial subset (large n). Each row of BB matrix */
-  /*     % is associated to a unit while each colum is associated to a step of the fwd search. */
+  /*     % is associated to a unit while each colum is associated to a step of
+   * the fwd search. */
   /*     n=20000; */
   /*     v=3; */
   /*     m0=10; */
@@ -6471,21 +6136,27 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  Beginning of code */
   /*  Input parameters checking */
   /* chkinputM does not do any check if option nocheck=true */
-  /* chkinputM makes some input parameters and user options checking in multivariate analysis */
+  /* chkinputM makes some input parameters and user options checking in
+   * multivariate analysis */
   /*  */
   /*  Required input arguments: */
   /*  */
   /*  X :          Input data. Matrix. */
-  /*                n x v data matrix; n observations and v variables. Rows of */
-  /*                X represent observations, and columns represent variables. */
+  /*                n x v data matrix; n observations and v variables. Rows of
+   */
+  /*                X represent observations, and columns represent variables.
+   */
   /*                Missing values (NaN's) and infinite values (Inf's) are */
-  /*                allowed, since observations (rows) with missing or infinite */
+  /*                allowed, since observations (rows) with missing or infinite
+   */
   /*                values will automatically be excluded from the */
   /*                computations. */
   /*                 Data Types - single|double */
-  /*  nnargin:      nargin. Scalar. The number of input arguments specified for the caller */
+  /*  nnargin:      nargin. Scalar. The number of input arguments specified for
+   * the caller */
   /*                function. */
-  /*  vvarargin:    nvarargin. Scalar. The variable length input argument list */
+  /*  vvarargin:    nvarargin. Scalar. The variable length input argument list
+   */
   /*                specified for the */
   /*                caller function. */
   /*  */
@@ -6514,7 +6185,8 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  Example: */
   /* { */
   /*     %% example_producing_error */
-  /*     %To examplify the behaviour of chkinputM, we call function FSM with a */
+  /*     %To examplify the behaviour of chkinputM, we call function FSM with a
+   */
   /*     %X with more columns then rows. */
   /*     n=3; */
   /*     p=200; */
@@ -6530,7 +6202,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  rows(Y) */
   v = Y->size[1];
   n = Y->size[0];
-
   /*  Do not use implicit expansion */
   /*  Input parameters checking */
   /* init1=options.init; */
@@ -6543,7 +6214,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     MDltminT->data[i] = (bsb->data[i] == 0.0);
   }
-
   emxInit_real_T(&Yb, 2);
   emxInit_real_T(&r, 2);
   if (ifWhileCond(MDltminT)) {
@@ -6552,7 +6222,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     while (Ra && (nwhile < 100)) {
       /*  Extract a random sample of size v+1 */
       randsample(n, (double)v + 1.0, bsb);
-
       /*  Check if the var-cov matrix of the random sample is full (i.e =v) */
       loop_ub = Y->size[1];
       i = Yb->size[0] * Yb->size[1];
@@ -6562,27 +6231,24 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
       for (i = 0; i < loop_ub; i++) {
         b_loop_ub = bsb->size[0];
         for (end = 0; end < b_loop_ub; end++) {
-          Yb->data[end + Yb->size[0] * i] = Y->data[((int)bsb->data[end] +
-            Y->size[0] * i) - 1];
+          Yb->data[end + Yb->size[0] * i] =
+              Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
         }
       }
-
       cov(Yb, r);
       irank = local_rank(r);
       Ra = (irank < v);
       nwhile++;
     }
   }
-
   emxInit_real_T(&ym, 2);
-
   /*  percn = scalar which controls up to which point of the search it is */
   /*  better to use linear indexing to extract the units forming subset. For */
-  /*  example percn=0.85*n means that units belonging to susbet are found using */
+  /*  example percn=0.85*n means that units belonging to susbet are found using
+   */
   /*  linear indexing up to step m=0.85*n. After m=0.85*n units belonging to */
   /*  subset are found using a n-by-1 logical vector */
   percn = 0.85 * (double)Y->size[0];
-
   /*  nrepmin = scalar which controls the maximum number of repeated minima */
   /*  which must be taken in order to find new subset */
   if (Y->size[0] < 1) {
@@ -6598,7 +6264,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
       ym->data[i] = (double)i + 1.0;
     }
   }
-
   emxInit_real_T(&seq, 1);
   i = seq->size[0];
   seq->size[0] = ym->size[1];
@@ -6607,11 +6272,9 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     seq->data[i] = ym->data[i];
   }
-
   memset(&unitadd[0], 0, 10U * sizeof(double));
   memset(&bsbradd[0], 0, 10U * sizeof(double));
   emxInit_boolean_T(&bsbT, 1);
-
   /*  Initialization of the n x 1 Boolean vector which contains a true in */
   /*  correspondence of the units belonging to subset in each step */
   i = bsbT->size[0];
@@ -6621,7 +6284,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     bsbT->data[i] = false;
   }
-
   emxInit_int32_T(&r1, 1);
   i = r1->size[0];
   r1->size[0] = bsb->size[0];
@@ -6630,14 +6292,11 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     r1->data[i] = (int)bsb->data[i];
   }
-
   loop_ub = r1->size[0];
   for (i = 0; i < loop_ub; i++) {
     bsbT->data[r1->data[i] - 1] = true;
   }
-
   emxInit_real_T(&S, 2);
-
   /*  Initialization for Matlab coder */
   rankgap = 0.0;
   i = S->size[0] * S->size[1];
@@ -6648,7 +6307,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     S->data[i] = 0.0;
   }
-
   emxInit_real_T(&meoldbsb, 2);
   i = meoldbsb->size[0] * meoldbsb->size[1];
   meoldbsb->size[0] = 1;
@@ -6658,7 +6316,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     meoldbsb->data[i] = 0.0;
   }
-
   emxInit_boolean_T(&oldbsbT, 1);
   i = oldbsbT->size[0];
   oldbsbT->size[0] = bsbT->size[0];
@@ -6667,7 +6324,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     oldbsbT->data[i] = bsbT->data[i];
   }
-
   emxInit_real_T(&bsbr, 1);
   i = bsbr->size[0];
   bsbr->size[0] = Y->size[0];
@@ -6676,7 +6332,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     bsbr->data[i] = 0.0;
   }
-
   emxInit_real_T(&unitout, 1);
   i = unitout->size[0];
   unitout->size[0] = Y->size[0];
@@ -6685,7 +6340,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     unitout->data[i] = 0.0;
   }
-
   emxInit_boolean_T(&bsbriniT, 1);
   i = bsbriniT->size[0];
   bsbriniT->size[0] = bsbT->size[0];
@@ -6694,7 +6348,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     bsbriniT->data[i] = bsbT->data[i];
   }
-
   emxInit_uint32_T(&bsbrini, 1);
   i = bsbrini->size[0];
   bsbrini->size[0] = Y->size[0];
@@ -6703,9 +6356,7 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     bsbrini->data[i] = 0U;
   }
-
   ini0 = bsb->size[0];
-
   /*  check init */
   init1 = varargin_2;
   if (varargin_2 < (double)Y->size[1] + 1.0) {
@@ -6721,7 +6372,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     fflush(stdout);
     init1 = (double)Y->size[0] - 1.0;
   }
-
   /*   Un is a Matrix whose 2nd column:11th col contain the unit(s) just */
   /*   included. */
   if (rtIsNaN(init1 + 1.0)) {
@@ -6751,7 +6401,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   } else {
     eml_float_colon(init1 + 1.0, Y->size[0], ym);
   }
-
   emxInit_real_T(&Szi, 1);
   irank = (int)((double)Y->size[0] - init1);
   i = Szi->size[0];
@@ -6761,7 +6410,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     Szi->data[i] = ym->data[i];
   }
-
   emxInit_real_T(&r2, 2);
   i = r2->size[0] * r2->size[1];
   r2->size[0] = irank;
@@ -6771,7 +6419,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     r2->data[i] = rtNaN;
   }
-
   emxInit_real_T(&r3, 2);
   cat(Szi, r2, r3);
   i = Un->size[0] * Un->size[1];
@@ -6783,9 +6430,7 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     Un->data[i] = r3->data[i];
   }
-
   emxFree_real_T(&r3);
-
   /*   mmd has two columns */
   /*   1st col = dimension of the subset */
   /*   2nd col min. Mahalanobis distances among the units */
@@ -6817,7 +6462,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   } else {
     eml_float_colon(init1, (double)Y->size[0] - 1.0, ym);
   }
-
   i = Szi->size[0];
   Szi->size[0] = (int)((double)Y->size[0] - init1);
   emxEnsureCapacity_real_T(Szi, i);
@@ -6825,7 +6469,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     Szi->data[i] = 0.0;
   }
-
   i = mmd->size[0] * mmd->size[1];
   mmd->size[0] = ym->size[1];
   mmd->size[1] = 2;
@@ -6834,15 +6477,13 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     mmd->data[i] = ym->data[i];
   }
-
   loop_ub = Szi->size[0];
   for (i = 0; i < loop_ub; i++) {
     mmd->data[i + mmd->size[0]] = 0.0;
   }
-
   emxInit_real_T(&unit, 1);
-
-  /*  unit is the vector which will contain the units which enter subset at each */
+  /*  unit is the vector which will contain the units which enter subset at each
+   */
   /*  step. It is initialized as a vector of zeros */
   i = unit->size[0];
   unit->size[0] = bsb->size[0];
@@ -6851,10 +6492,9 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     unit->data[i] = 0.0;
   }
-
   lunit = bsb->size[0];
-
-  /*  If the subset Y(bsb,:) is not full rank or a column is constant, then we */
+  /*  If the subset Y(bsb,:) is not full rank or a column is constant, then we
+   */
   /*  return as output an empty structure. */
   loop_ub = Y->size[1];
   i = Yb->size[0] * Yb->size[1];
@@ -6864,11 +6504,10 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   for (i = 0; i < loop_ub; i++) {
     b_loop_ub = bsb->size[0];
     for (end = 0; end < b_loop_ub; end++) {
-      Yb->data[end + Yb->size[0] * i] = Y->data[((int)bsb->data[end] + Y->size[0]
-        * i) - 1];
+      Yb->data[end + Yb->size[0] * i] =
+          Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
     }
   }
-
   irank = local_rank(Yb);
   emxInit_real_T(&Ym, 2);
   emxInit_real_T(&mi, 2);
@@ -6897,11 +6536,10 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     for (i = 0; i < loop_ub; i++) {
       b_loop_ub = bsb->size[0];
       for (end = 0; end < b_loop_ub; end++) {
-        Yb->data[end + Yb->size[0] * i] = Y->data[((int)bsb->data[end] + Y->
-          size[0] * i) - 1];
+        Yb->data[end + Yb->size[0] * i] =
+            Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
       }
     }
-
     maximum(Yb, ym);
     loop_ub = Y->size[1];
     i = Yb->size[0] * Yb->size[1];
@@ -6911,11 +6549,10 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     for (i = 0; i < loop_ub; i++) {
       b_loop_ub = bsb->size[0];
       for (end = 0; end < b_loop_ub; end++) {
-        Yb->data[end + Yb->size[0] * i] = Y->data[((int)bsb->data[end] + Y->
-          size[0] * i) - 1];
+        Yb->data[end + Yb->size[0] * i] =
+            Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
       }
     }
-
     minimum(Yb, mibsbr);
     i = mi->size[0] * mi->size[1];
     mi->size[0] = 1;
@@ -6925,17 +6562,17 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     for (i = 0; i < loop_ub; i++) {
       mi->data[i] = ym->data[i] - mibsbr->data[i];
     }
-
     if (b_minimum(mi) == 0.0) {
       guard1 = true;
     } else {
-      /*  ij = index which is linked with the columns of matrix BB. During the */
-      /*  search every time a subset is stored inside matrix BB ij icreases by one */
+      /*  ij = index which is linked with the columns of matrix BB. During the
+       */
+      /*  search every time a subset is stored inside matrix BB ij icreases by
+       * one */
       mm = 0;
       exitg1 = false;
       while ((!exitg1) && (mm <= n - ini0)) {
         b_mm = (double)ini0 + (double)mm;
-
         /*  Extract units forming subset */
         if (b_mm <= percn) {
           loop_ub = Y->size[1];
@@ -6946,8 +6583,8 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i < loop_ub; i++) {
             b_loop_ub = bsb->size[0];
             for (end = 0; end < b_loop_ub; end++) {
-              Yb->data[end + Yb->size[0] * i] = Y->data[((int)bsb->data[end] +
-                Y->size[0] * i) - 1];
+              Yb->data[end + Yb->size[0] * i] =
+                  Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
             }
           }
         } else {
@@ -6958,7 +6595,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               trueCount++;
             }
           }
-
           i = r4->size[0];
           r4->size[0] = trueCount;
           emxEnsureCapacity_int32_T(r4, i);
@@ -6969,7 +6605,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               b_loop_ub++;
             }
           }
-
           loop_ub = Y->size[1];
           i = Yb->size[0] * Yb->size[1];
           Yb->size[0] = r4->size[0];
@@ -6978,12 +6613,11 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i < loop_ub; i++) {
             b_loop_ub = r4->size[0];
             for (end = 0; end < b_loop_ub; end++) {
-              Yb->data[end + Yb->size[0] * i] = Y->data[(r4->data[end] + Y->
-                size[0] * i) - 1];
+              Yb->data[end + Yb->size[0] * i] =
+                  Y->data[(r4->data[end] + Y->size[0] * i) - 1];
             }
           }
         }
-
         /*  If required, store units forming subset at each step */
         /*  Find vector of means inside subset */
         /*  Note that ym is a row vector */
@@ -6995,7 +6629,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
         for (i = 0; i <= loop_ub; i++) {
           ym->data[i] /= b_mm;
         }
-
         /*  Ym = n-by-v matrix containing deviations from the means computed */
         /*  using units forming subset */
         /*  Ym=Y-one*ym; */
@@ -7022,7 +6655,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 MDltminT->data[i] = !bsbT->data[i];
               }
-
               end = oldbsbT->size[0] - 1;
               trueCount = 0;
               for (b_i = 0; b_i <= end; b_i++) {
@@ -7030,7 +6662,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   trueCount++;
                 }
               }
-
               i = unitout->size[0];
               unitout->size[0] = trueCount;
               emxEnsureCapacity_real_T(unitout, i);
@@ -7042,7 +6673,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 }
               }
             }
-
             irank = unitout->size[0];
             loop_ub = Y->size[1];
             i = Yb->size[0] * Yb->size[1];
@@ -7052,11 +6682,10 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = unitout->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                Yb->data[end + Yb->size[0] * i] = Y->data[((int)unitout->
-                  data[end] + Y->size[0] * i) - 1];
+                Yb->data[end + Yb->size[0] * i] =
+                    Y->data[((int)unitout->data[end] + Y->size[0] * i) - 1];
               }
             }
-
             combineVectorElements(Yb, mi);
             i = mi->size[0] * mi->size[1];
             mi->size[0] = 1;
@@ -7065,7 +6694,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i <= loop_ub; i++) {
               mi->data[i] /= (double)unitout->size[0];
             }
-
             /*  bsbr units which remained in subset */
             /*  old inefficient code */
             /*  bsbr=setdiff(oldbsb,unitout); */
@@ -7084,7 +6712,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   trueCount++;
                 }
               }
-
               i = r8->size[0];
               r8->size[0] = trueCount;
               emxEnsureCapacity_int32_T(r8, i);
@@ -7095,7 +6722,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   b_loop_ub++;
                 }
               }
-
               loop_ub = Y->size[1];
               i = Yb->size[0] * Yb->size[1];
               Yb->size[0] = r8->size[0];
@@ -7104,11 +6730,10 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 b_loop_ub = r8->size[0];
                 for (end = 0; end < b_loop_ub; end++) {
-                  Yb->data[end + Yb->size[0] * i] = Y->data[(r8->data[end] +
-                    Y->size[0] * i) - 1];
+                  Yb->data[end + Yb->size[0] * i] =
+                      Y->data[(r8->data[end] + Y->size[0] * i) - 1];
                 }
               }
-
               combineVectorElements(Yb, mibsbr);
               i = mibsbr->size[0] * mibsbr->size[1];
               mibsbr->size[0] = 1;
@@ -7127,11 +6752,10 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 b_loop_ub = bsbr->size[0];
                 for (end = 0; end < b_loop_ub; end++) {
-                  Yb->data[end + Yb->size[0] * i] = Y->data[((int)bsbr->data[end]
-                    + Y->size[0] * i) - 1];
+                  Yb->data[end + Yb->size[0] * i] =
+                      Y->data[((int)bsbr->data[end] + Y->size[0] * i) - 1];
                 }
               }
-
               combineVectorElements(Yb, mibsbr);
               i = mibsbr->size[0] * mibsbr->size[1];
               mibsbr->size[0] = 1;
@@ -7142,9 +6766,9 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 mibsbr->data[i] /= ksor;
               }
             }
-
-            ksor = sqrt((double)unitout->size[0] * ((b_mm - 1.0) - (double)
-              unitout->size[0]) / (b_mm - 1.0));
+            ksor =
+                sqrt((double)unitout->size[0] *
+                     ((b_mm - 1.0) - (double)unitout->size[0]) / (b_mm - 1.0));
             i = zi->size[0] * zi->size[1];
             zi->size[0] = 1;
             zi->size[1] = mi->size[1];
@@ -7153,16 +6777,13 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               zi->data[i] = ksor * (mi->data[i] - mibsbr->data[i]);
             }
-
             mtimes(S, zi, Szi);
-
             /*  S=S+(S*(zi')*zi*S)/(1-zi*S*(zi')); */
             ksor = 0.0;
             loop_ub = zi->size[1];
             for (i = 0; i < loop_ub; i++) {
               ksor += zi->data[i] * Szi->data[i];
             }
-
             i = S->size[0] * S->size[1];
             S->size[0] = Szi->size[0];
             S->size[1] = Szi->size[0];
@@ -7171,11 +6792,10 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = Szi->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                S->data[end + S->size[0] * i] += Szi->data[end] * Szi->data[i] /
-                  (1.0 - ksor);
+                S->data[end + S->size[0] * i] +=
+                    Szi->data[end] * Szi->data[i] / (1.0 - ksor);
               }
             }
-
             if (unitout->size[0] > 1) {
               i = unitout->size[0];
               for (b_i = 0; b_i < i; b_i++) {
@@ -7185,19 +6805,18 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 zi->size[1] = Y->size[1];
                 emxEnsureCapacity_real_T(zi, end);
                 for (end = 0; end < loop_ub; end++) {
-                  zi->data[end] = Y->data[((int)unitout->data[b_i] + Y->size[0] *
-                    end) - 1] - mi->data[end];
+                  zi->data[end] =
+                      Y->data[((int)unitout->data[b_i] + Y->size[0] * end) -
+                              1] -
+                      mi->data[end];
                 }
-
                 mtimes(S, zi, Szi);
-
                 /*  S=S+(S*(zi')*zi*S)/(1-zi*S*(zi')); */
                 ksor = 0.0;
                 loop_ub = zi->size[1];
                 for (end = 0; end < loop_ub; end++) {
                   ksor += zi->data[end] * Szi->data[end];
                 }
-
                 end = S->size[0] * S->size[1];
                 S->size[0] = Szi->size[0];
                 S->size[1] = Szi->size[0];
@@ -7206,8 +6825,8 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (end = 0; end < loop_ub; end++) {
                   b_loop_ub = Szi->size[0];
                   for (nwhile = 0; nwhile < b_loop_ub; nwhile++) {
-                    S->data[nwhile + S->size[0] * end] += Szi->data[nwhile] *
-                      Szi->data[end] / (1.0 - ksor);
+                    S->data[nwhile + S->size[0] * end] +=
+                        Szi->data[nwhile] * Szi->data[end] / (1.0 - ksor);
                   }
                 }
               }
@@ -7223,7 +6842,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               mibsbr->data[i] = meoldbsb->data[i];
             }
           }
-
           /*  mi = mean of units entering subset */
           loop_ub = Y->size[1];
           i = Yb->size[0] * Yb->size[1];
@@ -7233,11 +6851,10 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i < loop_ub; i++) {
             b_loop_ub = unit->size[0];
             for (end = 0; end < b_loop_ub; end++) {
-              Yb->data[end + Yb->size[0] * i] = Y->data[((int)unit->data[end] +
-                Y->size[0] * i) - 1];
+              Yb->data[end + Yb->size[0] * i] =
+                  Y->data[((int)unit->data[end] + Y->size[0] * i) - 1];
             }
           }
-
           combineVectorElements(Yb, mi);
           i = mi->size[0] * mi->size[1];
           mi->size[0] = 1;
@@ -7246,7 +6863,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i <= loop_ub; i++) {
             mi->data[i] /= (double)lunit;
           }
-
           /*  zi=sqrt(kin*(mm-1-k)/(mm-1-k+kin))*(mi-mean(Y(bsbr,:),1)); */
           ksor = (b_mm - 1.0) - (double)irank;
           ksor = sqrt((double)lunit * ksor / (ksor + (double)lunit));
@@ -7258,16 +6874,13 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i < loop_ub; i++) {
             zi->data[i] = ksor * (mi->data[i] - mibsbr->data[i]);
           }
-
           mtimes(S, zi, Szi);
-
           /*  S=S+(S*(zi')*zi*S)/(1-zi*S*(zi')); */
           ksor = 0.0;
           loop_ub = zi->size[1];
           for (i = 0; i < loop_ub; i++) {
             ksor += zi->data[i] * Szi->data[i];
           }
-
           i = S->size[0] * S->size[1];
           S->size[0] = Szi->size[0];
           S->size[1] = Szi->size[0];
@@ -7276,11 +6889,10 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i < loop_ub; i++) {
             b_loop_ub = Szi->size[0];
             for (end = 0; end < b_loop_ub; end++) {
-              S->data[end + S->size[0] * i] -= Szi->data[end] * Szi->data[i] /
-                (ksor + 1.0);
+              S->data[end + S->size[0] * i] -=
+                  Szi->data[end] * Szi->data[i] / (ksor + 1.0);
             }
           }
-
           if (lunit > 1) {
             /* mi=mean(Y(unit,:),1); */
             for (b_i = 0; b_i < lunit; b_i++) {
@@ -7290,19 +6902,17 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               zi->size[1] = Y->size[1];
               emxEnsureCapacity_real_T(zi, i);
               for (i = 0; i < loop_ub; i++) {
-                zi->data[i] = Y->data[((int)unit->data[b_i] + Y->size[0] * i) -
-                  1] - mi->data[i];
+                zi->data[i] =
+                    Y->data[((int)unit->data[b_i] + Y->size[0] * i) - 1] -
+                    mi->data[i];
               }
-
               mtimes(S, zi, Szi);
-
               /*  S=S-(S*(zi')*zi*S)/(1+zi*S*(zi')); */
               ksor = 0.0;
               loop_ub = zi->size[1];
               for (i = 0; i < loop_ub; i++) {
                 ksor += zi->data[i] * Szi->data[i];
               }
-
               i = S->size[0] * S->size[1];
               S->size[0] = Szi->size[0];
               S->size[1] = Szi->size[0];
@@ -7311,13 +6921,12 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 b_loop_ub = Szi->size[0];
                 for (end = 0; end < b_loop_ub; end++) {
-                  S->data[end + S->size[0] * i] -= Szi->data[end] * Szi->data[i]
-                    / (ksor + 1.0);
+                  S->data[end + S->size[0] * i] -=
+                      Szi->data[end] * Szi->data[i] / (ksor + 1.0);
                 }
               }
             }
           }
-
           /*  Compute Mahalanobis distance using updating formulae */
           /*  Note that up for n>30000 it seems faster to use bsxfun rather */
           /*  than .* */
@@ -7331,7 +6940,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               Yb->data[i] = r->data[i] * Ym->data[i];
             }
-
             sum(Yb, MD);
             loop_ub = MD->size[0];
             for (i = 0; i < loop_ub; i++) {
@@ -7346,10 +6954,10 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               MD->data[i] *= b_mm - 1.0;
             }
           }
-
           b_guard1 = true;
         } else {
-          /*  In the initial step of the search the inverse is computed directly */
+          /*  In the initial step of the search the inverse is computed directly
+           */
           if (b_mm > percn) {
             end = bsbT->size[0] - 1;
             trueCount = 0;
@@ -7358,7 +6966,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 trueCount++;
               }
             }
-
             i = r5->size[0];
             r5->size[0] = trueCount;
             emxEnsureCapacity_int32_T(r5, i);
@@ -7369,7 +6976,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 b_loop_ub++;
               }
             }
-
             end = bsbT->size[0] - 1;
             trueCount = 0;
             for (b_i = 0; b_i <= end; b_i++) {
@@ -7377,7 +6983,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 trueCount++;
               }
             }
-
             i = r6->size[0];
             r6->size[0] = trueCount;
             emxEnsureCapacity_int32_T(r6, i);
@@ -7388,7 +6993,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 b_loop_ub++;
               }
             }
-
             loop_ub = Ym->size[1];
             i = b_Ym->size[0] * b_Ym->size[1];
             b_Ym->size[0] = r5->size[0];
@@ -7401,17 +7005,15 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = r5->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] = Ym->data[(r5->data[end] +
-                  Ym->size[0] * i) - 1];
+                b_Ym->data[end + b_Ym->size[0] * i] =
+                    Ym->data[(r5->data[end] + Ym->size[0] * i) - 1];
               }
-
               b_loop_ub = r6->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                Yb->data[end + Yb->size[0] * i] = Ym->data[(r6->data[end] +
-                  Ym->size[0] * i) - 1];
+                Yb->data[end + Yb->size[0] * i] =
+                    Ym->data[(r6->data[end] + Ym->size[0] * i) - 1];
               }
             }
-
             c_mtimes(b_Ym, Yb, r);
             inv(r, S);
             end = bsbT->size[0] - 1;
@@ -7421,7 +7023,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 trueCount++;
               }
             }
-
             i = r7->size[0];
             r7->size[0] = trueCount;
             emxEnsureCapacity_int32_T(r7, i);
@@ -7432,7 +7033,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 b_loop_ub++;
               }
             }
-
             loop_ub = Ym->size[1];
             i = b_Ym->size[0] * b_Ym->size[1];
             b_Ym->size[0] = r7->size[0];
@@ -7441,11 +7041,10 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = r7->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] = Ym->data[(r7->data[end] +
-                  Ym->size[0] * i) - 1];
+                b_Ym->data[end + b_Ym->size[0] * i] =
+                    Ym->data[(r7->data[end] + Ym->size[0] * i) - 1];
               }
             }
-
             qr(b_Ym, Yb, R);
           } else {
             loop_ub = Ym->size[1];
@@ -7460,17 +7059,15 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = bsb->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] = Ym->data[((int)bsb->
-                  data[end] + Ym->size[0] * i) - 1];
+                b_Ym->data[end + b_Ym->size[0] * i] =
+                    Ym->data[((int)bsb->data[end] + Ym->size[0] * i) - 1];
               }
-
               b_loop_ub = bsb->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                Yb->data[end + Yb->size[0] * i] = Ym->data[((int)bsb->data[end]
-                  + Ym->size[0] * i) - 1];
+                Yb->data[end + Yb->size[0] * i] =
+                    Ym->data[((int)bsb->data[end] + Ym->size[0] * i) - 1];
               }
             }
-
             c_mtimes(b_Ym, Yb, r);
             inv(r, S);
             loop_ub = Ym->size[1];
@@ -7481,14 +7078,12 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = bsb->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] = Ym->data[((int)bsb->
-                  data[end] + Ym->size[0] * i) - 1];
+                b_Ym->data[end + b_Ym->size[0] * i] =
+                    Ym->data[((int)bsb->data[end] + Ym->size[0] * i) - 1];
               }
             }
-
             qr(b_Ym, Yb, R);
           }
-
           i = MDltminT->size[0];
           MDltminT->size[0] = S->size[0] * S->size[1];
           emxEnsureCapacity_boolean_T(MDltminT, i);
@@ -7496,7 +7091,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (i = 0; i < loop_ub; i++) {
             MDltminT->data[i] = rtIsInf(S->data[i]);
           }
-
           irank = MDltminT->size[0];
           if (MDltminT->size[0] == 0) {
             nwhile = 0;
@@ -7506,7 +7100,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               nwhile += MDltminT->data[b_loop_ub - 1];
             }
           }
-
           if (nwhile > 0) {
             i = mmd->size[0] * mmd->size[1];
             mmd->size[0] = 1;
@@ -7528,11 +7121,9 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               MD->data[i] *= b_mm - 1.0;
             }
-
             b_guard1 = true;
           }
         }
-
         if (b_guard1) {
           if (b_mm < n) {
             /*  MDmod contains modified Mahalanobis distances. The */
@@ -7546,7 +7137,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               Szi->data[i] = MD->data[i];
             }
-
             if (b_mm > percn) {
               end = bsbT->size[0];
               for (b_i = 0; b_i < end; b_i++) {
@@ -7562,13 +7152,11 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 r1->data[i] = (int)bsb->data[i];
               }
-
               loop_ub = r1->size[0];
               for (i = 0; i < loop_ub; i++) {
                 Szi->data[r1->data[i] - 1] = rtInf;
               }
             }
-
             /*  oldbsbF=bsbF; */
             i = oldbsbT->size[0];
             oldbsbT->size[0] = bsbT->size[0];
@@ -7577,11 +7165,10 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               oldbsbT->data[i] = bsbT->data[i];
             }
-
             /*  Take minimum distance of the units not belonging to subset */
             d_minimum(Szi, &minMD, &lunit);
-
-            /*  MDltminT = n x 1 Boolean vector which is true if corresponding MD is */
+            /*  MDltminT = n x 1 Boolean vector which is true if corresponding
+             * MD is */
             /*  smaller or equal minMD */
             i = MDltminT->size[0];
             MDltminT->size[0] = MD->size[0];
@@ -7590,10 +7177,11 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               MDltminT->data[i] = (MD->data[i] <= minMD);
             }
-
             /*  MDltminbsb = n x 1 Boolean vector (if m>percn) or */
-            /*  int32 vector containing the units which certainly remain inside subset */
-            /*  i.e. those which have a true in MDltminT and belong to previous subset */
+            /*  int32 vector containing the units which certainly remain inside
+             * subset */
+            /*  i.e. those which have a true in MDltminT and belong to previous
+             * subset */
             if (b_mm > percn) {
               i = MDltminbsb->size[0];
               MDltminbsb->size[0] = MDltminT->size[0];
@@ -7611,7 +7199,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 MDltminbsb->data[i] = MDltminT->data[(int)bsb->data[i] - 1];
               }
             }
-
             /*  Find number of units of old subset which have a MD <= minMD */
             /*  rankgap is the difference between m+1 (size of new size) and */
             /*  the number of units of old subset which have a distance <= */
@@ -7626,7 +7213,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 nwhile += MDltminbsb->data[b_loop_ub - 1];
               }
             }
-
             rankgap = (b_mm + 1.0) - (double)nwhile;
             if (rankgap == 1.0) {
               /*  Just one new unit entered subset */
@@ -7634,7 +7220,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               unit->size[0] = 1;
               emxEnsureCapacity_real_T(unit, i);
               unit->data[0] = lunit;
-
               /*  Compute new bsbT and new bsb */
               if (b_mm <= percn) {
                 /*  new bsb is equal to oldbsb plus unit which just entered */
@@ -7644,7 +7229,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 emxEnsureCapacity_real_T(bsb, end);
                 bsb->data[i] = lunit;
               }
-
               /*  bsbT is equal to old bsbT after adding a single true in */
               /*  correspondence of the unit which entered subset */
               bsbT->data[lunit - 1] = true;
@@ -7659,7 +7243,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 Szi->data[i] = MD->data[i];
               }
-
               /*  Find bsbrini, i.e. the vector which will contain the */
               /*  units which remain in the subset in the next step */
               /*  Note that bsbrini is defined using Boolean vector bsbT */
@@ -7678,7 +7261,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     trueCount++;
                   }
                 }
-
                 i = bsbrini->size[0];
                 bsbrini->size[0] = trueCount;
                 emxEnsureCapacity_uint32_T(bsbrini, i);
@@ -7689,7 +7271,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     b_loop_ub++;
                   }
                 }
-
                 /*  unitout = list of the units which potentially left */
                 /*  subset. We say potentially because there are still k */
                 /*  units to be included */
@@ -7701,7 +7282,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     trueCount++;
                   }
                 }
-
                 i = unitout->size[0];
                 unitout->size[0] = trueCount;
                 emxEnsureCapacity_real_T(unitout, i);
@@ -7712,7 +7292,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     b_loop_ub++;
                   }
                 }
-
                 i = r1->size[0];
                 r1->size[0] = bsbrini->size[0];
                 emxEnsureCapacity_int32_T(r1, i);
@@ -7720,7 +7299,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (i = 0; i < loop_ub; i++) {
                   r1->data[i] = (int)bsbrini->data[i];
                 }
-
                 loop_ub = r1->size[0];
                 for (i = 0; i < loop_ub; i++) {
                   Szi->data[r1->data[i] - 1] = rtInf;
@@ -7738,7 +7316,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (i = 0; i < loop_ub; i++) {
                   bsbriniT->data[i] = MDltminbsb->data[i];
                 }
-
                 end = MDltminbsb->size[0];
                 for (b_i = 0; b_i < end; b_i++) {
                   if (MDltminbsb->data[b_i]) {
@@ -7746,19 +7323,17 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   }
                 }
               }
-
               irank = 0;
               nwhile = 0;
-
               /*  In the following loop we add k units to form the new */
               /*  subset of m+1 units Note that if the difference between */
-              /*  m+1 and the rank of the min outside subset is equal to rankgap, */
+              /*  m+1 and the rank of the min outside subset is equal to
+               * rankgap, */
               /*  than at most rankgap minima must be calculated to find */
               /*  the the (m+1)-th order statistic */
               i = (int)rankgap;
               for (loop_ub = 0; loop_ub < i; loop_ub++) {
                 d_minimum(Szi, &ksor, &lunit);
-
                 /*  minMDindex = index of the unit which is about to */
                 /*  enter subset. We check whether unit minMDindex */
                 /*  belonged or not to previous subset If unit minMDindex */
@@ -7770,7 +7345,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   if (b_mm <= percn) {
                     bsbradd[nwhile] = lunit;
                     nwhile++;
-
                     /*  Delete from vector unitout (containing the */
                     /*  list of the units which went out of the */
                     /*  subset) element minMDindex */
@@ -7781,7 +7355,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                         trueCount++;
                       }
                     }
-
                     b_loop_ub = 0;
                     for (b_i = 0; b_i <= end; b_i++) {
                       if ((int)unitout->data[b_i] != lunit) {
@@ -7789,7 +7362,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                         b_loop_ub++;
                       }
                     }
-
                     end = unitout->size[0];
                     unitout->size[0] = trueCount;
                     emxEnsureCapacity_real_T(unitout, end);
@@ -7800,26 +7372,23 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   unitadd[irank] = lunit;
                   irank++;
                 }
-
                 /*  disp(posunit(posncl1)) */
                 Szi->data[lunit - 1] = rtInf;
               }
-
-              /*  unit = vector containing all units which enter the new subset */
+              /*  unit = vector containing all units which enter the new subset
+               */
               /*  but did not belong to previous subset */
               if (1 > irank) {
                 loop_ub = 0;
               } else {
                 loop_ub = irank;
               }
-
               i = unit->size[0];
               unit->size[0] = loop_ub;
               emxEnsureCapacity_real_T(unit, i);
               for (i = 0; i < loop_ub; i++) {
                 unit->data[i] = unitadd[i];
               }
-
               /*  bsbr = vector containing all units which enter the new */
               /*  subset and were also in the previous subset */
               /*  bsb = units forming new subset. */
@@ -7829,7 +7398,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 } else {
                   b_loop_ub = nwhile;
                 }
-
                 i = bsbr->size[0];
                 bsbr->size[0] = bsbrini->size[0] + b_loop_ub;
                 emxEnsureCapacity_real_T(bsbr, i);
@@ -7837,11 +7405,9 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (i = 0; i < irank; i++) {
                   bsbr->data[i] = bsbrini->data[i];
                 }
-
                 for (i = 0; i < b_loop_ub; i++) {
                   bsbr->data[i + bsbrini->size[0]] = bsbradd[i];
                 }
-
                 i = bsb->size[0];
                 bsb->size[0] = bsbr->size[0] + loop_ub;
                 emxEnsureCapacity_real_T(bsb, i);
@@ -7849,18 +7415,15 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (i = 0; i < b_loop_ub; i++) {
                   bsb->data[i] = bsbr->data[i];
                 }
-
                 for (i = 0; i < loop_ub; i++) {
                   bsb->data[i + bsbr->size[0]] = unitadd[i];
                 }
-
                 i = bsbT->size[0];
                 bsbT->size[0] = n;
                 emxEnsureCapacity_boolean_T(bsbT, i);
                 for (i = 0; i < n; i++) {
                   bsbT->data[i] = false;
                 }
-
                 i = r1->size[0];
                 r1->size[0] = bsb->size[0];
                 emxEnsureCapacity_int32_T(r1, i);
@@ -7868,7 +7431,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (i = 0; i < loop_ub; i++) {
                   r1->data[i] = (int)bsb->data[i];
                 }
-
                 loop_ub = r1->size[0];
                 for (i = 0; i < loop_ub; i++) {
                   bsbT->data[r1->data[i] - 1] = true;
@@ -7876,18 +7438,17 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               } else {
                 /*  After the instruction which follows bsbriniT */
                 /*  will be exactly equal to bsbT */
-                /*  Note that bsbT has been computed through the 3 following instructions */
+                /*  Note that bsbT has been computed through the 3 following
+                 * instructions */
                 /*  -----------    bsbriniT=MDltminT & bsbT; */
                 /*  -----------    bsbriniT(minMDindex)=true; */
                 /*  -----------    bsbriniT(unit)=true; */
                 for (i = 0; i < loop_ub; i++) {
                   tmp_data[i] = (int)unitadd[i];
                 }
-
                 for (i = 0; i < loop_ub; i++) {
                   bsbriniT->data[tmp_data[i] - 1] = true;
                 }
-
                 i = bsbT->size[0];
                 bsbT->size[0] = bsbriniT->size[0];
                 emxEnsureCapacity_boolean_T(bsbT, i);
@@ -7896,7 +7457,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   bsbT->data[i] = bsbriniT->data[i];
                 }
               }
-
               /*  Compute bsbT (Boolean vector which identifies new subset) */
             } else {
               /*   rankgap>nrepmin */
@@ -7913,7 +7473,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i <= loop_ub; i++) {
                 Szi->data[i] = MD->data[i];
               }
-
               ksor = quickselectFS(Szi, b_mm + 1.0, lunit);
               i = bsbT->size[0];
               bsbT->size[0] = MD->size[0];
@@ -7922,7 +7481,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 bsbT->data[i] = (MD->data[i] <= ksor);
               }
-
               irank = bsbT->size[0];
               if (bsbT->size[0] == 0) {
                 nwhile = 0;
@@ -7932,7 +7490,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   nwhile += bsbT->data[b_loop_ub - 1];
                 }
               }
-
               if (nwhile == (int)b_mm + 1) {
                 if (b_mm <= percn) {
                   end = bsbT->size[0] - 1;
@@ -7942,7 +7499,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                       trueCount++;
                     }
                   }
-
                   i = bsb->size[0];
                   bsb->size[0] = trueCount;
                   emxEnsureCapacity_real_T(bsb, i);
@@ -7965,14 +7521,12 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     irank++;
                   }
                 }
-
                 d = (b_mm + 1.0) - (double)trueCount;
                 if (1.0 > d) {
                   loop_ub = 0;
                 } else {
                   loop_ub = (int)d;
                 }
-
                 i = r9->size[0];
                 r9->size[0] = irank;
                 emxEnsureCapacity_int32_T(r9, i);
@@ -7984,12 +7538,10 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     r9->data[b_loop_ub] = b_i + 1;
                     b_loop_ub++;
                   }
-
                   if (MD->data[b_i] == ksor) {
                     trueCount++;
                   }
                 }
-
                 i = r10->size[0];
                 r10->size[0] = trueCount;
                 emxEnsureCapacity_int32_T(r10, i);
@@ -8000,7 +7552,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     b_loop_ub++;
                   }
                 }
-
                 i = bsb->size[0];
                 bsb->size[0] = r9->size[0] + loop_ub;
                 emxEnsureCapacity_real_T(bsb, i);
@@ -8008,18 +7559,15 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (i = 0; i < b_loop_ub; i++) {
                   bsb->data[i] = seq->data[r9->data[i] - 1];
                 }
-
                 for (i = 0; i < loop_ub; i++) {
                   bsb->data[i + r9->size[0]] = seq->data[r10->data[i] - 1];
                 }
-
                 i = bsbT->size[0];
                 bsbT->size[0] = n;
                 emxEnsureCapacity_boolean_T(bsbT, i);
                 for (i = 0; i < n; i++) {
                   bsbT->data[i] = false;
                 }
-
                 i = r1->size[0];
                 r1->size[0] = bsb->size[0];
                 emxEnsureCapacity_int32_T(r1, i);
@@ -8027,13 +7575,11 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 for (i = 0; i < loop_ub; i++) {
                   r1->data[i] = (int)bsb->data[i];
                 }
-
                 loop_ub = r1->size[0];
                 for (i = 0; i < loop_ub; i++) {
                   bsbT->data[r1->data[i] - 1] = true;
                 }
               }
-
               /*  unit = vector containing units which just entered subset; */
               i = MDltminT->size[0];
               MDltminT->size[0] = bsbT->size[0];
@@ -8042,7 +7588,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               for (i = 0; i < loop_ub; i++) {
                 MDltminT->data[i] = (bsbT->data[i] && (!oldbsbT->data[i]));
               }
-
               b_eml_find(MDltminT, r1);
               i = unit->size[0];
               unit->size[0] = r1->size[0];
@@ -8052,14 +7597,12 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 unit->data[i] = r1->data[i];
               }
             }
-
             if (b_mm >= init1) {
               /*  mmd contains minimum of Mahalanobis distances among */
               /*  the units which are not in the subset at step m */
-              mmd->data[((int)((b_mm - init1) + 1.0) + mmd->size[0]) - 1] = sqrt
-                (minMD);
+              mmd->data[((int)((b_mm - init1) + 1.0) + mmd->size[0]) - 1] =
+                  sqrt(minMD);
             }
-
             /*  store mean of units forming old subset */
             i = meoldbsb->size[0] * meoldbsb->size[1];
             meoldbsb->size[0] = 1;
@@ -8069,7 +7612,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             for (i = 0; i < loop_ub; i++) {
               meoldbsb->data[i] = ym->data[i];
             }
-
             lunit = unit->size[0];
             if (b_mm >= init1) {
               if (unit->size[0] <= 10) {
@@ -8080,12 +7622,11 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   i = 0;
                   end = unit->size[0];
                 }
-
                 nwhile = (int)((b_mm - init1) + 1.0) - 1;
                 irank = end - i;
                 for (end = 0; end < irank; end++) {
-                  Un->data[nwhile + Un->size[0] * ((i + end) + 1)] = unit->
-                    data[end];
+                  Un->data[nwhile + Un->size[0] * ((i + end) + 1)] =
+                      unit->data[end];
                 }
               } else {
                 i = (int)((b_mm - init1) + 1.0) - 1;
@@ -8095,13 +7636,11 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               }
             }
           }
-
           mm++;
         }
       }
     }
   }
-
   if (guard1) {
     i = mmd->size[0] * mmd->size[1];
     mmd->size[0] = 1;
@@ -8114,7 +7653,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     emxEnsureCapacity_real_T(Un, i);
     Un->data[0] = rtNaN;
   }
-
   emxFree_real_T(&r);
   emxFree_real_T(&b_Ym);
   emxFree_int32_T(&r10);
