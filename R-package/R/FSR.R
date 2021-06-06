@@ -54,7 +54,7 @@
 #'  contains several high leverage units (that is units which are very far from the bulk of the data),
 #'  it may happen that the best subset of LXS may include some of these units, or it may happen that
 #'  these units have a deletion residual which is very small due to their extremely high value of \code{hi}.
-#'  \code{bonflevoutX=1} imposes the constraints that:
+#'  \code{threshoutX=1} imposes the constraints that:
 #'  \enumerate{
 #'  \item the extracted subsets which contain at least one unit declared as outlier in the \code{X} space by
 #'      FSM using a Bonferronized confidence level of 0.99 are removed from the list of candidate subsets
@@ -166,8 +166,15 @@ FSR <- function(y, x, intercept=TRUE, lms=1,
 
     bonflev <- if(missing(bonflev)) c(0.0, 0.0)
                else                 c(bonflev, 1)
-    threshoutX <- if(missing(threshoutX)) c(0.0, 0.0)
-                  else                    c(threshoutX, 1)
+
+    ## threshoutX can be only 1 if present - set it to 1 whatever it is
+    if(missing(threshoutX))
+        threshoutX <-  c(0.0, 0.0)
+    else  {
+        if(threshoutX != 1)
+            warning("If present, 'threshoutX' must be equal to 1. Setting threshoutX=1.")
+        threshoutX <-  c(1, 1)
+     }
 
     ##  Allocate the output parameters
     beta <- rep(0, p1)

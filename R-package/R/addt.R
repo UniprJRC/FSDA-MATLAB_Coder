@@ -90,8 +90,6 @@ addt <- function(y, x, w, intercept=TRUE, la, nocheck=FALSE, trace)
         w = if(is.double(w)) w else as.double(w),
         n = as.integer(n),
         p = as.integer(p),
-        n1 = as.integer(n1),                            # new n, returned by chkinputR()
-        p1 = as.integer(p1),                            # new p, returned by chkinputR()
         intercept = as.integer(intercept),
         la = as.double(la),
         nocheck = as.integer(nocheck),

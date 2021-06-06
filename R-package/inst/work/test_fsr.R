@@ -3,9 +3,8 @@
     ## Call FSR() on the hbk data
 
     library(fsdac)
-    library(rrcov)
 
-    data(hbk)
+    data(hbk, package="robustbase")
     XX <- hbk
     y <- XX[, ncol(XX)]
     X <- XX[, 1:(ncol(XX)-1), drop=FALSE]
@@ -87,18 +86,30 @@
     X <- matrix(rnorm(n*p), nrow=n)
     y=rnorm(n)
     (out <- FSR(y, X))
+    ##
+    ## No plots in R yet
+    ##  [out]=FSR(y,X, 'labeladd','1','bivarfit','1','multivarfit','1');
 
 ##  #7. Example with Hawkins data
-    load('hawkins.txt','hawkins');
-    y=hawkins(:,9);
-    X=hawkins(:,1:8);
-    % Use of FSR starting with 1000 subsamples
-    [out]=FSR(y,X,'nsamp',1000);
+    library(fsdaR)
+    data(hawkins)
 
-    % Use of FSR starting with 1000 subsamples
-    % focusing in the output plots to the interval 1-6 on the y axis and
-    % to steps 30-90.
-    [out]=FSR(y,X,'nsamp',1000,'ylim',[1 6],'xlim',[30 90]);
+    y <- hawkins$y
+    X <- hawkins[, -ncol(hawkins)]
+
+    ## Use of FSR starting with 1000 subsamples
+    (out <- FSR(y, X, nsamp=1000)
+
+    ## Replace this by formula:
+    ##  (out <- FSR(y~., data=X, nsamp=1000)
+
+    ## Use of FSR starting with 1000 subsamples
+    ## focusing in the output plots to the interval 1-6 on the y axis and
+    ## to steps 30-90.
+    ##
+    ##  No plots in R yet
+    ##
+    ##  [out]=FSR(y,X,'nsamp',1000,'ylim',[1 6],'xlim',[30 90]);
 
 ##  #8. Example of contaminated data.
     n <- 200
@@ -149,41 +160,48 @@
     ##ylabel('mdr')
     ##title('FS without bound on the leverage')
 
+    ##
+    ##  In R thresholdX cannot be a structure - either missing or 1.
+    ##
     ##  threshoutX is passed s astructure
-    threshoutX <- list(threshlevoutX=5)
+    ##  threshoutX <- list(threshlevoutX=5)
     ##  Use the instruction below if you wish to change the confidence level to
     ##  be used to find outlierd in the X space
-    ##  threshoutX.bonflevoutX=0.99
-    (outWithLevConstr=FSR(yall, Xall, threshoutX=threshoutX, msg=FALSE))
+    ##  threshoutX$bonflevoutX <- 0.99
+
+    (outWithLevConstr <- FSR(yall, Xall, threshoutX=1, msg=FALSE))
     ##title('FS with bound on the leverage')
 
 
-%{
-    %% Example to detect both VIOM and MSOM outliers using weak=true.
-    % loyalty data
-    load('loyalty');
-    y = loyalty{:,end};
-    X = loyalty{:,1};
-    xla = 'Number of visits';
-    yla = 'Amount spent (in Euros)';
-    n = size(X,1);
-    % run FSR to detect a weaker signal indicating VIOM
-    FSRoutw = FSR(y, X, 'intercept', false, ...
-        'init', floor(n/2)-1, 'msg', 0, 'plots', 1, 'weak', true);
-    trim_FSR =  FSRoutw.outliers;
-    down_FSR =  FSRoutw.VIOMout;
-    clean_FSR = FSRoutw.ListCl;
-    % plotting
-    figure
-    plot(X(clean_FSR, :), y(clean_FSR), 'b.', 'MarkerSize', 15, 'DisplayName', 'clean');
-    hold('on')
-    plot(X(trim_FSR, :), y(trim_FSR), 'r.', 'MarkerSize', 15, 'DisplayName', 'MSOM');
-    plot(X(down_FSR, :), y(down_FSR), 'g.', 'MarkerSize', 15, 'DisplayName', 'VIOM');
-    drawnow
-    clb = clickableMultiLegend(gca, 'Location', 'northeast');
-    set(clb,'FontSize',12);
-    xlabel(xla);
-    ylabel(yla);
-    box
-    cascade
-%}
+##  11. Example to detect both VIOM and MSOM outliers using weak=true.
+##  loyalty data
+
+    library(fsdaR)
+    data(loyalty)
+
+    y <- loyalty$amount_spent
+    X <- loyalty[,"visits", drop=FALSE]
+
+    xla <- "Number of visits"
+    yla <- "Amount spent (in Euros)"
+    n <- nrow(X)
+
+    ## run FSR to detect a weaker signal indicating VIOM
+    (FSRoutw <- FSR(y, X, intercept=FALSE, init=floor(n/2)-1, msg=FALSE, weak=TRUE))
+    (trim_FSR  <-  FSRoutw$outliers)
+    (down_FSR  <-  FSRoutw$VIOMout)
+    (clean_FSR <- FSRoutw$ListCl)
+
+    ##  plotting
+    ##figure
+    ##plot(X(clean_FSR, :), y(clean_FSR), 'b.', 'MarkerSize', 15, 'DisplayName', 'clean');
+    ##hold('on')
+    ##plot(X(trim_FSR, :), y(trim_FSR), 'r.', 'MarkerSize', 15, 'DisplayName', 'MSOM');
+    ##plot(X(down_FSR, :), y(down_FSR), 'g.', 'MarkerSize', 15, 'DisplayName', 'VIOM');
+    ##drawnow
+    ##clb = clickableMultiLegend(gca, 'Location', 'northeast');
+    ##set(clb,'FontSize',12);
+    ##xlabel(xla);
+    ##ylabel(yla);
+    ##box
+    ##cascade

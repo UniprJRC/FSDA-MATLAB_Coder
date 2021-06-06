@@ -173,9 +173,6 @@ FSRbsb <- function(y, x, bsb, init, intercept=TRUE, nocheck=FALSE, bsbsteps, msg
         x = if(is.double(x)) x else as.double(x),
         n = as.integer(n),
         p = as.integer(p),
-        n1 = as.integer(n1),                            # new n, returned by chkinputR()
-        p1 = as.integer(p1),                            # new p, returned by chkinputR()
-
         bsb = if(is.double(bsb)) bsb else as.double(bsb),
         nbsb = as.integer(length(bsb)),
         bsbsteps = if(is.double(bsbsteps)) bsbsteps else as.double(bsbsteps),

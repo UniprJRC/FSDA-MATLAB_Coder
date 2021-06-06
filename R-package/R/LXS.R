@@ -68,7 +68,6 @@
 #' @param nocheck Wheather to check the input arguments. If \code{nocheck=TRUE} no check is performed on
 #'  matrix \code{y} and matrix \code{X}. Notice that \code{y} and \code{X} are left unchanged. In other words
 #'  the additional column of ones for the intercept is not added. By default \code{nocheck=FALSE}.
-#' @param yxsave wheather to return the input matrices y and X
 #' @param csave wheather to return the optional matrix \code{C} containing the indexes of
 #'  the subsamples extracted for computing the estimate (the so called elemental sets).
 #'
@@ -92,8 +91,8 @@
 #'  \item \code{conflev}: confidence level which is used to declare outliers.
 #'  \item \code{singsub}: number of subsets wihtout full rank. Notice that if this number is greater than
 #'      \code{0.1*(number of subsamples)} a warning is produced on the screen.
-#'  \item \code{y}: the responce variable (only of \code{yxsave=TRUE}).
-#'  \item \code{X}: the predictor matrix (only of \code{yxsave=TRUE}).
+#'  \item \code{y}: the responce variable.
+#'  \item \code{X}: the predictor matrix.
 #'  \item \code{C}: the matrix containing the indexes of the subsamples extracted for computing
 #'      the estimate (the so called elemental sets) (only of \code{csave=TRUE}).
 #'
@@ -119,7 +118,7 @@
 
 LXS <- function(y, x, intercept=TRUE, lms=1, rew=FALSE, bonflevoutX,
     alpha=0.5, h, conflev=0.975, nsamp, nomes=FALSE, msg=TRUE, nocheck=FALSE,
-    yxsave=FALSE, csave=FALSE,
+    csave=FALSE,
     trace=FALSE)
 {
 
@@ -264,7 +263,6 @@ LXS <- function(y, x, intercept=TRUE, lms=1, rew=FALSE, bonflevoutX,
         nomes = as.integer(nomes),
         msg = as.integer(msg),
         nocheck = as.integer(nocheck),
-        yxsave = as.integer(yxsave),             # wheather to return y and X, maybe not needed
         csave = as.integer(csave),               # wheather to return C
         nC = as.integer(nC),                     # expected number of rows of C
         pC = as.integer(pC),                     # expected number of columns of C
@@ -293,10 +291,13 @@ LXS <- function(y, x, intercept=TRUE, lms=1, rew=FALSE, bonflevoutX,
 
     ans <- list(rew=rew, coefficients=tmp$beta, bs=tmp$bs, residuals=tmp$residuals, scale=tmp$scale, weights=tmp$weights,
         h=tmp$h, outliers=outliers, conflev=tmp$conflev, singsub=tmp$singsub,
-        y=if(yxsave) y1 else NULL,
-        X=if(yxsave) x1 else NULL,
-        C=if(csave) C else NULL)
+        y=y1, X=x1)
+
+        if(csave)
+            ans$C <- tmp$C
     class(ans) <- if(lms==2) "LMS" else "LTS"
+
+    ans$call <- match.call()
     ans
 }
 
