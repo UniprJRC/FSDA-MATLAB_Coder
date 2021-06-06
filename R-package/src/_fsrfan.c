@@ -41,56 +41,19 @@ if(b_trace)
 */
     /* Initialize the input arguments. ==============================*/
     
-    //  Initialize function input argument 'y'
-    y = argInit_vector(yy, nn);
-//    Rprintf("%s ", "y initialized\n");                   
-    
-    //  Initialize function input argument 'X'
-    X = argInit_matrix(xx, nn, pp);
-//    Rprintf("%s ", "X initialized\n");                   
-    
-    //  Initialize function input argument 'la' 
-    la = argInit_vector(xla, lla);
-//    Rprintf("%s ", "la initialized\n");     
-                  
-    //  Initialize function input argument 'lms'. 
-    lms = argInit_matrix(xlms, nlms, plms);
-//    Rprintf("%s ", "lms initialized\n");                   
+    y = argInit_vector(yy, nn);             //  Initialize function input argument 'y'
+    X = argInit_matrix(xx, nn, pp);         //  Initialize function input argument 'X'
+    la = argInit_vector(xla, lla);          //  Initialize function input argument 'la'
+    lms = argInit_matrix(xlms, nlms, plms); //  Initialize function input argument 'lms'
 
     //  Initialize function input argument 'family'
     family = emxCreateWrapper_char_T(*xfamily, 1, strlen(*xfamily));
-//    Rprintf("%s ", "family initialized\n");                   
 
     // Initialize the output structure ===========================: 
     emxInit_struct_FSRfan_T(&out);
 
-/*-------------------------------------------------------------  
-    Rprintf("\ny dimensions: %d \n", y->size[0]); 
-    disp_dble(y->data, y->size[0]);
-    Rprintf("\nX dimensions: %d, %d \n", X->size[0], X->size[1]); 
-    disp_lmat_cm(X->data, X->size[0], X->size[1]);
-
-    Rprintf("\n la dimensions: %d \n", la->size[0]); 
-    disp_dble(la->data, la->size[0]);
-    Rprintf("\nlms dimensions: %d, %d \n", lms->size[0], lms->size[1]); 
-    disp_lmat_cm(lms->data, lms->size[0], lms->size[1]);
-
-    Rprintf("\nOther parameters (init, h, nsamp, family): %f %f %f %s\n", *init, *h, *nsamp, family->data); 
-    Rprintf("%s ", "Calling FSRfan...\n");                  
-*/
-
     FSRfan_wrapper(y, X, b_intercept, b_nocheck, la, *h, *nsamp, lms,
                     *init, family, b_msg, &out);
-
-/*
-    Rprintf("\nout.la dimensions: %d, %d \n", out.la->size[0], out.la->size[1]); 
-    Rprintf("\nout.bs dimensions: %d, %d \n", out.bs->size[0], out.bs->size[1]); 
-    Rprintf("\nout.Score dimensions: %d, %d \n", out.Score->size[0], out.Score->size[1]); 
-    Rprintf("\nout.Scorep dimensions: %d, %d \n", out.Scorep->size[0], out.Scorep->size[1]); 
-    Rprintf("\nout.Scoreb dimensions: %d, %d \n", out.Scoreb->size[0], out.Scoreb->size[1]); 
-    Rprintf("\nout.Scoren dimensions: %d, %d \n", out.Scoren->size[0], out.Scoren->size[1]); 
-    //disp_lmat_cm(out.Score->data, out.Score->size[0], out.Score->size[1]);
-*/
     
     // Copy the output matrices Score, Scorep, Scoren and Scoreb 
     if(out.Score->size[0] != *retn1 || out.Score->size[1] != *retp1)
@@ -145,10 +108,6 @@ if(b_trace)
 
     emxDestroy_struct_FSRfan_T(out);
     emxDestroyArray_char_T(family);  
-    emxDestroyArray_real_T(lms);    
-    emxDestroyArray_real_T(la);    
-    emxDestroyArray_real_T(X);
-    emxDestroyArray_real_T(y);    
 }
 
 

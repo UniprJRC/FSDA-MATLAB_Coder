@@ -11,7 +11,7 @@ void r_lxs(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int *in
              double *bonflevoutX, 
              double *h, double *conflev, double *nsamp, int *rew,
              int *nomes, int *msg, int *nocheck,
-             int *yxsave, int *csave, int *nC, int * pC, int *trace,
+             int *csave, int *nC, int *pC, int *trace,
              double *beta, int *bs, double *residuals, double *scale, double *weights, 
              double *outliers, int *nout, double *singsub, double *xC 
              )
@@ -22,7 +22,7 @@ void r_lxs(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int *in
     bool b_msg = *msg != 0;
     bool b_nocheck = *nocheck != 0;
     bool b_rew = *rew != 0;
-    bool b_yxsave = *yxsave != 0;
+    bool b_yxsave = false;
     bool b_csave = *csave != 0;
     bool b_trace = *trace != 0;
      
@@ -48,8 +48,8 @@ void r_lxs(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int *in
 
     /* Initialize the input arguments. ==============================*/
     
-    y = argInit_vector(yy, nn);                 //  Initialize function input argument 'y'    
-    X = argInit_matrix(xx, nn, pp);             //  Initialize function input argument 'X'    
+    y = argInit_vector(yy, nn);                     //  Initialize function input argument 'y'    
+    X = argInit_matrix(xx, nn, pp);                 //  Initialize function input argument 'X'    
     argInit_scalar(r_bonflevoutX, b_bonflevoutX, bonflevoutX_data, bonflevoutX_size);   //  Initialize function input argument 'bonflevoutX'
 
 
@@ -143,6 +143,10 @@ void r_lxs(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int *in
             xC[i] = C->data[i];
         }
     }
+
+    // Return n and p calculated by chkinputR()
+    *nn1 = out.beta->size[0];
+    *pp1 = out.residuals->size[0];
 
     // Destroy the allocated objetcs
     emxDestroyArray_real_T(C);

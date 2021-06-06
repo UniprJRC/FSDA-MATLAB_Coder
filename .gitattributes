@@ -5,6 +5,7 @@
 # in Unix via a file share from Windows, the scripts will work.
 *.sh text eol=lf
 *.c text eol=lf
+*.h text eol=lf
 
 # Declare files that will always have CRLF line endings on checkout.
 *.m text eol=crlf

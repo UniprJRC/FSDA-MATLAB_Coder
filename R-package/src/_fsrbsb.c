@@ -26,7 +26,7 @@
     than n if missing values were present. 
 */
 
-void r_fsrbsb(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, 
+void r_fsrbsb(double *yy, double *xx, int *nn, int *pp, 
             double *xbsb, int *nbsb, 
             double *xbsbsteps, int *nbsbsteps,
             double *init, int *intercept, int *msg, int *nocheck,
@@ -47,58 +47,17 @@ void r_fsrbsb(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1,
     emxArray_real_T *Un;
     emxArray_real32_T *BB;
 
-/*-------------------------------------------------------------  
-    Rprintf("%s  %d %d\n", "Starting r_fsrbsb: y:", *nn, *pp);    
-    disp_dble(yy, *nn);
-    Rprintf("%s ", "Starting fsrbsb: X\n");                   
-    disp_lmat_cm(xx, *nn, *pp);
-    Rprintf("%s ", "Starting fsrbsb: bsb\n");                   
-    disp_dble(xbsb, *nbsb);
-    Rprintf("%s ", "Starting fsrbsb: bsbsteps\n");                   
-    disp_dble(xbsbsteps, *nbsbsteps);
-*/
-
     /* Initialize function 'r_fsrbsb' input arguments. ==============================*/
     
-    //  Initialize function input argument 'y'
-    y = argInit_vector(yy, nn);
-    //Rprintf("%s ", "y initialized\n");                   
-    
-    //  Initialize function input argument 'X'
-    X = argInit_matrix(xx, nn, pp);
-    //Rprintf("%s ", "X initialized\n");                   
-    
-    //  Initialize function input argument 'bsb'. 
-    bsb = argInit_vector(xbsb, nbsb);
-    //Rprintf("%s ", "bsb initialized\n");     
-                  
-    //  Initialize function input argument 'bsbsteps'. 
-    bsbsteps = argInit_vector(xbsbsteps, nbsbsteps);
-    //Rprintf("%s ", "bsbsteps initialized\n");                   
+    y = argInit_vector(yy, nn);         //  Initialize function input argument 'y'  
+    X = argInit_matrix(xx, nn, pp);     //  Initialize function input argument 'X'
+    bsb = argInit_vector(xbsb, nbsb);   //  Initialize function input argument 'bsb'
+    bsbsteps = argInit_vector(xbsbsteps, nbsbsteps);        //  Initialize function input argument 'bsbsteps'
 
-    //  Initialize function input argument 'Un'
-    Un = emxCreate_real_T(*nUn, *pUn);
-    //Rprintf("%s ", "Un initialized\n");                   
-
-    //  Initialize function input argument 'Un'
-    BB =  emxCreate_real32_T(*nBB, *pBB);
-    //Rprintf("%s ", "BB initialized\n"); 
+    Un = emxCreate_real_T(*nUn, *pUn);      //  Initialize function output argument 'Un'
+    BB =  emxCreate_real32_T(*nBB, *pBB);   //  Initialize function input argument 'BB'
                       
-/*-------------------------------------------------------------  
-    Rprintf("\ny dimensions: %d \n", y->size[0]); 
-    disp_dble(y->data, y->size[0]);
-    Rprintf("\nX dimensions: %d, %d \n", X->size[0], X->size[1]); 
-    disp_lmat_cm(X->data, X->size[0], X->size[1]);
-*/
-
-    //Rprintf("%s ", "Calling FSRbsb...\n");                   
     FSRbsb_wrapper(y, X, bsb, bsbsteps, *init, b_intercept, b_msg, b_nocheck, Un, BB);
-    
-/*-------------------------------------------------------------  
-    Rprintf("\nUn dimensions: %d, %d \n", Un->size[0], Un->size[1]); 
-    disp_lmat_cm(Un->data, Un->size[0], Un->size[1]);
-*/    
-
     
     if(Un->size[0] != *nUn || Un->size[1] != *pUn)
         Rprintf("\nWARNING: the size of output matrix Un changed: was %d, %d, now is %d, %d \n", *nUn, *pUn, Un->size[0], Un->size[1]); 
@@ -118,9 +77,5 @@ void r_fsrbsb(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1,
 
     emxDestroyArray_real32_T(BB);
     emxDestroyArray_real_T(Un);
-    emxDestroyArray_real_T(bsbsteps);
-    emxDestroyArray_real_T(bsb);
-    emxDestroyArray_real_T(X);
-    emxDestroyArray_real_T(y);    
 }
 

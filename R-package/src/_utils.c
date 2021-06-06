@@ -97,52 +97,15 @@ void argInit_scalar2(double a[], double result_data[], int result_size[2])
     result_data[0] = a[0];
 }
 
-emxArray_real_T *argInit_vector(const double *yy, const int *nn)
+emxArray_real_T *argInit_vector(double *yy, const int *nn)
 {
-  static int iv[1] = { 2 };
-  iv[0] = *nn;
-  
-  emxArray_real_T *result;
-  int idx0;
 
-  /* Set the size of the array.
-     Change this size to the value that the application requires. */
-  result = emxCreateND_real_T(1, iv);
-
-  /* Loop over the array to initialize each element. */
-  for (idx0 = 0; idx0 < result->size[0U]; idx0++) {
-    /* Set the value of the array element.
-       Change this value to the value that the application requires. */
-    result->data[idx0] = yy[idx0];
-  }
-
-  return result;
+    return emxCreateWrapperND_real_T(yy, 1, nn);
 }
 
-emxArray_real_T *argInit_matrix(const double *xx, const int *nn, const int *pp)
+emxArray_real_T *argInit_matrix(double *xx, const int *nn, const int *pp)
 {
-    emxArray_real_T *result;
-    
-    int idx0;
-    //  int idx1;
-
-    //  Set the size of the array.
-    result = emxCreate_real_T(*nn, *pp);
-
-    //  Loop over the array to initialize each element.
-    /*
-    for (idx0 = 0; idx0 < result->size[0U]; idx0++) {
-        for (idx1 = 0; idx1 < result->size[1U]; idx1++) {
-          result->data[idx0 + result->size[0] * idx1] = xx[idx0 + result->size[0] * idx1];
-        }
-    }
-    */
-    
-    for (idx0 = 0; idx0 < result->size[0U] * result->size[1U]; idx0++) {
-      result->data[idx0] = xx[idx0];
-    }
-
-    return result;
+    return emxCreateWrapper_real_T(xx, *nn, *pp);
 }
 
 emxArray_real_T *argCreate_matrix(const int nn, const int pp)

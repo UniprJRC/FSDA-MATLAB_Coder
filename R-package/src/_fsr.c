@@ -74,8 +74,6 @@ void r_fsr(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int *in
 
     if(b_trace)
     {
-        Rprintf("\n+++++ out.scale: %f \n", out.scale);
-
         Rprintf("\n+++++ out.beta: %d, %d \n", out.beta->size[0], out.beta->size[1]);
         disp_dble(out.beta->data, out.beta->size[0]);
 
@@ -145,6 +143,10 @@ void r_fsr(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int *in
         }
     }    
  
+    // Return n and p calculated by chkinputR()
+    *nn1 = out.beta->size[0];
+    *pp1 = out.residuals->size[0];
+
     // Destroy the allocated objetcs
     emxDestroy_struct_FSR_T(out);
     emxDestroyArray_real_T(X);    
