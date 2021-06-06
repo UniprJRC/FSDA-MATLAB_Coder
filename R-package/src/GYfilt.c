@@ -10,7 +10,6 @@
  */
 
 #include <R.h>
-
 /* Include files */
 #include "GYfilt.h"
 #include "colon.h"

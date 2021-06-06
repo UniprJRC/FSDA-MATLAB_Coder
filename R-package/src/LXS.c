@@ -8,9 +8,8 @@
  * Code generation for function 'LXS'
  *
  */
- 
-#include <R.h>
 
+#include <R.h>
 /* Include files */
 #include "LXS.h"
 #include "FSM.h"
@@ -366,7 +365,7 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
   /*                        formed by units 2, 5 and 20. */
   /*  */
   /*  */
-  /*  See also FSReda, Sreg, MMreg */
+  /*  See also FSReda, Sreg, MMreg, LTSts */
   /*  */
   /*  References: */
   /*  */
@@ -1841,7 +1840,7 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                        formed by units 2, 5 and 20. */
   /*  */
   /*  */
-  /*  See also FSReda, Sreg, MMreg */
+  /*  See also FSReda, Sreg, MMreg, LTSts */
   /*  */
   /*  References: */
   /*  */
@@ -2719,7 +2718,7 @@ double corfactorRAW(double n, double alpha)
 {
   double fp_500_n;
   double fp_875_n;
-  double fp_alpha_n = 0;    // VT::warnings
+  double fp_alpha_n=0;
   double rawcorfac;
   /*  corfactorRAW function */
   fp_500_n = 1.0 - 1.2995580068132053 / rt_powd_snf(n, 0.604756680630497);

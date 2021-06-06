@@ -10,7 +10,6 @@
  */
  
 #include <R.h>
-
 /* Include files */
 #include "FSRmdr_wrapper.h"
 #include "any.h"

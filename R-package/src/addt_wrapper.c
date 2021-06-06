@@ -240,9 +240,6 @@ void addt_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  */
   /*  */
   /*  Beginning of code */
-  /*  User options */
-  /*  Insert code for intercept */
-  /*  t test for an additional explanatory variable */
   k = A->size[0] * A->size[1];
   A->size[0] = X->size[0];
   A->size[1] = X->size[1];
@@ -551,6 +548,8 @@ void addt_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     local_rank(A);
   }
   emxInit_real_T(&r, 2);
+  /*  Insert code for intercept */
+  /*  t test for an additional explanatory variable */
   qr(A, E, r);
   mrdiv(A, r, E);
   k = r->size[0] * r->size[1];

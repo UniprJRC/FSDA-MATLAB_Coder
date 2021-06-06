@@ -10,7 +10,6 @@
  */
 
 #include <R.h>
-
 /* Include files */
 #include "FSMbsb_wrapper.h"
 #include "bsxfun.h"

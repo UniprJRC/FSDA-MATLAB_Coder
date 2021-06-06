@@ -10,7 +10,6 @@
  */
  
 #include <R.h>
-
 /* Include files */
 #include "FSRcore.h"
 #include "FSRbonfbound.h"

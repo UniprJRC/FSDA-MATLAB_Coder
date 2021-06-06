@@ -8,9 +8,8 @@
  * Code generation for function 'FSMmmd_wrapper'
  *
  */
- 
- #include <R.h>
 
+#include <R.h>
 /* Include files */
 #include "FSMmmd_wrapper.h"
 #include "bsxfun.h"

@@ -8,9 +8,8 @@
  * Code generation for function 'FSRfan_wrapper'
  *
  */
- 
-#include <R.h>
 
+#include <R.h>
 /* Include files */
 #include "FSRfan_wrapper.h"
 #include "LXS.h"
@@ -421,7 +420,7 @@ void FSRfan_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*        ylimy   :  Minimum and maximum of the y axis. Vector. */
   /*                    Default value for ylimy(1)=max(min(score_test),-20). */
   /*                    Default value for ylimy(2)=min(max(score_test),20). */
-  /*                    Example - 'ylimx',[0 1] */
+  /*                    Example - 'ylimy',[0 1] */
   /*                    Data Types - double */
   /*  */
   /*   Output: */

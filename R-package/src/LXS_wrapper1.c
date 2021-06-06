@@ -8,9 +8,8 @@
  * Code generation for function 'LXS_wrapper1'
  *
  */
- 
-#include <R.h>
 
+#include <R.h>
 /* Include files */
 #include "LXS_wrapper1.h"
 #include "FSM.h"
@@ -412,7 +411,7 @@ void LXS_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                        formed by units 2, 5 and 20. */
   /*  */
   /*  */
-  /*  See also FSReda, Sreg, MMreg */
+  /*  See also FSReda, Sreg, MMreg, LTSts */
   /*  */
   /*  References: */
   /*  */
