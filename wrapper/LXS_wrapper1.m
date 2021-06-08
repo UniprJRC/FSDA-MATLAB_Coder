@@ -58,6 +58,9 @@ assert(isfield(lms,'reftolbestr'));
 assert(isa(lms.reftolbestr,'double'));
 assert(isscalar(lms.reftolbestr));
 
+coder.cstructname(lms,'struct_LXSlms_T');
+
+
 % msg is a boolean
 assert(isa(msg,'logical'));
 assert(isscalar(msg));

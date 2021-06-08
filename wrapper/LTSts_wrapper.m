@@ -35,6 +35,7 @@ assert(isscalar(lshiftlocref.typeres));
 % field huberc a scalar of type double
 assert(isa(lshiftlocref.huberc,'double'));
 assert(isscalar(lshiftlocref.huberc));
+coder.cstructname(lshiftlocref,'struct_LTStslshiftlocref_T');
 
 % lts: a struct (with 5 fields of type scalar double)
 assert(isa(lts,'struct'));
@@ -83,6 +84,8 @@ assert(all(size(model.ARp) <= [1 1]));
 assert(isfield(model,'X'));
 assert(isa(model.X,'double'));
 assert(all(size(model.X) <= [Inf Inf]));
+coder.cstructname(model,'struct_LTStsmodel_T');
+
 
 % msg a boolean
 assert(isa(msg, 'logical'));
