@@ -59,12 +59,13 @@
 
 /* Function Definitions */
 void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
-                   double h, bool intercept, const struct0_T *lshiftlocref,
-                   const struct1_T *lts, const struct2_T *model, bool msg,
-                   double nbestindexes, bool nocheck, const double nsamp_data[],
-                   const int nsamp_size[2], double refstepsALS,
-                   double reftolALS, double SmallSampleCor, bool yxsave,
-                   struct_LTSts_T *out, emxArray_real_T *C)
+                   double h, bool intercept,
+                   const struct_LTStslshiftlocref_T *lshiftlocref,
+                   const struct_LXSlms_T *lts, const struct_LTStsmodel_T *model,
+                   bool msg, double nbestindexes, bool nocheck,
+                   const double nsamp_data[], const int nsamp_size[2],
+                   double refstepsALS, double reftolALS, double SmallSampleCor,
+                   bool yxsave, struct_LTSts_T *out, emxArray_real_T *C)
 {
   static const char b_seaso[88] = {
       'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', '_', '_', '_', '_',
@@ -761,7 +762,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   /*                        2nd col = standard errors; */
   /*                        3rd col = t-statistics; */
   /*                        4th col = p values. */
-  /*           out.Btable = same thing out.B but n table format. */
+  /*           out.Btable = same thing as out.B but in table format. */
   /*                out.h = The number of observations that have determined the
    */
   /*                        initial LTS estimator, i.e. the value of h. */
@@ -4574,20 +4575,6 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   /*  end */
   emxFree_real_T(&b_out);
   if (dispresults && (lshiftYN.contents == 1.0)) {
-    /*          bhat=out.B(:,1); */
-    /*          se=out.B(:,2); */
-    /*          tstat=out.B(:,3); */
-    /*          pval=out.B(:,4); */
-    /*          %         disp('           Coeff.     SE         t-stat
-     * p-values'); */
-    /*          fprintf('%s%.3f',lab,bhat) */
-    /*      if verLessThan ('matlab','8.2.0') */
-    /*          disp('           Coeff.     SE         t-stat       p-values');
-     */
-    /*          disp( [char(lab) num2str([bhat se tstat pval])]); */
-    /*      else */
-    /*  disp([table(lab) table(bhat) table(se) table(tstat) table(pval)]); */
-    /*      end */
     printf("Level shift position t=%.0f\n", posLS);
     fflush(stdout);
   }

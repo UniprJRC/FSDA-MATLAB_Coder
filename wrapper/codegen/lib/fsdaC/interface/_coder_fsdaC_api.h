@@ -18,25 +18,25 @@
 #include <string.h>
 
 /* Type Definitions */
-#ifndef typedef_struct0_T
-#define typedef_struct0_T
+#ifndef typedef_struct_LTStslshiftlocref_T
+#define typedef_struct_LTStslshiftlocref_T
 typedef struct {
   real_T wlength;
   real_T typeres;
   real_T huberc;
-} struct0_T;
-#endif /* typedef_struct0_T */
+} struct_LTStslshiftlocref_T;
+#endif /* typedef_struct_LTStslshiftlocref_T */
 
-#ifndef typedef_struct1_T
-#define typedef_struct1_T
+#ifndef typedef_struct_LXSlms_T
+#define typedef_struct_LXSlms_T
 typedef struct {
   real_T bestr;
   real_T refsteps;
   real_T refstepsbestr;
   real_T reftol;
   real_T reftolbestr;
-} struct1_T;
-#endif /* typedef_struct1_T */
+} struct_LXSlms_T;
+#endif /* typedef_struct_LXSlms_T */
 
 #ifndef typedef_c_matlab_internal_coder_tabular
 #define typedef_c_matlab_internal_coder_tabular
@@ -207,8 +207,8 @@ typedef struct {
 } struct_FSRfan_T;
 #endif /* typedef_struct_FSRfan_T */
 
-#ifndef typedef_struct2_T
-#define typedef_struct2_T
+#ifndef typedef_struct_LTStsmodel_T
+#define typedef_struct_LTStsmodel_T
 typedef struct {
   real_T lshift;
   real_T s;
@@ -216,8 +216,8 @@ typedef struct {
   real_T seasonal;
   emxArray_real_T_1x1 ARp;
   emxArray_real_T *X;
-} struct2_T;
-#endif /* typedef_struct2_T */
+} struct_LTStsmodel_T;
+#endif /* typedef_struct_LTStsmodel_T */
 
 #ifndef struct_emxArray_boolean_T
 #define struct_emxArray_boolean_T
@@ -327,12 +327,12 @@ typedef struct {
 } cell_wrap_50;
 #endif /* typedef_cell_wrap_50 */
 
-#ifndef typedef_struct3_T
-#define typedef_struct3_T
+#ifndef typedef_struct0_T
+#define typedef_struct0_T
 typedef struct {
   emxArray_char_T_1x0 Description;
-} struct3_T;
-#endif /* typedef_struct3_T */
+} struct0_T;
+#endif /* typedef_struct0_T */
 
 #ifndef typedef_f_matlab_internal_coder_tabular
 #define typedef_f_matlab_internal_coder_tabular
@@ -355,7 +355,7 @@ typedef struct {
   e_matlab_internal_coder_tabular rowDim;
   f_matlab_internal_coder_tabular varDim;
   cell_wrap_6 data[4];
-  struct3_T arrayProps;
+  struct0_T arrayProps;
 } table;
 #endif /* typedef_table */
 
@@ -461,12 +461,13 @@ void FSRmdr_wrapper_api(const mxArray *const prhs[12], int32_T nlhs,
                         const mxArray *plhs[5]);
 
 void LTSts_wrapper(emxArray_real_T *y, real_T conflev, boolean_T dispresults,
-                   real_T h, boolean_T intercept, struct0_T *lshiftlocref,
-                   struct1_T *lts, struct2_T *model, boolean_T msg,
-                   real_T nbestindexes, boolean_T nocheck, real_T nsamp_data[],
-                   int32_T nsamp_size[2], real_T refstepsALS, real_T reftolALS,
-                   real_T SmallSampleCor, boolean_T yxsave, struct_LTSts_T *out,
-                   emxArray_real_T *C);
+                   real_T h, boolean_T intercept,
+                   struct_LTStslshiftlocref_T *lshiftlocref,
+                   struct_LXSlms_T *lts, struct_LTStsmodel_T *model,
+                   boolean_T msg, real_T nbestindexes, boolean_T nocheck,
+                   real_T nsamp_data[], int32_T nsamp_size[2],
+                   real_T refstepsALS, real_T reftolALS, real_T SmallSampleCor,
+                   boolean_T yxsave, struct_LTSts_T *out, emxArray_real_T *C);
 
 void LTSts_wrapper_api(const mxArray *const prhs[16], int32_T nlhs,
                        const mxArray *plhs[2]);
@@ -480,10 +481,10 @@ void LXS_wrapper(emxArray_real_T *y, emxArray_real_T *X,
 
 void LXS_wrapper1(emxArray_real_T *y, emxArray_real_T *X,
                   real_T bonflevoutX_data[], int32_T bonflevoutX_size[2],
-                  real_T conflev, real_T h, boolean_T intercept, struct1_T *lms,
-                  boolean_T msg, boolean_T nocheck, boolean_T nomes,
-                  real_T nsamp, boolean_T rew, boolean_T yxsave,
-                  struct_LXS_T *out, emxArray_real_T *C);
+                  real_T conflev, real_T h, boolean_T intercept,
+                  struct_LXSlms_T *lms, boolean_T msg, boolean_T nocheck,
+                  boolean_T nomes, real_T nsamp, boolean_T rew,
+                  boolean_T yxsave, struct_LXS_T *out, emxArray_real_T *C);
 
 void LXS_wrapper1_api(const mxArray *const prhs[13], int32_T nlhs,
                       const mxArray *plhs[2]);

@@ -360,11 +360,6 @@ void emxDestroyArray_real_T(emxArray_real_T *emxArray)
   emxFree_real_T(&emxArray);
 }
 
-void emxDestroy_struct2_T(struct2_T emxArray)
-{
-  emxFreeStruct_struct2_T(&emxArray);
-}
-
 void emxDestroy_struct_FSM_T(struct_FSM_T emxArray)
 {
   emxFreeStruct_struct_FSM_T(&emxArray);
@@ -383,6 +378,11 @@ void emxDestroy_struct_FSRfan_T(struct_FSRfan_T emxArray)
 void emxDestroy_struct_LTSts_T(struct_LTSts_T emxArray)
 {
   emxFreeStruct_struct_LTSts_T(&emxArray);
+}
+
+void emxDestroy_struct_LTStsmodel_T(struct_LTStsmodel_T emxArray)
+{
+  c_emxFreeStruct_struct_LTStsmod(&emxArray);
 }
 
 void emxDestroy_struct_LXS_T(struct_LXS_T emxArray)
@@ -405,11 +405,6 @@ void emxInitArray_real_T(emxArray_real_T **pEmxArray, int numDimensions)
   emxInit_real_T(pEmxArray, numDimensions);
 }
 
-void emxInit_struct2_T(struct2_T *pStruct)
-{
-  emxInitStruct_struct2_T(pStruct);
-}
-
 void emxInit_struct_FSM_T(struct_FSM_T *pStruct)
 {
   emxInitStruct_struct_FSM_T(pStruct);
@@ -428,6 +423,11 @@ void emxInit_struct_FSRfan_T(struct_FSRfan_T *pStruct)
 void emxInit_struct_LTSts_T(struct_LTSts_T *pStruct)
 {
   emxInitStruct_struct_LTSts_T(pStruct);
+}
+
+void emxInit_struct_LTStsmodel_T(struct_LTStsmodel_T *pStruct)
+{
+  c_emxInitStruct_struct_LTStsmod(pStruct);
 }
 
 void emxInit_struct_LXS_T(struct_LXS_T *pStruct)

@@ -71,13 +71,13 @@ static void argInit_d2xd1_real_T(double result_data[], int result_size[2]);
 
 static double argInit_real_T(void);
 
-static struct0_T argInit_struct0_T(void);
+static struct_LTStsmodel_T argInit_struct_LTStsmodel_T(void);
 
-static struct1_T argInit_struct1_T(void);
-
-static struct2_T argInit_struct2_T(void);
+static struct_LXSlms_T argInit_struct_LXSlms_T(void);
 
 static emxArray_real_T *c_argInit_UnboundedxUnbounded_r(void);
+
+static struct_LTStslshiftlocref_T c_argInit_struct_LTStslshiftloc(void);
 
 static void main_FSM_wrapper(void);
 
@@ -210,37 +210,9 @@ static double argInit_real_T(void)
   return 0.0;
 }
 
-static struct0_T argInit_struct0_T(void)
+static struct_LTStsmodel_T argInit_struct_LTStsmodel_T(void)
 {
-  struct0_T result;
-  double result_tmp;
-  /* Set the value of each structure field.
-Change this value to the value that the application requires. */
-  result_tmp = argInit_real_T();
-  result.typeres = result_tmp;
-  result.huberc = result_tmp;
-  result.wlength = result_tmp;
-  return result;
-}
-
-static struct1_T argInit_struct1_T(void)
-{
-  struct1_T result;
-  double result_tmp;
-  /* Set the value of each structure field.
-Change this value to the value that the application requires. */
-  result_tmp = argInit_real_T();
-  result.refsteps = result_tmp;
-  result.refstepsbestr = result_tmp;
-  result.reftol = result_tmp;
-  result.reftolbestr = result_tmp;
-  result.bestr = result_tmp;
-  return result;
-}
-
-static struct2_T argInit_struct2_T(void)
-{
-  struct2_T result;
+  struct_LTStsmodel_T result;
   double result_tmp;
   /* Set the value of each structure field.
 Change this value to the value that the application requires. */
@@ -251,6 +223,21 @@ Change this value to the value that the application requires. */
   result.lshift = result_tmp;
   argInit_d1xd1_real_T(result.ARp.data, result.ARp.size);
   result.X = c_argInit_UnboundedxUnbounded_r();
+  return result;
+}
+
+static struct_LXSlms_T argInit_struct_LXSlms_T(void)
+{
+  struct_LXSlms_T result;
+  double result_tmp;
+  /* Set the value of each structure field.
+Change this value to the value that the application requires. */
+  result_tmp = argInit_real_T();
+  result.refsteps = result_tmp;
+  result.refstepsbestr = result_tmp;
+  result.reftol = result_tmp;
+  result.reftolbestr = result_tmp;
+  result.bestr = result_tmp;
   return result;
 }
 
@@ -270,6 +257,19 @@ Change this value to the value that the application requires. */
       result->data[idx0 + result->size[0] * idx1] = argInit_real_T();
     }
   }
+  return result;
+}
+
+static struct_LTStslshiftlocref_T c_argInit_struct_LTStslshiftloc(void)
+{
+  struct_LTStslshiftlocref_T result;
+  double result_tmp;
+  /* Set the value of each structure field.
+Change this value to the value that the application requires. */
+  result_tmp = argInit_real_T();
+  result.typeres = result_tmp;
+  result.huberc = result_tmp;
+  result.wlength = result_tmp;
   return result;
 }
 
@@ -517,10 +517,10 @@ static void main_LTSts_wrapper(void)
 {
   emxArray_real_T *C;
   emxArray_real_T *y;
-  struct0_T r;
-  struct1_T r1;
-  struct2_T model;
   struct_LTSts_T out;
+  struct_LTStslshiftlocref_T r;
+  struct_LTStsmodel_T model;
+  struct_LXSlms_T r1;
   double nsamp_data[2];
   double conflev_tmp;
   int nsamp_size[2];
@@ -535,19 +535,19 @@ static void main_LTSts_wrapper(void)
   /* Initialize function input argument 'lshiftlocref'. */
   /* Initialize function input argument 'lts'. */
   /* Initialize function input argument 'model'. */
-  model = argInit_struct2_T();
+  model = argInit_struct_LTStsmodel_T();
   /* Initialize function input argument 'nsamp'. */
   argInit_d2xd1_real_T(nsamp_data, nsamp_size);
   /* Call the entry-point 'LTSts_wrapper'. */
-  r = argInit_struct0_T();
-  r1 = argInit_struct1_T();
+  r = c_argInit_struct_LTStslshiftloc();
+  r1 = argInit_struct_LXSlms_T();
   LTSts_wrapper(y, conflev_tmp, dispresults_tmp, conflev_tmp, dispresults_tmp,
                 &r, &r1, &model, dispresults_tmp, conflev_tmp, dispresults_tmp,
                 nsamp_data, nsamp_size, conflev_tmp, conflev_tmp, conflev_tmp,
                 dispresults_tmp, &out, C);
   emxDestroyArray_real_T(C);
   emxDestroy_struct_LTSts_T(out);
-  emxDestroy_struct2_T(model);
+  emxDestroy_struct_LTStsmodel_T(model);
   emxDestroyArray_real_T(y);
 }
 
@@ -588,8 +588,8 @@ static void main_LXS_wrapper1(void)
   emxArray_real_T *C;
   emxArray_real_T *X;
   emxArray_real_T *y;
-  struct1_T r;
   struct_LXS_T out;
+  struct_LXSlms_T r;
   double bonflevoutX_data;
   double conflev_tmp;
   int bonflevoutX_size[2];
@@ -607,7 +607,7 @@ static void main_LXS_wrapper1(void)
   intercept_tmp = argInit_boolean_T();
   /* Initialize function input argument 'lms'. */
   /* Call the entry-point 'LXS_wrapper1'. */
-  r = argInit_struct1_T();
+  r = argInit_struct_LXSlms_T();
   LXS_wrapper1(y, X, (double *)&bonflevoutX_data, bonflevoutX_size, conflev_tmp,
                conflev_tmp, intercept_tmp, &r, intercept_tmp, intercept_tmp,
                intercept_tmp, conflev_tmp, intercept_tmp, intercept_tmp, &out,
