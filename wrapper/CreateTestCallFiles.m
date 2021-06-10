@@ -200,7 +200,7 @@ for i=1:lFiles
             cont=true;
         catch
             cont=false;
-            warning('FSDA:CreateTestCallFiles:WrongInputOpt',['Could not convert file'  FileNameS])
+            warning('FSDA:CreateTestCallFiles:WrongInputOpt',['Could not convert file '  FileNameS])
         end
         if cont==true
             load('CompTimes.mat','CompTimes')

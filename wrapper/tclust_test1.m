@@ -27,7 +27,7 @@ equalweights=false;
 mixt=0;
 msg=0;
 nocheck=false;
-nsamp=2000;
+nsamp=1000;
 RandNumbForNini=[];
 refsteps=5;
 reftol=1e-7;
@@ -56,13 +56,11 @@ tottimeMEX=toc;
 
 % Compare mex time with .m time
 CompTimes=array2table([tottime tottimeMEX],'VariableNames',{'.m time' 'mex time'},...
-    'RowNames',{'tclust'});
+    'RowNames',{'tclust1'});
 disp(CompTimes)
 % Save table CompTimes
 save('CompTimes','CompTimes')
 
-% assert(isequal(out,outMEX),'out structure not equal')
-% assert(isequaln(BB,BBMEX),'BB not equal')
 tol=1e-7;
 assert(isequal(out.muopt,outMEX.muopt),'muopt not equal')
 assert(isequal(out.sigmaopt,outMEX.sigmaopt),'sigmaopt not equal')
