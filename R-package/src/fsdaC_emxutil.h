@@ -28,10 +28,14 @@ extern void c_emxCopyStruct_anonymous_funct(b_anonymous_function *dst,
 
 extern void c_emxFreeStruct_anonymous_funct(anonymous_function *pStruct);
 
+extern void c_emxFreeStruct_struct_LTStsmod(struct_LTStsmodel_T *pStruct);
+
 extern void c_emxInitStruct_anonymous_funct(b_anonymous_function *pStruct);
 
 extern void
 c_emxInitStruct_matlab_internal(e_matlab_internal_coder_tabular *pStruct);
+
+extern void c_emxInitStruct_struct_LTStsmod(struct_LTStsmodel_T *pStruct);
 
 extern void d_emxCopyStruct_anonymous_funct(anonymous_function *dst,
                                             const anonymous_function *src);
@@ -86,8 +90,6 @@ extern void emxFreeStruct_captured_var1(d_captured_var *pStruct);
 extern void emxFreeStruct_cell_wrap_36(cell_wrap_36 *pStruct);
 
 extern void emxFreeStruct_cell_wrap_6(cell_wrap_6 *pStruct);
-
-extern void emxFreeStruct_struct2_T(struct2_T *pStruct);
 
 extern void emxFreeStruct_struct_FSM_T(struct_FSM_T *pStruct);
 
@@ -149,9 +151,7 @@ extern void emxInitStruct_cell_wrap_50(cell_wrap_50 *pStruct);
 
 extern void emxInitStruct_cell_wrap_6(cell_wrap_6 *pStruct);
 
-extern void emxInitStruct_struct2_T(struct2_T *pStruct);
-
-extern void emxInitStruct_struct3_T(struct3_T *pStruct);
+extern void emxInitStruct_struct0_T(struct0_T *pStruct);
 
 extern void emxInitStruct_struct_FSM_T(struct_FSM_T *pStruct);
 

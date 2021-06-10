@@ -29,7 +29,7 @@ void r_lxs(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int *in
     double r_bonflevoutX = bonflevoutX[0];                    // the value of bonflevoutX
     bool b_bonflevoutX = bonflevoutX[1] != 0;                 // wheather bonflevoutX exists
     
-    struct1_T lmsstr;
+    struct_LXSlms_T lmsstr;
     
     emxArray_real_T *y;
     emxArray_real_T *X;

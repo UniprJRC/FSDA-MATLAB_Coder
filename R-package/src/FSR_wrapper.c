@@ -258,7 +258,7 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                  Data Types - double */
   /*  */
   /*   threshoutX  : threshold to bound the effect of high leverage units. */
-  /*                 empty value (default) or scalar or structure. */
+  /*                 empty value (default) or scalar equal to 1 or structure. */
   /*                If the design matrix X contains several high leverage units
    */
   /*                (that is units which are very far from the bulk of the */
@@ -650,7 +650,7 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*     xylim=axis; */
   /*     ylabel('mdr') */
   /*     title('FS without bound on the leverage') */
-  /*     % threshoutX is passed s astructure */
+  /*     % threshoutX is passed as astructure */
   /*     threshoutX=struct; */
   /*     threshoutX.threshlevoutX=5; */
   /*     % Use the instruction below if you wish to change the confidence level

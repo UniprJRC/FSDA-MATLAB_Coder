@@ -48,7 +48,7 @@ in case when a subset at step \code{m} (say \code{bsbm}) produces a singular \co
 In other words, this options controls what to do when \code{rank(X[bsbm,]} is smaller
 then number of explanatory variables. If \code{bsbmfullrank=TRUE} (default) these units
 (whose number is say \code{mnofullrank}) are constrained to enter the search in the final
-n-mnofullrank steps else the search continues using as estimate of beta at step \code{m}
+\code{n-mnofullrank} steps else the search continues using as estimate of beta at step \code{m}
 the estimate of \code{beta} found in the previous step.}
 
 \item{bonflev}{signal to use to identify outliers. This option is used if the distribution of
@@ -80,7 +80,7 @@ then \code{n}. Generally \code{h=[0.5*(n+p+1)]} (default value).}
 contains several high leverage units (that is units which are very far from the bulk of the data),
 it may happen that the best subset of LXS may include some of these units, or it may happen that
 these units have a deletion residual which is very small due to their extremely high value of \code{hi}.
-\code{bonflevoutX=1} imposes the constraints that:
+\code{threshoutX=1} imposes the constraints that:
 \enumerate{
 \item the extracted subsets which contain at least one unit declared as outlier in the \code{X} space by
     FSM using a Bonferronized confidence level of 0.99 are removed from the list of candidate subsets
