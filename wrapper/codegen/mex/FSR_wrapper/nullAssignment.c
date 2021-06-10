@@ -116,7 +116,7 @@ static emlrtRTEInfo cd_emlrtRTEI = {
     "internal\\nullAssignment.m" /* pName */
 };
 
-static emlrtRTEInfo dhb_emlrtRTEI = {
+static emlrtRTEInfo chb_emlrtRTEI = {
     365,              /* lineNo */
     9,                /* colNo */
     "nullAssignment", /* fName */
@@ -125,7 +125,7 @@ static emlrtRTEInfo dhb_emlrtRTEI = {
     "internal\\nullAssignment.m" /* pName */
 };
 
-static emlrtRTEInfo ehb_emlrtRTEI = {
+static emlrtRTEInfo dhb_emlrtRTEI = {
     33,               /* lineNo */
     13,               /* colNo */
     "nullAssignment", /* fName */
@@ -134,7 +134,7 @@ static emlrtRTEInfo ehb_emlrtRTEI = {
     "internal\\nullAssignment.m" /* pName */
 };
 
-static emlrtRTEInfo fhb_emlrtRTEI = {
+static emlrtRTEInfo ehb_emlrtRTEI = {
     363,              /* lineNo */
     9,                /* colNo */
     "nullAssignment", /* fName */
@@ -214,12 +214,12 @@ void nullAssignment(const emlrtStack *sp, emxArray_real_T *x,
       }
     }
   } else {
-    emxInit_boolean_T(&st, &b, 2, &fhb_emlrtRTEI, true);
+    emxInit_boolean_T(&st, &b, 2, &ehb_emlrtRTEI, true);
     b_st.site = &vb_emlrtRSI;
     i = b->size[0] * b->size[1];
     b->size[0] = 1;
     b->size[1] = x->size[1];
-    emxEnsureCapacity_boolean_T(&b_st, b, i, &dhb_emlrtRTEI);
+    emxEnsureCapacity_boolean_T(&b_st, b, i, &chb_emlrtRTEI);
     j = x->size[1];
     for (i = 0; i < j; i++) {
       b->data[i] = false;
@@ -286,7 +286,7 @@ void nullAssignment(const emlrtStack *sp, emxArray_real_T *x,
   i = x->size[0] * x->size[1];
   x->size[0] = b_b + 1;
   x->size[1] = j;
-  emxEnsureCapacity_real_T(&st, x, i, &ehb_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, x, i, &dhb_emlrtRTEI);
   emlrtHeapReferenceStackLeaveFcnR2012b((emlrtCTX)sp);
 }
 

@@ -160,7 +160,7 @@ static emlrtRSInfo
 };
 
 static emlrtRTEInfo
-    fm_emlrtRTEI =
+    em_emlrtRTEI =
         {
             61,        /* lineNo */
             5,         /* colNo */
@@ -171,7 +171,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    gm_emlrtRTEI =
+    fm_emlrtRTEI =
         {
             386,       /* lineNo */
             1,         /* colNo */
@@ -182,7 +182,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    hm_emlrtRTEI =
+    gm_emlrtRTEI =
         {
             388,       /* lineNo */
             1,         /* colNo */
@@ -193,7 +193,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    im_emlrtRTEI =
+    hm_emlrtRTEI =
         {
             308,       /* lineNo */
             14,        /* colNo */
@@ -204,7 +204,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    jm_emlrtRTEI =
+    im_emlrtRTEI =
         {
             308,       /* lineNo */
             20,        /* colNo */
@@ -428,12 +428,12 @@ void sortIdx(const emlrtStack *sp, emxArray_real_T *x, emxArray_int32_T *idx)
   ib = x->size[0];
   quartetOffset = idx->size[0];
   idx->size[0] = ib;
-  emxEnsureCapacity_int32_T(sp, idx, quartetOffset, &fm_emlrtRTEI);
+  emxEnsureCapacity_int32_T(sp, idx, quartetOffset, &em_emlrtRTEI);
   for (quartetOffset = 0; quartetOffset < ib; quartetOffset++) {
     idx->data[quartetOffset] = 0;
   }
   if (x->size[0] != 0) {
-    emxInit_int32_T(sp, &iwork, 1, &im_emlrtRTEI, true);
+    emxInit_int32_T(sp, &iwork, 1, &hm_emlrtRTEI, true);
     st.site = &jj_emlrtRSI;
     n = x->size[0];
     b_st.site = &kj_emlrtRSI;
@@ -448,15 +448,15 @@ void sortIdx(const emlrtStack *sp, emxArray_real_T *x, emxArray_int32_T *idx)
     idx4[3] = 0;
     quartetOffset = iwork->size[0];
     iwork->size[0] = ib;
-    emxEnsureCapacity_int32_T(&b_st, iwork, quartetOffset, &gm_emlrtRTEI);
+    emxEnsureCapacity_int32_T(&b_st, iwork, quartetOffset, &fm_emlrtRTEI);
     for (quartetOffset = 0; quartetOffset < ib; quartetOffset++) {
       iwork->data[quartetOffset] = 0;
     }
-    emxInit_real_T(&b_st, &xwork, 1, &jm_emlrtRTEI, true);
+    emxInit_real_T(&b_st, &xwork, 1, &im_emlrtRTEI, true);
     ib = x->size[0];
     quartetOffset = xwork->size[0];
     xwork->size[0] = ib;
-    emxEnsureCapacity_real_T(&b_st, xwork, quartetOffset, &hm_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, xwork, quartetOffset, &gm_emlrtRTEI);
     for (quartetOffset = 0; quartetOffset < ib; quartetOffset++) {
       xwork->data[quartetOffset] = 0.0;
     }

@@ -25,6 +25,10 @@ extern "C" {
 /* Function Declarations */
 bool any(const emxArray_boolean_T *x);
 
+void b_any(const emxArray_boolean_T *x, emxArray_boolean_T *y);
+
+bool c_any(const emxArray_boolean_T *x);
+
 #ifdef __cplusplus
 }
 #endif

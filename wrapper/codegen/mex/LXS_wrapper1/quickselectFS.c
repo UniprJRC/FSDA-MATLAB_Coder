@@ -16,7 +16,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtBCInfo bp_emlrtBCI = {
+static emlrtBCInfo dp_emlrtBCI = {
     -1,                                                      /* iFirst */
     -1,                                                      /* iLast */
     96,                                                      /* lineNo */
@@ -27,7 +27,7 @@ static emlrtBCInfo bp_emlrtBCI = {
     0                                                        /* checkKind */
 };
 
-static emlrtBCInfo cp_emlrtBCI = {
+static emlrtBCInfo ep_emlrtBCI = {
     -1,                                                      /* iFirst */
     -1,                                                      /* iLast */
     97,                                                      /* lineNo */
@@ -38,7 +38,7 @@ static emlrtBCInfo cp_emlrtBCI = {
     0                                                        /* checkKind */
 };
 
-static emlrtBCInfo dp_emlrtBCI = {
+static emlrtBCInfo fp_emlrtBCI = {
     -1,                                                      /* iFirst */
     -1,                                                      /* iLast */
     97,                                                      /* lineNo */
@@ -49,7 +49,7 @@ static emlrtBCInfo dp_emlrtBCI = {
     0                                                        /* checkKind */
 };
 
-static emlrtBCInfo ep_emlrtBCI = {
+static emlrtBCInfo gp_emlrtBCI = {
     -1,                                                      /* iFirst */
     -1,                                                      /* iLast */
     98,                                                      /* lineNo */
@@ -60,7 +60,7 @@ static emlrtBCInfo ep_emlrtBCI = {
     0                                                        /* checkKind */
 };
 
-static emlrtBCInfo fp_emlrtBCI = {
+static emlrtBCInfo hp_emlrtBCI = {
     -1,                                                      /* iFirst */
     -1,                                                      /* iLast */
     141,                                                     /* lineNo */
@@ -71,7 +71,7 @@ static emlrtBCInfo fp_emlrtBCI = {
     0                                                        /* checkKind */
 };
 
-static emlrtBCInfo gp_emlrtBCI = {
+static emlrtBCInfo ip_emlrtBCI = {
     -1,                                                      /* iFirst */
     -1,                                                      /* iLast */
     108,                                                     /* lineNo */
@@ -82,7 +82,7 @@ static emlrtBCInfo gp_emlrtBCI = {
     0                                                        /* checkKind */
 };
 
-static emlrtBCInfo hp_emlrtBCI = {
+static emlrtBCInfo jp_emlrtBCI = {
     -1,                                                      /* iFirst */
     -1,                                                      /* iLast */
     111,                                                     /* lineNo */
@@ -93,7 +93,7 @@ static emlrtBCInfo hp_emlrtBCI = {
     0                                                        /* checkKind */
 };
 
-static emlrtBCInfo ip_emlrtBCI = {
+static emlrtBCInfo kp_emlrtBCI = {
     -1,                                                      /* iFirst */
     -1,                                                      /* iLast */
     111,                                                     /* lineNo */
@@ -104,7 +104,7 @@ static emlrtBCInfo ip_emlrtBCI = {
     0                                                        /* checkKind */
 };
 
-static emlrtBCInfo jp_emlrtBCI = {
+static emlrtBCInfo lp_emlrtBCI = {
     -1,                                                      /* iFirst */
     -1,                                                      /* iLast */
     112,                                                     /* lineNo */
@@ -115,7 +115,7 @@ static emlrtBCInfo jp_emlrtBCI = {
     0                                                        /* checkKind */
 };
 
-static emlrtBCInfo kp_emlrtBCI = {
+static emlrtBCInfo mp_emlrtBCI = {
     -1,                                                      /* iFirst */
     -1,                                                      /* iLast */
     128,                                                     /* lineNo */
@@ -126,7 +126,7 @@ static emlrtBCInfo kp_emlrtBCI = {
     0                                                        /* checkKind */
 };
 
-static emlrtBCInfo lp_emlrtBCI = {
+static emlrtBCInfo np_emlrtBCI = {
     -1,                                                      /* iFirst */
     -1,                                                      /* iLast */
     128,                                                     /* lineNo */
@@ -137,7 +137,7 @@ static emlrtBCInfo lp_emlrtBCI = {
     0                                                        /* checkKind */
 };
 
-static emlrtBCInfo mp_emlrtBCI = {
+static emlrtBCInfo op_emlrtBCI = {
     -1,                                                      /* iFirst */
     -1,                                                      /* iLast */
     116,                                                     /* lineNo */
@@ -148,7 +148,7 @@ static emlrtBCInfo mp_emlrtBCI = {
     0                                                        /* checkKind */
 };
 
-static emlrtBCInfo np_emlrtBCI = {
+static emlrtBCInfo pp_emlrtBCI = {
     -1,                                                      /* iFirst */
     -1,                                                      /* iLast */
     129,                                                     /* lineNo */
@@ -159,7 +159,7 @@ static emlrtBCInfo np_emlrtBCI = {
     0                                                        /* checkKind */
 };
 
-static emlrtBCInfo op_emlrtBCI = {
+static emlrtBCInfo qp_emlrtBCI = {
     -1,                                                      /* iFirst */
     -1,                                                      /* iLast */
     119,                                                     /* lineNo */
@@ -170,7 +170,7 @@ static emlrtBCInfo op_emlrtBCI = {
     0                                                        /* checkKind */
 };
 
-static emlrtBCInfo pp_emlrtBCI = {
+static emlrtBCInfo rp_emlrtBCI = {
     -1,                                                      /* iFirst */
     -1,                                                      /* iLast */
     120,                                                     /* lineNo */
@@ -181,7 +181,7 @@ static emlrtBCInfo pp_emlrtBCI = {
     0                                                        /* checkKind */
 };
 
-static emlrtBCInfo qp_emlrtBCI = {
+static emlrtBCInfo sp_emlrtBCI = {
     -1,                                                      /* iFirst */
     -1,                                                      /* iLast */
     120,                                                     /* lineNo */
@@ -192,7 +192,7 @@ static emlrtBCInfo qp_emlrtBCI = {
     0                                                        /* checkKind */
 };
 
-static emlrtBCInfo rp_emlrtBCI = {
+static emlrtBCInfo tp_emlrtBCI = {
     -1,                                                      /* iFirst */
     -1,                                                      /* iLast */
     121,                                                     /* lineNo */
@@ -309,22 +309,22 @@ real_T quickselectFS(const emlrtStack *sp, emxArray_real_T *A, real_T k,
    * order */
   /*  statistic k, than swap A(k) and A(kiniindex). */
   if (((int32_T)k < 1) || ((int32_T)k > A->size[0])) {
-    emlrtDynamicBoundsCheckR2012b((int32_T)k, 1, A->size[0], &bp_emlrtBCI,
+    emlrtDynamicBoundsCheckR2012b((int32_T)k, 1, A->size[0], &dp_emlrtBCI,
                                   (emlrtCTX)sp);
   }
   Ak = A->data[(int32_T)k - 1];
   if (((int32_T)kiniindex < 1) || ((int32_T)kiniindex > A->size[0])) {
     emlrtDynamicBoundsCheckR2012b((int32_T)kiniindex, 1, A->size[0],
-                                  &cp_emlrtBCI, (emlrtCTX)sp);
+                                  &ep_emlrtBCI, (emlrtCTX)sp);
   }
   if (((int32_T)k < 1) || ((int32_T)k > A->size[0])) {
-    emlrtDynamicBoundsCheckR2012b((int32_T)k, 1, A->size[0], &dp_emlrtBCI,
+    emlrtDynamicBoundsCheckR2012b((int32_T)k, 1, A->size[0], &fp_emlrtBCI,
                                   (emlrtCTX)sp);
   }
   A->data[(int32_T)k - 1] = A->data[(int32_T)kiniindex - 1];
   if (((int32_T)kiniindex < 1) || ((int32_T)kiniindex > A->size[0])) {
     emlrtDynamicBoundsCheckR2012b((int32_T)kiniindex, 1, A->size[0],
-                                  &ep_emlrtBCI, (emlrtCTX)sp);
+                                  &gp_emlrtBCI, (emlrtCTX)sp);
   }
   A->data[(int32_T)kiniindex - 1] = Ak;
   /*  pivot is chosen at fixed position k.  */
@@ -332,22 +332,22 @@ real_T quickselectFS(const emlrtStack *sp, emxArray_real_T *A, real_T k,
   while (Ak != k) {
     /* while ((left < right) && (position ~= k)) */
     if (((int32_T)k < 1) || ((int32_T)k > A->size[0])) {
-      emlrtDynamicBoundsCheckR2012b((int32_T)k, 1, A->size[0], &gp_emlrtBCI,
+      emlrtDynamicBoundsCheckR2012b((int32_T)k, 1, A->size[0], &ip_emlrtBCI,
                                     (emlrtCTX)sp);
     }
     pivot = A->data[(int32_T)k - 1];
     /*  Swap right sentinel and pivot element */
     if ((right < 1) || (right > A->size[0])) {
-      emlrtDynamicBoundsCheckR2012b(right, 1, A->size[0], &hp_emlrtBCI,
+      emlrtDynamicBoundsCheckR2012b(right, 1, A->size[0], &jp_emlrtBCI,
                                     (emlrtCTX)sp);
     }
     if (((int32_T)k < 1) || ((int32_T)k > A->size[0])) {
-      emlrtDynamicBoundsCheckR2012b((int32_T)k, 1, A->size[0], &ip_emlrtBCI,
+      emlrtDynamicBoundsCheckR2012b((int32_T)k, 1, A->size[0], &kp_emlrtBCI,
                                     (emlrtCTX)sp);
     }
     A->data[(int32_T)k - 1] = A->data[right - 1];
     if (right > A->size[0]) {
-      emlrtDynamicBoundsCheckR2012b(right, 1, A->size[0], &jp_emlrtBCI,
+      emlrtDynamicBoundsCheckR2012b(right, 1, A->size[0], &lp_emlrtBCI,
                                     (emlrtCTX)sp);
     }
     A->data[right - 1] = pivot;
@@ -356,7 +356,7 @@ real_T quickselectFS(const emlrtStack *sp, emxArray_real_T *A, real_T k,
     for (b_i = 0; b_i <= i; b_i++) {
       c_i = (uint32_T)left + b_i;
       if (((int32_T)c_i < 1) || ((int32_T)c_i > A->size[0])) {
-        emlrtDynamicBoundsCheckR2012b((int32_T)c_i, 1, A->size[0], &mp_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b((int32_T)c_i, 1, A->size[0], &op_emlrtBCI,
                                       (emlrtCTX)sp);
       }
       d = A->data[(int32_T)c_i - 1];
@@ -365,20 +365,20 @@ real_T quickselectFS(const emlrtStack *sp, emxArray_real_T *A, real_T k,
         /*  A([i,position])=A([position,i]) would be more elegant but slower */
         if (((int32_T)c_i < 1) || ((int32_T)c_i > A->size[0])) {
           emlrtDynamicBoundsCheckR2012b((int32_T)c_i, 1, A->size[0],
-                                        &op_emlrtBCI, (emlrtCTX)sp);
+                                        &qp_emlrtBCI, (emlrtCTX)sp);
         }
         if (((int32_T)Ak < 1) || ((int32_T)Ak > A->size[0])) {
           emlrtDynamicBoundsCheckR2012b((int32_T)Ak, 1, A->size[0],
-                                        &pp_emlrtBCI, (emlrtCTX)sp);
+                                        &rp_emlrtBCI, (emlrtCTX)sp);
         }
         if (((int32_T)c_i < 1) || ((int32_T)c_i > A->size[0])) {
           emlrtDynamicBoundsCheckR2012b((int32_T)c_i, 1, A->size[0],
-                                        &qp_emlrtBCI, (emlrtCTX)sp);
+                                        &sp_emlrtBCI, (emlrtCTX)sp);
         }
         A->data[(int32_T)c_i - 1] = A->data[(int32_T)Ak - 1];
         if (((int32_T)Ak < 1) || ((int32_T)Ak > A->size[0])) {
           emlrtDynamicBoundsCheckR2012b((int32_T)Ak, 1, A->size[0],
-                                        &rp_emlrtBCI, (emlrtCTX)sp);
+                                        &tp_emlrtBCI, (emlrtCTX)sp);
         }
         A->data[(int32_T)Ak - 1] = d;
         Ak++;
@@ -389,16 +389,16 @@ real_T quickselectFS(const emlrtStack *sp, emxArray_real_T *A, real_T k,
     }
     /*  Swap A(right) with A(position) */
     if (((int32_T)Ak < 1) || ((int32_T)Ak > A->size[0])) {
-      emlrtDynamicBoundsCheckR2012b((int32_T)Ak, 1, A->size[0], &kp_emlrtBCI,
+      emlrtDynamicBoundsCheckR2012b((int32_T)Ak, 1, A->size[0], &mp_emlrtBCI,
                                     (emlrtCTX)sp);
     }
     if (right > A->size[0]) {
-      emlrtDynamicBoundsCheckR2012b(right, 1, A->size[0], &lp_emlrtBCI,
+      emlrtDynamicBoundsCheckR2012b(right, 1, A->size[0], &np_emlrtBCI,
                                     (emlrtCTX)sp);
     }
     A->data[right - 1] = A->data[(int32_T)Ak - 1];
     if (((int32_T)Ak < 1) || ((int32_T)Ak > A->size[0])) {
-      emlrtDynamicBoundsCheckR2012b((int32_T)Ak, 1, A->size[0], &np_emlrtBCI,
+      emlrtDynamicBoundsCheckR2012b((int32_T)Ak, 1, A->size[0], &pp_emlrtBCI,
                                     (emlrtCTX)sp);
     }
     A->data[(int32_T)Ak - 1] = pivot;
@@ -415,7 +415,7 @@ real_T quickselectFS(const emlrtStack *sp, emxArray_real_T *A, real_T k,
     }
   }
   if (((int32_T)k < 1) || ((int32_T)k > A->size[0])) {
-    emlrtDynamicBoundsCheckR2012b((int32_T)k, 1, A->size[0], &fp_emlrtBCI,
+    emlrtDynamicBoundsCheckR2012b((int32_T)k, 1, A->size[0], &hp_emlrtBCI,
                                   (emlrtCTX)sp);
   }
   return A->data[(int32_T)k - 1];

@@ -71,7 +71,7 @@ void b_bsxfun(const emlrtStack *sp, const emxArray_real_T *a,
   i = c->size[0] * c->size[1];
   c->size[0] = csz_idx_0;
   c->size[1] = csz_idx_1;
-  emxEnsureCapacity_real_T(sp, c, i, &kk_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, c, i, &jk_emlrtRTEI);
   if ((csz_idx_0 != 0) && (csz_idx_1 != 0)) {
     acoef = (a->size[1] != 1);
     bcoef = (b->size[1] != 1);
@@ -117,7 +117,7 @@ void bsxfun(const emlrtStack *sp, const emxArray_real_T *a,
   i = c->size[0] * c->size[1];
   c->size[0] = a->size[0];
   c->size[1] = csz_idx_1;
-  emxEnsureCapacity_real_T(sp, c, i, &kk_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, c, i, &jk_emlrtRTEI);
   if ((a->size[0] != 0) && (csz_idx_1 != 0)) {
     acoef = (a->size[1] != 1);
     bcoef = (b->size[1] != 1);

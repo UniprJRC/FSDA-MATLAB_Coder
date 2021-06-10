@@ -45,7 +45,7 @@ static emlrtRTEInfo nc_emlrtRTEI = {
                                                                          */
 };
 
-static emlrtRTEInfo jx_emlrtRTEI = {
+static emlrtRTEInfo ix_emlrtRTEI = {
     49,     /* lineNo */
     5,      /* colNo */
     "mean", /* fName */
@@ -76,7 +76,7 @@ void b_mean(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   b_combineVectorElements(&st, x, y);
   i = y->size[0] * y->size[1];
   y->size[0] = 1;
-  emxEnsureCapacity_real_T(sp, y, i, &jx_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, y, i, &ix_emlrtRTEI);
   loop_ub = y->size[1] - 1;
   for (i = 0; i <= loop_ub; i++) {
     y->data[i] /= (real_T)x->size[0];

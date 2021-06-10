@@ -21,122 +21,122 @@
 
 /* Variable Definitions */
 static emlrtRSInfo xfb_emlrtRSI = {
-    1280,                                          /* lineNo */
+    1294,                                          /* lineNo */
     "corfactorRAW",                                /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo yfb_emlrtRSI = {
-    1281,                                          /* lineNo */
+    1285,                                          /* lineNo */
     "corfactorRAW",                                /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo agb_emlrtRSI = {
-    1289,                                          /* lineNo */
+    1284,                                          /* lineNo */
     "corfactorRAW",                                /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo bgb_emlrtRSI = {
-    1128,                                          /* lineNo */
-    "LXS/asvar",                                   /* fcnName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
-};
-
-static emlrtRSInfo cgb_emlrtRSI = {
-    1129,                                          /* lineNo */
-    "LXS/asvar",                                   /* fcnName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
-};
-
-static emlrtRSInfo dgb_emlrtRSI = {
-    1131,                                          /* lineNo */
-    "LXS/asvar",                                   /* fcnName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
-};
-
-static emlrtRSInfo egb_emlrtRSI = {
-    1132,                                          /* lineNo */
-    "LXS/asvar",                                   /* fcnName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
-};
-
-static emlrtRSInfo fgb_emlrtRSI = {
-    1133,                                          /* lineNo */
-    "LXS/asvar",                                   /* fcnName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
-};
-
-static emlrtRSInfo ggb_emlrtRSI = {
     1134,                                          /* lineNo */
     "LXS/asvar",                                   /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
+static emlrtRSInfo cgb_emlrtRSI = {
+    1135,                                          /* lineNo */
+    "LXS/asvar",                                   /* fcnName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
+};
+
+static emlrtRSInfo dgb_emlrtRSI = {
+    1137,                                          /* lineNo */
+    "LXS/asvar",                                   /* fcnName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
+};
+
+static emlrtRSInfo egb_emlrtRSI = {
+    1138,                                          /* lineNo */
+    "LXS/asvar",                                   /* fcnName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
+};
+
+static emlrtRSInfo fgb_emlrtRSI = {
+    1139,                                          /* lineNo */
+    "LXS/asvar",                                   /* fcnName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
+};
+
+static emlrtRSInfo ggb_emlrtRSI = {
+    1140,                                          /* lineNo */
+    "LXS/asvar",                                   /* fcnName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
+};
+
 static emlrtRSInfo sgb_emlrtRSI = {
-    1332,                                          /* lineNo */
+    1336,                                          /* lineNo */
     "corfactorREW",                                /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo tgb_emlrtRSI = {
-    1333,                                          /* lineNo */
+    1335,                                          /* lineNo */
     "corfactorREW",                                /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtMCInfo jb_emlrtMCI = {
-    1296,                                          /* lineNo */
+    1301,                                          /* lineNo */
     5,                                             /* colNo */
     "corfactorRAW",                                /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
 static emlrtMCInfo kb_emlrtMCI = {
-    1297,                                          /* lineNo */
+    1302,                                          /* lineNo */
     5,                                             /* colNo */
     "corfactorRAW",                                /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
 static emlrtMCInfo lb_emlrtMCI = {
-    1298,                                          /* lineNo */
+    1303,                                          /* lineNo */
     5,                                             /* colNo */
     "corfactorRAW",                                /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
 static emlrtMCInfo mb_emlrtMCI = {
-    1299,                                          /* lineNo */
+    1304,                                          /* lineNo */
     5,                                             /* colNo */
     "corfactorRAW",                                /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
 static emlrtMCInfo nb_emlrtMCI = {
-    1347,                                          /* lineNo */
+    1350,                                          /* lineNo */
     5,                                             /* colNo */
     "corfactorREW",                                /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
 static emlrtMCInfo ob_emlrtMCI = {
-    1348,                                          /* lineNo */
+    1351,                                          /* lineNo */
     5,                                             /* colNo */
     "corfactorREW",                                /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
 static emlrtMCInfo pb_emlrtMCI = {
-    1349,                                          /* lineNo */
+    1352,                                          /* lineNo */
     5,                                             /* colNo */
     "corfactorREW",                                /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
 static emlrtMCInfo qb_emlrtMCI = {
-    1350,                                          /* lineNo */
+    1353,                                          /* lineNo */
     5,                                             /* colNo */
     "corfactorREW",                                /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
@@ -163,49 +163,49 @@ static const char_T cv17[51] = {
     'd', ' ', 'p', ' ', 'i', 's', ' ', 'l', 'a', 'r', 'g', 'e'};
 
 static emlrtRSInfo xhb_emlrtRSI = {
-    1350,                                          /* lineNo */
+    1353,                                          /* lineNo */
     "corfactorREW",                                /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo yhb_emlrtRSI = {
-    1349,                                          /* lineNo */
+    1352,                                          /* lineNo */
     "corfactorREW",                                /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo aib_emlrtRSI = {
-    1348,                                          /* lineNo */
+    1351,                                          /* lineNo */
     "corfactorREW",                                /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo bib_emlrtRSI = {
-    1347,                                          /* lineNo */
+    1350,                                          /* lineNo */
     "corfactorREW",                                /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo cib_emlrtRSI = {
-    1299,                                          /* lineNo */
+    1304,                                          /* lineNo */
     "corfactorRAW",                                /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo dib_emlrtRSI = {
-    1298,                                          /* lineNo */
+    1303,                                          /* lineNo */
     "corfactorRAW",                                /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo eib_emlrtRSI = {
-    1297,                                          /* lineNo */
+    1302,                                          /* lineNo */
     "corfactorRAW",                                /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo fib_emlrtRSI = {
-    1296,                                          /* lineNo */
+    1301,                                          /* lineNo */
     "corfactorRAW",                                /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
@@ -373,7 +373,7 @@ real_T corfactorRAW(const emlrtStack *sp, real_T n, real_T alpha)
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   /*  corfactorRAW function */
-  st.site = &xfb_emlrtRSI;
+  st.site = &agb_emlrtRSI;
   b_st.site = &dl_emlrtRSI;
   c_st.site = &el_emlrtRSI;
   if (n < 0.0) {
@@ -392,7 +392,7 @@ real_T corfactorRAW(const emlrtStack *sp, real_T n, real_T alpha)
   } else if ((0.875 < alpha) && (alpha < 1.0)) {
     fp_alpha_n = fp_875_n + (1.0 - fp_875_n) / 0.125 * (alpha - 0.875);
   } else {
-    st.site = &agb_emlrtRSI;
+    st.site = &xfb_emlrtRSI;
     y = NULL;
     m = emlrtCreateCharArray(2, &iv[0]);
     emlrtInitCharArrayR2013a(&st, 17, m, &varargin_1[0]);
@@ -465,7 +465,7 @@ real_T corfactorREW(const emlrtStack *sp, real_T n, real_T alpha)
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   /*  corfactorREW function */
-  st.site = &sgb_emlrtRSI;
+  st.site = &tgb_emlrtRSI;
   b_st.site = &dl_emlrtRSI;
   c_st.site = &el_emlrtRSI;
   if (n < 0.0) {
@@ -474,7 +474,7 @@ real_T corfactorREW(const emlrtStack *sp, real_T n, real_T alpha)
                                   "Coder:toolbox:power_domainError", 0);
   }
   fp_500_n = 1.0 - 3.0373378792330419 / muDoubleScalarPower(n, 1.5182890270453);
-  st.site = &tgb_emlrtRSI;
+  st.site = &sgb_emlrtRSI;
   b_st.site = &dl_emlrtRSI;
   fp_875_n =
       1.0 - 0.51660962465337334 / muDoubleScalarPower(n, 0.88939595831888);

@@ -15,6 +15,7 @@
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <string.h>
 
 /* Function Definitions */
 void b_eml_float_colon(double a, double b, emxArray_real_T *y)

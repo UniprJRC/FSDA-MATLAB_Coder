@@ -51,7 +51,7 @@ static emlrtRSInfo qlb_emlrtRSI = {
     "eVectorElements.m" /* pathName */
 };
 
-static emlrtRTEInfo cq_emlrtRTEI = {
+static emlrtRTEInfo bq_emlrtRTEI = {
     74,                      /* lineNo */
     9,                       /* colNo */
     "combineVectorElements", /* fName */
@@ -60,7 +60,7 @@ static emlrtRTEInfo cq_emlrtRTEI = {
     "eVectorElements.m" /* pName */
 };
 
-static emlrtRTEInfo dq_emlrtRTEI = {
+static emlrtRTEInfo cq_emlrtRTEI = {
     35,                    /* lineNo */
     20,                    /* colNo */
     "sumMatrixIncludeNaN", /* fName */
@@ -69,7 +69,7 @@ static emlrtRTEInfo dq_emlrtRTEI = {
     "rixIncludeNaN.m" /* pName */
 };
 
-static emlrtRTEInfo bfb_emlrtRTEI = {
+static emlrtRTEInfo afb_emlrtRTEI = {
     97,                      /* lineNo */
     13,                      /* colNo */
     "combineVectorElements", /* fName */
@@ -78,7 +78,7 @@ static emlrtRTEInfo bfb_emlrtRTEI = {
     "eVectorElements.m" /* pName */
 };
 
-static emlrtRTEInfo cfb_emlrtRTEI = {
+static emlrtRTEInfo bfb_emlrtRTEI = {
     170,                     /* lineNo */
     24,                      /* colNo */
     "combineVectorElements", /* fName */
@@ -118,7 +118,7 @@ void b_combineVectorElements(const emlrtStack *sp, const emxArray_real_T *x,
     nfb = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = x->size[1];
-    emxEnsureCapacity_real_T(&st, y, nfb, &cq_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, y, nfb, &bq_emlrtRTEI);
     ncols = x->size[1];
     for (nfb = 0; nfb < ncols; nfb++) {
       y->data[nfb] = 0.0;
@@ -129,7 +129,7 @@ void b_combineVectorElements(const emlrtStack *sp, const emxArray_real_T *x,
     nfb = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = x->size[1];
-    emxEnsureCapacity_real_T(&c_st, y, nfb, &dq_emlrtRTEI);
+    emxEnsureCapacity_real_T(&c_st, y, nfb, &cq_emlrtRTEI);
     ncols = x->size[1] - 1;
     if (x->size[0] < 4096) {
       d_st.site = &tv_emlrtRSI;
@@ -188,7 +188,7 @@ void c_combineVectorElements(const emlrtStack *sp, const emxArray_boolean_T *x,
     i = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = x->size[1];
-    emxEnsureCapacity_int32_T(sp, y, i, &bfb_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, y, i, &afb_emlrtRTEI);
     xpageoffset = x->size[1];
     for (i = 0; i < xpageoffset; i++) {
       y->data[i] = 0;
@@ -199,7 +199,7 @@ void c_combineVectorElements(const emlrtStack *sp, const emxArray_boolean_T *x,
     i = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = x->size[1];
-    emxEnsureCapacity_int32_T(&st, y, i, &cfb_emlrtRTEI);
+    emxEnsureCapacity_int32_T(&st, y, i, &bfb_emlrtRTEI);
     b_st.site = &qlb_emlrtRSI;
     if (x->size[1] > 2147483646) {
       c_st.site = &ab_emlrtRSI;

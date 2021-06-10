@@ -18,7 +18,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo ud_emlrtRSI =
+static emlrtRSInfo vd_emlrtRSI =
     {
         103,                  /* lineNo */
         "flatVectorAllOrAny", /* fcnName */
@@ -41,9 +41,9 @@ boolean_T flatVectorAllOrAny(const emlrtStack *sp, const emxArray_real_T *x)
   b_st.tls = st.tls;
   nx = x->size[0] * x->size[1];
   p = true;
-  st.site = &ud_emlrtRSI;
+  st.site = &vd_emlrtRSI;
   if ((1 <= nx) && (nx > 2147483646)) {
-    b_st.site = &gc_emlrtRSI;
+    b_st.site = &hc_emlrtRSI;
     check_forloop_overflow_error(&b_st);
   }
   for (k = 0; k < nx; k++) {

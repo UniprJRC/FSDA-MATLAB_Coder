@@ -70,7 +70,7 @@ static emlrtDCInfo pd_emlrtDCI = {
     4 /* checkKind */
 };
 
-static emlrtRTEInfo gbb_emlrtRTEI = {
+static emlrtRTEInfo fbb_emlrtRTEI = {
     89,        /* lineNo */
     20,        /* colNo */
     "repelem", /* fName */
@@ -111,7 +111,7 @@ void repelem(const emlrtStack *sp, const real_T x_data[],
   rowIdx = y->size[0] * y->size[1];
   y->size[0] = sz_idx_0;
   y->size[1] = x_size[1];
-  emxEnsureCapacity_real_T(&st, y, rowIdx, &gbb_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, y, rowIdx, &fbb_emlrtRTEI);
   if ((sz_idx_0 != 0) && (x_size[1] != 0)) {
     sz_idx_0 = x_size[0];
     b_st.site = &aib_emlrtRSI;

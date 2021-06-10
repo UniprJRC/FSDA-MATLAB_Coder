@@ -20,7 +20,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo jj_emlrtRSI = {
+static emlrtRSInfo kj_emlrtRSI = {
     88,       /* lineNo */
     "median", /* fcnName */
     "C:\\Program "
@@ -28,7 +28,7 @@ static emlrtRSInfo jj_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRSInfo kj_emlrtRSI = {
+static emlrtRSInfo lj_emlrtRSI = {
     87,        /* lineNo */
     "vmedian", /* fcnName */
     "C:\\Program "
@@ -36,16 +36,8 @@ static emlrtRSInfo kj_emlrtRSI = {
     "n.m" /* pathName */
 };
 
-static emlrtRSInfo lj_emlrtRSI = {
-    108,       /* lineNo */
-    "vmedian", /* fcnName */
-    "C:\\Program "
-    "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\datafun\\private\\vmedia"
-    "n.m" /* pathName */
-};
-
 static emlrtRSInfo mj_emlrtRSI = {
-    113,       /* lineNo */
+    108,       /* lineNo */
     "vmedian", /* fcnName */
     "C:\\Program "
     "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\datafun\\private\\vmedia"
@@ -53,6 +45,14 @@ static emlrtRSInfo mj_emlrtRSI = {
 };
 
 static emlrtRSInfo nj_emlrtRSI = {
+    113,       /* lineNo */
+    "vmedian", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\datafun\\private\\vmedia"
+    "n.m" /* pathName */
+};
+
+static emlrtRSInfo oj_emlrtRSI = {
     119,       /* lineNo */
     "vmedian", /* fcnName */
     "C:\\Program "
@@ -60,17 +60,8 @@ static emlrtRSInfo nj_emlrtRSI = {
     "n.m" /* pathName */
 };
 
-static emlrtRTEInfo nj_emlrtRTEI = {
-    119,       /* lineNo */
-    15,        /* colNo */
-    "vmedian", /* fName */
-    "C:\\Program "
-    "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\datafun\\private\\vmedia"
-    "n.m" /* pName */
-};
-
 static emlrtRTEInfo oj_emlrtRTEI = {
-    108,       /* lineNo */
+    119,       /* lineNo */
     15,        /* colNo */
     "vmedian", /* fName */
     "C:\\Program "
@@ -79,6 +70,15 @@ static emlrtRTEInfo oj_emlrtRTEI = {
 };
 
 static emlrtRTEInfo pj_emlrtRTEI = {
+    108,       /* lineNo */
+    15,        /* colNo */
+    "vmedian", /* fName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\datafun\\private\\vmedia"
+    "n.m" /* pName */
+};
+
+static emlrtRTEInfo qj_emlrtRTEI = {
     1,        /* lineNo */
     14,       /* colNo */
     "median", /* fName */
@@ -112,14 +112,14 @@ real_T median(const emlrtStack *sp, const emxArray_real_T *x)
   if (x->size[0] == 0) {
     y = rtNaN;
   } else {
-    st.site = &jj_emlrtRSI;
-    b_st.site = &kj_emlrtRSI;
+    st.site = &kj_emlrtRSI;
+    b_st.site = &lj_emlrtRSI;
     if (x->size[0] > 2147483646) {
-      c_st.site = &gc_emlrtRSI;
+      c_st.site = &hc_emlrtRSI;
       check_forloop_overflow_error(&c_st);
     }
     k = 0;
-    emxInit_real_T(&st, &a__4, 1, &pj_emlrtRTEI, true);
+    emxInit_real_T(&st, &a__4, 1, &qj_emlrtRTEI, true);
     do {
       exitg1 = 0;
       if (k <= vlen - 1) {
@@ -213,15 +213,15 @@ real_T median(const emlrtStack *sp, const emxArray_real_T *x)
           if ((vlen & 1) == 0) {
             a__6 = a__4->size[0];
             a__4->size[0] = x->size[0];
-            emxEnsureCapacity_real_T(&st, a__4, a__6, &oj_emlrtRTEI);
+            emxEnsureCapacity_real_T(&st, a__4, a__6, &pj_emlrtRTEI);
             k = x->size[0];
             for (a__6 = 0; a__6 < k; a__6++) {
               a__4->data[a__6] = x->data[a__6];
             }
-            b_st.site = &lj_emlrtRSI;
+            b_st.site = &mj_emlrtRSI;
             quickselect(a__4, midm1 + 1, vlen, &y, &k, &a__6);
             if (midm1 < k) {
-              b_st.site = &mj_emlrtRSI;
+              b_st.site = &nj_emlrtRSI;
               quickselect(a__4, midm1, a__6 - 1, &b, &k, &vlen);
               if (((y < 0.0) != (b < 0.0)) || muDoubleScalarIsInf(y)) {
                 y = (y + b) / 2.0;
@@ -232,12 +232,12 @@ real_T median(const emlrtStack *sp, const emxArray_real_T *x)
           } else {
             a__6 = a__4->size[0];
             a__4->size[0] = x->size[0];
-            emxEnsureCapacity_real_T(&st, a__4, a__6, &nj_emlrtRTEI);
+            emxEnsureCapacity_real_T(&st, a__4, a__6, &oj_emlrtRTEI);
             k = x->size[0];
             for (a__6 = 0; a__6 < k; a__6++) {
               a__4->data[a__6] = x->data[a__6];
             }
-            b_st.site = &nj_emlrtRSI;
+            b_st.site = &oj_emlrtRSI;
             quickselect(a__4, midm1 + 1, vlen, &y, &k, &a__6);
           }
         }

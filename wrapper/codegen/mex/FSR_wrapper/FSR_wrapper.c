@@ -36,61 +36,61 @@ static emlrtRSInfo emlrtRSI = {
 };
 
 static emlrtRSInfo b_emlrtRSI = {
-    844,                                           /* lineNo */
+    838,                                           /* lineNo */
     "FSR",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pathName */
 };
 
 static emlrtRSInfo c_emlrtRSI = {
-    841,                                           /* lineNo */
+    835,                                           /* lineNo */
     "FSR",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pathName */
 };
 
 static emlrtRSInfo d_emlrtRSI = {
-    750,                                           /* lineNo */
+    744,                                           /* lineNo */
     "FSR",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pathName */
 };
 
 static emlrtRSInfo e_emlrtRSI = {
-    725,                                           /* lineNo */
+    719,                                           /* lineNo */
     "FSR",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pathName */
 };
 
 static emlrtRSInfo f_emlrtRSI = {
-    710,                                           /* lineNo */
+    704,                                           /* lineNo */
     "FSR",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pathName */
 };
 
 static emlrtRSInfo g_emlrtRSI = {
-    655,                                           /* lineNo */
+    649,                                           /* lineNo */
     "FSR",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pathName */
 };
 
 static emlrtRSInfo h_emlrtRSI = {
-    650,                                           /* lineNo */
+    644,                                           /* lineNo */
     "FSR",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pathName */
 };
 
 static emlrtRSInfo i_emlrtRSI = {
-    570,                                           /* lineNo */
-    "FSR",                                         /* fcnName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pathName */
-};
-
-static emlrtRSInfo j_emlrtRSI = {
     564,                                           /* lineNo */
     "FSR",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pathName */
 };
 
+static emlrtRSInfo j_emlrtRSI = {
+    558,                                           /* lineNo */
+    "FSR",                                         /* fcnName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pathName */
+};
+
 static emlrtMCInfo emlrtMCI = {
-    715,                                           /* lineNo */
+    709,                                           /* lineNo */
     9,                                             /* colNo */
     "FSR",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pName */
@@ -99,7 +99,7 @@ static emlrtMCInfo emlrtMCI = {
 static emlrtBCInfo emlrtBCI = {
     -1,                                             /* iFirst */
     -1,                                             /* iLast */
-    838,                                            /* lineNo */
+    832,                                            /* lineNo */
     13,                                             /* colNo */
     "S2",                                           /* aName */
     "FSR",                                          /* fName */
@@ -110,7 +110,7 @@ static emlrtBCInfo emlrtBCI = {
 static emlrtBCInfo b_emlrtBCI = {
     -1,                                             /* iFirst */
     -1,                                             /* iLast */
-    739,                                            /* lineNo */
+    733,                                            /* lineNo */
     20,                                             /* colNo */
     "iniseq",                                       /* aName */
     "FSR",                                          /* fName */
@@ -120,42 +120,42 @@ static emlrtBCInfo b_emlrtBCI = {
 
 static emlrtECInfo emlrtECI = {
     -1,                                            /* nDims */
-    847,                                           /* lineNo */
+    841,                                           /* lineNo */
     21,                                            /* colNo */
     "FSR",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pName */
 };
 
 static emlrtRTEInfo dd_emlrtRTEI = {
-    564,                                           /* lineNo */
+    558,                                           /* lineNo */
     2,                                             /* colNo */
     "FSR",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pName */
 };
 
 static emlrtRTEInfo ed_emlrtRTEI = {
-    564,                                           /* lineNo */
+    558,                                           /* lineNo */
     4,                                             /* colNo */
     "FSR",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pName */
 };
 
 static emlrtRTEInfo gd_emlrtRTEI = {
-    725,                                           /* lineNo */
+    719,                                           /* lineNo */
     5,                                             /* colNo */
     "FSR",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pName */
 };
 
 static emlrtRTEInfo hd_emlrtRTEI = {
-    736,                                           /* lineNo */
+    730,                                           /* lineNo */
     13,                                            /* colNo */
     "FSR",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pName */
 };
 
 static emlrtRTEInfo id_emlrtRTEI = {
-    738,                                           /* lineNo */
+    732,                                           /* lineNo */
     13,                                            /* colNo */
     "FSR",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pName */
@@ -169,42 +169,42 @@ static emlrtRTEInfo jd_emlrtRTEI = {
 };
 
 static emlrtRTEInfo kd_emlrtRTEI = {
-    721,                                           /* lineNo */
+    715,                                           /* lineNo */
     8,                                             /* colNo */
     "FSR",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pName */
 };
 
 static emlrtRTEInfo ld_emlrtRTEI = {
-    740,                                           /* lineNo */
+    734,                                           /* lineNo */
     13,                                            /* colNo */
     "FSR",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pName */
 };
 
 static emlrtRTEInfo md_emlrtRTEI = {
-    833,                                           /* lineNo */
+    827,                                           /* lineNo */
     1,                                             /* colNo */
     "FSR",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pName */
 };
 
 static emlrtRTEInfo nd_emlrtRTEI = {
-    835,                                           /* lineNo */
+    829,                                           /* lineNo */
     1,                                             /* colNo */
     "FSR",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pName */
 };
 
 static emlrtRTEInfo od_emlrtRTEI = {
-    838,                                           /* lineNo */
+    832,                                           /* lineNo */
     1,                                             /* colNo */
     "FSR",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pName */
 };
 
 static emlrtRTEInfo pd_emlrtRTEI = {
-    842,                                           /* lineNo */
+    836,                                           /* lineNo */
     1,                                             /* colNo */
     "FSR",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pName */
@@ -218,35 +218,35 @@ static emlrtRTEInfo qd_emlrtRTEI = {
 };
 
 static emlrtRTEInfo rd_emlrtRTEI = {
-    846,                                           /* lineNo */
+    840,                                           /* lineNo */
     1,                                             /* colNo */
     "FSR",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pName */
 };
 
 static emlrtRTEInfo sd_emlrtRTEI = {
-    847,                                           /* lineNo */
+    841,                                           /* lineNo */
     1,                                             /* colNo */
     "FSR",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pName */
 };
 
 static emlrtRTEInfo td_emlrtRTEI = {
-    681,                                           /* lineNo */
+    675,                                           /* lineNo */
     21,                                            /* colNo */
     "FSR",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pName */
 };
 
 static emlrtRTEInfo ud_emlrtRTEI = {
-    728,                                           /* lineNo */
+    722,                                           /* lineNo */
     9,                                             /* colNo */
     "FSR",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pName */
 };
 
 static emlrtRTEInfo vd_emlrtRTEI = {
-    828,                                           /* lineNo */
+    822,                                           /* lineNo */
     1,                                             /* colNo */
     "FSR",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pName */
@@ -260,28 +260,28 @@ static emlrtRTEInfo wd_emlrtRTEI = {
 };
 
 static emlrtRTEInfo xd_emlrtRTEI = {
-    725,                                           /* lineNo */
+    719,                                           /* lineNo */
     13,                                            /* colNo */
     "FSR",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pName */
 };
 
 static emlrtRTEInfo yd_emlrtRTEI = {
-    710,                                           /* lineNo */
+    704,                                           /* lineNo */
     5,                                             /* colNo */
     "FSR",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pName */
 };
 
 static emlrtRTEInfo ae_emlrtRTEI = {
-    841,                                           /* lineNo */
+    835,                                           /* lineNo */
     1,                                             /* colNo */
     "FSR",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pName */
 };
 
 static emlrtRSInfo upb_emlrtRSI = {
-    715,                                           /* lineNo */
+    709,                                           /* lineNo */
     "FSR",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSR.m" /* pathName */
 };
@@ -544,7 +544,7 @@ void FSR_wrapper(FSR_wrapperStackData *SD, const emlrtStack *sp,
   /*                  Data Types - double */
   /*  */
   /*   threshoutX  : threshold to bound the effect of high leverage units. */
-  /*                 empty value (default) or scalar or structure. */
+  /*                 empty value (default) or scalar equal to 1 or structure. */
   /*                If the design matrix X contains several high leverage units
    */
   /*                (that is units which are very far from the bulk of the */
@@ -734,12 +734,11 @@ void FSR_wrapper(FSR_wrapperStackData *SD, const emlrtStack *sp,
   /*  */
   /*          out:   structure which contains the following fields */
   /*  */
-  /*  out.ListOut  = k x 1 vector containing the list of the units declared as
-   */
+  /*  out.ListOut  = row vector containing the list of the units declared as */
   /*                 outliers or NaN if the sample is homogeneous */
   /*  out.outliers = out.ListOut. This field is added for homogeneity with the
    */
-  /*                 other robust estimators. */
+  /*                 other robust estimators and is equal to out.ListOut. */
   /*  out.beta   =  p-by-1 vector containing the estimated regression */
   /*                parameters (in step n-k). */
   /*  out.scale  =  scalar containing the estimate of the scale (sigma). */
@@ -764,13 +763,6 @@ void FSR_wrapper(FSR_wrapperStackData *SD, const emlrtStack *sp,
   /*                of particular quantiles. */
   /*                First row contains quantiles 1 99 99.9 99.99 99.999. */
   /*                Second row contains the frequency distribution. */
-  /*  out.constr  = This output is produced only if the search found at a */
-  /*                certain step X is a singular matrix. In this case the */
-  /*                search runs in a constrained mode, that is including the */
-  /*                units which produced a non singular matrix in the last
-   * n-constr */
-  /*                steps. out.constr is a vector which contains the list of */
-  /*                units which produced a singular X matrix */
   /*  out.class  =  'FSR'. */
   /*  out.VIOMout = m x 1 vector containing the list of the units declared as */
   /*                VIOM outliers or NaN if they are not present. */
@@ -944,7 +936,7 @@ void FSR_wrapper(FSR_wrapperStackData *SD, const emlrtStack *sp,
   /*     xylim=axis; */
   /*     ylabel('mdr') */
   /*     title('FS without bound on the leverage') */
-  /*     % threshoutX is passed s astructure */
+  /*     % threshoutX is passed as astructure */
   /*     threshoutX=struct; */
   /*     threshoutX.threshlevoutX=5; */
   /*     % Use the instruction below if you wish to change the confidence level

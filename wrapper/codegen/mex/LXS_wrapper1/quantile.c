@@ -19,7 +19,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo al_emlrtRSI = {
+static emlrtRSInfo bl_emlrtRSI = {
     20,         /* lineNo */
     "quantile", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\quantile.m" /* pathName
@@ -45,26 +45,26 @@ void quantile(const emlrtStack *sp, const emxArray_real_T *x, real_T y[3])
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  st.site = &al_emlrtRSI;
-  b_st.site = &rk_emlrtRSI;
+  st.site = &bl_emlrtRSI;
+  b_st.site = &sk_emlrtRSI;
   if (x->size[0] == 0) {
     y[0] = rtNaN;
     y[1] = rtNaN;
     y[2] = rtNaN;
   } else {
-    emxInit_int32_T(&b_st, &idx, 1, &tj_emlrtRTEI, true);
-    c_st.site = &kk_emlrtRSI;
+    emxInit_int32_T(&b_st, &idx, 1, &uj_emlrtRTEI, true);
+    c_st.site = &lk_emlrtRSI;
     sortIdx(&c_st, x, idx);
-    c_st.site = &jk_emlrtRSI;
+    c_st.site = &kk_emlrtRSI;
     nj = x->size[0];
     exitg1 = false;
     while ((!exitg1) && (nj > 0)) {
       if (nj > idx->size[0]) {
-        emlrtDynamicBoundsCheckR2012b(nj, 1, idx->size[0], &rl_emlrtBCI, &c_st);
+        emlrtDynamicBoundsCheckR2012b(nj, 1, idx->size[0], &tl_emlrtBCI, &c_st);
       }
       i = idx->data[nj - 1];
       if ((i < 1) || (i > x->size[0])) {
-        emlrtDynamicBoundsCheckR2012b(i, 1, x->size[0], &rl_emlrtBCI, &c_st);
+        emlrtDynamicBoundsCheckR2012b(i, 1, x->size[0], &tl_emlrtBCI, &c_st);
       }
       if (!muDoubleScalarIsNaN(x->data[i - 1])) {
         exitg1 = true;
@@ -78,18 +78,18 @@ void quantile(const emlrtStack *sp, const emxArray_real_T *x, real_T y[3])
       y[2] = rtNaN;
     } else if (nj == 1) {
       if ((idx->data[0] < 1) || (idx->data[0] > x->size[0])) {
-        emlrtDynamicBoundsCheckR2012b(idx->data[0], 1, x->size[0], &wl_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b(idx->data[0], 1, x->size[0], &yl_emlrtBCI,
                                       &b_st);
       }
       r = x->data[idx->data[0] - 1];
       y[0] = r;
       if ((idx->data[0] < 1) || (idx->data[0] > x->size[0])) {
-        emlrtDynamicBoundsCheckR2012b(idx->data[0], 1, x->size[0], &wl_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b(idx->data[0], 1, x->size[0], &yl_emlrtBCI,
                                       &b_st);
       }
       y[1] = r;
       if ((idx->data[0] < 1) || (idx->data[0] > x->size[0])) {
-        emlrtDynamicBoundsCheckR2012b(idx->data[0], 1, x->size[0], &wl_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b(idx->data[0], 1, x->size[0], &yl_emlrtBCI,
                                       &b_st);
       }
       y[2] = r;
@@ -98,31 +98,31 @@ void quantile(const emlrtStack *sp, const emxArray_real_T *x, real_T y[3])
       b_i = (int32_T)muDoubleScalarRound(r);
       if (b_i >= nj) {
         if (nj > idx->size[0]) {
-          emlrtDynamicBoundsCheckR2012b(nj, 1, idx->size[0], &tl_emlrtBCI,
+          emlrtDynamicBoundsCheckR2012b(nj, 1, idx->size[0], &vl_emlrtBCI,
                                         &b_st);
         }
         i = idx->data[nj - 1];
         if ((i < 1) || (i > x->size[0])) {
-          emlrtDynamicBoundsCheckR2012b(i, 1, x->size[0], &tl_emlrtBCI, &b_st);
+          emlrtDynamicBoundsCheckR2012b(i, 1, x->size[0], &vl_emlrtBCI, &b_st);
         }
         y[0] = x->data[i - 1];
       } else {
         r -= (real_T)b_i;
         if (b_i > idx->size[0]) {
-          emlrtDynamicBoundsCheckR2012b(b_i, 1, idx->size[0], &ul_emlrtBCI,
+          emlrtDynamicBoundsCheckR2012b(b_i, 1, idx->size[0], &wl_emlrtBCI,
                                         &b_st);
         }
         i = idx->data[b_i - 1];
         if ((i < 1) || (i > x->size[0])) {
-          emlrtDynamicBoundsCheckR2012b(i, 1, x->size[0], &ul_emlrtBCI, &b_st);
+          emlrtDynamicBoundsCheckR2012b(i, 1, x->size[0], &wl_emlrtBCI, &b_st);
         }
         if (b_i + 1 > idx->size[0]) {
-          emlrtDynamicBoundsCheckR2012b(b_i + 1, 1, idx->size[0], &vl_emlrtBCI,
+          emlrtDynamicBoundsCheckR2012b(b_i + 1, 1, idx->size[0], &xl_emlrtBCI,
                                         &b_st);
         }
         b_i = idx->data[b_i];
         if ((b_i < 1) || (b_i > x->size[0])) {
-          emlrtDynamicBoundsCheckR2012b(b_i, 1, x->size[0], &vl_emlrtBCI,
+          emlrtDynamicBoundsCheckR2012b(b_i, 1, x->size[0], &xl_emlrtBCI,
                                         &b_st);
         }
         y[0] = (0.5 - r) * x->data[i - 1] + (r + 0.5) * x->data[b_i - 1];
@@ -131,31 +131,31 @@ void quantile(const emlrtStack *sp, const emxArray_real_T *x, real_T y[3])
       b_i = (int32_T)muDoubleScalarRound(r);
       if (b_i >= nj) {
         if (nj > idx->size[0]) {
-          emlrtDynamicBoundsCheckR2012b(nj, 1, idx->size[0], &tl_emlrtBCI,
+          emlrtDynamicBoundsCheckR2012b(nj, 1, idx->size[0], &vl_emlrtBCI,
                                         &b_st);
         }
         i = idx->data[nj - 1];
         if ((i < 1) || (i > x->size[0])) {
-          emlrtDynamicBoundsCheckR2012b(i, 1, x->size[0], &tl_emlrtBCI, &b_st);
+          emlrtDynamicBoundsCheckR2012b(i, 1, x->size[0], &vl_emlrtBCI, &b_st);
         }
         y[1] = x->data[i - 1];
       } else {
         r -= (real_T)b_i;
         if (b_i > idx->size[0]) {
-          emlrtDynamicBoundsCheckR2012b(b_i, 1, idx->size[0], &ul_emlrtBCI,
+          emlrtDynamicBoundsCheckR2012b(b_i, 1, idx->size[0], &wl_emlrtBCI,
                                         &b_st);
         }
         i = idx->data[b_i - 1];
         if ((i < 1) || (i > x->size[0])) {
-          emlrtDynamicBoundsCheckR2012b(i, 1, x->size[0], &ul_emlrtBCI, &b_st);
+          emlrtDynamicBoundsCheckR2012b(i, 1, x->size[0], &wl_emlrtBCI, &b_st);
         }
         if (b_i + 1 > idx->size[0]) {
-          emlrtDynamicBoundsCheckR2012b(b_i + 1, 1, idx->size[0], &vl_emlrtBCI,
+          emlrtDynamicBoundsCheckR2012b(b_i + 1, 1, idx->size[0], &xl_emlrtBCI,
                                         &b_st);
         }
         b_i = idx->data[b_i];
         if ((b_i < 1) || (b_i > x->size[0])) {
-          emlrtDynamicBoundsCheckR2012b(b_i, 1, x->size[0], &vl_emlrtBCI,
+          emlrtDynamicBoundsCheckR2012b(b_i, 1, x->size[0], &xl_emlrtBCI,
                                         &b_st);
         }
         y[1] = (0.5 - r) * x->data[i - 1] + (r + 0.5) * x->data[b_i - 1];
@@ -164,31 +164,31 @@ void quantile(const emlrtStack *sp, const emxArray_real_T *x, real_T y[3])
       b_i = (int32_T)muDoubleScalarRound(r);
       if (b_i >= nj) {
         if (nj > idx->size[0]) {
-          emlrtDynamicBoundsCheckR2012b(nj, 1, idx->size[0], &tl_emlrtBCI,
+          emlrtDynamicBoundsCheckR2012b(nj, 1, idx->size[0], &vl_emlrtBCI,
                                         &b_st);
         }
         i = idx->data[nj - 1];
         if ((i < 1) || (i > x->size[0])) {
-          emlrtDynamicBoundsCheckR2012b(i, 1, x->size[0], &tl_emlrtBCI, &b_st);
+          emlrtDynamicBoundsCheckR2012b(i, 1, x->size[0], &vl_emlrtBCI, &b_st);
         }
         y[2] = x->data[i - 1];
       } else {
         r -= (real_T)b_i;
         if (b_i > idx->size[0]) {
-          emlrtDynamicBoundsCheckR2012b(b_i, 1, idx->size[0], &ul_emlrtBCI,
+          emlrtDynamicBoundsCheckR2012b(b_i, 1, idx->size[0], &wl_emlrtBCI,
                                         &b_st);
         }
         i = idx->data[b_i - 1];
         if ((i < 1) || (i > x->size[0])) {
-          emlrtDynamicBoundsCheckR2012b(i, 1, x->size[0], &ul_emlrtBCI, &b_st);
+          emlrtDynamicBoundsCheckR2012b(i, 1, x->size[0], &wl_emlrtBCI, &b_st);
         }
         if (b_i + 1 > idx->size[0]) {
-          emlrtDynamicBoundsCheckR2012b(b_i + 1, 1, idx->size[0], &vl_emlrtBCI,
+          emlrtDynamicBoundsCheckR2012b(b_i + 1, 1, idx->size[0], &xl_emlrtBCI,
                                         &b_st);
         }
         b_i = idx->data[b_i];
         if ((b_i < 1) || (b_i > x->size[0])) {
-          emlrtDynamicBoundsCheckR2012b(b_i, 1, x->size[0], &vl_emlrtBCI,
+          emlrtDynamicBoundsCheckR2012b(b_i, 1, x->size[0], &xl_emlrtBCI,
                                         &b_st);
         }
         y[2] = (0.5 - r) * x->data[i - 1] + (r + 0.5) * x->data[b_i - 1];

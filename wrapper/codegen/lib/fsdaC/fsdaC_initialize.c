@@ -15,6 +15,7 @@
 #include "eml_rand_mt19937ar_stateful.h"
 #include "fsdaC_data.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 void fsdaC_initialize(void)

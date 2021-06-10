@@ -23,6 +23,7 @@
 #include "sort.h"
 #include "rt_nonfinite.h"
 #include <stdio.h>
+#include <string.h>
 
 /* Function Declarations */
 static void gyfiltaux(emxArray_real_T *v);

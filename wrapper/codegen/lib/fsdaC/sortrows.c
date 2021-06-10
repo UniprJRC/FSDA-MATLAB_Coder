@@ -16,6 +16,7 @@
 #include "rt_nonfinite.h"
 #include "sortrowsLE.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 void b_sortrows(emxArray_real_T *y)

@@ -159,7 +159,7 @@ static emlrtRTEInfo hc_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo iq_emlrtRTEI = {
+static emlrtRTEInfo hq_emlrtRTEI = {
     19,    /* lineNo */
     5,     /* colNo */
     "inv", /* fName */
@@ -168,7 +168,7 @@ static emlrtRTEInfo iq_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo jq_emlrtRTEI = {
+static emlrtRTEInfo iq_emlrtRTEI = {
     21,    /* lineNo */
     5,     /* colNo */
     "inv", /* fName */
@@ -177,7 +177,7 @@ static emlrtRTEInfo jq_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo nq_emlrtRTEI =
+static emlrtRTEInfo mq_emlrtRTEI =
     {
         164,     /* lineNo */
         20,      /* colNo */
@@ -187,7 +187,7 @@ static emlrtRTEInfo nq_emlrtRTEI =
                                                                           */
 };
 
-static emlrtRTEInfo oq_emlrtRTEI = {
+static emlrtRTEInfo nq_emlrtRTEI = {
     174,   /* lineNo */
     1,     /* colNo */
     "inv", /* fName */
@@ -196,7 +196,7 @@ static emlrtRTEInfo oq_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo pq_emlrtRTEI = {
+static emlrtRTEInfo oq_emlrtRTEI = {
     1,     /* lineNo */
     14,    /* colNo */
     "inv", /* fName */
@@ -269,7 +269,7 @@ void inv(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
     i = y->size[0] * y->size[1];
     y->size[0] = x->size[0];
     y->size[1] = x->size[1];
-    emxEnsureCapacity_real_T(sp, y, i, &iq_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, y, i, &hq_emlrtRTEI);
     yk = x->size[0] * x->size[1];
     for (i = 0; i < yk; i++) {
       y->data[i] = x->data[i];
@@ -280,30 +280,30 @@ void inv(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
     i = y->size[0] * y->size[1];
     y->size[0] = x->size[0];
     y->size[1] = x->size[1];
-    emxEnsureCapacity_real_T(&st, y, i, &jq_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, y, i, &iq_emlrtRTEI);
     yk = x->size[0] * x->size[1];
     for (i = 0; i < yk; i++) {
       y->data[i] = 0.0;
     }
-    emxInit_real_T(&st, &b_x, 2, &pq_emlrtRTEI, true);
+    emxInit_real_T(&st, &b_x, 2, &oq_emlrtRTEI, true);
     b_st.site = &hw_emlrtRSI;
     i = b_x->size[0] * b_x->size[1];
     b_x->size[0] = x->size[0];
     b_x->size[1] = x->size[1];
-    emxEnsureCapacity_real_T(&b_st, b_x, i, &kq_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, b_x, i, &jq_emlrtRTEI);
     yk = x->size[0] * x->size[1];
     for (i = 0; i < yk; i++) {
       b_x->data[i] = x->data[i];
     }
-    emxInit_int32_T(&b_st, &ipiv, 2, &pq_emlrtRTEI, true);
-    emxInit_ptrdiff_t(&b_st, &ipiv_t, 1, &qq_emlrtRTEI, true);
-    emxInit_ptrdiff_t(&b_st, &r, 1, &lq_emlrtRTEI, true);
+    emxInit_int32_T(&b_st, &ipiv, 2, &oq_emlrtRTEI, true);
+    emxInit_ptrdiff_t(&b_st, &ipiv_t, 1, &pq_emlrtRTEI, true);
+    emxInit_ptrdiff_t(&b_st, &r, 1, &kq_emlrtRTEI, true);
     c_st.site = &nw_emlrtRSI;
     d_st.site = &pw_emlrtRSI;
     repmat(&d_st, (ptrdiff_t)0.0, muIntScalarMin_sint32(n, n), r);
     i = ipiv_t->size[0];
     ipiv_t->size[0] = r->size[0];
-    emxEnsureCapacity_ptrdiff_t(&c_st, ipiv_t, i, &lq_emlrtRTEI);
+    emxEnsureCapacity_ptrdiff_t(&c_st, ipiv_t, i, &kq_emlrtRTEI);
     info_t = LAPACKE_dgetrf_work(102, (ptrdiff_t)x->size[0],
                                  (ptrdiff_t)x->size[0], &b_x->data[0],
                                  (ptrdiff_t)x->size[0], &ipiv_t->data[0]);
@@ -311,7 +311,7 @@ void inv(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
     i = ipiv->size[0] * ipiv->size[1];
     ipiv->size[0] = 1;
     ipiv->size[1] = ipiv_t->size[0];
-    emxEnsureCapacity_int32_T(&c_st, ipiv, i, &mq_emlrtRTEI);
+    emxEnsureCapacity_int32_T(&c_st, ipiv, i, &lq_emlrtRTEI);
     d_st.site = &ow_emlrtRSI;
     emxFree_ptrdiff_t(&r);
     if (yk < 0) {
@@ -329,7 +329,7 @@ void inv(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
       ipiv->data[k] = (int32_T)ipiv_t->data[k];
     }
     emxFree_ptrdiff_t(&ipiv_t);
-    emxInit_int32_T(&c_st, &p, 2, &oq_emlrtRTEI, true);
+    emxInit_int32_T(&c_st, &p, 2, &nq_emlrtRTEI, true);
     b_st.site = &iw_emlrtRSI;
     c_st.site = &xw_emlrtRSI;
     d_st.site = &xc_emlrtRSI;
@@ -340,7 +340,7 @@ void inv(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
     i = p->size[0] * p->size[1];
     p->size[0] = 1;
     p->size[1] = x->size[0];
-    emxEnsureCapacity_int32_T(&f_st, p, i, &nq_emlrtRTEI);
+    emxEnsureCapacity_int32_T(&f_st, p, i, &mq_emlrtRTEI);
     p->data[0] = 1;
     yk = 1;
     g_st.site = &ww_emlrtRSI;

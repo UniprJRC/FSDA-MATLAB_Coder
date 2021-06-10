@@ -20,63 +20,63 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRSInfo sj_emlrtRSI = {
+static emlrtRSInfo tj_emlrtRSI = {
     32,    /* lineNo */
     "mad", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\mad.m" /* pathName
                                                                      */
 };
 
-static emlrtRSInfo tj_emlrtRSI = {
+static emlrtRSInfo uj_emlrtRSI = {
     33,    /* lineNo */
     "mad", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\mad.m" /* pathName
                                                                      */
 };
 
-static emlrtRSInfo uj_emlrtRSI = {
+static emlrtRSInfo vj_emlrtRSI = {
     34,    /* lineNo */
     "mad", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\mad.m" /* pathName
                                                                      */
 };
 
-static emlrtRSInfo sk_emlrtRSI = {
+static emlrtRSInfo tk_emlrtRSI = {
     37,    /* lineNo */
     "mad", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\mad.m" /* pathName
                                                                      */
 };
 
-static emlrtRSInfo tk_emlrtRSI = {
+static emlrtRSInfo uk_emlrtRSI = {
     38,    /* lineNo */
     "mad", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\mad.m" /* pathName
                                                                      */
 };
 
-static emlrtRSInfo uk_emlrtRSI = {
+static emlrtRSInfo vk_emlrtRSI = {
     39,    /* lineNo */
     "mad", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\mad.m" /* pathName
                                                                      */
 };
 
-static emlrtRTEInfo rj_emlrtRTEI = {
+static emlrtRTEInfo sj_emlrtRTEI = {
     33,                                                             /* lineNo */
     5,                                                              /* colNo */
     "mad",                                                          /* fName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\mad.m" /* pName */
 };
 
-static emlrtRTEInfo sj_emlrtRTEI = {
+static emlrtRTEInfo tj_emlrtRTEI = {
     33,                                                             /* lineNo */
     14,                                                             /* colNo */
     "mad",                                                          /* fName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\mad.m" /* pName */
 };
 
-static emlrtRTEInfo yj_emlrtRTEI = {
+static emlrtRTEInfo ak_emlrtRTEI = {
     38,                                                             /* lineNo */
     14,                                                             /* colNo */
     "mad",                                                          /* fName */
@@ -100,21 +100,21 @@ real_T b_mad(const emlrtStack *sp, const emxArray_real_T *x)
   if (x->size[0] == 0) {
     y = rtNaN;
   } else {
-    emxInit_real_T(sp, &c, 1, &yj_emlrtRTEI, true);
-    st.site = &sk_emlrtRSI;
+    emxInit_real_T(sp, &c, 1, &ak_emlrtRTEI, true);
+    st.site = &tk_emlrtRSI;
     b = nanmean(&st, x);
     i = c->size[0];
     c->size[0] = x->size[0];
-    emxEnsureCapacity_real_T(sp, c, i, &qj_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, c, i, &rj_emlrtRTEI);
     acoef = (x->size[0] != 1);
     i = x->size[0] - 1;
     for (k = 0; k <= i; k++) {
       c->data[k] = x->data[acoef * k] - b;
     }
-    emxInit_real_T(sp, &xx, 1, &rj_emlrtRTEI, true);
-    st.site = &tk_emlrtRSI;
-    b_abs(&st, c, xx);
+    emxInit_real_T(sp, &xx, 1, &sj_emlrtRTEI, true);
     st.site = &uk_emlrtRSI;
+    b_abs(&st, c, xx);
+    st.site = &vk_emlrtRSI;
     y = nanmean(&st, xx);
     emxFree_real_T(&c);
     emxFree_real_T(&xx);
@@ -139,21 +139,21 @@ real_T mad(const emlrtStack *sp, const emxArray_real_T *x)
   if (x->size[0] == 0) {
     y = rtNaN;
   } else {
-    emxInit_real_T(sp, &c, 1, &sj_emlrtRTEI, true);
-    st.site = &sj_emlrtRSI;
+    emxInit_real_T(sp, &c, 1, &tj_emlrtRTEI, true);
+    st.site = &tj_emlrtRSI;
     b = nanmedian(&st, x);
     i = c->size[0];
     c->size[0] = x->size[0];
-    emxEnsureCapacity_real_T(sp, c, i, &qj_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, c, i, &rj_emlrtRTEI);
     acoef = (x->size[0] != 1);
     i = x->size[0] - 1;
     for (k = 0; k <= i; k++) {
       c->data[k] = x->data[acoef * k] - b;
     }
-    emxInit_real_T(sp, &xx, 1, &rj_emlrtRTEI, true);
-    st.site = &tj_emlrtRSI;
-    b_abs(&st, c, xx);
+    emxInit_real_T(sp, &xx, 1, &sj_emlrtRTEI, true);
     st.site = &uj_emlrtRSI;
+    b_abs(&st, c, xx);
+    st.site = &vj_emlrtRSI;
     y = nanmedian(&st, xx);
     emxFree_real_T(&c);
     emxFree_real_T(&xx);

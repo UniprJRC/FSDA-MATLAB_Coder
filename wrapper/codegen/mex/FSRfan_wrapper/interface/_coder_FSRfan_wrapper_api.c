@@ -19,7 +19,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRTEInfo al_emlrtRTEI = {
+static emlrtRTEInfo yk_emlrtRTEI = {
     1,                           /* lineNo */
     1,                           /* colNo */
     "_coder_FSRfan_wrapper_api", /* fName */
@@ -346,12 +346,12 @@ void FSRfan_wrapper_api(const mxArray *const prhs[11], const mxArray **plhs)
   boolean_T nocheck;
   st.tls = emlrtRootTLSGlobal;
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
-  emxInit_real_T(&st, &y, 1, &al_emlrtRTEI, true);
-  emxInit_real_T(&st, &X, 2, &al_emlrtRTEI, true);
-  emxInit_real_T(&st, &la, 1, &al_emlrtRTEI, true);
-  emxInit_real_T(&st, &lms, 2, &al_emlrtRTEI, true);
-  emxInit_char_T(&st, &family, 2, &al_emlrtRTEI, true);
-  emxInitStruct_struct_FSRfan_T(&st, &out, &al_emlrtRTEI, true);
+  emxInit_real_T(&st, &y, 1, &yk_emlrtRTEI, true);
+  emxInit_real_T(&st, &X, 2, &yk_emlrtRTEI, true);
+  emxInit_real_T(&st, &la, 1, &yk_emlrtRTEI, true);
+  emxInit_real_T(&st, &lms, 2, &yk_emlrtRTEI, true);
+  emxInit_char_T(&st, &family, 2, &yk_emlrtRTEI, true);
+  emxInitStruct_struct_FSRfan_T(&st, &out, &yk_emlrtRTEI, true);
   /* Marshall function inputs */
   y->canFreeData = false;
   k_emlrt_marshallIn(&st, emlrtAlias(prhs[0]), "y", y);

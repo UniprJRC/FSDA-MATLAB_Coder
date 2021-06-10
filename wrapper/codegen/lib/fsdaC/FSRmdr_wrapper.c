@@ -38,6 +38,7 @@
 #include "rt_nonfinite.h"
 #include <math.h>
 #include <stdio.h>
+#include <string.h>
 
 /* Function Definitions */
 void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,

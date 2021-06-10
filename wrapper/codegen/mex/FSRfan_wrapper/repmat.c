@@ -17,7 +17,7 @@
 #include <stddef.h>
 
 /* Variable Definitions */
-static emlrtRTEInfo ai_emlrtRTEI = {
+static emlrtRTEInfo yh_emlrtRTEI = {
     53,       /* lineNo */
     9,        /* colNo */
     "repmat", /* fName */
@@ -33,7 +33,7 @@ void repmat(const emlrtStack *sp, ptrdiff_t a, int32_T varargin_1,
   int32_T i;
   i = b->size[0];
   b->size[0] = varargin_1;
-  emxEnsureCapacity_ptrdiff_t(sp, b, i, &ai_emlrtRTEI);
+  emxEnsureCapacity_ptrdiff_t(sp, b, i, &yh_emlrtRTEI);
   for (i = 0; i < varargin_1; i++) {
     b->data[i] = a;
   }

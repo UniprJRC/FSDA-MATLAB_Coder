@@ -28,79 +28,79 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo ue_emlrtRSI = {
+static emlrtRSInfo ve_emlrtRSI = {
     349,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo ve_emlrtRSI = {
+static emlrtRSInfo we_emlrtRSI = {
     361,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo we_emlrtRSI = {
+static emlrtRSInfo xe_emlrtRSI = {
     431,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo xe_emlrtRSI = {
+static emlrtRSInfo ye_emlrtRSI = {
     435,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo ye_emlrtRSI = {
+static emlrtRSInfo af_emlrtRSI = {
     455,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo af_emlrtRSI = {
+static emlrtRSInfo bf_emlrtRSI = {
     457,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo bf_emlrtRSI = {
+static emlrtRSInfo cf_emlrtRSI = {
     460,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo cf_emlrtRSI = {
+static emlrtRSInfo df_emlrtRSI = {
     92,                                                   /* lineNo */
     "combsFS",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pathName */
 };
 
-static emlrtRSInfo df_emlrtRSI = {
+static emlrtRSInfo ef_emlrtRSI = {
     103,                                                  /* lineNo */
     "combsFS",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pathName */
 };
 
-static emlrtRSInfo ef_emlrtRSI = {
+static emlrtRSInfo ff_emlrtRSI = {
     109,                                                  /* lineNo */
     "combsFS",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pathName */
 };
 
-static emlrtRSInfo ff_emlrtRSI = {
+static emlrtRSInfo gf_emlrtRSI = {
     123,                                                  /* lineNo */
     "combsFS",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pathName */
 };
 
-static emlrtRSInfo hf_emlrtRSI = {
+static emlrtRSInfo if_emlrtRSI = {
     168,                                                       /* lineNo */
     "randsampleFS",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\randsampleFS.m" /* pathName */
 };
 
-static emlrtRSInfo rf_emlrtRSI = {
+static emlrtRSInfo sf_emlrtRSI = {
     341,                                                    /* lineNo */
     "lexunrank",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\lexunrank.m" /* pathName */
@@ -148,7 +148,7 @@ static emlrtMCInfo k_emlrtMCI = {
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtBCInfo y_emlrtBCI = {
+static emlrtBCInfo bb_emlrtBCI = {
     -1,                                                      /* iFirst */
     -1,                                                      /* iLast */
     341,                                                     /* lineNo */
@@ -159,7 +159,7 @@ static emlrtBCInfo y_emlrtBCI = {
     0                                                        /* checkKind */
 };
 
-static emlrtBCInfo ab_emlrtBCI = {
+static emlrtBCInfo cb_emlrtBCI = {
     -1,                                                      /* iFirst */
     -1,                                                      /* iLast */
     341,                                                     /* lineNo */
@@ -170,7 +170,7 @@ static emlrtBCInfo ab_emlrtBCI = {
     0                                                        /* checkKind */
 };
 
-static emlrtBCInfo bb_emlrtBCI = {
+static emlrtBCInfo db_emlrtBCI = {
     -1,                                                      /* iFirst */
     -1,                                                      /* iLast */
     341,                                                     /* lineNo */
@@ -188,7 +188,7 @@ static emlrtRTEInfo r_emlrtRTEI = {
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\lexunrank.m" /* pName */
 };
 
-static emlrtBCInfo cb_emlrtBCI = {
+static emlrtBCInfo eb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     119,                                                   /* lineNo */
@@ -199,7 +199,7 @@ static emlrtBCInfo cb_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtBCInfo db_emlrtBCI = {
+static emlrtBCInfo fb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     119,                                                   /* lineNo */
@@ -218,7 +218,7 @@ static emlrtDCInfo i_emlrtDCI = {
     1                                                      /* checkKind */
 };
 
-static emlrtBCInfo eb_emlrtBCI = {
+static emlrtBCInfo gb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     119,                                                   /* lineNo */
@@ -245,7 +245,7 @@ static emlrtECInfo h_emlrtECI = {
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pName */
 };
 
-static emlrtBCInfo fb_emlrtBCI = {
+static emlrtBCInfo hb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     118,                                                   /* lineNo */
@@ -256,7 +256,7 @@ static emlrtBCInfo fb_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtBCInfo gb_emlrtBCI = {
+static emlrtBCInfo ib_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     118,                                                   /* lineNo */
@@ -267,7 +267,7 @@ static emlrtBCInfo gb_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtBCInfo hb_emlrtBCI = {
+static emlrtBCInfo jb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     118,                                                   /* lineNo */
@@ -286,7 +286,7 @@ static emlrtDCInfo k_emlrtDCI = {
     1                                                      /* checkKind */
 };
 
-static emlrtBCInfo ib_emlrtBCI = {
+static emlrtBCInfo kb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     118,                                                   /* lineNo */
@@ -305,7 +305,7 @@ static emlrtDCInfo l_emlrtDCI = {
     1                                                      /* checkKind */
 };
 
-static emlrtBCInfo jb_emlrtBCI = {
+static emlrtBCInfo lb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     118,                                                   /* lineNo */
@@ -316,7 +316,7 @@ static emlrtBCInfo jb_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtBCInfo kb_emlrtBCI = {
+static emlrtBCInfo mb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     118,                                                   /* lineNo */
@@ -327,7 +327,7 @@ static emlrtBCInfo kb_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtBCInfo lb_emlrtBCI = {
+static emlrtBCInfo nb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     118,                                                   /* lineNo */
@@ -346,7 +346,7 @@ static emlrtDCInfo m_emlrtDCI = {
     1                                                      /* checkKind */
 };
 
-static emlrtBCInfo mb_emlrtBCI = {
+static emlrtBCInfo ob_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     118,                                                   /* lineNo */
@@ -365,7 +365,7 @@ static emlrtDCInfo n_emlrtDCI = {
     1                                                      /* checkKind */
 };
 
-static emlrtBCInfo nb_emlrtBCI = {
+static emlrtBCInfo pb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     113,                                                   /* lineNo */
@@ -376,7 +376,7 @@ static emlrtBCInfo nb_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtBCInfo ob_emlrtBCI = {
+static emlrtBCInfo qb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     113,                                                   /* lineNo */
@@ -395,7 +395,7 @@ static emlrtDCInfo o_emlrtDCI = {
     1                                                      /* checkKind */
 };
 
-static emlrtBCInfo pb_emlrtBCI = {
+static emlrtBCInfo rb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     113,                                                   /* lineNo */
@@ -414,7 +414,7 @@ static emlrtECInfo i_emlrtECI = {
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pName */
 };
 
-static emlrtBCInfo qb_emlrtBCI = {
+static emlrtBCInfo sb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     109,                                                   /* lineNo */
@@ -425,7 +425,7 @@ static emlrtBCInfo qb_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtBCInfo rb_emlrtBCI = {
+static emlrtBCInfo tb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     109,                                                   /* lineNo */
@@ -436,7 +436,7 @@ static emlrtBCInfo rb_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtBCInfo sb_emlrtBCI = {
+static emlrtBCInfo ub_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     109,                                                   /* lineNo */
@@ -469,7 +469,7 @@ static emlrtECInfo j_emlrtECI = {
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtBCInfo tb_emlrtBCI = {
+static emlrtBCInfo vb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     462,                                                   /* lineNo */
@@ -519,7 +519,7 @@ static emlrtDCInfo s_emlrtDCI = {
     4                                                      /* checkKind */
 };
 
-static emlrtBCInfo ub_emlrtBCI = {
+static emlrtBCInfo wb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     457,                                                   /* lineNo */
@@ -530,7 +530,7 @@ static emlrtBCInfo ub_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtBCInfo vb_emlrtBCI = {
+static emlrtBCInfo xb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     455,                                                   /* lineNo */
@@ -549,7 +549,7 @@ static emlrtDCInfo t_emlrtDCI = {
     1                                                      /* checkKind */
 };
 
-static emlrtBCInfo wb_emlrtBCI = {
+static emlrtBCInfo yb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     123,                                                   /* lineNo */
@@ -568,7 +568,7 @@ static emlrtDCInfo u_emlrtDCI = {
     1                                                      /* checkKind */
 };
 
-static emlrtBCInfo xb_emlrtBCI = {
+static emlrtBCInfo ac_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     363,                                                   /* lineNo */
@@ -587,7 +587,7 @@ static emlrtDCInfo v_emlrtDCI = {
     1                                                      /* checkKind */
 };
 
-static emlrtBCInfo yb_emlrtBCI = {
+static emlrtBCInfo bc_emlrtBCI = {
     -1,                                                      /* iFirst */
     -1,                                                      /* iLast */
     353,                                                     /* lineNo */
@@ -598,7 +598,7 @@ static emlrtBCInfo yb_emlrtBCI = {
     0                                                        /* checkKind */
 };
 
-static emlrtBCInfo ac_emlrtBCI = {
+static emlrtBCInfo cc_emlrtBCI = {
     -1,                                                      /* iFirst */
     -1,                                                      /* iLast */
     356,                                                     /* lineNo */
@@ -665,93 +665,93 @@ static emlrtRTEInfo if_emlrtRTEI = {
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRTEInfo jf_emlrtRTEI = {
+static emlrtRTEInfo kf_emlrtRTEI = {
     109,                                                  /* lineNo */
     22,                                                   /* colNo */
     "combsFS",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pName */
 };
 
-static emlrtRTEInfo kf_emlrtRTEI = {
+static emlrtRTEInfo lf_emlrtRTEI = {
     439,                                                  /* lineNo */
     17,                                                   /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRTEInfo lf_emlrtRTEI = {
+static emlrtRTEInfo mf_emlrtRTEI = {
     118,                                                  /* lineNo */
     40,                                                   /* colNo */
     "combsFS",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pName */
 };
 
-static emlrtRTEInfo mf_emlrtRTEI = {
+static emlrtRTEInfo nf_emlrtRTEI = {
     363,                                                  /* lineNo */
     13,                                                   /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRTEInfo nf_emlrtRTEI = {
+static emlrtRTEInfo of_emlrtRTEI = {
     363,                                                  /* lineNo */
     9,                                                    /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRTEInfo of_emlrtRTEI = {
+static emlrtRTEInfo pf_emlrtRTEI = {
     455,                                                  /* lineNo */
     21,                                                   /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRTEInfo pf_emlrtRTEI = {
+static emlrtRTEInfo qf_emlrtRTEI = {
     394,                                                  /* lineNo */
     21,                                                   /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRTEInfo qf_emlrtRTEI = {
+static emlrtRTEInfo rf_emlrtRTEI = {
     414,                                                  /* lineNo */
     21,                                                   /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRSInfo aib_emlrtRSI = {
+static emlrtRSInfo bib_emlrtRSI = {
     339,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo bib_emlrtRSI = {
+static emlrtRSInfo cib_emlrtRSI = {
     341,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo cib_emlrtRSI = {
+static emlrtRSInfo dib_emlrtRSI = {
     370,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo uib_emlrtRSI = {
+static emlrtRSInfo vib_emlrtRSI = {
     369,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo vib_emlrtRSI = {
+static emlrtRSInfo wib_emlrtRSI = {
     306,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo wib_emlrtRSI = {
+static emlrtRSInfo xib_emlrtRSI = {
     304,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
@@ -1240,13 +1240,13 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
     m = emlrtCreateCharArray(2, &iv[0]);
     emlrtInitCharArrayR2013a((emlrtCTX)sp, 89, m, &u[0]);
     emlrtAssign(&y, m);
-    st.site = &wib_emlrtRSI;
+    st.site = &xib_emlrtRSI;
     disp(&st, y, &f_emlrtMCI);
     b_y = NULL;
     m = emlrtCreateCharArray(2, &iv1[0]);
     emlrtInitCharArrayR2013a((emlrtCTX)sp, 25, m, &b_u[0]);
     emlrtAssign(&b_y, m);
-    st.site = &vib_emlrtRSI;
+    st.site = &wib_emlrtRSI;
     disp(&st, b_y, &g_emlrtMCI);
     nsamp = 0.0;
   }
@@ -1258,15 +1258,15 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
   /*  nselected = size(C,1), number of p-subsets to be selected. */
   /*  rndsi = vector of nselected indexes, randomly chosen between 1 e ncomb. */
   /*  Constants that determine the method used to extract the p-subsets */
-  emxInit_real_T(sp, &pascalM, 2, &pf_emlrtRTEI, true);
-  emxInit_real_T(sp, &s, 2, &qf_emlrtRTEI, true);
+  emxInit_real_T(sp, &pascalM, 2, &qf_emlrtRTEI, true);
+  emxInit_real_T(sp, &s, 2, &rf_emlrtRTEI, true);
   emxInit_real_T(sp, &b_seq, 1, &hf_emlrtRTEI, true);
   if ((nsamp == 0.0) || (ncomb <= 5.0E+7)) {
     if (nsamp == 0.0) {
       if ((ncomb > 100000.0) && msg) {
-        st.site = &aib_emlrtRSI;
-        disp(&st, h_emlrt_marshallOut(&st, b_cv), &j_emlrtMCI);
         st.site = &bib_emlrtRSI;
+        disp(&st, h_emlrt_marshallOut(&st, b_cv), &j_emlrtMCI);
+        st.site = &cib_emlrtRSI;
         disp(&st, i_emlrt_marshallOut(&st, b_cv1), &k_emlrtMCI);
       }
       *nselected = ncomb;
@@ -1274,7 +1274,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
       *nselected = nsamp;
     }
     /*  If nsamp = 0 matrix C contains the indexes of all possible subsets */
-    st.site = &ue_emlrtRSI;
+    st.site = &ve_emlrtRSI;
     /* combsFS is an iterative algorithm equivalent to the MATLAB combs.m */
     /*  */
     /*  It generates m-combinations without repetition taken in lexicographic */
@@ -1361,7 +1361,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
     b_n = seq->size[1];
     /*  Elements of v. */
     if (p > seq->size[1]) {
-      b_st.site = &cf_emlrtRSI;
+      b_st.site = &df_emlrtRSI;
       e_error(&b_st);
     } else if (seq->size[1] == p) {
       i = C->size[0] * C->size[1];
@@ -1395,7 +1395,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
       /* The binomial coefficient (n choose m) can be computed using */
       /* prod(np1-m:n)/prod(1:m). For large number of combinations */
       /* our function 'bc' is better. */
-      b_st.site = &df_emlrtRSI;
+      b_st.site = &ef_emlrtRSI;
       maxx = bc(&b_st, seq->size[1], p);
       /*  initialise the matrix of all m-combinations */
       if (!(maxx >= 0.0)) {
@@ -1423,25 +1423,25 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
         i = 0;
       } else {
         if (1 > (int32_T)maxx) {
-          emlrtDynamicBoundsCheckR2012b(1, 1, (int32_T)maxx, &sb_emlrtBCI, &st);
+          emlrtDynamicBoundsCheckR2012b(1, 1, (int32_T)maxx, &ub_emlrtBCI, &st);
         }
         if (((int32_T)toRow < 1) || ((int32_T)toRow > (int32_T)maxx)) {
           emlrtDynamicBoundsCheckR2012b((int32_T)toRow, 1, (int32_T)maxx,
-                                        &rb_emlrtBCI, &st);
+                                        &tb_emlrtBCI, &st);
         }
         i = (int32_T)toRow;
       }
       if ((int32_T)p < 1) {
-        emlrtDynamicBoundsCheckR2012b((int32_T)p, 1, (int32_T)p, &qb_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b((int32_T)p, 1, (int32_T)p, &sb_emlrtBCI,
                                       &st);
       }
-      b_st.site = &ef_emlrtRSI;
-      c_st.site = &ee_emlrtRSI;
+      b_st.site = &ff_emlrtRSI;
+      c_st.site = &fe_emlrtRSI;
       if (muDoubleScalarIsNaN(p)) {
         i1 = s->size[0] * s->size[1];
         s->size[0] = 1;
         s->size[1] = 1;
-        emxEnsureCapacity_real_T(&c_st, s, i1, &qc_emlrtRTEI);
+        emxEnsureCapacity_real_T(&c_st, s, i1, &jf_emlrtRTEI);
         s->data[0] = rtNaN;
       } else if (seq->size[1] < p) {
         s->size[0] = 1;
@@ -1450,18 +1450,18 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
         i1 = s->size[0] * s->size[1];
         s->size[0] = 1;
         s->size[1] = (int32_T)((real_T)seq->size[1] - p) + 1;
-        emxEnsureCapacity_real_T(&c_st, s, i1, &qc_emlrtRTEI);
+        emxEnsureCapacity_real_T(&c_st, s, i1, &jf_emlrtRTEI);
         loop_ub = (int32_T)((real_T)seq->size[1] - p);
         for (i1 = 0; i1 <= loop_ub; i1++) {
           s->data[i1] = p + (real_T)i1;
         }
       } else {
-        d_st.site = &fe_emlrtRSI;
+        d_st.site = &ge_emlrtRSI;
         eml_float_colon(&d_st, p, seq->size[1], s);
       }
       i1 = b_seq->size[0];
       b_seq->size[0] = s->size[1];
-      emxEnsureCapacity_real_T(&st, b_seq, i1, &jf_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, b_seq, i1, &kf_emlrtRTEI);
       loop_ub = s->size[1];
       for (i1 = 0; i1 < loop_ub; i1++) {
         b_seq->data[i1] = s->data[i1];
@@ -1485,20 +1485,20 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
           loop_ub = 0;
         } else {
           if (1 > C->size[0]) {
-            emlrtDynamicBoundsCheckR2012b(1, 1, C->size[0], &pb_emlrtBCI, &st);
+            emlrtDynamicBoundsCheckR2012b(1, 1, C->size[0], &rb_emlrtBCI, &st);
           }
           if (toRow != (int32_T)muDoubleScalarFloor(toRow)) {
             emlrtIntegerCheckR2012b(toRow, &o_emlrtDCI, &st);
           }
           if (((int32_T)toRow < 1) || ((int32_T)toRow > C->size[0])) {
             emlrtDynamicBoundsCheckR2012b((int32_T)toRow, 1, C->size[0],
-                                          &ob_emlrtBCI, &st);
+                                          &qb_emlrtBCI, &st);
           }
           loop_ub = (int32_T)toRow;
         }
         if (((int32_T)maxx < 1) || ((int32_T)maxx > C->size[1])) {
           emlrtDynamicBoundsCheckR2012b((int32_T)maxx, 1, C->size[1],
-                                        &nb_emlrtBCI, &st);
+                                        &pb_emlrtBCI, &st);
         }
         for (i1 = 0; i1 < loop_ub; i1++) {
           C->data[i1 + C->size[0] * ((int32_T)maxx - 1)] = maxx;
@@ -1524,7 +1524,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
             }
             if (((int32_T)d < 1) || ((int32_T)d > C->size[0])) {
               emlrtDynamicBoundsCheckR2012b((int32_T)d, 1, C->size[0],
-                                            &mb_emlrtBCI, &st);
+                                            &ob_emlrtBCI, &st);
             }
             i2 = (int32_T)d - 2;
             if (kk != (int32_T)muDoubleScalarFloor(kk)) {
@@ -1532,7 +1532,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
             }
             if (((int32_T)kk < 1) || ((int32_T)kk > C->size[0])) {
               emlrtDynamicBoundsCheckR2012b((int32_T)kk, 1, C->size[0],
-                                            &lb_emlrtBCI, &st);
+                                            &nb_emlrtBCI, &st);
             }
             i3 = (int32_T)kk - 1;
           }
@@ -1543,12 +1543,12 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
             if (((int32_T)(maxx + 1.0) < 1) ||
                 ((int32_T)(maxx + 1.0) > C->size[1])) {
               emlrtDynamicBoundsCheckR2012b((int32_T)(maxx + 1.0), 1,
-                                            C->size[1], &kb_emlrtBCI, &st);
+                                            C->size[1], &mb_emlrtBCI, &st);
             }
             b_kk = (int32_T)(maxx + 1.0) - 2;
             if (((int32_T)p < 1) || ((int32_T)p > C->size[1])) {
               emlrtDynamicBoundsCheckR2012b((int32_T)p, 1, C->size[1],
-                                            &jb_emlrtBCI, &st);
+                                            &lb_emlrtBCI, &st);
             }
             i4 = (int32_T)p - 1;
           }
@@ -1561,7 +1561,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
             }
             if (((int32_T)fromRow < 1) || ((int32_T)fromRow > C->size[0])) {
               emlrtDynamicBoundsCheckR2012b((int32_T)fromRow, 1, C->size[0],
-                                            &ib_emlrtBCI, &st);
+                                            &kb_emlrtBCI, &st);
             }
             i5 = (int32_T)fromRow - 1;
             if (toRow != (int32_T)muDoubleScalarFloor(toRow)) {
@@ -1569,7 +1569,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
             }
             if (((int32_T)toRow < 1) || ((int32_T)toRow > C->size[0])) {
               emlrtDynamicBoundsCheckR2012b((int32_T)toRow, 1, C->size[0],
-                                            &hb_emlrtBCI, &st);
+                                            &jb_emlrtBCI, &st);
             }
             ii_data = (int32_T)toRow;
           }
@@ -1580,12 +1580,12 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
             if (((int32_T)(maxx + 1.0) < 1) ||
                 ((int32_T)(maxx + 1.0) > C->size[1])) {
               emlrtDynamicBoundsCheckR2012b((int32_T)(maxx + 1.0), 1,
-                                            C->size[1], &gb_emlrtBCI, &st);
+                                            C->size[1], &ib_emlrtBCI, &st);
             }
             i6 = (int32_T)(maxx + 1.0) - 1;
             if (((int32_T)p < 1) || ((int32_T)p > C->size[1])) {
               emlrtDynamicBoundsCheckR2012b((int32_T)p, 1, C->size[1],
-                                            &fb_emlrtBCI, &st);
+                                            &hb_emlrtBCI, &st);
             }
             loop_ub = (int32_T)p;
           }
@@ -1600,7 +1600,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
           i3 = pascalM->size[0] * pascalM->size[1];
           pascalM->size[0] = loop_ub;
           pascalM->size[1] = ii_data;
-          emxEnsureCapacity_real_T(&st, pascalM, i3, &lf_emlrtRTEI);
+          emxEnsureCapacity_real_T(&st, pascalM, i3, &mf_emlrtRTEI);
           for (i3 = 0; i3 < ii_data; i3++) {
             for (i4 = 0; i4 < loop_ub; i4++) {
               pascalM->data[i4 + pascalM->size[0] * i3] =
@@ -1624,7 +1624,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
             }
             if (((int32_T)fromRow < 1) || ((int32_T)fromRow > C->size[0])) {
               emlrtDynamicBoundsCheckR2012b((int32_T)fromRow, 1, C->size[0],
-                                            &eb_emlrtBCI, &st);
+                                            &gb_emlrtBCI, &st);
             }
             i2 = (int32_T)fromRow - 1;
             if (toRow != (int32_T)muDoubleScalarFloor(toRow)) {
@@ -1632,13 +1632,13 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
             }
             if (((int32_T)toRow < 1) || ((int32_T)toRow > C->size[0])) {
               emlrtDynamicBoundsCheckR2012b((int32_T)toRow, 1, C->size[0],
-                                            &db_emlrtBCI, &st);
+                                            &fb_emlrtBCI, &st);
             }
             i3 = (int32_T)toRow;
           }
           if (((int32_T)maxx < 1) || ((int32_T)maxx > C->size[1])) {
             emlrtDynamicBoundsCheckR2012b((int32_T)maxx, 1, C->size[1],
-                                          &cb_emlrtBCI, &st);
+                                          &eb_emlrtBCI, &st);
           }
           loop_ub = i3 - i2;
           for (i3 = 0; i3 < loop_ub; i3++) {
@@ -1661,14 +1661,14 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
         i = s->size[0] * s->size[1];
         s->size[0] = 1;
         s->size[1] = seq->size[1];
-        emxEnsureCapacity_real_T(&st, s, i, &qc_emlrtRTEI);
+        emxEnsureCapacity_real_T(&st, s, i, &jf_emlrtRTEI);
         loop_ub = seq->size[1] - 1;
         for (i = 0; i <= loop_ub; i++) {
           s->data[i] = (real_T)i + 1.0;
         }
       }
       if (!b_isequal(seq, s)) {
-        b_st.site = &ff_emlrtRSI;
+        b_st.site = &gf_emlrtRSI;
         indexShapeCheck(&b_st, *(int32_T(*)[2])seq->size,
                         *(int32_T(*)[2])C->size);
         loop_ub = C->size[1];
@@ -1682,7 +1682,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
             }
             i2 = (int32_T)C->data[i1 + C->size[0] * i];
             if ((i2 < 1) || (i2 > seq->size[1])) {
-              emlrtDynamicBoundsCheckR2012b(i2, 1, seq->size[1], &wb_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(i2, 1, seq->size[1], &yb_emlrtBCI,
                                             &st);
             }
             C->data[i1 + C->size[0] * i] = seq->data[i2 - 1];
@@ -1692,247 +1692,6 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
     }
     /*  If nsamp is > 0 just select randomly ncomb rows from matrix C */
     if (nsamp > 0.0) {
-      /*  Extract without replacement nsamp elements from ncomb */
-      st.site = &ve_emlrtRSI;
-      /* randsampleFS generates a random sample of k elements from the integers
-       * 1 to n (k<=n) */
-      /*  */
-      /* <a href="matlab: docsearchFS('randsampleFS')">Link to the help
-       * function</a> */
-      /*  */
-      /*   Required input arguments: */
-      /*  */
-      /*        n : A vector of numbers will be selected from the integers 1 to
-       * n. */
-      /*            Scalar, a positive integer. */
-      /*            Data Types - single|double */
-      /*  */
-      /*       k  : The number of elements to be selected. Non negative integer.
-       */
-      /*            Data Types - single|double */
-      /*  */
-      /*   Optional input arguments: */
-      /*  */
-      /*    method : Sampling methods. Scalar or vector. */
-      /*             Methods used to extract the subsets. See more about for
-       * details. */
-      /*             Default is method = 0. */
-      /*             - Scalar from 0 to 3 determining the method used to extract
-       */
-      /*              (without replacement) the random sample. */
-      /*             - Vector of weights: in such a case, a weighted sampling
-       * without */
-      /*               replacement algorithm is applied using that vector of
-       * weights. */
-      /*             Example - randsampleFS(100,10,2) */
-      /*             Data Types - single|double */
-      /*  */
-      /*  */
-      /*    Output: */
-      /*  */
-      /*    y :     A column vector of k values sampled at random from the
-       * integers 1:n. */
-      /*            For methods 0, 1, 2 and weighted sampling the elements
-       * extracted */
-      /*            are unique; For method 3 (included for historical reasons)
-       * there is */
-      /*            no guarantee that the elements extracted are unique. */
-      /*            Data Types - single|double. */
-      /*  */
-      /*  More About: */
-      /*  */
-      /*    The method=0 uses MATLAB function randperm. In old MATLAB releases
-       */
-      /*    randperm was slower than FSDA function shuffling, which is used in
-       */
-      /*    method 1 (for example, in R2009a - MATLAB 7.8 - randperm was at
-       * least */
-      /*    50% slower). */
-      /*  */
-      /*    If method=1 the approach depends on the population and sample sizes:
-       */
-      /*    - if $n < 1000$ and $k < n/(10 + 0.007n)$, that is if the population
-       * is */
-      /*      relatively small and the desired sample is small compared to the
-       */
-      /*      population, we repeatedly sample with replacement until there are
-       * k */
-      /*      unique values; */
-      /*    - otherwise, we do a random permutation of the population and return
-       */
-      /*      the first k elements. */
-      /*    The threshold $k < n/(10 + 0.007n)$ has been determined by
-       * simulation */
-      /*    under MATLAB R2016b. Before, the threshold was $n < 4*k$. */
-      /*  */
-      /*    If method=2 systematic sampling is used, where the starting point is
-       */
-      /*    random and the step is also random. */
-      /*  */
-      /*    If method=3 random sampling is based on the old but well known
-       * Linear */
-      /*    Congruential Generator (LCG) method. In this case there is no
-       * guarantee */
-      /*    to get unique numbers. The method is included for historical
-       * reasons. */
-      /*  */
-      /*    If method is a vector of n weights, then Weighted Sampling Without
-       */
-      /*    Replacement is applied. Our implementation follows Efraimidis and */
-      /*    Spirakis (2006). MATLAB function datasample follows Wong and  Easton
-       */
-      /*    (1980), which is also quite fast; note however that function
-       * datasample */
-      /*    may be very slow if applied repetedly, for the large amount of time
-       */
-      /*    spent on options checking. */
-      /*  */
-      /*    Remark on computation performances. Method=2 (systematic sampling)
-       * is */
-      /*    by far the fastest for any practical population size $n$. For
-       * example, */
-      /*    for $n \approx 10^6$ method=2 is two orders of magniture faster than
-       */
-      /*    method=1. With recent MATLAB releases (after R2011b) method = 0
-       * (which */
-      /*    uses compiled MATLAB function randperm) has comparable performances,
-       * at */
-      /*    least for reasonably small $k$. In releases before 2012a, randperm
-       * was */
-      /*    considerably slow. */
-      /*  */
-      /*  See also: randsample, datasample, shuffling */
-      /*  */
-      /*  References: */
-      /*  */
-      /*  Fisher, R.A. and Yates, F. (1948), "Statistical tables */
-      /*  for biological, agricultural and medical research (3rd ed.)", */
-      /*  Oliver & Boyd, pp. 26-27. [For Method 1] */
-      /*  Cochran, W.G. (1977), "Sampling techniques (Third ed.)", Wiley. [For
-       */
-      /*  Method 2] */
-      /*  Knuth, D.E. (1997), "The Art of Computer Programming, Volume 2: */
-      /*  Seminumerical Algorithms, Third Edition" Addison-Wesley, pp. 10-26.
-       * [For */
-      /*  Method 3. For details see: Section 3.2.1: The Linear Congruential
-       * Method] */
-      /*  Efraimidis, P.S. and Spirakis, P.G. (2006), Weighted random sampling
-       * with */
-      /*  a reservoir, "Information Processing Letters", Vol. 97, pp. 181-185.
-       * [For */
-      /*  Weighted Sampling Without Replacement] */
-      /*  Wong, C.K. and Easton, M.C. (1980), An Efficient Method for Weighted
-       */
-      /*  Sampling Without Replacement, "SIAM Journal of Computing", Vol. 9, pp.
-       * 111-113. */
-      /*  */
-      /*  Copyright 2008-2021. */
-      /*  Written by FSDA team */
-      /*  */
-      /* <a href="matlab: docsearchFS('randsampleFS')">Link to the help
-       * function</a> */
-      /*  */
-      /*  */
-      /* $LastChangedDate::                      $: Date of the last commit */
-      /*  */
-      /*  Examples: */
-      /* { */
-      /*     %% randsampleFS with default options. */
-      /*     % default method (1) is used. */
-      /*     randsampleFS(1000,10) */
-      /* } */
-      /* { */
-      /*     %% randsampleFS with optional argument set to method (2). */
-      /*     method = 2; */
-      /*     randsampleFS(100,10,method) */
-      /* } */
-      /* { */
-      /*     % randsampleFS with optional arguments set to method (3). */
-      /*     method = 3; */
-      /*     % Here, being nsel so big wrt nsamp, it is likely to obtain
-       * repetitions. */
-      /*     randsampleFS(100,10,method) */
-      /* } */
-      /* { */
-      /*     % randsampleFS Weighted Sampling Without Replacement. */
-      /*     % Extract k=10 number in [-1000 -900] with gamma distributed
-       * weights. */
-      /*      population = -1000:1:-900; */
-      /*      n = numel(population); */
-      /*      wgts = sort(random('gamma',0.3,2,n,1),'descend'); */
-      /*  */
-      /*      k=10; */
-      /*      y = randsampleFS(n,k,wgts); */
-      /*      sample  = population(y); */
-      /*       */
-      /*      plot(wgts,'.r') */
-      /*      hold on; */
-      /*      text(y,wgts(y),'X'); */
-      /*      title('Weight distribution with the extracted numbers
-       * superimposed') */
-      /* } */
-      /*  Beginning of code */
-      /*  randsampleFS needs to check the MATLAB version in use in order to: */
-      /*  - decide the sampling method to use, and */
-      /*  - use properly the optional parameter of randperm. */
-      /*  In the first case  the release to check is R2012a, i.e. 7.14 */
-      /*  In the second case the release to check is R2011b, i.e. 7.13 */
-      /*  For the sake of computational efficiency, we just check the latest */
-      /*  To pass the argument, use: */
-      /*  after2012a = ~verLessThan('MATLAB','7.14'); */
-      /*  choose the default sampling method */
-      /*  Weighted Sampling Without Replacement */
-      /*  This is done if the third argument is provided as a vector of weights.
-       */
-      /*  Extract a random sample of k integers between 1 and n. */
-      b_st.site = &hf_emlrtRSI;
-      randperm(&b_st, ncomb, nsamp, seq);
-      /*  METHOD: it was set to 2 */
-      ii_data = C->size[1] - 1;
-      i = pascalM->size[0] * pascalM->size[1];
-      pascalM->size[0] = seq->size[1];
-      pascalM->size[1] = C->size[1];
-      emxEnsureCapacity_real_T(sp, pascalM, i, &mf_emlrtRTEI);
-      for (i = 0; i <= ii_data; i++) {
-        loop_ub = seq->size[1];
-        for (i1 = 0; i1 < loop_ub; i1++) {
-          if (seq->data[i1] != (int32_T)muDoubleScalarFloor(seq->data[i1])) {
-            emlrtIntegerCheckR2012b(seq->data[i1], &v_emlrtDCI, (emlrtCTX)sp);
-          }
-          i2 = (int32_T)seq->data[i1];
-          if ((i2 < 1) || (i2 > C->size[0])) {
-            emlrtDynamicBoundsCheckR2012b(i2, 1, C->size[0], &xb_emlrtBCI,
-                                          (emlrtCTX)sp);
-          }
-          pascalM->data[i1 + pascalM->size[0] * i] =
-              C->data[(i2 + C->size[0] * i) - 1];
-        }
-      }
-      i = C->size[0] * C->size[1];
-      C->size[0] = pascalM->size[0];
-      C->size[1] = pascalM->size[1];
-      emxEnsureCapacity_real_T(sp, C, i, &nf_emlrtRTEI);
-      loop_ub = pascalM->size[0] * pascalM->size[1];
-      for (i = 0; i < loop_ub; i++) {
-        C->data[i] = pascalM->data[i];
-      }
-    }
-  } else {
-    if ((nsamp > 100000.0) && msg) {
-      c_y = NULL;
-      m = emlrtCreateCharArray(2, &iv2[0]);
-      emlrtInitCharArrayR2013a((emlrtCTX)sp, 63, m, &c_u[0]);
-      emlrtAssign(&c_y, m);
-      st.site = &uib_emlrtRSI;
-      disp(&st, c_y, &h_emlrtMCI);
-      st.site = &cib_emlrtRSI;
-      disp(&st, k_emlrt_marshallOut(&st, b_cv2), &i_emlrtMCI);
-    }
-    *nselected = nsamp;
-    /*  usepascal: flag used to decide whether to use the Pascal triangle */
-    /*  tric, which allows to reduce considerably the computation time */
-    usepascal = true;
-    if ((ncomb > 5.0E+7) && (ncomb < 1.0E+8)) {
       /*  Extract without replacement nsamp elements from ncomb */
       st.site = &we_emlrtRSI;
       /* randsampleFS generates a random sample of k elements from the integers
@@ -2126,19 +1885,260 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
       /*  This is done if the third argument is provided as a vector of weights.
        */
       /*  Extract a random sample of k integers between 1 and n. */
-      b_st.site = &hf_emlrtRSI;
+      b_st.site = &if_emlrtRSI;
+      randperm(&b_st, ncomb, nsamp, seq);
+      /*  METHOD: it was set to 2 */
+      ii_data = C->size[1] - 1;
+      i = pascalM->size[0] * pascalM->size[1];
+      pascalM->size[0] = seq->size[1];
+      pascalM->size[1] = C->size[1];
+      emxEnsureCapacity_real_T(sp, pascalM, i, &nf_emlrtRTEI);
+      for (i = 0; i <= ii_data; i++) {
+        loop_ub = seq->size[1];
+        for (i1 = 0; i1 < loop_ub; i1++) {
+          if (seq->data[i1] != (int32_T)muDoubleScalarFloor(seq->data[i1])) {
+            emlrtIntegerCheckR2012b(seq->data[i1], &v_emlrtDCI, (emlrtCTX)sp);
+          }
+          i2 = (int32_T)seq->data[i1];
+          if ((i2 < 1) || (i2 > C->size[0])) {
+            emlrtDynamicBoundsCheckR2012b(i2, 1, C->size[0], &ac_emlrtBCI,
+                                          (emlrtCTX)sp);
+          }
+          pascalM->data[i1 + pascalM->size[0] * i] =
+              C->data[(i2 + C->size[0] * i) - 1];
+        }
+      }
+      i = C->size[0] * C->size[1];
+      C->size[0] = pascalM->size[0];
+      C->size[1] = pascalM->size[1];
+      emxEnsureCapacity_real_T(sp, C, i, &of_emlrtRTEI);
+      loop_ub = pascalM->size[0] * pascalM->size[1];
+      for (i = 0; i < loop_ub; i++) {
+        C->data[i] = pascalM->data[i];
+      }
+    }
+  } else {
+    if ((nsamp > 100000.0) && msg) {
+      c_y = NULL;
+      m = emlrtCreateCharArray(2, &iv2[0]);
+      emlrtInitCharArrayR2013a((emlrtCTX)sp, 63, m, &c_u[0]);
+      emlrtAssign(&c_y, m);
+      st.site = &vib_emlrtRSI;
+      disp(&st, c_y, &h_emlrtMCI);
+      st.site = &dib_emlrtRSI;
+      disp(&st, k_emlrt_marshallOut(&st, b_cv2), &i_emlrtMCI);
+    }
+    *nselected = nsamp;
+    /*  usepascal: flag used to decide whether to use the Pascal triangle */
+    /*  tric, which allows to reduce considerably the computation time */
+    usepascal = true;
+    if ((ncomb > 5.0E+7) && (ncomb < 1.0E+8)) {
+      /*  Extract without replacement nsamp elements from ncomb */
+      st.site = &xe_emlrtRSI;
+      /* randsampleFS generates a random sample of k elements from the integers
+       * 1 to n (k<=n) */
+      /*  */
+      /* <a href="matlab: docsearchFS('randsampleFS')">Link to the help
+       * function</a> */
+      /*  */
+      /*   Required input arguments: */
+      /*  */
+      /*        n : A vector of numbers will be selected from the integers 1 to
+       * n. */
+      /*            Scalar, a positive integer. */
+      /*            Data Types - single|double */
+      /*  */
+      /*       k  : The number of elements to be selected. Non negative integer.
+       */
+      /*            Data Types - single|double */
+      /*  */
+      /*   Optional input arguments: */
+      /*  */
+      /*    method : Sampling methods. Scalar or vector. */
+      /*             Methods used to extract the subsets. See more about for
+       * details. */
+      /*             Default is method = 0. */
+      /*             - Scalar from 0 to 3 determining the method used to extract
+       */
+      /*              (without replacement) the random sample. */
+      /*             - Vector of weights: in such a case, a weighted sampling
+       * without */
+      /*               replacement algorithm is applied using that vector of
+       * weights. */
+      /*             Example - randsampleFS(100,10,2) */
+      /*             Data Types - single|double */
+      /*  */
+      /*  */
+      /*    Output: */
+      /*  */
+      /*    y :     A column vector of k values sampled at random from the
+       * integers 1:n. */
+      /*            For methods 0, 1, 2 and weighted sampling the elements
+       * extracted */
+      /*            are unique; For method 3 (included for historical reasons)
+       * there is */
+      /*            no guarantee that the elements extracted are unique. */
+      /*            Data Types - single|double. */
+      /*  */
+      /*  More About: */
+      /*  */
+      /*    The method=0 uses MATLAB function randperm. In old MATLAB releases
+       */
+      /*    randperm was slower than FSDA function shuffling, which is used in
+       */
+      /*    method 1 (for example, in R2009a - MATLAB 7.8 - randperm was at
+       * least */
+      /*    50% slower). */
+      /*  */
+      /*    If method=1 the approach depends on the population and sample sizes:
+       */
+      /*    - if $n < 1000$ and $k < n/(10 + 0.007n)$, that is if the population
+       * is */
+      /*      relatively small and the desired sample is small compared to the
+       */
+      /*      population, we repeatedly sample with replacement until there are
+       * k */
+      /*      unique values; */
+      /*    - otherwise, we do a random permutation of the population and return
+       */
+      /*      the first k elements. */
+      /*    The threshold $k < n/(10 + 0.007n)$ has been determined by
+       * simulation */
+      /*    under MATLAB R2016b. Before, the threshold was $n < 4*k$. */
+      /*  */
+      /*    If method=2 systematic sampling is used, where the starting point is
+       */
+      /*    random and the step is also random. */
+      /*  */
+      /*    If method=3 random sampling is based on the old but well known
+       * Linear */
+      /*    Congruential Generator (LCG) method. In this case there is no
+       * guarantee */
+      /*    to get unique numbers. The method is included for historical
+       * reasons. */
+      /*  */
+      /*    If method is a vector of n weights, then Weighted Sampling Without
+       */
+      /*    Replacement is applied. Our implementation follows Efraimidis and */
+      /*    Spirakis (2006). MATLAB function datasample follows Wong and  Easton
+       */
+      /*    (1980), which is also quite fast; note however that function
+       * datasample */
+      /*    may be very slow if applied repetedly, for the large amount of time
+       */
+      /*    spent on options checking. */
+      /*  */
+      /*    Remark on computation performances. Method=2 (systematic sampling)
+       * is */
+      /*    by far the fastest for any practical population size $n$. For
+       * example, */
+      /*    for $n \approx 10^6$ method=2 is two orders of magniture faster than
+       */
+      /*    method=1. With recent MATLAB releases (after R2011b) method = 0
+       * (which */
+      /*    uses compiled MATLAB function randperm) has comparable performances,
+       * at */
+      /*    least for reasonably small $k$. In releases before 2012a, randperm
+       * was */
+      /*    considerably slow. */
+      /*  */
+      /*  See also: randsample, datasample, shuffling */
+      /*  */
+      /*  References: */
+      /*  */
+      /*  Fisher, R.A. and Yates, F. (1948), "Statistical tables */
+      /*  for biological, agricultural and medical research (3rd ed.)", */
+      /*  Oliver & Boyd, pp. 26-27. [For Method 1] */
+      /*  Cochran, W.G. (1977), "Sampling techniques (Third ed.)", Wiley. [For
+       */
+      /*  Method 2] */
+      /*  Knuth, D.E. (1997), "The Art of Computer Programming, Volume 2: */
+      /*  Seminumerical Algorithms, Third Edition" Addison-Wesley, pp. 10-26.
+       * [For */
+      /*  Method 3. For details see: Section 3.2.1: The Linear Congruential
+       * Method] */
+      /*  Efraimidis, P.S. and Spirakis, P.G. (2006), Weighted random sampling
+       * with */
+      /*  a reservoir, "Information Processing Letters", Vol. 97, pp. 181-185.
+       * [For */
+      /*  Weighted Sampling Without Replacement] */
+      /*  Wong, C.K. and Easton, M.C. (1980), An Efficient Method for Weighted
+       */
+      /*  Sampling Without Replacement, "SIAM Journal of Computing", Vol. 9, pp.
+       * 111-113. */
+      /*  */
+      /*  Copyright 2008-2021. */
+      /*  Written by FSDA team */
+      /*  */
+      /* <a href="matlab: docsearchFS('randsampleFS')">Link to the help
+       * function</a> */
+      /*  */
+      /*  */
+      /* $LastChangedDate::                      $: Date of the last commit */
+      /*  */
+      /*  Examples: */
+      /* { */
+      /*     %% randsampleFS with default options. */
+      /*     % default method (1) is used. */
+      /*     randsampleFS(1000,10) */
+      /* } */
+      /* { */
+      /*     %% randsampleFS with optional argument set to method (2). */
+      /*     method = 2; */
+      /*     randsampleFS(100,10,method) */
+      /* } */
+      /* { */
+      /*     % randsampleFS with optional arguments set to method (3). */
+      /*     method = 3; */
+      /*     % Here, being nsel so big wrt nsamp, it is likely to obtain
+       * repetitions. */
+      /*     randsampleFS(100,10,method) */
+      /* } */
+      /* { */
+      /*     % randsampleFS Weighted Sampling Without Replacement. */
+      /*     % Extract k=10 number in [-1000 -900] with gamma distributed
+       * weights. */
+      /*      population = -1000:1:-900; */
+      /*      n = numel(population); */
+      /*      wgts = sort(random('gamma',0.3,2,n,1),'descend'); */
+      /*  */
+      /*      k=10; */
+      /*      y = randsampleFS(n,k,wgts); */
+      /*      sample  = population(y); */
+      /*       */
+      /*      plot(wgts,'.r') */
+      /*      hold on; */
+      /*      text(y,wgts(y),'X'); */
+      /*      title('Weight distribution with the extracted numbers
+       * superimposed') */
+      /* } */
+      /*  Beginning of code */
+      /*  randsampleFS needs to check the MATLAB version in use in order to: */
+      /*  - decide the sampling method to use, and */
+      /*  - use properly the optional parameter of randperm. */
+      /*  In the first case  the release to check is R2012a, i.e. 7.14 */
+      /*  In the second case the release to check is R2011b, i.e. 7.13 */
+      /*  For the sake of computational efficiency, we just check the latest */
+      /*  To pass the argument, use: */
+      /*  after2012a = ~verLessThan('MATLAB','7.14'); */
+      /*  choose the default sampling method */
+      /*  Weighted Sampling Without Replacement */
+      /*  This is done if the third argument is provided as a vector of weights.
+       */
+      /*  Extract a random sample of k integers between 1 and n. */
+      b_st.site = &if_emlrtRSI;
       randperm(&b_st, ncomb, nsamp, seq);
       /*  METHOD: it was set to 2 */
       /*  The Pascal triangle can be used only if there is enough memory. */
       if (n <= 20000.0) {
-        st.site = &xe_emlrtRSI;
+        st.site = &ye_emlrtRSI;
         pascal(&st, n, pascalM);
       } else {
         usepascal = false;
         i = pascalM->size[0] * pascalM->size[1];
         pascalM->size[0] = 1;
         pascalM->size[1] = 1;
-        emxEnsureCapacity_real_T(sp, pascalM, i, &kf_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, pascalM, i, &lf_emlrtRTEI);
         pascalM->data[0] = 0.0;
         /*  C coder initialization */
       }
@@ -2180,11 +2180,11 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
     for (b_i = 0; b_i < i1; b_i++) {
       if ((ncomb > 5.0E+7) && (ncomb < 1.0E+8)) {
         if (usepascal) {
-          st.site = &ye_emlrtRSI;
+          st.site = &af_emlrtRSI;
           if (((int32_T)(b_i + 1U) < 1) ||
               ((int32_T)(b_i + 1U) > seq->size[1])) {
             emlrtDynamicBoundsCheckR2012b((int32_T)(b_i + 1U), 1, seq->size[1],
-                                          &vb_emlrtBCI, &st);
+                                          &xb_emlrtBCI, &st);
           }
           N_kk = seq->data[b_i];
           /* lexunrank gives the the $k$-combination of $n$ elements of position
@@ -2524,7 +2524,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
           i = s->size[0] * s->size[1];
           s->size[0] = 1;
           s->size[1] = (int32_T)p;
-          emxEnsureCapacity_real_T(&st, s, i, &of_emlrtRTEI);
+          emxEnsureCapacity_real_T(&st, s, i, &pf_emlrtRTEI);
           for (i = 0; i < b_n; i++) {
             s->data[i] = 0.0;
           }
@@ -2547,19 +2547,20 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
             } else {
               if (1 > pascalM->size[0]) {
                 emlrtDynamicBoundsCheckR2012b(1, 1, pascalM->size[0],
-                                              &bb_emlrtBCI, &st);
+                                              &db_emlrtBCI, &st);
               }
               if (((int32_T)d < 1) || ((int32_T)d > pascalM->size[0])) {
                 emlrtDynamicBoundsCheckR2012b((int32_T)d, 1, pascalM->size[0],
-                                              &ab_emlrtBCI, &st);
+                                              &cb_emlrtBCI, &st);
               }
               loop_ub = (int32_T)d;
             }
-            b_st.site = &rf_emlrtRSI;
+            b_st.site = &sf_emlrtRSI;
             if (((int32_T)(kk + 1.0) < 1) ||
                 ((int32_T)(kk + 1.0) > pascalM->size[1])) {
-              emlrtDynamicBoundsCheckR2012b(
-                  (int32_T)(kk + 1.0), 1, pascalM->size[1], &y_emlrtBCI, &b_st);
+              emlrtDynamicBoundsCheckR2012b((int32_T)(kk + 1.0), 1,
+                                            pascalM->size[1], &bb_emlrtBCI,
+                                            &b_st);
             }
             pascalM_size = loop_ub;
             for (i2 = 0; i2 < loop_ub; i2++) {
@@ -2572,7 +2573,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
             pascalM_data.allocatedSize = 20000;
             pascalM_data.numDimensions = 1;
             pascalM_data.canFreeData = false;
-            c_st.site = &uc_emlrtRSI;
+            c_st.site = &vc_emlrtRSI;
             b_eml_find(&c_st, &pascalM_data, (int32_T *)&ii_data, &loop_ub);
             /*  seqnmkk=1:n-kk; */
             /*  x=seqnmkk(pascalM(seqnmkk,kk+1) > N_kk); */
@@ -2584,19 +2585,19 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
             }
             if (((int32_T)kk < 1) || ((int32_T)kk > s->size[1])) {
               emlrtDynamicBoundsCheckR2012b((int32_T)kk, 1, s->size[1],
-                                            &yb_emlrtBCI, &st);
+                                            &bc_emlrtBCI, &st);
             }
             s->data[(int32_T)kk - 1] = n - maxx;
             if (maxx >= kk) {
               i2 = (int32_T)((maxx - kk) + 1.0);
               if ((i2 < 1) || (i2 > pascalM->size[0])) {
                 emlrtDynamicBoundsCheckR2012b(i2, 1, pascalM->size[0],
-                                              &ac_emlrtBCI, &st);
+                                              &cc_emlrtBCI, &st);
               }
               if (((int32_T)(kk + 1.0) < 1) ||
                   ((int32_T)(kk + 1.0) > pascalM->size[1])) {
                 emlrtDynamicBoundsCheckR2012b((int32_T)(kk + 1.0), 1,
-                                              pascalM->size[1], &ac_emlrtBCI,
+                                              pascalM->size[1], &cc_emlrtBCI,
                                               &st);
               }
               N_kk -= pascalM->data[(i2 + pascalM->size[0] *
@@ -2612,13 +2613,13 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
           if (((int32_T)(b_i + 1U) < 1) ||
               ((int32_T)(b_i + 1U) > seq->size[1])) {
             emlrtDynamicBoundsCheckR2012b((int32_T)(b_i + 1U), 1, seq->size[1],
-                                          &ub_emlrtBCI, (emlrtCTX)sp);
+                                          &wb_emlrtBCI, (emlrtCTX)sp);
           }
-          st.site = &af_emlrtRSI;
+          st.site = &bf_emlrtRSI;
           lexunrank(&st, n, p, seq->data[b_i], s);
         }
       } else {
-        st.site = &bf_emlrtRSI;
+        st.site = &cf_emlrtRSI;
         /* randsampleFS generates a random sample of k elements from the
          * integers 1 to n (k<=n) */
         /*  */
@@ -2813,11 +2814,11 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
         /*  This is done if the third argument is provided as a vector of
          * weights. */
         /*  Extract a random sample of k integers between 1 and n. */
-        b_st.site = &hf_emlrtRSI;
+        b_st.site = &if_emlrtRSI;
         randperm(&b_st, n, p, s);
       }
       if ((b_i + 1 < 1) || (b_i + 1 > C->size[0])) {
-        emlrtDynamicBoundsCheckR2012b(b_i + 1, 1, C->size[0], &tb_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b(b_i + 1, 1, C->size[0], &vb_emlrtBCI,
                                       (emlrtCTX)sp);
       }
       c_seq[1] = C->size[1];

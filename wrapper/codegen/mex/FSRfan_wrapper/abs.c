@@ -36,7 +36,7 @@ static emlrtRSInfo tp_emlrtRSI = {
     "internal\\applyScalarFunction.m" /* pathName */
 };
 
-static emlrtRTEInfo bi_emlrtRTEI = {
+static emlrtRTEInfo ai_emlrtRTEI = {
     30,                    /* lineNo */
     21,                    /* colNo */
     "applyScalarFunction", /* fName */
@@ -63,7 +63,7 @@ void b_abs(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   nx = x->size[0];
   k = y->size[0];
   y->size[0] = x->size[0];
-  emxEnsureCapacity_real_T(&st, y, k, &bi_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, y, k, &ai_emlrtRTEI);
   b_st.site = &tp_emlrtRSI;
   if ((1 <= x->size[0]) && (x->size[0] > 2147483646)) {
     c_st.site = &pb_emlrtRSI;

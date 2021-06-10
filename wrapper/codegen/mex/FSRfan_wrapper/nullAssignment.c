@@ -158,7 +158,7 @@ static emlrtRTEInfo ub_emlrtRTEI = {
     "internal\\nullAssignment.m" /* pName */
 };
 
-static emlrtRTEInfo tl_emlrtRTEI = {
+static emlrtRTEInfo sl_emlrtRTEI = {
     365,              /* lineNo */
     9,                /* colNo */
     "nullAssignment", /* fName */
@@ -167,7 +167,7 @@ static emlrtRTEInfo tl_emlrtRTEI = {
     "internal\\nullAssignment.m" /* pName */
 };
 
-static emlrtRTEInfo ul_emlrtRTEI = {
+static emlrtRTEInfo tl_emlrtRTEI = {
     33,               /* lineNo */
     13,               /* colNo */
     "nullAssignment", /* fName */
@@ -176,7 +176,7 @@ static emlrtRTEInfo ul_emlrtRTEI = {
     "internal\\nullAssignment.m" /* pName */
 };
 
-static emlrtRTEInfo vl_emlrtRTEI = {
+static emlrtRTEInfo ul_emlrtRTEI = {
     363,              /* lineNo */
     9,                /* colNo */
     "nullAssignment", /* fName */
@@ -185,7 +185,7 @@ static emlrtRTEInfo vl_emlrtRTEI = {
     "internal\\nullAssignment.m" /* pName */
 };
 
-static emlrtRTEInfo wl_emlrtRTEI = {
+static emlrtRTEInfo vl_emlrtRTEI = {
     17,               /* lineNo */
     9,                /* colNo */
     "nullAssignment", /* fName */
@@ -267,7 +267,7 @@ void b_nullAssignment(const emlrtStack *sp, emxArray_real_T *x,
   } else {
     x->size[1] = nxout;
   }
-  emxEnsureCapacity_real_T(&st, x, nxin, &wl_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, x, nxin, &vl_emlrtRTEI);
 }
 
 void nullAssignment(const emlrtStack *sp, emxArray_real_T *x,
@@ -340,12 +340,12 @@ void nullAssignment(const emlrtStack *sp, emxArray_real_T *x,
       }
     }
   } else {
-    emxInit_boolean_T(&st, &b, 2, &vl_emlrtRTEI, true);
+    emxInit_boolean_T(&st, &b, 2, &ul_emlrtRTEI, true);
     b_st.site = &lc_emlrtRSI;
     j = b->size[0] * b->size[1];
     b->size[0] = 1;
     b->size[1] = x->size[1];
-    emxEnsureCapacity_boolean_T(&b_st, b, j, &tl_emlrtRTEI);
+    emxEnsureCapacity_boolean_T(&b_st, b, j, &sl_emlrtRTEI);
     k = x->size[1];
     for (j = 0; j < k; j++) {
       b->data[j] = false;
@@ -402,7 +402,7 @@ void nullAssignment(const emlrtStack *sp, emxArray_real_T *x,
   j = x->size[0] * x->size[1];
   x->size[0] = b_b + 1;
   x->size[1] = k;
-  emxEnsureCapacity_real_T(&st, x, j, &ul_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, x, j, &tl_emlrtRTEI);
   emlrtHeapReferenceStackLeaveFcnR2012b((emlrtCTX)sp);
 }
 

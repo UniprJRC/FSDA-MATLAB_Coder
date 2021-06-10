@@ -20,7 +20,7 @@
 
 /* Variable Definitions */
 static emlrtRSInfo
-    rl_emlrtRSI =
+    sl_emlrtRSI =
         {
             105,       /* lineNo */
             "sortIdx", /* fcnName */
@@ -30,7 +30,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    sl_emlrtRSI =
+    tl_emlrtRSI =
         {
             308,                /* lineNo */
             "block_merge_sort", /* fcnName */
@@ -40,7 +40,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    tl_emlrtRSI =
+    ul_emlrtRSI =
         {
             316,                /* lineNo */
             "block_merge_sort", /* fcnName */
@@ -50,7 +50,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    ul_emlrtRSI =
+    vl_emlrtRSI =
         {
             317,                /* lineNo */
             "block_merge_sort", /* fcnName */
@@ -60,7 +60,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    vl_emlrtRSI =
+    wl_emlrtRSI =
         {
             325,                /* lineNo */
             "block_merge_sort", /* fcnName */
@@ -70,7 +70,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    wl_emlrtRSI =
+    xl_emlrtRSI =
         {
             333,                /* lineNo */
             "block_merge_sort", /* fcnName */
@@ -80,7 +80,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    xl_emlrtRSI =
+    yl_emlrtRSI =
         {
             392,                      /* lineNo */
             "initialize_vector_sort", /* fcnName */
@@ -90,7 +90,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    yl_emlrtRSI =
+    am_emlrtRSI =
         {
             420,                      /* lineNo */
             "initialize_vector_sort", /* fcnName */
@@ -100,7 +100,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    am_emlrtRSI =
+    bm_emlrtRSI =
         {
             427,                      /* lineNo */
             "initialize_vector_sort", /* fcnName */
@@ -110,7 +110,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    em_emlrtRSI =
+    fm_emlrtRSI =
         {
             499,           /* lineNo */
             "merge_block", /* fcnName */
@@ -120,7 +120,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    gm_emlrtRSI =
+    hm_emlrtRSI =
         {
             507,           /* lineNo */
             "merge_block", /* fcnName */
@@ -130,7 +130,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    hm_emlrtRSI =
+    im_emlrtRSI =
         {
             514,           /* lineNo */
             "merge_block", /* fcnName */
@@ -140,7 +140,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    im_emlrtRSI =
+    jm_emlrtRSI =
         {
             561,     /* lineNo */
             "merge", /* fcnName */
@@ -150,7 +150,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    jm_emlrtRSI =
+    km_emlrtRSI =
         {
             530,     /* lineNo */
             "merge", /* fcnName */
@@ -160,7 +160,7 @@ static emlrtRSInfo
 };
 
 static emlrtRTEInfo
-    uj_emlrtRTEI =
+    vj_emlrtRTEI =
         {
             61,        /* lineNo */
             5,         /* colNo */
@@ -171,7 +171,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    fab_emlrtRTEI =
+    gab_emlrtRTEI =
         {
             386,       /* lineNo */
             1,         /* colNo */
@@ -182,7 +182,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    gab_emlrtRTEI =
+    hab_emlrtRTEI =
         {
             388,       /* lineNo */
             1,         /* colNo */
@@ -193,7 +193,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    hab_emlrtRTEI =
+    iab_emlrtRTEI =
         {
             308,       /* lineNo */
             14,        /* colNo */
@@ -204,7 +204,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    iab_emlrtRTEI =
+    jab_emlrtRTEI =
         {
             308,       /* lineNo */
             20,        /* colNo */
@@ -246,9 +246,9 @@ static void merge(const emlrtStack *sp, emxArray_int32_T *idx,
   b_st.tls = st.tls;
   if (nq != 0) {
     n_tmp = np + nq;
-    st.site = &jm_emlrtRSI;
+    st.site = &km_emlrtRSI;
     if ((1 <= n_tmp) && (n_tmp > 2147483646)) {
-      b_st.site = &gc_emlrtRSI;
+      b_st.site = &hc_emlrtRSI;
       check_forloop_overflow_error(&b_st);
     }
     for (j = 0; j < n_tmp; j++) {
@@ -277,9 +277,9 @@ static void merge(const emlrtStack *sp, emxArray_int32_T *idx,
           q++;
         } else {
           q = iout - p;
-          st.site = &im_emlrtRSI;
+          st.site = &jm_emlrtRSI;
           if ((p + 1 <= np) && (np > 2147483646)) {
-            b_st.site = &gc_emlrtRSI;
+            b_st.site = &hc_emlrtRSI;
             check_forloop_overflow_error(&b_st);
           }
           for (j = p + 1; j <= np; j++) {
@@ -314,7 +314,7 @@ static void merge_block(const emlrtStack *sp, emxArray_int32_T *idx,
       tailOffset = bLen * nPairs;
       nTail = n - tailOffset;
       if (nTail > bLen) {
-        st.site = &em_emlrtRSI;
+        st.site = &fm_emlrtRSI;
         merge(&st, idx, x, offset + tailOffset, bLen, nTail - bLen, iwork,
               xwork);
       }
@@ -322,13 +322,13 @@ static void merge_block(const emlrtStack *sp, emxArray_int32_T *idx,
     tailOffset = bLen << 1;
     nPairs >>= 1;
     for (nTail = 0; nTail < nPairs; nTail++) {
-      st.site = &gm_emlrtRSI;
+      st.site = &hm_emlrtRSI;
       merge(&st, idx, x, offset + nTail * tailOffset, bLen, bLen, iwork, xwork);
     }
     bLen = tailOffset;
   }
   if (n > bLen) {
-    st.site = &hm_emlrtRSI;
+    st.site = &im_emlrtRSI;
     merge(&st, idx, x, offset, bLen, n - bLen, iwork, xwork);
   }
 }
@@ -428,15 +428,15 @@ void b_sortIdx(const emlrtStack *sp, emxArray_real_T *x, emxArray_int32_T *idx)
   ib = x->size[0];
   quartetOffset = idx->size[0];
   idx->size[0] = ib;
-  emxEnsureCapacity_int32_T(sp, idx, quartetOffset, &uj_emlrtRTEI);
+  emxEnsureCapacity_int32_T(sp, idx, quartetOffset, &vj_emlrtRTEI);
   for (quartetOffset = 0; quartetOffset < ib; quartetOffset++) {
     idx->data[quartetOffset] = 0;
   }
   if (x->size[0] != 0) {
-    emxInit_int32_T(sp, &iwork, 1, &hab_emlrtRTEI, true);
-    st.site = &rl_emlrtRSI;
+    emxInit_int32_T(sp, &iwork, 1, &iab_emlrtRTEI, true);
+    st.site = &sl_emlrtRSI;
     n = x->size[0];
-    b_st.site = &sl_emlrtRSI;
+    b_st.site = &tl_emlrtRSI;
     b_n = x->size[0];
     x4[0] = 0.0;
     idx4[0] = 0;
@@ -448,23 +448,23 @@ void b_sortIdx(const emlrtStack *sp, emxArray_real_T *x, emxArray_int32_T *idx)
     idx4[3] = 0;
     quartetOffset = iwork->size[0];
     iwork->size[0] = ib;
-    emxEnsureCapacity_int32_T(&b_st, iwork, quartetOffset, &fab_emlrtRTEI);
+    emxEnsureCapacity_int32_T(&b_st, iwork, quartetOffset, &gab_emlrtRTEI);
     for (quartetOffset = 0; quartetOffset < ib; quartetOffset++) {
       iwork->data[quartetOffset] = 0;
     }
-    emxInit_real_T(&b_st, &xwork, 1, &iab_emlrtRTEI, true);
+    emxInit_real_T(&b_st, &xwork, 1, &jab_emlrtRTEI, true);
     ib = x->size[0];
     quartetOffset = xwork->size[0];
     xwork->size[0] = ib;
-    emxEnsureCapacity_real_T(&b_st, xwork, quartetOffset, &gab_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, xwork, quartetOffset, &hab_emlrtRTEI);
     for (quartetOffset = 0; quartetOffset < ib; quartetOffset++) {
       xwork->data[quartetOffset] = 0.0;
     }
     nNaNs = 0;
     ib = -1;
-    c_st.site = &xl_emlrtRSI;
+    c_st.site = &yl_emlrtRSI;
     if ((1 <= x->size[0]) && (x->size[0] > 2147483646)) {
-      d_st.site = &gc_emlrtRSI;
+      d_st.site = &hc_emlrtRSI;
       check_forloop_overflow_error(&d_st);
     }
     for (k = 0; k < b_n; k++) {
@@ -588,9 +588,9 @@ void b_sortIdx(const emlrtStack *sp, emxArray_real_T *x, emxArray_int32_T *idx)
         perm[1] = 2;
         perm[2] = 1;
       }
-      c_st.site = &yl_emlrtRSI;
+      c_st.site = &am_emlrtRSI;
       if (ib + 1 > 2147483646) {
-        d_st.site = &gc_emlrtRSI;
+        d_st.site = &hc_emlrtRSI;
         check_forloop_overflow_error(&d_st);
       }
       for (k = 0; k <= ib; k++) {
@@ -601,7 +601,7 @@ void b_sortIdx(const emlrtStack *sp, emxArray_real_T *x, emxArray_int32_T *idx)
       }
     }
     ib = (nNaNs >> 1) + 1;
-    c_st.site = &am_emlrtRSI;
+    c_st.site = &bm_emlrtRSI;
     for (k = 0; k <= ib - 2; k++) {
       quartetOffset = (i4 + k) + 1;
       i1 = idx->data[quartetOffset];
@@ -621,21 +621,21 @@ void b_sortIdx(const emlrtStack *sp, emxArray_real_T *x, emxArray_int32_T *idx)
       if (n >= 256) {
         quartetOffset = i1 >> 8;
         if (quartetOffset > 0) {
-          b_st.site = &tl_emlrtRSI;
+          b_st.site = &ul_emlrtRSI;
           for (ib = 0; ib < quartetOffset; ib++) {
-            b_st.site = &ul_emlrtRSI;
+            b_st.site = &vl_emlrtRSI;
             merge_pow2_block(idx, x, ib << 8);
           }
           ib = quartetOffset << 8;
           quartetOffset = i1 - ib;
           if (quartetOffset > 0) {
-            b_st.site = &vl_emlrtRSI;
+            b_st.site = &wl_emlrtRSI;
             merge_block(&b_st, idx, x, ib, quartetOffset, 2, iwork, xwork);
           }
           ib = 8;
         }
       }
-      b_st.site = &wl_emlrtRSI;
+      b_st.site = &xl_emlrtRSI;
       merge_block(&b_st, idx, x, 0, i1, ib, iwork, xwork);
     }
     emxFree_real_T(&xwork);
@@ -673,20 +673,20 @@ void sortIdx(const emlrtStack *sp, const emxArray_real_T *x,
   n = x->size[0] + 1;
   i = idx->size[0];
   idx->size[0] = x->size[0];
-  emxEnsureCapacity_int32_T(sp, idx, i, &uj_emlrtRTEI);
+  emxEnsureCapacity_int32_T(sp, idx, i, &vj_emlrtRTEI);
   b_i = x->size[0];
   for (i = 0; i < b_i; i++) {
     idx->data[i] = 0;
   }
-  emxInit_int32_T(sp, &iwork, 1, &wj_emlrtRTEI, true);
-  st.site = &lk_emlrtRSI;
+  emxInit_int32_T(sp, &iwork, 1, &xj_emlrtRTEI, true);
+  st.site = &mk_emlrtRSI;
   i = iwork->size[0];
   iwork->size[0] = x->size[0];
-  emxEnsureCapacity_int32_T(&st, iwork, i, &vj_emlrtRTEI);
+  emxEnsureCapacity_int32_T(&st, iwork, i, &wj_emlrtRTEI);
   b_i = x->size[0] - 1;
-  b_st.site = &mk_emlrtRSI;
+  b_st.site = &nk_emlrtRSI;
   if ((1 <= x->size[0] - 1) && (x->size[0] - 1 > 2147483645)) {
-    c_st.site = &gc_emlrtRSI;
+    c_st.site = &hc_emlrtRSI;
     check_forloop_overflow_error(&c_st);
   }
   for (k = 1; k <= b_i; k += 2) {
@@ -740,7 +740,7 @@ void sortIdx(const emlrtStack *sp, const emxArray_real_T *x,
         }
         k++;
       }
-      b_st.site = &nk_emlrtRSI;
+      b_st.site = &ok_emlrtRSI;
       for (k = 0; k < kEnd; k++) {
         idx->data[(j + k) - 1] = iwork->data[k];
       }

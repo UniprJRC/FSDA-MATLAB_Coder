@@ -19,7 +19,7 @@
 #include "sumMatrixIncludeNaN.h"
 
 /* Variable Definitions */
-static emlrtRSInfo xj_emlrtRSI = {
+static emlrtRSInfo yj_emlrtRSI = {
     53,                 /* lineNo */
     "sumMatrixColumns", /* fcnName */
     "C:\\Program "
@@ -27,7 +27,7 @@ static emlrtRSInfo xj_emlrtRSI = {
     "rixIncludeNaN.m" /* pathName */
 };
 
-static emlrtRSInfo vv_emlrtRSI = {
+static emlrtRSInfo wv_emlrtRSI = {
     41,                 /* lineNo */
     "sumMatrixColumns", /* fcnName */
     "C:\\Program "
@@ -35,7 +35,7 @@ static emlrtRSInfo vv_emlrtRSI = {
     "rixIncludeNaN.m" /* pathName */
 };
 
-static emlrtRSInfo wv_emlrtRSI = {
+static emlrtRSInfo xv_emlrtRSI = {
     50,                 /* lineNo */
     "sumMatrixColumns", /* fcnName */
     "C:\\Program "
@@ -43,7 +43,7 @@ static emlrtRSInfo wv_emlrtRSI = {
     "rixIncludeNaN.m" /* pathName */
 };
 
-static emlrtRTEInfo ip_emlrtRTEI = {
+static emlrtRTEInfo jp_emlrtRTEI = {
     74,                      /* lineNo */
     9,                       /* colNo */
     "combineVectorElements", /* fName */
@@ -52,7 +52,7 @@ static emlrtRTEInfo ip_emlrtRTEI = {
     "eVectorElements.m" /* pName */
 };
 
-static emlrtRTEInfo jp_emlrtRTEI = {
+static emlrtRTEInfo kp_emlrtRTEI = {
     35,                    /* lineNo */
     20,                    /* colNo */
     "sumMatrixIncludeNaN", /* fName */
@@ -79,7 +79,7 @@ void b_combineVectorElements(const emlrtStack *sp, const emxArray_real_T *x,
   int32_T nleft;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &mm_emlrtRSI;
+  st.site = &nm_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -92,46 +92,46 @@ void b_combineVectorElements(const emlrtStack *sp, const emxArray_real_T *x,
     nfb = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = x->size[1];
-    emxEnsureCapacity_real_T(&st, y, nfb, &ip_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, y, nfb, &jp_emlrtRTEI);
     ncols = x->size[1];
     for (nfb = 0; nfb < ncols; nfb++) {
       y->data[nfb] = 0.0;
     }
   } else {
-    b_st.site = &nm_emlrtRSI;
-    c_st.site = &vj_emlrtRSI;
+    b_st.site = &om_emlrtRSI;
+    c_st.site = &wj_emlrtRSI;
     nfb = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = x->size[1];
-    emxEnsureCapacity_real_T(&c_st, y, nfb, &jp_emlrtRTEI);
+    emxEnsureCapacity_real_T(&c_st, y, nfb, &kp_emlrtRTEI);
     ncols = x->size[1] - 1;
     if (x->size[0] < 4096) {
-      d_st.site = &vv_emlrtRSI;
+      d_st.site = &wv_emlrtRSI;
       if (x->size[1] > 2147483646) {
-        e_st.site = &gc_emlrtRSI;
+        e_st.site = &hc_emlrtRSI;
         check_forloop_overflow_error(&e_st);
       }
       for (col = 0; col <= ncols; col++) {
-        d_st.site = &wj_emlrtRSI;
+        d_st.site = &xj_emlrtRSI;
         y->data[col] = c_sumColumnB(&d_st, x, col + 1, x->size[0]);
       }
     } else {
       nfb = x->size[0] / 4096;
       inb = nfb << 12;
       nleft = x->size[0] - inb;
-      d_st.site = &wv_emlrtRSI;
+      d_st.site = &xv_emlrtRSI;
       if (x->size[1] > 2147483646) {
-        e_st.site = &gc_emlrtRSI;
+        e_st.site = &hc_emlrtRSI;
         check_forloop_overflow_error(&e_st);
       }
       for (col = 0; col <= ncols; col++) {
         s = b_sumColumnB4(x, col + 1, 1);
-        d_st.site = &xj_emlrtRSI;
+        d_st.site = &yj_emlrtRSI;
         for (ib = 2; ib <= nfb; ib++) {
           s += b_sumColumnB4(x, col + 1, ((ib - 1) << 12) + 1);
         }
         if (nleft > 0) {
-          d_st.site = &yj_emlrtRSI;
+          d_st.site = &ak_emlrtRSI;
           s += d_sumColumnB(&d_st, x, col + 1, nleft, inb + 1);
         }
         y->data[col] = s;
@@ -158,11 +158,11 @@ int32_T combineVectorElements(const emlrtStack *sp, const emxArray_boolean_T *x)
   if (x->size[0] == 0) {
     y = 0;
   } else {
-    st.site = &se_emlrtRSI;
+    st.site = &te_emlrtRSI;
     y = x->data[0];
-    b_st.site = &te_emlrtRSI;
+    b_st.site = &ue_emlrtRSI;
     if ((2 <= x->size[0]) && (x->size[0] > 2147483646)) {
-      c_st.site = &gc_emlrtRSI;
+      c_st.site = &hc_emlrtRSI;
       check_forloop_overflow_error(&c_st);
     }
     for (k = 2; k <= vlen; k++) {

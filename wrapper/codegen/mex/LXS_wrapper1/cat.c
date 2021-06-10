@@ -18,7 +18,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRSInfo ic_emlrtRSI =
+static emlrtRSInfo jc_emlrtRSI =
     {
         87,    /* lineNo */
         "cat", /* fcnName */
@@ -88,18 +88,18 @@ void b_cat(const emlrtStack *sp, const emxArray_real_T *varargin_1,
     }
   }
   b = varargin_1->size[0];
-  st.site = &ic_emlrtRSI;
+  st.site = &jc_emlrtRSI;
   if ((1 <= varargin_1->size[0]) && (varargin_1->size[0] > 2147483646)) {
-    b_st.site = &gc_emlrtRSI;
+    b_st.site = &hc_emlrtRSI;
     check_forloop_overflow_error(&b_st);
   }
   for (j = 0; j < b; j++) {
     y->data[j] = varargin_1->data[j];
   }
   b_b = varargin_2->size[0] * 10;
-  st.site = &ic_emlrtRSI;
+  st.site = &jc_emlrtRSI;
   if ((1 <= b_b) && (b_b > 2147483646)) {
-    b_st.site = &gc_emlrtRSI;
+    b_st.site = &hc_emlrtRSI;
     check_forloop_overflow_error(&b_st);
   }
   for (j = 0; j < b_b; j++) {
@@ -147,18 +147,18 @@ void cat(const emlrtStack *sp, const emxArray_real_T *varargin_1,
     }
   }
   b = varargin_1->size[0];
-  st.site = &ic_emlrtRSI;
+  st.site = &jc_emlrtRSI;
   if ((1 <= varargin_1->size[0]) && (varargin_1->size[0] > 2147483646)) {
-    b_st.site = &gc_emlrtRSI;
+    b_st.site = &hc_emlrtRSI;
     check_forloop_overflow_error(&b_st);
   }
   for (j = 0; j < b; j++) {
     y->data[j] = 1.0;
   }
   b_b = varargin_2->size[0] * varargin_2->size[1];
-  st.site = &ic_emlrtRSI;
+  st.site = &jc_emlrtRSI;
   if ((1 <= b_b) && (b_b > 2147483646)) {
-    b_st.site = &gc_emlrtRSI;
+    b_st.site = &hc_emlrtRSI;
     check_forloop_overflow_error(&b_st);
   }
   for (j = 0; j < b_b; j++) {

@@ -50,133 +50,133 @@ static emlrtRSInfo emlrtRSI = {
 };
 
 static emlrtRSInfo b_emlrtRSI = {
-    963,                                              /* lineNo */
+    965,                                              /* lineNo */
     "FSRfan",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pathName */
 };
 
 static emlrtRSInfo c_emlrtRSI = {
-    961,                                              /* lineNo */
+    963,                                              /* lineNo */
     "FSRfan",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pathName */
 };
 
 static emlrtRSInfo d_emlrtRSI = {
-    937,                                              /* lineNo */
+    939,                                              /* lineNo */
     "FSRfan",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pathName */
 };
 
 static emlrtRSInfo e_emlrtRSI = {
-    926,                                              /* lineNo */
+    928,                                              /* lineNo */
     "FSRfan",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pathName */
 };
 
 static emlrtRSInfo f_emlrtRSI = {
-    923,                                              /* lineNo */
+    925,                                              /* lineNo */
     "FSRfan",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pathName */
 };
 
 static emlrtRSInfo g_emlrtRSI = {
-    909,                                              /* lineNo */
+    911,                                              /* lineNo */
     "FSRfan",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pathName */
 };
 
 static emlrtRSInfo h_emlrtRSI = {
-    905,                                              /* lineNo */
+    907,                                              /* lineNo */
     "FSRfan",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pathName */
 };
 
 static emlrtRSInfo i_emlrtRSI = {
-    882,                                              /* lineNo */
+    884,                                              /* lineNo */
     "FSRfan",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pathName */
 };
 
 static emlrtRSInfo j_emlrtRSI = {
-    867,                                              /* lineNo */
+    869,                                              /* lineNo */
     "FSRfan",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pathName */
 };
 
 static emlrtRSInfo k_emlrtRSI = {
-    860,                                              /* lineNo */
+    862,                                              /* lineNo */
     "FSRfan",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pathName */
 };
 
 static emlrtRSInfo l_emlrtRSI = {
-    853,                                              /* lineNo */
+    855,                                              /* lineNo */
     "FSRfan",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pathName */
 };
 
 static emlrtRSInfo m_emlrtRSI = {
-    841,                                              /* lineNo */
+    843,                                              /* lineNo */
     "FSRfan",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pathName */
 };
 
 static emlrtRSInfo n_emlrtRSI = {
-    814,                                              /* lineNo */
+    816,                                              /* lineNo */
     "FSRfan",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pathName */
 };
 
 static emlrtRSInfo o_emlrtRSI = {
-    808,                                              /* lineNo */
+    810,                                              /* lineNo */
     "FSRfan",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pathName */
 };
 
 static emlrtRSInfo p_emlrtRSI = {
-    805,                                              /* lineNo */
+    807,                                              /* lineNo */
     "FSRfan",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pathName */
 };
 
 static emlrtRSInfo q_emlrtRSI = {
-    803,                                              /* lineNo */
+    805,                                              /* lineNo */
     "FSRfan",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pathName */
 };
 
 static emlrtRSInfo r_emlrtRSI = {
-    792,                                              /* lineNo */
+    794,                                              /* lineNo */
     "FSRfan",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pathName */
 };
 
 static emlrtRSInfo s_emlrtRSI = {
-    783,                                              /* lineNo */
+    785,                                              /* lineNo */
     "FSRfan",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pathName */
 };
 
 static emlrtRSInfo t_emlrtRSI = {
-    778,                                              /* lineNo */
+    780,                                              /* lineNo */
     "FSRfan",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pathName */
 };
 
 static emlrtRSInfo u_emlrtRSI = {
-    759,                                              /* lineNo */
+    761,                                              /* lineNo */
     "FSRfan",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pathName */
 };
 
 static emlrtRSInfo v_emlrtRSI = {
-    740,                                              /* lineNo */
+    742,                                              /* lineNo */
     "FSRfan",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pathName */
 };
 
 static emlrtRSInfo w_emlrtRSI = {
-    723,                                              /* lineNo */
+    725,                                              /* lineNo */
     "FSRfan",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pathName */
 };
@@ -210,35 +210,35 @@ static emlrtRSInfo ge_emlrtRSI = {
 };
 
 static emlrtMCInfo emlrtMCI = {
-    845,                                              /* lineNo */
+    847,                                              /* lineNo */
     13,                                               /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
 };
 
 static emlrtMCInfo b_emlrtMCI = {
-    853,                                              /* lineNo */
+    855,                                              /* lineNo */
     17,                                               /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
 };
 
 static emlrtMCInfo c_emlrtMCI = {
-    915,                                              /* lineNo */
+    917,                                              /* lineNo */
     21,                                               /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
 };
 
 static emlrtMCInfo d_emlrtMCI = {
-    961,                                              /* lineNo */
+    963,                                              /* lineNo */
     29,                                               /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
 };
 
 static emlrtDCInfo emlrtDCI = {
-    759,                                               /* lineNo */
+    761,                                               /* lineNo */
     23,                                                /* colNo */
     "FSRfan",                                          /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m", /* pName */
@@ -248,7 +248,7 @@ static emlrtDCInfo emlrtDCI = {
 static emlrtBCInfo emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    802,                                               /* lineNo */
+    804,                                               /* lineNo */
     19,                                                /* colNo */
     "la",                                              /* aName */
     "FSRfan",                                          /* fName */
@@ -259,7 +259,7 @@ static emlrtBCInfo emlrtBCI = {
 static emlrtBCInfo b_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    821,                                               /* lineNo */
+    823,                                               /* lineNo */
     19,                                                /* colNo */
     "lms",                                             /* aName */
     "FSRfan",                                          /* fName */
@@ -268,7 +268,7 @@ static emlrtBCInfo b_emlrtBCI = {
 };
 
 static emlrtRTEInfo c_emlrtRTEI = {
-    849,                                              /* lineNo */
+    851,                                              /* lineNo */
     16,                                               /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
@@ -276,7 +276,7 @@ static emlrtRTEInfo c_emlrtRTEI = {
 
 static emlrtECInfo emlrtECI = {
     -1,                                               /* nDims */
-    923,                                              /* lineNo */
+    925,                                              /* lineNo */
     15,                                               /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
@@ -284,7 +284,7 @@ static emlrtECInfo emlrtECI = {
 
 static emlrtECInfo b_emlrtECI = {
     -1,                                               /* nDims */
-    926,                                              /* lineNo */
+    928,                                              /* lineNo */
     13,                                               /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
@@ -293,7 +293,7 @@ static emlrtECInfo b_emlrtECI = {
 static emlrtBCInfo c_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    940,                                               /* lineNo */
+    942,                                               /* lineNo */
     25,                                                /* colNo */
     "ord",                                             /* aName */
     "FSRfan",                                          /* fName */
@@ -304,7 +304,7 @@ static emlrtBCInfo c_emlrtBCI = {
 static emlrtBCInfo d_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    940,                                               /* lineNo */
+    942,                                               /* lineNo */
     28,                                                /* colNo */
     "ord",                                             /* aName */
     "FSRfan",                                          /* fName */
@@ -314,14 +314,14 @@ static emlrtBCInfo d_emlrtBCI = {
 
 static emlrtECInfo c_emlrtECI = {
     -1,                                               /* nDims */
-    955,                                              /* lineNo */
+    957,                                              /* lineNo */
     30,                                               /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
 };
 
 static emlrtDCInfo b_emlrtDCI = {
-    958,                                               /* lineNo */
+    960,                                               /* lineNo */
     31,                                                /* colNo */
     "FSRfan",                                          /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m", /* pName */
@@ -331,7 +331,7 @@ static emlrtDCInfo b_emlrtDCI = {
 static emlrtBCInfo e_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    958,                                               /* lineNo */
+    960,                                               /* lineNo */
     31,                                                /* colNo */
     "Unlai",                                           /* aName */
     "FSRfan",                                          /* fName */
@@ -341,14 +341,14 @@ static emlrtBCInfo e_emlrtBCI = {
 
 static emlrtECInfo d_emlrtECI = {
     -1,                                               /* nDims */
-    958,                                              /* lineNo */
+    960,                                              /* lineNo */
     25,                                               /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
 };
 
 static emlrtDCInfo c_emlrtDCI = {
-    963,                                               /* lineNo */
+    965,                                               /* lineNo */
     31,                                                /* colNo */
     "FSRfan",                                          /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m", /* pName */
@@ -358,7 +358,7 @@ static emlrtDCInfo c_emlrtDCI = {
 static emlrtBCInfo f_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    963,                                               /* lineNo */
+    965,                                               /* lineNo */
     31,                                                /* colNo */
     "Unlai",                                           /* aName */
     "FSRfan",                                          /* fName */
@@ -369,7 +369,7 @@ static emlrtBCInfo f_emlrtBCI = {
 static emlrtBCInfo g_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    819,                                               /* lineNo */
+    821,                                               /* lineNo */
     17,                                                /* colNo */
     "binit",                                           /* aName */
     "FSRfan",                                          /* fName */
@@ -379,7 +379,7 @@ static emlrtBCInfo g_emlrtBCI = {
 
 static emlrtECInfo e_emlrtECI = {
     -1,                                               /* nDims */
-    819,                                              /* lineNo */
+    821,                                              /* lineNo */
     9,                                                /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
@@ -388,7 +388,7 @@ static emlrtECInfo e_emlrtECI = {
 static emlrtBCInfo h_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    824,                                               /* lineNo */
+    826,                                               /* lineNo */
     17,                                                /* colNo */
     "binit",                                           /* aName */
     "FSRfan",                                          /* fName */
@@ -398,7 +398,7 @@ static emlrtBCInfo h_emlrtBCI = {
 
 static emlrtECInfo f_emlrtECI = {
     -1,                                               /* nDims */
-    824,                                              /* lineNo */
+    826,                                              /* lineNo */
     9,                                                /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
@@ -407,7 +407,7 @@ static emlrtECInfo f_emlrtECI = {
 static emlrtBCInfo i_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    971,                                               /* lineNo */
+    973,                                               /* lineNo */
     8,                                                 /* colNo */
     "Un",                                              /* aName */
     "FSRfan",                                          /* fName */
@@ -416,7 +416,7 @@ static emlrtBCInfo i_emlrtBCI = {
 };
 
 static emlrtDCInfo d_emlrtDCI = {
-    740,                                               /* lineNo */
+    742,                                               /* lineNo */
     35,                                                /* colNo */
     "FSRfan",                                          /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m", /* pName */
@@ -424,7 +424,7 @@ static emlrtDCInfo d_emlrtDCI = {
 };
 
 static emlrtDCInfo e_emlrtDCI = {
-    740,                                               /* lineNo */
+    742,                                               /* lineNo */
     35,                                                /* colNo */
     "FSRfan",                                          /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m", /* pName */
@@ -444,7 +444,7 @@ static emlrtBCInfo j_emlrtBCI = {
 };
 
 static emlrtDCInfo f_emlrtDCI = {
-    785,                                               /* lineNo */
+    787,                                               /* lineNo */
     11,                                                /* colNo */
     "FSRfan",                                          /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m", /* pName */
@@ -454,7 +454,7 @@ static emlrtDCInfo f_emlrtDCI = {
 static emlrtBCInfo k_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    785,                                               /* lineNo */
+    787,                                               /* lineNo */
     11,                                                /* colNo */
     "seq100boo",                                       /* aName */
     "FSRfan",                                          /* fName */
@@ -465,7 +465,7 @@ static emlrtBCInfo k_emlrtBCI = {
 static emlrtBCInfo l_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    808,                                               /* lineNo */
+    810,                                               /* lineNo */
     22,                                                /* colNo */
     "la",                                              /* aName */
     "FSRfan",                                          /* fName */
@@ -476,7 +476,7 @@ static emlrtBCInfo l_emlrtBCI = {
 static emlrtBCInfo m_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    805,                                               /* lineNo */
+    807,                                               /* lineNo */
     18,                                                /* colNo */
     "la",                                              /* aName */
     "FSRfan",                                          /* fName */
@@ -485,7 +485,7 @@ static emlrtBCInfo m_emlrtBCI = {
 };
 
 static emlrtDCInfo g_emlrtDCI = {
-    827,                                               /* lineNo */
+    829,                                               /* lineNo */
     10,                                                /* colNo */
     "FSRfan",                                          /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m", /* pName */
@@ -495,7 +495,7 @@ static emlrtDCInfo g_emlrtDCI = {
 static emlrtBCInfo n_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    827,                                               /* lineNo */
+    829,                                               /* lineNo */
     10,                                                /* colNo */
     "bsbT",                                            /* aName */
     "FSRfan",                                          /* fName */
@@ -506,7 +506,7 @@ static emlrtBCInfo n_emlrtBCI = {
 static emlrtBCInfo o_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    834,                                               /* lineNo */
+    836,                                               /* lineNo */
     10,                                                /* colNo */
     "z",                                               /* aName */
     "FSRfan",                                          /* fName */
@@ -517,7 +517,7 @@ static emlrtBCInfo o_emlrtBCI = {
 static emlrtBCInfo p_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    835,                                               /* lineNo */
+    837,                                               /* lineNo */
     10,                                                /* colNo */
     "y",                                               /* aName */
     "FSRfan",                                          /* fName */
@@ -528,7 +528,7 @@ static emlrtBCInfo p_emlrtBCI = {
 static emlrtBCInfo q_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    836,                                               /* lineNo */
+    838,                                               /* lineNo */
     10,                                                /* colNo */
     "X",                                               /* aName */
     "FSRfan",                                          /* fName */
@@ -539,7 +539,7 @@ static emlrtBCInfo q_emlrtBCI = {
 static emlrtBCInfo r_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    851,                                               /* lineNo */
+    853,                                               /* lineNo */
     30,                                                /* colNo */
     "seq100boo",                                       /* aName */
     "FSRfan",                                          /* fName */
@@ -550,7 +550,7 @@ static emlrtBCInfo r_emlrtBCI = {
 static emlrtBCInfo s_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    860,                                               /* lineNo */
+    862,                                               /* lineNo */
     46,                                                /* colNo */
     "la",                                              /* aName */
     "FSRfan",                                          /* fName */
@@ -561,7 +561,7 @@ static emlrtBCInfo s_emlrtBCI = {
 static emlrtBCInfo t_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    867,                                               /* lineNo */
+    869,                                               /* lineNo */
     48,                                                /* colNo */
     "la",                                              /* aName */
     "FSRfan",                                          /* fName */
@@ -572,7 +572,7 @@ static emlrtBCInfo t_emlrtBCI = {
 static emlrtBCInfo u_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    862,                                               /* lineNo */
+    864,                                               /* lineNo */
     21,                                                /* colNo */
     "Sco",                                             /* aName */
     "FSRfan",                                          /* fName */
@@ -581,7 +581,7 @@ static emlrtBCInfo u_emlrtBCI = {
 };
 
 static emlrtDCInfo h_emlrtDCI = {
-    862,                                               /* lineNo */
+    864,                                               /* lineNo */
     21,                                                /* colNo */
     "FSRfan",                                          /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m", /* pName */
@@ -591,7 +591,7 @@ static emlrtDCInfo h_emlrtDCI = {
 static emlrtBCInfo v_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    869,                                               /* lineNo */
+    871,                                               /* lineNo */
     21,                                                /* colNo */
     "Sco",                                             /* aName */
     "FSRfan",                                          /* fName */
@@ -600,7 +600,7 @@ static emlrtBCInfo v_emlrtBCI = {
 };
 
 static emlrtDCInfo i_emlrtDCI = {
-    869,                                               /* lineNo */
+    871,                                               /* lineNo */
     21,                                                /* colNo */
     "FSRfan",                                          /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m", /* pName */
@@ -610,7 +610,7 @@ static emlrtDCInfo i_emlrtDCI = {
 static emlrtBCInfo w_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    882,                                               /* lineNo */
+    884,                                               /* lineNo */
     53,                                                /* colNo */
     "la",                                              /* aName */
     "FSRfan",                                          /* fName */
@@ -621,7 +621,7 @@ static emlrtBCInfo w_emlrtBCI = {
 static emlrtBCInfo x_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    971,                                               /* lineNo */
+    973,                                               /* lineNo */
     5,                                                 /* colNo */
     "Un",                                              /* aName */
     "FSRfan",                                          /* fName */
@@ -632,7 +632,7 @@ static emlrtBCInfo x_emlrtBCI = {
 static emlrtBCInfo y_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    886,                                               /* lineNo */
+    888,                                               /* lineNo */
     21,                                                /* colNo */
     "Sco",                                             /* aName */
     "FSRfan",                                          /* fName */
@@ -641,7 +641,7 @@ static emlrtBCInfo y_emlrtBCI = {
 };
 
 static emlrtDCInfo j_emlrtDCI = {
-    886,                                               /* lineNo */
+    888,                                               /* lineNo */
     21,                                                /* colNo */
     "FSRfan",                                          /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m", /* pName */
@@ -651,7 +651,7 @@ static emlrtDCInfo j_emlrtDCI = {
 static emlrtBCInfo ab_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    887,                                               /* lineNo */
+    889,                                               /* lineNo */
     21,                                                /* colNo */
     "Scop",                                            /* aName */
     "FSRfan",                                          /* fName */
@@ -660,7 +660,7 @@ static emlrtBCInfo ab_emlrtBCI = {
 };
 
 static emlrtDCInfo k_emlrtDCI = {
-    887,                                               /* lineNo */
+    889,                                               /* lineNo */
     21,                                                /* colNo */
     "FSRfan",                                          /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m", /* pName */
@@ -670,7 +670,7 @@ static emlrtDCInfo k_emlrtDCI = {
 static emlrtBCInfo bb_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    888,                                               /* lineNo */
+    890,                                               /* lineNo */
     21,                                                /* colNo */
     "Scon",                                            /* aName */
     "FSRfan",                                          /* fName */
@@ -679,7 +679,7 @@ static emlrtBCInfo bb_emlrtBCI = {
 };
 
 static emlrtDCInfo l_emlrtDCI = {
-    888,                                               /* lineNo */
+    890,                                               /* lineNo */
     21,                                                /* colNo */
     "FSRfan",                                          /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m", /* pName */
@@ -689,7 +689,7 @@ static emlrtDCInfo l_emlrtDCI = {
 static emlrtBCInfo cb_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    890,                                               /* lineNo */
+    892,                                               /* lineNo */
     25,                                                /* colNo */
     "Scob",                                            /* aName */
     "FSRfan",                                          /* fName */
@@ -698,7 +698,7 @@ static emlrtBCInfo cb_emlrtBCI = {
 };
 
 static emlrtDCInfo m_emlrtDCI = {
-    890,                                               /* lineNo */
+    892,                                               /* lineNo */
     25,                                                /* colNo */
     "FSRfan",                                          /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m", /* pName */
@@ -708,7 +708,7 @@ static emlrtDCInfo m_emlrtDCI = {
 static emlrtBCInfo db_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    943,                                               /* lineNo */
+    945,                                               /* lineNo */
     22,                                                /* colNo */
     "bsbT",                                            /* aName */
     "FSRfan",                                          /* fName */
@@ -719,7 +719,7 @@ static emlrtBCInfo db_emlrtBCI = {
 static emlrtBCInfo eb_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    946,                                               /* lineNo */
+    948,                                               /* lineNo */
     22,                                                /* colNo */
     "X",                                               /* aName */
     "FSRfan",                                          /* fName */
@@ -730,7 +730,7 @@ static emlrtBCInfo eb_emlrtBCI = {
 static emlrtBCInfo fb_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    947,                                               /* lineNo */
+    949,                                               /* lineNo */
     22,                                                /* colNo */
     "y",                                               /* aName */
     "FSRfan",                                          /* fName */
@@ -741,7 +741,7 @@ static emlrtBCInfo fb_emlrtBCI = {
 static emlrtBCInfo gb_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    948,                                               /* lineNo */
+    950,                                               /* lineNo */
     22,                                                /* colNo */
     "z",                                               /* aName */
     "FSRfan",                                          /* fName */
@@ -752,7 +752,7 @@ static emlrtBCInfo gb_emlrtBCI = {
 static emlrtBCInfo hb_emlrtBCI = {
     -1,                                                /* iFirst */
     -1,                                                /* iLast */
-    955,                                               /* lineNo */
+    957,                                               /* lineNo */
     26,                                                /* colNo */
     "seq",                                             /* aName */
     "FSRfan",                                          /* fName */
@@ -775,28 +775,28 @@ static emlrtRTEInfo wb_emlrtRTEI = {
 };
 
 static emlrtRTEInfo xb_emlrtRTEI = {
-    735,                                              /* lineNo */
-    1,                                                /* colNo */
-    "FSRfan",                                         /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
-};
-
-static emlrtRTEInfo ac_emlrtRTEI = {
     737,                                              /* lineNo */
     1,                                                /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
 };
 
+static emlrtRTEInfo ac_emlrtRTEI = {
+    739,                                              /* lineNo */
+    1,                                                /* colNo */
+    "FSRfan",                                         /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
+};
+
 static emlrtRTEInfo bc_emlrtRTEI = {
-    740,                                              /* lineNo */
+    742,                                              /* lineNo */
     17,                                               /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
 };
 
 static emlrtRTEInfo cc_emlrtRTEI = {
-    740,                                              /* lineNo */
+    742,                                              /* lineNo */
     31,                                               /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
@@ -811,42 +811,42 @@ static emlrtRTEInfo dc_emlrtRTEI = {
 };
 
 static emlrtRTEInfo ec_emlrtRTEI = {
-    759,                                              /* lineNo */
+    761,                                              /* lineNo */
     6,                                                /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
 };
 
 static emlrtRTEInfo fc_emlrtRTEI = {
-    759,                                              /* lineNo */
+    761,                                              /* lineNo */
     1,                                                /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
 };
 
 static emlrtRTEInfo gc_emlrtRTEI = {
-    765,                                              /* lineNo */
-    1,                                                /* colNo */
-    "FSRfan",                                         /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
-};
-
-static emlrtRTEInfo hc_emlrtRTEI = {
-    766,                                              /* lineNo */
-    1,                                                /* colNo */
-    "FSRfan",                                         /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
-};
-
-static emlrtRTEInfo ic_emlrtRTEI = {
     767,                                              /* lineNo */
     1,                                                /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
 };
 
+static emlrtRTEInfo hc_emlrtRTEI = {
+    768,                                              /* lineNo */
+    1,                                                /* colNo */
+    "FSRfan",                                         /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
+};
+
+static emlrtRTEInfo ic_emlrtRTEI = {
+    769,                                              /* lineNo */
+    1,                                                /* colNo */
+    "FSRfan",                                         /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
+};
+
 static emlrtRTEInfo jc_emlrtRTEI = {
-    778,                                              /* lineNo */
+    780,                                              /* lineNo */
     1,                                                /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
@@ -883,28 +883,28 @@ static emlrtRTEInfo mc_emlrtRTEI =
 };
 
 static emlrtRTEInfo nc_emlrtRTEI = {
-    782,                                              /* lineNo */
-    1,                                                /* colNo */
-    "FSRfan",                                         /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
-};
-
-static emlrtRTEInfo oc_emlrtRTEI = {
-    783,                                              /* lineNo */
-    8,                                                /* colNo */
-    "FSRfan",                                         /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
-};
-
-static emlrtRTEInfo pc_emlrtRTEI = {
     784,                                              /* lineNo */
     1,                                                /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
 };
 
-static emlrtRTEInfo qc_emlrtRTEI = {
+static emlrtRTEInfo oc_emlrtRTEI = {
     785,                                              /* lineNo */
+    8,                                                /* colNo */
+    "FSRfan",                                         /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
+};
+
+static emlrtRTEInfo pc_emlrtRTEI = {
+    786,                                              /* lineNo */
+    1,                                                /* colNo */
+    "FSRfan",                                         /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
+};
+
+static emlrtRTEInfo qc_emlrtRTEI = {
+    787,                                              /* lineNo */
     11,                                               /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
@@ -918,112 +918,112 @@ static emlrtRTEInfo rc_emlrtRTEI = {
 };
 
 static emlrtRTEInfo sc_emlrtRTEI = {
-    978,                                              /* lineNo */
+    980,                                              /* lineNo */
     1,                                                /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
 };
 
 static emlrtRTEInfo tc_emlrtRTEI = {
-    803,                                              /* lineNo */
+    805,                                              /* lineNo */
     13,                                               /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
 };
 
 static emlrtRTEInfo uc_emlrtRTEI = {
-    992,                                              /* lineNo */
-    5,                                                /* colNo */
-    "FSRfan",                                         /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
-};
-
-static emlrtRTEInfo vc_emlrtRTEI = {
-    989,                                              /* lineNo */
-    9,                                                /* colNo */
-    "FSRfan",                                         /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
-};
-
-static emlrtRTEInfo wc_emlrtRTEI = {
-    816,                                              /* lineNo */
-    9,                                                /* colNo */
-    "FSRfan",                                         /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
-};
-
-static emlrtRTEInfo xc_emlrtRTEI = {
-    993,                                              /* lineNo */
-    5,                                                /* colNo */
-    "FSRfan",                                         /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
-};
-
-static emlrtRTEInfo yc_emlrtRTEI = {
-    821,                                              /* lineNo */
-    9,                                                /* colNo */
-    "FSRfan",                                         /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
-};
-
-static emlrtRTEInfo ad_emlrtRTEI = {
     994,                                              /* lineNo */
     5,                                                /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
 };
 
+static emlrtRTEInfo vc_emlrtRTEI = {
+    991,                                              /* lineNo */
+    9,                                                /* colNo */
+    "FSRfan",                                         /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
+};
+
+static emlrtRTEInfo wc_emlrtRTEI = {
+    818,                                              /* lineNo */
+    9,                                                /* colNo */
+    "FSRfan",                                         /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
+};
+
+static emlrtRTEInfo xc_emlrtRTEI = {
+    995,                                              /* lineNo */
+    5,                                                /* colNo */
+    "FSRfan",                                         /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
+};
+
+static emlrtRTEInfo yc_emlrtRTEI = {
+    823,                                              /* lineNo */
+    9,                                                /* colNo */
+    "FSRfan",                                         /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
+};
+
+static emlrtRTEInfo ad_emlrtRTEI = {
+    996,                                              /* lineNo */
+    5,                                                /* colNo */
+    "FSRfan",                                         /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
+};
+
 static emlrtRTEInfo bd_emlrtRTEI = {
-    827,                                              /* lineNo */
+    829,                                              /* lineNo */
     10,                                               /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
 };
 
 static emlrtRTEInfo cd_emlrtRTEI = {
-    834,                                              /* lineNo */
-    5,                                                /* colNo */
-    "FSRfan",                                         /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
-};
-
-static emlrtRTEInfo dd_emlrtRTEI = {
-    835,                                              /* lineNo */
-    5,                                                /* colNo */
-    "FSRfan",                                         /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
-};
-
-static emlrtRTEInfo ed_emlrtRTEI = {
     836,                                              /* lineNo */
     5,                                                /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
 };
 
+static emlrtRTEInfo dd_emlrtRTEI = {
+    837,                                              /* lineNo */
+    5,                                                /* colNo */
+    "FSRfan",                                         /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
+};
+
+static emlrtRTEInfo ed_emlrtRTEI = {
+    838,                                              /* lineNo */
+    5,                                                /* colNo */
+    "FSRfan",                                         /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
+};
+
 static emlrtRTEInfo fd_emlrtRTEI = {
-    839,                                              /* lineNo */
+    841,                                              /* lineNo */
     5,                                                /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
 };
 
 static emlrtRTEInfo gd_emlrtRTEI = {
-    971,                                              /* lineNo */
+    973,                                              /* lineNo */
     5,                                                /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
 };
 
 static emlrtRTEInfo hd_emlrtRTEI = {
-    923,                                              /* lineNo */
+    925,                                              /* lineNo */
     15,                                               /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
 };
 
 static emlrtRTEInfo id_emlrtRTEI = {
-    932,                                              /* lineNo */
+    934,                                              /* lineNo */
     17,                                               /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
@@ -1039,56 +1039,56 @@ static emlrtRTEInfo jd_emlrtRTEI = {
 };
 
 static emlrtRTEInfo ld_emlrtRTEI = {
-    942,                                              /* lineNo */
+    944,                                              /* lineNo */
     17,                                               /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
 };
 
 static emlrtRTEInfo md_emlrtRTEI = {
-    943,                                              /* lineNo */
+    945,                                              /* lineNo */
     22,                                               /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
 };
 
 static emlrtRTEInfo nd_emlrtRTEI = {
-    946,                                              /* lineNo */
-    17,                                               /* colNo */
-    "FSRfan",                                         /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
-};
-
-static emlrtRTEInfo od_emlrtRTEI = {
-    947,                                              /* lineNo */
-    17,                                               /* colNo */
-    "FSRfan",                                         /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
-};
-
-static emlrtRTEInfo pd_emlrtRTEI = {
     948,                                              /* lineNo */
     17,                                               /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
 };
 
+static emlrtRTEInfo od_emlrtRTEI = {
+    949,                                              /* lineNo */
+    17,                                               /* colNo */
+    "FSRfan",                                         /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
+};
+
+static emlrtRTEInfo pd_emlrtRTEI = {
+    950,                                              /* lineNo */
+    17,                                               /* colNo */
+    "FSRfan",                                         /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
+};
+
 static emlrtRTEInfo qd_emlrtRTEI = {
-    740,                                              /* lineNo */
+    742,                                              /* lineNo */
     1,                                                /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
 };
 
 static emlrtRTEInfo rd_emlrtRTEI = {
-    792,                                              /* lineNo */
+    794,                                              /* lineNo */
     2,                                                /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
 };
 
 static emlrtRTEInfo sd_emlrtRTEI = {
-    955,                                              /* lineNo */
+    957,                                              /* lineNo */
     21,                                               /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
@@ -1103,39 +1103,39 @@ static emlrtRTEInfo td_emlrtRTEI = {
 };
 
 static emlrtRTEInfo ud_emlrtRTEI = {
-    737,                                              /* lineNo */
+    739,                                              /* lineNo */
     6,                                                /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
 };
 
 static emlrtRTEInfo vd_emlrtRTEI = {
-    814,                                              /* lineNo */
+    816,                                              /* lineNo */
     9,                                                /* colNo */
     "FSRfan",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pName */
 };
 
 static emlrtRSInfo vt_emlrtRSI = {
-    845,                                              /* lineNo */
+    847,                                              /* lineNo */
     "FSRfan",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pathName */
 };
 
 static emlrtRSInfo wt_emlrtRSI = {
-    961,                                              /* lineNo */
+    963,                                              /* lineNo */
     "FSRfan",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pathName */
 };
 
 static emlrtRSInfo xt_emlrtRSI = {
-    853,                                              /* lineNo */
+    855,                                              /* lineNo */
     "FSRfan",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pathName */
 };
 
 static emlrtRSInfo yt_emlrtRSI = {
-    915,                                              /* lineNo */
+    917,                                              /* lineNo */
     "FSRfan",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\FSRfan.m" /* pathName */
 };
@@ -1677,7 +1677,7 @@ void FSRfan_wrapper(const emlrtStack *sp, const emxArray_real_T *y,
   /*        ylimy   :  Minimum and maximum of the y axis. Vector. */
   /*                    Default value for ylimy(1)=max(min(score_test),-20). */
   /*                    Default value for ylimy(2)=min(max(score_test),20). */
-  /*                    Example - 'ylimx',[0 1] */
+  /*                    Example - 'ylimy',[0 1] */
   /*                    Data Types - double */
   /*  */
   /*   Output: */

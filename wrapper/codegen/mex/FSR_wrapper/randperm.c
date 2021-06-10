@@ -97,7 +97,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    lg_emlrtRTEI =
+    kg_emlrtRTEI =
         {
             24,         /* lineNo */
             5,          /* colNo */
@@ -108,7 +108,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    mg_emlrtRTEI =
+    lg_emlrtRTEI =
         {
             62,         /* lineNo */
             5,          /* colNo */
@@ -119,7 +119,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    ng_emlrtRTEI =
+    mg_emlrtRTEI =
         {
             63,         /* lineNo */
             5,          /* colNo */
@@ -130,7 +130,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    og_emlrtRTEI =
+    ng_emlrtRTEI =
         {
             64,         /* lineNo */
             5,          /* colNo */
@@ -141,7 +141,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    pg_emlrtRTEI =
+    og_emlrtRTEI =
         {
             65,         /* lineNo */
             5,          /* colNo */
@@ -196,7 +196,7 @@ void randperm(const emlrtStack *sp, real_T n, real_T k, emxArray_real_T *p)
   p->size[0] = 1;
   loop_ub_tmp = (int32_T)k;
   p->size[1] = (int32_T)k;
-  emxEnsureCapacity_real_T(&st, p, i, &lg_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, p, i, &kg_emlrtRTEI);
   for (i = 0; i < loop_ub_tmp; i++) {
     p->data[i] = 0.0;
   }
@@ -235,31 +235,31 @@ void randperm(const emlrtStack *sp, real_T n, real_T k, emxArray_real_T *p)
         p->data[(int32_T)(j + 1.0) - 1] = t;
       }
     } else {
-      emxInit_real_T(&st, &hashTbl, 1, &mg_emlrtRTEI, true);
+      emxInit_real_T(&st, &hashTbl, 1, &lg_emlrtRTEI, true);
       i = hashTbl->size[0];
       hashTbl->size[0] = (int32_T)k;
-      emxEnsureCapacity_real_T(&st, hashTbl, i, &mg_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, hashTbl, i, &lg_emlrtRTEI);
       for (i = 0; i < loop_ub_tmp; i++) {
         hashTbl->data[i] = 0.0;
       }
-      emxInit_real_T(&st, &link, 1, &ng_emlrtRTEI, true);
+      emxInit_real_T(&st, &link, 1, &mg_emlrtRTEI, true);
       i = link->size[0];
       link->size[0] = (int32_T)k;
-      emxEnsureCapacity_real_T(&st, link, i, &ng_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, link, i, &mg_emlrtRTEI);
       for (i = 0; i < loop_ub_tmp; i++) {
         link->data[i] = 0.0;
       }
-      emxInit_real_T(&st, &val, 1, &og_emlrtRTEI, true);
+      emxInit_real_T(&st, &val, 1, &ng_emlrtRTEI, true);
       i = val->size[0];
       val->size[0] = (int32_T)k;
-      emxEnsureCapacity_real_T(&st, val, i, &og_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, val, i, &ng_emlrtRTEI);
       for (i = 0; i < loop_ub_tmp; i++) {
         val->data[i] = 0.0;
       }
-      emxInit_real_T(&st, &loc, 1, &pg_emlrtRTEI, true);
+      emxInit_real_T(&st, &loc, 1, &og_emlrtRTEI, true);
       i = loc->size[0];
       loc->size[0] = (int32_T)k;
-      emxEnsureCapacity_real_T(&st, loc, i, &pg_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, loc, i, &og_emlrtRTEI);
       for (i = 0; i < loop_ub_tmp; i++) {
         loc->data[i] = 0.0;
       }

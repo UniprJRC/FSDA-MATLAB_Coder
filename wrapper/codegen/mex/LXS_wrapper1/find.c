@@ -19,7 +19,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRSInfo vc_emlrtRSI = {
+static emlrtRSInfo wc_emlrtRSI = {
     144,        /* lineNo */
     "eml_find", /* fcnName */
     "C:\\Program "
@@ -27,7 +27,7 @@ static emlrtRSInfo vc_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRSInfo wc_emlrtRSI = {
+static emlrtRSInfo xc_emlrtRSI = {
     382,                  /* lineNo */
     "find_first_indices", /* fcnName */
     "C:\\Program "
@@ -35,7 +35,7 @@ static emlrtRSInfo wc_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRSInfo sf_emlrtRSI = {
+static emlrtRSInfo tf_emlrtRSI = {
     402,                  /* lineNo */
     "find_first_indices", /* fcnName */
     "C:\\Program "
@@ -79,7 +79,7 @@ static emlrtRTEInfo oe_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo ag_emlrtRTEI = {
+static emlrtRTEInfo bg_emlrtRTEI = {
     369,    /* lineNo */
     24,     /* colNo */
     "find", /* fName */
@@ -88,7 +88,7 @@ static emlrtRTEInfo ag_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo bg_emlrtRTEI = {
+static emlrtRTEInfo cg_emlrtRTEI = {
     402,    /* lineNo */
     5,      /* colNo */
     "find", /* fName */
@@ -97,7 +97,7 @@ static emlrtRTEInfo bg_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo cg_emlrtRTEI = {
+static emlrtRTEInfo dg_emlrtRTEI = {
     144,    /* lineNo */
     13,     /* colNo */
     "find", /* fName */
@@ -133,15 +133,15 @@ void b_eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
                                   "Coder:builtins:AssertionFailed",
                                   "Coder:builtins:AssertionFailed", 0);
   }
-  emxInit_int32_T(sp, &i, 1, &cg_emlrtRTEI, true);
-  st.site = &vc_emlrtRSI;
+  emxInit_int32_T(sp, &i, 1, &dg_emlrtRTEI, true);
+  st.site = &wc_emlrtRSI;
   idx = 0;
   b_i = i->size[0];
   i->size[0] = k;
-  emxEnsureCapacity_int32_T(&st, i, b_i, &ag_emlrtRTEI);
-  b_st.site = &wc_emlrtRSI;
+  emxEnsureCapacity_int32_T(&st, i, b_i, &bg_emlrtRTEI);
+  b_st.site = &xc_emlrtRSI;
   if ((1 <= x->size[0]) && (x->size[0] > 2147483646)) {
-    c_st.site = &gc_emlrtRSI;
+    c_st.site = &hc_emlrtRSI;
     check_forloop_overflow_error(&c_st);
   }
   ii = 0;
@@ -172,11 +172,11 @@ void b_eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
     b_i = (1 <= idx);
     iv[0] = 1;
     iv[1] = b_i;
-    b_st.site = &sf_emlrtRSI;
+    b_st.site = &tf_emlrtRSI;
     b_indexShapeCheck(&b_st, i->size[0], iv);
     ii = i->size[0];
     i->size[0] = b_i;
-    emxEnsureCapacity_int32_T(&st, i, ii, &bg_emlrtRTEI);
+    emxEnsureCapacity_int32_T(&st, i, ii, &cg_emlrtRTEI);
   }
   *i_size = i->size[0];
   ii = i->size[0];
@@ -206,14 +206,14 @@ void c_eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   nx = x->size[0];
-  st.site = &vc_emlrtRSI;
+  st.site = &wc_emlrtRSI;
   idx = 0;
   b_i = i->size[0];
   i->size[0] = x->size[0];
-  emxEnsureCapacity_int32_T(&st, i, b_i, &ag_emlrtRTEI);
-  b_st.site = &wc_emlrtRSI;
+  emxEnsureCapacity_int32_T(&st, i, b_i, &bg_emlrtRTEI);
+  b_st.site = &xc_emlrtRSI;
   if ((1 <= x->size[0]) && (x->size[0] > 2147483646)) {
-    c_st.site = &gc_emlrtRSI;
+    c_st.site = &hc_emlrtRSI;
     check_forloop_overflow_error(&c_st);
   }
   ii = 0;
@@ -248,7 +248,7 @@ void c_eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
     }
     iv[0] = 1;
     iv[1] = b_i;
-    b_st.site = &sf_emlrtRSI;
+    b_st.site = &tf_emlrtRSI;
     b_indexShapeCheck(&b_st, i->size[0], iv);
     ii = i->size[0];
     i->size[0] = b_i;
@@ -273,15 +273,15 @@ void eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   nx = x->size[1];
-  st.site = &vc_emlrtRSI;
+  st.site = &wc_emlrtRSI;
   idx = 0;
   ii = i->size[0] * i->size[1];
   i->size[0] = 1;
   i->size[1] = x->size[1];
   emxEnsureCapacity_int32_T(&st, i, ii, &ne_emlrtRTEI);
-  b_st.site = &wc_emlrtRSI;
+  b_st.site = &xc_emlrtRSI;
   if ((1 <= x->size[1]) && (x->size[1] > 2147483646)) {
-    c_st.site = &gc_emlrtRSI;
+    c_st.site = &hc_emlrtRSI;
     check_forloop_overflow_error(&c_st);
   }
   ii = 0;

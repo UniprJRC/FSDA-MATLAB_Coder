@@ -143,7 +143,7 @@ static emlrtRSInfo iab_emlrtRSI = {
     "reflapack\\xzunormqr.m" /* pathName */
 };
 
-static emlrtRTEInfo cib_emlrtRTEI = {
+static emlrtRTEInfo bib_emlrtRTEI = {
     31,                /* lineNo */
     5,                 /* colNo */
     "mrdivide_helper", /* fName */
@@ -152,7 +152,7 @@ static emlrtRTEInfo cib_emlrtRTEI = {
     "helper.m" /* pName */
 };
 
-static emlrtRTEInfo dib_emlrtRTEI = {
+static emlrtRTEInfo cib_emlrtRTEI = {
     44,                /* lineNo */
     35,                /* colNo */
     "mrdivide_helper", /* fName */
@@ -162,7 +162,7 @@ static emlrtRTEInfo dib_emlrtRTEI = {
 };
 
 static emlrtRTEInfo
-    eib_emlrtRTEI =
+    dib_emlrtRTEI =
         {
             85,        /* lineNo */
             1,         /* colNo */
@@ -172,7 +172,7 @@ static emlrtRTEInfo
             "internal\\qrsolve.m" /* pName */
 };
 
-static emlrtRTEInfo fib_emlrtRTEI = {
+static emlrtRTEInfo eib_emlrtRTEI = {
     44,                /* lineNo */
     5,                 /* colNo */
     "mrdivide_helper", /* fName */
@@ -181,7 +181,7 @@ static emlrtRTEInfo fib_emlrtRTEI = {
     "helper.m" /* pName */
 };
 
-static emlrtRTEInfo gib_emlrtRTEI = {
+static emlrtRTEInfo fib_emlrtRTEI = {
     44,                /* lineNo */
     9,                 /* colNo */
     "mrdivide_helper", /* fName */
@@ -190,7 +190,7 @@ static emlrtRTEInfo gib_emlrtRTEI = {
     "helper.m" /* pName */
 };
 
-static emlrtRTEInfo hib_emlrtRTEI = {
+static emlrtRTEInfo gib_emlrtRTEI = {
     25,                /* lineNo */
     14,                /* colNo */
     "mrdivide_helper", /* fName */
@@ -250,19 +250,19 @@ void mrdiv(const emlrtStack *sp, emxArray_real_T *A, const emxArray_real_T *B)
   g_st.prev = &f_st;
   g_st.tls = f_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  emxInit_real_T(sp, &Y, 2, &gib_emlrtRTEI, true);
-  emxInit_real_T(sp, &b_B, 2, &dib_emlrtRTEI, true);
-  emxInit_real_T(sp, &b_A, 2, &hib_emlrtRTEI, true);
-  emxInit_real_T(sp, &tau, 1, &hib_emlrtRTEI, true);
-  emxInit_int32_T(sp, &jpvt, 2, &hib_emlrtRTEI, true);
-  emxInit_ptrdiff_t(sp, &ipiv_t, 1, &qq_emlrtRTEI, true);
-  emxInit_ptrdiff_t(sp, &r, 1, &lq_emlrtRTEI, true);
+  emxInit_real_T(sp, &Y, 2, &fib_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_B, 2, &cib_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_A, 2, &gib_emlrtRTEI, true);
+  emxInit_real_T(sp, &tau, 1, &gib_emlrtRTEI, true);
+  emxInit_int32_T(sp, &jpvt, 2, &gib_emlrtRTEI, true);
+  emxInit_ptrdiff_t(sp, &ipiv_t, 1, &pq_emlrtRTEI, true);
+  emxInit_ptrdiff_t(sp, &r, 1, &kq_emlrtRTEI, true);
   if ((A->size[0] == 0) || (A->size[1] == 0) ||
       ((B->size[0] == 0) || (B->size[1] == 0))) {
     m = A->size[0];
     i = A->size[0] * A->size[1];
     A->size[1] = B->size[0];
-    emxEnsureCapacity_real_T(sp, A, i, &cib_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, A, i, &bib_emlrtRTEI);
     nb = B->size[0];
     for (i = 0; i < nb; i++) {
       for (a_tmp = 0; a_tmp < m; a_tmp++) {
@@ -278,7 +278,7 @@ void mrdiv(const emlrtStack *sp, emxArray_real_T *A, const emxArray_real_T *B)
     i = b_A->size[0] * b_A->size[1];
     b_A->size[0] = B->size[0];
     b_A->size[1] = B->size[1];
-    emxEnsureCapacity_real_T(&d_st, b_A, i, &kq_emlrtRTEI);
+    emxEnsureCapacity_real_T(&d_st, b_A, i, &jq_emlrtRTEI);
     nb = B->size[0] * B->size[1];
     for (i = 0; i < nb; i++) {
       b_A->data[i] = B->data[i];
@@ -288,7 +288,7 @@ void mrdiv(const emlrtStack *sp, emxArray_real_T *A, const emxArray_real_T *B)
     repmat(&f_st, (ptrdiff_t)0.0, muIntScalarMin_sint32(info, info), r);
     i = ipiv_t->size[0];
     ipiv_t->size[0] = r->size[0];
-    emxEnsureCapacity_ptrdiff_t(&e_st, ipiv_t, i, &lq_emlrtRTEI);
+    emxEnsureCapacity_ptrdiff_t(&e_st, ipiv_t, i, &kq_emlrtRTEI);
     nrc_t = LAPACKE_dgetrf_work(102, (ptrdiff_t)B->size[1],
                                 (ptrdiff_t)B->size[1], &b_A->data[0],
                                 (ptrdiff_t)B->size[1], &ipiv_t->data[0]);
@@ -296,7 +296,7 @@ void mrdiv(const emlrtStack *sp, emxArray_real_T *A, const emxArray_real_T *B)
     i = jpvt->size[0] * jpvt->size[1];
     jpvt->size[0] = 1;
     jpvt->size[1] = ipiv_t->size[0];
-    emxEnsureCapacity_int32_T(&e_st, jpvt, i, &mq_emlrtRTEI);
+    emxEnsureCapacity_int32_T(&e_st, jpvt, i, &lq_emlrtRTEI);
     f_st.site = &ow_emlrtRSI;
     if (info < 0) {
       if (info == -1010) {
@@ -372,7 +372,7 @@ void mrdiv(const emlrtStack *sp, emxArray_real_T *A, const emxArray_real_T *B)
     i = b_B->size[0] * b_B->size[1];
     b_B->size[0] = A->size[1];
     b_B->size[1] = A->size[0];
-    emxEnsureCapacity_real_T(&st, b_B, i, &dib_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, b_B, i, &cib_emlrtRTEI);
     nb = A->size[0];
     for (i = 0; i < nb; i++) {
       info = A->size[1];
@@ -383,7 +383,7 @@ void mrdiv(const emlrtStack *sp, emxArray_real_T *A, const emxArray_real_T *B)
     i = b_A->size[0] * b_A->size[1];
     b_A->size[0] = B->size[1];
     b_A->size[1] = B->size[0];
-    emxEnsureCapacity_real_T(&st, b_A, i, &px_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, b_A, i, &ox_emlrtRTEI);
     nb = B->size[0];
     for (i = 0; i < nb; i++) {
       info = B->size[1];
@@ -400,7 +400,7 @@ void mrdiv(const emlrtStack *sp, emxArray_real_T *A, const emxArray_real_T *B)
     i = Y->size[0] * Y->size[1];
     Y->size[0] = b_A->size[1];
     Y->size[1] = b_B->size[1];
-    emxEnsureCapacity_real_T(&b_st, Y, i, &eib_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, Y, i, &dib_emlrtRTEI);
     nb = b_A->size[1] * b_B->size[1];
     for (i = 0; i < nb; i++) {
       Y->data[i] = 0.0;
@@ -465,7 +465,7 @@ void mrdiv(const emlrtStack *sp, emxArray_real_T *A, const emxArray_real_T *B)
           i = b_B->size[0] * b_B->size[1];
           b_B->size[0] = m;
           b_B->size[1] = info;
-          emxEnsureCapacity_real_T(&d_st, b_B, i, &tx_emlrtRTEI);
+          emxEnsureCapacity_real_T(&d_st, b_B, i, &sx_emlrtRTEI);
           nb = m * info;
           for (i = 0; i < nb; i++) {
             b_B->data[i] = rtNaN;
@@ -503,7 +503,7 @@ void mrdiv(const emlrtStack *sp, emxArray_real_T *A, const emxArray_real_T *B)
     i = A->size[0] * A->size[1];
     A->size[0] = Y->size[1];
     A->size[1] = Y->size[0];
-    emxEnsureCapacity_real_T(sp, A, i, &fib_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, A, i, &eib_emlrtRTEI);
     nb = Y->size[0];
     for (i = 0; i < nb; i++) {
       info = Y->size[1];

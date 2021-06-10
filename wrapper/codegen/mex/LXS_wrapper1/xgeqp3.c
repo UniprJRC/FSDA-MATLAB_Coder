@@ -21,7 +21,7 @@
 #include <stddef.h>
 
 /* Variable Definitions */
-static emlrtRSInfo oy_emlrtRSI = {
+static emlrtRSInfo py_emlrtRSI = {
     63,       /* lineNo */
     "xgeqp3", /* fcnName */
     "C:\\Program "
@@ -29,7 +29,7 @@ static emlrtRSInfo oy_emlrtRSI = {
     "lapack\\xgeqp3.m" /* pathName */
 };
 
-static emlrtRSInfo py_emlrtRSI = {
+static emlrtRSInfo qy_emlrtRSI = {
     98,             /* lineNo */
     "ceval_xgeqp3", /* fcnName */
     "C:\\Program "
@@ -37,7 +37,7 @@ static emlrtRSInfo py_emlrtRSI = {
     "lapack\\xgeqp3.m" /* pathName */
 };
 
-static emlrtRSInfo qy_emlrtRSI = {
+static emlrtRSInfo ry_emlrtRSI = {
     138,            /* lineNo */
     "ceval_xgeqp3", /* fcnName */
     "C:\\Program "
@@ -45,7 +45,7 @@ static emlrtRSInfo qy_emlrtRSI = {
     "lapack\\xgeqp3.m" /* pathName */
 };
 
-static emlrtRSInfo ry_emlrtRSI = {
+static emlrtRSInfo sy_emlrtRSI = {
     141,            /* lineNo */
     "ceval_xgeqp3", /* fcnName */
     "C:\\Program "
@@ -53,7 +53,7 @@ static emlrtRSInfo ry_emlrtRSI = {
     "lapack\\xgeqp3.m" /* pathName */
 };
 
-static emlrtRSInfo sy_emlrtRSI = {
+static emlrtRSInfo ty_emlrtRSI = {
     143,            /* lineNo */
     "ceval_xgeqp3", /* fcnName */
     "C:\\Program "
@@ -61,7 +61,7 @@ static emlrtRSInfo sy_emlrtRSI = {
     "lapack\\xgeqp3.m" /* pathName */
 };
 
-static emlrtRSInfo ty_emlrtRSI = {
+static emlrtRSInfo uy_emlrtRSI = {
     148,            /* lineNo */
     "ceval_xgeqp3", /* fcnName */
     "C:\\Program "
@@ -69,7 +69,7 @@ static emlrtRSInfo ty_emlrtRSI = {
     "lapack\\xgeqp3.m" /* pathName */
 };
 
-static emlrtRSInfo uy_emlrtRSI = {
+static emlrtRSInfo vy_emlrtRSI = {
     151,            /* lineNo */
     "ceval_xgeqp3", /* fcnName */
     "C:\\Program "
@@ -77,7 +77,7 @@ static emlrtRSInfo uy_emlrtRSI = {
     "lapack\\xgeqp3.m" /* pathName */
 };
 
-static emlrtRSInfo vy_emlrtRSI = {
+static emlrtRSInfo wy_emlrtRSI = {
     154,            /* lineNo */
     "ceval_xgeqp3", /* fcnName */
     "C:\\Program "
@@ -85,7 +85,7 @@ static emlrtRSInfo vy_emlrtRSI = {
     "lapack\\xgeqp3.m" /* pathName */
 };
 
-static emlrtRSInfo wy_emlrtRSI = {
+static emlrtRSInfo xy_emlrtRSI = {
     158,            /* lineNo */
     "ceval_xgeqp3", /* fcnName */
     "C:\\Program "
@@ -93,7 +93,7 @@ static emlrtRSInfo wy_emlrtRSI = {
     "lapack\\xgeqp3.m" /* pathName */
 };
 
-static emlrtRTEInfo sab_emlrtRTEI = {
+static emlrtRTEInfo tab_emlrtRTEI = {
     61,       /* lineNo */
     9,        /* colNo */
     "xgeqp3", /* fName */
@@ -102,7 +102,7 @@ static emlrtRTEInfo sab_emlrtRTEI = {
     "lapack\\xgeqp3.m" /* pName */
 };
 
-static emlrtRTEInfo tab_emlrtRTEI = {
+static emlrtRTEInfo uab_emlrtRTEI = {
     92,       /* lineNo */
     22,       /* colNo */
     "xgeqp3", /* fName */
@@ -111,7 +111,7 @@ static emlrtRTEInfo tab_emlrtRTEI = {
     "lapack\\xgeqp3.m" /* pName */
 };
 
-static emlrtRTEInfo uab_emlrtRTEI = {
+static emlrtRTEInfo vab_emlrtRTEI = {
     105,      /* lineNo */
     1,        /* colNo */
     "xgeqp3", /* fName */
@@ -120,7 +120,7 @@ static emlrtRTEInfo uab_emlrtRTEI = {
     "lapack\\xgeqp3.m" /* pName */
 };
 
-static emlrtRTEInfo vab_emlrtRTEI = {
+static emlrtRTEInfo wab_emlrtRTEI = {
     97,       /* lineNo */
     5,        /* colNo */
     "xgeqp3", /* fName */
@@ -159,30 +159,30 @@ void xgeqp3(const emlrtStack *sp, emxArray_real_T *A, emxArray_real_T *tau,
   i = jpvt->size[0] * jpvt->size[1];
   jpvt->size[0] = 1;
   jpvt->size[1] = A->size[1];
-  emxEnsureCapacity_int32_T(sp, jpvt, i, &sab_emlrtRTEI);
+  emxEnsureCapacity_int32_T(sp, jpvt, i, &tab_emlrtRTEI);
   b_na = A->size[1];
   for (i = 0; i < b_na; i++) {
     jpvt->data[i] = 0;
   }
-  st.site = &oy_emlrtRSI;
+  st.site = &py_emlrtRSI;
   ma = A->size[0];
   b_na = A->size[1];
   minmana = muIntScalarMin_sint32(ma, b_na);
   i = tau->size[0];
   tau->size[0] = minmana;
-  emxEnsureCapacity_real_T(&st, tau, i, &tab_emlrtRTEI);
-  emxInit_ptrdiff_t(&st, &jpvt_t, 1, &uab_emlrtRTEI, true);
+  emxEnsureCapacity_real_T(&st, tau, i, &uab_emlrtRTEI);
+  emxInit_ptrdiff_t(&st, &jpvt_t, 1, &vab_emlrtRTEI, true);
   if ((A->size[0] == 0) || (A->size[1] == 0) || (A->size[0] < 1) ||
       (A->size[1] < 1)) {
     i = tau->size[0];
     tau->size[0] = minmana;
-    emxEnsureCapacity_real_T(&st, tau, i, &vab_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, tau, i, &wab_emlrtRTEI);
     for (i = 0; i < minmana; i++) {
       tau->data[i] = 0.0;
     }
-    b_st.site = &py_emlrtRSI;
+    b_st.site = &qy_emlrtRSI;
     if ((1 <= A->size[1]) && (A->size[1] > 2147483646)) {
-      c_st.site = &gc_emlrtRSI;
+      c_st.site = &hc_emlrtRSI;
       check_forloop_overflow_error(&c_st);
     }
     for (ma = 0; ma < na; ma++) {
@@ -191,7 +191,7 @@ void xgeqp3(const emlrtStack *sp, emxArray_real_T *A, emxArray_real_T *tau,
   } else {
     i = jpvt_t->size[0];
     jpvt_t->size[0] = A->size[1];
-    emxEnsureCapacity_ptrdiff_t(&st, jpvt_t, i, &uab_emlrtRTEI);
+    emxEnsureCapacity_ptrdiff_t(&st, jpvt_t, i, &vab_emlrtRTEI);
     b_na = A->size[1];
     for (i = 0; i < b_na; i++) {
       jpvt_t->data[i] = (ptrdiff_t)0;
@@ -200,7 +200,7 @@ void xgeqp3(const emlrtStack *sp, emxArray_real_T *A, emxArray_real_T *tau,
                             &A->data[0], (ptrdiff_t)A->size[0],
                             &jpvt_t->data[0], &tau->data[0]);
     b_na = (int32_T)info_t;
-    b_st.site = &qy_emlrtRSI;
+    b_st.site = &ry_emlrtRSI;
     if (b_na != 0) {
       p = true;
       if (b_na != -4) {
@@ -218,15 +218,15 @@ void xgeqp3(const emlrtStack *sp, emxArray_real_T *A, emxArray_real_T *tau,
       p = false;
     }
     if (p) {
-      b_st.site = &ry_emlrtRSI;
+      b_st.site = &sy_emlrtRSI;
       if ((1 <= na) && (na > 2147483646)) {
-        c_st.site = &gc_emlrtRSI;
+        c_st.site = &hc_emlrtRSI;
         check_forloop_overflow_error(&c_st);
       }
       for (b_na = 0; b_na < na; b_na++) {
-        b_st.site = &sy_emlrtRSI;
+        b_st.site = &ty_emlrtRSI;
         if ((1 <= m) && (m > 2147483646)) {
-          c_st.site = &gc_emlrtRSI;
+          c_st.site = &hc_emlrtRSI;
           check_forloop_overflow_error(&c_st);
         }
         for (i = 0; i < m; i++) {
@@ -234,27 +234,27 @@ void xgeqp3(const emlrtStack *sp, emxArray_real_T *A, emxArray_real_T *tau,
         }
       }
       b_na = muIntScalarMin_sint32(m, na);
-      b_st.site = &ty_emlrtRSI;
+      b_st.site = &uy_emlrtRSI;
       for (ma = 0; ma < b_na; ma++) {
         tau->data[ma] = rtNaN;
       }
       m = b_na + 1;
-      b_st.site = &uy_emlrtRSI;
+      b_st.site = &vy_emlrtRSI;
       if ((b_na + 1 <= minmana) && (minmana > 2147483646)) {
-        c_st.site = &gc_emlrtRSI;
+        c_st.site = &hc_emlrtRSI;
         check_forloop_overflow_error(&c_st);
       }
       for (ma = m; ma <= minmana; ma++) {
         tau->data[ma - 1] = 0.0;
       }
-      b_st.site = &vy_emlrtRSI;
+      b_st.site = &wy_emlrtRSI;
       for (ma = 0; ma < na; ma++) {
         jpvt->data[ma] = ma + 1;
       }
     } else {
-      b_st.site = &wy_emlrtRSI;
+      b_st.site = &xy_emlrtRSI;
       if ((1 <= na) && (na > 2147483646)) {
-        c_st.site = &gc_emlrtRSI;
+        c_st.site = &hc_emlrtRSI;
         check_forloop_overflow_error(&c_st);
       }
       for (ma = 0; ma < na; ma++) {

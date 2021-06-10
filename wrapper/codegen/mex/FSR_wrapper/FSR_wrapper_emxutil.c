@@ -524,7 +524,7 @@ void emxInitStruct_struct_T(const emlrtStack *sp, b_struct_T *pStruct,
   emxInit_real_T(sp, &pStruct->beta, 1, srcLocation, doPush);
   emxInit_real_T(sp, &pStruct->residuals, 1, srcLocation, doPush);
   emxInit_real_T(sp, &pStruct->bs, 2, srcLocation, doPush);
-  emxInit_real_T(sp, &pStruct->outliers, 1, srcLocation, doPush);
+  emxInit_real_T(sp, &pStruct->outliers, 2, srcLocation, doPush);
   pStruct->X.size[0] = 0;
   pStruct->X.size[1] = 0;
   pStruct->y.size[0] = 0;

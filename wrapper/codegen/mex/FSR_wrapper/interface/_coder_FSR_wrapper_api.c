@@ -19,7 +19,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRTEInfo mgb_emlrtRTEI = {
+static emlrtRTEInfo lgb_emlrtRTEI = {
     1,                        /* lineNo */
     1,                        /* colNo */
     "_coder_FSR_wrapper_api", /* fName */
@@ -415,9 +415,9 @@ void FSR_wrapper_api(FSR_wrapperStackData *SD, const mxArray *const prhs[13],
   boolean_T weak;
   st.tls = emlrtRootTLSGlobal;
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
-  emxInit_real_T(&st, &y, 1, &mgb_emlrtRTEI, true);
-  emxInit_real_T(&st, &X, 2, &mgb_emlrtRTEI, true);
-  emxInitStruct_struct_FSR_T(&st, &out, &mgb_emlrtRTEI, true);
+  emxInit_real_T(&st, &y, 1, &lgb_emlrtRTEI, true);
+  emxInit_real_T(&st, &X, 2, &lgb_emlrtRTEI, true);
+  emxInitStruct_struct_FSR_T(&st, &out, &lgb_emlrtRTEI, true);
   /* Marshall function inputs */
   y->canFreeData = false;
   m_emlrt_marshallIn(&st, emlrtAlias(prhs[0]), "y", y);

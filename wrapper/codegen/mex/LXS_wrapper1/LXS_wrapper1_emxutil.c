@@ -373,7 +373,7 @@ void emxInitStruct_struct_LXS_T(const emlrtStack *sp, struct_LXS_T *pStruct,
   emxInit_real_T(sp, &pStruct->beta, 1, srcLocation, doPush);
   emxInit_real_T(sp, &pStruct->residuals, 1, srcLocation, doPush);
   emxInit_real_T(sp, &pStruct->bs, 2, srcLocation, doPush);
-  emxInit_real_T(sp, &pStruct->outliers, 1, srcLocation, doPush);
+  emxInit_real_T(sp, &pStruct->outliers, 2, srcLocation, doPush);
   emxInit_real_T(sp, &pStruct->X, 2, srcLocation, doPush);
   emxInit_real_T(sp, &pStruct->y, 2, srcLocation, doPush);
 }

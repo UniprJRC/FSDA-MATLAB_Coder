@@ -19,7 +19,7 @@
 
 /* Variable Definitions */
 static emlrtRSInfo
-    yo_emlrtRSI =
+    ap_emlrtRSI =
         {
             36,         /* lineNo */
             "gammainc", /* fcnName */
@@ -29,7 +29,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    ap_emlrtRSI =
+    bp_emlrtRSI =
         {
             37,         /* lineNo */
             "gammainc", /* fcnName */
@@ -39,7 +39,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    bp_emlrtRSI =
+    cp_emlrtRSI =
         {
             40,         /* lineNo */
             "gammainc", /* fcnName */
@@ -49,7 +49,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    cp_emlrtRSI =
+    dp_emlrtRSI =
         {
             89,                /* lineNo */
             "scalar_gammainc", /* fcnName */
@@ -73,7 +73,7 @@ creal_T gammainc(const emlrtStack *sp, real_T x, real_T a)
   int32_T exitg1;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &yo_emlrtRSI;
+  st.site = &ap_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   if (a < 0.0) {
@@ -82,11 +82,11 @@ creal_T gammainc(const emlrtStack *sp, real_T x, real_T a)
         "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
   }
   r = a + 1.0;
-  st.site = &ap_emlrtRSI;
-  gammaln(&st, &r);
   st.site = &bp_emlrtRSI;
+  gammaln(&st, &r);
+  st.site = &cp_emlrtRSI;
   if (!(x < 0.0)) {
-    b_st.site = &cp_emlrtRSI;
+    b_st.site = &dp_emlrtRSI;
     r = b_eml_gammainc(&b_st, x, a, muDoubleScalarLog(a), r);
     b.re = r;
     b.im = 0.0;

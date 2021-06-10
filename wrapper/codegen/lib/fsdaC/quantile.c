@@ -17,6 +17,7 @@
 #include "rt_nonfinite.h"
 #include "sortIdx.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 void quantile(const emxArray_real_T *x, double y[3])

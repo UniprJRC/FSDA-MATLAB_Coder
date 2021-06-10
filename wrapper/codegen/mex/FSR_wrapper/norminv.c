@@ -54,7 +54,7 @@ static emlrtBCInfo ifb_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtRTEInfo ueb_emlrtRTEI = {
+static emlrtRTEInfo teb_emlrtRTEI = {
     31,        /* lineNo */
     5,         /* colNo */
     "norminv", /* fName */
@@ -75,7 +75,7 @@ void b_norminv(const emlrtStack *sp, const emxArray_real_T *p,
   i = x->size[0] * x->size[1];
   x->size[0] = p->size[0];
   x->size[1] = p->size[1];
-  emxEnsureCapacity_real_T(sp, x, i, &ueb_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, x, i, &teb_emlrtRTEI);
   i = p->size[0] * p->size[1];
   for (k = 0; k < i; k++) {
     i1 = p->size[0] * p->size[1];

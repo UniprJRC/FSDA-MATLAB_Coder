@@ -16,6 +16,7 @@
 #include "rt_nonfinite.h"
 #include <stddef.h>
 #include <stdio.h>
+#include <string.h>
 
 /* Function Definitions */
 void b_sprintf(double varargin_1)

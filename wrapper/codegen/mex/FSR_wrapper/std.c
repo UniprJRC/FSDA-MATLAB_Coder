@@ -62,7 +62,7 @@ static emlrtRSInfo vm_emlrtRSI = {
     "d.m" /* pathName */
 };
 
-static emlrtRTEInfo gl_emlrtRTEI = {
+static emlrtRTEInfo fl_emlrtRTEI = {
     126,       /* lineNo */
     34,        /* colNo */
     "vvarstd", /* fName */
@@ -71,7 +71,7 @@ static emlrtRTEInfo gl_emlrtRTEI = {
     "d.m" /* pName */
 };
 
-static emlrtRTEInfo hl_emlrtRTEI = {
+static emlrtRTEInfo gl_emlrtRTEI = {
     126,       /* lineNo */
     9,         /* colNo */
     "vvarstd", /* fName */
@@ -116,14 +116,14 @@ real_T b_std(const emlrtStack *sp, const emxArray_real_T *x)
       y = rtNaN;
     }
   } else {
-    emxInit_real_T(&b_st, &absdiff, 1, &hl_emlrtRTEI, true);
+    emxInit_real_T(&b_st, &absdiff, 1, &gl_emlrtRTEI, true);
     c_st.site = &tm_emlrtRSI;
     d_st.site = &mm_emlrtRSI;
     xbar = blockedSummation(&d_st, x, x->size[0]);
     xbar /= (real_T)x->size[0];
     k = absdiff->size[0];
     absdiff->size[0] = x->size[0];
-    emxEnsureCapacity_real_T(&b_st, absdiff, k, &gl_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, absdiff, k, &fl_emlrtRTEI);
     c_st.site = &um_emlrtRSI;
     if (x->size[0] > 2147483646) {
       d_st.site = &ab_emlrtRSI;

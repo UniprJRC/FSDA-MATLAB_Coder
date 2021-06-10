@@ -18,6 +18,7 @@
 #include "xnrm2.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <string.h>
 
 /* Function Definitions */
 double vvarstd(const emxArray_real_T *v, int n)

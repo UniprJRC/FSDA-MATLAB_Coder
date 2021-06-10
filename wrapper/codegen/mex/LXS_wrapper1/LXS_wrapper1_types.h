@@ -17,16 +17,16 @@
 #include <stddef.h>
 
 /* Type Definitions */
-#ifndef typedef_struct0_T
-#define typedef_struct0_T
+#ifndef typedef_struct_LXSlms_T
+#define typedef_struct_LXSlms_T
 typedef struct {
   real_T bestr;
   real_T refsteps;
   real_T refstepsbestr;
   real_T reftol;
   real_T reftolbestr;
-} struct0_T;
-#endif /* typedef_struct0_T */
+} struct_LXSlms_T;
+#endif /* typedef_struct_LXSlms_T */
 
 #ifndef struct_emxArray_real_T
 #define struct_emxArray_real_T

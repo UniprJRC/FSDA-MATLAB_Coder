@@ -95,7 +95,7 @@ static emlrtRTEInfo ad_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo jgb_emlrtRTEI = {
+static emlrtRTEInfo igb_emlrtRTEI = {
     162,      /* lineNo */
     20,       /* colNo */
     "unique", /* fName */
@@ -104,7 +104,7 @@ static emlrtRTEInfo jgb_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo kgb_emlrtRTEI = {
+static emlrtRTEInfo jgb_emlrtRTEI = {
     237,      /* lineNo */
     1,        /* colNo */
     "unique", /* fName */
@@ -113,7 +113,7 @@ static emlrtRTEInfo kgb_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo lgb_emlrtRTEI = {
+static emlrtRTEInfo kgb_emlrtRTEI = {
     161,      /* lineNo */
     1,        /* colNo */
     "unique", /* fName */
@@ -147,13 +147,13 @@ void unique_vector(const emlrtStack *sp, const emxArray_real_T *a,
   b_st.prev = &st;
   b_st.tls = st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  emxInit_int32_T(sp, &idx, 1, &lgb_emlrtRTEI, true);
+  emxInit_int32_T(sp, &idx, 1, &kgb_emlrtRTEI, true);
   na = a->size[0];
   st.site = &kmb_emlrtRSI;
   sortIdx(&st, a, idx);
   b_a = b->size[0];
   b->size[0] = a->size[0];
-  emxEnsureCapacity_real_T(sp, b, b_a, &jgb_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, b, b_a, &igb_emlrtRTEI);
   st.site = &lmb_emlrtRSI;
   if ((1 <= a->size[0]) && (a->size[0] > 2147483646)) {
     b_st.site = &ab_emlrtRSI;
@@ -252,7 +252,7 @@ void unique_vector(const emlrtStack *sp, const emxArray_real_T *a,
   b_indexShapeCheck(&st, b->size[0], b_iv);
   na = b->size[0];
   b->size[0] = b_a;
-  emxEnsureCapacity_real_T(sp, b, na, &kgb_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, b, na, &jgb_emlrtRTEI);
   st.site = &rmb_emlrtRSI;
   emlrtHeapReferenceStackLeaveFcnR2012b((emlrtCTX)sp);
 }

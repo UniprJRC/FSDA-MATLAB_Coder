@@ -13,6 +13,7 @@
 #include "hasFiniteBounds.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 bool hasFiniteBounds(int nvar, emxArray_boolean_T *hasLB,

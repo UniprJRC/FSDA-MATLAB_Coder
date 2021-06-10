@@ -346,119 +346,119 @@ static emlrtBCInfo he_emlrtBCI = {
     0                                                   /* checkKind */
 };
 
-static emlrtRTEInfo aj_emlrtRTEI = {
+static emlrtRTEInfo yi_emlrtRTEI = {
     189,                                               /* lineNo */
     12,                                                /* colNo */
     "ScoreYJ",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\ScoreYJ.m" /* pName */
 };
 
-static emlrtRTEInfo bj_emlrtRTEI = {
+static emlrtRTEInfo aj_emlrtRTEI = {
     1,                                                 /* lineNo */
     18,                                                /* colNo */
     "ScoreYJ",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\ScoreYJ.m" /* pName */
 };
 
-static emlrtRTEInfo cj_emlrtRTEI = {
+static emlrtRTEInfo bj_emlrtRTEI = {
     198,                                               /* lineNo */
     5,                                                 /* colNo */
     "ScoreYJ",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\ScoreYJ.m" /* pName */
 };
 
-static emlrtRTEInfo dj_emlrtRTEI = {
+static emlrtRTEInfo cj_emlrtRTEI = {
     199,                                               /* lineNo */
     5,                                                 /* colNo */
     "ScoreYJ",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\ScoreYJ.m" /* pName */
 };
 
-static emlrtRTEInfo ej_emlrtRTEI = {
+static emlrtRTEInfo dj_emlrtRTEI = {
     218,                                               /* lineNo */
     9,                                                 /* colNo */
     "ScoreYJ",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\ScoreYJ.m" /* pName */
 };
 
-static emlrtRTEInfo fj_emlrtRTEI = {
+static emlrtRTEInfo ej_emlrtRTEI = {
     212,                                               /* lineNo */
     9,                                                 /* colNo */
     "ScoreYJ",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\ScoreYJ.m" /* pName */
 };
 
-static emlrtRTEInfo gj_emlrtRTEI = {
+static emlrtRTEInfo fj_emlrtRTEI = {
     213,                                               /* lineNo */
     9,                                                 /* colNo */
     "ScoreYJ",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\ScoreYJ.m" /* pName */
 };
 
-static emlrtRTEInfo hj_emlrtRTEI = {
+static emlrtRTEInfo gj_emlrtRTEI = {
     220,                                               /* lineNo */
     31,                                                /* colNo */
     "ScoreYJ",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\ScoreYJ.m" /* pName */
 };
 
-static emlrtRTEInfo ij_emlrtRTEI = {
+static emlrtRTEInfo hj_emlrtRTEI = {
     236,                                               /* lineNo */
     9,                                                 /* colNo */
     "ScoreYJ",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\ScoreYJ.m" /* pName */
 };
 
-static emlrtRTEInfo jj_emlrtRTEI = {
+static emlrtRTEInfo ij_emlrtRTEI = {
     227,                                               /* lineNo */
     9,                                                 /* colNo */
     "ScoreYJ",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\ScoreYJ.m" /* pName */
 };
 
-static emlrtRTEInfo kj_emlrtRTEI = {
+static emlrtRTEInfo jj_emlrtRTEI = {
     229,                                               /* lineNo */
     9,                                                 /* colNo */
     "ScoreYJ",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\ScoreYJ.m" /* pName */
 };
 
-static emlrtRTEInfo lj_emlrtRTEI = {
+static emlrtRTEInfo kj_emlrtRTEI = {
     238,                                               /* lineNo */
     27,                                                /* colNo */
     "ScoreYJ",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\ScoreYJ.m" /* pName */
 };
 
-static emlrtRTEInfo mj_emlrtRTEI = {
+static emlrtRTEInfo lj_emlrtRTEI = {
     238,                                               /* lineNo */
     17,                                                /* colNo */
     "ScoreYJ",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\ScoreYJ.m" /* pName */
 };
 
-static emlrtRTEInfo nj_emlrtRTEI = {
+static emlrtRTEInfo mj_emlrtRTEI = {
     249,                                               /* lineNo */
     5,                                                 /* colNo */
     "ScoreYJ",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\ScoreYJ.m" /* pName */
 };
 
-static emlrtRTEInfo oj_emlrtRTEI = {
+static emlrtRTEInfo nj_emlrtRTEI = {
     253,                                               /* lineNo */
     17,                                                /* colNo */
     "ScoreYJ",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\ScoreYJ.m" /* pName */
 };
 
-static emlrtRTEInfo pj_emlrtRTEI = {
+static emlrtRTEInfo oj_emlrtRTEI = {
     190,                                               /* lineNo */
     1,                                                 /* colNo */
     "ScoreYJ",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\ScoreYJ.m" /* pName */
 };
 
-static emlrtRTEInfo qj_emlrtRTEI = {
+static emlrtRTEInfo pj_emlrtRTEI = {
     191,                                               /* lineNo */
     1,                                                 /* colNo */
     "ScoreYJ",                                         /* fName */
@@ -747,15 +747,15 @@ void ScoreYJ(const emlrtStack *sp, const emxArray_real_T *y,
                                     (emlrtCTX)sp);
     }
   }
-  emxInit_real_T(sp, &r, 1, &aj_emlrtRTEI, true);
+  emxInit_real_T(sp, &r, 1, &yi_emlrtRTEI, true);
   b_i = r->size[0];
   r->size[0] = y->size[0];
-  emxEnsureCapacity_real_T(sp, r, b_i, &aj_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, r, b_i, &yi_emlrtRTEI);
   loop_ub = y->size[0];
   for (b_i = 0; b_i < loop_ub; b_i++) {
     r->data[b_i] = y->data[b_i];
   }
-  emxInit_real_T(sp, &vposlai, 1, &fj_emlrtRTEI, true);
+  emxInit_real_T(sp, &vposlai, 1, &ej_emlrtRTEI, true);
   st.site = &ur_emlrtRSI;
   b_sign(&st, r);
   st.site = &ur_emlrtRSI;
@@ -783,10 +783,10 @@ void ScoreYJ(const emlrtStack *sp, const emxArray_real_T *y,
       loop_ub++;
     }
   }
-  emxInit_real_T(sp, &vneg, 1, &pj_emlrtRTEI, true);
+  emxInit_real_T(sp, &vneg, 1, &oj_emlrtRTEI, true);
   b_i = vneg->size[0];
   vneg->size[0] = loop_ub;
-  emxEnsureCapacity_real_T(sp, vneg, b_i, &bj_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, vneg, b_i, &aj_emlrtRTEI);
   loop_ub = 0;
   for (i = 0; i <= end; i++) {
     if (!(y->data[i] >= 0.0)) {
@@ -801,10 +801,10 @@ void ScoreYJ(const emlrtStack *sp, const emxArray_real_T *y,
       loop_ub++;
     }
   }
-  emxInit_real_T(sp, &vpos, 1, &qj_emlrtRTEI, true);
+  emxInit_real_T(sp, &vpos, 1, &pj_emlrtRTEI, true);
   b_i = vpos->size[0];
   vpos->size[0] = loop_ub;
-  emxEnsureCapacity_real_T(sp, vpos, b_i, &bj_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, vpos, b_i, &aj_emlrtRTEI);
   loop_ub = 0;
   for (i = 0; i <= end; i++) {
     if (y->data[i] >= 0.0) {
@@ -812,8 +812,8 @@ void ScoreYJ(const emlrtStack *sp, const emxArray_real_T *y,
       loop_ub++;
     }
   }
-  emxInit_real_T(sp, &z, 1, &cj_emlrtRTEI, true);
-  emxInit_real_T(sp, &w, 1, &dj_emlrtRTEI, true);
+  emxInit_real_T(sp, &z, 1, &bj_emlrtRTEI, true);
+  emxInit_real_T(sp, &w, 1, &cj_emlrtRTEI, true);
   st.site = &vr_emlrtRSI;
   b_log(&st, vpos);
   st.site = &wr_emlrtRSI;
@@ -825,11 +825,11 @@ void ScoreYJ(const emlrtStack *sp, const emxArray_real_T *y,
   Glaminus1 = muDoubleScalarExp((varargin_2 - 1.0) * logG);
   b_i = z->size[0];
   z->size[0] = y->size[0];
-  emxEnsureCapacity_real_T(sp, z, b_i, &cj_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, z, b_i, &bj_emlrtRTEI);
   /*  Initialized z and w */
   b_i = w->size[0];
   w->size[0] = y->size[0];
-  emxEnsureCapacity_real_T(sp, w, b_i, &dj_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, w, b_i, &cj_emlrtRTEI);
   for (b_i = 0; b_i < loop_ub; b_i++) {
     z->data[b_i] = y->data[b_i];
     w->data[b_i] = y->data[b_i];
@@ -840,7 +840,7 @@ void ScoreYJ(const emlrtStack *sp, const emxArray_real_T *y,
   /*  Compute transformed values and constructed variables depending on lambda
    */
   /*  transformation for non negative values */
-  emxInit_real_T(sp, &znonnegs, 1, &gj_emlrtRTEI, true);
+  emxInit_real_T(sp, &znonnegs, 1, &fj_emlrtRTEI, true);
   if (muDoubleScalarAbs(varargin_2) > 1.0E-8) {
     /*  if la is different from 0 */
     q = varargin_2 * Glaminus1;
@@ -848,7 +848,7 @@ void ScoreYJ(const emlrtStack *sp, const emxArray_real_T *y,
     loop_ub = vpos->size[0];
     b_i = vposlai->size[0];
     vposlai->size[0] = vpos->size[0];
-    emxEnsureCapacity_real_T(sp, vposlai, b_i, &fj_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, vposlai, b_i, &ej_emlrtRTEI);
     for (b_i = 0; b_i < loop_ub; b_i++) {
       vposlai->data[b_i] = varargin_2 * vpos->data[b_i];
     }
@@ -856,7 +856,7 @@ void ScoreYJ(const emlrtStack *sp, const emxArray_real_T *y,
     b_exp(&st, vposlai);
     b_i = znonnegs->size[0];
     znonnegs->size[0] = vposlai->size[0];
-    emxEnsureCapacity_real_T(sp, znonnegs, b_i, &gj_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, znonnegs, b_i, &fj_emlrtRTEI);
     loop_ub = vposlai->size[0];
     for (b_i = 0; b_i < loop_ub; b_i++) {
       znonnegs->data[b_i] = (vposlai->data[b_i] - 1.0) / q;
@@ -921,7 +921,7 @@ void ScoreYJ(const emlrtStack *sp, const emxArray_real_T *y,
     loop_ub = vpos->size[0];
     b_i = znonnegs->size[0];
     znonnegs->size[0] = vpos->size[0];
-    emxEnsureCapacity_real_T(sp, znonnegs, b_i, &ej_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, znonnegs, b_i, &dj_emlrtRTEI);
     for (b_i = 0; b_i < loop_ub; b_i++) {
       znonnegs->data[b_i] = G * vpos->data[b_i];
     }
@@ -951,7 +951,7 @@ void ScoreYJ(const emlrtStack *sp, const emxArray_real_T *y,
     loop_ub = vpos->size[0];
     b_i = r->size[0];
     r->size[0] = vpos->size[0];
-    emxEnsureCapacity_real_T(sp, r, b_i, &hj_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, r, b_i, &gj_emlrtRTEI);
     for (b_i = 0; b_i < loop_ub; b_i++) {
       r->data[b_i] = vpos->data[b_i] / 2.0;
     }
@@ -995,7 +995,7 @@ void ScoreYJ(const emlrtStack *sp, const emxArray_real_T *y,
     loop_ub = vneg->size[0];
     b_i = znonnegs->size[0];
     znonnegs->size[0] = vneg->size[0];
-    emxEnsureCapacity_real_T(sp, znonnegs, b_i, &jj_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, znonnegs, b_i, &ij_emlrtRTEI);
     for (b_i = 0; b_i < loop_ub; b_i++) {
       znonnegs->data[b_i] = (2.0 - varargin_2) * vneg->data[b_i];
     }
@@ -1004,7 +1004,7 @@ void ScoreYJ(const emlrtStack *sp, const emxArray_real_T *y,
     G = (2.0 - varargin_2) * Glaminus1;
     b_i = vposlai->size[0];
     vposlai->size[0] = znonnegs->size[0];
-    emxEnsureCapacity_real_T(sp, vposlai, b_i, &kj_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, vposlai, b_i, &jj_emlrtRTEI);
     loop_ub = znonnegs->size[0];
     for (b_i = 0; b_i < loop_ub; b_i++) {
       vposlai->data[b_i] = (1.0 - znonnegs->data[b_i]) / G;
@@ -1070,7 +1070,7 @@ void ScoreYJ(const emlrtStack *sp, const emxArray_real_T *y,
     loop_ub = vneg->size[0];
     b_i = vposlai->size[0];
     vposlai->size[0] = vneg->size[0];
-    emxEnsureCapacity_real_T(sp, vposlai, b_i, &ij_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, vposlai, b_i, &hj_emlrtRTEI);
     for (b_i = 0; b_i < loop_ub; b_i++) {
       vposlai->data[b_i] = -vneg->data[b_i] / G;
     }
@@ -1100,7 +1100,7 @@ void ScoreYJ(const emlrtStack *sp, const emxArray_real_T *y,
     loop_ub = vneg->size[0];
     b_i = r->size[0];
     r->size[0] = vneg->size[0];
-    emxEnsureCapacity_real_T(sp, r, b_i, &lj_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, r, b_i, &kj_emlrtRTEI);
     for (b_i = 0; b_i < loop_ub; b_i++) {
       r->data[b_i] = vneg->data[b_i] / 2.0;
     }
@@ -1111,7 +1111,7 @@ void ScoreYJ(const emlrtStack *sp, const emxArray_real_T *y,
     }
     b_i = r->size[0];
     r->size[0] = vneg->size[0];
-    emxEnsureCapacity_real_T(sp, r, b_i, &mj_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, r, b_i, &lj_emlrtRTEI);
     for (b_i = 0; b_i < loop_ub; b_i++) {
       r->data[b_i] = vneg->data[b_i] * (r->data[b_i] + logG) / G;
     }
@@ -1187,11 +1187,11 @@ void ScoreYJ(const emlrtStack *sp, const emxArray_real_T *y,
   } else {
     sizes_idx_1 = 0;
   }
-  emxInit_real_T(&b_st, &Xw, 2, &nj_emlrtRTEI, true);
+  emxInit_real_T(&b_st, &Xw, 2, &mj_emlrtRTEI, true);
   b_i = Xw->size[0] * Xw->size[1];
   Xw->size[0] = end;
   Xw->size[1] = loop_ub + sizes_idx_1;
-  emxEnsureCapacity_real_T(&b_st, Xw, b_i, &nj_emlrtRTEI);
+  emxEnsureCapacity_real_T(&b_st, Xw, b_i, &mj_emlrtRTEI);
   for (b_i = 0; b_i < loop_ub; b_i++) {
     for (i1 = 0; i1 < end; i1++) {
       Xw->data[i1 + Xw->size[0] * b_i] = X->data[i1 + end * b_i];
@@ -1223,7 +1223,7 @@ void ScoreYJ(const emlrtStack *sp, const emxArray_real_T *y,
   c_st.site = &rf_emlrtRSI;
   b_i = vposlai->size[0];
   vposlai->size[0] = z->size[0];
-  emxEnsureCapacity_real_T(&c_st, vposlai, b_i, &oj_emlrtRTEI);
+  emxEnsureCapacity_real_T(&c_st, vposlai, b_i, &nj_emlrtRTEI);
   loop_ub = z->size[0];
   for (b_i = 0; b_i < loop_ub; b_i++) {
     vposlai->data[b_i] = z->data[b_i] - vposlai->data[b_i];

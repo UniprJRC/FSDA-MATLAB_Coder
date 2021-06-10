@@ -16,7 +16,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo on_emlrtRSI = {
+static emlrtRSInfo pn_emlrtRSI = {
     10,        /* lineNo */
     "gammaln", /* fcnName */
     "C:\\Program "
@@ -24,7 +24,7 @@ static emlrtRSInfo on_emlrtRSI = {
                                                                             */
 };
 
-static emlrtRSInfo pn_emlrtRSI = {
+static emlrtRSInfo qn_emlrtRSI = {
     17,                           /* lineNo */
     "applyScalarFunctionInPlace", /* fcnName */
     "C:\\Program "
@@ -32,7 +32,7 @@ static emlrtRSInfo pn_emlrtRSI = {
     "internal\\applyScalarFunctionInPlace.m" /* pathName */
 };
 
-static emlrtRSInfo qn_emlrtRSI = {
+static emlrtRSInfo rn_emlrtRSI = {
     179,              /* lineNo */
     "scalar_gammaln", /* fcnName */
     "C:\\Program "
@@ -40,7 +40,7 @@ static emlrtRSInfo qn_emlrtRSI = {
                                                                             */
 };
 
-static emlrtRSInfo rn_emlrtRSI = {
+static emlrtRSInfo sn_emlrtRSI = {
     138,              /* lineNo */
     "scalar_gammaln", /* fcnName */
     "C:\\Program "
@@ -48,7 +48,7 @@ static emlrtRSInfo rn_emlrtRSI = {
                                                                             */
 };
 
-static emlrtRSInfo sn_emlrtRSI = {
+static emlrtRSInfo tn_emlrtRSI = {
     129,              /* lineNo */
     "scalar_gammaln", /* fcnName */
     "C:\\Program "
@@ -56,7 +56,7 @@ static emlrtRSInfo sn_emlrtRSI = {
                                                                             */
 };
 
-static emlrtRSInfo tn_emlrtRSI = {
+static emlrtRSInfo un_emlrtRSI = {
     121,              /* lineNo */
     "scalar_gammaln", /* fcnName */
     "C:\\Program "
@@ -203,17 +203,17 @@ void gammaln(const emlrtStack *sp, real_T *x)
   int32_T i;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &on_emlrtRSI;
+  st.site = &pn_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
-  b_st.site = &pn_emlrtRSI;
+  b_st.site = &qn_emlrtRSI;
   if (!muDoubleScalarIsNaN(*x)) {
     if (*x > 2.55E+305) {
       *x = rtInf;
     } else if (*x <= 2.2204460492503131E-16) {
-      c_st.site = &tn_emlrtRSI;
+      c_st.site = &un_emlrtRSI;
       if (*x < 0.0) {
         emlrtErrorWithMessageIdR2018a(
             &c_st, &rb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
@@ -227,7 +227,7 @@ void gammaln(const emlrtStack *sp, real_T *x)
         r = r * *x + p1[i];
         t = t * *x + q1[i];
       }
-      c_st.site = &sn_emlrtRSI;
+      c_st.site = &tn_emlrtRSI;
       if (*x < 0.0) {
         emlrtErrorWithMessageIdR2018a(
             &c_st, &rb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
@@ -241,7 +241,7 @@ void gammaln(const emlrtStack *sp, real_T *x)
         r = r * ((*x - 0.5) - 0.5) + p2[i];
         t = t * ((*x - 0.5) - 0.5) + q2[i];
       }
-      c_st.site = &rn_emlrtRSI;
+      c_st.site = &sn_emlrtRSI;
       if (*x < 0.0) {
         emlrtErrorWithMessageIdR2018a(
             &c_st, &rb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
@@ -288,7 +288,7 @@ void gammaln(const emlrtStack *sp, real_T *x)
       } else {
         r = 0.0;
       }
-      c_st.site = &qn_emlrtRSI;
+      c_st.site = &rn_emlrtRSI;
       if (*x < 0.0) {
         emlrtErrorWithMessageIdR2018a(
             &c_st, &rb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",

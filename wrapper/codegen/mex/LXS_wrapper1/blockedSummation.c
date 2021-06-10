@@ -37,10 +37,10 @@ real_T blockedSummation(const emlrtStack *sp, const emxArray_real_T *x,
   if ((x->size[0] == 0) || (vlen == 0)) {
     y = 0.0;
   } else {
-    st.site = &nm_emlrtRSI;
-    b_st.site = &vj_emlrtRSI;
+    st.site = &om_emlrtRSI;
+    b_st.site = &wj_emlrtRSI;
     if (vlen < 4096) {
-      c_st.site = &wj_emlrtRSI;
+      c_st.site = &xj_emlrtRSI;
       y = sumColumnB(&c_st, x, vlen);
     } else {
       nfb = vlen / 4096;
@@ -51,7 +51,7 @@ real_T blockedSummation(const emlrtStack *sp, const emxArray_real_T *x,
         y += sumColumnB4(x, ((ib - 1) << 12) + 1);
       }
       if (nleft > 0) {
-        c_st.site = &yj_emlrtRSI;
+        c_st.site = &ak_emlrtRSI;
         y += b_sumColumnB(&c_st, x, nleft, inb + 1);
       }
     }

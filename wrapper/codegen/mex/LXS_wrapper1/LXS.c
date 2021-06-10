@@ -29,67 +29,67 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo teb_emlrtRSI = {
-    1227,                                          /* lineNo */
-    "IRWLSreg",                                    /* fcnName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
-};
-
 static emlrtRSInfo ueb_emlrtRSI = {
-    1225,                                          /* lineNo */
+    1233,                                          /* lineNo */
     "IRWLSreg",                                    /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo veb_emlrtRSI = {
-    1223,                                          /* lineNo */
+    1231,                                          /* lineNo */
     "IRWLSreg",                                    /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo web_emlrtRSI = {
-    1213,                                          /* lineNo */
+    1229,                                          /* lineNo */
     "IRWLSreg",                                    /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo xeb_emlrtRSI = {
-    1208,                                          /* lineNo */
+    1219,                                          /* lineNo */
     "IRWLSreg",                                    /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo yeb_emlrtRSI = {
-    1205,                                          /* lineNo */
+    1214,                                          /* lineNo */
     "IRWLSreg",                                    /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo afb_emlrtRSI = {
-    1187,                                          /* lineNo */
+    1211,                                          /* lineNo */
     "IRWLSreg",                                    /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo bfb_emlrtRSI = {
-    1186,                                          /* lineNo */
+    1193,                                          /* lineNo */
     "IRWLSreg",                                    /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo cfb_emlrtRSI = {
-    1183,                                          /* lineNo */
+    1192,                                          /* lineNo */
     "IRWLSreg",                                    /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo dfb_emlrtRSI = {
-    1180,                                          /* lineNo */
+    1189,                                          /* lineNo */
     "IRWLSreg",                                    /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
-static emlrtRSInfo efb_emlrtRSI =
+static emlrtRSInfo efb_emlrtRSI = {
+    1186,                                          /* lineNo */
+    "IRWLSreg",                                    /* fcnName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
+};
+
+static emlrtRSInfo ffb_emlrtRSI =
     {
         13,    /* lineNo */
         "any", /* fcnName */
@@ -98,7 +98,7 @@ static emlrtRSInfo efb_emlrtRSI =
                                                                         */
 };
 
-static emlrtRSInfo ffb_emlrtRSI =
+static emlrtRSInfo gfb_emlrtRSI =
     {
         143,        /* lineNo */
         "allOrAny", /* fcnName */
@@ -107,156 +107,134 @@ static emlrtRSInfo ffb_emlrtRSI =
         "m" /* pathName */
 };
 
-static emlrtRSInfo mgb_emlrtRSI = {
-    1280,                                          /* lineNo */
-    "corfactorRAW",                                /* fcnName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
-};
-
 static emlrtRSInfo ngb_emlrtRSI = {
-    1281,                                          /* lineNo */
+    1294,                                          /* lineNo */
     "corfactorRAW",                                /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo ogb_emlrtRSI = {
-    1289,                                          /* lineNo */
+    1285,                                          /* lineNo */
     "corfactorRAW",                                /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo pgb_emlrtRSI = {
-    1128,                                          /* lineNo */
-    "LXS/asvar",                                   /* fcnName */
+    1284,                                          /* lineNo */
+    "corfactorRAW",                                /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo qgb_emlrtRSI = {
-    1129,                                          /* lineNo */
-    "LXS/asvar",                                   /* fcnName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
-};
-
-static emlrtRSInfo rgb_emlrtRSI = {
-    1131,                                          /* lineNo */
-    "LXS/asvar",                                   /* fcnName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
-};
-
-static emlrtRSInfo sgb_emlrtRSI = {
-    1132,                                          /* lineNo */
-    "LXS/asvar",                                   /* fcnName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
-};
-
-static emlrtRSInfo tgb_emlrtRSI = {
-    1133,                                          /* lineNo */
-    "LXS/asvar",                                   /* fcnName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
-};
-
-static emlrtRSInfo ugb_emlrtRSI = {
     1134,                                          /* lineNo */
     "LXS/asvar",                                   /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
-static emlrtRSInfo hhb_emlrtRSI = {
-    1332,                                          /* lineNo */
-    "corfactorREW",                                /* fcnName */
+static emlrtRSInfo rgb_emlrtRSI = {
+    1135,                                          /* lineNo */
+    "LXS/asvar",                                   /* fcnName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
+};
+
+static emlrtRSInfo sgb_emlrtRSI = {
+    1137,                                          /* lineNo */
+    "LXS/asvar",                                   /* fcnName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
+};
+
+static emlrtRSInfo tgb_emlrtRSI = {
+    1138,                                          /* lineNo */
+    "LXS/asvar",                                   /* fcnName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
+};
+
+static emlrtRSInfo ugb_emlrtRSI = {
+    1139,                                          /* lineNo */
+    "LXS/asvar",                                   /* fcnName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
+};
+
+static emlrtRSInfo vgb_emlrtRSI = {
+    1140,                                          /* lineNo */
+    "LXS/asvar",                                   /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo ihb_emlrtRSI = {
-    1333,                                          /* lineNo */
+    1336,                                          /* lineNo */
+    "corfactorREW",                                /* fcnName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
+};
+
+static emlrtRSInfo jhb_emlrtRSI = {
+    1335,                                          /* lineNo */
     "corfactorREW",                                /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtMCInfo jb_emlrtMCI = {
-    1296,                                          /* lineNo */
+    1301,                                          /* lineNo */
     5,                                             /* colNo */
     "corfactorRAW",                                /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
 static emlrtMCInfo kb_emlrtMCI = {
-    1297,                                          /* lineNo */
+    1302,                                          /* lineNo */
     5,                                             /* colNo */
     "corfactorRAW",                                /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
 static emlrtMCInfo lb_emlrtMCI = {
-    1298,                                          /* lineNo */
+    1303,                                          /* lineNo */
     5,                                             /* colNo */
     "corfactorRAW",                                /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
 static emlrtMCInfo mb_emlrtMCI = {
-    1299,                                          /* lineNo */
+    1304,                                          /* lineNo */
     5,                                             /* colNo */
     "corfactorRAW",                                /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
 static emlrtMCInfo nb_emlrtMCI = {
-    1347,                                          /* lineNo */
-    5,                                             /* colNo */
-    "corfactorREW",                                /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
-};
-
-static emlrtMCInfo ob_emlrtMCI = {
-    1348,                                          /* lineNo */
-    5,                                             /* colNo */
-    "corfactorREW",                                /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
-};
-
-static emlrtMCInfo pb_emlrtMCI = {
-    1349,                                          /* lineNo */
-    5,                                             /* colNo */
-    "corfactorREW",                                /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
-};
-
-static emlrtMCInfo qb_emlrtMCI = {
     1350,                                          /* lineNo */
     5,                                             /* colNo */
     "corfactorREW",                                /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtBCInfo rs_emlrtBCI = {
-    -1,                                             /* iFirst */
-    -1,                                             /* iLast */
-    1245,                                           /* lineNo */
-    17,                                             /* colNo */
-    "i_r2s",                                        /* aName */
-    "IRWLSreg",                                     /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m", /* pName */
-    0                                               /* checkKind */
+static emlrtMCInfo ob_emlrtMCI = {
+    1351,                                          /* lineNo */
+    5,                                             /* colNo */
+    "corfactorREW",                                /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtBCInfo ss_emlrtBCI = {
-    -1,                                             /* iFirst */
-    -1,                                             /* iLast */
-    1245,                                           /* lineNo */
-    15,                                             /* colNo */
-    "i_r2s",                                        /* aName */
-    "IRWLSreg",                                     /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m", /* pName */
-    0                                               /* checkKind */
+static emlrtMCInfo pb_emlrtMCI = {
+    1352,                                          /* lineNo */
+    5,                                             /* colNo */
+    "corfactorREW",                                /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
+};
+
+static emlrtMCInfo qb_emlrtMCI = {
+    1353,                                          /* lineNo */
+    5,                                             /* colNo */
+    "corfactorREW",                                /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
 static emlrtBCInfo ts_emlrtBCI = {
     -1,                                             /* iFirst */
     -1,                                             /* iLast */
-    1227,                                           /* lineNo */
-    23,                                             /* colNo */
-    "r2s",                                          /* aName */
+    1251,                                           /* lineNo */
+    17,                                             /* colNo */
+    "i_r2s",                                        /* aName */
     "IRWLSreg",                                     /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m", /* pName */
     0                                               /* checkKind */
@@ -265,7 +243,29 @@ static emlrtBCInfo ts_emlrtBCI = {
 static emlrtBCInfo us_emlrtBCI = {
     -1,                                             /* iFirst */
     -1,                                             /* iLast */
-    1227,                                           /* lineNo */
+    1251,                                           /* lineNo */
+    15,                                             /* colNo */
+    "i_r2s",                                        /* aName */
+    "IRWLSreg",                                     /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m", /* pName */
+    0                                               /* checkKind */
+};
+
+static emlrtBCInfo vs_emlrtBCI = {
+    -1,                                             /* iFirst */
+    -1,                                             /* iLast */
+    1233,                                           /* lineNo */
+    23,                                             /* colNo */
+    "r2s",                                          /* aName */
+    "IRWLSreg",                                     /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m", /* pName */
+    0                                               /* checkKind */
+};
+
+static emlrtBCInfo ws_emlrtBCI = {
+    -1,                                             /* iFirst */
+    -1,                                             /* iLast */
+    1233,                                           /* lineNo */
     21,                                             /* colNo */
     "r2s",                                          /* aName */
     "IRWLSreg",                                     /* fName */
@@ -275,7 +275,7 @@ static emlrtBCInfo us_emlrtBCI = {
 
 static emlrtECInfo yc_emlrtECI = {
     -1,                                            /* nDims */
-    1223,                                          /* lineNo */
+    1229,                                          /* lineNo */
     11,                                            /* colNo */
     "IRWLSreg",                                    /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
@@ -283,16 +283,16 @@ static emlrtECInfo yc_emlrtECI = {
 
 static emlrtECInfo ad_emlrtECI = {
     -1,                                            /* nDims */
-    1220,                                          /* lineNo */
+    1226,                                          /* lineNo */
     21,                                            /* colNo */
     "IRWLSreg",                                    /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtBCInfo vs_emlrtBCI = {
+static emlrtBCInfo xs_emlrtBCI = {
     -1,                                             /* iFirst */
     -1,                                             /* iLast */
-    1205,                                           /* lineNo */
+    1211,                                           /* lineNo */
     21,                                             /* colNo */
     "i_r2s",                                        /* aName */
     "IRWLSreg",                                     /* fName */
@@ -300,10 +300,10 @@ static emlrtBCInfo vs_emlrtBCI = {
     0                                               /* checkKind */
 };
 
-static emlrtBCInfo ws_emlrtBCI = {
+static emlrtBCInfo ys_emlrtBCI = {
     -1,                                             /* iFirst */
     -1,                                             /* iLast */
-    1205,                                           /* lineNo */
+    1211,                                           /* lineNo */
     19,                                             /* colNo */
     "i_r2s",                                        /* aName */
     "IRWLSreg",                                     /* fName */
@@ -311,10 +311,10 @@ static emlrtBCInfo ws_emlrtBCI = {
     0                                               /* checkKind */
 };
 
-static emlrtBCInfo xs_emlrtBCI = {
+static emlrtBCInfo at_emlrtBCI = {
     -1,                                             /* iFirst */
     -1,                                             /* iLast */
-    1187,                                           /* lineNo */
+    1193,                                           /* lineNo */
     27,                                             /* colNo */
     "r2s",                                          /* aName */
     "IRWLSreg",                                     /* fName */
@@ -323,17 +323,17 @@ static emlrtBCInfo xs_emlrtBCI = {
 };
 
 static emlrtDCInfo oc_emlrtDCI = {
-    1187,                                           /* lineNo */
+    1193,                                           /* lineNo */
     27,                                             /* colNo */
     "IRWLSreg",                                     /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m", /* pName */
     1                                               /* checkKind */
 };
 
-static emlrtBCInfo ys_emlrtBCI = {
+static emlrtBCInfo bt_emlrtBCI = {
     -1,                                             /* iFirst */
     -1,                                             /* iLast */
-    1187,                                           /* lineNo */
+    1193,                                           /* lineNo */
     25,                                             /* colNo */
     "r2s",                                          /* aName */
     "IRWLSreg",                                     /* fName */
@@ -343,16 +343,16 @@ static emlrtBCInfo ys_emlrtBCI = {
 
 static emlrtECInfo bd_emlrtECI = {
     -1,                                            /* nDims */
-    1180,                                          /* lineNo */
+    1186,                                          /* lineNo */
     7,                                             /* colNo */
     "IRWLSreg",                                    /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtBCInfo at_emlrtBCI = {
+static emlrtBCInfo ct_emlrtBCI = {
     -1,                                             /* iFirst */
     -1,                                             /* iLast */
-    1208,                                           /* lineNo */
+    1214,                                           /* lineNo */
     17,                                             /* colNo */
     "X",                                            /* aName */
     "IRWLSreg",                                     /* fName */
@@ -360,10 +360,10 @@ static emlrtBCInfo at_emlrtBCI = {
     0                                               /* checkKind */
 };
 
-static emlrtBCInfo bt_emlrtBCI = {
+static emlrtBCInfo dt_emlrtBCI = {
     -1,                                             /* iFirst */
     -1,                                             /* iLast */
-    1245,                                           /* lineNo */
+    1251,                                           /* lineNo */
     9,                                              /* colNo */
     "weights",                                      /* aName */
     "IRWLSreg",                                     /* fName */
@@ -371,10 +371,10 @@ static emlrtBCInfo bt_emlrtBCI = {
     0                                               /* checkKind */
 };
 
-static emlrtBCInfo ct_emlrtBCI = {
+static emlrtBCInfo et_emlrtBCI = {
     -1,                                             /* iFirst */
     -1,                                             /* iLast */
-    1208,                                           /* lineNo */
+    1214,                                           /* lineNo */
     30,                                             /* colNo */
     "y",                                            /* aName */
     "IRWLSreg",                                     /* fName */
@@ -382,70 +382,70 @@ static emlrtBCInfo ct_emlrtBCI = {
     0                                               /* checkKind */
 };
 
-static emlrtRTEInfo dx_emlrtRTEI = {
-    1180,                                          /* lineNo */
+static emlrtRTEInfo ex_emlrtRTEI = {
+    1186,                                          /* lineNo */
     7,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo ex_emlrtRTEI = {
-    1187,                                          /* lineNo */
+static emlrtRTEInfo fx_emlrtRTEI = {
+    1193,                                          /* lineNo */
     21,                                            /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo fx_emlrtRTEI = {
-    1192,                                          /* lineNo */
-    1,                                             /* colNo */
-    "LXS",                                         /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
-};
-
 static emlrtRTEInfo gx_emlrtRTEI = {
-    1195,                                          /* lineNo */
+    1198,                                          /* lineNo */
     1,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
 static emlrtRTEInfo hx_emlrtRTEI = {
-    1246,                                          /* lineNo */
+    1201,                                          /* lineNo */
     1,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
 static emlrtRTEInfo ix_emlrtRTEI = {
-    1205,                                          /* lineNo */
-    5,                                             /* colNo */
+    1252,                                          /* lineNo */
+    1,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
 static emlrtRTEInfo jx_emlrtRTEI = {
-    1208,                                          /* lineNo */
-    15,                                            /* colNo */
+    1211,                                          /* lineNo */
+    5,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
 static emlrtRTEInfo kx_emlrtRTEI = {
-    1245,                                          /* lineNo */
-    9,                                             /* colNo */
+    1214,                                          /* lineNo */
+    15,                                            /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
 static emlrtRTEInfo lx_emlrtRTEI = {
-    1208,                                          /* lineNo */
-    28,                                            /* colNo */
+    1251,                                          /* lineNo */
+    9,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
 static emlrtRTEInfo mx_emlrtRTEI = {
+    1214,                                          /* lineNo */
+    28,                                            /* colNo */
+    "LXS",                                         /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
+};
+
+static emlrtRTEInfo nx_emlrtRTEI = {
     15,      /* lineNo */
     9,       /* colNo */
     "isnan", /* fName */
@@ -454,64 +454,64 @@ static emlrtRTEInfo mx_emlrtRTEI = {
                                                                         */
 };
 
-static emlrtRTEInfo nx_emlrtRTEI = {
-    1214,                                          /* lineNo */
+static emlrtRTEInfo ox_emlrtRTEI = {
+    1220,                                          /* lineNo */
     9,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRTEInfo ox_emlrtRTEI = {
-    1220,                                          /* lineNo */
-    21,                                            /* colNo */
-    "LXS",                                         /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
-};
-
 static emlrtRTEInfo px_emlrtRTEI = {
-    1223,                                          /* lineNo */
-    11,                                            /* colNo */
+    1226,                                          /* lineNo */
+    21,                                            /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
 static emlrtRTEInfo qx_emlrtRTEI = {
-    1227,                                          /* lineNo */
-    17,                                            /* colNo */
+    1229,                                          /* lineNo */
+    11,                                            /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
 static emlrtRTEInfo rx_emlrtRTEI = {
-    1229,                                          /* lineNo */
-    5,                                             /* colNo */
+    1233,                                          /* lineNo */
+    17,                                            /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
 static emlrtRTEInfo sx_emlrtRTEI = {
-    1183,                                          /* lineNo */
-    1,                                             /* colNo */
+    1235,                                          /* lineNo */
+    5,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
 static emlrtRTEInfo tx_emlrtRTEI = {
-    1186,                                          /* lineNo */
-    8,                                             /* colNo */
+    1189,                                          /* lineNo */
+    1,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
 static emlrtRTEInfo ux_emlrtRTEI = {
-    1147,                                          /* lineNo */
-    21,                                            /* colNo */
+    1192,                                          /* lineNo */
+    8,                                             /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
 static emlrtRTEInfo vx_emlrtRTEI = {
-    1213,                                          /* lineNo */
+    1153,                                          /* lineNo */
+    21,                                            /* colNo */
+    "LXS",                                         /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
+};
+
+static emlrtRTEInfo wx_emlrtRTEI = {
+    1219,                                          /* lineNo */
     13,                                            /* colNo */
     "LXS",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
@@ -537,50 +537,50 @@ static const char_T cv17[51] = {
     'v', 'e', 'r', 'y', ' ', 's', 'm', 'a', 'l', 'l', ' ', 'a', 'n',
     'd', ' ', 'p', ' ', 'i', 's', ' ', 'l', 'a', 'r', 'g', 'e'};
 
-static emlrtRSInfo mib_emlrtRSI = {
-    1350,                                          /* lineNo */
-    "corfactorREW",                                /* fcnName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
-};
-
 static emlrtRSInfo nib_emlrtRSI = {
-    1349,                                          /* lineNo */
+    1353,                                          /* lineNo */
     "corfactorREW",                                /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo oib_emlrtRSI = {
-    1348,                                          /* lineNo */
+    1352,                                          /* lineNo */
     "corfactorREW",                                /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo pib_emlrtRSI = {
-    1347,                                          /* lineNo */
+    1351,                                          /* lineNo */
     "corfactorREW",                                /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo qib_emlrtRSI = {
-    1299,                                          /* lineNo */
-    "corfactorRAW",                                /* fcnName */
+    1350,                                          /* lineNo */
+    "corfactorREW",                                /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo rib_emlrtRSI = {
-    1298,                                          /* lineNo */
+    1304,                                          /* lineNo */
     "corfactorRAW",                                /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo sib_emlrtRSI = {
-    1297,                                          /* lineNo */
+    1303,                                          /* lineNo */
     "corfactorRAW",                                /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
 static emlrtRSInfo tib_emlrtRSI = {
-    1296,                                          /* lineNo */
+    1302,                                          /* lineNo */
+    "corfactorRAW",                                /* fcnName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
+};
+
+static emlrtRSInfo uib_emlrtRSI = {
+    1301,                                          /* lineNo */
     "corfactorRAW",                                /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
@@ -664,8 +664,8 @@ void IRWLSreg(const emlrtStack *sp, const emxArray_real_T *y,
   /*                0 for the other units. */
   /*  */
   /*  Residuals for the initialbeta */
-  st.site = &dfb_emlrtRSI;
-  b_st.site = &ec_emlrtRSI;
+  st.site = &efb_emlrtRSI;
+  b_st.site = &fc_emlrtRSI;
   if (initialbeta->size[0] != X->size[1]) {
     if (((X->size[0] == 1) && (X->size[1] == 1)) ||
         (initialbeta->size[0] == 1)) {
@@ -677,31 +677,31 @@ void IRWLSreg(const emlrtStack *sp, const emxArray_real_T *y,
                                     "MATLAB:innerdim", 0);
     }
   }
-  emxInit_real_T(&b_st, &r2, 1, &sx_emlrtRTEI, true);
-  b_st.site = &dc_emlrtRSI;
+  emxInit_real_T(&b_st, &r2, 1, &tx_emlrtRTEI, true);
+  b_st.site = &ec_emlrtRSI;
   mtimes(&b_st, X, initialbeta, r2);
   if (y->size[0] != r2->size[0]) {
     emlrtSizeEqCheck1DR2012b(y->size[0], r2->size[0], &bd_emlrtECI,
                              (emlrtCTX)sp);
   }
-  emxInit_real_T(sp, &b_y, 1, &dx_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_y, 1, &ex_emlrtRTEI, true);
   /*  Squared residuals for all the observations */
   i = b_y->size[0];
   b_y->size[0] = y->size[0];
-  emxEnsureCapacity_real_T(sp, b_y, i, &dx_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, b_y, i, &ex_emlrtRTEI);
   loop_ub = y->size[0];
   for (i = 0; i < loop_ub; i++) {
     b_y->data[i] = y->data[i] - r2->data[i];
   }
-  emxInit_int32_T(sp, &i_r2s, 1, &tx_emlrtRTEI, true);
-  st.site = &cfb_emlrtRSI;
+  emxInit_int32_T(sp, &i_r2s, 1, &ux_emlrtRTEI, true);
+  st.site = &dfb_emlrtRSI;
   power(&st, b_y, r2);
   /*  Ordering of squared residuals */
-  st.site = &bfb_emlrtRSI;
-  b_st.site = &jl_emlrtRSI;
+  st.site = &cfb_emlrtRSI;
+  b_st.site = &kl_emlrtRSI;
   sort(&b_st, r2, i_r2s);
   if (1 > r2->size[0]) {
-    emlrtDynamicBoundsCheckR2012b(1, 1, r2->size[0], &ys_emlrtBCI,
+    emlrtDynamicBoundsCheckR2012b(1, 1, r2->size[0], &bt_emlrtBCI,
                                   (emlrtCTX)sp);
   }
   if (h != (int32_T)muDoubleScalarFloor(h)) {
@@ -709,25 +709,25 @@ void IRWLSreg(const emlrtStack *sp, const emxArray_real_T *y,
   }
   loop_ub_tmp = (int32_T)h;
   if (((int32_T)h < 1) || ((int32_T)h > r2->size[0])) {
-    emlrtDynamicBoundsCheckR2012b((int32_T)h, 1, r2->size[0], &xs_emlrtBCI,
+    emlrtDynamicBoundsCheckR2012b((int32_T)h, 1, r2->size[0], &at_emlrtBCI,
                                   (emlrtCTX)sp);
   }
-  emxInit_real_T(sp, &beta, 1, &fx_emlrtRTEI, true);
+  emxInit_real_T(sp, &beta, 1, &gx_emlrtRTEI, true);
   iv[0] = 1;
   iv[1] = (int32_T)h;
-  st.site = &afb_emlrtRSI;
+  st.site = &bfb_emlrtRSI;
   b_indexShapeCheck(&st, r2->size[0], iv);
   i = r2->size[0];
   r2->size[0] = (int32_T)h;
-  emxEnsureCapacity_real_T(sp, r2, i, &ex_emlrtRTEI);
-  st.site = &afb_emlrtRSI;
+  emxEnsureCapacity_real_T(sp, r2, i, &fx_emlrtRTEI);
+  st.site = &bfb_emlrtRSI;
   initialscale = sum(&st, r2);
   /*  Initialize parameters for the refining steps loop */
   iter = 0.0;
   betadiff = 9999.0;
   i = beta->size[0];
   beta->size[0] = initialbeta->size[0];
-  emxEnsureCapacity_real_T(sp, beta, i, &fx_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, beta, i, &gx_emlrtRTEI);
   loop_ub = initialbeta->size[0];
   for (i = 0; i < loop_ub; i++) {
     beta->data[i] = initialbeta->data[i];
@@ -735,7 +735,7 @@ void IRWLSreg(const emlrtStack *sp, const emxArray_real_T *y,
   *outIRWLS_numscale2rw = rtInf;
   i = outIRWLS_betarw->size[0];
   outIRWLS_betarw->size[0] = initialbeta->size[0];
-  emxEnsureCapacity_real_T(sp, outIRWLS_betarw, i, &gx_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, outIRWLS_betarw, i, &hx_emlrtRTEI);
   loop_ub = initialbeta->size[0];
   for (i = 0; i < loop_ub; i++) {
     outIRWLS_betarw->data[i] = initialbeta->data[i];
@@ -744,39 +744,39 @@ void IRWLSreg(const emlrtStack *sp, const emxArray_real_T *y,
   /*  update of weights moved at the end of the function */
   /*  weights=zeros(n,1); */
   /*  weights(i_r2s(1:h))=1; */
-  emxInit_boolean_T(sp, &b, 1, &vx_emlrtRTEI, true);
-  emxInit_real_T(sp, &b_X, 2, &jx_emlrtRTEI, true);
+  emxInit_boolean_T(sp, &b, 1, &wx_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_X, 2, &kx_emlrtRTEI, true);
   exitg1 = false;
   while ((!exitg1) && ((betadiff > reftol) && (iter < refsteps))) {
     iter++;
     /*  i_r2s= units with smallest h squared residuals */
     if (1 > i_r2s->size[0]) {
-      emlrtDynamicBoundsCheckR2012b(1, 1, i_r2s->size[0], &ws_emlrtBCI,
+      emlrtDynamicBoundsCheckR2012b(1, 1, i_r2s->size[0], &ys_emlrtBCI,
                                     (emlrtCTX)sp);
     }
     if (((int32_T)h < 1) || ((int32_T)h > i_r2s->size[0])) {
-      emlrtDynamicBoundsCheckR2012b((int32_T)h, 1, i_r2s->size[0], &vs_emlrtBCI,
+      emlrtDynamicBoundsCheckR2012b((int32_T)h, 1, i_r2s->size[0], &xs_emlrtBCI,
                                     (emlrtCTX)sp);
     }
     iv[0] = 1;
     iv[1] = (int32_T)h;
-    st.site = &yeb_emlrtRSI;
+    st.site = &afb_emlrtRSI;
     b_indexShapeCheck(&st, i_r2s->size[0], iv);
     i = i_r2s->size[0];
     i_r2s->size[0] = (int32_T)h;
-    emxEnsureCapacity_int32_T(sp, i_r2s, i, &ix_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, i_r2s, i, &jx_emlrtRTEI);
     /*  new coefficients based on units with smallest h squared */
     /*  residuals */
     loop_ub = X->size[1];
     i = b_X->size[0] * b_X->size[1];
     b_X->size[0] = (int32_T)h;
     b_X->size[1] = X->size[1];
-    emxEnsureCapacity_real_T(sp, b_X, i, &jx_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_X, i, &kx_emlrtRTEI);
     for (i = 0; i < loop_ub; i++) {
       for (i1 = 0; i1 < loop_ub_tmp; i1++) {
         if ((i_r2s->data[i1] < 1) || (i_r2s->data[i1] > X->size[0])) {
           emlrtDynamicBoundsCheckR2012b(i_r2s->data[i1], 1, X->size[0],
-                                        &at_emlrtBCI, (emlrtCTX)sp);
+                                        &ct_emlrtBCI, (emlrtCTX)sp);
         }
         b_X->data[i1 + b_X->size[0] * i] =
             X->data[(i_r2s->data[i1] + X->size[0] * i) - 1];
@@ -784,32 +784,32 @@ void IRWLSreg(const emlrtStack *sp, const emxArray_real_T *y,
     }
     i = b_y->size[0];
     b_y->size[0] = (int32_T)h;
-    emxEnsureCapacity_real_T(sp, b_y, i, &lx_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_y, i, &mx_emlrtRTEI);
     for (i = 0; i < loop_ub_tmp; i++) {
       if ((i_r2s->data[i] < 1) || (i_r2s->data[i] > y->size[0])) {
         emlrtDynamicBoundsCheckR2012b(i_r2s->data[i], 1, y->size[0],
-                                      &ct_emlrtBCI, (emlrtCTX)sp);
+                                      &et_emlrtBCI, (emlrtCTX)sp);
       }
       b_y->data[i] = y->data[i_r2s->data[i] - 1];
     }
-    st.site = &xeb_emlrtRSI;
+    st.site = &yeb_emlrtRSI;
     mldivide(&st, b_X, b_y, outIRWLS_betarw);
     /*  exit from the loop if the new beta has singular values. In such a */
     /*  case, any intermediate estimate is not reliable and we can just */
     /*  keep the initialbeta and initial scale. */
     i = b->size[0];
     b->size[0] = outIRWLS_betarw->size[0];
-    emxEnsureCapacity_boolean_T(sp, b, i, &mx_emlrtRTEI);
+    emxEnsureCapacity_boolean_T(sp, b, i, &nx_emlrtRTEI);
     loop_ub = outIRWLS_betarw->size[0];
     for (i = 0; i < loop_ub; i++) {
       b->data[i] = muDoubleScalarIsNaN(outIRWLS_betarw->data[i]);
     }
-    st.site = &web_emlrtRSI;
-    b_st.site = &efb_emlrtRSI;
+    st.site = &xeb_emlrtRSI;
+    b_st.site = &ffb_emlrtRSI;
     c_y = false;
-    c_st.site = &ffb_emlrtRSI;
+    c_st.site = &gfb_emlrtRSI;
     if ((1 <= b->size[0]) && (b->size[0] > 2147483646)) {
-      d_st.site = &gc_emlrtRSI;
+      d_st.site = &hc_emlrtRSI;
       check_forloop_overflow_error(&d_st);
     }
     loop_ub = 1;
@@ -825,7 +825,7 @@ void IRWLSreg(const emlrtStack *sp, const emxArray_real_T *y,
     if (c_y) {
       i = outIRWLS_betarw->size[0];
       outIRWLS_betarw->size[0] = initialbeta->size[0];
-      emxEnsureCapacity_real_T(sp, outIRWLS_betarw, i, &nx_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, outIRWLS_betarw, i, &ox_emlrtRTEI);
       loop_ub = initialbeta->size[0];
       for (i = 0; i < loop_ub; i++) {
         outIRWLS_betarw->data[i] = initialbeta->data[i];
@@ -840,7 +840,7 @@ void IRWLSreg(const emlrtStack *sp, const emxArray_real_T *y,
       }
       i = r2->size[0];
       r2->size[0] = beta->size[0];
-      emxEnsureCapacity_real_T(sp, r2, i, &ox_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, r2, i, &px_emlrtRTEI);
       loop_ub = beta->size[0];
       for (i = 0; i < loop_ub; i++) {
         r2->data[i] = beta->data[i] - outIRWLS_betarw->data[i];
@@ -865,8 +865,8 @@ void IRWLSreg(const emlrtStack *sp, const emxArray_real_T *y,
       }
       betadiff /= d_y;
       /*  update residuals */
-      st.site = &veb_emlrtRSI;
-      b_st.site = &ec_emlrtRSI;
+      st.site = &web_emlrtRSI;
+      b_st.site = &fc_emlrtRSI;
       if (outIRWLS_betarw->size[0] != X->size[1]) {
         if (((X->size[0] == 1) && (X->size[1] == 1)) ||
             (outIRWLS_betarw->size[0] == 1)) {
@@ -879,47 +879,47 @@ void IRWLSreg(const emlrtStack *sp, const emxArray_real_T *y,
                                         "MATLAB:innerdim", 0);
         }
       }
-      b_st.site = &dc_emlrtRSI;
+      b_st.site = &ec_emlrtRSI;
       mtimes(&b_st, X, outIRWLS_betarw, r2);
       if (y->size[0] != r2->size[0]) {
         emlrtSizeEqCheck1DR2012b(y->size[0], r2->size[0], &yc_emlrtECI,
                                  (emlrtCTX)sp);
       }
       /*  Ordering of all new squared residuals */
-      st.site = &ueb_emlrtRSI;
+      st.site = &veb_emlrtRSI;
       i = b_y->size[0];
       b_y->size[0] = y->size[0];
-      emxEnsureCapacity_real_T(&st, b_y, i, &px_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, b_y, i, &qx_emlrtRTEI);
       loop_ub = y->size[0];
       for (i = 0; i < loop_ub; i++) {
         b_y->data[i] = y->data[i] - r2->data[i];
       }
-      b_st.site = &ueb_emlrtRSI;
+      b_st.site = &veb_emlrtRSI;
       power(&b_st, b_y, r2);
-      b_st.site = &jl_emlrtRSI;
+      b_st.site = &kl_emlrtRSI;
       sort(&b_st, r2, i_r2s);
       /*  sum of the smallest new squared residuals */
       if (1 > r2->size[0]) {
-        emlrtDynamicBoundsCheckR2012b(1, 1, r2->size[0], &us_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b(1, 1, r2->size[0], &ws_emlrtBCI,
                                       (emlrtCTX)sp);
       }
       if (((int32_T)h < 1) || ((int32_T)h > r2->size[0])) {
-        emlrtDynamicBoundsCheckR2012b((int32_T)h, 1, r2->size[0], &ts_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b((int32_T)h, 1, r2->size[0], &vs_emlrtBCI,
                                       (emlrtCTX)sp);
       }
       iv[0] = 1;
       iv[1] = (int32_T)h;
-      st.site = &teb_emlrtRSI;
+      st.site = &ueb_emlrtRSI;
       b_indexShapeCheck(&st, r2->size[0], iv);
       i = r2->size[0];
       r2->size[0] = (int32_T)h;
-      emxEnsureCapacity_real_T(sp, r2, i, &qx_emlrtRTEI);
-      st.site = &teb_emlrtRSI;
+      emxEnsureCapacity_real_T(sp, r2, i, &rx_emlrtRTEI);
+      st.site = &ueb_emlrtRSI;
       *outIRWLS_numscale2rw = sum(&st, r2);
       /*  update beta */
       i = beta->size[0];
       beta->size[0] = outIRWLS_betarw->size[0];
-      emxEnsureCapacity_real_T(sp, beta, i, &rx_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, beta, i, &sx_emlrtRTEI);
       loop_ub = outIRWLS_betarw->size[0];
       for (i = 0; i < loop_ub; i++) {
         beta->data[i] = outIRWLS_betarw->data[i];
@@ -943,27 +943,27 @@ void IRWLSreg(const emlrtStack *sp, const emxArray_real_T *y,
   /*  0 for the other units. */
   i = outIRWLS_weights->size[0];
   outIRWLS_weights->size[0] = y->size[0];
-  emxEnsureCapacity_real_T(sp, outIRWLS_weights, i, &hx_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, outIRWLS_weights, i, &ix_emlrtRTEI);
   loop_ub = y->size[0];
   for (i = 0; i < loop_ub; i++) {
     outIRWLS_weights->data[i] = 0.0;
   }
   if (1 > i_r2s->size[0]) {
-    emlrtDynamicBoundsCheckR2012b(1, 1, i_r2s->size[0], &ss_emlrtBCI,
+    emlrtDynamicBoundsCheckR2012b(1, 1, i_r2s->size[0], &us_emlrtBCI,
                                   (emlrtCTX)sp);
   }
   if (((int32_T)h < 1) || ((int32_T)h > i_r2s->size[0])) {
-    emlrtDynamicBoundsCheckR2012b((int32_T)h, 1, i_r2s->size[0], &rs_emlrtBCI,
+    emlrtDynamicBoundsCheckR2012b((int32_T)h, 1, i_r2s->size[0], &ts_emlrtBCI,
                                   (emlrtCTX)sp);
   }
-  emxInit_int32_T(sp, &r, 2, &ux_emlrtRTEI, true);
+  emxInit_int32_T(sp, &r, 2, &vx_emlrtRTEI, true);
   i = r->size[0] * r->size[1];
   r->size[0] = 1;
   r->size[1] = (int32_T)h;
-  emxEnsureCapacity_int32_T(sp, r, i, &kx_emlrtRTEI);
+  emxEnsureCapacity_int32_T(sp, r, i, &lx_emlrtRTEI);
   for (i = 0; i < loop_ub_tmp; i++) {
     if ((i_r2s->data[i] < 1) || (i_r2s->data[i] > y->size[0])) {
-      emlrtDynamicBoundsCheckR2012b(i_r2s->data[i], 1, y->size[0], &bt_emlrtBCI,
+      emlrtDynamicBoundsCheckR2012b(i_r2s->data[i], 1, y->size[0], &dt_emlrtBCI,
                                     (emlrtCTX)sp);
     }
     r->data[i] = i_r2s->data[i];
@@ -1016,18 +1016,18 @@ real_T asvar(const emlrtStack *sp, real_T h, real_T n)
    */
   /* asvar computes the new degrees of freedom for the Student T */
   hn = h / n;
-  st.site = &pgb_emlrtRSI;
-  b_st.site = &fn_emlrtRSI;
+  st.site = &qgb_emlrtRSI;
+  b_st.site = &gn_emlrtRSI;
   if ((hn >= 0.0) && (hn <= 1.0)) {
     if (hn < 1.0) {
-      c_st.site = &jn_emlrtRSI;
+      c_st.site = &kn_emlrtRSI;
       dc = gammaincinv(&c_st, hn, 0.5);
-      c_st.site = &in_emlrtRSI;
+      c_st.site = &jn_emlrtRSI;
       dc1 = gammainc(&c_st, dc.re, 0.5);
-      c_st.site = &in_emlrtRSI;
+      c_st.site = &jn_emlrtRSI;
       if (muDoubleScalarHypot(dc1.re - hn, dc1.im) >
           hn * 1.4901161193847656E-8) {
-        c_st.site = &hn_emlrtRSI;
+        c_st.site = &in_emlrtRSI;
         y = NULL;
         m = emlrtCreateCharArray(2, &iv[0]);
         emlrtInitCharArrayR2013a(&c_st, 6, m, &rfmt[0]);
@@ -1035,10 +1035,10 @@ real_T asvar(const emlrtStack *sp, real_T h, real_T n)
         b_y = NULL;
         m = emlrtCreateDoubleScalar(2.0);
         emlrtAssign(&b_y, m);
-        d_st.site = &bjb_emlrtRSI;
+        d_st.site = &cjb_emlrtRSI;
         e_emlrt_marshallIn(&d_st, b_sprintf(&d_st, y, b_y, &r_emlrtMCI),
                            "<output of sprintf>", str);
-        c_st.site = &fbb_emlrtRSI;
+        c_st.site = &gbb_emlrtRSI;
         c_y = NULL;
         m = emlrtCreateCharArray(2, &iv1[0]);
         emlrtInitCharArrayR2013a(&c_st, 6, m, &rfmt[0]);
@@ -1046,10 +1046,10 @@ real_T asvar(const emlrtStack *sp, real_T h, real_T n)
         d_y = NULL;
         m = emlrtCreateDoubleScalar(hn);
         emlrtAssign(&d_y, m);
-        d_st.site = &bjb_emlrtRSI;
+        d_st.site = &cjb_emlrtRSI;
         e_emlrt_marshallIn(&d_st, b_sprintf(&d_st, c_y, d_y, &r_emlrtMCI),
                            "<output of sprintf>", b_str);
-        c_st.site = &gn_emlrtRSI;
+        c_st.site = &hn_emlrtRSI;
         i_warning(&c_st, b_cv, str, b_str);
       }
       qalfa = dc.re * 2.0;
@@ -1059,7 +1059,7 @@ real_T asvar(const emlrtStack *sp, real_T h, real_T n)
   } else {
     qalfa = rtNaN;
   }
-  st.site = &qgb_emlrtRSI;
+  st.site = &rgb_emlrtRSI;
   xk = qalfa / 2.0;
   b_xk = xk;
   b = muDoubleScalarIsNaN(xk);
@@ -1067,34 +1067,34 @@ real_T asvar(const emlrtStack *sp, real_T h, real_T n)
     if (xk < 0.0) {
       b_xk = 0.0;
     }
-    b_st.site = &vbb_emlrtRSI;
+    b_st.site = &wbb_emlrtRSI;
     dc = gammainc(&b_st, b_xk, 1.5);
     c2 = dc.re;
   } else {
     c2 = rtNaN;
   }
   a = 1.0 / c2;
-  st.site = &rgb_emlrtRSI;
+  st.site = &sgb_emlrtRSI;
   if (!b) {
     if (xk < 0.0) {
       xk = 0.0;
     }
-    b_st.site = &vbb_emlrtRSI;
+    b_st.site = &wbb_emlrtRSI;
     dc = gammainc(&b_st, xk, 2.5);
     b_xk = dc.re;
   } else {
     b_xk = rtNaN;
   }
-  st.site = &sgb_emlrtRSI;
-  xk = qalfa * hn - c2;
-  b_st.site = &bl_emlrtRSI;
-  c_st.site = &cl_emlrtRSI;
   st.site = &tgb_emlrtRSI;
-  b_st.site = &bl_emlrtRSI;
-  c_st.site = &cl_emlrtRSI;
+  xk = qalfa * hn - c2;
+  b_st.site = &cl_emlrtRSI;
+  c_st.site = &dl_emlrtRSI;
   st.site = &ugb_emlrtRSI;
-  b_st.site = &bl_emlrtRSI;
-  c_st.site = &cl_emlrtRSI;
+  b_st.site = &cl_emlrtRSI;
+  c_st.site = &dl_emlrtRSI;
+  st.site = &vgb_emlrtRSI;
+  b_st.site = &cl_emlrtRSI;
+  c_st.site = &dl_emlrtRSI;
   return a * a *
          (((3.0 * b_xk - 2.0 * qalfa * c2) + hn * (qalfa * qalfa)) - xk * xk);
 }
@@ -1139,9 +1139,9 @@ real_T corfactorRAW(const emlrtStack *sp, real_T n, real_T alpha)
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   /*  corfactorRAW function */
-  st.site = &mgb_emlrtRSI;
-  b_st.site = &bl_emlrtRSI;
-  c_st.site = &cl_emlrtRSI;
+  st.site = &pgb_emlrtRSI;
+  b_st.site = &cl_emlrtRSI;
+  c_st.site = &dl_emlrtRSI;
   if (n < 0.0) {
     emlrtErrorWithMessageIdR2018a(&c_st, &sb_emlrtRTEI,
                                   "Coder:toolbox:power_domainError",
@@ -1149,8 +1149,8 @@ real_T corfactorRAW(const emlrtStack *sp, real_T n, real_T alpha)
   }
   fp_500_n =
       1.0 - 1.2995580068132053 / muDoubleScalarPower(n, 0.604756680630497);
-  st.site = &ngb_emlrtRSI;
-  b_st.site = &bl_emlrtRSI;
+  st.site = &ogb_emlrtRSI;
+  b_st.site = &cl_emlrtRSI;
   fp_875_n =
       1.0 - 0.70357229237653807 / muDoubleScalarPower(n, 1.01646567502486);
   if ((0.5 <= alpha) && (alpha <= 0.875)) {
@@ -1158,7 +1158,7 @@ real_T corfactorRAW(const emlrtStack *sp, real_T n, real_T alpha)
   } else if ((0.875 < alpha) && (alpha < 1.0)) {
     fp_alpha_n = fp_875_n + (1.0 - fp_875_n) / 0.125 * (alpha - 0.875);
   } else {
-    st.site = &ogb_emlrtRSI;
+    st.site = &ngb_emlrtRSI;
     y = NULL;
     m = emlrtCreateCharArray(2, &iv[0]);
     emlrtInitCharArrayR2013a(&st, 17, m, &varargin_1[0]);
@@ -1167,7 +1167,7 @@ real_T corfactorRAW(const emlrtStack *sp, real_T n, real_T alpha)
     m = emlrtCreateCharArray(2, &iv2[0]);
     emlrtInitCharArrayR2013a(&st, 36, m, &varargin_2[0]);
     emlrtAssign(&c_y, m);
-    b_st.site = &xib_emlrtRSI;
+    b_st.site = &yib_emlrtRSI;
     o_error(&b_st, y, c_y, &d_emlrtMCI);
   }
   rawcorfac = 1.0 / fp_alpha_n;
@@ -1178,25 +1178,25 @@ real_T corfactorRAW(const emlrtStack *sp, real_T n, real_T alpha)
     m = emlrtCreateCharArray(2, &iv1[0]);
     emlrtInitCharArrayR2013a((emlrtCTX)sp, 44, m, &u[0]);
     emlrtAssign(&b_y, m);
-    st.site = &tib_emlrtRSI;
+    st.site = &uib_emlrtRSI;
     disp(&st, b_y, &jb_emlrtMCI);
     d_y = NULL;
     m = emlrtCreateCharArray(2, &iv3[0]);
     emlrtInitCharArrayR2013a((emlrtCTX)sp, 69, m, &cv15[0]);
     emlrtAssign(&d_y, m);
-    st.site = &sib_emlrtRSI;
+    st.site = &tib_emlrtRSI;
     disp(&st, d_y, &kb_emlrtMCI);
     e_y = NULL;
     m = emlrtCreateCharArray(2, &iv4[0]);
     emlrtInitCharArrayR2013a((emlrtCTX)sp, 75, m, &cv16[0]);
     emlrtAssign(&e_y, m);
-    st.site = &rib_emlrtRSI;
+    st.site = &sib_emlrtRSI;
     disp(&st, e_y, &lb_emlrtMCI);
     f_y = NULL;
     m = emlrtCreateCharArray(2, &iv5[0]);
     emlrtInitCharArrayR2013a((emlrtCTX)sp, 51, m, &cv17[0]);
     emlrtAssign(&f_y, m);
-    st.site = &qib_emlrtRSI;
+    st.site = &rib_emlrtRSI;
     disp(&st, f_y, &mb_emlrtMCI);
     /*  end */
   }
@@ -1231,9 +1231,9 @@ real_T corfactorREW(const emlrtStack *sp, real_T n, real_T alpha)
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   /*  corfactorREW function */
-  st.site = &hhb_emlrtRSI;
-  b_st.site = &bl_emlrtRSI;
-  c_st.site = &cl_emlrtRSI;
+  st.site = &jhb_emlrtRSI;
+  b_st.site = &cl_emlrtRSI;
+  c_st.site = &dl_emlrtRSI;
   if (n < 0.0) {
     emlrtErrorWithMessageIdR2018a(&c_st, &sb_emlrtRTEI,
                                   "Coder:toolbox:power_domainError",
@@ -1241,7 +1241,7 @@ real_T corfactorREW(const emlrtStack *sp, real_T n, real_T alpha)
   }
   fp_500_n = 1.0 - 3.0373378792330419 / muDoubleScalarPower(n, 1.5182890270453);
   st.site = &ihb_emlrtRSI;
-  b_st.site = &bl_emlrtRSI;
+  b_st.site = &cl_emlrtRSI;
   fp_875_n =
       1.0 - 0.51660962465337334 / muDoubleScalarPower(n, 0.88939595831888);
   if ((0.5 <= alpha) && (alpha <= 0.875)) {
@@ -1259,25 +1259,25 @@ real_T corfactorREW(const emlrtStack *sp, real_T n, real_T alpha)
     m = emlrtCreateCharArray(2, &iv[0]);
     emlrtInitCharArrayR2013a((emlrtCTX)sp, 44, m, &u[0]);
     emlrtAssign(&y, m);
-    st.site = &pib_emlrtRSI;
+    st.site = &qib_emlrtRSI;
     disp(&st, y, &nb_emlrtMCI);
     b_y = NULL;
     m = emlrtCreateCharArray(2, &iv1[0]);
     emlrtInitCharArrayR2013a((emlrtCTX)sp, 69, m, &cv15[0]);
     emlrtAssign(&b_y, m);
-    st.site = &oib_emlrtRSI;
+    st.site = &pib_emlrtRSI;
     disp(&st, b_y, &ob_emlrtMCI);
     c_y = NULL;
     m = emlrtCreateCharArray(2, &iv2[0]);
     emlrtInitCharArrayR2013a((emlrtCTX)sp, 75, m, &cv16[0]);
     emlrtAssign(&c_y, m);
-    st.site = &nib_emlrtRSI;
+    st.site = &oib_emlrtRSI;
     disp(&st, c_y, &pb_emlrtMCI);
     d_y = NULL;
     m = emlrtCreateCharArray(2, &iv3[0]);
     emlrtInitCharArrayR2013a((emlrtCTX)sp, 51, m, &cv17[0]);
     emlrtAssign(&d_y, m);
-    st.site = &mib_emlrtRSI;
+    st.site = &nib_emlrtRSI;
     disp(&st, d_y, &qb_emlrtMCI);
     /*  end */
   }

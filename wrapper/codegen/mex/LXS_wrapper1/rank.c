@@ -22,7 +22,7 @@
 #include <math.h>
 
 /* Variable Definitions */
-static emlrtRSInfo md_emlrtRSI = {
+static emlrtRSInfo nd_emlrtRSI = {
     20,           /* lineNo */
     "local_rank", /* fcnName */
     "C:\\Program "
@@ -30,7 +30,7 @@ static emlrtRSInfo md_emlrtRSI = {
                                                                         */
 };
 
-static emlrtRSInfo nd_emlrtRSI = {
+static emlrtRSInfo od_emlrtRSI = {
     22,           /* lineNo */
     "local_rank", /* fcnName */
     "C:\\Program "
@@ -38,7 +38,7 @@ static emlrtRSInfo nd_emlrtRSI = {
                                                                         */
 };
 
-static emlrtRSInfo od_emlrtRSI = {
+static emlrtRSInfo pd_emlrtRSI = {
     31,           /* lineNo */
     "local_rank", /* fcnName */
     "C:\\Program "
@@ -46,7 +46,7 @@ static emlrtRSInfo od_emlrtRSI = {
                                                                         */
 };
 
-static emlrtRSInfo pd_emlrtRSI = {
+static emlrtRSInfo qd_emlrtRSI = {
     12,    /* lineNo */
     "svd", /* fcnName */
     "C:\\Program "
@@ -54,7 +54,7 @@ static emlrtRSInfo pd_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRSInfo qd_emlrtRSI = {
+static emlrtRSInfo rd_emlrtRSI = {
     15,    /* lineNo */
     "svd", /* fcnName */
     "C:\\Program "
@@ -62,7 +62,7 @@ static emlrtRSInfo qd_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRSInfo rd_emlrtRSI = {
+static emlrtRSInfo sd_emlrtRSI = {
     20,    /* lineNo */
     "svd", /* fcnName */
     "C:\\Program "
@@ -70,7 +70,7 @@ static emlrtRSInfo rd_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRSInfo ae_emlrtRSI =
+static emlrtRSInfo be_emlrtRSI =
     {
         46,    /* lineNo */
         "eps", /* fcnName */
@@ -123,14 +123,14 @@ int32_T local_rank(const emlrtStack *sp, const emxArray_real_T *A)
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
   irank = 0;
   if ((A->size[0] != 0) && (A->size[1] != 0)) {
-    st.site = &md_emlrtRSI;
-    b_st.site = &pd_emlrtRSI;
-    c_st.site = &sd_emlrtRSI;
-    d_st.site = &td_emlrtRSI;
+    st.site = &nd_emlrtRSI;
+    b_st.site = &qd_emlrtRSI;
+    c_st.site = &td_emlrtRSI;
+    d_st.site = &ud_emlrtRSI;
     p = flatVectorAllOrAny(&d_st, A);
     emxInit_real_T(&st, &s, 1, &qe_emlrtRTEI, true);
     if (p) {
-      b_st.site = &qd_emlrtRSI;
+      b_st.site = &rd_emlrtRSI;
       svd(&b_st, A, s);
     } else {
       emxInit_real_T(&st, &r, 2, &pe_emlrtRTEI, true);
@@ -142,7 +142,7 @@ int32_T local_rank(const emlrtStack *sp, const emxArray_real_T *A)
       for (i = 0; i < loop_ub; i++) {
         r->data[i] = 0.0;
       }
-      b_st.site = &rd_emlrtRSI;
+      b_st.site = &sd_emlrtRSI;
       svd(&b_st, r, s);
       loop_ub = s->size[0];
       i = s->size[0];
@@ -153,8 +153,8 @@ int32_T local_rank(const emlrtStack *sp, const emxArray_real_T *A)
         s->data[i] = rtNaN;
       }
     }
-    st.site = &nd_emlrtRSI;
-    b_st.site = &ae_emlrtRSI;
+    st.site = &od_emlrtRSI;
+    b_st.site = &be_emlrtRSI;
     absx = muDoubleScalarAbs(s->data[0]);
     if ((!muDoubleScalarIsInf(absx)) && (!muDoubleScalarIsNaN(absx))) {
       if (absx <= 2.2250738585072014E-308) {
@@ -167,9 +167,9 @@ int32_T local_rank(const emlrtStack *sp, const emxArray_real_T *A)
       absx = rtNaN;
     }
     absx *= (real_T)muIntScalarMax_sint32(A->size[0], A->size[1]);
-    st.site = &od_emlrtRSI;
+    st.site = &pd_emlrtRSI;
     if ((1 <= s->size[0]) && (s->size[0] > 2147483646)) {
-      b_st.site = &gc_emlrtRSI;
+      b_st.site = &hc_emlrtRSI;
       check_forloop_overflow_error(&b_st);
     }
     loop_ub = 0;

@@ -17,7 +17,7 @@
 #include <stdio.h>
 
 /* Variable Definitions */
-static emlrtRSInfo id_emlrtRSI = {
+static emlrtRSInfo jd_emlrtRSI = {
     54,        /* lineNo */
     "int2str", /* fcnName */
     "C:\\Program "
@@ -25,7 +25,7 @@ static emlrtRSInfo id_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRSInfo jd_emlrtRSI = {
+static emlrtRSInfo kd_emlrtRSI = {
     94,        /* lineNo */
     "int2str", /* fcnName */
     "C:\\Program "
@@ -33,7 +33,7 @@ static emlrtRSInfo jd_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRSInfo kd_emlrtRSI = {
+static emlrtRSInfo ld_emlrtRSI = {
     25,                 /* lineNo */
     "printNumToBuffer", /* fcnName */
     "C:\\Program "
@@ -60,7 +60,7 @@ static emlrtDCInfo h_emlrtDCI = {
     4 /* checkKind */
 };
 
-static emlrtRSInfo ajb_emlrtRSI = {
+static emlrtRSInfo bjb_emlrtRSI = {
     26,                 /* lineNo */
     "printNumToBuffer", /* fcnName */
     "C:\\Program "
@@ -171,15 +171,15 @@ void int2str(const emlrtStack *sp, real_T xin, char_T s_data[],
     if (x == 0.0) {
       ub = 1.0;
     } else {
-      st.site = &id_emlrtRSI;
+      st.site = &jd_emlrtRSI;
       b_x = muDoubleScalarFloor(muDoubleScalarLog10(muDoubleScalarAbs(x)));
       ub = b_x + 1.0;
       if (x < 0.0) {
         ub = (b_x + 1.0) + 1.0;
       }
     }
-    st.site = &jd_emlrtRSI;
-    b_st.site = &kd_emlrtRSI;
+    st.site = &kd_emlrtRSI;
+    b_st.site = &ld_emlrtRSI;
     if ((int32_T)ub <= 310) {
       i = (int32_T)ub;
     } else {
@@ -199,7 +199,7 @@ void int2str(const emlrtStack *sp, real_T xin, char_T s_data[],
     c_y = NULL;
     m = emlrtCreateDoubleScalar(x);
     emlrtAssign(&c_y, m);
-    b_st.site = &ajb_emlrtRSI;
+    b_st.site = &bjb_emlrtRSI;
     emlrt_marshallIn(&b_st, feval(&b_st, y, b_y, c_y, &e_emlrtMCI),
                      "<output of feval>", s_data, s_size);
   }

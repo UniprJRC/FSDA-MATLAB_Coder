@@ -2567,253 +2567,253 @@ static emlrtBCInfo wk_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtRTEInfo fh_emlrtRTEI = { 292,/* lineNo */
+static emlrtRTEInfo eh_emlrtRTEI = { 292,/* lineNo */
   1,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo gh_emlrtRTEI = { 363,/* lineNo */
+static emlrtRTEInfo fh_emlrtRTEI = { 363,/* lineNo */
   5,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo hh_emlrtRTEI = { 372,/* lineNo */
+static emlrtRTEInfo gh_emlrtRTEI = { 372,/* lineNo */
   17,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo ih_emlrtRTEI = { 373,/* lineNo */
+static emlrtRTEInfo hh_emlrtRTEI = { 373,/* lineNo */
   9,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo kh_emlrtRTEI = { 372,/* lineNo */
+static emlrtRTEInfo jh_emlrtRTEI = { 372,/* lineNo */
   36,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo lh_emlrtRTEI = { 391,/* lineNo */
+static emlrtRTEInfo kh_emlrtRTEI = { 391,/* lineNo */
   25,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo mh_emlrtRTEI = { 389,/* lineNo */
+static emlrtRTEInfo lh_emlrtRTEI = { 389,/* lineNo */
   28,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo nh_emlrtRTEI = { 392,/* lineNo */
+static emlrtRTEInfo mh_emlrtRTEI = { 392,/* lineNo */
+  5,                                   /* colNo */
+  "FSM",                               /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
+};
+
+static emlrtRTEInfo oh_emlrtRTEI = { 442,/* lineNo */
   5,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
 static emlrtRTEInfo ph_emlrtRTEI = { 442,/* lineNo */
-  5,                                   /* colNo */
-  "FSM",                               /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
-};
-
-static emlrtRTEInfo qh_emlrtRTEI = { 442,/* lineNo */
   34,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo rh_emlrtRTEI = { 434,/* lineNo */
+static emlrtRTEInfo qh_emlrtRTEI = { 434,/* lineNo */
   28,                                  /* colNo */
+  "FSM",                               /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
+};
+
+static emlrtRTEInfo rh_emlrtRTEI = { 439,/* lineNo */
+  5,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
 static emlrtRTEInfo sh_emlrtRTEI = { 439,/* lineNo */
-  5,                                   /* colNo */
-  "FSM",                               /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
-};
-
-static emlrtRTEInfo th_emlrtRTEI = { 439,/* lineNo */
   44,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo uh_emlrtRTEI = { 434,/* lineNo */
+static emlrtRTEInfo th_emlrtRTEI = { 434,/* lineNo */
   9,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo vh_emlrtRTEI = { 1353,/* lineNo */
+static emlrtRTEInfo uh_emlrtRTEI = { 1353,/* lineNo */
   5,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo wh_emlrtRTEI = { 1348,/* lineNo */
+static emlrtRTEInfo vh_emlrtRTEI = { 1348,/* lineNo */
   22,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo xh_emlrtRTEI = { 1345,/* lineNo */
+static emlrtRTEInfo wh_emlrtRTEI = { 1345,/* lineNo */
   28,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo yh_emlrtRTEI = { 1,/* lineNo */
+static emlrtRTEInfo xh_emlrtRTEI = { 1,/* lineNo */
   16,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo ai_emlrtRTEI = { 1345,/* lineNo */
+static emlrtRTEInfo yh_emlrtRTEI = { 1345,/* lineNo */
   22,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo bi_emlrtRTEI = { 1358,/* lineNo */
+static emlrtRTEInfo ai_emlrtRTEI = { 1358,/* lineNo */
   10,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo ci_emlrtRTEI = { 1359,/* lineNo */
+static emlrtRTEInfo bi_emlrtRTEI = { 1359,/* lineNo */
   10,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo di_emlrtRTEI = { 1270,/* lineNo */
+static emlrtRTEInfo ci_emlrtRTEI = { 1270,/* lineNo */
   20,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo ei_emlrtRTEI = { 1388,/* lineNo */
+static emlrtRTEInfo di_emlrtRTEI = { 1388,/* lineNo */
   1,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo fi_emlrtRTEI = { 1389,/* lineNo */
+static emlrtRTEInfo ei_emlrtRTEI = { 1389,/* lineNo */
   1,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo gi_emlrtRTEI = { 1391,/* lineNo */
+static emlrtRTEInfo fi_emlrtRTEI = { 1391,/* lineNo */
   1,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo hi_emlrtRTEI = { 645,/* lineNo */
+static emlrtRTEInfo gi_emlrtRTEI = { 645,/* lineNo */
   24,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo ii_emlrtRTEI = { 1278,/* lineNo */
+static emlrtRTEInfo hi_emlrtRTEI = { 1278,/* lineNo */
   41,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo ji_emlrtRTEI = { 1278,/* lineNo */
+static emlrtRTEInfo ii_emlrtRTEI = { 1278,/* lineNo */
   17,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo ki_emlrtRTEI = { 1281,/* lineNo */
+static emlrtRTEInfo ji_emlrtRTEI = { 1281,/* lineNo */
   29,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo li_emlrtRTEI = { 1284,/* lineNo */
+static emlrtRTEInfo ki_emlrtRTEI = { 1284,/* lineNo */
   17,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo mi_emlrtRTEI = { 339,/* lineNo */
+static emlrtRTEInfo li_emlrtRTEI = { 339,/* lineNo */
   5,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo ni_emlrtRTEI = { 348,/* lineNo */
+static emlrtRTEInfo mi_emlrtRTEI = { 348,/* lineNo */
   6,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo oi_emlrtRTEI = { 431,/* lineNo */
+static emlrtRTEInfo ni_emlrtRTEI = { 431,/* lineNo */
   10,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo pi_emlrtRTEI = { 659,/* lineNo */
+static emlrtRTEInfo oi_emlrtRTEI = { 659,/* lineNo */
   18,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo qi_emlrtRTEI = { 1345,/* lineNo */
+static emlrtRTEInfo pi_emlrtRTEI = { 1345,/* lineNo */
   9,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo ri_emlrtRTEI = { 1357,/* lineNo */
+static emlrtRTEInfo qi_emlrtRTEI = { 1357,/* lineNo */
   1,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo si_emlrtRTEI = { 1358,/* lineNo */
+static emlrtRTEInfo ri_emlrtRTEI = { 1358,/* lineNo */
   1,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo ti_emlrtRTEI = { 467,/* lineNo */
+static emlrtRTEInfo si_emlrtRTEI = { 467,/* lineNo */
   13,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo ui_emlrtRTEI = { 468,/* lineNo */
+static emlrtRTEInfo ti_emlrtRTEI = { 468,/* lineNo */
   13,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo vi_emlrtRTEI = { 469,/* lineNo */
+static emlrtRTEInfo ui_emlrtRTEI = { 469,/* lineNo */
   13,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo wi_emlrtRTEI = { 470,/* lineNo */
+static emlrtRTEInfo vi_emlrtRTEI = { 470,/* lineNo */
   13,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo xi_emlrtRTEI = { 466,/* lineNo */
+static emlrtRTEInfo wi_emlrtRTEI = { 466,/* lineNo */
   13,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
@@ -2935,7 +2935,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
   i_st.prev = &h_st;
   i_st.tls = h_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  emxInit_real_T(sp, &loc, 2, &si_emlrtRTEI, true);
+  emxInit_real_T(sp, &loc, 2, &ri_emlrtRTEI, true);
   st.site = &ph_emlrtRSI;
   b_st.site = &xf_emlrtRSI;
   st.site = &ph_emlrtRSI;
@@ -3242,16 +3242,16 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
     }
   }
 
-  emxInit_real_T(sp, &seq, 1, &fh_emlrtRTEI, true);
+  emxInit_real_T(sp, &seq, 1, &eh_emlrtRTEI, true);
   i = seq->size[0];
   seq->size[0] = loc->size[1];
-  emxEnsureCapacity_real_T(sp, seq, i, &fh_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, seq, i, &eh_emlrtRTEI);
   loop_ub = loc->size[1];
   for (i = 0; i < loop_ub; i++) {
     seq->data[i] = loc->data[i];
   }
 
-  emxInit_real_T(sp, &fre, 2, &ni_emlrtRTEI, true);
+  emxInit_real_T(sp, &fre, 2, &mi_emlrtRTEI, true);
 
   /*  Write in structure 'options' the options chosen by the user */
   init_contents = varargin_8;
@@ -3291,15 +3291,15 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       &fc_emlrtBCI, (emlrtCTX)sp);
   }
 
-  emxInit_real_T(sp, &bs, 1, &mi_emlrtRTEI, true);
+  emxInit_real_T(sp, &bs, 1, &li_emlrtRTEI, true);
   i = bs->size[0];
   bs->size[0] = (int32_T)varargin_12;
-  emxEnsureCapacity_real_T(sp, bs, i, &gh_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, bs, i, &fh_emlrtRTEI);
   for (i = 0; i < irank; i++) {
     bs->data[i] = fre->data[i];
   }
 
-  emxInit_real_T(sp, &b_Y, 2, &hh_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_Y, 2, &gh_emlrtRTEI, true);
 
   /*  the subset need to be incremented if it is not full rank. We also */
   /*  treat the unfortunate case when the rank of the matrix is v but a */
@@ -3310,7 +3310,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
   /* variable. This situation does not decrease the rank of Y, but it */
   /* decreases the rank of ym (i.e. Y-mean(Y)) inside FSMmmd. */
   loop_ub = Y->size[1];
-  emxInit_real_T(sp, &goodobs, 2, &ri_emlrtRTEI, true);
+  emxInit_real_T(sp, &goodobs, 2, &qi_emlrtRTEI, true);
   do {
     exitg1 = 0;
     st.site = &ih_emlrtRSI;
@@ -3329,7 +3329,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
     i = b_Y->size[0] * b_Y->size[1];
     b_Y->size[0] = bs->size[0];
     b_Y->size[1] = loop_ub;
-    emxEnsureCapacity_real_T(&st, b_Y, i, &hh_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, b_Y, i, &gh_emlrtRTEI);
     for (i = 0; i < loop_ub; i++) {
       irank = bs->size[0];
       for (i1 = 0; i1 < irank; i1++) {
@@ -3370,7 +3370,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       i1 = goodobs->size[0] * goodobs->size[1];
       goodobs->size[0] = 1;
       goodobs->size[1] = Y->size[1];
-      emxEnsureCapacity_real_T(&g_st, goodobs, i1, &jh_emlrtRTEI);
+      emxEnsureCapacity_real_T(&g_st, goodobs, i1, &ih_emlrtRTEI);
       if (Y->size[1] >= 1) {
         h_st.site = &kb_emlrtRSI;
         if (Y->size[1] > 2147483646) {
@@ -3431,7 +3431,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       i1 = loc->size[0] * loc->size[1];
       loc->size[0] = 1;
       loc->size[1] = Y->size[1];
-      emxEnsureCapacity_real_T(&g_st, loc, i1, &jh_emlrtRTEI);
+      emxEnsureCapacity_real_T(&g_st, loc, i1, &ih_emlrtRTEI);
       if (Y->size[1] >= 1) {
         h_st.site = &kb_emlrtRSI;
         if (Y->size[1] > 2147483646) {
@@ -3473,7 +3473,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       st.site = &ih_emlrtRSI;
       i = goodobs->size[0] * goodobs->size[1];
       goodobs->size[0] = 1;
-      emxEnsureCapacity_real_T(&st, goodobs, i, &kh_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, goodobs, i, &jh_emlrtRTEI);
       irank = goodobs->size[1] - 1;
       for (i = 0; i <= irank; i++) {
         goodobs->data[i] -= loc->data[i];
@@ -3568,7 +3568,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
 
       i = bs->size[0];
       bs->size[0] = irank;
-      emxEnsureCapacity_real_T(sp, bs, i, &ih_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, bs, i, &hh_emlrtRTEI);
       for (i = 0; i < irank; i++) {
         bs->data[i] = fre->data[i];
       }
@@ -3589,11 +3589,11 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
   }
 
   /*  Compute Minimum Mahalanobis Distance for each step of the search */
-  emxInit_real_T(sp, &b_bs, 1, &lh_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_bs, 1, &kh_emlrtRTEI, true);
   if (Y->size[0] < 5000) {
     i = b_bs->size[0];
     b_bs->size[0] = bs->size[0];
-    emxEnsureCapacity_real_T(sp, b_bs, i, &mh_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_bs, i, &lh_emlrtRTEI);
     loop_ub = bs->size[0] - 1;
     for (i = 0; i <= loop_ub; i++) {
       b_bs->data[i] = bs->data[i];
@@ -3604,7 +3604,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
   } else {
     i = b_bs->size[0];
     b_bs->size[0] = bs->size[0];
-    emxEnsureCapacity_real_T(sp, b_bs, i, &lh_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_bs, i, &kh_emlrtRTEI);
     loop_ub = bs->size[0] - 1;
     for (i = 0; i <= loop_ub; i++) {
       b_bs->data[i] = bs->data[i];
@@ -3615,15 +3615,15 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
     i = out_cov->size[0] * out_cov->size[1];
     out_cov->size[0] = 1;
     out_cov->size[1] = 1;
-    emxEnsureCapacity_real_T(sp, out_cov, i, &nh_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, out_cov, i, &mh_emlrtRTEI);
     out_cov->data[0] = 0.0;
   }
 
-  emxInit_boolean_T(sp, &r, 2, &oh_emlrtRTEI, true);
+  emxInit_boolean_T(sp, &r, 2, &nh_emlrtRTEI, true);
   i = r->size[0] * r->size[1];
   r->size[0] = out_mmd->size[0];
   r->size[1] = out_mmd->size[1];
-  emxEnsureCapacity_boolean_T(sp, r, i, &oh_emlrtRTEI);
+  emxEnsureCapacity_boolean_T(sp, r, i, &nh_emlrtRTEI);
   loop_ub = out_mmd->size[0] * out_mmd->size[1];
   for (i = 0; i < loop_ub; i++) {
     r->data[i] = muDoubleScalarIsNaN(out_mmd->data[i]);
@@ -3653,10 +3653,10 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
     /*  Part 1. Signal detection and validation */
     b_signal = 0;
     sto = 0;
-    emxInit_real_T(sp, &gbonf, 2, &oi_emlrtRTEI, true);
-    emxInit_real_T(sp, &gmin, 2, &sh_emlrtRTEI, true);
-    emxInit_real_T(sp, &gmin1, 2, &th_emlrtRTEI, true);
-    emxInit_int32_T(sp, &ia, 1, &xi_emlrtRTEI, true);
+    emxInit_real_T(sp, &gbonf, 2, &ni_emlrtRTEI, true);
+    emxInit_real_T(sp, &gmin, 2, &rh_emlrtRTEI, true);
+    emxInit_real_T(sp, &gmin1, 2, &sh_emlrtRTEI, true);
+    emxInit_int32_T(sp, &ia, 1, &wi_emlrtRTEI, true);
     if ((varargin_4_size[0] != 0) && (varargin_4_size[1] != 0)) {
       b_varargin_4_size[0] = 1;
       b_varargin_4_size[1] = 1;
@@ -3675,7 +3675,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
         FSMbonfbound(&st, Y->size[0], Y->size[1], varargin_4_data,
                      varargin_4_size, init_contents, gbonf);
       } else {
-        emxInit_real_T(sp, &b, 1, &rh_emlrtRTEI, true);
+        emxInit_real_T(sp, &b, 1, &qh_emlrtRTEI, true);
         st.site = &ch_emlrtRSI;
         d = (real_T)Y->size[0] - init_contents;
         if (!(d >= 0.0)) {
@@ -3688,7 +3688,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
 
         i = b->size[0];
         b->size[0] = (int32_T)d;
-        emxEnsureCapacity_real_T(&st, b, i, &rh_emlrtRTEI);
+        emxEnsureCapacity_real_T(&st, b, i, &qh_emlrtRTEI);
         d = (real_T)Y->size[0] - init_contents;
         if (!(d >= 0.0)) {
           emlrtNonNegativeCheckR2012b(d, &y_emlrtDCI, &st);
@@ -3721,7 +3721,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
         i = gbonf->size[0] * gbonf->size[1];
         gbonf->size[0] = b_bs->size[0];
         gbonf->size[1] = 1;
-        emxEnsureCapacity_real_T(sp, gbonf, i, &uh_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, gbonf, i, &th_emlrtRTEI);
         loop_ub = b_bs->size[0];
         emxFree_real_T(&b);
         for (i = 0; i < loop_ub; i++) {
@@ -3739,7 +3739,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       i = gmin->size[0] * gmin->size[1];
       gmin->size[0] = 1;
       gmin->size[1] = 1;
-      emxEnsureCapacity_real_T(sp, gmin, i, &sh_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, gmin, i, &rh_emlrtRTEI);
       gmin->data[0] = 0.0;
       NoFalseSig = true;
       incre = 0.0;
@@ -3747,7 +3747,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       i = gmin1->size[0] * gmin1->size[1];
       gmin1->size[0] = 1;
       gmin1->size[1] = 1;
-      emxEnsureCapacity_real_T(sp, gmin1, i, &th_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, gmin1, i, &sh_emlrtRTEI);
       gmin1->data[0] = 0.0;
       nout_size_idx_0 = 1;
       nout_size_idx_1 = 1;
@@ -3757,14 +3757,14 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       i = gbonf->size[0] * gbonf->size[1];
       gbonf->size[0] = 1;
       gbonf->size[1] = 1;
-      emxEnsureCapacity_real_T(sp, gbonf, i, &ph_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, gbonf, i, &oh_emlrtRTEI);
       gbonf->data[0] = 0.0;
       incre = 0.0;
       ii = 0U;
       i = gmin1->size[0] * gmin1->size[1];
       gmin1->size[0] = 1;
       gmin1->size[1] = 1;
-      emxEnsureCapacity_real_T(sp, gmin1, i, &qh_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, gmin1, i, &ph_emlrtRTEI);
       gmin1->data[0] = 0.0;
       if (out_mmd->size[0] < 4) {
         st.site = &bh_emlrtRSI;
@@ -3878,7 +3878,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
 
       i = ia->size[0];
       ia->size[0] = a;
-      emxEnsureCapacity_int32_T(sp, ia, i, &yh_emlrtRTEI);
+      emxEnsureCapacity_int32_T(sp, ia, i, &xh_emlrtRTEI);
       irank = 0;
       for (b_i = 0; b_i <= idx; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] > gmin->data[b_i + gmin->size
@@ -3897,10 +3897,10 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
         }
       }
 
-      emxInit_int32_T(sp, &r1, 1, &ti_emlrtRTEI, true);
+      emxInit_int32_T(sp, &r1, 1, &si_emlrtRTEI, true);
       i = r1->size[0];
       r1->size[0] = a;
-      emxEnsureCapacity_int32_T(sp, r1, i, &yh_emlrtRTEI);
+      emxEnsureCapacity_int32_T(sp, r1, i, &xh_emlrtRTEI);
       irank = 0;
       for (b_i = 0; b_i <= idx; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] > gmin->data[b_i + gmin->size
@@ -3919,10 +3919,10 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
         }
       }
 
-      emxInit_int32_T(sp, &r2, 1, &ui_emlrtRTEI, true);
+      emxInit_int32_T(sp, &r2, 1, &ti_emlrtRTEI, true);
       i = r2->size[0];
       r2->size[0] = a;
-      emxEnsureCapacity_int32_T(sp, r2, i, &yh_emlrtRTEI);
+      emxEnsureCapacity_int32_T(sp, r2, i, &xh_emlrtRTEI);
       irank = 0;
       for (b_i = 0; b_i <= idx; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] > gmin->data[b_i + gmin->size
@@ -3941,10 +3941,10 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
         }
       }
 
-      emxInit_int32_T(sp, &r3, 1, &vi_emlrtRTEI, true);
+      emxInit_int32_T(sp, &r3, 1, &ui_emlrtRTEI, true);
       i = r3->size[0];
       r3->size[0] = a;
-      emxEnsureCapacity_int32_T(sp, r3, i, &yh_emlrtRTEI);
+      emxEnsureCapacity_int32_T(sp, r3, i, &xh_emlrtRTEI);
       irank = 0;
       for (b_i = 0; b_i <= idx; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] > gmin->data[b_i + gmin->size
@@ -3963,10 +3963,10 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
         }
       }
 
-      emxInit_int32_T(sp, &r4, 1, &wi_emlrtRTEI, true);
+      emxInit_int32_T(sp, &r4, 1, &vi_emlrtRTEI, true);
       i = r4->size[0];
       r4->size[0] = a;
-      emxEnsureCapacity_int32_T(sp, r4, i, &yh_emlrtRTEI);
+      emxEnsureCapacity_int32_T(sp, r4, i, &xh_emlrtRTEI);
       irank = 0;
       for (b_i = 0; b_i <= idx; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] < gmin->data[b_i + gmin->size
@@ -4091,8 +4091,8 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
     /*  Signal detection loop */
     b_i = 3;
     c_i = 3;
-    emxInit_real_T(sp, &gval, 2, &pi_emlrtRTEI, true);
-    emxInit_boolean_T(sp, &x, 1, &hi_emlrtRTEI, true);
+    emxInit_real_T(sp, &gval, 2, &oi_emlrtRTEI, true);
+    emxInit_boolean_T(sp, &x, 1, &gi_emlrtRTEI, true);
     exitg2 = false;
     while ((!exitg2) && (c_i - 3 <= out_mmd->size[0] - 3)) {
       b_i = c_i;
@@ -5442,7 +5442,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
             st.site = &mg_emlrtRSI;
             i1 = x->size[0];
             x->size[0] = loop_ub;
-            emxEnsureCapacity_boolean_T(&st, x, i1, &hi_emlrtRTEI);
+            emxEnsureCapacity_boolean_T(&st, x, i1, &gi_emlrtRTEI);
             for (i1 = 0; i1 < loop_ub; i1++) {
               x->data[i1] = (out_mmd->data[((i + i1) + out_mmd->size[0]) + 1] <
                              gmin->data[((k + i1) + gmin->size[0] * (c001 - 1))
@@ -5778,7 +5778,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
           st.site = &gg_emlrtRSI;
           i1 = x->size[0];
           x->size[0] = loop_ub;
-          emxEnsureCapacity_boolean_T(&st, x, i1, &di_emlrtRTEI);
+          emxEnsureCapacity_boolean_T(&st, x, i1, &ci_emlrtRTEI);
           for (i1 = 0; i1 < loop_ub; i1++) {
             x->data[i1] = (gmin1->data[((i + i1) + gmin1->size[0] * 3) + 1] >
                            out_mmd->data[((k + i1) + out_mmd->size[0]) + 1]);
@@ -5864,7 +5864,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
             st.site = &fg_emlrtRSI;
             a = x->size[0];
             x->size[0] = loop_ub;
-            emxEnsureCapacity_boolean_T(&st, x, a, &ii_emlrtRTEI);
+            emxEnsureCapacity_boolean_T(&st, x, a, &hi_emlrtRTEI);
             for (a = 0; a < loop_ub; a++) {
               x->data[a] = (gmin1->data[((k + a) + gmin1->size[0] * 3) + 1] >
                             out_mmd->data[((irank + a) + out_mmd->size[0]) + 1]);
@@ -5879,11 +5879,11 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
                 "MATLAB:catenate:matrixDimensionMismatch", 0);
             }
 
-            emxInit_real_T(&c_st, &gfind, 2, &ji_emlrtRTEI, true);
+            emxInit_real_T(&c_st, &gfind, 2, &ii_emlrtRTEI, true);
             i1 = gfind->size[0] * gfind->size[1];
             gfind->size[0] = loop_ub;
             gfind->size[1] = 2;
-            emxEnsureCapacity_real_T(&b_st, gfind, i1, &ji_emlrtRTEI);
+            emxEnsureCapacity_real_T(&b_st, gfind, i1, &ii_emlrtRTEI);
             for (i1 = 0; i1 < loop_ub; i1++) {
               gfind->data[i1] = gmin1->data[(i + i1) + 1];
             }
@@ -5898,7 +5898,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
             loop_ub = gfind->size[0];
             i = x->size[0];
             x->size[0] = gfind->size[0];
-            emxEnsureCapacity_boolean_T(sp, x, i, &ki_emlrtRTEI);
+            emxEnsureCapacity_boolean_T(sp, x, i, &ji_emlrtRTEI);
             for (i = 0; i < loop_ub; i++) {
               x->data[i] = (gfind->data[i + gfind->size[0]] > 0.0);
             }
@@ -5916,7 +5916,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
             loop_ub = gfind->size[0];
             i = x->size[0];
             x->size[0] = gfind->size[0];
-            emxEnsureCapacity_boolean_T(sp, x, i, &ki_emlrtRTEI);
+            emxEnsureCapacity_boolean_T(sp, x, i, &ji_emlrtRTEI);
             for (i = 0; i < loop_ub; i++) {
               x->data[i] = (gfind->data[i + gfind->size[0]] > 0.0);
             }
@@ -5929,10 +5929,10 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
               }
             }
 
-            emxInit_int32_T(sp, &r5, 1, &ki_emlrtRTEI, true);
+            emxInit_int32_T(sp, &r5, 1, &ji_emlrtRTEI, true);
             i = r5->size[0];
             r5->size[0] = a;
-            emxEnsureCapacity_int32_T(sp, r5, i, &yh_emlrtRTEI);
+            emxEnsureCapacity_int32_T(sp, r5, i, &xh_emlrtRTEI);
             irank = 0;
             for (c_i = 0; c_i <= idx; c_i++) {
               if (x->data[c_i]) {
@@ -5955,7 +5955,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
             loop_ub = gfind->size[0];
             i = x->size[0];
             x->size[0] = gfind->size[0];
-            emxEnsureCapacity_boolean_T(sp, x, i, &ki_emlrtRTEI);
+            emxEnsureCapacity_boolean_T(sp, x, i, &ji_emlrtRTEI);
             for (i = 0; i < loop_ub; i++) {
               x->data[i] = (gfind->data[i + gfind->size[0]] > 0.0);
             }
@@ -5968,10 +5968,10 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
               }
             }
 
-            emxInit_int32_T(sp, &r6, 1, &ki_emlrtRTEI, true);
+            emxInit_int32_T(sp, &r6, 1, &ji_emlrtRTEI, true);
             i = r6->size[0];
             r6->size[0] = a;
-            emxEnsureCapacity_int32_T(sp, r6, i, &yh_emlrtRTEI);
+            emxEnsureCapacity_int32_T(sp, r6, i, &xh_emlrtRTEI);
             irank = 0;
             for (c_i = 0; c_i <= idx; c_i++) {
               if (x->data[c_i]) {
@@ -6008,7 +6008,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
             i1 = gfind->size[0] * gfind->size[1];
             gfind->size[0] = loop_ub;
             gfind->size[1] = 2;
-            emxEnsureCapacity_real_T(sp, gfind, i1, &li_emlrtRTEI);
+            emxEnsureCapacity_real_T(sp, gfind, i1, &ki_emlrtRTEI);
             for (i1 = 0; i1 < 2; i1++) {
               for (k = 0; k < loop_ub; k++) {
                 if (i1 + 1 > out_mmd->size[1]) {
@@ -6052,7 +6052,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
     emxFree_real_T(&gmin1);
 
     /*  End of the forward search */
-    emxInit_real_T(sp, &outliers, 1, &qi_emlrtRTEI, true);
+    emxInit_real_T(sp, &outliers, 1, &pi_emlrtRTEI, true);
     if (ndecl > 0.0) {
       /*  Now find the list of the units declared as outliers */
       /*  bsel=~isnan(bb(:,tr-init+1)); */
@@ -6071,14 +6071,14 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
         loop_ub = out_cov->size[0];
         i = bs->size[0];
         bs->size[0] = out_cov->size[0];
-        emxEnsureCapacity_real_T(sp, bs, i, &xh_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, bs, i, &wh_emlrtRTEI);
         for (i = 0; i < loop_ub; i++) {
           bs->data[i] = out_cov->data[i + out_cov->size[0] * ((int32_T)d - 1)];
         }
 
         i = x->size[0];
         x->size[0] = bs->size[0];
-        emxEnsureCapacity_boolean_T(sp, x, i, &ai_emlrtRTEI);
+        emxEnsureCapacity_boolean_T(sp, x, i, &yh_emlrtRTEI);
         loop_ub = bs->size[0];
         for (i = 0; i < loop_ub; i++) {
           x->data[i] = muDoubleScalarIsNaN(bs->data[i]);
@@ -6094,7 +6094,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
 
         i = outliers->size[0];
         outliers->size[0] = a;
-        emxEnsureCapacity_real_T(sp, outliers, i, &yh_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, outliers, i, &xh_emlrtRTEI);
         irank = 0;
         for (b_i = 0; b_i <= idx; b_i++) {
           if (x->data[b_i]) {
@@ -6108,14 +6108,14 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
           }
         }
       } else {
-        emxInit_real_T(sp, &a__1, 2, &yh_emlrtRTEI, true);
+        emxInit_real_T(sp, &a__1, 2, &xh_emlrtRTEI, true);
         st.site = &dg_emlrtRSI;
         FSMbsb(&st, Y, bs, (real_T)Y->size[0] - ndecl, (real_T)Y->size[0] -
                ndecl, a__1, out_cov);
         i = r->size[0] * r->size[1];
         r->size[0] = out_cov->size[0];
         r->size[1] = out_cov->size[1];
-        emxEnsureCapacity_boolean_T(sp, r, i, &wh_emlrtRTEI);
+        emxEnsureCapacity_boolean_T(sp, r, i, &vh_emlrtRTEI);
         loop_ub = out_cov->size[0] * out_cov->size[1];
         emxFree_real_T(&a__1);
         for (i = 0; i < loop_ub; i++) {
@@ -6132,7 +6132,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
 
         i = outliers->size[0];
         outliers->size[0] = a;
-        emxEnsureCapacity_real_T(sp, outliers, i, &yh_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, outliers, i, &xh_emlrtRTEI);
         irank = 0;
         for (b_i = 0; b_i <= idx; b_i++) {
           if (r->data[b_i]) {
@@ -6162,7 +6162,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
     } else {
       i = outliers->size[0];
       outliers->size[0] = 1;
-      emxEnsureCapacity_real_T(sp, outliers, i, &vh_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, outliers, i, &uh_emlrtRTEI);
       outliers->data[0] = rtNaN;
     }
 
@@ -6191,7 +6191,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
     i = b_Y->size[0] * b_Y->size[1];
     b_Y->size[0] = goodobs->size[1];
     b_Y->size[1] = Y->size[1];
-    emxEnsureCapacity_real_T(sp, b_Y, i, &bi_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_Y, i, &ai_emlrtRTEI);
     emxFree_int32_T(&ia);
     for (i = 0; i < loop_ub; i++) {
       irank = goodobs->size[1];
@@ -6217,7 +6217,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
     i = b_Y->size[0] * b_Y->size[1];
     b_Y->size[0] = goodobs->size[1];
     b_Y->size[1] = Y->size[1];
-    emxEnsureCapacity_real_T(sp, b_Y, i, &ci_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_Y, i, &bi_emlrtRTEI);
     for (i = 0; i < loop_ub; i++) {
       irank = goodobs->size[1];
       for (i1 = 0; i1 < irank; i1++) {
@@ -6245,7 +6245,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
     i = out_outliers->size[0] * out_outliers->size[1];
     out_outliers->size[0] = outliers->size[0];
     out_outliers->size[1] = 1;
-    emxEnsureCapacity_real_T(sp, out_outliers, i, &ei_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, out_outliers, i, &di_emlrtRTEI);
     loop_ub = outliers->size[0];
     for (i = 0; i < loop_ub; i++) {
       out_outliers->data[i] = outliers->data[i];
@@ -6255,7 +6255,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
     i = out_loc->size[0] * out_loc->size[1];
     out_loc->size[0] = 1;
     out_loc->size[1] = loc->size[1];
-    emxEnsureCapacity_real_T(sp, out_loc, i, &fi_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, out_loc, i, &ei_emlrtRTEI);
     loop_ub = loc->size[1];
     for (i = 0; i < loop_ub; i++) {
       out_loc->data[i] = loc->data[i];
@@ -6264,7 +6264,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
     i = out_md->size[0] * out_md->size[1];
     out_md->size[0] = bs->size[0];
     out_md->size[1] = 1;
-    emxEnsureCapacity_real_T(sp, out_md, i, &gi_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, out_md, i, &fi_emlrtRTEI);
     loop_ub = bs->size[0];
     for (i = 0; i < loop_ub; i++) {
       out_md->data[i] = bs->data[i];

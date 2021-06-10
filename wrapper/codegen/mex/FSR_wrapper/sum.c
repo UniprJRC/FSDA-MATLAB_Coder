@@ -91,7 +91,7 @@ static emlrtRSInfo ew_emlrtRSI = {
     "dSummation.m" /* pathName */
 };
 
-static emlrtRTEInfo eq_emlrtRTEI = {
+static emlrtRTEInfo dq_emlrtRTEI = {
     20,    /* lineNo */
     1,     /* colNo */
     "sum", /* fName */
@@ -100,7 +100,7 @@ static emlrtRTEInfo eq_emlrtRTEI = {
                                                                         */
 };
 
-static emlrtRTEInfo fq_emlrtRTEI = {
+static emlrtRTEInfo eq_emlrtRTEI = {
     146,                /* lineNo */
     24,                 /* colNo */
     "blockedSummation", /* fName */
@@ -109,7 +109,7 @@ static emlrtRTEInfo fq_emlrtRTEI = {
     "dSummation.m" /* pName */
 };
 
-static emlrtRTEInfo gq_emlrtRTEI = {
+static emlrtRTEInfo fq_emlrtRTEI = {
     153,                /* lineNo */
     23,                 /* colNo */
     "blockedSummation", /* fName */
@@ -118,7 +118,7 @@ static emlrtRTEInfo gq_emlrtRTEI = {
     "dSummation.m" /* pName */
 };
 
-static emlrtRTEInfo hq_emlrtRTEI = {
+static emlrtRTEInfo gq_emlrtRTEI = {
     153,                /* lineNo */
     1,                  /* colNo */
     "blockedSummation", /* fName */
@@ -166,22 +166,22 @@ void b_sum(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   if ((x->size[0] == 0) || (x->size[1] == 0)) {
     hi = y->size[0];
     y->size[0] = x->size[0];
-    emxEnsureCapacity_real_T(&c_st, y, hi, &eq_emlrtRTEI);
+    emxEnsureCapacity_real_T(&c_st, y, hi, &dq_emlrtRTEI);
     firstBlockLength = x->size[0];
     for (hi = 0; hi < firstBlockLength; hi++) {
       y->data[hi] = 0.0;
     }
   } else {
-    emxInit_real_T(&c_st, &bsum, 1, &hq_emlrtRTEI, true);
+    emxInit_real_T(&c_st, &bsum, 1, &gq_emlrtRTEI, true);
     d_st.site = &vv_emlrtRSI;
     vstride = x->size[0];
     bvstride = x->size[0] << 10;
     hi = y->size[0];
     y->size[0] = x->size[0];
-    emxEnsureCapacity_real_T(&d_st, y, hi, &fq_emlrtRTEI);
+    emxEnsureCapacity_real_T(&d_st, y, hi, &eq_emlrtRTEI);
     hi = bsum->size[0];
     bsum->size[0] = x->size[0];
-    emxEnsureCapacity_real_T(&d_st, bsum, hi, &gq_emlrtRTEI);
+    emxEnsureCapacity_real_T(&d_st, bsum, hi, &fq_emlrtRTEI);
     if (x->size[1] <= 1024) {
       firstBlockLength = x->size[1];
       lastBlockLength = 0;

@@ -78,7 +78,7 @@ static emlrtRTEInfo ic_emlrtRTEI = {
     "internal\\assertValidSizeArg.m" /* pName */
 };
 
-static emlrtRTEInfo rq_emlrtRTEI = {
+static emlrtRTEInfo qq_emlrtRTEI = {
     53,       /* lineNo */
     9,        /* colNo */
     "repmat", /* fName */
@@ -87,7 +87,7 @@ static emlrtRTEInfo rq_emlrtRTEI = {
                                                                          */
 };
 
-static emlrtRTEInfo qr_emlrtRTEI = {
+static emlrtRTEInfo pr_emlrtRTEI = {
     59,       /* lineNo */
     28,       /* colNo */
     "repmat", /* fName */
@@ -131,7 +131,7 @@ void b_repmat(const emlrtStack *sp, const emxArray_real_T *a, real_T varargin_2,
   b->size[0] = a->size[0];
   i = (int32_T)varargin_2;
   b->size[1] = (int32_T)varargin_2;
-  emxEnsureCapacity_real_T(sp, b, nrows, &qr_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, b, nrows, &pr_emlrtRTEI);
   nrows = a->size[0];
   st.site = &vab_emlrtRSI;
   for (jtilecol = 0; jtilecol < i; jtilecol++) {
@@ -175,7 +175,7 @@ void c_repmat(const emlrtStack *sp, const real_T a_data[],
   ncols = b->size[0] * b->size[1];
   b->size[0] = nrows;
   b->size[1] = a_size[1];
-  emxEnsureCapacity_real_T(sp, b, ncols, &qr_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, b, ncols, &pr_emlrtRTEI);
   nrows = a_size[0];
   ncols = a_size[1];
   ntilerows = (int32_T)varargin_1;
@@ -218,7 +218,7 @@ void d_repmat(const emlrtStack *sp, real_T varargin_1, emxArray_real_T *b)
   itilerow = b->size[0] * b->size[1];
   b->size[0] = (int32_T)varargin_1;
   b->size[1] = 1;
-  emxEnsureCapacity_real_T(sp, b, itilerow, &qr_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, b, itilerow, &pr_emlrtRTEI);
   st.site = &xab_emlrtRSI;
   for (itilerow = 0; itilerow < i; itilerow++) {
     b->data[itilerow] = 0.99;
@@ -236,7 +236,7 @@ void repmat(const emlrtStack *sp, ptrdiff_t a, int32_T varargin_1,
   int32_T i;
   i = b->size[0];
   b->size[0] = varargin_1;
-  emxEnsureCapacity_ptrdiff_t(sp, b, i, &rq_emlrtRTEI);
+  emxEnsureCapacity_ptrdiff_t(sp, b, i, &qq_emlrtRTEI);
   for (i = 0; i < varargin_1; i++) {
     b->data[i] = a;
   }

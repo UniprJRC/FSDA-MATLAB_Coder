@@ -20,7 +20,7 @@
 #include <stddef.h>
 
 /* Variable Definitions */
-static emlrtRSInfo vd_emlrtRSI = {
+static emlrtRSInfo wd_emlrtRSI = {
     29,    /* lineNo */
     "svd", /* fcnName */
     "C:\\Program "
@@ -28,7 +28,7 @@ static emlrtRSInfo vd_emlrtRSI = {
                                                                           */
 };
 
-static emlrtRSInfo wd_emlrtRSI = {
+static emlrtRSInfo xd_emlrtRSI = {
     108,          /* lineNo */
     "callLAPACK", /* fcnName */
     "C:\\Program "
@@ -36,7 +36,7 @@ static emlrtRSInfo wd_emlrtRSI = {
                                                                           */
 };
 
-static emlrtRSInfo xd_emlrtRSI = {
+static emlrtRSInfo yd_emlrtRSI = {
     31,       /* lineNo */
     "xgesvd", /* fcnName */
     "C:\\Program "
@@ -44,7 +44,7 @@ static emlrtRSInfo xd_emlrtRSI = {
     "lapack\\xgesvd.m" /* pathName */
 };
 
-static emlrtRSInfo yd_emlrtRSI = {
+static emlrtRSInfo ae_emlrtRSI = {
     197,            /* lineNo */
     "ceval_xgesvd", /* fcnName */
     "C:\\Program "
@@ -130,9 +130,9 @@ void svd(const emlrtStack *sp, const emxArray_real_T *A, emxArray_real_T *U)
   d_st.tls = c_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
   emxInit_real_T(sp, &b_A, 2, &re_emlrtRTEI, true);
-  st.site = &vd_emlrtRSI;
-  b_st.site = &wd_emlrtRSI;
-  c_st.site = &xd_emlrtRSI;
+  st.site = &wd_emlrtRSI;
+  b_st.site = &xd_emlrtRSI;
+  c_st.site = &yd_emlrtRSI;
   n = b_A->size[0] * b_A->size[1];
   b_A->size[0] = A->size[0];
   b_A->size[1] = A->size[1];
@@ -168,7 +168,7 @@ void svd(const emlrtStack *sp, const emxArray_real_T *A, emxArray_real_T *U)
     m = 0;
   }
   emxFree_real_T(&b_A);
-  d_st.site = &yd_emlrtRSI;
+  d_st.site = &ae_emlrtRSI;
   if (m < 0) {
     if (m == -1010) {
       emlrtErrorWithMessageIdR2018a(&d_st, &n_emlrtRTEI, "MATLAB:nomem",

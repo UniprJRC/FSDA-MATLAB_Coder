@@ -22,7 +22,7 @@
 #include <stddef.h>
 
 /* Variable Definitions */
-static emlrtRSInfo rm_emlrtRSI = {
+static emlrtRSInfo sm_emlrtRSI = {
     9,     /* lineNo */
     "std", /* fcnName */
     "C:\\Program "
@@ -30,7 +30,7 @@ static emlrtRSInfo rm_emlrtRSI = {
                                                                         */
 };
 
-static emlrtRSInfo sm_emlrtRSI = {
+static emlrtRSInfo tm_emlrtRSI = {
     102,      /* lineNo */
     "varstd", /* fcnName */
     "C:\\Program "
@@ -38,7 +38,7 @@ static emlrtRSInfo sm_emlrtRSI = {
     ".m" /* pathName */
 };
 
-static emlrtRSInfo tm_emlrtRSI = {
+static emlrtRSInfo um_emlrtRSI = {
     96,        /* lineNo */
     "vvarstd", /* fcnName */
     "C:\\Program "
@@ -46,7 +46,7 @@ static emlrtRSInfo tm_emlrtRSI = {
     "d.m" /* pathName */
 };
 
-static emlrtRSInfo um_emlrtRSI = {
+static emlrtRSInfo vm_emlrtRSI = {
     127,       /* lineNo */
     "vvarstd", /* fcnName */
     "C:\\Program "
@@ -54,7 +54,7 @@ static emlrtRSInfo um_emlrtRSI = {
     "d.m" /* pathName */
 };
 
-static emlrtRSInfo vm_emlrtRSI = {
+static emlrtRSInfo wm_emlrtRSI = {
     143,       /* lineNo */
     "vvarstd", /* fcnName */
     "C:\\Program "
@@ -62,7 +62,7 @@ static emlrtRSInfo vm_emlrtRSI = {
     "d.m" /* pathName */
 };
 
-static emlrtRTEInfo mk_emlrtRTEI = {
+static emlrtRTEInfo nk_emlrtRTEI = {
     126,       /* lineNo */
     34,        /* colNo */
     "vvarstd", /* fName */
@@ -71,7 +71,7 @@ static emlrtRTEInfo mk_emlrtRTEI = {
     "d.m" /* pName */
 };
 
-static emlrtRTEInfo nk_emlrtRTEI = {
+static emlrtRTEInfo ok_emlrtRTEI = {
     126,       /* lineNo */
     9,         /* colNo */
     "vvarstd", /* fName */
@@ -103,9 +103,9 @@ real_T b_std(const emlrtStack *sp, const emxArray_real_T *x)
   d_st.prev = &c_st;
   d_st.tls = c_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  st.site = &rm_emlrtRSI;
+  st.site = &sm_emlrtRSI;
   n = x->size[0];
-  b_st.site = &sm_emlrtRSI;
+  b_st.site = &tm_emlrtRSI;
   if (x->size[0] == 0) {
     y = rtNaN;
   } else if (x->size[0] == 1) {
@@ -116,17 +116,17 @@ real_T b_std(const emlrtStack *sp, const emxArray_real_T *x)
       y = rtNaN;
     }
   } else {
-    emxInit_real_T(&b_st, &absdiff, 1, &nk_emlrtRTEI, true);
-    c_st.site = &tm_emlrtRSI;
-    d_st.site = &mm_emlrtRSI;
+    emxInit_real_T(&b_st, &absdiff, 1, &ok_emlrtRTEI, true);
+    c_st.site = &um_emlrtRSI;
+    d_st.site = &nm_emlrtRSI;
     xbar = blockedSummation(&d_st, x, x->size[0]);
     xbar /= (real_T)x->size[0];
     k = absdiff->size[0];
     absdiff->size[0] = x->size[0];
-    emxEnsureCapacity_real_T(&b_st, absdiff, k, &mk_emlrtRTEI);
-    c_st.site = &um_emlrtRSI;
+    emxEnsureCapacity_real_T(&b_st, absdiff, k, &nk_emlrtRTEI);
+    c_st.site = &vm_emlrtRSI;
     if (x->size[0] > 2147483646) {
-      d_st.site = &gc_emlrtRSI;
+      d_st.site = &hc_emlrtRSI;
       check_forloop_overflow_error(&d_st);
     }
     for (k = 0; k < n; k++) {
@@ -135,7 +135,7 @@ real_T b_std(const emlrtStack *sp, const emxArray_real_T *x)
     n_t = (ptrdiff_t)x->size[0];
     incx_t = (ptrdiff_t)1;
     y = dnrm2(&n_t, &absdiff->data[0], &incx_t);
-    c_st.site = &vm_emlrtRSI;
+    c_st.site = &wm_emlrtRSI;
     y /= muDoubleScalarSqrt((real_T)x->size[0] - 1.0);
     emxFree_real_T(&absdiff);
   }

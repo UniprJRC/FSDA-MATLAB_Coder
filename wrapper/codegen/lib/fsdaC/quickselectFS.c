@@ -13,6 +13,7 @@
 #include "quickselectFS.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 double quickselectFS(emxArray_real_T *A, double k, double kiniindex)

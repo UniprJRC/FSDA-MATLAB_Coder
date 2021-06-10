@@ -30,12 +30,19 @@ void c_emxCopyStruct_anonymous_funct(const emlrtStack *sp,
 
 void c_emxFreeStruct_anonymous_funct(anonymous_function *pStruct);
 
+void c_emxFreeStruct_struct_LTStsmod(struct_LTStsmodel_T *pStruct);
+
 void c_emxInitStruct_anonymous_funct(const emlrtStack *sp,
                                      b_anonymous_function *pStruct,
                                      const emlrtRTEInfo *srcLocation,
                                      boolean_T doPush);
 
 void c_emxInitStruct_matlab_internal(e_matlab_internal_coder_tabular *pStruct);
+
+void c_emxInitStruct_struct_LTStsmod(const emlrtStack *sp,
+                                     struct_LTStsmodel_T *pStruct,
+                                     const emlrtRTEInfo *srcLocation,
+                                     boolean_T doPush);
 
 void d_emxCopyStruct_anonymous_funct(const emlrtStack *sp,
                                      anonymous_function *dst,
@@ -103,8 +110,6 @@ void emxFreeStruct_captured_var1(d_captured_var *pStruct);
 
 void emxFreeStruct_cell_wrap_4(cell_wrap_4 *pStruct);
 
-void emxFreeStruct_struct2_T(struct2_T *pStruct);
-
 void emxFreeStruct_struct_LTSts_T(struct_LTSts_T *pStruct);
 
 void emxFreeStruct_struct_T(struct_T *pStruct);
@@ -159,10 +164,7 @@ void emxInitStruct_cell_wrap_4(const emlrtStack *sp, cell_wrap_4 *pStruct,
                                const emlrtRTEInfo *srcLocation,
                                boolean_T doPush);
 
-void emxInitStruct_struct2_T(const emlrtStack *sp, struct2_T *pStruct,
-                             const emlrtRTEInfo *srcLocation, boolean_T doPush);
-
-void emxInitStruct_struct3_T(struct3_T *pStruct);
+void emxInitStruct_struct1_T(struct1_T *pStruct);
 
 void emxInitStruct_struct_LTSts_T(const emlrtStack *sp, struct_LTSts_T *pStruct,
                                   const emlrtRTEInfo *srcLocation,

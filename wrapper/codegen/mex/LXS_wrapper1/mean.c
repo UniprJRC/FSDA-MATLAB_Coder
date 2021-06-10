@@ -19,7 +19,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRSInfo qm_emlrtRSI = {
+static emlrtRSInfo rm_emlrtRSI = {
     49,     /* lineNo */
     "mean", /* fcnName */
     "C:\\Program "
@@ -45,7 +45,7 @@ static emlrtRTEInfo hc_emlrtRTEI = {
                                                                          */
 };
 
-static emlrtRTEInfo pw_emlrtRTEI = {
+static emlrtRTEInfo qw_emlrtRTEI = {
     49,     /* lineNo */
     5,      /* colNo */
     "mean", /* fName */
@@ -72,11 +72,11 @@ void b_mean(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
                                   "Coder:toolbox:UnsupportedSpecialEmpty",
                                   "Coder:toolbox:UnsupportedSpecialEmpty", 0);
   }
-  st.site = &qm_emlrtRSI;
+  st.site = &rm_emlrtRSI;
   b_combineVectorElements(&st, x, y);
   i = y->size[0] * y->size[1];
   y->size[0] = 1;
-  emxEnsureCapacity_real_T(sp, y, i, &pw_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, y, i, &qw_emlrtRTEI);
   loop_ub = y->size[1] - 1;
   for (i = 0; i <= loop_ub; i++) {
     y->data[i] /= (real_T)x->size[0];
@@ -92,8 +92,8 @@ real_T mean(const emlrtStack *sp, const emxArray_real_T *x)
   st.tls = sp->tls;
   b_st.prev = &st;
   b_st.tls = st.tls;
-  st.site = &qm_emlrtRSI;
-  b_st.site = &mm_emlrtRSI;
+  st.site = &rm_emlrtRSI;
+  b_st.site = &nm_emlrtRSI;
   y = blockedSummation(&b_st, x, x->size[0]);
   y /= (real_T)x->size[0];
   return y;

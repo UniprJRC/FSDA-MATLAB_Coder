@@ -12,6 +12,7 @@
 /* Include files */
 #include "eml_rand_mt19937ar.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 double eml_rand_mt19937ar(unsigned int b_state[625])

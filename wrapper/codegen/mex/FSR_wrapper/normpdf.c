@@ -41,7 +41,7 @@ static emlrtBCInfo kfb_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtRTEInfo veb_emlrtRTEI = {
+static emlrtRTEInfo ueb_emlrtRTEI = {
     17,        /* lineNo */
     5,         /* colNo */
     "normpdf", /* fName */
@@ -58,7 +58,7 @@ void normpdf(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   i = y->size[0] * y->size[1];
   y->size[0] = x->size[0];
   y->size[1] = x->size[1];
-  emxEnsureCapacity_real_T(sp, y, i, &veb_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, y, i, &ueb_emlrtRTEI);
   i = x->size[0] * x->size[1];
   for (k = 0; k < i; k++) {
     i1 = x->size[0] * x->size[1];

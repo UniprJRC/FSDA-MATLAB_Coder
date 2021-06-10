@@ -14,7 +14,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRSInfo gf_emlrtRSI = {
+static emlrtRSInfo hf_emlrtRSI = {
     38,                /* lineNo */
     "indexShapeCheck", /* fcnName */
     "C:\\Program "
@@ -22,7 +22,7 @@ static emlrtRSInfo gf_emlrtRSI = {
     "internal\\indexShapeCheck.m" /* pathName */
 };
 
-static emlrtRSInfo tf_emlrtRSI = {
+static emlrtRSInfo uf_emlrtRSI = {
     43,                /* lineNo */
     "indexShapeCheck", /* fcnName */
     "C:\\Program "
@@ -64,7 +64,7 @@ void b_indexShapeCheck(const emlrtStack *sp, int32_T matrixSize,
   } else {
     nonSingletonDimFound = false;
   }
-  st.site = &tf_emlrtRSI;
+  st.site = &uf_emlrtRSI;
   if (nonSingletonDimFound) {
     emlrtErrorWithMessageIdR2018a(&st, &v_emlrtRTEI,
                                   "Coder:FE:PotentialVectorVector",
@@ -77,7 +77,7 @@ void c_indexShapeCheck(const emlrtStack *sp, int32_T matrixSize)
   emlrtStack st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &tf_emlrtRSI;
+  st.site = &uf_emlrtRSI;
   if (matrixSize == 1) {
     emlrtErrorWithMessageIdR2018a(&st, &v_emlrtRTEI,
                                   "Coder:FE:PotentialVectorVector",
@@ -116,7 +116,7 @@ void indexShapeCheck(const emlrtStack *sp, const int32_T matrixSize[2],
       } else {
         nonSingletonDimFound = false;
       }
-      st.site = &gf_emlrtRSI;
+      st.site = &hf_emlrtRSI;
       if (nonSingletonDimFound) {
         emlrtErrorWithMessageIdR2018a(&st, &v_emlrtRTEI,
                                       "Coder:FE:PotentialMatrixMatrix_VM",

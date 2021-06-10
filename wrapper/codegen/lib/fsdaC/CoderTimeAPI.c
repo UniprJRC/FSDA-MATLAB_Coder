@@ -13,6 +13,7 @@
 #include "CoderTimeAPI.h"
 #include "fsdaC_data.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 void freq_not_empty_init(void)

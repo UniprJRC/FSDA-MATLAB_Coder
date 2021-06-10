@@ -17,6 +17,7 @@
 #include "sortIdx.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <string.h>
 
 /* Function Definitions */
 void unique_vector(const emxArray_real_T *a, emxArray_real_T *b)

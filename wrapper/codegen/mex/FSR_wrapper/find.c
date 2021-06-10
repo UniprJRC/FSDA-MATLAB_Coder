@@ -96,7 +96,7 @@ static emlrtRTEInfo fe_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo tg_emlrtRTEI = {
+static emlrtRTEInfo sg_emlrtRTEI = {
     369,    /* lineNo */
     24,     /* colNo */
     "find", /* fName */
@@ -105,7 +105,7 @@ static emlrtRTEInfo tg_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo ug_emlrtRTEI = {
+static emlrtRTEInfo tg_emlrtRTEI = {
     402,    /* lineNo */
     5,      /* colNo */
     "find", /* fName */
@@ -114,7 +114,7 @@ static emlrtRTEInfo ug_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo vg_emlrtRTEI = {
+static emlrtRTEInfo ug_emlrtRTEI = {
     144,    /* lineNo */
     13,     /* colNo */
     "find", /* fName */
@@ -150,12 +150,12 @@ void b_eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
                                   "Coder:builtins:AssertionFailed",
                                   "Coder:builtins:AssertionFailed", 0);
   }
-  emxInit_int32_T(sp, &i, 1, &vg_emlrtRTEI, true);
+  emxInit_int32_T(sp, &i, 1, &ug_emlrtRTEI, true);
   st.site = &pb_emlrtRSI;
   idx = 0;
   b_i = i->size[0];
   i->size[0] = k;
-  emxEnsureCapacity_int32_T(&st, i, b_i, &tg_emlrtRTEI);
+  emxEnsureCapacity_int32_T(&st, i, b_i, &sg_emlrtRTEI);
   b_st.site = &qb_emlrtRSI;
   if ((1 <= x->size[0]) && (x->size[0] > 2147483646)) {
     c_st.site = &ab_emlrtRSI;
@@ -193,7 +193,7 @@ void b_eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
     b_indexShapeCheck(&b_st, i->size[0], b_iv);
     ii = i->size[0];
     i->size[0] = b_i;
-    emxEnsureCapacity_int32_T(&st, i, ii, &ug_emlrtRTEI);
+    emxEnsureCapacity_int32_T(&st, i, ii, &tg_emlrtRTEI);
   }
   *i_size = i->size[0];
   ii = i->size[0];
@@ -227,7 +227,7 @@ void c_eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
   idx = 0;
   b_i = i->size[0];
   i->size[0] = x->size[0];
-  emxEnsureCapacity_int32_T(&st, i, b_i, &tg_emlrtRTEI);
+  emxEnsureCapacity_int32_T(&st, i, b_i, &sg_emlrtRTEI);
   b_st.site = &qb_emlrtRSI;
   if ((1 <= x->size[0]) && (x->size[0] > 2147483646)) {
     c_st.site = &ab_emlrtRSI;
@@ -298,7 +298,7 @@ void d_eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
                                   "Coder:builtins:AssertionFailed",
                                   "Coder:builtins:AssertionFailed", 0);
   }
-  emxInit_int32_T(sp, &i, 2, &vg_emlrtRTEI, true);
+  emxInit_int32_T(sp, &i, 2, &ug_emlrtRTEI, true);
   st.site = &pb_emlrtRSI;
   idx = 0;
   b_i = i->size[0] * i->size[1];
@@ -338,7 +338,7 @@ void d_eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
   } else {
     b_i = i->size[0] * i->size[1];
     i->size[1] = (1 <= idx);
-    emxEnsureCapacity_int32_T(&st, i, b_i, &ug_emlrtRTEI);
+    emxEnsureCapacity_int32_T(&st, i, b_i, &tg_emlrtRTEI);
   }
   i_size[0] = 1;
   i_size[1] = i->size[1];

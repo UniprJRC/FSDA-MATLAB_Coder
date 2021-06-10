@@ -27,7 +27,7 @@
 #include <stddef.h>
 
 /* Variable Definitions */
-static emlrtRSInfo by_emlrtRSI = {
+static emlrtRSInfo cy_emlrtRSI = {
     42,      /* lineNo */
     "mrdiv", /* fcnName */
     "C:\\Program "
@@ -35,7 +35,7 @@ static emlrtRSInfo by_emlrtRSI = {
     "helper.m" /* pathName */
 };
 
-static emlrtRSInfo cy_emlrtRSI = {
+static emlrtRSInfo dy_emlrtRSI = {
     44,      /* lineNo */
     "mrdiv", /* fcnName */
     "C:\\Program "
@@ -44,7 +44,7 @@ static emlrtRSInfo cy_emlrtRSI = {
 };
 
 static emlrtRSInfo
-    fy_emlrtRSI =
+    gy_emlrtRSI =
         {
             107,          /* lineNo */
             "lusolveNxN", /* fcnName */
@@ -54,7 +54,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    gy_emlrtRSI =
+    hy_emlrtRSI =
         {
             135,          /* lineNo */
             "XtimesInvA", /* fcnName */
@@ -64,7 +64,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    hy_emlrtRSI =
+    iy_emlrtRSI =
         {
             140,          /* lineNo */
             "XtimesInvA", /* fcnName */
@@ -74,7 +74,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    iy_emlrtRSI =
+    jy_emlrtRSI =
         {
             142,          /* lineNo */
             "XtimesInvA", /* fcnName */
@@ -84,7 +84,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    jy_emlrtRSI =
+    ky_emlrtRSI =
         {
             147,          /* lineNo */
             "XtimesInvA", /* fcnName */
@@ -94,7 +94,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    bab_emlrtRSI =
+    cab_emlrtRSI =
         {
             126,         /* lineNo */
             "LSQFromQR", /* fcnName */
@@ -103,7 +103,7 @@ static emlrtRSInfo
             "internal\\qrsolve.m" /* pathName */
 };
 
-static emlrtRSInfo gab_emlrtRSI = {
+static emlrtRSInfo hab_emlrtRSI = {
     108,              /* lineNo */
     "ceval_xunormqr", /* fcnName */
     "C:\\Program "
@@ -111,7 +111,7 @@ static emlrtRSInfo gab_emlrtRSI = {
     "lapack\\xunormqr.m" /* pathName */
 };
 
-static emlrtRSInfo hab_emlrtRSI = {
+static emlrtRSInfo iab_emlrtRSI = {
     18,          /* lineNo */
     "xzunormqr", /* fcnName */
     "C:\\Program "
@@ -119,7 +119,7 @@ static emlrtRSInfo hab_emlrtRSI = {
     "reflapack\\xzunormqr.m" /* pathName */
 };
 
-static emlrtRSInfo iab_emlrtRSI = {
+static emlrtRSInfo jab_emlrtRSI = {
     21,          /* lineNo */
     "xzunormqr", /* fcnName */
     "C:\\Program "
@@ -127,7 +127,7 @@ static emlrtRSInfo iab_emlrtRSI = {
     "reflapack\\xzunormqr.m" /* pathName */
 };
 
-static emlrtRSInfo jab_emlrtRSI = {
+static emlrtRSInfo kab_emlrtRSI = {
     23,          /* lineNo */
     "xzunormqr", /* fcnName */
     "C:\\Program "
@@ -135,7 +135,7 @@ static emlrtRSInfo jab_emlrtRSI = {
     "reflapack\\xzunormqr.m" /* pathName */
 };
 
-static emlrtRSInfo kab_emlrtRSI = {
+static emlrtRSInfo lab_emlrtRSI = {
     29,          /* lineNo */
     "xzunormqr", /* fcnName */
     "C:\\Program "
@@ -143,7 +143,7 @@ static emlrtRSInfo kab_emlrtRSI = {
     "reflapack\\xzunormqr.m" /* pathName */
 };
 
-static emlrtRTEInfo mab_emlrtRTEI = {
+static emlrtRTEInfo nab_emlrtRTEI = {
     31,                /* lineNo */
     5,                 /* colNo */
     "mrdivide_helper", /* fName */
@@ -152,7 +152,7 @@ static emlrtRTEInfo mab_emlrtRTEI = {
     "helper.m" /* pName */
 };
 
-static emlrtRTEInfo nab_emlrtRTEI = {
+static emlrtRTEInfo oab_emlrtRTEI = {
     44,                /* lineNo */
     35,                /* colNo */
     "mrdivide_helper", /* fName */
@@ -162,7 +162,7 @@ static emlrtRTEInfo nab_emlrtRTEI = {
 };
 
 static emlrtRTEInfo
-    oab_emlrtRTEI =
+    pab_emlrtRTEI =
         {
             85,        /* lineNo */
             1,         /* colNo */
@@ -172,7 +172,7 @@ static emlrtRTEInfo
             "internal\\qrsolve.m" /* pName */
 };
 
-static emlrtRTEInfo pab_emlrtRTEI = {
+static emlrtRTEInfo qab_emlrtRTEI = {
     44,                /* lineNo */
     5,                 /* colNo */
     "mrdivide_helper", /* fName */
@@ -181,7 +181,7 @@ static emlrtRTEInfo pab_emlrtRTEI = {
     "helper.m" /* pName */
 };
 
-static emlrtRTEInfo qab_emlrtRTEI = {
+static emlrtRTEInfo rab_emlrtRTEI = {
     44,                /* lineNo */
     9,                 /* colNo */
     "mrdivide_helper", /* fName */
@@ -190,7 +190,7 @@ static emlrtRTEInfo qab_emlrtRTEI = {
     "helper.m" /* pName */
 };
 
-static emlrtRTEInfo rab_emlrtRTEI = {
+static emlrtRTEInfo sab_emlrtRTEI = {
     25,                /* lineNo */
     14,                /* colNo */
     "mrdivide_helper", /* fName */
@@ -250,19 +250,19 @@ void mrdiv(const emlrtStack *sp, emxArray_real_T *A, const emxArray_real_T *B)
   g_st.prev = &f_st;
   g_st.tls = f_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  emxInit_real_T(sp, &Y, 2, &qab_emlrtRTEI, true);
-  emxInit_real_T(sp, &b_B, 2, &nab_emlrtRTEI, true);
-  emxInit_real_T(sp, &b_A, 2, &rab_emlrtRTEI, true);
-  emxInit_real_T(sp, &tau, 1, &rab_emlrtRTEI, true);
-  emxInit_int32_T(sp, &jpvt, 2, &rab_emlrtRTEI, true);
-  emxInit_ptrdiff_t(sp, &ipiv_t, 1, &wp_emlrtRTEI, true);
-  emxInit_ptrdiff_t(sp, &r, 1, &rp_emlrtRTEI, true);
+  emxInit_real_T(sp, &Y, 2, &rab_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_B, 2, &oab_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_A, 2, &sab_emlrtRTEI, true);
+  emxInit_real_T(sp, &tau, 1, &sab_emlrtRTEI, true);
+  emxInit_int32_T(sp, &jpvt, 2, &sab_emlrtRTEI, true);
+  emxInit_ptrdiff_t(sp, &ipiv_t, 1, &xp_emlrtRTEI, true);
+  emxInit_ptrdiff_t(sp, &r, 1, &sp_emlrtRTEI, true);
   if ((A->size[0] == 0) || (A->size[1] == 0) ||
       ((B->size[0] == 0) || (B->size[1] == 0))) {
     m = A->size[0];
     i = A->size[0] * A->size[1];
     A->size[1] = B->size[0];
-    emxEnsureCapacity_real_T(sp, A, i, &mab_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, A, i, &nab_emlrtRTEI);
     nb = B->size[0];
     for (i = 0; i < nb; i++) {
       for (a_tmp = 0; a_tmp < m; a_tmp++) {
@@ -270,25 +270,25 @@ void mrdiv(const emlrtStack *sp, emxArray_real_T *A, const emxArray_real_T *B)
       }
     }
   } else if (B->size[0] == B->size[1]) {
-    st.site = &by_emlrtRSI;
-    b_st.site = &dy_emlrtRSI;
-    c_st.site = &fy_emlrtRSI;
+    st.site = &cy_emlrtRSI;
+    b_st.site = &ey_emlrtRSI;
+    c_st.site = &gy_emlrtRSI;
     info = B->size[1];
-    d_st.site = &gy_emlrtRSI;
+    d_st.site = &hy_emlrtRSI;
     i = b_A->size[0] * b_A->size[1];
     b_A->size[0] = B->size[0];
     b_A->size[1] = B->size[1];
-    emxEnsureCapacity_real_T(&d_st, b_A, i, &qp_emlrtRTEI);
+    emxEnsureCapacity_real_T(&d_st, b_A, i, &rp_emlrtRTEI);
     nb = B->size[0] * B->size[1];
     for (i = 0; i < nb; i++) {
       b_A->data[i] = B->data[i];
     }
-    e_st.site = &pw_emlrtRSI;
-    f_st.site = &rw_emlrtRSI;
+    e_st.site = &qw_emlrtRSI;
+    f_st.site = &sw_emlrtRSI;
     repmat(&f_st, (ptrdiff_t)0.0, muIntScalarMin_sint32(info, info), r);
     i = ipiv_t->size[0];
     ipiv_t->size[0] = r->size[0];
-    emxEnsureCapacity_ptrdiff_t(&e_st, ipiv_t, i, &rp_emlrtRTEI);
+    emxEnsureCapacity_ptrdiff_t(&e_st, ipiv_t, i, &sp_emlrtRTEI);
     nrc_t = LAPACKE_dgetrf_work(102, (ptrdiff_t)B->size[1],
                                 (ptrdiff_t)B->size[1], &b_A->data[0],
                                 (ptrdiff_t)B->size[1], &ipiv_t->data[0]);
@@ -296,8 +296,8 @@ void mrdiv(const emlrtStack *sp, emxArray_real_T *A, const emxArray_real_T *B)
     i = jpvt->size[0] * jpvt->size[1];
     jpvt->size[0] = 1;
     jpvt->size[1] = ipiv_t->size[0];
-    emxEnsureCapacity_int32_T(&e_st, jpvt, i, &sp_emlrtRTEI);
-    f_st.site = &qw_emlrtRSI;
+    emxEnsureCapacity_int32_T(&e_st, jpvt, i, &tp_emlrtRTEI);
+    f_st.site = &rw_emlrtRSI;
     if (info < 0) {
       if (info == -1010) {
         emlrtErrorWithMessageIdR2018a(&f_st, &n_emlrtRTEI, "MATLAB:nomem",
@@ -313,10 +313,10 @@ void mrdiv(const emlrtStack *sp, emxArray_real_T *A, const emxArray_real_T *B)
       jpvt->data[k] = (int32_T)ipiv_t->data[k];
     }
     b_nb = A->size[0];
-    d_st.site = &hy_emlrtRSI;
+    d_st.site = &iy_emlrtRSI;
     if (A->size[0] >= 1) {
-      e_st.site = &bx_emlrtRSI;
-      f_st.site = &cx_emlrtRSI;
+      e_st.site = &cx_emlrtRSI;
+      f_st.site = &dx_emlrtRSI;
       wj = 1.0;
       DIAGA1 = 'N';
       TRANSA1 = 'N';
@@ -329,10 +329,10 @@ void mrdiv(const emlrtStack *sp, emxArray_real_T *A, const emxArray_real_T *B)
       dtrsm(&SIDE1, &UPLO1, &TRANSA1, &DIAGA1, &nrc_t, &n_t, &wj, &b_A->data[0],
             &lda_t, &A->data[0], &ldb_t);
     }
-    d_st.site = &iy_emlrtRSI;
+    d_st.site = &jy_emlrtRSI;
     if (b_nb >= 1) {
-      e_st.site = &bx_emlrtRSI;
-      f_st.site = &cx_emlrtRSI;
+      e_st.site = &cx_emlrtRSI;
+      f_st.site = &dx_emlrtRSI;
       wj = 1.0;
       DIAGA1 = 'U';
       TRANSA1 = 'N';
@@ -349,9 +349,9 @@ void mrdiv(const emlrtStack *sp, emxArray_real_T *A, const emxArray_real_T *B)
     for (j = i; j >= 1; j--) {
       a_tmp = jpvt->data[j - 1];
       if (a_tmp != j) {
-        d_st.site = &jy_emlrtRSI;
+        d_st.site = &ky_emlrtRSI;
         if ((1 <= b_nb) && (b_nb > 2147483646)) {
-          e_st.site = &gc_emlrtRSI;
+          e_st.site = &hc_emlrtRSI;
           check_forloop_overflow_error(&e_st);
         }
         for (b_i = 0; b_i < b_nb; b_i++) {
@@ -363,16 +363,16 @@ void mrdiv(const emlrtStack *sp, emxArray_real_T *A, const emxArray_real_T *B)
       }
     }
     if (((B->size[0] != 1) || (B->size[1] != 1)) && (info > 0)) {
-      c_st.site = &ey_emlrtRSI;
-      d_st.site = &ky_emlrtRSI;
+      c_st.site = &fy_emlrtRSI;
+      d_st.site = &ly_emlrtRSI;
       f_warning(&d_st);
     }
   } else {
-    st.site = &cy_emlrtRSI;
+    st.site = &dy_emlrtRSI;
     i = b_B->size[0] * b_B->size[1];
     b_B->size[0] = A->size[1];
     b_B->size[1] = A->size[0];
-    emxEnsureCapacity_real_T(&st, b_B, i, &nab_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, b_B, i, &oab_emlrtRTEI);
     nb = A->size[0];
     for (i = 0; i < nb; i++) {
       info = A->size[1];
@@ -383,7 +383,7 @@ void mrdiv(const emlrtStack *sp, emxArray_real_T *A, const emxArray_real_T *B)
     i = b_A->size[0] * b_A->size[1];
     b_A->size[0] = B->size[1];
     b_A->size[1] = B->size[0];
-    emxEnsureCapacity_real_T(&st, b_A, i, &vw_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, b_A, i, &ww_emlrtRTEI);
     nb = B->size[0];
     for (i = 0; i < nb; i++) {
       info = B->size[1];
@@ -391,22 +391,22 @@ void mrdiv(const emlrtStack *sp, emxArray_real_T *A, const emxArray_real_T *B)
         b_A->data[a_tmp + b_A->size[0] * i] = B->data[i + B->size[0] * a_tmp];
       }
     }
-    b_st.site = &ly_emlrtRSI;
-    xgeqp3(&b_st, b_A, tau, jpvt);
     b_st.site = &my_emlrtRSI;
-    rankA = rankFromQR(&b_st, b_A);
+    xgeqp3(&b_st, b_A, tau, jpvt);
     b_st.site = &ny_emlrtRSI;
+    rankA = rankFromQR(&b_st, b_A);
+    b_st.site = &oy_emlrtRSI;
     b_nb = b_B->size[1];
     i = Y->size[0] * Y->size[1];
     Y->size[0] = b_A->size[1];
     Y->size[1] = b_B->size[1];
-    emxEnsureCapacity_real_T(&b_st, Y, i, &oab_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, Y, i, &pab_emlrtRTEI);
     nb = b_A->size[1] * b_B->size[1];
     for (i = 0; i < nb; i++) {
       Y->data[i] = 0.0;
     }
-    c_st.site = &aab_emlrtRSI;
-    d_st.site = &eab_emlrtRSI;
+    c_st.site = &bab_emlrtRSI;
+    d_st.site = &fab_emlrtRSI;
     if ((b_A->size[0] != 0) && (b_A->size[1] != 0) &&
         ((b_B->size[0] != 0) && (b_B->size[1] != 0))) {
       nrc_t = (ptrdiff_t)b_B->size[0];
@@ -416,31 +416,31 @@ void mrdiv(const emlrtStack *sp, emxArray_real_T *A, const emxArray_real_T *B)
           &b_A->data[0], (ptrdiff_t)b_A->size[0], &tau->data[0], &b_B->data[0],
           nrc_t);
       info = (int32_T)nrc_t;
-      e_st.site = &fab_emlrtRSI;
+      e_st.site = &gab_emlrtRSI;
       if (infocheck(&e_st, info)) {
         if ((info == -10) && (b_B->size[1] > 1)) {
-          e_st.site = &gab_emlrtRSI;
+          e_st.site = &hab_emlrtRSI;
           m = b_A->size[0];
           nb = b_B->size[1];
           info = muIntScalarMin_sint32(b_A->size[0], b_A->size[1]);
-          f_st.site = &hab_emlrtRSI;
+          f_st.site = &iab_emlrtRSI;
           if (info > 2147483646) {
-            g_st.site = &gc_emlrtRSI;
+            g_st.site = &hc_emlrtRSI;
             check_forloop_overflow_error(&g_st);
           }
           for (j = 0; j < info; j++) {
             if (tau->data[j] != 0.0) {
-              f_st.site = &iab_emlrtRSI;
+              f_st.site = &jab_emlrtRSI;
               if (nb > 2147483646) {
-                g_st.site = &gc_emlrtRSI;
+                g_st.site = &hc_emlrtRSI;
                 check_forloop_overflow_error(&g_st);
               }
               for (k = 0; k < nb; k++) {
                 wj = b_B->data[j + b_B->size[0] * k];
                 a_tmp = j + 2;
-                f_st.site = &jab_emlrtRSI;
+                f_st.site = &kab_emlrtRSI;
                 if ((j + 2 <= m) && (m > 2147483646)) {
-                  g_st.site = &gc_emlrtRSI;
+                  g_st.site = &hc_emlrtRSI;
                   check_forloop_overflow_error(&g_st);
                 }
                 for (b_i = a_tmp; b_i <= m; b_i++) {
@@ -450,7 +450,7 @@ void mrdiv(const emlrtStack *sp, emxArray_real_T *A, const emxArray_real_T *B)
                 wj *= tau->data[j];
                 if (wj != 0.0) {
                   b_B->data[j + b_B->size[0] * k] -= wj;
-                  f_st.site = &kab_emlrtRSI;
+                  f_st.site = &lab_emlrtRSI;
                   for (b_i = a_tmp; b_i <= m; b_i++) {
                     b_B->data[(b_i + b_B->size[0] * k) - 1] -=
                         b_A->data[(b_i + b_A->size[0] * j) - 1] * wj;
@@ -465,7 +465,7 @@ void mrdiv(const emlrtStack *sp, emxArray_real_T *A, const emxArray_real_T *B)
           i = b_B->size[0] * b_B->size[1];
           b_B->size[0] = m;
           b_B->size[1] = info;
-          emxEnsureCapacity_real_T(&d_st, b_B, i, &ax_emlrtRTEI);
+          emxEnsureCapacity_real_T(&d_st, b_B, i, &bx_emlrtRTEI);
           nb = m * info;
           for (i = 0; i < nb; i++) {
             b_B->data[i] = rtNaN;
@@ -473,15 +473,15 @@ void mrdiv(const emlrtStack *sp, emxArray_real_T *A, const emxArray_real_T *B)
         }
       }
     }
-    c_st.site = &bab_emlrtRSI;
+    c_st.site = &cab_emlrtRSI;
     if ((1 <= b_nb) && (b_nb > 2147483646)) {
-      d_st.site = &gc_emlrtRSI;
+      d_st.site = &hc_emlrtRSI;
       check_forloop_overflow_error(&d_st);
     }
     for (k = 0; k < b_nb; k++) {
-      c_st.site = &cab_emlrtRSI;
+      c_st.site = &dab_emlrtRSI;
       if ((1 <= rankA) && (rankA > 2147483646)) {
-        d_st.site = &gc_emlrtRSI;
+        d_st.site = &hc_emlrtRSI;
         check_forloop_overflow_error(&d_st);
       }
       for (b_i = 0; b_i < rankA; b_i++) {
@@ -492,7 +492,7 @@ void mrdiv(const emlrtStack *sp, emxArray_real_T *A, const emxArray_real_T *B)
         i = jpvt->data[j - 1];
         Y->data[(i + Y->size[0] * k) - 1] /=
             b_A->data[(j + b_A->size[0] * (j - 1)) - 1];
-        c_st.site = &dab_emlrtRSI;
+        c_st.site = &eab_emlrtRSI;
         for (b_i = 0; b_i <= j - 2; b_i++) {
           Y->data[(jpvt->data[b_i] + Y->size[0] * k) - 1] -=
               Y->data[(jpvt->data[j - 1] + Y->size[0] * k) - 1] *
@@ -503,7 +503,7 @@ void mrdiv(const emlrtStack *sp, emxArray_real_T *A, const emxArray_real_T *B)
     i = A->size[0] * A->size[1];
     A->size[0] = Y->size[1];
     A->size[1] = Y->size[0];
-    emxEnsureCapacity_real_T(sp, A, i, &pab_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, A, i, &qab_emlrtRTEI);
     nb = Y->size[0];
     for (i = 0; i < nb; i++) {
       info = Y->size[1];

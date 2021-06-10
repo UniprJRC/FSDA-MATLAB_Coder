@@ -13,6 +13,7 @@
 #include "xrotg.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <string.h>
 
 /* Function Definitions */
 void xrotg(double *a, double *b, double *c, double *s)

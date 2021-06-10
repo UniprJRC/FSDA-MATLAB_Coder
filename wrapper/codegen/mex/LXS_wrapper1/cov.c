@@ -20,16 +20,8 @@
 #include <stddef.h>
 
 /* Variable Definitions */
-static emlrtRSInfo mv_emlrtRSI = {
-    71,    /* lineNo */
-    "cov", /* fcnName */
-    "C:\\Program "
-    "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\datafun\\cov.m" /* pathName
-                                                                        */
-};
-
 static emlrtRSInfo nv_emlrtRSI = {
-    73,    /* lineNo */
+    71,    /* lineNo */
     "cov", /* fcnName */
     "C:\\Program "
     "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\datafun\\cov.m" /* pathName
@@ -37,6 +29,14 @@ static emlrtRSInfo nv_emlrtRSI = {
 };
 
 static emlrtRSInfo ov_emlrtRSI = {
+    73,    /* lineNo */
+    "cov", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\datafun\\cov.m" /* pathName
+                                                                        */
+};
+
+static emlrtRSInfo pv_emlrtRSI = {
     153,         /* lineNo */
     "local_cov", /* fcnName */
     "C:\\Program "
@@ -44,7 +44,7 @@ static emlrtRSInfo ov_emlrtRSI = {
                                                                         */
 };
 
-static emlrtRSInfo pv_emlrtRSI = {
+static emlrtRSInfo qv_emlrtRSI = {
     158,         /* lineNo */
     "local_cov", /* fcnName */
     "C:\\Program "
@@ -52,7 +52,7 @@ static emlrtRSInfo pv_emlrtRSI = {
                                                                         */
 };
 
-static emlrtRSInfo qv_emlrtRSI = {
+static emlrtRSInfo rv_emlrtRSI = {
     179,         /* lineNo */
     "local_cov", /* fcnName */
     "C:\\Program "
@@ -60,7 +60,7 @@ static emlrtRSInfo qv_emlrtRSI = {
                                                                         */
 };
 
-static emlrtRSInfo tv_emlrtRSI = {
+static emlrtRSInfo uv_emlrtRSI = {
     150,         /* lineNo */
     "local_cov", /* fcnName */
     "C:\\Program "
@@ -68,17 +68,8 @@ static emlrtRSInfo tv_emlrtRSI = {
                                                                         */
 };
 
-static emlrtRTEInfo ep_emlrtRTEI = {
-    73,    /* lineNo */
-    20,    /* colNo */
-    "cov", /* fName */
-    "C:\\Program "
-    "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\datafun\\cov.m" /* pName
-                                                                        */
-};
-
 static emlrtRTEInfo fp_emlrtRTEI = {
-    71,    /* lineNo */
+    73,    /* lineNo */
     20,    /* colNo */
     "cov", /* fName */
     "C:\\Program "
@@ -87,6 +78,15 @@ static emlrtRTEInfo fp_emlrtRTEI = {
 };
 
 static emlrtRTEInfo gp_emlrtRTEI = {
+    71,    /* lineNo */
+    20,    /* colNo */
+    "cov", /* fName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\datafun\\cov.m" /* pName
+                                                                        */
+};
+
+static emlrtRTEInfo hp_emlrtRTEI = {
     73,    /* lineNo */
     5,     /* colNo */
     "cov", /* fName */
@@ -95,7 +95,7 @@ static emlrtRTEInfo gp_emlrtRTEI = {
                                                                         */
 };
 
-static emlrtRTEInfo hp_emlrtRTEI = {
+static emlrtRTEInfo ip_emlrtRTEI = {
     71,    /* lineNo */
     5,     /* colNo */
     "cov", /* fName */
@@ -135,12 +135,12 @@ void cov(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *xy)
   c_st.tls = b_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
   if (x->size[0] == 1) {
-    emxInit_real_T(sp, &c_x, 1, &fp_emlrtRTEI, true);
-    st.site = &mv_emlrtRSI;
+    emxInit_real_T(sp, &c_x, 1, &gp_emlrtRTEI, true);
+    st.site = &nv_emlrtRSI;
     LDA = x->size[1];
     i = c_x->size[0];
     c_x->size[0] = x->size[1];
-    emxEnsureCapacity_real_T(&st, c_x, i, &fp_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, c_x, i, &gp_emlrtRTEI);
     for (i = 0; i < LDA; i++) {
       c_x->data[i] = x->data[x->size[0] * i];
     }
@@ -152,21 +152,21 @@ void cov(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *xy)
       LDA = c_x->size[0];
       if (c_x->size[0] >= 2) {
         muj = 0.0;
-        b_st.site = &ov_emlrtRSI;
+        b_st.site = &pv_emlrtRSI;
         if (c_x->size[0] > 2147483646) {
-          c_st.site = &gc_emlrtRSI;
+          c_st.site = &hc_emlrtRSI;
           check_forloop_overflow_error(&c_st);
         }
         for (i = 0; i < m; i++) {
           muj += c_x->data[i];
         }
         muj /= (real_T)c_x->size[0];
-        b_st.site = &pv_emlrtRSI;
+        b_st.site = &qv_emlrtRSI;
         for (i = 0; i < m; i++) {
           c_x->data[i] -= muj;
         }
         muj = 1.0 / ((real_T)m - 1.0);
-        b_st.site = &qv_emlrtRSI;
+        b_st.site = &rv_emlrtRSI;
         beta1 = 0.0;
         TRANSB1 = 'N';
         TRANSA1 = 'C';
@@ -184,15 +184,15 @@ void cov(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *xy)
     i = xy->size[0] * xy->size[1];
     xy->size[0] = 1;
     xy->size[1] = 1;
-    emxEnsureCapacity_real_T(sp, xy, i, &hp_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, xy, i, &ip_emlrtRTEI);
     xy->data[0] = c;
   } else {
-    emxInit_real_T(sp, &b_x, 2, &ep_emlrtRTEI, true);
-    st.site = &nv_emlrtRSI;
+    emxInit_real_T(sp, &b_x, 2, &fp_emlrtRTEI, true);
+    st.site = &ov_emlrtRSI;
     i = b_x->size[0] * b_x->size[1];
     b_x->size[0] = x->size[0];
     b_x->size[1] = x->size[1];
-    emxEnsureCapacity_real_T(&st, b_x, i, &ep_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, b_x, i, &fp_emlrtRTEI);
     LDA = x->size[0] * x->size[1];
     for (i = 0; i < LDA; i++) {
       b_x->data[i] = x->data[i];
@@ -202,7 +202,7 @@ void cov(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *xy)
     i = xy->size[0] * xy->size[1];
     xy->size[0] = x->size[1];
     xy->size[1] = x->size[1];
-    emxEnsureCapacity_real_T(&st, xy, i, &gp_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, xy, i, &hp_emlrtRTEI);
     LDA = x->size[1] * x->size[1];
     for (i = 0; i < LDA; i++) {
       xy->data[i] = 0.0;
@@ -211,29 +211,29 @@ void cov(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *xy)
       i = xy->size[0] * xy->size[1];
       xy->size[0] = x->size[1];
       xy->size[1] = x->size[1];
-      emxEnsureCapacity_real_T(&st, xy, i, &gp_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, xy, i, &hp_emlrtRTEI);
       LDA = x->size[1] * x->size[1];
       for (i = 0; i < LDA; i++) {
         xy->data[i] = rtNaN;
       }
     } else if (x->size[0] >= 2) {
-      b_st.site = &tv_emlrtRSI;
+      b_st.site = &uv_emlrtRSI;
       if (x->size[1] > 2147483646) {
-        c_st.site = &gc_emlrtRSI;
+        c_st.site = &hc_emlrtRSI;
         check_forloop_overflow_error(&c_st);
       }
       for (LDA = 0; LDA < n; LDA++) {
         muj = 0.0;
-        b_st.site = &ov_emlrtRSI;
+        b_st.site = &pv_emlrtRSI;
         if ((1 <= m) && (m > 2147483646)) {
-          c_st.site = &gc_emlrtRSI;
+          c_st.site = &hc_emlrtRSI;
           check_forloop_overflow_error(&c_st);
         }
         for (i = 0; i < m; i++) {
           muj += b_x->data[i + b_x->size[0] * LDA];
         }
         muj /= (real_T)m;
-        b_st.site = &pv_emlrtRSI;
+        b_st.site = &qv_emlrtRSI;
         for (i = 0; i < m; i++) {
           b_x->data[i + b_x->size[0] * LDA] -= muj;
         }
@@ -242,12 +242,12 @@ void cov(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *xy)
       i = xy->size[0] * xy->size[1];
       xy->size[0] = x->size[1];
       xy->size[1] = x->size[1];
-      emxEnsureCapacity_real_T(&st, xy, i, &gp_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, xy, i, &hp_emlrtRTEI);
       LDA = x->size[1] * x->size[1];
       for (i = 0; i < LDA; i++) {
         xy->data[i] = 0.0;
       }
-      b_st.site = &qv_emlrtRSI;
+      b_st.site = &rv_emlrtRSI;
       beta1 = 0.0;
       TRANSB1 = 'N';
       TRANSA1 = 'C';

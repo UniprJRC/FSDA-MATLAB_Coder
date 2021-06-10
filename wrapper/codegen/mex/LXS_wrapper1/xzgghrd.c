@@ -17,7 +17,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo bs_emlrtRSI = {
+static emlrtRSInfo cs_emlrtRSI = {
     62,        /* lineNo */
     "xzgghrd", /* fcnName */
     "C:\\Program "
@@ -25,7 +25,7 @@ static emlrtRSInfo bs_emlrtRSI = {
     "reflapack\\xzgghrd.m" /* pathName */
 };
 
-static emlrtRSInfo cs_emlrtRSI = {
+static emlrtRSInfo ds_emlrtRSI = {
     64,        /* lineNo */
     "xzgghrd", /* fcnName */
     "C:\\Program "
@@ -33,7 +33,7 @@ static emlrtRSInfo cs_emlrtRSI = {
     "reflapack\\xzgghrd.m" /* pathName */
 };
 
-static emlrtRSInfo ds_emlrtRSI = {
+static emlrtRSInfo es_emlrtRSI = {
     77,        /* lineNo */
     "xzgghrd", /* fcnName */
     "C:\\Program "
@@ -73,7 +73,7 @@ void xzgghrd(const emlrtStack *sp, int32_T ilo, int32_T ihi, creal_T A[4])
   if (ihi >= ilo + 2) {
     for (jcol = ilo - 1; jcol + 1 < ihi - 1; jcol++) {
       for (jrow = ihi - 2; jrow + 2 > jcol + 2; jrow--) {
-        st.site = &bs_emlrtRSI;
+        st.site = &cs_emlrtRSI;
         f_re_tmp = jrow + (jcol << 1);
         fs_re = A[f_re_tmp].re;
         fs_im = A[f_re_tmp].im;
@@ -144,7 +144,7 @@ void xzgghrd(const emlrtStack *sp, int32_T ilo, int32_T ihi, creal_T A[4])
               gs_re /= f2;
               gs_im = -gs_im / f2;
             } else {
-              b_st.site = &es_emlrtRSI;
+              b_st.site = &fs_emlrtRSI;
               if (g2 < 0.0) {
                 emlrtErrorWithMessageIdR2018a(
                     &b_st, &tb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
@@ -173,7 +173,7 @@ void xzgghrd(const emlrtStack *sp, int32_T ilo, int32_T ihi, creal_T A[4])
                       (gs_re * A[f_re_tmp + 1].im + gs_im * A[f_re_tmp + 1].re);
             }
           } else {
-            b_st.site = &fs_emlrtRSI;
+            b_st.site = &gs_emlrtRSI;
             f2s = g2 / f2 + 1.0;
             if (f2s < 0.0) {
               emlrtErrorWithMessageIdR2018a(
@@ -192,15 +192,15 @@ void xzgghrd(const emlrtStack *sp, int32_T ilo, int32_T ihi, creal_T A[4])
             gs_re = f2s * b_gs_re - scale * gs_im;
             gs_im = f2s * gs_im + scale * b_gs_re;
             if (rescaledir > 0) {
-              b_st.site = &gs_emlrtRSI;
+              b_st.site = &hs_emlrtRSI;
               if ((1 <= count) && (count > 2147483646)) {
-                c_st.site = &gc_emlrtRSI;
+                c_st.site = &hc_emlrtRSI;
                 check_forloop_overflow_error(&c_st);
               }
             } else if (rescaledir < 0) {
-              b_st.site = &hs_emlrtRSI;
+              b_st.site = &is_emlrtRSI;
               if ((1 <= count) && (count > 2147483646)) {
-                c_st.site = &gc_emlrtRSI;
+                c_st.site = &hc_emlrtRSI;
                 check_forloop_overflow_error(&c_st);
               }
             }
@@ -210,8 +210,8 @@ void xzgghrd(const emlrtStack *sp, int32_T ilo, int32_T ihi, creal_T A[4])
         A[f_re_tmp].im = fs_im;
         A[f_re_tmp + 1].re = 0.0;
         A[f_re_tmp + 1].im = 0.0;
-        st.site = &cs_emlrtRSI;
-        b_st.site = &is_emlrtRSI;
+        st.site = &ds_emlrtRSI;
+        b_st.site = &js_emlrtRSI;
         b_gs_re = gs_re * A[1].re - gs_im * A[1].im;
         f2 = gs_re * A[1].im + gs_im * A[1].re;
         scale = c * A[0].re;
@@ -234,8 +234,8 @@ void xzgghrd(const emlrtStack *sp, int32_T ilo, int32_T ihi, creal_T A[4])
         A[2].im = f2s + f2;
         gs_re = -gs_re;
         gs_im = -gs_im;
-        st.site = &ds_emlrtRSI;
-        b_st.site = &js_emlrtRSI;
+        st.site = &es_emlrtRSI;
+        b_st.site = &ks_emlrtRSI;
         b_gs_re = gs_re * A[0].re - gs_im * A[0].im;
         f2 = gs_re * A[0].im + gs_im * A[0].re;
         g2 = c * A[2].re;

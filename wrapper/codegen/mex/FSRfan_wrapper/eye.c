@@ -54,7 +54,7 @@ static emlrtRTEInfo pb_emlrtRTEI = {
     "internal\\assertValidSizeArg.m" /* pName */
 };
 
-static emlrtRTEInfo wi_emlrtRTEI =
+static emlrtRTEInfo vi_emlrtRTEI =
     {
         94,    /* lineNo */
         5,     /* colNo */
@@ -88,7 +88,7 @@ void eye(const emlrtStack *sp, real_T varargin_1, emxArray_real_T *b_I)
   i = b_I->size[0] * b_I->size[1];
   b_I->size[0] = (int32_T)varargin_1;
   b_I->size[1] = (int32_T)varargin_1;
-  emxEnsureCapacity_real_T(sp, b_I, i, &wi_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, b_I, i, &vi_emlrtRTEI);
   loop_ub = (int32_T)varargin_1 * (int32_T)varargin_1;
   for (i = 0; i < loop_ub; i++) {
     b_I->data[i] = 0.0;

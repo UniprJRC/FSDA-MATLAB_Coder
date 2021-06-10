@@ -18,7 +18,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo wm_emlrtRSI = {
+static emlrtRSInfo xm_emlrtRSI = {
     33,                           /* lineNo */
     "applyScalarFunctionInPlace", /* fcnName */
     "C:\\Program "
@@ -26,7 +26,7 @@ static emlrtRSInfo wm_emlrtRSI = {
     "internal\\applyScalarFunctionInPlace.m" /* pathName */
 };
 
-static emlrtRSInfo an_emlrtRSI = {
+static emlrtRSInfo bn_emlrtRSI = {
     16,     /* lineNo */
     "sqrt", /* fcnName */
     "C:\\Program "
@@ -61,11 +61,11 @@ void b_sqrt(const emlrtStack *sp, emxArray_real_T *x)
         sp, &tb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
         "Coder:toolbox:ElFunDomainError", 3, 4, 4, "sqrt");
   }
-  st.site = &an_emlrtRSI;
+  st.site = &bn_emlrtRSI;
   nx = x->size[0];
-  b_st.site = &wm_emlrtRSI;
+  b_st.site = &xm_emlrtRSI;
   if ((1 <= x->size[0]) && (x->size[0] > 2147483646)) {
-    c_st.site = &gc_emlrtRSI;
+    c_st.site = &hc_emlrtRSI;
     check_forloop_overflow_error(&c_st);
   }
   for (k = 0; k < nx; k++) {
@@ -171,11 +171,11 @@ void d_sqrt(const emlrtStack *sp, emxArray_real_T *x)
         sp, &tb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
         "Coder:toolbox:ElFunDomainError", 3, 4, 4, "sqrt");
   }
-  st.site = &an_emlrtRSI;
+  st.site = &bn_emlrtRSI;
   nx = x->size[0] * x->size[1];
-  b_st.site = &wm_emlrtRSI;
+  b_st.site = &xm_emlrtRSI;
   if ((1 <= nx) && (nx > 2147483646)) {
-    c_st.site = &gc_emlrtRSI;
+    c_st.site = &hc_emlrtRSI;
     check_forloop_overflow_error(&c_st);
   }
   for (k = 0; k < nx; k++) {

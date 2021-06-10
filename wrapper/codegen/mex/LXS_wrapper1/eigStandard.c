@@ -19,7 +19,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo lr_emlrtRSI = {
+static emlrtRSInfo mr_emlrtRSI = {
     59,            /* lineNo */
     "eigStandard", /* fcnName */
     "C:\\Program "
@@ -27,7 +27,7 @@ static emlrtRSInfo lr_emlrtRSI = {
     "dard.m" /* pathName */
 };
 
-static emlrtRSInfo mr_emlrtRSI = {
+static emlrtRSInfo nr_emlrtRSI = {
     53,            /* lineNo */
     "eigStandard", /* fcnName */
     "C:\\Program "
@@ -35,7 +35,7 @@ static emlrtRSInfo mr_emlrtRSI = {
     "dard.m" /* pathName */
 };
 
-static emlrtRSInfo nr_emlrtRSI = {
+static emlrtRSInfo or_emlrtRSI = {
     29,       /* lineNo */
     "xzgeev", /* fcnName */
     "C:\\Program "
@@ -43,7 +43,7 @@ static emlrtRSInfo nr_emlrtRSI = {
     "reflapack\\xzgeev.m" /* pathName */
 };
 
-static emlrtRSInfo qr_emlrtRSI = {
+static emlrtRSInfo rr_emlrtRSI = {
     124,      /* lineNo */
     "xzggev", /* fcnName */
     "C:\\Program "
@@ -51,7 +51,7 @@ static emlrtRSInfo qr_emlrtRSI = {
     "reflapack\\xzggev.m" /* pathName */
 };
 
-static emlrtRSInfo rr_emlrtRSI = {
+static emlrtRSInfo sr_emlrtRSI = {
     125,      /* lineNo */
     "xzggev", /* fcnName */
     "C:\\Program "
@@ -89,7 +89,7 @@ void eigStandard(const emlrtStack *sp, const real_T A[4], creal_T V[2])
   boolean_T notdone;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &mr_emlrtRSI;
+  st.site = &nr_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -102,7 +102,7 @@ void eigStandard(const emlrtStack *sp, const real_T A[4], creal_T V[2])
   At[2].im = 0.0;
   At[3].re = A[3];
   At[3].im = 0.0;
-  b_st.site = &nr_emlrtRSI;
+  b_st.site = &or_emlrtRSI;
   j = 0;
   anrm = 0.0;
   k = 0;
@@ -294,9 +294,9 @@ void eigStandard(const emlrtStack *sp, const real_T A[4], creal_T V[2])
       }
       ihi = 1;
     }
-    c_st.site = &qr_emlrtRSI;
-    xzgghrd(&c_st, ilo, ihi, At);
     c_st.site = &rr_emlrtRSI;
+    xzgghrd(&c_st, ilo, ihi, At);
+    c_st.site = &sr_emlrtRSI;
     xzhgeqz(&c_st, At, ilo, ihi, &j, V, beta1);
     if ((j == 0) && ilascl) {
       notdone = true;
@@ -425,7 +425,7 @@ void eigStandard(const emlrtStack *sp, const real_T A[4], creal_T V[2])
   V[1].re = cto1;
   V[1].im = absxk;
   if (j != 0) {
-    st.site = &lr_emlrtRSI;
+    st.site = &mr_emlrtRSI;
     e_warning(&st);
   }
 }

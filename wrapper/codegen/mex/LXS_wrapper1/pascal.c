@@ -21,7 +21,7 @@
 #include <stddef.h>
 
 /* Variable Definitions */
-static emlrtRSInfo nf_emlrtRSI = {
+static emlrtRSInfo of_emlrtRSI = {
     52,       /* lineNo */
     "pascal", /* fcnName */
     "C:\\Program "
@@ -29,7 +29,7 @@ static emlrtRSInfo nf_emlrtRSI = {
                                                                          */
 };
 
-static emlrtRSInfo of_emlrtRSI = {
+static emlrtRSInfo pf_emlrtRSI = {
     46,       /* lineNo */
     "pascal", /* fcnName */
     "C:\\Program "
@@ -37,7 +37,7 @@ static emlrtRSInfo of_emlrtRSI = {
                                                                          */
 };
 
-static emlrtRSInfo pf_emlrtRSI = {
+static emlrtRSInfo qf_emlrtRSI = {
     45,       /* lineNo */
     "pascal", /* fcnName */
     "C:\\Program "
@@ -45,7 +45,7 @@ static emlrtRSInfo pf_emlrtRSI = {
                                                                          */
 };
 
-static emlrtRSInfo qf_emlrtRSI = {
+static emlrtRSInfo rf_emlrtRSI = {
     39,       /* lineNo */
     "pascal", /* fcnName */
     "C:\\Program "
@@ -62,7 +62,7 @@ static emlrtRTEInfo eb_emlrtRTEI = {
                                                                          */
 };
 
-static emlrtRTEInfo wf_emlrtRTEI = {
+static emlrtRTEInfo xf_emlrtRTEI = {
     36,       /* lineNo */
     1,        /* colNo */
     "pascal", /* fName */
@@ -71,7 +71,7 @@ static emlrtRTEInfo wf_emlrtRTEI = {
                                                                          */
 };
 
-static emlrtRTEInfo xf_emlrtRTEI = {
+static emlrtRTEInfo yf_emlrtRTEI = {
     33,       /* lineNo */
     5,        /* colNo */
     "pascal", /* fName */
@@ -80,7 +80,7 @@ static emlrtRTEInfo xf_emlrtRTEI = {
                                                                          */
 };
 
-static emlrtRTEInfo yf_emlrtRTEI = {
+static emlrtRTEInfo ag_emlrtRTEI = {
     178,      /* lineNo */
     59,       /* colNo */
     "mtimes", /* fName */
@@ -131,7 +131,7 @@ void pascal(const emlrtStack *sp, real_T n, emxArray_real_T *P)
     i = P->size[0] * P->size[1];
     P->size[0] = (int32_T)n;
     P->size[1] = (int32_T)n;
-    emxEnsureCapacity_real_T(sp, P, i, &xf_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, P, i, &yf_emlrtRTEI);
     loop_ub = (int32_T)n * (int32_T)n;
     for (i = 0; i < loop_ub; i++) {
       P->data[i] = 1.0;
@@ -140,7 +140,7 @@ void pascal(const emlrtStack *sp, real_T n, emxArray_real_T *P)
     i = P->size[0] * P->size[1];
     P->size[0] = (int32_T)n;
     P->size[1] = (int32_T)n;
-    emxEnsureCapacity_real_T(sp, P, i, &wf_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, P, i, &xf_emlrtRTEI);
     loop_ub = (int32_T)n * (int32_T)n;
     for (i = 0; i < loop_ub; i++) {
       P->data[i] = 0.0;
@@ -149,9 +149,9 @@ void pascal(const emlrtStack *sp, real_T n, emxArray_real_T *P)
       P->data[i] = 1.0;
     }
     plusminus1 = -1.0;
-    st.site = &qf_emlrtRSI;
+    st.site = &rf_emlrtRSI;
     if ((2 <= (int32_T)n) && ((int32_T)n > 2147483646)) {
-      b_st.site = &gc_emlrtRSI;
+      b_st.site = &hc_emlrtRSI;
       check_forloop_overflow_error(&b_st);
     }
     for (loop_ub = 2; loop_ub <= nn_tmp_tmp; loop_ub++) {
@@ -160,16 +160,16 @@ void pascal(const emlrtStack *sp, real_T n, emxArray_real_T *P)
     }
     if ((int32_T)n > 2) {
       mA = (int32_T)n - 1;
-      st.site = &pf_emlrtRSI;
+      st.site = &qf_emlrtRSI;
       if ((2 <= (int32_T)n - 1) && ((int32_T)n - 1 > 2147483646)) {
-        b_st.site = &gc_emlrtRSI;
+        b_st.site = &hc_emlrtRSI;
         check_forloop_overflow_error(&b_st);
       }
       for (loop_ub = 2; loop_ub <= mA; loop_ub++) {
         mB = loop_ub + 1;
-        st.site = &of_emlrtRSI;
+        st.site = &pf_emlrtRSI;
         if ((loop_ub + 1 <= (int32_T)n) && ((int32_T)n > 2147483646)) {
-          b_st.site = &gc_emlrtRSI;
+          b_st.site = &hc_emlrtRSI;
           check_forloop_overflow_error(&b_st);
         }
         for (i = mB; i <= nn_tmp_tmp; i++) {
@@ -179,18 +179,18 @@ void pascal(const emlrtStack *sp, real_T n, emxArray_real_T *P)
         }
       }
     }
-    emxInit_real_T(sp, &A, 2, &yf_emlrtRTEI, true);
-    st.site = &nf_emlrtRSI;
+    emxInit_real_T(sp, &A, 2, &ag_emlrtRTEI, true);
+    st.site = &of_emlrtRSI;
+    b_st.site = &fc_emlrtRSI;
     b_st.site = &ec_emlrtRSI;
-    b_st.site = &dc_emlrtRSI;
     mA = P->size[0];
     mB = P->size[0];
-    c_st.site = &fc_emlrtRSI;
-    d_st.site = &hc_emlrtRSI;
+    c_st.site = &gc_emlrtRSI;
+    d_st.site = &ic_emlrtRSI;
     i = A->size[0] * A->size[1];
     A->size[0] = P->size[0];
     A->size[1] = P->size[1];
-    emxEnsureCapacity_real_T(&d_st, A, i, &yf_emlrtRTEI);
+    emxEnsureCapacity_real_T(&d_st, A, i, &ag_emlrtRTEI);
     loop_ub = P->size[0] * P->size[1];
     for (i = 0; i < loop_ub; i++) {
       A->data[i] = P->data[i];

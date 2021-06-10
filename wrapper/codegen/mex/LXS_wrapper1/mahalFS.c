@@ -20,13 +20,13 @@
 #include "sum.h"
 
 /* Variable Definitions */
-static emlrtRSInfo feb_emlrtRSI = {
+static emlrtRSInfo geb_emlrtRSI = {
     64,                                                    /* lineNo */
     "mahalFS",                                             /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\mahalFS.m" /* pathName */
 };
 
-static emlrtRSInfo geb_emlrtRSI = {
+static emlrtRSInfo heb_emlrtRSI = {
     65,                                                    /* lineNo */
     "mahalFS",                                             /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\mahalFS.m" /* pathName */
@@ -40,28 +40,28 @@ static emlrtECInfo xc_emlrtECI = {
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\mahalFS.m" /* pName */
 };
 
-static emlrtRTEInfo qw_emlrtRTEI = {
+static emlrtRTEInfo rw_emlrtRTEI = {
     65,                                                    /* lineNo */
     8,                                                     /* colNo */
     "mahalFS",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\mahalFS.m" /* pName */
 };
 
-static emlrtRTEInfo rw_emlrtRTEI = {
+static emlrtRTEInfo sw_emlrtRTEI = {
     65,                                                    /* lineNo */
     7,                                                     /* colNo */
     "mahalFS",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\mahalFS.m" /* pName */
 };
 
-static emlrtRTEInfo sw_emlrtRTEI = {
+static emlrtRTEInfo tw_emlrtRTEI = {
     64,                                                    /* lineNo */
     1,                                                     /* colNo */
     "mahalFS",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\mahalFS.m" /* pName */
 };
 
-static emlrtRTEInfo tw_emlrtRTEI = {
+static emlrtRTEInfo uw_emlrtRTEI = {
     1,                                                     /* lineNo */
     14,                                                    /* colNo */
     "mahalFS",                                             /* fName */
@@ -87,7 +87,7 @@ void mahalFS(const emlrtStack *sp, const emxArray_real_T *Y,
   b_st.prev = &st;
   b_st.tls = st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  emxInit_real_T(sp, &Ytilde, 2, &sw_emlrtRTEI, true);
+  emxInit_real_T(sp, &Ytilde, 2, &tw_emlrtRTEI, true);
   /* mahalFS computes Mahalanobis distances (in squared units) for each row of
    * matrix Y  */
   /*  */
@@ -154,24 +154,24 @@ void mahalFS(const emlrtStack *sp, const emxArray_real_T *Y,
   /*     d=mahalFS(Y,MU,SIGMA); */
   /* } */
   /*  Beginning of code */
-  st.site = &feb_emlrtRSI;
-  bsxfun(&st, Y, MU, Ytilde);
   st.site = &geb_emlrtRSI;
+  bsxfun(&st, Y, MU, Ytilde);
+  st.site = &heb_emlrtRSI;
   if (SIGMA->size[1] != Ytilde->size[1]) {
     emlrtErrorWithMessageIdR2018a(&st, &wb_emlrtRTEI, "MATLAB:dimagree",
                                   "MATLAB:dimagree", 0);
   }
-  emxInit_real_T(&st, &r, 2, &tw_emlrtRTEI, true);
+  emxInit_real_T(&st, &r, 2, &uw_emlrtRTEI, true);
   i = r->size[0] * r->size[1];
   r->size[0] = Ytilde->size[0];
   r->size[1] = Ytilde->size[1];
-  emxEnsureCapacity_real_T(&st, r, i, &qw_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, r, i, &rw_emlrtRTEI);
   loop_ub = Ytilde->size[0] * Ytilde->size[1];
   for (i = 0; i < loop_ub; i++) {
     r->data[i] = Ytilde->data[i];
   }
-  emxInit_real_T(&st, &r1, 2, &rw_emlrtRTEI, true);
-  b_st.site = &ay_emlrtRSI;
+  emxInit_real_T(&st, &r1, 2, &sw_emlrtRTEI, true);
+  b_st.site = &by_emlrtRSI;
   mrdiv(&b_st, r, SIGMA);
   iv[0] = (*(int32_T(*)[2])r->size)[0];
   iv[1] = (*(int32_T(*)[2])r->size)[1];
@@ -181,14 +181,14 @@ void mahalFS(const emlrtStack *sp, const emxArray_real_T *Y,
   i = r1->size[0] * r1->size[1];
   r1->size[0] = r->size[0];
   r1->size[1] = r->size[1];
-  emxEnsureCapacity_real_T(sp, r1, i, &rw_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, r1, i, &sw_emlrtRTEI);
   loop_ub = r->size[0] * r->size[1];
   for (i = 0; i < loop_ub; i++) {
     r1->data[i] = r->data[i] * Ytilde->data[i];
   }
   emxFree_real_T(&r);
   emxFree_real_T(&Ytilde);
-  st.site = &geb_emlrtRSI;
+  st.site = &heb_emlrtRSI;
   b_sum(&st, r1, d);
   emxFree_real_T(&r1);
   emlrtHeapReferenceStackLeaveFcnR2012b((emlrtCTX)sp);

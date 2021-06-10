@@ -16,6 +16,7 @@
 #include "gammainc.h"
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 void chi2cdf(const emxArray_real_T *x, double v, emxArray_real_T *p)

@@ -259,7 +259,7 @@ static emlrtRTEInfo hb_emlrtRTEI = {
                                                                          */
 };
 
-static emlrtRTEInfo rh_emlrtRTEI = {
+static emlrtRTEInfo qh_emlrtRTEI = {
     20,         /* lineNo */
     5,          /* colNo */
     "mldivide", /* fName */
@@ -269,7 +269,7 @@ static emlrtRTEInfo rh_emlrtRTEI = {
 };
 
 static emlrtRTEInfo
-    sh_emlrtRTEI =
+    rh_emlrtRTEI =
         {
             61,        /* lineNo */
             2,         /* colNo */
@@ -280,7 +280,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    th_emlrtRTEI =
+    sh_emlrtRTEI =
         {
             85,        /* lineNo */
             26,        /* colNo */
@@ -290,7 +290,7 @@ static emlrtRTEInfo
             "internal\\qrsolve.m" /* pName */
 };
 
-static emlrtRTEInfo uh_emlrtRTEI = {
+static emlrtRTEInfo th_emlrtRTEI = {
     48,        /* lineNo */
     37,        /* colNo */
     "xgetrfs", /* fName */
@@ -299,7 +299,7 @@ static emlrtRTEInfo uh_emlrtRTEI = {
     "lapack\\xgetrfs.m" /* pName */
 };
 
-static emlrtRTEInfo vh_emlrtRTEI = {
+static emlrtRTEInfo uh_emlrtRTEI = {
     70,        /* lineNo */
     23,        /* colNo */
     "xgetrfs", /* fName */
@@ -309,7 +309,7 @@ static emlrtRTEInfo vh_emlrtRTEI = {
 };
 
 static emlrtRTEInfo
-    wh_emlrtRTEI =
+    vh_emlrtRTEI =
         {
             119,       /* lineNo */
             5,         /* colNo */
@@ -319,7 +319,7 @@ static emlrtRTEInfo
             "internal\\qrsolve.m" /* pName */
 };
 
-static emlrtRTEInfo xh_emlrtRTEI = {
+static emlrtRTEInfo wh_emlrtRTEI = {
     1,          /* lineNo */
     14,         /* colNo */
     "mldivide", /* fName */
@@ -328,7 +328,7 @@ static emlrtRTEInfo xh_emlrtRTEI = {
                                                                          */
 };
 
-static emlrtRTEInfo yh_emlrtRTEI = {
+static emlrtRTEInfo xh_emlrtRTEI = {
     70,        /* lineNo */
     1,         /* colNo */
     "xgetrfs", /* fName */
@@ -397,14 +397,14 @@ void b_mldivide(const emlrtStack *sp, const emxArray_real_T *A,
     Y->size[0] = 0;
     Y->size[1] = B->size[1];
   } else {
-    emxInit_real_T(&st, &b_A, 2, &xh_emlrtRTEI, true);
+    emxInit_real_T(&st, &b_A, 2, &wh_emlrtRTEI, true);
     if (A->size[0] == A->size[1]) {
       b_st.site = &uh_emlrtRSI;
       c_st.site = &wh_emlrtRSI;
       mn = Y->size[0] * Y->size[1];
       Y->size[0] = B->size[0];
       Y->size[1] = B->size[1];
-      emxEnsureCapacity_real_T(&c_st, Y, mn, &rh_emlrtRTEI);
+      emxEnsureCapacity_real_T(&c_st, Y, mn, &qh_emlrtRTEI);
       nb = B->size[0] * B->size[1];
       for (mn = 0; mn < nb; mn++) {
         Y->data[mn] = B->data[mn];
@@ -420,18 +420,18 @@ void b_mldivide(const emlrtStack *sp, const emxArray_real_T *A,
       mn = b_A->size[0] * b_A->size[1];
       b_A->size[0] = A->size[0];
       b_A->size[1] = A->size[1];
-      emxEnsureCapacity_real_T(&f_st, b_A, mn, &uh_emlrtRTEI);
+      emxEnsureCapacity_real_T(&f_st, b_A, mn, &th_emlrtRTEI);
       nb = A->size[0] * A->size[1];
       for (mn = 0; mn < nb; mn++) {
         b_A->data[mn] = A->data[mn];
       }
-      emxInit_ptrdiff_t(&f_st, &IPIV, 1, &yh_emlrtRTEI, true);
-      emxInit_ptrdiff_t(&f_st, &r, 1, &vh_emlrtRTEI, true);
+      emxInit_ptrdiff_t(&f_st, &IPIV, 1, &xh_emlrtRTEI, true);
+      emxInit_ptrdiff_t(&f_st, &r, 1, &uh_emlrtRTEI, true);
       g_st.site = &di_emlrtRSI;
       repmat(&g_st, (ptrdiff_t)0.0, info, r);
       mn = IPIV->size[0];
       IPIV->size[0] = r->size[0];
-      emxEnsureCapacity_ptrdiff_t(&f_st, IPIV, mn, &vh_emlrtRTEI);
+      emxEnsureCapacity_ptrdiff_t(&f_st, IPIV, mn, &uh_emlrtRTEI);
       nrc_t = (ptrdiff_t)info;
       LDA = (ptrdiff_t)b_A->size[0];
       INFO = LAPACKE_dgetrf_work(102, nrc_t, nrc_t, &b_A->data[0], LDA,
@@ -463,14 +463,14 @@ void b_mldivide(const emlrtStack *sp, const emxArray_real_T *A,
       mn = b_A->size[0] * b_A->size[1];
       b_A->size[0] = A->size[0];
       b_A->size[1] = A->size[1];
-      emxEnsureCapacity_real_T(&b_st, b_A, mn, &sh_emlrtRTEI);
+      emxEnsureCapacity_real_T(&b_st, b_A, mn, &rh_emlrtRTEI);
       nb = A->size[0] * A->size[1];
       for (mn = 0; mn < nb; mn++) {
         b_A->data[mn] = A->data[mn];
       }
-      emxInit_real_T(&b_st, &tau, 1, &xh_emlrtRTEI, true);
-      emxInit_int32_T(&b_st, &jpvt, 2, &xh_emlrtRTEI, true);
-      emxInit_real_T(&b_st, &b_B, 2, &th_emlrtRTEI, true);
+      emxInit_real_T(&b_st, &tau, 1, &wh_emlrtRTEI, true);
+      emxInit_int32_T(&b_st, &jpvt, 2, &wh_emlrtRTEI, true);
+      emxInit_real_T(&b_st, &b_B, 2, &sh_emlrtRTEI, true);
       c_st.site = &gi_emlrtRSI;
       xgeqp3(&c_st, b_A, tau, jpvt);
       c_st.site = &hi_emlrtRSI;
@@ -479,7 +479,7 @@ void b_mldivide(const emlrtStack *sp, const emxArray_real_T *A,
       mn = b_B->size[0] * b_B->size[1];
       b_B->size[0] = B->size[0];
       b_B->size[1] = B->size[1];
-      emxEnsureCapacity_real_T(&c_st, b_B, mn, &th_emlrtRTEI);
+      emxEnsureCapacity_real_T(&c_st, b_B, mn, &sh_emlrtRTEI);
       nb = B->size[0] * B->size[1];
       for (mn = 0; mn < nb; mn++) {
         b_B->data[mn] = B->data[mn];
@@ -488,7 +488,7 @@ void b_mldivide(const emlrtStack *sp, const emxArray_real_T *A,
       mn = Y->size[0] * Y->size[1];
       Y->size[0] = b_A->size[1];
       Y->size[1] = b_B->size[1];
-      emxEnsureCapacity_real_T(&c_st, Y, mn, &rh_emlrtRTEI);
+      emxEnsureCapacity_real_T(&c_st, Y, mn, &qh_emlrtRTEI);
       nb = b_A->size[1] * b_B->size[1];
       for (mn = 0; mn < nb; mn++) {
         Y->data[mn] = 0.0;
@@ -552,7 +552,7 @@ void b_mldivide(const emlrtStack *sp, const emxArray_real_T *A,
             mn = b_B->size[0] * b_B->size[1];
             b_B->size[0] = info;
             b_B->size[1] = nb;
-            emxEnsureCapacity_real_T(&e_st, b_B, mn, &wh_emlrtRTEI);
+            emxEnsureCapacity_real_T(&e_st, b_B, mn, &vh_emlrtRTEI);
             nb *= info;
             for (mn = 0; mn < nb; mn++) {
               b_B->data[mn] = rtNaN;
@@ -639,16 +639,16 @@ void mldivide(const emlrtStack *sp, const emxArray_real_T *A,
                                   "MATLAB:dimagree", 0);
   }
   st.site = &th_emlrtRSI;
-  emxInit_real_T(&st, &b_A, 2, &xh_emlrtRTEI, true);
-  emxInit_real_T(&st, &tau, 1, &xh_emlrtRTEI, true);
-  emxInit_int32_T(&st, &jpvt, 2, &xh_emlrtRTEI, true);
-  emxInit_real_T(&st, &b_B, 1, &th_emlrtRTEI, true);
-  emxInit_ptrdiff_t(&st, &IPIV, 1, &yh_emlrtRTEI, true);
-  emxInit_ptrdiff_t(&st, &r, 1, &vh_emlrtRTEI, true);
+  emxInit_real_T(&st, &b_A, 2, &wh_emlrtRTEI, true);
+  emxInit_real_T(&st, &tau, 1, &wh_emlrtRTEI, true);
+  emxInit_int32_T(&st, &jpvt, 2, &wh_emlrtRTEI, true);
+  emxInit_real_T(&st, &b_B, 1, &sh_emlrtRTEI, true);
+  emxInit_ptrdiff_t(&st, &IPIV, 1, &xh_emlrtRTEI, true);
+  emxInit_ptrdiff_t(&st, &r, 1, &uh_emlrtRTEI, true);
   if ((A->size[0] == 0) || (A->size[1] == 0) || (B->size[0] == 0)) {
     i = Y->size[0];
     Y->size[0] = A->size[1];
-    emxEnsureCapacity_real_T(&st, Y, i, &rh_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, Y, i, &qh_emlrtRTEI);
     na = A->size[1];
     for (i = 0; i < na; i++) {
       Y->data[i] = 0.0;
@@ -658,7 +658,7 @@ void mldivide(const emlrtStack *sp, const emxArray_real_T *A,
     c_st.site = &wh_emlrtRSI;
     i = Y->size[0];
     Y->size[0] = B->size[0];
-    emxEnsureCapacity_real_T(&c_st, Y, i, &rh_emlrtRTEI);
+    emxEnsureCapacity_real_T(&c_st, Y, i, &qh_emlrtRTEI);
     na = B->size[0];
     for (i = 0; i < na; i++) {
       Y->data[i] = B->data[i];
@@ -674,7 +674,7 @@ void mldivide(const emlrtStack *sp, const emxArray_real_T *A,
     i = b_A->size[0] * b_A->size[1];
     b_A->size[0] = A->size[0];
     b_A->size[1] = A->size[1];
-    emxEnsureCapacity_real_T(&f_st, b_A, i, &uh_emlrtRTEI);
+    emxEnsureCapacity_real_T(&f_st, b_A, i, &th_emlrtRTEI);
     na = A->size[0] * A->size[1];
     for (i = 0; i < na; i++) {
       b_A->data[i] = A->data[i];
@@ -683,7 +683,7 @@ void mldivide(const emlrtStack *sp, const emxArray_real_T *A,
     repmat(&g_st, (ptrdiff_t)0.0, ma, r);
     i = IPIV->size[0];
     IPIV->size[0] = r->size[0];
-    emxEnsureCapacity_ptrdiff_t(&f_st, IPIV, i, &vh_emlrtRTEI);
+    emxEnsureCapacity_ptrdiff_t(&f_st, IPIV, i, &uh_emlrtRTEI);
     nrc_t = (ptrdiff_t)ma;
     LDA = (ptrdiff_t)b_A->size[0];
     INFO = LAPACKE_dgetrf_work(102, nrc_t, nrc_t, &b_A->data[0], LDA,
@@ -712,7 +712,7 @@ void mldivide(const emlrtStack *sp, const emxArray_real_T *A,
     i = b_A->size[0] * b_A->size[1];
     b_A->size[0] = A->size[0];
     b_A->size[1] = A->size[1];
-    emxEnsureCapacity_real_T(&b_st, b_A, i, &sh_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, b_A, i, &rh_emlrtRTEI);
     na = A->size[0] * A->size[1];
     for (i = 0; i < na; i++) {
       b_A->data[i] = A->data[i];
@@ -724,14 +724,14 @@ void mldivide(const emlrtStack *sp, const emxArray_real_T *A,
     c_st.site = &ii_emlrtRSI;
     i = b_B->size[0];
     b_B->size[0] = B->size[0];
-    emxEnsureCapacity_real_T(&c_st, b_B, i, &th_emlrtRTEI);
+    emxEnsureCapacity_real_T(&c_st, b_B, i, &sh_emlrtRTEI);
     na = B->size[0];
     for (i = 0; i < na; i++) {
       b_B->data[i] = B->data[i];
     }
     i = Y->size[0];
     Y->size[0] = b_A->size[1];
-    emxEnsureCapacity_real_T(&c_st, Y, i, &rh_emlrtRTEI);
+    emxEnsureCapacity_real_T(&c_st, Y, i, &qh_emlrtRTEI);
     na = b_A->size[1];
     for (i = 0; i < na; i++) {
       Y->data[i] = 0.0;
@@ -750,7 +750,7 @@ void mldivide(const emlrtStack *sp, const emxArray_real_T *A,
         ma = b_B->size[0];
         i = b_B->size[0];
         b_B->size[0] = ma;
-        emxEnsureCapacity_real_T(&e_st, b_B, i, &wh_emlrtRTEI);
+        emxEnsureCapacity_real_T(&e_st, b_B, i, &vh_emlrtRTEI);
         for (i = 0; i < ma; i++) {
           b_B->data[i] = rtNaN;
         }

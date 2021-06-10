@@ -76,8 +76,8 @@ void c_mtimes(const emlrtStack *sp, const emxArray_real_T *A,
       C->data[i] = 0.0;
     }
   } else {
-    st.site = &fc_emlrtRSI;
-    b_st.site = &hc_emlrtRSI;
+    st.site = &gc_emlrtRSI;
+    b_st.site = &ic_emlrtRSI;
     TRANSB1 = 'T';
     TRANSA1 = 'N';
     alpha1 = 1.0;
@@ -145,8 +145,8 @@ void e_mtimes(const emlrtStack *sp, const emxArray_real_T *A,
       C->data[i] = 0.0;
     }
   } else {
-    st.site = &fc_emlrtRSI;
-    b_st.site = &hc_emlrtRSI;
+    st.site = &gc_emlrtRSI;
+    b_st.site = &ic_emlrtRSI;
     TRANSB1 = 'N';
     TRANSA1 = 'N';
     alpha1 = 1.0;
@@ -198,8 +198,8 @@ void f_mtimes(const emlrtStack *sp, const emxArray_real_T *A,
       C->data[i] = 0.0;
     }
   } else {
-    st.site = &fc_emlrtRSI;
-    b_st.site = &hc_emlrtRSI;
+    st.site = &gc_emlrtRSI;
+    b_st.site = &ic_emlrtRSI;
     TRANSB1 = 'N';
     TRANSA1 = 'T';
     alpha1 = 1.0;
@@ -249,8 +249,8 @@ void mtimes(const emlrtStack *sp, const emxArray_real_T *A,
       C->data[i] = 0.0;
     }
   } else {
-    st.site = &fc_emlrtRSI;
-    b_st.site = &hc_emlrtRSI;
+    st.site = &gc_emlrtRSI;
+    b_st.site = &ic_emlrtRSI;
     TRANSB1 = 'N';
     TRANSA1 = 'N';
     alpha1 = 1.0;

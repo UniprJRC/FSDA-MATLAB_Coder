@@ -16,6 +16,7 @@
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <string.h>
 
 /* Function Definitions */
 void FSRinvmdr(const double mdr[2], double p, double MDRinv[3])

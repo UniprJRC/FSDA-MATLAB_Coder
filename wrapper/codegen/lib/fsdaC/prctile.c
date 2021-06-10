@@ -17,6 +17,7 @@
 #include "rt_nonfinite.h"
 #include "sortIdx.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 double prctile(const emxArray_real_T *x, double p)

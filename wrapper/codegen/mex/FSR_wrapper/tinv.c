@@ -224,7 +224,7 @@ static emlrtBCInfo ffb_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtRTEInfo heb_emlrtRTEI = {
+static emlrtRTEInfo geb_emlrtRTEI = {
     10,     /* lineNo */
     5,      /* colNo */
     "tinv", /* fName */
@@ -312,7 +312,7 @@ void b_tinv(const emlrtStack *sp, const emxArray_real_T *p,
   i = x->size[0] * x->size[1];
   x->size[0] = csz_idx_0;
   x->size[1] = csz_idx_1;
-  emxEnsureCapacity_real_T(&st, x, i, &heb_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, x, i, &geb_emlrtRTEI);
   i = csz_idx_0 * csz_idx_1;
   for (k = 0; k < i; k++) {
     csz_idx_0 = p->size[0] * p->size[1];

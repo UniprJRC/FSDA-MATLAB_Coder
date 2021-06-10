@@ -284,14 +284,14 @@ static emlrtRTEInfo ve_emlrtRTEI = {
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRTEInfo ph_emlrtRTEI = {
+static emlrtRTEInfo oh_emlrtRTEI = {
     300,                                                  /* lineNo */
     4,                                                    /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRTEInfo qh_emlrtRTEI = {
+static emlrtRTEInfo ph_emlrtRTEI = {
     307,                                                  /* lineNo */
     5,                                                    /* colNo */
     "subsets",                                            /* fName */
@@ -750,11 +750,11 @@ void b_subsets(const emlrtStack *sp, emxArray_real_T *nsamp, real_T n, real_T p,
       seq->data[i] = (real_T)i + 1.0;
     }
   }
-  emxInit_boolean_T(sp, &b_ncomb, 2, &ph_emlrtRTEI, true);
+  emxInit_boolean_T(sp, &b_ncomb, 2, &oh_emlrtRTEI, true);
   i = b_ncomb->size[0] * b_ncomb->size[1];
   b_ncomb->size[0] = nsamp->size[0];
   b_ncomb->size[1] = nsamp->size[1];
-  emxEnsureCapacity_boolean_T(sp, b_ncomb, i, &ph_emlrtRTEI);
+  emxEnsureCapacity_boolean_T(sp, b_ncomb, i, &oh_emlrtRTEI);
   loop_ub = nsamp->size[0] * nsamp->size[1];
   for (i = 0; i < loop_ub; i++) {
     b_ncomb->data[i] = (ncomb < nsamp->data[i]);
@@ -776,7 +776,7 @@ void b_subsets(const emlrtStack *sp, emxArray_real_T *nsamp, real_T n, real_T p,
     i = nsamp->size[0] * nsamp->size[1];
     nsamp->size[0] = 1;
     nsamp->size[1] = 1;
-    emxEnsureCapacity_real_T(sp, nsamp, i, &qh_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, nsamp, i, &ph_emlrtRTEI);
     nsamp->data[0] = 0.0;
   }
   emxFree_boolean_T(&b_ncomb);

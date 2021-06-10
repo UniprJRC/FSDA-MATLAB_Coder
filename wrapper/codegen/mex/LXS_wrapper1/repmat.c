@@ -20,7 +20,7 @@
 #include <stddef.h>
 
 /* Variable Definitions */
-static emlrtRSInfo sw_emlrtRSI = {
+static emlrtRSInfo tw_emlrtRSI = {
     28,       /* lineNo */
     "repmat", /* fcnName */
     "C:\\Program "
@@ -28,7 +28,7 @@ static emlrtRSInfo sw_emlrtRSI = {
                                                                          */
 };
 
-static emlrtRSInfo xab_emlrtRSI = {
+static emlrtRSInfo yab_emlrtRSI = {
     64,       /* lineNo */
     "repmat", /* fcnName */
     "C:\\Program "
@@ -36,7 +36,7 @@ static emlrtRSInfo xab_emlrtRSI = {
                                                                          */
 };
 
-static emlrtRSInfo yab_emlrtRSI = {
+static emlrtRSInfo abb_emlrtRSI = {
     71,       /* lineNo */
     "repmat", /* fcnName */
     "C:\\Program "
@@ -44,7 +44,7 @@ static emlrtRSInfo yab_emlrtRSI = {
                                                                          */
 };
 
-static emlrtRSInfo abb_emlrtRSI = {
+static emlrtRSInfo bbb_emlrtRSI = {
     66,       /* lineNo */
     "repmat", /* fcnName */
     "C:\\Program "
@@ -52,7 +52,7 @@ static emlrtRSInfo abb_emlrtRSI = {
                                                                          */
 };
 
-static emlrtRSInfo bbb_emlrtRSI = {
+static emlrtRSInfo cbb_emlrtRSI = {
     69,       /* lineNo */
     "repmat", /* fcnName */
     "C:\\Program "
@@ -78,7 +78,7 @@ static emlrtRTEInfo cc_emlrtRTEI = {
     "internal\\assertValidSizeArg.m" /* pName */
 };
 
-static emlrtRTEInfo xp_emlrtRTEI = {
+static emlrtRTEInfo yp_emlrtRTEI = {
     53,       /* lineNo */
     9,        /* colNo */
     "repmat", /* fName */
@@ -87,7 +87,7 @@ static emlrtRTEInfo xp_emlrtRTEI = {
                                                                          */
 };
 
-static emlrtRTEInfo wq_emlrtRTEI = {
+static emlrtRTEInfo xq_emlrtRTEI = {
     59,       /* lineNo */
     28,       /* colNo */
     "repmat", /* fName */
@@ -110,7 +110,7 @@ void b_repmat(const emlrtStack *sp, const emxArray_real_T *a, real_T varargin_2,
   int32_T nrows;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &sw_emlrtRSI;
+  st.site = &tw_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   if ((varargin_2 != varargin_2) || muDoubleScalarIsInf(varargin_2)) {
@@ -131,14 +131,14 @@ void b_repmat(const emlrtStack *sp, const emxArray_real_T *a, real_T varargin_2,
   b->size[0] = a->size[0];
   i = (int32_T)varargin_2;
   b->size[1] = (int32_T)varargin_2;
-  emxEnsureCapacity_real_T(sp, b, nrows, &wq_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, b, nrows, &xq_emlrtRTEI);
   nrows = a->size[0];
-  st.site = &xab_emlrtRSI;
+  st.site = &yab_emlrtRSI;
   for (jtilecol = 0; jtilecol < i; jtilecol++) {
     ibtile = jtilecol * nrows;
-    st.site = &yab_emlrtRSI;
+    st.site = &abb_emlrtRSI;
     if ((1 <= nrows) && (nrows > 2147483646)) {
-      b_st.site = &gc_emlrtRSI;
+      b_st.site = &hc_emlrtRSI;
       check_forloop_overflow_error(&b_st);
     }
     for (k = 0; k < nrows; k++) {
@@ -163,7 +163,7 @@ void c_repmat(const emlrtStack *sp, const real_T a_data[],
   int32_T ntilerows;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &sw_emlrtRSI;
+  st.site = &tw_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   if ((varargin_1 != varargin_1) || muDoubleScalarIsInf(varargin_1)) {
@@ -175,22 +175,22 @@ void c_repmat(const emlrtStack *sp, const real_T a_data[],
   ncols = b->size[0] * b->size[1];
   b->size[0] = nrows;
   b->size[1] = a_size[1];
-  emxEnsureCapacity_real_T(sp, b, ncols, &wq_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, b, ncols, &xq_emlrtRTEI);
   nrows = a_size[0];
   ncols = a_size[1];
   ntilerows = (int32_T)varargin_1;
-  st.site = &abb_emlrtRSI;
+  st.site = &bbb_emlrtRSI;
   for (jcol = 0; jcol < ncols; jcol++) {
     iacol = jcol * nrows;
     ibmat = jcol * (nrows * (int32_T)varargin_1);
-    st.site = &bbb_emlrtRSI;
+    st.site = &cbb_emlrtRSI;
     if ((1 <= (int32_T)varargin_1) && ((int32_T)varargin_1 > 2147483646)) {
-      b_st.site = &gc_emlrtRSI;
+      b_st.site = &hc_emlrtRSI;
       check_forloop_overflow_error(&b_st);
     }
     for (itilerow = 0; itilerow < ntilerows; itilerow++) {
       ibcol = ibmat + itilerow * nrows;
-      st.site = &yab_emlrtRSI;
+      st.site = &abb_emlrtRSI;
       for (k = 0; k < nrows; k++) {
         b->data[ibcol] = a_data[iacol];
       }
@@ -206,7 +206,7 @@ void d_repmat(const emlrtStack *sp, real_T varargin_1, emxArray_real_T *b)
   int32_T itilerow;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &sw_emlrtRSI;
+  st.site = &tw_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   if ((varargin_1 != varargin_1) || muDoubleScalarIsInf(varargin_1)) {
@@ -218,14 +218,14 @@ void d_repmat(const emlrtStack *sp, real_T varargin_1, emxArray_real_T *b)
   itilerow = b->size[0] * b->size[1];
   b->size[0] = (int32_T)varargin_1;
   b->size[1] = 1;
-  emxEnsureCapacity_real_T(sp, b, itilerow, &wq_emlrtRTEI);
-  st.site = &abb_emlrtRSI;
+  emxEnsureCapacity_real_T(sp, b, itilerow, &xq_emlrtRTEI);
+  st.site = &bbb_emlrtRSI;
   for (itilerow = 0; itilerow < i; itilerow++) {
     b->data[itilerow] = 0.99;
   }
-  st.site = &bbb_emlrtRSI;
+  st.site = &cbb_emlrtRSI;
   if ((1 <= (int32_T)varargin_1) && ((int32_T)varargin_1 > 2147483646)) {
-    b_st.site = &gc_emlrtRSI;
+    b_st.site = &hc_emlrtRSI;
     check_forloop_overflow_error(&b_st);
   }
 }
@@ -236,7 +236,7 @@ void repmat(const emlrtStack *sp, ptrdiff_t a, int32_T varargin_1,
   int32_T i;
   i = b->size[0];
   b->size[0] = varargin_1;
-  emxEnsureCapacity_ptrdiff_t(sp, b, i, &xp_emlrtRTEI);
+  emxEnsureCapacity_ptrdiff_t(sp, b, i, &yp_emlrtRTEI);
   for (i = 0; i < varargin_1; i++) {
     b->data[i] = a;
   }

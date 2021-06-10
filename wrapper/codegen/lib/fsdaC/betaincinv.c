@@ -15,6 +15,7 @@
 #include "gammaln.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <string.h>
 
 /* Function Definitions */
 creal_T b_betaincinv(double x, double a, double b)

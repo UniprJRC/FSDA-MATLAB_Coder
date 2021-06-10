@@ -93,7 +93,7 @@ static emlrtRSInfo uy_emlrtRSI = {
     "lapack\\xgeqp3.m" /* pathName */
 };
 
-static emlrtRTEInfo iib_emlrtRTEI = {
+static emlrtRTEInfo hib_emlrtRTEI = {
     61,       /* lineNo */
     9,        /* colNo */
     "xgeqp3", /* fName */
@@ -102,7 +102,7 @@ static emlrtRTEInfo iib_emlrtRTEI = {
     "lapack\\xgeqp3.m" /* pName */
 };
 
-static emlrtRTEInfo jib_emlrtRTEI = {
+static emlrtRTEInfo iib_emlrtRTEI = {
     92,       /* lineNo */
     22,       /* colNo */
     "xgeqp3", /* fName */
@@ -111,7 +111,7 @@ static emlrtRTEInfo jib_emlrtRTEI = {
     "lapack\\xgeqp3.m" /* pName */
 };
 
-static emlrtRTEInfo kib_emlrtRTEI = {
+static emlrtRTEInfo jib_emlrtRTEI = {
     105,      /* lineNo */
     1,        /* colNo */
     "xgeqp3", /* fName */
@@ -120,7 +120,7 @@ static emlrtRTEInfo kib_emlrtRTEI = {
     "lapack\\xgeqp3.m" /* pName */
 };
 
-static emlrtRTEInfo lib_emlrtRTEI = {
+static emlrtRTEInfo kib_emlrtRTEI = {
     97,       /* lineNo */
     5,        /* colNo */
     "xgeqp3", /* fName */
@@ -159,7 +159,7 @@ void xgeqp3(const emlrtStack *sp, emxArray_real_T *A, emxArray_real_T *tau,
   i = jpvt->size[0] * jpvt->size[1];
   jpvt->size[0] = 1;
   jpvt->size[1] = A->size[1];
-  emxEnsureCapacity_int32_T(sp, jpvt, i, &iib_emlrtRTEI);
+  emxEnsureCapacity_int32_T(sp, jpvt, i, &hib_emlrtRTEI);
   b_na = A->size[1];
   for (i = 0; i < b_na; i++) {
     jpvt->data[i] = 0;
@@ -170,13 +170,13 @@ void xgeqp3(const emlrtStack *sp, emxArray_real_T *A, emxArray_real_T *tau,
   minmana = muIntScalarMin_sint32(ma, b_na);
   i = tau->size[0];
   tau->size[0] = minmana;
-  emxEnsureCapacity_real_T(&st, tau, i, &jib_emlrtRTEI);
-  emxInit_ptrdiff_t(&st, &jpvt_t, 1, &kib_emlrtRTEI, true);
+  emxEnsureCapacity_real_T(&st, tau, i, &iib_emlrtRTEI);
+  emxInit_ptrdiff_t(&st, &jpvt_t, 1, &jib_emlrtRTEI, true);
   if ((A->size[0] == 0) || (A->size[1] == 0) || (A->size[0] < 1) ||
       (A->size[1] < 1)) {
     i = tau->size[0];
     tau->size[0] = minmana;
-    emxEnsureCapacity_real_T(&st, tau, i, &lib_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, tau, i, &kib_emlrtRTEI);
     for (i = 0; i < minmana; i++) {
       tau->data[i] = 0.0;
     }
@@ -191,7 +191,7 @@ void xgeqp3(const emlrtStack *sp, emxArray_real_T *A, emxArray_real_T *tau,
   } else {
     i = jpvt_t->size[0];
     jpvt_t->size[0] = A->size[1];
-    emxEnsureCapacity_ptrdiff_t(&st, jpvt_t, i, &kib_emlrtRTEI);
+    emxEnsureCapacity_ptrdiff_t(&st, jpvt_t, i, &jib_emlrtRTEI);
     b_na = A->size[1];
     for (i = 0; i < b_na; i++) {
       jpvt_t->data[i] = (ptrdiff_t)0;

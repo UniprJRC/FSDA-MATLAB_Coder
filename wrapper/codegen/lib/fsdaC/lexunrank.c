@@ -18,6 +18,7 @@
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <string.h>
 
 /* Function Definitions */
 void b_lexunrank(double n, double k, double N, emxArray_real_T *kcomb)

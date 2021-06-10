@@ -62,7 +62,7 @@ static emlrtRTEInfo ib_emlrtRTEI = {
                                                                          */
 };
 
-static emlrtRTEInfo qg_emlrtRTEI = {
+static emlrtRTEInfo pg_emlrtRTEI = {
     36,       /* lineNo */
     1,        /* colNo */
     "pascal", /* fName */
@@ -71,7 +71,7 @@ static emlrtRTEInfo qg_emlrtRTEI = {
                                                                          */
 };
 
-static emlrtRTEInfo rg_emlrtRTEI = {
+static emlrtRTEInfo qg_emlrtRTEI = {
     33,       /* lineNo */
     5,        /* colNo */
     "pascal", /* fName */
@@ -80,7 +80,7 @@ static emlrtRTEInfo rg_emlrtRTEI = {
                                                                          */
 };
 
-static emlrtRTEInfo sg_emlrtRTEI = {
+static emlrtRTEInfo rg_emlrtRTEI = {
     178,      /* lineNo */
     59,       /* colNo */
     "mtimes", /* fName */
@@ -131,7 +131,7 @@ void pascal(const emlrtStack *sp, real_T n, emxArray_real_T *P)
     i = P->size[0] * P->size[1];
     P->size[0] = (int32_T)n;
     P->size[1] = (int32_T)n;
-    emxEnsureCapacity_real_T(sp, P, i, &rg_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, P, i, &qg_emlrtRTEI);
     loop_ub = (int32_T)n * (int32_T)n;
     for (i = 0; i < loop_ub; i++) {
       P->data[i] = 1.0;
@@ -140,7 +140,7 @@ void pascal(const emlrtStack *sp, real_T n, emxArray_real_T *P)
     i = P->size[0] * P->size[1];
     P->size[0] = (int32_T)n;
     P->size[1] = (int32_T)n;
-    emxEnsureCapacity_real_T(sp, P, i, &qg_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, P, i, &pg_emlrtRTEI);
     loop_ub = (int32_T)n * (int32_T)n;
     for (i = 0; i < loop_ub; i++) {
       P->data[i] = 0.0;
@@ -179,7 +179,7 @@ void pascal(const emlrtStack *sp, real_T n, emxArray_real_T *P)
         }
       }
     }
-    emxInit_real_T(sp, &A, 2, &sg_emlrtRTEI, true);
+    emxInit_real_T(sp, &A, 2, &rg_emlrtRTEI, true);
     st.site = &nf_emlrtRSI;
     b_st.site = &x_emlrtRSI;
     b_st.site = &w_emlrtRSI;
@@ -190,7 +190,7 @@ void pascal(const emlrtStack *sp, real_T n, emxArray_real_T *P)
     i = A->size[0] * A->size[1];
     A->size[0] = P->size[0];
     A->size[1] = P->size[1];
-    emxEnsureCapacity_real_T(&d_st, A, i, &sg_emlrtRTEI);
+    emxEnsureCapacity_real_T(&d_st, A, i, &rg_emlrtRTEI);
     loop_ub = P->size[0] * P->size[1];
     for (i = 0; i < loop_ub; i++) {
       A->data[i] = P->data[i];

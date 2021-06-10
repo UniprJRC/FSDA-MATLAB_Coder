@@ -41,115 +41,115 @@ static emlrtRSInfo emlrtRSI = {
 };
 
 static emlrtRSInfo b_emlrtRSI = {
-    194,                                            /* lineNo */
+    154,                                            /* lineNo */
     "addt",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pathName */
 };
 
 static emlrtRSInfo c_emlrtRSI = {
-    196,                                            /* lineNo */
+    194,                                            /* lineNo */
     "addt",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pathName */
 };
 
 static emlrtRSInfo d_emlrtRSI = {
-    197,                                            /* lineNo */
+    195,                                            /* lineNo */
     "addt",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pathName */
 };
 
 static emlrtRSInfo e_emlrtRSI = {
-    198,                                            /* lineNo */
+    196,                                            /* lineNo */
     "addt",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pathName */
 };
 
 static emlrtRSInfo f_emlrtRSI = {
-    207,                                            /* lineNo */
+    205,                                            /* lineNo */
     "addt",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pathName */
 };
 
 static emlrtRSInfo g_emlrtRSI = {
-    216,                                            /* lineNo */
+    214,                                            /* lineNo */
     "addt",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pathName */
 };
 
 static emlrtRSInfo h_emlrtRSI = {
-    218,                                            /* lineNo */
+    216,                                            /* lineNo */
     "addt",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pathName */
 };
 
 static emlrtRSInfo i_emlrtRSI = {
-    219,                                            /* lineNo */
+    217,                                            /* lineNo */
     "addt",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pathName */
 };
 
 static emlrtRSInfo j_emlrtRSI = {
-    221,                                            /* lineNo */
+    219,                                            /* lineNo */
     "addt",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pathName */
 };
 
 static emlrtRSInfo k_emlrtRSI = {
-    227,                                            /* lineNo */
+    225,                                            /* lineNo */
     "addt",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pathName */
 };
 
 static emlrtRSInfo l_emlrtRSI = {
-    228,                                            /* lineNo */
+    226,                                            /* lineNo */
     "addt",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pathName */
 };
 
 static emlrtRSInfo m_emlrtRSI = {
-    229,                                            /* lineNo */
+    227,                                            /* lineNo */
     "addt",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pathName */
 };
 
 static emlrtRSInfo n_emlrtRSI = {
-    230,                                            /* lineNo */
+    228,                                            /* lineNo */
     "addt",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pathName */
 };
 
 static emlrtRSInfo o_emlrtRSI = {
-    231,                                            /* lineNo */
+    229,                                            /* lineNo */
     "addt",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pathName */
 };
 
 static emlrtRSInfo p_emlrtRSI = {
-    245,                                            /* lineNo */
+    243,                                            /* lineNo */
     "addt",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pathName */
 };
 
 static emlrtRSInfo q_emlrtRSI = {
-    246,                                            /* lineNo */
+    244,                                            /* lineNo */
     "addt",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pathName */
 };
 
 static emlrtRSInfo r_emlrtRSI = {
-    248,                                            /* lineNo */
+    246,                                            /* lineNo */
     "addt",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pathName */
 };
 
 static emlrtRSInfo s_emlrtRSI = {
-    250,                                            /* lineNo */
+    248,                                            /* lineNo */
     "addt",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pathName */
 };
 
 static emlrtRSInfo t_emlrtRSI = {
-    252,                                            /* lineNo */
+    250,                                            /* lineNo */
     "addt",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pathName */
 };
@@ -165,7 +165,7 @@ static emlrtRSInfo yd_emlrtRSI = {
 static emlrtBCInfo emlrtBCI = {
     -1,                                              /* iFirst */
     -1,                                              /* iLast */
-    207,                                             /* lineNo */
+    205,                                             /* lineNo */
     15,                                              /* colNo */
     "A",                                             /* aName */
     "addt",                                          /* fName */
@@ -176,7 +176,7 @@ static emlrtBCInfo emlrtBCI = {
 static emlrtBCInfo b_emlrtBCI = {
     -1,                                              /* iFirst */
     -1,                                              /* iLast */
-    207,                                             /* lineNo */
+    205,                                             /* lineNo */
     3,                                               /* colNo */
     "A",                                             /* aName */
     "addt",                                          /* fName */
@@ -185,7 +185,7 @@ static emlrtBCInfo b_emlrtBCI = {
 };
 
 static emlrtDCInfo emlrtDCI = {
-    207,                                             /* lineNo */
+    205,                                             /* lineNo */
     3,                                               /* colNo */
     "addt",                                          /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m", /* pName */
@@ -203,7 +203,7 @@ static emlrtRTEInfo d_emlrtRTEI = {
 
 static emlrtECInfo emlrtECI = {
     -1,                                             /* nDims */
-    245,                                            /* lineNo */
+    243,                                            /* lineNo */
     13,                                             /* colNo */
     "addt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pName */
@@ -211,7 +211,7 @@ static emlrtECInfo emlrtECI = {
 
 static emlrtECInfo b_emlrtECI = {
     2,                                              /* nDims */
-    245,                                            /* lineNo */
+    243,                                            /* lineNo */
     13,                                             /* colNo */
     "addt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pName */
@@ -219,7 +219,7 @@ static emlrtECInfo b_emlrtECI = {
 
 static emlrtECInfo c_emlrtECI = {
     -1,                                             /* nDims */
-    207,                                            /* lineNo */
+    205,                                            /* lineNo */
     1,                                              /* colNo */
     "addt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pName */
@@ -227,119 +227,119 @@ static emlrtECInfo c_emlrtECI = {
 
 static emlrtECInfo d_emlrtECI = {
     2,                                              /* nDims */
-    204,                                            /* lineNo */
+    202,                                            /* lineNo */
     10,                                             /* colNo */
     "addt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pName */
 };
 
 static emlrtRTEInfo v_emlrtRTEI = {
-    194,                                            /* lineNo */
+    154,                                            /* lineNo */
     2,                                              /* colNo */
     "addt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pName */
 };
 
 static emlrtRTEInfo w_emlrtRTEI = {
-    194,                                            /* lineNo */
+    154,                                            /* lineNo */
     4,                                              /* colNo */
     "addt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pName */
 };
 
 static emlrtRTEInfo x_emlrtRTEI = {
-    198,                                            /* lineNo */
+    196,                                            /* lineNo */
     5,                                              /* colNo */
     "addt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pName */
 };
 
 static emlrtRTEInfo y_emlrtRTEI = {
-    199,                                            /* lineNo */
-    1,                                              /* colNo */
-    "addt",                                         /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pName */
-};
-
-static emlrtRTEInfo ab_emlrtRTEI = {
-    204,                                            /* lineNo */
-    16,                                             /* colNo */
-    "addt",                                         /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pName */
-};
-
-static emlrtRTEInfo bb_emlrtRTEI = {
-    204,                                            /* lineNo */
-    1,                                              /* colNo */
-    "addt",                                         /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pName */
-};
-
-static emlrtRTEInfo cb_emlrtRTEI = {
-    207,                                            /* lineNo */
-    3,                                              /* colNo */
-    "addt",                                         /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pName */
-};
-
-static emlrtRTEInfo db_emlrtRTEI = {
-    207,                                            /* lineNo */
-    11,                                             /* colNo */
-    "addt",                                         /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pName */
-};
-
-static emlrtRTEInfo eb_emlrtRTEI = {
-    224,                                            /* lineNo */
-    5,                                              /* colNo */
-    "addt",                                         /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pName */
-};
-
-static emlrtRTEInfo fb_emlrtRTEI = {
-    216,                                            /* lineNo */
-    16,                                             /* colNo */
-    "addt",                                         /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pName */
-};
-
-static emlrtRTEInfo gb_emlrtRTEI = {
-    219,                                            /* lineNo */
-    9,                                              /* colNo */
-    "addt",                                         /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pName */
-};
-
-static emlrtRTEInfo hb_emlrtRTEI = {
     197,                                            /* lineNo */
     1,                                              /* colNo */
     "addt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pName */
 };
 
+static emlrtRTEInfo ab_emlrtRTEI = {
+    202,                                            /* lineNo */
+    16,                                             /* colNo */
+    "addt",                                         /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pName */
+};
+
+static emlrtRTEInfo bb_emlrtRTEI = {
+    202,                                            /* lineNo */
+    1,                                              /* colNo */
+    "addt",                                         /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pName */
+};
+
+static emlrtRTEInfo cb_emlrtRTEI = {
+    205,                                            /* lineNo */
+    3,                                              /* colNo */
+    "addt",                                         /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pName */
+};
+
+static emlrtRTEInfo db_emlrtRTEI = {
+    205,                                            /* lineNo */
+    11,                                             /* colNo */
+    "addt",                                         /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pName */
+};
+
+static emlrtRTEInfo eb_emlrtRTEI = {
+    222,                                            /* lineNo */
+    5,                                              /* colNo */
+    "addt",                                         /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pName */
+};
+
+static emlrtRTEInfo fb_emlrtRTEI = {
+    214,                                            /* lineNo */
+    16,                                             /* colNo */
+    "addt",                                         /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pName */
+};
+
+static emlrtRTEInfo gb_emlrtRTEI = {
+    217,                                            /* lineNo */
+    9,                                              /* colNo */
+    "addt",                                         /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pName */
+};
+
+static emlrtRTEInfo hb_emlrtRTEI = {
+    195,                                            /* lineNo */
+    1,                                              /* colNo */
+    "addt",                                         /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pName */
+};
+
 static emlrtRTEInfo ib_emlrtRTEI = {
-    198,                                            /* lineNo */
+    196,                                            /* lineNo */
     1,                                              /* colNo */
     "addt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pName */
 };
 
 static emlrtRTEInfo jb_emlrtRTEI = {
-    227,                                            /* lineNo */
+    225,                                            /* lineNo */
     1,                                              /* colNo */
     "addt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pName */
 };
 
 static emlrtRTEInfo kb_emlrtRTEI = {
-    229,                                            /* lineNo */
+    227,                                            /* lineNo */
     1,                                              /* colNo */
     "addt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pName */
 };
 
 static emlrtRTEInfo lb_emlrtRTEI = {
-    219,                                            /* lineNo */
+    217,                                            /* lineNo */
     13,                                             /* colNo */
     "addt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\addt.m" /* pName */
@@ -574,9 +574,6 @@ void addt_wrapper(const emlrtStack *sp, const emxArray_real_T *y,
   /*  */
   /*  */
   /*  Beginning of code */
-  /*  User options */
-  /*  Insert code for intercept */
-  /*  t test for an additional explanatory variable */
   i = b_y->size[0];
   b_y->size[0] = y->size[0];
   emxEnsureCapacity_real_T(&st, b_y, i, &v_emlrtRTEI);
@@ -597,6 +594,8 @@ void addt_wrapper(const emlrtStack *sp, const emxArray_real_T *y,
   emxInit_real_T(&st, &R, 2, &mb_emlrtRTEI, true);
   b_st.site = &b_emlrtRSI;
   chkinputR(&b_st, b_y, A, intercept, nocheck, &n, &p);
+  /*  Insert code for intercept */
+  /*  t test for an additional explanatory variable */
   b_st.site = &c_emlrtRSI;
   qr(&b_st, A, a__1, R);
   b_st.site = &d_emlrtRSI;

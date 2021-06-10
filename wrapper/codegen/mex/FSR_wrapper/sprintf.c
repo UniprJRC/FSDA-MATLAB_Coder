@@ -53,7 +53,7 @@ static emlrtDCInfo od_emlrtDCI = {
     4 /* checkKind */
 };
 
-static emlrtRTEInfo hbb_emlrtRTEI = {
+static emlrtRTEInfo gbb_emlrtRTEI = {
     1,         /* lineNo */
     25,        /* colNo */
     "sprintf", /* fName */
@@ -245,7 +245,7 @@ void c_sprintf(const emlrtStack *sp, real_T varargin_1)
   if (!(strSize >= 0.0)) {
     emlrtNonNegativeCheckR2012b(strSize, &od_emlrtDCI, &st);
   }
-  emxInit_char_T(&st, &b_tmpStr, 2, &hbb_emlrtRTEI, true);
+  emxInit_char_T(&st, &b_tmpStr, 2, &gbb_emlrtRTEI, true);
   b_st.site = &cqb_emlrtRSI;
   k_emlrt_marshallIn(&b_st, emlrtAlias(tmpStr), "tmpStr", b_tmpStr);
   emlrtDestroyArray(&tmpStr);

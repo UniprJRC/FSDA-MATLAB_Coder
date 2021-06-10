@@ -172,7 +172,7 @@ static emlrtBCInfo
             0 /* checkKind */
 };
 
-static emlrtRTEInfo sp_emlrtRTEI = {
+static emlrtRTEInfo rp_emlrtRTEI = {
     75,           /* lineNo */
     24,           /* colNo */
     "randsample", /* fName */
@@ -180,7 +180,7 @@ static emlrtRTEInfo sp_emlrtRTEI = {
                                                                             */
 };
 
-static emlrtRTEInfo tp_emlrtRTEI = {
+static emlrtRTEInfo sp_emlrtRTEI = {
     134,          /* lineNo */
     9,            /* colNo */
     "randsample", /* fName */
@@ -189,7 +189,7 @@ static emlrtRTEInfo tp_emlrtRTEI = {
 };
 
 static emlrtRTEInfo
-    up_emlrtRTEI =
+    tp_emlrtRTEI =
         {
             16,         /* lineNo */
             5,          /* colNo */
@@ -199,7 +199,7 @@ static emlrtRTEInfo
             "m.m" /* pName */
 };
 
-static emlrtRTEInfo vp_emlrtRTEI = {
+static emlrtRTEInfo up_emlrtRTEI = {
     117,          /* lineNo */
     13,           /* colNo */
     "randsample", /* fName */
@@ -256,7 +256,7 @@ void randsample(const emlrtStack *sp, real_T varargin_1, real_T varargin_2,
   k_tmp_tmp = (int32_T)muDoubleScalarFloor(varargin_2);
   i = y->size[0];
   y->size[0] = (int32_T)x_tmp;
-  emxEnsureCapacity_real_T(sp, y, i, &sp_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, y, i, &rp_emlrtRTEI);
   if (!((int32_T)x_tmp <= n)) {
     emlrtErrorWithMessageIdR2018a(sp, &ec_emlrtRTEI,
                                   "stats:randsample:SampleTooLarge",
@@ -269,8 +269,8 @@ void randsample(const emlrtStack *sp, real_T varargin_1, real_T varargin_2,
                                     "MATLAB:randperm:inputType",
                                     "MATLAB:randperm:inputType", 0);
     }
-    emxInit_real_T(&st, &rp, 2, &vp_emlrtRTEI, true);
-    emxInit_int32_T(&st, &idx, 2, &up_emlrtRTEI, true);
+    emxInit_real_T(&st, &rp, 2, &up_emlrtRTEI, true);
+    emxInit_int32_T(&st, &idx, 2, &tp_emlrtRTEI, true);
     b_st.site = &iv_emlrtRSI;
     c_rand(&b_st, n, rp);
     b_st.site = &hv_emlrtRSI;
@@ -278,17 +278,17 @@ void randsample(const emlrtStack *sp, real_T varargin_1, real_T varargin_2,
     i = idx->size[0] * idx->size[1];
     idx->size[0] = 1;
     idx->size[1] = rp->size[1];
-    emxEnsureCapacity_int32_T(&b_st, idx, i, &up_emlrtRTEI);
+    emxEnsureCapacity_int32_T(&b_st, idx, i, &tp_emlrtRTEI);
     nsel = rp->size[1];
     for (i = 0; i < nsel; i++) {
       idx->data[i] = 0;
     }
     if (rp->size[1] != 0) {
-      emxInit_int32_T(&b_st, &iwork, 1, &qk_emlrtRTEI, true);
+      emxInit_int32_T(&b_st, &iwork, 1, &pk_emlrtRTEI, true);
       c_st.site = &lk_emlrtRSI;
       i = iwork->size[0];
       iwork->size[0] = rp->size[1];
-      emxEnsureCapacity_int32_T(&c_st, iwork, i, &pk_emlrtRTEI);
+      emxEnsureCapacity_int32_T(&c_st, iwork, i, &ok_emlrtRTEI);
       nsel = rp->size[1] - 1;
       d_st.site = &mk_emlrtRSI;
       if ((1 <= rp->size[1] - 1) && (rp->size[1] - 1 > 2147483645)) {
@@ -361,7 +361,7 @@ void randsample(const emlrtStack *sp, real_T varargin_1, real_T varargin_2,
     i = rp->size[0] * rp->size[1];
     rp->size[0] = 1;
     rp->size[1] = nsel;
-    emxEnsureCapacity_real_T(&st, rp, i, &vp_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, rp, i, &up_emlrtRTEI);
     for (i = 0; i < nsel; i++) {
       rp->data[i] = idx->data[i];
     }
@@ -384,12 +384,12 @@ void randsample(const emlrtStack *sp, real_T varargin_1, real_T varargin_2,
     }
     emxFree_real_T(&rp);
   } else {
-    emxInit_boolean_T(sp, &selected, 2, &tp_emlrtRTEI, true);
+    emxInit_boolean_T(sp, &selected, 2, &sp_emlrtRTEI, true);
     i = selected->size[0] * selected->size[1];
     selected->size[0] = 1;
     nsel = (int32_T)n;
     selected->size[1] = (int32_T)n;
-    emxEnsureCapacity_boolean_T(sp, selected, i, &tp_emlrtRTEI);
+    emxEnsureCapacity_boolean_T(sp, selected, i, &sp_emlrtRTEI);
     for (i = 0; i < nsel; i++) {
       selected->data[i] = false;
     }

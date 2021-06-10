@@ -62,21 +62,21 @@ static emlrtRSInfo uk_emlrtRSI = {
                                                                      */
 };
 
-static emlrtRTEInfo lk_emlrtRTEI = {
+static emlrtRTEInfo kk_emlrtRTEI = {
     33,                                                             /* lineNo */
     5,                                                              /* colNo */
     "mad",                                                          /* fName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\mad.m" /* pName */
 };
 
-static emlrtRTEInfo mk_emlrtRTEI = {
+static emlrtRTEInfo lk_emlrtRTEI = {
     33,                                                             /* lineNo */
     14,                                                             /* colNo */
     "mad",                                                          /* fName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\mad.m" /* pName */
 };
 
-static emlrtRTEInfo sk_emlrtRTEI = {
+static emlrtRTEInfo rk_emlrtRTEI = {
     38,                                                             /* lineNo */
     14,                                                             /* colNo */
     "mad",                                                          /* fName */
@@ -100,18 +100,18 @@ real_T b_mad(const emlrtStack *sp, const emxArray_real_T *x)
   if (x->size[0] == 0) {
     y = rtNaN;
   } else {
-    emxInit_real_T(sp, &c, 1, &sk_emlrtRTEI, true);
+    emxInit_real_T(sp, &c, 1, &rk_emlrtRTEI, true);
     st.site = &sk_emlrtRSI;
     b = nanmean(&st, x);
     i = c->size[0];
     c->size[0] = x->size[0];
-    emxEnsureCapacity_real_T(sp, c, i, &kk_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, c, i, &jk_emlrtRTEI);
     acoef = (x->size[0] != 1);
     i = x->size[0] - 1;
     for (k = 0; k <= i; k++) {
       c->data[k] = x->data[acoef * k] - b;
     }
-    emxInit_real_T(sp, &xx, 1, &lk_emlrtRTEI, true);
+    emxInit_real_T(sp, &xx, 1, &kk_emlrtRTEI, true);
     st.site = &tk_emlrtRSI;
     b_abs(&st, c, xx);
     st.site = &uk_emlrtRSI;
@@ -139,18 +139,18 @@ real_T mad(const emlrtStack *sp, const emxArray_real_T *x)
   if (x->size[0] == 0) {
     y = rtNaN;
   } else {
-    emxInit_real_T(sp, &c, 1, &mk_emlrtRTEI, true);
+    emxInit_real_T(sp, &c, 1, &lk_emlrtRTEI, true);
     st.site = &sj_emlrtRSI;
     b = nanmedian(&st, x);
     i = c->size[0];
     c->size[0] = x->size[0];
-    emxEnsureCapacity_real_T(sp, c, i, &kk_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, c, i, &jk_emlrtRTEI);
     acoef = (x->size[0] != 1);
     i = x->size[0] - 1;
     for (k = 0; k <= i; k++) {
       c->data[k] = x->data[acoef * k] - b;
     }
-    emxInit_real_T(sp, &xx, 1, &lk_emlrtRTEI, true);
+    emxInit_real_T(sp, &xx, 1, &kk_emlrtRTEI, true);
     st.site = &tj_emlrtRSI;
     b_abs(&st, c, xx);
     st.site = &uj_emlrtRSI;

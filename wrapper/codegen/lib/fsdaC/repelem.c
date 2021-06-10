@@ -14,6 +14,7 @@
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 void repelem(const double x_data[], const int x_size[2], double varargin_1,
