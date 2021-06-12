@@ -1,13 +1,52 @@
-Package: fsdac
-Version: 0.5-13
-Date: 2021-06-10
-Title: Demo Calling MATLAB Coder Translated to C Functions from R: FSR, LXS, FSRfan, FSRbsb, ...
-Author: Valentin Todorov <valentin@todorov.at>
-Maintainer: Valentin Todorov <valentin@todorov.at>
-Depends: R (>= 3.0.2)
-Suggests: robustbase
-Description: This is a demo package to show how FSDA functions in C code
-    obtained from the MATLAB coder can be called from R (using the R functions
-    .C and/or .Call).
+Package: fsdaR
+Title: Calling MATLAB Coder-translated functions ported in C from the FSDA toolbox
+Version: 0.5-14
+Date: 2021-06-12
+VersionNote: Released 0.4-8 on 2020-01-13 on CRAN
+Authors@R: c(person("Valentin", "Todorov", role = c("aut", "cre"), email = "valentin.todorov@chello.at", comment=c(ORCID = "0000-0003-4215-0245"))
+         , person("Emmanuele", "Sordini", role = "aut", email = "Emmanuele.sordini@ec.europa.eu")
+         , person("Aldo", "Corbellini", role = "ctb")
+         , person("Francesca", "Torti", role = "ctb")
+         , person("Marco",  "Riani", role = "ctb")
+         , person("Domenico", "Perrotta", role = "ctb")
+          )
+Description: The 'Flexible Statistical Data Analysis - FSDA' software 
+    aims to provide the data science community with principled methods 
+    for robust statistical analysis. It addresses numerical and categorical 
+    data with methods ranging from standard data summaries to sophisticated 
+    regression, multivariate, model selection and transformation tools. 
+    The distinctive feature of FSDA is that it is targeted to any step 
+    of the data analysis process that might be faced with data anomalies 
+    and deviations from model assumptions, and possibly require user 
+    interactivity with dynamic data visualizations. 
+    The package 'fsdaR' shows how FSDA functions in C code obtained from the 
+    MATLAB coder can be called from R (using the R functions .C and/or .Call). 
+    It therefore provides a interface to the 'MATLAB' toolbox FSDA. 
+    The current R version implements tools for regression: 
+    (forward search, S- and MM-estimation, least trimmed
+    squares (LTS) and least median of squares (LMS)), 
+    for multivariate analysis (forward search, S- and MM-estimation), 
+    for cluster analysis (TCLUST) and time series analysis (LTSts).
+    The distinctive feature of our package is the possibility of
+    monitoring the statistics of interest as function of breakdown point,
+    efficiency or subset size, depending on the estimator. 
+Depends: R (>= 3.0.2), rrcov
+Imports: rJava, methods, stats4, ggplot2
+Suggests: MASS, robustbase
+SystemRequirements: (license-free) MATLAB Runtime (MCR) V 9.6, Java
+        (>=8)
+LazyLoad: yes
+LazyData: yes
 License: GPL (>= 2)
+Packaged: 2020-01-14 12:53:15 UTC; todorovv
+Author: Valentin Todorov [aut, cre] (<https://orcid.org/0000-0003-4215-0245>),
+  Emmanuele Sordini [aut],
+  Aldo Corbellini [ctb],
+  Francesca Torti [ctb],
+  Marco Riani [ctb],
+  Domenico Perrotta [ctb],
+Maintainer: Valentin Todorov <valentin.todorov@chello.at>
+NeedsCompilation: no
+Repository: CRAN
 RoxygenNote: 7.1.1
+Date/Publication: 2020-06-12 16:40:02 UTC
