@@ -1,7 +1,7 @@
 Package: fsdac
-Version: 0.5-13
+Version: 0.5-14
 Date: 2021-06-10
-Title: Demo Calling MATLAB Coder Translated to C Functions from R: FSR, LXS, FSRfan, FSRbsb, ...
+Title: Demo Calling MATLAB Coder Translated to C Functions from R: addt, FSRbsb, FSRfan, LXS, FSR, FSRmdr, ...
 Author: Valentin Todorov <valentin@todorov.at>
 Maintainer: Valentin Todorov <valentin@todorov.at>
 Depends: R (>= 3.0.2)

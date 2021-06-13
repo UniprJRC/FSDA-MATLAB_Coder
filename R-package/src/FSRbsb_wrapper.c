@@ -9,6 +9,7 @@
  *
  */
 
+#include <R.h>
 /* Include files */
 #include "FSRbsb_wrapper.h"
 #include "cat.h"
@@ -428,6 +429,7 @@ void FSRbsb_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     emxEnsureCapacity_real_T(yb, i);
     loop_ub = bsb->size[0];
     for (i = 0; i < loop_ub; i++) {
+    Rprintf("\n %d %d %f", i, (int)bsb->data[i] - 1, b_y->data[(int)bsb->data[i] - 1]);
       yb->data[i] = b_y->data[(int)bsb->data[i] - 1];
     }
   }

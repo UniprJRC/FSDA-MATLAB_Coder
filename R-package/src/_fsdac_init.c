@@ -11,6 +11,7 @@ extern void r_addt(void *, void *, void *, void *, void *, void *, void *, void 
 extern void r_fsr(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern void r_fsrbsb(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern void r_fsrfan(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
+extern void r_fsrmdr(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern void r_lxs(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
 
 static const R_CMethodDef CEntries[] = {
@@ -19,6 +20,7 @@ static const R_CMethodDef CEntries[] = {
     {"r_fsr",    (DL_FUNC) &r_fsr,    34},
     {"r_fsrbsb", (DL_FUNC) &r_fsrbsb, 18},
     {"r_fsrfan", (DL_FUNC) &r_fsrfan, 28},
+    {"r_fsrmdr", (DL_FUNC) &r_fsrmdr, 32},
     {"r_lxs",    (DL_FUNC) &r_lxs,    34},
     {NULL, NULL, 0}
 };

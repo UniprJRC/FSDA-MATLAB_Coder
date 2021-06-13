@@ -19,23 +19,25 @@ FSRbsb(
 \arguments{
 \item{y}{A vector with \code{n} elements that contains the response variable.}
 
-\item{x}{An \code{n x p} data matrix (\code{n} observations and \code{p}
- variables) of explanatory variables
- (also called 'regressors') of dimension n x (p-1) where p denotes the number of
- explanatory variables including the intercept.
+\item{x}{A data matrix (\code{n} observations and \code{p-1} variables) of explanatory variables
+(also called 'regressors') of dimension \code{n x (p-1)} where \code{p} denotes the number of
+explanatory variables including the intercept. Rows of \code{x} represent observations,
+and columns represent variables. By default,
+there is a constant term in the model, unless you explicitly remove it using the input
+option intercept. In such case (\code{intercept=FALSE}) a column of 1s will not be added to \code{x}.
+Missing values (NA's) and infinite values (Inf's) are allowed, since observations (rows) with missing or
+infinite values will automatically be excluded from the computations.}
 
- Rows of \code{X} represent observations, and columns represent variables. By default,
- there is a constant term in the model, unless you explicitly remove it using input
- option intercept, so do not include a column of 1s in \code{X}.
- Missing values (NaN's)
- and infinite values (Inf's) are allowed, since observations (rows) with missing or
- infinite values will automatically be excluded from the computations.}
-
-\item{bsb}{List of units forming the initial subset or size of the initial subset.
+\item{bsb}{List of the units forming the initial subset.
 If \code{bsb = 0} then the procedure starts with \code{p} units randomly chosen
 else if \code{bsb} is not 0 the search will start with \code{m0=length(bsb)}.}
 
-\item{init}{Search initialization. It specifies the initial subset size to start monitoring units forming subset}
+\item{init}{Search initialization. It specifies the point where to initialize the search and start
+monitoring required diagnostics. If it is not specified by default it will be equal to:
+\itemize{
+    \item \code{p+1}, if the sample size is smaller than 40;
+    \item \code{min(3*p+1, floor(0.5*(n+p+1)))}, otherwise.
+}}
 
 \item{intercept}{Indicator for the constant term (intercept) in the fit, defaults to \code{intercept=TRUE}.}
 
@@ -44,11 +46,11 @@ matrix \code{y} and matrix \code{X}. Notice that \code{y} and \code{X} are left 
 the additional column of ones for the intercept is not added. By default \code{nocheck=FALSE}.}
 
 \item{bsbsteps}{It specifies for which steps of the fwd search it is necessary to save the units
-forming subset. If \code{bsbsteps=0} we store the units forming subset in all steps.
-If \code{bsbsteps=c()} or omitted, the default is to store the units forming subset in all steps
-if \code{n <= 5000}, else to store the units forming subset at steps init and steps which are
-multiple of 100. For example, as default, if \code{n = 753} and \code{init = 6}, units forming
-subset are stored for \code{m=init, 100, 200, 300, 400, 500 and 600}.}
+forming subset. If \code{bsbsteps=0} we store the units forming the subset in all steps.
+If \code{bsbsteps=c()} or omitted, the default is to store the units forming the subset in all steps
+if \code{n <= 5000}, else to store the units forming the subset at steps init and steps which are
+multiple of 100. For example, as default, if \code{n = 753} and \code{init = 6}, the units forming
+the subset are stored for \code{m=init, 100, 200, 300, 400, 500 and 600}.}
 
 \item{msg}{Level of output to display. It controls whether to display or not messages on the screen.
  If \code{msg=TRUE} (default) messages are displayed on the screen about step of the fwd search else
@@ -57,7 +59,7 @@ no message is displayed on the screen.}
 \item{trace}{Whether to print intermediate results. Default is \code{trace=FALSE}.}
 }
 \value{
-An object of class \code{fsrbsb}, will be returned which is basically a list
+An object of class \code{FSRbsb}, will be returned which is basically a list
  containing two matrices, \code{Un} and \code{BB}:
  \enumerate{
  \item \code{Un} Units included in each step;
@@ -74,9 +76,9 @@ An object of class \code{fsrbsb}, will be returned which is basically a list
      each step (or in selected steps as specified by optional vector bsbsteps) of the forward search.
      More precisely:
      \enumerate{
-     \item \code{BB[, 1]} contains the units forming subset in step \code{bsbsteps[1]};
+     \item \code{BB[, 1]} contains the units forming the subset in step \code{bsbsteps[1]};
      \item ....;
-     \item \code{BB[, ncol(BB)]} contains the units forming subset in step \code{bsbsteps[length(bsbsteps)]};
+     \item \code{BB[, ncol(BB)]} contains the units forming the subset in step \code{bsbsteps[length(bsbsteps)]};
      }
 
      Row 1 of matrix \code{BB} is referred to unit 1;
@@ -95,9 +97,8 @@ Returns the units belonging to the subset in each step of the forward search.
    y <- fishery[,2, drop=FALSE]
    X <- fishery[,1, drop=FALSE]
    bsb <- c(7, 431)                    # found by LTS
-   bsb <- c(104,   489)
 
-   out <- FSRbsb(y, X, bsb)                    # call 'FSRbsb' with all default parameters
+   out <- FSRbsb(y, X, bsb)            # call 'FSRbsb' with all default parameters
 
 }
 \references{
