@@ -555,7 +555,7 @@ void restreigeneasy(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
   for (i = 0; i < ibtile; i++) {
     dnis->data[i] = d->data[b_r->data[i] - 1];
   }
-  maxdnis = c_maximum(dnis);
+  maxdnis = b_maximum(dnis);
   if (!(maxdnis <= 1.0E-8)) {
     emxInit_boolean_T(&x, 2);
     /*  we check if the  eigenvalues verify the restrictions */

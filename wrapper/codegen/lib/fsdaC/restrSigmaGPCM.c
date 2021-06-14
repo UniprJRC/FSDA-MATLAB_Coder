@@ -613,7 +613,7 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
         for (i1 = 0; i1 < ret; i1++) {
           GAMold->data[i1] = r2->data[i1].re;
         }
-        wk->data[j] = c_maximum(GAMold);
+        wk->data[j] = b_maximum(GAMold);
       }
     }
     emxFree_creal_T(&r2);
@@ -1918,7 +1918,7 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
         for (i1 = 0; i1 < loop_ub; i1++) {
           diageigunsorted->data[i1] = r4->data[i1].re;
         }
-        wk->data[j] = c_maximum(diageigunsorted);
+        wk->data[j] = b_maximum(diageigunsorted);
       }
     }
     emxFree_creal_T(&r4);

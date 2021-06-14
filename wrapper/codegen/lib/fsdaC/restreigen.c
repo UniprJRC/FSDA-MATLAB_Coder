@@ -519,7 +519,7 @@ void b_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
       nrows++;
     }
   }
-  maxdnis = c_maximum(dnis);
+  maxdnis = b_maximum(dnis);
   if (!(maxdnis <= 1.0E-8)) {
     emxInit_boolean_T(&dltm, 2);
     /*  we check if the  eigenvalues verify the restrictions */
@@ -2138,7 +2138,7 @@ void d_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
       nrows++;
     }
   }
-  maxdnis = c_maximum(dnis);
+  maxdnis = b_maximum(dnis);
   emxInit_int32_T(&r, 1);
   if (userepmat == 2.0) {
     if ((!(maxdnis <= tol)) && (fabs(maxdnis / c_minimum(dnis)) <= restr)) {
@@ -3237,7 +3237,7 @@ void restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
   for (i = 0; i < ibtile; i++) {
     dnis->data[i] = d->data[r3->data[i] - 1];
   }
-  maxdnis = c_maximum(dnis);
+  maxdnis = b_maximum(dnis);
   if (!(maxdnis <= 1.0E-8)) {
     emxInit_boolean_T(&dltm, 2);
     /*  we check if the  eigenvalues verify the restrictions */
