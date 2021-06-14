@@ -27,12 +27,12 @@
 #' @param lms estimation method, If \code{lms=1} (default) Least Median of Squares is computed,
 #'  else if \code{lms=2} or  \code{lms='lts'} fast LTS with all default options is used else
 #'  if \code{lms} is a scalar different from 1 and 2 standard LTS is used (without concentration steps).
-#' @param bsbmfullrank how to deal with singular \code{X} matrix. This option tells what to do
-#'  in case when a subset at step \code{m} (say \code{bsbm}) produces a singular \code{X}.
+#' @param bsbmfullrank how to deal with singular \code{x} matrix. This option tells what to do
+#'  in case when a subset at step \code{m} (say \code{bsbm}) produces a singular \code{x}.
 #'  In other words, this options controls what to do when \code{rank(X[bsbm,]} is smaller
 #'  then number of explanatory variables. If \code{bsbmfullrank=TRUE} (default) these units
 #'  (whose number is say \code{mnofullrank}) are constrained to enter the search in the final
-#'  n-mnofullrank steps else the search continues using as estimate of beta at step \code{m}
+#'  \code{n-mnofullrank} steps else the search continues using as estimate of \code{beta} at step \code{m}
 #'  the estimate of \code{beta} found in the previous step.
 #' @param bonflev signal to use to identify outliers. This option is used if the distribution of
 #'  the data is strongly non-normal and, thus, the general signal detection rule based on

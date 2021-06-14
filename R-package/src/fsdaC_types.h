@@ -16,25 +16,25 @@
 #include "rtwtypes.h"
 
 /* Type Definitions */
-#ifndef typedef_struct0_T
-#define typedef_struct0_T
+#ifndef typedef_struct_LTStslshiftlocref_T
+#define typedef_struct_LTStslshiftlocref_T
 typedef struct {
   double wlength;
   double typeres;
   double huberc;
-} struct0_T;
-#endif /* typedef_struct0_T */
+} struct_LTStslshiftlocref_T;
+#endif /* typedef_struct_LTStslshiftlocref_T */
 
-#ifndef typedef_struct1_T
-#define typedef_struct1_T
+#ifndef typedef_struct_LXSlms_T
+#define typedef_struct_LXSlms_T
 typedef struct {
   double bestr;
   double refsteps;
   double refstepsbestr;
   double reftol;
   double reftolbestr;
-} struct1_T;
-#endif /* typedef_struct1_T */
+} struct_LXSlms_T;
+#endif /* typedef_struct_LXSlms_T */
 
 #ifndef enum_c_matlab_internal_coder_tabular
 #define enum_c_matlab_internal_coder_tabular
@@ -322,8 +322,8 @@ typedef struct {
 } struct_FSRfan_T;
 #endif /* typedef_struct_FSRfan_T */
 
-#ifndef typedef_struct2_T
-#define typedef_struct2_T
+#ifndef typedef_struct_LTStsmodel_T
+#define typedef_struct_LTStsmodel_T
 typedef struct {
   double lshift;
   double s;
@@ -331,8 +331,8 @@ typedef struct {
   double seasonal;
   emxArray_real_T_1x1 ARp;
   emxArray_real_T *X;
-} struct2_T;
-#endif /* typedef_struct2_T */
+} struct_LTStsmodel_T;
+#endif /* typedef_struct_LTStsmodel_T */
 
 #ifndef struct_emxArray_char_T_1x10
 #define struct_emxArray_char_T_1x10
@@ -454,12 +454,12 @@ typedef struct {
 } cell_wrap_50;
 #endif /* typedef_cell_wrap_50 */
 
-#ifndef typedef_struct3_T
-#define typedef_struct3_T
+#ifndef typedef_struct0_T
+#define typedef_struct0_T
 typedef struct {
   emxArray_char_T_1x0 Description;
-} struct3_T;
-#endif /* typedef_struct3_T */
+} struct0_T;
+#endif /* typedef_struct0_T */
 
 #ifndef typedef_f_struct_T
 #define typedef_f_struct_T
@@ -534,7 +534,7 @@ typedef struct {
   e_matlab_internal_coder_tabular rowDim;
   f_matlab_internal_coder_tabular varDim;
   cell_wrap_6 data[4];
-  struct3_T arrayProps;
+  struct0_T arrayProps;
 } table;
 #endif /* typedef_table */
 

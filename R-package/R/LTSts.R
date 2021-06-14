@@ -1,0 +1,210 @@
+##-------------------------------------------------------------------------------
+##
+##  roxygen2::roxygenise("C:/projects/statproj/R/fsdac", load_code=roxygen2:::load_installed)
+##
+#' Extention of the LTS estimator to time series
+#'
+#' @description The function LTSts extends the LTS estimator to time series. It is possible
+#'  to set a model with a trend (up to third order), a seasonality (constant or of varying
+#'  amplitude and with a different number of harmonics) and a level shift (in this last
+#'  case it is possible to specify the window in which level shift has to be searched for).
+#'
+#' @param y A vector with \code{T} elements that contains the time series to analize.
+#'
+#' @param intercept Indicator for the constant term (intercept) in the fit, defaults to \code{intercept=TRUE}.
+#'
+#' @param model model type. A list which specifies the model which will be used.
+#'  The list contains the following control elements:
+#'
+#' \tabular{ll}{
+#'     \bold{Value} \tab    \bold{Description}  \cr
+#'     \code{s} \tab length of seasonal period. For monthly data \code{s=12} (default),
+#'      for quartely data \code{s=4}, etc. \cr
+#'     \code{trend} \tab order of the trend component \cr
+#'     seasonal \tab    integer specifying number of frequencies,
+#'      i.e. harmonics, in the seasonal component. Possible values for
+#'      \code{seasonal} are \code{1,2,...,[s/2]}, where \code{[s/2]=floor(s/2)} \cr
+#'     \code{X} \tab matrix of size T-by-nexpl containing the values of \code{nexpl}
+#'      extra covariates which are likely to affect \code{y} \cr
+#'     \code{lshift} \tab numeric, greater or equal to 0 or equal to -1, or a vector of positive integer
+#'          values which specifies whether it is necessary to include a level shift component.
+#'          \code{lshift=0} (default) implies no level shift component. \code{lshift=-1} specifies
+#'          the moment to start considering level shifts automatically from specification of \code{lshift}
+#'          in position \code{floor((T-1-p)/2)}. If \code{lshift} is an interger greater then 0 or
+#'          a vector of positive integer values then it specifies the moments where the level
+#'          shift can be located \cr
+#'      \code{ARp} \tab    a number greater or equal to 0 which specifies the length of the autoregressive
+#'          component. The default value is \code{ARp=0}, which means that there is no autoregressive component \cr
+#'   }
+#'
+#'  Remark: the default model is for monthly data with a linear trend (2 parameters) + seasonal component
+#'  with just one harmonic (2 parameters), no additional explanatory variables and no level shift, i.e.
+#'  \code{model=list(s=12, trend=1, seasonal=1, X=NULL, lshift=0, ARp=0)}
+#'
+#' @param conflev confidence level which is used to declare outliers. It could be \code{95, 0.975, 0.99}
+#'  (individual alpha) or \code{1-0.05/n, 1-0.025/n, 1-0.01/n} (simultaneous alpha). The default is \code{conflev=0.975}.
+#' @param alpha the percentage (roughly) of squared residuals whose sum will be minimized,
+#'  by default \code{alpha=0.5}. In general, alpha must be between 0.5 and 1.
+#' @param h the number of observations that determined the least trimmed squares estimator,
+#'  an integer greater than p (number of columns of matrix \code{X} including the intercept)
+#'  but smaller then \code{n}. If the purpose is outlier detection than \code{h} does not have to
+#'  be smaller than \code{0.5*(T+p+1)}. The default is \code{h=0.75*T}. Note that if \code{h}
+#'  is supplied the input argument \code{alpha} will be ignored.
+#'
+#' @param lts a list which controls a number of options of the estimation procedure.
+#'  The list contains the following control elements:
+#'
+#' \tabular{ll}{
+#'     \bold{Value} \tab    \bold{Description}  \cr
+#'     \code{refsteps} \tab defines the number of concentration steps (default is \code{refsteps=2}).
+#'      If \code{refsteps=0}, this means "raw-subsampling" without iterations \cr
+#'     \code{reftol}   \tab     default value of tolerance for the refining steps. The default is \code{reftol=1e-6} \cr
+#'     \code{bestr}    \tab     defines the number of 'best betas' to remember from the subsamples.
+#'      These will be later iterated until convergence. The default is \code{bestr=20} (10 of them
+#'      are the best from previous iteration in case a level shift is present). \cr
+#'     \code{refstepsbestr}    \tab    defines the maximum number of refining steps for
+#'      each best subset (the default is \code{refstepsbestr=50}). \cr
+#'     \code{reftolbestr}  \tab    the default value of tolerance for the refining steps
+#'      for each of the best subsets. The default is \code{reftolbestr=1e-8}).\ cr
+#'   }
+#'
+#'  Remark: if \code{lts} is missing, all default values of the object \code{lts} will be used.
+#'
+#' @param nsamp A vector of length 1 or 2 which controls the number of subsamples which will be
+#'  extracted to find the robust estimator. If \code{lshift > 0} then \code{nsamp[1]} controls the
+#'  number of subsets which have to be extracted to find the solution for \code{t=lshift} and
+#'  \code{nsamp[2]} controls the number of subsets which have to be extracted to find the solution
+#'  for \code{t=lshift+1, lshift+2, ..., T-lshift}. Note that \code{nsamp[2]} is generally smaller
+#'  than \code{nsamp[1]} because in order to compute the best solution for \code{t=lshift+1, lshift+2, ..., T-lshift}
+#'  we use the \code{lts$bestr/2} best solutions from previous \code{t} (after shifting by one
+#'  the position of the level shift in the estimator of beta). If \code{lshift > 0} the default
+#'  value is \code{nsamp=c(500 250)}. If \code{lshift > 0} and \code{nsamp} is supplied as a scalar
+#'  the default is to extract \code{[nsamp/2]} subsamples for \code{t=lshift+1, lshift+2, ...}.
+#'  Therefore, for example, in order to extract 600 subsamples for \code{t=lshift} and 300 subsamples
+#'  for \code{t= lshift+1 ...} you can use \code{nsamp=600} or \code{nsamp=c(600, 300)}.
+#'  If \code{nsamp=0} all subsets will be extracted.
+#'
+#' @param msg Level of output to display. It controls whether to display or not messages on the screen.
+#'   If \code{msg=TRUE} (default) messages are displayed on the screen about step of the fwd search else
+#'  no message is displayed on the screen.
+#' @param nbestindexes For each tentative level shift solution, it is interesenting to understand whether
+#'  the best solutions of the btarget function come from subsets associated with the current level shift solution or
+#'  from the best solutions from previous tentative level shift position. The indexes from 1 to \code{lts$bestr/2}
+#'  are associated with subsets just extracted. The indexes from \code{lts$bestr/2+1} to \code{lts$bestr}
+#'  are associated with best solutions from previous tentative level shift.The default is \code{nbestindexes=3}.
+#' @param nocheck Wheather to check the input arguments. If \code{nocheck=TRUE} no check is performed on
+#'  matrix \code{y} and matrix \code{X}. Notice that \code{y} and \code{X} are left unchanged. In other words
+#'  the additional column of ones for the intercept is not added. By default \code{nocheck=FALSE}.
+#'
+#' @param lshiftlocref a list with parameters for local shift refinement.
+#'  The list contains the following control elements:
+#'
+#' \tabular{ll}{
+#'     \bold{Value} \tab    \bold{Description}  \cr
+#'     wlength \tab a number greater than 0 which identifies the length of the window.
+#'      By default \code{wlength=15}, i.e., the tentative level shift position varies from
+#'      \code{tl-15, tl-15, ..., tl+14, tl+15}, where \code{tl} is the best preliminary
+#'      tentative level shift position. \cr
+#'     typeres   \tab     a number which identifies the type of residuals to consider. If \code{typerres=1},
+#'      the local residuals sum of squares is based on huberized (scaled) residuals
+#'      (this is the default choice) else raw residuals are used. \cr
+#'     huberc    \tab tuning constant for the Huber estimator just in case that \code{lshiftlocref$typeres=1}.
+#'      The default is \code{huberc=2}. cr
+#'   }
+#'
+#' @param reftolALS value of tolerance for the refining steps inside the ALS routine. The default is \code{reftolALS=1e-03}.
+#' @param refstepsALS maximum number of iterations inside the ALS routine (default is \code{refstepsALS=50}).
+#' @param SmallSampleCor small sample correction factor to control the empirical size of the test.
+#'  Can be 1, 2, 3 or 4 and the default is \code{SmallSampleCor=2}.
+#' @param trace Whether to print intermediate results. Default is \code{trace=FALSE}.
+#'
+#' @return  An object of class \code{LTSts} will be returned which is basically a list
+#'  containing the following elements:
+#'  \enumerate{
+#'  \item \code{h} the number of observations that have determined the initial LTS estimator, i.e. the value of h.
+#'  \item \code{coefficients}: LTS (LMS) coefficient estimates, including the intercept when \code{intercept=TRUE}.
+#'  \item \code{bs}: a vector containing the units with the smallest \code{p+k} squared residuals before
+#'      the reweighting step, where p is the total number of parameters in the model and \code{p+k}
+#'      is the smallest number of units such that the design matrix is full rank. \code{bs}
+#'      can be used to initialize the forward search.
+#'  \item \code{residuals}: a vector containing the standardized residuals from the regression.
+#'  \item \code{scale}: scale estimate of the residuals.
+#'  \item \code{weights}: a vector containing weights. The elements of this vector are 0 or 1.
+#'      These weights identify the \code{h} observations which are used to compute the final LTS (LMS) estimate.
+#'      \code{sum(weights)=h} if there is not a perfect fit, otherwise \code{sum(weights)} can be greater than \code{h}.
+#'  \item \code{outliers}: a vector containing the list of the units declared as outliers
+#'      using confidence level specified in \code{conflev}.
+#'  \item \code{conflev}: confidence level which is used to declare outliers.
+#'  \item \code{singsub}: number of subsets wihtout full rank. Notice that if this number is greater than
+#'      \code{0.1*(number of subsamples)} a warning is produced on the screen.
+#'  \item \code{y}: the responce variable.
+#'  \item \code{X}: the predictor matrix.
+#'
+#'  }
+#'
+#' @references
+#'  Rousseeuw, P.J., Perrotta, D., Riani, M. and Hubert, M. (2019), Robust Monitoring of Many Time Series
+#'  with Application to Fraud Detection, "Econometrics and Statistics", \bold{9}, pp. 108--121.
+#'  \doi{10.1016/j.ecosta.2018.05.001}.
+#'
+#' @examples
+#'
+#'  data(heart, package="robustbase")
+#'
+#'  ## Default method works with 'x'-matrix and y-var and all default optional arguments
+#'  heart.x <- data.matrix(heart[, 1:2]) # the X-variables
+#'  heart.y <- heart[,"clength"]
+#'  (out <- LXS(heart.y, heart.x))
+#'
+#'  data(stackloss)
+#'  LXS(stackloss$stack.loss, stackloss[, -4])
+#'
+#' @export
+#' @author FSDA team, \email{valentin.todorov@@chello.at}
+
+## These are the input parameters of LTSts_wrapper:
+##  y, conflev,
+##  dispresults,        - remove it!
+##  h, intercept, struct0_T *lshiftlocref, struct1_T *lts, struct2_T *model,
+##  msg, nbestindexes, nocheck, nsamp_data[], int nsamp_size[2],
+##  refstepsALS, reftolALS, SmallSampleCor
+##
+##  And these are the returned arguments:
+##      struct_LTSts_T: has one element of time 'table' but we could ignore it because there is tge equivalent as a matrix
+##      ???? C - cell array, same or similar to the one returned by LXS()
+##
+LTSts <- function(y, intercept=TRUE, model,
+    alpha=0.5, h, lts,
+    conflev=0.975, msg=TRUE, nbestindexes=3, nocheck=FALSE, nsamp,
+    lshiftlocref, reftolALS=1e-03, refstepsALS=50, SmallSampleCor=2,
+    trace=FALSE)
+{
+
+    y <- data.matrix(y)
+    if (!is.numeric(y)) stop("y is not a numeric")
+    if (!is.null(dim(y)) && dim(y)[2] != 1) stop("y is not onedimensional")
+
+    lshiftlocref_def <- c(wlength=15, typeres=1, huberc=2)
+    if(!missing(lshiftlocref)) {
+        if(!is.vector(lx <- unlist(lshiftlocref)))
+            stop("If not missing, 'lshiftlocref' has to be named vector or list with the following elements: wlength, typeres and huberc.")
+
+        if(is.null(names(lx)) || length(lx) == 0 || length(lx) > 3)
+            stop("'lshiftlocref' has to be a named vector or a list with maximum of three elements.")
+
+        for(ix in names(lx)) {
+            if(!(ix %in% names(lshiftlocref_def)))
+                stop(paste("Unknown element in 'lshiftlocref': ", ix, " - should be one of: ", paste(names(lshiftlocref_def), colapse=",")))
+            lshiftlocref_def[ix] <- lx[ix]
+        }
+    }
+    lshiftlocref <- lshiftlocref_def
+
+    if(trace) {
+        cat("\nLTSts() parameters - 'lshiftlocref': \n")
+        print(lshiftlocref)
+    }
+
+
+
+}

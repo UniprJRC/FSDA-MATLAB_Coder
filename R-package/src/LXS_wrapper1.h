@@ -26,7 +26,7 @@ extern "C" {
 extern void LXS_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
                          const double bonflevoutX_data[],
                          const int bonflevoutX_size[2], double conflev,
-                         double h, bool intercept, const struct1_T *lms,
+                         double h, bool intercept, const struct_LXSlms_T *lms,
                          bool msg, bool nocheck, bool nomes, double nsamp,
                          bool rew, bool yxsave, struct_LXS_T *out,
                          emxArray_real_T *C);

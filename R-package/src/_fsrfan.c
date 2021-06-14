@@ -31,7 +31,7 @@ void r_fsrfan(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int 
 /*------------------------------------------------------------- 
 if(b_trace)
 { 
-    Rprintf("%s  %d %d\n", "Starting r_fsrbsb: y:", *nn, *pp);    
+    Rprintf("%s  %d %d\n", "Starting r_fsrfan: y:", *nn, *pp);    
     disp_dble(yy, *nn);
     Rprintf("%s ", "Starting fsrfan: X\n");                   
     disp_lmat_cm(xx, *nn, *pp);
