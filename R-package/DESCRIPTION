@@ -3,7 +3,7 @@ Title: Calling MATLAB Coder-translated functions ported in C from the FSDA toolb
 Version: 0.5-15
 Date: 2021-06-15
 VersionNote: Released ... on CRAN
-Authors@R: c(person("Valentin", "Todorov", role = c("aut", "cre"), email = "valentin.todorov@chello.at", comment=c(ORCID = "0000-0003-4215-0245"))
+Authors@R: c(person("Valentin", "Todorov", role = c("aut", "cre"), email = "valentin@todorov.at", comment=c(ORCID = "0000-0003-4215-0245"))
          , person("Emmanuele", "Sordini", role = "aut", email = "Emmanuele.sordini@ec.europa.eu")
          , person("Aldo", "Corbellini", role = "ctb")
          , person("Francesca", "Torti", role = "ctb")
@@ -19,7 +19,7 @@ Description: The 'Flexible Statistical Data Analysis - FSDA' software
     of the data analysis process that might be faced with data anomalies
     and deviations from model assumptions, and possibly require user
     interactivity with dynamic data visualizations.
-    The package 'fsdaR' shows how FSDA functions in C code obtained from the
+    The package 'fsdac' shows how FSDA functions in C code obtained from the
     MATLAB coder can be called from R (using the R functions .C and/or .Call).
     It therefore provides a interface to the 'MATLAB' toolbox FSDA.
     The current R version implements tools for regression:
