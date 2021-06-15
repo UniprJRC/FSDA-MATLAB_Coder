@@ -1,4 +1,4 @@
-Package: fsdaR
+Package: fsdac
 Title: Calling MATLAB Coder-translated functions ported in C from the FSDA toolbox
 Version: 0.5-15
 Date: 2021-06-15
