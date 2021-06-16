@@ -2,26 +2,17 @@
 
     library(fsdac)
 
-##    % FSRmdr with all default options.
-##    % Compute minimum deletion residual.
-##    % Monitor minimum deletion residual in each step of the forward search.
-##    % Common part to all examples: load fishery dataset.
-##
-##     load('fishery');
-##     y=fishery{:,2};
-##     X=fishery{:,1};
-##     % Find starting subset
-##     [out]=LXS(y,X,'nsamp',10000);
-##     [mdr] = FSRmdr(y,X,out.bs);
-##     plot(mdr(:,1),mdr(:,2))
-##     title('Monitoring of minimum deletion residual')
+##  1. FSRmdr with all default options. Compute minimum deletion residual.
+##      Monitor minimum deletion residual in each step of the forward search.
+##      Common part to all examples: load fishery dataset.
 
     data(fishery)
     y <- fishery[,2, drop=FALSE]
     X <- fishery[,1, drop=FALSE]
-    out <- LXS(y, X, nsamp=10000)
-    bsb <- out$bs
-    ## bsb <- c(371, 450)                       # found by LTS
+
+    ##out <- LXS(y, X, nsamp=10000)
+    ##bsb <- out$bs
+    bsb <- c(371, 450)                          # found by LTS
 
     out1 <- FSRmdr(y, X, bsb)                   # call 'FSRmdr' with all default parameters
     plot(out1$mdr[,1], out1$mdr[,2], type="l", col="blue",
@@ -29,6 +20,8 @@
       main="Monitoring of the minimum deletion residual")
 
     out1 <- FSRmdr(y, X)                         # call 'FSRmdr' with missing bsb - will start from random p-sample
+    plot(out1)                                   # same plot as above
+
     out1 <- FSRmdr(y, X, bsb, init=60)           # Example with monitoring from step 60.
     out1 <- FSRmdr(y, X, bsb, intercept=FALSE)   # Regression without intercept
     out1 <- FSRmdr(y, X, bsb, nocheck=TRUE)      # No checks on y and X (and no intercept)
@@ -50,43 +43,39 @@
     out1 <- FSRmdr(y, X, out$bs)
     tail(out1$Un)
 
-%{
-    % Units forming subset in each step.
-    % Obtain detailed information about the units forming subset in each
-    % step of the forward search (matrix BB).
-    load('fishery');
-    y=fishery{:,2};
-    X=fishery{:,1};
-     % Find starting subset
-     [out]=LXS(y,X,'nsamp',10000);
-    [mdr,Un,BB] = FSRmdr(y,X,out.bs);
-%}
+##  3. Units forming subset in each step.
+##      Obtain detailed information about the units forming subset in each
+##      step of the forward search (matrix BB).
+    data(fishery)
+    y <- fishery[,2, drop=FALSE]
+    X <- fishery[,1, drop=FALSE]
+    out <- LXS(y, X, nsamp=10000)
+    bsb <- out$bs
+    out1 <- FSRmdr(y, X, out$bs)
+    head(out1$BB)
 
-%{
-    % Monitor \( \hat  \beta \).
-    % Monitor how the estimates of beta coefficients changes as the subset
-    % size increases (matrix Bols).
-    load('fishery');
-    y=fishery{:,2};
-    X=fishery{:,1};
-     % Find starting subset
-     [out]=LXS(y,X,'nsamp',10000);
-    [mdr,Un,BB,Bols] = FSRmdr(y,X,out.bs);
-%}
+##  4. Monitor \( \hat  \beta \). Monitor how the estimates of beta coefficients changes as the subset
+##      size increases (matrix Bols).
+    data(fishery)
+    y <- fishery[,2, drop=FALSE]
+    X <- fishery[,1, drop=FALSE]
+    out <- LXS(y, X, nsamp=10000)
+    bsb <- out$bs
+    out1 <- FSRmdr(y, X, out$bs)
+    head(out1$Bols
 
-%{
-    % Monitor $s^2$.
-    % Monitor the estimate of $\sigma^2$ in each step of the fwd search
-    % (matrix S2).
-    load('fishery');
-    y=fishery{:,2};
-    X=fishery{:,1};
-     % Find starting subset
-     [out]=LXS(y,X,'nsamp',10000);
-    [mdr,Un,BB,Bols,S2] = FSRmdr(y,X,out.bs);
-    plot(S2(:,1),S2(:,2))
-    title('Monitoring of s2')
-%}
+##  5. Monitor $s^2$.
+##      Monitor the estimate of $\sigma^2$ in each step of the fwd search (matrix S2).
+    data(fishery)
+    y <- fishery[,2, drop=FALSE]
+    X <- fishery[,1, drop=FALSE]
+    out <- LXS(y, X, nsamp=10000)
+    bsb <- out$bs
+    out1 <- FSRmdr(y, X, out$bs)
+
+    plot(out1$S2[, 1], out1$S2[, 2], type="l", col="blue", xlab="Step",
+        ylab=expression("s"^2), main='Monitoring of s2')
+
 
 %{
     % Specify a regression model without intercept.
