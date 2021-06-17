@@ -1,7 +1,7 @@
 Package: fsdac
 Title: Calling MATLAB Coder-translated functions ported in C from the FSDA toolbox
-Version: 0.5-15
-Date: 2021-06-15
+Version: 0.5-16
+Date: 2021-06-18
 VersionNote: Released ... on CRAN
 Authors@R: c(person("Valentin", "Todorov", role = c("aut", "cre"), email = "valentin@todorov.at", comment=c(ORCID = "0000-0003-4215-0245"))
          , person("Emmanuele", "Sordini", role = "aut", email = "Emmanuele.sordini@ec.europa.eu")
@@ -43,7 +43,7 @@ Author: Valentin Todorov [aut, cre] (<https://orcid.org/0000-0003-4215-0245>),
   Marco Riani [ctb],
   Domenico Perrotta [ctb],
 Maintainer: Valentin Todorov <valentin.todorov@chello.at>
-NeedsCompilation: no
+NeedsCompilation: yes
 Repository: CRAN
 RoxygenNote: 7.1.1
 Date/Publication: 2020-06-12 16:40:02 UTC
