@@ -17,6 +17,7 @@
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <string.h>
 
 /* Function Definitions */
 double betainc_cf(double x, double a, double b)

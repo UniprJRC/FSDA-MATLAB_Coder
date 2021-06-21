@@ -28,6 +28,7 @@
 #include "xnrm2.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <string.h>
 
 /* Function Definitions */
 void lsqcurvefit(

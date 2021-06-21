@@ -14,6 +14,7 @@
 #include "fsdaC_data.h"
 #include "rt_nonfinite.h"
 #include "coder_posix_time.h"
+#include <string.h>
 
 /* Function Definitions */
 double toc(double tstart_tv_sec, double tstart_tv_nsec)

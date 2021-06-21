@@ -16,6 +16,7 @@
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <string.h>
 
 /* Function Definitions */
 creal_T gammainc(double x, double a)

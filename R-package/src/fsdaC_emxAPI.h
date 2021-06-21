@@ -98,6 +98,8 @@ extern void emxDestroy_struct_LTStsmodel_T(struct_LTStsmodel_T emxArray);
 
 extern void emxDestroy_struct_LXS_T(struct_LXS_T emxArray);
 
+extern void emxDestroy_struct_tclust_T(struct_tclust_T emxArray);
+
 extern void emxInitArray_char_T(emxArray_char_T **pEmxArray, int numDimensions);
 
 extern void emxInitArray_real32_T(emxArray_real32_T **pEmxArray,
@@ -116,6 +118,8 @@ extern void emxInit_struct_LTSts_T(struct_LTSts_T *pStruct);
 extern void emxInit_struct_LTStsmodel_T(struct_LTStsmodel_T *pStruct);
 
 extern void emxInit_struct_LXS_T(struct_LXS_T *pStruct);
+
+extern void emxInit_struct_tclust_T(struct_tclust_T *pStruct);
 
 #ifdef __cplusplus
 }

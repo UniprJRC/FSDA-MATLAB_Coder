@@ -20,6 +20,7 @@
 #include "xzlarf.h"
 #include "xzlarfg.h"
 #include <math.h>
+#include <string.h>
 
 /* Function Definitions */
 void linearLeastSquares(emxArray_real_T *lhs, emxArray_real_T *rhs,
@@ -176,7 +177,7 @@ void linearLeastSquares(emxArray_real_T *lhs, emxArray_real_T *rhs,
         }
         if (b_i < m) {
           temp = lhs->data[ii];
-          d = xzlarfg(mmi + 1, &temp, lhs, ii + 2);
+          d = b_xzlarfg(mmi + 1, &temp, lhs, ii + 2);
           tau->data[b_i - 1] = d;
           lhs->data[ii] = temp;
         } else {

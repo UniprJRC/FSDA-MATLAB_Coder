@@ -15,6 +15,7 @@
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <string.h>
 
 /* Function Definitions */
 void HUrho(const emxArray_real_T *u, double c, emxArray_real_T *rhoHU)

@@ -15,9 +15,99 @@
 #include "fsdaC_types.h"
 #include "qrsolve.h"
 #include "rt_nonfinite.h"
+#include "xgeqp3.h"
 #include "xzgetrf.h"
+#include <string.h>
 
 /* Function Definitions */
+void b_mrdiv(const emxArray_real_T *A, const double B_data[],
+             const int B_size[2], emxArray_real_T *Y)
+{
+  emxArray_int32_T *jpvt;
+  emxArray_real_T *b_A;
+  emxArray_real_T *b_Y;
+  emxArray_real_T *tau;
+  double B;
+  int j;
+  int loop_ub;
+  int nb;
+  int rankA;
+  emxInit_real_T(&b_Y, 2);
+  emxInit_real_T(&b_A, 2);
+  emxInit_real_T(&tau, 1);
+  emxInit_int32_T(&jpvt, 2);
+  if ((A->size[0] == 0) || (B_size[0] == 0)) {
+    j = Y->size[0] * Y->size[1];
+    Y->size[0] = A->size[0];
+    Y->size[1] = B_size[0];
+    emxEnsureCapacity_real_T(Y, j);
+    loop_ub = A->size[0] * B_size[0];
+    for (j = 0; j < loop_ub; j++) {
+      Y->data[j] = 0.0;
+    }
+  } else if (B_size[0] == 1) {
+    B = B_data[0];
+    loop_ub = A->size[0];
+    j = tau->size[0];
+    tau->size[0] = A->size[0];
+    emxEnsureCapacity_real_T(tau, j);
+    for (j = 0; j < loop_ub; j++) {
+      tau->data[j] = A->data[j] / B;
+    }
+    j = Y->size[0] * Y->size[1];
+    Y->size[0] = tau->size[0];
+    Y->size[1] = 1;
+    emxEnsureCapacity_real_T(Y, j);
+    loop_ub = tau->size[0];
+    for (j = 0; j < loop_ub; j++) {
+      Y->data[j] = tau->data[j];
+    }
+  } else {
+    j = b_A->size[0] * b_A->size[1];
+    b_A->size[0] = 1;
+    b_A->size[1] = 2;
+    emxEnsureCapacity_real_T(b_A, j);
+    for (j = 0; j < 2; j++) {
+      b_A->data[b_A->size[0] * j] = B_data[j];
+    }
+    xgeqp3(b_A, tau, jpvt);
+    rankA = rankFromQR(b_A);
+    nb = A->size[0];
+    j = b_Y->size[0] * b_Y->size[1];
+    b_Y->size[0] = b_A->size[1];
+    b_Y->size[1] = A->size[0];
+    emxEnsureCapacity_real_T(b_Y, j);
+    loop_ub = A->size[0] * b_A->size[1];
+    for (j = 0; j < loop_ub; j++) {
+      b_Y->data[j] = 0.0;
+    }
+    for (loop_ub = 0; loop_ub < nb; loop_ub++) {
+      if (0 <= rankA - 1) {
+        b_Y->data[(jpvt->data[0] + b_Y->size[0] * loop_ub) - 1] =
+            A->data[loop_ub];
+      }
+      for (j = rankA; j >= 1; j--) {
+        b_Y->data[(jpvt->data[0] + b_Y->size[0] * loop_ub) - 1] /= b_A->data[0];
+      }
+    }
+    j = Y->size[0] * Y->size[1];
+    Y->size[0] = b_Y->size[1];
+    Y->size[1] = b_Y->size[0];
+    emxEnsureCapacity_real_T(Y, j);
+    loop_ub = b_Y->size[0];
+    for (j = 0; j < loop_ub; j++) {
+      rankA = b_Y->size[1];
+      for (nb = 0; nb < rankA; nb++) {
+        Y->data[nb + Y->size[0] * j] = b_Y->data[j + b_Y->size[0] * nb];
+      }
+    }
+  }
+  emxFree_int32_T(&jpvt);
+  emxFree_real_T(&tau);
+  emxFree_real_T(&b_A);
+  emxFree_real_T(&b_Y);
+}
+
 void mrdiv(const emxArray_real_T *A, const emxArray_real_T *B,
            emxArray_real_T *Y)
 {

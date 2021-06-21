@@ -30,6 +30,7 @@
 #include "vvarstd.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <string.h>
 
 /* Variable Definitions */
 static const double dv[3601] = {1.0,

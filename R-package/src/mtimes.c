@@ -14,6 +14,7 @@
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 void b_mtimes(const emxArray_real_T *A, const emxArray_real_T *B,

@@ -23,6 +23,9 @@ extern "C" {
 #endif
 
 /* Function Declarations */
+void b_mrdiv(const emxArray_real_T *A, const double B_data[],
+             const int B_size[2], emxArray_real_T *Y);
+
 void mrdiv(const emxArray_real_T *A, const emxArray_real_T *B,
            emxArray_real_T *Y);
 

@@ -13,6 +13,7 @@
 #include "fsdaC_terminate.h"
 #include "fsdaC_data.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 void fsdaC_terminate(void)

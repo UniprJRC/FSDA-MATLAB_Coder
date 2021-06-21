@@ -16,6 +16,7 @@
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <string.h>
 
 /* Function Declarations */
 static double b_skip_to_last_equal_value(int *k, const emxArray_real_T *x);

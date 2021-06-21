@@ -27,6 +27,8 @@ void b_rand(double varargin_2, emxArray_real_T *r);
 
 double c_rand(void);
 
+void d_rand(double varargin_1, emxArray_real_T *r);
+
 #ifdef __cplusplus
 }
 #endif

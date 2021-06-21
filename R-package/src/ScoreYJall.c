@@ -21,6 +21,7 @@
 #include "sign.h"
 #include "xnrm2.h"
 #include <math.h>
+#include <string.h>
 
 /* Function Definitions */
 void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,

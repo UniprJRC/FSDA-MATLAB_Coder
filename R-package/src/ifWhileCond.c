@@ -13,6 +13,7 @@
 #include "ifWhileCond.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 bool b_ifWhileCond(const emxArray_boolean_T *x)

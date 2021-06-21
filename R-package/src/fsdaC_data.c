@@ -12,6 +12,7 @@
 /* Include files */
 #include "fsdaC_data.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Variable Definitions */
 unsigned int state[625];

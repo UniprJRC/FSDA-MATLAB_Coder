@@ -37,6 +37,7 @@
 #include "unibiv.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <string.h>
 
 /* Function Definitions */
 void FSM(emxArray_real_T *Y, const double varargin_4_data[],
