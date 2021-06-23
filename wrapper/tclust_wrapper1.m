@@ -81,6 +81,7 @@ assert(isfield(restrfactor,'zerotol'));
 assert(isa(restrfactor.zerotol,'double'));
 assert(isscalar(restrfactor.zerotol));
 
+coder.cstructname(restrfactor,'struct_tclustrestrfactor_T');
 
 % Optional input arguments (name / pairs) in (case insensitive)
 % alphabetical order
