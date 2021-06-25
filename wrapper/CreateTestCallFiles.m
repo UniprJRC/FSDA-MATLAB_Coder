@@ -224,7 +224,7 @@ if ~isempty(codegenOverall)
     AllFileNameschar=[AllFileNames{:}];
     
     % Configuration part
-    cfg = coder.config('lib','ecoder',false);
+    cfg = coder.config('lib','ecoder',true);
     cfg.GenerateReport = true;
     cfg.ReportPotentialDifferences = false;
     cfg.GenCodeOnly = true;
