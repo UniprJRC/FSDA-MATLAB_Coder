@@ -26,8 +26,8 @@ double logmvnpdfFS(const emxArray_real_T *X, const emxArray_real_T *Mu,
                    const emxArray_real_T *Sigma)
 {
   emxArray_real_T *A;
-  emxArray_real_T *B;
   emxArray_real_T *X0;
+  emxArray_real_T *b;
   emxArray_real_T *b_y;
   emxArray_real_T *c_y;
   emxArray_real_T *eyed;
@@ -475,22 +475,22 @@ double logmvnpdfFS(const emxArray_real_T *X, const emxArray_real_T *Mu,
       x->data[k] = log(x->data[k]);
     }
     emxInit_real_T(&b_y, 2);
-    emxInit_real_T(&B, 2);
-    b_mldivide(A, eyed, B);
+    emxInit_real_T(&b, 2);
+    b_mldivide(A, eyed, b);
     m = X0->size[1];
-    nc = B->size[1];
+    nc = b->size[1];
     j = b_y->size[0] * b_y->size[1];
     b_y->size[0] = 1;
-    b_y->size[1] = B->size[1];
+    b_y->size[1] = b->size[1];
     emxEnsureCapacity_real_T(b_y, j);
     for (j = 0; j < nc; j++) {
-      boffset = j * B->size[0];
+      boffset = j * b->size[0];
       b_y->data[j] = 0.0;
       for (k = 0; k < m; k++) {
-        b_y->data[j] += X0->data[k] * B->data[boffset + k];
+        b_y->data[j] += X0->data[k] * b->data[boffset + k];
       }
     }
-    emxFree_real_T(&B);
+    emxFree_real_T(&b);
     emxInit_real_T(&c_y, 2);
     j = c_y->size[0] * c_y->size[1];
     c_y->size[0] = 1;

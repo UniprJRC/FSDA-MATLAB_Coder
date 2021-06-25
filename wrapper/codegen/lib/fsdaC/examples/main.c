@@ -58,8 +58,6 @@
 /* Function Declarations */
 static void argInit_1x3_char_T(char result[3]);
 
-static void argInit_1x5_char_T(char result[5]);
-
 static emxArray_real_T *argInit_Unboundedx1_real_T(void);
 
 static emxArray_real_T *argInit_Unboundedxd1_real_T(void);
@@ -78,8 +76,6 @@ static void argInit_d2xd1_real_T(double result_data[], int result_size[2]);
 
 static double argInit_real_T(void);
 
-static void argInit_struct1_T(struct1_T *result);
-
 static struct_LTStsmodel_T argInit_struct_LTStsmodel_T(void);
 
 static struct_LXSlms_T argInit_struct_LXSlms_T(void);
@@ -87,6 +83,8 @@ static struct_LXSlms_T argInit_struct_LXSlms_T(void);
 static emxArray_real_T *c_argInit_UnboundedxUnbounded_r(void);
 
 static struct_LTStslshiftlocref_T c_argInit_struct_LTStslshiftloc(void);
+
+static void c_argInit_struct_tclustrestrfac(struct_tclustrestrfactor_T *result);
 
 static void main_FSM_wrapper(void);
 
@@ -120,17 +118,6 @@ static void argInit_1x3_char_T(char result[3])
   int idx1;
   /* Loop over the array to initialize each element. */
   for (idx1 = 0; idx1 < 3; idx1++) {
-    /* Set the value of the array element.
-Change this value to the value that the application requires. */
-    result[idx1] = argInit_char_T();
-  }
-}
-
-static void argInit_1x5_char_T(char result[5])
-{
-  int idx1;
-  /* Loop over the array to initialize each element. */
-  for (idx1 = 0; idx1 < 5; idx1++) {
     /* Set the value of the array element.
 Change this value to the value that the application requires. */
     result[idx1] = argInit_char_T();
@@ -245,32 +232,6 @@ static double argInit_real_T(void)
   return 0.0;
 }
 
-static void argInit_struct1_T(struct1_T *result)
-{
-  double result_tmp;
-  bool b_result_tmp;
-  /* Set the value of each structure field.
-Change this value to the value that the application requires. */
-  result_tmp = argInit_real_T();
-  result->shw = result_tmp;
-  result->shb = result_tmp;
-  result->k = result_tmp;
-  result->maxiterDSR = result_tmp;
-  result->maxiterR = result_tmp;
-  result->maxiterS = result_tmp;
-  result->tolR = result_tmp;
-  result->tolS = result_tmp;
-  b_result_tmp = argInit_boolean_T();
-  result->usepreviousest = b_result_tmp;
-  result->userepmat = result_tmp;
-  result->sortsh = result_tmp;
-  result->v = result_tmp;
-  result->zerotol = result_tmp;
-  argInit_1x3_char_T(result->pars);
-  result->cdet = result_tmp;
-  result->msg = b_result_tmp;
-}
-
 static struct_LTStsmodel_T argInit_struct_LTStsmodel_T(void)
 {
   struct_LTStsmodel_T result;
@@ -332,6 +293,32 @@ Change this value to the value that the application requires. */
   result.huberc = result_tmp;
   result.wlength = result_tmp;
   return result;
+}
+
+static void c_argInit_struct_tclustrestrfac(struct_tclustrestrfactor_T *result)
+{
+  double result_tmp;
+  bool b_result_tmp;
+  /* Set the value of each structure field.
+Change this value to the value that the application requires. */
+  result_tmp = argInit_real_T();
+  result->shw = result_tmp;
+  result->shb = result_tmp;
+  result->k = result_tmp;
+  result->maxiterDSR = result_tmp;
+  result->maxiterR = result_tmp;
+  result->maxiterS = result_tmp;
+  result->tolR = result_tmp;
+  result->tolS = result_tmp;
+  b_result_tmp = argInit_boolean_T();
+  result->usepreviousest = b_result_tmp;
+  result->userepmat = result_tmp;
+  result->sortsh = result_tmp;
+  result->v = result_tmp;
+  result->zerotol = result_tmp;
+  argInit_1x3_char_T(result->pars);
+  result->cdet = result_tmp;
+  result->msg = b_result_tmp;
 }
 
 static void main_FSM_wrapper(void)
@@ -713,10 +700,7 @@ static void main_tclust_wrapper(void)
   emxArray_real_T *Y;
   emxArray_real_T *nsamp;
   struct_tclust_T out;
-  double restrfactor_data[2];
   double k_tmp;
-  int restrfactor_size[2];
-  char b_cv[5];
   bool equalweights_tmp;
   emxInit_struct_tclust_T(&out);
   emxInitArray_real_T(&C, 2);
@@ -724,20 +708,15 @@ static void main_tclust_wrapper(void)
   /* Initialize function input argument 'Y'. */
   Y = c_argInit_UnboundedxUnbounded_r();
   k_tmp = argInit_real_T();
-  /* Initialize function input argument 'restrfactor'. */
-  argInit_d2xd1_real_T(restrfactor_data, restrfactor_size);
   equalweights_tmp = argInit_boolean_T();
   /* Initialize function input argument 'nsamp'. */
   nsamp = c_argInit_UnboundedxUnbounded_r();
   /* Initialize function input argument 'RandNumbForNini'. */
   RandNumbForNini = c_argInit_UnboundedxUnbounded_r();
-  /* Initialize function input argument 'restrtype'. */
   /* Call the entry-point 'tclust_wrapper'. */
-  argInit_1x5_char_T(b_cv);
-  tclust_wrapper(Y, k_tmp, k_tmp, restrfactor_data, restrfactor_size, k_tmp,
-                 equalweights_tmp, k_tmp, k_tmp, equalweights_tmp, nsamp,
-                 RandNumbForNini, k_tmp, k_tmp, b_cv, equalweights_tmp,
-                 equalweights_tmp, &out, C);
+  tclust_wrapper(Y, k_tmp, k_tmp, k_tmp, equalweights_tmp, k_tmp, k_tmp,
+                 equalweights_tmp, nsamp, RandNumbForNini, k_tmp, k_tmp,
+                 equalweights_tmp, equalweights_tmp, &out, C);
   emxDestroyArray_real_T(C);
   emxDestroy_struct_tclust_T(out);
   emxDestroyArray_real_T(RandNumbForNini);
@@ -751,10 +730,9 @@ static void main_tclust_wrapper1(void)
   emxArray_real_T *RandNumbForNini;
   emxArray_real_T *Y;
   emxArray_real_T *nsamp;
-  struct1_T r;
   struct_tclust_T out;
+  struct_tclustrestrfactor_T r;
   double k_tmp;
-  char b_cv[5];
   bool equalweights_tmp;
   emxInit_struct_tclust_T(&out);
   emxInitArray_real_T(&C, 2);
@@ -768,12 +746,10 @@ static void main_tclust_wrapper1(void)
   nsamp = c_argInit_UnboundedxUnbounded_r();
   /* Initialize function input argument 'RandNumbForNini'. */
   RandNumbForNini = c_argInit_UnboundedxUnbounded_r();
-  /* Initialize function input argument 'restrtype'. */
   /* Call the entry-point 'tclust_wrapper1'. */
-  argInit_struct1_T(&r);
-  argInit_1x5_char_T(b_cv);
-  tclust_wrapper1(Y, k_tmp, k_tmp, &r, k_tmp, equalweights_tmp, k_tmp, k_tmp,
-                  equalweights_tmp, nsamp, RandNumbForNini, k_tmp, k_tmp, b_cv,
+  c_argInit_struct_tclustrestrfac(&r);
+  tclust_wrapper1(Y, k_tmp, k_tmp, &r, equalweights_tmp, k_tmp, k_tmp,
+                  equalweights_tmp, nsamp, RandNumbForNini, k_tmp, k_tmp,
                   equalweights_tmp, equalweights_tmp, &out, C);
   emxDestroyArray_real_T(C);
   emxDestroy_struct_tclust_T(out);

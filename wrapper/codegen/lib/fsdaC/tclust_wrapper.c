@@ -26,9 +26,7 @@
 #include "fsdaC_data.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_initialize.h"
-#include "fsdaC_rtwutil.h"
 #include "fsdaC_types.h"
-#include "ifWhileCond.h"
 #include "logmvnpdfFS.h"
 #include "median.h"
 #include "minOrMax.h"
@@ -36,12 +34,10 @@
 #include "mtimes.h"
 #include "power.h"
 #include "rand.h"
-#include "restrdeter.h"
 #include "restreigen.h"
 #include "restreigeneasy.h"
 #include "rt_nonfinite.h"
 #include "sort.h"
-#include "strcmp.h"
 #include "subsets.h"
 #include "sum.h"
 #include "tic.h"
@@ -53,20 +49,15 @@
 
 /* Function Definitions */
 void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
-                    const double restrfactor_data[],
-                    const int restrfactor_size[2], double cshape,
-                    bool equalweights, double mixt, double msg, bool nocheck,
-                    const emxArray_real_T *nsamp,
+                    double restrfactor, bool equalweights, double mixt,
+                    double msg, bool nocheck, const emxArray_real_T *nsamp,
                     const emxArray_real_T *RandNumbForNini, double refsteps,
-                    double reftol, const char restrtype[5], bool startv1,
-                    bool Ysave, struct_tclust_T *out, emxArray_real_T *C)
+                    double reftol, bool startv1, bool Ysave,
+                    struct_tclust_T *out, emxArray_real_T *C)
 {
-  emxArray_boolean_T c_restrfactor_data;
-  emxArray_boolean_T e_restrfactor_data;
-  emxArray_boolean_T g_restrfactor_data;
   emxArray_boolean_T *NanGroups;
-  emxArray_boolean_T *r10;
-  emxArray_boolean_T *r12;
+  emxArray_boolean_T *r11;
+  emxArray_boolean_T *r8;
   emxArray_boolean_T *r9;
   emxArray_creal_T *Lambdaj;
   emxArray_creal_T *Uj;
@@ -76,19 +67,17 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
   emxArray_int32_T *indold;
   emxArray_int32_T *r;
   emxArray_int32_T *r1;
-  emxArray_int32_T *r11;
+  emxArray_int32_T *r10;
+  emxArray_int32_T *r12;
   emxArray_int32_T *r13;
   emxArray_int32_T *r14;
   emxArray_int32_T *r15;
   emxArray_int32_T *r16;
   emxArray_int32_T *r17;
   emxArray_int32_T *r18;
-  emxArray_int32_T *r19;
   emxArray_int32_T *r2;
   emxArray_int32_T *r3;
   emxArray_int32_T *r4;
-  emxArray_int32_T *r5;
-  emxArray_int32_T *r6;
   emxArray_int8_T *idxmixt;
   emxArray_real_T b_time_data;
   emxArray_real_T *Lambda_vk;
@@ -97,8 +86,8 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
   emxArray_real_T *Yseljc;
   emxArray_real_T *Ytri;
   emxArray_real_T *b_index;
-  emxArray_real_T *b_nsamp;
   emxArray_real_T *b_out;
+  emxArray_real_T *b_sigmaini;
   emxArray_real_T *cini;
   emxArray_real_T *ey;
   emxArray_real_T *eyev;
@@ -109,15 +98,15 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
   emxArray_real_T *postprob;
   emxArray_real_T *postprobold;
   emxArray_real_T *qqunassigned;
+  emxArray_real_T *r5;
+  emxArray_real_T *r6;
   emxArray_real_T *r7;
-  emxArray_real_T *r8;
   emxArray_real_T *randk;
   emxArray_real_T *sigmaini;
   emxArray_real_T *x;
   double time_data[10];
-  double b_restrfactor_data[2];
-  double f_restrfactor_data[2];
   double NlogLmixt;
+  double b_restrfactor;
   double b_v;
   double c_v;
   double h;
@@ -133,11 +122,6 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
   double tstart_tv_sec;
   double vopt;
   double y;
-  int b_restrfactor_size[2];
-  int c_restrfactor_size[2];
-  int d_restrfactor_size[2];
-  int e_restrfactor_size[2];
-  int f_restrfactor_size[2];
   int NoPriorNini;
   int b_i;
   int b_loop_ub;
@@ -150,17 +134,16 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
   int i2;
   int i3;
   int i4;
+  int i5;
   int j;
   int loop_ub;
   int loop_ub_tmp;
   int m;
   int n;
   int nx;
-  int restrnum;
   int time_size;
   int v;
   int vlen;
-  bool d_restrfactor_data[2];
   bool use_restreigen;
   (void)startv1;
   if (!isInitialized_fsdaC) {
@@ -173,10 +156,11 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
   /*  Y: an array of doubles of any dimensions */
   /*  k: a scalar of type double */
   /*  alpha: a scalar of type double */
-  /*  restrfactor: a scalar or a 2x1 vector of type double */
+  /*  restrfactor: a scalar of type double (when it is is struct it is dealt by
+   */
+  /*  wrapper1) */
   /*  Optional input arguments (name / pairs) in (case insensitive) */
   /*  alphabetical order */
-  /*  cshape: a scalar of type double */
   /*  equalweights is a boolean */
   /*  mixt: a scalar of type double */
   /*  msg: a scalar of type double */
@@ -187,13 +171,7 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
   /*  reftol: a scalar of type double */
   /*  startv1 is a boolean */
   /*  Ysave is a boolean */
-  b_restrfactor_size[0] = restrfactor_size[0];
-  b_restrfactor_size[1] = restrfactor_size[1];
-  loop_ub_tmp = restrfactor_size[0] * restrfactor_size[1];
-  if (0 <= loop_ub_tmp - 1) {
-    memcpy(&b_restrfactor_data[0], &restrfactor_data[0],
-           loop_ub_tmp * sizeof(double));
-  }
+  b_restrfactor = restrfactor;
   /* tclust computes trimmed clustering with scatter restrictions */
   /*  */
   /* <a href="matlab: docsearchFS('tclust')">Link to the help function</a> */
@@ -1204,35 +1182,13 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
   /*  And check if the optional user parameters are reasonable. */
   /*  is restrfactor is a struct then restriction is GPCM */
   /*  Check restriction factor */
-  c_restrfactor_size[0] = restrfactor_size[0];
-  c_restrfactor_size[1] = restrfactor_size[1];
-  for (i = 0; i < loop_ub_tmp; i++) {
-    d_restrfactor_data[i] = (restrfactor_data[i] < 1.0);
-  }
-  c_restrfactor_data.data = &d_restrfactor_data[0];
-  c_restrfactor_data.size = &c_restrfactor_size[0];
-  c_restrfactor_data.allocatedSize = 2;
-  c_restrfactor_data.numDimensions = 2;
-  c_restrfactor_data.canFreeData = false;
-  if (b_ifWhileCond(&c_restrfactor_data)) {
-    b_restrfactor_size[0] = 1;
-    b_restrfactor_size[1] = 1;
-    b_restrfactor_data[0] = 1.0;
+  if (restrfactor < 1.0) {
+    b_restrfactor = 1.0;
   }
   /*  Default restriction is the one based on the eigenvalues */
   /*  restrnum=1 ==> restriction on the eigenvalues */
   /*  restrnum=2 ==> restriction on the determinants */
   /*  restrnum=3 ==> restriction using GPCM */
-  if (l_strcmp(restrtype)) {
-    restrnum = 1;
-  } else if (m_strcmp(restrtype)) {
-    restrnum = 2;
-    iup = b_restrfactor_data[0];
-    b_restrfactor_size[0] = 2;
-    b_restrfactor_size[1] = 1;
-    b_restrfactor_data[0] = iup;
-    b_restrfactor_data[1] = cshape;
-  }
   /*  Default values for the optional */
   /*  parameters are set inside structure 'options' */
   /*  Number of subsets to extract */
@@ -1246,30 +1202,29 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
   /*  if options.mixt==1 mixture model is assumed */
   /*  Combinatorial part to extract the subsamples (if not already supplied by
    * the user) */
-  emxInit_real_T(&b_nsamp, 2);
+  emxInit_real_T(&ll, 2);
   if (k * ((double)out->Y->size[1] + 1.0) < out->Y->size[0]) {
-    i = b_nsamp->size[0] * b_nsamp->size[1];
-    b_nsamp->size[0] = nsamp->size[0];
-    b_nsamp->size[1] = nsamp->size[1];
-    emxEnsureCapacity_real_T(b_nsamp, i);
+    i = ll->size[0] * ll->size[1];
+    ll->size[0] = nsamp->size[0];
+    ll->size[1] = nsamp->size[1];
+    emxEnsureCapacity_real_T(ll, i);
     loop_ub = nsamp->size[0] * nsamp->size[1] - 1;
     for (i = 0; i <= loop_ub; i++) {
-      b_nsamp->data[i] = nsamp->data[i];
+      ll->data[i] = nsamp->data[i];
     }
-    d_subsets(b_nsamp, out->Y->size[0], k * ((double)out->Y->size[1] + 1.0), C,
+    d_subsets(ll, out->Y->size[0], k * ((double)out->Y->size[1] + 1.0), C,
               &nselected);
   } else {
-    i = b_nsamp->size[0] * b_nsamp->size[1];
-    b_nsamp->size[0] = nsamp->size[0];
-    b_nsamp->size[1] = nsamp->size[1];
-    emxEnsureCapacity_real_T(b_nsamp, i);
+    i = ll->size[0] * ll->size[1];
+    ll->size[0] = nsamp->size[0];
+    ll->size[1] = nsamp->size[1];
+    emxEnsureCapacity_real_T(ll, i);
     loop_ub = nsamp->size[0] * nsamp->size[1] - 1;
     for (i = 0; i <= loop_ub; i++) {
-      b_nsamp->data[i] = nsamp->data[i];
+      ll->data[i] = nsamp->data[i];
     }
-    d_subsets(b_nsamp, out->Y->size[0], k, C, &nselected);
+    d_subsets(ll, out->Y->size[0], k, C, &nselected);
   }
-  emxInit_real_T(&ll, 2);
   /*  Store the indices in varargout */
   /*  ll = matrix of loglikelihoods for each unit from each cluster */
   /*  rows of ll are associated to units */
@@ -1460,13 +1415,14 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
     i2 = (int)k;
     if (0 <= (int)k - 1) {
       i3 = C->size[1];
-      c_loop_ub = C->size[1];
-      i4 = out->Y->size[1];
+      b_loop_ub = C->size[1];
+      i5 = out->Y->size[1];
       e_loop_ub = out->Y->size[1];
       b_v = (double)out->Y->size[1] + 1.0;
       c_v = (double)out->Y->size[1] + 1.0;
     }
-    b_loop_ub = out->Y->size[0] * (int)k;
+    i4 = (int)k;
+    c_loop_ub = out->Y->size[0] * (int)k;
     d_loop_ub = out->Y->size[0];
   }
   emxInit_real_T(&randk, 1);
@@ -1486,13 +1442,13 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
   emxInit_int32_T(&r2, 1);
   emxInit_int32_T(&r3, 1);
   emxInit_int32_T(&r4, 1);
-  emxInit_int32_T(&r5, 1);
-  emxInit_int32_T(&r6, 1);
   emxInit_int32_T(&idx, 1);
   emxInit_real_T(&x, 1);
-  emxInit_real_T(&r7, 2);
+  emxInit_real_T(&r5, 2);
+  emxInit_real_T(&r6, 2);
+  emxInit_real_T(&b_sigmaini, 2);
   emxInit_real_T(&b_out, 2);
-  emxInit_real_T(&r8, 2);
+  emxInit_real_T(&r7, 2);
   for (b_i = 0; b_i < i; b_i++) {
     if ((msg == 1.0) && (b_i + 1U <= (unsigned int)tsampling)) {
       tic(&tstart_tv_sec, &tstart_tv_nsec);
@@ -1534,7 +1490,7 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
       b_index->size[0] = 1;
       b_index->size[1] = i3;
       emxEnsureCapacity_real_T(b_index, i1);
-      for (i1 = 0; i1 < c_loop_ub; i1++) {
+      for (i1 = 0; i1 < b_loop_ub; i1++) {
         b_index->data[i1] = C->data[b_i + C->size[0] * i1];
       }
       if (ilow > iup) {
@@ -1548,7 +1504,7 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
       loop_ub = c_i - i1;
       c_i = Yselj->size[0] * Yselj->size[1];
       Yselj->size[0] = loop_ub;
-      Yselj->size[1] = i4;
+      Yselj->size[1] = i5;
       emxEnsureCapacity_real_T(Yselj, c_i);
       for (c_i = 0; c_i < e_loop_ub; c_i++) {
         for (vlen = 0; vlen < loop_ub; vlen++) {
@@ -1589,18 +1545,18 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
       /*  Eigenvalue eigenvector decomposition for group j */
       loop_ub = sigmaini->size[0];
       nx = sigmaini->size[1];
-      i1 = b_nsamp->size[0] * b_nsamp->size[1];
-      b_nsamp->size[0] = sigmaini->size[0];
-      b_nsamp->size[1] = sigmaini->size[1];
-      emxEnsureCapacity_real_T(b_nsamp, i1);
+      i1 = b_sigmaini->size[0] * b_sigmaini->size[1];
+      b_sigmaini->size[0] = sigmaini->size[0];
+      b_sigmaini->size[1] = sigmaini->size[1];
+      emxEnsureCapacity_real_T(b_sigmaini, i1);
       for (i1 = 0; i1 < nx; i1++) {
         for (c_i = 0; c_i < loop_ub; c_i++) {
-          b_nsamp->data[c_i + b_nsamp->size[0] * i1] =
+          b_sigmaini->data[c_i + b_sigmaini->size[0] * i1] =
               sigmaini->data[(c_i + sigmaini->size[0] * i1) +
                              sigmaini->size[0] * sigmaini->size[1] * j];
         }
       }
-      b_eig(b_nsamp, Uj, Lambdaj);
+      b_eig(b_sigmaini, Uj, Lambdaj);
       /*  Store eigenvectors and eigenvalues of group j */
       loop_ub = Uj->size[1];
       for (i1 = 0; i1 < loop_ub; i1++) {
@@ -1617,65 +1573,41 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
       }
       /*  real is necessary for MATLAB coder */
     }
-    if (restrnum == 1) {
-      /*  Restriction on the eigenvalues */
-      nx = Lambda_vk->size[0] * Lambda_vk->size[1] - 1;
-      m = 0;
-      for (c_i = 0; c_i <= nx; c_i++) {
-        if (Lambda_vk->data[c_i] < 0.0) {
-          m++;
+    /*  Restriction on the eigenvalues */
+    nx = Lambda_vk->size[0] * Lambda_vk->size[1] - 1;
+    m = 0;
+    for (c_i = 0; c_i <= nx; c_i++) {
+      if (Lambda_vk->data[c_i] < 0.0) {
+        m++;
+      }
+    }
+    i1 = r->size[0];
+    r->size[0] = m;
+    emxEnsureCapacity_int32_T(r, i1);
+    vlen = 0;
+    for (c_i = 0; c_i <= nx; c_i++) {
+      if (Lambda_vk->data[c_i] < 0.0) {
+        r->data[vlen] = c_i + 1;
+        vlen++;
+      }
+    }
+    loop_ub = r->size[0] - 1;
+    for (i1 = 0; i1 <= loop_ub; i1++) {
+      Lambda_vk->data[r->data[i1] - 1] = 0.0;
+    }
+    /*  check on negative eigenvalues */
+    /*  Check first if the eigenvalues do not satisy the constraint */
+    if (fabs(e_maximum(Lambda_vk) / e_minimum(Lambda_vk)) > b_restrfactor) {
+      if (use_restreigen) {
+        i1 = Yselj->size[0] * Yselj->size[1];
+        Yselj->size[0] = Lambda_vk->size[0];
+        Yselj->size[1] = Lambda_vk->size[1];
+        emxEnsureCapacity_real_T(Yselj, i1);
+        loop_ub = Lambda_vk->size[0] * Lambda_vk->size[1];
+        for (i1 = 0; i1 < loop_ub; i1++) {
+          Yselj->data[i1] = Lambda_vk->data[i1];
         }
-      }
-      i1 = r1->size[0];
-      r1->size[0] = m;
-      emxEnsureCapacity_int32_T(r1, i1);
-      vlen = 0;
-      for (c_i = 0; c_i <= nx; c_i++) {
-        if (Lambda_vk->data[c_i] < 0.0) {
-          r1->data[vlen] = c_i + 1;
-          vlen++;
-        }
-      }
-      loop_ub = r1->size[0] - 1;
-      for (i1 = 0; i1 <= loop_ub; i1++) {
-        Lambda_vk->data[r1->data[i1] - 1] = 0.0;
-      }
-      /*  check on negative eigenvalues */
-      /*  Check first if the eigenvalues do not satisy the constraint */
-      y = fabs(e_maximum(Lambda_vk) / e_minimum(Lambda_vk));
-      c_restrfactor_size[0] = b_restrfactor_size[0];
-      c_restrfactor_size[1] = b_restrfactor_size[1];
-      loop_ub = b_restrfactor_size[0] * b_restrfactor_size[1];
-      for (i1 = 0; i1 < loop_ub; i1++) {
-        d_restrfactor_data[i1] = (y > b_restrfactor_data[i1]);
-      }
-      e_restrfactor_data.data = &d_restrfactor_data[0];
-      e_restrfactor_data.size = &c_restrfactor_size[0];
-      e_restrfactor_data.allocatedSize = 2;
-      e_restrfactor_data.numDimensions = 2;
-      e_restrfactor_data.canFreeData = false;
-      if (b_ifWhileCond(&e_restrfactor_data)) {
-        if (use_restreigen) {
-          i1 = Yselj->size[0] * Yselj->size[1];
-          Yselj->size[0] = Lambda_vk->size[0];
-          Yselj->size[1] = Lambda_vk->size[1];
-          emxEnsureCapacity_real_T(Yselj, i1);
-          loop_ub = Lambda_vk->size[0] * Lambda_vk->size[1];
-          for (i1 = 0; i1 < loop_ub; i1++) {
-            Yselj->data[i1] = Lambda_vk->data[i1];
-          }
-          restreigen(Yselj, randk, b_restrfactor_data, b_restrfactor_size);
-        } else {
-          i1 = Yselj->size[0] * Yselj->size[1];
-          Yselj->size[0] = Lambda_vk->size[0];
-          Yselj->size[1] = Lambda_vk->size[1];
-          emxEnsureCapacity_real_T(Yselj, i1);
-          loop_ub = Lambda_vk->size[0] * Lambda_vk->size[1];
-          for (i1 = 0; i1 < loop_ub; i1++) {
-            Yselj->data[i1] = Lambda_vk->data[i1];
-          }
-          restreigeneasy(Yselj, randk, b_restrfactor_data, b_restrfactor_size);
-        }
+        restreigen(Yselj, randk, b_restrfactor);
       } else {
         i1 = Yselj->size[0] * Yselj->size[1];
         Yselj->size[0] = Lambda_vk->size[0];
@@ -1685,150 +1617,68 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
         for (i1 = 0; i1 < loop_ub; i1++) {
           Yselj->data[i1] = Lambda_vk->data[i1];
         }
-      }
-      /*  Covariance matrices are reconstructed keeping into account the */
-      /*  constraints on the eigenvalues */
-      for (j = 0; j < loop_ub_tmp; j++) {
-        loop_ub = Yselj->size[0];
-        i1 = qqunassigned->size[0];
-        qqunassigned->size[0] = Yselj->size[0];
-        emxEnsureCapacity_real_T(qqunassigned, i1);
-        for (i1 = 0; i1 < loop_ub; i1++) {
-          qqunassigned->data[i1] = Yselj->data[i1 + Yselj->size[0] * j];
-        }
-        loop_ub = U->size[0];
-        nx = U->size[1];
-        i1 = b_nsamp->size[0] * b_nsamp->size[1];
-        b_nsamp->size[0] = U->size[0];
-        b_nsamp->size[1] = U->size[1];
-        emxEnsureCapacity_real_T(b_nsamp, i1);
-        for (i1 = 0; i1 < nx; i1++) {
-          for (c_i = 0; c_i < loop_ub; c_i++) {
-            b_nsamp->data[c_i + b_nsamp->size[0] * i1] =
-                U->data[(c_i + U->size[0] * i1) + U->size[0] * U->size[1] * j];
-          }
-        }
-        c_diag(qqunassigned, r8);
-        b_mtimes(b_nsamp, r8, r7);
-        loop_ub = U->size[0];
-        nx = U->size[1];
-        i1 = b_nsamp->size[0] * b_nsamp->size[1];
-        b_nsamp->size[0] = U->size[0];
-        b_nsamp->size[1] = U->size[1];
-        emxEnsureCapacity_real_T(b_nsamp, i1);
-        for (i1 = 0; i1 < nx; i1++) {
-          for (c_i = 0; c_i < loop_ub; c_i++) {
-            b_nsamp->data[c_i + b_nsamp->size[0] * i1] =
-                U->data[(c_i + U->size[0] * i1) + U->size[0] * U->size[1] * j];
-          }
-        }
-        d_mtimes(r7, b_nsamp, r8);
-        loop_ub = r8->size[1];
-        for (i1 = 0; i1 < loop_ub; i1++) {
-          nx = r8->size[0];
-          for (c_i = 0; c_i < nx; c_i++) {
-            sigmaini->data[(c_i + sigmaini->size[0] * i1) +
-                           sigmaini->size[0] * sigmaini->size[1] * j] =
-                r8->data[c_i + r8->size[0] * i1];
-          }
-        }
-        /*  Alternative code: in principle more efficient but slower */
-        /*  because diag is a built in function */
-        /*  sigmaini(:,:,j) = bsxfun(@times,U(:,:,j),autovalues(:,j)') *
-         * (U(:,:,j)'); */
+        restreigeneasy(Yselj, randk, b_restrfactor);
       }
     } else {
-      nx = Lambda_vk->size[0] * Lambda_vk->size[1] - 1;
-      m = 0;
-      for (c_i = 0; c_i <= nx; c_i++) {
-        if (Lambda_vk->data[c_i] < 0.0) {
-          m++;
+      i1 = Yselj->size[0] * Yselj->size[1];
+      Yselj->size[0] = Lambda_vk->size[0];
+      Yselj->size[1] = Lambda_vk->size[1];
+      emxEnsureCapacity_real_T(Yselj, i1);
+      loop_ub = Lambda_vk->size[0] * Lambda_vk->size[1];
+      for (i1 = 0; i1 < loop_ub; i1++) {
+        Yselj->data[i1] = Lambda_vk->data[i1];
+      }
+    }
+    /*  Covariance matrices are reconstructed keeping into account the */
+    /*  constraints on the eigenvalues */
+    for (j = 0; j < i4; j++) {
+      loop_ub = Yselj->size[0];
+      i1 = qqunassigned->size[0];
+      qqunassigned->size[0] = Yselj->size[0];
+      emxEnsureCapacity_real_T(qqunassigned, i1);
+      for (i1 = 0; i1 < loop_ub; i1++) {
+        qqunassigned->data[i1] = Yselj->data[i1 + Yselj->size[0] * j];
+      }
+      loop_ub = U->size[0];
+      nx = U->size[1];
+      i1 = b_sigmaini->size[0] * b_sigmaini->size[1];
+      b_sigmaini->size[0] = U->size[0];
+      b_sigmaini->size[1] = U->size[1];
+      emxEnsureCapacity_real_T(b_sigmaini, i1);
+      for (i1 = 0; i1 < nx; i1++) {
+        for (c_i = 0; c_i < loop_ub; c_i++) {
+          b_sigmaini->data[c_i + b_sigmaini->size[0] * i1] =
+              U->data[(c_i + U->size[0] * i1) + U->size[0] * U->size[1] * j];
         }
       }
-      i1 = r->size[0];
-      r->size[0] = m;
-      emxEnsureCapacity_int32_T(r, i1);
-      vlen = 0;
-      for (c_i = 0; c_i <= nx; c_i++) {
-        if (Lambda_vk->data[c_i] < 0.0) {
-          r->data[vlen] = c_i + 1;
-          vlen++;
+      c_diag(qqunassigned, r7);
+      b_mtimes(b_sigmaini, r7, r5);
+      loop_ub = U->size[0];
+      nx = U->size[1];
+      i1 = b_sigmaini->size[0] * b_sigmaini->size[1];
+      b_sigmaini->size[0] = U->size[0];
+      b_sigmaini->size[1] = U->size[1];
+      emxEnsureCapacity_real_T(b_sigmaini, i1);
+      for (i1 = 0; i1 < nx; i1++) {
+        for (c_i = 0; c_i < loop_ub; c_i++) {
+          b_sigmaini->data[c_i + b_sigmaini->size[0] * i1] =
+              U->data[(c_i + U->size[0] * i1) + U->size[0] * U->size[1] * j];
         }
       }
-      loop_ub = r->size[0] - 1;
-      for (i1 = 0; i1 <= loop_ub; i1++) {
-        Lambda_vk->data[r->data[i1] - 1] = 0.0;
-      }
-      /*  Restrictions on the determinants */
-      i1 = b_nsamp->size[0] * b_nsamp->size[1];
-      b_nsamp->size[0] = Lambda_vk->size[0];
-      b_nsamp->size[1] = Lambda_vk->size[1];
-      emxEnsureCapacity_real_T(b_nsamp, i1);
-      loop_ub = Lambda_vk->size[0] * Lambda_vk->size[1] - 1;
-      for (i1 = 0; i1 <= loop_ub; i1++) {
-        b_nsamp->data[i1] = Lambda_vk->data[i1];
-      }
-      d_restrfactor_size[0] = b_restrfactor_size[0];
-      d_restrfactor_size[1] = b_restrfactor_size[1];
-      loop_ub = b_restrfactor_size[0] * b_restrfactor_size[1] - 1;
-      if (0 <= loop_ub) {
-        memcpy(&f_restrfactor_data[0], &b_restrfactor_data[0],
-               (loop_ub + 1) * sizeof(double));
-      }
-      e_restrfactor_size[0] = d_restrfactor_size[0];
-      e_restrfactor_size[1] = d_restrfactor_size[1];
-      restrdeter(b_nsamp, randk, f_restrfactor_data, e_restrfactor_size, Yselj);
-      /*  Covariance matrices are reconstructed keeping into account the */
-      /*  constraints on the determinants */
-      for (j = 0; j < loop_ub_tmp; j++) {
-        loop_ub = Yselj->size[0];
-        i1 = qqunassigned->size[0];
-        qqunassigned->size[0] = Yselj->size[0];
-        emxEnsureCapacity_real_T(qqunassigned, i1);
-        for (i1 = 0; i1 < loop_ub; i1++) {
-          qqunassigned->data[i1] = Yselj->data[i1 + Yselj->size[0] * j];
+      d_mtimes(r5, b_sigmaini, r7);
+      loop_ub = r7->size[1];
+      for (i1 = 0; i1 < loop_ub; i1++) {
+        nx = r7->size[0];
+        for (c_i = 0; c_i < nx; c_i++) {
+          sigmaini->data[(c_i + sigmaini->size[0] * i1) +
+                         sigmaini->size[0] * sigmaini->size[1] * j] =
+              r7->data[c_i + r7->size[0] * i1];
         }
-        loop_ub = U->size[0];
-        nx = U->size[1];
-        i1 = b_nsamp->size[0] * b_nsamp->size[1];
-        b_nsamp->size[0] = U->size[0];
-        b_nsamp->size[1] = U->size[1];
-        emxEnsureCapacity_real_T(b_nsamp, i1);
-        for (i1 = 0; i1 < nx; i1++) {
-          for (c_i = 0; c_i < loop_ub; c_i++) {
-            b_nsamp->data[c_i + b_nsamp->size[0] * i1] =
-                U->data[(c_i + U->size[0] * i1) + U->size[0] * U->size[1] * j];
-          }
-        }
-        c_diag(qqunassigned, r8);
-        b_mtimes(b_nsamp, r8, r7);
-        loop_ub = U->size[0];
-        nx = U->size[1];
-        i1 = b_nsamp->size[0] * b_nsamp->size[1];
-        b_nsamp->size[0] = U->size[0];
-        b_nsamp->size[1] = U->size[1];
-        emxEnsureCapacity_real_T(b_nsamp, i1);
-        for (i1 = 0; i1 < nx; i1++) {
-          for (c_i = 0; c_i < loop_ub; c_i++) {
-            b_nsamp->data[c_i + b_nsamp->size[0] * i1] =
-                U->data[(c_i + U->size[0] * i1) + U->size[0] * U->size[1] * j];
-          }
-        }
-        d_mtimes(r7, b_nsamp, r8);
-        loop_ub = r8->size[1];
-        for (i1 = 0; i1 < loop_ub; i1++) {
-          nx = r8->size[0];
-          for (c_i = 0; c_i < nx; c_i++) {
-            sigmaini->data[(c_i + sigmaini->size[0] * i1) +
-                           sigmaini->size[0] * sigmaini->size[1] * j] =
-                r8->data[c_i + r8->size[0] * i1];
-          }
-        }
-        /*  Alternative code: in principle more efficient but slower */
-        /*  because diag is a built in function */
-        /*  sigmaini(:,:,j) = bsxfun(@times,U(:,:,j),autovalues(:,j)') *
-         * (U(:,:,j)'); */
       }
+      /*  Alternative code: in principle more efficient but slower */
+      /*  because diag is a built in function */
+      /*  sigmaini(:,:,j) = bsxfun(@times,U(:,:,j),autovalues(:,j)') *
+       * (U(:,:,j)'); */
     }
     /*  sigmaopt will be final estimate of the covariance matrices */
     /*  sigmaopt=sigmaini; */
@@ -1838,7 +1688,7 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
     postprob->size[0] = n;
     postprob->size[1] = (int)k;
     emxEnsureCapacity_real_T(postprob, i1);
-    for (i1 = 0; i1 < b_loop_ub; i1++) {
+    for (i1 = 0; i1 < c_loop_ub; i1++) {
       postprob->data[i1] = 0.0;
     }
     i1 = ind->size[0];
@@ -2283,10 +2133,10 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
                     cini->data[j + cini->size[0] * i1];
               }
             }
-            b_mldivide(Yselj, eyev, r8);
-            b_mtimes(b_out, r8, r7);
-            power(r7, r8);
-            sum(r8, qqunassigned);
+            b_mldivide(Yselj, eyev, r7);
+            b_mtimes(b_out, r7, r5);
+            power(r5, r7);
+            sum(r7, qqunassigned);
             loop_ub = qqunassigned->size[0];
             for (i1 = 0; i1 < loop_ub; i1++) {
               ll->data[i1 + ll->size[0] * j] =
@@ -2736,10 +2586,10 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
                     cini->data[j + cini->size[0] * i1];
               }
             }
-            b_mldivide(Yselj, eyev, r8);
-            b_mtimes(b_out, r8, r7);
-            power(r7, r8);
-            sum(r8, qqunassigned);
+            b_mldivide(Yselj, eyev, r7);
+            b_mtimes(b_out, r7, r5);
+            power(r5, r7);
+            sum(r7, qqunassigned);
             loop_ub = qqunassigned->size[0];
             for (i1 = 0; i1 < loop_ub; i1++) {
               qqunassigned->data[i1] = -0.5 * qqunassigned->data[i1] - iup;
@@ -2832,10 +2682,11 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
         /*  M-step update of niini */
         /*  niini = numerator of component probabilities */
         combineVectorElements(postprob, Yseljc);
+        combineVectorElements(postprob, r6);
         i1 = randk->size[0];
-        randk->size[0] = Yseljc->size[1];
+        randk->size[0] = r6->size[1];
         emxEnsureCapacity_real_T(randk, i1);
-        loop_ub = Yseljc->size[1];
+        loop_ub = r6->size[1];
         for (i1 = 0; i1 < loop_ub; i1++) {
           randk->data[i1] = Yseljc->data[i1];
         }
@@ -2967,10 +2818,11 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
         /*  M-step update of niini */
         /*  niini = numerator of component probabilities */
         combineVectorElements(postprob, Yseljc);
+        combineVectorElements(postprob, r6);
         i1 = randk->size[0];
-        randk->size[0] = Yseljc->size[1];
+        randk->size[0] = r6->size[1];
         emxEnsureCapacity_real_T(randk, i1);
-        loop_ub = Yseljc->size[1];
+        loop_ub = r6->size[1];
         for (i1 = 0; i1 < loop_ub; i1++) {
           randk->data[i1] = Yseljc->data[i1];
         }
@@ -3021,18 +2873,18 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
             /*  Eigenvalue eigenvector decomposition for group j */
             loop_ub = sigmaini->size[0];
             nx = sigmaini->size[1];
-            i1 = b_nsamp->size[0] * b_nsamp->size[1];
-            b_nsamp->size[0] = sigmaini->size[0];
-            b_nsamp->size[1] = sigmaini->size[1];
-            emxEnsureCapacity_real_T(b_nsamp, i1);
+            i1 = b_sigmaini->size[0] * b_sigmaini->size[1];
+            b_sigmaini->size[0] = sigmaini->size[0];
+            b_sigmaini->size[1] = sigmaini->size[1];
+            emxEnsureCapacity_real_T(b_sigmaini, i1);
             for (i1 = 0; i1 < nx; i1++) {
               for (c_i = 0; c_i < loop_ub; c_i++) {
-                b_nsamp->data[c_i + b_nsamp->size[0] * i1] =
+                b_sigmaini->data[c_i + b_sigmaini->size[0] * i1] =
                     sigmaini->data[(c_i + sigmaini->size[0] * i1) +
                                    sigmaini->size[0] * sigmaini->size[1] * j];
               }
             }
-            b_eig(b_nsamp, Uj, Lambdaj);
+            b_eig(b_sigmaini, Uj, Lambdaj);
             /*  Store eigenvectors and eigenvalues of group j */
             loop_ub = Uj->size[1];
             for (i1 = 0; i1 < loop_ub; i1++) {
@@ -3093,26 +2945,26 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
               m++;
             }
           }
-          i1 = r4->size[0];
-          r4->size[0] = m;
-          emxEnsureCapacity_int32_T(r4, i1);
+          i1 = r2->size[0];
+          r2->size[0] = m;
+          emxEnsureCapacity_int32_T(r2, i1);
           vlen = 0;
           for (c_i = 0; c_i <= nx; c_i++) {
             if (groupind->data[c_i] == (double)j + 1.0) {
-              r4->data[vlen] = c_i + 1;
+              r2->data[vlen] = c_i + 1;
               vlen++;
             }
           }
           loop_ub = Ytri->size[1];
           i1 = Yselj->size[0] * Yselj->size[1];
-          Yselj->size[0] = r4->size[0];
+          Yselj->size[0] = r2->size[0];
           Yselj->size[1] = Ytri->size[1];
           emxEnsureCapacity_real_T(Yselj, i1);
           for (i1 = 0; i1 < loop_ub; i1++) {
-            nx = r4->size[0];
+            nx = r2->size[0];
             for (c_i = 0; c_i < nx; c_i++) {
               Yselj->data[c_i + Yselj->size[0] * i1] =
-                  Ytri->data[(r4->data[c_i] + Ytri->size[0] * i1) - 1];
+                  Ytri->data[(r2->data[c_i] + Ytri->size[0] * i1) - 1];
             }
           }
           /*  Means of group j */
@@ -3147,31 +2999,31 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
                     cini->data[j + cini->size[0] * i1];
               }
             }
-            c_mtimes(Yselj, Yselj, r8);
-            loop_ub = r8->size[1];
+            c_mtimes(Yselj, Yselj, r7);
+            loop_ub = r7->size[1];
             for (i1 = 0; i1 < loop_ub; i1++) {
-              nx = r8->size[0];
+              nx = r7->size[0];
               for (c_i = 0; c_i < nx; c_i++) {
                 sigmaini->data[(c_i + sigmaini->size[0] * i1) +
                                sigmaini->size[0] * sigmaini->size[1] * j] =
-                    r8->data[c_i + r8->size[0] * i1] / randk->data[j];
+                    r7->data[c_i + r7->size[0] * i1] / randk->data[j];
               }
             }
             /*  Eigenvalue eigenvector decomposition for group j */
             loop_ub = sigmaini->size[0];
             nx = sigmaini->size[1];
-            i1 = b_nsamp->size[0] * b_nsamp->size[1];
-            b_nsamp->size[0] = sigmaini->size[0];
-            b_nsamp->size[1] = sigmaini->size[1];
-            emxEnsureCapacity_real_T(b_nsamp, i1);
+            i1 = b_sigmaini->size[0] * b_sigmaini->size[1];
+            b_sigmaini->size[0] = sigmaini->size[0];
+            b_sigmaini->size[1] = sigmaini->size[1];
+            emxEnsureCapacity_real_T(b_sigmaini, i1);
             for (i1 = 0; i1 < nx; i1++) {
               for (c_i = 0; c_i < loop_ub; c_i++) {
-                b_nsamp->data[c_i + b_nsamp->size[0] * i1] =
+                b_sigmaini->data[c_i + b_sigmaini->size[0] * i1] =
                     sigmaini->data[(c_i + sigmaini->size[0] * i1) +
                                    sigmaini->size[0] * sigmaini->size[1] * j];
               }
             }
-            b_eig(b_nsamp, Uj, Lambdaj);
+            b_eig(b_sigmaini, Uj, Lambdaj);
             /*  Store eigenvectors and eigenvalues of group j */
             loop_ub = Uj->size[1];
             for (i1 = 0; i1 < loop_ub; i1++) {
@@ -3199,76 +3051,47 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
                     obj;
               }
             }
-            if (restrnum == 1) {
-              for (i1 = 0; i1 < v; i1++) {
-                Lambda_vk->data[i1 + Lambda_vk->size[0] * j] = 1.0;
-              }
-            } else {
-              Lambda_vk->data[j] = 1.0;
+            for (i1 = 0; i1 < v; i1++) {
+              Lambda_vk->data[i1 + Lambda_vk->size[0] * j] = 1.0;
             }
           }
         }
       }
-      if (restrnum == 1) {
-        /*  Restriction on the eigenvalues */
-        nx = Lambda_vk->size[0] * Lambda_vk->size[1] - 1;
-        m = 0;
-        for (c_i = 0; c_i <= nx; c_i++) {
-          if (Lambda_vk->data[c_i] < 0.0) {
-            m++;
+      /*  Restriction on the eigenvalues */
+      nx = Lambda_vk->size[0] * Lambda_vk->size[1] - 1;
+      m = 0;
+      for (c_i = 0; c_i <= nx; c_i++) {
+        if (Lambda_vk->data[c_i] < 0.0) {
+          m++;
+        }
+      }
+      i1 = r1->size[0];
+      r1->size[0] = m;
+      emxEnsureCapacity_int32_T(r1, i1);
+      vlen = 0;
+      for (c_i = 0; c_i <= nx; c_i++) {
+        if (Lambda_vk->data[c_i] < 0.0) {
+          r1->data[vlen] = c_i + 1;
+          vlen++;
+        }
+      }
+      loop_ub = r1->size[0] - 1;
+      for (i1 = 0; i1 <= loop_ub; i1++) {
+        Lambda_vk->data[r1->data[i1] - 1] = 0.0;
+      }
+      /*  check on negative eigenvalues */
+      /*  Check first if the eigenvalues do not satisy the constraint */
+      if (fabs(e_maximum(Lambda_vk) / e_minimum(Lambda_vk)) > b_restrfactor) {
+        if (use_restreigen) {
+          i1 = Yselj->size[0] * Yselj->size[1];
+          Yselj->size[0] = Lambda_vk->size[0];
+          Yselj->size[1] = Lambda_vk->size[1];
+          emxEnsureCapacity_real_T(Yselj, i1);
+          loop_ub = Lambda_vk->size[0] * Lambda_vk->size[1];
+          for (i1 = 0; i1 < loop_ub; i1++) {
+            Yselj->data[i1] = Lambda_vk->data[i1];
           }
-        }
-        i1 = r3->size[0];
-        r3->size[0] = m;
-        emxEnsureCapacity_int32_T(r3, i1);
-        vlen = 0;
-        for (c_i = 0; c_i <= nx; c_i++) {
-          if (Lambda_vk->data[c_i] < 0.0) {
-            r3->data[vlen] = c_i + 1;
-            vlen++;
-          }
-        }
-        loop_ub = r3->size[0] - 1;
-        for (i1 = 0; i1 <= loop_ub; i1++) {
-          Lambda_vk->data[r3->data[i1] - 1] = 0.0;
-        }
-        /*  check on negative eigenvalues */
-        /*  Check first if the eigenvalues do not satisy the constraint */
-        y = fabs(e_maximum(Lambda_vk) / e_minimum(Lambda_vk));
-        c_restrfactor_size[0] = b_restrfactor_size[0];
-        c_restrfactor_size[1] = b_restrfactor_size[1];
-        loop_ub = b_restrfactor_size[0] * b_restrfactor_size[1];
-        for (i1 = 0; i1 < loop_ub; i1++) {
-          d_restrfactor_data[i1] = (y > b_restrfactor_data[i1]);
-        }
-        g_restrfactor_data.data = &d_restrfactor_data[0];
-        g_restrfactor_data.size = &c_restrfactor_size[0];
-        g_restrfactor_data.allocatedSize = 2;
-        g_restrfactor_data.numDimensions = 2;
-        g_restrfactor_data.canFreeData = false;
-        if (b_ifWhileCond(&g_restrfactor_data)) {
-          if (use_restreigen) {
-            i1 = Yselj->size[0] * Yselj->size[1];
-            Yselj->size[0] = Lambda_vk->size[0];
-            Yselj->size[1] = Lambda_vk->size[1];
-            emxEnsureCapacity_real_T(Yselj, i1);
-            loop_ub = Lambda_vk->size[0] * Lambda_vk->size[1];
-            for (i1 = 0; i1 < loop_ub; i1++) {
-              Yselj->data[i1] = Lambda_vk->data[i1];
-            }
-            restreigen(Yselj, randk, b_restrfactor_data, b_restrfactor_size);
-          } else {
-            i1 = Yselj->size[0] * Yselj->size[1];
-            Yselj->size[0] = Lambda_vk->size[0];
-            Yselj->size[1] = Lambda_vk->size[1];
-            emxEnsureCapacity_real_T(Yselj, i1);
-            loop_ub = Lambda_vk->size[0] * Lambda_vk->size[1];
-            for (i1 = 0; i1 < loop_ub; i1++) {
-              Yselj->data[i1] = Lambda_vk->data[i1];
-            }
-            restreigeneasy(Yselj, randk, b_restrfactor_data,
-                           b_restrfactor_size);
-          }
+          restreigen(Yselj, randk, b_restrfactor);
         } else {
           i1 = Yselj->size[0] * Yselj->size[1];
           Yselj->size[0] = Lambda_vk->size[0];
@@ -3278,49 +3101,17 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
           for (i1 = 0; i1 < loop_ub; i1++) {
             Yselj->data[i1] = Lambda_vk->data[i1];
           }
+          restreigeneasy(Yselj, randk, b_restrfactor);
         }
       } else {
-        /*  Restriction on the determinants */
-        nx = Lambda_vk->size[0] * Lambda_vk->size[1] - 1;
-        m = 0;
-        for (c_i = 0; c_i <= nx; c_i++) {
-          if (Lambda_vk->data[c_i] < 0.0) {
-            m++;
-          }
+        i1 = Yselj->size[0] * Yselj->size[1];
+        Yselj->size[0] = Lambda_vk->size[0];
+        Yselj->size[1] = Lambda_vk->size[1];
+        emxEnsureCapacity_real_T(Yselj, i1);
+        loop_ub = Lambda_vk->size[0] * Lambda_vk->size[1];
+        for (i1 = 0; i1 < loop_ub; i1++) {
+          Yselj->data[i1] = Lambda_vk->data[i1];
         }
-        i1 = r2->size[0];
-        r2->size[0] = m;
-        emxEnsureCapacity_int32_T(r2, i1);
-        vlen = 0;
-        for (c_i = 0; c_i <= nx; c_i++) {
-          if (Lambda_vk->data[c_i] < 0.0) {
-            r2->data[vlen] = c_i + 1;
-            vlen++;
-          }
-        }
-        loop_ub = r2->size[0] - 1;
-        for (i1 = 0; i1 <= loop_ub; i1++) {
-          Lambda_vk->data[r2->data[i1] - 1] = 0.0;
-        }
-        i1 = b_nsamp->size[0] * b_nsamp->size[1];
-        b_nsamp->size[0] = Lambda_vk->size[0];
-        b_nsamp->size[1] = Lambda_vk->size[1];
-        emxEnsureCapacity_real_T(b_nsamp, i1);
-        loop_ub = Lambda_vk->size[0] * Lambda_vk->size[1] - 1;
-        for (i1 = 0; i1 <= loop_ub; i1++) {
-          b_nsamp->data[i1] = Lambda_vk->data[i1];
-        }
-        f_restrfactor_size[0] = b_restrfactor_size[0];
-        f_restrfactor_size[1] = b_restrfactor_size[1];
-        loop_ub = b_restrfactor_size[0] * b_restrfactor_size[1] - 1;
-        if (0 <= loop_ub) {
-          memcpy(&f_restrfactor_data[0], &b_restrfactor_data[0],
-                 (loop_ub + 1) * sizeof(double));
-        }
-        e_restrfactor_size[0] = f_restrfactor_size[0];
-        e_restrfactor_size[1] = f_restrfactor_size[1];
-        restrdeter(b_nsamp, randk, f_restrfactor_data, e_restrfactor_size,
-                   Yselj);
       }
       /*  Covariance matrices are reconstructed keeping into account the */
       /*  constraints of the eigenvalues */
@@ -3334,38 +3125,38 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
         }
         loop_ub = U->size[0];
         nx = U->size[1];
-        i1 = b_nsamp->size[0] * b_nsamp->size[1];
-        b_nsamp->size[0] = U->size[0];
-        b_nsamp->size[1] = U->size[1];
-        emxEnsureCapacity_real_T(b_nsamp, i1);
+        i1 = b_sigmaini->size[0] * b_sigmaini->size[1];
+        b_sigmaini->size[0] = U->size[0];
+        b_sigmaini->size[1] = U->size[1];
+        emxEnsureCapacity_real_T(b_sigmaini, i1);
         for (i1 = 0; i1 < nx; i1++) {
           for (c_i = 0; c_i < loop_ub; c_i++) {
-            b_nsamp->data[c_i + b_nsamp->size[0] * i1] =
+            b_sigmaini->data[c_i + b_sigmaini->size[0] * i1] =
                 U->data[(c_i + U->size[0] * i1) + U->size[0] * U->size[1] * j];
           }
         }
-        c_diag(qqunassigned, r8);
-        b_mtimes(b_nsamp, r8, r7);
+        c_diag(qqunassigned, r7);
+        b_mtimes(b_sigmaini, r7, r5);
         loop_ub = U->size[0];
         nx = U->size[1];
-        i1 = b_nsamp->size[0] * b_nsamp->size[1];
-        b_nsamp->size[0] = U->size[0];
-        b_nsamp->size[1] = U->size[1];
-        emxEnsureCapacity_real_T(b_nsamp, i1);
+        i1 = b_sigmaini->size[0] * b_sigmaini->size[1];
+        b_sigmaini->size[0] = U->size[0];
+        b_sigmaini->size[1] = U->size[1];
+        emxEnsureCapacity_real_T(b_sigmaini, i1);
         for (i1 = 0; i1 < nx; i1++) {
           for (c_i = 0; c_i < loop_ub; c_i++) {
-            b_nsamp->data[c_i + b_nsamp->size[0] * i1] =
+            b_sigmaini->data[c_i + b_sigmaini->size[0] * i1] =
                 U->data[(c_i + U->size[0] * i1) + U->size[0] * U->size[1] * j];
           }
         }
-        d_mtimes(r7, b_nsamp, r8);
-        loop_ub = r8->size[1];
+        d_mtimes(r5, b_sigmaini, r7);
+        loop_ub = r7->size[1];
         for (i1 = 0; i1 < loop_ub; i1++) {
-          nx = r8->size[0];
+          nx = r7->size[0];
           for (c_i = 0; c_i < nx; c_i++) {
             sigmaini->data[(c_i + sigmaini->size[0] * i1) +
                            sigmaini->size[0] * sigmaini->size[1] * j] =
-                r8->data[c_i + r8->size[0] * i1];
+                r7->data[c_i + r7->size[0] * i1];
           }
         }
         /*  Alternative code: in principle more efficient but slower */
@@ -3834,10 +3625,10 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
                     cini->data[j + cini->size[0] * i1];
               }
             }
-            b_mldivide(Yselj, eyev, r8);
-            b_mtimes(b_out, r8, r7);
-            power(r7, r8);
-            sum(r8, qqunassigned);
+            b_mldivide(Yselj, eyev, r7);
+            b_mtimes(b_out, r7, r5);
+            power(r5, r7);
+            sum(r7, qqunassigned);
             loop_ub = qqunassigned->size[0];
             for (i1 = 0; i1 < loop_ub; i1++) {
               qqunassigned->data[i1] = -0.5 * qqunassigned->data[i1] - iup;
@@ -3868,26 +3659,26 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
                   m++;
                 }
               }
-              i1 = r5->size[0];
-              r5->size[0] = m;
-              emxEnsureCapacity_int32_T(r5, i1);
+              i1 = r3->size[0];
+              r3->size[0] = m;
+              emxEnsureCapacity_int32_T(r3, i1);
               vlen = 0;
               for (c_i = 0; c_i <= nx; c_i++) {
                 if (groupind->data[c_i] == (double)j + 1.0) {
-                  r5->data[vlen] = c_i + 1;
+                  r3->data[vlen] = c_i + 1;
                   vlen++;
                 }
               }
               loop_ub = Ytri->size[1];
               i1 = b_out->size[0] * b_out->size[1];
-              b_out->size[0] = r5->size[0];
+              b_out->size[0] = r3->size[0];
               b_out->size[1] = Ytri->size[1];
               emxEnsureCapacity_real_T(b_out, i1);
               for (i1 = 0; i1 < loop_ub; i1++) {
-                nx = r5->size[0];
+                nx = r3->size[0];
                 for (c_i = 0; c_i < nx; c_i++) {
                   b_out->data[c_i + b_out->size[0] * i1] =
-                      Ytri->data[(r5->data[c_i] + Ytri->size[0] * i1) - 1];
+                      Ytri->data[(r3->data[c_i] + Ytri->size[0] * i1) - 1];
                 }
               }
               loop_ub = cini->size[1];
@@ -3900,18 +3691,18 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
               }
               loop_ub = sigmaini->size[0];
               nx = sigmaini->size[1];
-              i1 = b_nsamp->size[0] * b_nsamp->size[1];
-              b_nsamp->size[0] = sigmaini->size[0];
-              b_nsamp->size[1] = sigmaini->size[1];
-              emxEnsureCapacity_real_T(b_nsamp, i1);
+              i1 = b_sigmaini->size[0] * b_sigmaini->size[1];
+              b_sigmaini->size[0] = sigmaini->size[0];
+              b_sigmaini->size[1] = sigmaini->size[1];
+              emxEnsureCapacity_real_T(b_sigmaini, i1);
               for (i1 = 0; i1 < nx; i1++) {
                 for (c_i = 0; c_i < loop_ub; c_i++) {
-                  b_nsamp->data[c_i + b_nsamp->size[0] * i1] =
+                  b_sigmaini->data[c_i + b_sigmaini->size[0] * i1] =
                       sigmaini->data[(c_i + sigmaini->size[0] * i1) +
                                      sigmaini->size[0] * sigmaini->size[1] * j];
                 }
               }
-              obj += logmvnpdfFS(b_out, Yseljc, b_nsamp);
+              obj += logmvnpdfFS(b_out, Yseljc, b_sigmaini);
             } else {
               /*  niini(j)*log(niini(j)/h) is the so called entropy */
               /*  term which allows for different group weights */
@@ -3922,13 +3713,13 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
                   m++;
                 }
               }
-              i1 = r6->size[0];
-              r6->size[0] = m;
-              emxEnsureCapacity_int32_T(r6, i1);
+              i1 = r4->size[0];
+              r4->size[0] = m;
+              emxEnsureCapacity_int32_T(r4, i1);
               vlen = 0;
               for (c_i = 0; c_i <= nx; c_i++) {
                 if (groupind->data[c_i] == (double)j + 1.0) {
-                  r6->data[vlen] = c_i + 1;
+                  r4->data[vlen] = c_i + 1;
                   vlen++;
                 }
               }
@@ -4361,21 +4152,21 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
                       0.918938533204673 * (double)v;
                 loop_ub = Ytri->size[1];
                 i1 = b_out->size[0] * b_out->size[1];
-                b_out->size[0] = r6->size[0];
+                b_out->size[0] = r4->size[0];
                 b_out->size[1] = Ytri->size[1];
                 emxEnsureCapacity_real_T(b_out, i1);
                 for (i1 = 0; i1 < loop_ub; i1++) {
-                  nx = r6->size[0];
+                  nx = r4->size[0];
                   for (c_i = 0; c_i < nx; c_i++) {
                     b_out->data[c_i + b_out->size[0] * i1] =
-                        Ytri->data[(r6->data[c_i] + Ytri->size[0] * i1) - 1] -
+                        Ytri->data[(r4->data[c_i] + Ytri->size[0] * i1) - 1] -
                         cini->data[j + cini->size[0] * i1];
                   }
                 }
-                b_mldivide(Yselj, eyev, r8);
-                b_mtimes(b_out, r8, r7);
-                power(r7, r8);
-                sum(r8, qqunassigned);
+                b_mldivide(Yselj, eyev, r7);
+                b_mtimes(b_out, r7, r5);
+                power(r5, r7);
+                sum(r7, qqunassigned);
                 loop_ub = qqunassigned->size[0];
                 for (i1 = 0; i1 < loop_ub; i1++) {
                   qqunassigned->data[i1] = -0.5 * qqunassigned->data[i1] - iup;
@@ -4391,17 +4182,17 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
       }
       if (mixt > 0.0) {
         /*  if mixt >0 stopping criterion is referred to postprob */
-        i1 = b_nsamp->size[0] * b_nsamp->size[1];
-        b_nsamp->size[0] = postprob->size[0];
-        b_nsamp->size[1] = postprob->size[1];
-        emxEnsureCapacity_real_T(b_nsamp, i1);
+        i1 = b_sigmaini->size[0] * b_sigmaini->size[1];
+        b_sigmaini->size[0] = postprob->size[0];
+        b_sigmaini->size[1] = postprob->size[1];
+        emxEnsureCapacity_real_T(b_sigmaini, i1);
         loop_ub = postprob->size[0] * postprob->size[1];
         for (i1 = 0; i1 < loop_ub; i1++) {
-          b_nsamp->data[i1] = postprob->data[i1] - postprobold->data[i1];
+          b_sigmaini->data[i1] = postprob->data[i1] - postprobold->data[i1];
         }
-        b_abs(b_nsamp, r8);
-        combineVectorElements(r8, Yseljc);
-        mudiff = d_combineVectorElements(Yseljc) / (double)n;
+        b_abs(b_sigmaini, r7);
+        combineVectorElements(r7, r6);
+        mudiff = d_combineVectorElements(r6) / (double)n;
         /*  disp(mudiff) */
       } else {
         /*  if mixt=0 stopping criterion is referred to no modiification in the
@@ -4518,8 +4309,7 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
       }
     }
   }
-  emxFree_int32_T(&r6);
-  emxFree_int32_T(&r5);
+  emxFree_real_T(&r6);
   emxFree_int32_T(&r4);
   emxFree_int32_T(&r3);
   emxFree_int32_T(&r2);
@@ -4542,22 +4332,22 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
            100.0 * mudiff);
     fflush(stdout);
   }
-  emxInit_boolean_T(&r9, 2);
+  emxInit_boolean_T(&r8, 2);
   /*  Store quantities in out structure */
   /* exist('muopt')==0 */
   /*  Procedure to order the non-empty components */
-  i = r9->size[0] * r9->size[1];
-  r9->size[0] = out->muopt->size[0];
-  r9->size[1] = out->muopt->size[1];
-  emxEnsureCapacity_boolean_T(r9, i);
+  i = r8->size[0] * r8->size[1];
+  r8->size[0] = out->muopt->size[0];
+  r8->size[1] = out->muopt->size[1];
+  emxEnsureCapacity_boolean_T(r8, i);
   loop_ub = out->muopt->size[0] * out->muopt->size[1];
   for (i = 0; i < loop_ub; i++) {
-    r9->data[i] = rtIsNaN(out->muopt->data[i]);
+    r8->data[i] = rtIsNaN(out->muopt->data[i]);
   }
-  emxInit_boolean_T(&r10, 2);
-  b_any(r9, r10);
-  emxFree_boolean_T(&r9);
-  if (c_any(r10)) {
+  emxInit_boolean_T(&r9, 2);
+  b_any(r8, r9);
+  emxFree_boolean_T(&r8);
+  if (c_any(r9)) {
     /*  restore apropriate order of the components */
     loop_ub = out->muopt->size[0];
     i = NanGroups->size[0];
@@ -4575,14 +4365,14 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
         m++;
       }
     }
-    emxInit_int32_T(&r11, 1);
-    i = r11->size[0];
-    r11->size[0] = m;
-    emxEnsureCapacity_int32_T(r11, i);
+    emxInit_int32_T(&r10, 1);
+    i = r10->size[0];
+    r10->size[0] = m;
+    emxEnsureCapacity_int32_T(r10, i);
     vlen = 0;
     for (b_i = 0; b_i <= nx; b_i++) {
       if (!NanGroups->data[b_i]) {
-        r11->data[vlen] = b_i + 1;
+        r10->data[vlen] = b_i + 1;
         vlen++;
       }
     }
@@ -4593,30 +4383,30 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
         m++;
       }
     }
-    emxInit_int32_T(&r13, 1);
-    i = r13->size[0];
-    r13->size[0] = m;
-    emxEnsureCapacity_int32_T(r13, i);
+    emxInit_int32_T(&r12, 1);
+    i = r12->size[0];
+    r12->size[0] = m;
+    emxEnsureCapacity_int32_T(r12, i);
     vlen = 0;
     for (b_i = 0; b_i <= nx; b_i++) {
       if (NanGroups->data[b_i]) {
-        r13->data[vlen] = b_i + 1;
+        r12->data[vlen] = b_i + 1;
         vlen++;
       }
     }
     i = qqunassigned->size[0];
-    qqunassigned->size[0] = r11->size[0] + r13->size[0];
+    qqunassigned->size[0] = r10->size[0] + r12->size[0];
     emxEnsureCapacity_real_T(qqunassigned, i);
-    loop_ub = r11->size[0];
+    loop_ub = r10->size[0];
     for (i = 0; i < loop_ub; i++) {
-      qqunassigned->data[i] = nopt->data[r11->data[i] - 1];
+      qqunassigned->data[i] = nopt->data[r10->data[i] - 1];
     }
-    loop_ub = r13->size[0];
+    loop_ub = r12->size[0];
     for (i = 0; i < loop_ub; i++) {
-      qqunassigned->data[i + r11->size[0]] = nopt->data[r13->data[i] - 1];
+      qqunassigned->data[i + r10->size[0]] = nopt->data[r12->data[i] - 1];
     }
-    emxFree_int32_T(&r13);
-    emxFree_int32_T(&r11);
+    emxFree_int32_T(&r12);
+    emxFree_int32_T(&r10);
     i = nopt->size[0];
     nopt->size[0] = qqunassigned->size[0];
     emxEnsureCapacity_real_T(nopt, i);
@@ -4631,15 +4421,100 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
         m++;
       }
     }
+    emxInit_int32_T(&r13, 1);
+    i = r13->size[0];
+    r13->size[0] = m;
+    emxEnsureCapacity_int32_T(r13, i);
+    vlen = 0;
+    for (b_i = 0; b_i <= nx; b_i++) {
+      if (!NanGroups->data[b_i]) {
+        r13->data[vlen] = b_i + 1;
+        vlen++;
+      }
+    }
+    nx = NanGroups->size[0] - 1;
+    m = 0;
+    for (b_i = 0; b_i <= nx; b_i++) {
+      if (NanGroups->data[b_i]) {
+        m++;
+      }
+    }
     emxInit_int32_T(&r14, 1);
     i = r14->size[0];
     r14->size[0] = m;
     emxEnsureCapacity_int32_T(r14, i);
     vlen = 0;
     for (b_i = 0; b_i <= nx; b_i++) {
-      if (!NanGroups->data[b_i]) {
+      if (NanGroups->data[b_i]) {
         r14->data[vlen] = b_i + 1;
         vlen++;
+      }
+    }
+    if ((r13->size[0] != 0) && (out->muopt->size[1] != 0)) {
+      vlen = out->muopt->size[1];
+    } else if ((r14->size[0] != 0) && (out->muopt->size[1] != 0)) {
+      vlen = out->muopt->size[1];
+    } else {
+      if (out->muopt->size[1] > 0) {
+        vlen = out->muopt->size[1];
+      } else {
+        vlen = 0;
+      }
+      if (out->muopt->size[1] > vlen) {
+        vlen = out->muopt->size[1];
+      }
+    }
+    use_restreigen = (vlen == 0);
+    if (use_restreigen || ((r13->size[0] != 0) && (out->muopt->size[1] != 0))) {
+      m = r13->size[0];
+    } else {
+      m = 0;
+    }
+    if (use_restreigen || ((r14->size[0] != 0) && (out->muopt->size[1] != 0))) {
+      nx = r14->size[0];
+    } else {
+      nx = 0;
+    }
+    c_i = out->muopt->size[1] - 1;
+    i = b_out->size[0] * b_out->size[1];
+    b_out->size[0] = r13->size[0];
+    b_out->size[1] = out->muopt->size[1];
+    emxEnsureCapacity_real_T(b_out, i);
+    for (i = 0; i <= c_i; i++) {
+      loop_ub = r13->size[0];
+      for (i1 = 0; i1 < loop_ub; i1++) {
+        b_out->data[i1 + b_out->size[0] * i] =
+            out->muopt->data[(r13->data[i1] + out->muopt->size[0] * i) - 1];
+      }
+    }
+    emxFree_int32_T(&r13);
+    c_i = out->muopt->size[1] - 1;
+    i = b_sigmaini->size[0] * b_sigmaini->size[1];
+    b_sigmaini->size[0] = r14->size[0];
+    b_sigmaini->size[1] = out->muopt->size[1];
+    emxEnsureCapacity_real_T(b_sigmaini, i);
+    for (i = 0; i <= c_i; i++) {
+      loop_ub = r14->size[0];
+      for (i1 = 0; i1 < loop_ub; i1++) {
+        b_sigmaini->data[i1 + b_sigmaini->size[0] * i] =
+            out->muopt->data[(r14->data[i1] + out->muopt->size[0] * i) - 1];
+      }
+    }
+    emxFree_int32_T(&r14);
+    i = out->muopt->size[0] * out->muopt->size[1];
+    out->muopt->size[0] = m + nx;
+    out->muopt->size[1] = vlen;
+    emxEnsureCapacity_real_T(out->muopt, i);
+    for (i = 0; i < vlen; i++) {
+      for (i1 = 0; i1 < m; i1++) {
+        out->muopt->data[i1 + out->muopt->size[0] * i] =
+            b_out->data[i1 + m * i];
+      }
+    }
+    for (i = 0; i < vlen; i++) {
+      for (i1 = 0; i1 < nx; i1++) {
+        out->muopt->data[(i1 + m) + out->muopt->size[0] * i] =
+            b_sigmaini->data[i1 + nx * i];
       }
     }
     nx = NanGroups->size[0] - 1;
@@ -4660,77 +4535,24 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
         vlen++;
       }
     }
-    if ((r14->size[0] != 0) && (out->muopt->size[1] != 0)) {
-      vlen = out->muopt->size[1];
-    } else if ((r15->size[0] != 0) && (out->muopt->size[1] != 0)) {
-      vlen = out->muopt->size[1];
-    } else {
-      if (out->muopt->size[1] > 0) {
-        vlen = out->muopt->size[1];
-      } else {
-        vlen = 0;
-      }
-      if (out->muopt->size[1] > vlen) {
-        vlen = out->muopt->size[1];
-      }
-    }
-    use_restreigen = (vlen == 0);
-    if (use_restreigen || ((r14->size[0] != 0) && (out->muopt->size[1] != 0))) {
-      m = r14->size[0];
-    } else {
-      m = 0;
-    }
-    if (use_restreigen || ((r15->size[0] != 0) && (out->muopt->size[1] != 0))) {
-      nx = r15->size[0];
-    } else {
-      nx = 0;
-    }
-    c_i = out->muopt->size[1] - 1;
-    i = b_out->size[0] * b_out->size[1];
-    b_out->size[0] = r14->size[0];
-    b_out->size[1] = out->muopt->size[1];
-    emxEnsureCapacity_real_T(b_out, i);
-    for (i = 0; i <= c_i; i++) {
-      loop_ub = r14->size[0];
-      for (i1 = 0; i1 < loop_ub; i1++) {
-        b_out->data[i1 + b_out->size[0] * i] =
-            out->muopt->data[(r14->data[i1] + out->muopt->size[0] * i) - 1];
-      }
-    }
-    emxFree_int32_T(&r14);
-    c_i = out->muopt->size[1] - 1;
-    i = b_nsamp->size[0] * b_nsamp->size[1];
-    b_nsamp->size[0] = r15->size[0];
-    b_nsamp->size[1] = out->muopt->size[1];
-    emxEnsureCapacity_real_T(b_nsamp, i);
-    for (i = 0; i <= c_i; i++) {
-      loop_ub = r15->size[0];
-      for (i1 = 0; i1 < loop_ub; i1++) {
-        b_nsamp->data[i1 + b_nsamp->size[0] * i] =
-            out->muopt->data[(r15->data[i1] + out->muopt->size[0] * i) - 1];
+    c_i = out->sigmaopt->size[0];
+    vlen = out->sigmaopt->size[1];
+    loop_ub = r15->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      for (i1 = 0; i1 < vlen; i1++) {
+        for (i2 = 0; i2 < c_i; i2++) {
+          out->sigmaopt->data[(i2 + out->sigmaopt->size[0] * i1) +
+                              out->sigmaopt->size[0] * out->sigmaopt->size[1] *
+                                  (r15->data[i] - 1)] = rtNaN;
+        }
       }
     }
     emxFree_int32_T(&r15);
-    i = out->muopt->size[0] * out->muopt->size[1];
-    out->muopt->size[0] = m + nx;
-    out->muopt->size[1] = vlen;
-    emxEnsureCapacity_real_T(out->muopt, i);
-    for (i = 0; i < vlen; i++) {
-      for (i1 = 0; i1 < m; i1++) {
-        out->muopt->data[i1 + out->muopt->size[0] * i] =
-            b_out->data[i1 + m * i];
-      }
-    }
-    for (i = 0; i < vlen; i++) {
-      for (i1 = 0; i1 < nx; i1++) {
-        out->muopt->data[(i1 + m) + out->muopt->size[0] * i] =
-            b_nsamp->data[i1 + nx * i];
-      }
-    }
+    /*  assign NaN on the empty clusters */
     nx = NanGroups->size[0] - 1;
     m = 0;
     for (b_i = 0; b_i <= nx; b_i++) {
-      if (NanGroups->data[b_i]) {
+      if (!NanGroups->data[b_i]) {
         m++;
       }
     }
@@ -4740,29 +4562,15 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
     emxEnsureCapacity_int32_T(r16, i);
     vlen = 0;
     for (b_i = 0; b_i <= nx; b_i++) {
-      if (NanGroups->data[b_i]) {
+      if (!NanGroups->data[b_i]) {
         r16->data[vlen] = b_i + 1;
         vlen++;
       }
     }
-    c_i = out->sigmaopt->size[0];
-    vlen = out->sigmaopt->size[1];
-    loop_ub = r16->size[0];
-    for (i = 0; i < loop_ub; i++) {
-      for (i1 = 0; i1 < vlen; i1++) {
-        for (i2 = 0; i2 < c_i; i2++) {
-          out->sigmaopt->data[(i2 + out->sigmaopt->size[0] * i1) +
-                              out->sigmaopt->size[0] * out->sigmaopt->size[1] *
-                                  (r16->data[i] - 1)] = rtNaN;
-        }
-      }
-    }
-    emxFree_int32_T(&r16);
-    /*  assign NaN on the empty clusters */
     nx = NanGroups->size[0] - 1;
     m = 0;
     for (b_i = 0; b_i <= nx; b_i++) {
-      if (!NanGroups->data[b_i]) {
+      if (NanGroups->data[b_i]) {
         m++;
       }
     }
@@ -4772,26 +4580,8 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
     emxEnsureCapacity_int32_T(r17, i);
     vlen = 0;
     for (b_i = 0; b_i <= nx; b_i++) {
-      if (!NanGroups->data[b_i]) {
+      if (NanGroups->data[b_i]) {
         r17->data[vlen] = b_i + 1;
-        vlen++;
-      }
-    }
-    nx = NanGroups->size[0] - 1;
-    m = 0;
-    for (b_i = 0; b_i <= nx; b_i++) {
-      if (NanGroups->data[b_i]) {
-        m++;
-      }
-    }
-    emxInit_int32_T(&r18, 1);
-    i = r18->size[0];
-    r18->size[0] = m;
-    emxEnsureCapacity_int32_T(r18, i);
-    vlen = 0;
-    for (b_i = 0; b_i <= nx; b_i++) {
-      if (NanGroups->data[b_i]) {
-        r18->data[vlen] = b_i + 1;
         vlen++;
       }
     }
@@ -4802,9 +4592,9 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
     i = sigmaini->size[0] * sigmaini->size[1] * sigmaini->size[2];
     sigmaini->size[0] = out->sigmaopt->size[0];
     sigmaini->size[1] = out->sigmaopt->size[1];
-    sigmaini->size[2] = r17->size[0];
+    sigmaini->size[2] = r16->size[0];
     emxEnsureCapacity_real_T(sigmaini, i);
-    loop_ub = r17->size[0];
+    loop_ub = r16->size[0];
     for (i = 0; i < loop_ub; i++) {
       for (i1 = 0; i1 <= vlen; i1++) {
         for (i2 = 0; i2 <= c_i; i2++) {
@@ -4813,17 +4603,17 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
               out->sigmaopt
                   ->data[(i2 + out->sigmaopt->size[0] * i1) +
                          out->sigmaopt->size[0] * out->sigmaopt->size[1] *
-                             (r17->data[i] - 1)];
+                             (r16->data[i] - 1)];
         }
       }
     }
-    emxFree_int32_T(&r17);
+    emxFree_int32_T(&r16);
     i = U->size[0] * U->size[1] * U->size[2];
     U->size[0] = out->sigmaopt->size[0];
     U->size[1] = out->sigmaopt->size[1];
-    U->size[2] = r18->size[0];
+    U->size[2] = r17->size[0];
     emxEnsureCapacity_real_T(U, i);
-    loop_ub = r18->size[0];
+    loop_ub = r17->size[0];
     for (i = 0; i < loop_ub; i++) {
       for (i1 = 0; i1 <= nx; i1++) {
         for (i2 = 0; i2 <= m; i2++) {
@@ -4831,11 +4621,11 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
               out->sigmaopt
                   ->data[(i2 + out->sigmaopt->size[0] * i1) +
                          out->sigmaopt->size[0] * out->sigmaopt->size[1] *
-                             (r18->data[i] - 1)];
+                             (r17->data[i] - 1)];
         }
       }
     }
-    emxFree_int32_T(&r18);
+    emxFree_int32_T(&r17);
     b_cat(sigmaini, U, out->sigmaopt);
   }
   emxFree_real_T(&U);
@@ -4852,26 +4642,26 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
   /*  else if  equalweights is true */
   /*  ll(i,j) is log( f(x_i|\theta_j)) */
   /*  f(x_i|\theta_j) is multivariate normal with theta_j =(mu_j, \Sigma_j) */
-  emxInit_boolean_T(&r12, 2);
+  emxInit_boolean_T(&r11, 2);
   if (equalweights) {
     for (j = 0; j < loop_ub_tmp; j++) {
       loop_ub = out->muopt->size[1];
-      i = r10->size[0] * r10->size[1];
-      r10->size[0] = 1;
-      r10->size[1] = out->muopt->size[1];
-      emxEnsureCapacity_boolean_T(r10, i);
+      i = r9->size[0] * r9->size[1];
+      r9->size[0] = 1;
+      r9->size[1] = out->muopt->size[1];
+      emxEnsureCapacity_boolean_T(r9, i);
       for (i = 0; i < loop_ub; i++) {
-        r10->data[i] = rtIsNaN(out->muopt->data[j + out->muopt->size[0] * i]);
+        r9->data[i] = rtIsNaN(out->muopt->data[j + out->muopt->size[0] * i]);
       }
-      i = r12->size[0] * r12->size[1];
-      r12->size[0] = 1;
-      r12->size[1] = r10->size[1];
-      emxEnsureCapacity_boolean_T(r12, i);
-      loop_ub = r10->size[1];
+      i = r11->size[0] * r11->size[1];
+      r11->size[0] = 1;
+      r11->size[1] = r9->size[1];
+      emxEnsureCapacity_boolean_T(r11, i);
+      loop_ub = r9->size[1];
       for (i = 0; i < loop_ub; i++) {
-        r12->data[i] = !r10->data[i];
+        r11->data[i] = !r9->data[i];
       }
-      if (c_any(r12)) {
+      if (c_any(r11)) {
         /* logmvnpdfFS produces log of Multivariate normal probability density
          * function (pdf) */
         /*  */
@@ -5258,12 +5048,12 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
          * equivalent. */
         /*  Take Choleski of Sigma */
         loop_ub = out->sigmaopt->size[0];
-        c_loop_ub = out->sigmaopt->size[1];
+        b_loop_ub = out->sigmaopt->size[1];
         i = Yselj->size[0] * Yselj->size[1];
         Yselj->size[0] = out->sigmaopt->size[0];
         Yselj->size[1] = out->sigmaopt->size[1];
         emxEnsureCapacity_real_T(Yselj, i);
-        for (i = 0; i < c_loop_ub; i++) {
+        for (i = 0; i < b_loop_ub; i++) {
           for (i1 = 0; i1 < loop_ub; i1++) {
             Yselj->data[i1 + Yselj->size[0] * i] =
                 out->sigmaopt
@@ -5289,17 +5079,17 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
           b_out->size[1] = out->Y->size[1];
           emxEnsureCapacity_real_T(b_out, i);
           for (i = 0; i < loop_ub; i++) {
-            c_loop_ub = out->Y->size[0];
-            for (i1 = 0; i1 < c_loop_ub; i1++) {
+            b_loop_ub = out->Y->size[0];
+            for (i1 = 0; i1 < b_loop_ub; i1++) {
               b_out->data[i1 + b_out->size[0] * i] =
                   out->Y->data[i1 + out->Y->size[0] * i] -
                   out->muopt->data[j + out->muopt->size[0] * i];
             }
           }
-          b_mldivide(Yselj, eyev, r8);
-          b_mtimes(b_out, r8, r7);
-          power(r7, r8);
-          sum(r8, qqunassigned);
+          b_mldivide(Yselj, eyev, r7);
+          b_mtimes(b_out, r7, r5);
+          power(r5, r7);
+          sum(r7, qqunassigned);
           loop_ub = qqunassigned->size[0];
           for (i = 0; i < loop_ub; i++) {
             ll->data[i + ll->size[0] * j] = -0.5 * qqunassigned->data[i] - iup;
@@ -5318,22 +5108,22 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
   } else {
     for (j = 0; j < loop_ub_tmp; j++) {
       loop_ub = out->muopt->size[1];
-      i = r10->size[0] * r10->size[1];
-      r10->size[0] = 1;
-      r10->size[1] = out->muopt->size[1];
-      emxEnsureCapacity_boolean_T(r10, i);
+      i = r9->size[0] * r9->size[1];
+      r9->size[0] = 1;
+      r9->size[1] = out->muopt->size[1];
+      emxEnsureCapacity_boolean_T(r9, i);
       for (i = 0; i < loop_ub; i++) {
-        r10->data[i] = rtIsNaN(out->muopt->data[j + out->muopt->size[0] * i]);
+        r9->data[i] = rtIsNaN(out->muopt->data[j + out->muopt->size[0] * i]);
       }
-      i = r12->size[0] * r12->size[1];
-      r12->size[0] = 1;
-      r12->size[1] = r10->size[1];
-      emxEnsureCapacity_boolean_T(r12, i);
-      loop_ub = r10->size[1];
+      i = r11->size[0] * r11->size[1];
+      r11->size[0] = 1;
+      r11->size[1] = r9->size[1];
+      emxEnsureCapacity_boolean_T(r11, i);
+      loop_ub = r9->size[1];
       for (i = 0; i < loop_ub; i++) {
-        r12->data[i] = !r10->data[i];
+        r11->data[i] = !r9->data[i];
       }
-      if (c_any(r12)) {
+      if (c_any(r11)) {
         ilow = log(nopt->data[j] / h);
         /* logmvnpdfFS produces log of Multivariate normal probability density
          * function (pdf) */
@@ -5721,12 +5511,12 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
          * equivalent. */
         /*  Take Choleski of Sigma */
         loop_ub = out->sigmaopt->size[0];
-        c_loop_ub = out->sigmaopt->size[1];
+        b_loop_ub = out->sigmaopt->size[1];
         i = Yselj->size[0] * Yselj->size[1];
         Yselj->size[0] = out->sigmaopt->size[0];
         Yselj->size[1] = out->sigmaopt->size[1];
         emxEnsureCapacity_real_T(Yselj, i);
-        for (i = 0; i < c_loop_ub; i++) {
+        for (i = 0; i < b_loop_ub; i++) {
           for (i1 = 0; i1 < loop_ub; i1++) {
             Yselj->data[i1 + Yselj->size[0] * i] =
                 out->sigmaopt
@@ -5755,17 +5545,17 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
           b_out->size[1] = out->Y->size[1];
           emxEnsureCapacity_real_T(b_out, i);
           for (i = 0; i < loop_ub; i++) {
-            c_loop_ub = out->Y->size[0];
-            for (i1 = 0; i1 < c_loop_ub; i1++) {
+            b_loop_ub = out->Y->size[0];
+            for (i1 = 0; i1 < b_loop_ub; i1++) {
               b_out->data[i1 + b_out->size[0] * i] =
                   out->Y->data[i1 + out->Y->size[0] * i] -
                   out->muopt->data[j + out->muopt->size[0] * i];
             }
           }
-          b_mldivide(Yselj, eyev, r8);
-          b_mtimes(b_out, r8, r7);
-          power(r7, r8);
-          sum(r8, qqunassigned);
+          b_mldivide(Yselj, eyev, r7);
+          b_mtimes(b_out, r7, r5);
+          power(r5, r7);
+          sum(r7, qqunassigned);
           loop_ub = qqunassigned->size[0];
           for (i = 0; i < loop_ub; i++) {
             qqunassigned->data[i] = -0.5 * qqunassigned->data[i] - iup;
@@ -5786,9 +5576,9 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
       }
     }
   }
-  emxFree_boolean_T(&r10);
-  emxFree_boolean_T(&r12);
-  emxFree_real_T(&r7);
+  emxFree_boolean_T(&r9);
+  emxFree_boolean_T(&r11);
+  emxFree_real_T(&r5);
   emxFree_real_T(&Yselj);
   emxFree_real_T(&nopt);
   emxFree_real_T(&eyev);
@@ -5881,8 +5671,8 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
     for (i1 = 0; i1 < loop_ub; i1++) {
       r->data[i1] = (int)qqunassigned->data[i + i1];
     }
-    c_loop_ub = r->size[0];
-    for (i1 = 0; i1 < c_loop_ub; i1++) {
+    b_loop_ub = r->size[0];
+    for (i1 = 0; i1 < b_loop_ub; i1++) {
       idxmixt->data[r->data[i1] - 1] = 0;
     }
     i1 = r->size[0];
@@ -5902,18 +5692,18 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
     /*  Note that if there was convergence NlogL should be exactly equal to */
     /*  -vopt */
     loop_ub = ll->size[1];
-    i = b_nsamp->size[0] * b_nsamp->size[1];
-    b_nsamp->size[0] = indold->size[0];
-    b_nsamp->size[1] = ll->size[1];
-    emxEnsureCapacity_real_T(b_nsamp, i);
+    i = b_sigmaini->size[0] * b_sigmaini->size[1];
+    b_sigmaini->size[0] = indold->size[0];
+    b_sigmaini->size[1] = ll->size[1];
+    emxEnsureCapacity_real_T(b_sigmaini, i);
     for (i = 0; i < loop_ub; i++) {
-      c_loop_ub = indold->size[0];
-      for (i1 = 0; i1 < c_loop_ub; i1++) {
-        b_nsamp->data[i1 + b_nsamp->size[0] * i] =
+      b_loop_ub = indold->size[0];
+      for (i1 = 0; i1 < b_loop_ub; i1++) {
+        b_sigmaini->data[i1 + b_sigmaini->size[0] * i] =
             ll->data[(indold->data[i1] + ll->size[0] * i) - 1];
       }
     }
-    NlogLmixt = -c_estepFS(b_nsamp);
+    NlogLmixt = -c_estepFS(b_sigmaini);
   } else {
     if (h + 1.0 > out->Y->size[0]) {
       i = 0;
@@ -5930,8 +5720,8 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
     for (i1 = 0; i1 < loop_ub; i1++) {
       r->data[i1] = (int)x->data[i + i1];
     }
-    c_loop_ub = r->size[0];
-    for (i1 = 0; i1 < c_loop_ub; i1++) {
+    b_loop_ub = r->size[0];
+    for (i1 = 0; i1 < b_loop_ub; i1++) {
       randk->data[r->data[i1] - 1] = 0.0;
     }
     i1 = r->size[0];
@@ -5945,7 +5735,7 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
       out->postprob->data[r->data[i] - 1] = 0.0;
     }
   }
-  emxFree_real_T(&b_nsamp);
+  emxFree_real_T(&b_sigmaini);
   emxFree_int32_T(&idx);
   emxFree_int32_T(&r);
   emxFree_int32_T(&indold);
@@ -6009,7 +5799,7 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
   }
   /*  Find number of constraints which are imposed on the covariance matrices */
   /*  Find number of restricted eigenvalues for each group */
-  emxInit_int32_T(&r19, 1);
+  emxInit_int32_T(&r18, 1);
   for (j = 0; j < loop_ub_tmp; j++) {
     loop_ub = randk->size[0];
     i = NanGroups->size[0];
@@ -6035,32 +5825,32 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
           m++;
         }
       }
-      i = r19->size[0];
-      r19->size[0] = m;
-      emxEnsureCapacity_int32_T(r19, i);
+      i = r18->size[0];
+      r18->size[0] = m;
+      emxEnsureCapacity_int32_T(r18, i);
       vlen = 0;
       for (b_i = 0; b_i <= nx; b_i++) {
         if (randk->data[b_i] == (double)j + 1.0) {
-          r19->data[vlen] = b_i + 1;
+          r18->data[vlen] = b_i + 1;
           vlen++;
         }
       }
       loop_ub = out->Y->size[1];
       i = b_out->size[0] * b_out->size[1];
-      b_out->size[0] = r19->size[0];
+      b_out->size[0] = r18->size[0];
       b_out->size[1] = out->Y->size[1];
       emxEnsureCapacity_real_T(b_out, i);
       for (i = 0; i < loop_ub; i++) {
-        c_loop_ub = r19->size[0];
-        for (i1 = 0; i1 < c_loop_ub; i1++) {
+        b_loop_ub = r18->size[0];
+        for (i1 = 0; i1 < b_loop_ub; i1++) {
           b_out->data[i1 + b_out->size[0] * i] =
-              out->Y->data[(r19->data[i1] + out->Y->size[0] * i) - 1];
+              out->Y->data[(r18->data[i1] + out->Y->size[0] * i) - 1];
         }
       }
       /*  disp(['group' num2str(j) num2str(covj)]) */
       /*          try */
-      cov(b_out, r8);
-      b_eig(r8, Uj, Lambdaj);
+      cov(b_out, r7);
+      b_eig(r7, Uj, Lambdaj);
       /*          catch */
       /*              jj=100; */
       /*          end */
@@ -6076,9 +5866,9 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
     /*      eigrestr((v*(j-1)+1):j*v)=diag(values); */
     /*  */
   }
-  emxFree_real_T(&r8);
+  emxFree_real_T(&r7);
   emxFree_real_T(&b_out);
-  emxFree_int32_T(&r19);
+  emxFree_int32_T(&r18);
   emxFree_creal_T(&values);
   emxFree_creal_T(&Lambdaj);
   emxFree_creal_T(&Uj);
@@ -6086,24 +5876,11 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
   emxFree_real_T(&randk);
   /*  Compute INFORMATION CRITERIA */
   /*  add to npar the number of free covariance parameters */
-  if (restrnum == 1) {
-    /*  traditional eigenvalue restriction */
-    iup = ((iup + 0.5 * (double)out->Y->size[1] *
-                      ((double)out->Y->size[1] - 1.0) * k) +
-           ((double)out->Y->size[1] * k - 1.0) *
-               (1.0 - 1.0 / b_restrfactor_data[0])) +
-          1.0;
-  } else {
-    /*  determinant restriction */
-    iup = (((iup + 0.5 * (double)out->Y->size[1] *
-                       ((double)out->Y->size[1] - 1.0) * k) +
-            (k - 1.0) *
-                (1.0 - 1.0 / rt_powd_snf(b_restrfactor_data[0],
-                                         1.0 / (double)out->Y->size[1]))) +
-           1.0) +
-          k * ((double)out->Y->size[1] - 1.0) *
-              (1.0 - 1.0 / b_restrfactor_data[1]);
-  }
+  /*  traditional eigenvalue restriction */
+  iup = ((iup +
+          0.5 * (double)out->Y->size[1] * ((double)out->Y->size[1] - 1.0) * k) +
+         ((double)out->Y->size[1] * k - 1.0) * (1.0 - 1.0 / b_restrfactor)) +
+        1.0;
   ilow = log(h);
   if (mixt > 0.0) {
     /*  MIXMIX = BIC which uses parameters estimated using the mixture
@@ -6157,6 +5934,7 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
   } else {
     /*  Store original data matrix */
   }
+  /* + */
 }
 
 /* End of code generation (tclust_wrapper.c) */

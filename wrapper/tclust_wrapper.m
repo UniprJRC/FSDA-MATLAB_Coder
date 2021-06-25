@@ -1,5 +1,5 @@
-function [out,C]=tclust_wrapper(Y,k,alpha,restrfactor,  cshape,equalweights,...
-    mixt,msg,nocheck,nsamp,RandNumbForNini,refsteps,reftol,restrtype,startv1,Ysave)
+function [out,C]=tclust_wrapper(Y,k,alpha,restrfactor,  equalweights,...
+    mixt,msg,nocheck,nsamp,RandNumbForNini,refsteps,reftol,startv1,Ysave)
 % Wrapper function for tclust (when restrfactor is a scalar or vector). 
 % NV pair names are not taken as inputs. Instead, just the values are taken
 % as inputs.
@@ -16,16 +16,13 @@ assert(isscalar(k));
 assert(isa(alpha,'double'));
 assert(isscalar(alpha));
 
-% restrfactor: a scalar or a 2x1 vector of type double
+% restrfactor: a scalar of type double (when it is is struct it is dealt by
+% wrapper1)
 assert(isa(restrfactor,'double'));
-assert(all(size(restrfactor) <= [2 1]));
+assert(isscalar(restrfactor));
 
 % Optional input arguments (name / pairs) in (case insensitive)
 % alphabetical order
-
-% cshape: a scalar of type double
-assert(isa(cshape,'double'));
-assert(isscalar(cshape));
 
 % equalweights is a boolean
 assert(isa(equalweights, 'logical'));
@@ -57,9 +54,6 @@ assert(isscalar(refsteps));
 assert(isa(reftol,'double'));
 assert(isscalar(reftol));
 
-assert(isa(restrtype, 'char'));
-assert(all(size(restrtype) == [1 5]));
-
 % startv1 is a boolean
 assert(isa(startv1, 'logical'));
 
@@ -67,9 +61,10 @@ assert(isa(startv1, 'logical'));
 assert(isa(Ysave, 'logical'));
 
 [out,C] = tclust(Y,k,alpha,restrfactor, ...
-    'cshape',cshape,'equalweights',equalweights,'mixt',mixt,'msg',msg,...
+    'equalweights',equalweights,'mixt',mixt,'msg',msg,...
     'nocheck',nocheck,'nsamp',nsamp,'RandNumbForNini',RandNumbForNini,...
-    'refsteps',refsteps,'reftol',reftol,'restrtype',restrtype,'startv1',startv1,'Ysave',Ysave);
+    'refsteps',refsteps,'reftol',reftol,'startv1',startv1,'Ysave',Ysave,...+
+    'cshape',1e10,'restrtype','eigen');
 
 coder.cstructname(out,'struct_tclust_T');
 

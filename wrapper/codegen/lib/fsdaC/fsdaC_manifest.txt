@@ -126,9 +126,6 @@ D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\eigStandard.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\xzlangeM.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\xzlanhs.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\permute.c
-D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\restrdeter.c
-D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\prod.c
-D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\matrix_to_integer_power.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\estepFS.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\logmvnpdfFS.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\tclust_wrapper1.c
@@ -310,9 +307,6 @@ D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\eigStandard.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\xzlangeM.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\xzlanhs.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\permute.h
-D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\restrdeter.h
-D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\prod.h
-D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\matrix_to_integer_power.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\estepFS.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\logmvnpdfFS.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\tclust_wrapper1.h

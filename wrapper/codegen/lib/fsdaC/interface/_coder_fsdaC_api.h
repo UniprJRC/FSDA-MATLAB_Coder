@@ -60,8 +60,8 @@ enum d_matlab_internal_coder_tabular
 typedef enum d_matlab_internal_coder_tabular d_matlab_internal_coder_tabular;
 #endif /* typedef_d_matlab_internal_coder_tabular */
 
-#ifndef typedef_struct1_T
-#define typedef_struct1_T
+#ifndef typedef_struct_tclustrestrfactor_T
+#define typedef_struct_tclustrestrfactor_T
 typedef struct {
   char_T pars[3];
   real_T cdet;
@@ -79,8 +79,8 @@ typedef struct {
   real_T sortsh;
   real_T v;
   real_T zerotol;
-} struct1_T;
-#endif /* typedef_struct1_T */
+} struct_tclustrestrfactor_T;
+#endif /* typedef_struct_tclustrestrfactor_T */
 
 #ifndef struct_emxArray_real_T
 #define struct_emxArray_real_T
@@ -552,25 +552,24 @@ void fsdaC_xil_shutdown(void);
 void fsdaC_xil_terminate(void);
 
 void tclust_wrapper(emxArray_real_T *Y, real_T k, real_T alpha,
-                    real_T restrfactor_data[], int32_T restrfactor_size[2],
-                    real_T cshape, boolean_T equalweights, real_T mixt,
+                    real_T restrfactor, boolean_T equalweights, real_T mixt,
                     real_T msg, boolean_T nocheck, emxArray_real_T *nsamp,
                     emxArray_real_T *RandNumbForNini, real_T refsteps,
-                    real_T reftol, char_T restrtype[5], boolean_T startv1,
-                    boolean_T Ysave, struct_tclust_T *out, emxArray_real_T *C);
+                    real_T reftol, boolean_T startv1, boolean_T Ysave,
+                    struct_tclust_T *out, emxArray_real_T *C);
 
 void tclust_wrapper1(emxArray_real_T *Y, real_T k, real_T alpha,
-                     struct1_T *restrfactor, real_T cshape,
+                     struct_tclustrestrfactor_T *restrfactor,
                      boolean_T equalweights, real_T mixt, real_T msg,
                      boolean_T nocheck, emxArray_real_T *nsamp,
                      emxArray_real_T *RandNumbForNini, real_T refsteps,
-                     real_T reftol, char_T restrtype[5], boolean_T startv1,
-                     boolean_T Ysave, struct_tclust_T *out, emxArray_real_T *C);
+                     real_T reftol, boolean_T startv1, boolean_T Ysave,
+                     struct_tclust_T *out, emxArray_real_T *C);
 
-void tclust_wrapper1_api(const mxArray *const prhs[16], int32_T nlhs,
+void tclust_wrapper1_api(const mxArray *const prhs[14], int32_T nlhs,
                          const mxArray *plhs[2]);
 
-void tclust_wrapper_api(const mxArray *const prhs[16], int32_T nlhs,
+void tclust_wrapper_api(const mxArray *const prhs[14], int32_T nlhs,
                         const mxArray *plhs[2]);
 
 #ifdef __cplusplus

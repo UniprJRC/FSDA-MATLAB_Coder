@@ -61,10 +61,10 @@ void unsafe_addt_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[1],
                                      int32_T nrhs, const mxArray *prhs[6]);
 
 void unsafe_tclust_wrapper1_mexFunction(int32_T nlhs, mxArray *plhs[2],
-                                        int32_T nrhs, const mxArray *prhs[16]);
+                                        int32_T nrhs, const mxArray *prhs[14]);
 
 void unsafe_tclust_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[2],
-                                       int32_T nrhs, const mxArray *prhs[16]);
+                                       int32_T nrhs, const mxArray *prhs[14]);
 
 #ifdef __cplusplus
 }

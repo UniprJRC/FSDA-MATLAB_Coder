@@ -22,7 +22,6 @@ restrfactor.sortsh=1;
 restrfactor.v=v;
 restrfactor.zerotol=1e-12;
 
-cshape=10^10;
 equalweights=false;
 mixt=0;
 msg=0;
@@ -31,7 +30,6 @@ nsamp=1000;
 RandNumbForNini=[];
 refsteps=5;
 reftol=1e-7;
-restrtype='deter';
 startv1=true;
 Ysave=false;
 rng('default')
@@ -40,18 +38,18 @@ rng(100);
 % Check whether mex and .m produce the same results
 tic
 [out,C] = tclust(Y,k,alpha,restrfactor, ...
-    'cshape',cshape,'equalweights',equalweights,'mixt',mixt,'msg',msg,...
+   'equalweights',equalweights,'mixt',mixt,'msg',msg,...
     'nocheck',nocheck,'nsamp',nsamp,'RandNumbForNini',RandNumbForNini,...
-    'refsteps',refsteps,'reftol',reftol,'restrtype',restrtype,'startv1',startv1,'Ysave',Ysave);
+    'refsteps',refsteps,'reftol',reftol,'startv1',startv1,'Ysave',Ysave);
 tottime=toc;
 
 % tclust wrapper when restrfactor is a struct
 rng(100);
 tic
 [outMEX,CMEX] = tclust_wrapper1(Y,k,alpha,restrfactor, ...
-    cshape,equalweights,mixt,msg,...
+    equalweights,mixt,msg,...
     nocheck,nsamp,RandNumbForNini,...
-    refsteps,reftol,restrtype,startv1,Ysave);
+    refsteps,reftol,startv1,Ysave);
 tottimeMEX=toc;
 
 % Compare mex time with .m time

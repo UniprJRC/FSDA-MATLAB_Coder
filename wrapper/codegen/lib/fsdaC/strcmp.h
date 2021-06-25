@@ -35,11 +35,7 @@ bool cb_strcmp(const char a[3]);
 
 bool d_strcmp(const char a_data[], const int a_size[2]);
 
-bool db_strcmp(const char a[3]);
-
 bool e_strcmp(const char a_data[], const int a_size[2]);
-
-bool eb_strcmp(const char a[3]);
 
 bool f_strcmp(const char a_data[], const int a_size[2]);
 
@@ -53,15 +49,15 @@ bool j_strcmp(const emxArray_char_T *a);
 
 bool k_strcmp(const emxArray_char_T *a);
 
-bool l_strcmp(const char a[5]);
+void l_strcmp(const char a[3], bool b_bool[7]);
 
-bool m_strcmp(const char a[5]);
+void m_strcmp(const char a[3], bool b_bool[6]);
 
-void n_strcmp(const char a[3], bool b_bool[7]);
+void n_strcmp(const char a[3], bool b_bool[2]);
 
-void o_strcmp(const char a[3], bool b_bool[6]);
+bool o_strcmp(const char a[3]);
 
-void p_strcmp(const char a[3], bool b_bool[2]);
+bool p_strcmp(const char a[3]);
 
 bool q_strcmp(const char a[3]);
 

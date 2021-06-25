@@ -72,8 +72,8 @@ typedef struct {
 } d_matlab_internal_coder_tabular;
 #endif /* typedef_d_matlab_internal_coder_tabular */
 
-#ifndef typedef_struct1_T
-#define typedef_struct1_T
+#ifndef typedef_struct_tclustrestrfactor_T
+#define typedef_struct_tclustrestrfactor_T
 typedef struct {
   char pars[3];
   double cdet;
@@ -91,8 +91,8 @@ typedef struct {
   double sortsh;
   double v;
   double zerotol;
-} struct1_T;
-#endif /* typedef_struct1_T */
+} struct_tclustrestrfactor_T;
+#endif /* typedef_struct_tclustrestrfactor_T */
 
 #ifndef struct_emxArray_real_T
 #define struct_emxArray_real_T

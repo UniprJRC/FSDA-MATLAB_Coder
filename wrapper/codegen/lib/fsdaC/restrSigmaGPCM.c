@@ -435,7 +435,7 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   /*  EVE VEE VVE VVV VEV VVI and VEI require iterations */
   /*  All the other specification do not */
   /*  Model which require more than one iteration in the main loop */
-  n_strcmp(pa_pars, varargin_1);
+  l_strcmp(pa_pars, varargin_1);
   cpc = varargin_1[0];
   for (ret = 0; ret < 6; ret++) {
     if ((int)cpc < (int)varargin_1[ret + 1]) {
@@ -448,7 +448,7 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
     maxiterDSR = 1.0;
   }
   /*  Cases with different shape (they require iteration for the shape) */
-  o_strcmp(pa_pars, b_varargin_1);
+  m_strcmp(pa_pars, b_varargin_1);
   cpc = b_varargin_1[0];
   for (ret = 0; ret < 5; ret++) {
     if ((int)cpc < (int)b_varargin_1[ret + 1]) {
@@ -613,7 +613,7 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
         for (i1 = 0; i1 < ret; i1++) {
           GAMold->data[i1] = r2->data[i1].re;
         }
-        wk->data[j] = c_maximum(GAMold);
+        wk->data[j] = b_maximum(GAMold);
       }
     }
     emxFree_creal_T(&r2);
@@ -1002,7 +1002,7 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
     /*  Make sure niini is a column vector */
     if (d_maximum(lmd) / b_minimum(lmd) >
         rt_powd_snf(pa_cdet, 1.0 / (double)pa_v)) {
-      d_restreigen(lmd, niini, rt_powd_snf(pa_cdet, 1.0 / (double)pa_v),
+      c_restreigen(lmd, niini, rt_powd_snf(pa_cdet, 1.0 / (double)pa_v),
                    pa_zerotol, pa_userepmat);
     }
     /*  lmdnew = new values of vector lmd */
@@ -1577,7 +1577,7 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   /*  EVE VEE VVE VVV VEV VVI and VEI require iterations */
   /*  All the other specification do not */
   /*  Model which require more than one iteration in the main loop */
-  n_strcmp(pa_pars, varargin_1);
+  l_strcmp(pa_pars, varargin_1);
   maxval = varargin_1[0];
   for (loop_ub = 0; loop_ub < 6; loop_ub++) {
     if ((int)maxval < (int)varargin_1[loop_ub + 1]) {
@@ -1590,12 +1590,12 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
     maxiterDSR = 1.0;
   }
   /*  Cases with different shape (they require iteration for the shape) */
-  o_strcmp(pa_pars, b_bv);
+  m_strcmp(pa_pars, b_bv);
   if (!h_maximum(b_bv)) {
     pa_maxiterS = 1.0;
   }
   pa_maxiterR = 20;
-  p_strcmp(pa_pars, bv1);
+  n_strcmp(pa_pars, bv1);
   if (i_maximum(bv1)) {
     /*  maxiterR=pa.maxiterR; */
     cpc = true;
@@ -1869,14 +1869,14 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
     }
     /*  Omega = array of size p-by-p-by-k */
     /*  containing k replicates of matrix V */
-    e_repmat(eyep, niini->size[0], OMG);
+    c_repmat(eyep, niini->size[0], OMG);
     /*  In presence of variable shape */
     /*  compute Wk and wk once and for all. */
     /*  Wk(:,:,j) contains (n_j/n) \Sigma_j */
     /*  wk(j) contains largest eigenvalue of Wk(:,:,j) */
     /*  These two matrices will be used inside routine cpcV */
     emxInit_creal_T(&r4, 1);
-    if (q_strcmp(pa_pars) || r_strcmp(pa_pars)) {
+    if (o_strcmp(pa_pars) || p_strcmp(pa_pars)) {
       i = niini->size[0];
       i1 = Wk->size[0] * Wk->size[1] * Wk->size[2];
       Wk->size[0] = unnamed_idx_0;
@@ -1918,7 +1918,7 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
         for (i1 = 0; i1 < loop_ub; i1++) {
           diageigunsorted->data[i1] = r4->data[i1].re;
         }
-        wk->data[j] = c_maximum(diageigunsorted);
+        wk->data[j] = b_maximum(diageigunsorted);
       }
     }
     emxFree_creal_T(&r4);
@@ -2417,7 +2417,7 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
     /*  Make sure niini is a column vector */
     if (d_maximum(lmd) / b_minimum(lmd) >
         rt_powd_snf(pa_cdet, 1.0 / (double)pa_v)) {
-      d_restreigen(lmd, niini, rt_powd_snf(pa_cdet, 1.0 / (double)pa_v),
+      c_restreigen(lmd, niini, rt_powd_snf(pa_cdet, 1.0 / (double)pa_v),
                    pa_zerotol, pa_userepmat);
     }
     /*  lmdnew = new values of vector lmd */

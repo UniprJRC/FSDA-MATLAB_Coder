@@ -403,7 +403,7 @@ void unsafe_addt_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[1],
 }
 
 void unsafe_tclust_wrapper1_mexFunction(int32_T nlhs, mxArray *plhs[2],
-                                        int32_T nrhs, const mxArray *prhs[16])
+                                        int32_T nrhs, const mxArray *prhs[14])
 {
   emlrtStack st = {
       NULL, /* site */
@@ -414,8 +414,8 @@ void unsafe_tclust_wrapper1_mexFunction(int32_T nlhs, mxArray *plhs[2],
   int32_T b_nlhs;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
-  if (nrhs != 16) {
-    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 16, 4,
+  if (nrhs != 14) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 14, 4,
                         15, "tclust_wrapper1");
   }
   if (nlhs > 2) {
@@ -434,7 +434,7 @@ void unsafe_tclust_wrapper1_mexFunction(int32_T nlhs, mxArray *plhs[2],
 }
 
 void unsafe_tclust_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[2],
-                                       int32_T nrhs, const mxArray *prhs[16])
+                                       int32_T nrhs, const mxArray *prhs[14])
 {
   emlrtStack st = {
       NULL, /* site */
@@ -445,8 +445,8 @@ void unsafe_tclust_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[2],
   int32_T b_nlhs;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
-  if (nrhs != 16) {
-    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 16, 4,
+  if (nrhs != 14) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 14, 4,
                         14, "tclust_wrapper");
   }
   if (nlhs > 2) {
