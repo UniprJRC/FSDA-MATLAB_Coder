@@ -31,6 +31,12 @@ void d_sort(emxArray_real_T *x);
 
 void e_sort(emxArray_real_T *x);
 
+void f_sort(emxArray_real_T *x, emxArray_int32_T *idx);
+
+void g_sort(emxArray_creal_T *x);
+
+void h_sort(emxArray_real_T *x);
+
 void sort(emxArray_real_T *x, emxArray_int32_T *idx);
 
 #ifdef __cplusplus

@@ -204,7 +204,7 @@ static void gyfiltaux(emxArray_real_T *v)
     }
     emxFree_int32_T(&r4);
     emxFree_real_T(&r2);
-    n0 = rt_roundd_snf(b_maximum(pup) * (double)b_v->size[0]);
+    n0 = rt_roundd_snf(c_maximum(pup) * (double)b_v->size[0]);
     emxFree_real_T(&pup);
   }
   emxFree_int32_T(&r);

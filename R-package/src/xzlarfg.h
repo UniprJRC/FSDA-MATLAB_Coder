@@ -23,7 +23,9 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-double xzlarfg(int n, double *alpha1, emxArray_real_T *x, int ix0);
+double b_xzlarfg(int n, double *alpha1, emxArray_real_T *x, int ix0);
+
+double xzlarfg(int n, double *alpha1, double x[3]);
 
 #ifdef __cplusplus
 }

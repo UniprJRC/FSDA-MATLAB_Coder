@@ -32,6 +32,42 @@ void bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
 void c_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
               emxArray_real_T *c);
 
+void d_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
+              emxArray_real_T *c);
+
+void e_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
+              emxArray_boolean_T *c);
+
+void f_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
+              emxArray_boolean_T *c);
+
+void g_bsxfun(const emxArray_boolean_T *a, const emxArray_real_T *b,
+              emxArray_real_T *c);
+
+void h_bsxfun(const emxArray_boolean_T *a, const emxArray_real_T *b,
+              emxArray_real_T *c);
+
+void i_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
+              emxArray_boolean_T *c);
+
+void j_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
+              emxArray_boolean_T *c);
+
+void k_bsxfun(const emxArray_boolean_T *a, const emxArray_real_T *b,
+              emxArray_real_T *c);
+
+void l_bsxfun(const emxArray_boolean_T *a, const emxArray_real_T *b,
+              emxArray_real_T *c);
+
+void m_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
+              emxArray_real_T *c);
+
+void n_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
+              emxArray_real_T *c);
+
+void o_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
+              emxArray_real_T *c);
+
 #ifdef __cplusplus
 }
 #endif

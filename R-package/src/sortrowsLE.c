@@ -14,6 +14,7 @@
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 bool sortrowsLE(const emxArray_real_T *v, const int col[2], int irow1,

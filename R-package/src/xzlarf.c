@@ -14,6 +14,7 @@
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 #include "xgerc.h"
+#include <string.h>
 
 /* Function Definitions */
 void xzlarf(int m, int n, int iv0, double tau, emxArray_real_T *C, int ic0,

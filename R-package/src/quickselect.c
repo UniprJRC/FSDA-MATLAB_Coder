@@ -13,6 +13,7 @@
 #include "quickselect.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Declarations */
 static int thirdOfFive(const emxArray_real_T *v, int ia, int ib);

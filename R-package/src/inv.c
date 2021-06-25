@@ -15,6 +15,7 @@
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 #include "xzgetrf.h"
+#include <string.h>
 
 /* Function Definitions */
 void inv(const emxArray_real_T *x, emxArray_real_T *y)

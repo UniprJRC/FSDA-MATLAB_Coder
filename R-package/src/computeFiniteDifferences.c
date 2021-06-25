@@ -16,6 +16,7 @@
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <string.h>
 
 /* Function Definitions */
 bool computeFiniteDifferences(h_struct_T *obj,

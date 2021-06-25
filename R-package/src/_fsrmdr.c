@@ -57,9 +57,21 @@ void r_fsrmdr(double *yy, double *xx, int *nn, int *pp,
     Bols =  emxCreate_real_T(*nBols, *pBols);   //  Initialize function input argument 'Bols'
     S2 =  emxCreate_real_T(*nS2, *pS2);     //  Initialize function input argument 'S2'
                       
+    //Rprintf("\ny dimensions: %d %d\n", y->size[0], y->size[1]); 
+    //disp_dble(y->data, y->size[0]);
+    //Rprintf("\nX dimensions: %d, %d \n", X->size[0], X->size[1]); 
+    //disp_lmat_cm(X->data, X->size[0], X->size[1]);
+    //Rprintf("\nbsb dimensions: %d %d\n", bsb->size[0], bsb->size[1]); 
+    //Rprintf("\nbsbsteps dimensions: %d %d\n", bsbsteps->size[0], bsbsteps->size[1]); 
+    //Rprintf("\nconstr dimensions: %d %d\n", constr->size[0], constr->size[1]); 
+
+    //Rprintf("\nCalling FSRmdr ...\n");                  
+
     FSRmdr_wrapper(y, X, bsb, b_bsbmfullrank, bsbsteps, constr, *init, b_intercept, 
         b_internationaltrade, b_msg, b_nocheck, threshlevoutX_data, threshlevoutX_size, mdr, Un, BB, Bols, S2);
     
+    //Rprintf("%s ", "Returning from FSRmdr and copying parameters ...\n");                  
+
     if(mdr->size[0] != *nmdr || mdr->size[1] != *pmdr)
         Rprintf("\nWARNING: the size of output matrix mdr changed: was %d, %d, now is %d, %d \n", *nmdr, *pmdr, mdr->size[0], mdr->size[1]); 
     if(Un->size[0] != *nUn || Un->size[1] != *pUn)

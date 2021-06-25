@@ -20,6 +20,7 @@
 #include <math.h>
 #include <stddef.h>
 #include <stdio.h>
+#include <string.h>
 
 /* Function Definitions */
 double RobRegrSize(double n, double p, double bdp)
@@ -1570,12 +1571,12 @@ double RobRegrSize(double n, double p, double bdp)
     for (ib_size = 0; ib_size < 9; ib_size++) {
       b_THseln[ib_size] = THseln[(ib_size + 1) << 1];
     }
-    c_mldivide(b_dv1, b_THseln, b_dv2);
+    d_mldivide(b_dv1, b_THseln, b_dv2);
     yhat_idx_2 = (b_dv2[0] + p * b_dv2[1]) + a * b_dv2[2];
     for (ib_size = 0; ib_size < 9; ib_size++) {
       b_THseln[ib_size] = THseln[((ib_size + 1) << 1) + 1];
     }
-    c_mldivide(b_dv1, b_THseln, b_dv2);
+    d_mldivide(b_dv1, b_THseln, b_dv2);
     a = (b_dv2[0] + p * b_dv2[1]) + a * b_dv2[2];
   } else {
     yhat_idx_0 = THseln[0];

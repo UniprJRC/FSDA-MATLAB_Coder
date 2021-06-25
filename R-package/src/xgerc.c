@@ -13,6 +13,7 @@
 #include "xgerc.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 void xgerc(int m, int n, double alpha1, int ix0, const emxArray_real_T *y,

@@ -15,6 +15,7 @@
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 void array2table(const emxArray_real_T *x, const char varargin_2_Value_data[],

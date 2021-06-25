@@ -335,6 +335,43 @@ void emxEnsureCapacity_int32_T(emxArray_int32_T *emxArray, int oldNumel)
   }
 }
 
+void emxEnsureCapacity_int8_T(emxArray_int8_T *emxArray, int oldNumel)
+{
+  int i;
+  int newNumel;
+  void *newData;
+  if (oldNumel < 0) {
+    oldNumel = 0;
+  }
+  newNumel = 1;
+  for (i = 0; i < emxArray->numDimensions; i++) {
+    newNumel *= emxArray->size[i];
+  }
+  if (newNumel > emxArray->allocatedSize) {
+    i = emxArray->allocatedSize;
+    if (i < 16) {
+      i = 16;
+    }
+    while (i < newNumel) {
+      if (i > 1073741823) {
+        i = MAX_int32_T;
+      } else {
+        i *= 2;
+      }
+    }
+    newData = calloc((unsigned int)i, sizeof(signed char));
+    if (emxArray->data != NULL) {
+      memcpy(newData, emxArray->data, sizeof(signed char) * oldNumel);
+      if (emxArray->canFreeData) {
+        free(emxArray->data);
+      }
+    }
+    emxArray->data = (signed char *)newData;
+    emxArray->allocatedSize = i;
+    emxArray->canFreeData = true;
+  }
+}
+
 void emxEnsureCapacity_real32_T(emxArray_real32_T *emxArray, int oldNumel)
 {
   int i;
@@ -596,6 +633,17 @@ void emxFreeStruct_struct_T5(h_struct_T *pStruct)
   emxFree_boolean_T(&pStruct->hasUB);
 }
 
+void emxFreeStruct_struct_tclust_T(struct_tclust_T *pStruct)
+{
+  emxFree_real_T(&pStruct->muopt);
+  emxFree_real_T(&pStruct->sigmaopt);
+  emxFree_real_T(&pStruct->idx);
+  emxFree_real_T(&pStruct->postprob);
+  emxFree_real_T(&pStruct->bs);
+  emxFree_real_T(&pStruct->fullsol);
+  emxFree_real_T(&pStruct->Y);
+}
+
 void emxFreeStruct_table(table *pStruct)
 {
   emxFreeMatrix_cell_wrap_6(pStruct->data);
@@ -669,6 +717,19 @@ void emxFree_int32_T(emxArray_int32_T **pEmxArray)
     free((*pEmxArray)->size);
     free(*pEmxArray);
     *pEmxArray = (emxArray_int32_T *)NULL;
+  }
+}
+
+void emxFree_int8_T(emxArray_int8_T **pEmxArray)
+{
+  if (*pEmxArray != (emxArray_int8_T *)NULL) {
+    if (((*pEmxArray)->data != (signed char *)NULL) &&
+        (*pEmxArray)->canFreeData) {
+      free((*pEmxArray)->data);
+    }
+    free((*pEmxArray)->size);
+    free(*pEmxArray);
+    *pEmxArray = (emxArray_int8_T *)NULL;
   }
 }
 
@@ -903,6 +964,23 @@ void emxInitStruct_struct_T5(f_struct_T *pStruct)
   emxInit_real_T(&pStruct->ydata, 1);
 }
 
+void emxInitStruct_struct_tclust_T(struct_tclust_T *pStruct)
+{
+  emxInit_real_T(&pStruct->muopt, 2);
+  emxInit_real_T(&pStruct->sigmaopt, 3);
+  emxInit_real_T(&pStruct->idx, 1);
+  emxInit_real_T(&pStruct->postprob, 1);
+  pStruct->MIXMIX.size[0] = 0;
+  pStruct->MIXMIX.size[1] = 0;
+  pStruct->MIXCLA.size[0] = 0;
+  pStruct->MIXCLA.size[1] = 0;
+  pStruct->CLACLA.size[0] = 0;
+  pStruct->CLACLA.size[1] = 0;
+  emxInit_real_T(&pStruct->bs, 2);
+  emxInit_real_T(&pStruct->fullsol, 1);
+  emxInit_real_T(&pStruct->Y, 2);
+}
+
 void emxInitStruct_table(table *pStruct)
 {
   c_emxInitStruct_matlab_internal(&pStruct->rowDim);
@@ -982,6 +1060,22 @@ void emxInit_int32_T(emxArray_int32_T **pEmxArray, int numDimensions)
   *pEmxArray = (emxArray_int32_T *)malloc(sizeof(emxArray_int32_T));
   emxArray = *pEmxArray;
   emxArray->data = (int *)NULL;
+  emxArray->numDimensions = numDimensions;
+  emxArray->size = (int *)malloc(sizeof(int) * numDimensions);
+  emxArray->allocatedSize = 0;
+  emxArray->canFreeData = true;
+  for (i = 0; i < numDimensions; i++) {
+    emxArray->size[i] = 0;
+  }
+}
+
+void emxInit_int8_T(emxArray_int8_T **pEmxArray, int numDimensions)
+{
+  emxArray_int8_T *emxArray;
+  int i;
+  *pEmxArray = (emxArray_int8_T *)malloc(sizeof(emxArray_int8_T));
+  emxArray = *pEmxArray;
+  emxArray->data = (signed char *)NULL;
   emxArray->numDimensions = numDimensions;
   emxArray->size = (int *)malloc(sizeof(int) * numDimensions);
   emxArray->allocatedSize = 0;

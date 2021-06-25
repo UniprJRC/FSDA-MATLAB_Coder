@@ -20,7 +20,7 @@
 double b_mod(double x)
 {
   double r;
-  if (rtIsNaN(x) || rtIsInf(x)) {
+  if (rtIsNaN(x)) {
     r = rtNaN;
   } else if (x == 0.0) {
     r = 0.0;
@@ -30,29 +30,6 @@ double b_mod(double x)
       r = 0.0;
     } else if (x < 0.0) {
       r += 100.0;
-    }
-  }
-  return r;
-}
-
-double c_mod(double x, double y)
-{
-  double r;
-  r = x;
-  if (rtIsNaN(x) || rtIsNaN(y) || rtIsInf(x)) {
-    r = rtNaN;
-  } else if (x == 0.0) {
-    r = 0.0;
-  } else if (rtIsInf(y)) {
-    if (x < 0.0) {
-      r = y;
-    }
-  } else {
-    r = fmod(x, y);
-    if (r == 0.0) {
-      r = 0.0;
-    } else if (x < 0.0) {
-      r += y;
     }
   }
   return r;

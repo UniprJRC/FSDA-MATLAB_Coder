@@ -13,6 +13,7 @@
 #include "xgemv.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 void xgemv(int m, int n, const emxArray_real_T *A, int lda,

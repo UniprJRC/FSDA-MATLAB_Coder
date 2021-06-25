@@ -14,6 +14,7 @@
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <string.h>
 
 /* Function Definitions */
 double rt_hypotd_snf(double u0, double u1)

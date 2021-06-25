@@ -21,6 +21,7 @@
 #include "rank.h"
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 void chkinputR(emxArray_real_T *y, emxArray_real_T *X, bool vvarargin_f10,

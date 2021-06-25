@@ -23,9 +23,6 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void b_tcdf(const double x_data[], const int x_size[2], double v,
-            double p_data[], int p_size[2]);
-
 void tcdf(const emxArray_real_T *x, double v, emxArray_real_T *p);
 
 #ifdef __cplusplus

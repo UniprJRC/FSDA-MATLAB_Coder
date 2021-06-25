@@ -18,6 +18,7 @@
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 void b_finv(const emxArray_real_T *p, const emxArray_real_T *v1,

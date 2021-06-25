@@ -14,7 +14,6 @@
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
 #include "median.h"
-#include "mod.h"
 #include "rt_nonfinite.h"
 #include "sort.h"
 #include "vvarstd.h"
@@ -32,8 +31,8 @@ void b_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   emxArray_real_T *med_j;
   emxArray_real_T *xbinned;
   emxArray_real_T *xsor;
-  double b_nbins;
   double d;
+  double d1;
   double ninbins;
   int acoef;
   int b_k;
@@ -448,13 +447,18 @@ void b_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
     ninbins = floor((double)X->size[0] / (double)nbins);
     emxInit_real_T(&b_xsor, 1);
     for (half = 0; half < nbins; half++) {
-      if ((c_mod((double)i + 1.0, nbins) != 0.0) && (half + 1 == nbins)) {
-        b_nbins = (((double)half + 1.0) - 1.0) * ninbins + 1.0;
-        if (b_nbins > (double)i + 1.0) {
+      if (i + 1 == 0) {
+        d = 0.0;
+      } else {
+        d = fmod((double)i + 1.0, nbins);
+      }
+      if ((d != 0.0) && (half + 1 == nbins)) {
+        d = (((double)half + 1.0) - 1.0) * ninbins + 1.0;
+        if (d > (double)i + 1.0) {
           i1 = 0;
           acoef = -1;
         } else {
-          i1 = (int)b_nbins - 1;
+          i1 = (int)d - 1;
           acoef = i;
         }
         loop_ub = acoef - i1;
@@ -466,14 +470,14 @@ void b_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
         }
         xbinned->data[half] = median(b_xsor);
       } else {
-        b_nbins = (((double)half + 1.0) - 1.0) * ninbins + 1.0;
-        d = ((double)half + 1.0) * ninbins;
-        if (b_nbins > d) {
+        d = (((double)half + 1.0) - 1.0) * ninbins + 1.0;
+        d1 = ((double)half + 1.0) * ninbins;
+        if (d > d1) {
           i1 = 0;
           acoef = 0;
         } else {
-          i1 = (int)b_nbins - 1;
-          acoef = (int)d;
+          i1 = (int)d - 1;
+          acoef = (int)d1;
         }
         loop_ub = acoef - i1;
         acoef = b_xsor->size[0];
@@ -574,11 +578,11 @@ void b_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
     break;
   default:
     if (nbins == 0) {
-      b_nbins = 0.0;
+      loop_ub = 0;
     } else {
-      b_nbins = fmod(nbins, 2.0);
+      loop_ub = (int)fmod(nbins, 2.0);
     }
-    if (b_nbins == 1.0) {
+    if (loop_ub == 1.0) {
       ninbins = (double)nbins / ((double)nbins - 0.9);
     }
     break;
@@ -1339,7 +1343,12 @@ void zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
     ninbins = floor((double)X->size[0] / (double)nbins);
     emxInit_real_T(&b_xsor, 1);
     for (ii = 0; ii < nbins; ii++) {
-      if ((c_mod((double)i + 1.0, nbins) != 0.0) && (ii + 1 == nbins)) {
+      if (i + 1 == 0) {
+        d = 0.0;
+      } else {
+        d = fmod((double)i + 1.0, nbins);
+      }
+      if ((d != 0.0) && (ii + 1 == nbins)) {
         d = (((double)ii + 1.0) - 1.0) * ninbins + 1.0;
         if (d > (double)i + 1.0) {
           i1 = 0;

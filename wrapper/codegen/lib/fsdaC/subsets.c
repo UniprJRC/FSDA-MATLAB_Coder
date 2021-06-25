@@ -16,7 +16,6 @@
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
 #include "lexunrank.h"
-#include "mod.h"
 #include "pascal.h"
 #include "rand.h"
 #include "randperm.h"
@@ -2157,8 +2156,8 @@ void d_subsets(emxArray_real_T *nsamp, double n, double p, emxArray_real_T *C,
   double link_data[1000];
   double loc_data[1000];
   double rndsi_data[1000];
-  double b_i;
   double b_nsamp;
+  double denom;
   double j;
   double newEntry;
   double selectedLoc;
@@ -2767,13 +2766,13 @@ void d_subsets(emxArray_real_T *nsamp, double n, double p, emxArray_real_T *C,
       i = (int)((nsamp->data[0] - 1.0) + 1.0);
       for (loop_ub = 0; loop_ub < i; loop_ub++) {
         selectedLoc = b_nsamp - (double)loop_ub;
-        b_i = 1000.0 - t;
+        denom = 1000.0 - t;
         newEntry = selectedLoc / (1000.0 - t);
         j = c_rand();
         while (j > newEntry) {
           t++;
-          b_i--;
-          newEntry += (1.0 - newEntry) * (selectedLoc / b_i);
+          denom--;
+          newEntry += (1.0 - newEntry) * (selectedLoc / denom);
         }
         t++;
         j = c_rand() * ((double)loop_ub + 1.0);
@@ -2803,8 +2802,19 @@ void d_subsets(emxArray_real_T *nsamp, double n, double p, emxArray_real_T *C,
       for (loop_ub = 0; loop_ub < i; loop_ub++) {
         selectedLoc = c_rand() * ((1000.0 - ((double)loop_ub + 1.0)) + 1.0);
         selectedLoc = floor(selectedLoc);
-        b_i = c_mod(selectedLoc, b_nsamp) + 1.0;
-        j = hashTbl_data[(int)b_i - 1];
+        if (rtIsNaN(selectedLoc) || rtIsNaN(b_nsamp)) {
+          denom = rtNaN;
+        } else if (selectedLoc == 0.0) {
+          denom = 0.0;
+        } else {
+          denom = fmod(selectedLoc, b_nsamp);
+          if (denom == 0.0) {
+            denom = 0.0;
+          } else if (selectedLoc < 0.0) {
+            denom += b_nsamp;
+          }
+        }
+        j = hashTbl_data[(int)(denom + 1.0) - 1];
         while ((j > 0.0) && (loc_data[(int)j - 1] != selectedLoc)) {
           j = link_data[(int)j - 1];
         }
@@ -2815,13 +2825,21 @@ void d_subsets(emxArray_real_T *nsamp, double n, double p, emxArray_real_T *C,
           j = newEntry;
           newEntry++;
           loc_data[(int)j - 1] = selectedLoc;
-          link_data[(int)j - 1] = hashTbl_data[(int)b_i - 1];
-          hashTbl_data[(int)b_i - 1] = j;
+          link_data[(int)j - 1] = hashTbl_data[(int)(denom + 1.0) - 1];
+          hashTbl_data[(int)(denom + 1.0) - 1] = j;
         }
         if ((double)loop_ub + 1.0 < b_nsamp) {
-          selectedLoc = hashTbl_data
-              [(int)(c_mod(1000.0 - ((double)loop_ub + 1.0), b_nsamp) + 1.0) -
-               1];
+          if (1000.0 - ((double)loop_ub + 1.0) == 0.0) {
+            denom = 0.0;
+          } else {
+            denom = fmod(1000.0 - ((double)loop_ub + 1.0), b_nsamp);
+            if (denom == 0.0) {
+              denom = 0.0;
+            } else if (1000.0 - ((double)loop_ub + 1.0) < 0.0) {
+              denom += b_nsamp;
+            }
+          }
+          selectedLoc = hashTbl_data[(int)(denom + 1.0) - 1];
           while ((selectedLoc > 0.0) && (loc_data[(int)selectedLoc - 1] !=
                                          1000.0 - ((double)loop_ub + 1.0))) {
             selectedLoc = link_data[(int)selectedLoc - 1];

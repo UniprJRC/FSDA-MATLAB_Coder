@@ -23,6 +23,9 @@ extern "C" {
 #endif
 
 /* Function Declarations */
+void b_svd(const emxArray_real_T *A, emxArray_real_T *U, emxArray_real_T *s,
+           emxArray_real_T *V);
+
 void svd(const emxArray_real_T *A, emxArray_real_T *U);
 
 #ifdef __cplusplus

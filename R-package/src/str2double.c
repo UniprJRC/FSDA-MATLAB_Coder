@@ -15,6 +15,7 @@
 #include "rt_nonfinite.h"
 #include "str2double1.h"
 #include <stdio.h>
+#include <string.h>
 
 /* Function Definitions */
 creal_T b_str2double(const char s[2])

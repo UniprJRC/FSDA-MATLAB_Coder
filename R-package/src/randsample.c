@@ -17,6 +17,7 @@
 #include "randperm.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <string.h>
 
 /* Function Definitions */
 double b_randsample(double varargin_1)

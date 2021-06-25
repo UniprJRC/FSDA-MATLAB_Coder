@@ -100,7 +100,9 @@ void argInit_scalar2(double a[], double result_data[], int result_size[2])
 emxArray_real_T *argInit_vector(double *yy, const int *nn)
 {
 
-    return emxCreateWrapperND_real_T(yy, 1, nn);
+    emxArray_real_T *ret = emxCreateWrapperND_real_T(yy, 1, nn);
+    ret->size[1] = 1;
+    return ret;
 }
 
 emxArray_real_T *argInit_matrix(double *xx, const int *nn, const int *pp)

@@ -25,6 +25,8 @@ extern "C" {
 /* Function Declarations */
 void b_sortIdx(emxArray_real_T *x, emxArray_int32_T *idx);
 
+void c_sortIdx(emxArray_real_T *x, emxArray_int32_T *idx);
+
 void merge_block(emxArray_int32_T *idx, emxArray_real_T *x, int offset, int n,
                  int preSortLevel, emxArray_int32_T *iwork,
                  emxArray_real_T *xwork);

@@ -24,8 +24,6 @@ extern "C" {
 /* Function Declarations */
 double b_mod(double x);
 
-double c_mod(double x, double y);
-
 #ifdef __cplusplus
 }
 #endif

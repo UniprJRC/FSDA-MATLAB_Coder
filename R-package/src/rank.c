@@ -17,6 +17,7 @@
 #include "svd.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <string.h>
 
 /* Function Definitions */
 int local_rank(const emxArray_real_T *A)

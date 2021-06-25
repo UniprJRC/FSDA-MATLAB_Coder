@@ -15,6 +15,7 @@
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 #include <stdlib.h>
+#include <string.h>
 
 /* Function Definitions */
 emxArray_boolean_T *emxCreateND_boolean_T(int numDimensions, const int *size)
@@ -390,6 +391,11 @@ void emxDestroy_struct_LXS_T(struct_LXS_T emxArray)
   emxFreeStruct_struct_LXS_T(&emxArray);
 }
 
+void emxDestroy_struct_tclust_T(struct_tclust_T emxArray)
+{
+  emxFreeStruct_struct_tclust_T(&emxArray);
+}
+
 void emxInitArray_char_T(emxArray_char_T **pEmxArray, int numDimensions)
 {
   emxInit_char_T(pEmxArray, numDimensions);
@@ -433,6 +439,11 @@ void emxInit_struct_LTStsmodel_T(struct_LTStsmodel_T *pStruct)
 void emxInit_struct_LXS_T(struct_LXS_T *pStruct)
 {
   emxInitStruct_struct_LXS_T(pStruct);
+}
+
+void emxInit_struct_tclust_T(struct_tclust_T *pStruct)
+{
+  emxInitStruct_struct_tclust_T(pStruct);
 }
 
 /* End of code generation (fsdaC_emxAPI.c) */

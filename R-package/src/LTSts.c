@@ -24,6 +24,7 @@
 #include "sort.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <string.h>
 
 /* Function Declarations */
 static void
@@ -1893,7 +1894,7 @@ static void b_ALS(const c_captured_var *Seq, const c_captured_var *bsb,
     for (i = 0; i < sizes_idx_1; i++) {
       b_Xlshiftbsb->data[i] = yinbsb->data[i] - b_Xlshiftbsb->data[i];
     }
-    b2378 = b_mldivide(b_Seqbsb, b_Xlshiftbsb);
+    b2378 = c_mldivide(b_Seqbsb, b_Xlshiftbsb);
     /*  Store new value of beta */
     i = r1->size[0] * r1->size[1];
     r1->size[0] = 1;
@@ -2790,7 +2791,7 @@ void ALS(const c_captured_var *Seq, const c_captured_var *bsb,
     for (i = 0; i < sizes_idx_1; i++) {
       b_Xlshiftbsb->data[i] = yinbsb->data[i] - b_Xlshiftbsb->data[i];
     }
-    b2378 = b_mldivide(b_Seqbsb, b_Xlshiftbsb);
+    b2378 = c_mldivide(b_Seqbsb, b_Xlshiftbsb);
     /*  Store new value of beta */
     i = r1->size[0] * r1->size[1];
     r1->size[0] = 1;
