@@ -2,11 +2,10 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: rtGetInf.c
  *
- * rtGetInf.c
- *
- * Code generation for function 'FSM_wrapper'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
 /*
@@ -14,7 +13,7 @@
  *       MATLAB for code generation function to initialize non-finite, Inf and
  * MinusInf
  */
-/* Include files */
+/* Include Files */
 #include "rtGetInf.h"
 #include "rt_nonfinite.h"
 
@@ -58,4 +57,8 @@ real32_T rtGetMinusInfF(void)
   return rtMinusInfF;
 }
 
-/* End of code generation (rtGetInf.c) */
+/*
+ * File trailer for rtGetInf.c
+ *
+ * [EOF]
+ */

@@ -2,17 +2,16 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: FSMmmd.h
  *
- * FSMmmd.h
- *
- * Code generation for function 'FSMmmd'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
 #ifndef FSMMMD_H
 #define FSMMMD_H
 
-/* Include files */
+/* Include Files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -42,4 +41,8 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
 #endif
 
 #endif
-/* End of code generation (FSMmmd.h) */
+/*
+ * File trailer for FSMmmd.h
+ *
+ * [EOF]
+ */

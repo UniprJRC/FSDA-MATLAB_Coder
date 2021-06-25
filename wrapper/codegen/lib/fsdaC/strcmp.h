@@ -2,17 +2,16 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: strcmp.h
  *
- * strcmp.h
- *
- * Code generation for function 'strcmp'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
 #ifndef STRCMP_H
 #define STRCMP_H
 
-/* Include files */
+/* Include Files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -82,4 +81,8 @@ bool y_strcmp(const char a[3]);
 #endif
 
 #endif
-/* End of code generation (strcmp.h) */
+/*
+ * File trailer for strcmp.h
+ *
+ * [EOF]
+ */

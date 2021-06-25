@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: eig.c
  *
- * eig.c
- *
- * Code generation for function 'eig'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "eig.h"
 #include "eigHermitianStandard.h"
 #include "eigStandard.h"
@@ -29,6 +28,12 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const emxArray_real_T *A
+ *                emxArray_creal_T *V
+ *                emxArray_creal_T *D
+ * Return Type  : void
+ */
 void b_eig(const emxArray_real_T *A, emxArray_creal_T *V, emxArray_creal_T *D)
 {
   emxArray_real_T *b_A;
@@ -249,6 +254,11 @@ void b_eig(const emxArray_real_T *A, emxArray_creal_T *V, emxArray_creal_T *D)
   }
 }
 
+/*
+ * Arguments    : const emxArray_real_T *A
+ *                emxArray_creal_T *V
+ * Return Type  : void
+ */
 void c_eig(const emxArray_real_T *A, emxArray_creal_T *V)
 {
   emxArray_creal_T *beta1;
@@ -421,6 +431,11 @@ void c_eig(const emxArray_real_T *A, emxArray_creal_T *V)
   }
 }
 
+/*
+ * Arguments    : const double A[4]
+ *                creal_T V[2]
+ * Return Type  : void
+ */
 void eig(const double A[4], creal_T V[2])
 {
   creal_T At[4];
@@ -823,4 +838,8 @@ void eig(const double A[4], creal_T V[2])
   }
 }
 
-/* End of code generation (eig.c) */
+/*
+ * File trailer for eig.c
+ *
+ * [EOF]
+ */

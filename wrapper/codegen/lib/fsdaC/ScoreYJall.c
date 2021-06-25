@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: ScoreYJall.c
  *
- * ScoreYJall.c
- *
- * Code generation for function 'ScoreYJall'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "ScoreYJall.h"
 #include "blockedSummation.h"
 #include "fsdaC_emxutil.h"
@@ -24,6 +23,168 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Computes all the 4 score tests for YJ transformation
+ *
+ * <a href="matlab: docsearchFS('ScoreYJall')">Link to the help function</a>
+ *
+ *  The transformations for negative and positive responses were determined
+ *  by Yeo and Johnson (2000) by imposing the smoothness condition that the
+ *  second derivative of zYJ(λ) with respect to y be smooth at y = 0. However
+ *  some authors, for example Weisberg (2005), query the physical
+ *  interpretability of this constraint which is oftern violated in data
+ *  analysis. Accordingly, Atkinson et al (2019) and (2020) extend the
+ *  Yeo-Johnson transformation to allow two values of the transformations
+ *  parameter: λN for negative observations and λP for non-negative ones.
+ *  ScoreYJall computes:
+ *  1) the global t test associated with the constructed variable for
+ *  λ=λP=λN.
+ *  2) the t test associated with the constructed variable computed assuming
+ *  a different transformation for positive observations keeping the value of
+ *  the transformation parameter for negative observations fixed. In short we
+ *  call this test, "test for positive observations".
+ *  3) the t test associated with the constructed variable computed assuming
+ *  a different transformation for negative observations keeping the value of
+ *  the transformation parameter for positive observations fixed. In short we
+ *  call this test, "test for negative observations".
+ *  4) the F test for the joint presence of the two constructed variables
+ *  described in points 2) and 3.
+ *
+ *
+ *
+ *   Required input arguments:
+ *
+ *     y:         Response variable. Vector. A vector with n elements that
+ *                contains the response
+ *                variable.  It can be either a row or a column vector.
+ *     X :        Predictor variables. Matrix. Data matrix of explanatory
+ *                variables (also called 'regressors')
+ *                of dimension (n x p-1). Rows of X represent observations, and
+ *                columns represent variables.
+ *                Missing values (NaN's) and infinite values (Inf's) are
+ * allowed, since observations (rows) with missing or infinite values will
+ *                automatically be excluded from the computations.
+ *
+ *   Optional input arguments:
+ *
+ *     intercept :  Indicator for constant term. true (default) | false.
+ *                  Indicator for the constant term (intercept) in the fit,
+ *                  specified as the comma-separated pair consisting of
+ *                  'Intercept' and either true to include or false to remove
+ *                  the constant term from the model.
+ *                  Example - 'intercept',false
+ *                  Data Types - boolean
+ *
+ *         la  :  transformation parameter. Vector. It specifies for which
+ *                values of the transformation parameter it is necessary to
+ *                compute the score test. Default value of lambda is la=[-1
+ *                -0.5 0 0.5 1]; that is the five most common values of
+ *                lambda
+ *                Example - 'la',[0 0.5]
+ *                Data Types - double
+ *
+ *       scoremle: likelihood ratio test for the two different transformation
+ *                 parameters $\lambda_P$ and $\lambda_N$. Boolean.
+ *                 if scoremle is true it is possible to compute the
+ *                 likelihood ratio test. In this case the residual sum of
+ *                 squares of the null model bsaed on a single transformation
+ *                 parameter $\lambda$ is compared with the residual sum of
+ *                 squares of the model based on data transformed data using
+ *                 MLE of $\lambda_P$ and $\lambda_N$. If scoremle is true it
+ *                 is possible through following option usefmin, to control
+ *                 the parameters of the optmization routine.
+ *                Example - 'scoremle',true
+ *                Data Types - logical
+ *
+ *     usefmin :  use solver to find MLE of lambda. Boolean or struct.
+ *                if usefmin is true or usefmin is a struct it is
+ *                possible to use MATLAB solvers fminsearch or fminunc to
+ *                find the maximum likelihood estimates of $\lambda_P$ and
+ *                $\lambda_N$. The default value of usefmin is false that is
+ *                solver is not used and the likelihood is evaluated at the
+ *                grid of points with steps 0.01.
+ *                If usefmin is a structure it may contain the following
+ *                fields:
+ *                usefmin.MaxIter = Maximum number of iterations (default is
+ * 1000). usefmin.TolX   = Termination tolerance for the parameters (default is
+ * 1e-7). usefmin.solver = name of the solver. Possible values are 'fminsearch'
+ * (default) and 'fminunc'. fminunc needs the optimization toolbox.
+ *                usefmin.displayLevel = amount of information displayed by
+ *                    the algorithm. possible values are 'off' (displays no
+ *                    information, this is the default), 'final' (displays
+ *                    just the final output) and 'iter' (displays iterative
+ *                    output to the command window).
+ *                Example - 'usefmin',true
+ *                Data Types - boolean or struct
+ *
+ *
+ *        nocheck : Check input arguments. Boolean.
+ *                If nocheck is equal to true no check is performed on
+ *                  matrix y and matrix X. Notice that y and X are left
+ *                  unchanged. In other words the additional column of ones
+ *                  for the intercept is not added. As default nocheck=false.
+ *                Example - 'nocheck',true
+ *                Data Types - boolean
+ *
+ *   Output:
+ *
+ *   The output consists of a structure 'outSC' containing the following fields:
+ *
+ *         outSC.Score =       score tests. Matrix.
+ *                             Matrix of size length(la)-by-5 which
+ *                             contains the value of the score test for each
+ *                             value of lambda specified in optional input
+ *                             parameter la. The first column refers to the
+ *                             global test, the second to the test for
+ *                             positive observations, the third refers to the
+ *                             test for negative observations and the fourth
+ *                             column refers to the F test for the joint
+ *                             presence of the two constructed variables.
+ *                             If input option scoremle is true the fifth
+ *                             column will contain the exact likelihod ratio
+ *                             test based on the maximum likelihood estimates
+ *                             of the $\lambda_P$ and $\lambda_N$.
+ *                             If la is not specified, the number of rows of
+ *                             outSc.Score is equal to 5 and will contain the
+ *                             values of the score tests for the 5 most common
+ *                             values of lambda.
+ *         outSC.laMLE =       MLE of lambda. Vector.
+ *                             Vector of dimension 2 which
+ *                             contains the value of maximum likelihood
+ *                             estimate of $\lambda_P$ and $\lambda_N$.  This
+ *                             output is present only if input option
+ *                             scoremle is true.
+ *
+ *
+ *  See also: FSRfan, Score, ScoreYJ, ScoreYjpn, fanBIC
+ *
+ *  References:
+ *
+ *  Yeo, I.K. and Johnson, R. (2000), A new family of power
+ *  transformations to improve normality or symmetry, "Biometrika", Vol. 87,
+ *  pp. 954-959.
+ *  Atkinson, A.C. Riani, M., Corbellini A. (2019), The analysis of
+ *  transformations for profit-and-loss data, Journal of the Royal
+ *  Statistical Society, Series C, "Applied Statistics",
+ *  https://doi.org/10.1111/rssc.12389
+ *  Atkinson, A.C. Riani, M. and Corbellini A. (2020), The Box-Cox
+ *  Transformation: Review and Extensions, "Statistical Science", in press.
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *
+ * <a href="matlab: docsearchFS('ScoreYJall')">Link to the help function</a>
+ *
+ * $LastChangedDate:: 2017-11-17 15:01:40 #$: Date of the last commit
+ *
+ * Arguments    : const emxArray_real_T *y
+ *                const emxArray_real_T *X
+ *                double varargin_2
+ *                double outSC_Score_data[]
+ *                int outSC_Score_size[2]
+ * Return Type  : void
+ */
 void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
                 double varargin_2, double outSC_Score_data[],
                 int outSC_Score_size[2])
@@ -57,193 +218,6 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
   bool vnegboo;
   bool vposboo;
   emxInit_real_T(&vposlai, 1);
-  /* Computes all the 4 score tests for YJ transformation */
-  /*  */
-  /* <a href="matlab: docsearchFS('ScoreYJall')">Link to the help function</a>
-   */
-  /*  */
-  /*  The transformations for negative and positive responses were determined */
-  /*  by Yeo and Johnson (2000) by imposing the smoothness condition that the */
-  /*  second derivative of zYJ(λ) with respect to y be smooth at y = 0. However
-   */
-  /*  some authors, for example Weisberg (2005), query the physical */
-  /*  interpretability of this constraint which is oftern violated in data */
-  /*  analysis. Accordingly, Atkinson et al (2019) and (2020) extend the */
-  /*  Yeo-Johnson transformation to allow two values of the transformations */
-  /*  parameter: λN for negative observations and λP for non-negative ones. */
-  /*  ScoreYJall computes: */
-  /*  1) the global t test associated with the constructed variable for */
-  /*  λ=λP=λN. */
-  /*  2) the t test associated with the constructed variable computed assuming
-   */
-  /*  a different transformation for positive observations keeping the value of
-   */
-  /*  the transformation parameter for negative observations fixed. In short we
-   */
-  /*  call this test, "test for positive observations". */
-  /*  3) the t test associated with the constructed variable computed assuming
-   */
-  /*  a different transformation for negative observations keeping the value of
-   */
-  /*  the transformation parameter for positive observations fixed. In short we
-   */
-  /*  call this test, "test for negative observations". */
-  /*  4) the F test for the joint presence of the two constructed variables */
-  /*  described in points 2) and 3. */
-  /*  */
-  /*  */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /*     y:         Response variable. Vector. A vector with n elements that */
-  /*                contains the response */
-  /*                variable.  It can be either a row or a column vector. */
-  /*     X :        Predictor variables. Matrix. Data matrix of explanatory */
-  /*                variables (also called 'regressors') */
-  /*                of dimension (n x p-1). Rows of X represent observations,
-   * and */
-  /*                columns represent variables. */
-  /*                Missing values (NaN's) and infinite values (Inf's) are
-   * allowed, */
-  /*                since observations (rows) with missing or infinite values
-   * will */
-  /*                automatically be excluded from the computations. */
-  /*  */
-  /*   Optional input arguments: */
-  /*  */
-  /*     intercept :  Indicator for constant term. true (default) | false. */
-  /*                  Indicator for the constant term (intercept) in the fit, */
-  /*                  specified as the comma-separated pair consisting of */
-  /*                  'Intercept' and either true to include or false to remove
-   */
-  /*                  the constant term from the model. */
-  /*                  Example - 'intercept',false */
-  /*                  Data Types - boolean */
-  /*  */
-  /*         la  :  transformation parameter. Vector. It specifies for which */
-  /*                values of the transformation parameter it is necessary to */
-  /*                compute the score test. Default value of lambda is la=[-1 */
-  /*                -0.5 0 0.5 1]; that is the five most common values of */
-  /*                lambda */
-  /*                Example - 'la',[0 0.5] */
-  /*                Data Types - double */
-  /*  */
-  /*       scoremle: likelihood ratio test for the two different transformation
-   */
-  /*                 parameters $\lambda_P$ and $\lambda_N$. Boolean. */
-  /*                 if scoremle is true it is possible to compute the */
-  /*                 likelihood ratio test. In this case the residual sum of */
-  /*                 squares of the null model bsaed on a single transformation
-   */
-  /*                 parameter $\lambda$ is compared with the residual sum of */
-  /*                 squares of the model based on data transformed data using
-   */
-  /*                 MLE of $\lambda_P$ and $\lambda_N$. If scoremle is true it
-   */
-  /*                 is possible through following option usefmin, to control */
-  /*                 the parameters of the optmization routine. */
-  /*                Example - 'scoremle',true */
-  /*                Data Types - logical */
-  /*  */
-  /*     usefmin :  use solver to find MLE of lambda. Boolean or struct. */
-  /*                if usefmin is true or usefmin is a struct it is */
-  /*                possible to use MATLAB solvers fminsearch or fminunc to */
-  /*                find the maximum likelihood estimates of $\lambda_P$ and */
-  /*                $\lambda_N$. The default value of usefmin is false that is
-   */
-  /*                solver is not used and the likelihood is evaluated at the */
-  /*                grid of points with steps 0.01. */
-  /*                If usefmin is a structure it may contain the following */
-  /*                fields: */
-  /*                usefmin.MaxIter = Maximum number of iterations (default is
-   * 1000). */
-  /*                usefmin.TolX   = Termination tolerance for the parameters */
-  /*                    (default is 1e-7). */
-  /*                usefmin.solver = name of the solver. Possible values are */
-  /*                    'fminsearch' (default) and 'fminunc'. fminunc needs the
-   */
-  /*                    optimization toolbox. */
-  /*                usefmin.displayLevel = amount of information displayed by */
-  /*                    the algorithm. possible values are 'off' (displays no */
-  /*                    information, this is the default), 'final' (displays */
-  /*                    just the final output) and 'iter' (displays iterative */
-  /*                    output to the command window). */
-  /*                Example - 'usefmin',true */
-  /*                Data Types - boolean or struct */
-  /*  */
-  /*  */
-  /*        nocheck : Check input arguments. Boolean. */
-  /*                If nocheck is equal to true no check is performed on */
-  /*                  matrix y and matrix X. Notice that y and X are left */
-  /*                  unchanged. In other words the additional column of ones */
-  /*                  for the intercept is not added. As default nocheck=false.
-   */
-  /*                Example - 'nocheck',true */
-  /*                Data Types - boolean */
-  /*  */
-  /*   Output: */
-  /*  */
-  /*   The output consists of a structure 'outSC' containing the following
-   * fields: */
-  /*  */
-  /*         outSC.Score =       score tests. Matrix. */
-  /*                             Matrix of size length(la)-by-5 which */
-  /*                             contains the value of the score test for each
-   */
-  /*                             value of lambda specified in optional input */
-  /*                             parameter la. The first column refers to the */
-  /*                             global test, the second to the test for */
-  /*                             positive observations, the third refers to the
-   */
-  /*                             test for negative observations and the fourth
-   */
-  /*                             column refers to the F test for the joint */
-  /*                             presence of the two constructed variables. */
-  /*                             If input option scoremle is true the fifth */
-  /*                             column will contain the exact likelihod ratio
-   */
-  /*                             test based on the maximum likelihood estimates
-   */
-  /*                             of the $\lambda_P$ and $\lambda_N$. */
-  /*                             If la is not specified, the number of rows of
-   */
-  /*                             outSc.Score is equal to 5 and will contain the
-   */
-  /*                             values of the score tests for the 5 most common
-   */
-  /*                             values of lambda. */
-  /*         outSC.laMLE =       MLE of lambda. Vector. */
-  /*                             Vector of dimension 2 which */
-  /*                             contains the value of maximum likelihood */
-  /*                             estimate of $\lambda_P$ and $\lambda_N$.  This
-   */
-  /*                             output is present only if input option */
-  /*                             scoremle is true. */
-  /*  */
-  /*  */
-  /*  See also: FSRfan, Score, ScoreYJ, ScoreYjpn, fanBIC */
-  /*  */
-  /*  References: */
-  /*  */
-  /*  Yeo, I.K. and Johnson, R. (2000), A new family of power */
-  /*  transformations to improve normality or symmetry, "Biometrika", Vol. 87,
-   */
-  /*  pp. 954-959. */
-  /*  Atkinson, A.C. Riani, M., Corbellini A. (2019), The analysis of */
-  /*  transformations for profit-and-loss data, Journal of the Royal */
-  /*  Statistical Society, Series C, "Applied Statistics", */
-  /*  https://doi.org/10.1111/rssc.12389 */
-  /*  Atkinson, A.C. Riani, M. and Corbellini A. (2020), The Box-Cox */
-  /*  Transformation: Review and Extensions, "Statistical Science", in press. */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('ScoreYJall')">Link to the help function</a>
-   */
-  /*  */
-  /* $LastChangedDate:: 2017-11-17 15:01:40 #$: Date of the last commit */
   /*  Examples */
   /* { */
   /*     %% Ex in which positive and negative observations require the same
@@ -1150,4 +1124,8 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  Also store MLE of lambda */
 }
 
-/* End of code generation (ScoreYJall.c) */
+/*
+ * File trailer for ScoreYJall.c
+ *
+ * [EOF]
+ */

@@ -2,17 +2,16 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: cpcV.h
  *
- * cpcV.h
- *
- * Code generation for function 'cpcV'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
 #ifndef CPCV_H
 #define CPCV_H
 
-/* Include files */
+/* Include Files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -33,4 +32,8 @@ void cpcV(const emxArray_real_T *lmdc, const emxArray_real_T *GAMc,
 #endif
 
 #endif
-/* End of code generation (cpcV.h) */
+/*
+ * File trailer for cpcV.h
+ *
+ * [EOF]
+ */

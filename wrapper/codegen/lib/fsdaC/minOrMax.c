@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: minOrMax.c
  *
- * minOrMax.c
- *
- * Code generation for function 'minOrMax'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "minOrMax.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
@@ -18,6 +17,10 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const emxArray_real_T *x
+ * Return Type  : double
+ */
 double b_maximum(const emxArray_real_T *x)
 {
   double d;
@@ -68,6 +71,10 @@ double b_maximum(const emxArray_real_T *x)
   return ex;
 }
 
+/*
+ * Arguments    : const emxArray_real_T *x
+ * Return Type  : double
+ */
 double b_minimum(const emxArray_real_T *x)
 {
   double d;
@@ -118,6 +125,12 @@ double b_minimum(const emxArray_real_T *x)
   return ex;
 }
 
+/*
+ * Arguments    : const emxArray_real_T *x
+ *                double *ex
+ *                int *idx
+ * Return Type  : void
+ */
 void c_maximum(const emxArray_real_T *x, double *ex, int *idx)
 {
   double d;
@@ -171,6 +184,10 @@ void c_maximum(const emxArray_real_T *x, double *ex, int *idx)
   }
 }
 
+/*
+ * Arguments    : const emxArray_real_T *x
+ * Return Type  : double
+ */
 double c_minimum(const emxArray_real_T *x)
 {
   double d;
@@ -221,6 +238,10 @@ double c_minimum(const emxArray_real_T *x)
   return ex;
 }
 
+/*
+ * Arguments    : const emxArray_real_T *x
+ * Return Type  : double
+ */
 double d_maximum(const emxArray_real_T *x)
 {
   double d;
@@ -271,6 +292,12 @@ double d_maximum(const emxArray_real_T *x)
   return ex;
 }
 
+/*
+ * Arguments    : const emxArray_real_T *x
+ *                double *ex
+ *                int *idx
+ * Return Type  : void
+ */
 void d_minimum(const emxArray_real_T *x, double *ex, int *idx)
 {
   double d;
@@ -324,6 +351,10 @@ void d_minimum(const emxArray_real_T *x, double *ex, int *idx)
   }
 }
 
+/*
+ * Arguments    : const emxArray_real_T *x
+ * Return Type  : double
+ */
 double e_maximum(const emxArray_real_T *x)
 {
   double ex;
@@ -373,6 +404,10 @@ double e_maximum(const emxArray_real_T *x)
   return ex;
 }
 
+/*
+ * Arguments    : const emxArray_real_T *x
+ * Return Type  : double
+ */
 double e_minimum(const emxArray_real_T *x)
 {
   double ex;
@@ -422,6 +457,11 @@ double e_minimum(const emxArray_real_T *x)
   return ex;
 }
 
+/*
+ * Arguments    : const emxArray_real_T *x
+ *                emxArray_real_T *ex
+ * Return Type  : void
+ */
 void f_maximum(const emxArray_real_T *x, emxArray_real_T *ex)
 {
   double b;
@@ -457,6 +497,12 @@ void f_maximum(const emxArray_real_T *x, emxArray_real_T *ex)
   }
 }
 
+/*
+ * Arguments    : const emxArray_real_T *x
+ *                double *ex
+ *                int *idx
+ * Return Type  : void
+ */
 void f_minimum(const emxArray_real_T *x, double *ex, int *idx)
 {
   double b_tmp;
@@ -482,6 +528,12 @@ void f_minimum(const emxArray_real_T *x, double *ex, int *idx)
   }
 }
 
+/*
+ * Arguments    : const emxArray_real_T *x
+ *                emxArray_real_T *ex
+ *                emxArray_int32_T *idx
+ * Return Type  : void
+ */
 void g_maximum(const emxArray_real_T *x, emxArray_real_T *ex,
                emxArray_int32_T *idx)
 {
@@ -526,6 +578,10 @@ void g_maximum(const emxArray_real_T *x, emxArray_real_T *ex,
   }
 }
 
+/*
+ * Arguments    : const bool x[6]
+ * Return Type  : bool
+ */
 bool h_maximum(const bool x[6])
 {
   int k;
@@ -539,6 +595,10 @@ bool h_maximum(const bool x[6])
   return ex;
 }
 
+/*
+ * Arguments    : const bool x[2]
+ * Return Type  : bool
+ */
 bool i_maximum(const bool x[2])
 {
   bool ex;
@@ -546,6 +606,10 @@ bool i_maximum(const bool x[2])
   return ((int)x[0] < (int)x[1]) || ex;
 }
 
+/*
+ * Arguments    : const double x[3]
+ * Return Type  : double
+ */
 double j_maximum(const double x[3])
 {
   double d;
@@ -583,6 +647,11 @@ double j_maximum(const double x[3])
   return ex;
 }
 
+/*
+ * Arguments    : const emxArray_real_T *x
+ *                emxArray_real_T *ex
+ * Return Type  : void
+ */
 void maximum(const emxArray_real_T *x, emxArray_real_T *ex)
 {
   double a;
@@ -619,6 +688,11 @@ void maximum(const emxArray_real_T *x, emxArray_real_T *ex)
   }
 }
 
+/*
+ * Arguments    : const emxArray_real_T *x
+ *                emxArray_real_T *ex
+ * Return Type  : void
+ */
 void minimum(const emxArray_real_T *x, emxArray_real_T *ex)
 {
   double a;
@@ -655,4 +729,8 @@ void minimum(const emxArray_real_T *x, emxArray_real_T *ex)
   }
 }
 
-/* End of code generation (minOrMax.c) */
+/*
+ * File trailer for minOrMax.c
+ *
+ * [EOF]
+ */

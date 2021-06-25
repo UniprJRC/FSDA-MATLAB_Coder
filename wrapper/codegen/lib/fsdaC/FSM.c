@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: FSM.c
  *
- * FSM.c
- *
- * Code generation for function 'FSM'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "FSM.h"
 #include "FSMbonfbound.h"
 #include "FSMbsb.h"
@@ -40,6 +39,215 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * FSM computes forward search estimator in multivariate analysis
+ *
+ * <a href="matlab: docsearchFS('FSM')">Link to the help function</a>
+ *
+ *  Required input arguments:
+ *
+ *  Y :           Input data. Matrix.
+ *                n x v data matrix; n observations and v variables. Rows of
+ *                Y represent observations, and columns represent variables.
+ *                Missing values (NaN's) and infinite values (Inf's) are
+ *                allowed, since observations (rows) with missing or infinite
+ *                values will automatically be excluded from the
+ *                computations.
+ *                 Data Types - single|double
+ *
+ *  Optional input arguments:
+ *
+ *
+ *       bonflev  : option that might be used to identify extreme outliers
+ *                  when the distribution of the data is strongly non normal.
+ *                  Scalar.
+ *                  In these circumstances, the general signal detection rule
+ * based on consecutive exceedances cannot be used. In this case bonflev can be:
+ *                  - a scalar smaller than 1, which specifies the confidence
+ *                    level for a signal and a stopping rule based on the
+ *                    comparison of the minimum deletion residual with a
+ *                    Bonferroni bound. For example if bonflev=0.99 the
+ *                    procedure stops when the trajectory exceeds for the
+ *                    first time the 99% bonferroni bound.
+ *                  - A scalar value greater than 1. In this case the
+ *                    procedure stops when the residual trajectory exceeds
+ *                    for the first time this value.
+ *                  Default value is ' ', which means to rely on general rules
+ *                  based on consecutive exceedances.
+ *                  Example - 'bonflev',0.7
+ *                  Data Types - double
+ *
+ *
+ *        crit    : It specified the criterion to be used to
+ *                  initialize the search. Character.
+ *                  if crit='md' the units which form initial subset are
+ *                   those which have the smallest m0 pseudo Mahalanobis
+ *                   distances computed using procedure unibiv (bivariate
+ *                   robust ellipses).
+ *                  if crit='biv' sorting is done first in
+ *                   terms of times units fell outside robust bivariate
+ *                   ellipses and then in terms of pseudoMD. In other words,
+ *                   the units forming initial subset are chosen first among
+ *                   the set of those which never fell outside robust
+ *                   bivariate ellipses then among those which fell only once
+ *                   outside bivariate ellipses ... up to reach m0.
+ *                  if crit='uni' sorting is done first in
+ *                   terms of times units fell outside univariate boxplots
+ *                   and then in terms of pseudoMD. In other words,
+ *                   the units forming initial subset are chosen first among
+ *                   the set of those which never fell outside
+ *                   univariate boxplots then among those which fell only once
+ *                   outside univariate boxplots... up to reach m0.
+ *                Example - 'crit','md'
+ *                Data Types - char
+ *                  Remark: as the user can see the starting point of the
+ *                  search is not going to affect at all the results of the
+ *                  analysis. The user can explore this point with his own
+ *                  datasets.
+ *                  Remark: if crit='biv' the user can also supply in scalar rf
+ *                  (see below) the confidence level of the bivariate
+ *                  ellipses.
+ *
+ *        init    : Point where to start monitoring required diagnostics.
+ * Scalar. Note that if bsb is suppliedinit>=length(bsb). If init is not
+ *                  specified it will be set equal to floor(n*0.6).
+ *                  Example - 'init',50
+ *                  Data Types - double
+ *
+ *           m0   : Initial subset size or vector which contains the list of
+ *                  the units forming initial subset. Scalar or vector.
+ *                  The default is to start the search with v+1 units which
+ *                  consisting of those observations which are not outlying
+ *                  on any scatterplot, found as the intersection of all
+ *                  points lying within a robust contour containing a
+ *                  specified portion of the data (Riani and Zani 1997) and
+ *                  inside the univariate boxplot. Remark: if m0 is a vector
+ *                  option below crit is ignored.
+ *                  Example - 'm0',5
+ *                  Data Types - double
+ *
+ *        msg     : It controls whether to display or not messages
+ *                  on the screen. Boolean.
+ *                  If msg==1 (default) messages about the progression of the
+ *                  search are displayed on the screen otherwise only error
+ *                  messages will be displayed.
+ *                  Example - 'msg',0
+ *                  Data Types - logical
+ *
+ *    nocheck     : It controls whether to perform checks on matrix Y.Scalar.
+ *                  If nocheck is equal to 1 no check is performed.
+ *                  As default nocheck=0.
+ *                  Example - 'nocheck',1
+ *                  Data Types - double
+ *
+ *         rf     : confidence level for bivariate ellipses. Scalar. The default
+ * is 0.95. This option is useful only if crit='biv'. Example - 'rf',0.9 Data
+ * Types - double
+ *
+ *        plots   : plot of minimum Mahalanobis distance.
+ *                  Scalar or structure. If plots is a missing value or is a
+ *                  scalar equal to 0 no plot is produced.
+ *                  If plots is a scalar equal to 1 (default) the plot
+ *                  of minimum MD with envelopes based on n observations and
+ *                  the scatterplot matrix with the outliers highlighted is
+ *                  produced.
+ *                  If plots is a scalar equal to 2 the additional plots of
+ *                  envelope resuperimposition are
+ *                  produced.
+ *                  If plots is a structure it may contain the following fields:
+ *                    plots.ylim = vector with two elements controlling minimum
+ * and maximum on the y axis. Default value is '' (automatic scale); plots.xlim
+ * = vector with two elements controlling minimum and maximum on the x axis.
+ * Default value is '' (automatic scale); plots.resuper = vector which specifies
+ * for which steps it is necessary to show the plots of resuperimposed envelopes
+ *                        if resuper is not supplied a plot of each step in
+ * which the envelope is resuperimposed is shown. Example if resuper =[85 87]
+ *                        plots of resuperimposedenvelopes are shown at steps
+ *                        m=85 and m=87;
+ *                    plots.ncoord = scalar. If ncoord=1 plots are shown in
+ * normal coordinates else (default) plots are shown in traditional mmd
+ * coordinates; plots.labeladd = If this option is '1', the outliers in the spm
+ * are labelled with the unit row index. The default value is labeladd='', i.e.
+ * no label is added; plots.nameY = cell array of strings containing the labels
+ * of the variables. As default value, the labels which are added are Y1, ...Yv;
+ *                    plots.lwd =  Scalar which controls line width of the curve
+ * which contains the monitoring of minimum Mahalanobis distance. Default line
+ * of lwd=2. plots.lwdenv = Scalar which controls linewidth of the envelopes.
+ * Default value of lwdenv=2. Example - 'plots',2 Data Types - double
+ *
+ *
+ *  Output:
+ *
+ *          out:   structure which contains the following fields
+ *
+ * out.outliers=  k x 1 vector containing the list of the units declared as
+ *                outliers or NaN if the sample is homogeneous
+ *  out.mmd    =  (n-init) x 2 matrix.
+ *                1st col = fwd search index;
+ *                2nd col = value of minimum Mahalanobis Distance in each step
+ *                of the fwd search.
+ *  out.Un     =  (n-init) x 11 Matrix which contains the unit(s) included
+ *                in the subset at each step of the fwd search.
+ *                REMARK: in every step the new subset is compared with the
+ *                old subset. Un contains the unit(s) present in the new
+ *                subset but not in the old one. Un(1,2) for example
+ *                contains the unit included in step init+1. Un(end,2)
+ *                contains the units included in the final step of the search.
+ *  out.nout    = 2 x 5 matrix containing the number of times mmd went out
+ *                of particular quantiles.
+ *                First row contains quantiles 1 99 99.9 99.99 99.999 per cent;
+ *                Second row contains the frequency distribution. It is NaN
+ *                if bonflev threshold is used.
+ *  out.loc     = 1 x v  vector containing location of the data.
+ *  out.cov     = v x v robust estimate of covariance matrix.
+ *  out.md      = n x 1 vector containing the estimates of the robust
+ *                Mahalanobis distances (in squared units). This vector
+ *                contains the distances of each observation from the
+ *                location of the data, relative to the scatter matrix cov.
+ *  out.class  =  'FSM'.
+ *
+ *
+ *  See also: FSMeda, unibiv.m, FSMmmd.m
+ *
+ *  References:
+ *
+ *  Riani, M., Atkinson, A.C. and Cerioli, A. (2009), Finding an unknown
+ *  number of multivariate outliers, "Journal of the Royal Statistical
+ *  Society Series B", Vol. 71, pp. 201-221.
+ *  Cerioli, A., Farcomeni, A. and Riani M. (2014), Strong consistency and
+ *  robustness of the Forward Search estimator of multivariate location
+ *  and scatter, "Journal of Multivariate Analysis", Vol. 126,
+ *  pp. 167-183, http://dx.doi.org/10.1016/j.jmva.2013.12.010
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *
+ *
+ * <a href="matlab: docsearchFS('FSM')">Link to the help page for this
+ * function</a>
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ * Arguments    : emxArray_real_T *Y
+ *                const double varargin_4_data[]
+ *                const int varargin_4_size[2]
+ *                double varargin_8
+ *                const char varargin_10_data[]
+ *                const int varargin_10_size[2]
+ *                double varargin_12
+ *                emxArray_real_T *out_outliers
+ *                emxArray_real_T *out_loc
+ *                emxArray_real_T *out_cov
+ *                emxArray_real_T *out_md
+ *                emxArray_real_T *out_mmd
+ *                emxArray_real_T *out_Un
+ *                double out_nout_data[]
+ *                int out_nout_size[2]
+ *                char out_class_data[]
+ *                int out_class_size[2]
+ * Return Type  : void
+ */
 void FSM(emxArray_real_T *Y, const double varargin_4_data[],
          const int varargin_4_size[2], double varargin_8,
          const char varargin_10_data[], const int varargin_10_size[2],
@@ -118,244 +326,6 @@ void FSM(emxArray_real_T *Y, const double varargin_4_data[],
   bool exitg3;
   bool guard1 = false;
   emxInit_real_T(&loc, 2);
-  /* FSM computes forward search estimator in multivariate analysis */
-  /*  */
-  /* <a href="matlab: docsearchFS('FSM')">Link to the help function</a> */
-  /*  */
-  /*  Required input arguments: */
-  /*  */
-  /*  Y :           Input data. Matrix. */
-  /*                n x v data matrix; n observations and v variables. Rows of
-   */
-  /*                Y represent observations, and columns represent variables.
-   */
-  /*                Missing values (NaN's) and infinite values (Inf's) are */
-  /*                allowed, since observations (rows) with missing or infinite
-   */
-  /*                values will automatically be excluded from the */
-  /*                computations. */
-  /*                 Data Types - single|double */
-  /*  */
-  /*  Optional input arguments: */
-  /*  */
-  /*  */
-  /*       bonflev  : option that might be used to identify extreme outliers */
-  /*                  when the distribution of the data is strongly non normal.
-   */
-  /*                  Scalar. */
-  /*                  In these circumstances, the general signal detection rule
-   * based on */
-  /*                  consecutive exceedances cannot be used. In this case */
-  /*                  bonflev can be: */
-  /*                  - a scalar smaller than 1, which specifies the confidence
-   */
-  /*                    level for a signal and a stopping rule based on the */
-  /*                    comparison of the minimum deletion residual with a */
-  /*                    Bonferroni bound. For example if bonflev=0.99 the */
-  /*                    procedure stops when the trajectory exceeds for the */
-  /*                    first time the 99% bonferroni bound. */
-  /*                  - A scalar value greater than 1. In this case the */
-  /*                    procedure stops when the residual trajectory exceeds */
-  /*                    for the first time this value. */
-  /*                  Default value is ' ', which means to rely on general rules
-   */
-  /*                  based on consecutive exceedances. */
-  /*                  Example - 'bonflev',0.7 */
-  /*                  Data Types - double */
-  /*  */
-  /*  */
-  /*        crit    : It specified the criterion to be used to */
-  /*                  initialize the search. Character. */
-  /*                  if crit='md' the units which form initial subset are */
-  /*                   those which have the smallest m0 pseudo Mahalanobis */
-  /*                   distances computed using procedure unibiv (bivariate */
-  /*                   robust ellipses). */
-  /*                  if crit='biv' sorting is done first in */
-  /*                   terms of times units fell outside robust bivariate */
-  /*                   ellipses and then in terms of pseudoMD. In other words,
-   */
-  /*                   the units forming initial subset are chosen first among
-   */
-  /*                   the set of those which never fell outside robust */
-  /*                   bivariate ellipses then among those which fell only once
-   */
-  /*                   outside bivariate ellipses ... up to reach m0. */
-  /*                  if crit='uni' sorting is done first in */
-  /*                   terms of times units fell outside univariate boxplots */
-  /*                   and then in terms of pseudoMD. In other words, */
-  /*                   the units forming initial subset are chosen first among
-   */
-  /*                   the set of those which never fell outside */
-  /*                   univariate boxplots then among those which fell only once
-   */
-  /*                   outside univariate boxplots... up to reach m0. */
-  /*                Example - 'crit','md' */
-  /*                Data Types - char */
-  /*                  Remark: as the user can see the starting point of the */
-  /*                  search is not going to affect at all the results of the */
-  /*                  analysis. The user can explore this point with his own */
-  /*                  datasets. */
-  /*                  Remark: if crit='biv' the user can also supply in scalar
-   * rf */
-  /*                  (see below) the confidence level of the bivariate */
-  /*                  ellipses. */
-  /*  */
-  /*        init    : Point where to start monitoring required diagnostics.
-   * Scalar. */
-  /*                  Note that if bsb is suppliedinit>=length(bsb). If init is
-   * not */
-  /*                  specified it will be set equal to floor(n*0.6). */
-  /*                  Example - 'init',50 */
-  /*                  Data Types - double */
-  /*  */
-  /*           m0   : Initial subset size or vector which contains the list of
-   */
-  /*                  the units forming initial subset. Scalar or vector. */
-  /*                  The default is to start the search with v+1 units which */
-  /*                  consisting of those observations which are not outlying */
-  /*                  on any scatterplot, found as the intersection of all */
-  /*                  points lying within a robust contour containing a */
-  /*                  specified portion of the data (Riani and Zani 1997) and */
-  /*                  inside the univariate boxplot. Remark: if m0 is a vector
-   */
-  /*                  option below crit is ignored. */
-  /*                  Example - 'm0',5 */
-  /*                  Data Types - double */
-  /*  */
-  /*        msg     : It controls whether to display or not messages */
-  /*                  on the screen. Boolean. */
-  /*                  If msg==1 (default) messages about the progression of the
-   */
-  /*                  search are displayed on the screen otherwise only error */
-  /*                  messages will be displayed. */
-  /*                  Example - 'msg',0 */
-  /*                  Data Types - logical */
-  /*  */
-  /*    nocheck     : It controls whether to perform checks on matrix Y.Scalar.
-   */
-  /*                  If nocheck is equal to 1 no check is performed. */
-  /*                  As default nocheck=0. */
-  /*                  Example - 'nocheck',1 */
-  /*                  Data Types - double */
-  /*  */
-  /*         rf     : confidence level for bivariate ellipses. Scalar. The
-   * default is */
-  /*                  0.95. This option is useful only if crit='biv'. */
-  /*                  Example - 'rf',0.9 */
-  /*                  Data Types - double */
-  /*  */
-  /*        plots   : plot of minimum Mahalanobis distance. */
-  /*                  Scalar or structure. If plots is a missing value or is a
-   */
-  /*                  scalar equal to 0 no plot is produced. */
-  /*                  If plots is a scalar equal to 1 (default) the plot */
-  /*                  of minimum MD with envelopes based on n observations and
-   */
-  /*                  the scatterplot matrix with the outliers highlighted is */
-  /*                  produced. */
-  /*                  If plots is a scalar equal to 2 the additional plots of */
-  /*                  envelope resuperimposition are */
-  /*                  produced. */
-  /*                  If plots is a structure it may contain the following
-   * fields: */
-  /*                    plots.ylim = vector with two elements controlling
-   * minimum and maximum */
-  /*                        on the y axis. Default value is '' (automatic */
-  /*                        scale); */
-  /*                    plots.xlim = vector with two elements controlling
-   * minimum and maximum */
-  /*                        on the x axis. Default value is '' (automatic */
-  /*                        scale); */
-  /*                    plots.resuper = vector which specifies for which steps
-   * it is */
-  /*                        necessary to show the plots of resuperimposed
-   * envelopes */
-  /*                        if resuper is not supplied a plot of each step in
-   * which the */
-  /*                        envelope is resuperimposed is shown. Example if
-   * resuper =[85 87] */
-  /*                        plots of resuperimposedenvelopes are shown at steps
-   */
-  /*                        m=85 and m=87; */
-  /*                    plots.ncoord = scalar. If ncoord=1 plots are shown in
-   * normal */
-  /*                        coordinates else (default) plots are shown in */
-  /*                        traditional mmd coordinates; */
-  /*                    plots.labeladd = If this option is '1', the outliers in
-   * the */
-  /*                        spm are labelled with the unit row index. The */
-  /*                        default value is labeladd='', i.e. no label is */
-  /*                        added; */
-  /*                    plots.nameY = cell array of strings containing the
-   * labels of */
-  /*                        the variables. As default value, the labels which
-   * are */
-  /*                        added are Y1, ...Yv; */
-  /*                    plots.lwd =  Scalar which controls line width of the
-   * curve which */
-  /*                        contains the monitoring of minimum Mahalanobis */
-  /*                        distance. Default line of lwd=2. */
-  /*                    plots.lwdenv = Scalar which controls linewidth of the */
-  /*                        envelopes. Default value of lwdenv=2. */
-  /*                Example - 'plots',2 */
-  /*                Data Types - double */
-  /*  */
-  /*  */
-  /*  Output: */
-  /*  */
-  /*          out:   structure which contains the following fields */
-  /*  */
-  /* out.outliers=  k x 1 vector containing the list of the units declared as */
-  /*                outliers or NaN if the sample is homogeneous */
-  /*  out.mmd    =  (n-init) x 2 matrix. */
-  /*                1st col = fwd search index; */
-  /*                2nd col = value of minimum Mahalanobis Distance in each step
-   */
-  /*                of the fwd search. */
-  /*  out.Un     =  (n-init) x 11 Matrix which contains the unit(s) included */
-  /*                in the subset at each step of the fwd search. */
-  /*                REMARK: in every step the new subset is compared with the */
-  /*                old subset. Un contains the unit(s) present in the new */
-  /*                subset but not in the old one. Un(1,2) for example */
-  /*                contains the unit included in step init+1. Un(end,2) */
-  /*                contains the units included in the final step of the search.
-   */
-  /*  out.nout    = 2 x 5 matrix containing the number of times mmd went out */
-  /*                of particular quantiles. */
-  /*                First row contains quantiles 1 99 99.9 99.99 99.999 per
-   * cent; */
-  /*                Second row contains the frequency distribution. It is NaN */
-  /*                if bonflev threshold is used. */
-  /*  out.loc     = 1 x v  vector containing location of the data. */
-  /*  out.cov     = v x v robust estimate of covariance matrix. */
-  /*  out.md      = n x 1 vector containing the estimates of the robust */
-  /*                Mahalanobis distances (in squared units). This vector */
-  /*                contains the distances of each observation from the */
-  /*                location of the data, relative to the scatter matrix cov. */
-  /*  out.class  =  'FSM'. */
-  /*  */
-  /*  */
-  /*  See also: FSMeda, unibiv.m, FSMmmd.m */
-  /*  */
-  /*  References: */
-  /*  */
-  /*  Riani, M., Atkinson, A.C. and Cerioli, A. (2009), Finding an unknown */
-  /*  number of multivariate outliers, "Journal of the Royal Statistical */
-  /*  Society Series B", Vol. 71, pp. 201-221. */
-  /*  Cerioli, A., Farcomeni, A. and Riani M. (2014), Strong consistency and */
-  /*  robustness of the Forward Search estimator of multivariate location */
-  /*  and scatter, "Journal of Multivariate Analysis", Vol. 126, */
-  /*  pp. 167-183, http://dx.doi.org/10.1016/j.jmva.2013.12.010 */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('FSM')">Link to the help page for this
-   * function</a> */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /* { */
   /*     %% FSM with all default options. */
@@ -1609,4 +1579,8 @@ void FSM(emxArray_real_T *Y, const double varargin_4_data[],
   emxFree_real_T(&seq);
 }
 
-/* End of code generation (FSM.c) */
+/*
+ * File trailer for FSM.c
+ *
+ * [EOF]
+ */

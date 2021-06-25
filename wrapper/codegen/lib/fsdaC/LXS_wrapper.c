@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: LXS_wrapper.c
  *
- * LXS_wrapper.c
- *
- * Code generation for function 'LXS_wrapper'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "LXS_wrapper.h"
 #include "FSM.h"
 #include "LXS.h"
@@ -39,6 +38,28 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Wrapper function for LXS (when lms is a scalar). NV pair names are not taken
+ * as inputs. Instead, just the values are taken as inputs.
+ *
+ * Arguments    : const emxArray_real_T *y
+ *                const emxArray_real_T *X
+ *                const double bonflevoutX_data[]
+ *                const int bonflevoutX_size[2]
+ *                double conflev
+ *                double h
+ *                bool intercept
+ *                double lms
+ *                bool msg
+ *                bool nocheck
+ *                bool nomes
+ *                double nsamp
+ *                bool rew
+ *                bool yxsave
+ *                struct_LXS_T *out
+ *                emxArray_real_T *C
+ * Return Type  : void
+ */
 void LXS_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                  const double bonflevoutX_data[], const int bonflevoutX_size[2],
                  double conflev, double h, bool intercept, double lms, bool msg,
@@ -100,9 +121,6 @@ void LXS_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     fsdaC_initialize();
   }
   emxInit_real_T(&b_y, 1);
-  /*  Wrapper function for LXS (when lms is a scalar). NV pair names are not
-   * taken as */
-  /*  inputs. Instead, just the values are taken as inputs. */
   /*  Required input arguments */
   /*  y: a column vector of doubles of any length */
   /*  ARGS{1}{1} = coder.typeof(0,[Inf 1],[1 0]); */
@@ -1398,4 +1416,8 @@ void LXS_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  Create plots */
 }
 
-/* End of code generation (LXS_wrapper.c) */
+/*
+ * File trailer for LXS_wrapper.c
+ *
+ * [EOF]
+ */

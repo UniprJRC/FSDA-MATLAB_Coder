@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: jacobianFiniteDifference.c
  *
- * jacobianFiniteDifference.c
- *
- * Code generation for function 'jacobianFiniteDifference'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "jacobianFiniteDifference.h"
 #include "computeFiniteDifferences.h"
 #include "fsdaC_data.h"
@@ -19,6 +18,15 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : emxArray_real_T *augJacobian
+ *                const emxArray_real_T *fCurrent
+ *                int *funcCount
+ *                const emxArray_real_T *x
+ *                const char options_FiniteDifferenceType[7]
+ *                const h_struct_T *FiniteDifferences
+ * Return Type  : bool
+ */
 bool b_jacobianFiniteDifference(emxArray_real_T *augJacobian,
                                 const emxArray_real_T *fCurrent, int *funcCount,
                                 const emxArray_real_T *x,
@@ -107,6 +115,16 @@ bool b_jacobianFiniteDifference(emxArray_real_T *augJacobian,
   return evalOK;
 }
 
+/*
+ * Arguments    : emxArray_real_T *augJacobian
+ *                const emxArray_real_T *fCurrent
+ *                const emxArray_real_T *x
+ *                const char options_FiniteDifferenceType[7]
+ *                h_struct_T *FiniteDifferences
+ *                int *funcCount
+ *                bool *evalOK
+ * Return Type  : void
+ */
 void jacobianFiniteDifference(emxArray_real_T *augJacobian,
                               const emxArray_real_T *fCurrent,
                               const emxArray_real_T *x,
@@ -196,4 +214,8 @@ void jacobianFiniteDifference(emxArray_real_T *augJacobian,
   emxFreeStruct_struct_T5(&b_FiniteDifferences);
 }
 
-/* End of code generation (jacobianFiniteDifference.c) */
+/*
+ * File trailer for jacobianFiniteDifference.c
+ *
+ * [EOF]
+ */

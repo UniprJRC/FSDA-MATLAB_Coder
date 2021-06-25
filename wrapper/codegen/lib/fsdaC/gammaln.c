@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: gammaln.c
  *
- * gammaln.c
- *
- * Code generation for function 'gammaln'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "gammaln.h"
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
@@ -17,6 +16,10 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : double *x
+ * Return Type  : void
+ */
 void gammaln(double *x)
 {
   static const double table100[100] = {0.0,
@@ -216,4 +219,8 @@ void gammaln(double *x)
   }
 }
 
-/* End of code generation (gammaln.c) */
+/*
+ * File trailer for gammaln.c
+ *
+ * [EOF]
+ */

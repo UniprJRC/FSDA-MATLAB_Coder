@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: xzlanhs.c
  *
- * xzlanhs.c
- *
- * Code generation for function 'xzlanhs'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "xzlanhs.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
@@ -17,6 +16,12 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const emxArray_creal_T *A
+ *                int ilo
+ *                int ihi
+ * Return Type  : double
+ */
 double xzlanhs(const emxArray_creal_T *A, int ilo, int ihi)
 {
   double absxk;
@@ -79,4 +84,8 @@ double xzlanhs(const emxArray_creal_T *A, int ilo, int ihi)
   return f;
 }
 
-/* End of code generation (xzlanhs.c) */
+/*
+ * File trailer for xzlanhs.c
+ *
+ * [EOF]
+ */

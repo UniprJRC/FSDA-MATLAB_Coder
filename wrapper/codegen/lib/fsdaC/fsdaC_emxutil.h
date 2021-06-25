@@ -2,17 +2,16 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: fsdaC_emxutil.h
  *
- * fsdaC_emxutil.h
- *
- * Code generation for function 'fsdaC_emxutil'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
 #ifndef FSDAC_EMXUTIL_H
 #define FSDAC_EMXUTIL_H
 
-/* Include files */
+/* Include Files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -213,4 +212,8 @@ extern void emxTrim_cell_wrap_36(emxArray_cell_wrap_36 *emxArray, int fromIndex,
 #endif
 
 #endif
-/* End of code generation (fsdaC_emxutil.h) */
+/*
+ * File trailer for fsdaC_emxutil.h
+ *
+ * [EOF]
+ */

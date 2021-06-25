@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: FSRcore.c
  *
- * FSRcore.c
- *
- * Code generation for function 'FSRcore'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "FSRcore.h"
 #include "FSRbonfbound.h"
 #include "FSRbsb.h"
@@ -37,6 +36,214 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * FSRcore scans the trajectory of mdr to check for exceedances
+ *
+ *
+ *  Required input arguments:
+ *
+ *     INP    :   Structure containing monitoring of mdr and other quantities.
+ * Structure. Structure containing the following fields. INP.y   =   Response
+ * variable. Vector. Response variable, specified as a vector of length n, where
+ * n is the number of observations. Each entry in y is the response for the
+ *                corresponding row of X.
+ *                Missing values (NaN's) and infinite values (Inf's) are
+ *                allowed, since observations (rows) with missing or infinite
+ *                values will automatically be excluded from the
+ *                computations.
+ *   INP.X =      Predictor variables. Matrix. Matrix of explanatory
+ *                variables (also called 'regressors') of dimension n x p
+ *                where p denotes the number of explanatory variables
+ *                including the intercept.
+ *   INP.n =      Number of observations. Scalar. Number of rows of matrix X.
+ *   INP.p =      Number of predictor variables. Scalar. Number of columns of
+ *                matrix X.
+ *   INP.mdr =    Minimum deletion residual. Matrix.  n -init x 2 matrix
+ *                which contains the monitoring of minimum deletion residual
+ *                at each step of the forward search.
+ *                1st col = fwd search index (from init to n-1).
+ *                2nd col = minimum deletion residual.
+ *                Depending on the string 'model', mdr refers to OLS
+ *                mdr, GLS mdr or Bayes regression mdr.
+ *   INP.init =   Search initialization. Scalar.
+ *                It specifies the point where the user has started
+ *                monitoring mdr.
+ *   INP.Un  =    Units included in each step. Matrix.
+ *                (n-init) x 11 matrix which contains the unit(s) included
+ *                in the subset at each step of the fwd search.
+ *                REMARK: in every step the new subset is compared with the
+ *                old subset. Un contains the unit(s) present in the new
+ *                subset but not in the old one. Un(1,2) for example contains
+ *                the unit included in step init+1. Un(end,2) contains the
+ *                units included in the final step of the search.
+ *                Un has 11 columns because we store up to 10 units
+ *                simultaneously in each step.
+ *    INP.bb=     Units included in each step. Matrix.
+ *                n-by-(n-init+1) or matrix n-by-r matrix which the units
+ *                belonging to the subset at each step of the forward search
+ *                or at selected steps.
+ *   INP.Bcoeff=  Estimated regression coefficients. Matrix.
+ *                (n-init+1) x (p+1) matrix containing the monitoring of
+ *                estimated beta coefficients in each step of the forward
+ *                search. The first column contains the fwd search index.
+ *                Depending on the string 'model', Bcoeff refers to OLS
+ *                coefficents, GLS coefficients or Bayes regression
+ *                coefficients.
+ *  INP.Hetero=  Estimated coefficients in the skedastic equation. Matrix.
+ *                (n-init+1) x (r+1) matrix containing the monitoring of
+ *                estimated skedastic coefficients in each step of the forward
+ *                search. The first column contains the fwd search index.
+ *                This input is used just if strcmp(model,'H')
+ *   INP.S2 =   Estimate of $sigma^2$.  (n-init+1)-by-2 matrix containing the
+ *                monitoring of S2.  Depending on the string 'model', S2
+ *                refers to OLS, GLS or in the Baysian case it is the
+ *                posterior estimate of $\sigma^2$.
+ *    INP.Z =     Predictor variables in the regression equation (necessary
+ *                input just if model='H'). Matrix.
+ *                n x r matrix or vector of length r.
+ *                If Z is a n x r matrix it contains the r variables which
+ *                form the scedastic function as follows (if input option
+ * art==1)
+ *                \[
+ *                \omega_i = 1 + exp(\gamma_0 + \gamma_1 Z(i,1) + ...+
+ * \gamma_{r} Z(i,r))
+ *                \]
+ *                If Z is a vector of length r it contains the indexes of the
+ *                columns of matrix X which form the scedastic function as
+ *                follows
+ *                \[
+ *                \omega_i = 1 +  exp(\gamma_0 + \gamma_1 X(i,Z(1)) + ...+
+ *                \gamma_{r} X(i,Z(r)))
+ *                \]
+ *
+ *    INP.beta0 = Prior mean of $\beta$ (necessary
+ *                input just if model='B'). p-times-1 vector.
+ *    INP.R     = Matrix associated with covariance matrix of $\beta$ (necessary
+ *                input just if model='B'). p-times-p
+ *                positive definite matrix.
+ *                It can be interpreted as X0'X0 where X0 is a n0 x p
+ *                matrix coming from previous experiments (assuming that the
+ *                intercept is included in the model)
+ *
+ *                The prior distribution of $\tau_0$ is a gamma distribution
+ * with parameters $a_0$ and $b_0$, that is
+ *
+ *                 \[     p(\tau_0) \propto \tau^{a_0-1} \exp (-b_0 \tau)
+ *                        \qquad   E(\tau_0)= a_0/b_0               \]
+ *
+ *    INP.tau0 =  Prior estimate of tau (necessary
+ *                input just if model='B'). Scalar. Prior estimate of $\tau=1/
+ * \sigma^2 =a_0/b_0$. INP.n0 =  Number of previous experiments (necessary input
+ * just if model='B'). Scalar. Sometimes it helps to think of the prior
+ * information as coming from n0 previous experiments. Therefore we assume that
+ * matrix X0 (which defines R), was made up of n0 observations. Data Types -
+ * struct model :      type of regression model. Character. Possible values are
+ * '' (default) | 'H' | 'B'.
+ *                '' stands for linear regression;
+ *                'H' stands for heteroskedastic regression;
+ *                'B' stands for Bayesian regression.
+ *                This input is used to reconstruct the units belonging to
+ *                subset at step n-decl where decl is the number of units
+ *                declared as outliers. More precisely, if n>5000 matrix BB
+ *                just contains the units belonging to subset in selected
+ *                steps, therefore in order to find the units inside subset at
+ *                step n-decl, FSRcore calls:
+ *                routine FSRbsb.m in presence of linear regression;
+ *                routine FSRHbsb.m in presence of heteroskedastic regression;
+ *                routine FSRBbsb.m in presence of Bayesian regression;
+ *                  Data Types - char
+ *     options:   Additional options. Stucture. Structure containing optional
+ *                parameters which are passed to directly through functions
+ *                FSR.m, FSRH.m or FSRB.m.
+ *                  Data Types - struct
+ *
+ *      weak:     Indicator to use a different decision rule to detect
+ *                the signal and flag outliers. false (default) | true.
+ *                If weak==false default FSRcore values are used,
+ *                if weak==true 'stronger' quantiles are used  as a
+ *                decision rule to trim outliers and VIOM outliers
+ *     are the ones entering the Search after the first signal.
+ *                Example - 'weak',true
+ *                Data Types - boolean
+ *
+ *  Optional input arguments:
+ *
+ *  Output:
+ *
+ *      out :     A structure containing the following fields
+ *  out.ListOut  =  k x 1 vector containing the list of the units declared as
+ *                  outliers or NaN if the sample is homogeneous.
+ *  out.outliers =  out.ListOut. This field is added for homogeneity with the
+ *                  other robust estimators.
+ *  out.beta   =  p-by-1 vector containing the estimated regression
+ *                parameter in step n-k. Depending on the string 'model',
+ *                beta refers to OLS coefficents, GLS coefficients or Bayes
+ *                regression coefficients.
+ *  out.scale   = estimate of the scale. Depending on the string 'model',
+ *                beta refers to OLS coefficents, GLS coefficients or it is
+ *                the inverse of the posterior estimate of the square root of
+ * tau. out.mdr    =  (n-init) x 2 matrix 1st col = fwd search index 2nd col =
+ * value of minimum deletion residual in each step of the fwd search. Depending
+ * on the string 'model', mdr is found using linear regression, heteroskedastic
+ *                regression or Bayes regression.
+ *  out.Un     =  (n-init) x 11 matrix which contains the unit(s) included
+ *                in the subset at each step of the fwd search.
+ *                REMARK: in every step the new subset is compared with the
+ *                old subset. Un contains the unit(s) present in the new
+ *                subset but not in the old one.
+ *                Un(1,2) for example contains the unit included in step
+ *                init+1.
+ *                Un(end,2) contains the units included in the final step
+ *                of the search.
+ *  out.nout    = 2 x 5 matrix containing the number of times mdr went out
+ *                of particular quantiles.
+ *                First row contains quantiles 1 99 99.9 99.99 99.999.
+ *                Second row contains the frequency distribution.
+ *  out.outliersVIOM = m x 1 vector containing the list of the units declared as
+ *                     VIOM outliers or NaN if they are not present.
+ *                     Present only if weak == true.
+ *  out.ListCl =  (n-m-k) x 1 vector of non-outlying units.
+ *                Present only if weak == true.
+ *
+ *  More About:
+ *
+ *  The rules for declaring units as outliers are the same for standard
+ *  regression, heteroskedastic regression and Bayesian regression. Therefore
+ *  this function is called by:
+ *  FSR.m  = outlier detection procedure for linear regression;
+ *  FSRB.m = outlier detection procedure in Bayesian linear regression;
+ *  FSRH.m = outlier detection procedure for heteroskedastic models;
+ *  If ndecl units are declared as outliers, it is necessary to find the
+ *  units forming subset at step n-decl. If n<=5000 input matrix INP.bb
+ *  contains the storing of the units belonging to subset in all steps, else
+ *  if INP.bb does not contain the units in step n-decl procedure calls
+ *  routine FSRbsb.m or FSRHbsb.m or FSRBbsb.m.
+ *
+ *  See also: FSR.m, FSRH.m, FSRB.m
+ *
+ *  References:
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ * Arguments    : const emxArray_real_T *INP_y
+ *                const emxArray_real_T *INP_X
+ *                double INP_n
+ *                double INP_p
+ *                const emxArray_real_T *INP_mdr
+ *                double INP_init
+ *                const emxArray_real_T *INP_Un
+ *                const emxArray_real_T *INP_bb
+ *                const emxArray_real_T *INP_Bcoeff
+ *                const emxArray_real_T *INP_S2
+ *                bool INP_weak
+ *                const double options_bonflev_data[]
+ *                const int options_bonflev_size[2]
+ *                bool options_msg
+ *                struct_T *out
+ * Return Type  : void
+ */
 void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
              double INP_n, double INP_p, const emxArray_real_T *INP_mdr,
              double INP_init, const emxArray_real_T *INP_Un,
@@ -121,225 +328,6 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
   bool exitg1;
   bool exitg2;
   bool tmp_data;
-  /* FSRcore scans the trajectory of mdr to check for exceedances */
-  /*  */
-  /*  */
-  /*  Required input arguments: */
-  /*  */
-  /*     INP    :   Structure containing monitoring of mdr and other quantities.
-   * Structure. */
-  /*                Structure containing the following fields. */
-  /*    INP.y   =   Response variable. Vector. Response variable, specified as
-   */
-  /*                a vector of length n, where n is the number of */
-  /*                observations. Each entry in y is the response for the */
-  /*                corresponding row of X. */
-  /*                Missing values (NaN's) and infinite values (Inf's) are */
-  /*                allowed, since observations (rows) with missing or infinite
-   */
-  /*                values will automatically be excluded from the */
-  /*                computations. */
-  /*   INP.X =      Predictor variables. Matrix. Matrix of explanatory */
-  /*                variables (also called 'regressors') of dimension n x p */
-  /*                where p denotes the number of explanatory variables */
-  /*                including the intercept. */
-  /*   INP.n =      Number of observations. Scalar. Number of rows of matrix X.
-   */
-  /*   INP.p =      Number of predictor variables. Scalar. Number of columns of
-   */
-  /*                matrix X. */
-  /*   INP.mdr =    Minimum deletion residual. Matrix.  n -init x 2 matrix */
-  /*                which contains the monitoring of minimum deletion residual
-   */
-  /*                at each step of the forward search. */
-  /*                1st col = fwd search index (from init to n-1). */
-  /*                2nd col = minimum deletion residual. */
-  /*                Depending on the string 'model', mdr refers to OLS */
-  /*                mdr, GLS mdr or Bayes regression mdr. */
-  /*   INP.init =   Search initialization. Scalar. */
-  /*                It specifies the point where the user has started */
-  /*                monitoring mdr. */
-  /*   INP.Un  =    Units included in each step. Matrix. */
-  /*                (n-init) x 11 matrix which contains the unit(s) included */
-  /*                in the subset at each step of the fwd search. */
-  /*                REMARK: in every step the new subset is compared with the */
-  /*                old subset. Un contains the unit(s) present in the new */
-  /*                subset but not in the old one. Un(1,2) for example contains
-   */
-  /*                the unit included in step init+1. Un(end,2) contains the */
-  /*                units included in the final step of the search. */
-  /*                Un has 11 columns because we store up to 10 units */
-  /*                simultaneously in each step. */
-  /*    INP.bb=     Units included in each step. Matrix. */
-  /*                n-by-(n-init+1) or matrix n-by-r matrix which the units */
-  /*                belonging to the subset at each step of the forward search
-   */
-  /*                or at selected steps. */
-  /*   INP.Bcoeff=  Estimated regression coefficients. Matrix. */
-  /*                (n-init+1) x (p+1) matrix containing the monitoring of */
-  /*                estimated beta coefficients in each step of the forward */
-  /*                search. The first column contains the fwd search index. */
-  /*                Depending on the string 'model', Bcoeff refers to OLS */
-  /*                coefficents, GLS coefficients or Bayes regression */
-  /*                coefficients. */
-  /*  INP.Hetero=  Estimated coefficients in the skedastic equation. Matrix. */
-  /*                (n-init+1) x (r+1) matrix containing the monitoring of */
-  /*                estimated skedastic coefficients in each step of the forward
-   */
-  /*                search. The first column contains the fwd search index. */
-  /*                This input is used just if strcmp(model,'H') */
-  /*   INP.S2 =   Estimate of $sigma^2$.  (n-init+1)-by-2 matrix containing the
-   */
-  /*                monitoring of S2.  Depending on the string 'model', S2 */
-  /*                refers to OLS, GLS or in the Baysian case it is the */
-  /*                posterior estimate of $\sigma^2$. */
-  /*    INP.Z =     Predictor variables in the regression equation (necessary */
-  /*                input just if model='H'). Matrix. */
-  /*                n x r matrix or vector of length r. */
-  /*                If Z is a n x r matrix it contains the r variables which */
-  /*                form the scedastic function as follows (if input option
-   * art==1) */
-  /*                \[ */
-  /*                \omega_i = 1 + exp(\gamma_0 + \gamma_1 Z(i,1) + ...+
-   * \gamma_{r} Z(i,r)) */
-  /*                \] */
-  /*                If Z is a vector of length r it contains the indexes of the
-   */
-  /*                columns of matrix X which form the scedastic function as */
-  /*                follows */
-  /*                \[ */
-  /*                \omega_i = 1 +  exp(\gamma_0 + \gamma_1 X(i,Z(1)) + ...+ */
-  /*                \gamma_{r} X(i,Z(r))) */
-  /*                \] */
-  /*  */
-  /*    INP.beta0 = Prior mean of $\beta$ (necessary */
-  /*                input just if model='B'). p-times-1 vector. */
-  /*    INP.R     = Matrix associated with covariance matrix of $\beta$
-   * (necessary */
-  /*                input just if model='B'). p-times-p */
-  /*                positive definite matrix. */
-  /*                It can be interpreted as X0'X0 where X0 is a n0 x p */
-  /*                matrix coming from previous experiments (assuming that the
-   */
-  /*                intercept is included in the model) */
-  /*  */
-  /*                The prior distribution of $\tau_0$ is a gamma distribution
-   * with */
-  /*                parameters $a_0$ and $b_0$, that is */
-  /*  */
-  /*                 \[     p(\tau_0) \propto \tau^{a_0-1} \exp (-b_0 \tau) */
-  /*                        \qquad   E(\tau_0)= a_0/b_0               \] */
-  /*  */
-  /*    INP.tau0 =  Prior estimate of tau (necessary */
-  /*                input just if model='B'). Scalar. Prior estimate of $\tau=1/
-   * \sigma^2 =a_0/b_0$. */
-  /*      INP.n0 =  Number of previous experiments (necessary */
-  /*                input just if model='B'). Scalar. Sometimes it helps */
-  /*                to think of the prior information as coming from n0 */
-  /*                previous experiments. Therefore we assume that matrix X0 */
-  /*                (which defines R), was made up of n0 observations. */
-  /*                  Data Types - struct */
-  /*   model :      type of regression model. Character. */
-  /*                Possible values are '' (default) | 'H' | 'B'. */
-  /*                '' stands for linear regression; */
-  /*                'H' stands for heteroskedastic regression; */
-  /*                'B' stands for Bayesian regression. */
-  /*                This input is used to reconstruct the units belonging to */
-  /*                subset at step n-decl where decl is the number of units */
-  /*                declared as outliers. More precisely, if n>5000 matrix BB */
-  /*                just contains the units belonging to subset in selected */
-  /*                steps, therefore in order to find the units inside subset at
-   */
-  /*                step n-decl, FSRcore calls: */
-  /*                routine FSRbsb.m in presence of linear regression; */
-  /*                routine FSRHbsb.m in presence of heteroskedastic regression;
-   */
-  /*                routine FSRBbsb.m in presence of Bayesian regression; */
-  /*                  Data Types - char */
-  /*     options:   Additional options. Stucture. Structure containing optional
-   */
-  /*                parameters which are passed to directly through functions */
-  /*                FSR.m, FSRH.m or FSRB.m. */
-  /*                  Data Types - struct */
-  /*  */
-  /*      weak:     Indicator to use a different decision rule to detect */
-  /*                the signal and flag outliers. false (default) | true. */
-  /*                If weak==false default FSRcore values are used, */
-  /*                if weak==true 'stronger' quantiles are used  as a */
-  /*                decision rule to trim outliers and VIOM outliers */
-  /* 				are the ones entering the Search after the first signal.
-   */
-  /*                Example - 'weak',true */
-  /*                Data Types - boolean */
-  /*  */
-  /*  Optional input arguments: */
-  /*  */
-  /*  Output: */
-  /*  */
-  /*      out :     A structure containing the following fields */
-  /*  out.ListOut  =  k x 1 vector containing the list of the units declared as
-   */
-  /*                  outliers or NaN if the sample is homogeneous. */
-  /*  out.outliers =  out.ListOut. This field is added for homogeneity with the
-   */
-  /*                  other robust estimators. */
-  /*  out.beta   =  p-by-1 vector containing the estimated regression */
-  /*                parameter in step n-k. Depending on the string 'model', */
-  /*                beta refers to OLS coefficents, GLS coefficients or Bayes */
-  /*                regression coefficients. */
-  /*  out.scale   = estimate of the scale. Depending on the string 'model', */
-  /*                beta refers to OLS coefficents, GLS coefficients or it is */
-  /*                the inverse of the posterior estimate of the square root of
-   * tau. */
-  /*  out.mdr    =  (n-init) x 2 matrix */
-  /*                1st col = fwd search index */
-  /*                2nd col = value of minimum deletion residual in each step */
-  /*                of the fwd search. Depending on the string 'model', */
-  /*                mdr is found using linear regression, heteroskedastic */
-  /*                regression or Bayes regression. */
-  /*  out.Un     =  (n-init) x 11 matrix which contains the unit(s) included */
-  /*                in the subset at each step of the fwd search. */
-  /*                REMARK: in every step the new subset is compared with the */
-  /*                old subset. Un contains the unit(s) present in the new */
-  /*                subset but not in the old one. */
-  /*                Un(1,2) for example contains the unit included in step */
-  /*                init+1. */
-  /*                Un(end,2) contains the units included in the final step */
-  /*                of the search. */
-  /*  out.nout    = 2 x 5 matrix containing the number of times mdr went out */
-  /*                of particular quantiles. */
-  /*                First row contains quantiles 1 99 99.9 99.99 99.999. */
-  /*                Second row contains the frequency distribution. */
-  /*  out.outliersVIOM = m x 1 vector containing the list of the units declared
-   * as */
-  /*                     VIOM outliers or NaN if they are not present. */
-  /*                     Present only if weak == true. */
-  /*  out.ListCl =  (n-m-k) x 1 vector of non-outlying units. */
-  /*                Present only if weak == true. */
-  /*  */
-  /*  More About: */
-  /*  */
-  /*  The rules for declaring units as outliers are the same for standard */
-  /*  regression, heteroskedastic regression and Bayesian regression. Therefore
-   */
-  /*  this function is called by: */
-  /*  FSR.m  = outlier detection procedure for linear regression; */
-  /*  FSRB.m = outlier detection procedure in Bayesian linear regression; */
-  /*  FSRH.m = outlier detection procedure for heteroskedastic models; */
-  /*  If ndecl units are declared as outliers, it is necessary to find the */
-  /*  units forming subset at step n-decl. If n<=5000 input matrix INP.bb */
-  /*  contains the storing of the units belonging to subset in all steps, else
-   */
-  /*  if INP.bb does not contain the units in step n-decl procedure calls */
-  /*  routine FSRbsb.m or FSRHbsb.m or FSRBbsb.m. */
-  /*  */
-  /*  See also: FSR.m, FSRH.m, FSRB.m */
-  /*  */
-  /*  References: */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Beginning of code */
   /*  Extract required input variables */
   i = out->mdr->size[0] * out->mdr->size[1];
@@ -1925,4 +1913,8 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
   emxFree_boolean_T(&b_bool);
 }
 
-/* End of code generation (FSRcore.c) */
+/*
+ * File trailer for FSRcore.c
+ *
+ * [EOF]
+ */

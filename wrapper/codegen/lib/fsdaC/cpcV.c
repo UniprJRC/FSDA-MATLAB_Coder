@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: cpcV.c
  *
- * cpcV.c
- *
- * Code generation for function 'cpcV'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "cpcV.h"
 #include "combineVectorElements.h"
 #include "fsdaC_emxutil.h"
@@ -22,6 +21,68 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * cpcV computes updated common rotation matrix when shapes are different
+ *
+ *   This routine is called when the parametrization is *VE that is when
+ *   variable shape is assumed but equal rotation is imposed. This routine is
+ *   based on the algorithm described in McNicholas and Browne (2014)
+ *
+ *  Required input arguments:
+ *
+ *
+ *      lmdc  : row vector of length $k$ containing restricted determinants.
+ * More precisely, the $j$-th element of lmdc contains $\lambda_j^{1/v}$. The
+ * elements of lmdc satisfy the constraint pa.cdet in the sense that
+ *              $\max(lmdc)/\min(lmdc) \leq pa.cdet^{(1/v)}. In other words, the
+ *              ratio between the largest and the smallest determinant is not
+ *              greater than pa.cdet. All the elements of vector lmdc are equal
+ *              if modeltype is E** or if pa.cdet=1;
+ *      GAMc : constrained shape matrix. Matrix of size v-by-k containing in
+ *            column j the elements on the main diagonal of shape matrix
+ *            $\Gamma_j$. The elements of GAMc satisfy the following
+ *            constraints:
+ *            The product of the elements of each column is equal to 1.
+ *            The ratio of the elements of each row is not greater than pa.shb.
+ *            The ratio of the elements of each column is not greater than
+ *            pa.shw. All the columns of matrix GAMc are equal if the second
+ *            letter of modeltype is E. All the columns of matrix GAMc are
+ *            equal to 1 if the second letter of modeltype is I.
+ *    Omega2D : v-by-v matrix containing the common rotation matrix.
+ *    SigmaB : v-by-v-by-k array containing the k covariance matrices for the
+ *            k groups.
+ *    niini  : vector of length k containing the size of the groups.
+ *      pa : structure containing: 3 letter character specifying modeltype,
+ *             number of dimensions, number of groups...
+ *             The fields of pars which are used in this routine are pa.v,
+ *             pa.k,  pa.maxiterR and pa.tolR
+ *
+ *  Output:
+ *
+ *     Omega : v-by-v-k 3D array containing the updated common rotation
+ *                matrix replicated k times. Omega(:,:,j)=Omega2D with j=1,
+ *                ..., k
+ *    Omega2D : v-by-v matrix containing the updated common rotation matrix.
+ *
+ *
+ *  References
+ *
+ *  McNicholas, P.D., Browne, R.P. (2014), Estimating common principal
+ *  components in high dimensions, Advances in Data Analysis and
+ *  Classification, Vol. 8, pp. 217-226
+ *
+ * Arguments    : const emxArray_real_T *lmdc
+ *                const emxArray_real_T *GAMc
+ *                const emxArray_real_T *Omega2D
+ *                const emxArray_real_T *Wk
+ *                const emxArray_real_T *wk
+ *                double pa_k
+ *                double pa_maxiterR
+ *                double pa_tolR
+ *                double pa_v
+ *                emxArray_real_T *Omega
+ * Return Type  : void
+ */
 void cpcV(const emxArray_real_T *lmdc, const emxArray_real_T *GAMc,
           const emxArray_real_T *Omega2D, const emxArray_real_T *Wk,
           const emxArray_real_T *wk, double pa_k, double pa_maxiterR,
@@ -56,66 +117,6 @@ void cpcV(const emxArray_real_T *lmdc, const emxArray_real_T *GAMc,
   for (i = 0; i < loop_ub; i++) {
     b_Omega2D->data[i] = Omega2D->data[i];
   }
-  /* cpcV computes updated common rotation matrix when shapes are different */
-  /*  */
-  /*   This routine is called when the parametrization is *VE that is when */
-  /*   variable shape is assumed but equal rotation is imposed. This routine is
-   */
-  /*   based on the algorithm described in McNicholas and Browne (2014) */
-  /*  */
-  /*  Required input arguments: */
-  /*  */
-  /*  */
-  /*      lmdc  : row vector of length $k$ containing restricted determinants.
-   * More */
-  /*              precisely, the $j$-th element of lmdc contains
-   * $\lambda_j^{1/v}$. */
-  /*              The elements of lmdc satisfy the constraint pa.cdet in the
-   * sense that */
-  /*              $\max(lmdc)/\min(lmdc) \leq pa.cdet^{(1/v)}. In other words,
-   * the */
-  /*              ratio between the largest and the smallest determinant is not
-   */
-  /*              greater than pa.cdet. All the elements of vector lmdc are
-   * equal */
-  /*              if modeltype is E** or if pa.cdet=1; */
-  /*      GAMc : constrained shape matrix. Matrix of size v-by-k containing in
-   */
-  /*            column j the elements on the main diagonal of shape matrix */
-  /*            $\Gamma_j$. The elements of GAMc satisfy the following */
-  /*            constraints: */
-  /*            The product of the elements of each column is equal to 1. */
-  /*            The ratio of the elements of each row is not greater than
-   * pa.shb. */
-  /*            The ratio of the elements of each column is not greater than */
-  /*            pa.shw. All the columns of matrix GAMc are equal if the second
-   */
-  /*            letter of modeltype is E. All the columns of matrix GAMc are */
-  /*            equal to 1 if the second letter of modeltype is I. */
-  /*    Omega2D : v-by-v matrix containing the common rotation matrix. */
-  /*    SigmaB : v-by-v-by-k array containing the k covariance matrices for the
-   */
-  /*            k groups. */
-  /*    niini  : vector of length k containing the size of the groups. */
-  /*      pa : structure containing: 3 letter character specifying modeltype, */
-  /*             number of dimensions, number of groups... */
-  /*             The fields of pars which are used in this routine are pa.v, */
-  /*             pa.k,  pa.maxiterR and pa.tolR */
-  /*  */
-  /*  Output: */
-  /*  */
-  /*     Omega : v-by-v-k 3D array containing the updated common rotation */
-  /*                matrix replicated k times. Omega(:,:,j)=Omega2D with j=1, */
-  /*                ..., k */
-  /*    Omega2D : v-by-v matrix containing the updated common rotation matrix.
-   */
-  /*  */
-  /*  */
-  /*  References */
-  /*  */
-  /*  McNicholas, P.D., Browne, R.P. (2014), Estimating common principal */
-  /*  components in high dimensions, Advances in Data Analysis and */
-  /*  Classification, Vol. 8, pp. 217-226 */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
   /* $LastChangedDate::                      $: Date of the last commit */
@@ -308,4 +309,8 @@ void cpcV(const emxArray_real_T *lmdc, const emxArray_real_T *GAMc,
   emxFree_real_T(&b_Omega2D);
 }
 
-/* End of code generation (cpcV.c) */
+/*
+ * File trailer for cpcV.c
+ *
+ * [EOF]
+ */

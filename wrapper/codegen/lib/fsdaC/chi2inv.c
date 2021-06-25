@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: chi2inv.c
  *
- * chi2inv.c
- *
- * Code generation for function 'chi2inv'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "chi2inv.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
@@ -19,6 +18,12 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const emxArray_real_T *p
+ *                double v
+ *                emxArray_real_T *x
+ * Return Type  : void
+ */
 void b_chi2inv(const emxArray_real_T *p, double v, emxArray_real_T *x)
 {
   creal_T dc;
@@ -49,6 +54,11 @@ void b_chi2inv(const emxArray_real_T *p, double v, emxArray_real_T *x)
   }
 }
 
+/*
+ * Arguments    : double p
+ *                double v
+ * Return Type  : double
+ */
 double chi2inv(double p, double v)
 {
   double a;
@@ -70,4 +80,8 @@ double chi2inv(double p, double v)
   return x;
 }
 
-/* End of code generation (chi2inv.c) */
+/*
+ * File trailer for chi2inv.c
+ *
+ * [EOF]
+ */

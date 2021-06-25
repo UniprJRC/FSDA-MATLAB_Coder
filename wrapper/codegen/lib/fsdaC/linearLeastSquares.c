@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: linearLeastSquares.c
  *
- * linearLeastSquares.c
- *
- * Code generation for function 'linearLeastSquares'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "linearLeastSquares.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
@@ -23,6 +22,15 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : emxArray_real_T *lhs
+ *                emxArray_real_T *rhs
+ *                const emxArray_real_T *dx
+ *                int m
+ *                int n
+ *                emxArray_real_T *b_dx
+ * Return Type  : void
+ */
 void linearLeastSquares(emxArray_real_T *lhs, emxArray_real_T *rhs,
                         const emxArray_real_T *dx, int m, int n,
                         emxArray_real_T *b_dx)
@@ -259,4 +267,8 @@ void linearLeastSquares(emxArray_real_T *lhs, emxArray_real_T *rhs,
   emxFree_int32_T(&jpvt);
 }
 
-/* End of code generation (linearLeastSquares.c) */
+/*
+ * File trailer for linearLeastSquares.c
+ *
+ * [EOF]
+ */

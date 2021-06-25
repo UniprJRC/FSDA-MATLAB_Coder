@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: cat.c
  *
- * cat.c
- *
- * Code generation for function 'cat'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "cat.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
@@ -17,6 +16,12 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const emxArray_real_T *varargin_1
+ *                const emxArray_real_T *varargin_2
+ *                emxArray_real_T *y
+ * Return Type  : void
+ */
 void b_cat(const emxArray_real_T *varargin_1, const emxArray_real_T *varargin_2,
            emxArray_real_T *y)
 {
@@ -44,6 +49,12 @@ void b_cat(const emxArray_real_T *varargin_1, const emxArray_real_T *varargin_2,
   }
 }
 
+/*
+ * Arguments    : const emxArray_real_T *varargin_1
+ *                const emxArray_real_T *varargin_2
+ *                emxArray_real_T *y
+ * Return Type  : void
+ */
 void cat(const emxArray_real_T *varargin_1, const emxArray_real_T *varargin_2,
          emxArray_real_T *y)
 {
@@ -64,4 +75,8 @@ void cat(const emxArray_real_T *varargin_1, const emxArray_real_T *varargin_2,
   }
 }
 
-/* End of code generation (cat.c) */
+/*
+ * File trailer for cat.c
+ *
+ * [EOF]
+ */

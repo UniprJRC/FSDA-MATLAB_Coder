@@ -2,20 +2,25 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: xunormqr.c
  *
- * xunormqr.c
- *
- * Code generation for function 'xunormqr'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "xunormqr.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const emxArray_real_T *Q
+ *                emxArray_real_T *C
+ *                const emxArray_real_T *tau
+ * Return Type  : void
+ */
 void xunormqr(const emxArray_real_T *Q, emxArray_real_T *C,
               const emxArray_real_T *tau)
 {
@@ -49,4 +54,8 @@ void xunormqr(const emxArray_real_T *Q, emxArray_real_T *C,
   }
 }
 
-/* End of code generation (xunormqr.c) */
+/*
+ * File trailer for xunormqr.c
+ *
+ * [EOF]
+ */

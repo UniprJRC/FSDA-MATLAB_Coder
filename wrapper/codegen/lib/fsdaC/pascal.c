@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: pascal.c
  *
- * pascal.c
- *
- * Code generation for function 'pascal'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "pascal.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
@@ -18,6 +17,11 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : double n
+ *                emxArray_real_T *P
+ * Return Type  : void
+ */
 void pascal(double n, emxArray_real_T *P)
 {
   emxArray_real_T *b_P;
@@ -90,4 +94,8 @@ void pascal(double n, emxArray_real_T *P)
   }
 }
 
-/* End of code generation (pascal.c) */
+/*
+ * File trailer for pascal.c
+ *
+ * [EOF]
+ */

@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: sum.c
  *
- * sum.c
- *
- * Code generation for function 'sum'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "sum.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
@@ -17,6 +16,11 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const emxArray_real_T *x
+ *                emxArray_real_T *y
+ * Return Type  : void
+ */
 void b_sum(const emxArray_real_T *x, emxArray_real_T *y)
 {
   emxArray_real_T *bsum;
@@ -102,6 +106,11 @@ void b_sum(const emxArray_real_T *x, emxArray_real_T *y)
   }
 }
 
+/*
+ * Arguments    : const emxArray_real_T *x
+ *                emxArray_real_T *y
+ * Return Type  : void
+ */
 void c_sum(const emxArray_real_T *x, emxArray_real_T *y)
 {
   double bsum_data;
@@ -176,6 +185,11 @@ void c_sum(const emxArray_real_T *x, emxArray_real_T *y)
   }
 }
 
+/*
+ * Arguments    : const emxArray_real_T *x
+ *                emxArray_real_T *y
+ * Return Type  : void
+ */
 void d_sum(const emxArray_real_T *x, emxArray_real_T *y)
 {
   double bsum_data;
@@ -250,6 +264,11 @@ void d_sum(const emxArray_real_T *x, emxArray_real_T *y)
   }
 }
 
+/*
+ * Arguments    : const emxArray_real_T *x
+ *                emxArray_real_T *y
+ * Return Type  : void
+ */
 void e_sum(const emxArray_real_T *x, emxArray_real_T *y)
 {
   emxArray_real_T *bsum;
@@ -335,6 +354,11 @@ void e_sum(const emxArray_real_T *x, emxArray_real_T *y)
   }
 }
 
+/*
+ * Arguments    : const emxArray_real_T *x
+ *                emxArray_real_T *y
+ * Return Type  : void
+ */
 void f_sum(const emxArray_real_T *x, emxArray_real_T *y)
 {
   double bsum_data;
@@ -409,6 +433,11 @@ void f_sum(const emxArray_real_T *x, emxArray_real_T *y)
   }
 }
 
+/*
+ * Arguments    : const emxArray_real_T *x
+ *                emxArray_real_T *y
+ * Return Type  : void
+ */
 void sum(const emxArray_real_T *x, emxArray_real_T *y)
 {
   emxArray_real_T *bsum;
@@ -488,4 +517,8 @@ void sum(const emxArray_real_T *x, emxArray_real_T *y)
   }
 }
 
-/* End of code generation (sum.c) */
+/*
+ * File trailer for sum.c
+ *
+ * [EOF]
+ */

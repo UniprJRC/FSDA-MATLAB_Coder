@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: eigStandard.c
  *
- * eigStandard.c
- *
- * Code generation for function 'eigStandard'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "eigStandard.h"
 #include "fsdaC_data.h"
 #include "fsdaC_emxutil.h"
@@ -27,6 +26,12 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const emxArray_real_T *A
+ *                emxArray_creal_T *V
+ *                emxArray_creal_T *D
+ * Return Type  : void
+ */
 void eigStandard(const emxArray_real_T *A, emxArray_creal_T *V,
                  emxArray_creal_T *D)
 {
@@ -418,4 +423,8 @@ void eigStandard(const emxArray_real_T *A, emxArray_creal_T *V,
   emxFree_creal_T(&alpha1);
 }
 
-/* End of code generation (eigStandard.c) */
+/*
+ * File trailer for eigStandard.c
+ *
+ * [EOF]
+ */

@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: LXS.c
  *
- * LXS.c
- *
- * Code generation for function 'LXS'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "LXS.h"
 #include "FSM.h"
 #include "bc.h"
@@ -37,6 +36,251 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * LXS computes the Least Median of Squares (LMS) or Least Trimmed Squares (LTS)
+ * estimators
+ *
+ * <a href="matlab: docsearchFS('LXS')">Link to the help function</a>
+ *
+ *   Required input arguments:
+ *
+ *     y:         Response variable. Vector. A vector with n elements that
+ *                contains the response
+ *                variable.  It can be either a row or a column vector.
+ *     X :        Predictor variables. Matrix. Data matrix of explanatory
+ *                variables (also called 'regressors')
+ *                of dimension (n x p-1). Rows of X represent observations, and
+ *                columns represent variables.
+ *
+ *                Missing values (NaN's) and infinite values (Inf's) are
+ *                allowed, since observations (rows) with missing or infinite
+ *                values will automatically be excluded from the
+ *                computations.
+ *
+ *   Optional input arguments:
+ *
+ *
+ *          bdp :  breakdown point. Scalar.
+ *                It measures the fraction of outliers
+ *                the algorithm should
+ *                resist. In this case any value greater than 0 but smaller
+ *                or equal than 0.5 will do fine. If on the other hand the
+ *                purpose is subgroups detection then bdp can be greater than
+ *                0.5. In any case however n*(1-bdp) must be greater than
+ *                p. If this condition is not fulfilled an error will be
+ *                given. Please specify h or bdp not both.
+ *                  Example - 'bdp',0.4
+ *                  Data Types - double
+ *
+ *
+ *
+ *   bonflevoutX : remote units in the X space. Scalar or empty (default).
+ *                If the design matrix X contains several high leverage units
+ *                (that is units which are very far from the bulk of the
+ *                data), it may happen that the best subset may include some
+ *                of these units.
+ *                If boflevoutX is not empty, outlier detection procedure FSM
+ *                is applied to the design matrix X,  using name/pair option
+ *                'bonflev',bonflevoutX. The extracted subsets which contain
+ *                at least one unit declared as outlier in the X space by FSM
+ *                are removed (more precisely they are treated as singular
+ *                subsets) from the list of candidate subsets to find the LXS
+ *                solution. The default value of bonflevoutX is empty, that
+ *                is FSM is not invoked.
+ *                Example - 'bonflevoutX',0.95
+ *                Data Types - double
+ *
+ *      conflev :  Confidence level which is
+ *                used to declare units as outliers. Scalar
+ *                Usually conflev=0.95, 0.975 0.99 (individual alpha)
+ *                or 1-0.05/n, 1-0.025/n, 1-0.01/n (simultaneous alpha).
+ *                Default value is 0.975
+ *                  Example - 'conflev',0.99
+ *                  Data Types - double
+ *
+ *            h : The number of observations that have determined the least
+ *                  trimmed squares estimator. Scalar.
+ *                The number of observations that have determined the least
+ *                trimmed squares estimator. h is an integer greater than p
+ *                (number of columns of matrix X including the intercept but
+ *                smaller then n. If the purpose is outlier detection than h
+ *                does not have to be smaller than [0.5*(n+p+1)] (default
+ *                value). On the other hand if the purpose is to find
+ *                subgroups of homogeneous observations h can be smaller than
+ *                [0.5*(n+p+1)]. If h <p+1 an error will be given.
+ *                  Example - 'h',round(n*0,75)
+ *                  Data Types - double
+ *
+ *     intercept :  Indicator for constant term. true (default) | false.
+ *                  Indicator for the constant term (intercept) in the fit,
+ *                  specified as the comma-separated pair consisting of
+ *                  'Intercept' and either true to include or false to remove
+ *                  the constant term from the model.
+ *                  Example - 'intercept',false
+ *                  Data Types - boolean
+ *
+ *        lms   : Estimation method. Scalar, vector or structure.
+ *                If lms is a scalar = 1 (default) Least Median of Squares is
+ *                        computed,
+ *                else if lms is a scalar = 2 fast lts with the all default
+ * options is used else if lms is a scalar different from 1 and 2 standard lts
+ *                        is used (without concentration steps)
+ *                else if lms is a struct fast lts (with concentration steps) is
+ * used. In this case the user can control the following options: lms.refsteps :
+ * scalar defining number of refining iterations in each subsample (default =
+ * 3). refsteps = 0 means "raw-subsampling" without iterations. lms.reftol  :
+ * scalar. Default value of tolerance for the refining steps The default value
+ * is 1e-6. lms.bestr   : scalar defining number of "best betas" to remember
+ * from the subsamples. These will be later iterated until convergence
+ *                                (default=5).
+ *              lms.refstepsbestr : scalar defining number of refining
+ * iterations for each best subset (default = 50). lms.reftolbestr  : scalar.
+ * Default value of tolerance for the refining steps for each of the best
+ * subsets The default value is 1e-8. Example - 'lms',1 Data Types - double
+ *
+ *       nocheck: Check input arguments. Boolean. If nocheck is equal to true no
+ *                check is performed on matrix y and matrix X. Notice that
+ *                when no check is true y and X are left unchanged, that is
+ *                the additional column of ones for the intercept is
+ *                not added. As default nocheck=false. The controls on h, bdp
+ *                and nsamp still remain. Example - 'nocheck',true
+ *                Data Types - boolean
+ *
+ *         nomes:  It controls whether to display or not on the screen
+ *                messages about estimated  time to compute LMS (LTS) . Boolean.
+ *                If nomes is equal to true no message about estimated
+ *                time to compute LMS (LTS) is displayed, else if nomes is
+ *                equal to false (default), a message about estimated time is
+ *                displayed.
+ *                Example - 'nomes',true
+ *                Data Types - logical
+ *
+ *
+ *         msg  : It controls whether to display or not messages on the screen.
+ * Boolean. If msg==true (default) messages are displayed on the screen about
+ * estimated time to compute the estimator and the warnings about
+ *                'MATLAB:rankDeficientMatrix', 'MATLAB:singularMatrix' and
+ *                'MATLAB:nearlySingularMatrix' are set to off
+ *                else no message is displayed on the screen
+ *                Example - 'msg',false
+ *                Data Types - logical
+ *
+ *        nsamp : Number of subsamples which will be extracted to find the
+ *                robust estimator or matrix with preextracted subsamples.
+ *                Scalar or matrix.
+ *                If nsamp=0 all subsets will be extracted. They will be (n
+ *                choose p). If nsamp is (say) 200, 200 subsets will be
+ *                extracted. If nsamp is a matrix of size r-by-p, it contains
+ *                in the rows the subsets which sill have to be extracted.
+ *                For example, if p=3 and nsamp=[ 2 4 9; 23 45 49; 90 34 1];
+ *                the first subset is made up of units [2 4 9], the second
+ *                subset of units [23 45 49] and the third subset of units
+ *                [90 34 1];
+ *                  Example - 'nsamp',0
+ *                  Data Types - double
+ *                Remark: if the number of all possible subset is <1000 the
+ *                default is to extract all subsets, otherwise just 1000 if
+ *                fastLTS is used (lms=2 or lms is a structure) or 3000 for
+ *                standard LTS or LMS.
+ *
+ *        rew   : LXS reweighted. Boolean.
+ *                 If rew=true the reweighted version of LTS (LMS) is
+ *                used and the output quantities refer to the reweighted
+ *                version
+ *                else no reweighting is performed (default).
+ *                  Example - 'rew',true
+ *                  Data Types - logical
+ *
+ *        yxsave : the response vector y and data matrix X are saved into the
+ * output structure out. Scalar. Default is 0, i.e. no saving is done. Example -
+ * 'yxsave',1 Data Types - double
+ *
+ *
+ *        plots : Plot on the screen. Scalar or structure.
+ *                If plots = 1, a plot which shows the
+ *                robust residuals against index number is shown on the
+ *                screen. The confidence level which is used to draw the
+ *                horizontal lines associated with the bands for the
+ *                residuals is as specified in input option conflev. If
+ *                conflev is missing a nominal 0.975 confidence interval will
+ *                be used.
+ *                  Example - 'plots',1
+ *                  Data Types - double
+ *
+ *        Remark: The user should only give the input arguments that have to
+ *                change their default value. The name of the input arguments
+ *                needs to be followed by their value. The order of the input
+ *                arguments is of no importance.
+ *
+ *
+ *   Output:
+ *
+ *   out :     A structure containing the following fields
+ *
+ *             out.rew  = boolean. if out.rew=true all subsequent output refers
+ * to reweighted else no reweighting is done. out.beta = Vector of beta LTS
+ * (LMS) coefficient estimates, including the intercept when
+ * options.intercept=true. out.beta=[intercept slopes]. out.bs = p x 1 vector
+ * containing the units forming subset associated with bLMS (bLTS).
+ *        out.residuals = Vector containing the standardized residuals from
+ *                        the regression.
+ *            out.scale = Scale estimate of the residuals.
+ *          out.weights = Vector like y containing weights. The elements of
+ *                        this vector are 0 or 1.
+ *                        These weights identify the h observations which are
+ *                        used to compute the final LTS (LMS) estimate.
+ *                        sum(out.weights)=h if there is not a perfect fit
+ *                        otherwise sum(out.weights) can be greater than h
+ *                out.h = The number of observations that have determined the
+ *                        LTS (LMS) estimator, i.e. the value of h.
+ *         out.outliers = row vector containing the list of the units declared
+ *                        as outliers using confidence level specified in
+ *                        input scalar conflev.
+ *          out.conflev = confidence level which is used to declare outliers.
+ *                        Remark: scalar out.conflev will be used
+ *                        to draw the horizontal lines (confidence bands) in the
+ * plots out.singsub = Number of subsets wihtout full rank. Notice that if this
+ * number is greater than 0.1*(number of subsamples) a warning is produced on
+ * the screen out.class = 'LTS' or 'LMS'. out.y    = response vector Y. The
+ * field is present only if option yxsave is set to 1. out.X    = data matrix X.
+ * The field is present only if option yxsave is set to 1.
+ *
+ *   Optional Output:
+ *
+ *             C        : Indexes of the extracted subsamples. Matrix.
+ *                        Matrix containing the indexes of the subsamples
+ *                        extracted for computing the estimate (the so called
+ *                        elemental sets). For example, if C(3,:)=[2 5 20],
+ *                        implies that the third extracted subsample is
+ *                        formed by units 2, 5 and 20.
+ *
+ *
+ *  See also FSReda, Sreg, MMreg, LTSts
+ *
+ *  References:
+ *
+ *    Rousseeuw P.J., Leroy A.M. (1987), "Robust regression and outlier
+ *    detection", Wiley.
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *
+ * <a href="matlab: docsearchFS('LXS')">Link to the help function</a>
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ * Arguments    : const emxArray_real_T *y
+ *                const emxArray_real_T *X
+ *                double varargin_2
+ *                double varargin_4
+ *                double varargin_6
+ *                bool varargin_10
+ *                const double varargin_12_data[]
+ *                const int varargin_12_size[2]
+ *                struct_LXS_T *out
+ * Return Type  : void
+ */
 void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
          double varargin_4, double varargin_6, bool varargin_10,
          const double varargin_12_data[], const int varargin_12_size[2],
@@ -83,301 +327,6 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
   char critdef_data[3];
   bool bonflevout;
   bool guard1 = false;
-  /* LXS computes the Least Median of Squares (LMS) or Least Trimmed Squares
-   * (LTS) estimators */
-  /*  */
-  /* <a href="matlab: docsearchFS('LXS')">Link to the help function</a> */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /*     y:         Response variable. Vector. A vector with n elements that */
-  /*                contains the response */
-  /*                variable.  It can be either a row or a column vector. */
-  /*     X :        Predictor variables. Matrix. Data matrix of explanatory */
-  /*                variables (also called 'regressors') */
-  /*                of dimension (n x p-1). Rows of X represent observations,
-   * and */
-  /*                columns represent variables. */
-  /*  */
-  /*                Missing values (NaN's) and infinite values (Inf's) are */
-  /*                allowed, since observations (rows) with missing or infinite
-   */
-  /*                values will automatically be excluded from the */
-  /*                computations. */
-  /*  */
-  /*   Optional input arguments: */
-  /*  */
-  /*  */
-  /*          bdp :  breakdown point. Scalar. */
-  /*                It measures the fraction of outliers */
-  /*                the algorithm should */
-  /*                resist. In this case any value greater than 0 but smaller */
-  /*                or equal than 0.5 will do fine. If on the other hand the */
-  /*                purpose is subgroups detection then bdp can be greater than
-   */
-  /*                0.5. In any case however n*(1-bdp) must be greater than */
-  /*                p. If this condition is not fulfilled an error will be */
-  /*                given. Please specify h or bdp not both. */
-  /*                  Example - 'bdp',0.4 */
-  /*                  Data Types - double */
-  /*  */
-  /*  */
-  /*  */
-  /*   bonflevoutX : remote units in the X space. Scalar or empty (default). */
-  /*                If the design matrix X contains several high leverage units
-   */
-  /*                (that is units which are very far from the bulk of the */
-  /*                data), it may happen that the best subset may include some
-   */
-  /*                of these units. */
-  /*                If boflevoutX is not empty, outlier detection procedure FSM
-   */
-  /*                is applied to the design matrix X,  using name/pair option
-   */
-  /*                'bonflev',bonflevoutX. The extracted subsets which contain
-   */
-  /*                at least one unit declared as outlier in the X space by FSM
-   */
-  /*                are removed (more precisely they are treated as singular */
-  /*                subsets) from the list of candidate subsets to find the LXS
-   */
-  /*                solution. The default value of bonflevoutX is empty, that */
-  /*                is FSM is not invoked. */
-  /*                Example - 'bonflevoutX',0.95 */
-  /*                Data Types - double */
-  /*  */
-  /*      conflev :  Confidence level which is */
-  /*                used to declare units as outliers. Scalar */
-  /*                Usually conflev=0.95, 0.975 0.99 (individual alpha) */
-  /*                or 1-0.05/n, 1-0.025/n, 1-0.01/n (simultaneous alpha). */
-  /*                Default value is 0.975 */
-  /*                  Example - 'conflev',0.99 */
-  /*                  Data Types - double */
-  /*  */
-  /*            h : The number of observations that have determined the least */
-  /*                  trimmed squares estimator. Scalar. */
-  /*                The number of observations that have determined the least */
-  /*                trimmed squares estimator. h is an integer greater than p */
-  /*                (number of columns of matrix X including the intercept but
-   */
-  /*                smaller then n. If the purpose is outlier detection than h
-   */
-  /*                does not have to be smaller than [0.5*(n+p+1)] (default */
-  /*                value). On the other hand if the purpose is to find */
-  /*                subgroups of homogeneous observations h can be smaller than
-   */
-  /*                [0.5*(n+p+1)]. If h <p+1 an error will be given. */
-  /*                  Example - 'h',round(n*0,75) */
-  /*                  Data Types - double */
-  /*  */
-  /*     intercept :  Indicator for constant term. true (default) | false. */
-  /*                  Indicator for the constant term (intercept) in the fit, */
-  /*                  specified as the comma-separated pair consisting of */
-  /*                  'Intercept' and either true to include or false to remove
-   */
-  /*                  the constant term from the model. */
-  /*                  Example - 'intercept',false */
-  /*                  Data Types - boolean */
-  /*  */
-  /*        lms   : Estimation method. Scalar, vector or structure. */
-  /*                If lms is a scalar = 1 (default) Least Median of Squares is
-   */
-  /*                        computed, */
-  /*                else if lms is a scalar = 2 fast lts with the all default
-   * options is used */
-  /*                else if lms is a scalar different from 1 and 2 standard lts
-   */
-  /*                        is used (without concentration steps) */
-  /*                else if lms is a struct fast lts (with concentration steps)
-   * is used. */
-  /*                   In this case the user can control the following options:
-   */
-  /*                   lms.refsteps : scalar defining number of refining
-   * iterations in each */
-  /*                                subsample (default = 3). refsteps = 0 means
-   */
-  /*                                "raw-subsampling" without iterations. */
-  /*                    lms.reftol  : scalar. Default value of tolerance for the
-   * refining steps */
-  /*                                The default value is 1e-6. */
-  /*                    lms.bestr   : scalar defining number of "best betas" to
-   * remember from the */
-  /*                                subsamples. These will be later iterated
-   * until convergence */
-  /*                                (default=5). */
-  /*              lms.refstepsbestr : scalar defining number of refining
-   * iterations for each */
-  /*                                best subset (default = 50). */
-  /*               lms.reftolbestr  : scalar. Default value of tolerance for the
-   * refining steps */
-  /*                                for each of the best subsets */
-  /*                                The default value is 1e-8. */
-  /*                  Example - 'lms',1 */
-  /*                  Data Types - double */
-  /*  */
-  /*       nocheck: Check input arguments. Boolean. If nocheck is equal to true
-   * no */
-  /*                check is performed on matrix y and matrix X. Notice that */
-  /*                when no check is true y and X are left unchanged, that is */
-  /*                the additional column of ones for the intercept is */
-  /*                not added. As default nocheck=false. The controls on h, bdp
-   */
-  /*                and nsamp still remain. Example - 'nocheck',true */
-  /*                Data Types - boolean */
-  /*  */
-  /*         nomes:  It controls whether to display or not on the screen */
-  /*                messages about estimated  time to compute LMS (LTS) .
-   * Boolean. */
-  /*                If nomes is equal to true no message about estimated */
-  /*                time to compute LMS (LTS) is displayed, else if nomes is */
-  /*                equal to false (default), a message about estimated time is
-   */
-  /*                displayed. */
-  /*                Example - 'nomes',true */
-  /*                Data Types - logical */
-  /*  */
-  /*  */
-  /*         msg  : It controls whether to display or not messages on the
-   * screen. Boolean. */
-  /*                 If msg==true (default) messages are displayed */
-  /*                on the screen about estimated time to compute the estimator
-   */
-  /*                and the warnings about */
-  /*                'MATLAB:rankDeficientMatrix', 'MATLAB:singularMatrix' and */
-  /*                'MATLAB:nearlySingularMatrix' are set to off */
-  /*                else no message is displayed on the screen */
-  /*                Example - 'msg',false */
-  /*                Data Types - logical */
-  /*  */
-  /*        nsamp : Number of subsamples which will be extracted to find the */
-  /*                robust estimator or matrix with preextracted subsamples. */
-  /*                Scalar or matrix. */
-  /*                If nsamp=0 all subsets will be extracted. They will be (n */
-  /*                choose p). If nsamp is (say) 200, 200 subsets will be */
-  /*                extracted. If nsamp is a matrix of size r-by-p, it contains
-   */
-  /*                in the rows the subsets which sill have to be extracted. */
-  /*                For example, if p=3 and nsamp=[ 2 4 9; 23 45 49; 90 34 1];
-   */
-  /*                the first subset is made up of units [2 4 9], the second */
-  /*                subset of units [23 45 49] and the third subset of units */
-  /*                [90 34 1]; */
-  /*                  Example - 'nsamp',0 */
-  /*                  Data Types - double */
-  /*                Remark: if the number of all possible subset is <1000 the */
-  /*                default is to extract all subsets, otherwise just 1000 if */
-  /*                fastLTS is used (lms=2 or lms is a structure) or 3000 for */
-  /*                standard LTS or LMS. */
-  /*  */
-  /*        rew   : LXS reweighted. Boolean. */
-  /*                 If rew=true the reweighted version of LTS (LMS) is */
-  /*                used and the output quantities refer to the reweighted */
-  /*                version */
-  /*                else no reweighting is performed (default). */
-  /*                  Example - 'rew',true */
-  /*                  Data Types - logical */
-  /*  */
-  /*        yxsave : the response vector y and data matrix X are saved into the
-   * output */
-  /*                 structure out. Scalar. */
-  /*                Default is 0, i.e. no saving is done. */
-  /*                Example - 'yxsave',1 */
-  /*                Data Types - double */
-  /*  */
-  /*  */
-  /*        plots : Plot on the screen. Scalar or structure. */
-  /*                If plots = 1, a plot which shows the */
-  /*                robust residuals against index number is shown on the */
-  /*                screen. The confidence level which is used to draw the */
-  /*                horizontal lines associated with the bands for the */
-  /*                residuals is as specified in input option conflev. If */
-  /*                conflev is missing a nominal 0.975 confidence interval will
-   */
-  /*                be used. */
-  /*                  Example - 'plots',1 */
-  /*                  Data Types - double */
-  /*  */
-  /*        Remark: The user should only give the input arguments that have to
-   */
-  /*                change their default value. The name of the input arguments
-   */
-  /*                needs to be followed by their value. The order of the input
-   */
-  /*                arguments is of no importance. */
-  /*  */
-  /*  */
-  /*   Output: */
-  /*  */
-  /*   out :     A structure containing the following fields */
-  /*  */
-  /*             out.rew  = boolean. if out.rew=true all subsequent output
-   * refers to */
-  /*                        reweighted else no reweighting is done. */
-  /*             out.beta = Vector of beta LTS (LMS) coefficient estimates, */
-  /*                        including the intercept when options.intercept=true.
-   */
-  /*                        out.beta=[intercept slopes]. */
-  /*               out.bs = p x 1 vector containing the units forming subset */
-  /*                        associated with bLMS (bLTS). */
-  /*        out.residuals = Vector containing the standardized residuals from */
-  /*                        the regression. */
-  /*            out.scale = Scale estimate of the residuals. */
-  /*          out.weights = Vector like y containing weights. The elements of */
-  /*                        this vector are 0 or 1. */
-  /*                        These weights identify the h observations which are
-   */
-  /*                        used to compute the final LTS (LMS) estimate. */
-  /*                        sum(out.weights)=h if there is not a perfect fit */
-  /*                        otherwise sum(out.weights) can be greater than h */
-  /*                out.h = The number of observations that have determined the
-   */
-  /*                        LTS (LMS) estimator, i.e. the value of h. */
-  /*         out.outliers = row vector containing the list of the units declared
-   */
-  /*                        as outliers using confidence level specified in */
-  /*                        input scalar conflev. */
-  /*          out.conflev = confidence level which is used to declare outliers.
-   */
-  /*                        Remark: scalar out.conflev will be used */
-  /*                        to draw the horizontal lines (confidence bands) in
-   * the plots */
-  /*          out.singsub = Number of subsets wihtout full rank. Notice that if
-   */
-  /*                        this number is greater than 0.1*(number of */
-  /*                        subsamples) a warning is produced on the screen */
-  /*            out.class = 'LTS' or 'LMS'. */
-  /*             out.y    = response vector Y. The field is present only if
-   * option */
-  /*                        yxsave is set to 1. */
-  /*             out.X    = data matrix X. The field is present only if option
-   */
-  /*                        yxsave is set to 1. */
-  /*  */
-  /*   Optional Output: */
-  /*  */
-  /*             C        : Indexes of the extracted subsamples. Matrix. */
-  /*                        Matrix containing the indexes of the subsamples */
-  /*                        extracted for computing the estimate (the so called
-   */
-  /*                        elemental sets). For example, if C(3,:)=[2 5 20], */
-  /*                        implies that the third extracted subsample is */
-  /*                        formed by units 2, 5 and 20. */
-  /*  */
-  /*  */
-  /*  See also FSReda, Sreg, MMreg, LTSts */
-  /*  */
-  /*  References: */
-  /*  */
-  /*    Rousseeuw P.J., Leroy A.M. (1987), "Robust regression and outlier */
-  /*    detection", Wiley. */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('LXS')">Link to the help function</a> */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /*  */
   /* { */
@@ -1180,6 +1129,13 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
   /*  Create plots */
 }
 
+/*
+ * asvar computes the new degrees of freedom for the Student T
+ *
+ * Arguments    : double h
+ *                double n
+ * Return Type  : double
+ */
 double asvar(double h, double n)
 {
   double a;
@@ -1191,7 +1147,6 @@ double asvar(double h, double n)
   bool b;
   /*  The part below contains subfunctions which are used only inside this file
    */
-  /* asvar computes the new degrees of freedom for the Student T */
   hn = h / n;
   if ((hn >= 0.0) && (hn <= 1.0)) {
     if (hn < 1.0) {
@@ -1227,6 +1182,48 @@ double asvar(double h, double n)
          (((3.0 * b_xk - 2.0 * qalfa * c2) + hn * (qalfa * qalfa)) - xk * xk);
 }
 
+/*
+ * IRWLSreg (iterative reweighted least squares) does refsteps refining steps
+ * from initialbeta
+ *
+ *   Required input arguments:
+ *
+ *     y:         A vector with n elements that contains the response variable.
+ *                It can be both a row or column vector.
+ *     X :        Data matrix of explanatory variables (also called
+ * 'regressors') of dimension (n x p). Rows of X represent observations, and
+ *                columns represent variables.
+ *  initialbeta : p x 1 vector containing initial estimate of beta
+ *    refsteps  : scalar, number of refining (IRLS) steps
+ *    reftol    : relative convergence tolerance
+ *                Default value is 1e-7
+ *       h      : scalar. number of observations with smallest residuals to
+ * consider
+ *
+ *   Output:
+ *
+ *   The output consists of a structure 'outIRWLS' containing the following
+ * fields: betarw  : p x 1 vector. Estimate of beta after refsteps refining
+ * steps numscale2rw : scalar. Sum of the smallest h squared residuals from
+ *                 final iteration (after refsteps refining step).It is the
+ *                 numerator of the estimate of the squared scale.
+ *      weights  : n x 1 vector. Weights assigned to each observation
+ *                In this case weights are 0,1.
+ *                1 for the units associated with the smallest h squared
+ * residuals from final iteration 0 for the other units.
+ *
+ *
+ * Arguments    : const emxArray_real_T *y
+ *                const emxArray_real_T *X
+ *                const emxArray_real_T *initialbeta
+ *                double refsteps
+ *                double reftol
+ *                double h
+ *                emxArray_real_T *outIRWLS_betarw
+ *                double *outIRWLS_numscale2rw
+ *                emxArray_real_T *outIRWLS_weights
+ * Return Type  : void
+ */
 void b_IRWLSreg(const emxArray_real_T *y, const emxArray_real_T *X,
                 const emxArray_real_T *initialbeta, double refsteps,
                 double reftol, double h, emxArray_real_T *outIRWLS_betarw,
@@ -1255,42 +1252,6 @@ void b_IRWLSreg(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  ------------------------------------------------------------------- */
   /*  subfunction IRWLSreg */
   /*  ------------------------------------------------------------------- */
-  /* IRWLSreg (iterative reweighted least squares) does refsteps refining steps
-   * from initialbeta */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /*     y:         A vector with n elements that contains the response
-   * variable. */
-  /*                It can be both a row or column vector. */
-  /*     X :        Data matrix of explanatory variables (also called
-   * 'regressors') */
-  /*                of dimension (n x p). Rows of X represent observations, and
-   */
-  /*                columns represent variables. */
-  /*  initialbeta : p x 1 vector containing initial estimate of beta */
-  /*    refsteps  : scalar, number of refining (IRLS) steps */
-  /*    reftol    : relative convergence tolerance */
-  /*                Default value is 1e-7 */
-  /*       h      : scalar. number of observations with smallest residuals to
-   * consider */
-  /*  */
-  /*   Output: */
-  /*  */
-  /*   The output consists of a structure 'outIRWLS' containing the following
-   * fields: */
-  /*       betarw  : p x 1 vector. Estimate of beta after refsteps refining
-   * steps */
-  /*   numscale2rw : scalar. Sum of the smallest h squared residuals from */
-  /*                 final iteration (after refsteps refining step).It is the */
-  /*                 numerator of the estimate of the squared scale. */
-  /*      weights  : n x 1 vector. Weights assigned to each observation */
-  /*                In this case weights are 0,1. */
-  /*                1 for the units associated with the smallest h squared
-   * residuals from */
-  /*                final iteration */
-  /*                0 for the other units. */
-  /*  */
   /*  Residuals for the initialbeta */
   /*  Squared residuals for all the observations */
   /*  Ordering of squared residuals */
@@ -1520,6 +1481,249 @@ void b_IRWLSreg(const emxArray_real_T *y, const emxArray_real_T *X,
   emxFree_int32_T(&r);
 }
 
+/*
+ * LXS computes the Least Median of Squares (LMS) or Least Trimmed Squares (LTS)
+ * estimators
+ *
+ * <a href="matlab: docsearchFS('LXS')">Link to the help function</a>
+ *
+ *   Required input arguments:
+ *
+ *     y:         Response variable. Vector. A vector with n elements that
+ *                contains the response
+ *                variable.  It can be either a row or a column vector.
+ *     X :        Predictor variables. Matrix. Data matrix of explanatory
+ *                variables (also called 'regressors')
+ *                of dimension (n x p-1). Rows of X represent observations, and
+ *                columns represent variables.
+ *
+ *                Missing values (NaN's) and infinite values (Inf's) are
+ *                allowed, since observations (rows) with missing or infinite
+ *                values will automatically be excluded from the
+ *                computations.
+ *
+ *   Optional input arguments:
+ *
+ *
+ *          bdp :  breakdown point. Scalar.
+ *                It measures the fraction of outliers
+ *                the algorithm should
+ *                resist. In this case any value greater than 0 but smaller
+ *                or equal than 0.5 will do fine. If on the other hand the
+ *                purpose is subgroups detection then bdp can be greater than
+ *                0.5. In any case however n*(1-bdp) must be greater than
+ *                p. If this condition is not fulfilled an error will be
+ *                given. Please specify h or bdp not both.
+ *                  Example - 'bdp',0.4
+ *                  Data Types - double
+ *
+ *
+ *
+ *   bonflevoutX : remote units in the X space. Scalar or empty (default).
+ *                If the design matrix X contains several high leverage units
+ *                (that is units which are very far from the bulk of the
+ *                data), it may happen that the best subset may include some
+ *                of these units.
+ *                If boflevoutX is not empty, outlier detection procedure FSM
+ *                is applied to the design matrix X,  using name/pair option
+ *                'bonflev',bonflevoutX. The extracted subsets which contain
+ *                at least one unit declared as outlier in the X space by FSM
+ *                are removed (more precisely they are treated as singular
+ *                subsets) from the list of candidate subsets to find the LXS
+ *                solution. The default value of bonflevoutX is empty, that
+ *                is FSM is not invoked.
+ *                Example - 'bonflevoutX',0.95
+ *                Data Types - double
+ *
+ *      conflev :  Confidence level which is
+ *                used to declare units as outliers. Scalar
+ *                Usually conflev=0.95, 0.975 0.99 (individual alpha)
+ *                or 1-0.05/n, 1-0.025/n, 1-0.01/n (simultaneous alpha).
+ *                Default value is 0.975
+ *                  Example - 'conflev',0.99
+ *                  Data Types - double
+ *
+ *            h : The number of observations that have determined the least
+ *                  trimmed squares estimator. Scalar.
+ *                The number of observations that have determined the least
+ *                trimmed squares estimator. h is an integer greater than p
+ *                (number of columns of matrix X including the intercept but
+ *                smaller then n. If the purpose is outlier detection than h
+ *                does not have to be smaller than [0.5*(n+p+1)] (default
+ *                value). On the other hand if the purpose is to find
+ *                subgroups of homogeneous observations h can be smaller than
+ *                [0.5*(n+p+1)]. If h <p+1 an error will be given.
+ *                  Example - 'h',round(n*0,75)
+ *                  Data Types - double
+ *
+ *     intercept :  Indicator for constant term. true (default) | false.
+ *                  Indicator for the constant term (intercept) in the fit,
+ *                  specified as the comma-separated pair consisting of
+ *                  'Intercept' and either true to include or false to remove
+ *                  the constant term from the model.
+ *                  Example - 'intercept',false
+ *                  Data Types - boolean
+ *
+ *        lms   : Estimation method. Scalar, vector or structure.
+ *                If lms is a scalar = 1 (default) Least Median of Squares is
+ *                        computed,
+ *                else if lms is a scalar = 2 fast lts with the all default
+ * options is used else if lms is a scalar different from 1 and 2 standard lts
+ *                        is used (without concentration steps)
+ *                else if lms is a struct fast lts (with concentration steps) is
+ * used. In this case the user can control the following options: lms.refsteps :
+ * scalar defining number of refining iterations in each subsample (default =
+ * 3). refsteps = 0 means "raw-subsampling" without iterations. lms.reftol  :
+ * scalar. Default value of tolerance for the refining steps The default value
+ * is 1e-6. lms.bestr   : scalar defining number of "best betas" to remember
+ * from the subsamples. These will be later iterated until convergence
+ *                                (default=5).
+ *              lms.refstepsbestr : scalar defining number of refining
+ * iterations for each best subset (default = 50). lms.reftolbestr  : scalar.
+ * Default value of tolerance for the refining steps for each of the best
+ * subsets The default value is 1e-8. Example - 'lms',1 Data Types - double
+ *
+ *       nocheck: Check input arguments. Boolean. If nocheck is equal to true no
+ *                check is performed on matrix y and matrix X. Notice that
+ *                when no check is true y and X are left unchanged, that is
+ *                the additional column of ones for the intercept is
+ *                not added. As default nocheck=false. The controls on h, bdp
+ *                and nsamp still remain. Example - 'nocheck',true
+ *                Data Types - boolean
+ *
+ *         nomes:  It controls whether to display or not on the screen
+ *                messages about estimated  time to compute LMS (LTS) . Boolean.
+ *                If nomes is equal to true no message about estimated
+ *                time to compute LMS (LTS) is displayed, else if nomes is
+ *                equal to false (default), a message about estimated time is
+ *                displayed.
+ *                Example - 'nomes',true
+ *                Data Types - logical
+ *
+ *
+ *         msg  : It controls whether to display or not messages on the screen.
+ * Boolean. If msg==true (default) messages are displayed on the screen about
+ * estimated time to compute the estimator and the warnings about
+ *                'MATLAB:rankDeficientMatrix', 'MATLAB:singularMatrix' and
+ *                'MATLAB:nearlySingularMatrix' are set to off
+ *                else no message is displayed on the screen
+ *                Example - 'msg',false
+ *                Data Types - logical
+ *
+ *        nsamp : Number of subsamples which will be extracted to find the
+ *                robust estimator or matrix with preextracted subsamples.
+ *                Scalar or matrix.
+ *                If nsamp=0 all subsets will be extracted. They will be (n
+ *                choose p). If nsamp is (say) 200, 200 subsets will be
+ *                extracted. If nsamp is a matrix of size r-by-p, it contains
+ *                in the rows the subsets which sill have to be extracted.
+ *                For example, if p=3 and nsamp=[ 2 4 9; 23 45 49; 90 34 1];
+ *                the first subset is made up of units [2 4 9], the second
+ *                subset of units [23 45 49] and the third subset of units
+ *                [90 34 1];
+ *                  Example - 'nsamp',0
+ *                  Data Types - double
+ *                Remark: if the number of all possible subset is <1000 the
+ *                default is to extract all subsets, otherwise just 1000 if
+ *                fastLTS is used (lms=2 or lms is a structure) or 3000 for
+ *                standard LTS or LMS.
+ *
+ *        rew   : LXS reweighted. Boolean.
+ *                 If rew=true the reweighted version of LTS (LMS) is
+ *                used and the output quantities refer to the reweighted
+ *                version
+ *                else no reweighting is performed (default).
+ *                  Example - 'rew',true
+ *                  Data Types - logical
+ *
+ *        yxsave : the response vector y and data matrix X are saved into the
+ * output structure out. Scalar. Default is 0, i.e. no saving is done. Example -
+ * 'yxsave',1 Data Types - double
+ *
+ *
+ *        plots : Plot on the screen. Scalar or structure.
+ *                If plots = 1, a plot which shows the
+ *                robust residuals against index number is shown on the
+ *                screen. The confidence level which is used to draw the
+ *                horizontal lines associated with the bands for the
+ *                residuals is as specified in input option conflev. If
+ *                conflev is missing a nominal 0.975 confidence interval will
+ *                be used.
+ *                  Example - 'plots',1
+ *                  Data Types - double
+ *
+ *        Remark: The user should only give the input arguments that have to
+ *                change their default value. The name of the input arguments
+ *                needs to be followed by their value. The order of the input
+ *                arguments is of no importance.
+ *
+ *
+ *   Output:
+ *
+ *   out :     A structure containing the following fields
+ *
+ *             out.rew  = boolean. if out.rew=true all subsequent output refers
+ * to reweighted else no reweighting is done. out.beta = Vector of beta LTS
+ * (LMS) coefficient estimates, including the intercept when
+ * options.intercept=true. out.beta=[intercept slopes]. out.bs = p x 1 vector
+ * containing the units forming subset associated with bLMS (bLTS).
+ *        out.residuals = Vector containing the standardized residuals from
+ *                        the regression.
+ *            out.scale = Scale estimate of the residuals.
+ *          out.weights = Vector like y containing weights. The elements of
+ *                        this vector are 0 or 1.
+ *                        These weights identify the h observations which are
+ *                        used to compute the final LTS (LMS) estimate.
+ *                        sum(out.weights)=h if there is not a perfect fit
+ *                        otherwise sum(out.weights) can be greater than h
+ *                out.h = The number of observations that have determined the
+ *                        LTS (LMS) estimator, i.e. the value of h.
+ *         out.outliers = row vector containing the list of the units declared
+ *                        as outliers using confidence level specified in
+ *                        input scalar conflev.
+ *          out.conflev = confidence level which is used to declare outliers.
+ *                        Remark: scalar out.conflev will be used
+ *                        to draw the horizontal lines (confidence bands) in the
+ * plots out.singsub = Number of subsets wihtout full rank. Notice that if this
+ * number is greater than 0.1*(number of subsamples) a warning is produced on
+ * the screen out.class = 'LTS' or 'LMS'. out.y    = response vector Y. The
+ * field is present only if option yxsave is set to 1. out.X    = data matrix X.
+ * The field is present only if option yxsave is set to 1.
+ *
+ *   Optional Output:
+ *
+ *             C        : Indexes of the extracted subsamples. Matrix.
+ *                        Matrix containing the indexes of the subsamples
+ *                        extracted for computing the estimate (the so called
+ *                        elemental sets). For example, if C(3,:)=[2 5 20],
+ *                        implies that the third extracted subsample is
+ *                        formed by units 2, 5 and 20.
+ *
+ *
+ *  See also FSReda, Sreg, MMreg, LTSts
+ *
+ *  References:
+ *
+ *    Rousseeuw P.J., Leroy A.M. (1987), "Robust regression and outlier
+ *    detection", Wiley.
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *
+ * <a href="matlab: docsearchFS('LXS')">Link to the help function</a>
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ * Arguments    : const emxArray_real_T *y
+ *                const emxArray_real_T *X
+ *                const emxArray_real_T *varargin_2
+ *                double varargin_4
+ *                const emxArray_real_T *varargin_6
+ *                bool varargin_10
+ *                struct_LXS_T *out
+ * Return Type  : void
+ */
 void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
            const emxArray_real_T *varargin_2, double varargin_4,
            const emxArray_real_T *varargin_6, bool varargin_10,
@@ -1558,301 +1762,6 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   int time_size;
   bool b_y;
   bool exitg1;
-  /* LXS computes the Least Median of Squares (LMS) or Least Trimmed Squares
-   * (LTS) estimators */
-  /*  */
-  /* <a href="matlab: docsearchFS('LXS')">Link to the help function</a> */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /*     y:         Response variable. Vector. A vector with n elements that */
-  /*                contains the response */
-  /*                variable.  It can be either a row or a column vector. */
-  /*     X :        Predictor variables. Matrix. Data matrix of explanatory */
-  /*                variables (also called 'regressors') */
-  /*                of dimension (n x p-1). Rows of X represent observations,
-   * and */
-  /*                columns represent variables. */
-  /*  */
-  /*                Missing values (NaN's) and infinite values (Inf's) are */
-  /*                allowed, since observations (rows) with missing or infinite
-   */
-  /*                values will automatically be excluded from the */
-  /*                computations. */
-  /*  */
-  /*   Optional input arguments: */
-  /*  */
-  /*  */
-  /*          bdp :  breakdown point. Scalar. */
-  /*                It measures the fraction of outliers */
-  /*                the algorithm should */
-  /*                resist. In this case any value greater than 0 but smaller */
-  /*                or equal than 0.5 will do fine. If on the other hand the */
-  /*                purpose is subgroups detection then bdp can be greater than
-   */
-  /*                0.5. In any case however n*(1-bdp) must be greater than */
-  /*                p. If this condition is not fulfilled an error will be */
-  /*                given. Please specify h or bdp not both. */
-  /*                  Example - 'bdp',0.4 */
-  /*                  Data Types - double */
-  /*  */
-  /*  */
-  /*  */
-  /*   bonflevoutX : remote units in the X space. Scalar or empty (default). */
-  /*                If the design matrix X contains several high leverage units
-   */
-  /*                (that is units which are very far from the bulk of the */
-  /*                data), it may happen that the best subset may include some
-   */
-  /*                of these units. */
-  /*                If boflevoutX is not empty, outlier detection procedure FSM
-   */
-  /*                is applied to the design matrix X,  using name/pair option
-   */
-  /*                'bonflev',bonflevoutX. The extracted subsets which contain
-   */
-  /*                at least one unit declared as outlier in the X space by FSM
-   */
-  /*                are removed (more precisely they are treated as singular */
-  /*                subsets) from the list of candidate subsets to find the LXS
-   */
-  /*                solution. The default value of bonflevoutX is empty, that */
-  /*                is FSM is not invoked. */
-  /*                Example - 'bonflevoutX',0.95 */
-  /*                Data Types - double */
-  /*  */
-  /*      conflev :  Confidence level which is */
-  /*                used to declare units as outliers. Scalar */
-  /*                Usually conflev=0.95, 0.975 0.99 (individual alpha) */
-  /*                or 1-0.05/n, 1-0.025/n, 1-0.01/n (simultaneous alpha). */
-  /*                Default value is 0.975 */
-  /*                  Example - 'conflev',0.99 */
-  /*                  Data Types - double */
-  /*  */
-  /*            h : The number of observations that have determined the least */
-  /*                  trimmed squares estimator. Scalar. */
-  /*                The number of observations that have determined the least */
-  /*                trimmed squares estimator. h is an integer greater than p */
-  /*                (number of columns of matrix X including the intercept but
-   */
-  /*                smaller then n. If the purpose is outlier detection than h
-   */
-  /*                does not have to be smaller than [0.5*(n+p+1)] (default */
-  /*                value). On the other hand if the purpose is to find */
-  /*                subgroups of homogeneous observations h can be smaller than
-   */
-  /*                [0.5*(n+p+1)]. If h <p+1 an error will be given. */
-  /*                  Example - 'h',round(n*0,75) */
-  /*                  Data Types - double */
-  /*  */
-  /*     intercept :  Indicator for constant term. true (default) | false. */
-  /*                  Indicator for the constant term (intercept) in the fit, */
-  /*                  specified as the comma-separated pair consisting of */
-  /*                  'Intercept' and either true to include or false to remove
-   */
-  /*                  the constant term from the model. */
-  /*                  Example - 'intercept',false */
-  /*                  Data Types - boolean */
-  /*  */
-  /*        lms   : Estimation method. Scalar, vector or structure. */
-  /*                If lms is a scalar = 1 (default) Least Median of Squares is
-   */
-  /*                        computed, */
-  /*                else if lms is a scalar = 2 fast lts with the all default
-   * options is used */
-  /*                else if lms is a scalar different from 1 and 2 standard lts
-   */
-  /*                        is used (without concentration steps) */
-  /*                else if lms is a struct fast lts (with concentration steps)
-   * is used. */
-  /*                   In this case the user can control the following options:
-   */
-  /*                   lms.refsteps : scalar defining number of refining
-   * iterations in each */
-  /*                                subsample (default = 3). refsteps = 0 means
-   */
-  /*                                "raw-subsampling" without iterations. */
-  /*                    lms.reftol  : scalar. Default value of tolerance for the
-   * refining steps */
-  /*                                The default value is 1e-6. */
-  /*                    lms.bestr   : scalar defining number of "best betas" to
-   * remember from the */
-  /*                                subsamples. These will be later iterated
-   * until convergence */
-  /*                                (default=5). */
-  /*              lms.refstepsbestr : scalar defining number of refining
-   * iterations for each */
-  /*                                best subset (default = 50). */
-  /*               lms.reftolbestr  : scalar. Default value of tolerance for the
-   * refining steps */
-  /*                                for each of the best subsets */
-  /*                                The default value is 1e-8. */
-  /*                  Example - 'lms',1 */
-  /*                  Data Types - double */
-  /*  */
-  /*       nocheck: Check input arguments. Boolean. If nocheck is equal to true
-   * no */
-  /*                check is performed on matrix y and matrix X. Notice that */
-  /*                when no check is true y and X are left unchanged, that is */
-  /*                the additional column of ones for the intercept is */
-  /*                not added. As default nocheck=false. The controls on h, bdp
-   */
-  /*                and nsamp still remain. Example - 'nocheck',true */
-  /*                Data Types - boolean */
-  /*  */
-  /*         nomes:  It controls whether to display or not on the screen */
-  /*                messages about estimated  time to compute LMS (LTS) .
-   * Boolean. */
-  /*                If nomes is equal to true no message about estimated */
-  /*                time to compute LMS (LTS) is displayed, else if nomes is */
-  /*                equal to false (default), a message about estimated time is
-   */
-  /*                displayed. */
-  /*                Example - 'nomes',true */
-  /*                Data Types - logical */
-  /*  */
-  /*  */
-  /*         msg  : It controls whether to display or not messages on the
-   * screen. Boolean. */
-  /*                 If msg==true (default) messages are displayed */
-  /*                on the screen about estimated time to compute the estimator
-   */
-  /*                and the warnings about */
-  /*                'MATLAB:rankDeficientMatrix', 'MATLAB:singularMatrix' and */
-  /*                'MATLAB:nearlySingularMatrix' are set to off */
-  /*                else no message is displayed on the screen */
-  /*                Example - 'msg',false */
-  /*                Data Types - logical */
-  /*  */
-  /*        nsamp : Number of subsamples which will be extracted to find the */
-  /*                robust estimator or matrix with preextracted subsamples. */
-  /*                Scalar or matrix. */
-  /*                If nsamp=0 all subsets will be extracted. They will be (n */
-  /*                choose p). If nsamp is (say) 200, 200 subsets will be */
-  /*                extracted. If nsamp is a matrix of size r-by-p, it contains
-   */
-  /*                in the rows the subsets which sill have to be extracted. */
-  /*                For example, if p=3 and nsamp=[ 2 4 9; 23 45 49; 90 34 1];
-   */
-  /*                the first subset is made up of units [2 4 9], the second */
-  /*                subset of units [23 45 49] and the third subset of units */
-  /*                [90 34 1]; */
-  /*                  Example - 'nsamp',0 */
-  /*                  Data Types - double */
-  /*                Remark: if the number of all possible subset is <1000 the */
-  /*                default is to extract all subsets, otherwise just 1000 if */
-  /*                fastLTS is used (lms=2 or lms is a structure) or 3000 for */
-  /*                standard LTS or LMS. */
-  /*  */
-  /*        rew   : LXS reweighted. Boolean. */
-  /*                 If rew=true the reweighted version of LTS (LMS) is */
-  /*                used and the output quantities refer to the reweighted */
-  /*                version */
-  /*                else no reweighting is performed (default). */
-  /*                  Example - 'rew',true */
-  /*                  Data Types - logical */
-  /*  */
-  /*        yxsave : the response vector y and data matrix X are saved into the
-   * output */
-  /*                 structure out. Scalar. */
-  /*                Default is 0, i.e. no saving is done. */
-  /*                Example - 'yxsave',1 */
-  /*                Data Types - double */
-  /*  */
-  /*  */
-  /*        plots : Plot on the screen. Scalar or structure. */
-  /*                If plots = 1, a plot which shows the */
-  /*                robust residuals against index number is shown on the */
-  /*                screen. The confidence level which is used to draw the */
-  /*                horizontal lines associated with the bands for the */
-  /*                residuals is as specified in input option conflev. If */
-  /*                conflev is missing a nominal 0.975 confidence interval will
-   */
-  /*                be used. */
-  /*                  Example - 'plots',1 */
-  /*                  Data Types - double */
-  /*  */
-  /*        Remark: The user should only give the input arguments that have to
-   */
-  /*                change their default value. The name of the input arguments
-   */
-  /*                needs to be followed by their value. The order of the input
-   */
-  /*                arguments is of no importance. */
-  /*  */
-  /*  */
-  /*   Output: */
-  /*  */
-  /*   out :     A structure containing the following fields */
-  /*  */
-  /*             out.rew  = boolean. if out.rew=true all subsequent output
-   * refers to */
-  /*                        reweighted else no reweighting is done. */
-  /*             out.beta = Vector of beta LTS (LMS) coefficient estimates, */
-  /*                        including the intercept when options.intercept=true.
-   */
-  /*                        out.beta=[intercept slopes]. */
-  /*               out.bs = p x 1 vector containing the units forming subset */
-  /*                        associated with bLMS (bLTS). */
-  /*        out.residuals = Vector containing the standardized residuals from */
-  /*                        the regression. */
-  /*            out.scale = Scale estimate of the residuals. */
-  /*          out.weights = Vector like y containing weights. The elements of */
-  /*                        this vector are 0 or 1. */
-  /*                        These weights identify the h observations which are
-   */
-  /*                        used to compute the final LTS (LMS) estimate. */
-  /*                        sum(out.weights)=h if there is not a perfect fit */
-  /*                        otherwise sum(out.weights) can be greater than h */
-  /*                out.h = The number of observations that have determined the
-   */
-  /*                        LTS (LMS) estimator, i.e. the value of h. */
-  /*         out.outliers = row vector containing the list of the units declared
-   */
-  /*                        as outliers using confidence level specified in */
-  /*                        input scalar conflev. */
-  /*          out.conflev = confidence level which is used to declare outliers.
-   */
-  /*                        Remark: scalar out.conflev will be used */
-  /*                        to draw the horizontal lines (confidence bands) in
-   * the plots */
-  /*          out.singsub = Number of subsets wihtout full rank. Notice that if
-   */
-  /*                        this number is greater than 0.1*(number of */
-  /*                        subsamples) a warning is produced on the screen */
-  /*            out.class = 'LTS' or 'LMS'. */
-  /*             out.y    = response vector Y. The field is present only if
-   * option */
-  /*                        yxsave is set to 1. */
-  /*             out.X    = data matrix X. The field is present only if option
-   */
-  /*                        yxsave is set to 1. */
-  /*  */
-  /*   Optional Output: */
-  /*  */
-  /*             C        : Indexes of the extracted subsamples. Matrix. */
-  /*                        Matrix containing the indexes of the subsamples */
-  /*                        extracted for computing the estimate (the so called
-   */
-  /*                        elemental sets). For example, if C(3,:)=[2 5 20], */
-  /*                        implies that the third extracted subsample is */
-  /*                        formed by units 2, 5 and 20. */
-  /*  */
-  /*  */
-  /*  See also FSReda, Sreg, MMreg, LTSts */
-  /*  */
-  /*  References: */
-  /*  */
-  /*    Rousseeuw P.J., Leroy A.M. (1987), "Robust regression and outlier */
-  /*    detection", Wiley. */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('LXS')">Link to the help function</a> */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /*  */
   /* { */
@@ -2713,6 +2622,11 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  Create plots */
 }
 
+/*
+ * Arguments    : double n
+ *                double alpha
+ * Return Type  : double
+ */
 double corfactorRAW(double n, double alpha)
 {
   double fp_500_n;
@@ -2736,6 +2650,11 @@ double corfactorRAW(double n, double alpha)
   return rawcorfac;
 }
 
+/*
+ * Arguments    : double n
+ *                double alpha
+ * Return Type  : double
+ */
 double corfactorREW(double n, double alpha)
 {
   double fp_500_n;
@@ -2760,4 +2679,8 @@ double corfactorREW(double n, double alpha)
   return rewcorfac;
 }
 
-/* End of code generation (LXS.c) */
+/*
+ * File trailer for LXS.c
+ *
+ * [EOF]
+ */

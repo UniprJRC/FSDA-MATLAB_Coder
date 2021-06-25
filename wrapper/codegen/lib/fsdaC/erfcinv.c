@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: erfcinv.c
  *
- * erfcinv.c
- *
- * Code generation for function 'erfcinv'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "erfcinv.h"
 #include "eml_erfcore.h"
 #include "fsdaC_rtwutil.h"
@@ -19,6 +18,10 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : double y
+ * Return Type  : double
+ */
 double erfcinv(double y)
 {
   double P;
@@ -211,4 +214,8 @@ double erfcinv(double y)
   return x;
 }
 
-/* End of code generation (erfcinv.c) */
+/*
+ * File trailer for erfcinv.c
+ *
+ * [EOF]
+ */

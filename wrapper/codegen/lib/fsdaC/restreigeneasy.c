@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: restreigeneasy.c
  *
- * restreigeneasy.c
- *
- * Code generation for function 'restreigeneasy'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "restreigeneasy.h"
 #include "blockedSummation.h"
 #include "combineVectorElements.h"
@@ -23,6 +22,77 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * restreigeneasy computes eigenvalues restriction (without Dykstra algorithm)
+ *
+ * <a href="matlab: docsearchFS('restreigeneasy')">Link to the help function</a>
+ *
+ *    restreigeneasy restricts the eigenvalues according to the constraint
+ *    specified in scalar restr. This function is a readable and
+ *    understandble (but sometimes slower) version of routine restreigen.
+ *
+ *   Required input arguments:
+ *
+ * eigenvalues: Eigenvalues. Matrix. v x k matrix containing the eigenvalues
+ *              of the covariance matrices of the k groups.
+ *              v is the number of variables of the dataset which has to be
+ *              clustered.
+ *      niini: Cluster size. Vector. k x 1 vector containing the size of the k
+ * clusters restr: Restriction factor. Scalar. Scalar containing the restr
+ * parameter in tclust program. More in detail, parameter restr defines the
+ * cluster's shape restrictions, which are applied on all clusters during each
+ *             iteration.
+ *             Setting restr to 1, yields the strongest restriction,
+ *             forcing all eigenvalues/determinants to be equal and so the
+ *             method looks for similarly scattered (respectively spherical)
+ *             clusters.
+ *
+ *   Optional input arguments:
+ *
+ *       tol : tolerance. Scalar defining the tolerance of the procedure.
+ *             The default value is 1e-8
+ *                Example - 'tol',[1e-18]
+ *                Data Types - double
+ *
+ *   Output:
+ *
+ *
+ *             out      : Restricted eigenvalues. Matrix. v-by-k matrix
+ *                        containing restricted eigenvalues.
+ *                        The ratio between two possible elements in matrix
+ *                        out is not greater than restr
+ *
+ *  See also restreigen, tclust, restrdeter, tclustreg
+ *
+ *  References:
+ *
+ *  This function implements the algorithm described in
+ *  Fritz H., Garcia-Escudero, L.A. and Mayo-Iscar, A. (2013), A fast
+ *  algorithm for robust constrained clustering,
+ * "Computational Satistics and Data Analysis", Vol. 61, pp. 124-136.
+ *  [Available at
+ *  http://www.eio.uva.es/infor/personas/tclust_algorithm.pdf]
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *  DETAILS. This algorithm solves the minimization problem with constraints
+ *  without resorting to the Dykstra algorithm. This implementation is based
+ *  on the paper  "A fast algorithm for robust constrained clustering" by
+ *  Fritz H., Garcia Escudero L.A. and Mayo-Iscar A. (2012). (FGM2012 in the
+ *  code below)
+ *
+ *
+ *
+ * <a href="matlab: docsearchFS('restreigeneasy')">Link to the help function</a>
+ *
+ * $LastChangedDate:: 2018-01-24 13:44:34 #$: Date of the last commit
+ *
+ * Arguments    : emxArray_real_T *eigenvalues
+ *                const emxArray_real_T *niini
+ *                double restr
+ * Return Type  : void
+ */
 void restreigeneasy(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
                     double restr)
 {
@@ -57,80 +127,6 @@ void restreigeneasy(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
   bool exitg1;
   bool y;
   emxInit_real_T(&d, 2);
-  /* restreigeneasy computes eigenvalues restriction (without Dykstra algorithm)
-   */
-  /*  */
-  /* <a href="matlab: docsearchFS('restreigeneasy')">Link to the help
-   * function</a> */
-  /*  */
-  /*    restreigeneasy restricts the eigenvalues according to the constraint */
-  /*    specified in scalar restr. This function is a readable and */
-  /*    understandble (but sometimes slower) version of routine restreigen. */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /* eigenvalues: Eigenvalues. Matrix. v x k matrix containing the eigenvalues
-   */
-  /*              of the covariance matrices of the k groups. */
-  /*              v is the number of variables of the dataset which has to be */
-  /*              clustered. */
-  /*      niini: Cluster size. Vector. k x 1 vector containing the size of the k
-   * clusters */
-  /*      restr: Restriction factor. Scalar. Scalar containing the restr
-   * parameter in tclust program. */
-  /*             More in detail, parameter restr defines the cluster's shape */
-  /*             restrictions, which are applied on all clusters during each */
-  /*             iteration. */
-  /*             Setting restr to 1, yields the strongest restriction, */
-  /*             forcing all eigenvalues/determinants to be equal and so the */
-  /*             method looks for similarly scattered (respectively spherical)
-   */
-  /*             clusters. */
-  /*  */
-  /*   Optional input arguments: */
-  /*  */
-  /*       tol : tolerance. Scalar defining the tolerance of the procedure. */
-  /*             The default value is 1e-8 */
-  /*                Example - 'tol',[1e-18] */
-  /*                Data Types - double */
-  /*  */
-  /*   Output: */
-  /*  */
-  /*  */
-  /*             out      : Restricted eigenvalues. Matrix. v-by-k matrix */
-  /*                        containing restricted eigenvalues. */
-  /*                        The ratio between two possible elements in matrix */
-  /*                        out is not greater than restr */
-  /*  */
-  /*  See also restreigen, tclust, restrdeter, tclustreg */
-  /*  */
-  /*  References: */
-  /*  */
-  /*  This function implements the algorithm described in */
-  /*  Fritz H., Garcia-Escudero, L.A. and Mayo-Iscar, A. (2013), A fast */
-  /*  algorithm for robust constrained clustering, */
-  /* "Computational Satistics and Data Analysis", Vol. 61, pp. 124-136. */
-  /*  [Available at */
-  /*  http://www.eio.uva.es/infor/personas/tclust_algorithm.pdf] */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  DETAILS. This algorithm solves the minimization problem with constraints
-   */
-  /*  without resorting to the Dykstra algorithm. This implementation is based
-   */
-  /*  on the paper  "A fast algorithm for robust constrained clustering" by */
-  /*  Fritz H., Garcia Escudero L.A. and Mayo-Iscar A. (2012). (FGM2012 in the
-   */
-  /*  code below) */
-  /*  */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('restreigeneasy')">Link to the help
-   * function</a> */
-  /*  */
-  /* $LastChangedDate:: 2018-01-24 13:44:34 #$: Date of the last commit */
   /*  Examples: */
   /*  */
   /* { */
@@ -707,4 +703,8 @@ void restreigeneasy(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
   /* FScategory:CLUS-RobClaMULT */
 }
 
-/* End of code generation (restreigeneasy.c) */
+/*
+ * File trailer for restreigeneasy.c
+ *
+ * [EOF]
+ */

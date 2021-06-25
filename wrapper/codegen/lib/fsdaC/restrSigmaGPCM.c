@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: restrSigmaGPCM.c
  *
- * restrSigmaGPCM.c
- *
- * Code generation for function 'restrSigmaGPCM'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "restrSigmaGPCM.h"
 #include "any.h"
 #include "blockedSummation.h"
@@ -37,6 +36,229 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * restrSigmaGPCM computes constrained covariance matrices for the 14 GPCM
+ * specifications
+ *
+ *
+ * <a href="matlab: docsearchFS('restrSigmaGPCM')">Link to the help function</a>
+ *
+ *
+ *   This routine applies the constraints to the covariance matrices using the
+ *   specifications contained in input structure pa.
+ *
+ *
+ *  Required input arguments:
+ *
+ *    SigmaB : initial unconstrained covariance matrices. p-by-p-by-k array.
+ *             p-by-p-by-k array containing the k covariance matrices for the
+ *             k groups.
+ *                Data Types - single|double
+ *
+ *    niini  : sizes of the groups. Vector. Vector of length k containing
+ *            the size of the groups. ninini can be either a row or a columns
+ *            vector.
+ *                Data Types - single|double
+ *
+ *       pa  : Constraints to apply and model specification. Structure.
+ *             Structure containing the following fields:
+ *              pa.pars= type of Gaussian Parsimonious Clustering Model.
+ * Character. A 3 letter word in the set:
+ *                'VVE','EVE','VVV','EVV','VEE','EEE','VEV','EEV','VVI',
+ *                'EVI','VEI','EEI','VII','EII'.
+ *                The field pa.pars is compulsory. All the other fields are
+ *                non necessary. If they are not present they are set to
+ *                their default values.
+ *              pa.cdet = scalar in the interval [1 Inf) which specifies the
+ *                the restriction which has to be applied to the determinants.
+ *                If pa.cdet=1 all determinants are forced to be equal.
+ *                See section More About for additional details.
+ *              pa.shw = scalar in the interval [1 Inf) which specifies the
+ *                the restriction which has to be applied to the elements of
+ *                the shape matrices inside each group. If pa.shw=1 all diagonal
+ *                elements of the shape matrix of cluster j (with j=1, ...,
+ *                k) will be equal.
+ *              pa.shb = scalar in the interval [1 Inf) which specifies the
+ *                the restriction which has to be applied to the elements of
+ *                the shape matrices across each group.
+ *              pa.maxiterS = positive integer which specifies the maximum
+ *                number of iterations to obtain the restricted shape matrix.
+ *                This parameter is used by routine restrshapepars. The
+ *                default value of pa.maxiterS is 5.
+ *              pa.maxiterR = positive integer which specifies the maximum
+ *                number of iterations to obtain the common rotation matrix
+ *                in presence of varying shape.
+ *                This parameter is used by routine cpcV. The
+ *                default value of pa.maxiterR is 20.
+ *           pa.maxiterDSR = positive integer which specifies the maximum
+ *                number of iterations to obtain the requested restricted
+ *                determinants, shape matrices and rotation. For all
+ *                parametrizations  pa.maxiterDSR is set to 1 apart from for
+ *                the specifications 'VVE', 'EVE' and 'VEE'. The default
+ *                value of pa.maxiterDSR is 20.
+ *            pa.tolS=tolerance to use to exit the iterative procedure for
+ *                estimating the shape. Scalar. The
+ *                iterative procedures stops when the relative difference of
+ *                a certain output matrix is smaller than itertol in two
+ * consecutive iterations. The default value of pa.tol is 1e-12. pa.zerotol =
+ * tolerance value to declare all input values equal to 0 in the eigenvalues
+ * restriction routine (file restreigen.m) or in the final reconstruction of
+ * covariance matrices. The default value of zerotol is 1e-10. pa.msg = boolean
+ * which if set equal to true enables to monitor the relative change of the
+ * estimates of lambda Gamma and Omega in each iteration. The default value of
+ * pa.msg is false, that is nothing is displayed in each iteration. pa.k  = the
+ * number of groups. pa.v  = the number of variables. pa.userepmat  = scalar,
+ * which specifies whether to use implicit expansion or bsxfun.  pa.userepmat =2
+ * implies implicit expansion, pa.userepmat=1 implies use of bsxfun. The default
+ * is to use implicit expansion (faster) if verLessThanFS(9.1) is false and
+ * bsxfun if MATLAB is older than 2016b. Data Types - struct
+ *
+ *     nocheck : check in input option pa. Boolean. Specify whether it is
+ *                necessary to check the input fields in
+ *                previous input option pa. If nocheck is
+ *                false (default is true) no check is performed on input
+ *                structure pa.
+ *                Data Types - Boolean
+ *
+ *   Optional input arguments:
+ *
+ *      lmd  : determinants. Vector.
+ *              Initial estimates of (constrained) determinants
+ *                  Example - [ 2 4 6]
+ *                  Data Types - double
+ *       OMG : rotation matrices. p-by-p-by-k array.
+ *              p-by-p-by-k array containing the preliminary estimates of the
+ *              rotation matrices for the k groups. If common rotation is
+ *              imposed (third letter is equal to E),
+ *              OMG(:,:,1)=...=OMG(:,:,k).
+ *                  Example - .5*hadamard(4)
+ *                  Data Types - double
+ *
+ *  Output:
+ *
+ *
+ *     Sigma  : constrained covariance matrices. p-by-p-by-k array.
+ *              p-by-p-by-k array containing the k covariance matrices for
+ *              the k groups. See section 'More About' for the notation for
+ *              the eigen-decomposition of the component covariance matrices.
+ *      lmd  : restricted determinants. Vector.
+ *              Row vector of length $k$ containing restricted determinants.
+ *              More precisely, the $j$-th element of lmd contains
+ *              $\lambda_j^{1/p}$. The elements of lmd satisfy the
+ *              constraint pa.cdet in the sense that $\max(lmd) / \min(lmd)
+ *              \leq pa.cdet^{(1/p)}$. In other words, the ratio between the
+ *              largest and the smallest determinant is not greater than
+ *              pa.cdet. All the elements of vector lmd are equal if
+ *              modeltype is E** or if pa.cdet=1.
+ *       OMG : constrained rotation matrices. p-by-p-by-k array.
+ *              p-by-p-by-k array containing the k rotation matrices for
+ *              the k groups. If common rotation is imposed (third letter is
+ *              equal to E), OMG(:,:,1)=...=OMG(:,:,k).
+ *      GAM : constrained shape matrix. 2D array.
+ *            Matrix of size p-by-k containing in
+ *            column j the elements on the main diagonal of shape matrix
+ *            $\Gamma_j$. The elements of GAM satisfy the following
+ *            constraints:
+ *            The product of the elements of each column is equal to 1.
+ *            The ratio among the largest elements of each column is
+ *            not greater than pa.shb.
+ *            The ratio among the second largest elements of each column is
+ *            not greater than pa.shb.
+ *            ....
+ *            The ratio among the smallest elements of each column is
+ *            not greater than pa.shb.
+ *            The ratio of the elements of each column is not greater than
+ *            pa.shw.
+ *
+ *
+ *  More About:
+ *  The notation for the eigen-decomposition of the
+ *  component covariance matrices is as follows
+ *
+ *  \[
+ *  \Sigma_j= \lambda_j^{1/p} \Omega_j \Gamma_j \Omega_j'  \qquad j=1, 2,
+ * \ldots, k
+ *  \]
+ *  The dimension of matrices $\Omega_j$ (rotation) and $\Gamma_j$ (shape) is
+ * $p\times p$.
+ *
+ *  $c_{det}=$ scalar, constraint associated with the determinants.
+ *
+ *  $c_{shw}=$ scalar, constraint inside each group of the shape matrix.
+ *
+ *  $c_{shb}=$ scalar, constraint among groups of the shape matrix.
+ *
+ *  Note that if you impose equal volumes $c_{det}=1$. Similarly, if you
+ *  impose a spherical shape $c_{shw}=1$.
+ *
+ *  We also denote with
+ *
+ *    [1] $\Sigma_B$ the 3D array of size $p\times p \times k$ containing the
+ *    empirical covariance matrices of the $k$ groups, before applying the
+ *    constraints coming from the 14 parametrizations. In the code $\Sigma_B$
+ *    is called $SigmaB$. The $j$-th slice of this 3D array of size $p\times
+ *    p$ is denoted with symbol $\hat \Sigma_j$.
+ *    [2] $\Omega$ the 3D array of size $p\times p \times k$ containing the
+ *    rotation matrices of the $k$ groups. In the code $\Omega$  is called
+ *    $OMG$. The $j$-th slice of this 3D array of size $p\times p$ is called
+ *    $\hat \Omega_j$.
+ *    [3] $\Gamma$ the $p\times k$ matrix containing in column $j$, with
+ *    $j=1, 2, \ldots, k$, the diagonal elements of matrix $\Gamma_j$ (shape
+ *    matrix of group j). In the code matrix $\Gamma$ is called GAM.
+ *    After the application of this routine, the product of the elements of
+ *    each column of matrix GAM is equal to 1.
+ *    The ratio among the largest (second largest, ...smallest) elements of
+ *    each column is not greater than $c_{shb}$ (pa.shb).
+ *    The ratio of the elements of each column is not greater than
+ *    $c_{shw}$ (pa.shb). All the columns of matrix GAM are equal if the second
+ *    letter of modeltype is E. All the columns of matrix GAM are
+ *    equal to 1 if the second letter of modeltype is I.
+ *    [4] niini the vector of length $k$ containing the number of units
+ *    (weights) associated to each group.
+ *    [5]  $\lambda$ = the vector of length $p$ containing in the $j$-th
+ *    position $\lambda_j^{1/p}=|\Sigma_j|^{1/p}$. In the code  vector
+ *    $\lambda$ is called $lmd$.
+ *    The elements of lmd satisfy the constraint pa.cdet in the sense that
+ *    $\max(lmd) / \min(lmd) \leq pa.cdet^{(1/p)}$. In other words, the
+ *    ratio between the largest and the smallest determinant is not
+ *    greater than pa.cdet. All the elements of vector lmd are equal
+ *    if modeltype is E** or if $c_{det}=1$ (pa.cdet=1).
+ *
+ *
+ *
+ *  See also restrshapeGPCM, restrdeterGPCM, restreigen, tclust
+ *
+ *
+ *  References:
+ *
+ *    Garcia-Escudero, L.A., Mayo-Iscar, A. and Riani M. (2019),
+ *    Robust parsimonious clustering models. Submitted.
+ *
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *
+ * <a href="matlab: docsearchFS('restrSigmaGPCM')">Link to the help function</a>
+ *
+ * $LastChangedDate:: 2018-09-15 00:27:12 #$: Date of the last commit
+ *
+ * Arguments    : emxArray_real_T *SigmaB
+ *                const emxArray_real_T *niini
+ *                const char pa_pars[3]
+ *                double pa_cdet
+ *                double pa_shw
+ *                double pa_shb
+ *                double pa_maxiterDSR
+ *                double pa_maxiterS
+ *                double pa_tolR
+ *                double pa_tolS
+ *                double pa_userepmat
+ *                double pa_zerotol
+ *                emxArray_real_T *lmd
+ *                emxArray_real_T *OMG
+ * Return Type  : void
+ */
 void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
                       const char pa_pars[3], double pa_cdet, double pa_shw,
                       double pa_shb, double pa_maxiterDSR, double pa_maxiterS,
@@ -102,248 +324,6 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   bool cpc;
   bool exitg1;
   bool guard1 = false;
-  /* restrSigmaGPCM computes constrained covariance matrices for the 14 GPCM
-   * specifications */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('restrSigmaGPCM')">Link to the help
-   * function</a> */
-  /*  */
-  /*  */
-  /*   This routine applies the constraints to the covariance matrices using the
-   */
-  /*   specifications contained in input structure pa. */
-  /*  */
-  /*  */
-  /*  Required input arguments: */
-  /*  */
-  /*    SigmaB : initial unconstrained covariance matrices. p-by-p-by-k array.
-   */
-  /*             p-by-p-by-k array containing the k covariance matrices for the
-   */
-  /*             k groups. */
-  /*                Data Types - single|double */
-  /*  */
-  /*    niini  : sizes of the groups. Vector. Vector of length k containing */
-  /*            the size of the groups. ninini can be either a row or a columns
-   */
-  /*            vector. */
-  /*                Data Types - single|double */
-  /*  */
-  /*       pa  : Constraints to apply and model specification. Structure. */
-  /*             Structure containing the following fields: */
-  /*              pa.pars= type of Gaussian Parsimonious Clustering Model.
-   * Character. */
-  /*                A 3 letter word in the set: */
-  /*                'VVE','EVE','VVV','EVV','VEE','EEE','VEV','EEV','VVI', */
-  /*                'EVI','VEI','EEI','VII','EII'. */
-  /*                The field pa.pars is compulsory. All the other fields are */
-  /*                non necessary. If they are not present they are set to */
-  /*                their default values. */
-  /*              pa.cdet = scalar in the interval [1 Inf) which specifies the
-   */
-  /*                the restriction which has to be applied to the determinants.
-   */
-  /*                If pa.cdet=1 all determinants are forced to be equal. */
-  /*                See section More About for additional details. */
-  /*              pa.shw = scalar in the interval [1 Inf) which specifies the */
-  /*                the restriction which has to be applied to the elements of
-   */
-  /*                the shape matrices inside each group. If pa.shw=1 all
-   * diagonal */
-  /*                elements of the shape matrix of cluster j (with j=1, ..., */
-  /*                k) will be equal. */
-  /*              pa.shb = scalar in the interval [1 Inf) which specifies the */
-  /*                the restriction which has to be applied to the elements of
-   */
-  /*                the shape matrices across each group. */
-  /*              pa.maxiterS = positive integer which specifies the maximum */
-  /*                number of iterations to obtain the restricted shape matrix.
-   */
-  /*                This parameter is used by routine restrshapepars. The */
-  /*                default value of pa.maxiterS is 5. */
-  /*              pa.maxiterR = positive integer which specifies the maximum */
-  /*                number of iterations to obtain the common rotation matrix */
-  /*                in presence of varying shape. */
-  /*                This parameter is used by routine cpcV. The */
-  /*                default value of pa.maxiterR is 20. */
-  /*           pa.maxiterDSR = positive integer which specifies the maximum */
-  /*                number of iterations to obtain the requested restricted */
-  /*                determinants, shape matrices and rotation. For all */
-  /*                parametrizations  pa.maxiterDSR is set to 1 apart from for
-   */
-  /*                the specifications 'VVE', 'EVE' and 'VEE'. The default */
-  /*                value of pa.maxiterDSR is 20. */
-  /*            pa.tolS=tolerance to use to exit the iterative procedure for */
-  /*                estimating the shape. Scalar. The */
-  /*                iterative procedures stops when the relative difference of
-   */
-  /*                a certain output matrix is smaller than itertol in two
-   * consecutive */
-  /*                iterations. The default value of pa.tol is 1e-12. */
-  /*       pa.zerotol = tolerance value to declare all input values equal to 0
-   */
-  /*                in the eigenvalues restriction routine (file restreigen.m)
-   */
-  /*                or in the final reconstruction of covariance matrices. */
-  /*                The default value of zerotol is 1e-10. */
-  /*           pa.msg = boolean which if set equal to true enables to monitor */
-  /*                the relative change of the estimates of lambda Gamma and */
-  /*                Omega in each iteration. The default value of pa.msg is */
-  /*                false, that is nothing is displayed in each iteration. */
-  /*            pa.k  = the number of groups. */
-  /*            pa.v  = the number of variables. */
-  /*    pa.userepmat  = scalar, which specifies whether to use implicit */
-  /*                    expansion or bsxfun.  pa.userepmat =2 implies implicit
-   */
-  /*                    expansion, pa.userepmat=1 implies use of bsxfun. The */
-  /*                    default is to use implicit expansion (faster) */
-  /*                    if verLessThanFS(9.1) is false and bsxfun if MATLAB is
-   */
-  /*                    older than 2016b. */
-  /*                Data Types - struct */
-  /*  */
-  /*     nocheck : check in input option pa. Boolean. Specify whether it is */
-  /*                necessary to check the input fields in */
-  /*                previous input option pa. If nocheck is */
-  /*                false (default is true) no check is performed on input */
-  /*                structure pa. */
-  /*                Data Types - Boolean */
-  /*  */
-  /*   Optional input arguments: */
-  /*  */
-  /*      lmd  : determinants. Vector. */
-  /*              Initial estimates of (constrained) determinants */
-  /*                  Example - [ 2 4 6] */
-  /*                  Data Types - double */
-  /*       OMG : rotation matrices. p-by-p-by-k array. */
-  /*              p-by-p-by-k array containing the preliminary estimates of the
-   */
-  /*              rotation matrices for the k groups. If common rotation is */
-  /*              imposed (third letter is equal to E), */
-  /*              OMG(:,:,1)=...=OMG(:,:,k). */
-  /*                  Example - .5*hadamard(4) */
-  /*                  Data Types - double */
-  /*  */
-  /*  Output: */
-  /*  */
-  /*  */
-  /*     Sigma  : constrained covariance matrices. p-by-p-by-k array. */
-  /*              p-by-p-by-k array containing the k covariance matrices for */
-  /*              the k groups. See section 'More About' for the notation for */
-  /*              the eigen-decomposition of the component covariance matrices.
-   */
-  /*      lmd  : restricted determinants. Vector. */
-  /*              Row vector of length $k$ containing restricted determinants.
-   */
-  /*              More precisely, the $j$-th element of lmd contains */
-  /*              $\lambda_j^{1/p}$. The elements of lmd satisfy the */
-  /*              constraint pa.cdet in the sense that $\max(lmd) / \min(lmd) */
-  /*              \leq pa.cdet^{(1/p)}$. In other words, the ratio between the
-   */
-  /*              largest and the smallest determinant is not greater than */
-  /*              pa.cdet. All the elements of vector lmd are equal if */
-  /*              modeltype is E** or if pa.cdet=1. */
-  /*       OMG : constrained rotation matrices. p-by-p-by-k array. */
-  /*              p-by-p-by-k array containing the k rotation matrices for */
-  /*              the k groups. If common rotation is imposed (third letter is
-   */
-  /*              equal to E), OMG(:,:,1)=...=OMG(:,:,k). */
-  /*      GAM : constrained shape matrix. 2D array. */
-  /*            Matrix of size p-by-k containing in */
-  /*            column j the elements on the main diagonal of shape matrix */
-  /*            $\Gamma_j$. The elements of GAM satisfy the following */
-  /*            constraints: */
-  /*            The product of the elements of each column is equal to 1. */
-  /*            The ratio among the largest elements of each column is */
-  /*            not greater than pa.shb. */
-  /*            The ratio among the second largest elements of each column is */
-  /*            not greater than pa.shb. */
-  /*            .... */
-  /*            The ratio among the smallest elements of each column is */
-  /*            not greater than pa.shb. */
-  /*            The ratio of the elements of each column is not greater than */
-  /*            pa.shw. */
-  /*  */
-  /*  */
-  /*  More About: */
-  /*  The notation for the eigen-decomposition of the */
-  /*  component covariance matrices is as follows */
-  /*  */
-  /*  \[ */
-  /*  \Sigma_j= \lambda_j^{1/p} \Omega_j \Gamma_j \Omega_j'  \qquad j=1, 2,
-   * \ldots, k */
-  /*  \] */
-  /*  The dimension of matrices $\Omega_j$ (rotation) and $\Gamma_j$ (shape) is
-   * $p\times p$. */
-  /*  */
-  /*  $c_{det}=$ scalar, constraint associated with the determinants. */
-  /*  */
-  /*  $c_{shw}=$ scalar, constraint inside each group of the shape matrix. */
-  /*  */
-  /*  $c_{shb}=$ scalar, constraint among groups of the shape matrix. */
-  /*  */
-  /*  Note that if you impose equal volumes $c_{det}=1$. Similarly, if you */
-  /*  impose a spherical shape $c_{shw}=1$. */
-  /*  */
-  /*  We also denote with */
-  /*  */
-  /*    [1] $\Sigma_B$ the 3D array of size $p\times p \times k$ containing the
-   */
-  /*    empirical covariance matrices of the $k$ groups, before applying the */
-  /*    constraints coming from the 14 parametrizations. In the code $\Sigma_B$
-   */
-  /*    is called $SigmaB$. The $j$-th slice of this 3D array of size $p\times
-   */
-  /*    p$ is denoted with symbol $\hat \Sigma_j$. */
-  /*    [2] $\Omega$ the 3D array of size $p\times p \times k$ containing the */
-  /*    rotation matrices of the $k$ groups. In the code $\Omega$  is called */
-  /*    $OMG$. The $j$-th slice of this 3D array of size $p\times p$ is called
-   */
-  /*    $\hat \Omega_j$. */
-  /*    [3] $\Gamma$ the $p\times k$ matrix containing in column $j$, with */
-  /*    $j=1, 2, \ldots, k$, the diagonal elements of matrix $\Gamma_j$ (shape
-   */
-  /*    matrix of group j). In the code matrix $\Gamma$ is called GAM. */
-  /*    After the application of this routine, the product of the elements of */
-  /*    each column of matrix GAM is equal to 1. */
-  /*    The ratio among the largest (second largest, ...smallest) elements of */
-  /*    each column is not greater than $c_{shb}$ (pa.shb). */
-  /*    The ratio of the elements of each column is not greater than */
-  /*    $c_{shw}$ (pa.shb). All the columns of matrix GAM are equal if the
-   * second */
-  /*    letter of modeltype is E. All the columns of matrix GAM are */
-  /*    equal to 1 if the second letter of modeltype is I. */
-  /*    [4] niini the vector of length $k$ containing the number of units */
-  /*    (weights) associated to each group. */
-  /*    [5]  $\lambda$ = the vector of length $p$ containing in the $j$-th */
-  /*    position $\lambda_j^{1/p}=|\Sigma_j|^{1/p}$. In the code  vector */
-  /*    $\lambda$ is called $lmd$. */
-  /*    The elements of lmd satisfy the constraint pa.cdet in the sense that */
-  /*    $\max(lmd) / \min(lmd) \leq pa.cdet^{(1/p)}$. In other words, the */
-  /*    ratio between the largest and the smallest determinant is not */
-  /*    greater than pa.cdet. All the elements of vector lmd are equal */
-  /*    if modeltype is E** or if $c_{det}=1$ (pa.cdet=1). */
-  /*  */
-  /*  */
-  /*  */
-  /*  See also restrshapeGPCM, restrdeterGPCM, restreigen, tclust */
-  /*  */
-  /*  */
-  /*  References: */
-  /*  */
-  /*    Garcia-Escudero, L.A., Mayo-Iscar, A. and Riani M. (2019), */
-  /*    Robust parsimonious clustering models. Submitted. */
-  /*  */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('restrSigmaGPCM')">Link to the help
-   * function</a> */
-  /*  */
-  /* $LastChangedDate:: 2018-09-15 00:27:12 #$: Date of the last commit */
   /*  Examples: */
   /* { */
   /*     % Use of restrSigmaGPCM with just one output argument. */
@@ -1171,6 +1151,229 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   emxFree_real_T(&GAM);
 }
 
+/*
+ * restrSigmaGPCM computes constrained covariance matrices for the 14 GPCM
+ * specifications
+ *
+ *
+ * <a href="matlab: docsearchFS('restrSigmaGPCM')">Link to the help function</a>
+ *
+ *
+ *   This routine applies the constraints to the covariance matrices using the
+ *   specifications contained in input structure pa.
+ *
+ *
+ *  Required input arguments:
+ *
+ *    SigmaB : initial unconstrained covariance matrices. p-by-p-by-k array.
+ *             p-by-p-by-k array containing the k covariance matrices for the
+ *             k groups.
+ *                Data Types - single|double
+ *
+ *    niini  : sizes of the groups. Vector. Vector of length k containing
+ *            the size of the groups. ninini can be either a row or a columns
+ *            vector.
+ *                Data Types - single|double
+ *
+ *       pa  : Constraints to apply and model specification. Structure.
+ *             Structure containing the following fields:
+ *              pa.pars= type of Gaussian Parsimonious Clustering Model.
+ * Character. A 3 letter word in the set:
+ *                'VVE','EVE','VVV','EVV','VEE','EEE','VEV','EEV','VVI',
+ *                'EVI','VEI','EEI','VII','EII'.
+ *                The field pa.pars is compulsory. All the other fields are
+ *                non necessary. If they are not present they are set to
+ *                their default values.
+ *              pa.cdet = scalar in the interval [1 Inf) which specifies the
+ *                the restriction which has to be applied to the determinants.
+ *                If pa.cdet=1 all determinants are forced to be equal.
+ *                See section More About for additional details.
+ *              pa.shw = scalar in the interval [1 Inf) which specifies the
+ *                the restriction which has to be applied to the elements of
+ *                the shape matrices inside each group. If pa.shw=1 all diagonal
+ *                elements of the shape matrix of cluster j (with j=1, ...,
+ *                k) will be equal.
+ *              pa.shb = scalar in the interval [1 Inf) which specifies the
+ *                the restriction which has to be applied to the elements of
+ *                the shape matrices across each group.
+ *              pa.maxiterS = positive integer which specifies the maximum
+ *                number of iterations to obtain the restricted shape matrix.
+ *                This parameter is used by routine restrshapepars. The
+ *                default value of pa.maxiterS is 5.
+ *              pa.maxiterR = positive integer which specifies the maximum
+ *                number of iterations to obtain the common rotation matrix
+ *                in presence of varying shape.
+ *                This parameter is used by routine cpcV. The
+ *                default value of pa.maxiterR is 20.
+ *           pa.maxiterDSR = positive integer which specifies the maximum
+ *                number of iterations to obtain the requested restricted
+ *                determinants, shape matrices and rotation. For all
+ *                parametrizations  pa.maxiterDSR is set to 1 apart from for
+ *                the specifications 'VVE', 'EVE' and 'VEE'. The default
+ *                value of pa.maxiterDSR is 20.
+ *            pa.tolS=tolerance to use to exit the iterative procedure for
+ *                estimating the shape. Scalar. The
+ *                iterative procedures stops when the relative difference of
+ *                a certain output matrix is smaller than itertol in two
+ * consecutive iterations. The default value of pa.tol is 1e-12. pa.zerotol =
+ * tolerance value to declare all input values equal to 0 in the eigenvalues
+ * restriction routine (file restreigen.m) or in the final reconstruction of
+ * covariance matrices. The default value of zerotol is 1e-10. pa.msg = boolean
+ * which if set equal to true enables to monitor the relative change of the
+ * estimates of lambda Gamma and Omega in each iteration. The default value of
+ * pa.msg is false, that is nothing is displayed in each iteration. pa.k  = the
+ * number of groups. pa.v  = the number of variables. pa.userepmat  = scalar,
+ * which specifies whether to use implicit expansion or bsxfun.  pa.userepmat =2
+ * implies implicit expansion, pa.userepmat=1 implies use of bsxfun. The default
+ * is to use implicit expansion (faster) if verLessThanFS(9.1) is false and
+ * bsxfun if MATLAB is older than 2016b. Data Types - struct
+ *
+ *     nocheck : check in input option pa. Boolean. Specify whether it is
+ *                necessary to check the input fields in
+ *                previous input option pa. If nocheck is
+ *                false (default is true) no check is performed on input
+ *                structure pa.
+ *                Data Types - Boolean
+ *
+ *   Optional input arguments:
+ *
+ *      lmd  : determinants. Vector.
+ *              Initial estimates of (constrained) determinants
+ *                  Example - [ 2 4 6]
+ *                  Data Types - double
+ *       OMG : rotation matrices. p-by-p-by-k array.
+ *              p-by-p-by-k array containing the preliminary estimates of the
+ *              rotation matrices for the k groups. If common rotation is
+ *              imposed (third letter is equal to E),
+ *              OMG(:,:,1)=...=OMG(:,:,k).
+ *                  Example - .5*hadamard(4)
+ *                  Data Types - double
+ *
+ *  Output:
+ *
+ *
+ *     Sigma  : constrained covariance matrices. p-by-p-by-k array.
+ *              p-by-p-by-k array containing the k covariance matrices for
+ *              the k groups. See section 'More About' for the notation for
+ *              the eigen-decomposition of the component covariance matrices.
+ *      lmd  : restricted determinants. Vector.
+ *              Row vector of length $k$ containing restricted determinants.
+ *              More precisely, the $j$-th element of lmd contains
+ *              $\lambda_j^{1/p}$. The elements of lmd satisfy the
+ *              constraint pa.cdet in the sense that $\max(lmd) / \min(lmd)
+ *              \leq pa.cdet^{(1/p)}$. In other words, the ratio between the
+ *              largest and the smallest determinant is not greater than
+ *              pa.cdet. All the elements of vector lmd are equal if
+ *              modeltype is E** or if pa.cdet=1.
+ *       OMG : constrained rotation matrices. p-by-p-by-k array.
+ *              p-by-p-by-k array containing the k rotation matrices for
+ *              the k groups. If common rotation is imposed (third letter is
+ *              equal to E), OMG(:,:,1)=...=OMG(:,:,k).
+ *      GAM : constrained shape matrix. 2D array.
+ *            Matrix of size p-by-k containing in
+ *            column j the elements on the main diagonal of shape matrix
+ *            $\Gamma_j$. The elements of GAM satisfy the following
+ *            constraints:
+ *            The product of the elements of each column is equal to 1.
+ *            The ratio among the largest elements of each column is
+ *            not greater than pa.shb.
+ *            The ratio among the second largest elements of each column is
+ *            not greater than pa.shb.
+ *            ....
+ *            The ratio among the smallest elements of each column is
+ *            not greater than pa.shb.
+ *            The ratio of the elements of each column is not greater than
+ *            pa.shw.
+ *
+ *
+ *  More About:
+ *  The notation for the eigen-decomposition of the
+ *  component covariance matrices is as follows
+ *
+ *  \[
+ *  \Sigma_j= \lambda_j^{1/p} \Omega_j \Gamma_j \Omega_j'  \qquad j=1, 2,
+ * \ldots, k
+ *  \]
+ *  The dimension of matrices $\Omega_j$ (rotation) and $\Gamma_j$ (shape) is
+ * $p\times p$.
+ *
+ *  $c_{det}=$ scalar, constraint associated with the determinants.
+ *
+ *  $c_{shw}=$ scalar, constraint inside each group of the shape matrix.
+ *
+ *  $c_{shb}=$ scalar, constraint among groups of the shape matrix.
+ *
+ *  Note that if you impose equal volumes $c_{det}=1$. Similarly, if you
+ *  impose a spherical shape $c_{shw}=1$.
+ *
+ *  We also denote with
+ *
+ *    [1] $\Sigma_B$ the 3D array of size $p\times p \times k$ containing the
+ *    empirical covariance matrices of the $k$ groups, before applying the
+ *    constraints coming from the 14 parametrizations. In the code $\Sigma_B$
+ *    is called $SigmaB$. The $j$-th slice of this 3D array of size $p\times
+ *    p$ is denoted with symbol $\hat \Sigma_j$.
+ *    [2] $\Omega$ the 3D array of size $p\times p \times k$ containing the
+ *    rotation matrices of the $k$ groups. In the code $\Omega$  is called
+ *    $OMG$. The $j$-th slice of this 3D array of size $p\times p$ is called
+ *    $\hat \Omega_j$.
+ *    [3] $\Gamma$ the $p\times k$ matrix containing in column $j$, with
+ *    $j=1, 2, \ldots, k$, the diagonal elements of matrix $\Gamma_j$ (shape
+ *    matrix of group j). In the code matrix $\Gamma$ is called GAM.
+ *    After the application of this routine, the product of the elements of
+ *    each column of matrix GAM is equal to 1.
+ *    The ratio among the largest (second largest, ...smallest) elements of
+ *    each column is not greater than $c_{shb}$ (pa.shb).
+ *    The ratio of the elements of each column is not greater than
+ *    $c_{shw}$ (pa.shb). All the columns of matrix GAM are equal if the second
+ *    letter of modeltype is E. All the columns of matrix GAM are
+ *    equal to 1 if the second letter of modeltype is I.
+ *    [4] niini the vector of length $k$ containing the number of units
+ *    (weights) associated to each group.
+ *    [5]  $\lambda$ = the vector of length $p$ containing in the $j$-th
+ *    position $\lambda_j^{1/p}=|\Sigma_j|^{1/p}$. In the code  vector
+ *    $\lambda$ is called $lmd$.
+ *    The elements of lmd satisfy the constraint pa.cdet in the sense that
+ *    $\max(lmd) / \min(lmd) \leq pa.cdet^{(1/p)}$. In other words, the
+ *    ratio between the largest and the smallest determinant is not
+ *    greater than pa.cdet. All the elements of vector lmd are equal
+ *    if modeltype is E** or if $c_{det}=1$ (pa.cdet=1).
+ *
+ *
+ *
+ *  See also restrshapeGPCM, restrdeterGPCM, restreigen, tclust
+ *
+ *
+ *  References:
+ *
+ *    Garcia-Escudero, L.A., Mayo-Iscar, A. and Riani M. (2019),
+ *    Robust parsimonious clustering models. Submitted.
+ *
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *
+ * <a href="matlab: docsearchFS('restrSigmaGPCM')">Link to the help function</a>
+ *
+ * $LastChangedDate:: 2018-09-15 00:27:12 #$: Date of the last commit
+ *
+ * Arguments    : emxArray_real_T *SigmaB
+ *                const emxArray_real_T *niini
+ *                const char pa_pars[3]
+ *                double pa_cdet
+ *                double pa_shw
+ *                double pa_shb
+ *                double pa_maxiterDSR
+ *                double pa_maxiterS
+ *                double pa_tolR
+ *                double pa_tolS
+ *                double pa_userepmat
+ *                double pa_zerotol
+ *                emxArray_real_T *lmd
+ *                emxArray_real_T *OMG
+ * Return Type  : void
+ */
 void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
                     const char pa_pars[3], double pa_cdet, double pa_shw,
                     double pa_shb, double pa_maxiterDSR, double pa_maxiterS,
@@ -1231,248 +1434,6 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   bool cpc;
   bool guard1 = false;
   bool maxval;
-  /* restrSigmaGPCM computes constrained covariance matrices for the 14 GPCM
-   * specifications */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('restrSigmaGPCM')">Link to the help
-   * function</a> */
-  /*  */
-  /*  */
-  /*   This routine applies the constraints to the covariance matrices using the
-   */
-  /*   specifications contained in input structure pa. */
-  /*  */
-  /*  */
-  /*  Required input arguments: */
-  /*  */
-  /*    SigmaB : initial unconstrained covariance matrices. p-by-p-by-k array.
-   */
-  /*             p-by-p-by-k array containing the k covariance matrices for the
-   */
-  /*             k groups. */
-  /*                Data Types - single|double */
-  /*  */
-  /*    niini  : sizes of the groups. Vector. Vector of length k containing */
-  /*            the size of the groups. ninini can be either a row or a columns
-   */
-  /*            vector. */
-  /*                Data Types - single|double */
-  /*  */
-  /*       pa  : Constraints to apply and model specification. Structure. */
-  /*             Structure containing the following fields: */
-  /*              pa.pars= type of Gaussian Parsimonious Clustering Model.
-   * Character. */
-  /*                A 3 letter word in the set: */
-  /*                'VVE','EVE','VVV','EVV','VEE','EEE','VEV','EEV','VVI', */
-  /*                'EVI','VEI','EEI','VII','EII'. */
-  /*                The field pa.pars is compulsory. All the other fields are */
-  /*                non necessary. If they are not present they are set to */
-  /*                their default values. */
-  /*              pa.cdet = scalar in the interval [1 Inf) which specifies the
-   */
-  /*                the restriction which has to be applied to the determinants.
-   */
-  /*                If pa.cdet=1 all determinants are forced to be equal. */
-  /*                See section More About for additional details. */
-  /*              pa.shw = scalar in the interval [1 Inf) which specifies the */
-  /*                the restriction which has to be applied to the elements of
-   */
-  /*                the shape matrices inside each group. If pa.shw=1 all
-   * diagonal */
-  /*                elements of the shape matrix of cluster j (with j=1, ..., */
-  /*                k) will be equal. */
-  /*              pa.shb = scalar in the interval [1 Inf) which specifies the */
-  /*                the restriction which has to be applied to the elements of
-   */
-  /*                the shape matrices across each group. */
-  /*              pa.maxiterS = positive integer which specifies the maximum */
-  /*                number of iterations to obtain the restricted shape matrix.
-   */
-  /*                This parameter is used by routine restrshapepars. The */
-  /*                default value of pa.maxiterS is 5. */
-  /*              pa.maxiterR = positive integer which specifies the maximum */
-  /*                number of iterations to obtain the common rotation matrix */
-  /*                in presence of varying shape. */
-  /*                This parameter is used by routine cpcV. The */
-  /*                default value of pa.maxiterR is 20. */
-  /*           pa.maxiterDSR = positive integer which specifies the maximum */
-  /*                number of iterations to obtain the requested restricted */
-  /*                determinants, shape matrices and rotation. For all */
-  /*                parametrizations  pa.maxiterDSR is set to 1 apart from for
-   */
-  /*                the specifications 'VVE', 'EVE' and 'VEE'. The default */
-  /*                value of pa.maxiterDSR is 20. */
-  /*            pa.tolS=tolerance to use to exit the iterative procedure for */
-  /*                estimating the shape. Scalar. The */
-  /*                iterative procedures stops when the relative difference of
-   */
-  /*                a certain output matrix is smaller than itertol in two
-   * consecutive */
-  /*                iterations. The default value of pa.tol is 1e-12. */
-  /*       pa.zerotol = tolerance value to declare all input values equal to 0
-   */
-  /*                in the eigenvalues restriction routine (file restreigen.m)
-   */
-  /*                or in the final reconstruction of covariance matrices. */
-  /*                The default value of zerotol is 1e-10. */
-  /*           pa.msg = boolean which if set equal to true enables to monitor */
-  /*                the relative change of the estimates of lambda Gamma and */
-  /*                Omega in each iteration. The default value of pa.msg is */
-  /*                false, that is nothing is displayed in each iteration. */
-  /*            pa.k  = the number of groups. */
-  /*            pa.v  = the number of variables. */
-  /*    pa.userepmat  = scalar, which specifies whether to use implicit */
-  /*                    expansion or bsxfun.  pa.userepmat =2 implies implicit
-   */
-  /*                    expansion, pa.userepmat=1 implies use of bsxfun. The */
-  /*                    default is to use implicit expansion (faster) */
-  /*                    if verLessThanFS(9.1) is false and bsxfun if MATLAB is
-   */
-  /*                    older than 2016b. */
-  /*                Data Types - struct */
-  /*  */
-  /*     nocheck : check in input option pa. Boolean. Specify whether it is */
-  /*                necessary to check the input fields in */
-  /*                previous input option pa. If nocheck is */
-  /*                false (default is true) no check is performed on input */
-  /*                structure pa. */
-  /*                Data Types - Boolean */
-  /*  */
-  /*   Optional input arguments: */
-  /*  */
-  /*      lmd  : determinants. Vector. */
-  /*              Initial estimates of (constrained) determinants */
-  /*                  Example - [ 2 4 6] */
-  /*                  Data Types - double */
-  /*       OMG : rotation matrices. p-by-p-by-k array. */
-  /*              p-by-p-by-k array containing the preliminary estimates of the
-   */
-  /*              rotation matrices for the k groups. If common rotation is */
-  /*              imposed (third letter is equal to E), */
-  /*              OMG(:,:,1)=...=OMG(:,:,k). */
-  /*                  Example - .5*hadamard(4) */
-  /*                  Data Types - double */
-  /*  */
-  /*  Output: */
-  /*  */
-  /*  */
-  /*     Sigma  : constrained covariance matrices. p-by-p-by-k array. */
-  /*              p-by-p-by-k array containing the k covariance matrices for */
-  /*              the k groups. See section 'More About' for the notation for */
-  /*              the eigen-decomposition of the component covariance matrices.
-   */
-  /*      lmd  : restricted determinants. Vector. */
-  /*              Row vector of length $k$ containing restricted determinants.
-   */
-  /*              More precisely, the $j$-th element of lmd contains */
-  /*              $\lambda_j^{1/p}$. The elements of lmd satisfy the */
-  /*              constraint pa.cdet in the sense that $\max(lmd) / \min(lmd) */
-  /*              \leq pa.cdet^{(1/p)}$. In other words, the ratio between the
-   */
-  /*              largest and the smallest determinant is not greater than */
-  /*              pa.cdet. All the elements of vector lmd are equal if */
-  /*              modeltype is E** or if pa.cdet=1. */
-  /*       OMG : constrained rotation matrices. p-by-p-by-k array. */
-  /*              p-by-p-by-k array containing the k rotation matrices for */
-  /*              the k groups. If common rotation is imposed (third letter is
-   */
-  /*              equal to E), OMG(:,:,1)=...=OMG(:,:,k). */
-  /*      GAM : constrained shape matrix. 2D array. */
-  /*            Matrix of size p-by-k containing in */
-  /*            column j the elements on the main diagonal of shape matrix */
-  /*            $\Gamma_j$. The elements of GAM satisfy the following */
-  /*            constraints: */
-  /*            The product of the elements of each column is equal to 1. */
-  /*            The ratio among the largest elements of each column is */
-  /*            not greater than pa.shb. */
-  /*            The ratio among the second largest elements of each column is */
-  /*            not greater than pa.shb. */
-  /*            .... */
-  /*            The ratio among the smallest elements of each column is */
-  /*            not greater than pa.shb. */
-  /*            The ratio of the elements of each column is not greater than */
-  /*            pa.shw. */
-  /*  */
-  /*  */
-  /*  More About: */
-  /*  The notation for the eigen-decomposition of the */
-  /*  component covariance matrices is as follows */
-  /*  */
-  /*  \[ */
-  /*  \Sigma_j= \lambda_j^{1/p} \Omega_j \Gamma_j \Omega_j'  \qquad j=1, 2,
-   * \ldots, k */
-  /*  \] */
-  /*  The dimension of matrices $\Omega_j$ (rotation) and $\Gamma_j$ (shape) is
-   * $p\times p$. */
-  /*  */
-  /*  $c_{det}=$ scalar, constraint associated with the determinants. */
-  /*  */
-  /*  $c_{shw}=$ scalar, constraint inside each group of the shape matrix. */
-  /*  */
-  /*  $c_{shb}=$ scalar, constraint among groups of the shape matrix. */
-  /*  */
-  /*  Note that if you impose equal volumes $c_{det}=1$. Similarly, if you */
-  /*  impose a spherical shape $c_{shw}=1$. */
-  /*  */
-  /*  We also denote with */
-  /*  */
-  /*    [1] $\Sigma_B$ the 3D array of size $p\times p \times k$ containing the
-   */
-  /*    empirical covariance matrices of the $k$ groups, before applying the */
-  /*    constraints coming from the 14 parametrizations. In the code $\Sigma_B$
-   */
-  /*    is called $SigmaB$. The $j$-th slice of this 3D array of size $p\times
-   */
-  /*    p$ is denoted with symbol $\hat \Sigma_j$. */
-  /*    [2] $\Omega$ the 3D array of size $p\times p \times k$ containing the */
-  /*    rotation matrices of the $k$ groups. In the code $\Omega$  is called */
-  /*    $OMG$. The $j$-th slice of this 3D array of size $p\times p$ is called
-   */
-  /*    $\hat \Omega_j$. */
-  /*    [3] $\Gamma$ the $p\times k$ matrix containing in column $j$, with */
-  /*    $j=1, 2, \ldots, k$, the diagonal elements of matrix $\Gamma_j$ (shape
-   */
-  /*    matrix of group j). In the code matrix $\Gamma$ is called GAM. */
-  /*    After the application of this routine, the product of the elements of */
-  /*    each column of matrix GAM is equal to 1. */
-  /*    The ratio among the largest (second largest, ...smallest) elements of */
-  /*    each column is not greater than $c_{shb}$ (pa.shb). */
-  /*    The ratio of the elements of each column is not greater than */
-  /*    $c_{shw}$ (pa.shb). All the columns of matrix GAM are equal if the
-   * second */
-  /*    letter of modeltype is E. All the columns of matrix GAM are */
-  /*    equal to 1 if the second letter of modeltype is I. */
-  /*    [4] niini the vector of length $k$ containing the number of units */
-  /*    (weights) associated to each group. */
-  /*    [5]  $\lambda$ = the vector of length $p$ containing in the $j$-th */
-  /*    position $\lambda_j^{1/p}=|\Sigma_j|^{1/p}$. In the code  vector */
-  /*    $\lambda$ is called $lmd$. */
-  /*    The elements of lmd satisfy the constraint pa.cdet in the sense that */
-  /*    $\max(lmd) / \min(lmd) \leq pa.cdet^{(1/p)}$. In other words, the */
-  /*    ratio between the largest and the smallest determinant is not */
-  /*    greater than pa.cdet. All the elements of vector lmd are equal */
-  /*    if modeltype is E** or if $c_{det}=1$ (pa.cdet=1). */
-  /*  */
-  /*  */
-  /*  */
-  /*  See also restrshapeGPCM, restrdeterGPCM, restreigen, tclust */
-  /*  */
-  /*  */
-  /*  References: */
-  /*  */
-  /*    Garcia-Escudero, L.A., Mayo-Iscar, A. and Riani M. (2019), */
-  /*    Robust parsimonious clustering models. Submitted. */
-  /*  */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('restrSigmaGPCM')">Link to the help
-   * function</a> */
-  /*  */
-  /* $LastChangedDate:: 2018-09-15 00:27:12 #$: Date of the last commit */
   /*  Examples: */
   /* { */
   /*     % Use of restrSigmaGPCM with just one output argument. */
@@ -2570,4 +2531,8 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   emxFree_real_T(&diageigunsorted);
 }
 
-/* End of code generation (restrSigmaGPCM.c) */
+/*
+ * File trailer for restrSigmaGPCM.c
+ *
+ * [EOF]
+ */

@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: power.c
  *
- * power.c
- *
- * Code generation for function 'power'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "power.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
@@ -17,6 +16,11 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const emxArray_real_T *a
+ *                emxArray_real_T *y
+ * Return Type  : void
+ */
 void power(const emxArray_real_T *a, emxArray_real_T *y)
 {
   int k;
@@ -31,4 +35,8 @@ void power(const emxArray_real_T *a, emxArray_real_T *y)
   }
 }
 
-/* End of code generation (power.c) */
+/*
+ * File trailer for power.c
+ *
+ * [EOF]
+ */

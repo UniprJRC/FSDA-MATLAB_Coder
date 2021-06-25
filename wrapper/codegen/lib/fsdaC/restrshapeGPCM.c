@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: restrshapeGPCM.c
  *
- * restrshapeGPCM.c
- *
- * Code generation for function 'restrshapeGPCM'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "restrshapeGPCM.h"
 #include "blockedSummation.h"
 #include "combineVectorElements.h"
@@ -25,6 +24,116 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * restrshapeGPCM produces the restricted shape matrix for the 14 GPCM
+ *
+ *
+ * <a href="matlab: docsearchFS('restrshapeGPCM')">Link to the help function</a>
+ *
+ *
+ *
+ *  The purpose of this routine is to produce the constrained shape matrix
+ *  $\Gamma$.
+ *  This routine copes with the second of the 3 letters of modeltype. It
+ *  deals with the cases in which the second letter is E, or I or V. If the
+ *  second letter is V procedure restrshapecore is invoked and both (within
+ *  groups) cshw, and (between groups) cshb constraints are imposed. If the
+ *  second letter of modeltype is E just cshw is used. If the second letter
+ *  is I, GAMc becomes a matrix of ones.
+ *
+ *
+ *  Required input arguments:
+ *
+ *      lmd : Determinants. Vector.
+ *             Row vector of length k containing in the j-th position
+ *            the estimate of lambda. In the first iteration the estiamte of
+ *            \lambda_j is $|\Sigma_j|^(1/v)$, $j=1, 2, \ldots, k$ if
+ *            different determinants are allowed else it is a row vector of
+ *            ones.
+ *     Omega : Rotation. 3D array.
+ *            v-by-v-by-k 3D array containing in
+ *            position (:,:,j) the rotation
+ *            matrix $\Omega_j$ for group $j$, with $j=1, 2, \ldots, k$.
+ *    SigmaB : initial unconstrained covariance matrices. v-by-v-by-k array.
+ *             v-by-v-by-k array containing the k unconstrained covariance
+ *             matrices for the k groups.
+ *    niini  : size of the groups. Vector.
+ *            Row vector of length k containing the size of the groups.
+ *      pa : constraining parameters. Structure. Structure containing 3 letter
+ * character specifying modeltype, number of dimensions, number of groups... pa
+ * must contain the following fields: pa.v = scalar, number of variables. pa.k =
+ * scalar, number of groups. pa.pars = type of Gaussian Parsimonious Clustering
+ * Model. A 3 letter word in the set:
+ *                'VVE','EVE','VVV','EVV','VEE','EEE','VEV','EEV','VVI',
+ *                'EVI','VEI','EEI','VII','EII'
+ *             pa.shb = between groups shape constraint
+ *             pa.shw = within groups shape constraint
+ *             pa.zerotol = tolerance to decleare elements equal to 0.
+ *             pa.maxiterS = maximum number of iterations in presence of
+ *             varying shape matrices.
+ *             pa.userepmat = scalar (if =2 implicit expansion is used)
+ *                  Data Types - struct
+ *
+ *
+ *   Optional input arguments:
+ *
+ *
+ *  Output:
+ *
+ *      GAMc : constrained shape matrix. Matrix of size v-by-k containing in
+ *            column j the elements on the main diagonal of shape matrix
+ *            $\Gamma_j$. The elements of GAMc satisfy the following
+ *            constraints:
+ *            The product of the elements of each column is equal to 1.
+ *            The ratio among the largest elements of each column is
+ *            not greater than pa.shb.
+ *            The ratio among the second largest elements of each column is
+ *            not greater than pa.shb.
+ *            ....
+ *            The ratio among the smallest elements of each column is
+ *            not greater than pa.shb.
+ *            The ratio of the elements of each column is not greater than
+ *            pa.shw.
+ *            All the columns of matrix GAMc are equal if the second
+ *            letter of modeltype is E. All the columns of matrix GAMc are
+ *            equal to 1 if the second letter of modeltype is I. This matrix
+ *            will be an input of routine restrdeterGPCM.m to compute
+ *            constrained determinants.
+ *
+ *
+ *  See also: restrSigmaGPCM, restrdeterGPCM, restreigen, tclust
+ *
+ *
+ *  References:
+ *
+ *    Garcia-Escudero, L.A., Mayo-Iscar, A. and Riani M. (2020),
+ *    Robust parsimonious clustering models. Submitted.
+ *
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *
+ * <a href="matlab: docsearchFS('restrshapeGPCM')">Link to the help function</a>
+ *
+ * $LastChangedDate:: 2018-09-15 00:27:12 #$: Date of the last commit
+ *
+ * Arguments    : const emxArray_real_T *lmd
+ *                const emxArray_real_T *Omega
+ *                const emxArray_real_T *SigmaB
+ *                const emxArray_real_T *niini
+ *                const char pa_pars[3]
+ *                double pa_shw
+ *                double pa_shb
+ *                double pa_k
+ *                double pa_maxiterS
+ *                double pa_tolS
+ *                double pa_userepmat
+ *                double pa_v
+ *                double pa_zerotol
+ *                emxArray_real_T *GAMc
+ * Return Type  : void
+ */
 void restrshapeGPCM(const emxArray_real_T *lmd, const emxArray_real_T *Omega,
                     const emxArray_real_T *SigmaB, const emxArray_real_T *niini,
                     const char pa_pars[3], double pa_shw, double pa_shb,
@@ -68,107 +177,6 @@ void restrshapeGPCM(const emxArray_real_T *lmd, const emxArray_real_T *Omega,
   int vlen;
   int xpageoffset;
   bool b_bool;
-  /* restrshapeGPCM produces the restricted shape matrix for the 14 GPCM */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('restrshapeGPCM')">Link to the help
-   * function</a> */
-  /*  */
-  /*  */
-  /*  */
-  /*  The purpose of this routine is to produce the constrained shape matrix */
-  /*  $\Gamma$. */
-  /*  This routine copes with the second of the 3 letters of modeltype. It */
-  /*  deals with the cases in which the second letter is E, or I or V. If the */
-  /*  second letter is V procedure restrshapecore is invoked and both (within */
-  /*  groups) cshw, and (between groups) cshb constraints are imposed. If the */
-  /*  second letter of modeltype is E just cshw is used. If the second letter */
-  /*  is I, GAMc becomes a matrix of ones. */
-  /*  */
-  /*  */
-  /*  Required input arguments: */
-  /*  */
-  /*      lmd : Determinants. Vector. */
-  /*             Row vector of length k containing in the j-th position */
-  /*            the estimate of lambda. In the first iteration the estiamte of
-   */
-  /*            \lambda_j is $|\Sigma_j|^(1/v)$, $j=1, 2, \ldots, k$ if */
-  /*            different determinants are allowed else it is a row vector of */
-  /*            ones. */
-  /*     Omega : Rotation. 3D array. */
-  /*            v-by-v-by-k 3D array containing in */
-  /*            position (:,:,j) the rotation */
-  /*            matrix $\Omega_j$ for group $j$, with $j=1, 2, \ldots, k$. */
-  /*    SigmaB : initial unconstrained covariance matrices. v-by-v-by-k array.
-   */
-  /*             v-by-v-by-k array containing the k unconstrained covariance */
-  /*             matrices for the k groups. */
-  /*    niini  : size of the groups. Vector. */
-  /*            Row vector of length k containing the size of the groups. */
-  /*      pa : constraining parameters. Structure. Structure containing 3 letter
-   * character specifying modeltype, */
-  /*             number of dimensions, number of groups... */
-  /*             pa must contain the following fields: */
-  /*             pa.v = scalar, number of variables. */
-  /*             pa.k = scalar, number of groups. */
-  /*             pa.pars = type of Gaussian Parsimonious Clustering Model. */
-  /*                A 3 letter word in the set: */
-  /*                'VVE','EVE','VVV','EVV','VEE','EEE','VEV','EEV','VVI', */
-  /*                'EVI','VEI','EEI','VII','EII' */
-  /*             pa.shb = between groups shape constraint */
-  /*             pa.shw = within groups shape constraint */
-  /*             pa.zerotol = tolerance to decleare elements equal to 0. */
-  /*             pa.maxiterS = maximum number of iterations in presence of */
-  /*             varying shape matrices. */
-  /*             pa.userepmat = scalar (if =2 implicit expansion is used) */
-  /*                  Data Types - struct */
-  /*  */
-  /*  */
-  /*   Optional input arguments: */
-  /*  */
-  /*  */
-  /*  Output: */
-  /*  */
-  /*      GAMc : constrained shape matrix. Matrix of size v-by-k containing in
-   */
-  /*            column j the elements on the main diagonal of shape matrix */
-  /*            $\Gamma_j$. The elements of GAMc satisfy the following */
-  /*            constraints: */
-  /*            The product of the elements of each column is equal to 1. */
-  /*            The ratio among the largest elements of each column is */
-  /*            not greater than pa.shb. */
-  /*            The ratio among the second largest elements of each column is */
-  /*            not greater than pa.shb. */
-  /*            .... */
-  /*            The ratio among the smallest elements of each column is */
-  /*            not greater than pa.shb. */
-  /*            The ratio of the elements of each column is not greater than */
-  /*            pa.shw. */
-  /*            All the columns of matrix GAMc are equal if the second */
-  /*            letter of modeltype is E. All the columns of matrix GAMc are */
-  /*            equal to 1 if the second letter of modeltype is I. This matrix
-   */
-  /*            will be an input of routine restrdeterGPCM.m to compute */
-  /*            constrained determinants. */
-  /*  */
-  /*  */
-  /*  See also: restrSigmaGPCM, restrdeterGPCM, restreigen, tclust */
-  /*  */
-  /*  */
-  /*  References: */
-  /*  */
-  /*    Garcia-Escudero, L.A., Mayo-Iscar, A. and Riani M. (2020), */
-  /*    Robust parsimonious clustering models. Submitted. */
-  /*  */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('restrshapeGPCM')">Link to the help
-   * function</a> */
-  /*  */
-  /* $LastChangedDate:: 2018-09-15 00:27:12 #$: Date of the last commit */
   /*  Examples: */
   /*  Beginning of code */
   b_bool = !(pa_pars[1] != 'E');
@@ -813,4 +821,8 @@ void restrshapeGPCM(const emxArray_real_T *lmd, const emxArray_real_T *Omega,
   emxFree_real_T(&GAM);
 }
 
-/* End of code generation (restrshapeGPCM.c) */
+/*
+ * File trailer for restrshapeGPCM.c
+ *
+ * [EOF]
+ */

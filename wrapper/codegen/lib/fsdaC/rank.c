@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: rank.c
  *
- * rank.c
- *
- * Code generation for function 'rank'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "rank.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
@@ -20,6 +19,10 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const emxArray_real_T *A
+ * Return Type  : int
+ */
 int local_rank(const emxArray_real_T *A)
 {
   emxArray_real_T *r;
@@ -90,4 +93,8 @@ int local_rank(const emxArray_real_T *A)
   return irank;
 }
 
-/* End of code generation (rank.c) */
+/*
+ * File trailer for rank.c
+ *
+ * [EOF]
+ */

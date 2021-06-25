@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: xzgetrf.c
  *
- * xzgetrf.c
- *
- * Code generation for function 'xzgetrf'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "xzgetrf.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
@@ -18,6 +17,15 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : int m
+ *                int n
+ *                emxArray_real_T *A
+ *                int lda
+ *                emxArray_int32_T *ipiv
+ *                int *info
+ * Return Type  : void
+ */
 void xzgetrf(int m, int n, emxArray_real_T *A, int lda, emxArray_int32_T *ipiv,
              int *info)
 {
@@ -124,4 +132,8 @@ void xzgetrf(int m, int n, emxArray_real_T *A, int lda, emxArray_int32_T *ipiv,
   }
 }
 
-/* End of code generation (xzgetrf.c) */
+/*
+ * File trailer for xzgetrf.c
+ *
+ * [EOF]
+ */

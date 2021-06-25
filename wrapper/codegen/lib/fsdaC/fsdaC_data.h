@@ -2,17 +2,16 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: fsdaC_data.h
  *
- * fsdaC_data.h
- *
- * Code generation for function 'fsdaC_data'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
 #ifndef FSDAC_DATA_H
 #define FSDAC_DATA_H
 
-/* Include files */
+/* Include Files */
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -28,4 +27,8 @@ extern const char cv[128];
 extern bool isInitialized_fsdaC;
 
 #endif
-/* End of code generation (fsdaC_data.h) */
+/*
+ * File trailer for fsdaC_data.h
+ *
+ * [EOF]
+ */

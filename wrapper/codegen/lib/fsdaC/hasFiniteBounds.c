@@ -2,20 +2,27 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: hasFiniteBounds.c
  *
- * hasFiniteBounds.c
- *
- * Code generation for function 'hasFiniteBounds'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "hasFiniteBounds.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : int nvar
+ *                emxArray_boolean_T *hasLB
+ *                emxArray_boolean_T *hasUB
+ *                const emxArray_real_T *lb
+ *                const emxArray_real_T *ub
+ * Return Type  : bool
+ */
 bool hasFiniteBounds(int nvar, emxArray_boolean_T *hasLB,
                      emxArray_boolean_T *hasUB, const emxArray_real_T *lb,
                      const emxArray_real_T *ub)
@@ -72,4 +79,8 @@ bool hasFiniteBounds(int nvar, emxArray_boolean_T *hasLB,
   return hasBounds;
 }
 
-/* End of code generation (hasFiniteBounds.c) */
+/*
+ * File trailer for hasFiniteBounds.c
+ *
+ * [EOF]
+ */

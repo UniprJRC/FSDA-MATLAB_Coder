@@ -2,17 +2,16 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: pascal.h
  *
- * pascal.h
- *
- * Code generation for function 'pascal'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
 #ifndef PASCAL_H
 #define PASCAL_H
 
-/* Include files */
+/* Include Files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -30,4 +29,8 @@ void pascal(double n, emxArray_real_T *P);
 #endif
 
 #endif
-/* End of code generation (pascal.h) */
+/*
+ * File trailer for pascal.h
+ *
+ * [EOF]
+ */

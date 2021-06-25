@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: FSMbsb_wrapper.c
  *
- * FSMbsb_wrapper.c
- *
- * Code generation for function 'FSMbsb_wrapper'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "FSMbsb_wrapper.h"
 #include "bsxfun.h"
 #include "cat.h"
@@ -44,6 +43,20 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Required input arguments
+ *  Y: an array of doubles of any dimensions
+ *
+ * Arguments    : const emxArray_real_T *Y
+ *                const emxArray_real_T *bsb
+ *                const emxArray_real_T *bsbsteps
+ *                double init
+ *                bool msg
+ *                bool nocheck
+ *                emxArray_real_T *Un
+ *                emxArray_real_T *BB
+ * Return Type  : void
+ */
 void FSMbsb_wrapper(const emxArray_real_T *Y, const emxArray_real_T *bsb,
                     const emxArray_real_T *bsbsteps, double init, bool msg,
                     bool nocheck, emxArray_real_T *Un, emxArray_real_T *BB)
@@ -124,8 +137,6 @@ void FSMbsb_wrapper(const emxArray_real_T *Y, const emxArray_real_T *bsb,
     fsdaC_initialize();
   }
   emxInit_real_T(&b_bsb, 1);
-  /*  Required input arguments */
-  /*  Y: an array of doubles of any dimensions */
   /*  bsb: a column vector of doubles of any length */
   /*  Optional input arguments (name / pairs) */
   /*  bsbsteps a column vector of any length or a missing value */
@@ -2082,4 +2093,8 @@ void FSMbsb_wrapper(const emxArray_real_T *Y, const emxArray_real_T *bsb,
   emxFree_real_T(&b_Y);
 }
 
-/* End of code generation (FSMbsb_wrapper.c) */
+/*
+ * File trailer for FSMbsb_wrapper.c
+ *
+ * [EOF]
+ */

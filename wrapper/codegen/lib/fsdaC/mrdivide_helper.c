@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: mrdivide_helper.c
  *
- * mrdivide_helper.c
- *
- * Code generation for function 'mrdivide_helper'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "mrdivide_helper.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
@@ -19,6 +18,12 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const emxArray_real_T *A
+ *                const emxArray_real_T *B
+ *                emxArray_real_T *Y
+ * Return Type  : void
+ */
 void mrdiv(const emxArray_real_T *A, const emxArray_real_T *B,
            emxArray_real_T *Y)
 {
@@ -160,4 +165,8 @@ void mrdiv(const emxArray_real_T *A, const emxArray_real_T *B,
   emxFree_real_T(&b_A);
 }
 
-/* End of code generation (mrdivide_helper.c) */
+/*
+ * File trailer for mrdivide_helper.c
+ *
+ * [EOF]
+ */

@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: Score.c
  *
- * Score.c
- *
- * Code generation for function 'Score'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "Score.h"
 #include "blockedSummation.h"
 #include "fsdaC_emxutil.h"
@@ -23,6 +22,93 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Score computes the score test for transformation
+ *
+ * <a href="matlab: docsearchFS('Score')">Link to the help function</a>
+ *
+ *   Required input arguments:
+ *
+ *     y:         Response variable. Vector. A vector with n elements that
+ *                contains the response
+ *                variable.  It can be either a row or a column vector.
+ *     X :        Predictor variables. Matrix. Data matrix of explanatory
+ *                variables (also called 'regressors')
+ *                of dimension (n x p-1). Rows of X represent observations, and
+ *                columns represent variables.
+ *                Missing values (NaN's) and infinite values (Inf's) are
+ * allowed, since observations (rows) with missing or infinite values will
+ *                automatically be excluded from the computations.
+ *
+ *   Optional input arguments:
+ *
+ *     intercept :  Indicator for constant term. true (default) | false.
+ *                  Indicator for the constant term (intercept) in the fit,
+ *                  specified as the comma-separated pair consisting of
+ *                  'Intercept' and either true to include or false to remove
+ *                  the constant term from the model.
+ *                  Example - 'intercept',false
+ *                  Data Types - boolean
+ *
+ *            la  :transformation parameter. Vector. It specifies for which
+ * values of the transformation parameter it is necessary to compute the score
+ * test. Default value of lambda is la=[-1 -0.5 0 0.5 1]; that is the five most
+ * common values of lambda Example - 'la',[0 0.5] Data Types - double
+ *
+ *            Lik : likelihood for the augmented model. Boolean.
+ *                    If true the value of the likelihood for the augmented
+ *                    model will be produced
+ *                  else (default) only the value of the score test will be
+ *                  given
+ *                Example - 'Lik',false
+ *                Data Types - logical
+ *
+ *        nocheck : Check input arguments. Boolean.
+ *                If nocheck is equal to true no check is performed on
+ *                  matrix y and matrix X. Notice that y and X are left
+ *                  unchanged. In other words the additional column of ones
+ *                  for the intercept is not added. As default nocheck=false.
+ *                Example - 'nocheck',true
+ *                Data Types - boolean
+ *
+ *   Output:
+ *
+ *   The output consists of a structure 'outSC' containing the following fields:
+ *
+ *         outSC.Score    =    score test. Vector. Vector of length
+ *                             length(lambda) which contains the value of the
+ *                             score test for each value of lambda specfied
+ *                             in optional input parameter la. If la is not
+ *                             specified, the vector will be of length 5 and
+ *                             contains the values of the score test for the
+ *                             5 most common values of lambda.
+ *         outSC.Lik      =    value of the likelihood. Scalar. This output
+ *                            is produced only if input value Lik =1
+ *
+ *  See also: FSRfan, ScoreYJ, ScoreYJpn, normBoxCox, normYJ
+ *
+ *  References:
+ *
+ *  Atkinson, A.C. and Riani, M. (2000), "Robust Diagnostic Regression
+ *  Analysis", Springer Verlag, New York. [see equation 2.30 for the
+ *  expression for score test statistic]
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *
+ * <a href="matlab: docsearchFS('Score')">Link to the help function</a>
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ * Arguments    : const emxArray_real_T *y
+ *                const emxArray_real_T *X
+ *                double varargin_2
+ *                double outSC_Score_data[]
+ *                int *outSC_Score_size
+ *                double *outSC_Lik
+ * Return Type  : void
+ */
 void Score(const emxArray_real_T *y, const emxArray_real_T *X,
            double varargin_2, double outSC_Score_data[], int *outSC_Score_size,
            double *outSC_Lik)
@@ -49,96 +135,6 @@ void Score(const emxArray_real_T *y, const emxArray_real_T *X,
   signed char i1;
   bool empty_non_axis_sizes;
   emxInit_real_T(&logy, 1);
-  /* Score computes the score test for transformation */
-  /*  */
-  /* <a href="matlab: docsearchFS('Score')">Link to the help function</a> */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /*     y:         Response variable. Vector. A vector with n elements that */
-  /*                contains the response */
-  /*                variable.  It can be either a row or a column vector. */
-  /*     X :        Predictor variables. Matrix. Data matrix of explanatory */
-  /*                variables (also called 'regressors') */
-  /*                of dimension (n x p-1). Rows of X represent observations,
-   * and */
-  /*                columns represent variables. */
-  /*                Missing values (NaN's) and infinite values (Inf's) are
-   * allowed, */
-  /*                since observations (rows) with missing or infinite values
-   * will */
-  /*                automatically be excluded from the computations. */
-  /*  */
-  /*   Optional input arguments: */
-  /*  */
-  /*     intercept :  Indicator for constant term. true (default) | false. */
-  /*                  Indicator for the constant term (intercept) in the fit, */
-  /*                  specified as the comma-separated pair consisting of */
-  /*                  'Intercept' and either true to include or false to remove
-   */
-  /*                  the constant term from the model. */
-  /*                  Example - 'intercept',false */
-  /*                  Data Types - boolean */
-  /*  */
-  /*            la  :transformation parameter. Vector. It specifies for which
-   * values of the */
-  /*                  transformation parameter it is necessary to compute the */
-  /*                  score test. */
-  /*                  Default value of lambda is la=[-1 -0.5 0 0.5 1]; that */
-  /*                  is the five most common values of lambda */
-  /*                Example - 'la',[0 0.5] */
-  /*                Data Types - double */
-  /*  */
-  /*            Lik : likelihood for the augmented model. Boolean. */
-  /*                    If true the value of the likelihood for the augmented */
-  /*                    model will be produced */
-  /*                  else (default) only the value of the score test will be */
-  /*                  given */
-  /*                Example - 'Lik',false */
-  /*                Data Types - logical */
-  /*  */
-  /*        nocheck : Check input arguments. Boolean. */
-  /*                If nocheck is equal to true no check is performed on */
-  /*                  matrix y and matrix X. Notice that y and X are left */
-  /*                  unchanged. In other words the additional column of ones */
-  /*                  for the intercept is not added. As default nocheck=false.
-   */
-  /*                Example - 'nocheck',true */
-  /*                Data Types - boolean */
-  /*  */
-  /*   Output: */
-  /*  */
-  /*   The output consists of a structure 'outSC' containing the following
-   * fields: */
-  /*  */
-  /*         outSC.Score    =    score test. Vector. Vector of length */
-  /*                             length(lambda) which contains the value of the
-   */
-  /*                             score test for each value of lambda specfied */
-  /*                             in optional input parameter la. If la is not */
-  /*                             specified, the vector will be of length 5 and
-   */
-  /*                             contains the values of the score test for the
-   */
-  /*                             5 most common values of lambda. */
-  /*         outSC.Lik      =    value of the likelihood. Scalar. This output */
-  /*                            is produced only if input value Lik =1 */
-  /*  */
-  /*  See also: FSRfan, ScoreYJ, ScoreYJpn, normBoxCox, normYJ */
-  /*  */
-  /*  References: */
-  /*  */
-  /*  Atkinson, A.C. and Riani, M. (2000), "Robust Diagnostic Regression */
-  /*  Analysis", Springer Verlag, New York. [see equation 2.30 for the */
-  /*  expression for score test statistic] */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('Score')">Link to the help function</a> */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples */
   /* { */
   /*     %% Score with all default options. */
@@ -472,4 +468,8 @@ void Score(const emxArray_real_T *y, const emxArray_real_T *X,
   emxFree_real_T(&ylai);
 }
 
-/* End of code generation (Score.c) */
+/*
+ * File trailer for Score.c
+ *
+ * [EOF]
+ */

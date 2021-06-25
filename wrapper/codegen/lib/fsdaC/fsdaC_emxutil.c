@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: fsdaC_emxutil.c
  *
- * fsdaC_emxutil.c
- *
- * Code generation for function 'fsdaC_emxutil'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
@@ -17,32 +16,57 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : b_anonymous_function *dst
+ *                const b_anonymous_function *src
+ * Return Type  : void
+ */
 void c_emxCopyStruct_anonymous_funct(b_anonymous_function *dst,
                                      const b_anonymous_function *src)
 {
   emxCopyStruct_struct_T1(&dst->workspace, &src->workspace);
 }
 
+/*
+ * Arguments    : anonymous_function *pStruct
+ * Return Type  : void
+ */
 void c_emxFreeStruct_anonymous_funct(anonymous_function *pStruct)
 {
   emxFreeStruct_struct_T3(&pStruct->workspace);
 }
 
+/*
+ * Arguments    : struct_LTStsmodel_T *pStruct
+ * Return Type  : void
+ */
 void c_emxFreeStruct_struct_LTStsmod(struct_LTStsmodel_T *pStruct)
 {
   emxFree_real_T(&pStruct->X);
 }
 
+/*
+ * Arguments    : b_anonymous_function *pStruct
+ * Return Type  : void
+ */
 void c_emxInitStruct_anonymous_funct(b_anonymous_function *pStruct)
 {
   emxInitStruct_struct_T4(&pStruct->workspace);
 }
 
+/*
+ * Arguments    : e_matlab_internal_coder_tabular *pStruct
+ * Return Type  : void
+ */
 void c_emxInitStruct_matlab_internal(e_matlab_internal_coder_tabular *pStruct)
 {
   emxInitMatrix_cell_wrap_48(&pStruct->labels[0]);
 }
 
+/*
+ * Arguments    : struct_LTStsmodel_T *pStruct
+ * Return Type  : void
+ */
 void c_emxInitStruct_struct_LTStsmod(struct_LTStsmodel_T *pStruct)
 {
   pStruct->ARp.size[0] = 0;
@@ -50,28 +74,50 @@ void c_emxInitStruct_struct_LTStsmod(struct_LTStsmodel_T *pStruct)
   emxInit_real_T(&pStruct->X, 2);
 }
 
+/*
+ * Arguments    : anonymous_function *dst
+ *                const anonymous_function *src
+ * Return Type  : void
+ */
 void d_emxCopyStruct_anonymous_funct(anonymous_function *dst,
                                      const anonymous_function *src)
 {
   emxCopyStruct_struct_T2(&dst->workspace, &src->workspace);
 }
 
+/*
+ * Arguments    : b_anonymous_function *pStruct
+ * Return Type  : void
+ */
 void d_emxFreeStruct_anonymous_funct(b_anonymous_function *pStruct)
 {
   emxFreeStruct_struct_T4(&pStruct->workspace);
 }
 
+/*
+ * Arguments    : anonymous_function *pStruct
+ * Return Type  : void
+ */
 void d_emxInitStruct_anonymous_funct(anonymous_function *pStruct)
 {
   emxInitStruct_struct_T5(&pStruct->workspace);
 }
 
+/*
+ * Arguments    : f_matlab_internal_coder_tabular *pStruct
+ * Return Type  : void
+ */
 void d_emxInitStruct_matlab_internal(f_matlab_internal_coder_tabular *pStruct)
 {
   emxInitMatrix_cell_wrap_50(pStruct->descrs);
   emxInitMatrix_cell_wrap_50(pStruct->units);
 }
 
+/*
+ * Arguments    : h_struct_T *dst
+ *                const h_struct_T *src
+ * Return Type  : void
+ */
 void emxCopyStruct_struct_T(h_struct_T *dst, const h_struct_T *src)
 {
   c_emxCopyStruct_anonymous_funct(&dst->nonlin, &src->nonlin);
@@ -92,11 +138,21 @@ void emxCopyStruct_struct_T(h_struct_T *dst, const h_struct_T *src)
   dst->FiniteDifferenceType = src->FiniteDifferenceType;
 }
 
+/*
+ * Arguments    : g_struct_T *dst
+ *                const g_struct_T *src
+ * Return Type  : void
+ */
 void emxCopyStruct_struct_T1(g_struct_T *dst, const g_struct_T *src)
 {
   d_emxCopyStruct_anonymous_funct(&dst->fun, &src->fun);
 }
 
+/*
+ * Arguments    : f_struct_T *dst
+ *                const f_struct_T *src
+ * Return Type  : void
+ */
 void emxCopyStruct_struct_T2(f_struct_T *dst, const f_struct_T *src)
 {
   dst->fun = src->fun;
@@ -104,6 +160,11 @@ void emxCopyStruct_struct_T2(f_struct_T *dst, const f_struct_T *src)
   emxCopy_real_T(&dst->ydata, &src->ydata);
 }
 
+/*
+ * Arguments    : emxArray_boolean_T **dst
+ *                emxArray_boolean_T * const *src
+ * Return Type  : void
+ */
 void emxCopy_boolean_T(emxArray_boolean_T **dst, emxArray_boolean_T *const *src)
 {
   int i;
@@ -124,6 +185,11 @@ void emxCopy_boolean_T(emxArray_boolean_T **dst, emxArray_boolean_T *const *src)
   }
 }
 
+/*
+ * Arguments    : emxArray_real_T **dst
+ *                emxArray_real_T * const *src
+ * Return Type  : void
+ */
 void emxCopy_real_T(emxArray_real_T **dst, emxArray_real_T *const *src)
 {
   int i;
@@ -144,6 +210,11 @@ void emxCopy_real_T(emxArray_real_T **dst, emxArray_real_T *const *src)
   }
 }
 
+/*
+ * Arguments    : emxArray_boolean_T *emxArray
+ *                int oldNumel
+ * Return Type  : void
+ */
 void emxEnsureCapacity_boolean_T(emxArray_boolean_T *emxArray, int oldNumel)
 {
   int i;
@@ -181,6 +252,11 @@ void emxEnsureCapacity_boolean_T(emxArray_boolean_T *emxArray, int oldNumel)
   }
 }
 
+/*
+ * Arguments    : emxArray_cell_wrap_36 *emxArray
+ *                int oldNumel
+ * Return Type  : void
+ */
 void emxEnsureCapacity_cell_wrap_36(emxArray_cell_wrap_36 *emxArray,
                                     int oldNumel)
 {
@@ -224,6 +300,11 @@ void emxEnsureCapacity_cell_wrap_36(emxArray_cell_wrap_36 *emxArray,
   }
 }
 
+/*
+ * Arguments    : emxArray_char_T *emxArray
+ *                int oldNumel
+ * Return Type  : void
+ */
 void emxEnsureCapacity_char_T(emxArray_char_T *emxArray, int oldNumel)
 {
   int i;
@@ -261,6 +342,11 @@ void emxEnsureCapacity_char_T(emxArray_char_T *emxArray, int oldNumel)
   }
 }
 
+/*
+ * Arguments    : emxArray_creal_T *emxArray
+ *                int oldNumel
+ * Return Type  : void
+ */
 void emxEnsureCapacity_creal_T(emxArray_creal_T *emxArray, int oldNumel)
 {
   int i;
@@ -298,6 +384,11 @@ void emxEnsureCapacity_creal_T(emxArray_creal_T *emxArray, int oldNumel)
   }
 }
 
+/*
+ * Arguments    : emxArray_int32_T *emxArray
+ *                int oldNumel
+ * Return Type  : void
+ */
 void emxEnsureCapacity_int32_T(emxArray_int32_T *emxArray, int oldNumel)
 {
   int i;
@@ -335,6 +426,11 @@ void emxEnsureCapacity_int32_T(emxArray_int32_T *emxArray, int oldNumel)
   }
 }
 
+/*
+ * Arguments    : emxArray_int8_T *emxArray
+ *                int oldNumel
+ * Return Type  : void
+ */
 void emxEnsureCapacity_int8_T(emxArray_int8_T *emxArray, int oldNumel)
 {
   int i;
@@ -372,6 +468,11 @@ void emxEnsureCapacity_int8_T(emxArray_int8_T *emxArray, int oldNumel)
   }
 }
 
+/*
+ * Arguments    : emxArray_real32_T *emxArray
+ *                int oldNumel
+ * Return Type  : void
+ */
 void emxEnsureCapacity_real32_T(emxArray_real32_T *emxArray, int oldNumel)
 {
   int i;
@@ -409,6 +510,11 @@ void emxEnsureCapacity_real32_T(emxArray_real32_T *emxArray, int oldNumel)
   }
 }
 
+/*
+ * Arguments    : emxArray_real_T *emxArray
+ *                int oldNumel
+ * Return Type  : void
+ */
 void emxEnsureCapacity_real_T(emxArray_real_T *emxArray, int oldNumel)
 {
   int i;
@@ -446,6 +552,11 @@ void emxEnsureCapacity_real_T(emxArray_real_T *emxArray, int oldNumel)
   }
 }
 
+/*
+ * Arguments    : emxArray_uint32_T *emxArray
+ *                int oldNumel
+ * Return Type  : void
+ */
 void emxEnsureCapacity_uint32_T(emxArray_uint32_T *emxArray, int oldNumel)
 {
   int i;
@@ -483,6 +594,12 @@ void emxEnsureCapacity_uint32_T(emxArray_uint32_T *emxArray, int oldNumel)
   }
 }
 
+/*
+ * Arguments    : emxArray_cell_wrap_36 *emxArray
+ *                int fromIndex
+ *                int toIndex
+ * Return Type  : void
+ */
 void emxExpand_cell_wrap_36(emxArray_cell_wrap_36 *emxArray, int fromIndex,
                             int toIndex)
 {
@@ -492,6 +609,10 @@ void emxExpand_cell_wrap_36(emxArray_cell_wrap_36 *emxArray, int fromIndex,
   }
 }
 
+/*
+ * Arguments    : cell_wrap_6 pMatrix[4]
+ * Return Type  : void
+ */
 void emxFreeMatrix_cell_wrap_6(cell_wrap_6 pMatrix[4])
 {
   int i;
@@ -500,26 +621,46 @@ void emxFreeMatrix_cell_wrap_6(cell_wrap_6 pMatrix[4])
   }
 }
 
+/*
+ * Arguments    : c_captured_var *pStruct
+ * Return Type  : void
+ */
 void emxFreeStruct_captured_var(c_captured_var *pStruct)
 {
   emxFree_real_T(&pStruct->contents);
 }
 
+/*
+ * Arguments    : d_captured_var *pStruct
+ * Return Type  : void
+ */
 void emxFreeStruct_captured_var1(d_captured_var *pStruct)
 {
   emxFree_boolean_T(&pStruct->contents);
 }
 
+/*
+ * Arguments    : cell_wrap_36 *pStruct
+ * Return Type  : void
+ */
 void emxFreeStruct_cell_wrap_36(cell_wrap_36 *pStruct)
 {
   emxFree_real_T(&pStruct->f1);
 }
 
+/*
+ * Arguments    : cell_wrap_6 *pStruct
+ * Return Type  : void
+ */
 void emxFreeStruct_cell_wrap_6(cell_wrap_6 *pStruct)
 {
   emxFree_real_T(&pStruct->f1);
 }
 
+/*
+ * Arguments    : struct_FSM_T *pStruct
+ * Return Type  : void
+ */
 void emxFreeStruct_struct_FSM_T(struct_FSM_T *pStruct)
 {
   emxFree_real_T(&pStruct->outliers);
@@ -530,6 +671,10 @@ void emxFreeStruct_struct_FSM_T(struct_FSM_T *pStruct)
   emxFree_real_T(&pStruct->Un);
 }
 
+/*
+ * Arguments    : struct_FSR_T *pStruct
+ * Return Type  : void
+ */
 void emxFreeStruct_struct_FSR_T(struct_FSR_T *pStruct)
 {
   emxFree_real_T(&pStruct->ListOut);
@@ -545,6 +690,10 @@ void emxFreeStruct_struct_FSR_T(struct_FSR_T *pStruct)
   emxFree_real_T(&pStruct->residuals);
 }
 
+/*
+ * Arguments    : struct_FSRfan_T *pStruct
+ * Return Type  : void
+ */
 void emxFreeStruct_struct_FSRfan_T(struct_FSRfan_T *pStruct)
 {
   emxFree_real_T(&pStruct->Score);
@@ -558,6 +707,10 @@ void emxFreeStruct_struct_FSRfan_T(struct_FSRfan_T *pStruct)
   emxFree_real_T(&pStruct->Scoreb);
 }
 
+/*
+ * Arguments    : struct_LTSts_T *pStruct
+ * Return Type  : void
+ */
 void emxFreeStruct_struct_LTSts_T(struct_LTSts_T *pStruct)
 {
   emxFree_real_T(&pStruct->RES);
@@ -578,6 +731,10 @@ void emxFreeStruct_struct_LTSts_T(struct_LTSts_T *pStruct)
   emxFreeStruct_table(&pStruct->Btable);
 }
 
+/*
+ * Arguments    : struct_LXS_T *pStruct
+ * Return Type  : void
+ */
 void emxFreeStruct_struct_LXS_T(struct_LXS_T *pStruct)
 {
   emxFree_boolean_T(&pStruct->weights);
@@ -589,6 +746,10 @@ void emxFreeStruct_struct_LXS_T(struct_LXS_T *pStruct)
   emxFree_real_T(&pStruct->y);
 }
 
+/*
+ * Arguments    : struct_T *pStruct
+ * Return Type  : void
+ */
 void emxFreeStruct_struct_T(struct_T *pStruct)
 {
   emxFree_real_T(&pStruct->ListOut);
@@ -600,12 +761,20 @@ void emxFreeStruct_struct_T(struct_T *pStruct)
   emxFree_real_T(&pStruct->VIOMout);
 }
 
+/*
+ * Arguments    : b_struct_T *pStruct
+ * Return Type  : void
+ */
 void emxFreeStruct_struct_T1(b_struct_T *pStruct)
 {
   emxFree_real_T(&pStruct->lower);
   emxFree_real_T(&pStruct->upper);
 }
 
+/*
+ * Arguments    : c_struct_T *pStruct
+ * Return Type  : void
+ */
 void emxFreeStruct_struct_T2(c_struct_T *pStruct)
 {
   emxFree_real_T(&pStruct->betarw);
@@ -613,17 +782,29 @@ void emxFreeStruct_struct_T2(c_struct_T *pStruct)
   emxFree_boolean_T(&pStruct->weights);
 }
 
+/*
+ * Arguments    : f_struct_T *pStruct
+ * Return Type  : void
+ */
 void emxFreeStruct_struct_T3(f_struct_T *pStruct)
 {
   emxFree_real_T(&pStruct->xdata);
   emxFree_real_T(&pStruct->ydata);
 }
 
+/*
+ * Arguments    : g_struct_T *pStruct
+ * Return Type  : void
+ */
 void emxFreeStruct_struct_T4(g_struct_T *pStruct)
 {
   c_emxFreeStruct_anonymous_funct(&pStruct->fun);
 }
 
+/*
+ * Arguments    : h_struct_T *pStruct
+ * Return Type  : void
+ */
 void emxFreeStruct_struct_T5(h_struct_T *pStruct)
 {
   d_emxFreeStruct_anonymous_funct(&pStruct->nonlin);
@@ -633,6 +814,10 @@ void emxFreeStruct_struct_T5(h_struct_T *pStruct)
   emxFree_boolean_T(&pStruct->hasUB);
 }
 
+/*
+ * Arguments    : struct_tclust_T *pStruct
+ * Return Type  : void
+ */
 void emxFreeStruct_struct_tclust_T(struct_tclust_T *pStruct)
 {
   emxFree_real_T(&pStruct->muopt);
@@ -644,11 +829,19 @@ void emxFreeStruct_struct_tclust_T(struct_tclust_T *pStruct)
   emxFree_real_T(&pStruct->Y);
 }
 
+/*
+ * Arguments    : table *pStruct
+ * Return Type  : void
+ */
 void emxFreeStruct_table(table *pStruct)
 {
   emxFreeMatrix_cell_wrap_6(pStruct->data);
 }
 
+/*
+ * Arguments    : emxArray_boolean_T **pEmxArray
+ * Return Type  : void
+ */
 void emxFree_boolean_T(emxArray_boolean_T **pEmxArray)
 {
   if (*pEmxArray != (emxArray_boolean_T *)NULL) {
@@ -661,6 +854,10 @@ void emxFree_boolean_T(emxArray_boolean_T **pEmxArray)
   }
 }
 
+/*
+ * Arguments    : emxArray_cell_wrap_36 **pEmxArray
+ * Return Type  : void
+ */
 void emxFree_cell_wrap_36(emxArray_cell_wrap_36 **pEmxArray)
 {
   int i;
@@ -684,6 +881,10 @@ void emxFree_cell_wrap_36(emxArray_cell_wrap_36 **pEmxArray)
   }
 }
 
+/*
+ * Arguments    : emxArray_char_T **pEmxArray
+ * Return Type  : void
+ */
 void emxFree_char_T(emxArray_char_T **pEmxArray)
 {
   if (*pEmxArray != (emxArray_char_T *)NULL) {
@@ -696,6 +897,10 @@ void emxFree_char_T(emxArray_char_T **pEmxArray)
   }
 }
 
+/*
+ * Arguments    : emxArray_creal_T **pEmxArray
+ * Return Type  : void
+ */
 void emxFree_creal_T(emxArray_creal_T **pEmxArray)
 {
   if (*pEmxArray != (emxArray_creal_T *)NULL) {
@@ -708,6 +913,10 @@ void emxFree_creal_T(emxArray_creal_T **pEmxArray)
   }
 }
 
+/*
+ * Arguments    : emxArray_int32_T **pEmxArray
+ * Return Type  : void
+ */
 void emxFree_int32_T(emxArray_int32_T **pEmxArray)
 {
   if (*pEmxArray != (emxArray_int32_T *)NULL) {
@@ -720,6 +929,10 @@ void emxFree_int32_T(emxArray_int32_T **pEmxArray)
   }
 }
 
+/*
+ * Arguments    : emxArray_int8_T **pEmxArray
+ * Return Type  : void
+ */
 void emxFree_int8_T(emxArray_int8_T **pEmxArray)
 {
   if (*pEmxArray != (emxArray_int8_T *)NULL) {
@@ -733,6 +946,10 @@ void emxFree_int8_T(emxArray_int8_T **pEmxArray)
   }
 }
 
+/*
+ * Arguments    : emxArray_real32_T **pEmxArray
+ * Return Type  : void
+ */
 void emxFree_real32_T(emxArray_real32_T **pEmxArray)
 {
   if (*pEmxArray != (emxArray_real32_T *)NULL) {
@@ -745,6 +962,10 @@ void emxFree_real32_T(emxArray_real32_T **pEmxArray)
   }
 }
 
+/*
+ * Arguments    : emxArray_real_T **pEmxArray
+ * Return Type  : void
+ */
 void emxFree_real_T(emxArray_real_T **pEmxArray)
 {
   if (*pEmxArray != (emxArray_real_T *)NULL) {
@@ -757,6 +978,10 @@ void emxFree_real_T(emxArray_real_T **pEmxArray)
   }
 }
 
+/*
+ * Arguments    : emxArray_uint32_T **pEmxArray
+ * Return Type  : void
+ */
 void emxFree_uint32_T(emxArray_uint32_T **pEmxArray)
 {
   if (*pEmxArray != (emxArray_uint32_T *)NULL) {
@@ -770,6 +995,10 @@ void emxFree_uint32_T(emxArray_uint32_T **pEmxArray)
   }
 }
 
+/*
+ * Arguments    : cell_wrap_48 *pMatrix
+ * Return Type  : void
+ */
 void emxInitMatrix_cell_wrap_48(cell_wrap_48 *pMatrix)
 {
   int i;
@@ -778,6 +1007,10 @@ void emxInitMatrix_cell_wrap_48(cell_wrap_48 *pMatrix)
   }
 }
 
+/*
+ * Arguments    : cell_wrap_50 pMatrix[4]
+ * Return Type  : void
+ */
 void emxInitMatrix_cell_wrap_50(cell_wrap_50 pMatrix[4])
 {
   int i;
@@ -786,6 +1019,10 @@ void emxInitMatrix_cell_wrap_50(cell_wrap_50 pMatrix[4])
   }
 }
 
+/*
+ * Arguments    : cell_wrap_6 pMatrix[4]
+ * Return Type  : void
+ */
 void emxInitMatrix_cell_wrap_6(cell_wrap_6 pMatrix[4])
 {
   int i;
@@ -794,49 +1031,85 @@ void emxInitMatrix_cell_wrap_6(cell_wrap_6 pMatrix[4])
   }
 }
 
+/*
+ * Arguments    : c_captured_var *pStruct
+ * Return Type  : void
+ */
 void emxInitStruct_captured_var(c_captured_var *pStruct)
 {
   emxInit_real_T(&pStruct->contents, 1);
 }
 
+/*
+ * Arguments    : c_captured_var *pStruct
+ * Return Type  : void
+ */
 void emxInitStruct_captured_var1(c_captured_var *pStruct)
 {
   emxInit_real_T(&pStruct->contents, 2);
 }
 
+/*
+ * Arguments    : d_captured_var *pStruct
+ * Return Type  : void
+ */
 void emxInitStruct_captured_var2(d_captured_var *pStruct)
 {
   emxInit_boolean_T(&pStruct->contents, 1);
 }
 
+/*
+ * Arguments    : cell_wrap_36 *pStruct
+ * Return Type  : void
+ */
 void emxInitStruct_cell_wrap_36(cell_wrap_36 *pStruct)
 {
   emxInit_real_T(&pStruct->f1, 2);
 }
 
+/*
+ * Arguments    : cell_wrap_48 *pStruct
+ * Return Type  : void
+ */
 void emxInitStruct_cell_wrap_48(cell_wrap_48 *pStruct)
 {
   pStruct->f1.size[0] = 0;
   pStruct->f1.size[1] = 0;
 }
 
+/*
+ * Arguments    : cell_wrap_50 *pStruct
+ * Return Type  : void
+ */
 void emxInitStruct_cell_wrap_50(cell_wrap_50 *pStruct)
 {
   pStruct->f1.size[0] = 0;
   pStruct->f1.size[1] = 0;
 }
 
+/*
+ * Arguments    : cell_wrap_6 *pStruct
+ * Return Type  : void
+ */
 void emxInitStruct_cell_wrap_6(cell_wrap_6 *pStruct)
 {
   emxInit_real_T(&pStruct->f1, 1);
 }
 
+/*
+ * Arguments    : struct0_T *pStruct
+ * Return Type  : void
+ */
 void emxInitStruct_struct0_T(struct0_T *pStruct)
 {
   pStruct->Description.size[0] = 0;
   pStruct->Description.size[1] = 0;
 }
 
+/*
+ * Arguments    : struct_FSM_T *pStruct
+ * Return Type  : void
+ */
 void emxInitStruct_struct_FSM_T(struct_FSM_T *pStruct)
 {
   emxInit_real_T(&pStruct->outliers, 2);
@@ -851,6 +1124,10 @@ void emxInitStruct_struct_FSM_T(struct_FSM_T *pStruct)
   pStruct->class.size[1] = 0;
 }
 
+/*
+ * Arguments    : struct_FSR_T *pStruct
+ * Return Type  : void
+ */
 void emxInitStruct_struct_FSR_T(struct_FSR_T *pStruct)
 {
   emxInit_real_T(&pStruct->ListOut, 2);
@@ -866,6 +1143,10 @@ void emxInitStruct_struct_FSR_T(struct_FSR_T *pStruct)
   emxInit_real_T(&pStruct->residuals, 2);
 }
 
+/*
+ * Arguments    : struct_FSRfan_T *pStruct
+ * Return Type  : void
+ */
 void emxInitStruct_struct_FSRfan_T(struct_FSRfan_T *pStruct)
 {
   emxInit_real_T(&pStruct->Score, 2);
@@ -879,6 +1160,10 @@ void emxInitStruct_struct_FSRfan_T(struct_FSRfan_T *pStruct)
   emxInit_real_T(&pStruct->Scoreb, 2);
 }
 
+/*
+ * Arguments    : struct_LTSts_T *pStruct
+ * Return Type  : void
+ */
 void emxInitStruct_struct_LTSts_T(struct_LTSts_T *pStruct)
 {
   emxInit_real_T(&pStruct->RES, 1);
@@ -905,6 +1190,10 @@ void emxInitStruct_struct_LTSts_T(struct_LTSts_T *pStruct)
   pStruct->LevelShiftPval.size[1] = 0;
 }
 
+/*
+ * Arguments    : struct_LXS_T *pStruct
+ * Return Type  : void
+ */
 void emxInitStruct_struct_LXS_T(struct_LXS_T *pStruct)
 {
   emxInit_boolean_T(&pStruct->weights, 1);
@@ -916,6 +1205,10 @@ void emxInitStruct_struct_LXS_T(struct_LXS_T *pStruct)
   emxInit_real_T(&pStruct->y, 2);
 }
 
+/*
+ * Arguments    : struct_T *pStruct
+ * Return Type  : void
+ */
 void emxInitStruct_struct_T(struct_T *pStruct)
 {
   emxInit_real_T(&pStruct->ListOut, 2);
@@ -931,12 +1224,20 @@ void emxInitStruct_struct_T(struct_T *pStruct)
   emxInit_real_T(&pStruct->VIOMout, 2);
 }
 
+/*
+ * Arguments    : b_struct_T *pStruct
+ * Return Type  : void
+ */
 void emxInitStruct_struct_T1(b_struct_T *pStruct)
 {
   emxInit_real_T(&pStruct->lower, 1);
   emxInit_real_T(&pStruct->upper, 1);
 }
 
+/*
+ * Arguments    : c_struct_T *pStruct
+ * Return Type  : void
+ */
 void emxInitStruct_struct_T2(c_struct_T *pStruct)
 {
   emxInit_real_T(&pStruct->betarw, 1);
@@ -944,6 +1245,10 @@ void emxInitStruct_struct_T2(c_struct_T *pStruct)
   emxInit_boolean_T(&pStruct->weights, 1);
 }
 
+/*
+ * Arguments    : h_struct_T *pStruct
+ * Return Type  : void
+ */
 void emxInitStruct_struct_T3(h_struct_T *pStruct)
 {
   c_emxInitStruct_anonymous_funct(&pStruct->nonlin);
@@ -953,17 +1258,29 @@ void emxInitStruct_struct_T3(h_struct_T *pStruct)
   emxInit_boolean_T(&pStruct->hasUB, 1);
 }
 
+/*
+ * Arguments    : g_struct_T *pStruct
+ * Return Type  : void
+ */
 void emxInitStruct_struct_T4(g_struct_T *pStruct)
 {
   d_emxInitStruct_anonymous_funct(&pStruct->fun);
 }
 
+/*
+ * Arguments    : f_struct_T *pStruct
+ * Return Type  : void
+ */
 void emxInitStruct_struct_T5(f_struct_T *pStruct)
 {
   emxInit_real_T(&pStruct->xdata, 2);
   emxInit_real_T(&pStruct->ydata, 1);
 }
 
+/*
+ * Arguments    : struct_tclust_T *pStruct
+ * Return Type  : void
+ */
 void emxInitStruct_struct_tclust_T(struct_tclust_T *pStruct)
 {
   emxInit_real_T(&pStruct->muopt, 2);
@@ -981,6 +1298,10 @@ void emxInitStruct_struct_tclust_T(struct_tclust_T *pStruct)
   emxInit_real_T(&pStruct->Y, 2);
 }
 
+/*
+ * Arguments    : table *pStruct
+ * Return Type  : void
+ */
 void emxInitStruct_table(table *pStruct)
 {
   c_emxInitStruct_matlab_internal(&pStruct->rowDim);
@@ -989,6 +1310,11 @@ void emxInitStruct_table(table *pStruct)
   emxInitStruct_struct0_T(&pStruct->arrayProps);
 }
 
+/*
+ * Arguments    : emxArray_boolean_T **pEmxArray
+ *                int numDimensions
+ * Return Type  : void
+ */
 void emxInit_boolean_T(emxArray_boolean_T **pEmxArray, int numDimensions)
 {
   emxArray_boolean_T *emxArray;
@@ -1005,6 +1331,11 @@ void emxInit_boolean_T(emxArray_boolean_T **pEmxArray, int numDimensions)
   }
 }
 
+/*
+ * Arguments    : emxArray_cell_wrap_36 **pEmxArray
+ *                int numDimensions
+ * Return Type  : void
+ */
 void emxInit_cell_wrap_36(emxArray_cell_wrap_36 **pEmxArray, int numDimensions)
 {
   emxArray_cell_wrap_36 *emxArray;
@@ -1021,6 +1352,11 @@ void emxInit_cell_wrap_36(emxArray_cell_wrap_36 **pEmxArray, int numDimensions)
   }
 }
 
+/*
+ * Arguments    : emxArray_char_T **pEmxArray
+ *                int numDimensions
+ * Return Type  : void
+ */
 void emxInit_char_T(emxArray_char_T **pEmxArray, int numDimensions)
 {
   emxArray_char_T *emxArray;
@@ -1037,6 +1373,11 @@ void emxInit_char_T(emxArray_char_T **pEmxArray, int numDimensions)
   }
 }
 
+/*
+ * Arguments    : emxArray_creal_T **pEmxArray
+ *                int numDimensions
+ * Return Type  : void
+ */
 void emxInit_creal_T(emxArray_creal_T **pEmxArray, int numDimensions)
 {
   emxArray_creal_T *emxArray;
@@ -1053,6 +1394,11 @@ void emxInit_creal_T(emxArray_creal_T **pEmxArray, int numDimensions)
   }
 }
 
+/*
+ * Arguments    : emxArray_int32_T **pEmxArray
+ *                int numDimensions
+ * Return Type  : void
+ */
 void emxInit_int32_T(emxArray_int32_T **pEmxArray, int numDimensions)
 {
   emxArray_int32_T *emxArray;
@@ -1069,6 +1415,11 @@ void emxInit_int32_T(emxArray_int32_T **pEmxArray, int numDimensions)
   }
 }
 
+/*
+ * Arguments    : emxArray_int8_T **pEmxArray
+ *                int numDimensions
+ * Return Type  : void
+ */
 void emxInit_int8_T(emxArray_int8_T **pEmxArray, int numDimensions)
 {
   emxArray_int8_T *emxArray;
@@ -1085,6 +1436,11 @@ void emxInit_int8_T(emxArray_int8_T **pEmxArray, int numDimensions)
   }
 }
 
+/*
+ * Arguments    : emxArray_real32_T **pEmxArray
+ *                int numDimensions
+ * Return Type  : void
+ */
 void emxInit_real32_T(emxArray_real32_T **pEmxArray, int numDimensions)
 {
   emxArray_real32_T *emxArray;
@@ -1101,6 +1457,11 @@ void emxInit_real32_T(emxArray_real32_T **pEmxArray, int numDimensions)
   }
 }
 
+/*
+ * Arguments    : emxArray_real_T **pEmxArray
+ *                int numDimensions
+ * Return Type  : void
+ */
 void emxInit_real_T(emxArray_real_T **pEmxArray, int numDimensions)
 {
   emxArray_real_T *emxArray;
@@ -1117,6 +1478,11 @@ void emxInit_real_T(emxArray_real_T **pEmxArray, int numDimensions)
   }
 }
 
+/*
+ * Arguments    : emxArray_uint32_T **pEmxArray
+ *                int numDimensions
+ * Return Type  : void
+ */
 void emxInit_uint32_T(emxArray_uint32_T **pEmxArray, int numDimensions)
 {
   emxArray_uint32_T *emxArray;
@@ -1133,6 +1499,12 @@ void emxInit_uint32_T(emxArray_uint32_T **pEmxArray, int numDimensions)
   }
 }
 
+/*
+ * Arguments    : emxArray_cell_wrap_36 *emxArray
+ *                int fromIndex
+ *                int toIndex
+ * Return Type  : void
+ */
 void emxTrim_cell_wrap_36(emxArray_cell_wrap_36 *emxArray, int fromIndex,
                           int toIndex)
 {
@@ -1142,4 +1514,8 @@ void emxTrim_cell_wrap_36(emxArray_cell_wrap_36 *emxArray, int fromIndex,
   }
 }
 
-/* End of code generation (fsdaC_emxutil.c) */
+/*
+ * File trailer for fsdaC_emxutil.c
+ *
+ * [EOF]
+ */

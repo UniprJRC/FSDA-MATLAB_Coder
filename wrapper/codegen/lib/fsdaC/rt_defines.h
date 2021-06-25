@@ -2,17 +2,16 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: rt_defines.h
  *
- * rt_defines.h
- *
- * Code generation for function 'FSM_wrapper'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
 #ifndef RT_DEFINES_H
 #define RT_DEFINES_H
 
-/* Include files */
+/* Include Files */
 
 #ifdef __cplusplus
 extern "C" {
@@ -31,4 +30,8 @@ extern "C" {
 }
 #endif
 #endif
-/* End of code generation (rt_defines.h) */
+/*
+ * File trailer for rt_defines.h
+ *
+ * [EOF]
+ */

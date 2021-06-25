@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: restreigen.c
  *
- * restreigen.c
- *
- * Code generation for function 'restreigen'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "restreigen.h"
 #include "blockedSummation.h"
 #include "bsxfun.h"
@@ -26,6 +25,91 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * restreigen computes eigenvalues restriction (without Dykstra algorithm)
+ *
+ * <a href="matlab: docsearchFS('restreigen')">Link to the help function</a>
+ *
+ *    restreigen restricts the eigenvalues according to the constraint
+ *    specified in scalar restr. This function is called in every
+ *    concentration step of function tclust and can also be used inside
+ *    function MixSim to generate groups with a prespecified level of
+ *    overlapping.
+ *
+ *   Required input arguments:
+ *
+ * eigenvalues: Eigenvalues. Matrix. v x k matrix containing the eigenvalues
+ *              of the covariance matrices of the k groups.
+ *              v is the number of variables of the dataset which has to be
+ *              clustered.
+ *      niini: Cluster size. Vector. k x 1 vector containing the size of the k
+ * clusters restr: Restriction factor. Scalar. Scalar containing the restr
+ * parameter in tclust program. More in detail, parameter restr defines the
+ * cluster's shape restrictions, which are applied on all clusters during each
+ *             iteration.
+ *             Setting restr to 1, yields the strongest restriction,
+ *             forcing all eigenvalues/determinants to be equal and so the
+ *             method looks for similarly scattered (respectively spherical)
+ *             clusters.
+ *
+ *   Optional input arguments:
+ *
+ *       tol : tolerance. Scalar defining the tolerance of the procedure.
+ *             The default value is 1e-8
+ *                Example - 'tol',[1e-18]
+ *                Data Types - double
+ *
+ *  userepmat : use repmat, bsxfun or implicit expansion. Scalar.
+ *              If userepmat is equal to 1, function repmat is used instead
+ *              of bsxfun inside the procedure. Remark: repmat is built in
+ *              from MATLAB 2013b so it is faster to use repmat if the
+ *              current version of MATLAB is >2013a.
+ *              If userepmat is 2, implicit expansion is used instead of
+ *              bsxfun. Note that implicit expansion has been introduced only
+ *              in 2017a therefore it will not work with previous releases.
+ *                Example - 'userepmat',1
+ *                Data Types - double
+ *
+ *   Output:
+ *
+ *
+ *             out      : Restricted eigenvalues. Matrix. v-by-k matrix
+ *                        containing restricted eigenvalues.
+ *                        The ratio between two possible elements in matrix
+ *                        out is not greater than restr
+ *
+ *  See also tclust, restrdeter, tclustreg
+ *
+ *  References:
+ *
+ *  This function implements the algorithm described in
+ *  Fritz H., Garcia-Escudero, L.A. and Mayo-Iscar, A. (2013), A fast
+ *  algorithm for robust constrained clustering,
+ * "Computational Satistics and Data Analysis", Vol. 61, pp. 124-136.
+ *  [Available at
+ *  http://www.eio.uva.es/infor/personas/tclust_algorithm.pdf]
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *  DETAILS. This algorithm solves the minimization problem with constraints
+ *  without resorting to the Dykstra algorithm. This implementation is based
+ *  on the paper  "A fast algorithm for robust constrained clustering" by
+ *  Fritz H., Garcia Escudero L.A. and Mayo-Iscar A. (2012). (FGM2012 in the
+ *  code below)
+ *
+ *
+ *
+ * <a href="matlab: docsearchFS('restreigen')">Link to the help function</a>
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ * Arguments    : emxArray_real_T *eigenvalues
+ *                double restr
+ *                double tol
+ *                double userepmat
+ * Return Type  : void
+ */
 void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
                   double userepmat)
 {
@@ -68,93 +152,6 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
   int outsize_idx_1;
   int varargin_3;
   emxInit_real_T(&nis, 2);
-  /* restreigen computes eigenvalues restriction (without Dykstra algorithm) */
-  /*  */
-  /* <a href="matlab: docsearchFS('restreigen')">Link to the help function</a>
-   */
-  /*  */
-  /*    restreigen restricts the eigenvalues according to the constraint */
-  /*    specified in scalar restr. This function is called in every */
-  /*    concentration step of function tclust and can also be used inside */
-  /*    function MixSim to generate groups with a prespecified level of */
-  /*    overlapping. */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /* eigenvalues: Eigenvalues. Matrix. v x k matrix containing the eigenvalues
-   */
-  /*              of the covariance matrices of the k groups. */
-  /*              v is the number of variables of the dataset which has to be */
-  /*              clustered. */
-  /*      niini: Cluster size. Vector. k x 1 vector containing the size of the k
-   * clusters */
-  /*      restr: Restriction factor. Scalar. Scalar containing the restr
-   * parameter in tclust program. */
-  /*             More in detail, parameter restr defines the cluster's shape */
-  /*             restrictions, which are applied on all clusters during each */
-  /*             iteration. */
-  /*             Setting restr to 1, yields the strongest restriction, */
-  /*             forcing all eigenvalues/determinants to be equal and so the */
-  /*             method looks for similarly scattered (respectively spherical)
-   */
-  /*             clusters. */
-  /*  */
-  /*   Optional input arguments: */
-  /*  */
-  /*       tol : tolerance. Scalar defining the tolerance of the procedure. */
-  /*             The default value is 1e-8 */
-  /*                Example - 'tol',[1e-18] */
-  /*                Data Types - double */
-  /*  */
-  /*  userepmat : use repmat, bsxfun or implicit expansion. Scalar. */
-  /*              If userepmat is equal to 1, function repmat is used instead */
-  /*              of bsxfun inside the procedure. Remark: repmat is built in */
-  /*              from MATLAB 2013b so it is faster to use repmat if the */
-  /*              current version of MATLAB is >2013a. */
-  /*              If userepmat is 2, implicit expansion is used instead of */
-  /*              bsxfun. Note that implicit expansion has been introduced only
-   */
-  /*              in 2017a therefore it will not work with previous releases. */
-  /*                Example - 'userepmat',1 */
-  /*                Data Types - double */
-  /*  */
-  /*   Output: */
-  /*  */
-  /*  */
-  /*             out      : Restricted eigenvalues. Matrix. v-by-k matrix */
-  /*                        containing restricted eigenvalues. */
-  /*                        The ratio between two possible elements in matrix */
-  /*                        out is not greater than restr */
-  /*  */
-  /*  See also tclust, restrdeter, tclustreg */
-  /*  */
-  /*  References: */
-  /*  */
-  /*  This function implements the algorithm described in */
-  /*  Fritz H., Garcia-Escudero, L.A. and Mayo-Iscar, A. (2013), A fast */
-  /*  algorithm for robust constrained clustering, */
-  /* "Computational Satistics and Data Analysis", Vol. 61, pp. 124-136. */
-  /*  [Available at */
-  /*  http://www.eio.uva.es/infor/personas/tclust_algorithm.pdf] */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  DETAILS. This algorithm solves the minimization problem with constraints
-   */
-  /*  without resorting to the Dykstra algorithm. This implementation is based
-   */
-  /*  on the paper  "A fast algorithm for robust constrained clustering" by */
-  /*  Fritz H., Garcia Escudero L.A. and Mayo-Iscar A. (2012). (FGM2012 in the
-   */
-  /*  code below) */
-  /*  */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('restreigen')">Link to the help function</a>
-   */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /*  */
   /* { */
@@ -868,6 +865,92 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
   emxFree_real_T(&nis);
 }
 
+/*
+ * restreigen computes eigenvalues restriction (without Dykstra algorithm)
+ *
+ * <a href="matlab: docsearchFS('restreigen')">Link to the help function</a>
+ *
+ *    restreigen restricts the eigenvalues according to the constraint
+ *    specified in scalar restr. This function is called in every
+ *    concentration step of function tclust and can also be used inside
+ *    function MixSim to generate groups with a prespecified level of
+ *    overlapping.
+ *
+ *   Required input arguments:
+ *
+ * eigenvalues: Eigenvalues. Matrix. v x k matrix containing the eigenvalues
+ *              of the covariance matrices of the k groups.
+ *              v is the number of variables of the dataset which has to be
+ *              clustered.
+ *      niini: Cluster size. Vector. k x 1 vector containing the size of the k
+ * clusters restr: Restriction factor. Scalar. Scalar containing the restr
+ * parameter in tclust program. More in detail, parameter restr defines the
+ * cluster's shape restrictions, which are applied on all clusters during each
+ *             iteration.
+ *             Setting restr to 1, yields the strongest restriction,
+ *             forcing all eigenvalues/determinants to be equal and so the
+ *             method looks for similarly scattered (respectively spherical)
+ *             clusters.
+ *
+ *   Optional input arguments:
+ *
+ *       tol : tolerance. Scalar defining the tolerance of the procedure.
+ *             The default value is 1e-8
+ *                Example - 'tol',[1e-18]
+ *                Data Types - double
+ *
+ *  userepmat : use repmat, bsxfun or implicit expansion. Scalar.
+ *              If userepmat is equal to 1, function repmat is used instead
+ *              of bsxfun inside the procedure. Remark: repmat is built in
+ *              from MATLAB 2013b so it is faster to use repmat if the
+ *              current version of MATLAB is >2013a.
+ *              If userepmat is 2, implicit expansion is used instead of
+ *              bsxfun. Note that implicit expansion has been introduced only
+ *              in 2017a therefore it will not work with previous releases.
+ *                Example - 'userepmat',1
+ *                Data Types - double
+ *
+ *   Output:
+ *
+ *
+ *             out      : Restricted eigenvalues. Matrix. v-by-k matrix
+ *                        containing restricted eigenvalues.
+ *                        The ratio between two possible elements in matrix
+ *                        out is not greater than restr
+ *
+ *  See also tclust, restrdeter, tclustreg
+ *
+ *  References:
+ *
+ *  This function implements the algorithm described in
+ *  Fritz H., Garcia-Escudero, L.A. and Mayo-Iscar, A. (2013), A fast
+ *  algorithm for robust constrained clustering,
+ * "Computational Satistics and Data Analysis", Vol. 61, pp. 124-136.
+ *  [Available at
+ *  http://www.eio.uva.es/infor/personas/tclust_algorithm.pdf]
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *  DETAILS. This algorithm solves the minimization problem with constraints
+ *  without resorting to the Dykstra algorithm. This implementation is based
+ *  on the paper  "A fast algorithm for robust constrained clustering" by
+ *  Fritz H., Garcia Escudero L.A. and Mayo-Iscar A. (2012). (FGM2012 in the
+ *  code below)
+ *
+ *
+ *
+ * <a href="matlab: docsearchFS('restreigen')">Link to the help function</a>
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ * Arguments    : emxArray_real_T *eigenvalues
+ *                const emxArray_real_T *niini
+ *                double restr
+ *                double tol
+ *                double userepmat
+ * Return Type  : void
+ */
 void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
                   double restr, double tol, double userepmat)
 {
@@ -915,93 +998,6 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
   int nrows;
   unsigned int unnamed_idx_1;
   emxInit_real_T(&d, 1);
-  /* restreigen computes eigenvalues restriction (without Dykstra algorithm) */
-  /*  */
-  /* <a href="matlab: docsearchFS('restreigen')">Link to the help function</a>
-   */
-  /*  */
-  /*    restreigen restricts the eigenvalues according to the constraint */
-  /*    specified in scalar restr. This function is called in every */
-  /*    concentration step of function tclust and can also be used inside */
-  /*    function MixSim to generate groups with a prespecified level of */
-  /*    overlapping. */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /* eigenvalues: Eigenvalues. Matrix. v x k matrix containing the eigenvalues
-   */
-  /*              of the covariance matrices of the k groups. */
-  /*              v is the number of variables of the dataset which has to be */
-  /*              clustered. */
-  /*      niini: Cluster size. Vector. k x 1 vector containing the size of the k
-   * clusters */
-  /*      restr: Restriction factor. Scalar. Scalar containing the restr
-   * parameter in tclust program. */
-  /*             More in detail, parameter restr defines the cluster's shape */
-  /*             restrictions, which are applied on all clusters during each */
-  /*             iteration. */
-  /*             Setting restr to 1, yields the strongest restriction, */
-  /*             forcing all eigenvalues/determinants to be equal and so the */
-  /*             method looks for similarly scattered (respectively spherical)
-   */
-  /*             clusters. */
-  /*  */
-  /*   Optional input arguments: */
-  /*  */
-  /*       tol : tolerance. Scalar defining the tolerance of the procedure. */
-  /*             The default value is 1e-8 */
-  /*                Example - 'tol',[1e-18] */
-  /*                Data Types - double */
-  /*  */
-  /*  userepmat : use repmat, bsxfun or implicit expansion. Scalar. */
-  /*              If userepmat is equal to 1, function repmat is used instead */
-  /*              of bsxfun inside the procedure. Remark: repmat is built in */
-  /*              from MATLAB 2013b so it is faster to use repmat if the */
-  /*              current version of MATLAB is >2013a. */
-  /*              If userepmat is 2, implicit expansion is used instead of */
-  /*              bsxfun. Note that implicit expansion has been introduced only
-   */
-  /*              in 2017a therefore it will not work with previous releases. */
-  /*                Example - 'userepmat',1 */
-  /*                Data Types - double */
-  /*  */
-  /*   Output: */
-  /*  */
-  /*  */
-  /*             out      : Restricted eigenvalues. Matrix. v-by-k matrix */
-  /*                        containing restricted eigenvalues. */
-  /*                        The ratio between two possible elements in matrix */
-  /*                        out is not greater than restr */
-  /*  */
-  /*  See also tclust, restrdeter, tclustreg */
-  /*  */
-  /*  References: */
-  /*  */
-  /*  This function implements the algorithm described in */
-  /*  Fritz H., Garcia-Escudero, L.A. and Mayo-Iscar, A. (2013), A fast */
-  /*  algorithm for robust constrained clustering, */
-  /* "Computational Satistics and Data Analysis", Vol. 61, pp. 124-136. */
-  /*  [Available at */
-  /*  http://www.eio.uva.es/infor/personas/tclust_algorithm.pdf] */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  DETAILS. This algorithm solves the minimization problem with constraints
-   */
-  /*  without resorting to the Dykstra algorithm. This implementation is based
-   */
-  /*  on the paper  "A fast algorithm for robust constrained clustering" by */
-  /*  Fritz H., Garcia Escudero L.A. and Mayo-Iscar A. (2012). (FGM2012 in the
-   */
-  /*  code below) */
-  /*  */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('restreigen')">Link to the help function</a>
-   */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /*  */
   /* { */
@@ -1809,6 +1805,90 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
   emxFree_real_T(&d);
 }
 
+/*
+ * restreigen computes eigenvalues restriction (without Dykstra algorithm)
+ *
+ * <a href="matlab: docsearchFS('restreigen')">Link to the help function</a>
+ *
+ *    restreigen restricts the eigenvalues according to the constraint
+ *    specified in scalar restr. This function is called in every
+ *    concentration step of function tclust and can also be used inside
+ *    function MixSim to generate groups with a prespecified level of
+ *    overlapping.
+ *
+ *   Required input arguments:
+ *
+ * eigenvalues: Eigenvalues. Matrix. v x k matrix containing the eigenvalues
+ *              of the covariance matrices of the k groups.
+ *              v is the number of variables of the dataset which has to be
+ *              clustered.
+ *      niini: Cluster size. Vector. k x 1 vector containing the size of the k
+ * clusters restr: Restriction factor. Scalar. Scalar containing the restr
+ * parameter in tclust program. More in detail, parameter restr defines the
+ * cluster's shape restrictions, which are applied on all clusters during each
+ *             iteration.
+ *             Setting restr to 1, yields the strongest restriction,
+ *             forcing all eigenvalues/determinants to be equal and so the
+ *             method looks for similarly scattered (respectively spherical)
+ *             clusters.
+ *
+ *   Optional input arguments:
+ *
+ *       tol : tolerance. Scalar defining the tolerance of the procedure.
+ *             The default value is 1e-8
+ *                Example - 'tol',[1e-18]
+ *                Data Types - double
+ *
+ *  userepmat : use repmat, bsxfun or implicit expansion. Scalar.
+ *              If userepmat is equal to 1, function repmat is used instead
+ *              of bsxfun inside the procedure. Remark: repmat is built in
+ *              from MATLAB 2013b so it is faster to use repmat if the
+ *              current version of MATLAB is >2013a.
+ *              If userepmat is 2, implicit expansion is used instead of
+ *              bsxfun. Note that implicit expansion has been introduced only
+ *              in 2017a therefore it will not work with previous releases.
+ *                Example - 'userepmat',1
+ *                Data Types - double
+ *
+ *   Output:
+ *
+ *
+ *             out      : Restricted eigenvalues. Matrix. v-by-k matrix
+ *                        containing restricted eigenvalues.
+ *                        The ratio between two possible elements in matrix
+ *                        out is not greater than restr
+ *
+ *  See also tclust, restrdeter, tclustreg
+ *
+ *  References:
+ *
+ *  This function implements the algorithm described in
+ *  Fritz H., Garcia-Escudero, L.A. and Mayo-Iscar, A. (2013), A fast
+ *  algorithm for robust constrained clustering,
+ * "Computational Satistics and Data Analysis", Vol. 61, pp. 124-136.
+ *  [Available at
+ *  http://www.eio.uva.es/infor/personas/tclust_algorithm.pdf]
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *  DETAILS. This algorithm solves the minimization problem with constraints
+ *  without resorting to the Dykstra algorithm. This implementation is based
+ *  on the paper  "A fast algorithm for robust constrained clustering" by
+ *  Fritz H., Garcia Escudero L.A. and Mayo-Iscar A. (2012). (FGM2012 in the
+ *  code below)
+ *
+ *
+ *
+ * <a href="matlab: docsearchFS('restreigen')">Link to the help function</a>
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ * Arguments    : emxArray_real_T *eigenvalues
+ *                const emxArray_real_T *niini
+ *                double restr
+ * Return Type  : void
+ */
 void restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
                 double restr)
 {
@@ -1865,93 +1945,6 @@ void restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
   bool exitg1;
   bool y;
   emxInit_real_T(&d, 2);
-  /* restreigen computes eigenvalues restriction (without Dykstra algorithm) */
-  /*  */
-  /* <a href="matlab: docsearchFS('restreigen')">Link to the help function</a>
-   */
-  /*  */
-  /*    restreigen restricts the eigenvalues according to the constraint */
-  /*    specified in scalar restr. This function is called in every */
-  /*    concentration step of function tclust and can also be used inside */
-  /*    function MixSim to generate groups with a prespecified level of */
-  /*    overlapping. */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /* eigenvalues: Eigenvalues. Matrix. v x k matrix containing the eigenvalues
-   */
-  /*              of the covariance matrices of the k groups. */
-  /*              v is the number of variables of the dataset which has to be */
-  /*              clustered. */
-  /*      niini: Cluster size. Vector. k x 1 vector containing the size of the k
-   * clusters */
-  /*      restr: Restriction factor. Scalar. Scalar containing the restr
-   * parameter in tclust program. */
-  /*             More in detail, parameter restr defines the cluster's shape */
-  /*             restrictions, which are applied on all clusters during each */
-  /*             iteration. */
-  /*             Setting restr to 1, yields the strongest restriction, */
-  /*             forcing all eigenvalues/determinants to be equal and so the */
-  /*             method looks for similarly scattered (respectively spherical)
-   */
-  /*             clusters. */
-  /*  */
-  /*   Optional input arguments: */
-  /*  */
-  /*       tol : tolerance. Scalar defining the tolerance of the procedure. */
-  /*             The default value is 1e-8 */
-  /*                Example - 'tol',[1e-18] */
-  /*                Data Types - double */
-  /*  */
-  /*  userepmat : use repmat, bsxfun or implicit expansion. Scalar. */
-  /*              If userepmat is equal to 1, function repmat is used instead */
-  /*              of bsxfun inside the procedure. Remark: repmat is built in */
-  /*              from MATLAB 2013b so it is faster to use repmat if the */
-  /*              current version of MATLAB is >2013a. */
-  /*              If userepmat is 2, implicit expansion is used instead of */
-  /*              bsxfun. Note that implicit expansion has been introduced only
-   */
-  /*              in 2017a therefore it will not work with previous releases. */
-  /*                Example - 'userepmat',1 */
-  /*                Data Types - double */
-  /*  */
-  /*   Output: */
-  /*  */
-  /*  */
-  /*             out      : Restricted eigenvalues. Matrix. v-by-k matrix */
-  /*                        containing restricted eigenvalues. */
-  /*                        The ratio between two possible elements in matrix */
-  /*                        out is not greater than restr */
-  /*  */
-  /*  See also tclust, restrdeter, tclustreg */
-  /*  */
-  /*  References: */
-  /*  */
-  /*  This function implements the algorithm described in */
-  /*  Fritz H., Garcia-Escudero, L.A. and Mayo-Iscar, A. (2013), A fast */
-  /*  algorithm for robust constrained clustering, */
-  /* "Computational Satistics and Data Analysis", Vol. 61, pp. 124-136. */
-  /*  [Available at */
-  /*  http://www.eio.uva.es/infor/personas/tclust_algorithm.pdf] */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  DETAILS. This algorithm solves the minimization problem with constraints
-   */
-  /*  without resorting to the Dykstra algorithm. This implementation is based
-   */
-  /*  on the paper  "A fast algorithm for robust constrained clustering" by */
-  /*  Fritz H., Garcia Escudero L.A. and Mayo-Iscar A. (2012). (FGM2012 in the
-   */
-  /*  code below) */
-  /*  */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('restreigen')">Link to the help function</a>
-   */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /*  */
   /* { */
@@ -2729,4 +2722,8 @@ void restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
   emxFree_real_T(&d);
 }
 
-/* End of code generation (restreigen.c) */
+/*
+ * File trailer for restreigen.c
+ *
+ * [EOF]
+ */

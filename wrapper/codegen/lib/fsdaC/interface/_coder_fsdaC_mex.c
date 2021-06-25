@@ -2,18 +2,24 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: _coder_fsdaC_mex.c
  *
- * _coder_fsdaC_mex.c
- *
- * Code generation for function 'FSM_wrapper'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "_coder_fsdaC_mex.h"
 #include "_coder_fsdaC_api.h"
 
 /* Function Definitions */
+/*
+ * Arguments    : int32_T nlhs
+ *                mxArray *plhs[]
+ *                int32_T nrhs
+ *                const mxArray *prhs[]
+ * Return Type  : void
+ */
 void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
                  const mxArray *prhs[])
 {
@@ -78,6 +84,10 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
   fsdaC_terminate();
 }
 
+/*
+ * Arguments    : void
+ * Return Type  : emlrtCTX
+ */
 emlrtCTX mexFunctionCreateRootTLS(void)
 {
   emlrtCreateRootTLSR2021a(&emlrtRootTLSGlobal, &emlrtContextGlobal, NULL, 1,
@@ -85,6 +95,13 @@ emlrtCTX mexFunctionCreateRootTLS(void)
   return emlrtRootTLSGlobal;
 }
 
+/*
+ * Arguments    : int32_T nlhs
+ *                mxArray *plhs[1]
+ *                int32_T nrhs
+ *                const mxArray *prhs[8]
+ * Return Type  : void
+ */
 void unsafe_FSM_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[1],
                                     int32_T nrhs, const mxArray *prhs[8])
 {
@@ -110,6 +127,13 @@ void unsafe_FSM_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[1],
   emlrtReturnArrays(1, &plhs[0], &outputs);
 }
 
+/*
+ * Arguments    : int32_T nlhs
+ *                mxArray *plhs[2]
+ *                int32_T nrhs
+ *                const mxArray *prhs[6]
+ * Return Type  : void
+ */
 void unsafe_FSMbsb_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[2],
                                        int32_T nrhs, const mxArray *prhs[6])
 {
@@ -141,6 +165,13 @@ void unsafe_FSMbsb_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[2],
   emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
 }
 
+/*
+ * Arguments    : int32_T nlhs
+ *                mxArray *plhs[3]
+ *                int32_T nrhs
+ *                const mxArray *prhs[6]
+ * Return Type  : void
+ */
 void unsafe_FSMmmd_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[3],
                                        int32_T nrhs, const mxArray *prhs[6])
 {
@@ -172,6 +203,13 @@ void unsafe_FSMmmd_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[3],
   emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
 }
 
+/*
+ * Arguments    : int32_T nlhs
+ *                mxArray *plhs[1]
+ *                int32_T nrhs
+ *                const mxArray *prhs[13]
+ * Return Type  : void
+ */
 void unsafe_FSR_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[1],
                                     int32_T nrhs, const mxArray *prhs[13])
 {
@@ -197,6 +235,13 @@ void unsafe_FSR_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[1],
   emlrtReturnArrays(1, &plhs[0], &outputs);
 }
 
+/*
+ * Arguments    : int32_T nlhs
+ *                mxArray *plhs[2]
+ *                int32_T nrhs
+ *                const mxArray *prhs[8]
+ * Return Type  : void
+ */
 void unsafe_FSRbsb_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[2],
                                        int32_T nrhs, const mxArray *prhs[8])
 {
@@ -228,6 +273,13 @@ void unsafe_FSRbsb_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[2],
   emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
 }
 
+/*
+ * Arguments    : int32_T nlhs
+ *                mxArray *plhs[1]
+ *                int32_T nrhs
+ *                const mxArray *prhs[11]
+ * Return Type  : void
+ */
 void unsafe_FSRfan_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[1],
                                        int32_T nrhs, const mxArray *prhs[11])
 {
@@ -253,6 +305,13 @@ void unsafe_FSRfan_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[1],
   emlrtReturnArrays(1, &plhs[0], &outputs);
 }
 
+/*
+ * Arguments    : int32_T nlhs
+ *                mxArray *plhs[5]
+ *                int32_T nrhs
+ *                const mxArray *prhs[12]
+ * Return Type  : void
+ */
 void unsafe_FSRmdr_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[5],
                                        int32_T nrhs, const mxArray *prhs[12])
 {
@@ -284,6 +343,13 @@ void unsafe_FSRmdr_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[5],
   emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
 }
 
+/*
+ * Arguments    : int32_T nlhs
+ *                mxArray *plhs[2]
+ *                int32_T nrhs
+ *                const mxArray *prhs[16]
+ * Return Type  : void
+ */
 void unsafe_LTSts_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[2],
                                       int32_T nrhs, const mxArray *prhs[16])
 {
@@ -315,6 +381,13 @@ void unsafe_LTSts_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[2],
   emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
 }
 
+/*
+ * Arguments    : int32_T nlhs
+ *                mxArray *plhs[2]
+ *                int32_T nrhs
+ *                const mxArray *prhs[13]
+ * Return Type  : void
+ */
 void unsafe_LXS_wrapper1_mexFunction(int32_T nlhs, mxArray *plhs[2],
                                      int32_T nrhs, const mxArray *prhs[13])
 {
@@ -346,6 +419,13 @@ void unsafe_LXS_wrapper1_mexFunction(int32_T nlhs, mxArray *plhs[2],
   emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
 }
 
+/*
+ * Arguments    : int32_T nlhs
+ *                mxArray *plhs[2]
+ *                int32_T nrhs
+ *                const mxArray *prhs[13]
+ * Return Type  : void
+ */
 void unsafe_LXS_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[2],
                                     int32_T nrhs, const mxArray *prhs[13])
 {
@@ -377,6 +457,13 @@ void unsafe_LXS_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[2],
   emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
 }
 
+/*
+ * Arguments    : int32_T nlhs
+ *                mxArray *plhs[1]
+ *                int32_T nrhs
+ *                const mxArray *prhs[6]
+ * Return Type  : void
+ */
 void unsafe_addt_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[1],
                                      int32_T nrhs, const mxArray *prhs[6])
 {
@@ -402,6 +489,13 @@ void unsafe_addt_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[1],
   emlrtReturnArrays(1, &plhs[0], &outputs);
 }
 
+/*
+ * Arguments    : int32_T nlhs
+ *                mxArray *plhs[2]
+ *                int32_T nrhs
+ *                const mxArray *prhs[14]
+ * Return Type  : void
+ */
 void unsafe_tclust_wrapper1_mexFunction(int32_T nlhs, mxArray *plhs[2],
                                         int32_T nrhs, const mxArray *prhs[14])
 {
@@ -433,6 +527,13 @@ void unsafe_tclust_wrapper1_mexFunction(int32_T nlhs, mxArray *plhs[2],
   emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
 }
 
+/*
+ * Arguments    : int32_T nlhs
+ *                mxArray *plhs[2]
+ *                int32_T nrhs
+ *                const mxArray *prhs[14]
+ * Return Type  : void
+ */
 void unsafe_tclust_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[2],
                                        int32_T nrhs, const mxArray *prhs[14])
 {
@@ -464,4 +565,8 @@ void unsafe_tclust_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[2],
   emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
 }
 
-/* End of code generation (_coder_fsdaC_mex.c) */
+/*
+ * File trailer for _coder_fsdaC_mex.c
+ *
+ * [EOF]
+ */

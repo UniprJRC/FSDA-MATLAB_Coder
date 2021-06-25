@@ -2,20 +2,23 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: triu.c
  *
- * triu.c
- *
- * Code generation for function 'triu'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "triu.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : emxArray_real_T *x
+ * Return Type  : void
+ */
 void triu(emxArray_real_T *x)
 {
   int i;
@@ -40,4 +43,8 @@ void triu(emxArray_real_T *x)
   }
 }
 
-/* End of code generation (triu.c) */
+/*
+ * File trailer for triu.c
+ *
+ * [EOF]
+ */

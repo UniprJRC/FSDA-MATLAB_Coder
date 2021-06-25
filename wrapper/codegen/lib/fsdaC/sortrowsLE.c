@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: sortrowsLE.c
  *
- * sortrowsLE.c
- *
- * Code generation for function 'sortrowsLE'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "sortrowsLE.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
@@ -17,6 +16,13 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const emxArray_real_T *v
+ *                const int col[2]
+ *                int irow1
+ *                int irow2
+ * Return Type  : bool
+ */
 bool sortrowsLE(const emxArray_real_T *v, const int col[2], int irow1,
                 int irow2)
 {
@@ -43,4 +49,8 @@ bool sortrowsLE(const emxArray_real_T *v, const int col[2], int irow1,
   return p;
 }
 
-/* End of code generation (sortrowsLE.c) */
+/*
+ * File trailer for sortrowsLE.c
+ *
+ * [EOF]
+ */

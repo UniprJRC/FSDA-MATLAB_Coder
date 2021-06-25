@@ -2,17 +2,16 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: repmat.h
  *
- * repmat.h
- *
- * Code generation for function 'repmat'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
 #ifndef REPMAT_H
 #define REPMAT_H
 
-/* Include files */
+/* Include Files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -42,4 +41,8 @@ void repmat(const double a_data[], const int a_size[2], double varargin_1,
 #endif
 
 #endif
-/* End of code generation (repmat.h) */
+/*
+ * File trailer for repmat.h
+ *
+ * [EOF]
+ */

@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: FSMbonfbound.c
  *
- * FSMbonfbound.c
- *
- * Code generation for function 'FSMbonfbound'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "FSMbonfbound.h"
 #include "colon.h"
 #include "finv.h"
@@ -22,6 +21,77 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * FSMbonfbound computes Bonferroni bounds for each step of the  search (in mult
+ * analysis)
+ *
+ *
+ * <a href="matlab: docsearchFS('FSMbonfbound')">Link to the help function</a>
+ *
+ *   Required input arguments:
+ *
+ *     n : number of observations. Scalar. Number of observations on which
+ *        the envelopes are based.
+ *                Data Types - single | double
+ *     p : number of variables. Scalar. Number of variables on which
+ *        the envelopes are based.
+ *                Data Types - single | double
+ *
+ *   Optional input arguments:
+ *
+ *  distrib:      Reference distribution to use. Character.
+ *                The statistical distribution used to compute the
+ *                approximated Bonferroni bounds. Distributions implemented
+ *                are 'chi2' and 'F' (default).
+ *                  Example - 'distrib','chi2'
+ *                  Data Types - char
+ *
+ *  init :       Point where to start monitoring required diagnostics. Scalar.
+ *               Note that if bsb is supplied, init>=length(bsb). If init is not
+ *               specified it will be set equal to floor(0.5*(n+p+1))+1.
+ *                  Example - 'init',50
+ *                  Data Types - double
+ *
+ *  prob:        quantiles for which envelopes have
+ *                to be computed. Vector. Vector containing 1 x k elements .
+ *                The default is to produce 1 per cent, 50 per cent and 99 per
+ * cent envelopes. Example - 'prob',[0.05 0.95] Data Types - double
+ *
+ *   Output:
+ *
+ *   Bbound:      Bonferroni forward envelopes of mmd. Matrix.
+ *                Matrix with n-m0+1 rows and length(prob)+1 columns:
+ *                1st col = fwd search index from m0 to n-1,
+ *                2nd col = bound for quantile prob[1],
+ *                3rd col = bound for quantile prob[2],
+ *                ...,
+ *                (k+1) col = bound for quantile prob[k].
+ *
+ *  See also: FSMenvmmd, FSRbonfbound
+ *
+ *  References:
+ *
+ *  Atkinson, A.C. and Riani, M. (2006), Distribution theory and
+ *  simulations for tests of outliers in regression, "Journal of
+ *  Computational and Graphical Statistics", Vol. 15, pp. 460-476.
+ *
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *
+ * <a href="matlab: docsearchFS('FSMbonfbound')">Link to the help function</a>
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ * Arguments    : double n
+ *                double p
+ *                const double varargin_2_data[]
+ *                const int varargin_2_size[2]
+ *                double varargin_4
+ *                emxArray_real_T *Bbound
+ * Return Type  : void
+ */
 void FSMbonfbound(double n, double p, const double varargin_2_data[],
                   const int varargin_2_size[2], double varargin_4,
                   emxArray_real_T *Bbound)
@@ -44,74 +114,6 @@ void FSMbonfbound(double n, double p, const double varargin_2_data[],
   signed char input_sizes_idx_1;
   signed char sizes_idx_1;
   bool empty_non_axis_sizes;
-  /* FSMbonfbound computes Bonferroni bounds for each step of the  search (in
-   * mult analysis) */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('FSMbonfbound')">Link to the help function</a>
-   */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /*     n : number of observations. Scalar. Number of observations on which */
-  /*        the envelopes are based. */
-  /*                Data Types - single | double */
-  /*     p : number of variables. Scalar. Number of variables on which */
-  /*        the envelopes are based. */
-  /*                Data Types - single | double */
-  /*  */
-  /*   Optional input arguments: */
-  /*  */
-  /*  distrib:      Reference distribution to use. Character. */
-  /*                The statistical distribution used to compute the */
-  /*                approximated Bonferroni bounds. Distributions implemented */
-  /*                are 'chi2' and 'F' (default). */
-  /*                  Example - 'distrib','chi2' */
-  /*                  Data Types - char */
-  /*  */
-  /*  init :       Point where to start monitoring required diagnostics. Scalar.
-   */
-  /*               Note that if bsb is supplied, init>=length(bsb). If init is
-   * not */
-  /*               specified it will be set equal to floor(0.5*(n+p+1))+1. */
-  /*                  Example - 'init',50 */
-  /*                  Data Types - double */
-  /*  */
-  /*  prob:        quantiles for which envelopes have */
-  /*                to be computed. Vector. Vector containing 1 x k elements .
-   */
-  /*                The default is to produce 1 per cent, 50 per cent and 99 per
-   * cent envelopes. */
-  /*                  Example - 'prob',[0.05 0.95] */
-  /*                  Data Types - double */
-  /*  */
-  /*   Output: */
-  /*  */
-  /*   Bbound:      Bonferroni forward envelopes of mmd. Matrix. */
-  /*                Matrix with n-m0+1 rows and length(prob)+1 columns: */
-  /*                1st col = fwd search index from m0 to n-1, */
-  /*                2nd col = bound for quantile prob[1], */
-  /*                3rd col = bound for quantile prob[2], */
-  /*                ..., */
-  /*                (k+1) col = bound for quantile prob[k]. */
-  /*  */
-  /*  See also: FSMenvmmd, FSRbonfbound */
-  /*  */
-  /*  References: */
-  /*  */
-  /*  Atkinson, A.C. and Riani, M. (2006), Distribution theory and */
-  /*  simulations for tests of outliers in regression, "Journal of */
-  /*  Computational and Graphical Statistics", Vol. 15, pp. 460-476. */
-  /*  */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('FSMbonfbound')">Link to the help function</a>
-   */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /* { */
   /*     %% Example using default options. */
@@ -347,4 +349,8 @@ void FSMbonfbound(double n, double p, const double varargin_2_data[],
   emxFree_real_T(&b_x);
 }
 
-/* End of code generation (FSMbonfbound.c) */
+/*
+ * File trailer for FSMbonfbound.c
+ *
+ * [EOF]
+ */

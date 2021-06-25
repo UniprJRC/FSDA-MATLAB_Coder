@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: strcmp.c
  *
- * strcmp.c
- *
- * Code generation for function 'strcmp'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "strcmp.h"
 #include "fsdaC_internal_types.h"
 #include "fsdaC_types.h"
@@ -17,6 +16,10 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const char a[3]
+ * Return Type  : bool
+ */
 bool ab_strcmp(const char a[3])
 {
   static const char b[3] = {'V', 'E', 'V'};
@@ -25,6 +28,11 @@ bool ab_strcmp(const char a[3])
   return ret == 0;
 }
 
+/*
+ * Arguments    : const char a_data[]
+ *                const int a_size[2]
+ * Return Type  : bool
+ */
 bool b_strcmp(const char a_data[], const int a_size[2])
 {
   static const char b_cv[2] = {'m', 'd'};
@@ -51,6 +59,10 @@ bool b_strcmp(const char a_data[], const int a_size[2])
   return b_bool;
 }
 
+/*
+ * Arguments    : const char a[3]
+ * Return Type  : bool
+ */
 bool bb_strcmp(const char a[3])
 {
   static const char b[3] = {'E', 'V', 'V'};
@@ -59,6 +71,11 @@ bool bb_strcmp(const char a[3])
   return ret == 0;
 }
 
+/*
+ * Arguments    : const char a_data[]
+ *                const int a_size[2]
+ * Return Type  : bool
+ */
 bool c_strcmp(const char a_data[], const int a_size[2])
 {
   static const char b_cv[3] = {'b', 'i', 'v'};
@@ -85,6 +102,10 @@ bool c_strcmp(const char a_data[], const int a_size[2])
   return b_bool;
 }
 
+/*
+ * Arguments    : const char a[3]
+ * Return Type  : bool
+ */
 bool cb_strcmp(const char a[3])
 {
   int ret;
@@ -96,6 +117,11 @@ bool cb_strcmp(const char a[3])
   return ret == 0;
 }
 
+/*
+ * Arguments    : const char a_data[]
+ *                const int a_size[2]
+ * Return Type  : bool
+ */
 bool d_strcmp(const char a_data[], const int a_size[2])
 {
   static const char b_cv[3] = {'u', 'n', 'i'};
@@ -122,6 +148,11 @@ bool d_strcmp(const char a_data[], const int a_size[2])
   return b_bool;
 }
 
+/*
+ * Arguments    : const char a_data[]
+ *                const int a_size[2]
+ * Return Type  : bool
+ */
 bool e_strcmp(const char a_data[], const int a_size[2])
 {
   static const char b_cv[2] = {'m', 'd'};
@@ -148,6 +179,11 @@ bool e_strcmp(const char a_data[], const int a_size[2])
   return b_bool;
 }
 
+/*
+ * Arguments    : const char a_data[]
+ *                const int a_size[2]
+ * Return Type  : bool
+ */
 bool f_strcmp(const char a_data[], const int a_size[2])
 {
   static const char b_cv[3] = {'b', 'i', 'v'};
@@ -174,6 +210,11 @@ bool f_strcmp(const char a_data[], const int a_size[2])
   return b_bool;
 }
 
+/*
+ * Arguments    : const char a_data[]
+ *                const int a_size[2]
+ * Return Type  : bool
+ */
 bool g_strcmp(const char a_data[], const int a_size[2])
 {
   static const char b_cv[3] = {'u', 'n', 'i'};
@@ -200,6 +241,10 @@ bool g_strcmp(const char a_data[], const int a_size[2])
   return b_bool;
 }
 
+/*
+ * Arguments    : const emxArray_char_T *a
+ * Return Type  : bool
+ */
 bool h_strcmp(const emxArray_char_T *a)
 {
   static const char b_cv[6] = {'B', 'o', 'x', 'C', 'o', 'x'};
@@ -226,6 +271,10 @@ bool h_strcmp(const emxArray_char_T *a)
   return b_bool;
 }
 
+/*
+ * Arguments    : const emxArray_char_T *a
+ * Return Type  : bool
+ */
 bool i_strcmp(const emxArray_char_T *a)
 {
   static const char b_cv[2] = {'Y', 'J'};
@@ -252,6 +301,10 @@ bool i_strcmp(const emxArray_char_T *a)
   return b_bool;
 }
 
+/*
+ * Arguments    : const emxArray_char_T *a
+ * Return Type  : bool
+ */
 bool j_strcmp(const emxArray_char_T *a)
 {
   static const char b_cv[4] = {'Y', 'J', 'p', 'n'};
@@ -278,6 +331,10 @@ bool j_strcmp(const emxArray_char_T *a)
   return b_bool;
 }
 
+/*
+ * Arguments    : const emxArray_char_T *a
+ * Return Type  : bool
+ */
 bool k_strcmp(const emxArray_char_T *a)
 {
   static const char b_cv[5] = {'Y', 'J', 'a', 'l', 'l'};
@@ -304,6 +361,11 @@ bool k_strcmp(const emxArray_char_T *a)
   return b_bool;
 }
 
+/*
+ * Arguments    : const char a[3]
+ *                bool b_bool[7]
+ * Return Type  : void
+ */
 void l_strcmp(const char a[3], bool b_bool[7])
 {
   static const char b[3] = {'E', 'V', 'E'};
@@ -337,6 +399,11 @@ void l_strcmp(const char a[3], bool b_bool[7])
   b_bool[6] = (ret == 0);
 }
 
+/*
+ * Arguments    : const char a[3]
+ *                bool b_bool[6]
+ * Return Type  : void
+ */
 void m_strcmp(const char a[3], bool b_bool[6])
 {
   static const char b[3] = {'V', 'V', 'E'};
@@ -367,6 +434,11 @@ void m_strcmp(const char a[3], bool b_bool[6])
   b_bool[5] = (ret == 0);
 }
 
+/*
+ * Arguments    : const char a[3]
+ *                bool b_bool[2]
+ * Return Type  : void
+ */
 void n_strcmp(const char a[3], bool b_bool[2])
 {
   static const char b[3] = {'E', 'V', 'E'};
@@ -382,6 +454,10 @@ void n_strcmp(const char a[3], bool b_bool[2])
   b_bool[1] = (ret == 0);
 }
 
+/*
+ * Arguments    : const char a[3]
+ * Return Type  : bool
+ */
 bool o_strcmp(const char a[3])
 {
   static const char b[3] = {'V', 'V', 'E'};
@@ -390,6 +466,10 @@ bool o_strcmp(const char a[3])
   return ret == 0;
 }
 
+/*
+ * Arguments    : const char a[3]
+ * Return Type  : bool
+ */
 bool p_strcmp(const char a[3])
 {
   static const char b[3] = {'E', 'V', 'E'};
@@ -398,6 +478,10 @@ bool p_strcmp(const char a[3])
   return ret == 0;
 }
 
+/*
+ * Arguments    : const char a[3]
+ * Return Type  : bool
+ */
 bool q_strcmp(const char a[3])
 {
   static const char b[3] = {'E', 'I', 'I'};
@@ -406,6 +490,10 @@ bool q_strcmp(const char a[3])
   return ret == 0;
 }
 
+/*
+ * Arguments    : const char a[3]
+ * Return Type  : bool
+ */
 bool r_strcmp(const char a[3])
 {
   static const char b[3] = {'V', 'I', 'I'};
@@ -414,6 +502,10 @@ bool r_strcmp(const char a[3])
   return ret == 0;
 }
 
+/*
+ * Arguments    : const char a[3]
+ * Return Type  : bool
+ */
 bool s_strcmp(const char a[3])
 {
   static const char b[3] = {'E', 'E', 'I'};
@@ -422,6 +514,10 @@ bool s_strcmp(const char a[3])
   return ret == 0;
 }
 
+/*
+ * Arguments    : const char a[3]
+ * Return Type  : bool
+ */
 bool t_strcmp(const char a[3])
 {
   static const char b[3] = {'V', 'E', 'I'};
@@ -430,6 +526,10 @@ bool t_strcmp(const char a[3])
   return ret == 0;
 }
 
+/*
+ * Arguments    : const char a[3]
+ * Return Type  : bool
+ */
 bool u_strcmp(const char a[3])
 {
   static const char b[3] = {'E', 'V', 'I'};
@@ -438,6 +538,10 @@ bool u_strcmp(const char a[3])
   return ret == 0;
 }
 
+/*
+ * Arguments    : const char a[3]
+ * Return Type  : bool
+ */
 bool v_strcmp(const char a[3])
 {
   static const char b[3] = {'V', 'V', 'I'};
@@ -446,6 +550,10 @@ bool v_strcmp(const char a[3])
   return ret == 0;
 }
 
+/*
+ * Arguments    : const char a[3]
+ * Return Type  : bool
+ */
 bool w_strcmp(const char a[3])
 {
   int ret;
@@ -457,6 +565,10 @@ bool w_strcmp(const char a[3])
   return ret == 0;
 }
 
+/*
+ * Arguments    : const char a[3]
+ * Return Type  : bool
+ */
 bool x_strcmp(const char a[3])
 {
   static const char b[3] = {'V', 'E', 'E'};
@@ -465,6 +577,10 @@ bool x_strcmp(const char a[3])
   return ret == 0;
 }
 
+/*
+ * Arguments    : const char a[3]
+ * Return Type  : bool
+ */
 bool y_strcmp(const char a[3])
 {
   static const char b[3] = {'E', 'E', 'V'};
@@ -473,4 +589,8 @@ bool y_strcmp(const char a[3])
   return ret == 0;
 }
 
-/* End of code generation (strcmp.c) */
+/*
+ * File trailer for strcmp.c
+ *
+ * [EOF]
+ */

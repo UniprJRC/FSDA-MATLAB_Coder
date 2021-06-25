@@ -2,17 +2,16 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: mtimes.h
  *
- * mtimes.h
- *
- * Code generation for function 'mtimes'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
 #ifndef MTIMES_H
 #define MTIMES_H
 
-/* Include files */
+/* Include Files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -40,4 +39,8 @@ void mtimes(const emxArray_real_T *A, const emxArray_real_T *B,
 #endif
 
 #endif
-/* End of code generation (mtimes.h) */
+/*
+ * File trailer for mtimes.h
+ *
+ * [EOF]
+ */

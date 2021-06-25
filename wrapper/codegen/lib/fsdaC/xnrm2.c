@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: xnrm2.c
  *
- * xnrm2.c
- *
- * Code generation for function 'xnrm2'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "xnrm2.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
@@ -17,6 +16,11 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : int n
+ *                const emxArray_real_T *x
+ * Return Type  : double
+ */
 double b_xnrm2(int n, const emxArray_real_T *x)
 {
   double absxk;
@@ -45,6 +49,11 @@ double b_xnrm2(int n, const emxArray_real_T *x)
   return y;
 }
 
+/*
+ * Arguments    : int n
+ *                const double x[3]
+ * Return Type  : double
+ */
 double c_xnrm2(int n, const double x[3])
 {
   double absxk;
@@ -80,6 +89,11 @@ double c_xnrm2(int n, const double x[3])
   return y;
 }
 
+/*
+ * Arguments    : int n
+ *                const emxArray_real_T *x
+ * Return Type  : double
+ */
 double d_xnrm2(int n, const emxArray_real_T *x)
 {
   double absxk;
@@ -112,6 +126,12 @@ double d_xnrm2(int n, const emxArray_real_T *x)
   return y;
 }
 
+/*
+ * Arguments    : int n
+ *                const double x[27]
+ *                int ix0
+ * Return Type  : double
+ */
 double e_xnrm2(int n, const double x[27], int ix0)
 {
   double absxk;
@@ -137,6 +157,12 @@ double e_xnrm2(int n, const double x[27], int ix0)
   return scale * sqrt(y);
 }
 
+/*
+ * Arguments    : int n
+ *                const emxArray_real_T *x
+ *                int ix0
+ * Return Type  : double
+ */
 double xnrm2(int n, const emxArray_real_T *x, int ix0)
 {
   double absxk;
@@ -169,4 +195,8 @@ double xnrm2(int n, const emxArray_real_T *x, int ix0)
   return y;
 }
 
-/* End of code generation (xnrm2.c) */
+/*
+ * File trailer for xnrm2.c
+ *
+ * [EOF]
+ */

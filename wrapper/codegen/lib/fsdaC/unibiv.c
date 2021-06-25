@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: unibiv.c
  *
- * unibiv.c
- *
- * Code generation for function 'unibiv'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "unibiv.h"
 #include "betainc.h"
 #include "betaincinv.h"
@@ -7241,6 +7240,18 @@ static const double dv1[3601] = {0.0,
 static void tiedrankFS(const emxArray_real_T *x, emxArray_real_T *r);
 
 /* Function Definitions */
+/*
+ * tiedrankFS is a simplified version of tiedrank
+ *  to use with the C coder because tiedrank is not supported
+ *    tiedrankFS computes the ranks of a sample, adjusting for ties.
+ *    [R,] = tiedrankFS(x) computes the ranks of the values in the
+ *    vector x.  If any x values are tied, TIEDRANK computes their average
+ *    rank.
+ *
+ * Arguments    : const emxArray_real_T *x
+ *                emxArray_real_T *r
+ * Return Type  : void
+ */
 static void tiedrankFS(const emxArray_real_T *x, emxArray_real_T *r)
 {
   emxArray_boolean_T *b_x;
@@ -7261,12 +7272,6 @@ static void tiedrankFS(const emxArray_real_T *x, emxArray_real_T *r)
   int vlen;
   emxInit_real_T(&tieloc, 1);
   /*  This function is called just in case of C coder translation */
-  /*  tiedrankFS is a simplified version of tiedrank */
-  /*  to use with the C coder because tiedrank is not supported */
-  /*    tiedrankFS computes the ranks of a sample, adjusting for ties. */
-  /*    [R,] = tiedrankFS(x) computes the ranks of the values in the */
-  /*    vector x.  If any x values are tied, TIEDRANK computes their average */
-  /*    rank. */
   /*  Sort, then leave the NaNs (which are sorted to the end) alone */
   i = tieloc->size[0];
   tieloc->size[0] = x->size[0];
@@ -7412,6 +7417,122 @@ static void tiedrankFS(const emxArray_real_T *x, emxArray_real_T *r)
   emxEnsureCapacity_real_T(r, i);
 }
 
+/*
+ * unibiv has the purpose of detecting univariate and bivariate outliers
+ *
+ * <a href="matlab: docsearchFS('unibiv')">Link to the help function</a>
+ *
+ *  Required input arguments:
+ *
+ *  Y :           Input data. Matrix.
+ *                n x v data matrix; n observations and v variables. Rows of
+ *                Y represent observations, and columns represent variables.
+ *                Missing values (NaN's) and infinite values (Inf's) are
+ *                allowed, since observations (rows) with missing or infinite
+ *                values will automatically be excluded from the
+ *                computations.
+ *                 Data Types - single|double
+ *
+ *
+ *  Optional input arguments:
+ *
+ *            rf  :  It specifies the confidence
+ *                   level of the robust bivariate ellipses. Scalar. 0<rf<1.
+ *                   The default value is 0.95 that is the outer contour in
+ *                   presence of normality for each ellipse should leave
+ *                   outside 5% of the values.
+ *                  Example - 'rf',0.99
+ *                  Data Types - double
+ *
+ *       robscale :   how to compute dispersion. Scalar. It specifies the
+ *                    statistical indexes to use to compute the dispersion of
+ *                    each variable and the correlation among each pair of
+ *                    variables.
+ *                    robscale=1 (default): the program uses the median
+ * correlation and the MAD as estimate of the dispersion of each variable;
+ *                    robscale=2: the correlation coefficient among ranks is
+ * used (Spearman's rho) and the MAD as estimate of the dispersion of each
+ * variable; robscale=3: the correlation coefficient is based on Kendall's tau b
+ *                    and the MAD as estimate of the dispersion of each
+ *                    variable;
+ *                    robscale=4: tetracoric correlation coefficient is used and
+ * the MAD as estimate of the dispersion of each variable; otherwise the
+ * correlation and the dispersion of the variables are computed using the
+ * traditional (non robust) formulae around the univariate medians. Example -
+ * 'robscale',2 Data Types - double
+ *
+ *          plots :   Plot on the screen. Scalar. It specifies whether it is
+ *                    necessary to produce a plot
+ *                    with univariate standardized boxplots on the
+ *                    main diagonal and bivariate confidence ellipses out of
+ *                    the main diagonal. If plots is equal to 1 a plot
+ *                    which contains univariate standardized boxplots on the
+ *                    main diagonal and bivariate confidence ellipses out of
+ *                    the main diagonal is produced on the screen. If plots is
+ *                    <> 1 no plot is produced. As default no plot is
+ *                    produced.
+ *                  Example - 'plots',2
+ *                  Data Types - double
+ *
+ *        textlab : plot labels. Scalar.  Scalar which controls the labels in
+ *                    the plots. If textlab=1 and
+ *                    plots=1 the labels associated
+ *                    to the units which are univariate outliers or which are
+ *                    outside the confidence levels of the contours are
+ *                    displayed on the screen.
+ *                  Example - 'textlab',0
+ *                  Data Types - double
+ *
+ *        tag     :   plot tag.  Character. It identifies the handle of the plot
+ * which is about to be created. The default is to use tag 'pl_unibiv'. Notice
+ * that if the program finds a plot which has a tag equal to the one specified
+ * by the user, then the output of the new plot overwrites the existing one in
+ * the same window else a new window is created. Example - 'tag','new_tag' Data
+ * Types - char
+ *
+ *        madcoef :  scaled MAD. Scalar. Coefficient which is used to scale MAD
+ *                    coefficient to have a robust estimate of dispersion.  The
+ *                    default is 1.4815 so that 1.4815*MAD(N(0,1))=1.
+ *                  Example - 'madcoef',2
+ *                  Data Types - double
+ *                    Remark: if mad =median(y-median(y))=0 then the
+ * interquartile range is used. If also the interquartile range is 0 than the MD
+ * (mean absolute deviation) is used.  In other words MD=mean(abs(y-mean(Y))
+ *
+ *
+ *  Output:
+ *
+ *    fre  :  n x 4 matrix which contains details about the univariate and
+ *            bivariate outliers.
+ *            1st col = index of the units;
+ *            2nd col = number of times unit has been declared
+ *            univariate outliers;
+ *            3rd col = number of times unit has been declared
+ *            bivariate outlier;
+ *            4th col = pseudo MD as sum of bivariate MD.
+ *
+ *
+ *  See also: FSMmmd
+ *
+ *  References:
+ *
+ *        Riani, M., Zani S. (1997). An iterative method for the detection of
+ *        multivariate outliers, "Metron", Vol. LV, pp. 101-117.
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *
+ *
+ * <a href="matlab: docsearchFS('unibiv')">Link to the help page for this
+ * function</a>
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ * Arguments    : const emxArray_real_T *Y
+ *                emxArray_real_T *fre
+ * Return Type  : void
+ */
 void b_unibiv(const emxArray_real_T *Y, emxArray_real_T *fre)
 {
   static creal_T b_The1max[7202];
@@ -7467,149 +7588,6 @@ void b_unibiv(const emxArray_real_T *Y, emxArray_real_T *fre)
   int nx;
   int robscale;
   emxInit_real_T(&bivT, 1);
-  /* unibiv has the purpose of detecting univariate and bivariate outliers */
-  /*  */
-  /* <a href="matlab: docsearchFS('unibiv')">Link to the help function</a> */
-  /*  */
-  /*  Required input arguments: */
-  /*  */
-  /*  Y :           Input data. Matrix. */
-  /*                n x v data matrix; n observations and v variables. Rows of
-   */
-  /*                Y represent observations, and columns represent variables.
-   */
-  /*                Missing values (NaN's) and infinite values (Inf's) are */
-  /*                allowed, since observations (rows) with missing or infinite
-   */
-  /*                values will automatically be excluded from the */
-  /*                computations. */
-  /*                 Data Types - single|double */
-  /*  */
-  /*  */
-  /*  Optional input arguments: */
-  /*  */
-  /*            rf  :  It specifies the confidence */
-  /*                   level of the robust bivariate ellipses. Scalar. 0<rf<1.
-   */
-  /*                   The default value is 0.95 that is the outer contour in */
-  /*                   presence of normality for each ellipse should leave */
-  /*                   outside 5% of the values. */
-  /*                  Example - 'rf',0.99 */
-  /*                  Data Types - double */
-  /*  */
-  /*       robscale :   how to compute dispersion. Scalar. It specifies the */
-  /*                    statistical indexes to use to compute the dispersion of
-   */
-  /*                    each variable and the correlation among each pair of */
-  /*                    variables. */
-  /*                    robscale=1 (default): the program uses the median
-   * correlation */
-  /*                    and the MAD as estimate of the dispersion of each
-   * variable; */
-  /*                    robscale=2: the correlation coefficient among ranks is
-   * used */
-  /*                    (Spearman's rho) and the MAD as estimate of the
-   * dispersion */
-  /*                    of each variable; */
-  /*                    robscale=3: the correlation coefficient is based on
-   * Kendall's tau b */
-  /*                    and the MAD as estimate of the dispersion of each */
-  /*                    variable; */
-  /*                    robscale=4: tetracoric correlation coefficient is used
-   * and the MAD */
-  /*                    as estimate of the dispersion of each variable; */
-  /*                    otherwise the correlation and the dispersion of the
-   * variables are */
-  /*                    computed using the traditional (non robust) formulae */
-  /*                    around the univariate medians. */
-  /*                  Example - 'robscale',2 */
-  /*                  Data Types - double */
-  /*  */
-  /*          plots :   Plot on the screen. Scalar. It specifies whether it is
-   */
-  /*                    necessary to produce a plot */
-  /*                    with univariate standardized boxplots on the */
-  /*                    main diagonal and bivariate confidence ellipses out of
-   */
-  /*                    the main diagonal. If plots is equal to 1 a plot */
-  /*                    which contains univariate standardized boxplots on the
-   */
-  /*                    main diagonal and bivariate confidence ellipses out of
-   */
-  /*                    the main diagonal is produced on the screen. If plots is
-   */
-  /*                    <> 1 no plot is produced. As default no plot is */
-  /*                    produced. */
-  /*                  Example - 'plots',2 */
-  /*                  Data Types - double */
-  /*  */
-  /*        textlab : plot labels. Scalar.  Scalar which controls the labels in
-   */
-  /*                    the plots. If textlab=1 and */
-  /*                    plots=1 the labels associated */
-  /*                    to the units which are univariate outliers or which are
-   */
-  /*                    outside the confidence levels of the contours are */
-  /*                    displayed on the screen. */
-  /*                  Example - 'textlab',0 */
-  /*                  Data Types - double */
-  /*  */
-  /*        tag     :   plot tag.  Character. It identifies the handle of the
-   * plot which */
-  /*                    is about to be created. The default is to use tag */
-  /*                    'pl_unibiv'. Notice that if the program finds a plot
-   * which */
-  /*                    has a tag equal to the one specified by the user, then
-   */
-  /*                    the output of the new plot overwrites the existing one
-   */
-  /*                    in the same window else a new window is created. */
-  /*                  Example - 'tag','new_tag' */
-  /*                  Data Types - char */
-  /*  */
-  /*        madcoef :  scaled MAD. Scalar. Coefficient which is used to scale
-   * MAD */
-  /*                    coefficient to have a robust estimate of dispersion.
-   * The */
-  /*                    default is 1.4815 so that 1.4815*MAD(N(0,1))=1. */
-  /*                  Example - 'madcoef',2 */
-  /*                  Data Types - double */
-  /*                    Remark: if mad =median(y-median(y))=0 then the
-   * interquartile */
-  /*                    range is used. If also the interquartile range is 0 */
-  /*                    than the MD (mean absolute deviation) is used.  In */
-  /*                    other words MD=mean(abs(y-mean(Y)) */
-  /*  */
-  /*  */
-  /*  Output: */
-  /*  */
-  /*    fre  :  n x 4 matrix which contains details about the univariate and */
-  /*            bivariate outliers. */
-  /*            1st col = index of the units; */
-  /*            2nd col = number of times unit has been declared */
-  /*            univariate outliers; */
-  /*            3rd col = number of times unit has been declared */
-  /*            bivariate outlier; */
-  /*            4th col = pseudo MD as sum of bivariate MD. */
-  /*  */
-  /*  */
-  /*  See also: FSMmmd */
-  /*  */
-  /*  References: */
-  /*  */
-  /*        Riani, M., Zani S. (1997). An iterative method for the detection of
-   */
-  /*        multivariate outliers, "Metron", Vol. LV, pp. 101-117. */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('unibiv')">Link to the help page for this
-   * function</a> */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /* { */
   /*     % unibiv with all default options. */
@@ -8428,6 +8406,123 @@ void b_unibiv(const emxArray_real_T *Y, emxArray_real_T *fre)
   emxFree_real_T(&MDbiv);
 }
 
+/*
+ * unibiv has the purpose of detecting univariate and bivariate outliers
+ *
+ * <a href="matlab: docsearchFS('unibiv')">Link to the help function</a>
+ *
+ *  Required input arguments:
+ *
+ *  Y :           Input data. Matrix.
+ *                n x v data matrix; n observations and v variables. Rows of
+ *                Y represent observations, and columns represent variables.
+ *                Missing values (NaN's) and infinite values (Inf's) are
+ *                allowed, since observations (rows) with missing or infinite
+ *                values will automatically be excluded from the
+ *                computations.
+ *                 Data Types - single|double
+ *
+ *
+ *  Optional input arguments:
+ *
+ *            rf  :  It specifies the confidence
+ *                   level of the robust bivariate ellipses. Scalar. 0<rf<1.
+ *                   The default value is 0.95 that is the outer contour in
+ *                   presence of normality for each ellipse should leave
+ *                   outside 5% of the values.
+ *                  Example - 'rf',0.99
+ *                  Data Types - double
+ *
+ *       robscale :   how to compute dispersion. Scalar. It specifies the
+ *                    statistical indexes to use to compute the dispersion of
+ *                    each variable and the correlation among each pair of
+ *                    variables.
+ *                    robscale=1 (default): the program uses the median
+ * correlation and the MAD as estimate of the dispersion of each variable;
+ *                    robscale=2: the correlation coefficient among ranks is
+ * used (Spearman's rho) and the MAD as estimate of the dispersion of each
+ * variable; robscale=3: the correlation coefficient is based on Kendall's tau b
+ *                    and the MAD as estimate of the dispersion of each
+ *                    variable;
+ *                    robscale=4: tetracoric correlation coefficient is used and
+ * the MAD as estimate of the dispersion of each variable; otherwise the
+ * correlation and the dispersion of the variables are computed using the
+ * traditional (non robust) formulae around the univariate medians. Example -
+ * 'robscale',2 Data Types - double
+ *
+ *          plots :   Plot on the screen. Scalar. It specifies whether it is
+ *                    necessary to produce a plot
+ *                    with univariate standardized boxplots on the
+ *                    main diagonal and bivariate confidence ellipses out of
+ *                    the main diagonal. If plots is equal to 1 a plot
+ *                    which contains univariate standardized boxplots on the
+ *                    main diagonal and bivariate confidence ellipses out of
+ *                    the main diagonal is produced on the screen. If plots is
+ *                    <> 1 no plot is produced. As default no plot is
+ *                    produced.
+ *                  Example - 'plots',2
+ *                  Data Types - double
+ *
+ *        textlab : plot labels. Scalar.  Scalar which controls the labels in
+ *                    the plots. If textlab=1 and
+ *                    plots=1 the labels associated
+ *                    to the units which are univariate outliers or which are
+ *                    outside the confidence levels of the contours are
+ *                    displayed on the screen.
+ *                  Example - 'textlab',0
+ *                  Data Types - double
+ *
+ *        tag     :   plot tag.  Character. It identifies the handle of the plot
+ * which is about to be created. The default is to use tag 'pl_unibiv'. Notice
+ * that if the program finds a plot which has a tag equal to the one specified
+ * by the user, then the output of the new plot overwrites the existing one in
+ * the same window else a new window is created. Example - 'tag','new_tag' Data
+ * Types - char
+ *
+ *        madcoef :  scaled MAD. Scalar. Coefficient which is used to scale MAD
+ *                    coefficient to have a robust estimate of dispersion.  The
+ *                    default is 1.4815 so that 1.4815*MAD(N(0,1))=1.
+ *                  Example - 'madcoef',2
+ *                  Data Types - double
+ *                    Remark: if mad =median(y-median(y))=0 then the
+ * interquartile range is used. If also the interquartile range is 0 than the MD
+ * (mean absolute deviation) is used.  In other words MD=mean(abs(y-mean(Y))
+ *
+ *
+ *  Output:
+ *
+ *    fre  :  n x 4 matrix which contains details about the univariate and
+ *            bivariate outliers.
+ *            1st col = index of the units;
+ *            2nd col = number of times unit has been declared
+ *            univariate outliers;
+ *            3rd col = number of times unit has been declared
+ *            bivariate outlier;
+ *            4th col = pseudo MD as sum of bivariate MD.
+ *
+ *
+ *  See also: FSMmmd
+ *
+ *  References:
+ *
+ *        Riani, M., Zani S. (1997). An iterative method for the detection of
+ *        multivariate outliers, "Metron", Vol. LV, pp. 101-117.
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *
+ *
+ * <a href="matlab: docsearchFS('unibiv')">Link to the help page for this
+ * function</a>
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ * Arguments    : const emxArray_real_T *Y
+ *                double varargin_2
+ *                emxArray_real_T *fre
+ * Return Type  : void
+ */
 void unibiv(const emxArray_real_T *Y, double varargin_2, emxArray_real_T *fre)
 {
   static creal_T b_The1max[7202];
@@ -8483,149 +8578,6 @@ void unibiv(const emxArray_real_T *Y, double varargin_2, emxArray_real_T *fre)
   int nx;
   int robscale;
   emxInit_real_T(&bivT, 1);
-  /* unibiv has the purpose of detecting univariate and bivariate outliers */
-  /*  */
-  /* <a href="matlab: docsearchFS('unibiv')">Link to the help function</a> */
-  /*  */
-  /*  Required input arguments: */
-  /*  */
-  /*  Y :           Input data. Matrix. */
-  /*                n x v data matrix; n observations and v variables. Rows of
-   */
-  /*                Y represent observations, and columns represent variables.
-   */
-  /*                Missing values (NaN's) and infinite values (Inf's) are */
-  /*                allowed, since observations (rows) with missing or infinite
-   */
-  /*                values will automatically be excluded from the */
-  /*                computations. */
-  /*                 Data Types - single|double */
-  /*  */
-  /*  */
-  /*  Optional input arguments: */
-  /*  */
-  /*            rf  :  It specifies the confidence */
-  /*                   level of the robust bivariate ellipses. Scalar. 0<rf<1.
-   */
-  /*                   The default value is 0.95 that is the outer contour in */
-  /*                   presence of normality for each ellipse should leave */
-  /*                   outside 5% of the values. */
-  /*                  Example - 'rf',0.99 */
-  /*                  Data Types - double */
-  /*  */
-  /*       robscale :   how to compute dispersion. Scalar. It specifies the */
-  /*                    statistical indexes to use to compute the dispersion of
-   */
-  /*                    each variable and the correlation among each pair of */
-  /*                    variables. */
-  /*                    robscale=1 (default): the program uses the median
-   * correlation */
-  /*                    and the MAD as estimate of the dispersion of each
-   * variable; */
-  /*                    robscale=2: the correlation coefficient among ranks is
-   * used */
-  /*                    (Spearman's rho) and the MAD as estimate of the
-   * dispersion */
-  /*                    of each variable; */
-  /*                    robscale=3: the correlation coefficient is based on
-   * Kendall's tau b */
-  /*                    and the MAD as estimate of the dispersion of each */
-  /*                    variable; */
-  /*                    robscale=4: tetracoric correlation coefficient is used
-   * and the MAD */
-  /*                    as estimate of the dispersion of each variable; */
-  /*                    otherwise the correlation and the dispersion of the
-   * variables are */
-  /*                    computed using the traditional (non robust) formulae */
-  /*                    around the univariate medians. */
-  /*                  Example - 'robscale',2 */
-  /*                  Data Types - double */
-  /*  */
-  /*          plots :   Plot on the screen. Scalar. It specifies whether it is
-   */
-  /*                    necessary to produce a plot */
-  /*                    with univariate standardized boxplots on the */
-  /*                    main diagonal and bivariate confidence ellipses out of
-   */
-  /*                    the main diagonal. If plots is equal to 1 a plot */
-  /*                    which contains univariate standardized boxplots on the
-   */
-  /*                    main diagonal and bivariate confidence ellipses out of
-   */
-  /*                    the main diagonal is produced on the screen. If plots is
-   */
-  /*                    <> 1 no plot is produced. As default no plot is */
-  /*                    produced. */
-  /*                  Example - 'plots',2 */
-  /*                  Data Types - double */
-  /*  */
-  /*        textlab : plot labels. Scalar.  Scalar which controls the labels in
-   */
-  /*                    the plots. If textlab=1 and */
-  /*                    plots=1 the labels associated */
-  /*                    to the units which are univariate outliers or which are
-   */
-  /*                    outside the confidence levels of the contours are */
-  /*                    displayed on the screen. */
-  /*                  Example - 'textlab',0 */
-  /*                  Data Types - double */
-  /*  */
-  /*        tag     :   plot tag.  Character. It identifies the handle of the
-   * plot which */
-  /*                    is about to be created. The default is to use tag */
-  /*                    'pl_unibiv'. Notice that if the program finds a plot
-   * which */
-  /*                    has a tag equal to the one specified by the user, then
-   */
-  /*                    the output of the new plot overwrites the existing one
-   */
-  /*                    in the same window else a new window is created. */
-  /*                  Example - 'tag','new_tag' */
-  /*                  Data Types - char */
-  /*  */
-  /*        madcoef :  scaled MAD. Scalar. Coefficient which is used to scale
-   * MAD */
-  /*                    coefficient to have a robust estimate of dispersion.
-   * The */
-  /*                    default is 1.4815 so that 1.4815*MAD(N(0,1))=1. */
-  /*                  Example - 'madcoef',2 */
-  /*                  Data Types - double */
-  /*                    Remark: if mad =median(y-median(y))=0 then the
-   * interquartile */
-  /*                    range is used. If also the interquartile range is 0 */
-  /*                    than the MD (mean absolute deviation) is used.  In */
-  /*                    other words MD=mean(abs(y-mean(Y)) */
-  /*  */
-  /*  */
-  /*  Output: */
-  /*  */
-  /*    fre  :  n x 4 matrix which contains details about the univariate and */
-  /*            bivariate outliers. */
-  /*            1st col = index of the units; */
-  /*            2nd col = number of times unit has been declared */
-  /*            univariate outliers; */
-  /*            3rd col = number of times unit has been declared */
-  /*            bivariate outlier; */
-  /*            4th col = pseudo MD as sum of bivariate MD. */
-  /*  */
-  /*  */
-  /*  See also: FSMmmd */
-  /*  */
-  /*  References: */
-  /*  */
-  /*        Riani, M., Zani S. (1997). An iterative method for the detection of
-   */
-  /*        multivariate outliers, "Metron", Vol. LV, pp. 101-117. */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('unibiv')">Link to the help page for this
-   * function</a> */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /* { */
   /*     % unibiv with all default options. */
@@ -9444,4 +9396,8 @@ void unibiv(const emxArray_real_T *Y, double varargin_2, emxArray_real_T *fre)
   emxFree_real_T(&MDbiv);
 }
 
-/* End of code generation (unibiv.c) */
+/*
+ * File trailer for unibiv.c
+ *
+ * [EOF]
+ */

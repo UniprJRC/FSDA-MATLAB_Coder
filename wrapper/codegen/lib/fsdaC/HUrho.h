@@ -2,17 +2,16 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: HUrho.h
  *
- * HUrho.h
- *
- * Code generation for function 'HUrho'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
 #ifndef HURHO_H
 #define HURHO_H
 
-/* Include files */
+/* Include Files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -30,4 +29,8 @@ void HUrho(const emxArray_real_T *u, double c, emxArray_real_T *rhoHU);
 #endif
 
 #endif
-/* End of code generation (HUrho.h) */
+/*
+ * File trailer for HUrho.h
+ *
+ * [EOF]
+ */

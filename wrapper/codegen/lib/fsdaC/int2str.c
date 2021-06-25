@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: int2str.c
  *
- * int2str.c
- *
- * Code generation for function 'int2str'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "int2str.h"
 #include "fsdaC_rtwutil.h"
 #include "rt_nonfinite.h"
@@ -18,6 +17,12 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : double xin
+ *                char s_data[]
+ *                int s_size[2]
+ * Return Type  : void
+ */
 void int2str(double xin, char s_data[], int s_size[2])
 {
   double x;
@@ -59,4 +64,8 @@ void int2str(double xin, char s_data[], int s_size[2])
   }
 }
 
-/* End of code generation (int2str.c) */
+/*
+ * File trailer for int2str.c
+ *
+ * [EOF]
+ */

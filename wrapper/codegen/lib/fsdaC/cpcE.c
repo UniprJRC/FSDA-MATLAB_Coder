@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: cpcE.c
  *
- * cpcE.c
- *
- * Code generation for function 'cpcE'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "cpcE.h"
 #include "blockedSummation.h"
 #include "eig.h"
@@ -21,6 +20,51 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * cpcE computes updated common rotation matrix when shapes are equal
+ *
+ *   This routine is called when the parametrization is VEE that is when
+ *   equal shape and equal rotation are imposed and we have varying
+ *   determinants.
+ *
+ *
+ *  Required input arguments:
+ *
+ *      lmdc  : row vector of length $k$ containing restricted determinants.
+ * More precisely, the $j$-th element of lmdc contains $\lambda_j^{1/p}$. The
+ * elements of lmdc satisfy the constraint pa.cdet in the sense that
+ *              $\max(lmdc)/\min(lmdc) \leq pa.cdet^{(1/p)}. In other words, the
+ *              ratio between the largest and the smallest determinant is not
+ *              greater than pa.cdet. All the elements of vector lmdc are equal
+ *              if modeltype is E** or if pa.cdet=1;
+ *    SigmaB : p-by-p-by-k array containing the k covariance matrices for the
+ *            k groups.
+ *    niini  : vector of length k containing the size of the groups.
+ *      pa : structure containing: 3 letter character specifying modeltype,
+ *             number of dimensions, number of groups...
+ *             The fields of pars which are used in this routine are pa.p,
+ *             and pa.k a
+ *
+ *
+ *  Output:
+ *
+ *     Omega : p-by-p-k 3D array containing the updated common rotation
+ *                matrix replicated k times. Omega(:,:,j)=Omega2D with j=1,
+ *                ..., k
+ *    Omega2D : p-by-p matrix containing the updated common rotation matrix.
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ * Arguments    : const emxArray_real_T *lmdc
+ *                const emxArray_real_T *SigmaB
+ *                const emxArray_real_T *niini
+ *                double pa_k
+ *                double pa_v
+ *                emxArray_real_T *Omega
+ * Return Type  : void
+ */
 void cpcE(const emxArray_real_T *lmdc, const emxArray_real_T *SigmaB,
           const emxArray_real_T *niini, double pa_k, double pa_v,
           emxArray_real_T *Omega)
@@ -40,49 +84,6 @@ void cpcE(const emxArray_real_T *lmdc, const emxArray_real_T *SigmaB,
   int loop_ub;
   int nx;
   emxInit_real_T(&Sigma, 2);
-  /* cpcE computes updated common rotation matrix when shapes are equal */
-  /*  */
-  /*   This routine is called when the parametrization is VEE that is when */
-  /*   equal shape and equal rotation are imposed and we have varying */
-  /*   determinants. */
-  /*  */
-  /*  */
-  /*  Required input arguments: */
-  /*  */
-  /*      lmdc  : row vector of length $k$ containing restricted determinants.
-   * More */
-  /*              precisely, the $j$-th element of lmdc contains
-   * $\lambda_j^{1/p}$. */
-  /*              The elements of lmdc satisfy the constraint pa.cdet in the
-   * sense that */
-  /*              $\max(lmdc)/\min(lmdc) \leq pa.cdet^{(1/p)}. In other words,
-   * the */
-  /*              ratio between the largest and the smallest determinant is not
-   */
-  /*              greater than pa.cdet. All the elements of vector lmdc are
-   * equal */
-  /*              if modeltype is E** or if pa.cdet=1; */
-  /*    SigmaB : p-by-p-by-k array containing the k covariance matrices for the
-   */
-  /*            k groups. */
-  /*    niini  : vector of length k containing the size of the groups. */
-  /*      pa : structure containing: 3 letter character specifying modeltype, */
-  /*             number of dimensions, number of groups... */
-  /*             The fields of pars which are used in this routine are pa.p, */
-  /*             and pa.k a */
-  /*  */
-  /*  */
-  /*  Output: */
-  /*  */
-  /*     Omega : p-by-p-k 3D array containing the updated common rotation */
-  /*                matrix replicated k times. Omega(:,:,j)=Omega2D with j=1, */
-  /*                ..., k */
-  /*    Omega2D : p-by-p matrix containing the updated common rotation matrix.
-   */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Beginning of code */
   sumnini = blockedSummation(niini, niini->size[0]);
   /*  Inefficient way of obtaining Sigma */
@@ -203,4 +204,8 @@ void cpcE(const emxArray_real_T *lmdc, const emxArray_real_T *SigmaB,
   emxFree_real_T(&Sigma);
 }
 
-/* End of code generation (cpcE.c) */
+/*
+ * File trailer for cpcE.c
+ *
+ * [EOF]
+ */

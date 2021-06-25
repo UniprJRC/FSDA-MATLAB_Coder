@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: tinv.c
  *
- * tinv.c
- *
- * Code generation for function 'tinv'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "tinv.h"
 #include "betaincinv.h"
 #include "erfcinv.h"
@@ -21,6 +20,12 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const emxArray_real_T *p
+ *                const emxArray_real_T *v
+ *                emxArray_real_T *x
+ * Return Type  : void
+ */
 void b_tinv(const emxArray_real_T *p, const emxArray_real_T *v,
             emxArray_real_T *x)
 {
@@ -110,6 +115,11 @@ void b_tinv(const emxArray_real_T *p, const emxArray_real_T *v,
   }
 }
 
+/*
+ * Arguments    : double p
+ *                double v
+ * Return Type  : double
+ */
 double tinv(double p, double v)
 {
   creal_T dc;
@@ -166,4 +176,8 @@ double tinv(double p, double v)
   return x;
 }
 
-/* End of code generation (tinv.c) */
+/*
+ * File trailer for tinv.c
+ *
+ * [EOF]
+ */

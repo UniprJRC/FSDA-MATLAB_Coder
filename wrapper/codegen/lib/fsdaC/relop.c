@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: relop.c
  *
- * relop.c
- *
- * Code generation for function 'relop'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "relop.h"
 #include "fsdaC_rtwutil.h"
 #include "rt_nonfinite.h"
@@ -22,6 +21,11 @@
 static double rt_atan2d_snf(double u0, double u1);
 
 /* Function Definitions */
+/*
+ * Arguments    : double u0
+ *                double u1
+ * Return Type  : double
+ */
 static double rt_atan2d_snf(double u0, double u1)
 {
   double y;
@@ -55,6 +59,13 @@ static double rt_atan2d_snf(double u0, double u1)
   return y;
 }
 
+/*
+ * Arguments    : const creal_T a
+ *                const creal_T b
+ *                double *x
+ *                double *y
+ * Return Type  : void
+ */
 void absRelopProxies(const creal_T a, const creal_T b, double *x, double *y)
 {
   bool SCALEA;
@@ -105,4 +116,8 @@ void absRelopProxies(const creal_T a, const creal_T b, double *x, double *y)
   }
 }
 
-/* End of code generation (relop.c) */
+/*
+ * File trailer for relop.c
+ *
+ * [EOF]
+ */

@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: bc.c
  *
- * bc.c
- *
- * Code generation for function 'bc'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "bc.h"
 #include "colon.h"
 #include "fsdaC_emxutil.h"
@@ -21,6 +20,59 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * bc returns the Binomial coefficient
+ *
+ * <a href="matlab: docsearchFS('bc')">Link to the help page for this
+ * function</a>
+ *
+ *  Required input arguments:
+ *
+ *        n:  Number of elements. Non negative integer.
+ *            Data Types - single|double
+ *
+ *        k:  Items to choose from the set of n elements. Non negative integer.
+ *            Data Types - single|double
+ *
+ *  Optional input arguments:
+ *
+ *  Output:
+ *
+ *        c  : The binomial coefficient $n!/k!(n-k)!$. Integer. This is the
+ *             coefficient of the $x^k$ term in the polynomial expansion of
+ *             the binomial power $(1 + x)^n$. This is also the so called
+ *             choose function of n and k (nchoosek in MATLAB), i.e. the
+ *             number of k-element subsets (the k-combinations) of a set of n
+ *             objects. When a coefficient is large, results may be inexact.
+ *             The result is only accurate to 15 digits for double-precision
+ *             inputs in 32bits computers.
+ *
+ *  See also: nchoosek
+ *
+ *  References:
+ *
+ *     Knuth, D. E. (1997). "The Art of Computer Programming", Volume 1:
+ *     Fundamental Algorithms, Third ed. Addison-Wesley. [pp. 52--74].
+ *
+ *  Acknowledgements:
+ *
+ *  Matlab function bc has been adapted to this toolbox by FSDA team
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *
+ * <a href="matlab: docsearchFS('bc')">Link to the help page for this
+ * function</a>
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ *  Examples:
+ *
+ * Arguments    : double n
+ *                double k
+ * Return Type  : double
+ */
 double bc(double n, double k)
 {
   emxArray_real_T *dens;
@@ -28,57 +80,6 @@ double bc(double n, double k)
   double a;
   int b_k;
   int vlen;
-  /* bc returns the Binomial coefficient */
-  /*  */
-  /* <a href="matlab: docsearchFS('bc')">Link to the help page for this
-   * function</a> */
-  /*  */
-  /*  Required input arguments: */
-  /*  */
-  /*        n:  Number of elements. Non negative integer.  */
-  /*            Data Types - single|double */
-  /*  */
-  /*        k:  Items to choose from the set of n elements. Non negative
-   * integer. */
-  /*            Data Types - single|double */
-  /*  */
-  /*  Optional input arguments: */
-  /*  */
-  /*  Output:     */
-  /*   */
-  /*        c  : The binomial coefficient $n!/k!(n-k)!$. Integer. This is the */
-  /*             coefficient of the $x^k$ term in the polynomial expansion of */
-  /*             the binomial power $(1 + x)^n$. This is also the so called */
-  /*             choose function of n and k (nchoosek in MATLAB), i.e. the */
-  /*             number of k-element subsets (the k-combinations) of a set of n
-   */
-  /*             objects. When a coefficient is large, results may be inexact.
-   */
-  /*             The result is only accurate to 15 digits for double-precision
-   */
-  /*             inputs in 32bits computers. */
-  /*  */
-  /*  See also: nchoosek */
-  /*  */
-  /*  References: */
-  /*  */
-  /*     Knuth, D. E. (1997). "The Art of Computer Programming", Volume 1: */
-  /*     Fundamental Algorithms, Third ed. Addison-Wesley. [pp. 52--74].  */
-  /*  */
-  /*  Acknowledgements:  */
-  /*  */
-  /*  Matlab function bc has been adapted to this toolbox by FSDA team */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('bc')">Link to the help page for this
-   * function</a> */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
-  /*  */
-  /*  Examples: */
   /* { */
   /*     %% Number of pairs chosen among 6 elements. */
   /*     bc(6,2) */
@@ -163,4 +164,8 @@ double bc(double n, double k)
   return rt_roundd_snf(a);
 }
 
-/* End of code generation (bc.c) */
+/*
+ * File trailer for bc.c
+ *
+ * [EOF]
+ */

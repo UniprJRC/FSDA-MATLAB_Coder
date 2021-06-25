@@ -2,19 +2,22 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: eml_rand_mt19937ar.c
  *
- * eml_rand_mt19937ar.c
- *
- * Code generation for function 'eml_rand_mt19937ar'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "eml_rand_mt19937ar.h"
 #include "rt_nonfinite.h"
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : unsigned int b_state[625]
+ * Return Type  : double
+ */
 double eml_rand_mt19937ar(unsigned int b_state[625])
 {
   double r;
@@ -107,4 +110,8 @@ double eml_rand_mt19937ar(unsigned int b_state[625])
   return r;
 }
 
-/* End of code generation (eml_rand_mt19937ar.c) */
+/*
+ * File trailer for eml_rand_mt19937ar.c
+ *
+ * [EOF]
+ */

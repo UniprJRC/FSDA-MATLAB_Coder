@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: FSRfan_wrapper.c
  *
- * FSRfan_wrapper.c
- *
- * Code generation for function 'FSRfan_wrapper'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "FSRfan_wrapper.h"
 #include "LXS.h"
 #include "Score.h"
@@ -40,6 +39,24 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Wrapper function for FSRfan. NV pair names are not taken as
+ *  inputs. Instead, just the values are taken as inputs.
+ *
+ * Arguments    : const emxArray_real_T *y
+ *                const emxArray_real_T *X
+ *                bool intercept
+ *                bool nocheck
+ *                const emxArray_real_T *la
+ *                double h
+ *                double nsamp
+ *                const emxArray_real_T *lms
+ *                double init
+ *                const emxArray_char_T *family
+ *                bool msg
+ *                struct_FSRfan_T *out
+ * Return Type  : void
+ */
 void FSRfan_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                     bool intercept, bool nocheck, const emxArray_real_T *la,
                     double h, double nsamp, const emxArray_real_T *lms,
@@ -96,8 +113,6 @@ void FSRfan_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   if (!isInitialized_fsdaC) {
     fsdaC_initialize();
   }
-  /*  Wrapper function for FSRfan. NV pair names are not taken as */
-  /*  inputs. Instead, just the values are taken as inputs. */
   /*  Required input arguments */
   /*  y: a column vector of doubles of any length */
   /*  ARGS{1}{1} = coder.typeof(0,[Inf 1],[1 0]); */
@@ -1545,4 +1560,8 @@ void FSRfan_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   }
 }
 
-/* End of code generation (FSRfan_wrapper.c) */
+/*
+ * File trailer for FSRfan_wrapper.c
+ *
+ * [EOF]
+ */

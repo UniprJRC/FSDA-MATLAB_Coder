@@ -2,17 +2,16 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: fsdaC_terminate.h
  *
- * fsdaC_terminate.h
- *
- * Code generation for function 'fsdaC_terminate'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
 #ifndef FSDAC_TERMINATE_H
 #define FSDAC_TERMINATE_H
 
-/* Include files */
+/* Include Files */
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -29,4 +28,8 @@ extern void fsdaC_terminate(void);
 #endif
 
 #endif
-/* End of code generation (fsdaC_terminate.h) */
+/*
+ * File trailer for fsdaC_terminate.h
+ *
+ * [EOF]
+ */

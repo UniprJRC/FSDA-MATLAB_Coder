@@ -2,11 +2,10 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: main.c
  *
- * main.c
- *
- * Code generation for function 'main'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
 /*************************************************************************/
@@ -34,7 +33,7 @@
 /*                                                                       */
 /*************************************************************************/
 
-/* Include files */
+/* Include Files */
 #include "main.h"
 #include "FSM_wrapper.h"
 #include "FSMbsb_wrapper.h"
@@ -113,6 +112,10 @@ static void main_tclust_wrapper(void);
 static void main_tclust_wrapper1(void);
 
 /* Function Definitions */
+/*
+ * Arguments    : char result[3]
+ * Return Type  : void
+ */
 static void argInit_1x3_char_T(char result[3])
 {
   int idx1;
@@ -124,6 +127,10 @@ Change this value to the value that the application requires. */
   }
 }
 
+/*
+ * Arguments    : void
+ * Return Type  : emxArray_real_T *
+ */
 static emxArray_real_T *argInit_Unboundedx1_real_T(void)
 {
   emxArray_real_T *result;
@@ -141,6 +148,10 @@ Change this value to the value that the application requires. */
   return result;
 }
 
+/*
+ * Arguments    : void
+ * Return Type  : emxArray_real_T *
+ */
 static emxArray_real_T *argInit_Unboundedxd1_real_T(void)
 {
   emxArray_real_T *result;
@@ -160,16 +171,28 @@ Change this value to the value that the application requires. */
   return result;
 }
 
+/*
+ * Arguments    : void
+ * Return Type  : bool
+ */
 static bool argInit_boolean_T(void)
 {
   return false;
 }
 
+/*
+ * Arguments    : void
+ * Return Type  : char
+ */
 static char argInit_char_T(void)
 {
   return '?';
 }
 
+/*
+ * Arguments    : void
+ * Return Type  : emxArray_char_T *
+ */
 static emxArray_char_T *argInit_d1xUnbounded_char_T(void)
 {
   emxArray_char_T *result;
@@ -189,6 +212,11 @@ Change this value to the value that the application requires. */
   return result;
 }
 
+/*
+ * Arguments    : double result_data[]
+ *                int result_size[2]
+ * Return Type  : void
+ */
 static void argInit_d1xd1_real_T(double result_data[], int result_size[2])
 {
   /* Set the size of the array.
@@ -199,6 +227,11 @@ Change this size to the value that the application requires. */
   result_data[0] = argInit_real_T();
 }
 
+/*
+ * Arguments    : char result_data[]
+ *                int result_size[2]
+ * Return Type  : void
+ */
 static void argInit_d1xd3_char_T(char result_data[], int result_size[2])
 {
   int idx1;
@@ -214,6 +247,11 @@ Change this value to the value that the application requires. */
   }
 }
 
+/*
+ * Arguments    : double result_data[]
+ *                int result_size[2]
+ * Return Type  : void
+ */
 static void argInit_d2xd1_real_T(double result_data[], int result_size[2])
 {
   int idx0;
@@ -227,11 +265,19 @@ Change this size to the value that the application requires. */
   }
 }
 
+/*
+ * Arguments    : void
+ * Return Type  : double
+ */
 static double argInit_real_T(void)
 {
   return 0.0;
 }
 
+/*
+ * Arguments    : void
+ * Return Type  : struct_LTStsmodel_T
+ */
 static struct_LTStsmodel_T argInit_struct_LTStsmodel_T(void)
 {
   struct_LTStsmodel_T result;
@@ -248,6 +294,10 @@ Change this value to the value that the application requires. */
   return result;
 }
 
+/*
+ * Arguments    : void
+ * Return Type  : struct_LXSlms_T
+ */
 static struct_LXSlms_T argInit_struct_LXSlms_T(void)
 {
   struct_LXSlms_T result;
@@ -263,6 +313,10 @@ Change this value to the value that the application requires. */
   return result;
 }
 
+/*
+ * Arguments    : void
+ * Return Type  : emxArray_real_T *
+ */
 static emxArray_real_T *c_argInit_UnboundedxUnbounded_r(void)
 {
   emxArray_real_T *result;
@@ -282,6 +336,10 @@ Change this value to the value that the application requires. */
   return result;
 }
 
+/*
+ * Arguments    : void
+ * Return Type  : struct_LTStslshiftlocref_T
+ */
 static struct_LTStslshiftlocref_T c_argInit_struct_LTStslshiftloc(void)
 {
   struct_LTStslshiftlocref_T result;
@@ -295,6 +353,10 @@ Change this value to the value that the application requires. */
   return result;
 }
 
+/*
+ * Arguments    : struct_tclustrestrfactor_T *result
+ * Return Type  : void
+ */
 static void c_argInit_struct_tclustrestrfac(struct_tclustrestrfactor_T *result)
 {
   double result_tmp;
@@ -321,6 +383,10 @@ Change this value to the value that the application requires. */
   result->msg = b_result_tmp;
 }
 
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
 static void main_FSM_wrapper(void)
 {
   emxArray_real_T *Y;
@@ -352,6 +418,10 @@ static void main_FSM_wrapper(void)
   emxDestroyArray_real_T(Y);
 }
 
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
 static void main_FSMbsb_wrapper(void)
 {
   emxArray_real_T *BB;
@@ -379,6 +449,10 @@ static void main_FSMbsb_wrapper(void)
   emxDestroyArray_real_T(Y);
 }
 
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
 static void main_FSMmmd_wrapper(void)
 {
   emxArray_real_T *BB;
@@ -410,6 +484,10 @@ static void main_FSMmmd_wrapper(void)
   emxDestroyArray_real_T(Y);
 }
 
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
 static void main_FSR_wrapper(void)
 {
   emxArray_real_T *X;
@@ -443,6 +521,10 @@ static void main_FSR_wrapper(void)
   emxDestroyArray_real_T(y);
 }
 
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
 static void main_FSRbsb_wrapper(void)
 {
   emxArray_real32_T *BB;
@@ -475,6 +557,10 @@ static void main_FSRbsb_wrapper(void)
   emxDestroyArray_real_T(y);
 }
 
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
 static void main_FSRfan_wrapper(void)
 {
   emxArray_char_T *family;
@@ -510,6 +596,10 @@ static void main_FSRfan_wrapper(void)
   emxDestroyArray_real_T(y);
 }
 
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
 static void main_FSRmdr_wrapper(void)
 {
   emxArray_real_T *BB;
@@ -561,6 +651,10 @@ static void main_FSRmdr_wrapper(void)
   emxDestroyArray_real_T(y);
 }
 
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
 static void main_LTSts_wrapper(void)
 {
   emxArray_real_T *C;
@@ -599,6 +693,10 @@ static void main_LTSts_wrapper(void)
   emxDestroyArray_real_T(y);
 }
 
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
 static void main_LXS_wrapper(void)
 {
   emxArray_real_T *C;
@@ -631,6 +729,10 @@ static void main_LXS_wrapper(void)
   emxDestroyArray_real_T(y);
 }
 
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
 static void main_LXS_wrapper1(void)
 {
   emxArray_real_T *C;
@@ -666,6 +768,10 @@ static void main_LXS_wrapper1(void)
   emxDestroyArray_real_T(y);
 }
 
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
 static void main_addt_wrapper(void)
 {
   emxArray_real_T *X;
@@ -693,6 +799,10 @@ static void main_addt_wrapper(void)
   emxDestroyArray_real_T(y);
 }
 
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
 static void main_tclust_wrapper(void)
 {
   emxArray_real_T *C;
@@ -724,6 +834,10 @@ static void main_tclust_wrapper(void)
   emxDestroyArray_real_T(Y);
 }
 
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
 static void main_tclust_wrapper1(void)
 {
   emxArray_real_T *C;
@@ -758,6 +872,11 @@ static void main_tclust_wrapper1(void)
   emxDestroyArray_real_T(Y);
 }
 
+/*
+ * Arguments    : int argc
+ *                char **argv
+ * Return Type  : int
+ */
 int main(int argc, char **argv)
 {
   (void)argc;
@@ -785,4 +904,8 @@ You do not need to do this more than one time. */
   return 0;
 }
 
-/* End of code generation (main.c) */
+/*
+ * File trailer for main.c
+ *
+ * [EOF]
+ */

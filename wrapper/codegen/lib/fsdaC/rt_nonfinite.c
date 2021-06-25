@@ -2,11 +2,10 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: rt_nonfinite.c
  *
- * rt_nonfinite.c
- *
- * Code generation for function 'FSM_wrapper'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
 /*
@@ -14,7 +13,7 @@
  *      MATLAB for code generation function to initialize non-finites,
  *      (Inf, NaN and -Inf).
  */
-/* Include files */
+/* Include Files */
 #include "rt_nonfinite.h"
 #include <math.h>
 
@@ -73,4 +72,8 @@ boolean_T rtIsNaNF(real32_T value)
   return (isnan((real_T)value) != 0U);
 }
 
-/* End of code generation (rt_nonfinite.c) */
+/*
+ * File trailer for rt_nonfinite.c
+ *
+ * [EOF]
+ */

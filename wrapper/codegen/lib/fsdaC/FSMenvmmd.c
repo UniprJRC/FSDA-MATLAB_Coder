@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: FSMenvmmd.c
  *
- * FSMenvmmd.c
- *
- * Code generation for function 'FSMenvmmd'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "FSMenvmmd.h"
 #include "chi2cdf.h"
 #include "chi2inv.h"
@@ -24,6 +23,73 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * FSMenvmmd computes the theoretical envelopes of Minimum MD outside subset
+ * during the search
+ *
+ * <a href="matlab: docsearchFS('FSMenvmmd')">Link to the help function</a>
+ *
+ *  Required input arguments:
+ *
+ *  n :           Number of observations. Scalar. Number of observations.
+ *                Data Types - single | double
+ *  v :           Number of variables. Scalar. Number of variables.
+ *                Data Types - single | double
+ *
+ *  Optional input arguments:
+ *
+ *  init :       Point where to start monitoring required diagnostics. Scalar.
+ *               Note that if bsb is supplied, init>=length(bsb). If init is not
+ *               specified it will be set equal to floor(n*0.6).
+ *                  Example - 'init',50
+ *                  Data Types - double
+ *
+ *  prob:        quantiles for which envelopes have
+ *                to be computed. Vector. Vector containing 1 x k elements .
+ *                The default is to produce 1 per cent, 50 per cent and 99 per
+ * cent envelopes. Example - 'prob',[0.05 0.95] Data Types - double
+ *
+ *    scaled:  It indicates how to compute the envelopes. Scalar.
+ *                If scaled>0 the envelopes are produced for
+ *                scaled Mahalanobis distances (no consistency factor is
+ *                applied) else the traditional consistency factor is applied
+ *                (this is the default)
+ *                  Example - 'scaled',0
+ *                  Data Types - double
+ *
+ *
+ *  Output:
+ *
+ *   MMDenv=      n-m0+1 x length(prob)+1 columns containing the envelopes
+ *                for the requested quantiles.
+ *                1st col = fwd search index from m0 to n-1;
+ *                2nd col = envelope for quantile prob[1];
+ *                3rd col = envelope for quantile prob[2];
+ *                ...;
+ *                (k+1) col = envelope for quantile prob[k].
+ *
+ *  See also FSMenvmmd.m, FSM.m
+ *
+ *  References:
+ *
+ *  Riani, M., Atkinson, A.C. and Cerioli, A. (2009), Finding an unknown
+ *  number of multivariate outliers, "Journal of the Royal Statistical
+ *  Society Series B", Vol. 71, pp. 201-221.
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *
+ * <a href="matlab: docsearchFS('FSMenvmmd')">Link to the help function</a>
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ * Arguments    : double n
+ *                double v
+ *                double varargin_4
+ *                emxArray_real_T *MMDenv
+ * Return Type  : void
+ */
 void FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
 {
   static const double varargin_2[6] = {0.99, 0.999, 0.9999, 0.99999, 0.01, 0.5};
@@ -52,71 +118,6 @@ void FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   int outsize_idx_1;
   signed char input_sizes_idx_1;
   bool empty_non_axis_sizes;
-  /* FSMenvmmd computes the theoretical envelopes of Minimum MD outside subset
-   * during the search */
-  /*  */
-  /* <a href="matlab: docsearchFS('FSMenvmmd')">Link to the help function</a> */
-  /*  */
-  /*  Required input arguments: */
-  /*  */
-  /*  n :           Number of observations. Scalar. Number of observations. */
-  /*                Data Types - single | double */
-  /*  v :           Number of variables. Scalar. Number of variables. */
-  /*                Data Types - single | double */
-  /*  */
-  /*  Optional input arguments: */
-  /*  */
-  /*  init :       Point where to start monitoring required diagnostics. Scalar.
-   */
-  /*               Note that if bsb is supplied, init>=length(bsb). If init is
-   * not */
-  /*               specified it will be set equal to floor(n*0.6). */
-  /*                  Example - 'init',50 */
-  /*                  Data Types - double */
-  /*  */
-  /*  prob:        quantiles for which envelopes have */
-  /*                to be computed. Vector. Vector containing 1 x k elements .
-   */
-  /*                The default is to produce 1 per cent, 50 per cent and 99 per
-   * cent envelopes. */
-  /*                  Example - 'prob',[0.05 0.95] */
-  /*                  Data Types - double */
-  /*  */
-  /*    scaled:  It indicates how to compute the envelopes. Scalar. */
-  /*                If scaled>0 the envelopes are produced for */
-  /*                scaled Mahalanobis distances (no consistency factor is */
-  /*                applied) else the traditional consistency factor is applied
-   */
-  /*                (this is the default) */
-  /*                  Example - 'scaled',0 */
-  /*                  Data Types - double */
-  /*  */
-  /*  */
-  /*  Output: */
-  /*  */
-  /*   MMDenv=      n-m0+1 x length(prob)+1 columns containing the envelopes */
-  /*                for the requested quantiles. */
-  /*                1st col = fwd search index from m0 to n-1; */
-  /*                2nd col = envelope for quantile prob[1]; */
-  /*                3rd col = envelope for quantile prob[2]; */
-  /*                ...; */
-  /*                (k+1) col = envelope for quantile prob[k]. */
-  /*  */
-  /*  See also FSMenvmmd.m, FSM.m */
-  /*  */
-  /*  References: */
-  /*  */
-  /*  Riani, M., Atkinson, A.C. and Cerioli, A. (2009), Finding an unknown */
-  /*  number of multivariate outliers, "Journal of the Royal Statistical */
-  /*  Society Series B", Vol. 71, pp. 201-221. */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('FSMenvmmd')">Link to the help function</a> */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /*  */
   /* { */
@@ -457,6 +458,73 @@ void FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   emxFree_real_T(&b);
 }
 
+/*
+ * FSMenvmmd computes the theoretical envelopes of Minimum MD outside subset
+ * during the search
+ *
+ * <a href="matlab: docsearchFS('FSMenvmmd')">Link to the help function</a>
+ *
+ *  Required input arguments:
+ *
+ *  n :           Number of observations. Scalar. Number of observations.
+ *                Data Types - single | double
+ *  v :           Number of variables. Scalar. Number of variables.
+ *                Data Types - single | double
+ *
+ *  Optional input arguments:
+ *
+ *  init :       Point where to start monitoring required diagnostics. Scalar.
+ *               Note that if bsb is supplied, init>=length(bsb). If init is not
+ *               specified it will be set equal to floor(n*0.6).
+ *                  Example - 'init',50
+ *                  Data Types - double
+ *
+ *  prob:        quantiles for which envelopes have
+ *                to be computed. Vector. Vector containing 1 x k elements .
+ *                The default is to produce 1 per cent, 50 per cent and 99 per
+ * cent envelopes. Example - 'prob',[0.05 0.95] Data Types - double
+ *
+ *    scaled:  It indicates how to compute the envelopes. Scalar.
+ *                If scaled>0 the envelopes are produced for
+ *                scaled Mahalanobis distances (no consistency factor is
+ *                applied) else the traditional consistency factor is applied
+ *                (this is the default)
+ *                  Example - 'scaled',0
+ *                  Data Types - double
+ *
+ *
+ *  Output:
+ *
+ *   MMDenv=      n-m0+1 x length(prob)+1 columns containing the envelopes
+ *                for the requested quantiles.
+ *                1st col = fwd search index from m0 to n-1;
+ *                2nd col = envelope for quantile prob[1];
+ *                3rd col = envelope for quantile prob[2];
+ *                ...;
+ *                (k+1) col = envelope for quantile prob[k].
+ *
+ *  See also FSMenvmmd.m, FSM.m
+ *
+ *  References:
+ *
+ *  Riani, M., Atkinson, A.C. and Cerioli, A. (2009), Finding an unknown
+ *  number of multivariate outliers, "Journal of the Royal Statistical
+ *  Society Series B", Vol. 71, pp. 201-221.
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *
+ * <a href="matlab: docsearchFS('FSMenvmmd')">Link to the help function</a>
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ * Arguments    : double n
+ *                double v
+ *                double varargin_4
+ *                emxArray_real_T *MMDenv
+ * Return Type  : void
+ */
 void b_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
 {
   emxArray_real_T *a;
@@ -480,71 +548,6 @@ void b_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   int outsize_idx_1;
   signed char input_sizes_idx_1;
   bool empty_non_axis_sizes;
-  /* FSMenvmmd computes the theoretical envelopes of Minimum MD outside subset
-   * during the search */
-  /*  */
-  /* <a href="matlab: docsearchFS('FSMenvmmd')">Link to the help function</a> */
-  /*  */
-  /*  Required input arguments: */
-  /*  */
-  /*  n :           Number of observations. Scalar. Number of observations. */
-  /*                Data Types - single | double */
-  /*  v :           Number of variables. Scalar. Number of variables. */
-  /*                Data Types - single | double */
-  /*  */
-  /*  Optional input arguments: */
-  /*  */
-  /*  init :       Point where to start monitoring required diagnostics. Scalar.
-   */
-  /*               Note that if bsb is supplied, init>=length(bsb). If init is
-   * not */
-  /*               specified it will be set equal to floor(n*0.6). */
-  /*                  Example - 'init',50 */
-  /*                  Data Types - double */
-  /*  */
-  /*  prob:        quantiles for which envelopes have */
-  /*                to be computed. Vector. Vector containing 1 x k elements .
-   */
-  /*                The default is to produce 1 per cent, 50 per cent and 99 per
-   * cent envelopes. */
-  /*                  Example - 'prob',[0.05 0.95] */
-  /*                  Data Types - double */
-  /*  */
-  /*    scaled:  It indicates how to compute the envelopes. Scalar. */
-  /*                If scaled>0 the envelopes are produced for */
-  /*                scaled Mahalanobis distances (no consistency factor is */
-  /*                applied) else the traditional consistency factor is applied
-   */
-  /*                (this is the default) */
-  /*                  Example - 'scaled',0 */
-  /*                  Data Types - double */
-  /*  */
-  /*  */
-  /*  Output: */
-  /*  */
-  /*   MMDenv=      n-m0+1 x length(prob)+1 columns containing the envelopes */
-  /*                for the requested quantiles. */
-  /*                1st col = fwd search index from m0 to n-1; */
-  /*                2nd col = envelope for quantile prob[1]; */
-  /*                3rd col = envelope for quantile prob[2]; */
-  /*                ...; */
-  /*                (k+1) col = envelope for quantile prob[k]. */
-  /*  */
-  /*  See also FSMenvmmd.m, FSM.m */
-  /*  */
-  /*  References: */
-  /*  */
-  /*  Riani, M., Atkinson, A.C. and Cerioli, A. (2009), Finding an unknown */
-  /*  number of multivariate outliers, "Journal of the Royal Statistical */
-  /*  Society Series B", Vol. 71, pp. 201-221. */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('FSMenvmmd')">Link to the help function</a> */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /*  */
   /* { */
@@ -877,6 +880,73 @@ void b_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   emxFree_real_T(&b);
 }
 
+/*
+ * FSMenvmmd computes the theoretical envelopes of Minimum MD outside subset
+ * during the search
+ *
+ * <a href="matlab: docsearchFS('FSMenvmmd')">Link to the help function</a>
+ *
+ *  Required input arguments:
+ *
+ *  n :           Number of observations. Scalar. Number of observations.
+ *                Data Types - single | double
+ *  v :           Number of variables. Scalar. Number of variables.
+ *                Data Types - single | double
+ *
+ *  Optional input arguments:
+ *
+ *  init :       Point where to start monitoring required diagnostics. Scalar.
+ *               Note that if bsb is supplied, init>=length(bsb). If init is not
+ *               specified it will be set equal to floor(n*0.6).
+ *                  Example - 'init',50
+ *                  Data Types - double
+ *
+ *  prob:        quantiles for which envelopes have
+ *                to be computed. Vector. Vector containing 1 x k elements .
+ *                The default is to produce 1 per cent, 50 per cent and 99 per
+ * cent envelopes. Example - 'prob',[0.05 0.95] Data Types - double
+ *
+ *    scaled:  It indicates how to compute the envelopes. Scalar.
+ *                If scaled>0 the envelopes are produced for
+ *                scaled Mahalanobis distances (no consistency factor is
+ *                applied) else the traditional consistency factor is applied
+ *                (this is the default)
+ *                  Example - 'scaled',0
+ *                  Data Types - double
+ *
+ *
+ *  Output:
+ *
+ *   MMDenv=      n-m0+1 x length(prob)+1 columns containing the envelopes
+ *                for the requested quantiles.
+ *                1st col = fwd search index from m0 to n-1;
+ *                2nd col = envelope for quantile prob[1];
+ *                3rd col = envelope for quantile prob[2];
+ *                ...;
+ *                (k+1) col = envelope for quantile prob[k].
+ *
+ *  See also FSMenvmmd.m, FSM.m
+ *
+ *  References:
+ *
+ *  Riani, M., Atkinson, A.C. and Cerioli, A. (2009), Finding an unknown
+ *  number of multivariate outliers, "Journal of the Royal Statistical
+ *  Society Series B", Vol. 71, pp. 201-221.
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *
+ * <a href="matlab: docsearchFS('FSMenvmmd')">Link to the help function</a>
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ * Arguments    : double n
+ *                double v
+ *                double varargin_4
+ *                emxArray_real_T *MMDenv
+ * Return Type  : void
+ */
 void c_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
 {
   emxArray_real_T *b;
@@ -902,71 +972,6 @@ void c_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   int outsize_idx_1;
   signed char input_sizes_idx_1;
   bool empty_non_axis_sizes;
-  /* FSMenvmmd computes the theoretical envelopes of Minimum MD outside subset
-   * during the search */
-  /*  */
-  /* <a href="matlab: docsearchFS('FSMenvmmd')">Link to the help function</a> */
-  /*  */
-  /*  Required input arguments: */
-  /*  */
-  /*  n :           Number of observations. Scalar. Number of observations. */
-  /*                Data Types - single | double */
-  /*  v :           Number of variables. Scalar. Number of variables. */
-  /*                Data Types - single | double */
-  /*  */
-  /*  Optional input arguments: */
-  /*  */
-  /*  init :       Point where to start monitoring required diagnostics. Scalar.
-   */
-  /*               Note that if bsb is supplied, init>=length(bsb). If init is
-   * not */
-  /*               specified it will be set equal to floor(n*0.6). */
-  /*                  Example - 'init',50 */
-  /*                  Data Types - double */
-  /*  */
-  /*  prob:        quantiles for which envelopes have */
-  /*                to be computed. Vector. Vector containing 1 x k elements .
-   */
-  /*                The default is to produce 1 per cent, 50 per cent and 99 per
-   * cent envelopes. */
-  /*                  Example - 'prob',[0.05 0.95] */
-  /*                  Data Types - double */
-  /*  */
-  /*    scaled:  It indicates how to compute the envelopes. Scalar. */
-  /*                If scaled>0 the envelopes are produced for */
-  /*                scaled Mahalanobis distances (no consistency factor is */
-  /*                applied) else the traditional consistency factor is applied
-   */
-  /*                (this is the default) */
-  /*                  Example - 'scaled',0 */
-  /*                  Data Types - double */
-  /*  */
-  /*  */
-  /*  Output: */
-  /*  */
-  /*   MMDenv=      n-m0+1 x length(prob)+1 columns containing the envelopes */
-  /*                for the requested quantiles. */
-  /*                1st col = fwd search index from m0 to n-1; */
-  /*                2nd col = envelope for quantile prob[1]; */
-  /*                3rd col = envelope for quantile prob[2]; */
-  /*                ...; */
-  /*                (k+1) col = envelope for quantile prob[k]. */
-  /*  */
-  /*  See also FSMenvmmd.m, FSM.m */
-  /*  */
-  /*  References: */
-  /*  */
-  /*  Riani, M., Atkinson, A.C. and Cerioli, A. (2009), Finding an unknown */
-  /*  number of multivariate outliers, "Journal of the Royal Statistical */
-  /*  Society Series B", Vol. 71, pp. 201-221. */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('FSMenvmmd')">Link to the help function</a> */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /*  */
   /* { */
@@ -1280,4 +1285,8 @@ void c_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   emxFree_real_T(&b);
 }
 
-/* End of code generation (FSMenvmmd.c) */
+/*
+ * File trailer for FSMenvmmd.c
+ *
+ * [EOF]
+ */

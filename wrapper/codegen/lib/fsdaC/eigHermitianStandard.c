@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: eigHermitianStandard.c
  *
- * eigHermitianStandard.c
- *
- * Code generation for function 'eigHermitianStandard'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "eigHermitianStandard.h"
 #include "rt_nonfinite.h"
 #include "xdlanv2.h"
@@ -18,6 +17,11 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const double A[4]
+ *                double V[2]
+ * Return Type  : void
+ */
 void eigHermitianStandard(const double A[4], double V[2])
 {
   double T[4];
@@ -114,4 +118,8 @@ void eigHermitianStandard(const double A[4], double V[2])
   V[1] = T[3];
 }
 
-/* End of code generation (eigHermitianStandard.c) */
+/*
+ * File trailer for eigHermitianStandard.c
+ *
+ * [EOF]
+ */

@@ -2,17 +2,16 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: quickselectFS.h
  *
- * quickselectFS.h
- *
- * Code generation for function 'quickselectFS'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
 #ifndef QUICKSELECTFS_H
 #define QUICKSELECTFS_H
 
-/* Include files */
+/* Include Files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -30,4 +29,8 @@ double quickselectFS(emxArray_real_T *A, double k, double kiniindex);
 #endif
 
 #endif
-/* End of code generation (quickselectFS.h) */
+/*
+ * File trailer for quickselectFS.h
+ *
+ * [EOF]
+ */

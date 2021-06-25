@@ -2,17 +2,16 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: xzggbal.h
  *
- * xzggbal.h
- *
- * Code generation for function 'xzggbal'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
 #ifndef XZGGBAL_H
 #define XZGGBAL_H
 
-/* Include files */
+/* Include Files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -30,4 +29,8 @@ void xzggbal(emxArray_creal_T *A, int *ilo, int *ihi, emxArray_int32_T *rscale);
 #endif
 
 #endif
-/* End of code generation (xzggbal.h) */
+/*
+ * File trailer for xzggbal.h
+ *
+ * [EOF]
+ */

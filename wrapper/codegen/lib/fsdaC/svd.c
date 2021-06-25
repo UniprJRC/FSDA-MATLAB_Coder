@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: svd.c
  *
- * svd.c
- *
- * Code generation for function 'svd'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "svd.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
@@ -21,6 +20,13 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const emxArray_real_T *A
+ *                emxArray_real_T *U
+ *                emxArray_real_T *s
+ *                emxArray_real_T *V
+ * Return Type  : void
+ */
 void b_svd(const emxArray_real_T *A, emxArray_real_T *U, emxArray_real_T *s,
            emxArray_real_T *V)
 {
@@ -588,6 +594,11 @@ void b_svd(const emxArray_real_T *A, emxArray_real_T *U, emxArray_real_T *s,
   emxFree_real_T(&b_s);
 }
 
+/*
+ * Arguments    : const emxArray_real_T *A
+ *                emxArray_real_T *U
+ * Return Type  : void
+ */
 void svd(const emxArray_real_T *A, emxArray_real_T *U)
 {
   emxArray_real_T *b_A;
@@ -962,4 +973,8 @@ void svd(const emxArray_real_T *A, emxArray_real_T *U)
   emxFree_real_T(&s);
 }
 
-/* End of code generation (svd.c) */
+/*
+ * File trailer for svd.c
+ *
+ * [EOF]
+ */

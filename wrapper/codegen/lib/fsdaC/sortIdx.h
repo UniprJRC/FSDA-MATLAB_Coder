@@ -2,17 +2,16 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: sortIdx.h
  *
- * sortIdx.h
- *
- * Code generation for function 'sortIdx'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
 #ifndef SORTIDX_H
 #define SORTIDX_H
 
-/* Include files */
+/* Include Files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -38,4 +37,8 @@ void sortIdx(const emxArray_real_T *x, emxArray_int32_T *idx);
 #endif
 
 #endif
-/* End of code generation (sortIdx.h) */
+/*
+ * File trailer for sortIdx.h
+ *
+ * [EOF]
+ */

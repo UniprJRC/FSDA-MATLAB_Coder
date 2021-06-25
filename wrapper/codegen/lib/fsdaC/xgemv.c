@@ -2,20 +2,28 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: xgemv.c
  *
- * xgemv.c
- *
- * Code generation for function 'xgemv'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "xgemv.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : int m
+ *                int n
+ *                const emxArray_real_T *A
+ *                int lda
+ *                const emxArray_real_T *x
+ *                emxArray_real_T *y
+ * Return Type  : void
+ */
 void xgemv(int m, int n, const emxArray_real_T *A, int lda,
            const emxArray_real_T *x, emxArray_real_T *y)
 {
@@ -43,4 +51,8 @@ void xgemv(int m, int n, const emxArray_real_T *A, int lda,
   }
 }
 
-/* End of code generation (xgemv.c) */
+/*
+ * File trailer for xgemv.c
+ *
+ * [EOF]
+ */

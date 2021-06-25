@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: xztgevc.c
  *
- * xztgevc.c
- *
- * Code generation for function 'xztgevc'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "xztgevc.h"
 #include "fsdaC_data.h"
 #include "fsdaC_emxutil.h"
@@ -19,6 +18,11 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const emxArray_creal_T *A
+ *                emxArray_creal_T *V
+ * Return Type  : void
+ */
 void xztgevc(const emxArray_creal_T *A, emxArray_creal_T *V)
 {
   emxArray_creal_T *work1;
@@ -319,4 +323,8 @@ void xztgevc(const emxArray_creal_T *A, emxArray_creal_T *V)
   emxFree_creal_T(&work1);
 }
 
-/* End of code generation (xztgevc.c) */
+/*
+ * File trailer for xztgevc.c
+ *
+ * [EOF]
+ */

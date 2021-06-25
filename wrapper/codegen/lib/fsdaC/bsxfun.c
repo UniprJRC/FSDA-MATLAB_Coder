@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: bsxfun.c
  *
- * bsxfun.c
- *
- * Code generation for function 'bsxfun'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "bsxfun.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
@@ -17,6 +16,12 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const emxArray_real_T *a
+ *                const emxArray_real_T *b
+ *                emxArray_real_T *c
+ * Return Type  : void
+ */
 void b_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
               emxArray_real_T *c)
 {
@@ -105,6 +110,12 @@ void b_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
   }
 }
 
+/*
+ * Arguments    : const emxArray_real_T *a
+ *                const emxArray_real_T *b
+ *                emxArray_real_T *c
+ * Return Type  : void
+ */
 void bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
             emxArray_real_T *c)
 {
@@ -165,6 +176,12 @@ void bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
   }
 }
 
+/*
+ * Arguments    : const emxArray_real_T *a
+ *                const emxArray_real_T *b
+ *                emxArray_real_T *c
+ * Return Type  : void
+ */
 void c_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
               emxArray_real_T *c)
 {
@@ -221,6 +238,12 @@ void c_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
   }
 }
 
+/*
+ * Arguments    : const emxArray_boolean_T *a
+ *                const emxArray_real_T *b
+ *                emxArray_real_T *c
+ * Return Type  : void
+ */
 void d_bsxfun(const emxArray_boolean_T *a, const emxArray_real_T *b,
               emxArray_real_T *c)
 {
@@ -278,6 +301,12 @@ void d_bsxfun(const emxArray_boolean_T *a, const emxArray_real_T *b,
   }
 }
 
+/*
+ * Arguments    : const emxArray_boolean_T *a
+ *                const emxArray_real_T *b
+ *                emxArray_real_T *c
+ * Return Type  : void
+ */
 void e_bsxfun(const emxArray_boolean_T *a, const emxArray_real_T *b,
               emxArray_real_T *c)
 {
@@ -330,6 +359,12 @@ void e_bsxfun(const emxArray_boolean_T *a, const emxArray_real_T *b,
   }
 }
 
+/*
+ * Arguments    : const emxArray_real_T *a
+ *                const emxArray_real_T *b
+ *                emxArray_real_T *c
+ * Return Type  : void
+ */
 void f_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
               emxArray_real_T *c)
 {
@@ -383,6 +418,12 @@ void f_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
   }
 }
 
+/*
+ * Arguments    : const emxArray_real_T *a
+ *                const emxArray_real_T *b
+ *                emxArray_real_T *c
+ * Return Type  : void
+ */
 void g_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
               emxArray_real_T *c)
 {
@@ -435,6 +476,12 @@ void g_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
   }
 }
 
+/*
+ * Arguments    : const emxArray_real_T *a
+ *                const emxArray_real_T *b
+ *                emxArray_real_T *c
+ * Return Type  : void
+ */
 void h_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
               emxArray_real_T *c)
 {
@@ -488,4 +535,8 @@ void h_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
   }
 }
 
-/* End of code generation (bsxfun.c) */
+/*
+ * File trailer for bsxfun.c
+ *
+ * [EOF]
+ */

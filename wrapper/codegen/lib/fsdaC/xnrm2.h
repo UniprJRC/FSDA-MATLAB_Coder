@@ -2,17 +2,16 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: xnrm2.h
  *
- * xnrm2.h
- *
- * Code generation for function 'xnrm2'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
 #ifndef XNRM2_H
 #define XNRM2_H
 
-/* Include files */
+/* Include Files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -38,4 +37,8 @@ double xnrm2(int n, const emxArray_real_T *x, int ix0);
 #endif
 
 #endif
-/* End of code generation (xnrm2.h) */
+/*
+ * File trailer for xnrm2.h
+ *
+ * [EOF]
+ */

@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: combineVectorElements.c
  *
- * combineVectorElements.c
- *
- * Code generation for function 'combineVectorElements'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "combineVectorElements.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
@@ -17,6 +16,11 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const emxArray_boolean_T *x
+ *                emxArray_int32_T *y
+ * Return Type  : void
+ */
 void b_combineVectorElements(const emxArray_boolean_T *x, emxArray_int32_T *y)
 {
   int i;
@@ -50,6 +54,11 @@ void b_combineVectorElements(const emxArray_boolean_T *x, emxArray_int32_T *y)
   }
 }
 
+/*
+ * Arguments    : const emxArray_boolean_T *x
+ *                emxArray_int32_T *y
+ * Return Type  : void
+ */
 void c_combineVectorElements(const emxArray_boolean_T *x, emxArray_int32_T *y)
 {
   int j;
@@ -83,6 +92,11 @@ void c_combineVectorElements(const emxArray_boolean_T *x, emxArray_int32_T *y)
   }
 }
 
+/*
+ * Arguments    : const emxArray_real_T *x
+ *                emxArray_real_T *y
+ * Return Type  : void
+ */
 void combineVectorElements(const emxArray_real_T *x, emxArray_real_T *y)
 {
   double bsum;
@@ -148,6 +162,10 @@ void combineVectorElements(const emxArray_real_T *x, emxArray_real_T *y)
   }
 }
 
+/*
+ * Arguments    : const emxArray_real_T *x
+ * Return Type  : double
+ */
 double d_combineVectorElements(const emxArray_real_T *x)
 {
   double bsum;
@@ -196,4 +214,8 @@ double d_combineVectorElements(const emxArray_real_T *x)
   return y;
 }
 
-/* End of code generation (combineVectorElements.c) */
+/*
+ * File trailer for combineVectorElements.c
+ *
+ * [EOF]
+ */

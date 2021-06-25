@@ -2,20 +2,24 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: blockedSummation.c
  *
- * blockedSummation.c
- *
- * Code generation for function 'blockedSummation'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "blockedSummation.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const emxArray_real_T *x
+ *                int vlen
+ * Return Type  : double
+ */
 double blockedSummation(const emxArray_real_T *x, int vlen)
 {
   double bsum;
@@ -64,4 +68,8 @@ double blockedSummation(const emxArray_real_T *x, int vlen)
   return y;
 }
 
-/* End of code generation (blockedSummation.c) */
+/*
+ * File trailer for blockedSummation.c
+ *
+ * [EOF]
+ */

@@ -2,17 +2,16 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: FSR_wrapper.h
  *
- * FSR_wrapper.h
- *
- * Code generation for function 'FSR_wrapper'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
 #ifndef FSR_WRAPPER_H
 #define FSR_WRAPPER_H
 
-/* Include files */
+/* Include Files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -36,4 +35,8 @@ extern void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
 #endif
 
 #endif
-/* End of code generation (FSR_wrapper.h) */
+/*
+ * File trailer for FSR_wrapper.h
+ *
+ * [EOF]
+ */

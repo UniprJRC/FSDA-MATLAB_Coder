@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: prctile.c
  *
- * prctile.c
- *
- * Code generation for function 'prctile'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "prctile.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_rtwutil.h"
@@ -20,6 +19,11 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const emxArray_real_T *x
+ *                double p
+ * Return Type  : double
+ */
 double prctile(const emxArray_real_T *x, double p)
 {
   emxArray_int32_T *idx;
@@ -58,4 +62,8 @@ double prctile(const emxArray_real_T *x, double p)
   return y;
 }
 
-/* End of code generation (prctile.c) */
+/*
+ * File trailer for prctile.c
+ *
+ * [EOF]
+ */

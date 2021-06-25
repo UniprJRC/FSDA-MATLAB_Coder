@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: mldivide.c
  *
- * mldivide.c
- *
- * Code generation for function 'mldivide'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "mldivide.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_rtwutil.h"
@@ -27,6 +26,11 @@
 static int div_nde_s32_floor(int numerator, int denominator);
 
 /* Function Definitions */
+/*
+ * Arguments    : int numerator
+ *                int denominator
+ * Return Type  : int
+ */
 static int div_nde_s32_floor(int numerator, int denominator)
 {
   int b_numerator;
@@ -39,6 +43,12 @@ static int div_nde_s32_floor(int numerator, int denominator)
   return numerator / denominator + b_numerator;
 }
 
+/*
+ * Arguments    : const emxArray_real_T *A
+ *                const emxArray_real_T *B
+ *                emxArray_real_T *Y
+ * Return Type  : void
+ */
 void b_mldivide(const emxArray_real_T *A, const emxArray_real_T *B,
                 emxArray_real_T *Y)
 {
@@ -141,6 +151,11 @@ void b_mldivide(const emxArray_real_T *A, const emxArray_real_T *B,
   emxFree_real_T(&b_A);
 }
 
+/*
+ * Arguments    : const emxArray_real_T *A
+ *                const emxArray_real_T *B
+ * Return Type  : double
+ */
 double c_mldivide(const emxArray_real_T *A, const emxArray_real_T *B)
 {
   emxArray_real_T *b_A;
@@ -251,6 +266,12 @@ double c_mldivide(const emxArray_real_T *A, const emxArray_real_T *B)
   return Y;
 }
 
+/*
+ * Arguments    : const double A[27]
+ *                const double B[9]
+ *                double Y[3]
+ * Return Type  : void
+ */
 void d_mldivide(const double A[27], const double B[9], double Y[3])
 {
   double b_A[27];
@@ -507,6 +528,12 @@ void d_mldivide(const double A[27], const double B[9], double Y[3])
   }
 }
 
+/*
+ * Arguments    : const emxArray_real_T *A
+ *                const emxArray_real_T *B
+ *                emxArray_real_T *Y
+ * Return Type  : void
+ */
 void mldivide(const emxArray_real_T *A, const emxArray_real_T *B,
               emxArray_real_T *Y)
 {
@@ -632,4 +659,8 @@ void mldivide(const emxArray_real_T *A, const emxArray_real_T *B,
   emxFree_real_T(&b_A);
 }
 
-/* End of code generation (mldivide.c) */
+/*
+ * File trailer for mldivide.c
+ *
+ * [EOF]
+ */

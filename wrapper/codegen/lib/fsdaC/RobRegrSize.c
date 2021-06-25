@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: RobRegrSize.c
  *
- * RobRegrSize.c
- *
- * Code generation for function 'RobRegrSize'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "RobRegrSize.h"
 #include "eml_setop.h"
 #include "erfcinv.h"
@@ -23,6 +22,71 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * RobRegrSize provides proper threshold for robust estimators to obtain an
+ * empirical size close to 1 per cent nominal size
+ *
+ * <a href="matlab: docsearchFS('RobRegrSize')">Link to the help function</a>
+ *
+ *
+ *   Required input arguments:
+ *
+ *            n : sample size. Scalar integer.
+ *                Number of units of the regression dataset.
+ *                REMARK - simulations have been done for
+ *                n=50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 400, 500.
+ *                For other values of n the threhold are found by
+ *                interpolation using the two closest values smaller or
+ *                greater than the one which has been considered
+ *                Data Types -single | double | int8 | int16 | int32 | int64
+ * |uint8 | uint16 | uint32 | uint64
+ *
+ *
+ *            p : number of variables. Scalar integer. Number of explanatory
+ * variables. REMARK - simulations have been done for p=2, 3, ..., 10. If the
+ * user supplies a value of p greater than 10 the correction factors are
+ * extrapolated by fitting a simple quadratic model in p. Data Types -single |
+ * double | int8 | int16 | int32 | int64 |uint8 | uint16 | uint32 | uint64
+ *
+ *
+ *        robest: robust estimator. String. String which identifies the robust
+ * estimator which is used Possibile values are: 'S'    S estimators; 'MM'   MM
+ * estimators; 'LTS'  Least trimmed squares estimator; 'LTSr' Least trimmed
+ * squares estimator reweighted. If robest is missing MM estimator is used Data
+ * Types -char
+ *
+ *       rhofunc: Weight function. String.
+ *                String which identifies the weight function which has been
+ *                used for S or MM.
+ *                Possibile values are
+ *                 'TB', for Tukey biweight rho function;
+ *                 'HA', for Hampel rho function;
+ *                 'HY', for hyperbolic rho function;
+ *                 'OP', for optimal rho function;
+ *                 'ST'  Soft trimming estimator (in this case an average
+ *                         threshold based on the TB,HY,HA and OP is used)
+ *                 REMARK - this value is ignored if robest is LTS or LTSr
+ *                If rhofunc is missing and robest is 'S' or 'MM', the
+ *                default value of rhofunc is 'ST'.
+ *                Data Types -char
+ *
+ *          bdp :  breakdown point. Scalar.
+ *                Scalar between 0 and 0.5. If robest is S, LTS or LTSr
+ *                and bdp is missing a value of 0.5 is used as default.
+ *                REMARK - simulations have been done for bdp=0.25 and 0.50
+ *                If the user supplies a value of bdp smaller than 0.25, the
+ *                threhold found for bdp=0.25 is used.  In this case a
+ *                warning is produced which alerts the user that the test is
+ *                likely to be conservative. If on the other hand bdp is a
+ *                value in the interval (0.25 0.5) an average
+ *                between bdp=0.25 and bdp=0.5 is used (for a more refined
+ *                correction please see input option Tallis)
+ *
+ * Arguments    : double n
+ *                double p
+ *                double bdp
+ * Return Type  : double
+ */
 double RobRegrSize(double n, double p, double bdp)
 {
   static const double b_dv[2592] = {
@@ -984,76 +1048,6 @@ double RobRegrSize(double n, double p, double bdp)
   signed char posint1[2];
   bool exitg1;
   bool y;
-  /* RobRegrSize provides proper threshold for robust estimators to obtain an
-   * empirical size close to 1 per cent nominal size */
-  /*  */
-  /* <a href="matlab: docsearchFS('RobRegrSize')">Link to the help function</a>
-   */
-  /*  */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /*            n : sample size. Scalar integer. */
-  /*                Number of units of the regression dataset. */
-  /*                REMARK - simulations have been done for */
-  /*                n=50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 400, 500. */
-  /*                For other values of n the threhold are found by */
-  /*                interpolation using the two closest values smaller or */
-  /*                greater than the one which has been considered */
-  /*                Data Types -single | double | int8 | int16 | int32 | int64
-   * |uint8 | uint16 | uint32 | uint64 */
-  /*  */
-  /*  */
-  /*            p : number of variables. Scalar integer. Number of explanatory
-   * variables. */
-  /*                REMARK - simulations have been done for p=2, 3, ..., 10. If
-   */
-  /*                the user supplies a value of p greater than 10 the */
-  /*                correction factors are extrapolated by fitting a simple */
-  /*                quadratic model in p. */
-  /*                Data Types -single | double | int8 | int16 | int32 | int64
-   * |uint8 | uint16 | uint32 | uint64 */
-  /*  */
-  /*  */
-  /*        robest: robust estimator. String. String which identifies the robust
-   * estimator which is used */
-  /*                Possibile values are: */
-  /*                  'S'    S estimators; */
-  /*                  'MM'   MM estimators; */
-  /*                  'LTS'  Least trimmed squares estimator; */
-  /*                  'LTSr' Least trimmed squares estimator reweighted. */
-  /*                If robest is missing MM estimator is used */
-  /*                Data Types -char */
-  /*  */
-  /*       rhofunc: Weight function. String. */
-  /*                String which identifies the weight function which has been
-   */
-  /*                used for S or MM. */
-  /*                Possibile values are */
-  /*                 'TB', for Tukey biweight rho function; */
-  /*                 'HA', for Hampel rho function; */
-  /*                 'HY', for hyperbolic rho function; */
-  /*                 'OP', for optimal rho function; */
-  /*                 'ST'  Soft trimming estimator (in this case an average */
-  /*                         threshold based on the TB,HY,HA and OP is used) */
-  /*                 REMARK - this value is ignored if robest is LTS or LTSr */
-  /*                If rhofunc is missing and robest is 'S' or 'MM', the */
-  /*                default value of rhofunc is 'ST'. */
-  /*                Data Types -char */
-  /*  */
-  /*          bdp :  breakdown point. Scalar. */
-  /*                Scalar between 0 and 0.5. If robest is S, LTS or LTSr */
-  /*                and bdp is missing a value of 0.5 is used as default. */
-  /*                REMARK - simulations have been done for bdp=0.25 and 0.50 */
-  /*                If the user supplies a value of bdp smaller than 0.25, the
-   */
-  /*                threhold found for bdp=0.25 is used.  In this case a */
-  /*                warning is produced which alerts the user that the test is
-   */
-  /*                likely to be conservative. If on the other hand bdp is a */
-  /*                value in the interval (0.25 0.5) an average */
-  /*                between bdp=0.25 and bdp=0.5 is used (for a more refined */
-  /*                correction please see input option Tallis) */
   /*  */
   /*          eff : nominal efficiency. Scalar. */
   /*                Scalar between between 0.5 and 1-epsilon (if robest is 'MM')
@@ -1592,4 +1586,8 @@ double RobRegrSize(double n, double p, double bdp)
          (a - yhat_idx_2) / (yhat_idx_1 - yhat_idx_0) * (n - yhat_idx_0);
 }
 
-/* End of code generation (RobRegrSize.c) */
+/*
+ * File trailer for RobRegrSize.c
+ *
+ * [EOF]
+ */

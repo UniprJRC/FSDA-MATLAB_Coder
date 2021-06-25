@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: FSRmdr.c
  *
- * FSRmdr.c
- *
- * Code generation for function 'FSRmdr'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "FSRmdr.h"
 #include "any.h"
 #include "blockedSummation.h"
@@ -38,6 +37,153 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * FSRmdr computes minimum deletion residual and other basic linear regression
+ * quantities in each step of the search
+ *
+ * <a href="matlab: docsearchFS('FSRmdr')">Link to the help function</a>
+ *
+ *  Required input arguments:
+ *
+ *     y:         Response variable. Vector. Response variable, specified as
+ *                a vector of length n, where n is the number of
+ *                observations. Each entry in y is the response for the
+ *                corresponding row of X.
+ *                Missing values (NaN's) and infinite values (Inf's) are
+ *                allowed, since observations (rows) with missing or infinite
+ *                values will automatically be excluded from the
+ *                computations.
+ *   X :          Predictor variables. Matrix. Matrix of explanatory
+ *                variables (also called 'regressors') of dimension n x (p-1)
+ *                where p denotes the number of explanatory variables
+ *                including the intercept.
+ *                Rows of X represent observations, and columns represent
+ *                variables. By default, there is a constant term in the
+ *                model, unless you explicitly remove it using input option
+ *                intercept, so do not include a column of 1s in X. Missing
+ *                values (NaN's) and infinite values (Inf's) are allowed,
+ *                since observations (rows) with missing or infinite values
+ *                will automatically be excluded from the computations.
+ *   bsb     :    list of units forming the initial subset. Vector. If bsb=0
+ *                (default) then the procedure starts with p units randomly
+ *                chosen else if bsb is not 0 the search will start with
+ *                m0=length(bsb)
+ *
+ *  Optional input arguments:
+ *
+ *
+ *  bsbmfullrank :What to do in case subset at step m (say bsbm) produces a
+ *                non singular X. Scalar.
+ *                This options controls what to do when rank(X(bsbm,:)) is
+ *                smaller then number of explanatory variables.
+ *                If bsbmfullrank = 1 (default is 1) these units (whose number
+ *                is say mnofullrank) are constrained to enter the search in
+ *                the final n-mnofullrank steps else the search continues
+ *                using as estimate of beta at step m the estimate of beta
+ *                found in the previous step.
+ *                Example - 'bsbmfullrank',1
+ *                Data Types - double
+ *
+ *    bsbsteps :  Save the units forming subsets. Vector. It specifies for
+ *                which steps of the fwd search it
+ *                is necessary to save the units forming subsets. If bsbsteps
+ *                is 0 we store the units forming subset in all steps. If
+ *                bsbsteps=[] or omitted, the default is to store the units
+ *                forming subset in all steps if n<=5000, else to store the
+ *                units forming subset at steps init and steps which are
+ *                multiple of 100. For example, as default, if n=753 and
+ *                init=6, units forming subset are stored for m=init, 100,
+ *                200, 300, 400, 500 and 600.
+ *                Example - 'bsbsteps',[100 200] stores the unis forming
+ *                subset in steps 100 and 200.
+ *                Data Types - double
+ *
+ *   constr :     Constrained search. Vector. r x 1 vector which contains the
+ *                list of units which are forced to join the search in the
+ *                last r steps. The default is constr=[].
+ *                 No constraint is imposed
+ *                Example - 'constr',[1:10] forces the first 10 units to join
+ *                the subset in the last 10 steps
+ *                Data Types - double
+ *
+ *   init :       Search initialization. Scalar.
+ *                It specifies the point where to initialize the search and
+ *                start monitoring required diagnostics. If it is not
+ *                specified it is set equal to:
+ *                    p+1, if the sample size is smaller than 40;
+ *                    min(3*p+1,floor(0.5*(n+p+1))), otherwise.
+ *                Example - 'init',100 starts monitoring from step m=100
+ *                Data Types - double
+ *
+ *     intercept :  Indicator for constant term. true (default) | false.
+ *                  Indicator for the constant term (intercept) in the fit,
+ *                  specified as the comma-separated pair consisting of
+ *                  'Intercept' and either true to include or false to remove
+ *                  the constant term from the model.
+ *                  Example - 'intercept',false
+ *                  Data Types - boolean
+ *
+ *  internationaltrade : criterion for updating subset. Boolean.
+ *                If internationaltrade is true (default is false) residuals
+ *                which have large of the final column of X (generally
+ *                quantity) are reduced. Note that this guarantees that
+ *                leverge units which have a large value of  X will tend to
+ *                stay in the subset. This option is particularly useful in
+ *                the context of international trade data where we
+ *                regress value (value=price*Q) on quantity (Q). In other
+ *                words, we use the residuals as if we were regressing y/X
+ *                (that is price) on the vector of ones.
+ *                Example - 'internationaltrade',true
+ *                Data Types - boolean
+ *
+ *   msg  :       Level of output to display. Scalar. It controls whether to
+ *                display or not messages about great interchange on the
+ *                screen If msg==1 (default)
+ *                messages are displayed on the screen
+ *                else no message is displayed on the screen
+ *                Example - 'msg',1
+ *                Data Types - double
+ *
+ *   nocheck:     Check input arguments. Boolean. If nocheck is equal to true no
+ *                check is performed on matrix y and matrix X. Notice that y
+ *                and X are left unchanged. In other words the additioanl
+ *                column of ones for the intercept is not added. As default
+ *                nocheck=false. The controls on h, alpha and nsamp still remain
+ *                Example - 'nocheck',true
+ *                Data Types - boolean
+ *
+ * threshlevoutX: threshold for high leverage units. Scalar or empty value.
+ *                Threshold to bound the effect of high leverage units in the
+ *                computation of deletion residuals. In the computation of
+ *                the quantity $h_i(m^*) = x_i^T\{X(m^*)^TX(m^*)\}^{-1}x_i$,
+ *                $i \notin S^{(m)}_*$, units which very far from the bulk of
+ *                the data (represented by $X(m^*)$) will have a huge value
+ *                of $h_i(m^*)$ and consequently of the deletion residuals.
+ *                In order to tackle this problem it is possible to put a
+ *                bound to the value of $h_i(m^*)$. For example
+ *                threshlevoutX=r imposes the contrainst that $h_i(m^*)$
+ *                cannot exceed $r \times p/m$. The default value of
+ *                threshlevoutX is empty, which means that no threshold is
+ *                imposed.
+ *                Example - 'threshlevoutX',5
+ *                Data Types - double
+ *
+ * Arguments    : const emxArray_real_T *y
+ *                const emxArray_real_T *X
+ *                emxArray_real_T *bsb
+ *                double varargin_2
+ *                bool varargin_8
+ *                const emxArray_real_T *varargin_10
+ *                const double varargin_14_data[]
+ *                const int varargin_14_size[2]
+ *                const emxArray_real_T *varargin_18
+ *                emxArray_real_T *mdr
+ *                emxArray_real_T *Un
+ *                emxArray_real_T *BB
+ *                emxArray_real_T *Bols
+ *                emxArray_real_T *S2
+ * Return Type  : void
+ */
 void FSRmdr(const emxArray_real_T *y, const emxArray_real_T *X,
             emxArray_real_T *bsb, double varargin_2, bool varargin_8,
             const emxArray_real_T *varargin_10, const double varargin_14_data[],
@@ -93,153 +239,6 @@ void FSRmdr(const emxArray_real_T *y, const emxArray_real_T *X,
   bool Ra;
   bool empty_non_axis_sizes;
   emxInit_boolean_T(&bsbT, 1);
-  /* FSRmdr computes minimum deletion residual and other basic linear regression
-   * quantities in each step of the search */
-  /*  */
-  /* <a href="matlab: docsearchFS('FSRmdr')">Link to the help function</a> */
-  /*  */
-  /*  Required input arguments: */
-  /*  */
-  /*     y:         Response variable. Vector. Response variable, specified as
-   */
-  /*                a vector of length n, where n is the number of */
-  /*                observations. Each entry in y is the response for the */
-  /*                corresponding row of X. */
-  /*                Missing values (NaN's) and infinite values (Inf's) are */
-  /*                allowed, since observations (rows) with missing or infinite
-   */
-  /*                values will automatically be excluded from the */
-  /*                computations. */
-  /*   X :          Predictor variables. Matrix. Matrix of explanatory */
-  /*                variables (also called 'regressors') of dimension n x (p-1)
-   */
-  /*                where p denotes the number of explanatory variables */
-  /*                including the intercept. */
-  /*                Rows of X represent observations, and columns represent */
-  /*                variables. By default, there is a constant term in the */
-  /*                model, unless you explicitly remove it using input option */
-  /*                intercept, so do not include a column of 1s in X. Missing */
-  /*                values (NaN's) and infinite values (Inf's) are allowed, */
-  /*                since observations (rows) with missing or infinite values */
-  /*                will automatically be excluded from the computations. */
-  /*   bsb     :    list of units forming the initial subset. Vector. If bsb=0
-   */
-  /*                (default) then the procedure starts with p units randomly */
-  /*                chosen else if bsb is not 0 the search will start with */
-  /*                m0=length(bsb) */
-  /*  */
-  /*  Optional input arguments: */
-  /*  */
-  /*  */
-  /*  bsbmfullrank :What to do in case subset at step m (say bsbm) produces a */
-  /*                non singular X. Scalar. */
-  /*                This options controls what to do when rank(X(bsbm,:)) is */
-  /*                smaller then number of explanatory variables. */
-  /*                If bsbmfullrank = 1 (default is 1) these units (whose number
-   */
-  /*                is say mnofullrank) are constrained to enter the search in
-   */
-  /*                the final n-mnofullrank steps else the search continues */
-  /*                using as estimate of beta at step m the estimate of beta */
-  /*                found in the previous step. */
-  /*                Example - 'bsbmfullrank',1 */
-  /*                Data Types - double */
-  /*  */
-  /*    bsbsteps :  Save the units forming subsets. Vector. It specifies for */
-  /*                which steps of the fwd search it */
-  /*                is necessary to save the units forming subsets. If bsbsteps
-   */
-  /*                is 0 we store the units forming subset in all steps. If */
-  /*                bsbsteps=[] or omitted, the default is to store the units */
-  /*                forming subset in all steps if n<=5000, else to store the */
-  /*                units forming subset at steps init and steps which are */
-  /*                multiple of 100. For example, as default, if n=753 and */
-  /*                init=6, units forming subset are stored for m=init, 100, */
-  /*                200, 300, 400, 500 and 600. */
-  /*                Example - 'bsbsteps',[100 200] stores the unis forming */
-  /*                subset in steps 100 and 200. */
-  /*                Data Types - double */
-  /*  */
-  /*   constr :     Constrained search. Vector. r x 1 vector which contains the
-   */
-  /*                list of units which are forced to join the search in the */
-  /*                last r steps. The default is constr=[]. */
-  /*                 No constraint is imposed */
-  /*                Example - 'constr',[1:10] forces the first 10 units to join
-   */
-  /*                the subset in the last 10 steps */
-  /*                Data Types - double */
-  /*  */
-  /*   init :       Search initialization. Scalar. */
-  /*                It specifies the point where to initialize the search and */
-  /*                start monitoring required diagnostics. If it is not */
-  /*                specified it is set equal to: */
-  /*                    p+1, if the sample size is smaller than 40; */
-  /*                    min(3*p+1,floor(0.5*(n+p+1))), otherwise. */
-  /*                Example - 'init',100 starts monitoring from step m=100 */
-  /*                Data Types - double */
-  /*  */
-  /*     intercept :  Indicator for constant term. true (default) | false. */
-  /*                  Indicator for the constant term (intercept) in the fit, */
-  /*                  specified as the comma-separated pair consisting of */
-  /*                  'Intercept' and either true to include or false to remove
-   */
-  /*                  the constant term from the model. */
-  /*                  Example - 'intercept',false */
-  /*                  Data Types - boolean */
-  /*  */
-  /*  internationaltrade : criterion for updating subset. Boolean. */
-  /*                If internationaltrade is true (default is false) residuals
-   */
-  /*                which have large of the final column of X (generally */
-  /*                quantity) are reduced. Note that this guarantees that */
-  /*                leverge units which have a large value of  X will tend to */
-  /*                stay in the subset. This option is particularly useful in */
-  /*                the context of international trade data where we */
-  /*                regress value (value=price*Q) on quantity (Q). In other */
-  /*                words, we use the residuals as if we were regressing y/X */
-  /*                (that is price) on the vector of ones. */
-  /*                Example - 'internationaltrade',true */
-  /*                Data Types - boolean */
-  /*  */
-  /*   msg  :       Level of output to display. Scalar. It controls whether to
-   */
-  /*                display or not messages about great interchange on the */
-  /*                screen If msg==1 (default) */
-  /*                messages are displayed on the screen */
-  /*                else no message is displayed on the screen */
-  /*                Example - 'msg',1 */
-  /*                Data Types - double */
-  /*  */
-  /*   nocheck:     Check input arguments. Boolean. If nocheck is equal to true
-   * no */
-  /*                check is performed on matrix y and matrix X. Notice that y
-   */
-  /*                and X are left unchanged. In other words the additioanl */
-  /*                column of ones for the intercept is not added. As default */
-  /*                nocheck=false. The controls on h, alpha and nsamp still
-   * remain */
-  /*                Example - 'nocheck',true */
-  /*                Data Types - boolean */
-  /*  */
-  /* threshlevoutX: threshold for high leverage units. Scalar or empty value. */
-  /*                Threshold to bound the effect of high leverage units in the
-   */
-  /*                computation of deletion residuals. In the computation of */
-  /*                the quantity $h_i(m^*) = x_i^T\{X(m^*)^TX(m^*)\}^{-1}x_i$,
-   */
-  /*                $i \notin S^{(m)}_*$, units which very far from the bulk of
-   */
-  /*                the data (represented by $X(m^*)$) will have a huge value */
-  /*                of $h_i(m^*)$ and consequently of the deletion residuals. */
-  /*                In order to tackle this problem it is possible to put a */
-  /*                bound to the value of $h_i(m^*)$. For example */
-  /*                threshlevoutX=r imposes the contrainst that $h_i(m^*)$ */
-  /*                cannot exceed $r \times p/m$. The default value of */
-  /*                threshlevoutX is empty, which means that no threshold is */
-  /*                imposed. */
-  /*                Example - 'threshlevoutX',5 */
-  /*                Data Types - double */
   /*  */
   /*   plots :      Plot on the screen. Scalar. If equal to one a plot of */
   /*                minimum deletion residual appears  on the screen with 1%, */
@@ -1668,4 +1667,8 @@ void FSRmdr(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  rank check */
 }
 
-/* End of code generation (FSRmdr.c) */
+/*
+ * File trailer for FSRmdr.c
+ *
+ * [EOF]
+ */

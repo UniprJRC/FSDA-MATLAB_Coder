@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: logmvnpdfFS.c
  *
- * logmvnpdfFS.c
- *
- * Code generation for function 'logmvnpdfFS'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "logmvnpdfFS.h"
 #include "blockedSummation.h"
 #include "chol.h"
@@ -22,6 +21,102 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * logmvnpdfFS produces log of Multivariate normal probability density function
+ * (pdf)
+ *
+ * <a href="matlab: docsearchFS('logmvnpdfFS')">Link to the help function</a>
+ *
+ *  This function is a much faster version than (log of) Matlab function
+ *  mvnpdf.  If this function is called without optional arguments than it
+ *  uses matlab function bsxfun to compute
+ *  the deviations form the means and no mex function.
+ *  If this function is called with the four optional input
+ *  arguments X0, eyed, n and d a mex function based on C code is directly used.
+ *  Additional details follow: in order to compute the kernel of the quadratic
+ * form at the exponent logmvnpdfFS creates an identity of size length(Mu) and
+ *  similarly needs to compute length(Mu). These two quantites can be
+ *  precalculated and supplied as input parameters. If logmvnpdfFS has to be
+ *  called thousands of times (as it happens for example in each iteration
+ *  of all procedures of cluster analysis based mixtures of multivariate
+ *  gaussian distributions). The same argument above applies to scalars n
+ *  and d which are directly passed to the compiled mex function
+ *
+ *   Required input arguments:
+ *
+ *
+ *  X :           Input data. Scalar, Vector or matrix.
+ *                n x d data matrix; n observations and d variables. Rows of
+ *                Y represent observations, and columns represent variables or
+ * coordinates. The (log of the) probability density of the multivariate normal
+ * distribution will be evaluated at each row of the n-by-d matrix Y Data Types
+ * - single|double Mu:           mean mu of the multivariate normal
+ * distribution. 1-by-d vector. Data Types - single|double Sigma  : covariance
+ * matrix of the multivariate normal distribution. d-by-d matrix. Data Types -
+ * single|double
+ *
+ *   Optional input arguments:
+ *
+ *    X0  :       matrix of the same size of X which passes to C function a
+ * container. Note that options X0, eyed, n, and d must be supplied together.
+ *                  Example - 'X0',X
+ *                  Data Types - single|double
+ *
+ *   eyed :       identity matrix of size length(Mu) wchich passes to C function
+ * a container. Note that options X0, eyed, n, and d must be supplied together.
+ *                  Example - 'eyed',eye(v)
+ *                  Data Types - single|double
+ *
+ *      n :       scalar which passes to C function size(X,1).
+ *                Note that options X0, eyed, n, and d must be supplied
+ *                together.
+ *                  Example - 'eyed',eye(v)
+ *                  Data Types - single|double
+ *
+ *      d :       scalar which passes to C function length(Mu).
+ *                Note that options X0, eyed, n, and d must be supplied
+ *                together.
+ *                  Example - 'eyed',eye(v)
+ *                  Data Types - single|double
+ *
+ *         msg  : Level of output to display. Scalar.
+ *                Scalar which controls whether to display or not messages
+ *                on the screen. If msg==1 (default) messages are displayed
+ *                on the screen when cholesky of Sigma is impossibile
+ *                else no message is displayed on the screen. When Clolesky
+ *                of Sigma is impossible -Inf output is returned.
+ *                  Example - 'msg',1
+ *                  Data Types - single | double
+ *
+ *      callmex  : call or not mex function to compute the result. Boolean.
+ *                Boolean which controls whether to call or not the mex
+ * function. Example - 'callmex',false Data Types - boolean
+ *
+ *  Output:
+ *
+ *    y    :   log-density of the multivariate normal. Vector. Vector with
+ * length equal to n which returns the log-density of the multivariate normal
+ *                distribution with mean Mu and covariance Sigma, evaluated at
+ * each row of X.
+ *
+ *  See also mvnpdf
+ *
+ *  References:
+ *
+ *
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ * <a href="matlab: docsearchFS('logmvnpdfFS')">Link to the help function</a>
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ * Arguments    : const emxArray_real_T *X
+ *                const emxArray_real_T *Mu
+ *                const emxArray_real_T *Sigma
+ * Return Type  : double
+ */
 double logmvnpdfFS(const emxArray_real_T *X, const emxArray_real_T *Mu,
                    const emxArray_real_T *Sigma)
 {
@@ -40,116 +135,6 @@ double logmvnpdfFS(const emxArray_real_T *X, const emxArray_real_T *Mu,
   int m;
   int nc;
   emxInit_real_T(&X0, 2);
-  /* logmvnpdfFS produces log of Multivariate normal probability density
-   * function (pdf) */
-  /*  */
-  /* <a href="matlab: docsearchFS('logmvnpdfFS')">Link to the help function</a>
-   */
-  /*  */
-  /*  This function is a much faster version than (log of) Matlab function */
-  /*  mvnpdf.  If this function is called without optional arguments than it */
-  /*  uses matlab function bsxfun to compute */
-  /*  the deviations form the means and no mex function. */
-  /*  If this function is called with the four optional input */
-  /*  arguments X0, eyed, n and d a mex function based on C code is directly
-   * used. */
-  /*  Additional details follow: in order to compute the kernel of the quadratic
-   * form */
-  /*  at the exponent logmvnpdfFS creates an identity of size length(Mu) and */
-  /*  similarly needs to compute length(Mu). These two quantites can be */
-  /*  precalculated and supplied as input parameters. If logmvnpdfFS has to be
-   */
-  /*  called thousands of times (as it happens for example in each iteration */
-  /*  of all procedures of cluster analysis based mixtures of multivariate */
-  /*  gaussian distributions). The same argument above applies to scalars n */
-  /*  and d which are directly passed to the compiled mex function */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /*  */
-  /*  X :           Input data. Scalar, Vector or matrix. */
-  /*                n x d data matrix; n observations and d variables. Rows of
-   */
-  /*                Y represent observations, and columns represent variables or
-   * coordinates. */
-  /*                The (log of the) probability density of the multivariate */
-  /*                normal distribution will be evaluated at each row of the */
-  /*                n-by-d matrix Y */
-  /*                Data Types - single|double */
-  /*  Mu:           mean mu of the multivariate normal distribution. 1-by-d
-   * vector. */
-  /*                Data Types - single|double */
-  /*  Sigma  :      covariance matrix of the multivariate normal distribution.
-   */
-  /*                d-by-d matrix. */
-  /*                Data Types - single|double */
-  /*  */
-  /*   Optional input arguments: */
-  /*  */
-  /*    X0  :       matrix of the same size of X which passes to C function a
-   * container. */
-  /*                Note that options X0, eyed, n, and d must be supplied */
-  /*                together. */
-  /*                  Example - 'X0',X */
-  /*                  Data Types - single|double */
-  /*  */
-  /*   eyed :       identity matrix of size length(Mu) wchich passes to C
-   * function a container. */
-  /*                Note that options X0, eyed, n, and d must be supplied */
-  /*                together. */
-  /*                  Example - 'eyed',eye(v) */
-  /*                  Data Types - single|double */
-  /*  */
-  /*      n :       scalar which passes to C function size(X,1). */
-  /*                Note that options X0, eyed, n, and d must be supplied */
-  /*                together. */
-  /*                  Example - 'eyed',eye(v) */
-  /*                  Data Types - single|double */
-  /*  */
-  /*      d :       scalar which passes to C function length(Mu). */
-  /*                Note that options X0, eyed, n, and d must be supplied */
-  /*                together. */
-  /*                  Example - 'eyed',eye(v) */
-  /*                  Data Types - single|double */
-  /*  */
-  /*         msg  : Level of output to display. Scalar. */
-  /*                Scalar which controls whether to display or not messages */
-  /*                on the screen. If msg==1 (default) messages are displayed */
-  /*                on the screen when cholesky of Sigma is impossibile */
-  /*                else no message is displayed on the screen. When Clolesky */
-  /*                of Sigma is impossible -Inf output is returned. */
-  /*                  Example - 'msg',1 */
-  /*                  Data Types - single | double */
-  /*  */
-  /*      callmex  : call or not mex function to compute the result. Boolean. */
-  /*                Boolean which controls whether to call or not the mex
-   * function. */
-  /*                  Example - 'callmex',false */
-  /*                  Data Types - boolean */
-  /*  */
-  /*  Output: */
-  /*  */
-  /*    y    :   log-density of the multivariate normal. Vector. Vector with
-   * length */
-  /*                equal to n which returns the log-density of the multivariate
-   * normal */
-  /*                distribution with mean Mu and covariance Sigma, evaluated at
-   * each row */
-  /*                of X. */
-  /*  */
-  /*  See also mvnpdf */
-  /*  */
-  /*  References: */
-  /*  */
-  /*  */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /* <a href="matlab: docsearchFS('logmvnpdfFS')">Link to the help function</a>
-   */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
   /*    Examples: */
   /* { */
   /*     % Call to logmvnpdfFS with 3 input arguments. */
@@ -516,4 +501,8 @@ double logmvnpdfFS(const emxArray_real_T *X, const emxArray_real_T *Mu,
   return y;
 }
 
-/* End of code generation (logmvnpdfFS.c) */
+/*
+ * File trailer for logmvnpdfFS.c
+ *
+ * [EOF]
+ */

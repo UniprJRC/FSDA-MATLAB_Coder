@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: xdlanv2.c
  *
- * xdlanv2.c
- *
- * Code generation for function 'xdlanv2'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "xdlanv2.h"
 #include "fsdaC_rtwutil.h"
 #include "rt_nonfinite.h"
@@ -17,6 +16,19 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : double *a
+ *                double *b
+ *                double *c
+ *                double *d
+ *                double *rt1r
+ *                double *rt1i
+ *                double *rt2r
+ *                double *rt2i
+ *                double *cs
+ *                double *sn
+ * Return Type  : void
+ */
 void xdlanv2(double *a, double *b, double *c, double *d, double *rt1r,
              double *rt1i, double *rt2r, double *rt2i, double *cs, double *sn)
 {
@@ -138,4 +150,8 @@ void xdlanv2(double *a, double *b, double *c, double *d, double *rt1r,
   }
 }
 
-/* End of code generation (xdlanv2.c) */
+/*
+ * File trailer for xdlanv2.c
+ *
+ * [EOF]
+ */

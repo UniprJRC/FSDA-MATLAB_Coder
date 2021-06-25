@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: estepFS.c
  *
- * estepFS.c
- *
- * Code generation for function 'estepFS'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "estepFS.h"
 #include "blockedSummation.h"
 #include "fsdaC_emxutil.h"
@@ -20,6 +19,99 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * estepFS performs e-step for Gaussian mixture distribution
+ *
+ * <a href="matlab: docsearchFS('estepFS')">Link to the help function</a>
+ *
+ *    obj = estepFS(log_lh) returns value of the loglikelihood of mixture model.
+ *
+ *    obj is equal to
+ *    \begin{equation}\label{mixlik}
+ *    obj = \log   \left( \prod_{i=1}^n  \sum_{j=1}^k \pi_j \phi (y_i; \;
+ * \theta_j)    \right). \end{equation}
+ *
+ *    or
+ *
+ *    \begin{equation}\label{mixlik}
+ *    obj =  \sum_{i=1}^n  \log   \left( \sum_{j=1}^k \pi_j \phi (y_i; \;
+ * \theta_j)    \right). \end{equation}
+ *
+ *
+ *    k = number of components of the mixture
+ *    \pi_j = component probabilitites
+ *    \theta_j = parameters of the j-th component of the mixture
+ *
+ *   Required input arguments:
+ *
+ *        log_lh: n-by-p matrix containing the log of component conditional
+ *                density weighted by the component probability.
+ *                log_lh = log( \pi_j \phi (y_i; \; \theta_j))
+ *
+ *  verLess2016b : bsxfun or implicit expansion. Boolean.
+ *              If verLess2016b is true,
+ *              bsxfun inside the procedure is used.
+ *              If verLess2016b is fase, implicit expansion is used instead of
+ *              bsxfun. Note that implicit expansion has been introduced only
+ *              in 2017a therefore it will not work with previous releases.
+ *                Example - 'userepmat',1
+ *                Data Types - double%
+ *   Output:
+ *
+ *          obj  : scalar. Value of the log likelihood (see above) of
+ *                 mixture models
+ *
+ *   Optional Output:
+ *
+ *    varargout1 : n-by-k matrix containing posterior probabilities
+ *                 varargout1 i=1, ..., n and j=1, ..., k is the posterior
+ *                 probability of observation i belonging to component j of
+ *                 the mixture.
+ *                 Posterior probabilities are computed as
+ *                 varargout1(i,j)= exp( log_lh(i,j))/ (\sum_{j=1^k}
+ * exp(log_lh(i,j)))
+ *
+ *    varargout2 : n-by-1 vector which contains the contributions
+ *                 to the loglikelihood of the mixture model of each observation
+ *                 More precisely,
+ *                 lodpdf = \log   \left( \sum_{j=1}^k \pi_j \phi (y_i; \;
+ * \theta_j)    \right) = \log   \left( \sum_{j=1}^k  \exp( \log_lh ) \right)
+ *
+ *
+ *
+ *  DETAILS. Formally a mixture model corresponds to the mixture distribution
+ * that represents the probability distribution of observations in the overall
+ *  population. Mixture models are used
+ *  to make statistical inferences about the properties of the
+ *  sub-populations given only observations on the pooled population, without
+ *  sub-population-identity information.
+ *  Mixture modeling approaches assume that data at hand $y_1, ..., y_n$ in
+ *  $R^p$ come from a probability distribution with density given by the sum of
+ * k components
+ *  $\sum_{j=1}^k  \pi_j \phi( \cdot, \theta_j)$
+ *  with $\phi( \cdot, \theta_j)$ being the
+ *  $p$-variate  (generally multivariate normal) densities with parameters
+ *  $\theta_j$, $j=1, \ldots, k$. Generally $\theta_j= (\mu_j, \Sigma_j)$
+ *  where $\mu_j$ is the population mean  and   $\Sigma_j$ is the covariance
+ *  matrix for component $j$.
+ *  \pi_j is the (prior) probability of component j
+ *
+ *  References:
+ *
+ *    McLachlan, G.J.; Peel, D. (2000). Finite Mixture Models. Wiley. ISBN
+ * 0-471-00626-2
+ *
+ *  Copyright 2008-2021.
+ *
+ * <a href="matlab: docsearchFS('estepFS')">Link to the help function</a>
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ * Arguments    : const emxArray_real_T *log_lh
+ *                double *obj
+ *                emxArray_real_T *varargout1
+ * Return Type  : void
+ */
 void b_estepFS(const emxArray_real_T *log_lh, double *obj,
                emxArray_real_T *varargout1)
 {
@@ -28,103 +120,6 @@ void b_estepFS(const emxArray_real_T *log_lh, double *obj,
   int k;
   int nx;
   emxInit_real_T(&maxll, 1);
-  /* estepFS performs e-step for Gaussian mixture distribution */
-  /*  */
-  /* <a href="matlab: docsearchFS('estepFS')">Link to the help function</a> */
-  /*  */
-  /*    obj = estepFS(log_lh) returns value of the loglikelihood of mixture
-   * model. */
-  /*  */
-  /*    obj is equal to */
-  /*    \begin{equation}\label{mixlik} */
-  /*    obj = \log   \left( \prod_{i=1}^n  \sum_{j=1}^k \pi_j \phi (y_i; \;
-   * \theta_j)    \right). */
-  /*    \end{equation} */
-  /*  */
-  /*    or */
-  /*  */
-  /*    \begin{equation}\label{mixlik} */
-  /*    obj =  \sum_{i=1}^n  \log   \left( \sum_{j=1}^k \pi_j \phi (y_i; \;
-   * \theta_j)    \right). */
-  /*    \end{equation} */
-  /*  */
-  /*  */
-  /*    k = number of components of the mixture */
-  /*    \pi_j = component probabilitites */
-  /*    \theta_j = parameters of the j-th component of the mixture */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /*        log_lh: n-by-p matrix containing the log of component conditional */
-  /*                density weighted by the component probability. */
-  /*                log_lh = log( \pi_j \phi (y_i; \; \theta_j)) */
-  /*  */
-  /*  verLess2016b : bsxfun or implicit expansion. Boolean. */
-  /*              If verLess2016b is true, */
-  /*              bsxfun inside the procedure is used. */
-  /*              If verLess2016b is fase, implicit expansion is used instead of
-   */
-  /*              bsxfun. Note that implicit expansion has been introduced only
-   */
-  /*              in 2017a therefore it will not work with previous releases. */
-  /*                Example - 'userepmat',1 */
-  /*                Data Types - double% */
-  /*   Output: */
-  /*  */
-  /*          obj  : scalar. Value of the log likelihood (see above) of */
-  /*                 mixture models */
-  /*  */
-  /*   Optional Output: */
-  /*  */
-  /*    varargout1 : n-by-k matrix containing posterior probabilities */
-  /*                 varargout1 i=1, ..., n and j=1, ..., k is the posterior */
-  /*                 probability of observation i belonging to component j of */
-  /*                 the mixture. */
-  /*                 Posterior probabilities are computed as */
-  /*                 varargout1(i,j)= exp( log_lh(i,j))/ (\sum_{j=1^k}
-   * exp(log_lh(i,j))) */
-  /*  */
-  /*    varargout2 : n-by-1 vector which contains the contributions */
-  /*                 to the loglikelihood of the mixture model of each
-   * observation */
-  /*                 More precisely, */
-  /*                 lodpdf = \log   \left( \sum_{j=1}^k \pi_j \phi (y_i; \;
-   * \theta_j)    \right) */
-  /*                        = \log   \left( \sum_{j=1}^k  \exp( \log_lh )
-   * \right) */
-  /*  */
-  /*  */
-  /*  */
-  /*  DETAILS. Formally a mixture model corresponds to the mixture distribution
-   * that */
-  /*  represents the probability distribution of observations in the overall */
-  /*  population. Mixture models are used */
-  /*  to make statistical inferences about the properties of the */
-  /*  sub-populations given only observations on the pooled population, without
-   */
-  /*  sub-population-identity information. */
-  /*  Mixture modeling approaches assume that data at hand $y_1, ..., y_n$ in */
-  /*  $R^p$ come from a probability distribution with density given by the sum
-   * of k components */
-  /*  $\sum_{j=1}^k  \pi_j \phi( \cdot, \theta_j)$ */
-  /*  with $\phi( \cdot, \theta_j)$ being the */
-  /*  $p$-variate  (generally multivariate normal) densities with parameters */
-  /*  $\theta_j$, $j=1, \ldots, k$. Generally $\theta_j= (\mu_j, \Sigma_j)$ */
-  /*  where $\mu_j$ is the population mean  and   $\Sigma_j$ is the covariance
-   */
-  /*  matrix for component $j$. */
-  /*  \pi_j is the (prior) probability of component j */
-  /*  */
-  /*  References: */
-  /*  */
-  /*    McLachlan, G.J.; Peel, D. (2000). Finite Mixture Models. Wiley. ISBN
-   * 0-471-00626-2 */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  */
-  /* <a href="matlab: docsearchFS('estepFS')">Link to the help function</a> */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /*  */
   /* { */
@@ -212,6 +207,97 @@ void b_estepFS(const emxArray_real_T *log_lh, double *obj,
   emxFree_real_T(&density);
 }
 
+/*
+ * estepFS performs e-step for Gaussian mixture distribution
+ *
+ * <a href="matlab: docsearchFS('estepFS')">Link to the help function</a>
+ *
+ *    obj = estepFS(log_lh) returns value of the loglikelihood of mixture model.
+ *
+ *    obj is equal to
+ *    \begin{equation}\label{mixlik}
+ *    obj = \log   \left( \prod_{i=1}^n  \sum_{j=1}^k \pi_j \phi (y_i; \;
+ * \theta_j)    \right). \end{equation}
+ *
+ *    or
+ *
+ *    \begin{equation}\label{mixlik}
+ *    obj =  \sum_{i=1}^n  \log   \left( \sum_{j=1}^k \pi_j \phi (y_i; \;
+ * \theta_j)    \right). \end{equation}
+ *
+ *
+ *    k = number of components of the mixture
+ *    \pi_j = component probabilitites
+ *    \theta_j = parameters of the j-th component of the mixture
+ *
+ *   Required input arguments:
+ *
+ *        log_lh: n-by-p matrix containing the log of component conditional
+ *                density weighted by the component probability.
+ *                log_lh = log( \pi_j \phi (y_i; \; \theta_j))
+ *
+ *  verLess2016b : bsxfun or implicit expansion. Boolean.
+ *              If verLess2016b is true,
+ *              bsxfun inside the procedure is used.
+ *              If verLess2016b is fase, implicit expansion is used instead of
+ *              bsxfun. Note that implicit expansion has been introduced only
+ *              in 2017a therefore it will not work with previous releases.
+ *                Example - 'userepmat',1
+ *                Data Types - double%
+ *   Output:
+ *
+ *          obj  : scalar. Value of the log likelihood (see above) of
+ *                 mixture models
+ *
+ *   Optional Output:
+ *
+ *    varargout1 : n-by-k matrix containing posterior probabilities
+ *                 varargout1 i=1, ..., n and j=1, ..., k is the posterior
+ *                 probability of observation i belonging to component j of
+ *                 the mixture.
+ *                 Posterior probabilities are computed as
+ *                 varargout1(i,j)= exp( log_lh(i,j))/ (\sum_{j=1^k}
+ * exp(log_lh(i,j)))
+ *
+ *    varargout2 : n-by-1 vector which contains the contributions
+ *                 to the loglikelihood of the mixture model of each observation
+ *                 More precisely,
+ *                 lodpdf = \log   \left( \sum_{j=1}^k \pi_j \phi (y_i; \;
+ * \theta_j)    \right) = \log   \left( \sum_{j=1}^k  \exp( \log_lh ) \right)
+ *
+ *
+ *
+ *  DETAILS. Formally a mixture model corresponds to the mixture distribution
+ * that represents the probability distribution of observations in the overall
+ *  population. Mixture models are used
+ *  to make statistical inferences about the properties of the
+ *  sub-populations given only observations on the pooled population, without
+ *  sub-population-identity information.
+ *  Mixture modeling approaches assume that data at hand $y_1, ..., y_n$ in
+ *  $R^p$ come from a probability distribution with density given by the sum of
+ * k components
+ *  $\sum_{j=1}^k  \pi_j \phi( \cdot, \theta_j)$
+ *  with $\phi( \cdot, \theta_j)$ being the
+ *  $p$-variate  (generally multivariate normal) densities with parameters
+ *  $\theta_j$, $j=1, \ldots, k$. Generally $\theta_j= (\mu_j, \Sigma_j)$
+ *  where $\mu_j$ is the population mean  and   $\Sigma_j$ is the covariance
+ *  matrix for component $j$.
+ *  \pi_j is the (prior) probability of component j
+ *
+ *  References:
+ *
+ *    McLachlan, G.J.; Peel, D. (2000). Finite Mixture Models. Wiley. ISBN
+ * 0-471-00626-2
+ *
+ *  Copyright 2008-2021.
+ *
+ * <a href="matlab: docsearchFS('estepFS')">Link to the help function</a>
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ * Arguments    : const emxArray_real_T *log_lh
+ * Return Type  : double
+ */
 double c_estepFS(const emxArray_real_T *log_lh)
 {
   emxArray_real_T *density;
@@ -222,103 +308,6 @@ double c_estepFS(const emxArray_real_T *log_lh)
   int nx;
   emxInit_real_T(&maxll, 1);
   emxInit_real_T(&post, 1);
-  /* estepFS performs e-step for Gaussian mixture distribution */
-  /*  */
-  /* <a href="matlab: docsearchFS('estepFS')">Link to the help function</a> */
-  /*  */
-  /*    obj = estepFS(log_lh) returns value of the loglikelihood of mixture
-   * model. */
-  /*  */
-  /*    obj is equal to */
-  /*    \begin{equation}\label{mixlik} */
-  /*    obj = \log   \left( \prod_{i=1}^n  \sum_{j=1}^k \pi_j \phi (y_i; \;
-   * \theta_j)    \right). */
-  /*    \end{equation} */
-  /*  */
-  /*    or */
-  /*  */
-  /*    \begin{equation}\label{mixlik} */
-  /*    obj =  \sum_{i=1}^n  \log   \left( \sum_{j=1}^k \pi_j \phi (y_i; \;
-   * \theta_j)    \right). */
-  /*    \end{equation} */
-  /*  */
-  /*  */
-  /*    k = number of components of the mixture */
-  /*    \pi_j = component probabilitites */
-  /*    \theta_j = parameters of the j-th component of the mixture */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /*        log_lh: n-by-p matrix containing the log of component conditional */
-  /*                density weighted by the component probability. */
-  /*                log_lh = log( \pi_j \phi (y_i; \; \theta_j)) */
-  /*  */
-  /*  verLess2016b : bsxfun or implicit expansion. Boolean. */
-  /*              If verLess2016b is true, */
-  /*              bsxfun inside the procedure is used. */
-  /*              If verLess2016b is fase, implicit expansion is used instead of
-   */
-  /*              bsxfun. Note that implicit expansion has been introduced only
-   */
-  /*              in 2017a therefore it will not work with previous releases. */
-  /*                Example - 'userepmat',1 */
-  /*                Data Types - double% */
-  /*   Output: */
-  /*  */
-  /*          obj  : scalar. Value of the log likelihood (see above) of */
-  /*                 mixture models */
-  /*  */
-  /*   Optional Output: */
-  /*  */
-  /*    varargout1 : n-by-k matrix containing posterior probabilities */
-  /*                 varargout1 i=1, ..., n and j=1, ..., k is the posterior */
-  /*                 probability of observation i belonging to component j of */
-  /*                 the mixture. */
-  /*                 Posterior probabilities are computed as */
-  /*                 varargout1(i,j)= exp( log_lh(i,j))/ (\sum_{j=1^k}
-   * exp(log_lh(i,j))) */
-  /*  */
-  /*    varargout2 : n-by-1 vector which contains the contributions */
-  /*                 to the loglikelihood of the mixture model of each
-   * observation */
-  /*                 More precisely, */
-  /*                 lodpdf = \log   \left( \sum_{j=1}^k \pi_j \phi (y_i; \;
-   * \theta_j)    \right) */
-  /*                        = \log   \left( \sum_{j=1}^k  \exp( \log_lh )
-   * \right) */
-  /*  */
-  /*  */
-  /*  */
-  /*  DETAILS. Formally a mixture model corresponds to the mixture distribution
-   * that */
-  /*  represents the probability distribution of observations in the overall */
-  /*  population. Mixture models are used */
-  /*  to make statistical inferences about the properties of the */
-  /*  sub-populations given only observations on the pooled population, without
-   */
-  /*  sub-population-identity information. */
-  /*  Mixture modeling approaches assume that data at hand $y_1, ..., y_n$ in */
-  /*  $R^p$ come from a probability distribution with density given by the sum
-   * of k components */
-  /*  $\sum_{j=1}^k  \pi_j \phi( \cdot, \theta_j)$ */
-  /*  with $\phi( \cdot, \theta_j)$ being the */
-  /*  $p$-variate  (generally multivariate normal) densities with parameters */
-  /*  $\theta_j$, $j=1, \ldots, k$. Generally $\theta_j= (\mu_j, \Sigma_j)$ */
-  /*  where $\mu_j$ is the population mean  and   $\Sigma_j$ is the covariance
-   */
-  /*  matrix for component $j$. */
-  /*  \pi_j is the (prior) probability of component j */
-  /*  */
-  /*  References: */
-  /*  */
-  /*    McLachlan, G.J.; Peel, D. (2000). Finite Mixture Models. Wiley. ISBN
-   * 0-471-00626-2 */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  */
-  /* <a href="matlab: docsearchFS('estepFS')">Link to the help function</a> */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /*  */
   /* { */
@@ -401,6 +390,100 @@ double c_estepFS(const emxArray_real_T *log_lh)
   return obj;
 }
 
+/*
+ * estepFS performs e-step for Gaussian mixture distribution
+ *
+ * <a href="matlab: docsearchFS('estepFS')">Link to the help function</a>
+ *
+ *    obj = estepFS(log_lh) returns value of the loglikelihood of mixture model.
+ *
+ *    obj is equal to
+ *    \begin{equation}\label{mixlik}
+ *    obj = \log   \left( \prod_{i=1}^n  \sum_{j=1}^k \pi_j \phi (y_i; \;
+ * \theta_j)    \right). \end{equation}
+ *
+ *    or
+ *
+ *    \begin{equation}\label{mixlik}
+ *    obj =  \sum_{i=1}^n  \log   \left( \sum_{j=1}^k \pi_j \phi (y_i; \;
+ * \theta_j)    \right). \end{equation}
+ *
+ *
+ *    k = number of components of the mixture
+ *    \pi_j = component probabilitites
+ *    \theta_j = parameters of the j-th component of the mixture
+ *
+ *   Required input arguments:
+ *
+ *        log_lh: n-by-p matrix containing the log of component conditional
+ *                density weighted by the component probability.
+ *                log_lh = log( \pi_j \phi (y_i; \; \theta_j))
+ *
+ *  verLess2016b : bsxfun or implicit expansion. Boolean.
+ *              If verLess2016b is true,
+ *              bsxfun inside the procedure is used.
+ *              If verLess2016b is fase, implicit expansion is used instead of
+ *              bsxfun. Note that implicit expansion has been introduced only
+ *              in 2017a therefore it will not work with previous releases.
+ *                Example - 'userepmat',1
+ *                Data Types - double%
+ *   Output:
+ *
+ *          obj  : scalar. Value of the log likelihood (see above) of
+ *                 mixture models
+ *
+ *   Optional Output:
+ *
+ *    varargout1 : n-by-k matrix containing posterior probabilities
+ *                 varargout1 i=1, ..., n and j=1, ..., k is the posterior
+ *                 probability of observation i belonging to component j of
+ *                 the mixture.
+ *                 Posterior probabilities are computed as
+ *                 varargout1(i,j)= exp( log_lh(i,j))/ (\sum_{j=1^k}
+ * exp(log_lh(i,j)))
+ *
+ *    varargout2 : n-by-1 vector which contains the contributions
+ *                 to the loglikelihood of the mixture model of each observation
+ *                 More precisely,
+ *                 lodpdf = \log   \left( \sum_{j=1}^k \pi_j \phi (y_i; \;
+ * \theta_j)    \right) = \log   \left( \sum_{j=1}^k  \exp( \log_lh ) \right)
+ *
+ *
+ *
+ *  DETAILS. Formally a mixture model corresponds to the mixture distribution
+ * that represents the probability distribution of observations in the overall
+ *  population. Mixture models are used
+ *  to make statistical inferences about the properties of the
+ *  sub-populations given only observations on the pooled population, without
+ *  sub-population-identity information.
+ *  Mixture modeling approaches assume that data at hand $y_1, ..., y_n$ in
+ *  $R^p$ come from a probability distribution with density given by the sum of
+ * k components
+ *  $\sum_{j=1}^k  \pi_j \phi( \cdot, \theta_j)$
+ *  with $\phi( \cdot, \theta_j)$ being the
+ *  $p$-variate  (generally multivariate normal) densities with parameters
+ *  $\theta_j$, $j=1, \ldots, k$. Generally $\theta_j= (\mu_j, \Sigma_j)$
+ *  where $\mu_j$ is the population mean  and   $\Sigma_j$ is the covariance
+ *  matrix for component $j$.
+ *  \pi_j is the (prior) probability of component j
+ *
+ *  References:
+ *
+ *    McLachlan, G.J.; Peel, D. (2000). Finite Mixture Models. Wiley. ISBN
+ * 0-471-00626-2
+ *
+ *  Copyright 2008-2021.
+ *
+ * <a href="matlab: docsearchFS('estepFS')">Link to the help function</a>
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ * Arguments    : const emxArray_real_T *log_lh
+ *                double *obj
+ *                emxArray_real_T *varargout1
+ *                emxArray_real_T *varargout2
+ * Return Type  : void
+ */
 void estepFS(const emxArray_real_T *log_lh, double *obj,
              emxArray_real_T *varargout1, emxArray_real_T *varargout2)
 {
@@ -408,103 +491,6 @@ void estepFS(const emxArray_real_T *log_lh, double *obj,
   int k;
   int nx;
   emxInit_real_T(&maxll, 1);
-  /* estepFS performs e-step for Gaussian mixture distribution */
-  /*  */
-  /* <a href="matlab: docsearchFS('estepFS')">Link to the help function</a> */
-  /*  */
-  /*    obj = estepFS(log_lh) returns value of the loglikelihood of mixture
-   * model. */
-  /*  */
-  /*    obj is equal to */
-  /*    \begin{equation}\label{mixlik} */
-  /*    obj = \log   \left( \prod_{i=1}^n  \sum_{j=1}^k \pi_j \phi (y_i; \;
-   * \theta_j)    \right). */
-  /*    \end{equation} */
-  /*  */
-  /*    or */
-  /*  */
-  /*    \begin{equation}\label{mixlik} */
-  /*    obj =  \sum_{i=1}^n  \log   \left( \sum_{j=1}^k \pi_j \phi (y_i; \;
-   * \theta_j)    \right). */
-  /*    \end{equation} */
-  /*  */
-  /*  */
-  /*    k = number of components of the mixture */
-  /*    \pi_j = component probabilitites */
-  /*    \theta_j = parameters of the j-th component of the mixture */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /*        log_lh: n-by-p matrix containing the log of component conditional */
-  /*                density weighted by the component probability. */
-  /*                log_lh = log( \pi_j \phi (y_i; \; \theta_j)) */
-  /*  */
-  /*  verLess2016b : bsxfun or implicit expansion. Boolean. */
-  /*              If verLess2016b is true, */
-  /*              bsxfun inside the procedure is used. */
-  /*              If verLess2016b is fase, implicit expansion is used instead of
-   */
-  /*              bsxfun. Note that implicit expansion has been introduced only
-   */
-  /*              in 2017a therefore it will not work with previous releases. */
-  /*                Example - 'userepmat',1 */
-  /*                Data Types - double% */
-  /*   Output: */
-  /*  */
-  /*          obj  : scalar. Value of the log likelihood (see above) of */
-  /*                 mixture models */
-  /*  */
-  /*   Optional Output: */
-  /*  */
-  /*    varargout1 : n-by-k matrix containing posterior probabilities */
-  /*                 varargout1 i=1, ..., n and j=1, ..., k is the posterior */
-  /*                 probability of observation i belonging to component j of */
-  /*                 the mixture. */
-  /*                 Posterior probabilities are computed as */
-  /*                 varargout1(i,j)= exp( log_lh(i,j))/ (\sum_{j=1^k}
-   * exp(log_lh(i,j))) */
-  /*  */
-  /*    varargout2 : n-by-1 vector which contains the contributions */
-  /*                 to the loglikelihood of the mixture model of each
-   * observation */
-  /*                 More precisely, */
-  /*                 lodpdf = \log   \left( \sum_{j=1}^k \pi_j \phi (y_i; \;
-   * \theta_j)    \right) */
-  /*                        = \log   \left( \sum_{j=1}^k  \exp( \log_lh )
-   * \right) */
-  /*  */
-  /*  */
-  /*  */
-  /*  DETAILS. Formally a mixture model corresponds to the mixture distribution
-   * that */
-  /*  represents the probability distribution of observations in the overall */
-  /*  population. Mixture models are used */
-  /*  to make statistical inferences about the properties of the */
-  /*  sub-populations given only observations on the pooled population, without
-   */
-  /*  sub-population-identity information. */
-  /*  Mixture modeling approaches assume that data at hand $y_1, ..., y_n$ in */
-  /*  $R^p$ come from a probability distribution with density given by the sum
-   * of k components */
-  /*  $\sum_{j=1}^k  \pi_j \phi( \cdot, \theta_j)$ */
-  /*  with $\phi( \cdot, \theta_j)$ being the */
-  /*  $p$-variate  (generally multivariate normal) densities with parameters */
-  /*  $\theta_j$, $j=1, \ldots, k$. Generally $\theta_j= (\mu_j, \Sigma_j)$ */
-  /*  where $\mu_j$ is the population mean  and   $\Sigma_j$ is the covariance
-   */
-  /*  matrix for component $j$. */
-  /*  \pi_j is the (prior) probability of component j */
-  /*  */
-  /*  References: */
-  /*  */
-  /*    McLachlan, G.J.; Peel, D. (2000). Finite Mixture Models. Wiley. ISBN
-   * 0-471-00626-2 */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  */
-  /* <a href="matlab: docsearchFS('estepFS')">Link to the help function</a> */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /*  */
   /* { */
@@ -590,4 +576,8 @@ void estepFS(const emxArray_real_T *log_lh, double *obj,
   *obj = blockedSummation(varargout2, varargout2->size[0]);
 }
 
-/* End of code generation (estepFS.c) */
+/*
+ * File trailer for estepFS.c
+ *
+ * [EOF]
+ */

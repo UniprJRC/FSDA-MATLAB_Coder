@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: FSM_wrapper.c
  *
- * FSM_wrapper.c
- *
- * Code generation for function 'FSM_wrapper'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "FSM_wrapper.h"
 #include "FSMbonfbound.h"
 #include "FSMbsb.h"
@@ -41,6 +40,23 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Wrapper function for LXS (when lms is a scalar). NV pair names are not taken
+ * as inputs. Instead, just the values are taken as inputs.
+ *
+ * Arguments    : const emxArray_real_T *Y
+ *                const double bonflev_data[]
+ *                const int bonflev_size[2]
+ *                const char crit_data[]
+ *                const int crit_size[2]
+ *                double init
+ *                const emxArray_real_T *m0
+ *                bool msg
+ *                bool nocheck
+ *                double rf
+ *                struct_FSM_T *out
+ * Return Type  : void
+ */
 void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
                  const int bonflev_size[2], const char crit_data[],
                  const int crit_size[2], double init, const emxArray_real_T *m0,
@@ -120,9 +136,6 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
     fsdaC_initialize();
   }
   emxInit_real_T(&b_Y, 2);
-  /*  Wrapper function for LXS (when lms is a scalar). NV pair names are not
-   * taken as */
-  /*  inputs. Instead, just the values are taken as inputs. */
   /*  Y: an array of doubles of any dimensions */
   /*  Optional input arguments (name / pairs) in (case insensitive) */
   /*  alphabetical order */
@@ -1746,4 +1759,8 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
   emxFree_real_T(&b_Y);
 }
 
-/* End of code generation (FSM_wrapper.c) */
+/*
+ * File trailer for FSM_wrapper.c
+ *
+ * [EOF]
+ */

@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: tcdf.c
  *
- * tcdf.c
- *
- * Code generation for function 'tcdf'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "tcdf.h"
 #include "betainc.h"
 #include "eml_erfcore.h"
@@ -21,6 +20,14 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const double x_data[]
+ *                const int x_size[2]
+ *                double v
+ *                double p_data[]
+ *                int p_size[2]
+ * Return Type  : void
+ */
 void b_tcdf(const double x_data[], const int x_size[2], double v,
             double p_data[], int p_size[2])
 {
@@ -64,6 +71,12 @@ void b_tcdf(const double x_data[], const int x_size[2], double v,
   }
 }
 
+/*
+ * Arguments    : const emxArray_real_T *x
+ *                double v
+ *                emxArray_real_T *p
+ * Return Type  : void
+ */
 void tcdf(const emxArray_real_T *x, double v, emxArray_real_T *p)
 {
   double xsq;
@@ -96,4 +109,8 @@ void tcdf(const emxArray_real_T *x, double v, emxArray_real_T *p)
   }
 }
 
-/* End of code generation (tcdf.c) */
+/*
+ * File trailer for tcdf.c
+ *
+ * [EOF]
+ */

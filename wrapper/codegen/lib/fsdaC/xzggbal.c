@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: xzggbal.c
  *
- * xzggbal.c
- *
- * Code generation for function 'xzggbal'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "xzggbal.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
@@ -17,6 +16,13 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : emxArray_creal_T *A
+ *                int *ilo
+ *                int *ihi
+ *                emxArray_int32_T *rscale
+ * Return Type  : void
+ */
 void xzggbal(emxArray_creal_T *A, int *ilo, int *ihi, emxArray_int32_T *rscale)
 {
   double atmp_im;
@@ -184,4 +190,8 @@ void xzggbal(emxArray_creal_T *A, int *ilo, int *ihi, emxArray_int32_T *rscale)
   }
 }
 
-/* End of code generation (xzggbal.c) */
+/*
+ * File trailer for xzggbal.c
+ *
+ * [EOF]
+ */

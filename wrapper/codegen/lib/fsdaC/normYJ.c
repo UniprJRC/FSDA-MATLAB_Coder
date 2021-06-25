@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: normYJ.c
  *
- * normYJ.c
- *
- * Code generation for function 'normYJ'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "normYJ.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_rtwutil.h"
@@ -19,6 +18,77 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * normYJ computes (normalized) Yeo-Johnson transformation
+ *
+ * <a href="matlab: docsearchFS('normYJ')">Link to the help function</a>
+ *
+ *   Required input arguments:
+ *
+ *  Y :           Input data. Matrix.
+ *                n x v data matrix; n observations and v variables. Rows of
+ *                Y represent observations, and columns represent variables.
+ *                Missing values (NaN's) and infinite values (Inf's) are
+ *                allowed, since observations (rows) with missing or infinite
+ *                values will automatically be excluded from the
+ *                computations.
+ *                 Data Types - single|double
+ *    ColtoTra:   Variable to transform. Vector.  k x 1 integer vector
+ *                specifying the variables which must be
+ *                transformed. If it is missing and length(la)=v all
+ *                variables are transformed
+ *                 Data Types - single|double
+ *         la :   transformation parameters. Vector.
+ *                k x 1 vector containing set of transformation
+ *                parameters for the k ColtoTra.
+ *                 Data Types - single|double
+ *
+ *
+ *  Optional input arguments:
+ *
+ *   inverse :    Inverse transformation. Logical. If inverse is true, the
+ *                inverse transformation is returned. The default value of
+ *                inverse is false.
+ *                  Example - 'inverse',true
+ *                  Data Types - Logical
+ *
+ *   Jacobian :   Requested Jacobian of transformed values. true (default) or
+ *                false. If true (default) the transformation is normalized
+ *                to have Jacobian equal to 1
+ *                  Example - 'Jacobian',true
+ *                  Data Types - Logical
+ *
+ *  Output:
+ *
+ *    Ytra    : transformed data matrix. Matrix. n x v data matrix containing
+ *                transformed observations
+ *              The Yeo-Johnson transformation is the Box-Cox transformation
+ *              of y+1 for nonnegative values, and of |y|+1 with parameter
+ *              2-lambda for y negative.
+ *
+ *
+ *  See also normBoxCox, normYJpn
+ *
+ *  References:
+ *
+ *  Yeo, I.K and Johnson, R. (2000), A new family of power transformations to
+ *  improve normality or symmetry, "Biometrika", Vol. 87, pp. 954-959.
+ *
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *
+ *
+ * <a href="matlab: docsearchFS('normYJ')">Link to the help function</a>
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ * Arguments    : const emxArray_real_T *Y
+ *                double la
+ *                emxArray_real_T *Ytra
+ * Return Type  : void
+ */
 void normYJ(const emxArray_real_T *Y, double la, emxArray_real_T *Ytra)
 {
   emxArray_int32_T *r;
@@ -30,77 +100,6 @@ void normYJ(const emxArray_real_T *Y, double la, emxArray_real_T *Ytra)
   int end;
   int i;
   int nx;
-  /* normYJ computes (normalized) Yeo-Johnson transformation */
-  /*  */
-  /* <a href="matlab: docsearchFS('normYJ')">Link to the help function</a> */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /*  Y :           Input data. Matrix. */
-  /*                n x v data matrix; n observations and v variables. Rows of
-   */
-  /*                Y represent observations, and columns represent variables.
-   */
-  /*                Missing values (NaN's) and infinite values (Inf's) are */
-  /*                allowed, since observations (rows) with missing or infinite
-   */
-  /*                values will automatically be excluded from the */
-  /*                computations. */
-  /*                 Data Types - single|double */
-  /*    ColtoTra:   Variable to transform. Vector.  k x 1 integer vector */
-  /*                specifying the variables which must be */
-  /*                transformed. If it is missing and length(la)=v all */
-  /*                variables are transformed */
-  /*                 Data Types - single|double */
-  /*         la :   transformation parameters. Vector. */
-  /*                k x 1 vector containing set of transformation */
-  /*                parameters for the k ColtoTra. */
-  /*                 Data Types - single|double */
-  /*  */
-  /*  */
-  /*  Optional input arguments: */
-  /*  */
-  /*   inverse :    Inverse transformation. Logical. If inverse is true, the */
-  /*                inverse transformation is returned. The default value of */
-  /*                inverse is false. */
-  /*                  Example - 'inverse',true */
-  /*                  Data Types - Logical */
-  /*  */
-  /*   Jacobian :   Requested Jacobian of transformed values. true (default) or
-   */
-  /*                false. If true (default) the transformation is normalized */
-  /*                to have Jacobian equal to 1 */
-  /*                  Example - 'Jacobian',true */
-  /*                  Data Types - Logical */
-  /*  */
-  /*  Output: */
-  /*  */
-  /*    Ytra    : transformed data matrix. Matrix. n x v data matrix containing
-   */
-  /*                transformed observations */
-  /*              The Yeo-Johnson transformation is the Box-Cox transformation
-   */
-  /*              of y+1 for nonnegative values, and of |y|+1 with parameter */
-  /*              2-lambda for y negative. */
-  /*  */
-  /*  */
-  /*  See also normBoxCox, normYJpn */
-  /*  */
-  /*  References: */
-  /*  */
-  /*  Yeo, I.K and Johnson, R. (2000), A new family of power transformations to
-   */
-  /*  improve normality or symmetry, "Biometrika", Vol. 87, pp. 954-959. */
-  /*  */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('normYJ')">Link to the help function</a> */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /* { */
   /*     % Example of use of normYJ with all default options. */
@@ -399,4 +398,8 @@ void normYJ(const emxArray_real_T *Y, double la, emxArray_real_T *Ytra)
   /*  Jacobian will be 1 */
 }
 
-/* End of code generation (normYJ.c) */
+/*
+ * File trailer for normYJ.c
+ *
+ * [EOF]
+ */

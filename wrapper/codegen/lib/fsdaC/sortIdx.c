@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: sortIdx.c
  *
- * sortIdx.c
- *
- * Code generation for function 'sortIdx'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "sortIdx.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
@@ -30,6 +29,16 @@ static void merge(emxArray_int32_T *idx, emxArray_real_T *x, int offset, int np,
                   int nq, emxArray_int32_T *iwork, emxArray_real_T *xwork);
 
 /* Function Definitions */
+/*
+ * Arguments    : emxArray_int32_T *idx
+ *                emxArray_real_T *x
+ *                int offset
+ *                int np
+ *                int nq
+ *                emxArray_int32_T *iwork
+ *                emxArray_real_T *xwork
+ * Return Type  : void
+ */
 static void b_merge(emxArray_int32_T *idx, emxArray_real_T *x, int offset,
                     int np, int nq, emxArray_int32_T *iwork,
                     emxArray_real_T *xwork)
@@ -80,6 +89,16 @@ static void b_merge(emxArray_int32_T *idx, emxArray_real_T *x, int offset,
   }
 }
 
+/*
+ * Arguments    : emxArray_int32_T *idx
+ *                emxArray_real_T *x
+ *                int offset
+ *                int n
+ *                int preSortLevel
+ *                emxArray_int32_T *iwork
+ *                emxArray_real_T *xwork
+ * Return Type  : void
+ */
 static void b_merge_block(emxArray_int32_T *idx, emxArray_real_T *x, int offset,
                           int n, int preSortLevel, emxArray_int32_T *iwork,
                           emxArray_real_T *xwork)
@@ -111,6 +130,16 @@ static void b_merge_block(emxArray_int32_T *idx, emxArray_real_T *x, int offset,
   }
 }
 
+/*
+ * Arguments    : emxArray_int32_T *idx
+ *                emxArray_real_T *x
+ *                int offset
+ *                int np
+ *                int nq
+ *                emxArray_int32_T *iwork
+ *                emxArray_real_T *xwork
+ * Return Type  : void
+ */
 static void merge(emxArray_int32_T *idx, emxArray_real_T *x, int offset, int np,
                   int nq, emxArray_int32_T *iwork, emxArray_real_T *xwork)
 {
@@ -160,6 +189,11 @@ static void merge(emxArray_int32_T *idx, emxArray_real_T *x, int offset, int np,
   }
 }
 
+/*
+ * Arguments    : emxArray_real_T *x
+ *                emxArray_int32_T *idx
+ * Return Type  : void
+ */
 void b_sortIdx(emxArray_real_T *x, emxArray_int32_T *idx)
 {
   emxArray_int32_T *iwork;
@@ -431,6 +465,11 @@ void b_sortIdx(emxArray_real_T *x, emxArray_int32_T *idx)
   }
 }
 
+/*
+ * Arguments    : emxArray_real_T *x
+ *                emxArray_int32_T *idx
+ * Return Type  : void
+ */
 void c_sortIdx(emxArray_real_T *x, emxArray_int32_T *idx)
 {
   emxArray_int32_T *iwork;
@@ -719,6 +758,16 @@ void c_sortIdx(emxArray_real_T *x, emxArray_int32_T *idx)
   }
 }
 
+/*
+ * Arguments    : emxArray_int32_T *idx
+ *                emxArray_real_T *x
+ *                int offset
+ *                int n
+ *                int preSortLevel
+ *                emxArray_int32_T *iwork
+ *                emxArray_real_T *xwork
+ * Return Type  : void
+ */
 void merge_block(emxArray_int32_T *idx, emxArray_real_T *x, int offset, int n,
                  int preSortLevel, emxArray_int32_T *iwork,
                  emxArray_real_T *xwork)
@@ -750,6 +799,11 @@ void merge_block(emxArray_int32_T *idx, emxArray_real_T *x, int offset, int n,
   }
 }
 
+/*
+ * Arguments    : const emxArray_real_T *x
+ *                emxArray_int32_T *idx
+ * Return Type  : void
+ */
 void sortIdx(const emxArray_real_T *x, emxArray_int32_T *idx)
 {
   emxArray_int32_T *iwork;
@@ -839,4 +893,8 @@ void sortIdx(const emxArray_real_T *x, emxArray_int32_T *idx)
   emxFree_int32_T(&iwork);
 }
 
-/* End of code generation (sortIdx.c) */
+/*
+ * File trailer for sortIdx.c
+ *
+ * [EOF]
+ */

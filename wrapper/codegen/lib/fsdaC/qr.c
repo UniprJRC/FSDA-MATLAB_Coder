@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: qr.c
  *
- * qr.c
- *
- * Code generation for function 'qr'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "qr.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
@@ -19,6 +18,12 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const emxArray_real_T *A
+ *                emxArray_real_T *Q
+ *                emxArray_real_T *R
+ * Return Type  : void
+ */
 void qr(const emxArray_real_T *A, emxArray_real_T *Q, emxArray_real_T *R)
 {
   emxArray_real_T *b_A;
@@ -142,4 +147,8 @@ void qr(const emxArray_real_T *A, emxArray_real_T *Q, emxArray_real_T *R)
   emxFree_real_T(&b_A);
 }
 
-/* End of code generation (qr.c) */
+/*
+ * File trailer for qr.c
+ *
+ * [EOF]
+ */

@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: mod.c
  *
- * mod.c
- *
- * Code generation for function 'mod'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "mod.h"
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
@@ -17,6 +16,10 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : double x
+ * Return Type  : double
+ */
 double b_mod(double x)
 {
   double r;
@@ -35,6 +38,11 @@ double b_mod(double x)
   return r;
 }
 
+/*
+ * Arguments    : double x
+ *                double y
+ * Return Type  : double
+ */
 double c_mod(double x, double y)
 {
   double r;
@@ -58,4 +66,8 @@ double c_mod(double x, double y)
   return r;
 }
 
-/* End of code generation (mod.c) */
+/*
+ * File trailer for mod.c
+ *
+ * [EOF]
+ */

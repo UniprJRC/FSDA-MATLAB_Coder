@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: FSRenvmdr.c
  *
- * FSRenvmdr.c
- *
- * Code generation for function 'FSRenvmdr'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "FSRenvmdr.h"
 #include "colon.h"
 #include "erfcinv.h"
@@ -24,6 +23,76 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * FSRenvmdr computes the theoretical envelopes of Minimum Deletion Residual
+ * outside subset during the search
+ *
+ * <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a>
+ *
+ *   Required input arguments:
+ *
+ *     n : number of observations. Scalar. Number of observations on which
+ *        the envelopes are based.
+ *     p : number of explanatory variables (including the intercept if
+ *     present). Scalar. Number of expl. variables on which
+ *        the envelopes are based.
+ *
+ *   Optional input arguments:
+ *
+ *    init:       Search initialization. Scalar.
+ *                Scalar which specifies the initial subset size to monitor
+ *                minimum deletion residual, if init is not specified it will
+ *                be set equal to
+ *                    p+1, if the sample size is smaller than 40;
+ *                    min(3*p+1,floor(0.5*(n+p+1))), otherwise.
+ *                Example - 'init',100 starts monitoring from step m=100
+ *                Data Types - double
+ *
+ *   prob:    quantiles for which envelopes have
+ *                to be computed. Vector.
+ *                1 x k vector containing quantiles for which envelopes have
+ *                to be computed. The default is to produce 1%, 50% and 99%
+ *                envelopes.
+ *                Example - 'prob',[0.01 0.99]
+ *                Data Types - double
+ *
+ *   Output:
+ *
+ *   MDRenv:      forward envelopes of mdr. Matrix. Matrix with n-m0+1 rows
+ *                and length(prob)+1 columns.
+ *                1st col = fwd search index from m0 to n-1;
+ *                2nd col = envelope for quantile prob(1);
+ *                3rd col = envelope for quantile prob(2)
+ *                ...
+ *                (k+1) col = envelope for quantile prob(k).
+ *
+ *
+ *  See also: LXS.m, FSReda.m
+ *
+ *  References:
+ *
+ *  Atkinson, A.C. and Riani, M. (2006), Distribution theory and
+ *  simulations for tests of outliers in regression, "Journal of
+ *  Computational and Graphical Statistics", Vol. 15, pp. 460-476.
+ *  Riani, M. and Atkinson, A.C. (2007), Fast calibrations of the forward
+ *  search for testing multiple outliers in regression, "Advances in Data
+ *  Analysis and Classification", Vol. 1, pp. 123-141.
+ *
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *
+ * <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a>
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ * Arguments    : double n
+ *                double p
+ *                double varargin_4
+ *                emxArray_real_T *MDRenv
+ * Return Type  : void
+ */
 void FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
 {
   static const double options_prob[7] = {0.99, 0.999, 0.9999, 0.99999,
@@ -50,70 +119,6 @@ void FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   int outsize_idx_1;
   signed char input_sizes_idx_1;
   bool empty_non_axis_sizes;
-  /* FSRenvmdr computes the theoretical envelopes of Minimum Deletion Residual
-   * outside subset during the search */
-  /*  */
-  /* <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a> */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /*     n : number of observations. Scalar. Number of observations on which */
-  /*        the envelopes are based. */
-  /*     p : number of explanatory variables (including the intercept if */
-  /*     present). Scalar. Number of expl. variables on which */
-  /*        the envelopes are based. */
-  /*  */
-  /*   Optional input arguments: */
-  /*  */
-  /*    init:       Search initialization. Scalar. */
-  /*                Scalar which specifies the initial subset size to monitor */
-  /*                minimum deletion residual, if init is not specified it will
-   */
-  /*                be set equal to */
-  /*                    p+1, if the sample size is smaller than 40; */
-  /*                    min(3*p+1,floor(0.5*(n+p+1))), otherwise. */
-  /*                Example - 'init',100 starts monitoring from step m=100 */
-  /*                Data Types - double */
-  /*  */
-  /*   prob:    quantiles for which envelopes have */
-  /*                to be computed. Vector. */
-  /*                1 x k vector containing quantiles for which envelopes have
-   */
-  /*                to be computed. The default is to produce 1%, 50% and 99% */
-  /*                envelopes. */
-  /*                Example - 'prob',[0.01 0.99] */
-  /*                Data Types - double */
-  /*  */
-  /*   Output: */
-  /*  */
-  /*   MDRenv:      forward envelopes of mdr. Matrix. Matrix with n-m0+1 rows */
-  /*                and length(prob)+1 columns. */
-  /*                1st col = fwd search index from m0 to n-1; */
-  /*                2nd col = envelope for quantile prob(1); */
-  /*                3rd col = envelope for quantile prob(2) */
-  /*                ... */
-  /*                (k+1) col = envelope for quantile prob(k). */
-  /*  */
-  /*  */
-  /*  See also: LXS.m, FSReda.m */
-  /*  */
-  /*  References: */
-  /*  */
-  /*  Atkinson, A.C. and Riani, M. (2006), Distribution theory and */
-  /*  simulations for tests of outliers in regression, "Journal of */
-  /*  Computational and Graphical Statistics", Vol. 15, pp. 460-476. */
-  /*  Riani, M. and Atkinson, A.C. (2007), Fast calibrations of the forward */
-  /*  search for testing multiple outliers in regression, "Advances in Data */
-  /*  Analysis and Classification", Vol. 1, pp. 123-141. */
-  /*  */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a> */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /* { */
   /*     % FSRenvmdr with all default options. */
@@ -417,6 +422,76 @@ void FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   emxFree_real_T(&b_b_tmp);
 }
 
+/*
+ * FSRenvmdr computes the theoretical envelopes of Minimum Deletion Residual
+ * outside subset during the search
+ *
+ * <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a>
+ *
+ *   Required input arguments:
+ *
+ *     n : number of observations. Scalar. Number of observations on which
+ *        the envelopes are based.
+ *     p : number of explanatory variables (including the intercept if
+ *     present). Scalar. Number of expl. variables on which
+ *        the envelopes are based.
+ *
+ *   Optional input arguments:
+ *
+ *    init:       Search initialization. Scalar.
+ *                Scalar which specifies the initial subset size to monitor
+ *                minimum deletion residual, if init is not specified it will
+ *                be set equal to
+ *                    p+1, if the sample size is smaller than 40;
+ *                    min(3*p+1,floor(0.5*(n+p+1))), otherwise.
+ *                Example - 'init',100 starts monitoring from step m=100
+ *                Data Types - double
+ *
+ *   prob:    quantiles for which envelopes have
+ *                to be computed. Vector.
+ *                1 x k vector containing quantiles for which envelopes have
+ *                to be computed. The default is to produce 1%, 50% and 99%
+ *                envelopes.
+ *                Example - 'prob',[0.01 0.99]
+ *                Data Types - double
+ *
+ *   Output:
+ *
+ *   MDRenv:      forward envelopes of mdr. Matrix. Matrix with n-m0+1 rows
+ *                and length(prob)+1 columns.
+ *                1st col = fwd search index from m0 to n-1;
+ *                2nd col = envelope for quantile prob(1);
+ *                3rd col = envelope for quantile prob(2)
+ *                ...
+ *                (k+1) col = envelope for quantile prob(k).
+ *
+ *
+ *  See also: LXS.m, FSReda.m
+ *
+ *  References:
+ *
+ *  Atkinson, A.C. and Riani, M. (2006), Distribution theory and
+ *  simulations for tests of outliers in regression, "Journal of
+ *  Computational and Graphical Statistics", Vol. 15, pp. 460-476.
+ *  Riani, M. and Atkinson, A.C. (2007), Fast calibrations of the forward
+ *  search for testing multiple outliers in regression, "Advances in Data
+ *  Analysis and Classification", Vol. 1, pp. 123-141.
+ *
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *
+ * <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a>
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ * Arguments    : double n
+ *                double p
+ *                double varargin_4
+ *                emxArray_real_T *MDRenv
+ * Return Type  : void
+ */
 void b_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
 {
   emxArray_real_T *b;
@@ -436,70 +511,6 @@ void b_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   int outsize_idx_1;
   signed char input_sizes_idx_1;
   bool empty_non_axis_sizes;
-  /* FSRenvmdr computes the theoretical envelopes of Minimum Deletion Residual
-   * outside subset during the search */
-  /*  */
-  /* <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a> */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /*     n : number of observations. Scalar. Number of observations on which */
-  /*        the envelopes are based. */
-  /*     p : number of explanatory variables (including the intercept if */
-  /*     present). Scalar. Number of expl. variables on which */
-  /*        the envelopes are based. */
-  /*  */
-  /*   Optional input arguments: */
-  /*  */
-  /*    init:       Search initialization. Scalar. */
-  /*                Scalar which specifies the initial subset size to monitor */
-  /*                minimum deletion residual, if init is not specified it will
-   */
-  /*                be set equal to */
-  /*                    p+1, if the sample size is smaller than 40; */
-  /*                    min(3*p+1,floor(0.5*(n+p+1))), otherwise. */
-  /*                Example - 'init',100 starts monitoring from step m=100 */
-  /*                Data Types - double */
-  /*  */
-  /*   prob:    quantiles for which envelopes have */
-  /*                to be computed. Vector. */
-  /*                1 x k vector containing quantiles for which envelopes have
-   */
-  /*                to be computed. The default is to produce 1%, 50% and 99% */
-  /*                envelopes. */
-  /*                Example - 'prob',[0.01 0.99] */
-  /*                Data Types - double */
-  /*  */
-  /*   Output: */
-  /*  */
-  /*   MDRenv:      forward envelopes of mdr. Matrix. Matrix with n-m0+1 rows */
-  /*                and length(prob)+1 columns. */
-  /*                1st col = fwd search index from m0 to n-1; */
-  /*                2nd col = envelope for quantile prob(1); */
-  /*                3rd col = envelope for quantile prob(2) */
-  /*                ... */
-  /*                (k+1) col = envelope for quantile prob(k). */
-  /*  */
-  /*  */
-  /*  See also: LXS.m, FSReda.m */
-  /*  */
-  /*  References: */
-  /*  */
-  /*  Atkinson, A.C. and Riani, M. (2006), Distribution theory and */
-  /*  simulations for tests of outliers in regression, "Journal of */
-  /*  Computational and Graphical Statistics", Vol. 15, pp. 460-476. */
-  /*  Riani, M. and Atkinson, A.C. (2007), Fast calibrations of the forward */
-  /*  search for testing multiple outliers in regression, "Advances in Data */
-  /*  Analysis and Classification", Vol. 1, pp. 123-141. */
-  /*  */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a> */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /* { */
   /*     % FSRenvmdr with all default options. */
@@ -807,6 +818,76 @@ void b_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   emxFree_real_T(&b_b_tmp);
 }
 
+/*
+ * FSRenvmdr computes the theoretical envelopes of Minimum Deletion Residual
+ * outside subset during the search
+ *
+ * <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a>
+ *
+ *   Required input arguments:
+ *
+ *     n : number of observations. Scalar. Number of observations on which
+ *        the envelopes are based.
+ *     p : number of explanatory variables (including the intercept if
+ *     present). Scalar. Number of expl. variables on which
+ *        the envelopes are based.
+ *
+ *   Optional input arguments:
+ *
+ *    init:       Search initialization. Scalar.
+ *                Scalar which specifies the initial subset size to monitor
+ *                minimum deletion residual, if init is not specified it will
+ *                be set equal to
+ *                    p+1, if the sample size is smaller than 40;
+ *                    min(3*p+1,floor(0.5*(n+p+1))), otherwise.
+ *                Example - 'init',100 starts monitoring from step m=100
+ *                Data Types - double
+ *
+ *   prob:    quantiles for which envelopes have
+ *                to be computed. Vector.
+ *                1 x k vector containing quantiles for which envelopes have
+ *                to be computed. The default is to produce 1%, 50% and 99%
+ *                envelopes.
+ *                Example - 'prob',[0.01 0.99]
+ *                Data Types - double
+ *
+ *   Output:
+ *
+ *   MDRenv:      forward envelopes of mdr. Matrix. Matrix with n-m0+1 rows
+ *                and length(prob)+1 columns.
+ *                1st col = fwd search index from m0 to n-1;
+ *                2nd col = envelope for quantile prob(1);
+ *                3rd col = envelope for quantile prob(2)
+ *                ...
+ *                (k+1) col = envelope for quantile prob(k).
+ *
+ *
+ *  See also: LXS.m, FSReda.m
+ *
+ *  References:
+ *
+ *  Atkinson, A.C. and Riani, M. (2006), Distribution theory and
+ *  simulations for tests of outliers in regression, "Journal of
+ *  Computational and Graphical Statistics", Vol. 15, pp. 460-476.
+ *  Riani, M. and Atkinson, A.C. (2007), Fast calibrations of the forward
+ *  search for testing multiple outliers in regression, "Advances in Data
+ *  Analysis and Classification", Vol. 1, pp. 123-141.
+ *
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *
+ * <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a>
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ * Arguments    : double n
+ *                double p
+ *                double varargin_4
+ *                emxArray_real_T *MDRenv
+ * Return Type  : void
+ */
 void c_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
 {
   emxArray_real_T *a;
@@ -831,70 +912,6 @@ void c_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   int outsize_idx_1;
   signed char input_sizes_idx_1;
   bool empty_non_axis_sizes;
-  /* FSRenvmdr computes the theoretical envelopes of Minimum Deletion Residual
-   * outside subset during the search */
-  /*  */
-  /* <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a> */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /*     n : number of observations. Scalar. Number of observations on which */
-  /*        the envelopes are based. */
-  /*     p : number of explanatory variables (including the intercept if */
-  /*     present). Scalar. Number of expl. variables on which */
-  /*        the envelopes are based. */
-  /*  */
-  /*   Optional input arguments: */
-  /*  */
-  /*    init:       Search initialization. Scalar. */
-  /*                Scalar which specifies the initial subset size to monitor */
-  /*                minimum deletion residual, if init is not specified it will
-   */
-  /*                be set equal to */
-  /*                    p+1, if the sample size is smaller than 40; */
-  /*                    min(3*p+1,floor(0.5*(n+p+1))), otherwise. */
-  /*                Example - 'init',100 starts monitoring from step m=100 */
-  /*                Data Types - double */
-  /*  */
-  /*   prob:    quantiles for which envelopes have */
-  /*                to be computed. Vector. */
-  /*                1 x k vector containing quantiles for which envelopes have
-   */
-  /*                to be computed. The default is to produce 1%, 50% and 99% */
-  /*                envelopes. */
-  /*                Example - 'prob',[0.01 0.99] */
-  /*                Data Types - double */
-  /*  */
-  /*   Output: */
-  /*  */
-  /*   MDRenv:      forward envelopes of mdr. Matrix. Matrix with n-m0+1 rows */
-  /*                and length(prob)+1 columns. */
-  /*                1st col = fwd search index from m0 to n-1; */
-  /*                2nd col = envelope for quantile prob(1); */
-  /*                3rd col = envelope for quantile prob(2) */
-  /*                ... */
-  /*                (k+1) col = envelope for quantile prob(k). */
-  /*  */
-  /*  */
-  /*  See also: LXS.m, FSReda.m */
-  /*  */
-  /*  References: */
-  /*  */
-  /*  Atkinson, A.C. and Riani, M. (2006), Distribution theory and */
-  /*  simulations for tests of outliers in regression, "Journal of */
-  /*  Computational and Graphical Statistics", Vol. 15, pp. 460-476. */
-  /*  Riani, M. and Atkinson, A.C. (2007), Fast calibrations of the forward */
-  /*  search for testing multiple outliers in regression, "Advances in Data */
-  /*  Analysis and Classification", Vol. 1, pp. 123-141. */
-  /*  */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a> */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /* { */
   /*     % FSRenvmdr with all default options. */
@@ -1199,6 +1216,76 @@ void c_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   emxFree_real_T(&b_b_tmp);
 }
 
+/*
+ * FSRenvmdr computes the theoretical envelopes of Minimum Deletion Residual
+ * outside subset during the search
+ *
+ * <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a>
+ *
+ *   Required input arguments:
+ *
+ *     n : number of observations. Scalar. Number of observations on which
+ *        the envelopes are based.
+ *     p : number of explanatory variables (including the intercept if
+ *     present). Scalar. Number of expl. variables on which
+ *        the envelopes are based.
+ *
+ *   Optional input arguments:
+ *
+ *    init:       Search initialization. Scalar.
+ *                Scalar which specifies the initial subset size to monitor
+ *                minimum deletion residual, if init is not specified it will
+ *                be set equal to
+ *                    p+1, if the sample size is smaller than 40;
+ *                    min(3*p+1,floor(0.5*(n+p+1))), otherwise.
+ *                Example - 'init',100 starts monitoring from step m=100
+ *                Data Types - double
+ *
+ *   prob:    quantiles for which envelopes have
+ *                to be computed. Vector.
+ *                1 x k vector containing quantiles for which envelopes have
+ *                to be computed. The default is to produce 1%, 50% and 99%
+ *                envelopes.
+ *                Example - 'prob',[0.01 0.99]
+ *                Data Types - double
+ *
+ *   Output:
+ *
+ *   MDRenv:      forward envelopes of mdr. Matrix. Matrix with n-m0+1 rows
+ *                and length(prob)+1 columns.
+ *                1st col = fwd search index from m0 to n-1;
+ *                2nd col = envelope for quantile prob(1);
+ *                3rd col = envelope for quantile prob(2)
+ *                ...
+ *                (k+1) col = envelope for quantile prob(k).
+ *
+ *
+ *  See also: LXS.m, FSReda.m
+ *
+ *  References:
+ *
+ *  Atkinson, A.C. and Riani, M. (2006), Distribution theory and
+ *  simulations for tests of outliers in regression, "Journal of
+ *  Computational and Graphical Statistics", Vol. 15, pp. 460-476.
+ *  Riani, M. and Atkinson, A.C. (2007), Fast calibrations of the forward
+ *  search for testing multiple outliers in regression, "Advances in Data
+ *  Analysis and Classification", Vol. 1, pp. 123-141.
+ *
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *
+ * <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a>
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ * Arguments    : double n
+ *                double p
+ *                double varargin_4
+ *                emxArray_real_T *MDRenv
+ * Return Type  : void
+ */
 void d_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
 {
   emxArray_real_T *a;
@@ -1223,70 +1310,6 @@ void d_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   int outsize_idx_1;
   signed char input_sizes_idx_1;
   bool empty_non_axis_sizes;
-  /* FSRenvmdr computes the theoretical envelopes of Minimum Deletion Residual
-   * outside subset during the search */
-  /*  */
-  /* <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a> */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /*     n : number of observations. Scalar. Number of observations on which */
-  /*        the envelopes are based. */
-  /*     p : number of explanatory variables (including the intercept if */
-  /*     present). Scalar. Number of expl. variables on which */
-  /*        the envelopes are based. */
-  /*  */
-  /*   Optional input arguments: */
-  /*  */
-  /*    init:       Search initialization. Scalar. */
-  /*                Scalar which specifies the initial subset size to monitor */
-  /*                minimum deletion residual, if init is not specified it will
-   */
-  /*                be set equal to */
-  /*                    p+1, if the sample size is smaller than 40; */
-  /*                    min(3*p+1,floor(0.5*(n+p+1))), otherwise. */
-  /*                Example - 'init',100 starts monitoring from step m=100 */
-  /*                Data Types - double */
-  /*  */
-  /*   prob:    quantiles for which envelopes have */
-  /*                to be computed. Vector. */
-  /*                1 x k vector containing quantiles for which envelopes have
-   */
-  /*                to be computed. The default is to produce 1%, 50% and 99% */
-  /*                envelopes. */
-  /*                Example - 'prob',[0.01 0.99] */
-  /*                Data Types - double */
-  /*  */
-  /*   Output: */
-  /*  */
-  /*   MDRenv:      forward envelopes of mdr. Matrix. Matrix with n-m0+1 rows */
-  /*                and length(prob)+1 columns. */
-  /*                1st col = fwd search index from m0 to n-1; */
-  /*                2nd col = envelope for quantile prob(1); */
-  /*                3rd col = envelope for quantile prob(2) */
-  /*                ... */
-  /*                (k+1) col = envelope for quantile prob(k). */
-  /*  */
-  /*  */
-  /*  See also: LXS.m, FSReda.m */
-  /*  */
-  /*  References: */
-  /*  */
-  /*  Atkinson, A.C. and Riani, M. (2006), Distribution theory and */
-  /*  simulations for tests of outliers in regression, "Journal of */
-  /*  Computational and Graphical Statistics", Vol. 15, pp. 460-476. */
-  /*  Riani, M. and Atkinson, A.C. (2007), Fast calibrations of the forward */
-  /*  search for testing multiple outliers in regression, "Advances in Data */
-  /*  Analysis and Classification", Vol. 1, pp. 123-141. */
-  /*  */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a> */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /* { */
   /*     % FSRenvmdr with all default options. */
@@ -1591,4 +1614,8 @@ void d_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   emxFree_real_T(&b_b_tmp);
 }
 
-/* End of code generation (FSRenvmdr.c) */
+/*
+ * File trailer for FSRenvmdr.c
+ *
+ * [EOF]
+ */

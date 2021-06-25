@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: xzlarfg.c
  *
- * xzlarfg.c
- *
- * Code generation for function 'xzlarfg'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "xzlarfg.h"
 #include "fsdaC_rtwutil.h"
 #include "fsdaC_types.h"
@@ -19,6 +18,13 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : int n
+ *                double *alpha1
+ *                emxArray_real_T *x
+ *                int ix0
+ * Return Type  : double
+ */
 double b_xzlarfg(int n, double *alpha1, emxArray_real_T *x, int ix0)
 {
   double beta1;
@@ -73,6 +79,12 @@ double b_xzlarfg(int n, double *alpha1, emxArray_real_T *x, int ix0)
   return tau;
 }
 
+/*
+ * Arguments    : int n
+ *                double *alpha1
+ *                double x[3]
+ * Return Type  : double
+ */
 double xzlarfg(int n, double *alpha1, double x[3])
 {
   double beta1;
@@ -124,4 +136,8 @@ double xzlarfg(int n, double *alpha1, double x[3])
   return tau;
 }
 
-/* End of code generation (xzlarfg.c) */
+/*
+ * File trailer for xzlarfg.c
+ *
+ * [EOF]
+ */

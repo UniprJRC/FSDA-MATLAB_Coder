@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: fsdaC_rtwutil.c
  *
- * fsdaC_rtwutil.c
- *
- * Code generation for function 'fsdaC_rtwutil'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "fsdaC_rtwutil.h"
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
@@ -17,6 +16,11 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : double u0
+ *                double u1
+ * Return Type  : double
+ */
 double rt_hypotd_snf(double u0, double u1)
 {
   double a;
@@ -35,6 +39,11 @@ double rt_hypotd_snf(double u0, double u1)
   return y;
 }
 
+/*
+ * Arguments    : double u0
+ *                double u1
+ * Return Type  : double
+ */
 double rt_powd_snf(double u0, double u1)
 {
   double d;
@@ -80,6 +89,10 @@ double rt_powd_snf(double u0, double u1)
   return y;
 }
 
+/*
+ * Arguments    : double u
+ * Return Type  : double
+ */
 double rt_roundd_snf(double u)
 {
   double y;
@@ -97,4 +110,8 @@ double rt_roundd_snf(double u)
   return y;
 }
 
-/* End of code generation (fsdaC_rtwutil.c) */
+/*
+ * File trailer for fsdaC_rtwutil.c
+ *
+ * [EOF]
+ */

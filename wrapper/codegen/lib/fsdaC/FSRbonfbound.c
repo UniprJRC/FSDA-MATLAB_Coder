@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: FSRbonfbound.c
  *
- * FSRbonfbound.c
- *
- * Code generation for function 'FSRbonfbound'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "FSRbonfbound.h"
 #include "colon.h"
 #include "fsdaC_emxutil.h"
@@ -22,6 +21,75 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * FSRbonfbound computes Bonferroni bounds for each step of the search (in
+ * linear regression)
+ *
+ * <a href="matlab: docsearchFS('FSRbonfbound')">Link to the help function</a>
+ *
+ *   Required input arguments:
+ *
+ *     n : number of observations. Scalar. Number of observations on which
+ *        the envelopes are based.
+ *     p : number of explanatory variables (including the intercept if
+ *     present). Scalar. Number of expl. variables on which
+ *        the envelopes are based.
+ *
+ *   Optional input arguments:
+ *
+ *         init :      Search initialization. Scalar.
+ *                       It specifies the point where to initialize the search
+ *                        and start monitoring minimum deletion residual. if
+ * init is not specified it will be set equal to : p+1, if the sample size is
+ * smaller than 40; min(3*p+1,floor(0.5*(n+p+1))), otherwise. Example -
+ * 'init',100 starts monitoring from step m=100 Data Types - double
+ *
+ *   prob:    quantiles for which envelopes have
+ *                to be computed. Vector.
+ *                1 x k vector containing quantiles for which envelopes have
+ *                to be computed. The default is to produce 1%, 50% and 99%
+ *                envelopes.
+ *                Example - 'prob',[0.01 0.99]
+ *                Data Types - double
+ *
+ *   Output:
+ *
+ *   Bbound:      Bonferroni forward envelopes of mdr. Matrix.
+ *                Matrix with n-m0+1 rows and length(prob)+1 columns:
+ *                1st col = fwd search index from m0 to n-1,
+ *                2nd col = bound for quantile prob[1],
+ *                3rd col = bound for quantile prob[2],
+ *                ...,
+ *                (k+1) col = bound for quantile prob[k].
+ *
+ *
+ *  See also: FSRenvmdr
+ *
+ *  References:
+ *
+ *  Atkinson, A.C. and Riani, M. (2006), Distribution theory and
+ *  simulations for tests of outliers in regression, "Journal of
+ *  Computational and Graphical Statistics", Vol. 15, pp. 460-476.
+ *  Riani, M. and Atkinson, A.C. (2007), Fast calibrations of the forward
+ *  search for testing multiple outliers in regression, "Advances in Data
+ *  Analysis and Classification", Vol. 1, pp. 123-141.
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *
+ * <a href="matlab: docsearchFS('FSRbonfbound')">Link to the help function</a>
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ * Arguments    : double n
+ *                double p
+ *                const double varargin_2_data[]
+ *                const int varargin_2_size[2]
+ *                double varargin_4
+ *                emxArray_real_T *Bbound
+ * Return Type  : void
+ */
 void FSRbonfbound(double n, double p, const double varargin_2_data[],
                   const int varargin_2_size[2], double varargin_4,
                   emxArray_real_T *Bbound)
@@ -43,73 +111,6 @@ void FSRbonfbound(double n, double p, const double varargin_2_data[],
   signed char input_sizes_idx_1;
   signed char sizes_idx_1;
   bool empty_non_axis_sizes;
-  /* FSRbonfbound computes Bonferroni bounds for each step of the search (in
-   * linear regression) */
-  /*  */
-  /* <a href="matlab: docsearchFS('FSRbonfbound')">Link to the help function</a>
-   */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /*     n : number of observations. Scalar. Number of observations on which */
-  /*        the envelopes are based. */
-  /*     p : number of explanatory variables (including the intercept if */
-  /*     present). Scalar. Number of expl. variables on which */
-  /*        the envelopes are based. */
-  /*  */
-  /*   Optional input arguments: */
-  /*  */
-  /*         init :      Search initialization. Scalar. */
-  /*                       It specifies the point where to initialize the search
-   */
-  /*                        and start monitoring minimum deletion residual. if
-   * init is not */
-  /*                        specified it will be set equal to : */
-  /*                        p+1, if the sample size is smaller than 40; */
-  /*                        min(3*p+1,floor(0.5*(n+p+1))), otherwise. */
-  /*                        Example - 'init',100 starts monitoring from step
-   * m=100 */
-  /*                        Data Types - double */
-  /*  */
-  /*   prob:    quantiles for which envelopes have */
-  /*                to be computed. Vector. */
-  /*                1 x k vector containing quantiles for which envelopes have
-   */
-  /*                to be computed. The default is to produce 1%, 50% and 99% */
-  /*                envelopes. */
-  /*                Example - 'prob',[0.01 0.99]  */
-  /*                Data Types - double */
-  /*  */
-  /*   Output: */
-  /*  */
-  /*   Bbound:      Bonferroni forward envelopes of mdr. Matrix. */
-  /*                Matrix with n-m0+1 rows and length(prob)+1 columns: */
-  /*                1st col = fwd search index from m0 to n-1, */
-  /*                2nd col = bound for quantile prob[1], */
-  /*                3rd col = bound for quantile prob[2], */
-  /*                ..., */
-  /*                (k+1) col = bound for quantile prob[k]. */
-  /*  */
-  /*  */
-  /*  See also: FSRenvmdr */
-  /*  */
-  /*  References: */
-  /*  */
-  /*  Atkinson, A.C. and Riani, M. (2006), Distribution theory and */
-  /*  simulations for tests of outliers in regression, "Journal of */
-  /*  Computational and Graphical Statistics", Vol. 15, pp. 460-476. */
-  /*  Riani, M. and Atkinson, A.C. (2007), Fast calibrations of the forward */
-  /*  search for testing multiple outliers in regression, "Advances in Data */
-  /*  Analysis and Classification", Vol. 1, pp. 123-141. */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('FSRbonfbound')">Link to the help function</a>
-   */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /* { */
   /*     %% mdr with Bonferroni envelopes. */
@@ -336,4 +337,8 @@ void FSRbonfbound(double n, double p, const double varargin_2_data[],
   emxFree_real_T(&b);
 }
 
-/* End of code generation (FSRbonfbound.c) */
+/*
+ * File trailer for FSRbonfbound.c
+ *
+ * [EOF]
+ */

@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: tclust_wrapper.c
  *
- * tclust_wrapper.c
- *
- * Code generation for function 'tclust_wrapper'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "tclust_wrapper.h"
 #include "abs.h"
 #include "any.h"
@@ -48,6 +47,29 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Wrapper function for tclust (when restrfactor is a scalar or vector).
+ *  NV pair names are not taken as inputs. Instead, just the values are taken
+ *  as inputs.
+ *
+ * Arguments    : const emxArray_real_T *Y
+ *                double k
+ *                double alpha
+ *                double restrfactor
+ *                bool equalweights
+ *                double mixt
+ *                double msg
+ *                bool nocheck
+ *                const emxArray_real_T *nsamp
+ *                const emxArray_real_T *RandNumbForNini
+ *                double refsteps
+ *                double reftol
+ *                bool startv1
+ *                bool Ysave
+ *                struct_tclust_T *out
+ *                emxArray_real_T *C
+ * Return Type  : void
+ */
 void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
                     double restrfactor, bool equalweights, double mixt,
                     double msg, bool nocheck, const emxArray_real_T *nsamp,
@@ -149,10 +171,6 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
   if (!isInitialized_fsdaC) {
     fsdaC_initialize();
   }
-  /*  Wrapper function for tclust (when restrfactor is a scalar or vector).  */
-  /*  NV pair names are not taken as inputs. Instead, just the values are taken
-   */
-  /*  as inputs. */
   /*  Y: an array of doubles of any dimensions */
   /*  k: a scalar of type double */
   /*  alpha: a scalar of type double */
@@ -5937,4 +5955,8 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
   /* + */
 }
 
-/* End of code generation (tclust_wrapper.c) */
+/*
+ * File trailer for tclust_wrapper.c
+ *
+ * [EOF]
+ */

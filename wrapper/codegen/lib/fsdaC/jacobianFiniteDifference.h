@@ -2,17 +2,16 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: jacobianFiniteDifference.h
  *
- * jacobianFiniteDifference.h
- *
- * Code generation for function 'jacobianFiniteDifference'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
 #ifndef JACOBIANFINITEDIFFERENCE_H
 #define JACOBIANFINITEDIFFERENCE_H
 
-/* Include files */
+/* Include Files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -41,4 +40,8 @@ void jacobianFiniteDifference(emxArray_real_T *augJacobian,
 #endif
 
 #endif
-/* End of code generation (jacobianFiniteDifference.h) */
+/*
+ * File trailer for jacobianFiniteDifference.h
+ *
+ * [EOF]
+ */

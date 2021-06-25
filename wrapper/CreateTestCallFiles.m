@@ -215,7 +215,7 @@ for i=1:lFiles
 end
 
 if ~isempty(codegenOverall)
-    disp('Code to callgen on the multiple files')
+    disp('Call to callgen on the multiple files')
     
     % This assignment is not necessary, this is just because overallName is
     % more evocative than codegenOverall

@@ -2,19 +2,25 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: string1.c
  *
- * string1.c
- *
- * Code generation for function 'string1'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "string1.h"
 #include "rt_nonfinite.h"
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const char val_data[]
+ *                const int val_size[2]
+ *                char obj_Value_data[]
+ *                int obj_Value_size[2]
+ * Return Type  : void
+ */
 void string_string(const char val_data[], const int val_size[2],
                    char obj_Value_data[], int obj_Value_size[2])
 {
@@ -49,4 +55,8 @@ void string_string(const char val_data[], const int val_size[2],
   }
 }
 
-/* End of code generation (string1.c) */
+/*
+ * File trailer for string1.c
+ *
+ * [EOF]
+ */

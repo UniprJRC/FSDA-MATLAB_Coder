@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: nanmedian.c
  *
- * nanmedian.c
- *
- * Code generation for function 'nanmedian'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "nanmedian.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_rtwutil.h"
@@ -20,6 +19,10 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const emxArray_real_T *x
+ * Return Type  : double
+ */
 double nanmedian(const emxArray_real_T *x)
 {
   emxArray_int32_T *idx;
@@ -52,4 +55,8 @@ double nanmedian(const emxArray_real_T *x)
   return y;
 }
 
-/* End of code generation (nanmedian.c) */
+/*
+ * File trailer for nanmedian.c
+ *
+ * [EOF]
+ */

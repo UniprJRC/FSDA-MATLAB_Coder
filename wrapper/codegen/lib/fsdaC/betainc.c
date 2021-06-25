@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: betainc.c
  *
- * betainc.c
- *
- * Code generation for function 'betainc'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "betainc.h"
 #include "eml_betainc.h"
 #include "fsdaC_data.h"
@@ -21,6 +20,12 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : double x
+ *                double a
+ *                double b
+ * Return Type  : creal_T
+ */
 creal_T b_betainc(double x, double a, double b)
 {
   creal_T y;
@@ -465,6 +470,12 @@ creal_T b_betainc(double x, double a, double b)
   return y;
 }
 
+/*
+ * Arguments    : double x
+ *                double a
+ *                double b
+ * Return Type  : creal_T
+ */
 creal_T betainc(double x, double a, double b)
 {
   creal_T y;
@@ -952,4 +963,8 @@ creal_T betainc(double x, double a, double b)
   return y;
 }
 
-/* End of code generation (betainc.c) */
+/*
+ * File trailer for betainc.c
+ *
+ * [EOF]
+ */

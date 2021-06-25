@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: checkStoppingCriteria.c
  *
- * checkStoppingCriteria.c
- *
- * Code generation for function 'checkStoppingCriteria'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "checkStoppingCriteria.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
@@ -19,6 +18,20 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : double options_MaxFunctionEvaluations
+ *                const emxArray_real_T *gradf
+ *                double relFactor
+ *                double funDiff
+ *                const emxArray_real_T *x
+ *                const emxArray_real_T *dx
+ *                int funcCount
+ *                bool stepSuccessful
+ *                int *iter
+ *                double projSteepestDescentInfNorm
+ *                bool b_hasFiniteBounds
+ * Return Type  : int
+ */
 int b_checkStoppingCriteria(double options_MaxFunctionEvaluations,
                             const emxArray_real_T *gradf, double relFactor,
                             double funDiff, const emxArray_real_T *x,
@@ -86,6 +99,17 @@ int b_checkStoppingCriteria(double options_MaxFunctionEvaluations,
   return exitflag;
 }
 
+/*
+ * Arguments    : double options_MaxFunctionEvaluations
+ *                const emxArray_real_T *gradf
+ *                double relFactor
+ *                const emxArray_real_T *x
+ *                const emxArray_real_T *dx
+ *                int funcCount
+ *                double projSteepestDescentInfNorm
+ *                bool b_hasFiniteBounds
+ * Return Type  : int
+ */
 int checkStoppingCriteria(double options_MaxFunctionEvaluations,
                           const emxArray_real_T *gradf, double relFactor,
                           const emxArray_real_T *x, const emxArray_real_T *dx,
@@ -144,4 +168,8 @@ int checkStoppingCriteria(double options_MaxFunctionEvaluations,
   return exitflag;
 }
 
-/* End of code generation (checkStoppingCriteria.c) */
+/*
+ * File trailer for checkStoppingCriteria.c
+ *
+ * [EOF]
+ */

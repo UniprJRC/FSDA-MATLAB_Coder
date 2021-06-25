@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: sort.c
  *
- * sort.c
- *
- * Code generation for function 'sort'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "sort.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
@@ -20,6 +19,10 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : creal_T x[2]
+ * Return Type  : void
+ */
 void b_sort(creal_T x[2])
 {
   double tmp_im;
@@ -42,6 +45,10 @@ void b_sort(creal_T x[2])
   }
 }
 
+/*
+ * Arguments    : emxArray_real_T *x
+ * Return Type  : void
+ */
 void c_sort(emxArray_real_T *x)
 {
   emxArray_int32_T *b_vwork;
@@ -83,6 +90,10 @@ void c_sort(emxArray_real_T *x)
   emxFree_real_T(&vwork);
 }
 
+/*
+ * Arguments    : emxArray_real_T *x
+ * Return Type  : void
+ */
 void d_sort(emxArray_real_T *x)
 {
   emxArray_int32_T *idx;
@@ -359,6 +370,10 @@ void d_sort(emxArray_real_T *x)
   emxFree_int32_T(&idx);
 }
 
+/*
+ * Arguments    : emxArray_real_T *x
+ * Return Type  : void
+ */
 void e_sort(emxArray_real_T *x)
 {
   emxArray_int32_T *b_vwork;
@@ -409,6 +424,11 @@ void e_sort(emxArray_real_T *x)
   emxFree_real_T(&vwork);
 }
 
+/*
+ * Arguments    : emxArray_real_T *x
+ *                emxArray_int32_T *idx
+ * Return Type  : void
+ */
 void f_sort(emxArray_real_T *x, emxArray_int32_T *idx)
 {
   emxArray_int32_T *iidx;
@@ -455,6 +475,10 @@ void f_sort(emxArray_real_T *x, emxArray_int32_T *idx)
   emxFree_real_T(&vwork);
 }
 
+/*
+ * Arguments    : emxArray_creal_T *x
+ * Return Type  : void
+ */
 void g_sort(emxArray_creal_T *x)
 {
   emxArray_creal_T *vwork;
@@ -620,6 +644,10 @@ void g_sort(emxArray_creal_T *x)
   emxFree_creal_T(&vwork);
 }
 
+/*
+ * Arguments    : emxArray_real_T *x
+ * Return Type  : void
+ */
 void h_sort(emxArray_real_T *x)
 {
   emxArray_int32_T *b_vwork;
@@ -661,6 +689,11 @@ void h_sort(emxArray_real_T *x)
   emxFree_real_T(&vwork);
 }
 
+/*
+ * Arguments    : emxArray_real_T *x
+ *                emxArray_int32_T *idx
+ * Return Type  : void
+ */
 void sort(emxArray_real_T *x, emxArray_int32_T *idx)
 {
   emxArray_int32_T *iidx;
@@ -707,4 +740,8 @@ void sort(emxArray_real_T *x, emxArray_int32_T *idx)
   emxFree_real_T(&vwork);
 }
 
-/* End of code generation (sort.c) */
+/*
+ * File trailer for sort.c
+ *
+ * [EOF]
+ */

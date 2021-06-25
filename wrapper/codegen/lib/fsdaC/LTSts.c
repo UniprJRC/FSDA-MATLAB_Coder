@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: LTSts.c
  *
- * LTSts.c
- *
- * Code generation for function 'LTSts'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "LTSts.h"
 #include "any.h"
 #include "blockedSummation.h"
@@ -52,6 +51,28 @@ static void b_ALS(const c_captured_var *Seq, const c_captured_var *bsb,
                   emxArray_real_T *newbeta, double *exitflag);
 
 /* Function Definitions */
+/*
+ * Arguments    : const captured_var *reftolALS
+ *                const captured_var *refstepsALS
+ *                const c_captured_var *indlinsc
+ *                const c_captured_var *Xseaso
+ *                const c_captured_var *bsb
+ *                const b_captured_var *isemptyX
+ *                const captured_var *lshiftYN
+ *                const c_captured_var *Xtrend
+ *                const c_captured_var *Seq
+ *                const captured_var *varampl
+ *                const c_captured_var *Xlshift
+ *                const c_captured_var *X
+ *                const c_captured_var *yin
+ *                const captured_var *trend
+ *                const captured_var *nexpl
+ *                const c_captured_var *otherind
+ *                const emxArray_real_T *beta0
+ *                emxArray_real_T *newbeta
+ *                double *exitflag
+ * Return Type  : void
+ */
 static void
 ALSbsxfun(const captured_var *reftolALS, const captured_var *refstepsALS,
           const c_captured_var *indlinsc, const c_captured_var *Xseaso,
@@ -1089,6 +1110,28 @@ ALSbsxfun(const captured_var *reftolALS, const captured_var *refstepsALS,
   *exitflag = b_exitflag;
 }
 
+/*
+ * Arguments    : const c_captured_var *Seq
+ *                const c_captured_var *bsb
+ *                const c_captured_var *Xseaso
+ *                const c_captured_var *Xtrend
+ *                const c_captured_var *yin
+ *                const captured_var *trend
+ *                const captured_var *nexpl
+ *                const captured_var *varampl
+ *                const b_captured_var *isemptyX
+ *                const captured_var *lshiftYN
+ *                const c_captured_var *Xlshift
+ *                const c_captured_var *X
+ *                const captured_var *reftolALS
+ *                const captured_var *refstepsALS
+ *                const c_captured_var *indlinsc
+ *                const c_captured_var *otherind
+ *                const emxArray_real_T *beta0
+ *                emxArray_real_T *newbeta
+ *                double *exitflag
+ * Return Type  : void
+ */
 static void b_ALS(const c_captured_var *Seq, const c_captured_var *bsb,
                   const c_captured_var *Xseaso, const c_captured_var *Xtrend,
                   const c_captured_var *yin, const captured_var *trend,
@@ -1990,6 +2033,27 @@ static void b_ALS(const c_captured_var *Seq, const c_captured_var *bsb,
   *exitflag = b_exitflag;
 }
 
+/*
+ * Arguments    : const c_captured_var *Seq
+ *                const c_captured_var *bsb
+ *                const c_captured_var *Xseaso
+ *                const c_captured_var *Xtrend
+ *                const c_captured_var *yin
+ *                const captured_var *trend
+ *                const captured_var *nexpl
+ *                const captured_var *varampl
+ *                const b_captured_var *isemptyX
+ *                const captured_var *lshiftYN
+ *                const c_captured_var *Xlshift
+ *                const c_captured_var *X
+ *                const captured_var *reftolALS
+ *                const captured_var *refstepsALS
+ *                const c_captured_var *indlinsc
+ *                const c_captured_var *otherind
+ *                const emxArray_real_T *beta0
+ *                emxArray_real_T *newbeta
+ * Return Type  : void
+ */
 void ALS(const c_captured_var *Seq, const c_captured_var *bsb,
          const c_captured_var *Xseaso, const c_captured_var *Xtrend,
          const c_captured_var *yin, const captured_var *trend,
@@ -2885,6 +2949,76 @@ void ALS(const c_captured_var *Seq, const c_captured_var *bsb,
   emxFree_real_T(&oldbeta);
 }
 
+/*
+ * IRWLSreg (iterative reweighted least squares) does refsteps
+ * refining steps from initialbeta
+ *
+ *   Required input arguments:
+ *
+ *     y:         A vector with n elements that contains the response
+ *                variable. It can be both a row or column vector.
+ *   initialbeta: vector containing initial estimate of beta
+ *    refsteps  : scalar, number of refining (IRLS) steps
+ *    reftol    : relative convergence tolerance
+ *                Default value is 1e-7
+ *       h      : scalar. number of observations with smallest
+ *                residuals to consider
+ *
+ *            GLOBAL VARIABLES REQUIRED
+ *     yhat :     A vector with T elements (fitted values for all the
+ *                observations)
+ *   Output:
+ *
+ *   The output consists of a structure 'outIRWLS' containing the
+ *   following fields:
+ *       betarw  : p x 1 vector. Estimate of beta after refsteps
+ *                 refining steps
+ *   numscale2rw : scalar. Sum of the smallest h squared residuals
+ *                 from final iteration (after refsteps refining
+ *                 step).It is the numerator of the estimate of the
+ *                 squared scale.
+ *      weights  : n x 1 vector. Weights assigned to each observation
+ *                In this case weights are 0,1. 1 for the units
+ *                associated with the smallest h squared residuals
+ *                from final iteration 0 for the other units.
+ *    exitflag   : scalar which informs about convergence. exitflag =
+ *                0 implies normal convergence
+ *
+ * Arguments    : const captured_var *reftolALS
+ *                const captured_var *refstepsALS
+ *                const c_captured_var *indlinsc
+ *                const c_captured_var *Xseaso
+ *                c_captured_var *bsb
+ *                const b_captured_var *isemptyX
+ *                const captured_var *lshiftYN
+ *                const c_captured_var *Xtrend
+ *                const c_captured_var *Seq
+ *                const captured_var *varampl
+ *                const c_captured_var *Xlshift
+ *                const c_captured_var *X
+ *                const c_captured_var *yin
+ *                const captured_var *trend
+ *                const captured_var *nexpl
+ *                const c_captured_var *otherind
+ *                const captured_var *seasonal
+ *                const captured_var *s
+ *                c_captured_var *yhatseaso
+ *                c_captured_var *yhat
+ *                c_captured_var *beta
+ *                const captured_var *constr
+ *                const c_captured_var *Xsel
+ *                const b_captured_var *verLess2016b
+ *                const c_captured_var *seq
+ *                d_captured_var *weights
+ *                const d_captured_var *zerT1
+ *                const emxArray_real_T *y
+ *                const emxArray_real_T *initialbeta
+ *                double refsteps
+ *                double reftol
+ *                double h
+ *                c_struct_T *outIRWLS
+ * Return Type  : void
+ */
 void IRWLSreg(const captured_var *reftolALS, const captured_var *refstepsALS,
               const c_captured_var *indlinsc, const c_captured_var *Xseaso,
               c_captured_var *bsb, const b_captured_var *isemptyX,
@@ -2925,39 +3059,6 @@ void IRWLSreg(const captured_var *reftolALS, const captured_var *refstepsALS,
   /*  ------------------------------------------------------------------- */
   /*  subfunction IRWLSreg */
   /*  ------------------------------------------------------------------- */
-  /* IRWLSreg (iterative reweighted least squares) does refsteps */
-  /* refining steps from initialbeta */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /*     y:         A vector with n elements that contains the response */
-  /*                variable. It can be both a row or column vector. */
-  /*   initialbeta: vector containing initial estimate of beta */
-  /*    refsteps  : scalar, number of refining (IRLS) steps */
-  /*    reftol    : relative convergence tolerance */
-  /*                Default value is 1e-7 */
-  /*       h      : scalar. number of observations with smallest */
-  /*                residuals to consider */
-  /*  */
-  /*            GLOBAL VARIABLES REQUIRED */
-  /*     yhat :     A vector with T elements (fitted values for all the */
-  /*                observations) */
-  /*   Output: */
-  /*  */
-  /*   The output consists of a structure 'outIRWLS' containing the */
-  /*   following fields: */
-  /*       betarw  : p x 1 vector. Estimate of beta after refsteps */
-  /*                 refining steps */
-  /*   numscale2rw : scalar. Sum of the smallest h squared residuals */
-  /*                 from final iteration (after refsteps refining */
-  /*                 step).It is the numerator of the estimate of the */
-  /*                 squared scale. */
-  /*      weights  : n x 1 vector. Weights assigned to each observation */
-  /*                In this case weights are 0,1. 1 for the units */
-  /*                associated with the smallest h squared residuals */
-  /*                from final iteration 0 for the other units. */
-  /*    exitflag   : scalar which informs about convergence. exitflag = */
-  /*                0 implies normal convergence */
   /*  For performance reasons, the output structure is created only at */
   /*  the end */
   /*  outIRWLS =
@@ -3699,6 +3800,11 @@ void IRWLSreg(const captured_var *reftolALS, const captured_var *refstepsALS,
   outIRWLS->exiflag = exitfl;
 }
 
+/*
+ * Arguments    : double n
+ *                double alpha
+ * Return Type  : double
+ */
 double b_corfactorRAW(double n, double alpha)
 {
   double fp_500_n;
@@ -3723,6 +3829,25 @@ double b_corfactorRAW(double n, double alpha)
   return rawcorfac;
 }
 
+/*
+ * Arguments    : const c_captured_var *Xtrend
+ *                const c_captured_var *bsb
+ *                const captured_var *trend
+ *                const captured_var *seasonal
+ *                const captured_var *s
+ *                c_captured_var *yhatseaso
+ *                const c_captured_var *Xseaso
+ *                const captured_var *varampl
+ *                const c_captured_var *Seq
+ *                const captured_var *nexpl
+ *                const b_captured_var *isemptyX
+ *                const c_captured_var *X
+ *                const captured_var *lshiftYN
+ *                const c_captured_var *Xlshift
+ *                c_captured_var *yhat
+ *                const emxArray_real_T *beta0
+ * Return Type  : void
+ */
 void lik(const c_captured_var *Xtrend, const c_captured_var *bsb,
          const captured_var *trend, const captured_var *seasonal,
          const captured_var *s, c_captured_var *yhatseaso,
@@ -4045,6 +4170,24 @@ void lik(const c_captured_var *Xtrend, const c_captured_var *bsb,
   /*  disp(obj) */
 }
 
+/*
+ * Arguments    : const captured_var *trend
+ *                const captured_var *seasonal
+ *                const captured_var *s
+ *                c_captured_var *yhatseaso
+ *                const c_captured_var *Xseasof
+ *                const captured_var *varampl
+ *                const c_captured_var *Seqf
+ *                const captured_var *nexpl
+ *                const b_captured_var *isemptyX
+ *                const c_captured_var *Xf
+ *                const captured_var *lshiftYN
+ *                const c_captured_var *Xlshiftf
+ *                const emxArray_real_T *beta0
+ *                const emxArray_real_T *Xtrendf
+ *                emxArray_real_T *objyhat
+ * Return Type  : void
+ */
 void likyhat(const captured_var *trend, const captured_var *seasonal,
              const captured_var *s, c_captured_var *yhatseaso,
              const c_captured_var *Xseasof, const captured_var *varampl,
@@ -4308,4 +4451,8 @@ void likyhat(const captured_var *trend, const captured_var *seasonal,
   emxFree_real_T(&yhatX);
 }
 
-/* End of code generation (LTSts.c) */
+/*
+ * File trailer for LTSts.c
+ *
+ * [EOF]
+ */

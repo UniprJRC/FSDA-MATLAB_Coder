@@ -2,17 +2,16 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: zscore.h
  *
- * zscore.h
- *
- * Code generation for function 'zscore'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
 #ifndef ZSCORE_H
 #define ZSCORE_H
 
-/* Include files */
+/* Include Files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -30,4 +29,8 @@ void zscore(const emxArray_real_T *x, emxArray_real_T *z);
 #endif
 
 #endif
-/* End of code generation (zscore.h) */
+/*
+ * File trailer for zscore.h
+ *
+ * [EOF]
+ */

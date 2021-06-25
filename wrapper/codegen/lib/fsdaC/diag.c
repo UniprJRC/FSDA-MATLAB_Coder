@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: diag.c
  *
- * diag.c
- *
- * Code generation for function 'diag'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "diag.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
@@ -17,6 +16,11 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const emxArray_creal_T *v
+ *                emxArray_creal_T *d
+ * Return Type  : void
+ */
 void b_diag(const emxArray_creal_T *v, emxArray_creal_T *d)
 {
   int u0;
@@ -47,6 +51,11 @@ void b_diag(const emxArray_creal_T *v, emxArray_creal_T *d)
   }
 }
 
+/*
+ * Arguments    : const emxArray_real_T *v
+ *                emxArray_real_T *d
+ * Return Type  : void
+ */
 void c_diag(const emxArray_real_T *v, emxArray_real_T *d)
 {
   int i;
@@ -66,6 +75,11 @@ void c_diag(const emxArray_real_T *v, emxArray_real_T *d)
   }
 }
 
+/*
+ * Arguments    : const emxArray_real_T *v
+ *                emxArray_real_T *d
+ * Return Type  : void
+ */
 void diag(const emxArray_real_T *v, emxArray_real_T *d)
 {
   int u0;
@@ -96,4 +110,8 @@ void diag(const emxArray_real_T *v, emxArray_real_T *d)
   }
 }
 
-/* End of code generation (diag.c) */
+/*
+ * File trailer for diag.c
+ *
+ * [EOF]
+ */

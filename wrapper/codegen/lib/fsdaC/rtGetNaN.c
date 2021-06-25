@@ -2,18 +2,17 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: rtGetNaN.c
  *
- * rtGetNaN.c
- *
- * Code generation for function 'FSM_wrapper'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
 /*
  * Abstract:
  *       MATLAB for code generation function to initialize non-finite, NaN
  */
-/* Include files */
+/* Include Files */
 #include "rtGetNaN.h"
 #include "rt_nonfinite.h"
 
@@ -41,4 +40,8 @@ real32_T rtGetNaNF(void)
   return rtNaNF;
 }
 
-/* End of code generation (rtGetNaN.c) */
+/*
+ * File trailer for rtGetNaN.c
+ *
+ * [EOF]
+ */

@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: xhseqr.c
  *
- * xhseqr.c
- *
- * Code generation for function 'xhseqr'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "xhseqr.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
@@ -20,6 +19,10 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : emxArray_real_T *h
+ * Return Type  : int
+ */
 int b_xhseqr(emxArray_real_T *h)
 {
   double v[3];
@@ -335,6 +338,11 @@ int b_xhseqr(emxArray_real_T *h)
   return info;
 }
 
+/*
+ * Arguments    : emxArray_real_T *h
+ *                emxArray_real_T *z
+ * Return Type  : int
+ */
 int xhseqr(emxArray_real_T *h, emxArray_real_T *z)
 {
   double v[3];
@@ -663,4 +671,8 @@ int xhseqr(emxArray_real_T *h, emxArray_real_T *z)
   return info;
 }
 
-/* End of code generation (xhseqr.c) */
+/*
+ * File trailer for xhseqr.c
+ *
+ * [EOF]
+ */

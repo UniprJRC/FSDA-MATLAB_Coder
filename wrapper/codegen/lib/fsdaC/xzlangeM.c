@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: xzlangeM.c
  *
- * xzlangeM.c
- *
- * Code generation for function 'xzlangeM'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "xzlangeM.h"
 #include "fsdaC_rtwutil.h"
 #include "fsdaC_types.h"
@@ -18,6 +17,10 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const emxArray_creal_T *x
+ * Return Type  : double
+ */
 double xzlangeM(const emxArray_creal_T *x)
 {
   double absxk;
@@ -48,4 +51,8 @@ double xzlangeM(const emxArray_creal_T *x)
   return y;
 }
 
-/* End of code generation (xzlangeM.c) */
+/*
+ * File trailer for xzlangeM.c
+ *
+ * [EOF]
+ */

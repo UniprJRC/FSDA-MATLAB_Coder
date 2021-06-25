@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: GYfilt.c
  *
- * GYfilt.c
- *
- * Code generation for function 'GYfilt'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "GYfilt.h"
 #include "colon.h"
 #include "fsdaC_emxutil.h"
@@ -29,6 +28,10 @@
 static void gyfiltaux(emxArray_real_T *v);
 
 /* Function Definitions */
+/*
+ * Arguments    : emxArray_real_T *v
+ * Return Type  : void
+ */
 static void gyfiltaux(emxArray_real_T *v)
 {
   emxArray_int32_T *iidx;
@@ -254,6 +257,67 @@ static void gyfiltaux(emxArray_real_T *v)
   emxFree_real_T(&b_v);
 }
 
+/*
+ * GYfilt computes the Gervini-Yohai univariate outlier identifier
+ *
+ * <a href="matlab: docsearchFS('GYfilt')">Link to the help function</a>
+ *
+ *   Required input arguments:
+ *
+ *     x:         Input vector. Vector. A vector with n elements that
+ *                contains the univariate data.
+ *
+ *
+ *   Optional input arguments:
+ *
+ *       alpha :  coverage probability. Scalar.
+ *                Scalar in the interval [0.5 1). The default coverage
+ *                probability is 0.95.
+ *                  Example - 'alpha',0.99
+ *                  Data Types - double
+ *
+ *    centering:  centering the data. Boolean.
+ *                If centering is true input data are preliminarly centered.
+ *                The defalt value of centering is true.
+ *                  Example - 'centering',false
+ *                  Data Types - logical
+ *
+ *    iterating:  iterative procedure. Boolean.
+ *                If Boolean is true then an iterative adaptive procedure is
+ *                applied.  The defalt value of iterating is true.
+ *                  Example - 'iterating',false
+ *                  Data Types - logical
+ *
+ *       niter :  maximum number of iterations in the iterative adaptive
+ *                procedure. Positive integer. This option is used just if
+ * previous iterating is true. The default value of niter is 10. Example -
+ * 'niter',20 Data Types - double
+ *
+ *   Output:
+ *
+ *     weights:   Boolean vector of weights. Logical.
+ *                A boolean vector with n elements that contains false in
+ *                correspondence of the units declared as outliers.
+ *
+ *
+ *  See also: LTSts
+ *
+ *  References:
+ *
+ *  Gervini, D. and Yohai, V.J. (2002), A class of robust and fully efficient
+ *  regression estimators, "Annals of Statistics", Vol. 30, pp. 583-616.
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ * <a href="matlab: docsearchFS('GYfilt')">Link to the help function</a>
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ * Arguments    : const emxArray_real_T *x
+ *                emxArray_boolean_T *weights
+ * Return Type  : void
+ */
 void GYfilt(const emxArray_real_T *x, emxArray_boolean_T *weights)
 {
   emxArray_boolean_T *r;
@@ -267,66 +331,6 @@ void GYfilt(const emxArray_real_T *x, emxArray_boolean_T *weights)
   int nx;
   emxInit_real_T(&xs2na, 1);
   emxInit_real_T(&a, 1);
-  /* GYfilt computes the Gervini-Yohai univariate outlier identifier */
-  /*  */
-  /* <a href="matlab: docsearchFS('GYfilt')">Link to the help function</a> */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /*     x:         Input vector. Vector. A vector with n elements that */
-  /*                contains the univariate data. */
-  /*  */
-  /*  */
-  /*   Optional input arguments: */
-  /*  */
-  /*       alpha :  coverage probability. Scalar. */
-  /*                Scalar in the interval [0.5 1). The default coverage */
-  /*                probability is 0.95. */
-  /*                  Example - 'alpha',0.99 */
-  /*                  Data Types - double */
-  /*  */
-  /*    centering:  centering the data. Boolean. */
-  /*                If centering is true input data are preliminarly centered.
-   */
-  /*                The defalt value of centering is true. */
-  /*                  Example - 'centering',false */
-  /*                  Data Types - logical */
-  /*  */
-  /*    iterating:  iterative procedure. Boolean. */
-  /*                If Boolean is true then an iterative adaptive procedure is
-   */
-  /*                applied.  The defalt value of iterating is true. */
-  /*                  Example - 'iterating',false */
-  /*                  Data Types - logical */
-  /*  */
-  /*       niter :  maximum number of iterations in the iterative adaptive */
-  /*                procedure. Positive integer. This option is used just if
-   * previous iterating */
-  /*                is true. The default value of niter is 10. */
-  /*                  Example - 'niter',20 */
-  /*                  Data Types - double */
-  /*  */
-  /*   Output: */
-  /*  */
-  /*     weights:   Boolean vector of weights. Logical. */
-  /*                A boolean vector with n elements that contains false in */
-  /*                correspondence of the units declared as outliers. */
-  /*  */
-  /*  */
-  /*  See also: LTSts */
-  /*  */
-  /*  References: */
-  /*  */
-  /*  Gervini, D. and Yohai, V.J. (2002), A class of robust and fully efficient
-   */
-  /*  regression estimators, "Annals of Statistics", Vol. 30, pp. 583-616. */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /* <a href="matlab: docsearchFS('GYfilt')">Link to the help function</a> */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /* { */
   /*     % GYfilt with all the default options. */
@@ -400,6 +404,67 @@ void GYfilt(const emxArray_real_T *x, emxArray_boolean_T *weights)
   emxFree_int32_T(&r1);
 }
 
+/*
+ * GYfilt computes the Gervini-Yohai univariate outlier identifier
+ *
+ * <a href="matlab: docsearchFS('GYfilt')">Link to the help function</a>
+ *
+ *   Required input arguments:
+ *
+ *     x:         Input vector. Vector. A vector with n elements that
+ *                contains the univariate data.
+ *
+ *
+ *   Optional input arguments:
+ *
+ *       alpha :  coverage probability. Scalar.
+ *                Scalar in the interval [0.5 1). The default coverage
+ *                probability is 0.95.
+ *                  Example - 'alpha',0.99
+ *                  Data Types - double
+ *
+ *    centering:  centering the data. Boolean.
+ *                If centering is true input data are preliminarly centered.
+ *                The defalt value of centering is true.
+ *                  Example - 'centering',false
+ *                  Data Types - logical
+ *
+ *    iterating:  iterative procedure. Boolean.
+ *                If Boolean is true then an iterative adaptive procedure is
+ *                applied.  The defalt value of iterating is true.
+ *                  Example - 'iterating',false
+ *                  Data Types - logical
+ *
+ *       niter :  maximum number of iterations in the iterative adaptive
+ *                procedure. Positive integer. This option is used just if
+ * previous iterating is true. The default value of niter is 10. Example -
+ * 'niter',20 Data Types - double
+ *
+ *   Output:
+ *
+ *     weights:   Boolean vector of weights. Logical.
+ *                A boolean vector with n elements that contains false in
+ *                correspondence of the units declared as outliers.
+ *
+ *
+ *  See also: LTSts
+ *
+ *  References:
+ *
+ *  Gervini, D. and Yohai, V.J. (2002), A class of robust and fully efficient
+ *  regression estimators, "Annals of Statistics", Vol. 30, pp. 583-616.
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ * <a href="matlab: docsearchFS('GYfilt')">Link to the help function</a>
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ * Arguments    : const emxArray_real_T *x
+ *                emxArray_boolean_T *weights
+ * Return Type  : void
+ */
 void b_GYfilt(const emxArray_real_T *x, emxArray_boolean_T *weights)
 {
   emxArray_boolean_T *b_x;
@@ -422,66 +487,6 @@ void b_GYfilt(const emxArray_real_T *x, emxArray_boolean_T *weights)
   bool exitg1;
   bool y;
   emxInit_real_T(&xs2na, 1);
-  /* GYfilt computes the Gervini-Yohai univariate outlier identifier */
-  /*  */
-  /* <a href="matlab: docsearchFS('GYfilt')">Link to the help function</a> */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /*     x:         Input vector. Vector. A vector with n elements that */
-  /*                contains the univariate data. */
-  /*  */
-  /*  */
-  /*   Optional input arguments: */
-  /*  */
-  /*       alpha :  coverage probability. Scalar. */
-  /*                Scalar in the interval [0.5 1). The default coverage */
-  /*                probability is 0.95. */
-  /*                  Example - 'alpha',0.99 */
-  /*                  Data Types - double */
-  /*  */
-  /*    centering:  centering the data. Boolean. */
-  /*                If centering is true input data are preliminarly centered.
-   */
-  /*                The defalt value of centering is true. */
-  /*                  Example - 'centering',false */
-  /*                  Data Types - logical */
-  /*  */
-  /*    iterating:  iterative procedure. Boolean. */
-  /*                If Boolean is true then an iterative adaptive procedure is
-   */
-  /*                applied.  The defalt value of iterating is true. */
-  /*                  Example - 'iterating',false */
-  /*                  Data Types - logical */
-  /*  */
-  /*       niter :  maximum number of iterations in the iterative adaptive */
-  /*                procedure. Positive integer. This option is used just if
-   * previous iterating */
-  /*                is true. The default value of niter is 10. */
-  /*                  Example - 'niter',20 */
-  /*                  Data Types - double */
-  /*  */
-  /*   Output: */
-  /*  */
-  /*     weights:   Boolean vector of weights. Logical. */
-  /*                A boolean vector with n elements that contains false in */
-  /*                correspondence of the units declared as outliers. */
-  /*  */
-  /*  */
-  /*  See also: LTSts */
-  /*  */
-  /*  References: */
-  /*  */
-  /*  Gervini, D. and Yohai, V.J. (2002), A class of robust and fully efficient
-   */
-  /*  regression estimators, "Annals of Statistics", Vol. 30, pp. 583-616. */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /* <a href="matlab: docsearchFS('GYfilt')">Link to the help function</a> */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /* { */
   /*     % GYfilt with all the default options. */
@@ -699,4 +704,8 @@ void b_GYfilt(const emxArray_real_T *x, emxArray_boolean_T *weights)
   emxFree_int32_T(&r2);
 }
 
-/* End of code generation (GYfilt.c) */
+/*
+ * File trailer for GYfilt.c
+ *
+ * [EOF]
+ */

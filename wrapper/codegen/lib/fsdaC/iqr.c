@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: iqr.c
  *
- * iqr.c
- *
- * Code generation for function 'iqr'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "iqr.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_rtwutil.h"
@@ -20,6 +19,10 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const emxArray_real_T *x
+ * Return Type  : double
+ */
 double iqr(const emxArray_real_T *x)
 {
   emxArray_int32_T *idx;
@@ -68,4 +71,8 @@ double iqr(const emxArray_real_T *x)
   return r - y_idx_0_tmp;
 }
 
-/* End of code generation (iqr.c) */
+/*
+ * File trailer for iqr.c
+ *
+ * [EOF]
+ */

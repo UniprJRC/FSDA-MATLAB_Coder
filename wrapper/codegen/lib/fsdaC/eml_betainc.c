@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: eml_betainc.c
  *
- * eml_betainc.c
- *
- * Code generation for function 'eml_betainc'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "eml_betainc.h"
 #include "eml_gammainc.h"
 #include "fsdaC_rtwutil.h"
@@ -20,6 +19,12 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : double x
+ *                double a
+ *                double b
+ * Return Type  : double
+ */
 double betainc_cf(double x, double a, double b)
 {
   double C;
@@ -66,6 +71,14 @@ double betainc_cf(double x, double a, double b)
   return y;
 }
 
+/*
+ * Arguments    : double x
+ *                double a
+ *                double b
+ *                double lbeta
+ *                bool upper
+ * Return Type  : double
+ */
 double eml_betainc(double x, double a, double b, double lbeta, bool upper)
 {
   double d;
@@ -243,4 +256,8 @@ double eml_betainc(double x, double a, double b, double lbeta, bool upper)
   return rval;
 }
 
-/* End of code generation (eml_betainc.c) */
+/*
+ * File trailer for eml_betainc.c
+ *
+ * [EOF]
+ */

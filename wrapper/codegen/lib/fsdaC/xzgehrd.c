@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: xzgehrd.c
  *
- * xzgehrd.c
- *
- * Code generation for function 'xzgehrd'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "xzgehrd.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
@@ -19,6 +18,11 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : emxArray_real_T *a
+ *                emxArray_real_T *tau
+ * Return Type  : void
+ */
 void xzgehrd(emxArray_real_T *a, emxArray_real_T *tau)
 {
   emxArray_real_T *work;
@@ -145,4 +149,8 @@ void xzgehrd(emxArray_real_T *a, emxArray_real_T *tau)
   emxFree_real_T(&work);
 }
 
-/* End of code generation (xzgehrd.c) */
+/*
+ * File trailer for xzgehrd.c
+ *
+ * [EOF]
+ */

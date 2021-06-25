@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: subsets.c
  *
- * subsets.c
- *
- * Code generation for function 'subsets'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "subsets.h"
 #include "bc.h"
 #include "combsFS.h"
@@ -26,6 +25,101 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * subsets creates a matrix of indexes where rows are distinct p-subsets
+ * extracted from a set of n elements
+ *
+ * <a href="matlab: docsearchFS('subsets')">Link to the help function</a>
+ *
+ *   Required input arguments:
+ *
+ *        nsamp : Number of subsamples which have to be extracted. Scalar;
+ *                if nsamp=0 all subsets will be extracted; they will be (n
+ *                choose p).
+ *                Data Types - single|double
+ *
+ *          n   : Number of observations of the dataset. Scalar.
+ *                Data Types - single|double
+ *
+ *          p   : Size of the subsets. Scalar. In regression with p
+ *                explanatory variable the size of the elmental subsets is p;
+ *                in multivariate analysis, in presence of v variables,
+ *                the size of the elemental subsets is v+1.
+ *                Data Types - single|double
+ *
+ *   Optional input arguments:
+ *
+ *        ncomb : scalar (n choose p). If the user has already computed this
+ *                value it can supply it directly, otherwise the program will
+ *                calculate it automatically.
+ *                Example - C=subsets(20,10,3,120)
+ *                Data Types - single|double
+ *
+ *         msg  : scalar which controls whether to display or not messages
+ *                on the screen. If msg=true (default), messages are displayed
+ *                on the screen about estimated time.
+ *                Example - C=subsets(20,10,3,120,0)
+ *                Data Types - boolean
+ *
+ *    method : Sampling methods. Scalar or vector.
+ *             Methods used to extract the subsets. See section 'More About'
+ *             of function randsampleFS.m for details about the sampling
+ *             methods. Default is method = 1.
+ *             - Scalar, from 0 to 3 determining the (random sample without
+ *             replacement) method to be used.
+ *             - Vector of weights: in such a case, Weighted Sampling Without
+ *               Replacement is applied using that vector of weights.
+ *             Example - randsampleFS(100,10,2)
+ *             Data Types - single|double
+ *
+ *
+ *   Output:
+ *
+ *
+ *            C : The indices of the subsets which need to be extracted.
+ *                Matrix with nselected rows and p columns (stored in int16
+ * format). Data Types - single|double
+ *
+ *    nselected : Number of rows of matrix C. Scalar.
+ *                Data Types - single|double
+ *
+ *
+ *  See also randsampleFS.m, lexunrank.m, bc.m
+ *
+ *  References:
+ *        See references in randsampleFS.m, lexunrank.m and bc.m. See also, for
+ *        weighted sampling, Pavlos S. Efraimidis, Paul G. Spirakis, Weighted
+ *        random sampling with a reservoir, Information Processing Letters,
+ * Volume 97, Issue 5, 16 March 2006, Pages 181-185.
+ *
+ *        Wong, C.K. and M.C. Easton (1980) "An Efficient Method for Weighted
+ *        Sampling Without Replacement", SIAM Journal of Computing,
+ *        9(1):111-113.
+ *
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *
+ * <a href="matlab: docsearchFS('subsets')">Link to the help function</a>
+ *
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ *  Examples:
+ *
+ * {
+ *        %% Create a matrix with the indexes of 5 subsets when n=100, p=3.
+ *        % Only default arguments used.
+ *        C = subsets(5,100,3)
+ * }
+ *
+ * Arguments    : double nsamp
+ *                double n
+ *                double p
+ *                emxArray_real_T *C
+ * Return Type  : void
+ */
 void b_subsets(double nsamp, double n, double p, emxArray_real_T *C)
 {
   emxArray_real_T *pascalM;
@@ -37,104 +131,6 @@ void b_subsets(double nsamp, double n, double p, emxArray_real_T *C)
   int i1;
   int loop_ub;
   bool usepascal;
-  /* subsets creates a matrix of indexes where rows are distinct p-subsets
-   * extracted from a set of n elements */
-  /*  */
-  /* <a href="matlab: docsearchFS('subsets')">Link to the help function</a> */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /*        nsamp : Number of subsamples which have to be extracted. Scalar; */
-  /*                if nsamp=0 all subsets will be extracted; they will be (n */
-  /*                choose p). */
-  /*                Data Types - single|double */
-  /*  */
-  /*          n   : Number of observations of the dataset. Scalar. */
-  /*                Data Types - single|double */
-  /*  */
-  /*          p   : Size of the subsets. Scalar. In regression with p */
-  /*                explanatory variable the size of the elmental subsets is p;
-   */
-  /*                in multivariate analysis, in presence of v variables, */
-  /*                the size of the elemental subsets is v+1. */
-  /*                Data Types - single|double */
-  /*  */
-  /*   Optional input arguments: */
-  /*  */
-  /*        ncomb : scalar (n choose p). If the user has already computed this
-   */
-  /*                value it can supply it directly, otherwise the program will
-   */
-  /*                calculate it automatically. */
-  /*                Example - C=subsets(20,10,3,120) */
-  /*                Data Types - single|double */
-  /*  */
-  /*         msg  : scalar which controls whether to display or not messages */
-  /*                on the screen. If msg=true (default), messages are displayed
-   */
-  /*                on the screen about estimated time. */
-  /*                Example - C=subsets(20,10,3,120,0) */
-  /*                Data Types - boolean */
-  /*  */
-  /*    method : Sampling methods. Scalar or vector. */
-  /*             Methods used to extract the subsets. See section 'More About'
-   */
-  /*             of function randsampleFS.m for details about the sampling */
-  /*             methods. Default is method = 1. */
-  /*             - Scalar, from 0 to 3 determining the (random sample without */
-  /*             replacement) method to be used. */
-  /*             - Vector of weights: in such a case, Weighted Sampling Without
-   */
-  /*               Replacement is applied using that vector of weights. */
-  /*             Example - randsampleFS(100,10,2) */
-  /*             Data Types - single|double */
-  /*  */
-  /*  */
-  /*   Output: */
-  /*  */
-  /*  */
-  /*            C : The indices of the subsets which need to be extracted. */
-  /*                Matrix with nselected rows and p columns (stored in int16
-   * format). */
-  /*                Data Types - single|double */
-  /*  */
-  /*    nselected : Number of rows of matrix C. Scalar. */
-  /*                Data Types - single|double */
-  /*  */
-  /*  */
-  /*  See also randsampleFS.m, lexunrank.m, bc.m */
-  /*  */
-  /*  References: */
-  /*        See references in randsampleFS.m, lexunrank.m and bc.m. See also,
-   * for */
-  /*        weighted sampling, Pavlos S. Efraimidis, Paul G. Spirakis, Weighted
-   */
-  /*        random sampling with a reservoir, Information Processing Letters,
-   * Volume */
-  /*        97, Issue 5, 16 March 2006, Pages 181-185. */
-  /*  */
-  /*        Wong, C.K. and M.C. Easton (1980) "An Efficient Method for Weighted
-   */
-  /*        Sampling Without Replacement", SIAM Journal of Computing, */
-  /*        9(1):111-113. */
-  /*  */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('subsets')">Link to the help function</a> */
-  /*  */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
-  /*  */
-  /*  Examples: */
-  /*  */
-  /* { */
-  /*        %% Create a matrix with the indexes of 5 subsets when n=100, p=3. */
-  /*        % Only default arguments used. */
-  /*        C = subsets(5,100,3) */
-  /* } */
   /* { */
   /*        %% Create a matrix with the indexes of 5 subsets when n=100, p=3. */
   /*        % Use information on the number of combinations to speed up
@@ -1069,6 +1065,103 @@ void b_subsets(double nsamp, double n, double p, emxArray_real_T *C)
   emxFree_real_T(&seq);
 }
 
+/*
+ * subsets creates a matrix of indexes where rows are distinct p-subsets
+ * extracted from a set of n elements
+ *
+ * <a href="matlab: docsearchFS('subsets')">Link to the help function</a>
+ *
+ *   Required input arguments:
+ *
+ *        nsamp : Number of subsamples which have to be extracted. Scalar;
+ *                if nsamp=0 all subsets will be extracted; they will be (n
+ *                choose p).
+ *                Data Types - single|double
+ *
+ *          n   : Number of observations of the dataset. Scalar.
+ *                Data Types - single|double
+ *
+ *          p   : Size of the subsets. Scalar. In regression with p
+ *                explanatory variable the size of the elmental subsets is p;
+ *                in multivariate analysis, in presence of v variables,
+ *                the size of the elemental subsets is v+1.
+ *                Data Types - single|double
+ *
+ *   Optional input arguments:
+ *
+ *        ncomb : scalar (n choose p). If the user has already computed this
+ *                value it can supply it directly, otherwise the program will
+ *                calculate it automatically.
+ *                Example - C=subsets(20,10,3,120)
+ *                Data Types - single|double
+ *
+ *         msg  : scalar which controls whether to display or not messages
+ *                on the screen. If msg=true (default), messages are displayed
+ *                on the screen about estimated time.
+ *                Example - C=subsets(20,10,3,120,0)
+ *                Data Types - boolean
+ *
+ *    method : Sampling methods. Scalar or vector.
+ *             Methods used to extract the subsets. See section 'More About'
+ *             of function randsampleFS.m for details about the sampling
+ *             methods. Default is method = 1.
+ *             - Scalar, from 0 to 3 determining the (random sample without
+ *             replacement) method to be used.
+ *             - Vector of weights: in such a case, Weighted Sampling Without
+ *               Replacement is applied using that vector of weights.
+ *             Example - randsampleFS(100,10,2)
+ *             Data Types - single|double
+ *
+ *
+ *   Output:
+ *
+ *
+ *            C : The indices of the subsets which need to be extracted.
+ *                Matrix with nselected rows and p columns (stored in int16
+ * format). Data Types - single|double
+ *
+ *    nselected : Number of rows of matrix C. Scalar.
+ *                Data Types - single|double
+ *
+ *
+ *  See also randsampleFS.m, lexunrank.m, bc.m
+ *
+ *  References:
+ *        See references in randsampleFS.m, lexunrank.m and bc.m. See also, for
+ *        weighted sampling, Pavlos S. Efraimidis, Paul G. Spirakis, Weighted
+ *        random sampling with a reservoir, Information Processing Letters,
+ * Volume 97, Issue 5, 16 March 2006, Pages 181-185.
+ *
+ *        Wong, C.K. and M.C. Easton (1980) "An Efficient Method for Weighted
+ *        Sampling Without Replacement", SIAM Journal of Computing,
+ *        9(1):111-113.
+ *
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *
+ * <a href="matlab: docsearchFS('subsets')">Link to the help function</a>
+ *
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ *  Examples:
+ *
+ * {
+ *        %% Create a matrix with the indexes of 5 subsets when n=100, p=3.
+ *        % Only default arguments used.
+ *        C = subsets(5,100,3)
+ * }
+ *
+ * Arguments    : emxArray_real_T *nsamp
+ *                double n
+ *                double p
+ *                double ncomb
+ *                emxArray_real_T *C
+ *                double *nselected
+ * Return Type  : void
+ */
 void c_subsets(emxArray_real_T *nsamp, double n, double p, double ncomb,
                emxArray_real_T *C, double *nselected)
 {
@@ -1082,104 +1175,6 @@ void c_subsets(emxArray_real_T *nsamp, double n, double p, double ncomb,
   int loop_ub;
   bool exitg1;
   bool usepascal;
-  /* subsets creates a matrix of indexes where rows are distinct p-subsets
-   * extracted from a set of n elements */
-  /*  */
-  /* <a href="matlab: docsearchFS('subsets')">Link to the help function</a> */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /*        nsamp : Number of subsamples which have to be extracted. Scalar; */
-  /*                if nsamp=0 all subsets will be extracted; they will be (n */
-  /*                choose p). */
-  /*                Data Types - single|double */
-  /*  */
-  /*          n   : Number of observations of the dataset. Scalar. */
-  /*                Data Types - single|double */
-  /*  */
-  /*          p   : Size of the subsets. Scalar. In regression with p */
-  /*                explanatory variable the size of the elmental subsets is p;
-   */
-  /*                in multivariate analysis, in presence of v variables, */
-  /*                the size of the elemental subsets is v+1. */
-  /*                Data Types - single|double */
-  /*  */
-  /*   Optional input arguments: */
-  /*  */
-  /*        ncomb : scalar (n choose p). If the user has already computed this
-   */
-  /*                value it can supply it directly, otherwise the program will
-   */
-  /*                calculate it automatically. */
-  /*                Example - C=subsets(20,10,3,120) */
-  /*                Data Types - single|double */
-  /*  */
-  /*         msg  : scalar which controls whether to display or not messages */
-  /*                on the screen. If msg=true (default), messages are displayed
-   */
-  /*                on the screen about estimated time. */
-  /*                Example - C=subsets(20,10,3,120,0) */
-  /*                Data Types - boolean */
-  /*  */
-  /*    method : Sampling methods. Scalar or vector. */
-  /*             Methods used to extract the subsets. See section 'More About'
-   */
-  /*             of function randsampleFS.m for details about the sampling */
-  /*             methods. Default is method = 1. */
-  /*             - Scalar, from 0 to 3 determining the (random sample without */
-  /*             replacement) method to be used. */
-  /*             - Vector of weights: in such a case, Weighted Sampling Without
-   */
-  /*               Replacement is applied using that vector of weights. */
-  /*             Example - randsampleFS(100,10,2) */
-  /*             Data Types - single|double */
-  /*  */
-  /*  */
-  /*   Output: */
-  /*  */
-  /*  */
-  /*            C : The indices of the subsets which need to be extracted. */
-  /*                Matrix with nselected rows and p columns (stored in int16
-   * format). */
-  /*                Data Types - single|double */
-  /*  */
-  /*    nselected : Number of rows of matrix C. Scalar. */
-  /*                Data Types - single|double */
-  /*  */
-  /*  */
-  /*  See also randsampleFS.m, lexunrank.m, bc.m */
-  /*  */
-  /*  References: */
-  /*        See references in randsampleFS.m, lexunrank.m and bc.m. See also,
-   * for */
-  /*        weighted sampling, Pavlos S. Efraimidis, Paul G. Spirakis, Weighted
-   */
-  /*        random sampling with a reservoir, Information Processing Letters,
-   * Volume */
-  /*        97, Issue 5, 16 March 2006, Pages 181-185. */
-  /*  */
-  /*        Wong, C.K. and M.C. Easton (1980) "An Efficient Method for Weighted
-   */
-  /*        Sampling Without Replacement", SIAM Journal of Computing, */
-  /*        9(1):111-113. */
-  /*  */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('subsets')">Link to the help function</a> */
-  /*  */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
-  /*  */
-  /*  Examples: */
-  /*  */
-  /* { */
-  /*        %% Create a matrix with the indexes of 5 subsets when n=100, p=3. */
-  /*        % Only default arguments used. */
-  /*        C = subsets(5,100,3) */
-  /* } */
   /* { */
   /*        %% Create a matrix with the indexes of 5 subsets when n=100, p=3. */
   /*        % Use information on the number of combinations to speed up
@@ -2147,6 +2142,102 @@ void c_subsets(emxArray_real_T *nsamp, double n, double p, double ncomb,
   emxFree_real_T(&seq);
 }
 
+/*
+ * subsets creates a matrix of indexes where rows are distinct p-subsets
+ * extracted from a set of n elements
+ *
+ * <a href="matlab: docsearchFS('subsets')">Link to the help function</a>
+ *
+ *   Required input arguments:
+ *
+ *        nsamp : Number of subsamples which have to be extracted. Scalar;
+ *                if nsamp=0 all subsets will be extracted; they will be (n
+ *                choose p).
+ *                Data Types - single|double
+ *
+ *          n   : Number of observations of the dataset. Scalar.
+ *                Data Types - single|double
+ *
+ *          p   : Size of the subsets. Scalar. In regression with p
+ *                explanatory variable the size of the elmental subsets is p;
+ *                in multivariate analysis, in presence of v variables,
+ *                the size of the elemental subsets is v+1.
+ *                Data Types - single|double
+ *
+ *   Optional input arguments:
+ *
+ *        ncomb : scalar (n choose p). If the user has already computed this
+ *                value it can supply it directly, otherwise the program will
+ *                calculate it automatically.
+ *                Example - C=subsets(20,10,3,120)
+ *                Data Types - single|double
+ *
+ *         msg  : scalar which controls whether to display or not messages
+ *                on the screen. If msg=true (default), messages are displayed
+ *                on the screen about estimated time.
+ *                Example - C=subsets(20,10,3,120,0)
+ *                Data Types - boolean
+ *
+ *    method : Sampling methods. Scalar or vector.
+ *             Methods used to extract the subsets. See section 'More About'
+ *             of function randsampleFS.m for details about the sampling
+ *             methods. Default is method = 1.
+ *             - Scalar, from 0 to 3 determining the (random sample without
+ *             replacement) method to be used.
+ *             - Vector of weights: in such a case, Weighted Sampling Without
+ *               Replacement is applied using that vector of weights.
+ *             Example - randsampleFS(100,10,2)
+ *             Data Types - single|double
+ *
+ *
+ *   Output:
+ *
+ *
+ *            C : The indices of the subsets which need to be extracted.
+ *                Matrix with nselected rows and p columns (stored in int16
+ * format). Data Types - single|double
+ *
+ *    nselected : Number of rows of matrix C. Scalar.
+ *                Data Types - single|double
+ *
+ *
+ *  See also randsampleFS.m, lexunrank.m, bc.m
+ *
+ *  References:
+ *        See references in randsampleFS.m, lexunrank.m and bc.m. See also, for
+ *        weighted sampling, Pavlos S. Efraimidis, Paul G. Spirakis, Weighted
+ *        random sampling with a reservoir, Information Processing Letters,
+ * Volume 97, Issue 5, 16 March 2006, Pages 181-185.
+ *
+ *        Wong, C.K. and M.C. Easton (1980) "An Efficient Method for Weighted
+ *        Sampling Without Replacement", SIAM Journal of Computing,
+ *        9(1):111-113.
+ *
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *
+ * <a href="matlab: docsearchFS('subsets')">Link to the help function</a>
+ *
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ *  Examples:
+ *
+ * {
+ *        %% Create a matrix with the indexes of 5 subsets when n=100, p=3.
+ *        % Only default arguments used.
+ *        C = subsets(5,100,3)
+ * }
+ *
+ * Arguments    : emxArray_real_T *nsamp
+ *                double n
+ *                double p
+ *                emxArray_real_T *C
+ *                double *nselected
+ * Return Type  : void
+ */
 void d_subsets(emxArray_real_T *nsamp, double n, double p, emxArray_real_T *C,
                double *nselected)
 {
@@ -2170,104 +2261,6 @@ void d_subsets(emxArray_real_T *nsamp, double n, double p, emxArray_real_T *C,
   int rndsi_size_idx_1;
   bool exitg1;
   bool y;
-  /* subsets creates a matrix of indexes where rows are distinct p-subsets
-   * extracted from a set of n elements */
-  /*  */
-  /* <a href="matlab: docsearchFS('subsets')">Link to the help function</a> */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /*        nsamp : Number of subsamples which have to be extracted. Scalar; */
-  /*                if nsamp=0 all subsets will be extracted; they will be (n */
-  /*                choose p). */
-  /*                Data Types - single|double */
-  /*  */
-  /*          n   : Number of observations of the dataset. Scalar. */
-  /*                Data Types - single|double */
-  /*  */
-  /*          p   : Size of the subsets. Scalar. In regression with p */
-  /*                explanatory variable the size of the elmental subsets is p;
-   */
-  /*                in multivariate analysis, in presence of v variables, */
-  /*                the size of the elemental subsets is v+1. */
-  /*                Data Types - single|double */
-  /*  */
-  /*   Optional input arguments: */
-  /*  */
-  /*        ncomb : scalar (n choose p). If the user has already computed this
-   */
-  /*                value it can supply it directly, otherwise the program will
-   */
-  /*                calculate it automatically. */
-  /*                Example - C=subsets(20,10,3,120) */
-  /*                Data Types - single|double */
-  /*  */
-  /*         msg  : scalar which controls whether to display or not messages */
-  /*                on the screen. If msg=true (default), messages are displayed
-   */
-  /*                on the screen about estimated time. */
-  /*                Example - C=subsets(20,10,3,120,0) */
-  /*                Data Types - boolean */
-  /*  */
-  /*    method : Sampling methods. Scalar or vector. */
-  /*             Methods used to extract the subsets. See section 'More About'
-   */
-  /*             of function randsampleFS.m for details about the sampling */
-  /*             methods. Default is method = 1. */
-  /*             - Scalar, from 0 to 3 determining the (random sample without */
-  /*             replacement) method to be used. */
-  /*             - Vector of weights: in such a case, Weighted Sampling Without
-   */
-  /*               Replacement is applied using that vector of weights. */
-  /*             Example - randsampleFS(100,10,2) */
-  /*             Data Types - single|double */
-  /*  */
-  /*  */
-  /*   Output: */
-  /*  */
-  /*  */
-  /*            C : The indices of the subsets which need to be extracted. */
-  /*                Matrix with nselected rows and p columns (stored in int16
-   * format). */
-  /*                Data Types - single|double */
-  /*  */
-  /*    nselected : Number of rows of matrix C. Scalar. */
-  /*                Data Types - single|double */
-  /*  */
-  /*  */
-  /*  See also randsampleFS.m, lexunrank.m, bc.m */
-  /*  */
-  /*  References: */
-  /*        See references in randsampleFS.m, lexunrank.m and bc.m. See also,
-   * for */
-  /*        weighted sampling, Pavlos S. Efraimidis, Paul G. Spirakis, Weighted
-   */
-  /*        random sampling with a reservoir, Information Processing Letters,
-   * Volume */
-  /*        97, Issue 5, 16 March 2006, Pages 181-185. */
-  /*  */
-  /*        Wong, C.K. and M.C. Easton (1980) "An Efficient Method for Weighted
-   */
-  /*        Sampling Without Replacement", SIAM Journal of Computing, */
-  /*        9(1):111-113. */
-  /*  */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('subsets')">Link to the help function</a> */
-  /*  */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
-  /*  */
-  /*  Examples: */
-  /*  */
-  /* { */
-  /*        %% Create a matrix with the indexes of 5 subsets when n=100, p=3. */
-  /*        % Only default arguments used. */
-  /*        C = subsets(5,100,3) */
-  /* } */
   /* { */
   /*        %% Create a matrix with the indexes of 5 subsets when n=100, p=3. */
   /*        % Use information on the number of combinations to speed up
@@ -2859,6 +2852,103 @@ void d_subsets(emxArray_real_T *nsamp, double n, double p, emxArray_real_T *C,
   }
 }
 
+/*
+ * subsets creates a matrix of indexes where rows are distinct p-subsets
+ * extracted from a set of n elements
+ *
+ * <a href="matlab: docsearchFS('subsets')">Link to the help function</a>
+ *
+ *   Required input arguments:
+ *
+ *        nsamp : Number of subsamples which have to be extracted. Scalar;
+ *                if nsamp=0 all subsets will be extracted; they will be (n
+ *                choose p).
+ *                Data Types - single|double
+ *
+ *          n   : Number of observations of the dataset. Scalar.
+ *                Data Types - single|double
+ *
+ *          p   : Size of the subsets. Scalar. In regression with p
+ *                explanatory variable the size of the elmental subsets is p;
+ *                in multivariate analysis, in presence of v variables,
+ *                the size of the elemental subsets is v+1.
+ *                Data Types - single|double
+ *
+ *   Optional input arguments:
+ *
+ *        ncomb : scalar (n choose p). If the user has already computed this
+ *                value it can supply it directly, otherwise the program will
+ *                calculate it automatically.
+ *                Example - C=subsets(20,10,3,120)
+ *                Data Types - single|double
+ *
+ *         msg  : scalar which controls whether to display or not messages
+ *                on the screen. If msg=true (default), messages are displayed
+ *                on the screen about estimated time.
+ *                Example - C=subsets(20,10,3,120,0)
+ *                Data Types - boolean
+ *
+ *    method : Sampling methods. Scalar or vector.
+ *             Methods used to extract the subsets. See section 'More About'
+ *             of function randsampleFS.m for details about the sampling
+ *             methods. Default is method = 1.
+ *             - Scalar, from 0 to 3 determining the (random sample without
+ *             replacement) method to be used.
+ *             - Vector of weights: in such a case, Weighted Sampling Without
+ *               Replacement is applied using that vector of weights.
+ *             Example - randsampleFS(100,10,2)
+ *             Data Types - single|double
+ *
+ *
+ *   Output:
+ *
+ *
+ *            C : The indices of the subsets which need to be extracted.
+ *                Matrix with nselected rows and p columns (stored in int16
+ * format). Data Types - single|double
+ *
+ *    nselected : Number of rows of matrix C. Scalar.
+ *                Data Types - single|double
+ *
+ *
+ *  See also randsampleFS.m, lexunrank.m, bc.m
+ *
+ *  References:
+ *        See references in randsampleFS.m, lexunrank.m and bc.m. See also, for
+ *        weighted sampling, Pavlos S. Efraimidis, Paul G. Spirakis, Weighted
+ *        random sampling with a reservoir, Information Processing Letters,
+ * Volume 97, Issue 5, 16 March 2006, Pages 181-185.
+ *
+ *        Wong, C.K. and M.C. Easton (1980) "An Efficient Method for Weighted
+ *        Sampling Without Replacement", SIAM Journal of Computing,
+ *        9(1):111-113.
+ *
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ *
+ * <a href="matlab: docsearchFS('subsets')">Link to the help function</a>
+ *
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ *  Examples:
+ *
+ * {
+ *        %% Create a matrix with the indexes of 5 subsets when n=100, p=3.
+ *        % Only default arguments used.
+ *        C = subsets(5,100,3)
+ * }
+ *
+ * Arguments    : double nsamp
+ *                double n
+ *                double p
+ *                double ncomb
+ *                emxArray_real_T *C
+ *                double *nselected
+ * Return Type  : void
+ */
 void subsets(double nsamp, double n, double p, double ncomb, emxArray_real_T *C,
              double *nselected)
 {
@@ -2870,104 +2960,6 @@ void subsets(double nsamp, double n, double p, double ncomb, emxArray_real_T *C,
   int i1;
   int loop_ub;
   bool usepascal;
-  /* subsets creates a matrix of indexes where rows are distinct p-subsets
-   * extracted from a set of n elements */
-  /*  */
-  /* <a href="matlab: docsearchFS('subsets')">Link to the help function</a> */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /*        nsamp : Number of subsamples which have to be extracted. Scalar; */
-  /*                if nsamp=0 all subsets will be extracted; they will be (n */
-  /*                choose p). */
-  /*                Data Types - single|double */
-  /*  */
-  /*          n   : Number of observations of the dataset. Scalar. */
-  /*                Data Types - single|double */
-  /*  */
-  /*          p   : Size of the subsets. Scalar. In regression with p */
-  /*                explanatory variable the size of the elmental subsets is p;
-   */
-  /*                in multivariate analysis, in presence of v variables, */
-  /*                the size of the elemental subsets is v+1. */
-  /*                Data Types - single|double */
-  /*  */
-  /*   Optional input arguments: */
-  /*  */
-  /*        ncomb : scalar (n choose p). If the user has already computed this
-   */
-  /*                value it can supply it directly, otherwise the program will
-   */
-  /*                calculate it automatically. */
-  /*                Example - C=subsets(20,10,3,120) */
-  /*                Data Types - single|double */
-  /*  */
-  /*         msg  : scalar which controls whether to display or not messages */
-  /*                on the screen. If msg=true (default), messages are displayed
-   */
-  /*                on the screen about estimated time. */
-  /*                Example - C=subsets(20,10,3,120,0) */
-  /*                Data Types - boolean */
-  /*  */
-  /*    method : Sampling methods. Scalar or vector. */
-  /*             Methods used to extract the subsets. See section 'More About'
-   */
-  /*             of function randsampleFS.m for details about the sampling */
-  /*             methods. Default is method = 1. */
-  /*             - Scalar, from 0 to 3 determining the (random sample without */
-  /*             replacement) method to be used. */
-  /*             - Vector of weights: in such a case, Weighted Sampling Without
-   */
-  /*               Replacement is applied using that vector of weights. */
-  /*             Example - randsampleFS(100,10,2) */
-  /*             Data Types - single|double */
-  /*  */
-  /*  */
-  /*   Output: */
-  /*  */
-  /*  */
-  /*            C : The indices of the subsets which need to be extracted. */
-  /*                Matrix with nselected rows and p columns (stored in int16
-   * format). */
-  /*                Data Types - single|double */
-  /*  */
-  /*    nselected : Number of rows of matrix C. Scalar. */
-  /*                Data Types - single|double */
-  /*  */
-  /*  */
-  /*  See also randsampleFS.m, lexunrank.m, bc.m */
-  /*  */
-  /*  References: */
-  /*        See references in randsampleFS.m, lexunrank.m and bc.m. See also,
-   * for */
-  /*        weighted sampling, Pavlos S. Efraimidis, Paul G. Spirakis, Weighted
-   */
-  /*        random sampling with a reservoir, Information Processing Letters,
-   * Volume */
-  /*        97, Issue 5, 16 March 2006, Pages 181-185. */
-  /*  */
-  /*        Wong, C.K. and M.C. Easton (1980) "An Efficient Method for Weighted
-   */
-  /*        Sampling Without Replacement", SIAM Journal of Computing, */
-  /*        9(1):111-113. */
-  /*  */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /*  */
-  /* <a href="matlab: docsearchFS('subsets')">Link to the help function</a> */
-  /*  */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
-  /*  */
-  /*  Examples: */
-  /*  */
-  /* { */
-  /*        %% Create a matrix with the indexes of 5 subsets when n=100, p=3. */
-  /*        % Only default arguments used. */
-  /*        C = subsets(5,100,3) */
-  /* } */
   /* { */
   /*        %% Create a matrix with the indexes of 5 subsets when n=100, p=3. */
   /*        % Use information on the number of combinations to speed up
@@ -3907,4 +3899,8 @@ void subsets(double nsamp, double n, double p, double ncomb, emxArray_real_T *C,
   emxFree_real_T(&seq);
 }
 
-/* End of code generation (subsets.c) */
+/*
+ * File trailer for subsets.c
+ *
+ * [EOF]
+ */

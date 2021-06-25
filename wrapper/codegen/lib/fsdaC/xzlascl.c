@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: xzlascl.c
  *
- * xzlascl.c
- *
- * Code generation for function 'xzlascl'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "xzlascl.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
@@ -17,6 +16,12 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : double cfrom
+ *                double cto
+ *                emxArray_creal_T *A
+ * Return Type  : void
+ */
 void b_xzlascl(double cfrom, double cto, emxArray_creal_T *A)
 {
   double a;
@@ -51,6 +56,12 @@ void b_xzlascl(double cfrom, double cto, emxArray_creal_T *A)
   }
 }
 
+/*
+ * Arguments    : double cfrom
+ *                double cto
+ *                emxArray_creal_T *A
+ * Return Type  : void
+ */
 void xzlascl(double cfrom, double cto, emxArray_creal_T *A)
 {
   double a;
@@ -90,4 +101,8 @@ void xzlascl(double cfrom, double cto, emxArray_creal_T *A)
   }
 }
 
-/* End of code generation (xzlascl.c) */
+/*
+ * File trailer for xzlascl.c
+ *
+ * [EOF]
+ */

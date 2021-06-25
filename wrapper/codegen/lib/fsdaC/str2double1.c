@@ -2,20 +2,27 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: str2double1.c
  *
- * str2double1.c
- *
- * Code generation for function 'str2double1'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "str2double1.h"
 #include "fsdaC_data.h"
 #include "rt_nonfinite.h"
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : char s1[4]
+ *                int *idx
+ *                const char s[2]
+ *                int *k
+ *                bool allowpoint
+ * Return Type  : bool
+ */
 bool b_copydigits(char s1[4], int *idx, const char s[2], int *k,
                   bool allowpoint)
 {
@@ -53,6 +60,13 @@ bool b_copydigits(char s1[4], int *idx, const char s[2], int *k,
   return success;
 }
 
+/*
+ * Arguments    : char s1[4]
+ *                int *idx
+ *                const char s[2]
+ *                int *k
+ * Return Type  : bool
+ */
 bool b_copyexponent(char s1[4], int *idx, const char s[2], int *k)
 {
   int kexp;
@@ -88,6 +102,13 @@ bool b_copyexponent(char s1[4], int *idx, const char s[2], int *k)
   return success;
 }
 
+/*
+ * Arguments    : const char s[2]
+ *                int *k
+ *                bool *b_finite
+ *                double *fv
+ * Return Type  : void
+ */
 void b_readNonFinite(const char s[2], int *k, bool *b_finite, double *fv)
 {
   int ksaved;
@@ -136,6 +157,19 @@ void b_readNonFinite(const char s[2], int *k, bool *b_finite, double *fv)
   }
 }
 
+/*
+ * Arguments    : char s1[4]
+ *                int *idx
+ *                const char s[2]
+ *                int *k
+ *                bool allowimag
+ *                bool *isimag
+ *                bool *b_finite
+ *                double *nfv
+ *                bool *foundsign
+ *                bool *success
+ * Return Type  : void
+ */
 void b_readfloat(char s1[4], int *idx, const char s[2], int *k, bool allowimag,
                  bool *isimag, bool *b_finite, double *nfv, bool *foundsign,
                  bool *success)
@@ -271,6 +305,14 @@ void b_readfloat(char s1[4], int *idx, const char s[2], int *k, bool allowimag,
   }
 }
 
+/*
+ * Arguments    : char s1[3]
+ *                int *idx
+ *                char s
+ *                int *k
+ *                bool allowpoint
+ * Return Type  : bool
+ */
 bool copydigits(char s1[3], int *idx, char s, int *k, bool allowpoint)
 {
   bool exitg1;
@@ -305,6 +347,13 @@ bool copydigits(char s1[3], int *idx, char s, int *k, bool allowpoint)
   return success;
 }
 
+/*
+ * Arguments    : char s1[3]
+ *                int *idx
+ *                char s
+ *                int *k
+ * Return Type  : bool
+ */
 bool copyexponent(char s1[3], int *idx, char s, int *k)
 {
   bool b_success;
@@ -322,6 +371,13 @@ bool copyexponent(char s1[3], int *idx, char s, int *k)
   return success;
 }
 
+/*
+ * Arguments    : char s
+ *                int *k
+ *                bool *b_finite
+ *                double *fv
+ * Return Type  : void
+ */
 void readNonFinite(char s, int *k, bool *b_finite, double *fv)
 {
   int ksaved;
@@ -370,6 +426,19 @@ void readNonFinite(char s, int *k, bool *b_finite, double *fv)
   }
 }
 
+/*
+ * Arguments    : char s1[3]
+ *                int *idx
+ *                char s
+ *                int *k
+ *                bool allowimag
+ *                bool *isimag
+ *                bool *b_finite
+ *                double *nfv
+ *                bool *foundsign
+ *                bool *success
+ * Return Type  : void
+ */
 void readfloat(char s1[3], int *idx, char s, int *k, bool allowimag,
                bool *isimag, bool *b_finite, double *nfv, bool *foundsign,
                bool *success)
@@ -466,4 +535,8 @@ void readfloat(char s1[3], int *idx, char s, int *k, bool allowimag,
   }
 }
 
-/* End of code generation (str2double1.c) */
+/*
+ * File trailer for str2double1.c
+ *
+ * [EOF]
+ */

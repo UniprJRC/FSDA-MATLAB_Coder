@@ -2,17 +2,16 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: fsdaC_internal_types.h
  *
- * fsdaC_internal_types.h
- *
- * Code generation for function 'FSM_wrapper'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
 #ifndef FSDAC_INTERNAL_TYPES_H
 #define FSDAC_INTERNAL_TYPES_H
 
-/* Include files */
+/* Include Files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 
@@ -48,4 +47,8 @@ typedef struct {
 #endif /* typedef_e_struct_T */
 
 #endif
-/* End of code generation (fsdaC_internal_types.h) */
+/*
+ * File trailer for fsdaC_internal_types.h
+ *
+ * [EOF]
+ */

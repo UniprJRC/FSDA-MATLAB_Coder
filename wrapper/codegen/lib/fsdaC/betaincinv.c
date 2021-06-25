@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: betaincinv.c
  *
- * betaincinv.c
- *
- * Code generation for function 'betaincinv'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "betaincinv.h"
 #include "eml_betainc.h"
 #include "gammaln.h"
@@ -18,6 +17,12 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : double x
+ *                double a
+ *                double b
+ * Return Type  : creal_T
+ */
 creal_T b_betaincinv(double x, double a, double b)
 {
   creal_T y;
@@ -201,6 +206,12 @@ creal_T b_betaincinv(double x, double a, double b)
   return y;
 }
 
+/*
+ * Arguments    : double x
+ *                double a
+ *                double b
+ * Return Type  : creal_T
+ */
 creal_T betaincinv(double x, double a, double b)
 {
   creal_T y;
@@ -387,4 +398,8 @@ creal_T betaincinv(double x, double a, double b)
   return y;
 }
 
-/* End of code generation (betaincinv.c) */
+/*
+ * File trailer for betaincinv.c
+ *
+ * [EOF]
+ */

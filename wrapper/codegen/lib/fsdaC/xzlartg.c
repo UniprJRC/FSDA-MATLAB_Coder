@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: xzlartg.c
  *
- * xzlartg.c
- *
- * Code generation for function 'xzlartg'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "xzlartg.h"
 #include "fsdaC_rtwutil.h"
 #include "rt_nonfinite.h"
@@ -17,6 +16,13 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const creal_T f
+ *                const creal_T g
+ *                double *cs
+ *                creal_T *sn
+ * Return Type  : void
+ */
 void b_xzlartg(const creal_T f, const creal_T g, double *cs, creal_T *sn)
 {
   double f2;
@@ -119,6 +125,14 @@ void b_xzlartg(const creal_T f, const creal_T g, double *cs, creal_T *sn)
   }
 }
 
+/*
+ * Arguments    : const creal_T f
+ *                const creal_T g
+ *                double *cs
+ *                creal_T *sn
+ *                creal_T *r
+ * Return Type  : void
+ */
 void xzlartg(const creal_T f, const creal_T g, double *cs, creal_T *sn,
              creal_T *r)
 {
@@ -248,4 +262,8 @@ void xzlartg(const creal_T f, const creal_T g, double *cs, creal_T *sn,
   }
 }
 
-/* End of code generation (xzlartg.c) */
+/*
+ * File trailer for xzlartg.c
+ *
+ * [EOF]
+ */

@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: xzgeev.c
  *
- * xzgeev.c
- *
- * Code generation for function 'xzgeev'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "xzgeev.h"
 #include "fsdaC_data.h"
 #include "fsdaC_emxutil.h"
@@ -26,6 +25,13 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const emxArray_real_T *A
+ *                int *info
+ *                emxArray_creal_T *alpha1
+ *                emxArray_creal_T *beta1
+ * Return Type  : void
+ */
 void xzgeev(const emxArray_real_T *A, int *info, emxArray_creal_T *alpha1,
             emxArray_creal_T *beta1)
 {
@@ -583,4 +589,8 @@ void xzgeev(const emxArray_real_T *A, int *info, emxArray_creal_T *alpha1,
   emxFree_creal_T(&At);
 }
 
-/* End of code generation (xzgeev.c) */
+/*
+ * File trailer for xzgeev.c
+ *
+ * [EOF]
+ */

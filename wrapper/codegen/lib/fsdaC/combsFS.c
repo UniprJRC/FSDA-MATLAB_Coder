@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: combsFS.c
  *
- * combsFS.c
- *
- * Code generation for function 'combsFS'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "combsFS.h"
 #include "bc.h"
 #include "colon.h"
@@ -21,6 +20,67 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * combsFS is an iterative algorithm equivalent to the MATLAB combs.m
+ *
+ *  It generates m-combinations without repetition taken in lexicographic
+ *  order from the vector v.
+ *
+ *  REMARK: the MATLAB function combs.m uses recursive calls and it is
+ *  therefore very inefficient. Our iterative counterpart also makes better
+ *  use of memory, first because it works iteratively, and then because we
+ *  force computations in the lowest possible precision. This is not a
+ *  limitation, because the algotithm first builds the matrix P of all
+ *  m-combinations starting from the first n natural numbers, for which
+ *  double precision is not at all needed. Then, if the input vector b is
+ *  different from vector 1:v, then the desired P is simply obtained as P =
+ *  v(P). Note also that we build the matrix P by going over colums rather
+ *  than over lines. This is faster, as MATLAB indexes the elements of a
+ *  matrix by column first.
+ *
+ * <a href="matlab: docsearchFS('combsFS')">Link to the help function</a>
+ *
+ *   Required input arguments:
+ *
+ *     v:         A vector with n elements. It contains the response variable.
+ *                It can be either a row or a column vector.
+ *                Data Types - single|double
+ *
+ *     m:         Scalar. It specifies the size of the combinations.
+ *                Data Types - single|double
+ *
+ *  Optional input arguments:
+ *
+ *  Output:
+ *
+ *      P:        m-combinations without repetition taken in lexicographic
+ *                order from the vector v. Matrix containing the
+ *                m-combinations in the rows.
+ *                Data Types - single|double
+ *
+ *  See also: nchoosek
+ *
+ *  References:
+ *
+ *     Knuth, D. E. (1997). "The Art of Computer Programming", Volume 1:
+ *     Fundamental Algorithms, Third ed. Addison-Wesley. [pp. 52--74].
+ *
+ *  Copyright 2008-2021.
+ *  Written by FSDA team
+ *
+ * <a href="matlab: docsearchFS('combsFS')">Link to the help function</a>
+ *
+ *
+ * $LastChangedDate::                      $: Date of the last commit
+ *
+ *
+ *  Examples:
+ *
+ * Arguments    : emxArray_real_T *v
+ *                double m
+ *                emxArray_real_T *P
+ * Return Type  : void
+ */
 void combsFS(emxArray_real_T *v, double m, emxArray_real_T *P)
 {
   emxArray_real_T *b_P;
@@ -49,61 +109,6 @@ void combsFS(emxArray_real_T *v, double m, emxArray_real_T *P)
   int loop_ub;
   int n;
   emxInit_real_T(&b_v, 2);
-  /* combsFS is an iterative algorithm equivalent to the MATLAB combs.m */
-  /*  */
-  /*  It generates m-combinations without repetition taken in lexicographic */
-  /*  order from the vector v. */
-  /*  */
-  /*  REMARK: the MATLAB function combs.m uses recursive calls and it is */
-  /*  therefore very inefficient. Our iterative counterpart also makes better */
-  /*  use of memory, first because it works iteratively, and then because we */
-  /*  force computations in the lowest possible precision. This is not a */
-  /*  limitation, because the algotithm first builds the matrix P of all */
-  /*  m-combinations starting from the first n natural numbers, for which */
-  /*  double precision is not at all needed. Then, if the input vector b is */
-  /*  different from vector 1:v, then the desired P is simply obtained as P = */
-  /*  v(P). Note also that we build the matrix P by going over colums rather */
-  /*  than over lines. This is faster, as MATLAB indexes the elements of a */
-  /*  matrix by column first. */
-  /*  */
-  /* <a href="matlab: docsearchFS('combsFS')">Link to the help function</a> */
-  /*  */
-  /*   Required input arguments: */
-  /*  */
-  /*     v:         A vector with n elements. It contains the response variable.
-   */
-  /*                It can be either a row or a column vector. */
-  /*                Data Types - single|double */
-  /*  */
-  /*     m:         Scalar. It specifies the size of the combinations. */
-  /*                Data Types - single|double */
-  /*  */
-  /*  Optional input arguments: */
-  /*  */
-  /*  Output: */
-  /*  */
-  /*      P:        m-combinations without repetition taken in lexicographic */
-  /*                order from the vector v. Matrix containing the */
-  /*                m-combinations in the rows. */
-  /*                Data Types - single|double */
-  /*  */
-  /*  See also: nchoosek */
-  /*  */
-  /*  References: */
-  /*  */
-  /*     Knuth, D. E. (1997). "The Art of Computer Programming", Volume 1: */
-  /*     Fundamental Algorithms, Third ed. Addison-Wesley. [pp. 52--74]. */
-  /*  */
-  /*  Copyright 2008-2021. */
-  /*  Written by FSDA team */
-  /*  */
-  /* <a href="matlab: docsearchFS('combsFS')">Link to the help function</a> */
-  /*  */
-  /*  */
-  /* $LastChangedDate::                      $: Date of the last commit */
-  /*  */
-  /*  */
-  /*  Examples: */
   /* { */
   /*     %% combsFS used to generate all possible combinations of size 3 of
    * elements 5, 8, 9, 10, 11. */
@@ -309,4 +314,8 @@ void combsFS(emxArray_real_T *v, double m, emxArray_real_T *P)
   emxFree_real_T(&b_v);
 }
 
-/* End of code generation (combsFS.c) */
+/*
+ * File trailer for combsFS.c
+ *
+ * [EOF]
+ */

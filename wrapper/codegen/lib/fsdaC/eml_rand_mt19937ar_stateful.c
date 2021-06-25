@@ -2,20 +2,23 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: eml_rand_mt19937ar_stateful.c
  *
- * eml_rand_mt19937ar_stateful.c
- *
- * Code generation for function 'eml_rand_mt19937ar_stateful'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "eml_rand_mt19937ar_stateful.h"
 #include "fsdaC_data.h"
 #include "rt_nonfinite.h"
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
 void c_eml_rand_mt19937ar_stateful_i(void)
 {
   static const unsigned int uv[625] = {
@@ -147,4 +150,8 @@ void c_eml_rand_mt19937ar_stateful_i(void)
   memcpy(&state[0], &uv[0], 625U * sizeof(unsigned int));
 }
 
-/* End of code generation (eml_rand_mt19937ar_stateful.c) */
+/*
+ * File trailer for eml_rand_mt19937ar_stateful.c
+ *
+ * [EOF]
+ */

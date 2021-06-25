@@ -2,14 +2,13 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
+ * File: unique.c
  *
- * unique.c
- *
- * Code generation for function 'unique'
- *
+ * MATLAB Coder version            : 5.2
+ * C/C++ source code generated on  : 25-Jun-2021 16:19:58
  */
 
-/* Include files */
+/* Include Files */
 #include "unique.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
@@ -20,6 +19,11 @@
 #include <string.h>
 
 /* Function Definitions */
+/*
+ * Arguments    : const emxArray_real_T *a
+ *                emxArray_real_T *b
+ * Return Type  : void
+ */
 void unique_vector(const emxArray_real_T *a, emxArray_real_T *b)
 {
   emxArray_int32_T *idx;
@@ -107,4 +111,8 @@ void unique_vector(const emxArray_real_T *a, emxArray_real_T *b)
   emxEnsureCapacity_real_T(b, nNaN);
 }
 
-/* End of code generation (unique.c) */
+/*
+ * File trailer for unique.c
+ *
+ * [EOF]
+ */
