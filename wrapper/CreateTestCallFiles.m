@@ -55,6 +55,11 @@ function ComptimesAll = CreateTestCallFiles(varargin)
 %               contained in the input folder will be used.
 %                 Example - 'codegenOverall','myLibraryName'
 %                 Data Types - char
+%   ExcludeFile = File to exclude from overall compilation. Character.
+%                 Name of the file (excluding extension) which has to be
+%                 excluded from overall codegen.
+%                 Example - 'ExcludeFile','tclust'
+%                 Data Types - char
 %
 % DeleteMexSubfolder  : Delete mex subfolder. Boolean.
 %               If DeleteMexSubfoler is true command
@@ -65,8 +70,8 @@ function ComptimesAll = CreateTestCallFiles(varargin)
 %                 Data Types - logical
 %
 % UseBlas  :  Use BLAS library. Boolean.
-%               If UseBlas is true command codegen is invoked with 
-%               cfg.CustomBLASCallback ='mklcallback'. Note that we assume that file 
+%               If UseBlas is true command codegen is invoked with
+%               cfg.CustomBLASCallback ='mklcallback'. Note that we assume that file
 %               mklcallback is the current folder and the INTEL libraries
 %              libiomp5md.lib,  mkl_core.lib,  mkl_intel_ilp64.lib,
 %              mkl_intel_thread.lib, and header file mkl_cblas.h
@@ -139,12 +144,13 @@ DeleteMexSubfolder=false;
 codegenIndependent=false;
 codegenOverall='fsdaC';
 CreateMexFile=true;
-    UseBlas=false;
+UseBlas=false;
+ExcludeFile='';
 
 if nargin>0
     options=struct('InputPath',InputPath,'DeleteMexSubfolder',DeleteMexSubfolder,...
         'codegenIndependent',codegenIndependent,'CreateMexFile',CreateMexFile,...
-        'codegenOverall',codegenOverall,'UseBlas',UseBlas);
+        'codegenOverall',codegenOverall,'UseBlas',UseBlas,'ExcludeFile',ExcludeFile);
     
     UserOptions=varargin(1:2:length(varargin));
     if ~isempty(UserOptions)
@@ -164,10 +170,16 @@ if nargin>0
     CreateMexFile=options.CreateMexFile;
     InputPath=options.InputPath;
     codegenOverall=options.codegenOverall;
-        UseBlas=options.UseBlas;
+    UseBlas=options.UseBlas;
+    ExcludeFile=options.ExcludeFile;
 end
 
 FileList=dir([InputPath '*_wrapper*.m']);
+
+if ~isempty(ExcludeFile)
+sel=cellfun(@isempty,regexp({FileList.name},ExcludeFile));
+FileList=FileList(sel);
+end
 
 lFiles=length(FileList);
 ComptimesAll=table('Size',[lFiles,2],'VariableNames',{'m-time' 'mex-time'},...
