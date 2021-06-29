@@ -1,10 +1,11 @@
 % This file performs search and replace for all files inside
 % codegen/lib/fsdaC
-% The indication of the files is in the first column of Excel file
+% The indication of the files is in the first column of Excel file named
 % ToInitialize.xlsx (a missing entry in the first column means consider all
 % files which have .c extension)
 % String to search is in the second column of Excel file
 % String to replace is in the third column of Excel file
+% Remark: this file must be run before copyFilesIntoDocuments.m
 
 OldFolder=pwd;
 fsep=filesep;
@@ -13,7 +14,7 @@ newpwd=pwd;
 % Open Excel file
 X=readtable([OldFolder fsep 'ToInitialize.xlsx']);
 n=size(X,1);
-for i=2:n
+for i=1:n
     disp(['Row ' num2str(i)])
     FileName=X{i,1}; % cell format
     FileName=FileName{1,1}; % character format
@@ -39,17 +40,31 @@ for i=2:n
             
             % Insert the file into fstring
             fstring=fscanf(fileID,'%c');
-                    fclose(fileID);
+            fclose(fileID);
             
             % Perform search and replace
-            fstringNEW=strrep(fstring,strTofind,strToReplace);
-            fileID1 = fopen(FileWithFullPath, 'w');
-
-            % Write into fileID1
-            nb=fprintf(fileID1,'%s',fstringNEW);
-            status=fclose(fileID1);
-            if status ~=0
-                error('FSDA:ToInitialize:FileNotClosed',['Could not close the connection with file: ' '''' FileName ''''])
+            strTofindWithEmptySpace=[' ' strTofind];
+            sIndexTofind = regexp(fstring,strTofindWithEmptySpace);
+            
+            
+            if ~isempty(sIndexTofind)
+                
+                fstringNEW=strrep(fstring,strTofindWithEmptySpace,[' ' strToReplace]);
+                
+                if strcmp(strTofind,'printf(')
+                    CRLF='\x0A';
+                    strToReplace1=['/* Include files */' CRLF  '#include \<R.h\>' CRLF];
+                    fstringNEW=regexprep(fstringNEW,'/\* Include files \*/',strToReplace1);
+                end
+                
+                fileID1 = fopen(FileWithFullPath, 'w');
+                
+                % Write into fileID1
+                nb=fprintf(fileID1,'%s',fstringNEW);
+                status=fclose(fileID1);
+                if status ~=0
+                    error('FSDA:ToInitialize:FileNotClosed',['Could not close the connection with file: ' '''' FileName ''''])
+                end
             end
         end
         
@@ -78,13 +93,13 @@ for i=2:n
         else
         end
         % Perform search and replace
-        fstring=regexprep(fstring,strTofind,strToReplace);
+        fstring=strrep(fstring,strTofind,strToReplace);
         % Write into fileID
         fileID1 = fopen(FileWithFullPath, 'w');
         if fileID1==-1
             error('FSDA:ToInitialize:WrongFile',['Could not find file ' '''' FileName ''''])
         end
-      
+        
         fprintf(fileID1,'%s',fstring);
         status=fclose(fileID1);
         if status ~=0
