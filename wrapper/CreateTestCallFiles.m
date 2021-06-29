@@ -177,8 +177,8 @@ end
 FileList=dir([InputPath '*_wrapper*.m']);
 
 if ~isempty(ExcludeFile)
-sel=cellfun(@isempty,regexp({FileList.name},ExcludeFile));
-FileList=FileList(sel);
+    sel=cellfun(@isempty,regexp({FileList.name},ExcludeFile));
+    FileList=FileList(sel);
 end
 
 lFiles=length(FileList);
@@ -236,7 +236,8 @@ if ~isempty(codegenOverall)
     AllFileNameschar=[AllFileNames{:}];
     
     % Configuration part
-    cfg = coder.config('lib','ecoder',true);
+    % cfg = coder.config('lib','ecoder',true);
+    cfg = coder.config('lib','ecoder',false);
     cfg.GenerateReport = true;
     cfg.ReportPotentialDifferences = false;
     cfg.GenCodeOnly = true;
@@ -245,7 +246,7 @@ if ~isempty(codegenOverall)
     elseif ismac == true
         cfg.Toolchain = 'Clang v3.1 | gmake (64-bit Mac)';
     elseif isunix == true
-        cfg.Toolchain = 'Clang v3.1 | gmake (64-bit Mac)';
+        % cfg.Toolchain = 'Clang v3.1 | gmake (64-bit Mac)';
     else
         disp('Platform not supported')
     end
