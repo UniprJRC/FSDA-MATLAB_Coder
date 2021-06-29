@@ -2,13 +2,14 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: FSRbsb.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * FSRbsb.c
+ *
+ * Code generation for function 'FSRbsb'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "FSRbsb.h"
 #include "cat.h"
 #include "colon.h"
@@ -23,138 +24,8 @@
 #include "sort.h"
 #include "rt_nonfinite.h"
 #include <math.h>
-#include <string.h>
 
 /* Function Definitions */
-/*
- * FSRbsb returns the units belonging to the subset in each step of the forward
- * search
- *
- * <a href="matlab: docsearchFS('FSRbsb')">Link to the help function</a>
- *
- *  Required input arguments:
- *
- *     y    :     Response variable. Vector. A vector with n elements that
- * contains the response variable. y can be either a row or a column vector. X :
- * Predictor variables. Matrix. Matrix of explanatory variables (also called
- * 'regressors') of dimension n x (p-1) where p denotes the number of
- *                explanatory variables including the intercept.
- *                Rows of X represent observations, and columns represent
- *                variables. By default, there is a constant term in the
- *                model, unless you explicitly remove it using input option
- *                intercept, so do not include a column of 1s in X. Missing
- *                values (NaN's) and infinite values (Inf's) are allowed,
- *                since observations (rows) with missing or infinite values
- *                will automatically be excluded from the computations.
- *   bsb :        list of units forming the initial subset. Vector | 0. If
- *                bsb=0 then the procedure starts with p units randomly
- *                chosen else if bsb is not 0 the search will start with
- *                m0=length(bsb)
- *
- *  Optional input arguments:
- *
- *        init  :     Search initialization. Scalar.
- *                    It specifies the initial subset size to start
- *                    monitoring units forming subset
- *                    Example - 'init',100 starts the search from step m=100
- *                    Data Types - double
- *
- *     intercept :  Indicator for constant term. true (default) | false.
- *                  Indicator for the constant term (intercept) in the fit,
- *                  specified as the comma-separated pair consisting of
- *                  'Intercept' and either true to include or false to remove
- *                  the constant term from the model.
- *                  Example - 'intercept',false
- *                  Data Types - boolean
- *
- *     nocheck  :    Check input arguments. Boolean.
- *                   If nocheck is equal to 1 no check is performed on
- *                   matrix y and matrix X. Notice that y and X are left
- *                   unchanged. In other words the additional column of ones for
- *                   the intercept is not added. As default nocheck=false.
- *                   Example - 'nocheck',true
- *                   Data Types - boolean
- *
- *    bsbsteps :  Save the units forming subsets in selected steps. Vector or
- *                empty value.
- *                It specifies for which steps of the fwd search it is
- *                necessary to save the units forming subset. If bsbsteps
- *                is 0 we store the units forming subset in all steps. If
- *                bsbsteps=[] or omitted, the default is to store the units
- *                forming subset in all steps if n<=5000, else to store the
- *                units forming subset at steps init and steps which are
- *                multiple of 100. For example, as default, if n=753 and
- *                init=6, units forming subset are stored for m=init, 100,
- *                200, 300, 400, 500 and 600.
- *                Example - 'bsbsteps',[100 200] stores the unis forming
- *                subset in steps 100 and 200.
- *                Data Types - double
- *
- *        msg    :  Level of output to display. Boolean. It controls whether
- *                  to display or not messages on the screen
- *                  If msg==true (default) messages are displayed on the screen
- * about step of the fwd search else no message is displayed on the screen.
- *                Example - 'msg',true
- *                Data Types - boolean
- *
- *        plots   : Plot on the screen. Scalar.
- *                  If plots=1 the monitoring units plot is displayed on the
- *                  screen. The default value of plots is 0 (that is no plot
- *                  is produced on the screen).
- *                  Example - 'plots',1
- *                  Data Types - double
- *
- *
- *  Output:
- *
- *   Un:          Units included in each step. Matrix.
- *                (n-init) x 11 Matrix which contains the unit(s) included
- *                in the subset at each step of the search.
- *                REMARK: in every step the new subset is compared with the
- *                old subset. Un contains the unit(s) present in the new
- *                subset but not in the old one.
- *                Un(1,2) for example contains the unit included in step
- *                init+1.
- *                Un(end,2) contains the units included in the final step
- *                of the search.
- *   BB:          Units belonging to subset in each step or selected steps.
- * Matrix. n-by-(n-init+1) or n-by-length(bsbsteps) matrix which contains the
- * units belonging to the subset at each step (or in selected steps as specified
- * by optional vector bsbsteps) of the forward search. More precisely: BB(:,1)
- * contains the units forming subset in step bsbsteps(1);
- *                ....;
- *                BB(:,end) contains the units forming subset in step
- * bsbsteps(end); Row 1 of matrix BB is referred to unit 1;
- *                ......;
- *                Row n of matrix BB is referred to unit n;
- *                Units not belonging to subset are denoted with NaN.
- *
- *  See also FSRBbsb, FSRHbsb
- *
- *  See also: FSReda
- *
- *  References:
- *
- *  Atkinson, A.C. and Riani, M. (2000), "Robust Diagnostic Regression
- *  Analysis", Springer Verlag, New York.
- *
- *
- *  Copyright 2008-2021.
- *  Written by FSDA team
- *
- *
- * <a href="matlab: docsearchFS('FSRbsb')">Link to the help function</a>
- *
- * $LastChangedDate::                      $: Date of the last commit
- *
- * Arguments    : const emxArray_real_T *y
- *                const emxArray_real_T *X
- *                emxArray_real_T *bsb
- *                double varargin_4
- *                emxArray_real_T *Un
- *                emxArray_real32_T *BB
- * Return Type  : void
- */
 void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
             emxArray_real_T *bsb, double varargin_4, emxArray_real_T *Un,
             emxArray_real32_T *BB)
@@ -192,6 +63,145 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
   bool Ra;
   bool exitg1;
   emxInit_real_T(&Xb, 2);
+  /* FSRbsb returns the units belonging to the subset in each step of the
+   * forward search */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSRbsb')">Link to the help function</a> */
+  /*  */
+  /*  Required input arguments: */
+  /*  */
+  /*     y    :     Response variable. Vector. A vector with n elements that
+   * contains */
+  /*                the response variable. y can be either a row or a column
+   * vector. */
+  /*   X :          Predictor variables. Matrix. */
+  /*                Matrix of explanatory variables (also called 'regressors')
+   */
+  /*                of dimension n x (p-1) where p denotes the number of */
+  /*                explanatory variables including the intercept. */
+  /*                Rows of X represent observations, and columns represent */
+  /*                variables. By default, there is a constant term in the */
+  /*                model, unless you explicitly remove it using input option */
+  /*                intercept, so do not include a column of 1s in X. Missing */
+  /*                values (NaN's) and infinite values (Inf's) are allowed, */
+  /*                since observations (rows) with missing or infinite values */
+  /*                will automatically be excluded from the computations. */
+  /*   bsb :        list of units forming the initial subset. Vector | 0. If */
+  /*                bsb=0 then the procedure starts with p units randomly */
+  /*                chosen else if bsb is not 0 the search will start with */
+  /*                m0=length(bsb) */
+  /*  */
+  /*  Optional input arguments: */
+  /*  */
+  /*        init  :     Search initialization. Scalar. */
+  /*                    It specifies the initial subset size to start */
+  /*                    monitoring units forming subset */
+  /*                    Example - 'init',100 starts the search from step m=100
+   */
+  /*                    Data Types - double */
+  /*  */
+  /*     intercept :  Indicator for constant term. true (default) | false. */
+  /*                  Indicator for the constant term (intercept) in the fit, */
+  /*                  specified as the comma-separated pair consisting of */
+  /*                  'Intercept' and either true to include or false to remove
+   */
+  /*                  the constant term from the model. */
+  /*                  Example - 'intercept',false */
+  /*                  Data Types - boolean */
+  /*  */
+  /*     nocheck  :    Check input arguments. Boolean. */
+  /*                   If nocheck is equal to 1 no check is performed on */
+  /*                   matrix y and matrix X. Notice that y and X are left */
+  /*                   unchanged. In other words the additional column of ones
+   * for */
+  /*                   the intercept is not added. As default nocheck=false. */
+  /*                   Example - 'nocheck',true */
+  /*                   Data Types - boolean */
+  /*  */
+  /*    bsbsteps :  Save the units forming subsets in selected steps. Vector or
+   */
+  /*                empty value. */
+  /*                It specifies for which steps of the fwd search it is */
+  /*                necessary to save the units forming subset. If bsbsteps */
+  /*                is 0 we store the units forming subset in all steps. If */
+  /*                bsbsteps=[] or omitted, the default is to store the units */
+  /*                forming subset in all steps if n<=5000, else to store the */
+  /*                units forming subset at steps init and steps which are */
+  /*                multiple of 100. For example, as default, if n=753 and */
+  /*                init=6, units forming subset are stored for m=init, 100, */
+  /*                200, 300, 400, 500 and 600. */
+  /*                Example - 'bsbsteps',[100 200] stores the unis forming */
+  /*                subset in steps 100 and 200. */
+  /*                Data Types - double */
+  /*  */
+  /*        msg    :  Level of output to display. Boolean. It controls whether
+   */
+  /*                  to display or not messages on the screen */
+  /*                  If msg==true (default) messages are displayed on the
+   * screen about */
+  /*                    step of the fwd search */
+  /*                  else no message is displayed on the screen. */
+  /*                Example - 'msg',true */
+  /*                Data Types - boolean */
+  /*  */
+  /*        plots   : Plot on the screen. Scalar. */
+  /*                  If plots=1 the monitoring units plot is displayed on the
+   */
+  /*                  screen. The default value of plots is 0 (that is no plot
+   */
+  /*                  is produced on the screen). */
+  /*                  Example - 'plots',1 */
+  /*                  Data Types - double */
+  /*  */
+  /*  */
+  /*  Output: */
+  /*  */
+  /*   Un:          Units included in each step. Matrix. */
+  /*                (n-init) x 11 Matrix which contains the unit(s) included */
+  /*                in the subset at each step of the search. */
+  /*                REMARK: in every step the new subset is compared with the */
+  /*                old subset. Un contains the unit(s) present in the new */
+  /*                subset but not in the old one. */
+  /*                Un(1,2) for example contains the unit included in step */
+  /*                init+1. */
+  /*                Un(end,2) contains the units included in the final step */
+  /*                of the search. */
+  /*   BB:          Units belonging to subset in each step or selected steps.
+   * Matrix. */
+  /*                n-by-(n-init+1) or n-by-length(bsbsteps) matrix which */
+  /*                contains the units belonging to the subset at each step (or
+   */
+  /*                in selected steps as specified by optional vector bsbsteps)
+   */
+  /*                of the forward search. */
+  /*                More precisely: */
+  /*                BB(:,1) contains the units forming subset in step
+   * bsbsteps(1); */
+  /*                ....; */
+  /*                BB(:,end) contains the units forming subset in step
+   * bsbsteps(end); */
+  /*                Row 1 of matrix BB is referred to unit 1; */
+  /*                ......; */
+  /*                Row n of matrix BB is referred to unit n; */
+  /*                Units not belonging to subset are denoted with NaN. */
+  /*  */
+  /*  See also FSRBbsb, FSRHbsb */
+  /*  */
+  /*  See also: FSReda */
+  /*  */
+  /*  References: */
+  /*  */
+  /*  Atkinson, A.C. and Riani, M. (2000), "Robust Diagnostic Regression */
+  /*  Analysis", Springer Verlag, New York. */
+  /*  */
+  /*  */
+  /*  Copyright 2008-2021. */
+  /*  Written by FSDA team */
+  /*  */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSRbsb')">Link to the help function</a> */
+  /*  */
+  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /* { */
   /*     % FSRbsb with all default options. */
@@ -915,8 +925,4 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
   emxFree_real_T(&Xb);
 }
 
-/*
- * File trailer for FSRbsb.c
- *
- * [EOF]
- */
+/* End of code generation (FSRbsb.c) */

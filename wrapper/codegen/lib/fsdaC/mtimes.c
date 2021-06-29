@@ -2,26 +2,20 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: mtimes.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * mtimes.c
+ *
+ * Code generation for function 'mtimes'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "mtimes.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
-#include <string.h>
 
 /* Function Definitions */
-/*
- * Arguments    : const emxArray_real_T *A
- *                const emxArray_real_T *B
- *                emxArray_real_T *C
- * Return Type  : void
- */
 void b_mtimes(const emxArray_real_T *A, const emxArray_real_T *B,
               emxArray_real_T *C)
 {
@@ -60,12 +54,6 @@ void b_mtimes(const emxArray_real_T *A, const emxArray_real_T *B,
   }
 }
 
-/*
- * Arguments    : const emxArray_real_T *A
- *                const emxArray_real_T *B
- *                emxArray_real_T *C
- * Return Type  : void
- */
 void c_mtimes(const emxArray_real_T *A, const emxArray_real_T *B,
               emxArray_real_T *C)
 {
@@ -102,12 +90,6 @@ void c_mtimes(const emxArray_real_T *A, const emxArray_real_T *B,
   }
 }
 
-/*
- * Arguments    : const emxArray_real_T *A
- *                const emxArray_real_T *B
- *                emxArray_real_T *C
- * Return Type  : void
- */
 void d_mtimes(const emxArray_real_T *A, const emxArray_real_T *B,
               emxArray_real_T *C)
 {
@@ -144,12 +126,6 @@ void d_mtimes(const emxArray_real_T *A, const emxArray_real_T *B,
   }
 }
 
-/*
- * Arguments    : const emxArray_real_T *A
- *                const emxArray_real_T *B
- *                emxArray_real_T *C
- * Return Type  : void
- */
 void mtimes(const emxArray_real_T *A, const emxArray_real_T *B,
             emxArray_real_T *C)
 {
@@ -174,8 +150,4 @@ void mtimes(const emxArray_real_T *A, const emxArray_real_T *B,
   }
 }
 
-/*
- * File trailer for mtimes.c
- *
- * [EOF]
- */
+/* End of code generation (mtimes.c) */

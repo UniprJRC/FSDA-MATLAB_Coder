@@ -2,26 +2,22 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: sortrows.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * sortrows.c
+ *
+ * Code generation for function 'sortrows'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "sortrows.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 #include "sortrowsLE.h"
 #include "rt_nonfinite.h"
-#include <string.h>
 
 /* Function Definitions */
-/*
- * Arguments    : emxArray_real_T *y
- * Return Type  : void
- */
 void b_sortrows(emxArray_real_T *y)
 {
   emxArray_int32_T *idx;
@@ -144,10 +140,6 @@ void b_sortrows(emxArray_real_T *y)
   emxFree_int32_T(&idx);
 }
 
-/*
- * Arguments    : emxArray_real_T *y
- * Return Type  : void
- */
 void c_sortrows(emxArray_real_T *y)
 {
   emxArray_int32_T *idx;
@@ -270,10 +262,6 @@ void c_sortrows(emxArray_real_T *y)
   emxFree_int32_T(&idx);
 }
 
-/*
- * Arguments    : emxArray_real_T *y
- * Return Type  : void
- */
 void d_sortrows(emxArray_real_T *y)
 {
   emxArray_int32_T *idx;
@@ -395,10 +383,6 @@ void d_sortrows(emxArray_real_T *y)
   emxFree_int32_T(&idx);
 }
 
-/*
- * Arguments    : emxArray_real_T *y
- * Return Type  : void
- */
 void sortrows(emxArray_real_T *y)
 {
   emxArray_int32_T *idx;
@@ -520,8 +504,4 @@ void sortrows(emxArray_real_T *y)
   emxFree_int32_T(&idx);
 }
 
-/*
- * File trailer for sortrows.c
- *
- * [EOF]
- */
+/* End of code generation (sortrows.c) */

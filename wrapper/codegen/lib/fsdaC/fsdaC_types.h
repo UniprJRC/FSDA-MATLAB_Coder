@@ -2,16 +2,17 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: fsdaC_types.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * fsdaC_types.h
+ *
+ * Code generation for function 'FSM_wrapper'
+ *
  */
 
 #ifndef FSDAC_TYPES_H
 #define FSDAC_TYPES_H
 
-/* Include Files */
+/* Include files */
 #include "rtwtypes.h"
 
 /* Type Definitions */
@@ -70,28 +71,6 @@ typedef struct {
   double length;
 } d_matlab_internal_coder_tabular;
 #endif /* typedef_d_matlab_internal_coder_tabular */
-
-#ifndef typedef_struct_tclustrestrfactor_T
-#define typedef_struct_tclustrestrfactor_T
-typedef struct {
-  char pars[3];
-  double cdet;
-  double shw;
-  double shb;
-  double k;
-  double maxiterDSR;
-  double maxiterR;
-  double maxiterS;
-  bool msg;
-  double tolR;
-  double tolS;
-  bool usepreviousest;
-  double userepmat;
-  double sortsh;
-  double v;
-  double zerotol;
-} struct_tclustrestrfactor_T;
-#endif /* typedef_struct_tclustrestrfactor_T */
 
 #ifndef struct_emxArray_real_T
 #define struct_emxArray_real_T
@@ -457,42 +436,6 @@ typedef struct {
 } struct_addt_T;
 #endif /* typedef_struct_addt_T */
 
-#ifndef typedef_struct_tclust_T
-#define typedef_struct_tclust_T
-typedef struct {
-  emxArray_real_T *muopt;
-  emxArray_real_T *sigmaopt;
-  emxArray_real_T *idx;
-  emxArray_real_T *postprob;
-  emxArray_real_T_1x1 MIXMIX;
-  emxArray_real_T_1x1 MIXCLA;
-  double NlogL;
-  emxArray_real_T_1x1 CLACLA;
-  double notconver;
-  emxArray_real_T *bs;
-  double obj;
-  bool equalweights;
-  double h;
-  emxArray_real_T *fullsol;
-  emxArray_real_T *Y;
-} struct_tclust_T;
-#endif /* typedef_struct_tclust_T */
-
-#ifndef struct_emxArray_int8_T
-#define struct_emxArray_int8_T
-struct emxArray_int8_T {
-  signed char *data;
-  int *size;
-  int allocatedSize;
-  int numDimensions;
-  bool canFreeData;
-};
-#endif /* struct_emxArray_int8_T */
-#ifndef typedef_emxArray_int8_T
-#define typedef_emxArray_int8_T
-typedef struct emxArray_int8_T emxArray_int8_T;
-#endif /* typedef_emxArray_int8_T */
-
 #ifndef struct_emxArray_char_T_1x0
 #define struct_emxArray_char_T_1x0
 struct emxArray_char_T_1x0 {
@@ -626,8 +569,4 @@ typedef struct {
 #endif /* typedef_struct_LTSts_T */
 
 #endif
-/*
- * File trailer for fsdaC_types.h
- *
- * [EOF]
- */
+/* End of code generation (fsdaC_types.h) */

@@ -2,13 +2,14 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: FSMenvmmd.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * FSMenvmmd.c
+ *
+ * Code generation for function 'FSMenvmmd'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "FSMenvmmd.h"
 #include "chi2cdf.h"
 #include "chi2inv.h"
@@ -20,91 +21,22 @@
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 #include <math.h>
-#include <string.h>
 
 /* Function Definitions */
-/*
- * FSMenvmmd computes the theoretical envelopes of Minimum MD outside subset
- * during the search
- *
- * <a href="matlab: docsearchFS('FSMenvmmd')">Link to the help function</a>
- *
- *  Required input arguments:
- *
- *  n :           Number of observations. Scalar. Number of observations.
- *                Data Types - single | double
- *  v :           Number of variables. Scalar. Number of variables.
- *                Data Types - single | double
- *
- *  Optional input arguments:
- *
- *  init :       Point where to start monitoring required diagnostics. Scalar.
- *               Note that if bsb is supplied, init>=length(bsb). If init is not
- *               specified it will be set equal to floor(n*0.6).
- *                  Example - 'init',50
- *                  Data Types - double
- *
- *  prob:        quantiles for which envelopes have
- *                to be computed. Vector. Vector containing 1 x k elements .
- *                The default is to produce 1 per cent, 50 per cent and 99 per
- * cent envelopes. Example - 'prob',[0.05 0.95] Data Types - double
- *
- *    scaled:  It indicates how to compute the envelopes. Scalar.
- *                If scaled>0 the envelopes are produced for
- *                scaled Mahalanobis distances (no consistency factor is
- *                applied) else the traditional consistency factor is applied
- *                (this is the default)
- *                  Example - 'scaled',0
- *                  Data Types - double
- *
- *
- *  Output:
- *
- *   MMDenv=      n-m0+1 x length(prob)+1 columns containing the envelopes
- *                for the requested quantiles.
- *                1st col = fwd search index from m0 to n-1;
- *                2nd col = envelope for quantile prob[1];
- *                3rd col = envelope for quantile prob[2];
- *                ...;
- *                (k+1) col = envelope for quantile prob[k].
- *
- *  See also FSMenvmmd.m, FSM.m
- *
- *  References:
- *
- *  Riani, M., Atkinson, A.C. and Cerioli, A. (2009), Finding an unknown
- *  number of multivariate outliers, "Journal of the Royal Statistical
- *  Society Series B", Vol. 71, pp. 201-221.
- *
- *  Copyright 2008-2021.
- *  Written by FSDA team
- *
- *
- * <a href="matlab: docsearchFS('FSMenvmmd')">Link to the help function</a>
- *
- * $LastChangedDate::                      $: Date of the last commit
- *
- * Arguments    : double n
- *                double v
- *                double varargin_4
- *                emxArray_real_T *MMDenv
- * Return Type  : void
- */
 void FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
 {
   static const double varargin_2[6] = {0.99, 0.999, 0.9999, 0.99999, 0.01, 0.5};
   emxArray_real_T *a;
   emxArray_real_T *b;
   emxArray_real_T *b_b;
-  emxArray_real_T *b_b_tmp;
-  emxArray_real_T *b_tmp;
   emxArray_real_T *b_x;
+  emxArray_real_T *b_y;
+  emxArray_real_T *c_b;
   emxArray_real_T *m;
   emxArray_real_T *quant;
   emxArray_real_T *r;
   emxArray_real_T *r1;
   emxArray_real_T *r2;
-  emxArray_real_T *r3;
   emxArray_real_T *x;
   emxArray_real_T *y;
   double b_options_prob_data[36];
@@ -118,6 +50,71 @@ void FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   int outsize_idx_1;
   signed char input_sizes_idx_1;
   bool empty_non_axis_sizes;
+  /* FSMenvmmd computes the theoretical envelopes of Minimum MD outside subset
+   * during the search */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSMenvmmd')">Link to the help function</a> */
+  /*  */
+  /*  Required input arguments: */
+  /*  */
+  /*  n :           Number of observations. Scalar. Number of observations. */
+  /*                Data Types - single | double */
+  /*  v :           Number of variables. Scalar. Number of variables. */
+  /*                Data Types - single | double */
+  /*  */
+  /*  Optional input arguments: */
+  /*  */
+  /*  init :       Point where to start monitoring required diagnostics. Scalar.
+   */
+  /*               Note that if bsb is supplied, init>=length(bsb). If init is
+   * not */
+  /*               specified it will be set equal to floor(n*0.6). */
+  /*                  Example - 'init',50 */
+  /*                  Data Types - double */
+  /*  */
+  /*  prob:        quantiles for which envelopes have */
+  /*                to be computed. Vector. Vector containing 1 x k elements .
+   */
+  /*                The default is to produce 1 per cent, 50 per cent and 99 per
+   * cent envelopes. */
+  /*                  Example - 'prob',[0.05 0.95] */
+  /*                  Data Types - double */
+  /*  */
+  /*    scaled:  It indicates how to compute the envelopes. Scalar. */
+  /*                If scaled>0 the envelopes are produced for */
+  /*                scaled Mahalanobis distances (no consistency factor is */
+  /*                applied) else the traditional consistency factor is applied
+   */
+  /*                (this is the default) */
+  /*                  Example - 'scaled',0 */
+  /*                  Data Types - double */
+  /*  */
+  /*  */
+  /*  Output: */
+  /*  */
+  /*   MMDenv=      n-m0+1 x length(prob)+1 columns containing the envelopes */
+  /*                for the requested quantiles. */
+  /*                1st col = fwd search index from m0 to n-1; */
+  /*                2nd col = envelope for quantile prob[1]; */
+  /*                3rd col = envelope for quantile prob[2]; */
+  /*                ...; */
+  /*                (k+1) col = envelope for quantile prob[k]. */
+  /*  */
+  /*  See also FSMenvmmd.m, FSM.m */
+  /*  */
+  /*  References: */
+  /*  */
+  /*  Riani, M., Atkinson, A.C. and Cerioli, A. (2009), Finding an unknown */
+  /*  number of multivariate outliers, "Journal of the Royal Statistical */
+  /*  Society Series B", Vol. 71, pp. 201-221. */
+  /*  */
+  /*  Copyright 2008-2021. */
+  /*  Written by FSDA team */
+  /*  */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSMenvmmd')">Link to the help function</a> */
+  /*  */
+  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /*  */
   /* { */
@@ -264,15 +261,6 @@ void FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   for (k = 0; k < nrows; k++) {
     a->data[k] = n - b->data[k];
   }
-  emxInit_real_T(&b_tmp, 2);
-  k = b_tmp->size[0] * b_tmp->size[1];
-  b_tmp->size[0] = b->size[0];
-  b_tmp->size[1] = 6;
-  emxEnsureCapacity_real_T(b_tmp, k);
-  nrows = b->size[0] * 6;
-  for (k = 0; k < nrows; k++) {
-    b_tmp->data[k] = b->data[k] + 1.0;
-  }
   for (k = 0; k < 6; k++) {
     b_options_prob_data[k] = options_prob_data[k];
   }
@@ -290,65 +278,80 @@ void FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   for (k = 0; k < nrows; k++) {
     x->data[k] = 2.0 * a->data[k];
   }
-  emxInit_real_T(&r, 2);
-  k = r->size[0] * r->size[1];
-  r->size[0] = b_tmp->size[0];
-  r->size[1] = 6;
-  emxEnsureCapacity_real_T(r, k);
-  nrows = b_tmp->size[0] * 6;
+  emxInit_real_T(&b_y, 2);
+  k = b_y->size[0] * b_y->size[1];
+  b_y->size[0] = b->size[0];
+  b_y->size[1] = 6;
+  emxEnsureCapacity_real_T(b_y, k);
+  nrows = b->size[0] * 6;
   for (k = 0; k < nrows; k++) {
-    r->data[k] = 2.0 * b_tmp->data[k];
+    b_y->data[k] = 2.0 * (b->data[k] + 1.0);
   }
   emxInit_real_T(&quant, 2);
   emxInit_real_T(&b_x, 2);
-  emxInit_real_T(&r1, 2);
-  repmat(tmp_data, tmp_size, m->size[0], r1);
-  b_finv(r1, x, r, b_x);
+  emxInit_real_T(&r, 2);
+  repmat(tmp_data, tmp_size, m->size[0], r);
+  b_finv(r, x, b_y, b_x);
   k = quant->size[0] * quant->size[1];
   quant->size[0] = b_x->size[0];
   quant->size[1] = b_x->size[1];
   emxEnsureCapacity_real_T(quant, k);
   nrows = b_x->size[0] * b_x->size[1];
-  emxFree_real_T(&r1);
   emxFree_real_T(&r);
   for (k = 0; k < nrows; k++) {
     quant->data[k] = b_x->data[k];
   }
-  emxInit_real_T(&b_b_tmp, 2);
   /*  from the equivalence with the incomplete beta distribution. */
   /*  cor=(n/(n-1))*v*(mm-1)./(mm-v); */
+  k = x->size[0] * x->size[1];
+  x->size[0] = b->size[0];
+  x->size[1] = 6;
+  emxEnsureCapacity_real_T(x, k);
+  nrows = b->size[0] * 6;
+  for (k = 0; k < nrows; k++) {
+    x->data[k] = v * ((b->data[k] + 1.0) / b->data[k]) * (b->data[k] - 1.0);
+  }
+  k = b_y->size[0] * b_y->size[1];
+  b_y->size[0] = b->size[0];
+  b_y->size[1] = 6;
+  emxEnsureCapacity_real_T(b_y, k);
+  nrows = b->size[0] * 6;
+  for (k = 0; k < nrows; k++) {
+    b_y->data[k] = b->data[k] - v;
+  }
+  emxInit_real_T(&b_b, 2);
   /* cor=v*((mm.^2-1)./mm)./(mm-v); */
   /*  Minsca = matrix of the scaled minMD envelopes in each step of the search.
    */
-  k = b_b_tmp->size[0] * b_b_tmp->size[1];
-  b_b_tmp->size[0] = b_tmp->size[0];
-  b_b_tmp->size[1] = 6;
-  emxEnsureCapacity_real_T(b_b_tmp, k);
-  nrows = b_tmp->size[0] * 6;
-  for (k = 0; k < nrows; k++) {
-    b_b_tmp->data[k] =
-        b_tmp->data[k] / ((b->data[k] + 1.0) + a->data[k] * quant->data[k]);
-  }
-  emxInit_real_T(&b_b, 2);
   k = b_b->size[0] * b_b->size[1];
   b_b->size[0] = b->size[0];
   b_b->size[1] = 6;
   emxEnsureCapacity_real_T(b_b, k);
   nrows = b->size[0] * 6;
   for (k = 0; k < nrows; k++) {
-    b_b->data[k] = b->data[k] - v;
+    b_b->data[k] =
+        (b->data[k] + 1.0) / ((b->data[k] + 1.0) + a->data[k] * quant->data[k]);
   }
-  emxInit_real_T(&r2, 2);
-  emxInit_real_T(&r3, 2);
-  finv(b_b_tmp, v, b_b, r3);
-  k = r2->size[0] * r2->size[1];
-  r2->size[0] = r3->size[0];
-  r2->size[1] = r3->size[1];
-  emxEnsureCapacity_real_T(r2, k);
-  nrows = r3->size[0] * r3->size[1];
-  emxFree_real_T(&b_b_tmp);
+  emxInit_real_T(&c_b, 2);
+  k = c_b->size[0] * c_b->size[1];
+  c_b->size[0] = b->size[0];
+  c_b->size[1] = 6;
+  emxEnsureCapacity_real_T(c_b, k);
+  nrows = b->size[0] * 6;
   for (k = 0; k < nrows; k++) {
-    r2->data[k] = r3->data[k];
+    c_b->data[k] = b->data[k] - v;
+  }
+  emxInit_real_T(&r1, 2);
+  emxInit_real_T(&r2, 2);
+  finv(b_b, v, c_b, r2);
+  k = r1->size[0] * r1->size[1];
+  r1->size[0] = r2->size[0];
+  r1->size[1] = r2->size[1];
+  emxEnsureCapacity_real_T(r1, k);
+  nrows = r2->size[0] * r2->size[1];
+  emxFree_real_T(&c_b);
+  for (k = 0; k < nrows; k++) {
+    r1->data[k] = r2->data[k];
   }
   /*  Compute Tallis correction factor based on the chi^2 distribution */
   /*  mm/n is the percentage of observations inside subset if scaled is not
@@ -361,69 +364,52 @@ void FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   for (k = 0; k < nrows; k++) {
     b_b->data[k] = b->data[k] / n;
   }
-  b_chi2inv(b_b, v, r3);
+  b_chi2inv(b_b, v, r2);
   k = a->size[0] * a->size[1];
-  a->size[0] = r3->size[0];
-  a->size[1] = r3->size[1];
+  a->size[0] = r2->size[0];
+  a->size[1] = r2->size[1];
   emxEnsureCapacity_real_T(a, k);
-  nrows = r3->size[0] * r3->size[1];
+  nrows = r2->size[0] * r2->size[1];
   emxFree_real_T(&b_b);
   for (k = 0; k < nrows; k++) {
-    a->data[k] = r3->data[k];
+    a->data[k] = r2->data[k];
   }
-  chi2cdf(a, v + 2.0, r3);
+  chi2cdf(a, v + 2.0, r2);
   k = quant->size[0] * quant->size[1];
-  quant->size[0] = r3->size[0];
-  quant->size[1] = r3->size[1];
+  quant->size[0] = r2->size[0];
+  quant->size[1] = r2->size[1];
   emxEnsureCapacity_real_T(quant, k);
-  nrows = r3->size[0] * r3->size[1];
+  nrows = r2->size[0] * r2->size[1];
   emxFree_real_T(&a);
   for (k = 0; k < nrows; k++) {
-    quant->data[k] = r3->data[k];
+    quant->data[k] = r2->data[k];
   }
-  emxFree_real_T(&r3);
-  k = x->size[0] * x->size[1];
-  x->size[0] = b_tmp->size[0];
-  x->size[1] = 6;
-  emxEnsureCapacity_real_T(x, k);
-  nrows = b_tmp->size[0] * 6;
-  for (k = 0; k < nrows; k++) {
-    x->data[k] = v * (b_tmp->data[k] / b->data[k]) * (b->data[k] - 1.0) /
-                 (b->data[k] - v) * r2->data[k];
-  }
-  emxFree_real_T(&b_tmp);
   emxFree_real_T(&r2);
-  nrows = x->size[0] * 6;
-  for (k = 0; k < nrows; k++) {
-    x->data[k] = sqrt(x->data[k]);
-  }
-  k = b_x->size[0] * b_x->size[1];
-  b_x->size[0] = b->size[0];
-  b_x->size[1] = 6;
-  emxEnsureCapacity_real_T(b_x, k);
   nrows = b->size[0] * 6;
   for (k = 0; k < nrows; k++) {
-    b_x->data[k] = n / b->data[k] * quant->data[k];
+    b->data[k] = n / b->data[k] * quant->data[k];
   }
   emxFree_real_T(&quant);
+  nrows = b->size[0] * 6;
+  for (k = 0; k < nrows; k++) {
+    b->data[k] = sqrt(b->data[k]);
+  }
+  k = b_x->size[0] * b_x->size[1];
+  b_x->size[0] = x->size[0];
+  b_x->size[1] = 6;
+  emxEnsureCapacity_real_T(b_x, k);
+  nrows = x->size[0] * 6;
+  for (k = 0; k < nrows; k++) {
+    b_x->data[k] = x->data[k] / b_y->data[k] * r1->data[k];
+  }
   nrows = b_x->size[0] * 6;
   for (k = 0; k < nrows; k++) {
     b_x->data[k] = sqrt(b_x->data[k]);
   }
-  k = b->size[0] * b->size[1];
-  b->size[0] = x->size[0];
-  b->size[1] = 6;
-  emxEnsureCapacity_real_T(b, k);
-  nrows = x->size[0] * 6;
-  for (k = 0; k < nrows; k++) {
-    b->data[k] = x->data[k] / b_x->data[k];
-  }
-  emxFree_real_T(&b_x);
-  emxFree_real_T(&x);
   if (m->size[0] != 0) {
     ibtile = m->size[0];
-  } else if (b->size[0] != 0) {
-    ibtile = b->size[0];
+  } else if (b_x->size[0] != 0) {
+    ibtile = b_x->size[0];
   } else {
     ibtile = 0;
   }
@@ -433,11 +419,31 @@ void FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   } else {
     input_sizes_idx_1 = 0;
   }
-  if (empty_non_axis_sizes || (b->size[0] != 0)) {
+  if (empty_non_axis_sizes || (b_x->size[0] != 0)) {
     outsize_idx_1 = 6;
   } else {
     outsize_idx_1 = 0;
   }
+  nrows = x->size[0] * 6;
+  for (k = 0; k < nrows; k++) {
+    x->data[k] = x->data[k] / b_y->data[k] * r1->data[k];
+  }
+  emxFree_real_T(&b_y);
+  emxFree_real_T(&r1);
+  nrows = x->size[0] * 6;
+  for (k = 0; k < nrows; k++) {
+    x->data[k] = sqrt(x->data[k]);
+  }
+  k = b_x->size[0] * b_x->size[1];
+  b_x->size[0] = x->size[0];
+  b_x->size[1] = 6;
+  emxEnsureCapacity_real_T(b_x, k);
+  nrows = x->size[0] * 6;
+  for (k = 0; k < nrows; k++) {
+    b_x->data[k] = x->data[k] / b->data[k];
+  }
+  emxFree_real_T(&b);
+  emxFree_real_T(&x);
   k = MMDenv->size[0] * MMDenv->size[1];
   MMDenv->size[0] = ibtile;
   MMDenv->size[1] = input_sizes_idx_1 + outsize_idx_1;
@@ -452,102 +458,99 @@ void FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   for (k = 0; k < outsize_idx_1; k++) {
     for (i = 0; i < ibtile; i++) {
       MMDenv->data[i + MMDenv->size[0] * (k + input_sizes_idx_1)] =
-          b->data[i + ibtile * k];
+          b_x->data[i + ibtile * k];
     }
   }
-  emxFree_real_T(&b);
+  emxFree_real_T(&b_x);
 }
 
-/*
- * FSMenvmmd computes the theoretical envelopes of Minimum MD outside subset
- * during the search
- *
- * <a href="matlab: docsearchFS('FSMenvmmd')">Link to the help function</a>
- *
- *  Required input arguments:
- *
- *  n :           Number of observations. Scalar. Number of observations.
- *                Data Types - single | double
- *  v :           Number of variables. Scalar. Number of variables.
- *                Data Types - single | double
- *
- *  Optional input arguments:
- *
- *  init :       Point where to start monitoring required diagnostics. Scalar.
- *               Note that if bsb is supplied, init>=length(bsb). If init is not
- *               specified it will be set equal to floor(n*0.6).
- *                  Example - 'init',50
- *                  Data Types - double
- *
- *  prob:        quantiles for which envelopes have
- *                to be computed. Vector. Vector containing 1 x k elements .
- *                The default is to produce 1 per cent, 50 per cent and 99 per
- * cent envelopes. Example - 'prob',[0.05 0.95] Data Types - double
- *
- *    scaled:  It indicates how to compute the envelopes. Scalar.
- *                If scaled>0 the envelopes are produced for
- *                scaled Mahalanobis distances (no consistency factor is
- *                applied) else the traditional consistency factor is applied
- *                (this is the default)
- *                  Example - 'scaled',0
- *                  Data Types - double
- *
- *
- *  Output:
- *
- *   MMDenv=      n-m0+1 x length(prob)+1 columns containing the envelopes
- *                for the requested quantiles.
- *                1st col = fwd search index from m0 to n-1;
- *                2nd col = envelope for quantile prob[1];
- *                3rd col = envelope for quantile prob[2];
- *                ...;
- *                (k+1) col = envelope for quantile prob[k].
- *
- *  See also FSMenvmmd.m, FSM.m
- *
- *  References:
- *
- *  Riani, M., Atkinson, A.C. and Cerioli, A. (2009), Finding an unknown
- *  number of multivariate outliers, "Journal of the Royal Statistical
- *  Society Series B", Vol. 71, pp. 201-221.
- *
- *  Copyright 2008-2021.
- *  Written by FSDA team
- *
- *
- * <a href="matlab: docsearchFS('FSMenvmmd')">Link to the help function</a>
- *
- * $LastChangedDate::                      $: Date of the last commit
- *
- * Arguments    : double n
- *                double v
- *                double varargin_4
- *                emxArray_real_T *MMDenv
- * Return Type  : void
- */
 void b_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
 {
   emxArray_real_T *a;
   emxArray_real_T *b;
   emxArray_real_T *b_b;
-  emxArray_real_T *b_b_tmp;
-  emxArray_real_T *b_tmp;
   emxArray_real_T *b_x;
+  emxArray_real_T *b_y;
   emxArray_real_T *c_b;
+  emxArray_real_T *d_b;
   emxArray_real_T *m;
   emxArray_real_T *quant;
   emxArray_real_T *r;
   emxArray_real_T *r1;
-  emxArray_real_T *r2;
   emxArray_real_T *x;
   emxArray_real_T *y;
   int i;
-  int i1;
   int itilerow;
+  int k;
   int nrows;
   int outsize_idx_1;
   signed char input_sizes_idx_1;
   bool empty_non_axis_sizes;
+  /* FSMenvmmd computes the theoretical envelopes of Minimum MD outside subset
+   * during the search */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSMenvmmd')">Link to the help function</a> */
+  /*  */
+  /*  Required input arguments: */
+  /*  */
+  /*  n :           Number of observations. Scalar. Number of observations. */
+  /*                Data Types - single | double */
+  /*  v :           Number of variables. Scalar. Number of variables. */
+  /*                Data Types - single | double */
+  /*  */
+  /*  Optional input arguments: */
+  /*  */
+  /*  init :       Point where to start monitoring required diagnostics. Scalar.
+   */
+  /*               Note that if bsb is supplied, init>=length(bsb). If init is
+   * not */
+  /*               specified it will be set equal to floor(n*0.6). */
+  /*                  Example - 'init',50 */
+  /*                  Data Types - double */
+  /*  */
+  /*  prob:        quantiles for which envelopes have */
+  /*                to be computed. Vector. Vector containing 1 x k elements .
+   */
+  /*                The default is to produce 1 per cent, 50 per cent and 99 per
+   * cent envelopes. */
+  /*                  Example - 'prob',[0.05 0.95] */
+  /*                  Data Types - double */
+  /*  */
+  /*    scaled:  It indicates how to compute the envelopes. Scalar. */
+  /*                If scaled>0 the envelopes are produced for */
+  /*                scaled Mahalanobis distances (no consistency factor is */
+  /*                applied) else the traditional consistency factor is applied
+   */
+  /*                (this is the default) */
+  /*                  Example - 'scaled',0 */
+  /*                  Data Types - double */
+  /*  */
+  /*  */
+  /*  Output: */
+  /*  */
+  /*   MMDenv=      n-m0+1 x length(prob)+1 columns containing the envelopes */
+  /*                for the requested quantiles. */
+  /*                1st col = fwd search index from m0 to n-1; */
+  /*                2nd col = envelope for quantile prob[1]; */
+  /*                3rd col = envelope for quantile prob[2]; */
+  /*                ...; */
+  /*                (k+1) col = envelope for quantile prob[k]. */
+  /*  */
+  /*  See also FSMenvmmd.m, FSM.m */
+  /*  */
+  /*  References: */
+  /*  */
+  /*  Riani, M., Atkinson, A.C. and Cerioli, A. (2009), Finding an unknown */
+  /*  number of multivariate outliers, "Journal of the Royal Statistical */
+  /*  Society Series B", Vol. 71, pp. 201-221. */
+  /*  */
+  /*  Copyright 2008-2021. */
+  /*  Written by FSDA team */
+  /*  */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSMenvmmd')">Link to the help function</a> */
+  /*  */
+  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /*  */
   /* { */
@@ -632,221 +635,210 @@ void b_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   /*  m = column vector which contains fwd search index. */
   emxInit_real_T(&y, 2);
   if (rtIsNaN(varargin_4) || rtIsNaN(n - 1.0)) {
-    i = y->size[0] * y->size[1];
+    k = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = 1;
-    emxEnsureCapacity_real_T(y, i);
+    emxEnsureCapacity_real_T(y, k);
     y->data[0] = rtNaN;
   } else if (n - 1.0 < varargin_4) {
     y->size[0] = 1;
     y->size[1] = 0;
   } else if ((rtIsInf(varargin_4) || rtIsInf(n - 1.0)) &&
              (varargin_4 == n - 1.0)) {
-    i = y->size[0] * y->size[1];
+    k = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = 1;
-    emxEnsureCapacity_real_T(y, i);
+    emxEnsureCapacity_real_T(y, k);
     y->data[0] = rtNaN;
   } else if (floor(varargin_4) == varargin_4) {
-    i = y->size[0] * y->size[1];
+    k = y->size[0] * y->size[1];
     y->size[0] = 1;
     nrows = (int)floor((n - 1.0) - varargin_4);
     y->size[1] = nrows + 1;
-    emxEnsureCapacity_real_T(y, i);
-    for (i = 0; i <= nrows; i++) {
-      y->data[i] = varargin_4 + (double)i;
+    emxEnsureCapacity_real_T(y, k);
+    for (k = 0; k <= nrows; k++) {
+      y->data[k] = varargin_4 + (double)k;
     }
   } else {
     eml_float_colon(varargin_4, n - 1.0, y);
   }
   emxInit_real_T(&m, 1);
-  i = m->size[0];
+  k = m->size[0];
   m->size[0] = y->size[1];
-  emxEnsureCapacity_real_T(m, i);
+  emxEnsureCapacity_real_T(m, k);
   nrows = y->size[1];
-  for (i = 0; i < nrows; i++) {
-    m->data[i] = y->data[i];
+  for (k = 0; k < nrows; k++) {
+    m->data[k] = y->data[k];
   }
   emxFree_real_T(&y);
   emxInit_real_T(&b, 2);
   /*  mm = fwd search index replicated lp times. */
-  i = b->size[0] * b->size[1];
+  k = b->size[0] * b->size[1];
   b->size[0] = m->size[0];
   b->size[1] = 1;
-  emxEnsureCapacity_real_T(b, i);
+  emxEnsureCapacity_real_T(b, k);
   nrows = m->size[0];
-  for (outsize_idx_1 = 0; outsize_idx_1 < nrows; outsize_idx_1++) {
-    b->data[outsize_idx_1] = m->data[outsize_idx_1];
+  for (k = 0; k < nrows; k++) {
+    b->data[k] = m->data[k];
   }
   emxInit_real_T(&a, 2);
   /*  finv finds the inverse of the F distribution. */
-  i = a->size[0] * a->size[1];
+  k = a->size[0] * a->size[1];
   a->size[0] = b->size[0];
   a->size[1] = 1;
-  emxEnsureCapacity_real_T(a, i);
+  emxEnsureCapacity_real_T(a, k);
   nrows = b->size[0];
-  for (i = 0; i < nrows; i++) {
-    a->data[i] = n - b->data[i];
-  }
-  emxInit_real_T(&b_tmp, 2);
-  i = b_tmp->size[0] * b_tmp->size[1];
-  b_tmp->size[0] = b->size[0];
-  b_tmp->size[1] = 1;
-  emxEnsureCapacity_real_T(b_tmp, i);
-  nrows = b->size[0];
-  for (i = 0; i < nrows; i++) {
-    b_tmp->data[i] = b->data[i] + 1.0;
+  for (k = 0; k < nrows; k++) {
+    a->data[k] = n - b->data[k];
   }
   emxInit_real_T(&b_b, 2);
-  i = b_b->size[0] * b_b->size[1];
+  k = b_b->size[0] * b_b->size[1];
   b_b->size[0] = m->size[0];
   b_b->size[1] = 1;
-  emxEnsureCapacity_real_T(b_b, i);
+  emxEnsureCapacity_real_T(b_b, k);
   nrows = m->size[0];
   for (itilerow = 0; itilerow < nrows; itilerow++) {
     b_b->data[itilerow] = 0.99;
   }
-  emxInit_real_T(&x, 2);
-  i = x->size[0] * x->size[1];
-  x->size[0] = a->size[0];
-  x->size[1] = 1;
-  emxEnsureCapacity_real_T(x, i);
+  emxInit_real_T(&b_y, 2);
+  k = b_y->size[0] * b_y->size[1];
+  b_y->size[0] = a->size[0];
+  b_y->size[1] = 1;
+  emxEnsureCapacity_real_T(b_y, k);
   nrows = a->size[0];
-  for (i = 0; i < nrows; i++) {
-    x->data[i] = 2.0 * a->data[i];
+  for (k = 0; k < nrows; k++) {
+    b_y->data[k] = 2.0 * a->data[k];
   }
-  emxInit_real_T(&r, 2);
-  i = r->size[0] * r->size[1];
-  r->size[0] = b_tmp->size[0];
-  r->size[1] = 1;
-  emxEnsureCapacity_real_T(r, i);
-  nrows = b_tmp->size[0];
-  for (i = 0; i < nrows; i++) {
-    r->data[i] = 2.0 * b_tmp->data[i];
+  emxInit_real_T(&x, 2);
+  k = x->size[0] * x->size[1];
+  x->size[0] = b->size[0];
+  x->size[1] = 1;
+  emxEnsureCapacity_real_T(x, k);
+  nrows = b->size[0];
+  for (k = 0; k < nrows; k++) {
+    x->data[k] = 2.0 * (b->data[k] + 1.0);
   }
   emxInit_real_T(&quant, 2);
   emxInit_real_T(&b_x, 2);
-  b_finv(b_b, x, r, b_x);
-  i = quant->size[0] * quant->size[1];
+  b_finv(b_b, b_y, x, b_x);
+  k = quant->size[0] * quant->size[1];
   quant->size[0] = b_x->size[0];
   quant->size[1] = b_x->size[1];
-  emxEnsureCapacity_real_T(quant, i);
+  emxEnsureCapacity_real_T(quant, k);
   nrows = b_x->size[0] * b_x->size[1];
-  emxFree_real_T(&r);
   emxFree_real_T(&b_b);
-  for (i = 0; i < nrows; i++) {
-    quant->data[i] = b_x->data[i];
+  for (k = 0; k < nrows; k++) {
+    quant->data[k] = b_x->data[k];
   }
-  emxInit_real_T(&b_b_tmp, 2);
   /*  from the equivalence with the incomplete beta distribution. */
   /*  cor=(n/(n-1))*v*(mm-1)./(mm-v); */
+  k = b_x->size[0] * b_x->size[1];
+  b_x->size[0] = b->size[0];
+  b_x->size[1] = 1;
+  emxEnsureCapacity_real_T(b_x, k);
+  nrows = b->size[0];
+  for (k = 0; k < nrows; k++) {
+    b_x->data[k] = v * ((b->data[k] + 1.0) / b->data[k]) * (b->data[k] - 1.0);
+  }
+  k = b_y->size[0] * b_y->size[1];
+  b_y->size[0] = b->size[0];
+  b_y->size[1] = 1;
+  emxEnsureCapacity_real_T(b_y, k);
+  nrows = b->size[0];
+  for (k = 0; k < nrows; k++) {
+    b_y->data[k] = b->data[k] - v;
+  }
+  emxInit_real_T(&c_b, 2);
   /* cor=v*((mm.^2-1)./mm)./(mm-v); */
   /*  Minsca = matrix of the scaled minMD envelopes in each step of the search.
    */
-  i = b_b_tmp->size[0] * b_b_tmp->size[1];
-  b_b_tmp->size[0] = b_tmp->size[0];
-  b_b_tmp->size[1] = 1;
-  emxEnsureCapacity_real_T(b_b_tmp, i);
-  nrows = b_tmp->size[0];
-  for (i = 0; i < nrows; i++) {
-    b_b_tmp->data[i] =
-        b_tmp->data[i] / ((b->data[i] + 1.0) + a->data[i] * quant->data[i]);
-  }
-  emxInit_real_T(&c_b, 2);
-  i = c_b->size[0] * c_b->size[1];
+  k = c_b->size[0] * c_b->size[1];
   c_b->size[0] = b->size[0];
   c_b->size[1] = 1;
-  emxEnsureCapacity_real_T(c_b, i);
+  emxEnsureCapacity_real_T(c_b, k);
   nrows = b->size[0];
-  for (i = 0; i < nrows; i++) {
-    c_b->data[i] = b->data[i] - v;
+  for (k = 0; k < nrows; k++) {
+    c_b->data[k] =
+        (b->data[k] + 1.0) / ((b->data[k] + 1.0) + a->data[k] * quant->data[k]);
   }
+  emxInit_real_T(&d_b, 2);
+  k = d_b->size[0] * d_b->size[1];
+  d_b->size[0] = b->size[0];
+  d_b->size[1] = 1;
+  emxEnsureCapacity_real_T(d_b, k);
+  nrows = b->size[0];
+  for (k = 0; k < nrows; k++) {
+    d_b->data[k] = b->data[k] - v;
+  }
+  emxInit_real_T(&r, 2);
   emxInit_real_T(&r1, 2);
-  emxInit_real_T(&r2, 2);
-  finv(b_b_tmp, v, c_b, r2);
-  i = r1->size[0] * r1->size[1];
-  r1->size[0] = r2->size[0];
-  r1->size[1] = r2->size[1];
-  emxEnsureCapacity_real_T(r1, i);
-  nrows = r2->size[0] * r2->size[1];
-  emxFree_real_T(&b_b_tmp);
-  for (i = 0; i < nrows; i++) {
-    r1->data[i] = r2->data[i];
+  finv(c_b, v, d_b, r1);
+  k = r->size[0] * r->size[1];
+  r->size[0] = r1->size[0];
+  r->size[1] = r1->size[1];
+  emxEnsureCapacity_real_T(r, k);
+  nrows = r1->size[0] * r1->size[1];
+  emxFree_real_T(&d_b);
+  for (k = 0; k < nrows; k++) {
+    r->data[k] = r1->data[k];
   }
   /*  Compute Tallis correction factor based on the chi^2 distribution */
   /*  mm/n is the percentage of observations inside subset if scaled is not
    * equal to 1. */
-  i = c_b->size[0] * c_b->size[1];
+  k = c_b->size[0] * c_b->size[1];
   c_b->size[0] = b->size[0];
   c_b->size[1] = 1;
-  emxEnsureCapacity_real_T(c_b, i);
+  emxEnsureCapacity_real_T(c_b, k);
   nrows = b->size[0];
-  for (i = 0; i < nrows; i++) {
-    c_b->data[i] = b->data[i] / n;
+  for (k = 0; k < nrows; k++) {
+    c_b->data[k] = b->data[k] / n;
   }
-  b_chi2inv(c_b, v, r2);
-  i = a->size[0] * a->size[1];
-  a->size[0] = r2->size[0];
-  a->size[1] = r2->size[1];
-  emxEnsureCapacity_real_T(a, i);
-  nrows = r2->size[0] * r2->size[1];
+  b_chi2inv(c_b, v, r1);
+  k = a->size[0] * a->size[1];
+  a->size[0] = r1->size[0];
+  a->size[1] = r1->size[1];
+  emxEnsureCapacity_real_T(a, k);
+  nrows = r1->size[0] * r1->size[1];
   emxFree_real_T(&c_b);
-  for (i = 0; i < nrows; i++) {
-    a->data[i] = r2->data[i];
+  for (k = 0; k < nrows; k++) {
+    a->data[k] = r1->data[k];
   }
-  chi2cdf(a, v + 2.0, r2);
-  i = quant->size[0] * quant->size[1];
-  quant->size[0] = r2->size[0];
-  quant->size[1] = r2->size[1];
-  emxEnsureCapacity_real_T(quant, i);
-  nrows = r2->size[0] * r2->size[1];
+  chi2cdf(a, v + 2.0, r1);
+  k = quant->size[0] * quant->size[1];
+  quant->size[0] = r1->size[0];
+  quant->size[1] = r1->size[1];
+  emxEnsureCapacity_real_T(quant, k);
+  nrows = r1->size[0] * r1->size[1];
   emxFree_real_T(&a);
-  for (i = 0; i < nrows; i++) {
-    quant->data[i] = r2->data[i];
+  for (k = 0; k < nrows; k++) {
+    quant->data[k] = r1->data[k];
   }
-  emxFree_real_T(&r2);
-  i = b_x->size[0] * b_x->size[1];
-  b_x->size[0] = b_tmp->size[0];
-  b_x->size[1] = 1;
-  emxEnsureCapacity_real_T(b_x, i);
-  nrows = b_tmp->size[0];
-  for (i = 0; i < nrows; i++) {
-    b_x->data[i] = v * (b_tmp->data[i] / b->data[i]) * (b->data[i] - 1.0) /
-                   (b->data[i] - v) * r1->data[i];
-  }
-  emxFree_real_T(&b_tmp);
   emxFree_real_T(&r1);
-  nrows = b_x->size[0];
-  for (outsize_idx_1 = 0; outsize_idx_1 < nrows; outsize_idx_1++) {
-    b_x->data[outsize_idx_1] = sqrt(b_x->data[outsize_idx_1]);
-  }
-  i = x->size[0] * x->size[1];
-  x->size[0] = b->size[0];
-  x->size[1] = 1;
-  emxEnsureCapacity_real_T(x, i);
   nrows = b->size[0];
-  for (i = 0; i < nrows; i++) {
-    x->data[i] = n / b->data[i] * quant->data[i];
+  for (k = 0; k < nrows; k++) {
+    b->data[k] = n / b->data[k] * quant->data[k];
   }
   emxFree_real_T(&quant);
-  nrows = x->size[0];
-  for (outsize_idx_1 = 0; outsize_idx_1 < nrows; outsize_idx_1++) {
-    x->data[outsize_idx_1] = sqrt(x->data[outsize_idx_1]);
+  nrows = b->size[0];
+  for (k = 0; k < nrows; k++) {
+    b->data[k] = sqrt(b->data[k]);
   }
-  i = b->size[0] * b->size[1];
-  b->size[0] = b_x->size[0];
-  b->size[1] = 1;
-  emxEnsureCapacity_real_T(b, i);
+  k = x->size[0] * x->size[1];
+  x->size[0] = b_x->size[0];
+  x->size[1] = 1;
+  emxEnsureCapacity_real_T(x, k);
   nrows = b_x->size[0];
-  for (i = 0; i < nrows; i++) {
-    b->data[i] = b_x->data[i] / x->data[i];
+  for (k = 0; k < nrows; k++) {
+    x->data[k] = b_x->data[k] / b_y->data[k] * r->data[k];
   }
-  emxFree_real_T(&x);
-  emxFree_real_T(&b_x);
+  nrows = x->size[0];
+  for (k = 0; k < nrows; k++) {
+    x->data[k] = sqrt(x->data[k]);
+  }
   if (m->size[0] != 0) {
     itilerow = m->size[0];
-  } else if (b->size[0] != 0) {
-    itilerow = b->size[0];
+  } else if (x->size[0] != 0) {
+    itilerow = x->size[0];
   } else {
     itilerow = 0;
   }
@@ -856,109 +848,61 @@ void b_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   } else {
     input_sizes_idx_1 = 0;
   }
-  if (empty_non_axis_sizes || (b->size[0] != 0)) {
+  if (empty_non_axis_sizes || (x->size[0] != 0)) {
     outsize_idx_1 = 1;
   } else {
     outsize_idx_1 = 0;
   }
-  i = MMDenv->size[0] * MMDenv->size[1];
+  nrows = b_x->size[0];
+  for (k = 0; k < nrows; k++) {
+    b_x->data[k] = b_x->data[k] / b_y->data[k] * r->data[k];
+  }
+  emxFree_real_T(&b_y);
+  emxFree_real_T(&r);
+  nrows = b_x->size[0];
+  for (k = 0; k < nrows; k++) {
+    b_x->data[k] = sqrt(b_x->data[k]);
+  }
+  k = x->size[0] * x->size[1];
+  x->size[0] = b_x->size[0];
+  x->size[1] = 1;
+  emxEnsureCapacity_real_T(x, k);
+  nrows = b_x->size[0];
+  for (k = 0; k < nrows; k++) {
+    x->data[k] = b_x->data[k] / b->data[k];
+  }
+  emxFree_real_T(&b);
+  emxFree_real_T(&b_x);
+  k = MMDenv->size[0] * MMDenv->size[1];
   MMDenv->size[0] = itilerow;
   MMDenv->size[1] = input_sizes_idx_1 + outsize_idx_1;
-  emxEnsureCapacity_real_T(MMDenv, i);
+  emxEnsureCapacity_real_T(MMDenv, k);
   nrows = input_sizes_idx_1;
-  for (i = 0; i < nrows; i++) {
-    for (i1 = 0; i1 < itilerow; i1++) {
-      MMDenv->data[i1] = m->data[i1];
+  for (k = 0; k < nrows; k++) {
+    for (i = 0; i < itilerow; i++) {
+      MMDenv->data[i] = m->data[i];
     }
   }
   emxFree_real_T(&m);
-  for (i = 0; i < outsize_idx_1; i++) {
-    for (i1 = 0; i1 < itilerow; i1++) {
-      MMDenv->data[i1 + MMDenv->size[0] * input_sizes_idx_1] = b->data[i1];
+  for (k = 0; k < outsize_idx_1; k++) {
+    for (i = 0; i < itilerow; i++) {
+      MMDenv->data[i + MMDenv->size[0] * input_sizes_idx_1] = x->data[i];
     }
   }
-  emxFree_real_T(&b);
+  emxFree_real_T(&x);
 }
 
-/*
- * FSMenvmmd computes the theoretical envelopes of Minimum MD outside subset
- * during the search
- *
- * <a href="matlab: docsearchFS('FSMenvmmd')">Link to the help function</a>
- *
- *  Required input arguments:
- *
- *  n :           Number of observations. Scalar. Number of observations.
- *                Data Types - single | double
- *  v :           Number of variables. Scalar. Number of variables.
- *                Data Types - single | double
- *
- *  Optional input arguments:
- *
- *  init :       Point where to start monitoring required diagnostics. Scalar.
- *               Note that if bsb is supplied, init>=length(bsb). If init is not
- *               specified it will be set equal to floor(n*0.6).
- *                  Example - 'init',50
- *                  Data Types - double
- *
- *  prob:        quantiles for which envelopes have
- *                to be computed. Vector. Vector containing 1 x k elements .
- *                The default is to produce 1 per cent, 50 per cent and 99 per
- * cent envelopes. Example - 'prob',[0.05 0.95] Data Types - double
- *
- *    scaled:  It indicates how to compute the envelopes. Scalar.
- *                If scaled>0 the envelopes are produced for
- *                scaled Mahalanobis distances (no consistency factor is
- *                applied) else the traditional consistency factor is applied
- *                (this is the default)
- *                  Example - 'scaled',0
- *                  Data Types - double
- *
- *
- *  Output:
- *
- *   MMDenv=      n-m0+1 x length(prob)+1 columns containing the envelopes
- *                for the requested quantiles.
- *                1st col = fwd search index from m0 to n-1;
- *                2nd col = envelope for quantile prob[1];
- *                3rd col = envelope for quantile prob[2];
- *                ...;
- *                (k+1) col = envelope for quantile prob[k].
- *
- *  See also FSMenvmmd.m, FSM.m
- *
- *  References:
- *
- *  Riani, M., Atkinson, A.C. and Cerioli, A. (2009), Finding an unknown
- *  number of multivariate outliers, "Journal of the Royal Statistical
- *  Society Series B", Vol. 71, pp. 201-221.
- *
- *  Copyright 2008-2021.
- *  Written by FSDA team
- *
- *
- * <a href="matlab: docsearchFS('FSMenvmmd')">Link to the help function</a>
- *
- * $LastChangedDate::                      $: Date of the last commit
- *
- * Arguments    : double n
- *                double v
- *                double varargin_4
- *                emxArray_real_T *MMDenv
- * Return Type  : void
- */
 void c_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
 {
   emxArray_real_T *b;
   emxArray_real_T *b_b;
-  emxArray_real_T *b_b_tmp;
   emxArray_real_T *b_tmp;
   emxArray_real_T *b_x;
-  emxArray_real_T *c_b_tmp;
+  emxArray_real_T *b_y;
+  emxArray_real_T *c_b;
   emxArray_real_T *m;
   emxArray_real_T *quant;
   emxArray_real_T *r;
-  emxArray_real_T *r1;
   emxArray_real_T *x;
   emxArray_real_T *y;
   double options_prob_data[18];
@@ -972,6 +916,71 @@ void c_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   int outsize_idx_1;
   signed char input_sizes_idx_1;
   bool empty_non_axis_sizes;
+  /* FSMenvmmd computes the theoretical envelopes of Minimum MD outside subset
+   * during the search */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSMenvmmd')">Link to the help function</a> */
+  /*  */
+  /*  Required input arguments: */
+  /*  */
+  /*  n :           Number of observations. Scalar. Number of observations. */
+  /*                Data Types - single | double */
+  /*  v :           Number of variables. Scalar. Number of variables. */
+  /*                Data Types - single | double */
+  /*  */
+  /*  Optional input arguments: */
+  /*  */
+  /*  init :       Point where to start monitoring required diagnostics. Scalar.
+   */
+  /*               Note that if bsb is supplied, init>=length(bsb). If init is
+   * not */
+  /*               specified it will be set equal to floor(n*0.6). */
+  /*                  Example - 'init',50 */
+  /*                  Data Types - double */
+  /*  */
+  /*  prob:        quantiles for which envelopes have */
+  /*                to be computed. Vector. Vector containing 1 x k elements .
+   */
+  /*                The default is to produce 1 per cent, 50 per cent and 99 per
+   * cent envelopes. */
+  /*                  Example - 'prob',[0.05 0.95] */
+  /*                  Data Types - double */
+  /*  */
+  /*    scaled:  It indicates how to compute the envelopes. Scalar. */
+  /*                If scaled>0 the envelopes are produced for */
+  /*                scaled Mahalanobis distances (no consistency factor is */
+  /*                applied) else the traditional consistency factor is applied
+   */
+  /*                (this is the default) */
+  /*                  Example - 'scaled',0 */
+  /*                  Data Types - double */
+  /*  */
+  /*  */
+  /*  Output: */
+  /*  */
+  /*   MMDenv=      n-m0+1 x length(prob)+1 columns containing the envelopes */
+  /*                for the requested quantiles. */
+  /*                1st col = fwd search index from m0 to n-1; */
+  /*                2nd col = envelope for quantile prob[1]; */
+  /*                3rd col = envelope for quantile prob[2]; */
+  /*                ...; */
+  /*                (k+1) col = envelope for quantile prob[k]. */
+  /*  */
+  /*  See also FSMenvmmd.m, FSM.m */
+  /*  */
+  /*  References: */
+  /*  */
+  /*  Riani, M., Atkinson, A.C. and Cerioli, A. (2009), Finding an unknown */
+  /*  number of multivariate outliers, "Journal of the Royal Statistical */
+  /*  Society Series B", Vol. 71, pp. 201-221. */
+  /*  */
+  /*  Copyright 2008-2021. */
+  /*  Written by FSDA team */
+  /*  */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSMenvmmd')">Link to the help function</a> */
+  /*  */
+  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /*  */
   /* { */
@@ -1119,15 +1128,6 @@ void c_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   for (k = 0; k < nrows; k++) {
     b_tmp->data[k] = n - b->data[k];
   }
-  emxInit_real_T(&b_b_tmp, 2);
-  k = b_b_tmp->size[0] * b_b_tmp->size[1];
-  b_b_tmp->size[0] = b->size[0];
-  b_b_tmp->size[1] = 4;
-  emxEnsureCapacity_real_T(b_b_tmp, k);
-  nrows = b->size[0] * 4;
-  for (k = 0; k < nrows; k++) {
-    b_b_tmp->data[k] = b->data[k] + 1.0;
-  }
   for (k = 0; k < 4; k++) {
     b_options_prob_data[k] = options_prob_data[k];
   }
@@ -1145,55 +1145,70 @@ void c_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   for (k = 0; k < nrows; k++) {
     x->data[k] = 2.0 * b_tmp->data[k];
   }
-  emxInit_real_T(&r, 2);
-  k = r->size[0] * r->size[1];
-  r->size[0] = b_b_tmp->size[0];
-  r->size[1] = 4;
-  emxEnsureCapacity_real_T(r, k);
-  nrows = b_b_tmp->size[0] * 4;
+  emxInit_real_T(&b_y, 2);
+  k = b_y->size[0] * b_y->size[1];
+  b_y->size[0] = b->size[0];
+  b_y->size[1] = 4;
+  emxEnsureCapacity_real_T(b_y, k);
+  nrows = b->size[0] * 4;
   for (k = 0; k < nrows; k++) {
-    r->data[k] = 2.0 * b_b_tmp->data[k];
+    b_y->data[k] = 2.0 * (b->data[k] + 1.0);
   }
   emxInit_real_T(&quant, 2);
   emxInit_real_T(&b_x, 2);
-  emxInit_real_T(&r1, 2);
-  repmat(tmp_data, tmp_size, m->size[0], r1);
-  b_finv(r1, x, r, b_x);
+  emxInit_real_T(&r, 2);
+  repmat(tmp_data, tmp_size, m->size[0], r);
+  b_finv(r, x, b_y, b_x);
   k = quant->size[0] * quant->size[1];
   quant->size[0] = b_x->size[0];
   quant->size[1] = b_x->size[1];
   emxEnsureCapacity_real_T(quant, k);
   nrows = b_x->size[0] * b_x->size[1];
-  emxFree_real_T(&r1);
   emxFree_real_T(&r);
   for (k = 0; k < nrows; k++) {
     quant->data[k] = b_x->data[k];
   }
-  emxInit_real_T(&c_b_tmp, 2);
   /*  from the equivalence with the incomplete beta distribution. */
   /*  cor=(n/(n-1))*v*(mm-1)./(mm-v); */
+  k = x->size[0] * x->size[1];
+  x->size[0] = b->size[0];
+  x->size[1] = 4;
+  emxEnsureCapacity_real_T(x, k);
+  nrows = b->size[0] * 4;
+  for (k = 0; k < nrows; k++) {
+    x->data[k] = v * ((b->data[k] + 1.0) / b->data[k]) * (b->data[k] - 1.0);
+  }
+  k = b_y->size[0] * b_y->size[1];
+  b_y->size[0] = b->size[0];
+  b_y->size[1] = 4;
+  emxEnsureCapacity_real_T(b_y, k);
+  nrows = b->size[0] * 4;
+  for (k = 0; k < nrows; k++) {
+    b_y->data[k] = b->data[k] - v;
+  }
+  emxInit_real_T(&b_b, 2);
   /* cor=v*((mm.^2-1)./mm)./(mm-v); */
   /*  Minsca = matrix of the scaled minMD envelopes in each step of the search.
    */
-  k = c_b_tmp->size[0] * c_b_tmp->size[1];
-  c_b_tmp->size[0] = b_b_tmp->size[0];
-  c_b_tmp->size[1] = 4;
-  emxEnsureCapacity_real_T(c_b_tmp, k);
-  nrows = b_b_tmp->size[0] * 4;
-  for (k = 0; k < nrows; k++) {
-    c_b_tmp->data[k] = b_b_tmp->data[k] /
-                       ((b->data[k] + 1.0) + b_tmp->data[k] * quant->data[k]);
-  }
-  emxInit_real_T(&b_b, 2);
   k = b_b->size[0] * b_b->size[1];
   b_b->size[0] = b->size[0];
   b_b->size[1] = 4;
   emxEnsureCapacity_real_T(b_b, k);
   nrows = b->size[0] * 4;
   for (k = 0; k < nrows; k++) {
-    b_b->data[k] = b->data[k] - v;
+    b_b->data[k] = (b->data[k] + 1.0) /
+                   ((b->data[k] + 1.0) + b_tmp->data[k] * quant->data[k]);
   }
-  finv(c_b_tmp, v, b_b, b_tmp);
+  emxInit_real_T(&c_b, 2);
+  k = c_b->size[0] * c_b->size[1];
+  c_b->size[0] = b->size[0];
+  c_b->size[1] = 4;
+  emxEnsureCapacity_real_T(c_b, k);
+  nrows = b->size[0] * 4;
+  for (k = 0; k < nrows; k++) {
+    c_b->data[k] = b->data[k] - v;
+  }
+  finv(b_b, v, c_b, b_tmp);
   /*  Compute Tallis correction factor based on the chi^2 distribution */
   /*  mm/n is the percentage of observations inside subset if scaled is not
    * equal to 1. */
@@ -1206,51 +1221,34 @@ void c_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
     b_b->data[k] = b->data[k] / n;
   }
   b_chi2inv(b_b, v, quant);
-  chi2cdf(quant, v + 2.0, c_b_tmp);
-  k = x->size[0] * x->size[1];
-  x->size[0] = b_b_tmp->size[0];
-  x->size[1] = 4;
-  emxEnsureCapacity_real_T(x, k);
-  nrows = b_b_tmp->size[0] * 4;
+  chi2cdf(quant, v + 2.0, c_b);
+  nrows = b->size[0] * 4;
   emxFree_real_T(&b_b);
   emxFree_real_T(&quant);
   for (k = 0; k < nrows; k++) {
-    x->data[k] = v * (b_b_tmp->data[k] / b->data[k]) * (b->data[k] - 1.0) /
-                 (b->data[k] - v) * b_tmp->data[k];
+    b->data[k] = n / b->data[k] * c_b->data[k];
   }
-  emxFree_real_T(&b_b_tmp);
-  emxFree_real_T(&b_tmp);
-  nrows = x->size[0] << 2;
+  emxFree_real_T(&c_b);
+  nrows = b->size[0] << 2;
   for (k = 0; k < nrows; k++) {
-    x->data[k] = sqrt(x->data[k]);
+    b->data[k] = sqrt(b->data[k]);
   }
   k = b_x->size[0] * b_x->size[1];
-  b_x->size[0] = b->size[0];
+  b_x->size[0] = x->size[0];
   b_x->size[1] = 4;
   emxEnsureCapacity_real_T(b_x, k);
-  nrows = b->size[0] * 4;
+  nrows = x->size[0] * 4;
   for (k = 0; k < nrows; k++) {
-    b_x->data[k] = n / b->data[k] * c_b_tmp->data[k];
+    b_x->data[k] = x->data[k] / b_y->data[k] * b_tmp->data[k];
   }
-  emxFree_real_T(&c_b_tmp);
   nrows = b_x->size[0] << 2;
   for (k = 0; k < nrows; k++) {
     b_x->data[k] = sqrt(b_x->data[k]);
   }
-  k = b->size[0] * b->size[1];
-  b->size[0] = x->size[0];
-  b->size[1] = 4;
-  emxEnsureCapacity_real_T(b, k);
-  nrows = x->size[0] * 4;
-  for (k = 0; k < nrows; k++) {
-    b->data[k] = x->data[k] / b_x->data[k];
-  }
-  emxFree_real_T(&b_x);
-  emxFree_real_T(&x);
   if (m->size[0] != 0) {
     ibtile = m->size[0];
-  } else if (b->size[0] != 0) {
-    ibtile = b->size[0];
+  } else if (b_x->size[0] != 0) {
+    ibtile = b_x->size[0];
   } else {
     ibtile = 0;
   }
@@ -1260,11 +1258,31 @@ void c_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   } else {
     input_sizes_idx_1 = 0;
   }
-  if (empty_non_axis_sizes || (b->size[0] != 0)) {
+  if (empty_non_axis_sizes || (b_x->size[0] != 0)) {
     outsize_idx_1 = 4;
   } else {
     outsize_idx_1 = 0;
   }
+  nrows = x->size[0] * 4;
+  for (k = 0; k < nrows; k++) {
+    x->data[k] = x->data[k] / b_y->data[k] * b_tmp->data[k];
+  }
+  emxFree_real_T(&b_tmp);
+  emxFree_real_T(&b_y);
+  nrows = x->size[0] << 2;
+  for (k = 0; k < nrows; k++) {
+    x->data[k] = sqrt(x->data[k]);
+  }
+  k = b_x->size[0] * b_x->size[1];
+  b_x->size[0] = x->size[0];
+  b_x->size[1] = 4;
+  emxEnsureCapacity_real_T(b_x, k);
+  nrows = x->size[0] * 4;
+  for (k = 0; k < nrows; k++) {
+    b_x->data[k] = x->data[k] / b->data[k];
+  }
+  emxFree_real_T(&b);
+  emxFree_real_T(&x);
   k = MMDenv->size[0] * MMDenv->size[1];
   MMDenv->size[0] = ibtile;
   MMDenv->size[1] = input_sizes_idx_1 + outsize_idx_1;
@@ -1279,14 +1297,10 @@ void c_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   for (k = 0; k < outsize_idx_1; k++) {
     for (i = 0; i < ibtile; i++) {
       MMDenv->data[i + MMDenv->size[0] * (k + input_sizes_idx_1)] =
-          b->data[i + ibtile * k];
+          b_x->data[i + ibtile * k];
     }
   }
-  emxFree_real_T(&b);
+  emxFree_real_T(&b_x);
 }
 
-/*
- * File trailer for FSMenvmmd.c
- *
- * [EOF]
- */
+/* End of code generation (FSMenvmmd.c) */

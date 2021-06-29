@@ -2,25 +2,21 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: eml_erfcore.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * eml_erfcore.c
+ *
+ * Code generation for function 'eml_erfcore'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "eml_erfcore.h"
 #include "fsdaC_rtwutil.h"
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 #include <math.h>
-#include <string.h>
 
 /* Function Definitions */
-/*
- * Arguments    : double x
- * Return Type  : double
- */
 double eml_erfcore(double x)
 {
   double R;
@@ -156,8 +152,4 @@ double eml_erfcore(double x)
   return y;
 }
 
-/*
- * File trailer for eml_erfcore.c
- *
- * [EOF]
- */
+/* End of code generation (eml_erfcore.c) */

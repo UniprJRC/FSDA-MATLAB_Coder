@@ -2,16 +2,17 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: lsqcurvefit.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * lsqcurvefit.h
+ *
+ * Code generation for function 'lsqcurvefit'
+ *
  */
 
 #ifndef LSQCURVEFIT_H
 #define LSQCURVEFIT_H
 
-/* Include Files */
+/* Include files */
 #include "fsdaC_internal_types.h"
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
@@ -41,8 +42,4 @@ void lsqcurvefit(
 #endif
 
 #endif
-/*
- * File trailer for lsqcurvefit.h
- *
- * [EOF]
- */
+/* End of code generation (lsqcurvefit.h) */

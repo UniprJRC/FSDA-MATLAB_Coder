@@ -2,10 +2,11 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: main.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * main.c
+ *
+ * Code generation for function 'main'
+ *
  */
 
 /*************************************************************************/
@@ -33,7 +34,7 @@
 /*                                                                       */
 /*************************************************************************/
 
-/* Include Files */
+/* Include files */
 #include "main.h"
 #include "FSM_wrapper.h"
 #include "FSMbsb_wrapper.h"
@@ -50,13 +51,8 @@
 #include "fsdaC_terminate.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
-#include "tclust_wrapper.h"
-#include "tclust_wrapper1.h"
-#include <string.h>
 
 /* Function Declarations */
-static void argInit_1x3_char_T(char result[3]);
-
 static emxArray_real_T *argInit_Unboundedx1_real_T(void);
 
 static emxArray_real_T *argInit_Unboundedxd1_real_T(void);
@@ -83,8 +79,6 @@ static emxArray_real_T *c_argInit_UnboundedxUnbounded_r(void);
 
 static struct_LTStslshiftlocref_T c_argInit_struct_LTStslshiftloc(void);
 
-static void c_argInit_struct_tclustrestrfac(struct_tclustrestrfactor_T *result);
-
 static void main_FSM_wrapper(void);
 
 static void main_FSMbsb_wrapper(void);
@@ -107,30 +101,7 @@ static void main_LXS_wrapper1(void);
 
 static void main_addt_wrapper(void);
 
-static void main_tclust_wrapper(void);
-
-static void main_tclust_wrapper1(void);
-
 /* Function Definitions */
-/*
- * Arguments    : char result[3]
- * Return Type  : void
- */
-static void argInit_1x3_char_T(char result[3])
-{
-  int idx1;
-  /* Loop over the array to initialize each element. */
-  for (idx1 = 0; idx1 < 3; idx1++) {
-    /* Set the value of the array element.
-Change this value to the value that the application requires. */
-    result[idx1] = argInit_char_T();
-  }
-}
-
-/*
- * Arguments    : void
- * Return Type  : emxArray_real_T *
- */
 static emxArray_real_T *argInit_Unboundedx1_real_T(void)
 {
   emxArray_real_T *result;
@@ -148,10 +119,6 @@ Change this value to the value that the application requires. */
   return result;
 }
 
-/*
- * Arguments    : void
- * Return Type  : emxArray_real_T *
- */
 static emxArray_real_T *argInit_Unboundedxd1_real_T(void)
 {
   emxArray_real_T *result;
@@ -171,28 +138,16 @@ Change this value to the value that the application requires. */
   return result;
 }
 
-/*
- * Arguments    : void
- * Return Type  : bool
- */
 static bool argInit_boolean_T(void)
 {
   return false;
 }
 
-/*
- * Arguments    : void
- * Return Type  : char
- */
 static char argInit_char_T(void)
 {
   return '?';
 }
 
-/*
- * Arguments    : void
- * Return Type  : emxArray_char_T *
- */
 static emxArray_char_T *argInit_d1xUnbounded_char_T(void)
 {
   emxArray_char_T *result;
@@ -212,11 +167,6 @@ Change this value to the value that the application requires. */
   return result;
 }
 
-/*
- * Arguments    : double result_data[]
- *                int result_size[2]
- * Return Type  : void
- */
 static void argInit_d1xd1_real_T(double result_data[], int result_size[2])
 {
   /* Set the size of the array.
@@ -227,11 +177,6 @@ Change this size to the value that the application requires. */
   result_data[0] = argInit_real_T();
 }
 
-/*
- * Arguments    : char result_data[]
- *                int result_size[2]
- * Return Type  : void
- */
 static void argInit_d1xd3_char_T(char result_data[], int result_size[2])
 {
   int idx1;
@@ -247,11 +192,6 @@ Change this value to the value that the application requires. */
   }
 }
 
-/*
- * Arguments    : double result_data[]
- *                int result_size[2]
- * Return Type  : void
- */
 static void argInit_d2xd1_real_T(double result_data[], int result_size[2])
 {
   int idx0;
@@ -265,19 +205,11 @@ Change this size to the value that the application requires. */
   }
 }
 
-/*
- * Arguments    : void
- * Return Type  : double
- */
 static double argInit_real_T(void)
 {
   return 0.0;
 }
 
-/*
- * Arguments    : void
- * Return Type  : struct_LTStsmodel_T
- */
 static struct_LTStsmodel_T argInit_struct_LTStsmodel_T(void)
 {
   struct_LTStsmodel_T result;
@@ -294,10 +226,6 @@ Change this value to the value that the application requires. */
   return result;
 }
 
-/*
- * Arguments    : void
- * Return Type  : struct_LXSlms_T
- */
 static struct_LXSlms_T argInit_struct_LXSlms_T(void)
 {
   struct_LXSlms_T result;
@@ -313,10 +241,6 @@ Change this value to the value that the application requires. */
   return result;
 }
 
-/*
- * Arguments    : void
- * Return Type  : emxArray_real_T *
- */
 static emxArray_real_T *c_argInit_UnboundedxUnbounded_r(void)
 {
   emxArray_real_T *result;
@@ -336,10 +260,6 @@ Change this value to the value that the application requires. */
   return result;
 }
 
-/*
- * Arguments    : void
- * Return Type  : struct_LTStslshiftlocref_T
- */
 static struct_LTStslshiftlocref_T c_argInit_struct_LTStslshiftloc(void)
 {
   struct_LTStslshiftlocref_T result;
@@ -353,40 +273,6 @@ Change this value to the value that the application requires. */
   return result;
 }
 
-/*
- * Arguments    : struct_tclustrestrfactor_T *result
- * Return Type  : void
- */
-static void c_argInit_struct_tclustrestrfac(struct_tclustrestrfactor_T *result)
-{
-  double result_tmp;
-  bool b_result_tmp;
-  /* Set the value of each structure field.
-Change this value to the value that the application requires. */
-  result_tmp = argInit_real_T();
-  result->shw = result_tmp;
-  result->shb = result_tmp;
-  result->k = result_tmp;
-  result->maxiterDSR = result_tmp;
-  result->maxiterR = result_tmp;
-  result->maxiterS = result_tmp;
-  result->tolR = result_tmp;
-  result->tolS = result_tmp;
-  b_result_tmp = argInit_boolean_T();
-  result->usepreviousest = b_result_tmp;
-  result->userepmat = result_tmp;
-  result->sortsh = result_tmp;
-  result->v = result_tmp;
-  result->zerotol = result_tmp;
-  argInit_1x3_char_T(result->pars);
-  result->cdet = result_tmp;
-  result->msg = b_result_tmp;
-}
-
-/*
- * Arguments    : void
- * Return Type  : void
- */
 static void main_FSM_wrapper(void)
 {
   emxArray_real_T *Y;
@@ -418,10 +304,6 @@ static void main_FSM_wrapper(void)
   emxDestroyArray_real_T(Y);
 }
 
-/*
- * Arguments    : void
- * Return Type  : void
- */
 static void main_FSMbsb_wrapper(void)
 {
   emxArray_real_T *BB;
@@ -449,10 +331,6 @@ static void main_FSMbsb_wrapper(void)
   emxDestroyArray_real_T(Y);
 }
 
-/*
- * Arguments    : void
- * Return Type  : void
- */
 static void main_FSMmmd_wrapper(void)
 {
   emxArray_real_T *BB;
@@ -484,10 +362,6 @@ static void main_FSMmmd_wrapper(void)
   emxDestroyArray_real_T(Y);
 }
 
-/*
- * Arguments    : void
- * Return Type  : void
- */
 static void main_FSR_wrapper(void)
 {
   emxArray_real_T *X;
@@ -521,10 +395,6 @@ static void main_FSR_wrapper(void)
   emxDestroyArray_real_T(y);
 }
 
-/*
- * Arguments    : void
- * Return Type  : void
- */
 static void main_FSRbsb_wrapper(void)
 {
   emxArray_real32_T *BB;
@@ -557,10 +427,6 @@ static void main_FSRbsb_wrapper(void)
   emxDestroyArray_real_T(y);
 }
 
-/*
- * Arguments    : void
- * Return Type  : void
- */
 static void main_FSRfan_wrapper(void)
 {
   emxArray_char_T *family;
@@ -596,10 +462,6 @@ static void main_FSRfan_wrapper(void)
   emxDestroyArray_real_T(y);
 }
 
-/*
- * Arguments    : void
- * Return Type  : void
- */
 static void main_FSRmdr_wrapper(void)
 {
   emxArray_real_T *BB;
@@ -651,10 +513,6 @@ static void main_FSRmdr_wrapper(void)
   emxDestroyArray_real_T(y);
 }
 
-/*
- * Arguments    : void
- * Return Type  : void
- */
 static void main_LTSts_wrapper(void)
 {
   emxArray_real_T *C;
@@ -693,10 +551,6 @@ static void main_LTSts_wrapper(void)
   emxDestroyArray_real_T(y);
 }
 
-/*
- * Arguments    : void
- * Return Type  : void
- */
 static void main_LXS_wrapper(void)
 {
   emxArray_real_T *C;
@@ -729,10 +583,6 @@ static void main_LXS_wrapper(void)
   emxDestroyArray_real_T(y);
 }
 
-/*
- * Arguments    : void
- * Return Type  : void
- */
 static void main_LXS_wrapper1(void)
 {
   emxArray_real_T *C;
@@ -768,10 +618,6 @@ static void main_LXS_wrapper1(void)
   emxDestroyArray_real_T(y);
 }
 
-/*
- * Arguments    : void
- * Return Type  : void
- */
 static void main_addt_wrapper(void)
 {
   emxArray_real_T *X;
@@ -799,84 +645,6 @@ static void main_addt_wrapper(void)
   emxDestroyArray_real_T(y);
 }
 
-/*
- * Arguments    : void
- * Return Type  : void
- */
-static void main_tclust_wrapper(void)
-{
-  emxArray_real_T *C;
-  emxArray_real_T *RandNumbForNini;
-  emxArray_real_T *Y;
-  emxArray_real_T *nsamp;
-  struct_tclust_T out;
-  double k_tmp;
-  bool equalweights_tmp;
-  emxInit_struct_tclust_T(&out);
-  emxInitArray_real_T(&C, 2);
-  /* Initialize function 'tclust_wrapper' input arguments. */
-  /* Initialize function input argument 'Y'. */
-  Y = c_argInit_UnboundedxUnbounded_r();
-  k_tmp = argInit_real_T();
-  equalweights_tmp = argInit_boolean_T();
-  /* Initialize function input argument 'nsamp'. */
-  nsamp = c_argInit_UnboundedxUnbounded_r();
-  /* Initialize function input argument 'RandNumbForNini'. */
-  RandNumbForNini = c_argInit_UnboundedxUnbounded_r();
-  /* Call the entry-point 'tclust_wrapper'. */
-  tclust_wrapper(Y, k_tmp, k_tmp, k_tmp, equalweights_tmp, k_tmp, k_tmp,
-                 equalweights_tmp, nsamp, RandNumbForNini, k_tmp, k_tmp,
-                 equalweights_tmp, equalweights_tmp, &out, C);
-  emxDestroyArray_real_T(C);
-  emxDestroy_struct_tclust_T(out);
-  emxDestroyArray_real_T(RandNumbForNini);
-  emxDestroyArray_real_T(nsamp);
-  emxDestroyArray_real_T(Y);
-}
-
-/*
- * Arguments    : void
- * Return Type  : void
- */
-static void main_tclust_wrapper1(void)
-{
-  emxArray_real_T *C;
-  emxArray_real_T *RandNumbForNini;
-  emxArray_real_T *Y;
-  emxArray_real_T *nsamp;
-  struct_tclust_T out;
-  struct_tclustrestrfactor_T r;
-  double k_tmp;
-  bool equalweights_tmp;
-  emxInit_struct_tclust_T(&out);
-  emxInitArray_real_T(&C, 2);
-  /* Initialize function 'tclust_wrapper1' input arguments. */
-  /* Initialize function input argument 'Y'. */
-  Y = c_argInit_UnboundedxUnbounded_r();
-  k_tmp = argInit_real_T();
-  /* Initialize function input argument 'restrfactor'. */
-  equalweights_tmp = argInit_boolean_T();
-  /* Initialize function input argument 'nsamp'. */
-  nsamp = c_argInit_UnboundedxUnbounded_r();
-  /* Initialize function input argument 'RandNumbForNini'. */
-  RandNumbForNini = c_argInit_UnboundedxUnbounded_r();
-  /* Call the entry-point 'tclust_wrapper1'. */
-  c_argInit_struct_tclustrestrfac(&r);
-  tclust_wrapper1(Y, k_tmp, k_tmp, &r, equalweights_tmp, k_tmp, k_tmp,
-                  equalweights_tmp, nsamp, RandNumbForNini, k_tmp, k_tmp,
-                  equalweights_tmp, equalweights_tmp, &out, C);
-  emxDestroyArray_real_T(C);
-  emxDestroy_struct_tclust_T(out);
-  emxDestroyArray_real_T(RandNumbForNini);
-  emxDestroyArray_real_T(nsamp);
-  emxDestroyArray_real_T(Y);
-}
-
-/*
- * Arguments    : int argc
- *                char **argv
- * Return Type  : int
- */
 int main(int argc, char **argv)
 {
   (void)argc;
@@ -896,16 +664,10 @@ You can call entry-point functions multiple times. */
   main_LXS_wrapper();
   main_LXS_wrapper1();
   main_addt_wrapper();
-  main_tclust_wrapper();
-  main_tclust_wrapper1();
   /* Terminate the application.
 You do not need to do this more than one time. */
   fsdaC_terminate();
   return 0;
 }
 
-/*
- * File trailer for main.c
- *
- * [EOF]
- */
+/* End of code generation (main.c) */

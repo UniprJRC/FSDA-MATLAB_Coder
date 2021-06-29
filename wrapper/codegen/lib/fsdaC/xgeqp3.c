@@ -2,13 +2,14 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: xgeqp3.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * xgeqp3.c
+ *
+ * Code generation for function 'xgeqp3'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "xgeqp3.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
@@ -17,15 +18,8 @@
 #include "xzlarf.h"
 #include "xzlarfg.h"
 #include <math.h>
-#include <string.h>
 
 /* Function Definitions */
-/*
- * Arguments    : emxArray_real_T *A
- *                emxArray_real_T *tau
- *                emxArray_int32_T *jpvt
- * Return Type  : void
- */
 void xgeqp3(emxArray_real_T *A, emxArray_real_T *tau, emxArray_int32_T *jpvt)
 {
   emxArray_real_T *vn1;
@@ -160,7 +154,7 @@ void xgeqp3(emxArray_real_T *A, emxArray_real_T *tau, emxArray_int32_T *jpvt)
         }
         if (b_i + 1 < m) {
           smax = A->data[ii];
-          d = b_xzlarfg(mmi, &smax, A, ii + 2);
+          d = xzlarfg(mmi, &smax, A, ii + 2);
           tau->data[b_i] = d;
           A->data[ii] = smax;
         } else {
@@ -219,8 +213,4 @@ void xgeqp3(emxArray_real_T *A, emxArray_real_T *tau, emxArray_int32_T *jpvt)
   emxFree_real_T(&work);
 }
 
-/*
- * File trailer for xgeqp3.c
- *
- * [EOF]
- */
+/* End of code generation (xgeqp3.c) */

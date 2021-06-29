@@ -2,23 +2,19 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: ifWhileCond.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * ifWhileCond.c
+ *
+ * Code generation for function 'ifWhileCond'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "ifWhileCond.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
-#include <string.h>
 
 /* Function Definitions */
-/*
- * Arguments    : const emxArray_boolean_T *x
- * Return Type  : bool
- */
 bool b_ifWhileCond(const emxArray_boolean_T *x)
 {
   int i;
@@ -42,10 +38,6 @@ bool b_ifWhileCond(const emxArray_boolean_T *x)
   return y;
 }
 
-/*
- * Arguments    : const emxArray_boolean_T *x
- * Return Type  : bool
- */
 bool c_ifWhileCond(const emxArray_boolean_T *x)
 {
   int k;
@@ -67,10 +59,6 @@ bool c_ifWhileCond(const emxArray_boolean_T *x)
   return y;
 }
 
-/*
- * Arguments    : const emxArray_boolean_T *x
- * Return Type  : bool
- */
 bool ifWhileCond(const emxArray_boolean_T *x)
 {
   int k;
@@ -92,8 +80,4 @@ bool ifWhileCond(const emxArray_boolean_T *x)
   return y;
 }
 
-/*
- * File trailer for ifWhileCond.c
- *
- * [EOF]
- */
+/* End of code generation (ifWhileCond.c) */

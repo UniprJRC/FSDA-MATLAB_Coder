@@ -2,16 +2,17 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: xzlarfg.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * xzlarfg.h
+ *
+ * Code generation for function 'xzlarfg'
+ *
  */
 
 #ifndef XZLARFG_H
 #define XZLARFG_H
 
-/* Include Files */
+/* Include files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -22,17 +23,11 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-double b_xzlarfg(int n, double *alpha1, emxArray_real_T *x, int ix0);
-
-double xzlarfg(int n, double *alpha1, double x[3]);
+double xzlarfg(int n, double *alpha1, emxArray_real_T *x, int ix0);
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-/*
- * File trailer for xzlarfg.h
- *
- * [EOF]
- */
+/* End of code generation (xzlarfg.h) */

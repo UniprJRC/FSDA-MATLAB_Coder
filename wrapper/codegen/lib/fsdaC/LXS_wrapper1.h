@@ -2,16 +2,17 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: LXS_wrapper1.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * LXS_wrapper1.h
+ *
+ * Code generation for function 'LXS_wrapper1'
+ *
  */
 
 #ifndef LXS_WRAPPER1_H
 #define LXS_WRAPPER1_H
 
-/* Include Files */
+/* Include files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -35,8 +36,4 @@ extern void LXS_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
 #endif
 
 #endif
-/*
- * File trailer for LXS_wrapper1.h
- *
- * [EOF]
- */
+/* End of code generation (LXS_wrapper1.h) */

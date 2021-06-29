@@ -2,13 +2,16 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: LXS_wrapper1.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * LXS_wrapper1.c
+ *
+ * Code generation for function 'LXS_wrapper1'
+ *
  */
 
-/* Include Files */
+/* Include files */
+#include <R.h>
+
 #include "LXS_wrapper1.h"
 #include "FSM.h"
 #include "LXS.h"
@@ -39,28 +42,6 @@
 #include <string.h>
 
 /* Function Definitions */
-/*
- * Wrapper function for LXS (when lms is a struct). NV pair names are not taken
- * as inputs. Instead, just the values are taken as inputs.
- *
- * Arguments    : const emxArray_real_T *y
- *                const emxArray_real_T *X
- *                const double bonflevoutX_data[]
- *                const int bonflevoutX_size[2]
- *                double conflev
- *                double h
- *                bool intercept
- *                const struct_LXSlms_T *lms
- *                bool msg
- *                bool nocheck
- *                bool nomes
- *                double nsamp
- *                bool rew
- *                bool yxsave
- *                struct_LXS_T *out
- *                emxArray_real_T *C
- * Return Type  : void
- */
 void LXS_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
                   const double bonflevoutX_data[],
                   const int bonflevoutX_size[2], double conflev, double h,
@@ -124,6 +105,9 @@ void LXS_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
     fsdaC_initialize();
   }
   emxInit_real_T(&b_y, 1);
+  /*  Wrapper function for LXS (when lms is a struct). NV pair names are not
+   * taken as */
+  /*  inputs. Instead, just the values are taken as inputs. */
   /*  Required input arguments */
   /*  y: a column vector of doubles of any length */
   /*  ARGS{1}{1} = coder.typeof(0,[Inf 1],[1 0]); */
@@ -957,7 +941,7 @@ void LXS_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
         b_time_data.allocatedSize = 1000;
         b_time_data.numDimensions = 1;
         b_time_data.canFreeData = false;
-        printf("Total estimated time to complete FASTLTS: %5.2f seconds \n",
+        Rprintf("Total estimated time to complete FASTLTS: %5.2f seconds \n",
                nselected * median(&b_time_data));
         fflush(stdout);
       }
@@ -1390,12 +1374,12 @@ void LXS_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
   if (msg && (singsub / nselected > 0.1)) {
     ncomb = 100.0 * singsub / nselected;
     if (bonflevout) {
-      printf("Warning: Number of subsets without full rank or excluded because "
+      Rprintf("Warning: Number of subsets without full rank or excluded because "
              "containing remote units in the X space equal to %.1f %%\n",
              ncomb);
       fflush(stdout);
     } else {
-      printf("Warning: Number of subsets without full rank equal to %.1f%%\n",
+      Rprintf("Warning: Number of subsets without full rank equal to %.1f%%\n",
              ncomb);
       fflush(stdout);
     }
@@ -1447,8 +1431,4 @@ void LXS_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  Create plots */
 }
 
-/*
- * File trailer for LXS_wrapper1.c
- *
- * [EOF]
- */
+/* End of code generation (LXS_wrapper1.c) */

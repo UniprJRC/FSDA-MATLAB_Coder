@@ -2,16 +2,17 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: rt_nonfinite.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * rt_nonfinite.h
+ *
+ * Code generation for function 'FSM_wrapper'
+ *
  */
 
 #ifndef RT_NONFINITE_H
 #define RT_NONFINITE_H
 
-/* Include Files */
+/* Include files */
 #include "rtwtypes.h"
 
 #ifdef __cplusplus
@@ -34,8 +35,4 @@ extern boolean_T rtIsNaNF(real32_T value);
 }
 #endif
 #endif
-/*
- * File trailer for rt_nonfinite.h
- *
- * [EOF]
- */
+/* End of code generation (rt_nonfinite.h) */

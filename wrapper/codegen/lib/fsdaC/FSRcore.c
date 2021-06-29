@@ -2,13 +2,16 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: FSRcore.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * FSRcore.c
+ *
+ * Code generation for function 'FSRcore'
+ *
  */
 
-/* Include Files */
+/* Include files */
+#include <R.h>
+
 #include "FSRcore.h"
 #include "FSRbonfbound.h"
 #include "FSRbsb.h"
@@ -33,217 +36,8 @@
 #include "rt_nonfinite.h"
 #include <math.h>
 #include <stdio.h>
-#include <string.h>
 
 /* Function Definitions */
-/*
- * FSRcore scans the trajectory of mdr to check for exceedances
- *
- *
- *  Required input arguments:
- *
- *     INP    :   Structure containing monitoring of mdr and other quantities.
- * Structure. Structure containing the following fields. INP.y   =   Response
- * variable. Vector. Response variable, specified as a vector of length n, where
- * n is the number of observations. Each entry in y is the response for the
- *                corresponding row of X.
- *                Missing values (NaN's) and infinite values (Inf's) are
- *                allowed, since observations (rows) with missing or infinite
- *                values will automatically be excluded from the
- *                computations.
- *   INP.X =      Predictor variables. Matrix. Matrix of explanatory
- *                variables (also called 'regressors') of dimension n x p
- *                where p denotes the number of explanatory variables
- *                including the intercept.
- *   INP.n =      Number of observations. Scalar. Number of rows of matrix X.
- *   INP.p =      Number of predictor variables. Scalar. Number of columns of
- *                matrix X.
- *   INP.mdr =    Minimum deletion residual. Matrix.  n -init x 2 matrix
- *                which contains the monitoring of minimum deletion residual
- *                at each step of the forward search.
- *                1st col = fwd search index (from init to n-1).
- *                2nd col = minimum deletion residual.
- *                Depending on the string 'model', mdr refers to OLS
- *                mdr, GLS mdr or Bayes regression mdr.
- *   INP.init =   Search initialization. Scalar.
- *                It specifies the point where the user has started
- *                monitoring mdr.
- *   INP.Un  =    Units included in each step. Matrix.
- *                (n-init) x 11 matrix which contains the unit(s) included
- *                in the subset at each step of the fwd search.
- *                REMARK: in every step the new subset is compared with the
- *                old subset. Un contains the unit(s) present in the new
- *                subset but not in the old one. Un(1,2) for example contains
- *                the unit included in step init+1. Un(end,2) contains the
- *                units included in the final step of the search.
- *                Un has 11 columns because we store up to 10 units
- *                simultaneously in each step.
- *    INP.bb=     Units included in each step. Matrix.
- *                n-by-(n-init+1) or matrix n-by-r matrix which the units
- *                belonging to the subset at each step of the forward search
- *                or at selected steps.
- *   INP.Bcoeff=  Estimated regression coefficients. Matrix.
- *                (n-init+1) x (p+1) matrix containing the monitoring of
- *                estimated beta coefficients in each step of the forward
- *                search. The first column contains the fwd search index.
- *                Depending on the string 'model', Bcoeff refers to OLS
- *                coefficents, GLS coefficients or Bayes regression
- *                coefficients.
- *  INP.Hetero=  Estimated coefficients in the skedastic equation. Matrix.
- *                (n-init+1) x (r+1) matrix containing the monitoring of
- *                estimated skedastic coefficients in each step of the forward
- *                search. The first column contains the fwd search index.
- *                This input is used just if strcmp(model,'H')
- *   INP.S2 =   Estimate of $sigma^2$.  (n-init+1)-by-2 matrix containing the
- *                monitoring of S2.  Depending on the string 'model', S2
- *                refers to OLS, GLS or in the Baysian case it is the
- *                posterior estimate of $\sigma^2$.
- *    INP.Z =     Predictor variables in the regression equation (necessary
- *                input just if model='H'). Matrix.
- *                n x r matrix or vector of length r.
- *                If Z is a n x r matrix it contains the r variables which
- *                form the scedastic function as follows (if input option
- * art==1)
- *                \[
- *                \omega_i = 1 + exp(\gamma_0 + \gamma_1 Z(i,1) + ...+
- * \gamma_{r} Z(i,r))
- *                \]
- *                If Z is a vector of length r it contains the indexes of the
- *                columns of matrix X which form the scedastic function as
- *                follows
- *                \[
- *                \omega_i = 1 +  exp(\gamma_0 + \gamma_1 X(i,Z(1)) + ...+
- *                \gamma_{r} X(i,Z(r)))
- *                \]
- *
- *    INP.beta0 = Prior mean of $\beta$ (necessary
- *                input just if model='B'). p-times-1 vector.
- *    INP.R     = Matrix associated with covariance matrix of $\beta$ (necessary
- *                input just if model='B'). p-times-p
- *                positive definite matrix.
- *                It can be interpreted as X0'X0 where X0 is a n0 x p
- *                matrix coming from previous experiments (assuming that the
- *                intercept is included in the model)
- *
- *                The prior distribution of $\tau_0$ is a gamma distribution
- * with parameters $a_0$ and $b_0$, that is
- *
- *                 \[     p(\tau_0) \propto \tau^{a_0-1} \exp (-b_0 \tau)
- *                        \qquad   E(\tau_0)= a_0/b_0               \]
- *
- *    INP.tau0 =  Prior estimate of tau (necessary
- *                input just if model='B'). Scalar. Prior estimate of $\tau=1/
- * \sigma^2 =a_0/b_0$. INP.n0 =  Number of previous experiments (necessary input
- * just if model='B'). Scalar. Sometimes it helps to think of the prior
- * information as coming from n0 previous experiments. Therefore we assume that
- * matrix X0 (which defines R), was made up of n0 observations. Data Types -
- * struct model :      type of regression model. Character. Possible values are
- * '' (default) | 'H' | 'B'.
- *                '' stands for linear regression;
- *                'H' stands for heteroskedastic regression;
- *                'B' stands for Bayesian regression.
- *                This input is used to reconstruct the units belonging to
- *                subset at step n-decl where decl is the number of units
- *                declared as outliers. More precisely, if n>5000 matrix BB
- *                just contains the units belonging to subset in selected
- *                steps, therefore in order to find the units inside subset at
- *                step n-decl, FSRcore calls:
- *                routine FSRbsb.m in presence of linear regression;
- *                routine FSRHbsb.m in presence of heteroskedastic regression;
- *                routine FSRBbsb.m in presence of Bayesian regression;
- *                  Data Types - char
- *     options:   Additional options. Stucture. Structure containing optional
- *                parameters which are passed to directly through functions
- *                FSR.m, FSRH.m or FSRB.m.
- *                  Data Types - struct
- *
- *      weak:     Indicator to use a different decision rule to detect
- *                the signal and flag outliers. false (default) | true.
- *                If weak==false default FSRcore values are used,
- *                if weak==true 'stronger' quantiles are used  as a
- *                decision rule to trim outliers and VIOM outliers
- *     are the ones entering the Search after the first signal.
- *                Example - 'weak',true
- *                Data Types - boolean
- *
- *  Optional input arguments:
- *
- *  Output:
- *
- *      out :     A structure containing the following fields
- *  out.ListOut  =  k x 1 vector containing the list of the units declared as
- *                  outliers or NaN if the sample is homogeneous.
- *  out.outliers =  out.ListOut. This field is added for homogeneity with the
- *                  other robust estimators.
- *  out.beta   =  p-by-1 vector containing the estimated regression
- *                parameter in step n-k. Depending on the string 'model',
- *                beta refers to OLS coefficents, GLS coefficients or Bayes
- *                regression coefficients.
- *  out.scale   = estimate of the scale. Depending on the string 'model',
- *                beta refers to OLS coefficents, GLS coefficients or it is
- *                the inverse of the posterior estimate of the square root of
- * tau. out.mdr    =  (n-init) x 2 matrix 1st col = fwd search index 2nd col =
- * value of minimum deletion residual in each step of the fwd search. Depending
- * on the string 'model', mdr is found using linear regression, heteroskedastic
- *                regression or Bayes regression.
- *  out.Un     =  (n-init) x 11 matrix which contains the unit(s) included
- *                in the subset at each step of the fwd search.
- *                REMARK: in every step the new subset is compared with the
- *                old subset. Un contains the unit(s) present in the new
- *                subset but not in the old one.
- *                Un(1,2) for example contains the unit included in step
- *                init+1.
- *                Un(end,2) contains the units included in the final step
- *                of the search.
- *  out.nout    = 2 x 5 matrix containing the number of times mdr went out
- *                of particular quantiles.
- *                First row contains quantiles 1 99 99.9 99.99 99.999.
- *                Second row contains the frequency distribution.
- *  out.outliersVIOM = m x 1 vector containing the list of the units declared as
- *                     VIOM outliers or NaN if they are not present.
- *                     Present only if weak == true.
- *  out.ListCl =  (n-m-k) x 1 vector of non-outlying units.
- *                Present only if weak == true.
- *
- *  More About:
- *
- *  The rules for declaring units as outliers are the same for standard
- *  regression, heteroskedastic regression and Bayesian regression. Therefore
- *  this function is called by:
- *  FSR.m  = outlier detection procedure for linear regression;
- *  FSRB.m = outlier detection procedure in Bayesian linear regression;
- *  FSRH.m = outlier detection procedure for heteroskedastic models;
- *  If ndecl units are declared as outliers, it is necessary to find the
- *  units forming subset at step n-decl. If n<=5000 input matrix INP.bb
- *  contains the storing of the units belonging to subset in all steps, else
- *  if INP.bb does not contain the units in step n-decl procedure calls
- *  routine FSRbsb.m or FSRHbsb.m or FSRBbsb.m.
- *
- *  See also: FSR.m, FSRH.m, FSRB.m
- *
- *  References:
- *
- *  Copyright 2008-2021.
- *  Written by FSDA team
- * $LastChangedDate::                      $: Date of the last commit
- *
- * Arguments    : const emxArray_real_T *INP_y
- *                const emxArray_real_T *INP_X
- *                double INP_n
- *                double INP_p
- *                const emxArray_real_T *INP_mdr
- *                double INP_init
- *                const emxArray_real_T *INP_Un
- *                const emxArray_real_T *INP_bb
- *                const emxArray_real_T *INP_Bcoeff
- *                const emxArray_real_T *INP_S2
- *                bool INP_weak
- *                const double options_bonflev_data[]
- *                const int options_bonflev_size[2]
- *                bool options_msg
- *                struct_T *out
- * Return Type  : void
- */
 void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
              double INP_n, double INP_p, const emxArray_real_T *INP_mdr,
              double INP_init, const emxArray_real_T *INP_Un,
@@ -252,13 +46,12 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
              const double options_bonflev_data[],
              const int options_bonflev_size[2], bool options_msg, struct_T *out)
 {
-  emxArray_boolean_T b_tmp_data;
   emxArray_boolean_T nout_data;
+  emxArray_boolean_T tmp_data;
   emxArray_boolean_T *b_beta;
   emxArray_boolean_T *b_bool;
-  emxArray_boolean_T *r12;
   emxArray_boolean_T *r2;
-  emxArray_boolean_T *r7;
+  emxArray_boolean_T *r8;
   emxArray_char_T_1x310 b_out;
   emxArray_int32_T *ia;
   emxArray_int32_T *r;
@@ -269,7 +62,7 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
   emxArray_int32_T *r4;
   emxArray_int32_T *r5;
   emxArray_int32_T *r6;
-  emxArray_int32_T *r8;
+  emxArray_int32_T *r7;
   emxArray_int32_T *r9;
   emxArray_real32_T *BB;
   emxArray_real32_T *b_BB;
@@ -314,20 +107,239 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
   int nout_size_idx_0;
   int nout_size_idx_1;
   int sto;
-  int vlen;
+  int vlen=0;
   signed char c_tmp_data[5];
   signed char sizes_idx_1;
   bool x[31];
   bool c_nout_data[5];
   bool NoFalseSig;
   bool b_options_bonflev_data;
+  bool b_tmp_data;
   bool condition2;
   bool condition3;
   bool condition4;
   bool empty_non_axis_sizes;
   bool exitg1;
   bool exitg2;
-  bool tmp_data;
+  /* FSRcore scans the trajectory of mdr to check for exceedances */
+  /*  */
+  /*  */
+  /*  Required input arguments: */
+  /*  */
+  /*     INP    :   Structure containing monitoring of mdr and other quantities.
+   * Structure. */
+  /*                Structure containing the following fields. */
+  /*    INP.y   =   Response variable. Vector. Response variable, specified as
+   */
+  /*                a vector of length n, where n is the number of */
+  /*                observations. Each entry in y is the response for the */
+  /*                corresponding row of X. */
+  /*                Missing values (NaN's) and infinite values (Inf's) are */
+  /*                allowed, since observations (rows) with missing or infinite
+   */
+  /*                values will automatically be excluded from the */
+  /*                computations. */
+  /*   INP.X =      Predictor variables. Matrix. Matrix of explanatory */
+  /*                variables (also called 'regressors') of dimension n x p */
+  /*                where p denotes the number of explanatory variables */
+  /*                including the intercept. */
+  /*   INP.n =      Number of observations. Scalar. Number of rows of matrix X.
+   */
+  /*   INP.p =      Number of predictor variables. Scalar. Number of columns of
+   */
+  /*                matrix X. */
+  /*   INP.mdr =    Minimum deletion residual. Matrix.  n -init x 2 matrix */
+  /*                which contains the monitoring of minimum deletion residual
+   */
+  /*                at each step of the forward search. */
+  /*                1st col = fwd search index (from init to n-1). */
+  /*                2nd col = minimum deletion residual. */
+  /*                Depending on the string 'model', mdr refers to OLS */
+  /*                mdr, GLS mdr or Bayes regression mdr. */
+  /*   INP.init =   Search initialization. Scalar. */
+  /*                It specifies the point where the user has started */
+  /*                monitoring mdr. */
+  /*   INP.Un  =    Units included in each step. Matrix. */
+  /*                (n-init) x 11 matrix which contains the unit(s) included */
+  /*                in the subset at each step of the fwd search. */
+  /*                REMARK: in every step the new subset is compared with the */
+  /*                old subset. Un contains the unit(s) present in the new */
+  /*                subset but not in the old one. Un(1,2) for example contains
+   */
+  /*                the unit included in step init+1. Un(end,2) contains the */
+  /*                units included in the final step of the search. */
+  /*                Un has 11 columns because we store up to 10 units */
+  /*                simultaneously in each step. */
+  /*    INP.bb=     Units included in each step. Matrix. */
+  /*                n-by-(n-init+1) or matrix n-by-r matrix which the units */
+  /*                belonging to the subset at each step of the forward search
+   */
+  /*                or at selected steps. */
+  /*   INP.Bcoeff=  Estimated regression coefficients. Matrix. */
+  /*                (n-init+1) x (p+1) matrix containing the monitoring of */
+  /*                estimated beta coefficients in each step of the forward */
+  /*                search. The first column contains the fwd search index. */
+  /*                Depending on the string 'model', Bcoeff refers to OLS */
+  /*                coefficents, GLS coefficients or Bayes regression */
+  /*                coefficients. */
+  /*  INP.Hetero=  Estimated coefficients in the skedastic equation. Matrix. */
+  /*                (n-init+1) x (r+1) matrix containing the monitoring of */
+  /*                estimated skedastic coefficients in each step of the forward
+   */
+  /*                search. The first column contains the fwd search index. */
+  /*                This input is used just if strcmp(model,'H') */
+  /*   INP.S2 =   Estimate of $sigma^2$.  (n-init+1)-by-2 matrix containing the
+   */
+  /*                monitoring of S2.  Depending on the string 'model', S2 */
+  /*                refers to OLS, GLS or in the Baysian case it is the */
+  /*                posterior estimate of $\sigma^2$. */
+  /*    INP.Z =     Predictor variables in the regression equation (necessary */
+  /*                input just if model='H'). Matrix. */
+  /*                n x r matrix or vector of length r. */
+  /*                If Z is a n x r matrix it contains the r variables which */
+  /*                form the scedastic function as follows (if input option
+   * art==1) */
+  /*                \[ */
+  /*                \omega_i = 1 + exp(\gamma_0 + \gamma_1 Z(i,1) + ...+
+   * \gamma_{r} Z(i,r)) */
+  /*                \] */
+  /*                If Z is a vector of length r it contains the indexes of the
+   */
+  /*                columns of matrix X which form the scedastic function as */
+  /*                follows */
+  /*                \[ */
+  /*                \omega_i = 1 +  exp(\gamma_0 + \gamma_1 X(i,Z(1)) + ...+ */
+  /*                \gamma_{r} X(i,Z(r))) */
+  /*                \] */
+  /*  */
+  /*    INP.beta0 = Prior mean of $\beta$ (necessary */
+  /*                input just if model='B'). p-times-1 vector. */
+  /*    INP.R     = Matrix associated with covariance matrix of $\beta$
+   * (necessary */
+  /*                input just if model='B'). p-times-p */
+  /*                positive definite matrix. */
+  /*                It can be interpreted as X0'X0 where X0 is a n0 x p */
+  /*                matrix coming from previous experiments (assuming that the
+   */
+  /*                intercept is included in the model) */
+  /*  */
+  /*                The prior distribution of $\tau_0$ is a gamma distribution
+   * with */
+  /*                parameters $a_0$ and $b_0$, that is */
+  /*  */
+  /*                 \[     p(\tau_0) \propto \tau^{a_0-1} \exp (-b_0 \tau) */
+  /*                        \qquad   E(\tau_0)= a_0/b_0               \] */
+  /*  */
+  /*    INP.tau0 =  Prior estimate of tau (necessary */
+  /*                input just if model='B'). Scalar. Prior estimate of $\tau=1/
+   * \sigma^2 =a_0/b_0$. */
+  /*      INP.n0 =  Number of previous experiments (necessary */
+  /*                input just if model='B'). Scalar. Sometimes it helps */
+  /*                to think of the prior information as coming from n0 */
+  /*                previous experiments. Therefore we assume that matrix X0 */
+  /*                (which defines R), was made up of n0 observations. */
+  /*                  Data Types - struct */
+  /*   model :      type of regression model. Character. */
+  /*                Possible values are '' (default) | 'H' | 'B'. */
+  /*                '' stands for linear regression; */
+  /*                'H' stands for heteroskedastic regression; */
+  /*                'B' stands for Bayesian regression. */
+  /*                This input is used to reconstruct the units belonging to */
+  /*                subset at step n-decl where decl is the number of units */
+  /*                declared as outliers. More precisely, if n>5000 matrix BB */
+  /*                just contains the units belonging to subset in selected */
+  /*                steps, therefore in order to find the units inside subset at
+   */
+  /*                step n-decl, FSRcore calls: */
+  /*                routine FSRbsb.m in presence of linear regression; */
+  /*                routine FSRHbsb.m in presence of heteroskedastic regression;
+   */
+  /*                routine FSRBbsb.m in presence of Bayesian regression; */
+  /*                  Data Types - char */
+  /*     options:   Additional options. Stucture. Structure containing optional
+   */
+  /*                parameters which are passed to directly through functions */
+  /*                FSR.m, FSRH.m or FSRB.m. */
+  /*                  Data Types - struct */
+  /*  */
+  /*      weak:     Indicator to use a different decision rule to detect */
+  /*                the signal and flag outliers. false (default) | true. */
+  /*                If weak==false default FSRcore values are used, */
+  /*                if weak==true 'stronger' quantiles are used  as a */
+  /*                decision rule to trim outliers and VIOM outliers */
+  /* 				are the ones entering the Search after the first signal.
+   */
+  /*                Example - 'weak',true */
+  /*                Data Types - boolean */
+  /*  */
+  /*  Optional input arguments: */
+  /*  */
+  /*  Output: */
+  /*  */
+  /*      out :     A structure containing the following fields */
+  /*  out.ListOut  =  k x 1 vector containing the list of the units declared as
+   */
+  /*                  outliers or NaN if the sample is homogeneous. */
+  /*  out.outliers =  out.ListOut. This field is added for homogeneity with the
+   */
+  /*                  other robust estimators. */
+  /*  out.beta   =  p-by-1 vector containing the estimated regression */
+  /*                parameter in step n-k. Depending on the string 'model', */
+  /*                beta refers to OLS coefficents, GLS coefficients or Bayes */
+  /*                regression coefficients. */
+  /*  out.scale   = estimate of the scale. Depending on the string 'model', */
+  /*                beta refers to OLS coefficents, GLS coefficients or it is */
+  /*                the inverse of the posterior estimate of the square root of
+   * tau. */
+  /*  out.mdr    =  (n-init) x 2 matrix */
+  /*                1st col = fwd search index */
+  /*                2nd col = value of minimum deletion residual in each step */
+  /*                of the fwd search. Depending on the string 'model', */
+  /*                mdr is found using linear regression, heteroskedastic */
+  /*                regression or Bayes regression. */
+  /*  out.Un     =  (n-init) x 11 matrix which contains the unit(s) included */
+  /*                in the subset at each step of the fwd search. */
+  /*                REMARK: in every step the new subset is compared with the */
+  /*                old subset. Un contains the unit(s) present in the new */
+  /*                subset but not in the old one. */
+  /*                Un(1,2) for example contains the unit included in step */
+  /*                init+1. */
+  /*                Un(end,2) contains the units included in the final step */
+  /*                of the search. */
+  /*  out.nout    = 2 x 5 matrix containing the number of times mdr went out */
+  /*                of particular quantiles. */
+  /*                First row contains quantiles 1 99 99.9 99.99 99.999. */
+  /*                Second row contains the frequency distribution. */
+  /*  out.outliersVIOM = m x 1 vector containing the list of the units declared
+   * as */
+  /*                     VIOM outliers or NaN if they are not present. */
+  /*                     Present only if weak == true. */
+  /*  out.ListCl =  (n-m-k) x 1 vector of non-outlying units. */
+  /*                Present only if weak == true. */
+  /*  */
+  /*  More About: */
+  /*  */
+  /*  The rules for declaring units as outliers are the same for standard */
+  /*  regression, heteroskedastic regression and Bayesian regression. Therefore
+   */
+  /*  this function is called by: */
+  /*  FSR.m  = outlier detection procedure for linear regression; */
+  /*  FSRB.m = outlier detection procedure in Bayesian linear regression; */
+  /*  FSRH.m = outlier detection procedure for heteroskedastic models; */
+  /*  If ndecl units are declared as outliers, it is necessary to find the */
+  /*  units forming subset at step n-decl. If n<=5000 input matrix INP.bb */
+  /*  contains the storing of the units belonging to subset in all steps, else
+   */
+  /*  if INP.bb does not contain the units in step n-decl procedure calls */
+  /*  routine FSRbsb.m or FSRHbsb.m or FSRBbsb.m. */
+  /*  */
+  /*  See also: FSR.m, FSRH.m, FSRB.m */
+  /*  */
+  /*  References: */
+  /*  */
+  /*  Copyright 2008-2021. */
+  /*  Written by FSDA team */
+  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Beginning of code */
   /*  Extract required input variables */
   i = out->mdr->size[0] * out->mdr->size[1];
@@ -538,8 +550,8 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
     out->mdr->size[1] = INP_mdr->size[1];
     emxEnsureCapacity_real_T(out->mdr, i);
     for (i = 0; i < loop_ub; i++) {
-      vlen = ia->size[0];
-      for (i1 = 0; i1 < vlen; i1++) {
+      end = ia->size[0];
+      for (i1 = 0; i1 < end; i1++) {
         out->mdr->data[i1 + out->mdr->size[0] * i] =
             INP_mdr->data[(ia->data[i1] + INP_mdr->size[0] * i) - 1];
       }
@@ -661,15 +673,15 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
         nmdr++;
       }
     }
-    emxInit_int32_T(&r8, 1);
-    i = r8->size[0];
-    r8->size[0] = nmdr;
-    emxEnsureCapacity_int32_T(r8, i);
+    emxInit_int32_T(&r7, 1);
+    i = r7->size[0];
+    r7->size[0] = nmdr;
+    emxEnsureCapacity_int32_T(r7, i);
     vlen = 0;
     for (b_i = 0; b_i <= end; b_i++) {
       if (out->mdr->data[b_i + out->mdr->size[0]] >
           gmin->data[b_i + gmin->size[0] * 4]) {
-        r8->data[vlen] = b_i + 1;
+        r7->data[vlen] = b_i + 1;
         vlen++;
       }
     }
@@ -705,11 +717,11 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
     uv[3] = (unsigned int)r3->size[0];
     uv[5] = (unsigned int)r5->size[0];
     uv[7] = (unsigned int)r6->size[0];
-    uv[9] = (unsigned int)r8->size[0];
+    uv[9] = (unsigned int)r7->size[0];
     nout_size_idx_0 = 2;
     nout_size_idx_1 = 5;
     emxFree_int32_T(&r9);
-    emxFree_int32_T(&r8);
+    emxFree_int32_T(&r7);
     emxFree_int32_T(&r6);
     emxFree_int32_T(&r5);
     emxFree_int32_T(&r3);
@@ -872,7 +884,7 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
           if (options_msg) {
             /*  disp(['Signal in final part of the search: step '
              * num2str(mdr(i,1)) ' because']); */
-            printf("Signal in final part of the search: step %.0f because",
+            Rprintf("Signal in final part of the search: step %.0f because",
                    out->mdr->data[c_i]);
             fflush(stdout);
           }
@@ -884,7 +896,7 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
               print_processing(
                   out->mdr->data[c_i], INP_n, out->mdr->data[c_i + 1], INP_n,
                   out->mdr->data[c_i - 1], INP_n, validatedHoleFilling);
-              printf("\nrmin(%.0f,%.0f)>99.9%% and rmin(%.0f,%.0f)>99.9%% and "
+              Rprintf("\nrmin(%.0f,%.0f)>99.9%% and rmin(%.0f,%.0f)>99.9%% and "
                      "rmin(%.0f,%.0f)>99%%",
                      validatedHoleFilling[0], validatedHoleFilling[1],
                      validatedHoleFilling[2], validatedHoleFilling[3],
@@ -906,7 +918,7 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
               print_processing(
                   out->mdr->data[c_i - 1], INP_n, out->mdr->data[c_i], INP_n,
                   out->mdr->data[c_i + 1], INP_n, validatedHoleFilling);
-              printf("\nrmin(%.0f,%.0f)>99.9%% and rmin(%.0f,%.0f)>99.9%% and "
+              Rprintf("\nrmin(%.0f,%.0f)>99.9%% and rmin(%.0f,%.0f)>99.9%% and "
                      "rmin(%.0f,%.0f)>99%%",
                      validatedHoleFilling[0], validatedHoleFilling[1],
                      validatedHoleFilling[2], validatedHoleFilling[3],
@@ -925,7 +937,7 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
               /*  disp(['rmin('  int2str(mdr(i,1)) ',' int2str(n) ')>99% at
                * final step: Bonferroni signal in the final part of the
                * search.']); */
-              printf("\nrmin(%.0f,%.0f)>99%% at final step: Bonferroni signal "
+              Rprintf("\nrmin(%.0f,%.0f)>99%% at final step: Bonferroni signal "
                      "in the final part of the search.",
                      out->mdr->data[c_i], INP_n);
               fflush(stdout);
@@ -938,14 +950,14 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
             if (options_msg) {
               /*  disp(['rmin('  int2str(mdr(i,1)) ',' int2str(n) ')>99.999%']);
                */
-              printf("\nrmin(%.0f,%.0f)>99.999%%", out->mdr->data[c_i], INP_n);
+              Rprintf("\nrmin(%.0f,%.0f)>99.999%%", out->mdr->data[c_i], INP_n);
               fflush(stdout);
             }
             int2str(out->mdr->data[c_i], b_out.data, b_out.size);
             int2str(INP_n, b_out.data, b_out.size);
           }
           if (options_msg) {
-            printf("\n------------------------------------------------");
+            Rprintf("\n------------------------------------------------");
             fflush(stdout);
           }
           /*  Signal is always considered true if it takes place in the */
@@ -989,7 +1001,7 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
       /*         %% Stage 1b: signal validation */
       if (b_signal == 1) {
         if (options_msg) {
-          printf("\n-------------------\n");
+          Rprintf("\n-------------------\n");
           fflush(stdout);
         }
         /*  mdag is $m^\dagger$ */
@@ -1148,10 +1160,10 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
         }
         i1 = gmin1->size[0] - b_i;
         ii = (double)(b_i + 1) - 1.0;
-        end = 0;
+        nmdr = 0;
         exitg2 = false;
-        while ((!exitg2) && (end <= i1)) {
-          ii = ((double)(b_i + 1) - 1.0) + (double)end;
+        while ((!exitg2) && (nmdr <= i1)) {
+          ii = ((double)(b_i + 1) - 1.0) + (double)nmdr;
           /*  CHECK IF STOPPING RULE IS FULFILLED */
           /*  ii>=size(gmin1,1)-2 = final, penultimate or antepenultimate value
            */
@@ -1181,7 +1193,7 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
             exitg2 = true;
           } else {
             /*  mdr is inside the envelopes, so keep resuperimposing */
-            end++;
+            nmdr++;
           }
         }
         if (sto == 1) {
@@ -1238,13 +1250,13 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
             i1 = 0;
             i2 = 0;
             vlen = 0;
-            end = 0;
+            nmdr = 0;
           } else {
             i = (int)(unsigned int)ii;
             i1 = gmin1->size[0];
             i2 = (int)(unsigned int)ii;
             vlen = gmin1->size[0];
-            end = (int)(unsigned int)ii;
+            nmdr = (int)(unsigned int)ii;
           }
           emxInit_real_T(&gfind, 2);
           loop_ub = i1 - i;
@@ -1259,7 +1271,7 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
           for (i = 0; i < loop_ub; i++) {
             gfind->data[i + gfind->size[0]] =
                 (gmin1->data[(i2 + i) + gmin1->size[0] * 3] >
-                 out->mdr->data[(end + i) + out->mdr->size[0]]);
+                 out->mdr->data[(nmdr + i) + out->mdr->size[0]]);
           }
           /*  select from gfind the steps where mdr was below 1% threshold */
           /*  gfind(1,1) contains the first step where mdr was below 1% */
@@ -1326,7 +1338,7 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
           if (options_msg) {
             /*  disp(['Using the criterion of the maximum, the group of
              * homogenous obs. is=' int2str(tr)]); */
-            printf("Using the criterion of the maximum, the group of "
+            Rprintf("Using the criterion of the maximum, the group of "
                    "homogenous obs. is= %.0f\n",
                    ndecl);
             fflush(stdout);
@@ -1394,69 +1406,71 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
       for (i = 0; i < loop_ub; i++) {
         b_beta->data[i] = (r4->data[i] >= ndecl);
       }
+      emxFree_int32_T(&r4);
       d_eml_find(b_beta, (int *)&end, tmp_size);
+      nmdr = tmp_size[1];
+      loop_ub = tmp_size[1];
       emxFree_boolean_T(&b_beta);
+      for (i = 0; i < loop_ub; i++) {
+        vlen = end;
+      }
       loop_ub = INP_bb->size[0];
       i = r2->size[0] * r2->size[1];
       r2->size[0] = INP_bb->size[0];
       r2->size[1] = tmp_size[1];
       emxEnsureCapacity_boolean_T(r2, i);
-      vlen = tmp_size[1];
-      if (0 <= vlen - 1) {
+      end = tmp_size[1];
+      if (0 <= end - 1) {
         for (i = 0; i < loop_ub; i++) {
-          r2->data[i] = rtIsNaN(INP_bb->data[i + INP_bb->size[0] * (end - 1)]);
+          r2->data[i] = rtIsNaN(INP_bb->data[i + INP_bb->size[0] * (vlen - 1)]);
         }
       }
-      emxInit_boolean_T(&r7, 2);
-      i = r7->size[0] * r7->size[1];
-      r7->size[0] = r2->size[0];
-      r7->size[1] = r2->size[1];
-      emxEnsureCapacity_boolean_T(r7, i);
+      emxInit_boolean_T(&r8, 2);
+      i = r8->size[0] * r8->size[1];
+      r8->size[0] = r2->size[0];
+      r8->size[1] = r2->size[1];
+      emxEnsureCapacity_boolean_T(r8, i);
       loop_ub = r2->size[0] * r2->size[1];
       for (i = 0; i < loop_ub; i++) {
-        r7->data[i] = !r2->data[i];
+        r8->data[i] = !r2->data[i];
       }
-      b_combineVectorElements(r7, r4);
+      c_combineVectorElements(r8, (int *)&end, tmp_size);
       ii = INP_n - ndecl;
       b_tmp_size[0] = 1;
-      b_tmp_size[1] = r4->size[1];
-      loop_ub = r4->size[1];
-      emxFree_boolean_T(&r7);
+      b_tmp_size[1] = tmp_size[1];
+      loop_ub = tmp_size[1];
       for (i = 0; i < loop_ub; i++) {
-        tmp_data = (r4->data[i] < ii);
+        b_tmp_data = (end < ii);
       }
-      emxFree_int32_T(&r4);
-      b_tmp_data.data = &tmp_data;
-      b_tmp_data.size = &b_tmp_size[0];
-      b_tmp_data.allocatedSize = 1;
-      b_tmp_data.numDimensions = 2;
-      b_tmp_data.canFreeData = false;
-      if (c_ifWhileCond(&b_tmp_data)) {
+      tmp_data.data = &b_tmp_data;
+      tmp_data.size = &b_tmp_size[0];
+      tmp_data.allocatedSize = 1;
+      tmp_data.numDimensions = 2;
+      tmp_data.canFreeData = false;
+      if (c_ifWhileCond(&tmp_data)) {
         loop_ub = INP_bb->size[0];
         i = r2->size[0] * r2->size[1];
         r2->size[0] = INP_bb->size[0];
-        r2->size[1] = tmp_size[1];
+        r2->size[1] = nmdr;
         emxEnsureCapacity_boolean_T(r2, i);
-        vlen = tmp_size[1];
-        if (0 <= vlen - 1) {
+        if (0 <= nmdr - 1) {
           for (i = 0; i < loop_ub; i++) {
             r2->data[i] =
-                rtIsNaN(INP_bb->data[i + INP_bb->size[0] * (end - 1)]);
+                rtIsNaN(INP_bb->data[i + INP_bb->size[0] * (vlen - 1)]);
           }
         }
-        emxInit_boolean_T(&r12, 2);
-        i = r12->size[0] * r12->size[1];
-        r12->size[0] = r2->size[0];
-        r12->size[1] = r2->size[1];
-        emxEnsureCapacity_boolean_T(r12, i);
+        i = r8->size[0] * r8->size[1];
+        r8->size[0] = r2->size[0];
+        r8->size[1] = r2->size[1];
+        emxEnsureCapacity_boolean_T(r8, i);
         loop_ub = r2->size[0] * r2->size[1];
         for (i = 0; i < loop_ub; i++) {
-          r12->data[i] = !r2->data[i];
+          r8->data[i] = !r2->data[i];
         }
-        end = r12->size[0] * r12->size[1] - 1;
+        end = r8->size[0] * r8->size[1] - 1;
         nmdr = 0;
         for (b_i = 0; b_i <= end; b_i++) {
-          if (r12->data[b_i]) {
+          if (r8->data[b_i]) {
             nmdr++;
           }
         }
@@ -1465,12 +1479,11 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
         emxEnsureCapacity_int32_T(r1, i);
         vlen = 0;
         for (b_i = 0; b_i <= end; b_i++) {
-          if (r12->data[b_i]) {
+          if (r8->data[b_i]) {
             r1->data[vlen] = b_i + 1;
             vlen++;
           }
         }
-        emxFree_boolean_T(&r12);
         /*  Call procedure FSRbsb */
         i = add->size[0];
         add->size[0] = r1->size[0];
@@ -1516,13 +1529,12 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
         loop_ub = INP_bb->size[0];
         i = r2->size[0] * r2->size[1];
         r2->size[0] = INP_bb->size[0];
-        r2->size[1] = tmp_size[1];
+        r2->size[1] = nmdr;
         emxEnsureCapacity_boolean_T(r2, i);
-        vlen = tmp_size[1];
-        if (0 <= vlen - 1) {
+        if (0 <= nmdr - 1) {
           for (i = 0; i < loop_ub; i++) {
             r2->data[i] =
-                rtIsNaN(INP_bb->data[i + INP_bb->size[0] * (end - 1)]);
+                rtIsNaN(INP_bb->data[i + INP_bb->size[0] * (vlen - 1)]);
           }
         }
         end = r2->size[0] * r2->size[1] - 1;
@@ -1551,6 +1563,7 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
           out->ListOut->data[i] = out->ListCl->data[r1->data[i] - 1];
         }
       }
+      emxFree_boolean_T(&r8);
       emxFree_boolean_T(&r2);
     } else {
       end = (int)((double)INP_bb->size[1] - ndecl);
@@ -1913,8 +1926,4 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
   emxFree_boolean_T(&b_bool);
 }
 
-/*
- * File trailer for FSRcore.c
- *
- * [EOF]
- */
+/* End of code generation (FSRcore.c) */

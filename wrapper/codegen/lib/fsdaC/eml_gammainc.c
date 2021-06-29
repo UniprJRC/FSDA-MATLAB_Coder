@@ -2,29 +2,21 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: eml_gammainc.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * eml_gammainc.c
+ *
+ * Code generation for function 'eml_gammainc'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "eml_gammainc.h"
 #include "fsdaC_data.h"
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 #include <math.h>
-#include <string.h>
 
 /* Function Definitions */
-/*
- * Arguments    : double x
- *                double a
- *                double la
- *                double lgap1
- *                bool upper
- * Return Type  : double
- */
 double eml_gammainc(double x, double a, double la, double lgap1, bool upper)
 {
   double a1;
@@ -386,8 +378,4 @@ double eml_gammainc(double x, double a, double la, double lgap1, bool upper)
   return rval;
 }
 
-/*
- * File trailer for eml_gammainc.c
- *
- * [EOF]
- */
+/* End of code generation (eml_gammainc.c) */

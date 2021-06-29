@@ -2,25 +2,20 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: find.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * find.c
+ *
+ * Code generation for function 'find'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "find.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
-#include <string.h>
 
 /* Function Definitions */
-/*
- * Arguments    : const emxArray_boolean_T *x
- *                emxArray_int32_T *i
- * Return Type  : void
- */
 void b_eml_find(const emxArray_boolean_T *x, emxArray_int32_T *i)
 {
   int idx;
@@ -62,11 +57,6 @@ void b_eml_find(const emxArray_boolean_T *x, emxArray_int32_T *i)
   }
 }
 
-/*
- * Arguments    : const emxArray_boolean_T *x
- *                emxArray_int32_T *i
- * Return Type  : void
- */
 void c_eml_find(const emxArray_boolean_T *x, emxArray_int32_T *i)
 {
   int idx;
@@ -104,12 +94,6 @@ void c_eml_find(const emxArray_boolean_T *x, emxArray_int32_T *i)
   }
 }
 
-/*
- * Arguments    : const emxArray_boolean_T *x
- *                int i_data[]
- *                int i_size[2]
- * Return Type  : void
- */
 void d_eml_find(const emxArray_boolean_T *x, int i_data[], int i_size[2])
 {
   int idx;
@@ -141,11 +125,6 @@ void d_eml_find(const emxArray_boolean_T *x, int i_data[], int i_size[2])
   }
 }
 
-/*
- * Arguments    : const emxArray_boolean_T *x
- *                emxArray_int32_T *i
- * Return Type  : void
- */
 void eml_find(const emxArray_boolean_T *x, emxArray_int32_T *i)
 {
   int idx;
@@ -189,8 +168,4 @@ void eml_find(const emxArray_boolean_T *x, emxArray_int32_T *i)
   }
 }
 
-/*
- * File trailer for find.c
- *
- * [EOF]
- */
+/* End of code generation (find.c) */

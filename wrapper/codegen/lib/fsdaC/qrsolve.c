@@ -2,28 +2,22 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: qrsolve.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * qrsolve.c
+ *
+ * Code generation for function 'qrsolve'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "qrsolve.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 #include "xgeqp3.h"
 #include <math.h>
-#include <string.h>
 
 /* Function Definitions */
-/*
- * Arguments    : const emxArray_real_T *A
- *                const emxArray_real_T *B
- *                emxArray_real_T *Y
- * Return Type  : void
- */
 void qrsolve(const emxArray_real_T *A, const emxArray_real_T *B,
              emxArray_real_T *Y)
 {
@@ -121,10 +115,6 @@ void qrsolve(const emxArray_real_T *A, const emxArray_real_T *B,
   emxFree_real_T(&b_A);
 }
 
-/*
- * Arguments    : const emxArray_real_T *A
- * Return Type  : int
- */
 int rankFromQR(const emxArray_real_T *A)
 {
   double tol;
@@ -149,8 +139,4 @@ int rankFromQR(const emxArray_real_T *A)
   return r;
 }
 
-/*
- * File trailer for qrsolve.c
- *
- * [EOF]
- */
+/* End of code generation (qrsolve.c) */

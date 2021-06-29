@@ -2,107 +2,111 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: FSRinvmdr.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * FSRinvmdr.c
+ *
+ * Code generation for function 'FSRinvmdr'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "FSRinvmdr.h"
 #include "betainc.h"
 #include "erfcinv.h"
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 #include <math.h>
-#include <string.h>
 
 /* Function Definitions */
-/*
- * FSRinvmdr converts values of minimum deletion residual into confidence levels
- *
- * <a href="matlab: docsearchFS('FSRinvmdr')">Link to the help function</a>
- *
- *   Required input arguments:
- *
- *     mdr : Minimum deletion residuals. Matrix. n-m0 x 2 matrix containing:
- *           1st col = fwd search index;
- *           2nd col = minimum deletion residual .
- *     p : Number of explanatory variables. Scalar. Number of explanatory
- * variables of the underlying dataset (including the intercept if present)
- *
- *   Optional input arguments:
- *
- *         n:     size of the sample. Scalar.
- *                If it is not specified
- *                it is set equal to mdr(end,1)+1
- *                Example - 'n',10
- *                Data Types - double
- *
- *    plots :  Plot on the screen. Scalar or structure.
- *                It specify whether it is necessary to
- *                plot in normal coordinates the value of mdr
- *                If plots = 1, a plot which shows the
- *                confidence level of mdr in each step is shown on the
- *                screen.
- *                Remark. three horizontal lines associated respectively with
- *                values  0.01 0.5 and 0.99  are added to the plot
- *                If plots is a structure the user can specify the following
- * options conflev = vector containing horizontal lines associated with
- * confidence levels conflevlab = scalar if it is equal 1 labels associated with
- *                        horizontal lines are shown on the screen
- *                    xlim = minimum and maximum on the x axis
- *                    ylim = minimum and maximum on the y axis
- *                    LineWidth = Line width of the trajectory of mdr in
- *                    normal coordinates
- *                    LineStyle = Line style of the
- *                    trajectory of mle of transformation parameters
- *                    LineWidthEnv = Line width of the horizontal lines
- *                    Tag = tag of the plot (default is pl_mdrinv)
- *                    FontSize = font size of the text labels which identify
- *                    the trajectories
- *                  Example - 'plots',1
- *                  Data Types - double
- *   Output:
- *
- *    MDRinv:     Confidence levels. Matrix. Matrix with n-m0 rows (same rows
- *                of input matrix mdr) and 3 columns:
- *                1st col = fwd search index from m0 to n-1.
- *                2nd col = confidence level of each value of mdr.
- *                3rd col = confidence level in normal coordinates: 50% conf
- *                level becomes norminv(0.50)=0; 99% conf level becomes
- * norminv(0.99)=2.33.
- *
- *
- *  See also FSRenvmdr, LXS.m, FSREDA.m
- *
- *  References:
- *
- *  Atkinson, A.C. and Riani, M. (2006), Distribution theory and
- *  simulations for tests of outliers in regression, "Journal of
- *  Computational and Graphical Statistics", Vol. 15, pp. 460-476.
- *  Riani, M. and Atkinson, A.C. (2007), Fast calibrations of the forward
- *  search for testing multiple outliers in regression, "Advances in Data
- *  Analysis and Classification", Vol. 1, pp. 123-141.
- *
- *
- *  Copyright 2008-2021.
- *  Written by FSDA team
- *
- *
- * <a href="matlab: docsearchFS('FSRinvmdr')">Link to the help function</a>
- *
- * $LastChangedDate::                      $: Date of the last commit
- *
- * Arguments    : const double mdr[2]
- *                double p
- *                double MDRinv[3]
- * Return Type  : void
- */
 void FSRinvmdr(const double mdr[2], double p, double MDRinv[3])
 {
   double a;
   double x;
+  /* FSRinvmdr converts values of minimum deletion residual into confidence
+   * levels */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSRinvmdr')">Link to the help function</a> */
+  /*  */
+  /*   Required input arguments: */
+  /*  */
+  /*     mdr : Minimum deletion residuals. Matrix. n-m0 x 2 matrix containing:
+   */
+  /*           1st col = fwd search index; */
+  /*           2nd col = minimum deletion residual . */
+  /*     p : Number of explanatory variables. Scalar. Number of explanatory
+   * variables of the underlying dataset */
+  /*            (including the intercept if present) */
+  /*  */
+  /*   Optional input arguments: */
+  /*  */
+  /*         n:     size of the sample. Scalar. */
+  /*                If it is not specified */
+  /*                it is set equal to mdr(end,1)+1 */
+  /*                Example - 'n',10 */
+  /*                Data Types - double */
+  /*  */
+  /*    plots :  Plot on the screen. Scalar or structure. */
+  /*                It specify whether it is necessary to */
+  /*                plot in normal coordinates the value of mdr */
+  /*                If plots = 1, a plot which shows the */
+  /*                confidence level of mdr in each step is shown on the */
+  /*                screen. */
+  /*                Remark. three horizontal lines associated respectively with
+   */
+  /*                values  0.01 0.5 and 0.99  are added to the plot */
+  /*                If plots is a structure the user can specify the following
+   * options */
+  /*                    conflev = vector containing horizontal lines associated
+   */
+  /*                        with confidence levels */
+  /*                    conflevlab = scalar if it is equal 1 labels associated
+   * with */
+  /*                        horizontal lines are shown on the screen */
+  /*                    xlim = minimum and maximum on the x axis */
+  /*                    ylim = minimum and maximum on the y axis */
+  /*                    LineWidth = Line width of the trajectory of mdr in */
+  /*                    normal coordinates */
+  /*                    LineStyle = Line style of the */
+  /*                    trajectory of mle of transformation parameters */
+  /*                    LineWidthEnv = Line width of the horizontal lines */
+  /*                    Tag = tag of the plot (default is pl_mdrinv) */
+  /*                    FontSize = font size of the text labels which identify
+   */
+  /*                    the trajectories */
+  /*                  Example - 'plots',1 */
+  /*                  Data Types - double */
+  /*   Output: */
+  /*  */
+  /*    MDRinv:     Confidence levels. Matrix. Matrix with n-m0 rows (same rows
+   */
+  /*                of input matrix mdr) and 3 columns: */
+  /*                1st col = fwd search index from m0 to n-1. */
+  /*                2nd col = confidence level of each value of mdr. */
+  /*                3rd col = confidence level in normal coordinates: 50% conf
+   */
+  /*                level becomes norminv(0.50)=0; 99% conf level becomes
+   * norminv(0.99)=2.33. */
+  /*  */
+  /*  */
+  /*  See also FSRenvmdr, LXS.m, FSREDA.m */
+  /*  */
+  /*  References: */
+  /*  */
+  /*  Atkinson, A.C. and Riani, M. (2006), Distribution theory and */
+  /*  simulations for tests of outliers in regression, "Journal of */
+  /*  Computational and Graphical Statistics", Vol. 15, pp. 460-476. */
+  /*  Riani, M. and Atkinson, A.C. (2007), Fast calibrations of the forward */
+  /*  search for testing multiple outliers in regression, "Advances in Data */
+  /*  Analysis and Classification", Vol. 1, pp. 123-141. */
+  /*  */
+  /*  */
+  /*  Copyright 2008-2021. */
+  /*  Written by FSDA team */
+  /*  */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSRinvmdr')">Link to the help function</a> */
+  /*  */
+  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /* { */
   /*     % FSRinvmdr with all default options. */
@@ -269,8 +273,4 @@ void FSRinvmdr(const double mdr[2], double p, double MDRinv[3])
   /*  Plotting part */
 }
 
-/*
- * File trailer for FSRinvmdr.c
- *
- * [EOF]
- */
+/* End of code generation (FSRinvmdr.c) */

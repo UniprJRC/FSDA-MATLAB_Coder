@@ -2,16 +2,17 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: FSRcore.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * FSRcore.h
+ *
+ * Code generation for function 'FSRcore'
+ *
  */
 
 #ifndef FSRCORE_H
 #define FSRCORE_H
 
-/* Include Files */
+/* Include files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -36,8 +37,4 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
 #endif
 
 #endif
-/*
- * File trailer for FSRcore.h
- *
- * [EOF]
- */
+/* End of code generation (FSRcore.h) */

@@ -2,16 +2,17 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: tcdf.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * tcdf.h
+ *
+ * Code generation for function 'tcdf'
+ *
  */
 
 #ifndef TCDF_H
 #define TCDF_H
 
-/* Include Files */
+/* Include files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -32,8 +33,4 @@ void tcdf(const emxArray_real_T *x, double v, emxArray_real_T *p);
 #endif
 
 #endif
-/*
- * File trailer for tcdf.h
- *
- * [EOF]
- */
+/* End of code generation (tcdf.h) */

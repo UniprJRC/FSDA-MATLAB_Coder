@@ -2,26 +2,21 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: fcdf.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * fcdf.c
+ *
+ * Code generation for function 'fcdf'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "fcdf.h"
 #include "betainc.h"
 #include "gammainc.h"
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
-#include <string.h>
 
 /* Function Definitions */
-/*
- * Arguments    : double x
- *                double v2
- * Return Type  : double
- */
 double fcdf(double x, double v2)
 {
   double num;
@@ -47,8 +42,4 @@ double fcdf(double x, double v2)
   return p;
 }
 
-/*
- * File trailer for fcdf.c
- *
- * [EOF]
- */
+/* End of code generation (fcdf.c) */

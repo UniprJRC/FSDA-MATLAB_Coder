@@ -2,13 +2,14 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: finv.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * finv.c
+ *
+ * Code generation for function 'finv'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "finv.h"
 #include "betainc.h"
 #include "betaincinv.h"
@@ -17,16 +18,8 @@
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
-#include <string.h>
 
 /* Function Definitions */
-/*
- * Arguments    : const emxArray_real_T *p
- *                const emxArray_real_T *v1
- *                const emxArray_real_T *v2
- *                emxArray_real_T *x
- * Return Type  : void
- */
 void b_finv(const emxArray_real_T *p, const emxArray_real_T *v1,
             const emxArray_real_T *v2, emxArray_real_T *x)
 {
@@ -88,13 +81,6 @@ void b_finv(const emxArray_real_T *p, const emxArray_real_T *v1,
   }
 }
 
-/*
- * Arguments    : const emxArray_real_T *p
- *                double v1
- *                const emxArray_real_T *v2
- *                emxArray_real_T *x
- * Return Type  : void
- */
 void finv(const emxArray_real_T *p, double v1, const emxArray_real_T *v2,
           emxArray_real_T *x)
 {
@@ -154,8 +140,4 @@ void finv(const emxArray_real_T *p, double v1, const emxArray_real_T *v2,
   }
 }
 
-/*
- * File trailer for finv.c
- *
- * [EOF]
- */
+/* End of code generation (finv.c) */

@@ -2,13 +2,14 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: FSR_wrapper.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * FSR_wrapper.c
+ *
+ * Code generation for function 'FSR_wrapper'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "FSR_wrapper.h"
 #include "FSRcore.h"
 #include "FSRmdr.h"
@@ -22,31 +23,8 @@
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 #include <math.h>
-#include <string.h>
 
 /* Function Definitions */
-/*
- * Required input arguments
- *  y: a column vector of doubles of any length
- *
- * Arguments    : const emxArray_real_T *y
- *                const emxArray_real_T *X
- *                bool bsbmfullrank
- *                const double bonflev_data[]
- *                const int bonflev_size[2]
- *                double h
- *                double init
- *                bool intercept
- *                double lms
- *                bool msg
- *                bool nocheck
- *                double nsamp
- *                const double threshoutX_data[]
- *                const int threshoutX_size[2]
- *                bool weak
- *                struct_FSR_T *out
- * Return Type  : void
- */
 void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                  bool bsbmfullrank, const double bonflev_data[],
                  const int bonflev_size[2], double h, double init,
@@ -89,6 +67,8 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     fsdaC_initialize();
   }
   emxInit_real_T(&b_y, 1);
+  /*  Required input arguments */
+  /*  y: a column vector of doubles of any length */
   /*  X: an array of doubles of any dimension */
   /*  Optional input arguments (name / pairs) */
   /*  bsbmfullrank */
@@ -1071,8 +1051,4 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   out->class[2] = 'R';
 }
 
-/*
- * File trailer for FSR_wrapper.c
- *
- * [EOF]
- */
+/* End of code generation (FSR_wrapper.c) */

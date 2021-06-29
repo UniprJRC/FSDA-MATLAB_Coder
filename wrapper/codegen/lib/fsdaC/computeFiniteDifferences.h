@@ -2,16 +2,17 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: computeFiniteDifferences.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * computeFiniteDifferences.h
+ *
+ * Code generation for function 'computeFiniteDifferences'
+ *
  */
 
 #ifndef COMPUTEFINITEDIFFERENCES_H
 #define COMPUTEFINITEDIFFERENCES_H
 
-/* Include Files */
+/* Include files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -32,8 +33,4 @@ bool computeFiniteDifferences(h_struct_T *obj,
 #endif
 
 #endif
-/*
- * File trailer for computeFiniteDifferences.h
- *
- * [EOF]
- */
+/* End of code generation (computeFiniteDifferences.h) */

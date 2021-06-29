@@ -2,13 +2,14 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: combsFS.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * combsFS.c
+ *
+ * Code generation for function 'combsFS'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "combsFS.h"
 #include "bc.h"
 #include "colon.h"
@@ -16,85 +17,24 @@
 #include "fsdaC_types.h"
 #include "isequal.h"
 #include "rt_nonfinite.h"
+#include "rt_nonfinite.h"
 #include <math.h>
-#include <string.h>
 
 /* Function Definitions */
-/*
- * combsFS is an iterative algorithm equivalent to the MATLAB combs.m
- *
- *  It generates m-combinations without repetition taken in lexicographic
- *  order from the vector v.
- *
- *  REMARK: the MATLAB function combs.m uses recursive calls and it is
- *  therefore very inefficient. Our iterative counterpart also makes better
- *  use of memory, first because it works iteratively, and then because we
- *  force computations in the lowest possible precision. This is not a
- *  limitation, because the algotithm first builds the matrix P of all
- *  m-combinations starting from the first n natural numbers, for which
- *  double precision is not at all needed. Then, if the input vector b is
- *  different from vector 1:v, then the desired P is simply obtained as P =
- *  v(P). Note also that we build the matrix P by going over colums rather
- *  than over lines. This is faster, as MATLAB indexes the elements of a
- *  matrix by column first.
- *
- * <a href="matlab: docsearchFS('combsFS')">Link to the help function</a>
- *
- *   Required input arguments:
- *
- *     v:         A vector with n elements. It contains the response variable.
- *                It can be either a row or a column vector.
- *                Data Types - single|double
- *
- *     m:         Scalar. It specifies the size of the combinations.
- *                Data Types - single|double
- *
- *  Optional input arguments:
- *
- *  Output:
- *
- *      P:        m-combinations without repetition taken in lexicographic
- *                order from the vector v. Matrix containing the
- *                m-combinations in the rows.
- *                Data Types - single|double
- *
- *  See also: nchoosek
- *
- *  References:
- *
- *     Knuth, D. E. (1997). "The Art of Computer Programming", Volume 1:
- *     Fundamental Algorithms, Third ed. Addison-Wesley. [pp. 52--74].
- *
- *  Copyright 2008-2021.
- *  Written by FSDA team
- *
- * <a href="matlab: docsearchFS('combsFS')">Link to the help function</a>
- *
- *
- * $LastChangedDate::                      $: Date of the last commit
- *
- *
- *  Examples:
- *
- * Arguments    : emxArray_real_T *v
- *                double m
- *                emxArray_real_T *P
- * Return Type  : void
- */
 void combsFS(emxArray_real_T *v, double m, emxArray_real_T *P)
 {
   emxArray_real_T *b_P;
   emxArray_real_T *b_v;
   emxArray_real_T *c_v;
+  double b_j;
   double bcn;
+  double c_i;
   double d;
   double fromRow;
   double s1;
   double s2;
   int b_i;
-  unsigned int b_j;
   int b_loop_ub;
-  int c_i;
   int c_loop_ub;
   int d_i;
   int i;
@@ -109,6 +49,61 @@ void combsFS(emxArray_real_T *v, double m, emxArray_real_T *P)
   int loop_ub;
   int n;
   emxInit_real_T(&b_v, 2);
+  /* combsFS is an iterative algorithm equivalent to the MATLAB combs.m */
+  /*  */
+  /*  It generates m-combinations without repetition taken in lexicographic */
+  /*  order from the vector v. */
+  /*  */
+  /*  REMARK: the MATLAB function combs.m uses recursive calls and it is */
+  /*  therefore very inefficient. Our iterative counterpart also makes better */
+  /*  use of memory, first because it works iteratively, and then because we */
+  /*  force computations in the lowest possible precision. This is not a */
+  /*  limitation, because the algotithm first builds the matrix P of all */
+  /*  m-combinations starting from the first n natural numbers, for which */
+  /*  double precision is not at all needed. Then, if the input vector b is */
+  /*  different from vector 1:v, then the desired P is simply obtained as P = */
+  /*  v(P). Note also that we build the matrix P by going over colums rather */
+  /*  than over lines. This is faster, as MATLAB indexes the elements of a */
+  /*  matrix by column first. */
+  /*  */
+  /* <a href="matlab: docsearchFS('combsFS')">Link to the help function</a> */
+  /*  */
+  /*   Required input arguments: */
+  /*  */
+  /*     v:         A vector with n elements. It contains the response variable.
+   */
+  /*                It can be either a row or a column vector. */
+  /*                Data Types - single|double */
+  /*  */
+  /*     m:         Scalar. It specifies the size of the combinations. */
+  /*                Data Types - single|double */
+  /*  */
+  /*  Optional input arguments: */
+  /*  */
+  /*  Output: */
+  /*  */
+  /*      P:        m-combinations without repetition taken in lexicographic */
+  /*                order from the vector v. Matrix containing the */
+  /*                m-combinations in the rows. */
+  /*                Data Types - single|double */
+  /*  */
+  /*  See also: nchoosek */
+  /*  */
+  /*  References: */
+  /*  */
+  /*     Knuth, D. E. (1997). "The Art of Computer Programming", Volume 1: */
+  /*     Fundamental Algorithms, Third ed. Addison-Wesley. [pp. 52--74]. */
+  /*  */
+  /*  Copyright 2008-2021. */
+  /*  Written by FSDA team */
+  /*  */
+  /* <a href="matlab: docsearchFS('combsFS')">Link to the help function</a> */
+  /*  */
+  /*  */
+  /* $LastChangedDate::                      $: Date of the last commit */
+  /*  */
+  /*  */
+  /*  Examples: */
   /* { */
   /*     %% combsFS used to generate all possible combinations of size 3 of
    * elements 5, 8, 9, 10, 11. */
@@ -182,15 +177,21 @@ void combsFS(emxArray_real_T *v, double m, emxArray_real_T *P)
       /*  do once here n+1 (needed in the internal loop) */
       bcn = ((double)v->size[1] + 1.0) - m;
       /*  set the first n+1-m rows of the last column */
-      if (v->size[1] < (int)m) {
-        b_v->size[0] = 1;
-        b_v->size[1] = 0;
-      } else if (m == m) {
+      if (rtIsNaN(m)) {
         i = b_v->size[0] * b_v->size[1];
         b_v->size[0] = 1;
-        b_v->size[1] = (int)floor((double)v->size[1] - m) + 1;
+        b_v->size[1] = 1;
         emxEnsureCapacity_real_T(b_v, i);
-        loop_ub = (int)floor((double)v->size[1] - m);
+        b_v->data[0] = rtNaN;
+      } else if (v->size[1] < m) {
+        b_v->size[0] = 1;
+        b_v->size[1] = 0;
+      } else if (floor(m) == m) {
+        i = b_v->size[0] * b_v->size[1];
+        b_v->size[0] = 1;
+        b_v->size[1] = (int)((double)v->size[1] - m) + 1;
+        emxEnsureCapacity_real_T(b_v, i);
+        loop_ub = (int)((double)v->size[1] - m);
         for (i = 0; i <= loop_ub; i++) {
           b_v->data[i] = m + (double)i;
         }
@@ -204,7 +205,7 @@ void combsFS(emxArray_real_T *v, double m, emxArray_real_T *P)
       i = (int)(((-1.0 - (m - 1.0)) + 1.0) / -1.0);
       emxInit_real_T(&b_P, 2);
       for (b_i = 0; b_i < i; b_i++) {
-        c_i = (int)m - b_i;
+        c_i = (m - 1.0) + -(double)b_i;
         /*  external loop over colums */
         s1 = bcn;
         s2 = bcn;
@@ -215,27 +216,27 @@ void combsFS(emxArray_real_T *v, double m, emxArray_real_T *P)
           loop_ub = (int)bcn;
         }
         for (i1 = 0; i1 < loop_ub; i1++) {
-          P->data[i1 + P->size[0] * (c_i - 2)] = c_i - 1;
+          P->data[i1 + P->size[0] * ((int)c_i - 1)] = c_i;
         }
-        i1 = ((c_i + n) - (int)m) - c_i;
+        i1 = (int)(((c_i + (double)n) - m) + (1.0 - (c_i + 1.0)));
         if (0 <= i1 - 1) {
-          if (c_i > (int)m) {
+          if (c_i + 1.0 > m) {
             i2 = 0;
             i3 = 0;
             i4 = 1;
           } else {
-            i2 = c_i - 1;
+            i2 = (int)(c_i + 1.0) - 1;
             i3 = (int)m;
-            i4 = c_i;
+            i4 = (int)(c_i + 1.0);
           }
           b_loop_ub = i3 - i2;
-          d_i = c_i;
+          d_i = (int)c_i;
         }
         for (j = 0; j < i1; j++) {
-          b_j = (unsigned int)c_i + j;
+          b_j = (c_i + 1.0) + (double)j;
           /*  internal loop */
-          s1 = s1 * (((double)((unsigned int)n + c_i) - (double)b_j) - m) /
-               (((double)n + 1.0) - (double)b_j);
+          s1 = s1 * (((((double)n + 1.0) + c_i) - b_j) - m) /
+               (((double)n + 1.0) - b_j);
           fromRow = bcn + 1.0;
           bcn = ((bcn + 1.0) + s1) - 1.0;
           d = (s2 - s1) + 1.0;
@@ -279,7 +280,7 @@ void combsFS(emxArray_real_T *v, double m, emxArray_real_T *P)
           }
           loop_ub = i6 - i5;
           for (i6 = 0; i6 < loop_ub; i6++) {
-            P->data[(i5 + i6) + P->size[0] * (d_i - 2)] = b_j;
+            P->data[(i5 + i6) + P->size[0] * (d_i - 1)] = b_j;
           }
         }
       }
@@ -314,8 +315,4 @@ void combsFS(emxArray_real_T *v, double m, emxArray_real_T *P)
   emxFree_real_T(&b_v);
 }
 
-/*
- * File trailer for combsFS.c
- *
- * [EOF]
- */
+/* End of code generation (combsFS.c) */

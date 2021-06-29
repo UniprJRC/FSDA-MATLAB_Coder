@@ -2,25 +2,21 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: str2double.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * str2double.c
+ *
+ * Code generation for function 'str2double'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "str2double.h"
 #include "fsdaC_data.h"
 #include "rt_nonfinite.h"
 #include "str2double1.h"
 #include <stdio.h>
-#include <string.h>
 
 /* Function Definitions */
-/*
- * Arguments    : const char s[2]
- * Return Type  : creal_T
- */
 creal_T b_str2double(const char s[2])
 {
   creal_T x;
@@ -191,10 +187,6 @@ creal_T b_str2double(const char s[2])
   return x;
 }
 
-/*
- * Arguments    : char s
- * Return Type  : creal_T
- */
 creal_T str2double(char s)
 {
   creal_T x;
@@ -332,8 +324,4 @@ creal_T str2double(char s)
   return x;
 }
 
-/*
- * File trailer for str2double.c
- *
- * [EOF]
- */
+/* End of code generation (str2double.c) */

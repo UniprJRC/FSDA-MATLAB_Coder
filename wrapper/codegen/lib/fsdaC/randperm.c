@@ -2,13 +2,14 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: randperm.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * randperm.c
+ *
+ * Code generation for function 'randperm'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "randperm.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
@@ -17,15 +18,8 @@
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 #include <math.h>
-#include <string.h>
 
 /* Function Definitions */
-/*
- * Arguments    : double n
- *                double k
- *                emxArray_real_T *p
- * Return Type  : void
- */
 void b_randperm(double n, double k, emxArray_real_T *p)
 {
   emxArray_real_T *hashTbl;
@@ -148,11 +142,6 @@ void b_randperm(double n, double k, emxArray_real_T *p)
   }
 }
 
-/*
- * Arguments    : double n
- *                emxArray_real_T *p
- * Return Type  : void
- */
 void randperm(double n, emxArray_real_T *p)
 {
   emxArray_int32_T *idx;
@@ -258,8 +247,4 @@ void randperm(double n, emxArray_real_T *p)
   emxFree_int32_T(&idx);
 }
 
-/*
- * File trailer for randperm.c
- *
- * [EOF]
- */
+/* End of code generation (randperm.c) */

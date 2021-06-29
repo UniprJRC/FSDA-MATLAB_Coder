@@ -2,13 +2,14 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: chkinputM.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * chkinputM.c
+ *
+ * Code generation for function 'chkinputM'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "chkinputM.h"
 #include "find.h"
 #include "fsdaC_emxutil.h"
@@ -20,66 +21,8 @@
 #include "rank.h"
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
-#include <string.h>
 
 /* Function Definitions */
-/*
- * chkinputM makes some input parameters and user options checking in
- * multivariate analysis
- *
- *  Required input arguments:
- *
- *  X :          Input data. Matrix.
- *                n x v data matrix; n observations and v variables. Rows of
- *                X represent observations, and columns represent variables.
- *                Missing values (NaN's) and infinite values (Inf's) are
- *                allowed, since observations (rows) with missing or infinite
- *                values will automatically be excluded from the
- *                computations.
- *                 Data Types - single|double
- *  nnargin:      nargin. Scalar. The number of input arguments specified for
- * the caller function. vvarargin:    nvarargin. Scalar. The variable length
- * input argument list specified for the caller function.
- *
- *
- *   Optional input arguments:
- *
- *  Output:
- *
- *  X:            Data matrix without missing and infs. Matrix.
- *                The new matrix of variables, with missing or
- *                infinite values excluded.
- *  n:            Number of rows of X (observations). Scalar.  Number of
- *                rows after listwise exclusion.
- *  p:            Number of columns of X (variables). Scalar.
- *                Number of variable in the input data matrix.
- *
- *  See also
- *
- *  Copyright 2008-2021.
- *  Written by FSDA team
- *
- *
- *
- * $LastChangedDate::                      $: Date of the last commit
- *
- *  Example:
- * {
- *     %% example_producing_error
- *     %To examplify the behaviour of chkinputM, we call function FSM with a
- *     %X with more columns then rows.
- *     n=3;
- *     p=200;
- *     state1=123498;
- *     randn('state', state1);
- *     X=randn(n,p);
- *     [out]=FSM(X);
- * }
- *  Beginning of code
- *
- * Arguments    : emxArray_real_T *X
- * Return Type  : void
- */
 void b_chkinputM(emxArray_real_T *X)
 {
   emxArray_boolean_T *b_constcols;
@@ -98,6 +41,66 @@ void b_chkinputM(emxArray_real_T *X)
   int k;
   int mc;
   emxInit_real_T(&y, 1);
+  /* chkinputM makes some input parameters and user options checking in
+   * multivariate analysis */
+  /*  */
+  /*  Required input arguments: */
+  /*  */
+  /*  X :          Input data. Matrix. */
+  /*                n x v data matrix; n observations and v variables. Rows of
+   */
+  /*                X represent observations, and columns represent variables.
+   */
+  /*                Missing values (NaN's) and infinite values (Inf's) are */
+  /*                allowed, since observations (rows) with missing or infinite
+   */
+  /*                values will automatically be excluded from the */
+  /*                computations. */
+  /*                 Data Types - single|double */
+  /*  nnargin:      nargin. Scalar. The number of input arguments specified for
+   * the caller */
+  /*                function. */
+  /*  vvarargin:    nvarargin. Scalar. The variable length input argument list
+   */
+  /*                specified for the */
+  /*                caller function. */
+  /*  */
+  /*  */
+  /*   Optional input arguments: */
+  /*  */
+  /*  Output: */
+  /*  */
+  /*  X:            Data matrix without missing and infs. Matrix. */
+  /*                The new matrix of variables, with missing or */
+  /*                infinite values excluded. */
+  /*  n:            Number of rows of X (observations). Scalar.  Number of */
+  /*                rows after listwise exclusion. */
+  /*  p:            Number of columns of X (variables). Scalar. */
+  /*                Number of variable in the input data matrix. */
+  /*  */
+  /*  See also */
+  /*  */
+  /*  Copyright 2008-2021. */
+  /*  Written by FSDA team */
+  /*  */
+  /*  */
+  /*  */
+  /* $LastChangedDate::                      $: Date of the last commit */
+  /*  */
+  /*  Example: */
+  /* { */
+  /*     %% example_producing_error */
+  /*     %To examplify the behaviour of chkinputM, we call function FSM with a
+   */
+  /*     %X with more columns then rows. */
+  /*     n=3; */
+  /*     p=200; */
+  /*     state1=123498; */
+  /*     randn('state', state1); */
+  /*     X=randn(n,p); */
+  /*     [out]=FSM(X); */
+  /* } */
+  /*  Beginning of code */
   /*  chkchk is the position of the option nocheck in vector chklist */
   /*  chkchk = strmatch('nocheck',chklist,'exact'); */
   /*  If nocheck=1, then skip checks on y and X */
@@ -242,64 +245,6 @@ void b_chkinputM(emxArray_real_T *X)
   local_rank(X);
 }
 
-/*
- * chkinputM makes some input parameters and user options checking in
- * multivariate analysis
- *
- *  Required input arguments:
- *
- *  X :          Input data. Matrix.
- *                n x v data matrix; n observations and v variables. Rows of
- *                X represent observations, and columns represent variables.
- *                Missing values (NaN's) and infinite values (Inf's) are
- *                allowed, since observations (rows) with missing or infinite
- *                values will automatically be excluded from the
- *                computations.
- *                 Data Types - single|double
- *  nnargin:      nargin. Scalar. The number of input arguments specified for
- * the caller function. vvarargin:    nvarargin. Scalar. The variable length
- * input argument list specified for the caller function.
- *
- *
- *   Optional input arguments:
- *
- *  Output:
- *
- *  X:            Data matrix without missing and infs. Matrix.
- *                The new matrix of variables, with missing or
- *                infinite values excluded.
- *  n:            Number of rows of X (observations). Scalar.  Number of
- *                rows after listwise exclusion.
- *  p:            Number of columns of X (variables). Scalar.
- *                Number of variable in the input data matrix.
- *
- *  See also
- *
- *  Copyright 2008-2021.
- *  Written by FSDA team
- *
- *
- *
- * $LastChangedDate::                      $: Date of the last commit
- *
- *  Example:
- * {
- *     %% example_producing_error
- *     %To examplify the behaviour of chkinputM, we call function FSM with a
- *     %X with more columns then rows.
- *     n=3;
- *     p=200;
- *     state1=123498;
- *     randn('state', state1);
- *     X=randn(n,p);
- *     [out]=FSM(X);
- * }
- *  Beginning of code
- *
- * Arguments    : emxArray_real_T *X
- *                bool vvarargin_f12
- * Return Type  : void
- */
 void chkinputM(emxArray_real_T *X, bool vvarargin_f12)
 {
   emxArray_boolean_T *b_constcols;
@@ -317,6 +262,66 @@ void chkinputM(emxArray_real_T *X, bool vvarargin_f12)
   int inner;
   int k;
   int mc;
+  /* chkinputM makes some input parameters and user options checking in
+   * multivariate analysis */
+  /*  */
+  /*  Required input arguments: */
+  /*  */
+  /*  X :          Input data. Matrix. */
+  /*                n x v data matrix; n observations and v variables. Rows of
+   */
+  /*                X represent observations, and columns represent variables.
+   */
+  /*                Missing values (NaN's) and infinite values (Inf's) are */
+  /*                allowed, since observations (rows) with missing or infinite
+   */
+  /*                values will automatically be excluded from the */
+  /*                computations. */
+  /*                 Data Types - single|double */
+  /*  nnargin:      nargin. Scalar. The number of input arguments specified for
+   * the caller */
+  /*                function. */
+  /*  vvarargin:    nvarargin. Scalar. The variable length input argument list
+   */
+  /*                specified for the */
+  /*                caller function. */
+  /*  */
+  /*  */
+  /*   Optional input arguments: */
+  /*  */
+  /*  Output: */
+  /*  */
+  /*  X:            Data matrix without missing and infs. Matrix. */
+  /*                The new matrix of variables, with missing or */
+  /*                infinite values excluded. */
+  /*  n:            Number of rows of X (observations). Scalar.  Number of */
+  /*                rows after listwise exclusion. */
+  /*  p:            Number of columns of X (variables). Scalar. */
+  /*                Number of variable in the input data matrix. */
+  /*  */
+  /*  See also */
+  /*  */
+  /*  Copyright 2008-2021. */
+  /*  Written by FSDA team */
+  /*  */
+  /*  */
+  /*  */
+  /* $LastChangedDate::                      $: Date of the last commit */
+  /*  */
+  /*  Example: */
+  /* { */
+  /*     %% example_producing_error */
+  /*     %To examplify the behaviour of chkinputM, we call function FSM with a
+   */
+  /*     %X with more columns then rows. */
+  /*     n=3; */
+  /*     p=200; */
+  /*     state1=123498; */
+  /*     randn('state', state1); */
+  /*     X=randn(n,p); */
+  /*     [out]=FSM(X); */
+  /* } */
+  /*  Beginning of code */
   /*  chkchk is the position of the option nocheck in vector chklist */
   /*  chkchk = strmatch('nocheck',chklist,'exact'); */
   /*  If nocheck=1, then skip checks on y and X */
@@ -465,8 +470,4 @@ void chkinputM(emxArray_real_T *X, bool vvarargin_f12)
   }
 }
 
-/*
- * File trailer for chkinputM.c
- *
- * [EOF]
- */
+/* End of code generation (chkinputM.c) */

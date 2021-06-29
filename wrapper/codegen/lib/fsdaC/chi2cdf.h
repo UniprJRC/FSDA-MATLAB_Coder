@@ -2,16 +2,17 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: chi2cdf.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * chi2cdf.h
+ *
+ * Code generation for function 'chi2cdf'
+ *
  */
 
 #ifndef CHI2CDF_H
 #define CHI2CDF_H
 
-/* Include Files */
+/* Include files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -29,8 +30,4 @@ void chi2cdf(const emxArray_real_T *x, double v, emxArray_real_T *p);
 #endif
 
 #endif
-/*
- * File trailer for chi2cdf.h
- *
- * [EOF]
- */
+/* End of code generation (chi2cdf.h) */

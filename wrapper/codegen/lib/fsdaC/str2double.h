@@ -2,16 +2,17 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: str2double.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * str2double.h
+ *
+ * Code generation for function 'str2double'
+ *
  */
 
 #ifndef STR2DOUBLE_H
 #define STR2DOUBLE_H
 
-/* Include Files */
+/* Include files */
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -30,8 +31,4 @@ creal_T str2double(char s);
 #endif
 
 #endif
-/*
- * File trailer for str2double.h
- *
- * [EOF]
- */
+/* End of code generation (str2double.h) */

@@ -2,16 +2,17 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: eml_betainc.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * eml_betainc.h
+ *
+ * Code generation for function 'eml_betainc'
+ *
  */
 
 #ifndef EML_BETAINC_H
 #define EML_BETAINC_H
 
-/* Include Files */
+/* Include files */
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -30,8 +31,4 @@ double eml_betainc(double x, double a, double b, double lbeta, bool upper);
 #endif
 
 #endif
-/*
- * File trailer for eml_betainc.h
- *
- * [EOF]
- */
+/* End of code generation (eml_betainc.h) */

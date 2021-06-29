@@ -2,28 +2,19 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: xaxpy.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * xaxpy.c
+ *
+ * Code generation for function 'xaxpy'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "xaxpy.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
-#include <string.h>
 
 /* Function Definitions */
-/*
- * Arguments    : int n
- *                double a
- *                const emxArray_real_T *x
- *                int ix0
- *                emxArray_real_T *y
- *                int iy0
- * Return Type  : void
- */
 void b_xaxpy(int n, double a, const emxArray_real_T *x, int ix0,
              emxArray_real_T *y, int iy0)
 {
@@ -39,14 +30,6 @@ void b_xaxpy(int n, double a, const emxArray_real_T *x, int ix0,
   }
 }
 
-/*
- * Arguments    : int n
- *                double a
- *                int ix0
- *                emxArray_real_T *y
- *                int iy0
- * Return Type  : void
- */
 void xaxpy(int n, double a, int ix0, emxArray_real_T *y, int iy0)
 {
   int i;
@@ -61,8 +44,4 @@ void xaxpy(int n, double a, int ix0, emxArray_real_T *y, int iy0)
   }
 }
 
-/*
- * File trailer for xaxpy.c
- *
- * [EOF]
- */
+/* End of code generation (xaxpy.c) */

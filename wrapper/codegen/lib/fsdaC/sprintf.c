@@ -2,26 +2,22 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: sprintf.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * sprintf.c
+ *
+ * Code generation for function 'sprintf'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "sprintf.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 #include <stddef.h>
 #include <stdio.h>
-#include <string.h>
 
 /* Function Definitions */
-/*
- * Arguments    : double varargin_1
- * Return Type  : void
- */
 void b_sprintf(double varargin_1)
 {
   emxArray_char_T *charStr;
@@ -44,10 +40,6 @@ void b_sprintf(double varargin_1)
   emxFree_char_T(&charStr);
 }
 
-/*
- * Arguments    : double varargin_1
- * Return Type  : void
- */
 void c_sprintf(double varargin_1)
 {
   emxArray_char_T *charStr;
@@ -67,11 +59,6 @@ void c_sprintf(double varargin_1)
   emxFree_char_T(&charStr);
 }
 
-/*
- * Arguments    : double varargin_1
- *                emxArray_char_T *str
- * Return Type  : void
- */
 void d_sprintf(double varargin_1, emxArray_char_T *str)
 {
   int i;
@@ -91,8 +78,4 @@ void d_sprintf(double varargin_1, emxArray_char_T *str)
   emxEnsureCapacity_char_T(str, i);
 }
 
-/*
- * File trailer for sprintf.c
- *
- * [EOF]
- */
+/* End of code generation (sprintf.c) */

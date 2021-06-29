@@ -2,16 +2,17 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: factoryConstruct.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * factoryConstruct.h
+ *
+ * Code generation for function 'factoryConstruct'
+ *
  */
 
 #ifndef FACTORYCONSTRUCT_H
 #define FACTORYCONSTRUCT_H
 
-/* Include Files */
+/* Include files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -46,8 +47,4 @@ void factoryConstruct(captured_var *c_nonlin_workspace_fun_workspac,
 #endif
 
 #endif
-/*
- * File trailer for factoryConstruct.h
- *
- * [EOF]
- */
+/* End of code generation (factoryConstruct.h) */

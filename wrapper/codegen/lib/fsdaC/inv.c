@@ -2,26 +2,21 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: inv.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * inv.c
+ *
+ * Code generation for function 'inv'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "inv.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 #include "xzgetrf.h"
-#include <string.h>
 
 /* Function Definitions */
-/*
- * Arguments    : const emxArray_real_T *x
- *                emxArray_real_T *y
- * Return Type  : void
- */
 void inv(const emxArray_real_T *x, emxArray_real_T *y)
 {
   emxArray_int32_T *ipiv;
@@ -123,8 +118,4 @@ void inv(const emxArray_real_T *x, emxArray_real_T *y)
   }
 }
 
-/*
- * File trailer for inv.c
- *
- * [EOF]
- */
+/* End of code generation (inv.c) */

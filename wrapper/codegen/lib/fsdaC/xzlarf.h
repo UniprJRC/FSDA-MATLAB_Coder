@@ -2,16 +2,17 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: xzlarf.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * xzlarf.h
+ *
+ * Code generation for function 'xzlarf'
+ *
  */
 
 #ifndef XZLARF_H
 #define XZLARF_H
 
-/* Include Files */
+/* Include files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -30,8 +31,4 @@ void xzlarf(int m, int n, int iv0, double tau, emxArray_real_T *C, int ic0,
 #endif
 
 #endif
-/*
- * File trailer for xzlarf.h
- *
- * [EOF]
- */
+/* End of code generation (xzlarf.h) */

@@ -2,16 +2,17 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: sort.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * sort.h
+ *
+ * Code generation for function 'sort'
+ *
  */
 
 #ifndef SORT_H
 #define SORT_H
 
-/* Include Files */
+/* Include files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -30,12 +31,6 @@ void d_sort(emxArray_real_T *x);
 
 void e_sort(emxArray_real_T *x);
 
-void f_sort(emxArray_real_T *x, emxArray_int32_T *idx);
-
-void g_sort(emxArray_creal_T *x);
-
-void h_sort(emxArray_real_T *x);
-
 void sort(emxArray_real_T *x, emxArray_int32_T *idx);
 
 #ifdef __cplusplus
@@ -43,8 +38,4 @@ void sort(emxArray_real_T *x, emxArray_int32_T *idx);
 #endif
 
 #endif
-/*
- * File trailer for sort.h
- *
- * [EOF]
- */
+/* End of code generation (sort.h) */

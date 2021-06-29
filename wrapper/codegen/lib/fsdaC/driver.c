@@ -2,27 +2,21 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: driver.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * driver.c
+ *
+ * Code generation for function 'driver'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "driver.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 #include <math.h>
-#include <string.h>
 
 /* Function Definitions */
-/*
- * Arguments    : const emxArray_real_T *gradf
- *                bool b_hasFiniteBounds
- *                const double *projSteepestDescentInfNorm
- * Return Type  : double
- */
 double computeFirstOrderOpt(const emxArray_real_T *gradf,
                             bool b_hasFiniteBounds,
                             const double *projSteepestDescentInfNorm)
@@ -68,8 +62,4 @@ double computeFirstOrderOpt(const emxArray_real_T *gradf,
   return firstOrderOpt;
 }
 
-/*
- * File trailer for driver.c
- *
- * [EOF]
- */
+/* End of code generation (driver.c) */

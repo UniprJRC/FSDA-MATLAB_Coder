@@ -2,13 +2,16 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: FSMmmd_wrapper.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * FSMmmd_wrapper.c
+ *
+ * Code generation for function 'FSMmmd_wrapper'
+ *
  */
 
-/* Include Files */
+/* Include files */
+#include <R.h>
+
 #include "FSMmmd_wrapper.h"
 #include "bsxfun.h"
 #include "cat.h"
@@ -42,20 +45,6 @@
 #include <string.h>
 
 /* Function Definitions */
-/*
- * Required input arguments
- *
- * Arguments    : const emxArray_real_T *Y
- *                const emxArray_real_T *bsb
- *                const emxArray_real_T *bsbsteps
- *                double init
- *                bool msg
- *                bool nocheck
- *                emxArray_real_T *mmd
- *                emxArray_real_T *Un
- *                emxArray_real_T *BB
- * Return Type  : void
- */
 void FSMmmd_wrapper(const emxArray_real_T *Y, const emxArray_real_T *bsb,
                     const emxArray_real_T *bsbsteps, double init, bool msg,
                     bool nocheck, emxArray_real_T *mmd, emxArray_real_T *Un,
@@ -134,6 +123,7 @@ void FSMmmd_wrapper(const emxArray_real_T *Y, const emxArray_real_T *bsb,
     fsdaC_initialize();
   }
   emxInit_real_T(&b_bsb, 1);
+  /*  Required input arguments */
   /*  Y: an array of doubles of any dimension */
   /*  bsb: a column vector of doubles of any length */
   /*  bsbsteps: a missing value, a scalar or a column vector of doubles of any
@@ -530,14 +520,14 @@ void FSMmmd_wrapper(const emxArray_real_T *Y, const emxArray_real_T *bsb,
   /*  check init */
   init1 = init;
   if (init < (double)b_Y->size[1] + 1.0) {
-    printf("%s\n",
+    Rprintf("%s\n",
            "Attention : init1 should be larger than v. \nIt is set to v+1.");
     fflush(stdout);
     init1 = (double)b_Y->size[1] + 1.0;
   } else if (init < b_bsb->size[0]) {
     init1 = b_bsb->size[0];
   } else if (init >= b_Y->size[0]) {
-    printf("%s\n",
+    Rprintf("%s\n",
            "Attention : init1 should be smaller than n. \nIt is set to n-1.");
     fflush(stdout);
     init1 = (double)b_Y->size[0] - 1.0;
@@ -2114,8 +2104,4 @@ void FSMmmd_wrapper(const emxArray_real_T *Y, const emxArray_real_T *bsb,
   emxFree_real_T(&b_Y);
 }
 
-/*
- * File trailer for FSMmmd_wrapper.c
- *
- * [EOF]
- */
+/* End of code generation (FSMmmd_wrapper.c) */

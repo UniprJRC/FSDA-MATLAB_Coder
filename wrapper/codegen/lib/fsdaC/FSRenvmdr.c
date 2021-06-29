@@ -2,13 +2,14 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: FSRenvmdr.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * FSRenvmdr.c
+ *
+ * Code generation for function 'FSRenvmdr'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "FSRenvmdr.h"
 #include "colon.h"
 #include "erfcinv.h"
@@ -20,88 +21,17 @@
 #include "tinv.h"
 #include "rt_nonfinite.h"
 #include <math.h>
-#include <string.h>
 
 /* Function Definitions */
-/*
- * FSRenvmdr computes the theoretical envelopes of Minimum Deletion Residual
- * outside subset during the search
- *
- * <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a>
- *
- *   Required input arguments:
- *
- *     n : number of observations. Scalar. Number of observations on which
- *        the envelopes are based.
- *     p : number of explanatory variables (including the intercept if
- *     present). Scalar. Number of expl. variables on which
- *        the envelopes are based.
- *
- *   Optional input arguments:
- *
- *    init:       Search initialization. Scalar.
- *                Scalar which specifies the initial subset size to monitor
- *                minimum deletion residual, if init is not specified it will
- *                be set equal to
- *                    p+1, if the sample size is smaller than 40;
- *                    min(3*p+1,floor(0.5*(n+p+1))), otherwise.
- *                Example - 'init',100 starts monitoring from step m=100
- *                Data Types - double
- *
- *   prob:    quantiles for which envelopes have
- *                to be computed. Vector.
- *                1 x k vector containing quantiles for which envelopes have
- *                to be computed. The default is to produce 1%, 50% and 99%
- *                envelopes.
- *                Example - 'prob',[0.01 0.99]
- *                Data Types - double
- *
- *   Output:
- *
- *   MDRenv:      forward envelopes of mdr. Matrix. Matrix with n-m0+1 rows
- *                and length(prob)+1 columns.
- *                1st col = fwd search index from m0 to n-1;
- *                2nd col = envelope for quantile prob(1);
- *                3rd col = envelope for quantile prob(2)
- *                ...
- *                (k+1) col = envelope for quantile prob(k).
- *
- *
- *  See also: LXS.m, FSReda.m
- *
- *  References:
- *
- *  Atkinson, A.C. and Riani, M. (2006), Distribution theory and
- *  simulations for tests of outliers in regression, "Journal of
- *  Computational and Graphical Statistics", Vol. 15, pp. 460-476.
- *  Riani, M. and Atkinson, A.C. (2007), Fast calibrations of the forward
- *  search for testing multiple outliers in regression, "Advances in Data
- *  Analysis and Classification", Vol. 1, pp. 123-141.
- *
- *
- *  Copyright 2008-2021.
- *  Written by FSDA team
- *
- *
- * <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a>
- *
- * $LastChangedDate::                      $: Date of the last commit
- *
- * Arguments    : double n
- *                double p
- *                double varargin_4
- *                emxArray_real_T *MDRenv
- * Return Type  : void
- */
 void FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
 {
   static const double options_prob[7] = {0.99, 0.999, 0.9999, 0.99999,
                                          0.01, 0.5,   1.0E-5};
   emxArray_real_T *a;
-  emxArray_real_T *b;
-  emxArray_real_T *b_b_tmp;
   emxArray_real_T *b_tmp;
+  emxArray_real_T *b_y;
   emxArray_real_T *m;
+  emxArray_real_T *mm;
   emxArray_real_T *quant;
   emxArray_real_T *r;
   emxArray_real_T *r1;
@@ -119,6 +49,70 @@ void FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   int outsize_idx_1;
   signed char input_sizes_idx_1;
   bool empty_non_axis_sizes;
+  /* FSRenvmdr computes the theoretical envelopes of Minimum Deletion Residual
+   * outside subset during the search */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a> */
+  /*  */
+  /*   Required input arguments: */
+  /*  */
+  /*     n : number of observations. Scalar. Number of observations on which */
+  /*        the envelopes are based. */
+  /*     p : number of explanatory variables (including the intercept if */
+  /*     present). Scalar. Number of expl. variables on which */
+  /*        the envelopes are based. */
+  /*  */
+  /*   Optional input arguments: */
+  /*  */
+  /*    init:       Search initialization. Scalar. */
+  /*                Scalar which specifies the initial subset size to monitor */
+  /*                minimum deletion residual, if init is not specified it will
+   */
+  /*                be set equal to */
+  /*                    p+1, if the sample size is smaller than 40; */
+  /*                    min(3*p+1,floor(0.5*(n+p+1))), otherwise. */
+  /*                Example - 'init',100 starts monitoring from step m=100 */
+  /*                Data Types - double */
+  /*  */
+  /*   prob:    quantiles for which envelopes have */
+  /*                to be computed. Vector. */
+  /*                1 x k vector containing quantiles for which envelopes have
+   */
+  /*                to be computed. The default is to produce 1%, 50% and 99% */
+  /*                envelopes. */
+  /*                Example - 'prob',[0.01 0.99] */
+  /*                Data Types - double */
+  /*  */
+  /*   Output: */
+  /*  */
+  /*   MDRenv:      forward envelopes of mdr. Matrix. Matrix with n-m0+1 rows */
+  /*                and length(prob)+1 columns. */
+  /*                1st col = fwd search index from m0 to n-1; */
+  /*                2nd col = envelope for quantile prob(1); */
+  /*                3rd col = envelope for quantile prob(2) */
+  /*                ... */
+  /*                (k+1) col = envelope for quantile prob(k). */
+  /*  */
+  /*  */
+  /*  See also: LXS.m, FSReda.m */
+  /*  */
+  /*  References: */
+  /*  */
+  /*  Atkinson, A.C. and Riani, M. (2006), Distribution theory and */
+  /*  simulations for tests of outliers in regression, "Journal of */
+  /*  Computational and Graphical Statistics", Vol. 15, pp. 460-476. */
+  /*  Riani, M. and Atkinson, A.C. (2007), Fast calibrations of the forward */
+  /*  search for testing multiple outliers in regression, "Advances in Data */
+  /*  Analysis and Classification", Vol. 1, pp. 123-141. */
+  /*  */
+  /*  */
+  /*  Copyright 2008-2021. */
+  /*  Written by FSDA team */
+  /*  */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a> */
+  /*  */
+  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /* { */
   /*     % FSRenvmdr with all default options. */
@@ -226,37 +220,28 @@ void FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
     m->data[i] = y->data[i];
   }
   emxFree_real_T(&y);
-  emxInit_real_T(&b, 2);
+  emxInit_real_T(&mm, 2);
   /*  mm = fwd search index replicated lp times. */
-  i = b->size[0] * b->size[1];
-  b->size[0] = m->size[0];
-  b->size[1] = 7;
-  emxEnsureCapacity_real_T(b, i);
+  i = mm->size[0] * mm->size[1];
+  mm->size[0] = m->size[0];
+  mm->size[1] = 7;
+  emxEnsureCapacity_real_T(mm, i);
   nrows = m->size[0];
   for (outsize_idx_1 = 0; outsize_idx_1 < 7; outsize_idx_1++) {
     ibtile = outsize_idx_1 * nrows;
     for (k = 0; k < nrows; k++) {
-      b->data[ibtile + k] = m->data[k];
+      mm->data[ibtile + k] = m->data[k];
     }
   }
   emxInit_real_T(&b_tmp, 2);
   /*  finv finds the inverse of the F distribution. */
   i = b_tmp->size[0] * b_tmp->size[1];
-  b_tmp->size[0] = b->size[0];
+  b_tmp->size[0] = mm->size[0];
   b_tmp->size[1] = 7;
   emxEnsureCapacity_real_T(b_tmp, i);
-  nrows = b->size[0] * 7;
+  nrows = mm->size[0] * 7;
   for (i = 0; i < nrows; i++) {
-    b_tmp->data[i] = n - b->data[i];
-  }
-  emxInit_real_T(&b_b_tmp, 2);
-  i = b_b_tmp->size[0] * b_b_tmp->size[1];
-  b_b_tmp->size[0] = b->size[0];
-  b_b_tmp->size[1] = 7;
-  emxEnsureCapacity_real_T(b_b_tmp, i);
-  nrows = b->size[0] * 7;
-  for (i = 0; i < nrows; i++) {
-    b_b_tmp->data[i] = b->data[i] + 1.0;
+    b_tmp->data[i] = n - mm->data[i];
   }
   for (i = 0; i < 7; i++) {
     options_prob_data[i] = options_prob[i];
@@ -277,38 +262,40 @@ void FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   }
   emxInit_real_T(&r1, 2);
   i = r1->size[0] * r1->size[1];
-  r1->size[0] = b_b_tmp->size[0];
+  r1->size[0] = mm->size[0];
   r1->size[1] = 7;
   emxEnsureCapacity_real_T(r1, i);
-  nrows = b_b_tmp->size[0] * 7;
+  nrows = mm->size[0] * 7;
   for (i = 0; i < nrows; i++) {
-    r1->data[i] = 2.0 * b_b_tmp->data[i];
+    r1->data[i] = 2.0 * (mm->data[i] + 1.0);
   }
   emxInit_real_T(&quant, 2);
+  emxInit_real_T(&b_y, 2);
   emxInit_real_T(&r2, 2);
   repmat(tmp_data, tmp_size, m->size[0], r2);
   b_finv(r2, r, r1, quant);
   /*  from the equivalence with Incomplete beta distribution. */
   /*  Minsca = matrix of the scaled MDR envelopes in each step of the search. */
   i = r->size[0] * r->size[1];
-  r->size[0] = b_b_tmp->size[0];
+  r->size[0] = mm->size[0];
   r->size[1] = 7;
   emxEnsureCapacity_real_T(r, i);
-  nrows = b_b_tmp->size[0] * 7;
+  nrows = mm->size[0] * 7;
   emxFree_real_T(&r2);
   for (i = 0; i < nrows; i++) {
-    r->data[i] = 0.5 * (b_b_tmp->data[i] / ((b->data[i] + 1.0) +
-                                            b_tmp->data[i] * quant->data[i]) +
-                        1.0);
+    r->data[i] =
+        0.5 * ((mm->data[i] + 1.0) /
+                   ((mm->data[i] + 1.0) + b_tmp->data[i] * quant->data[i]) +
+               1.0);
   }
   emxFree_real_T(&quant);
   i = b_tmp->size[0] * b_tmp->size[1];
-  b_tmp->size[0] = b->size[0];
+  b_tmp->size[0] = mm->size[0];
   b_tmp->size[1] = 7;
   emxEnsureCapacity_real_T(b_tmp, i);
-  nrows = b->size[0] * 7;
+  nrows = mm->size[0] * 7;
   for (i = 0; i < nrows; i++) {
-    b_tmp->data[i] = b->data[i] - p;
+    b_tmp->data[i] = mm->data[i] - p;
   }
   emxInit_real_T(&x, 2);
   b_tinv(r, b_tmp, r1);
@@ -323,23 +310,23 @@ void FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   }
   emxFree_real_T(&r1);
   nrows = x->size[0] * x->size[1];
-  i = b_b_tmp->size[0] * b_b_tmp->size[1];
-  b_b_tmp->size[0] = x->size[0];
-  b_b_tmp->size[1] = x->size[1];
-  emxEnsureCapacity_real_T(b_b_tmp, i);
+  i = b_y->size[0] * b_y->size[1];
+  b_y->size[0] = x->size[0];
+  b_y->size[1] = x->size[1];
+  emxEnsureCapacity_real_T(b_y, i);
   for (k = 0; k < nrows; k++) {
-    b_b_tmp->data[k] = fabs(x->data[k]);
+    b_y->data[k] = fabs(x->data[k]);
   }
   emxFree_real_T(&x);
   /*  Compute variance of the truncated normal distribution. */
   /*  mm/n is the percentage of observations inside subset. */
   i = b_tmp->size[0] * b_tmp->size[1];
-  b_tmp->size[0] = b->size[0];
+  b_tmp->size[0] = mm->size[0];
   b_tmp->size[1] = 7;
   emxEnsureCapacity_real_T(b_tmp, i);
-  nrows = b->size[0] * 7;
+  nrows = mm->size[0] * 7;
   for (i = 0; i < nrows; i++) {
-    b_tmp->data[i] = 0.5 * (b->data[i] / n + 1.0);
+    b_tmp->data[i] = 0.5 * (mm->data[i] / n + 1.0);
   }
   emxInit_real_T(&a, 2);
   i = a->size[0] * a->size[1];
@@ -354,7 +341,6 @@ void FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
       a->data[k] = rtNaN;
     }
   }
-  emxFree_real_T(&b_tmp);
   emxInit_real_T(&r3, 2);
   /* corr=1-(2*a.*normpdf(a))./(2*normcdf(a)-1); */
   i = r3->size[0] * r3->size[1];
@@ -365,29 +351,20 @@ void FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   for (k = 0; k < i; k++) {
     r3->data[k] = exp(-0.5 * a->data[k] * a->data[k]) / 2.5066282746310002;
   }
-  nrows = b->size[0] * 7;
-  i = a->size[0] * a->size[1];
-  a->size[0] = b->size[0];
-  a->size[1] = 7;
-  emxEnsureCapacity_real_T(a, i);
+  nrows = mm->size[0] * 7;
   for (i = 0; i < nrows; i++) {
-    a->data[i] = 1.0 - 2.0 * (n / b->data[i]) * a->data[i] * r3->data[i];
+    mm->data[i] = 1.0 - 2.0 * (n / mm->data[i]) * a->data[i] * r3->data[i];
   }
-  emxFree_real_T(&b);
   emxFree_real_T(&r3);
-  nrows = a->size[0] * 7;
-  for (k = 0; k < nrows; k++) {
-    a->data[k] = sqrt(a->data[k]);
-  }
-  nrows = b_b_tmp->size[0] * b_b_tmp->size[1];
-  for (i = 0; i < nrows; i++) {
-    b_b_tmp->data[i] /= a->data[i];
-  }
   emxFree_real_T(&a);
+  nrows = mm->size[0] * 7;
+  for (k = 0; k < nrows; k++) {
+    mm->data[k] = sqrt(mm->data[k]);
+  }
   if (m->size[0] != 0) {
     ibtile = m->size[0];
-  } else if (b_b_tmp->size[0] != 0) {
-    ibtile = b_b_tmp->size[0];
+  } else if (b_y->size[0] != 0) {
+    ibtile = b_y->size[0];
   } else {
     ibtile = 0;
   }
@@ -397,11 +374,21 @@ void FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   } else {
     input_sizes_idx_1 = 0;
   }
-  if (empty_non_axis_sizes || (b_b_tmp->size[0] != 0)) {
+  if (empty_non_axis_sizes || (b_y->size[0] != 0)) {
     outsize_idx_1 = 7;
   } else {
     outsize_idx_1 = 0;
   }
+  i = b_tmp->size[0] * b_tmp->size[1];
+  b_tmp->size[0] = b_y->size[0];
+  b_tmp->size[1] = b_y->size[1];
+  emxEnsureCapacity_real_T(b_tmp, i);
+  nrows = b_y->size[0] * b_y->size[1];
+  for (i = 0; i < nrows; i++) {
+    b_tmp->data[i] = b_y->data[i] / mm->data[i];
+  }
+  emxFree_real_T(&b_y);
+  emxFree_real_T(&mm);
   i = MDRenv->size[0] * MDRenv->size[1];
   MDRenv->size[0] = ibtile;
   MDRenv->size[1] = input_sizes_idx_1 + outsize_idx_1;
@@ -416,93 +403,24 @@ void FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   for (i = 0; i < outsize_idx_1; i++) {
     for (k = 0; k < ibtile; k++) {
       MDRenv->data[k + MDRenv->size[0] * (i + input_sizes_idx_1)] =
-          b_b_tmp->data[k + ibtile * i];
+          b_tmp->data[k + ibtile * i];
     }
   }
-  emxFree_real_T(&b_b_tmp);
+  emxFree_real_T(&b_tmp);
 }
 
-/*
- * FSRenvmdr computes the theoretical envelopes of Minimum Deletion Residual
- * outside subset during the search
- *
- * <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a>
- *
- *   Required input arguments:
- *
- *     n : number of observations. Scalar. Number of observations on which
- *        the envelopes are based.
- *     p : number of explanatory variables (including the intercept if
- *     present). Scalar. Number of expl. variables on which
- *        the envelopes are based.
- *
- *   Optional input arguments:
- *
- *    init:       Search initialization. Scalar.
- *                Scalar which specifies the initial subset size to monitor
- *                minimum deletion residual, if init is not specified it will
- *                be set equal to
- *                    p+1, if the sample size is smaller than 40;
- *                    min(3*p+1,floor(0.5*(n+p+1))), otherwise.
- *                Example - 'init',100 starts monitoring from step m=100
- *                Data Types - double
- *
- *   prob:    quantiles for which envelopes have
- *                to be computed. Vector.
- *                1 x k vector containing quantiles for which envelopes have
- *                to be computed. The default is to produce 1%, 50% and 99%
- *                envelopes.
- *                Example - 'prob',[0.01 0.99]
- *                Data Types - double
- *
- *   Output:
- *
- *   MDRenv:      forward envelopes of mdr. Matrix. Matrix with n-m0+1 rows
- *                and length(prob)+1 columns.
- *                1st col = fwd search index from m0 to n-1;
- *                2nd col = envelope for quantile prob(1);
- *                3rd col = envelope for quantile prob(2)
- *                ...
- *                (k+1) col = envelope for quantile prob(k).
- *
- *
- *  See also: LXS.m, FSReda.m
- *
- *  References:
- *
- *  Atkinson, A.C. and Riani, M. (2006), Distribution theory and
- *  simulations for tests of outliers in regression, "Journal of
- *  Computational and Graphical Statistics", Vol. 15, pp. 460-476.
- *  Riani, M. and Atkinson, A.C. (2007), Fast calibrations of the forward
- *  search for testing multiple outliers in regression, "Advances in Data
- *  Analysis and Classification", Vol. 1, pp. 123-141.
- *
- *
- *  Copyright 2008-2021.
- *  Written by FSDA team
- *
- *
- * <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a>
- *
- * $LastChangedDate::                      $: Date of the last commit
- *
- * Arguments    : double n
- *                double p
- *                double varargin_4
- *                emxArray_real_T *MDRenv
- * Return Type  : void
- */
 void b_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
 {
   emxArray_real_T *b;
   emxArray_real_T *b_b;
-  emxArray_real_T *b_b_tmp;
   emxArray_real_T *b_p;
   emxArray_real_T *b_tmp;
+  emxArray_real_T *b_y;
   emxArray_real_T *c_b;
   emxArray_real_T *m;
   emxArray_real_T *quant;
   emxArray_real_T *r;
+  emxArray_real_T *x;
   emxArray_real_T *y;
   int i;
   int i1;
@@ -511,6 +429,70 @@ void b_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   int outsize_idx_1;
   signed char input_sizes_idx_1;
   bool empty_non_axis_sizes;
+  /* FSRenvmdr computes the theoretical envelopes of Minimum Deletion Residual
+   * outside subset during the search */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a> */
+  /*  */
+  /*   Required input arguments: */
+  /*  */
+  /*     n : number of observations. Scalar. Number of observations on which */
+  /*        the envelopes are based. */
+  /*     p : number of explanatory variables (including the intercept if */
+  /*     present). Scalar. Number of expl. variables on which */
+  /*        the envelopes are based. */
+  /*  */
+  /*   Optional input arguments: */
+  /*  */
+  /*    init:       Search initialization. Scalar. */
+  /*                Scalar which specifies the initial subset size to monitor */
+  /*                minimum deletion residual, if init is not specified it will
+   */
+  /*                be set equal to */
+  /*                    p+1, if the sample size is smaller than 40; */
+  /*                    min(3*p+1,floor(0.5*(n+p+1))), otherwise. */
+  /*                Example - 'init',100 starts monitoring from step m=100 */
+  /*                Data Types - double */
+  /*  */
+  /*   prob:    quantiles for which envelopes have */
+  /*                to be computed. Vector. */
+  /*                1 x k vector containing quantiles for which envelopes have
+   */
+  /*                to be computed. The default is to produce 1%, 50% and 99% */
+  /*                envelopes. */
+  /*                Example - 'prob',[0.01 0.99] */
+  /*                Data Types - double */
+  /*  */
+  /*   Output: */
+  /*  */
+  /*   MDRenv:      forward envelopes of mdr. Matrix. Matrix with n-m0+1 rows */
+  /*                and length(prob)+1 columns. */
+  /*                1st col = fwd search index from m0 to n-1; */
+  /*                2nd col = envelope for quantile prob(1); */
+  /*                3rd col = envelope for quantile prob(2) */
+  /*                ... */
+  /*                (k+1) col = envelope for quantile prob(k). */
+  /*  */
+  /*  */
+  /*  See also: LXS.m, FSReda.m */
+  /*  */
+  /*  References: */
+  /*  */
+  /*  Atkinson, A.C. and Riani, M. (2006), Distribution theory and */
+  /*  simulations for tests of outliers in regression, "Journal of */
+  /*  Computational and Graphical Statistics", Vol. 15, pp. 460-476. */
+  /*  Riani, M. and Atkinson, A.C. (2007), Fast calibrations of the forward */
+  /*  search for testing multiple outliers in regression, "Advances in Data */
+  /*  Analysis and Classification", Vol. 1, pp. 123-141. */
+  /*  */
+  /*  */
+  /*  Copyright 2008-2021. */
+  /*  Written by FSDA team */
+  /*  */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a> */
+  /*  */
+  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /* { */
   /*     % FSRenvmdr with all default options. */
@@ -638,15 +620,6 @@ void b_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   for (i = 0; i < nrows; i++) {
     b_tmp->data[i] = n - b->data[i];
   }
-  emxInit_real_T(&b_b_tmp, 2);
-  i = b_b_tmp->size[0] * b_b_tmp->size[1];
-  b_b_tmp->size[0] = b->size[0];
-  b_b_tmp->size[1] = 1;
-  emxEnsureCapacity_real_T(b_b_tmp, i);
-  nrows = b->size[0];
-  for (i = 0; i < nrows; i++) {
-    b_b_tmp->data[i] = b->data[i] + 1.0;
-  }
   emxInit_real_T(&b_b, 2);
   i = b_b->size[0] * b_b->size[1];
   b_b->size[0] = m->size[0];
@@ -667,12 +640,12 @@ void b_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   }
   emxInit_real_T(&c_b, 2);
   i = c_b->size[0] * c_b->size[1];
-  c_b->size[0] = b_b_tmp->size[0];
+  c_b->size[0] = b->size[0];
   c_b->size[1] = 1;
   emxEnsureCapacity_real_T(c_b, i);
-  nrows = b_b_tmp->size[0];
+  nrows = b->size[0];
   for (i = 0; i < nrows; i++) {
-    c_b->data[i] = 2.0 * b_b_tmp->data[i];
+    c_b->data[i] = 2.0 * (b->data[i] + 1.0);
   }
   emxInit_real_T(&quant, 2);
   emxInit_real_T(&b_p, 2);
@@ -682,19 +655,21 @@ void b_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   quant->size[1] = b_p->size[1];
   emxEnsureCapacity_real_T(quant, i);
   nrows = b_p->size[0] * b_p->size[1];
+  emxFree_real_T(&b_b);
   for (i = 0; i < nrows; i++) {
     quant->data[i] = b_p->data[i];
   }
+  emxInit_real_T(&b_y, 2);
   /*  from the equivalence with Incomplete beta distribution. */
   /*  Minsca = matrix of the scaled MDR envelopes in each step of the search. */
   i = r->size[0] * r->size[1];
-  r->size[0] = b_b_tmp->size[0];
+  r->size[0] = b->size[0];
   r->size[1] = 1;
   emxEnsureCapacity_real_T(r, i);
-  nrows = b_b_tmp->size[0];
+  nrows = b->size[0];
   for (i = 0; i < nrows; i++) {
-    r->data[i] = 0.5 * (b_b_tmp->data[i] / ((b->data[i] + 1.0) +
-                                            b_tmp->data[i] * quant->data[i]) +
+    r->data[i] = 0.5 * ((b->data[i] + 1.0) / ((b->data[i] + 1.0) +
+                                              b_tmp->data[i] * quant->data[i]) +
                         1.0);
   }
   emxFree_real_T(&b_tmp);
@@ -707,25 +682,26 @@ void b_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   for (i = 0; i < nrows; i++) {
     c_b->data[i] = b->data[i] - p;
   }
+  emxInit_real_T(&x, 2);
   b_tinv(r, c_b, b_p);
-  i = b_b->size[0] * b_b->size[1];
-  b_b->size[0] = b_p->size[0];
-  b_b->size[1] = b_p->size[1];
-  emxEnsureCapacity_real_T(b_b, i);
+  i = x->size[0] * x->size[1];
+  x->size[0] = b_p->size[0];
+  x->size[1] = b_p->size[1];
+  emxEnsureCapacity_real_T(x, i);
   nrows = b_p->size[0] * b_p->size[1];
   emxFree_real_T(&r);
   for (i = 0; i < nrows; i++) {
-    b_b->data[i] = b_p->data[i];
+    x->data[i] = b_p->data[i];
   }
-  nrows = b_b->size[0] * b_b->size[1];
-  i = b_b_tmp->size[0] * b_b_tmp->size[1];
-  b_b_tmp->size[0] = b_b->size[0];
-  b_b_tmp->size[1] = b_b->size[1];
-  emxEnsureCapacity_real_T(b_b_tmp, i);
+  nrows = x->size[0] * x->size[1];
+  i = b_y->size[0] * b_y->size[1];
+  b_y->size[0] = x->size[0];
+  b_y->size[1] = x->size[1];
+  emxEnsureCapacity_real_T(b_y, i);
   for (outsize_idx_1 = 0; outsize_idx_1 < nrows; outsize_idx_1++) {
-    b_b_tmp->data[outsize_idx_1] = fabs(b_b->data[outsize_idx_1]);
+    b_y->data[outsize_idx_1] = fabs(x->data[outsize_idx_1]);
   }
-  emxFree_real_T(&b_b);
+  emxFree_real_T(&x);
   /*  Compute variance of the truncated normal distribution. */
   /*  mm/n is the percentage of observations inside subset. */
   i = b_p->size[0] * b_p->size[1];
@@ -762,28 +738,18 @@ void b_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
         2.5066282746310002;
   }
   nrows = b->size[0];
-  i = c_b->size[0] * c_b->size[1];
-  c_b->size[0] = b->size[0];
-  c_b->size[1] = 1;
-  emxEnsureCapacity_real_T(c_b, i);
   for (i = 0; i < nrows; i++) {
-    c_b->data[i] = 1.0 - 2.0 * (n / b->data[i]) * c_b->data[i] * b_p->data[i];
+    b->data[i] = 1.0 - 2.0 * (n / b->data[i]) * c_b->data[i] * b_p->data[i];
   }
   emxFree_real_T(&b_p);
-  emxFree_real_T(&b);
-  nrows = c_b->size[0];
+  nrows = b->size[0];
   for (outsize_idx_1 = 0; outsize_idx_1 < nrows; outsize_idx_1++) {
-    c_b->data[outsize_idx_1] = sqrt(c_b->data[outsize_idx_1]);
+    b->data[outsize_idx_1] = sqrt(b->data[outsize_idx_1]);
   }
-  nrows = b_b_tmp->size[0] * b_b_tmp->size[1];
-  for (i = 0; i < nrows; i++) {
-    b_b_tmp->data[i] /= c_b->data[i];
-  }
-  emxFree_real_T(&c_b);
   if (m->size[0] != 0) {
     itilerow = m->size[0];
-  } else if (b_b_tmp->size[0] != 0) {
-    itilerow = b_b_tmp->size[0];
+  } else if (b_y->size[0] != 0) {
+    itilerow = b_y->size[0];
   } else {
     itilerow = 0;
   }
@@ -793,11 +759,21 @@ void b_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   } else {
     input_sizes_idx_1 = 0;
   }
-  if (empty_non_axis_sizes || (b_b_tmp->size[0] != 0)) {
+  if (empty_non_axis_sizes || (b_y->size[0] != 0)) {
     outsize_idx_1 = 1;
   } else {
     outsize_idx_1 = 0;
   }
+  i = c_b->size[0] * c_b->size[1];
+  c_b->size[0] = b_y->size[0];
+  c_b->size[1] = b_y->size[1];
+  emxEnsureCapacity_real_T(c_b, i);
+  nrows = b_y->size[0] * b_y->size[1];
+  for (i = 0; i < nrows; i++) {
+    c_b->data[i] = b_y->data[i] / b->data[i];
+  }
+  emxFree_real_T(&b_y);
+  emxFree_real_T(&b);
   i = MDRenv->size[0] * MDRenv->size[1];
   MDRenv->size[0] = itilerow;
   MDRenv->size[1] = input_sizes_idx_1 + outsize_idx_1;
@@ -811,90 +787,19 @@ void b_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   emxFree_real_T(&m);
   for (i = 0; i < outsize_idx_1; i++) {
     for (i1 = 0; i1 < itilerow; i1++) {
-      MDRenv->data[i1 + MDRenv->size[0] * input_sizes_idx_1] =
-          b_b_tmp->data[i1];
+      MDRenv->data[i1 + MDRenv->size[0] * input_sizes_idx_1] = c_b->data[i1];
     }
   }
-  emxFree_real_T(&b_b_tmp);
+  emxFree_real_T(&c_b);
 }
 
-/*
- * FSRenvmdr computes the theoretical envelopes of Minimum Deletion Residual
- * outside subset during the search
- *
- * <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a>
- *
- *   Required input arguments:
- *
- *     n : number of observations. Scalar. Number of observations on which
- *        the envelopes are based.
- *     p : number of explanatory variables (including the intercept if
- *     present). Scalar. Number of expl. variables on which
- *        the envelopes are based.
- *
- *   Optional input arguments:
- *
- *    init:       Search initialization. Scalar.
- *                Scalar which specifies the initial subset size to monitor
- *                minimum deletion residual, if init is not specified it will
- *                be set equal to
- *                    p+1, if the sample size is smaller than 40;
- *                    min(3*p+1,floor(0.5*(n+p+1))), otherwise.
- *                Example - 'init',100 starts monitoring from step m=100
- *                Data Types - double
- *
- *   prob:    quantiles for which envelopes have
- *                to be computed. Vector.
- *                1 x k vector containing quantiles for which envelopes have
- *                to be computed. The default is to produce 1%, 50% and 99%
- *                envelopes.
- *                Example - 'prob',[0.01 0.99]
- *                Data Types - double
- *
- *   Output:
- *
- *   MDRenv:      forward envelopes of mdr. Matrix. Matrix with n-m0+1 rows
- *                and length(prob)+1 columns.
- *                1st col = fwd search index from m0 to n-1;
- *                2nd col = envelope for quantile prob(1);
- *                3rd col = envelope for quantile prob(2)
- *                ...
- *                (k+1) col = envelope for quantile prob(k).
- *
- *
- *  See also: LXS.m, FSReda.m
- *
- *  References:
- *
- *  Atkinson, A.C. and Riani, M. (2006), Distribution theory and
- *  simulations for tests of outliers in regression, "Journal of
- *  Computational and Graphical Statistics", Vol. 15, pp. 460-476.
- *  Riani, M. and Atkinson, A.C. (2007), Fast calibrations of the forward
- *  search for testing multiple outliers in regression, "Advances in Data
- *  Analysis and Classification", Vol. 1, pp. 123-141.
- *
- *
- *  Copyright 2008-2021.
- *  Written by FSDA team
- *
- *
- * <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a>
- *
- * $LastChangedDate::                      $: Date of the last commit
- *
- * Arguments    : double n
- *                double p
- *                double varargin_4
- *                emxArray_real_T *MDRenv
- * Return Type  : void
- */
 void c_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
 {
   emxArray_real_T *a;
-  emxArray_real_T *b;
-  emxArray_real_T *b_b_tmp;
   emxArray_real_T *b_tmp;
+  emxArray_real_T *b_y;
   emxArray_real_T *m;
+  emxArray_real_T *mm;
   emxArray_real_T *quant;
   emxArray_real_T *r;
   emxArray_real_T *r1;
@@ -912,6 +817,70 @@ void c_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   int outsize_idx_1;
   signed char input_sizes_idx_1;
   bool empty_non_axis_sizes;
+  /* FSRenvmdr computes the theoretical envelopes of Minimum Deletion Residual
+   * outside subset during the search */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a> */
+  /*  */
+  /*   Required input arguments: */
+  /*  */
+  /*     n : number of observations. Scalar. Number of observations on which */
+  /*        the envelopes are based. */
+  /*     p : number of explanatory variables (including the intercept if */
+  /*     present). Scalar. Number of expl. variables on which */
+  /*        the envelopes are based. */
+  /*  */
+  /*   Optional input arguments: */
+  /*  */
+  /*    init:       Search initialization. Scalar. */
+  /*                Scalar which specifies the initial subset size to monitor */
+  /*                minimum deletion residual, if init is not specified it will
+   */
+  /*                be set equal to */
+  /*                    p+1, if the sample size is smaller than 40; */
+  /*                    min(3*p+1,floor(0.5*(n+p+1))), otherwise. */
+  /*                Example - 'init',100 starts monitoring from step m=100 */
+  /*                Data Types - double */
+  /*  */
+  /*   prob:    quantiles for which envelopes have */
+  /*                to be computed. Vector. */
+  /*                1 x k vector containing quantiles for which envelopes have
+   */
+  /*                to be computed. The default is to produce 1%, 50% and 99% */
+  /*                envelopes. */
+  /*                Example - 'prob',[0.01 0.99] */
+  /*                Data Types - double */
+  /*  */
+  /*   Output: */
+  /*  */
+  /*   MDRenv:      forward envelopes of mdr. Matrix. Matrix with n-m0+1 rows */
+  /*                and length(prob)+1 columns. */
+  /*                1st col = fwd search index from m0 to n-1; */
+  /*                2nd col = envelope for quantile prob(1); */
+  /*                3rd col = envelope for quantile prob(2) */
+  /*                ... */
+  /*                (k+1) col = envelope for quantile prob(k). */
+  /*  */
+  /*  */
+  /*  See also: LXS.m, FSReda.m */
+  /*  */
+  /*  References: */
+  /*  */
+  /*  Atkinson, A.C. and Riani, M. (2006), Distribution theory and */
+  /*  simulations for tests of outliers in regression, "Journal of */
+  /*  Computational and Graphical Statistics", Vol. 15, pp. 460-476. */
+  /*  Riani, M. and Atkinson, A.C. (2007), Fast calibrations of the forward */
+  /*  search for testing multiple outliers in regression, "Advances in Data */
+  /*  Analysis and Classification", Vol. 1, pp. 123-141. */
+  /*  */
+  /*  */
+  /*  Copyright 2008-2021. */
+  /*  Written by FSDA team */
+  /*  */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a> */
+  /*  */
+  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /* { */
   /*     % FSRenvmdr with all default options. */
@@ -1019,37 +988,28 @@ void c_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
     m->data[i] = y->data[i];
   }
   emxFree_real_T(&y);
-  emxInit_real_T(&b, 2);
+  emxInit_real_T(&mm, 2);
   /*  mm = fwd search index replicated lp times. */
-  i = b->size[0] * b->size[1];
-  b->size[0] = m->size[0];
-  b->size[1] = 4;
-  emxEnsureCapacity_real_T(b, i);
+  i = mm->size[0] * mm->size[1];
+  mm->size[0] = m->size[0];
+  mm->size[1] = 4;
+  emxEnsureCapacity_real_T(mm, i);
   nrows = m->size[0];
   for (outsize_idx_1 = 0; outsize_idx_1 < 4; outsize_idx_1++) {
     ibtile = outsize_idx_1 * nrows;
     for (k = 0; k < nrows; k++) {
-      b->data[ibtile + k] = m->data[k];
+      mm->data[ibtile + k] = m->data[k];
     }
   }
   emxInit_real_T(&b_tmp, 2);
   /*  finv finds the inverse of the F distribution. */
   i = b_tmp->size[0] * b_tmp->size[1];
-  b_tmp->size[0] = b->size[0];
+  b_tmp->size[0] = mm->size[0];
   b_tmp->size[1] = 4;
   emxEnsureCapacity_real_T(b_tmp, i);
-  nrows = b->size[0] * 4;
+  nrows = mm->size[0] * 4;
   for (i = 0; i < nrows; i++) {
-    b_tmp->data[i] = n - b->data[i];
-  }
-  emxInit_real_T(&b_b_tmp, 2);
-  i = b_b_tmp->size[0] * b_b_tmp->size[1];
-  b_b_tmp->size[0] = b->size[0];
-  b_b_tmp->size[1] = 4;
-  emxEnsureCapacity_real_T(b_b_tmp, i);
-  nrows = b->size[0] * 4;
-  for (i = 0; i < nrows; i++) {
-    b_b_tmp->data[i] = b->data[i] + 1.0;
+    b_tmp->data[i] = n - mm->data[i];
   }
   options_prob_data[0] = 0.99;
   options_prob_data[1] = 0.999;
@@ -1071,38 +1031,40 @@ void c_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   }
   emxInit_real_T(&r1, 2);
   i = r1->size[0] * r1->size[1];
-  r1->size[0] = b_b_tmp->size[0];
+  r1->size[0] = mm->size[0];
   r1->size[1] = 4;
   emxEnsureCapacity_real_T(r1, i);
-  nrows = b_b_tmp->size[0] * 4;
+  nrows = mm->size[0] * 4;
   for (i = 0; i < nrows; i++) {
-    r1->data[i] = 2.0 * b_b_tmp->data[i];
+    r1->data[i] = 2.0 * (mm->data[i] + 1.0);
   }
   emxInit_real_T(&quant, 2);
+  emxInit_real_T(&b_y, 2);
   emxInit_real_T(&r2, 2);
   repmat(tmp_data, tmp_size, m->size[0], r2);
   b_finv(r2, r, r1, quant);
   /*  from the equivalence with Incomplete beta distribution. */
   /*  Minsca = matrix of the scaled MDR envelopes in each step of the search. */
   i = r->size[0] * r->size[1];
-  r->size[0] = b_b_tmp->size[0];
+  r->size[0] = mm->size[0];
   r->size[1] = 4;
   emxEnsureCapacity_real_T(r, i);
-  nrows = b_b_tmp->size[0] * 4;
+  nrows = mm->size[0] * 4;
   emxFree_real_T(&r2);
   for (i = 0; i < nrows; i++) {
-    r->data[i] = 0.5 * (b_b_tmp->data[i] / ((b->data[i] + 1.0) +
-                                            b_tmp->data[i] * quant->data[i]) +
-                        1.0);
+    r->data[i] =
+        0.5 * ((mm->data[i] + 1.0) /
+                   ((mm->data[i] + 1.0) + b_tmp->data[i] * quant->data[i]) +
+               1.0);
   }
   emxFree_real_T(&quant);
   i = b_tmp->size[0] * b_tmp->size[1];
-  b_tmp->size[0] = b->size[0];
+  b_tmp->size[0] = mm->size[0];
   b_tmp->size[1] = 4;
   emxEnsureCapacity_real_T(b_tmp, i);
-  nrows = b->size[0] * 4;
+  nrows = mm->size[0] * 4;
   for (i = 0; i < nrows; i++) {
-    b_tmp->data[i] = b->data[i] - p;
+    b_tmp->data[i] = mm->data[i] - p;
   }
   emxInit_real_T(&x, 2);
   b_tinv(r, b_tmp, r1);
@@ -1117,23 +1079,23 @@ void c_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   }
   emxFree_real_T(&r1);
   nrows = x->size[0] * x->size[1];
-  i = b_b_tmp->size[0] * b_b_tmp->size[1];
-  b_b_tmp->size[0] = x->size[0];
-  b_b_tmp->size[1] = x->size[1];
-  emxEnsureCapacity_real_T(b_b_tmp, i);
+  i = b_y->size[0] * b_y->size[1];
+  b_y->size[0] = x->size[0];
+  b_y->size[1] = x->size[1];
+  emxEnsureCapacity_real_T(b_y, i);
   for (k = 0; k < nrows; k++) {
-    b_b_tmp->data[k] = fabs(x->data[k]);
+    b_y->data[k] = fabs(x->data[k]);
   }
   emxFree_real_T(&x);
   /*  Compute variance of the truncated normal distribution. */
   /*  mm/n is the percentage of observations inside subset. */
   i = b_tmp->size[0] * b_tmp->size[1];
-  b_tmp->size[0] = b->size[0];
+  b_tmp->size[0] = mm->size[0];
   b_tmp->size[1] = 4;
   emxEnsureCapacity_real_T(b_tmp, i);
-  nrows = b->size[0] * 4;
+  nrows = mm->size[0] * 4;
   for (i = 0; i < nrows; i++) {
-    b_tmp->data[i] = 0.5 * (b->data[i] / n + 1.0);
+    b_tmp->data[i] = 0.5 * (mm->data[i] / n + 1.0);
   }
   emxInit_real_T(&a, 2);
   i = a->size[0] * a->size[1];
@@ -1148,7 +1110,6 @@ void c_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
       a->data[k] = rtNaN;
     }
   }
-  emxFree_real_T(&b_tmp);
   emxInit_real_T(&r3, 2);
   /* corr=1-(2*a.*normpdf(a))./(2*normcdf(a)-1); */
   i = r3->size[0] * r3->size[1];
@@ -1159,29 +1120,20 @@ void c_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   for (k = 0; k < i; k++) {
     r3->data[k] = exp(-0.5 * a->data[k] * a->data[k]) / 2.5066282746310002;
   }
-  nrows = b->size[0] * 4;
-  i = a->size[0] * a->size[1];
-  a->size[0] = b->size[0];
-  a->size[1] = 4;
-  emxEnsureCapacity_real_T(a, i);
+  nrows = mm->size[0] * 4;
   for (i = 0; i < nrows; i++) {
-    a->data[i] = 1.0 - 2.0 * (n / b->data[i]) * a->data[i] * r3->data[i];
+    mm->data[i] = 1.0 - 2.0 * (n / mm->data[i]) * a->data[i] * r3->data[i];
   }
-  emxFree_real_T(&b);
   emxFree_real_T(&r3);
-  nrows = a->size[0] << 2;
-  for (k = 0; k < nrows; k++) {
-    a->data[k] = sqrt(a->data[k]);
-  }
-  nrows = b_b_tmp->size[0] * b_b_tmp->size[1];
-  for (i = 0; i < nrows; i++) {
-    b_b_tmp->data[i] /= a->data[i];
-  }
   emxFree_real_T(&a);
+  nrows = mm->size[0] << 2;
+  for (k = 0; k < nrows; k++) {
+    mm->data[k] = sqrt(mm->data[k]);
+  }
   if (m->size[0] != 0) {
     ibtile = m->size[0];
-  } else if (b_b_tmp->size[0] != 0) {
-    ibtile = b_b_tmp->size[0];
+  } else if (b_y->size[0] != 0) {
+    ibtile = b_y->size[0];
   } else {
     ibtile = 0;
   }
@@ -1191,11 +1143,21 @@ void c_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   } else {
     input_sizes_idx_1 = 0;
   }
-  if (empty_non_axis_sizes || (b_b_tmp->size[0] != 0)) {
+  if (empty_non_axis_sizes || (b_y->size[0] != 0)) {
     outsize_idx_1 = 4;
   } else {
     outsize_idx_1 = 0;
   }
+  i = b_tmp->size[0] * b_tmp->size[1];
+  b_tmp->size[0] = b_y->size[0];
+  b_tmp->size[1] = b_y->size[1];
+  emxEnsureCapacity_real_T(b_tmp, i);
+  nrows = b_y->size[0] * b_y->size[1];
+  for (i = 0; i < nrows; i++) {
+    b_tmp->data[i] = b_y->data[i] / mm->data[i];
+  }
+  emxFree_real_T(&b_y);
+  emxFree_real_T(&mm);
   i = MDRenv->size[0] * MDRenv->size[1];
   MDRenv->size[0] = ibtile;
   MDRenv->size[1] = input_sizes_idx_1 + outsize_idx_1;
@@ -1210,89 +1172,19 @@ void c_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   for (i = 0; i < outsize_idx_1; i++) {
     for (k = 0; k < ibtile; k++) {
       MDRenv->data[k + MDRenv->size[0] * (i + input_sizes_idx_1)] =
-          b_b_tmp->data[k + ibtile * i];
+          b_tmp->data[k + ibtile * i];
     }
   }
-  emxFree_real_T(&b_b_tmp);
+  emxFree_real_T(&b_tmp);
 }
 
-/*
- * FSRenvmdr computes the theoretical envelopes of Minimum Deletion Residual
- * outside subset during the search
- *
- * <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a>
- *
- *   Required input arguments:
- *
- *     n : number of observations. Scalar. Number of observations on which
- *        the envelopes are based.
- *     p : number of explanatory variables (including the intercept if
- *     present). Scalar. Number of expl. variables on which
- *        the envelopes are based.
- *
- *   Optional input arguments:
- *
- *    init:       Search initialization. Scalar.
- *                Scalar which specifies the initial subset size to monitor
- *                minimum deletion residual, if init is not specified it will
- *                be set equal to
- *                    p+1, if the sample size is smaller than 40;
- *                    min(3*p+1,floor(0.5*(n+p+1))), otherwise.
- *                Example - 'init',100 starts monitoring from step m=100
- *                Data Types - double
- *
- *   prob:    quantiles for which envelopes have
- *                to be computed. Vector.
- *                1 x k vector containing quantiles for which envelopes have
- *                to be computed. The default is to produce 1%, 50% and 99%
- *                envelopes.
- *                Example - 'prob',[0.01 0.99]
- *                Data Types - double
- *
- *   Output:
- *
- *   MDRenv:      forward envelopes of mdr. Matrix. Matrix with n-m0+1 rows
- *                and length(prob)+1 columns.
- *                1st col = fwd search index from m0 to n-1;
- *                2nd col = envelope for quantile prob(1);
- *                3rd col = envelope for quantile prob(2)
- *                ...
- *                (k+1) col = envelope for quantile prob(k).
- *
- *
- *  See also: LXS.m, FSReda.m
- *
- *  References:
- *
- *  Atkinson, A.C. and Riani, M. (2006), Distribution theory and
- *  simulations for tests of outliers in regression, "Journal of
- *  Computational and Graphical Statistics", Vol. 15, pp. 460-476.
- *  Riani, M. and Atkinson, A.C. (2007), Fast calibrations of the forward
- *  search for testing multiple outliers in regression, "Advances in Data
- *  Analysis and Classification", Vol. 1, pp. 123-141.
- *
- *
- *  Copyright 2008-2021.
- *  Written by FSDA team
- *
- *
- * <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a>
- *
- * $LastChangedDate::                      $: Date of the last commit
- *
- * Arguments    : double n
- *                double p
- *                double varargin_4
- *                emxArray_real_T *MDRenv
- * Return Type  : void
- */
 void d_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
 {
   emxArray_real_T *a;
-  emxArray_real_T *b;
-  emxArray_real_T *b_b_tmp;
   emxArray_real_T *b_tmp;
+  emxArray_real_T *b_y;
   emxArray_real_T *m;
+  emxArray_real_T *mm;
   emxArray_real_T *quant;
   emxArray_real_T *r;
   emxArray_real_T *r1;
@@ -1310,6 +1202,70 @@ void d_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   int outsize_idx_1;
   signed char input_sizes_idx_1;
   bool empty_non_axis_sizes;
+  /* FSRenvmdr computes the theoretical envelopes of Minimum Deletion Residual
+   * outside subset during the search */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a> */
+  /*  */
+  /*   Required input arguments: */
+  /*  */
+  /*     n : number of observations. Scalar. Number of observations on which */
+  /*        the envelopes are based. */
+  /*     p : number of explanatory variables (including the intercept if */
+  /*     present). Scalar. Number of expl. variables on which */
+  /*        the envelopes are based. */
+  /*  */
+  /*   Optional input arguments: */
+  /*  */
+  /*    init:       Search initialization. Scalar. */
+  /*                Scalar which specifies the initial subset size to monitor */
+  /*                minimum deletion residual, if init is not specified it will
+   */
+  /*                be set equal to */
+  /*                    p+1, if the sample size is smaller than 40; */
+  /*                    min(3*p+1,floor(0.5*(n+p+1))), otherwise. */
+  /*                Example - 'init',100 starts monitoring from step m=100 */
+  /*                Data Types - double */
+  /*  */
+  /*   prob:    quantiles for which envelopes have */
+  /*                to be computed. Vector. */
+  /*                1 x k vector containing quantiles for which envelopes have
+   */
+  /*                to be computed. The default is to produce 1%, 50% and 99% */
+  /*                envelopes. */
+  /*                Example - 'prob',[0.01 0.99] */
+  /*                Data Types - double */
+  /*  */
+  /*   Output: */
+  /*  */
+  /*   MDRenv:      forward envelopes of mdr. Matrix. Matrix with n-m0+1 rows */
+  /*                and length(prob)+1 columns. */
+  /*                1st col = fwd search index from m0 to n-1; */
+  /*                2nd col = envelope for quantile prob(1); */
+  /*                3rd col = envelope for quantile prob(2) */
+  /*                ... */
+  /*                (k+1) col = envelope for quantile prob(k). */
+  /*  */
+  /*  */
+  /*  See also: LXS.m, FSReda.m */
+  /*  */
+  /*  References: */
+  /*  */
+  /*  Atkinson, A.C. and Riani, M. (2006), Distribution theory and */
+  /*  simulations for tests of outliers in regression, "Journal of */
+  /*  Computational and Graphical Statistics", Vol. 15, pp. 460-476. */
+  /*  Riani, M. and Atkinson, A.C. (2007), Fast calibrations of the forward */
+  /*  search for testing multiple outliers in regression, "Advances in Data */
+  /*  Analysis and Classification", Vol. 1, pp. 123-141. */
+  /*  */
+  /*  */
+  /*  Copyright 2008-2021. */
+  /*  Written by FSDA team */
+  /*  */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a> */
+  /*  */
+  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /* { */
   /*     % FSRenvmdr with all default options. */
@@ -1417,37 +1373,28 @@ void d_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
     m->data[i] = y->data[i];
   }
   emxFree_real_T(&y);
-  emxInit_real_T(&b, 2);
+  emxInit_real_T(&mm, 2);
   /*  mm = fwd search index replicated lp times. */
-  i = b->size[0] * b->size[1];
-  b->size[0] = m->size[0];
-  b->size[1] = 4;
-  emxEnsureCapacity_real_T(b, i);
+  i = mm->size[0] * mm->size[1];
+  mm->size[0] = m->size[0];
+  mm->size[1] = 4;
+  emxEnsureCapacity_real_T(mm, i);
   nrows = m->size[0];
   for (outsize_idx_1 = 0; outsize_idx_1 < 4; outsize_idx_1++) {
     ibtile = outsize_idx_1 * nrows;
     for (k = 0; k < nrows; k++) {
-      b->data[ibtile + k] = m->data[k];
+      mm->data[ibtile + k] = m->data[k];
     }
   }
   emxInit_real_T(&b_tmp, 2);
   /*  finv finds the inverse of the F distribution. */
   i = b_tmp->size[0] * b_tmp->size[1];
-  b_tmp->size[0] = b->size[0];
+  b_tmp->size[0] = mm->size[0];
   b_tmp->size[1] = 4;
   emxEnsureCapacity_real_T(b_tmp, i);
-  nrows = b->size[0] * 4;
+  nrows = mm->size[0] * 4;
   for (i = 0; i < nrows; i++) {
-    b_tmp->data[i] = n - b->data[i];
-  }
-  emxInit_real_T(&b_b_tmp, 2);
-  i = b_b_tmp->size[0] * b_b_tmp->size[1];
-  b_b_tmp->size[0] = b->size[0];
-  b_b_tmp->size[1] = 4;
-  emxEnsureCapacity_real_T(b_b_tmp, i);
-  nrows = b->size[0] * 4;
-  for (i = 0; i < nrows; i++) {
-    b_b_tmp->data[i] = b->data[i] + 1.0;
+    b_tmp->data[i] = n - mm->data[i];
   }
   options_prob_data[0] = 0.999999;
   options_prob_data[1] = 0.9999999;
@@ -1469,38 +1416,40 @@ void d_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   }
   emxInit_real_T(&r1, 2);
   i = r1->size[0] * r1->size[1];
-  r1->size[0] = b_b_tmp->size[0];
+  r1->size[0] = mm->size[0];
   r1->size[1] = 4;
   emxEnsureCapacity_real_T(r1, i);
-  nrows = b_b_tmp->size[0] * 4;
+  nrows = mm->size[0] * 4;
   for (i = 0; i < nrows; i++) {
-    r1->data[i] = 2.0 * b_b_tmp->data[i];
+    r1->data[i] = 2.0 * (mm->data[i] + 1.0);
   }
   emxInit_real_T(&quant, 2);
+  emxInit_real_T(&b_y, 2);
   emxInit_real_T(&r2, 2);
   repmat(tmp_data, tmp_size, m->size[0], r2);
   b_finv(r2, r, r1, quant);
   /*  from the equivalence with Incomplete beta distribution. */
   /*  Minsca = matrix of the scaled MDR envelopes in each step of the search. */
   i = r->size[0] * r->size[1];
-  r->size[0] = b_b_tmp->size[0];
+  r->size[0] = mm->size[0];
   r->size[1] = 4;
   emxEnsureCapacity_real_T(r, i);
-  nrows = b_b_tmp->size[0] * 4;
+  nrows = mm->size[0] * 4;
   emxFree_real_T(&r2);
   for (i = 0; i < nrows; i++) {
-    r->data[i] = 0.5 * (b_b_tmp->data[i] / ((b->data[i] + 1.0) +
-                                            b_tmp->data[i] * quant->data[i]) +
-                        1.0);
+    r->data[i] =
+        0.5 * ((mm->data[i] + 1.0) /
+                   ((mm->data[i] + 1.0) + b_tmp->data[i] * quant->data[i]) +
+               1.0);
   }
   emxFree_real_T(&quant);
   i = b_tmp->size[0] * b_tmp->size[1];
-  b_tmp->size[0] = b->size[0];
+  b_tmp->size[0] = mm->size[0];
   b_tmp->size[1] = 4;
   emxEnsureCapacity_real_T(b_tmp, i);
-  nrows = b->size[0] * 4;
+  nrows = mm->size[0] * 4;
   for (i = 0; i < nrows; i++) {
-    b_tmp->data[i] = b->data[i] - p;
+    b_tmp->data[i] = mm->data[i] - p;
   }
   emxInit_real_T(&x, 2);
   b_tinv(r, b_tmp, r1);
@@ -1515,23 +1464,23 @@ void d_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   }
   emxFree_real_T(&r1);
   nrows = x->size[0] * x->size[1];
-  i = b_b_tmp->size[0] * b_b_tmp->size[1];
-  b_b_tmp->size[0] = x->size[0];
-  b_b_tmp->size[1] = x->size[1];
-  emxEnsureCapacity_real_T(b_b_tmp, i);
+  i = b_y->size[0] * b_y->size[1];
+  b_y->size[0] = x->size[0];
+  b_y->size[1] = x->size[1];
+  emxEnsureCapacity_real_T(b_y, i);
   for (k = 0; k < nrows; k++) {
-    b_b_tmp->data[k] = fabs(x->data[k]);
+    b_y->data[k] = fabs(x->data[k]);
   }
   emxFree_real_T(&x);
   /*  Compute variance of the truncated normal distribution. */
   /*  mm/n is the percentage of observations inside subset. */
   i = b_tmp->size[0] * b_tmp->size[1];
-  b_tmp->size[0] = b->size[0];
+  b_tmp->size[0] = mm->size[0];
   b_tmp->size[1] = 4;
   emxEnsureCapacity_real_T(b_tmp, i);
-  nrows = b->size[0] * 4;
+  nrows = mm->size[0] * 4;
   for (i = 0; i < nrows; i++) {
-    b_tmp->data[i] = 0.5 * (b->data[i] / n + 1.0);
+    b_tmp->data[i] = 0.5 * (mm->data[i] / n + 1.0);
   }
   emxInit_real_T(&a, 2);
   i = a->size[0] * a->size[1];
@@ -1546,7 +1495,6 @@ void d_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
       a->data[k] = rtNaN;
     }
   }
-  emxFree_real_T(&b_tmp);
   emxInit_real_T(&r3, 2);
   /* corr=1-(2*a.*normpdf(a))./(2*normcdf(a)-1); */
   i = r3->size[0] * r3->size[1];
@@ -1557,29 +1505,20 @@ void d_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   for (k = 0; k < i; k++) {
     r3->data[k] = exp(-0.5 * a->data[k] * a->data[k]) / 2.5066282746310002;
   }
-  nrows = b->size[0] * 4;
-  i = a->size[0] * a->size[1];
-  a->size[0] = b->size[0];
-  a->size[1] = 4;
-  emxEnsureCapacity_real_T(a, i);
+  nrows = mm->size[0] * 4;
   for (i = 0; i < nrows; i++) {
-    a->data[i] = 1.0 - 2.0 * (n / b->data[i]) * a->data[i] * r3->data[i];
+    mm->data[i] = 1.0 - 2.0 * (n / mm->data[i]) * a->data[i] * r3->data[i];
   }
-  emxFree_real_T(&b);
   emxFree_real_T(&r3);
-  nrows = a->size[0] << 2;
-  for (k = 0; k < nrows; k++) {
-    a->data[k] = sqrt(a->data[k]);
-  }
-  nrows = b_b_tmp->size[0] * b_b_tmp->size[1];
-  for (i = 0; i < nrows; i++) {
-    b_b_tmp->data[i] /= a->data[i];
-  }
   emxFree_real_T(&a);
+  nrows = mm->size[0] << 2;
+  for (k = 0; k < nrows; k++) {
+    mm->data[k] = sqrt(mm->data[k]);
+  }
   if (m->size[0] != 0) {
     ibtile = m->size[0];
-  } else if (b_b_tmp->size[0] != 0) {
-    ibtile = b_b_tmp->size[0];
+  } else if (b_y->size[0] != 0) {
+    ibtile = b_y->size[0];
   } else {
     ibtile = 0;
   }
@@ -1589,11 +1528,21 @@ void d_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   } else {
     input_sizes_idx_1 = 0;
   }
-  if (empty_non_axis_sizes || (b_b_tmp->size[0] != 0)) {
+  if (empty_non_axis_sizes || (b_y->size[0] != 0)) {
     outsize_idx_1 = 4;
   } else {
     outsize_idx_1 = 0;
   }
+  i = b_tmp->size[0] * b_tmp->size[1];
+  b_tmp->size[0] = b_y->size[0];
+  b_tmp->size[1] = b_y->size[1];
+  emxEnsureCapacity_real_T(b_tmp, i);
+  nrows = b_y->size[0] * b_y->size[1];
+  for (i = 0; i < nrows; i++) {
+    b_tmp->data[i] = b_y->data[i] / mm->data[i];
+  }
+  emxFree_real_T(&b_y);
+  emxFree_real_T(&mm);
   i = MDRenv->size[0] * MDRenv->size[1];
   MDRenv->size[0] = ibtile;
   MDRenv->size[1] = input_sizes_idx_1 + outsize_idx_1;
@@ -1608,14 +1557,10 @@ void d_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   for (i = 0; i < outsize_idx_1; i++) {
     for (k = 0; k < ibtile; k++) {
       MDRenv->data[k + MDRenv->size[0] * (i + input_sizes_idx_1)] =
-          b_b_tmp->data[k + ibtile * i];
+          b_tmp->data[k + ibtile * i];
     }
   }
-  emxFree_real_T(&b_b_tmp);
+  emxFree_real_T(&b_tmp);
 }
 
-/*
- * File trailer for FSRenvmdr.c
- *
- * [EOF]
- */
+/* End of code generation (FSRenvmdr.c) */

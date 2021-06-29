@@ -2,20 +2,20 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: eml_setop.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * eml_setop.c
+ *
+ * Code generation for function 'eml_setop'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "eml_setop.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 #include <math.h>
-#include <string.h>
 
 /* Function Declarations */
 static double b_skip_to_last_equal_value(int *k, const emxArray_real_T *x);
@@ -25,11 +25,6 @@ static double c_skip_to_last_equal_value(int *k, const emxArray_real_T *x);
 static double skip_to_last_equal_value(int *k, double x);
 
 /* Function Definitions */
-/*
- * Arguments    : int *k
- *                const emxArray_real_T *x
- * Return Type  : double
- */
 static double b_skip_to_last_equal_value(int *k, const emxArray_real_T *x)
 {
   double absx;
@@ -61,11 +56,6 @@ static double b_skip_to_last_equal_value(int *k, const emxArray_real_T *x)
   return xk;
 }
 
-/*
- * Arguments    : int *k
- *                const emxArray_real_T *x
- * Return Type  : double
- */
 static double c_skip_to_last_equal_value(int *k, const emxArray_real_T *x)
 {
   double absx;
@@ -97,11 +87,6 @@ static double c_skip_to_last_equal_value(int *k, const emxArray_real_T *x)
   return xk;
 }
 
-/*
- * Arguments    : int *k
- *                double x
- * Return Type  : double
- */
 static double skip_to_last_equal_value(int *k, double x)
 {
   double absx;
@@ -131,14 +116,6 @@ static double skip_to_last_equal_value(int *k, double x)
   return xk;
 }
 
-/*
- * Arguments    : const emxArray_real_T *a
- *                const emxArray_real_T *b
- *                emxArray_real_T *c
- *                emxArray_int32_T *ia
- *                int *ib_size
- * Return Type  : void
- */
 void b_do_vectors(const emxArray_real_T *a, const emxArray_real_T *b,
                   emxArray_real_T *c, emxArray_int32_T *ia, int *ib_size)
 {
@@ -237,14 +214,6 @@ void b_do_vectors(const emxArray_real_T *a, const emxArray_real_T *b,
   }
 }
 
-/*
- * Arguments    : const emxArray_real_T *a
- *                const emxArray_real_T *b
- *                emxArray_real_T *c
- *                emxArray_int32_T *ia
- *                emxArray_int32_T *ib
- * Return Type  : void
- */
 void c_do_vectors(const emxArray_real_T *a, const emxArray_real_T *b,
                   emxArray_real_T *c, emxArray_int32_T *ia,
                   emxArray_int32_T *ib)
@@ -351,17 +320,6 @@ void c_do_vectors(const emxArray_real_T *a, const emxArray_real_T *b,
   }
 }
 
-/*
- * Arguments    : double a
- *                const emxArray_real_T *b
- *                double c_data[]
- *                int c_size[2]
- *                int ia_data[]
- *                int *ia_size
- *                int ib_data[]
- *                int *ib_size
- * Return Type  : void
- */
 void d_do_vectors(double a, const emxArray_real_T *b, double c_data[],
                   int c_size[2], int ia_data[], int *ia_size, int ib_data[],
                   int *ib_size)
@@ -444,17 +402,6 @@ void d_do_vectors(double a, const emxArray_real_T *b, double c_data[],
   }
 }
 
-/*
- * Arguments    : double a
- *                const emxArray_real_T *b
- *                double c_data[]
- *                int *c_size
- *                int ia_data[]
- *                int *ia_size
- *                int ib_data[]
- *                int *ib_size
- * Return Type  : void
- */
 void do_vectors(double a, const emxArray_real_T *b, double c_data[],
                 int *c_size, int ia_data[], int *ia_size, int ib_data[],
                 int *ib_size)
@@ -534,14 +481,6 @@ void do_vectors(double a, const emxArray_real_T *b, double c_data[],
   }
 }
 
-/*
- * Arguments    : const emxArray_real_T *a
- *                const emxArray_real_T *b
- *                emxArray_real_T *c
- *                emxArray_int32_T *ia
- *                int *ib_size
- * Return Type  : void
- */
 void e_do_vectors(const emxArray_real_T *a, const emxArray_real_T *b,
                   emxArray_real_T *c, emxArray_int32_T *ia, int *ib_size)
 {
@@ -639,14 +578,6 @@ void e_do_vectors(const emxArray_real_T *a, const emxArray_real_T *b,
   }
 }
 
-/*
- * Arguments    : const emxArray_real_T *a
- *                const emxArray_real32_T *b
- *                emxArray_real_T *c
- *                emxArray_int32_T *ia
- *                int *ib_size
- * Return Type  : void
- */
 void f_do_vectors(const emxArray_real_T *a, const emxArray_real32_T *b,
                   emxArray_real_T *c, emxArray_int32_T *ia, int *ib_size)
 {
@@ -767,14 +698,6 @@ void f_do_vectors(const emxArray_real_T *a, const emxArray_real32_T *b,
   }
 }
 
-/*
- * Arguments    : const emxArray_real_T *a
- *                const emxArray_real_T *b
- *                emxArray_real_T *c
- *                emxArray_int32_T *ia
- *                int *ib_size
- * Return Type  : void
- */
 void g_do_vectors(const emxArray_real_T *a, const emxArray_real_T *b,
                   emxArray_real_T *c, emxArray_int32_T *ia, int *ib_size)
 {
@@ -873,16 +796,6 @@ void g_do_vectors(const emxArray_real_T *a, const emxArray_real_T *b,
   }
 }
 
-/*
- * Arguments    : double a
- *                double c_data[]
- *                int c_size[2]
- *                int ia_data[]
- *                int *ia_size
- *                int ib_data[]
- *                int *ib_size
- * Return Type  : void
- */
 void h_do_vectors(double a, double c_data[], int c_size[2], int ia_data[],
                   int *ia_size, int ib_data[], int *ib_size)
 {
@@ -956,16 +869,6 @@ void h_do_vectors(double a, double c_data[], int c_size[2], int ia_data[],
   c_size[1] = (1 <= nc);
 }
 
-/*
- * Arguments    : double a
- *                double c_data[]
- *                int c_size[2]
- *                int ia_data[]
- *                int *ia_size
- *                int ib_data[]
- *                int *ib_size
- * Return Type  : void
- */
 void i_do_vectors(double a, double c_data[], int c_size[2], int ia_data[],
                   int *ia_size, int ib_data[], int *ib_size)
 {
@@ -1026,8 +929,4 @@ void i_do_vectors(double a, double c_data[], int c_size[2], int ia_data[],
   c_size[1] = (1 <= nc);
 }
 
-/*
- * File trailer for eml_setop.c
- *
- * [EOF]
- */
+/* End of code generation (eml_setop.c) */

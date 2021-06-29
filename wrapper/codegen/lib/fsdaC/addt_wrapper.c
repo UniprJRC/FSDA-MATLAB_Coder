@@ -2,13 +2,14 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: addt_wrapper.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * addt_wrapper.c
+ *
+ * Code generation for function 'addt_wrapper'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "addt_wrapper.h"
 #include "blockedSummation.h"
 #include "find.h"
@@ -29,23 +30,8 @@
 #include "tcdf.h"
 #include "rt_nonfinite.h"
 #include <math.h>
-#include <string.h>
 
 /* Function Definitions */
-/*
- * Example wrapper function for addt. NV pair names are not taken as
- *  inputs. Instead, just the values are taken as inputs.
- *
- * Arguments    : const emxArray_real_T *y
- *                const emxArray_real_T *X
- *                const emxArray_real_T *w
- *                bool intercept
- *                const double la_data[]
- *                const int la_size[2]
- *                bool nocheck
- *                struct_addt_T *out
- * Return Type  : void
- */
 void addt_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                   const emxArray_real_T *w, bool intercept,
                   const double la_data[], const int la_size[2], bool nocheck,
@@ -86,6 +72,8 @@ void addt_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     fsdaC_initialize();
   }
   emxInit_real_T(&A, 2);
+  /*  Example wrapper function for addt. NV pair names are not taken as */
+  /*  inputs. Instead, just the values are taken as inputs. */
   /*  Required input arguments */
   /*  y: a column vector of doubles of any length */
   /*  ARGS{1}{1} = coder.typeof(0,[Inf 1],[1 0]); */
@@ -252,6 +240,22 @@ void addt_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  */
   /*  */
   /*  Beginning of code */
+  k = A->size[0] * A->size[1];
+  A->size[0] = X->size[0];
+  A->size[1] = X->size[1];
+  emxEnsureCapacity_real_T(A, k);
+  loop_ub = X->size[0] * X->size[1];
+  for (k = 0; k < loop_ub; k++) {
+    A->data[k] = X->data[k];
+  }
+  emxInit_real_T(&b_y, 1);
+  k = b_y->size[0];
+  b_y->size[0] = y->size[0];
+  emxEnsureCapacity_real_T(b_y, k);
+  loop_ub = y->size[0];
+  for (k = 0; k < loop_ub; k++) {
+    b_y->data[k] = y->data[k];
+  }
   /* chkinputR makes some input parameters and user options checking in
    * regression */
   /*  */
@@ -330,22 +334,6 @@ void addt_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*     X=randn(n,p); */
   /*     [out]=FSR(X); */
   /* } */
-  k = A->size[0] * A->size[1];
-  A->size[0] = X->size[0];
-  A->size[1] = X->size[1];
-  emxEnsureCapacity_real_T(A, k);
-  loop_ub = X->size[0] * X->size[1];
-  for (k = 0; k < loop_ub; k++) {
-    A->data[k] = X->data[k];
-  }
-  emxInit_real_T(&b_y, 1);
-  k = b_y->size[0];
-  b_y->size[0] = y->size[0];
-  emxEnsureCapacity_real_T(b_y, k);
-  loop_ub = y->size[0];
-  for (k = 0; k < loop_ub; k++) {
-    b_y->data[k] = y->data[k];
-  }
   /*  Beginning of code */
   /*  chklist is the vector containing the names of optional arguments */
   /*  chkchk is the position of the option nocheck in vector chklist */
@@ -834,8 +822,4 @@ void addt_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  Added variable plot */
 }
 
-/*
- * File trailer for addt_wrapper.c
- *
- * [EOF]
- */
+/* End of code generation (addt_wrapper.c) */

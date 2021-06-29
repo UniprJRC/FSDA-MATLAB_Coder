@@ -2,53 +2,133 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: sort.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * sort.c
+ *
+ * Code generation for function 'sort'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "sort.h"
 #include "fsdaC_emxutil.h"
+#include "fsdaC_rtwutil.h"
 #include "fsdaC_types.h"
-#include "relop.h"
 #include "rt_nonfinite.h"
 #include "sortIdx.h"
+#include "rt_defines.h"
 #include "rt_nonfinite.h"
-#include <string.h>
+#include <math.h>
+
+/* Function Declarations */
+static double rt_atan2d_snf(double u0, double u1);
 
 /* Function Definitions */
-/*
- * Arguments    : creal_T x[2]
- * Return Type  : void
- */
+static double rt_atan2d_snf(double u0, double u1)
+{
+  double y;
+  int b_u0;
+  int b_u1;
+  if (rtIsNaN(u0) || rtIsNaN(u1)) {
+    y = rtNaN;
+  } else if (rtIsInf(u0) && rtIsInf(u1)) {
+    if (u0 > 0.0) {
+      b_u0 = 1;
+    } else {
+      b_u0 = -1;
+    }
+    if (u1 > 0.0) {
+      b_u1 = 1;
+    } else {
+      b_u1 = -1;
+    }
+    y = atan2(b_u0, b_u1);
+  } else if (u1 == 0.0) {
+    if (u0 > 0.0) {
+      y = RT_PI / 2.0;
+    } else if (u0 < 0.0) {
+      y = -(RT_PI / 2.0);
+    } else {
+      y = 0.0;
+    }
+  } else {
+    y = atan2(u0, u1);
+  }
+  return y;
+}
+
 void b_sort(creal_T x[2])
 {
-  double tmp_im;
-  double tmp_re;
-  bool p;
+  double ai;
+  double ar;
+  double b_x;
+  double bi;
+  double br;
+  bool SCALEA;
+  bool SCALEB;
   if (rtIsNaN(x[1].re) || rtIsNaN(x[1].im)) {
-    p = (rtIsNaN(x[0].re) || rtIsNaN(x[0].im));
+    SCALEA = (rtIsNaN(x[0].re) || rtIsNaN(x[0].im));
   } else if (rtIsNaN(x[0].re) || rtIsNaN(x[0].im)) {
-    p = true;
+    SCALEA = true;
   } else {
-    absRelopProxies(x[0], x[1], &tmp_re, &tmp_im);
-    p = (tmp_re >= tmp_im);
+    if ((fabs(x[0].re) > 8.9884656743115785E+307) ||
+        (fabs(x[0].im) > 8.9884656743115785E+307)) {
+      SCALEA = true;
+    } else {
+      SCALEA = false;
+    }
+    if ((fabs(x[1].re) > 8.9884656743115785E+307) ||
+        (fabs(x[1].im) > 8.9884656743115785E+307)) {
+      SCALEB = true;
+    } else {
+      SCALEB = false;
+    }
+    if (SCALEA || SCALEB) {
+      b_x = rt_hypotd_snf(x[0].re / 2.0, x[0].im / 2.0);
+      bi = rt_hypotd_snf(x[1].re / 2.0, x[1].im / 2.0);
+    } else {
+      b_x = rt_hypotd_snf(x[0].re, x[0].im);
+      bi = rt_hypotd_snf(x[1].re, x[1].im);
+    }
+    if (b_x == bi) {
+      b_x = rt_atan2d_snf(x[0].im, x[0].re);
+      bi = rt_atan2d_snf(x[1].im, x[1].re);
+      if (b_x == bi) {
+        ar = x[0].re;
+        ai = x[0].im;
+        br = x[1].re;
+        bi = x[1].im;
+        if (ar != br) {
+          if (b_x >= 0.0) {
+            b_x = br;
+            bi = ar;
+          } else {
+            b_x = ar;
+            bi = br;
+          }
+        } else if (ar < 0.0) {
+          b_x = bi;
+          bi = ai;
+        } else {
+          b_x = ai;
+        }
+        if (b_x == bi) {
+          b_x = 0.0;
+          bi = 0.0;
+        }
+      }
+    }
+    SCALEA = (b_x >= bi);
   }
-  if (!p) {
-    tmp_re = x[0].re;
-    tmp_im = x[0].im;
+  if (!SCALEA) {
+    ar = x[0].re;
+    ai = x[0].im;
     x[0] = x[1];
-    x[1].re = tmp_re;
-    x[1].im = tmp_im;
+    x[1].re = ar;
+    x[1].im = ai;
   }
 }
 
-/*
- * Arguments    : emxArray_real_T *x
- * Return Type  : void
- */
 void c_sort(emxArray_real_T *x)
 {
   emxArray_int32_T *b_vwork;
@@ -90,10 +170,6 @@ void c_sort(emxArray_real_T *x)
   emxFree_real_T(&vwork);
 }
 
-/*
- * Arguments    : emxArray_real_T *x
- * Return Type  : void
- */
 void d_sort(emxArray_real_T *x)
 {
   emxArray_int32_T *idx;
@@ -370,10 +446,6 @@ void d_sort(emxArray_real_T *x)
   emxFree_int32_T(&idx);
 }
 
-/*
- * Arguments    : emxArray_real_T *x
- * Return Type  : void
- */
 void e_sort(emxArray_real_T *x)
 {
   emxArray_int32_T *b_vwork;
@@ -424,276 +496,6 @@ void e_sort(emxArray_real_T *x)
   emxFree_real_T(&vwork);
 }
 
-/*
- * Arguments    : emxArray_real_T *x
- *                emxArray_int32_T *idx
- * Return Type  : void
- */
-void f_sort(emxArray_real_T *x, emxArray_int32_T *idx)
-{
-  emxArray_int32_T *iidx;
-  emxArray_real_T *vwork;
-  int dim;
-  int i;
-  int k;
-  int vlen;
-  int vstride;
-  dim = 0;
-  if (x->size[0] != 1) {
-    dim = -1;
-  }
-  emxInit_real_T(&vwork, 1);
-  if (dim + 2 <= 1) {
-    i = x->size[0];
-  } else {
-    i = 1;
-  }
-  vlen = i - 1;
-  vstride = vwork->size[0];
-  vwork->size[0] = i;
-  emxEnsureCapacity_real_T(vwork, vstride);
-  i = idx->size[0];
-  idx->size[0] = x->size[0];
-  emxEnsureCapacity_int32_T(idx, i);
-  vstride = 1;
-  for (k = 0; k <= dim; k++) {
-    vstride *= x->size[0];
-  }
-  emxInit_int32_T(&iidx, 1);
-  for (dim = 0; dim < vstride; dim++) {
-    for (k = 0; k <= vlen; k++) {
-      vwork->data[k] = x->data[dim + k * vstride];
-    }
-    c_sortIdx(vwork, iidx);
-    for (k = 0; k <= vlen; k++) {
-      i = dim + k * vstride;
-      x->data[i] = vwork->data[k];
-      idx->data[i] = iidx->data[k];
-    }
-  }
-  emxFree_int32_T(&iidx);
-  emxFree_real_T(&vwork);
-}
-
-/*
- * Arguments    : emxArray_creal_T *x
- * Return Type  : void
- */
-void g_sort(emxArray_creal_T *x)
-{
-  emxArray_creal_T *vwork;
-  emxArray_creal_T *xwork;
-  emxArray_int32_T *iidx;
-  emxArray_int32_T *iwork;
-  creal_T b_vwork;
-  creal_T c_vwork;
-  double b_x;
-  double y;
-  int b_j;
-  int b_p;
-  int dim;
-  int i;
-  int i2;
-  int j;
-  int k;
-  int kEnd;
-  int n;
-  int pEnd;
-  int q;
-  int qEnd;
-  int vlen;
-  int vstride;
-  bool p;
-  dim = 0;
-  if (x->size[0] != 1) {
-    dim = -1;
-  }
-  emxInit_creal_T(&vwork, 1);
-  if (dim + 2 <= 1) {
-    i = x->size[0];
-  } else {
-    i = 1;
-  }
-  vlen = i - 1;
-  i2 = vwork->size[0];
-  vwork->size[0] = i;
-  emxEnsureCapacity_creal_T(vwork, i2);
-  vstride = 1;
-  for (k = 0; k <= dim; k++) {
-    vstride *= x->size[0];
-  }
-  emxInit_int32_T(&iidx, 1);
-  emxInit_int32_T(&iwork, 1);
-  emxInit_creal_T(&xwork, 1);
-  for (j = 0; j < vstride; j++) {
-    for (k = 0; k <= vlen; k++) {
-      vwork->data[k] = x->data[j + k * vstride];
-    }
-    i = vwork->size[0];
-    n = vwork->size[0] + 1;
-    i2 = iidx->size[0];
-    iidx->size[0] = vwork->size[0];
-    emxEnsureCapacity_int32_T(iidx, i2);
-    dim = vwork->size[0];
-    for (i2 = 0; i2 < dim; i2++) {
-      iidx->data[i2] = 0;
-    }
-    if (vwork->size[0] != 0) {
-      i2 = iwork->size[0];
-      iwork->size[0] = vwork->size[0];
-      emxEnsureCapacity_int32_T(iwork, i2);
-      i2 = vwork->size[0] - 1;
-      for (k = 1; k <= i2; k += 2) {
-        if (rtIsNaN(vwork->data[k].re) || rtIsNaN(vwork->data[k].im)) {
-          p = true;
-        } else {
-          b_vwork = vwork->data[k - 1];
-          if (rtIsNaN(b_vwork.re) || rtIsNaN(vwork->data[k - 1].im)) {
-            p = false;
-          } else {
-            absRelopProxies(b_vwork, vwork->data[k], &b_x, &y);
-            p = (b_x <= y);
-          }
-        }
-        if (p) {
-          iidx->data[k - 1] = k;
-          iidx->data[k] = k + 1;
-        } else {
-          iidx->data[k - 1] = k + 1;
-          iidx->data[k] = k;
-        }
-      }
-      if ((vwork->size[0] & 1) != 0) {
-        iidx->data[vwork->size[0] - 1] = vwork->size[0];
-      }
-      dim = 2;
-      while (dim < i) {
-        i2 = dim << 1;
-        b_j = 1;
-        for (pEnd = dim + 1; pEnd < i + 1; pEnd = qEnd + dim) {
-          b_p = b_j - 1;
-          q = pEnd - 1;
-          qEnd = b_j + i2;
-          if (qEnd > i + 1) {
-            qEnd = i + 1;
-          }
-          k = 0;
-          kEnd = qEnd - b_j;
-          while (k + 1 <= kEnd) {
-            b_vwork = vwork->data[iidx->data[q] - 1];
-            if (rtIsNaN(b_vwork.re) ||
-                rtIsNaN(vwork->data[iidx->data[q] - 1].im)) {
-              p = true;
-            } else {
-              c_vwork = vwork->data[iidx->data[b_p] - 1];
-              if (rtIsNaN(c_vwork.re) ||
-                  rtIsNaN(vwork->data[iidx->data[b_p] - 1].im)) {
-                p = false;
-              } else {
-                absRelopProxies(c_vwork, b_vwork, &b_x, &y);
-                p = (b_x <= y);
-              }
-            }
-            if (p) {
-              iwork->data[k] = iidx->data[b_p];
-              b_p++;
-              if (b_p + 1 == pEnd) {
-                while (q + 1 < qEnd) {
-                  k++;
-                  iwork->data[k] = iidx->data[q];
-                  q++;
-                }
-              }
-            } else {
-              iwork->data[k] = iidx->data[q];
-              q++;
-              if (q + 1 == qEnd) {
-                while (b_p + 1 < pEnd) {
-                  k++;
-                  iwork->data[k] = iidx->data[b_p];
-                  b_p++;
-                }
-              }
-            }
-            k++;
-          }
-          for (k = 0; k < kEnd; k++) {
-            iidx->data[(b_j + k) - 1] = iwork->data[k];
-          }
-          b_j = qEnd;
-        }
-        dim = i2;
-      }
-      i = xwork->size[0];
-      xwork->size[0] = vwork->size[0];
-      emxEnsureCapacity_creal_T(xwork, i);
-      for (k = 0; k <= n - 2; k++) {
-        xwork->data[k] = vwork->data[k];
-      }
-      for (k = 0; k <= n - 2; k++) {
-        vwork->data[k] = xwork->data[iidx->data[k] - 1];
-      }
-    }
-    for (k = 0; k <= vlen; k++) {
-      x->data[j + k * vstride] = vwork->data[k];
-    }
-  }
-  emxFree_creal_T(&xwork);
-  emxFree_int32_T(&iwork);
-  emxFree_int32_T(&iidx);
-  emxFree_creal_T(&vwork);
-}
-
-/*
- * Arguments    : emxArray_real_T *x
- * Return Type  : void
- */
-void h_sort(emxArray_real_T *x)
-{
-  emxArray_int32_T *b_vwork;
-  emxArray_real_T *vwork;
-  int dim;
-  int j;
-  int k;
-  int vlen;
-  int vstride;
-  dim = 0;
-  if (x->size[0] != 1) {
-    dim = -1;
-  }
-  emxInit_real_T(&vwork, 1);
-  if (dim + 2 <= 1) {
-    vstride = x->size[0];
-  } else {
-    vstride = 1;
-  }
-  vlen = vstride - 1;
-  j = vwork->size[0];
-  vwork->size[0] = vstride;
-  emxEnsureCapacity_real_T(vwork, j);
-  vstride = 1;
-  for (k = 0; k <= dim; k++) {
-    vstride *= x->size[0];
-  }
-  emxInit_int32_T(&b_vwork, 1);
-  for (j = 0; j < vstride; j++) {
-    for (k = 0; k <= vlen; k++) {
-      vwork->data[k] = x->data[j + k * vstride];
-    }
-    c_sortIdx(vwork, b_vwork);
-    for (k = 0; k <= vlen; k++) {
-      x->data[j + k * vstride] = vwork->data[k];
-    }
-  }
-  emxFree_int32_T(&b_vwork);
-  emxFree_real_T(&vwork);
-}
-
-/*
- * Arguments    : emxArray_real_T *x
- *                emxArray_int32_T *idx
- * Return Type  : void
- */
 void sort(emxArray_real_T *x, emxArray_int32_T *idx)
 {
   emxArray_int32_T *iidx;
@@ -740,8 +542,4 @@ void sort(emxArray_real_T *x, emxArray_int32_T *idx)
   emxFree_real_T(&vwork);
 }
 
-/*
- * File trailer for sort.c
- *
- * [EOF]
- */
+/* End of code generation (sort.c) */

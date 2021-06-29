@@ -2,16 +2,17 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: FSRmdr_wrapper.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * FSRmdr_wrapper.h
+ *
+ * Code generation for function 'FSRmdr_wrapper'
+ *
  */
 
 #ifndef FSRMDR_WRAPPER_H
 #define FSRMDR_WRAPPER_H
 
-/* Include Files */
+/* Include files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -38,8 +39,4 @@ extern void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
 #endif
 
 #endif
-/*
- * File trailer for FSRmdr_wrapper.h
- *
- * [EOF]
- */
+/* End of code generation (FSRmdr_wrapper.h) */

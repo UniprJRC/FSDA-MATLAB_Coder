@@ -2,13 +2,16 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: FSRmdr_wrapper.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * FSRmdr_wrapper.c
+ *
+ * Code generation for function 'FSRmdr_wrapper'
+ *
  */
 
-/* Include Files */
+/* Include files */
+#include <R.h>
+
 #include "FSRmdr_wrapper.h"
 #include "any.h"
 #include "blockedSummation.h"
@@ -37,33 +40,8 @@
 #include "rt_nonfinite.h"
 #include <math.h>
 #include <stdio.h>
-#include <string.h>
 
 /* Function Definitions */
-/*
- * Required input arguments
- *  y: a column vector of doubles of any length
- *
- * Arguments    : const emxArray_real_T *y
- *                const emxArray_real_T *X
- *                const emxArray_real_T *bsb
- *                bool bsbmfullrank
- *                const emxArray_real_T *bsbsteps
- *                const emxArray_real_T *constr
- *                double init
- *                bool intercept
- *                bool internationaltrade
- *                bool msg
- *                bool nocheck
- *                const double threshlevoutX_data[]
- *                const int threshlevoutX_size[2]
- *                emxArray_real_T *mdr
- *                emxArray_real_T *Un
- *                emxArray_real_T *BB
- *                emxArray_real_T *Bols
- *                emxArray_real_T *S2
- * Return Type  : void
- */
 void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                     const emxArray_real_T *bsb, bool bsbmfullrank,
                     const emxArray_real_T *bsbsteps,
@@ -141,6 +119,8 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     fsdaC_initialize();
   }
   emxInit_real_T(&b_bsb, 1);
+  /*  Required input arguments */
+  /*  y: a column vector of doubles of any length */
   /*  X: an array of doubles of any dimension */
   /*  bsb: a column vector of doubles of any length */
   /*  Optional input arguments (name / pairs) */
@@ -809,14 +789,14 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  check init */
   init1 = init;
   if (init < p + 1.0) {
-    printf("Attention : init1 should be larger than p. \nIt is set to p+1.");
+    Rprintf("Attention : init1 should be larger than p. \nIt is set to p+1.");
     fflush(stdout);
     init1 = p + 1.0;
   } else if (init < b_bsb->size[0]) {
     b_sprintf(b_bsb->size[0]);
     init1 = b_bsb->size[0];
   } else if (init >= n) {
-    printf("Attention : init1 should be smaller than n. \nIt is set to n-1.");
+    Rprintf("Attention : init1 should be smaller than n. \nIt is set to n-1.");
     fflush(stdout);
     init1 = n - 1.0;
   }
@@ -1587,7 +1567,7 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
             loop_ub = Xbb->size[0] - 1;
           }
           if (msg) {
-            printf("FSDA:FSRmdr,Rank problem in step %.0f\n", b_mm);
+            Rprintf("FSDA:FSRmdr,Rank problem in step %.0f\n", b_mm);
             fflush(stdout);
           }
           i = mdr->size[0] * mdr->size[1];
@@ -1619,7 +1599,7 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           S2->data[0] = rtNaN;
           exitg1 = 1;
         } else {
-          printf("Matrix without full rank at step m= %.0f\n", b_mm);
+          Rprintf("Matrix without full rank at step m= %.0f\n", b_mm);
           fflush(stdout);
           /*  disp([mm b']) */
           guard2 = true;
@@ -2070,8 +2050,4 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   emxFree_real_T(&b_bsb);
 }
 
-/*
- * File trailer for FSRmdr_wrapper.c
- *
- * [EOF]
- */
+/* End of code generation (FSRmdr_wrapper.c) */

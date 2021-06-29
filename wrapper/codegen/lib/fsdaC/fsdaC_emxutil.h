@@ -2,16 +2,17 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: fsdaC_emxutil.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * fsdaC_emxutil.h
+ *
+ * Code generation for function 'fsdaC_emxutil'
+ *
  */
 
 #ifndef FSDAC_EMXUTIL_H
 #define FSDAC_EMXUTIL_H
 
-/* Include Files */
+/* Include files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -69,8 +70,6 @@ extern void emxEnsureCapacity_creal_T(emxArray_creal_T *emxArray, int oldNumel);
 
 extern void emxEnsureCapacity_int32_T(emxArray_int32_T *emxArray, int oldNumel);
 
-extern void emxEnsureCapacity_int8_T(emxArray_int8_T *emxArray, int oldNumel);
-
 extern void emxEnsureCapacity_real32_T(emxArray_real32_T *emxArray,
                                        int oldNumel);
 
@@ -114,8 +113,6 @@ extern void emxFreeStruct_struct_T4(g_struct_T *pStruct);
 
 extern void emxFreeStruct_struct_T5(h_struct_T *pStruct);
 
-extern void emxFreeStruct_struct_tclust_T(struct_tclust_T *pStruct);
-
 extern void emxFreeStruct_table(table *pStruct);
 
 extern void emxFree_boolean_T(emxArray_boolean_T **pEmxArray);
@@ -127,8 +124,6 @@ extern void emxFree_char_T(emxArray_char_T **pEmxArray);
 extern void emxFree_creal_T(emxArray_creal_T **pEmxArray);
 
 extern void emxFree_int32_T(emxArray_int32_T **pEmxArray);
-
-extern void emxFree_int8_T(emxArray_int8_T **pEmxArray);
 
 extern void emxFree_real32_T(emxArray_real32_T **pEmxArray);
 
@@ -180,8 +175,6 @@ extern void emxInitStruct_struct_T4(g_struct_T *pStruct);
 
 extern void emxInitStruct_struct_T5(f_struct_T *pStruct);
 
-extern void emxInitStruct_struct_tclust_T(struct_tclust_T *pStruct);
-
 extern void emxInitStruct_table(table *pStruct);
 
 extern void emxInit_boolean_T(emxArray_boolean_T **pEmxArray,
@@ -195,8 +188,6 @@ extern void emxInit_char_T(emxArray_char_T **pEmxArray, int numDimensions);
 extern void emxInit_creal_T(emxArray_creal_T **pEmxArray, int numDimensions);
 
 extern void emxInit_int32_T(emxArray_int32_T **pEmxArray, int numDimensions);
-
-extern void emxInit_int8_T(emxArray_int8_T **pEmxArray, int numDimensions);
 
 extern void emxInit_real32_T(emxArray_real32_T **pEmxArray, int numDimensions);
 
@@ -212,8 +203,4 @@ extern void emxTrim_cell_wrap_36(emxArray_cell_wrap_36 *emxArray, int fromIndex,
 #endif
 
 #endif
-/*
- * File trailer for fsdaC_emxutil.h
- *
- * [EOF]
- */
+/* End of code generation (fsdaC_emxutil.h) */

@@ -2,25 +2,20 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: nullAssignment.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * nullAssignment.c
+ *
+ * Code generation for function 'nullAssignment'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "nullAssignment.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
-#include <string.h>
 
 /* Function Definitions */
-/*
- * Arguments    : emxArray_real_T *x
- *                const emxArray_boolean_T *idx
- * Return Type  : void
- */
 void b_nullAssignment(emxArray_real_T *x, const emxArray_boolean_T *idx)
 {
   int i;
@@ -51,11 +46,6 @@ void b_nullAssignment(emxArray_real_T *x, const emxArray_boolean_T *idx)
   emxEnsureCapacity_real_T(x, i);
 }
 
-/*
- * Arguments    : emxArray_real_T *x
- *                const emxArray_int32_T *idx
- * Return Type  : void
- */
 void nullAssignment(emxArray_real_T *x, const emxArray_int32_T *idx)
 {
   emxArray_boolean_T *b;
@@ -125,8 +115,4 @@ void nullAssignment(emxArray_real_T *x, const emxArray_int32_T *idx)
   emxEnsureCapacity_real_T(x, i);
 }
 
-/*
- * File trailer for nullAssignment.c
- *
- * [EOF]
- */
+/* End of code generation (nullAssignment.c) */

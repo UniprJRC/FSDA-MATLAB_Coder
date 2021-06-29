@@ -2,13 +2,16 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: LTSts_wrapper.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * LTSts_wrapper.c
+ *
+ * Code generation for function 'LTSts_wrapper'
+ *
  */
 
-/* Include Files */
+/* Include files */
+#include <R.h>
+
 #include "LTSts_wrapper.h"
 #include "FSRinvmdr.h"
 #include "GYfilt.h"
@@ -57,31 +60,6 @@
 #include <string.h>
 
 /* Function Definitions */
-/*
- * Wrapper function for LTSts. NV pair names are not taken as
- *  inputs. Instead, just the values are taken as inputs.
- *
- * Arguments    : const emxArray_real_T *y
- *                double conflev
- *                bool dispresults
- *                double h
- *                bool intercept
- *                const struct_LTStslshiftlocref_T *lshiftlocref
- *                const struct_LXSlms_T *lts
- *                const struct_LTStsmodel_T *model
- *                bool msg
- *                double nbestindexes
- *                bool nocheck
- *                const double nsamp_data[]
- *                const int nsamp_size[2]
- *                double refstepsALS
- *                double reftolALS
- *                double SmallSampleCor
- *                bool yxsave
- *                struct_LTSts_T *out
- *                emxArray_real_T *C
- * Return Type  : void
- */
 void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
                    double h, bool intercept,
                    const struct_LTStslshiftlocref_T *lshiftlocref,
@@ -221,11 +199,11 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   int i;
   int i1;
   int i2;
-  int i3;
-  int i4;
-  int i_loop_ub;
+  int i3=0;
+  int i4=0;
+  int i_loop_ub=0;
   int ib_size;
-  int j_loop_ub;
+  int j_loop_ub=0;
   int loop_ub;
   int nseaso;
   int nx;
@@ -251,6 +229,8 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   emxInitStruct_captured_var1(&Xf);
   emxInitStruct_captured_var1(&Xseasof);
   emxInitStruct_captured_var(&yhatseaso);
+  /*  Wrapper function for LTSts. NV pair names are not taken as */
+  /*  inputs. Instead, just the values are taken as inputs. */
   /*  Required input arguments */
   /*  y: a column vector of doubles of any length */
   /*  Optional input arguments (name / pairs) in (case insensitive) */
@@ -295,6 +275,10 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     }
   }
   emxInitStruct_captured_var(&yin);
+  Xseasof.contents->size[0] = 0;
+  Xseasof.contents->size[1] = 0;
+  Xf.contents->size[0] = 0;
+  Xf.contents->size[1] = 0;
   /* LTSts extends LTS estimator to time series */
   /*  */
   /* <a href="matlab: docsearchFS('LTSts')">Link to the help function</a> */
@@ -968,10 +952,6 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   /* <a href="matlab: docsearchFS('LTSts')">Link to the help function</a> */
   /*  */
   /* $LastChangedDate:: 2019-12-15 21:09:21 #$: Date of the last commit */
-  Xseasof.contents->size[0] = 0;
-  Xseasof.contents->size[1] = 0;
-  Xf.contents->size[0] = 0;
-  Xf.contents->size[1] = 0;
   /*  Examples: */
   /* { */
   /*     % Simulated data with linear trend and level shift. */
@@ -3051,7 +3031,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     out->BestIndexes->data[i] = betaini->data[i];
   }
   if ((LSH > 0.0) && msg) {
-    printf("Level shift for t=%.0f\n", LSH);
+    Rprintf("Level shift for t=%.0f\n", LSH);
     fflush(stdout);
   }
   /*  save RES to output structure (these residuals can be used for example to
@@ -4597,7 +4577,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   /*  end */
   emxFree_real_T(&b_out);
   if (dispresults && (lshiftYN.contents == 1.0)) {
-    printf("Level shift position t=%.0f\n", posLS);
+    Rprintf("Level shift position t=%.0f\n", posLS);
     fflush(stdout);
   }
   /*  Create plots */
@@ -5059,8 +5039,4 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   emxFreeStruct_captured_var(&Xlshiftf);
 }
 
-/*
- * File trailer for LTSts_wrapper.c
- *
- * [EOF]
- */
+/* End of code generation (LTSts_wrapper.c) */

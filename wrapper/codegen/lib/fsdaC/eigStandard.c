@@ -2,429 +2,372 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: eigStandard.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * eigStandard.c
+ *
+ * Code generation for function 'eigStandard'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "eigStandard.h"
 #include "fsdaC_data.h"
-#include "fsdaC_emxutil.h"
 #include "fsdaC_rtwutil.h"
-#include "fsdaC_types.h"
 #include "rt_nonfinite.h"
-#include "xzggbal.h"
 #include "xzhgeqz.h"
-#include "xzlangeM.h"
-#include "xzlartg.h"
-#include "xzlascl.h"
-#include "xztgevc.h"
 #include "rt_nonfinite.h"
 #include <math.h>
-#include <string.h>
 
 /* Function Definitions */
-/*
- * Arguments    : const emxArray_real_T *A
- *                emxArray_creal_T *V
- *                emxArray_creal_T *D
- * Return Type  : void
- */
-void eigStandard(const emxArray_real_T *A, emxArray_creal_T *V,
-                 emxArray_creal_T *D)
+void eigStandard(const double A[4], creal_T V[2])
 {
-  emxArray_creal_T *At;
-  emxArray_creal_T *alpha1;
-  emxArray_creal_T *beta1;
-  emxArray_int32_T *rscale;
-  emxArray_int8_T *b_I;
-  creal_T tmp;
-  double ai;
+  creal_T At[4];
+  creal_T beta1[2];
+  double a;
+  double absxk;
   double anrm;
   double anrmto;
-  double ar;
-  double colnorm;
-  double stemp_im;
-  double stemp_re;
-  double vtemp;
-  int b_i;
-  int b_n;
-  int i;
+  double cfrom1;
+  double cto1;
+  double ctoc;
+  int At_tmp;
   int ihi;
+  int ii;
   int ilo;
   int j;
-  int jcol;
-  int jcolp1;
-  int jrow;
+  int jj;
   int k;
-  int n;
+  int nzcount;
+  bool exitg1;
+  bool exitg2;
+  bool guard1 = false;
   bool ilascl;
-  emxInit_creal_T(&At, 2);
-  i = At->size[0] * At->size[1];
-  At->size[0] = A->size[0];
-  At->size[1] = A->size[1];
-  emxEnsureCapacity_creal_T(At, i);
-  jcol = A->size[0] * A->size[1];
-  for (i = 0; i < jcol; i++) {
-    At->data[i].re = A->data[i];
-    At->data[i].im = 0.0;
-  }
-  emxInit_creal_T(&alpha1, 1);
-  n = At->size[0] - 1;
-  i = alpha1->size[0];
-  alpha1->size[0] = At->size[0];
-  emxEnsureCapacity_creal_T(alpha1, i);
-  jcol = At->size[0];
-  for (i = 0; i < jcol; i++) {
-    alpha1->data[i].re = 0.0;
-    alpha1->data[i].im = 0.0;
-  }
-  emxInit_creal_T(&beta1, 1);
-  i = beta1->size[0];
-  beta1->size[0] = At->size[0];
-  emxEnsureCapacity_creal_T(beta1, i);
-  jcol = At->size[0];
-  for (i = 0; i < jcol; i++) {
-    beta1->data[i].re = 0.0;
-    beta1->data[i].im = 0.0;
-  }
-  i = V->size[0] * V->size[1];
-  V->size[0] = At->size[0];
-  V->size[1] = At->size[0];
-  emxEnsureCapacity_creal_T(V, i);
-  jcol = At->size[0] * At->size[0];
-  for (i = 0; i < jcol; i++) {
-    V->data[i].re = 0.0;
-    V->data[i].im = 0.0;
-  }
-  emxInit_int32_T(&rscale, 1);
-  emxInit_int8_T(&b_I, 2);
-  if ((At->size[0] != 0) && (At->size[1] != 0)) {
-    anrm = xzlangeM(At);
-    if (rtIsInf(anrm) || rtIsNaN(anrm)) {
-      i = alpha1->size[0];
-      alpha1->size[0] = At->size[0];
-      emxEnsureCapacity_creal_T(alpha1, i);
-      jcol = At->size[0];
-      for (i = 0; i < jcol; i++) {
-        alpha1->data[i].re = rtNaN;
-        alpha1->data[i].im = 0.0;
+  bool notdone;
+  At[0].re = A[0];
+  At[0].im = 0.0;
+  At[1].re = A[1];
+  At[1].im = 0.0;
+  At[2].re = A[2];
+  At[2].im = 0.0;
+  At[3].re = A[3];
+  At[3].im = 0.0;
+  anrm = 0.0;
+  k = 0;
+  exitg1 = false;
+  while ((!exitg1) && (k < 4)) {
+    absxk = rt_hypotd_snf(At[k].re, 0.0);
+    if (rtIsNaN(absxk)) {
+      anrm = rtNaN;
+      exitg1 = true;
+    } else {
+      if (absxk > anrm) {
+        anrm = absxk;
       }
-      i = beta1->size[0];
-      beta1->size[0] = At->size[0];
-      emxEnsureCapacity_creal_T(beta1, i);
-      jcol = At->size[0];
-      for (i = 0; i < jcol; i++) {
-        beta1->data[i].re = rtNaN;
-        beta1->data[i].im = 0.0;
+      k++;
+    }
+  }
+  if (rtIsInf(anrm) || rtIsNaN(anrm)) {
+    V[0].re = rtNaN;
+    V[0].im = 0.0;
+    beta1[0].re = rtNaN;
+    beta1[0].im = 0.0;
+    V[1].re = rtNaN;
+    V[1].im = 0.0;
+    beta1[1].re = rtNaN;
+    beta1[1].im = 0.0;
+  } else {
+    ilascl = false;
+    anrmto = anrm;
+    guard1 = false;
+    if ((anrm > 0.0) && (anrm < 6.7178761075670888E-139)) {
+      anrmto = 6.7178761075670888E-139;
+      ilascl = true;
+      guard1 = true;
+    } else if (anrm > 1.4885657073574029E+138) {
+      anrmto = 1.4885657073574029E+138;
+      ilascl = true;
+      guard1 = true;
+    }
+    if (guard1) {
+      absxk = anrm;
+      ctoc = anrmto;
+      notdone = true;
+      while (notdone) {
+        cfrom1 = absxk * 2.0041683600089728E-292;
+        cto1 = ctoc / 4.9896007738368E+291;
+        if ((cfrom1 > ctoc) && (ctoc != 0.0)) {
+          a = 2.0041683600089728E-292;
+          absxk = cfrom1;
+        } else if (cto1 > absxk) {
+          a = 4.9896007738368E+291;
+          ctoc = cto1;
+        } else {
+          a = ctoc / absxk;
+          notdone = false;
+        }
+        At[0].re *= a;
+        At[0].im *= a;
+        At[1].re *= a;
+        At[1].im *= a;
+        At[2].re *= a;
+        At[2].im *= a;
+        At[3].re *= a;
+        At[3].im *= a;
       }
-      i = V->size[0] * V->size[1];
-      V->size[0] = At->size[0];
-      V->size[1] = At->size[0];
-      emxEnsureCapacity_creal_T(V, i);
-      jcol = At->size[0] * At->size[0];
-      for (i = 0; i < jcol; i++) {
-        V->data[i].re = rtNaN;
-        V->data[i].im = 0.0;
+    }
+    ilo = 1;
+    ihi = 2;
+    k = 0;
+    j = 0;
+    notdone = false;
+    ii = 2;
+    exitg1 = false;
+    while ((!exitg1) && (ii > 0)) {
+      nzcount = 0;
+      k = ii;
+      j = 2;
+      jj = 0;
+      exitg2 = false;
+      while ((!exitg2) && (jj < 2)) {
+        At_tmp = (ii + (jj << 1)) - 1;
+        if ((At[At_tmp].re != 0.0) || (At[At_tmp].im != 0.0) ||
+            (ii == jj + 1)) {
+          if (nzcount == 0) {
+            j = jj + 1;
+            nzcount = 1;
+            jj++;
+          } else {
+            nzcount = 2;
+            exitg2 = true;
+          }
+        } else {
+          jj++;
+        }
+      }
+      if (nzcount < 2) {
+        notdone = true;
+        exitg1 = true;
+      } else {
+        ii--;
+      }
+    }
+    if (!notdone) {
+      k = 0;
+      j = 0;
+      notdone = false;
+      jj = 1;
+      exitg1 = false;
+      while ((!exitg1) && (jj < 3)) {
+        nzcount = 0;
+        k = 2;
+        j = jj;
+        ii = 1;
+        exitg2 = false;
+        while ((!exitg2) && (ii < 3)) {
+          At_tmp = (ii + ((jj - 1) << 1)) - 1;
+          if ((At[At_tmp].re != 0.0) || (At[At_tmp].im != 0.0) || (ii == jj)) {
+            if (nzcount == 0) {
+              k = ii;
+              nzcount = 1;
+              ii++;
+            } else {
+              nzcount = 2;
+              exitg2 = true;
+            }
+          } else {
+            ii++;
+          }
+        }
+        if (nzcount < 2) {
+          notdone = true;
+          exitg1 = true;
+        } else {
+          jj++;
+        }
+      }
+      if (notdone) {
+        if (k != 1) {
+          absxk = At[k - 1].re;
+          ctoc = At[k - 1].im;
+          At[k - 1] = At[0];
+          At[0].re = absxk;
+          At[0].im = ctoc;
+          absxk = At[k + 1].re;
+          ctoc = At[k + 1].im;
+          At[k + 1] = At[2];
+          At[2].re = absxk;
+          At[2].im = ctoc;
+        }
+        if (j != 1) {
+          k = (j - 1) << 1;
+          absxk = At[k].re;
+          ctoc = At[k].im;
+          At[k] = At[0];
+          At[0].re = absxk;
+          At[0].im = ctoc;
+          absxk = At[k + 1].re;
+          ctoc = At[k + 1].im;
+          At[k + 1] = At[1];
+          At[1].re = absxk;
+          At[1].im = ctoc;
+        }
+        ilo = 2;
       }
     } else {
-      ilascl = false;
-      anrmto = anrm;
-      if ((anrm > 0.0) && (anrm < 6.7178761075670888E-139)) {
-        anrmto = 6.7178761075670888E-139;
-        ilascl = true;
-        xzlascl(anrm, anrmto, At);
-      } else if (anrm > 1.4885657073574029E+138) {
-        anrmto = 1.4885657073574029E+138;
-        ilascl = true;
-        xzlascl(anrm, anrmto, At);
+      if (k != 2) {
+        absxk = At[k - 1].re;
+        ctoc = At[k - 1].im;
+        At[k - 1] = At[1];
+        At[1].re = absxk;
+        At[1].im = ctoc;
+        absxk = At[k + 1].re;
+        ctoc = At[k + 1].im;
+        At[k + 1] = At[3];
+        At[3].re = absxk;
+        At[3].im = ctoc;
       }
-      xzggbal(At, &ilo, &ihi, rscale);
-      b_n = At->size[0];
-      i = b_I->size[0] * b_I->size[1];
-      b_I->size[0] = At->size[0];
-      b_I->size[1] = At->size[0];
-      emxEnsureCapacity_int8_T(b_I, i);
-      jcol = At->size[0] * At->size[0];
-      for (i = 0; i < jcol; i++) {
-        b_I->data[i] = 0;
+      if (j != 2) {
+        k = (j - 1) << 1;
+        absxk = At[k].re;
+        ctoc = At[k].im;
+        At[k] = At[2];
+        At[2].re = absxk;
+        At[2].im = ctoc;
+        absxk = At[k + 1].re;
+        ctoc = At[k + 1].im;
+        At[k + 1] = At[3];
+        At[3].re = absxk;
+        At[3].im = ctoc;
       }
-      if (At->size[0] > 0) {
-        for (k = 0; k < b_n; k++) {
-          b_I->data[k + b_I->size[0] * k] = 1;
-        }
-      }
-      i = V->size[0] * V->size[1];
-      V->size[0] = b_I->size[0];
-      V->size[1] = b_I->size[1];
-      emxEnsureCapacity_creal_T(V, i);
-      jcol = b_I->size[0] * b_I->size[1];
-      for (i = 0; i < jcol; i++) {
-        V->data[i].re = b_I->data[i];
-        V->data[i].im = 0.0;
-      }
-      if ((At->size[0] > 1) && (ihi >= ilo + 2)) {
-        for (jcol = ilo - 1; jcol + 1 < ihi - 1; jcol++) {
-          jcolp1 = jcol + 2;
-          for (jrow = ihi - 1; jrow + 1 > jcol + 2; jrow--) {
-            xzlartg(At->data[(jrow + At->size[0] * jcol) - 1],
-                    At->data[jrow + At->size[0] * jcol], &vtemp, &tmp,
-                    &At->data[(jrow + At->size[0] * jcol) - 1]);
-            At->data[jrow + At->size[0] * jcol].re = 0.0;
-            At->data[jrow + At->size[0] * jcol].im = 0.0;
-            for (j = jcolp1; j <= b_n; j++) {
-              stemp_re =
-                  vtemp * At->data[(jrow + At->size[0] * (j - 1)) - 1].re +
-                  (tmp.re * At->data[jrow + At->size[0] * (j - 1)].re -
-                   tmp.im * At->data[jrow + At->size[0] * (j - 1)].im);
-              stemp_im =
-                  vtemp * At->data[(jrow + At->size[0] * (j - 1)) - 1].im +
-                  (tmp.re * At->data[jrow + At->size[0] * (j - 1)].im +
-                   tmp.im * At->data[jrow + At->size[0] * (j - 1)].re);
-              colnorm = At->data[(jrow + At->size[0] * (j - 1)) - 1].re;
-              At->data[jrow + At->size[0] * (j - 1)].re =
-                  vtemp * At->data[jrow + At->size[0] * (j - 1)].re -
-                  (tmp.re * At->data[(jrow + At->size[0] * (j - 1)) - 1].re +
-                   tmp.im * At->data[(jrow + At->size[0] * (j - 1)) - 1].im);
-              At->data[jrow + At->size[0] * (j - 1)].im =
-                  vtemp * At->data[jrow + At->size[0] * (j - 1)].im -
-                  (tmp.re * At->data[(jrow + At->size[0] * (j - 1)) - 1].im -
-                   tmp.im * colnorm);
-              At->data[(jrow + At->size[0] * (j - 1)) - 1].re = stemp_re;
-              At->data[(jrow + At->size[0] * (j - 1)) - 1].im = stemp_im;
-            }
-            tmp.re = -tmp.re;
-            tmp.im = -tmp.im;
-            for (b_i = 1; b_i <= ihi; b_i++) {
-              stemp_re =
-                  vtemp * At->data[(b_i + At->size[0] * jrow) - 1].re +
-                  (tmp.re * At->data[(b_i + At->size[0] * (jrow - 1)) - 1].re -
-                   tmp.im * At->data[(b_i + At->size[0] * (jrow - 1)) - 1].im);
-              stemp_im =
-                  vtemp * At->data[(b_i + At->size[0] * jrow) - 1].im +
-                  (tmp.re * At->data[(b_i + At->size[0] * (jrow - 1)) - 1].im +
-                   tmp.im * At->data[(b_i + At->size[0] * (jrow - 1)) - 1].re);
-              colnorm = At->data[(b_i + At->size[0] * jrow) - 1].re;
-              At->data[(b_i + At->size[0] * (jrow - 1)) - 1].re =
-                  vtemp * At->data[(b_i + At->size[0] * (jrow - 1)) - 1].re -
-                  (tmp.re * At->data[(b_i + At->size[0] * jrow) - 1].re +
-                   tmp.im * At->data[(b_i + At->size[0] * jrow) - 1].im);
-              At->data[(b_i + At->size[0] * (jrow - 1)) - 1].im =
-                  vtemp * At->data[(b_i + At->size[0] * (jrow - 1)) - 1].im -
-                  (tmp.re * At->data[(b_i + At->size[0] * jrow) - 1].im -
-                   tmp.im * colnorm);
-              At->data[(b_i + At->size[0] * jrow) - 1].re = stemp_re;
-              At->data[(b_i + At->size[0] * jrow) - 1].im = stemp_im;
-            }
-            for (b_i = 1; b_i <= b_n; b_i++) {
-              stemp_re =
-                  vtemp * V->data[(b_i + V->size[0] * jrow) - 1].re +
-                  (tmp.re * V->data[(b_i + V->size[0] * (jrow - 1)) - 1].re -
-                   tmp.im * V->data[(b_i + V->size[0] * (jrow - 1)) - 1].im);
-              stemp_im =
-                  vtemp * V->data[(b_i + V->size[0] * jrow) - 1].im +
-                  (tmp.re * V->data[(b_i + V->size[0] * (jrow - 1)) - 1].im +
-                   tmp.im * V->data[(b_i + V->size[0] * (jrow - 1)) - 1].re);
-              colnorm = V->data[(b_i + V->size[0] * jrow) - 1].re;
-              V->data[(b_i + V->size[0] * (jrow - 1)) - 1].re =
-                  vtemp * V->data[(b_i + V->size[0] * (jrow - 1)) - 1].re -
-                  (tmp.re * V->data[(b_i + V->size[0] * jrow) - 1].re +
-                   tmp.im * V->data[(b_i + V->size[0] * jrow) - 1].im);
-              V->data[(b_i + V->size[0] * (jrow - 1)) - 1].im =
-                  vtemp * V->data[(b_i + V->size[0] * (jrow - 1)) - 1].im -
-                  (tmp.re * V->data[(b_i + V->size[0] * jrow) - 1].im -
-                   tmp.im * colnorm);
-              V->data[(b_i + V->size[0] * jrow) - 1].re = stemp_re;
-              V->data[(b_i + V->size[0] * jrow) - 1].im = stemp_im;
-            }
-          }
-        }
-      }
-      b_xzhgeqz(At, ilo, ihi, V, &jcol, alpha1, beta1);
-      if (jcol == 0) {
-        xztgevc(At, V);
-        b_n = V->size[0];
-        jcolp1 = V->size[1] - 1;
-        if (ilo > 1) {
-          for (b_i = ilo - 2; b_i + 1 >= 1; b_i--) {
-            k = rscale->data[b_i] - 1;
-            if (rscale->data[b_i] != b_i + 1) {
-              for (j = 0; j <= jcolp1; j++) {
-                tmp = V->data[b_i + V->size[0] * j];
-                V->data[b_i + V->size[0] * j] = V->data[k + V->size[0] * j];
-                V->data[k + V->size[0] * j] = tmp;
-              }
-            }
-          }
-        }
-        if (ihi < b_n) {
-          i = ihi + 1;
-          for (b_i = i; b_i <= b_n; b_i++) {
-            jcol = rscale->data[b_i - 1];
-            if (jcol != b_i) {
-              for (j = 0; j <= jcolp1; j++) {
-                tmp = V->data[(b_i + V->size[0] * j) - 1];
-                V->data[(b_i + V->size[0] * j) - 1] =
-                    V->data[(jcol + V->size[0] * j) - 1];
-                V->data[(jcol + V->size[0] * j) - 1] = tmp;
-              }
-            }
-          }
-        }
-        for (jcol = 0; jcol <= n; jcol++) {
-          vtemp = fabs(V->data[V->size[0] * jcol].re) +
-                  fabs(V->data[V->size[0] * jcol].im);
-          if (n + 1 > 1) {
-            for (jcolp1 = 0; jcolp1 < n; jcolp1++) {
-              stemp_re = fabs(V->data[(jcolp1 + V->size[0] * jcol) + 1].re) +
-                         fabs(V->data[(jcolp1 + V->size[0] * jcol) + 1].im);
-              if (stemp_re > vtemp) {
-                vtemp = stemp_re;
-              }
-            }
-          }
-          if (vtemp >= 6.7178761075670888E-139) {
-            vtemp = 1.0 / vtemp;
-            for (jcolp1 = 0; jcolp1 <= n; jcolp1++) {
-              V->data[jcolp1 + V->size[0] * jcol].re *= vtemp;
-              V->data[jcolp1 + V->size[0] * jcol].im *= vtemp;
-            }
-          }
-        }
-        if (ilascl) {
-          b_xzlascl(anrmto, anrm, alpha1);
-        }
-      }
+      ihi = 1;
     }
-  }
-  emxFree_int8_T(&b_I);
-  emxFree_int32_T(&rscale);
-  emxFree_creal_T(&At);
-  n = A->size[0];
-  if (A->size[0] > 0) {
-    jcolp1 = (A->size[0] - 1) * A->size[0] + 1;
-    for (jrow = 1; n < 0 ? jrow >= jcolp1 : jrow <= jcolp1; jrow += n) {
-      colnorm = 0.0;
-      if (n == 1) {
-        colnorm = rt_hypotd_snf(V->data[jrow - 1].re, V->data[jrow - 1].im);
-      } else {
-        vtemp = 3.3121686421112381E-170;
-        jcol = (jrow + n) - 1;
-        for (k = jrow; k <= jcol; k++) {
-          stemp_re = fabs(V->data[k - 1].re);
-          if (stemp_re > vtemp) {
-            stemp_im = vtemp / stemp_re;
-            colnorm = colnorm * stemp_im * stemp_im + 1.0;
-            vtemp = stemp_re;
-          } else {
-            stemp_im = stemp_re / vtemp;
-            colnorm += stemp_im * stemp_im;
-          }
-          stemp_re = fabs(V->data[k - 1].im);
-          if (stemp_re > vtemp) {
-            stemp_im = vtemp / stemp_re;
-            colnorm = colnorm * stemp_im * stemp_im + 1.0;
-            vtemp = stemp_re;
-          } else {
-            stemp_im = stemp_re / vtemp;
-            colnorm += stemp_im * stemp_im;
-          }
-        }
-        colnorm = vtemp * sqrt(colnorm);
-      }
-      i = (jrow + n) - 1;
-      for (j = jrow; j <= i; j++) {
-        ar = V->data[j - 1].re;
-        ai = V->data[j - 1].im;
-        if (ai == 0.0) {
-          stemp_re = ar / colnorm;
-          vtemp = 0.0;
-        } else if (ar == 0.0) {
-          stemp_re = 0.0;
-          vtemp = ai / colnorm;
+    xzhgeqz(At, ilo, ihi, &k, V, beta1);
+    if ((k == 0) && ilascl) {
+      notdone = true;
+      while (notdone) {
+        cfrom1 = anrmto * 2.0041683600089728E-292;
+        cto1 = anrm / 4.9896007738368E+291;
+        if ((cfrom1 > anrm) && (anrm != 0.0)) {
+          a = 2.0041683600089728E-292;
+          anrmto = cfrom1;
+        } else if (cto1 > anrmto) {
+          a = 4.9896007738368E+291;
+          anrm = cto1;
         } else {
-          stemp_re = ar / colnorm;
-          vtemp = ai / colnorm;
+          a = anrm / anrmto;
+          notdone = false;
         }
-        V->data[j - 1].re = stemp_re;
-        V->data[j - 1].im = vtemp;
+        V[0].re *= a;
+        V[0].im *= a;
+        V[1].re *= a;
+        V[1].im *= a;
       }
     }
   }
-  i = D->size[0] * D->size[1];
-  D->size[0] = alpha1->size[0];
-  D->size[1] = alpha1->size[0];
-  emxEnsureCapacity_creal_T(D, i);
-  jcol = alpha1->size[0] * alpha1->size[0];
-  for (i = 0; i < jcol; i++) {
-    D->data[i].re = 0.0;
-    D->data[i].im = 0.0;
-  }
-  i = alpha1->size[0];
-  for (k = 0; k < i; k++) {
-    ar = alpha1->data[k].re;
-    ai = alpha1->data[k].im;
-    stemp_im = beta1->data[k].re;
-    anrm = beta1->data[k].im;
-    if (anrm == 0.0) {
-      if (ai == 0.0) {
-        D->data[k + D->size[0] * k].re = ar / stemp_im;
-        D->data[k + D->size[0] * k].im = 0.0;
-      } else if (ar == 0.0) {
-        D->data[k + D->size[0] * k].re = 0.0;
-        D->data[k + D->size[0] * k].im = ai / stemp_im;
-      } else {
-        D->data[k + D->size[0] * k].re = ar / stemp_im;
-        D->data[k + D->size[0] * k].im = ai / stemp_im;
-      }
-    } else if (stemp_im == 0.0) {
-      if (ar == 0.0) {
-        D->data[k + D->size[0] * k].re = ai / anrm;
-        D->data[k + D->size[0] * k].im = 0.0;
-      } else if (ai == 0.0) {
-        D->data[k + D->size[0] * k].re = 0.0;
-        D->data[k + D->size[0] * k].im = -(ar / anrm);
-      } else {
-        D->data[k + D->size[0] * k].re = ai / anrm;
-        D->data[k + D->size[0] * k].im = -(ar / anrm);
-      }
+  if (beta1[0].im == 0.0) {
+    if (V[0].im == 0.0) {
+      cto1 = V[0].re / beta1[0].re;
+      absxk = 0.0;
+    } else if (V[0].re == 0.0) {
+      cto1 = 0.0;
+      absxk = V[0].im / beta1[0].re;
     } else {
-      anrmto = fabs(stemp_im);
-      vtemp = fabs(anrm);
-      if (anrmto > vtemp) {
-        stemp_re = anrm / stemp_im;
-        vtemp = stemp_im + stemp_re * anrm;
-        D->data[k + D->size[0] * k].re = (ar + stemp_re * ai) / vtemp;
-        D->data[k + D->size[0] * k].im = (ai - stemp_re * ar) / vtemp;
-      } else if (vtemp == anrmto) {
-        if (stemp_im > 0.0) {
-          stemp_re = 0.5;
-        } else {
-          stemp_re = -0.5;
-        }
-        if (anrm > 0.0) {
-          vtemp = 0.5;
-        } else {
-          vtemp = -0.5;
-        }
-        D->data[k + D->size[0] * k].re = (ar * stemp_re + ai * vtemp) / anrmto;
-        D->data[k + D->size[0] * k].im = (ai * stemp_re - ar * vtemp) / anrmto;
+      cto1 = V[0].re / beta1[0].re;
+      absxk = V[0].im / beta1[0].re;
+    }
+  } else if (beta1[0].re == 0.0) {
+    if (V[0].re == 0.0) {
+      cto1 = V[0].im / beta1[0].im;
+      absxk = 0.0;
+    } else if (V[0].im == 0.0) {
+      cto1 = 0.0;
+      absxk = -(V[0].re / beta1[0].im);
+    } else {
+      cto1 = V[0].im / beta1[0].im;
+      absxk = -(V[0].re / beta1[0].im);
+    }
+  } else {
+    cfrom1 = fabs(beta1[0].re);
+    absxk = fabs(beta1[0].im);
+    if (cfrom1 > absxk) {
+      absxk = beta1[0].im / beta1[0].re;
+      ctoc = beta1[0].re + absxk * beta1[0].im;
+      cto1 = (V[0].re + absxk * V[0].im) / ctoc;
+      absxk = (V[0].im - absxk * V[0].re) / ctoc;
+    } else if (absxk == cfrom1) {
+      if (beta1[0].re > 0.0) {
+        absxk = 0.5;
       } else {
-        stemp_re = stemp_im / anrm;
-        vtemp = anrm + stemp_re * stemp_im;
-        D->data[k + D->size[0] * k].re = (stemp_re * ar + ai) / vtemp;
-        D->data[k + D->size[0] * k].im = (stemp_re * ai - ar) / vtemp;
+        absxk = -0.5;
       }
+      if (beta1[0].im > 0.0) {
+        ctoc = 0.5;
+      } else {
+        ctoc = -0.5;
+      }
+      cto1 = (V[0].re * absxk + V[0].im * ctoc) / cfrom1;
+      absxk = (V[0].im * absxk - V[0].re * ctoc) / cfrom1;
+    } else {
+      absxk = beta1[0].re / beta1[0].im;
+      ctoc = beta1[0].im + absxk * beta1[0].re;
+      cto1 = (absxk * V[0].re + V[0].im) / ctoc;
+      absxk = (absxk * V[0].im - V[0].re) / ctoc;
     }
   }
-  emxFree_creal_T(&beta1);
-  emxFree_creal_T(&alpha1);
+  V[0].re = cto1;
+  V[0].im = absxk;
+  if (beta1[1].im == 0.0) {
+    if (V[1].im == 0.0) {
+      cto1 = V[1].re / beta1[1].re;
+      absxk = 0.0;
+    } else if (V[1].re == 0.0) {
+      cto1 = 0.0;
+      absxk = V[1].im / beta1[1].re;
+    } else {
+      cto1 = V[1].re / beta1[1].re;
+      absxk = V[1].im / beta1[1].re;
+    }
+  } else if (beta1[1].re == 0.0) {
+    if (V[1].re == 0.0) {
+      cto1 = V[1].im / beta1[1].im;
+      absxk = 0.0;
+    } else if (V[1].im == 0.0) {
+      cto1 = 0.0;
+      absxk = -(V[1].re / beta1[1].im);
+    } else {
+      cto1 = V[1].im / beta1[1].im;
+      absxk = -(V[1].re / beta1[1].im);
+    }
+  } else {
+    cfrom1 = fabs(beta1[1].re);
+    absxk = fabs(beta1[1].im);
+    if (cfrom1 > absxk) {
+      absxk = beta1[1].im / beta1[1].re;
+      ctoc = beta1[1].re + absxk * beta1[1].im;
+      cto1 = (V[1].re + absxk * V[1].im) / ctoc;
+      absxk = (V[1].im - absxk * V[1].re) / ctoc;
+    } else if (absxk == cfrom1) {
+      if (beta1[1].re > 0.0) {
+        absxk = 0.5;
+      } else {
+        absxk = -0.5;
+      }
+      if (beta1[1].im > 0.0) {
+        ctoc = 0.5;
+      } else {
+        ctoc = -0.5;
+      }
+      cto1 = (V[1].re * absxk + V[1].im * ctoc) / cfrom1;
+      absxk = (V[1].im * absxk - V[1].re * ctoc) / cfrom1;
+    } else {
+      absxk = beta1[1].re / beta1[1].im;
+      ctoc = beta1[1].im + absxk * beta1[1].re;
+      cto1 = (absxk * V[1].re + V[1].im) / ctoc;
+      absxk = (absxk * V[1].im - V[1].re) / ctoc;
+    }
+  }
+  V[1].re = cto1;
+  V[1].im = absxk;
 }
 
-/*
- * File trailer for eigStandard.c
- *
- * [EOF]
- */
+/* End of code generation (eigStandard.c) */

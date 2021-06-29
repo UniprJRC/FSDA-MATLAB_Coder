@@ -2,16 +2,17 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: str2double1.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * str2double1.h
+ *
+ * Code generation for function 'str2double1'
+ *
  */
 
 #ifndef STR2DOUBLE1_H
 #define STR2DOUBLE1_H
 
-/* Include Files */
+/* Include files */
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -47,8 +48,4 @@ void readfloat(char s1[3], int *idx, char s, int *k, bool allowimag,
 #endif
 
 #endif
-/*
- * File trailer for str2double1.h
- *
- * [EOF]
- */
+/* End of code generation (str2double1.h) */

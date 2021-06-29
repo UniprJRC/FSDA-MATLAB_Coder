@@ -2,13 +2,16 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: FSMmmd.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * FSMmmd.c
+ *
+ * Code generation for function 'FSMmmd'
+ *
  */
 
-/* Include Files */
+/* Include files */
+#include <R.h>
+
 #include "FSMmmd.h"
 #include "bsxfun.h"
 #include "cat.h"
@@ -39,129 +42,6 @@
 #include <string.h>
 
 /* Function Definitions */
-/*
- * FSMmmd monitors minMD
- *
- * <a href="matlab: docsearchFS('FSMmmd')">Link to the help function</a>
- *
- *  Required input arguments:
- *
- *  Y :           Input data. Matrix.
- *                n x v data matrix; n observations and v variables. Rows of
- *                Y represent observations, and columns represent variables.
- *                Missing values (NaN's) and infinite values (Inf's) are
- *                allowed, since observations (rows) with missing or infinite
- *                values will automatically be excluded from the
- *                computations.
- *                 Data Types - single|double
- *  bsb :         Units forming subset. Vector. List of units forming the
- * initial subset. If bsb=0 (default) then the procedure starts with p units
- * randomly chosen else if bsb is not 0 the search will start with
- *                m0=length(bsb)
- *                Data Types - single | double
- *
- *
- *  Optional input arguments:
- *
- *    bsbsteps :  Save the units forming subsets. Vector. It specifies for
- *                which steps of the fwd search it
- *                is necessary to save the units forming subsets. If bsbsteps
- *                is 0 we store the units forming subset in all steps. The
- *                default is store the units forming subset in all steps if
- *                n<=5000, else to store the units forming subset at steps
- *                init and steps which are multiple of 100. For example, as
- *                default, if n=7530 and init=6,
- *                units forming subset are stored for
- *                m=init, 100, 200, ..., 7500.
- *                Example - 'bsbsteps',[100 200] stores the unis forming
- *                subset in steps 100 and 200.
- *                Data Types - double
- *
- *  init :       Point where to start monitoring
- *                required diagnostics. Scalar. Note that if bsb is supplied,
- *                init>=length(bsb). If init is not specified it will
- *                be set equal to floor(n*0.6).
- *                  Example - 'init',50
- *                  Data Types - double
- *
- *   msg  :     It controls whether to display or not messages
- *                about great interchange on the screen. Scalar.
- *                If msg==1 (default) messages are displyed on the screen
- *                else no message is displayed on the screen.
- *                  Example - 'msg',0
- *                  Data Types - double
- *
- *  nocheck :   It controls wether to perform checks on
- *                matrix Y. Boolean. If nocheck is equal to true no check is
- *                performed on matrix Y. As default nocheck=false.
- *                  Example - 'nocheck',false
- *                  Data Types - logical
- *
- *
- *  plots :     It specify whether it is necessary to produce the plots of
- * minimum Mahalanobis distance. Scalar. If plots=1, a plot of the monitoring of
- * minMD among the units not belonging to the subset is produced on the screen
- * with 1% 50% and 99% confidence bands else (default) no plot is produced.
- *                  Example - 'plots',0
- *                  Data Types - double
- *
- *
- *  Remark :      The user should only give the input arguments that have to
- *                change their default value.
- *                The name of the input arguments needs to be followed by
- *                their value. The order of the input arguments is of no
- *                importance.
- *
- *                Missing values (NaN's) and infinite values (Inf's) are
- *                allowed, since observations (rows) with missing or infinite
- *                values will automatically be excluded from the
- *                computations. y can be both a row of column vector.
- *
- *  Output:
- *
- *  mmd :         (n-init) x 2 matrix which contains the monitoring of minimum
- *                Mahalanobis distance each step of the forward search.
- *                1st col = fwd search index (from init to n-1);
- *                2nd col = minimum Mahalanobis distance.
- *  Un :          (n-init) x 11 Matrix which contains the unit(s) included
- *                in the subset at each step of the search.
- *                REMARK: in every step the new subset is compared with the
- *                old subset. Un contains the unit(s) present in the new
- *                subset but not in the old one.
- *                Un(1,2) for example contains the unit included in step
- *                init+1.
- *                Un(end,2) contains the units included in the final step
- *                of the search.
- *
- *   Optional Output:
- *
- *  BB :   n x (n-init+1) matrix containing units belonging to subset in
- *                each step of the search. Each row is associated to a unit
- *                while each colum is associated to a step of the fwd search.
- *
- *  See also FSMenvmmd.m, FSM.m, FSMmmdeasy, quickselectFS.m
- *
- *  References:
- *
- *  Atkinson, A.C., Riani, M. and Cerioli, A. (2004), "Exploring multivariate
- *  data with the forward search", Springer Verlag, New York.
- *
- *  Copyright 2008-2021.
- *  Written by FSDA team
- *
- * <a href="matlab: docsearchFS('FSMmmd')">Link to the help function</a>
- *
- * $LastChangedDate::                      $: Date of the last commit
- *
- * Arguments    : const emxArray_real_T *Y
- *                emxArray_real_T *bsb
- *                double varargin_2
- *                bool varargin_6
- *                emxArray_real_T *mmd
- *                emxArray_real_T *Un
- *                emxArray_real_T *varargout_1
- * Return Type  : void
- */
 void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             bool varargin_6, emxArray_real_T *mmd, emxArray_real_T *Un,
             emxArray_real_T *varargout_1)
@@ -232,6 +112,134 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   bool exitg1;
   bool guard1 = false;
   emxInit_boolean_T(&MDltminT, 1);
+  /* FSMmmd monitors minMD */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSMmmd')">Link to the help function</a> */
+  /*  */
+  /*  Required input arguments: */
+  /*  */
+  /*  Y :           Input data. Matrix. */
+  /*                n x v data matrix; n observations and v variables. Rows of
+   */
+  /*                Y represent observations, and columns represent variables.
+   */
+  /*                Missing values (NaN's) and infinite values (Inf's) are */
+  /*                allowed, since observations (rows) with missing or infinite
+   */
+  /*                values will automatically be excluded from the */
+  /*                computations. */
+  /*                 Data Types - single|double */
+  /*  bsb :         Units forming subset. Vector. List of units forming the
+   * initial subset. */
+  /*                If bsb=0 (default) then the procedure starts with p units
+   * randomly */
+  /*                chosen else if bsb is not 0 the search will start with */
+  /*                m0=length(bsb) */
+  /*                Data Types - single | double */
+  /*  */
+  /*  */
+  /*  Optional input arguments: */
+  /*  */
+  /*    bsbsteps :  Save the units forming subsets. Vector. It specifies for */
+  /*                which steps of the fwd search it */
+  /*                is necessary to save the units forming subsets. If bsbsteps
+   */
+  /*                is 0 we store the units forming subset in all steps. The */
+  /*                default is store the units forming subset in all steps if */
+  /*                n<=5000, else to store the units forming subset at steps */
+  /*                init and steps which are multiple of 100. For example, as */
+  /*                default, if n=7530 and init=6, */
+  /*                units forming subset are stored for */
+  /*                m=init, 100, 200, ..., 7500. */
+  /*                Example - 'bsbsteps',[100 200] stores the unis forming */
+  /*                subset in steps 100 and 200. */
+  /*                Data Types - double */
+  /*  */
+  /*  init :       Point where to start monitoring */
+  /*                required diagnostics. Scalar. Note that if bsb is supplied,
+   */
+  /*                init>=length(bsb). If init is not specified it will */
+  /*                be set equal to floor(n*0.6). */
+  /*                  Example - 'init',50 */
+  /*                  Data Types - double */
+  /*  */
+  /*   msg  :     It controls whether to display or not messages */
+  /*                about great interchange on the screen. Scalar. */
+  /*                If msg==1 (default) messages are displyed on the screen */
+  /*                else no message is displayed on the screen. */
+  /*                  Example - 'msg',0 */
+  /*                  Data Types - double */
+  /*  */
+  /*  nocheck :   It controls wether to perform checks on */
+  /*                matrix Y. Boolean. If nocheck is equal to true no check is
+   */
+  /*                performed on matrix Y. As default nocheck=false. */
+  /*                  Example - 'nocheck',false */
+  /*                  Data Types - logical */
+  /*  */
+  /*  */
+  /*  plots :     It specify whether it is necessary to produce the plots of
+   * minimum Mahalanobis */
+  /*                  distance. Scalar. If plots=1, a plot of the monitoring of
+   * minMD among */
+  /*                the units not belonging to the subset is produced on the */
+  /*                screen with 1% 50% and 99% confidence bands */
+  /*                else (default) no plot is produced. */
+  /*                  Example - 'plots',0 */
+  /*                  Data Types - double */
+  /*  */
+  /*  */
+  /*  Remark :      The user should only give the input arguments that have to
+   */
+  /*                change their default value. */
+  /*                The name of the input arguments needs to be followed by */
+  /*                their value. The order of the input arguments is of no */
+  /*                importance. */
+  /*  */
+  /*                Missing values (NaN's) and infinite values (Inf's) are */
+  /*                allowed, since observations (rows) with missing or infinite
+   */
+  /*                values will automatically be excluded from the */
+  /*                computations. y can be both a row of column vector. */
+  /*  */
+  /*  Output: */
+  /*  */
+  /*  mmd :         (n-init) x 2 matrix which contains the monitoring of minimum
+   */
+  /*                Mahalanobis distance each step of the forward search. */
+  /*                1st col = fwd search index (from init to n-1); */
+  /*                2nd col = minimum Mahalanobis distance. */
+  /*  Un :          (n-init) x 11 Matrix which contains the unit(s) included */
+  /*                in the subset at each step of the search. */
+  /*                REMARK: in every step the new subset is compared with the */
+  /*                old subset. Un contains the unit(s) present in the new */
+  /*                subset but not in the old one. */
+  /*                Un(1,2) for example contains the unit included in step */
+  /*                init+1. */
+  /*                Un(end,2) contains the units included in the final step */
+  /*                of the search. */
+  /*  */
+  /*   Optional Output: */
+  /*  */
+  /*  BB :   n x (n-init+1) matrix containing units belonging to subset in */
+  /*                each step of the search. Each row is associated to a unit */
+  /*                while each colum is associated to a step of the fwd search.
+   */
+  /*  */
+  /*  See also FSMenvmmd.m, FSM.m, FSMmmdeasy, quickselectFS.m */
+  /*  */
+  /*  References: */
+  /*  */
+  /*  Atkinson, A.C., Riani, M. and Cerioli, A. (2004), "Exploring multivariate
+   */
+  /*  data with the forward search", Springer Verlag, New York. */
+  /*  */
+  /*  Copyright 2008-2021. */
+  /*  Written by FSDA team */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSMmmd')">Link to the help function</a> */
+  /*  */
+  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /* { */
   /*     %% Minimum Mahalanobis distance. */
@@ -538,14 +546,14 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  check init */
   init1 = varargin_2;
   if (varargin_2 < (double)Y->size[1] + 1.0) {
-    printf("%s\n",
+    Rprintf("%s\n",
            "Attention : init1 should be larger than v. \nIt is set to v+1.");
     fflush(stdout);
     init1 = (double)Y->size[1] + 1.0;
   } else if (varargin_2 < bsb->size[0]) {
     init1 = bsb->size[0];
   } else if (varargin_2 >= Y->size[0]) {
-    printf("%s\n",
+    Rprintf("%s\n",
            "Attention : init1 should be smaller than n. \nIt is set to n-1.");
     fflush(stdout);
     init1 = (double)Y->size[0] - 1.0;
@@ -2042,128 +2050,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   emxFree_real_T(&seq);
 }
 
-/*
- * FSMmmd monitors minMD
- *
- * <a href="matlab: docsearchFS('FSMmmd')">Link to the help function</a>
- *
- *  Required input arguments:
- *
- *  Y :           Input data. Matrix.
- *                n x v data matrix; n observations and v variables. Rows of
- *                Y represent observations, and columns represent variables.
- *                Missing values (NaN's) and infinite values (Inf's) are
- *                allowed, since observations (rows) with missing or infinite
- *                values will automatically be excluded from the
- *                computations.
- *                 Data Types - single|double
- *  bsb :         Units forming subset. Vector. List of units forming the
- * initial subset. If bsb=0 (default) then the procedure starts with p units
- * randomly chosen else if bsb is not 0 the search will start with
- *                m0=length(bsb)
- *                Data Types - single | double
- *
- *
- *  Optional input arguments:
- *
- *    bsbsteps :  Save the units forming subsets. Vector. It specifies for
- *                which steps of the fwd search it
- *                is necessary to save the units forming subsets. If bsbsteps
- *                is 0 we store the units forming subset in all steps. The
- *                default is store the units forming subset in all steps if
- *                n<=5000, else to store the units forming subset at steps
- *                init and steps which are multiple of 100. For example, as
- *                default, if n=7530 and init=6,
- *                units forming subset are stored for
- *                m=init, 100, 200, ..., 7500.
- *                Example - 'bsbsteps',[100 200] stores the unis forming
- *                subset in steps 100 and 200.
- *                Data Types - double
- *
- *  init :       Point where to start monitoring
- *                required diagnostics. Scalar. Note that if bsb is supplied,
- *                init>=length(bsb). If init is not specified it will
- *                be set equal to floor(n*0.6).
- *                  Example - 'init',50
- *                  Data Types - double
- *
- *   msg  :     It controls whether to display or not messages
- *                about great interchange on the screen. Scalar.
- *                If msg==1 (default) messages are displyed on the screen
- *                else no message is displayed on the screen.
- *                  Example - 'msg',0
- *                  Data Types - double
- *
- *  nocheck :   It controls wether to perform checks on
- *                matrix Y. Boolean. If nocheck is equal to true no check is
- *                performed on matrix Y. As default nocheck=false.
- *                  Example - 'nocheck',false
- *                  Data Types - logical
- *
- *
- *  plots :     It specify whether it is necessary to produce the plots of
- * minimum Mahalanobis distance. Scalar. If plots=1, a plot of the monitoring of
- * minMD among the units not belonging to the subset is produced on the screen
- * with 1% 50% and 99% confidence bands else (default) no plot is produced.
- *                  Example - 'plots',0
- *                  Data Types - double
- *
- *
- *  Remark :      The user should only give the input arguments that have to
- *                change their default value.
- *                The name of the input arguments needs to be followed by
- *                their value. The order of the input arguments is of no
- *                importance.
- *
- *                Missing values (NaN's) and infinite values (Inf's) are
- *                allowed, since observations (rows) with missing or infinite
- *                values will automatically be excluded from the
- *                computations. y can be both a row of column vector.
- *
- *  Output:
- *
- *  mmd :         (n-init) x 2 matrix which contains the monitoring of minimum
- *                Mahalanobis distance each step of the forward search.
- *                1st col = fwd search index (from init to n-1);
- *                2nd col = minimum Mahalanobis distance.
- *  Un :          (n-init) x 11 Matrix which contains the unit(s) included
- *                in the subset at each step of the search.
- *                REMARK: in every step the new subset is compared with the
- *                old subset. Un contains the unit(s) present in the new
- *                subset but not in the old one.
- *                Un(1,2) for example contains the unit included in step
- *                init+1.
- *                Un(end,2) contains the units included in the final step
- *                of the search.
- *
- *   Optional Output:
- *
- *  BB :   n x (n-init+1) matrix containing units belonging to subset in
- *                each step of the search. Each row is associated to a unit
- *                while each colum is associated to a step of the fwd search.
- *
- *  See also FSMenvmmd.m, FSM.m, FSMmmdeasy, quickselectFS.m
- *
- *  References:
- *
- *  Atkinson, A.C., Riani, M. and Cerioli, A. (2004), "Exploring multivariate
- *  data with the forward search", Springer Verlag, New York.
- *
- *  Copyright 2008-2021.
- *  Written by FSDA team
- *
- * <a href="matlab: docsearchFS('FSMmmd')">Link to the help function</a>
- *
- * $LastChangedDate::                      $: Date of the last commit
- *
- * Arguments    : const emxArray_real_T *Y
- *                emxArray_real_T *bsb
- *                double varargin_2
- *                bool varargin_6
- *                emxArray_real_T *mmd
- *                emxArray_real_T *Un
- * Return Type  : void
- */
 void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               bool varargin_6, emxArray_real_T *mmd, emxArray_real_T *Un)
 {
@@ -2229,6 +2115,134 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   bool exitg1;
   bool guard1 = false;
   emxInit_boolean_T(&MDltminT, 1);
+  /* FSMmmd monitors minMD */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSMmmd')">Link to the help function</a> */
+  /*  */
+  /*  Required input arguments: */
+  /*  */
+  /*  Y :           Input data. Matrix. */
+  /*                n x v data matrix; n observations and v variables. Rows of
+   */
+  /*                Y represent observations, and columns represent variables.
+   */
+  /*                Missing values (NaN's) and infinite values (Inf's) are */
+  /*                allowed, since observations (rows) with missing or infinite
+   */
+  /*                values will automatically be excluded from the */
+  /*                computations. */
+  /*                 Data Types - single|double */
+  /*  bsb :         Units forming subset. Vector. List of units forming the
+   * initial subset. */
+  /*                If bsb=0 (default) then the procedure starts with p units
+   * randomly */
+  /*                chosen else if bsb is not 0 the search will start with */
+  /*                m0=length(bsb) */
+  /*                Data Types - single | double */
+  /*  */
+  /*  */
+  /*  Optional input arguments: */
+  /*  */
+  /*    bsbsteps :  Save the units forming subsets. Vector. It specifies for */
+  /*                which steps of the fwd search it */
+  /*                is necessary to save the units forming subsets. If bsbsteps
+   */
+  /*                is 0 we store the units forming subset in all steps. The */
+  /*                default is store the units forming subset in all steps if */
+  /*                n<=5000, else to store the units forming subset at steps */
+  /*                init and steps which are multiple of 100. For example, as */
+  /*                default, if n=7530 and init=6, */
+  /*                units forming subset are stored for */
+  /*                m=init, 100, 200, ..., 7500. */
+  /*                Example - 'bsbsteps',[100 200] stores the unis forming */
+  /*                subset in steps 100 and 200. */
+  /*                Data Types - double */
+  /*  */
+  /*  init :       Point where to start monitoring */
+  /*                required diagnostics. Scalar. Note that if bsb is supplied,
+   */
+  /*                init>=length(bsb). If init is not specified it will */
+  /*                be set equal to floor(n*0.6). */
+  /*                  Example - 'init',50 */
+  /*                  Data Types - double */
+  /*  */
+  /*   msg  :     It controls whether to display or not messages */
+  /*                about great interchange on the screen. Scalar. */
+  /*                If msg==1 (default) messages are displyed on the screen */
+  /*                else no message is displayed on the screen. */
+  /*                  Example - 'msg',0 */
+  /*                  Data Types - double */
+  /*  */
+  /*  nocheck :   It controls wether to perform checks on */
+  /*                matrix Y. Boolean. If nocheck is equal to true no check is
+   */
+  /*                performed on matrix Y. As default nocheck=false. */
+  /*                  Example - 'nocheck',false */
+  /*                  Data Types - logical */
+  /*  */
+  /*  */
+  /*  plots :     It specify whether it is necessary to produce the plots of
+   * minimum Mahalanobis */
+  /*                  distance. Scalar. If plots=1, a plot of the monitoring of
+   * minMD among */
+  /*                the units not belonging to the subset is produced on the */
+  /*                screen with 1% 50% and 99% confidence bands */
+  /*                else (default) no plot is produced. */
+  /*                  Example - 'plots',0 */
+  /*                  Data Types - double */
+  /*  */
+  /*  */
+  /*  Remark :      The user should only give the input arguments that have to
+   */
+  /*                change their default value. */
+  /*                The name of the input arguments needs to be followed by */
+  /*                their value. The order of the input arguments is of no */
+  /*                importance. */
+  /*  */
+  /*                Missing values (NaN's) and infinite values (Inf's) are */
+  /*                allowed, since observations (rows) with missing or infinite
+   */
+  /*                values will automatically be excluded from the */
+  /*                computations. y can be both a row of column vector. */
+  /*  */
+  /*  Output: */
+  /*  */
+  /*  mmd :         (n-init) x 2 matrix which contains the monitoring of minimum
+   */
+  /*                Mahalanobis distance each step of the forward search. */
+  /*                1st col = fwd search index (from init to n-1); */
+  /*                2nd col = minimum Mahalanobis distance. */
+  /*  Un :          (n-init) x 11 Matrix which contains the unit(s) included */
+  /*                in the subset at each step of the search. */
+  /*                REMARK: in every step the new subset is compared with the */
+  /*                old subset. Un contains the unit(s) present in the new */
+  /*                subset but not in the old one. */
+  /*                Un(1,2) for example contains the unit included in step */
+  /*                init+1. */
+  /*                Un(end,2) contains the units included in the final step */
+  /*                of the search. */
+  /*  */
+  /*   Optional Output: */
+  /*  */
+  /*  BB :   n x (n-init+1) matrix containing units belonging to subset in */
+  /*                each step of the search. Each row is associated to a unit */
+  /*                while each colum is associated to a step of the fwd search.
+   */
+  /*  */
+  /*  See also FSMenvmmd.m, FSM.m, FSMmmdeasy, quickselectFS.m */
+  /*  */
+  /*  References: */
+  /*  */
+  /*  Atkinson, A.C., Riani, M. and Cerioli, A. (2004), "Exploring multivariate
+   */
+  /*  data with the forward search", Springer Verlag, New York. */
+  /*  */
+  /*  Copyright 2008-2021. */
+  /*  Written by FSDA team */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSMmmd')">Link to the help function</a> */
+  /*  */
+  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /* { */
   /*     %% Minimum Mahalanobis distance. */
@@ -2535,14 +2549,14 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  check init */
   init1 = varargin_2;
   if (varargin_2 < (double)Y->size[1] + 1.0) {
-    printf("%s\n",
+    Rprintf("%s\n",
            "Attention : init1 should be larger than v. \nIt is set to v+1.");
     fflush(stdout);
     init1 = (double)Y->size[1] + 1.0;
   } else if (varargin_2 < bsb->size[0]) {
     init1 = bsb->size[0];
   } else if (varargin_2 >= Y->size[0]) {
-    printf("%s\n",
+    Rprintf("%s\n",
            "Attention : init1 should be smaller than n. \nIt is set to n-1.");
     fflush(stdout);
     init1 = (double)Y->size[0] - 1.0;
@@ -3865,128 +3879,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   emxFree_real_T(&seq);
 }
 
-/*
- * FSMmmd monitors minMD
- *
- * <a href="matlab: docsearchFS('FSMmmd')">Link to the help function</a>
- *
- *  Required input arguments:
- *
- *  Y :           Input data. Matrix.
- *                n x v data matrix; n observations and v variables. Rows of
- *                Y represent observations, and columns represent variables.
- *                Missing values (NaN's) and infinite values (Inf's) are
- *                allowed, since observations (rows) with missing or infinite
- *                values will automatically be excluded from the
- *                computations.
- *                 Data Types - single|double
- *  bsb :         Units forming subset. Vector. List of units forming the
- * initial subset. If bsb=0 (default) then the procedure starts with p units
- * randomly chosen else if bsb is not 0 the search will start with
- *                m0=length(bsb)
- *                Data Types - single | double
- *
- *
- *  Optional input arguments:
- *
- *    bsbsteps :  Save the units forming subsets. Vector. It specifies for
- *                which steps of the fwd search it
- *                is necessary to save the units forming subsets. If bsbsteps
- *                is 0 we store the units forming subset in all steps. The
- *                default is store the units forming subset in all steps if
- *                n<=5000, else to store the units forming subset at steps
- *                init and steps which are multiple of 100. For example, as
- *                default, if n=7530 and init=6,
- *                units forming subset are stored for
- *                m=init, 100, 200, ..., 7500.
- *                Example - 'bsbsteps',[100 200] stores the unis forming
- *                subset in steps 100 and 200.
- *                Data Types - double
- *
- *  init :       Point where to start monitoring
- *                required diagnostics. Scalar. Note that if bsb is supplied,
- *                init>=length(bsb). If init is not specified it will
- *                be set equal to floor(n*0.6).
- *                  Example - 'init',50
- *                  Data Types - double
- *
- *   msg  :     It controls whether to display or not messages
- *                about great interchange on the screen. Scalar.
- *                If msg==1 (default) messages are displyed on the screen
- *                else no message is displayed on the screen.
- *                  Example - 'msg',0
- *                  Data Types - double
- *
- *  nocheck :   It controls wether to perform checks on
- *                matrix Y. Boolean. If nocheck is equal to true no check is
- *                performed on matrix Y. As default nocheck=false.
- *                  Example - 'nocheck',false
- *                  Data Types - logical
- *
- *
- *  plots :     It specify whether it is necessary to produce the plots of
- * minimum Mahalanobis distance. Scalar. If plots=1, a plot of the monitoring of
- * minMD among the units not belonging to the subset is produced on the screen
- * with 1% 50% and 99% confidence bands else (default) no plot is produced.
- *                  Example - 'plots',0
- *                  Data Types - double
- *
- *
- *  Remark :      The user should only give the input arguments that have to
- *                change their default value.
- *                The name of the input arguments needs to be followed by
- *                their value. The order of the input arguments is of no
- *                importance.
- *
- *                Missing values (NaN's) and infinite values (Inf's) are
- *                allowed, since observations (rows) with missing or infinite
- *                values will automatically be excluded from the
- *                computations. y can be both a row of column vector.
- *
- *  Output:
- *
- *  mmd :         (n-init) x 2 matrix which contains the monitoring of minimum
- *                Mahalanobis distance each step of the forward search.
- *                1st col = fwd search index (from init to n-1);
- *                2nd col = minimum Mahalanobis distance.
- *  Un :          (n-init) x 11 Matrix which contains the unit(s) included
- *                in the subset at each step of the search.
- *                REMARK: in every step the new subset is compared with the
- *                old subset. Un contains the unit(s) present in the new
- *                subset but not in the old one.
- *                Un(1,2) for example contains the unit included in step
- *                init+1.
- *                Un(end,2) contains the units included in the final step
- *                of the search.
- *
- *   Optional Output:
- *
- *  BB :   n x (n-init+1) matrix containing units belonging to subset in
- *                each step of the search. Each row is associated to a unit
- *                while each colum is associated to a step of the fwd search.
- *
- *  See also FSMenvmmd.m, FSM.m, FSMmmdeasy, quickselectFS.m
- *
- *  References:
- *
- *  Atkinson, A.C., Riani, M. and Cerioli, A. (2004), "Exploring multivariate
- *  data with the forward search", Springer Verlag, New York.
- *
- *  Copyright 2008-2021.
- *  Written by FSDA team
- *
- * <a href="matlab: docsearchFS('FSMmmd')">Link to the help function</a>
- *
- * $LastChangedDate::                      $: Date of the last commit
- *
- * Arguments    : const emxArray_real_T *Y
- *                emxArray_real_T *bsb
- *                double varargin_2
- *                emxArray_real_T *mmd
- *                emxArray_real_T *Un
- *                emxArray_real_T *varargout_1
- * Return Type  : void
- */
 void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               emxArray_real_T *mmd, emxArray_real_T *Un,
               emxArray_real_T *varargout_1)
@@ -4056,6 +3948,134 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   bool exitg1;
   bool guard1 = false;
   emxInit_boolean_T(&MDltminT, 1);
+  /* FSMmmd monitors minMD */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSMmmd')">Link to the help function</a> */
+  /*  */
+  /*  Required input arguments: */
+  /*  */
+  /*  Y :           Input data. Matrix. */
+  /*                n x v data matrix; n observations and v variables. Rows of
+   */
+  /*                Y represent observations, and columns represent variables.
+   */
+  /*                Missing values (NaN's) and infinite values (Inf's) are */
+  /*                allowed, since observations (rows) with missing or infinite
+   */
+  /*                values will automatically be excluded from the */
+  /*                computations. */
+  /*                 Data Types - single|double */
+  /*  bsb :         Units forming subset. Vector. List of units forming the
+   * initial subset. */
+  /*                If bsb=0 (default) then the procedure starts with p units
+   * randomly */
+  /*                chosen else if bsb is not 0 the search will start with */
+  /*                m0=length(bsb) */
+  /*                Data Types - single | double */
+  /*  */
+  /*  */
+  /*  Optional input arguments: */
+  /*  */
+  /*    bsbsteps :  Save the units forming subsets. Vector. It specifies for */
+  /*                which steps of the fwd search it */
+  /*                is necessary to save the units forming subsets. If bsbsteps
+   */
+  /*                is 0 we store the units forming subset in all steps. The */
+  /*                default is store the units forming subset in all steps if */
+  /*                n<=5000, else to store the units forming subset at steps */
+  /*                init and steps which are multiple of 100. For example, as */
+  /*                default, if n=7530 and init=6, */
+  /*                units forming subset are stored for */
+  /*                m=init, 100, 200, ..., 7500. */
+  /*                Example - 'bsbsteps',[100 200] stores the unis forming */
+  /*                subset in steps 100 and 200. */
+  /*                Data Types - double */
+  /*  */
+  /*  init :       Point where to start monitoring */
+  /*                required diagnostics. Scalar. Note that if bsb is supplied,
+   */
+  /*                init>=length(bsb). If init is not specified it will */
+  /*                be set equal to floor(n*0.6). */
+  /*                  Example - 'init',50 */
+  /*                  Data Types - double */
+  /*  */
+  /*   msg  :     It controls whether to display or not messages */
+  /*                about great interchange on the screen. Scalar. */
+  /*                If msg==1 (default) messages are displyed on the screen */
+  /*                else no message is displayed on the screen. */
+  /*                  Example - 'msg',0 */
+  /*                  Data Types - double */
+  /*  */
+  /*  nocheck :   It controls wether to perform checks on */
+  /*                matrix Y. Boolean. If nocheck is equal to true no check is
+   */
+  /*                performed on matrix Y. As default nocheck=false. */
+  /*                  Example - 'nocheck',false */
+  /*                  Data Types - logical */
+  /*  */
+  /*  */
+  /*  plots :     It specify whether it is necessary to produce the plots of
+   * minimum Mahalanobis */
+  /*                  distance. Scalar. If plots=1, a plot of the monitoring of
+   * minMD among */
+  /*                the units not belonging to the subset is produced on the */
+  /*                screen with 1% 50% and 99% confidence bands */
+  /*                else (default) no plot is produced. */
+  /*                  Example - 'plots',0 */
+  /*                  Data Types - double */
+  /*  */
+  /*  */
+  /*  Remark :      The user should only give the input arguments that have to
+   */
+  /*                change their default value. */
+  /*                The name of the input arguments needs to be followed by */
+  /*                their value. The order of the input arguments is of no */
+  /*                importance. */
+  /*  */
+  /*                Missing values (NaN's) and infinite values (Inf's) are */
+  /*                allowed, since observations (rows) with missing or infinite
+   */
+  /*                values will automatically be excluded from the */
+  /*                computations. y can be both a row of column vector. */
+  /*  */
+  /*  Output: */
+  /*  */
+  /*  mmd :         (n-init) x 2 matrix which contains the monitoring of minimum
+   */
+  /*                Mahalanobis distance each step of the forward search. */
+  /*                1st col = fwd search index (from init to n-1); */
+  /*                2nd col = minimum Mahalanobis distance. */
+  /*  Un :          (n-init) x 11 Matrix which contains the unit(s) included */
+  /*                in the subset at each step of the search. */
+  /*                REMARK: in every step the new subset is compared with the */
+  /*                old subset. Un contains the unit(s) present in the new */
+  /*                subset but not in the old one. */
+  /*                Un(1,2) for example contains the unit included in step */
+  /*                init+1. */
+  /*                Un(end,2) contains the units included in the final step */
+  /*                of the search. */
+  /*  */
+  /*   Optional Output: */
+  /*  */
+  /*  BB :   n x (n-init+1) matrix containing units belonging to subset in */
+  /*                each step of the search. Each row is associated to a unit */
+  /*                while each colum is associated to a step of the fwd search.
+   */
+  /*  */
+  /*  See also FSMenvmmd.m, FSM.m, FSMmmdeasy, quickselectFS.m */
+  /*  */
+  /*  References: */
+  /*  */
+  /*  Atkinson, A.C., Riani, M. and Cerioli, A. (2004), "Exploring multivariate
+   */
+  /*  data with the forward search", Springer Verlag, New York. */
+  /*  */
+  /*  Copyright 2008-2021. */
+  /*  Written by FSDA team */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSMmmd')">Link to the help function</a> */
+  /*  */
+  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /* { */
   /*     %% Minimum Mahalanobis distance. */
@@ -4362,14 +4382,14 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  check init */
   init1 = varargin_2;
   if (varargin_2 < (double)Y->size[1] + 1.0) {
-    printf("%s\n",
+    Rprintf("%s\n",
            "Attention : init1 should be larger than v. \nIt is set to v+1.");
     fflush(stdout);
     init1 = (double)Y->size[1] + 1.0;
   } else if (varargin_2 < bsb->size[0]) {
     init1 = bsb->size[0];
   } else if (varargin_2 >= Y->size[0]) {
-    printf("%s\n",
+    Rprintf("%s\n",
            "Attention : init1 should be smaller than n. \nIt is set to n-1.");
     fflush(stdout);
     init1 = (double)Y->size[0] - 1.0;
@@ -5844,127 +5864,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   emxFree_real_T(&seq);
 }
 
-/*
- * FSMmmd monitors minMD
- *
- * <a href="matlab: docsearchFS('FSMmmd')">Link to the help function</a>
- *
- *  Required input arguments:
- *
- *  Y :           Input data. Matrix.
- *                n x v data matrix; n observations and v variables. Rows of
- *                Y represent observations, and columns represent variables.
- *                Missing values (NaN's) and infinite values (Inf's) are
- *                allowed, since observations (rows) with missing or infinite
- *                values will automatically be excluded from the
- *                computations.
- *                 Data Types - single|double
- *  bsb :         Units forming subset. Vector. List of units forming the
- * initial subset. If bsb=0 (default) then the procedure starts with p units
- * randomly chosen else if bsb is not 0 the search will start with
- *                m0=length(bsb)
- *                Data Types - single | double
- *
- *
- *  Optional input arguments:
- *
- *    bsbsteps :  Save the units forming subsets. Vector. It specifies for
- *                which steps of the fwd search it
- *                is necessary to save the units forming subsets. If bsbsteps
- *                is 0 we store the units forming subset in all steps. The
- *                default is store the units forming subset in all steps if
- *                n<=5000, else to store the units forming subset at steps
- *                init and steps which are multiple of 100. For example, as
- *                default, if n=7530 and init=6,
- *                units forming subset are stored for
- *                m=init, 100, 200, ..., 7500.
- *                Example - 'bsbsteps',[100 200] stores the unis forming
- *                subset in steps 100 and 200.
- *                Data Types - double
- *
- *  init :       Point where to start monitoring
- *                required diagnostics. Scalar. Note that if bsb is supplied,
- *                init>=length(bsb). If init is not specified it will
- *                be set equal to floor(n*0.6).
- *                  Example - 'init',50
- *                  Data Types - double
- *
- *   msg  :     It controls whether to display or not messages
- *                about great interchange on the screen. Scalar.
- *                If msg==1 (default) messages are displyed on the screen
- *                else no message is displayed on the screen.
- *                  Example - 'msg',0
- *                  Data Types - double
- *
- *  nocheck :   It controls wether to perform checks on
- *                matrix Y. Boolean. If nocheck is equal to true no check is
- *                performed on matrix Y. As default nocheck=false.
- *                  Example - 'nocheck',false
- *                  Data Types - logical
- *
- *
- *  plots :     It specify whether it is necessary to produce the plots of
- * minimum Mahalanobis distance. Scalar. If plots=1, a plot of the monitoring of
- * minMD among the units not belonging to the subset is produced on the screen
- * with 1% 50% and 99% confidence bands else (default) no plot is produced.
- *                  Example - 'plots',0
- *                  Data Types - double
- *
- *
- *  Remark :      The user should only give the input arguments that have to
- *                change their default value.
- *                The name of the input arguments needs to be followed by
- *                their value. The order of the input arguments is of no
- *                importance.
- *
- *                Missing values (NaN's) and infinite values (Inf's) are
- *                allowed, since observations (rows) with missing or infinite
- *                values will automatically be excluded from the
- *                computations. y can be both a row of column vector.
- *
- *  Output:
- *
- *  mmd :         (n-init) x 2 matrix which contains the monitoring of minimum
- *                Mahalanobis distance each step of the forward search.
- *                1st col = fwd search index (from init to n-1);
- *                2nd col = minimum Mahalanobis distance.
- *  Un :          (n-init) x 11 Matrix which contains the unit(s) included
- *                in the subset at each step of the search.
- *                REMARK: in every step the new subset is compared with the
- *                old subset. Un contains the unit(s) present in the new
- *                subset but not in the old one.
- *                Un(1,2) for example contains the unit included in step
- *                init+1.
- *                Un(end,2) contains the units included in the final step
- *                of the search.
- *
- *   Optional Output:
- *
- *  BB :   n x (n-init+1) matrix containing units belonging to subset in
- *                each step of the search. Each row is associated to a unit
- *                while each colum is associated to a step of the fwd search.
- *
- *  See also FSMenvmmd.m, FSM.m, FSMmmdeasy, quickselectFS.m
- *
- *  References:
- *
- *  Atkinson, A.C., Riani, M. and Cerioli, A. (2004), "Exploring multivariate
- *  data with the forward search", Springer Verlag, New York.
- *
- *  Copyright 2008-2021.
- *  Written by FSDA team
- *
- * <a href="matlab: docsearchFS('FSMmmd')">Link to the help function</a>
- *
- * $LastChangedDate::                      $: Date of the last commit
- *
- * Arguments    : const emxArray_real_T *Y
- *                emxArray_real_T *bsb
- *                double varargin_2
- *                emxArray_real_T *mmd
- *                emxArray_real_T *Un
- * Return Type  : void
- */
 void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               emxArray_real_T *mmd, emxArray_real_T *Un)
 {
@@ -6029,6 +5928,134 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   bool exitg1;
   bool guard1 = false;
   emxInit_boolean_T(&MDltminT, 1);
+  /* FSMmmd monitors minMD */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSMmmd')">Link to the help function</a> */
+  /*  */
+  /*  Required input arguments: */
+  /*  */
+  /*  Y :           Input data. Matrix. */
+  /*                n x v data matrix; n observations and v variables. Rows of
+   */
+  /*                Y represent observations, and columns represent variables.
+   */
+  /*                Missing values (NaN's) and infinite values (Inf's) are */
+  /*                allowed, since observations (rows) with missing or infinite
+   */
+  /*                values will automatically be excluded from the */
+  /*                computations. */
+  /*                 Data Types - single|double */
+  /*  bsb :         Units forming subset. Vector. List of units forming the
+   * initial subset. */
+  /*                If bsb=0 (default) then the procedure starts with p units
+   * randomly */
+  /*                chosen else if bsb is not 0 the search will start with */
+  /*                m0=length(bsb) */
+  /*                Data Types - single | double */
+  /*  */
+  /*  */
+  /*  Optional input arguments: */
+  /*  */
+  /*    bsbsteps :  Save the units forming subsets. Vector. It specifies for */
+  /*                which steps of the fwd search it */
+  /*                is necessary to save the units forming subsets. If bsbsteps
+   */
+  /*                is 0 we store the units forming subset in all steps. The */
+  /*                default is store the units forming subset in all steps if */
+  /*                n<=5000, else to store the units forming subset at steps */
+  /*                init and steps which are multiple of 100. For example, as */
+  /*                default, if n=7530 and init=6, */
+  /*                units forming subset are stored for */
+  /*                m=init, 100, 200, ..., 7500. */
+  /*                Example - 'bsbsteps',[100 200] stores the unis forming */
+  /*                subset in steps 100 and 200. */
+  /*                Data Types - double */
+  /*  */
+  /*  init :       Point where to start monitoring */
+  /*                required diagnostics. Scalar. Note that if bsb is supplied,
+   */
+  /*                init>=length(bsb). If init is not specified it will */
+  /*                be set equal to floor(n*0.6). */
+  /*                  Example - 'init',50 */
+  /*                  Data Types - double */
+  /*  */
+  /*   msg  :     It controls whether to display or not messages */
+  /*                about great interchange on the screen. Scalar. */
+  /*                If msg==1 (default) messages are displyed on the screen */
+  /*                else no message is displayed on the screen. */
+  /*                  Example - 'msg',0 */
+  /*                  Data Types - double */
+  /*  */
+  /*  nocheck :   It controls wether to perform checks on */
+  /*                matrix Y. Boolean. If nocheck is equal to true no check is
+   */
+  /*                performed on matrix Y. As default nocheck=false. */
+  /*                  Example - 'nocheck',false */
+  /*                  Data Types - logical */
+  /*  */
+  /*  */
+  /*  plots :     It specify whether it is necessary to produce the plots of
+   * minimum Mahalanobis */
+  /*                  distance. Scalar. If plots=1, a plot of the monitoring of
+   * minMD among */
+  /*                the units not belonging to the subset is produced on the */
+  /*                screen with 1% 50% and 99% confidence bands */
+  /*                else (default) no plot is produced. */
+  /*                  Example - 'plots',0 */
+  /*                  Data Types - double */
+  /*  */
+  /*  */
+  /*  Remark :      The user should only give the input arguments that have to
+   */
+  /*                change their default value. */
+  /*                The name of the input arguments needs to be followed by */
+  /*                their value. The order of the input arguments is of no */
+  /*                importance. */
+  /*  */
+  /*                Missing values (NaN's) and infinite values (Inf's) are */
+  /*                allowed, since observations (rows) with missing or infinite
+   */
+  /*                values will automatically be excluded from the */
+  /*                computations. y can be both a row of column vector. */
+  /*  */
+  /*  Output: */
+  /*  */
+  /*  mmd :         (n-init) x 2 matrix which contains the monitoring of minimum
+   */
+  /*                Mahalanobis distance each step of the forward search. */
+  /*                1st col = fwd search index (from init to n-1); */
+  /*                2nd col = minimum Mahalanobis distance. */
+  /*  Un :          (n-init) x 11 Matrix which contains the unit(s) included */
+  /*                in the subset at each step of the search. */
+  /*                REMARK: in every step the new subset is compared with the */
+  /*                old subset. Un contains the unit(s) present in the new */
+  /*                subset but not in the old one. */
+  /*                Un(1,2) for example contains the unit included in step */
+  /*                init+1. */
+  /*                Un(end,2) contains the units included in the final step */
+  /*                of the search. */
+  /*  */
+  /*   Optional Output: */
+  /*  */
+  /*  BB :   n x (n-init+1) matrix containing units belonging to subset in */
+  /*                each step of the search. Each row is associated to a unit */
+  /*                while each colum is associated to a step of the fwd search.
+   */
+  /*  */
+  /*  See also FSMenvmmd.m, FSM.m, FSMmmdeasy, quickselectFS.m */
+  /*  */
+  /*  References: */
+  /*  */
+  /*  Atkinson, A.C., Riani, M. and Cerioli, A. (2004), "Exploring multivariate
+   */
+  /*  data with the forward search", Springer Verlag, New York. */
+  /*  */
+  /*  Copyright 2008-2021. */
+  /*  Written by FSDA team */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSMmmd')">Link to the help function</a> */
+  /*  */
+  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /* { */
   /*     %% Minimum Mahalanobis distance. */
@@ -6335,14 +6362,14 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  check init */
   init1 = varargin_2;
   if (varargin_2 < (double)Y->size[1] + 1.0) {
-    printf("%s\n",
+    Rprintf("%s\n",
            "Attention : init1 should be larger than v. \nIt is set to v+1.");
     fflush(stdout);
     init1 = (double)Y->size[1] + 1.0;
   } else if (varargin_2 < bsb->size[0]) {
     init1 = bsb->size[0];
   } else if (varargin_2 >= Y->size[0]) {
-    printf("%s\n",
+    Rprintf("%s\n",
            "Attention : init1 should be smaller than n. \nIt is set to n-1.");
     fflush(stdout);
     init1 = (double)Y->size[0] - 1.0;
@@ -7661,8 +7688,4 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   emxFree_real_T(&seq);
 }
 
-/*
- * File trailer for FSMmmd.c
- *
- * [EOF]
- */
+/* End of code generation (FSMmmd.c) */

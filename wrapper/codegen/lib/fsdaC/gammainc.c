@@ -2,27 +2,22 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: gammainc.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * gammainc.c
+ *
+ * Code generation for function 'gammainc'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "gammainc.h"
 #include "fsdaC_data.h"
 #include "gammaln.h"
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 #include <math.h>
-#include <string.h>
 
 /* Function Definitions */
-/*
- * Arguments    : double x
- *                double a
- * Return Type  : creal_T
- */
 creal_T gammainc(double x, double a)
 {
   creal_T b;
@@ -423,8 +418,4 @@ creal_T gammainc(double x, double a)
   return b;
 }
 
-/*
- * File trailer for gammainc.c
- *
- * [EOF]
- */
+/* End of code generation (gammainc.c) */

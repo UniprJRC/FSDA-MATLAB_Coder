@@ -2,7 +2,7 @@
 ## Makefile generated for component 'fsdaC'. 
 ## 
 ## Makefile     : fsdaC_rtw.mk
-## Generated on : Fri Jun 25 16:11:56 2021
+## Generated on : Sat Jun 26 15:25:37 2021
 ## Final product: ./fsdaC.lib
 ## Product type : static-library
 ## 
@@ -190,7 +190,7 @@ DEFINES = $(DEFINES_) $(DEFINES_CUSTOM) $(DEFINES_STANDARD)
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(START_DIR)/coder_posix_time.c $(START_DIR)/fsdaC_data.c $(START_DIR)/rt_nonfinite.c $(START_DIR)/rtGetNaN.c $(START_DIR)/rtGetInf.c $(START_DIR)/fsdaC_initialize.c $(START_DIR)/fsdaC_terminate.c $(START_DIR)/FSM_wrapper.c $(START_DIR)/mtimes.c $(START_DIR)/minOrMax.c $(START_DIR)/find.c $(START_DIR)/int2str.c $(START_DIR)/rank.c $(START_DIR)/svd.c $(START_DIR)/xnrm2.c $(START_DIR)/unibiv.c $(START_DIR)/median.c $(START_DIR)/quickselect.c $(START_DIR)/mad.c $(START_DIR)/blockedSummation.c $(START_DIR)/nanmedian.c $(START_DIR)/sortIdx.c $(START_DIR)/iqr.c $(START_DIR)/quantile.c $(START_DIR)/vvarstd.c $(START_DIR)/gammaincinv.c $(START_DIR)/eml_gammainc.c $(START_DIR)/gammainc.c $(START_DIR)/betainc.c $(START_DIR)/eml_betainc.c $(START_DIR)/betaincinv.c $(START_DIR)/eig.c $(START_DIR)/eigHermitianStandard.c $(START_DIR)/xzlartg.c $(START_DIR)/xzhgeqz.c $(START_DIR)/relop.c $(START_DIR)/strcmp.c $(START_DIR)/sortrowsLE.c $(START_DIR)/FSMmmd.c $(START_DIR)/ifWhileCond.c $(START_DIR)/randsample.c $(START_DIR)/randperm.c $(START_DIR)/rand.c $(START_DIR)/cov.c $(START_DIR)/colon.c $(START_DIR)/mod.c $(START_DIR)/cat.c $(START_DIR)/combineVectorElements.c $(START_DIR)/bsxfun.c $(START_DIR)/sum.c $(START_DIR)/inv.c $(START_DIR)/qr.c $(START_DIR)/mrdivide_helper.c $(START_DIR)/qrsolve.c $(START_DIR)/power.c $(START_DIR)/quickselectFS.c $(START_DIR)/FSMbonfbound.c $(START_DIR)/repmat.c $(START_DIR)/finv.c $(START_DIR)/chi2inv.c $(START_DIR)/FSMenvmmd.c $(START_DIR)/chi2cdf.c $(START_DIR)/FSMbsb.c $(START_DIR)/eml_setop.c $(START_DIR)/FSMbsb_wrapper.c $(START_DIR)/FSMmmd_wrapper.c $(START_DIR)/FSR_wrapper.c $(START_DIR)/bc.c $(START_DIR)/LXS.c $(START_DIR)/subsets.c $(START_DIR)/combsFS.c $(START_DIR)/isequal.c $(START_DIR)/pascal.c $(START_DIR)/lexunrank.c $(START_DIR)/FSM.c $(START_DIR)/tic.c $(START_DIR)/mldivide.c $(START_DIR)/toc.c $(START_DIR)/erfcinv.c $(START_DIR)/eml_erfcore.c $(START_DIR)/tinv.c $(START_DIR)/FSRmdr.c $(START_DIR)/sprintf.c $(START_DIR)/repelem.c $(START_DIR)/any.c $(START_DIR)/FSRcore.c $(START_DIR)/FSRbonfbound.c $(START_DIR)/abs.c $(START_DIR)/FSRenvmdr.c $(START_DIR)/print_processing.c $(START_DIR)/FSRbsb.c $(START_DIR)/unique.c $(START_DIR)/FSRbsb_wrapper.c $(START_DIR)/FSRfan_wrapper.c $(START_DIR)/normYJ.c $(START_DIR)/Score.c $(START_DIR)/diag.c $(START_DIR)/ScoreYJ.c $(START_DIR)/ScoreYJall.c $(START_DIR)/FSRmdr_wrapper.c $(START_DIR)/LTSts_wrapper.c $(START_DIR)/str2double.c $(START_DIR)/LTSts.c $(START_DIR)/HUrho.c $(START_DIR)/zscore.c $(START_DIR)/zscoreFS.c $(START_DIR)/prctile.c $(START_DIR)/RobRegrSize.c $(START_DIR)/GYfilt.c $(START_DIR)/lsqcurvefit.c $(START_DIR)/factoryConstruct.c $(START_DIR)/checkStoppingCriteria.c $(START_DIR)/tcdf.c $(START_DIR)/string1.c $(START_DIR)/array2table.c $(START_DIR)/fcdf.c $(START_DIR)/FSRinvmdr.c $(START_DIR)/LXS_wrapper.c $(START_DIR)/LXS_wrapper1.c $(START_DIR)/addt_wrapper.c $(START_DIR)/tclust_wrapper.c $(START_DIR)/eye.c $(START_DIR)/ishermitian.c $(START_DIR)/eigStandard.c $(START_DIR)/xzlangeM.c $(START_DIR)/xzlanhs.c $(START_DIR)/permute.c $(START_DIR)/estepFS.c $(START_DIR)/logmvnpdfFS.c $(START_DIR)/tclust_wrapper1.c $(START_DIR)/det.c $(START_DIR)/xzgeev.c $(START_DIR)/cpcV.c $(START_DIR)/cpcE.c $(START_DIR)/restrshapeGPCM.c $(START_DIR)/eml_rand_mt19937ar_stateful.c $(START_DIR)/CoderTimeAPI.c $(START_DIR)/chkinputM.c $(START_DIR)/nullAssignment.c $(START_DIR)/xaxpy.c $(START_DIR)/xrotg.c $(START_DIR)/sort.c $(START_DIR)/sign.c $(START_DIR)/gammaln.c $(START_DIR)/xzlarfg.c $(START_DIR)/xdlanv2.c $(START_DIR)/sqrt.c $(START_DIR)/sortrows.c $(START_DIR)/eml_rand_mt19937ar.c $(START_DIR)/xzgetrf.c $(START_DIR)/xzgeqp3.c $(START_DIR)/xzlarf.c $(START_DIR)/xgerc.c $(START_DIR)/xgeqp3.c $(START_DIR)/chkinputR.c $(START_DIR)/xunormqr.c $(START_DIR)/str2double1.c $(START_DIR)/hasFiniteBounds.c $(START_DIR)/jacobianFiniteDifference.c $(START_DIR)/computeFiniteDifferences.c $(START_DIR)/finDiffEvalAndChkErr.c $(START_DIR)/xgemv.c $(START_DIR)/projectBox.c $(START_DIR)/driver.c $(START_DIR)/linearLeastSquares.c $(START_DIR)/xzgehrd.c $(START_DIR)/xhseqr.c $(START_DIR)/triu.c $(START_DIR)/xzlascl.c $(START_DIR)/xzggbal.c $(START_DIR)/xztgevc.c $(START_DIR)/restreigen.c $(START_DIR)/restreigeneasy.c $(START_DIR)/chol.c $(START_DIR)/restrSigmaGPCM.c $(START_DIR)/fsdaC_emxutil.c $(START_DIR)/fsdaC_emxAPI.c $(START_DIR)/fsdaC_rtwutil.c
+SRCS = $(START_DIR)/coder_posix_time.c $(START_DIR)/fsdaC_data.c $(START_DIR)/rt_nonfinite.c $(START_DIR)/rtGetNaN.c $(START_DIR)/rtGetInf.c $(START_DIR)/fsdaC_initialize.c $(START_DIR)/fsdaC_terminate.c $(START_DIR)/FSM_wrapper.c $(START_DIR)/mtimes.c $(START_DIR)/minOrMax.c $(START_DIR)/find.c $(START_DIR)/int2str.c $(START_DIR)/rank.c $(START_DIR)/svd.c $(START_DIR)/xnrm2.c $(START_DIR)/unibiv.c $(START_DIR)/median.c $(START_DIR)/quickselect.c $(START_DIR)/mad.c $(START_DIR)/nanmedian.c $(START_DIR)/sortIdx.c $(START_DIR)/iqr.c $(START_DIR)/quantile.c $(START_DIR)/blockedSummation.c $(START_DIR)/vvarstd.c $(START_DIR)/gammaincinv.c $(START_DIR)/eml_gammainc.c $(START_DIR)/gammainc.c $(START_DIR)/betainc.c $(START_DIR)/eml_betainc.c $(START_DIR)/betaincinv.c $(START_DIR)/eig.c $(START_DIR)/eigStandard.c $(START_DIR)/xzhgeqz.c $(START_DIR)/strcmp.c $(START_DIR)/sortrowsLE.c $(START_DIR)/FSMmmd.c $(START_DIR)/ifWhileCond.c $(START_DIR)/randsample.c $(START_DIR)/randperm.c $(START_DIR)/rand.c $(START_DIR)/cov.c $(START_DIR)/colon.c $(START_DIR)/mod.c $(START_DIR)/cat.c $(START_DIR)/combineVectorElements.c $(START_DIR)/bsxfun.c $(START_DIR)/sum.c $(START_DIR)/inv.c $(START_DIR)/qr.c $(START_DIR)/mrdivide_helper.c $(START_DIR)/qrsolve.c $(START_DIR)/power.c $(START_DIR)/quickselectFS.c $(START_DIR)/FSMbonfbound.c $(START_DIR)/repmat.c $(START_DIR)/finv.c $(START_DIR)/chi2inv.c $(START_DIR)/FSMenvmmd.c $(START_DIR)/chi2cdf.c $(START_DIR)/FSMbsb.c $(START_DIR)/eml_setop.c $(START_DIR)/FSMbsb_wrapper.c $(START_DIR)/FSMmmd_wrapper.c $(START_DIR)/FSR_wrapper.c $(START_DIR)/bc.c $(START_DIR)/LXS.c $(START_DIR)/subsets.c $(START_DIR)/combsFS.c $(START_DIR)/isequal.c $(START_DIR)/pascal.c $(START_DIR)/lexunrank.c $(START_DIR)/FSM.c $(START_DIR)/tic.c $(START_DIR)/mldivide.c $(START_DIR)/toc.c $(START_DIR)/erfcinv.c $(START_DIR)/eml_erfcore.c $(START_DIR)/tinv.c $(START_DIR)/FSRmdr.c $(START_DIR)/sprintf.c $(START_DIR)/repelem.c $(START_DIR)/any.c $(START_DIR)/FSRcore.c $(START_DIR)/FSRbonfbound.c $(START_DIR)/FSRenvmdr.c $(START_DIR)/print_processing.c $(START_DIR)/FSRbsb.c $(START_DIR)/unique.c $(START_DIR)/FSRbsb_wrapper.c $(START_DIR)/FSRfan_wrapper.c $(START_DIR)/normYJ.c $(START_DIR)/Score.c $(START_DIR)/diag.c $(START_DIR)/ScoreYJ.c $(START_DIR)/ScoreYJall.c $(START_DIR)/FSRmdr_wrapper.c $(START_DIR)/LTSts_wrapper.c $(START_DIR)/str2double.c $(START_DIR)/LTSts.c $(START_DIR)/HUrho.c $(START_DIR)/zscore.c $(START_DIR)/zscoreFS.c $(START_DIR)/prctile.c $(START_DIR)/RobRegrSize.c $(START_DIR)/GYfilt.c $(START_DIR)/lsqcurvefit.c $(START_DIR)/factoryConstruct.c $(START_DIR)/checkStoppingCriteria.c $(START_DIR)/tcdf.c $(START_DIR)/string1.c $(START_DIR)/array2table.c $(START_DIR)/fcdf.c $(START_DIR)/FSRinvmdr.c $(START_DIR)/LXS_wrapper.c $(START_DIR)/LXS_wrapper1.c $(START_DIR)/addt_wrapper.c $(START_DIR)/eml_rand_mt19937ar_stateful.c $(START_DIR)/CoderTimeAPI.c $(START_DIR)/chkinputM.c $(START_DIR)/nullAssignment.c $(START_DIR)/xaxpy.c $(START_DIR)/xrotg.c $(START_DIR)/sort.c $(START_DIR)/sign.c $(START_DIR)/gammaln.c $(START_DIR)/sqrt.c $(START_DIR)/sortrows.c $(START_DIR)/eml_rand_mt19937ar.c $(START_DIR)/xzgetrf.c $(START_DIR)/xzgeqp3.c $(START_DIR)/xzlarfg.c $(START_DIR)/xzlarf.c $(START_DIR)/xgerc.c $(START_DIR)/xgeqp3.c $(START_DIR)/chkinputR.c $(START_DIR)/xunormqr.c $(START_DIR)/str2double1.c $(START_DIR)/hasFiniteBounds.c $(START_DIR)/jacobianFiniteDifference.c $(START_DIR)/computeFiniteDifferences.c $(START_DIR)/finDiffEvalAndChkErr.c $(START_DIR)/xgemv.c $(START_DIR)/projectBox.c $(START_DIR)/driver.c $(START_DIR)/linearLeastSquares.c $(START_DIR)/fsdaC_emxutil.c $(START_DIR)/fsdaC_emxAPI.c $(START_DIR)/fsdaC_rtwutil.c
 
 ALL_SRCS = $(SRCS)
 
@@ -198,7 +198,7 @@ ALL_SRCS = $(SRCS)
 ## OBJECTS
 ###########################################################################
 
-OBJS = coder_posix_time.obj fsdaC_data.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj fsdaC_initialize.obj fsdaC_terminate.obj FSM_wrapper.obj mtimes.obj minOrMax.obj find.obj int2str.obj rank.obj svd.obj xnrm2.obj unibiv.obj median.obj quickselect.obj mad.obj blockedSummation.obj nanmedian.obj sortIdx.obj iqr.obj quantile.obj vvarstd.obj gammaincinv.obj eml_gammainc.obj gammainc.obj betainc.obj eml_betainc.obj betaincinv.obj eig.obj eigHermitianStandard.obj xzlartg.obj xzhgeqz.obj relop.obj strcmp.obj sortrowsLE.obj FSMmmd.obj ifWhileCond.obj randsample.obj randperm.obj rand.obj cov.obj colon.obj mod.obj cat.obj combineVectorElements.obj bsxfun.obj sum.obj inv.obj qr.obj mrdivide_helper.obj qrsolve.obj power.obj quickselectFS.obj FSMbonfbound.obj repmat.obj finv.obj chi2inv.obj FSMenvmmd.obj chi2cdf.obj FSMbsb.obj eml_setop.obj FSMbsb_wrapper.obj FSMmmd_wrapper.obj FSR_wrapper.obj bc.obj LXS.obj subsets.obj combsFS.obj isequal.obj pascal.obj lexunrank.obj FSM.obj tic.obj mldivide.obj toc.obj erfcinv.obj eml_erfcore.obj tinv.obj FSRmdr.obj sprintf.obj repelem.obj any.obj FSRcore.obj FSRbonfbound.obj abs.obj FSRenvmdr.obj print_processing.obj FSRbsb.obj unique.obj FSRbsb_wrapper.obj FSRfan_wrapper.obj normYJ.obj Score.obj diag.obj ScoreYJ.obj ScoreYJall.obj FSRmdr_wrapper.obj LTSts_wrapper.obj str2double.obj LTSts.obj HUrho.obj zscore.obj zscoreFS.obj prctile.obj RobRegrSize.obj GYfilt.obj lsqcurvefit.obj factoryConstruct.obj checkStoppingCriteria.obj tcdf.obj string1.obj array2table.obj fcdf.obj FSRinvmdr.obj LXS_wrapper.obj LXS_wrapper1.obj addt_wrapper.obj tclust_wrapper.obj eye.obj ishermitian.obj eigStandard.obj xzlangeM.obj xzlanhs.obj permute.obj estepFS.obj logmvnpdfFS.obj tclust_wrapper1.obj det.obj xzgeev.obj cpcV.obj cpcE.obj restrshapeGPCM.obj eml_rand_mt19937ar_stateful.obj CoderTimeAPI.obj chkinputM.obj nullAssignment.obj xaxpy.obj xrotg.obj sort.obj sign.obj gammaln.obj xzlarfg.obj xdlanv2.obj sqrt.obj sortrows.obj eml_rand_mt19937ar.obj xzgetrf.obj xzgeqp3.obj xzlarf.obj xgerc.obj xgeqp3.obj chkinputR.obj xunormqr.obj str2double1.obj hasFiniteBounds.obj jacobianFiniteDifference.obj computeFiniteDifferences.obj finDiffEvalAndChkErr.obj xgemv.obj projectBox.obj driver.obj linearLeastSquares.obj xzgehrd.obj xhseqr.obj triu.obj xzlascl.obj xzggbal.obj xztgevc.obj restreigen.obj restreigeneasy.obj chol.obj restrSigmaGPCM.obj fsdaC_emxutil.obj fsdaC_emxAPI.obj fsdaC_rtwutil.obj
+OBJS = coder_posix_time.obj fsdaC_data.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj fsdaC_initialize.obj fsdaC_terminate.obj FSM_wrapper.obj mtimes.obj minOrMax.obj find.obj int2str.obj rank.obj svd.obj xnrm2.obj unibiv.obj median.obj quickselect.obj mad.obj nanmedian.obj sortIdx.obj iqr.obj quantile.obj blockedSummation.obj vvarstd.obj gammaincinv.obj eml_gammainc.obj gammainc.obj betainc.obj eml_betainc.obj betaincinv.obj eig.obj eigStandard.obj xzhgeqz.obj strcmp.obj sortrowsLE.obj FSMmmd.obj ifWhileCond.obj randsample.obj randperm.obj rand.obj cov.obj colon.obj mod.obj cat.obj combineVectorElements.obj bsxfun.obj sum.obj inv.obj qr.obj mrdivide_helper.obj qrsolve.obj power.obj quickselectFS.obj FSMbonfbound.obj repmat.obj finv.obj chi2inv.obj FSMenvmmd.obj chi2cdf.obj FSMbsb.obj eml_setop.obj FSMbsb_wrapper.obj FSMmmd_wrapper.obj FSR_wrapper.obj bc.obj LXS.obj subsets.obj combsFS.obj isequal.obj pascal.obj lexunrank.obj FSM.obj tic.obj mldivide.obj toc.obj erfcinv.obj eml_erfcore.obj tinv.obj FSRmdr.obj sprintf.obj repelem.obj any.obj FSRcore.obj FSRbonfbound.obj FSRenvmdr.obj print_processing.obj FSRbsb.obj unique.obj FSRbsb_wrapper.obj FSRfan_wrapper.obj normYJ.obj Score.obj diag.obj ScoreYJ.obj ScoreYJall.obj FSRmdr_wrapper.obj LTSts_wrapper.obj str2double.obj LTSts.obj HUrho.obj zscore.obj zscoreFS.obj prctile.obj RobRegrSize.obj GYfilt.obj lsqcurvefit.obj factoryConstruct.obj checkStoppingCriteria.obj tcdf.obj string1.obj array2table.obj fcdf.obj FSRinvmdr.obj LXS_wrapper.obj LXS_wrapper1.obj addt_wrapper.obj eml_rand_mt19937ar_stateful.obj CoderTimeAPI.obj chkinputM.obj nullAssignment.obj xaxpy.obj xrotg.obj sort.obj sign.obj gammaln.obj sqrt.obj sortrows.obj eml_rand_mt19937ar.obj xzgetrf.obj xzgeqp3.obj xzlarfg.obj xzlarf.obj xgerc.obj xgeqp3.obj chkinputR.obj xunormqr.obj str2double1.obj hasFiniteBounds.obj jacobianFiniteDifference.obj computeFiniteDifferences.obj finDiffEvalAndChkErr.obj xgemv.obj projectBox.obj driver.obj linearLeastSquares.obj fsdaC_emxutil.obj fsdaC_emxAPI.obj fsdaC_rtwutil.obj
 
 ALL_OBJS = $(OBJS)
 
@@ -417,10 +417,6 @@ mad.obj : $(START_DIR)/mad.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-blockedSummation.obj : $(START_DIR)/blockedSummation.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
 nanmedian.obj : $(START_DIR)/nanmedian.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
@@ -434,6 +430,10 @@ iqr.obj : $(START_DIR)/iqr.c
 
 
 quantile.obj : $(START_DIR)/quantile.c
+	$(CC) $(CFLAGS) -o "$@" "$<"
+
+
+blockedSummation.obj : $(START_DIR)/blockedSummation.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
@@ -469,19 +469,11 @@ eig.obj : $(START_DIR)/eig.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-eigHermitianStandard.obj : $(START_DIR)/eigHermitianStandard.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-xzlartg.obj : $(START_DIR)/xzlartg.c
+eigStandard.obj : $(START_DIR)/eigStandard.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
 xzhgeqz.obj : $(START_DIR)/xzhgeqz.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-relop.obj : $(START_DIR)/relop.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
@@ -689,10 +681,6 @@ FSRbonfbound.obj : $(START_DIR)/FSRbonfbound.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-abs.obj : $(START_DIR)/abs.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
 FSRenvmdr.obj : $(START_DIR)/FSRenvmdr.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
@@ -821,66 +809,6 @@ addt_wrapper.obj : $(START_DIR)/addt_wrapper.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-tclust_wrapper.obj : $(START_DIR)/tclust_wrapper.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-eye.obj : $(START_DIR)/eye.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-ishermitian.obj : $(START_DIR)/ishermitian.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-eigStandard.obj : $(START_DIR)/eigStandard.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-xzlangeM.obj : $(START_DIR)/xzlangeM.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-xzlanhs.obj : $(START_DIR)/xzlanhs.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-permute.obj : $(START_DIR)/permute.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-estepFS.obj : $(START_DIR)/estepFS.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-logmvnpdfFS.obj : $(START_DIR)/logmvnpdfFS.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-tclust_wrapper1.obj : $(START_DIR)/tclust_wrapper1.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-det.obj : $(START_DIR)/det.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-xzgeev.obj : $(START_DIR)/xzgeev.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-cpcV.obj : $(START_DIR)/cpcV.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-cpcE.obj : $(START_DIR)/cpcE.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-restrshapeGPCM.obj : $(START_DIR)/restrshapeGPCM.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
 eml_rand_mt19937ar_stateful.obj : $(START_DIR)/eml_rand_mt19937ar_stateful.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
@@ -917,14 +845,6 @@ gammaln.obj : $(START_DIR)/gammaln.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-xzlarfg.obj : $(START_DIR)/xzlarfg.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-xdlanv2.obj : $(START_DIR)/xdlanv2.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
 sqrt.obj : $(START_DIR)/sqrt.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
@@ -942,6 +862,10 @@ xzgetrf.obj : $(START_DIR)/xzgetrf.c
 
 
 xzgeqp3.obj : $(START_DIR)/xzgeqp3.c
+	$(CC) $(CFLAGS) -o "$@" "$<"
+
+
+xzlarfg.obj : $(START_DIR)/xzlarfg.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
@@ -998,46 +922,6 @@ driver.obj : $(START_DIR)/driver.c
 
 
 linearLeastSquares.obj : $(START_DIR)/linearLeastSquares.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-xzgehrd.obj : $(START_DIR)/xzgehrd.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-xhseqr.obj : $(START_DIR)/xhseqr.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-triu.obj : $(START_DIR)/triu.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-xzlascl.obj : $(START_DIR)/xzlascl.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-xzggbal.obj : $(START_DIR)/xzggbal.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-xztgevc.obj : $(START_DIR)/xztgevc.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-restreigen.obj : $(START_DIR)/restreigen.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-restreigeneasy.obj : $(START_DIR)/restreigeneasy.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-chol.obj : $(START_DIR)/chol.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-restrSigmaGPCM.obj : $(START_DIR)/restrSigmaGPCM.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 

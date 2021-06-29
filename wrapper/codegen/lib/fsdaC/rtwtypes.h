@@ -2,16 +2,17 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: rtwtypes.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * rtwtypes.h
+ *
+ * Code generation for function 'FSM_wrapper'
+ *
  */
 
 #ifndef RTWTYPES_H
 #define RTWTYPES_H
 
-/* Include Files */
+/* Include files */
 
 #ifndef __cplusplus
 #include <stdbool.h>
@@ -160,8 +161,4 @@ typedef struct {
 }
 #endif
 #endif
-/*
- * File trailer for rtwtypes.h
- *
- * [EOF]
- */
+/* End of code generation (rtwtypes.h) */

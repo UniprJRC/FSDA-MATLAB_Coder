@@ -2,30 +2,22 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: computeFiniteDifferences.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * computeFiniteDifferences.c
+ *
+ * Code generation for function 'computeFiniteDifferences'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "computeFiniteDifferences.h"
 #include "finDiffEvalAndChkErr.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 #include <math.h>
-#include <string.h>
 
 /* Function Definitions */
-/*
- * Arguments    : h_struct_T *obj
- *                const emxArray_real_T *cEqCurrent
- *                emxArray_real_T *xk
- *                emxArray_real_T *JacCeqTrans
- *                int ldJE
- * Return Type  : bool
- */
 bool computeFiniteDifferences(h_struct_T *obj,
                               const emxArray_real_T *cEqCurrent,
                               emxArray_real_T *xk, emxArray_real_T *JacCeqTrans,
@@ -422,8 +414,4 @@ bool computeFiniteDifferences(h_struct_T *obj,
   return evalOK;
 }
 
-/*
- * File trailer for computeFiniteDifferences.c
- *
- * [EOF]
- */
+/* End of code generation (computeFiniteDifferences.c) */

@@ -2,16 +2,17 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: colon.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * colon.h
+ *
+ * Code generation for function 'colon'
+ *
  */
 
 #ifndef COLON_H
 #define COLON_H
 
-/* Include Files */
+/* Include files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -31,8 +32,4 @@ void eml_float_colon(double a, double b, emxArray_real_T *y);
 #endif
 
 #endif
-/*
- * File trailer for colon.h
- *
- * [EOF]
- */
+/* End of code generation (colon.h) */

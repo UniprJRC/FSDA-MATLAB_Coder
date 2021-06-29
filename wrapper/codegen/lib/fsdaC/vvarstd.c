@@ -2,13 +2,14 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: vvarstd.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * vvarstd.c
+ *
+ * Code generation for function 'vvarstd'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "vvarstd.h"
 #include "blockedSummation.h"
 #include "fsdaC_emxutil.h"
@@ -17,14 +18,8 @@
 #include "xnrm2.h"
 #include "rt_nonfinite.h"
 #include <math.h>
-#include <string.h>
 
 /* Function Definitions */
-/*
- * Arguments    : const emxArray_real_T *v
- *                int n
- * Return Type  : double
- */
 double vvarstd(const emxArray_real_T *v, int n)
 {
   emxArray_real_T *absdiff;
@@ -54,8 +49,4 @@ double vvarstd(const emxArray_real_T *v, int n)
   return s;
 }
 
-/*
- * File trailer for vvarstd.c
- *
- * [EOF]
- */
+/* End of code generation (vvarstd.c) */

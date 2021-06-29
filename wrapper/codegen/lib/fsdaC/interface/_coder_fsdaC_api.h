@@ -2,16 +2,17 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: _coder_fsdaC_api.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * _coder_fsdaC_api.h
+ *
+ * Code generation for function 'FSM_wrapper'
+ *
  */
 
 #ifndef _CODER_FSDAC_API_H
 #define _CODER_FSDAC_API_H
 
-/* Include Files */
+/* Include files */
 #include "emlrt.h"
 #include "tmwtypes.h"
 #include <string.h>
@@ -58,28 +59,6 @@ enum d_matlab_internal_coder_tabular
 #define typedef_d_matlab_internal_coder_tabular
 typedef enum d_matlab_internal_coder_tabular d_matlab_internal_coder_tabular;
 #endif /* typedef_d_matlab_internal_coder_tabular */
-
-#ifndef typedef_struct_tclustrestrfactor_T
-#define typedef_struct_tclustrestrfactor_T
-typedef struct {
-  char_T pars[3];
-  real_T cdet;
-  real_T shw;
-  real_T shb;
-  real_T k;
-  real_T maxiterDSR;
-  real_T maxiterR;
-  real_T maxiterS;
-  boolean_T msg;
-  real_T tolR;
-  real_T tolS;
-  boolean_T usepreviousest;
-  real_T userepmat;
-  real_T sortsh;
-  real_T v;
-  real_T zerotol;
-} struct_tclustrestrfactor_T;
-#endif /* typedef_struct_tclustrestrfactor_T */
 
 #ifndef struct_emxArray_real_T
 #define struct_emxArray_real_T
@@ -330,27 +309,6 @@ typedef struct {
 } struct_addt_T;
 #endif /* typedef_struct_addt_T */
 
-#ifndef typedef_struct_tclust_T
-#define typedef_struct_tclust_T
-typedef struct {
-  emxArray_real_T *muopt;
-  emxArray_real_T *sigmaopt;
-  emxArray_real_T *idx;
-  emxArray_real_T *postprob;
-  emxArray_real_T_1x1 MIXMIX;
-  emxArray_real_T_1x1 MIXCLA;
-  real_T NlogL;
-  emxArray_real_T_1x1 CLACLA;
-  real_T notconver;
-  emxArray_real_T *bs;
-  real_T obj;
-  boolean_T equalweights;
-  real_T h;
-  emxArray_real_T *fullsol;
-  emxArray_real_T *Y;
-} struct_tclust_T;
-#endif /* typedef_struct_tclust_T */
-
 #ifndef struct_emxArray_char_T_1x0
 #define struct_emxArray_char_T_1x0
 struct emxArray_char_T_1x0 {
@@ -550,34 +508,9 @@ void fsdaC_xil_shutdown(void);
 
 void fsdaC_xil_terminate(void);
 
-void tclust_wrapper(emxArray_real_T *Y, real_T k, real_T alpha,
-                    real_T restrfactor, boolean_T equalweights, real_T mixt,
-                    real_T msg, boolean_T nocheck, emxArray_real_T *nsamp,
-                    emxArray_real_T *RandNumbForNini, real_T refsteps,
-                    real_T reftol, boolean_T startv1, boolean_T Ysave,
-                    struct_tclust_T *out, emxArray_real_T *C);
-
-void tclust_wrapper1(emxArray_real_T *Y, real_T k, real_T alpha,
-                     struct_tclustrestrfactor_T *restrfactor,
-                     boolean_T equalweights, real_T mixt, real_T msg,
-                     boolean_T nocheck, emxArray_real_T *nsamp,
-                     emxArray_real_T *RandNumbForNini, real_T refsteps,
-                     real_T reftol, boolean_T startv1, boolean_T Ysave,
-                     struct_tclust_T *out, emxArray_real_T *C);
-
-void tclust_wrapper1_api(const mxArray *const prhs[14], int32_T nlhs,
-                         const mxArray *plhs[2]);
-
-void tclust_wrapper_api(const mxArray *const prhs[14], int32_T nlhs,
-                        const mxArray *plhs[2]);
-
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-/*
- * File trailer for _coder_fsdaC_api.h
- *
- * [EOF]
- */
+/* End of code generation (_coder_fsdaC_api.h) */

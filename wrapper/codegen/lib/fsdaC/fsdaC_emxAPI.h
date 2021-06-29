@@ -2,16 +2,17 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: fsdaC_emxAPI.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * fsdaC_emxAPI.h
+ *
+ * Code generation for function 'fsdaC_emxAPI'
+ *
  */
 
 #ifndef FSDAC_EMXAPI_H
 #define FSDAC_EMXAPI_H
 
-/* Include Files */
+/* Include files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -97,8 +98,6 @@ extern void emxDestroy_struct_LTStsmodel_T(struct_LTStsmodel_T emxArray);
 
 extern void emxDestroy_struct_LXS_T(struct_LXS_T emxArray);
 
-extern void emxDestroy_struct_tclust_T(struct_tclust_T emxArray);
-
 extern void emxInitArray_char_T(emxArray_char_T **pEmxArray, int numDimensions);
 
 extern void emxInitArray_real32_T(emxArray_real32_T **pEmxArray,
@@ -118,15 +117,9 @@ extern void emxInit_struct_LTStsmodel_T(struct_LTStsmodel_T *pStruct);
 
 extern void emxInit_struct_LXS_T(struct_LXS_T *pStruct);
 
-extern void emxInit_struct_tclust_T(struct_tclust_T *pStruct);
-
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-/*
- * File trailer for fsdaC_emxAPI.h
- *
- * [EOF]
- */
+/* End of code generation (fsdaC_emxAPI.h) */

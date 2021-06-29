@@ -2,16 +2,17 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: FSRenvmdr.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * FSRenvmdr.h
+ *
+ * Code generation for function 'FSRenvmdr'
+ *
  */
 
 #ifndef FSRENVMDR_H
 #define FSRENVMDR_H
 
-/* Include Files */
+/* Include files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -38,8 +39,4 @@ void d_FSRenvmdr(double n, double p, double varargin_4,
 #endif
 
 #endif
-/*
- * File trailer for FSRenvmdr.h
- *
- * [EOF]
- */
+/* End of code generation (FSRenvmdr.h) */

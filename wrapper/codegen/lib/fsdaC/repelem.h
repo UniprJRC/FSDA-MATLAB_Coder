@@ -2,16 +2,17 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: repelem.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * repelem.h
+ *
+ * Code generation for function 'repelem'
+ *
  */
 
 #ifndef REPELEM_H
 #define REPELEM_H
 
-/* Include Files */
+/* Include files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -30,8 +31,4 @@ void repelem(const double x_data[], const int x_size[2], double varargin_1,
 #endif
 
 #endif
-/*
- * File trailer for repelem.h
- *
- * [EOF]
- */
+/* End of code generation (repelem.h) */

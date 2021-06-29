@@ -2,13 +2,14 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: Score.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * Score.c
+ *
+ * Code generation for function 'Score'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "Score.h"
 #include "blockedSummation.h"
 #include "fsdaC_emxutil.h"
@@ -16,103 +17,18 @@
 #include "mldivide.h"
 #include "mtimes.h"
 #include "qr.h"
+#include "qrsolve.h"
 #include "rt_nonfinite.h"
 #include "xnrm2.h"
+#include "xzgetrf.h"
 #include <math.h>
-#include <string.h>
 
 /* Function Definitions */
-/*
- * Score computes the score test for transformation
- *
- * <a href="matlab: docsearchFS('Score')">Link to the help function</a>
- *
- *   Required input arguments:
- *
- *     y:         Response variable. Vector. A vector with n elements that
- *                contains the response
- *                variable.  It can be either a row or a column vector.
- *     X :        Predictor variables. Matrix. Data matrix of explanatory
- *                variables (also called 'regressors')
- *                of dimension (n x p-1). Rows of X represent observations, and
- *                columns represent variables.
- *                Missing values (NaN's) and infinite values (Inf's) are
- * allowed, since observations (rows) with missing or infinite values will
- *                automatically be excluded from the computations.
- *
- *   Optional input arguments:
- *
- *     intercept :  Indicator for constant term. true (default) | false.
- *                  Indicator for the constant term (intercept) in the fit,
- *                  specified as the comma-separated pair consisting of
- *                  'Intercept' and either true to include or false to remove
- *                  the constant term from the model.
- *                  Example - 'intercept',false
- *                  Data Types - boolean
- *
- *            la  :transformation parameter. Vector. It specifies for which
- * values of the transformation parameter it is necessary to compute the score
- * test. Default value of lambda is la=[-1 -0.5 0 0.5 1]; that is the five most
- * common values of lambda Example - 'la',[0 0.5] Data Types - double
- *
- *            Lik : likelihood for the augmented model. Boolean.
- *                    If true the value of the likelihood for the augmented
- *                    model will be produced
- *                  else (default) only the value of the score test will be
- *                  given
- *                Example - 'Lik',false
- *                Data Types - logical
- *
- *        nocheck : Check input arguments. Boolean.
- *                If nocheck is equal to true no check is performed on
- *                  matrix y and matrix X. Notice that y and X are left
- *                  unchanged. In other words the additional column of ones
- *                  for the intercept is not added. As default nocheck=false.
- *                Example - 'nocheck',true
- *                Data Types - boolean
- *
- *   Output:
- *
- *   The output consists of a structure 'outSC' containing the following fields:
- *
- *         outSC.Score    =    score test. Vector. Vector of length
- *                             length(lambda) which contains the value of the
- *                             score test for each value of lambda specfied
- *                             in optional input parameter la. If la is not
- *                             specified, the vector will be of length 5 and
- *                             contains the values of the score test for the
- *                             5 most common values of lambda.
- *         outSC.Lik      =    value of the likelihood. Scalar. This output
- *                            is produced only if input value Lik =1
- *
- *  See also: FSRfan, ScoreYJ, ScoreYJpn, normBoxCox, normYJ
- *
- *  References:
- *
- *  Atkinson, A.C. and Riani, M. (2000), "Robust Diagnostic Regression
- *  Analysis", Springer Verlag, New York. [see equation 2.30 for the
- *  expression for score test statistic]
- *
- *  Copyright 2008-2021.
- *  Written by FSDA team
- *
- *
- * <a href="matlab: docsearchFS('Score')">Link to the help function</a>
- *
- * $LastChangedDate::                      $: Date of the last commit
- *
- * Arguments    : const emxArray_real_T *y
- *                const emxArray_real_T *X
- *                double varargin_2
- *                double outSC_Score_data[]
- *                int *outSC_Score_size
- *                double *outSC_Lik
- * Return Type  : void
- */
 void Score(const emxArray_real_T *y, const emxArray_real_T *X,
            double varargin_2, double outSC_Score_data[], int *outSC_Score_size,
            double *outSC_Lik)
 {
+  emxArray_int32_T *ipiv;
   emxArray_real_T *R;
   emxArray_real_T *Xw;
   emxArray_real_T *logy;
@@ -125,16 +41,108 @@ void Score(const emxArray_real_T *y, const emxArray_real_T *X,
   double laiGlaim1;
   double logG;
   int b_i;
-  int b_loop_ub;
-  int c_loop_ub;
   int i;
+  int i2;
+  int j;
   int k;
-  int loop_ub;
+  int kAcol;
+  int n;
   int nx;
   int p;
+  int temp;
   signed char i1;
   bool empty_non_axis_sizes;
   emxInit_real_T(&logy, 1);
+  /* Score computes the score test for transformation */
+  /*  */
+  /* <a href="matlab: docsearchFS('Score')">Link to the help function</a> */
+  /*  */
+  /*   Required input arguments: */
+  /*  */
+  /*     y:         Response variable. Vector. A vector with n elements that */
+  /*                contains the response */
+  /*                variable.  It can be either a row or a column vector. */
+  /*     X :        Predictor variables. Matrix. Data matrix of explanatory */
+  /*                variables (also called 'regressors') */
+  /*                of dimension (n x p-1). Rows of X represent observations,
+   * and */
+  /*                columns represent variables. */
+  /*                Missing values (NaN's) and infinite values (Inf's) are
+   * allowed, */
+  /*                since observations (rows) with missing or infinite values
+   * will */
+  /*                automatically be excluded from the computations. */
+  /*  */
+  /*   Optional input arguments: */
+  /*  */
+  /*     intercept :  Indicator for constant term. true (default) | false. */
+  /*                  Indicator for the constant term (intercept) in the fit, */
+  /*                  specified as the comma-separated pair consisting of */
+  /*                  'Intercept' and either true to include or false to remove
+   */
+  /*                  the constant term from the model. */
+  /*                  Example - 'intercept',false */
+  /*                  Data Types - boolean */
+  /*  */
+  /*            la  :transformation parameter. Vector. It specifies for which
+   * values of the */
+  /*                  transformation parameter it is necessary to compute the */
+  /*                  score test. */
+  /*                  Default value of lambda is la=[-1 -0.5 0 0.5 1]; that */
+  /*                  is the five most common values of lambda */
+  /*                Example - 'la',[0 0.5] */
+  /*                Data Types - double */
+  /*  */
+  /*            Lik : likelihood for the augmented model. Boolean. */
+  /*                    If true the value of the likelihood for the augmented */
+  /*                    model will be produced */
+  /*                  else (default) only the value of the score test will be */
+  /*                  given */
+  /*                Example - 'Lik',false */
+  /*                Data Types - logical */
+  /*  */
+  /*        nocheck : Check input arguments. Boolean. */
+  /*                If nocheck is equal to true no check is performed on */
+  /*                  matrix y and matrix X. Notice that y and X are left */
+  /*                  unchanged. In other words the additional column of ones */
+  /*                  for the intercept is not added. As default nocheck=false.
+   */
+  /*                Example - 'nocheck',true */
+  /*                Data Types - boolean */
+  /*  */
+  /*   Output: */
+  /*  */
+  /*   The output consists of a structure 'outSC' containing the following
+   * fields: */
+  /*  */
+  /*         outSC.Score    =    score test. Vector. Vector of length */
+  /*                             length(lambda) which contains the value of the
+   */
+  /*                             score test for each value of lambda specfied */
+  /*                             in optional input parameter la. If la is not */
+  /*                             specified, the vector will be of length 5 and
+   */
+  /*                             contains the values of the score test for the
+   */
+  /*                             5 most common values of lambda. */
+  /*         outSC.Lik      =    value of the likelihood. Scalar. This output */
+  /*                            is produced only if input value Lik =1 */
+  /*  */
+  /*  See also: FSRfan, ScoreYJ, ScoreYJpn, normBoxCox, normYJ */
+  /*  */
+  /*  References: */
+  /*  */
+  /*  Atkinson, A.C. and Riani, M. (2000), "Robust Diagnostic Regression */
+  /*  Analysis", Springer Verlag, New York. [see equation 2.30 for the */
+  /*  expression for score test statistic] */
+  /*  */
+  /*  Copyright 2008-2021. */
+  /*  Written by FSDA team */
+  /*  */
+  /*  */
+  /* <a href="matlab: docsearchFS('Score')">Link to the help function</a> */
+  /*  */
+  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples */
   /* { */
   /*     %% Score with all default options. */
@@ -255,8 +263,8 @@ void Score(const emxArray_real_T *y, const emxArray_real_T *X,
   i = logy->size[0];
   logy->size[0] = y->size[0];
   emxEnsureCapacity_real_T(logy, i);
-  loop_ub = y->size[0];
-  for (i = 0; i < loop_ub; i++) {
+  n = y->size[0];
+  for (i = 0; i < n; i++) {
     logy->data[i] = y->data[i];
   }
   nx = y->size[0];
@@ -267,36 +275,36 @@ void Score(const emxArray_real_T *y, const emxArray_real_T *X,
   logG = log(G);
   /*  loop over the values of \lambda */
   *outSC_Score_size = 1;
-  loop_ub = (X->size[1] + 1) * (X->size[1] + 1);
+  n = (X->size[1] + 1) * (X->size[1] + 1);
   b_X = (double)(X->size[0] - X->size[1]) - 1.0;
   /*  Define transformed and constructed variable */
   emxInit_real_T(&z, 1);
   emxInit_real_T(&ylai, 1);
   emxInit_real_T(&ylaim1, 1);
   if (fabs(varargin_2) < 1.0E-8) {
-    b_loop_ub = logy->size[0];
+    nx = logy->size[0];
     i = z->size[0];
     z->size[0] = logy->size[0];
     emxEnsureCapacity_real_T(z, i);
-    for (i = 0; i < b_loop_ub; i++) {
+    for (i = 0; i < nx; i++) {
       z->data[i] = G * logy->data[i];
     }
     i = ylai->size[0];
     ylai->size[0] = z->size[0];
     emxEnsureCapacity_real_T(ylai, i);
-    b_loop_ub = z->size[0];
-    for (i = 0; i < b_loop_ub; i++) {
+    nx = z->size[0];
+    for (i = 0; i < nx; i++) {
       ylai->data[i] = z->data[i] * (logy->data[i] / 2.0 - logG);
     }
   } else {
     /*  laiGlaim1=lai*G^(lai-1); */
     laiGlaim1 = varargin_2 * exp((varargin_2 - 1.0) * logG);
     /*  ylai=y.^lai; */
-    b_loop_ub = logy->size[0];
+    nx = logy->size[0];
     i = ylai->size[0];
     ylai->size[0] = logy->size[0];
     emxEnsureCapacity_real_T(ylai, i);
-    for (i = 0; i < b_loop_ub; i++) {
+    for (i = 0; i < nx; i++) {
       ylai->data[i] = varargin_2 * logy->data[i];
     }
     nx = ylai->size[0];
@@ -306,20 +314,20 @@ void Score(const emxArray_real_T *y, const emxArray_real_T *X,
     i = ylaim1->size[0];
     ylaim1->size[0] = ylai->size[0];
     emxEnsureCapacity_real_T(ylaim1, i);
-    b_loop_ub = ylai->size[0];
-    for (i = 0; i < b_loop_ub; i++) {
+    nx = ylai->size[0];
+    for (i = 0; i < nx; i++) {
       ylaim1->data[i] = ylai->data[i] - 1.0;
     }
     i = z->size[0];
     z->size[0] = ylaim1->size[0];
     emxEnsureCapacity_real_T(z, i);
-    b_loop_ub = ylaim1->size[0];
-    for (i = 0; i < b_loop_ub; i++) {
+    nx = ylaim1->size[0];
+    for (i = 0; i < nx; i++) {
       z->data[i] = ylaim1->data[i] / laiGlaim1;
     }
     G = 1.0 / varargin_2 + logG;
-    b_loop_ub = ylai->size[0];
-    for (i = 0; i < b_loop_ub; i++) {
+    nx = ylai->size[0];
+    for (i = 0; i < nx; i++) {
       ylai->data[i] =
           (ylai->data[i] * logy->data[i] - ylaim1->data[i] * G) / laiGlaim1;
     }
@@ -331,17 +339,17 @@ void Score(const emxArray_real_T *y, const emxArray_real_T *X,
   emxFree_real_T(&logy);
   /*  Define augmented X matrix */
   if ((X->size[0] != 0) && (X->size[1] != 0)) {
-    nx = X->size[0];
+    temp = X->size[0];
   } else if (ylai->size[0] != 0) {
-    nx = ylai->size[0];
+    temp = ylai->size[0];
   } else {
-    nx = X->size[0];
+    temp = X->size[0];
   }
-  empty_non_axis_sizes = (nx == 0);
+  empty_non_axis_sizes = (temp == 0);
   if (empty_non_axis_sizes || ((X->size[0] != 0) && (X->size[1] != 0))) {
-    b_loop_ub = X->size[1];
+    nx = X->size[1];
   } else {
-    b_loop_ub = 0;
+    nx = 0;
   }
   if (empty_non_axis_sizes || (ylai->size[0] != 0)) {
     i1 = 1;
@@ -350,53 +358,53 @@ void Score(const emxArray_real_T *y, const emxArray_real_T *X,
   }
   emxInit_real_T(&Xw, 2);
   i = Xw->size[0] * Xw->size[1];
-  Xw->size[0] = nx;
-  Xw->size[1] = b_loop_ub + i1;
+  Xw->size[0] = temp;
+  Xw->size[1] = nx + i1;
   emxEnsureCapacity_real_T(Xw, i);
-  for (i = 0; i < b_loop_ub; i++) {
-    for (b_i = 0; b_i < nx; b_i++) {
-      Xw->data[b_i + Xw->size[0] * i] = X->data[b_i + nx * i];
+  for (i = 0; i < nx; i++) {
+    for (i2 = 0; i2 < temp; i2++) {
+      Xw->data[i2 + Xw->size[0] * i] = X->data[i2 + temp * i];
     }
   }
-  c_loop_ub = i1;
-  for (i = 0; i < c_loop_ub; i++) {
-    for (b_i = 0; b_i < nx; b_i++) {
-      Xw->data[b_i + Xw->size[0] * b_loop_ub] = ylai->data[b_i];
+  kAcol = i1;
+  for (i = 0; i < kAcol; i++) {
+    for (i2 = 0; i2 < temp; i2++) {
+      Xw->data[i2 + Xw->size[0] * nx] = ylai->data[i2];
     }
   }
   emxInit_real_T(&ri, 2);
   emxInit_real_T(&R, 2);
   qr(Xw, ri, R);
-  b_loop_ub = ri->size[1] - 1;
-  c_loop_ub = ri->size[0];
+  temp = ri->size[1] - 1;
+  kAcol = ri->size[0];
   i = ylai->size[0];
   ylai->size[0] = ri->size[1];
   emxEnsureCapacity_real_T(ylai, i);
-  for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+  for (b_i = 0; b_i <= temp; b_i++) {
     ylai->data[b_i] = 0.0;
   }
-  for (k = 0; k < c_loop_ub; k++) {
-    for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+  for (k = 0; k < kAcol; k++) {
+    for (b_i = 0; b_i <= temp; b_i++) {
       ylai->data[b_i] += ri->data[b_i * ri->size[0] + k] * z->data[k];
     }
   }
   mldivide(R, ylai, ylaim1);
-  b_loop_ub = Xw->size[0] - 1;
-  c_loop_ub = Xw->size[1];
+  temp = Xw->size[0] - 1;
+  kAcol = Xw->size[1];
   i = ylai->size[0];
   ylai->size[0] = Xw->size[0];
   emxEnsureCapacity_real_T(ylai, i);
-  for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+  for (b_i = 0; b_i <= temp; b_i++) {
     ylai->data[b_i] = 0.0;
   }
-  for (k = 0; k < c_loop_ub; k++) {
+  for (k = 0; k < kAcol; k++) {
     nx = k * Xw->size[0];
-    for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+    for (b_i = 0; b_i <= temp; b_i++) {
       ylai->data[b_i] += Xw->data[nx + b_i] * ylaim1->data[k];
     }
   }
-  b_loop_ub = z->size[0];
-  for (i = 0; i < b_loop_ub; i++) {
+  nx = z->size[0];
+  for (i = 0; i < nx; i++) {
     z->data[i] -= ylai->data[i];
   }
   /*  Sum of squares of residuals */
@@ -412,20 +420,86 @@ void Score(const emxArray_real_T *y, const emxArray_real_T *X,
   Xw->size[1] = X->size[1] + 1;
   emxEnsureCapacity_real_T(Xw, i);
   emxFree_real_T(&z);
-  for (i = 0; i < loop_ub; i++) {
+  for (i = 0; i < n; i++) {
     Xw->data[i] = 0.0;
   }
-  if (X->size[1] + 1 > 0) {
-    for (k = 0; k < p; k++) {
-      Xw->data[k + Xw->size[0] * k] = 1.0;
-    }
+  for (k = 0; k < p; k++) {
+    Xw->data[k + Xw->size[0] * k] = 1.0;
   }
-  b_mldivide(R, Xw, ri);
-  d_mtimes(ri, ri, Xw);
-  loop_ub = Xw->size[0] * Xw->size[1];
+  if (R->size[1] == 0) {
+    ri->size[0] = 0;
+    ri->size[1] = Xw->size[1];
+  } else if (R->size[0] == R->size[1]) {
+    i = ri->size[0] * ri->size[1];
+    ri->size[0] = Xw->size[0];
+    ri->size[1] = Xw->size[1];
+    emxEnsureCapacity_real_T(ri, i);
+    n = Xw->size[0] * Xw->size[1];
+    for (i = 0; i < n; i++) {
+      ri->data[i] = Xw->data[i];
+    }
+    emxInit_int32_T(&ipiv, 2);
+    nx = R->size[0];
+    n = R->size[1];
+    if (nx < n) {
+      n = nx;
+    }
+    nx = Xw->size[0];
+    if (nx < n) {
+      n = nx;
+    }
+    p = Xw->size[1] - 1;
+    xzgetrf(n, n, R, R->size[0], ipiv, &temp);
+    for (b_i = 0; b_i <= n - 2; b_i++) {
+      i = ipiv->data[b_i];
+      if (i != b_i + 1) {
+        for (j = 0; j <= p; j++) {
+          temp = (int)ri->data[b_i + ri->size[0] * j];
+          ri->data[b_i + ri->size[0] * j] = ri->data[(i + ri->size[0] * j) - 1];
+          ri->data[(i + ri->size[0] * j) - 1] = temp;
+        }
+      }
+    }
+    emxFree_int32_T(&ipiv);
+    for (j = 0; j <= p; j++) {
+      temp = Xw->size[0] * j;
+      for (k = 0; k < n; k++) {
+        kAcol = R->size[0] * k;
+        i = k + temp;
+        if (ri->data[i] != 0.0) {
+          i2 = k + 2;
+          for (b_i = i2; b_i <= n; b_i++) {
+            nx = (b_i + temp) - 1;
+            ri->data[nx] -= ri->data[i] * R->data[(b_i + kAcol) - 1];
+          }
+        }
+      }
+    }
+    nx = Xw->size[1];
+    if ((Xw->size[1] != 0) && ((ri->size[0] != 0) && (ri->size[1] != 0))) {
+      for (j = 0; j < nx; j++) {
+        temp = Xw->size[0] * j - 1;
+        for (k = n; k >= 1; k--) {
+          kAcol = R->size[0] * (k - 1) - 1;
+          i = k + temp;
+          if (ri->data[i] != 0.0) {
+            ri->data[i] /= R->data[k + kAcol];
+            for (b_i = 0; b_i <= k - 2; b_i++) {
+              i2 = (b_i + temp) + 1;
+              ri->data[i2] -= ri->data[i] * R->data[(b_i + kAcol) + 1];
+            }
+          }
+        }
+      }
+    }
+  } else {
+    qrsolve(R, Xw, ri);
+  }
   emxFree_real_T(&R);
+  d_mtimes(ri, ri, Xw);
+  n = Xw->size[0] * Xw->size[1];
   emxFree_real_T(&ri);
-  for (i = 0; i < loop_ub; i++) {
+  for (i = 0; i < n; i++) {
     Xw->data[i] = Xw->data[i] * G / b_X;
   }
   if ((Xw->size[0] == 1) && (Xw->size[1] == 1)) {
@@ -435,19 +509,17 @@ void Score(const emxArray_real_T *y, const emxArray_real_T *X,
     ylai->data[0] = Xw->data[0];
   } else {
     nx = Xw->size[0];
-    b_loop_ub = Xw->size[1];
-    if (nx < b_loop_ub) {
-      b_loop_ub = nx;
+    temp = Xw->size[1];
+    if (nx < temp) {
+      temp = nx;
     }
-    if (0 < Xw->size[1]) {
-      nx = b_loop_ub;
-    } else {
-      nx = 0;
+    if (0 >= Xw->size[1]) {
+      temp = 0;
     }
     i = ylai->size[0];
-    ylai->size[0] = nx;
+    ylai->size[0] = temp;
     emxEnsureCapacity_real_T(ylai, i);
-    i = nx - 1;
+    i = temp - 1;
     for (k = 0; k <= i; k++) {
       ylai->data[k] = Xw->data[k + Xw->size[0] * k];
     }
@@ -468,8 +540,4 @@ void Score(const emxArray_real_T *y, const emxArray_real_T *X,
   emxFree_real_T(&ylai);
 }
 
-/*
- * File trailer for Score.c
- *
- * [EOF]
- */
+/* End of code generation (Score.c) */

@@ -2,13 +2,14 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: zscore.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * zscore.c
+ *
+ * Code generation for function 'zscore'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "zscore.h"
 #include "bsxfun.h"
 #include "combineVectorElements.h"
@@ -16,14 +17,8 @@
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 #include "vvarstd.h"
-#include <string.h>
 
 /* Function Definitions */
-/*
- * Arguments    : const emxArray_real_T *x
- *                emxArray_real_T *z
- * Return Type  : void
- */
 void zscore(const emxArray_real_T *x, emxArray_real_T *z)
 {
   emxArray_real_T *a;
@@ -141,8 +136,4 @@ void zscore(const emxArray_real_T *x, emxArray_real_T *z)
   emxFree_real_T(&sigma);
 }
 
-/*
- * File trailer for zscore.c
- *
- * [EOF]
- */
+/* End of code generation (zscore.c) */

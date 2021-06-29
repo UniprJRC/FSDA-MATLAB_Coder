@@ -2,28 +2,22 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: quickselect.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * quickselect.c
+ *
+ * Code generation for function 'quickselect'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "quickselect.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
-#include <string.h>
 
 /* Function Declarations */
 static int thirdOfFive(const emxArray_real_T *v, int ia, int ib);
 
 /* Function Definitions */
-/*
- * Arguments    : const emxArray_real_T *v
- *                int ia
- *                int ib
- * Return Type  : int
- */
 static int thirdOfFive(const emxArray_real_T *v, int ia, int ib)
 {
   double v4;
@@ -112,15 +106,6 @@ static int thirdOfFive(const emxArray_real_T *v, int ia, int ib)
   return im;
 }
 
-/*
- * Arguments    : emxArray_real_T *v
- *                int n
- *                int vlen
- *                double *vn
- *                int *nfirst
- *                int *nlast
- * Return Type  : void
- */
 void quickselect(emxArray_real_T *v, int n, int vlen, double *vn, int *nfirst,
                  int *nlast)
 {
@@ -249,8 +234,4 @@ void quickselect(emxArray_real_T *v, int n, int vlen, double *vn, int *nfirst,
   }
 }
 
-/*
- * File trailer for quickselect.c
- *
- * [EOF]
- */
+/* End of code generation (quickselect.c) */

@@ -2,13 +2,14 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: FSRbsb_wrapper.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * FSRbsb_wrapper.c
+ *
+ * Code generation for function 'FSRbsb_wrapper'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "FSRbsb_wrapper.h"
 #include "cat.h"
 #include "chkinputR.h"
@@ -29,25 +30,8 @@
 #include "sort.h"
 #include "rt_nonfinite.h"
 #include <math.h>
-#include <string.h>
 
 /* Function Definitions */
-/*
- * Required input arguments
- *  y: a column vector of doubles of any length
- *
- * Arguments    : const emxArray_real_T *y
- *                const emxArray_real_T *X
- *                const emxArray_real_T *bsb
- *                const emxArray_real_T *bsbsteps
- *                double init
- *                bool intercept
- *                bool msg
- *                bool nocheck
- *                emxArray_real_T *Un
- *                emxArray_real32_T *BB
- * Return Type  : void
- */
 void FSRbsb_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                     const emxArray_real_T *bsb, const emxArray_real_T *bsbsteps,
                     double init, bool intercept, bool msg, bool nocheck,
@@ -101,6 +85,8 @@ void FSRbsb_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     fsdaC_initialize();
   }
   emxInit_real_T(&b_bsb, 1);
+  /*  Required input arguments */
+  /*  y: a column vector of doubles of any length */
   /*  X: an array of doubles of any dimensions */
   /*  bsb: a column vector of doubles of any length */
   /*  Optional input arguments (name / pairs) */
@@ -1099,8 +1085,4 @@ void FSRbsb_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   emxFree_real_T(&b_bsb);
 }
 
-/*
- * File trailer for FSRbsb_wrapper.c
- *
- * [EOF]
- */
+/* End of code generation (FSRbsb_wrapper.c) */

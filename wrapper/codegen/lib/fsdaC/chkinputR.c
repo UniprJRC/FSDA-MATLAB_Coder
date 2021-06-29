@@ -2,13 +2,14 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: chkinputR.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * chkinputR.c
+ *
+ * Code generation for function 'chkinputR'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "chkinputR.h"
 #include "find.h"
 #include "fsdaC_emxutil.h"
@@ -20,89 +21,8 @@
 #include "rank.h"
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
-#include <string.h>
 
 /* Function Definitions */
-/*
- * chkinputR makes some input parameters and user options checking in regression
- *
- *  Required input arguments:
- *
- *  y:            Response variable. Vector.
- *                A vector with n elements that contains the response
- *                variables, possibly with missing values (NaN's) and
- *                infinite values (Inf's).
- *  X :           Predictor variables. Matrix.
- *                Data matrix of explanatory variables (also called
- *                'regressors') of dimension (n x p-1), possibly with missing
- *                values (NaN's) and infinite values (Inf's). Rows of X
- *                represent observations, and columns represent variables.
- *  nnargin:      nargin. Scalar. The number of input arguments specified for
- * the caller function. vvarargin:    nvarargin. Scalar. The variable length
- * input argument list specified for the caller function.
- *
- *
- *   Optional input arguments:
- *
- *  Output:
- *
- *  y:            response without missing and infs. Vector. The new response
- * variable, with observations (rows) with missing or infinite values excluded.
- *  X:            Predictor variables without infs and missings. Matrix.
- *                The new matrix of explanatory variables, with missing or
- *                infinite values excluded.
- *  n:            Number of rows of X (observations). Scalar.  Number of
- *                rows after listwise exclusion.
- *  p:            Number of columns of X (variables). Scalar.
- *                Number of parameters to be estimated.
- *
- *
- *  More About:
- *
- *  This routines preforms the following operations:
- *  1) If y is a row vector it is transformed in a column vector;
- *  2) Checks that X is a matrix that has not more than two dimensions;
- *  3) Checks dimension consistency of X and y;
- *  4) Removes observations with missing or infinite values from X or y
- *  (listwise exclusion);
- *  5) Adds to matrix X a column of ones if option intercept is 1;
- *  6) Checks if there are constant columns in matrix X. In other words, if
- *  Xj is a generic column of X (excluding the column which contains the
- *  intercept) it removes it if max(Xj)=min(Xj) and produces a warning.
- *  7) Computes final values of n and p after previous operations;
- *  8) Makes sure than n>=p;
- *  9) Makes sure that new X is full rank
- *
- *  See also chkinputRB
- *
- *  Copyright 2008-2021.
- *  Written by FSDA team
- *
- *
- *
- * $LastChangedDate::                      $: Date of the last commit
- *
- *  Example:
- * {
- *  example_producing_error
- *     %To examplify the behaviour of chkinputR, we call function FSR without a
- *     %compulsory parameter ('y').
- *     n=200;
- *     p=3;
- *     state1=123498;
- *     randn('state', state1);
- *     X=randn(n,p);
- *     [out]=FSR(X);
- * }
- *
- * Arguments    : emxArray_real_T *y
- *                emxArray_real_T *X
- *                bool vvarargin_f10
- *                bool vvarargin_f16
- *                double *n
- *                double *p
- * Return Type  : void
- */
 void chkinputR(emxArray_real_T *y, emxArray_real_T *X, bool vvarargin_f10,
                bool vvarargin_f16, double *n, double *p)
 {
@@ -123,6 +43,84 @@ void chkinputR(emxArray_real_T *y, emxArray_real_T *X, bool vvarargin_f10,
   int inner;
   int k;
   int mc;
+  /* chkinputR makes some input parameters and user options checking in
+   * regression */
+  /*  */
+  /*  Required input arguments: */
+  /*  */
+  /*  y:            Response variable. Vector. */
+  /*                A vector with n elements that contains the response */
+  /*                variables, possibly with missing values (NaN's) and */
+  /*                infinite values (Inf's). */
+  /*  X :           Predictor variables. Matrix. */
+  /*                Data matrix of explanatory variables (also called */
+  /*                'regressors') of dimension (n x p-1), possibly with missing
+   */
+  /*                values (NaN's) and infinite values (Inf's). Rows of X */
+  /*                represent observations, and columns represent variables. */
+  /*  nnargin:      nargin. Scalar. The number of input arguments specified for
+   * the caller */
+  /*                function. */
+  /*  vvarargin:    nvarargin. Scalar. The variable length input argument list
+   */
+  /*                specified for the */
+  /*                caller function. */
+  /*  */
+  /*  */
+  /*   Optional input arguments: */
+  /*  */
+  /*  Output: */
+  /*  */
+  /*  y:            response without missing and infs. Vector. The new response
+   * variable, with observations (rows) with */
+  /*                missing or infinite values excluded. */
+  /*  X:            Predictor variables without infs and missings. Matrix. */
+  /*                The new matrix of explanatory variables, with missing or */
+  /*                infinite values excluded. */
+  /*  n:            Number of rows of X (observations). Scalar.  Number of */
+  /*                rows after listwise exclusion. */
+  /*  p:            Number of columns of X (variables). Scalar. */
+  /*                Number of parameters to be estimated. */
+  /*  */
+  /*  */
+  /*  More About: */
+  /*  */
+  /*  This routines preforms the following operations: */
+  /*  1) If y is a row vector it is transformed in a column vector; */
+  /*  2) Checks that X is a matrix that has not more than two dimensions; */
+  /*  3) Checks dimension consistency of X and y; */
+  /*  4) Removes observations with missing or infinite values from X or y */
+  /*  (listwise exclusion); */
+  /*  5) Adds to matrix X a column of ones if option intercept is 1; */
+  /*  6) Checks if there are constant columns in matrix X. In other words, if */
+  /*  Xj is a generic column of X (excluding the column which contains the */
+  /*  intercept) it removes it if max(Xj)=min(Xj) and produces a warning. */
+  /*  7) Computes final values of n and p after previous operations; */
+  /*  8) Makes sure than n>=p; */
+  /*  9) Makes sure that new X is full rank */
+  /*  */
+  /*  See also chkinputRB */
+  /*  */
+  /*  Copyright 2008-2021. */
+  /*  Written by FSDA team */
+  /*  */
+  /*  */
+  /*  */
+  /* $LastChangedDate::                      $: Date of the last commit */
+  /*  */
+  /*  Example: */
+  /* { */
+  /*  example_producing_error */
+  /*     %To examplify the behaviour of chkinputR, we call function FSR without
+   * a */
+  /*     %compulsory parameter ('y'). */
+  /*     n=200; */
+  /*     p=3; */
+  /*     state1=123498; */
+  /*     randn('state', state1); */
+  /*     X=randn(n,p); */
+  /*     [out]=FSR(X); */
+  /* } */
   /*  Beginning of code */
   /*  chklist is the vector containing the names of optional arguments */
   /*  chkchk is the position of the option nocheck in vector chklist */
@@ -362,8 +360,4 @@ void chkinputR(emxArray_real_T *y, emxArray_real_T *X, bool vvarargin_f10,
   }
 }
 
-/*
- * File trailer for chkinputR.c
- *
- * [EOF]
- */
+/* End of code generation (chkinputR.c) */

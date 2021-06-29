@@ -2,16 +2,17 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: xgeqp3.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * xgeqp3.h
+ *
+ * Code generation for function 'xgeqp3'
+ *
  */
 
 #ifndef XGEQP3_H
 #define XGEQP3_H
 
-/* Include Files */
+/* Include files */
 #include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
@@ -29,8 +30,4 @@ void xgeqp3(emxArray_real_T *A, emxArray_real_T *tau, emxArray_int32_T *jpvt);
 #endif
 
 #endif
-/*
- * File trailer for xgeqp3.h
- *
- * [EOF]
- */
+/* End of code generation (xgeqp3.h) */

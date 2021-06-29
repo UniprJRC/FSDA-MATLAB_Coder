@@ -2,13 +2,16 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: FSMbsb.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * FSMbsb.c
+ *
+ * Code generation for function 'FSMbsb'
+ *
  */
 
-/* Include Files */
+/* Include files */
+#include <R.h>
+
 #include "FSMbsb.h"
 #include "bsxfun.h"
 #include "cat.h"
@@ -39,131 +42,6 @@
 #include <string.h>
 
 /* Function Definitions */
-/*
- * FSMbsb gives the units belonging to subset at step(s) msel of the forward
- * search
- *
- * <a href="matlab: docsearchFS('FSMbsb')">Link to the help function</a>
- *
- *  Required input arguments:
- *
- *  Y :           Input data. Matrix.
- *                n x v data matrix; n observations and v variables. Rows of
- *                Y represent observations, and columns represent variables.
- *                Missing values (NaN's) and infinite values (Inf's) are
- *                allowed, since observations (rows) with missing or infinite
- *                values will automatically be excluded from the
- *                computations.
- *                 Data Types - single|double
- *  bsb :         Units forming subset. Vector. List of units forming the
- * initial subset. If bsb=0 (default) then the procedure starts with p units
- * randomly chosen else if bsb is not 0 the search will start with
- *                m0=length(bsb)
- *                 Data Types - single|double
- *
- *
- *  Optional input arguments:
- *
- *    bsbsteps :  Save the units forming subsets in selected steps. Vector.
- *                It specifies for which steps of the fwd search it is
- *                necessary to save the units forming subset. If bsbsteps is
- *                0 we store the units forming subset in all steps. The
- *                default is store the units forming subset in all steps if
- *                n<=5000, else to store the units forming subset at steps
- *                init and steps which are multiple of 100. For example, as
- *                default, if n=7530 and init=6, units forming subset are
- *                stored for
- *                m=init, 100, 200, ..., 7500.
- *                Example - 'bsbsteps',[100 200] stores the unis forming
- *                subset in steps 100 and 200.
- *                Data Types - double
- *
- *  init :       Point where to start monitoring required diagnostics. Scalar.
- *               Note that if bsb is supplied, init>=length(bsb). If init is not
- *               specified it will be set equal to floor(n*0.6).
- *                  Example - 'init',50
- *                  Data Types - double
- *
- *   msg  :   It controls whether to display or not messages
- *                about great interchange on the screen. Boolean.
- *                If msg==true (default) messages are displyed on the screen
- *                else no message is displayed on the screen
- *                  Example - 'msg',false
- *                  Data Types - logical
- *
- *  nocheck :   It controls whether to perform checks on matrix Y. Scalar.
- *              If nocheck is equal to 1 no check is performed on matrix Y.
- *              As default nocheck=0.
- *                  Example - 'nocheck',1
- *                  Data Types - double
- *
- *  plots :     Plot on the screen. Scalar.
- *                If plots=1, a plot of the monitoring of minMD among
- *                the units not belonging to the subset is produced on the
- *                screen with 1 per cent, 50 per cent and 99 per cent confidence
- * bands else (default) no plot is produced. Example - 'plots',0 Data Types -
- * double
- *
- *
- *  Remark:       The user should only give the input arguments that have to
- *                change their default value.
- *                The name of the input arguments needs to be followed by
- *                their value. The order of the input arguments is of no
- *                importance.
- *
- *                Missing values (NaN's) and infinite values (Inf's) are
- *                allowed, since observations (rows) with missing or infinite
- *                values will automatically be excluded from the
- *                computations. y can be both a row of column vector.
- *
- *  Output:
- *
- *
- *   Un:          Units included in each step. Matrix.
- *                (n-init) x 11 Matrix which contains the unit(s) included
- *                in the subset at each step of the search.
- *                REMARK: in every step the new subset is compared with the
- *                old subset. Un contains the unit(s) present in the new
- *                subset but not in the old one.
- *                Un(1,2) for example contains the unit included in step
- *                init+1.
- *                Un(end,2) contains the units included in the final step
- *                of the search.
- *   BB:          Units belonging to subset in each step or selected steps.
- * Matrix. n-by-(n-init+1) or n-by-length(bsbsteps) matrix which contains the
- * units belonging to the subset at each step (or in selected steps as specified
- * by optional vector bsbsteps) of the forward search. More precisely: BB(:,1)
- * contains the units forming subset in step bsbsteps(1);
- *                ....;
- *                BB(:,end) contains the units forming subset in step
- * bsbsteps(end); Row 1 of matrix BB is referred to unit 1;
- *                ......;
- *                Row n of matrix BB is referred to unit n;
- *                Units not belonging to subset are denoted with NaN.
- *
- *  See also FSMeda, FSM.m, FSMmmd, FSRbsb, FSRHbsb, FSRBbsb
- *
- *  References:
- *
- *  Atkinson, A.C., Riani, M. and Cerioli, A. (2004), "Exploring multivariate
- *  data with the forward search", Springer Verlag, New York.
- *
- *  Copyright 2008-2021.
- *  Written by FSDA team
- *
- *
- * <a href="matlab: docsearchFS('FSMbsb')">Link to the help function</a>
- *
- * $LastChangedDate::                      $: Date of the last commit
- *
- * Arguments    : const emxArray_real_T *Y
- *                emxArray_real_T *bsb
- *                double varargin_2
- *                double varargin_4
- *                emxArray_real_T *Un
- *                emxArray_real_T *BB
- * Return Type  : void
- */
 void FSMbsb(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             double varargin_4, emxArray_real_T *Un, emxArray_real_T *BB)
 {
@@ -237,6 +115,142 @@ void FSMbsb(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   bool exitg1;
   bool guard1 = false;
   emxInit_boolean_T(&MDltminT, 1);
+  /* FSMbsb gives the units belonging to subset at step(s) msel of the forward
+   * search */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSMbsb')">Link to the help function</a> */
+  /*  */
+  /*  Required input arguments: */
+  /*  */
+  /*  Y :           Input data. Matrix. */
+  /*                n x v data matrix; n observations and v variables. Rows of
+   */
+  /*                Y represent observations, and columns represent variables.
+   */
+  /*                Missing values (NaN's) and infinite values (Inf's) are */
+  /*                allowed, since observations (rows) with missing or infinite
+   */
+  /*                values will automatically be excluded from the */
+  /*                computations. */
+  /*                 Data Types - single|double */
+  /*  bsb :         Units forming subset. Vector. List of units forming the
+   * initial subset. */
+  /*                If bsb=0 (default) then the procedure starts with p units
+   * randomly */
+  /*                chosen else if bsb is not 0 the search will start with */
+  /*                m0=length(bsb) */
+  /*                 Data Types - single|double */
+  /*  */
+  /*  */
+  /*  Optional input arguments: */
+  /*  */
+  /*    bsbsteps :  Save the units forming subsets in selected steps. Vector. */
+  /*                It specifies for which steps of the fwd search it is */
+  /*                necessary to save the units forming subset. If bsbsteps is
+   */
+  /*                0 we store the units forming subset in all steps. The */
+  /*                default is store the units forming subset in all steps if */
+  /*                n<=5000, else to store the units forming subset at steps */
+  /*                init and steps which are multiple of 100. For example, as */
+  /*                default, if n=7530 and init=6, units forming subset are */
+  /*                stored for */
+  /*                m=init, 100, 200, ..., 7500. */
+  /*                Example - 'bsbsteps',[100 200] stores the unis forming */
+  /*                subset in steps 100 and 200. */
+  /*                Data Types - double */
+  /*  */
+  /*  init :       Point where to start monitoring required diagnostics. Scalar.
+   */
+  /*               Note that if bsb is supplied, init>=length(bsb). If init is
+   * not */
+  /*               specified it will be set equal to floor(n*0.6). */
+  /*                  Example - 'init',50 */
+  /*                  Data Types - double */
+  /*  */
+  /*   msg  :   It controls whether to display or not messages */
+  /*                about great interchange on the screen. Boolean. */
+  /*                If msg==true (default) messages are displyed on the screen
+   */
+  /*                else no message is displayed on the screen */
+  /*                  Example - 'msg',false */
+  /*                  Data Types - logical */
+  /*  */
+  /*  nocheck :   It controls whether to perform checks on matrix Y. Scalar. */
+  /*              If nocheck is equal to 1 no check is performed on matrix Y. */
+  /*              As default nocheck=0. */
+  /*                  Example - 'nocheck',1 */
+  /*                  Data Types - double */
+  /*  */
+  /*  plots :     Plot on the screen. Scalar. */
+  /*                If plots=1, a plot of the monitoring of minMD among */
+  /*                the units not belonging to the subset is produced on the */
+  /*                screen with 1 per cent, 50 per cent and 99 per cent
+   * confidence bands */
+  /*                else (default) no plot is produced. */
+  /*                Example - 'plots',0 */
+  /*                Data Types - double */
+  /*  */
+  /*  */
+  /*  Remark:       The user should only give the input arguments that have to
+   */
+  /*                change their default value. */
+  /*                The name of the input arguments needs to be followed by */
+  /*                their value. The order of the input arguments is of no */
+  /*                importance. */
+  /*  */
+  /*                Missing values (NaN's) and infinite values (Inf's) are */
+  /*                allowed, since observations (rows) with missing or infinite
+   */
+  /*                values will automatically be excluded from the */
+  /*                computations. y can be both a row of column vector. */
+  /*  */
+  /*  Output: */
+  /*  */
+  /*  */
+  /*   Un:          Units included in each step. Matrix. */
+  /*                (n-init) x 11 Matrix which contains the unit(s) included */
+  /*                in the subset at each step of the search. */
+  /*                REMARK: in every step the new subset is compared with the */
+  /*                old subset. Un contains the unit(s) present in the new */
+  /*                subset but not in the old one. */
+  /*                Un(1,2) for example contains the unit included in step */
+  /*                init+1. */
+  /*                Un(end,2) contains the units included in the final step */
+  /*                of the search. */
+  /*   BB:          Units belonging to subset in each step or selected steps.
+   * Matrix. */
+  /*                n-by-(n-init+1) or n-by-length(bsbsteps) matrix which */
+  /*                contains the units belonging to the subset at each step (or
+   */
+  /*                in selected steps as specified by optional vector bsbsteps)
+   */
+  /*                of the forward search. */
+  /*                More precisely: */
+  /*                BB(:,1) contains the units forming subset in step
+   * bsbsteps(1); */
+  /*                ....; */
+  /*                BB(:,end) contains the units forming subset in step
+   * bsbsteps(end); */
+  /*                Row 1 of matrix BB is referred to unit 1; */
+  /*                ......; */
+  /*                Row n of matrix BB is referred to unit n; */
+  /*                Units not belonging to subset are denoted with NaN. */
+  /*  */
+  /*  See also FSMeda, FSM.m, FSMmmd, FSRbsb, FSRHbsb, FSRBbsb */
+  /*  */
+  /*  References: */
+  /*  */
+  /*  Atkinson, A.C., Riani, M. and Cerioli, A. (2004), "Exploring multivariate
+   */
+  /*  data with the forward search", Springer Verlag, New York. */
+  /*  */
+  /*  Copyright 2008-2021. */
+  /*  Written by FSDA team */
+  /*  */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSMbsb')">Link to the help function</a> */
+  /*  */
+  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /* { */
   /*     % FSMbsb with all default options. */
@@ -535,14 +549,14 @@ void FSMbsb(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  check init */
   init1 = varargin_4;
   if (varargin_4 < (double)Y->size[1] + 1.0) {
-    printf("%s\n",
+    Rprintf("%s\n",
            "Attention : init1 should be larger than v. \nIt is set to v+1.");
     fflush(stdout);
     init1 = (double)Y->size[1] + 1.0;
   } else if (varargin_4 < bsb->size[0]) {
     init1 = bsb->size[0];
   } else if (varargin_4 >= Y->size[0]) {
-    printf("%s\n",
+    Rprintf("%s\n",
            "Attention : init1 should be smaller than n. \nIt is set to n-1.");
     fflush(stdout);
     init1 = (double)Y->size[0] - 1.0;
@@ -1982,8 +1996,4 @@ void FSMbsb(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   emxFree_real_T(&seq);
 }
 
-/*
- * File trailer for FSMbsb.c
- *
- * [EOF]
- */
+/* End of code generation (FSMbsb.c) */

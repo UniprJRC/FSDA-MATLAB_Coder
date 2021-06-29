@@ -2,26 +2,22 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: median.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * median.c
+ *
+ * Code generation for function 'median'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "median.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
 #include "quickselect.h"
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
-#include <string.h>
 
 /* Function Definitions */
-/*
- * Arguments    : const emxArray_real_T *x
- * Return Type  : double
- */
 double median(const emxArray_real_T *x)
 {
   emxArray_real_T *a__4;
@@ -164,8 +160,4 @@ double median(const emxArray_real_T *x)
   return y;
 }
 
-/*
- * File trailer for median.c
- *
- * [EOF]
- */
+/* End of code generation (median.c) */

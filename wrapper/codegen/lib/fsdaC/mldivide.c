@@ -2,13 +2,14 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: mldivide.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * mldivide.c
+ *
+ * Code generation for function 'mldivide'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "mldivide.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_rtwutil.h"
@@ -26,11 +27,6 @@
 static int div_nde_s32_floor(int numerator, int denominator);
 
 /* Function Definitions */
-/*
- * Arguments    : int numerator
- *                int denominator
- * Return Type  : int
- */
 static int div_nde_s32_floor(int numerator, int denominator)
 {
   int b_numerator;
@@ -43,120 +39,7 @@ static int div_nde_s32_floor(int numerator, int denominator)
   return numerator / denominator + b_numerator;
 }
 
-/*
- * Arguments    : const emxArray_real_T *A
- *                const emxArray_real_T *B
- *                emxArray_real_T *Y
- * Return Type  : void
- */
-void b_mldivide(const emxArray_real_T *A, const emxArray_real_T *B,
-                emxArray_real_T *Y)
-{
-  emxArray_int32_T *ipiv;
-  emxArray_real_T *b_A;
-  double temp;
-  int b_i;
-  int i;
-  int i1;
-  int j;
-  int jBcol;
-  int k;
-  int kAcol;
-  int loop_ub;
-  int n;
-  int nrhs;
-  emxInit_real_T(&b_A, 2);
-  emxInit_int32_T(&ipiv, 2);
-  if ((A->size[0] == 0) || (A->size[1] == 0) ||
-      ((B->size[0] == 0) || (B->size[1] == 0))) {
-    i = Y->size[0] * Y->size[1];
-    Y->size[0] = A->size[1];
-    Y->size[1] = B->size[1];
-    emxEnsureCapacity_real_T(Y, i);
-    loop_ub = A->size[1] * B->size[1];
-    for (i = 0; i < loop_ub; i++) {
-      Y->data[i] = 0.0;
-    }
-  } else if (A->size[0] == A->size[1]) {
-    i = Y->size[0] * Y->size[1];
-    Y->size[0] = B->size[0];
-    Y->size[1] = B->size[1];
-    emxEnsureCapacity_real_T(Y, i);
-    loop_ub = B->size[0] * B->size[1];
-    for (i = 0; i < loop_ub; i++) {
-      Y->data[i] = B->data[i];
-    }
-    loop_ub = A->size[0];
-    n = A->size[1];
-    if (loop_ub < n) {
-      n = loop_ub;
-    }
-    loop_ub = B->size[0];
-    if (loop_ub < n) {
-      n = loop_ub;
-    }
-    nrhs = B->size[1] - 1;
-    i = b_A->size[0] * b_A->size[1];
-    b_A->size[0] = A->size[0];
-    b_A->size[1] = A->size[1];
-    emxEnsureCapacity_real_T(b_A, i);
-    loop_ub = A->size[0] * A->size[1];
-    for (i = 0; i < loop_ub; i++) {
-      b_A->data[i] = A->data[i];
-    }
-    xzgetrf(n, n, b_A, A->size[0], ipiv, &loop_ub);
-    for (b_i = 0; b_i <= n - 2; b_i++) {
-      i = ipiv->data[b_i];
-      if (i != b_i + 1) {
-        for (j = 0; j <= nrhs; j++) {
-          temp = Y->data[b_i + Y->size[0] * j];
-          Y->data[b_i + Y->size[0] * j] = Y->data[(i + Y->size[0] * j) - 1];
-          Y->data[(i + Y->size[0] * j) - 1] = temp;
-        }
-      }
-    }
-    for (j = 0; j <= nrhs; j++) {
-      jBcol = B->size[0] * j;
-      for (k = 0; k < n; k++) {
-        kAcol = b_A->size[0] * k;
-        i = k + jBcol;
-        if (Y->data[i] != 0.0) {
-          i1 = k + 2;
-          for (b_i = i1; b_i <= n; b_i++) {
-            loop_ub = (b_i + jBcol) - 1;
-            Y->data[loop_ub] -= Y->data[i] * b_A->data[(b_i + kAcol) - 1];
-          }
-        }
-      }
-    }
-    loop_ub = B->size[1];
-    for (j = 0; j < loop_ub; j++) {
-      jBcol = B->size[0] * j - 1;
-      for (k = n; k >= 1; k--) {
-        kAcol = b_A->size[0] * (k - 1) - 1;
-        i = k + jBcol;
-        if (Y->data[i] != 0.0) {
-          Y->data[i] /= b_A->data[k + kAcol];
-          for (b_i = 0; b_i <= k - 2; b_i++) {
-            i1 = (b_i + jBcol) + 1;
-            Y->data[i1] -= Y->data[i] * b_A->data[(b_i + kAcol) + 1];
-          }
-        }
-      }
-    }
-  } else {
-    qrsolve(A, B, Y);
-  }
-  emxFree_int32_T(&ipiv);
-  emxFree_real_T(&b_A);
-}
-
-/*
- * Arguments    : const emxArray_real_T *A
- *                const emxArray_real_T *B
- * Return Type  : double
- */
-double c_mldivide(const emxArray_real_T *A, const emxArray_real_T *B)
+double b_mldivide(const emxArray_real_T *A, const emxArray_real_T *B)
 {
   emxArray_real_T *b_A;
   emxArray_real_T *b_B;
@@ -185,7 +68,7 @@ double c_mldivide(const emxArray_real_T *A, const emxArray_real_T *B)
     atmp = b_A->data[0];
     tau_data = 0.0;
     i = A->size[0];
-    wj = d_xnrm2(A->size[0] - 1, b_A);
+    wj = c_xnrm2(A->size[0] - 1, b_A);
     if (wj != 0.0) {
       beta1 = rt_hypotd_snf(b_A->data[0], wj);
       if (b_A->data[0] >= 0.0) {
@@ -202,7 +85,7 @@ double c_mldivide(const emxArray_real_T *A, const emxArray_real_T *B)
           atmp *= 9.9792015476736E+291;
         } while (!(fabs(beta1) >= 1.0020841800044864E-292));
         i = A->size[0];
-        beta1 = rt_hypotd_snf(atmp, d_xnrm2(A->size[0] - 1, b_A));
+        beta1 = rt_hypotd_snf(atmp, c_xnrm2(A->size[0] - 1, b_A));
         if (atmp >= 0.0) {
           beta1 = -beta1;
         }
@@ -266,13 +149,7 @@ double c_mldivide(const emxArray_real_T *A, const emxArray_real_T *B)
   return Y;
 }
 
-/*
- * Arguments    : const double A[27]
- *                const double B[9]
- *                double Y[3]
- * Return Type  : void
- */
-void d_mldivide(const double A[27], const double B[9], double Y[3])
+void c_mldivide(const double A[27], const double B[9], double Y[3])
 {
   double b_A[27];
   double b_B[9];
@@ -358,7 +235,7 @@ void d_mldivide(const double A[27], const double B[9], double Y[3])
     t = b_A[ii];
     ix0 = ii + 2;
     tau[i] = 0.0;
-    smax = e_xnrm2(8 - i, b_A, ii + 2);
+    smax = d_xnrm2(8 - i, b_A, ii + 2);
     if (smax != 0.0) {
       absxk = b_A[ii];
       scale = rt_hypotd_snf(absxk, smax);
@@ -376,7 +253,7 @@ void d_mldivide(const double A[27], const double B[9], double Y[3])
           scale *= 9.9792015476736E+291;
           t *= 9.9792015476736E+291;
         } while (!(fabs(scale) >= 1.0020841800044864E-292));
-        scale = rt_hypotd_snf(t, e_xnrm2(8 - i, b_A, ii + 2));
+        scale = rt_hypotd_snf(t, d_xnrm2(8 - i, b_A, ii + 2));
         if (t >= 0.0) {
           scale = -scale;
         }
@@ -482,7 +359,7 @@ void d_mldivide(const double A[27], const double B[9], double Y[3])
         scale = absxk / vn2[j - 1];
         scale = smax * (scale * scale);
         if (scale <= 1.4901161193847656E-8) {
-          absxk = e_xnrm2(8 - i, b_A, kend + 2);
+          absxk = d_xnrm2(8 - i, b_A, kend + 2);
           vn1[j - 1] = absxk;
           vn2[j - 1] = absxk;
         } else {
@@ -528,12 +405,6 @@ void d_mldivide(const double A[27], const double B[9], double Y[3])
   }
 }
 
-/*
- * Arguments    : const emxArray_real_T *A
- *                const emxArray_real_T *B
- *                emxArray_real_T *Y
- * Return Type  : void
- */
 void mldivide(const emxArray_real_T *A, const emxArray_real_T *B,
               emxArray_real_T *Y)
 {
@@ -659,8 +530,4 @@ void mldivide(const emxArray_real_T *A, const emxArray_real_T *B,
   emxFree_real_T(&b_A);
 }
 
-/*
- * File trailer for mldivide.c
- *
- * [EOF]
- */
+/* End of code generation (mldivide.c) */

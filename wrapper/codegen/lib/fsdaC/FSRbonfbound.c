@@ -2,13 +2,14 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: FSRbonfbound.c
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * FSRbonfbound.c
+ *
+ * Code generation for function 'FSRbonfbound'
+ *
  */
 
-/* Include Files */
+/* Include files */
 #include "FSRbonfbound.h"
 #include "colon.h"
 #include "fsdaC_emxutil.h"
@@ -18,78 +19,8 @@
 #include "tinv.h"
 #include "rt_nonfinite.h"
 #include <math.h>
-#include <string.h>
 
 /* Function Definitions */
-/*
- * FSRbonfbound computes Bonferroni bounds for each step of the search (in
- * linear regression)
- *
- * <a href="matlab: docsearchFS('FSRbonfbound')">Link to the help function</a>
- *
- *   Required input arguments:
- *
- *     n : number of observations. Scalar. Number of observations on which
- *        the envelopes are based.
- *     p : number of explanatory variables (including the intercept if
- *     present). Scalar. Number of expl. variables on which
- *        the envelopes are based.
- *
- *   Optional input arguments:
- *
- *         init :      Search initialization. Scalar.
- *                       It specifies the point where to initialize the search
- *                        and start monitoring minimum deletion residual. if
- * init is not specified it will be set equal to : p+1, if the sample size is
- * smaller than 40; min(3*p+1,floor(0.5*(n+p+1))), otherwise. Example -
- * 'init',100 starts monitoring from step m=100 Data Types - double
- *
- *   prob:    quantiles for which envelopes have
- *                to be computed. Vector.
- *                1 x k vector containing quantiles for which envelopes have
- *                to be computed. The default is to produce 1%, 50% and 99%
- *                envelopes.
- *                Example - 'prob',[0.01 0.99]
- *                Data Types - double
- *
- *   Output:
- *
- *   Bbound:      Bonferroni forward envelopes of mdr. Matrix.
- *                Matrix with n-m0+1 rows and length(prob)+1 columns:
- *                1st col = fwd search index from m0 to n-1,
- *                2nd col = bound for quantile prob[1],
- *                3rd col = bound for quantile prob[2],
- *                ...,
- *                (k+1) col = bound for quantile prob[k].
- *
- *
- *  See also: FSRenvmdr
- *
- *  References:
- *
- *  Atkinson, A.C. and Riani, M. (2006), Distribution theory and
- *  simulations for tests of outliers in regression, "Journal of
- *  Computational and Graphical Statistics", Vol. 15, pp. 460-476.
- *  Riani, M. and Atkinson, A.C. (2007), Fast calibrations of the forward
- *  search for testing multiple outliers in regression, "Advances in Data
- *  Analysis and Classification", Vol. 1, pp. 123-141.
- *
- *  Copyright 2008-2021.
- *  Written by FSDA team
- *
- *
- * <a href="matlab: docsearchFS('FSRbonfbound')">Link to the help function</a>
- *
- * $LastChangedDate::                      $: Date of the last commit
- *
- * Arguments    : double n
- *                double p
- *                const double varargin_2_data[]
- *                const int varargin_2_size[2]
- *                double varargin_4
- *                emxArray_real_T *Bbound
- * Return Type  : void
- */
 void FSRbonfbound(double n, double p, const double varargin_2_data[],
                   const int varargin_2_size[2], double varargin_4,
                   emxArray_real_T *Bbound)
@@ -97,11 +28,11 @@ void FSRbonfbound(double n, double p, const double varargin_2_data[],
   emxArray_int32_T *r;
   emxArray_int32_T *r1;
   emxArray_real_T *b;
+  emxArray_real_T *b_y;
   emxArray_real_T *m;
   emxArray_real_T *mm;
   emxArray_real_T *mmminusp;
   emxArray_real_T *r2;
-  emxArray_real_T *r3;
   emxArray_real_T *x;
   emxArray_real_T *y;
   int b_n;
@@ -111,6 +42,73 @@ void FSRbonfbound(double n, double p, const double varargin_2_data[],
   signed char input_sizes_idx_1;
   signed char sizes_idx_1;
   bool empty_non_axis_sizes;
+  /* FSRbonfbound computes Bonferroni bounds for each step of the search (in
+   * linear regression) */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSRbonfbound')">Link to the help function</a>
+   */
+  /*  */
+  /*   Required input arguments: */
+  /*  */
+  /*     n : number of observations. Scalar. Number of observations on which */
+  /*        the envelopes are based. */
+  /*     p : number of explanatory variables (including the intercept if */
+  /*     present). Scalar. Number of expl. variables on which */
+  /*        the envelopes are based. */
+  /*  */
+  /*   Optional input arguments: */
+  /*  */
+  /*         init :      Search initialization. Scalar. */
+  /*                       It specifies the point where to initialize the search
+   */
+  /*                        and start monitoring minimum deletion residual. if
+   * init is not */
+  /*                        specified it will be set equal to : */
+  /*                        p+1, if the sample size is smaller than 40; */
+  /*                        min(3*p+1,floor(0.5*(n+p+1))), otherwise. */
+  /*                        Example - 'init',100 starts monitoring from step
+   * m=100 */
+  /*                        Data Types - double */
+  /*  */
+  /*   prob:    quantiles for which envelopes have */
+  /*                to be computed. Vector. */
+  /*                1 x k vector containing quantiles for which envelopes have
+   */
+  /*                to be computed. The default is to produce 1%, 50% and 99% */
+  /*                envelopes. */
+  /*                Example - 'prob',[0.01 0.99]  */
+  /*                Data Types - double */
+  /*  */
+  /*   Output: */
+  /*  */
+  /*   Bbound:      Bonferroni forward envelopes of mdr. Matrix. */
+  /*                Matrix with n-m0+1 rows and length(prob)+1 columns: */
+  /*                1st col = fwd search index from m0 to n-1, */
+  /*                2nd col = bound for quantile prob[1], */
+  /*                3rd col = bound for quantile prob[2], */
+  /*                ..., */
+  /*                (k+1) col = bound for quantile prob[k]. */
+  /*  */
+  /*  */
+  /*  See also: FSRenvmdr */
+  /*  */
+  /*  References: */
+  /*  */
+  /*  Atkinson, A.C. and Riani, M. (2006), Distribution theory and */
+  /*  simulations for tests of outliers in regression, "Journal of */
+  /*  Computational and Graphical Statistics", Vol. 15, pp. 460-476. */
+  /*  Riani, M. and Atkinson, A.C. (2007), Fast calibrations of the forward */
+  /*  search for testing multiple outliers in regression, "Advances in Data */
+  /*  Analysis and Classification", Vol. 1, pp. 123-141. */
+  /*  */
+  /*  Copyright 2008-2021. */
+  /*  Written by FSDA team */
+  /*  */
+  /*  */
+  /* <a href="matlab: docsearchFS('FSRbonfbound')">Link to the help function</a>
+   */
+  /*  */
+  /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
   /* { */
   /*     %% mdr with Bonferroni envelopes. */
@@ -261,48 +259,48 @@ void FSRbonfbound(double n, double p, const double varargin_2_data[],
     mmminusp->data[r1->data[k] - 1] = 1.0;
   }
   emxFree_int32_T(&r1);
+  emxInit_real_T(&b_y, 2);
   emxInit_real_T(&r2, 2);
-  emxInit_real_T(&r3, 2);
-  repmat(varargin_2_data, varargin_2_size, m->size[0], r2);
-  k = r3->size[0] * r3->size[1];
-  r3->size[0] = r2->size[0];
-  r3->size[1] = r2->size[1];
-  emxEnsureCapacity_real_T(r3, k);
-  nrows = r2->size[0] * r2->size[1];
+  repmat(varargin_2_data, varargin_2_size, m->size[0], b);
+  k = r2->size[0] * r2->size[1];
+  r2->size[0] = b->size[0];
+  r2->size[1] = b->size[1];
+  emxEnsureCapacity_real_T(r2, k);
+  nrows = b->size[0] * b->size[1];
   for (k = 0; k < nrows; k++) {
-    r3->data[k] = (1.0 - r2->data[k]) / (mm->data[k] + 1.0);
+    r2->data[k] = (1.0 - b->data[k]) / (mm->data[k] + 1.0);
   }
   emxFree_real_T(&mm);
   emxInit_real_T(&x, 2);
-  b_tinv(r3, mmminusp, r2);
+  b_tinv(r2, mmminusp, b);
   k = x->size[0] * x->size[1];
-  x->size[0] = r2->size[0];
-  x->size[1] = r2->size[1];
+  x->size[0] = b->size[0];
+  x->size[1] = b->size[1];
   emxEnsureCapacity_real_T(x, k);
-  nrows = r2->size[0] * r2->size[1];
-  emxFree_real_T(&r3);
+  nrows = b->size[0] * b->size[1];
+  emxFree_real_T(&r2);
   emxFree_real_T(&mmminusp);
   for (k = 0; k < nrows; k++) {
-    x->data[k] = r2->data[k];
+    x->data[k] = b->data[k];
   }
-  emxFree_real_T(&r2);
+  emxFree_real_T(&b);
   nrows = x->size[0] * x->size[1];
-  k = b->size[0] * b->size[1];
-  b->size[0] = x->size[0];
-  b->size[1] = x->size[1];
-  emxEnsureCapacity_real_T(b, k);
+  k = b_y->size[0] * b_y->size[1];
+  b_y->size[0] = x->size[0];
+  b_y->size[1] = x->size[1];
+  emxEnsureCapacity_real_T(b_y, k);
   for (k = 0; k < nrows; k++) {
-    b->data[k] = fabs(x->data[k]);
+    b_y->data[k] = fabs(x->data[k]);
   }
   emxFree_real_T(&x);
   if (m->size[0] != 0) {
     b_n = m->size[0];
-  } else if ((b->size[0] != 0) && (b->size[1] != 0)) {
-    b_n = b->size[0];
+  } else if ((b_y->size[0] != 0) && (b_y->size[1] != 0)) {
+    b_n = b_y->size[0];
   } else {
     b_n = 0;
-    if (b->size[0] > 0) {
-      b_n = b->size[0];
+    if (b_y->size[0] > 0) {
+      b_n = b_y->size[0];
     }
   }
   empty_non_axis_sizes = (b_n == 0);
@@ -311,8 +309,8 @@ void FSRbonfbound(double n, double p, const double varargin_2_data[],
   } else {
     input_sizes_idx_1 = 0;
   }
-  if (empty_non_axis_sizes || ((b->size[0] != 0) && (b->size[1] != 0))) {
-    sizes_idx_1 = (signed char)b->size[1];
+  if (empty_non_axis_sizes || ((b_y->size[0] != 0) && (b_y->size[1] != 0))) {
+    sizes_idx_1 = (signed char)b_y->size[1];
   } else {
     sizes_idx_1 = 0;
   }
@@ -331,14 +329,10 @@ void FSRbonfbound(double n, double p, const double varargin_2_data[],
   for (k = 0; k < nrows; k++) {
     for (jtilecol = 0; jtilecol < b_n; jtilecol++) {
       Bbound->data[jtilecol + Bbound->size[0] * (k + input_sizes_idx_1)] =
-          b->data[jtilecol + b_n * k];
+          b_y->data[jtilecol + b_n * k];
     }
   }
-  emxFree_real_T(&b);
+  emxFree_real_T(&b_y);
 }
 
-/*
- * File trailer for FSRbonfbound.c
- *
- * [EOF]
- */
+/* End of code generation (FSRbonfbound.c) */

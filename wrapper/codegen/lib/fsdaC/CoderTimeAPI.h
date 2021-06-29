@@ -2,16 +2,17 @@
  * Academic License - for use in teaching, academic research, and meeting
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
- * File: CoderTimeAPI.h
  *
- * MATLAB Coder version            : 5.2
- * C/C++ source code generated on  : 25-Jun-2021 16:19:58
+ * CoderTimeAPI.h
+ *
+ * Code generation for function 'CoderTimeAPI'
+ *
  */
 
 #ifndef CODERTIMEAPI_H
 #define CODERTIMEAPI_H
 
-/* Include Files */
+/* Include files */
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -28,8 +29,4 @@ void freq_not_empty_init(void);
 #endif
 
 #endif
-/*
- * File trailer for CoderTimeAPI.h
- *
- * [EOF]
- */
+/* End of code generation (CoderTimeAPI.h) */
