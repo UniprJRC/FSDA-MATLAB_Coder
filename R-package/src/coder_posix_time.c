@@ -25,7 +25,7 @@
 #include <time.h>
 
 /* Prototypes */
-
+#ifndef CODER_WINAPI
 /**
  * @brief Convert coderTimeSpec to POSIX timespec
  *
@@ -51,6 +51,7 @@ static void posixToCoderTimespec(const struct timespec* const aTimespec,
     aCoderTimespec->tv_sec = (double)(aTimespec->tv_sec);
     aCoderTimespec->tv_nsec = (double)(aTimespec->tv_nsec);
 }
+#endif /* CODER_WINAPI */
 
 int coderInitTimeFunctions(double* const aFrequency) {
 #ifdef CODER_WINAPI
