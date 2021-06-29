@@ -23,6 +23,9 @@ extern "C" {
 #endif
 
 /* Function Declarations */
+void b_cat(const emxArray_real_T *varargin_1, const emxArray_real_T *varargin_2,
+           emxArray_real_T *y);
+
 void cat(const emxArray_real_T *varargin_1, const emxArray_real_T *varargin_2,
          emxArray_real_T *y);
 

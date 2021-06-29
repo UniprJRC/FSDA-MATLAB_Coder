@@ -38,6 +38,7 @@
 #include "unibiv.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <string.h>
 
 /* Function Definitions */
 void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],

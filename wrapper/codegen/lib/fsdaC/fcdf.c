@@ -15,6 +15,7 @@
 #include "gammainc.h"
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 double fcdf(double x, double v2)

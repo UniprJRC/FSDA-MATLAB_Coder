@@ -15,6 +15,7 @@
 #include "fsdaC_types.h"
 #include "mtimes.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 void pascal(double n, emxArray_real_T *P)

@@ -13,6 +13,7 @@
 #include "xunormqr.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 void xunormqr(const emxArray_real_T *Q, emxArray_real_T *C,

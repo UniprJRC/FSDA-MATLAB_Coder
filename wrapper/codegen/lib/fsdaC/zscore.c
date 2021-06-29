@@ -17,6 +17,7 @@
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 #include "vvarstd.h"
+#include <string.h>
 
 /* Function Definitions */
 void zscore(const emxArray_real_T *x, emxArray_real_T *z)

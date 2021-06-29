@@ -16,6 +16,7 @@
 #include "rt_nonfinite.h"
 #include "xzlarf.h"
 #include "xzlarfg.h"
+#include <string.h>
 
 /* Function Definitions */
 void qrf(emxArray_real_T *A, int m, int n, int nfxd, emxArray_real_T *tau)
@@ -40,7 +41,7 @@ void qrf(emxArray_real_T *A, int m, int n, int nfxd, emxArray_real_T *tau)
     mmi = m - i;
     if (i + 1 < m) {
       atmp = A->data[ii];
-      tau->data[i] = xzlarfg(mmi, &atmp, A, ii + 2);
+      tau->data[i] = b_xzlarfg(mmi, &atmp, A, ii + 2);
       A->data[ii] = atmp;
     } else {
       tau->data[i] = 0.0;

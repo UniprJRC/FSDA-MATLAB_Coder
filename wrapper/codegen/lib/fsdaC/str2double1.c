@@ -13,6 +13,7 @@
 #include "str2double1.h"
 #include "fsdaC_data.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 bool b_copydigits(char s1[4], int *idx, const char s[2], int *k,

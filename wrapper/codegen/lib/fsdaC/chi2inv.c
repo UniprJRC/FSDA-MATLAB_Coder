@@ -16,6 +16,7 @@
 #include "gammaincinv.h"
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 void b_chi2inv(const emxArray_real_T *p, double v, emxArray_real_T *x)

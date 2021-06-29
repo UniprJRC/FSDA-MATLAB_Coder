@@ -18,6 +18,7 @@
 #include "xzlarf.h"
 #include "xzlarfg.h"
 #include <math.h>
+#include <string.h>
 
 /* Function Definitions */
 void xgeqp3(emxArray_real_T *A, emxArray_real_T *tau, emxArray_int32_T *jpvt)
@@ -154,7 +155,7 @@ void xgeqp3(emxArray_real_T *A, emxArray_real_T *tau, emxArray_int32_T *jpvt)
         }
         if (b_i + 1 < m) {
           smax = A->data[ii];
-          d = xzlarfg(mmi, &smax, A, ii + 2);
+          d = b_xzlarfg(mmi, &smax, A, ii + 2);
           tau->data[b_i] = d;
           A->data[ii] = smax;
         } else {

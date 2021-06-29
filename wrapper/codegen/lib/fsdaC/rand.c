@@ -16,6 +16,7 @@
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 void b_rand(double varargin_2, emxArray_real_T *r)
@@ -35,6 +36,19 @@ void b_rand(double varargin_2, emxArray_real_T *r)
 double c_rand(void)
 {
   return eml_rand_mt19937ar(state);
+}
+
+void d_rand(double varargin_1, emxArray_real_T *r)
+{
+  int i;
+  int k;
+  i = (int)varargin_1;
+  k = r->size[0];
+  r->size[0] = (int)varargin_1;
+  emxEnsureCapacity_real_T(r, k);
+  for (k = 0; k < i; k++) {
+    r->data[k] = eml_rand_mt19937ar(state);
+  }
 }
 
 /* End of code generation (rand.c) */

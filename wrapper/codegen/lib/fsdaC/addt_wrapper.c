@@ -30,6 +30,7 @@
 #include "tcdf.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <string.h>
 
 /* Function Definitions */
 void addt_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,

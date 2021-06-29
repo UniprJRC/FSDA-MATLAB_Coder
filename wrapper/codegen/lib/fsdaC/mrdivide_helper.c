@@ -16,6 +16,7 @@
 #include "qrsolve.h"
 #include "rt_nonfinite.h"
 #include "xzgetrf.h"
+#include <string.h>
 
 /* Function Definitions */
 void mrdiv(const emxArray_real_T *A, const emxArray_real_T *B,

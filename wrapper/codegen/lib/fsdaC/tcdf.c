@@ -18,6 +18,7 @@
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <string.h>
 
 /* Function Definitions */
 void b_tcdf(const double x_data[], const int x_size[2], double v,

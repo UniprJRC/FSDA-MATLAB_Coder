@@ -14,6 +14,7 @@
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 void b_nullAssignment(emxArray_real_T *x, const emxArray_boolean_T *idx)

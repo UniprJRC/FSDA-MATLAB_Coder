@@ -13,6 +13,7 @@
 #define EIGSTANDARD_H
 
 /* Include files */
+#include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -22,7 +23,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void eigStandard(const double A[4], creal_T V[2]);
+void eigStandard(const emxArray_real_T *A, emxArray_creal_T *V,
+                 emxArray_creal_T *D);
 
 #ifdef __cplusplus
 }

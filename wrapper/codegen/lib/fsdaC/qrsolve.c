@@ -16,6 +16,7 @@
 #include "rt_nonfinite.h"
 #include "xgeqp3.h"
 #include <math.h>
+#include <string.h>
 
 /* Function Definitions */
 void qrsolve(const emxArray_real_T *A, const emxArray_real_T *B,

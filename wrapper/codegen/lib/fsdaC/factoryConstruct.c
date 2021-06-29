@@ -16,6 +16,7 @@
 #include "fsdaC_types.h"
 #include "hasFiniteBounds.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 void factoryConstruct(captured_var *c_nonlin_workspace_fun_workspac,

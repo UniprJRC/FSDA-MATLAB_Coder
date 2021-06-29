@@ -20,6 +20,7 @@
 #include "vvarstd.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <string.h>
 
 /* Function Definitions */
 void b_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,

@@ -16,6 +16,7 @@
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 bool b_jacobianFiniteDifference(emxArray_real_T *augJacobian,

@@ -19,6 +19,7 @@
 #include "tinv.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <string.h>
 
 /* Function Definitions */
 void FSRbonfbound(double n, double p, const double varargin_2_data[],
@@ -28,11 +29,11 @@ void FSRbonfbound(double n, double p, const double varargin_2_data[],
   emxArray_int32_T *r;
   emxArray_int32_T *r1;
   emxArray_real_T *b;
-  emxArray_real_T *b_y;
   emxArray_real_T *m;
   emxArray_real_T *mm;
   emxArray_real_T *mmminusp;
   emxArray_real_T *r2;
+  emxArray_real_T *r3;
   emxArray_real_T *x;
   emxArray_real_T *y;
   int b_n;
@@ -259,48 +260,48 @@ void FSRbonfbound(double n, double p, const double varargin_2_data[],
     mmminusp->data[r1->data[k] - 1] = 1.0;
   }
   emxFree_int32_T(&r1);
-  emxInit_real_T(&b_y, 2);
   emxInit_real_T(&r2, 2);
-  repmat(varargin_2_data, varargin_2_size, m->size[0], b);
-  k = r2->size[0] * r2->size[1];
-  r2->size[0] = b->size[0];
-  r2->size[1] = b->size[1];
-  emxEnsureCapacity_real_T(r2, k);
-  nrows = b->size[0] * b->size[1];
+  emxInit_real_T(&r3, 2);
+  repmat(varargin_2_data, varargin_2_size, m->size[0], r2);
+  k = r3->size[0] * r3->size[1];
+  r3->size[0] = r2->size[0];
+  r3->size[1] = r2->size[1];
+  emxEnsureCapacity_real_T(r3, k);
+  nrows = r2->size[0] * r2->size[1];
   for (k = 0; k < nrows; k++) {
-    r2->data[k] = (1.0 - b->data[k]) / (mm->data[k] + 1.0);
+    r3->data[k] = (1.0 - r2->data[k]) / (mm->data[k] + 1.0);
   }
   emxFree_real_T(&mm);
   emxInit_real_T(&x, 2);
-  b_tinv(r2, mmminusp, b);
+  b_tinv(r3, mmminusp, r2);
   k = x->size[0] * x->size[1];
-  x->size[0] = b->size[0];
-  x->size[1] = b->size[1];
+  x->size[0] = r2->size[0];
+  x->size[1] = r2->size[1];
   emxEnsureCapacity_real_T(x, k);
-  nrows = b->size[0] * b->size[1];
-  emxFree_real_T(&r2);
+  nrows = r2->size[0] * r2->size[1];
+  emxFree_real_T(&r3);
   emxFree_real_T(&mmminusp);
   for (k = 0; k < nrows; k++) {
-    x->data[k] = b->data[k];
+    x->data[k] = r2->data[k];
   }
-  emxFree_real_T(&b);
+  emxFree_real_T(&r2);
   nrows = x->size[0] * x->size[1];
-  k = b_y->size[0] * b_y->size[1];
-  b_y->size[0] = x->size[0];
-  b_y->size[1] = x->size[1];
-  emxEnsureCapacity_real_T(b_y, k);
+  k = b->size[0] * b->size[1];
+  b->size[0] = x->size[0];
+  b->size[1] = x->size[1];
+  emxEnsureCapacity_real_T(b, k);
   for (k = 0; k < nrows; k++) {
-    b_y->data[k] = fabs(x->data[k]);
+    b->data[k] = fabs(x->data[k]);
   }
   emxFree_real_T(&x);
   if (m->size[0] != 0) {
     b_n = m->size[0];
-  } else if ((b_y->size[0] != 0) && (b_y->size[1] != 0)) {
-    b_n = b_y->size[0];
+  } else if ((b->size[0] != 0) && (b->size[1] != 0)) {
+    b_n = b->size[0];
   } else {
     b_n = 0;
-    if (b_y->size[0] > 0) {
-      b_n = b_y->size[0];
+    if (b->size[0] > 0) {
+      b_n = b->size[0];
     }
   }
   empty_non_axis_sizes = (b_n == 0);
@@ -309,8 +310,8 @@ void FSRbonfbound(double n, double p, const double varargin_2_data[],
   } else {
     input_sizes_idx_1 = 0;
   }
-  if (empty_non_axis_sizes || ((b_y->size[0] != 0) && (b_y->size[1] != 0))) {
-    sizes_idx_1 = (signed char)b_y->size[1];
+  if (empty_non_axis_sizes || ((b->size[0] != 0) && (b->size[1] != 0))) {
+    sizes_idx_1 = (signed char)b->size[1];
   } else {
     sizes_idx_1 = 0;
   }
@@ -329,10 +330,10 @@ void FSRbonfbound(double n, double p, const double varargin_2_data[],
   for (k = 0; k < nrows; k++) {
     for (jtilecol = 0; jtilecol < b_n; jtilecol++) {
       Bbound->data[jtilecol + Bbound->size[0] * (k + input_sizes_idx_1)] =
-          b_y->data[jtilecol + b_n * k];
+          b->data[jtilecol + b_n * k];
     }
   }
-  emxFree_real_T(&b_y);
+  emxFree_real_T(&b);
 }
 
 /* End of code generation (FSRbonfbound.c) */

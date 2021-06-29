@@ -32,6 +32,21 @@ void bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
 void c_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
               emxArray_real_T *c);
 
+void d_bsxfun(const emxArray_boolean_T *a, const emxArray_real_T *b,
+              emxArray_real_T *c);
+
+void e_bsxfun(const emxArray_boolean_T *a, const emxArray_real_T *b,
+              emxArray_real_T *c);
+
+void f_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
+              emxArray_real_T *c);
+
+void g_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
+              emxArray_real_T *c);
+
+void h_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
+              emxArray_real_T *c);
+
 #ifdef __cplusplus
 }
 #endif

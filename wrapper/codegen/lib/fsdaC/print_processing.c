@@ -12,6 +12,7 @@
 /* Include files */
 #include "print_processing.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 void print_processing(double varargin_1, double varargin_2, double varargin_3,

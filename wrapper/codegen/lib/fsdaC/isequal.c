@@ -13,6 +13,7 @@
 #include "isequal.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 bool isequal(const emxArray_real_T *varargin_1,
