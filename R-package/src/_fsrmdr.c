@@ -72,6 +72,7 @@ void r_fsrmdr(double *yy, double *xx, int *nn, int *pp,
     
     //Rprintf("%s ", "Returning from FSRmdr and copying parameters ...\n");                  
 
+    // Check the sizes of the returned vectors and matrices in the structure out.
     if(mdr->size[0] != *nmdr || mdr->size[1] != *pmdr)
         Rprintf("\nWARNING: the size of output matrix mdr changed: was %d, %d, now is %d, %d \n", *nmdr, *pmdr, mdr->size[0], mdr->size[1]); 
     if(Un->size[0] != *nUn || Un->size[1] != *pUn)
@@ -83,7 +84,7 @@ void r_fsrmdr(double *yy, double *xx, int *nn, int *pp,
     if(S2->size[0] != *nS2 || S2->size[1] != *pS2)
         Rprintf("\nWARNING: the size of output matrix S2 changed: was %d, %d, now is %d, %d \n", *nS2, *pS2, S2->size[0], S2->size[1]); 
 
-    // Copy the output matrices mdr, Un and BB
+    // Copy the output matrices mdr, Un, BB, Bols and S2
     loop_ub = mdr->size[0] * mdr->size[1];
     for(i=0; i < loop_ub; i++) {
         xmdr[i] = mdr->data[i];
