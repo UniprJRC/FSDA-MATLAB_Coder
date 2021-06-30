@@ -101,7 +101,7 @@ void tclust_wrapper1(const emxArray_real_T *Y, double k, double alpha,
   double NlogLmixt;
   double b_v;
   double c_v;
-  double detpar;
+  double detpar=0;;
   double h;
   double ilow;
   double iup;
@@ -118,8 +118,8 @@ void tclust_wrapper1(const emxArray_real_T *Y, double k, double alpha,
   double restrfactorSTRUCT_tolS;
   double restrfactorSTRUCT_userepmat;
   double restrfactorSTRUCT_zerotol;
-  double rotpar;
-  double shapepar;
+  double rotpar=0;;
+  double shapepar=0;;
   double tsampling;
   double tstart_tv_nsec;
   double tstart_tv_sec;
