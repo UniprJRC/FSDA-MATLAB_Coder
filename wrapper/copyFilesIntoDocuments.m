@@ -55,7 +55,7 @@ if ispc
     mydocpath = fullfile(getenv('USERPROFILE'), 'Documents');
     cd(mydocpath)
     % system('"c:\Program Files\R\R-4.1.0\bin\x64\R" CMD INSTALL --clean --no-multiarch fsdac')
-    system(['"c:\Program Files\R\R-' Rversion '\bin\x64\R" CMD INSTALL --clean --no-multiarch fsdac'])
+    a=system(['"c:\Program Files\R\R-' Rversion '\bin\x64\R" CMD INSTALL --clean --no-multiarch fsdac']);
     
     if a ~= 0
         disp(str)
