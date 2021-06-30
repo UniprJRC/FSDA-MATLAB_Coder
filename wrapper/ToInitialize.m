@@ -15,6 +15,7 @@ newpwd=pwd;
 X=readtable([OldFolder fsep 'ToInitialize.xlsx']);
 n=size(X,1);
 for i=1:n
+    issFound=0;
     disp(['Row ' num2str(i)])
     FileName=X{i,1}; % cell format
     FileName=FileName{1,1}; % character format
@@ -48,7 +49,7 @@ for i=1:n
             
             
             if ~isempty(sIndexTofind)
-                
+                issFound=issFound+1;
                 fstringNEW=strrep(fstring,strTofindWithEmptySpace,[' ' strToReplace]);
                 
                 if strcmp(strTofind,'printf(')
@@ -67,7 +68,9 @@ for i=1:n
                 end
             end
         end
-        
+        if issFound==0
+            error('FSDA:ToInitialize:WrongStrFind',['Could not find string ' '''' strTofind ''' in the .c source files'])
+        end
     else
         % find and replace just inside FileName
         FileWithFullPath=which(FileName);
