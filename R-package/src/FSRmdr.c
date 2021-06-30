@@ -9,8 +9,9 @@
  *
  */
 
-#include <R.h>
 /* Include files */
+#include <R.h>
+
 #include "FSRmdr.h"
 #include "any.h"
 #include "blockedSummation.h"

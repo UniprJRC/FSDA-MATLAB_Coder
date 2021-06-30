@@ -9,8 +9,9 @@
  *
  */
 
-#include <R.h>
 /* Include files */
+#include <R.h>
+
 #include "FSRfan_wrapper.h"
 #include "LXS.h"
 #include "Score.h"

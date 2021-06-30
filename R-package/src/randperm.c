@@ -13,6 +13,7 @@
 #include "randperm.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
+#include "mod.h"
 #include "rand.h"
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
@@ -26,7 +27,7 @@ void b_randperm(double n, double k, emxArray_real_T *p)
   emxArray_real_T *link;
   emxArray_real_T *loc;
   emxArray_real_T *val;
-  double denom;
+  double b_i;
   double j;
   double newEntry;
   double nleftm1;
@@ -58,13 +59,13 @@ void b_randperm(double n, double k, emxArray_real_T *p)
       i = (int)((k - 1.0) + 1.0);
       for (m = 0; m < i; m++) {
         selectedLoc = k - (double)m;
-        denom = n - t;
-        newEntry = selectedLoc / denom;
+        b_i = n - t;
+        newEntry = selectedLoc / b_i;
         nleftm1 = c_rand();
         while (nleftm1 > newEntry) {
           t++;
-          denom--;
-          newEntry += (1.0 - newEntry) * (selectedLoc / denom);
+          b_i--;
+          newEntry += (1.0 - newEntry) * (selectedLoc / b_i);
         }
         t++;
         j = c_rand() * ((double)m + 1.0);
@@ -106,19 +107,8 @@ void b_randperm(double n, double k, emxArray_real_T *p)
         nleftm1 = n - ((double)m + 1.0);
         selectedLoc = c_rand() * (nleftm1 + 1.0);
         selectedLoc = floor(selectedLoc);
-        if (rtIsNaN(selectedLoc)) {
-          denom = rtNaN;
-        } else if (selectedLoc == 0.0) {
-          denom = 0.0;
-        } else {
-          denom = fmod(selectedLoc, k);
-          if (denom == 0.0) {
-            denom = 0.0;
-          } else if (selectedLoc < 0.0) {
-            denom += k;
-          }
-        }
-        j = hashTbl->data[(int)(denom + 1.0) - 1];
+        b_i = c_mod(selectedLoc, k) + 1.0;
+        j = hashTbl->data[(int)b_i - 1];
         while ((j > 0.0) && (loc->data[(int)j - 1] != selectedLoc)) {
           j = link->data[(int)j - 1];
         }
@@ -129,23 +119,11 @@ void b_randperm(double n, double k, emxArray_real_T *p)
           j = newEntry;
           newEntry++;
           loc->data[(int)j - 1] = selectedLoc;
-          link->data[(int)j - 1] = hashTbl->data[(int)(denom + 1.0) - 1];
-          hashTbl->data[(int)(denom + 1.0) - 1] = j;
+          link->data[(int)j - 1] = hashTbl->data[(int)b_i - 1];
+          hashTbl->data[(int)b_i - 1] = j;
         }
         if ((double)m + 1.0 < k) {
-          if (rtIsNaN(nleftm1)) {
-            denom = rtNaN;
-          } else if (nleftm1 == 0.0) {
-            denom = 0.0;
-          } else {
-            denom = fmod(nleftm1, k);
-            if (denom == 0.0) {
-              denom = 0.0;
-            } else if (nleftm1 < 0.0) {
-              denom += k;
-            }
-          }
-          selectedLoc = hashTbl->data[(int)(denom + 1.0) - 1];
+          selectedLoc = hashTbl->data[(int)(c_mod(nleftm1, k) + 1.0) - 1];
           while ((selectedLoc > 0.0) &&
                  (loc->data[(int)selectedLoc - 1] != nleftm1)) {
             selectedLoc = link->data[(int)selectedLoc - 1];

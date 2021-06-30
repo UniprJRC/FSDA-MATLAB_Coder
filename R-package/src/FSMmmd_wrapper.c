@@ -9,8 +9,9 @@
  *
  */
 
-#include <R.h>
 /* Include files */
+#include <R.h>
+
 #include "FSMmmd_wrapper.h"
 #include "bsxfun.h"
 #include "cat.h"

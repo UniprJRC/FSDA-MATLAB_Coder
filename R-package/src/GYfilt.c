@@ -9,7 +9,6 @@
  *
  */
 
-#include <R.h>
 /* Include files */
 #include "GYfilt.h"
 #include "colon.h"
@@ -23,7 +22,6 @@
 #include "rt_nonfinite.h"
 #include "sort.h"
 #include "rt_nonfinite.h"
-#include <stdio.h>
 #include <string.h>
 
 /* Function Declarations */
@@ -205,7 +203,7 @@ static void gyfiltaux(emxArray_real_T *v)
     }
     emxFree_int32_T(&r4);
     emxFree_real_T(&r2);
-    n0 = rt_roundd_snf(c_maximum(pup) * (double)b_v->size[0]);
+    n0 = rt_roundd_snf(b_maximum(pup) * (double)b_v->size[0]);
     emxFree_real_T(&pup);
   }
   emxFree_int32_T(&r);
@@ -657,8 +655,7 @@ void b_GYfilt(const emxArray_real_T *x, emxArray_boolean_T *weights)
   emxFree_int32_T(&r1);
   emxFree_real_T(&xs2);
   /*  disp([' iter = ' num2str(iter)]) */
-  Rprintf(" iter = %.0f\n ", (double)iter);
-  //fflush(stdout);
+  /*  fprintf(' iter = %.0f\n ',iter) */
   i = weights->size[0];
   weights->size[0] = x->size[0];
   emxEnsureCapacity_boolean_T(weights, i);

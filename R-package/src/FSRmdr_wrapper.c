@@ -8,9 +8,10 @@
  * Code generation for function 'FSRmdr_wrapper'
  *
  */
- 
-#include <R.h>
+
 /* Include files */
+#include <R.h>
+
 #include "FSRmdr_wrapper.h"
 #include "any.h"
 #include "blockedSummation.h"

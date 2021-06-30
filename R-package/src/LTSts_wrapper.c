@@ -9,8 +9,9 @@
  *
  */
 
-#include <R.h>
 /* Include files */
+#include <R.h>
+
 #include "LTSts_wrapper.h"
 #include "FSRinvmdr.h"
 #include "GYfilt.h"
@@ -2845,7 +2846,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
           /*  forming the best subset for the current iteration */
           /*  Find position of the maximum value of previously */
           /*  stored best numerator of squared scaled */
-          b_maximum(bestnumscale2, &ncomb, &nx);
+          c_maximum(bestnumscale2, &ncomb, &nx);
           bestnumscale2->data[nx - 1] = b_expl_temp.numscale2rw;
           loop_ub = expl_temp.betarw->size[0];
           for (i1 = 0; i1 < loop_ub; i1++) {
@@ -2858,7 +2859,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
                 yhat.contents->data[i1];
           }
           /*  sworst = best scale among the bestr found up to now */
-          sworst = c_maximum(bestnumscale2);
+          sworst = b_maximum(bestnumscale2);
         }
       } else {
         bestnumscale2->data[(int)ij - 1] = b_expl_temp.numscale2rw;
@@ -2873,7 +2874,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
               yhat.contents->data[i1];
         }
         /*  sworst = best scale among the bestr found up to now */
-        sworst = c_maximum(bestnumscale2);
+        sworst = b_maximum(bestnumscale2);
         ij++;
         i1 = brob->size[0];
         brob->size[0] = 1;

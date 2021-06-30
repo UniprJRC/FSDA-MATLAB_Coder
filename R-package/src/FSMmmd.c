@@ -8,8 +8,10 @@
  * Code generation for function 'FSMmmd'
  *
  */
-#include <R.h>
+
 /* Include files */
+#include <R.h>
+
 #include "FSMmmd.h"
 #include "bsxfun.h"
 #include "cat.h"

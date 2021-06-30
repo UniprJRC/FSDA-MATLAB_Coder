@@ -9,8 +9,9 @@
  *
  */
 
-#include <R.h>
 /* Include files */
+#include <R.h>
+
 #include "LXS_wrapper1.h"
 #include "FSM.h"
 #include "LXS.h"
@@ -893,7 +894,7 @@ void LXS_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
         if (tmp_numscale2rw < sworst) {
           /*  Find position of the maximum value of previously stored */
           /*  best scales */
-          b_maximum(out->beta, &ncomb, &nx);
+          c_maximum(out->beta, &ncomb, &nx);
           /*  Store numscale2rw, betarw and indexes of the units forming the */
           /*  best subset for the current iteration */
           out->beta->data[nx - 1] = tmp_numscale2rw;
@@ -908,7 +909,7 @@ void LXS_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
                 C->data[b_i + C->size[0] * i1];
           }
           /*  sworst = the best scale among the bestr found up to now */
-          sworst = c_maximum(out->beta);
+          sworst = b_maximum(out->beta);
         }
       } else {
         out->beta->data[(int)ij - 1] = tmp_numscale2rw;
@@ -923,7 +924,7 @@ void LXS_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
               C->data[b_i + C->size[0] * i1];
         }
         /*  sworst = the best scale among the bestr found up to now */
-        sworst = c_maximum(out->beta);
+        sworst = b_maximum(out->beta);
         ij++;
       }
     } else {

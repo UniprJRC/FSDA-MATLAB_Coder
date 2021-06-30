@@ -9,8 +9,9 @@
  *
  */
 
-#include <R.h>
 /* Include files */
+#include <R.h>
+
 #include "LXS_wrapper.h"
 #include "FSM.h"
 #include "LXS.h"

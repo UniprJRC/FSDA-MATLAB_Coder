@@ -24,14 +24,13 @@ extern "C" {
 
 /* Function Declarations */
 extern void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
-                           const double restrfactor_data[],
-                           const int restrfactor_size[2], double cshape,
-                           bool equalweights, double mixt, double msg,
-                           bool nocheck, const emxArray_real_T *nsamp,
+                           double restrfactor, bool equalweights, double mixt,
+                           double msg, bool nocheck,
+                           const emxArray_real_T *nsamp,
                            const emxArray_real_T *RandNumbForNini,
-                           double refsteps, double reftol,
-                           const char restrtype[5], bool startv1, bool Ysave,
-                           struct_tclust_T *out, emxArray_real_T *C);
+                           double refsteps, double reftol, bool startv1,
+                           bool Ysave, struct_tclust_T *out,
+                           emxArray_real_T *C);
 
 #ifdef __cplusplus
 }

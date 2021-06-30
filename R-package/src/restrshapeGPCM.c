@@ -18,7 +18,6 @@
 #include "fsdaC_types.h"
 #include "minOrMax.h"
 #include "mtimes.h"
-#include "prod.h"
 #include "restreigen.h"
 #include "rt_nonfinite.h"
 #include "sort.h"
@@ -57,17 +56,17 @@ void restrshapeGPCM(const emxArray_real_T *lmd, const emxArray_real_T *Omega,
   int c_loop_ub;
   int d_loop_ub;
   int e_loop_ub;
-  int f_loop_ub;
   int i;
   int i1;
   int i2;
   int j;
   int k;
   int loop_ub;
-  int ncols;
-  int nx;
+  int npages;
   int p;
   int unnamed_idx_0;
+  int vlen;
+  int xpageoffset;
   bool b_bool;
   /* restrshapeGPCM produces the restricted shape matrix for the 14 GPCM */
   /*  */
@@ -197,8 +196,8 @@ void restrshapeGPCM(const emxArray_real_T *lmd, const emxArray_real_T *Omega,
     Ord->size[0] = (int)pa_v;
     Ord->size[1] = (int)pa_v;
     emxEnsureCapacity_real_T(Ord, i);
-    nx = (int)pa_v * (int)pa_v;
-    for (i = 0; i < nx; i++) {
+    xpageoffset = (int)pa_v * (int)pa_v;
+    for (i = 0; i < xpageoffset; i++) {
       Ord->data[i] = 0.0;
     }
     i = (int)pa_k;
@@ -267,7 +266,7 @@ void restrshapeGPCM(const emxArray_real_T *lmd, const emxArray_real_T *Omega,
         GAM->size[0] = (int)pa_v;
         GAM->size[1] = (int)pa_v;
         emxEnsureCapacity_real_T(GAM, i1);
-        for (i1 = 0; i1 < nx; i1++) {
+        for (i1 = 0; i1 < xpageoffset; i1++) {
           GAM->data[i1] = 0.0;
         }
       }
@@ -286,33 +285,33 @@ void restrshapeGPCM(const emxArray_real_T *lmd, const emxArray_real_T *Omega,
       emxEnsureCapacity_real_T(diff, i1);
       diff->data[0] = Ord->data[0];
     } else {
-      nx = Ord->size[0];
-      ncols = Ord->size[1];
-      if (nx < ncols) {
-        ncols = nx;
+      xpageoffset = Ord->size[0];
+      vlen = Ord->size[1];
+      if (xpageoffset < vlen) {
+        vlen = xpageoffset;
       }
       if (0 < Ord->size[1]) {
-        nx = ncols;
+        xpageoffset = vlen;
       } else {
-        nx = 0;
+        xpageoffset = 0;
       }
       i1 = diff->size[0];
-      diff->size[0] = nx;
+      diff->size[0] = xpageoffset;
       emxEnsureCapacity_real_T(diff, i1);
-      i1 = nx - 1;
+      i1 = xpageoffset - 1;
       for (k = 0; k <= i1; k++) {
         diff->data[k] = Ord->data[k + Ord->size[0] * k];
       }
     }
-    c_restreigen(diff, pa_shw, pa_zerotol, pa_userepmat);
+    b_restreigen(diff, pa_shw, pa_zerotol, pa_userepmat);
     /*  Impose the constraint that the product of the elements of vector */
     /*  GAMpooledc is equal to 1 */
-    nx = diff->size[0];
+    vlen = diff->size[0];
     if (diff->size[0] == 0) {
       diffGAM = 1.0;
     } else {
       diffGAM = diff->data[0];
-      for (k = 2; k <= nx; k++) {
+      for (k = 2; k <= vlen; k++) {
         diffGAM *= diff->data[k - 1];
       }
     }
@@ -329,11 +328,11 @@ void restrshapeGPCM(const emxArray_real_T *lmd, const emxArray_real_T *Omega,
     GAMc->size[0] = diff->size[0];
     GAMc->size[1] = (int)pa_k;
     emxEnsureCapacity_real_T(GAMc, i1);
-    nx = diff->size[0];
-    for (c_loop_ub = 0; c_loop_ub < i; c_loop_ub++) {
-      ncols = c_loop_ub * nx;
-      for (k = 0; k < nx; k++) {
-        GAMc->data[ncols + k] = diff->data[k];
+    xpageoffset = diff->size[0];
+    for (npages = 0; npages < i; npages++) {
+      vlen = npages * xpageoffset;
+      for (k = 0; k < xpageoffset; k++) {
+        GAMc->data[vlen + k] = diff->data[k];
       }
     }
   } else {
@@ -358,12 +357,12 @@ void restrshapeGPCM(const emxArray_real_T *lmd, const emxArray_real_T *Omega,
         loop_ub = Omega->size[0];
         i2 = Omega->size[1];
         b_loop_ub = Omega->size[1];
-        c_loop_ub = SigmaB->size[0];
+        npages = SigmaB->size[0];
         unnamed_idx_0 = SigmaB->size[1];
-        d_loop_ub = SigmaB->size[1];
-        e_loop_ub = Omega->size[0];
+        c_loop_ub = SigmaB->size[1];
+        d_loop_ub = Omega->size[0];
         p = Omega->size[1];
-        f_loop_ub = Omega->size[1];
+        e_loop_ub = Omega->size[1];
       }
       for (j = 0; j < i1; j++) {
         i = lamGAMc->size[0] * lamGAMc->size[1];
@@ -371,32 +370,32 @@ void restrshapeGPCM(const emxArray_real_T *lmd, const emxArray_real_T *Omega,
         lamGAMc->size[1] = i2;
         emxEnsureCapacity_real_T(lamGAMc, i);
         for (i = 0; i < b_loop_ub; i++) {
-          for (nx = 0; nx < loop_ub; nx++) {
-            lamGAMc->data[nx + lamGAMc->size[0] * i] =
-                Omega->data[(nx + Omega->size[0] * i) +
+          for (xpageoffset = 0; xpageoffset < loop_ub; xpageoffset++) {
+            lamGAMc->data[xpageoffset + lamGAMc->size[0] * i] =
+                Omega->data[(xpageoffset + Omega->size[0] * i) +
                             Omega->size[0] * Omega->size[1] * j];
           }
         }
         i = b_SigmaB->size[0] * b_SigmaB->size[1];
-        b_SigmaB->size[0] = c_loop_ub;
+        b_SigmaB->size[0] = npages;
         b_SigmaB->size[1] = unnamed_idx_0;
         emxEnsureCapacity_real_T(b_SigmaB, i);
-        for (i = 0; i < d_loop_ub; i++) {
-          for (nx = 0; nx < c_loop_ub; nx++) {
-            b_SigmaB->data[nx + b_SigmaB->size[0] * i] =
-                SigmaB->data[(nx + SigmaB->size[0] * i) +
+        for (i = 0; i < c_loop_ub; i++) {
+          for (xpageoffset = 0; xpageoffset < npages; xpageoffset++) {
+            b_SigmaB->data[xpageoffset + b_SigmaB->size[0] * i] =
+                SigmaB->data[(xpageoffset + SigmaB->size[0] * i) +
                              SigmaB->size[0] * SigmaB->size[1] * j];
           }
         }
         c_mtimes(lamGAMc, b_SigmaB, GAMctr);
         i = lamGAMc->size[0] * lamGAMc->size[1];
-        lamGAMc->size[0] = e_loop_ub;
+        lamGAMc->size[0] = d_loop_ub;
         lamGAMc->size[1] = p;
         emxEnsureCapacity_real_T(lamGAMc, i);
-        for (i = 0; i < f_loop_ub; i++) {
-          for (nx = 0; nx < e_loop_ub; nx++) {
-            lamGAMc->data[nx + lamGAMc->size[0] * i] =
-                Omega->data[(nx + Omega->size[0] * i) +
+        for (i = 0; i < e_loop_ub; i++) {
+          for (xpageoffset = 0; xpageoffset < d_loop_ub; xpageoffset++) {
+            lamGAMc->data[xpageoffset + lamGAMc->size[0] * i] =
+                Omega->data[(xpageoffset + Omega->size[0] * i) +
                             Omega->size[0] * Omega->size[1] * j];
           }
         }
@@ -407,27 +406,27 @@ void restrshapeGPCM(const emxArray_real_T *lmd, const emxArray_real_T *Omega,
           emxEnsureCapacity_real_T(diff, i);
           diff->data[0] = Ord->data[0];
         } else {
-          nx = Ord->size[0];
-          ncols = Ord->size[1];
-          if (nx < ncols) {
-            ncols = nx;
+          xpageoffset = Ord->size[0];
+          vlen = Ord->size[1];
+          if (xpageoffset < vlen) {
+            vlen = xpageoffset;
           }
           if (0 < Ord->size[1]) {
-            nx = ncols;
+            xpageoffset = vlen;
           } else {
-            nx = 0;
+            xpageoffset = 0;
           }
           i = diff->size[0];
-          diff->size[0] = nx;
+          diff->size[0] = xpageoffset;
           emxEnsureCapacity_real_T(diff, i);
-          i = nx - 1;
+          i = xpageoffset - 1;
           for (k = 0; k <= i; k++) {
             diff->data[k] = Ord->data[k + Ord->size[0] * k];
           }
         }
         diffGAM = lmd->data[j];
-        nx = diff->size[0];
-        for (i = 0; i < nx; i++) {
+        xpageoffset = diff->size[0];
+        for (i = 0; i < xpageoffset; i++) {
           GAM->data[i + GAM->size[0] * j] = diff->data[i] / diffGAM;
         }
       }
@@ -509,7 +508,7 @@ void restrshapeGPCM(const emxArray_real_T *lmd, const emxArray_real_T *Omega,
         lamGAMc->data[i] = GAM->data[i];
       }
       /*  Initialize GAMc = Shape matrix constrained */
-      e_loop_ub = GAM->size[1] - 1;
+      d_loop_ub = GAM->size[1] - 1;
       p = GAM->size[0];
       /*  Apply eigenvalue restriction inside each group using constraining
        * parameter */
@@ -535,7 +534,7 @@ void restrshapeGPCM(const emxArray_real_T *lmd, const emxArray_real_T *Omega,
           for (i1 = 0; i1 < loop_ub; i1++) {
             diff->data[i1] = GAM->data[i1 + GAM->size[0] * j];
           }
-          c_restreigen(diff, pa_shw, pa_zerotol, pa_userepmat);
+          b_restreigen(diff, pa_shw, pa_zerotol, pa_userepmat);
           loop_ub = diff->size[0];
           for (i1 = 0; i1 < loop_ub; i1++) {
             lamGAMc->data[i1 + lamGAMc->size[0] * j] = diff->data[i1];
@@ -555,27 +554,27 @@ void restrshapeGPCM(const emxArray_real_T *lmd, const emxArray_real_T *Omega,
       /*  the element of matrix \Gamma in two consecutive iterations */
       diffGAM = 9999.0;
       unnamed_idx_0 = GAM->size[0];
-      d_loop_ub = GAM->size[1];
+      c_loop_ub = GAM->size[1];
       i = GAM->size[0] * GAM->size[1];
       GAM->size[0] = unnamed_idx_0;
-      GAM->size[1] = d_loop_ub;
+      GAM->size[1] = c_loop_ub;
       emxEnsureCapacity_real_T(GAM, i);
-      nx = unnamed_idx_0 * d_loop_ub;
-      for (i = 0; i < nx; i++) {
+      xpageoffset = unnamed_idx_0 * c_loop_ub;
+      for (i = 0; i < xpageoffset; i++) {
         GAM->data[i] = rtNaN;
       }
       i = GAMctr->size[0] * GAMctr->size[1];
       GAMctr->size[0] = unnamed_idx_0;
-      GAMctr->size[1] = d_loop_ub;
+      GAMctr->size[1] = c_loop_ub;
       emxEnsureCapacity_real_T(GAMctr, i);
-      for (i = 0; i < nx; i++) {
+      for (i = 0; i < xpageoffset; i++) {
         GAMctr->data[i] = rtNaN;
       }
       i = GAMc->size[0] * GAMc->size[1];
       GAMc->size[0] = unnamed_idx_0;
-      GAMc->size[1] = d_loop_ub;
+      GAMc->size[1] = c_loop_ub;
       emxEnsureCapacity_real_T(GAMc, i);
-      for (i = 0; i < nx; i++) {
+      for (i = 0; i < xpageoffset; i++) {
         GAMc->data[i] = rtNaN;
       }
       while ((diffGAM > pa_tolS) && (iter < pa_maxiterS)) {
@@ -588,14 +587,37 @@ void restrshapeGPCM(const emxArray_real_T *lmd, const emxArray_real_T *Omega,
         for (i = 0; i < loop_ub; i++) {
           GAMold->data[i] = lamGAMc->data[i];
         }
-        prod(lamGAMc, es);
+        vlen = lamGAMc->size[0];
+        if ((lamGAMc->size[0] == 0) || (lamGAMc->size[1] == 0)) {
+          i = es->size[0] * es->size[1];
+          es->size[0] = 1;
+          es->size[1] = lamGAMc->size[1];
+          emxEnsureCapacity_real_T(es, i);
+          loop_ub = lamGAMc->size[1];
+          for (i = 0; i < loop_ub; i++) {
+            es->data[i] = 1.0;
+          }
+        } else {
+          npages = lamGAMc->size[1];
+          i = es->size[0] * es->size[1];
+          es->size[0] = 1;
+          es->size[1] = lamGAMc->size[1];
+          emxEnsureCapacity_real_T(es, i);
+          for (e_loop_ub = 0; e_loop_ub < npages; e_loop_ub++) {
+            xpageoffset = e_loop_ub * lamGAMc->size[0];
+            es->data[e_loop_ub] = lamGAMc->data[xpageoffset];
+            for (k = 2; k <= vlen; k++) {
+              es->data[e_loop_ub] *= lamGAMc->data[(xpageoffset + k) - 1];
+            }
+          }
+        }
         diffGAM = 1.0 / (double)p;
         i = b_lmd->size[0] * b_lmd->size[1];
         b_lmd->size[0] = 1;
         b_lmd->size[1] = es->size[1];
         emxEnsureCapacity_real_T(b_lmd, i);
-        nx = es->size[1];
-        for (k = 0; k < nx; k++) {
+        xpageoffset = es->size[1];
+        for (k = 0; k < xpageoffset; k++) {
           b_lmd->data[k] = rt_powd_snf(es->data[k], diffGAM);
         }
         i = es->size[0] * es->size[1];
@@ -606,10 +628,10 @@ void restrshapeGPCM(const emxArray_real_T *lmd, const emxArray_real_T *Omega,
         for (i = 0; i < loop_ub; i++) {
           es->data[i] = b_lmd->data[i];
         }
-        c_loop_ub = b_lmd->size[1];
-        for (f_loop_ub = 0; f_loop_ub < c_loop_ub; f_loop_ub++) {
-          if (b_lmd->data[f_loop_ub] == 0.0) {
-            es->data[f_loop_ub] = 1.0;
+        npages = b_lmd->size[1];
+        for (e_loop_ub = 0; e_loop_ub < npages; e_loop_ub++) {
+          if (b_lmd->data[e_loop_ub] == 0.0) {
+            es->data[e_loop_ub] = 1.0;
           }
         }
         /*  In this stage GAM(:,j) is diag(\Gamma_j ) */
@@ -618,32 +640,32 @@ void restrshapeGPCM(const emxArray_real_T *lmd, const emxArray_real_T *Omega,
         Ord->size[0] = p;
         Ord->size[1] = es->size[1];
         emxEnsureCapacity_real_T(Ord, i);
-        ncols = es->size[1];
-        for (c_loop_ub = 0; c_loop_ub < ncols; c_loop_ub++) {
-          nx = c_loop_ub * p;
-          for (f_loop_ub = 0; f_loop_ub < p; f_loop_ub++) {
-            Ord->data[nx + f_loop_ub] = es->data[c_loop_ub];
+        vlen = es->size[1];
+        for (npages = 0; npages < vlen; npages++) {
+          xpageoffset = npages * p;
+          for (e_loop_ub = 0; e_loop_ub < p; e_loop_ub++) {
+            Ord->data[xpageoffset + e_loop_ub] = es->data[npages];
           }
         }
         loop_ub = lamGAMc->size[0] * lamGAMc->size[1];
         for (i = 0; i < loop_ub; i++) {
           lamGAMc->data[i] /= Ord->data[i];
         }
-        c_loop_ub = lamGAMc->size[0] * lamGAMc->size[1] - 1;
-        nx = 0;
-        for (f_loop_ub = 0; f_loop_ub <= c_loop_ub; f_loop_ub++) {
-          if (lamGAMc->data[f_loop_ub] == 0.0) {
-            nx++;
+        npages = lamGAMc->size[0] * lamGAMc->size[1] - 1;
+        xpageoffset = 0;
+        for (e_loop_ub = 0; e_loop_ub <= npages; e_loop_ub++) {
+          if (lamGAMc->data[e_loop_ub] == 0.0) {
+            xpageoffset++;
           }
         }
         i = r->size[0];
-        r->size[0] = nx;
+        r->size[0] = xpageoffset;
         emxEnsureCapacity_int32_T(r, i);
-        ncols = 0;
-        for (f_loop_ub = 0; f_loop_ub <= c_loop_ub; f_loop_ub++) {
-          if (lamGAMc->data[f_loop_ub] == 0.0) {
-            r->data[ncols] = f_loop_ub + 1;
-            ncols++;
+        vlen = 0;
+        for (e_loop_ub = 0; e_loop_ub <= npages; e_loop_ub++) {
+          if (lamGAMc->data[e_loop_ub] == 0.0) {
+            r->data[vlen] = e_loop_ub + 1;
+            vlen++;
           }
         }
         loop_ub = r->size[0] - 1;
@@ -652,9 +674,9 @@ void restrshapeGPCM(const emxArray_real_T *lmd, const emxArray_real_T *Omega,
         }
         i = Ord->size[0] * Ord->size[1];
         Ord->size[0] = unnamed_idx_0;
-        Ord->size[1] = d_loop_ub;
+        Ord->size[1] = c_loop_ub;
         emxEnsureCapacity_real_T(Ord, i);
-        for (j = 0; j <= e_loop_ub; j++) {
+        for (j = 0; j <= d_loop_ub; j++) {
           loop_ub = lamGAMc->size[0];
           i = diff->size[0];
           diff->size[0] = lamGAMc->size[0];
@@ -678,27 +700,27 @@ void restrshapeGPCM(const emxArray_real_T *lmd, const emxArray_real_T *Omega,
         /*  The ranks of the orginal ordering of each column is store in matrix
          * Ord */
         /*  The ratio of each row of matrix GAMc is not greater than shb */
-        nx = GAM->size[0] - 1;
-        ncols = GAM->size[1];
+        vlen = GAM->size[0] - 1;
+        xpageoffset = GAM->size[1];
         i = ex->size[0];
         ex->size[0] = GAM->size[0];
         emxEnsureCapacity_real_T(ex, i);
         if (GAM->size[0] >= 1) {
-          for (f_loop_ub = 0; f_loop_ub <= nx; f_loop_ub++) {
-            ex->data[f_loop_ub] = GAM->data[f_loop_ub];
+          for (e_loop_ub = 0; e_loop_ub <= vlen; e_loop_ub++) {
+            ex->data[e_loop_ub] = GAM->data[e_loop_ub];
           }
-          for (j = 2; j <= ncols; j++) {
-            for (f_loop_ub = 0; f_loop_ub <= nx; f_loop_ub++) {
-              diffGAM = GAM->data[f_loop_ub + GAM->size[0] * (j - 1)];
+          for (j = 2; j <= xpageoffset; j++) {
+            for (e_loop_ub = 0; e_loop_ub <= vlen; e_loop_ub++) {
+              diffGAM = GAM->data[e_loop_ub + GAM->size[0] * (j - 1)];
               if (rtIsNaN(diffGAM)) {
                 b_bool = false;
-              } else if (rtIsNaN(ex->data[f_loop_ub])) {
+              } else if (rtIsNaN(ex->data[e_loop_ub])) {
                 b_bool = true;
               } else {
-                b_bool = (ex->data[f_loop_ub] > diffGAM);
+                b_bool = (ex->data[e_loop_ub] > diffGAM);
               }
               if (b_bool) {
-                ex->data[f_loop_ub] = diffGAM;
+                ex->data[e_loop_ub] = diffGAM;
               }
             }
           }
@@ -711,31 +733,31 @@ void restrshapeGPCM(const emxArray_real_T *lmd, const emxArray_real_T *Omega,
         for (i = 0; i < loop_ub; i++) {
           b_booeig->data[i] = (diff->data[i] / ex->data[i] > pa_shb);
         }
-        for (f_loop_ub = 0; f_loop_ub < p; f_loop_ub++) {
-          if (b_booeig->data[f_loop_ub]) {
+        for (e_loop_ub = 0; e_loop_ub < p; e_loop_ub++) {
+          if (b_booeig->data[e_loop_ub]) {
             loop_ub = GAM->size[1];
             i = es->size[0] * es->size[1];
             es->size[0] = 1;
             es->size[1] = GAM->size[1];
             emxEnsureCapacity_real_T(es, i);
             for (i = 0; i < loop_ub; i++) {
-              es->data[i] = GAM->data[f_loop_ub + GAM->size[0] * i];
+              es->data[i] = GAM->data[e_loop_ub + GAM->size[0] * i];
             }
-            d_restreigen(es, niini, pa_shb, pa_zerotol, pa_userepmat);
+            c_restreigen(es, niini, pa_shb, pa_zerotol, pa_userepmat);
             loop_ub = es->size[1];
             for (i = 0; i < loop_ub; i++) {
-              GAMctr->data[f_loop_ub + GAMctr->size[0] * i] = es->data[i];
+              GAMctr->data[e_loop_ub + GAMctr->size[0] * i] = es->data[i];
             }
           } else {
             loop_ub = GAM->size[1];
             for (i = 0; i < loop_ub; i++) {
-              GAMctr->data[f_loop_ub + GAMctr->size[0] * i] =
-                  GAM->data[f_loop_ub + GAM->size[0] * i];
+              GAMctr->data[e_loop_ub + GAMctr->size[0] * i] =
+                  GAM->data[e_loop_ub + GAM->size[0] * i];
             }
           }
         }
         /*  Reconstruct the original order for each column */
-        for (j = 0; j <= e_loop_ub; j++) {
+        for (j = 0; j <= d_loop_ub; j++) {
           loop_ub = GAMctr->size[0];
           for (i = 0; i < loop_ub; i++) {
             GAMc->data[((int)Ord->data[i + Ord->size[0] * j] +

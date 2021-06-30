@@ -9,8 +9,9 @@
  *
  */
 
-#include <R.h>
 /* Include files */
+#include <R.h>
+
 #include "LXS.h"
 #include "FSM.h"
 #include "bc.h"
@@ -2718,17 +2719,19 @@ double corfactorRAW(double n, double alpha)
 {
   double fp_500_n;
   double fp_875_n;
-  double fp_alpha_n=0;
   double rawcorfac;
   /*  corfactorRAW function */
   fp_500_n = 1.0 - 1.2995580068132053 / rt_powd_snf(n, 0.604756680630497);
   fp_875_n = 1.0 - 0.70357229237653807 / rt_powd_snf(n, 1.01646567502486);
   if ((0.5 <= alpha) && (alpha <= 0.875)) {
-    fp_alpha_n = fp_500_n + (fp_875_n - fp_500_n) / 0.375 * (alpha - 0.5);
+    fp_500_n += (fp_875_n - fp_500_n) / 0.375 * (alpha - 0.5);
   } else if ((0.875 < alpha) && (alpha < 1.0)) {
-    fp_alpha_n = fp_875_n + (1.0 - fp_875_n) / 0.125 * (alpha - 0.875);
+    fp_500_n = fp_875_n + (1.0 - fp_875_n) / 0.125 * (alpha - 0.875);
+  } else {
+    fp_500_n = 1.0;
+    /*  Initialization necessary for MATLAB C-coder */
   }
-  rawcorfac = 1.0 / fp_alpha_n;
+  rawcorfac = 1.0 / fp_500_n;
   if ((rawcorfac <= 0.0) || (rawcorfac > 50.0)) {
     rawcorfac = 1.0;
     /*  if msg==1 */

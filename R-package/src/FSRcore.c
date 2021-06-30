@@ -9,8 +9,9 @@
  *
  */
 
-#include <R.h>
 /* Include files */
+#include <R.h>
+
 #include "FSRcore.h"
 #include "FSRbonfbound.h"
 #include "FSRbsb.h"
