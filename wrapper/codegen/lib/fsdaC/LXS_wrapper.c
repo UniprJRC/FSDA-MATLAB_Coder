@@ -941,7 +941,7 @@ void LXS_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           c_time_data.canFreeData = false;
           Rprintf("Total estimated time to complete LMS: %5.2f seconds \n",
                  nselected * median(&c_time_data));
-          fflush(stdout);
+          //fflush(stdout);
           break;
         case 2:
           d_time_data.data = &time_data[0];
@@ -951,7 +951,7 @@ void LXS_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           d_time_data.canFreeData = false;
           Rprintf("Total estimated time to complete FASTLTS: %5.2f seconds \n",
                  nselected * median(&d_time_data));
-          fflush(stdout);
+          //fflush(stdout);
           break;
         default:
           b_time_data.data = &time_data[0];
@@ -961,7 +961,7 @@ void LXS_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           b_time_data.canFreeData = false;
           Rprintf("Total estimated time to complete LTS: %5.2f seconds \n",
                  nselected * median(&b_time_data));
-          fflush(stdout);
+          //fflush(stdout);
           break;
         }
       }
@@ -1340,11 +1340,11 @@ void LXS_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
       Rprintf("Warning: Number of subsets without full rank or excluded because "
              "containing remote units in the X space equal to %.1f %%\n",
              ncomb);
-      fflush(stdout);
+      //fflush(stdout);
     } else {
       Rprintf("Warning: Number of subsets without full rank equal to %.1f%%\n",
              ncomb);
-      fflush(stdout);
+      //fflush(stdout);
     }
   }
   if (yxsave) {

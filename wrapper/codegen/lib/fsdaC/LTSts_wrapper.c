@@ -3032,7 +3032,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   }
   if ((LSH > 0.0) && msg) {
     Rprintf("Level shift for t=%.0f\n", LSH);
-    fflush(stdout);
+    //fflush(stdout);
   }
   /*  save RES to output structure (these residuals can be used for example to
    */
@@ -4578,7 +4578,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   emxFree_real_T(&b_out);
   if (dispresults && (lshiftYN.contents == 1.0)) {
     Rprintf("Level shift position t=%.0f\n", posLS);
-    fflush(stdout);
+    //fflush(stdout);
   }
   /*  Create plots */
   /*  Part of the code to find the F test for the final harmonic of the seasonal

@@ -522,14 +522,14 @@ void FSMmmd_wrapper(const emxArray_real_T *Y, const emxArray_real_T *bsb,
   if (init < (double)b_Y->size[1] + 1.0) {
     Rprintf("%s\n",
            "Attention : init1 should be larger than v. \nIt is set to v+1.");
-    fflush(stdout);
+    //fflush(stdout);
     init1 = (double)b_Y->size[1] + 1.0;
   } else if (init < b_bsb->size[0]) {
     init1 = b_bsb->size[0];
   } else if (init >= b_Y->size[0]) {
     Rprintf("%s\n",
            "Attention : init1 should be smaller than n. \nIt is set to n-1.");
-    fflush(stdout);
+    //fflush(stdout);
     init1 = (double)b_Y->size[0] - 1.0;
   }
   /*  Matrix BB will contain the units forming subset in each step (or in */

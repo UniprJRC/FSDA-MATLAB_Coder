@@ -128,7 +128,7 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
   int b_i;
   int b_loop_ub=0;
   int c_i;
-  int c_loop_ub;
+  int c_loop_ub=0;
   int d_loop_ub=0;
   int e_loop_ub=0;
   int i;
@@ -1458,7 +1458,7 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
     if (msg == 2.0) {
       /*  disp(['Iteration ' num2str(i)]) */
       Rprintf("Iteration %.0f\n", (double)b_i + 1.0);
-      fflush(stdout);
+      //fflush(stdout);
     }
     if (NoPriorNini == 1) {
       d_rand(k, randk);
@@ -4307,7 +4307,7 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
         b_time_data.canFreeData = false;
         Rprintf("Total estimated time to complete tclust: %5.2f seconds \n",
                nselected * median(&b_time_data));
-        fflush(stdout);
+        //fflush(stdout);
       }
     }
   }
@@ -4332,7 +4332,7 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
      * num2str(100*notconver) '%']) */
     Rprintf("Warning: Number of subsets without convergence equal to %.1f%%\n",
            100.0 * mudiff);
-    fflush(stdout);
+    //fflush(stdout);
   }
   emxInit_boolean_T(&r8, 2);
   /*  Store quantities in out structure */
