@@ -88,7 +88,7 @@ for i=1:n
         sIndexToreplace = regexp(fstring,strToReplace);
         
         if isempty(sIndexTofind)
-            error('FSDA:ToInitialize:WrongString',['String ' '''' strTofind '''' ' not found in file ' '''' FileName ''''])
+            warning('FSDA:ToInitialize:WrongString',['String ' '''' strTofind '''' ' not found in file ' '''' FileName ''''])
         elseif length(sIndexTofind)>1
             warning('FSDA:ToInitialize:WrongString',['String ' '''' strTofind '''' ' found more than once in file ' '''' FileName ''''])
         elseif ~isempty(sIndexToreplace)
