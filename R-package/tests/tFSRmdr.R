@@ -1,4 +1,4 @@
-##  test_fsrmdr
+##  Testing FSRmdr()==============================================
 
     library(fsdac)
 
@@ -6,15 +6,23 @@
 ##      Monitor minimum deletion residual in each step of the forward search.
 ##      Common part to all examples: load fishery dataset.
 
+##  All examples #1-#7 use the same data fishery. LXS is used only
+##  once for finding the initial values for bsb
+
     data(fishery)
     y <- fishery[, 2, drop=FALSE]
     X <- fishery[, 1, drop=FALSE]
 
-    out <- LXS(y, X, nsamp=10000)
-    bsb <- out$bs
-    ## bsb <- c(371, 450)                          # found by LTS
+    ## Instead of calling LXS, take hard-coded bsb - this is faster,
+    ##  more deterministic and guarantees that there is no crash of R
 
-    out1 <- FSRmdr(y, X, bsb)                   # call 'FSRmdr' with all default parameters
+    ##  out <- LXS(y, X, nsamp=10000)
+    ##  bsb <- out$bs
+    ##  print(bsb)
+
+    bsb <- c(14, 163)                               # found by LTS
+
+    out1 <- FSRmdr(y, X, bsb=bsb)                   # call 'FSRmdr' with all default parameters
     plot(out1$mdr[,1], out1$mdr[,2], type="l", col="blue",
       xlab="Step", ylab="minimum deletion residual",
       main="Monitoring of the minimum deletion residual")
@@ -22,9 +30,9 @@
     out2 <- FSRmdr(y, X)                         # call 'FSRmdr' with missing bsb - will start from random p-sample
     plot(out2)                                   # same plot as above
 
-    out1 <- FSRmdr(y, X, bsb, init=60)           # Example with monitoring from step 60.
-    out1 <- FSRmdr(y, X, bsb, intercept=FALSE)   # Regression without intercept
-    out1 <- FSRmdr(y, X, bsb, nocheck=TRUE)      # No checks on y and X (and no intercept)
+    out1 <- FSRmdr(y, X, bsb=bsb, init=60)           # Example with monitoring from step 60.
+    out1 <- FSRmdr(y, X, bsb=bsb, intercept=FALSE)   # Regression without intercept
+    out1 <- FSRmdr(y, X, bsb=bsb, nocheck=TRUE)      # No checks on y and X (and no intercept)
 
 ##  2. Analyze units entering the search in the final steps.
 ##
@@ -34,46 +42,24 @@
 ##  with a suggested model (which enter the first steps) to those least in
 ##  agreement with it (which are included in the final steps).
 
-
-    data(fishery)
-    y <- fishery[, 2, drop=FALSE]
-    X <- fishery[, 1, drop=FALSE]
-    out <- LXS(y, X, nsamp=10000)
-    bsb <- out$bs
-
-    out1 <- FSRmdr(y, X, out$bs)
+    out1 <- FSRmdr(y, X, bsb=bsb)
     tail(out1$Un)
 
 ##  3. Units forming subset in each step.
 ##      Obtain detailed information about the units forming subset in each
 ##      step of the forward search (matrix BB).
-    data(fishery)
-    y <- fishery[, 2, drop=FALSE]
-    X <- fishery[, 1, drop=FALSE]
-    out <- LXS(y, X, nsamp=10000)
-    bsb <- out$bs
-    out1 <- FSRmdr(y, X, out$bs)
+    out1 <- FSRmdr(y, X, bsb=bsb)
     head(out1$BB)
 
 ##  4. Monitor \( \hat  \beta \). Monitor how the estimates of beta coefficients changes as the subset
 ##      size increases (matrix Bols).
-    data(fishery)
-    y <- fishery[, 2, drop=FALSE]
-    X <- fishery[, 1, drop=FALSE]
-    out <- LXS(y, X, nsamp=10000)
-    bsb <- out$bs
-    out1 <- FSRmdr(y, X, bsb=out$bs)
+    out1 <- FSRmdr(y, X, bsb=bsb)
     head(out1$Bols)
 
 ##  5. Monitor $s^2$.
 ##      Monitor the estimate of $\sigma^2$ in each step of the fwd search (matrix S2).
 
-    data(fishery)
-    y <- fishery[, 2, drop=FALSE]
-    X <- fishery[, 1, drop=FALSE]
-    out <- LXS(y, X, nsamp=10000)
-    out1 <- FSRmdr(y, X, bsb=out$bs)
-
+    out1 <- FSRmdr(y, X, bsb=bsb)
     plot(out1$S2[, 1], out1$S2[, 2], type="l", col="blue", xlab="Step",
         ylab=expression("s"^2), main='Monitoring of s2')
 
@@ -81,28 +67,28 @@
 
 ##  6. Specify a regression model without intercept.
 ##      FSRmdr using a regression model without intercept.
-    data(fishery)
-    y <- fishery[, 2, drop=FALSE]
-    X <- fishery[, 1, drop=FALSE]
-    out <- LXS(y, X, nsamp=10000)
-    out1 <- FSRmdr(y, X, bsb=out$bs, intercept=FALSE)
+    out1 <- FSRmdr(y, X, bsb=bsb, intercept=FALSE)
 
 ##  7. Example of the use of option nocheck.
 ##      FSRmdr applied without doing any checks on y and X variables.
-    data(fishery)
-    y <- fishery[, 2, drop=FALSE]
-    X <- fishery[, 1, drop=FALSE]
-    out <- LXS(y, X, nsamp=10000)
-    out1 <- FSRmdr(y, X, bsb=out$bs, nocheck=TRUE)
+    out1 <- FSRmdr(y, X, bsb=bsb, nocheck=TRUE)
 
 ##  8. Monitoring of s2, and the evolution of beta coefficients for the Hawkins dataset
-
     data(hawkins)
     y <- hawkins[, 9, drop=FALSE]
     X <- hawkins[, 1:8]
-    out <- LXS(y, X, nsamp=10000)
 
-    out1 <- FSRmdr(y, X, bsb=out$bs)
+    ## Instead of calling LXS, take hard-coded bsb - this is faster
+    ##  and guarantees that there is no crash of R
+
+    ##  out <- LXS(y, X, nsamp=10000)
+    ##  print(out$bs)
+    bsb <- c(89, 125,  78,  27,  29,  15,  67,  91,  47)
+
+    ##  This will cause a crash: with an error message from the C code 'FSDA:FSRmdr,Rank problem in step 10'
+    ##bsb <- c(42,   1,   7,  96,  37, 104,  49, 109,  51)
+
+    out1 <- FSRmdr(y, X, bsb=bsb)
 
     if(sum(is.nan(out1$S2)) > 0) {
         cat('\nNoFullRank in initial subset, please rerun FSRmdr.\n')
@@ -138,12 +124,18 @@
     y <- hawkins[, 9, drop=FALSE]
     X <- hawkins[, 1:8]
 
-    ##  rng('default')
-    ##  rng(100)
+    ## Instead of calling LXS, take hard-coded bsb - this is faster
+    ##  and guarantees that there is no crash of R
 
-    out <- LXS(y, X, nsamp=10000)
-    out1 <- FSRmdr(y, X, bsb=out$bs, bsbsteps=c(30, 60))
+    ##  out <- LXS(y, X, nsamp=10000)
+    ##  print(out$bs)
+    bsb <- c(89, 125,  78,  27,  29,  15,  67,  91,  47)
 
+    ##  This will cause a crash: with an error message from the C code 'FSDA:FSRmdr,Rank problem in step 10'
+    ##  bsb <- c(42,   1,   7,  96,  37, 104,  49, 109,  51)
+
+    out1 <- FSRmdr(y, X, bsb=bsb, bsbsteps=c(30, 60))
+    head(out1$mdr)
 
     if(sum(is.nan(out1$S2)) > 0) {
         cat('\nNoFullRank in initial subset, please rerun FSRmdr.\n')
@@ -165,7 +157,8 @@
 ##      from the bulk of th data (bad or good elverage points) it is necessary to
 ##      bound their effect putting a constraint on their leverage hi=xi'(X'X)xi
 
-    set.default(10000)
+    set.seed(10000)
+
     n <- 100
     p <- 1
     X <- matrix(rnorm(n*p), nrow=n)
@@ -179,10 +172,19 @@
     yadd <- y[1:add] + 200
     Xall <- rbind(X, Xadd)
     yall <- c(y, yadd)
-    outLXS <- LXS(y, X)
 
-    out1 <- FSRmdr(yall, Xall, bsb=outLXS$bs)
-    out2 <- FSRmdr(yall, Xall, bsb=outLXS$bs, threshlevoutX=10)
+    ## Instead of calling LXS, take hard-coded bsb - this is faster,
+    ##  more deterministic and guarantees that there is no crash of R
+
+    ##  outLXS <- LXS(y, X)
+    ##  bsb <- outLXS$bs
+    ##  print(bsb)
+
+    bsb <- c(5, 46)
+
+    out1 <- FSRmdr(yall, Xall, bsb=bsb)
+    out2 <- FSRmdr(yall, Xall, bsb=bsb, threshlevoutX=10)
+    print(head(out1$mdr))
 
 ##  We cannot draw yet the envelopes as it is done in MATLAB, see
 ##  below the commented code; will draw just mdr
@@ -202,10 +204,4 @@
     plot(out1$mdr[,1], out1$mdr[,2], xlab='Subset size m', ylab='mdr', ylim=c(0,5), xlim=c(0,120), main="Monitoring of mdr without bound on the leverage", type="l")
     plot(out2$mdr[,1], out2$mdr[,2], xlab='Subset size m', ylab='mdr', ylim=c(0,5), xlim=c(0,120), main="Monitoring of mdr with bound on the leverage", type="l")
 
-    par(oldpar)
-
-    ## The same can be done using the simple plot() function for 'FSRmdr' objects.
-    oldpar <- par(mfrow=c(2,1))
-    plot(out1, xlim=c(0,120), ylim=c(0, 5), xlab='Subset size m', ylab='mdr', main="Monitoring of mdr without bound on the leverage")
-    plot(out2, xlim=c(0,120), ylim=c(0, 5), xlab='Subset size m', ylab='mdr', main="Monitoring of mdr with bound on the leverage")
     par(oldpar)
