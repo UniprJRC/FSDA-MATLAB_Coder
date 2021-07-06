@@ -77,37 +77,38 @@ for i=1:n
         [pathstrcf,name,ext]=fileparts(FileWithFullPath);
         fileID = fopen(FileWithFullPath, 'r');
         if fileID==-1
-            error('FSDA:ToInitialize:WrongFile',['Could not find file ' '''' FileName ''''])
-        end
-        
-        % Insert the file into fstring
-        fstring=fscanf(fileID,'%c');
-        fclose(fileID);
-        
-        sIndexTofind = regexp(fstring,strTofind);
-        sIndexToreplace = regexp(fstring,strToReplace);
-        
-        if isempty(sIndexTofind)
-            warning('FSDA:ToInitialize:WrongString',['String ' '''' strTofind '''' ' not found in file ' '''' FileName ''''])
-        elseif length(sIndexTofind)>1
-            warning('FSDA:ToInitialize:WrongString',['String ' '''' strTofind '''' ' found more than once in file ' '''' FileName ''''])
-        elseif ~isempty(sIndexToreplace)
-            error('FSDA:ToInitialize:WrongString',['String ' '''' strToReplace '''' ' already exists in input file ' '''' FileName ''''])
+            warning('FSDA:ToInitialize:WrongFile',['Could not find file ' '''' FileName ''''])
         else
-        end
-        % Perform search and replace
-        fstring=strrep(fstring,strTofind,strToReplace);
-        % Write into fileID
-        fileID1 = fopen(FileWithFullPath, 'w');
-        if fileID1==-1
-            error('FSDA:ToInitialize:WrongFile',['Could not find file ' '''' FileName ''''])
+            % Insert the file into fstring
+            fstring=fscanf(fileID,'%c');
+            fclose(fileID);
+            
+            sIndexTofind = regexp(fstring,strTofind);
+            sIndexToreplace = regexp(fstring,strToReplace);
+            
+            if isempty(sIndexTofind)
+                warning('FSDA:ToInitialize:WrongString',['String ' '''' strTofind '''' ' not found in file ' '''' FileName ''''])
+            elseif length(sIndexTofind)>1
+                warning('FSDA:ToInitialize:WrongString',['String ' '''' strTofind '''' ' found more than once in file ' '''' FileName ''''])
+            elseif ~isempty(sIndexToreplace)
+                error('FSDA:ToInitialize:WrongString',['String ' '''' strToReplace '''' ' already exists in input file ' '''' FileName ''''])
+            else
+            end
+            % Perform search and replace
+            fstring=strrep(fstring,strTofind,strToReplace);
+            % Write into fileID
+            fileID1 = fopen(FileWithFullPath, 'w');
+            if fileID1==-1
+                error('FSDA:ToInitialize:WrongFile',['Could not find file ' '''' FileName ''''])
+            end
+            
+            fprintf(fileID1,'%s',fstring);
+            status=fclose(fileID1);
+            if status ~=0
+                error('FSDA:ToInitialize:FileNotClosed',['Could not close the connection with file: ' '''' FileName ''''])
+            end
         end
         
-        fprintf(fileID1,'%s',fstring);
-        status=fclose(fileID1);
-        if status ~=0
-            error('FSDA:ToInitialize:FileNotClosed',['Could not close the connection with file: ' '''' FileName ''''])
-        end
     end
 end
 
