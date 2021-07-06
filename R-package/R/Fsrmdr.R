@@ -304,17 +304,20 @@ FSRmdr <- function(y, x, bsb, intercept=TRUE, init, nocheck=FALSE,
         NAOK=TRUE,
         PACKAGE="fsdac")
 
-    mdr <- matrix(tmp$mdr, nrow=tmp$nmdr, ncol=tmp$pmdr)
+    mdr <- matrix(tmp$mdr[1:tmp$nmdr*tmp$pmdr], nrow=tmp$nmdr, ncol=tmp$pmdr)
     Un <- matrix(tmp$Un, nrow=tmp$nUn, ncol=tmp$pUn)
     BB <- matrix(tmp$BB, nrow=tmp$nBB, ncol=tmp$pBB)
     Bols <- matrix(tmp$Bols, nrow=tmp$nBols, ncol=tmp$pBols)
     S2 <- matrix(tmp$S2, nrow=tmp$nS2, ncol=tmp$pS2)
 
-    dimnames(mdr) <- list(mdr[,1], c("Step", "MDR"))
-    dimnames(Un) <- list(Un[,1], c("Step", paste0("Unit", 1:10)))
-    dimnames(Bols) <- list(Bols[,1], c("Step", paste0("V", 1:p1)))
-    dimnames(S2) <- list(S2[,1], c("Step", "S2", "R2"))
-
+    if(tmp$pmdr == 2) {
+        dimnames(mdr) <- list(mdr[,1], c("Step", "MDR"))
+        dimnames(Un) <- list(Un[,1], c("Step", paste0("Unit", 1:10)))
+        dimnames(Bols) <- list(Bols[,1], c("Step", paste0("V", 1:p1)))
+        dimnames(S2) <- list(S2[,1], c("Step", "S2", "R2"))
+    } else {
+    	message("Singularity issue! The vector 'mdr' does not contain the minimum deletion residuals!\n It contains a list of observations which produce singular matrix.")
+    }
     ans <- list(mdr=mdr, Un=Un, BB=BB, Bols=Bols, S2=S2)
     class(ans) <- "FSRmdr"
     ans$call <- match.call()
@@ -325,6 +328,9 @@ FSRmdr <- function(y, x, bsb, intercept=TRUE, init, nocheck=FALSE,
 plot.FSRmdr <- function(x, col, xlab, ylab, main, ...) {
     if (!inherits(x, "FSRmdr"))
 	   stop("Use only with 'FSRmdr' objects")
+
+    if(ncol(x$mdr) != 2)
+	   stop("Singularity issue - the 'FSRmdr' object does not contain the minimum deletion residuals.")
 
     if(missing(col))
         col <-"blue"

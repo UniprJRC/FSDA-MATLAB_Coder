@@ -163,7 +163,7 @@
     ##
     ##  In R thresholdX cannot be a structure - either missing or 1.
     ##
-    ##  threshoutX is passed s astructure
+    ##  threshoutX is passed as a structure
     ##  threshoutX <- list(threshlevoutX=5)
     ##  Use the instruction below if you wish to change the confidence level to
     ##  be used to find outlierd in the X space
@@ -174,9 +174,7 @@
 
 
 ##  11. Example to detect both VIOM and MSOM outliers using weak=true.
-##  loyalty data
 
-    library(fsdaR)
     data(loyalty)
 
     y <- loyalty$amount_spent

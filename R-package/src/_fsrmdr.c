@@ -73,6 +73,9 @@ void r_fsrmdr(double *yy, double *xx, int *nn, int *pp,
     //Rprintf("%s ", "Returning from FSRmdr and copying parameters ...\n");                  
 
     // Check the sizes of the returned vectors and matrices in the structure out.
+    // No need of these warnings, they will be cougth by the R function and a message will be displayed.
+    
+    /*
     if(mdr->size[0] != *nmdr || mdr->size[1] != *pmdr)
         Rprintf("\nWARNING: the size of output matrix mdr changed: was %d, %d, now is %d, %d \n", *nmdr, *pmdr, mdr->size[0], mdr->size[1]); 
     if(Un->size[0] != *nUn || Un->size[1] != *pUn)
@@ -83,33 +86,45 @@ void r_fsrmdr(double *yy, double *xx, int *nn, int *pp,
         Rprintf("\nWARNING: the size of output matrix Bols changed: was %d, %d, now is %d, %d \n", *nBols, *pBols, Bols->size[0], Bols->size[1]); 
     if(S2->size[0] != *nS2 || S2->size[1] != *pS2)
         Rprintf("\nWARNING: the size of output matrix S2 changed: was %d, %d, now is %d, %d \n", *nS2, *pS2, S2->size[0], S2->size[1]); 
-
+    */
+    
     // Copy the output matrices mdr, Un, BB, Bols and S2
+    
+    *nmdr = mdr->size[0];
+    *pmdr = mdr->size[1];
     loop_ub = mdr->size[0] * mdr->size[1];
     for(i=0; i < loop_ub; i++) {
         xmdr[i] = mdr->data[i];
     }
+    //disp_dble(xmdr, *nmdr);
 
+    *nUn = Un->size[0];
+    *pUn = Un->size[1];
     loop_ub = Un->size[0] * Un->size[1];
     for(i=0; i < loop_ub; i++) {
         xUn[i] = Un->data[i];
     }
 
+    *nBB = BB->size[0];
+    *pBB = BB->size[1];
     loop_ub = BB->size[0] * BB->size[1];
     for(i=0; i < loop_ub; i++) {
         xBB[i] = BB->data[i];
     }
 
+    *nBols = Bols->size[0];
+    *pBols = Bols->size[1];
     loop_ub = Bols->size[0] * Bols->size[1];
     for(i=0; i < loop_ub; i++) {
         xBols[i] = Bols->data[i];
     }
 
+    *nS2 = S2->size[0];
+    *pS2 = S2->size[1];
     loop_ub = S2->size[0] * S2->size[1];
     for(i=0; i < loop_ub; i++) {
         xS2[i] = S2->data[i];
     }
-
 
     emxDestroyArray_real_T(S2);
     emxDestroyArray_real_T(Bols);
