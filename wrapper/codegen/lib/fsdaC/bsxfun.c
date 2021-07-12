@@ -334,6 +334,174 @@ void f_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
               emxArray_real_T *c)
 {
   int acoef;
+  int b_acoef;
+  int b_k;
+  int bcoef;
+  int i;
+  int i1;
+  int k;
+  int u1;
+  i = c->size[0] * c->size[1];
+  acoef = b->size[0];
+  u1 = a->size[0];
+  if (acoef < u1) {
+    u1 = acoef;
+  }
+  if (b->size[0] == 1) {
+    c->size[0] = a->size[0];
+  } else if (a->size[0] == 1) {
+    c->size[0] = b->size[0];
+  } else if (a->size[0] == b->size[0]) {
+    c->size[0] = a->size[0];
+  } else {
+    c->size[0] = u1;
+  }
+  c->size[1] = a->size[1];
+  emxEnsureCapacity_real_T(c, i);
+  acoef = b->size[0];
+  u1 = a->size[0];
+  if (acoef < u1) {
+    u1 = acoef;
+  }
+  if (b->size[0] == 1) {
+    u1 = a->size[0];
+  } else if (a->size[0] == 1) {
+    u1 = b->size[0];
+  } else if (a->size[0] == b->size[0]) {
+    u1 = a->size[0];
+  }
+  if ((u1 != 0) && (a->size[1] != 0)) {
+    acoef = (a->size[1] != 1);
+    i = a->size[1] - 1;
+    for (k = 0; k <= i; k++) {
+      u1 = acoef * k;
+      b_acoef = (a->size[0] != 1);
+      bcoef = (b->size[0] != 1);
+      i1 = c->size[0] - 1;
+      for (b_k = 0; b_k <= i1; b_k++) {
+        c->data[b_k + c->size[0] * k] =
+            a->data[b_acoef * b_k + a->size[0] * u1] - b->data[bcoef * b_k];
+      }
+    }
+  }
+}
+
+void g_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
+              emxArray_real_T *c)
+{
+  int acoef;
+  int b_acoef;
+  int b_k;
+  int bcoef;
+  int i;
+  int i1;
+  int k;
+  int u1;
+  i = c->size[0] * c->size[1];
+  acoef = b->size[0];
+  u1 = a->size[0];
+  if (acoef < u1) {
+    u1 = acoef;
+  }
+  if (b->size[0] == 1) {
+    c->size[0] = a->size[0];
+  } else if (a->size[0] == 1) {
+    c->size[0] = b->size[0];
+  } else if (a->size[0] == b->size[0]) {
+    c->size[0] = a->size[0];
+  } else {
+    c->size[0] = u1;
+  }
+  c->size[1] = a->size[1];
+  emxEnsureCapacity_real_T(c, i);
+  acoef = b->size[0];
+  u1 = a->size[0];
+  if (acoef < u1) {
+    u1 = acoef;
+  }
+  if (b->size[0] == 1) {
+    u1 = a->size[0];
+  } else if (a->size[0] == 1) {
+    u1 = b->size[0];
+  } else if (a->size[0] == b->size[0]) {
+    u1 = a->size[0];
+  }
+  if ((u1 != 0) && (a->size[1] != 0)) {
+    acoef = (a->size[1] != 1);
+    i = a->size[1] - 1;
+    for (k = 0; k <= i; k++) {
+      u1 = acoef * k;
+      b_acoef = (a->size[0] != 1);
+      bcoef = (b->size[0] != 1);
+      i1 = c->size[0] - 1;
+      for (b_k = 0; b_k <= i1; b_k++) {
+        c->data[b_k + c->size[0] * k] =
+            a->data[b_acoef * b_k + a->size[0] * u1] / b->data[bcoef * b_k];
+      }
+    }
+  }
+}
+
+void h_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
+              emxArray_real_T *c)
+{
+  int acoef;
+  int b_acoef;
+  int b_k;
+  int bcoef;
+  int i;
+  int i1;
+  int k;
+  int u1;
+  i = c->size[0] * c->size[1];
+  acoef = b->size[0];
+  u1 = a->size[0];
+  if (acoef < u1) {
+    u1 = acoef;
+  }
+  if (b->size[0] == 1) {
+    c->size[0] = a->size[0];
+  } else if (a->size[0] == 1) {
+    c->size[0] = b->size[0];
+  } else if (a->size[0] == b->size[0]) {
+    c->size[0] = a->size[0];
+  } else {
+    c->size[0] = u1;
+  }
+  c->size[1] = a->size[1];
+  emxEnsureCapacity_real_T(c, i);
+  acoef = b->size[0];
+  u1 = a->size[0];
+  if (acoef < u1) {
+    u1 = acoef;
+  }
+  if (b->size[0] == 1) {
+    u1 = a->size[0];
+  } else if (a->size[0] == 1) {
+    u1 = b->size[0];
+  } else if (a->size[0] == b->size[0]) {
+    u1 = a->size[0];
+  }
+  if ((u1 != 0) && (a->size[1] != 0)) {
+    acoef = (a->size[1] != 1);
+    i = a->size[1] - 1;
+    for (k = 0; k <= i; k++) {
+      u1 = acoef * k;
+      b_acoef = (a->size[0] != 1);
+      bcoef = (b->size[0] != 1);
+      i1 = c->size[0] - 1;
+      for (b_k = 0; b_k <= i1; b_k++) {
+        c->data[b_k + c->size[0] * k] =
+            a->data[b_acoef * b_k + a->size[0] * u1] * b->data[bcoef * b_k];
+      }
+    }
+  }
+}
+
+void i_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
+              emxArray_real_T *c)
+{
+  int acoef;
   int b_k;
   int bcoef;
   int i;
@@ -383,59 +551,7 @@ void f_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
   }
 }
 
-void g_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
-              emxArray_real_T *c)
-{
-  int acoef;
-  int b_k;
-  int bcoef;
-  int i;
-  int i1;
-  int k;
-  i = c->size[0] * c->size[1];
-  acoef = b->size[0];
-  bcoef = a->size[0];
-  if (acoef < bcoef) {
-    bcoef = acoef;
-  }
-  if (b->size[0] == 1) {
-    c->size[0] = a->size[0];
-  } else if (a->size[0] == 1) {
-    c->size[0] = b->size[0];
-  } else if (a->size[0] == b->size[0]) {
-    c->size[0] = a->size[0];
-  } else {
-    c->size[0] = bcoef;
-  }
-  c->size[1] = a->size[1];
-  emxEnsureCapacity_real_T(c, i);
-  acoef = b->size[0];
-  bcoef = a->size[0];
-  if (acoef < bcoef) {
-    bcoef = acoef;
-  }
-  if (b->size[0] == 1) {
-    bcoef = a->size[0];
-  } else if (a->size[0] == 1) {
-    bcoef = b->size[0];
-  } else if (a->size[0] == b->size[0]) {
-    bcoef = a->size[0];
-  }
-  if (bcoef != 0) {
-    i = a->size[1] - 1;
-    for (k = 0; k <= i; k++) {
-      acoef = (a->size[0] != 1);
-      bcoef = (b->size[0] != 1);
-      i1 = c->size[0] - 1;
-      for (b_k = 0; b_k <= i1; b_k++) {
-        c->data[b_k + c->size[0] * k] =
-            a->data[acoef * b_k + a->size[0] * k] * b->data[bcoef * b_k];
-      }
-    }
-  }
-}
-
-void h_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
+void j_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
               emxArray_real_T *c)
 {
   int acoef;

@@ -10,8 +10,6 @@
  */
 
 /* Include files */
-#include <R.h>
-
 #include "FSRfan_wrapper.h"
 #include "LXS.h"
 #include "Score.h"
@@ -827,8 +825,8 @@ void FSRfan_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
    */
   /*  =1 */
   if (init < p + 1.0) {
-    Rprintf("Attention : init should be larger than p+1. \nIt is set to p+2.");
-    //fflush(stdout);
+    printf("Attention : init should be larger than p+1. \nIt is set to p+2.");
+    fflush(stdout);
     b_init = p + 2.0;
   }
   emxInit_boolean_T(&bsbT, 1);
@@ -999,9 +997,9 @@ void FSRfan_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   out->Score->size[1] = input_sizes_idx_1 + sizes_idx_1;
   emxEnsureCapacity_real_T(out->Score, i);
   loop_ub = input_sizes_idx_1;
-  if (0 <= loop_ub - 1) {
-    for (i = 0; i < nx; i++) {
-      out->Score->data[i] = c_y->data[i];
+  for (i = 0; i < loop_ub; i++) {
+    for (i1 = 0; i1 < nx; i1++) {
+      out->Score->data[i1] = c_y->data[i1];
     }
   }
   for (i = 0; i < sizes_idx_1; i++) {

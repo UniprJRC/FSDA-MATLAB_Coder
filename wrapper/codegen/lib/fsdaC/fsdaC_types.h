@@ -296,21 +296,6 @@ struct emxArray_char_T {
 typedef struct emxArray_char_T emxArray_char_T;
 #endif /* typedef_emxArray_char_T */
 
-#ifndef struct_emxArray_real32_T
-#define struct_emxArray_real32_T
-struct emxArray_real32_T {
-  float *data;
-  int *size;
-  int allocatedSize;
-  int numDimensions;
-  bool canFreeData;
-};
-#endif /* struct_emxArray_real32_T */
-#ifndef typedef_emxArray_real32_T
-#define typedef_emxArray_real32_T
-typedef struct emxArray_real32_T emxArray_real32_T;
-#endif /* typedef_emxArray_real32_T */
-
 #ifndef typedef_cell_wrap_36
 #define typedef_cell_wrap_36
 typedef struct {

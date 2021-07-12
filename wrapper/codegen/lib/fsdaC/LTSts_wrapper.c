@@ -10,8 +10,6 @@
  */
 
 /* Include files */
-#include <R.h>
-
 #include "LTSts_wrapper.h"
 #include "FSRinvmdr.h"
 #include "GYfilt.h"
@@ -199,11 +197,11 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   int i;
   int i1;
   int i2;
-  int i3=0;
-  int i4=0;
-  int i_loop_ub=0;
+  int i3;
+  int i4;
+  int i_loop_ub;
   int ib_size;
-  int j_loop_ub=0;
+  int j_loop_ub;
   int loop_ub;
   int nseaso;
   int nx;
@@ -1698,7 +1696,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   /*  tentative position of level shift */
   /*  Check if the optional user parameters are valid. */
   ij = trend.contents;
-  h_do_vectors(ij, (double *)&sworst, c_size, (int *)&nx, &sizes_idx_1,
+  g_do_vectors(ij, (double *)&sworst, c_size, (int *)&nx, &sizes_idx_1,
                (int *)&vlen, &ib_size);
   /*  Construct the matrices which are fixed in each step of the minimization */
   /*  procedure */
@@ -2075,7 +2073,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   }
   emxInitStruct_captured_var1(&otherind);
   emxInit_int32_T(&ia, 1);
-  g_do_vectors(Cr, indlinsc.contents, otherind.contents, ia, &ib_size);
+  f_do_vectors(Cr, indlinsc.contents, otherind.contents, ia, &ib_size);
   if (lshiftYN.contents == 1.0) {
     i = otherind.contents->size[0] * otherind.contents->size[1];
     if (1 > otherind.contents->size[1] - 1) {
@@ -3031,8 +3029,8 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     out->BestIndexes->data[i] = betaini->data[i];
   }
   if ((LSH > 0.0) && msg) {
-    Rprintf("Level shift for t=%.0f\n", LSH);
-    //fflush(stdout);
+    printf("Level shift for t=%.0f\n", LSH);
+    fflush(stdout);
   }
   /*  save RES to output structure (these residuals can be used for example to
    */
@@ -3243,9 +3241,9 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     out->Likloc->size[1] = input_sizes_idx_1 + b_sizes_idx_1;
     emxEnsureCapacity_real_T(out->Likloc, i);
     loop_ub = input_sizes_idx_1;
-    if (0 <= loop_ub - 1) {
-      for (i = 0; i < result; i++) {
-        out->Likloc->data[i] = betaini->data[i];
+    for (i = 0; i < loop_ub; i++) {
+      for (i1 = 0; i1 < result; i1++) {
+        out->Likloc->data[i1] = betaini->data[i1];
       }
     }
     for (i = 0; i < b_sizes_idx_1; i++) {
@@ -4577,8 +4575,8 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   /*  end */
   emxFree_real_T(&b_out);
   if (dispresults && (lshiftYN.contents == 1.0)) {
-    Rprintf("Level shift position t=%.0f\n", posLS);
-    //fflush(stdout);
+    printf("Level shift position t=%.0f\n", posLS);
+    fflush(stdout);
   }
   /*  Create plots */
   /*  Part of the code to find the F test for the final harmonic of the seasonal
@@ -4930,7 +4928,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
         for (i = 0; i <= loop_ub; i++) {
           Cr->data[i] = selWithoutLastHarmonic->data[i];
         }
-        g_do_vectors(Cr, posvarampl, selWithoutLastHarmonic, ia, &ib_size);
+        f_do_vectors(Cr, posvarampl, selWithoutLastHarmonic, ia, &ib_size);
         varampl.contents = 0.0;
       }
       /*  TODO nlinfit not supported by MATLAB C Coder */

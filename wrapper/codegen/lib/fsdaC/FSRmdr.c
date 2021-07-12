@@ -10,8 +10,6 @@
  */
 
 /* Include files */
-#include <R.h>
-
 #include "FSRmdr.h"
 #include "any.h"
 #include "blockedSummation.h"
@@ -749,15 +747,15 @@ void FSRmdr(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  check init */
   init1 = varargin_2;
   if (varargin_2 < (double)X->size[1] + 1.0) {
-    Rprintf("Attention : init1 should be larger than p. \nIt is set to p+1.");
-    //fflush(stdout);
+    printf("Attention : init1 should be larger than p. \nIt is set to p+1.");
+    fflush(stdout);
     init1 = (double)X->size[1] + 1.0;
   } else if (varargin_2 < bsb->size[0]) {
     b_sprintf(bsb->size[0]);
     init1 = bsb->size[0];
   } else if (varargin_2 >= X->size[0]) {
-    Rprintf("Attention : init1 should be smaller than n. \nIt is set to n-1.");
-    //fflush(stdout);
+    printf("Attention : init1 should be smaller than n. \nIt is set to n-1.");
+    fflush(stdout);
     init1 = (double)X->size[0] - 1.0;
   }
   /*  if ~isempty(constr) */

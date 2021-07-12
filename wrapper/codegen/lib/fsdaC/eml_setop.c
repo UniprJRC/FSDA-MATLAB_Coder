@@ -579,127 +579,7 @@ void e_do_vectors(const emxArray_real_T *a, const emxArray_real_T *b,
   }
 }
 
-void f_do_vectors(const emxArray_real_T *a, const emxArray_real32_T *b,
-                  emxArray_real_T *c, emxArray_int32_T *ia, int *ib_size)
-{
-  double absx;
-  double ak;
-  float b_absx;
-  float bk;
-  int b_exponent;
-  int b_ialast;
-  int exponent;
-  int iafirst;
-  int ialast;
-  int iblast;
-  int na;
-  int nc;
-  int nia;
-  bool exitg1;
-  bool p;
-  na = a->size[1];
-  iblast = c->size[0] * c->size[1];
-  c->size[0] = 1;
-  c->size[1] = a->size[1];
-  emxEnsureCapacity_real_T(c, iblast);
-  iblast = ia->size[0];
-  ia->size[0] = a->size[1];
-  emxEnsureCapacity_int32_T(ia, iblast);
-  *ib_size = 0;
-  nc = 0;
-  nia = 0;
-  iafirst = 0;
-  ialast = 1;
-  iblast = 1;
-  while ((ialast <= na) && (iblast <= b->size[0])) {
-    b_ialast = ialast;
-    ak = c_skip_to_last_equal_value(&b_ialast, a);
-    ialast = b_ialast;
-    bk = b->data[iblast - 1];
-    exitg1 = false;
-    while ((!exitg1) && (iblast < b->size[0])) {
-      b_absx = fabsf(bk / 2.0F);
-      if (!rtIsNaNF(b_absx)) {
-        if (b_absx <= 1.17549435E-38F) {
-          b_absx = 1.4013E-45F;
-        } else {
-          frexpf(b_absx, &b_exponent);
-          b_absx = ldexpf(1.0F, b_exponent - 24);
-        }
-      } else {
-        b_absx = rtNaNF;
-      }
-      if (fabsf(bk - b->data[iblast]) < b_absx) {
-        iblast++;
-      } else {
-        exitg1 = true;
-      }
-    }
-    absx = fabs(bk / 2.0);
-    if ((!rtIsInf(absx)) && (!rtIsNaN(absx))) {
-      if (absx <= 2.2250738585072014E-308) {
-        absx = 4.94065645841247E-324;
-      } else {
-        frexp(absx, &exponent);
-        absx = ldexp(1.0, exponent - 53);
-      }
-    } else {
-      absx = rtNaN;
-    }
-    if ((fabs(bk - ak) < absx) ||
-        (rtIsInf(ak) && rtIsInf(bk) && ((ak > 0.0) == (bk > 0.0F)))) {
-      ialast = b_ialast + 1;
-      iafirst = b_ialast;
-      iblast++;
-    } else {
-      if (rtIsNaNF(bk)) {
-        p = !rtIsNaN(ak);
-      } else if (rtIsNaN(ak)) {
-        p = false;
-      } else {
-        p = (ak < bk);
-      }
-      if (p) {
-        nc++;
-        nia++;
-        c->data[nc - 1] = ak;
-        ia->data[nia - 1] = iafirst + 1;
-        ialast = b_ialast + 1;
-        iafirst = b_ialast;
-      } else {
-        iblast++;
-      }
-    }
-  }
-  while (ialast <= na) {
-    iblast = ialast;
-    ak = c_skip_to_last_equal_value(&iblast, a);
-    nc++;
-    nia++;
-    c->data[nc - 1] = ak;
-    ia->data[nia - 1] = iafirst + 1;
-    ialast = iblast + 1;
-    iafirst = iblast;
-  }
-  if (a->size[1] > 0) {
-    iblast = ia->size[0];
-    if (1 > nia) {
-      ia->size[0] = 0;
-    } else {
-      ia->size[0] = nia;
-    }
-    emxEnsureCapacity_int32_T(ia, iblast);
-    iblast = c->size[0] * c->size[1];
-    if (1 > nc) {
-      c->size[1] = 0;
-    } else {
-      c->size[1] = nc;
-    }
-    emxEnsureCapacity_real_T(c, iblast);
-  }
-}
-
-void g_do_vectors(const emxArray_real_T *a, const emxArray_real_T *b,
+void f_do_vectors(const emxArray_real_T *a, const emxArray_real_T *b,
                   emxArray_real_T *c, emxArray_int32_T *ia, int *ib_size)
 {
   double absx;
@@ -797,7 +677,7 @@ void g_do_vectors(const emxArray_real_T *a, const emxArray_real_T *b,
   }
 }
 
-void h_do_vectors(double a, double c_data[], int c_size[2], int ia_data[],
+void g_do_vectors(double a, double c_data[], int c_size[2], int ia_data[],
                   int *ia_size, int ib_data[], int *ib_size)
 {
   double absx;
@@ -870,7 +750,7 @@ void h_do_vectors(double a, double c_data[], int c_size[2], int ia_data[],
   c_size[1] = (1 <= nc);
 }
 
-void i_do_vectors(double a, double c_data[], int c_size[2], int ia_data[],
+void h_do_vectors(double a, double c_data[], int c_size[2], int ia_data[],
                   int *ia_size, int ib_data[], int *ib_size)
 {
   double ak;

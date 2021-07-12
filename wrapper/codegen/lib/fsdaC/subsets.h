@@ -28,9 +28,6 @@ void b_subsets(double nsamp, double n, double p, emxArray_real_T *C);
 void c_subsets(emxArray_real_T *nsamp, double n, double p, double ncomb,
                emxArray_real_T *C, double *nselected);
 
-void d_subsets(emxArray_real_T *nsamp, double n, double p, emxArray_real_T *C,
-               double *nselected);
-
 void subsets(double nsamp, double n, double p, double ncomb, emxArray_real_T *C,
              double *nselected);
 

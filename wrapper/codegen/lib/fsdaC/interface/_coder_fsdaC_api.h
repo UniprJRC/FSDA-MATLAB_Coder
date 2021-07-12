@@ -166,21 +166,6 @@ typedef struct {
 } struct_FSR_T;
 #endif /* typedef_struct_FSR_T */
 
-#ifndef struct_emxArray_real32_T
-#define struct_emxArray_real32_T
-struct emxArray_real32_T {
-  real32_T *data;
-  int32_T *size;
-  int32_T allocatedSize;
-  int32_T numDimensions;
-  boolean_T canFreeData;
-};
-#endif /* struct_emxArray_real32_T */
-#ifndef typedef_emxArray_real32_T
-#define typedef_emxArray_real32_T
-typedef struct emxArray_real32_T emxArray_real32_T;
-#endif /* typedef_emxArray_real32_T */
-
 #ifndef struct_emxArray_char_T
 #define struct_emxArray_char_T
 struct emxArray_char_T {
@@ -477,7 +462,7 @@ void FSRbsb_wrapper(emxArray_real_T *y, emxArray_real_T *X,
                     emxArray_real_T *bsb, emxArray_real_T *bsbsteps,
                     real_T init, boolean_T intercept, boolean_T msg,
                     boolean_T nocheck, emxArray_real_T *Un,
-                    emxArray_real32_T *BB);
+                    emxArray_real_T *BB);
 
 void FSRbsb_wrapper_api(const mxArray *const prhs[8], int32_T nlhs,
                         const mxArray *plhs[2]);
