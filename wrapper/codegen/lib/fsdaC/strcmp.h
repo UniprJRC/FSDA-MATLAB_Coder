@@ -25,15 +25,15 @@ extern "C" {
 /* Function Declarations */
 bool ab_strcmp(const char a[3]);
 
-bool b_strcmp(const char a_data[], const int a_size[2]);
+bool b_strcmp(const emxArray_char_T *a);
 
 bool bb_strcmp(const char a[3]);
 
-bool c_strcmp(const char a_data[], const int a_size[2]);
+bool c_strcmp(const emxArray_char_T *a);
 
 bool cb_strcmp(const char a[3]);
 
-bool d_strcmp(const char a_data[], const int a_size[2]);
+bool d_strcmp(const emxArray_char_T *a);
 
 bool e_strcmp(const char a_data[], const int a_size[2]);
 

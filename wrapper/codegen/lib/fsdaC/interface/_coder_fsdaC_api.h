@@ -109,17 +109,20 @@ struct emxArray_real_T_1x1 {
 typedef struct emxArray_real_T_1x1 emxArray_real_T_1x1;
 #endif /* typedef_emxArray_real_T_1x1 */
 
-#ifndef struct_emxArray_char_T_1x3
-#define struct_emxArray_char_T_1x3
-struct emxArray_char_T_1x3 {
-  char_T data[3];
-  int32_T size[2];
+#ifndef struct_emxArray_char_T
+#define struct_emxArray_char_T
+struct emxArray_char_T {
+  char_T *data;
+  int32_T *size;
+  int32_T allocatedSize;
+  int32_T numDimensions;
+  boolean_T canFreeData;
 };
-#endif /* struct_emxArray_char_T_1x3 */
-#ifndef typedef_emxArray_char_T_1x3
-#define typedef_emxArray_char_T_1x3
-typedef struct emxArray_char_T_1x3 emxArray_char_T_1x3;
-#endif /* typedef_emxArray_char_T_1x3 */
+#endif /* struct_emxArray_char_T */
+#ifndef typedef_emxArray_char_T
+#define typedef_emxArray_char_T
+typedef struct emxArray_char_T emxArray_char_T;
+#endif /* typedef_emxArray_char_T */
 
 #ifndef struct_emxArray_real_T_2x5
 #define struct_emxArray_real_T_2x5
@@ -132,6 +135,18 @@ struct emxArray_real_T_2x5 {
 #define typedef_emxArray_real_T_2x5
 typedef struct emxArray_real_T_2x5 emxArray_real_T_2x5;
 #endif /* typedef_emxArray_real_T_2x5 */
+
+#ifndef struct_emxArray_char_T_1x3
+#define struct_emxArray_char_T_1x3
+struct emxArray_char_T_1x3 {
+  char_T data[3];
+  int32_T size[2];
+};
+#endif /* struct_emxArray_char_T_1x3 */
+#ifndef typedef_emxArray_char_T_1x3
+#define typedef_emxArray_char_T_1x3
+typedef struct emxArray_char_T_1x3 emxArray_char_T_1x3;
+#endif /* typedef_emxArray_char_T_1x3 */
 
 #ifndef typedef_struct_FSM_T
 #define typedef_struct_FSM_T
@@ -165,21 +180,6 @@ typedef struct {
   char_T class[3];
 } struct_FSR_T;
 #endif /* typedef_struct_FSR_T */
-
-#ifndef struct_emxArray_char_T
-#define struct_emxArray_char_T
-struct emxArray_char_T {
-  char_T *data;
-  int32_T *size;
-  int32_T allocatedSize;
-  int32_T numDimensions;
-  boolean_T canFreeData;
-};
-#endif /* struct_emxArray_char_T */
-#ifndef typedef_emxArray_char_T
-#define typedef_emxArray_char_T
-typedef struct emxArray_char_T emxArray_char_T;
-#endif /* typedef_emxArray_char_T */
 
 #ifndef typedef_cell_wrap_36
 #define typedef_cell_wrap_36
@@ -427,10 +427,9 @@ extern "C" {
 
 /* Function Declarations */
 void FSM_wrapper(emxArray_real_T *Y, real_T bonflev_data[],
-                 int32_T bonflev_size[2], char_T crit_data[],
-                 int32_T crit_size[2], real_T init, emxArray_real_T *m0,
-                 boolean_T msg, boolean_T nocheck, real_T rf,
-                 struct_FSM_T *out);
+                 int32_T bonflev_size[2], emxArray_char_T *crit, real_T init,
+                 emxArray_real_T *m0, boolean_T msg, boolean_T nocheck,
+                 real_T rf, struct_FSM_T *out);
 
 void FSM_wrapper_api(const mxArray *const prhs[8], const mxArray **plhs);
 

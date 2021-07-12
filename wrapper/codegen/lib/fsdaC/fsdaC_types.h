@@ -121,17 +121,20 @@ struct emxArray_real_T_1x1 {
 typedef struct emxArray_real_T_1x1 emxArray_real_T_1x1;
 #endif /* typedef_emxArray_real_T_1x1 */
 
-#ifndef struct_emxArray_char_T_1x3
-#define struct_emxArray_char_T_1x3
-struct emxArray_char_T_1x3 {
-  char data[3];
-  int size[2];
+#ifndef struct_emxArray_char_T
+#define struct_emxArray_char_T
+struct emxArray_char_T {
+  char *data;
+  int *size;
+  int allocatedSize;
+  int numDimensions;
+  bool canFreeData;
 };
-#endif /* struct_emxArray_char_T_1x3 */
-#ifndef typedef_emxArray_char_T_1x3
-#define typedef_emxArray_char_T_1x3
-typedef struct emxArray_char_T_1x3 emxArray_char_T_1x3;
-#endif /* typedef_emxArray_char_T_1x3 */
+#endif /* struct_emxArray_char_T */
+#ifndef typedef_emxArray_char_T
+#define typedef_emxArray_char_T
+typedef struct emxArray_char_T emxArray_char_T;
+#endif /* typedef_emxArray_char_T */
 
 #ifndef struct_emxArray_real_T_2x5
 #define struct_emxArray_real_T_2x5
@@ -144,6 +147,18 @@ struct emxArray_real_T_2x5 {
 #define typedef_emxArray_real_T_2x5
 typedef struct emxArray_real_T_2x5 emxArray_real_T_2x5;
 #endif /* typedef_emxArray_real_T_2x5 */
+
+#ifndef struct_emxArray_char_T_1x3
+#define struct_emxArray_char_T_1x3
+struct emxArray_char_T_1x3 {
+  char data[3];
+  int size[2];
+};
+#endif /* struct_emxArray_char_T_1x3 */
+#ifndef typedef_emxArray_char_T_1x3
+#define typedef_emxArray_char_T_1x3
+typedef struct emxArray_char_T_1x3 emxArray_char_T_1x3;
+#endif /* typedef_emxArray_char_T_1x3 */
 
 #ifndef typedef_struct_FSM_T
 #define typedef_struct_FSM_T
@@ -280,21 +295,6 @@ typedef struct {
   emxArray_real_T *VIOMout;
 } struct_T;
 #endif /* typedef_struct_T */
-
-#ifndef struct_emxArray_char_T
-#define struct_emxArray_char_T
-struct emxArray_char_T {
-  char *data;
-  int *size;
-  int allocatedSize;
-  int numDimensions;
-  bool canFreeData;
-};
-#endif /* struct_emxArray_char_T */
-#ifndef typedef_emxArray_char_T
-#define typedef_emxArray_char_T
-typedef struct emxArray_char_T emxArray_char_T;
-#endif /* typedef_emxArray_char_T */
 
 #ifndef typedef_cell_wrap_36
 #define typedef_cell_wrap_36

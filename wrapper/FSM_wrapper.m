@@ -1,5 +1,5 @@
 function [out]=FSM_wrapper(Y,  bonflev,crit,init,m0,msg,nocheck,rf)
-% Wrapper function for LXS (when lms is a scalar). NV pair names are not taken as
+% Wrapper function for FSM. NV pair names are not taken as
 % inputs. Instead, just the values are taken as inputs.
 
 % Y: an array of doubles of any dimensions
@@ -18,7 +18,7 @@ assert(all(size(bonflev) <= [1 1]));
 % this char can only contain 
 % 'md'  'biv', 'uni'
 assert(isa(crit, 'char'));
-assert(all(size(crit) <= [1 3]));
+assert(all(size(crit) <= [1 Inf]));
 
 % init a scalar double
 assert(isa(init, 'double'));

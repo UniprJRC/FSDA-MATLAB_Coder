@@ -42,9 +42,9 @@
 
 /* Function Definitions */
 void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
-                 const int bonflev_size[2], const char crit_data[],
-                 const int crit_size[2], double init, const emxArray_real_T *m0,
-                 bool msg, bool nocheck, double rf, struct_FSM_T *out)
+                 const int bonflev_size[2], const emxArray_char_T *crit,
+                 double init, const emxArray_real_T *m0, bool msg, bool nocheck,
+                 double rf, struct_FSM_T *out)
 {
   emxArray_boolean_T nout_data;
   emxArray_boolean_T *r;
@@ -120,8 +120,7 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
     fsdaC_initialize();
   }
   emxInit_real_T(&b_Y, 2);
-  /*  Wrapper function for LXS (when lms is a scalar). NV pair names are not
-   * taken as */
+  /*  Wrapper function for FSM. NV pair names are not taken as */
   /*  inputs. Instead, just the values are taken as inputs. */
   /*  Y: an array of doubles of any dimensions */
   /*  Optional input arguments (name / pairs) in (case insensitive) */
@@ -505,13 +504,13 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
     /*  Confidence level for robust bivariate ellipses */
     /*  Find initial subset to initialize the search */
     unibiv(b_Y, rf, fre);
-    if (b_strcmp(crit_data, crit_size)) {
+    if (b_strcmp(crit)) {
       /*  The user has chosen to select the intial subset according to the */
       /*  smallest m0 pseudo MD Select only the potential bivariate outliers */
       sortrows(fre);
-    } else if (c_strcmp(crit_data, crit_size)) {
+    } else if (c_strcmp(crit)) {
       b_sortrows(fre);
-    } else if (d_strcmp(crit_data, crit_size)) {
+    } else if (d_strcmp(crit)) {
       c_sortrows(fre);
     }
     /*  initial subset */
