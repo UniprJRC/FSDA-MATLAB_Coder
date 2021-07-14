@@ -10,6 +10,8 @@
  */
 
 /* Include files */
+#include <R.h>
+
 #include "FSRmdr_wrapper.h"
 #include "any.h"
 #include "blockedSummation.h"
@@ -788,15 +790,15 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  check init */
   init1 = init;
   if (init < p + 1.0) {
-    printf("Attention : init1 should be larger than p. \nIt is set to p+1.");
-    fflush(stdout);
+    Rprintf("Attention : init1 should be larger than p. \nIt is set to p+1.");
+    //fflush(stdout);
     init1 = p + 1.0;
   } else if (init < b_bsb->size[0]) {
     b_sprintf(b_bsb->size[0]);
     init1 = b_bsb->size[0];
   } else if (init >= n) {
-    printf("Attention : init1 should be smaller than n. \nIt is set to n-1.");
-    fflush(stdout);
+    Rprintf("Attention : init1 should be smaller than n. \nIt is set to n-1.");
+    //fflush(stdout);
     init1 = n - 1.0;
   }
   emxInit_real_T(&b_bsbsteps, 2);
@@ -1566,8 +1568,8 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
             loop_ub = Xbb->size[0] - 1;
           }
           if (msg) {
-            printf("FSDA:FSRmdr,Rank problem in step %.0f\n", b_mm);
-            fflush(stdout);
+            Rprintf("FSDA:FSRmdr,Rank problem in step %.0f\n", b_mm);
+            //fflush(stdout);
           }
           i = mdr->size[0] * mdr->size[1];
           mdr->size[0] = loop_ub;
@@ -1598,8 +1600,8 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           S2->data[0] = rtNaN;
           exitg1 = 1;
         } else {
-          printf("Matrix without full rank at step m= %.0f\n", b_mm);
-          fflush(stdout);
+          Rprintf("Matrix without full rank at step m= %.0f\n", b_mm);
+          //fflush(stdout);
           /*  disp([mm b']) */
           guard2 = true;
         }

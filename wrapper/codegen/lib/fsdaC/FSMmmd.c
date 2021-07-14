@@ -10,6 +10,8 @@
  */
 
 /* Include files */
+#include <R.h>
+
 #include "FSMmmd.h"
 #include "bsxfun.h"
 #include "cat.h"
@@ -544,16 +546,16 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  check init */
   init1 = varargin_2;
   if (varargin_2 < (double)Y->size[1] + 1.0) {
-    printf("%s\n",
+    Rprintf("%s\n",
            "Attention : init1 should be larger than v. \nIt is set to v+1.");
-    fflush(stdout);
+    //fflush(stdout);
     init1 = (double)Y->size[1] + 1.0;
   } else if (varargin_2 < bsb->size[0]) {
     init1 = bsb->size[0];
   } else if (varargin_2 >= Y->size[0]) {
-    printf("%s\n",
+    Rprintf("%s\n",
            "Attention : init1 should be smaller than n. \nIt is set to n-1.");
-    fflush(stdout);
+    //fflush(stdout);
     init1 = (double)Y->size[0] - 1.0;
   }
   /*  Matrix BB will contain the units forming subset in each step (or in */
@@ -2547,16 +2549,16 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  check init */
   init1 = varargin_2;
   if (varargin_2 < (double)Y->size[1] + 1.0) {
-    printf("%s\n",
+    Rprintf("%s\n",
            "Attention : init1 should be larger than v. \nIt is set to v+1.");
-    fflush(stdout);
+    //fflush(stdout);
     init1 = (double)Y->size[1] + 1.0;
   } else if (varargin_2 < bsb->size[0]) {
     init1 = bsb->size[0];
   } else if (varargin_2 >= Y->size[0]) {
-    printf("%s\n",
+    Rprintf("%s\n",
            "Attention : init1 should be smaller than n. \nIt is set to n-1.");
-    fflush(stdout);
+    //fflush(stdout);
     init1 = (double)Y->size[0] - 1.0;
   }
   /*   Un is a Matrix whose 2nd column:11th col contain the unit(s) just */
@@ -4380,16 +4382,16 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  check init */
   init1 = varargin_2;
   if (varargin_2 < (double)Y->size[1] + 1.0) {
-    printf("%s\n",
+    Rprintf("%s\n",
            "Attention : init1 should be larger than v. \nIt is set to v+1.");
-    fflush(stdout);
+    //fflush(stdout);
     init1 = (double)Y->size[1] + 1.0;
   } else if (varargin_2 < bsb->size[0]) {
     init1 = bsb->size[0];
   } else if (varargin_2 >= Y->size[0]) {
-    printf("%s\n",
+    Rprintf("%s\n",
            "Attention : init1 should be smaller than n. \nIt is set to n-1.");
-    fflush(stdout);
+    //fflush(stdout);
     init1 = (double)Y->size[0] - 1.0;
   }
   /*  Matrix BB will contain the units forming subset in each step (or in */
@@ -6360,16 +6362,16 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  check init */
   init1 = varargin_2;
   if (varargin_2 < (double)Y->size[1] + 1.0) {
-    printf("%s\n",
+    Rprintf("%s\n",
            "Attention : init1 should be larger than v. \nIt is set to v+1.");
-    fflush(stdout);
+    //fflush(stdout);
     init1 = (double)Y->size[1] + 1.0;
   } else if (varargin_2 < bsb->size[0]) {
     init1 = bsb->size[0];
   } else if (varargin_2 >= Y->size[0]) {
-    printf("%s\n",
+    Rprintf("%s\n",
            "Attention : init1 should be smaller than n. \nIt is set to n-1.");
-    fflush(stdout);
+    //fflush(stdout);
     init1 = (double)Y->size[0] - 1.0;
   }
   /*   Un is a Matrix whose 2nd column:11th col contain the unit(s) just */

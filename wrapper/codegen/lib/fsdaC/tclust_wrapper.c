@@ -10,6 +10,8 @@
  */
 
 /* Include files */
+#include <R.h>
+
 #include "tclust_wrapper.h"
 #include "abs.h"
 #include "any.h"
@@ -128,14 +130,14 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
   int NoPriorNini;
   int NoPriorSubsets;
   int b_i;
-  int b_loop_ub;
-  int c_loop_ub;
+  int b_loop_ub=0;
+  int c_loop_ub=0;
   int i;
   int i1;
-  int i2;
-  int i3;
-  int i4;
-  int i5;
+  int i2=0;
+  int i3=0;
+  int i4=0;
+  int i5=0;
   int input_sizes_idx_0;
   int j;
   int loop_ub;
@@ -1492,8 +1494,8 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
     }
     if (msg == 2.0) {
       /*  disp(['Iteration ' num2str(i)]) */
-      printf("Iteration %.0f\n", (double)b_i + 1.0);
-      fflush(stdout);
+      Rprintf("Iteration %.0f\n", (double)b_i + 1.0);
+      //fflush(stdout);
     }
     if (b_startv1) {
       if (NoPriorNini == 1) {
@@ -4403,9 +4405,9 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
         b_time_data.allocatedSize = 10;
         b_time_data.numDimensions = 1;
         b_time_data.canFreeData = false;
-        printf("Total estimated time to complete tclust: %5.2f seconds \n",
+        Rprintf("Total estimated time to complete tclust: %5.2f seconds \n",
                nselected * median(&b_time_data));
-        fflush(stdout);
+        //fflush(stdout);
       }
     }
   }
@@ -4427,9 +4429,9 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
   if ((msg == 2.0) && (obj > 0.1)) {
     /*  disp(['Warning: Number of subsets without convergence equal to '
      * num2str(100*notconver) '%']) */
-    printf("Warning: Number of subsets without convergence equal to %.1f%%\n",
+    Rprintf("Warning: Number of subsets without convergence equal to %.1f%%\n",
            100.0 * obj);
-    fflush(stdout);
+    //fflush(stdout);
   }
   emxInit_boolean_T(&r6, 2);
   /*  Store quantities in out structure */

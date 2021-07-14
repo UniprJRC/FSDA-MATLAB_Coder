@@ -10,6 +10,8 @@
  */
 
 /* Include files */
+#include <R.h>
+
 #include "LTSts_wrapper.h"
 #include "FSRinvmdr.h"
 #include "GYfilt.h"
@@ -197,11 +199,11 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   int i;
   int i1;
   int i2;
-  int i3;
-  int i4;
-  int i_loop_ub;
+  int i3=0;
+  int i4=0;
+  int i_loop_ub=0;
   int ib_size;
-  int j_loop_ub;
+  int j_loop_ub=0;
   int loop_ub;
   int nseaso;
   int nx;
@@ -3029,8 +3031,8 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     out->BestIndexes->data[i] = betaini->data[i];
   }
   if ((LSH > 0.0) && msg) {
-    printf("Level shift for t=%.0f\n", LSH);
-    fflush(stdout);
+    Rprintf("Level shift for t=%.0f\n", LSH);
+    //fflush(stdout);
   }
   /*  save RES to output structure (these residuals can be used for example to
    */
@@ -4575,8 +4577,8 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   /*  end */
   emxFree_real_T(&b_out);
   if (dispresults && (lshiftYN.contents == 1.0)) {
-    printf("Level shift position t=%.0f\n", posLS);
-    fflush(stdout);
+    Rprintf("Level shift position t=%.0f\n", posLS);
+    //fflush(stdout);
   }
   /*  Create plots */
   /*  Part of the code to find the F test for the final harmonic of the seasonal

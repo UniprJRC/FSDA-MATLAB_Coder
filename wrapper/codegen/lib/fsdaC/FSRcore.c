@@ -10,6 +10,8 @@
  */
 
 /* Include files */
+#include <R.h>
+
 #include "FSRcore.h"
 #include "FSRbonfbound.h"
 #include "FSRbsb.h"
@@ -105,7 +107,7 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
   int nout_size_idx_0;
   int nout_size_idx_1;
   int sto;
-  int vlen;
+  int vlen=0;
   signed char c_tmp_data[5];
   signed char sizes_idx_1;
   bool x[31];
@@ -882,9 +884,9 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
           if (options_msg) {
             /*  disp(['Signal in final part of the search: step '
              * num2str(mdr(i,1)) ' because']); */
-            printf("Signal in final part of the search: step %.0f because",
+            Rprintf("Signal in final part of the search: step %.0f because",
                    out->mdr->data[c_i]);
-            fflush(stdout);
+            //fflush(stdout);
           }
           if (empty_non_axis_sizes) {
             if (options_msg) {
@@ -894,12 +896,12 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
               print_processing(
                   out->mdr->data[c_i], INP_n, out->mdr->data[c_i + 1], INP_n,
                   out->mdr->data[c_i - 1], INP_n, validatedHoleFilling);
-              printf("\nrmin(%.0f,%.0f)>99.9%% and rmin(%.0f,%.0f)>99.9%% and "
+              Rprintf("\nrmin(%.0f,%.0f)>99.9%% and rmin(%.0f,%.0f)>99.9%% and "
                      "rmin(%.0f,%.0f)>99%%",
                      validatedHoleFilling[0], validatedHoleFilling[1],
                      validatedHoleFilling[2], validatedHoleFilling[3],
                      validatedHoleFilling[4], validatedHoleFilling[5]);
-              fflush(stdout);
+              //fflush(stdout);
             }
             int2str(out->mdr->data[c_i], b_out.data, b_out.size);
             int2str(INP_n, b_out.data, b_out.size);
@@ -916,12 +918,12 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
               print_processing(
                   out->mdr->data[c_i - 1], INP_n, out->mdr->data[c_i], INP_n,
                   out->mdr->data[c_i + 1], INP_n, validatedHoleFilling);
-              printf("\nrmin(%.0f,%.0f)>99.9%% and rmin(%.0f,%.0f)>99.9%% and "
+              Rprintf("\nrmin(%.0f,%.0f)>99.9%% and rmin(%.0f,%.0f)>99.9%% and "
                      "rmin(%.0f,%.0f)>99%%",
                      validatedHoleFilling[0], validatedHoleFilling[1],
                      validatedHoleFilling[2], validatedHoleFilling[3],
                      validatedHoleFilling[4], validatedHoleFilling[5]);
-              fflush(stdout);
+              //fflush(stdout);
             }
             int2str(out->mdr->data[c_i], b_out.data, b_out.size);
             int2str(INP_n, b_out.data, b_out.size);
@@ -935,10 +937,10 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
               /*  disp(['rmin('  int2str(mdr(i,1)) ',' int2str(n) ')>99% at
                * final step: Bonferroni signal in the final part of the
                * search.']); */
-              printf("\nrmin(%.0f,%.0f)>99%% at final step: Bonferroni signal "
+              Rprintf("\nrmin(%.0f,%.0f)>99%% at final step: Bonferroni signal "
                      "in the final part of the search.",
                      out->mdr->data[c_i], INP_n);
-              fflush(stdout);
+              //fflush(stdout);
             }
             int2str(out->mdr->data[c_i], b_out.data, b_out.size);
             int2str(INP_n, b_out.data, b_out.size);
@@ -948,15 +950,15 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
             if (options_msg) {
               /*  disp(['rmin('  int2str(mdr(i,1)) ',' int2str(n) ')>99.999%']);
                */
-              printf("\nrmin(%.0f,%.0f)>99.999%%", out->mdr->data[c_i], INP_n);
-              fflush(stdout);
+              Rprintf("\nrmin(%.0f,%.0f)>99.999%%", out->mdr->data[c_i], INP_n);
+              //fflush(stdout);
             }
             int2str(out->mdr->data[c_i], b_out.data, b_out.size);
             int2str(INP_n, b_out.data, b_out.size);
           }
           if (options_msg) {
-            printf("\n------------------------------------------------");
-            fflush(stdout);
+            Rprintf("\n------------------------------------------------");
+            //fflush(stdout);
           }
           /*  Signal is always considered true if it takes place in the */
           /*  final part of the search */
@@ -999,8 +1001,8 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
       /*         %% Stage 1b: signal validation */
       if (b_signal == 1) {
         if (options_msg) {
-          printf("\n-------------------\n");
-          fflush(stdout);
+          Rprintf("\n-------------------\n");
+          //fflush(stdout);
         }
         /*  mdag is $m^\dagger$ */
         mdag = out->mdr->data[c_i];
@@ -1336,10 +1338,10 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
           if (options_msg) {
             /*  disp(['Using the criterion of the maximum, the group of
              * homogenous obs. is=' int2str(tr)]); */
-            printf("Using the criterion of the maximum, the group of "
+            Rprintf("Using the criterion of the maximum, the group of "
                    "homogenous obs. is= %.0f\n",
                    ndecl);
-            fflush(stdout);
+            //fflush(stdout);
           }
           /*  tr is redefined and is associated with the step associated to */
           /*  the maximum value of r_min */
