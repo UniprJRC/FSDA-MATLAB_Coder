@@ -3,7 +3,7 @@ useDynLib(fsdac, .registration=TRUE)
 importFrom("utils", "flush.console")
 importFrom("stats", "coef")
 
-export(myc, addt, FSRbsb, FSRfan, LXS, FSR, FSRmdr
+export(myc, addt, FSRbsb, FSRfan, LXS, FSR, FSRmdr, FSMmmd, FSMbsb
 )
 
 ## S3 methods for ``our own'' S3 generics:
@@ -21,3 +21,4 @@ S3method(print, LTS)
 S3method(print, LMS)
 S3method(print, FSR)
 S3method(plot, FSRmdr)
+S3method(plot, FSMmmd)

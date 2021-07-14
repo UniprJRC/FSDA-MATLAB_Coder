@@ -165,7 +165,7 @@
 ##      from the bulk of th data (bad or good elverage points) it is necessary to
 ##      bound their effect putting a constraint on their leverage hi=xi'(X'X)xi
 
-    set.default(10000)
+    set.seed(10000)
     n <- 100
     p <- 1
     X <- matrix(rnorm(n*p), nrow=n)

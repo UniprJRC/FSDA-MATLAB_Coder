@@ -27,7 +27,7 @@ extern void FSRbsb_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                            const emxArray_real_T *bsb,
                            const emxArray_real_T *bsbsteps, double init,
                            bool intercept, bool msg, bool nocheck,
-                           emxArray_real_T *Un, emxArray_real32_T *BB);
+                           emxArray_real_T *Un, emxArray_real_T *BB);
 
 #ifdef __cplusplus
 }

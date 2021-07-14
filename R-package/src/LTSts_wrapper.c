@@ -1698,7 +1698,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   /*  tentative position of level shift */
   /*  Check if the optional user parameters are valid. */
   ij = trend.contents;
-  h_do_vectors(ij, (double *)&sworst, c_size, (int *)&nx, &sizes_idx_1,
+  g_do_vectors(ij, (double *)&sworst, c_size, (int *)&nx, &sizes_idx_1,
                (int *)&vlen, &ib_size);
   /*  Construct the matrices which are fixed in each step of the minimization */
   /*  procedure */
@@ -2075,7 +2075,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   }
   emxInitStruct_captured_var1(&otherind);
   emxInit_int32_T(&ia, 1);
-  g_do_vectors(Cr, indlinsc.contents, otherind.contents, ia, &ib_size);
+  f_do_vectors(Cr, indlinsc.contents, otherind.contents, ia, &ib_size);
   if (lshiftYN.contents == 1.0) {
     i = otherind.contents->size[0] * otherind.contents->size[1];
     if (1 > otherind.contents->size[1] - 1) {
@@ -3243,9 +3243,9 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     out->Likloc->size[1] = input_sizes_idx_1 + b_sizes_idx_1;
     emxEnsureCapacity_real_T(out->Likloc, i);
     loop_ub = input_sizes_idx_1;
-    if (0 <= loop_ub - 1) {
-      for (i = 0; i < result; i++) {
-        out->Likloc->data[i] = betaini->data[i];
+    for (i = 0; i < loop_ub; i++) {
+      for (i1 = 0; i1 < result; i1++) {
+        out->Likloc->data[i1] = betaini->data[i1];
       }
     }
     for (i = 0; i < b_sizes_idx_1; i++) {
@@ -4930,7 +4930,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
         for (i = 0; i <= loop_ub; i++) {
           Cr->data[i] = selWithoutLastHarmonic->data[i];
         }
-        g_do_vectors(Cr, posvarampl, selWithoutLastHarmonic, ia, &ib_size);
+        f_do_vectors(Cr, posvarampl, selWithoutLastHarmonic, ia, &ib_size);
         varampl.contents = 0.0;
       }
       /*  TODO nlinfit not supported by MATLAB C Coder */

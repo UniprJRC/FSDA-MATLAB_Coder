@@ -11,7 +11,6 @@
 
 /* Include files */
 #include <R.h>
-#include "_utils.h"
 
 #include "FSRmdr_wrapper.h"
 #include "any.h"
@@ -639,11 +638,6 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /* } */
   /*  Beginning of code */
   /*  Input parameters checking */
-
-
-    //Rprintf("\nInput parameters checking...\n");
-
-
   i = b_y->size[0];
   b_y->size[0] = y->size[0];
   emxEnsureCapacity_real_T(b_y, i);
@@ -667,9 +661,6 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   } else {
     initdef = fmin(3.0 * p + 1.0, floor(0.5 * ((n + p) + 1.0)));
   }
-
-    //Rprintf("\nchkinputR() passed (n, p): %f %f\n", n, p);
-
   /*  Default for vector bsbsteps which indicates for which steps of the fwd */
   /*  search units forming subset have to be saved */
   emxInit_real_T(&bsbstepdef, 2);
@@ -728,9 +719,6 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     /*  OLD WRONG statement */
     /*  bsbstepdef = [initdef 100:100:100*floor(n/100)]; */
   }
-
-    //Rprintf("\nDefault for bsbsteps initialized: %d %d\n", bsbstepdef->size[0], bsbstepdef->size[1]);
-
   emxInit_boolean_T(&bsbT, 1);
   /* init1=options.init; */
   /*  Write in structure 'options' the options chosen by the user */
@@ -813,11 +801,6 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     //fflush(stdout);
     init1 = n - 1.0;
   }
-
-    //Rprintf("\nInitialized the structure options...\n");
-
-
-
   emxInit_real_T(&b_bsbsteps, 2);
   /*  if ~isempty(constr) */
   /*      constr=constr(:); */
@@ -842,11 +825,6 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     }
   }
   emxFree_real_T(&bsbstepdef);
-
-
-    //Rprintf("\ninitialized bsbsteps: %d %d\n", bsbsteps->size[0], bsbsteps->size[1]);
-
-
   emxInit_real_T(&weight, 1);
   if (internationaltrade) {
     i = weight->size[0];
@@ -868,11 +846,6 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  Initialise key matrices */
   /*  Initialization of the n x 1 Boolean vector which contains a true in */
   /*  correspondence of the units belonging to subset in each step */
-
-
-    //Rprintf("\nInitialize key matrices\n");
-
-
   loop_ub_tmp = (int)n;
   i = bsbT->size[0];
   bsbT->size[0] = (int)n;
@@ -997,8 +970,6 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   for (i = 0; i <= loop_ub; i++) {
     c_y->data[i] *= 500.0;
   }
-
-
   /*  Matrix Bols will contain the beta coefficients in each step of the fwd */
   /*  search. The first column of Bols contains the fwd search index */
   emxInit_real_T(&d_y, 2);
@@ -1412,11 +1383,6 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   emxEnsureCapacity_real_T(resBSB, i);
   resBSB->data[0] = 0.0;
   /*  Start of the forward search */
-
-
-    //Rprintf("\nStart of the forward search...\n");
-
-
   emxInit_boolean_T(&unitstopenalize, 1);
   emxInit_uint32_T(&truerownamestopenalize, 1);
   emxInit_real_T(&unit, 1);
@@ -1439,11 +1405,6 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   } else {
     guard1 = true;
   }
-
-
-    //Rprintf("\nStart of the forward search. What is guard1? %d\n", guard1);
-
-
   if (guard1) {
     mm = 0;
     do {
@@ -1464,8 +1425,6 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           irank = local_rank(Xb);
           Ra = (irank == p);
         }
-        
-        
         guard2 = false;
         if (Ra) {
           /*  rank is ok */
@@ -1484,9 +1443,6 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           /*  number of independent columns is smaller than number of parameters
            */
         } else if (bsbmfullrank) {
-
-          //Rprintf("\nStep= %d. Rank is not full. Next we will increase the size of the subset by one...\n", mm);
-
           i = bsbx->size[0];
           bsbx->size[0] = (int)n;
           emxEnsureCapacity_real_T(bsbx, i);
@@ -1501,26 +1457,14 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           for (i = 0; i < loop_ub; i++) {
             bsbx->data[i] = b_bsb->data[i];
           }
-
-
-          //Rprintf("\nbsbx and b_bsb: %d %d %d %d %d\n", loop_ub, bsbx->size[0], bsbx->size[1], b_bsb->size[0], b_bsb->size[1]);
-          //Rprintf("\nNext we will increase the size of the subset by one...\n");
-          //Rprintf("\nNot full rank, start iteration (length(nclx)=%d)...\n", ncl->size[0]);
-         
-         
           nwhile = 1;
           while (nwhile == 1) {
-          
-            /*  Increase the size of the subset by one unit iteratively until  you obtain a full rank matrix */
-          
+            /*  Increase the size of the subset by one unit iteratively until
+             * you */
+            /*  obtain a full rank matrix */
             b_i = 0;
             exitg2 = false;
-
-            //Rprintf("\nLooping: nwhile=%d...\n", nwhile);
-
             while ((!exitg2) && (b_i <= ncl->size[0] - 1)) {
-            
-            
               if ((Xb->size[0] != 0) && (Xb->size[1] != 0)) {
                 result = Xb->size[1];
               } else if (b_X->size[1] != 0) {
@@ -1528,24 +1472,17 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
               } else {
                 result = Xb->size[1];
               }
-
               Ra = (result == 0);
               if (Ra || ((Xb->size[0] != 0) && (Xb->size[1] != 0))) {
                 nwhile = Xb->size[0];
               } else {
                 nwhile = 0;
               }
-              
-              
               if (Ra || (b_X->size[1] != 0)) {
                 irank = 1;
               } else {
                 irank = 0;
               }
-              
-              //Rprintf("\nIteration %d of %d/%d. Size of Xb is %d, %d. Size of b_X is %d %d, result= %d.\n", b_i, ncl->size[0], ncl->size[1], Xb->size[0], Xb->size[1], b_X->size[0], b_X->size[1], result);              
-              //Rprintf("\nLooping: nwhile, irank = %d %d %d. Size of Xbb: %d %d\n", nwhile, irank, Ra, Xbb->size[0], Xbb->size[1]);
-
               loop_ub = b_X->size[1];
               i = c_y->size[0] * c_y->size[1];
               c_y->size[0] = 1;
@@ -1555,7 +1492,6 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                 c_y->data[i] =
                     b_X->data[((int)ncl->data[b_i] + b_X->size[0] * i) - 1];
               }
-              
               i = Xbb->size[0] * Xbb->size[1];
               Xbb->size[0] = nwhile + irank;
               Xbb->size[1] = result;
@@ -1565,17 +1501,11 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                   Xbb->data[i1 + Xbb->size[0] * i] = Xb->data[i1 + nwhile * i];
                 }
               }
-              
-              //Rprintf("\nLooping: updated Xbb= %d %d %d %d\n", result, nwhile, Xbb->size[0], Xbb->size[1]);
-              
               for (i = 0; i < result; i++) {
                 for (i1 = 0; i1 < irank; i1++) {
                   Xbb->data[nwhile + Xbb->size[0] * i] = c_y->data[irank * i];
                 }
               }
-              
-              //Rprintf("\nLooping: updated again Xbb= %d %d %d %d\n", result, irank, Xbb->size[0], Xbb->size[1]);
-              
               irank = local_rank(Xbb);
               if (irank == p) {
                 nwhile = 0;
@@ -1586,8 +1516,6 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                 } else {
                   loop_ub = Xbb->size[0] - 1;
                 }
-                
-                
                 i = c_y->size[0] * c_y->size[1];
                 c_y->size[0] = 1;
                 c_y->size[1] = loop_ub + 1;
@@ -1600,15 +1528,11 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                 for (i = 0; i < loop_ub; i++) {
                   bsbx->data[i] = c_y->data[i];
                 }
-                
-                
                 if (1 > Xbb->size[0]) {
                   loop_ub = 0;
                 } else {
                   loop_ub = Xbb->size[0];
                 }
-                
-                
                 irank = b_X->size[1];
                 i = Xb->size[0] * Xb->size[1];
                 Xb->size[0] = loop_ub;
@@ -1620,11 +1544,6 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                         b_X->data[((int)bsbx->data[i1] + b_X->size[0] * i) - 1];
                   }
                 }
-
-
-                //Rprintf("\nXbb size: %d %d \n", Xbb->size[0], Xbb->size[1]);
-
-
                 if (1 > Xbb->size[0]) {
                   loop_ub = 0;
                 } else {
@@ -1637,31 +1556,15 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                   e->data[i] = bsbx->data[i];
                 }
 
-
-                //Rprintf("\nLooping: updated e= %d %d %d\n", loop_ub, e->size[0], e->size[1]);
-
+                // VT::14.07.2021 - added sorting with c_sort() because otherwise e_do_vectors() does not work
                 c_sort(e);
                 
-                //Rprintf("\nExiting the loop: ncl size (Before)= %d %d\n", ncl->size[0], ncl->size[1]);
                 e_do_vectors(seq, e, ncl, ia, &result);
-                
-              
-                //Rprintf("\n****seq: %d %d:\n", seq->size[0], seq->size[1]); disp_dble(seq->data, seq->size[0]);
-                //Rprintf("\n****e: %d %d\n", e->size[0], e->size[1]); disp_dble(e->data, e->size[0]);
-                //Rprintf("\n****ncl %d %d:\n", ncl->size[0], ncl->size[1]); disp_dble(ncl->data, ncl->size[0]);
-
                 nwhile = 1;
-                exitg2 = true;               
+                exitg2 = true;
               }
             }
           }
- 
- 
- 
-        //Rprintf("\nCheck how many observations produce a singular X matrix...\n");
-
- 
- 
           /*  check how many observations produce a singular X matrix */
           if (1 > Xbb->size[0] - 1) {
             loop_ub = 0;
@@ -1672,9 +1575,6 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
             Rprintf("FSDA:FSRmdr,Rank problem in step %.0f\n", b_mm);
             //fflush(stdout);
           }
-          
-          //Rprintf("\nmdr sizes: %d %d %d\n", mdr->size[0], mdr->size[1], loop_ub);
-
           i = mdr->size[0] * mdr->size[1];
           mdr->size[0] = loop_ub;
           mdr->size[1] = 1;
@@ -1687,33 +1587,21 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           Un->size[1] = 1;
           emxEnsureCapacity_real_T(Un, i);
           Un->data[0] = rtNaN;
-
-          //Rprintf("\nUn set to NaN\n");
-
           i = BB->size[0] * BB->size[1];
           BB->size[0] = 1;
           BB->size[1] = 1;
           emxEnsureCapacity_real_T(BB, i);
           BB->data[0] = rtNaN;
-
-          //Rprintf("\nBB set to NaN\n");
-
           i = Bols->size[0] * Bols->size[1];
           Bols->size[0] = 1;
           Bols->size[1] = 1;
           emxEnsureCapacity_real_T(Bols, i);
           Bols->data[0] = rtNaN;
-
-          //Rprintf("\nBols set to NaN\n");
-    
           i = S2->size[0] * S2->size[1];
           S2->size[0] = 1;
           S2->size[1] = 1;
           emxEnsureCapacity_real_T(S2, i);
           S2->data[0] = rtNaN;
-          
-          //Rprintf("\nS2 set to NaN\n");
-          
           exitg1 = 1;
         } else {
           Rprintf("Matrix without full rank at step m= %.0f\n", b_mm);
@@ -2138,9 +2026,6 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
         /*  rank check */
         exitg1 = 1;
       }
-      
-      
-      
     } while (exitg1 == 0);
   }
   emxFree_real_T(&r5);

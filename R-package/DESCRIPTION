@@ -1,13 +1,13 @@
 Package: fsdac
 Title: Calling MATLAB Coder-translated functions ported in C from the FSDA toolbox
-Version: 0.5-16
-Date: 2021-06-18
+Version: 0.5-18
+Date: 2021-07-14
 VersionNote: Released ... on CRAN
 Authors@R: c(person("Valentin", "Todorov", role = c("aut", "cre"), email = "valentin@todorov.at", comment=c(ORCID = "0000-0003-4215-0245"))
-         , person("Emmanuele", "Sordini", role = "aut", email = "Emmanuele.sordini@ec.europa.eu")
-         , person("Aldo", "Corbellini", role = "ctb")
+         , person("Aldo", "Corbellini", role = "aut", email = "aldo.corbellini@unipr.it")
+         , person("Marco",  "Riani", role = "aut", email = "marco.riani@unipr.it")
          , person("Francesca", "Torti", role = "ctb")
-         , person("Marco",  "Riani", role = "ctb")
+         , person("Emmanuele", "Sordini", role = "ctb")
          , person("Domenico", "Perrotta", role = "ctb")
           )
 Description: The 'Flexible Statistical Data Analysis - FSDA' software

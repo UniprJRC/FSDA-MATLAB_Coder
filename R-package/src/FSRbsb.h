@@ -25,7 +25,7 @@ extern "C" {
 /* Function Declarations */
 void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
             emxArray_real_T *bsb, double varargin_4, emxArray_real_T *Un,
-            emxArray_real32_T *BB);
+            emxArray_real_T *BB);
 
 #ifdef __cplusplus
 }

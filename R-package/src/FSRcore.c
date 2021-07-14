@@ -66,8 +66,6 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
   emxArray_int32_T *r6;
   emxArray_int32_T *r8;
   emxArray_int32_T *r9;
-  emxArray_real32_T *BB;
-  emxArray_real32_T *b_BB;
   emxArray_real_T c_options_bonflev_data;
   emxArray_real_T *Un;
   emxArray_real_T *Xy;
@@ -635,15 +633,15 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
         nmdr++;
       }
     }
-    emxInit_int32_T(&r5, 1);
-    i = r5->size[0];
-    r5->size[0] = nmdr;
-    emxEnsureCapacity_int32_T(r5, i);
+    emxInit_int32_T(&r4, 1);
+    i = r4->size[0];
+    r4->size[0] = nmdr;
+    emxEnsureCapacity_int32_T(r4, i);
     vlen = 0;
     for (b_i = 0; b_i <= end; b_i++) {
       if (out->mdr->data[b_i + out->mdr->size[0]] >
           gmin->data[b_i + gmin->size[0] * 2]) {
-        r5->data[vlen] = b_i + 1;
+        r4->data[vlen] = b_i + 1;
         vlen++;
       }
     }
@@ -717,7 +715,7 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
     }
     uv[1] = (unsigned int)r9->size[0];
     uv[3] = (unsigned int)r3->size[0];
-    uv[5] = (unsigned int)r5->size[0];
+    uv[5] = (unsigned int)r4->size[0];
     uv[7] = (unsigned int)r6->size[0];
     uv[9] = (unsigned int)r8->size[0];
     nout_size_idx_0 = 2;
@@ -725,7 +723,7 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
     emxFree_int32_T(&r9);
     emxFree_int32_T(&r8);
     emxFree_int32_T(&r6);
-    emxFree_int32_T(&r5);
+    emxFree_int32_T(&r4);
     emxFree_int32_T(&r3);
     for (i = 0; i < 10; i++) {
       b_nout_data[i] = uv[i];
@@ -1377,6 +1375,7 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
     /*  steps of the fwd search then it is necessary to call procedure FSRbsb */
     /*  to find unit forming subset in step n-decl */
     d = INP_n - INP_init;
+    emxInit_real_T(&b_Xy, 2);
     emxInit_int32_T(&r1, 1);
     if (INP_bb->size[1] < d + 1.0) {
       emxInit_boolean_T(&r2, 2);
@@ -1397,16 +1396,16 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
       for (i = 0; i < loop_ub; i++) {
         r2->data[i] = rtIsNaN(INP_bb->data[i]);
       }
-      emxInit_int32_T(&r4, 2);
+      emxInit_int32_T(&r5, 2);
       emxInit_boolean_T(&b_beta, 2);
-      b_combineVectorElements(r2, r4);
+      b_combineVectorElements(r2, r5);
       i = b_beta->size[0] * b_beta->size[1];
       b_beta->size[0] = 1;
-      b_beta->size[1] = r4->size[1];
+      b_beta->size[1] = r5->size[1];
       emxEnsureCapacity_boolean_T(b_beta, i);
-      loop_ub = r4->size[1];
+      loop_ub = r5->size[1];
       for (i = 0; i < loop_ub; i++) {
-        b_beta->data[i] = (r4->data[i] >= ndecl);
+        b_beta->data[i] = (r5->data[i] >= ndecl);
       }
       d_eml_find(b_beta, (int *)&end, tmp_size);
       emxFree_boolean_T(&b_beta);
@@ -1430,16 +1429,16 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
       for (i = 0; i < loop_ub; i++) {
         r7->data[i] = !r2->data[i];
       }
-      b_combineVectorElements(r7, r4);
+      b_combineVectorElements(r7, r5);
       ii = INP_n - ndecl;
       b_tmp_size[0] = 1;
-      b_tmp_size[1] = r4->size[1];
-      loop_ub = r4->size[1];
+      b_tmp_size[1] = r5->size[1];
+      loop_ub = r5->size[1];
       emxFree_boolean_T(&r7);
       for (i = 0; i < loop_ub; i++) {
-        tmp_data = (r4->data[i] < ii);
+        tmp_data = (r5->data[i] < ii);
       }
-      emxFree_int32_T(&r4);
+      emxFree_int32_T(&r5);
       b_tmp_data.data = &tmp_data;
       b_tmp_data.size = &b_tmp_size[0];
       b_tmp_data.allocatedSize = 1;
@@ -1494,8 +1493,7 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
           add->data[i] = out->ListCl->data[r1->data[i] - 1];
         }
         emxInit_real_T(&Un, 2);
-        emxInit_real32_T(&BB, 2);
-        FSRbsb(INP_y, INP_X, add, INP_n - ndecl, Un, BB);
+        FSRbsb(INP_y, INP_X, add, INP_n - ndecl, Un, b_Xy);
         i = out->Un->size[0] * out->Un->size[1];
         out->Un->size[0] = Un->size[0];
         out->Un->size[1] = 11;
@@ -1505,17 +1503,15 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
           out->Un->data[i] = Un->data[i];
         }
         emxFree_real_T(&Un);
-        emxInit_real32_T(&b_BB, 1);
         /*  The first column of BB contains the units forming subset in */
         /*  step n-ndecl */
-        loop_ub = BB->size[0];
-        i = b_BB->size[0];
-        b_BB->size[0] = BB->size[0];
-        emxEnsureCapacity_real32_T(b_BB, i);
+        loop_ub = b_Xy->size[0];
+        i = add->size[0];
+        add->size[0] = b_Xy->size[0];
+        emxEnsureCapacity_real_T(add, i);
         for (i = 0; i < loop_ub; i++) {
-          b_BB->data[i] = BB->data[i];
+          add->data[i] = b_Xy->data[i];
         }
-        emxFree_real32_T(&BB);
         i = beta->size[0] * beta->size[1];
         beta->size[0] = 1;
         beta->size[1] = out->ListCl->size[1];
@@ -1524,8 +1520,7 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
         for (i = 0; i <= loop_ub; i++) {
           beta->data[i] = out->ListCl->data[i];
         }
-        f_do_vectors(beta, b_BB, out->ListOut, ia, &end);
-        emxFree_real32_T(&b_BB);
+        b_do_vectors(beta, add, out->ListOut, ia, &end);
       } else {
         loop_ub = INP_bb->size[0];
         i = r2->size[0] * r2->size[1];
@@ -1618,7 +1613,7 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
     for (i = 0; i < end; i++) {
       add->data[i] = 0.0;
     }
-    g_do_vectors(out->ListCl, out->ListOut, good, ia, &end);
+    f_do_vectors(out->ListCl, out->ListOut, good, ia, &end);
     if ((INP_X->size[0] != 0) && (INP_X->size[1] != 0)) {
       end = INP_X->size[0];
     } else if (INP_y->size[0] != 0) {
@@ -1638,7 +1633,6 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
     } else {
       sizes_idx_1 = 0;
     }
-    emxInit_real_T(&b_Xy, 2);
     i = b_Xy->size[0] * b_Xy->size[1];
     b_Xy->size[0] = end;
     b_Xy->size[1] = vlen + sizes_idx_1;
@@ -1899,7 +1893,7 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
       for (i = 0; i < loop_ub; i++) {
         Xy->data[i + good->size[1]] = out->ListOut->data[i];
       }
-      g_do_vectors(beta, Xy, out->VIOMout, ia, &end);
+      f_do_vectors(beta, Xy, out->VIOMout, ia, &end);
     } else {
       out->mdag.size[0] = 1;
       out->mdag.size[1] = 1;

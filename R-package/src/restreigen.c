@@ -30,16 +30,16 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
                   double userepmat)
 {
   emxArray_boolean_T d_dltm;
-  emxArray_boolean_T *b_c;
+  emxArray_boolean_T *c_c;
   emxArray_boolean_T *dgtcm;
   emxArray_boolean_T *dltm;
   emxArray_int32_T *r2;
   emxArray_real_T c_dltm;
+  emxArray_real_T *b_c;
   emxArray_real_T *b_dltm;
   emxArray_real_T *b_x;
   emxArray_real_T *c;
   emxArray_real_T *c_x;
-  emxArray_real_T *d1;
   emxArray_real_T *dnis;
   emxArray_real_T *ed;
   emxArray_real_T *ee;
@@ -284,33 +284,44 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
   for (i = 0; i < acoef; i++) {
     x->data[i + eigenvalues->size[0]] = eigenvalues->data[i];
   }
-  emxInit_real_T(&d1, 2);
+  emxInit_real_T(&rr, 2);
   c_sort(x);
   /*  dimsor=length(dsor); */
   dimsor = (double)eigenvalues->size[0] * 2.0;
   /*  d1 is like dsor but contains an additional element which is larger than
    * the largest element of dsor */
-  i = d1->size[0] * d1->size[1];
-  d1->size[0] = 1;
-  d1->size[1] = x->size[0];
-  emxEnsureCapacity_real_T(d1, i);
-  acoef = x->size[0];
-  for (i = 0; i < acoef; i++) {
-    d1->data[i] = x->data[i];
-  }
-  emxInit_real_T(&ed, 2);
-  d1->data[(int)(dimsor + 1.0) - 1] = x->data[(int)dimsor - 1] * 2.0;
+  /* d1=dsor; */
+  /* d1(dimsor+1)=d1(dimsor)*2; */
   /*  d2 is like dsor but contains an additional element which smaller than the
    * smallest element of dsor */
   /*  ed is a set with the middle points of these intervals */
-  acoef = x->size[0] - 1;
+  i = rr->size[0] * rr->size[1];
+  rr->size[0] = 1;
+  rr->size[1] = x->size[0] + 1;
+  emxEnsureCapacity_real_T(rr, i);
+  acoef = x->size[0];
+  for (i = 0; i < acoef; i++) {
+    rr->data[i] = x->data[i];
+  }
+  emxInit_real_T(&c, 2);
+  rr->data[x->size[0]] = x->data[(int)dimsor - 1] * 2.0;
+  i = c->size[0] * c->size[1];
+  c->size[0] = 1;
+  c->size[1] = x->size[0] + 1;
+  emxEnsureCapacity_real_T(c, i);
+  c->data[0] = 0.0;
+  acoef = x->size[0];
+  for (i = 0; i < acoef; i++) {
+    c->data[i + 1] = x->data[i];
+  }
+  emxInit_real_T(&ed, 2);
   i = ed->size[0] * ed->size[1];
   ed->size[0] = 1;
-  ed->size[1] = x->size[0] + 1;
+  ed->size[1] = rr->size[1];
   emxEnsureCapacity_real_T(ed, i);
-  ed->data[0] = d1->data[0] / 2.0;
-  for (i = 0; i <= acoef; i++) {
-    ed->data[i + 1] = (d1->data[i + 1] + x->data[i]) / 2.0;
+  acoef = rr->size[1];
+  for (i = 0; i < acoef; i++) {
+    ed->data[i] = (rr->data[i] + c->data[i]) / 2.0;
   }
   dimsor++;
   /*  the only relevant eigenvalues are those belong to a clusters with sample
@@ -393,8 +404,7 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
     for (i = 0; i < acoef; i++) {
       b_dltm->data[i] = (double)dltm->data[i] + (double)dgtcm->data[i];
     }
-    emxInit_real_T(&rr, 2);
-    emxInit_real_T(&c, 3);
+    emxInit_real_T(&b_c, 3);
     b_i = eigenvalues->size[0];
     c_dltm = *b_dltm;
     b_iv[0] = 1;
@@ -402,8 +412,8 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
     b_iv[2] = (int)dimsor;
     c_dltm.size = &b_iv[0];
     c_dltm.numDimensions = 3;
-    b_permute(&c_dltm, c);
-    e_sum(c, rr);
+    b_permute(&c_dltm, b_c);
+    e_sum(b_c, rr);
     /*  Matrix version of s(:,mp)=sum(d.*(d<edmp),2) for mp=1, ..., dimsor */
     outsize_idx_1 = eigenvalues->size[0];
     i = x->size[0];
@@ -421,8 +431,8 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
     iv1[2] = (int)dimsor;
     c_dltm.size = &iv1[0];
     c_dltm.numDimensions = 3;
-    b_permute(&c_dltm, c);
-    e_sum(c, ed);
+    b_permute(&c_dltm, b_c);
+    e_sum(b_c, dnis);
     /*  Matrix version of t(:,mp)=sum(d.*(d>edmpc),2) for mp=1, ..., dimsor */
     outsize_idx_1 = eigenvalues->size[0];
     i = x->size[0];
@@ -439,8 +449,8 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
     iv2[2] = (int)dimsor;
     c_dltm.size = &iv2[0];
     c_dltm.numDimensions = 3;
-    b_permute(&c_dltm, c);
-    e_sum(c, d1);
+    b_permute(&c_dltm, b_c);
+    e_sum(b_c, ed);
     /*  Vector version of */
     /*  solmp=sum(niini/n.*(s(:,mp)+t(:,mp)/c))/(sum(niini/n.*(r(:,mp)))) */
     /*  Note that solmp corresponds to m* of the equation below (5.4) of */
@@ -450,54 +460,12 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
     /*  implemented in vector obj */
     emxInit_real_T(&solmp, 2);
     if (userepmat == 1.0) {
-      i = ed->size[0] * ed->size[1];
-      ed->size[0] = 1;
-      emxEnsureCapacity_real_T(ed, i);
-      acoef = ed->size[1] - 1;
-      for (i = 0; i <= acoef; i++) {
-        ed->data[i] += d1->data[i] / restr;
-      }
-      outsize_idx_1 = ed->size[1];
-      i = solmp->size[0] * solmp->size[1];
-      solmp->size[0] = 1;
-      solmp->size[1] = ed->size[1];
-      emxEnsureCapacity_real_T(solmp, i);
-      for (varargin_3 = 0; varargin_3 < outsize_idx_1; varargin_3++) {
-        solmp->data[varargin_3] = ed->data[varargin_3];
-      }
-      i = rr->size[0] * rr->size[1];
-      rr->size[0] = 1;
-      emxEnsureCapacity_real_T(rr, i);
-      outsize_idx_1 = rr->size[1];
-      i = d1->size[0] * d1->size[1];
-      d1->size[0] = 1;
-      d1->size[1] = rr->size[1];
-      emxEnsureCapacity_real_T(d1, i);
-      for (varargin_3 = 0; varargin_3 < outsize_idx_1; varargin_3++) {
-        d1->data[varargin_3] = rr->data[varargin_3];
-      }
-      i = solmp->size[0] * solmp->size[1];
-      solmp->size[0] = 1;
-      emxEnsureCapacity_real_T(solmp, i);
-      acoef = solmp->size[1] - 1;
-      for (i = 0; i <= acoef; i++) {
-        solmp->data[i] /= d1->data[i];
-      }
-    } else {
-      i = ed->size[0] * ed->size[1];
-      ed->size[0] = 1;
-      emxEnsureCapacity_real_T(ed, i);
-      acoef = ed->size[1] - 1;
-      for (i = 0; i <= acoef; i++) {
-        ed->data[i] += d1->data[i] / restr;
-      }
       i = dnis->size[0] * dnis->size[1];
       dnis->size[0] = 1;
-      dnis->size[1] = ed->size[1];
       emxEnsureCapacity_real_T(dnis, i);
-      i = ed->size[1] - 1;
-      for (k = 0; k <= i; k++) {
-        dnis->data[k] = ed->data[k];
+      acoef = dnis->size[1] - 1;
+      for (i = 0; i <= acoef; i++) {
+        dnis->data[i] += ed->data[i] / restr;
       }
       outsize_idx_1 = dnis->size[1];
       i = solmp->size[0] * solmp->size[1];
@@ -507,31 +475,72 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
       for (varargin_3 = 0; varargin_3 < outsize_idx_1; varargin_3++) {
         solmp->data[varargin_3] = dnis->data[varargin_3];
       }
-      i = dnis->size[0] * dnis->size[1];
-      dnis->size[0] = 1;
-      dnis->size[1] = rr->size[1];
-      emxEnsureCapacity_real_T(dnis, i);
-      i = rr->size[1] - 1;
-      for (k = 0; k <= i; k++) {
-        dnis->data[k] = rr->data[k];
-      }
-      outsize_idx_1 = dnis->size[1];
-      i = d1->size[0] * d1->size[1];
-      d1->size[0] = 1;
-      d1->size[1] = dnis->size[1];
-      emxEnsureCapacity_real_T(d1, i);
+      i = rr->size[0] * rr->size[1];
+      rr->size[0] = 1;
+      emxEnsureCapacity_real_T(rr, i);
+      outsize_idx_1 = rr->size[1];
+      i = ed->size[0] * ed->size[1];
+      ed->size[0] = 1;
+      ed->size[1] = rr->size[1];
+      emxEnsureCapacity_real_T(ed, i);
       for (varargin_3 = 0; varargin_3 < outsize_idx_1; varargin_3++) {
-        d1->data[varargin_3] = dnis->data[varargin_3];
+        ed->data[varargin_3] = rr->data[varargin_3];
       }
       i = solmp->size[0] * solmp->size[1];
       solmp->size[0] = 1;
       emxEnsureCapacity_real_T(solmp, i);
       acoef = solmp->size[1] - 1;
       for (i = 0; i <= acoef; i++) {
-        solmp->data[i] /= d1->data[i];
+        solmp->data[i] /= ed->data[i];
+      }
+    } else {
+      i = dnis->size[0] * dnis->size[1];
+      dnis->size[0] = 1;
+      emxEnsureCapacity_real_T(dnis, i);
+      acoef = dnis->size[1] - 1;
+      for (i = 0; i <= acoef; i++) {
+        dnis->data[i] += ed->data[i] / restr;
+      }
+      i = c->size[0] * c->size[1];
+      c->size[0] = 1;
+      c->size[1] = dnis->size[1];
+      emxEnsureCapacity_real_T(c, i);
+      i = dnis->size[1] - 1;
+      for (k = 0; k <= i; k++) {
+        c->data[k] = dnis->data[k];
+      }
+      outsize_idx_1 = c->size[1];
+      i = solmp->size[0] * solmp->size[1];
+      solmp->size[0] = 1;
+      solmp->size[1] = c->size[1];
+      emxEnsureCapacity_real_T(solmp, i);
+      for (varargin_3 = 0; varargin_3 < outsize_idx_1; varargin_3++) {
+        solmp->data[varargin_3] = c->data[varargin_3];
+      }
+      i = c->size[0] * c->size[1];
+      c->size[0] = 1;
+      c->size[1] = rr->size[1];
+      emxEnsureCapacity_real_T(c, i);
+      i = rr->size[1] - 1;
+      for (k = 0; k <= i; k++) {
+        c->data[k] = rr->data[k];
+      }
+      outsize_idx_1 = c->size[1];
+      i = ed->size[0] * ed->size[1];
+      ed->size[0] = 1;
+      ed->size[1] = c->size[1];
+      emxEnsureCapacity_real_T(ed, i);
+      for (varargin_3 = 0; varargin_3 < outsize_idx_1; varargin_3++) {
+        ed->data[varargin_3] = c->data[varargin_3];
+      }
+      i = solmp->size[0] * solmp->size[1];
+      solmp->size[0] = 1;
+      emxEnsureCapacity_real_T(solmp, i);
+      acoef = solmp->size[1] - 1;
+      for (i = 0; i <= acoef; i++) {
+        solmp->data[i] /= ed->data[i];
       }
     }
-    emxFree_real_T(&rr);
     /*  Now find vector version of */
     /*  e = solmp*(d<solmp)+d.*(d>=solmp).*(d<=c*solmp)+(c*solmp)*(d>c*solmp);
      */
@@ -542,13 +551,13 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
     /*  stands for "sol (d less than sol)" */
     /*  d.*(d>=solmp) */
     /*  cs is c*solmp */
-    i = d1->size[0] * d1->size[1];
-    d1->size[0] = 1;
-    d1->size[1] = solmp->size[1];
-    emxEnsureCapacity_real_T(d1, i);
+    i = ed->size[0] * ed->size[1];
+    ed->size[0] = 1;
+    ed->size[1] = solmp->size[1];
+    emxEnsureCapacity_real_T(ed, i);
     acoef = solmp->size[1];
     for (i = 0; i < acoef; i++) {
-      d1->data[i] = solmp->data[i] * restr;
+      ed->data[i] = solmp->data[i] * restr;
     }
     /*  csr is a reshaped version of cs */
     /*  less efficient code to obtain csr */
@@ -598,11 +607,11 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
     } else {
       outsize_idx_1 = eigenvalues->size[0];
     }
-    i = c->size[0] * c->size[1] * c->size[2];
-    c->size[0] = 1;
-    c->size[1] = outsize_idx_1;
-    c->size[2] = (int)dimsor;
-    emxEnsureCapacity_real_T(c, i);
+    i = b_c->size[0] * b_c->size[1] * b_c->size[2];
+    b_c->size[0] = 1;
+    b_c->size[1] = outsize_idx_1;
+    b_c->size[2] = (int)dimsor;
+    emxEnsureCapacity_real_T(b_c, i);
     if (outsize_idx_1 != 0) {
       i = (int)dimsor - 1;
       if (0 <= (int)dimsor - 1) {
@@ -610,12 +619,12 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
         bcoef = (eigenvalues->size[0] != 1);
       }
       for (k = 0; k <= i; k++) {
-        i1 = c->size[1] - 1;
-        if (0 <= c->size[1] - 1) {
+        i1 = b_c->size[1] - 1;
+        if (0 <= b_c->size[1] - 1) {
           b_i = eigenvalues->size[0];
         }
         for (b_k = 0; b_k <= i1; b_k++) {
-          c->data[b_k + c->size[1] * k] =
+          b_c->data[b_k + b_c->size[1] * k] =
               (double)dgtcm->data[b_acoef * b_k + b_i * k] *
               eigenvalues->data[bcoef * b_k];
         }
@@ -623,36 +632,36 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
     }
     i = dgtcm->size[0] * dgtcm->size[1];
     dgtcm->size[0] = eigenvalues->size[0];
-    dgtcm->size[1] = d1->size[1];
+    dgtcm->size[1] = ed->size[1];
     emxEnsureCapacity_boolean_T(dgtcm, i);
-    if ((eigenvalues->size[0] != 0) && (d1->size[1] != 0)) {
-      outsize_idx_1 = (d1->size[1] != 1);
-      i = d1->size[1] - 1;
+    if ((eigenvalues->size[0] != 0) && (ed->size[1] != 0)) {
+      outsize_idx_1 = (ed->size[1] != 1);
+      i = ed->size[1] - 1;
       for (k = 0; k <= i; k++) {
         varargin_3 = outsize_idx_1 * k;
         acoef = (eigenvalues->size[0] != 1);
         i1 = dgtcm->size[0] - 1;
         for (b_k = 0; b_k <= i1; b_k++) {
           dgtcm->data[b_k + dgtcm->size[0] * k] =
-              (eigenvalues->data[acoef * b_k] <= d1->data[varargin_3]);
+              (eigenvalues->data[acoef * b_k] <= ed->data[varargin_3]);
         }
       }
     }
-    emxInit_boolean_T(&b_c, 2);
-    i = b_c->size[0] * b_c->size[1];
-    b_c->size[0] = eigenvalues->size[0];
-    b_c->size[1] = d1->size[1];
-    emxEnsureCapacity_boolean_T(b_c, i);
-    if ((eigenvalues->size[0] != 0) && (d1->size[1] != 0)) {
-      outsize_idx_1 = (d1->size[1] != 1);
-      i = d1->size[1] - 1;
+    emxInit_boolean_T(&c_c, 2);
+    i = c_c->size[0] * c_c->size[1];
+    c_c->size[0] = eigenvalues->size[0];
+    c_c->size[1] = ed->size[1];
+    emxEnsureCapacity_boolean_T(c_c, i);
+    if ((eigenvalues->size[0] != 0) && (ed->size[1] != 0)) {
+      outsize_idx_1 = (ed->size[1] != 1);
+      i = ed->size[1] - 1;
       for (k = 0; k <= i; k++) {
         varargin_3 = outsize_idx_1 * k;
         acoef = (eigenvalues->size[0] != 1);
-        i1 = b_c->size[0] - 1;
+        i1 = c_c->size[0] - 1;
         for (b_k = 0; b_k <= i1; b_k++) {
-          b_c->data[b_k + b_c->size[0] * k] =
-              (eigenvalues->data[acoef * b_k] > d1->data[varargin_3]);
+          c_c->data[b_k + c_c->size[0] * k] =
+              (eigenvalues->data[acoef * b_k] > ed->data[varargin_3]);
         }
       }
     }
@@ -667,13 +676,13 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
     outsize_idx_1 = eigenvalues->size[0];
     i = r->size[0] * r->size[1];
     r->size[0] = outsize_idx_1;
-    r->size[1] = d1->size[1];
+    r->size[1] = ed->size[1];
     emxEnsureCapacity_real_T(r, i);
-    acoef = d1->size[1];
+    acoef = ed->size[1];
     emxFree_boolean_T(&dltm);
     for (i = 0; i < acoef; i++) {
       for (i1 = 0; i1 < outsize_idx_1; i1++) {
-        r->data[i1 + r->size[0] * i] = d1->data[i];
+        r->data[i1 + r->size[0] * i] = ed->data[i];
       }
     }
     emxInit_real_T(&ee, 3);
@@ -684,12 +693,12 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
     emxEnsureCapacity_real_T(ee, i);
     outsize_idx_1 = b_i * (int)dimsor;
     for (i = 0; i < outsize_idx_1; i++) {
-      ee->data[i] = (b_dltm->data[i] + c->data[i] * (double)dgtcm->data[i]) +
-                    r->data[i] * (double)b_c->data[i];
+      ee->data[i] = (b_dltm->data[i] + b_c->data[i] * (double)dgtcm->data[i]) +
+                    r->data[i] * (double)c_c->data[i];
     }
     emxFree_real_T(&r);
     emxFree_real_T(&b_dltm);
-    emxFree_boolean_T(&b_c);
+    emxFree_boolean_T(&c_c);
     emxFree_boolean_T(&dgtcm);
     emxInit_real_T(&oo, 3);
     emxInit_real_T(&b_x, 3);
@@ -710,25 +719,25 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
       b_dv[0] = 1.0;
       b_dv[1] = 1.0;
       b_dv[2] = dimsor;
-      d_repmat(nis, b_dv, oo);
-      i = d1->size[0] * d1->size[1];
-      d1->size[0] = 1;
-      d1->size[1] = eigenvalues->size[0];
-      emxEnsureCapacity_real_T(d1, i);
+      e_repmat(nis, b_dv, oo);
+      i = rr->size[0] * rr->size[1];
+      rr->size[0] = 1;
+      rr->size[1] = eigenvalues->size[0];
+      emxEnsureCapacity_real_T(rr, i);
       acoef = eigenvalues->size[0];
       for (i = 0; i < acoef; i++) {
-        d1->data[i] = eigenvalues->data[i];
+        rr->data[i] = eigenvalues->data[i];
       }
       b_dv[0] = 1.0;
       b_dv[1] = 1.0;
       b_dv[2] = dimsor;
-      d_repmat(d1, b_dv, c);
+      e_repmat(rr, b_dv, b_c);
       acoef = oo->size[1] * oo->size[2];
       i = oo->size[0] * oo->size[1] * oo->size[2];
       oo->size[0] = 1;
       emxEnsureCapacity_real_T(oo, i);
       for (i = 0; i < acoef; i++) {
-        oo->data[i] *= b_x->data[i] + c->data[i] / ee->data[i];
+        oo->data[i] *= b_x->data[i] + b_c->data[i] / ee->data[i];
       }
     } else {
       /*  Now find vector version of o */
@@ -747,13 +756,13 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
       for (k = 0; k < outsize_idx_1; k++) {
         b_x->data[k] = log(b_x->data[k]);
       }
-      i = d1->size[0] * d1->size[1];
-      d1->size[0] = 1;
-      d1->size[1] = eigenvalues->size[0];
-      emxEnsureCapacity_real_T(d1, i);
+      i = rr->size[0] * rr->size[1];
+      rr->size[0] = 1;
+      rr->size[1] = eigenvalues->size[0];
+      emxEnsureCapacity_real_T(rr, i);
       acoef = eigenvalues->size[0];
       for (i = 0; i < acoef; i++) {
-        d1->data[i] = eigenvalues->data[i];
+        rr->data[i] = eigenvalues->data[i];
       }
       emxInit_real_T(&c_x, 3);
       i = c_x->size[0] * c_x->size[1] * c_x->size[2];
@@ -765,7 +774,7 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
       for (i = 0; i < acoef; i++) {
         c_x->data[i] = 1.0 / ee->data[i];
       }
-      f_bsxfun(d1, c_x, c);
+      i_bsxfun(rr, c_x, b_c);
       i = c_x->size[0] * c_x->size[1] * c_x->size[2];
       c_x->size[0] = 1;
       c_x->size[1] = b_x->size[1];
@@ -773,9 +782,9 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
       emxEnsureCapacity_real_T(c_x, i);
       acoef = b_x->size[1] * b_x->size[2];
       for (i = 0; i < acoef; i++) {
-        c_x->data[i] = b_x->data[i] + c->data[i];
+        c_x->data[i] = b_x->data[i] + b_c->data[i];
       }
-      f_bsxfun(nis, c_x, oo);
+      i_bsxfun(nis, c_x, oo);
       emxFree_real_T(&c_x);
     }
     emxFree_real_T(&b_x);
@@ -783,9 +792,9 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
     /*  obj is a vector of size dimsor */
     /*   obj=sum(sum(oo,1)); */
     if (oo->size[1] == 0) {
-      c->size[0] = 1;
-      c->size[1] = 0;
-      c->size[2] = oo->size[2];
+      b_c->size[0] = 1;
+      b_c->size[1] = 0;
+      b_c->size[2] = oo->size[2];
     } else {
       outsize_idx_1 = 1;
       k = 3;
@@ -795,18 +804,18 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
       for (b_k = 2; b_k <= k; b_k++) {
         outsize_idx_1 *= oo->size[b_k - 1];
       }
-      i = c->size[0] * c->size[1] * c->size[2];
-      c->size[0] = 1;
-      c->size[1] = oo->size[1];
-      c->size[2] = oo->size[2];
-      emxEnsureCapacity_real_T(c, i);
+      i = b_c->size[0] * b_c->size[1] * b_c->size[2];
+      b_c->size[0] = 1;
+      b_c->size[1] = oo->size[1];
+      b_c->size[2] = oo->size[2];
+      emxEnsureCapacity_real_T(b_c, i);
       for (varargin_3 = 0; varargin_3 < outsize_idx_1; varargin_3++) {
-        c->data[varargin_3] = oo->data[varargin_3];
+        b_c->data[varargin_3] = oo->data[varargin_3];
       }
     }
     emxFree_real_T(&oo);
     emxInit_real_T(&r1, 3);
-    d_sum(c, r1);
+    d_sum(b_c, r1);
     f_minimum(r1, &dimsor, &varargin_3);
     /*  m is the optimum value for the eigenvalues procedure */
     dimsor = solmp->data[varargin_3 - 1];
@@ -820,7 +829,7 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
     /*  out= ((m*(d<m)+d.*(d>=m).*(d<=c*m)+(c*m)*(d>c*m)))'; */
     acoef = eigenvalues->size[0];
     emxFree_real_T(&r1);
-    emxFree_real_T(&c);
+    emxFree_real_T(&b_c);
     for (b_i = 0; b_i < acoef; b_i++) {
       if (eigenvalues->data[b_i] < dimsor) {
         eigenvalues->data[b_i] = dimsor;
@@ -861,10 +870,11 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
     /*  Simply replace the 0 eigenvalues with the mean of the eigenvalues */
     /*  which are greater than zero */
   }
+  emxFree_real_T(&c);
   emxFree_real_T(&x);
+  emxFree_real_T(&rr);
   emxFree_real_T(&dnis);
   emxFree_real_T(&ed);
-  emxFree_real_T(&d1);
   emxFree_real_T(&nis);
 }
 
@@ -875,15 +885,14 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
   emxArray_boolean_T *b_c;
   emxArray_boolean_T *dgtcm;
   emxArray_boolean_T *dltm;
-  emxArray_int32_T *r;
-  emxArray_int32_T *r2;
+  emxArray_int32_T *r1;
+  emxArray_int32_T *r3;
   emxArray_real_T b_ss;
   emxArray_real_T *b_x;
   emxArray_real_T *c;
   emxArray_real_T *c_ss;
   emxArray_real_T *c_x;
   emxArray_real_T *d;
-  emxArray_real_T *d1;
   emxArray_real_T *dnis;
   emxArray_real_T *ed;
   emxArray_real_T *ee;
@@ -891,8 +900,10 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
   emxArray_real_T *nininmat;
   emxArray_real_T *nis;
   emxArray_real_T *oo;
-  emxArray_real_T *r1;
+  emxArray_real_T *r;
+  emxArray_real_T *r2;
   emxArray_real_T *rr;
+  emxArray_real_T *solmp;
   emxArray_real_T *ss;
   emxArray_real_T *tt;
   emxArray_real_T *x;
@@ -1139,34 +1150,46 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
   for (i = 0; i < ibtile; i++) {
     ninin->data[i + eigenvalues->size[1]] = eigenvalues->data[i];
   }
-  emxInit_real_T(&d1, 2);
+  emxInit_real_T(&solmp, 2);
   c_sort(ninin);
   /*  dimsor=length(dsor); */
   dimsor = (double)eigenvalues->size[1] * 2.0;
   /*  d1 is like dsor but contains an additional element which is larger than
    * the largest element of dsor */
-  i = d1->size[0] * d1->size[1];
-  d1->size[0] = 1;
-  d1->size[1] = ninin->size[0];
-  emxEnsureCapacity_real_T(d1, i);
-  ibtile = ninin->size[0];
-  for (i = 0; i < ibtile; i++) {
-    d1->data[i] = ninin->data[i];
-  }
-  emxInit_real_T(&ed, 2);
-  d1->data[(int)(dimsor + 1.0) - 1] = ninin->data[(int)dimsor - 1] * 2.0;
+  /* d1=dsor; */
+  /* d1(dimsor+1)=d1(dimsor)*2; */
   /*  d2 is like dsor but contains an additional element which smaller than the
    * smallest element of dsor */
   /*  ed is a set with the middle points of these intervals */
-  ibtile = ninin->size[0] - 1;
+  i = solmp->size[0] * solmp->size[1];
+  solmp->size[0] = 1;
+  solmp->size[1] = ninin->size[0] + 1;
+  emxEnsureCapacity_real_T(solmp, i);
+  ibtile = ninin->size[0];
+  for (i = 0; i < ibtile; i++) {
+    solmp->data[i] = ninin->data[i];
+  }
+  emxInit_real_T(&r, 2);
+  solmp->data[ninin->size[0]] = ninin->data[(int)dimsor - 1] * 2.0;
+  i = r->size[0] * r->size[1];
+  r->size[0] = 1;
+  r->size[1] = ninin->size[0] + 1;
+  emxEnsureCapacity_real_T(r, i);
+  r->data[0] = 0.0;
+  ibtile = ninin->size[0];
+  for (i = 0; i < ibtile; i++) {
+    r->data[i + 1] = ninin->data[i];
+  }
+  emxInit_real_T(&ed, 2);
   i = ed->size[0] * ed->size[1];
   ed->size[0] = 1;
-  ed->size[1] = ninin->size[0] + 1;
+  ed->size[1] = solmp->size[1];
   emxEnsureCapacity_real_T(ed, i);
-  ed->data[0] = d1->data[0] / 2.0;
-  for (i = 0; i <= ibtile; i++) {
-    ed->data[i + 1] = (d1->data[i + 1] + ninin->data[i]) / 2.0;
+  ibtile = solmp->size[1];
+  for (i = 0; i < ibtile; i++) {
+    ed->data[i] = (solmp->data[i] + r->data[i]) / 2.0;
   }
+  emxFree_real_T(&r);
   dimsor++;
   /*  the only relevant eigenvalues are those belong to a clusters with sample
    */
@@ -1191,7 +1214,7 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
     }
   }
   maxdnis = b_maximum(dnis);
-  emxInit_int32_T(&r, 1);
+  emxInit_int32_T(&r1, 1);
   if (userepmat == 2.0) {
     if ((!(maxdnis <= tol)) && (fabs(maxdnis / c_minimum(dnis)) <= restr)) {
       /*  we check if the  eigenvalues verify the restrictions */
@@ -1209,20 +1232,20 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
             nrows++;
           }
         }
-        i = r->size[0];
-        r->size[0] = nrows;
-        emxEnsureCapacity_int32_T(r, i);
+        i = r1->size[0];
+        r1->size[0] = nrows;
+        emxEnsureCapacity_int32_T(r1, i);
         nrows = 0;
         for (b_i = 0; b_i <= ibtile; b_i++) {
           if (nis->data[b_i] == 0.0) {
-            r->data[nrows] = b_i + 1;
+            r1->data[nrows] = b_i + 1;
             nrows++;
           }
         }
         n = blockedSummation(dnis, dnis->size[0]) / (double)dnis->size[0];
-        ibtile = r->size[0];
+        ibtile = r1->size[0];
         for (i = 0; i < ibtile; i++) {
-          d->data[r->data[i] - 1] = n;
+          d->data[r1->data[i] - 1] = n;
         }
       }
       i = eigenvalues->size[0] * eigenvalues->size[1];
@@ -1258,20 +1281,20 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
             nrows++;
           }
         }
-        i = r->size[0];
-        r->size[0] = nrows;
-        emxEnsureCapacity_int32_T(r, i);
+        i = r1->size[0];
+        r1->size[0] = nrows;
+        emxEnsureCapacity_int32_T(r1, i);
         nrows = 0;
         for (b_i = 0; b_i <= ibtile; b_i++) {
           if (nis->data[b_i] == 0.0) {
-            r->data[nrows] = b_i + 1;
+            r1->data[nrows] = b_i + 1;
             nrows++;
           }
         }
         n = blockedSummation(dnis, dnis->size[0]) / (double)dnis->size[0];
-        ibtile = r->size[0];
+        ibtile = r1->size[0];
         for (i = 0; i < ibtile; i++) {
-          d->data[r->data[i] - 1] = n;
+          d->data[r1->data[i] - 1] = n;
         }
       }
       i = eigenvalues->size[0] * eigenvalues->size[1];
@@ -1424,7 +1447,7 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
           c_ss->data[i] =
               (ss->data[i] + tt->data[i] / restr) * nininmat->data[i];
         }
-        combineVectorElements(c_ss, ed);
+        combineVectorElements(c_ss, solmp);
         i = ss->size[0] * ss->size[1];
         ss->size[0] = rr->size[0];
         ss->size[1] = rr->size[1];
@@ -1433,13 +1456,13 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
         for (i = 0; i < ibtile; i++) {
           ss->data[i] = rr->data[i] * nininmat->data[i];
         }
-        combineVectorElements(ss, d1);
-        i = ed->size[0] * ed->size[1];
-        ed->size[0] = 1;
-        emxEnsureCapacity_real_T(ed, i);
-        ibtile = ed->size[1] - 1;
+        combineVectorElements(ss, ed);
+        i = solmp->size[0] * solmp->size[1];
+        solmp->size[0] = 1;
+        emxEnsureCapacity_real_T(solmp, i);
+        ibtile = solmp->size[1] - 1;
         for (i = 0; i <= ibtile; i++) {
-          ed->data[i] /= d1->data[i];
+          solmp->data[i] /= ed->data[i];
         }
       } else {
         i = c_ss->size[0] * c_ss->size[1];
@@ -1450,16 +1473,16 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
         for (i = 0; i < ibtile; i++) {
           c_ss->data[i] = ss->data[i] + tt->data[i] / restr;
         }
-        g_bsxfun(c_ss, ninin, nininmat);
+        h_bsxfun(c_ss, ninin, nininmat);
+        combineVectorElements(nininmat, solmp);
+        h_bsxfun(rr, ninin, nininmat);
         combineVectorElements(nininmat, ed);
-        g_bsxfun(rr, ninin, nininmat);
-        combineVectorElements(nininmat, d1);
-        i = ed->size[0] * ed->size[1];
-        ed->size[0] = 1;
-        emxEnsureCapacity_real_T(ed, i);
-        ibtile = ed->size[1] - 1;
+        i = solmp->size[0] * solmp->size[1];
+        solmp->size[0] = 1;
+        emxEnsureCapacity_real_T(solmp, i);
+        ibtile = solmp->size[1] - 1;
         for (i = 0; i <= ibtile; i++) {
-          ed->data[i] /= d1->data[i];
+          solmp->data[i] /= ed->data[i];
         }
       }
       emxFree_real_T(&c_ss);
@@ -1475,13 +1498,13 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
       /*  stands for "sol (d less than sol)" */
       /*  d.*(d>=solmp) */
       /*  cs is c*solmp */
-      i = d1->size[0] * d1->size[1];
-      d1->size[0] = 1;
-      d1->size[1] = ed->size[1];
-      emxEnsureCapacity_real_T(d1, i);
-      ibtile = ed->size[1];
+      i = ed->size[0] * ed->size[1];
+      ed->size[0] = 1;
+      ed->size[1] = solmp->size[1];
+      emxEnsureCapacity_real_T(ed, i);
+      ibtile = solmp->size[1];
       for (i = 0; i < ibtile; i++) {
-        d1->data[i] = ed->data[i] * restr;
+        ed->data[i] = solmp->data[i] * restr;
       }
       /*  csr is a reshaped version of cs */
       /*  less efficient code to obtain csr */
@@ -1494,35 +1517,35 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
        */
       i = dltm->size[0] * dltm->size[1];
       dltm->size[0] = d->size[0];
-      dltm->size[1] = ed->size[1];
+      dltm->size[1] = solmp->size[1];
       emxEnsureCapacity_boolean_T(dltm, i);
-      if ((d->size[0] != 0) && (ed->size[1] != 0)) {
-        nrows = (ed->size[1] != 1);
-        i = ed->size[1] - 1;
+      if ((d->size[0] != 0) && (solmp->size[1] != 0)) {
+        nrows = (solmp->size[1] != 1);
+        i = solmp->size[1] - 1;
         for (k = 0; k <= i; k++) {
           ibtile = nrows * k;
           acoef = (d->size[0] != 1);
           i1 = dltm->size[0] - 1;
           for (b_k = 0; b_k <= i1; b_k++) {
             dltm->data[b_k + dltm->size[0] * k] =
-                (d->data[acoef * b_k] < ed->data[ibtile]);
+                (d->data[acoef * b_k] < solmp->data[ibtile]);
           }
         }
       }
       i = dgtcm->size[0] * dgtcm->size[1];
       dgtcm->size[0] = d->size[0];
-      dgtcm->size[1] = ed->size[1];
+      dgtcm->size[1] = solmp->size[1];
       emxEnsureCapacity_boolean_T(dgtcm, i);
-      if ((d->size[0] != 0) && (ed->size[1] != 0)) {
-        nrows = (ed->size[1] != 1);
-        i = ed->size[1] - 1;
+      if ((d->size[0] != 0) && (solmp->size[1] != 0)) {
+        nrows = (solmp->size[1] != 1);
+        i = solmp->size[1] - 1;
         for (k = 0; k <= i; k++) {
           ibtile = nrows * k;
           acoef = (d->size[0] != 1);
           i1 = dgtcm->size[0] - 1;
           for (b_k = 0; b_k <= i1; b_k++) {
             dgtcm->data[b_k + dgtcm->size[0] * k] =
-                (d->data[acoef * b_k] >= ed->data[ibtile]);
+                (d->data[acoef * b_k] >= solmp->data[ibtile]);
           }
         }
       }
@@ -1575,36 +1598,36 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
       }
       i = dgtcm->size[0] * dgtcm->size[1];
       dgtcm->size[0] = d->size[0];
-      dgtcm->size[1] = d1->size[1];
+      dgtcm->size[1] = ed->size[1];
       emxEnsureCapacity_boolean_T(dgtcm, i);
-      if ((d->size[0] != 0) && (d1->size[1] != 0)) {
-        nrows = (d1->size[1] != 1);
-        i = d1->size[1] - 1;
+      if ((d->size[0] != 0) && (ed->size[1] != 0)) {
+        nrows = (ed->size[1] != 1);
+        i = ed->size[1] - 1;
         for (k = 0; k <= i; k++) {
           ibtile = nrows * k;
           acoef = (d->size[0] != 1);
           i1 = dgtcm->size[0] - 1;
           for (b_k = 0; b_k <= i1; b_k++) {
             dgtcm->data[b_k + dgtcm->size[0] * k] =
-                (d->data[acoef * b_k] <= d1->data[ibtile]);
+                (d->data[acoef * b_k] <= ed->data[ibtile]);
           }
         }
       }
       emxInit_boolean_T(&b_c, 2);
       i = b_c->size[0] * b_c->size[1];
       b_c->size[0] = d->size[0];
-      b_c->size[1] = d1->size[1];
+      b_c->size[1] = ed->size[1];
       emxEnsureCapacity_boolean_T(b_c, i);
-      if ((d->size[0] != 0) && (d1->size[1] != 0)) {
-        nrows = (d1->size[1] != 1);
-        i = d1->size[1] - 1;
+      if ((d->size[0] != 0) && (ed->size[1] != 0)) {
+        nrows = (ed->size[1] != 1);
+        i = ed->size[1] - 1;
         for (k = 0; k <= i; k++) {
           ibtile = nrows * k;
           acoef = (d->size[0] != 1);
           i1 = b_c->size[0] - 1;
           for (b_k = 0; b_k <= i1; b_k++) {
             b_c->data[b_k + b_c->size[0] * k] =
-                (d->data[acoef * b_k] > d1->data[ibtile]);
+                (d->data[acoef * b_k] > ed->data[ibtile]);
           }
         }
       }
@@ -1614,18 +1637,18 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
       e_eigenvalues[1] = (int)dimsor;
       b_dltm.size = &e_eigenvalues[0];
       b_dltm.numDimensions = 2;
-      e_bsxfun(&b_dltm, ed, nininmat);
+      e_bsxfun(&b_dltm, solmp, nininmat);
       b_i = eigenvalues->size[1];
       nrows = eigenvalues->size[1];
       i = ss->size[0] * ss->size[1];
       ss->size[0] = nrows;
-      ss->size[1] = d1->size[1];
+      ss->size[1] = ed->size[1];
       emxEnsureCapacity_real_T(ss, i);
-      ibtile = d1->size[1];
+      ibtile = ed->size[1];
       emxFree_boolean_T(&dltm);
       for (i = 0; i < ibtile; i++) {
         for (i1 = 0; i1 < nrows; i1++) {
-          ss->data[i1 + ss->size[0] * i] = d1->data[i];
+          ss->data[i1 + ss->size[0] * i] = ed->data[i];
         }
       }
       emxInit_real_T(&ee, 3);
@@ -1647,7 +1670,7 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
       emxFree_boolean_T(&dgtcm);
       emxInit_real_T(&oo, 3);
       emxInit_real_T(&x, 3);
-      emxInit_real_T(&r1, 3);
+      emxInit_real_T(&r2, 3);
       if (userepmat == 1.0) {
         i = x->size[0] * x->size[1] * x->size[2];
         x->size[0] = ee->size[0];
@@ -1669,17 +1692,17 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
         b_dv[0] = 1.0;
         b_dv[1] = 1.0;
         b_dv[2] = dimsor;
-        e_repmat(nis, b_dv, oo);
+        f_repmat(nis, b_dv, oo);
         b_dv[0] = 1.0;
         b_dv[1] = 1.0;
         b_dv[2] = dimsor;
-        e_repmat(d, b_dv, r1);
+        f_repmat(d, b_dv, r2);
         ibtile = oo->size[0] * oo->size[2];
         i = oo->size[0] * oo->size[1] * oo->size[2];
         oo->size[1] = 1;
         emxEnsureCapacity_real_T(oo, i);
         for (i = 0; i < ibtile; i++) {
-          oo->data[i] *= x->data[i] + r1->data[i] / ee->data[i];
+          oo->data[i] *= x->data[i] + r2->data[i] / ee->data[i];
         }
       } else {
         /*  Now find vector version of o */
@@ -1708,7 +1731,7 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
         for (i = 0; i < ibtile; i++) {
           b_x->data[i] = 1.0 / ee->data[i];
         }
-        h_bsxfun(d, b_x, r1);
+        j_bsxfun(d, b_x, r2);
         ibtile = nis->size[0];
         for (i = 0; i < ibtile; i++) {
           nis->data[i] /= n;
@@ -1720,12 +1743,12 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
         emxEnsureCapacity_real_T(b_x, i);
         ibtile = x->size[0] * x->size[2];
         for (i = 0; i < ibtile; i++) {
-          b_x->data[i] = x->data[i] + r1->data[i];
+          b_x->data[i] = x->data[i] + r2->data[i];
         }
-        h_bsxfun(nis, b_x, oo);
+        j_bsxfun(nis, b_x, oo);
         emxFree_real_T(&b_x);
       }
-      emxFree_real_T(&r1);
+      emxFree_real_T(&r2);
       emxFree_real_T(&x);
       emxFree_real_T(&ee);
       emxInit_real_T(&y, 3);
@@ -1753,7 +1776,7 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
       emxFree_real_T(&c_x);
       f_minimum(y, &n, &acoef);
       /*  m is the optimum value for the eigenvalues procedure */
-      n = ed->data[acoef - 1];
+      n = solmp->data[acoef - 1];
       /*  plot(1:dimsor,obj) */
       /*  Based on the m value we get the restricted eigenvalues */
       /*  The new eigenvalues are equal to */
@@ -1776,23 +1799,23 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
           nrows++;
         }
       }
-      emxInit_int32_T(&r2, 2);
-      i = r2->size[0] * r2->size[1];
-      r2->size[0] = 1;
-      r2->size[1] = nrows;
-      emxEnsureCapacity_int32_T(r2, i);
+      emxInit_int32_T(&r3, 2);
+      i = r3->size[0] * r3->size[1];
+      r3->size[0] = 1;
+      r3->size[1] = nrows;
+      emxEnsureCapacity_int32_T(r3, i);
       nrows = 0;
       for (b_i = 0; b_i <= ibtile; b_i++) {
         if (eigenvalues->data[b_i] > restr * n) {
-          r2->data[nrows] = b_i + 1;
+          r3->data[nrows] = b_i + 1;
           nrows++;
         }
       }
-      ibtile = r2->size[1];
+      ibtile = r3->size[1];
       for (i = 0; i < ibtile; i++) {
-        eigenvalues->data[r2->data[i] - 1] = restr * ed->data[acoef - 1];
+        eigenvalues->data[r3->data[i] - 1] = restr * solmp->data[acoef - 1];
       }
-      emxFree_int32_T(&r2);
+      emxFree_int32_T(&r3);
     }
   } else {
     /*  if all the eigenvalues are 0 this means all points are concentrated */
@@ -1800,11 +1823,11 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
     /*  no further changes on the eigenvalues required, so return them */
     /*  immediately and stop the procedure! */
   }
-  emxFree_int32_T(&r);
+  emxFree_int32_T(&r1);
+  emxFree_real_T(&solmp);
   emxFree_real_T(&ninin);
   emxFree_real_T(&dnis);
   emxFree_real_T(&ed);
-  emxFree_real_T(&d1);
   emxFree_real_T(&nis);
   emxFree_real_T(&d);
 }
@@ -1817,26 +1840,27 @@ void restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
   emxArray_boolean_T *dgtcm;
   emxArray_boolean_T *dltm;
   emxArray_boolean_T *x;
-  emxArray_int32_T *r;
   emxArray_int32_T *r1;
-  emxArray_int32_T *r7;
+  emxArray_int32_T *r2;
+  emxArray_int32_T *r8;
   emxArray_real_T b_d;
   emxArray_real_T *b_dltm;
   emxArray_real_T *b_x;
   emxArray_real_T *c;
   emxArray_real_T *c_c;
   emxArray_real_T *d;
-  emxArray_real_T *d1;
   emxArray_real_T *dnis;
   emxArray_real_T *ed;
   emxArray_real_T *ee;
   emxArray_real_T *nininmat;
   emxArray_real_T *nis;
-  emxArray_real_T *r2;
+  emxArray_real_T *r;
   emxArray_real_T *r3;
   emxArray_real_T *r4;
   emxArray_real_T *r5;
   emxArray_real_T *r6;
+  emxArray_real_T *r7;
+  emxArray_real_T *solmp;
   double b_dv[3];
   double dimsor;
   double kv;
@@ -2101,35 +2125,47 @@ void restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
     dnis->data[i + eigenvalues->size[0] * eigenvalues->size[1]] =
         eigenvalues->data[i];
   }
-  emxInit_real_T(&d1, 2);
+  emxInit_real_T(&solmp, 2);
   c_sort(dnis);
   kv = (double)eigenvalues->size[1] * (double)eigenvalues->size[0];
   /*  dimsor=length(dsor); */
   dimsor = kv * 2.0;
   /*  d1 is like dsor but contains an additional element which is larger than
    * the largest element of dsor */
-  i = d1->size[0] * d1->size[1];
-  d1->size[0] = 1;
-  d1->size[1] = dnis->size[0];
-  emxEnsureCapacity_real_T(d1, i);
-  nrows = dnis->size[0];
-  for (i = 0; i < nrows; i++) {
-    d1->data[i] = dnis->data[i];
-  }
-  emxInit_real_T(&ed, 2);
-  d1->data[(int)(dimsor + 1.0) - 1] = dnis->data[(int)dimsor - 1] * 2.0;
+  /* d1=dsor; */
+  /* d1(dimsor+1)=d1(dimsor)*2; */
   /*  d2 is like dsor but contains an additional element which smaller than the
    * smallest element of dsor */
   /*  ed is a set with the middle points of these intervals */
-  nrows = dnis->size[0] - 1;
+  i = solmp->size[0] * solmp->size[1];
+  solmp->size[0] = 1;
+  solmp->size[1] = dnis->size[0] + 1;
+  emxEnsureCapacity_real_T(solmp, i);
+  nrows = dnis->size[0];
+  for (i = 0; i < nrows; i++) {
+    solmp->data[i] = dnis->data[i];
+  }
+  emxInit_real_T(&r, 2);
+  solmp->data[dnis->size[0]] = dnis->data[(int)dimsor - 1] * 2.0;
+  i = r->size[0] * r->size[1];
+  r->size[0] = 1;
+  r->size[1] = dnis->size[0] + 1;
+  emxEnsureCapacity_real_T(r, i);
+  r->data[0] = 0.0;
+  nrows = dnis->size[0];
+  for (i = 0; i < nrows; i++) {
+    r->data[i + 1] = dnis->data[i];
+  }
+  emxInit_real_T(&ed, 2);
   i = ed->size[0] * ed->size[1];
   ed->size[0] = 1;
-  ed->size[1] = dnis->size[0] + 1;
+  ed->size[1] = solmp->size[1];
   emxEnsureCapacity_real_T(ed, i);
-  ed->data[0] = d1->data[0] / 2.0;
-  for (i = 0; i <= nrows; i++) {
-    ed->data[i + 1] = (d1->data[i + 1] + dnis->data[i]) / 2.0;
+  nrows = solmp->size[1];
+  for (i = 0; i < nrows; i++) {
+    ed->data[i] = (solmp->data[i] + r->data[i]) / 2.0;
   }
+  emxFree_real_T(&r);
   dimsor++;
   /*  the only relevant eigenvalues are those belong to a clusters with sample
    */
@@ -2142,29 +2178,29 @@ void restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
       ntilecols++;
     }
   }
-  emxInit_int32_T(&r, 1);
-  i = r->size[0];
-  r->size[0] = ntilecols;
-  emxEnsureCapacity_int32_T(r, i);
+  emxInit_int32_T(&r1, 1);
+  i = r1->size[0];
+  r1->size[0] = ntilecols;
+  emxEnsureCapacity_int32_T(r1, i);
   ntilecols = 0;
   for (b_i = 0; b_i <= nrows; b_i++) {
     if (nis->data[b_i] > 0.0) {
-      r->data[ntilecols] = b_i + 1;
+      r1->data[ntilecols] = b_i + 1;
       ntilecols++;
     }
   }
   i = dnis->size[0];
-  dnis->size[0] = r->size[0];
+  dnis->size[0] = r1->size[0];
   emxEnsureCapacity_real_T(dnis, i);
-  nrows = r->size[0];
+  nrows = r1->size[0];
   for (i = 0; i < nrows; i++) {
-    dnis->data[i] = d->data[r->data[i] - 1];
+    dnis->data[i] = d->data[r1->data[i] - 1];
   }
   maxdnis = b_maximum(dnis);
   if (!(maxdnis <= 1.0E-8)) {
     /*  we check if the  eigenvalues verify the restrictions */
     /*  abs here is just for computational purposes */
-    emxInit_int32_T(&r1, 1);
+    emxInit_int32_T(&r2, 1);
     if (fabs(maxdnis / c_minimum(dnis)) <= restr) {
       emxInit_boolean_T(&x, 2);
       /*  If all eigenvalues satisy the constraint */
@@ -2172,14 +2208,14 @@ void restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
        * immediately! */
       /*  Simply replace the 0 eigenvalues with the mean of the eigenvalues */
       /*  which are greater than zero */
-      minimum(nis, d1);
+      minimum(nis, ed);
       i = x->size[0] * x->size[1];
       x->size[0] = 1;
-      x->size[1] = d1->size[1];
+      x->size[1] = ed->size[1];
       emxEnsureCapacity_boolean_T(x, i);
-      nrows = d1->size[1];
+      nrows = ed->size[1];
       for (i = 0; i < nrows; i++) {
-        x->data[i] = (d1->data[i] == 0.0);
+        x->data[i] = (ed->data[i] == 0.0);
       }
       y = (x->size[1] != 0);
       if (y) {
@@ -2203,20 +2239,20 @@ void restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
             ntilecols++;
           }
         }
-        i = r1->size[0];
-        r1->size[0] = ntilecols;
-        emxEnsureCapacity_int32_T(r1, i);
+        i = r2->size[0];
+        r2->size[0] = ntilecols;
+        emxEnsureCapacity_int32_T(r2, i);
         ntilecols = 0;
         for (b_i = 0; b_i <= nrows; b_i++) {
           if (nis->data[b_i] == 0.0) {
-            r1->data[ntilecols] = b_i + 1;
+            r2->data[ntilecols] = b_i + 1;
             ntilecols++;
           }
         }
-        n = blockedSummation(dnis, r->size[0]) / (double)r->size[0];
-        nrows = r1->size[0] - 1;
+        n = blockedSummation(dnis, r1->size[0]) / (double)r1->size[0];
+        nrows = r2->size[0] - 1;
         for (i = 0; i <= nrows; i++) {
-          d->data[r1->data[i] - 1] = n;
+          d->data[r2->data[i] - 1] = n;
         }
       }
       i = eigenvalues->size[0] * eigenvalues->size[1];
@@ -2310,10 +2346,10 @@ void restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
           nininmat->data[ibtile + k] = dnis->data[k];
         }
       }
-      emxInit_real_T(&r2, 2);
-      emxInit_real_T(&b_dltm, 2);
       emxInit_real_T(&r3, 2);
-      emxInit_real_T(&r4, 3);
+      emxInit_real_T(&b_dltm, 2);
+      emxInit_real_T(&r4, 2);
+      emxInit_real_T(&r5, 3);
       ntilecols = d->size[0] * d->size[1];
       eigenvalues_idx_0 = eigenvalues->size[1];
       eigenvalues_idx_1 = eigenvalues->size[0];
@@ -2321,15 +2357,15 @@ void restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
       c_d = ntilecols;
       b_d.size = &c_d;
       b_d.numDimensions = 1;
-      d_bsxfun(dltm, &b_d, r3);
-      b_d = *r3;
+      d_bsxfun(dltm, &b_d, r4);
+      b_d = *r4;
       b_eigenvalues[0] = eigenvalues_idx_0;
       b_eigenvalues[1] = eigenvalues_idx_1;
       b_eigenvalues[2] = (int)dimsor;
       b_d.size = &b_eigenvalues[0];
       b_d.numDimensions = 3;
-      permute(&b_d, r4);
-      b_sum(r4, b_dltm);
+      permute(&b_d, r5);
+      b_sum(r5, b_dltm);
       ntilecols = d->size[0] * d->size[1];
       eigenvalues_idx_0 = eigenvalues->size[1];
       eigenvalues_idx_1 = eigenvalues->size[0];
@@ -2337,31 +2373,31 @@ void restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
       d_d = ntilecols;
       b_d.size = &d_d;
       b_d.numDimensions = 1;
-      d_bsxfun(dgtcm, &b_d, r3);
-      b_d = *r3;
+      d_bsxfun(dgtcm, &b_d, r4);
+      b_d = *r4;
       c_eigenvalues[0] = eigenvalues_idx_0;
       c_eigenvalues[1] = eigenvalues_idx_1;
       c_eigenvalues[2] = (int)dimsor;
       b_d.size = &c_eigenvalues[0];
       b_d.numDimensions = 3;
-      permute(&b_d, r4);
-      b_sum(r4, r3);
-      i = r2->size[0] * r2->size[1];
-      r2->size[0] = b_dltm->size[0];
-      r2->size[1] = b_dltm->size[1];
-      emxEnsureCapacity_real_T(r2, i);
+      permute(&b_d, r5);
+      b_sum(r5, r4);
+      i = r3->size[0] * r3->size[1];
+      r3->size[0] = b_dltm->size[0];
+      r3->size[1] = b_dltm->size[1];
+      emxEnsureCapacity_real_T(r3, i);
       nrows = b_dltm->size[0] * b_dltm->size[1];
       for (i = 0; i < nrows; i++) {
-        r2->data[i] =
-            (b_dltm->data[i] + r3->data[i] / restr) * nininmat->data[i];
+        r3->data[i] =
+            (b_dltm->data[i] + r4->data[i] / restr) * nininmat->data[i];
       }
-      combineVectorElements(r2, ed);
+      combineVectorElements(r3, solmp);
       i = b_dltm->size[0] * b_dltm->size[1];
       b_dltm->size[0] = dltm->size[0];
       b_dltm->size[1] = dltm->size[1];
       emxEnsureCapacity_real_T(b_dltm, i);
       nrows = dltm->size[0] * dltm->size[1];
-      emxFree_real_T(&r2);
+      emxFree_real_T(&r3);
       for (i = 0; i < nrows; i++) {
         b_dltm->data[i] = (double)dltm->data[i] + (double)dgtcm->data[i];
       }
@@ -2373,24 +2409,24 @@ void restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
       d_eigenvalues[2] = (int)dimsor;
       b_d.size = &d_eigenvalues[0];
       b_d.numDimensions = 3;
-      permute(&b_d, r4);
-      b_sum(r4, b_dltm);
-      i = r3->size[0] * r3->size[1];
-      r3->size[0] = b_dltm->size[0];
-      r3->size[1] = b_dltm->size[1];
-      emxEnsureCapacity_real_T(r3, i);
+      permute(&b_d, r5);
+      b_sum(r5, b_dltm);
+      i = r4->size[0] * r4->size[1];
+      r4->size[0] = b_dltm->size[0];
+      r4->size[1] = b_dltm->size[1];
+      emxEnsureCapacity_real_T(r4, i);
       nrows = b_dltm->size[0] * b_dltm->size[1];
       for (i = 0; i < nrows; i++) {
-        r3->data[i] = b_dltm->data[i] * nininmat->data[i];
+        r4->data[i] = b_dltm->data[i] * nininmat->data[i];
       }
       emxFree_real_T(&nininmat);
-      combineVectorElements(r3, d1);
-      i = ed->size[0] * ed->size[1];
-      ed->size[0] = 1;
-      emxEnsureCapacity_real_T(ed, i);
-      nrows = ed->size[1] - 1;
+      combineVectorElements(r4, ed);
+      i = solmp->size[0] * solmp->size[1];
+      solmp->size[0] = 1;
+      emxEnsureCapacity_real_T(solmp, i);
+      nrows = solmp->size[1] - 1;
       for (i = 0; i <= nrows; i++) {
-        ed->data[i] /= d1->data[i];
+        solmp->data[i] /= ed->data[i];
       }
       /*  Now find vector version of */
       /*  e = solmp*(d<solmp)+d.*(d>=solmp).*(d<=c*solmp)+(c*solmp)*(d>c*solmp);
@@ -2402,13 +2438,13 @@ void restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
       /*  stands for "sol (d less than sol)" */
       /*  d.*(d>=solmp) */
       /*  cs is c*solmp */
-      i = d1->size[0] * d1->size[1];
-      d1->size[0] = 1;
-      d1->size[1] = ed->size[1];
-      emxEnsureCapacity_real_T(d1, i);
-      nrows = ed->size[1];
+      i = ed->size[0] * ed->size[1];
+      ed->size[0] = 1;
+      ed->size[1] = solmp->size[1];
+      emxEnsureCapacity_real_T(ed, i);
+      nrows = solmp->size[1];
       for (i = 0; i < nrows; i++) {
-        d1->data[i] = ed->data[i] * restr;
+        ed->data[i] = solmp->data[i] * restr;
       }
       /*  csr is a reshaped version of cs */
       /*  less efficient code to obtain csr */
@@ -2421,35 +2457,35 @@ void restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
        */
       i = dltm->size[0] * dltm->size[1];
       dltm->size[0] = d->size[0] * d->size[1];
-      dltm->size[1] = ed->size[1];
+      dltm->size[1] = solmp->size[1];
       emxEnsureCapacity_boolean_T(dltm, i);
-      if ((d->size[0] * d->size[1] != 0) && (ed->size[1] != 0)) {
-        ntilecols = (ed->size[1] != 1);
-        i = ed->size[1] - 1;
+      if ((d->size[0] * d->size[1] != 0) && (solmp->size[1] != 0)) {
+        ntilecols = (solmp->size[1] != 1);
+        i = solmp->size[1] - 1;
         for (k = 0; k <= i; k++) {
           nrows = ntilecols * k;
           ibtile = (d->size[0] * d->size[1] != 1);
           i1 = dltm->size[0] - 1;
           for (b_k = 0; b_k <= i1; b_k++) {
             dltm->data[b_k + dltm->size[0] * k] =
-                (d->data[ibtile * b_k] < ed->data[nrows]);
+                (d->data[ibtile * b_k] < solmp->data[nrows]);
           }
         }
       }
       i = dgtcm->size[0] * dgtcm->size[1];
       dgtcm->size[0] = d->size[0] * d->size[1];
-      dgtcm->size[1] = ed->size[1];
+      dgtcm->size[1] = solmp->size[1];
       emxEnsureCapacity_boolean_T(dgtcm, i);
-      if ((d->size[0] * d->size[1] != 0) && (ed->size[1] != 0)) {
-        ntilecols = (ed->size[1] != 1);
-        i = ed->size[1] - 1;
+      if ((d->size[0] * d->size[1] != 0) && (solmp->size[1] != 0)) {
+        ntilecols = (solmp->size[1] != 1);
+        i = solmp->size[1] - 1;
         for (k = 0; k <= i; k++) {
           nrows = ntilecols * k;
           ibtile = (d->size[0] * d->size[1] != 1);
           i1 = dgtcm->size[0] - 1;
           for (b_k = 0; b_k <= i1; b_k++) {
             dgtcm->data[b_k + dgtcm->size[0] * k] =
-                (d->data[ibtile * b_k] >= ed->data[nrows]);
+                (d->data[ibtile * b_k] >= solmp->data[nrows]);
           }
         }
       }
@@ -2537,36 +2573,36 @@ void restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
       }
       i = dgtcm->size[0] * dgtcm->size[1];
       dgtcm->size[0] = d->size[0] * d->size[1];
-      dgtcm->size[1] = d1->size[1];
+      dgtcm->size[1] = ed->size[1];
       emxEnsureCapacity_boolean_T(dgtcm, i);
-      if ((d->size[0] * d->size[1] != 0) && (d1->size[1] != 0)) {
-        ntilecols = (d1->size[1] != 1);
-        i = d1->size[1] - 1;
+      if ((d->size[0] * d->size[1] != 0) && (ed->size[1] != 0)) {
+        ntilecols = (ed->size[1] != 1);
+        i = ed->size[1] - 1;
         for (k = 0; k <= i; k++) {
           nrows = ntilecols * k;
           ibtile = (d->size[0] * d->size[1] != 1);
           i1 = dgtcm->size[0] - 1;
           for (b_k = 0; b_k <= i1; b_k++) {
             dgtcm->data[b_k + dgtcm->size[0] * k] =
-                (d->data[ibtile * b_k] <= d1->data[nrows]);
+                (d->data[ibtile * b_k] <= ed->data[nrows]);
           }
         }
       }
       emxInit_boolean_T(&b_c, 2);
       i = b_c->size[0] * b_c->size[1];
       b_c->size[0] = d->size[0] * d->size[1];
-      b_c->size[1] = d1->size[1];
+      b_c->size[1] = ed->size[1];
       emxEnsureCapacity_boolean_T(b_c, i);
-      if ((d->size[0] * d->size[1] != 0) && (d1->size[1] != 0)) {
-        ntilecols = (d1->size[1] != 1);
-        i = d1->size[1] - 1;
+      if ((d->size[0] * d->size[1] != 0) && (ed->size[1] != 0)) {
+        ntilecols = (ed->size[1] != 1);
+        i = ed->size[1] - 1;
         for (k = 0; k <= i; k++) {
           nrows = ntilecols * k;
           ibtile = (d->size[0] * d->size[1] != 1);
           i1 = b_c->size[0] - 1;
           for (b_k = 0; b_k <= i1; b_k++) {
             b_c->data[b_k + b_c->size[0] * k] =
-                (d->data[ibtile * b_k] > d1->data[nrows]);
+                (d->data[ibtile * b_k] > ed->data[nrows]);
           }
         }
       }
@@ -2576,18 +2612,18 @@ void restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
       b_kv[1] = (int)dimsor;
       c_dltm.size = &b_kv[0];
       c_dltm.numDimensions = 2;
-      e_bsxfun(&c_dltm, ed, b_dltm);
+      e_bsxfun(&c_dltm, solmp, b_dltm);
       eigenvalues_idx_0 = eigenvalues->size[1];
       eigenvalues_idx_1 = eigenvalues->size[0];
-      i = r3->size[0] * r3->size[1];
-      r3->size[0] = (int)kv;
-      r3->size[1] = d1->size[1];
-      emxEnsureCapacity_real_T(r3, i);
-      nrows = d1->size[1];
+      i = r4->size[0] * r4->size[1];
+      r4->size[0] = (int)kv;
+      r4->size[1] = ed->size[1];
+      emxEnsureCapacity_real_T(r4, i);
+      nrows = ed->size[1];
       emxFree_boolean_T(&dltm);
       for (i = 0; i < nrows; i++) {
         for (i1 = 0; i1 < ntilecols; i1++) {
-          r3->data[i1 + r3->size[0] * i] = d1->data[i];
+          r4->data[i1 + r4->size[0] * i] = ed->data[i];
         }
       }
       emxInit_real_T(&ee, 3);
@@ -2599,9 +2635,9 @@ void restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
       ntilecols = eigenvalues_idx_0 * eigenvalues_idx_1 * (int)dimsor;
       for (i = 0; i < ntilecols; i++) {
         ee->data[i] = (b_dltm->data[i] + c->data[i] * (double)dgtcm->data[i]) +
-                      r3->data[i] * (double)b_c->data[i];
+                      r4->data[i] * (double)b_c->data[i];
       }
-      emxFree_real_T(&r3);
+      emxFree_real_T(&r4);
       emxFree_boolean_T(&b_c);
       emxFree_boolean_T(&dgtcm);
       emxInit_real_T(&b_x, 3);
@@ -2632,11 +2668,11 @@ void restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
       b_dv[0] = 1.0;
       b_dv[1] = 1.0;
       b_dv[2] = dimsor;
-      b_repmat(b_dltm, b_dv, c);
+      c_repmat(b_dltm, b_dv, c);
       b_dv[0] = 1.0;
       b_dv[1] = 1.0;
       b_dv[2] = dimsor;
-      b_repmat(d, b_dv, r4);
+      c_repmat(d, b_dv, r5);
       i = c_c->size[0] * c_c->size[1] * c_c->size[2];
       c_c->size[0] = c->size[0];
       c_c->size[1] = c->size[1];
@@ -2645,19 +2681,19 @@ void restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
       nrows = c->size[0] * c->size[1] * c->size[2];
       emxFree_real_T(&b_dltm);
       for (i = 0; i < nrows; i++) {
-        c_c->data[i] = c->data[i] * (b_x->data[i] + r4->data[i] / ee->data[i]);
+        c_c->data[i] = c->data[i] * (b_x->data[i] + r5->data[i] / ee->data[i]);
       }
-      emxFree_real_T(&r4);
+      emxFree_real_T(&r5);
       emxFree_real_T(&b_x);
       emxFree_real_T(&c);
       emxFree_real_T(&ee);
-      emxInit_real_T(&r5, 3);
       emxInit_real_T(&r6, 3);
-      c_sum(c_c, r5);
-      d_sum(r5, r6);
-      f_minimum(r6, &n, &ibtile);
+      emxInit_real_T(&r7, 3);
+      c_sum(c_c, r6);
+      d_sum(r6, r7);
+      f_minimum(r7, &n, &ibtile);
       /*  m is the optimum value for the eigenvalues procedure */
-      n = ed->data[ibtile - 1];
+      n = solmp->data[ibtile - 1];
       /*  plot(1:dimsor,obj) */
       /*  Based on the m value we get the restricted eigenvalues */
       /*  The new eigenvalues are equal to */
@@ -2668,27 +2704,27 @@ void restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
       /*  out= ((m*(d<m)+d.*(d>=m).*(d<=c*m)+(c*m)*(d>c*m)))'; */
       nrows = eigenvalues->size[0] * eigenvalues->size[1] - 1;
       ntilecols = 0;
+      emxFree_real_T(&r7);
       emxFree_real_T(&r6);
-      emxFree_real_T(&r5);
       emxFree_real_T(&c_c);
       for (b_i = 0; b_i <= nrows; b_i++) {
         if (eigenvalues->data[b_i] < n) {
           ntilecols++;
         }
       }
-      i = r1->size[0];
-      r1->size[0] = ntilecols;
-      emxEnsureCapacity_int32_T(r1, i);
+      i = r2->size[0];
+      r2->size[0] = ntilecols;
+      emxEnsureCapacity_int32_T(r2, i);
       ntilecols = 0;
       for (b_i = 0; b_i <= nrows; b_i++) {
         if (eigenvalues->data[b_i] < n) {
-          r1->data[ntilecols] = b_i + 1;
+          r2->data[ntilecols] = b_i + 1;
           ntilecols++;
         }
       }
-      nrows = r1->size[0];
+      nrows = r2->size[0];
       for (i = 0; i < nrows; i++) {
-        eigenvalues->data[r1->data[i] - 1] = n;
+        eigenvalues->data[r2->data[i] - 1] = n;
       }
       nrows = eigenvalues->size[0] * eigenvalues->size[1] - 1;
       ntilecols = 0;
@@ -2697,34 +2733,34 @@ void restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
           ntilecols++;
         }
       }
-      emxInit_int32_T(&r7, 1);
-      i = r7->size[0];
-      r7->size[0] = ntilecols;
-      emxEnsureCapacity_int32_T(r7, i);
+      emxInit_int32_T(&r8, 1);
+      i = r8->size[0];
+      r8->size[0] = ntilecols;
+      emxEnsureCapacity_int32_T(r8, i);
       ntilecols = 0;
       for (b_i = 0; b_i <= nrows; b_i++) {
         if (eigenvalues->data[b_i] > restr * n) {
-          r7->data[ntilecols] = b_i + 1;
+          r8->data[ntilecols] = b_i + 1;
           ntilecols++;
         }
       }
-      nrows = r7->size[0];
+      nrows = r8->size[0];
       for (i = 0; i < nrows; i++) {
-        eigenvalues->data[r7->data[i] - 1] = restr * ed->data[ibtile - 1];
+        eigenvalues->data[r8->data[i] - 1] = restr * solmp->data[ibtile - 1];
       }
-      emxFree_int32_T(&r7);
+      emxFree_int32_T(&r8);
     }
-    emxFree_int32_T(&r1);
+    emxFree_int32_T(&r2);
   } else {
     /*  if all the eigenvalues are 0 this means all points are concentrated */
     /*  in k groups and there is a perfect fit */
     /*  no further changes on the eigenvalues required, so return them */
     /*  immediately and stop the procedure! */
   }
-  emxFree_int32_T(&r);
+  emxFree_int32_T(&r1);
+  emxFree_real_T(&solmp);
   emxFree_real_T(&dnis);
   emxFree_real_T(&ed);
-  emxFree_real_T(&d1);
   emxFree_real_T(&nis);
   emxFree_real_T(&d);
 }

@@ -1387,7 +1387,7 @@ double RobRegrSize(double n, double p, double bdp)
    * threshold */
   /*  RAW LTS */
   /*  If breakdown point is the one supplied by the user */
-  i_do_vectors(bdp, (double *)&a, c_size, (int *)&nbytes, &ia_size,
+  h_do_vectors(bdp, (double *)&a, c_size, (int *)&nbytes, &ia_size,
                (int *)&ib_data, &ib_size);
   ib_size = x->size[0] * x->size[1];
   x->size[0] = 1;

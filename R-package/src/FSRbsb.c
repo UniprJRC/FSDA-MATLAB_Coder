@@ -29,7 +29,7 @@
 /* Function Definitions */
 void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
             emxArray_real_T *bsb, double varargin_4, emxArray_real_T *Un,
-            emxArray_real32_T *BB)
+            emxArray_real_T *BB)
 {
   emxArray_boolean_T *boobsbsteps;
   emxArray_boolean_T *bsbT;
@@ -651,10 +651,10 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
   i = BB->size[0] * BB->size[1];
   BB->size[0] = X->size[0];
   BB->size[1] = (int)(((double)X->size[0] - init) + 1.0);
-  emxEnsureCapacity_real32_T(BB, i);
+  emxEnsureCapacity_real_T(BB, i);
   loop_ub = X->size[0] * (int)(((double)X->size[0] - init) + 1.0);
   for (i = 0; i < loop_ub; i++) {
-    BB->data[i] = rtNaNF;
+    BB->data[i] = rtNaN;
   }
   emxInit_boolean_T(&boobsbsteps, 1);
   i = boobsbsteps->size[0];
@@ -749,7 +749,7 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
       loop_ub = bsb->size[0];
       for (b_i = 0; b_i < loop_ub; b_i++) {
         BB->data[((int)bsb->data[b_i] + BB->size[0] * ((int)ij - 1)) - 1] =
-            (float)bsb->data[b_i];
+            bsb->data[b_i];
       }
       ij++;
     }

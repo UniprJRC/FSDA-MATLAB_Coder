@@ -17,7 +17,20 @@
 #include <string.h>
 
 /* Function Definitions */
-void b_repmat(const emxArray_real_T *a, const double varargin_1[3],
+void b_repmat(double a, double varargin_1, emxArray_real_T *b)
+{
+  int i;
+  int loop_ub_tmp;
+  loop_ub_tmp = (int)varargin_1;
+  i = b->size[0];
+  b->size[0] = (int)varargin_1;
+  emxEnsureCapacity_real_T(b, i);
+  for (i = 0; i < loop_ub_tmp; i++) {
+    b->data[i] = a;
+  }
+}
+
+void c_repmat(const emxArray_real_T *a, const double varargin_1[3],
               emxArray_real_T *b)
 {
   int tile_size[3];
@@ -60,7 +73,7 @@ void b_repmat(const emxArray_real_T *a, const double varargin_1[3],
   }
 }
 
-void c_repmat(const emxArray_real_T *a, double varargin_3, emxArray_real_T *b)
+void d_repmat(const emxArray_real_T *a, double varargin_3, emxArray_real_T *b)
 {
   int tile_size[3];
   int iacol_tmp;
@@ -102,7 +115,7 @@ void c_repmat(const emxArray_real_T *a, double varargin_3, emxArray_real_T *b)
   }
 }
 
-void d_repmat(const emxArray_real_T *a, const double varargin_1[3],
+void e_repmat(const emxArray_real_T *a, const double varargin_1[3],
               emxArray_real_T *b)
 {
   int tile_size[3];
@@ -136,7 +149,7 @@ void d_repmat(const emxArray_real_T *a, const double varargin_1[3],
   }
 }
 
-void e_repmat(const emxArray_real_T *a, const double varargin_1[3],
+void f_repmat(const emxArray_real_T *a, const double varargin_1[3],
               emxArray_real_T *b)
 {
   int tile_size[3];

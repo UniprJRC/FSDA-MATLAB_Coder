@@ -62,12 +62,12 @@ Type 'q()' to quit R.
 >     out1 <- FSRmdr(y, X, bsb=bsb)
 >     tail(out1$Un)
     Step Unit1 Unit2 Unit3 Unit4 Unit5 Unit6 Unit7 Unit8 Unit9 Unit10
-672  672   205   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
-673  673   195   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
-674  674   206   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
-675  675   207   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
-676  676   200   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
-677  677   212   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+665  672   205   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+666  673   195   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+667  674   206   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+668  675   207   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+669  676   200   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+670  677   212   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
 > 
 > ##  3. Units forming subset in each step.
 > ##      Obtain detailed information about the units forming subset in each
@@ -541,13 +541,13 @@ Type 'q()' to quit R.
 > ##      size increases (matrix Bols).
 >     out1 <- FSRmdr(y, X, bsb=bsb)
 >     head(out1$Bols)
-   Step       V1       V2
-7     7 1.056241 14.28992
-8     8 1.064522 14.28961
-9     9 1.071232 14.28934
-10   10 1.076580 14.28914
-11   11 1.081648 14.28894
-12   12 1.086707 14.28874
+  Step       V1       V2
+1    7 1.056241 14.28992
+2    8 1.064522 14.28961
+3    9 1.071232 14.28934
+4   10 1.076580 14.28914
+5   11 1.081648 14.28894
+6   12 1.086707 14.28874
 > 
 > ##  5. Monitor $s^2$.
 > ##      Monitor the estimate of $\sigma^2$ in each step of the fwd search (matrix S2).
@@ -629,13 +629,13 @@ Type 'q()' to quit R.
 > 
 >     out1 <- FSRmdr(y, X, bsb=bsb, bsbsteps=c(30, 60))
 >     head(out1$mdr)
-   Step      MDR
-28   28 2.165113
-29   29 1.875426
-30   30 1.614791
-31   31 1.541885
-32   32 1.792951
-33   33 1.810484
+  Step      MDR
+1   28 2.165113
+2   29 1.875426
+3   30 1.614791
+4   31 1.541885
+5   32 1.792951
+6   33 1.810484
 > 
 >     if(sum(is.nan(out1$S2)) > 0) {
 +         cat('\nNoFullRank in initial subset, please rerun FSRmdr.\n')
@@ -687,13 +687,13 @@ Type 'q()' to quit R.
 >     out1 <- FSRmdr(yall, Xall, bsb=bsb)
 >     out2 <- FSRmdr(yall, Xall, bsb=bsb, threshlevoutX=10)
 >     print(head(out1$mdr))
-   Step       MDR
-7     7 0.8697592
-8     8 0.8290465
-9     9 1.9128247
-10   10 2.0924264
-11   11 1.9131512
-12   12 1.5657342
+  Step       MDR
+1    7 0.8697592
+2    8 0.8290465
+3    9 1.9128247
+4   10 2.0924264
+5   11 1.9131512
+6   12 1.5657342
 > 
 > ##  We cannot draw yet the envelopes as it is done in MATLAB, see
 > ##  below the commented code; will draw just mdr
@@ -717,4 +717,4 @@ Type 'q()' to quit R.
 > 
 > proc.time()
    user  system elapsed 
-   0.93    0.20    1.17 
+   0.82    0.14    0.90 

@@ -1740,6 +1740,7 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
           }
         }
         lmd->data[j] = rt_powd_snf(det(b_SigmaB), 1.0 / (double)v);
+        /*  lmd(j) = real(complex(det(SigmaB(:,:,j)))^complex(1/v)); */
       }
     } else {
       i = lmd->size[0] * lmd->size[1];
@@ -1869,7 +1870,7 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
     }
     /*  Omega = array of size p-by-p-by-k */
     /*  containing k replicates of matrix V */
-    c_repmat(eyep, niini->size[0], OMG);
+    d_repmat(eyep, niini->size[0], OMG);
     /*  In presence of variable shape */
     /*  compute Wk and wk once and for all. */
     /*  Wk(:,:,j) contains (n_j/n) \Sigma_j */

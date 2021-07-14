@@ -36,7 +36,7 @@
 void FSRbsb_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                     const emxArray_real_T *bsb, const emxArray_real_T *bsbsteps,
                     double init, bool intercept, bool msg, bool nocheck,
-                    emxArray_real_T *Un, emxArray_real32_T *BB)
+                    emxArray_real_T *Un, emxArray_real_T *BB)
 {
   emxArray_boolean_T *boobsbsteps;
   emxArray_boolean_T *bsbT;
@@ -685,10 +685,10 @@ void FSRbsb_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     i = BB->size[0] * BB->size[1];
     BB->size[0] = (int)n;
     BB->size[1] = b_bsbsteps->size[0];
-    emxEnsureCapacity_real32_T(BB, i);
+    emxEnsureCapacity_real_T(BB, i);
     loop_ub = (int)n * b_bsbsteps->size[0];
     for (i = 0; i < loop_ub; i++) {
-      BB->data[i] = rtNaNF;
+      BB->data[i] = rtNaN;
     }
   } else {
     emxInit_boolean_T(&c_bsbsteps, 2);
@@ -739,10 +739,10 @@ void FSRbsb_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
       BB->size[0] = (int)n;
       i1 = (int)((n - b_init) + 1.0);
       BB->size[1] = i1;
-      emxEnsureCapacity_real32_T(BB, i);
+      emxEnsureCapacity_real_T(BB, i);
       loop_ub = (int)n * i1;
       for (i = 0; i < loop_ub; i++) {
-        BB->data[i] = rtNaNF;
+        BB->data[i] = rtNaN;
       }
     } else {
       irank = bsbsteps->size[0] - 1;
@@ -773,11 +773,11 @@ void FSRbsb_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
       i = BB->size[0] * BB->size[1];
       BB->size[0] = (int)n;
       BB->size[1] = r1->size[0];
-      emxEnsureCapacity_real32_T(BB, i);
+      emxEnsureCapacity_real_T(BB, i);
       loop_ub = (int)n * r1->size[0];
       emxFree_int32_T(&r1);
       for (i = 0; i < loop_ub; i++) {
-        BB->data[i] = rtNaNF;
+        BB->data[i] = rtNaN;
       }
     }
     emxFree_boolean_T(&c_bsbsteps);
@@ -908,7 +908,7 @@ void FSRbsb_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
         loop_ub = b_bsb->size[0];
         for (i1 = 0; i1 < loop_ub; i1++) {
           BB->data[((int)b_bsb->data[i1] + BB->size[0] * ((int)ij - 1)) - 1] =
-              (float)b_bsb->data[i1];
+              b_bsb->data[i1];
         }
         ij++;
       }

@@ -25,19 +25,19 @@ bool ab_strcmp(const char a[3])
   return ret == 0;
 }
 
-bool b_strcmp(const char a_data[], const int a_size[2])
+bool b_strcmp(const emxArray_char_T *a)
 {
   static const char b_cv[2] = {'m', 'd'};
   int exitg1;
   int kstr;
   bool b_bool;
   b_bool = false;
-  if ((a_size[0] == 1) && (a_size[1] == 2)) {
+  if ((a->size[0] == 1) && (a->size[1] == 2)) {
     kstr = 0;
     do {
       exitg1 = 0;
       if (kstr < 2) {
-        if (a_data[kstr] != b_cv[kstr]) {
+        if (a->data[kstr] != b_cv[kstr]) {
           exitg1 = 1;
         } else {
           kstr++;
@@ -59,19 +59,19 @@ bool bb_strcmp(const char a[3])
   return ret == 0;
 }
 
-bool c_strcmp(const char a_data[], const int a_size[2])
+bool c_strcmp(const emxArray_char_T *a)
 {
   static const char b_cv[3] = {'b', 'i', 'v'};
   int exitg1;
   int kstr;
   bool b_bool;
   b_bool = false;
-  if ((a_size[0] == 1) && (a_size[1] == 3)) {
+  if ((a->size[0] == 1) && (a->size[1] == 3)) {
     kstr = 0;
     do {
       exitg1 = 0;
       if (kstr < 3) {
-        if (a_data[kstr] != b_cv[kstr]) {
+        if (a->data[kstr] != b_cv[kstr]) {
           exitg1 = 1;
         } else {
           kstr++;
@@ -96,19 +96,19 @@ bool cb_strcmp(const char a[3])
   return ret == 0;
 }
 
-bool d_strcmp(const char a_data[], const int a_size[2])
+bool d_strcmp(const emxArray_char_T *a)
 {
   static const char b_cv[3] = {'u', 'n', 'i'};
   int exitg1;
   int kstr;
   bool b_bool;
   b_bool = false;
-  if ((a_size[0] == 1) && (a_size[1] == 3)) {
+  if ((a->size[0] == 1) && (a->size[1] == 3)) {
     kstr = 0;
     do {
       exitg1 = 0;
       if (kstr < 3) {
-        if (a_data[kstr] != b_cv[kstr]) {
+        if (a->data[kstr] != b_cv[kstr]) {
           exitg1 = 1;
         } else {
           kstr++;
