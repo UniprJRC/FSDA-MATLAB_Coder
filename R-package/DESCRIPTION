@@ -1,5 +1,5 @@
 Package: fsdac
-Title: Calling MATLAB Coder-translated functions ported in C from the FSDA toolbox
+Title: Robust Data Analysis with the Forward Search
 Version: 0.5-18
 Date: 2021-07-14
 VersionNote: Released ... on CRAN
@@ -35,17 +35,15 @@ Suggests: robustbase
 LazyLoad: yes
 LazyData: yes
 License: GPL (>= 2)
-Packaged: 2020-01-14 12:53:15 UTC; todorovv
 Author: Valentin Todorov [aut, cre] (<https://orcid.org/0000-0003-4215-0245>),
-  Emmanuele Sordini [aut],
-  Aldo Corbellini [ctb],
+  Aldo Corbellini [aut],
+  Marco Riani [aut],
   Francesca Torti [ctb],
-  Marco Riani [ctb],
+  Emmanuele Sordini [ctb],
   Domenico Perrotta [ctb],
-Maintainer: Valentin Todorov <valentin.todorov@chello.at>
+Maintainer: Valentin Todorov <valentin@todorov.at>
 NeedsCompilation: yes
 Repository: CRAN
 RoxygenNote: 7.1.1
-Date/Publication: 2020-06-12 16:40:02 UTC
 
 
