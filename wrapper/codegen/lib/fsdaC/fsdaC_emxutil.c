@@ -40,7 +40,7 @@ void c_emxInitStruct_anonymous_funct(b_anonymous_function *pStruct)
 
 void c_emxInitStruct_matlab_internal(e_matlab_internal_coder_tabular *pStruct)
 {
-  emxInitMatrix_cell_wrap_48(&pStruct->labels[0]);
+  emxInitMatrix_cell_wrap_50(&pStruct->labels[0]);
 }
 
 void c_emxInitStruct_struct_LTStsmod(struct_LTStsmodel_T *pStruct)
@@ -68,8 +68,8 @@ void d_emxInitStruct_anonymous_funct(anonymous_function *pStruct)
 
 void d_emxInitStruct_matlab_internal(f_matlab_internal_coder_tabular *pStruct)
 {
-  emxInitMatrix_cell_wrap_50(pStruct->descrs);
-  emxInitMatrix_cell_wrap_50(pStruct->units);
+  emxInitMatrix_cell_wrap_52(pStruct->descrs);
+  emxInitMatrix_cell_wrap_52(pStruct->units);
 }
 
 void emxCopyStruct_struct_T(h_struct_T *dst, const h_struct_T *src)
@@ -181,7 +181,7 @@ void emxEnsureCapacity_boolean_T(emxArray_boolean_T *emxArray, int oldNumel)
   }
 }
 
-void emxEnsureCapacity_cell_wrap_36(emxArray_cell_wrap_36 *emxArray,
+void emxEnsureCapacity_cell_wrap_38(emxArray_cell_wrap_38 *emxArray,
                                     int oldNumel)
 {
   int i;
@@ -206,21 +206,21 @@ void emxEnsureCapacity_cell_wrap_36(emxArray_cell_wrap_36 *emxArray,
         i *= 2;
       }
     }
-    newData = calloc((unsigned int)i, sizeof(cell_wrap_36));
+    newData = calloc((unsigned int)i, sizeof(cell_wrap_38));
     if (emxArray->data != NULL) {
-      memcpy(newData, emxArray->data, sizeof(cell_wrap_36) * oldNumel);
+      memcpy(newData, emxArray->data, sizeof(cell_wrap_38) * oldNumel);
       if (emxArray->canFreeData) {
         free(emxArray->data);
       }
     }
-    emxArray->data = (cell_wrap_36 *)newData;
+    emxArray->data = (cell_wrap_38 *)newData;
     emxArray->allocatedSize = i;
     emxArray->canFreeData = true;
   }
   if (oldNumel > newNumel) {
-    emxTrim_cell_wrap_36(emxArray, newNumel, oldNumel);
+    emxTrim_cell_wrap_38(emxArray, newNumel, oldNumel);
   } else if (oldNumel < newNumel) {
-    emxExpand_cell_wrap_36(emxArray, oldNumel, newNumel);
+    emxExpand_cell_wrap_38(emxArray, oldNumel, newNumel);
   }
 }
 
@@ -446,12 +446,12 @@ void emxEnsureCapacity_uint32_T(emxArray_uint32_T *emxArray, int oldNumel)
   }
 }
 
-void emxExpand_cell_wrap_36(emxArray_cell_wrap_36 *emxArray, int fromIndex,
+void emxExpand_cell_wrap_38(emxArray_cell_wrap_38 *emxArray, int fromIndex,
                             int toIndex)
 {
   int i;
   for (i = fromIndex; i < toIndex; i++) {
-    emxInitStruct_cell_wrap_36(&emxArray->data[i]);
+    emxInitStruct_cell_wrap_38(&emxArray->data[i]);
   }
 }
 
@@ -473,7 +473,7 @@ void emxFreeStruct_captured_var1(d_captured_var *pStruct)
   emxFree_boolean_T(&pStruct->contents);
 }
 
-void emxFreeStruct_cell_wrap_36(cell_wrap_36 *pStruct)
+void emxFreeStruct_cell_wrap_38(cell_wrap_38 *pStruct)
 {
   emxFree_real_T(&pStruct->f1);
 }
@@ -513,7 +513,7 @@ void emxFreeStruct_struct_FSRfan_T(struct_FSRfan_T *pStruct)
   emxFree_real_T(&pStruct->Score);
   emxFree_real_T(&pStruct->la);
   emxFree_real_T(&pStruct->bs);
-  emxFree_cell_wrap_36(&pStruct->Un);
+  emxFree_cell_wrap_38(&pStruct->Un);
   emxFree_real_T(&pStruct->y);
   emxFree_real_T(&pStruct->X);
   emxFree_real_T(&pStruct->Scorep);
@@ -624,18 +624,18 @@ void emxFree_boolean_T(emxArray_boolean_T **pEmxArray)
   }
 }
 
-void emxFree_cell_wrap_36(emxArray_cell_wrap_36 **pEmxArray)
+void emxFree_cell_wrap_38(emxArray_cell_wrap_38 **pEmxArray)
 {
   int i;
   int numEl;
-  if (*pEmxArray != (emxArray_cell_wrap_36 *)NULL) {
-    if ((*pEmxArray)->data != (cell_wrap_36 *)NULL) {
+  if (*pEmxArray != (emxArray_cell_wrap_38 *)NULL) {
+    if ((*pEmxArray)->data != (cell_wrap_38 *)NULL) {
       numEl = 1;
       for (i = 0; i < (*pEmxArray)->numDimensions; i++) {
         numEl *= (*pEmxArray)->size[i];
       }
       for (i = 0; i < numEl; i++) {
-        emxFreeStruct_cell_wrap_36(&(*pEmxArray)->data[i]);
+        emxFreeStruct_cell_wrap_38(&(*pEmxArray)->data[i]);
       }
       if ((*pEmxArray)->canFreeData) {
         free((*pEmxArray)->data);
@@ -643,7 +643,7 @@ void emxFree_cell_wrap_36(emxArray_cell_wrap_36 **pEmxArray)
     }
     free((*pEmxArray)->size);
     free(*pEmxArray);
-    *pEmxArray = (emxArray_cell_wrap_36 *)NULL;
+    *pEmxArray = (emxArray_cell_wrap_38 *)NULL;
   }
 }
 
@@ -721,19 +721,19 @@ void emxFree_uint32_T(emxArray_uint32_T **pEmxArray)
   }
 }
 
-void emxInitMatrix_cell_wrap_48(cell_wrap_48 *pMatrix)
+void emxInitMatrix_cell_wrap_50(cell_wrap_50 *pMatrix)
 {
   int i;
   for (i = 0; i < 1; i++) {
-    emxInitStruct_cell_wrap_48(pMatrix);
+    emxInitStruct_cell_wrap_50(pMatrix);
   }
 }
 
-void emxInitMatrix_cell_wrap_50(cell_wrap_50 pMatrix[4])
+void emxInitMatrix_cell_wrap_52(cell_wrap_52 pMatrix[4])
 {
   int i;
   for (i = 0; i < 4; i++) {
-    emxInitStruct_cell_wrap_50(&pMatrix[i]);
+    emxInitStruct_cell_wrap_52(&pMatrix[i]);
   }
 }
 
@@ -760,18 +760,18 @@ void emxInitStruct_captured_var2(d_captured_var *pStruct)
   emxInit_boolean_T(&pStruct->contents, 1);
 }
 
-void emxInitStruct_cell_wrap_36(cell_wrap_36 *pStruct)
+void emxInitStruct_cell_wrap_38(cell_wrap_38 *pStruct)
 {
   emxInit_real_T(&pStruct->f1, 2);
 }
 
-void emxInitStruct_cell_wrap_48(cell_wrap_48 *pStruct)
+void emxInitStruct_cell_wrap_50(cell_wrap_50 *pStruct)
 {
   pStruct->f1.size[0] = 0;
   pStruct->f1.size[1] = 0;
 }
 
-void emxInitStruct_cell_wrap_50(cell_wrap_50 *pStruct)
+void emxInitStruct_cell_wrap_52(cell_wrap_52 *pStruct)
 {
   pStruct->f1.size[0] = 0;
   pStruct->f1.size[1] = 0;
@@ -822,7 +822,7 @@ void emxInitStruct_struct_FSRfan_T(struct_FSRfan_T *pStruct)
   emxInit_real_T(&pStruct->Score, 2);
   emxInit_real_T(&pStruct->la, 2);
   emxInit_real_T(&pStruct->bs, 2);
-  emxInit_cell_wrap_36(&pStruct->Un, 1);
+  emxInit_cell_wrap_38(&pStruct->Un, 1);
   emxInit_real_T(&pStruct->y, 1);
   emxInit_real_T(&pStruct->X, 2);
   emxInit_real_T(&pStruct->Scorep, 2);
@@ -956,13 +956,13 @@ void emxInit_boolean_T(emxArray_boolean_T **pEmxArray, int numDimensions)
   }
 }
 
-void emxInit_cell_wrap_36(emxArray_cell_wrap_36 **pEmxArray, int numDimensions)
+void emxInit_cell_wrap_38(emxArray_cell_wrap_38 **pEmxArray, int numDimensions)
 {
-  emxArray_cell_wrap_36 *emxArray;
+  emxArray_cell_wrap_38 *emxArray;
   int i;
-  *pEmxArray = (emxArray_cell_wrap_36 *)malloc(sizeof(emxArray_cell_wrap_36));
+  *pEmxArray = (emxArray_cell_wrap_38 *)malloc(sizeof(emxArray_cell_wrap_38));
   emxArray = *pEmxArray;
-  emxArray->data = (cell_wrap_36 *)NULL;
+  emxArray->data = (cell_wrap_38 *)NULL;
   emxArray->numDimensions = numDimensions;
   emxArray->size = (int *)malloc(sizeof(int) * numDimensions);
   emxArray->allocatedSize = 0;
@@ -1068,12 +1068,12 @@ void emxInit_uint32_T(emxArray_uint32_T **pEmxArray, int numDimensions)
   }
 }
 
-void emxTrim_cell_wrap_36(emxArray_cell_wrap_36 *emxArray, int fromIndex,
+void emxTrim_cell_wrap_38(emxArray_cell_wrap_38 *emxArray, int fromIndex,
                           int toIndex)
 {
   int i;
   for (i = fromIndex; i < toIndex; i++) {
-    emxFreeStruct_cell_wrap_36(&emxArray->data[i]);
+    emxFreeStruct_cell_wrap_38(&emxArray->data[i]);
   }
 }
 

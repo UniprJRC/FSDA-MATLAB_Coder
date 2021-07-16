@@ -181,23 +181,23 @@ typedef struct {
 } struct_FSR_T;
 #endif /* typedef_struct_FSR_T */
 
-#ifndef typedef_cell_wrap_36
-#define typedef_cell_wrap_36
+#ifndef typedef_cell_wrap_38
+#define typedef_cell_wrap_38
 typedef struct {
   emxArray_real_T *f1;
-} cell_wrap_36;
-#endif /* typedef_cell_wrap_36 */
+} cell_wrap_38;
+#endif /* typedef_cell_wrap_38 */
 
-#ifndef typedef_emxArray_cell_wrap_36
-#define typedef_emxArray_cell_wrap_36
+#ifndef typedef_emxArray_cell_wrap_38
+#define typedef_emxArray_cell_wrap_38
 typedef struct {
-  cell_wrap_36 *data;
+  cell_wrap_38 *data;
   int32_T *size;
   int32_T allocatedSize;
   int32_T numDimensions;
   boolean_T canFreeData;
-} emxArray_cell_wrap_36;
-#endif /* typedef_emxArray_cell_wrap_36 */
+} emxArray_cell_wrap_38;
+#endif /* typedef_emxArray_cell_wrap_38 */
 
 #ifndef typedef_struct_FSRfan_T
 #define typedef_struct_FSRfan_T
@@ -205,7 +205,7 @@ typedef struct {
   emxArray_real_T *Score;
   emxArray_real_T *la;
   emxArray_real_T *bs;
-  emxArray_cell_wrap_36 *Un;
+  emxArray_cell_wrap_38 *Un;
   emxArray_real_T *y;
   emxArray_real_T *X;
   emxArray_real_T *Scorep;
@@ -253,17 +253,17 @@ struct emxArray_char_T_1x10 {
 typedef struct emxArray_char_T_1x10 emxArray_char_T_1x10;
 #endif /* typedef_emxArray_char_T_1x10 */
 
-#ifndef typedef_cell_wrap_48
-#define typedef_cell_wrap_48
+#ifndef typedef_cell_wrap_50
+#define typedef_cell_wrap_50
 typedef struct {
   emxArray_char_T_1x10 f1;
-} cell_wrap_48;
-#endif /* typedef_cell_wrap_48 */
+} cell_wrap_50;
+#endif /* typedef_cell_wrap_50 */
 
 #ifndef typedef_e_matlab_internal_coder_tabular
 #define typedef_e_matlab_internal_coder_tabular
 typedef struct {
-  cell_wrap_48 labels[1];
+  cell_wrap_50 labels[1];
   real_T length;
 } e_matlab_internal_coder_tabular;
 #endif /* typedef_e_matlab_internal_coder_tabular */
@@ -348,12 +348,12 @@ struct emxArray_char_T_1x0 {
 typedef struct emxArray_char_T_1x0 emxArray_char_T_1x0;
 #endif /* typedef_emxArray_char_T_1x0 */
 
-#ifndef typedef_cell_wrap_50
-#define typedef_cell_wrap_50
+#ifndef typedef_cell_wrap_52
+#define typedef_cell_wrap_52
 typedef struct {
   emxArray_char_T_1x0 f1;
-} cell_wrap_50;
-#endif /* typedef_cell_wrap_50 */
+} cell_wrap_52;
+#endif /* typedef_cell_wrap_52 */
 
 #ifndef typedef_struct0_T
 #define typedef_struct0_T
@@ -366,8 +366,8 @@ typedef struct {
 #define typedef_f_matlab_internal_coder_tabular
 typedef struct {
   real_T length;
-  cell_wrap_50 descrs[4];
-  cell_wrap_50 units[4];
+  cell_wrap_52 descrs[4];
+  cell_wrap_52 units[4];
   d_matlab_internal_coder_tabular continuity[4];
   boolean_T hasDescrs;
   boolean_T hasUnits;

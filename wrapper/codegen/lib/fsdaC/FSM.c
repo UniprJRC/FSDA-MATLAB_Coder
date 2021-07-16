@@ -82,8 +82,7 @@ void FSM(emxArray_real_T *Y, const double varargin_4_data[],
   double incre;
   double init_contents;
   double tr;
-  unsigned int b_nout_data[10];
-  unsigned int uv[10];
+  unsigned int nout[10];
   int b_varargin_4_size[2];
   int nout_size[2];
   int b_i;
@@ -103,15 +102,13 @@ void FSM(emxArray_real_T *Y, const double varargin_4_data[],
   int irank;
   int loop_ub;
   int n;
-  int nout_size_idx_0;
-  int nout_size_idx_1;
+  int partialTrueCount;
   int sto;
-  int trueCount;
   unsigned int u;
   int v;
   signed char tmp_data[5];
   bool b_x[31];
-  bool c_nout_data[5];
+  bool b_nout_data[5];
   bool NoFalseSig;
   bool b_varargin_4_data;
   bool exitg2;
@@ -504,8 +501,8 @@ void FSM(emxArray_real_T *Y, const double varargin_4_data[],
     Ytilde->size[1] = loop_ub;
     emxEnsureCapacity_real_T(Ytilde, i);
     for (i = 0; i < loop_ub; i++) {
-      b_loop_ub = bs->size[0];
-      for (i1 = 0; i1 < b_loop_ub; i1++) {
+      irank = bs->size[0];
+      for (i1 = 0; i1 < irank; i1++) {
         Ytilde->data[i1 + Ytilde->size[0] * i] =
             Y->data[((int)bs->data[i1] + Y->size[0] * i) - 1];
       }
@@ -515,27 +512,27 @@ void FSM(emxArray_real_T *Y, const double varargin_4_data[],
     if (irank < v) {
       guard1 = true;
     } else {
-      b_loop_ub = Y->size[1];
+      irank = Y->size[1];
       i = Ytilde->size[0] * Ytilde->size[1];
       Ytilde->size[0] = bs->size[0];
       Ytilde->size[1] = Y->size[1];
       emxEnsureCapacity_real_T(Ytilde, i);
-      for (i = 0; i < b_loop_ub; i++) {
-        irank = bs->size[0];
-        for (i1 = 0; i1 < irank; i1++) {
+      for (i = 0; i < irank; i++) {
+        b_loop_ub = bs->size[0];
+        for (i1 = 0; i1 < b_loop_ub; i1++) {
           Ytilde->data[i1 + Ytilde->size[0] * i] =
               Y->data[((int)bs->data[i1] + Y->size[0] * i) - 1];
         }
       }
       maximum(Ytilde, loc);
-      b_loop_ub = Y->size[1];
+      irank = Y->size[1];
       i = Ytilde->size[0] * Ytilde->size[1];
       Ytilde->size[0] = bs->size[0];
       Ytilde->size[1] = Y->size[1];
       emxEnsureCapacity_real_T(Ytilde, i);
-      for (i = 0; i < b_loop_ub; i++) {
-        irank = bs->size[0];
-        for (i1 = 0; i1 < irank; i1++) {
+      for (i = 0; i < irank; i++) {
+        b_loop_ub = bs->size[0];
+        for (i1 = 0; i1 < b_loop_ub; i1++) {
           Ytilde->data[i1 + Ytilde->size[0] * i] =
               Y->data[((int)bs->data[i1] + Y->size[0] * i) - 1];
         }
@@ -545,8 +542,8 @@ void FSM(emxArray_real_T *Y, const double varargin_4_data[],
       b_loc->size[0] = 1;
       b_loc->size[1] = loc->size[1];
       emxEnsureCapacity_real_T(b_loc, i);
-      b_loop_ub = loc->size[1];
-      for (i = 0; i < b_loop_ub; i++) {
+      irank = loc->size[1];
+      for (i = 0; i < irank; i++) {
         b_loc->data[i] = loc->data[i] - goodobs->data[i];
       }
       if (b_minimum(b_loc) == 0.0) {
@@ -556,11 +553,11 @@ void FSM(emxArray_real_T *Y, const double varargin_4_data[],
       }
     }
     if (guard1) {
-      b_loop_ub = (int)(varargin_12 + incre);
+      irank = (int)(varargin_12 + incre);
       i = bs->size[0];
-      bs->size[0] = b_loop_ub;
+      bs->size[0] = irank;
       emxEnsureCapacity_real_T(bs, i);
-      for (i = 0; i < b_loop_ub; i++) {
+      for (i = 0; i < irank; i++) {
         bs->data[i] = fre->data[i];
       }
       incre++;
@@ -674,7 +671,7 @@ void FSM(emxArray_real_T *Y, const double varargin_4_data[],
         emxFree_real_T(&y);
       }
       /*  declarations necessary for MATLAB C coder */
-      trueCount = 0;
+      partialTrueCount = 0;
       c99 = -1;
       c999 = -1;
       c9999 = -1;
@@ -693,9 +690,9 @@ void FSM(emxArray_real_T *Y, const double varargin_4_data[],
       gmin1->size[1] = 1;
       emxEnsureCapacity_real_T(gmin1, i);
       gmin1->data[0] = 0.0;
-      nout_size_idx_0 = 1;
-      nout_size_idx_1 = 1;
-      b_nout_data[0] = 0U;
+      for (i = 0; i < 10; i++) {
+        nout[i] = 0U;
+      }
     } else {
       /*  declaration necessary for C coder */
       i = gbonf->size[0] * gbonf->size[1];
@@ -732,103 +729,103 @@ void FSM(emxArray_real_T *Y, const double varargin_4_data[],
       c001 = 5;
       /*  Store in nout the number of times the observed mmd (d_min) lies above:
        */
-      b_loop_ub = out_mmd->size[0] - 1;
-      trueCount = 0;
-      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+      irank = out_mmd->size[0] - 1;
+      b_loop_ub = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] >
             gmin->data[b_i + gmin->size[0]]) {
-          trueCount++;
+          b_loop_ub++;
         }
       }
       i = ia->size[0];
-      ia->size[0] = trueCount;
+      ia->size[0] = b_loop_ub;
       emxEnsureCapacity_int32_T(ia, i);
-      irank = 0;
-      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+      partialTrueCount = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] >
             gmin->data[b_i + gmin->size[0]]) {
-          ia->data[irank] = b_i + 1;
-          irank++;
+          ia->data[partialTrueCount] = b_i + 1;
+          partialTrueCount++;
         }
       }
-      b_loop_ub = out_mmd->size[0] - 1;
-      trueCount = 0;
-      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+      irank = out_mmd->size[0] - 1;
+      b_loop_ub = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] >
             gmin->data[b_i + gmin->size[0] * 2]) {
-          trueCount++;
+          b_loop_ub++;
         }
       }
       emxInit_int32_T(&r1, 1);
       i = r1->size[0];
-      r1->size[0] = trueCount;
+      r1->size[0] = b_loop_ub;
       emxEnsureCapacity_int32_T(r1, i);
-      irank = 0;
-      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+      partialTrueCount = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] >
             gmin->data[b_i + gmin->size[0] * 2]) {
-          r1->data[irank] = b_i + 1;
-          irank++;
+          r1->data[partialTrueCount] = b_i + 1;
+          partialTrueCount++;
         }
       }
-      b_loop_ub = out_mmd->size[0] - 1;
-      trueCount = 0;
-      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+      irank = out_mmd->size[0] - 1;
+      b_loop_ub = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] >
             gmin->data[b_i + gmin->size[0] * 3]) {
-          trueCount++;
+          b_loop_ub++;
         }
       }
       emxInit_int32_T(&r2, 1);
       i = r2->size[0];
-      r2->size[0] = trueCount;
+      r2->size[0] = b_loop_ub;
       emxEnsureCapacity_int32_T(r2, i);
-      irank = 0;
-      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+      partialTrueCount = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] >
             gmin->data[b_i + gmin->size[0] * 3]) {
-          r2->data[irank] = b_i + 1;
-          irank++;
+          r2->data[partialTrueCount] = b_i + 1;
+          partialTrueCount++;
         }
       }
-      b_loop_ub = out_mmd->size[0] - 1;
-      trueCount = 0;
-      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+      irank = out_mmd->size[0] - 1;
+      b_loop_ub = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] >
             gmin->data[b_i + gmin->size[0] * 4]) {
-          trueCount++;
+          b_loop_ub++;
         }
       }
       emxInit_int32_T(&r3, 1);
       i = r3->size[0];
-      r3->size[0] = trueCount;
+      r3->size[0] = b_loop_ub;
       emxEnsureCapacity_int32_T(r3, i);
-      irank = 0;
-      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+      partialTrueCount = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] >
             gmin->data[b_i + gmin->size[0] * 4]) {
-          r3->data[irank] = b_i + 1;
-          irank++;
+          r3->data[partialTrueCount] = b_i + 1;
+          partialTrueCount++;
         }
       }
-      b_loop_ub = out_mmd->size[0] - 1;
-      trueCount = 0;
-      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+      irank = out_mmd->size[0] - 1;
+      b_loop_ub = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] <
             gmin->data[b_i + gmin->size[0] * 5]) {
-          trueCount++;
+          b_loop_ub++;
         }
       }
       emxInit_int32_T(&r4, 1);
       i = r4->size[0];
-      r4->size[0] = trueCount;
+      r4->size[0] = b_loop_ub;
       emxEnsureCapacity_int32_T(r4, i);
-      irank = 0;
-      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+      partialTrueCount = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] <
             gmin->data[b_i + gmin->size[0] * 5]) {
-          r4->data[irank] = b_i + 1;
-          irank++;
+          r4->data[partialTrueCount] = b_i + 1;
+          partialTrueCount++;
         }
       }
       /*        % the 99% envelope */
@@ -836,51 +833,45 @@ void FSM(emxArray_real_T *Y, const double varargin_4_data[],
       /*      % the 99.99% envelope */
       /*     % the 99.999% envelope */
       /*  the 1% envelope */
-      for (i = 0; i < 5; i++) {
-        uv[i << 1] = (unsigned int)iv[i];
-      }
-      uv[1] = (unsigned int)r4->size[0];
-      uv[3] = (unsigned int)ia->size[0];
-      uv[5] = (unsigned int)r1->size[0];
-      uv[7] = (unsigned int)r2->size[0];
-      uv[9] = (unsigned int)r3->size[0];
-      nout_size_idx_0 = 2;
-      nout_size_idx_1 = 5;
-      emxFree_int32_T(&r4);
-      emxFree_int32_T(&r3);
-      emxFree_int32_T(&r2);
-      emxFree_int32_T(&r1);
-      for (i = 0; i < 10; i++) {
-        b_nout_data[i] = uv[i];
-      }
+      nout[1] = (unsigned int)r4->size[0];
+      nout[3] = (unsigned int)ia->size[0];
+      nout[5] = (unsigned int)r1->size[0];
+      nout[7] = (unsigned int)r2->size[0];
+      nout[9] = (unsigned int)r3->size[0];
       /*  NoFalseSig = boolean linked to the fact that the signal is good or not
        */
       /*  NoFalseSig is set to 1 if the condition for an INCONTROVERTIBLE SIGNAL
        * is */
       /*  fulfilled. */
-      trueCount = 0;
-      irank = 0;
+      b_loop_ub = 0;
+      emxFree_int32_T(&r4);
+      emxFree_int32_T(&r3);
+      emxFree_int32_T(&r2);
+      emxFree_int32_T(&r1);
+      partialTrueCount = 0;
       for (b_i = 0; b_i < 5; b_i++) {
-        NoFalseSig = ((int)b_nout_data[2 * b_i] == 9999);
+        i = iv[b_i];
+        nout[b_i << 1] = (unsigned int)i;
+        NoFalseSig = (i == 9999);
         if (NoFalseSig) {
-          trueCount++;
-          tmp_data[irank] = (signed char)(b_i + 1);
-          irank++;
+          b_loop_ub++;
+          tmp_data[partialTrueCount] = (signed char)(b_i + 1);
+          partialTrueCount++;
         }
       }
       nout_size[0] = 1;
-      nout_size[1] = trueCount;
-      for (i = 0; i < trueCount; i++) {
-        c_nout_data[i] = ((int)b_nout_data[2 * (tmp_data[i] - 1) + 1] >= 10);
+      nout_size[1] = b_loop_ub;
+      for (i = 0; i < b_loop_ub; i++) {
+        b_nout_data[i] = ((int)nout[((tmp_data[i] - 1) << 1) + 1] >= 10);
       }
-      nout_data.data = &c_nout_data[0];
+      nout_data.data = &b_nout_data[0];
       nout_data.size = &nout_size[0];
       nout_data.allocatedSize = 5;
       nout_data.numDimensions = 2;
       nout_data.canFreeData = false;
       NoFalseSig = c_ifWhileCond(&nout_data);
       /*  Divide central part from final part of the search */
-      trueCount =
+      partialTrueCount =
           Y->size[0] - (int)floor(13.0 * sqrt((double)Y->size[0] / 200.0));
     }
     /*  Stage 1a: signal detection */
@@ -897,7 +888,7 @@ void FSM(emxArray_real_T *Y, const double varargin_4_data[],
       b_i = c_i + 1;
       if ((varargin_4_size[0] == 0) || (varargin_4_size[1] == 0)) {
         if ((double)(c_i - 2) + 3.0 <
-            ((double)trueCount - init_contents) + 1.0) {
+            ((double)partialTrueCount - init_contents) + 1.0) {
           /*  CENTRAL PART OF THE SEARCH */
           /*  Extreme triplet or an extreme single value */
           /*  Three consecutive values of d_min above the 99.99% threshold or 1
@@ -1281,22 +1272,22 @@ void FSM(emxArray_real_T *Y, const double varargin_4_data[],
             for (i = 0; i < loop_ub; i++) {
               x->data[i] = (gfind->data[i + gfind->size[0]] > 0.0);
             }
-            b_loop_ub = x->size[0] - 1;
-            trueCount = 0;
-            for (c_i = 0; c_i <= b_loop_ub; c_i++) {
+            irank = x->size[0] - 1;
+            b_loop_ub = 0;
+            for (c_i = 0; c_i <= irank; c_i++) {
               if (x->data[c_i]) {
-                trueCount++;
+                b_loop_ub++;
               }
             }
             emxInit_int32_T(&r7, 1);
             i = r7->size[0];
-            r7->size[0] = trueCount;
+            r7->size[0] = b_loop_ub;
             emxEnsureCapacity_int32_T(r7, i);
-            irank = 0;
-            for (c_i = 0; c_i <= b_loop_ub; c_i++) {
+            partialTrueCount = 0;
+            for (c_i = 0; c_i <= irank; c_i++) {
               if (x->data[c_i]) {
-                r7->data[irank] = c_i + 1;
-                irank++;
+                r7->data[partialTrueCount] = c_i + 1;
+                partialTrueCount++;
               }
             }
             d = gfind->data[r7->data[0] - 1] - out_mmd->data[0];
@@ -1357,21 +1348,21 @@ void FSM(emxArray_real_T *Y, const double varargin_4_data[],
         for (i = 0; i < loop_ub; i++) {
           x->data[i] = rtIsNaN(bs->data[i]);
         }
-        b_loop_ub = x->size[0] - 1;
-        trueCount = 0;
-        for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+        irank = x->size[0] - 1;
+        b_loop_ub = 0;
+        for (b_i = 0; b_i <= irank; b_i++) {
           if (x->data[b_i]) {
-            trueCount++;
+            b_loop_ub++;
           }
         }
         i = outliers->size[0];
-        outliers->size[0] = trueCount;
+        outliers->size[0] = b_loop_ub;
         emxEnsureCapacity_real_T(outliers, i);
-        irank = 0;
-        for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+        partialTrueCount = 0;
+        for (b_i = 0; b_i <= irank; b_i++) {
           if (x->data[b_i]) {
-            outliers->data[irank] = seq->data[b_i];
-            irank++;
+            outliers->data[partialTrueCount] = seq->data[b_i];
+            partialTrueCount++;
           }
         }
       } else {
@@ -1387,21 +1378,21 @@ void FSM(emxArray_real_T *Y, const double varargin_4_data[],
         for (i = 0; i < loop_ub; i++) {
           r->data[i] = rtIsNaN(out_cov->data[i]);
         }
-        b_loop_ub = r->size[0] * r->size[1] - 1;
-        trueCount = 0;
-        for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+        irank = r->size[0] * r->size[1] - 1;
+        b_loop_ub = 0;
+        for (b_i = 0; b_i <= irank; b_i++) {
           if (r->data[b_i]) {
-            trueCount++;
+            b_loop_ub++;
           }
         }
         i = outliers->size[0];
-        outliers->size[0] = trueCount;
+        outliers->size[0] = b_loop_ub;
         emxEnsureCapacity_real_T(outliers, i);
-        irank = 0;
-        for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+        partialTrueCount = 0;
+        for (b_i = 0; b_i <= irank; b_i++) {
           if (r->data[b_i]) {
-            outliers->data[irank] = seq->data[b_i];
-            irank++;
+            outliers->data[partialTrueCount] = seq->data[b_i];
+            partialTrueCount++;
           }
         }
       }
@@ -1441,8 +1432,8 @@ void FSM(emxArray_real_T *Y, const double varargin_4_data[],
     Ytilde->size[1] = Y->size[1];
     emxEnsureCapacity_real_T(Ytilde, i);
     for (i = 0; i < loop_ub; i++) {
-      b_loop_ub = bs->size[0];
-      for (i1 = 0; i1 < b_loop_ub; i1++) {
+      irank = bs->size[0];
+      for (i1 = 0; i1 < irank; i1++) {
         Ytilde->data[i1 + Ytilde->size[0] * i] =
             Y->data[((int)bs->data[i1] + Y->size[0] * i) - 1];
       }
@@ -1461,8 +1452,8 @@ void FSM(emxArray_real_T *Y, const double varargin_4_data[],
     Ytilde->size[1] = Y->size[1];
     emxEnsureCapacity_real_T(Ytilde, i);
     for (i = 0; i < loop_ub; i++) {
-      b_loop_ub = bs->size[0];
-      for (i1 = 0; i1 < b_loop_ub; i1++) {
+      irank = bs->size[0];
+      for (i1 = 0; i1 < irank; i1++) {
         Ytilde->data[i1 + Ytilde->size[0] * i] =
             Y->data[((int)bs->data[i1] + Y->size[0] * i) - 1];
       }
@@ -1583,16 +1574,14 @@ void FSM(emxArray_real_T *Y, const double varargin_4_data[],
       out_md->data[i] = bs->data[i];
     }
     if ((varargin_4_size[0] == 0) || (varargin_4_size[1] == 0)) {
-      out_nout_size[0] = nout_size_idx_0;
-      out_nout_size[1] = nout_size_idx_1;
-      loop_ub = nout_size_idx_0 * nout_size_idx_1;
-      for (i = 0; i < loop_ub; i++) {
-        out_nout_data[i] = b_nout_data[i];
+      out_nout_size[0] = 2;
+      out_nout_size[1] = 5;
+      for (i = 0; i < 10; i++) {
+        out_nout_data[i] = nout[i];
       }
     } else {
-      out_nout_size[0] = 1;
-      out_nout_size[1] = 1;
-      out_nout_data[0] = rtNaN;
+      out_nout_size[0] = 0;
+      out_nout_size[1] = 0;
     }
     out_class_size[0] = 1;
     out_class_size[1] = 3;

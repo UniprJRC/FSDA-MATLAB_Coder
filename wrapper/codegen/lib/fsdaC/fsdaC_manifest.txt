@@ -82,6 +82,7 @@ D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\eml_erfcore.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\tinv.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\FSRmdr.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\sprintf.c
+D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\linsolve.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\repelem.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\any.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\FSRcore.c
@@ -263,6 +264,7 @@ D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\eml_erfcore.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\tinv.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\FSRmdr.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\sprintf.h
+D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\linsolve.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\repelem.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\any.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\FSRcore.h

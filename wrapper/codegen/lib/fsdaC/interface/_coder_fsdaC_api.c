@@ -99,7 +99,7 @@ static void emxEnsureCapacity_real_T(emxArray_real_T *emxArray,
 
 static void emxFreeMatrix_cell_wrap_6(cell_wrap_6 pMatrix[4]);
 
-static void emxFreeStruct_cell_wrap_36(cell_wrap_36 *pStruct);
+static void emxFreeStruct_cell_wrap_38(cell_wrap_38 *pStruct);
 
 static void emxFreeStruct_cell_wrap_6(cell_wrap_6 *pStruct);
 
@@ -119,22 +119,22 @@ static void emxFreeStruct_table(table *pStruct);
 
 static void emxFree_boolean_T(emxArray_boolean_T **pEmxArray);
 
-static void emxFree_cell_wrap_36(emxArray_cell_wrap_36 **pEmxArray);
+static void emxFree_cell_wrap_38(emxArray_cell_wrap_38 **pEmxArray);
 
 static void emxFree_char_T(emxArray_char_T **pEmxArray);
 
 static void emxFree_real_T(emxArray_real_T **pEmxArray);
 
-static void emxInitMatrix_cell_wrap_48(cell_wrap_48 *pMatrix);
+static void emxInitMatrix_cell_wrap_50(cell_wrap_50 *pMatrix);
 
-static void emxInitMatrix_cell_wrap_50(cell_wrap_50 pMatrix[4]);
+static void emxInitMatrix_cell_wrap_52(cell_wrap_52 pMatrix[4]);
 
 static void emxInitMatrix_cell_wrap_6(const emlrtStack *sp,
                                       cell_wrap_6 pMatrix[4], boolean_T doPush);
 
-static void emxInitStruct_cell_wrap_48(cell_wrap_48 *pStruct);
-
 static void emxInitStruct_cell_wrap_50(cell_wrap_50 *pStruct);
+
+static void emxInitStruct_cell_wrap_52(cell_wrap_52 *pStruct);
 
 static void emxInitStruct_cell_wrap_6(const emlrtStack *sp,
                                       cell_wrap_6 *pStruct, boolean_T doPush);
@@ -169,8 +169,8 @@ static void emxInit_boolean_T(const emlrtStack *sp,
                               emxArray_boolean_T **pEmxArray,
                               int32_T numDimensions, boolean_T doPush);
 
-static void emxInit_cell_wrap_36(const emlrtStack *sp,
-                                 emxArray_cell_wrap_36 **pEmxArray,
+static void emxInit_cell_wrap_38(const emlrtStack *sp,
+                                 emxArray_cell_wrap_38 **pEmxArray,
                                  int32_T numDimensions, boolean_T doPush);
 
 static void emxInit_char_T(const emlrtStack *sp, emxArray_char_T **pEmxArray,
@@ -239,7 +239,7 @@ static boolean_T l_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
                                     const emlrtMsgIdentifier *parentId);
 
 static const mxArray *l_emlrt_marshallOut(const emlrtStack *sp,
-                                          const cell_wrap_50 u[4]);
+                                          const cell_wrap_52 u[4]);
 
 static void lb_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
                                 const emlrtMsgIdentifier *msgId,
@@ -508,7 +508,7 @@ static void c_emxFreeStruct_struct_LTStsmod(struct_LTStsmodel_T *pStruct)
 static void
 c_emxInitStruct_matlab_internal(e_matlab_internal_coder_tabular *pStruct)
 {
-  emxInitMatrix_cell_wrap_48(&pStruct->labels[0]);
+  emxInitMatrix_cell_wrap_50(&pStruct->labels[0]);
 }
 
 static void c_emxInitStruct_struct_LTStsmod(const emlrtStack *sp,
@@ -564,8 +564,8 @@ static const mxArray *d_emlrt_marshallOut(const emxArray_real_T *u)
 static void
 d_emxInitStruct_matlab_internal(f_matlab_internal_coder_tabular *pStruct)
 {
-  emxInitMatrix_cell_wrap_50(pStruct->descrs);
-  emxInitMatrix_cell_wrap_50(pStruct->units);
+  emxInitMatrix_cell_wrap_52(pStruct->descrs);
+  emxInitMatrix_cell_wrap_52(pStruct->units);
 }
 
 static void db_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
@@ -823,7 +823,7 @@ static void emxFreeMatrix_cell_wrap_6(cell_wrap_6 pMatrix[4])
   }
 }
 
-static void emxFreeStruct_cell_wrap_36(cell_wrap_36 *pStruct)
+static void emxFreeStruct_cell_wrap_38(cell_wrap_38 *pStruct)
 {
   emxFree_real_T(&pStruct->f1);
 }
@@ -863,7 +863,7 @@ static void emxFreeStruct_struct_FSRfan_T(struct_FSRfan_T *pStruct)
   emxFree_real_T(&pStruct->Score);
   emxFree_real_T(&pStruct->la);
   emxFree_real_T(&pStruct->bs);
-  emxFree_cell_wrap_36(&pStruct->Un);
+  emxFree_cell_wrap_38(&pStruct->Un);
   emxFree_real_T(&pStruct->y);
   emxFree_real_T(&pStruct->X);
   emxFree_real_T(&pStruct->Scorep);
@@ -931,18 +931,18 @@ static void emxFree_boolean_T(emxArray_boolean_T **pEmxArray)
   }
 }
 
-static void emxFree_cell_wrap_36(emxArray_cell_wrap_36 **pEmxArray)
+static void emxFree_cell_wrap_38(emxArray_cell_wrap_38 **pEmxArray)
 {
   int32_T i;
   int32_T numEl;
-  if (*pEmxArray != (emxArray_cell_wrap_36 *)NULL) {
-    if ((*pEmxArray)->data != (cell_wrap_36 *)NULL) {
+  if (*pEmxArray != (emxArray_cell_wrap_38 *)NULL) {
+    if ((*pEmxArray)->data != (cell_wrap_38 *)NULL) {
       numEl = 1;
       for (i = 0; i < (*pEmxArray)->numDimensions; i++) {
         numEl *= (*pEmxArray)->size[i];
       }
       for (i = 0; i < numEl; i++) {
-        emxFreeStruct_cell_wrap_36(&(*pEmxArray)->data[i]);
+        emxFreeStruct_cell_wrap_38(&(*pEmxArray)->data[i]);
       }
       if ((*pEmxArray)->canFreeData) {
         emlrtFreeMex((*pEmxArray)->data);
@@ -950,7 +950,7 @@ static void emxFree_cell_wrap_36(emxArray_cell_wrap_36 **pEmxArray)
     }
     emlrtFreeMex((*pEmxArray)->size);
     emlrtFreeMex(*pEmxArray);
-    *pEmxArray = (emxArray_cell_wrap_36 *)NULL;
+    *pEmxArray = (emxArray_cell_wrap_38 *)NULL;
   }
 }
 
@@ -978,19 +978,19 @@ static void emxFree_real_T(emxArray_real_T **pEmxArray)
   }
 }
 
-static void emxInitMatrix_cell_wrap_48(cell_wrap_48 *pMatrix)
+static void emxInitMatrix_cell_wrap_50(cell_wrap_50 *pMatrix)
 {
   int32_T i;
   for (i = 0; i < 1; i++) {
-    emxInitStruct_cell_wrap_48(pMatrix);
+    emxInitStruct_cell_wrap_50(pMatrix);
   }
 }
 
-static void emxInitMatrix_cell_wrap_50(cell_wrap_50 pMatrix[4])
+static void emxInitMatrix_cell_wrap_52(cell_wrap_52 pMatrix[4])
 {
   int32_T i;
   for (i = 0; i < 4; i++) {
-    emxInitStruct_cell_wrap_50(&pMatrix[i]);
+    emxInitStruct_cell_wrap_52(&pMatrix[i]);
   }
 }
 
@@ -1003,13 +1003,13 @@ static void emxInitMatrix_cell_wrap_6(const emlrtStack *sp,
   }
 }
 
-static void emxInitStruct_cell_wrap_48(cell_wrap_48 *pStruct)
+static void emxInitStruct_cell_wrap_50(cell_wrap_50 *pStruct)
 {
   pStruct->f1.size[0] = 0;
   pStruct->f1.size[1] = 0;
 }
 
-static void emxInitStruct_cell_wrap_50(cell_wrap_50 *pStruct)
+static void emxInitStruct_cell_wrap_52(cell_wrap_52 *pStruct)
 {
   pStruct->f1.size[0] = 0;
   pStruct->f1.size[1] = 0;
@@ -1065,7 +1065,7 @@ static void emxInitStruct_struct_FSRfan_T(const emlrtStack *sp,
   emxInit_real_T(sp, &pStruct->Score, 2, doPush);
   emxInit_real_T(sp, &pStruct->la, 2, doPush);
   emxInit_real_T(sp, &pStruct->bs, 2, doPush);
-  emxInit_cell_wrap_36(sp, &pStruct->Un, 1, doPush);
+  emxInit_cell_wrap_38(sp, &pStruct->Un, 1, doPush);
   emxInit_real_T(sp, &pStruct->y, 1, doPush);
   emxInit_real_T(sp, &pStruct->X, 2, doPush);
   emxInit_real_T(sp, &pStruct->Scorep, 2, doPush);
@@ -1164,21 +1164,21 @@ static void emxInit_boolean_T(const emlrtStack *sp,
   }
 }
 
-static void emxInit_cell_wrap_36(const emlrtStack *sp,
-                                 emxArray_cell_wrap_36 **pEmxArray,
+static void emxInit_cell_wrap_38(const emlrtStack *sp,
+                                 emxArray_cell_wrap_38 **pEmxArray,
                                  int32_T numDimensions, boolean_T doPush)
 {
-  emxArray_cell_wrap_36 *emxArray;
+  emxArray_cell_wrap_38 *emxArray;
   int32_T i;
   *pEmxArray =
-      (emxArray_cell_wrap_36 *)emlrtMallocMex(sizeof(emxArray_cell_wrap_36));
+      (emxArray_cell_wrap_38 *)emlrtMallocMex(sizeof(emxArray_cell_wrap_38));
   if (doPush) {
     emlrtPushHeapReferenceStackR2021a((emlrtCTX)sp, false, (void *)pEmxArray,
-                                      (void *)&emxFree_cell_wrap_36, NULL, NULL,
+                                      (void *)&emxFree_cell_wrap_38, NULL, NULL,
                                       NULL);
   }
   emxArray = *pEmxArray;
-  emxArray->data = (cell_wrap_36 *)NULL;
+  emxArray->data = (cell_wrap_38 *)NULL;
   emxArray->numDimensions = numDimensions;
   emxArray->size = (int32_T *)emlrtMallocMex(sizeof(int32_T) * numDimensions);
   emxArray->allocatedSize = 0;
@@ -2029,7 +2029,7 @@ static boolean_T l_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
 }
 
 static const mxArray *l_emlrt_marshallOut(const emlrtStack *sp,
-                                          const cell_wrap_50 u[4])
+                                          const cell_wrap_52 u[4])
 {
   const mxArray *b_y;
   const mxArray *m;

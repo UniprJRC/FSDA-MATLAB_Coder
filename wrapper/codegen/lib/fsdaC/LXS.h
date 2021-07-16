@@ -37,6 +37,11 @@ void b_IRWLSreg(const emxArray_real_T *y, const emxArray_real_T *X,
                 emxArray_real_T *outIRWLS_weights);
 
 void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
+           double varargin_2, double varargin_4, double varargin_6,
+           bool varargin_10, const double varargin_14_data[],
+           const int varargin_14_size[2], struct_LXS_T *out);
+
+void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
            const emxArray_real_T *varargin_2, double varargin_4,
            const emxArray_real_T *varargin_6, bool varargin_10,
            struct_LXS_T *out);
