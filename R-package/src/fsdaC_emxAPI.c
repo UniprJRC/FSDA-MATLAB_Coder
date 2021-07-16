@@ -35,19 +35,19 @@ emxArray_boolean_T *emxCreateND_boolean_T(int numDimensions, const int *size)
   return emx;
 }
 
-emxArray_cell_wrap_36 *emxCreateND_cell_wrap_36(int numDimensions,
+emxArray_cell_wrap_38 *emxCreateND_cell_wrap_38(int numDimensions,
                                                 const int *size)
 {
-  emxArray_cell_wrap_36 *emx;
+  emxArray_cell_wrap_38 *emx;
   int i;
   int numEl;
-  emxInit_cell_wrap_36(&emx, numDimensions);
+  emxInit_cell_wrap_38(&emx, numDimensions);
   numEl = 1;
   for (i = 0; i < numDimensions; i++) {
     numEl *= size[i];
     emx->size[i] = size[i];
   }
-  emx->data = (cell_wrap_36 *)calloc((unsigned int)numEl, sizeof(cell_wrap_36));
+  emx->data = (cell_wrap_38 *)calloc((unsigned int)numEl, sizeof(cell_wrap_38));
   emx->numDimensions = numDimensions;
   emx->allocatedSize = numEl;
   return emx;
@@ -106,14 +106,14 @@ emxArray_boolean_T *emxCreateWrapperND_boolean_T(bool *data, int numDimensions,
   return emx;
 }
 
-emxArray_cell_wrap_36 *emxCreateWrapperND_cell_wrap_36(cell_wrap_36 *data,
+emxArray_cell_wrap_38 *emxCreateWrapperND_cell_wrap_38(cell_wrap_38 *data,
                                                        int numDimensions,
                                                        const int *size)
 {
-  emxArray_cell_wrap_36 *emx;
+  emxArray_cell_wrap_38 *emx;
   int i;
   int numEl;
-  emxInit_cell_wrap_36(&emx, numDimensions);
+  emxInit_cell_wrap_38(&emx, numDimensions);
   numEl = 1;
   for (i = 0; i < numDimensions; i++) {
     numEl *= size[i];
@@ -177,11 +177,11 @@ emxArray_boolean_T *emxCreateWrapper_boolean_T(bool *data, int rows, int cols)
   return emx;
 }
 
-emxArray_cell_wrap_36 *emxCreateWrapper_cell_wrap_36(cell_wrap_36 *data,
+emxArray_cell_wrap_38 *emxCreateWrapper_cell_wrap_38(cell_wrap_38 *data,
                                                      int rows, int cols)
 {
-  emxArray_cell_wrap_36 *emx;
-  emxInit_cell_wrap_36(&emx, 2);
+  emxArray_cell_wrap_38 *emx;
+  emxInit_cell_wrap_38(&emx, 2);
   emx->size[0] = rows;
   emx->size[1] = cols;
   emx->data = data;
@@ -231,15 +231,15 @@ emxArray_boolean_T *emxCreate_boolean_T(int rows, int cols)
   return emx;
 }
 
-emxArray_cell_wrap_36 *emxCreate_cell_wrap_36(int rows, int cols)
+emxArray_cell_wrap_38 *emxCreate_cell_wrap_38(int rows, int cols)
 {
-  emxArray_cell_wrap_36 *emx;
+  emxArray_cell_wrap_38 *emx;
   int numEl;
-  emxInit_cell_wrap_36(&emx, 2);
+  emxInit_cell_wrap_38(&emx, 2);
   emx->size[0] = rows;
   numEl = rows * cols;
   emx->size[1] = cols;
-  emx->data = (cell_wrap_36 *)calloc((unsigned int)numEl, sizeof(cell_wrap_36));
+  emx->data = (cell_wrap_38 *)calloc((unsigned int)numEl, sizeof(cell_wrap_38));
   emx->numDimensions = 2;
   emx->allocatedSize = numEl;
   return emx;
@@ -278,9 +278,9 @@ void emxDestroyArray_boolean_T(emxArray_boolean_T *emxArray)
   emxFree_boolean_T(&emxArray);
 }
 
-void emxDestroyArray_cell_wrap_36(emxArray_cell_wrap_36 *emxArray)
+void emxDestroyArray_cell_wrap_38(emxArray_cell_wrap_38 *emxArray)
 {
-  emxFree_cell_wrap_36(&emxArray);
+  emxFree_cell_wrap_38(&emxArray);
 }
 
 void emxDestroyArray_char_T(emxArray_char_T *emxArray)

@@ -17,7 +17,7 @@
 #include "fsdaC_internal_types.h"
 #include "fsdaC_types.h"
 #include "int2str.h"
-#include "mldivide.h"
+#include "linsolve.h"
 #include "randsample.h"
 #include "rank.h"
 #include "rt_nonfinite.h"
@@ -40,15 +40,17 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
   emxArray_int32_T *iidx;
   emxArray_real_T *C;
   emxArray_real_T *Xb;
+  emxArray_real_T *b;
   emxArray_real_T *b_y;
+  emxArray_real_T *blast;
   emxArray_real_T *c_y;
-  emxArray_real_T *d_y;
   emxArray_real_T *r;
   emxArray_real_T *r1;
   emxArray_real_T *seq;
   emxArray_real_T *seq100;
   emxArray_real_T *unit;
   emxArray_real_T *yb;
+  double condNumber;
   double init;
   int aoffset;
   int b_i;
@@ -61,6 +63,7 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
   int n;
   int nwhile;
   int p;
+  int trueCount;
   bool Ra;
   bool exitg1;
   emxInit_real_T(&Xb, 2);
@@ -580,11 +583,11 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
     seq100->data[i] = 100.0 * b_y->data[i];
   }
   nwhile = c_y->size[1] - 1;
-  p = 0;
+  trueCount = 0;
   aoffset = 0;
   for (b_i = 0; b_i <= nwhile; b_i++) {
     if (c_y->data[b_i] <= n) {
-      p++;
+      trueCount++;
     }
     if (seq100->data[b_i] <= n) {
       seq100->data[aoffset] = seq100->data[b_i];
@@ -595,7 +598,7 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
   emxInit_boolean_T(&seq100boo, 1);
   i = seq100->size[0] * seq100->size[1];
   seq100->size[0] = 1;
-  seq100->size[1] = p;
+  seq100->size[1] = trueCount;
   emxEnsureCapacity_real_T(seq100, i);
   i = seq100boo->size[0];
   seq100boo->size[0] = X->size[0];
@@ -607,9 +610,9 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
   emxInit_int32_T(&b_r, 2);
   i = b_r->size[0] * b_r->size[1];
   b_r->size[0] = 1;
-  b_r->size[1] = p;
+  b_r->size[1] = trueCount;
   emxEnsureCapacity_int32_T(b_r, i);
-  for (i = 0; i < p; i++) {
+  for (i = 0; i < trueCount; i++) {
     b_r->data[i] = (int)seq100->data[i];
   }
   emxFree_real_T(&seq100);
@@ -704,14 +707,14 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
   } else {
     eml_float_colon(init + 1.0, X->size[0], b_y);
   }
-  emxInit_real_T(&d_y, 1);
+  emxInit_real_T(&blast, 1);
   aoffset = (int)((double)X->size[0] - init);
-  i = d_y->size[0];
-  d_y->size[0] = b_y->size[1];
-  emxEnsureCapacity_real_T(d_y, i);
+  i = blast->size[0];
+  blast->size[0] = b_y->size[1];
+  emxEnsureCapacity_real_T(blast, i);
   loop_ub = b_y->size[1];
   for (i = 0; i < loop_ub; i++) {
-    d_y->data[i] = b_y->data[i];
+    blast->data[i] = b_y->data[i];
   }
   emxFree_real_T(&b_y);
   emxInit_real_T(&r1, 2);
@@ -723,15 +726,24 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
   for (i = 0; i < loop_ub; i++) {
     r1->data[i] = rtNaN;
   }
-  cat(d_y, r1, Un);
+  cat(blast, r1, Un);
   /*  The last correctly computed beta oefficients */
+  i = blast->size[0];
+  blast->size[0] = X->size[1];
+  emxEnsureCapacity_real_T(blast, i);
+  loop_ub = X->size[1];
+  emxFree_real_T(&r1);
+  for (i = 0; i < loop_ub; i++) {
+    blast->data[i] = rtNaN;
+  }
+  /*  opts is a structure which contains the options to use in linsolve */
   /*  Forward search loop */
   /*  ij = index which is linked with the columns of matrix BB. During the */
-  /*  search every time a subset is stored inside matrix BB ij icreases by one
+  /*  search every time a subset is stored inside matrix BB ij increases by one
    */
   ij = 1U;
   i = X->size[0] - bsb->size[0];
-  emxFree_real_T(&r1);
+  emxInit_real_T(&b, 1);
   emxInit_boolean_T(&oldbsbT, 1);
   emxInit_real_T(&unit, 1);
   emxInit_real_T(&C, 1);
@@ -754,21 +766,45 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
       ij++;
     }
     /*  Compute beta coefficients using subset */
-    /*  rank is ok */
+    /*  Implicitly control the rank of Xb checking the condition number */
+    /*  for inversion (which in the case of a rectangular matrix is */
+    /*  nothing but the rank) */
+    /*  Old instruction was b=Xb\yb; */
+    linsolve(Xb, yb, b, &condNumber);
+    /*  disp([mm condNumber]) */
+    if (!(condNumber < p)) {
+      /*  rank is ok */
+      b_i = blast->size[0];
+      blast->size[0] = b->size[0];
+      emxEnsureCapacity_real_T(blast, b_i);
+      loop_ub = b->size[0];
+      for (b_i = 0; b_i < loop_ub; b_i++) {
+        blast->data[b_i] = b->data[b_i];
+      }
+    } else {
+      loop_ub = blast->size[0];
+      b_i = b->size[0];
+      b->size[0] = blast->size[0];
+      emxEnsureCapacity_real_T(b, b_i);
+      for (b_i = 0; b_i < loop_ub; b_i++) {
+        b->data[b_i] = blast->data[b_i];
+      }
+      /*  in case of rank problem, the last orrectly computed coefficients are
+       * used */
+    }
     /*  e= vector of residual for all units using b estimated using subset */
-    mldivide(Xb, yb, d_y);
     nwhile = X->size[0] - 1;
-    p = X->size[1];
+    trueCount = X->size[1];
     b_i = C->size[0];
     C->size[0] = X->size[0];
     emxEnsureCapacity_real_T(C, b_i);
     for (b_i = 0; b_i <= nwhile; b_i++) {
       C->data[b_i] = 0.0;
     }
-    for (loop_ub = 0; loop_ub < p; loop_ub++) {
+    for (loop_ub = 0; loop_ub < trueCount; loop_ub++) {
       aoffset = loop_ub * X->size[0];
       for (b_i = 0; b_i <= nwhile; b_i++) {
-        C->data[b_i] += X->data[aoffset + b_i] * d_y->data[loop_ub];
+        C->data[b_i] += X->data[aoffset + b_i] * b->data[loop_ub];
       }
     }
     loop_ub = y->size[0];
@@ -778,16 +814,16 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
     for (b_i = 0; b_i < loop_ub; b_i++) {
       C->data[b_i] = y->data[b_i] - C->data[b_i];
     }
-    b_i = d_y->size[0];
-    d_y->size[0] = C->size[0];
-    emxEnsureCapacity_real_T(d_y, b_i);
+    b_i = b->size[0];
+    b->size[0] = C->size[0];
+    emxEnsureCapacity_real_T(b, b_i);
     aoffset = C->size[0];
     for (loop_ub = 0; loop_ub < aoffset; loop_ub++) {
-      d_y->data[loop_ub] = C->data[loop_ub] * C->data[loop_ub];
+      b->data[loop_ub] = C->data[loop_ub] * C->data[loop_ub];
     }
-    loop_ub = d_y->size[0];
+    loop_ub = b->size[0];
     for (b_i = 0; b_i < loop_ub; b_i++) {
-      r->data[b_i + r->size[0]] = d_y->data[b_i];
+      r->data[b_i + r->size[0]] = b->data[b_i];
     }
     if (b_mm < (unsigned int)n) {
       /*  store units forming old subset in vector oldbsb */
@@ -802,19 +838,19 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
       /*  the group of potential outliers */
       /*  ord=sortrows(r,2); */
       loop_ub = r->size[0];
-      b_i = d_y->size[0];
-      d_y->size[0] = r->size[0];
-      emxEnsureCapacity_real_T(d_y, b_i);
+      b_i = b->size[0];
+      b->size[0] = r->size[0];
+      emxEnsureCapacity_real_T(b, b_i);
       for (b_i = 0; b_i < loop_ub; b_i++) {
-        d_y->data[b_i] = r->data[b_i + r->size[0]];
+        b->data[b_i] = r->data[b_i + r->size[0]];
       }
-      sort(d_y, iidx);
-      b_i = d_y->size[0];
-      d_y->size[0] = iidx->size[0];
-      emxEnsureCapacity_real_T(d_y, b_i);
+      sort(b, iidx);
+      b_i = b->size[0];
+      b->size[0] = iidx->size[0];
+      emxEnsureCapacity_real_T(b, b_i);
       loop_ub = iidx->size[0];
       for (b_i = 0; b_i < loop_ub; b_i++) {
-        d_y->data[b_i] = iidx->data[b_i];
+        b->data[b_i] = iidx->data[b_i];
       }
       /*  bsb= units forming the new subset */
       b_i = bsb->size[0];
@@ -822,7 +858,7 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
       emxEnsureCapacity_real_T(bsb, b_i);
       loop_ub = (int)b_mm;
       for (b_i = 0; b_i <= loop_ub; b_i++) {
-        bsb->data[b_i] = d_y->data[b_i];
+        bsb->data[b_i] = b->data[b_i];
       }
       b_i = bsbT->size[0];
       bsbT->size[0] = n;
@@ -835,7 +871,7 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
       emxEnsureCapacity_int32_T(iidx, b_i);
       loop_ub = (int)b_mm;
       for (b_i = 0; b_i <= loop_ub; b_i++) {
-        iidx->data[b_i] = (int)d_y->data[b_i];
+        iidx->data[b_i] = (int)b->data[b_i];
       }
       loop_ub = iidx->size[0];
       for (b_i = 0; b_i < loop_ub; b_i++) {
@@ -848,9 +884,9 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
       emxEnsureCapacity_real_T(Xb, b_i);
       for (b_i = 0; b_i < loop_ub; b_i++) {
         aoffset = (int)b_mm;
-        for (p = 0; p <= aoffset; p++) {
-          Xb->data[p + Xb->size[0] * b_i] =
-              X->data[((int)d_y->data[p] + X->size[0] * b_i) - 1];
+        for (trueCount = 0; trueCount <= aoffset; trueCount++) {
+          Xb->data[trueCount + Xb->size[0] * b_i] =
+              X->data[((int)b->data[trueCount] + X->size[0] * b_i) - 1];
         }
       }
       /*  subset of X */
@@ -859,7 +895,7 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
       emxEnsureCapacity_real_T(yb, b_i);
       loop_ub = (int)b_mm;
       for (b_i = 0; b_i <= loop_ub; b_i++) {
-        yb->data[b_i] = y->data[(int)d_y->data[b_i] - 1];
+        yb->data[b_i] = y->data[(int)b->data[b_i] - 1];
       }
       /*  subset of y */
       if (b_mm >= init) {
@@ -871,14 +907,14 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
           oldbsbT->data[b_i] = !oldbsbT->data[b_i];
         }
         nwhile = bsbT->size[0] - 1;
-        p = 0;
+        trueCount = 0;
         for (b_i = 0; b_i <= nwhile; b_i++) {
           if (bsbT->data[b_i] && oldbsbT->data[b_i]) {
-            p++;
+            trueCount++;
           }
         }
         b_i = unit->size[0];
-        unit->size[0] = p;
+        unit->size[0] = trueCount;
         emxEnsureCapacity_real_T(unit, b_i);
         aoffset = 0;
         for (b_i = 0; b_i <= nwhile; b_i++) {
@@ -892,15 +928,16 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
         if (unit->size[0] <= 10) {
           if (2 > unit->size[0] + 1) {
             b_i = -1;
-            p = -1;
+            trueCount = -1;
           } else {
             b_i = 0;
-            p = unit->size[0];
+            trueCount = unit->size[0];
           }
           aoffset = (int)(((double)b_mm - init) + 1.0) - 1;
-          nwhile = p - b_i;
-          for (p = 0; p < nwhile; p++) {
-            Un->data[aoffset + Un->size[0] * ((b_i + p) + 1)] = unit->data[p];
+          nwhile = trueCount - b_i;
+          for (trueCount = 0; trueCount < nwhile; trueCount++) {
+            Un->data[aoffset + Un->size[0] * ((b_i + trueCount) + 1)] =
+                unit->data[trueCount];
           }
         } else {
           int2str(b_mm, c_mm.data, c_mm.size);
@@ -912,11 +949,12 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
       }
     }
   }
-  emxFree_real_T(&d_y);
   emxFree_real_T(&C);
   emxFree_int32_T(&iidx);
   emxFree_real_T(&unit);
   emxFree_boolean_T(&oldbsbT);
+  emxFree_real_T(&b);
+  emxFree_real_T(&blast);
   emxFree_boolean_T(&boobsbsteps);
   emxFree_boolean_T(&seq100boo);
   emxFree_real_T(&r);

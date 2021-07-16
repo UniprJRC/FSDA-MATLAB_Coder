@@ -1,7 +1,7 @@
 Package: fsdac
-Title: Robust Data Analysis with the Forward Search
-Version: 0.5-18
-Date: 2021-07-14
+Title: Robust Data Analysis through monitoring 
+Version: 0.5-19
+Date: 2021-07-16
 VersionNote: Released ... on CRAN
 Authors@R: c(person("Valentin", "Todorov", role = c("aut", "cre"), email = "valentin@todorov.at", comment=c(ORCID = "0000-0003-4215-0245"))
          , person("Aldo", "Corbellini", role = "aut", email = "aldo.corbellini@unipr.it")
@@ -10,26 +10,28 @@ Authors@R: c(person("Valentin", "Todorov", role = c("aut", "cre"), email = "vale
          , person("Emmanuele", "Sordini", role = "ctb")
          , person("Domenico", "Perrotta", role = "ctb")
           )
-Description: The 'Flexible Statistical Data Analysis - FSDA' software
-    aims to provide the data science community with principled methods
-    for robust statistical analysis. It addresses numerical and categorical
-    data with methods ranging from standard data summaries to sophisticated
-    regression, multivariate, model selection and transformation tools.
-    The distinctive feature of FSDA is that it is targeted to any step
-    of the data analysis process that might be faced with data anomalies
-    and deviations from model assumptions, and possibly require user
-    interactivity with dynamic data visualizations.
-    The package 'fsdac' shows how FSDA functions in C code obtained from the
-    MATLAB coder can be called from R (using the R functions .C and/or .Call).
-    It therefore provides a interface to the 'MATLAB' toolbox FSDA.
-    The current R version implements tools for regression:
-    (forward search, S- and MM-estimation, least trimmed
-    squares (LTS) and least median of squares (LMS)),
-    for multivariate analysis (forward search, S- and MM-estimation),
-    for cluster analysis (TCLUST) and time series analysis (LTSts).
-    The distinctive feature of our package is the possibility of
-    monitoring the statistics of interest as function of breakdown point,
-    efficiency or subset size, depending on the estimator.
+Description: The 'Flexible Statistical Data Analysis - FSDA' software aims to provide 
+    the data science community with principled methods for robust statistical analysis.
+    The distinctive feature of FSDA is that, differently from the traditional robust
+    packages which given a fixed value of breakdown point (in case of S estimator,
+    LMS and LTS) or given a fixed value of efficiency (MM estimators) provide
+    a snapshot of the data, it gives particular attention to the monitoring
+    approach, that is to understand how the fitted model changes as breakdown
+    point/efficiency changes and or the units belonging to subset (as in the
+    forward search) increase. The current version implements tools for regression
+    (forward search, least trimmed squares (LTS) and least median of squares (LMS)),
+    transformation of the response (function FSRfan), multivariate analysis (FSM)
+    and time series analysis (LTSts). The distinctive feature of our package is
+    the possibility of monitoring the statistics of interest as a function of
+    breakdown point, efficiency or subset size, depending on the estimator.
+    In the monitoring approach, in order to better understand the effect that
+    particular units, outliers or not, exert on the model, it is of paramount
+    importance to have interactivity tools which enable to link the information
+    present in different logical connected plots. In the companion package 'fsdaR',
+    through the installation of the free MATLAB run time environment,
+    it is also possible to have a rich set of graphical features, such
+    as dynamic brushing, linking, particularly useful for exploratory
+    data analysis.
 Depends: R (>= 3.0.2)
 Suggests: robustbase
 LazyLoad: yes

@@ -1,9 +1,13 @@
-2021-07-14  Valentin Todorov  <valentin@todorov.at>
+2021-07-16  Valentin Todorov  <valentin@todorov.at>
+    *
+    * DESCRIPTION (Version): 0.5-19:
+    *
+    *   C code generated with linsolve()
     *
     * DESCRIPTION (Version): 0.5-18:
     *
     * Added functions FSMmmd() and FSMbsb compiled by Aldo and Marco
-    * Corrections in FSRbsb, FSRmdr  
+    * Corrections in FSRbsb, FSRmdr
     * Added FSRmdr
     *
     * DESCRIPTION (Version): 0.5-13:

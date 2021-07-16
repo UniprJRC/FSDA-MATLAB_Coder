@@ -25,10 +25,11 @@ extern "C" {
 /* Function Declarations */
 void FSRmdr(const emxArray_real_T *y, const emxArray_real_T *X,
             emxArray_real_T *bsb, double varargin_2, bool varargin_8,
-            const emxArray_real_T *varargin_10, const double varargin_14_data[],
-            const int varargin_14_size[2], const emxArray_real_T *varargin_18,
-            emxArray_real_T *mdr, emxArray_real_T *Un, emxArray_real_T *BB,
-            emxArray_real_T *Bols, emxArray_real_T *S2);
+            const emxArray_real_T *varargin_10, bool varargin_12,
+            const double varargin_14_data[], const int varargin_14_size[2],
+            const emxArray_real_T *varargin_18, emxArray_real_T *mdr,
+            emxArray_real_T *Un, emxArray_real_T *BB, emxArray_real_T *Bols,
+            emxArray_real_T *S2);
 
 #ifdef __cplusplus
 }
