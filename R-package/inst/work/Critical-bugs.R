@@ -32,4 +32,30 @@
     ##  point mass contamination of the first kk units
     X[1:kk,] <- 1
     y[1:kk] <- 3
+
+    xx <- cbind.data.frame(X, y)
+    write.table(xx, file="xx.txt", col.names=FALSE, row.names=FALSE)
+
+    xx1 <- read.table("xx.txt")
+    y <- xx1[, 6]
+    X <- xx1[, 1:5]
+    ## X[,2]=X[,1]
+
+    (out <- FSRmdr(y, X))
+
+##  3. Example 3.
+##      The crash of FSR from the previous example was fixed, in the same way this was done for FSRmdr.
+##      but now new issues arise.
+##
+    library(fsdac)
+    n <- 130
+    p <- 5
+    set.seed(12345678)
+    X <- matrix(rnorm(n*p), nrow=n)
+    y <- rnorm(n)
+    kk <- 30
+    ##  point mass contamination of the first kk units
+    X[1:kk,] <- 1
+    y[1:kk] <- 3
+
     (out <- FSR(y, X))

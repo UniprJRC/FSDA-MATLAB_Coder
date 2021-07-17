@@ -1437,6 +1437,11 @@ void FSRmdr(const emxArray_real_T *y, const emxArray_real_T *X,
               for (i = 0; i < loop_ub; i++) {
                 e->data[i] = b->data[i];
               }
+
+
+              // VT::14.07.2021 - added sorting with c_sort() because otherwise e_do_vectors() does not work
+              c_sort(e);
+
               e_do_vectors(seq, e, ncl, ia, &loop_ub);
               sizes_idx_1 = 1;
               exitg2 = true;
