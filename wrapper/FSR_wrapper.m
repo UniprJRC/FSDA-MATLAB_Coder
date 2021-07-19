@@ -1,4 +1,5 @@
 function [out]=FSR_wrapper(y,X,   bsbmfullrank,bonflev,h,init,intercept,lms,msg,nocheck,nsamp,threshoutX,weak)
+% Wrapper function for FSR (when input option lms is not a struct). 
 
 % Required input arguments
 % y: a column vector of doubles of any length
