@@ -58,6 +58,7 @@ assert(isfield(lms,'reftolbestr'));
 assert(isa(lms.reftolbestr,'double'));
 assert(isscalar(lms.reftolbestr));
 
+% Force name of input structure lms
 coder.cstructname(lms,'struct_LXSlms_T');
 
 
