@@ -71,11 +71,11 @@ void LXS_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
   emxArray_real_T *e_expl_temp;
   emxArray_real_T *expl_temp;
   emxArray_real_T *f_expl_temp;
+  emxArray_real_T *g_expl_temp;
   emxArray_real_T *outFSM_outliers;
   emxArray_real_T *seq;
   emxArray_real_T *tmp_betarw;
   double time_data[1000];
-  double expl_temp_data[10];
   double n;
   double ncomb;
   double nselected;
@@ -85,7 +85,6 @@ void LXS_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
   double tmp_numscale2rw;
   double tsampling;
   double ttic_tv_sec;
-  int b_expl_temp_size[2];
   int critdef_size[2];
   int expl_temp_size[2];
   int b_i;
@@ -97,8 +96,8 @@ void LXS_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
   int loop_ub_tmp;
   int nx;
   int time_size;
-  char b_expl_temp_data[3];
   char critdef_data[3];
+  char expl_temp_data[3];
   bool bonflevout;
   bool guard1 = false;
   if (!isInitialized_fsdaC) {
@@ -126,6 +125,7 @@ void LXS_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  field refstepsbestr a scalar of type double */
   /*  field reftol a scalar of type double */
   /*  field reftolbestr a scalar of type double */
+  /*  Force name of input structure lms */
   /*  msg is a boolean */
   /*  nomes is a boolean */
   /*  nsamp: a scalar of type double */
@@ -794,17 +794,18 @@ void LXS_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
     emxInit_real_T(&d_expl_temp, 2);
     emxInit_real_T(&e_expl_temp, 2);
     emxInit_real_T(&f_expl_temp, 2);
+    emxInit_real_T(&g_expl_temp, 2);
     FSM(b_Xwithoutint, bonflevoutX_data, bonflevoutX_size, floor(n * 0.6),
         critdef_data, critdef_size, (double)Xwithoutint->size[1] + 1.0,
         outFSM_outliers, b_expl_temp, c_expl_temp, d_expl_temp, e_expl_temp,
-        f_expl_temp, expl_temp_data, expl_temp_size, b_expl_temp_data,
-        b_expl_temp_size);
+        f_expl_temp, g_expl_temp, expl_temp_data, expl_temp_size);
     i = out->residuals->size[0];
     out->residuals->size[0] =
         outFSM_outliers->size[0] * outFSM_outliers->size[1];
     emxEnsureCapacity_real_T(out->residuals, i);
     loop_ub = outFSM_outliers->size[0] * outFSM_outliers->size[1];
     emxFree_real_T(&b_Xwithoutint);
+    emxFree_real_T(&g_expl_temp);
     emxFree_real_T(&f_expl_temp);
     emxFree_real_T(&e_expl_temp);
     emxFree_real_T(&d_expl_temp);

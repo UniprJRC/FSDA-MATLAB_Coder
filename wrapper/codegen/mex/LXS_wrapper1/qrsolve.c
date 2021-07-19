@@ -85,7 +85,7 @@ int32_T rankFromQR(const emlrtStack *sp, const emxArray_real_T *A)
     b_y = NULL;
     m = emlrtCreateDoubleScalar(tol);
     emlrtAssign(&b_y, m);
-    b_st.site = &cjb_emlrtRSI;
+    b_st.site = &bjb_emlrtRSI;
     i_emlrt_marshallIn(&b_st, b_sprintf(&b_st, y, b_y, &r_emlrtMCI),
                        "<output of sprintf>", str);
     st.site = &aab_emlrtRSI;

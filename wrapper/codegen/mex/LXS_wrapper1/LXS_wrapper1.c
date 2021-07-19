@@ -60,7 +60,7 @@ static emlrtRTEInfo b_emlrtRTEI = {
 };
 
 static emlrtRSInfo emlrtRSI = {
-    81,             /* lineNo */
+    82,             /* lineNo */
     "LXS_wrapper1", /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\LXS_wrapper1.m" /* pathName
                                                                        */
@@ -977,7 +977,7 @@ static emlrtRTEInfo qd_emlrtRTEI = {
 };
 
 static emlrtRTEInfo rd_emlrtRTEI = {
-    81,             /* lineNo */
+    82,             /* lineNo */
     1,              /* colNo */
     "LXS_wrapper1", /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\LXS_wrapper1.m" /* pName
@@ -1104,19 +1104,19 @@ static emlrtRTEInfo je_emlrtRTEI = {
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pName */
 };
 
-static emlrtRSInfo hib_emlrtRSI = {
+static emlrtRSInfo gib_emlrtRSI = {
     546,                                           /* lineNo */
     "LXS",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
-static emlrtRSInfo kib_emlrtRSI = {
+static emlrtRSInfo jib_emlrtRSI = {
     1018,                                          /* lineNo */
     "LXS",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
 };
 
-static emlrtRSInfo lib_emlrtRSI = {
+static emlrtRSInfo kib_emlrtRSI = {
     1065,                                          /* lineNo */
     "LXS",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LXS.m" /* pathName */
@@ -1354,6 +1354,7 @@ void LXS_wrapper1(LXS_wrapper1StackData *SD, const emlrtStack *sp,
   /*  field refstepsbestr a scalar of type double */
   /*  field reftol a scalar of type double */
   /*  field reftolbestr a scalar of type double */
+  /*  Force name of input structure lms */
   /*  msg is a boolean */
   /*  nomes is a boolean */
   /*  nsamp: a scalar of type double */
@@ -1931,7 +1932,7 @@ void LXS_wrapper1(LXS_wrapper1StackData *SD, const emlrtStack *sp,
   /*  Check number of subsamples to extract */
   if (nsamp > ncomb) {
     if (msg) {
-      b_st.site = &hib_emlrtRSI;
+      b_st.site = &gib_emlrtRSI;
       disp(&b_st, s_emlrt_marshallOut(&b_st, b_cv1), &emlrtMCI);
     }
     tsampling = 0.0;
@@ -2540,8 +2541,8 @@ void LXS_wrapper1(LXS_wrapper1StackData *SD, const emlrtStack *sp,
         c_st.site = &y_emlrtRSI;
         ncomb = nselected * median(&c_st, &b_time_data);
         c_st.site = &vv_emlrtRSI;
-        d_st.site = &vhb_emlrtRSI;
-        k_st.site = &whb_emlrtRSI;
+        d_st.site = &uhb_emlrtRSI;
+        k_st.site = &vhb_emlrtRSI;
         g_emlrt_marshallIn(&d_st,
                            d_feval(&d_st, d_emlrt_marshallOut(&d_st, b_cv3),
                                    f_emlrt_marshallOut(1.0),
@@ -2987,7 +2988,7 @@ void LXS_wrapper1(LXS_wrapper1StackData *SD, const emlrtStack *sp,
   } else {
     /*  Perfect fit */
     if (msg) {
-      b_st.site = &kib_emlrtRSI;
+      b_st.site = &jib_emlrtRSI;
       disp(&b_st, w_emlrt_marshallOut(&b_st, b_cv5), &b_emlrtMCI);
     }
     /*  There is an approximate perfect fit for the first h observations. */
@@ -3071,14 +3072,14 @@ void LXS_wrapper1(LXS_wrapper1StackData *SD, const emlrtStack *sp,
     for (i = 0; i < 30; i++) {
       b_cv6[i] = '-';
     }
-    b_st.site = &lib_emlrtRSI;
+    b_st.site = &kib_emlrtRSI;
     disp(&b_st, x_emlrt_marshallOut(&b_st, b_cv6), &c_emlrtMCI);
     ncomb = 100.0 * singsub / nselected;
     if (bonflevout) {
       b_st.site = &c_emlrtRSI;
       c_st.site = &vv_emlrtRSI;
-      d_st.site = &vhb_emlrtRSI;
-      k_st.site = &whb_emlrtRSI;
+      d_st.site = &uhb_emlrtRSI;
+      k_st.site = &vhb_emlrtRSI;
       ncomb = g_emlrt_marshallIn(
           &d_st,
           d_feval(&d_st, d_emlrt_marshallOut(&d_st, b_cv3),
@@ -3090,8 +3091,8 @@ void LXS_wrapper1(LXS_wrapper1StackData *SD, const emlrtStack *sp,
     } else {
       b_st.site = &b_emlrtRSI;
       c_st.site = &vv_emlrtRSI;
-      d_st.site = &vhb_emlrtRSI;
-      k_st.site = &whb_emlrtRSI;
+      d_st.site = &uhb_emlrtRSI;
+      k_st.site = &vhb_emlrtRSI;
       ncomb = g_emlrt_marshallIn(
           &d_st,
           d_feval(&d_st, d_emlrt_marshallOut(&d_st, b_cv3),

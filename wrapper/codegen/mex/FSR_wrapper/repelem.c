@@ -19,7 +19,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo yhb_emlrtRSI = {
+static emlrtRSInfo oib_emlrtRSI = {
     24,        /* lineNo */
     "repelem", /* fcnName */
     "C:\\Program "
@@ -27,7 +27,7 @@ static emlrtRSInfo yhb_emlrtRSI = {
                                                                           */
 };
 
-static emlrtRSInfo aib_emlrtRSI = {
+static emlrtRSInfo pib_emlrtRSI = {
     94,              /* lineNo */
     "repelemMatrix", /* fcnName */
     "C:\\Program "
@@ -35,7 +35,7 @@ static emlrtRSInfo aib_emlrtRSI = {
                                                                           */
 };
 
-static emlrtRSInfo bib_emlrtRSI = {
+static emlrtRSInfo qib_emlrtRSI = {
     100,             /* lineNo */
     "repelemMatrix", /* fcnName */
     "C:\\Program "
@@ -43,7 +43,7 @@ static emlrtRSInfo bib_emlrtRSI = {
                                                                           */
 };
 
-static emlrtRSInfo cib_emlrtRSI = {
+static emlrtRSInfo rib_emlrtRSI = {
     103,             /* lineNo */
     "repelemMatrix", /* fcnName */
     "C:\\Program "
@@ -51,7 +51,7 @@ static emlrtRSInfo cib_emlrtRSI = {
                                                                           */
 };
 
-static emlrtRTEInfo sc_emlrtRTEI = {
+static emlrtRTEInfo uc_emlrtRTEI = {
     19,        /* lineNo */
     23,        /* colNo */
     "repelem", /* fName */
@@ -60,7 +60,7 @@ static emlrtRTEInfo sc_emlrtRTEI = {
                                                                           */
 };
 
-static emlrtDCInfo pd_emlrtDCI = {
+static emlrtDCInfo xd_emlrtDCI = {
     89,              /* lineNo */
     58,              /* colNo */
     "repelemMatrix", /* fName */
@@ -70,7 +70,7 @@ static emlrtDCInfo pd_emlrtDCI = {
     4 /* checkKind */
 };
 
-static emlrtRTEInfo fbb_emlrtRTEI = {
+static emlrtRTEInfo adb_emlrtRTEI = {
     89,        /* lineNo */
     20,        /* colNo */
     "repelem", /* fName */
@@ -99,30 +99,30 @@ void repelem(const emlrtStack *sp, const real_T x_data[],
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   if (!(muDoubleScalarFloor(varargin_1) == varargin_1)) {
-    emlrtErrorWithMessageIdR2018a(sp, &sc_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(sp, &uc_emlrtRTEI,
                                   "MATLAB:repelem:invalidReplications",
                                   "MATLAB:repelem:invalidReplications", 0);
   }
-  st.site = &yhb_emlrtRSI;
+  st.site = &oib_emlrtRSI;
   sz_idx_0 = x_size[0] * (int32_T)varargin_1;
   if (sz_idx_0 < 0) {
-    emlrtNonNegativeCheckR2012b(sz_idx_0, &pd_emlrtDCI, &st);
+    emlrtNonNegativeCheckR2012b(sz_idx_0, &xd_emlrtDCI, &st);
   }
   rowIdx = y->size[0] * y->size[1];
   y->size[0] = sz_idx_0;
   y->size[1] = x_size[1];
-  emxEnsureCapacity_real_T(&st, y, rowIdx, &fbb_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, y, rowIdx, &adb_emlrtRTEI);
   if ((sz_idx_0 != 0) && (x_size[1] != 0)) {
     sz_idx_0 = x_size[0];
-    b_st.site = &aib_emlrtRSI;
+    b_st.site = &pib_emlrtRSI;
     for (j = 0; j < 1; j++) {
       rowIdx = -1;
-      b_st.site = &bib_emlrtRSI;
+      b_st.site = &qib_emlrtRSI;
       for (i = 0; i < sz_idx_0; i++) {
         rowreps = (int32_T)varargin_1;
-        b_st.site = &cib_emlrtRSI;
+        b_st.site = &rib_emlrtRSI;
         if ((1 <= (int32_T)varargin_1) && ((int32_T)varargin_1 > 2147483646)) {
-          c_st.site = &ab_emlrtRSI;
+          c_st.site = &hb_emlrtRSI;
           check_forloop_overflow_error(&c_st);
         }
         for (k = 0; k < rowreps; k++) {

@@ -18,7 +18,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRSInfo we_emlrtRSI =
+static emlrtRSInfo ve_emlrtRSI =
     {
         71,      /* lineNo */
         "power", /* fcnName */
@@ -27,7 +27,7 @@ static emlrtRSInfo we_emlrtRSI =
                                                                           */
 };
 
-static emlrtRSInfo xe_emlrtRSI =
+static emlrtRSInfo we_emlrtRSI =
     {
         80,         /* lineNo */
         "fltpower", /* fcnName */
@@ -36,7 +36,7 @@ static emlrtRSInfo xe_emlrtRSI =
                                                                           */
 };
 
-static emlrtRSInfo bf_emlrtRSI = {
+static emlrtRSInfo af_emlrtRSI = {
     200,        /* lineNo */
     "flatIter", /* fcnName */
     "C:\\Program "
@@ -44,7 +44,7 @@ static emlrtRSInfo bf_emlrtRSI = {
     "internal\\applyBinaryScalarFunction.m" /* pathName */
 };
 
-static emlrtRTEInfo sf_emlrtRTEI = {
+static emlrtRTEInfo vf_emlrtRTEI = {
     127,                         /* lineNo */
     6,                           /* colNo */
     "applyBinaryScalarFunction", /* fName */
@@ -66,7 +66,7 @@ void power(const emlrtStack *sp, const emxArray_real_T *a, emxArray_real_T *y)
   int32_T nx;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &we_emlrtRSI;
+  st.site = &ve_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -77,16 +77,16 @@ void power(const emlrtStack *sp, const emxArray_real_T *a, emxArray_real_T *y)
   e_st.tls = d_st.tls;
   f_st.prev = &e_st;
   f_st.tls = e_st.tls;
-  b_st.site = &xe_emlrtRSI;
-  c_st.site = &ye_emlrtRSI;
-  d_st.site = &af_emlrtRSI;
+  b_st.site = &we_emlrtRSI;
+  c_st.site = &xe_emlrtRSI;
+  d_st.site = &ye_emlrtRSI;
   nx = y->size[0];
   y->size[0] = a->size[0];
-  emxEnsureCapacity_real_T(&d_st, y, nx, &sf_emlrtRTEI);
+  emxEnsureCapacity_real_T(&d_st, y, nx, &vf_emlrtRTEI);
   nx = a->size[0];
-  e_st.site = &bf_emlrtRSI;
+  e_st.site = &af_emlrtRSI;
   if ((1 <= a->size[0]) && (a->size[0] > 2147483646)) {
-    f_st.site = &pc_emlrtRSI;
+    f_st.site = &oc_emlrtRSI;
     check_forloop_overflow_error(&f_st);
   }
   for (k = 0; k < nx; k++) {

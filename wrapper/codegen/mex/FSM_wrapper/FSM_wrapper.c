@@ -3667,6 +3667,7 @@ static const mxArray *eb_emlrt_marshallOut(const emlrtStack *sp, const char_T u
 static const mxArray *emlrt_marshallOut(const emlrtStack *sp, const char_T u[28]);
 static const mxArray *f_emlrt_marshallOut(const emlrtStack *sp, const char_T u
   [25]);
+static const mxArray *fb_emlrt_marshallOut(const real_T u[10]);
 static const mxArray *g_emlrt_marshallOut(const emlrtStack *sp, const char_T u
   [20]);
 static const mxArray *i_emlrt_marshallOut(const emlrtStack *sp, const char_T u
@@ -3774,6 +3775,31 @@ static const mxArray *f_emlrt_marshallOut(const emlrtStack *sp, const char_T u
   y = NULL;
   m = emlrtCreateCharArray(2, &iv[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 25, m, &u[0]);
+  emlrtAssign(&y, m);
+  return y;
+}
+
+static const mxArray *fb_emlrt_marshallOut(const real_T u[10])
+{
+  static const int32_T iv[2] = { 2, 5 };
+
+  const mxArray *m;
+  const mxArray *y;
+  real_T *pData;
+  int32_T b_i;
+  int32_T i;
+  int32_T i1;
+  y = NULL;
+  m = emlrtCreateNumericArray(2, (const void *)&iv[0], mxDOUBLE_CLASS, mxREAL);
+  pData = emlrtMxGetPr(m);
+  i = 0;
+  for (b_i = 0; b_i < 5; b_i++) {
+    i1 = b_i << 1;
+    pData[i] = u[i1];
+    pData[i + 1] = u[i1 + 1];
+    i += 2;
+  }
+
   emlrtAssign(&y, m);
   return y;
 }
@@ -4081,6 +4107,7 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
   emxArray_real_T *loc;
   emxArray_real_T *outliers;
   emxArray_real_T *seq;
+  real_T nout[10];
   real_T b_tmp;
   real_T d;
   real_T incre;
@@ -4103,8 +4130,8 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
   int32_T m_tmp_size[2];
   int32_T mes_size[2];
   int32_T n_tmp_size[2];
+  int32_T nout_size[2];
   int32_T o_tmp_size[2];
-  int32_T out_size[2];
   int32_T p_tmp_size[2];
   int32_T q_tmp_size[2];
   int32_T r_tmp_size[2];
@@ -4133,7 +4160,6 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
   int32_T sto;
   int32_T v;
   uint32_T uv[31];
-  uint32_T uv1[10];
   uint32_T ii;
   char_T t_tmp_data[1012];
   char_T v_tmp_data[1008];
@@ -4170,7 +4196,7 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
   char_T extram3_data[14];
   int8_T x_tmp_data[5];
   boolean_T b_x[31];
-  boolean_T out_data[5];
+  boolean_T nout_data[5];
   boolean_T NoFalseSig;
   boolean_T b_b;
   boolean_T b_guard1 = false;
@@ -4207,7 +4233,7 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
   emxInit_real_T(sp, &b_Y, 2, &gd_emlrtRTEI, true);
 
-  /*  Wrapper function for LXS (when lms is a scalar). NV pair names are not taken as */
+  /*  Wrapper function for FSM. NV pair names are not taken as */
   /*  inputs. Instead, just the values are taken as inputs. */
   /*  Y: an array of doubles of any dimensions */
   /*  Optional input arguments (name / pairs) in (case insensitive) */
@@ -5115,9 +5141,7 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
       gmin1->size[1] = 1;
       emxEnsureCapacity_real_T(&st, gmin1, i, &lc_emlrtRTEI);
       gmin1->data[0] = 0.0;
-      out->nout.size[0] = 1;
-      out->nout.size[1] = 1;
-      out->nout.data[0] = 0.0;
+      memset(&nout[0], 0, 10U * sizeof(real_T));
     } else {
       /*  declaration necessary for C coder */
       i = gbonf->size[0] * gbonf->size[1];
@@ -5223,9 +5247,9 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
           &st);
       }
 
-      idx = out->mmd->size[0] - 1;
+      irank = out->mmd->size[0] - 1;
       a = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out->mmd->data[b_i + out->mmd->size[0]] > gmin->data[b_i +
             gmin->size[0]]) {
           a++;
@@ -5235,18 +5259,18 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
       i = ia->size[0];
       ia->size[0] = a;
       emxEnsureCapacity_int32_T(&st, ia, i, &qc_emlrtRTEI);
-      irank = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
+      idx = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out->mmd->data[b_i + out->mmd->size[0]] > gmin->data[b_i +
             gmin->size[0]]) {
-          ia->data[irank] = b_i + 1;
-          irank++;
+          ia->data[idx] = b_i + 1;
+          idx++;
         }
       }
 
-      idx = out->mmd->size[0] - 1;
+      irank = out->mmd->size[0] - 1;
       a = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out->mmd->data[b_i + out->mmd->size[0]] > gmin->data[b_i +
             gmin->size[0] * 2]) {
           a++;
@@ -5257,18 +5281,18 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
       i = r1->size[0];
       r1->size[0] = a;
       emxEnsureCapacity_int32_T(&st, r1, i, &qc_emlrtRTEI);
-      irank = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
+      idx = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out->mmd->data[b_i + out->mmd->size[0]] > gmin->data[b_i +
             gmin->size[0] * 2]) {
-          r1->data[irank] = b_i + 1;
-          irank++;
+          r1->data[idx] = b_i + 1;
+          idx++;
         }
       }
 
-      idx = out->mmd->size[0] - 1;
+      irank = out->mmd->size[0] - 1;
       a = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out->mmd->data[b_i + out->mmd->size[0]] > gmin->data[b_i +
             gmin->size[0] * 3]) {
           a++;
@@ -5279,18 +5303,18 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
       i = r2->size[0];
       r2->size[0] = a;
       emxEnsureCapacity_int32_T(&st, r2, i, &qc_emlrtRTEI);
-      irank = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
+      idx = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out->mmd->data[b_i + out->mmd->size[0]] > gmin->data[b_i +
             gmin->size[0] * 3]) {
-          r2->data[irank] = b_i + 1;
-          irank++;
+          r2->data[idx] = b_i + 1;
+          idx++;
         }
       }
 
-      idx = out->mmd->size[0] - 1;
+      irank = out->mmd->size[0] - 1;
       a = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out->mmd->data[b_i + out->mmd->size[0]] > gmin->data[b_i +
             gmin->size[0] * 4]) {
           a++;
@@ -5301,18 +5325,18 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
       i = r3->size[0];
       r3->size[0] = a;
       emxEnsureCapacity_int32_T(&st, r3, i, &qc_emlrtRTEI);
-      irank = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
+      idx = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out->mmd->data[b_i + out->mmd->size[0]] > gmin->data[b_i +
             gmin->size[0] * 4]) {
-          r3->data[irank] = b_i + 1;
-          irank++;
+          r3->data[idx] = b_i + 1;
+          idx++;
         }
       }
 
-      idx = out->mmd->size[0] - 1;
+      irank = out->mmd->size[0] - 1;
       a = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out->mmd->data[b_i + out->mmd->size[0]] < gmin->data[b_i +
             gmin->size[0] * 5]) {
           a++;
@@ -5323,12 +5347,12 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
       i = r4->size[0];
       r4->size[0] = a;
       emxEnsureCapacity_int32_T(&st, r4, i, &qc_emlrtRTEI);
-      irank = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
+      idx = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out->mmd->data[b_i + out->mmd->size[0]] < gmin->data[b_i +
             gmin->size[0] * 5]) {
-          r4->data[irank] = b_i + 1;
-          irank++;
+          r4->data[idx] = b_i + 1;
+          idx++;
         }
       }
 
@@ -5377,24 +5401,11 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
       /*      % the 99.99% envelope */
       /*     % the 99.999% envelope */
       /*  the 1% envelope */
-      for (i = 0; i < 5; i++) {
-        uv1[i << 1] = (uint32_T)iv[i];
-      }
-
-      uv1[1] = (uint32_T)r4->size[0];
-      uv1[3] = (uint32_T)ia->size[0];
-      uv1[5] = (uint32_T)r1->size[0];
-      uv1[7] = (uint32_T)r2->size[0];
-      uv1[9] = (uint32_T)r3->size[0];
-      out->nout.size[0] = 2;
-      out->nout.size[1] = 5;
-      emxFree_int32_T(&r4);
-      emxFree_int32_T(&r3);
-      emxFree_int32_T(&r2);
-      emxFree_int32_T(&r1);
-      for (i = 0; i < 10; i++) {
-        out->nout.data[i] = uv1[i];
-      }
+      nout[1] = (uint32_T)r4->size[0];
+      nout[3] = (uint32_T)ia->size[0];
+      nout[5] = (uint32_T)r1->size[0];
+      nout[7] = (uint32_T)r2->size[0];
+      nout[9] = (uint32_T)r3->size[0];
 
       /*  NoFalseSig = boolean linked to the fact that the signal is good or not */
       NoFalseSig = false;
@@ -5402,25 +5413,30 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
       /*  NoFalseSig is set to 1 if the condition for an INCONTROVERTIBLE SIGNAL is */
       /*  fulfilled. */
       a = 0;
-      irank = 0;
+      emxFree_int32_T(&r4);
+      emxFree_int32_T(&r3);
+      emxFree_int32_T(&r2);
+      emxFree_int32_T(&r1);
+      idx = 0;
       for (b_i = 0; b_i < 5; b_i++) {
-        b_b = (out->nout.data[out->nout.size[0] * b_i] == 9999.0);
+        irank = iv[b_i];
+        nout[b_i << 1] = irank;
+        b_b = (irank == 9999);
         if (b_b) {
           a++;
-          x_tmp_data[irank] = (int8_T)(b_i + 1);
-          irank++;
+          x_tmp_data[idx] = (int8_T)(b_i + 1);
+          idx++;
         }
       }
 
-      out_size[0] = 1;
-      out_size[1] = a;
+      nout_size[0] = 1;
+      nout_size[1] = a;
       for (i = 0; i < a; i++) {
-        out_data[i] = (out->nout.data[out->nout.size[0] * (x_tmp_data[i] - 1) +
-                       1] >= 10.0);
+        nout_data[i] = (nout[((x_tmp_data[i] - 1) << 1) + 1] >= 10.0);
       }
 
       b_st.site = &r_emlrtRSI;
-      if (c_ifWhileCond(out_data, out_size)) {
+      if (c_ifWhileCond(nout_data, nout_size)) {
         NoFalseSig = true;
         if (msg) {
           b_st.site = &eeb_emlrtRSI;
@@ -6144,7 +6160,7 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
                   }
 
                   b_st.site = &u_emlrtRSI;
-                  int2str(&b_st, out->mmd->data[c_i - 2], n_tmp_data, out_size);
+                  int2str(&b_st, out->mmd->data[c_i - 2], n_tmp_data, nout_size);
                   b_st.site = &u_emlrtRSI;
                   int2str(&b_st, n, o_tmp_data, n_tmp_size);
                   if (((int32_T)(c_i + 1U) < 1) || ((int32_T)(c_i + 1U) >
@@ -6158,7 +6174,7 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
                   b_st.site = &u_emlrtRSI;
                   int2str(&b_st, n, r_tmp_data, p_tmp_size);
                   q_tmp_size[0] = 1;
-                  irank = (tmp_size[1] + c_tmp_size[1]) + out_size[1];
+                  irank = (tmp_size[1] + c_tmp_size[1]) + nout_size[1];
                   idx = (irank + n_tmp_size[1]) + o_tmp_size[1];
                   q_tmp_size[1] = (idx + p_tmp_size[1]) + 52;
                   for (i = 0; i < 5; i++) {
@@ -6180,7 +6196,7 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
                     t_tmp_data[((i + tmp_size[1]) + c_tmp_size[1]) + 6] = cv37[i];
                   }
 
-                  loop_ub = out_size[1];
+                  loop_ub = nout_size[1];
                   for (i = 0; i < loop_ub; i++) {
                     t_tmp_data[((i + tmp_size[1]) + c_tmp_size[1]) + 24] =
                       n_tmp_data[i];
@@ -6189,32 +6205,33 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
                   t_tmp_data[irank + 24] = ',';
                   loop_ub = n_tmp_size[1];
                   for (i = 0; i < loop_ub; i++) {
-                    t_tmp_data[(((i + tmp_size[1]) + c_tmp_size[1]) + out_size[1])
-                      + 25] = o_tmp_data[i];
+                    t_tmp_data[(((i + tmp_size[1]) + c_tmp_size[1]) + nout_size
+                                [1]) + 25] = o_tmp_data[i];
                   }
 
                   for (i = 0; i < 18; i++) {
-                    t_tmp_data[((((i + tmp_size[1]) + c_tmp_size[1]) + out_size
-                                 [1]) + n_tmp_size[1]) + 25] = cv42[i];
+                    t_tmp_data[((((i + tmp_size[1]) + c_tmp_size[1]) +
+                                 nout_size[1]) + n_tmp_size[1]) + 25] = cv42[i];
                   }
 
                   loop_ub = o_tmp_size[1];
                   for (i = 0; i < loop_ub; i++) {
-                    t_tmp_data[((((i + tmp_size[1]) + c_tmp_size[1]) + out_size
-                                 [1]) + n_tmp_size[1]) + 43] = q_tmp_data[i];
+                    t_tmp_data[((((i + tmp_size[1]) + c_tmp_size[1]) +
+                                 nout_size[1]) + n_tmp_size[1]) + 43] =
+                      q_tmp_data[i];
                   }
 
                   t_tmp_data[idx + 43] = ',';
                   loop_ub = p_tmp_size[1];
                   for (i = 0; i < loop_ub; i++) {
                     t_tmp_data[(((((i + tmp_size[1]) + c_tmp_size[1]) +
-                                  out_size[1]) + n_tmp_size[1]) + o_tmp_size[1])
+                                  nout_size[1]) + n_tmp_size[1]) + o_tmp_size[1])
                       + 44] = r_tmp_data[i];
                   }
 
                   for (i = 0; i < 8; i++) {
                     t_tmp_data[((((((i + tmp_size[1]) + c_tmp_size[1]) +
-                                   out_size[1]) + n_tmp_size[1]) + o_tmp_size[1])
+                                   nout_size[1]) + n_tmp_size[1]) + o_tmp_size[1])
                                 + p_tmp_size[1]) + 44] = cv44[i];
                   }
 
@@ -6550,7 +6567,7 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
                   }
 
                   b_st.site = &bb_emlrtRSI;
-                  int2str(&b_st, out->mmd->data[c_i], n_tmp_data, out_size);
+                  int2str(&b_st, out->mmd->data[c_i], n_tmp_data, nout_size);
                   b_st.site = &bb_emlrtRSI;
                   int2str(&b_st, n, o_tmp_data, n_tmp_size);
                   if ((c_i - 1 < 1) || (c_i - 1 > out->mmd->size[0])) {
@@ -6563,8 +6580,8 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
                   b_st.site = &bb_emlrtRSI;
                   int2str(&b_st, n, r_tmp_data, p_tmp_size);
                   r_tmp_size[0] = 1;
-                  r_tmp_size[1] = (((((tmp_size[1] + c_tmp_size[1]) + out_size[1])
-                                     + n_tmp_size[1]) + o_tmp_size[1]) +
+                  r_tmp_size[1] = (((((tmp_size[1] + c_tmp_size[1]) + nout_size
+                                      [1]) + n_tmp_size[1]) + o_tmp_size[1]) +
                                    p_tmp_size[1]) + 47;
                   for (i = 0; i < 5; i++) {
                     s_tmp_data[i] = cv18[i];
@@ -6585,43 +6602,44 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
                     s_tmp_data[((i + tmp_size[1]) + c_tmp_size[1]) + 6] = cv36[i];
                   }
 
-                  loop_ub = out_size[1];
+                  loop_ub = nout_size[1];
                   for (i = 0; i < loop_ub; i++) {
                     s_tmp_data[((i + tmp_size[1]) + c_tmp_size[1]) + 23] =
                       n_tmp_data[i];
                   }
 
-                  s_tmp_data[((tmp_size[1] + c_tmp_size[1]) + out_size[1]) + 23]
+                  s_tmp_data[((tmp_size[1] + c_tmp_size[1]) + nout_size[1]) + 23]
                     = ',';
                   loop_ub = n_tmp_size[1];
                   for (i = 0; i < loop_ub; i++) {
-                    s_tmp_data[(((i + tmp_size[1]) + c_tmp_size[1]) + out_size[1])
-                      + 24] = o_tmp_data[i];
+                    s_tmp_data[(((i + tmp_size[1]) + c_tmp_size[1]) + nout_size
+                                [1]) + 24] = o_tmp_data[i];
                   }
 
                   for (i = 0; i < 17; i++) {
-                    s_tmp_data[((((i + tmp_size[1]) + c_tmp_size[1]) + out_size
-                                 [1]) + n_tmp_size[1]) + 24] = cv41[i];
+                    s_tmp_data[((((i + tmp_size[1]) + c_tmp_size[1]) +
+                                 nout_size[1]) + n_tmp_size[1]) + 24] = cv41[i];
                   }
 
                   loop_ub = o_tmp_size[1];
                   for (i = 0; i < loop_ub; i++) {
-                    s_tmp_data[((((i + tmp_size[1]) + c_tmp_size[1]) + out_size
-                                 [1]) + n_tmp_size[1]) + 41] = q_tmp_data[i];
+                    s_tmp_data[((((i + tmp_size[1]) + c_tmp_size[1]) +
+                                 nout_size[1]) + n_tmp_size[1]) + 41] =
+                      q_tmp_data[i];
                   }
 
-                  s_tmp_data[((((tmp_size[1] + c_tmp_size[1]) + out_size[1]) +
+                  s_tmp_data[((((tmp_size[1] + c_tmp_size[1]) + nout_size[1]) +
                                n_tmp_size[1]) + o_tmp_size[1]) + 41] = ',';
                   loop_ub = p_tmp_size[1];
                   for (i = 0; i < loop_ub; i++) {
                     s_tmp_data[(((((i + tmp_size[1]) + c_tmp_size[1]) +
-                                  out_size[1]) + n_tmp_size[1]) + o_tmp_size[1])
+                                  nout_size[1]) + n_tmp_size[1]) + o_tmp_size[1])
                       + 42] = r_tmp_data[i];
                   }
 
                   for (i = 0; i < 5; i++) {
                     s_tmp_data[((((((i + tmp_size[1]) + c_tmp_size[1]) +
-                                   out_size[1]) + n_tmp_size[1]) + o_tmp_size[1])
+                                   nout_size[1]) + n_tmp_size[1]) + o_tmp_size[1])
                                 + p_tmp_size[1]) + 42] = cv43[i];
                   }
 
@@ -6769,7 +6787,7 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
                   }
 
                   b_st.site = &db_emlrtRSI;
-                  int2str(&b_st, out->mmd->data[c_i - 1], n_tmp_data, out_size);
+                  int2str(&b_st, out->mmd->data[c_i - 1], n_tmp_data, nout_size);
                   b_st.site = &db_emlrtRSI;
                   int2str(&b_st, n, o_tmp_data, n_tmp_size);
                   if ((int32_T)(c_i + 1U) > out->mmd->size[0]) {
@@ -6782,8 +6800,8 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
                   b_st.site = &db_emlrtRSI;
                   int2str(&b_st, n, r_tmp_data, p_tmp_size);
                   t_tmp_size[0] = 1;
-                  t_tmp_size[1] = (((((tmp_size[1] + c_tmp_size[1]) + out_size[1])
-                                     + n_tmp_size[1]) + o_tmp_size[1]) +
+                  t_tmp_size[1] = (((((tmp_size[1] + c_tmp_size[1]) + nout_size
+                                      [1]) + n_tmp_size[1]) + o_tmp_size[1]) +
                                    p_tmp_size[1]) + 48;
                   for (i = 0; i < 6; i++) {
                     v_tmp_data[i] = cv38[i];
@@ -6804,43 +6822,44 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
                     v_tmp_data[((i + tmp_size[1]) + c_tmp_size[1]) + 7] = cv36[i];
                   }
 
-                  loop_ub = out_size[1];
+                  loop_ub = nout_size[1];
                   for (i = 0; i < loop_ub; i++) {
                     v_tmp_data[((i + tmp_size[1]) + c_tmp_size[1]) + 24] =
                       n_tmp_data[i];
                   }
 
-                  v_tmp_data[((tmp_size[1] + c_tmp_size[1]) + out_size[1]) + 24]
+                  v_tmp_data[((tmp_size[1] + c_tmp_size[1]) + nout_size[1]) + 24]
                     = ',';
                   loop_ub = n_tmp_size[1];
                   for (i = 0; i < loop_ub; i++) {
-                    v_tmp_data[(((i + tmp_size[1]) + c_tmp_size[1]) + out_size[1])
-                      + 25] = o_tmp_data[i];
+                    v_tmp_data[(((i + tmp_size[1]) + c_tmp_size[1]) + nout_size
+                                [1]) + 25] = o_tmp_data[i];
                   }
 
                   for (i = 0; i < 17; i++) {
-                    v_tmp_data[((((i + tmp_size[1]) + c_tmp_size[1]) + out_size
-                                 [1]) + n_tmp_size[1]) + 25] = cv41[i];
+                    v_tmp_data[((((i + tmp_size[1]) + c_tmp_size[1]) +
+                                 nout_size[1]) + n_tmp_size[1]) + 25] = cv41[i];
                   }
 
                   loop_ub = o_tmp_size[1];
                   for (i = 0; i < loop_ub; i++) {
-                    v_tmp_data[((((i + tmp_size[1]) + c_tmp_size[1]) + out_size
-                                 [1]) + n_tmp_size[1]) + 42] = q_tmp_data[i];
+                    v_tmp_data[((((i + tmp_size[1]) + c_tmp_size[1]) +
+                                 nout_size[1]) + n_tmp_size[1]) + 42] =
+                      q_tmp_data[i];
                   }
 
-                  v_tmp_data[((((tmp_size[1] + c_tmp_size[1]) + out_size[1]) +
+                  v_tmp_data[((((tmp_size[1] + c_tmp_size[1]) + nout_size[1]) +
                                n_tmp_size[1]) + o_tmp_size[1]) + 42] = ',';
                   loop_ub = p_tmp_size[1];
                   for (i = 0; i < loop_ub; i++) {
                     v_tmp_data[(((((i + tmp_size[1]) + c_tmp_size[1]) +
-                                  out_size[1]) + n_tmp_size[1]) + o_tmp_size[1])
+                                  nout_size[1]) + n_tmp_size[1]) + o_tmp_size[1])
                       + 43] = r_tmp_data[i];
                   }
 
                   for (i = 0; i < 5; i++) {
                     v_tmp_data[((((((i + tmp_size[1]) + c_tmp_size[1]) +
-                                   out_size[1]) + n_tmp_size[1]) + o_tmp_size[1])
+                                   nout_size[1]) + n_tmp_size[1]) + o_tmp_size[1])
                                 + p_tmp_size[1]) + 43] = cv43[i];
                   }
 
@@ -8061,8 +8080,8 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
               x->data[i] = (gfind->data[i + gfind->size[0]] > 0.0);
             }
 
-            idx = x->size[0];
-            for (c_i = 0; c_i < idx; c_i++) {
+            irank = x->size[0];
+            for (c_i = 0; c_i < irank; c_i++) {
               if (x->data[c_i] && (c_i + 1 > gfind->size[0])) {
                 emlrtDynamicBoundsCheckR2012b(c_i + 1, 1, gfind->size[0],
                   &emlrtBCI, &st);
@@ -8079,9 +8098,9 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
               x->data[i] = (gfind->data[i + gfind->size[0]] > 0.0);
             }
 
-            idx = x->size[0] - 1;
+            irank = x->size[0] - 1;
             a = 0;
-            for (c_i = 0; c_i <= idx; c_i++) {
+            for (c_i = 0; c_i <= irank; c_i++) {
               if (x->data[c_i]) {
                 a++;
               }
@@ -8091,11 +8110,11 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
             i = r5->size[0];
             r5->size[0] = a;
             emxEnsureCapacity_int32_T(&st, r5, i, &qc_emlrtRTEI);
-            irank = 0;
-            for (c_i = 0; c_i <= idx; c_i++) {
+            idx = 0;
+            for (c_i = 0; c_i <= irank; c_i++) {
               if (x->data[c_i]) {
-                r5->data[irank] = c_i + 1;
-                irank++;
+                r5->data[idx] = c_i + 1;
+                idx++;
               }
             }
 
@@ -8117,9 +8136,9 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
               x->data[i] = (gfind->data[i + gfind->size[0]] > 0.0);
             }
 
-            idx = x->size[0] - 1;
+            irank = x->size[0] - 1;
             a = 0;
-            for (c_i = 0; c_i <= idx; c_i++) {
+            for (c_i = 0; c_i <= irank; c_i++) {
               if (x->data[c_i]) {
                 a++;
               }
@@ -8129,11 +8148,11 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
             i = r6->size[0];
             r6->size[0] = a;
             emxEnsureCapacity_int32_T(&st, r6, i, &qc_emlrtRTEI);
-            irank = 0;
-            for (c_i = 0; c_i <= idx; c_i++) {
+            idx = 0;
+            for (c_i = 0; c_i <= irank; c_i++) {
               if (x->data[c_i]) {
-                r6->data[irank] = c_i + 1;
-                irank++;
+                r6->data[idx] = c_i + 1;
+                idx++;
               }
             }
 
@@ -8286,8 +8305,7 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
         b_st.site = &pcb_emlrtRSI;
         disp(&b_st, k_emlrt_marshallOut(&b_st, b_cv4), &m_emlrtMCI);
         b_st.site = &meb_emlrtRSI;
-        disp(&b_st, fb_emlrt_marshallOut(out->nout.data, out->nout.size),
-             &o_emlrtMCI);
+        disp(&b_st, fb_emlrt_marshallOut(nout), &o_emlrtMCI);
       }
 
       if (extram3_size[1] != 0) {
@@ -8335,9 +8353,9 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
           x->data[i] = muDoubleScalarIsNaN(b_m0->data[i]);
         }
 
-        idx = x->size[0] - 1;
+        irank = x->size[0] - 1;
         a = 0;
-        for (b_i = 0; b_i <= idx; b_i++) {
+        for (b_i = 0; b_i <= irank; b_i++) {
           if (x->data[b_i]) {
             a++;
           }
@@ -8346,16 +8364,16 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
         i = outliers->size[0];
         outliers->size[0] = a;
         emxEnsureCapacity_real_T(&st, outliers, i, &qc_emlrtRTEI);
-        irank = 0;
-        for (b_i = 0; b_i <= idx; b_i++) {
+        idx = 0;
+        for (b_i = 0; b_i <= irank; b_i++) {
           if (x->data[b_i]) {
             if (b_i + 1 > seq->size[0]) {
               emlrtDynamicBoundsCheckR2012b(b_i + 1, 1, seq->size[0],
                 &ci_emlrtBCI, &st);
             }
 
-            outliers->data[irank] = seq->data[b_i];
-            irank++;
+            outliers->data[idx] = seq->data[b_i];
+            idx++;
           }
         }
       } else {
@@ -8373,9 +8391,9 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
           r->data[i] = muDoubleScalarIsNaN(out->cov->data[i]);
         }
 
-        idx = r->size[0] * r->size[1] - 1;
+        irank = r->size[0] * r->size[1] - 1;
         a = 0;
-        for (b_i = 0; b_i <= idx; b_i++) {
+        for (b_i = 0; b_i <= irank; b_i++) {
           if (r->data[b_i]) {
             a++;
           }
@@ -8384,16 +8402,16 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
         i = outliers->size[0];
         outliers->size[0] = a;
         emxEnsureCapacity_real_T(&st, outliers, i, &qc_emlrtRTEI);
-        irank = 0;
-        for (b_i = 0; b_i <= idx; b_i++) {
+        idx = 0;
+        for (b_i = 0; b_i <= irank; b_i++) {
           if (r->data[b_i]) {
             if ((b_i + 1 < 1) || (b_i + 1 > seq->size[0])) {
               emlrtDynamicBoundsCheckR2012b(b_i + 1, 1, seq->size[0],
                 &ni_emlrtBCI, &st);
             }
 
-            outliers->data[irank] = seq->data[b_i];
-            irank++;
+            outliers->data[idx] = seq->data[b_i];
+            idx++;
           }
         }
       }
@@ -8518,10 +8536,13 @@ void FSM_wrapper(FSM_wrapperStackData *SD, const emlrtStack *sp, const
       out->md->data[i] = b_m0->data[i];
     }
 
-    if ((bonflev_size[0] != 0) && (bonflev_size[1] != 0)) {
-      out->nout.size[0] = 1;
-      out->nout.size[1] = 1;
-      out->nout.data[0] = rtNaN;
+    if ((bonflev_size[0] == 0) || (bonflev_size[1] == 0)) {
+      out->nout.size[0] = 2;
+      out->nout.size[1] = 5;
+      memcpy(&out->nout.data[0], &nout[0], 10U * sizeof(real_T));
+    } else {
+      out->nout.size[0] = 0;
+      out->nout.size[1] = 0;
     }
 
     out->class.size[0] = 1;

@@ -19,7 +19,7 @@
 #include "sumMatrixIncludeNaN.h"
 
 /* Variable Definitions */
-static emlrtRSInfo xj_emlrtRSI = {
+static emlrtRSInfo fk_emlrtRSI = {
     53,                 /* lineNo */
     "sumMatrixColumns", /* fcnName */
     "C:\\Program "
@@ -27,7 +27,7 @@ static emlrtRSInfo xj_emlrtRSI = {
     "rixIncludeNaN.m" /* pathName */
 };
 
-static emlrtRSInfo tv_emlrtRSI = {
+static emlrtRSInfo bw_emlrtRSI = {
     41,                 /* lineNo */
     "sumMatrixColumns", /* fcnName */
     "C:\\Program "
@@ -35,7 +35,7 @@ static emlrtRSInfo tv_emlrtRSI = {
     "rixIncludeNaN.m" /* pathName */
 };
 
-static emlrtRSInfo uv_emlrtRSI = {
+static emlrtRSInfo cw_emlrtRSI = {
     50,                 /* lineNo */
     "sumMatrixColumns", /* fcnName */
     "C:\\Program "
@@ -43,7 +43,7 @@ static emlrtRSInfo uv_emlrtRSI = {
     "rixIncludeNaN.m" /* pathName */
 };
 
-static emlrtRSInfo qlb_emlrtRSI = {
+static emlrtRSInfo gmb_emlrtRSI = {
     177,                /* lineNo */
     "colMajorFlatIter", /* fcnName */
     "C:\\Program "
@@ -51,7 +51,7 @@ static emlrtRSInfo qlb_emlrtRSI = {
     "eVectorElements.m" /* pathName */
 };
 
-static emlrtRTEInfo bq_emlrtRTEI = {
+static emlrtRTEInfo ar_emlrtRTEI = {
     74,                      /* lineNo */
     9,                       /* colNo */
     "combineVectorElements", /* fName */
@@ -60,7 +60,7 @@ static emlrtRTEInfo bq_emlrtRTEI = {
     "eVectorElements.m" /* pName */
 };
 
-static emlrtRTEInfo cq_emlrtRTEI = {
+static emlrtRTEInfo br_emlrtRTEI = {
     35,                    /* lineNo */
     20,                    /* colNo */
     "sumMatrixIncludeNaN", /* fName */
@@ -69,7 +69,7 @@ static emlrtRTEInfo cq_emlrtRTEI = {
     "rixIncludeNaN.m" /* pName */
 };
 
-static emlrtRTEInfo afb_emlrtRTEI = {
+static emlrtRTEInfo ugb_emlrtRTEI = {
     97,                      /* lineNo */
     13,                      /* colNo */
     "combineVectorElements", /* fName */
@@ -78,7 +78,7 @@ static emlrtRTEInfo afb_emlrtRTEI = {
     "eVectorElements.m" /* pName */
 };
 
-static emlrtRTEInfo bfb_emlrtRTEI = {
+static emlrtRTEInfo vgb_emlrtRTEI = {
     170,                     /* lineNo */
     24,                      /* colNo */
     "combineVectorElements", /* fName */
@@ -105,7 +105,7 @@ void b_combineVectorElements(const emlrtStack *sp, const emxArray_real_T *x,
   int32_T nleft;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &mm_emlrtRSI;
+  st.site = &tm_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -118,46 +118,46 @@ void b_combineVectorElements(const emlrtStack *sp, const emxArray_real_T *x,
     nfb = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = x->size[1];
-    emxEnsureCapacity_real_T(&st, y, nfb, &bq_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, y, nfb, &ar_emlrtRTEI);
     ncols = x->size[1];
     for (nfb = 0; nfb < ncols; nfb++) {
       y->data[nfb] = 0.0;
     }
   } else {
-    b_st.site = &nm_emlrtRSI;
-    c_st.site = &vj_emlrtRSI;
+    b_st.site = &um_emlrtRSI;
+    c_st.site = &dk_emlrtRSI;
     nfb = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = x->size[1];
-    emxEnsureCapacity_real_T(&c_st, y, nfb, &cq_emlrtRTEI);
+    emxEnsureCapacity_real_T(&c_st, y, nfb, &br_emlrtRTEI);
     ncols = x->size[1] - 1;
     if (x->size[0] < 4096) {
-      d_st.site = &tv_emlrtRSI;
+      d_st.site = &bw_emlrtRSI;
       if (x->size[1] > 2147483646) {
-        e_st.site = &ab_emlrtRSI;
+        e_st.site = &hb_emlrtRSI;
         check_forloop_overflow_error(&e_st);
       }
       for (col = 0; col <= ncols; col++) {
-        d_st.site = &wj_emlrtRSI;
+        d_st.site = &ek_emlrtRSI;
         y->data[col] = c_sumColumnB(&d_st, x, col + 1, x->size[0]);
       }
     } else {
       nfb = x->size[0] / 4096;
       inb = nfb << 12;
       nleft = x->size[0] - inb;
-      d_st.site = &uv_emlrtRSI;
+      d_st.site = &cw_emlrtRSI;
       if (x->size[1] > 2147483646) {
-        e_st.site = &ab_emlrtRSI;
+        e_st.site = &hb_emlrtRSI;
         check_forloop_overflow_error(&e_st);
       }
       for (col = 0; col <= ncols; col++) {
         s = b_sumColumnB4(x, col + 1, 1);
-        d_st.site = &xj_emlrtRSI;
+        d_st.site = &fk_emlrtRSI;
         for (ib = 2; ib <= nfb; ib++) {
           s += b_sumColumnB4(x, col + 1, ((ib - 1) << 12) + 1);
         }
         if (nleft > 0) {
-          d_st.site = &yj_emlrtRSI;
+          d_st.site = &gk_emlrtRSI;
           s += d_sumColumnB(&d_st, x, col + 1, nleft, inb + 1);
         }
         y->data[col] = s;
@@ -188,29 +188,29 @@ void c_combineVectorElements(const emlrtStack *sp, const emxArray_boolean_T *x,
     i = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = x->size[1];
-    emxEnsureCapacity_int32_T(sp, y, i, &afb_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, y, i, &ugb_emlrtRTEI);
     xpageoffset = x->size[1];
     for (i = 0; i < xpageoffset; i++) {
       y->data[i] = 0;
     }
   } else {
-    st.site = &md_emlrtRSI;
+    st.site = &td_emlrtRSI;
     npages = x->size[1];
     i = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = x->size[1];
-    emxEnsureCapacity_int32_T(&st, y, i, &bfb_emlrtRTEI);
-    b_st.site = &qlb_emlrtRSI;
+    emxEnsureCapacity_int32_T(&st, y, i, &vgb_emlrtRTEI);
+    b_st.site = &gmb_emlrtRSI;
     if (x->size[1] > 2147483646) {
-      c_st.site = &ab_emlrtRSI;
+      c_st.site = &hb_emlrtRSI;
       check_forloop_overflow_error(&c_st);
     }
     for (i = 0; i < npages; i++) {
       xpageoffset = i * x->size[0];
       y->data[i] = x->data[xpageoffset];
-      b_st.site = &nd_emlrtRSI;
+      b_st.site = &ud_emlrtRSI;
       if ((2 <= vlen) && (vlen > 2147483646)) {
-        c_st.site = &ab_emlrtRSI;
+        c_st.site = &hb_emlrtRSI;
         check_forloop_overflow_error(&c_st);
       }
       for (k = 2; k <= vlen; k++) {
@@ -238,11 +238,11 @@ int32_T combineVectorElements(const emlrtStack *sp, const emxArray_boolean_T *x)
   if (x->size[0] == 0) {
     y = 0;
   } else {
-    st.site = &md_emlrtRSI;
+    st.site = &td_emlrtRSI;
     y = x->data[0];
-    b_st.site = &nd_emlrtRSI;
+    b_st.site = &ud_emlrtRSI;
     if ((2 <= x->size[0]) && (x->size[0] > 2147483646)) {
-      c_st.site = &ab_emlrtRSI;
+      c_st.site = &hb_emlrtRSI;
       check_forloop_overflow_error(&c_st);
     }
     for (k = 2; k <= vlen; k++) {
@@ -275,14 +275,14 @@ void d_combineVectorElements(const emlrtStack *sp, const emxArray_boolean_T *x,
       y_data[0] = 0;
     }
   } else {
-    st.site = &md_emlrtRSI;
+    st.site = &td_emlrtRSI;
     y_size[0] = 1;
     y_size[1] = 1;
-    b_st.site = &qlb_emlrtRSI;
+    b_st.site = &gmb_emlrtRSI;
     y_data[0] = x->data[0];
-    b_st.site = &nd_emlrtRSI;
+    b_st.site = &ud_emlrtRSI;
     if ((2 <= x->size[0]) && (x->size[0] > 2147483646)) {
-      c_st.site = &ab_emlrtRSI;
+      c_st.site = &hb_emlrtRSI;
       check_forloop_overflow_error(&c_st);
     }
     for (k = 2; k <= vlen; k++) {

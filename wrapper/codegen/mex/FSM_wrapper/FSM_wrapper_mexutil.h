@@ -55,9 +55,6 @@ const mxArray *e_emlrt_marshallOut(const real_T u);
 void f_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
                         const emlrtMsgIdentifier *parentId, char_T y[12]);
 
-const mxArray *fb_emlrt_marshallOut(const real_T u_data[],
-                                    const int32_T u_size[2]);
-
 const mxArray *feval(const emlrtStack *sp, const mxArray *b, const mxArray *c,
                      const mxArray *d, emlrtMCInfo *location);
 

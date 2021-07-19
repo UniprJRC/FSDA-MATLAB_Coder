@@ -381,7 +381,7 @@ real_T chi2inv(const emlrtStack *sp)
           d_st.site = &rw_emlrtRSI;
           if (z < 0.0) {
             emlrtErrorWithMessageIdR2018a(
-                &d_st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+                &d_st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
                 "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
           }
           z *= 1.0 - f / (z * muDoubleScalarExp(
@@ -438,7 +438,7 @@ real_T chi2inv(const emlrtStack *sp)
       d_y = NULL;
       m = emlrtCreateDoubleScalar(0.99);
       emlrtAssign(&d_y, m);
-      e_st.site = &yeb_emlrtRSI;
+      e_st.site = &xeb_emlrtRSI;
       i_emlrt_marshallIn(&e_st, c_sprintf(&e_st, c_y, d_y, &p_emlrtMCI),
                          "<output of sprintf>", b_str);
       d_st.site = &ow_emlrtRSI;
@@ -449,7 +449,7 @@ real_T chi2inv(const emlrtStack *sp)
       f_y = NULL;
       m = emlrtCreateDoubleScalar(0.5);
       emlrtAssign(&f_y, m);
-      e_st.site = &yeb_emlrtRSI;
+      e_st.site = &xeb_emlrtRSI;
       i_emlrt_marshallIn(&e_st, c_sprintf(&e_st, e_y, f_y, &p_emlrtMCI),
                          "<output of sprintf>", c_str);
       d_st.site = &nw_emlrtRSI;
@@ -474,7 +474,7 @@ real_T chi2inv(const emlrtStack *sp)
     b_y = NULL;
     m = emlrtCreateDoubleScalar(2.0);
     emlrtAssign(&b_y, m);
-    c_st.site = &yeb_emlrtRSI;
+    c_st.site = &xeb_emlrtRSI;
     k_emlrt_marshallIn(&c_st, c_sprintf(&c_st, y, b_y, &p_emlrtMCI),
                        "<output of sprintf>", str);
     b_st.site = &aw_emlrtRSI;

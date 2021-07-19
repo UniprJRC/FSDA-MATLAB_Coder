@@ -13,7 +13,6 @@
 #include "GYfilt.h"
 #include "LTSts_wrapper_data.h"
 #include "LTSts_wrapper_emxutil.h"
-#include "LTSts_wrapper_mexutil.h"
 #include "LTSts_wrapper_types.h"
 #include "any.h"
 #include "chi2inv.h"
@@ -28,16 +27,8 @@
 #include "rt_nonfinite.h"
 #include "sort.h"
 #include "mwmathutil.h"
-#include <stdio.h>
 
 /* Variable Definitions */
-static emlrtRTEInfo c_emlrtRTEI = {
-    180,                                              /* lineNo */
-    1,                                                /* colNo */
-    "gyiterate",                                      /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\GYfilt.m" /* pName */
-};
-
 static emlrtRSInfo sx_emlrtRSI = {
     110,                                              /* lineNo */
     "GYfilt",                                         /* fcnName */
@@ -120,12 +111,6 @@ static emlrtRSInfo ly_emlrtRSI = {
 
 static emlrtRSInfo my_emlrtRSI = {
     172,                                              /* lineNo */
-    "gyiterate",                                      /* fcnName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\GYfilt.m" /* pathName */
-};
-
-static emlrtRSInfo ny_emlrtRSI = {
-    180,                                              /* lineNo */
     "gyiterate",                                      /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\GYfilt.m" /* pathName */
 };
@@ -353,112 +338,112 @@ static emlrtBCInfo wp_emlrtBCI = {
     0                                                  /* checkKind */
 };
 
-static emlrtRTEInfo bv_emlrtRTEI = {
+static emlrtRTEInfo av_emlrtRTEI = {
     116,                                              /* lineNo */
     5,                                                /* colNo */
     "GYfilt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\GYfilt.m" /* pName */
 };
 
-static emlrtRTEInfo cv_emlrtRTEI = {
+static emlrtRTEInfo bv_emlrtRTEI = {
     126,                                              /* lineNo */
     1,                                                /* colNo */
     "GYfilt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\GYfilt.m" /* pName */
 };
 
-static emlrtRTEInfo dv_emlrtRTEI = {
+static emlrtRTEInfo cv_emlrtRTEI = {
     127,                                              /* lineNo */
     10,                                               /* colNo */
     "GYfilt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\GYfilt.m" /* pName */
 };
 
-static emlrtRTEInfo ev_emlrtRTEI = {
+static emlrtRTEInfo dv_emlrtRTEI = {
     1,                                                /* lineNo */
     20,                                               /* colNo */
     "GYfilt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\GYfilt.m" /* pName */
 };
 
-static emlrtRTEInfo fv_emlrtRTEI = {
+static emlrtRTEInfo ev_emlrtRTEI = {
     117,                                              /* lineNo */
     1,                                                /* colNo */
     "GYfilt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\GYfilt.m" /* pName */
 };
 
-static emlrtRTEInfo iv_emlrtRTEI = {
+static emlrtRTEInfo hv_emlrtRTEI = {
     166,                                              /* lineNo */
     1,                                                /* colNo */
     "GYfilt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\GYfilt.m" /* pName */
 };
 
-static emlrtRTEInfo jv_emlrtRTEI = {
+static emlrtRTEInfo iv_emlrtRTEI = {
     121,                                              /* lineNo */
     5,                                                /* colNo */
     "GYfilt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\GYfilt.m" /* pName */
 };
 
-static emlrtRTEInfo kv_emlrtRTEI = {
+static emlrtRTEInfo jv_emlrtRTEI = {
     178,                                              /* lineNo */
     6,                                                /* colNo */
     "GYfilt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\GYfilt.m" /* pName */
 };
 
-static emlrtRTEInfo lv_emlrtRTEI = {
+static emlrtRTEInfo kv_emlrtRTEI = {
     121,                                              /* lineNo */
     13,                                               /* colNo */
     "GYfilt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\GYfilt.m" /* pName */
 };
 
-static emlrtRTEInfo mv_emlrtRTEI = {
+static emlrtRTEInfo lv_emlrtRTEI = {
     171,                                              /* lineNo */
     10,                                               /* colNo */
     "GYfilt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\GYfilt.m" /* pName */
 };
 
-static emlrtRTEInfo nv_emlrtRTEI = {
+static emlrtRTEInfo mv_emlrtRTEI = {
     171,                                              /* lineNo */
     5,                                                /* colNo */
     "GYfilt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\GYfilt.m" /* pName */
 };
 
-static emlrtRTEInfo ov_emlrtRTEI = {
+static emlrtRTEInfo nv_emlrtRTEI = {
     171,                                              /* lineNo */
     13,                                               /* colNo */
     "GYfilt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\GYfilt.m" /* pName */
 };
 
-static emlrtRTEInfo ox_emlrtRTEI = {
+static emlrtRTEInfo nx_emlrtRTEI = {
     137,                                              /* lineNo */
     1,                                                /* colNo */
     "GYfilt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\GYfilt.m" /* pName */
 };
 
-static emlrtRTEInfo px_emlrtRTEI = {
+static emlrtRTEInfo ox_emlrtRTEI = {
     138,                                              /* lineNo */
     10,                                               /* colNo */
     "GYfilt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\GYfilt.m" /* pName */
 };
 
-static emlrtRTEInfo qx_emlrtRTEI = {
+static emlrtRTEInfo px_emlrtRTEI = {
     133,                                              /* lineNo */
     14,                                               /* colNo */
     "GYfilt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\GYfilt.m" /* pName */
 };
 
-static emlrtRTEInfo rx_emlrtRTEI = {
+static emlrtRTEInfo qx_emlrtRTEI = {
     36,       /* lineNo */
     5,        /* colNo */
     "gamcdf", /* fName */
@@ -466,7 +451,7 @@ static emlrtRTEInfo rx_emlrtRTEI = {
                                                                         */
 };
 
-static emlrtRTEInfo sx_emlrtRTEI = {
+static emlrtRTEInfo rx_emlrtRTEI = {
     37,       /* lineNo */
     22,       /* colNo */
     "gamcdf", /* fName */
@@ -474,14 +459,14 @@ static emlrtRTEInfo sx_emlrtRTEI = {
                                                                         */
 };
 
-static emlrtRTEInfo tx_emlrtRTEI = {
+static emlrtRTEInfo sx_emlrtRTEI = {
     151,                                              /* lineNo */
     1,                                                /* colNo */
     "GYfilt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\GYfilt.m" /* pName */
 };
 
-static emlrtRTEInfo ux_emlrtRTEI = {
+static emlrtRTEInfo tx_emlrtRTEI = {
     38,       /* lineNo */
     22,       /* colNo */
     "gamcdf", /* fName */
@@ -489,49 +474,49 @@ static emlrtRTEInfo ux_emlrtRTEI = {
                                                                         */
 };
 
-static emlrtRTEInfo vx_emlrtRTEI = {
+static emlrtRTEInfo ux_emlrtRTEI = {
     154,                                              /* lineNo */
     9,                                                /* colNo */
     "GYfilt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\GYfilt.m" /* pName */
 };
 
-static emlrtRTEInfo wx_emlrtRTEI = {
+static emlrtRTEInfo vx_emlrtRTEI = {
     142,                                              /* lineNo */
     27,                                               /* colNo */
     "GYfilt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\GYfilt.m" /* pName */
 };
 
-static emlrtRTEInfo xx_emlrtRTEI = {
+static emlrtRTEInfo wx_emlrtRTEI = {
     144,                                              /* lineNo */
     5,                                                /* colNo */
     "GYfilt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\GYfilt.m" /* pName */
 };
 
-static emlrtRTEInfo yx_emlrtRTEI = {
+static emlrtRTEInfo xx_emlrtRTEI = {
     145,                                              /* lineNo */
     17,                                               /* colNo */
     "GYfilt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\GYfilt.m" /* pName */
 };
 
-static emlrtRTEInfo ay_emlrtRTEI = {
+static emlrtRTEInfo yx_emlrtRTEI = {
     145,                                              /* lineNo */
     9,                                                /* colNo */
     "GYfilt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\GYfilt.m" /* pName */
 };
 
-static emlrtRTEInfo by_emlrtRTEI = {
+static emlrtRTEInfo ay_emlrtRTEI = {
     142,                                              /* lineNo */
     30,                                               /* colNo */
     "GYfilt",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\GYfilt.m" /* pName */
 };
 
-static emlrtRTEInfo cy_emlrtRTEI = {
+static emlrtRTEInfo by_emlrtRTEI = {
     1,        /* lineNo */
     13,       /* colNo */
     "gamcdf", /* fName */
@@ -539,7 +524,7 @@ static emlrtRTEInfo cy_emlrtRTEI = {
                                                                         */
 };
 
-static emlrtRTEInfo dy_emlrtRTEI = {
+static emlrtRTEInfo cy_emlrtRTEI = {
     1,        /* lineNo */
     17,       /* colNo */
     "gamcdf", /* fName */
@@ -604,28 +589,28 @@ static void gyfiltaux(const emlrtStack *sp, emxArray_real_T *v)
   i_st.prev = &h_st;
   i_st.tls = h_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  emxInit_real_T(sp, &b_v, 1, &qx_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_v, 1, &px_emlrtRTEI, true);
   /*  Inner fucntion gyfiltaux */
   st.site = &dy_emlrtRSI;
   i = b_v->size[0];
   b_v->size[0] = v->size[0];
-  emxEnsureCapacity_real_T(&st, b_v, i, &se_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, b_v, i, &re_emlrtRTEI);
   last = v->size[0];
   for (i = 0; i < last; i++) {
     b_v->data[i] = v->data[i];
   }
-  emxInit_int32_T(&st, &vorder, 1, &qx_emlrtRTEI, true);
-  emxInit_int32_T(&st, &iidx, 1, &qx_emlrtRTEI, true);
+  emxInit_int32_T(&st, &vorder, 1, &px_emlrtRTEI, true);
+  emxInit_int32_T(&st, &iidx, 1, &px_emlrtRTEI, true);
   b_st.site = &cq_emlrtRSI;
   sort(&b_st, b_v, iidx);
   i = vorder->size[0];
   vorder->size[0] = iidx->size[0];
-  emxEnsureCapacity_int32_T(&st, vorder, i, &ue_emlrtRTEI);
+  emxEnsureCapacity_int32_T(&st, vorder, i, &te_emlrtRTEI);
   last = iidx->size[0];
   for (i = 0; i < last; i++) {
     vorder->data[i] = iidx->data[i];
   }
-  emxInit_real_T(sp, &seq, 2, &ox_emlrtRTEI, true);
+  emxInit_real_T(sp, &seq, 2, &nx_emlrtRTEI, true);
   if (b_v->size[0] < 1) {
     seq->size[0] = 1;
     seq->size[1] = 0;
@@ -633,18 +618,18 @@ static void gyfiltaux(const emlrtStack *sp, emxArray_real_T *v)
     i = seq->size[0] * seq->size[1];
     seq->size[0] = 1;
     seq->size[1] = b_v->size[0];
-    emxEnsureCapacity_real_T(sp, seq, i, &ox_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, seq, i, &nx_emlrtRTEI);
     last = b_v->size[0] - 1;
     for (i = 0; i <= last; i++) {
       seq->data[i] = (real_T)i + 1.0;
     }
   }
-  emxInit_boolean_T(sp, &r, 1, &px_emlrtRTEI, true);
+  emxInit_boolean_T(sp, &r, 1, &ox_emlrtRTEI, true);
   st.site = &ey_emlrtRSI;
   n0 = chi2inv(&st);
   i = r->size[0];
   r->size[0] = b_v->size[0];
-  emxEnsureCapacity_boolean_T(sp, r, i, &px_emlrtRTEI);
+  emxEnsureCapacity_boolean_T(sp, r, i, &ox_emlrtRTEI);
   last = b_v->size[0];
   for (i = 0; i < last; i++) {
     r->data[i] = (b_v->data[i] < n0);
@@ -656,10 +641,10 @@ static void gyfiltaux(const emlrtStack *sp, emxArray_real_T *v)
       last++;
     }
   }
-  emxInit_int32_T(sp, &r1, 1, &px_emlrtRTEI, true);
+  emxInit_int32_T(sp, &r1, 1, &ox_emlrtRTEI, true);
   i = r1->size[0];
   r1->size[0] = last;
-  emxEnsureCapacity_int32_T(sp, r1, i, &qx_emlrtRTEI);
+  emxEnsureCapacity_int32_T(sp, r1, i, &px_emlrtRTEI);
   last = 0;
   for (b_i = 0; b_i <= idx; b_i++) {
     if (r->data[b_i]) {
@@ -676,7 +661,7 @@ static void gyfiltaux(const emlrtStack *sp, emxArray_real_T *v)
     }
   }
   n0 = 0.0;
-  emxInit_real_T(sp, &plo, 1, &cy_emlrtRTEI, true);
+  emxInit_real_T(sp, &plo, 1, &by_emlrtRTEI, true);
   if (r1->size[0] != 0) {
     if (seq->data[r1->data[r1->size[0] - 1] - 1] > b_v->size[0]) {
       i = 0;
@@ -693,8 +678,8 @@ static void gyfiltaux(const emlrtStack *sp, emxArray_real_T *v)
       i = (int32_T)n0 - 1;
       b_i = b_v->size[0];
     }
-    emxInit_real_T(sp, &r2, 1, &qx_emlrtRTEI, true);
-    emxInit_real_T(sp, &pup, 1, &dy_emlrtRTEI, true);
+    emxInit_real_T(sp, &r2, 1, &px_emlrtRTEI, true);
+    emxInit_real_T(sp, &pup, 1, &cy_emlrtRTEI, true);
     iv[0] = 1;
     b_i -= i;
     iv[1] = b_i;
@@ -704,13 +689,13 @@ static void gyfiltaux(const emlrtStack *sp, emxArray_real_T *v)
     b_st.site = &iy_emlrtRSI;
     idx = r2->size[0];
     r2->size[0] = b_i;
-    emxEnsureCapacity_real_T(&b_st, r2, idx, &rx_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, r2, idx, &qx_emlrtRTEI);
     idx = plo->size[0];
     plo->size[0] = b_i;
-    emxEnsureCapacity_real_T(&b_st, plo, idx, &sx_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, plo, idx, &rx_emlrtRTEI);
     idx = pup->size[0];
     pup->size[0] = b_i;
-    emxEnsureCapacity_real_T(&b_st, pup, idx, &ux_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, pup, idx, &tx_emlrtRTEI);
     for (k = 0; k < b_i; k++) {
       if (k + 1 > b_i) {
         emlrtDynamicBoundsCheckR2012b(k + 1, 1, b_i, &wp_emlrtBCI, &b_st);
@@ -750,7 +735,7 @@ static void gyfiltaux(const emlrtStack *sp, emxArray_real_T *v)
         pup->data[k] = rtNaN;
       }
     }
-    emxInit_real_T(&b_st, &y, 2, &by_emlrtRTEI, true);
+    emxInit_real_T(&b_st, &y, 2, &ay_emlrtRTEI, true);
     st.site = &fy_emlrtRSI;
     b_st.site = &rg_emlrtRSI;
     if (b_v->size[0] < seq->data[r1->data[r1->size[0] - 1] - 1]) {
@@ -762,7 +747,7 @@ static void gyfiltaux(const emlrtStack *sp, emxArray_real_T *v)
       i = y->size[0] * y->size[1];
       y->size[0] = 1;
       y->size[1] = (int32_T)((real_T)b_v->size[0] - n0) + 1;
-      emxEnsureCapacity_real_T(&b_st, y, i, &wc_emlrtRTEI);
+      emxEnsureCapacity_real_T(&b_st, y, i, &vc_emlrtRTEI);
       last = (int32_T)((real_T)b_v->size[0] - n0);
       for (i = 0; i <= last; i++) {
         y->data[i] = n0 + (real_T)i;
@@ -774,7 +759,7 @@ static void gyfiltaux(const emlrtStack *sp, emxArray_real_T *v)
     }
     i = plo->size[0];
     plo->size[0] = y->size[1];
-    emxEnsureCapacity_real_T(sp, plo, i, &wx_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, plo, i, &vx_emlrtRTEI);
     last = y->size[1];
     for (i = 0; i < last; i++) {
       plo->data[i] = (y->data[i] - 1.0) / (real_T)b_v->size[0];
@@ -786,7 +771,7 @@ static void gyfiltaux(const emlrtStack *sp, emxArray_real_T *v)
     }
     i = pup->size[0];
     pup->size[0] = r2->size[0];
-    emxEnsureCapacity_real_T(sp, pup, i, &xx_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, pup, i, &wx_emlrtRTEI);
     last = r2->size[0];
     for (i = 0; i < last; i++) {
       pup->data[i] = 0.0;
@@ -798,10 +783,10 @@ static void gyfiltaux(const emlrtStack *sp, emxArray_real_T *v)
         last++;
       }
     }
-    emxInit_int32_T(sp, &r4, 1, &yx_emlrtRTEI, true);
+    emxInit_int32_T(sp, &r4, 1, &xx_emlrtRTEI, true);
     i = r4->size[0];
     r4->size[0] = last;
-    emxEnsureCapacity_int32_T(sp, r4, i, &qx_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, r4, i, &px_emlrtRTEI);
     last = 0;
     for (b_i = 0; b_i <= idx; b_i++) {
       if (r2->data[b_i] - plo->data[b_i] > 0.0) {
@@ -824,10 +809,10 @@ static void gyfiltaux(const emlrtStack *sp, emxArray_real_T *v)
         last++;
       }
     }
-    emxInit_int32_T(sp, &r5, 1, &ay_emlrtRTEI, true);
+    emxInit_int32_T(sp, &r5, 1, &yx_emlrtRTEI, true);
     i = r5->size[0];
     r5->size[0] = last;
-    emxEnsureCapacity_int32_T(sp, r5, i, &qx_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, r5, i, &px_emlrtRTEI);
     last = 0;
     for (b_i = 0; b_i <= idx; b_i++) {
       if (r2->data[b_i] - plo->data[b_i] > 0.0) {
@@ -852,7 +837,7 @@ static void gyfiltaux(const emlrtStack *sp, emxArray_real_T *v)
     d_st.site = &nr_emlrtRSI;
     if (pup->size[0] < 1) {
       emlrtErrorWithMessageIdR2018a(
-          &d_st, &f_emlrtRTEI, "Coder:toolbox:eml_min_or_max_varDimZero",
+          &d_st, &e_emlrtRTEI, "Coder:toolbox:eml_min_or_max_varDimZero",
           "Coder:toolbox:eml_min_or_max_varDimZero", 0);
     }
     e_st.site = &or_emlrtRSI;
@@ -917,7 +902,7 @@ static void gyfiltaux(const emlrtStack *sp, emxArray_real_T *v)
   st.site = &hy_emlrtRSI;
   i = plo->size[0];
   plo->size[0] = vorder->size[0];
-  emxEnsureCapacity_real_T(&st, plo, i, &se_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, plo, i, &re_emlrtRTEI);
   last = vorder->size[0];
   for (i = 0; i < last; i++) {
     plo->data[i] = vorder->data[i];
@@ -926,14 +911,14 @@ static void gyfiltaux(const emlrtStack *sp, emxArray_real_T *v)
   sort(&b_st, plo, iidx);
   i = plo->size[0];
   plo->size[0] = iidx->size[0];
-  emxEnsureCapacity_real_T(&st, plo, i, &ue_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, plo, i, &te_emlrtRTEI);
   last = iidx->size[0];
   for (i = 0; i < last; i++) {
     plo->data[i] = iidx->data[i];
   }
   i = v->size[0];
   v->size[0] = iidx->size[0];
-  emxEnsureCapacity_real_T(sp, v, i, &tx_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, v, i, &sx_emlrtRTEI);
   last = iidx->size[0];
   for (i = 0; i < last; i++) {
     if ((iidx->data[i] < 1) || (iidx->data[i] > b_v->size[0])) {
@@ -960,12 +945,12 @@ static void gyfiltaux(const emlrtStack *sp, emxArray_real_T *v)
       }
       b_i = b_v->size[0];
     }
-    emxInit_int32_T(sp, &r3, 2, &qx_emlrtRTEI, true);
+    emxInit_int32_T(sp, &r3, 2, &px_emlrtRTEI, true);
     idx = r3->size[0] * r3->size[1];
     r3->size[0] = 1;
     last = b_i - i;
     r3->size[1] = last;
-    emxEnsureCapacity_int32_T(sp, r3, idx, &vx_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, r3, idx, &ux_emlrtRTEI);
     for (b_i = 0; b_i < last; b_i++) {
       idx = vorder->data[i + b_i];
       if ((idx < 1) || (idx > plo->size[0])) {
@@ -1002,7 +987,7 @@ void GYfilt(const emlrtStack *sp, const emxArray_real_T *x,
   st.prev = sp;
   st.tls = sp->tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  emxInit_real_T(sp, &b_x, 1, &bv_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_x, 1, &av_emlrtRTEI, true);
   /* GYfilt computes the Gervini-Yohai univariate outlier identifier */
   /*  */
   /* <a href="matlab: docsearchFS('GYfilt')">Link to the help function</a> */
@@ -1082,28 +1067,28 @@ void GYfilt(const emlrtStack *sp, const emxArray_real_T *x,
   madx = 1.4826 * mad(&st, x);
   i = b_x->size[0];
   b_x->size[0] = x->size[0];
-  emxEnsureCapacity_real_T(sp, b_x, i, &bv_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, b_x, i, &av_emlrtRTEI);
   loop_ub = x->size[0];
   for (i = 0; i < loop_ub; i++) {
     b_x->data[i] = (x->data[i] - mu) / madx;
   }
-  emxInit_real_T(sp, &xs2, 1, &fv_emlrtRTEI, true);
+  emxInit_real_T(sp, &xs2, 1, &ev_emlrtRTEI, true);
   st.site = &ux_emlrtRSI;
   power(&st, b_x, xs2);
   st.site = &vx_emlrtRSI;
   gyfiltaux(&st, xs2);
   i = weights->size[0];
   weights->size[0] = x->size[0];
-  emxEnsureCapacity_boolean_T(sp, weights, i, &cv_emlrtRTEI);
+  emxEnsureCapacity_boolean_T(sp, weights, i, &bv_emlrtRTEI);
   loop_ub = x->size[0];
   emxFree_real_T(&b_x);
   for (i = 0; i < loop_ub; i++) {
     weights->data[i] = true;
   }
-  emxInit_boolean_T(sp, &r, 1, &dv_emlrtRTEI, true);
+  emxInit_boolean_T(sp, &r, 1, &cv_emlrtRTEI, true);
   i = r->size[0];
   r->size[0] = xs2->size[0];
-  emxEnsureCapacity_boolean_T(sp, r, i, &dv_emlrtRTEI);
+  emxEnsureCapacity_boolean_T(sp, r, i, &cv_emlrtRTEI);
   loop_ub = xs2->size[0];
   for (i = 0; i < loop_ub; i++) {
     r->data[i] = muDoubleScalarIsNaN(xs2->data[i]);
@@ -1116,10 +1101,10 @@ void GYfilt(const emlrtStack *sp, const emxArray_real_T *x,
       loop_ub++;
     }
   }
-  emxInit_int32_T(sp, &r1, 1, &ev_emlrtRTEI, true);
+  emxInit_int32_T(sp, &r1, 1, &dv_emlrtRTEI, true);
   i = r1->size[0];
   r1->size[0] = loop_ub;
-  emxEnsureCapacity_int32_T(sp, r1, i, &ev_emlrtRTEI);
+  emxEnsureCapacity_int32_T(sp, r1, i, &dv_emlrtRTEI);
   loop_ub = 0;
   for (i = 0; i <= end; i++) {
     if (r->data[i]) {
@@ -1143,14 +1128,7 @@ void GYfilt(const emlrtStack *sp, const emxArray_real_T *x,
 void b_GYfilt(const emlrtStack *sp, const emxArray_real_T *x,
               emxArray_boolean_T *weights)
 {
-  static const int32_T iv[2] = {1, 7};
-  static const int32_T iv1[2] = {1, 15};
-  static const char_T b_u[15] = {' ', 'i', 't', 'e', 'r',  ' ', '=', ' ',
-                                 '%', '.', '0', 'f', '\\', 'n', ' '};
-  static const char_T u[7] = {'f', 'p', 'r', 'i', 'n', 't', 'f'};
   emlrtStack b_st;
-  emlrtStack c_st;
-  emlrtStack d_st;
   emlrtStack st;
   emxArray_boolean_T *r;
   emxArray_int32_T *r1;
@@ -1160,12 +1138,6 @@ void b_GYfilt(const emlrtStack *sp, const emxArray_real_T *x,
   emxArray_real_T *id;
   emxArray_real_T *xs2;
   emxArray_real_T *xs2na;
-  const mxArray *b_y;
-  const mxArray *c_y;
-  const mxArray *d_y;
-  const mxArray *e_y;
-  const mxArray *m;
-  const mxArray *y;
   real_T madx;
   real_T mu;
   int32_T converge;
@@ -1179,12 +1151,8 @@ void b_GYfilt(const emlrtStack *sp, const emxArray_real_T *x,
   st.tls = sp->tls;
   b_st.prev = &st;
   b_st.tls = st.tls;
-  c_st.prev = &b_st;
-  c_st.tls = b_st.tls;
-  d_st.prev = &c_st;
-  d_st.tls = c_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  emxInit_real_T(sp, &xs2na, 1, &jv_emlrtRTEI, true);
+  emxInit_real_T(sp, &xs2na, 1, &iv_emlrtRTEI, true);
   /* GYfilt computes the Gervini-Yohai univariate outlier identifier */
   /*  */
   /* <a href="matlab: docsearchFS('GYfilt')">Link to the help function</a> */
@@ -1264,12 +1232,12 @@ void b_GYfilt(const emlrtStack *sp, const emxArray_real_T *x,
   madx = 1.4826 * mad(&st, x);
   i = xs2na->size[0];
   xs2na->size[0] = x->size[0];
-  emxEnsureCapacity_real_T(sp, xs2na, i, &bv_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, xs2na, i, &av_emlrtRTEI);
   loop_ub = x->size[0];
   for (i = 0; i < loop_ub; i++) {
     xs2na->data[i] = (x->data[i] - mu) / madx;
   }
-  emxInit_real_T(sp, &xs2, 1, &fv_emlrtRTEI, true);
+  emxInit_real_T(sp, &xs2, 1, &ev_emlrtRTEI, true);
   st.site = &ux_emlrtRSI;
   power(&st, xs2na, xs2);
   st.site = &ky_emlrtRSI;
@@ -1277,7 +1245,7 @@ void b_GYfilt(const emlrtStack *sp, const emxArray_real_T *x,
   converge = 0;
   iter = 0;
   n = xs2->size[0];
-  emxInit_real_T(&st, &id, 2, &iv_emlrtRTEI, true);
+  emxInit_real_T(&st, &id, 2, &hv_emlrtRTEI, true);
   if (xs2->size[0] < 1) {
     id->size[0] = 1;
     id->size[1] = 0;
@@ -1285,23 +1253,23 @@ void b_GYfilt(const emlrtStack *sp, const emxArray_real_T *x,
     i = id->size[0] * id->size[1];
     id->size[0] = 1;
     id->size[1] = xs2->size[0];
-    emxEnsureCapacity_real_T(&st, id, i, &iv_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, id, i, &hv_emlrtRTEI);
     loop_ub = xs2->size[0] - 1;
     for (i = 0; i <= loop_ub; i++) {
       id->data[i] = (real_T)i + 1.0;
     }
   }
   /*  vold = v; */
-  emxInit_boolean_T(&st, &r, 1, &dv_emlrtRTEI, true);
-  emxInit_int32_T(&st, &r1, 1, &ov_emlrtRTEI, true);
-  emxInit_real_T(&st, &b_id, 2, &mv_emlrtRTEI, true);
+  emxInit_boolean_T(&st, &r, 1, &cv_emlrtRTEI, true);
+  emxInit_int32_T(&st, &r1, 1, &nv_emlrtRTEI, true);
+  emxInit_real_T(&st, &b_id, 2, &lv_emlrtRTEI, true);
   while ((converge == 0) && (iter < 10)) {
     iter++;
     b_st.site = &ly_emlrtRSI;
     gyfiltaux(&b_st, xs2);
     i = r->size[0];
     r->size[0] = xs2->size[0];
-    emxEnsureCapacity_boolean_T(&st, r, i, &ef_emlrtRTEI);
+    emxEnsureCapacity_boolean_T(&st, r, i, &df_emlrtRTEI);
     loop_ub = xs2->size[0];
     for (i = 0; i < loop_ub; i++) {
       r->data[i] = muDoubleScalarIsNaN(xs2->data[i]);
@@ -1319,7 +1287,7 @@ void b_GYfilt(const emlrtStack *sp, const emxArray_real_T *x,
     }
     i = r1->size[0];
     r1->size[0] = trueCount;
-    emxEnsureCapacity_int32_T(&st, r1, i, &lv_emlrtRTEI);
+    emxEnsureCapacity_int32_T(&st, r1, i, &kv_emlrtRTEI);
     partialTrueCount = 0;
     for (i = 0; i <= loop_ub; i++) {
       if (r->data[i]) {
@@ -1330,7 +1298,7 @@ void b_GYfilt(const emlrtStack *sp, const emxArray_real_T *x,
     i = b_id->size[0] * b_id->size[1];
     b_id->size[0] = 1;
     b_id->size[1] = r1->size[0];
-    emxEnsureCapacity_real_T(&st, b_id, i, &mv_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, b_id, i, &lv_emlrtRTEI);
     loop_ub = r1->size[0];
     for (i = 0; i < loop_ub; i++) {
       if (r1->data[i] > id->size[1]) {
@@ -1342,14 +1310,14 @@ void b_GYfilt(const emlrtStack *sp, const emxArray_real_T *x,
     i = id->size[0] * id->size[1];
     id->size[0] = 1;
     id->size[1] = b_id->size[1];
-    emxEnsureCapacity_real_T(&st, id, i, &nv_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, id, i, &mv_emlrtRTEI);
     loop_ub = b_id->size[1];
     for (i = 0; i < loop_ub; i++) {
       id->data[i] = b_id->data[i];
     }
     i = r->size[0];
     r->size[0] = xs2->size[0];
-    emxEnsureCapacity_boolean_T(&st, r, i, &ef_emlrtRTEI);
+    emxEnsureCapacity_boolean_T(&st, r, i, &df_emlrtRTEI);
     loop_ub = xs2->size[0];
     for (i = 0; i < loop_ub; i++) {
       r->data[i] = muDoubleScalarIsNaN(xs2->data[i]);
@@ -1360,7 +1328,7 @@ void b_GYfilt(const emlrtStack *sp, const emxArray_real_T *x,
     }
     i = r->size[0];
     r->size[0] = xs2->size[0];
-    emxEnsureCapacity_boolean_T(&st, r, i, &ef_emlrtRTEI);
+    emxEnsureCapacity_boolean_T(&st, r, i, &df_emlrtRTEI);
     loop_ub = xs2->size[0];
     for (i = 0; i < loop_ub; i++) {
       r->data[i] = muDoubleScalarIsNaN(xs2->data[i]);
@@ -1389,7 +1357,7 @@ void b_GYfilt(const emlrtStack *sp, const emxArray_real_T *x,
     }
     i = xs2->size[0];
     xs2->size[0] = trueCount;
-    emxEnsureCapacity_real_T(&st, xs2, i, &lv_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, xs2, i, &kv_emlrtRTEI);
     if (*emlrtBreakCheckR2012bFlagVar != 0) {
       emlrtBreakCheckR2012b(&st);
     }
@@ -1398,15 +1366,15 @@ void b_GYfilt(const emlrtStack *sp, const emxArray_real_T *x,
   emxFree_int32_T(&r1);
   i = xs2na->size[0];
   xs2na->size[0] = n;
-  emxEnsureCapacity_real_T(&st, xs2na, i, &jv_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, xs2na, i, &iv_emlrtRTEI);
   for (i = 0; i < n; i++) {
     xs2na->data[i] = rtNaN;
   }
-  emxInit_int32_T(&st, &r2, 2, &ev_emlrtRTEI, true);
+  emxInit_int32_T(&st, &r2, 2, &dv_emlrtRTEI, true);
   i = r2->size[0] * r2->size[1];
   r2->size[0] = 1;
   r2->size[1] = id->size[1];
-  emxEnsureCapacity_int32_T(&st, r2, i, &kv_emlrtRTEI);
+  emxEnsureCapacity_int32_T(&st, r2, i, &jv_emlrtRTEI);
   loop_ub = id->size[1];
   for (i = 0; i < loop_ub; i++) {
     partialTrueCount = (int32_T)id->data[i];
@@ -1431,40 +1399,17 @@ void b_GYfilt(const emlrtStack *sp, const emxArray_real_T *x,
   emxFree_int32_T(&r2);
   emxFree_real_T(&xs2);
   /*  disp([' iter = ' num2str(iter)]) */
-  emlrtAssertMATLABThread(&st, &c_emlrtRTEI);
-  b_st.site = &ny_emlrtRSI;
-  c_st.site = &cs_emlrtRSI;
-  y = NULL;
-  m = emlrtCreateCharArray(2, &iv[0]);
-  emlrtInitCharArrayR2013a(&c_st, 7, m, &u[0]);
-  emlrtAssign(&y, m);
-  b_y = NULL;
-  m = emlrtCreateDoubleScalar(1.0);
-  emlrtAssign(&b_y, m);
-  c_y = NULL;
-  m = emlrtCreateCharArray(2, &iv1[0]);
-  emlrtInitCharArrayR2013a(&c_st, 15, m, &b_u[0]);
-  emlrtAssign(&c_y, m);
-  d_y = NULL;
-  m = emlrtCreateDoubleScalar(iter);
-  emlrtAssign(&d_y, m);
-  d_st.site = &ydb_emlrtRSI;
-  mu = emlrt_marshallIn(&d_st, d_feval(&d_st, y, b_y, c_y, d_y, &q_emlrtMCI),
-                        "<output of feval>");
-  e_y = NULL;
-  m = emlrtCreateDoubleScalar(mu);
-  emlrtAssign(&e_y, m);
-  emlrtDisplayR2012b(e_y, (char_T *)"ans", &c_emlrtRTEI, &st);
+  /*  fprintf(' iter = %.0f\n ',iter) */
   i = weights->size[0];
   weights->size[0] = x->size[0];
-  emxEnsureCapacity_boolean_T(sp, weights, i, &cv_emlrtRTEI);
+  emxEnsureCapacity_boolean_T(sp, weights, i, &bv_emlrtRTEI);
   loop_ub = x->size[0];
   for (i = 0; i < loop_ub; i++) {
     weights->data[i] = true;
   }
   i = r->size[0];
   r->size[0] = xs2na->size[0];
-  emxEnsureCapacity_boolean_T(sp, r, i, &dv_emlrtRTEI);
+  emxEnsureCapacity_boolean_T(sp, r, i, &cv_emlrtRTEI);
   loop_ub = xs2na->size[0];
   for (i = 0; i < loop_ub; i++) {
     r->data[i] = muDoubleScalarIsNaN(xs2na->data[i]);
@@ -1477,10 +1422,10 @@ void b_GYfilt(const emlrtStack *sp, const emxArray_real_T *x,
       trueCount++;
     }
   }
-  emxInit_int32_T(sp, &r3, 1, &ev_emlrtRTEI, true);
+  emxInit_int32_T(sp, &r3, 1, &dv_emlrtRTEI, true);
   i = r3->size[0];
   r3->size[0] = trueCount;
-  emxEnsureCapacity_int32_T(sp, r3, i, &ev_emlrtRTEI);
+  emxEnsureCapacity_int32_T(sp, r3, i, &dv_emlrtRTEI);
   partialTrueCount = 0;
   for (i = 0; i <= loop_ub; i++) {
     if (r->data[i]) {

@@ -20,7 +20,7 @@
 
 /* Variable Definitions */
 static emlrtRSInfo
-    jj_emlrtRSI =
+    ij_emlrtRSI =
         {
             105,       /* lineNo */
             "sortIdx", /* fcnName */
@@ -30,7 +30,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    kj_emlrtRSI =
+    jj_emlrtRSI =
         {
             308,                /* lineNo */
             "block_merge_sort", /* fcnName */
@@ -40,7 +40,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    lj_emlrtRSI =
+    kj_emlrtRSI =
         {
             316,                /* lineNo */
             "block_merge_sort", /* fcnName */
@@ -50,7 +50,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    mj_emlrtRSI =
+    lj_emlrtRSI =
         {
             317,                /* lineNo */
             "block_merge_sort", /* fcnName */
@@ -60,7 +60,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    nj_emlrtRSI =
+    mj_emlrtRSI =
         {
             325,                /* lineNo */
             "block_merge_sort", /* fcnName */
@@ -70,7 +70,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    oj_emlrtRSI =
+    nj_emlrtRSI =
         {
             333,                /* lineNo */
             "block_merge_sort", /* fcnName */
@@ -80,7 +80,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    pj_emlrtRSI =
+    oj_emlrtRSI =
         {
             392,                      /* lineNo */
             "initialize_vector_sort", /* fcnName */
@@ -90,7 +90,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    qj_emlrtRSI =
+    pj_emlrtRSI =
         {
             420,                      /* lineNo */
             "initialize_vector_sort", /* fcnName */
@@ -100,7 +100,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    rj_emlrtRSI =
+    qj_emlrtRSI =
         {
             427,                      /* lineNo */
             "initialize_vector_sort", /* fcnName */
@@ -110,7 +110,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    vj_emlrtRSI =
+    uj_emlrtRSI =
         {
             499,           /* lineNo */
             "merge_block", /* fcnName */
@@ -120,7 +120,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    xj_emlrtRSI =
+    wj_emlrtRSI =
         {
             507,           /* lineNo */
             "merge_block", /* fcnName */
@@ -130,7 +130,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    yj_emlrtRSI =
+    xj_emlrtRSI =
         {
             514,           /* lineNo */
             "merge_block", /* fcnName */
@@ -140,7 +140,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    ak_emlrtRSI =
+    yj_emlrtRSI =
         {
             561,     /* lineNo */
             "merge", /* fcnName */
@@ -150,7 +150,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    bk_emlrtRSI =
+    ak_emlrtRSI =
         {
             530,     /* lineNo */
             "merge", /* fcnName */
@@ -160,7 +160,7 @@ static emlrtRSInfo
 };
 
 static emlrtRTEInfo
-    em_emlrtRTEI =
+    mm_emlrtRTEI =
         {
             61,        /* lineNo */
             5,         /* colNo */
@@ -171,7 +171,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    fm_emlrtRTEI =
+    nm_emlrtRTEI =
         {
             386,       /* lineNo */
             1,         /* colNo */
@@ -182,7 +182,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    gm_emlrtRTEI =
+    om_emlrtRTEI =
         {
             388,       /* lineNo */
             1,         /* colNo */
@@ -193,7 +193,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    hm_emlrtRTEI =
+    pm_emlrtRTEI =
         {
             308,       /* lineNo */
             14,        /* colNo */
@@ -204,7 +204,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    im_emlrtRTEI =
+    qm_emlrtRTEI =
         {
             308,       /* lineNo */
             20,        /* colNo */
@@ -246,9 +246,9 @@ static void merge(const emlrtStack *sp, emxArray_int32_T *idx,
   b_st.tls = st.tls;
   if (nq != 0) {
     n_tmp = np + nq;
-    st.site = &bk_emlrtRSI;
+    st.site = &ak_emlrtRSI;
     if ((1 <= n_tmp) && (n_tmp > 2147483646)) {
-      b_st.site = &pb_emlrtRSI;
+      b_st.site = &ob_emlrtRSI;
       check_forloop_overflow_error(&b_st);
     }
     for (j = 0; j < n_tmp; j++) {
@@ -277,9 +277,9 @@ static void merge(const emlrtStack *sp, emxArray_int32_T *idx,
           q++;
         } else {
           q = iout - p;
-          st.site = &ak_emlrtRSI;
+          st.site = &yj_emlrtRSI;
           if ((p + 1 <= np) && (np > 2147483646)) {
-            b_st.site = &pb_emlrtRSI;
+            b_st.site = &ob_emlrtRSI;
             check_forloop_overflow_error(&b_st);
           }
           for (j = p + 1; j <= np; j++) {
@@ -314,7 +314,7 @@ static void merge_block(const emlrtStack *sp, emxArray_int32_T *idx,
       tailOffset = bLen * nPairs;
       nTail = n - tailOffset;
       if (nTail > bLen) {
-        st.site = &vj_emlrtRSI;
+        st.site = &uj_emlrtRSI;
         merge(&st, idx, x, offset + tailOffset, bLen, nTail - bLen, iwork,
               xwork);
       }
@@ -322,13 +322,13 @@ static void merge_block(const emlrtStack *sp, emxArray_int32_T *idx,
     tailOffset = bLen << 1;
     nPairs >>= 1;
     for (nTail = 0; nTail < nPairs; nTail++) {
-      st.site = &xj_emlrtRSI;
+      st.site = &wj_emlrtRSI;
       merge(&st, idx, x, offset + nTail * tailOffset, bLen, bLen, iwork, xwork);
     }
     bLen = tailOffset;
   }
   if (n > bLen) {
-    st.site = &yj_emlrtRSI;
+    st.site = &xj_emlrtRSI;
     merge(&st, idx, x, offset, bLen, n - bLen, iwork, xwork);
   }
 }
@@ -428,15 +428,15 @@ void sortIdx(const emlrtStack *sp, emxArray_real_T *x, emxArray_int32_T *idx)
   ib = x->size[0];
   quartetOffset = idx->size[0];
   idx->size[0] = ib;
-  emxEnsureCapacity_int32_T(sp, idx, quartetOffset, &em_emlrtRTEI);
+  emxEnsureCapacity_int32_T(sp, idx, quartetOffset, &mm_emlrtRTEI);
   for (quartetOffset = 0; quartetOffset < ib; quartetOffset++) {
     idx->data[quartetOffset] = 0;
   }
   if (x->size[0] != 0) {
-    emxInit_int32_T(sp, &iwork, 1, &hm_emlrtRTEI, true);
-    st.site = &jj_emlrtRSI;
+    emxInit_int32_T(sp, &iwork, 1, &pm_emlrtRTEI, true);
+    st.site = &ij_emlrtRSI;
     n = x->size[0];
-    b_st.site = &kj_emlrtRSI;
+    b_st.site = &jj_emlrtRSI;
     b_n = x->size[0];
     x4[0] = 0.0;
     idx4[0] = 0;
@@ -448,23 +448,23 @@ void sortIdx(const emlrtStack *sp, emxArray_real_T *x, emxArray_int32_T *idx)
     idx4[3] = 0;
     quartetOffset = iwork->size[0];
     iwork->size[0] = ib;
-    emxEnsureCapacity_int32_T(&b_st, iwork, quartetOffset, &fm_emlrtRTEI);
+    emxEnsureCapacity_int32_T(&b_st, iwork, quartetOffset, &nm_emlrtRTEI);
     for (quartetOffset = 0; quartetOffset < ib; quartetOffset++) {
       iwork->data[quartetOffset] = 0;
     }
-    emxInit_real_T(&b_st, &xwork, 1, &im_emlrtRTEI, true);
+    emxInit_real_T(&b_st, &xwork, 1, &qm_emlrtRTEI, true);
     ib = x->size[0];
     quartetOffset = xwork->size[0];
     xwork->size[0] = ib;
-    emxEnsureCapacity_real_T(&b_st, xwork, quartetOffset, &gm_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, xwork, quartetOffset, &om_emlrtRTEI);
     for (quartetOffset = 0; quartetOffset < ib; quartetOffset++) {
       xwork->data[quartetOffset] = 0.0;
     }
     nNaNs = 0;
     ib = -1;
-    c_st.site = &pj_emlrtRSI;
+    c_st.site = &oj_emlrtRSI;
     if ((1 <= x->size[0]) && (x->size[0] > 2147483646)) {
-      d_st.site = &pb_emlrtRSI;
+      d_st.site = &ob_emlrtRSI;
       check_forloop_overflow_error(&d_st);
     }
     for (k = 0; k < b_n; k++) {
@@ -588,9 +588,9 @@ void sortIdx(const emlrtStack *sp, emxArray_real_T *x, emxArray_int32_T *idx)
         perm[1] = 2;
         perm[2] = 1;
       }
-      c_st.site = &qj_emlrtRSI;
+      c_st.site = &pj_emlrtRSI;
       if (ib + 1 > 2147483646) {
-        d_st.site = &pb_emlrtRSI;
+        d_st.site = &ob_emlrtRSI;
         check_forloop_overflow_error(&d_st);
       }
       for (k = 0; k <= ib; k++) {
@@ -601,7 +601,7 @@ void sortIdx(const emlrtStack *sp, emxArray_real_T *x, emxArray_int32_T *idx)
       }
     }
     ib = (nNaNs >> 1) + 1;
-    c_st.site = &rj_emlrtRSI;
+    c_st.site = &qj_emlrtRSI;
     for (k = 0; k <= ib - 2; k++) {
       quartetOffset = (i4 + k) + 1;
       i1 = idx->data[quartetOffset];
@@ -621,21 +621,21 @@ void sortIdx(const emlrtStack *sp, emxArray_real_T *x, emxArray_int32_T *idx)
       if (n >= 256) {
         quartetOffset = i1 >> 8;
         if (quartetOffset > 0) {
-          b_st.site = &lj_emlrtRSI;
+          b_st.site = &kj_emlrtRSI;
           for (ib = 0; ib < quartetOffset; ib++) {
-            b_st.site = &mj_emlrtRSI;
+            b_st.site = &lj_emlrtRSI;
             merge_pow2_block(idx, x, ib << 8);
           }
           ib = quartetOffset << 8;
           quartetOffset = i1 - ib;
           if (quartetOffset > 0) {
-            b_st.site = &nj_emlrtRSI;
+            b_st.site = &mj_emlrtRSI;
             merge_block(&b_st, idx, x, ib, quartetOffset, 2, iwork, xwork);
           }
           ib = 8;
         }
       }
-      b_st.site = &oj_emlrtRSI;
+      b_st.site = &nj_emlrtRSI;
       merge_block(&b_st, idx, x, 0, i1, ib, iwork, xwork);
     }
     emxFree_real_T(&xwork);

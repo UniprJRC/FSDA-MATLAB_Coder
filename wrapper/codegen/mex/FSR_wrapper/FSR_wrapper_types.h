@@ -63,20 +63,20 @@ typedef struct {
 } struct_FSR_T;
 #endif /* typedef_struct_FSR_T */
 
-#ifndef struct_emxArray_boolean_T
-#define struct_emxArray_boolean_T
-struct emxArray_boolean_T {
-  boolean_T *data;
+#ifndef struct_emxArray_int32_T
+#define struct_emxArray_int32_T
+struct emxArray_int32_T {
+  int32_T *data;
   int32_T *size;
   int32_T allocatedSize;
   int32_T numDimensions;
   boolean_T canFreeData;
 };
-#endif /* struct_emxArray_boolean_T */
-#ifndef typedef_emxArray_boolean_T
-#define typedef_emxArray_boolean_T
-typedef struct emxArray_boolean_T emxArray_boolean_T;
-#endif /* typedef_emxArray_boolean_T */
+#endif /* struct_emxArray_int32_T */
+#ifndef typedef_emxArray_int32_T
+#define typedef_emxArray_int32_T
+typedef struct emxArray_int32_T emxArray_int32_T;
+#endif /* typedef_emxArray_int32_T */
 
 #ifndef struct_emxArray_real_T_2x5
 #define struct_emxArray_real_T_2x5
@@ -106,20 +106,20 @@ typedef struct {
 } struct_T;
 #endif /* typedef_struct_T */
 
-#ifndef struct_emxArray_int32_T
-#define struct_emxArray_int32_T
-struct emxArray_int32_T {
-  int32_T *data;
+#ifndef struct_emxArray_boolean_T
+#define struct_emxArray_boolean_T
+struct emxArray_boolean_T {
+  boolean_T *data;
   int32_T *size;
   int32_T allocatedSize;
   int32_T numDimensions;
   boolean_T canFreeData;
 };
-#endif /* struct_emxArray_int32_T */
-#ifndef typedef_emxArray_int32_T
-#define typedef_emxArray_int32_T
-typedef struct emxArray_int32_T emxArray_int32_T;
-#endif /* typedef_emxArray_int32_T */
+#endif /* struct_emxArray_boolean_T */
+#ifndef typedef_emxArray_boolean_T
+#define typedef_emxArray_boolean_T
+typedef struct emxArray_boolean_T emxArray_boolean_T;
+#endif /* typedef_emxArray_boolean_T */
 
 #ifndef typedef_emxArray_creal_T
 #define typedef_emxArray_creal_T
@@ -176,21 +176,6 @@ struct emxArray_char_T {
 #define typedef_emxArray_char_T
 typedef struct emxArray_char_T emxArray_char_T;
 #endif /* typedef_emxArray_char_T */
-
-#ifndef struct_emxArray_real32_T
-#define struct_emxArray_real32_T
-struct emxArray_real32_T {
-  real32_T *data;
-  int32_T *size;
-  int32_T allocatedSize;
-  int32_T numDimensions;
-  boolean_T canFreeData;
-};
-#endif /* struct_emxArray_real32_T */
-#ifndef typedef_emxArray_real32_T
-#define typedef_emxArray_real32_T
-typedef struct emxArray_real32_T emxArray_real32_T;
-#endif /* typedef_emxArray_real32_T */
 
 #ifndef struct_emxArray_real_T_0x0
 #define struct_emxArray_real_T_0x0

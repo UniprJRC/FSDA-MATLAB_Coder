@@ -27,61 +27,61 @@
 
 /* Variable Definitions */
 static emlrtRSInfo kbb_emlrtRSI = {
-    227,                                                   /* lineNo */
+    228,                                                   /* lineNo */
     "FSMenvmmd",                                           /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pathName */
 };
 
 static emlrtRSInfo lbb_emlrtRSI = {
-    224,                                                   /* lineNo */
+    225,                                                   /* lineNo */
     "FSMenvmmd",                                           /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pathName */
 };
 
 static emlrtRSInfo mbb_emlrtRSI = {
-    223,                                                   /* lineNo */
+    224,                                                   /* lineNo */
     "FSMenvmmd",                                           /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pathName */
 };
 
 static emlrtRSInfo nbb_emlrtRSI = {
-    215,                                                   /* lineNo */
+    216,                                                   /* lineNo */
     "FSMenvmmd",                                           /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pathName */
 };
 
 static emlrtRSInfo obb_emlrtRSI = {
-    211,                                                   /* lineNo */
+    212,                                                   /* lineNo */
     "FSMenvmmd",                                           /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pathName */
 };
 
 static emlrtRSInfo pbb_emlrtRSI = {
-    207,                                                   /* lineNo */
+    208,                                                   /* lineNo */
     "FSMenvmmd",                                           /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pathName */
 };
 
 static emlrtRSInfo qbb_emlrtRSI = {
-    203,                                                   /* lineNo */
+    204,                                                   /* lineNo */
     "FSMenvmmd",                                           /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pathName */
 };
 
 static emlrtRSInfo rbb_emlrtRSI = {
-    200,                                                   /* lineNo */
+    201,                                                   /* lineNo */
     "FSMenvmmd",                                           /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pathName */
 };
 
 static emlrtRSInfo sbb_emlrtRSI = {
-    196,                                                   /* lineNo */
+    197,                                                   /* lineNo */
     "FSMenvmmd",                                           /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pathName */
 };
 
 static emlrtRSInfo tbb_emlrtRSI = {
-    180,                                                   /* lineNo */
+    181,                                                   /* lineNo */
     "FSMenvmmd",                                           /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pathName */
 };
@@ -100,7 +100,7 @@ static emlrtRSInfo vbb_emlrtRSI = {
 
 static emlrtECInfo wb_emlrtECI = {
     2,                                                     /* nDims */
-    207,                                                   /* lineNo */
+    208,                                                   /* lineNo */
     17,                                                    /* colNo */
     "FSMenvmmd",                                           /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pName */
@@ -108,7 +108,7 @@ static emlrtECInfo wb_emlrtECI = {
 
 static emlrtECInfo xb_emlrtECI = {
     2,                                                     /* nDims */
-    207,                                                   /* lineNo */
+    208,                                                   /* lineNo */
     12,                                                    /* colNo */
     "FSMenvmmd",                                           /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pName */
@@ -116,7 +116,7 @@ static emlrtECInfo xb_emlrtECI = {
 
 static emlrtECInfo yb_emlrtECI = {
     2,                                                     /* nDims */
-    211,                                                   /* lineNo */
+    212,                                                   /* lineNo */
     5,                                                     /* colNo */
     "FSMenvmmd",                                           /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pName */
@@ -124,7 +124,7 @@ static emlrtECInfo yb_emlrtECI = {
 
 static emlrtECInfo ac_emlrtECI = {
     2,                                                     /* nDims */
-    215,                                                   /* lineNo */
+    216,                                                   /* lineNo */
     14,                                                    /* colNo */
     "FSMenvmmd",                                           /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pName */
@@ -132,35 +132,35 @@ static emlrtECInfo ac_emlrtECI = {
 
 static emlrtECInfo bc_emlrtECI = {
     2,                                                     /* nDims */
-    224,                                                   /* lineNo */
+    225,                                                   /* lineNo */
     10,                                                    /* colNo */
     "FSMenvmmd",                                           /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pName */
 };
 
 static emlrtRTEInfo sq_emlrtRTEI = {
-    196,                                                   /* lineNo */
+    197,                                                   /* lineNo */
     1,                                                     /* colNo */
     "FSMenvmmd",                                           /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pName */
 };
 
 static emlrtRTEInfo tq_emlrtRTEI = {
-    200,                                                   /* lineNo */
+    201,                                                   /* lineNo */
     1,                                                     /* colNo */
     "FSMenvmmd",                                           /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pName */
 };
 
 static emlrtRTEInfo uq_emlrtRTEI = {
-    203,                                                   /* lineNo */
+    204,                                                   /* lineNo */
     33,                                                    /* colNo */
     "FSMenvmmd",                                           /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pName */
 };
 
 static emlrtRTEInfo vq_emlrtRTEI = {
-    203,                                                   /* lineNo */
+    204,                                                   /* lineNo */
     42,                                                    /* colNo */
     "FSMenvmmd",                                           /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pName */
@@ -177,21 +177,21 @@ static emlrtRTEInfo wq_emlrtRTEI =
 };
 
 static emlrtRTEInfo xq_emlrtRTEI = {
-    203,                                                   /* lineNo */
+    204,                                                   /* lineNo */
     1,                                                     /* colNo */
     "FSMenvmmd",                                           /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pName */
 };
 
 static emlrtRTEInfo yq_emlrtRTEI = {
-    207,                                                   /* lineNo */
+    208,                                                   /* lineNo */
     17,                                                    /* colNo */
     "FSMenvmmd",                                           /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pName */
 };
 
 static emlrtRTEInfo ar_emlrtRTEI = {
-    207,                                                   /* lineNo */
+    208,                                                   /* lineNo */
     12,                                                    /* colNo */
     "FSMenvmmd",                                           /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pName */
@@ -208,7 +208,7 @@ static emlrtRTEInfo br_emlrtRTEI =
 };
 
 static emlrtRTEInfo cr_emlrtRTEI = {
-    211,                                                   /* lineNo */
+    212,                                                   /* lineNo */
     30,                                                    /* colNo */
     "FSMenvmmd",                                           /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pName */
@@ -224,49 +224,49 @@ static emlrtRTEInfo dr_emlrtRTEI = {
 };
 
 static emlrtRTEInfo er_emlrtRTEI = {
-    215,                                                   /* lineNo */
+    216,                                                   /* lineNo */
     29,                                                    /* colNo */
     "FSMenvmmd",                                           /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pName */
 };
 
 static emlrtRTEInfo fr_emlrtRTEI = {
-    215,                                                   /* lineNo */
+    216,                                                   /* lineNo */
     19,                                                    /* colNo */
     "FSMenvmmd",                                           /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pName */
 };
 
 static emlrtRTEInfo gr_emlrtRTEI = {
-    215,                                                   /* lineNo */
+    216,                                                   /* lineNo */
     1,                                                     /* colNo */
     "FSMenvmmd",                                           /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pName */
 };
 
 static emlrtRTEInfo hr_emlrtRTEI = {
-    223,                                                   /* lineNo */
+    224,                                                   /* lineNo */
     15,                                                    /* colNo */
     "FSMenvmmd",                                           /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pName */
 };
 
 static emlrtRTEInfo ir_emlrtRTEI = {
-    223,                                                   /* lineNo */
+    224,                                                   /* lineNo */
     5,                                                     /* colNo */
     "FSMenvmmd",                                           /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pName */
 };
 
 static emlrtRTEInfo jr_emlrtRTEI = {
-    224,                                                   /* lineNo */
+    225,                                                   /* lineNo */
     20,                                                    /* colNo */
     "FSMenvmmd",                                           /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pName */
 };
 
 static emlrtRTEInfo kr_emlrtRTEI = {
-    227,                                                   /* lineNo */
+    228,                                                   /* lineNo */
     19,                                                    /* colNo */
     "FSMenvmmd",                                           /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pName */
@@ -282,35 +282,35 @@ static emlrtRTEInfo lr_emlrtRTEI = {
 };
 
 static emlrtRTEInfo mr_emlrtRTEI = {
-    227,                                                   /* lineNo */
+    228,                                                   /* lineNo */
     1,                                                     /* colNo */
     "FSMenvmmd",                                           /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pName */
 };
 
 static emlrtRTEInfo nr_emlrtRTEI = {
-    196,                                                   /* lineNo */
+    197,                                                   /* lineNo */
     5,                                                     /* colNo */
     "FSMenvmmd",                                           /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pName */
 };
 
 static emlrtRTEInfo or_emlrtRTEI = {
-    211,                                                   /* lineNo */
+    212,                                                   /* lineNo */
     5,                                                     /* colNo */
     "FSMenvmmd",                                           /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pName */
 };
 
 static emlrtRTEInfo vr_emlrtRTEI = {
-    203,                                                   /* lineNo */
+    204,                                                   /* lineNo */
     12,                                                    /* colNo */
     "FSMenvmmd",                                           /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pName */
 };
 
 static emlrtRTEInfo wr_emlrtRTEI = {
-    211,                                                   /* lineNo */
+    212,                                                   /* lineNo */
     1,                                                     /* colNo */
     "FSMenvmmd",                                           /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMenvmmd.m" /* pName */
@@ -401,14 +401,14 @@ void FSMenvmmd(const emlrtStack *sp, real_T n, real_T v, real_T varargin_4,
   /*                  Example - 'prob',[0.05 0.95] */
   /*                  Data Types - double */
   /*  */
-  /*    scaled:  It indicates how to compute the envelopes. Scalar. */
-  /*                If scaled>0 the envelopes are produced for */
+  /*    scaled:  It indicates how to compute the envelopes. Boolean. */
+  /*                If scaled=true0 the envelopes are produced for */
   /*                scaled Mahalanobis distances (no consistency factor is */
   /*                applied) else the traditional consistency factor is applied
    */
   /*                (this is the default) */
-  /*                  Example - 'scaled',0 */
-  /*                  Data Types - double */
+  /*                  Example - 'scaled',false */
+  /*                  Data Types - logical */
   /*  */
   /*  */
   /*  Output: */
@@ -1355,14 +1355,14 @@ void b_FSMenvmmd(const emlrtStack *sp, real_T n, real_T v, real_T varargin_4,
   /*                  Example - 'prob',[0.05 0.95] */
   /*                  Data Types - double */
   /*  */
-  /*    scaled:  It indicates how to compute the envelopes. Scalar. */
-  /*                If scaled>0 the envelopes are produced for */
+  /*    scaled:  It indicates how to compute the envelopes. Boolean. */
+  /*                If scaled=true0 the envelopes are produced for */
   /*                scaled Mahalanobis distances (no consistency factor is */
   /*                applied) else the traditional consistency factor is applied
    */
   /*                (this is the default) */
-  /*                  Example - 'scaled',0 */
-  /*                  Data Types - double */
+  /*                  Example - 'scaled',false */
+  /*                  Data Types - logical */
   /*  */
   /*  */
   /*  Output: */
@@ -2339,14 +2339,14 @@ void c_FSMenvmmd(const emlrtStack *sp, real_T n, real_T v, real_T varargin_4,
   /*                  Example - 'prob',[0.05 0.95] */
   /*                  Data Types - double */
   /*  */
-  /*    scaled:  It indicates how to compute the envelopes. Scalar. */
-  /*                If scaled>0 the envelopes are produced for */
+  /*    scaled:  It indicates how to compute the envelopes. Boolean. */
+  /*                If scaled=true0 the envelopes are produced for */
   /*                scaled Mahalanobis distances (no consistency factor is */
   /*                applied) else the traditional consistency factor is applied
    */
   /*                (this is the default) */
-  /*                  Example - 'scaled',0 */
-  /*                  Data Types - double */
+  /*                  Example - 'scaled',false */
+  /*                  Data Types - logical */
   /*  */
   /*  */
   /*  Output: */

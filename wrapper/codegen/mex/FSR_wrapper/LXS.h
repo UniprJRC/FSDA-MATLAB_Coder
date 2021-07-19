@@ -28,4 +28,10 @@ void LXS(FSR_wrapperStackData *SD, const emlrtStack *sp,
          const real_T varargin_12_data[], const int32_T varargin_12_size[2],
          b_struct_T *out);
 
+void b_LXS(FSR_wrapperStackData *SD, const emlrtStack *sp,
+           const emxArray_real_T *y, const emxArray_real_T *X,
+           real_T varargin_2, real_T varargin_4, real_T varargin_6,
+           boolean_T varargin_10, const real_T varargin_14_data[],
+           const int32_T varargin_14_size[2], b_struct_T *out);
+
 /* End of code generation (LXS.h) */

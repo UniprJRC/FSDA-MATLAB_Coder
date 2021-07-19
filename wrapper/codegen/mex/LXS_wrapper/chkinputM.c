@@ -170,7 +170,7 @@ static emlrtRTEInfo ay_emlrtRTEI = {
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities\\chkinputM.m" /* pName */
 };
 
-static emlrtRSInfo whb_emlrtRSI = {
+static emlrtRSInfo vhb_emlrtRSI = {
     108,                                                /* lineNo */
     "chkinputM",                                        /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities\\chkinputM.m" /* pathName */
@@ -334,7 +334,7 @@ void chkinputM(const emlrtStack *sp, emxArray_real_T *X)
     m = emlrtCreateCharArray(2, &iv1[0]);
     emlrtInitCharArrayR2013a(&st, 29, m, &cv18[0]);
     emlrtAssign(&c_y, m);
-    b_st.site = &jib_emlrtRSI;
+    b_st.site = &iib_emlrtRSI;
     o_error(&b_st, b_y, c_y, &d_emlrtMCI);
   }
   emxInit_real_T(sp, &y, 1, &ay_emlrtRTEI, true);
@@ -572,7 +572,7 @@ void chkinputM(const emlrtStack *sp, emxArray_real_T *X)
     m = emlrtCreateCharArray(2, &iv2[0]);
     emlrtInitCharArrayR2013a((emlrtCTX)sp, 60, m, &u[0]);
     emlrtAssign(&d_y, m);
-    st.site = &whb_emlrtRSI;
+    st.site = &vhb_emlrtRSI;
     disp(&st, d_y, &l_emlrtMCI);
   }
   emxFree_int32_T(&ii);
@@ -609,7 +609,7 @@ void chkinputM(const emlrtStack *sp, emxArray_real_T *X)
     m = emlrtCreateCharArray(2, &tmp_size[0]);
     emlrtInitCharArrayR2013a(&st, b_m, m, &varargin_2_data[0]);
     emlrtAssign(&h_y, m);
-    b_st.site = &jib_emlrtRSI;
+    b_st.site = &iib_emlrtRSI;
     o_error(&b_st, g_y, h_y, &d_emlrtMCI);
   }
   st.site = &yh_emlrtRSI;
@@ -625,7 +625,7 @@ void chkinputM(const emlrtStack *sp, emxArray_real_T *X)
     m = emlrtCreateCharArray(2, &iv4[0]);
     emlrtInitCharArrayR2013a(&st, 20, m, &cv[0]);
     emlrtAssign(&f_y, m);
-    b_st.site = &jib_emlrtRSI;
+    b_st.site = &iib_emlrtRSI;
     o_error(&b_st, e_y, f_y, &d_emlrtMCI);
   }
   emlrtHeapReferenceStackLeaveFcnR2012b((emlrtCTX)sp);

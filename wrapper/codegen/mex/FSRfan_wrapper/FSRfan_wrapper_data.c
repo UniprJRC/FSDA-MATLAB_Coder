@@ -30,7 +30,7 @@ emlrtContext emlrtContextGlobal = {
     NULL                                                /* fSigMem */
 };
 
-emlrtRSInfo mb_emlrtRSI =
+emlrtRSInfo lb_emlrtRSI =
     {
         91,                  /* lineNo */
         "eml_mtimes_helper", /* fcnName */
@@ -39,7 +39,7 @@ emlrtRSInfo mb_emlrtRSI =
         "helper.m" /* pathName */
 };
 
-emlrtRSInfo nb_emlrtRSI =
+emlrtRSInfo mb_emlrtRSI =
     {
         60,                  /* lineNo */
         "eml_mtimes_helper", /* fcnName */
@@ -48,7 +48,7 @@ emlrtRSInfo nb_emlrtRSI =
         "helper.m" /* pathName */
 };
 
-emlrtRSInfo ob_emlrtRSI = {
+emlrtRSInfo nb_emlrtRSI = {
     142,      /* lineNo */
     "mtimes", /* fcnName */
     "C:\\Program "
@@ -56,7 +56,7 @@ emlrtRSInfo ob_emlrtRSI = {
     "blas\\mtimes.m" /* pathName */
 };
 
-emlrtRSInfo pb_emlrtRSI = {
+emlrtRSInfo ob_emlrtRSI = {
     21,                               /* lineNo */
     "eml_int_forloop_overflow_check", /* fcnName */
     "C:\\Program "
@@ -64,7 +64,7 @@ emlrtRSInfo pb_emlrtRSI = {
     "overflow_check.m" /* pathName */
 };
 
-emlrtRSInfo qb_emlrtRSI = {
+emlrtRSInfo pb_emlrtRSI = {
     178,           /* lineNo */
     "mtimes_blas", /* fcnName */
     "C:\\Program "
@@ -72,7 +72,7 @@ emlrtRSInfo qb_emlrtRSI = {
     "blas\\mtimes.m" /* pathName */
 };
 
-emlrtRSInfo bc_emlrtRSI = {
+emlrtRSInfo ac_emlrtRSI = {
     15,    /* lineNo */
     "min", /* fcnName */
     "C:\\Program "
@@ -80,7 +80,7 @@ emlrtRSInfo bc_emlrtRSI = {
                                                                         */
 };
 
-emlrtRSInfo cc_emlrtRSI =
+emlrtRSInfo bc_emlrtRSI =
     {
         46,         /* lineNo */
         "minOrMax", /* fcnName */
@@ -89,7 +89,7 @@ emlrtRSInfo cc_emlrtRSI =
         "m" /* pathName */
 };
 
-emlrtRSInfo dc_emlrtRSI =
+emlrtRSInfo cc_emlrtRSI =
     {
         92,        /* lineNo */
         "minimum", /* fcnName */
@@ -98,7 +98,7 @@ emlrtRSInfo dc_emlrtRSI =
         "m" /* pathName */
 };
 
-emlrtRSInfo ec_emlrtRSI = {
+emlrtRSInfo dc_emlrtRSI = {
     39,     /* lineNo */
     "find", /* fcnName */
     "C:\\Program "
@@ -106,7 +106,7 @@ emlrtRSInfo ec_emlrtRSI = {
                                                                        */
 };
 
-emlrtRSInfo tc_emlrtRSI = {
+emlrtRSInfo sc_emlrtRSI = {
     11,     /* lineNo */
     "rank", /* fcnName */
     "C:\\Program "
@@ -114,7 +114,7 @@ emlrtRSInfo tc_emlrtRSI = {
                                                                         */
 };
 
-emlrtRSInfo cd_emlrtRSI =
+emlrtRSInfo bd_emlrtRSI =
     {
         44,          /* lineNo */
         "vAllOrAny", /* fcnName */
@@ -123,7 +123,7 @@ emlrtRSInfo cd_emlrtRSI =
         "internal\\vAllOrAny.m" /* pathName */
 };
 
-emlrtRSInfo dd_emlrtRSI =
+emlrtRSInfo cd_emlrtRSI =
     {
         103,                  /* lineNo */
         "flatVectorAllOrAny", /* fcnName */
@@ -132,7 +132,7 @@ emlrtRSInfo dd_emlrtRSI =
         "internal\\vAllOrAny.m" /* pathName */
 };
 
-emlrtRSInfo md_emlrtRSI =
+emlrtRSInfo ld_emlrtRSI =
     {
         28,      /* lineNo */
         "colon", /* fcnName */
@@ -141,7 +141,7 @@ emlrtRSInfo md_emlrtRSI =
                                                                           */
 };
 
-emlrtRSInfo nd_emlrtRSI =
+emlrtRSInfo md_emlrtRSI =
     {
         117,     /* lineNo */
         "colon", /* fcnName */
@@ -150,7 +150,7 @@ emlrtRSInfo nd_emlrtRSI =
                                                                           */
 };
 
-emlrtRSInfo qd_emlrtRSI = {
+emlrtRSInfo pd_emlrtRSI = {
     34,               /* lineNo */
     "rdivide_helper", /* fcnName */
     "C:\\Program "
@@ -158,7 +158,7 @@ emlrtRSInfo qd_emlrtRSI = {
     "helper.m" /* pathName */
 };
 
-emlrtRSInfo rd_emlrtRSI = {
+emlrtRSInfo qd_emlrtRSI = {
     51,    /* lineNo */
     "div", /* fcnName */
     "C:\\Program "
@@ -166,7 +166,7 @@ emlrtRSInfo rd_emlrtRSI = {
                                                                           */
 };
 
-emlrtRSInfo sd_emlrtRSI = {
+emlrtRSInfo rd_emlrtRSI = {
     259,                    /* lineNo */
     "assertCompatibleSize", /* fcnName */
     "C:\\Program "
@@ -174,7 +174,7 @@ emlrtRSInfo sd_emlrtRSI = {
                                                                           */
 };
 
-emlrtRSInfo td_emlrtRSI = {
+emlrtRSInfo sd_emlrtRSI = {
     52,      /* lineNo */
     "ixfun", /* fcnName */
     "C:\\Program "
@@ -182,7 +182,7 @@ emlrtRSInfo td_emlrtRSI = {
                                                                             */
 };
 
-emlrtRSInfo ud_emlrtRSI = {
+emlrtRSInfo td_emlrtRSI = {
     45,                          /* lineNo */
     "applyBinaryScalarFunction", /* fcnName */
     "C:\\Program "
@@ -190,7 +190,7 @@ emlrtRSInfo ud_emlrtRSI = {
     "internal\\applyBinaryScalarFunction.m" /* pathName */
 };
 
-emlrtRSInfo vd_emlrtRSI = {
+emlrtRSInfo ud_emlrtRSI = {
     66,                          /* lineNo */
     "applyBinaryScalarFunction", /* fcnName */
     "C:\\Program "
@@ -198,7 +198,7 @@ emlrtRSInfo vd_emlrtRSI = {
     "internal\\applyBinaryScalarFunction.m" /* pathName */
 };
 
-emlrtRSInfo wd_emlrtRSI = {
+emlrtRSInfo vd_emlrtRSI = {
     127,        /* lineNo */
     "flatIter", /* fcnName */
     "C:\\Program "
@@ -206,7 +206,7 @@ emlrtRSInfo wd_emlrtRSI = {
     "internal\\applyBinaryScalarFunction.m" /* pathName */
 };
 
-emlrtRSInfo xd_emlrtRSI = {
+emlrtRSInfo wd_emlrtRSI = {
     214,        /* lineNo */
     "flatIter", /* fcnName */
     "C:\\Program "
@@ -214,7 +214,7 @@ emlrtRSInfo xd_emlrtRSI = {
     "internal\\applyBinaryScalarFunction.m" /* pathName */
 };
 
-emlrtRSInfo ae_emlrtRSI = {
+emlrtRSInfo yd_emlrtRSI = {
     99,        /* lineNo */
     "sumprod", /* fcnName */
     "C:\\Program "
@@ -222,7 +222,7 @@ emlrtRSInfo ae_emlrtRSI = {
     "d.m" /* pathName */
 };
 
-emlrtRSInfo ee_emlrtRSI = {
+emlrtRSInfo de_emlrtRSI = {
     24,    /* lineNo */
     "cat", /* fcnName */
     "C:\\Program "
@@ -230,7 +230,7 @@ emlrtRSInfo ee_emlrtRSI = {
                                                                           */
 };
 
-emlrtRSInfo fe_emlrtRSI = {
+emlrtRSInfo ee_emlrtRSI = {
     96,         /* lineNo */
     "cat_impl", /* fcnName */
     "C:\\Program "
@@ -238,7 +238,7 @@ emlrtRSInfo fe_emlrtRSI = {
                                                                           */
 };
 
-emlrtRSInfo qf_emlrtRSI = {
+emlrtRSInfo pf_emlrtRSI = {
     33,                           /* lineNo */
     "applyScalarFunctionInPlace", /* fcnName */
     "C:\\Program "
@@ -246,7 +246,7 @@ emlrtRSInfo qf_emlrtRSI = {
     "internal\\applyScalarFunctionInPlace.m" /* pathName */
 };
 
-emlrtRSInfo rf_emlrtRSI =
+emlrtRSInfo qf_emlrtRSI =
     {
         71,      /* lineNo */
         "power", /* fcnName */
@@ -255,7 +255,7 @@ emlrtRSInfo rf_emlrtRSI =
                                                                           */
 };
 
-emlrtRSInfo qh_emlrtRSI = {
+emlrtRSInfo ph_emlrtRSI = {
     7,         /* lineNo */
     "getTime", /* fcnName */
     "C:\\Program "
@@ -263,7 +263,7 @@ emlrtRSInfo qh_emlrtRSI = {
     "internal\\+time\\getTime.m" /* pathName */
 };
 
-emlrtRSInfo rh_emlrtRSI = {
+emlrtRSInfo qh_emlrtRSI = {
     21,                     /* lineNo */
     "CoderTimeAPI/getTime", /* fcnName */
     "C:\\Program "
@@ -271,7 +271,7 @@ emlrtRSInfo rh_emlrtRSI = {
     "internal\\+time\\CoderTimeAPI.m" /* pathName */
 };
 
-emlrtRSInfo sh_emlrtRSI = {
+emlrtRSInfo rh_emlrtRSI = {
     148,                                  /* lineNo */
     "CoderTimeAPI/callEMLRTClockGettime", /* fcnName */
     "C:\\Program "
@@ -279,7 +279,73 @@ emlrtRSInfo sh_emlrtRSI = {
     "internal\\+time\\CoderTimeAPI.m" /* pathName */
 };
 
-emlrtRSInfo jl_emlrtRSI = {
+emlrtRSInfo
+    fi_emlrtRSI =
+        {
+            61,        /* lineNo */
+            "qrsolve", /* fcnName */
+            "C:\\Program "
+            "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
+            "internal\\qrsolve.m" /* pathName */
+};
+
+emlrtRSInfo
+    hi_emlrtRSI =
+        {
+            85,        /* lineNo */
+            "qrsolve", /* fcnName */
+            "C:\\Program "
+            "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
+            "internal\\qrsolve.m" /* pathName */
+};
+
+emlrtRSInfo
+    ti_emlrtRSI =
+        {
+            119,         /* lineNo */
+            "LSQFromQR", /* fcnName */
+            "C:\\Program "
+            "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
+            "internal\\qrsolve.m" /* pathName */
+};
+
+emlrtRSInfo
+    ui_emlrtRSI =
+        {
+            128,         /* lineNo */
+            "LSQFromQR", /* fcnName */
+            "C:\\Program "
+            "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
+            "internal\\qrsolve.m" /* pathName */
+};
+
+emlrtRSInfo
+    vi_emlrtRSI =
+        {
+            138,         /* lineNo */
+            "LSQFromQR", /* fcnName */
+            "C:\\Program "
+            "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
+            "internal\\qrsolve.m" /* pathName */
+};
+
+emlrtRSInfo wi_emlrtRSI = {
+    31,         /* lineNo */
+    "xunormqr", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\+"
+    "lapack\\xunormqr.m" /* pathName */
+};
+
+emlrtRSInfo xi_emlrtRSI = {
+    102,              /* lineNo */
+    "ceval_xunormqr", /* fcnName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\+"
+    "lapack\\xunormqr.m" /* pathName */
+};
+
+emlrtRSInfo il_emlrtRSI = {
     44,       /* lineNo */
     "mpower", /* fcnName */
     "C:\\Program "
@@ -287,7 +353,7 @@ emlrtRSInfo jl_emlrtRSI = {
                                                                        */
 };
 
-emlrtRSInfo yl_emlrtRSI = {
+emlrtRSInfo wl_emlrtRSI = {
     27,     /* lineNo */
     "sort", /* fcnName */
     "C:\\Program "
@@ -295,7 +361,7 @@ emlrtRSInfo yl_emlrtRSI = {
                                                                          */
 };
 
-emlrtRSInfo nn_emlrtRSI = {
+emlrtRSInfo ln_emlrtRSI = {
     374,            /* lineNo */
     "eml_gammainc", /* fcnName */
     "C:\\Program "
@@ -303,7 +369,7 @@ emlrtRSInfo nn_emlrtRSI = {
     "gammainc.m" /* pathName */
 };
 
-emlrtRSInfo qn_emlrtRSI = {
+emlrtRSInfo on_emlrtRSI = {
     294,            /* lineNo */
     "eml_gammainc", /* fcnName */
     "C:\\Program "
@@ -311,7 +377,7 @@ emlrtRSInfo qn_emlrtRSI = {
     "gammainc.m" /* pathName */
 };
 
-emlrtRSInfo tn_emlrtRSI = {
+emlrtRSInfo rn_emlrtRSI = {
     198,            /* lineNo */
     "eml_gammainc", /* fcnName */
     "C:\\Program "
@@ -319,7 +385,7 @@ emlrtRSInfo tn_emlrtRSI = {
     "gammainc.m" /* pathName */
 };
 
-emlrtRSInfo wn_emlrtRSI = {
+emlrtRSInfo un_emlrtRSI = {
     128,            /* lineNo */
     "eml_gammainc", /* fcnName */
     "C:\\Program "
@@ -327,7 +393,7 @@ emlrtRSInfo wn_emlrtRSI = {
     "gammainc.m" /* pathName */
 };
 
-emlrtRSInfo xn_emlrtRSI = {
+emlrtRSInfo vn_emlrtRSI = {
     126,            /* lineNo */
     "eml_gammainc", /* fcnName */
     "C:\\Program "
@@ -465,7 +531,7 @@ emlrtRTEInfo ob_emlrtRTEI = {
     "internal\\unaryMinOrMax.m" /* pName */
 };
 
-emlrtRTEInfo yb_emlrtRTEI =
+emlrtRTEInfo ac_emlrtRTEI =
     {
         28,      /* lineNo */
         9,       /* colNo */
@@ -475,7 +541,7 @@ emlrtRTEInfo yb_emlrtRTEI =
                                                                           */
 };
 
-emlrtRTEInfo kd_emlrtRTEI = {
+emlrtRTEInfo nd_emlrtRTEI = {
     28,     /* lineNo */
     5,      /* colNo */
     "sort", /* fName */
@@ -484,7 +550,7 @@ emlrtRTEInfo kd_emlrtRTEI = {
                                                                          */
 };
 
-emlrtRTEInfo xd_emlrtRTEI = {
+emlrtRTEInfo ce_emlrtRTEI = {
     218,      /* lineNo */
     20,       /* colNo */
     "mtimes", /* fName */
@@ -493,11 +559,33 @@ emlrtRTEInfo xd_emlrtRTEI = {
     "blas\\mtimes.m" /* pName */
 };
 
+emlrtRTEInfo
+    vh_emlrtRTEI =
+        {
+            61,        /* lineNo */
+            2,         /* colNo */
+            "qrsolve", /* fName */
+            "C:\\Program "
+            "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
+            "internal\\qrsolve.m" /* pName */
+};
+
+emlrtRTEInfo
+    ei_emlrtRTEI =
+        {
+            119,       /* lineNo */
+            5,         /* colNo */
+            "qrsolve", /* fName */
+            "C:\\Program "
+            "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
+            "internal\\qrsolve.m" /* pName */
+};
+
 const char_T cv8[26] = {'e', 'm', 'l', 'r', 't', 'C', 'l', 'o', 'c',
                         'k', 'G', 'e', 't', 't', 'i', 'm', 'e', 'M',
                         'o', 'n', 'o', 't', 'o', 'n', 'i', 'c'};
 
-emlrtRSInfo qt_emlrtRSI = {
+emlrtRSInfo pt_emlrtRSI = {
     66,        /* lineNo */
     "fprintf", /* fcnName */
     "C:\\Program "
@@ -505,7 +593,7 @@ emlrtRSInfo qt_emlrtRSI = {
                                                                           */
 };
 
-emlrtRSInfo rt_emlrtRSI = {
+emlrtRSInfo qt_emlrtRSI = {
     68,        /* lineNo */
     "fprintf", /* fcnName */
     "C:\\Program "
@@ -513,7 +601,7 @@ emlrtRSInfo rt_emlrtRSI = {
                                                                           */
 };
 
-emlrtRSInfo ku_emlrtRSI = {
+emlrtRSInfo ju_emlrtRSI = {
     27,      /* lineNo */
     "error", /* fcnName */
     "C:\\Program "
@@ -522,7 +610,7 @@ emlrtRSInfo ku_emlrtRSI = {
 };
 
 emlrtRSInfo
-    nu_emlrtRSI =
+    mu_emlrtRSI =
         {
             53,        /* lineNo */
             "flt2str", /* fcnName */

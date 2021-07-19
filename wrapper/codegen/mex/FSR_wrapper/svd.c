@@ -20,7 +20,7 @@
 #include <stddef.h>
 
 /* Variable Definitions */
-static emlrtRSInfo pc_emlrtRSI = {
+static emlrtRSInfo wc_emlrtRSI = {
     29,    /* lineNo */
     "svd", /* fcnName */
     "C:\\Program "
@@ -28,7 +28,7 @@ static emlrtRSInfo pc_emlrtRSI = {
                                                                           */
 };
 
-static emlrtRSInfo qc_emlrtRSI = {
+static emlrtRSInfo xc_emlrtRSI = {
     108,          /* lineNo */
     "callLAPACK", /* fcnName */
     "C:\\Program "
@@ -36,7 +36,7 @@ static emlrtRSInfo qc_emlrtRSI = {
                                                                           */
 };
 
-static emlrtRSInfo rc_emlrtRSI = {
+static emlrtRSInfo yc_emlrtRSI = {
     31,       /* lineNo */
     "xgesvd", /* fcnName */
     "C:\\Program "
@@ -44,7 +44,7 @@ static emlrtRSInfo rc_emlrtRSI = {
     "lapack\\xgesvd.m" /* pathName */
 };
 
-static emlrtRSInfo sc_emlrtRSI = {
+static emlrtRSInfo ad_emlrtRSI = {
     197,            /* lineNo */
     "ceval_xgesvd", /* fcnName */
     "C:\\Program "
@@ -52,7 +52,7 @@ static emlrtRSInfo sc_emlrtRSI = {
     "lapack\\xgesvd.m" /* pathName */
 };
 
-static emlrtRTEInfo o_emlrtRTEI = {
+static emlrtRTEInfo p_emlrtRTEI = {
     112,          /* lineNo */
     5,            /* colNo */
     "callLAPACK", /* fName */
@@ -61,7 +61,7 @@ static emlrtRTEInfo o_emlrtRTEI = {
                                                                           */
 };
 
-static emlrtRTEInfo ie_emlrtRTEI = {
+static emlrtRTEInfo hf_emlrtRTEI = {
     31,       /* lineNo */
     33,       /* colNo */
     "xgesvd", /* fName */
@@ -70,7 +70,7 @@ static emlrtRTEInfo ie_emlrtRTEI = {
     "lapack\\xgesvd.m" /* pName */
 };
 
-static emlrtRTEInfo je_emlrtRTEI = {
+static emlrtRTEInfo if_emlrtRTEI = {
     90,       /* lineNo */
     20,       /* colNo */
     "xgesvd", /* fName */
@@ -79,7 +79,7 @@ static emlrtRTEInfo je_emlrtRTEI = {
     "lapack\\xgesvd.m" /* pName */
 };
 
-static emlrtRTEInfo ke_emlrtRTEI = {
+static emlrtRTEInfo jf_emlrtRTEI = {
     123,      /* lineNo */
     9,        /* colNo */
     "xgesvd", /* fName */
@@ -88,7 +88,7 @@ static emlrtRTEInfo ke_emlrtRTEI = {
     "lapack\\xgesvd.m" /* pName */
 };
 
-static emlrtRTEInfo le_emlrtRTEI = {
+static emlrtRTEInfo kf_emlrtRTEI = {
     121,      /* lineNo */
     33,       /* colNo */
     "xgesvd", /* fName */
@@ -97,7 +97,7 @@ static emlrtRTEInfo le_emlrtRTEI = {
     "lapack\\xgesvd.m" /* pName */
 };
 
-static emlrtRTEInfo me_emlrtRTEI = {
+static emlrtRTEInfo lf_emlrtRTEI = {
     121,      /* lineNo */
     9,        /* colNo */
     "xgesvd", /* fName */
@@ -129,14 +129,14 @@ void svd(const emlrtStack *sp, const emxArray_real_T *A, emxArray_real_T *U)
   d_st.prev = &c_st;
   d_st.tls = c_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  emxInit_real_T(sp, &b_A, 2, &ie_emlrtRTEI, true);
-  st.site = &pc_emlrtRSI;
-  b_st.site = &qc_emlrtRSI;
-  c_st.site = &rc_emlrtRSI;
+  emxInit_real_T(sp, &b_A, 2, &hf_emlrtRTEI, true);
+  st.site = &wc_emlrtRSI;
+  b_st.site = &xc_emlrtRSI;
+  c_st.site = &yc_emlrtRSI;
   n = b_A->size[0] * b_A->size[1];
   b_A->size[0] = A->size[0];
   b_A->size[1] = A->size[1];
-  emxEnsureCapacity_real_T(&c_st, b_A, n, &ie_emlrtRTEI);
+  emxEnsureCapacity_real_T(&c_st, b_A, n, &hf_emlrtRTEI);
   m = A->size[0] * A->size[1];
   for (n = 0; n < m; n++) {
     b_A->data[n] = A->data[n];
@@ -146,17 +146,17 @@ void svd(const emlrtStack *sp, const emxArray_real_T *A, emxArray_real_T *U)
   m = muIntScalarMin_sint32(n, m);
   n = U->size[0];
   U->size[0] = m;
-  emxEnsureCapacity_real_T(&c_st, U, n, &je_emlrtRTEI);
+  emxEnsureCapacity_real_T(&c_st, U, n, &if_emlrtRTEI);
   if ((A->size[0] != 0) && (A->size[1] != 0)) {
-    emxInit_real_T(&c_st, &superb, 1, &me_emlrtRTEI, true);
+    emxInit_real_T(&c_st, &superb, 1, &lf_emlrtRTEI, true);
     if (m > 1) {
       n = superb->size[0];
       superb->size[0] = m - 1;
-      emxEnsureCapacity_real_T(&c_st, superb, n, &le_emlrtRTEI);
+      emxEnsureCapacity_real_T(&c_st, superb, n, &kf_emlrtRTEI);
     } else {
       n = superb->size[0];
       superb->size[0] = 1;
-      emxEnsureCapacity_real_T(&c_st, superb, n, &ke_emlrtRTEI);
+      emxEnsureCapacity_real_T(&c_st, superb, n, &jf_emlrtRTEI);
     }
     info_t = LAPACKE_dgesvd(102, 'N', 'N', (ptrdiff_t)A->size[0],
                             (ptrdiff_t)A->size[1], &b_A->data[0],
@@ -168,19 +168,19 @@ void svd(const emlrtStack *sp, const emxArray_real_T *A, emxArray_real_T *U)
     m = 0;
   }
   emxFree_real_T(&b_A);
-  d_st.site = &sc_emlrtRSI;
+  d_st.site = &ad_emlrtRSI;
   if (m < 0) {
     if (m == -1010) {
-      emlrtErrorWithMessageIdR2018a(&d_st, &p_emlrtRTEI, "MATLAB:nomem",
+      emlrtErrorWithMessageIdR2018a(&d_st, &q_emlrtRTEI, "MATLAB:nomem",
                                     "MATLAB:nomem", 0);
     } else {
       emlrtErrorWithMessageIdR2018a(
-          &d_st, &q_emlrtRTEI, "Coder:toolbox:LAPACKCallErrorInfo",
+          &d_st, &r_emlrtRTEI, "Coder:toolbox:LAPACKCallErrorInfo",
           "Coder:toolbox:LAPACKCallErrorInfo", 5, 4, 14, &fname[0], 12, m);
     }
   }
   if (m > 0) {
-    emlrtErrorWithMessageIdR2018a(&st, &o_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(&st, &p_emlrtRTEI,
                                   "Coder:MATLAB:svd_NoConvergence",
                                   "Coder:MATLAB:svd_NoConvergence", 0);
   }

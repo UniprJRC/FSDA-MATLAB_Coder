@@ -33,7 +33,7 @@ void chi2cdf(const emxArray_real_T *x, double v, emxArray_real_T *p)
   i = x->size[0] * x->size[1];
   for (k = 0; k < i; k++) {
     xk = x->data[k];
-    if (!rtIsNaN(x->data[k])) {
+    if ((a >= 0.0) && (!rtIsNaN(x->data[k]))) {
       if (x->data[k] < 0.0) {
         xk = 0.0;
       }

@@ -581,7 +581,7 @@ real_T finv(const emlrtStack *sp, real_T v2)
         b_y = NULL;
         m = emlrtCreateDoubleScalar(2.0);
         emlrtAssign(&b_y, m);
-        d_st.site = &cjb_emlrtRSI;
+        d_st.site = &bjb_emlrtRSI;
         e_emlrt_marshallIn(&d_st, b_sprintf(&d_st, y, b_y, &r_emlrtMCI),
                            "<output of sprintf>", str);
         c_st.site = &hn_emlrtRSI;

@@ -19,7 +19,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo sf_emlrtRSI =
+static emlrtRSInfo rf_emlrtRSI =
     {
         80,         /* lineNo */
         "fltpower", /* fcnName */
@@ -28,7 +28,7 @@ static emlrtRSInfo sf_emlrtRSI =
                                                                           */
 };
 
-static emlrtRSInfo tf_emlrtRSI =
+static emlrtRSInfo sf_emlrtRSI =
     {
         82,         /* lineNo */
         "fltpower", /* fcnName */
@@ -37,7 +37,7 @@ static emlrtRSInfo tf_emlrtRSI =
                                                                           */
 };
 
-static emlrtRSInfo uf_emlrtRSI = {
+static emlrtRSInfo tf_emlrtRSI = {
     200,        /* lineNo */
     "flatIter", /* fcnName */
     "C:\\Program "
@@ -45,7 +45,7 @@ static emlrtRSInfo uf_emlrtRSI = {
     "internal\\applyBinaryScalarFunction.m" /* pathName */
 };
 
-static emlrtRSInfo vf_emlrtRSI =
+static emlrtRSInfo uf_emlrtRSI =
     {
         102,                     /* lineNo */
         "fltpower_domain_error", /* fcnName */
@@ -54,7 +54,7 @@ static emlrtRSInfo vf_emlrtRSI =
                                                                           */
 };
 
-static emlrtRTEInfo wf_emlrtRTEI = {
+static emlrtRTEInfo bg_emlrtRTEI = {
     127,                         /* lineNo */
     6,                           /* colNo */
     "applyBinaryScalarFunction", /* fName */
@@ -76,7 +76,7 @@ void b_power(const emlrtStack *sp, const emxArray_real_T *a, emxArray_real_T *y)
   int32_T nx;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &rf_emlrtRSI;
+  st.site = &qf_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -87,16 +87,16 @@ void b_power(const emlrtStack *sp, const emxArray_real_T *a, emxArray_real_T *y)
   e_st.tls = d_st.tls;
   f_st.prev = &e_st;
   f_st.tls = e_st.tls;
-  b_st.site = &sf_emlrtRSI;
-  c_st.site = &td_emlrtRSI;
-  d_st.site = &vd_emlrtRSI;
+  b_st.site = &rf_emlrtRSI;
+  c_st.site = &sd_emlrtRSI;
+  d_st.site = &ud_emlrtRSI;
   nx = y->size[0];
   y->size[0] = a->size[0];
-  emxEnsureCapacity_real_T(&d_st, y, nx, &wf_emlrtRTEI);
+  emxEnsureCapacity_real_T(&d_st, y, nx, &bg_emlrtRTEI);
   nx = a->size[0];
-  e_st.site = &uf_emlrtRSI;
+  e_st.site = &tf_emlrtRSI;
   if ((1 <= a->size[0]) && (a->size[0] > 2147483646)) {
-    f_st.site = &pb_emlrtRSI;
+    f_st.site = &ob_emlrtRSI;
     check_forloop_overflow_error(&f_st);
   }
   for (k = 0; k < nx; k++) {
@@ -118,7 +118,7 @@ void power(const emlrtStack *sp, const emxArray_real_T *a, real_T b,
   boolean_T p;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &rf_emlrtRSI;
+  st.site = &qf_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -129,22 +129,22 @@ void power(const emlrtStack *sp, const emxArray_real_T *a, real_T b,
   e_st.tls = d_st.tls;
   f_st.prev = &e_st;
   f_st.tls = e_st.tls;
-  b_st.site = &sf_emlrtRSI;
-  c_st.site = &td_emlrtRSI;
-  d_st.site = &vd_emlrtRSI;
+  b_st.site = &rf_emlrtRSI;
+  c_st.site = &sd_emlrtRSI;
+  d_st.site = &ud_emlrtRSI;
   nx = y->size[0];
   y->size[0] = a->size[0];
-  emxEnsureCapacity_real_T(&d_st, y, nx, &wf_emlrtRTEI);
+  emxEnsureCapacity_real_T(&d_st, y, nx, &bg_emlrtRTEI);
   nx = a->size[0];
-  e_st.site = &uf_emlrtRSI;
+  e_st.site = &tf_emlrtRSI;
   if ((1 <= a->size[0]) && (a->size[0] > 2147483646)) {
-    f_st.site = &pb_emlrtRSI;
+    f_st.site = &ob_emlrtRSI;
     check_forloop_overflow_error(&f_st);
   }
   for (k = 0; k < nx; k++) {
     y->data[k] = muDoubleScalarPower(a->data[k], b);
   }
-  b_st.site = &tf_emlrtRSI;
+  b_st.site = &sf_emlrtRSI;
   if (a->size[0] == 1) {
     if ((a->data[0] < 0.0) && (!muDoubleScalarIsNaN(b)) &&
         (muDoubleScalarFloor(b) != b)) {
@@ -153,11 +153,11 @@ void power(const emlrtStack *sp, const emxArray_real_T *a, real_T b,
       p = false;
     }
   } else if ((!muDoubleScalarIsNaN(b)) && (muDoubleScalarFloor(b) != b)) {
-    c_st.site = &vf_emlrtRSI;
-    d_st.site = &cd_emlrtRSI;
+    c_st.site = &uf_emlrtRSI;
+    d_st.site = &bd_emlrtRSI;
     nx = a->size[0];
     p = false;
-    e_st.site = &dd_emlrtRSI;
+    e_st.site = &cd_emlrtRSI;
     for (k = 0; k < nx; k++) {
       if (p || (a->data[k] < 0.0)) {
         p = true;

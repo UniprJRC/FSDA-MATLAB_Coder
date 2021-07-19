@@ -18,7 +18,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo vk_emlrtRSI = {
+static emlrtRSInfo dl_emlrtRSI = {
     7,         /* lineNo */
     "nanmean", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\nanmean.m" /* pathName
@@ -26,7 +26,7 @@ static emlrtRSInfo vk_emlrtRSI = {
 };
 
 static emlrtRSInfo
-    wk_emlrtRSI =
+    el_emlrtRSI =
         {
             74,                /* lineNo */
             "nan_sum_or_mean", /* fcnName */
@@ -35,7 +35,7 @@ static emlrtRSInfo
             "mean.m" /* pathName */
 };
 
-static emlrtBCInfo ol_emlrtBCI =
+static emlrtBCInfo vl_emlrtBCI =
     {
         -1,                /* iFirst */
         -1,                /* iLast */
@@ -49,7 +49,7 @@ static emlrtBCInfo ol_emlrtBCI =
         0    /* checkKind */
 };
 
-static emlrtBCInfo pl_emlrtBCI =
+static emlrtBCInfo wl_emlrtBCI =
     {
         -1,                /* iFirst */
         -1,                /* iLast */
@@ -75,7 +75,7 @@ real_T nanmean(const emlrtStack *sp, const emxArray_real_T *varargin_1)
   int32_T vlen;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &vk_emlrtRSI;
+  st.site = &dl_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -83,20 +83,20 @@ real_T nanmean(const emlrtStack *sp, const emxArray_real_T *varargin_1)
   vlen = varargin_1->size[0];
   y = 0.0;
   c = 0;
-  b_st.site = &wk_emlrtRSI;
+  b_st.site = &el_emlrtRSI;
   if ((1 <= varargin_1->size[0]) && (varargin_1->size[0] > 2147483646)) {
-    c_st.site = &ab_emlrtRSI;
+    c_st.site = &hb_emlrtRSI;
     check_forloop_overflow_error(&c_st);
   }
   for (k = 0; k < vlen; k++) {
     if (k + 1 > varargin_1->size[0]) {
-      emlrtDynamicBoundsCheckR2012b(k + 1, 1, varargin_1->size[0], &ol_emlrtBCI,
+      emlrtDynamicBoundsCheckR2012b(k + 1, 1, varargin_1->size[0], &vl_emlrtBCI,
                                     &st);
     }
     if (!muDoubleScalarIsNaN(varargin_1->data[k])) {
       if (k + 1 > varargin_1->size[0]) {
         emlrtDynamicBoundsCheckR2012b(k + 1, 1, varargin_1->size[0],
-                                      &pl_emlrtBCI, &st);
+                                      &wl_emlrtBCI, &st);
       }
       y += varargin_1->data[k];
       c++;

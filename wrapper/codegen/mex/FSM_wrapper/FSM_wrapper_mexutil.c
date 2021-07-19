@@ -141,32 +141,6 @@ void f_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
   emlrtDestroyArray(&u);
 }
 
-const mxArray *fb_emlrt_marshallOut(const real_T u_data[],
-                                    const int32_T u_size[2])
-{
-  const mxArray *m;
-  const mxArray *y;
-  real_T *pData;
-  int32_T iv[2];
-  int32_T b_i;
-  int32_T c_i;
-  int32_T i;
-  y = NULL;
-  iv[0] = u_size[0];
-  iv[1] = u_size[1];
-  m = emlrtCreateNumericArray(2, &iv[0], mxDOUBLE_CLASS, mxREAL);
-  pData = emlrtMxGetPr(m);
-  i = 0;
-  for (b_i = 0; b_i < u_size[1]; b_i++) {
-    for (c_i = 0; c_i < u_size[0]; c_i++) {
-      pData[i] = u_data[c_i + u_size[0] * b_i];
-      i++;
-    }
-  }
-  emlrtAssign(&y, m);
-  return y;
-}
-
 const mxArray *feval(const emlrtStack *sp, const mxArray *b, const mxArray *c,
                      const mxArray *d, emlrtMCInfo *location)
 {

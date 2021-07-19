@@ -40,14 +40,14 @@ static emlrtRSInfo yx_emlrtRSI = {
                                                                      */
 };
 
-static emlrtRTEInfo gv_emlrtRTEI = {
+static emlrtRTEInfo fv_emlrtRTEI = {
     33,                                                             /* lineNo */
     5,                                                              /* colNo */
     "mad",                                                          /* fName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\mad.m" /* pName */
 };
 
-static emlrtRTEInfo hv_emlrtRTEI = {
+static emlrtRTEInfo gv_emlrtRTEI = {
     33,                                                             /* lineNo */
     14,                                                             /* colNo */
     "mad",                                                          /* fName */
@@ -71,18 +71,18 @@ real_T mad(const emlrtStack *sp, const emxArray_real_T *x)
   if (x->size[0] == 0) {
     y = rtNaN;
   } else {
-    emxInit_real_T(sp, &c, 1, &hv_emlrtRTEI, true);
+    emxInit_real_T(sp, &c, 1, &gv_emlrtRTEI, true);
     st.site = &wx_emlrtRSI;
     xm = nanmedian(&st, x);
     i = c->size[0];
     c->size[0] = x->size[0];
-    emxEnsureCapacity_real_T(sp, c, i, &gm_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, c, i, &fm_emlrtRTEI);
     acoef = (x->size[0] != 1);
     i = x->size[0] - 1;
     for (k = 0; k <= i; k++) {
       c->data[k] = x->data[acoef * k] - xm;
     }
-    emxInit_real_T(sp, &xx, 1, &gv_emlrtRTEI, true);
+    emxInit_real_T(sp, &xx, 1, &fv_emlrtRTEI, true);
     st.site = &xx_emlrtRSI;
     b_abs(&st, c, xx);
     st.site = &yx_emlrtRSI;

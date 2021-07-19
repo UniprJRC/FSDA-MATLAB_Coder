@@ -15,7 +15,7 @@
 #include "emlrt.h"
 
 /* Variable Definitions */
-static emlrtRSInfo feb_emlrtRSI = {
+static emlrtRSInfo meb_emlrtRSI = {
     31,    /* lineNo */
     "tic", /* fcnName */
     "C:\\Program "
@@ -23,7 +23,7 @@ static emlrtRSInfo feb_emlrtRSI = {
                                                                         */
 };
 
-static emlrtRSInfo geb_emlrtRSI = {
+static emlrtRSInfo neb_emlrtRSI = {
     7,         /* lineNo */
     "getTime", /* fcnName */
     "C:\\Program "
@@ -31,7 +31,7 @@ static emlrtRSInfo geb_emlrtRSI = {
     "internal\\+time\\getTime.m" /* pathName */
 };
 
-static emlrtRSInfo heb_emlrtRSI = {
+static emlrtRSInfo oeb_emlrtRSI = {
     21,                     /* lineNo */
     "CoderTimeAPI/getTime", /* fcnName */
     "C:\\Program "
@@ -39,7 +39,7 @@ static emlrtRSInfo heb_emlrtRSI = {
     "internal\\+time\\CoderTimeAPI.m" /* pathName */
 };
 
-static emlrtRSInfo ieb_emlrtRSI = {
+static emlrtRSInfo peb_emlrtRSI = {
     148,                                  /* lineNo */
     "CoderTimeAPI/callEMLRTClockGettime", /* fcnName */
     "C:\\Program "
@@ -47,7 +47,7 @@ static emlrtRSInfo ieb_emlrtRSI = {
     "internal\\+time\\CoderTimeAPI.m" /* pathName */
 };
 
-static emlrtRTEInfo oc_emlrtRTEI = {
+static emlrtRTEInfo pc_emlrtRTEI = {
     159,                    /* lineNo */
     13,                     /* colNo */
     "coderTimeCheckStatus", /* fName */
@@ -70,20 +70,20 @@ emlrtTimespec tic(const emlrtStack *sp)
   int32_T status;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &feb_emlrtRSI;
+  st.site = &meb_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   d_st.prev = &c_st;
   d_st.tls = c_st.tls;
-  b_st.site = &geb_emlrtRSI;
-  c_st.site = &heb_emlrtRSI;
+  b_st.site = &neb_emlrtRSI;
+  c_st.site = &oeb_emlrtRSI;
   status = emlrtClockGettimeMonotonic(&tstart);
-  d_st.site = &ieb_emlrtRSI;
+  d_st.site = &peb_emlrtRSI;
   if (status != 0) {
     emlrtErrorWithMessageIdR2018a(
-        &d_st, &oc_emlrtRTEI, "Coder:toolbox:CoderTimeCallFailed",
+        &d_st, &pc_emlrtRTEI, "Coder:toolbox:CoderTimeCallFailed",
         "Coder:toolbox:CoderTimeCallFailed", 5, 4, 26, &fcn[0], 12, status);
   }
   return tstart;

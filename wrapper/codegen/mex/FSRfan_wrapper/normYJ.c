@@ -18,25 +18,25 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRSInfo wf_emlrtRSI = {
+static emlrtRSInfo vf_emlrtRSI = {
     194,                                                  /* lineNo */
     "normYJ",                                             /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\normYJ.m" /* pathName */
 };
 
-static emlrtRSInfo xf_emlrtRSI = {
+static emlrtRSInfo wf_emlrtRSI = {
     196,                                                  /* lineNo */
     "normYJ",                                             /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\normYJ.m" /* pathName */
 };
 
-static emlrtRSInfo yf_emlrtRSI = {
+static emlrtRSInfo xf_emlrtRSI = {
     202,                                                  /* lineNo */
     "normYJ",                                             /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\normYJ.m" /* pathName */
 };
 
-static emlrtRSInfo ag_emlrtRSI = {
+static emlrtRSInfo yf_emlrtRSI = {
     204,                                                  /* lineNo */
     "normYJ",                                             /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\normYJ.m" /* pathName */
@@ -162,77 +162,77 @@ static emlrtBCInfo dd_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtRTEInfo xf_emlrtRTEI = {
+static emlrtRTEInfo cg_emlrtRTEI = {
     178,                                                  /* lineNo */
     1,                                                    /* colNo */
     "normYJ",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\normYJ.m" /* pName */
 };
 
-static emlrtRTEInfo yf_emlrtRTEI = {
+static emlrtRTEInfo dg_emlrtRTEI = {
     1,                                                    /* lineNo */
     15,                                                   /* colNo */
     "normYJ",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\normYJ.m" /* pName */
 };
 
-static emlrtRTEInfo ag_emlrtRTEI = {
+static emlrtRTEInfo eg_emlrtRTEI = {
     196,                                                  /* lineNo */
     31,                                                   /* colNo */
     "normYJ",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\normYJ.m" /* pName */
 };
 
-static emlrtRTEInfo bg_emlrtRTEI = {
+static emlrtRTEInfo fg_emlrtRTEI = {
     194,                                                  /* lineNo */
     33,                                                   /* colNo */
     "normYJ",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\normYJ.m" /* pName */
 };
 
-static emlrtRTEInfo cg_emlrtRTEI = {
+static emlrtRTEInfo gg_emlrtRTEI = {
     204,                                                  /* lineNo */
     30,                                                   /* colNo */
     "normYJ",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\normYJ.m" /* pName */
 };
 
-static emlrtRTEInfo dg_emlrtRTEI = {
+static emlrtRTEInfo hg_emlrtRTEI = {
     202,                                                  /* lineNo */
     33,                                                   /* colNo */
     "normYJ",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\normYJ.m" /* pName */
 };
 
-static emlrtRTEInfo eg_emlrtRTEI = {
+static emlrtRTEInfo ig_emlrtRTEI = {
     194,                                                  /* lineNo */
     32,                                                   /* colNo */
     "normYJ",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\normYJ.m" /* pName */
 };
 
-static emlrtRTEInfo fg_emlrtRTEI = {
+static emlrtRTEInfo jg_emlrtRTEI = {
     196,                                                  /* lineNo */
     37,                                                   /* colNo */
     "normYJ",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\normYJ.m" /* pName */
 };
 
-static emlrtRTEInfo gg_emlrtRTEI = {
+static emlrtRTEInfo kg_emlrtRTEI = {
     196,                                                  /* lineNo */
     18,                                                   /* colNo */
     "normYJ",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\normYJ.m" /* pName */
 };
 
-static emlrtRTEInfo hg_emlrtRTEI = {
+static emlrtRTEInfo lg_emlrtRTEI = {
     204,                                                  /* lineNo */
     37,                                                   /* colNo */
     "normYJ",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\normYJ.m" /* pName */
 };
 
-static emlrtRTEInfo ig_emlrtRTEI = {
+static emlrtRTEInfo mg_emlrtRTEI = {
     204,                                                  /* lineNo */
     18,                                                   /* colNo */
     "normYJ",                                             /* fName */
@@ -392,17 +392,17 @@ void normYJ(const emlrtStack *sp, const emxArray_real_T *Y, real_T la,
   /*  Normalized Yeo-Johnson transformation of columns ColtoTra using la */
   i = Ytra->size[0];
   Ytra->size[0] = Y->size[0];
-  emxEnsureCapacity_real_T(sp, Ytra, i, &xf_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, Ytra, i, &cg_emlrtRTEI);
   loop_ub = Y->size[0];
   for (i = 0; i < loop_ub; i++) {
     Ytra->data[i] = Y->data[i];
   }
   /*  YJ transformation is the Box-Cox transformation of */
   /*  y+1 for nonnegative values of y */
-  emxInit_real_T(sp, &r, 1, &eg_emlrtRTEI, true);
-  emxInit_int32_T(sp, &r1, 1, &fg_emlrtRTEI, true);
-  emxInit_int32_T(sp, &r2, 1, &gg_emlrtRTEI, true);
-  emxInit_real_T(sp, &b_Y, 1, &bg_emlrtRTEI, true);
+  emxInit_real_T(sp, &r, 1, &ig_emlrtRTEI, true);
+  emxInit_int32_T(sp, &r1, 1, &jg_emlrtRTEI, true);
+  emxInit_int32_T(sp, &r2, 1, &kg_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_Y, 1, &fg_emlrtRTEI, true);
   if (la != 0.0) {
     end = Y->size[0];
     for (i = 0; i < end; i++) {
@@ -420,7 +420,7 @@ void normYJ(const emlrtStack *sp, const emxArray_real_T *Y, real_T la,
     }
     i = r1->size[0];
     r1->size[0] = loop_ub;
-    emxEnsureCapacity_int32_T(sp, r1, i, &yf_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, r1, i, &dg_emlrtRTEI);
     loop_ub = 0;
     for (i = 0; i <= end; i++) {
       if (Y->data[i] >= 0.0) {
@@ -430,7 +430,7 @@ void normYJ(const emlrtStack *sp, const emxArray_real_T *Y, real_T la,
     }
     i = b_Y->size[0];
     b_Y->size[0] = r1->size[0];
-    emxEnsureCapacity_real_T(sp, b_Y, i, &bg_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_Y, i, &fg_emlrtRTEI);
     loop_ub = r1->size[0];
     for (i = 0; i < loop_ub; i++) {
       if (r1->data[i] > Y->size[0]) {
@@ -439,7 +439,7 @@ void normYJ(const emlrtStack *sp, const emxArray_real_T *Y, real_T la,
       }
       b_Y->data[i] = Y->data[r1->data[i] - 1] + 1.0;
     }
-    st.site = &wf_emlrtRSI;
+    st.site = &vf_emlrtRSI;
     power(&st, b_Y, la, r);
     loop_ub = r->size[0];
     for (i = 0; i < loop_ub; i++) {
@@ -463,7 +463,7 @@ void normYJ(const emlrtStack *sp, const emxArray_real_T *Y, real_T la,
     }
     i = r2->size[0];
     r2->size[0] = loop_ub;
-    emxEnsureCapacity_int32_T(sp, r2, i, &yf_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, r2, i, &dg_emlrtRTEI);
     loop_ub = 0;
     for (i = 0; i <= end; i++) {
       if (Y->data[i] >= 0.0) {
@@ -492,7 +492,7 @@ void normYJ(const emlrtStack *sp, const emxArray_real_T *Y, real_T la,
     }
     i = r1->size[0];
     r1->size[0] = loop_ub;
-    emxEnsureCapacity_int32_T(sp, r1, i, &yf_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, r1, i, &dg_emlrtRTEI);
     loop_ub = 0;
     for (i = 0; i <= end; i++) {
       if (Y->data[i] >= 0.0) {
@@ -502,7 +502,7 @@ void normYJ(const emlrtStack *sp, const emxArray_real_T *Y, real_T la,
     }
     i = r->size[0];
     r->size[0] = r1->size[0];
-    emxEnsureCapacity_real_T(sp, r, i, &ag_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, r, i, &eg_emlrtRTEI);
     loop_ub = r1->size[0];
     for (i = 0; i < loop_ub; i++) {
       if (r1->data[i] > Y->size[0]) {
@@ -511,7 +511,7 @@ void normYJ(const emlrtStack *sp, const emxArray_real_T *Y, real_T la,
       }
       r->data[i] = Y->data[r1->data[i] - 1] + 1.0;
     }
-    st.site = &xf_emlrtRSI;
+    st.site = &wf_emlrtRSI;
     b_log(&st, r);
     end = Y->size[0];
     loop_ub = 0;
@@ -531,7 +531,7 @@ void normYJ(const emlrtStack *sp, const emxArray_real_T *Y, real_T la,
     }
     i = r2->size[0];
     r2->size[0] = loop_ub;
-    emxEnsureCapacity_int32_T(sp, r2, i, &yf_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, r2, i, &dg_emlrtRTEI);
     loop_ub = 0;
     for (i = 0; i <= end; i++) {
       if (Y->data[i] >= 0.0) {
@@ -548,8 +548,8 @@ void normYJ(const emlrtStack *sp, const emxArray_real_T *Y, real_T la,
   emxFree_int32_T(&r1);
   /*  YJ transformation is the Box-Cox transformation of */
   /*   |y|+1 with parameter 2-lambda for y negative. */
-  emxInit_int32_T(sp, &r3, 1, &hg_emlrtRTEI, true);
-  emxInit_int32_T(sp, &r4, 1, &ig_emlrtRTEI, true);
+  emxInit_int32_T(sp, &r3, 1, &lg_emlrtRTEI, true);
+  emxInit_int32_T(sp, &r4, 1, &mg_emlrtRTEI, true);
   if (2.0 - la != 0.0) {
     end = Y->size[0];
     for (i = 0; i < end; i++) {
@@ -567,7 +567,7 @@ void normYJ(const emlrtStack *sp, const emxArray_real_T *Y, real_T la,
     }
     i = r3->size[0];
     r3->size[0] = loop_ub;
-    emxEnsureCapacity_int32_T(sp, r3, i, &yf_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, r3, i, &dg_emlrtRTEI);
     loop_ub = 0;
     for (i = 0; i <= end; i++) {
       if (!(Y->data[i] >= 0.0)) {
@@ -577,7 +577,7 @@ void normYJ(const emlrtStack *sp, const emxArray_real_T *Y, real_T la,
     }
     i = b_Y->size[0];
     b_Y->size[0] = r3->size[0];
-    emxEnsureCapacity_real_T(sp, b_Y, i, &dg_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_Y, i, &hg_emlrtRTEI);
     loop_ub = r3->size[0];
     for (i = 0; i < loop_ub; i++) {
       if (r3->data[i] > Y->size[0]) {
@@ -586,7 +586,7 @@ void normYJ(const emlrtStack *sp, const emxArray_real_T *Y, real_T la,
       }
       b_Y->data[i] = -Y->data[r3->data[i] - 1] + 1.0;
     }
-    st.site = &yf_emlrtRSI;
+    st.site = &xf_emlrtRSI;
     power(&st, b_Y, 2.0 - la, r);
     loop_ub = r->size[0];
     for (i = 0; i < loop_ub; i++) {
@@ -610,7 +610,7 @@ void normYJ(const emlrtStack *sp, const emxArray_real_T *Y, real_T la,
     }
     i = r4->size[0];
     r4->size[0] = loop_ub;
-    emxEnsureCapacity_int32_T(sp, r4, i, &yf_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, r4, i, &dg_emlrtRTEI);
     loop_ub = 0;
     for (i = 0; i <= end; i++) {
       if (!(Y->data[i] >= 0.0)) {
@@ -639,7 +639,7 @@ void normYJ(const emlrtStack *sp, const emxArray_real_T *Y, real_T la,
     }
     i = r3->size[0];
     r3->size[0] = loop_ub;
-    emxEnsureCapacity_int32_T(sp, r3, i, &yf_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, r3, i, &dg_emlrtRTEI);
     loop_ub = 0;
     for (i = 0; i <= end; i++) {
       if (!(Y->data[i] >= 0.0)) {
@@ -649,7 +649,7 @@ void normYJ(const emlrtStack *sp, const emxArray_real_T *Y, real_T la,
     }
     i = r->size[0];
     r->size[0] = r3->size[0];
-    emxEnsureCapacity_real_T(sp, r, i, &cg_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, r, i, &gg_emlrtRTEI);
     loop_ub = r3->size[0];
     for (i = 0; i < loop_ub; i++) {
       if (r3->data[i] > Y->size[0]) {
@@ -658,7 +658,7 @@ void normYJ(const emlrtStack *sp, const emxArray_real_T *Y, real_T la,
       }
       r->data[i] = -Y->data[r3->data[i] - 1] + 1.0;
     }
-    st.site = &ag_emlrtRSI;
+    st.site = &yf_emlrtRSI;
     b_log(&st, r);
     loop_ub = r->size[0];
     for (i = 0; i < loop_ub; i++) {
@@ -682,7 +682,7 @@ void normYJ(const emlrtStack *sp, const emxArray_real_T *Y, real_T la,
     }
     i = r4->size[0];
     r4->size[0] = loop_ub;
-    emxEnsureCapacity_int32_T(sp, r4, i, &yf_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, r4, i, &dg_emlrtRTEI);
     loop_ub = 0;
     for (i = 0; i <= end; i++) {
       if (!(Y->data[i] >= 0.0)) {

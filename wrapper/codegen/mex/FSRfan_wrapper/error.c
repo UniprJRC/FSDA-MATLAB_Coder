@@ -60,7 +60,7 @@ void b_error(const emlrtStack *sp, const char_T varargin_2_data[],
   emlrtInitCharArrayR2013a((emlrtCTX)sp, varargin_2_size[1], m,
                            &varargin_2_data[0]);
   emlrtAssign(&b_y, m);
-  st.site = &ku_emlrtRSI;
+  st.site = &ju_emlrtRSI;
   h_error(&st, y, b_y, &e_emlrtMCI);
 }
 
@@ -88,7 +88,7 @@ void c_error(const emlrtStack *sp)
   m = emlrtCreateCharArray(2, &iv1[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 70, m, &varargin_2[0]);
   emlrtAssign(&b_y, m);
-  st.site = &ku_emlrtRSI;
+  st.site = &ju_emlrtRSI;
   h_error(&st, y, b_y, &e_emlrtMCI);
 }
 
@@ -116,7 +116,7 @@ void d_error(const emlrtStack *sp)
   m = emlrtCreateCharArray(2, &iv1[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 65, m, &varargin_2[0]);
   emlrtAssign(&b_y, m);
-  st.site = &ku_emlrtRSI;
+  st.site = &ju_emlrtRSI;
   h_error(&st, y, b_y, &e_emlrtMCI);
 }
 
@@ -146,7 +146,7 @@ void e_error(const emlrtStack *sp, real_T varargin_3)
   c_y = NULL;
   m = emlrtCreateDoubleScalar(varargin_3);
   emlrtAssign(&c_y, m);
-  st.site = &ku_emlrtRSI;
+  st.site = &ju_emlrtRSI;
   i_error(&st, y, b_y, c_y, &e_emlrtMCI);
 }
 
@@ -174,7 +174,7 @@ void error(const emlrtStack *sp)
   m = emlrtCreateCharArray(2, &iv1[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 20, m, &varargin_2[0]);
   emlrtAssign(&b_y, m);
-  st.site = &ku_emlrtRSI;
+  st.site = &ju_emlrtRSI;
   h_error(&st, y, b_y, &e_emlrtMCI);
 }
 
@@ -207,7 +207,7 @@ void f_error(const emlrtStack *sp)
   m = emlrtCreateCharArray(2, &iv1[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 92, m, &varargin_2[0]);
   emlrtAssign(&b_y, m);
-  st.site = &ku_emlrtRSI;
+  st.site = &ju_emlrtRSI;
   h_error(&st, y, b_y, &e_emlrtMCI);
 }
 
@@ -241,7 +241,7 @@ void g_error(const emlrtStack *sp)
   m = emlrtCreateCharArray(2, &iv1[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 106, m, &varargin_2[0]);
   emlrtAssign(&b_y, m);
-  st.site = &ku_emlrtRSI;
+  st.site = &ju_emlrtRSI;
   h_error(&st, y, b_y, &e_emlrtMCI);
 }
 

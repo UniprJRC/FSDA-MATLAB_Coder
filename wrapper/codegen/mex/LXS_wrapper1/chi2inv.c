@@ -172,7 +172,7 @@ void b_chi2inv(const emlrtStack *sp, const emxArray_real_T *p, real_T v,
           b_y = NULL;
           m = emlrtCreateDoubleScalar(a);
           emlrtAssign(&b_y, m);
-          c_st.site = &cjb_emlrtRSI;
+          c_st.site = &bjb_emlrtRSI;
           e_emlrt_marshallIn(&c_st, b_sprintf(&c_st, y, b_y, &r_emlrtMCI),
                              "<output of sprintf>", str);
           b_st.site = &in_emlrtRSI;
@@ -183,7 +183,7 @@ void b_chi2inv(const emlrtStack *sp, const emxArray_real_T *p, real_T v,
           d_y = NULL;
           m = emlrtCreateDoubleScalar(2.0);
           emlrtAssign(&d_y, m);
-          c_st.site = &cjb_emlrtRSI;
+          c_st.site = &bjb_emlrtRSI;
           e_emlrt_marshallIn(&c_st, b_sprintf(&c_st, c_y, d_y, &r_emlrtMCI),
                              "<output of sprintf>", b_str);
           b_st.site = &gbb_emlrtRSI;
@@ -194,7 +194,7 @@ void b_chi2inv(const emlrtStack *sp, const emxArray_real_T *p, real_T v,
           f_y = NULL;
           m = emlrtCreateDoubleScalar(p->data[k]);
           emlrtAssign(&f_y, m);
-          c_st.site = &cjb_emlrtRSI;
+          c_st.site = &bjb_emlrtRSI;
           e_emlrt_marshallIn(&c_st, b_sprintf(&c_st, e_y, f_y, &r_emlrtMCI),
                              "<output of sprintf>", c_str);
           b_st.site = &hn_emlrtRSI;
@@ -286,7 +286,7 @@ real_T chi2inv(const emlrtStack *sp, real_T p, real_T v)
         b_y = NULL;
         m = emlrtCreateDoubleScalar(a);
         emlrtAssign(&b_y, m);
-        c_st.site = &cjb_emlrtRSI;
+        c_st.site = &bjb_emlrtRSI;
         e_emlrt_marshallIn(&c_st, b_sprintf(&c_st, y, b_y, &r_emlrtMCI),
                            "<output of sprintf>", str);
         b_st.site = &in_emlrtRSI;
@@ -297,7 +297,7 @@ real_T chi2inv(const emlrtStack *sp, real_T p, real_T v)
         d_y = NULL;
         m = emlrtCreateDoubleScalar(2.0);
         emlrtAssign(&d_y, m);
-        c_st.site = &cjb_emlrtRSI;
+        c_st.site = &bjb_emlrtRSI;
         e_emlrt_marshallIn(&c_st, b_sprintf(&c_st, c_y, d_y, &r_emlrtMCI),
                            "<output of sprintf>", b_str);
         b_st.site = &gbb_emlrtRSI;
@@ -308,7 +308,7 @@ real_T chi2inv(const emlrtStack *sp, real_T p, real_T v)
         f_y = NULL;
         m = emlrtCreateDoubleScalar(p);
         emlrtAssign(&f_y, m);
-        c_st.site = &cjb_emlrtRSI;
+        c_st.site = &bjb_emlrtRSI;
         e_emlrt_marshallIn(&c_st, b_sprintf(&c_st, e_y, f_y, &r_emlrtMCI),
                            "<output of sprintf>", c_str);
         b_st.site = &hn_emlrtRSI;

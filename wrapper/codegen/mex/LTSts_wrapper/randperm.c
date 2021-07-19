@@ -31,7 +31,7 @@ static emlrtRSInfo
 };
 
 static emlrtRTEInfo
-    ab_emlrtRTEI =
+    y_emlrtRTEI =
         {
             10,         /* lineNo */
             15,         /* colNo */
@@ -42,7 +42,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    cb_emlrtRTEI =
+    bb_emlrtRTEI =
         {
             20,         /* lineNo */
             19,         /* colNo */
@@ -53,7 +53,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    db_emlrtRTEI =
+    cb_emlrtRTEI =
         {
             23,         /* lineNo */
             19,         /* colNo */
@@ -64,7 +64,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    eb_emlrtRTEI =
+    db_emlrtRTEI =
         {
             39,          /* lineNo */
             13,          /* colNo */
@@ -75,7 +75,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    fb_emlrtRTEI =
+    eb_emlrtRTEI =
         {
             46,          /* lineNo */
             13,          /* colNo */
@@ -86,7 +86,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    gb_emlrtRTEI =
+    fb_emlrtRTEI =
         {
             67,          /* lineNo */
             13,          /* colNo */
@@ -97,7 +97,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    yk_emlrtRTEI =
+    xk_emlrtRTEI =
         {
             24,         /* lineNo */
             5,          /* colNo */
@@ -108,7 +108,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    al_emlrtRTEI =
+    yk_emlrtRTEI =
         {
             62,         /* lineNo */
             5,          /* colNo */
@@ -119,7 +119,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    bl_emlrtRTEI =
+    al_emlrtRTEI =
         {
             63,         /* lineNo */
             5,          /* colNo */
@@ -130,7 +130,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    cl_emlrtRTEI =
+    bl_emlrtRTEI =
         {
             64,         /* lineNo */
             5,          /* colNo */
@@ -141,7 +141,7 @@ static emlrtRTEInfo
 };
 
 static emlrtRTEInfo
-    dl_emlrtRTEI =
+    cl_emlrtRTEI =
         {
             65,         /* lineNo */
             5,          /* colNo */
@@ -172,33 +172,33 @@ void randperm(const emlrtStack *sp, real_T n, real_T k, emxArray_real_T *p)
   st.tls = sp->tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
   if (!(n <= 9.007199254740991E+15)) {
-    emlrtErrorWithMessageIdR2018a(sp, &ab_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(sp, &y_emlrtRTEI,
                                   "MATLAB:randperm:inputNTooLarge",
                                   "MATLAB:randperm:inputNTooLarge", 0);
   }
   if ((!(n >= 0.0)) || (!(n == muDoubleScalarFloor(n)))) {
-    emlrtErrorWithMessageIdR2018a(sp, &bb_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(sp, &ab_emlrtRTEI,
                                   "MATLAB:randperm:inputType",
                                   "MATLAB:randperm:inputType", 0);
   }
   if ((!(k >= 0.0)) || (!(k == muDoubleScalarFloor(k)))) {
-    emlrtErrorWithMessageIdR2018a(sp, &cb_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(sp, &bb_emlrtRTEI,
                                   "MATLAB:randperm:inputType",
                                   "MATLAB:randperm:inputType", 0);
   }
   if (!(k <= n)) {
-    emlrtErrorWithMessageIdR2018a(sp, &db_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(sp, &cb_emlrtRTEI,
                                   "MATLAB:randperm:inputKTooLarge",
                                   "MATLAB:randperm:inputKTooLarge", 0);
   }
   st.site = &hj_emlrtRSI;
   i = p->size[0] * p->size[1];
   p->size[0] = 1;
-  emxEnsureCapacity_real_T(&st, p, i, &yk_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, p, i, &xk_emlrtRTEI);
   loop_ub_tmp = (int32_T)k;
   i = p->size[0] * p->size[1];
   p->size[1] = (int32_T)k;
-  emxEnsureCapacity_real_T(&st, p, i, &yk_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, p, i, &xk_emlrtRTEI);
   for (i = 0; i < loop_ub_tmp; i++) {
     p->data[i] = 0.0;
   }
@@ -207,7 +207,7 @@ void randperm(const emlrtStack *sp, real_T n, real_T k, emxArray_real_T *p)
       p->data[0] = 1.0;
       i = (int32_T)(n - 1.0);
       emlrtForLoopVectorCheckR2021a(1.0, 1.0, n - 1.0, mxDOUBLE_CLASS,
-                                    (int32_T)(n - 1.0), &eb_emlrtRTEI, &st);
+                                    (int32_T)(n - 1.0), &db_emlrtRTEI, &st);
       for (loop_ub_tmp = 0; loop_ub_tmp < i; loop_ub_tmp++) {
         j = b_rand() * (((real_T)loop_ub_tmp + 1.0) + 1.0);
         j = muDoubleScalarFloor(j);
@@ -218,7 +218,7 @@ void randperm(const emlrtStack *sp, real_T n, real_T k, emxArray_real_T *p)
       t = 0.0;
       i = (int32_T)((k - 1.0) + 1.0);
       emlrtForLoopVectorCheckR2021a(0.0, 1.0, k - 1.0, mxDOUBLE_CLASS,
-                                    (int32_T)((k - 1.0) + 1.0), &fb_emlrtRTEI,
+                                    (int32_T)((k - 1.0) + 1.0), &eb_emlrtRTEI,
                                     &st);
       for (m = 0; m < i; m++) {
         selectedLoc = k - (real_T)m;
@@ -237,37 +237,37 @@ void randperm(const emlrtStack *sp, real_T n, real_T k, emxArray_real_T *p)
         p->data[(int32_T)(j + 1.0) - 1] = t;
       }
     } else {
-      emxInit_real_T(&st, &hashTbl, 1, &al_emlrtRTEI, true);
+      emxInit_real_T(&st, &hashTbl, 1, &yk_emlrtRTEI, true);
       i = hashTbl->size[0];
       hashTbl->size[0] = (int32_T)k;
-      emxEnsureCapacity_real_T(&st, hashTbl, i, &al_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, hashTbl, i, &yk_emlrtRTEI);
       for (i = 0; i < loop_ub_tmp; i++) {
         hashTbl->data[i] = 0.0;
       }
-      emxInit_real_T(&st, &link, 1, &bl_emlrtRTEI, true);
+      emxInit_real_T(&st, &link, 1, &al_emlrtRTEI, true);
       i = link->size[0];
       link->size[0] = (int32_T)k;
-      emxEnsureCapacity_real_T(&st, link, i, &bl_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, link, i, &al_emlrtRTEI);
       for (i = 0; i < loop_ub_tmp; i++) {
         link->data[i] = 0.0;
       }
-      emxInit_real_T(&st, &val, 1, &cl_emlrtRTEI, true);
+      emxInit_real_T(&st, &val, 1, &bl_emlrtRTEI, true);
       i = val->size[0];
       val->size[0] = (int32_T)k;
-      emxEnsureCapacity_real_T(&st, val, i, &cl_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, val, i, &bl_emlrtRTEI);
       for (i = 0; i < loop_ub_tmp; i++) {
         val->data[i] = 0.0;
       }
-      emxInit_real_T(&st, &loc, 1, &dl_emlrtRTEI, true);
+      emxInit_real_T(&st, &loc, 1, &cl_emlrtRTEI, true);
       i = loc->size[0];
       loc->size[0] = (int32_T)k;
-      emxEnsureCapacity_real_T(&st, loc, i, &dl_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, loc, i, &cl_emlrtRTEI);
       for (i = 0; i < loop_ub_tmp; i++) {
         loc->data[i] = 0.0;
       }
       newEntry = 1.0;
       emlrtForLoopVectorCheckR2021a(1.0, 1.0, k, mxDOUBLE_CLASS, (int32_T)k,
-                                    &gb_emlrtRTEI, &st);
+                                    &fb_emlrtRTEI, &st);
       for (m = 0; m < loop_ub_tmp; m++) {
         nleftm1 = n - ((real_T)m + 1.0);
         selectedLoc = b_rand() * (nleftm1 + 1.0);

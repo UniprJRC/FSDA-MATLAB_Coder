@@ -22,25 +22,25 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo jf_emlrtRSI = {
+static emlrtRSInfo if_emlrtRSI = {
     341,                                                    /* lineNo */
     "lexunrank",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\lexunrank.m" /* pathName */
 };
 
-static emlrtRSInfo mf_emlrtRSI = {
+static emlrtRSInfo lf_emlrtRSI = {
     310,                                                    /* lineNo */
     "lexunrank",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\lexunrank.m" /* pathName */
 };
 
-static emlrtRSInfo nf_emlrtRSI = {
+static emlrtRSInfo mf_emlrtRSI = {
     312,                                                    /* lineNo */
     "lexunrank",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\lexunrank.m" /* pathName */
 };
 
-static emlrtRSInfo of_emlrtRSI = {
+static emlrtRSInfo nf_emlrtRSI = {
     325,                                                    /* lineNo */
     "lexunrank",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\lexunrank.m" /* pathName */
@@ -244,35 +244,35 @@ static emlrtBCInfo uc_emlrtBCI = {
     0                                                        /* checkKind */
 };
 
-static emlrtRTEInfo of_emlrtRTEI = {
+static emlrtRTEInfo sf_emlrtRTEI = {
     283,                                                    /* lineNo */
     1,                                                      /* colNo */
     "lexunrank",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\lexunrank.m" /* pName */
 };
 
-static emlrtRTEInfo pf_emlrtRTEI = {
+static emlrtRTEInfo tf_emlrtRTEI = {
     294,                                                    /* lineNo */
     5,                                                      /* colNo */
     "lexunrank",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\lexunrank.m" /* pName */
 };
 
-static emlrtRTEInfo qf_emlrtRTEI = {
+static emlrtRTEInfo uf_emlrtRTEI = {
     295,                                                    /* lineNo */
     5,                                                      /* colNo */
     "lexunrank",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\lexunrank.m" /* pName */
 };
 
-static emlrtRTEInfo rf_emlrtRTEI = {
+static emlrtRTEInfo vf_emlrtRTEI = {
     312,                                                    /* lineNo */
     18,                                                     /* colNo */
     "lexunrank",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\lexunrank.m" /* pName */
 };
 
-static emlrtRTEInfo sf_emlrtRTEI =
+static emlrtRTEInfo wf_emlrtRTEI =
     {
         75,                  /* lineNo */
         9,                   /* colNo */
@@ -282,21 +282,21 @@ static emlrtRTEInfo sf_emlrtRTEI =
         "helper.m" /* pName */
 };
 
-static emlrtRTEInfo tf_emlrtRTEI = {
+static emlrtRTEInfo xf_emlrtRTEI = {
     310,                                                    /* lineNo */
     56,                                                     /* colNo */
     "lexunrank",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\lexunrank.m" /* pName */
 };
 
-static emlrtRTEInfo uf_emlrtRTEI = {
+static emlrtRTEInfo yf_emlrtRTEI = {
     295,                                                    /* lineNo */
     12,                                                     /* colNo */
     "lexunrank",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\lexunrank.m" /* pName */
 };
 
-static emlrtRTEInfo vf_emlrtRTEI = {
+static emlrtRTEInfo ag_emlrtRTEI = {
     310,                                                    /* lineNo */
     31,                                                     /* colNo */
     "lexunrank",                                            /* fName */
@@ -653,11 +653,11 @@ void b_lexunrank(const emlrtStack *sp, real_T n, real_T k, real_T N,
   kcomb->size[0] = 1;
   ii_data = (int32_T)k;
   kcomb->size[1] = (int32_T)k;
-  emxEnsureCapacity_real_T(sp, kcomb, i, &of_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, kcomb, i, &sf_emlrtRTEI);
   for (i = 0; i < ii_data; i++) {
     kcomb->data[i] = 0.0;
   }
-  emxInit_real_T(sp, &pas_col, 1, &pf_emlrtRTEI, true);
+  emxInit_real_T(sp, &pas_col, 1, &tf_emlrtRTEI, true);
   /*  initialise the count of the calls to binomial coefficient values (via */
   /*  call to bc function or access to Pascal matrix cells) */
   /*     %% call_bc OPTION: */
@@ -665,16 +665,16 @@ void b_lexunrank(const emlrtStack *sp, real_T n, real_T k, real_T N,
   ii_data = (int32_T)n;
   i = pas_col->size[0];
   pas_col->size[0] = (int32_T)n;
-  emxEnsureCapacity_real_T(sp, pas_col, i, &pf_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, pas_col, i, &tf_emlrtRTEI);
   for (i = 0; i < ii_data; i++) {
     pas_col->data[i] = 1.0;
   }
-  emxInit_real_T(sp, &y, 2, &uf_emlrtRTEI, true);
+  emxInit_real_T(sp, &y, 2, &yf_emlrtRTEI, true);
   if (muDoubleScalarIsNaN(n)) {
     i = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = 1;
-    emxEnsureCapacity_real_T(sp, y, i, &yb_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, y, i, &ac_emlrtRTEI);
     y->data[0] = rtNaN;
   } else if (n < 1.0) {
     y->size[0] = 1;
@@ -683,22 +683,22 @@ void b_lexunrank(const emlrtStack *sp, real_T n, real_T k, real_T N,
     i = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = 1;
-    emxEnsureCapacity_real_T(sp, y, i, &yb_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, y, i, &ac_emlrtRTEI);
     y->data[0] = rtNaN;
   } else {
     i = y->size[0] * y->size[1];
     y->size[0] = 1;
     ii_data = (int32_T)muDoubleScalarFloor(n - 1.0);
     y->size[1] = ii_data + 1;
-    emxEnsureCapacity_real_T(sp, y, i, &yb_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, y, i, &ac_emlrtRTEI);
     for (i = 0; i <= ii_data; i++) {
       y->data[i] = (real_T)i + 1.0;
     }
   }
-  emxInit_real_T(sp, &seq, 1, &qf_emlrtRTEI, true);
+  emxInit_real_T(sp, &seq, 1, &uf_emlrtRTEI, true);
   i = seq->size[0];
   seq->size[0] = y->size[1];
-  emxEnsureCapacity_real_T(sp, seq, i, &qf_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, seq, i, &uf_emlrtRTEI);
   ii_data = y->size[1];
   for (i = 0; i < ii_data; i++) {
     seq->data[i] = y->data[i];
@@ -707,9 +707,9 @@ void b_lexunrank(const emlrtStack *sp, real_T n, real_T k, real_T N,
   i = (int32_T)(((-1.0 - k) + 1.0) / -1.0);
   emlrtForLoopVectorCheckR2021a(k, -1.0, 1.0, mxDOUBLE_CLASS, i, &db_emlrtRTEI,
                                 (emlrtCTX)sp);
-  emxInit_real_T(sp, &b_y, 1, &vf_emlrtRTEI, true);
-  emxInit_real_T(sp, &c_y, 1, &tf_emlrtRTEI, true);
-  emxInit_boolean_T(sp, &b_pas_col, 1, &rf_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_y, 1, &ag_emlrtRTEI, true);
+  emxInit_real_T(sp, &c_y, 1, &xf_emlrtRTEI, true);
+  emxInit_boolean_T(sp, &b_pas_col, 1, &vf_emlrtRTEI, true);
   for (kk = 0; kk < i; kk++) {
     b_kk = k + -(real_T)kk;
     /*  The next 'if' statement builds the required part of column kk+1 */
@@ -761,7 +761,7 @@ void b_lexunrank(const emlrtStack *sp, real_T n, real_T k, real_T N,
       iv[0] = 1;
       ii_data = i2 - i1;
       iv[1] = ii_data;
-      st.site = &mf_emlrtRSI;
+      st.site = &lf_emlrtRSI;
       b_indexShapeCheck(&st, pas_col->size[0], iv);
       if (b_kk + 1.0 > n) {
         i2 = 0;
@@ -782,7 +782,7 @@ void b_lexunrank(const emlrtStack *sp, real_T n, real_T k, real_T N,
       iv[0] = 1;
       loop_ub = i3 - i2;
       iv[1] = loop_ub;
-      st.site = &mf_emlrtRSI;
+      st.site = &lf_emlrtRSI;
       b_indexShapeCheck(&st, seq->size[0], iv);
       if (b_kk + 1.0 > n) {
         i3 = -1;
@@ -803,22 +803,22 @@ void b_lexunrank(const emlrtStack *sp, real_T n, real_T k, real_T N,
       }
       i5 = b_y->size[0];
       b_y->size[0] = ii_data;
-      emxEnsureCapacity_real_T(sp, b_y, i5, &sf_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, b_y, i5, &wf_emlrtRTEI);
       for (i5 = 0; i5 < ii_data; i5++) {
         b_y->data[i5] = pas_col->data[i1 + i5] * (b_kk + 1.0);
       }
-      st.site = &mf_emlrtRSI;
+      st.site = &lf_emlrtRSI;
       i1 = c_y->size[0];
       c_y->size[0] = loop_ub;
-      emxEnsureCapacity_real_T(&st, c_y, i1, &tf_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, c_y, i1, &xf_emlrtRTEI);
       for (i1 = 0; i1 < loop_ub; i1++) {
         c_y->data[i1] = seq->data[i2 + i1] - b_kk;
       }
-      b_st.site = &qd_emlrtRSI;
-      c_st.site = &rd_emlrtRSI;
-      d_st.site = &sd_emlrtRSI;
-      e_st.site = &td_emlrtRSI;
-      f_st.site = &ud_emlrtRSI;
+      b_st.site = &pd_emlrtRSI;
+      c_st.site = &qd_emlrtRSI;
+      d_st.site = &rd_emlrtRSI;
+      e_st.site = &sd_emlrtRSI;
+      f_st.site = &td_emlrtRSI;
       if (b_y->size[0] <= c_y->size[0]) {
         i1 = b_y->size[0];
       } else {
@@ -872,8 +872,8 @@ void b_lexunrank(const emlrtStack *sp, real_T n, real_T k, real_T N,
         emlrtErrorWithMessageIdR2018a(&f_st, &m_emlrtRTEI, "MATLAB:dimagree",
                                       "MATLAB:dimagree", 0);
       }
-      f_st.site = &vd_emlrtRSI;
-      g_st.site = &wd_emlrtRSI;
+      f_st.site = &ud_emlrtRSI;
+      g_st.site = &vd_emlrtRSI;
       if (b_y->size[0] <= c_y->size[0]) {
         i1 = b_y->size[0];
       } else {
@@ -932,9 +932,9 @@ void b_lexunrank(const emlrtStack *sp, real_T n, real_T k, real_T N,
         emlrtErrorWithMessageIdR2018a(&g_st, &m_emlrtRTEI, "MATLAB:dimagree",
                                       "MATLAB:dimagree", 0);
       }
-      g_st.site = &xd_emlrtRSI;
+      g_st.site = &wd_emlrtRSI;
       if ((1 <= loop_ub) && (loop_ub > 2147483646)) {
-        h_st.site = &pb_emlrtRSI;
+        h_st.site = &ob_emlrtRSI;
         check_forloop_overflow_error(&h_st);
       }
       ii_data = b_y->size[0];
@@ -968,16 +968,16 @@ void b_lexunrank(const emlrtStack *sp, real_T n, real_T k, real_T N,
     iv[0] = 1;
     ii_data = i2 - i1;
     iv[1] = ii_data;
-    st.site = &nf_emlrtRSI;
+    st.site = &mf_emlrtRSI;
     b_indexShapeCheck(&st, pas_col->size[0], iv);
-    st.site = &nf_emlrtRSI;
+    st.site = &mf_emlrtRSI;
     i2 = b_pas_col->size[0];
     b_pas_col->size[0] = ii_data;
-    emxEnsureCapacity_boolean_T(&st, b_pas_col, i2, &rf_emlrtRTEI);
+    emxEnsureCapacity_boolean_T(&st, b_pas_col, i2, &vf_emlrtRTEI);
     for (i2 = 0; i2 < ii_data; i2++) {
       b_pas_col->data[i2] = (pas_col->data[i1 + i2] > N_kk);
     }
-    b_st.site = &ec_emlrtRSI;
+    b_st.site = &dc_emlrtRSI;
     b_eml_find(&b_st, b_pas_col, (int32_T *)&ii_data, &loop_ub);
     if (loop_ub == 0) {
       maxx = n - 1.0;
@@ -990,7 +990,7 @@ void b_lexunrank(const emlrtStack *sp, real_T n, real_T k, real_T N,
     }
     kcomb->data[(int32_T)b_kk - 1] = n - maxx;
     if (maxx >= b_kk) {
-      st.site = &of_emlrtRSI;
+      st.site = &nf_emlrtRSI;
       N_kk -= bc(&st, maxx, b_kk);
     }
     if (*emlrtBreakCheckR2012bFlagVar != 0) {
@@ -1323,7 +1323,7 @@ void lexunrank(const emlrtStack *sp, real_T n, real_T k, real_T N,
   kcomb->size[0] = 1;
   ii_data = (int32_T)k;
   kcomb->size[1] = (int32_T)k;
-  emxEnsureCapacity_real_T(sp, kcomb, i, &of_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, kcomb, i, &sf_emlrtRTEI);
   for (i = 0; i < ii_data; i++) {
     kcomb->data[i] = 0.0;
   }
@@ -1353,7 +1353,7 @@ void lexunrank(const emlrtStack *sp, real_T n, real_T k, real_T N,
       }
       ii_data = (int32_T)maxx;
     }
-    st.site = &jf_emlrtRSI;
+    st.site = &if_emlrtRSI;
     if (((int32_T)(b_kk + 1.0) < 1) ||
         ((int32_T)(b_kk + 1.0) > pascalM->size[1])) {
       emlrtDynamicBoundsCheckR2012b((int32_T)(b_kk + 1.0), 1, pascalM->size[1],
@@ -1370,7 +1370,7 @@ void lexunrank(const emlrtStack *sp, real_T n, real_T k, real_T N,
     pascalM_data.allocatedSize = 20000;
     pascalM_data.numDimensions = 1;
     pascalM_data.canFreeData = false;
-    b_st.site = &ec_emlrtRSI;
+    b_st.site = &dc_emlrtRSI;
     b_eml_find(&b_st, &pascalM_data, (int32_T *)&ii_data, &ii_size);
     /*  seqnmkk=1:n-kk; */
     /*  x=seqnmkk(pascalM(seqnmkk,kk+1) > N_kk); */

@@ -104,10 +104,10 @@ void xzlartg(const emlrtStack *sp, const creal_T f, const creal_T g, real_T *cs,
         sn->re = gs_re / g2;
         sn->im = -gs_im / g2;
       } else {
-        st.site = &es_emlrtRSI;
+        st.site = &ls_emlrtRSI;
         if (g2 < 0.0) {
           emlrtErrorWithMessageIdR2018a(
-              &st, &ac_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+              &st, &bc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
               "Coder:toolbox:ElFunDomainError", 3, 4, 4, "sqrt");
         }
         g2s = muDoubleScalarSqrt(g2);
@@ -129,11 +129,11 @@ void xzlartg(const emlrtStack *sp, const creal_T f, const creal_T g, real_T *cs,
         sn->im = fs_re * gs_im + fs_im * gs_re;
       }
     } else {
-      st.site = &fs_emlrtRSI;
+      st.site = &ms_emlrtRSI;
       scale = g2 / f2 + 1.0;
       if (scale < 0.0) {
         emlrtErrorWithMessageIdR2018a(
-            &st, &ac_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+            &st, &bc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
             "Coder:toolbox:ElFunDomainError", 3, 4, 4, "sqrt");
       }
       scale = muDoubleScalarSqrt(scale);
@@ -144,15 +144,15 @@ void xzlartg(const emlrtStack *sp, const creal_T f, const creal_T g, real_T *cs,
       sn->re = fs_re * gs_re - fs_im * -gs_im;
       sn->im = fs_re * -gs_im + fs_im * gs_re;
       if (rescaledir > 0) {
-        st.site = &gs_emlrtRSI;
+        st.site = &ns_emlrtRSI;
         if ((1 <= count) && (count > 2147483646)) {
-          b_st.site = &ab_emlrtRSI;
+          b_st.site = &hb_emlrtRSI;
           check_forloop_overflow_error(&b_st);
         }
       } else if (rescaledir < 0) {
-        st.site = &hs_emlrtRSI;
+        st.site = &os_emlrtRSI;
         if ((1 <= count) && (count > 2147483646)) {
-          b_st.site = &ab_emlrtRSI;
+          b_st.site = &hb_emlrtRSI;
           check_forloop_overflow_error(&b_st);
         }
       }

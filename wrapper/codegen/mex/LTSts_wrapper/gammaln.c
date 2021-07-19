@@ -212,7 +212,7 @@ void gammaln(const emlrtStack *sp, real_T *x)
       c_st.site = &mw_emlrtRSI;
       if (*x < 0.0) {
         emlrtErrorWithMessageIdR2018a(
-            &c_st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+            &c_st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
             "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
       }
       *x = 0.5 * (0.5 * (r / t) + -0.57721566490153287) + 0.69314718055994529;
@@ -226,7 +226,7 @@ void gammaln(const emlrtStack *sp, real_T *x)
       c_st.site = &lw_emlrtRSI;
       if (*x < 0.0) {
         emlrtErrorWithMessageIdR2018a(
-            &c_st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+            &c_st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
             "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
       }
       *x = -muDoubleScalarLog(*x) +
@@ -269,7 +269,7 @@ void gammaln(const emlrtStack *sp, real_T *x)
       c_st.site = &kw_emlrtRSI;
       if (*x < 0.0) {
         emlrtErrorWithMessageIdR2018a(
-            &c_st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+            &c_st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
             "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
       }
       t = muDoubleScalarLog(*x);

@@ -38,7 +38,7 @@ static emlrtRSInfo an_emlrtRSI = {
     "internal\\indexShapeCheck.m" /* pathName */
 };
 
-static emlrtRTEInfo p_emlrtRTEI = {
+static emlrtRTEInfo o_emlrtRTEI = {
     121,           /* lineNo */
     5,             /* colNo */
     "errOrWarnIf", /* fName */
@@ -81,7 +81,7 @@ void b_indexShapeCheck(const emlrtStack *sp, const int32_T matrixSize[2],
       }
       st.site = &fj_emlrtRSI;
       if (nonSingletonDimFound) {
-        emlrtErrorWithMessageIdR2018a(&st, &p_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&st, &o_emlrtRTEI,
                                       "Coder:FE:PotentialMatrixMatrix_VM",
                                       "Coder:FE:PotentialMatrixMatrix_VM", 0);
       }
@@ -112,7 +112,7 @@ void c_indexShapeCheck(const emlrtStack *sp, const int32_T matrixSize[2],
     }
     st.site = &an_emlrtRSI;
     if (nonSingletonDimFound) {
-      emlrtErrorWithMessageIdR2018a(&st, &p_emlrtRTEI,
+      emlrtErrorWithMessageIdR2018a(&st, &o_emlrtRTEI,
                                     "Coder:FE:PotentialMatrixMatrix_MV",
                                     "Coder:FE:PotentialMatrixMatrix_MV", 0);
     }
@@ -145,7 +145,7 @@ void indexShapeCheck(const emlrtStack *sp, int32_T matrixSize,
   }
   st.site = &pg_emlrtRSI;
   if (nonSingletonDimFound) {
-    emlrtErrorWithMessageIdR2018a(&st, &p_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(&st, &o_emlrtRTEI,
                                   "Coder:FE:PotentialVectorVector",
                                   "Coder:FE:PotentialVectorVector", 0);
   }

@@ -1737,32 +1737,32 @@ static emlrtRTEInfo ro_emlrtRTEI = { 410,/* lineNo */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMmmd.m"/* pName */
 };
 
-static emlrtRSInfo wgb_emlrtRSI = { 437,/* lineNo */
+static emlrtRSInfo vgb_emlrtRSI = { 437,/* lineNo */
   "FSMmmd",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMmmd.m"/* pathName */
 };
 
-static emlrtRSInfo xgb_emlrtRSI = { 584,/* lineNo */
+static emlrtRSInfo wgb_emlrtRSI = { 584,/* lineNo */
   "FSMmmd",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMmmd.m"/* pathName */
 };
 
-static emlrtRSInfo dhb_emlrtRSI = { 434,/* lineNo */
+static emlrtRSInfo chb_emlrtRSI = { 434,/* lineNo */
   "FSMmmd",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMmmd.m"/* pathName */
 };
 
-static emlrtRSInfo ehb_emlrtRSI = { 582,/* lineNo */
+static emlrtRSInfo dhb_emlrtRSI = { 582,/* lineNo */
   "FSMmmd",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMmmd.m"/* pathName */
 };
 
-static emlrtRSInfo fhb_emlrtRSI = { 264,/* lineNo */
+static emlrtRSInfo ehb_emlrtRSI = { 264,/* lineNo */
   "FSMmmd",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMmmd.m"/* pathName */
 };
 
-static emlrtRSInfo qhb_emlrtRSI = { 352,/* lineNo */
+static emlrtRSInfo phb_emlrtRSI = { 352,/* lineNo */
   "FSMmmd",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSMmmd.m"/* pathName */
 };
@@ -2191,7 +2191,7 @@ void FSMmmd(const emlrtStack *sp, const emxArray_real_T *Y, emxArray_real_T *bsb
     }
 
     if (nwhile == 100) {
-      st.site = &fhb_emlrtRSI;
+      st.site = &ehb_emlrtRSI;
       b_disp(&st, c_emlrt_marshallOut(&st, cv3), q_emlrt_marshallOut(&st, cv4),
              &s_emlrtMCI);
     }
@@ -2340,23 +2340,23 @@ void FSMmmd(const emlrtStack *sp, const emxArray_real_T *Y, emxArray_real_T *bsb
   if (varargin_2 < (real_T)Y->size[1] + 1.0) {
     st.site = &cv_emlrtRSI;
     b_st.site = &wv_emlrtRSI;
-    c_st.site = &ghb_emlrtRSI;
-    d_st.site = &hhb_emlrtRSI;
-    e_st.site = &ohb_emlrtRSI;
+    c_st.site = &fhb_emlrtRSI;
+    d_st.site = &ghb_emlrtRSI;
+    e_st.site = &nhb_emlrtRSI;
     g_emlrt_marshallIn(&c_st, d_feval(&c_st, d_emlrt_marshallOut(&c_st, b_cv),
       f_emlrt_marshallOut(1.0), e_emlrt_marshallOut(&d_st, b_cv1),
       o_emlrt_marshallOut(&e_st, cv6), &y_emlrtMCI), "<output of feval>");
     init1 = (real_T)Y->size[1] + 1.0;
   } else if (varargin_2 < bsb->size[0]) {
-    st.site = &qhb_emlrtRSI;
+    st.site = &phb_emlrtRSI;
     disp(&st, r_emlrt_marshallOut(&st, cv5), &t_emlrtMCI);
     init1 = bsb->size[0];
   } else if (varargin_2 >= Y->size[0]) {
     st.site = &bv_emlrtRSI;
     b_st.site = &wv_emlrtRSI;
-    c_st.site = &ghb_emlrtRSI;
-    d_st.site = &hhb_emlrtRSI;
-    e_st.site = &ohb_emlrtRSI;
+    c_st.site = &fhb_emlrtRSI;
+    d_st.site = &ghb_emlrtRSI;
+    e_st.site = &nhb_emlrtRSI;
     g_emlrt_marshallIn(&c_st, d_feval(&c_st, d_emlrt_marshallOut(&c_st, b_cv),
       f_emlrt_marshallOut(1.0), e_emlrt_marshallOut(&d_st, b_cv1),
       p_emlrt_marshallOut(&e_st, cv7), &y_emlrtMCI), "<output of feval>");
@@ -3947,10 +3947,10 @@ void FSMmmd(const emlrtStack *sp, const emxArray_real_T *Y, emxArray_real_T *bsb
           c_st.site = &te_emlrtRSI;
           irank = combineVectorElements(&c_st, MDltminT);
           if (irank > 0) {
-            st.site = &ehb_emlrtRSI;
+            st.site = &dhb_emlrtRSI;
             b_disp(&st, c_emlrt_marshallOut(&st, cv3), l_emlrt_marshallOut(&st,
                     cv10), &w_emlrtMCI);
-            st.site = &xgb_emlrtRSI;
+            st.site = &wgb_emlrtRSI;
             disp(&st, emlrt_marshallOut(&st, cv9), &x_emlrtMCI);
             i = mmd->size[0] * mmd->size[1];
             mmd->size[0] = 1;
@@ -4962,10 +4962,10 @@ void FSMmmd(const emlrtStack *sp, const emxArray_real_T *Y, emxArray_real_T *bsb
   }
 
   if (guard1) {
-    st.site = &dhb_emlrtRSI;
+    st.site = &chb_emlrtRSI;
     b_disp(&st, c_emlrt_marshallOut(&st, cv3), j_emlrt_marshallOut(&st, cv8),
            &u_emlrtMCI);
-    st.site = &wgb_emlrtRSI;
+    st.site = &vgb_emlrtRSI;
     disp(&st, emlrt_marshallOut(&st, cv9), &v_emlrtMCI);
     i = mmd->size[0] * mmd->size[1];
     mmd->size[0] = 1;
@@ -5436,7 +5436,7 @@ void b_FSMmmd(const emlrtStack *sp, const emxArray_real_T *Y, emxArray_real_T
     }
 
     if (nwhile == 100) {
-      st.site = &fhb_emlrtRSI;
+      st.site = &ehb_emlrtRSI;
       b_disp(&st, c_emlrt_marshallOut(&st, cv3), q_emlrt_marshallOut(&st, cv4),
              &s_emlrtMCI);
     }
@@ -5585,23 +5585,23 @@ void b_FSMmmd(const emlrtStack *sp, const emxArray_real_T *Y, emxArray_real_T
   if (varargin_2 < (real_T)Y->size[1] + 1.0) {
     st.site = &cv_emlrtRSI;
     b_st.site = &wv_emlrtRSI;
-    c_st.site = &ghb_emlrtRSI;
-    d_st.site = &hhb_emlrtRSI;
-    e_st.site = &ohb_emlrtRSI;
+    c_st.site = &fhb_emlrtRSI;
+    d_st.site = &ghb_emlrtRSI;
+    e_st.site = &nhb_emlrtRSI;
     g_emlrt_marshallIn(&c_st, d_feval(&c_st, d_emlrt_marshallOut(&c_st, b_cv),
       f_emlrt_marshallOut(1.0), e_emlrt_marshallOut(&d_st, b_cv1),
       o_emlrt_marshallOut(&e_st, cv6), &y_emlrtMCI), "<output of feval>");
     init1 = (real_T)Y->size[1] + 1.0;
   } else if (varargin_2 < bsb->size[0]) {
-    st.site = &qhb_emlrtRSI;
+    st.site = &phb_emlrtRSI;
     disp(&st, r_emlrt_marshallOut(&st, cv5), &t_emlrtMCI);
     init1 = bsb->size[0];
   } else if (varargin_2 >= Y->size[0]) {
     st.site = &bv_emlrtRSI;
     b_st.site = &wv_emlrtRSI;
-    c_st.site = &ghb_emlrtRSI;
-    d_st.site = &hhb_emlrtRSI;
-    e_st.site = &ohb_emlrtRSI;
+    c_st.site = &fhb_emlrtRSI;
+    d_st.site = &ghb_emlrtRSI;
+    e_st.site = &nhb_emlrtRSI;
     g_emlrt_marshallIn(&c_st, d_feval(&c_st, d_emlrt_marshallOut(&c_st, b_cv),
       f_emlrt_marshallOut(1.0), e_emlrt_marshallOut(&d_st, b_cv1),
       p_emlrt_marshallOut(&e_st, cv7), &y_emlrtMCI), "<output of feval>");
@@ -6914,10 +6914,10 @@ void b_FSMmmd(const emlrtStack *sp, const emxArray_real_T *Y, emxArray_real_T
           c_st.site = &te_emlrtRSI;
           irank = combineVectorElements(&c_st, MDltminT);
           if (irank > 0) {
-            st.site = &ehb_emlrtRSI;
+            st.site = &dhb_emlrtRSI;
             b_disp(&st, c_emlrt_marshallOut(&st, cv3), l_emlrt_marshallOut(&st,
                     cv10), &w_emlrtMCI);
-            st.site = &xgb_emlrtRSI;
+            st.site = &wgb_emlrtRSI;
             disp(&st, emlrt_marshallOut(&st, cv9), &x_emlrtMCI);
             i = mmd->size[0] * mmd->size[1];
             mmd->size[0] = 1;
@@ -7925,10 +7925,10 @@ void b_FSMmmd(const emlrtStack *sp, const emxArray_real_T *Y, emxArray_real_T
   }
 
   if (guard1) {
-    st.site = &dhb_emlrtRSI;
+    st.site = &chb_emlrtRSI;
     b_disp(&st, c_emlrt_marshallOut(&st, cv3), j_emlrt_marshallOut(&st, cv8),
            &u_emlrtMCI);
-    st.site = &wgb_emlrtRSI;
+    st.site = &vgb_emlrtRSI;
     disp(&st, emlrt_marshallOut(&st, cv9), &v_emlrtMCI);
     i = mmd->size[0] * mmd->size[1];
     mmd->size[0] = 1;

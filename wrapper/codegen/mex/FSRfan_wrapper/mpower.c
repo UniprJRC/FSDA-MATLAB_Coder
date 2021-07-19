@@ -23,10 +23,10 @@ real_T mpower(const emlrtStack *sp, real_T a, real_T b)
   real_T c;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &jl_emlrtRSI;
+  st.site = &il_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
-  b_st.site = &rf_emlrtRSI;
+  b_st.site = &qf_emlrtRSI;
   c = muDoubleScalarPower(a, b);
   if ((a < 0.0) && (!muDoubleScalarIsNaN(b)) && (muDoubleScalarFloor(b) != b)) {
     emlrtErrorWithMessageIdR2018a(&b_st, &eb_emlrtRTEI,

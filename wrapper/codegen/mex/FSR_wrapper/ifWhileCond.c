@@ -17,7 +17,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRSInfo od_emlrtRSI =
+static emlrtRSInfo vd_emlrtRSI =
     {
         18,            /* lineNo */
         "ifWhileCond", /* fcnName */
@@ -26,7 +26,7 @@ static emlrtRSInfo od_emlrtRSI =
         "internal\\ifWhileCond.m" /* pathName */
 };
 
-static emlrtRSInfo pd_emlrtRSI =
+static emlrtRSInfo wd_emlrtRSI =
     {
         31,            /* lineNo */
         "checkNoNaNs", /* fcnName */
@@ -52,10 +52,10 @@ boolean_T b_ifWhileCond(const emlrtStack *sp, const emxArray_boolean_T *x)
   c_st.tls = b_st.tls;
   y = (x->size[0] != 0);
   if (y) {
-    st.site = &od_emlrtRSI;
-    b_st.site = &pd_emlrtRSI;
+    st.site = &vd_emlrtRSI;
+    b_st.site = &wd_emlrtRSI;
     if ((1 <= x->size[0]) && (x->size[0] > 2147483646)) {
-      c_st.site = &ab_emlrtRSI;
+      c_st.site = &hb_emlrtRSI;
       check_forloop_overflow_error(&c_st);
     }
     k = 0;
@@ -110,11 +110,11 @@ boolean_T ifWhileCond(const emlrtStack *sp, const emxArray_boolean_T *x)
   c_st.tls = b_st.tls;
   y = ((x->size[0] != 0) && (x->size[1] != 0));
   if (y) {
-    st.site = &od_emlrtRSI;
+    st.site = &vd_emlrtRSI;
     b = x->size[0] * x->size[1];
-    b_st.site = &pd_emlrtRSI;
+    b_st.site = &wd_emlrtRSI;
     if ((1 <= b) && (b > 2147483646)) {
-      c_st.site = &ab_emlrtRSI;
+      c_st.site = &hb_emlrtRSI;
       check_forloop_overflow_error(&c_st);
     }
     k = 0;

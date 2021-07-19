@@ -39,217 +39,217 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo yf_emlrtRSI = { 1360,/* lineNo */
+static emlrtRSInfo gg_emlrtRSI = { 1360,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo ag_emlrtRSI = { 1359,/* lineNo */
+static emlrtRSInfo hg_emlrtRSI = { 1359,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo bg_emlrtRSI = { 1358,/* lineNo */
+static emlrtRSInfo ig_emlrtRSI = { 1358,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo cg_emlrtRSI = { 1357,/* lineNo */
+static emlrtRSInfo jg_emlrtRSI = { 1357,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo dg_emlrtRSI = { 1347,/* lineNo */
+static emlrtRSInfo kg_emlrtRSI = { 1347,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo eg_emlrtRSI = { 1284,/* lineNo */
+static emlrtRSInfo lg_emlrtRSI = { 1284,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo fg_emlrtRSI = { 1278,/* lineNo */
+static emlrtRSInfo mg_emlrtRSI = { 1278,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo gg_emlrtRSI = { 1270,/* lineNo */
+static emlrtRSInfo ng_emlrtRSI = { 1270,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo hg_emlrtRSI = { 1121,/* lineNo */
+static emlrtRSInfo og_emlrtRSI = { 1121,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo ig_emlrtRSI = { 1112,/* lineNo */
+static emlrtRSInfo pg_emlrtRSI = { 1112,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo jg_emlrtRSI = { 1104,/* lineNo */
+static emlrtRSInfo qg_emlrtRSI = { 1104,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo kg_emlrtRSI = { 687,/* lineNo */
+static emlrtRSInfo rg_emlrtRSI = { 687,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo lg_emlrtRSI = { 659,/* lineNo */
+static emlrtRSInfo sg_emlrtRSI = { 659,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo mg_emlrtRSI = { 645,/* lineNo */
+static emlrtRSInfo tg_emlrtRSI = { 645,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo ng_emlrtRSI = { 609,/* lineNo */
+static emlrtRSInfo ug_emlrtRSI = { 609,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo og_emlrtRSI = { 600,/* lineNo */
+static emlrtRSInfo vg_emlrtRSI = { 600,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo pg_emlrtRSI = { 593,/* lineNo */
+static emlrtRSInfo wg_emlrtRSI = { 593,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo qg_emlrtRSI = { 572,/* lineNo */
+static emlrtRSInfo xg_emlrtRSI = { 572,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo rg_emlrtRSI = { 563,/* lineNo */
+static emlrtRSInfo yg_emlrtRSI = { 563,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo sg_emlrtRSI = { 555,/* lineNo */
+static emlrtRSInfo ah_emlrtRSI = { 555,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo tg_emlrtRSI = { 547,/* lineNo */
+static emlrtRSInfo bh_emlrtRSI = { 547,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo ug_emlrtRSI = { 530,/* lineNo */
+static emlrtRSInfo ch_emlrtRSI = { 530,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo vg_emlrtRSI = { 522,/* lineNo */
+static emlrtRSInfo dh_emlrtRSI = { 522,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo wg_emlrtRSI = { 514,/* lineNo */
+static emlrtRSInfo eh_emlrtRSI = { 514,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo xg_emlrtRSI = { 490,/* lineNo */
+static emlrtRSInfo fh_emlrtRSI = { 490,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo yg_emlrtRSI = { 481,/* lineNo */
+static emlrtRSInfo gh_emlrtRSI = { 481,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo ah_emlrtRSI = { 452,/* lineNo */
+static emlrtRSInfo hh_emlrtRSI = { 452,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo bh_emlrtRSI = { 445,/* lineNo */
+static emlrtRSInfo ih_emlrtRSI = { 445,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo ch_emlrtRSI = { 434,/* lineNo */
+static emlrtRSInfo jh_emlrtRSI = { 434,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo dh_emlrtRSI = { 431,/* lineNo */
+static emlrtRSInfo kh_emlrtRSI = { 431,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo eh_emlrtRSI = { 430,/* lineNo */
+static emlrtRSInfo lh_emlrtRSI = { 430,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo fh_emlrtRSI = { 395,/* lineNo */
+static emlrtRSInfo mh_emlrtRSI = { 395,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo gh_emlrtRSI = { 391,/* lineNo */
+static emlrtRSInfo nh_emlrtRSI = { 391,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo hh_emlrtRSI = { 389,/* lineNo */
+static emlrtRSInfo oh_emlrtRSI = { 389,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo ih_emlrtRSI = { 372,/* lineNo */
+static emlrtRSInfo ph_emlrtRSI = { 372,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo jh_emlrtRSI = { 359,/* lineNo */
+static emlrtRSInfo qh_emlrtRSI = { 359,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo kh_emlrtRSI = { 357,/* lineNo */
+static emlrtRSInfo rh_emlrtRSI = { 357,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo lh_emlrtRSI = { 355,/* lineNo */
+static emlrtRSInfo sh_emlrtRSI = { 355,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo mh_emlrtRSI = { 353,/* lineNo */
+static emlrtRSInfo th_emlrtRSI = { 353,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo nh_emlrtRSI = { 348,/* lineNo */
+static emlrtRSInfo uh_emlrtRSI = { 348,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo oh_emlrtRSI = { 289,/* lineNo */
+static emlrtRSInfo vh_emlrtRSI = { 289,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtRSInfo ph_emlrtRSI = { 287,/* lineNo */
+static emlrtRSInfo wh_emlrtRSI = { 287,/* lineNo */
   "FSM",                               /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pathName */
 };
 
-static emlrtBCInfo dc_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo kc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1281,                                /* lineNo */
   29,                                  /* colNo */
@@ -259,7 +259,7 @@ static emlrtBCInfo dc_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ec_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo lc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   363,                                 /* lineNo */
   12,                                  /* colNo */
@@ -269,7 +269,7 @@ static emlrtBCInfo ec_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo fc_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo mc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   363,                                 /* lineNo */
   14,                                  /* colNo */
@@ -286,7 +286,7 @@ static emlrtECInfo h_emlrtECI = { 2,   /* nDims */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtBCInfo gc_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo nc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   373,                                 /* lineNo */
   16,                                  /* colNo */
@@ -296,7 +296,7 @@ static emlrtBCInfo gc_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo hc_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo oc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   373,                                 /* lineNo */
   18,                                  /* colNo */
@@ -306,7 +306,7 @@ static emlrtBCInfo hc_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ic_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo pc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   466,                                 /* lineNo */
   19,                                  /* colNo */
@@ -316,7 +316,7 @@ static emlrtBCInfo ic_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo jc_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo qc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   466,                                 /* lineNo */
   29,                                  /* colNo */
@@ -333,7 +333,7 @@ static emlrtECInfo i_emlrtECI = { -1,  /* nDims */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtBCInfo kc_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo rc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   467,                                 /* lineNo */
   19,                                  /* colNo */
@@ -343,7 +343,7 @@ static emlrtBCInfo kc_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo lc_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo sc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   467,                                 /* lineNo */
   29,                                  /* colNo */
@@ -360,7 +360,7 @@ static emlrtECInfo j_emlrtECI = { -1,  /* nDims */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtBCInfo mc_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo tc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   468,                                 /* lineNo */
   19,                                  /* colNo */
@@ -370,7 +370,7 @@ static emlrtBCInfo mc_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo nc_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo uc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   468,                                 /* lineNo */
   29,                                  /* colNo */
@@ -387,7 +387,7 @@ static emlrtECInfo k_emlrtECI = { -1,  /* nDims */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtBCInfo oc_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo vc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   469,                                 /* lineNo */
   19,                                  /* colNo */
@@ -397,7 +397,7 @@ static emlrtBCInfo oc_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo pc_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo wc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   469,                                 /* lineNo */
   29,                                  /* colNo */
@@ -414,7 +414,7 @@ static emlrtECInfo l_emlrtECI = { -1,  /* nDims */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtBCInfo qc_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo xc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   470,                                 /* lineNo */
   19,                                  /* colNo */
@@ -424,7 +424,7 @@ static emlrtBCInfo qc_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo rc_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo yc_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   470,                                 /* lineNo */
   29,                                  /* colNo */
@@ -441,7 +441,7 @@ static emlrtECInfo m_emlrtECI = { -1,  /* nDims */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtBCInfo sc_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ad_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   506,                                 /* lineNo */
   24,                                  /* colNo */
@@ -451,7 +451,7 @@ static emlrtBCInfo sc_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo tc_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo bd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   506,                                 /* lineNo */
   52,                                  /* colNo */
@@ -461,7 +461,7 @@ static emlrtBCInfo tc_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo uc_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo cd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   506,                                 /* lineNo */
   82,                                  /* colNo */
@@ -471,7 +471,7 @@ static emlrtBCInfo uc_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo vc_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo dd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   506,                                 /* lineNo */
   111,                                 /* colNo */
@@ -481,7 +481,7 @@ static emlrtBCInfo vc_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo wc_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ed_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   506,                                 /* lineNo */
   137,                                 /* colNo */
@@ -491,7 +491,7 @@ static emlrtBCInfo wc_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo xc_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo fd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   510,                                 /* lineNo */
   27,                                  /* colNo */
@@ -501,7 +501,7 @@ static emlrtBCInfo xc_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo yc_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo gd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   510,                                 /* lineNo */
   55,                                  /* colNo */
@@ -511,7 +511,7 @@ static emlrtBCInfo yc_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ad_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo hd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   510,                                 /* lineNo */
   85,                                  /* colNo */
@@ -521,7 +521,7 @@ static emlrtBCInfo ad_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo bd_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo id_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   518,                                 /* lineNo */
   27,                                  /* colNo */
@@ -531,7 +531,7 @@ static emlrtBCInfo bd_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo cd_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo jd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   526,                                 /* lineNo */
   27,                                  /* colNo */
@@ -541,7 +541,7 @@ static emlrtBCInfo cd_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo dd_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo kd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   531,                                 /* lineNo */
   32,                                  /* colNo */
@@ -551,7 +551,7 @@ static emlrtBCInfo dd_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ed_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ld_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   541,                                 /* lineNo */
   24,                                  /* colNo */
@@ -561,7 +561,7 @@ static emlrtBCInfo ed_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo fd_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo md_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   541,                                 /* lineNo */
   51,                                  /* colNo */
@@ -571,7 +571,7 @@ static emlrtBCInfo fd_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo gd_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo nd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   541,                                 /* lineNo */
   80,                                  /* colNo */
@@ -581,7 +581,7 @@ static emlrtBCInfo gd_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo hd_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo od_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   541,                                 /* lineNo */
   110,                                 /* colNo */
@@ -591,7 +591,7 @@ static emlrtBCInfo hd_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo id_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo pd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   541,                                 /* lineNo */
   137,                                 /* colNo */
@@ -601,7 +601,7 @@ static emlrtBCInfo id_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo jd_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo qd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   541,                                 /* lineNo */
   164,                                 /* colNo */
@@ -611,7 +611,7 @@ static emlrtBCInfo jd_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo kd_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo rd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   541,                                 /* lineNo */
   191,                                 /* colNo */
@@ -621,7 +621,7 @@ static emlrtBCInfo kd_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ld_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo sd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   541,                                 /* lineNo */
   217,                                 /* colNo */
@@ -631,7 +631,7 @@ static emlrtBCInfo ld_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo md_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo td_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   542,                                 /* lineNo */
   66,                                  /* colNo */
@@ -641,7 +641,7 @@ static emlrtBCInfo md_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo nd_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ud_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   543,                                 /* lineNo */
   27,                                  /* colNo */
@@ -651,7 +651,7 @@ static emlrtBCInfo nd_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo od_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo vd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   543,                                 /* lineNo */
   54,                                  /* colNo */
@@ -661,7 +661,7 @@ static emlrtBCInfo od_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo pd_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo wd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   543,                                 /* lineNo */
   83,                                  /* colNo */
@@ -671,7 +671,7 @@ static emlrtBCInfo pd_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo qd_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo xd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   551,                                 /* lineNo */
   29,                                  /* colNo */
@@ -681,7 +681,7 @@ static emlrtBCInfo qd_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo rd_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo yd_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   551,                                 /* lineNo */
   56,                                  /* colNo */
@@ -691,7 +691,7 @@ static emlrtBCInfo rd_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo sd_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ae_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   551,                                 /* lineNo */
   83,                                  /* colNo */
@@ -701,7 +701,7 @@ static emlrtBCInfo sd_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo td_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo be_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   559,                                 /* lineNo */
   27,                                  /* colNo */
@@ -711,7 +711,7 @@ static emlrtBCInfo td_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ud_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ce_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   564,                                 /* lineNo */
   32,                                  /* colNo */
@@ -721,7 +721,7 @@ static emlrtBCInfo ud_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo vd_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo de_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   568,                                 /* lineNo */
   26,                                  /* colNo */
@@ -731,7 +731,7 @@ static emlrtBCInfo vd_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo wd_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ee_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   573,                                 /* lineNo */
   32,                                  /* colNo */
@@ -741,7 +741,7 @@ static emlrtBCInfo wd_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo xd_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo fe_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   582,                                 /* lineNo */
   23,                                  /* colNo */
@@ -751,7 +751,7 @@ static emlrtBCInfo xd_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo yd_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ge_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   582,                                 /* lineNo */
   48,                                  /* colNo */
@@ -761,7 +761,7 @@ static emlrtBCInfo yd_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ae_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo he_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   589,                                 /* lineNo */
   23,                                  /* colNo */
@@ -771,7 +771,7 @@ static emlrtBCInfo ae_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo be_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ie_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   596,                                 /* lineNo */
   23,                                  /* colNo */
@@ -781,7 +781,7 @@ static emlrtBCInfo be_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ce_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo je_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   602,                                 /* lineNo */
   24,                                  /* colNo */
@@ -791,7 +791,7 @@ static emlrtBCInfo ce_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo de_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ke_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   603,                                 /* lineNo */
   23,                                  /* colNo */
@@ -801,7 +801,7 @@ static emlrtBCInfo de_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ee_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo le_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   610,                                 /* lineNo */
   24,                                  /* colNo */
@@ -811,7 +811,7 @@ static emlrtBCInfo ee_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo fe_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo me_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   626,                                 /* lineNo */
   26,                                  /* colNo */
@@ -821,7 +821,7 @@ static emlrtBCInfo fe_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ge_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ne_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   626,                                 /* lineNo */
   55,                                  /* colNo */
@@ -831,7 +831,7 @@ static emlrtBCInfo ge_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo he_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo oe_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   626,                                 /* lineNo */
   87,                                  /* colNo */
@@ -841,7 +841,7 @@ static emlrtBCInfo he_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ie_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo pe_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   639,                                 /* lineNo */
   37,                                  /* colNo */
@@ -851,7 +851,7 @@ static emlrtBCInfo ie_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo je_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo qe_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   640,                                 /* lineNo */
   37,                                  /* colNo */
@@ -861,7 +861,7 @@ static emlrtBCInfo je_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ke_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo re_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   640,                                 /* lineNo */
   54,                                  /* colNo */
@@ -871,7 +871,7 @@ static emlrtBCInfo ke_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo le_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo se_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   645,                                 /* lineNo */
   28,                                  /* colNo */
@@ -881,7 +881,7 @@ static emlrtBCInfo le_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo me_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo te_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   645,                                 /* lineNo */
   32,                                  /* colNo */
@@ -891,7 +891,7 @@ static emlrtBCInfo me_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ne_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ue_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   645,                                 /* lineNo */
   36,                                  /* colNo */
@@ -901,7 +901,7 @@ static emlrtBCInfo ne_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo oe_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ve_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   645,                                 /* lineNo */
   46,                                  /* colNo */
@@ -911,7 +911,7 @@ static emlrtBCInfo oe_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo pe_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo we_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   645,                                 /* lineNo */
   50,                                  /* colNo */
@@ -921,7 +921,7 @@ static emlrtBCInfo pe_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo qe_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo xe_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   645,                                 /* lineNo */
   54,                                  /* colNo */
@@ -938,7 +938,7 @@ static emlrtECInfo n_emlrtECI = { -1,  /* nDims */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtBCInfo re_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ye_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   660,                                 /* lineNo */
   26,                                  /* colNo */
@@ -948,7 +948,7 @@ static emlrtBCInfo re_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo se_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo af_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   660,                                 /* lineNo */
   34,                                  /* colNo */
@@ -958,7 +958,7 @@ static emlrtBCInfo se_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo te_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo bf_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   660,                                 /* lineNo */
   36,                                  /* colNo */
@@ -968,7 +968,7 @@ static emlrtBCInfo te_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ue_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo cf_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   683,                                 /* lineNo */
   19,                                  /* colNo */
@@ -978,7 +978,7 @@ static emlrtBCInfo ue_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ve_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo df_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   688,                                 /* lineNo */
   24,                                  /* colNo */
@@ -988,13 +988,13 @@ static emlrtBCInfo ve_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtRTEInfo ob_emlrtRTEI = { 1102,/* lineNo */
+static emlrtRTEInfo pb_emlrtRTEI = { 1102,/* lineNo */
   16,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtBCInfo we_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ef_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1110,                                /* lineNo */
   27,                                  /* colNo */
@@ -1004,7 +1004,7 @@ static emlrtBCInfo we_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo xe_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ff_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1119,                                /* lineNo */
   54,                                  /* colNo */
@@ -1014,7 +1014,7 @@ static emlrtBCInfo xe_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ye_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo gf_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1270,                                /* lineNo */
   26,                                  /* colNo */
@@ -1024,7 +1024,7 @@ static emlrtBCInfo ye_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo af_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo hf_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1270,                                /* lineNo */
   31,                                  /* colNo */
@@ -1034,7 +1034,7 @@ static emlrtBCInfo af_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo bf_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo if_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1270,                                /* lineNo */
   35,                                  /* colNo */
@@ -1044,7 +1044,7 @@ static emlrtBCInfo bf_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo cf_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo jf_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1270,                                /* lineNo */
   42,                                  /* colNo */
@@ -1054,7 +1054,7 @@ static emlrtBCInfo cf_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo df_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo kf_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1270,                                /* lineNo */
   47,                                  /* colNo */
@@ -1064,7 +1064,7 @@ static emlrtBCInfo df_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ef_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo lf_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1270,                                /* lineNo */
   61,                                  /* colNo */
@@ -1081,7 +1081,7 @@ static emlrtECInfo o_emlrtECI = { -1,  /* nDims */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtBCInfo ff_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo mf_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1278,                                /* lineNo */
   30,                                  /* colNo */
@@ -1091,7 +1091,7 @@ static emlrtBCInfo ff_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo gf_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo nf_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1278,                                /* lineNo */
   34,                                  /* colNo */
@@ -1101,7 +1101,7 @@ static emlrtBCInfo gf_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo hf_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo of_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1278,                                /* lineNo */
   38,                                  /* colNo */
@@ -1111,7 +1111,7 @@ static emlrtBCInfo hf_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo if_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo pf_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1278,                                /* lineNo */
   47,                                  /* colNo */
@@ -1121,7 +1121,7 @@ static emlrtBCInfo if_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo jf_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo qf_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1278,                                /* lineNo */
   51,                                  /* colNo */
@@ -1131,7 +1131,7 @@ static emlrtBCInfo jf_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo kf_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo rf_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1278,                                /* lineNo */
   55,                                  /* colNo */
@@ -1141,7 +1141,7 @@ static emlrtBCInfo kf_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo lf_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo sf_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1278,                                /* lineNo */
   62,                                  /* colNo */
@@ -1151,7 +1151,7 @@ static emlrtBCInfo lf_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo mf_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo tf_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1278,                                /* lineNo */
   66,                                  /* colNo */
@@ -1161,7 +1161,7 @@ static emlrtBCInfo mf_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo nf_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo uf_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1278,                                /* lineNo */
   80,                                  /* colNo */
@@ -1178,7 +1178,7 @@ static emlrtECInfo p_emlrtECI = { -1,  /* nDims */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtBCInfo of_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo vf_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1284,                                /* lineNo */
   41,                                  /* colNo */
@@ -1188,7 +1188,7 @@ static emlrtBCInfo of_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo pf_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo wf_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1284,                                /* lineNo */
   50,                                  /* colNo */
@@ -1198,7 +1198,7 @@ static emlrtBCInfo pf_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo qf_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo xf_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1284,                                /* lineNo */
   33,                                  /* colNo */
@@ -1208,14 +1208,14 @@ static emlrtBCInfo qf_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo u_emlrtDCI = { 1284,/* lineNo */
+static emlrtDCInfo bb_emlrtDCI = { 1284,/* lineNo */
   35,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtBCInfo rf_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo yf_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1284,                                /* lineNo */
   35,                                  /* colNo */
@@ -1225,7 +1225,7 @@ static emlrtBCInfo rf_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo sf_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ag_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1285,                                /* lineNo */
   23,                                  /* colNo */
@@ -1235,14 +1235,14 @@ static emlrtBCInfo sf_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo v_emlrtDCI = { 1345,/* lineNo */
+static emlrtDCInfo cb_emlrtDCI = { 1345,/* lineNo */
   33,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtBCInfo tf_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo bg_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1345,                                /* lineNo */
   33,                                  /* colNo */
@@ -1252,14 +1252,14 @@ static emlrtBCInfo tf_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo w_emlrtDCI = { 372, /* lineNo */
+static emlrtDCInfo db_emlrtDCI = { 372,/* lineNo */
   19,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtBCInfo uf_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo cg_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   372,                                 /* lineNo */
   19,                                  /* colNo */
@@ -1269,7 +1269,7 @@ static emlrtBCInfo uf_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo vf_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo dg_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   372,                                 /* lineNo */
   42,                                  /* colNo */
@@ -1279,7 +1279,7 @@ static emlrtBCInfo vf_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo wf_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo eg_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   372,                                 /* lineNo */
   57,                                  /* colNo */
@@ -1289,21 +1289,21 @@ static emlrtBCInfo wf_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo x_emlrtDCI = { 434, /* lineNo */
+static emlrtDCInfo eb_emlrtDCI = { 434,/* lineNo */
   28,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtDCInfo y_emlrtDCI = { 434, /* lineNo */
+static emlrtDCInfo fb_emlrtDCI = { 434,/* lineNo */
   28,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
   4                                    /* checkKind */
 };
 
-static emlrtBCInfo xf_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo fg_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   683,                                 /* lineNo */
   13,                                  /* colNo */
@@ -1313,7 +1313,7 @@ static emlrtBCInfo xf_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo yf_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo gg_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   683,                                 /* lineNo */
   22,                                  /* colNo */
@@ -1323,7 +1323,7 @@ static emlrtBCInfo yf_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ag_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo hg_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   687,                                 /* lineNo */
   41,                                  /* colNo */
@@ -1333,7 +1333,7 @@ static emlrtBCInfo ag_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo bg_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ig_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   582,                                 /* lineNo */
   17,                                  /* colNo */
@@ -1343,7 +1343,7 @@ static emlrtBCInfo bg_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo cg_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo jg_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   582,                                 /* lineNo */
   26,                                  /* colNo */
@@ -1353,7 +1353,7 @@ static emlrtBCInfo cg_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo dg_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo kg_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   582,                                 /* lineNo */
   42,                                  /* colNo */
@@ -1363,7 +1363,7 @@ static emlrtBCInfo dg_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo eg_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo lg_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   582,                                 /* lineNo */
   51,                                  /* colNo */
@@ -1373,80 +1373,10 @@ static emlrtBCInfo eg_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo fg_emlrtBCI = { -1, /* iFirst */
-  -1,                                  /* iLast */
-  541,                                 /* lineNo */
-  18,                                  /* colNo */
-  "mmd",                               /* aName */
-  "FSM",                               /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtBCInfo gg_emlrtBCI = { -1, /* iFirst */
-  -1,                                  /* iLast */
-  541,                                 /* lineNo */
-  27,                                  /* colNo */
-  "gmin",                              /* aName */
-  "FSM",                               /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtBCInfo hg_emlrtBCI = { -1, /* iFirst */
-  -1,                                  /* iLast */
-  506,                                 /* lineNo */
-  18,                                  /* colNo */
-  "mmd",                               /* aName */
-  "FSM",                               /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtBCInfo ig_emlrtBCI = { -1, /* iFirst */
-  -1,                                  /* iLast */
-  506,                                 /* lineNo */
-  27,                                  /* colNo */
-  "gmin",                              /* aName */
-  "FSM",                               /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtBCInfo jg_emlrtBCI = { -1, /* iFirst */
-  -1,                                  /* iLast */
-  1303,                                /* lineNo */
-  17,                                  /* colNo */
-  "mmd",                               /* aName */
-  "FSM",                               /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtBCInfo kg_emlrtBCI = { -1, /* iFirst */
-  -1,                                  /* iLast */
-  603,                                 /* lineNo */
-  17,                                  /* colNo */
-  "mmd",                               /* aName */
-  "FSM",                               /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtBCInfo lg_emlrtBCI = { -1, /* iFirst */
-  -1,                                  /* iLast */
-  603,                                 /* lineNo */
-  26,                                  /* colNo */
-  "gmin",                              /* aName */
-  "FSM",                               /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
-  0                                    /* checkKind */
-};
-
 static emlrtBCInfo mg_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   541,                                 /* lineNo */
-  43,                                  /* colNo */
+  18,                                  /* colNo */
   "mmd",                               /* aName */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
@@ -1456,7 +1386,7 @@ static emlrtBCInfo mg_emlrtBCI = { -1, /* iFirst */
 static emlrtBCInfo ng_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   541,                                 /* lineNo */
-  54,                                  /* colNo */
+  27,                                  /* colNo */
   "gmin",                              /* aName */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
@@ -1466,7 +1396,7 @@ static emlrtBCInfo ng_emlrtBCI = { -1, /* iFirst */
 static emlrtBCInfo og_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   506,                                 /* lineNo */
-  44,                                  /* colNo */
+  18,                                  /* colNo */
   "mmd",                               /* aName */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
@@ -1476,7 +1406,7 @@ static emlrtBCInfo og_emlrtBCI = { -1, /* iFirst */
 static emlrtBCInfo pg_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   506,                                 /* lineNo */
-  55,                                  /* colNo */
+  27,                                  /* colNo */
   "gmin",                              /* aName */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
@@ -1485,7 +1415,7 @@ static emlrtBCInfo pg_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo qg_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  589,                                 /* lineNo */
+  1303,                                /* lineNo */
   17,                                  /* colNo */
   "mmd",                               /* aName */
   "FSM",                               /* fName */
@@ -1495,9 +1425,9 @@ static emlrtBCInfo qg_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo rg_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  589,                                 /* lineNo */
-  26,                                  /* colNo */
-  "gmin",                              /* aName */
+  603,                                 /* lineNo */
+  17,                                  /* colNo */
+  "mmd",                               /* aName */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
   0                                    /* checkKind */
@@ -1505,9 +1435,9 @@ static emlrtBCInfo rg_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo sg_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  593,                                 /* lineNo */
-  46,                                  /* colNo */
-  "mmd",                               /* aName */
+  603,                                 /* lineNo */
+  26,                                  /* colNo */
+  "gmin",                              /* aName */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
   0                                    /* checkKind */
@@ -1516,7 +1446,7 @@ static emlrtBCInfo sg_emlrtBCI = { -1, /* iFirst */
 static emlrtBCInfo tg_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   541,                                 /* lineNo */
-  102,                                 /* colNo */
+  43,                                  /* colNo */
   "mmd",                               /* aName */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
@@ -1526,7 +1456,7 @@ static emlrtBCInfo tg_emlrtBCI = { -1, /* iFirst */
 static emlrtBCInfo ug_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   541,                                 /* lineNo */
-  113,                                 /* colNo */
+  54,                                  /* colNo */
   "gmin",                              /* aName */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
@@ -1534,6 +1464,76 @@ static emlrtBCInfo ug_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtBCInfo vg_emlrtBCI = { -1, /* iFirst */
+  -1,                                  /* iLast */
+  506,                                 /* lineNo */
+  44,                                  /* colNo */
+  "mmd",                               /* aName */
+  "FSM",                               /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
+  0                                    /* checkKind */
+};
+
+static emlrtBCInfo wg_emlrtBCI = { -1, /* iFirst */
+  -1,                                  /* iLast */
+  506,                                 /* lineNo */
+  55,                                  /* colNo */
+  "gmin",                              /* aName */
+  "FSM",                               /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
+  0                                    /* checkKind */
+};
+
+static emlrtBCInfo xg_emlrtBCI = { -1, /* iFirst */
+  -1,                                  /* iLast */
+  589,                                 /* lineNo */
+  17,                                  /* colNo */
+  "mmd",                               /* aName */
+  "FSM",                               /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
+  0                                    /* checkKind */
+};
+
+static emlrtBCInfo yg_emlrtBCI = { -1, /* iFirst */
+  -1,                                  /* iLast */
+  589,                                 /* lineNo */
+  26,                                  /* colNo */
+  "gmin",                              /* aName */
+  "FSM",                               /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
+  0                                    /* checkKind */
+};
+
+static emlrtBCInfo ah_emlrtBCI = { -1, /* iFirst */
+  -1,                                  /* iLast */
+  593,                                 /* lineNo */
+  46,                                  /* colNo */
+  "mmd",                               /* aName */
+  "FSM",                               /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
+  0                                    /* checkKind */
+};
+
+static emlrtBCInfo bh_emlrtBCI = { -1, /* iFirst */
+  -1,                                  /* iLast */
+  541,                                 /* lineNo */
+  102,                                 /* colNo */
+  "mmd",                               /* aName */
+  "FSM",                               /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
+  0                                    /* checkKind */
+};
+
+static emlrtBCInfo ch_emlrtBCI = { -1, /* iFirst */
+  -1,                                  /* iLast */
+  541,                                 /* lineNo */
+  113,                                 /* colNo */
+  "gmin",                              /* aName */
+  "FSM",                               /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
+  0                                    /* checkKind */
+};
+
+static emlrtBCInfo dh_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   541,                                 /* lineNo */
   72,                                  /* colNo */
@@ -1543,7 +1543,7 @@ static emlrtBCInfo vg_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo wg_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo eh_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   541,                                 /* lineNo */
   83,                                  /* colNo */
@@ -1553,7 +1553,7 @@ static emlrtBCInfo wg_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo xg_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo fh_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   506,                                 /* lineNo */
   105,                                 /* colNo */
@@ -1563,7 +1563,7 @@ static emlrtBCInfo xg_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo yg_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo gh_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   506,                                 /* lineNo */
   114,                                 /* colNo */
@@ -1573,7 +1573,7 @@ static emlrtBCInfo yg_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ah_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo hh_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   506,                                 /* lineNo */
   74,                                  /* colNo */
@@ -1583,7 +1583,7 @@ static emlrtBCInfo ah_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo bh_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ih_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   506,                                 /* lineNo */
   85,                                  /* colNo */
@@ -1593,7 +1593,7 @@ static emlrtBCInfo bh_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ch_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo jh_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   609,                                 /* lineNo */
   42,                                  /* colNo */
@@ -1603,7 +1603,7 @@ static emlrtBCInfo ch_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo dh_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo kh_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   596,                                 /* lineNo */
   17,                                  /* colNo */
@@ -1613,7 +1613,7 @@ static emlrtBCInfo dh_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo eh_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo lh_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   596,                                 /* lineNo */
   26,                                  /* colNo */
@@ -1623,80 +1623,10 @@ static emlrtBCInfo eh_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo fh_emlrtBCI = { -1, /* iFirst */
-  -1,                                  /* iLast */
-  541,                                 /* lineNo */
-  131,                                 /* colNo */
-  "mmd",                               /* aName */
-  "FSM",                               /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtBCInfo gh_emlrtBCI = { -1, /* iFirst */
-  -1,                                  /* iLast */
-  541,                                 /* lineNo */
-  140,                                 /* colNo */
-  "gmin",                              /* aName */
-  "FSM",                               /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtBCInfo hh_emlrtBCI = { -1, /* iFirst */
-  -1,                                  /* iLast */
-  506,                                 /* lineNo */
-  131,                                 /* colNo */
-  "mmd",                               /* aName */
-  "FSM",                               /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtBCInfo ih_emlrtBCI = { -1, /* iFirst */
-  -1,                                  /* iLast */
-  506,                                 /* lineNo */
-  140,                                 /* colNo */
-  "gmin",                              /* aName */
-  "FSM",                               /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtBCInfo jh_emlrtBCI = { -1, /* iFirst */
-  -1,                                  /* iLast */
-  600,                                 /* lineNo */
-  46,                                  /* colNo */
-  "mmd",                               /* aName */
-  "FSM",                               /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtBCInfo kh_emlrtBCI = { -1, /* iFirst */
-  -1,                                  /* iLast */
-  541,                                 /* lineNo */
-  185,                                 /* colNo */
-  "mmd",                               /* aName */
-  "FSM",                               /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtBCInfo lh_emlrtBCI = { -1, /* iFirst */
-  -1,                                  /* iLast */
-  541,                                 /* lineNo */
-  194,                                 /* colNo */
-  "gmin",                              /* aName */
-  "FSM",                               /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
-  0                                    /* checkKind */
-};
-
 static emlrtBCInfo mh_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   541,                                 /* lineNo */
-  156,                                 /* colNo */
+  131,                                 /* colNo */
   "mmd",                               /* aName */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
@@ -1706,7 +1636,7 @@ static emlrtBCInfo mh_emlrtBCI = { -1, /* iFirst */
 static emlrtBCInfo nh_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   541,                                 /* lineNo */
-  167,                                 /* colNo */
+  140,                                 /* colNo */
   "gmin",                              /* aName */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
@@ -1715,8 +1645,8 @@ static emlrtBCInfo nh_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo oh_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  510,                                 /* lineNo */
-  21,                                  /* colNo */
+  506,                                 /* lineNo */
+  131,                                 /* colNo */
   "mmd",                               /* aName */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
@@ -1725,8 +1655,8 @@ static emlrtBCInfo oh_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo ph_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  510,                                 /* lineNo */
-  30,                                  /* colNo */
+  506,                                 /* lineNo */
+  140,                                 /* colNo */
   "gmin",                              /* aName */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
@@ -1735,8 +1665,8 @@ static emlrtBCInfo ph_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo qh_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  541,                                 /* lineNo */
-  211,                                 /* colNo */
+  600,                                 /* lineNo */
+  46,                                  /* colNo */
   "mmd",                               /* aName */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
@@ -1746,6 +1676,76 @@ static emlrtBCInfo qh_emlrtBCI = { -1, /* iFirst */
 static emlrtBCInfo rh_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   541,                                 /* lineNo */
+  185,                                 /* colNo */
+  "mmd",                               /* aName */
+  "FSM",                               /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
+  0                                    /* checkKind */
+};
+
+static emlrtBCInfo sh_emlrtBCI = { -1, /* iFirst */
+  -1,                                  /* iLast */
+  541,                                 /* lineNo */
+  194,                                 /* colNo */
+  "gmin",                              /* aName */
+  "FSM",                               /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
+  0                                    /* checkKind */
+};
+
+static emlrtBCInfo th_emlrtBCI = { -1, /* iFirst */
+  -1,                                  /* iLast */
+  541,                                 /* lineNo */
+  156,                                 /* colNo */
+  "mmd",                               /* aName */
+  "FSM",                               /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
+  0                                    /* checkKind */
+};
+
+static emlrtBCInfo uh_emlrtBCI = { -1, /* iFirst */
+  -1,                                  /* iLast */
+  541,                                 /* lineNo */
+  167,                                 /* colNo */
+  "gmin",                              /* aName */
+  "FSM",                               /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
+  0                                    /* checkKind */
+};
+
+static emlrtBCInfo vh_emlrtBCI = { -1, /* iFirst */
+  -1,                                  /* iLast */
+  510,                                 /* lineNo */
+  21,                                  /* colNo */
+  "mmd",                               /* aName */
+  "FSM",                               /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
+  0                                    /* checkKind */
+};
+
+static emlrtBCInfo wh_emlrtBCI = { -1, /* iFirst */
+  -1,                                  /* iLast */
+  510,                                 /* lineNo */
+  30,                                  /* colNo */
+  "gmin",                              /* aName */
+  "FSM",                               /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
+  0                                    /* checkKind */
+};
+
+static emlrtBCInfo xh_emlrtBCI = { -1, /* iFirst */
+  -1,                                  /* iLast */
+  541,                                 /* lineNo */
+  211,                                 /* colNo */
+  "mmd",                               /* aName */
+  "FSM",                               /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
+  0                                    /* checkKind */
+};
+
+static emlrtBCInfo yh_emlrtBCI = { -1, /* iFirst */
+  -1,                                  /* iLast */
+  541,                                 /* lineNo */
   220,                                 /* colNo */
   "gmin",                              /* aName */
   "FSM",                               /* fName */
@@ -1753,7 +1753,7 @@ static emlrtBCInfo rh_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo sh_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ai_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   543,                                 /* lineNo */
   21,                                  /* colNo */
@@ -1763,7 +1763,7 @@ static emlrtBCInfo sh_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo th_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo bi_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   543,                                 /* lineNo */
   30,                                  /* colNo */
@@ -1773,7 +1773,7 @@ static emlrtBCInfo th_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo uh_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ci_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   510,                                 /* lineNo */
   47,                                  /* colNo */
@@ -1783,7 +1783,7 @@ static emlrtBCInfo uh_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo vh_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo di_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   510,                                 /* lineNo */
   58,                                  /* colNo */
@@ -1793,7 +1793,7 @@ static emlrtBCInfo vh_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo wh_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ei_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   620,                                 /* lineNo */
   18,                                  /* colNo */
@@ -1803,7 +1803,7 @@ static emlrtBCInfo wh_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo xh_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo fi_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   622,                                 /* lineNo */
   16,                                  /* colNo */
@@ -1813,7 +1813,7 @@ static emlrtBCInfo xh_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo yh_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo gi_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   543,                                 /* lineNo */
   46,                                  /* colNo */
@@ -1823,7 +1823,7 @@ static emlrtBCInfo yh_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ai_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo hi_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   543,                                 /* lineNo */
   57,                                  /* colNo */
@@ -1833,7 +1833,7 @@ static emlrtBCInfo ai_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo bi_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ii_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   510,                                 /* lineNo */
   77,                                  /* colNo */
@@ -1843,7 +1843,7 @@ static emlrtBCInfo bi_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ci_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ji_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   510,                                 /* lineNo */
   88,                                  /* colNo */
@@ -1853,7 +1853,7 @@ static emlrtBCInfo ci_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo di_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ki_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   518,                                 /* lineNo */
   21,                                  /* colNo */
@@ -1863,7 +1863,7 @@ static emlrtBCInfo di_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ei_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo li_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   518,                                 /* lineNo */
   30,                                  /* colNo */
@@ -1873,7 +1873,7 @@ static emlrtBCInfo ei_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo fi_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo mi_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   514,                                 /* lineNo */
   50,                                  /* colNo */
@@ -1883,7 +1883,7 @@ static emlrtBCInfo fi_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo gi_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ni_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   543,                                 /* lineNo */
   75,                                  /* colNo */
@@ -1893,7 +1893,7 @@ static emlrtBCInfo gi_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo hi_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo oi_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   543,                                 /* lineNo */
   86,                                  /* colNo */
@@ -1903,7 +1903,7 @@ static emlrtBCInfo hi_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ii_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo pi_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   522,                                 /* lineNo */
   50,                                  /* colNo */
@@ -1913,7 +1913,7 @@ static emlrtBCInfo ii_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ji_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo qi_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   551,                                 /* lineNo */
   21,                                  /* colNo */
@@ -1923,7 +1923,7 @@ static emlrtBCInfo ji_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ki_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ri_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   551,                                 /* lineNo */
   32,                                  /* colNo */
@@ -1933,86 +1933,9 @@ static emlrtBCInfo ki_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo li_emlrtBCI = { -1, /* iFirst */
-  -1,                                  /* iLast */
-  547,                                 /* lineNo */
-  50,                                  /* colNo */
-  "mmd",                               /* aName */
-  "FSM",                               /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtBCInfo mi_emlrtBCI = { -1, /* iFirst */
-  -1,                                  /* iLast */
-  514,                                 /* lineNo */
-  110,                                 /* colNo */
-  "mmd",                               /* aName */
-  "FSM",                               /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtBCInfo ni_emlrtBCI = { -1, /* iFirst */
-  -1,                                  /* iLast */
-  526,                                 /* lineNo */
-  21,                                  /* colNo */
-  "mmd",                               /* aName */
-  "FSM",                               /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtBCInfo oi_emlrtBCI = { -1, /* iFirst */
-  -1,                                  /* iLast */
-  526,                                 /* lineNo */
-  30,                                  /* colNo */
-  "gmin",                              /* aName */
-  "FSM",                               /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtBCInfo pi_emlrtBCI = { -1, /* iFirst */
-  -1,                                  /* iLast */
-  1358,                                /* lineNo */
-  12,                                  /* colNo */
-  "Y",                                 /* aName */
-  "FSM",                               /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtDCInfo ab_emlrtDCI = { 1358,/* lineNo */
-  12,                                  /* colNo */
-  "FSM",                               /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
-  1                                    /* checkKind */
-};
-
-static emlrtBCInfo qi_emlrtBCI = { -1, /* iFirst */
-  -1,                                  /* iLast */
-  626,                                 /* lineNo */
-  20,                                  /* colNo */
-  "mmd",                               /* aName */
-  "FSM",                               /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtBCInfo ri_emlrtBCI = { -1, /* iFirst */
-  -1,                                  /* iLast */
-  626,                                 /* lineNo */
-  29,                                  /* colNo */
-  "gmin",                              /* aName */
-  "FSM",                               /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
-  0                                    /* checkKind */
-};
-
 static emlrtBCInfo si_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  551,                                 /* lineNo */
+  547,                                 /* lineNo */
   50,                                  /* colNo */
   "mmd",                               /* aName */
   "FSM",                               /* fName */
@@ -2022,9 +1945,9 @@ static emlrtBCInfo si_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo ti_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  551,                                 /* lineNo */
-  59,                                  /* colNo */
-  "gmin",                              /* aName */
+  514,                                 /* lineNo */
+  110,                                 /* colNo */
+  "mmd",                               /* aName */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
   0                                    /* checkKind */
@@ -2032,8 +1955,8 @@ static emlrtBCInfo ti_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo ui_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  547,                                 /* lineNo */
-  109,                                 /* colNo */
+  526,                                 /* lineNo */
+  21,                                  /* colNo */
   "mmd",                               /* aName */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
@@ -2042,9 +1965,9 @@ static emlrtBCInfo ui_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo vi_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  530,                                 /* lineNo */
-  50,                                  /* colNo */
-  "mmd",                               /* aName */
+  526,                                 /* lineNo */
+  30,                                  /* colNo */
+  "gmin",                              /* aName */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
   0                                    /* checkKind */
@@ -2052,18 +1975,25 @@ static emlrtBCInfo vi_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo wi_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  514,                                 /* lineNo */
-  172,                                 /* colNo */
-  "mmd",                               /* aName */
+  1358,                                /* lineNo */
+  12,                                  /* colNo */
+  "Y",                                 /* aName */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
   0                                    /* checkKind */
 };
 
+static emlrtDCInfo gb_emlrtDCI = { 1358,/* lineNo */
+  12,                                  /* colNo */
+  "FSM",                               /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
+  1                                    /* checkKind */
+};
+
 static emlrtBCInfo xi_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  1268,                                /* lineNo */
-  13,                                  /* colNo */
+  626,                                 /* lineNo */
+  20,                                  /* colNo */
   "mmd",                               /* aName */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
@@ -2073,6 +2003,76 @@ static emlrtBCInfo xi_emlrtBCI = { -1, /* iFirst */
 static emlrtBCInfo yi_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   626,                                 /* lineNo */
+  29,                                  /* colNo */
+  "gmin",                              /* aName */
+  "FSM",                               /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
+  0                                    /* checkKind */
+};
+
+static emlrtBCInfo aj_emlrtBCI = { -1, /* iFirst */
+  -1,                                  /* iLast */
+  551,                                 /* lineNo */
+  50,                                  /* colNo */
+  "mmd",                               /* aName */
+  "FSM",                               /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
+  0                                    /* checkKind */
+};
+
+static emlrtBCInfo bj_emlrtBCI = { -1, /* iFirst */
+  -1,                                  /* iLast */
+  551,                                 /* lineNo */
+  59,                                  /* colNo */
+  "gmin",                              /* aName */
+  "FSM",                               /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
+  0                                    /* checkKind */
+};
+
+static emlrtBCInfo cj_emlrtBCI = { -1, /* iFirst */
+  -1,                                  /* iLast */
+  547,                                 /* lineNo */
+  109,                                 /* colNo */
+  "mmd",                               /* aName */
+  "FSM",                               /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
+  0                                    /* checkKind */
+};
+
+static emlrtBCInfo dj_emlrtBCI = { -1, /* iFirst */
+  -1,                                  /* iLast */
+  530,                                 /* lineNo */
+  50,                                  /* colNo */
+  "mmd",                               /* aName */
+  "FSM",                               /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
+  0                                    /* checkKind */
+};
+
+static emlrtBCInfo ej_emlrtBCI = { -1, /* iFirst */
+  -1,                                  /* iLast */
+  514,                                 /* lineNo */
+  172,                                 /* colNo */
+  "mmd",                               /* aName */
+  "FSM",                               /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
+  0                                    /* checkKind */
+};
+
+static emlrtBCInfo fj_emlrtBCI = { -1, /* iFirst */
+  -1,                                  /* iLast */
+  1268,                                /* lineNo */
+  13,                                  /* colNo */
+  "mmd",                               /* aName */
+  "FSM",                               /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
+  0                                    /* checkKind */
+};
+
+static emlrtBCInfo gj_emlrtBCI = { -1, /* iFirst */
+  -1,                                  /* iLast */
+  626,                                 /* lineNo */
   47,                                  /* colNo */
   "mmd",                               /* aName */
   "FSM",                               /* fName */
@@ -2080,7 +2080,7 @@ static emlrtBCInfo yi_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo aj_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo hj_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   626,                                 /* lineNo */
   58,                                  /* colNo */
@@ -2090,7 +2090,7 @@ static emlrtBCInfo aj_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo bj_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ij_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   551,                                 /* lineNo */
   75,                                  /* colNo */
@@ -2100,7 +2100,7 @@ static emlrtBCInfo bj_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo cj_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo jj_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   551,                                 /* lineNo */
   86,                                  /* colNo */
@@ -2110,7 +2110,7 @@ static emlrtBCInfo cj_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo dj_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo kj_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   547,                                 /* lineNo */
   168,                                 /* colNo */
@@ -2120,7 +2120,7 @@ static emlrtBCInfo dj_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ej_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo lj_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1359,                                /* lineNo */
   12,                                  /* colNo */
@@ -2130,7 +2130,7 @@ static emlrtBCInfo ej_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo fj_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo mj_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   559,                                 /* lineNo */
   21,                                  /* colNo */
@@ -2140,7 +2140,7 @@ static emlrtBCInfo fj_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo gj_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo nj_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   559,                                 /* lineNo */
   30,                                  /* colNo */
@@ -2150,7 +2150,7 @@ static emlrtBCInfo gj_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo hj_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo oj_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   555,                                 /* lineNo */
   50,                                  /* colNo */
@@ -2160,7 +2160,7 @@ static emlrtBCInfo hj_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ij_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo pj_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1345,                                /* lineNo */
   18,                                  /* colNo */
@@ -2170,7 +2170,7 @@ static emlrtBCInfo ij_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo jj_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo qj_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   626,                                 /* lineNo */
   79,                                  /* colNo */
@@ -2180,7 +2180,7 @@ static emlrtBCInfo jj_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo kj_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo rj_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   626,                                 /* lineNo */
   90,                                  /* colNo */
@@ -2190,7 +2190,7 @@ static emlrtBCInfo kj_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo lj_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo sj_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   563,                                 /* lineNo */
   50,                                  /* colNo */
@@ -2200,14 +2200,14 @@ static emlrtBCInfo lj_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo bb_emlrtDCI = { 1350,/* lineNo */
+static emlrtDCInfo hb_emlrtDCI = { 1350,/* lineNo */
   11,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtBCInfo mj_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo tj_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1350,                                /* lineNo */
   11,                                  /* colNo */
@@ -2217,7 +2217,7 @@ static emlrtBCInfo mj_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo nj_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo uj_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   640,                                 /* lineNo */
   28,                                  /* colNo */
@@ -2227,7 +2227,7 @@ static emlrtBCInfo nj_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo oj_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo vj_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   555,                                 /* lineNo */
   109,                                 /* colNo */
@@ -2237,7 +2237,7 @@ static emlrtBCInfo oj_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo pj_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo wj_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1110,                                /* lineNo */
   20,                                  /* colNo */
@@ -2247,7 +2247,7 @@ static emlrtBCInfo pj_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo qj_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo xj_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1110,                                /* lineNo */
   30,                                  /* colNo */
@@ -2257,7 +2257,7 @@ static emlrtBCInfo qj_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo rj_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo yj_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   640,                                 /* lineNo */
   45,                                  /* colNo */
@@ -2267,7 +2267,7 @@ static emlrtBCInfo rj_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo sj_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ak_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   568,                                 /* lineNo */
   20,                                  /* colNo */
@@ -2277,7 +2277,7 @@ static emlrtBCInfo sj_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo tj_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo bk_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   568,                                 /* lineNo */
   29,                                  /* colNo */
@@ -2287,7 +2287,7 @@ static emlrtBCInfo tj_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo uj_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ck_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   555,                                 /* lineNo */
   170,                                 /* colNo */
@@ -2297,7 +2297,7 @@ static emlrtBCInfo uj_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo vj_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo dk_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1348,                                /* lineNo */
   18,                                  /* colNo */
@@ -2307,7 +2307,7 @@ static emlrtBCInfo vj_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo wj_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ek_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   572,                                 /* lineNo */
   50,                                  /* colNo */
@@ -2317,7 +2317,7 @@ static emlrtBCInfo wj_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo xj_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo fk_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1112,                                /* lineNo */
   48,                                  /* colNo */
@@ -2327,7 +2327,7 @@ static emlrtBCInfo xj_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo yj_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo gk_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1119,                                /* lineNo */
   47,                                  /* colNo */
@@ -2337,7 +2337,7 @@ static emlrtBCInfo yj_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ak_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo hk_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1119,                                /* lineNo */
   57,                                  /* colNo */
@@ -2347,7 +2347,7 @@ static emlrtBCInfo ak_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo bk_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ik_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1121,                                /* lineNo */
   48,                                  /* colNo */
@@ -2357,7 +2357,7 @@ static emlrtBCInfo bk_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ck_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo jk_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   660,                                 /* lineNo */
   20,                                  /* colNo */
@@ -2367,7 +2367,7 @@ static emlrtBCInfo ck_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo dk_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo kk_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   466,                                 /* lineNo */
   13,                                  /* colNo */
@@ -2377,7 +2377,7 @@ static emlrtBCInfo dk_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ek_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo lk_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   467,                                 /* lineNo */
   13,                                  /* colNo */
@@ -2387,7 +2387,7 @@ static emlrtBCInfo ek_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo fk_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo mk_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   468,                                 /* lineNo */
   13,                                  /* colNo */
@@ -2397,7 +2397,7 @@ static emlrtBCInfo fk_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo gk_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo nk_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   469,                                 /* lineNo */
   13,                                  /* colNo */
@@ -2407,7 +2407,7 @@ static emlrtBCInfo gk_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo hk_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ok_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   470,                                 /* lineNo */
   13,                                  /* colNo */
@@ -2417,7 +2417,7 @@ static emlrtBCInfo hk_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ik_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo pk_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   1284,                                /* lineNo */
   55,                                  /* colNo */
@@ -2427,7 +2427,7 @@ static emlrtBCInfo ik_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo jk_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo qk_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   531,                                 /* lineNo */
   36,                                  /* colNo */
@@ -2437,7 +2437,7 @@ static emlrtBCInfo jk_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo kk_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo rk_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   523,                                 /* lineNo */
   40,                                  /* colNo */
@@ -2447,7 +2447,7 @@ static emlrtBCInfo kk_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo lk_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo sk_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   523,                                 /* lineNo */
   32,                                  /* colNo */
@@ -2457,7 +2457,7 @@ static emlrtBCInfo lk_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo mk_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo tk_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   515,                                 /* lineNo */
   40,                                  /* colNo */
@@ -2467,7 +2467,7 @@ static emlrtBCInfo mk_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo nk_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo uk_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   515,                                 /* lineNo */
   32,                                  /* colNo */
@@ -2477,7 +2477,7 @@ static emlrtBCInfo nk_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ok_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo vk_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   573,                                 /* lineNo */
   36,                                  /* colNo */
@@ -2487,7 +2487,7 @@ static emlrtBCInfo ok_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo pk_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo wk_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   564,                                 /* lineNo */
   36,                                  /* colNo */
@@ -2497,7 +2497,7 @@ static emlrtBCInfo pk_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo qk_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo xk_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   556,                                 /* lineNo */
   40,                                  /* colNo */
@@ -2507,7 +2507,7 @@ static emlrtBCInfo qk_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo rk_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo yk_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   556,                                 /* lineNo */
   32,                                  /* colNo */
@@ -2517,7 +2517,7 @@ static emlrtBCInfo rk_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo sk_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo al_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   548,                                 /* lineNo */
   40,                                  /* colNo */
@@ -2527,7 +2527,7 @@ static emlrtBCInfo sk_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo tk_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo bl_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   548,                                 /* lineNo */
   32,                                  /* colNo */
@@ -2537,7 +2537,7 @@ static emlrtBCInfo tk_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo uk_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo cl_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   602,                                 /* lineNo */
   28,                                  /* colNo */
@@ -2547,7 +2547,7 @@ static emlrtBCInfo uk_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo vk_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo dl_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   610,                                 /* lineNo */
   28,                                  /* colNo */
@@ -2557,7 +2557,7 @@ static emlrtBCInfo vk_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo wk_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo el_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
   688,                                 /* lineNo */
   28,                                  /* colNo */
@@ -2567,253 +2567,253 @@ static emlrtBCInfo wk_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtRTEInfo eh_emlrtRTEI = { 292,/* lineNo */
+static emlrtRTEInfo di_emlrtRTEI = { 292,/* lineNo */
   1,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo fh_emlrtRTEI = { 363,/* lineNo */
+static emlrtRTEInfo ei_emlrtRTEI = { 363,/* lineNo */
   5,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo gh_emlrtRTEI = { 372,/* lineNo */
+static emlrtRTEInfo fi_emlrtRTEI = { 372,/* lineNo */
   17,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo hh_emlrtRTEI = { 373,/* lineNo */
+static emlrtRTEInfo gi_emlrtRTEI = { 373,/* lineNo */
   9,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo jh_emlrtRTEI = { 372,/* lineNo */
+static emlrtRTEInfo ii_emlrtRTEI = { 372,/* lineNo */
   36,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo kh_emlrtRTEI = { 391,/* lineNo */
+static emlrtRTEInfo ji_emlrtRTEI = { 391,/* lineNo */
   25,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo lh_emlrtRTEI = { 389,/* lineNo */
+static emlrtRTEInfo ki_emlrtRTEI = { 389,/* lineNo */
   28,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo mh_emlrtRTEI = { 392,/* lineNo */
+static emlrtRTEInfo li_emlrtRTEI = { 392,/* lineNo */
   5,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo oh_emlrtRTEI = { 442,/* lineNo */
+static emlrtRTEInfo ni_emlrtRTEI = { 442,/* lineNo */
   5,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo ph_emlrtRTEI = { 442,/* lineNo */
+static emlrtRTEInfo oi_emlrtRTEI = { 442,/* lineNo */
   34,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo qh_emlrtRTEI = { 434,/* lineNo */
+static emlrtRTEInfo pi_emlrtRTEI = { 434,/* lineNo */
   28,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo rh_emlrtRTEI = { 439,/* lineNo */
+static emlrtRTEInfo qi_emlrtRTEI = { 439,/* lineNo */
   5,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo sh_emlrtRTEI = { 439,/* lineNo */
+static emlrtRTEInfo ri_emlrtRTEI = { 439,/* lineNo */
   44,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo th_emlrtRTEI = { 434,/* lineNo */
+static emlrtRTEInfo si_emlrtRTEI = { 434,/* lineNo */
   9,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo uh_emlrtRTEI = { 1353,/* lineNo */
+static emlrtRTEInfo ti_emlrtRTEI = { 1353,/* lineNo */
   5,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo vh_emlrtRTEI = { 1348,/* lineNo */
+static emlrtRTEInfo ui_emlrtRTEI = { 1348,/* lineNo */
   22,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo wh_emlrtRTEI = { 1345,/* lineNo */
+static emlrtRTEInfo vi_emlrtRTEI = { 1345,/* lineNo */
   28,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo xh_emlrtRTEI = { 1,/* lineNo */
+static emlrtRTEInfo wi_emlrtRTEI = { 1,/* lineNo */
   16,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo yh_emlrtRTEI = { 1345,/* lineNo */
+static emlrtRTEInfo xi_emlrtRTEI = { 1345,/* lineNo */
   22,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo ai_emlrtRTEI = { 1358,/* lineNo */
+static emlrtRTEInfo yi_emlrtRTEI = { 1358,/* lineNo */
   10,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo bi_emlrtRTEI = { 1359,/* lineNo */
+static emlrtRTEInfo aj_emlrtRTEI = { 1359,/* lineNo */
   10,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo ci_emlrtRTEI = { 1270,/* lineNo */
+static emlrtRTEInfo bj_emlrtRTEI = { 1270,/* lineNo */
   20,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo di_emlrtRTEI = { 1388,/* lineNo */
+static emlrtRTEInfo cj_emlrtRTEI = { 1388,/* lineNo */
   1,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo ei_emlrtRTEI = { 1389,/* lineNo */
+static emlrtRTEInfo dj_emlrtRTEI = { 1389,/* lineNo */
   1,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo fi_emlrtRTEI = { 1391,/* lineNo */
+static emlrtRTEInfo ej_emlrtRTEI = { 1391,/* lineNo */
   1,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo gi_emlrtRTEI = { 645,/* lineNo */
+static emlrtRTEInfo fj_emlrtRTEI = { 645,/* lineNo */
   24,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo hi_emlrtRTEI = { 1278,/* lineNo */
+static emlrtRTEInfo gj_emlrtRTEI = { 1278,/* lineNo */
   41,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo ii_emlrtRTEI = { 1278,/* lineNo */
+static emlrtRTEInfo hj_emlrtRTEI = { 1278,/* lineNo */
   17,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo ji_emlrtRTEI = { 1281,/* lineNo */
+static emlrtRTEInfo ij_emlrtRTEI = { 1281,/* lineNo */
   29,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo ki_emlrtRTEI = { 1284,/* lineNo */
+static emlrtRTEInfo jj_emlrtRTEI = { 1284,/* lineNo */
   17,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo li_emlrtRTEI = { 339,/* lineNo */
+static emlrtRTEInfo kj_emlrtRTEI = { 339,/* lineNo */
   5,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo mi_emlrtRTEI = { 348,/* lineNo */
+static emlrtRTEInfo lj_emlrtRTEI = { 348,/* lineNo */
   6,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo ni_emlrtRTEI = { 431,/* lineNo */
+static emlrtRTEInfo mj_emlrtRTEI = { 431,/* lineNo */
   10,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo oi_emlrtRTEI = { 659,/* lineNo */
+static emlrtRTEInfo nj_emlrtRTEI = { 659,/* lineNo */
   18,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo pi_emlrtRTEI = { 1345,/* lineNo */
+static emlrtRTEInfo oj_emlrtRTEI = { 1345,/* lineNo */
   9,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo qi_emlrtRTEI = { 1357,/* lineNo */
+static emlrtRTEInfo pj_emlrtRTEI = { 1357,/* lineNo */
   1,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo ri_emlrtRTEI = { 1358,/* lineNo */
+static emlrtRTEInfo qj_emlrtRTEI = { 1358,/* lineNo */
   1,                                   /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo si_emlrtRTEI = { 467,/* lineNo */
+static emlrtRTEInfo rj_emlrtRTEI = { 467,/* lineNo */
   13,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo ti_emlrtRTEI = { 468,/* lineNo */
+static emlrtRTEInfo sj_emlrtRTEI = { 468,/* lineNo */
   13,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo ui_emlrtRTEI = { 469,/* lineNo */
+static emlrtRTEInfo tj_emlrtRTEI = { 469,/* lineNo */
   13,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo vi_emlrtRTEI = { 470,/* lineNo */
+static emlrtRTEInfo uj_emlrtRTEI = { 470,/* lineNo */
   13,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
 };
 
-static emlrtRTEInfo wi_emlrtRTEI = { 466,/* lineNo */
+static emlrtRTEInfo vj_emlrtRTEI = { 466,/* lineNo */
   13,                                  /* colNo */
   "FSM",                               /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\FSM.m"/* pName */
@@ -2841,7 +2841,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
   emxArray_boolean_T nout_data;
   emxArray_boolean_T *r;
   emxArray_boolean_T *x;
-  emxArray_char_T_1x310 dqb_emlrtRSI;
+  emxArray_char_T_1x310 xqb_emlrtRSI;
   emxArray_int32_T *ia;
   emxArray_int32_T *r1;
   emxArray_int32_T *r2;
@@ -2892,17 +2892,14 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
   int32_T k;
   int32_T loop_ub;
   int32_T n;
-  int32_T nout_size_idx_0;
-  int32_T nout_size_idx_1;
   int32_T sto;
   int32_T v;
   uint32_T uv[31];
-  uint32_T b_nout_data[10];
-  uint32_T uv1[10];
+  uint32_T nout[10];
   uint32_T ii;
   int8_T tmp_data[5];
   boolean_T b_x[31];
-  boolean_T c_nout_data[5];
+  boolean_T b_nout_data[5];
   boolean_T NoFalseSig;
   boolean_T b_b;
   boolean_T b_guard1 = false;
@@ -2935,19 +2932,19 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
   i_st.prev = &h_st;
   i_st.tls = h_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  emxInit_real_T(sp, &loc, 2, &ri_emlrtRTEI, true);
-  st.site = &ph_emlrtRSI;
-  b_st.site = &xf_emlrtRSI;
-  st.site = &ph_emlrtRSI;
-  b_st.site = &xf_emlrtRSI;
-  st.site = &ph_emlrtRSI;
-  b_st.site = &xf_emlrtRSI;
-  st.site = &ph_emlrtRSI;
-  b_st.site = &xf_emlrtRSI;
-  st.site = &ph_emlrtRSI;
-  b_st.site = &xf_emlrtRSI;
-  st.site = &ph_emlrtRSI;
-  b_st.site = &xf_emlrtRSI;
+  emxInit_real_T(sp, &loc, 2, &qj_emlrtRTEI, true);
+  st.site = &wh_emlrtRSI;
+  b_st.site = &fg_emlrtRSI;
+  st.site = &wh_emlrtRSI;
+  b_st.site = &fg_emlrtRSI;
+  st.site = &wh_emlrtRSI;
+  b_st.site = &fg_emlrtRSI;
+  st.site = &wh_emlrtRSI;
+  b_st.site = &fg_emlrtRSI;
+  st.site = &wh_emlrtRSI;
+  b_st.site = &fg_emlrtRSI;
+  st.site = &wh_emlrtRSI;
+  b_st.site = &fg_emlrtRSI;
 
   /* FSM computes forward search estimator in multivariate analysis */
   /*  */
@@ -3224,7 +3221,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
   /*  Beginning of code */
   /*  Input parameters checking */
   /* chkinputM does not do any check if option nocheck=1 */
-  st.site = &oh_emlrtRSI;
+  st.site = &vh_emlrtRSI;
   chkinputM(&st, Y);
   v = Y->size[1];
   n = Y->size[0];
@@ -3235,23 +3232,23 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
     i = loc->size[0] * loc->size[1];
     loc->size[0] = 1;
     loc->size[1] = Y->size[0];
-    emxEnsureCapacity_real_T(sp, loc, i, &fd_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, loc, i, &hd_emlrtRTEI);
     loop_ub = Y->size[0] - 1;
     for (i = 0; i <= loop_ub; i++) {
       loc->data[i] = (real_T)i + 1.0;
     }
   }
 
-  emxInit_real_T(sp, &seq, 1, &eh_emlrtRTEI, true);
+  emxInit_real_T(sp, &seq, 1, &di_emlrtRTEI, true);
   i = seq->size[0];
   seq->size[0] = loc->size[1];
-  emxEnsureCapacity_real_T(sp, seq, i, &eh_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, seq, i, &di_emlrtRTEI);
   loop_ub = loc->size[1];
   for (i = 0; i < loop_ub; i++) {
     seq->data[i] = loc->data[i];
   }
 
-  emxInit_real_T(sp, &fre, 2, &mi_emlrtRTEI, true);
+  emxInit_real_T(sp, &fre, 2, &lj_emlrtRTEI, true);
 
   /*  Write in structure 'options' the options chosen by the user */
   init_contents = varargin_8;
@@ -3262,44 +3259,44 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
   /*  m0(1) necessary for MATLAB C coder */
   /*  Confidence level for robust bivariate ellipses */
   /*  Find initial subset to initialize the search */
-  st.site = &nh_emlrtRSI;
+  st.site = &uh_emlrtRSI;
   unibiv(SD, &st, Y, fre);
   if (b_strcmp(varargin_10_data, varargin_10_size)) {
     /*  The user has chosen to select the intial subset according to the */
     /*  smallest m0 pseudo MD Select only the potential bivariate outliers */
-    st.site = &mh_emlrtRSI;
+    st.site = &th_emlrtRSI;
     sortrows(&st, fre);
   } else if (c_strcmp(varargin_10_data, varargin_10_size)) {
-    st.site = &lh_emlrtRSI;
+    st.site = &sh_emlrtRSI;
     b_sortrows(&st, fre);
   } else if (d_strcmp(varargin_10_data, varargin_10_size)) {
-    st.site = &kh_emlrtRSI;
+    st.site = &rh_emlrtRSI;
     c_sortrows(&st, fre);
   } else {
-    st.site = &jh_emlrtRSI;
+    st.site = &qh_emlrtRSI;
     g_error(&st);
   }
 
   /*  initial subset */
   if (1 > fre->size[0]) {
-    emlrtDynamicBoundsCheckR2012b(1, 1, fre->size[0], &ec_emlrtBCI, (emlrtCTX)sp);
+    emlrtDynamicBoundsCheckR2012b(1, 1, fre->size[0], &lc_emlrtBCI, (emlrtCTX)sp);
   }
 
   irank = (int32_T)varargin_12;
   if (((int32_T)varargin_12 < 1) || ((int32_T)varargin_12 > fre->size[0])) {
     emlrtDynamicBoundsCheckR2012b((int32_T)varargin_12, 1, fre->size[0],
-      &fc_emlrtBCI, (emlrtCTX)sp);
+      &mc_emlrtBCI, (emlrtCTX)sp);
   }
 
-  emxInit_real_T(sp, &bs, 1, &li_emlrtRTEI, true);
+  emxInit_real_T(sp, &bs, 1, &kj_emlrtRTEI, true);
   i = bs->size[0];
   bs->size[0] = (int32_T)varargin_12;
-  emxEnsureCapacity_real_T(sp, bs, i, &fh_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, bs, i, &ei_emlrtRTEI);
   for (i = 0; i < irank; i++) {
     bs->data[i] = fre->data[i];
   }
 
-  emxInit_real_T(sp, &b_Y, 2, &gh_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_Y, 2, &fi_emlrtRTEI, true);
 
   /*  the subset need to be incremented if it is not full rank. We also */
   /*  treat the unfortunate case when the rank of the matrix is v but a */
@@ -3310,26 +3307,26 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
   /* variable. This situation does not decrease the rank of Y, but it */
   /* decreases the rank of ym (i.e. Y-mean(Y)) inside FSMmmd. */
   loop_ub = Y->size[1];
-  emxInit_real_T(sp, &goodobs, 2, &qi_emlrtRTEI, true);
+  emxInit_real_T(sp, &goodobs, 2, &pj_emlrtRTEI, true);
   do {
     exitg1 = 0;
-    st.site = &ih_emlrtRSI;
+    st.site = &ph_emlrtRSI;
     irank = bs->size[0];
     for (i = 0; i < irank; i++) {
       if (bs->data[i] != (int32_T)muDoubleScalarFloor(bs->data[i])) {
-        emlrtIntegerCheckR2012b(bs->data[i], &w_emlrtDCI, &st);
+        emlrtIntegerCheckR2012b(bs->data[i], &db_emlrtDCI, &st);
       }
 
       i1 = (int32_T)bs->data[i];
       if ((i1 < 1) || (i1 > Y->size[0])) {
-        emlrtDynamicBoundsCheckR2012b(i1, 1, Y->size[0], &uf_emlrtBCI, &st);
+        emlrtDynamicBoundsCheckR2012b(i1, 1, Y->size[0], &cg_emlrtBCI, &st);
       }
     }
 
     i = b_Y->size[0] * b_Y->size[1];
     b_Y->size[0] = bs->size[0];
     b_Y->size[1] = loop_ub;
-    emxEnsureCapacity_real_T(&st, b_Y, i, &gh_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, b_Y, i, &fi_emlrtRTEI);
     for (i = 0; i < loop_ub; i++) {
       irank = bs->size[0];
       for (i1 = 0; i1 < irank; i1++) {
@@ -3338,52 +3335,52 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       }
     }
 
-    b_st.site = &fc_emlrtRSI;
+    b_st.site = &mc_emlrtRSI;
     irank = local_rank(&b_st, b_Y);
     guard1 = false;
     if (irank < v) {
       guard1 = true;
     } else {
-      st.site = &ih_emlrtRSI;
+      st.site = &ph_emlrtRSI;
       irank = bs->size[0];
       for (i = 0; i < irank; i++) {
         i1 = (int32_T)bs->data[i];
         if ((i1 < 1) || (i1 > Y->size[0])) {
-          emlrtDynamicBoundsCheckR2012b(i1, 1, Y->size[0], &vf_emlrtBCI, &st);
+          emlrtDynamicBoundsCheckR2012b(i1, 1, Y->size[0], &dg_emlrtBCI, &st);
         }
       }
 
-      b_st.site = &db_emlrtRSI;
-      c_st.site = &eb_emlrtRSI;
-      d_st.site = &fb_emlrtRSI;
+      b_st.site = &kb_emlrtRSI;
+      c_st.site = &lb_emlrtRSI;
+      d_st.site = &mb_emlrtRSI;
       if (((bs->size[0] != 1) || (Y->size[1] != 1)) && (bs->size[0] == 1)) {
-        emlrtErrorWithMessageIdR2018a(&d_st, &mb_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&d_st, &nb_emlrtRTEI,
           "Coder:toolbox:autoDimIncompatibility",
           "Coder:toolbox:autoDimIncompatibility", 0);
       }
 
-      e_st.site = &gb_emlrtRSI;
-      f_st.site = &hb_emlrtRSI;
-      g_st.site = &ib_emlrtRSI;
+      e_st.site = &nb_emlrtRSI;
+      f_st.site = &ob_emlrtRSI;
+      g_st.site = &pb_emlrtRSI;
       irank = bs->size[0];
       i = Y->size[1] - 1;
       i1 = goodobs->size[0] * goodobs->size[1];
       goodobs->size[0] = 1;
       goodobs->size[1] = Y->size[1];
-      emxEnsureCapacity_real_T(&g_st, goodobs, i1, &ih_emlrtRTEI);
+      emxEnsureCapacity_real_T(&g_st, goodobs, i1, &hi_emlrtRTEI);
       if (Y->size[1] >= 1) {
-        h_st.site = &kb_emlrtRSI;
+        h_st.site = &rb_emlrtRSI;
         if (Y->size[1] > 2147483646) {
-          i_st.site = &ab_emlrtRSI;
+          i_st.site = &hb_emlrtRSI;
           check_forloop_overflow_error(&i_st);
         }
 
         for (idx = 0; idx <= i; idx++) {
           goodobs->data[idx] = Y->data[((int32_T)bs->data[0] + Y->size[0] * idx)
             - 1];
-          h_st.site = &jb_emlrtRSI;
+          h_st.site = &qb_emlrtRSI;
           if ((2 <= irank) && (irank > 2147483646)) {
-            i_st.site = &ab_emlrtRSI;
+            i_st.site = &hb_emlrtRSI;
             check_forloop_overflow_error(&i_st);
           }
 
@@ -3405,45 +3402,45 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
         }
       }
 
-      st.site = &ih_emlrtRSI;
+      st.site = &ph_emlrtRSI;
       irank = bs->size[0];
       for (i = 0; i < irank; i++) {
         i1 = (int32_T)bs->data[i];
         if ((i1 < 1) || (i1 > Y->size[0])) {
-          emlrtDynamicBoundsCheckR2012b(i1, 1, Y->size[0], &wf_emlrtBCI, &st);
+          emlrtDynamicBoundsCheckR2012b(i1, 1, Y->size[0], &eg_emlrtBCI, &st);
         }
       }
 
-      b_st.site = &lb_emlrtRSI;
-      c_st.site = &mb_emlrtRSI;
-      d_st.site = &nb_emlrtRSI;
+      b_st.site = &sb_emlrtRSI;
+      c_st.site = &tb_emlrtRSI;
+      d_st.site = &ub_emlrtRSI;
       if (((bs->size[0] != 1) || (Y->size[1] != 1)) && (bs->size[0] == 1)) {
-        emlrtErrorWithMessageIdR2018a(&d_st, &mb_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&d_st, &nb_emlrtRTEI,
           "Coder:toolbox:autoDimIncompatibility",
           "Coder:toolbox:autoDimIncompatibility", 0);
       }
 
-      e_st.site = &gb_emlrtRSI;
-      f_st.site = &hb_emlrtRSI;
-      g_st.site = &ib_emlrtRSI;
+      e_st.site = &nb_emlrtRSI;
+      f_st.site = &ob_emlrtRSI;
+      g_st.site = &pb_emlrtRSI;
       irank = bs->size[0];
       i = Y->size[1] - 1;
       i1 = loc->size[0] * loc->size[1];
       loc->size[0] = 1;
       loc->size[1] = Y->size[1];
-      emxEnsureCapacity_real_T(&g_st, loc, i1, &ih_emlrtRTEI);
+      emxEnsureCapacity_real_T(&g_st, loc, i1, &hi_emlrtRTEI);
       if (Y->size[1] >= 1) {
-        h_st.site = &kb_emlrtRSI;
+        h_st.site = &rb_emlrtRSI;
         if (Y->size[1] > 2147483646) {
-          i_st.site = &ab_emlrtRSI;
+          i_st.site = &hb_emlrtRSI;
           check_forloop_overflow_error(&i_st);
         }
 
         for (idx = 0; idx <= i; idx++) {
           loc->data[idx] = Y->data[((int32_T)bs->data[0] + Y->size[0] * idx) - 1];
-          h_st.site = &jb_emlrtRSI;
+          h_st.site = &qb_emlrtRSI;
           if ((2 <= irank) && (irank > 2147483646)) {
-            i_st.site = &ab_emlrtRSI;
+            i_st.site = &hb_emlrtRSI;
             check_forloop_overflow_error(&i_st);
           }
 
@@ -3470,26 +3467,26 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       iv1[0] = (*(int32_T (*)[2])loc->size)[0];
       iv1[1] = (*(int32_T (*)[2])loc->size)[1];
       emlrtSizeEqCheckNDR2012b(&b_iv[0], &iv1[0], &h_emlrtECI, (emlrtCTX)sp);
-      st.site = &ih_emlrtRSI;
+      st.site = &ph_emlrtRSI;
       i = goodobs->size[0] * goodobs->size[1];
       goodobs->size[0] = 1;
-      emxEnsureCapacity_real_T(&st, goodobs, i, &jh_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, goodobs, i, &ii_emlrtRTEI);
       irank = goodobs->size[1] - 1;
       for (i = 0; i <= irank; i++) {
         goodobs->data[i] -= loc->data[i];
       }
 
-      b_st.site = &lb_emlrtRSI;
-      c_st.site = &mb_emlrtRSI;
-      d_st.site = &nb_emlrtRSI;
+      b_st.site = &sb_emlrtRSI;
+      c_st.site = &tb_emlrtRSI;
+      d_st.site = &ub_emlrtRSI;
       if (goodobs->size[1] < 1) {
-        emlrtErrorWithMessageIdR2018a(&d_st, &lb_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&d_st, &mb_emlrtRTEI,
           "Coder:toolbox:eml_min_or_max_varDimZero",
           "Coder:toolbox:eml_min_or_max_varDimZero", 0);
       }
 
-      e_st.site = &dt_emlrtRSI;
-      f_st.site = &et_emlrtRSI;
+      e_st.site = &kt_emlrtRSI;
+      f_st.site = &lt_emlrtRSI;
       irank = goodobs->size[1];
       if (goodobs->size[1] <= 2) {
         if (goodobs->size[1] == 1) {
@@ -3502,14 +3499,14 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
           ndecl = goodobs->data[0];
         }
       } else {
-        g_st.site = &gt_emlrtRSI;
+        g_st.site = &nt_emlrtRSI;
         if (!muDoubleScalarIsNaN(goodobs->data[0])) {
           idx = 1;
         } else {
           idx = 0;
-          h_st.site = &ht_emlrtRSI;
+          h_st.site = &ot_emlrtRSI;
           if (goodobs->size[1] > 2147483646) {
-            i_st.site = &ab_emlrtRSI;
+            i_st.site = &hb_emlrtRSI;
             check_forloop_overflow_error(&i_st);
           }
 
@@ -3528,13 +3525,13 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
         if (idx == 0) {
           ndecl = goodobs->data[0];
         } else {
-          g_st.site = &ft_emlrtRSI;
+          g_st.site = &mt_emlrtRSI;
           ndecl = goodobs->data[idx - 1];
           a = idx + 1;
-          h_st.site = &it_emlrtRSI;
+          h_st.site = &pt_emlrtRSI;
           if ((idx + 1 <= goodobs->size[1]) && (goodobs->size[1] > 2147483646))
           {
-            i_st.site = &ab_emlrtRSI;
+            i_st.site = &hb_emlrtRSI;
             check_forloop_overflow_error(&i_st);
           }
 
@@ -3556,19 +3553,19 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
 
     if (guard1) {
       if (1 > fre->size[0]) {
-        emlrtDynamicBoundsCheckR2012b(1, 1, fre->size[0], &gc_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b(1, 1, fre->size[0], &nc_emlrtBCI,
           (emlrtCTX)sp);
       }
 
       irank = (int32_T)(varargin_12 + incre);
       if ((irank < 1) || (irank > fre->size[0])) {
-        emlrtDynamicBoundsCheckR2012b(irank, 1, fre->size[0], &hc_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b(irank, 1, fre->size[0], &oc_emlrtBCI,
           (emlrtCTX)sp);
       }
 
       i = bs->size[0];
       bs->size[0] = irank;
-      emxEnsureCapacity_real_T(sp, bs, i, &hh_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, bs, i, &gi_emlrtRTEI);
       for (i = 0; i < irank; i++) {
         bs->data[i] = fre->data[i];
       }
@@ -3589,47 +3586,47 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
   }
 
   /*  Compute Minimum Mahalanobis Distance for each step of the search */
-  emxInit_real_T(sp, &b_bs, 1, &kh_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_bs, 1, &ji_emlrtRTEI, true);
   if (Y->size[0] < 5000) {
     i = b_bs->size[0];
     b_bs->size[0] = bs->size[0];
-    emxEnsureCapacity_real_T(sp, b_bs, i, &lh_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_bs, i, &ki_emlrtRTEI);
     loop_ub = bs->size[0] - 1;
     for (i = 0; i <= loop_ub; i++) {
       b_bs->data[i] = bs->data[i];
     }
 
-    st.site = &hh_emlrtRSI;
+    st.site = &oh_emlrtRSI;
     FSMmmd(&st, Y, b_bs, init_contents, out_mmd, out_Un, out_cov);
   } else {
     i = b_bs->size[0];
     b_bs->size[0] = bs->size[0];
-    emxEnsureCapacity_real_T(sp, b_bs, i, &kh_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_bs, i, &ji_emlrtRTEI);
     loop_ub = bs->size[0] - 1;
     for (i = 0; i <= loop_ub; i++) {
       b_bs->data[i] = bs->data[i];
     }
 
-    st.site = &gh_emlrtRSI;
+    st.site = &nh_emlrtRSI;
     b_FSMmmd(&st, Y, b_bs, init_contents, out_mmd, out_Un);
     i = out_cov->size[0] * out_cov->size[1];
     out_cov->size[0] = 1;
     out_cov->size[1] = 1;
-    emxEnsureCapacity_real_T(sp, out_cov, i, &mh_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, out_cov, i, &li_emlrtRTEI);
     out_cov->data[0] = 0.0;
   }
 
-  emxInit_boolean_T(sp, &r, 2, &nh_emlrtRTEI, true);
+  emxInit_boolean_T(sp, &r, 2, &mi_emlrtRTEI, true);
   i = r->size[0] * r->size[1];
   r->size[0] = out_mmd->size[0];
   r->size[1] = out_mmd->size[1];
-  emxEnsureCapacity_boolean_T(sp, r, i, &nh_emlrtRTEI);
+  emxEnsureCapacity_boolean_T(sp, r, i, &mi_emlrtRTEI);
   loop_ub = out_mmd->size[0] * out_mmd->size[1];
   for (i = 0; i < loop_ub; i++) {
     r->data[i] = muDoubleScalarIsNaN(out_mmd->data[i]);
   }
 
-  st.site = &fh_emlrtRSI;
+  st.site = &mh_emlrtRSI;
   if (ifWhileCond(&st, r)) {
     out_outliers->size[0] = 0;
     out_outliers->size[1] = 0;
@@ -3653,10 +3650,10 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
     /*  Part 1. Signal detection and validation */
     b_signal = 0;
     sto = 0;
-    emxInit_real_T(sp, &gbonf, 2, &ni_emlrtRTEI, true);
-    emxInit_real_T(sp, &gmin, 2, &rh_emlrtRTEI, true);
-    emxInit_real_T(sp, &gmin1, 2, &sh_emlrtRTEI, true);
-    emxInit_int32_T(sp, &ia, 1, &wi_emlrtRTEI, true);
+    emxInit_real_T(sp, &gbonf, 2, &mj_emlrtRTEI, true);
+    emxInit_real_T(sp, &gmin, 2, &qi_emlrtRTEI, true);
+    emxInit_real_T(sp, &gmin1, 2, &ri_emlrtRTEI, true);
+    emxInit_int32_T(sp, &ia, 1, &vj_emlrtRTEI, true);
     if ((varargin_4_size[0] != 0) && (varargin_4_size[1] != 0)) {
       b_varargin_4_size[0] = 1;
       b_varargin_4_size[1] = 1;
@@ -3669,33 +3666,33 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       nout_data.allocatedSize = 1;
       nout_data.numDimensions = 2;
       nout_data.canFreeData = false;
-      st.site = &eh_emlrtRSI;
+      st.site = &lh_emlrtRSI;
       if (ifWhileCond(&st, &nout_data)) {
-        st.site = &dh_emlrtRSI;
+        st.site = &kh_emlrtRSI;
         FSMbonfbound(&st, Y->size[0], Y->size[1], varargin_4_data,
                      varargin_4_size, init_contents, gbonf);
       } else {
-        emxInit_real_T(sp, &b, 1, &qh_emlrtRTEI, true);
-        st.site = &ch_emlrtRSI;
+        emxInit_real_T(sp, &b, 1, &pi_emlrtRTEI, true);
+        st.site = &jh_emlrtRSI;
         d = (real_T)Y->size[0] - init_contents;
         if (!(d >= 0.0)) {
-          emlrtNonNegativeCheckR2012b(d, &y_emlrtDCI, &st);
+          emlrtNonNegativeCheckR2012b(d, &fb_emlrtDCI, &st);
         }
 
         if (d != (int32_T)muDoubleScalarFloor(d)) {
-          emlrtIntegerCheckR2012b(d, &x_emlrtDCI, &st);
+          emlrtIntegerCheckR2012b(d, &eb_emlrtDCI, &st);
         }
 
         i = b->size[0];
         b->size[0] = (int32_T)d;
-        emxEnsureCapacity_real_T(&st, b, i, &qh_emlrtRTEI);
+        emxEnsureCapacity_real_T(&st, b, i, &pi_emlrtRTEI);
         d = (real_T)Y->size[0] - init_contents;
         if (!(d >= 0.0)) {
-          emlrtNonNegativeCheckR2012b(d, &y_emlrtDCI, &st);
+          emlrtNonNegativeCheckR2012b(d, &fb_emlrtDCI, &st);
         }
 
         if (d != (int32_T)muDoubleScalarFloor(d)) {
-          emlrtIntegerCheckR2012b(d, &x_emlrtDCI, &st);
+          emlrtIntegerCheckR2012b(d, &eb_emlrtDCI, &st);
         }
 
         loop_ub = (int32_T)d;
@@ -3708,7 +3705,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
         c_varargin_4_data.allocatedSize = -1;
         c_varargin_4_data.numDimensions = 2;
         c_varargin_4_data.canFreeData = false;
-        b_st.site = &x_emlrtRSI;
+        b_st.site = &fb_emlrtRSI;
         dynamic_size_checks(&b_st, &c_varargin_4_data, b, 1, (int32_T)((real_T)
           Y->size[0] - init_contents));
         d_varargin_4_data.data = (real_T *)&varargin_4_data[0];
@@ -3716,12 +3713,12 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
         d_varargin_4_data.allocatedSize = -1;
         d_varargin_4_data.numDimensions = 2;
         d_varargin_4_data.canFreeData = false;
-        b_st.site = &w_emlrtRSI;
+        b_st.site = &eb_emlrtRSI;
         mtimes(&b_st, &d_varargin_4_data, b, b_bs);
         i = gbonf->size[0] * gbonf->size[1];
         gbonf->size[0] = b_bs->size[0];
         gbonf->size[1] = 1;
-        emxEnsureCapacity_real_T(sp, gbonf, i, &th_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, gbonf, i, &si_emlrtRTEI);
         loop_ub = b_bs->size[0];
         emxFree_real_T(&b);
         for (i = 0; i < loop_ub; i++) {
@@ -3739,7 +3736,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       i = gmin->size[0] * gmin->size[1];
       gmin->size[0] = 1;
       gmin->size[1] = 1;
-      emxEnsureCapacity_real_T(sp, gmin, i, &rh_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, gmin, i, &qi_emlrtRTEI);
       gmin->data[0] = 0.0;
       NoFalseSig = true;
       incre = 0.0;
@@ -3747,33 +3744,33 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       i = gmin1->size[0] * gmin1->size[1];
       gmin1->size[0] = 1;
       gmin1->size[1] = 1;
-      emxEnsureCapacity_real_T(sp, gmin1, i, &sh_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, gmin1, i, &ri_emlrtRTEI);
       gmin1->data[0] = 0.0;
-      nout_size_idx_0 = 1;
-      nout_size_idx_1 = 1;
-      b_nout_data[0] = 0U;
+      for (i = 0; i < 10; i++) {
+        nout[i] = 0U;
+      }
     } else {
       /*  declaration necessary for C coder */
       i = gbonf->size[0] * gbonf->size[1];
       gbonf->size[0] = 1;
       gbonf->size[1] = 1;
-      emxEnsureCapacity_real_T(sp, gbonf, i, &oh_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, gbonf, i, &ni_emlrtRTEI);
       gbonf->data[0] = 0.0;
       incre = 0.0;
       ii = 0U;
       i = gmin1->size[0] * gmin1->size[1];
       gmin1->size[0] = 1;
       gmin1->size[1] = 1;
-      emxEnsureCapacity_real_T(sp, gmin1, i, &ph_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, gmin1, i, &oi_emlrtRTEI);
       gmin1->data[0] = 0.0;
       if (out_mmd->size[0] < 4) {
-        st.site = &bh_emlrtRSI;
+        st.site = &ih_emlrtRSI;
         k_error(&st);
       }
 
       /*  Compute theoretical envelops for minimum Mahalanobis Distance based on all */
       /*  the observations for the above quantiles. */
-      st.site = &ah_emlrtRSI;
+      st.site = &hh_emlrtRSI;
       FSMenvmmd(&st, Y->size[0], Y->size[1], init_contents, gmin);
 
       /*  gmin = the matrix which contains envelopes based on all observations. */
@@ -3793,12 +3790,12 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
 
       /*  Store in nout the number of times the observed mmd (d_min) lies above: */
       if (2 > out_mmd->size[1]) {
-        emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &ic_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &pc_emlrtBCI,
           (emlrtCTX)sp);
       }
 
       if (2 > gmin->size[1]) {
-        emlrtDynamicBoundsCheckR2012b(2, 1, gmin->size[1], &jc_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b(2, 1, gmin->size[1], &qc_emlrtBCI,
           (emlrtCTX)sp);
       }
 
@@ -3808,12 +3805,12 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       }
 
       if (2 > out_mmd->size[1]) {
-        emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &kc_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &rc_emlrtBCI,
           (emlrtCTX)sp);
       }
 
       if (3 > gmin->size[1]) {
-        emlrtDynamicBoundsCheckR2012b(3, 1, gmin->size[1], &lc_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b(3, 1, gmin->size[1], &sc_emlrtBCI,
           (emlrtCTX)sp);
       }
 
@@ -3823,12 +3820,12 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       }
 
       if (2 > out_mmd->size[1]) {
-        emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &mc_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &tc_emlrtBCI,
           (emlrtCTX)sp);
       }
 
       if (4 > gmin->size[1]) {
-        emlrtDynamicBoundsCheckR2012b(4, 1, gmin->size[1], &nc_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b(4, 1, gmin->size[1], &uc_emlrtBCI,
           (emlrtCTX)sp);
       }
 
@@ -3838,12 +3835,12 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       }
 
       if (2 > out_mmd->size[1]) {
-        emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &oc_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &vc_emlrtBCI,
           (emlrtCTX)sp);
       }
 
       if (5 > gmin->size[1]) {
-        emlrtDynamicBoundsCheckR2012b(5, 1, gmin->size[1], &pc_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b(5, 1, gmin->size[1], &wc_emlrtBCI,
           (emlrtCTX)sp);
       }
 
@@ -3853,12 +3850,12 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       }
 
       if (2 > out_mmd->size[1]) {
-        emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &qc_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &xc_emlrtBCI,
           (emlrtCTX)sp);
       }
 
       if (6 > gmin->size[1]) {
-        emlrtDynamicBoundsCheckR2012b(6, 1, gmin->size[1], &rc_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b(6, 1, gmin->size[1], &yc_emlrtBCI,
           (emlrtCTX)sp);
       }
 
@@ -3867,112 +3864,112 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
           (emlrtCTX)sp);
       }
 
-      idx = out_mmd->size[0] - 1;
-      a = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
+      irank = out_mmd->size[0] - 1;
+      idx = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] > gmin->data[b_i + gmin->size
             [0]]) {
-          a++;
+          idx++;
         }
       }
 
       i = ia->size[0];
-      ia->size[0] = a;
-      emxEnsureCapacity_int32_T(sp, ia, i, &xh_emlrtRTEI);
-      irank = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
+      ia->size[0] = idx;
+      emxEnsureCapacity_int32_T(sp, ia, i, &wi_emlrtRTEI);
+      a = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] > gmin->data[b_i + gmin->size
             [0]]) {
-          ia->data[irank] = b_i + 1;
-          irank++;
-        }
-      }
-
-      idx = out_mmd->size[0] - 1;
-      a = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
-        if (out_mmd->data[b_i + out_mmd->size[0]] > gmin->data[b_i + gmin->size
-            [0] * 2]) {
+          ia->data[a] = b_i + 1;
           a++;
         }
       }
 
-      emxInit_int32_T(sp, &r1, 1, &si_emlrtRTEI, true);
+      irank = out_mmd->size[0] - 1;
+      idx = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
+        if (out_mmd->data[b_i + out_mmd->size[0]] > gmin->data[b_i + gmin->size
+            [0] * 2]) {
+          idx++;
+        }
+      }
+
+      emxInit_int32_T(sp, &r1, 1, &rj_emlrtRTEI, true);
       i = r1->size[0];
-      r1->size[0] = a;
-      emxEnsureCapacity_int32_T(sp, r1, i, &xh_emlrtRTEI);
-      irank = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
+      r1->size[0] = idx;
+      emxEnsureCapacity_int32_T(sp, r1, i, &wi_emlrtRTEI);
+      a = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] > gmin->data[b_i + gmin->size
             [0] * 2]) {
-          r1->data[irank] = b_i + 1;
-          irank++;
-        }
-      }
-
-      idx = out_mmd->size[0] - 1;
-      a = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
-        if (out_mmd->data[b_i + out_mmd->size[0]] > gmin->data[b_i + gmin->size
-            [0] * 3]) {
+          r1->data[a] = b_i + 1;
           a++;
         }
       }
 
-      emxInit_int32_T(sp, &r2, 1, &ti_emlrtRTEI, true);
+      irank = out_mmd->size[0] - 1;
+      idx = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
+        if (out_mmd->data[b_i + out_mmd->size[0]] > gmin->data[b_i + gmin->size
+            [0] * 3]) {
+          idx++;
+        }
+      }
+
+      emxInit_int32_T(sp, &r2, 1, &sj_emlrtRTEI, true);
       i = r2->size[0];
-      r2->size[0] = a;
-      emxEnsureCapacity_int32_T(sp, r2, i, &xh_emlrtRTEI);
-      irank = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
+      r2->size[0] = idx;
+      emxEnsureCapacity_int32_T(sp, r2, i, &wi_emlrtRTEI);
+      a = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] > gmin->data[b_i + gmin->size
             [0] * 3]) {
-          r2->data[irank] = b_i + 1;
-          irank++;
-        }
-      }
-
-      idx = out_mmd->size[0] - 1;
-      a = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
-        if (out_mmd->data[b_i + out_mmd->size[0]] > gmin->data[b_i + gmin->size
-            [0] * 4]) {
+          r2->data[a] = b_i + 1;
           a++;
         }
       }
 
-      emxInit_int32_T(sp, &r3, 1, &ui_emlrtRTEI, true);
+      irank = out_mmd->size[0] - 1;
+      idx = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
+        if (out_mmd->data[b_i + out_mmd->size[0]] > gmin->data[b_i + gmin->size
+            [0] * 4]) {
+          idx++;
+        }
+      }
+
+      emxInit_int32_T(sp, &r3, 1, &tj_emlrtRTEI, true);
       i = r3->size[0];
-      r3->size[0] = a;
-      emxEnsureCapacity_int32_T(sp, r3, i, &xh_emlrtRTEI);
-      irank = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
+      r3->size[0] = idx;
+      emxEnsureCapacity_int32_T(sp, r3, i, &wi_emlrtRTEI);
+      a = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] > gmin->data[b_i + gmin->size
             [0] * 4]) {
-          r3->data[irank] = b_i + 1;
-          irank++;
-        }
-      }
-
-      idx = out_mmd->size[0] - 1;
-      a = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
-        if (out_mmd->data[b_i + out_mmd->size[0]] < gmin->data[b_i + gmin->size
-            [0] * 5]) {
+          r3->data[a] = b_i + 1;
           a++;
         }
       }
 
-      emxInit_int32_T(sp, &r4, 1, &vi_emlrtRTEI, true);
-      i = r4->size[0];
-      r4->size[0] = a;
-      emxEnsureCapacity_int32_T(sp, r4, i, &xh_emlrtRTEI);
-      irank = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
+      irank = out_mmd->size[0] - 1;
+      idx = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] < gmin->data[b_i + gmin->size
             [0] * 5]) {
-          r4->data[irank] = b_i + 1;
-          irank++;
+          idx++;
+        }
+      }
+
+      emxInit_int32_T(sp, &r4, 1, &uj_emlrtRTEI, true);
+      i = r4->size[0];
+      r4->size[0] = idx;
+      emxEnsureCapacity_int32_T(sp, r4, i, &wi_emlrtRTEI);
+      a = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
+        if (out_mmd->data[b_i + out_mmd->size[0]] < gmin->data[b_i + gmin->size
+            [0] * 5]) {
+          r4->data[a] = b_i + 1;
+          a++;
         }
       }
 
@@ -3980,7 +3977,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       for (i = 0; i < loop_ub; i++) {
         if (ia->data[i] > out_mmd->size[0]) {
           emlrtDynamicBoundsCheckR2012b(ia->data[i], 1, out_mmd->size[0],
-            &dk_emlrtBCI, (emlrtCTX)sp);
+            &kk_emlrtBCI, (emlrtCTX)sp);
         }
       }
 
@@ -3988,7 +3985,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       for (i = 0; i < loop_ub; i++) {
         if (r1->data[i] > out_mmd->size[0]) {
           emlrtDynamicBoundsCheckR2012b(r1->data[i], 1, out_mmd->size[0],
-            &ek_emlrtBCI, (emlrtCTX)sp);
+            &lk_emlrtBCI, (emlrtCTX)sp);
         }
       }
 
@@ -3996,7 +3993,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       for (i = 0; i < loop_ub; i++) {
         if (r2->data[i] > out_mmd->size[0]) {
           emlrtDynamicBoundsCheckR2012b(r2->data[i], 1, out_mmd->size[0],
-            &fk_emlrtBCI, (emlrtCTX)sp);
+            &mk_emlrtBCI, (emlrtCTX)sp);
         }
       }
 
@@ -4004,7 +4001,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       for (i = 0; i < loop_ub; i++) {
         if (r3->data[i] > out_mmd->size[0]) {
           emlrtDynamicBoundsCheckR2012b(r3->data[i], 1, out_mmd->size[0],
-            &gk_emlrtBCI, (emlrtCTX)sp);
+            &nk_emlrtBCI, (emlrtCTX)sp);
         }
       }
 
@@ -4012,7 +4009,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       for (i = 0; i < loop_ub; i++) {
         if (r4->data[i] > out_mmd->size[0]) {
           emlrtDynamicBoundsCheckR2012b(r4->data[i], 1, out_mmd->size[0],
-            &hk_emlrtBCI, (emlrtCTX)sp);
+            &ok_emlrtBCI, (emlrtCTX)sp);
         }
       }
 
@@ -4021,62 +4018,55 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       /*      % the 99.99% envelope */
       /*     % the 99.999% envelope */
       /*  the 1% envelope */
-      for (i = 0; i < 5; i++) {
-        uv1[i << 1] = (uint32_T)iv[i];
-      }
-
-      uv1[1] = (uint32_T)r4->size[0];
-      uv1[3] = (uint32_T)ia->size[0];
-      uv1[5] = (uint32_T)r1->size[0];
-      uv1[7] = (uint32_T)r2->size[0];
-      uv1[9] = (uint32_T)r3->size[0];
-      nout_size_idx_0 = 2;
-      nout_size_idx_1 = 5;
-      emxFree_int32_T(&r4);
-      emxFree_int32_T(&r3);
-      emxFree_int32_T(&r2);
-      emxFree_int32_T(&r1);
-      for (i = 0; i < 10; i++) {
-        b_nout_data[i] = uv1[i];
-      }
+      nout[1] = (uint32_T)r4->size[0];
+      nout[3] = (uint32_T)ia->size[0];
+      nout[5] = (uint32_T)r1->size[0];
+      nout[7] = (uint32_T)r2->size[0];
+      nout[9] = (uint32_T)r3->size[0];
 
       /*  NoFalseSig = boolean linked to the fact that the signal is good or not */
       NoFalseSig = false;
 
       /*  NoFalseSig is set to 1 if the condition for an INCONTROVERTIBLE SIGNAL is */
       /*  fulfilled. */
+      idx = 0;
+      emxFree_int32_T(&r4);
+      emxFree_int32_T(&r3);
+      emxFree_int32_T(&r2);
+      emxFree_int32_T(&r1);
       a = 0;
-      irank = 0;
       for (b_i = 0; b_i < 5; b_i++) {
-        b_b = ((int32_T)b_nout_data[2 * b_i] == 9999);
+        i = iv[b_i];
+        nout[b_i << 1] = (uint32_T)i;
+        b_b = (i == 9999);
         if (b_b) {
+          idx++;
+          tmp_data[a] = (int8_T)(b_i + 1);
           a++;
-          tmp_data[irank] = (int8_T)(b_i + 1);
-          irank++;
         }
       }
 
       nout_size[0] = 1;
-      nout_size[1] = a;
-      for (i = 0; i < a; i++) {
-        c_nout_data[i] = ((int32_T)b_nout_data[2 * (tmp_data[i] - 1) + 1] >= 10);
+      nout_size[1] = idx;
+      for (i = 0; i < idx; i++) {
+        b_nout_data[i] = ((int32_T)nout[((tmp_data[i] - 1) << 1) + 1] >= 10);
       }
 
-      nout_data.data = &c_nout_data[0];
+      nout_data.data = &b_nout_data[0];
       nout_data.size = &nout_size[0];
       nout_data.allocatedSize = 5;
       nout_data.numDimensions = 2;
       nout_data.canFreeData = false;
-      st.site = &yg_emlrtRSI;
+      st.site = &gh_emlrtRSI;
       if (c_ifWhileCond(&nout_data)) {
         NoFalseSig = true;
       }
 
       /*  Divide central part from final part of the search */
       d = (real_T)Y->size[0] / 200.0;
-      st.site = &xg_emlrtRSI;
+      st.site = &fh_emlrtRSI;
       if (d < 0.0) {
-        emlrtErrorWithMessageIdR2018a(&st, &ac_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&st, &bc_emlrtRTEI,
           "Coder:toolbox:ElFunDomainError", "Coder:toolbox:ElFunDomainError", 3,
           4, 4, "sqrt");
       }
@@ -4091,8 +4081,8 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
     /*  Signal detection loop */
     b_i = 3;
     c_i = 3;
-    emxInit_real_T(sp, &gval, 2, &oi_emlrtRTEI, true);
-    emxInit_boolean_T(sp, &x, 1, &gi_emlrtRTEI, true);
+    emxInit_real_T(sp, &gval, 2, &nj_emlrtRTEI, true);
+    emxInit_boolean_T(sp, &x, 1, &fj_emlrtRTEI, true);
     exitg2 = false;
     while ((!exitg2) && (c_i - 3 <= out_mmd->size[0] - 3)) {
       b_i = c_i;
@@ -4111,22 +4101,22 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
           /*  Three consecutive values of d_min above the 99.99% threshold or 1 */
           /*  above 99.999% envelope */
           if (2 > out_mmd->size[1]) {
-            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &sc_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &ad_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if ((c_i < 1) || (c_i > out_mmd->size[0])) {
-            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &hg_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &og_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (c_i > gmin->size[0]) {
-            emlrtDynamicBoundsCheckR2012b(c_i, 1, gmin->size[0], &ig_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c_i, 1, gmin->size[0], &pg_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if ((c9999 < 1) || (c9999 > gmin->size[1])) {
-            emlrtDynamicBoundsCheckR2012b(c9999, 1, gmin->size[1], &ig_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c9999, 1, gmin->size[1], &pg_emlrtBCI,
               (emlrtCTX)sp);
           }
 
@@ -4134,47 +4124,47 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
           b_tmp = gmin->data[(c_i + gmin->size[0] * (c9999 - 1)) - 1];
           if (d > b_tmp) {
             if (2 > out_mmd->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &tc_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &bd_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if (((int32_T)(c_i + 1U) < 1) || ((int32_T)(c_i + 1U) >
                  out_mmd->size[0])) {
               emlrtDynamicBoundsCheckR2012b((int32_T)(c_i + 1U), 1,
-                out_mmd->size[0], &og_emlrtBCI, (emlrtCTX)sp);
+                out_mmd->size[0], &vg_emlrtBCI, (emlrtCTX)sp);
             }
 
             if (((int32_T)(c_i + 1U) < 1) || ((int32_T)(c_i + 1U) > gmin->size[0]))
             {
               emlrtDynamicBoundsCheckR2012b((int32_T)(c_i + 1U), 1, gmin->size[0],
-                &pg_emlrtBCI, (emlrtCTX)sp);
+                &wg_emlrtBCI, (emlrtCTX)sp);
             }
 
             if (c9999 > gmin->size[1]) {
               emlrtDynamicBoundsCheckR2012b(c9999, 1, gmin->size[1],
-                &pg_emlrtBCI, (emlrtCTX)sp);
+                &wg_emlrtBCI, (emlrtCTX)sp);
             }
 
             if (out_mmd->data[c_i + out_mmd->size[0]] > gmin->data[c_i +
                 gmin->size[0] * (c9999 - 1)]) {
               if (2 > out_mmd->size[1]) {
                 emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1],
-                  &uc_emlrtBCI, (emlrtCTX)sp);
+                  &cd_emlrtBCI, (emlrtCTX)sp);
               }
 
               if ((c_i - 1 < 1) || (c_i - 1 > out_mmd->size[0])) {
                 emlrtDynamicBoundsCheckR2012b(c_i - 1, 1, out_mmd->size[0],
-                  &ah_emlrtBCI, (emlrtCTX)sp);
+                  &hh_emlrtBCI, (emlrtCTX)sp);
               }
 
               if ((c_i - 1 < 1) || (c_i - 1 > gmin->size[0])) {
                 emlrtDynamicBoundsCheckR2012b(c_i - 1, 1, gmin->size[0],
-                  &bh_emlrtBCI, (emlrtCTX)sp);
+                  &ih_emlrtBCI, (emlrtCTX)sp);
               }
 
               if (c9999 > gmin->size[1]) {
                 emlrtDynamicBoundsCheckR2012b(c9999, 1, gmin->size[1],
-                  &bh_emlrtBCI, (emlrtCTX)sp);
+                  &ih_emlrtBCI, (emlrtCTX)sp);
               }
 
               if (out_mmd->data[(c_i + out_mmd->size[0]) - 2] > gmin->data[(c_i
@@ -4194,22 +4184,22 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
           /*  Extreme couple adjacent to an exceedance */
           /*  Two consecutive values of mmd above the 99.99% envelope and 1 above 99% */
           if (2 > out_mmd->size[1]) {
-            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &ed_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &ld_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if ((c_i < 1) || (c_i > out_mmd->size[0])) {
-            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &fg_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &mg_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (c_i > gmin->size[0]) {
-            emlrtDynamicBoundsCheckR2012b(c_i, 1, gmin->size[0], &gg_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c_i, 1, gmin->size[0], &ng_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if ((c999 < 1) || (c999 > gmin->size[1])) {
-            emlrtDynamicBoundsCheckR2012b(c999, 1, gmin->size[1], &gg_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c999, 1, gmin->size[1], &ng_emlrtBCI,
               (emlrtCTX)sp);
           }
 
@@ -4217,22 +4207,22 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
           b_tmp = gmin->data[(c_i + gmin->size[0] * (c999 - 1)) - 1];
           if (d > b_tmp) {
             if (2 > out_mmd->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &fd_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &md_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if ((int32_T)(c_i + 1U) > out_mmd->size[0]) {
               emlrtDynamicBoundsCheckR2012b((int32_T)(c_i + 1U), 1,
-                out_mmd->size[0], &mg_emlrtBCI, (emlrtCTX)sp);
+                out_mmd->size[0], &tg_emlrtBCI, (emlrtCTX)sp);
             }
 
             if ((int32_T)(c_i + 1U) > gmin->size[0]) {
               emlrtDynamicBoundsCheckR2012b((int32_T)(c_i + 1U), 1, gmin->size[0],
-                &ng_emlrtBCI, (emlrtCTX)sp);
+                &ug_emlrtBCI, (emlrtCTX)sp);
             }
 
             if (c999 > gmin->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(c999, 1, gmin->size[1], &ng_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(c999, 1, gmin->size[1], &ug_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
@@ -4240,22 +4230,22 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
                 gmin->size[0] * (c999 - 1)]) {
               if (2 > out_mmd->size[1]) {
                 emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1],
-                  &gd_emlrtBCI, (emlrtCTX)sp);
+                  &nd_emlrtBCI, (emlrtCTX)sp);
               }
 
               if ((c_i - 1 < 1) || (c_i - 1 > out_mmd->size[0])) {
                 emlrtDynamicBoundsCheckR2012b(c_i - 1, 1, out_mmd->size[0],
-                  &vg_emlrtBCI, (emlrtCTX)sp);
+                  &dh_emlrtBCI, (emlrtCTX)sp);
               }
 
               if ((c_i - 1 < 1) || (c_i - 1 > gmin->size[0])) {
                 emlrtDynamicBoundsCheckR2012b(c_i - 1, 1, gmin->size[0],
-                  &wg_emlrtBCI, (emlrtCTX)sp);
+                  &eh_emlrtBCI, (emlrtCTX)sp);
               }
 
               if ((c99 < 1) || (c99 > gmin->size[1])) {
                 emlrtDynamicBoundsCheckR2012b(c99, 1, gmin->size[1],
-                  &wg_emlrtBCI, (emlrtCTX)sp);
+                  &eh_emlrtBCI, (emlrtCTX)sp);
               }
 
               if (out_mmd->data[(c_i + out_mmd->size[0]) - 2] > gmin->data[(c_i
@@ -4272,22 +4262,22 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
           }
         } else {
           if (2 > out_mmd->size[1]) {
-            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &xd_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &fe_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if ((c_i < 1) || (c_i > out_mmd->size[0])) {
-            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &bg_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &ig_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (c_i > gmin->size[0]) {
-            emlrtDynamicBoundsCheckR2012b(c_i, 1, gmin->size[0], &cg_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c_i, 1, gmin->size[0], &jg_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if ((c999 < 1) || (c999 > gmin->size[1])) {
-            emlrtDynamicBoundsCheckR2012b(c999, 1, gmin->size[1], &cg_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c999, 1, gmin->size[1], &jg_emlrtBCI,
               (emlrtCTX)sp);
           }
 
@@ -4297,22 +4287,22 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
             guard4 = true;
           } else {
             if (2 > out_mmd->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &yd_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &ge_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if (c_i > out_mmd->size[0]) {
               emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
-                &dg_emlrtBCI, (emlrtCTX)sp);
+                &kg_emlrtBCI, (emlrtCTX)sp);
             }
 
             if (gmin->size[0] < 1) {
               emlrtDynamicBoundsCheckR2012b(gmin->size[0], 1, gmin->size[0],
-                &eg_emlrtBCI, (emlrtCTX)sp);
+                &lg_emlrtBCI, (emlrtCTX)sp);
             }
 
             if ((c99 < 1) || (c99 > gmin->size[1])) {
-              emlrtDynamicBoundsCheckR2012b(c99, 1, gmin->size[1], &eg_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(c99, 1, gmin->size[1], &lg_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
@@ -4327,66 +4317,66 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
 
         if (guard7) {
           if (2 > out_mmd->size[1]) {
-            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &hd_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &od_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if ((c_i - 1 < 1) || (c_i - 1 > out_mmd->size[0])) {
             emlrtDynamicBoundsCheckR2012b(c_i - 1, 1, out_mmd->size[0],
-              &tg_emlrtBCI, (emlrtCTX)sp);
+              &bh_emlrtBCI, (emlrtCTX)sp);
           }
 
           if ((c_i - 1 < 1) || (c_i - 1 > gmin->size[0])) {
             emlrtDynamicBoundsCheckR2012b(c_i - 1, 1, gmin->size[0],
-              &ug_emlrtBCI, (emlrtCTX)sp);
+              &ch_emlrtBCI, (emlrtCTX)sp);
           }
 
           if (c999 > gmin->size[1]) {
-            emlrtDynamicBoundsCheckR2012b(c999, 1, gmin->size[1], &ug_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c999, 1, gmin->size[1], &ch_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (out_mmd->data[(c_i + out_mmd->size[0]) - 2] > gmin->data[(c_i +
                gmin->size[0] * (c999 - 1)) - 2]) {
             if (2 > out_mmd->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &id_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &pd_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if (c_i > out_mmd->size[0]) {
               emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
-                &fh_emlrtBCI, (emlrtCTX)sp);
+                &mh_emlrtBCI, (emlrtCTX)sp);
             }
 
             if (c_i > gmin->size[0]) {
-              emlrtDynamicBoundsCheckR2012b(c_i, 1, gmin->size[0], &gh_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(c_i, 1, gmin->size[0], &nh_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if (c999 > gmin->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(c999, 1, gmin->size[1], &gh_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(c999, 1, gmin->size[1], &nh_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if (d > b_tmp) {
               if (2 > out_mmd->size[1]) {
                 emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1],
-                  &jd_emlrtBCI, (emlrtCTX)sp);
+                  &qd_emlrtBCI, (emlrtCTX)sp);
               }
 
               if ((int32_T)(c_i + 1U) > out_mmd->size[0]) {
                 emlrtDynamicBoundsCheckR2012b((int32_T)(c_i + 1U), 1,
-                  out_mmd->size[0], &mh_emlrtBCI, (emlrtCTX)sp);
+                  out_mmd->size[0], &th_emlrtBCI, (emlrtCTX)sp);
               }
 
               if ((int32_T)(c_i + 1U) > gmin->size[0]) {
                 emlrtDynamicBoundsCheckR2012b((int32_T)(c_i + 1U), 1, gmin->
-                  size[0], &nh_emlrtBCI, (emlrtCTX)sp);
+                  size[0], &uh_emlrtBCI, (emlrtCTX)sp);
               }
 
               if ((c99 < 1) || (c99 > gmin->size[1])) {
                 emlrtDynamicBoundsCheckR2012b(c99, 1, gmin->size[1],
-                  &nh_emlrtBCI, (emlrtCTX)sp);
+                  &uh_emlrtBCI, (emlrtCTX)sp);
               }
 
               if (out_mmd->data[c_i + out_mmd->size[0]] > gmin->data[c_i +
@@ -4405,22 +4395,22 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
 
         if (guard6) {
           if (2 > out_mmd->size[1]) {
-            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &vc_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &dd_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (c_i > out_mmd->size[0]) {
-            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &xg_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &fh_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (gmin->size[0] < 1) {
             emlrtDynamicBoundsCheckR2012b(gmin->size[0], 1, gmin->size[0],
-              &yg_emlrtBCI, (emlrtCTX)sp);
+              &gh_emlrtBCI, (emlrtCTX)sp);
           }
 
           if ((c99 < 1) || (c99 > gmin->size[1])) {
-            emlrtDynamicBoundsCheckR2012b(c99, 1, gmin->size[1], &yg_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c99, 1, gmin->size[1], &gh_emlrtBCI,
               (emlrtCTX)sp);
           }
 
@@ -4428,23 +4418,23 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
             guard3 = true;
           } else {
             if (2 > out_mmd->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &wc_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &ed_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if (c_i > out_mmd->size[0]) {
               emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
-                &hh_emlrtBCI, (emlrtCTX)sp);
+                &oh_emlrtBCI, (emlrtCTX)sp);
             }
 
             if (c_i > gmin->size[0]) {
-              emlrtDynamicBoundsCheckR2012b(c_i, 1, gmin->size[0], &ih_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(c_i, 1, gmin->size[0], &ph_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if ((c99999 < 1) || (c99999 > gmin->size[1])) {
               emlrtDynamicBoundsCheckR2012b(c99999, 1, gmin->size[1],
-                &ih_emlrtBCI, (emlrtCTX)sp);
+                &ph_emlrtBCI, (emlrtCTX)sp);
             }
 
             if (d > gmin->data[(c_i + gmin->size[0] * (c99999 - 1)) - 1]) {
@@ -4455,22 +4445,22 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
 
         if (guard5) {
           if (2 > out_mmd->size[1]) {
-            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &kd_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &rd_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (c_i > out_mmd->size[0]) {
-            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &kh_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &rh_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (gmin->size[0] < 1) {
             emlrtDynamicBoundsCheckR2012b(gmin->size[0], 1, gmin->size[0],
-              &lh_emlrtBCI, (emlrtCTX)sp);
+              &sh_emlrtBCI, (emlrtCTX)sp);
           }
 
           if ((c99 < 1) || (c99 > gmin->size[1])) {
-            emlrtDynamicBoundsCheckR2012b(c99, 1, gmin->size[1], &lh_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c99, 1, gmin->size[1], &sh_emlrtBCI,
               (emlrtCTX)sp);
           }
 
@@ -4478,23 +4468,23 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
             guard2 = true;
           } else {
             if (2 > out_mmd->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &ld_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &sd_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if (c_i > out_mmd->size[0]) {
               emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
-                &qh_emlrtBCI, (emlrtCTX)sp);
+                &xh_emlrtBCI, (emlrtCTX)sp);
             }
 
             if (c_i > gmin->size[0]) {
-              emlrtDynamicBoundsCheckR2012b(c_i, 1, gmin->size[0], &rh_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(c_i, 1, gmin->size[0], &yh_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if ((c99999 < 1) || (c99999 > gmin->size[1])) {
               emlrtDynamicBoundsCheckR2012b(c99999, 1, gmin->size[1],
-                &rh_emlrtBCI, (emlrtCTX)sp);
+                &yh_emlrtBCI, (emlrtCTX)sp);
             }
 
             if (d > gmin->data[(c_i + gmin->size[0] * (c99999 - 1)) - 1]) {
@@ -4508,55 +4498,55 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
             /*  potential couple of outliers */
             b_signal = 1;
             if (2 > out_mmd->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &ae_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &he_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if (c_i > out_mmd->size[0]) {
               emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
-                &qg_emlrtBCI, (emlrtCTX)sp);
+                &xg_emlrtBCI, (emlrtCTX)sp);
             }
 
             if (c_i > gmin->size[0]) {
-              emlrtDynamicBoundsCheckR2012b(c_i, 1, gmin->size[0], &rg_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(c_i, 1, gmin->size[0], &yg_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if (c999 > gmin->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(c999, 1, gmin->size[1], &rg_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(c999, 1, gmin->size[1], &yg_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if (d > b_tmp) {
               if (c_i > out_mmd->size[0]) {
                 emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
-                  &sg_emlrtBCI, (emlrtCTX)sp);
+                  &ah_emlrtBCI, (emlrtCTX)sp);
               }
 
-              st.site = &pg_emlrtRSI;
-              int2str(&st, out_mmd->data[c_i - 1], dqb_emlrtRSI.data,
-                      dqb_emlrtRSI.size);
-              st.site = &pg_emlrtRSI;
-              int2str(&st, n, dqb_emlrtRSI.data, dqb_emlrtRSI.size);
+              st.site = &wg_emlrtRSI;
+              int2str(&st, out_mmd->data[c_i - 1], xqb_emlrtRSI.data,
+                      xqb_emlrtRSI.size);
+              st.site = &wg_emlrtRSI;
+              int2str(&st, n, xqb_emlrtRSI.data, xqb_emlrtRSI.size);
             }
 
             if (2 > out_mmd->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &be_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &ie_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if (c_i > out_mmd->size[0]) {
               emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
-                &dh_emlrtBCI, (emlrtCTX)sp);
+                &kh_emlrtBCI, (emlrtCTX)sp);
             }
 
             if (gmin->size[0] < 1) {
               emlrtDynamicBoundsCheckR2012b(gmin->size[0], 1, gmin->size[0],
-                &eh_emlrtBCI, (emlrtCTX)sp);
+                &lh_emlrtBCI, (emlrtCTX)sp);
             }
 
             if ((c99 < 1) || (c99 > gmin->size[1])) {
-              emlrtDynamicBoundsCheckR2012b(c99, 1, gmin->size[1], &eh_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(c99, 1, gmin->size[1], &lh_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
@@ -4564,28 +4554,28 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
             {
               if (c_i > out_mmd->size[0]) {
                 emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
-                  &jh_emlrtBCI, (emlrtCTX)sp);
+                  &qh_emlrtBCI, (emlrtCTX)sp);
               }
 
-              st.site = &og_emlrtRSI;
-              int2str(&st, out_mmd->data[c_i - 1], dqb_emlrtRSI.data,
-                      dqb_emlrtRSI.size);
-              st.site = &og_emlrtRSI;
-              int2str(&st, n, dqb_emlrtRSI.data, dqb_emlrtRSI.size);
+              st.site = &vg_emlrtRSI;
+              int2str(&st, out_mmd->data[c_i - 1], xqb_emlrtRSI.data,
+                      xqb_emlrtRSI.size);
+              st.site = &vg_emlrtRSI;
+              int2str(&st, n, xqb_emlrtRSI.data, xqb_emlrtRSI.size);
             }
 
             if (c_i > out_mmd->size[0]) {
               emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
-                &ce_emlrtBCI, (emlrtCTX)sp);
+                &je_emlrtBCI, (emlrtCTX)sp);
             }
 
             if (1 > out_mmd->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(1, 1, out_mmd->size[1], &uk_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(1, 1, out_mmd->size[1], &cl_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if (2 > out_mmd->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &uk_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &cl_emlrtBCI,
                 (emlrtCTX)sp);
             }
           } else {
@@ -4595,231 +4585,231 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
 
         if (guard3) {
           if (2 > out_mmd->size[1]) {
-            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &xc_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &fd_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (c_i > out_mmd->size[0]) {
-            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &oh_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &vh_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (c_i > gmin->size[0]) {
-            emlrtDynamicBoundsCheckR2012b(c_i, 1, gmin->size[0], &ph_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c_i, 1, gmin->size[0], &wh_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (c9999 > gmin->size[1]) {
-            emlrtDynamicBoundsCheckR2012b(c9999, 1, gmin->size[1], &ph_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c9999, 1, gmin->size[1], &wh_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (d > b_tmp) {
             if (2 > out_mmd->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &yc_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &gd_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if (((int32_T)(c_i + 1U) < 1) || ((int32_T)(c_i + 1U) >
                  out_mmd->size[0])) {
               emlrtDynamicBoundsCheckR2012b((int32_T)(c_i + 1U), 1,
-                out_mmd->size[0], &uh_emlrtBCI, (emlrtCTX)sp);
+                out_mmd->size[0], &ci_emlrtBCI, (emlrtCTX)sp);
             }
 
             if (((int32_T)(c_i + 1U) < 1) || ((int32_T)(c_i + 1U) > gmin->size[0]))
             {
               emlrtDynamicBoundsCheckR2012b((int32_T)(c_i + 1U), 1, gmin->size[0],
-                &vh_emlrtBCI, (emlrtCTX)sp);
+                &di_emlrtBCI, (emlrtCTX)sp);
             }
 
             if (c9999 > gmin->size[1]) {
               emlrtDynamicBoundsCheckR2012b(c9999, 1, gmin->size[1],
-                &vh_emlrtBCI, (emlrtCTX)sp);
+                &di_emlrtBCI, (emlrtCTX)sp);
             }
 
             if (out_mmd->data[c_i + out_mmd->size[0]] > gmin->data[c_i +
                 gmin->size[0] * (c9999 - 1)]) {
               if (2 > out_mmd->size[1]) {
                 emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1],
-                  &ad_emlrtBCI, (emlrtCTX)sp);
+                  &hd_emlrtBCI, (emlrtCTX)sp);
               }
 
               if ((c_i - 1 < 1) || (c_i - 1 > out_mmd->size[0])) {
                 emlrtDynamicBoundsCheckR2012b(c_i - 1, 1, out_mmd->size[0],
-                  &bi_emlrtBCI, (emlrtCTX)sp);
+                  &ii_emlrtBCI, (emlrtCTX)sp);
               }
 
               if ((c_i - 1 < 1) || (c_i - 1 > gmin->size[0])) {
                 emlrtDynamicBoundsCheckR2012b(c_i - 1, 1, gmin->size[0],
-                  &ci_emlrtBCI, (emlrtCTX)sp);
+                  &ji_emlrtBCI, (emlrtCTX)sp);
               }
 
               if (c9999 > gmin->size[1]) {
                 emlrtDynamicBoundsCheckR2012b(c9999, 1, gmin->size[1],
-                  &ci_emlrtBCI, (emlrtCTX)sp);
+                  &ji_emlrtBCI, (emlrtCTX)sp);
               }
 
               if (out_mmd->data[(c_i + out_mmd->size[0]) - 2] > gmin->data[(c_i
                    + gmin->size[0] * (c9999 - 1)) - 2]) {
                 if (c_i > out_mmd->size[0]) {
                   emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
-                    &fi_emlrtBCI, (emlrtCTX)sp);
-                }
-
-                st.site = &wg_emlrtRSI;
-                int2str(&st, out_mmd->data[c_i - 1], dqb_emlrtRSI.data,
-                        dqb_emlrtRSI.size);
-                st.site = &wg_emlrtRSI;
-                int2str(&st, n, dqb_emlrtRSI.data, dqb_emlrtRSI.size);
-                if ((c_i - 1 < 1) || (c_i - 1 > out_mmd->size[0])) {
-                  emlrtDynamicBoundsCheckR2012b(c_i - 1, 1, out_mmd->size[0],
                     &mi_emlrtBCI, (emlrtCTX)sp);
                 }
 
-                st.site = &wg_emlrtRSI;
-                int2str(&st, out_mmd->data[c_i - 2], dqb_emlrtRSI.data,
-                        dqb_emlrtRSI.size);
-                st.site = &wg_emlrtRSI;
-                int2str(&st, n, dqb_emlrtRSI.data, dqb_emlrtRSI.size);
+                st.site = &eh_emlrtRSI;
+                int2str(&st, out_mmd->data[c_i - 1], xqb_emlrtRSI.data,
+                        xqb_emlrtRSI.size);
+                st.site = &eh_emlrtRSI;
+                int2str(&st, n, xqb_emlrtRSI.data, xqb_emlrtRSI.size);
+                if ((c_i - 1 < 1) || (c_i - 1 > out_mmd->size[0])) {
+                  emlrtDynamicBoundsCheckR2012b(c_i - 1, 1, out_mmd->size[0],
+                    &ti_emlrtBCI, (emlrtCTX)sp);
+                }
+
+                st.site = &eh_emlrtRSI;
+                int2str(&st, out_mmd->data[c_i - 2], xqb_emlrtRSI.data,
+                        xqb_emlrtRSI.size);
+                st.site = &eh_emlrtRSI;
+                int2str(&st, n, xqb_emlrtRSI.data, xqb_emlrtRSI.size);
                 if (((int32_T)(c_i + 1U) < 1) || ((int32_T)(c_i + 1U) >
                      out_mmd->size[0])) {
                   emlrtDynamicBoundsCheckR2012b((int32_T)(c_i + 1U), 1,
-                    out_mmd->size[0], &wi_emlrtBCI, (emlrtCTX)sp);
+                    out_mmd->size[0], &ej_emlrtBCI, (emlrtCTX)sp);
                 }
 
-                st.site = &wg_emlrtRSI;
-                int2str(&st, out_mmd->data[c_i], dqb_emlrtRSI.data,
-                        dqb_emlrtRSI.size);
-                st.site = &wg_emlrtRSI;
-                int2str(&st, n, dqb_emlrtRSI.data, dqb_emlrtRSI.size);
+                st.site = &eh_emlrtRSI;
+                int2str(&st, out_mmd->data[c_i], xqb_emlrtRSI.data,
+                        xqb_emlrtRSI.size);
+                st.site = &eh_emlrtRSI;
+                int2str(&st, n, xqb_emlrtRSI.data, xqb_emlrtRSI.size);
                 if ((c_i + -1 < 1) || (c_i + -1 > out_mmd->size[0])) {
                   emlrtDynamicBoundsCheckR2012b(c_i + -1, 1, out_mmd->size[0],
-                    &nk_emlrtBCI, (emlrtCTX)sp);
+                    &uk_emlrtBCI, (emlrtCTX)sp);
                 }
 
                 if (c_i > out_mmd->size[0]) {
                   emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
-                    &nk_emlrtBCI, (emlrtCTX)sp);
+                    &uk_emlrtBCI, (emlrtCTX)sp);
                 }
 
                 if ((c_i + 1 < 1) || (c_i + 1 > out_mmd->size[0])) {
                   emlrtDynamicBoundsCheckR2012b(c_i + 1, 1, out_mmd->size[0],
-                    &nk_emlrtBCI, (emlrtCTX)sp);
+                    &uk_emlrtBCI, (emlrtCTX)sp);
                 }
 
                 if (1 > out_mmd->size[1]) {
                   emlrtDynamicBoundsCheckR2012b(1, 1, out_mmd->size[1],
-                    &mk_emlrtBCI, (emlrtCTX)sp);
+                    &tk_emlrtBCI, (emlrtCTX)sp);
                 }
 
                 if (2 > out_mmd->size[1]) {
                   emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1],
-                    &mk_emlrtBCI, (emlrtCTX)sp);
+                    &tk_emlrtBCI, (emlrtCTX)sp);
                 }
               }
             }
           }
 
           if (2 > out_mmd->size[1]) {
-            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &bd_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &id_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (c_i > out_mmd->size[0]) {
-            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &di_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &ki_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (c_i > gmin->size[0]) {
-            emlrtDynamicBoundsCheckR2012b(c_i, 1, gmin->size[0], &ei_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c_i, 1, gmin->size[0], &li_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if ((c99999 < 1) || (c99999 > gmin->size[1])) {
-            emlrtDynamicBoundsCheckR2012b(c99999, 1, gmin->size[1], &ei_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c99999, 1, gmin->size[1], &li_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (d > gmin->data[(c_i + gmin->size[0] * (c99999 - 1)) - 1]) {
             if (c_i > out_mmd->size[0]) {
               emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
-                &ii_emlrtBCI, (emlrtCTX)sp);
+                &pi_emlrtBCI, (emlrtCTX)sp);
             }
 
-            st.site = &vg_emlrtRSI;
-            int2str(&st, out_mmd->data[c_i - 1], dqb_emlrtRSI.data,
-                    dqb_emlrtRSI.size);
-            st.site = &vg_emlrtRSI;
-            int2str(&st, n, dqb_emlrtRSI.data, dqb_emlrtRSI.size);
+            st.site = &dh_emlrtRSI;
+            int2str(&st, out_mmd->data[c_i - 1], xqb_emlrtRSI.data,
+                    xqb_emlrtRSI.size);
+            st.site = &dh_emlrtRSI;
+            int2str(&st, n, xqb_emlrtRSI.data, xqb_emlrtRSI.size);
             if ((c_i + -1 < 1) || (c_i + -1 > out_mmd->size[0])) {
               emlrtDynamicBoundsCheckR2012b(c_i + -1, 1, out_mmd->size[0],
-                &lk_emlrtBCI, (emlrtCTX)sp);
+                &sk_emlrtBCI, (emlrtCTX)sp);
             }
 
             if (c_i > out_mmd->size[0]) {
               emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
-                &lk_emlrtBCI, (emlrtCTX)sp);
+                &sk_emlrtBCI, (emlrtCTX)sp);
             }
 
             if ((c_i + 1 < 1) || (c_i + 1 > out_mmd->size[0])) {
               emlrtDynamicBoundsCheckR2012b(c_i + 1, 1, out_mmd->size[0],
-                &lk_emlrtBCI, (emlrtCTX)sp);
+                &sk_emlrtBCI, (emlrtCTX)sp);
             }
 
             if (1 > out_mmd->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(1, 1, out_mmd->size[1], &kk_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(1, 1, out_mmd->size[1], &rk_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if (2 > out_mmd->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &kk_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &rk_emlrtBCI,
                 (emlrtCTX)sp);
             }
           }
 
           if (2 > out_mmd->size[1]) {
-            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &cd_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &jd_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (c_i > out_mmd->size[0]) {
-            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &ni_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &ui_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (gmin->size[0] < 1) {
             emlrtDynamicBoundsCheckR2012b(gmin->size[0], 1, gmin->size[0],
-              &oi_emlrtBCI, (emlrtCTX)sp);
+              &vi_emlrtBCI, (emlrtCTX)sp);
           }
 
           if ((c99 < 1) || (c99 > gmin->size[1])) {
-            emlrtDynamicBoundsCheckR2012b(c99, 1, gmin->size[1], &oi_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c99, 1, gmin->size[1], &vi_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (d > gmin->data[(gmin->size[0] + gmin->size[0] * (c99 - 1)) - 1]) {
             if (c_i > out_mmd->size[0]) {
               emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
-                &vi_emlrtBCI, (emlrtCTX)sp);
+                &dj_emlrtBCI, (emlrtCTX)sp);
             }
 
-            st.site = &ug_emlrtRSI;
-            int2str(&st, out_mmd->data[c_i - 1], dqb_emlrtRSI.data,
-                    dqb_emlrtRSI.size);
-            st.site = &ug_emlrtRSI;
-            int2str(&st, n, dqb_emlrtRSI.data, dqb_emlrtRSI.size);
+            st.site = &ch_emlrtRSI;
+            int2str(&st, out_mmd->data[c_i - 1], xqb_emlrtRSI.data,
+                    xqb_emlrtRSI.size);
+            st.site = &ch_emlrtRSI;
+            int2str(&st, n, xqb_emlrtRSI.data, xqb_emlrtRSI.size);
             if (c_i > out_mmd->size[0]) {
               emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
-                &dd_emlrtBCI, (emlrtCTX)sp);
+                &kd_emlrtBCI, (emlrtCTX)sp);
             }
 
             if (1 > out_mmd->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(1, 1, out_mmd->size[1], &jk_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(1, 1, out_mmd->size[1], &qk_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if (2 > out_mmd->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &jk_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &qk_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
@@ -4833,48 +4823,48 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
 
         if (guard2) {
           if (c_i > out_mmd->size[0]) {
-            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &md_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &td_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (2 > out_mmd->size[1]) {
-            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &nd_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &ud_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (c_i > out_mmd->size[0]) {
-            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &sh_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &ai_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (c_i > gmin->size[0]) {
-            emlrtDynamicBoundsCheckR2012b(c_i, 1, gmin->size[0], &th_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c_i, 1, gmin->size[0], &bi_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (c999 > gmin->size[1]) {
-            emlrtDynamicBoundsCheckR2012b(c999, 1, gmin->size[1], &th_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c999, 1, gmin->size[1], &bi_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (d > b_tmp) {
             if (2 > out_mmd->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &od_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &vd_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if ((int32_T)(c_i + 1U) > out_mmd->size[0]) {
               emlrtDynamicBoundsCheckR2012b((int32_T)(c_i + 1U), 1,
-                out_mmd->size[0], &yh_emlrtBCI, (emlrtCTX)sp);
+                out_mmd->size[0], &gi_emlrtBCI, (emlrtCTX)sp);
             }
 
             if ((int32_T)(c_i + 1U) > gmin->size[0]) {
               emlrtDynamicBoundsCheckR2012b((int32_T)(c_i + 1U), 1, gmin->size[0],
-                &ai_emlrtBCI, (emlrtCTX)sp);
+                &hi_emlrtBCI, (emlrtCTX)sp);
             }
 
             if (c999 > gmin->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(c999, 1, gmin->size[1], &ai_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(c999, 1, gmin->size[1], &hi_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
@@ -4882,343 +4872,286 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
                 gmin->size[0] * (c999 - 1)]) {
               if (2 > out_mmd->size[1]) {
                 emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1],
-                  &pd_emlrtBCI, (emlrtCTX)sp);
+                  &wd_emlrtBCI, (emlrtCTX)sp);
               }
 
               if ((c_i - 1 < 1) || (c_i - 1 > out_mmd->size[0])) {
                 emlrtDynamicBoundsCheckR2012b(c_i - 1, 1, out_mmd->size[0],
-                  &gi_emlrtBCI, (emlrtCTX)sp);
+                  &ni_emlrtBCI, (emlrtCTX)sp);
               }
 
               if ((c_i - 1 < 1) || (c_i - 1 > gmin->size[0])) {
                 emlrtDynamicBoundsCheckR2012b(c_i - 1, 1, gmin->size[0],
-                  &hi_emlrtBCI, (emlrtCTX)sp);
+                  &oi_emlrtBCI, (emlrtCTX)sp);
               }
 
               if (c99 > gmin->size[1]) {
                 emlrtDynamicBoundsCheckR2012b(c99, 1, gmin->size[1],
-                  &hi_emlrtBCI, (emlrtCTX)sp);
+                  &oi_emlrtBCI, (emlrtCTX)sp);
               }
 
               if (out_mmd->data[(c_i + out_mmd->size[0]) - 2] > gmin->data[(c_i
                    + gmin->size[0] * (c99 - 1)) - 2]) {
                 if (c_i > out_mmd->size[0]) {
                   emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
-                    &li_emlrtBCI, (emlrtCTX)sp);
+                    &si_emlrtBCI, (emlrtCTX)sp);
                 }
 
-                st.site = &tg_emlrtRSI;
-                int2str(&st, out_mmd->data[c_i - 1], dqb_emlrtRSI.data,
-                        dqb_emlrtRSI.size);
-                st.site = &tg_emlrtRSI;
-                int2str(&st, n, dqb_emlrtRSI.data, dqb_emlrtRSI.size);
+                st.site = &bh_emlrtRSI;
+                int2str(&st, out_mmd->data[c_i - 1], xqb_emlrtRSI.data,
+                        xqb_emlrtRSI.size);
+                st.site = &bh_emlrtRSI;
+                int2str(&st, n, xqb_emlrtRSI.data, xqb_emlrtRSI.size);
                 if ((c_i - 1 < 1) || (c_i - 1 > out_mmd->size[0])) {
                   emlrtDynamicBoundsCheckR2012b(c_i - 1, 1, out_mmd->size[0],
-                    &ui_emlrtBCI, (emlrtCTX)sp);
+                    &cj_emlrtBCI, (emlrtCTX)sp);
                 }
 
-                st.site = &tg_emlrtRSI;
-                int2str(&st, out_mmd->data[c_i - 2], dqb_emlrtRSI.data,
-                        dqb_emlrtRSI.size);
-                st.site = &tg_emlrtRSI;
-                int2str(&st, n, dqb_emlrtRSI.data, dqb_emlrtRSI.size);
+                st.site = &bh_emlrtRSI;
+                int2str(&st, out_mmd->data[c_i - 2], xqb_emlrtRSI.data,
+                        xqb_emlrtRSI.size);
+                st.site = &bh_emlrtRSI;
+                int2str(&st, n, xqb_emlrtRSI.data, xqb_emlrtRSI.size);
                 if ((int32_T)(c_i + 1U) > out_mmd->size[0]) {
                   emlrtDynamicBoundsCheckR2012b((int32_T)(c_i + 1U), 1,
-                    out_mmd->size[0], &dj_emlrtBCI, (emlrtCTX)sp);
+                    out_mmd->size[0], &kj_emlrtBCI, (emlrtCTX)sp);
                 }
 
-                st.site = &tg_emlrtRSI;
-                int2str(&st, out_mmd->data[c_i], dqb_emlrtRSI.data,
-                        dqb_emlrtRSI.size);
-                st.site = &tg_emlrtRSI;
-                int2str(&st, n, dqb_emlrtRSI.data, dqb_emlrtRSI.size);
+                st.site = &bh_emlrtRSI;
+                int2str(&st, out_mmd->data[c_i], xqb_emlrtRSI.data,
+                        xqb_emlrtRSI.size);
+                st.site = &bh_emlrtRSI;
+                int2str(&st, n, xqb_emlrtRSI.data, xqb_emlrtRSI.size);
                 if ((c_i + -1 < 1) || (c_i + -1 > out_mmd->size[0])) {
                   emlrtDynamicBoundsCheckR2012b(c_i + -1, 1, out_mmd->size[0],
-                    &tk_emlrtBCI, (emlrtCTX)sp);
+                    &bl_emlrtBCI, (emlrtCTX)sp);
                 }
 
                 if (c_i > out_mmd->size[0]) {
                   emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
-                    &tk_emlrtBCI, (emlrtCTX)sp);
+                    &bl_emlrtBCI, (emlrtCTX)sp);
                 }
 
                 if (c_i + 1 > out_mmd->size[0]) {
                   emlrtDynamicBoundsCheckR2012b(c_i + 1, 1, out_mmd->size[0],
-                    &tk_emlrtBCI, (emlrtCTX)sp);
+                    &bl_emlrtBCI, (emlrtCTX)sp);
                 }
 
                 if (1 > out_mmd->size[1]) {
                   emlrtDynamicBoundsCheckR2012b(1, 1, out_mmd->size[1],
-                    &sk_emlrtBCI, (emlrtCTX)sp);
+                    &al_emlrtBCI, (emlrtCTX)sp);
                 }
 
                 if (2 > out_mmd->size[1]) {
                   emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1],
-                    &sk_emlrtBCI, (emlrtCTX)sp);
+                    &al_emlrtBCI, (emlrtCTX)sp);
                 }
               }
             }
           }
 
           if (2 > out_mmd->size[1]) {
-            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &qd_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &xd_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if ((c_i - 1 < 1) || (c_i - 1 > out_mmd->size[0])) {
             emlrtDynamicBoundsCheckR2012b(c_i - 1, 1, out_mmd->size[0],
-              &ji_emlrtBCI, (emlrtCTX)sp);
+              &qi_emlrtBCI, (emlrtCTX)sp);
           }
 
           if ((c_i - 1 < 1) || (c_i - 1 > gmin->size[0])) {
             emlrtDynamicBoundsCheckR2012b(c_i - 1, 1, gmin->size[0],
-              &ki_emlrtBCI, (emlrtCTX)sp);
+              &ri_emlrtBCI, (emlrtCTX)sp);
           }
 
           if (c999 > gmin->size[1]) {
-            emlrtDynamicBoundsCheckR2012b(c999, 1, gmin->size[1], &ki_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c999, 1, gmin->size[1], &ri_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (out_mmd->data[(c_i + out_mmd->size[0]) - 2] > gmin->data[(c_i +
                gmin->size[0] * (c999 - 1)) - 2]) {
             if (2 > out_mmd->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &rd_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &yd_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if (c_i > out_mmd->size[0]) {
               emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
-                &si_emlrtBCI, (emlrtCTX)sp);
+                &aj_emlrtBCI, (emlrtCTX)sp);
             }
 
             if (c_i > gmin->size[0]) {
-              emlrtDynamicBoundsCheckR2012b(c_i, 1, gmin->size[0], &ti_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(c_i, 1, gmin->size[0], &bj_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if (c999 > gmin->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(c999, 1, gmin->size[1], &ti_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(c999, 1, gmin->size[1], &bj_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if (d > b_tmp) {
               if (2 > out_mmd->size[1]) {
                 emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1],
-                  &sd_emlrtBCI, (emlrtCTX)sp);
+                  &ae_emlrtBCI, (emlrtCTX)sp);
               }
 
               if ((int32_T)(c_i + 1U) > out_mmd->size[0]) {
                 emlrtDynamicBoundsCheckR2012b((int32_T)(c_i + 1U), 1,
-                  out_mmd->size[0], &bj_emlrtBCI, (emlrtCTX)sp);
+                  out_mmd->size[0], &ij_emlrtBCI, (emlrtCTX)sp);
               }
 
               if ((int32_T)(c_i + 1U) > gmin->size[0]) {
                 emlrtDynamicBoundsCheckR2012b((int32_T)(c_i + 1U), 1, gmin->
-                  size[0], &cj_emlrtBCI, (emlrtCTX)sp);
+                  size[0], &jj_emlrtBCI, (emlrtCTX)sp);
               }
 
               if (c99 > gmin->size[1]) {
                 emlrtDynamicBoundsCheckR2012b(c99, 1, gmin->size[1],
-                  &cj_emlrtBCI, (emlrtCTX)sp);
+                  &jj_emlrtBCI, (emlrtCTX)sp);
               }
 
               if (out_mmd->data[c_i + out_mmd->size[0]] > gmin->data[c_i +
                   gmin->size[0] * (c99 - 1)]) {
                 if (c_i > out_mmd->size[0]) {
                   emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
-                    &hj_emlrtBCI, (emlrtCTX)sp);
-                }
-
-                st.site = &sg_emlrtRSI;
-                int2str(&st, out_mmd->data[c_i - 1], dqb_emlrtRSI.data,
-                        dqb_emlrtRSI.size);
-                st.site = &sg_emlrtRSI;
-                int2str(&st, n, dqb_emlrtRSI.data, dqb_emlrtRSI.size);
-                if ((c_i - 1 < 1) || (c_i - 1 > out_mmd->size[0])) {
-                  emlrtDynamicBoundsCheckR2012b(c_i - 1, 1, out_mmd->size[0],
                     &oj_emlrtBCI, (emlrtCTX)sp);
                 }
 
-                st.site = &sg_emlrtRSI;
-                int2str(&st, out_mmd->data[c_i - 2], dqb_emlrtRSI.data,
-                        dqb_emlrtRSI.size);
-                st.site = &sg_emlrtRSI;
-                int2str(&st, n, dqb_emlrtRSI.data, dqb_emlrtRSI.size);
-                if ((int32_T)(c_i + 1U) > out_mmd->size[0]) {
-                  emlrtDynamicBoundsCheckR2012b((int32_T)(c_i + 1U), 1,
-                    out_mmd->size[0], &uj_emlrtBCI, (emlrtCTX)sp);
+                st.site = &ah_emlrtRSI;
+                int2str(&st, out_mmd->data[c_i - 1], xqb_emlrtRSI.data,
+                        xqb_emlrtRSI.size);
+                st.site = &ah_emlrtRSI;
+                int2str(&st, n, xqb_emlrtRSI.data, xqb_emlrtRSI.size);
+                if ((c_i - 1 < 1) || (c_i - 1 > out_mmd->size[0])) {
+                  emlrtDynamicBoundsCheckR2012b(c_i - 1, 1, out_mmd->size[0],
+                    &vj_emlrtBCI, (emlrtCTX)sp);
                 }
 
-                st.site = &sg_emlrtRSI;
-                int2str(&st, out_mmd->data[c_i], dqb_emlrtRSI.data,
-                        dqb_emlrtRSI.size);
-                st.site = &sg_emlrtRSI;
-                int2str(&st, n, dqb_emlrtRSI.data, dqb_emlrtRSI.size);
+                st.site = &ah_emlrtRSI;
+                int2str(&st, out_mmd->data[c_i - 2], xqb_emlrtRSI.data,
+                        xqb_emlrtRSI.size);
+                st.site = &ah_emlrtRSI;
+                int2str(&st, n, xqb_emlrtRSI.data, xqb_emlrtRSI.size);
+                if ((int32_T)(c_i + 1U) > out_mmd->size[0]) {
+                  emlrtDynamicBoundsCheckR2012b((int32_T)(c_i + 1U), 1,
+                    out_mmd->size[0], &ck_emlrtBCI, (emlrtCTX)sp);
+                }
+
+                st.site = &ah_emlrtRSI;
+                int2str(&st, out_mmd->data[c_i], xqb_emlrtRSI.data,
+                        xqb_emlrtRSI.size);
+                st.site = &ah_emlrtRSI;
+                int2str(&st, n, xqb_emlrtRSI.data, xqb_emlrtRSI.size);
                 if ((c_i + -1 < 1) || (c_i + -1 > out_mmd->size[0])) {
                   emlrtDynamicBoundsCheckR2012b(c_i + -1, 1, out_mmd->size[0],
-                    &rk_emlrtBCI, (emlrtCTX)sp);
+                    &yk_emlrtBCI, (emlrtCTX)sp);
                 }
 
                 if (c_i > out_mmd->size[0]) {
                   emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
-                    &rk_emlrtBCI, (emlrtCTX)sp);
+                    &yk_emlrtBCI, (emlrtCTX)sp);
                 }
 
                 if (c_i + 1 > out_mmd->size[0]) {
                   emlrtDynamicBoundsCheckR2012b(c_i + 1, 1, out_mmd->size[0],
-                    &rk_emlrtBCI, (emlrtCTX)sp);
+                    &yk_emlrtBCI, (emlrtCTX)sp);
                 }
 
                 if (1 > out_mmd->size[1]) {
                   emlrtDynamicBoundsCheckR2012b(1, 1, out_mmd->size[1],
-                    &qk_emlrtBCI, (emlrtCTX)sp);
+                    &xk_emlrtBCI, (emlrtCTX)sp);
                 }
 
                 if (2 > out_mmd->size[1]) {
                   emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1],
-                    &qk_emlrtBCI, (emlrtCTX)sp);
+                    &xk_emlrtBCI, (emlrtCTX)sp);
                 }
               }
             }
           }
 
           if (2 > out_mmd->size[1]) {
-            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &td_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &be_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (c_i > out_mmd->size[0]) {
-            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &fj_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &mj_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (gmin->size[0] < 1) {
             emlrtDynamicBoundsCheckR2012b(gmin->size[0], 1, gmin->size[0],
-              &gj_emlrtBCI, (emlrtCTX)sp);
+              &nj_emlrtBCI, (emlrtCTX)sp);
           }
 
           if (c99 > gmin->size[1]) {
-            emlrtDynamicBoundsCheckR2012b(c99, 1, gmin->size[1], &gj_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c99, 1, gmin->size[1], &nj_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (d > gmin->data[(gmin->size[0] + gmin->size[0] * (c99 - 1)) - 1]) {
             if (c_i > out_mmd->size[0]) {
               emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
-                &lj_emlrtBCI, (emlrtCTX)sp);
+                &sj_emlrtBCI, (emlrtCTX)sp);
             }
 
-            st.site = &rg_emlrtRSI;
-            int2str(&st, out_mmd->data[c_i - 1], dqb_emlrtRSI.data,
-                    dqb_emlrtRSI.size);
-            st.site = &rg_emlrtRSI;
-            int2str(&st, n, dqb_emlrtRSI.data, dqb_emlrtRSI.size);
+            st.site = &yg_emlrtRSI;
+            int2str(&st, out_mmd->data[c_i - 1], xqb_emlrtRSI.data,
+                    xqb_emlrtRSI.size);
+            st.site = &yg_emlrtRSI;
+            int2str(&st, n, xqb_emlrtRSI.data, xqb_emlrtRSI.size);
             if (c_i > out_mmd->size[0]) {
               emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
-                &ud_emlrtBCI, (emlrtCTX)sp);
+                &ce_emlrtBCI, (emlrtCTX)sp);
             }
 
             if (1 > out_mmd->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(1, 1, out_mmd->size[1], &pk_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(1, 1, out_mmd->size[1], &wk_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if (2 > out_mmd->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &pk_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &wk_emlrtBCI,
                 (emlrtCTX)sp);
             }
           }
 
           /*  Extreme single value */
           if (2 > out_mmd->size[1]) {
-            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &vd_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &de_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (c_i > out_mmd->size[0]) {
-            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &sj_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &ak_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (c_i > gmin->size[0]) {
-            emlrtDynamicBoundsCheckR2012b(c_i, 1, gmin->size[0], &tj_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c_i, 1, gmin->size[0], &bk_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if ((c99999 < 1) || (c99999 > gmin->size[1])) {
-            emlrtDynamicBoundsCheckR2012b(c99999, 1, gmin->size[1], &tj_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c99999, 1, gmin->size[1], &bk_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (d > gmin->data[(c_i + gmin->size[0] * (c99999 - 1)) - 1]) {
             if (c_i > out_mmd->size[0]) {
               emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
-                &wj_emlrtBCI, (emlrtCTX)sp);
+                &ek_emlrtBCI, (emlrtCTX)sp);
             }
 
-            st.site = &qg_emlrtRSI;
-            int2str(&st, out_mmd->data[c_i - 1], dqb_emlrtRSI.data,
-                    dqb_emlrtRSI.size);
-            st.site = &qg_emlrtRSI;
-            int2str(&st, n, dqb_emlrtRSI.data, dqb_emlrtRSI.size);
-            if (c_i > out_mmd->size[0]) {
-              emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
-                &wd_emlrtBCI, (emlrtCTX)sp);
-            }
-
-            if (1 > out_mmd->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(1, 1, out_mmd->size[1], &ok_emlrtBCI,
-                (emlrtCTX)sp);
-            }
-
-            if (2 > out_mmd->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &ok_emlrtBCI,
-                (emlrtCTX)sp);
-            }
-          }
-
-          /*  Signal is always considered true if it takes place in the */
-          /*  final part of the search */
-          NoFalseSig = true;
-          b_signal = 1;
-        }
-
-        if (b_guard1) {
-          if (2 > out_mmd->size[1]) {
-            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &de_emlrtBCI,
-              (emlrtCTX)sp);
-          }
-
-          if (c_i > out_mmd->size[0]) {
-            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &kg_emlrtBCI,
-              (emlrtCTX)sp);
-          }
-
-          if (c_i > gmin->size[0]) {
-            emlrtDynamicBoundsCheckR2012b(c_i, 1, gmin->size[0], &lg_emlrtBCI,
-              (emlrtCTX)sp);
-          }
-
-          if ((c99 < 1) || (c99 > gmin->size[1])) {
-            emlrtDynamicBoundsCheckR2012b(c99, 1, gmin->size[1], &lg_emlrtBCI,
-              (emlrtCTX)sp);
-          }
-
-          if ((d > gmin->data[(c_i + gmin->size[0] * (c99 - 1)) - 1]) && (c_i ==
-               out_mmd->size[0])) {
-            /*  a single outlier */
-            b_signal = 1;
-            if (c_i > out_mmd->size[0]) {
-              emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
-                &ch_emlrtBCI, (emlrtCTX)sp);
-            }
-
-            st.site = &ng_emlrtRSI;
-            int2str(&st, out_mmd->data[c_i - 1], dqb_emlrtRSI.data,
-                    dqb_emlrtRSI.size);
-            st.site = &ng_emlrtRSI;
-            int2str(&st, n, dqb_emlrtRSI.data, dqb_emlrtRSI.size);
+            st.site = &xg_emlrtRSI;
+            int2str(&st, out_mmd->data[c_i - 1], xqb_emlrtRSI.data,
+                    xqb_emlrtRSI.size);
+            st.site = &xg_emlrtRSI;
+            int2str(&st, n, xqb_emlrtRSI.data, xqb_emlrtRSI.size);
             if (c_i > out_mmd->size[0]) {
               emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
                 &ee_emlrtBCI, (emlrtCTX)sp);
@@ -5234,19 +5167,76 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
                 (emlrtCTX)sp);
             }
           }
+
+          /*  Signal is always considered true if it takes place in the */
+          /*  final part of the search */
+          NoFalseSig = true;
+          b_signal = 1;
+        }
+
+        if (b_guard1) {
+          if (2 > out_mmd->size[1]) {
+            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &ke_emlrtBCI,
+              (emlrtCTX)sp);
+          }
+
+          if (c_i > out_mmd->size[0]) {
+            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &rg_emlrtBCI,
+              (emlrtCTX)sp);
+          }
+
+          if (c_i > gmin->size[0]) {
+            emlrtDynamicBoundsCheckR2012b(c_i, 1, gmin->size[0], &sg_emlrtBCI,
+              (emlrtCTX)sp);
+          }
+
+          if ((c99 < 1) || (c99 > gmin->size[1])) {
+            emlrtDynamicBoundsCheckR2012b(c99, 1, gmin->size[1], &sg_emlrtBCI,
+              (emlrtCTX)sp);
+          }
+
+          if ((d > gmin->data[(c_i + gmin->size[0] * (c99 - 1)) - 1]) && (c_i ==
+               out_mmd->size[0])) {
+            /*  a single outlier */
+            b_signal = 1;
+            if (c_i > out_mmd->size[0]) {
+              emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
+                &jh_emlrtBCI, (emlrtCTX)sp);
+            }
+
+            st.site = &ug_emlrtRSI;
+            int2str(&st, out_mmd->data[c_i - 1], xqb_emlrtRSI.data,
+                    xqb_emlrtRSI.size);
+            st.site = &ug_emlrtRSI;
+            int2str(&st, n, xqb_emlrtRSI.data, xqb_emlrtRSI.size);
+            if (c_i > out_mmd->size[0]) {
+              emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
+                &le_emlrtBCI, (emlrtCTX)sp);
+            }
+
+            if (1 > out_mmd->size[1]) {
+              emlrtDynamicBoundsCheckR2012b(1, 1, out_mmd->size[1], &dl_emlrtBCI,
+                (emlrtCTX)sp);
+            }
+
+            if (2 > out_mmd->size[1]) {
+              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &dl_emlrtBCI,
+                (emlrtCTX)sp);
+            }
+          }
         }
 
         /*         %% Stage 1b: signal validation */
         if (b_signal == 1) {
           /*  mdag is $m^\dagger$ */
           if (c_i > out_mmd->size[0]) {
-            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &wh_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &ei_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           incre = out_mmd->data[c_i - 1];
           if (c_i > out_mmd->size[0]) {
-            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &xh_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &fi_emlrtBCI,
               (emlrtCTX)sp);
           }
 
@@ -5255,69 +5245,69 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
             /*  Incontrovertible signal = 3 consecutive values of d_min > */
             /*  99.999% threshold */
             if (2 > out_mmd->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &fe_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &me_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if (c_i > out_mmd->size[0]) {
               emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
-                &qi_emlrtBCI, (emlrtCTX)sp);
+                &xi_emlrtBCI, (emlrtCTX)sp);
             }
 
             if (c_i > gmin->size[0]) {
-              emlrtDynamicBoundsCheckR2012b(c_i, 1, gmin->size[0], &ri_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(c_i, 1, gmin->size[0], &yi_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if ((c99999 < 1) || (c99999 > gmin->size[1])) {
               emlrtDynamicBoundsCheckR2012b(c99999, 1, gmin->size[1],
-                &ri_emlrtBCI, (emlrtCTX)sp);
+                &yi_emlrtBCI, (emlrtCTX)sp);
             }
 
             if (out_mmd->data[(c_i + out_mmd->size[0]) - 1] > gmin->data[(c_i +
                  gmin->size[0] * (c99999 - 1)) - 1]) {
               if (2 > out_mmd->size[1]) {
                 emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1],
-                  &ge_emlrtBCI, (emlrtCTX)sp);
+                  &ne_emlrtBCI, (emlrtCTX)sp);
               }
 
               if ((c_i - 1 < 1) || (c_i - 1 > out_mmd->size[0])) {
                 emlrtDynamicBoundsCheckR2012b(c_i - 1, 1, out_mmd->size[0],
-                  &yi_emlrtBCI, (emlrtCTX)sp);
+                  &gj_emlrtBCI, (emlrtCTX)sp);
               }
 
               if ((c_i - 1 < 1) || (c_i - 1 > gmin->size[0])) {
                 emlrtDynamicBoundsCheckR2012b(c_i - 1, 1, gmin->size[0],
-                  &aj_emlrtBCI, (emlrtCTX)sp);
+                  &hj_emlrtBCI, (emlrtCTX)sp);
               }
 
               if (c99999 > gmin->size[1]) {
                 emlrtDynamicBoundsCheckR2012b(c99999, 1, gmin->size[1],
-                  &aj_emlrtBCI, (emlrtCTX)sp);
+                  &hj_emlrtBCI, (emlrtCTX)sp);
               }
 
               if (out_mmd->data[(c_i + out_mmd->size[0]) - 2] > gmin->data[(c_i
                    + gmin->size[0] * (c99999 - 1)) - 2]) {
                 if (2 > out_mmd->size[1]) {
                   emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1],
-                    &he_emlrtBCI, (emlrtCTX)sp);
+                    &oe_emlrtBCI, (emlrtCTX)sp);
                 }
 
                 if (((int32_T)(c_i + 1U) < 1) || ((int32_T)(c_i + 1U) >
                      out_mmd->size[0])) {
                   emlrtDynamicBoundsCheckR2012b((int32_T)(c_i + 1U), 1,
-                    out_mmd->size[0], &jj_emlrtBCI, (emlrtCTX)sp);
+                    out_mmd->size[0], &qj_emlrtBCI, (emlrtCTX)sp);
                 }
 
                 if (((int32_T)(c_i + 1U) < 1) || ((int32_T)(c_i + 1U) >
                      gmin->size[0])) {
                   emlrtDynamicBoundsCheckR2012b((int32_T)(c_i + 1U), 1,
-                    gmin->size[0], &kj_emlrtBCI, (emlrtCTX)sp);
+                    gmin->size[0], &rj_emlrtBCI, (emlrtCTX)sp);
                 }
 
                 if (c99999 > gmin->size[1]) {
                   emlrtDynamicBoundsCheckR2012b(c99999, 1, gmin->size[1],
-                    &kj_emlrtBCI, (emlrtCTX)sp);
+                    &rj_emlrtBCI, (emlrtCTX)sp);
                 }
 
                 if (out_mmd->data[c_i + out_mmd->size[0]] > gmin->data[c_i +
@@ -5333,13 +5323,13 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
           /*  if the following statement is true, observed curve of d_min is */
           /*  above 99.99% and later is below 1%: peak followed by dip */
           if (1 > out_mmd->size[0]) {
-            emlrtDynamicBoundsCheckR2012b(1, 1, out_mmd->size[0], &ie_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(1, 1, out_mmd->size[0], &pe_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (out_mmd->size[0] > (incre - out_mmd->data[0]) + 31.0) {
             if (2 > out_mmd->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &je_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &qe_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
@@ -5351,20 +5341,20 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
               i1 = (int32_T)uv[i];
               if ((i1 < 1) || (i1 > out_mmd->size[0])) {
                 emlrtDynamicBoundsCheckR2012b(i1, 1, out_mmd->size[0],
-                  &nj_emlrtBCI, (emlrtCTX)sp);
+                  &uj_emlrtBCI, (emlrtCTX)sp);
               }
             }
 
             for (i = 0; i < 31; i++) {
               i1 = (int32_T)uv[i];
               if ((i1 < 1) || (i1 > gmin->size[0])) {
-                emlrtDynamicBoundsCheckR2012b(i1, 1, gmin->size[0], &rj_emlrtBCI,
+                emlrtDynamicBoundsCheckR2012b(i1, 1, gmin->size[0], &yj_emlrtBCI,
                   (emlrtCTX)sp);
               }
             }
 
             if ((c001 < 1) || (c001 > gmin->size[1])) {
-              emlrtDynamicBoundsCheckR2012b(c001, 1, gmin->size[1], &ke_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(c001, 1, gmin->size[1], &re_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
@@ -5392,13 +5382,13 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
               if (((int32_T)(c_i + 1U) < 1) || ((int32_T)(c_i + 1U) >
                    out_mmd->size[0])) {
                 emlrtDynamicBoundsCheckR2012b((int32_T)(c_i + 1U), 1,
-                  out_mmd->size[0], &le_emlrtBCI, (emlrtCTX)sp);
+                  out_mmd->size[0], &se_emlrtBCI, (emlrtCTX)sp);
               }
 
               i = c_i - 1;
               if (out_mmd->size[0] < 1) {
                 emlrtDynamicBoundsCheckR2012b(out_mmd->size[0], 1, out_mmd->
-                  size[0], &me_emlrtBCI, (emlrtCTX)sp);
+                  size[0], &te_emlrtBCI, (emlrtCTX)sp);
               }
 
               i1 = out_mmd->size[0] - 1;
@@ -5411,25 +5401,25 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
               if (((int32_T)(c_i + 1U) < 1) || ((int32_T)(c_i + 1U) > gmin->
                    size[0])) {
                 emlrtDynamicBoundsCheckR2012b((int32_T)(c_i + 1U), 1, gmin->
-                  size[0], &oe_emlrtBCI, (emlrtCTX)sp);
+                  size[0], &ve_emlrtBCI, (emlrtCTX)sp);
               }
 
               k = c_i - 1;
               if (gmin->size[0] < 1) {
                 emlrtDynamicBoundsCheckR2012b(gmin->size[0], 1, gmin->size[0],
-                  &pe_emlrtBCI, (emlrtCTX)sp);
+                  &we_emlrtBCI, (emlrtCTX)sp);
               }
 
               a = gmin->size[0];
             }
 
             if (2 > out_mmd->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &ne_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &ue_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if ((c001 < 1) || (c001 > gmin->size[1])) {
-              emlrtDynamicBoundsCheckR2012b(c001, 1, gmin->size[1], &qe_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(c001, 1, gmin->size[1], &xe_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
@@ -5439,18 +5429,18 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
               emlrtSizeEqCheck1DR2012b(loop_ub, i1, &n_emlrtECI, (emlrtCTX)sp);
             }
 
-            st.site = &mg_emlrtRSI;
+            st.site = &tg_emlrtRSI;
             i1 = x->size[0];
             x->size[0] = loop_ub;
-            emxEnsureCapacity_boolean_T(&st, x, i1, &gi_emlrtRTEI);
+            emxEnsureCapacity_boolean_T(&st, x, i1, &fj_emlrtRTEI);
             for (i1 = 0; i1 < loop_ub; i1++) {
               x->data[i1] = (out_mmd->data[((i + i1) + out_mmd->size[0]) + 1] <
                              gmin->data[((k + i1) + gmin->size[0] * (c001 - 1))
                              + 1]);
             }
 
-            b_st.site = &km_emlrtRSI;
-            c_st.site = &ld_emlrtRSI;
+            b_st.site = &rm_emlrtRSI;
+            c_st.site = &sd_emlrtRSI;
             irank = combineVectorElements(&c_st, x);
             if (irank >= 2) {
               NoFalseSig = true;
@@ -5467,26 +5457,26 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
           if (!NoFalseSig) {
             /*  Compute the final value of the envelope based on */
             /*  mmd(i+1,1)=mdagger+1 observations */
-            st.site = &lg_emlrtRSI;
+            st.site = &sg_emlrtRSI;
             b_FSMenvmmd(&st, incre + 1.0, v, incre, gval);
             if (2 > out_mmd->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &re_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &ye_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if (1 > gval->size[0]) {
-              emlrtDynamicBoundsCheckR2012b(1, 1, gval->size[0], &se_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(1, 1, gval->size[0], &af_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if (2 > gval->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(2, 1, gval->size[1], &te_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(2, 1, gval->size[1], &bf_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if (c_i > out_mmd->size[0]) {
               emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
-                &ck_emlrtBCI, (emlrtCTX)sp);
+                &jk_emlrtBCI, (emlrtCTX)sp);
             }
 
             if (out_mmd->data[(c_i + out_mmd->size[0]) - 1] < gval->data
@@ -5511,49 +5501,49 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       } else {
         /*  Outlier detection based on Bonferroni threshold */
         if (2 > out_mmd->size[1]) {
-          emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &ue_emlrtBCI,
+          emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &cf_emlrtBCI,
             (emlrtCTX)sp);
         }
 
         if ((c_i < 1) || (c_i > out_mmd->size[0])) {
-          emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &xf_emlrtBCI,
+          emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &fg_emlrtBCI,
             (emlrtCTX)sp);
         }
 
         if (c_i > gbonf->size[0]) {
-          emlrtDynamicBoundsCheckR2012b(c_i, 1, gbonf->size[0], &yf_emlrtBCI,
+          emlrtDynamicBoundsCheckR2012b(c_i, 1, gbonf->size[0], &gg_emlrtBCI,
             (emlrtCTX)sp);
         }
 
         if (gbonf->size[1] < 1) {
           emlrtDynamicBoundsCheckR2012b(gbonf->size[1], 1, gbonf->size[1],
-            &yf_emlrtBCI, (emlrtCTX)sp);
+            &gg_emlrtBCI, (emlrtCTX)sp);
         }
 
         if (out_mmd->data[(c_i + out_mmd->size[0]) - 1] > gbonf->data[(c_i +
              gbonf->size[0] * (gbonf->size[1] - 1)) - 1]) {
           if (c_i > out_mmd->size[0]) {
-            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &ag_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &hg_emlrtBCI,
               (emlrtCTX)sp);
           }
 
-          st.site = &kg_emlrtRSI;
-          int2str(&st, out_mmd->data[c_i - 1], dqb_emlrtRSI.data,
-                  dqb_emlrtRSI.size);
-          st.site = &kg_emlrtRSI;
-          int2str(&st, n, dqb_emlrtRSI.data, dqb_emlrtRSI.size);
+          st.site = &rg_emlrtRSI;
+          int2str(&st, out_mmd->data[c_i - 1], xqb_emlrtRSI.data,
+                  xqb_emlrtRSI.size);
+          st.site = &rg_emlrtRSI;
+          int2str(&st, n, xqb_emlrtRSI.data, xqb_emlrtRSI.size);
           if (c_i > out_mmd->size[0]) {
-            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &ve_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &df_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (1 > out_mmd->size[1]) {
-            emlrtDynamicBoundsCheckR2012b(1, 1, out_mmd->size[1], &wk_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(1, 1, out_mmd->size[1], &el_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (2 > out_mmd->size[1]) {
-            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &wk_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &el_emlrtBCI,
               (emlrtCTX)sp);
           }
 
@@ -5588,7 +5578,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
         /*  Notice that mmd(i,1) = m dagger */
         i = (int32_T)((real_T)Y->size[0] + (1.0 - (incre - 1.0)));
         emlrtForLoopVectorCheckR2021a(incre - 1.0, 1.0, Y->size[0],
-          mxDOUBLE_CLASS, i, &ob_emlrtRTEI, (emlrtCTX)sp);
+          mxDOUBLE_CLASS, i, &pb_emlrtRTEI, (emlrtCTX)sp);
         ndecl = incre - 1.0;
         irank = 0;
         exitg2 = false;
@@ -5596,7 +5586,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
           ndecl = (incre - 1.0) + (real_T)irank;
 
           /*  Compute theoretical envelopes based on tr observations */
-          st.site = &jg_emlrtRSI;
+          st.site = &qg_emlrtRSI;
           c_FSMenvmmd(&st, ndecl, v, init_contents, gmin1);
           i1 = (gmin1->size[0] - b_i) + 1;
           ii = (uint32_T)(b_i - 1);
@@ -5609,22 +5599,22 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
             /*  ii>=size(gmin1,1)-2 = final, penultimate or antepenultimate value */
             /*  of the resuperimposed envelope based on tr observations */
             if (2 > out_mmd->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &we_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &ef_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if (((int32_T)ii < 1) || ((int32_T)ii > out_mmd->size[0])) {
               emlrtDynamicBoundsCheckR2012b((int32_T)ii, 1, out_mmd->size[0],
-                &pj_emlrtBCI, (emlrtCTX)sp);
+                &wj_emlrtBCI, (emlrtCTX)sp);
             }
 
             if (((int32_T)ii < 1) || ((int32_T)ii > gmin1->size[0])) {
               emlrtDynamicBoundsCheckR2012b((int32_T)ii, 1, gmin1->size[0],
-                &qj_emlrtBCI, (emlrtCTX)sp);
+                &xj_emlrtBCI, (emlrtCTX)sp);
             }
 
             if ((c99 < 1) || (c99 > gmin1->size[1])) {
-              emlrtDynamicBoundsCheckR2012b(c99, 1, gmin1->size[1], &qj_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(c99, 1, gmin1->size[1], &xj_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
@@ -5634,14 +5624,14 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
               /*  Condition S1 */
               if (((int32_T)ii < 1) || ((int32_T)ii > out_mmd->size[0])) {
                 emlrtDynamicBoundsCheckR2012b((int32_T)ii, 1, out_mmd->size[0],
-                  &xj_emlrtBCI, (emlrtCTX)sp);
+                  &fk_emlrtBCI, (emlrtCTX)sp);
               }
 
-              st.site = &ig_emlrtRSI;
-              int2str(&st, out_mmd->data[(int32_T)ii - 1], dqb_emlrtRSI.data,
-                      dqb_emlrtRSI.size);
-              st.site = &ig_emlrtRSI;
-              int2str(&st, ndecl, dqb_emlrtRSI.data, dqb_emlrtRSI.size);
+              st.site = &pg_emlrtRSI;
+              int2str(&st, out_mmd->data[(int32_T)ii - 1], xqb_emlrtRSI.data,
+                      xqb_emlrtRSI.size);
+              st.site = &pg_emlrtRSI;
+              int2str(&st, ndecl, xqb_emlrtRSI.data, xqb_emlrtRSI.size);
               sto = 1;
               exitg3 = true;
             } else {
@@ -5649,22 +5639,22 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
               if ((int32_T)ii < gmin1->size[0] - 2) {
                 if (2 > out_mmd->size[1]) {
                   emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1],
-                    &xe_emlrtBCI, (emlrtCTX)sp);
+                    &ff_emlrtBCI, (emlrtCTX)sp);
                 }
 
                 if (((int32_T)ii < 1) || ((int32_T)ii > out_mmd->size[0])) {
                   emlrtDynamicBoundsCheckR2012b((int32_T)ii, 1, out_mmd->size[0],
-                    &yj_emlrtBCI, (emlrtCTX)sp);
+                    &gk_emlrtBCI, (emlrtCTX)sp);
                 }
 
                 if (((int32_T)ii < 1) || ((int32_T)ii > gmin1->size[0])) {
                   emlrtDynamicBoundsCheckR2012b((int32_T)ii, 1, gmin1->size[0],
-                    &ak_emlrtBCI, (emlrtCTX)sp);
+                    &hk_emlrtBCI, (emlrtCTX)sp);
                 }
 
                 if ((c999 < 1) || (c999 > gmin1->size[1])) {
                   emlrtDynamicBoundsCheckR2012b(c999, 1, gmin1->size[1],
-                    &ak_emlrtBCI, (emlrtCTX)sp);
+                    &hk_emlrtBCI, (emlrtCTX)sp);
                 }
 
                 if (d > gmin1->data[((int32_T)ii + gmin1->size[0] * (c999 - 1))
@@ -5672,14 +5662,14 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
                   /*  Condition S2 */
                   if (((int32_T)ii < 1) || ((int32_T)ii > out_mmd->size[0])) {
                     emlrtDynamicBoundsCheckR2012b((int32_T)ii, 1, out_mmd->size
-                      [0], &bk_emlrtBCI, (emlrtCTX)sp);
+                      [0], &ik_emlrtBCI, (emlrtCTX)sp);
                   }
 
-                  st.site = &hg_emlrtRSI;
-                  int2str(&st, out_mmd->data[(int32_T)ii - 1], dqb_emlrtRSI.data,
-                          dqb_emlrtRSI.size);
-                  st.site = &hg_emlrtRSI;
-                  int2str(&st, ndecl, dqb_emlrtRSI.data, dqb_emlrtRSI.size);
+                  st.site = &og_emlrtRSI;
+                  int2str(&st, out_mmd->data[(int32_T)ii - 1], xqb_emlrtRSI.data,
+                          xqb_emlrtRSI.size);
+                  st.site = &og_emlrtRSI;
+                  int2str(&st, ndecl, xqb_emlrtRSI.data, xqb_emlrtRSI.size);
                   sto = 1;
                   exitg3 = true;
                 } else {
@@ -5720,7 +5710,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
         /*  Check if stopping rule takes place at m* <m^\dagger+k */
         if (((int32_T)ii < 1) || ((int32_T)ii > out_mmd->size[0])) {
           emlrtDynamicBoundsCheckR2012b((int32_T)ii, 1, out_mmd->size[0],
-            &xi_emlrtBCI, (emlrtCTX)sp);
+            &fj_emlrtBCI, (emlrtCTX)sp);
         }
 
         if (out_mmd->data[(int32_T)ii - 1] < ndecl - 1.0) {
@@ -5734,38 +5724,38 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
             if (((int32_T)(ii + 1U) < 1) || ((int32_T)(ii + 1U) > gmin1->size[0]))
             {
               emlrtDynamicBoundsCheckR2012b((int32_T)(ii + 1U), 1, gmin1->size[0],
-                &ye_emlrtBCI, (emlrtCTX)sp);
+                &gf_emlrtBCI, (emlrtCTX)sp);
             }
 
             i = (int32_T)ii - 1;
             if (gmin1->size[0] < 1) {
               emlrtDynamicBoundsCheckR2012b(gmin1->size[0], 1, gmin1->size[0],
-                &af_emlrtBCI, (emlrtCTX)sp);
+                &hf_emlrtBCI, (emlrtCTX)sp);
             }
 
             i1 = gmin1->size[0] - 1;
             if (((int32_T)(ii + 1U) < 1) || ((int32_T)(ii + 1U) > out_mmd->size
                  [0])) {
               emlrtDynamicBoundsCheckR2012b((int32_T)(ii + 1U), 1, out_mmd->
-                size[0], &cf_emlrtBCI, (emlrtCTX)sp);
+                size[0], &jf_emlrtBCI, (emlrtCTX)sp);
             }
 
             k = (int32_T)ii - 1;
             if ((gmin1->size[0] < 1) || (gmin1->size[0] > out_mmd->size[0])) {
               emlrtDynamicBoundsCheckR2012b(gmin1->size[0], 1, out_mmd->size[0],
-                &df_emlrtBCI, (emlrtCTX)sp);
+                &kf_emlrtBCI, (emlrtCTX)sp);
             }
 
             a = gmin1->size[0];
           }
 
           if (4 > gmin1->size[1]) {
-            emlrtDynamicBoundsCheckR2012b(4, 1, gmin1->size[1], &bf_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(4, 1, gmin1->size[1], &if_emlrtBCI,
               (emlrtCTX)sp);
           }
 
           if (2 > out_mmd->size[1]) {
-            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &ef_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &lf_emlrtBCI,
               (emlrtCTX)sp);
           }
 
@@ -5775,17 +5765,17 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
             emlrtSizeEqCheck1DR2012b(loop_ub, i1, &o_emlrtECI, (emlrtCTX)sp);
           }
 
-          st.site = &gg_emlrtRSI;
+          st.site = &ng_emlrtRSI;
           i1 = x->size[0];
           x->size[0] = loop_ub;
-          emxEnsureCapacity_boolean_T(&st, x, i1, &ci_emlrtRTEI);
+          emxEnsureCapacity_boolean_T(&st, x, i1, &bj_emlrtRTEI);
           for (i1 = 0; i1 < loop_ub; i1++) {
             x->data[i1] = (gmin1->data[((i + i1) + gmin1->size[0] * 3) + 1] >
                            out_mmd->data[((k + i1) + out_mmd->size[0]) + 1]);
           }
 
-          b_st.site = &km_emlrtRSI;
-          c_st.site = &ld_emlrtRSI;
+          b_st.site = &rm_emlrtRSI;
+          c_st.site = &sd_emlrtRSI;
           irank = combineVectorElements(&c_st, x);
           if (irank > 0) {
             /*  Find m^{1%} that is the step where mmd goes below the 1% */
@@ -5802,51 +5792,51 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
               if (((int32_T)(b_i + 1U) < 1) || ((int32_T)(b_i + 1U) >
                    gmin1->size[0])) {
                 emlrtDynamicBoundsCheckR2012b((int32_T)(b_i + 1U), 1,
-                  gmin1->size[0], &ff_emlrtBCI, (emlrtCTX)sp);
+                  gmin1->size[0], &mf_emlrtBCI, (emlrtCTX)sp);
               }
 
               i = b_i - 1;
               if (gmin1->size[0] < 1) {
                 emlrtDynamicBoundsCheckR2012b(gmin1->size[0], 1, gmin1->size[0],
-                  &gf_emlrtBCI, (emlrtCTX)sp);
+                  &nf_emlrtBCI, (emlrtCTX)sp);
               }
 
               i1 = gmin1->size[0] - 1;
               if (((int32_T)(b_i + 1U) < 1) || ((int32_T)(b_i + 1U) >
                    gmin1->size[0])) {
                 emlrtDynamicBoundsCheckR2012b((int32_T)(b_i + 1U), 1,
-                  gmin1->size[0], &if_emlrtBCI, (emlrtCTX)sp);
+                  gmin1->size[0], &pf_emlrtBCI, (emlrtCTX)sp);
               }
 
               k = b_i - 1;
               if (gmin1->size[0] < 1) {
                 emlrtDynamicBoundsCheckR2012b(gmin1->size[0], 1, gmin1->size[0],
-                  &jf_emlrtBCI, (emlrtCTX)sp);
+                  &qf_emlrtBCI, (emlrtCTX)sp);
               }
 
               a = gmin1->size[0] - 1;
               if (((int32_T)(b_i + 1U) < 1) || ((int32_T)(b_i + 1U) >
                    out_mmd->size[0])) {
                 emlrtDynamicBoundsCheckR2012b((int32_T)(b_i + 1U), 1,
-                  out_mmd->size[0], &lf_emlrtBCI, (emlrtCTX)sp);
+                  out_mmd->size[0], &sf_emlrtBCI, (emlrtCTX)sp);
               }
 
               irank = b_i - 1;
               if ((gmin1->size[0] < 1) || (gmin1->size[0] > out_mmd->size[0])) {
                 emlrtDynamicBoundsCheckR2012b(gmin1->size[0], 1, out_mmd->size[0],
-                  &mf_emlrtBCI, (emlrtCTX)sp);
+                  &tf_emlrtBCI, (emlrtCTX)sp);
               }
 
               idx = gmin1->size[0];
             }
 
             if (4 > gmin1->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(4, 1, gmin1->size[1], &kf_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(4, 1, gmin1->size[1], &rf_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             if (2 > out_mmd->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &nf_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(2, 1, out_mmd->size[1], &uf_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
@@ -5857,33 +5847,33 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
             }
 
             if (1 > gmin1->size[1]) {
-              emlrtDynamicBoundsCheckR2012b(1, 1, gmin1->size[1], &hf_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(1, 1, gmin1->size[1], &of_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
-            st.site = &fg_emlrtRSI;
+            st.site = &mg_emlrtRSI;
             a = x->size[0];
             x->size[0] = loop_ub;
-            emxEnsureCapacity_boolean_T(&st, x, a, &hi_emlrtRTEI);
+            emxEnsureCapacity_boolean_T(&st, x, a, &gj_emlrtRTEI);
             for (a = 0; a < loop_ub; a++) {
               x->data[a] = (gmin1->data[((k + a) + gmin1->size[0] * 3) + 1] >
                             out_mmd->data[((irank + a) + out_mmd->size[0]) + 1]);
             }
 
-            b_st.site = &xk_emlrtRSI;
-            c_st.site = &yk_emlrtRSI;
+            b_st.site = &fl_emlrtRSI;
+            c_st.site = &gl_emlrtRSI;
             loop_ub = i1 - i;
             if (x->size[0] != loop_ub) {
-              emlrtErrorWithMessageIdR2018a(&c_st, &nb_emlrtRTEI,
+              emlrtErrorWithMessageIdR2018a(&c_st, &ob_emlrtRTEI,
                 "MATLAB:catenate:matrixDimensionMismatch",
                 "MATLAB:catenate:matrixDimensionMismatch", 0);
             }
 
-            emxInit_real_T(&c_st, &gfind, 2, &ii_emlrtRTEI, true);
+            emxInit_real_T(&c_st, &gfind, 2, &hj_emlrtRTEI, true);
             i1 = gfind->size[0] * gfind->size[1];
             gfind->size[0] = loop_ub;
             gfind->size[1] = 2;
-            emxEnsureCapacity_real_T(&b_st, gfind, i1, &ii_emlrtRTEI);
+            emxEnsureCapacity_real_T(&b_st, gfind, i1, &hj_emlrtRTEI);
             for (i1 = 0; i1 < loop_ub; i1++) {
               gfind->data[i1] = gmin1->data[(i + i1) + 1];
             }
@@ -5898,16 +5888,16 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
             loop_ub = gfind->size[0];
             i = x->size[0];
             x->size[0] = gfind->size[0];
-            emxEnsureCapacity_boolean_T(sp, x, i, &ji_emlrtRTEI);
+            emxEnsureCapacity_boolean_T(sp, x, i, &ij_emlrtRTEI);
             for (i = 0; i < loop_ub; i++) {
               x->data[i] = (gfind->data[i + gfind->size[0]] > 0.0);
             }
 
-            idx = x->size[0];
-            for (c_i = 0; c_i < idx; c_i++) {
+            irank = x->size[0];
+            for (c_i = 0; c_i < irank; c_i++) {
               if (x->data[c_i] && (c_i + 1 > gfind->size[0])) {
                 emlrtDynamicBoundsCheckR2012b(c_i + 1, 1, gfind->size[0],
-                  &dc_emlrtBCI, (emlrtCTX)sp);
+                  &kc_emlrtBCI, (emlrtCTX)sp);
               }
             }
 
@@ -5916,67 +5906,67 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
             loop_ub = gfind->size[0];
             i = x->size[0];
             x->size[0] = gfind->size[0];
-            emxEnsureCapacity_boolean_T(sp, x, i, &ji_emlrtRTEI);
+            emxEnsureCapacity_boolean_T(sp, x, i, &ij_emlrtRTEI);
             for (i = 0; i < loop_ub; i++) {
               x->data[i] = (gfind->data[i + gfind->size[0]] > 0.0);
             }
 
-            idx = x->size[0] - 1;
-            a = 0;
-            for (c_i = 0; c_i <= idx; c_i++) {
+            irank = x->size[0] - 1;
+            idx = 0;
+            for (c_i = 0; c_i <= irank; c_i++) {
               if (x->data[c_i]) {
+                idx++;
+              }
+            }
+
+            emxInit_int32_T(sp, &r5, 1, &ij_emlrtRTEI, true);
+            i = r5->size[0];
+            r5->size[0] = idx;
+            emxEnsureCapacity_int32_T(sp, r5, i, &wi_emlrtRTEI);
+            a = 0;
+            for (c_i = 0; c_i <= irank; c_i++) {
+              if (x->data[c_i]) {
+                r5->data[a] = c_i + 1;
                 a++;
               }
             }
 
-            emxInit_int32_T(sp, &r5, 1, &ji_emlrtRTEI, true);
-            i = r5->size[0];
-            r5->size[0] = a;
-            emxEnsureCapacity_int32_T(sp, r5, i, &xh_emlrtRTEI);
-            irank = 0;
-            for (c_i = 0; c_i <= idx; c_i++) {
-              if (x->data[c_i]) {
-                r5->data[irank] = c_i + 1;
-                irank++;
-              }
-            }
-
             if (1 > r5->size[0]) {
-              emlrtDynamicBoundsCheckR2012b(1, 1, r5->size[0], &of_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(1, 1, r5->size[0], &vf_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             emxFree_int32_T(&r5);
             if (1 > out_mmd->size[0]) {
-              emlrtDynamicBoundsCheckR2012b(1, 1, out_mmd->size[0], &pf_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(1, 1, out_mmd->size[0], &wf_emlrtBCI,
                 (emlrtCTX)sp);
             }
 
             loop_ub = gfind->size[0];
             i = x->size[0];
             x->size[0] = gfind->size[0];
-            emxEnsureCapacity_boolean_T(sp, x, i, &ji_emlrtRTEI);
+            emxEnsureCapacity_boolean_T(sp, x, i, &ij_emlrtRTEI);
             for (i = 0; i < loop_ub; i++) {
               x->data[i] = (gfind->data[i + gfind->size[0]] > 0.0);
             }
 
-            idx = x->size[0] - 1;
-            a = 0;
-            for (c_i = 0; c_i <= idx; c_i++) {
+            irank = x->size[0] - 1;
+            idx = 0;
+            for (c_i = 0; c_i <= irank; c_i++) {
               if (x->data[c_i]) {
-                a++;
+                idx++;
               }
             }
 
-            emxInit_int32_T(sp, &r6, 1, &ji_emlrtRTEI, true);
+            emxInit_int32_T(sp, &r6, 1, &ij_emlrtRTEI, true);
             i = r6->size[0];
-            r6->size[0] = a;
-            emxEnsureCapacity_int32_T(sp, r6, i, &xh_emlrtRTEI);
-            irank = 0;
-            for (c_i = 0; c_i <= idx; c_i++) {
+            r6->size[0] = idx;
+            emxEnsureCapacity_int32_T(sp, r6, i, &wi_emlrtRTEI);
+            a = 0;
+            for (c_i = 0; c_i <= irank; c_i++) {
               if (x->data[c_i]) {
-                r6->data[irank] = c_i + 1;
-                irank++;
+                r6->data[a] = c_i + 1;
+                a++;
               }
             }
 
@@ -5988,17 +5978,17 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
             } else {
               if ((b_i < 1) || (b_i > out_mmd->size[0])) {
                 emlrtDynamicBoundsCheckR2012b(b_i, 1, out_mmd->size[0],
-                  &qf_emlrtBCI, (emlrtCTX)sp);
+                  &xf_emlrtBCI, (emlrtCTX)sp);
               }
 
               i = b_i - 1;
               if (d != (int32_T)muDoubleScalarFloor(d)) {
-                emlrtIntegerCheckR2012b(d, &u_emlrtDCI, (emlrtCTX)sp);
+                emlrtIntegerCheckR2012b(d, &bb_emlrtDCI, (emlrtCTX)sp);
               }
 
               if (((int32_T)d < 1) || ((int32_T)d > out_mmd->size[0])) {
                 emlrtDynamicBoundsCheckR2012b((int32_T)d, 1, out_mmd->size[0],
-                  &rf_emlrtBCI, (emlrtCTX)sp);
+                  &yf_emlrtBCI, (emlrtCTX)sp);
               }
 
               i1 = (int32_T)d;
@@ -6008,12 +5998,12 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
             i1 = gfind->size[0] * gfind->size[1];
             gfind->size[0] = loop_ub;
             gfind->size[1] = 2;
-            emxEnsureCapacity_real_T(sp, gfind, i1, &ki_emlrtRTEI);
+            emxEnsureCapacity_real_T(sp, gfind, i1, &jj_emlrtRTEI);
             for (i1 = 0; i1 < 2; i1++) {
               for (k = 0; k < loop_ub; k++) {
                 if (i1 + 1 > out_mmd->size[1]) {
                   emlrtDynamicBoundsCheckR2012b(i1 + 1, 1, out_mmd->size[1],
-                    &ik_emlrtBCI, (emlrtCTX)sp);
+                    &pk_emlrtBCI, (emlrtCTX)sp);
                 }
 
                 gfind->data[k + gfind->size[0] * i1] = out_mmd->data[(i + k) +
@@ -6021,11 +6011,11 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
               }
             }
 
-            st.site = &eg_emlrtRSI;
+            st.site = &lg_emlrtRSI;
             d_sortrows(&st, gfind);
             if (gfind->size[0] < 1) {
               emlrtDynamicBoundsCheckR2012b(gfind->size[0], 1, gfind->size[0],
-                &sf_emlrtBCI, (emlrtCTX)sp);
+                &ag_emlrtBCI, (emlrtCTX)sp);
             }
 
             /*  tr is redefined and is associated with the step associated to */
@@ -6039,7 +6029,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
         ndecl = ((real_T)Y->size[0] - ndecl) + 1.0;
       } else {
         if ((b_i < 1) || (b_i > out_mmd->size[0])) {
-          emlrtDynamicBoundsCheckR2012b(b_i, 1, out_mmd->size[0], &jg_emlrtBCI,
+          emlrtDynamicBoundsCheckR2012b(b_i, 1, out_mmd->size[0], &qg_emlrtBCI,
             (emlrtCTX)sp);
         }
 
@@ -6052,7 +6042,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
     emxFree_real_T(&gmin1);
 
     /*  End of the forward search */
-    emxInit_real_T(sp, &outliers, 1, &pi_emlrtRTEI, true);
+    emxInit_real_T(sp, &outliers, 1, &oj_emlrtRTEI, true);
     if (ndecl > 0.0) {
       /*  Now find the list of the units declared as outliers */
       /*  bsel=~isnan(bb(:,tr-init+1)); */
@@ -6060,89 +6050,89 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       if (Y->size[0] < 5000) {
         d = (real_T)out_cov->size[1] - ndecl;
         if (d != (int32_T)muDoubleScalarFloor(d)) {
-          emlrtIntegerCheckR2012b(d, &v_emlrtDCI, (emlrtCTX)sp);
+          emlrtIntegerCheckR2012b(d, &cb_emlrtDCI, (emlrtCTX)sp);
         }
 
         if (((int32_T)d < 1) || ((int32_T)d > out_cov->size[1])) {
           emlrtDynamicBoundsCheckR2012b((int32_T)d, 1, out_cov->size[1],
-            &tf_emlrtBCI, (emlrtCTX)sp);
+            &bg_emlrtBCI, (emlrtCTX)sp);
         }
 
         loop_ub = out_cov->size[0];
         i = bs->size[0];
         bs->size[0] = out_cov->size[0];
-        emxEnsureCapacity_real_T(sp, bs, i, &wh_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, bs, i, &vi_emlrtRTEI);
         for (i = 0; i < loop_ub; i++) {
           bs->data[i] = out_cov->data[i + out_cov->size[0] * ((int32_T)d - 1)];
         }
 
         i = x->size[0];
         x->size[0] = bs->size[0];
-        emxEnsureCapacity_boolean_T(sp, x, i, &yh_emlrtRTEI);
+        emxEnsureCapacity_boolean_T(sp, x, i, &xi_emlrtRTEI);
         loop_ub = bs->size[0];
         for (i = 0; i < loop_ub; i++) {
           x->data[i] = muDoubleScalarIsNaN(bs->data[i]);
         }
 
-        idx = x->size[0] - 1;
-        a = 0;
-        for (b_i = 0; b_i <= idx; b_i++) {
+        irank = x->size[0] - 1;
+        idx = 0;
+        for (b_i = 0; b_i <= irank; b_i++) {
           if (x->data[b_i]) {
-            a++;
+            idx++;
           }
         }
 
         i = outliers->size[0];
-        outliers->size[0] = a;
-        emxEnsureCapacity_real_T(sp, outliers, i, &xh_emlrtRTEI);
-        irank = 0;
-        for (b_i = 0; b_i <= idx; b_i++) {
+        outliers->size[0] = idx;
+        emxEnsureCapacity_real_T(sp, outliers, i, &wi_emlrtRTEI);
+        a = 0;
+        for (b_i = 0; b_i <= irank; b_i++) {
           if (x->data[b_i]) {
             if (b_i + 1 > seq->size[0]) {
               emlrtDynamicBoundsCheckR2012b(b_i + 1, 1, seq->size[0],
-                &ij_emlrtBCI, (emlrtCTX)sp);
+                &pj_emlrtBCI, (emlrtCTX)sp);
             }
 
-            outliers->data[irank] = seq->data[b_i];
-            irank++;
+            outliers->data[a] = seq->data[b_i];
+            a++;
           }
         }
       } else {
-        emxInit_real_T(sp, &a__1, 2, &xh_emlrtRTEI, true);
-        st.site = &dg_emlrtRSI;
+        emxInit_real_T(sp, &a__1, 2, &wi_emlrtRTEI, true);
+        st.site = &kg_emlrtRSI;
         FSMbsb(&st, Y, bs, (real_T)Y->size[0] - ndecl, (real_T)Y->size[0] -
                ndecl, a__1, out_cov);
         i = r->size[0] * r->size[1];
         r->size[0] = out_cov->size[0];
         r->size[1] = out_cov->size[1];
-        emxEnsureCapacity_boolean_T(sp, r, i, &vh_emlrtRTEI);
+        emxEnsureCapacity_boolean_T(sp, r, i, &ui_emlrtRTEI);
         loop_ub = out_cov->size[0] * out_cov->size[1];
         emxFree_real_T(&a__1);
         for (i = 0; i < loop_ub; i++) {
           r->data[i] = muDoubleScalarIsNaN(out_cov->data[i]);
         }
 
-        idx = r->size[0] * r->size[1] - 1;
-        a = 0;
-        for (b_i = 0; b_i <= idx; b_i++) {
+        irank = r->size[0] * r->size[1] - 1;
+        idx = 0;
+        for (b_i = 0; b_i <= irank; b_i++) {
           if (r->data[b_i]) {
-            a++;
+            idx++;
           }
         }
 
         i = outliers->size[0];
-        outliers->size[0] = a;
-        emxEnsureCapacity_real_T(sp, outliers, i, &xh_emlrtRTEI);
-        irank = 0;
-        for (b_i = 0; b_i <= idx; b_i++) {
+        outliers->size[0] = idx;
+        emxEnsureCapacity_real_T(sp, outliers, i, &wi_emlrtRTEI);
+        a = 0;
+        for (b_i = 0; b_i <= irank; b_i++) {
           if (r->data[b_i]) {
             if ((b_i + 1 < 1) || (b_i + 1 > seq->size[0])) {
               emlrtDynamicBoundsCheckR2012b(b_i + 1, 1, seq->size[0],
-                &vj_emlrtBCI, (emlrtCTX)sp);
+                &dk_emlrtBCI, (emlrtCTX)sp);
             }
 
-            outliers->data[irank] = seq->data[b_i];
-            irank++;
+            outliers->data[a] = seq->data[b_i];
+            a++;
           }
         }
       }
@@ -6151,18 +6141,18 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       for (i = 0; i < loop_ub; i++) {
         i1 = (int32_T)outliers->data[i];
         if (outliers->data[i] != i1) {
-          emlrtIntegerCheckR2012b(outliers->data[i], &bb_emlrtDCI, (emlrtCTX)sp);
+          emlrtIntegerCheckR2012b(outliers->data[i], &hb_emlrtDCI, (emlrtCTX)sp);
         }
 
         if (i1 > Y->size[0]) {
-          emlrtDynamicBoundsCheckR2012b(i1, 1, Y->size[0], &mj_emlrtBCI,
+          emlrtDynamicBoundsCheckR2012b(i1, 1, Y->size[0], &tj_emlrtBCI,
             (emlrtCTX)sp);
         }
       }
     } else {
       i = outliers->size[0];
       outliers->size[0] = 1;
-      emxEnsureCapacity_real_T(sp, outliers, i, &uh_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, outliers, i, &ti_emlrtRTEI);
       outliers->data[0] = rtNaN;
     }
 
@@ -6176,34 +6166,34 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       i = loc->size[0] * loc->size[1];
       loc->size[0] = 1;
       loc->size[1] = Y->size[0];
-      emxEnsureCapacity_real_T(sp, loc, i, &fd_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, loc, i, &hd_emlrtRTEI);
       loop_ub = Y->size[0] - 1;
       for (i = 0; i <= loop_ub; i++) {
         loc->data[i] = (real_T)i + 1.0;
       }
     }
 
-    st.site = &cg_emlrtRSI;
-    b_st.site = &aeb_emlrtRSI;
-    c_st.site = &pdb_emlrtRSI;
+    st.site = &jg_emlrtRSI;
+    b_st.site = &heb_emlrtRSI;
+    c_st.site = &wdb_emlrtRSI;
     b_do_vectors(&c_st, loc, outliers, goodobs, ia, &irank);
     loop_ub = Y->size[1];
     i = b_Y->size[0] * b_Y->size[1];
     b_Y->size[0] = goodobs->size[1];
     b_Y->size[1] = Y->size[1];
-    emxEnsureCapacity_real_T(sp, b_Y, i, &ai_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_Y, i, &yi_emlrtRTEI);
     emxFree_int32_T(&ia);
     for (i = 0; i < loop_ub; i++) {
       irank = goodobs->size[1];
       for (i1 = 0; i1 < irank; i1++) {
         if (goodobs->data[i1] != (int32_T)muDoubleScalarFloor(goodobs->data[i1]))
         {
-          emlrtIntegerCheckR2012b(goodobs->data[i1], &ab_emlrtDCI, (emlrtCTX)sp);
+          emlrtIntegerCheckR2012b(goodobs->data[i1], &gb_emlrtDCI, (emlrtCTX)sp);
         }
 
         k = (int32_T)goodobs->data[i1];
         if ((k < 1) || (k > Y->size[0])) {
-          emlrtDynamicBoundsCheckR2012b(k, 1, Y->size[0], &pi_emlrtBCI,
+          emlrtDynamicBoundsCheckR2012b(k, 1, Y->size[0], &wi_emlrtBCI,
             (emlrtCTX)sp);
         }
 
@@ -6211,19 +6201,19 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       }
     }
 
-    st.site = &bg_emlrtRSI;
+    st.site = &ig_emlrtRSI;
     b_mean(&st, b_Y, loc);
     loop_ub = Y->size[1];
     i = b_Y->size[0] * b_Y->size[1];
     b_Y->size[0] = goodobs->size[1];
     b_Y->size[1] = Y->size[1];
-    emxEnsureCapacity_real_T(sp, b_Y, i, &bi_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_Y, i, &aj_emlrtRTEI);
     for (i = 0; i < loop_ub; i++) {
       irank = goodobs->size[1];
       for (i1 = 0; i1 < irank; i1++) {
         k = (int32_T)goodobs->data[i1];
         if ((k < 1) || (k > Y->size[0])) {
-          emlrtDynamicBoundsCheckR2012b(k, 1, Y->size[0], &ej_emlrtBCI,
+          emlrtDynamicBoundsCheckR2012b(k, 1, Y->size[0], &lj_emlrtBCI,
             (emlrtCTX)sp);
         }
 
@@ -6231,9 +6221,9 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       }
     }
 
-    st.site = &ag_emlrtRSI;
+    st.site = &hg_emlrtRSI;
     cov(&st, b_Y, out_cov);
-    st.site = &yf_emlrtRSI;
+    st.site = &gg_emlrtRSI;
     mahalFS(&st, Y, loc, out_cov, bs);
 
     /*  Scatter plot matrix with the outliers shown with a different symbol */
@@ -6245,7 +6235,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
     i = out_outliers->size[0] * out_outliers->size[1];
     out_outliers->size[0] = outliers->size[0];
     out_outliers->size[1] = 1;
-    emxEnsureCapacity_real_T(sp, out_outliers, i, &di_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, out_outliers, i, &cj_emlrtRTEI);
     loop_ub = outliers->size[0];
     for (i = 0; i < loop_ub; i++) {
       out_outliers->data[i] = outliers->data[i];
@@ -6255,7 +6245,7 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
     i = out_loc->size[0] * out_loc->size[1];
     out_loc->size[0] = 1;
     out_loc->size[1] = loc->size[1];
-    emxEnsureCapacity_real_T(sp, out_loc, i, &ei_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, out_loc, i, &dj_emlrtRTEI);
     loop_ub = loc->size[1];
     for (i = 0; i < loop_ub; i++) {
       out_loc->data[i] = loc->data[i];
@@ -6264,23 +6254,21 @@ void FSM(FSR_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
     i = out_md->size[0] * out_md->size[1];
     out_md->size[0] = bs->size[0];
     out_md->size[1] = 1;
-    emxEnsureCapacity_real_T(sp, out_md, i, &fi_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, out_md, i, &ej_emlrtRTEI);
     loop_ub = bs->size[0];
     for (i = 0; i < loop_ub; i++) {
       out_md->data[i] = bs->data[i];
     }
 
     if ((varargin_4_size[0] == 0) || (varargin_4_size[1] == 0)) {
-      out_nout_size[0] = nout_size_idx_0;
-      out_nout_size[1] = nout_size_idx_1;
-      loop_ub = nout_size_idx_0 * nout_size_idx_1;
-      for (i = 0; i < loop_ub; i++) {
-        out_nout_data[i] = b_nout_data[i];
+      out_nout_size[0] = 2;
+      out_nout_size[1] = 5;
+      for (i = 0; i < 10; i++) {
+        out_nout_data[i] = nout[i];
       }
     } else {
-      out_nout_size[0] = 1;
-      out_nout_size[1] = 1;
-      out_nout_data[0] = rtNaN;
+      out_nout_size[0] = 0;
+      out_nout_size[1] = 0;
     }
 
     out_class_size[0] = 1;

@@ -37,237 +37,237 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo yh_emlrtRSI = { 494,/* lineNo */
+static emlrtRSInfo gi_emlrtRSI = { 495,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo ai_emlrtRSI = { 436,/* lineNo */
+static emlrtRSInfo hi_emlrtRSI = { 437,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo bi_emlrtRSI = { 430,/* lineNo */
+static emlrtRSInfo ii_emlrtRSI = { 431,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo ci_emlrtRSI = { 429,/* lineNo */
+static emlrtRSInfo ji_emlrtRSI = { 430,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo di_emlrtRSI = { 427,/* lineNo */
+static emlrtRSInfo ki_emlrtRSI = { 428,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo ei_emlrtRSI = { 423,/* lineNo */
+static emlrtRSInfo li_emlrtRSI = { 424,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo fi_emlrtRSI = { 422,/* lineNo */
+static emlrtRSInfo mi_emlrtRSI = { 423,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo gi_emlrtRSI = { 419,/* lineNo */
+static emlrtRSInfo ni_emlrtRSI = { 420,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo hi_emlrtRSI = { 413,/* lineNo */
+static emlrtRSInfo oi_emlrtRSI = { 414,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo ii_emlrtRSI = { 412,/* lineNo */
+static emlrtRSInfo pi_emlrtRSI = { 413,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo ji_emlrtRSI = { 404,/* lineNo */
+static emlrtRSInfo qi_emlrtRSI = { 405,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo ki_emlrtRSI = { 403,/* lineNo */
+static emlrtRSInfo ri_emlrtRSI = { 404,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo li_emlrtRSI = { 399,/* lineNo */
+static emlrtRSInfo si_emlrtRSI = { 400,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo mi_emlrtRSI = { 398,/* lineNo */
+static emlrtRSInfo ti_emlrtRSI = { 399,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo ni_emlrtRSI = { 397,/* lineNo */
+static emlrtRSInfo ui_emlrtRSI = { 398,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo oi_emlrtRSI = { 390,/* lineNo */
+static emlrtRSInfo vi_emlrtRSI = { 391,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo pi_emlrtRSI = { 344,/* lineNo */
+static emlrtRSInfo wi_emlrtRSI = { 345,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo qi_emlrtRSI = { 343,/* lineNo */
+static emlrtRSInfo xi_emlrtRSI = { 344,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo ri_emlrtRSI = { 342,/* lineNo */
+static emlrtRSInfo yi_emlrtRSI = { 343,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo si_emlrtRSI = { 331,/* lineNo */
+static emlrtRSInfo aj_emlrtRSI = { 332,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo ti_emlrtRSI = { 330,/* lineNo */
+static emlrtRSInfo bj_emlrtRSI = { 331,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo ui_emlrtRSI = { 329,/* lineNo */
+static emlrtRSInfo cj_emlrtRSI = { 330,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo vi_emlrtRSI = { 328,/* lineNo */
+static emlrtRSInfo dj_emlrtRSI = { 329,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo wi_emlrtRSI = { 322,/* lineNo */
+static emlrtRSInfo ej_emlrtRSI = { 323,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo xi_emlrtRSI = { 306,/* lineNo */
+static emlrtRSInfo fj_emlrtRSI = { 307,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo yi_emlrtRSI = { 292,/* lineNo */
+static emlrtRSInfo gj_emlrtRSI = { 293,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo aj_emlrtRSI = { 291,/* lineNo */
+static emlrtRSInfo hj_emlrtRSI = { 292,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo bj_emlrtRSI = { 251,/* lineNo */
+static emlrtRSInfo ij_emlrtRSI = { 252,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo cj_emlrtRSI = { 239,/* lineNo */
+static emlrtRSInfo jj_emlrtRSI = { 240,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo dj_emlrtRSI = { 235,/* lineNo */
+static emlrtRSInfo kj_emlrtRSI = { 236,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo ej_emlrtRSI = { 220,/* lineNo */
+static emlrtRSInfo lj_emlrtRSI = { 221,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo fj_emlrtRSI = { 217,/* lineNo */
+static emlrtRSInfo mj_emlrtRSI = { 218,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo gj_emlrtRSI = { 215,/* lineNo */
+static emlrtRSInfo nj_emlrtRSI = { 216,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo hj_emlrtRSI = { 210,/* lineNo */
+static emlrtRSInfo oj_emlrtRSI = { 211,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo ij_emlrtRSI = { 208,/* lineNo */
+static emlrtRSInfo pj_emlrtRSI = { 209,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo dl_emlrtRSI = { 513,/* lineNo */
+static emlrtRSInfo kl_emlrtRSI = { 514,/* lineNo */
   "tiedrankFS",                        /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo el_emlrtRSI = { 516,/* lineNo */
+static emlrtRSInfo ll_emlrtRSI = { 517,/* lineNo */
   "tiedrankFS",                        /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo fl_emlrtRSI = { 523,/* lineNo */
+static emlrtRSInfo ml_emlrtRSI = { 524,/* lineNo */
   "tiedrankFS",                        /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo gl_emlrtRSI = { 524,/* lineNo */
+static emlrtRSInfo nl_emlrtRSI = { 525,/* lineNo */
   "tiedrankFS",                        /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo hl_emlrtRSI = { 540,/* lineNo */
+static emlrtRSInfo ol_emlrtRSI = { 541,/* lineNo */
   "tiedrankFS",                        /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo il_emlrtRSI = { 546,/* lineNo */
+static emlrtRSInfo pl_emlrtRSI = { 547,/* lineNo */
   "tiedrankFS",                        /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo om_emlrtRSI = { 29, /* lineNo */
+static emlrtRSInfo vm_emlrtRSI = { 29, /* lineNo */
   "reshapeSizeChecks",                 /* fcnName */
   "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\reshapeSizeChecks.m"/* pathName */
 };
 
-static emlrtMCInfo n_emlrtMCI = { 301, /* lineNo */
+static emlrtMCInfo p_emlrtMCI = { 302, /* lineNo */
   25,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtMCInfo o_emlrtMCI = { 320, /* lineNo */
+static emlrtMCInfo q_emlrtMCI = { 321, /* lineNo */
   25,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtMCInfo p_emlrtMCI = { 313, /* lineNo */
+static emlrtMCInfo r_emlrtMCI = { 314, /* lineNo */
   25,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtBCInfo xk_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo fl_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  207,                                 /* lineNo */
+  208,                                 /* lineNo */
   11,                                  /* colNo */
   "Y",                                 /* aName */
   "unibiv",                            /* fName */
@@ -276,22 +276,22 @@ static emlrtBCInfo xk_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo q_emlrtECI = { -1,  /* nDims */
-  251,                                 /* lineNo */
+  252,                                 /* lineNo */
   16,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
 static emlrtECInfo r_emlrtECI = { -1,  /* nDims */
-  257,                                 /* lineNo */
+  258,                                 /* lineNo */
   9,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtBCInfo yk_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo gl_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  290,                                 /* lineNo */
+  291,                                 /* lineNo */
   19,                                  /* colNo */
   "Y",                                 /* aName */
   "unibiv",                            /* fName */
@@ -300,43 +300,43 @@ static emlrtBCInfo yk_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo s_emlrtECI = { -1,  /* nDims */
-  328,                                 /* lineNo */
-  24,                                  /* colNo */
-  "unibiv",                            /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
-};
-
-static emlrtECInfo t_emlrtECI = { -1,  /* nDims */
   329,                                 /* lineNo */
   24,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
+static emlrtECInfo t_emlrtECI = { -1,  /* nDims */
+  330,                                 /* lineNo */
+  24,                                  /* colNo */
+  "unibiv",                            /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
+};
+
 static emlrtECInfo u_emlrtECI = { -1,  /* nDims */
-  390,                                 /* lineNo */
+  391,                                 /* lineNo */
   21,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
 static emlrtECInfo v_emlrtECI = { -1,  /* nDims */
-  390,                                 /* lineNo */
+  391,                                 /* lineNo */
   33,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
 static emlrtECInfo w_emlrtECI = { -1,  /* nDims */
-  394,                                 /* lineNo */
+  395,                                 /* lineNo */
   19,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtBCInfo al_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo hl_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  459,                                 /* lineNo */
+  460,                                 /* lineNo */
   51,                                  /* colNo */
   "new2",                              /* aName */
   "unibiv",                            /* fName */
@@ -344,9 +344,9 @@ static emlrtBCInfo al_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo bl_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo il_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  459,                                 /* lineNo */
+  460,                                 /* lineNo */
   89,                                  /* colNo */
   "new2",                              /* aName */
   "unibiv",                            /* fName */
@@ -355,15 +355,15 @@ static emlrtBCInfo bl_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo x_emlrtECI = { -1,  /* nDims */
-  465,                                 /* lineNo */
+  466,                                 /* lineNo */
   18,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtBCInfo cl_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo jl_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  251,                                 /* lineNo */
+  252,                                 /* lineNo */
   16,                                  /* colNo */
   "datax",                             /* aName */
   "unibiv",                            /* fName */
@@ -371,16 +371,16 @@ static emlrtBCInfo cl_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo cb_emlrtDCI = { 257,/* lineNo */
+static emlrtDCInfo ib_emlrtDCI = { 258,/* lineNo */
   15,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtBCInfo dl_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo kl_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  257,                                 /* lineNo */
+  258,                                 /* lineNo */
   15,                                  /* colNo */
   "univT",                             /* aName */
   "unibiv",                            /* fName */
@@ -388,9 +388,9 @@ static emlrtBCInfo dl_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo el_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ll_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  257,                                 /* lineNo */
+  258,                                 /* lineNo */
   32,                                  /* colNo */
   "univT",                             /* aName */
   "unibiv",                            /* fName */
@@ -398,16 +398,16 @@ static emlrtBCInfo el_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo db_emlrtDCI = { 257,/* lineNo */
+static emlrtDCInfo jb_emlrtDCI = { 258,/* lineNo */
   32,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m",/* pName */
   1                                    /* checkKind */
 };
 
-static emlrtBCInfo fl_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ml_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  459,                                 /* lineNo */
+  460,                                 /* lineNo */
   26,                                  /* colNo */
   "new2",                              /* aName */
   "unibiv",                            /* fName */
@@ -415,9 +415,9 @@ static emlrtBCInfo fl_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo gl_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo nl_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  459,                                 /* lineNo */
+  460,                                 /* lineNo */
   64,                                  /* colNo */
   "new2",                              /* aName */
   "unibiv",                            /* fName */
@@ -425,9 +425,9 @@ static emlrtBCInfo gl_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo hl_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo ol_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  460,                                 /* lineNo */
+  461,                                 /* lineNo */
   31,                                  /* colNo */
   "biv",                               /* aName */
   "unibiv",                            /* fName */
@@ -435,9 +435,9 @@ static emlrtBCInfo hl_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo ql_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo xl_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  523,                                 /* lineNo */
+  524,                                 /* lineNo */
   11,                                  /* colNo */
   "sx",                                /* aName */
   "tiedrankFS",                        /* fName */
@@ -445,9 +445,9 @@ static emlrtBCInfo ql_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo rl_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo yl_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  523,                                 /* lineNo */
+  524,                                 /* lineNo */
   13,                                  /* colNo */
   "sx",                                /* aName */
   "tiedrankFS",                        /* fName */
@@ -455,9 +455,9 @@ static emlrtBCInfo rl_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo sl_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo am_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  523,                                 /* lineNo */
+  524,                                 /* lineNo */
   26,                                  /* colNo */
   "epsx",                              /* aName */
   "tiedrankFS",                        /* fName */
@@ -465,9 +465,9 @@ static emlrtBCInfo sl_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo tl_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo bm_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  523,                                 /* lineNo */
+  524,                                 /* lineNo */
   28,                                  /* colNo */
   "epsx",                              /* aName */
   "tiedrankFS",                        /* fName */
@@ -476,15 +476,15 @@ static emlrtBCInfo tl_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo y_emlrtECI = { -1,  /* nDims */
-  523,                                 /* lineNo */
+  524,                                 /* lineNo */
   8,                                   /* colNo */
   "tiedrankFS",                        /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtBCInfo ul_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo cm_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  523,                                 /* lineNo */
+  524,                                 /* lineNo */
   42,                                  /* colNo */
   "sx",                                /* aName */
   "tiedrankFS",                        /* fName */
@@ -492,9 +492,9 @@ static emlrtBCInfo ul_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo vl_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo dm_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  523,                                 /* lineNo */
+  524,                                 /* lineNo */
   44,                                  /* colNo */
   "sx",                                /* aName */
   "tiedrankFS",                        /* fName */
@@ -502,9 +502,9 @@ static emlrtBCInfo vl_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo wl_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo em_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  523,                                 /* lineNo */
+  524,                                 /* lineNo */
   55,                                  /* colNo */
   "epsx",                              /* aName */
   "tiedrankFS",                        /* fName */
@@ -512,9 +512,9 @@ static emlrtBCInfo wl_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo xl_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo fm_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  523,                                 /* lineNo */
+  524,                                 /* lineNo */
   57,                                  /* colNo */
   "epsx",                              /* aName */
   "tiedrankFS",                        /* fName */
@@ -523,15 +523,15 @@ static emlrtBCInfo xl_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo ab_emlrtECI = { -1, /* nDims */
-  523,                                 /* lineNo */
+  524,                                 /* lineNo */
   39,                                  /* colNo */
   "tiedrankFS",                        /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtBCInfo yl_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo gm_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  540,                                 /* lineNo */
+  541,                                 /* lineNo */
   19,                                  /* colNo */
   "ranks",                             /* aName */
   "tiedrankFS",                        /* fName */
@@ -539,9 +539,9 @@ static emlrtBCInfo yl_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo am_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo hm_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  540,                                 /* lineNo */
+  541,                                 /* lineNo */
   28,                                  /* colNo */
   "ranks",                             /* aName */
   "tiedrankFS",                        /* fName */
@@ -549,9 +549,9 @@ static emlrtBCInfo am_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo bm_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo im_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  539,                                 /* lineNo */
+  540,                                 /* lineNo */
   11,                                  /* colNo */
   "ranks",                             /* aName */
   "tiedrankFS",                        /* fName */
@@ -559,9 +559,9 @@ static emlrtBCInfo bm_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo cm_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo jm_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  539,                                 /* lineNo */
+  540,                                 /* lineNo */
   20,                                  /* colNo */
   "ranks",                             /* aName */
   "tiedrankFS",                        /* fName */
@@ -570,34 +570,34 @@ static emlrtBCInfo cm_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo bb_emlrtECI = { -1, /* nDims */
-  545,                                 /* lineNo */
+  546,                                 /* lineNo */
   1,                                   /* colNo */
   "tiedrankFS",                        /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo sb_emlrtRTEI = { 59,/* lineNo */
+static emlrtRTEInfo tb_emlrtRTEI = { 59,/* lineNo */
   23,                                  /* colNo */
   "reshapeSizeChecks",                 /* fName */
   "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\reshapeSizeChecks.m"/* pName */
 };
 
-static emlrtRTEInfo tb_emlrtRTEI = { 52,/* lineNo */
+static emlrtRTEInfo ub_emlrtRTEI = { 52,/* lineNo */
   13,                                  /* colNo */
   "reshapeSizeChecks",                 /* fName */
   "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\reshapeSizeChecks.m"/* pName */
 };
 
-static emlrtDCInfo eb_emlrtDCI = { 520,/* lineNo */
+static emlrtDCInfo kb_emlrtDCI = { 521,/* lineNo */
   23,                                  /* colNo */
   "tiedrankFS",                        /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m",/* pName */
   4                                    /* checkKind */
 };
 
-static emlrtBCInfo dm_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo km_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  531,                                 /* lineNo */
+  532,                                 /* lineNo */
   16,                                  /* colNo */
   "tieloc",                            /* aName */
   "tiedrankFS",                        /* fName */
@@ -605,9 +605,9 @@ static emlrtBCInfo dm_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo em_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo lm_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  545,                                 /* lineNo */
+  546,                                 /* lineNo */
   3,                                   /* colNo */
   "r",                                 /* aName */
   "tiedrankFS",                        /* fName */
@@ -615,9 +615,9 @@ static emlrtBCInfo em_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo fm_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo mm_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  533,                                 /* lineNo */
+  534,                                 /* lineNo */
   11,                                  /* colNo */
   "tieloc",                            /* aName */
   "tiedrankFS",                        /* fName */
@@ -625,9 +625,9 @@ static emlrtBCInfo fm_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtBCInfo gm_emlrtBCI = { -1, /* iFirst */
+static emlrtBCInfo nm_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  533,                                 /* lineNo */
+  534,                                 /* lineNo */
   33,                                  /* colNo */
   "tieloc",                            /* aName */
   "tiedrankFS",                        /* fName */
@@ -635,275 +635,275 @@ static emlrtBCInfo gm_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtRTEInfo xi_emlrtRTEI = { 195,/* lineNo */
+static emlrtRTEInfo wj_emlrtRTEI = { 196,/* lineNo */
   1,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo yi_emlrtRTEI = { 197,/* lineNo */
+static emlrtRTEInfo xj_emlrtRTEI = { 198,/* lineNo */
   1,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo aj_emlrtRTEI = { 199,/* lineNo */
+static emlrtRTEInfo yj_emlrtRTEI = { 200,/* lineNo */
   1,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo bj_emlrtRTEI = { 203,/* lineNo */
+static emlrtRTEInfo ak_emlrtRTEI = { 204,/* lineNo */
   1,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo cj_emlrtRTEI = { 207,/* lineNo */
+static emlrtRTEInfo bk_emlrtRTEI = { 208,/* lineNo */
   5,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo dj_emlrtRTEI = { 207,/* lineNo */
+static emlrtRTEInfo ck_emlrtRTEI = { 208,/* lineNo */
   7,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo ej_emlrtRTEI = { 494,/* lineNo */
+static emlrtRTEInfo dk_emlrtRTEI = { 495,/* lineNo */
   1,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo fj_emlrtRTEI = { 213,/* lineNo */
+static emlrtRTEInfo ek_emlrtRTEI = { 214,/* lineNo */
   9,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo gj_emlrtRTEI = { 221,/* lineNo */
+static emlrtRTEInfo fk_emlrtRTEI = { 222,/* lineNo */
   13,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo hj_emlrtRTEI = { 218,/* lineNo */
+static emlrtRTEInfo gk_emlrtRTEI = { 219,/* lineNo */
   13,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo ij_emlrtRTEI = { 235,/* lineNo */
+static emlrtRTEInfo hk_emlrtRTEI = { 236,/* lineNo */
   5,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo jj_emlrtRTEI = { 251,/* lineNo */
+static emlrtRTEInfo ik_emlrtRTEI = { 252,/* lineNo */
   16,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo kj_emlrtRTEI = { 251,/* lineNo */
+static emlrtRTEInfo jk_emlrtRTEI = { 252,/* lineNo */
   32,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo lj_emlrtRTEI = { 251,/* lineNo */
+static emlrtRTEInfo kk_emlrtRTEI = { 252,/* lineNo */
   53,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo mj_emlrtRTEI = { 251,/* lineNo */
+static emlrtRTEInfo lk_emlrtRTEI = { 252,/* lineNo */
   49,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo nj_emlrtRTEI = { 1,/* lineNo */
+static emlrtRTEInfo mk_emlrtRTEI = { 1,/* lineNo */
   16,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo oj_emlrtRTEI = { 251,/* lineNo */
+static emlrtRTEInfo nk_emlrtRTEI = { 252,/* lineNo */
   5,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo pj_emlrtRTEI = { 257,/* lineNo */
+static emlrtRTEInfo ok_emlrtRTEI = { 258,/* lineNo */
   15,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo qj_emlrtRTEI = { 257,/* lineNo */
+static emlrtRTEInfo pk_emlrtRTEI = { 258,/* lineNo */
   26,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo rj_emlrtRTEI = { 290,/* lineNo */
+static emlrtRTEInfo qk_emlrtRTEI = { 291,/* lineNo */
   15,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo sj_emlrtRTEI = { 295,/* lineNo */
+static emlrtRTEInfo rk_emlrtRTEI = { 296,/* lineNo */
   17,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo tj_emlrtRTEI = { 328,/* lineNo */
+static emlrtRTEInfo sk_emlrtRTEI = { 329,/* lineNo */
   24,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo uj_emlrtRTEI = { 309,/* lineNo */
+static emlrtRTEInfo tk_emlrtRTEI = { 310,/* lineNo */
   21,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo vj_emlrtRTEI = { 344,/* lineNo */
+static emlrtRTEInfo uk_emlrtRTEI = { 345,/* lineNo */
   24,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo wj_emlrtRTEI = { 323,/* lineNo */
+static emlrtRTEInfo vk_emlrtRTEI = { 324,/* lineNo */
   21,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo xj_emlrtRTEI = { 329,/* lineNo */
+static emlrtRTEInfo wk_emlrtRTEI = { 330,/* lineNo */
   24,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo yj_emlrtRTEI = { 344,/* lineNo */
+static emlrtRTEInfo xk_emlrtRTEI = { 345,/* lineNo */
   45,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo ak_emlrtRTEI = { 390,/* lineNo */
+static emlrtRTEInfo yk_emlrtRTEI = { 391,/* lineNo */
   33,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo bk_emlrtRTEI = { 86,/* lineNo */
+static emlrtRTEInfo al_emlrtRTEI = { 86,/* lineNo */
   13,                                  /* colNo */
   "eml_mtimes_helper",                 /* fName */
   "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\ops\\eml_mtimes_helper.m"/* pName */
 };
 
-static emlrtRTEInfo ck_emlrtRTEI = { 448,/* lineNo */
+static emlrtRTEInfo bl_emlrtRTEI = { 449,/* lineNo */
   13,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo dk_emlrtRTEI = { 456,/* lineNo */
+static emlrtRTEInfo cl_emlrtRTEI = { 457,/* lineNo */
   13,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo ek_emlrtRTEI = { 342,/* lineNo */
+static emlrtRTEInfo dl_emlrtRTEI = { 343,/* lineNo */
   21,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo fk_emlrtRTEI = { 343,/* lineNo */
+static emlrtRTEInfo el_emlrtRTEI = { 344,/* lineNo */
   21,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo tk_emlrtRTEI = { 516,/* lineNo */
+static emlrtRTEInfo sl_emlrtRTEI = { 517,/* lineNo */
   15,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo uk_emlrtRTEI = { 520,/* lineNo */
+static emlrtRTEInfo tl_emlrtRTEI = { 521,/* lineNo */
   1,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo vk_emlrtRTEI = { 523,/* lineNo */
+static emlrtRTEInfo ul_emlrtRTEI = { 524,/* lineNo */
   8,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo wk_emlrtRTEI = { 524,/* lineNo */
+static emlrtRTEInfo vl_emlrtRTEI = { 525,/* lineNo */
   1,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo xk_emlrtRTEI = { 527,/* lineNo */
+static emlrtRTEInfo wl_emlrtRTEI = { 528,/* lineNo */
   1,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo yk_emlrtRTEI = { 545,/* lineNo */
+static emlrtRTEInfo xl_emlrtRTEI = { 546,/* lineNo */
   3,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo al_emlrtRTEI = { 546,/* lineNo */
+static emlrtRTEInfo yl_emlrtRTEI = { 547,/* lineNo */
   1,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo bl_emlrtRTEI = { 540,/* lineNo */
+static emlrtRTEInfo am_emlrtRTEI = { 541,/* lineNo */
   13,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo cl_emlrtRTEI = { 502,/* lineNo */
+static emlrtRTEInfo bm_emlrtRTEI = { 503,/* lineNo */
   14,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo dl_emlrtRTEI = { 520,/* lineNo */
+static emlrtRTEInfo cm_emlrtRTEI = { 521,/* lineNo */
   10,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRSInfo lnb_emlrtRSI = { 313,/* lineNo */
+static emlrtRSInfo bob_emlrtRSI = { 314,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo mnb_emlrtRSI = { 320,/* lineNo */
+static emlrtRSInfo cob_emlrtRSI = { 321,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo nnb_emlrtRSI = { 301,/* lineNo */
+static emlrtRSInfo dob_emlrtRSI = { 302,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
@@ -965,7 +965,7 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  emxInit_real_T(sp, &tieloc, 1, &wk_emlrtRTEI, true);
+  emxInit_real_T(sp, &tieloc, 1, &vl_emlrtRTEI, true);
 
   /*  This function is called just in case of C coder translation */
   /*  tiedrankFS is a simplified version of tiedrank */
@@ -975,40 +975,40 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
   /*    vector x.  If any x values are tied, TIEDRANK computes their average */
   /*    rank. */
   /*  Sort, then leave the NaNs (which are sorted to the end) alone */
-  st.site = &dl_emlrtRSI;
+  st.site = &kl_emlrtRSI;
   i = tieloc->size[0];
   tieloc->size[0] = x->size[0];
-  emxEnsureCapacity_real_T(&st, tieloc, i, &sk_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, tieloc, i, &rl_emlrtRTEI);
   loop_ub = x->size[0];
   for (i = 0; i < loop_ub; i++) {
     tieloc->data[i] = x->data[i];
   }
 
-  emxInit_int32_T(&st, &rowidx, 1, &cl_emlrtRTEI, true);
-  emxInit_int32_T(&st, &ii, 1, &el_emlrtRTEI, true);
-  b_st.site = &jl_emlrtRSI;
+  emxInit_int32_T(&st, &rowidx, 1, &bm_emlrtRTEI, true);
+  emxInit_int32_T(&st, &ii, 1, &dm_emlrtRTEI, true);
+  b_st.site = &ql_emlrtRSI;
   sort(&b_st, tieloc, ii);
   i = rowidx->size[0];
   rowidx->size[0] = ii->size[0];
-  emxEnsureCapacity_int32_T(&st, rowidx, i, &df_emlrtRTEI);
+  emxEnsureCapacity_int32_T(&st, rowidx, i, &cg_emlrtRTEI);
   loop_ub = ii->size[0];
   for (i = 0; i < loop_ub; i++) {
     rowidx->data[i] = ii->data[i];
   }
 
-  emxInit_boolean_T(&st, &b_x, 1, &tk_emlrtRTEI, true);
-  st.site = &el_emlrtRSI;
+  emxInit_boolean_T(&st, &b_x, 1, &sl_emlrtRTEI, true);
+  st.site = &ll_emlrtRSI;
   i = b_x->size[0];
   b_x->size[0] = x->size[0];
-  emxEnsureCapacity_boolean_T(&st, b_x, i, &tk_emlrtRTEI);
+  emxEnsureCapacity_boolean_T(&st, b_x, i, &sl_emlrtRTEI);
   loop_ub = x->size[0];
   for (i = 0; i < loop_ub; i++) {
     b_x->data[i] = muDoubleScalarIsNaN(x->data[i]);
   }
 
-  b_st.site = &km_emlrtRSI;
-  emxInit_real_T(&b_st, &y, 2, &dl_emlrtRTEI, true);
-  c_st.site = &ld_emlrtRSI;
+  b_st.site = &rm_emlrtRSI;
+  emxInit_real_T(&b_st, &y, 2, &cm_emlrtRTEI, true);
+  c_st.site = &sd_emlrtRSI;
   nz = combineVectorElements(&c_st, b_x);
   xLen = (real_T)x->size[0] - (real_T)nz;
 
@@ -1020,7 +1020,7 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
     i = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = (int32_T)(xLen - 1.0) + 1;
-    emxEnsureCapacity_real_T(sp, y, i, &fd_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, y, i, &hd_emlrtRTEI);
     loop_ub = (int32_T)(xLen - 1.0);
     for (i = 0; i <= loop_ub; i++) {
       y->data[i] = (real_T)i + 1.0;
@@ -1028,13 +1028,13 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
   }
 
   if (nz < 0) {
-    emlrtNonNegativeCheckR2012b(nz, &eb_emlrtDCI, (emlrtCTX)sp);
+    emlrtNonNegativeCheckR2012b(nz, &kb_emlrtDCI, (emlrtCTX)sp);
   }
 
-  emxInit_real_T(sp, &ranks, 1, &uk_emlrtRTEI, true);
+  emxInit_real_T(sp, &ranks, 1, &tl_emlrtRTEI, true);
   i = ranks->size[0];
   ranks->size[0] = y->size[1] + nz;
-  emxEnsureCapacity_real_T(sp, ranks, i, &uk_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, ranks, i, &tl_emlrtRTEI);
   loop_ub = y->size[1];
   for (i = 0; i < loop_ub; i++) {
     ranks->data[i] = y->data[i];
@@ -1051,14 +1051,14 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
     loop_ub = 0;
   } else {
     if (1 > tieloc->size[0]) {
-      emlrtDynamicBoundsCheckR2012b(1, 1, tieloc->size[0], &ql_emlrtBCI,
+      emlrtDynamicBoundsCheckR2012b(1, 1, tieloc->size[0], &xl_emlrtBCI,
         (emlrtCTX)sp);
     }
 
     if (((int32_T)(xLen - 1.0) < 1) || ((int32_T)(xLen - 1.0) > tieloc->size[0]))
     {
       emlrtDynamicBoundsCheckR2012b((int32_T)(xLen - 1.0), 1, tieloc->size[0],
-        &rl_emlrtBCI, (emlrtCTX)sp);
+        &yl_emlrtBCI, (emlrtCTX)sp);
     }
 
     loop_ub = (int32_T)(xLen - 1.0);
@@ -1066,20 +1066,20 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
 
   b_iv[0] = 1;
   b_iv[1] = loop_ub;
-  st.site = &fl_emlrtRSI;
+  st.site = &ml_emlrtRSI;
   b_indexShapeCheck(&st, tieloc->size[0], b_iv);
   if (1.0 > xLen - 1.0) {
     i = 0;
   } else {
     if (1 > rowidx->size[0]) {
-      emlrtDynamicBoundsCheckR2012b(1, 1, rowidx->size[0], &sl_emlrtBCI,
+      emlrtDynamicBoundsCheckR2012b(1, 1, rowidx->size[0], &am_emlrtBCI,
         (emlrtCTX)sp);
     }
 
     if (((int32_T)(xLen - 1.0) < 1) || ((int32_T)(xLen - 1.0) > rowidx->size[0]))
     {
       emlrtDynamicBoundsCheckR2012b((int32_T)(xLen - 1.0), 1, rowidx->size[0],
-        &tl_emlrtBCI, (emlrtCTX)sp);
+        &bm_emlrtBCI, (emlrtCTX)sp);
     }
 
     i = (int32_T)(xLen - 1.0);
@@ -1087,7 +1087,7 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
 
   b_iv[0] = 1;
   b_iv[1] = i;
-  st.site = &fl_emlrtRSI;
+  st.site = &ml_emlrtRSI;
   b_indexShapeCheck(&st, rowidx->size[0], b_iv);
   if (loop_ub != i) {
     emlrtSizeEqCheck1DR2012b(loop_ub, i, &y_emlrtECI, (emlrtCTX)sp);
@@ -1098,14 +1098,14 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
     nz = 0;
   } else {
     if (2 > tieloc->size[0]) {
-      emlrtDynamicBoundsCheckR2012b(2, 1, tieloc->size[0], &ul_emlrtBCI,
+      emlrtDynamicBoundsCheckR2012b(2, 1, tieloc->size[0], &cm_emlrtBCI,
         (emlrtCTX)sp);
     }
 
     i = 1;
     if (((int32_T)xLen < 1) || ((int32_T)xLen > tieloc->size[0])) {
       emlrtDynamicBoundsCheckR2012b((int32_T)xLen, 1, tieloc->size[0],
-        &vl_emlrtBCI, (emlrtCTX)sp);
+        &dm_emlrtBCI, (emlrtCTX)sp);
     }
 
     nz = (int32_T)xLen;
@@ -1114,21 +1114,21 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
   b_iv[0] = 1;
   nz -= i;
   b_iv[1] = nz;
-  st.site = &fl_emlrtRSI;
+  st.site = &ml_emlrtRSI;
   b_indexShapeCheck(&st, tieloc->size[0], b_iv);
   if (2.0 > xLen) {
     n = -1;
     i1 = -1;
   } else {
     if (2 > rowidx->size[0]) {
-      emlrtDynamicBoundsCheckR2012b(2, 1, rowidx->size[0], &wl_emlrtBCI,
+      emlrtDynamicBoundsCheckR2012b(2, 1, rowidx->size[0], &em_emlrtBCI,
         (emlrtCTX)sp);
     }
 
     n = 0;
     if (((int32_T)xLen < 1) || ((int32_T)xLen > rowidx->size[0])) {
       emlrtDynamicBoundsCheckR2012b((int32_T)xLen, 1, rowidx->size[0],
-        &xl_emlrtBCI, (emlrtCTX)sp);
+        &fm_emlrtBCI, (emlrtCTX)sp);
     }
 
     i1 = (int32_T)xLen - 1;
@@ -1137,7 +1137,7 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
   b_iv[0] = 1;
   n = i1 - n;
   b_iv[1] = n;
-  st.site = &fl_emlrtRSI;
+  st.site = &ml_emlrtRSI;
   b_indexShapeCheck(&st, rowidx->size[0], b_iv);
   if (nz != n) {
     emlrtSizeEqCheck1DR2012b(nz, n, &ab_emlrtECI, (emlrtCTX)sp);
@@ -1147,19 +1147,19 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
     emlrtSizeEqCheck1DR2012b(loop_ub, nz, &y_emlrtECI, (emlrtCTX)sp);
   }
 
-  st.site = &gl_emlrtRSI;
+  st.site = &nl_emlrtRSI;
   nz = b_x->size[0];
   b_x->size[0] = loop_ub;
-  emxEnsureCapacity_boolean_T(&st, b_x, nz, &vk_emlrtRTEI);
+  emxEnsureCapacity_boolean_T(&st, b_x, nz, &ul_emlrtRTEI);
   for (nz = 0; nz < loop_ub; nz++) {
     b_x->data[nz] = (tieloc->data[nz] >= tieloc->data[i + nz]);
   }
 
-  b_st.site = &ob_emlrtRSI;
+  b_st.site = &vb_emlrtRSI;
   c_eml_find(&b_st, b_x, ii);
   i = tieloc->size[0];
   tieloc->size[0] = ii->size[0] + 1;
-  emxEnsureCapacity_real_T(sp, tieloc, i, &wk_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, tieloc, i, &vl_emlrtRTEI);
   loop_ub = ii->size[0];
   emxFree_boolean_T(&b_x);
   for (i = 0; i < loop_ub; i++) {
@@ -1169,18 +1169,18 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
   tieloc->data[ii->size[0]] = xLen + 2.0;
   i = r->size[0];
   r->size[0] = x->size[0];
-  emxEnsureCapacity_real_T(sp, r, i, &xk_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, r, i, &wl_emlrtRTEI);
   loop_ub = x->size[0];
   for (i = 0; i < loop_ub; i++) {
     r->data[i] = 0.0;
   }
 
   tiecount = 1U;
-  emxInit_real_T(sp, &b_ranks, 1, &bl_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_ranks, 1, &am_emlrtRTEI, true);
   while (tiecount < (uint32_T)tieloc->size[0]) {
     if (((int32_T)tiecount < 1) || ((int32_T)tiecount > tieloc->size[0])) {
       emlrtDynamicBoundsCheckR2012b((int32_T)tiecount, 1, tieloc->size[0],
-        &dm_emlrtBCI, (emlrtCTX)sp);
+        &km_emlrtBCI, (emlrtCTX)sp);
     }
 
     xLen = tieloc->data[(int32_T)tiecount - 1];
@@ -1190,12 +1190,12 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
       if (((int32_T)(tiecount + 1U) < 1) || ((int32_T)(tiecount + 1U) >
            tieloc->size[0])) {
         emlrtDynamicBoundsCheckR2012b((int32_T)(tiecount + 1U), 1, tieloc->size
-          [0], &fm_emlrtBCI, (emlrtCTX)sp);
+          [0], &mm_emlrtBCI, (emlrtCTX)sp);
       }
 
       if (((int32_T)tiecount < 1) || ((int32_T)tiecount > tieloc->size[0])) {
         emlrtDynamicBoundsCheckR2012b((int32_T)tiecount, 1, tieloc->size[0],
-          &gm_emlrtBCI, (emlrtCTX)sp);
+          &nm_emlrtBCI, (emlrtCTX)sp);
       }
 
       if (tieloc->data[(int32_T)tiecount] == tieloc->data[(int32_T)tiecount - 1]
@@ -1218,13 +1218,13 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
     } else {
       if (((int32_T)xLen < 1) || ((int32_T)xLen > ranks->size[0])) {
         emlrtDynamicBoundsCheckR2012b((int32_T)xLen, 1, ranks->size[0],
-          &yl_emlrtBCI, (emlrtCTX)sp);
+          &gm_emlrtBCI, (emlrtCTX)sp);
       }
 
       i = (int32_T)xLen - 1;
       if (((int32_T)d < 1) || ((int32_T)d > ranks->size[0])) {
         emlrtDynamicBoundsCheckR2012b((int32_T)d, 1, ranks->size[0],
-          &am_emlrtBCI, (emlrtCTX)sp);
+          &hm_emlrtBCI, (emlrtCTX)sp);
       }
 
       nz = (int32_T)d;
@@ -1233,7 +1233,7 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
     b_iv[0] = 1;
     loop_ub = nz - i;
     b_iv[1] = loop_ub;
-    st.site = &hl_emlrtRSI;
+    st.site = &ol_emlrtRSI;
     b_indexShapeCheck(&st, ranks->size[0], b_iv);
     if (xLen > d) {
       nz = -1;
@@ -1241,13 +1241,13 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
     } else {
       if (((int32_T)xLen < 1) || ((int32_T)xLen > ranks->size[0])) {
         emlrtDynamicBoundsCheckR2012b((int32_T)xLen, 1, ranks->size[0],
-          &bm_emlrtBCI, (emlrtCTX)sp);
+          &im_emlrtBCI, (emlrtCTX)sp);
       }
 
       nz = (int32_T)xLen - 2;
       if (((int32_T)d < 1) || ((int32_T)d > ranks->size[0])) {
         emlrtDynamicBoundsCheckR2012b((int32_T)d, 1, ranks->size[0],
-          &cm_emlrtBCI, (emlrtCTX)sp);
+          &jm_emlrtBCI, (emlrtCTX)sp);
       }
 
       n = (int32_T)d;
@@ -1255,12 +1255,12 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
 
     i1 = b_ranks->size[0];
     b_ranks->size[0] = loop_ub;
-    emxEnsureCapacity_real_T(sp, b_ranks, i1, &bl_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_ranks, i1, &am_emlrtRTEI);
     for (i1 = 0; i1 < loop_ub; i1++) {
       b_ranks->data[i1] = ranks->data[i + i1];
     }
 
-    st.site = &hl_emlrtRSI;
+    st.site = &ol_emlrtRSI;
     b_r = &st;
     d = sum(b_r, b_ranks);
     loop_ub = (n - nz) - 1;
@@ -1280,11 +1280,11 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
   /*  Broadcast the ranks back out, including NaN where required. */
   i = ii->size[0];
   ii->size[0] = rowidx->size[0];
-  emxEnsureCapacity_int32_T(sp, ii, i, &yk_emlrtRTEI);
+  emxEnsureCapacity_int32_T(sp, ii, i, &xl_emlrtRTEI);
   loop_ub = rowidx->size[0];
   for (i = 0; i < loop_ub; i++) {
     if ((rowidx->data[i] < 1) || (rowidx->data[i] > x->size[0])) {
-      emlrtDynamicBoundsCheckR2012b(rowidx->data[i], 1, x->size[0], &em_emlrtBCI,
+      emlrtDynamicBoundsCheckR2012b(rowidx->data[i], 1, x->size[0], &lm_emlrtBCI,
         (emlrtCTX)sp);
     }
 
@@ -1304,29 +1304,29 @@ static void tiedrankFS(const emlrtStack *sp, const emxArray_real_T *x,
 
   emxFree_int32_T(&ii);
   emxFree_real_T(&ranks);
-  st.site = &il_emlrtRSI;
+  st.site = &pl_emlrtRSI;
   nz = r->size[0];
-  b_st.site = &om_emlrtRSI;
+  b_st.site = &vm_emlrtRSI;
   n = r->size[0];
   if (1 > r->size[0]) {
     n = 1;
   }
 
   if (x->size[0] > muIntScalarMax_sint32(nz, n)) {
-    emlrtErrorWithMessageIdR2018a(&st, &tb_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(&st, &ub_emlrtRTEI,
       "Coder:toolbox:reshape_emptyReshapeLimit",
       "Coder:toolbox:reshape_emptyReshapeLimit", 0);
   }
 
   if (x->size[0] != r->size[0]) {
-    emlrtErrorWithMessageIdR2018a(&st, &sb_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(&st, &tb_emlrtRTEI,
       "Coder:MATLAB:getReshapeDims_notSameNumel",
       "Coder:MATLAB:getReshapeDims_notSameNumel", 0);
   }
 
   i = r->size[0];
   r->size[0] = x->size[0];
-  emxEnsureCapacity_real_T(sp, r, i, &al_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, r, i, &yl_emlrtRTEI);
   emlrtHeapReferenceStackLeaveFcnR2012b((emlrtCTX)sp);
 }
 
@@ -3851,7 +3851,7 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  emxInit_real_T(sp, &bivT, 1, &xi_emlrtRTEI, true);
+  emxInit_real_T(sp, &bivT, 1, &wj_emlrtRTEI, true);
 
   /* unibiv has the purpose of detecting univariate and bivariate outliers */
   /*  */
@@ -3871,13 +3871,16 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
   /*  */
   /*  Optional input arguments: */
   /*  */
-  /*            rf  :  It specifies the confidence */
-  /*                   level of the robust bivariate ellipses. Scalar. 0<rf<1. */
-  /*                   The default value is 0.95 that is the outer contour in */
-  /*                   presence of normality for each ellipse should leave */
-  /*                   outside 5% of the values. */
-  /*                  Example - 'rf',0.99 */
+  /*  */
+  /*        madcoef :  scaled MAD. Scalar. Coefficient which is used to scale MAD */
+  /*                    coefficient to have a robust estimate of dispersion.  The */
+  /*                    default is 1.4815 so that 1.4815*MAD(N(0,1))=1. */
+  /*                  Example - 'madcoef',2 */
   /*                  Data Types - double */
+  /*                    Remark: if mad =median(y-median(y))=0 then the interquartile */
+  /*                    range is used. If also the interquartile range is 0 */
+  /*                    than the MD (mean absolute deviation) is used.  In */
+  /*                    other words MD=mean(abs(y-mean(Y)) */
   /*  */
   /*       robscale :   how to compute dispersion. Scalar. It specifies the */
   /*                    statistical indexes to use to compute the dispersion of */
@@ -3898,6 +3901,15 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
   /*                    around the univariate medians. */
   /*                  Example - 'robscale',2 */
   /*                  Data Types - double */
+  /*  */
+  /*            rf  :  It specifies the confidence */
+  /*                   level of the robust bivariate ellipses. Scalar. 0<rf<1. */
+  /*                   The default value is 0.95 that is the outer contour in */
+  /*                   presence of normality for each ellipse should leave */
+  /*                   outside 5% of the values. */
+  /*                  Example - 'rf',0.99 */
+  /*                  Data Types - double */
+  /*  */
   /*  */
   /*          plots :   Plot on the screen. Scalar. It specifies whether it is */
   /*                    necessary to produce a plot */
@@ -3929,17 +3941,6 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
   /*                    in the same window else a new window is created. */
   /*                  Example - 'tag','new_tag' */
   /*                  Data Types - char */
-  /*  */
-  /*        madcoef :  scaled MAD. Scalar. Coefficient which is used to scale MAD */
-  /*                    coefficient to have a robust estimate of dispersion.  The */
-  /*                    default is 1.4815 so that 1.4815*MAD(N(0,1))=1. */
-  /*                  Example - 'madcoef',2 */
-  /*                  Data Types - double */
-  /*                    Remark: if mad =median(y-median(y))=0 then the interquartile */
-  /*                    range is used. If also the interquartile range is 0 */
-  /*                    than the MD (mean absolute deviation) is used.  In */
-  /*                    other words MD=mean(abs(y-mean(Y)) */
-  /*  */
   /*  */
   /*  Output: */
   /*  */
@@ -3996,36 +3997,36 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
   /*  bivT contains the frequency distribution of biv. outliers */
   i = bivT->size[0];
   bivT->size[0] = Y->size[0];
-  emxEnsureCapacity_real_T(sp, bivT, i, &xi_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, bivT, i, &wj_emlrtRTEI);
   loop_ub = Y->size[0];
   for (i = 0; i < loop_ub; i++) {
     bivT->data[i] = 0.0;
   }
 
-  emxInit_real_T(sp, &univT, 1, &yi_emlrtRTEI, true);
+  emxInit_real_T(sp, &univT, 1, &xj_emlrtRTEI, true);
 
   /*  univT contains the frequency distribution of univ. outliers */
   i = univT->size[0];
   univT->size[0] = Y->size[0];
-  emxEnsureCapacity_real_T(sp, univT, i, &yi_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, univT, i, &xj_emlrtRTEI);
   loop_ub = Y->size[0];
   for (i = 0; i < loop_ub; i++) {
     univT->data[i] = 0.0;
   }
 
-  emxInit_real_T(sp, &MDbiv, 1, &aj_emlrtRTEI, true);
+  emxInit_real_T(sp, &MDbiv, 1, &yj_emlrtRTEI, true);
 
   /*  MDbiv= vector which contains the sum of the bivaraite Mahalanobis distances for each unit */
   i = MDbiv->size[0];
   MDbiv->size[0] = Y->size[0];
-  emxEnsureCapacity_real_T(sp, MDbiv, i, &aj_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, MDbiv, i, &yj_emlrtRTEI);
   loop_ub = Y->size[0];
   for (i = 0; i < loop_ub; i++) {
     MDbiv->data[i] = 0.0;
   }
 
   /*  madcoef=1; */
-  emxInit_real_T(sp, &biv, 2, &dk_emlrtRTEI, true);
+  emxInit_real_T(sp, &biv, 2, &cl_emlrtRTEI, true);
   if (Y->size[0] < 1) {
     biv->size[0] = 1;
     biv->size[1] = 0;
@@ -4033,77 +4034,77 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
     i = biv->size[0] * biv->size[1];
     biv->size[0] = 1;
     biv->size[1] = Y->size[0];
-    emxEnsureCapacity_real_T(sp, biv, i, &fd_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, biv, i, &hd_emlrtRTEI);
     loop_ub = Y->size[0] - 1;
     for (i = 0; i <= loop_ub; i++) {
       biv->data[i] = (real_T)i + 1.0;
     }
   }
 
-  emxInit_real_T(sp, &seq, 1, &bj_emlrtRTEI, true);
+  emxInit_real_T(sp, &seq, 1, &ak_emlrtRTEI, true);
   i = seq->size[0];
   seq->size[0] = biv->size[1];
-  emxEnsureCapacity_real_T(sp, seq, i, &bj_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, seq, i, &ak_emlrtRTEI);
   loop_ub = biv->size[1];
   for (i = 0; i < loop_ub; i++) {
     seq->data[i] = biv->data[i];
   }
 
   i = Y->size[1];
-  emxInit_real_T(sp, &y, 1, &cj_emlrtRTEI, true);
-  emxInit_real_T(sp, &Ys, 1, &fj_emlrtRTEI, true);
-  emxInit_real_T(sp, &datax, 2, &ij_emlrtRTEI, true);
-  emxInit_real_T(sp, &outy, 2, &oj_emlrtRTEI, true);
-  emxInit_real_T(sp, &Xs, 1, &sj_emlrtRTEI, true);
-  emxInit_real_T(sp, &xrank, 1, &ek_emlrtRTEI, true);
-  emxInit_real_T(sp, &yrank, 1, &fk_emlrtRTEI, true);
-  emxInit_creal_T(sp, &new2, 2, &ck_emlrtRTEI, true);
-  emxInit_boolean_T(sp, &r, 1, &nj_emlrtRTEI, true);
-  emxInit_boolean_T(sp, &r1, 1, &nj_emlrtRTEI, true);
-  emxInit_int32_T(sp, &r2, 1, &jj_emlrtRTEI, true);
-  emxInit_int32_T(sp, &ii, 1, &nj_emlrtRTEI, true);
-  emxInit_real_T(sp, &r3, 1, &mj_emlrtRTEI, true);
-  emxInit_real_T(sp, &b_Y, 1, &dj_emlrtRTEI, true);
-  emxInit_creal_T(sp, &b_Xs, 2, &bk_emlrtRTEI, true);
+  emxInit_real_T(sp, &y, 1, &bk_emlrtRTEI, true);
+  emxInit_real_T(sp, &Ys, 1, &ek_emlrtRTEI, true);
+  emxInit_real_T(sp, &datax, 2, &hk_emlrtRTEI, true);
+  emxInit_real_T(sp, &outy, 2, &nk_emlrtRTEI, true);
+  emxInit_real_T(sp, &Xs, 1, &rk_emlrtRTEI, true);
+  emxInit_real_T(sp, &xrank, 1, &dl_emlrtRTEI, true);
+  emxInit_real_T(sp, &yrank, 1, &el_emlrtRTEI, true);
+  emxInit_creal_T(sp, &new2, 2, &bl_emlrtRTEI, true);
+  emxInit_boolean_T(sp, &r, 1, &mk_emlrtRTEI, true);
+  emxInit_boolean_T(sp, &r1, 1, &mk_emlrtRTEI, true);
+  emxInit_int32_T(sp, &r2, 1, &ik_emlrtRTEI, true);
+  emxInit_int32_T(sp, &ii, 1, &mk_emlrtRTEI, true);
+  emxInit_real_T(sp, &r3, 1, &lk_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_Y, 1, &ck_emlrtRTEI, true);
+  emxInit_creal_T(sp, &b_Xs, 2, &al_emlrtRTEI, true);
   for (il = 0; il < i; il++) {
     /*  il is linked to the rows */
     /*  Ys = vector which contains standardized data */
     if (il + 1 > Y->size[1]) {
-      emlrtDynamicBoundsCheckR2012b(il + 1, 1, Y->size[1], &xk_emlrtBCI,
+      emlrtDynamicBoundsCheckR2012b(il + 1, 1, Y->size[1], &fl_emlrtBCI,
         (emlrtCTX)sp);
     }
 
     loop_ub = Y->size[0];
     i1 = y->size[0];
     y->size[0] = Y->size[0];
-    emxEnsureCapacity_real_T(sp, y, i1, &cj_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, y, i1, &bk_emlrtRTEI);
     i1 = b_Y->size[0];
     b_Y->size[0] = Y->size[0];
-    emxEnsureCapacity_real_T(sp, b_Y, i1, &dj_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_Y, i1, &ck_emlrtRTEI);
     for (i1 = 0; i1 < loop_ub; i1++) {
       brm = Y->data[i1 + Y->size[0] * il];
       y->data[i1] = brm;
       b_Y->data[i1] = brm;
     }
 
-    st.site = &ij_emlrtRSI;
+    st.site = &pj_emlrtRSI;
     Ty = median(&st, b_Y);
     loop_ub = Y->size[0];
     i1 = b_Y->size[0];
     b_Y->size[0] = Y->size[0];
-    emxEnsureCapacity_real_T(sp, b_Y, i1, &dj_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_Y, i1, &ck_emlrtRTEI);
     for (i1 = 0; i1 < loop_ub; i1++) {
       b_Y->data[i1] = Y->data[i1 + Y->size[0] * il];
     }
 
-    st.site = &hj_emlrtRSI;
+    st.site = &oj_emlrtRSI;
     mady = mad(&st, b_Y);
     if (mady > 0.0) {
       brm = 1.4815 * mady;
       loop_ub = Y->size[0];
       i1 = Ys->size[0];
       Ys->size[0] = Y->size[0];
-      emxEnsureCapacity_real_T(sp, Ys, i1, &fj_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, Ys, i1, &ek_emlrtRTEI);
       for (i1 = 0; i1 < loop_ub; i1++) {
         Ys->data[i1] = (Y->data[i1 + Y->size[0] * il] - Ty) / brm;
       }
@@ -4111,29 +4112,29 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
       loop_ub = Y->size[0];
       i1 = b_Y->size[0];
       b_Y->size[0] = Y->size[0];
-      emxEnsureCapacity_real_T(sp, b_Y, i1, &dj_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, b_Y, i1, &ck_emlrtRTEI);
       for (i1 = 0; i1 < loop_ub; i1++) {
         b_Y->data[i1] = Y->data[i1 + Y->size[0] * il];
       }
 
-      st.site = &gj_emlrtRSI;
+      st.site = &nj_emlrtRSI;
       mady = iqr(&st, b_Y);
       if (mady > 0.0) {
         loop_ub = Y->size[0];
         i1 = b_Y->size[0];
         b_Y->size[0] = Y->size[0];
-        emxEnsureCapacity_real_T(sp, b_Y, i1, &dj_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, b_Y, i1, &ck_emlrtRTEI);
         for (i1 = 0; i1 < loop_ub; i1++) {
           b_Y->data[i1] = Y->data[i1 + Y->size[0] * il];
         }
 
-        st.site = &fj_emlrtRSI;
+        st.site = &mj_emlrtRSI;
         mady = 1.349 * iqr(&st, b_Y) / 0.6745;
         brm = 1.4815 * mady;
         loop_ub = Y->size[0];
         i1 = Ys->size[0];
         Ys->size[0] = Y->size[0];
-        emxEnsureCapacity_real_T(sp, Ys, i1, &hj_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, Ys, i1, &gk_emlrtRTEI);
         for (i1 = 0; i1 < loop_ub; i1++) {
           Ys->data[i1] = (Y->data[i1 + Y->size[0] * il] - Ty) / brm;
         }
@@ -4141,18 +4142,18 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
         loop_ub = Y->size[0];
         i1 = b_Y->size[0];
         b_Y->size[0] = Y->size[0];
-        emxEnsureCapacity_real_T(sp, b_Y, i1, &dj_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, b_Y, i1, &ck_emlrtRTEI);
         for (i1 = 0; i1 < loop_ub; i1++) {
           b_Y->data[i1] = Y->data[i1 + Y->size[0] * il];
         }
 
-        st.site = &ej_emlrtRSI;
+        st.site = &lj_emlrtRSI;
         mady = 1.2533 * b_mad(&st, b_Y) / 0.6745;
         brm = 1.4815 * mady;
         loop_ub = Y->size[0];
         i1 = Ys->size[0];
         Ys->size[0] = Y->size[0];
-        emxEnsureCapacity_real_T(sp, Ys, i1, &gj_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, Ys, i1, &fk_emlrtRTEI);
         for (i1 = 0; i1 < loop_ub; i1++) {
           Ys->data[i1] = (Y->data[i1 + Y->size[0] * il] - Ty) / brm;
         }
@@ -4160,12 +4161,12 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
     }
 
     /*  datax x add a sequence to standardized data */
-    st.site = &dj_emlrtRSI;
-    b_st.site = &xk_emlrtRSI;
-    c_st.site = &yk_emlrtRSI;
+    st.site = &kj_emlrtRSI;
+    b_st.site = &fl_emlrtRSI;
+    c_st.site = &gl_emlrtRSI;
     loop_ub = seq->size[0];
     if (Ys->size[0] != seq->size[0]) {
-      emlrtErrorWithMessageIdR2018a(&c_st, &nb_emlrtRTEI,
+      emlrtErrorWithMessageIdR2018a(&c_st, &ob_emlrtRTEI,
         "MATLAB:catenate:matrixDimensionMismatch",
         "MATLAB:catenate:matrixDimensionMismatch", 0);
     }
@@ -4173,7 +4174,7 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
     i1 = datax->size[0] * datax->size[1];
     datax->size[0] = seq->size[0];
     datax->size[1] = 2;
-    emxEnsureCapacity_real_T(&b_st, datax, i1, &ij_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, datax, i1, &hk_emlrtRTEI);
     for (i1 = 0; i1 < loop_ub; i1++) {
       datax->data[i1] = seq->data[i1];
     }
@@ -4185,7 +4186,7 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
 
     /*  quan = 1 x 3 vector which contins 1% quartile median and 3rd */
     /*  quartile */
-    st.site = &cj_emlrtRSI;
+    st.site = &jj_emlrtRSI;
     quantile(&st, Ys, quan);
 
     /*  di= interquartile difference */
@@ -4204,7 +4205,7 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
     loop_ub = datax->size[0];
     i1 = r->size[0];
     r->size[0] = datax->size[0];
-    emxEnsureCapacity_boolean_T(sp, r, i1, &jj_emlrtRTEI);
+    emxEnsureCapacity_boolean_T(sp, r, i1, &ik_emlrtRTEI);
     for (i1 = 0; i1 < loop_ub; i1++) {
       r->data[i1] = (datax->data[i1 + datax->size[0]] > Ty);
     }
@@ -4212,7 +4213,7 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
     loop_ub = datax->size[0];
     i1 = r1->size[0];
     r1->size[0] = datax->size[0];
-    emxEnsureCapacity_boolean_T(sp, r1, i1, &kj_emlrtRTEI);
+    emxEnsureCapacity_boolean_T(sp, r1, i1, &jk_emlrtRTEI);
     for (i1 = 0; i1 < loop_ub; i1++) {
       r1->data[i1] = (datax->data[i1 + datax->size[0]] < mady);
     }
@@ -4230,16 +4231,16 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
     loop_ub = datax->size[0];
     i1 = b_Y->size[0];
     b_Y->size[0] = datax->size[0];
-    emxEnsureCapacity_real_T(sp, b_Y, i1, &lj_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_Y, i1, &kk_emlrtRTEI);
     for (i1 = 0; i1 < loop_ub; i1++) {
       b_Y->data[i1] = datax->data[i1 + datax->size[0]];
     }
 
-    st.site = &bj_emlrtRSI;
+    st.site = &ij_emlrtRSI;
     b_abs(&st, b_Y, r3);
     i1 = r1->size[0];
     r1->size[0] = r3->size[0];
-    emxEnsureCapacity_boolean_T(sp, r1, i1, &mj_emlrtRTEI);
+    emxEnsureCapacity_boolean_T(sp, r1, i1, &lk_emlrtRTEI);
     loop_ub = r3->size[0];
     for (i1 = 0; i1 < loop_ub; i1++) {
       r1->data[i1] = (r3->data[i1] > 3.0);
@@ -4260,7 +4261,7 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
 
     i1 = r2->size[0];
     r2->size[0] = loop_ub;
-    emxEnsureCapacity_int32_T(sp, r2, i1, &nj_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, r2, i1, &mk_emlrtRTEI);
     loop_ub = 0;
     for (b_i = 0; b_i <= end; b_i++) {
       if (r->data[b_i] || r1->data[b_i]) {
@@ -4273,12 +4274,12 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
     i1 = outy->size[0] * outy->size[1];
     outy->size[0] = r2->size[0];
     outy->size[1] = 2;
-    emxEnsureCapacity_real_T(sp, outy, i1, &oj_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, outy, i1, &nk_emlrtRTEI);
     for (i1 = 0; i1 < 2; i1++) {
       for (i2 = 0; i2 < loop_ub; i2++) {
         if (r2->data[i2] > datax->size[0]) {
           emlrtDynamicBoundsCheckR2012b(r2->data[i2], 1, datax->size[0],
-            &cl_emlrtBCI, (emlrtCTX)sp);
+            &jl_emlrtBCI, (emlrtCTX)sp);
         }
 
         outy->data[i2 + outy->size[0] * i1] = datax->data[(r2->data[i2] +
@@ -4292,16 +4293,16 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
       /*  univariate outliers in vector univT */
       i1 = ii->size[0];
       ii->size[0] = r2->size[0];
-      emxEnsureCapacity_int32_T(sp, ii, i1, &pj_emlrtRTEI);
+      emxEnsureCapacity_int32_T(sp, ii, i1, &ok_emlrtRTEI);
       for (i1 = 0; i1 < loop_ub; i1++) {
         if (outy->data[i1] != (int32_T)muDoubleScalarFloor(outy->data[i1])) {
-          emlrtIntegerCheckR2012b(outy->data[i1], &cb_emlrtDCI, (emlrtCTX)sp);
+          emlrtIntegerCheckR2012b(outy->data[i1], &ib_emlrtDCI, (emlrtCTX)sp);
         }
 
         i2 = (int32_T)outy->data[i1];
         if ((i2 < 1) || (i2 > univT->size[0])) {
           emlrtDynamicBoundsCheckR2012b((int32_T)outy->data[i1], 1, univT->size
-            [0], &dl_emlrtBCI, (emlrtCTX)sp);
+            [0], &kl_emlrtBCI, (emlrtCTX)sp);
         }
 
         ii->data[i1] = i2;
@@ -4310,15 +4311,15 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
       loop_ub = r2->size[0];
       i1 = r3->size[0];
       r3->size[0] = r2->size[0];
-      emxEnsureCapacity_real_T(sp, r3, i1, &qj_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, r3, i1, &pk_emlrtRTEI);
       for (i1 = 0; i1 < loop_ub; i1++) {
         if (outy->data[i1] != (int32_T)muDoubleScalarFloor(outy->data[i1])) {
-          emlrtIntegerCheckR2012b(outy->data[i1], &db_emlrtDCI, (emlrtCTX)sp);
+          emlrtIntegerCheckR2012b(outy->data[i1], &jb_emlrtDCI, (emlrtCTX)sp);
         }
 
         i2 = (int32_T)outy->data[i1];
         if ((i2 < 1) || (i2 > univT->size[0])) {
-          emlrtDynamicBoundsCheckR2012b(i2, 1, univT->size[0], &el_emlrtBCI,
+          emlrtDynamicBoundsCheckR2012b(i2, 1, univT->size[0], &ll_emlrtBCI,
             (emlrtCTX)sp);
         }
 
@@ -4346,90 +4347,90 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
         /*  Tx is the coordinate of the  Median */
         if (((int32_T)b_jl < 1) || ((int32_T)b_jl > Y->size[1])) {
           emlrtDynamicBoundsCheckR2012b((int32_T)b_jl, 1, Y->size[1],
-            &yk_emlrtBCI, (emlrtCTX)sp);
+            &gl_emlrtBCI, (emlrtCTX)sp);
         }
 
         loop_ub = Y->size[0];
         i2 = b_Y->size[0];
         b_Y->size[0] = Y->size[0];
-        emxEnsureCapacity_real_T(sp, b_Y, i2, &rj_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, b_Y, i2, &qk_emlrtRTEI);
         for (i2 = 0; i2 < loop_ub; i2++) {
           b_Y->data[i2] = Y->data[i2 + Y->size[0] * ((int32_T)b_jl - 1)];
         }
 
-        st.site = &aj_emlrtRSI;
+        st.site = &hj_emlrtRSI;
         Ty = median(&st, b_Y);
         loop_ub = Y->size[0];
         i2 = b_Y->size[0];
         b_Y->size[0] = Y->size[0];
-        emxEnsureCapacity_real_T(sp, b_Y, i2, &rj_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, b_Y, i2, &qk_emlrtRTEI);
         for (i2 = 0; i2 < loop_ub; i2++) {
           b_Y->data[i2] = Y->data[i2 + Y->size[0] * ((int32_T)b_jl - 1)];
         }
 
-        st.site = &yi_emlrtRSI;
+        st.site = &gj_emlrtRSI;
         mady = mad(&st, b_Y);
         if (mady > 0.0) {
           brm = 1.4815 * mady;
           loop_ub = Y->size[0];
           i2 = Xs->size[0];
           Xs->size[0] = Y->size[0];
-          emxEnsureCapacity_real_T(sp, Xs, i2, &sj_emlrtRTEI);
+          emxEnsureCapacity_real_T(sp, Xs, i2, &rk_emlrtRTEI);
           for (i2 = 0; i2 < loop_ub; i2++) {
             Xs->data[i2] = (Y->data[i2 + Y->size[0] * ((int32_T)b_jl - 1)] - Ty)
               / brm;
           }
         } else {
           if (robscale == 1) {
-            st.site = &nnb_emlrtRSI;
+            st.site = &dob_emlrtRSI;
             b_disp(&st, k_emlrt_marshallOut(&st, b_cv), o_emlrt_marshallOut(&st,
-                    b_cv1), &n_emlrtMCI);
+                    b_cv1), &p_emlrtMCI);
             robscale = 2;
           }
 
           loop_ub = Y->size[0];
           i2 = b_Y->size[0];
           b_Y->size[0] = Y->size[0];
-          emxEnsureCapacity_real_T(sp, b_Y, i2, &rj_emlrtRTEI);
+          emxEnsureCapacity_real_T(sp, b_Y, i2, &qk_emlrtRTEI);
           for (i2 = 0; i2 < loop_ub; i2++) {
             b_Y->data[i2] = Y->data[i2 + Y->size[0] * ((int32_T)b_jl - 1)];
           }
 
-          st.site = &xi_emlrtRSI;
+          st.site = &fj_emlrtRSI;
           mady = iqr(&st, b_Y);
           if (mady > 0.0) {
             brm = 1.4815 * (1.349 * mady / 0.6745);
             loop_ub = Y->size[0];
             i2 = Xs->size[0];
             Xs->size[0] = Y->size[0];
-            emxEnsureCapacity_real_T(sp, Xs, i2, &uj_emlrtRTEI);
+            emxEnsureCapacity_real_T(sp, Xs, i2, &tk_emlrtRTEI);
             for (i2 = 0; i2 < loop_ub; i2++) {
               Xs->data[i2] = (Y->data[i2 + Y->size[0] * ((int32_T)b_jl - 1)] -
                               Ty) / brm;
             }
 
-            st.site = &lnb_emlrtRSI;
+            st.site = &bob_emlrtRSI;
             b_disp(&st, k_emlrt_marshallOut(&st, b_cv4), u_emlrt_marshallOut(&st,
-                    b_cv5), &p_emlrtMCI);
+                    b_cv5), &r_emlrtMCI);
           } else {
-            st.site = &mnb_emlrtRSI;
+            st.site = &cob_emlrtRSI;
             b_disp(&st, k_emlrt_marshallOut(&st, b_cv2), v_emlrt_marshallOut(&st,
-                    b_cv3), &o_emlrtMCI);
+                    b_cv3), &q_emlrtMCI);
             loop_ub = Y->size[0];
             i2 = b_Y->size[0];
             b_Y->size[0] = Y->size[0];
-            emxEnsureCapacity_real_T(sp, b_Y, i2, &rj_emlrtRTEI);
+            emxEnsureCapacity_real_T(sp, b_Y, i2, &qk_emlrtRTEI);
             for (i2 = 0; i2 < loop_ub; i2++) {
               b_Y->data[i2] = Y->data[i2 + Y->size[0] * ((int32_T)b_jl - 1)];
             }
 
-            st.site = &wi_emlrtRSI;
+            st.site = &ej_emlrtRSI;
             mady = 1.2533 * b_mad(&st, b_Y) / 0.6745;
             brm = 1.4815 * mady;
             loop_ub = Y->size[0];
             i2 = Xs->size[0];
             Xs->size[0] = Y->size[0];
-            emxEnsureCapacity_real_T(sp, Xs, i2, &wj_emlrtRTEI);
+            emxEnsureCapacity_real_T(sp, Xs, i2, &vk_emlrtRTEI);
             for (i2 = 0; i2 < loop_ub; i2++) {
               Xs->data[i2] = (Y->data[i2 + Y->size[0] * ((int32_T)b_jl - 1)] -
                               Ty) / brm;
@@ -4445,13 +4446,13 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
 
           i2 = b_Y->size[0];
           b_Y->size[0] = Xs->size[0];
-          emxEnsureCapacity_real_T(sp, b_Y, i2, &tj_emlrtRTEI);
+          emxEnsureCapacity_real_T(sp, b_Y, i2, &sk_emlrtRTEI);
           loop_ub = Xs->size[0];
           for (i2 = 0; i2 < loop_ub; i2++) {
             b_Y->data[i2] = Xs->data[i2] + Ys->data[i2];
           }
 
-          st.site = &vi_emlrtRSI;
+          st.site = &dj_emlrtRSI;
           b_abs(&st, b_Y, xrank);
           if (Xs->size[0] != Ys->size[0]) {
             emlrtSizeEqCheck1DR2012b(Xs->size[0], Ys->size[0], &t_emlrtECI,
@@ -4460,23 +4461,23 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
 
           i2 = b_Y->size[0];
           b_Y->size[0] = Xs->size[0];
-          emxEnsureCapacity_real_T(sp, b_Y, i2, &xj_emlrtRTEI);
+          emxEnsureCapacity_real_T(sp, b_Y, i2, &wk_emlrtRTEI);
           loop_ub = Xs->size[0];
           for (i2 = 0; i2 < loop_ub; i2++) {
             b_Y->data[i2] = Xs->data[i2] - Ys->data[i2];
           }
 
-          st.site = &ui_emlrtRSI;
+          st.site = &cj_emlrtRSI;
           b_abs(&st, b_Y, yrank);
-          st.site = &ti_emlrtRSI;
-          b_st.site = &ti_emlrtRSI;
+          st.site = &bj_emlrtRSI;
+          b_st.site = &bj_emlrtRSI;
           a = median(&b_st, xrank);
-          b_st.site = &bl_emlrtRSI;
+          b_st.site = &il_emlrtRSI;
           Ty = a * a;
-          st.site = &si_emlrtRSI;
-          b_st.site = &si_emlrtRSI;
+          st.site = &aj_emlrtRSI;
+          b_st.site = &aj_emlrtRSI;
           a = median(&b_st, yrank);
-          b_st.site = &bl_emlrtRSI;
+          b_st.site = &il_emlrtRSI;
           mady = a * a;
           b_r = (Ty - mady) / (Ty + mady);
           if (muDoubleScalarIsNaN(b_r)) {
@@ -4487,39 +4488,39 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
           loop_ub = Y->size[0];
           i2 = b_Y->size[0];
           b_Y->size[0] = Y->size[0];
-          emxEnsureCapacity_real_T(sp, b_Y, i2, &rj_emlrtRTEI);
+          emxEnsureCapacity_real_T(sp, b_Y, i2, &qk_emlrtRTEI);
           for (i2 = 0; i2 < loop_ub; i2++) {
             b_Y->data[i2] = Y->data[i2 + Y->size[0] * ((int32_T)b_jl - 1)];
           }
 
-          st.site = &ri_emlrtRSI;
+          st.site = &yi_emlrtRSI;
           tiedrankFS(&st, b_Y, xrank);
-          st.site = &qi_emlrtRSI;
+          st.site = &xi_emlrtRSI;
           tiedrankFS(&st, y, yrank);
-          st.site = &pi_emlrtRSI;
+          st.site = &wi_emlrtRSI;
           brm = mean(&st, xrank);
           i2 = r3->size[0];
           r3->size[0] = xrank->size[0];
-          emxEnsureCapacity_real_T(sp, r3, i2, &vj_emlrtRTEI);
+          emxEnsureCapacity_real_T(sp, r3, i2, &uk_emlrtRTEI);
           loop_ub = xrank->size[0];
           for (i2 = 0; i2 < loop_ub; i2++) {
             r3->data[i2] = xrank->data[i2] - brm;
           }
 
-          st.site = &pi_emlrtRSI;
-          b_st.site = &pi_emlrtRSI;
+          st.site = &wi_emlrtRSI;
+          b_st.site = &wi_emlrtRSI;
           brm = mean(&b_st, yrank);
           i2 = b_Y->size[0];
           b_Y->size[0] = yrank->size[0];
-          emxEnsureCapacity_real_T(&st, b_Y, i2, &yj_emlrtRTEI);
+          emxEnsureCapacity_real_T(&st, b_Y, i2, &xk_emlrtRTEI);
           loop_ub = yrank->size[0];
           for (i2 = 0; i2 < loop_ub; i2++) {
             b_Y->data[i2] = yrank->data[i2] - brm;
           }
 
-          b_st.site = &x_emlrtRSI;
+          b_st.site = &fb_emlrtRSI;
           c_dynamic_size_checks(&b_st, r3, b_Y, r3->size[0], b_Y->size[0]);
-          st.site = &pi_emlrtRSI;
+          st.site = &wi_emlrtRSI;
           b_r = b_mtimes(r3, b_Y) / (((real_T)n - 1.0) * b_std(&st, xrank) *
             b_std(&st, yrank));
         }
@@ -4537,9 +4538,9 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
 
         /*  Now we calculate Mahalanobis distances with centroid defined */
         /*  by medians */
-        st.site = &oi_emlrtRSI;
+        st.site = &vi_emlrtRSI;
         power(&st, Xs, yrank);
-        st.site = &oi_emlrtRSI;
+        st.site = &vi_emlrtRSI;
         power(&st, Ys, r3);
         if (yrank->size[0] != r3->size[0]) {
           emlrtSizeEqCheck1DR2012b(yrank->size[0], r3->size[0], &u_emlrtECI,
@@ -4549,7 +4550,7 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
         a = 2.0 * b_r;
         i2 = xrank->size[0];
         xrank->size[0] = Xs->size[0];
-        emxEnsureCapacity_real_T(sp, xrank, i2, &ak_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, xrank, i2, &yk_emlrtRTEI);
         loop_ub = Xs->size[0];
         for (i2 = 0; i2 < loop_ub; i2++) {
           xrank->data[i2] = a * Xs->data[i2];
@@ -4570,8 +4571,8 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
             (emlrtCTX)sp);
         }
 
-        st.site = &oi_emlrtRSI;
-        b_st.site = &bl_emlrtRSI;
+        st.site = &vi_emlrtRSI;
+        b_st.site = &il_emlrtRSI;
         mady = b_r * b_r;
         loop_ub = yrank->size[0];
         for (i2 = 0; i2 < loop_ub; i2++) {
@@ -4579,7 +4580,7 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
             / (1.0 - mady);
         }
 
-        st.site = &oi_emlrtRSI;
+        st.site = &vi_emlrtRSI;
         b_sqrt(&st, yrank);
 
         /*  Create the vector of pseudoMahalanobis distances (based on the sum */
@@ -4595,14 +4596,14 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
         }
 
         /*   Em  is the median  of vector E */
-        st.site = &ni_emlrtRSI;
+        st.site = &ui_emlrtRSI;
         median(&st, yrank);
-        st.site = &mi_emlrtRSI;
+        st.site = &ti_emlrtRSI;
         Ty = 2.0 * ((real_T)n - 1.0) / ((real_T)n - 2.0) * finv(&st, (real_T)n -
           2.0);
-        st.site = &li_emlrtRSI;
+        st.site = &si_emlrtRSI;
         if (Ty < 0.0) {
-          emlrtErrorWithMessageIdR2018a(&st, &ac_emlrtRTEI,
+          emlrtErrorWithMessageIdR2018a(&st, &bc_emlrtRTEI,
             "Coder:toolbox:ElFunDomainError", "Coder:toolbox:ElFunDomainError",
             3, 4, 4, "sqrt");
         }
@@ -4611,33 +4612,33 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
 
         /*  hinge=ellipse containing 50% of the values */
         brm = (b_r + 1.0) / 2.0;
-        st.site = &ki_emlrtRSI;
+        st.site = &ri_emlrtRSI;
         if (brm < 0.0) {
-          emlrtErrorWithMessageIdR2018a(&st, &ac_emlrtRTEI,
+          emlrtErrorWithMessageIdR2018a(&st, &bc_emlrtRTEI,
             "Coder:toolbox:ElFunDomainError", "Coder:toolbox:ElFunDomainError",
             3, 4, 4, "sqrt");
         }
 
         d = (1.0 - b_r) / 2.0;
-        st.site = &ji_emlrtRSI;
+        st.site = &qi_emlrtRSI;
         if (d < 0.0) {
-          emlrtErrorWithMessageIdR2018a(&st, &ac_emlrtRTEI,
+          emlrtErrorWithMessageIdR2018a(&st, &bc_emlrtRTEI,
             "Coder:toolbox:ElFunDomainError", "Coder:toolbox:ElFunDomainError",
             3, 4, 4, "sqrt");
         }
 
         /*  fence=ellipe containing (1-\alpha)% of the values */
-        st.site = &ii_emlrtRSI;
+        st.site = &pi_emlrtRSI;
         if (brm < 0.0) {
-          emlrtErrorWithMessageIdR2018a(&st, &ac_emlrtRTEI,
+          emlrtErrorWithMessageIdR2018a(&st, &bc_emlrtRTEI,
             "Coder:toolbox:ElFunDomainError", "Coder:toolbox:ElFunDomainError",
             3, 4, 4, "sqrt");
         }
 
         a = Ty * muDoubleScalarSqrt(brm);
-        st.site = &hi_emlrtRSI;
+        st.site = &oi_emlrtRSI;
         if (d < 0.0) {
-          emlrtErrorWithMessageIdR2018a(&st, &ac_emlrtRTEI,
+          emlrtErrorWithMessageIdR2018a(&st, &bc_emlrtRTEI,
             "Coder:toolbox:ElFunDomainError", "Coder:toolbox:ElFunDomainError",
             3, 4, 4, "sqrt");
         }
@@ -4648,32 +4649,32 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
           The2max[i2] = mady * c_b[i2];
         }
 
-        st.site = &gi_emlrtRSI;
-        b_st.site = &xk_emlrtRSI;
-        c_st.site = &yk_emlrtRSI;
+        st.site = &ni_emlrtRSI;
+        b_st.site = &fl_emlrtRSI;
+        c_st.site = &gl_emlrtRSI;
         if (Ys->size[0] != Xs->size[0]) {
-          emlrtErrorWithMessageIdR2018a(&c_st, &nb_emlrtRTEI,
+          emlrtErrorWithMessageIdR2018a(&c_st, &ob_emlrtRTEI,
             "MATLAB:catenate:matrixDimensionMismatch",
             "MATLAB:catenate:matrixDimensionMismatch", 0);
         }
 
         /*  rotation of the coordinates */
-        st.site = &fi_emlrtRSI;
-        b_st.site = &bl_emlrtRSI;
-        st.site = &ei_emlrtRSI;
-        b_st.site = &bl_emlrtRSI;
+        st.site = &mi_emlrtRSI;
+        b_st.site = &il_emlrtRSI;
+        st.site = &li_emlrtRSI;
+        b_st.site = &il_emlrtRSI;
         a = 1.0 / (Ty * Ty * (1.0 - b_r * b_r));
         mady = -b_r * a;
         b_a[0] = a;
         b_a[2] = mady;
         b_a[1] = mady;
         b_a[3] = a;
-        st.site = &di_emlrtRSI;
+        st.site = &ki_emlrtRSI;
         eig(&st, b_a, aut);
         b_sort(aut);
         b_r = a - aut[1].re;
-        st.site = &ci_emlrtRSI;
-        b_st.site = &bl_emlrtRSI;
+        st.site = &ji_emlrtRSI;
+        b_st.site = &il_emlrtRSI;
         a_im_tmp_tmp = b_r * (0.0 - aut[1].im);
         b_r = (b_r * b_r - (0.0 - aut[1].im) * (0.0 - aut[1].im)) + mady * mady;
         c_a.re = b_r;
@@ -4721,8 +4722,8 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
           }
         }
 
-        st.site = &bi_emlrtRSI;
-        b_st.site = &bl_emlrtRSI;
+        st.site = &ii_emlrtRSI;
+        b_st.site = &il_emlrtRSI;
         c_a.re = b_r;
         c_a.im = a_im_tmp_tmp + a_im_tmp_tmp;
         c_sqrt(&c_a);
@@ -4865,9 +4866,9 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
         }
 
         fuo = muDoubleScalarHypot(b_r - Ty, a - mady);
-        st.site = &ai_emlrtRSI;
+        st.site = &hi_emlrtRSI;
         if (fuo < 0.0) {
-          emlrtErrorWithMessageIdR2018a(&st, &ac_emlrtRTEI,
+          emlrtErrorWithMessageIdR2018a(&st, &bc_emlrtRTEI,
             "Coder:toolbox:ElFunDomainError", "Coder:toolbox:ElFunDomainError",
             3, 4, 4, "sqrt");
         }
@@ -4918,7 +4919,7 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
         i2 = b_Xs->size[0] * b_Xs->size[1];
         b_Xs->size[0] = 2;
         b_Xs->size[1] = Xs->size[0];
-        emxEnsureCapacity_creal_T(sp, b_Xs, i2, &bk_emlrtRTEI);
+        emxEnsureCapacity_creal_T(sp, b_Xs, i2, &al_emlrtRTEI);
         loop_ub = Xs->size[0];
         for (i2 = 0; i2 < loop_ub; i2++) {
           b_Xs->data[2 * i2].re = Xs->data[i2];
@@ -4935,7 +4936,7 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
         i2 = new2->size[0] * new2->size[1];
         new2->size[0] = 2;
         new2->size[1] = b_Xs->size[1];
-        emxEnsureCapacity_creal_T(sp, new2, i2, &ck_emlrtRTEI);
+        emxEnsureCapacity_creal_T(sp, new2, i2, &bl_emlrtRTEI);
         loop_ub = b_Xs->size[1];
         for (i2 = 0; i2 < 2; i2++) {
           for (i3 = 0; i3 < loop_ub; i3++) {
@@ -4976,7 +4977,7 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
         i2 = biv->size[0] * biv->size[1];
         biv->size[0] = 1;
         biv->size[1] = n;
-        emxEnsureCapacity_real_T(sp, biv, i2, &dk_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, biv, i2, &cl_emlrtRTEI);
         for (i2 = 0; i2 < n; i2++) {
           biv->data[i2] = 0.0;
         }
@@ -4984,31 +4985,31 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
         for (end = 0; end < n; end++) {
           if (end + 1 > new2->size[1]) {
             emlrtDynamicBoundsCheckR2012b(end + 1, 1, new2->size[1],
-              &fl_emlrtBCI, (emlrtCTX)sp);
+              &ml_emlrtBCI, (emlrtCTX)sp);
           }
 
           c_a.re = new2->data[2 * end].re + fuo;
           if (end + 1 > new2->size[1]) {
             emlrtDynamicBoundsCheckR2012b(end + 1, 1, new2->size[1],
-              &fl_emlrtBCI, (emlrtCTX)sp);
+              &ml_emlrtBCI, (emlrtCTX)sp);
           }
 
           c_a.im = new2->data[2 * end].im;
           if (end + 1 > new2->size[1]) {
             emlrtDynamicBoundsCheckR2012b(end + 1, 1, new2->size[1],
-              &al_emlrtBCI, (emlrtCTX)sp);
+              &hl_emlrtBCI, (emlrtCTX)sp);
           }
 
           costh_re = new2->data[2 * end].re - fuo;
           if (end + 1 > new2->size[1]) {
             emlrtDynamicBoundsCheckR2012b(end + 1, 1, new2->size[1],
-              &gl_emlrtBCI, (emlrtCTX)sp);
+              &nl_emlrtBCI, (emlrtCTX)sp);
           }
 
           costh_im = new2->data[2 * end].im;
           if (end + 1 > new2->size[1]) {
             emlrtDynamicBoundsCheckR2012b(end + 1, 1, new2->size[1],
-              &bl_emlrtBCI, (emlrtCTX)sp);
+              &il_emlrtBCI, (emlrtCTX)sp);
           }
 
           Ty = c_a.re * c_a.re - c_a.im * c_a.im;
@@ -5028,7 +5029,7 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
           if (c_a.re + sinth.re > mady) {
             if (end + 1 > biv->size[1]) {
               emlrtDynamicBoundsCheckR2012b(end + 1, 1, biv->size[1],
-                &hl_emlrtBCI, (emlrtCTX)sp);
+                &ol_emlrtBCI, (emlrtCTX)sp);
             }
 
             biv->data[end]++;
@@ -5087,12 +5088,12 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
   emxFree_real_T(&y);
 
   /*  endif of il=1:v */
-  st.site = &yh_emlrtRSI;
-  b_st.site = &xk_emlrtRSI;
-  c_st.site = &yk_emlrtRSI;
+  st.site = &gi_emlrtRSI;
+  b_st.site = &fl_emlrtRSI;
+  c_st.site = &gl_emlrtRSI;
   b = (univT->size[0] == seq->size[0]);
   if (!b) {
-    emlrtErrorWithMessageIdR2018a(&c_st, &nb_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(&c_st, &ob_emlrtRTEI,
       "MATLAB:catenate:matrixDimensionMismatch",
       "MATLAB:catenate:matrixDimensionMismatch", 0);
   }
@@ -5102,7 +5103,7 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
   }
 
   if (!b) {
-    emlrtErrorWithMessageIdR2018a(&c_st, &nb_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(&c_st, &ob_emlrtRTEI,
       "MATLAB:catenate:matrixDimensionMismatch",
       "MATLAB:catenate:matrixDimensionMismatch", 0);
   }
@@ -5112,7 +5113,7 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
   }
 
   if (!b) {
-    emlrtErrorWithMessageIdR2018a(&c_st, &nb_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(&c_st, &ob_emlrtRTEI,
       "MATLAB:catenate:matrixDimensionMismatch",
       "MATLAB:catenate:matrixDimensionMismatch", 0);
   }
@@ -5120,7 +5121,7 @@ void unibiv(FSR_wrapperStackData *SD, const emlrtStack *sp, const
   i = fre->size[0] * fre->size[1];
   fre->size[0] = seq->size[0];
   fre->size[1] = 4;
-  emxEnsureCapacity_real_T(&b_st, fre, i, &ej_emlrtRTEI);
+  emxEnsureCapacity_real_T(&b_st, fre, i, &dk_emlrtRTEI);
   loop_ub = seq->size[0];
   for (i = 0; i < loop_ub; i++) {
     fre->data[i] = seq->data[i];

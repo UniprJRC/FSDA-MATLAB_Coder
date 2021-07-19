@@ -184,10 +184,10 @@ extern const char_T cv11[19];
 extern const char_T cv14[26];
 extern const char_T cv18[29];
 extern const char_T cv19[41];
+extern emlrtRSInfo uhb_emlrtRSI;
 extern emlrtRSInfo vhb_emlrtRSI;
-extern emlrtRSInfo whb_emlrtRSI;
-extern emlrtRSInfo eib_emlrtRSI;
-extern emlrtRSInfo yib_emlrtRSI;
-extern emlrtRSInfo cjb_emlrtRSI;
+extern emlrtRSInfo dib_emlrtRSI;
+extern emlrtRSInfo xib_emlrtRSI;
+extern emlrtRSInfo bjb_emlrtRSI;
 
 /* End of code generation (LXS_wrapper1_data.h) */

@@ -17,7 +17,7 @@
 #include "sumMatrixIncludeNaN.h"
 
 /* Variable Definitions */
-static emlrtRSInfo ck_emlrtRSI = {
+static emlrtRSInfo bk_emlrtRSI = {
     20,    /* lineNo */
     "sum", /* fcnName */
     "C:\\Program "
@@ -25,7 +25,7 @@ static emlrtRSInfo ck_emlrtRSI = {
                                                                         */
 };
 
-static emlrtRSInfo dk_emlrtRSI = {
+static emlrtRSInfo ck_emlrtRSI = {
     74,                      /* lineNo */
     "combineVectorElements", /* fcnName */
     "C:\\Program "
@@ -33,7 +33,7 @@ static emlrtRSInfo dk_emlrtRSI = {
     "eVectorElements.m" /* pathName */
 };
 
-static emlrtRSInfo ek_emlrtRSI = {
+static emlrtRSInfo dk_emlrtRSI = {
     107,                /* lineNo */
     "blockedSummation", /* fcnName */
     "C:\\Program "
@@ -41,7 +41,7 @@ static emlrtRSInfo ek_emlrtRSI = {
     "dSummation.m" /* pathName */
 };
 
-static emlrtRSInfo fk_emlrtRSI = {
+static emlrtRSInfo ek_emlrtRSI = {
     22,                    /* lineNo */
     "sumMatrixIncludeNaN", /* fcnName */
     "C:\\Program "
@@ -49,7 +49,7 @@ static emlrtRSInfo fk_emlrtRSI = {
     "rixIncludeNaN.m" /* pathName */
 };
 
-static emlrtRSInfo gk_emlrtRSI = {
+static emlrtRSInfo fk_emlrtRSI = {
     42,                 /* lineNo */
     "sumMatrixColumns", /* fcnName */
     "C:\\Program "
@@ -57,7 +57,7 @@ static emlrtRSInfo gk_emlrtRSI = {
     "rixIncludeNaN.m" /* pathName */
 };
 
-static emlrtRSInfo ik_emlrtRSI = {
+static emlrtRSInfo hk_emlrtRSI = {
     57,                 /* lineNo */
     "sumMatrixColumns", /* fcnName */
     "C:\\Program "
@@ -81,7 +81,7 @@ real_T sum(const emlrtStack *sp, const emxArray_real_T *x)
   int32_T nleft;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &ck_emlrtRSI;
+  st.site = &bk_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -92,15 +92,15 @@ real_T sum(const emlrtStack *sp, const emxArray_real_T *x)
   e_st.tls = d_st.tls;
   f_st.prev = &e_st;
   f_st.tls = e_st.tls;
-  b_st.site = &ae_emlrtRSI;
-  c_st.site = &dk_emlrtRSI;
+  b_st.site = &yd_emlrtRSI;
+  c_st.site = &ck_emlrtRSI;
   if (x->size[0] == 0) {
     y = 0.0;
   } else {
-    d_st.site = &ek_emlrtRSI;
-    e_st.site = &fk_emlrtRSI;
+    d_st.site = &dk_emlrtRSI;
+    e_st.site = &ek_emlrtRSI;
     if (x->size[0] < 4096) {
-      f_st.site = &gk_emlrtRSI;
+      f_st.site = &fk_emlrtRSI;
       y = sumColumnB(&f_st, x, x->size[0]);
     } else {
       nfb = x->size[0] / 4096;
@@ -111,7 +111,7 @@ real_T sum(const emlrtStack *sp, const emxArray_real_T *x)
         y += sumColumnB4(x, ((ib - 1) << 12) + 1);
       }
       if (nleft > 0) {
-        f_st.site = &ik_emlrtRSI;
+        f_st.site = &hk_emlrtRSI;
         y += b_sumColumnB(&f_st, x, nleft, inb + 1);
       }
     }

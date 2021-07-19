@@ -42,10 +42,6 @@ void emxEnsureCapacity_ptrdiff_t(const emlrtStack *sp,
                                  emxArray_ptrdiff_t *emxArray, int32_T oldNumel,
                                  const emlrtRTEInfo *srcLocation);
 
-void emxEnsureCapacity_real32_T(const emlrtStack *sp,
-                                emxArray_real32_T *emxArray, int32_T oldNumel,
-                                const emlrtRTEInfo *srcLocation);
-
 void emxEnsureCapacity_real_T(const emlrtStack *sp, emxArray_real_T *emxArray,
                               int32_T oldNumel,
                               const emlrtRTEInfo *srcLocation);
@@ -56,9 +52,9 @@ void emxEnsureCapacity_uint32_T(const emlrtStack *sp,
 
 void emxFreeStruct_struct_FSR_T(struct_FSR_T *pStruct);
 
-void emxFreeStruct_struct_T(b_struct_T *pStruct);
+void emxFreeStruct_struct_T(struct_T *pStruct);
 
-void emxFreeStruct_struct_T1(struct_T *pStruct);
+void emxFreeStruct_struct_T1(b_struct_T *pStruct);
 
 void emxFree_boolean_T(emxArray_boolean_T **pEmxArray);
 
@@ -70,8 +66,6 @@ void emxFree_int32_T(emxArray_int32_T **pEmxArray);
 
 void emxFree_ptrdiff_t(emxArray_ptrdiff_t **pEmxArray);
 
-void emxFree_real32_T(emxArray_real32_T **pEmxArray);
-
 void emxFree_real_T(emxArray_real_T **pEmxArray);
 
 void emxFree_uint32_T(emxArray_uint32_T **pEmxArray);
@@ -80,10 +74,10 @@ void emxInitStruct_struct_FSR_T(const emlrtStack *sp, struct_FSR_T *pStruct,
                                 const emlrtRTEInfo *srcLocation,
                                 boolean_T doPush);
 
-void emxInitStruct_struct_T(const emlrtStack *sp, b_struct_T *pStruct,
+void emxInitStruct_struct_T(const emlrtStack *sp, struct_T *pStruct,
                             const emlrtRTEInfo *srcLocation, boolean_T doPush);
 
-void emxInitStruct_struct_T1(const emlrtStack *sp, struct_T *pStruct,
+void emxInitStruct_struct_T1(const emlrtStack *sp, b_struct_T *pStruct,
                              const emlrtRTEInfo *srcLocation, boolean_T doPush);
 
 void emxInit_boolean_T(const emlrtStack *sp, emxArray_boolean_T **pEmxArray,
@@ -105,10 +99,6 @@ void emxInit_int32_T(const emlrtStack *sp, emxArray_int32_T **pEmxArray,
 void emxInit_ptrdiff_t(const emlrtStack *sp, emxArray_ptrdiff_t **pEmxArray,
                        int32_T numDimensions, const emlrtRTEInfo *srcLocation,
                        boolean_T doPush);
-
-void emxInit_real32_T(const emlrtStack *sp, emxArray_real32_T **pEmxArray,
-                      int32_T numDimensions, const emlrtRTEInfo *srcLocation,
-                      boolean_T doPush);
 
 void emxInit_real_T(const emlrtStack *sp, emxArray_real_T **pEmxArray,
                     int32_T numDimensions, const emlrtRTEInfo *srcLocation,

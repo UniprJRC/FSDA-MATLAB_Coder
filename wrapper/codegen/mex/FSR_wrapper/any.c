@@ -18,7 +18,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo dib_emlrtRSI =
+static emlrtRSInfo sib_emlrtRSI =
     {
         13,    /* lineNo */
         "any", /* fcnName */
@@ -27,7 +27,7 @@ static emlrtRSInfo dib_emlrtRSI =
                                                                         */
 };
 
-static emlrtRSInfo eib_emlrtRSI =
+static emlrtRSInfo tib_emlrtRSI =
     {
         143,        /* lineNo */
         "allOrAny", /* fcnName */
@@ -47,15 +47,15 @@ boolean_T any(const emlrtStack *sp, const emxArray_boolean_T *x)
   boolean_T y;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &dib_emlrtRSI;
+  st.site = &sib_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   y = false;
-  b_st.site = &eib_emlrtRSI;
+  b_st.site = &tib_emlrtRSI;
   if ((1 <= x->size[0]) && (x->size[0] > 2147483646)) {
-    c_st.site = &ab_emlrtRSI;
+    c_st.site = &hb_emlrtRSI;
     check_forloop_overflow_error(&c_st);
   }
   ix = 1;

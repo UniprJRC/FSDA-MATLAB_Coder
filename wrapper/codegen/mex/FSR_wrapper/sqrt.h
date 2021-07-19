@@ -28,4 +28,8 @@ void c_sqrt(creal_T *x);
 
 void d_sqrt(const emlrtStack *sp, emxArray_real_T *x);
 
+void e_sqrt(const emlrtStack *sp, emxArray_real_T *x);
+
+void f_sqrt(const emlrtStack *sp, emxArray_real_T *x);
+
 /* End of code generation (sqrt.h) */

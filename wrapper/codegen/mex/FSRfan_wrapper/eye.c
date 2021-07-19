@@ -19,7 +19,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo lr_emlrtRSI =
+static emlrtRSInfo jr_emlrtRSI =
     {
         96,    /* lineNo */
         "eye", /* fcnName */
@@ -28,7 +28,7 @@ static emlrtRSInfo lr_emlrtRSI =
                                                                           */
 };
 
-static emlrtRSInfo mr_emlrtRSI =
+static emlrtRSInfo kr_emlrtRSI =
     {
         50,    /* lineNo */
         "eye", /* fcnName */
@@ -37,7 +37,7 @@ static emlrtRSInfo mr_emlrtRSI =
                                                                           */
 };
 
-static emlrtRSInfo nr_emlrtRSI = {
+static emlrtRSInfo lr_emlrtRSI = {
     21,                           /* lineNo */
     "checkAndSaturateExpandSize", /* fcnName */
     "C:\\Program "
@@ -54,7 +54,7 @@ static emlrtRTEInfo pb_emlrtRTEI = {
     "internal\\assertValidSizeArg.m" /* pName */
 };
 
-static emlrtRTEInfo vi_emlrtRTEI =
+static emlrtRTEInfo bj_emlrtRTEI =
     {
         94,    /* lineNo */
         5,     /* colNo */
@@ -74,10 +74,10 @@ void eye(const emlrtStack *sp, real_T varargin_1, emxArray_real_T *b_I)
   int32_T m_tmp_tmp;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &mr_emlrtRSI;
+  st.site = &kr_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
-  b_st.site = &nr_emlrtRSI;
+  b_st.site = &lr_emlrtRSI;
   if ((varargin_1 != varargin_1) || muDoubleScalarIsInf(varargin_1) ||
       (varargin_1 > 2.147483647E+9)) {
     emlrtErrorWithMessageIdR2018a(
@@ -88,14 +88,14 @@ void eye(const emlrtStack *sp, real_T varargin_1, emxArray_real_T *b_I)
   i = b_I->size[0] * b_I->size[1];
   b_I->size[0] = (int32_T)varargin_1;
   b_I->size[1] = (int32_T)varargin_1;
-  emxEnsureCapacity_real_T(sp, b_I, i, &vi_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, b_I, i, &bj_emlrtRTEI);
   loop_ub = (int32_T)varargin_1 * (int32_T)varargin_1;
   for (i = 0; i < loop_ub; i++) {
     b_I->data[i] = 0.0;
   }
-  st.site = &lr_emlrtRSI;
+  st.site = &jr_emlrtRSI;
   if ((1 <= (int32_T)varargin_1) && ((int32_T)varargin_1 > 2147483646)) {
-    b_st.site = &pb_emlrtRSI;
+    b_st.site = &ob_emlrtRSI;
     check_forloop_overflow_error(&b_st);
   }
   for (loop_ub = 0; loop_ub < m_tmp_tmp; loop_ub++) {

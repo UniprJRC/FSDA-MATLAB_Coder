@@ -65,7 +65,7 @@ void b_power(const emlrtStack *sp, const emxArray_real_T *a, emxArray_real_T *y)
   d_st.site = &of_emlrtRSI;
   nx = y->size[0];
   y->size[0] = a->size[0];
-  emxEnsureCapacity_real_T(&d_st, y, nx, &bk_emlrtRTEI);
+  emxEnsureCapacity_real_T(&d_st, y, nx, &ak_emlrtRTEI);
   nx = a->size[0];
   e_st.site = &pf_emlrtRSI;
   if ((1 <= a->size[0]) && (a->size[0] > 2147483646)) {
@@ -105,7 +105,7 @@ void power(const emlrtStack *sp, const emxArray_real_T *a, emxArray_real_T *y)
   d_st.site = &of_emlrtRSI;
   nx = y->size[0];
   y->size[0] = a->size[0];
-  emxEnsureCapacity_real_T(&d_st, y, nx, &bk_emlrtRTEI);
+  emxEnsureCapacity_real_T(&d_st, y, nx, &ak_emlrtRTEI);
   nx = a->size[0];
   e_st.site = &pf_emlrtRSI;
   if ((1 <= a->size[0]) && (a->size[0] > 2147483646)) {

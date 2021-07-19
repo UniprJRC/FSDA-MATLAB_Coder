@@ -60,7 +60,7 @@ static emlrtDCInfo f_emlrtDCI = {
     4 /* checkKind */
 };
 
-static emlrtRSInfo lib_emlrtRSI = {
+static emlrtRSInfo kib_emlrtRSI = {
     26,                 /* lineNo */
     "printNumToBuffer", /* fcnName */
     "C:\\Program "
@@ -199,7 +199,7 @@ void int2str(const emlrtStack *sp, real_T xin, char_T s_data[],
     c_y = NULL;
     m = emlrtCreateDoubleScalar(x);
     emlrtAssign(&c_y, m);
-    b_st.site = &lib_emlrtRSI;
+    b_st.site = &kib_emlrtRSI;
     emlrt_marshallIn(&b_st, feval(&b_st, y, b_y, c_y, &e_emlrtMCI),
                      "<output of feval>", s_data, s_size);
   }

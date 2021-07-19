@@ -36,7 +36,7 @@ void b_abs(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   nx = x->size[0];
   k = y->size[0];
   y->size[0] = x->size[0];
-  emxEnsureCapacity_real_T(&st, y, k, &us_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, y, k, &ts_emlrtRTEI);
   b_st.site = &bs_emlrtRSI;
   if ((1 <= x->size[0]) && (x->size[0] > 2147483646)) {
     c_st.site = &qf_emlrtRSI;

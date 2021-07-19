@@ -53,7 +53,7 @@ static emlrtDCInfo gd_emlrtDCI = {
     4 /* checkKind */
 };
 
-static emlrtRSInfo web_emlrtRSI = {
+static emlrtRSInfo veb_emlrtRSI = {
     52,              /* lineNo */
     "nonConstPrint", /* fcnName */
     "C:\\Program "
@@ -61,7 +61,7 @@ static emlrtRSInfo web_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRSInfo xeb_emlrtRSI = {
+static emlrtRSInfo web_emlrtRSI = {
     54,              /* lineNo */
     "nonConstPrint", /* fcnName */
     "C:\\Program "
@@ -69,7 +69,7 @@ static emlrtRSInfo xeb_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRSInfo afb_emlrtRSI = {
+static emlrtRSInfo yeb_emlrtRSI = {
     57,              /* lineNo */
     "nonConstPrint", /* fcnName */
     "C:\\Program "
@@ -171,16 +171,16 @@ void b_sprintf(const emlrtStack *sp, real_T varargin_1, emxArray_char_T *str)
   c_y = NULL;
   m = emlrtCreateDoubleScalar(varargin_1);
   emlrtAssign(&c_y, m);
-  b_st.site = &web_emlrtRSI;
+  b_st.site = &veb_emlrtRSI;
   emlrtAssign(&tmpStr, feval(&b_st, y, b_y, c_y, &e_emlrtMCI));
-  b_st.site = &xeb_emlrtRSI;
+  b_st.site = &web_emlrtRSI;
   strSize =
       emlrt_marshallIn(&b_st, length(&b_st, emlrtAlias(tmpStr), &f_emlrtMCI),
                        "<output of length>");
   if (!(strSize >= 0.0)) {
     emlrtNonNegativeCheckR2012b(strSize, &gd_emlrtDCI, &st);
   }
-  b_st.site = &afb_emlrtRSI;
+  b_st.site = &yeb_emlrtRSI;
   c_emlrt_marshallIn(&b_st, emlrtAlias(tmpStr), "tmpStr", str);
   emlrtDestroyArray(&tmpStr);
 }

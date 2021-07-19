@@ -17,7 +17,7 @@
 #include <stdio.h>
 
 /* Variable Definitions */
-static emlrtRSInfo cc_emlrtRSI = {
+static emlrtRSInfo jc_emlrtRSI = {
     54,        /* lineNo */
     "int2str", /* fcnName */
     "C:\\Program "
@@ -25,7 +25,7 @@ static emlrtRSInfo cc_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRSInfo dc_emlrtRSI = {
+static emlrtRSInfo kc_emlrtRSI = {
     94,        /* lineNo */
     "int2str", /* fcnName */
     "C:\\Program "
@@ -33,7 +33,7 @@ static emlrtRSInfo dc_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRSInfo ec_emlrtRSI = {
+static emlrtRSInfo lc_emlrtRSI = {
     25,                 /* lineNo */
     "printNumToBuffer", /* fcnName */
     "C:\\Program "
@@ -41,7 +41,7 @@ static emlrtRSInfo ec_emlrtRSI = {
     "internal\\printNumToBuffer.m" /* pathName */
 };
 
-static emlrtMCInfo c_emlrtMCI = {
+static emlrtMCInfo e_emlrtMCI = {
     26,                 /* lineNo */
     9,                  /* colNo */
     "printNumToBuffer", /* fName */
@@ -50,7 +50,7 @@ static emlrtMCInfo c_emlrtMCI = {
     "internal\\printNumToBuffer.m" /* pName */
 };
 
-static emlrtDCInfo emlrtDCI = {
+static emlrtDCInfo g_emlrtDCI = {
     12,       /* lineNo */
     20,       /* colNo */
     "blanks", /* fName */
@@ -60,7 +60,7 @@ static emlrtDCInfo emlrtDCI = {
     4 /* checkKind */
 };
 
-static emlrtRSInfo ypb_emlrtRSI = {
+static emlrtRSInfo tqb_emlrtRSI = {
     26,                 /* lineNo */
     "printNumToBuffer", /* fcnName */
     "C:\\Program "
@@ -171,22 +171,22 @@ void int2str(const emlrtStack *sp, real_T xin, char_T s_data[],
     if (x == 0.0) {
       ub = 1.0;
     } else {
-      st.site = &cc_emlrtRSI;
+      st.site = &jc_emlrtRSI;
       b_x = muDoubleScalarFloor(muDoubleScalarLog10(muDoubleScalarAbs(x)));
       ub = b_x + 1.0;
       if (x < 0.0) {
         ub = (b_x + 1.0) + 1.0;
       }
     }
-    st.site = &dc_emlrtRSI;
-    b_st.site = &ec_emlrtRSI;
+    st.site = &kc_emlrtRSI;
+    b_st.site = &lc_emlrtRSI;
     if ((int32_T)ub <= 310) {
       i = (int32_T)ub;
     } else {
       i = 310;
     }
     if (i < 0) {
-      emlrtNonNegativeCheckR2012b(i, &emlrtDCI, &b_st);
+      emlrtNonNegativeCheckR2012b(i, &g_emlrtDCI, &b_st);
     }
     y = NULL;
     m = emlrtCreateCharArray(2, &b_iv[0]);
@@ -199,8 +199,8 @@ void int2str(const emlrtStack *sp, real_T xin, char_T s_data[],
     c_y = NULL;
     m = emlrtCreateDoubleScalar(x);
     emlrtAssign(&c_y, m);
-    b_st.site = &ypb_emlrtRSI;
-    emlrt_marshallIn(&b_st, feval(&b_st, y, b_y, c_y, &c_emlrtMCI),
+    b_st.site = &tqb_emlrtRSI;
+    emlrt_marshallIn(&b_st, feval(&b_st, y, b_y, c_y, &e_emlrtMCI),
                      "<output of feval>", s_data, s_size);
   }
 }

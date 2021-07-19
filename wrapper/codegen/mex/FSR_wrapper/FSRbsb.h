@@ -24,6 +24,6 @@
 /* Function Declarations */
 void FSRbsb(const emlrtStack *sp, const emxArray_real_T *y,
             const emxArray_real_T *X, emxArray_real_T *bsb, real_T varargin_4,
-            emxArray_real_T *Un, emxArray_real32_T *BB);
+            emxArray_real_T *Un, emxArray_real_T *BB);
 
 /* End of code generation (FSRbsb.h) */

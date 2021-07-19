@@ -19,7 +19,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRSInfo pb_emlrtRSI = {
+static emlrtRSInfo wb_emlrtRSI = {
     144,        /* lineNo */
     "eml_find", /* fcnName */
     "C:\\Program "
@@ -27,7 +27,7 @@ static emlrtRSInfo pb_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRSInfo qb_emlrtRSI = {
+static emlrtRSInfo xb_emlrtRSI = {
     382,                  /* lineNo */
     "find_first_indices", /* fcnName */
     "C:\\Program "
@@ -35,7 +35,7 @@ static emlrtRSInfo qb_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRSInfo sf_emlrtRSI = {
+static emlrtRSInfo ag_emlrtRSI = {
     402,                  /* lineNo */
     "find_first_indices", /* fcnName */
     "C:\\Program "
@@ -43,7 +43,7 @@ static emlrtRSInfo sf_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRSInfo rlb_emlrtRSI = {
+static emlrtRSInfo hmb_emlrtRSI = {
     146,        /* lineNo */
     "eml_find", /* fcnName */
     "C:\\Program "
@@ -51,7 +51,7 @@ static emlrtRSInfo rlb_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRTEInfo n_emlrtRTEI = {
+static emlrtRTEInfo o_emlrtRTEI = {
     392,                  /* lineNo */
     1,                    /* colNo */
     "find_first_indices", /* fName */
@@ -60,7 +60,7 @@ static emlrtRTEInfo n_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo jb_emlrtRTEI = {
+static emlrtRTEInfo kb_emlrtRTEI = {
     81,         /* lineNo */
     1,          /* colNo */
     "eml_find", /* fName */
@@ -69,7 +69,7 @@ static emlrtRTEInfo jb_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo xc_emlrtRTEI = {
+static emlrtRTEInfo ad_emlrtRTEI = {
     447,                 /* lineNo */
     1,                   /* colNo */
     "find_last_indices", /* fName */
@@ -78,7 +78,7 @@ static emlrtRTEInfo xc_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo ee_emlrtRTEI = {
+static emlrtRTEInfo df_emlrtRTEI = {
     364,    /* lineNo */
     24,     /* colNo */
     "find", /* fName */
@@ -87,7 +87,7 @@ static emlrtRTEInfo ee_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo fe_emlrtRTEI = {
+static emlrtRTEInfo ef_emlrtRTEI = {
     144,    /* lineNo */
     9,      /* colNo */
     "find", /* fName */
@@ -96,7 +96,7 @@ static emlrtRTEInfo fe_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo sg_emlrtRTEI = {
+static emlrtRTEInfo rh_emlrtRTEI = {
     369,    /* lineNo */
     24,     /* colNo */
     "find", /* fName */
@@ -105,7 +105,7 @@ static emlrtRTEInfo sg_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo tg_emlrtRTEI = {
+static emlrtRTEInfo sh_emlrtRTEI = {
     402,    /* lineNo */
     5,      /* colNo */
     "find", /* fName */
@@ -114,7 +114,7 @@ static emlrtRTEInfo tg_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo ug_emlrtRTEI = {
+static emlrtRTEInfo th_emlrtRTEI = {
     144,    /* lineNo */
     13,     /* colNo */
     "find", /* fName */
@@ -146,19 +146,19 @@ void b_eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
   k = (1 <= x->size[0]);
   if (k > x->size[0]) {
-    emlrtErrorWithMessageIdR2018a(sp, &jb_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(sp, &kb_emlrtRTEI,
                                   "Coder:builtins:AssertionFailed",
                                   "Coder:builtins:AssertionFailed", 0);
   }
-  emxInit_int32_T(sp, &i, 1, &ug_emlrtRTEI, true);
-  st.site = &pb_emlrtRSI;
+  emxInit_int32_T(sp, &i, 1, &th_emlrtRTEI, true);
+  st.site = &wb_emlrtRSI;
   idx = 0;
   b_i = i->size[0];
   i->size[0] = k;
-  emxEnsureCapacity_int32_T(&st, i, b_i, &sg_emlrtRTEI);
-  b_st.site = &qb_emlrtRSI;
+  emxEnsureCapacity_int32_T(&st, i, b_i, &rh_emlrtRTEI);
+  b_st.site = &xb_emlrtRSI;
   if ((1 <= x->size[0]) && (x->size[0] > 2147483646)) {
-    c_st.site = &ab_emlrtRSI;
+    c_st.site = &hb_emlrtRSI;
     check_forloop_overflow_error(&c_st);
   }
   ii = 0;
@@ -177,7 +177,7 @@ void b_eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
     }
   }
   if (idx > k) {
-    emlrtErrorWithMessageIdR2018a(&st, &n_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(&st, &o_emlrtRTEI,
                                   "Coder:builtins:AssertionFailed",
                                   "Coder:builtins:AssertionFailed", 0);
   }
@@ -189,11 +189,11 @@ void b_eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
     b_i = (1 <= idx);
     b_iv[0] = 1;
     b_iv[1] = b_i;
-    b_st.site = &sf_emlrtRSI;
+    b_st.site = &ag_emlrtRSI;
     b_indexShapeCheck(&b_st, i->size[0], b_iv);
     ii = i->size[0];
     i->size[0] = b_i;
-    emxEnsureCapacity_int32_T(&st, i, ii, &tg_emlrtRTEI);
+    emxEnsureCapacity_int32_T(&st, i, ii, &sh_emlrtRTEI);
   }
   *i_size = i->size[0];
   ii = i->size[0];
@@ -223,14 +223,14 @@ void c_eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   nx = x->size[0];
-  st.site = &pb_emlrtRSI;
+  st.site = &wb_emlrtRSI;
   idx = 0;
   b_i = i->size[0];
   i->size[0] = x->size[0];
-  emxEnsureCapacity_int32_T(&st, i, b_i, &sg_emlrtRTEI);
-  b_st.site = &qb_emlrtRSI;
+  emxEnsureCapacity_int32_T(&st, i, b_i, &rh_emlrtRTEI);
+  b_st.site = &xb_emlrtRSI;
   if ((1 <= x->size[0]) && (x->size[0] > 2147483646)) {
-    c_st.site = &ab_emlrtRSI;
+    c_st.site = &hb_emlrtRSI;
     check_forloop_overflow_error(&c_st);
   }
   ii = 0;
@@ -249,7 +249,7 @@ void c_eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
     }
   }
   if (idx > x->size[0]) {
-    emlrtErrorWithMessageIdR2018a(&st, &n_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(&st, &o_emlrtRTEI,
                                   "Coder:builtins:AssertionFailed",
                                   "Coder:builtins:AssertionFailed", 0);
   }
@@ -265,11 +265,11 @@ void c_eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
     }
     b_iv[0] = 1;
     b_iv[1] = b_i;
-    b_st.site = &sf_emlrtRSI;
+    b_st.site = &ag_emlrtRSI;
     b_indexShapeCheck(&b_st, i->size[0], b_iv);
     ii = i->size[0];
     i->size[0] = b_i;
-    emxEnsureCapacity_int32_T(&st, i, ii, &fe_emlrtRTEI);
+    emxEnsureCapacity_int32_T(&st, i, ii, &ef_emlrtRTEI);
   }
 }
 
@@ -294,20 +294,20 @@ void d_eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
   k = (1 <= x->size[1]);
   if (k > x->size[1]) {
-    emlrtErrorWithMessageIdR2018a(sp, &jb_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(sp, &kb_emlrtRTEI,
                                   "Coder:builtins:AssertionFailed",
                                   "Coder:builtins:AssertionFailed", 0);
   }
-  emxInit_int32_T(sp, &i, 2, &ug_emlrtRTEI, true);
-  st.site = &pb_emlrtRSI;
+  emxInit_int32_T(sp, &i, 2, &th_emlrtRTEI, true);
+  st.site = &wb_emlrtRSI;
   idx = 0;
   b_i = i->size[0] * i->size[1];
   i->size[0] = 1;
   i->size[1] = k;
-  emxEnsureCapacity_int32_T(&st, i, b_i, &ee_emlrtRTEI);
-  b_st.site = &qb_emlrtRSI;
+  emxEnsureCapacity_int32_T(&st, i, b_i, &df_emlrtRTEI);
+  b_st.site = &xb_emlrtRSI;
   if ((1 <= x->size[1]) && (x->size[1] > 2147483646)) {
-    c_st.site = &ab_emlrtRSI;
+    c_st.site = &hb_emlrtRSI;
     check_forloop_overflow_error(&c_st);
   }
   ii = 0;
@@ -326,7 +326,7 @@ void d_eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
     }
   }
   if (idx > k) {
-    emlrtErrorWithMessageIdR2018a(&st, &n_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(&st, &o_emlrtRTEI,
                                   "Coder:builtins:AssertionFailed",
                                   "Coder:builtins:AssertionFailed", 0);
   }
@@ -338,7 +338,7 @@ void d_eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
   } else {
     b_i = i->size[0] * i->size[1];
     i->size[1] = (1 <= idx);
-    emxEnsureCapacity_int32_T(&st, i, b_i, &tg_emlrtRTEI);
+    emxEnsureCapacity_int32_T(&st, i, b_i, &sh_emlrtRTEI);
   }
   i_size[0] = 1;
   i_size[1] = i->size[1];
@@ -362,11 +362,11 @@ void e_eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
   st.tls = sp->tls;
   k = (1 <= x->size[1]);
   if (k > x->size[1]) {
-    emlrtErrorWithMessageIdR2018a(sp, &jb_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(sp, &kb_emlrtRTEI,
                                   "Coder:builtins:AssertionFailed",
                                   "Coder:builtins:AssertionFailed", 0);
   }
-  st.site = &rlb_emlrtRSI;
+  st.site = &hmb_emlrtRSI;
   ii = x->size[1];
   idx = 0;
   i_size[0] = 1;
@@ -382,7 +382,7 @@ void e_eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
     }
   }
   if (idx > k) {
-    emlrtErrorWithMessageIdR2018a(&st, &xc_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(&st, &ad_emlrtRTEI,
                                   "Coder:builtins:AssertionFailed",
                                   "Coder:builtins:AssertionFailed", 0);
   }
@@ -413,15 +413,15 @@ void eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   nx = x->size[1];
-  st.site = &pb_emlrtRSI;
+  st.site = &wb_emlrtRSI;
   idx = 0;
   ii = i->size[0] * i->size[1];
   i->size[0] = 1;
   i->size[1] = x->size[1];
-  emxEnsureCapacity_int32_T(&st, i, ii, &ee_emlrtRTEI);
-  b_st.site = &qb_emlrtRSI;
+  emxEnsureCapacity_int32_T(&st, i, ii, &df_emlrtRTEI);
+  b_st.site = &xb_emlrtRSI;
   if ((1 <= x->size[1]) && (x->size[1] > 2147483646)) {
-    c_st.site = &ab_emlrtRSI;
+    c_st.site = &hb_emlrtRSI;
     check_forloop_overflow_error(&c_st);
   }
   ii = 0;
@@ -440,7 +440,7 @@ void eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
     }
   }
   if (idx > x->size[1]) {
-    emlrtErrorWithMessageIdR2018a(&st, &n_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(&st, &o_emlrtRTEI,
                                   "Coder:builtins:AssertionFailed",
                                   "Coder:builtins:AssertionFailed", 0);
   }
@@ -456,7 +456,7 @@ void eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
     } else {
       i->size[1] = idx;
     }
-    emxEnsureCapacity_int32_T(&st, i, ii, &fe_emlrtRTEI);
+    emxEnsureCapacity_int32_T(&st, i, ii, &ef_emlrtRTEI);
   }
 }
 

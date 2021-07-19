@@ -236,50 +236,6 @@ void emxEnsureCapacity_ptrdiff_t(const emlrtStack *sp,
   }
 }
 
-void emxEnsureCapacity_real32_T(const emlrtStack *sp,
-                                emxArray_real32_T *emxArray, int32_T oldNumel,
-                                const emlrtRTEInfo *srcLocation)
-{
-  int32_T i;
-  int32_T newNumel;
-  void *newData;
-  if (oldNumel < 0) {
-    oldNumel = 0;
-  }
-  newNumel = 1;
-  for (i = 0; i < emxArray->numDimensions; i++) {
-    newNumel = (int32_T)emlrtSizeMulR2012b((size_t)(uint32_T)newNumel,
-                                           (size_t)(uint32_T)emxArray->size[i],
-                                           srcLocation, (emlrtCTX)sp);
-  }
-  if (newNumel > emxArray->allocatedSize) {
-    i = emxArray->allocatedSize;
-    if (i < 16) {
-      i = 16;
-    }
-    while (i < newNumel) {
-      if (i > 1073741823) {
-        i = MAX_int32_T;
-      } else {
-        i *= 2;
-      }
-    }
-    newData = emlrtCallocMex((uint32_T)i, sizeof(real32_T));
-    if (newData == NULL) {
-      emlrtHeapAllocationErrorR2012b(srcLocation, (emlrtCTX)sp);
-    }
-    if (emxArray->data != NULL) {
-      memcpy(newData, emxArray->data, sizeof(real32_T) * oldNumel);
-      if (emxArray->canFreeData) {
-        emlrtFreeMex(emxArray->data);
-      }
-    }
-    emxArray->data = (real32_T *)newData;
-    emxArray->allocatedSize = i;
-    emxArray->canFreeData = true;
-  }
-}
-
 void emxEnsureCapacity_real_T(const emlrtStack *sp, emxArray_real_T *emxArray,
                               int32_T oldNumel, const emlrtRTEInfo *srcLocation)
 {
@@ -382,16 +338,7 @@ void emxFreeStruct_struct_FSR_T(struct_FSR_T *pStruct)
   emxFree_real_T(&pStruct->residuals);
 }
 
-void emxFreeStruct_struct_T(b_struct_T *pStruct)
-{
-  emxFree_boolean_T(&pStruct->weights);
-  emxFree_real_T(&pStruct->beta);
-  emxFree_real_T(&pStruct->residuals);
-  emxFree_real_T(&pStruct->bs);
-  emxFree_real_T(&pStruct->outliers);
-}
-
-void emxFreeStruct_struct_T1(struct_T *pStruct)
+void emxFreeStruct_struct_T(struct_T *pStruct)
 {
   emxFree_real_T(&pStruct->ListOut);
   emxFree_real_T(&pStruct->outliers);
@@ -400,6 +347,15 @@ void emxFreeStruct_struct_T1(struct_T *pStruct)
   emxFree_real_T(&pStruct->beta);
   emxFree_real_T(&pStruct->ListCl);
   emxFree_real_T(&pStruct->VIOMout);
+}
+
+void emxFreeStruct_struct_T1(b_struct_T *pStruct)
+{
+  emxFree_boolean_T(&pStruct->weights);
+  emxFree_real_T(&pStruct->beta);
+  emxFree_real_T(&pStruct->residuals);
+  emxFree_real_T(&pStruct->bs);
+  emxFree_real_T(&pStruct->outliers);
 }
 
 void emxFree_boolean_T(emxArray_boolean_T **pEmxArray)
@@ -464,18 +420,6 @@ void emxFree_ptrdiff_t(emxArray_ptrdiff_t **pEmxArray)
   }
 }
 
-void emxFree_real32_T(emxArray_real32_T **pEmxArray)
-{
-  if (*pEmxArray != (emxArray_real32_T *)NULL) {
-    if (((*pEmxArray)->data != (real32_T *)NULL) && (*pEmxArray)->canFreeData) {
-      emlrtFreeMex((*pEmxArray)->data);
-    }
-    emlrtFreeMex((*pEmxArray)->size);
-    emlrtFreeMex(*pEmxArray);
-    *pEmxArray = (emxArray_real32_T *)NULL;
-  }
-}
-
 void emxFree_real_T(emxArray_real_T **pEmxArray)
 {
   if (*pEmxArray != (emxArray_real_T *)NULL) {
@@ -517,22 +461,8 @@ void emxInitStruct_struct_FSR_T(const emlrtStack *sp, struct_FSR_T *pStruct,
   emxInit_real_T(sp, &pStruct->residuals, 2, srcLocation, doPush);
 }
 
-void emxInitStruct_struct_T(const emlrtStack *sp, b_struct_T *pStruct,
+void emxInitStruct_struct_T(const emlrtStack *sp, struct_T *pStruct,
                             const emlrtRTEInfo *srcLocation, boolean_T doPush)
-{
-  emxInit_boolean_T(sp, &pStruct->weights, 1, srcLocation, doPush);
-  emxInit_real_T(sp, &pStruct->beta, 1, srcLocation, doPush);
-  emxInit_real_T(sp, &pStruct->residuals, 1, srcLocation, doPush);
-  emxInit_real_T(sp, &pStruct->bs, 2, srcLocation, doPush);
-  emxInit_real_T(sp, &pStruct->outliers, 2, srcLocation, doPush);
-  pStruct->X.size[0] = 0;
-  pStruct->X.size[1] = 0;
-  pStruct->y.size[0] = 0;
-  pStruct->y.size[1] = 0;
-}
-
-void emxInitStruct_struct_T1(const emlrtStack *sp, struct_T *pStruct,
-                             const emlrtRTEInfo *srcLocation, boolean_T doPush)
 {
   emxInit_real_T(sp, &pStruct->ListOut, 2, srcLocation, doPush);
   emxInit_real_T(sp, &pStruct->outliers, 2, srcLocation, doPush);
@@ -545,6 +475,20 @@ void emxInitStruct_struct_T1(const emlrtStack *sp, struct_T *pStruct,
   pStruct->mdag.size[1] = 0;
   emxInit_real_T(sp, &pStruct->ListCl, 2, srcLocation, doPush);
   emxInit_real_T(sp, &pStruct->VIOMout, 2, srcLocation, doPush);
+}
+
+void emxInitStruct_struct_T1(const emlrtStack *sp, b_struct_T *pStruct,
+                             const emlrtRTEInfo *srcLocation, boolean_T doPush)
+{
+  emxInit_boolean_T(sp, &pStruct->weights, 1, srcLocation, doPush);
+  emxInit_real_T(sp, &pStruct->beta, 1, srcLocation, doPush);
+  emxInit_real_T(sp, &pStruct->residuals, 1, srcLocation, doPush);
+  emxInit_real_T(sp, &pStruct->bs, 2, srcLocation, doPush);
+  emxInit_real_T(sp, &pStruct->outliers, 2, srcLocation, doPush);
+  pStruct->X.size[0] = 0;
+  pStruct->X.size[1] = 0;
+  pStruct->y.size[0] = 0;
+  pStruct->y.size[1] = 0;
 }
 
 void emxInit_boolean_T(const emlrtStack *sp, emxArray_boolean_T **pEmxArray,
@@ -680,35 +624,6 @@ void emxInit_ptrdiff_t(const emlrtStack *sp, emxArray_ptrdiff_t **pEmxArray,
   }
   emxArray = *pEmxArray;
   emxArray->data = (ptrdiff_t *)NULL;
-  emxArray->numDimensions = numDimensions;
-  emxArray->size = (int32_T *)emlrtMallocMex(sizeof(int32_T) * numDimensions);
-  if ((void *)emxArray->size == NULL) {
-    emlrtHeapAllocationErrorR2012b(srcLocation, (emlrtCTX)sp);
-  }
-  emxArray->allocatedSize = 0;
-  emxArray->canFreeData = true;
-  for (i = 0; i < numDimensions; i++) {
-    emxArray->size[i] = 0;
-  }
-}
-
-void emxInit_real32_T(const emlrtStack *sp, emxArray_real32_T **pEmxArray,
-                      int32_T numDimensions, const emlrtRTEInfo *srcLocation,
-                      boolean_T doPush)
-{
-  emxArray_real32_T *emxArray;
-  int32_T i;
-  *pEmxArray = (emxArray_real32_T *)emlrtMallocMex(sizeof(emxArray_real32_T));
-  if ((void *)*pEmxArray == NULL) {
-    emlrtHeapAllocationErrorR2012b(srcLocation, (emlrtCTX)sp);
-  }
-  if (doPush) {
-    emlrtPushHeapReferenceStackR2021a((emlrtCTX)sp, false, (void *)pEmxArray,
-                                      (void *)&emxFree_real32_T, NULL, NULL,
-                                      NULL);
-  }
-  emxArray = *pEmxArray;
-  emxArray->data = (real32_T *)NULL;
   emxArray->numDimensions = numDimensions;
   emxArray->size = (int32_T *)emlrtMallocMex(sizeof(int32_T) * numDimensions);
   if ((void *)emxArray->size == NULL) {

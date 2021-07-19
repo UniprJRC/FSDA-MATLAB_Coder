@@ -27,7 +27,7 @@ static emlrtRSInfo ek_emlrtRSI = {
                                                                             */
 };
 
-static emlrtRTEInfo ob_emlrtRTEI = {
+static emlrtRTEInfo nb_emlrtRTEI = {
     109,          /* lineNo */
     9,            /* colNo */
     "randsample", /* fName */
@@ -35,7 +35,7 @@ static emlrtRTEInfo ob_emlrtRTEI = {
                                                                             */
 };
 
-static emlrtRTEInfo pb_emlrtRTEI = {
+static emlrtRTEInfo ob_emlrtRTEI = {
     25,           /* lineNo */
     27,           /* colNo */
     "randsample", /* fName */
@@ -109,7 +109,7 @@ static emlrtBCInfo
             0 /* checkKind */
 };
 
-static emlrtRTEInfo ql_emlrtRTEI = {
+static emlrtRTEInfo pl_emlrtRTEI = {
     134,          /* lineNo */
     9,            /* colNo */
     "randsample", /* fName */
@@ -141,19 +141,19 @@ real_T randsample(const emlrtStack *sp, real_T varargin_1)
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
   n = muDoubleScalarFloor(varargin_1);
   if (!(n == varargin_1)) {
-    emlrtErrorWithMessageIdR2018a(sp, &pb_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(sp, &ob_emlrtRTEI,
                                   "Coder:stats:RandsampleBadN",
                                   "Coder:stats:RandsampleBadN", 0);
   }
   if (!(1.0 <= n)) {
-    emlrtErrorWithMessageIdR2018a(sp, &ob_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(sp, &nb_emlrtRTEI,
                                   "stats:randsample:SampleTooLarge",
                                   "stats:randsample:SampleTooLarge", 2, 6, n);
   }
   if (4.0 > n) {
     st.site = &ek_emlrtRSI;
     if (!(n == n)) {
-      emlrtErrorWithMessageIdR2018a(&st, &bb_emlrtRTEI,
+      emlrtErrorWithMessageIdR2018a(&st, &ab_emlrtRTEI,
                                     "MATLAB:randperm:inputType",
                                     "MATLAB:randperm:inputType", 0);
     }
@@ -224,16 +224,16 @@ real_T randsample(const emlrtStack *sp, real_T varargin_1)
     }
     y = rp_data[0];
   } else {
-    emxInit_boolean_T(sp, &selected, 2, &ql_emlrtRTEI, true);
+    emxInit_boolean_T(sp, &selected, 2, &pl_emlrtRTEI, true);
     pEnd = selected->size[0] * selected->size[1];
     selected->size[0] = 1;
-    emxEnsureCapacity_boolean_T(sp, selected, pEnd, &ql_emlrtRTEI);
+    emxEnsureCapacity_boolean_T(sp, selected, pEnd, &pl_emlrtRTEI);
     if (n != (int32_T)n) {
       emlrtIntegerCheckR2012b(n, &ce_emlrtDCI, (emlrtCTX)sp);
     }
     pEnd = selected->size[0] * selected->size[1];
     selected->size[1] = (int32_T)n;
-    emxEnsureCapacity_boolean_T(sp, selected, pEnd, &ql_emlrtRTEI);
+    emxEnsureCapacity_boolean_T(sp, selected, pEnd, &pl_emlrtRTEI);
     if (n != (int32_T)n) {
       emlrtIntegerCheckR2012b(n, &de_emlrtDCI, (emlrtCTX)sp);
     }

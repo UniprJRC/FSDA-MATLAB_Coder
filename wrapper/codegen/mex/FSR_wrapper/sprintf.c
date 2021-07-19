@@ -17,7 +17,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRSInfo xhb_emlrtRSI = {
+static emlrtRSInfo mib_emlrtRSI = {
     28,        /* lineNo */
     "sprintf", /* fcnName */
     "C:\\Program "
@@ -25,7 +25,7 @@ static emlrtRSInfo xhb_emlrtRSI = {
                                                                            */
 };
 
-static emlrtMCInfo sb_emlrtMCI = {
+static emlrtMCInfo yb_emlrtMCI = {
     52,              /* lineNo */
     14,              /* colNo */
     "nonConstPrint", /* fName */
@@ -34,7 +34,7 @@ static emlrtMCInfo sb_emlrtMCI = {
                                                                            */
 };
 
-static emlrtMCInfo tb_emlrtMCI = {
+static emlrtMCInfo ac_emlrtMCI = {
     54,              /* lineNo */
     15,              /* colNo */
     "nonConstPrint", /* fName */
@@ -43,7 +43,7 @@ static emlrtMCInfo tb_emlrtMCI = {
                                                                            */
 };
 
-static emlrtDCInfo od_emlrtDCI = {
+static emlrtDCInfo wd_emlrtDCI = {
     56,              /* lineNo */
     53,              /* colNo */
     "nonConstPrint", /* fName */
@@ -53,7 +53,7 @@ static emlrtDCInfo od_emlrtDCI = {
     4 /* checkKind */
 };
 
-static emlrtRTEInfo gbb_emlrtRTEI = {
+static emlrtRTEInfo bdb_emlrtRTEI = {
     1,         /* lineNo */
     25,        /* colNo */
     "sprintf", /* fName */
@@ -62,7 +62,7 @@ static emlrtRTEInfo gbb_emlrtRTEI = {
                                                                            */
 };
 
-static emlrtRSInfo wpb_emlrtRSI = {
+static emlrtRSInfo rqb_emlrtRSI = {
     52,              /* lineNo */
     "nonConstPrint", /* fcnName */
     "C:\\Program "
@@ -70,7 +70,7 @@ static emlrtRSInfo wpb_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRSInfo bqb_emlrtRSI = {
+static emlrtRSInfo vqb_emlrtRSI = {
     54,              /* lineNo */
     "nonConstPrint", /* fcnName */
     "C:\\Program "
@@ -78,7 +78,7 @@ static emlrtRSInfo bqb_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRSInfo cqb_emlrtRSI = {
+static emlrtRSInfo wqb_emlrtRSI = {
     57,              /* lineNo */
     "nonConstPrint", /* fcnName */
     "C:\\Program "
@@ -171,7 +171,7 @@ void b_sprintf(const emlrtStack *sp, real_T varargin_1, emxArray_char_T *str)
   real_T strSize;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &xhb_emlrtRSI;
+  st.site = &mib_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   tmpStr = NULL;
@@ -186,16 +186,16 @@ void b_sprintf(const emlrtStack *sp, real_T varargin_1, emxArray_char_T *str)
   c_y = NULL;
   m = emlrtCreateDoubleScalar(varargin_1);
   emlrtAssign(&c_y, m);
-  b_st.site = &wpb_emlrtRSI;
-  emlrtAssign(&tmpStr, feval(&b_st, y, b_y, c_y, &sb_emlrtMCI));
-  b_st.site = &bqb_emlrtRSI;
+  b_st.site = &rqb_emlrtRSI;
+  emlrtAssign(&tmpStr, feval(&b_st, y, b_y, c_y, &yb_emlrtMCI));
+  b_st.site = &vqb_emlrtRSI;
   strSize =
-      g_emlrt_marshallIn(&b_st, length(&b_st, emlrtAlias(tmpStr), &tb_emlrtMCI),
+      g_emlrt_marshallIn(&b_st, length(&b_st, emlrtAlias(tmpStr), &ac_emlrtMCI),
                          "<output of length>");
   if (!(strSize >= 0.0)) {
-    emlrtNonNegativeCheckR2012b(strSize, &od_emlrtDCI, &st);
+    emlrtNonNegativeCheckR2012b(strSize, &wd_emlrtDCI, &st);
   }
-  b_st.site = &cqb_emlrtRSI;
+  b_st.site = &wqb_emlrtRSI;
   k_emlrt_marshallIn(&b_st, emlrtAlias(tmpStr), "tmpStr", str);
   emlrtDestroyArray(&tmpStr);
 }
@@ -223,7 +223,7 @@ void c_sprintf(const emlrtStack *sp, real_T varargin_1)
   b_st.prev = &st;
   b_st.tls = st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  st.site = &xhb_emlrtRSI;
+  st.site = &mib_emlrtRSI;
   tmpStr = NULL;
   y = NULL;
   m = emlrtCreateCharArray(2, &b_iv[0]);
@@ -236,17 +236,17 @@ void c_sprintf(const emlrtStack *sp, real_T varargin_1)
   c_y = NULL;
   m = emlrtCreateDoubleScalar(varargin_1);
   emlrtAssign(&c_y, m);
-  b_st.site = &wpb_emlrtRSI;
-  emlrtAssign(&tmpStr, feval(&b_st, y, b_y, c_y, &sb_emlrtMCI));
-  b_st.site = &bqb_emlrtRSI;
+  b_st.site = &rqb_emlrtRSI;
+  emlrtAssign(&tmpStr, feval(&b_st, y, b_y, c_y, &yb_emlrtMCI));
+  b_st.site = &vqb_emlrtRSI;
   strSize =
-      g_emlrt_marshallIn(&b_st, length(&b_st, emlrtAlias(tmpStr), &tb_emlrtMCI),
+      g_emlrt_marshallIn(&b_st, length(&b_st, emlrtAlias(tmpStr), &ac_emlrtMCI),
                          "<output of length>");
   if (!(strSize >= 0.0)) {
-    emlrtNonNegativeCheckR2012b(strSize, &od_emlrtDCI, &st);
+    emlrtNonNegativeCheckR2012b(strSize, &wd_emlrtDCI, &st);
   }
-  emxInit_char_T(&st, &b_tmpStr, 2, &gbb_emlrtRTEI, true);
-  b_st.site = &cqb_emlrtRSI;
+  emxInit_char_T(&st, &b_tmpStr, 2, &bdb_emlrtRTEI, true);
+  b_st.site = &wqb_emlrtRSI;
   k_emlrt_marshallIn(&b_st, emlrtAlias(tmpStr), "tmpStr", b_tmpStr);
   emlrtDestroyArray(&tmpStr);
   emxFree_char_T(&b_tmpStr);

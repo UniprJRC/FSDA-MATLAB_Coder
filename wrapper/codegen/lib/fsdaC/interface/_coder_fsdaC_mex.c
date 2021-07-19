@@ -17,11 +17,13 @@
 void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
                  const mxArray *prhs[])
 {
-  static const char_T *emlrtEntryPoints[13] = {
-      "FSM_wrapper",    "FSMbsb_wrapper", "FSMmmd_wrapper", "FSR_wrapper",
-      "FSRbsb_wrapper", "FSRfan_wrapper", "FSRmdr_wrapper", "LTSts_wrapper",
-      "LXS_wrapper",    "LXS_wrapper1",   "addt_wrapper",   "tclust_wrapper",
-      "tclust_wrapper1"};
+  static const char_T *emlrtEntryPoints[17] = {
+      "FSM_wrapper",     "FSMbsb_wrapper",    "FSMenvmmd_wrapper",
+      "FSMmmd_wrapper",  "FSR_wrapper",       "FSR_wrapper1",
+      "FSRbsb_wrapper",  "FSRenvmdr_wrapper", "FSRfan_wrapper",
+      "FSRmdr_wrapper",  "LTSts_wrapper",     "LXS_wrapper",
+      "LXS_wrapper1",    "addt_wrapper",      "tclust_wrapper",
+      "tclust_wrapper1", "unibiv_wrapper"};
   emlrtStack st = {
       NULL, /* site */
       NULL, /* tls */
@@ -33,7 +35,7 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
   st.tls = emlrtRootTLSGlobal;
   /* Dispatch the entry-point. */
   switch (emlrtGetEntryPointIndexR2016a(
-      &st, nrhs, &prhs[0], (const char_T **)&emlrtEntryPoints[0], 13)) {
+      &st, nrhs, &prhs[0], (const char_T **)&emlrtEntryPoints[0], 17)) {
   case 0:
     unsafe_FSM_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
@@ -41,37 +43,49 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
     unsafe_FSMbsb_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   case 2:
-    unsafe_FSMmmd_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    unsafe_FSMenvmmd_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   case 3:
-    unsafe_FSR_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    unsafe_FSMmmd_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   case 4:
-    unsafe_FSRbsb_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    unsafe_FSR_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   case 5:
-    unsafe_FSRfan_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    unsafe_FSR_wrapper1_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   case 6:
-    unsafe_FSRmdr_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    unsafe_FSRbsb_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   case 7:
-    unsafe_LTSts_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    unsafe_FSRenvmdr_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   case 8:
-    unsafe_LXS_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    unsafe_FSRfan_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   case 9:
-    unsafe_LXS_wrapper1_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    unsafe_FSRmdr_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   case 10:
-    unsafe_addt_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    unsafe_LTSts_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   case 11:
-    unsafe_tclust_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    unsafe_LXS_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   case 12:
+    unsafe_LXS_wrapper1_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    break;
+  case 13:
+    unsafe_addt_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    break;
+  case 14:
+    unsafe_tclust_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    break;
+  case 15:
     unsafe_tclust_wrapper1_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    break;
+  case 16:
+    unsafe_unibiv_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   }
   /* Module termination. */
@@ -141,6 +155,31 @@ void unsafe_FSMbsb_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[2],
   emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
 }
 
+void unsafe_FSMenvmmd_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[1],
+                                          int32_T nrhs, const mxArray *prhs[5])
+{
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
+  };
+  const mxArray *outputs;
+  st.tls = emlrtRootTLSGlobal;
+  /* Check for proper number of arguments. */
+  if (nrhs != 5) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 5, 4,
+                        17, "FSMenvmmd_wrapper");
+  }
+  if (nlhs > 1) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:TooManyOutputArguments", 3, 4, 17,
+                        "FSMenvmmd_wrapper");
+  }
+  /* Call the function. */
+  FSMenvmmd_wrapper_api(prhs, &outputs);
+  /* Copy over outputs to the caller. */
+  emlrtReturnArrays(1, &plhs[0], &outputs);
+}
+
 void unsafe_FSMmmd_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[3],
                                        int32_T nrhs, const mxArray *prhs[6])
 {
@@ -170,6 +209,31 @@ void unsafe_FSMmmd_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[3],
     b_nlhs = nlhs;
   }
   emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
+}
+
+void unsafe_FSR_wrapper1_mexFunction(int32_T nlhs, mxArray *plhs[1],
+                                     int32_T nrhs, const mxArray *prhs[13])
+{
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
+  };
+  const mxArray *outputs;
+  st.tls = emlrtRootTLSGlobal;
+  /* Check for proper number of arguments. */
+  if (nrhs != 13) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 13, 4,
+                        12, "FSR_wrapper1");
+  }
+  if (nlhs > 1) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:TooManyOutputArguments", 3, 4, 12,
+                        "FSR_wrapper1");
+  }
+  /* Call the function. */
+  FSR_wrapper1_api(prhs, &outputs);
+  /* Copy over outputs to the caller. */
+  emlrtReturnArrays(1, &plhs[0], &outputs);
 }
 
 void unsafe_FSR_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[1],
@@ -226,6 +290,31 @@ void unsafe_FSRbsb_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[2],
     b_nlhs = nlhs;
   }
   emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
+}
+
+void unsafe_FSRenvmdr_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[1],
+                                          int32_T nrhs, const mxArray *prhs[4])
+{
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
+  };
+  const mxArray *outputs;
+  st.tls = emlrtRootTLSGlobal;
+  /* Check for proper number of arguments. */
+  if (nrhs != 4) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 4, 4,
+                        17, "FSRenvmdr_wrapper");
+  }
+  if (nlhs > 1) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:TooManyOutputArguments", 3, 4, 17,
+                        "FSRenvmdr_wrapper");
+  }
+  /* Call the function. */
+  FSRenvmdr_wrapper_api(prhs, &outputs);
+  /* Copy over outputs to the caller. */
+  emlrtReturnArrays(1, &plhs[0], &outputs);
 }
 
 void unsafe_FSRfan_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[1],
@@ -462,6 +551,31 @@ void unsafe_tclust_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[2],
     b_nlhs = nlhs;
   }
   emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
+}
+
+void unsafe_unibiv_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[1],
+                                       int32_T nrhs, const mxArray *prhs[4])
+{
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
+  };
+  const mxArray *outputs;
+  st.tls = emlrtRootTLSGlobal;
+  /* Check for proper number of arguments. */
+  if (nrhs != 4) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 4, 4,
+                        14, "unibiv_wrapper");
+  }
+  if (nlhs > 1) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:TooManyOutputArguments", 3, 4, 14,
+                        "unibiv_wrapper");
+  }
+  /* Call the function. */
+  unibiv_wrapper_api(prhs, &outputs);
+  /* Copy over outputs to the caller. */
+  emlrtReturnArrays(1, &plhs[0], &outputs);
 }
 
 /* End of code generation (_coder_fsdaC_mex.c) */

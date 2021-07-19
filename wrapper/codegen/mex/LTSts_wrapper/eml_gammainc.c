@@ -48,7 +48,7 @@ static emlrtRSInfo kx_emlrtRSI = {
     "gammainc.m" /* pathName */
 };
 
-static emlrtRSInfo rcb_emlrtRSI = {
+static emlrtRSInfo qcb_emlrtRSI = {
     180,            /* lineNo */
     "eml_gammainc", /* fcnName */
     "C:\\Program "
@@ -120,7 +120,7 @@ real_T b_eml_gammainc(const emlrtStack *sp, real_T x, real_T a, real_T la,
         st.site = &kx_emlrtRSI;
         if (x < 0.0) {
           emlrtErrorWithMessageIdR2018a(
-              &st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+              &st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
               "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
         }
         xD0 = (a * la - a * muDoubleScalarLog(x)) - a;
@@ -129,7 +129,7 @@ real_T b_eml_gammainc(const emlrtStack *sp, real_T x, real_T a, real_T la,
         st.site = &jx_emlrtRSI;
         if (asq < 0.0) {
           emlrtErrorWithMessageIdR2018a(
-              &st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+              &st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
               "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
         }
         asq = muDoubleScalarLog(asq);
@@ -233,10 +233,10 @@ real_T b_eml_gammainc(const emlrtStack *sp, real_T x, real_T a, real_T la,
         if (logpax < 709.782712893384) {
           rval = muDoubleScalarExp(logpax) * asq;
         } else {
-          st.site = &rcb_emlrtRSI;
+          st.site = &qcb_emlrtRSI;
           if (asq < 0.0) {
             emlrtErrorWithMessageIdR2018a(
-                &st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+                &st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
                 "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
           }
           rval = muDoubleScalarExp(logpax + muDoubleScalarLog(asq));
@@ -251,7 +251,7 @@ real_T b_eml_gammainc(const emlrtStack *sp, real_T x, real_T a, real_T la,
           st.site = &gx_emlrtRSI;
           if (asq < 0.0) {
             emlrtErrorWithMessageIdR2018a(
-                &st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+                &st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
                 "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
           }
           rval = muDoubleScalarExp(logpax + muDoubleScalarLog(asq));
@@ -276,7 +276,7 @@ real_T b_eml_gammainc(const emlrtStack *sp, real_T x, real_T a, real_T la,
       st.site = &fx_emlrtRSI;
       if (x < 0.0) {
         emlrtErrorWithMessageIdR2018a(
-            &st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+            &st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
             "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
       }
       asq = a * muDoubleScalarLog(x) - lgap1;
@@ -288,7 +288,7 @@ real_T b_eml_gammainc(const emlrtStack *sp, real_T x, real_T a, real_T la,
           st.site = &ex_emlrtRSI;
           if (xD0 < 0.0) {
             emlrtErrorWithMessageIdR2018a(
-                &st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+                &st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
                 "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
           }
           asq = (xD0 - 1.0) * asq / muDoubleScalarLog(xD0);
@@ -316,7 +316,7 @@ real_T b_eml_gammainc(const emlrtStack *sp, real_T x, real_T a, real_T la,
       asq = 0.0;
       i = (int32_T)(((-1.0 - (n - 1.0)) + 1.0) / -1.0);
       emlrtForLoopVectorCheckR2021a(n - 1.0, -1.0, 1.0, mxDOUBLE_CLASS, i,
-                                    &ec_emlrtRTEI, (emlrtCTX)sp);
+                                    &dc_emlrtRTEI, (emlrtCTX)sp);
       for (b_i = 0; b_i < i; b_i++) {
         asq = x * (asq + 1.0) / (a + ((n - 1.0) + -(real_T)b_i));
       }
@@ -327,7 +327,7 @@ real_T b_eml_gammainc(const emlrtStack *sp, real_T x, real_T a, real_T la,
         st.site = &dx_emlrtRSI;
         if (asq < 0.0) {
           emlrtErrorWithMessageIdR2018a(
-              &st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+              &st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
               "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
         }
         rval = muDoubleScalarExp(logpax + muDoubleScalarLog(asq));
@@ -440,7 +440,7 @@ real_T b_eml_gammainc(const emlrtStack *sp, real_T x, real_T a, real_T la,
       }
       i = (int32_T)(((-1.0 - (n - 1.0)) + 1.0) / -1.0);
       emlrtForLoopVectorCheckR2021a(n - 1.0, -1.0, 1.0, mxDOUBLE_CLASS, i,
-                                    &fc_emlrtRTEI, (emlrtCTX)sp);
+                                    &ec_emlrtRTEI, (emlrtCTX)sp);
       for (b_i = 0; b_i < i; b_i++) {
         asq = (a - ((n - 1.0) + -(real_T)b_i)) * asq / x + 1.0;
       }
@@ -451,7 +451,7 @@ real_T b_eml_gammainc(const emlrtStack *sp, real_T x, real_T a, real_T la,
         st.site = &ax_emlrtRSI;
         if (asq < 0.0) {
           emlrtErrorWithMessageIdR2018a(
-              &st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+              &st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
               "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
         }
         rval = muDoubleScalarExp(logpax + muDoubleScalarLog(asq));
@@ -527,7 +527,7 @@ real_T c_eml_gammainc(const emlrtStack *sp, real_T x, real_T a, real_T la,
         st.site = &kx_emlrtRSI;
         if (x < 0.0) {
           emlrtErrorWithMessageIdR2018a(
-              &st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+              &st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
               "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
         }
         xD0 = (a * la - a * muDoubleScalarLog(x)) - a;
@@ -536,7 +536,7 @@ real_T c_eml_gammainc(const emlrtStack *sp, real_T x, real_T a, real_T la,
         st.site = &jx_emlrtRSI;
         if (asq < 0.0) {
           emlrtErrorWithMessageIdR2018a(
-              &st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+              &st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
               "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
         }
         asq = muDoubleScalarLog(asq);
@@ -639,10 +639,10 @@ real_T c_eml_gammainc(const emlrtStack *sp, real_T x, real_T a, real_T la,
         if (logpax < 709.782712893384) {
           rval = muDoubleScalarExp(logpax) * asq;
         } else {
-          st.site = &rcb_emlrtRSI;
+          st.site = &qcb_emlrtRSI;
           if (asq < 0.0) {
             emlrtErrorWithMessageIdR2018a(
-                &st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+                &st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
                 "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
           }
           rval = muDoubleScalarExp(logpax + muDoubleScalarLog(asq));
@@ -655,7 +655,7 @@ real_T c_eml_gammainc(const emlrtStack *sp, real_T x, real_T a, real_T la,
           st.site = &gx_emlrtRSI;
           if (asq < 0.0) {
             emlrtErrorWithMessageIdR2018a(
-                &st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+                &st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
                 "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
           }
           rval = muDoubleScalarExp(logpax + muDoubleScalarLog(asq));
@@ -680,7 +680,7 @@ real_T c_eml_gammainc(const emlrtStack *sp, real_T x, real_T a, real_T la,
       asq = 0.0;
       i = (int32_T)(((-1.0 - (n - 1.0)) + 1.0) / -1.0);
       emlrtForLoopVectorCheckR2021a(n - 1.0, -1.0, 1.0, mxDOUBLE_CLASS, i,
-                                    &ec_emlrtRTEI, (emlrtCTX)sp);
+                                    &dc_emlrtRTEI, (emlrtCTX)sp);
       for (b_i = 0; b_i < i; b_i++) {
         asq = x * (asq + 1.0) / (a + ((n - 1.0) + -(real_T)b_i));
       }
@@ -691,7 +691,7 @@ real_T c_eml_gammainc(const emlrtStack *sp, real_T x, real_T a, real_T la,
         st.site = &dx_emlrtRSI;
         if (asq < 0.0) {
           emlrtErrorWithMessageIdR2018a(
-              &st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+              &st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
               "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
         }
         rval = muDoubleScalarExp(logpax + muDoubleScalarLog(asq));
@@ -804,7 +804,7 @@ real_T c_eml_gammainc(const emlrtStack *sp, real_T x, real_T a, real_T la,
       }
       i = (int32_T)(((-1.0 - (n - 1.0)) + 1.0) / -1.0);
       emlrtForLoopVectorCheckR2021a(n - 1.0, -1.0, 1.0, mxDOUBLE_CLASS, i,
-                                    &fc_emlrtRTEI, (emlrtCTX)sp);
+                                    &ec_emlrtRTEI, (emlrtCTX)sp);
       for (b_i = 0; b_i < i; b_i++) {
         asq = (a - ((n - 1.0) + -(real_T)b_i)) * asq / x + 1.0;
       }
@@ -815,7 +815,7 @@ real_T c_eml_gammainc(const emlrtStack *sp, real_T x, real_T a, real_T la,
         st.site = &ax_emlrtRSI;
         if (asq < 0.0) {
           emlrtErrorWithMessageIdR2018a(
-              &st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+              &st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
               "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
         }
         rval = muDoubleScalarExp(logpax + muDoubleScalarLog(asq));
@@ -863,7 +863,7 @@ real_T eml_gammainc(const emlrtStack *sp, real_T x, real_T lgap1,
         st.site = &kx_emlrtRSI;
         if (x < 0.0) {
           emlrtErrorWithMessageIdR2018a(
-              &st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+              &st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
               "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
         }
         xD0 = (-0.34657359027997264 - 0.5 * muDoubleScalarLog(x)) - 0.5;
@@ -872,7 +872,7 @@ real_T eml_gammainc(const emlrtStack *sp, real_T x, real_T lgap1,
         st.site = &jx_emlrtRSI;
         if (v < 0.0) {
           emlrtErrorWithMessageIdR2018a(
-              &st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+              &st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
               "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
         }
         v = muDoubleScalarLog(v);
@@ -975,7 +975,7 @@ real_T eml_gammainc(const emlrtStack *sp, real_T x, real_T lgap1,
         st.site = &gx_emlrtRSI;
         if (v < 0.0) {
           emlrtErrorWithMessageIdR2018a(
-              &st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+              &st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
               "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
         }
         rval = muDoubleScalarExp((-0.72579135264472727 - xD0) +
@@ -1003,7 +1003,7 @@ real_T eml_gammainc(const emlrtStack *sp, real_T x, real_T lgap1,
       st.site = &fx_emlrtRSI;
       if (x < 0.0) {
         emlrtErrorWithMessageIdR2018a(
-            &st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+            &st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
             "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
       }
       v = 0.5 * muDoubleScalarLog(x) - lgap1;
@@ -1015,7 +1015,7 @@ real_T eml_gammainc(const emlrtStack *sp, real_T x, real_T lgap1,
           st.site = &ex_emlrtRSI;
           if (dj < 0.0) {
             emlrtErrorWithMessageIdR2018a(
-                &st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+                &st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
                 "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
           }
           v = (dj - 1.0) * v / muDoubleScalarLog(dj);
@@ -1043,7 +1043,7 @@ real_T eml_gammainc(const emlrtStack *sp, real_T x, real_T lgap1,
       v = 0.0;
       i = (int32_T)(((-1.0 - (dj - 1.0)) + 1.0) / -1.0);
       emlrtForLoopVectorCheckR2021a(dj - 1.0, -1.0, 1.0, mxDOUBLE_CLASS, i,
-                                    &ec_emlrtRTEI, (emlrtCTX)sp);
+                                    &dc_emlrtRTEI, (emlrtCTX)sp);
       for (b_i = 0; b_i < i; b_i++) {
         v = x * (v + 1.0) / (((dj - 1.0) + -(real_T)b_i) + 0.5);
       }
@@ -1054,7 +1054,7 @@ real_T eml_gammainc(const emlrtStack *sp, real_T x, real_T lgap1,
         st.site = &dx_emlrtRSI;
         if (v < 0.0) {
           emlrtErrorWithMessageIdR2018a(
-              &st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+              &st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
               "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
         }
         rval = muDoubleScalarExp((-0.72579135264472727 - xD0) +
@@ -1139,7 +1139,7 @@ real_T eml_gammainc(const emlrtStack *sp, real_T x, real_T lgap1,
       }
       i = (int32_T)(((-1.0 - (dj - 1.0)) + 1.0) / -1.0);
       emlrtForLoopVectorCheckR2021a(dj - 1.0, -1.0, 1.0, mxDOUBLE_CLASS, i,
-                                    &fc_emlrtRTEI, (emlrtCTX)sp);
+                                    &ec_emlrtRTEI, (emlrtCTX)sp);
       for (b_i = 0; b_i < i; b_i++) {
         v = (0.5 - ((dj - 1.0) + -(real_T)b_i)) * v / x + 1.0;
       }
@@ -1150,7 +1150,7 @@ real_T eml_gammainc(const emlrtStack *sp, real_T x, real_T lgap1,
         st.site = &ax_emlrtRSI;
         if (v < 0.0) {
           emlrtErrorWithMessageIdR2018a(
-              &st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+              &st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
               "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
         }
         rval = muDoubleScalarExp((-0.72579135264472727 - xD0) +

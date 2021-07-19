@@ -17,7 +17,7 @@
 #include <stdio.h>
 
 /* Variable Definitions */
-static emlrtRSInfo rd_emlrtRSI = {
+static emlrtRSInfo qd_emlrtRSI = {
     94,        /* lineNo */
     "int2str", /* fcnName */
     "C:\\Program "
@@ -25,7 +25,7 @@ static emlrtRSInfo rd_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRSInfo sd_emlrtRSI = {
+static emlrtRSInfo rd_emlrtRSI = {
     54,        /* lineNo */
     "int2str", /* fcnName */
     "C:\\Program "
@@ -33,7 +33,7 @@ static emlrtRSInfo sd_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRSInfo td_emlrtRSI = {
+static emlrtRSInfo sd_emlrtRSI = {
     25,                 /* lineNo */
     "printNumToBuffer", /* fcnName */
     "C:\\Program "
@@ -60,7 +60,7 @@ static emlrtDCInfo bb_emlrtDCI = {
     4 /* checkKind */
 };
 
-static emlrtRSInfo el_emlrtRSI = {
+static emlrtRSInfo vk_emlrtRSI = {
     26,                 /* lineNo */
     "printNumToBuffer", /* fcnName */
     "C:\\Program "
@@ -155,9 +155,9 @@ void int2str(const emlrtStack *sp, real_T xin, char_T s_data[],
     s_data[1] = 'a';
     s_data[2] = 'N';
   } else {
-    st.site = &sd_emlrtRSI;
     st.site = &rd_emlrtRSI;
-    b_st.site = &td_emlrtRSI;
+    st.site = &qd_emlrtRSI;
+    b_st.site = &sd_emlrtRSI;
     i = (int32_T)(
         muDoubleScalarFloor(muDoubleScalarLog10(muDoubleScalarAbs(xin))) + 1.0);
     if (i < 0) {
@@ -174,7 +174,7 @@ void int2str(const emlrtStack *sp, real_T xin, char_T s_data[],
     c_y = NULL;
     m = emlrtCreateDoubleScalar(xin);
     emlrtAssign(&c_y, m);
-    b_st.site = &el_emlrtRSI;
+    b_st.site = &vk_emlrtRSI;
     emlrt_marshallIn(&b_st, feval(&b_st, y, b_y, c_y, &l_emlrtMCI),
                      "<output of feval>", s_data, s_size);
   }

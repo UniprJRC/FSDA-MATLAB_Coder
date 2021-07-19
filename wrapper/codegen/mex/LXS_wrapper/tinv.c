@@ -18,21 +18,21 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo hgb_emlrtRSI = {
+static emlrtRSInfo ggb_emlrtRSI = {
     29,     /* lineNo */
     "tinv", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\tinv.m" /* pathName
                                                                       */
 };
 
-static emlrtRSInfo igb_emlrtRSI = {
+static emlrtRSInfo hgb_emlrtRSI = {
     32,     /* lineNo */
     "tinv", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\tinv.m" /* pathName
                                                                       */
 };
 
-static emlrtRSInfo jgb_emlrtRSI = {
+static emlrtRSInfo igb_emlrtRSI = {
     35,     /* lineNo */
     "tinv", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\tinv.m" /* pathName
@@ -60,17 +60,17 @@ real_T tinv(const emlrtStack *sp, real_T p, real_T v)
     } else if (v < 1000.0) {
       xn3 = muDoubleScalarAbs(p - 0.5);
       if (xn3 < 0.25) {
-        st.site = &hgb_emlrtRSI;
+        st.site = &ggb_emlrtRSI;
         dc = b_betaincinv(&st, 2.0 * xn3, 0.5, v / 2.0);
         xn5 = dc.re;
         xn3 = 1.0 - dc.re;
       } else {
-        st.site = &igb_emlrtRSI;
+        st.site = &hgb_emlrtRSI;
         dc = betaincinv(&st, 2.0 * xn3, v / 2.0, 0.5);
         xn3 = dc.re;
         xn5 = 1.0 - dc.re;
       }
-      st.site = &jgb_emlrtRSI;
+      st.site = &igb_emlrtRSI;
       x = v * (xn5 / xn3);
       if (x < 0.0) {
         emlrtErrorWithMessageIdR2018a(

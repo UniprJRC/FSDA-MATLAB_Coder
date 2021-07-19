@@ -179,6 +179,7 @@ static const mxArray *gb_emlrt_marshallOut(const emlrtStack *sp,
   const mxArray *d_y;
   const mxArray *e_y;
   const mxArray *f_y;
+  const mxArray *g_y;
   const mxArray *m;
   const mxArray *y;
   real_T *pData;
@@ -250,16 +251,28 @@ static const mxArray *gb_emlrt_marshallOut(const emlrtStack *sp,
   }
   emlrtAssign(&e_y, m);
   emlrtSetFieldR2017b(y, 0, (const char_T *)"Un", e_y, 5);
-  emlrtSetFieldR2017b(y, 0, (const char_T *)"nout",
-                      fb_emlrt_marshallOut(u->nout.data, u->nout.size), 6);
   f_y = NULL;
+  iv[0] = u->nout.size[0];
+  iv[1] = u->nout.size[1];
+  m = emlrtCreateNumericArray(2, &iv[0], mxDOUBLE_CLASS, mxREAL);
+  pData = emlrtMxGetPr(m);
+  i = 0;
+  for (b_i = 0; b_i < u->nout.size[1]; b_i++) {
+    for (c_i = 0; c_i < u->nout.size[0]; c_i++) {
+      pData[i] = u->nout.data[c_i + u->nout.size[0] * b_i];
+      i++;
+    }
+  }
+  emlrtAssign(&f_y, m);
+  emlrtSetFieldR2017b(y, 0, (const char_T *)"nout", f_y, 6);
+  g_y = NULL;
   iv[0] = 1;
   iv[1] = u->class.size[1];
   m = emlrtCreateCharArray(2, &iv[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, u->class.size[1], m,
                            &u->class.data[0]);
-  emlrtAssign(&f_y, m);
-  emlrtSetFieldR2017b(y, 0, (const char_T *)"class", f_y, 7);
+  emlrtAssign(&g_y, m);
+  emlrtSetFieldR2017b(y, 0, (const char_T *)"class", g_y, 7);
   return y;
 }
 

@@ -12,6 +12,7 @@
 #pragma once
 
 /* Include files */
+#include "FSR_wrapper_types.h"
 #include "rtwtypes.h"
 #include "emlrt.h"
 #include "mex.h"
@@ -39,6 +40,8 @@ const mxArray *cb_emlrt_marshallOut(const emlrtStack *sp, const char_T u_data[],
 
 void d_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
                         const emlrtMsgIdentifier *parentId, char_T y[23]);
+
+const mxArray *d_emlrt_marshallOut(const emlrtStack *sp, const char_T u[25]);
 
 const mxArray *d_feval(const emlrtStack *sp, const mxArray *b, const mxArray *c,
                        const mxArray *d, const mxArray *e,
@@ -71,6 +74,8 @@ real_T g_emlrt_marshallIn(const emlrtStack *sp,
 
 const mxArray *g_emlrt_marshallOut(const emlrtStack *sp, const char_T u[7]);
 
+const mxArray *gb_emlrt_marshallOut(const emxArray_real_T *u);
+
 real_T h_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
                           const emlrtMsgIdentifier *parentId);
 
@@ -89,18 +94,22 @@ const mxArray *m_emlrt_marshallOut(const emlrtStack *sp, const char_T u[50]);
 
 const mxArray *o_emlrt_marshallOut(const emlrtStack *sp, const char_T u[63]);
 
+const mxArray *p_emlrt_marshallOut(const emlrtStack *sp, const char_T u[39]);
+
 const mxArray *r_emlrt_marshallOut(const emlrtStack *sp, const char_T u[41]);
+
+const mxArray *s_emlrt_marshallOut(const emlrtStack *sp, const char_T u[12]);
 
 void v_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
                         const emlrtMsgIdentifier *msgId, char_T ret[23]);
-
-void v_error(const emlrtStack *sp, const mxArray *b, const mxArray *c,
-             emlrtMCInfo *location);
 
 void w_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
                         const emlrtMsgIdentifier *msgId, char_T ret[12]);
 
 const mxArray *w_emlrt_marshallOut(const emlrtStack *sp, const char_T u[61]);
+
+void w_error(const emlrtStack *sp, const mxArray *b, const mxArray *c,
+             emlrtMCInfo *location);
 
 real_T x_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
                           const emlrtMsgIdentifier *msgId);

@@ -11,6 +11,7 @@
 
 /* Include files */
 #include "FSR_wrapper_mexutil.h"
+#include "FSR_wrapper_types.h"
 #include "rt_nonfinite.h"
 
 /* Function Definitions */
@@ -92,6 +93,18 @@ void d_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
 {
   v_emlrt_marshallIn(sp, emlrtAlias(u), parentId, y);
   emlrtDestroyArray(&u);
+}
+
+const mxArray *d_emlrt_marshallOut(const emlrtStack *sp, const char_T u[25])
+{
+  static const int32_T b_iv[2] = {1, 25};
+  const mxArray *m;
+  const mxArray *y;
+  y = NULL;
+  m = emlrtCreateCharArray(2, &b_iv[0]);
+  emlrtInitCharArrayR2013a((emlrtCTX)sp, 25, m, &u[0]);
+  emlrtAssign(&y, m);
+  return y;
 }
 
 const mxArray *d_feval(const emlrtStack *sp, const mxArray *b, const mxArray *c,
@@ -211,6 +224,28 @@ const mxArray *g_emlrt_marshallOut(const emlrtStack *sp, const char_T u[7])
   return y;
 }
 
+const mxArray *gb_emlrt_marshallOut(const emxArray_real_T *u)
+{
+  const mxArray *m;
+  const mxArray *y;
+  real_T *pData;
+  int32_T b_iv[2];
+  int32_T b_i;
+  int32_T i;
+  y = NULL;
+  b_iv[0] = 1;
+  b_iv[1] = u->size[1];
+  m = emlrtCreateNumericArray(2, &b_iv[0], mxDOUBLE_CLASS, mxREAL);
+  pData = emlrtMxGetPr(m);
+  i = 0;
+  for (b_i = 0; b_i < u->size[1]; b_i++) {
+    pData[i] = u->data[b_i];
+    i++;
+  }
+  emlrtAssign(&y, m);
+  return y;
+}
+
 real_T h_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
                           const emlrtMsgIdentifier *parentId)
 {
@@ -285,6 +320,18 @@ const mxArray *o_emlrt_marshallOut(const emlrtStack *sp, const char_T u[63])
   return y;
 }
 
+const mxArray *p_emlrt_marshallOut(const emlrtStack *sp, const char_T u[39])
+{
+  static const int32_T b_iv[2] = {1, 39};
+  const mxArray *m;
+  const mxArray *y;
+  y = NULL;
+  m = emlrtCreateCharArray(2, &b_iv[0]);
+  emlrtInitCharArrayR2013a((emlrtCTX)sp, 39, m, &u[0]);
+  emlrtAssign(&y, m);
+  return y;
+}
+
 const mxArray *r_emlrt_marshallOut(const emlrtStack *sp, const char_T u[41])
 {
   static const int32_T b_iv[2] = {1, 41};
@@ -297,6 +344,18 @@ const mxArray *r_emlrt_marshallOut(const emlrtStack *sp, const char_T u[41])
   return y;
 }
 
+const mxArray *s_emlrt_marshallOut(const emlrtStack *sp, const char_T u[12])
+{
+  static const int32_T b_iv[2] = {1, 12};
+  const mxArray *m;
+  const mxArray *y;
+  y = NULL;
+  m = emlrtCreateCharArray(2, &b_iv[0]);
+  emlrtInitCharArrayR2013a((emlrtCTX)sp, 12, m, &u[0]);
+  emlrtAssign(&y, m);
+  return y;
+}
+
 void v_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
                         const emlrtMsgIdentifier *msgId, char_T ret[23])
 {
@@ -305,16 +364,6 @@ void v_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
                           false, 2U, (void *)&dims[0]);
   emlrtImportCharArrayR2015b((emlrtCTX)sp, src, &ret[0], 23);
   emlrtDestroyArray(&src);
-}
-
-void v_error(const emlrtStack *sp, const mxArray *b, const mxArray *c,
-             emlrtMCInfo *location)
-{
-  const mxArray *pArrays[2];
-  pArrays[0] = b;
-  pArrays[1] = c;
-  emlrtCallMATLABR2012b((emlrtCTX)sp, 0, NULL, 2, &pArrays[0],
-                        (const char_T *)"error", true, location);
 }
 
 void w_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
@@ -337,6 +386,16 @@ const mxArray *w_emlrt_marshallOut(const emlrtStack *sp, const char_T u[61])
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 61, m, &u[0]);
   emlrtAssign(&y, m);
   return y;
+}
+
+void w_error(const emlrtStack *sp, const mxArray *b, const mxArray *c,
+             emlrtMCInfo *location)
+{
+  const mxArray *pArrays[2];
+  pArrays[0] = b;
+  pArrays[1] = c;
+  emlrtCallMATLABR2012b((emlrtCTX)sp, 0, NULL, 2, &pArrays[0],
+                        (const char_T *)"error", true, location);
 }
 
 real_T x_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,

@@ -20,7 +20,7 @@
 #include "xhseqr.h"
 
 /* Variable Definitions */
-static emlrtRSInfo nq_emlrtRSI = {
+static emlrtRSInfo uq_emlrtRSI = {
     93,    /* lineNo */
     "eig", /* fcnName */
     "C:\\Program "
@@ -28,7 +28,7 @@ static emlrtRSInfo nq_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRSInfo oq_emlrtRSI = {
+static emlrtRSInfo vq_emlrtRSI = {
     139,   /* lineNo */
     "eig", /* fcnName */
     "C:\\Program "
@@ -36,7 +36,7 @@ static emlrtRSInfo oq_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRSInfo pq_emlrtRSI = {
+static emlrtRSInfo wq_emlrtRSI = {
     147,   /* lineNo */
     "eig", /* fcnName */
     "C:\\Program "
@@ -44,7 +44,7 @@ static emlrtRSInfo pq_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRSInfo qq_emlrtRSI = {
+static emlrtRSInfo xq_emlrtRSI = {
     21,                     /* lineNo */
     "eigHermitianStandard", /* fcnName */
     "C:\\Program "
@@ -52,7 +52,7 @@ static emlrtRSInfo qq_emlrtRSI = {
     "itianStandard.m" /* pathName */
 };
 
-static emlrtRSInfo rq_emlrtRSI = {
+static emlrtRSInfo yq_emlrtRSI = {
     35,      /* lineNo */
     "schur", /* fcnName */
     "C:\\Program "
@@ -60,7 +60,7 @@ static emlrtRSInfo rq_emlrtRSI = {
                                                                          */
 };
 
-static emlrtRSInfo sq_emlrtRSI = {
+static emlrtRSInfo ar_emlrtRSI = {
     52,      /* lineNo */
     "schur", /* fcnName */
     "C:\\Program "
@@ -68,7 +68,7 @@ static emlrtRSInfo sq_emlrtRSI = {
                                                                          */
 };
 
-static emlrtRSInfo tq_emlrtRSI = {
+static emlrtRSInfo br_emlrtRSI = {
     54,      /* lineNo */
     "schur", /* fcnName */
     "C:\\Program "
@@ -76,7 +76,7 @@ static emlrtRSInfo tq_emlrtRSI = {
                                                                          */
 };
 
-static emlrtRSInfo uq_emlrtRSI = {
+static emlrtRSInfo cr_emlrtRSI = {
     83,      /* lineNo */
     "schur", /* fcnName */
     "C:\\Program "
@@ -84,7 +84,7 @@ static emlrtRSInfo uq_emlrtRSI = {
                                                                          */
 };
 
-static emlrtRSInfo vq_emlrtRSI = {
+static emlrtRSInfo dr_emlrtRSI = {
     18,       /* lineNo */
     "xgehrd", /* fcnName */
     "C:\\Program "
@@ -112,7 +112,7 @@ void eig(const emlrtStack *sp, const real_T A[4], creal_T V[2])
   boolean_T p;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &nq_emlrtRSI;
+  st.site = &uq_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -121,7 +121,7 @@ void eig(const emlrtStack *sp, const real_T A[4], creal_T V[2])
   d_st.tls = c_st.tls;
   e_st.prev = &d_st;
   e_st.tls = d_st.tls;
-  b_st.site = &mc_emlrtRSI;
+  b_st.site = &tc_emlrtRSI;
   b_A.data = (real_T *)&A[0];
   b_iv[0] = 2;
   b_iv[1] = 2;
@@ -129,7 +129,7 @@ void eig(const emlrtStack *sp, const real_T A[4], creal_T V[2])
   b_A.allocatedSize = 4;
   b_A.numDimensions = 2;
   b_A.canFreeData = false;
-  c_st.site = &nc_emlrtRSI;
+  c_st.site = &uc_emlrtRSI;
   p = flatVectorAllOrAny(&c_st, &b_A);
   if (!p) {
     V[0].re = rtNaN;
@@ -161,13 +161,13 @@ void eig(const emlrtStack *sp, const real_T A[4], creal_T V[2])
       }
     }
     if (p) {
-      st.site = &oq_emlrtRSI;
-      b_st.site = &qq_emlrtRSI;
+      st.site = &vq_emlrtRSI;
+      b_st.site = &xq_emlrtRSI;
       T[0] = A[0];
       T[2] = A[2];
       T[3] = A[3];
-      c_st.site = &rq_emlrtRSI;
-      d_st.site = &mc_emlrtRSI;
+      c_st.site = &yq_emlrtRSI;
+      d_st.site = &tc_emlrtRSI;
       c_A.data = (real_T *)&A[0];
       iv1[0] = 2;
       iv1[1] = 2;
@@ -175,19 +175,19 @@ void eig(const emlrtStack *sp, const real_T A[4], creal_T V[2])
       c_A.allocatedSize = 4;
       c_A.numDimensions = 2;
       c_A.canFreeData = false;
-      e_st.site = &nc_emlrtRSI;
+      e_st.site = &uc_emlrtRSI;
       p = flatVectorAllOrAny(&e_st, &c_A);
       if (!p) {
         T[0] = rtNaN;
         T[3] = rtNaN;
       } else {
-        c_st.site = &sq_emlrtRSI;
-        d_st.site = &vq_emlrtRSI;
+        c_st.site = &ar_emlrtRSI;
+        d_st.site = &dr_emlrtRSI;
         T[1] = A[1];
-        c_st.site = &tq_emlrtRSI;
+        c_st.site = &br_emlrtRSI;
         j = xhseqr(T);
         if (j != 0) {
-          c_st.site = &uq_emlrtRSI;
+          c_st.site = &cr_emlrtRSI;
           d_warning(&c_st);
         }
       }
@@ -196,7 +196,7 @@ void eig(const emlrtStack *sp, const real_T A[4], creal_T V[2])
       V[1].re = T[3];
       V[1].im = 0.0;
     } else {
-      st.site = &pq_emlrtRSI;
+      st.site = &wq_emlrtRSI;
       eigStandard(&st, A, V);
     }
   }

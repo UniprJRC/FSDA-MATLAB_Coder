@@ -18,7 +18,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo teb_emlrtRSI = {
+static emlrtRSInfo bfb_emlrtRSI = {
     9,         /* lineNo */
     "erfcinv", /* fcnName */
     "C:\\Program "
@@ -26,7 +26,7 @@ static emlrtRSInfo teb_emlrtRSI = {
                                                                             */
 };
 
-static emlrtRSInfo ueb_emlrtRSI = {
+static emlrtRSInfo cfb_emlrtRSI = {
     24,            /* lineNo */
     "eml_erfcore", /* fcnName */
     "C:\\Program "
@@ -34,7 +34,7 @@ static emlrtRSInfo ueb_emlrtRSI = {
     "erfcore.m" /* pathName */
 };
 
-static emlrtRSInfo veb_emlrtRSI = {
+static emlrtRSInfo dfb_emlrtRSI = {
     48,                    /* lineNo */
     "applyScalarFunction", /* fcnName */
     "C:\\Program "
@@ -42,7 +42,7 @@ static emlrtRSInfo veb_emlrtRSI = {
     "internal\\applyScalarFunction.m" /* pathName */
 };
 
-static emlrtRSInfo web_emlrtRSI = {
+static emlrtRSInfo efb_emlrtRSI = {
     66,               /* lineNo */
     "scalar_erfcinv", /* fcnName */
     "C:\\Program "
@@ -50,7 +50,7 @@ static emlrtRSInfo web_emlrtRSI = {
     "erfcore.m" /* pathName */
 };
 
-static emlrtRSInfo bfb_emlrtRSI = {
+static emlrtRSInfo ifb_emlrtRSI = {
     316,                         /* lineNo */
     "scalar_erfinv_and_erfcinv", /* fcnName */
     "C:\\Program "
@@ -58,7 +58,7 @@ static emlrtRSInfo bfb_emlrtRSI = {
     "erfcore.m" /* pathName */
 };
 
-static emlrtRSInfo cfb_emlrtRSI = {
+static emlrtRSInfo jfb_emlrtRSI = {
     310,                         /* lineNo */
     "scalar_erfinv_and_erfcinv", /* fcnName */
     "C:\\Program "
@@ -84,7 +84,7 @@ real_T erfcinv(const emlrtStack *sp, real_T y)
   int32_T nIterations;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &teb_emlrtRSI;
+  st.site = &bfb_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -93,9 +93,9 @@ real_T erfcinv(const emlrtStack *sp, real_T y)
   d_st.tls = c_st.tls;
   e_st.prev = &d_st;
   e_st.tls = d_st.tls;
-  b_st.site = &ueb_emlrtRSI;
-  c_st.site = &veb_emlrtRSI;
-  d_st.site = &web_emlrtRSI;
+  b_st.site = &cfb_emlrtRSI;
+  c_st.site = &dfb_emlrtRSI;
+  d_st.site = &efb_emlrtRSI;
   nIterations = 1;
   if (muDoubleScalarIsNaN(y)) {
     x = rtNaN;
@@ -105,10 +105,10 @@ real_T erfcinv(const emlrtStack *sp, real_T y)
     x = rtMinusInf;
   } else if (y > 1.7) {
     x = (2.0 - y) / 2.0;
-    e_st.site = &cfb_emlrtRSI;
+    e_st.site = &jfb_emlrtRSI;
     if (x < 0.0) {
       emlrtErrorWithMessageIdR2018a(
-          &e_st, &xb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+          &e_st, &yb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
           "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
     }
     x = muDoubleScalarLog(x);
@@ -122,10 +122,10 @@ real_T erfcinv(const emlrtStack *sp, real_T y)
       x -= z / (x * z + 1.0);
     }
   } else if (y < 0.3) {
-    e_st.site = &bfb_emlrtRSI;
+    e_st.site = &ifb_emlrtRSI;
     if (y < 0.0) {
       emlrtErrorWithMessageIdR2018a(
-          &e_st, &xb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+          &e_st, &yb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
           "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
     }
     z = muDoubleScalarSqrt(0.69314718055994529 - muDoubleScalarLog(y));

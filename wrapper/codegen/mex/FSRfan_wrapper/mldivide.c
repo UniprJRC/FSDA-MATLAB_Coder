@@ -26,7 +26,7 @@
 #include <stddef.h>
 
 /* Variable Definitions */
-static emlrtRSInfo th_emlrtRSI = {
+static emlrtRSInfo sh_emlrtRSI = {
     20,         /* lineNo */
     "mldivide", /* fcnName */
     "C:\\Program "
@@ -34,7 +34,7 @@ static emlrtRSInfo th_emlrtRSI = {
                                                                          */
 };
 
-static emlrtRSInfo uh_emlrtRSI = {
+static emlrtRSInfo th_emlrtRSI = {
     42,      /* lineNo */
     "mldiv", /* fcnName */
     "C:\\Program "
@@ -42,7 +42,7 @@ static emlrtRSInfo uh_emlrtRSI = {
                                                                          */
 };
 
-static emlrtRSInfo vh_emlrtRSI = {
+static emlrtRSInfo uh_emlrtRSI = {
     44,      /* lineNo */
     "mldiv", /* fcnName */
     "C:\\Program "
@@ -51,7 +51,7 @@ static emlrtRSInfo vh_emlrtRSI = {
 };
 
 static emlrtRSInfo
-    wh_emlrtRSI =
+    vh_emlrtRSI =
         {
             67,        /* lineNo */
             "lusolve", /* fcnName */
@@ -61,7 +61,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    xh_emlrtRSI =
+    wh_emlrtRSI =
         {
             112,          /* lineNo */
             "lusolveNxN", /* fcnName */
@@ -71,7 +71,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    yh_emlrtRSI =
+    xh_emlrtRSI =
         {
             109,          /* lineNo */
             "lusolveNxN", /* fcnName */
@@ -81,7 +81,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    ai_emlrtRSI =
+    yh_emlrtRSI =
         {
             124,          /* lineNo */
             "InvAtimesX", /* fcnName */
@@ -90,7 +90,7 @@ static emlrtRSInfo
             "internal\\lusolve.m" /* pathName */
 };
 
-static emlrtRSInfo bi_emlrtRSI = {
+static emlrtRSInfo ai_emlrtRSI = {
     19,        /* lineNo */
     "xgetrfs", /* fcnName */
     "C:\\Program "
@@ -98,7 +98,7 @@ static emlrtRSInfo bi_emlrtRSI = {
     "lapack\\xgetrfs.m" /* pathName */
 };
 
-static emlrtRSInfo ci_emlrtRSI = {
+static emlrtRSInfo bi_emlrtRSI = {
     108,      /* lineNo */
     "cmldiv", /* fcnName */
     "C:\\Program "
@@ -106,7 +106,7 @@ static emlrtRSInfo ci_emlrtRSI = {
     "lapack\\xgetrfs.m" /* pathName */
 };
 
-static emlrtRSInfo di_emlrtRSI = {
+static emlrtRSInfo ci_emlrtRSI = {
     70,       /* lineNo */
     "cmldiv", /* fcnName */
     "C:\\Program "
@@ -115,7 +115,7 @@ static emlrtRSInfo di_emlrtRSI = {
 };
 
 static emlrtRSInfo
-    fi_emlrtRSI =
+    ei_emlrtRSI =
         {
             90,              /* lineNo */
             "warn_singular", /* fcnName */
@@ -127,16 +127,6 @@ static emlrtRSInfo
 static emlrtRSInfo
     gi_emlrtRSI =
         {
-            61,        /* lineNo */
-            "qrsolve", /* fcnName */
-            "C:\\Program "
-            "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
-            "internal\\qrsolve.m" /* pathName */
-};
-
-static emlrtRSInfo
-    hi_emlrtRSI =
-        {
             72,        /* lineNo */
             "qrsolve", /* fcnName */
             "C:\\Program "
@@ -144,63 +134,7 @@ static emlrtRSInfo
             "internal\\qrsolve.m" /* pathName */
 };
 
-static emlrtRSInfo
-    ii_emlrtRSI =
-        {
-            85,        /* lineNo */
-            "qrsolve", /* fcnName */
-            "C:\\Program "
-            "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
-            "internal\\qrsolve.m" /* pathName */
-};
-
-static emlrtRSInfo
-    ui_emlrtRSI =
-        {
-            119,         /* lineNo */
-            "LSQFromQR", /* fcnName */
-            "C:\\Program "
-            "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
-            "internal\\qrsolve.m" /* pathName */
-};
-
-static emlrtRSInfo
-    vi_emlrtRSI =
-        {
-            128,         /* lineNo */
-            "LSQFromQR", /* fcnName */
-            "C:\\Program "
-            "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
-            "internal\\qrsolve.m" /* pathName */
-};
-
-static emlrtRSInfo
-    wi_emlrtRSI =
-        {
-            138,         /* lineNo */
-            "LSQFromQR", /* fcnName */
-            "C:\\Program "
-            "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
-            "internal\\qrsolve.m" /* pathName */
-};
-
-static emlrtRSInfo xi_emlrtRSI = {
-    31,         /* lineNo */
-    "xunormqr", /* fcnName */
-    "C:\\Program "
-    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\+"
-    "lapack\\xunormqr.m" /* pathName */
-};
-
 static emlrtRSInfo yi_emlrtRSI = {
-    102,              /* lineNo */
-    "ceval_xunormqr", /* fcnName */
-    "C:\\Program "
-    "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\+"
-    "lapack\\xunormqr.m" /* pathName */
-};
-
-static emlrtRSInfo aj_emlrtRSI = {
     18,          /* lineNo */
     "xzunormqr", /* fcnName */
     "C:\\Program "
@@ -209,7 +143,7 @@ static emlrtRSInfo aj_emlrtRSI = {
 };
 
 static emlrtRSInfo
-    or_emlrtRSI =
+    mr_emlrtRSI =
         {
             126,         /* lineNo */
             "LSQFromQR", /* fcnName */
@@ -218,7 +152,7 @@ static emlrtRSInfo
             "internal\\qrsolve.m" /* pathName */
 };
 
-static emlrtRSInfo pr_emlrtRSI = {
+static emlrtRSInfo nr_emlrtRSI = {
     108,              /* lineNo */
     "ceval_xunormqr", /* fcnName */
     "C:\\Program "
@@ -226,7 +160,7 @@ static emlrtRSInfo pr_emlrtRSI = {
     "lapack\\xunormqr.m" /* pathName */
 };
 
-static emlrtRSInfo qr_emlrtRSI = {
+static emlrtRSInfo or_emlrtRSI = {
     21,          /* lineNo */
     "xzunormqr", /* fcnName */
     "C:\\Program "
@@ -234,7 +168,7 @@ static emlrtRSInfo qr_emlrtRSI = {
     "reflapack\\xzunormqr.m" /* pathName */
 };
 
-static emlrtRSInfo rr_emlrtRSI = {
+static emlrtRSInfo pr_emlrtRSI = {
     23,          /* lineNo */
     "xzunormqr", /* fcnName */
     "C:\\Program "
@@ -242,7 +176,7 @@ static emlrtRSInfo rr_emlrtRSI = {
     "reflapack\\xzunormqr.m" /* pathName */
 };
 
-static emlrtRSInfo sr_emlrtRSI = {
+static emlrtRSInfo qr_emlrtRSI = {
     29,          /* lineNo */
     "xzunormqr", /* fcnName */
     "C:\\Program "
@@ -259,7 +193,7 @@ static emlrtRTEInfo hb_emlrtRTEI = {
                                                                          */
 };
 
-static emlrtRTEInfo qh_emlrtRTEI = {
+static emlrtRTEInfo uh_emlrtRTEI = {
     20,         /* lineNo */
     5,          /* colNo */
     "mldivide", /* fName */
@@ -268,29 +202,16 @@ static emlrtRTEInfo qh_emlrtRTEI = {
                                                                          */
 };
 
-static emlrtRTEInfo
-    rh_emlrtRTEI =
-        {
-            61,        /* lineNo */
-            2,         /* colNo */
-            "qrsolve", /* fName */
-            "C:\\Program "
-            "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
-            "internal\\qrsolve.m" /* pName */
+static emlrtRTEInfo wh_emlrtRTEI = {
+    44,         /* lineNo */
+    34,         /* colNo */
+    "mldivide", /* fName */
+    "C:\\Program "
+    "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\ops\\mldivide.m" /* pName
+                                                                         */
 };
 
-static emlrtRTEInfo
-    sh_emlrtRTEI =
-        {
-            85,        /* lineNo */
-            26,        /* colNo */
-            "qrsolve", /* fName */
-            "C:\\Program "
-            "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
-            "internal\\qrsolve.m" /* pName */
-};
-
-static emlrtRTEInfo th_emlrtRTEI = {
+static emlrtRTEInfo xh_emlrtRTEI = {
     48,        /* lineNo */
     37,        /* colNo */
     "xgetrfs", /* fName */
@@ -299,7 +220,7 @@ static emlrtRTEInfo th_emlrtRTEI = {
     "lapack\\xgetrfs.m" /* pName */
 };
 
-static emlrtRTEInfo uh_emlrtRTEI = {
+static emlrtRTEInfo yh_emlrtRTEI = {
     70,        /* lineNo */
     23,        /* colNo */
     "xgetrfs", /* fName */
@@ -308,18 +229,7 @@ static emlrtRTEInfo uh_emlrtRTEI = {
     "lapack\\xgetrfs.m" /* pName */
 };
 
-static emlrtRTEInfo
-    vh_emlrtRTEI =
-        {
-            119,       /* lineNo */
-            5,         /* colNo */
-            "qrsolve", /* fName */
-            "C:\\Program "
-            "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
-            "internal\\qrsolve.m" /* pName */
-};
-
-static emlrtRTEInfo wh_emlrtRTEI = {
+static emlrtRTEInfo ai_emlrtRTEI = {
     1,          /* lineNo */
     14,         /* colNo */
     "mldivide", /* fName */
@@ -328,13 +238,24 @@ static emlrtRTEInfo wh_emlrtRTEI = {
                                                                          */
 };
 
-static emlrtRTEInfo xh_emlrtRTEI = {
+static emlrtRTEInfo bi_emlrtRTEI = {
     70,        /* lineNo */
     1,         /* colNo */
     "xgetrfs", /* fName */
     "C:\\Program "
     "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\+"
     "lapack\\xgetrfs.m" /* pName */
+};
+
+static emlrtRTEInfo
+    cj_emlrtRTEI =
+        {
+            85,        /* lineNo */
+            26,        /* colNo */
+            "qrsolve", /* fName */
+            "C:\\Program "
+            "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
+            "internal\\qrsolve.m" /* pName */
 };
 
 static const char_T cv9[19] = {'L', 'A', 'P', 'A', 'C', 'K', 'E', '_', 'd', 'g',
@@ -392,52 +313,52 @@ void b_mldivide(const emlrtStack *sp, const emxArray_real_T *A,
     emlrtErrorWithMessageIdR2018a(sp, &hb_emlrtRTEI, "MATLAB:dimagree",
                                   "MATLAB:dimagree", 0);
   }
-  st.site = &th_emlrtRSI;
+  st.site = &sh_emlrtRSI;
   if (A->size[1] == 0) {
     Y->size[0] = 0;
     Y->size[1] = B->size[1];
   } else {
-    emxInit_real_T(&st, &b_A, 2, &wh_emlrtRTEI, true);
+    emxInit_real_T(&st, &b_A, 2, &ai_emlrtRTEI, true);
     if (A->size[0] == A->size[1]) {
-      b_st.site = &uh_emlrtRSI;
-      c_st.site = &wh_emlrtRSI;
+      b_st.site = &th_emlrtRSI;
+      c_st.site = &vh_emlrtRSI;
       mn = Y->size[0] * Y->size[1];
       Y->size[0] = B->size[0];
       Y->size[1] = B->size[1];
-      emxEnsureCapacity_real_T(&c_st, Y, mn, &qh_emlrtRTEI);
+      emxEnsureCapacity_real_T(&c_st, Y, mn, &uh_emlrtRTEI);
       nb = B->size[0] * B->size[1];
       for (mn = 0; mn < nb; mn++) {
         Y->data[mn] = B->data[mn];
       }
-      d_st.site = &yh_emlrtRSI;
-      e_st.site = &ai_emlrtRSI;
+      d_st.site = &xh_emlrtRSI;
+      e_st.site = &yh_emlrtRSI;
       info = A->size[0];
       nb = A->size[1];
       mn = B->size[0];
       nb = muIntScalarMin_sint32(info, nb);
       info = muIntScalarMin_sint32(mn, nb);
-      f_st.site = &bi_emlrtRSI;
+      f_st.site = &ai_emlrtRSI;
       mn = b_A->size[0] * b_A->size[1];
       b_A->size[0] = A->size[0];
       b_A->size[1] = A->size[1];
-      emxEnsureCapacity_real_T(&f_st, b_A, mn, &th_emlrtRTEI);
+      emxEnsureCapacity_real_T(&f_st, b_A, mn, &xh_emlrtRTEI);
       nb = A->size[0] * A->size[1];
       for (mn = 0; mn < nb; mn++) {
         b_A->data[mn] = A->data[mn];
       }
-      emxInit_ptrdiff_t(&f_st, &IPIV, 1, &xh_emlrtRTEI, true);
-      emxInit_ptrdiff_t(&f_st, &r, 1, &uh_emlrtRTEI, true);
-      g_st.site = &di_emlrtRSI;
+      emxInit_ptrdiff_t(&f_st, &IPIV, 1, &bi_emlrtRTEI, true);
+      emxInit_ptrdiff_t(&f_st, &r, 1, &yh_emlrtRTEI, true);
+      g_st.site = &ci_emlrtRSI;
       repmat(&g_st, (ptrdiff_t)0.0, info, r);
       mn = IPIV->size[0];
       IPIV->size[0] = r->size[0];
-      emxEnsureCapacity_ptrdiff_t(&f_st, IPIV, mn, &uh_emlrtRTEI);
+      emxEnsureCapacity_ptrdiff_t(&f_st, IPIV, mn, &yh_emlrtRTEI);
       nrc_t = (ptrdiff_t)info;
       LDA = (ptrdiff_t)b_A->size[0];
       INFO = LAPACKE_dgetrf_work(102, nrc_t, nrc_t, &b_A->data[0], LDA,
                                  &IPIV->data[0]);
       info = (int32_T)INFO;
-      g_st.site = &ci_emlrtRSI;
+      g_st.site = &bi_emlrtRSI;
       emxFree_ptrdiff_t(&r);
       if (info < 0) {
         if (info == -1010) {
@@ -454,32 +375,32 @@ void b_mldivide(const emlrtStack *sp, const emxArray_real_T *A,
                           (ptrdiff_t)B->size[0]);
       emxFree_ptrdiff_t(&IPIV);
       if (((A->size[0] != 1) || (A->size[1] != 1)) && (info > 0)) {
-        d_st.site = &xh_emlrtRSI;
-        e_st.site = &fi_emlrtRSI;
+        d_st.site = &wh_emlrtRSI;
+        e_st.site = &ei_emlrtRSI;
         warning(&e_st);
       }
     } else {
-      b_st.site = &vh_emlrtRSI;
+      b_st.site = &uh_emlrtRSI;
       mn = b_A->size[0] * b_A->size[1];
       b_A->size[0] = A->size[0];
       b_A->size[1] = A->size[1];
-      emxEnsureCapacity_real_T(&b_st, b_A, mn, &rh_emlrtRTEI);
+      emxEnsureCapacity_real_T(&b_st, b_A, mn, &vh_emlrtRTEI);
       nb = A->size[0] * A->size[1];
       for (mn = 0; mn < nb; mn++) {
         b_A->data[mn] = A->data[mn];
       }
-      emxInit_real_T(&b_st, &tau, 1, &wh_emlrtRTEI, true);
-      emxInit_int32_T(&b_st, &jpvt, 2, &wh_emlrtRTEI, true);
-      emxInit_real_T(&b_st, &b_B, 2, &sh_emlrtRTEI, true);
-      c_st.site = &gi_emlrtRSI;
+      emxInit_real_T(&b_st, &tau, 1, &ai_emlrtRTEI, true);
+      emxInit_int32_T(&b_st, &jpvt, 2, &ai_emlrtRTEI, true);
+      emxInit_real_T(&b_st, &b_B, 2, &cj_emlrtRTEI, true);
+      c_st.site = &fi_emlrtRSI;
       xgeqp3(&c_st, b_A, tau, jpvt);
-      c_st.site = &hi_emlrtRSI;
+      c_st.site = &gi_emlrtRSI;
       rankA = rankFromQR(&c_st, b_A);
-      c_st.site = &ii_emlrtRSI;
+      c_st.site = &hi_emlrtRSI;
       mn = b_B->size[0] * b_B->size[1];
       b_B->size[0] = B->size[0];
       b_B->size[1] = B->size[1];
-      emxEnsureCapacity_real_T(&c_st, b_B, mn, &sh_emlrtRTEI);
+      emxEnsureCapacity_real_T(&c_st, b_B, mn, &cj_emlrtRTEI);
       nb = B->size[0] * B->size[1];
       for (mn = 0; mn < nb; mn++) {
         b_B->data[mn] = B->data[mn];
@@ -488,13 +409,13 @@ void b_mldivide(const emlrtStack *sp, const emxArray_real_T *A,
       mn = Y->size[0] * Y->size[1];
       Y->size[0] = b_A->size[1];
       Y->size[1] = b_B->size[1];
-      emxEnsureCapacity_real_T(&c_st, Y, mn, &qh_emlrtRTEI);
+      emxEnsureCapacity_real_T(&c_st, Y, mn, &uh_emlrtRTEI);
       nb = b_A->size[1] * b_B->size[1];
       for (mn = 0; mn < nb; mn++) {
         Y->data[mn] = 0.0;
       }
-      d_st.site = &ui_emlrtRSI;
-      e_st.site = &xi_emlrtRSI;
+      d_st.site = &ti_emlrtRSI;
+      e_st.site = &wi_emlrtRSI;
       if (b_A->size[1] != 0) {
         nrc_t = (ptrdiff_t)b_B->size[0];
         nrc_t = LAPACKE_dormqr(
@@ -503,31 +424,31 @@ void b_mldivide(const emlrtStack *sp, const emxArray_real_T *A,
             &b_A->data[0], (ptrdiff_t)b_A->size[0], &tau->data[0],
             &b_B->data[0], nrc_t);
         info = (int32_T)nrc_t;
-        f_st.site = &yi_emlrtRSI;
+        f_st.site = &xi_emlrtRSI;
         if (infocheck(&f_st, info)) {
           if ((info == -10) && (b_B->size[1] > 1)) {
-            f_st.site = &pr_emlrtRSI;
+            f_st.site = &nr_emlrtRSI;
             info = b_A->size[0];
             nb = b_B->size[1];
             mn = muIntScalarMin_sint32(b_A->size[0], b_A->size[1]);
-            g_st.site = &aj_emlrtRSI;
+            g_st.site = &yi_emlrtRSI;
             if ((1 <= mn) && (mn > 2147483646)) {
-              h_st.site = &pb_emlrtRSI;
+              h_st.site = &ob_emlrtRSI;
               check_forloop_overflow_error(&h_st);
             }
             for (j = 0; j < mn; j++) {
               if (tau->data[j] != 0.0) {
-                g_st.site = &qr_emlrtRSI;
+                g_st.site = &or_emlrtRSI;
                 if (nb > 2147483646) {
-                  h_st.site = &pb_emlrtRSI;
+                  h_st.site = &ob_emlrtRSI;
                   check_forloop_overflow_error(&h_st);
                 }
                 for (k = 0; k < nb; k++) {
                   wj = b_B->data[j + b_B->size[0] * k];
                   a_tmp = j + 2;
-                  g_st.site = &rr_emlrtRSI;
+                  g_st.site = &pr_emlrtRSI;
                   if ((j + 2 <= info) && (info > 2147483646)) {
-                    h_st.site = &pb_emlrtRSI;
+                    h_st.site = &ob_emlrtRSI;
                     check_forloop_overflow_error(&h_st);
                   }
                   for (i = a_tmp; i <= info; i++) {
@@ -537,7 +458,7 @@ void b_mldivide(const emlrtStack *sp, const emxArray_real_T *A,
                   wj *= tau->data[j];
                   if (wj != 0.0) {
                     b_B->data[j + b_B->size[0] * k] -= wj;
-                    g_st.site = &sr_emlrtRSI;
+                    g_st.site = &qr_emlrtRSI;
                     for (i = a_tmp; i <= info; i++) {
                       b_B->data[(i + b_B->size[0] * k) - 1] -=
                           b_A->data[(i + b_A->size[0] * j) - 1] * wj;
@@ -552,7 +473,7 @@ void b_mldivide(const emlrtStack *sp, const emxArray_real_T *A,
             mn = b_B->size[0] * b_B->size[1];
             b_B->size[0] = info;
             b_B->size[1] = nb;
-            emxEnsureCapacity_real_T(&e_st, b_B, mn, &vh_emlrtRTEI);
+            emxEnsureCapacity_real_T(&e_st, b_B, mn, &ei_emlrtRTEI);
             nb *= info;
             for (mn = 0; mn < nb; mn++) {
               b_B->data[mn] = rtNaN;
@@ -561,15 +482,15 @@ void b_mldivide(const emlrtStack *sp, const emxArray_real_T *A,
         }
       }
       emxFree_real_T(&tau);
-      d_st.site = &or_emlrtRSI;
+      d_st.site = &mr_emlrtRSI;
       if ((1 <= b_nb) && (b_nb > 2147483646)) {
-        e_st.site = &pb_emlrtRSI;
+        e_st.site = &ob_emlrtRSI;
         check_forloop_overflow_error(&e_st);
       }
       for (k = 0; k < b_nb; k++) {
-        d_st.site = &vi_emlrtRSI;
+        d_st.site = &ui_emlrtRSI;
         if ((1 <= rankA) && (rankA > 2147483646)) {
-          e_st.site = &pb_emlrtRSI;
+          e_st.site = &ob_emlrtRSI;
           check_forloop_overflow_error(&e_st);
         }
         for (i = 0; i < rankA; i++) {
@@ -580,7 +501,7 @@ void b_mldivide(const emlrtStack *sp, const emxArray_real_T *A,
           mn = jpvt->data[j - 1];
           Y->data[(mn + Y->size[0] * k) - 1] /=
               b_A->data[(j + b_A->size[0] * (j - 1)) - 1];
-          d_st.site = &wi_emlrtRSI;
+          d_st.site = &vi_emlrtRSI;
           for (i = 0; i <= j - 2; i++) {
             Y->data[(jpvt->data[i] + Y->size[0] * k) - 1] -=
                 Y->data[(jpvt->data[j - 1] + Y->size[0] * k) - 1] *
@@ -601,7 +522,7 @@ void mldivide(const emlrtStack *sp, const emxArray_real_T *A,
 {
   ptrdiff_t INFO;
   ptrdiff_t LDA;
-  ptrdiff_t nrc_t;
+  ptrdiff_t N;
   emlrtStack b_st;
   emlrtStack c_st;
   emlrtStack d_st;
@@ -615,10 +536,9 @@ void mldivide(const emlrtStack *sp, const emxArray_real_T *A,
   emxArray_real_T *b_A;
   emxArray_real_T *b_B;
   emxArray_real_T *tau;
-  int32_T i;
-  int32_T ma;
   int32_T mb;
   int32_T na;
+  int32_T rankA;
   st.prev = sp;
   st.tls = sp->tls;
   b_st.prev = &st;
@@ -638,145 +558,101 @@ void mldivide(const emlrtStack *sp, const emxArray_real_T *A,
     emlrtErrorWithMessageIdR2018a(sp, &hb_emlrtRTEI, "MATLAB:dimagree",
                                   "MATLAB:dimagree", 0);
   }
-  st.site = &th_emlrtRSI;
-  emxInit_real_T(&st, &b_A, 2, &wh_emlrtRTEI, true);
-  emxInit_real_T(&st, &tau, 1, &wh_emlrtRTEI, true);
-  emxInit_int32_T(&st, &jpvt, 2, &wh_emlrtRTEI, true);
-  emxInit_real_T(&st, &b_B, 1, &sh_emlrtRTEI, true);
-  emxInit_ptrdiff_t(&st, &IPIV, 1, &xh_emlrtRTEI, true);
-  emxInit_ptrdiff_t(&st, &r, 1, &uh_emlrtRTEI, true);
+  st.site = &sh_emlrtRSI;
+  emxInit_real_T(&st, &b_A, 2, &ai_emlrtRTEI, true);
+  emxInit_real_T(&st, &tau, 1, &ai_emlrtRTEI, true);
+  emxInit_int32_T(&st, &jpvt, 2, &ai_emlrtRTEI, true);
+  emxInit_ptrdiff_t(&st, &IPIV, 1, &bi_emlrtRTEI, true);
+  emxInit_ptrdiff_t(&st, &r, 1, &yh_emlrtRTEI, true);
+  emxInit_real_T(&st, &b_B, 1, &wh_emlrtRTEI, true);
   if ((A->size[0] == 0) || (A->size[1] == 0) || (B->size[0] == 0)) {
-    i = Y->size[0];
+    mb = Y->size[0];
     Y->size[0] = A->size[1];
-    emxEnsureCapacity_real_T(&st, Y, i, &qh_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, Y, mb, &uh_emlrtRTEI);
     na = A->size[1];
-    for (i = 0; i < na; i++) {
-      Y->data[i] = 0.0;
+    for (mb = 0; mb < na; mb++) {
+      Y->data[mb] = 0.0;
     }
   } else if (A->size[0] == A->size[1]) {
-    b_st.site = &uh_emlrtRSI;
-    c_st.site = &wh_emlrtRSI;
-    i = Y->size[0];
+    b_st.site = &th_emlrtRSI;
+    c_st.site = &vh_emlrtRSI;
+    mb = Y->size[0];
     Y->size[0] = B->size[0];
-    emxEnsureCapacity_real_T(&c_st, Y, i, &qh_emlrtRTEI);
+    emxEnsureCapacity_real_T(&c_st, Y, mb, &uh_emlrtRTEI);
     na = B->size[0];
-    for (i = 0; i < na; i++) {
-      Y->data[i] = B->data[i];
+    for (mb = 0; mb < na; mb++) {
+      Y->data[mb] = B->data[mb];
     }
-    d_st.site = &yh_emlrtRSI;
-    e_st.site = &ai_emlrtRSI;
-    ma = A->size[0];
+    d_st.site = &xh_emlrtRSI;
+    e_st.site = &yh_emlrtRSI;
+    rankA = A->size[0];
     na = A->size[1];
     mb = B->size[0];
-    i = muIntScalarMin_sint32(ma, na);
-    ma = muIntScalarMin_sint32(mb, i);
-    f_st.site = &bi_emlrtRSI;
-    i = b_A->size[0] * b_A->size[1];
+    na = muIntScalarMin_sint32(rankA, na);
+    rankA = muIntScalarMin_sint32(mb, na);
+    f_st.site = &ai_emlrtRSI;
+    mb = b_A->size[0] * b_A->size[1];
     b_A->size[0] = A->size[0];
     b_A->size[1] = A->size[1];
-    emxEnsureCapacity_real_T(&f_st, b_A, i, &th_emlrtRTEI);
+    emxEnsureCapacity_real_T(&f_st, b_A, mb, &xh_emlrtRTEI);
     na = A->size[0] * A->size[1];
-    for (i = 0; i < na; i++) {
-      b_A->data[i] = A->data[i];
+    for (mb = 0; mb < na; mb++) {
+      b_A->data[mb] = A->data[mb];
     }
-    g_st.site = &di_emlrtRSI;
-    repmat(&g_st, (ptrdiff_t)0.0, ma, r);
-    i = IPIV->size[0];
-    IPIV->size[0] = r->size[0];
-    emxEnsureCapacity_ptrdiff_t(&f_st, IPIV, i, &uh_emlrtRTEI);
-    nrc_t = (ptrdiff_t)ma;
-    LDA = (ptrdiff_t)b_A->size[0];
-    INFO = LAPACKE_dgetrf_work(102, nrc_t, nrc_t, &b_A->data[0], LDA,
-                               &IPIV->data[0]);
-    ma = (int32_T)INFO;
     g_st.site = &ci_emlrtRSI;
-    if (ma < 0) {
-      if (ma == -1010) {
+    repmat(&g_st, (ptrdiff_t)0.0, rankA, r);
+    mb = IPIV->size[0];
+    IPIV->size[0] = r->size[0];
+    emxEnsureCapacity_ptrdiff_t(&f_st, IPIV, mb, &yh_emlrtRTEI);
+    N = (ptrdiff_t)rankA;
+    LDA = (ptrdiff_t)b_A->size[0];
+    INFO = LAPACKE_dgetrf_work(102, N, N, &b_A->data[0], LDA, &IPIV->data[0]);
+    rankA = (int32_T)INFO;
+    g_st.site = &bi_emlrtRSI;
+    if (rankA < 0) {
+      if (rankA == -1010) {
         emlrtErrorWithMessageIdR2018a(&g_st, &j_emlrtRTEI, "MATLAB:nomem",
                                       "MATLAB:nomem", 0);
       } else {
         emlrtErrorWithMessageIdR2018a(
             &g_st, &k_emlrtRTEI, "Coder:toolbox:LAPACKCallErrorInfo",
-            "Coder:toolbox:LAPACKCallErrorInfo", 5, 4, 19, &cv9[0], 12, ma);
+            "Coder:toolbox:LAPACKCallErrorInfo", 5, 4, 19, &cv9[0], 12, rankA);
       }
     }
-    LAPACKE_dgetrs_work(102, 'N', nrc_t, (ptrdiff_t)1, &b_A->data[0], LDA,
+    LAPACKE_dgetrs_work(102, 'N', N, (ptrdiff_t)1, &b_A->data[0], LDA,
                         &IPIV->data[0], &Y->data[0], (ptrdiff_t)B->size[0]);
-    if (((A->size[0] != 1) || (A->size[1] != 1)) && (ma > 0)) {
-      d_st.site = &xh_emlrtRSI;
-      e_st.site = &fi_emlrtRSI;
+    if (((A->size[0] != 1) || (A->size[1] != 1)) && (rankA > 0)) {
+      d_st.site = &wh_emlrtRSI;
+      e_st.site = &ei_emlrtRSI;
       warning(&e_st);
     }
   } else {
-    b_st.site = &vh_emlrtRSI;
-    i = b_A->size[0] * b_A->size[1];
+    b_st.site = &uh_emlrtRSI;
+    mb = b_A->size[0] * b_A->size[1];
     b_A->size[0] = A->size[0];
     b_A->size[1] = A->size[1];
-    emxEnsureCapacity_real_T(&b_st, b_A, i, &rh_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, b_A, mb, &vh_emlrtRTEI);
     na = A->size[0] * A->size[1];
-    for (i = 0; i < na; i++) {
-      b_A->data[i] = A->data[i];
+    for (mb = 0; mb < na; mb++) {
+      b_A->data[mb] = A->data[mb];
     }
-    c_st.site = &gi_emlrtRSI;
+    c_st.site = &fi_emlrtRSI;
     xgeqp3(&c_st, b_A, tau, jpvt);
-    c_st.site = &hi_emlrtRSI;
-    mb = rankFromQR(&c_st, b_A);
-    c_st.site = &ii_emlrtRSI;
-    i = b_B->size[0];
+    c_st.site = &gi_emlrtRSI;
+    rankA = rankFromQR(&c_st, b_A);
+    mb = b_B->size[0];
     b_B->size[0] = B->size[0];
-    emxEnsureCapacity_real_T(&c_st, b_B, i, &sh_emlrtRTEI);
-    na = B->size[0];
-    for (i = 0; i < na; i++) {
-      b_B->data[i] = B->data[i];
+    emxEnsureCapacity_real_T(&b_st, b_B, mb, &wh_emlrtRTEI);
+    na = B->size[0] - 1;
+    for (mb = 0; mb <= na; mb++) {
+      b_B->data[mb] = B->data[mb];
     }
-    i = Y->size[0];
-    Y->size[0] = b_A->size[1];
-    emxEnsureCapacity_real_T(&c_st, Y, i, &qh_emlrtRTEI);
-    na = b_A->size[1];
-    for (i = 0; i < na; i++) {
-      Y->data[i] = 0.0;
-    }
-    d_st.site = &ui_emlrtRSI;
-    e_st.site = &xi_emlrtRSI;
-    if ((b_A->size[0] != 0) && (b_A->size[1] != 0)) {
-      nrc_t = (ptrdiff_t)b_B->size[0];
-      nrc_t = LAPACKE_dormqr(
-          102, 'L', 'T', nrc_t, (ptrdiff_t)1,
-          (ptrdiff_t)muIntScalarMin_sint32(b_A->size[0], b_A->size[1]),
-          &b_A->data[0], (ptrdiff_t)b_A->size[0], &tau->data[0], &b_B->data[0],
-          nrc_t);
-      f_st.site = &yi_emlrtRSI;
-      if (infocheck(&f_st, (int32_T)nrc_t)) {
-        ma = b_B->size[0];
-        i = b_B->size[0];
-        b_B->size[0] = ma;
-        emxEnsureCapacity_real_T(&e_st, b_B, i, &vh_emlrtRTEI);
-        for (i = 0; i < ma; i++) {
-          b_B->data[i] = rtNaN;
-        }
-      }
-    }
-    d_st.site = &vi_emlrtRSI;
-    if ((1 <= mb) && (mb > 2147483646)) {
-      e_st.site = &pb_emlrtRSI;
-      check_forloop_overflow_error(&e_st);
-    }
-    for (ma = 0; ma < mb; ma++) {
-      Y->data[jpvt->data[ma] - 1] = b_B->data[ma];
-    }
-    for (na = mb; na >= 1; na--) {
-      i = jpvt->data[na - 1];
-      Y->data[i - 1] /= b_A->data[(na + b_A->size[0] * (na - 1)) - 1];
-      d_st.site = &wi_emlrtRSI;
-      for (ma = 0; ma <= na - 2; ma++) {
-        Y->data[jpvt->data[ma] - 1] -= Y->data[jpvt->data[na - 1] - 1] *
-                                       b_A->data[ma + b_A->size[0] * (na - 1)];
-      }
-    }
+    c_st.site = &hi_emlrtRSI;
+    LSQFromQR(&c_st, b_A, tau, jpvt, b_B, rankA, Y);
   }
+  emxFree_real_T(&b_B);
   emxFree_ptrdiff_t(&r);
   emxFree_ptrdiff_t(&IPIV);
-  emxFree_real_T(&b_B);
   emxFree_int32_T(&jpvt);
   emxFree_real_T(&tau);
   emxFree_real_T(&b_A);

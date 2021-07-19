@@ -19,7 +19,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo ok_emlrtRSI =
+static emlrtRSInfo vk_emlrtRSI =
     {
         18,    /* lineNo */
         "abs", /* fcnName */
@@ -28,7 +28,7 @@ static emlrtRSInfo ok_emlrtRSI =
                                                                           */
 };
 
-static emlrtRSInfo pk_emlrtRSI = {
+static emlrtRSInfo wk_emlrtRSI = {
     74,                    /* lineNo */
     "applyScalarFunction", /* fcnName */
     "C:\\Program "
@@ -36,7 +36,7 @@ static emlrtRSInfo pk_emlrtRSI = {
     "internal\\applyScalarFunction.m" /* pathName */
 };
 
-static emlrtRTEInfo qk_emlrtRTEI = {
+static emlrtRTEInfo pl_emlrtRTEI = {
     30,                    /* lineNo */
     21,                    /* colNo */
     "applyScalarFunction", /* fName */
@@ -55,7 +55,7 @@ void b_abs(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   int32_T nx;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &ok_emlrtRSI;
+  st.site = &vk_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -63,10 +63,10 @@ void b_abs(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   nx = x->size[0];
   k = y->size[0];
   y->size[0] = x->size[0];
-  emxEnsureCapacity_real_T(&st, y, k, &qk_emlrtRTEI);
-  b_st.site = &pk_emlrtRSI;
+  emxEnsureCapacity_real_T(&st, y, k, &pl_emlrtRTEI);
+  b_st.site = &wk_emlrtRSI;
   if ((1 <= x->size[0]) && (x->size[0] > 2147483646)) {
-    c_st.site = &ab_emlrtRSI;
+    c_st.site = &hb_emlrtRSI;
     check_forloop_overflow_error(&c_st);
   }
   for (k = 0; k < nx; k++) {
@@ -83,7 +83,7 @@ void c_abs(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   int32_T nx;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &ok_emlrtRSI;
+  st.site = &vk_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -92,10 +92,68 @@ void c_abs(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   k = y->size[0] * y->size[1];
   y->size[0] = x->size[0];
   y->size[1] = x->size[1];
-  emxEnsureCapacity_real_T(&st, y, k, &qk_emlrtRTEI);
-  b_st.site = &pk_emlrtRSI;
+  emxEnsureCapacity_real_T(&st, y, k, &pl_emlrtRTEI);
+  b_st.site = &wk_emlrtRSI;
   if ((1 <= nx) && (nx > 2147483646)) {
-    c_st.site = &ab_emlrtRSI;
+    c_st.site = &hb_emlrtRSI;
+    check_forloop_overflow_error(&c_st);
+  }
+  for (k = 0; k < nx; k++) {
+    y->data[k] = muDoubleScalarAbs(x->data[k]);
+  }
+}
+
+void d_abs(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
+{
+  emlrtStack b_st;
+  emlrtStack c_st;
+  emlrtStack st;
+  int32_T k;
+  int32_T nx;
+  st.prev = sp;
+  st.tls = sp->tls;
+  st.site = &vk_emlrtRSI;
+  b_st.prev = &st;
+  b_st.tls = st.tls;
+  c_st.prev = &b_st;
+  c_st.tls = b_st.tls;
+  nx = x->size[0] * 7;
+  k = y->size[0] * y->size[1];
+  y->size[0] = x->size[0];
+  y->size[1] = 7;
+  emxEnsureCapacity_real_T(&st, y, k, &pl_emlrtRTEI);
+  b_st.site = &wk_emlrtRSI;
+  if ((1 <= nx) && (nx > 2147483646)) {
+    c_st.site = &hb_emlrtRSI;
+    check_forloop_overflow_error(&c_st);
+  }
+  for (k = 0; k < nx; k++) {
+    y->data[k] = muDoubleScalarAbs(x->data[k]);
+  }
+}
+
+void e_abs(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
+{
+  emlrtStack b_st;
+  emlrtStack c_st;
+  emlrtStack st;
+  int32_T k;
+  int32_T nx;
+  st.prev = sp;
+  st.tls = sp->tls;
+  st.site = &vk_emlrtRSI;
+  b_st.prev = &st;
+  b_st.tls = st.tls;
+  c_st.prev = &b_st;
+  c_st.tls = b_st.tls;
+  nx = x->size[0] << 2;
+  k = y->size[0] * y->size[1];
+  y->size[0] = x->size[0];
+  y->size[1] = 4;
+  emxEnsureCapacity_real_T(&st, y, k, &pl_emlrtRTEI);
+  b_st.site = &wk_emlrtRSI;
+  if ((1 <= nx) && (nx > 2147483646)) {
+    c_st.site = &hb_emlrtRSI;
     check_forloop_overflow_error(&c_st);
   }
   for (k = 0; k < nx; k++) {

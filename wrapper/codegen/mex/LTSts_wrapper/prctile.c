@@ -59,7 +59,7 @@ real_T prctile(const emlrtStack *sp, const emxArray_real_T *x, real_T p)
   if (x->size[0] == 0) {
     y = rtNaN;
   } else {
-    emxInit_int32_T(&st, &idx, 1, &ru_emlrtRTEI, true);
+    emxInit_int32_T(&st, &idx, 1, &qu_emlrtRTEI, true);
     b_st.site = &kv_emlrtRSI;
     sortIdx(&b_st, x, idx);
     b_st.site = &lv_emlrtRSI;

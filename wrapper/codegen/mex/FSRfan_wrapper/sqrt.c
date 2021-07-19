@@ -18,7 +18,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo tr_emlrtRSI = {
+static emlrtRSInfo rr_emlrtRSI = {
     16,     /* lineNo */
     "sqrt", /* fcnName */
     "C:\\Program "
@@ -53,11 +53,11 @@ void b_sqrt(const emlrtStack *sp, emxArray_real_T *x)
         sp, &kb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
         "Coder:toolbox:ElFunDomainError", 3, 4, 4, "sqrt");
   }
-  st.site = &tr_emlrtRSI;
+  st.site = &rr_emlrtRSI;
   nx = x->size[0];
-  b_st.site = &qf_emlrtRSI;
+  b_st.site = &pf_emlrtRSI;
   if ((1 <= x->size[0]) && (x->size[0] > 2147483646)) {
-    c_st.site = &pb_emlrtRSI;
+    c_st.site = &ob_emlrtRSI;
     check_forloop_overflow_error(&c_st);
   }
   for (k = 0; k < nx; k++) {

@@ -124,18 +124,6 @@ struct emxArray_char_T {
 typedef struct emxArray_char_T emxArray_char_T;
 #endif /* typedef_emxArray_char_T */
 
-#ifndef struct_emxArray_real_T_2x5
-#define struct_emxArray_real_T_2x5
-struct emxArray_real_T_2x5 {
-  real_T data[10];
-  int32_T size[2];
-};
-#endif /* struct_emxArray_real_T_2x5 */
-#ifndef typedef_emxArray_real_T_2x5
-#define typedef_emxArray_real_T_2x5
-typedef struct emxArray_real_T_2x5 emxArray_real_T_2x5;
-#endif /* typedef_emxArray_real_T_2x5 */
-
 #ifndef struct_emxArray_char_T_1x3
 #define struct_emxArray_char_T_1x3
 struct emxArray_char_T_1x3 {
@@ -157,7 +145,7 @@ typedef struct {
   emxArray_real_T *md;
   emxArray_real_T *mmd;
   emxArray_real_T *Un;
-  emxArray_real_T_2x5 nout;
+  emxArray_real_T *nout;
   emxArray_char_T_1x3 class;
 } struct_FSM_T;
 #endif /* typedef_struct_FSM_T */
@@ -181,23 +169,49 @@ typedef struct {
 } struct_FSR_T;
 #endif /* typedef_struct_FSR_T */
 
-#ifndef typedef_cell_wrap_38
-#define typedef_cell_wrap_38
+#ifndef typedef_struct_FSRlms_T
+#define typedef_struct_FSRlms_T
+typedef struct {
+  emxArray_real_T *bsb;
+} struct_FSRlms_T;
+#endif /* typedef_struct_FSRlms_T */
+
+#ifndef typedef_struct0_T
+#define typedef_struct0_T
+typedef struct {
+  emxArray_real_T *ListOut;
+  emxArray_real_T *outliers;
+  emxArray_real_T *mdr;
+  emxArray_real_T *Un;
+  emxArray_real_T *nout;
+  emxArray_real_T *beta;
+  real_T scale;
+  emxArray_real_T *mdag;
+  emxArray_real_T *ListCl;
+  emxArray_real_T *VIOMout;
+  emxArray_real_T *fittedvalues;
+  emxArray_real_T *residuals;
+  char_T class[3];
+} struct0_T;
+#endif /* typedef_struct0_T */
+
+#ifndef typedef_cell_wrap_39
+#define typedef_cell_wrap_39
 typedef struct {
   emxArray_real_T *f1;
-} cell_wrap_38;
-#endif /* typedef_cell_wrap_38 */
+} cell_wrap_39;
+#endif /* typedef_cell_wrap_39 */
 
-#ifndef typedef_emxArray_cell_wrap_38
-#define typedef_emxArray_cell_wrap_38
+#ifndef typedef_emxArray_cell_wrap_39
+#define typedef_emxArray_cell_wrap_39
 typedef struct {
-  cell_wrap_38 *data;
+  cell_wrap_39 *data;
   int32_T *size;
   int32_T allocatedSize;
   int32_T numDimensions;
   boolean_T canFreeData;
-} emxArray_cell_wrap_38;
-#endif /* typedef_emxArray_cell_wrap_38 */
+} emxArray_cell_wrap_39;
+#endif /* typedef_emxArray_cell_wrap_39 */
 
 #ifndef typedef_struct_FSRfan_T
 #define typedef_struct_FSRfan_T
@@ -205,7 +219,7 @@ typedef struct {
   emxArray_real_T *Score;
   emxArray_real_T *la;
   emxArray_real_T *bs;
-  emxArray_cell_wrap_38 *Un;
+  emxArray_cell_wrap_39 *Un;
   emxArray_real_T *y;
   emxArray_real_T *X;
   emxArray_real_T *Scorep;
@@ -253,17 +267,17 @@ struct emxArray_char_T_1x10 {
 typedef struct emxArray_char_T_1x10 emxArray_char_T_1x10;
 #endif /* typedef_emxArray_char_T_1x10 */
 
-#ifndef typedef_cell_wrap_50
-#define typedef_cell_wrap_50
+#ifndef typedef_cell_wrap_51
+#define typedef_cell_wrap_51
 typedef struct {
   emxArray_char_T_1x10 f1;
-} cell_wrap_50;
-#endif /* typedef_cell_wrap_50 */
+} cell_wrap_51;
+#endif /* typedef_cell_wrap_51 */
 
 #ifndef typedef_e_matlab_internal_coder_tabular
 #define typedef_e_matlab_internal_coder_tabular
 typedef struct {
-  cell_wrap_50 labels[1];
+  cell_wrap_51 labels[1];
   real_T length;
 } e_matlab_internal_coder_tabular;
 #endif /* typedef_e_matlab_internal_coder_tabular */
@@ -348,26 +362,26 @@ struct emxArray_char_T_1x0 {
 typedef struct emxArray_char_T_1x0 emxArray_char_T_1x0;
 #endif /* typedef_emxArray_char_T_1x0 */
 
-#ifndef typedef_cell_wrap_52
-#define typedef_cell_wrap_52
+#ifndef typedef_cell_wrap_53
+#define typedef_cell_wrap_53
 typedef struct {
   emxArray_char_T_1x0 f1;
-} cell_wrap_52;
-#endif /* typedef_cell_wrap_52 */
+} cell_wrap_53;
+#endif /* typedef_cell_wrap_53 */
 
-#ifndef typedef_struct0_T
-#define typedef_struct0_T
+#ifndef typedef_struct1_T
+#define typedef_struct1_T
 typedef struct {
   emxArray_char_T_1x0 Description;
-} struct0_T;
-#endif /* typedef_struct0_T */
+} struct1_T;
+#endif /* typedef_struct1_T */
 
 #ifndef typedef_f_matlab_internal_coder_tabular
 #define typedef_f_matlab_internal_coder_tabular
 typedef struct {
   real_T length;
-  cell_wrap_52 descrs[4];
-  cell_wrap_52 units[4];
+  cell_wrap_53 descrs[4];
+  cell_wrap_53 units[4];
   d_matlab_internal_coder_tabular continuity[4];
   boolean_T hasDescrs;
   boolean_T hasUnits;
@@ -383,7 +397,7 @@ typedef struct {
   e_matlab_internal_coder_tabular rowDim;
   f_matlab_internal_coder_tabular varDim;
   cell_wrap_6 data[4];
-  struct0_T arrayProps;
+  struct1_T arrayProps;
 } table;
 #endif /* typedef_table */
 
@@ -441,6 +455,11 @@ void FSMbsb_wrapper(emxArray_real_T *Y, emxArray_real_T *bsb,
 void FSMbsb_wrapper_api(const mxArray *const prhs[6], int32_T nlhs,
                         const mxArray *plhs[2]);
 
+void FSMenvmmd_wrapper(real_T n, real_T v, real_T init, emxArray_real_T *prob,
+                       boolean_T scaled, emxArray_real_T *MMDenv);
+
+void FSMenvmmd_wrapper_api(const mxArray *const prhs[5], const mxArray **plhs);
+
 void FSMmmd_wrapper(emxArray_real_T *Y, emxArray_real_T *bsb,
                     emxArray_real_T *bsbsteps, real_T init, boolean_T msg,
                     boolean_T nocheck, emxArray_real_T *mmd,
@@ -455,6 +474,15 @@ void FSR_wrapper(emxArray_real_T *y, emxArray_real_T *X, boolean_T bsbmfullrank,
                  boolean_T nocheck, real_T nsamp, real_T threshoutX_data[],
                  int32_T threshoutX_size[2], boolean_T weak, struct_FSR_T *out);
 
+void FSR_wrapper1(emxArray_real_T *y, emxArray_real_T *X,
+                  boolean_T bsbmfullrank, real_T bonflev_data[],
+                  int32_T bonflev_size[2], real_T h, real_T init,
+                  boolean_T intercept, struct_FSRlms_T *lms, boolean_T msg,
+                  boolean_T nocheck, real_T nsamp, real_T threshoutX_data[],
+                  int32_T threshoutX_size[2], boolean_T weak, struct0_T *out);
+
+void FSR_wrapper1_api(const mxArray *const prhs[13], const mxArray **plhs);
+
 void FSR_wrapper_api(const mxArray *const prhs[13], const mxArray **plhs);
 
 void FSRbsb_wrapper(emxArray_real_T *y, emxArray_real_T *X,
@@ -465,6 +493,11 @@ void FSRbsb_wrapper(emxArray_real_T *y, emxArray_real_T *X,
 
 void FSRbsb_wrapper_api(const mxArray *const prhs[8], int32_T nlhs,
                         const mxArray *plhs[2]);
+
+void FSRenvmdr_wrapper(real_T n, real_T p, real_T init, emxArray_real_T *prob,
+                       emxArray_real_T *MDRenv);
+
+void FSRenvmdr_wrapper_api(const mxArray *const prhs[4], const mxArray **plhs);
 
 void FSRfan_wrapper(emxArray_real_T *y, emxArray_real_T *X, boolean_T intercept,
                     boolean_T nocheck, emxArray_real_T *la, real_T h,
@@ -555,6 +588,11 @@ void tclust_wrapper1_api(const mxArray *const prhs[14], int32_T nlhs,
 
 void tclust_wrapper_api(const mxArray *const prhs[14], int32_T nlhs,
                         const mxArray *plhs[2]);
+
+void unibiv_wrapper(emxArray_real_T *Y, real_T madcoef, real_T robscale,
+                    real_T rf, emxArray_real_T *fre);
+
+void unibiv_wrapper_api(const mxArray *const prhs[4], const mxArray **plhs);
 
 #ifdef __cplusplus
 }

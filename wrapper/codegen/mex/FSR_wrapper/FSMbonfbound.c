@@ -24,49 +24,49 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo nab_emlrtRSI = {
+static emlrtRSInfo uab_emlrtRSI = {
     166,                                                        /* lineNo */
     "FSMbonfbound",                                             /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\FSMbonfbound.m" /* pathName */
 };
 
-static emlrtRSInfo oab_emlrtRSI = {
+static emlrtRSInfo vab_emlrtRSI = {
     163,                                                        /* lineNo */
     "FSMbonfbound",                                             /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\FSMbonfbound.m" /* pathName */
 };
 
-static emlrtRSInfo pab_emlrtRSI = {
+static emlrtRSInfo wab_emlrtRSI = {
     158,                                                        /* lineNo */
     "FSMbonfbound",                                             /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\FSMbonfbound.m" /* pathName */
 };
 
-static emlrtRSInfo qab_emlrtRSI = {
+static emlrtRSInfo xab_emlrtRSI = {
     157,                                                        /* lineNo */
     "FSMbonfbound",                                             /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\FSMbonfbound.m" /* pathName */
 };
 
-static emlrtRSInfo rab_emlrtRSI = {
+static emlrtRSInfo yab_emlrtRSI = {
     153,                                                        /* lineNo */
     "FSMbonfbound",                                             /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\FSMbonfbound.m" /* pathName */
 };
 
-static emlrtRSInfo sab_emlrtRSI = {
+static emlrtRSInfo abb_emlrtRSI = {
     141,                                                        /* lineNo */
     "FSMbonfbound",                                             /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\FSMbonfbound.m" /* pathName */
 };
 
-static emlrtRSInfo tab_emlrtRSI = {
+static emlrtRSInfo bbb_emlrtRSI = {
     113,                                                        /* lineNo */
     "FSMbonfbound",                                             /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\FSMbonfbound.m" /* pathName */
 };
 
-static emlrtRSInfo uab_emlrtRSI = {
+static emlrtRSInfo cbb_emlrtRSI = {
     109,                                                        /* lineNo */
     "FSMbonfbound",                                             /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\FSMbonfbound.m" /* pathName */
@@ -80,112 +80,112 @@ static emlrtECInfo ub_emlrtECI = {
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\FSMbonfbound.m" /* pName */
 };
 
-static emlrtRTEInfo yq_emlrtRTEI = {
+static emlrtRTEInfo xr_emlrtRTEI = {
     153,                                                        /* lineNo */
     1,                                                          /* colNo */
     "FSMbonfbound",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\FSMbonfbound.m" /* pName */
 };
 
-static emlrtRTEInfo ar_emlrtRTEI = {
+static emlrtRTEInfo yr_emlrtRTEI = {
     157,                                                        /* lineNo */
     1,                                                          /* colNo */
     "FSMbonfbound",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\FSMbonfbound.m" /* pName */
 };
 
-static emlrtRTEInfo br_emlrtRTEI = {
+static emlrtRTEInfo as_emlrtRTEI = {
     158,                                                        /* lineNo */
     1,                                                          /* colNo */
     "FSMbonfbound",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\FSMbonfbound.m" /* pName */
 };
 
-static emlrtRTEInfo cr_emlrtRTEI = {
+static emlrtRTEInfo bs_emlrtRTEI = {
     163,                                                        /* lineNo */
     35,                                                         /* colNo */
     "FSMbonfbound",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\FSMbonfbound.m" /* pName */
 };
 
-static emlrtRTEInfo dr_emlrtRTEI = {
+static emlrtRTEInfo cs_emlrtRTEI = {
     163,                                                        /* lineNo */
     43,                                                         /* colNo */
     "FSMbonfbound",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\FSMbonfbound.m" /* pName */
 };
 
-static emlrtRTEInfo er_emlrtRTEI = {
+static emlrtRTEInfo ds_emlrtRTEI = {
     163,                                                        /* lineNo */
     20,                                                         /* colNo */
     "FSMbonfbound",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\FSMbonfbound.m" /* pName */
 };
 
-static emlrtRTEInfo fr_emlrtRTEI = {
+static emlrtRTEInfo es_emlrtRTEI = {
     163,                                                        /* lineNo */
     60,                                                         /* colNo */
     "FSMbonfbound",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\FSMbonfbound.m" /* pName */
 };
 
-static emlrtRTEInfo gr_emlrtRTEI = {
+static emlrtRTEInfo fs_emlrtRTEI = {
     163,                                                        /* lineNo */
     71,                                                         /* colNo */
     "FSMbonfbound",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\FSMbonfbound.m" /* pName */
 };
 
-static emlrtRTEInfo hr_emlrtRTEI = {
+static emlrtRTEInfo gs_emlrtRTEI = {
     163,                                                        /* lineNo */
     56,                                                         /* colNo */
     "FSMbonfbound",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\FSMbonfbound.m" /* pName */
 };
 
-static emlrtRTEInfo ir_emlrtRTEI = {
+static emlrtRTEInfo hs_emlrtRTEI = {
     163,                                                        /* lineNo */
     81,                                                         /* colNo */
     "FSMbonfbound",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\FSMbonfbound.m" /* pName */
 };
 
-static emlrtRTEInfo jr_emlrtRTEI = {
+static emlrtRTEInfo is_emlrtRTEI = {
     163,                                                        /* lineNo */
     51,                                                         /* colNo */
     "FSMbonfbound",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\FSMbonfbound.m" /* pName */
 };
 
-static emlrtRTEInfo kr_emlrtRTEI = {
+static emlrtRTEInfo js_emlrtRTEI = {
     163,                                                        /* lineNo */
     15,                                                         /* colNo */
     "FSMbonfbound",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\FSMbonfbound.m" /* pName */
 };
 
-static emlrtRTEInfo lr_emlrtRTEI = {
+static emlrtRTEInfo ks_emlrtRTEI = {
     163,                                                        /* lineNo */
     5,                                                          /* colNo */
     "FSMbonfbound",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\FSMbonfbound.m" /* pName */
 };
 
-static emlrtRTEInfo mr_emlrtRTEI = {
+static emlrtRTEInfo ls_emlrtRTEI = {
     166,                                                        /* lineNo */
     1,                                                          /* colNo */
     "FSMbonfbound",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\FSMbonfbound.m" /* pName */
 };
 
-static emlrtRTEInfo nr_emlrtRTEI = {
+static emlrtRTEInfo ms_emlrtRTEI = {
     1,                                                          /* lineNo */
     19,                                                         /* colNo */
     "FSMbonfbound",                                             /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\utilities_stat\\FSMbonfbound.m" /* pName */
 };
 
-static emlrtRTEInfo or_emlrtRTEI = {
+static emlrtRTEInfo ns_emlrtRTEI = {
     153,                                                        /* lineNo */
     5,                                                          /* colNo */
     "FSMbonfbound",                                             /* fName */
@@ -206,14 +206,12 @@ void FSMbonfbound(const emlrtStack *sp, real_T n, real_T p,
   emlrtStack g_st;
   emlrtStack h_st;
   emlrtStack st;
-  emxArray_real_T *b_mm;
   emxArray_real_T *b_y;
   emxArray_real_T *m;
   emxArray_real_T *mm;
   emxArray_real_T *probm;
   emxArray_real_T *r;
   emxArray_real_T *r1;
-  emxArray_real_T *r2;
   emxArray_real_T *x;
   emxArray_real_T *y;
   real_T b_n;
@@ -361,11 +359,11 @@ void FSMbonfbound(const emlrtStack *sp, real_T n, real_T p,
   /*  Beginning of code */
   /*  Input parameters checks */
   if (muDoubleScalarIsNaN(n)) {
-    st.site = &uab_emlrtRSI;
+    st.site = &cbb_emlrtRSI;
     h_error(&st);
   }
   if (muDoubleScalarIsNaN(p)) {
-    st.site = &tab_emlrtRSI;
+    st.site = &bbb_emlrtRSI;
     i_error(&st);
   }
   /*  The default starting point to monitor mdr is equal to the integer part of
@@ -374,20 +372,20 @@ void FSMbonfbound(const emlrtStack *sp, real_T n, real_T p,
   /*  Notice that prob must be a row vector */
   /*  Check that the initial subset size is not greater than n-1 */
   if (varargin_4 > n - 1.0) {
-    st.site = &sab_emlrtRSI;
+    st.site = &abb_emlrtRSI;
     j_error(&st);
   }
-  emxInit_real_T(sp, &y, 2, &or_emlrtRTEI, true);
+  emxInit_real_T(sp, &y, 2, &ns_emlrtRTEI, true);
   /*  Bonferroni bound generation */
   /*  Make sure that prob is a row vector. */
   /*  m = column vector which contains fwd search index. */
-  st.site = &rab_emlrtRSI;
-  b_st.site = &xc_emlrtRSI;
+  st.site = &yab_emlrtRSI;
+  b_st.site = &fd_emlrtRSI;
   if (muDoubleScalarIsNaN(varargin_4) || muDoubleScalarIsNaN(n - 1.0)) {
     i = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = 1;
-    emxEnsureCapacity_real_T(&b_st, y, i, &fd_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, y, i, &hd_emlrtRTEI);
     y->data[0] = rtNaN;
   } else if (n - 1.0 < varargin_4) {
     y->size[0] = 1;
@@ -398,25 +396,25 @@ void FSMbonfbound(const emlrtStack *sp, real_T n, real_T p,
     i = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = 1;
-    emxEnsureCapacity_real_T(&b_st, y, i, &fd_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, y, i, &hd_emlrtRTEI);
     y->data[0] = rtNaN;
   } else if (muDoubleScalarFloor(varargin_4) == varargin_4) {
     i = y->size[0] * y->size[1];
     y->size[0] = 1;
     loop_ub = (int32_T)muDoubleScalarFloor((n - 1.0) - varargin_4);
     y->size[1] = loop_ub + 1;
-    emxEnsureCapacity_real_T(&b_st, y, i, &fd_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, y, i, &hd_emlrtRTEI);
     for (i = 0; i <= loop_ub; i++) {
       y->data[i] = varargin_4 + (real_T)i;
     }
   } else {
-    c_st.site = &yc_emlrtRSI;
+    c_st.site = &gd_emlrtRSI;
     eml_float_colon(&c_st, varargin_4, n - 1.0, y);
   }
-  emxInit_real_T(&b_st, &m, 1, &yq_emlrtRTEI, true);
+  emxInit_real_T(&b_st, &m, 1, &xr_emlrtRTEI, true);
   i = m->size[0];
   m->size[0] = y->size[1];
-  emxEnsureCapacity_real_T(sp, m, i, &yq_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, m, i, &xr_emlrtRTEI);
   loop_ub = y->size[1];
   for (i = 0; i < loop_ub; i++) {
     m->data[i] = y->data[i];
@@ -428,52 +426,52 @@ void FSMbonfbound(const emlrtStack *sp, real_T n, real_T p,
   } else {
     loop_ub = 1;
   }
-  emxInit_real_T(sp, &mm, 2, &ar_emlrtRTEI, true);
-  emxInit_real_T(sp, &x, 2, &cr_emlrtRTEI, true);
-  st.site = &qab_emlrtRSI;
+  emxInit_real_T(sp, &mm, 2, &yr_emlrtRTEI, true);
+  emxInit_real_T(sp, &x, 2, &bs_emlrtRTEI, true);
+  st.site = &xab_emlrtRSI;
   b_repmat(&st, m, loop_ub, x);
   i = mm->size[0] * mm->size[1];
   mm->size[0] = x->size[0];
   mm->size[1] = x->size[1];
-  emxEnsureCapacity_real_T(sp, mm, i, &ar_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, mm, i, &yr_emlrtRTEI);
   loop_ub = x->size[0] * x->size[1];
   for (i = 0; i < loop_ub; i++) {
     mm->data[i] = x->data[i];
   }
-  emxInit_real_T(sp, &probm, 2, &br_emlrtRTEI, true);
-  st.site = &pab_emlrtRSI;
+  emxInit_real_T(sp, &probm, 2, &as_emlrtRTEI, true);
+  st.site = &wab_emlrtRSI;
   c_repmat(&st, varargin_2_data, varargin_2_size, m->size[0], x);
   i = probm->size[0] * probm->size[1];
   probm->size[0] = x->size[0];
   probm->size[1] = x->size[1];
-  emxEnsureCapacity_real_T(sp, probm, i, &br_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, probm, i, &as_emlrtRTEI);
   loop_ub = x->size[0] * x->size[1];
   for (i = 0; i < loop_ub; i++) {
     probm->data[i] = x->data[i];
   }
-  st.site = &oab_emlrtRSI;
+  st.site = &vab_emlrtRSI;
   i = x->size[0] * x->size[1];
   x->size[0] = mm->size[0];
   x->size[1] = mm->size[1];
-  emxEnsureCapacity_real_T(&st, x, i, &cr_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, x, i, &bs_emlrtRTEI);
   loop_ub = mm->size[0] * mm->size[1];
   for (i = 0; i < loop_ub; i++) {
     x->data[i] = mm->data[i] - 1.0;
   }
-  emxInit_real_T(&st, &b_y, 2, &dr_emlrtRTEI, true);
+  emxInit_real_T(&st, &b_y, 2, &cs_emlrtRTEI, true);
   i = b_y->size[0] * b_y->size[1];
   b_y->size[0] = mm->size[0];
   b_y->size[1] = mm->size[1];
-  emxEnsureCapacity_real_T(&st, b_y, i, &dr_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, b_y, i, &cs_emlrtRTEI);
   loop_ub = mm->size[0] * mm->size[1];
   for (i = 0; i < loop_ub; i++) {
     b_y->data[i] = mm->data[i] - p;
   }
-  b_st.site = &cd_emlrtRSI;
-  c_st.site = &dd_emlrtRSI;
-  d_st.site = &ed_emlrtRSI;
-  e_st.site = &fd_emlrtRSI;
-  f_st.site = &gd_emlrtRSI;
+  b_st.site = &jd_emlrtRSI;
+  c_st.site = &kd_emlrtRSI;
+  d_st.site = &ld_emlrtRSI;
+  e_st.site = &md_emlrtRSI;
+  f_st.site = &nd_emlrtRSI;
   if (x->size[0] <= b_y->size[0]) {
     z_size[0] = x->size[0];
   } else {
@@ -515,11 +513,11 @@ void FSMbonfbound(const emlrtStack *sp, real_T n, real_T p,
     empty_non_axis_sizes = false;
   }
   if (!empty_non_axis_sizes) {
-    emlrtErrorWithMessageIdR2018a(&f_st, &s_emlrtRTEI, "MATLAB:dimagree",
+    emlrtErrorWithMessageIdR2018a(&f_st, &t_emlrtRTEI, "MATLAB:dimagree",
                                   "MATLAB:dimagree", 0);
   }
-  f_st.site = &hd_emlrtRSI;
-  g_st.site = &id_emlrtRSI;
+  f_st.site = &od_emlrtRSI;
+  g_st.site = &pd_emlrtRSI;
   if (x->size[0] <= b_y->size[0]) {
     z_size[0] = x->size[0];
   } else {
@@ -561,7 +559,7 @@ void FSMbonfbound(const emlrtStack *sp, real_T n, real_T p,
     empty_non_axis_sizes = false;
   }
   if (!empty_non_axis_sizes) {
-    emlrtErrorWithMessageIdR2018a(&g_st, &s_emlrtRTEI, "MATLAB:dimagree",
+    emlrtErrorWithMessageIdR2018a(&g_st, &t_emlrtRTEI, "MATLAB:dimagree",
                                   "MATLAB:dimagree", 0);
   }
   if (x->size[0] <= b_y->size[0]) {
@@ -575,26 +573,26 @@ void FSMbonfbound(const emlrtStack *sp, real_T n, real_T p,
     b_x = 0;
   }
   loop_ub *= b_x;
-  g_st.site = &jd_emlrtRSI;
+  g_st.site = &qd_emlrtRSI;
   if ((1 <= loop_ub) && (loop_ub > 2147483646)) {
-    h_st.site = &ab_emlrtRSI;
+    h_st.site = &hb_emlrtRSI;
     check_forloop_overflow_error(&h_st);
   }
-  emxInit_real_T(&g_st, &r, 2, &nr_emlrtRTEI, true);
+  emxInit_real_T(&g_st, &r, 2, &ms_emlrtRTEI, true);
   i = r->size[0] * r->size[1];
   r->size[0] = x->size[0];
   r->size[1] = x->size[1];
-  emxEnsureCapacity_real_T(sp, r, i, &er_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, r, i, &ds_emlrtRTEI);
   b_n = n / (n - 1.0) * p;
   loop_ub = x->size[0] * x->size[1];
   for (i = 0; i < loop_ub; i++) {
     r->data[i] = b_n * (x->data[i] / b_y->data[i]);
   }
-  st.site = &oab_emlrtRSI;
+  st.site = &vab_emlrtRSI;
   i = x->size[0] * x->size[1];
   x->size[0] = probm->size[0];
   x->size[1] = probm->size[1];
-  emxEnsureCapacity_real_T(&st, x, i, &fr_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, x, i, &es_emlrtRTEI);
   loop_ub = probm->size[0] * probm->size[1];
   for (i = 0; i < loop_ub; i++) {
     x->data[i] = 1.0 - probm->data[i];
@@ -603,16 +601,16 @@ void FSMbonfbound(const emlrtStack *sp, real_T n, real_T p,
   i = b_y->size[0] * b_y->size[1];
   b_y->size[0] = mm->size[0];
   b_y->size[1] = mm->size[1];
-  emxEnsureCapacity_real_T(&st, b_y, i, &gr_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, b_y, i, &fs_emlrtRTEI);
   loop_ub = mm->size[0] * mm->size[1];
   for (i = 0; i < loop_ub; i++) {
     b_y->data[i] = mm->data[i] + 1.0;
   }
-  b_st.site = &cd_emlrtRSI;
-  c_st.site = &dd_emlrtRSI;
-  d_st.site = &ed_emlrtRSI;
-  e_st.site = &fd_emlrtRSI;
-  f_st.site = &gd_emlrtRSI;
+  b_st.site = &jd_emlrtRSI;
+  c_st.site = &kd_emlrtRSI;
+  d_st.site = &ld_emlrtRSI;
+  e_st.site = &md_emlrtRSI;
+  f_st.site = &nd_emlrtRSI;
   if (x->size[0] <= b_y->size[0]) {
     z_size[0] = x->size[0];
   } else {
@@ -654,11 +652,11 @@ void FSMbonfbound(const emlrtStack *sp, real_T n, real_T p,
     empty_non_axis_sizes = false;
   }
   if (!empty_non_axis_sizes) {
-    emlrtErrorWithMessageIdR2018a(&f_st, &s_emlrtRTEI, "MATLAB:dimagree",
+    emlrtErrorWithMessageIdR2018a(&f_st, &t_emlrtRTEI, "MATLAB:dimagree",
                                   "MATLAB:dimagree", 0);
   }
-  f_st.site = &hd_emlrtRSI;
-  g_st.site = &id_emlrtRSI;
+  f_st.site = &od_emlrtRSI;
+  g_st.site = &pd_emlrtRSI;
   if (x->size[0] <= b_y->size[0]) {
     z_size[0] = x->size[0];
   } else {
@@ -700,7 +698,7 @@ void FSMbonfbound(const emlrtStack *sp, real_T n, real_T p,
     empty_non_axis_sizes = false;
   }
   if (!empty_non_axis_sizes) {
-    emlrtErrorWithMessageIdR2018a(&g_st, &s_emlrtRTEI, "MATLAB:dimagree",
+    emlrtErrorWithMessageIdR2018a(&g_st, &t_emlrtRTEI, "MATLAB:dimagree",
                                   "MATLAB:dimagree", 0);
   }
   if (x->size[0] <= b_y->size[0]) {
@@ -714,44 +712,40 @@ void FSMbonfbound(const emlrtStack *sp, real_T n, real_T p,
     b_x = 0;
   }
   loop_ub *= b_x;
-  g_st.site = &jd_emlrtRSI;
+  g_st.site = &qd_emlrtRSI;
   if ((1 <= loop_ub) && (loop_ub > 2147483646)) {
-    h_st.site = &ab_emlrtRSI;
+    h_st.site = &hb_emlrtRSI;
     check_forloop_overflow_error(&h_st);
   }
-  emxInit_real_T(&g_st, &r1, 2, &hr_emlrtRTEI, true);
+  emxInit_real_T(&g_st, &r1, 2, &gs_emlrtRTEI, true);
   i = r1->size[0] * r1->size[1];
   r1->size[0] = x->size[0];
   r1->size[1] = x->size[1];
-  emxEnsureCapacity_real_T(sp, r1, i, &hr_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, r1, i, &gs_emlrtRTEI);
   loop_ub = x->size[0] * x->size[1];
   for (i = 0; i < loop_ub; i++) {
     r1->data[i] = 1.0 - x->data[i] / b_y->data[i];
   }
-  emxFree_real_T(&b_y);
-  emxInit_real_T(sp, &b_mm, 2, &ir_emlrtRTEI, true);
-  i = b_mm->size[0] * b_mm->size[1];
-  b_mm->size[0] = mm->size[0];
-  b_mm->size[1] = mm->size[1];
-  emxEnsureCapacity_real_T(sp, b_mm, i, &ir_emlrtRTEI);
+  i = b_y->size[0] * b_y->size[1];
+  b_y->size[0] = mm->size[0];
+  b_y->size[1] = mm->size[1];
+  emxEnsureCapacity_real_T(sp, b_y, i, &hs_emlrtRTEI);
   loop_ub = mm->size[0] * mm->size[1];
   for (i = 0; i < loop_ub; i++) {
-    b_mm->data[i] = mm->data[i] - p;
+    b_y->data[i] = mm->data[i] - p;
   }
-  emxInit_real_T(sp, &r2, 2, &jr_emlrtRTEI, true);
-  st.site = &oab_emlrtRSI;
-  b_finv(&st, r1, p, b_mm, r2);
+  st.site = &vab_emlrtRSI;
+  b_finv(&st, r1, p, b_y, x);
   i = mm->size[0] * mm->size[1];
-  mm->size[0] = r2->size[0];
-  mm->size[1] = r2->size[1];
-  emxEnsureCapacity_real_T(sp, mm, i, &jr_emlrtRTEI);
-  loop_ub = r2->size[0] * r2->size[1];
-  emxFree_real_T(&b_mm);
+  mm->size[0] = x->size[0];
+  mm->size[1] = x->size[1];
+  emxEnsureCapacity_real_T(sp, mm, i, &is_emlrtRTEI);
+  loop_ub = x->size[0] * x->size[1];
   emxFree_real_T(&r1);
+  emxFree_real_T(&b_y);
   for (i = 0; i < loop_ub; i++) {
-    mm->data[i] = r2->data[i];
+    mm->data[i] = x->data[i];
   }
-  emxFree_real_T(&r2);
   z_size[0] = (*(int32_T(*)[2])r->size)[0];
   z_size[1] = (*(int32_T(*)[2])r->size)[1];
   b_iv[0] = (*(int32_T(*)[2])mm->size)[0];
@@ -760,18 +754,18 @@ void FSMbonfbound(const emlrtStack *sp, real_T n, real_T p,
   i = x->size[0] * x->size[1];
   x->size[0] = r->size[0];
   x->size[1] = r->size[1];
-  emxEnsureCapacity_real_T(sp, x, i, &kr_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, x, i, &js_emlrtRTEI);
   loop_ub = r->size[0] * r->size[1];
   for (i = 0; i < loop_ub; i++) {
     x->data[i] = r->data[i] * mm->data[i];
   }
   emxFree_real_T(&r);
-  st.site = &oab_emlrtRSI;
+  st.site = &vab_emlrtRSI;
   d_sqrt(&st, x);
   i = mm->size[0] * mm->size[1];
   mm->size[0] = x->size[0];
   mm->size[1] = x->size[1];
-  emxEnsureCapacity_real_T(sp, mm, i, &lr_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, mm, i, &ks_emlrtRTEI);
   loop_ub = x->size[0] * x->size[1];
   for (i = 0; i < loop_ub; i++) {
     mm->data[i] = x->data[i];
@@ -779,8 +773,8 @@ void FSMbonfbound(const emlrtStack *sp, real_T n, real_T p,
   emxFree_real_T(&x);
   /* MinBonf =
    * sqrt(((m-1).^2./m).*betainv(1-((1-probm)./(mm+1)),p/2,(mm-p-1)/2)); */
-  st.site = &nab_emlrtRSI;
-  b_st.site = &fbb_emlrtRSI;
+  st.site = &uab_emlrtRSI;
+  b_st.site = &mbb_emlrtRSI;
   if (m->size[0] != 0) {
     b_x = m->size[0];
   } else if ((mm->size[0] != 0) && (mm->size[1] != 0)) {
@@ -791,14 +785,14 @@ void FSMbonfbound(const emlrtStack *sp, real_T n, real_T p,
       b_x = mm->size[0];
     }
   }
-  c_st.site = &yk_emlrtRSI;
+  c_st.site = &gl_emlrtRSI;
   if ((m->size[0] != b_x) && (m->size[0] != 0)) {
-    emlrtErrorWithMessageIdR2018a(&c_st, &nb_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(&c_st, &ob_emlrtRTEI,
                                   "MATLAB:catenate:matrixDimensionMismatch",
                                   "MATLAB:catenate:matrixDimensionMismatch", 0);
   }
   if ((mm->size[0] != b_x) && ((mm->size[0] != 0) && (mm->size[1] != 0))) {
-    emlrtErrorWithMessageIdR2018a(&c_st, &nb_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(&c_st, &ob_emlrtRTEI,
                                   "MATLAB:catenate:matrixDimensionMismatch",
                                   "MATLAB:catenate:matrixDimensionMismatch", 0);
   }
@@ -816,7 +810,7 @@ void FSMbonfbound(const emlrtStack *sp, real_T n, real_T p,
   i = Bbound->size[0] * Bbound->size[1];
   Bbound->size[0] = b_x;
   Bbound->size[1] = input_sizes_idx_1 + csz_idx_1;
-  emxEnsureCapacity_real_T(sp, Bbound, i, &mr_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, Bbound, i, &ls_emlrtRTEI);
   loop_ub = input_sizes_idx_1;
   for (i = 0; i < loop_ub; i++) {
     for (i1 = 0; i1 < b_x; i1++) {

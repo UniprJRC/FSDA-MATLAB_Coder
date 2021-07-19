@@ -33,11 +33,11 @@ boolean_T infocheck(const emlrtStack *sp, int32_T info)
     }
     if (!b_p) {
       if (info == -1010) {
-        emlrtErrorWithMessageIdR2018a(sp, &rb_emlrtRTEI, "MATLAB:nomem",
+        emlrtErrorWithMessageIdR2018a(sp, &qb_emlrtRTEI, "MATLAB:nomem",
                                       "MATLAB:nomem", 0);
       } else {
         emlrtErrorWithMessageIdR2018a(
-            sp, &qb_emlrtRTEI, "Coder:toolbox:LAPACKCallErrorInfo",
+            sp, &pb_emlrtRTEI, "Coder:toolbox:LAPACKCallErrorInfo",
             "Coder:toolbox:LAPACKCallErrorInfo", 5, 4, 14, &fname[0], 12, info);
       }
     }

@@ -14,7 +14,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRSInfo jf_emlrtRSI = {
+static emlrtRSInfo if_emlrtRSI = {
     51,                /* lineNo */
     "indexShapeCheck", /* fcnName */
     "C:\\Program "
@@ -22,7 +22,7 @@ static emlrtRSInfo jf_emlrtRSI = {
     "internal\\indexShapeCheck.m" /* pathName */
 };
 
-static emlrtRSInfo kf_emlrtRSI = {
+static emlrtRSInfo jf_emlrtRSI = {
     56,                /* lineNo */
     "indexShapeCheck", /* fcnName */
     "C:\\Program "
@@ -30,7 +30,7 @@ static emlrtRSInfo kf_emlrtRSI = {
     "internal\\indexShapeCheck.m" /* pathName */
 };
 
-static emlrtRSInfo hh_emlrtRSI = {
+static emlrtRSInfo mg_emlrtRSI = {
     43,                /* lineNo */
     "indexShapeCheck", /* fcnName */
     "C:\\Program "
@@ -72,7 +72,7 @@ void b_indexShapeCheck(const emlrtStack *sp, int32_T matrixSize,
   } else {
     nonSingletonDimFound = false;
   }
-  st.site = &hh_emlrtRSI;
+  st.site = &mg_emlrtRSI;
   if (nonSingletonDimFound) {
     emlrtErrorWithMessageIdR2018a(&st, &u_emlrtRTEI,
                                   "Coder:FE:PotentialVectorVector",
@@ -85,7 +85,7 @@ void c_indexShapeCheck(const emlrtStack *sp, int32_T matrixSize)
   emlrtStack st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &hh_emlrtRSI;
+  st.site = &mg_emlrtRSI;
   if (matrixSize == 1) {
     emlrtErrorWithMessageIdR2018a(&st, &u_emlrtRTEI,
                                   "Coder:FE:PotentialVectorVector",
@@ -114,7 +114,7 @@ void indexShapeCheck(const emlrtStack *sp, const int32_T matrixSize[2],
     } else {
       nonSingletonDimFound = false;
     }
-    st.site = &jf_emlrtRSI;
+    st.site = &if_emlrtRSI;
     if (nonSingletonDimFound) {
       emlrtErrorWithMessageIdR2018a(
           &st, &u_emlrtRTEI, "Coder:FE:PotentialMatrixMatrix_MM_Logical1",
@@ -135,7 +135,7 @@ void indexShapeCheck(const emlrtStack *sp, const int32_T matrixSize[2],
       } else {
         nonSingletonDimFound = false;
       }
-      st.site = &kf_emlrtRSI;
+      st.site = &jf_emlrtRSI;
       if (nonSingletonDimFound) {
         emlrtErrorWithMessageIdR2018a(
             &st, &u_emlrtRTEI, "Coder:FE:PotentialMatrixMatrix_MM_Logical2",

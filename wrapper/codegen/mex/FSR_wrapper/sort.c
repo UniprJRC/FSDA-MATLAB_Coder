@@ -20,7 +20,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo kl_emlrtRSI = {
+static emlrtRSInfo rl_emlrtRSI = {
     76,     /* lineNo */
     "sort", /* fcnName */
     "C:\\Program "
@@ -28,7 +28,7 @@ static emlrtRSInfo kl_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRSInfo ll_emlrtRSI = {
+static emlrtRSInfo sl_emlrtRSI = {
     79,     /* lineNo */
     "sort", /* fcnName */
     "C:\\Program "
@@ -36,7 +36,7 @@ static emlrtRSInfo ll_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRSInfo ml_emlrtRSI = {
+static emlrtRSInfo tl_emlrtRSI = {
     81,     /* lineNo */
     "sort", /* fcnName */
     "C:\\Program "
@@ -44,7 +44,7 @@ static emlrtRSInfo ml_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRSInfo nl_emlrtRSI = {
+static emlrtRSInfo ul_emlrtRSI = {
     84,     /* lineNo */
     "sort", /* fcnName */
     "C:\\Program "
@@ -52,7 +52,7 @@ static emlrtRSInfo nl_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRSInfo ol_emlrtRSI = {
+static emlrtRSInfo vl_emlrtRSI = {
     87,     /* lineNo */
     "sort", /* fcnName */
     "C:\\Program "
@@ -60,7 +60,7 @@ static emlrtRSInfo ol_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRSInfo pl_emlrtRSI = {
+static emlrtRSInfo wl_emlrtRSI = {
     90,     /* lineNo */
     "sort", /* fcnName */
     "C:\\Program "
@@ -68,7 +68,7 @@ static emlrtRSInfo pl_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRTEInfo phb_emlrtRTEI = {
+static emlrtRTEInfo njb_emlrtRTEI = {
     56,     /* lineNo */
     24,     /* colNo */
     "sort", /* fName */
@@ -77,7 +77,7 @@ static emlrtRTEInfo phb_emlrtRTEI = {
                                                                            */
 };
 
-static emlrtRTEInfo qhb_emlrtRTEI = {
+static emlrtRTEInfo ojb_emlrtRTEI = {
     75,     /* lineNo */
     26,     /* colNo */
     "sort", /* fName */
@@ -86,7 +86,7 @@ static emlrtRTEInfo qhb_emlrtRTEI = {
                                                                            */
 };
 
-static emlrtRTEInfo rhb_emlrtRTEI = {
+static emlrtRTEInfo pjb_emlrtRTEI = {
     56,     /* lineNo */
     1,      /* colNo */
     "sort", /* fName */
@@ -95,7 +95,7 @@ static emlrtRTEInfo rhb_emlrtRTEI = {
                                                                            */
 };
 
-static emlrtRTEInfo shb_emlrtRTEI = {
+static emlrtRTEInfo qjb_emlrtRTEI = {
     1,      /* lineNo */
     20,     /* colNo */
     "sort", /* fName */
@@ -181,7 +181,7 @@ void c_sort(const emlrtStack *sp, emxArray_real_T *x)
 {
   emlrtStack b_st;
   emlrtStack st;
-  emxArray_int32_T *dqb_emlrtRSI;
+  emxArray_int32_T *xqb_emlrtRSI;
   emxArray_real_T *vwork;
   int32_T dim;
   int32_T i;
@@ -197,7 +197,7 @@ void c_sort(const emlrtStack *sp, emxArray_real_T *x)
   if (x->size[0] != 1) {
     dim = -1;
   }
-  emxInit_real_T(sp, &vwork, 1, &rhb_emlrtRTEI, true);
+  emxInit_real_T(sp, &vwork, 1, &pjb_emlrtRTEI, true);
   if (dim + 2 <= 1) {
     i = x->size[0];
   } else {
@@ -206,36 +206,36 @@ void c_sort(const emlrtStack *sp, emxArray_real_T *x)
   vlen = i - 1;
   vstride = vwork->size[0];
   vwork->size[0] = i;
-  emxEnsureCapacity_real_T(sp, vwork, vstride, &phb_emlrtRTEI);
-  st.site = &kl_emlrtRSI;
+  emxEnsureCapacity_real_T(sp, vwork, vstride, &njb_emlrtRTEI);
+  st.site = &rl_emlrtRSI;
   vstride = 1;
   for (k = 0; k <= dim; k++) {
     vstride *= x->size[0];
   }
-  st.site = &ll_emlrtRSI;
-  st.site = &ml_emlrtRSI;
+  st.site = &sl_emlrtRSI;
+  st.site = &tl_emlrtRSI;
   if ((1 <= vstride) && (vstride > 2147483646)) {
-    b_st.site = &ab_emlrtRSI;
+    b_st.site = &hb_emlrtRSI;
     check_forloop_overflow_error(&b_st);
   }
-  emxInit_int32_T(sp, &dqb_emlrtRSI, 1, &shb_emlrtRTEI, true);
+  emxInit_int32_T(sp, &xqb_emlrtRSI, 1, &qjb_emlrtRTEI, true);
   for (dim = 0; dim < vstride; dim++) {
-    st.site = &nl_emlrtRSI;
+    st.site = &ul_emlrtRSI;
     if ((1 <= i) && (i > 2147483646)) {
-      b_st.site = &ab_emlrtRSI;
+      b_st.site = &hb_emlrtRSI;
       check_forloop_overflow_error(&b_st);
     }
     for (k = 0; k <= vlen; k++) {
       vwork->data[k] = x->data[dim + k * vstride];
     }
-    st.site = &ol_emlrtRSI;
-    b_sortIdx(&st, vwork, dqb_emlrtRSI);
-    st.site = &pl_emlrtRSI;
+    st.site = &vl_emlrtRSI;
+    b_sortIdx(&st, vwork, xqb_emlrtRSI);
+    st.site = &wl_emlrtRSI;
     for (k = 0; k <= vlen; k++) {
       x->data[dim + k * vstride] = vwork->data[k];
     }
   }
-  emxFree_int32_T(&dqb_emlrtRSI);
+  emxFree_int32_T(&xqb_emlrtRSI);
   emxFree_real_T(&vwork);
   emlrtHeapReferenceStackLeaveFcnR2012b((emlrtCTX)sp);
 }
@@ -261,7 +261,7 @@ void sort(const emlrtStack *sp, emxArray_real_T *x, emxArray_int32_T *idx)
   if (x->size[0] != 1) {
     dim = -1;
   }
-  emxInit_real_T(sp, &vwork, 1, &rhb_emlrtRTEI, true);
+  emxInit_real_T(sp, &vwork, 1, &pjb_emlrtRTEI, true);
   if (dim + 2 <= 1) {
     i = x->size[0];
   } else {
@@ -270,34 +270,34 @@ void sort(const emlrtStack *sp, emxArray_real_T *x, emxArray_int32_T *idx)
   vlen = i - 1;
   i1 = vwork->size[0];
   vwork->size[0] = i;
-  emxEnsureCapacity_real_T(sp, vwork, i1, &phb_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, vwork, i1, &njb_emlrtRTEI);
   i1 = idx->size[0];
   idx->size[0] = x->size[0];
-  emxEnsureCapacity_int32_T(sp, idx, i1, &qhb_emlrtRTEI);
-  st.site = &kl_emlrtRSI;
+  emxEnsureCapacity_int32_T(sp, idx, i1, &ojb_emlrtRTEI);
+  st.site = &rl_emlrtRSI;
   vstride = 1;
   for (k = 0; k <= dim; k++) {
     vstride *= x->size[0];
   }
-  st.site = &ll_emlrtRSI;
-  st.site = &ml_emlrtRSI;
+  st.site = &sl_emlrtRSI;
+  st.site = &tl_emlrtRSI;
   if ((1 <= vstride) && (vstride > 2147483646)) {
-    b_st.site = &ab_emlrtRSI;
+    b_st.site = &hb_emlrtRSI;
     check_forloop_overflow_error(&b_st);
   }
-  emxInit_int32_T(sp, &iidx, 1, &shb_emlrtRTEI, true);
+  emxInit_int32_T(sp, &iidx, 1, &qjb_emlrtRTEI, true);
   for (dim = 0; dim < vstride; dim++) {
-    st.site = &nl_emlrtRSI;
+    st.site = &ul_emlrtRSI;
     if ((1 <= i) && (i > 2147483646)) {
-      b_st.site = &ab_emlrtRSI;
+      b_st.site = &hb_emlrtRSI;
       check_forloop_overflow_error(&b_st);
     }
     for (k = 0; k <= vlen; k++) {
       vwork->data[k] = x->data[dim + k * vstride];
     }
-    st.site = &ol_emlrtRSI;
+    st.site = &vl_emlrtRSI;
     b_sortIdx(&st, vwork, iidx);
-    st.site = &pl_emlrtRSI;
+    st.site = &wl_emlrtRSI;
     for (k = 0; k <= vlen; k++) {
       i1 = dim + k * vstride;
       x->data[i1] = vwork->data[k];

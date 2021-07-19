@@ -17,7 +17,7 @@
 #include <stdio.h>
 
 /* Variable Definitions */
-static emlrtRSInfo rc_emlrtRSI = {
+static emlrtRSInfo qc_emlrtRSI = {
     94,        /* lineNo */
     "int2str", /* fcnName */
     "C:\\Program "
@@ -25,7 +25,7 @@ static emlrtRSInfo rc_emlrtRSI = {
                                                                            */
 };
 
-static emlrtRSInfo sc_emlrtRSI = {
+static emlrtRSInfo rc_emlrtRSI = {
     54,        /* lineNo */
     "int2str", /* fcnName */
     "C:\\Program "
@@ -42,7 +42,7 @@ static emlrtMCInfo f_emlrtMCI = {
     "internal\\printNumToBuffer.m" /* pName */
 };
 
-static emlrtRSInfo lu_emlrtRSI = {
+static emlrtRSInfo ku_emlrtRSI = {
     26,                 /* lineNo */
     "printNumToBuffer", /* fcnName */
     "C:\\Program "
@@ -138,8 +138,8 @@ void int2str(const emlrtStack *sp, real_T xin, char_T s_data[],
     s_data[1] = 'a';
     s_data[2] = 'N';
   } else {
-    st.site = &sc_emlrtRSI;
     st.site = &rc_emlrtRSI;
+    st.site = &qc_emlrtRSI;
     y = NULL;
     m = emlrtCreateCharArray(2, &iv[0]);
     emlrtInitCharArrayR2013a(&st, 7, m, &u[0]);
@@ -151,7 +151,7 @@ void int2str(const emlrtStack *sp, real_T xin, char_T s_data[],
     c_y = NULL;
     m = emlrtCreateDoubleScalar(x);
     emlrtAssign(&c_y, m);
-    b_st.site = &lu_emlrtRSI;
+    b_st.site = &ku_emlrtRSI;
     emlrt_marshallIn(&b_st, feval(&b_st, y, b_y, c_y, &f_emlrtMCI),
                      "<output of feval>", s_data, s_size);
   }

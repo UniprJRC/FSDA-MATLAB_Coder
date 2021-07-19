@@ -63,7 +63,7 @@ real_T nanmedian(const emlrtStack *sp, const emxArray_real_T *x)
   d_st.prev = &c_st;
   d_st.tls = c_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  emxInit_int32_T(sp, &idx, 1, &ru_emlrtRTEI, true);
+  emxInit_int32_T(sp, &idx, 1, &qu_emlrtRTEI, true);
   st.site = &ay_emlrtRSI;
   b_st.site = &by_emlrtRSI;
   c_st.site = &cy_emlrtRSI;

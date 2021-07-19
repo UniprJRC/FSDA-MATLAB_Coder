@@ -31,6 +31,23 @@ void c_repmat(const emlrtStack *sp, const real_T a_data[],
 
 void d_repmat(const emlrtStack *sp, real_T varargin_1, emxArray_real_T *b);
 
+void e_repmat(const emlrtStack *sp, const emxArray_real_T *a,
+              emxArray_real_T *b);
+
+void f_repmat(const emlrtStack *sp, real_T varargin_1, emxArray_real_T *b);
+
+void g_repmat(const emlrtStack *sp, const emxArray_real_T *a,
+              emxArray_real_T *b);
+
+void h_repmat(const emlrtStack *sp, real_T varargin_1, emxArray_real_T *b);
+
+void i_repmat(const emlrtStack *sp, const emxArray_real_T *a,
+              emxArray_real_T *b);
+
+void j_repmat(const emlrtStack *sp, real_T varargin_1, emxArray_real_T *b);
+
+void k_repmat(const emlrtStack *sp, real_T varargin_1, emxArray_real_T *b);
+
 void repmat(const emlrtStack *sp, ptrdiff_t a, int32_T varargin_1,
             emxArray_ptrdiff_t *b);
 

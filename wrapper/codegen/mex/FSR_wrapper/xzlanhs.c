@@ -17,7 +17,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo rs_emlrtRSI = {
+static emlrtRSInfo ys_emlrtRSI = {
     21,        /* lineNo */
     "xzlanhs", /* fcnName */
     "C:\\Program "
@@ -25,7 +25,7 @@ static emlrtRSInfo rs_emlrtRSI = {
     "reflapack\\xzlanhs.m" /* pathName */
 };
 
-static emlrtRSInfo ss_emlrtRSI = {
+static emlrtRSInfo at_emlrtRSI = {
     26,        /* lineNo */
     "xzlanhs", /* fcnName */
     "C:\\Program "
@@ -33,7 +33,7 @@ static emlrtRSInfo ss_emlrtRSI = {
     "reflapack\\xzlanhs.m" /* pathName */
 };
 
-static emlrtRSInfo ts_emlrtRSI = {
+static emlrtRSInfo bt_emlrtRSI = {
     47,        /* lineNo */
     "xzlanhs", /* fcnName */
     "C:\\Program "
@@ -41,7 +41,7 @@ static emlrtRSInfo ts_emlrtRSI = {
     "reflapack\\xzlanhs.m" /* pathName */
 };
 
-static emlrtRSInfo us_emlrtRSI = {
+static emlrtRSInfo ct_emlrtRSI = {
     49,        /* lineNo */
     "xzlanhs", /* fcnName */
     "C:\\Program "
@@ -49,7 +49,7 @@ static emlrtRSInfo us_emlrtRSI = {
     "reflapack\\xzlanhs.m" /* pathName */
 };
 
-static emlrtRSInfo vs_emlrtRSI = {
+static emlrtRSInfo dt_emlrtRSI = {
     53,        /* lineNo */
     "xzlanhs", /* fcnName */
     "C:\\Program "
@@ -85,9 +85,9 @@ real_T xzlanhs(const emlrtStack *sp, const creal_T A[4], int32_T ilo,
     scale = 3.3121686421112381E-170;
     ssq = 0.0;
     nm1 = ihi - ilo;
-    st.site = &rs_emlrtRSI;
+    st.site = &ys_emlrtRSI;
     if ((1 <= nm1 + 1) && (nm1 + 1 > 2147483646)) {
-      b_st.site = &ab_emlrtRSI;
+      b_st.site = &hb_emlrtRSI;
       check_forloop_overflow_error(&b_st);
     }
     for (j = 0; j <= nm1; j++) {
@@ -95,9 +95,9 @@ real_T xzlanhs(const emlrtStack *sp, const creal_T A[4], int32_T ilo,
       colssq = 0.0;
       col = (ilo + j) - 1;
       b = ilo + nm1;
-      st.site = &ss_emlrtRSI;
+      st.site = &at_emlrtRSI;
       if ((ilo <= b) && (b > 2147483646)) {
-        b_st.site = &ab_emlrtRSI;
+        b_st.site = &hb_emlrtRSI;
         check_forloop_overflow_error(&b_st);
       }
       for (row = ilo; row <= b; row++) {
@@ -122,17 +122,17 @@ real_T xzlanhs(const emlrtStack *sp, const creal_T A[4], int32_T ilo,
         }
       }
       if (scale >= colscale) {
-        st.site = &ts_emlrtRSI;
+        st.site = &bt_emlrtRSI;
         absxk = colscale / scale;
         ssq += absxk * absxk * colssq;
       } else {
-        st.site = &us_emlrtRSI;
+        st.site = &ct_emlrtRSI;
         absxk = scale / colscale;
         ssq = colssq + absxk * absxk * ssq;
         scale = colscale;
       }
     }
-    st.site = &vs_emlrtRSI;
+    st.site = &dt_emlrtRSI;
     f = scale * muDoubleScalarSqrt(ssq);
   }
   return f;

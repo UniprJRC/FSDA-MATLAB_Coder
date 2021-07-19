@@ -28,127 +28,127 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo ue_emlrtRSI = {
+static emlrtRSInfo cf_emlrtRSI = {
     349,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo ve_emlrtRSI = {
+static emlrtRSInfo df_emlrtRSI = {
     361,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo we_emlrtRSI = {
+static emlrtRSInfo ef_emlrtRSI = {
     431,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo xe_emlrtRSI = {
+static emlrtRSInfo ff_emlrtRSI = {
     435,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo ye_emlrtRSI = {
+static emlrtRSInfo gf_emlrtRSI = {
     455,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo af_emlrtRSI = {
+static emlrtRSInfo hf_emlrtRSI = {
     457,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo bf_emlrtRSI = {
+static emlrtRSInfo if_emlrtRSI = {
     460,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo cf_emlrtRSI = {
+static emlrtRSInfo jf_emlrtRSI = {
     92,                                                   /* lineNo */
     "combsFS",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pathName */
 };
 
-static emlrtRSInfo df_emlrtRSI = {
+static emlrtRSInfo kf_emlrtRSI = {
     103,                                                  /* lineNo */
     "combsFS",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pathName */
 };
 
-static emlrtRSInfo ef_emlrtRSI = {
+static emlrtRSInfo lf_emlrtRSI = {
     109,                                                  /* lineNo */
     "combsFS",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pathName */
 };
 
-static emlrtRSInfo ff_emlrtRSI = {
+static emlrtRSInfo mf_emlrtRSI = {
     123,                                                  /* lineNo */
     "combsFS",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pathName */
 };
 
-static emlrtRSInfo hf_emlrtRSI = {
+static emlrtRSInfo of_emlrtRSI = {
     168,                                                       /* lineNo */
     "randsampleFS",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\randsampleFS.m" /* pathName */
 };
 
-static emlrtRSInfo rf_emlrtRSI = {
+static emlrtRSInfo yf_emlrtRSI = {
     341,                                                    /* lineNo */
     "lexunrank",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\lexunrank.m" /* pathName */
 };
 
-static emlrtMCInfo g_emlrtMCI = {
+static emlrtMCInfo i_emlrtMCI = {
     304,                                                  /* lineNo */
     9,                                                    /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtMCInfo h_emlrtMCI = {
+static emlrtMCInfo j_emlrtMCI = {
     306,                                                  /* lineNo */
     5,                                                    /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtMCInfo i_emlrtMCI = {
+static emlrtMCInfo k_emlrtMCI = {
     369,                                                  /* lineNo */
     9,                                                    /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtMCInfo j_emlrtMCI = {
+static emlrtMCInfo l_emlrtMCI = {
     370,                                                  /* lineNo */
     9,                                                    /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtMCInfo k_emlrtMCI = {
+static emlrtMCInfo m_emlrtMCI = {
     339,                                                  /* lineNo */
     17,                                                   /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtMCInfo l_emlrtMCI = {
+static emlrtMCInfo n_emlrtMCI = {
     341,                                                  /* lineNo */
     13,                                                   /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtBCInfo p_emlrtBCI = {
+static emlrtBCInfo w_emlrtBCI = {
     -1,                                                      /* iFirst */
     -1,                                                      /* iLast */
     341,                                                     /* lineNo */
@@ -159,7 +159,7 @@ static emlrtBCInfo p_emlrtBCI = {
     0                                                        /* checkKind */
 };
 
-static emlrtBCInfo q_emlrtBCI = {
+static emlrtBCInfo x_emlrtBCI = {
     -1,                                                      /* iFirst */
     -1,                                                      /* iLast */
     341,                                                     /* lineNo */
@@ -170,7 +170,7 @@ static emlrtBCInfo q_emlrtBCI = {
     0                                                        /* checkKind */
 };
 
-static emlrtBCInfo r_emlrtBCI = {
+static emlrtBCInfo y_emlrtBCI = {
     -1,                                                      /* iFirst */
     -1,                                                      /* iLast */
     341,                                                     /* lineNo */
@@ -181,14 +181,14 @@ static emlrtBCInfo r_emlrtBCI = {
     0                                                        /* checkKind */
 };
 
-static emlrtRTEInfo v_emlrtRTEI = {
+static emlrtRTEInfo w_emlrtRTEI = {
     338,                                                    /* lineNo */
     14,                                                     /* colNo */
     "lexunrank",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\lexunrank.m" /* pName */
 };
 
-static emlrtBCInfo s_emlrtBCI = {
+static emlrtBCInfo ab_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     119,                                                   /* lineNo */
@@ -199,7 +199,7 @@ static emlrtBCInfo s_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtBCInfo t_emlrtBCI = {
+static emlrtBCInfo bb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     119,                                                   /* lineNo */
@@ -210,7 +210,7 @@ static emlrtBCInfo t_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtDCInfo g_emlrtDCI = {
+static emlrtDCInfo m_emlrtDCI = {
     119,                                                   /* lineNo */
     23,                                                    /* colNo */
     "combsFS",                                             /* fName */
@@ -218,7 +218,7 @@ static emlrtDCInfo g_emlrtDCI = {
     1                                                      /* checkKind */
 };
 
-static emlrtBCInfo u_emlrtBCI = {
+static emlrtBCInfo cb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     119,                                                   /* lineNo */
@@ -229,7 +229,7 @@ static emlrtBCInfo u_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtDCInfo h_emlrtDCI = {
+static emlrtDCInfo n_emlrtDCI = {
     119,                                                   /* lineNo */
     15,                                                    /* colNo */
     "combsFS",                                             /* fName */
@@ -245,7 +245,7 @@ static emlrtECInfo d_emlrtECI = {
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pName */
 };
 
-static emlrtBCInfo v_emlrtBCI = {
+static emlrtBCInfo db_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     118,                                                   /* lineNo */
@@ -256,7 +256,7 @@ static emlrtBCInfo v_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtBCInfo w_emlrtBCI = {
+static emlrtBCInfo eb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     118,                                                   /* lineNo */
@@ -267,7 +267,7 @@ static emlrtBCInfo w_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtBCInfo x_emlrtBCI = {
+static emlrtBCInfo fb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     118,                                                   /* lineNo */
@@ -278,7 +278,7 @@ static emlrtBCInfo x_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtDCInfo i_emlrtDCI = {
+static emlrtDCInfo o_emlrtDCI = {
     118,                                                   /* lineNo */
     23,                                                    /* colNo */
     "combsFS",                                             /* fName */
@@ -286,7 +286,7 @@ static emlrtDCInfo i_emlrtDCI = {
     1                                                      /* checkKind */
 };
 
-static emlrtBCInfo y_emlrtBCI = {
+static emlrtBCInfo gb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     118,                                                   /* lineNo */
@@ -297,7 +297,7 @@ static emlrtBCInfo y_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtDCInfo j_emlrtDCI = {
+static emlrtDCInfo p_emlrtDCI = {
     118,                                                   /* lineNo */
     15,                                                    /* colNo */
     "combsFS",                                             /* fName */
@@ -305,7 +305,7 @@ static emlrtDCInfo j_emlrtDCI = {
     1                                                      /* checkKind */
 };
 
-static emlrtBCInfo ab_emlrtBCI = {
+static emlrtBCInfo hb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     118,                                                   /* lineNo */
@@ -316,7 +316,7 @@ static emlrtBCInfo ab_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtBCInfo bb_emlrtBCI = {
+static emlrtBCInfo ib_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     118,                                                   /* lineNo */
@@ -327,7 +327,7 @@ static emlrtBCInfo bb_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtBCInfo cb_emlrtBCI = {
+static emlrtBCInfo jb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     118,                                                   /* lineNo */
@@ -338,7 +338,7 @@ static emlrtBCInfo cb_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtDCInfo k_emlrtDCI = {
+static emlrtDCInfo q_emlrtDCI = {
     118,                                                   /* lineNo */
     50,                                                    /* colNo */
     "combsFS",                                             /* fName */
@@ -346,7 +346,7 @@ static emlrtDCInfo k_emlrtDCI = {
     1                                                      /* checkKind */
 };
 
-static emlrtBCInfo db_emlrtBCI = {
+static emlrtBCInfo kb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     118,                                                   /* lineNo */
@@ -357,7 +357,7 @@ static emlrtBCInfo db_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtDCInfo l_emlrtDCI = {
+static emlrtDCInfo r_emlrtDCI = {
     118,                                                   /* lineNo */
     42,                                                    /* colNo */
     "combsFS",                                             /* fName */
@@ -365,7 +365,7 @@ static emlrtDCInfo l_emlrtDCI = {
     1                                                      /* checkKind */
 };
 
-static emlrtBCInfo eb_emlrtBCI = {
+static emlrtBCInfo lb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     113,                                                   /* lineNo */
@@ -376,7 +376,7 @@ static emlrtBCInfo eb_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtBCInfo fb_emlrtBCI = {
+static emlrtBCInfo mb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     113,                                                   /* lineNo */
@@ -387,7 +387,7 @@ static emlrtBCInfo fb_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtDCInfo m_emlrtDCI = {
+static emlrtDCInfo s_emlrtDCI = {
     113,                                                   /* lineNo */
     13,                                                    /* colNo */
     "combsFS",                                             /* fName */
@@ -395,7 +395,7 @@ static emlrtDCInfo m_emlrtDCI = {
     1                                                      /* checkKind */
 };
 
-static emlrtBCInfo gb_emlrtBCI = {
+static emlrtBCInfo nb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     113,                                                   /* lineNo */
@@ -414,7 +414,7 @@ static emlrtECInfo e_emlrtECI = {
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pName */
 };
 
-static emlrtBCInfo hb_emlrtBCI = {
+static emlrtBCInfo ob_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     109,                                                   /* lineNo */
@@ -425,7 +425,7 @@ static emlrtBCInfo hb_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtBCInfo ib_emlrtBCI = {
+static emlrtBCInfo pb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     109,                                                   /* lineNo */
@@ -436,7 +436,7 @@ static emlrtBCInfo ib_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtBCInfo jb_emlrtBCI = {
+static emlrtBCInfo qb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     109,                                                   /* lineNo */
@@ -447,14 +447,14 @@ static emlrtBCInfo jb_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtRTEInfo w_emlrtRTEI = {
+static emlrtRTEInfo x_emlrtRTEI = {
     114,                                                  /* lineNo */
     17,                                                   /* colNo */
     "combsFS",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pName */
 };
 
-static emlrtRTEInfo x_emlrtRTEI = {
+static emlrtRTEInfo y_emlrtRTEI = {
     110,                                                  /* lineNo */
     13,                                                   /* colNo */
     "combsFS",                                            /* fName */
@@ -469,7 +469,7 @@ static emlrtECInfo f_emlrtECI = {
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtBCInfo kb_emlrtBCI = {
+static emlrtBCInfo rb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     462,                                                   /* lineNo */
@@ -480,14 +480,14 @@ static emlrtBCInfo kb_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtRTEInfo y_emlrtRTEI = {
+static emlrtRTEInfo ab_emlrtRTEI = {
     451,                                                  /* lineNo */
     15,                                                   /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtDCInfo n_emlrtDCI = {
+static emlrtDCInfo t_emlrtDCI = {
     105,                                                   /* lineNo */
     15,                                                    /* colNo */
     "combsFS",                                             /* fName */
@@ -495,7 +495,7 @@ static emlrtDCInfo n_emlrtDCI = {
     1                                                      /* checkKind */
 };
 
-static emlrtDCInfo o_emlrtDCI = {
+static emlrtDCInfo u_emlrtDCI = {
     105,                                                   /* lineNo */
     15,                                                    /* colNo */
     "combsFS",                                             /* fName */
@@ -503,7 +503,7 @@ static emlrtDCInfo o_emlrtDCI = {
     4                                                      /* checkKind */
 };
 
-static emlrtDCInfo p_emlrtDCI = {
+static emlrtDCInfo v_emlrtDCI = {
     449,                                                   /* lineNo */
     17,                                                    /* colNo */
     "subsets",                                             /* fName */
@@ -511,7 +511,7 @@ static emlrtDCInfo p_emlrtDCI = {
     1                                                      /* checkKind */
 };
 
-static emlrtDCInfo q_emlrtDCI = {
+static emlrtDCInfo w_emlrtDCI = {
     449,                                                   /* lineNo */
     17,                                                    /* colNo */
     "subsets",                                             /* fName */
@@ -519,7 +519,7 @@ static emlrtDCInfo q_emlrtDCI = {
     4                                                      /* checkKind */
 };
 
-static emlrtBCInfo lb_emlrtBCI = {
+static emlrtBCInfo sb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     457,                                                   /* lineNo */
@@ -530,7 +530,7 @@ static emlrtBCInfo lb_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtBCInfo mb_emlrtBCI = {
+static emlrtBCInfo tb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     455,                                                   /* lineNo */
@@ -541,7 +541,7 @@ static emlrtBCInfo mb_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtDCInfo r_emlrtDCI = {
+static emlrtDCInfo x_emlrtDCI = {
     349,                                                   /* lineNo */
     5,                                                     /* colNo */
     "subsets",                                             /* fName */
@@ -549,7 +549,7 @@ static emlrtDCInfo r_emlrtDCI = {
     1                                                      /* checkKind */
 };
 
-static emlrtBCInfo nb_emlrtBCI = {
+static emlrtBCInfo ub_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     123,                                                   /* lineNo */
@@ -560,7 +560,7 @@ static emlrtBCInfo nb_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtDCInfo s_emlrtDCI = {
+static emlrtDCInfo y_emlrtDCI = {
     123,                                                   /* lineNo */
     32,                                                    /* colNo */
     "combsFS",                                             /* fName */
@@ -568,7 +568,7 @@ static emlrtDCInfo s_emlrtDCI = {
     1                                                      /* checkKind */
 };
 
-static emlrtBCInfo ob_emlrtBCI = {
+static emlrtBCInfo vb_emlrtBCI = {
     -1,                                                    /* iFirst */
     -1,                                                    /* iLast */
     363,                                                   /* lineNo */
@@ -579,7 +579,7 @@ static emlrtBCInfo ob_emlrtBCI = {
     0                                                      /* checkKind */
 };
 
-static emlrtDCInfo t_emlrtDCI = {
+static emlrtDCInfo ab_emlrtDCI = {
     363,                                                   /* lineNo */
     15,                                                    /* colNo */
     "subsets",                                             /* fName */
@@ -587,7 +587,7 @@ static emlrtDCInfo t_emlrtDCI = {
     1                                                      /* checkKind */
 };
 
-static emlrtBCInfo pb_emlrtBCI = {
+static emlrtBCInfo wb_emlrtBCI = {
     -1,                                                      /* iFirst */
     -1,                                                      /* iLast */
     353,                                                     /* lineNo */
@@ -598,7 +598,7 @@ static emlrtBCInfo pb_emlrtBCI = {
     0                                                        /* checkKind */
 };
 
-static emlrtBCInfo qb_emlrtBCI = {
+static emlrtBCInfo xb_emlrtBCI = {
     -1,                                                      /* iFirst */
     -1,                                                      /* iLast */
     356,                                                     /* lineNo */
@@ -609,149 +609,149 @@ static emlrtBCInfo qb_emlrtBCI = {
     0                                                        /* checkKind */
 };
 
-static emlrtRTEInfo tf_emlrtRTEI = {
+static emlrtRTEInfo sg_emlrtRTEI = {
     293,                                                  /* lineNo */
     1,                                                    /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRTEInfo uf_emlrtRTEI = {
+static emlrtRTEInfo tg_emlrtRTEI = {
     442,                                                  /* lineNo */
     13,                                                   /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRTEInfo vf_emlrtRTEI = {
+static emlrtRTEInfo ug_emlrtRTEI = {
     443,                                                  /* lineNo */
     13,                                                   /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRTEInfo wf_emlrtRTEI = {
+static emlrtRTEInfo vg_emlrtRTEI = {
     449,                                                  /* lineNo */
     11,                                                   /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRTEInfo xf_emlrtRTEI = {
+static emlrtRTEInfo wg_emlrtRTEI = {
     69,                                                   /* lineNo */
     5,                                                    /* colNo */
     "combsFS",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pName */
 };
 
-static emlrtRTEInfo yf_emlrtRTEI = {
+static emlrtRTEInfo xg_emlrtRTEI = {
     69,                                                   /* lineNo */
     1,                                                    /* colNo */
     "combsFS",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pName */
 };
 
-static emlrtRTEInfo ag_emlrtRTEI = {
+static emlrtRTEInfo yg_emlrtRTEI = {
     96,                                                   /* lineNo */
     9,                                                    /* colNo */
     "combsFS",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pName */
 };
 
-static emlrtRTEInfo bg_emlrtRTEI = {
+static emlrtRTEInfo ah_emlrtRTEI = {
     349,                                                  /* lineNo */
     5,                                                    /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRTEInfo cg_emlrtRTEI = {
+static emlrtRTEInfo bh_emlrtRTEI = {
     109,                                                  /* lineNo */
     22,                                                   /* colNo */
     "combsFS",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pName */
 };
 
-static emlrtRTEInfo dg_emlrtRTEI = {
+static emlrtRTEInfo ch_emlrtRTEI = {
     439,                                                  /* lineNo */
     17,                                                   /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRTEInfo eg_emlrtRTEI = {
+static emlrtRTEInfo dh_emlrtRTEI = {
     118,                                                  /* lineNo */
     40,                                                   /* colNo */
     "combsFS",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pName */
 };
 
-static emlrtRTEInfo fg_emlrtRTEI = {
+static emlrtRTEInfo eh_emlrtRTEI = {
     363,                                                  /* lineNo */
     13,                                                   /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRTEInfo gg_emlrtRTEI = {
+static emlrtRTEInfo fh_emlrtRTEI = {
     363,                                                  /* lineNo */
     9,                                                    /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRTEInfo hg_emlrtRTEI = {
+static emlrtRTEInfo gh_emlrtRTEI = {
     455,                                                  /* lineNo */
     21,                                                   /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRTEInfo ig_emlrtRTEI = {
+static emlrtRTEInfo hh_emlrtRTEI = {
     394,                                                  /* lineNo */
     21,                                                   /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRTEInfo jg_emlrtRTEI = {
+static emlrtRTEInfo ih_emlrtRTEI = {
     414,                                                  /* lineNo */
     21,                                                   /* colNo */
     "subsets",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRSInfo qnb_emlrtRSI = {
+static emlrtRSInfo gob_emlrtRSI = {
     339,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo rnb_emlrtRSI = {
+static emlrtRSInfo hob_emlrtRSI = {
     341,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo snb_emlrtRSI = {
+static emlrtRSInfo iob_emlrtRSI = {
     370,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo opb_emlrtRSI = {
+static emlrtRSInfo kqb_emlrtRSI = {
     369,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo ppb_emlrtRSI = {
+static emlrtRSInfo lqb_emlrtRSI = {
     306,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo qpb_emlrtRSI = {
+static emlrtRSInfo mqb_emlrtRSI = {
     304,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
@@ -760,9 +760,6 @@ static emlrtRSInfo qpb_emlrtRSI = {
 /* Function Declarations */
 static const mxArray *n_emlrt_marshallOut(const emlrtStack *sp,
                                           const char_T u[60]);
-
-static const mxArray *p_emlrt_marshallOut(const emlrtStack *sp,
-                                          const char_T u[39]);
 
 /* Function Definitions */
 static const mxArray *n_emlrt_marshallOut(const emlrtStack *sp,
@@ -774,19 +771,6 @@ static const mxArray *n_emlrt_marshallOut(const emlrtStack *sp,
   y = NULL;
   m = emlrtCreateCharArray(2, &b_iv[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 60, m, &u[0]);
-  emlrtAssign(&y, m);
-  return y;
-}
-
-static const mxArray *p_emlrt_marshallOut(const emlrtStack *sp,
-                                          const char_T u[39])
-{
-  static const int32_T b_iv[2] = {1, 39};
-  const mxArray *m;
-  const mxArray *y;
-  y = NULL;
-  m = emlrtCreateCharArray(2, &b_iv[0]);
-  emlrtInitCharArrayR2013a((emlrtCTX)sp, 39, m, &u[0]);
   emlrtAssign(&y, m);
   return y;
 }
@@ -1193,12 +1177,12 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
   /* } */
   /*  Beginning of code */
   /*  We cache the MATLAB memory information for better performance. */
-  emxInit_real_T(sp, &seq, 2, &tf_emlrtRTEI, true);
+  emxInit_real_T(sp, &seq, 2, &sg_emlrtRTEI, true);
   if (muDoubleScalarIsNaN(n)) {
     i = seq->size[0] * seq->size[1];
     seq->size[0] = 1;
     seq->size[1] = 1;
-    emxEnsureCapacity_real_T(sp, seq, i, &tf_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, seq, i, &sg_emlrtRTEI);
     seq->data[0] = rtNaN;
   } else if (n < 1.0) {
     seq->size[0] = 1;
@@ -1207,14 +1191,14 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
     i = seq->size[0] * seq->size[1];
     seq->size[0] = 1;
     seq->size[1] = 1;
-    emxEnsureCapacity_real_T(sp, seq, i, &tf_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, seq, i, &sg_emlrtRTEI);
     seq->data[0] = rtNaN;
   } else {
     i = seq->size[0] * seq->size[1];
     seq->size[0] = 1;
     loop_ub = (int32_T)muDoubleScalarFloor(n - 1.0);
     seq->size[1] = loop_ub + 1;
-    emxEnsureCapacity_real_T(sp, seq, i, &tf_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, seq, i, &sg_emlrtRTEI);
     for (i = 0; i <= loop_ub; i++) {
       seq->data[i] = (real_T)i + 1.0;
     }
@@ -1224,14 +1208,14 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
     m = emlrtCreateCharArray(2, &b_iv[0]);
     emlrtInitCharArrayR2013a((emlrtCTX)sp, 89, m, &u[0]);
     emlrtAssign(&y, m);
-    st.site = &qpb_emlrtRSI;
-    disp(&st, y, &g_emlrtMCI);
+    st.site = &mqb_emlrtRSI;
+    disp(&st, y, &i_emlrtMCI);
     b_y = NULL;
     m = emlrtCreateCharArray(2, &iv1[0]);
     emlrtInitCharArrayR2013a((emlrtCTX)sp, 25, m, &b_u[0]);
     emlrtAssign(&b_y, m);
-    st.site = &ppb_emlrtRSI;
-    disp(&st, b_y, &h_emlrtMCI);
+    st.site = &lqb_emlrtRSI;
+    disp(&st, b_y, &j_emlrtMCI);
     nsamp = 0.0;
   }
   /*  this check is used in combination of randsampleFS, for computational */
@@ -1242,23 +1226,23 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
   /*  nselected = size(C,1), number of p-subsets to be selected. */
   /*  rndsi = vector of nselected indexes, randomly chosen between 1 e ncomb. */
   /*  Constants that determine the method used to extract the p-subsets */
-  emxInit_real_T(sp, &pascalM, 2, &ig_emlrtRTEI, true);
-  emxInit_real_T(sp, &s, 2, &jg_emlrtRTEI, true);
-  emxInit_real_T(sp, &b_seq, 1, &ag_emlrtRTEI, true);
+  emxInit_real_T(sp, &pascalM, 2, &hh_emlrtRTEI, true);
+  emxInit_real_T(sp, &s, 2, &ih_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_seq, 1, &yg_emlrtRTEI, true);
   if ((nsamp == 0.0) || (ncomb <= 5.0E+7)) {
     if (nsamp == 0.0) {
       if ((ncomb > 100000.0) && msg) {
-        st.site = &qnb_emlrtRSI;
-        disp(&st, m_emlrt_marshallOut(&st, b_cv), &k_emlrtMCI);
-        st.site = &rnb_emlrtRSI;
-        disp(&st, n_emlrt_marshallOut(&st, b_cv1), &l_emlrtMCI);
+        st.site = &gob_emlrtRSI;
+        disp(&st, m_emlrt_marshallOut(&st, b_cv), &m_emlrtMCI);
+        st.site = &hob_emlrtRSI;
+        disp(&st, n_emlrt_marshallOut(&st, b_cv1), &n_emlrtMCI);
       }
       *nselected = ncomb;
     } else {
       *nselected = nsamp;
     }
     /*  If nsamp = 0 matrix C contains the indexes of all possible subsets */
-    st.site = &ue_emlrtRSI;
+    st.site = &cf_emlrtRSI;
     /* combsFS is an iterative algorithm equivalent to the MATLAB combs.m */
     /*  */
     /*  It generates m-combinations without repetition taken in lexicographic */
@@ -1328,7 +1312,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
     i = s->size[0] * s->size[1];
     s->size[0] = 1;
     s->size[1] = seq->size[1];
-    emxEnsureCapacity_real_T(&st, s, i, &xf_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, s, i, &wg_emlrtRTEI);
     loop_ub = seq->size[1];
     for (i = 0; i < loop_ub; i++) {
       s->data[i] = seq->data[i];
@@ -1336,7 +1320,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
     i = seq->size[0] * seq->size[1];
     seq->size[0] = 1;
     seq->size[1] = s->size[1];
-    emxEnsureCapacity_real_T(&st, seq, i, &yf_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, seq, i, &xg_emlrtRTEI);
     loop_ub = s->size[1];
     for (i = 0; i < loop_ub; i++) {
       seq->data[i] = s->data[i];
@@ -1345,13 +1329,13 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
     b_n = seq->size[1];
     /*  Elements of v. */
     if (p > seq->size[1]) {
-      b_st.site = &cf_emlrtRSI;
+      b_st.site = &jf_emlrtRSI;
       f_error(&b_st);
     } else if (seq->size[1] == p) {
       i = C->size[0] * C->size[1];
       C->size[0] = 1;
       C->size[1] = seq->size[1];
-      emxEnsureCapacity_real_T(&st, C, i, &bg_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, C, i, &ah_emlrtRTEI);
       loop_ub = seq->size[1];
       for (i = 0; i < loop_ub; i++) {
         C->data[i] = seq->data[i];
@@ -1359,7 +1343,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
     } else if (p == 1.0) {
       i = b_seq->size[0];
       b_seq->size[0] = seq->size[1];
-      emxEnsureCapacity_real_T(&st, b_seq, i, &ag_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, b_seq, i, &yg_emlrtRTEI);
       loop_ub = seq->size[1];
       for (i = 0; i < loop_ub; i++) {
         b_seq->data[i] = seq->data[i];
@@ -1367,7 +1351,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
       i = C->size[0] * C->size[1];
       C->size[0] = seq->size[1];
       C->size[1] = 1;
-      emxEnsureCapacity_real_T(&st, C, i, &bg_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, C, i, &ah_emlrtRTEI);
       loop_ub = seq->size[1];
       for (i = 0; i < loop_ub; i++) {
         C->data[i] = b_seq->data[i];
@@ -1379,22 +1363,22 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
       /* The binomial coefficient (n choose m) can be computed using */
       /* prod(np1-m:n)/prod(1:m). For large number of combinations */
       /* our function 'bc' is better. */
-      b_st.site = &df_emlrtRSI;
+      b_st.site = &kf_emlrtRSI;
       maxx = bc(&b_st, seq->size[1], p);
       /*  initialise the matrix of all m-combinations */
       if (!(maxx >= 0.0)) {
-        emlrtNonNegativeCheckR2012b(maxx, &o_emlrtDCI, &st);
+        emlrtNonNegativeCheckR2012b(maxx, &u_emlrtDCI, &st);
       }
       d = (int32_T)muDoubleScalarFloor(maxx);
       if (maxx != d) {
-        emlrtIntegerCheckR2012b(maxx, &n_emlrtDCI, &st);
+        emlrtIntegerCheckR2012b(maxx, &t_emlrtDCI, &st);
       }
       i = C->size[0] * C->size[1];
       C->size[0] = (int32_T)maxx;
       C->size[1] = (int32_T)p;
-      emxEnsureCapacity_real_T(&st, C, i, &bg_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, C, i, &ah_emlrtRTEI);
       if (maxx != d) {
-        emlrtIntegerCheckR2012b(maxx, &r_emlrtDCI, &st);
+        emlrtIntegerCheckR2012b(maxx, &x_emlrtDCI, &st);
       }
       loop_ub = (int32_T)maxx * (int32_T)p;
       for (i = 0; i < loop_ub; i++) {
@@ -1407,25 +1391,25 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
         i = 0;
       } else {
         if (1 > (int32_T)maxx) {
-          emlrtDynamicBoundsCheckR2012b(1, 1, (int32_T)maxx, &jb_emlrtBCI, &st);
+          emlrtDynamicBoundsCheckR2012b(1, 1, (int32_T)maxx, &qb_emlrtBCI, &st);
         }
         if (((int32_T)toRow < 1) || ((int32_T)toRow > (int32_T)maxx)) {
           emlrtDynamicBoundsCheckR2012b((int32_T)toRow, 1, (int32_T)maxx,
-                                        &ib_emlrtBCI, &st);
+                                        &pb_emlrtBCI, &st);
         }
         i = (int32_T)toRow;
       }
       if ((int32_T)p < 1) {
-        emlrtDynamicBoundsCheckR2012b((int32_T)p, 1, (int32_T)p, &hb_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b((int32_T)p, 1, (int32_T)p, &ob_emlrtBCI,
                                       &st);
       }
-      b_st.site = &ef_emlrtRSI;
-      c_st.site = &xc_emlrtRSI;
+      b_st.site = &lf_emlrtRSI;
+      c_st.site = &fd_emlrtRSI;
       if (muDoubleScalarIsNaN(p)) {
         i1 = s->size[0] * s->size[1];
         s->size[0] = 1;
         s->size[1] = 1;
-        emxEnsureCapacity_real_T(&c_st, s, i1, &fd_emlrtRTEI);
+        emxEnsureCapacity_real_T(&c_st, s, i1, &hd_emlrtRTEI);
         s->data[0] = rtNaN;
       } else if (seq->size[1] < p) {
         s->size[0] = 1;
@@ -1434,18 +1418,18 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
         i1 = s->size[0] * s->size[1];
         s->size[0] = 1;
         s->size[1] = (int32_T)((real_T)seq->size[1] - p) + 1;
-        emxEnsureCapacity_real_T(&c_st, s, i1, &fd_emlrtRTEI);
+        emxEnsureCapacity_real_T(&c_st, s, i1, &hd_emlrtRTEI);
         loop_ub = (int32_T)((real_T)seq->size[1] - p);
         for (i1 = 0; i1 <= loop_ub; i1++) {
           s->data[i1] = p + (real_T)i1;
         }
       } else {
-        d_st.site = &yc_emlrtRSI;
+        d_st.site = &gd_emlrtRSI;
         eml_float_colon(&d_st, p, seq->size[1], s);
       }
       i1 = b_seq->size[0];
       b_seq->size[0] = s->size[1];
-      emxEnsureCapacity_real_T(&st, b_seq, i1, &cg_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, b_seq, i1, &bh_emlrtRTEI);
       loop_ub = s->size[1];
       for (i1 = 0; i1 < loop_ub; i1++) {
         b_seq->data[i1] = s->data[i1];
@@ -1458,7 +1442,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
       }
       i = (int32_T)(((-1.0 - (p - 1.0)) + 1.0) / -1.0);
       emlrtForLoopVectorCheckR2021a(p - 1.0, -1.0, 1.0, mxDOUBLE_CLASS, i,
-                                    &x_emlrtRTEI, &st);
+                                    &y_emlrtRTEI, &st);
       for (b_i = 0; b_i < i; b_i++) {
         maxx = (p - 1.0) + -(real_T)b_i;
         /*  external loop over colums */
@@ -1469,20 +1453,20 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
           loop_ub = 0;
         } else {
           if (1 > C->size[0]) {
-            emlrtDynamicBoundsCheckR2012b(1, 1, C->size[0], &gb_emlrtBCI, &st);
+            emlrtDynamicBoundsCheckR2012b(1, 1, C->size[0], &nb_emlrtBCI, &st);
           }
           if (toRow != (int32_T)muDoubleScalarFloor(toRow)) {
-            emlrtIntegerCheckR2012b(toRow, &m_emlrtDCI, &st);
+            emlrtIntegerCheckR2012b(toRow, &s_emlrtDCI, &st);
           }
           if (((int32_T)toRow < 1) || ((int32_T)toRow > C->size[0])) {
             emlrtDynamicBoundsCheckR2012b((int32_T)toRow, 1, C->size[0],
-                                          &fb_emlrtBCI, &st);
+                                          &mb_emlrtBCI, &st);
           }
           loop_ub = (int32_T)toRow;
         }
         if (((int32_T)maxx < 1) || ((int32_T)maxx > C->size[1])) {
           emlrtDynamicBoundsCheckR2012b((int32_T)maxx, 1, C->size[1],
-                                        &eb_emlrtBCI, &st);
+                                        &lb_emlrtBCI, &st);
         }
         for (i1 = 0; i1 < loop_ub; i1++) {
           C->data[i1 + C->size[0] * ((int32_T)maxx - 1)] = maxx;
@@ -1490,7 +1474,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
         d = (maxx + (real_T)b_n) - p;
         i1 = (int32_T)(d + (1.0 - (maxx + 1.0)));
         emlrtForLoopVectorCheckR2021a(maxx + 1.0, 1.0, d, mxDOUBLE_CLASS, i1,
-                                      &w_emlrtRTEI, &st);
+                                      &x_emlrtRTEI, &st);
         for (j = 0; j < i1; j++) {
           b_j = (maxx + 1.0) + (real_T)j;
           /*  internal loop */
@@ -1504,19 +1488,19 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
             i3 = -1;
           } else {
             if (d != (int32_T)muDoubleScalarFloor(d)) {
-              emlrtIntegerCheckR2012b(d, &l_emlrtDCI, &st);
+              emlrtIntegerCheckR2012b(d, &r_emlrtDCI, &st);
             }
             if (((int32_T)d < 1) || ((int32_T)d > C->size[0])) {
               emlrtDynamicBoundsCheckR2012b((int32_T)d, 1, C->size[0],
-                                            &db_emlrtBCI, &st);
+                                            &kb_emlrtBCI, &st);
             }
             i2 = (int32_T)d - 2;
             if (kk != (int32_T)muDoubleScalarFloor(kk)) {
-              emlrtIntegerCheckR2012b(kk, &k_emlrtDCI, &st);
+              emlrtIntegerCheckR2012b(kk, &q_emlrtDCI, &st);
             }
             if (((int32_T)kk < 1) || ((int32_T)kk > C->size[0])) {
               emlrtDynamicBoundsCheckR2012b((int32_T)kk, 1, C->size[0],
-                                            &cb_emlrtBCI, &st);
+                                            &jb_emlrtBCI, &st);
             }
             i3 = (int32_T)kk - 1;
           }
@@ -1527,12 +1511,12 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
             if (((int32_T)(maxx + 1.0) < 1) ||
                 ((int32_T)(maxx + 1.0) > C->size[1])) {
               emlrtDynamicBoundsCheckR2012b((int32_T)(maxx + 1.0), 1,
-                                            C->size[1], &bb_emlrtBCI, &st);
+                                            C->size[1], &ib_emlrtBCI, &st);
             }
             b_kk = (int32_T)(maxx + 1.0) - 2;
             if (((int32_T)p < 1) || ((int32_T)p > C->size[1])) {
               emlrtDynamicBoundsCheckR2012b((int32_T)p, 1, C->size[1],
-                                            &ab_emlrtBCI, &st);
+                                            &hb_emlrtBCI, &st);
             }
             i4 = (int32_T)p - 1;
           }
@@ -1541,19 +1525,19 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
             ii_data = 0;
           } else {
             if (fromRow != (int32_T)muDoubleScalarFloor(fromRow)) {
-              emlrtIntegerCheckR2012b(fromRow, &j_emlrtDCI, &st);
+              emlrtIntegerCheckR2012b(fromRow, &p_emlrtDCI, &st);
             }
             if (((int32_T)fromRow < 1) || ((int32_T)fromRow > C->size[0])) {
               emlrtDynamicBoundsCheckR2012b((int32_T)fromRow, 1, C->size[0],
-                                            &y_emlrtBCI, &st);
+                                            &gb_emlrtBCI, &st);
             }
             i5 = (int32_T)fromRow - 1;
             if (toRow != (int32_T)muDoubleScalarFloor(toRow)) {
-              emlrtIntegerCheckR2012b(toRow, &i_emlrtDCI, &st);
+              emlrtIntegerCheckR2012b(toRow, &o_emlrtDCI, &st);
             }
             if (((int32_T)toRow < 1) || ((int32_T)toRow > C->size[0])) {
               emlrtDynamicBoundsCheckR2012b((int32_T)toRow, 1, C->size[0],
-                                            &x_emlrtBCI, &st);
+                                            &fb_emlrtBCI, &st);
             }
             ii_data = (int32_T)toRow;
           }
@@ -1564,12 +1548,12 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
             if (((int32_T)(maxx + 1.0) < 1) ||
                 ((int32_T)(maxx + 1.0) > C->size[1])) {
               emlrtDynamicBoundsCheckR2012b((int32_T)(maxx + 1.0), 1,
-                                            C->size[1], &w_emlrtBCI, &st);
+                                            C->size[1], &eb_emlrtBCI, &st);
             }
             i6 = (int32_T)(maxx + 1.0) - 1;
             if (((int32_T)p < 1) || ((int32_T)p > C->size[1])) {
               emlrtDynamicBoundsCheckR2012b((int32_T)p, 1, C->size[1],
-                                            &v_emlrtBCI, &st);
+                                            &db_emlrtBCI, &st);
             }
             loop_ub = (int32_T)p;
           }
@@ -1584,7 +1568,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
           i3 = pascalM->size[0] * pascalM->size[1];
           pascalM->size[0] = loop_ub;
           pascalM->size[1] = ii_data;
-          emxEnsureCapacity_real_T(&st, pascalM, i3, &eg_emlrtRTEI);
+          emxEnsureCapacity_real_T(&st, pascalM, i3, &dh_emlrtRTEI);
           for (i3 = 0; i3 < ii_data; i3++) {
             for (i4 = 0; i4 < loop_ub; i4++) {
               pascalM->data[i4 + pascalM->size[0] * i3] =
@@ -1604,25 +1588,25 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
             i3 = 0;
           } else {
             if (fromRow != (int32_T)muDoubleScalarFloor(fromRow)) {
-              emlrtIntegerCheckR2012b(fromRow, &h_emlrtDCI, &st);
+              emlrtIntegerCheckR2012b(fromRow, &n_emlrtDCI, &st);
             }
             if (((int32_T)fromRow < 1) || ((int32_T)fromRow > C->size[0])) {
               emlrtDynamicBoundsCheckR2012b((int32_T)fromRow, 1, C->size[0],
-                                            &u_emlrtBCI, &st);
+                                            &cb_emlrtBCI, &st);
             }
             i2 = (int32_T)fromRow - 1;
             if (toRow != (int32_T)muDoubleScalarFloor(toRow)) {
-              emlrtIntegerCheckR2012b(toRow, &g_emlrtDCI, &st);
+              emlrtIntegerCheckR2012b(toRow, &m_emlrtDCI, &st);
             }
             if (((int32_T)toRow < 1) || ((int32_T)toRow > C->size[0])) {
               emlrtDynamicBoundsCheckR2012b((int32_T)toRow, 1, C->size[0],
-                                            &t_emlrtBCI, &st);
+                                            &bb_emlrtBCI, &st);
             }
             i3 = (int32_T)toRow;
           }
           if (((int32_T)maxx < 1) || ((int32_T)maxx > C->size[1])) {
             emlrtDynamicBoundsCheckR2012b((int32_T)maxx, 1, C->size[1],
-                                          &s_emlrtBCI, &st);
+                                          &ab_emlrtBCI, &st);
           }
           loop_ub = i3 - i2;
           for (i3 = 0; i3 < loop_ub; i3++) {
@@ -1645,14 +1629,14 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
         i = s->size[0] * s->size[1];
         s->size[0] = 1;
         s->size[1] = seq->size[1];
-        emxEnsureCapacity_real_T(&st, s, i, &fd_emlrtRTEI);
+        emxEnsureCapacity_real_T(&st, s, i, &hd_emlrtRTEI);
         loop_ub = seq->size[1] - 1;
         for (i = 0; i <= loop_ub; i++) {
           s->data[i] = (real_T)i + 1.0;
         }
       }
       if (!b_isequal(seq, s)) {
-        b_st.site = &ff_emlrtRSI;
+        b_st.site = &mf_emlrtRSI;
         indexShapeCheck(&b_st, *(int32_T(*)[2])seq->size,
                         *(int32_T(*)[2])C->size);
         loop_ub = C->size[1];
@@ -1661,12 +1645,12 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
           for (i1 = 0; i1 < ii_data; i1++) {
             if (C->data[i1 + C->size[0] * i] !=
                 (int32_T)muDoubleScalarFloor(C->data[i1 + C->size[0] * i])) {
-              emlrtIntegerCheckR2012b(C->data[i1 + C->size[0] * i], &s_emlrtDCI,
+              emlrtIntegerCheckR2012b(C->data[i1 + C->size[0] * i], &y_emlrtDCI,
                                       &st);
             }
             i2 = (int32_T)C->data[i1 + C->size[0] * i];
             if ((i2 < 1) || (i2 > seq->size[1])) {
-              emlrtDynamicBoundsCheckR2012b(i2, 1, seq->size[1], &nb_emlrtBCI,
+              emlrtDynamicBoundsCheckR2012b(i2, 1, seq->size[1], &ub_emlrtBCI,
                                             &st);
             }
             C->data[i1 + C->size[0] * i] = seq->data[i2 - 1];
@@ -1677,7 +1661,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
     /*  If nsamp is > 0 just select randomly ncomb rows from matrix C */
     if (nsamp > 0.0) {
       /*  Extract without replacement nsamp elements from ncomb */
-      st.site = &ve_emlrtRSI;
+      st.site = &df_emlrtRSI;
       /* randsampleFS generates a random sample of k elements from the integers
        * 1 to n (k<=n) */
       /*  */
@@ -1869,23 +1853,23 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
       /*  This is done if the third argument is provided as a vector of weights.
        */
       /*  Extract a random sample of k integers between 1 and n. */
-      b_st.site = &hf_emlrtRSI;
+      b_st.site = &of_emlrtRSI;
       randperm(&b_st, ncomb, nsamp, seq);
       /*  METHOD: it was set to 2 */
       ii_data = C->size[1] - 1;
       i = pascalM->size[0] * pascalM->size[1];
       pascalM->size[0] = seq->size[1];
       pascalM->size[1] = C->size[1];
-      emxEnsureCapacity_real_T(sp, pascalM, i, &fg_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, pascalM, i, &eh_emlrtRTEI);
       for (i = 0; i <= ii_data; i++) {
         loop_ub = seq->size[1];
         for (i1 = 0; i1 < loop_ub; i1++) {
           if (seq->data[i1] != (int32_T)muDoubleScalarFloor(seq->data[i1])) {
-            emlrtIntegerCheckR2012b(seq->data[i1], &t_emlrtDCI, (emlrtCTX)sp);
+            emlrtIntegerCheckR2012b(seq->data[i1], &ab_emlrtDCI, (emlrtCTX)sp);
           }
           i2 = (int32_T)seq->data[i1];
           if ((i2 < 1) || (i2 > C->size[0])) {
-            emlrtDynamicBoundsCheckR2012b(i2, 1, C->size[0], &ob_emlrtBCI,
+            emlrtDynamicBoundsCheckR2012b(i2, 1, C->size[0], &vb_emlrtBCI,
                                           (emlrtCTX)sp);
           }
           pascalM->data[i1 + pascalM->size[0] * i] =
@@ -1895,7 +1879,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
       i = C->size[0] * C->size[1];
       C->size[0] = pascalM->size[0];
       C->size[1] = pascalM->size[1];
-      emxEnsureCapacity_real_T(sp, C, i, &gg_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, C, i, &fh_emlrtRTEI);
       loop_ub = pascalM->size[0] * pascalM->size[1];
       for (i = 0; i < loop_ub; i++) {
         C->data[i] = pascalM->data[i];
@@ -1907,10 +1891,10 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
       m = emlrtCreateCharArray(2, &iv2[0]);
       emlrtInitCharArrayR2013a((emlrtCTX)sp, 63, m, &c_u[0]);
       emlrtAssign(&c_y, m);
-      st.site = &opb_emlrtRSI;
-      disp(&st, c_y, &i_emlrtMCI);
-      st.site = &snb_emlrtRSI;
-      disp(&st, p_emlrt_marshallOut(&st, b_cv2), &j_emlrtMCI);
+      st.site = &kqb_emlrtRSI;
+      disp(&st, c_y, &k_emlrtMCI);
+      st.site = &iob_emlrtRSI;
+      disp(&st, p_emlrt_marshallOut(&st, b_cv2), &l_emlrtMCI);
     }
     *nselected = nsamp;
     /*  usepascal: flag used to decide whether to use the Pascal triangle */
@@ -1918,7 +1902,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
     usepascal = true;
     if ((ncomb > 5.0E+7) && (ncomb < 1.0E+8)) {
       /*  Extract without replacement nsamp elements from ncomb */
-      st.site = &we_emlrtRSI;
+      st.site = &ef_emlrtRSI;
       /* randsampleFS generates a random sample of k elements from the integers
        * 1 to n (k<=n) */
       /*  */
@@ -2110,19 +2094,19 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
       /*  This is done if the third argument is provided as a vector of weights.
        */
       /*  Extract a random sample of k integers between 1 and n. */
-      b_st.site = &hf_emlrtRSI;
+      b_st.site = &of_emlrtRSI;
       randperm(&b_st, ncomb, nsamp, seq);
       /*  METHOD: it was set to 2 */
       /*  The Pascal triangle can be used only if there is enough memory. */
       if (n <= 20000.0) {
-        st.site = &xe_emlrtRSI;
+        st.site = &ff_emlrtRSI;
         pascal(&st, n, pascalM);
       } else {
         usepascal = false;
         i = pascalM->size[0] * pascalM->size[1];
         pascalM->size[0] = 1;
         pascalM->size[1] = 1;
-        emxEnsureCapacity_real_T(sp, pascalM, i, &dg_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, pascalM, i, &ch_emlrtRTEI);
         pascalM->data[0] = 0.0;
         /*  C coder initialization */
       }
@@ -2130,13 +2114,13 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
       i = seq->size[0] * seq->size[1];
       seq->size[0] = 1;
       seq->size[1] = 1;
-      emxEnsureCapacity_real_T(sp, seq, i, &uf_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, seq, i, &tg_emlrtRTEI);
       seq->data[0] = 0.0;
       /*  C coder initialization */
       i = pascalM->size[0] * pascalM->size[1];
       pascalM->size[0] = 1;
       pascalM->size[1] = 1;
-      emxEnsureCapacity_real_T(sp, pascalM, i, &vf_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, pascalM, i, &ug_emlrtRTEI);
       pascalM->data[0] = 0.0;
       /*  C coder initialization */
     }
@@ -2145,30 +2129,30 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
     /*  subset which is extracted at step i, where i=1....number of selected */
     /*  subsamples (nselected) */
     if (!(nsamp >= 0.0)) {
-      emlrtNonNegativeCheckR2012b(nsamp, &q_emlrtDCI, (emlrtCTX)sp);
+      emlrtNonNegativeCheckR2012b(nsamp, &w_emlrtDCI, (emlrtCTX)sp);
     }
     if (nsamp != (int32_T)muDoubleScalarFloor(nsamp)) {
-      emlrtIntegerCheckR2012b(nsamp, &p_emlrtDCI, (emlrtCTX)sp);
+      emlrtIntegerCheckR2012b(nsamp, &v_emlrtDCI, (emlrtCTX)sp);
     }
     i = C->size[0] * C->size[1];
     i1 = (int32_T)nsamp;
     C->size[0] = (int32_T)nsamp;
     b_n = (int32_T)p;
     C->size[1] = (int32_T)p;
-    emxEnsureCapacity_real_T(sp, C, i, &wf_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, C, i, &vg_emlrtRTEI);
     emlrtForLoopVectorCheckR2021a(1.0, 1.0, nsamp, mxDOUBLE_CLASS,
-                                  (int32_T)nsamp, &y_emlrtRTEI, (emlrtCTX)sp);
+                                  (int32_T)nsamp, &ab_emlrtRTEI, (emlrtCTX)sp);
     if (0 <= (int32_T)nsamp - 1) {
       c_seq[0] = 1;
     }
     for (b_i = 0; b_i < i1; b_i++) {
       if ((ncomb > 5.0E+7) && (ncomb < 1.0E+8)) {
         if (usepascal) {
-          st.site = &ye_emlrtRSI;
+          st.site = &gf_emlrtRSI;
           if (((int32_T)(b_i + 1U) < 1) ||
               ((int32_T)(b_i + 1U) > seq->size[1])) {
             emlrtDynamicBoundsCheckR2012b((int32_T)(b_i + 1U), 1, seq->size[1],
-                                          &mb_emlrtBCI, &st);
+                                          &tb_emlrtBCI, &st);
           }
           N_kk = seq->data[b_i];
           /* lexunrank gives the the $k$-combination of $n$ elements of position
@@ -2508,7 +2492,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
           i = s->size[0] * s->size[1];
           s->size[0] = 1;
           s->size[1] = (int32_T)p;
-          emxEnsureCapacity_real_T(&st, s, i, &hg_emlrtRTEI);
+          emxEnsureCapacity_real_T(&st, s, i, &gh_emlrtRTEI);
           for (i = 0; i < b_n; i++) {
             s->data[i] = 0.0;
           }
@@ -2521,7 +2505,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
           /*  computing them using bc. Of course this option is space greedy. */
           i = (int32_T)(((-1.0 - p) + 1.0) / -1.0);
           emlrtForLoopVectorCheckR2021a(p, -1.0, 1.0, mxDOUBLE_CLASS, i,
-                                        &v_emlrtRTEI, &st);
+                                        &w_emlrtRTEI, &st);
           for (b_kk = 0; b_kk < i; b_kk++) {
             kk = p + -(real_T)b_kk;
             /*  istruction find faster than logical extraction */
@@ -2531,19 +2515,19 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
             } else {
               if (1 > pascalM->size[0]) {
                 emlrtDynamicBoundsCheckR2012b(1, 1, pascalM->size[0],
-                                              &r_emlrtBCI, &st);
+                                              &y_emlrtBCI, &st);
               }
               if (((int32_T)d < 1) || ((int32_T)d > pascalM->size[0])) {
                 emlrtDynamicBoundsCheckR2012b((int32_T)d, 1, pascalM->size[0],
-                                              &q_emlrtBCI, &st);
+                                              &x_emlrtBCI, &st);
               }
               loop_ub = (int32_T)d;
             }
-            b_st.site = &rf_emlrtRSI;
+            b_st.site = &yf_emlrtRSI;
             if (((int32_T)(kk + 1.0) < 1) ||
                 ((int32_T)(kk + 1.0) > pascalM->size[1])) {
               emlrtDynamicBoundsCheckR2012b(
-                  (int32_T)(kk + 1.0), 1, pascalM->size[1], &p_emlrtBCI, &b_st);
+                  (int32_T)(kk + 1.0), 1, pascalM->size[1], &w_emlrtBCI, &b_st);
             }
             pascalM_size = loop_ub;
             for (i2 = 0; i2 < loop_ub; i2++) {
@@ -2556,7 +2540,7 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
             pascalM_data.allocatedSize = 20000;
             pascalM_data.numDimensions = 1;
             pascalM_data.canFreeData = false;
-            c_st.site = &ob_emlrtRSI;
+            c_st.site = &vb_emlrtRSI;
             b_eml_find(&c_st, &pascalM_data, (int32_T *)&ii_data, &loop_ub);
             /*  seqnmkk=1:n-kk; */
             /*  x=seqnmkk(pascalM(seqnmkk,kk+1) > N_kk); */
@@ -2568,19 +2552,19 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
             }
             if (((int32_T)kk < 1) || ((int32_T)kk > s->size[1])) {
               emlrtDynamicBoundsCheckR2012b((int32_T)kk, 1, s->size[1],
-                                            &pb_emlrtBCI, &st);
+                                            &wb_emlrtBCI, &st);
             }
             s->data[(int32_T)kk - 1] = n - maxx;
             if (maxx >= kk) {
               i2 = (int32_T)((maxx - kk) + 1.0);
               if ((i2 < 1) || (i2 > pascalM->size[0])) {
                 emlrtDynamicBoundsCheckR2012b(i2, 1, pascalM->size[0],
-                                              &qb_emlrtBCI, &st);
+                                              &xb_emlrtBCI, &st);
               }
               if (((int32_T)(kk + 1.0) < 1) ||
                   ((int32_T)(kk + 1.0) > pascalM->size[1])) {
                 emlrtDynamicBoundsCheckR2012b((int32_T)(kk + 1.0), 1,
-                                              pascalM->size[1], &qb_emlrtBCI,
+                                              pascalM->size[1], &xb_emlrtBCI,
                                               &st);
               }
               N_kk -= pascalM->data[(i2 + pascalM->size[0] *
@@ -2596,13 +2580,13 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
           if (((int32_T)(b_i + 1U) < 1) ||
               ((int32_T)(b_i + 1U) > seq->size[1])) {
             emlrtDynamicBoundsCheckR2012b((int32_T)(b_i + 1U), 1, seq->size[1],
-                                          &lb_emlrtBCI, (emlrtCTX)sp);
+                                          &sb_emlrtBCI, (emlrtCTX)sp);
           }
-          st.site = &af_emlrtRSI;
+          st.site = &hf_emlrtRSI;
           lexunrank(&st, n, p, seq->data[b_i], s);
         }
       } else {
-        st.site = &bf_emlrtRSI;
+        st.site = &if_emlrtRSI;
         /* randsampleFS generates a random sample of k elements from the
          * integers 1 to n (k<=n) */
         /*  */
@@ -2797,11 +2781,11 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
         /*  This is done if the third argument is provided as a vector of
          * weights. */
         /*  Extract a random sample of k integers between 1 and n. */
-        b_st.site = &hf_emlrtRSI;
+        b_st.site = &of_emlrtRSI;
         randperm(&b_st, n, p, s);
       }
       if ((b_i + 1 < 1) || (b_i + 1 > C->size[0])) {
-        emlrtDynamicBoundsCheckR2012b(b_i + 1, 1, C->size[0], &kb_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b(b_i + 1, 1, C->size[0], &rb_emlrtBCI,
                                       (emlrtCTX)sp);
       }
       c_seq[1] = C->size[1];

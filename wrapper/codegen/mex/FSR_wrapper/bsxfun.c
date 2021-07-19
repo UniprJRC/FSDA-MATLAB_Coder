@@ -18,7 +18,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRTEInfo gc_emlrtRTEI = {
+static emlrtRTEInfo hc_emlrtRTEI = {
     53,       /* lineNo */
     15,       /* colNo */
     "bsxfun", /* fName */
@@ -64,14 +64,14 @@ void b_bsxfun(const emlrtStack *sp, const emxArray_real_T *a,
     csz_idx_1 = muIntScalarMin_sint32(b->size[1], a->size[1]);
   }
   if (!iscompatible) {
-    emlrtErrorWithMessageIdR2018a(sp, &gc_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(sp, &hc_emlrtRTEI,
                                   "MATLAB:bsxfun:arrayDimensionsMustMatch",
                                   "MATLAB:bsxfun:arrayDimensionsMustMatch", 0);
   }
   i = c->size[0] * c->size[1];
   c->size[0] = csz_idx_0;
   c->size[1] = csz_idx_1;
-  emxEnsureCapacity_real_T(sp, c, i, &jk_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, c, i, &il_emlrtRTEI);
   if ((csz_idx_0 != 0) && (csz_idx_1 != 0)) {
     acoef = (a->size[1] != 1);
     bcoef = (b->size[1] != 1);
@@ -110,14 +110,14 @@ void bsxfun(const emlrtStack *sp, const emxArray_real_T *a,
   } else if (a->size[1] == b->size[1]) {
     csz_idx_1 = a->size[1];
   } else {
-    emlrtErrorWithMessageIdR2018a(sp, &gc_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(sp, &hc_emlrtRTEI,
                                   "MATLAB:bsxfun:arrayDimensionsMustMatch",
                                   "MATLAB:bsxfun:arrayDimensionsMustMatch", 0);
   }
   i = c->size[0] * c->size[1];
   c->size[0] = a->size[0];
   c->size[1] = csz_idx_1;
-  emxEnsureCapacity_real_T(sp, c, i, &jk_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, c, i, &il_emlrtRTEI);
   if ((a->size[0] != 0) && (csz_idx_1 != 0)) {
     acoef = (a->size[1] != 1);
     bcoef = (b->size[1] != 1);

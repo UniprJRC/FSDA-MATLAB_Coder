@@ -59,14 +59,14 @@ build $builddir/power.o : cc $root/power.c
 build $builddir/colon.o : cc $root/colon.c
 build $builddir/indexShapeCheck.o : cc $root/indexShapeCheck.c
 build $builddir/eml_setop.o : cc $root/eml_setop.c
-build $builddir/mldivide.o : cc $root/mldivide.c
-build $builddir/repmat.o : cc $root/repmat.c
-build $builddir/warning.o : cc $root/warning.c
-build $builddir/qrsolve.o : cc $root/qrsolve.c
+build $builddir/linsolve.o : cc $root/linsolve.c
 build $builddir/infocheck.o : cc $root/infocheck.c
 build $builddir/issorted.o : cc $root/issorted.c
 build $builddir/sum.o : cc $root/sum.c
 build $builddir/sumMatrixIncludeNaN.o : cc $root/sumMatrixIncludeNaN.c
+build $builddir/mrdivide_helper.o : cc $root/mrdivide_helper.c
+build $builddir/warning.o : cc $root/warning.c
+build $builddir/qrsolve.o : cc $root/qrsolve.c
 build $builddir/repelem.o : cc $root/repelem.c
 build $builddir/any.o : cc $root/any.c
 build $builddir/_coder_FSRmdr_wrapper_api.o : cc $root/interface/_coder_FSRmdr_wrapper_api.c
@@ -74,7 +74,6 @@ build $builddir/_coder_FSRmdr_wrapper_mex.o : cc $root/interface/_coder_FSRmdr_w
 build $builddir/chkinputR.o : cc $root/chkinputR.c
 build $builddir/nullAssignment.o : cc $root/nullAssignment.c
 build $builddir/xgeqp3.o : cc $root/xgeqp3.c
-build $builddir/mrdivide_helper.o : cc $root/mrdivide_helper.c
 build $builddir/sort.o : cc $root/sort.c
 build $builddir/sortIdx.o : cc $root/sortIdx.c
 build $builddir/FSRmdr_wrapper_emxutil.o : cc $root/FSRmdr_wrapper_emxutil.c
@@ -83,4 +82,4 @@ build $builddir/_coder_FSRmdr_wrapper_info.o : cc $root/interface/_coder_FSRmdr_
 build $builddir/c_mexapi_version.o : cc $matlabdir/extern/version/c_mexapi_version.c
 
 # Link
-build $root\FSRmdr_wrapper_mex.mexw64 : link $builddir/FSRmdr_wrapper_data.o $builddir/rt_nonfinite.o $builddir/FSRmdr_wrapper_initialize.o $builddir/FSRmdr_wrapper_terminate.o $builddir/FSRmdr_wrapper.o $builddir/isequal.o $builddir/eml_mtimes_helper.o $builddir/mtimes.o $builddir/eml_int_forloop_overflow_check.o $builddir/cat.o $builddir/find.o $builddir/int2str.o $builddir/rank.o $builddir/svd.o $builddir/error.o $builddir/ifWhileCond.o $builddir/randsample.o $builddir/rand.o $builddir/sprintf.o $builddir/power.o $builddir/colon.o $builddir/indexShapeCheck.o $builddir/eml_setop.o $builddir/mldivide.o $builddir/repmat.o $builddir/warning.o $builddir/qrsolve.o $builddir/infocheck.o $builddir/issorted.o $builddir/sum.o $builddir/sumMatrixIncludeNaN.o $builddir/repelem.o $builddir/any.o $builddir/_coder_FSRmdr_wrapper_api.o $builddir/_coder_FSRmdr_wrapper_mex.o $builddir/chkinputR.o $builddir/nullAssignment.o $builddir/xgeqp3.o $builddir/mrdivide_helper.o $builddir/sort.o $builddir/sortIdx.o $builddir/FSRmdr_wrapper_emxutil.o $builddir/FSRmdr_wrapper_mexutil.o $builddir/_coder_FSRmdr_wrapper_info.o $builddir/c_mexapi_version.o 
+build $root\FSRmdr_wrapper_mex.mexw64 : link $builddir/FSRmdr_wrapper_data.o $builddir/rt_nonfinite.o $builddir/FSRmdr_wrapper_initialize.o $builddir/FSRmdr_wrapper_terminate.o $builddir/FSRmdr_wrapper.o $builddir/isequal.o $builddir/eml_mtimes_helper.o $builddir/mtimes.o $builddir/eml_int_forloop_overflow_check.o $builddir/cat.o $builddir/find.o $builddir/int2str.o $builddir/rank.o $builddir/svd.o $builddir/error.o $builddir/ifWhileCond.o $builddir/randsample.o $builddir/rand.o $builddir/sprintf.o $builddir/power.o $builddir/colon.o $builddir/indexShapeCheck.o $builddir/eml_setop.o $builddir/linsolve.o $builddir/infocheck.o $builddir/issorted.o $builddir/sum.o $builddir/sumMatrixIncludeNaN.o $builddir/mrdivide_helper.o $builddir/warning.o $builddir/qrsolve.o $builddir/repelem.o $builddir/any.o $builddir/_coder_FSRmdr_wrapper_api.o $builddir/_coder_FSRmdr_wrapper_mex.o $builddir/chkinputR.o $builddir/nullAssignment.o $builddir/xgeqp3.o $builddir/sort.o $builddir/sortIdx.o $builddir/FSRmdr_wrapper_emxutil.o $builddir/FSRmdr_wrapper_mexutil.o $builddir/_coder_FSRmdr_wrapper_info.o $builddir/c_mexapi_version.o 

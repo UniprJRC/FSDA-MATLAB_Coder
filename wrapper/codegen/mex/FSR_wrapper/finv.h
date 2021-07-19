@@ -29,6 +29,18 @@ void c_finv(const emlrtStack *sp, const emxArray_real_T *p,
             const emxArray_real_T *v1, const emxArray_real_T *v2,
             emxArray_real_T *x);
 
+void d_finv(const emlrtStack *sp, const emxArray_real_T *p,
+            const emxArray_real_T *v1, const emxArray_real_T *v2,
+            emxArray_real_T *x);
+
+void e_finv(const emlrtStack *sp, const emxArray_real_T *p,
+            const emxArray_real_T *v1, const emxArray_real_T *v2,
+            emxArray_real_T *x);
+
+void f_finv(const emlrtStack *sp, const emxArray_real_T *p,
+            const emxArray_real_T *v1, const emxArray_real_T *v2,
+            emxArray_real_T *x);
+
 real_T finv(const emlrtStack *sp, real_T v2);
 
 /* End of code generation (finv.h) */

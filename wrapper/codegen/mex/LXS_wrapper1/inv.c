@@ -415,7 +415,7 @@ void inv(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
       c_y = NULL;
       m = emlrtCreateDoubleScalar(rc);
       emlrtAssign(&c_y, m);
-      c_st.site = &cjb_emlrtRSI;
+      c_st.site = &bjb_emlrtRSI;
       i_emlrt_marshallIn(&c_st, b_sprintf(&c_st, b_y, c_y, &r_emlrtMCI),
                          "<output of sprintf>", str);
       b_st.site = &fx_emlrtRSI;

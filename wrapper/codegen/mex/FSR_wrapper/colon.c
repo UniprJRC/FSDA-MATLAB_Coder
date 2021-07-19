@@ -17,7 +17,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo ad_emlrtRSI =
+static emlrtRSInfo hd_emlrtRSI =
     {
         311,               /* lineNo */
         "eml_float_colon", /* fcnName */
@@ -26,7 +26,7 @@ static emlrtRSInfo ad_emlrtRSI =
                                                                           */
 };
 
-static emlrtRTEInfo t_emlrtRTEI =
+static emlrtRTEInfo u_emlrtRTEI =
     {
         417,               /* lineNo */
         15,                /* colNo */
@@ -36,7 +36,7 @@ static emlrtRTEInfo t_emlrtRTEI =
                                                                           */
 };
 
-static emlrtRTEInfo qe_emlrtRTEI =
+static emlrtRTEInfo pf_emlrtRTEI =
     {
         312,     /* lineNo */
         20,      /* colNo */
@@ -77,7 +77,7 @@ void b_eml_float_colon(const emlrtStack *sp, real_T a, real_T b,
   nm1d2 = y->size[0] * y->size[1];
   y->size[0] = 1;
   y->size[1] = n;
-  emxEnsureCapacity_real_T(sp, y, nm1d2, &qe_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, y, nm1d2, &pf_emlrtRTEI);
   if (n > 0) {
     y->data[0] = a;
     if (n > 1) {
@@ -129,15 +129,15 @@ void eml_float_colon(const emlrtStack *sp, real_T a, real_T b,
   } else {
     n = 0;
   }
-  st.site = &ad_emlrtRSI;
+  st.site = &hd_emlrtRSI;
   if (ndbl > 2.147483647E+9) {
-    emlrtErrorWithMessageIdR2018a(&st, &t_emlrtRTEI, "Coder:MATLAB:pmaxsize",
+    emlrtErrorWithMessageIdR2018a(&st, &u_emlrtRTEI, "Coder:MATLAB:pmaxsize",
                                   "Coder:MATLAB:pmaxsize", 0);
   }
   nm1d2 = y->size[0] * y->size[1];
   y->size[0] = 1;
   y->size[1] = n;
-  emxEnsureCapacity_real_T(sp, y, nm1d2, &qe_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, y, nm1d2, &pf_emlrtRTEI);
   if (n > 0) {
     y->data[0] = a;
     if (n > 1) {

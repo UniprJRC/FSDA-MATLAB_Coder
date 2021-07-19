@@ -25,6 +25,12 @@
 void b_norminv(const emlrtStack *sp, const emxArray_real_T *p,
                emxArray_real_T *x);
 
+void c_norminv(const emlrtStack *sp, const emxArray_real_T *p,
+               emxArray_real_T *x);
+
+void d_norminv(const emlrtStack *sp, const emxArray_real_T *p,
+               emxArray_real_T *x);
+
 real_T norminv(const emlrtStack *sp, real_T p);
 
 /* End of code generation (norminv.h) */

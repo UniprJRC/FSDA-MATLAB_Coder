@@ -22,6 +22,7 @@
 #include <string.h>
 
 /* Function Declarations */
-int32_T rankFromQR(const emlrtStack *sp, const emxArray_real_T *A);
+void qrsolve(const emlrtStack *sp, const emxArray_real_T *A,
+             const emxArray_real_T *B, emxArray_real_T *Y);
 
 /* End of code generation (qrsolve.h) */

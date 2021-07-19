@@ -721,37 +721,37 @@ static emlrtRTEInfo rf_emlrtRTEI = {
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pName */
 };
 
-static emlrtRSInfo bib_emlrtRSI = {
+static emlrtRSInfo aib_emlrtRSI = {
     339,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo cib_emlrtRSI = {
+static emlrtRSInfo bib_emlrtRSI = {
     341,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo dib_emlrtRSI = {
+static emlrtRSInfo cib_emlrtRSI = {
     370,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo vib_emlrtRSI = {
+static emlrtRSInfo uib_emlrtRSI = {
     369,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo wib_emlrtRSI = {
+static emlrtRSInfo vib_emlrtRSI = {
     306,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
 };
 
-static emlrtRSInfo xib_emlrtRSI = {
+static emlrtRSInfo wib_emlrtRSI = {
     304,                                                  /* lineNo */
     "subsets",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\subsets.m" /* pathName */
@@ -1240,13 +1240,13 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
     m = emlrtCreateCharArray(2, &iv[0]);
     emlrtInitCharArrayR2013a((emlrtCTX)sp, 89, m, &u[0]);
     emlrtAssign(&y, m);
-    st.site = &xib_emlrtRSI;
+    st.site = &wib_emlrtRSI;
     disp(&st, y, &f_emlrtMCI);
     b_y = NULL;
     m = emlrtCreateCharArray(2, &iv1[0]);
     emlrtInitCharArrayR2013a((emlrtCTX)sp, 25, m, &b_u[0]);
     emlrtAssign(&b_y, m);
-    st.site = &wib_emlrtRSI;
+    st.site = &vib_emlrtRSI;
     disp(&st, b_y, &g_emlrtMCI);
     nsamp = 0.0;
   }
@@ -1264,9 +1264,9 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
   if ((nsamp == 0.0) || (ncomb <= 5.0E+7)) {
     if (nsamp == 0.0) {
       if ((ncomb > 100000.0) && msg) {
-        st.site = &bib_emlrtRSI;
+        st.site = &aib_emlrtRSI;
         disp(&st, h_emlrt_marshallOut(&st, b_cv), &j_emlrtMCI);
-        st.site = &cib_emlrtRSI;
+        st.site = &bib_emlrtRSI;
         disp(&st, i_emlrt_marshallOut(&st, b_cv1), &k_emlrtMCI);
       }
       *nselected = ncomb;
@@ -1923,9 +1923,9 @@ void subsets(const emlrtStack *sp, real_T nsamp, real_T n, real_T p,
       m = emlrtCreateCharArray(2, &iv2[0]);
       emlrtInitCharArrayR2013a((emlrtCTX)sp, 63, m, &c_u[0]);
       emlrtAssign(&c_y, m);
-      st.site = &vib_emlrtRSI;
+      st.site = &uib_emlrtRSI;
       disp(&st, c_y, &h_emlrtMCI);
-      st.site = &dib_emlrtRSI;
+      st.site = &cib_emlrtRSI;
       disp(&st, k_emlrt_marshallOut(&st, b_cv2), &i_emlrtMCI);
     }
     *nselected = nsamp;

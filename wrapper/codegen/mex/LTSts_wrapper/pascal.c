@@ -53,7 +53,7 @@ static emlrtRSInfo pj_emlrtRSI = {
                                                                          */
 };
 
-static emlrtRTEInfo hb_emlrtRTEI = {
+static emlrtRTEInfo gb_emlrtRTEI = {
     25,       /* lineNo */
     15,       /* colNo */
     "pascal", /* fName */
@@ -62,7 +62,7 @@ static emlrtRTEInfo hb_emlrtRTEI = {
                                                                          */
 };
 
-static emlrtRTEInfo el_emlrtRTEI = {
+static emlrtRTEInfo dl_emlrtRTEI = {
     36,       /* lineNo */
     1,        /* colNo */
     "pascal", /* fName */
@@ -71,7 +71,7 @@ static emlrtRTEInfo el_emlrtRTEI = {
                                                                          */
 };
 
-static emlrtRTEInfo fl_emlrtRTEI = {
+static emlrtRTEInfo el_emlrtRTEI = {
     33,       /* lineNo */
     5,        /* colNo */
     "pascal", /* fName */
@@ -80,7 +80,7 @@ static emlrtRTEInfo fl_emlrtRTEI = {
                                                                          */
 };
 
-static emlrtRTEInfo gl_emlrtRTEI = {
+static emlrtRTEInfo fl_emlrtRTEI = {
     178,      /* lineNo */
     59,       /* colNo */
     "mtimes", /* fName */
@@ -123,7 +123,7 @@ void pascal(const emlrtStack *sp, real_T n, emxArray_real_T *P)
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
   if ((!(n == muDoubleScalarFloor(n))) || (!(n >= 0.0))) {
     emlrtErrorWithMessageIdR2018a(
-        sp, &hb_emlrtRTEI, "Coder:toolbox:pascal_nMustBeNonNegativeInteger",
+        sp, &gb_emlrtRTEI, "Coder:toolbox:pascal_nMustBeNonNegativeInteger",
         "Coder:toolbox:pascal_nMustBeNonNegativeInteger", 0);
   }
   nn_tmp_tmp = (int32_T)n;
@@ -131,7 +131,7 @@ void pascal(const emlrtStack *sp, real_T n, emxArray_real_T *P)
     i = P->size[0] * P->size[1];
     P->size[0] = (int32_T)n;
     P->size[1] = (int32_T)n;
-    emxEnsureCapacity_real_T(sp, P, i, &fl_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, P, i, &el_emlrtRTEI);
     loop_ub = (int32_T)n * (int32_T)n;
     for (i = 0; i < loop_ub; i++) {
       P->data[i] = 1.0;
@@ -140,7 +140,7 @@ void pascal(const emlrtStack *sp, real_T n, emxArray_real_T *P)
     i = P->size[0] * P->size[1];
     P->size[0] = (int32_T)n;
     P->size[1] = (int32_T)n;
-    emxEnsureCapacity_real_T(sp, P, i, &el_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, P, i, &dl_emlrtRTEI);
     loop_ub = (int32_T)n * (int32_T)n;
     for (i = 0; i < loop_ub; i++) {
       P->data[i] = 0.0;
@@ -179,7 +179,7 @@ void pascal(const emlrtStack *sp, real_T n, emxArray_real_T *P)
         }
       }
     }
-    emxInit_real_T(sp, &A, 2, &gl_emlrtRTEI, true);
+    emxInit_real_T(sp, &A, 2, &fl_emlrtRTEI, true);
     st.site = &pj_emlrtRSI;
     b_st.site = &rj_emlrtRSI;
     b_st.site = &qj_emlrtRSI;
@@ -190,7 +190,7 @@ void pascal(const emlrtStack *sp, real_T n, emxArray_real_T *P)
     i = A->size[0] * A->size[1];
     A->size[0] = P->size[0];
     A->size[1] = P->size[1];
-    emxEnsureCapacity_real_T(&d_st, A, i, &gl_emlrtRTEI);
+    emxEnsureCapacity_real_T(&d_st, A, i, &fl_emlrtRTEI);
     loop_ub = P->size[0] * P->size[1];
     for (i = 0; i < loop_ub; i++) {
       A->data[i] = P->data[i];
@@ -208,7 +208,7 @@ void pascal(const emlrtStack *sp, real_T n, emxArray_real_T *P)
     i = P->size[0] * P->size[1];
     P->size[0] = mA;
     P->size[1] = mB;
-    emxEnsureCapacity_real_T(&d_st, P, i, &hl_emlrtRTEI);
+    emxEnsureCapacity_real_T(&d_st, P, i, &gl_emlrtRTEI);
     dgemm(&TRANSA1, &TRANSB1, &m_t, &n_t, &k_t, &plusminus1, &A->data[0],
           &lda_t, &A->data[0], &ldb_t, &beta1, &P->data[0], &ldc_t);
     emxFree_real_T(&A);

@@ -19,7 +19,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRSInfo vv_emlrtRSI = {
+static emlrtRSInfo dw_emlrtRSI = {
     112,                /* lineNo */
     "blockedSummation", /* fcnName */
     "C:\\Program "
@@ -27,7 +27,7 @@ static emlrtRSInfo vv_emlrtRSI = {
     "dSummation.m" /* pathName */
 };
 
-static emlrtRSInfo wv_emlrtRSI = {
+static emlrtRSInfo ew_emlrtRSI = {
     173,                /* lineNo */
     "colMajorFlatIter", /* fcnName */
     "C:\\Program "
@@ -35,7 +35,7 @@ static emlrtRSInfo wv_emlrtRSI = {
     "dSummation.m" /* pathName */
 };
 
-static emlrtRSInfo xv_emlrtRSI = {
+static emlrtRSInfo fw_emlrtRSI = {
     190,                /* lineNo */
     "colMajorFlatIter", /* fcnName */
     "C:\\Program "
@@ -43,7 +43,7 @@ static emlrtRSInfo xv_emlrtRSI = {
     "dSummation.m" /* pathName */
 };
 
-static emlrtRSInfo yv_emlrtRSI = {
+static emlrtRSInfo gw_emlrtRSI = {
     192,                /* lineNo */
     "colMajorFlatIter", /* fcnName */
     "C:\\Program "
@@ -51,7 +51,7 @@ static emlrtRSInfo yv_emlrtRSI = {
     "dSummation.m" /* pathName */
 };
 
-static emlrtRSInfo aw_emlrtRSI = {
+static emlrtRSInfo hw_emlrtRSI = {
     204,                /* lineNo */
     "colMajorFlatIter", /* fcnName */
     "C:\\Program "
@@ -59,7 +59,7 @@ static emlrtRSInfo aw_emlrtRSI = {
     "dSummation.m" /* pathName */
 };
 
-static emlrtRSInfo bw_emlrtRSI = {
+static emlrtRSInfo iw_emlrtRSI = {
     207,                /* lineNo */
     "colMajorFlatIter", /* fcnName */
     "C:\\Program "
@@ -67,7 +67,7 @@ static emlrtRSInfo bw_emlrtRSI = {
     "dSummation.m" /* pathName */
 };
 
-static emlrtRSInfo cw_emlrtRSI = {
+static emlrtRSInfo jw_emlrtRSI = {
     225,                /* lineNo */
     "colMajorFlatIter", /* fcnName */
     "C:\\Program "
@@ -75,7 +75,7 @@ static emlrtRSInfo cw_emlrtRSI = {
     "dSummation.m" /* pathName */
 };
 
-static emlrtRSInfo dw_emlrtRSI = {
+static emlrtRSInfo kw_emlrtRSI = {
     227,                /* lineNo */
     "colMajorFlatIter", /* fcnName */
     "C:\\Program "
@@ -83,7 +83,7 @@ static emlrtRSInfo dw_emlrtRSI = {
     "dSummation.m" /* pathName */
 };
 
-static emlrtRSInfo ew_emlrtRSI = {
+static emlrtRSInfo lw_emlrtRSI = {
     238,                /* lineNo */
     "colMajorFlatIter", /* fcnName */
     "C:\\Program "
@@ -91,7 +91,7 @@ static emlrtRSInfo ew_emlrtRSI = {
     "dSummation.m" /* pathName */
 };
 
-static emlrtRTEInfo dq_emlrtRTEI = {
+static emlrtRTEInfo cr_emlrtRTEI = {
     20,    /* lineNo */
     1,     /* colNo */
     "sum", /* fName */
@@ -100,7 +100,7 @@ static emlrtRTEInfo dq_emlrtRTEI = {
                                                                         */
 };
 
-static emlrtRTEInfo eq_emlrtRTEI = {
+static emlrtRTEInfo dr_emlrtRTEI = {
     146,                /* lineNo */
     24,                 /* colNo */
     "blockedSummation", /* fName */
@@ -109,7 +109,7 @@ static emlrtRTEInfo eq_emlrtRTEI = {
     "dSummation.m" /* pName */
 };
 
-static emlrtRTEInfo fq_emlrtRTEI = {
+static emlrtRTEInfo er_emlrtRTEI = {
     153,                /* lineNo */
     23,                 /* colNo */
     "blockedSummation", /* fName */
@@ -118,7 +118,7 @@ static emlrtRTEInfo fq_emlrtRTEI = {
     "dSummation.m" /* pName */
 };
 
-static emlrtRTEInfo gq_emlrtRTEI = {
+static emlrtRTEInfo fr_emlrtRTEI = {
     153,                /* lineNo */
     1,                  /* colNo */
     "blockedSummation", /* fName */
@@ -160,28 +160,28 @@ void b_sum(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   f_st.prev = &e_st;
   f_st.tls = e_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  st.site = &lm_emlrtRSI;
-  b_st.site = &ld_emlrtRSI;
-  c_st.site = &mm_emlrtRSI;
+  st.site = &sm_emlrtRSI;
+  b_st.site = &sd_emlrtRSI;
+  c_st.site = &tm_emlrtRSI;
   if ((x->size[0] == 0) || (x->size[1] == 0)) {
     hi = y->size[0];
     y->size[0] = x->size[0];
-    emxEnsureCapacity_real_T(&c_st, y, hi, &dq_emlrtRTEI);
+    emxEnsureCapacity_real_T(&c_st, y, hi, &cr_emlrtRTEI);
     firstBlockLength = x->size[0];
     for (hi = 0; hi < firstBlockLength; hi++) {
       y->data[hi] = 0.0;
     }
   } else {
-    emxInit_real_T(&c_st, &bsum, 1, &gq_emlrtRTEI, true);
-    d_st.site = &vv_emlrtRSI;
+    emxInit_real_T(&c_st, &bsum, 1, &fr_emlrtRTEI, true);
+    d_st.site = &dw_emlrtRSI;
     vstride = x->size[0];
     bvstride = x->size[0] << 10;
     hi = y->size[0];
     y->size[0] = x->size[0];
-    emxEnsureCapacity_real_T(&d_st, y, hi, &eq_emlrtRTEI);
+    emxEnsureCapacity_real_T(&d_st, y, hi, &dr_emlrtRTEI);
     hi = bsum->size[0];
     bsum->size[0] = x->size[0];
-    emxEnsureCapacity_real_T(&d_st, bsum, hi, &fq_emlrtRTEI);
+    emxEnsureCapacity_real_T(&d_st, bsum, hi, &er_emlrtRTEI);
     if (x->size[1] <= 1024) {
       firstBlockLength = x->size[1];
       lastBlockLength = 0;
@@ -196,33 +196,33 @@ void b_sum(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
         lastBlockLength = 1024;
       }
     }
-    e_st.site = &wv_emlrtRSI;
+    e_st.site = &ew_emlrtRSI;
     if (x->size[0] > 2147483646) {
-      f_st.site = &ab_emlrtRSI;
+      f_st.site = &hb_emlrtRSI;
       check_forloop_overflow_error(&f_st);
     }
     for (xj = 0; xj < vstride; xj++) {
       y->data[xj] = x->data[xj];
       bsum->data[xj] = 0.0;
     }
-    e_st.site = &xv_emlrtRSI;
+    e_st.site = &fw_emlrtRSI;
     for (k = 2; k <= firstBlockLength; k++) {
       xoffset = (k - 1) * vstride;
-      e_st.site = &yv_emlrtRSI;
+      e_st.site = &gw_emlrtRSI;
       if (vstride > 2147483646) {
-        f_st.site = &ab_emlrtRSI;
+        f_st.site = &hb_emlrtRSI;
         check_forloop_overflow_error(&f_st);
       }
       for (xj = 0; xj < vstride; xj++) {
         y->data[xj] += x->data[xoffset + xj];
       }
     }
-    e_st.site = &aw_emlrtRSI;
+    e_st.site = &hw_emlrtRSI;
     for (ib = 2; ib <= nblocks; ib++) {
       firstBlockLength = (ib - 1) * bvstride;
-      e_st.site = &bw_emlrtRSI;
+      e_st.site = &iw_emlrtRSI;
       if (vstride > 2147483646) {
-        f_st.site = &ab_emlrtRSI;
+        f_st.site = &hb_emlrtRSI;
         check_forloop_overflow_error(&f_st);
       }
       for (xj = 0; xj < vstride; xj++) {
@@ -233,19 +233,19 @@ void b_sum(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
       } else {
         hi = 1024;
       }
-      e_st.site = &cw_emlrtRSI;
+      e_st.site = &jw_emlrtRSI;
       if ((2 <= hi) && (hi > 2147483646)) {
-        f_st.site = &ab_emlrtRSI;
+        f_st.site = &hb_emlrtRSI;
         check_forloop_overflow_error(&f_st);
       }
       for (k = 2; k <= hi; k++) {
         xoffset = firstBlockLength + (k - 1) * vstride;
-        e_st.site = &dw_emlrtRSI;
+        e_st.site = &kw_emlrtRSI;
         for (xj = 0; xj < vstride; xj++) {
           bsum->data[xj] += x->data[xoffset + xj];
         }
       }
-      e_st.site = &ew_emlrtRSI;
+      e_st.site = &lw_emlrtRSI;
       for (xj = 0; xj < vstride; xj++) {
         y->data[xj] += bsum->data[xj];
       }
@@ -262,13 +262,13 @@ real_T sum(const emlrtStack *sp, const emxArray_real_T *x)
   emlrtStack st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &lm_emlrtRSI;
+  st.site = &sm_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
-  b_st.site = &ld_emlrtRSI;
-  c_st.site = &mm_emlrtRSI;
+  b_st.site = &sd_emlrtRSI;
+  c_st.site = &tm_emlrtRSI;
   return blockedSummation(&c_st, x, x->size[0]);
 }
 

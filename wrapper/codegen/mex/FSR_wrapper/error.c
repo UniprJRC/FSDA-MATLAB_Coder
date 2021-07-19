@@ -16,37 +16,37 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static const char_T cv1[15] = {'F', 'S', 'D', 'A', ':', 'L', 'X', 'S',
+static const char_T cv7[15] = {'F', 'S', 'D', 'A', ':', 'L', 'X', 'S',
                                ':', 'W', 'r', 'o', 'n', 'g', 'h'};
 
-static const char_T cv13[45] = {
+static const char_T cv19[45] = {
     'p', ' ', 'm', 'u', 's', 't', ' ', 'b', 'e', ' ', 's', 'c', 'a', 'l', 'a',
     'r', ' ', 'n', 'o', 'n', ' ', 'e', 'm', 'p', 't', 'y', ' ', 'a', 'n', 'd',
     ' ', 'n', 'o', 'n', ' ', 'm', 'i', 's', 's', 'i', 'n', 'g', '!', '!', '!'};
 
-static const char_T cv14[56] = {
+static const char_T cv20[56] = {
     'I', 'n', 'i', 't', 'i', 'a', 'l', ' ', 's', 't', 'a', 'r', 't', 'i',
     'n', 'g', ' ', 'p', 'o', 'i', 'n', 't', ' ', 'o', 'f', ' ', 't', 'h',
     'e', ' ', 's', 'e', 'a', 'r', 'c', 'h', ' ', 'i', 's', ' ', 'g', 'r',
     'e', 'a', 't', 'e', 'r', ' ', 't', 'h', 'a', 'n', ' ', 'n', '-', '1'};
 
-static const char_T cv17[73] = {
+static const char_T cv23[73] = {
     'I', 'n', 'i', 't', 'i', 'a', 'l', ' ', 's', 't', 'a', 'r', 't', 'i', 'n',
     'g', ' ', 'p', 'o', 'i', 'n', 't', ' ', 'o', 'f', ' ', 't', 'h', 'e', ' ',
     's', 'e', 'a', 'r', 'c', 'h', ' ', '(', 'm', '0', '=', '%', 'd', ')', ' ',
     'i', 's', ' ', 'g', 'r', 'e', 'a', 't', 'e', 'r', ' ', 't', 'h', 'a', 'n',
     ' ', 'n', '-', '1', ' ', '(', 'n', '-', '1', '=', '%', 'd', ')'};
 
-static const char_T cv18[28] = {
+static const char_T cv24[28] = {
     'F', 'S', 'D', 'A', ':', 'F', 'S', 'R', 'e', 'n', 'v', 'm', 'd', 'r',
     ':', 'm', 'i', 's', 's', 'i', 'n', 'g', 'I', 'n', 'p', 'u', 't', 's'};
 
 /* Function Declarations */
-static void w_error(const emlrtStack *sp, const mxArray *b, const mxArray *c,
+static void x_error(const emlrtStack *sp, const mxArray *b, const mxArray *c,
                     const mxArray *d, const mxArray *e, emlrtMCInfo *location);
 
 /* Function Definitions */
-static void w_error(const emlrtStack *sp, const mxArray *b, const mxArray *c,
+static void x_error(const emlrtStack *sp, const mxArray *b, const mxArray *c,
                     const mxArray *d, const mxArray *e, emlrtMCInfo *location)
 {
   const mxArray *pArrays[4];
@@ -84,8 +84,8 @@ void b_error(const emlrtStack *sp)
   m = emlrtCreateCharArray(2, &iv1[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 56, m, &varargin_2[0]);
   emlrtAssign(&b_y, m);
-  st.site = &vpb_emlrtRSI;
-  v_error(&st, y, b_y, &b_emlrtMCI);
+  st.site = &qqb_emlrtRSI;
+  w_error(&st, y, b_y, &d_emlrtMCI);
 }
 
 void c_error(const emlrtStack *sp, const char_T varargin_2_data[],
@@ -101,7 +101,7 @@ void c_error(const emlrtStack *sp, const char_T varargin_2_data[],
   st.tls = sp->tls;
   y = NULL;
   m = emlrtCreateCharArray(2, &b_iv[0]);
-  emlrtInitCharArrayR2013a((emlrtCTX)sp, 15, m, &cv1[0]);
+  emlrtInitCharArrayR2013a((emlrtCTX)sp, 15, m, &cv7[0]);
   emlrtAssign(&y, m);
   b_y = NULL;
   iv1[0] = 1;
@@ -110,8 +110,8 @@ void c_error(const emlrtStack *sp, const char_T varargin_2_data[],
   emlrtInitCharArrayR2013a((emlrtCTX)sp, varargin_2_size[1], m,
                            &varargin_2_data[0]);
   emlrtAssign(&b_y, m);
-  st.site = &vpb_emlrtRSI;
-  v_error(&st, y, b_y, &b_emlrtMCI);
+  st.site = &qqb_emlrtRSI;
+  w_error(&st, y, b_y, &d_emlrtMCI);
 }
 
 void d_error(const emlrtStack *sp)
@@ -132,14 +132,14 @@ void d_error(const emlrtStack *sp)
   st.tls = sp->tls;
   y = NULL;
   m = emlrtCreateCharArray(2, &b_iv[0]);
-  emlrtInitCharArrayR2013a((emlrtCTX)sp, 15, m, &cv1[0]);
+  emlrtInitCharArrayR2013a((emlrtCTX)sp, 15, m, &cv7[0]);
   emlrtAssign(&y, m);
   b_y = NULL;
   m = emlrtCreateCharArray(2, &iv1[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 70, m, &varargin_2[0]);
   emlrtAssign(&b_y, m);
-  st.site = &vpb_emlrtRSI;
-  v_error(&st, y, b_y, &b_emlrtMCI);
+  st.site = &qqb_emlrtRSI;
+  w_error(&st, y, b_y, &d_emlrtMCI);
 }
 
 void e_error(const emlrtStack *sp)
@@ -169,8 +169,8 @@ void e_error(const emlrtStack *sp)
   m = emlrtCreateCharArray(2, &iv1[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 65, m, &varargin_2[0]);
   emlrtAssign(&b_y, m);
-  st.site = &vpb_emlrtRSI;
-  v_error(&st, y, b_y, &b_emlrtMCI);
+  st.site = &qqb_emlrtRSI;
+  w_error(&st, y, b_y, &d_emlrtMCI);
 }
 
 void error(const emlrtStack *sp)
@@ -194,8 +194,8 @@ void error(const emlrtStack *sp)
   m = emlrtCreateCharArray(2, &iv1[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 20, m, &cv[0]);
   emlrtAssign(&b_y, m);
-  st.site = &vpb_emlrtRSI;
-  v_error(&st, y, b_y, &b_emlrtMCI);
+  st.site = &qqb_emlrtRSI;
+  w_error(&st, y, b_y, &d_emlrtMCI);
 }
 
 void f_error(const emlrtStack *sp)
@@ -220,8 +220,8 @@ void f_error(const emlrtStack *sp)
   m = emlrtCreateCharArray(2, &iv1[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 8, m, &varargin_2[0]);
   emlrtAssign(&b_y, m);
-  st.site = &vpb_emlrtRSI;
-  v_error(&st, y, b_y, &b_emlrtMCI);
+  st.site = &qqb_emlrtRSI;
+  w_error(&st, y, b_y, &d_emlrtMCI);
 }
 
 void g_error(const emlrtStack *sp)
@@ -253,8 +253,8 @@ void g_error(const emlrtStack *sp)
   m = emlrtCreateCharArray(2, &iv1[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 90, m, &varargin_2[0]);
   emlrtAssign(&b_y, m);
-  st.site = &vpb_emlrtRSI;
-  v_error(&st, y, b_y, &b_emlrtMCI);
+  st.site = &qqb_emlrtRSI;
+  w_error(&st, y, b_y, &d_emlrtMCI);
 }
 
 void h_error(const emlrtStack *sp)
@@ -276,10 +276,10 @@ void h_error(const emlrtStack *sp)
   emlrtAssign(&y, m);
   b_y = NULL;
   m = emlrtCreateCharArray(2, &iv1[0]);
-  emlrtInitCharArrayR2013a((emlrtCTX)sp, 44, m, &cv12[0]);
+  emlrtInitCharArrayR2013a((emlrtCTX)sp, 44, m, &cv18[0]);
   emlrtAssign(&b_y, m);
-  st.site = &vpb_emlrtRSI;
-  v_error(&st, y, b_y, &b_emlrtMCI);
+  st.site = &qqb_emlrtRSI;
+  w_error(&st, y, b_y, &d_emlrtMCI);
 }
 
 void i_error(const emlrtStack *sp)
@@ -301,10 +301,10 @@ void i_error(const emlrtStack *sp)
   emlrtAssign(&y, m);
   b_y = NULL;
   m = emlrtCreateCharArray(2, &iv1[0]);
-  emlrtInitCharArrayR2013a((emlrtCTX)sp, 45, m, &cv13[0]);
+  emlrtInitCharArrayR2013a((emlrtCTX)sp, 45, m, &cv19[0]);
   emlrtAssign(&b_y, m);
-  st.site = &vpb_emlrtRSI;
-  v_error(&st, y, b_y, &b_emlrtMCI);
+  st.site = &qqb_emlrtRSI;
+  w_error(&st, y, b_y, &d_emlrtMCI);
 }
 
 void j_error(const emlrtStack *sp)
@@ -326,10 +326,10 @@ void j_error(const emlrtStack *sp)
   emlrtAssign(&y, m);
   b_y = NULL;
   m = emlrtCreateCharArray(2, &iv1[0]);
-  emlrtInitCharArrayR2013a((emlrtCTX)sp, 56, m, &cv14[0]);
+  emlrtInitCharArrayR2013a((emlrtCTX)sp, 56, m, &cv20[0]);
   emlrtAssign(&b_y, m);
-  st.site = &vpb_emlrtRSI;
-  v_error(&st, y, b_y, &b_emlrtMCI);
+  st.site = &qqb_emlrtRSI;
+  w_error(&st, y, b_y, &d_emlrtMCI);
 }
 
 void k_error(const emlrtStack *sp)
@@ -359,8 +359,8 @@ void k_error(const emlrtStack *sp)
   m = emlrtCreateCharArray(2, &iv1[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 68, m, &varargin_2[0]);
   emlrtAssign(&b_y, m);
-  st.site = &vpb_emlrtRSI;
-  v_error(&st, y, b_y, &b_emlrtMCI);
+  st.site = &qqb_emlrtRSI;
+  w_error(&st, y, b_y, &d_emlrtMCI);
 }
 
 void l_error(const emlrtStack *sp)
@@ -382,10 +382,10 @@ void l_error(const emlrtStack *sp)
   emlrtAssign(&y, m);
   b_y = NULL;
   m = emlrtCreateCharArray(2, &iv1[0]);
-  emlrtInitCharArrayR2013a((emlrtCTX)sp, 44, m, &cv12[0]);
+  emlrtInitCharArrayR2013a((emlrtCTX)sp, 44, m, &cv18[0]);
   emlrtAssign(&b_y, m);
-  st.site = &vpb_emlrtRSI;
-  v_error(&st, y, b_y, &b_emlrtMCI);
+  st.site = &qqb_emlrtRSI;
+  w_error(&st, y, b_y, &d_emlrtMCI);
 }
 
 void m_error(const emlrtStack *sp)
@@ -414,8 +414,8 @@ void m_error(const emlrtStack *sp)
   m = emlrtCreateCharArray(2, &iv1[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 45, m, &varargin_2[0]);
   emlrtAssign(&b_y, m);
-  st.site = &vpb_emlrtRSI;
-  v_error(&st, y, b_y, &b_emlrtMCI);
+  st.site = &qqb_emlrtRSI;
+  w_error(&st, y, b_y, &d_emlrtMCI);
 }
 
 void n_error(const emlrtStack *sp)
@@ -437,10 +437,10 @@ void n_error(const emlrtStack *sp)
   emlrtAssign(&y, m);
   b_y = NULL;
   m = emlrtCreateCharArray(2, &iv1[0]);
-  emlrtInitCharArrayR2013a((emlrtCTX)sp, 56, m, &cv14[0]);
+  emlrtInitCharArrayR2013a((emlrtCTX)sp, 56, m, &cv20[0]);
   emlrtAssign(&b_y, m);
-  st.site = &vpb_emlrtRSI;
-  v_error(&st, y, b_y, &b_emlrtMCI);
+  st.site = &qqb_emlrtRSI;
+  w_error(&st, y, b_y, &d_emlrtMCI);
 }
 
 void o_error(const emlrtStack *sp)
@@ -472,11 +472,37 @@ void o_error(const emlrtStack *sp)
   m = emlrtCreateCharArray(2, &iv1[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 92, m, &varargin_2[0]);
   emlrtAssign(&b_y, m);
-  st.site = &vpb_emlrtRSI;
-  v_error(&st, y, b_y, &b_emlrtMCI);
+  st.site = &qqb_emlrtRSI;
+  w_error(&st, y, b_y, &d_emlrtMCI);
 }
 
 void p_error(const emlrtStack *sp)
+{
+  static const int32_T b_iv[2] = {1, 15};
+  static const int32_T iv1[2] = {1, 14};
+  static const char_T varargin_1[15] = {'F', 'S', 'D', 'A', ':', 'F', 'S', 'R',
+                                        ':', 'N', 'o', 'C', 'o', 'n', 'v'};
+  static const char_T varargin_2[14] = {'N', 'o', ' ', 'c', 'o', 'n', 'v',
+                                        'e', 'r', 'g', 'e', 'n', 'c', 'e'};
+  emlrtStack st;
+  const mxArray *b_y;
+  const mxArray *m;
+  const mxArray *y;
+  st.prev = sp;
+  st.tls = sp->tls;
+  y = NULL;
+  m = emlrtCreateCharArray(2, &b_iv[0]);
+  emlrtInitCharArrayR2013a((emlrtCTX)sp, 15, m, &varargin_1[0]);
+  emlrtAssign(&y, m);
+  b_y = NULL;
+  m = emlrtCreateCharArray(2, &iv1[0]);
+  emlrtInitCharArrayR2013a((emlrtCTX)sp, 14, m, &varargin_2[0]);
+  emlrtAssign(&b_y, m);
+  st.site = &qqb_emlrtRSI;
+  w_error(&st, y, b_y, &d_emlrtMCI);
+}
+
+void q_error(const emlrtStack *sp)
 {
   static const int32_T b_iv[2] = {1, 24};
   static const int32_T iv1[2] = {1, 45};
@@ -495,13 +521,13 @@ void p_error(const emlrtStack *sp)
   emlrtAssign(&y, m);
   b_y = NULL;
   m = emlrtCreateCharArray(2, &iv1[0]);
-  emlrtInitCharArrayR2013a((emlrtCTX)sp, 45, m, &cv13[0]);
+  emlrtInitCharArrayR2013a((emlrtCTX)sp, 45, m, &cv19[0]);
   emlrtAssign(&b_y, m);
-  st.site = &vpb_emlrtRSI;
-  v_error(&st, y, b_y, &b_emlrtMCI);
+  st.site = &qqb_emlrtRSI;
+  w_error(&st, y, b_y, &d_emlrtMCI);
 }
 
-void q_error(const emlrtStack *sp, real_T varargin_3, real_T varargin_4)
+void r_error(const emlrtStack *sp, real_T varargin_3, real_T varargin_4)
 {
   static const int32_T b_iv[2] = {1, 28};
   static const int32_T iv1[2] = {1, 73};
@@ -522,7 +548,7 @@ void q_error(const emlrtStack *sp, real_T varargin_3, real_T varargin_4)
   emlrtAssign(&y, m);
   b_y = NULL;
   m = emlrtCreateCharArray(2, &iv1[0]);
-  emlrtInitCharArrayR2013a((emlrtCTX)sp, 73, m, &cv17[0]);
+  emlrtInitCharArrayR2013a((emlrtCTX)sp, 73, m, &cv23[0]);
   emlrtAssign(&b_y, m);
   c_y = NULL;
   m = emlrtCreateDoubleScalar(varargin_3);
@@ -530,11 +556,11 @@ void q_error(const emlrtStack *sp, real_T varargin_3, real_T varargin_4)
   d_y = NULL;
   m = emlrtCreateDoubleScalar(varargin_4);
   emlrtAssign(&d_y, m);
-  st.site = &vpb_emlrtRSI;
-  w_error(&st, y, b_y, c_y, d_y, &b_emlrtMCI);
+  st.site = &qqb_emlrtRSI;
+  x_error(&st, y, b_y, c_y, d_y, &d_emlrtMCI);
 }
 
-void r_error(const emlrtStack *sp)
+void s_error(const emlrtStack *sp)
 {
   static const int32_T b_iv[2] = {1, 28};
   static const int32_T iv1[2] = {1, 44};
@@ -546,17 +572,17 @@ void r_error(const emlrtStack *sp)
   st.tls = sp->tls;
   y = NULL;
   m = emlrtCreateCharArray(2, &b_iv[0]);
-  emlrtInitCharArrayR2013a((emlrtCTX)sp, 28, m, &cv18[0]);
+  emlrtInitCharArrayR2013a((emlrtCTX)sp, 28, m, &cv24[0]);
   emlrtAssign(&y, m);
   b_y = NULL;
   m = emlrtCreateCharArray(2, &iv1[0]);
-  emlrtInitCharArrayR2013a((emlrtCTX)sp, 44, m, &cv12[0]);
+  emlrtInitCharArrayR2013a((emlrtCTX)sp, 44, m, &cv18[0]);
   emlrtAssign(&b_y, m);
-  st.site = &vpb_emlrtRSI;
-  v_error(&st, y, b_y, &b_emlrtMCI);
+  st.site = &qqb_emlrtRSI;
+  w_error(&st, y, b_y, &d_emlrtMCI);
 }
 
-void s_error(const emlrtStack *sp)
+void t_error(const emlrtStack *sp)
 {
   static const int32_T b_iv[2] = {1, 28};
   static const int32_T iv1[2] = {1, 45};
@@ -568,17 +594,17 @@ void s_error(const emlrtStack *sp)
   st.tls = sp->tls;
   y = NULL;
   m = emlrtCreateCharArray(2, &b_iv[0]);
-  emlrtInitCharArrayR2013a((emlrtCTX)sp, 28, m, &cv18[0]);
+  emlrtInitCharArrayR2013a((emlrtCTX)sp, 28, m, &cv24[0]);
   emlrtAssign(&y, m);
   b_y = NULL;
   m = emlrtCreateCharArray(2, &iv1[0]);
-  emlrtInitCharArrayR2013a((emlrtCTX)sp, 45, m, &cv13[0]);
+  emlrtInitCharArrayR2013a((emlrtCTX)sp, 45, m, &cv19[0]);
   emlrtAssign(&b_y, m);
-  st.site = &vpb_emlrtRSI;
-  v_error(&st, y, b_y, &b_emlrtMCI);
+  st.site = &qqb_emlrtRSI;
+  w_error(&st, y, b_y, &d_emlrtMCI);
 }
 
-void t_error(const emlrtStack *sp, real_T varargin_3, real_T varargin_4)
+void u_error(const emlrtStack *sp, real_T varargin_3, real_T varargin_4)
 {
   static const int32_T b_iv[2] = {1, 24};
   static const int32_T iv1[2] = {1, 73};
@@ -599,7 +625,7 @@ void t_error(const emlrtStack *sp, real_T varargin_3, real_T varargin_4)
   emlrtAssign(&y, m);
   b_y = NULL;
   m = emlrtCreateCharArray(2, &iv1[0]);
-  emlrtInitCharArrayR2013a((emlrtCTX)sp, 73, m, &cv17[0]);
+  emlrtInitCharArrayR2013a((emlrtCTX)sp, 73, m, &cv23[0]);
   emlrtAssign(&b_y, m);
   c_y = NULL;
   m = emlrtCreateDoubleScalar(varargin_3);
@@ -607,11 +633,11 @@ void t_error(const emlrtStack *sp, real_T varargin_3, real_T varargin_4)
   d_y = NULL;
   m = emlrtCreateDoubleScalar(varargin_4);
   emlrtAssign(&d_y, m);
-  st.site = &vpb_emlrtRSI;
-  w_error(&st, y, b_y, c_y, d_y, &b_emlrtMCI);
+  st.site = &qqb_emlrtRSI;
+  x_error(&st, y, b_y, c_y, d_y, &d_emlrtMCI);
 }
 
-void u_error(const emlrtStack *sp)
+void v_error(const emlrtStack *sp)
 {
   static const int32_T b_iv[2] = {1, 28};
   static const int32_T iv1[2] = {1, 113};
@@ -642,8 +668,8 @@ void u_error(const emlrtStack *sp)
   m = emlrtCreateCharArray(2, &iv1[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 113, m, &varargin_2[0]);
   emlrtAssign(&b_y, m);
-  st.site = &vpb_emlrtRSI;
-  v_error(&st, y, b_y, &b_emlrtMCI);
+  st.site = &qqb_emlrtRSI;
+  w_error(&st, y, b_y, &d_emlrtMCI);
 }
 
 /* End of code generation (error.c) */

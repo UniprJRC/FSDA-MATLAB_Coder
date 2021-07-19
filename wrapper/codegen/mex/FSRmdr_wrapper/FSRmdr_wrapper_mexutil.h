@@ -24,16 +24,16 @@
 void b_error(const emlrtStack *sp, const mxArray *b, const mxArray *c,
              emlrtMCInfo *location);
 
+const mxArray *b_feval(const emlrtStack *sp, const mxArray *b, const mxArray *c,
+                       const mxArray *d, const mxArray *e,
+                       emlrtMCInfo *location);
+
 real_T c_emlrt_marshallIn(const emlrtStack *sp,
                           const mxArray *a__output_of_feval_,
                           const char_T *identifier);
 
 real_T d_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
                           const emlrtMsgIdentifier *parentId);
-
-const mxArray *d_feval(const emlrtStack *sp, const mxArray *b, const mxArray *c,
-                       const mxArray *d, const mxArray *e,
-                       emlrtMCInfo *location);
 
 const mxArray *feval(const emlrtStack *sp, const mxArray *b, const mxArray *c,
                      const mxArray *d, emlrtMCInfo *location);

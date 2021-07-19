@@ -3243,9 +3243,9 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     out->Likloc->size[1] = input_sizes_idx_1 + b_sizes_idx_1;
     emxEnsureCapacity_real_T(out->Likloc, i);
     loop_ub = input_sizes_idx_1;
-    for (i = 0; i < loop_ub; i++) {
-      for (i1 = 0; i1 < result; i1++) {
-        out->Likloc->data[i1] = betaini->data[i1];
+    if (0 <= loop_ub - 1) {
+      for (i = 0; i < result; i++) {
+        out->Likloc->data[i] = betaini->data[i];
       }
     }
     for (i = 0; i < b_sizes_idx_1; i++) {

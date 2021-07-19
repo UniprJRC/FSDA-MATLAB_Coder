@@ -104,7 +104,7 @@ static emlrtRSInfo ut_emlrtRSI =
         "internal\\vAllOrAny.m" /* pathName */
 };
 
-static emlrtRTEInfo jt_emlrtRTEI = {
+static emlrtRTEInfo it_emlrtRTEI = {
     19,    /* lineNo */
     14,    /* colNo */
     "svd", /* fName */
@@ -113,7 +113,7 @@ static emlrtRTEInfo jt_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo kt_emlrtRTEI = {
+static emlrtRTEInfo jt_emlrtRTEI = {
     20,     /* lineNo */
     5,      /* colNo */
     "rank", /* fName */
@@ -171,16 +171,16 @@ int32_T local_rank(const emlrtStack *sp, const emxArray_real_T *A)
         p = false;
       }
     }
-    emxInit_real_T(&st, &s, 1, &kt_emlrtRTEI, true);
+    emxInit_real_T(&st, &s, 1, &jt_emlrtRTEI, true);
     if (p) {
       b_st.site = &qt_emlrtRSI;
       svd(&b_st, A, s);
     } else {
-      emxInit_real_T(&st, &r, 2, &jt_emlrtRTEI, true);
+      emxInit_real_T(&st, &r, 2, &it_emlrtRTEI, true);
       k = r->size[0] * r->size[1];
       r->size[0] = A->size[0];
       r->size[1] = A->size[1];
-      emxEnsureCapacity_real_T(&st, r, k, &jt_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, r, k, &it_emlrtRTEI);
       nx = A->size[0] * A->size[1];
       for (k = 0; k < nx; k++) {
         r->data[k] = 0.0;
@@ -190,7 +190,7 @@ int32_T local_rank(const emlrtStack *sp, const emxArray_real_T *A)
       nx = s->size[0];
       k = s->size[0];
       s->size[0] = nx;
-      emxEnsureCapacity_real_T(&st, s, k, &kt_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, s, k, &jt_emlrtRTEI);
       emxFree_real_T(&r);
       for (k = 0; k < nx; k++) {
         s->data[k] = rtNaN;

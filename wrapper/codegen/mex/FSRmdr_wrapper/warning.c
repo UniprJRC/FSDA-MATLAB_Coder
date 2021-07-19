@@ -33,7 +33,7 @@ static emlrtMCInfo q_emlrtMCI = {
     "internal\\warning.m" /* pName */
 };
 
-static emlrtRSInfo gl_emlrtRSI = {
+static emlrtRSInfo xk_emlrtRSI = {
     14,        /* lineNo */
     "warning", /* fcnName */
     "C:\\Program "
@@ -42,14 +42,14 @@ static emlrtRSInfo gl_emlrtRSI = {
 };
 
 /* Function Declarations */
-static const mxArray *b_feval(const emlrtStack *sp, const mxArray *b,
+static const mxArray *c_feval(const emlrtStack *sp, const mxArray *b,
                               const mxArray *c, emlrtMCInfo *location);
 
-static void c_feval(const emlrtStack *sp, const mxArray *b, const mxArray *c,
+static void d_feval(const emlrtStack *sp, const mxArray *b, const mxArray *c,
                     emlrtMCInfo *location);
 
 /* Function Definitions */
-static const mxArray *b_feval(const emlrtStack *sp, const mxArray *b,
+static const mxArray *c_feval(const emlrtStack *sp, const mxArray *b,
                               const mxArray *c, emlrtMCInfo *location)
 {
   const mxArray *pArrays[2];
@@ -60,7 +60,7 @@ static const mxArray *b_feval(const emlrtStack *sp, const mxArray *b,
                                (const char_T *)"feval", true, location);
 }
 
-static void c_feval(const emlrtStack *sp, const mxArray *b, const mxArray *c,
+static void d_feval(const emlrtStack *sp, const mxArray *b, const mxArray *c,
                     emlrtMCInfo *location)
 {
   const mxArray *pArrays[2];
@@ -112,8 +112,8 @@ void b_warning(const emlrtStack *sp, int32_T varargin_1,
   m = emlrtCreateCharArray(2, &iv3[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 14, m, &varargin_2[0]);
   emlrtAssign(&e_y, m);
-  st.site = &gl_emlrtRSI;
-  c_feval(&st, y, d_feval(&st, b_y, c_y, d_y, e_y, &p_emlrtMCI), &q_emlrtMCI);
+  st.site = &xk_emlrtRSI;
+  d_feval(&st, y, b_feval(&st, b_y, c_y, d_y, e_y, &p_emlrtMCI), &q_emlrtMCI);
 }
 
 void warning(const emlrtStack *sp)
@@ -145,8 +145,8 @@ void warning(const emlrtStack *sp)
   m = emlrtCreateCharArray(2, &iv2[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 21, m, &msgID[0]);
   emlrtAssign(&c_y, m);
-  st.site = &gl_emlrtRSI;
-  c_feval(&st, y, b_feval(&st, b_y, c_y, &p_emlrtMCI), &q_emlrtMCI);
+  st.site = &xk_emlrtRSI;
+  d_feval(&st, y, c_feval(&st, b_y, c_y, &p_emlrtMCI), &q_emlrtMCI);
 }
 
 /* End of code generation (warning.c) */

@@ -38,9 +38,12 @@
 #include "main.h"
 #include "FSM_wrapper.h"
 #include "FSMbsb_wrapper.h"
+#include "FSMenvmmd_wrapper.h"
 #include "FSMmmd_wrapper.h"
 #include "FSR_wrapper.h"
+#include "FSR_wrapper1.h"
 #include "FSRbsb_wrapper.h"
+#include "FSRenvmdr_wrapper.h"
 #include "FSRfan_wrapper.h"
 #include "FSRmdr_wrapper.h"
 #include "LTSts_wrapper.h"
@@ -53,10 +56,13 @@
 #include "rt_nonfinite.h"
 #include "tclust_wrapper.h"
 #include "tclust_wrapper1.h"
+#include "unibiv_wrapper.h"
 #include <string.h>
 
 /* Function Declarations */
 static void argInit_1x3_char_T(char result[3]);
+
+static emxArray_real_T *argInit_1xUnbounded_real_T(void);
 
 static emxArray_real_T *argInit_Unboundedx1_real_T(void);
 
@@ -70,11 +76,11 @@ static emxArray_char_T *argInit_d1xUnbounded_char_T(void);
 
 static void argInit_d1xd1_real_T(double result_data[], int result_size[2]);
 
-static void argInit_d1xd3_char_T(char result_data[], int result_size[2]);
-
 static void argInit_d2xd1_real_T(double result_data[], int result_size[2]);
 
 static double argInit_real_T(void);
+
+static struct_FSRlms_T argInit_struct_FSRlms_T(void);
 
 static struct_LTStsmodel_T argInit_struct_LTStsmodel_T(void);
 
@@ -90,11 +96,17 @@ static void main_FSM_wrapper(void);
 
 static void main_FSMbsb_wrapper(void);
 
+static void main_FSMenvmmd_wrapper(void);
+
 static void main_FSMmmd_wrapper(void);
 
 static void main_FSR_wrapper(void);
 
+static void main_FSR_wrapper1(void);
+
 static void main_FSRbsb_wrapper(void);
+
+static void main_FSRenvmdr_wrapper(void);
 
 static void main_FSRfan_wrapper(void);
 
@@ -112,6 +124,8 @@ static void main_tclust_wrapper(void);
 
 static void main_tclust_wrapper1(void);
 
+static void main_unibiv_wrapper(void);
+
 /* Function Definitions */
 static void argInit_1x3_char_T(char result[3])
 {
@@ -122,6 +136,25 @@ static void argInit_1x3_char_T(char result[3])
 Change this value to the value that the application requires. */
     result[idx1] = argInit_char_T();
   }
+}
+
+static emxArray_real_T *argInit_1xUnbounded_real_T(void)
+{
+  emxArray_real_T *result;
+  int idx0;
+  int idx1;
+  /* Set the size of the array.
+Change this size to the value that the application requires. */
+  result = emxCreate_real_T(1, 2);
+  /* Loop over the array to initialize each element. */
+  for (idx0 = 0; idx0 < 1; idx0++) {
+    for (idx1 = 0; idx1 < result->size[1U]; idx1++) {
+      /* Set the value of the array element.
+Change this value to the value that the application requires. */
+      result->data[idx1] = argInit_real_T();
+    }
+  }
+  return result;
 }
 
 static emxArray_real_T *argInit_Unboundedx1_real_T(void)
@@ -199,21 +232,6 @@ Change this size to the value that the application requires. */
   result_data[0] = argInit_real_T();
 }
 
-static void argInit_d1xd3_char_T(char result_data[], int result_size[2])
-{
-  int idx1;
-  /* Set the size of the array.
-Change this size to the value that the application requires. */
-  result_size[0] = 1;
-  result_size[1] = 2;
-  /* Loop over the array to initialize each element. */
-  for (idx1 = 0; idx1 < 2; idx1++) {
-    /* Set the value of the array element.
-Change this value to the value that the application requires. */
-    result_data[idx1] = argInit_char_T();
-  }
-}
-
 static void argInit_d2xd1_real_T(double result_data[], int result_size[2])
 {
   int idx0;
@@ -230,6 +248,15 @@ Change this size to the value that the application requires. */
 static double argInit_real_T(void)
 {
   return 0.0;
+}
+
+static struct_FSRlms_T argInit_struct_FSRlms_T(void)
+{
+  struct_FSRlms_T result;
+  /* Set the value of each structure field.
+Change this value to the value that the application requires. */
+  result.bsb = argInit_Unboundedx1_real_T();
+  return result;
 }
 
 static struct_LTStsmodel_T argInit_struct_LTStsmodel_T(void)
@@ -323,14 +350,13 @@ Change this value to the value that the application requires. */
 
 static void main_FSM_wrapper(void)
 {
+  emxArray_char_T *crit;
   emxArray_real_T *Y;
   emxArray_real_T *m0;
   struct_FSM_T out;
   double bonflev_data;
   double init_tmp;
   int bonflev_size[2];
-  int crit_size[2];
-  char crit_data[3];
   bool msg_tmp;
   emxInit_struct_FSM_T(&out);
   /* Initialize function 'FSM_wrapper' input arguments. */
@@ -339,16 +365,17 @@ static void main_FSM_wrapper(void)
   /* Initialize function input argument 'bonflev'. */
   argInit_d1xd1_real_T((double *)&bonflev_data, bonflev_size);
   /* Initialize function input argument 'crit'. */
-  argInit_d1xd3_char_T(crit_data, crit_size);
+  crit = argInit_d1xUnbounded_char_T();
   init_tmp = argInit_real_T();
   /* Initialize function input argument 'm0'. */
   m0 = argInit_Unboundedx1_real_T();
   msg_tmp = argInit_boolean_T();
   /* Call the entry-point 'FSM_wrapper'. */
-  FSM_wrapper(Y, (double *)&bonflev_data, bonflev_size, crit_data, crit_size,
-              init_tmp, m0, msg_tmp, msg_tmp, init_tmp, &out);
+  FSM_wrapper(Y, (double *)&bonflev_data, bonflev_size, crit, init_tmp, m0,
+              msg_tmp, msg_tmp, init_tmp, &out);
   emxDestroy_struct_FSM_T(out);
   emxDestroyArray_real_T(m0);
+  emxDestroyArray_char_T(crit);
   emxDestroyArray_real_T(Y);
 }
 
@@ -377,6 +404,22 @@ static void main_FSMbsb_wrapper(void)
   emxDestroyArray_real_T(bsbsteps);
   emxDestroyArray_real_T(bsb);
   emxDestroyArray_real_T(Y);
+}
+
+static void main_FSMenvmmd_wrapper(void)
+{
+  emxArray_real_T *MMDenv;
+  emxArray_real_T *prob;
+  double n_tmp;
+  emxInitArray_real_T(&MMDenv, 2);
+  /* Initialize function 'FSMenvmmd_wrapper' input arguments. */
+  n_tmp = argInit_real_T();
+  /* Initialize function input argument 'prob'. */
+  prob = argInit_1xUnbounded_real_T();
+  /* Call the entry-point 'FSMenvmmd_wrapper'. */
+  FSMenvmmd_wrapper(n_tmp, n_tmp, n_tmp, prob, argInit_boolean_T(), MMDenv);
+  emxDestroyArray_real_T(MMDenv);
+  emxDestroyArray_real_T(prob);
 }
 
 static void main_FSMmmd_wrapper(void)
@@ -443,9 +486,46 @@ static void main_FSR_wrapper(void)
   emxDestroyArray_real_T(y);
 }
 
+static void main_FSR_wrapper1(void)
+{
+  emxArray_real_T *X;
+  emxArray_real_T *y;
+  struct0_T out;
+  struct_FSRlms_T lms;
+  double bonflev_data;
+  double h_tmp;
+  double threshoutX_data;
+  int bonflev_size[2];
+  int threshoutX_size[2];
+  bool bsbmfullrank_tmp;
+  emxInit_struct0_T(&out);
+  /* Initialize function 'FSR_wrapper1' input arguments. */
+  /* Initialize function input argument 'y'. */
+  y = argInit_Unboundedx1_real_T();
+  /* Initialize function input argument 'X'. */
+  X = c_argInit_UnboundedxUnbounded_r();
+  bsbmfullrank_tmp = argInit_boolean_T();
+  /* Initialize function input argument 'bonflev'. */
+  argInit_d1xd1_real_T((double *)&bonflev_data, bonflev_size);
+  h_tmp = argInit_real_T();
+  /* Initialize function input argument 'lms'. */
+  lms = argInit_struct_FSRlms_T();
+  /* Initialize function input argument 'threshoutX'. */
+  argInit_d1xd1_real_T((double *)&threshoutX_data, threshoutX_size);
+  /* Call the entry-point 'FSR_wrapper1'. */
+  FSR_wrapper1(y, X, bsbmfullrank_tmp, (double *)&bonflev_data, bonflev_size,
+               h_tmp, h_tmp, bsbmfullrank_tmp, &lms, bsbmfullrank_tmp,
+               bsbmfullrank_tmp, h_tmp, (double *)&threshoutX_data,
+               threshoutX_size, bsbmfullrank_tmp, &out);
+  emxDestroy_struct0_T(out);
+  emxDestroy_struct_FSRlms_T(lms);
+  emxDestroyArray_real_T(X);
+  emxDestroyArray_real_T(y);
+}
+
 static void main_FSRbsb_wrapper(void)
 {
-  emxArray_real32_T *BB;
+  emxArray_real_T *BB;
   emxArray_real_T *Un;
   emxArray_real_T *X;
   emxArray_real_T *bsb;
@@ -453,7 +533,7 @@ static void main_FSRbsb_wrapper(void)
   emxArray_real_T *y;
   bool intercept_tmp;
   emxInitArray_real_T(&Un, 2);
-  emxInitArray_real32_T(&BB, 2);
+  emxInitArray_real_T(&BB, 2);
   /* Initialize function 'FSRbsb_wrapper' input arguments. */
   /* Initialize function input argument 'y'. */
   y = argInit_Unboundedx1_real_T();
@@ -467,12 +547,28 @@ static void main_FSRbsb_wrapper(void)
   /* Call the entry-point 'FSRbsb_wrapper'. */
   FSRbsb_wrapper(y, X, bsb, bsbsteps, argInit_real_T(), intercept_tmp,
                  intercept_tmp, intercept_tmp, Un, BB);
-  emxDestroyArray_real32_T(BB);
+  emxDestroyArray_real_T(BB);
   emxDestroyArray_real_T(Un);
   emxDestroyArray_real_T(bsbsteps);
   emxDestroyArray_real_T(bsb);
   emxDestroyArray_real_T(X);
   emxDestroyArray_real_T(y);
+}
+
+static void main_FSRenvmdr_wrapper(void)
+{
+  emxArray_real_T *MDRenv;
+  emxArray_real_T *prob;
+  double n_tmp;
+  emxInitArray_real_T(&MDRenv, 2);
+  /* Initialize function 'FSRenvmdr_wrapper' input arguments. */
+  n_tmp = argInit_real_T();
+  /* Initialize function input argument 'prob'. */
+  prob = argInit_1xUnbounded_real_T();
+  /* Call the entry-point 'FSRenvmdr_wrapper'. */
+  FSRenvmdr_wrapper(n_tmp, n_tmp, n_tmp, prob, MDRenv);
+  emxDestroyArray_real_T(MDRenv);
+  emxDestroyArray_real_T(prob);
 }
 
 static void main_FSRfan_wrapper(void)
@@ -758,6 +854,22 @@ static void main_tclust_wrapper1(void)
   emxDestroyArray_real_T(Y);
 }
 
+static void main_unibiv_wrapper(void)
+{
+  emxArray_real_T *Y;
+  emxArray_real_T *fre;
+  double madcoef_tmp;
+  emxInitArray_real_T(&fre, 2);
+  /* Initialize function 'unibiv_wrapper' input arguments. */
+  /* Initialize function input argument 'Y'. */
+  Y = c_argInit_UnboundedxUnbounded_r();
+  madcoef_tmp = argInit_real_T();
+  /* Call the entry-point 'unibiv_wrapper'. */
+  unibiv_wrapper(Y, madcoef_tmp, madcoef_tmp, madcoef_tmp, fre);
+  emxDestroyArray_real_T(fre);
+  emxDestroyArray_real_T(Y);
+}
+
 int main(int argc, char **argv)
 {
   (void)argc;
@@ -768,9 +880,12 @@ int main(int argc, char **argv)
 You can call entry-point functions multiple times. */
   main_FSM_wrapper();
   main_FSMbsb_wrapper();
+  main_FSMenvmmd_wrapper();
   main_FSMmmd_wrapper();
   main_FSR_wrapper();
+  main_FSR_wrapper1();
   main_FSRbsb_wrapper();
+  main_FSRenvmdr_wrapper();
   main_FSRfan_wrapper();
   main_FSRmdr_wrapper();
   main_LTSts_wrapper();
@@ -779,6 +894,7 @@ You can call entry-point functions multiple times. */
   main_addt_wrapper();
   main_tclust_wrapper();
   main_tclust_wrapper1();
+  main_unibiv_wrapper();
   /* Terminate the application.
 You do not need to do this more than one time. */
   fsdaC_terminate();

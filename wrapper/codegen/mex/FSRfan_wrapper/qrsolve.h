@@ -22,6 +22,10 @@
 #include <string.h>
 
 /* Function Declarations */
+void LSQFromQR(const emlrtStack *sp, const emxArray_real_T *A,
+               const emxArray_real_T *tau, const emxArray_int32_T *jpvt,
+               emxArray_real_T *B, int32_T rankA, emxArray_real_T *Y);
+
 int32_T rankFromQR(const emlrtStack *sp, const emxArray_real_T *A);
 
 /* End of code generation (qrsolve.h) */

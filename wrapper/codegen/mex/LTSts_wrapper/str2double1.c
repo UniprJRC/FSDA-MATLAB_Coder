@@ -194,7 +194,7 @@ void b_readfloat(const emlrtStack *sp, char_T s1[4], int32_T *idx,
       i = (uint8_T)s[b_k];
       if (i > 127) {
         emlrtErrorWithMessageIdR2018a(
-            &e_st, &o_emlrtRTEI, "Coder:toolbox:unsupportedString",
+            &e_st, &n_emlrtRTEI, "Coder:toolbox:unsupportedString",
             "Coder:toolbox:unsupportedString", 2, 12, 127);
       }
       if (!bv[i]) {
@@ -292,7 +292,7 @@ void b_skipspaces(const emlrtStack *sp, const char_T s[2], int32_T *k)
     c = s[*k - 1];
     if ((uint8_T)c > 127) {
       emlrtErrorWithMessageIdR2018a(
-          &d_st, &o_emlrtRTEI, "Coder:toolbox:unsupportedString",
+          &d_st, &n_emlrtRTEI, "Coder:toolbox:unsupportedString",
           "Coder:toolbox:unsupportedString", 2, 12, 127);
     }
     if (bv[(uint8_T)c & 127] || (c == '\x00') || (c == ',')) {
@@ -455,7 +455,7 @@ void readfloat(const emlrtStack *sp, char_T s1[3], int32_T *idx, char_T s,
       e_st.site = &eg_emlrtRSI;
       if ((uint8_T)s > 127) {
         emlrtErrorWithMessageIdR2018a(
-            &e_st, &o_emlrtRTEI, "Coder:toolbox:unsupportedString",
+            &e_st, &n_emlrtRTEI, "Coder:toolbox:unsupportedString",
             "Coder:toolbox:unsupportedString", 2, 12, 127);
       }
       if (!bv[(uint8_T)s & 127]) {
@@ -550,7 +550,7 @@ void skipspaces(const emlrtStack *sp, char_T s, int32_T *k)
     d_st.site = &eg_emlrtRSI;
     if ((uint8_T)s > 127) {
       emlrtErrorWithMessageIdR2018a(
-          &d_st, &o_emlrtRTEI, "Coder:toolbox:unsupportedString",
+          &d_st, &n_emlrtRTEI, "Coder:toolbox:unsupportedString",
           "Coder:toolbox:unsupportedString", 2, 12, 127);
     }
     if (bv[(uint8_T)s & 127] || (s == '\x00') || (s == ',')) {

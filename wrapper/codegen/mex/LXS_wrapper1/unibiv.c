@@ -37,207 +37,207 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo ai_emlrtRSI = { 494,/* lineNo */
+static emlrtRSInfo ai_emlrtRSI = { 495,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo bi_emlrtRSI = { 436,/* lineNo */
+static emlrtRSInfo bi_emlrtRSI = { 437,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo ci_emlrtRSI = { 430,/* lineNo */
+static emlrtRSInfo ci_emlrtRSI = { 431,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo di_emlrtRSI = { 429,/* lineNo */
+static emlrtRSInfo di_emlrtRSI = { 430,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo ei_emlrtRSI = { 427,/* lineNo */
+static emlrtRSInfo ei_emlrtRSI = { 428,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo fi_emlrtRSI = { 423,/* lineNo */
+static emlrtRSInfo fi_emlrtRSI = { 424,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo gi_emlrtRSI = { 422,/* lineNo */
+static emlrtRSInfo gi_emlrtRSI = { 423,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo hi_emlrtRSI = { 419,/* lineNo */
+static emlrtRSInfo hi_emlrtRSI = { 420,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo ii_emlrtRSI = { 413,/* lineNo */
+static emlrtRSInfo ii_emlrtRSI = { 414,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo ji_emlrtRSI = { 412,/* lineNo */
+static emlrtRSInfo ji_emlrtRSI = { 413,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo ki_emlrtRSI = { 404,/* lineNo */
+static emlrtRSInfo ki_emlrtRSI = { 405,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo li_emlrtRSI = { 403,/* lineNo */
+static emlrtRSInfo li_emlrtRSI = { 404,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo mi_emlrtRSI = { 399,/* lineNo */
+static emlrtRSInfo mi_emlrtRSI = { 400,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo ni_emlrtRSI = { 398,/* lineNo */
+static emlrtRSInfo ni_emlrtRSI = { 399,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo oi_emlrtRSI = { 397,/* lineNo */
+static emlrtRSInfo oi_emlrtRSI = { 398,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo pi_emlrtRSI = { 390,/* lineNo */
+static emlrtRSInfo pi_emlrtRSI = { 391,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo qi_emlrtRSI = { 344,/* lineNo */
+static emlrtRSInfo qi_emlrtRSI = { 345,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo ri_emlrtRSI = { 343,/* lineNo */
+static emlrtRSInfo ri_emlrtRSI = { 344,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo si_emlrtRSI = { 342,/* lineNo */
+static emlrtRSInfo si_emlrtRSI = { 343,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo ti_emlrtRSI = { 331,/* lineNo */
+static emlrtRSInfo ti_emlrtRSI = { 332,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo ui_emlrtRSI = { 330,/* lineNo */
+static emlrtRSInfo ui_emlrtRSI = { 331,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo vi_emlrtRSI = { 329,/* lineNo */
+static emlrtRSInfo vi_emlrtRSI = { 330,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo wi_emlrtRSI = { 328,/* lineNo */
+static emlrtRSInfo wi_emlrtRSI = { 329,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo xi_emlrtRSI = { 322,/* lineNo */
+static emlrtRSInfo xi_emlrtRSI = { 323,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo yi_emlrtRSI = { 306,/* lineNo */
+static emlrtRSInfo yi_emlrtRSI = { 307,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo aj_emlrtRSI = { 292,/* lineNo */
+static emlrtRSInfo aj_emlrtRSI = { 293,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo bj_emlrtRSI = { 291,/* lineNo */
+static emlrtRSInfo bj_emlrtRSI = { 292,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo cj_emlrtRSI = { 251,/* lineNo */
+static emlrtRSInfo cj_emlrtRSI = { 252,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo dj_emlrtRSI = { 239,/* lineNo */
+static emlrtRSInfo dj_emlrtRSI = { 240,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo ej_emlrtRSI = { 235,/* lineNo */
+static emlrtRSInfo ej_emlrtRSI = { 236,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo fj_emlrtRSI = { 220,/* lineNo */
+static emlrtRSInfo fj_emlrtRSI = { 221,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo gj_emlrtRSI = { 217,/* lineNo */
+static emlrtRSInfo gj_emlrtRSI = { 218,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo hj_emlrtRSI = { 215,/* lineNo */
+static emlrtRSInfo hj_emlrtRSI = { 216,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo ij_emlrtRSI = { 210,/* lineNo */
+static emlrtRSInfo ij_emlrtRSI = { 211,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo jj_emlrtRSI = { 208,/* lineNo */
+static emlrtRSInfo jj_emlrtRSI = { 209,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo el_emlrtRSI = { 513,/* lineNo */
+static emlrtRSInfo el_emlrtRSI = { 514,/* lineNo */
   "tiedrankFS",                        /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo fl_emlrtRSI = { 516,/* lineNo */
+static emlrtRSInfo fl_emlrtRSI = { 517,/* lineNo */
   "tiedrankFS",                        /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo gl_emlrtRSI = { 523,/* lineNo */
+static emlrtRSInfo gl_emlrtRSI = { 524,/* lineNo */
   "tiedrankFS",                        /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo hl_emlrtRSI = { 524,/* lineNo */
+static emlrtRSInfo hl_emlrtRSI = { 525,/* lineNo */
   "tiedrankFS",                        /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo il_emlrtRSI = { 540,/* lineNo */
+static emlrtRSInfo il_emlrtRSI = { 541,/* lineNo */
   "tiedrankFS",                        /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo jl_emlrtRSI = { 546,/* lineNo */
+static emlrtRSInfo jl_emlrtRSI = { 547,/* lineNo */
   "tiedrankFS",                        /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
@@ -247,19 +247,19 @@ static emlrtRSInfo pm_emlrtRSI = { 29, /* lineNo */
   "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\reshapeSizeChecks.m"/* pathName */
 };
 
-static emlrtMCInfo m_emlrtMCI = { 301, /* lineNo */
+static emlrtMCInfo m_emlrtMCI = { 302, /* lineNo */
   25,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtMCInfo n_emlrtMCI = { 320, /* lineNo */
+static emlrtMCInfo n_emlrtMCI = { 321, /* lineNo */
   25,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtMCInfo o_emlrtMCI = { 313, /* lineNo */
+static emlrtMCInfo o_emlrtMCI = { 314, /* lineNo */
   25,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
@@ -267,7 +267,7 @@ static emlrtMCInfo o_emlrtMCI = { 313, /* lineNo */
 
 static emlrtBCInfo jl_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  207,                                 /* lineNo */
+  208,                                 /* lineNo */
   11,                                  /* colNo */
   "Y",                                 /* aName */
   "unibiv",                            /* fName */
@@ -276,14 +276,14 @@ static emlrtBCInfo jl_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo u_emlrtECI = { -1,  /* nDims */
-  251,                                 /* lineNo */
+  252,                                 /* lineNo */
   16,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
 static emlrtECInfo v_emlrtECI = { -1,  /* nDims */
-  257,                                 /* lineNo */
+  258,                                 /* lineNo */
   9,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
@@ -291,7 +291,7 @@ static emlrtECInfo v_emlrtECI = { -1,  /* nDims */
 
 static emlrtBCInfo kl_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  290,                                 /* lineNo */
+  291,                                 /* lineNo */
   19,                                  /* colNo */
   "Y",                                 /* aName */
   "unibiv",                            /* fName */
@@ -300,35 +300,35 @@ static emlrtBCInfo kl_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo w_emlrtECI = { -1,  /* nDims */
-  328,                                 /* lineNo */
-  24,                                  /* colNo */
-  "unibiv",                            /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
-};
-
-static emlrtECInfo x_emlrtECI = { -1,  /* nDims */
   329,                                 /* lineNo */
   24,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
+static emlrtECInfo x_emlrtECI = { -1,  /* nDims */
+  330,                                 /* lineNo */
+  24,                                  /* colNo */
+  "unibiv",                            /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
+};
+
 static emlrtECInfo y_emlrtECI = { -1,  /* nDims */
-  390,                                 /* lineNo */
+  391,                                 /* lineNo */
   21,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
 static emlrtECInfo ab_emlrtECI = { -1, /* nDims */
-  390,                                 /* lineNo */
+  391,                                 /* lineNo */
   33,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
 static emlrtECInfo bb_emlrtECI = { -1, /* nDims */
-  394,                                 /* lineNo */
+  395,                                 /* lineNo */
   19,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
@@ -336,7 +336,7 @@ static emlrtECInfo bb_emlrtECI = { -1, /* nDims */
 
 static emlrtBCInfo ll_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  459,                                 /* lineNo */
+  460,                                 /* lineNo */
   51,                                  /* colNo */
   "new2",                              /* aName */
   "unibiv",                            /* fName */
@@ -346,7 +346,7 @@ static emlrtBCInfo ll_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo ml_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  459,                                 /* lineNo */
+  460,                                 /* lineNo */
   89,                                  /* colNo */
   "new2",                              /* aName */
   "unibiv",                            /* fName */
@@ -355,7 +355,7 @@ static emlrtBCInfo ml_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo cb_emlrtECI = { -1, /* nDims */
-  465,                                 /* lineNo */
+  466,                                 /* lineNo */
   18,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
@@ -363,7 +363,7 @@ static emlrtECInfo cb_emlrtECI = { -1, /* nDims */
 
 static emlrtBCInfo nl_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  251,                                 /* lineNo */
+  252,                                 /* lineNo */
   16,                                  /* colNo */
   "datax",                             /* aName */
   "unibiv",                            /* fName */
@@ -371,7 +371,7 @@ static emlrtBCInfo nl_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo eb_emlrtDCI = { 257,/* lineNo */
+static emlrtDCInfo eb_emlrtDCI = { 258,/* lineNo */
   15,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m",/* pName */
@@ -380,7 +380,7 @@ static emlrtDCInfo eb_emlrtDCI = { 257,/* lineNo */
 
 static emlrtBCInfo ol_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  257,                                 /* lineNo */
+  258,                                 /* lineNo */
   15,                                  /* colNo */
   "univT",                             /* aName */
   "unibiv",                            /* fName */
@@ -390,7 +390,7 @@ static emlrtBCInfo ol_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo pl_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  257,                                 /* lineNo */
+  258,                                 /* lineNo */
   32,                                  /* colNo */
   "univT",                             /* aName */
   "unibiv",                            /* fName */
@@ -398,7 +398,7 @@ static emlrtBCInfo pl_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtDCInfo fb_emlrtDCI = { 257,/* lineNo */
+static emlrtDCInfo fb_emlrtDCI = { 258,/* lineNo */
   32,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m",/* pName */
@@ -407,7 +407,7 @@ static emlrtDCInfo fb_emlrtDCI = { 257,/* lineNo */
 
 static emlrtBCInfo ql_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  459,                                 /* lineNo */
+  460,                                 /* lineNo */
   26,                                  /* colNo */
   "new2",                              /* aName */
   "unibiv",                            /* fName */
@@ -417,7 +417,7 @@ static emlrtBCInfo ql_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo rl_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  459,                                 /* lineNo */
+  460,                                 /* lineNo */
   64,                                  /* colNo */
   "new2",                              /* aName */
   "unibiv",                            /* fName */
@@ -427,7 +427,7 @@ static emlrtBCInfo rl_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo sl_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  460,                                 /* lineNo */
+  461,                                 /* lineNo */
   31,                                  /* colNo */
   "biv",                               /* aName */
   "unibiv",                            /* fName */
@@ -437,7 +437,7 @@ static emlrtBCInfo sl_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo cm_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  523,                                 /* lineNo */
+  524,                                 /* lineNo */
   11,                                  /* colNo */
   "sx",                                /* aName */
   "tiedrankFS",                        /* fName */
@@ -447,7 +447,7 @@ static emlrtBCInfo cm_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo dm_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  523,                                 /* lineNo */
+  524,                                 /* lineNo */
   13,                                  /* colNo */
   "sx",                                /* aName */
   "tiedrankFS",                        /* fName */
@@ -457,7 +457,7 @@ static emlrtBCInfo dm_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo em_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  523,                                 /* lineNo */
+  524,                                 /* lineNo */
   26,                                  /* colNo */
   "epsx",                              /* aName */
   "tiedrankFS",                        /* fName */
@@ -467,7 +467,7 @@ static emlrtBCInfo em_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo fm_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  523,                                 /* lineNo */
+  524,                                 /* lineNo */
   28,                                  /* colNo */
   "epsx",                              /* aName */
   "tiedrankFS",                        /* fName */
@@ -476,7 +476,7 @@ static emlrtBCInfo fm_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo db_emlrtECI = { -1, /* nDims */
-  523,                                 /* lineNo */
+  524,                                 /* lineNo */
   8,                                   /* colNo */
   "tiedrankFS",                        /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
@@ -484,7 +484,7 @@ static emlrtECInfo db_emlrtECI = { -1, /* nDims */
 
 static emlrtBCInfo gm_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  523,                                 /* lineNo */
+  524,                                 /* lineNo */
   42,                                  /* colNo */
   "sx",                                /* aName */
   "tiedrankFS",                        /* fName */
@@ -494,7 +494,7 @@ static emlrtBCInfo gm_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo hm_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  523,                                 /* lineNo */
+  524,                                 /* lineNo */
   44,                                  /* colNo */
   "sx",                                /* aName */
   "tiedrankFS",                        /* fName */
@@ -504,7 +504,7 @@ static emlrtBCInfo hm_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo im_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  523,                                 /* lineNo */
+  524,                                 /* lineNo */
   55,                                  /* colNo */
   "epsx",                              /* aName */
   "tiedrankFS",                        /* fName */
@@ -514,7 +514,7 @@ static emlrtBCInfo im_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo jm_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  523,                                 /* lineNo */
+  524,                                 /* lineNo */
   57,                                  /* colNo */
   "epsx",                              /* aName */
   "tiedrankFS",                        /* fName */
@@ -523,7 +523,7 @@ static emlrtBCInfo jm_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo eb_emlrtECI = { -1, /* nDims */
-  523,                                 /* lineNo */
+  524,                                 /* lineNo */
   39,                                  /* colNo */
   "tiedrankFS",                        /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
@@ -531,7 +531,7 @@ static emlrtECInfo eb_emlrtECI = { -1, /* nDims */
 
 static emlrtBCInfo km_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  540,                                 /* lineNo */
+  541,                                 /* lineNo */
   19,                                  /* colNo */
   "ranks",                             /* aName */
   "tiedrankFS",                        /* fName */
@@ -541,7 +541,7 @@ static emlrtBCInfo km_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo lm_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  540,                                 /* lineNo */
+  541,                                 /* lineNo */
   28,                                  /* colNo */
   "ranks",                             /* aName */
   "tiedrankFS",                        /* fName */
@@ -551,7 +551,7 @@ static emlrtBCInfo lm_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo mm_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  539,                                 /* lineNo */
+  540,                                 /* lineNo */
   11,                                  /* colNo */
   "ranks",                             /* aName */
   "tiedrankFS",                        /* fName */
@@ -561,7 +561,7 @@ static emlrtBCInfo mm_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo nm_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  539,                                 /* lineNo */
+  540,                                 /* lineNo */
   20,                                  /* colNo */
   "ranks",                             /* aName */
   "tiedrankFS",                        /* fName */
@@ -570,7 +570,7 @@ static emlrtBCInfo nm_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtECInfo fb_emlrtECI = { -1, /* nDims */
-  545,                                 /* lineNo */
+  546,                                 /* lineNo */
   1,                                   /* colNo */
   "tiedrankFS",                        /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
@@ -588,7 +588,7 @@ static emlrtRTEInfo nb_emlrtRTEI = { 52,/* lineNo */
   "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+internal\\reshapeSizeChecks.m"/* pName */
 };
 
-static emlrtDCInfo gb_emlrtDCI = { 520,/* lineNo */
+static emlrtDCInfo gb_emlrtDCI = { 521,/* lineNo */
   23,                                  /* colNo */
   "tiedrankFS",                        /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m",/* pName */
@@ -597,7 +597,7 @@ static emlrtDCInfo gb_emlrtDCI = { 520,/* lineNo */
 
 static emlrtBCInfo om_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  531,                                 /* lineNo */
+  532,                                 /* lineNo */
   16,                                  /* colNo */
   "tieloc",                            /* aName */
   "tiedrankFS",                        /* fName */
@@ -607,7 +607,7 @@ static emlrtBCInfo om_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo pm_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  545,                                 /* lineNo */
+  546,                                 /* lineNo */
   3,                                   /* colNo */
   "r",                                 /* aName */
   "tiedrankFS",                        /* fName */
@@ -617,7 +617,7 @@ static emlrtBCInfo pm_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo qm_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  533,                                 /* lineNo */
+  534,                                 /* lineNo */
   11,                                  /* colNo */
   "tieloc",                            /* aName */
   "tiedrankFS",                        /* fName */
@@ -627,7 +627,7 @@ static emlrtBCInfo qm_emlrtBCI = { -1, /* iFirst */
 
 static emlrtBCInfo rm_emlrtBCI = { -1, /* iFirst */
   -1,                                  /* iLast */
-  533,                                 /* lineNo */
+  534,                                 /* lineNo */
   33,                                  /* colNo */
   "tieloc",                            /* aName */
   "tiedrankFS",                        /* fName */
@@ -635,91 +635,91 @@ static emlrtBCInfo rm_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtRTEInfo gi_emlrtRTEI = { 195,/* lineNo */
+static emlrtRTEInfo gi_emlrtRTEI = { 196,/* lineNo */
   1,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo hi_emlrtRTEI = { 197,/* lineNo */
+static emlrtRTEInfo hi_emlrtRTEI = { 198,/* lineNo */
   1,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo ii_emlrtRTEI = { 199,/* lineNo */
+static emlrtRTEInfo ii_emlrtRTEI = { 200,/* lineNo */
   1,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo ji_emlrtRTEI = { 203,/* lineNo */
+static emlrtRTEInfo ji_emlrtRTEI = { 204,/* lineNo */
   1,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo ki_emlrtRTEI = { 207,/* lineNo */
+static emlrtRTEInfo ki_emlrtRTEI = { 208,/* lineNo */
   5,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo li_emlrtRTEI = { 207,/* lineNo */
+static emlrtRTEInfo li_emlrtRTEI = { 208,/* lineNo */
   7,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo mi_emlrtRTEI = { 494,/* lineNo */
+static emlrtRTEInfo mi_emlrtRTEI = { 495,/* lineNo */
   1,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo ni_emlrtRTEI = { 213,/* lineNo */
+static emlrtRTEInfo ni_emlrtRTEI = { 214,/* lineNo */
   9,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo oi_emlrtRTEI = { 221,/* lineNo */
+static emlrtRTEInfo oi_emlrtRTEI = { 222,/* lineNo */
   13,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo pi_emlrtRTEI = { 218,/* lineNo */
+static emlrtRTEInfo pi_emlrtRTEI = { 219,/* lineNo */
   13,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo qi_emlrtRTEI = { 235,/* lineNo */
+static emlrtRTEInfo qi_emlrtRTEI = { 236,/* lineNo */
   5,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo ri_emlrtRTEI = { 251,/* lineNo */
+static emlrtRTEInfo ri_emlrtRTEI = { 252,/* lineNo */
   16,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo si_emlrtRTEI = { 251,/* lineNo */
+static emlrtRTEInfo si_emlrtRTEI = { 252,/* lineNo */
   32,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo ti_emlrtRTEI = { 251,/* lineNo */
+static emlrtRTEInfo ti_emlrtRTEI = { 252,/* lineNo */
   53,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo ui_emlrtRTEI = { 251,/* lineNo */
+static emlrtRTEInfo ui_emlrtRTEI = { 252,/* lineNo */
   49,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
@@ -731,73 +731,73 @@ static emlrtRTEInfo vi_emlrtRTEI = { 1,/* lineNo */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo wi_emlrtRTEI = { 251,/* lineNo */
+static emlrtRTEInfo wi_emlrtRTEI = { 252,/* lineNo */
   5,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo xi_emlrtRTEI = { 257,/* lineNo */
+static emlrtRTEInfo xi_emlrtRTEI = { 258,/* lineNo */
   15,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo yi_emlrtRTEI = { 257,/* lineNo */
+static emlrtRTEInfo yi_emlrtRTEI = { 258,/* lineNo */
   26,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo aj_emlrtRTEI = { 290,/* lineNo */
+static emlrtRTEInfo aj_emlrtRTEI = { 291,/* lineNo */
   15,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo bj_emlrtRTEI = { 295,/* lineNo */
+static emlrtRTEInfo bj_emlrtRTEI = { 296,/* lineNo */
   17,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo cj_emlrtRTEI = { 328,/* lineNo */
+static emlrtRTEInfo cj_emlrtRTEI = { 329,/* lineNo */
   24,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo dj_emlrtRTEI = { 309,/* lineNo */
+static emlrtRTEInfo dj_emlrtRTEI = { 310,/* lineNo */
   21,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo ej_emlrtRTEI = { 344,/* lineNo */
+static emlrtRTEInfo ej_emlrtRTEI = { 345,/* lineNo */
   24,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo fj_emlrtRTEI = { 323,/* lineNo */
+static emlrtRTEInfo fj_emlrtRTEI = { 324,/* lineNo */
   21,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo gj_emlrtRTEI = { 329,/* lineNo */
+static emlrtRTEInfo gj_emlrtRTEI = { 330,/* lineNo */
   24,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo hj_emlrtRTEI = { 344,/* lineNo */
+static emlrtRTEInfo hj_emlrtRTEI = { 345,/* lineNo */
   45,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo ij_emlrtRTEI = { 390,/* lineNo */
+static emlrtRTEInfo ij_emlrtRTEI = { 391,/* lineNo */
   33,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
@@ -809,25 +809,25 @@ static emlrtRTEInfo jj_emlrtRTEI = { 86,/* lineNo */
   "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\ops\\eml_mtimes_helper.m"/* pName */
 };
 
-static emlrtRTEInfo kj_emlrtRTEI = { 448,/* lineNo */
+static emlrtRTEInfo kj_emlrtRTEI = { 449,/* lineNo */
   13,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo lj_emlrtRTEI = { 456,/* lineNo */
+static emlrtRTEInfo lj_emlrtRTEI = { 457,/* lineNo */
   13,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo mj_emlrtRTEI = { 342,/* lineNo */
+static emlrtRTEInfo mj_emlrtRTEI = { 343,/* lineNo */
   21,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo nj_emlrtRTEI = { 343,/* lineNo */
+static emlrtRTEInfo nj_emlrtRTEI = { 344,/* lineNo */
   21,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
@@ -839,77 +839,77 @@ static emlrtRTEInfo bk_emlrtRTEI = { 27,/* lineNo */
   "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\datafun\\sort.m"/* pName */
 };
 
-static emlrtRTEInfo ck_emlrtRTEI = { 516,/* lineNo */
+static emlrtRTEInfo ck_emlrtRTEI = { 517,/* lineNo */
   15,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo dk_emlrtRTEI = { 520,/* lineNo */
+static emlrtRTEInfo dk_emlrtRTEI = { 521,/* lineNo */
   1,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo ek_emlrtRTEI = { 523,/* lineNo */
+static emlrtRTEInfo ek_emlrtRTEI = { 524,/* lineNo */
   8,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo fk_emlrtRTEI = { 524,/* lineNo */
+static emlrtRTEInfo fk_emlrtRTEI = { 525,/* lineNo */
   1,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo gk_emlrtRTEI = { 527,/* lineNo */
+static emlrtRTEInfo gk_emlrtRTEI = { 528,/* lineNo */
   1,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo hk_emlrtRTEI = { 545,/* lineNo */
+static emlrtRTEInfo hk_emlrtRTEI = { 546,/* lineNo */
   3,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo ik_emlrtRTEI = { 546,/* lineNo */
+static emlrtRTEInfo ik_emlrtRTEI = { 547,/* lineNo */
   1,                                   /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo jk_emlrtRTEI = { 540,/* lineNo */
+static emlrtRTEInfo jk_emlrtRTEI = { 541,/* lineNo */
   13,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo kk_emlrtRTEI = { 502,/* lineNo */
+static emlrtRTEInfo kk_emlrtRTEI = { 503,/* lineNo */
   14,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRTEInfo lk_emlrtRTEI = { 520,/* lineNo */
+static emlrtRTEInfo lk_emlrtRTEI = { 521,/* lineNo */
   10,                                  /* colNo */
   "unibiv",                            /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pName */
 };
 
-static emlrtRSInfo xhb_emlrtRSI = { 313,/* lineNo */
+static emlrtRSInfo whb_emlrtRSI = { 314,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo yhb_emlrtRSI = { 320,/* lineNo */
+static emlrtRSInfo xhb_emlrtRSI = { 321,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
 
-static emlrtRSInfo aib_emlrtRSI = { 301,/* lineNo */
+static emlrtRSInfo yhb_emlrtRSI = { 302,/* lineNo */
   "unibiv",                            /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\multivariate\\unibiv.m"/* pathName */
 };
@@ -3877,13 +3877,16 @@ void unibiv(LXS_wrapper1StackData *SD, const emlrtStack *sp, const
   /*  */
   /*  Optional input arguments: */
   /*  */
-  /*            rf  :  It specifies the confidence */
-  /*                   level of the robust bivariate ellipses. Scalar. 0<rf<1. */
-  /*                   The default value is 0.95 that is the outer contour in */
-  /*                   presence of normality for each ellipse should leave */
-  /*                   outside 5% of the values. */
-  /*                  Example - 'rf',0.99 */
+  /*  */
+  /*        madcoef :  scaled MAD. Scalar. Coefficient which is used to scale MAD */
+  /*                    coefficient to have a robust estimate of dispersion.  The */
+  /*                    default is 1.4815 so that 1.4815*MAD(N(0,1))=1. */
+  /*                  Example - 'madcoef',2 */
   /*                  Data Types - double */
+  /*                    Remark: if mad =median(y-median(y))=0 then the interquartile */
+  /*                    range is used. If also the interquartile range is 0 */
+  /*                    than the MD (mean absolute deviation) is used.  In */
+  /*                    other words MD=mean(abs(y-mean(Y)) */
   /*  */
   /*       robscale :   how to compute dispersion. Scalar. It specifies the */
   /*                    statistical indexes to use to compute the dispersion of */
@@ -3904,6 +3907,15 @@ void unibiv(LXS_wrapper1StackData *SD, const emlrtStack *sp, const
   /*                    around the univariate medians. */
   /*                  Example - 'robscale',2 */
   /*                  Data Types - double */
+  /*  */
+  /*            rf  :  It specifies the confidence */
+  /*                   level of the robust bivariate ellipses. Scalar. 0<rf<1. */
+  /*                   The default value is 0.95 that is the outer contour in */
+  /*                   presence of normality for each ellipse should leave */
+  /*                   outside 5% of the values. */
+  /*                  Example - 'rf',0.99 */
+  /*                  Data Types - double */
+  /*  */
   /*  */
   /*          plots :   Plot on the screen. Scalar. It specifies whether it is */
   /*                    necessary to produce a plot */
@@ -3935,17 +3947,6 @@ void unibiv(LXS_wrapper1StackData *SD, const emlrtStack *sp, const
   /*                    in the same window else a new window is created. */
   /*                  Example - 'tag','new_tag' */
   /*                  Data Types - char */
-  /*  */
-  /*        madcoef :  scaled MAD. Scalar. Coefficient which is used to scale MAD */
-  /*                    coefficient to have a robust estimate of dispersion.  The */
-  /*                    default is 1.4815 so that 1.4815*MAD(N(0,1))=1. */
-  /*                  Example - 'madcoef',2 */
-  /*                  Data Types - double */
-  /*                    Remark: if mad =median(y-median(y))=0 then the interquartile */
-  /*                    range is used. If also the interquartile range is 0 */
-  /*                    than the MD (mean absolute deviation) is used.  In */
-  /*                    other words MD=mean(abs(y-mean(Y)) */
-  /*  */
   /*  */
   /*  Output: */
   /*  */
@@ -4387,7 +4388,7 @@ void unibiv(LXS_wrapper1StackData *SD, const emlrtStack *sp, const
           }
         } else {
           if (robscale == 1) {
-            st.site = &aib_emlrtRSI;
+            st.site = &yhb_emlrtRSI;
             b_disp(&st, g_emlrt_marshallOut(&st, b_cv), j_emlrt_marshallOut(&st,
                     b_cv1), &m_emlrtMCI);
             robscale = 2;
@@ -4414,11 +4415,11 @@ void unibiv(LXS_wrapper1StackData *SD, const emlrtStack *sp, const
                               Ty) / brm;
             }
 
-            st.site = &xhb_emlrtRSI;
+            st.site = &whb_emlrtRSI;
             b_disp(&st, g_emlrt_marshallOut(&st, b_cv4), m_emlrt_marshallOut(&st,
                     b_cv5), &o_emlrtMCI);
           } else {
-            st.site = &yhb_emlrtRSI;
+            st.site = &xhb_emlrtRSI;
             b_disp(&st, g_emlrt_marshallOut(&st, b_cv2), n_emlrt_marshallOut(&st,
                     b_cv3), &n_emlrtMCI);
             loop_ub = Y->size[0];

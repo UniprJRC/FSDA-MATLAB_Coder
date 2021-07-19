@@ -17,7 +17,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo od_emlrtRSI =
+static emlrtRSInfo nd_emlrtRSI =
     {
         311,               /* lineNo */
         "eml_float_colon", /* fcnName */
@@ -36,7 +36,7 @@ static emlrtRTEInfo n_emlrtRTEI =
                                                                           */
 };
 
-static emlrtRTEInfo me_emlrtRTEI =
+static emlrtRTEInfo qe_emlrtRTEI =
     {
         312,     /* lineNo */
         20,      /* colNo */
@@ -77,7 +77,7 @@ void eml_float_colon(const emlrtStack *sp, real_T a, real_T b,
   } else {
     n = 0;
   }
-  st.site = &od_emlrtRSI;
+  st.site = &nd_emlrtRSI;
   if (ndbl > 2.147483647E+9) {
     emlrtErrorWithMessageIdR2018a(&st, &n_emlrtRTEI, "Coder:MATLAB:pmaxsize",
                                   "Coder:MATLAB:pmaxsize", 0);
@@ -85,7 +85,7 @@ void eml_float_colon(const emlrtStack *sp, real_T a, real_T b,
   nm1d2 = y->size[0] * y->size[1];
   y->size[0] = 1;
   y->size[1] = n;
-  emxEnsureCapacity_real_T(sp, y, nm1d2, &me_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, y, nm1d2, &qe_emlrtRTEI);
   if (n > 0) {
     y->data[0] = a;
     if (n > 1) {

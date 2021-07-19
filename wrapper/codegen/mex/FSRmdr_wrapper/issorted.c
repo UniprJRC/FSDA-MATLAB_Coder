@@ -19,7 +19,7 @@
 
 /* Variable Definitions */
 static emlrtRSInfo
-    qf_emlrtRSI =
+    pf_emlrtRSI =
         {
             74,         /* lineNo */
             "issorted", /* fcnName */
@@ -29,7 +29,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    rf_emlrtRSI =
+    qf_emlrtRSI =
         {
             95,       /* lineNo */
             "looper", /* fcnName */
@@ -39,7 +39,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    mh_emlrtRSI =
+    rg_emlrtRSI =
         {
             112,      /* lineNo */
             "looper", /* fcnName */
@@ -84,25 +84,25 @@ boolean_T issorted(const emlrtStack *sp, const emxArray_real_T *x)
       n = 1;
     }
     if (n != 1) {
-      st.site = &qf_emlrtRSI;
+      st.site = &pf_emlrtRSI;
       if (dim == 2) {
         n = -1;
       } else {
         n = 0;
       }
-      b_st.site = &rf_emlrtRSI;
+      b_st.site = &qf_emlrtRSI;
       k = 0;
       exitg1 = false;
       while ((!exitg1) && (k <= n)) {
-        b_st.site = &mh_emlrtRSI;
+        b_st.site = &rg_emlrtRSI;
         if (dim == 1) {
           b_n = x->size[0] - 1;
         } else {
           b_n = x->size[0];
         }
-        c_st.site = &rf_emlrtRSI;
+        c_st.site = &qf_emlrtRSI;
         if ((1 <= b_n) && (b_n > 2147483646)) {
-          d_st.site = &pc_emlrtRSI;
+          d_st.site = &oc_emlrtRSI;
           check_forloop_overflow_error(&d_st);
         }
         k = 0;

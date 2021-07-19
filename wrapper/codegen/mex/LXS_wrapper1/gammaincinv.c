@@ -539,7 +539,7 @@ creal_T gammaincinv(const emlrtStack *sp, real_T x, real_T a)
       b_y = NULL;
       m = emlrtCreateDoubleScalar(x);
       emlrtAssign(&b_y, m);
-      c_st.site = &cjb_emlrtRSI;
+      c_st.site = &bjb_emlrtRSI;
       c_emlrt_marshallIn(&c_st, b_sprintf(&c_st, y, b_y, &r_emlrtMCI),
                          "<output of sprintf>", str);
       b_st.site = &wn_emlrtRSI;
@@ -550,7 +550,7 @@ creal_T gammaincinv(const emlrtStack *sp, real_T x, real_T a)
       d_y = NULL;
       m = emlrtCreateDoubleScalar(a);
       emlrtAssign(&d_y, m);
-      c_st.site = &cjb_emlrtRSI;
+      c_st.site = &bjb_emlrtRSI;
       c_emlrt_marshallIn(&c_st, b_sprintf(&c_st, c_y, d_y, &r_emlrtMCI),
                          "<output of sprintf>", b_str);
       b_st.site = &vn_emlrtRSI;

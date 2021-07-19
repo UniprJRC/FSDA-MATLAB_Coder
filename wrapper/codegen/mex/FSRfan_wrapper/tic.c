@@ -16,7 +16,7 @@
 #include "emlrt.h"
 
 /* Variable Definitions */
-static emlrtRSInfo ph_emlrtRSI = {
+static emlrtRSInfo oh_emlrtRSI = {
     31,    /* lineNo */
     "tic", /* fcnName */
     "C:\\Program "
@@ -35,17 +35,17 @@ emlrtTimespec tic(const emlrtStack *sp)
   int32_T status;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &ph_emlrtRSI;
+  st.site = &oh_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   d_st.prev = &c_st;
   d_st.tls = c_st.tls;
-  b_st.site = &qh_emlrtRSI;
-  c_st.site = &rh_emlrtRSI;
+  b_st.site = &ph_emlrtRSI;
+  c_st.site = &qh_emlrtRSI;
   status = emlrtClockGettimeMonotonic(&tstart);
-  d_st.site = &sh_emlrtRSI;
+  d_st.site = &rh_emlrtRSI;
   if (status != 0) {
     emlrtErrorWithMessageIdR2018a(
         &d_st, &gb_emlrtRTEI, "Coder:toolbox:CoderTimeCallFailed",

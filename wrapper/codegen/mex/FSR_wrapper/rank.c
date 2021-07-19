@@ -22,7 +22,7 @@
 #include <math.h>
 
 /* Variable Definitions */
-static emlrtRSInfo gc_emlrtRSI = {
+static emlrtRSInfo nc_emlrtRSI = {
     20,           /* lineNo */
     "local_rank", /* fcnName */
     "C:\\Program "
@@ -30,7 +30,7 @@ static emlrtRSInfo gc_emlrtRSI = {
                                                                         */
 };
 
-static emlrtRSInfo hc_emlrtRSI = {
+static emlrtRSInfo oc_emlrtRSI = {
     22,           /* lineNo */
     "local_rank", /* fcnName */
     "C:\\Program "
@@ -38,7 +38,7 @@ static emlrtRSInfo hc_emlrtRSI = {
                                                                         */
 };
 
-static emlrtRSInfo ic_emlrtRSI = {
+static emlrtRSInfo pc_emlrtRSI = {
     31,           /* lineNo */
     "local_rank", /* fcnName */
     "C:\\Program "
@@ -46,7 +46,7 @@ static emlrtRSInfo ic_emlrtRSI = {
                                                                         */
 };
 
-static emlrtRSInfo jc_emlrtRSI = {
+static emlrtRSInfo qc_emlrtRSI = {
     12,    /* lineNo */
     "svd", /* fcnName */
     "C:\\Program "
@@ -54,7 +54,7 @@ static emlrtRSInfo jc_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRSInfo kc_emlrtRSI = {
+static emlrtRSInfo rc_emlrtRSI = {
     15,    /* lineNo */
     "svd", /* fcnName */
     "C:\\Program "
@@ -62,7 +62,7 @@ static emlrtRSInfo kc_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRSInfo lc_emlrtRSI = {
+static emlrtRSInfo sc_emlrtRSI = {
     20,    /* lineNo */
     "svd", /* fcnName */
     "C:\\Program "
@@ -70,7 +70,16 @@ static emlrtRSInfo lc_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRTEInfo ge_emlrtRTEI = {
+static emlrtRSInfo bd_emlrtRSI =
+    {
+        46,    /* lineNo */
+        "eps", /* fcnName */
+        "C:\\Program "
+        "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\elmat\\eps.m" /* pathName
+                                                                          */
+};
+
+static emlrtRTEInfo ff_emlrtRTEI = {
     19,    /* lineNo */
     14,    /* colNo */
     "svd", /* fName */
@@ -79,7 +88,7 @@ static emlrtRTEInfo ge_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo he_emlrtRTEI = {
+static emlrtRTEInfo gf_emlrtRTEI = {
     20,     /* lineNo */
     5,      /* colNo */
     "rank", /* fName */
@@ -114,38 +123,38 @@ int32_T local_rank(const emlrtStack *sp, const emxArray_real_T *A)
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
   irank = 0;
   if ((A->size[0] != 0) && (A->size[1] != 0)) {
-    st.site = &gc_emlrtRSI;
-    b_st.site = &jc_emlrtRSI;
-    c_st.site = &mc_emlrtRSI;
-    d_st.site = &nc_emlrtRSI;
+    st.site = &nc_emlrtRSI;
+    b_st.site = &qc_emlrtRSI;
+    c_st.site = &tc_emlrtRSI;
+    d_st.site = &uc_emlrtRSI;
     p = flatVectorAllOrAny(&d_st, A);
-    emxInit_real_T(&st, &s, 1, &he_emlrtRTEI, true);
+    emxInit_real_T(&st, &s, 1, &gf_emlrtRTEI, true);
     if (p) {
-      b_st.site = &kc_emlrtRSI;
+      b_st.site = &rc_emlrtRSI;
       svd(&b_st, A, s);
     } else {
-      emxInit_real_T(&st, &r, 2, &ge_emlrtRTEI, true);
+      emxInit_real_T(&st, &r, 2, &ff_emlrtRTEI, true);
       i = r->size[0] * r->size[1];
       r->size[0] = A->size[0];
       r->size[1] = A->size[1];
-      emxEnsureCapacity_real_T(&st, r, i, &ge_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, r, i, &ff_emlrtRTEI);
       loop_ub = A->size[0] * A->size[1];
       for (i = 0; i < loop_ub; i++) {
         r->data[i] = 0.0;
       }
-      b_st.site = &lc_emlrtRSI;
+      b_st.site = &sc_emlrtRSI;
       svd(&b_st, r, s);
       loop_ub = s->size[0];
       i = s->size[0];
       s->size[0] = loop_ub;
-      emxEnsureCapacity_real_T(&st, s, i, &he_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, s, i, &gf_emlrtRTEI);
       emxFree_real_T(&r);
       for (i = 0; i < loop_ub; i++) {
         s->data[i] = rtNaN;
       }
     }
-    st.site = &hc_emlrtRSI;
-    b_st.site = &tc_emlrtRSI;
+    st.site = &oc_emlrtRSI;
+    b_st.site = &bd_emlrtRSI;
     absx = muDoubleScalarAbs(s->data[0]);
     if ((!muDoubleScalarIsInf(absx)) && (!muDoubleScalarIsNaN(absx))) {
       if (absx <= 2.2250738585072014E-308) {
@@ -158,9 +167,9 @@ int32_T local_rank(const emlrtStack *sp, const emxArray_real_T *A)
       absx = rtNaN;
     }
     absx *= (real_T)muIntScalarMax_sint32(A->size[0], A->size[1]);
-    st.site = &ic_emlrtRSI;
+    st.site = &pc_emlrtRSI;
     if ((1 <= s->size[0]) && (s->size[0] > 2147483646)) {
-      b_st.site = &ab_emlrtRSI;
+      b_st.site = &hb_emlrtRSI;
       check_forloop_overflow_error(&b_st);
     }
     loop_ub = 0;

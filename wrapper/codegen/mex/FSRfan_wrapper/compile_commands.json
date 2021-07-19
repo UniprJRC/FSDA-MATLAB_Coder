@@ -349,6 +349,12 @@
   },
   {
     "directory": "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\FSRfan_wrapper",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2017b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\FSRfan_wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\FSRfan_wrapper\\interface\" -I \"C:\\Program Files\\MATLAB\\R2021a\\extern\\include\" -I \".\" -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=FSRfan_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1   linsolve.c -o build/win64/linsolve.o",
+    "file": "linsolve.c",
+    "output": "build/win64/linsolve.o"
+  },
+  {
+    "directory": "D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\FSRfan_wrapper",
     "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2017b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\FSRfan_wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\" -I \"D:\\MATLAB\\FSDAgit\\FSDA-MATLAB_Coder\\wrapper\\codegen\\mex\\FSRfan_wrapper\\interface\" -I \"C:\\Program Files\\MATLAB\\R2021a\\extern\\include\" -I \".\" -DHAVE_LAPACK_CONFIG_H -DLAPACK_COMPLEX_STRUCTURE -DMW_HAVE_LAPACK_DECLS -DMODEL=FSRfan_wrapper_mex -D__USE_MINGW_ANSI_STDIO=1   interface/_coder_FSRfan_wrapper_api.c -o build/win64/_coder_FSRfan_wrapper_api.o",
     "file": "interface/_coder_FSRfan_wrapper_api.c",
     "output": "build/win64/_coder_FSRfan_wrapper_api.o"

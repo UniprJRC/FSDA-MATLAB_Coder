@@ -22,7 +22,7 @@
 #include <math.h>
 
 /* Variable Definitions */
-static emlrtRSInfo kmb_emlrtRSI = {
+static emlrtRSInfo ymb_emlrtRSI = {
     161,             /* lineNo */
     "unique_vector", /* fcnName */
     "C:\\Program "
@@ -30,7 +30,7 @@ static emlrtRSInfo kmb_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRSInfo lmb_emlrtRSI = {
+static emlrtRSInfo anb_emlrtRSI = {
     163,             /* lineNo */
     "unique_vector", /* fcnName */
     "C:\\Program "
@@ -38,7 +38,7 @@ static emlrtRSInfo lmb_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRSInfo mmb_emlrtRSI = {
+static emlrtRSInfo bnb_emlrtRSI = {
     198,             /* lineNo */
     "unique_vector", /* fcnName */
     "C:\\Program "
@@ -46,7 +46,7 @@ static emlrtRSInfo mmb_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRSInfo nmb_emlrtRSI = {
+static emlrtRSInfo cnb_emlrtRSI = {
     205,             /* lineNo */
     "unique_vector", /* fcnName */
     "C:\\Program "
@@ -54,7 +54,7 @@ static emlrtRSInfo nmb_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRSInfo omb_emlrtRSI = {
+static emlrtRSInfo dnb_emlrtRSI = {
     218,             /* lineNo */
     "unique_vector", /* fcnName */
     "C:\\Program "
@@ -62,7 +62,7 @@ static emlrtRSInfo omb_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRSInfo pmb_emlrtRSI = {
+static emlrtRSInfo enb_emlrtRSI = {
     229,             /* lineNo */
     "unique_vector", /* fcnName */
     "C:\\Program "
@@ -70,7 +70,7 @@ static emlrtRSInfo pmb_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRSInfo qmb_emlrtRSI = {
+static emlrtRSInfo fnb_emlrtRSI = {
     237,             /* lineNo */
     "unique_vector", /* fcnName */
     "C:\\Program "
@@ -78,7 +78,7 @@ static emlrtRSInfo qmb_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRSInfo rmb_emlrtRSI = {
+static emlrtRSInfo gnb_emlrtRSI = {
     243,             /* lineNo */
     "unique_vector", /* fcnName */
     "C:\\Program "
@@ -86,7 +86,7 @@ static emlrtRSInfo rmb_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRTEInfo ad_emlrtRTEI = {
+static emlrtRTEInfo cd_emlrtRTEI = {
     236,             /* lineNo */
     1,               /* colNo */
     "unique_vector", /* fName */
@@ -95,7 +95,7 @@ static emlrtRTEInfo ad_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo igb_emlrtRTEI = {
+static emlrtRTEInfo gib_emlrtRTEI = {
     162,      /* lineNo */
     20,       /* colNo */
     "unique", /* fName */
@@ -104,7 +104,7 @@ static emlrtRTEInfo igb_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo jgb_emlrtRTEI = {
+static emlrtRTEInfo hib_emlrtRTEI = {
     237,      /* lineNo */
     1,        /* colNo */
     "unique", /* fName */
@@ -113,7 +113,7 @@ static emlrtRTEInfo jgb_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo kgb_emlrtRTEI = {
+static emlrtRTEInfo iib_emlrtRTEI = {
     161,      /* lineNo */
     1,        /* colNo */
     "unique", /* fName */
@@ -147,16 +147,16 @@ void unique_vector(const emlrtStack *sp, const emxArray_real_T *a,
   b_st.prev = &st;
   b_st.tls = st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  emxInit_int32_T(sp, &idx, 1, &kgb_emlrtRTEI, true);
+  emxInit_int32_T(sp, &idx, 1, &iib_emlrtRTEI, true);
   na = a->size[0];
-  st.site = &kmb_emlrtRSI;
+  st.site = &ymb_emlrtRSI;
   sortIdx(&st, a, idx);
   b_a = b->size[0];
   b->size[0] = a->size[0];
-  emxEnsureCapacity_real_T(sp, b, b_a, &igb_emlrtRTEI);
-  st.site = &lmb_emlrtRSI;
+  emxEnsureCapacity_real_T(sp, b, b_a, &gib_emlrtRTEI);
+  st.site = &anb_emlrtRSI;
   if ((1 <= a->size[0]) && (a->size[0] > 2147483646)) {
-    b_st.site = &ab_emlrtRSI;
+    b_st.site = &hb_emlrtRSI;
     check_forloop_overflow_error(&b_st);
   }
   for (k = 0; k < na; k++) {
@@ -189,7 +189,7 @@ void unique_vector(const emlrtStack *sp, const emxArray_real_T *a,
       if (b_k + 1 > k) {
         exitg2 = 1;
       } else {
-        st.site = &mmb_emlrtRSI;
+        st.site = &bnb_emlrtRSI;
         absx = muDoubleScalarAbs(x / 2.0);
         if ((!muDoubleScalarIsInf(absx)) && (!muDoubleScalarIsNaN(absx))) {
           if (absx <= 2.2250738585072014E-308) {
@@ -215,29 +215,29 @@ void unique_vector(const emlrtStack *sp, const emxArray_real_T *a,
     } while (exitg2 == 0);
     nb++;
     b->data[nb - 1] = x;
-    st.site = &nmb_emlrtRSI;
+    st.site = &cnb_emlrtRSI;
     if ((b_a + 1 <= b_k) && (b_k > 2147483646)) {
-      b_st.site = &ab_emlrtRSI;
+      b_st.site = &hb_emlrtRSI;
       check_forloop_overflow_error(&b_st);
     }
   }
   if (na > 0) {
     nb++;
     b->data[nb - 1] = b->data[k];
-    st.site = &omb_emlrtRSI;
+    st.site = &dnb_emlrtRSI;
     if (na > 2147483646) {
-      b_st.site = &ab_emlrtRSI;
+      b_st.site = &hb_emlrtRSI;
       check_forloop_overflow_error(&b_st);
     }
   }
   b_k = k + na;
-  st.site = &pmb_emlrtRSI;
+  st.site = &enb_emlrtRSI;
   for (na = 0; na < nNaN; na++) {
     b->data[nb + na] = b->data[b_k + na];
   }
   nb += nNaN;
   if (nb > a->size[0]) {
-    emlrtErrorWithMessageIdR2018a(sp, &ad_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(sp, &cd_emlrtRTEI,
                                   "Coder:builtins:AssertionFailed",
                                   "Coder:builtins:AssertionFailed", 0);
   }
@@ -248,12 +248,12 @@ void unique_vector(const emlrtStack *sp, const emxArray_real_T *a,
   }
   b_iv[0] = 1;
   b_iv[1] = b_a;
-  st.site = &qmb_emlrtRSI;
+  st.site = &fnb_emlrtRSI;
   b_indexShapeCheck(&st, b->size[0], b_iv);
   na = b->size[0];
   b->size[0] = b_a;
-  emxEnsureCapacity_real_T(sp, b, na, &jgb_emlrtRTEI);
-  st.site = &rmb_emlrtRSI;
+  emxEnsureCapacity_real_T(sp, b, na, &hib_emlrtRTEI);
+  st.site = &gnb_emlrtRSI;
   emlrtHeapReferenceStackLeaveFcnR2012b((emlrtCTX)sp);
 }
 

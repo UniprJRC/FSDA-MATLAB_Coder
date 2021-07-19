@@ -11,41 +11,15 @@
 
 /* Include files */
 #include "eml_setop.h"
-#include "FSR_wrapper_data.h"
 #include "FSR_wrapper_emxutil.h"
 #include "FSR_wrapper_types.h"
-#include "eml_int_forloop_overflow_check.h"
 #include "issorted.h"
 #include "rt_nonfinite.h"
 #include "mwmathutil.h"
 #include <math.h>
 
 /* Variable Definitions */
-static emlrtRSInfo qdb_emlrtRSI = {
-    252,          /* lineNo */
-    "do_vectors", /* fcnName */
-    "C:\\Program "
-    "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\ops\\private\\eml_setop."
-    "m" /* pathName */
-};
-
-static emlrtRSInfo rdb_emlrtRSI = {
-    250,          /* lineNo */
-    "do_vectors", /* fcnName */
-    "C:\\Program "
-    "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\ops\\private\\eml_setop."
-    "m" /* pathName */
-};
-
-static emlrtRSInfo sdb_emlrtRSI = {
-    249,          /* lineNo */
-    "do_vectors", /* fcnName */
-    "C:\\Program "
-    "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\ops\\private\\eml_setop."
-    "m" /* pathName */
-};
-
-static emlrtRSInfo tdb_emlrtRSI = {
+static emlrtRSInfo beb_emlrtRSI = {
     218,          /* lineNo */
     "do_vectors", /* fcnName */
     "C:\\Program "
@@ -53,25 +27,7 @@ static emlrtRSInfo tdb_emlrtRSI = {
     "m" /* pathName */
 };
 
-static emlrtRSInfo xdb_emlrtRSI = {
-    450,                        /* lineNo */
-    "skip_to_last_equal_value", /* fcnName */
-    "C:\\Program "
-    "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\ops\\private\\eml_setop."
-    "m" /* pathName */
-};
-
-static emlrtRSInfo
-    ydb_emlrtRSI =
-        {
-            40,       /* lineNo */
-            "safeEq", /* fcnName */
-            "C:\\Program "
-            "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
-            "internal\\safeEq.m" /* pathName */
-};
-
-static emlrtRSInfo beb_emlrtRSI = {
+static emlrtRSInfo ieb_emlrtRSI = {
     215,          /* lineNo */
     "do_vectors", /* fcnName */
     "C:\\Program "
@@ -79,25 +35,7 @@ static emlrtRSInfo beb_emlrtRSI = {
     "m" /* pathName */
 };
 
-static emlrtRSInfo ceb_emlrtRSI = {
-    338,          /* lineNo */
-    "do_vectors", /* fcnName */
-    "C:\\Program "
-    "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\ops\\private\\eml_setop."
-    "m" /* pathName */
-};
-
-static emlrtRSInfo
-    imb_emlrtRSI =
-        {
-            43,       /* lineNo */
-            "safeEq", /* fcnName */
-            "C:\\Program "
-            "Files\\MATLAB\\R2021a\\toolbox\\eml\\eml\\+coder\\+"
-            "internal\\safeEq.m" /* pathName */
-};
-
-static emlrtRTEInfo jc_emlrtRTEI = {
+static emlrtRTEInfo kc_emlrtRTEI = {
     219,          /* lineNo */
     13,           /* colNo */
     "do_vectors", /* fName */
@@ -106,7 +44,7 @@ static emlrtRTEInfo jc_emlrtRTEI = {
     "m" /* pName */
 };
 
-static emlrtRTEInfo kc_emlrtRTEI = {
+static emlrtRTEInfo lc_emlrtRTEI = {
     216,          /* lineNo */
     13,           /* colNo */
     "do_vectors", /* fName */
@@ -115,7 +53,7 @@ static emlrtRTEInfo kc_emlrtRTEI = {
     "m" /* pName */
 };
 
-static emlrtRTEInfo lc_emlrtRTEI = {
+static emlrtRTEInfo mc_emlrtRTEI = {
     383,          /* lineNo */
     5,            /* colNo */
     "do_vectors", /* fName */
@@ -124,7 +62,7 @@ static emlrtRTEInfo lc_emlrtRTEI = {
     "m" /* pName */
 };
 
-static emlrtRTEInfo mc_emlrtRTEI = {
+static emlrtRTEInfo nc_emlrtRTEI = {
     421,          /* lineNo */
     5,            /* colNo */
     "do_vectors", /* fName */
@@ -133,7 +71,7 @@ static emlrtRTEInfo mc_emlrtRTEI = {
     "m" /* pName */
 };
 
-static emlrtRTEInfo pc_emlrtRTEI = {
+static emlrtRTEInfo qc_emlrtRTEI = {
     394,          /* lineNo */
     9,            /* colNo */
     "do_vectors", /* fName */
@@ -142,7 +80,7 @@ static emlrtRTEInfo pc_emlrtRTEI = {
     "m" /* pName */
 };
 
-static emlrtRTEInfo yw_emlrtRTEI = {
+static emlrtRTEInfo wx_emlrtRTEI = {
     197,         /* lineNo */
     24,          /* colNo */
     "eml_setop", /* fName */
@@ -151,7 +89,7 @@ static emlrtRTEInfo yw_emlrtRTEI = {
     "m" /* pName */
 };
 
-static emlrtRTEInfo ax_emlrtRTEI = {
+static emlrtRTEInfo xx_emlrtRTEI = {
     198,         /* lineNo */
     25,          /* colNo */
     "eml_setop", /* fName */
@@ -160,7 +98,7 @@ static emlrtRTEInfo ax_emlrtRTEI = {
     "m" /* pName */
 };
 
-static emlrtRTEInfo bx_emlrtRTEI = {
+static emlrtRTEInfo yx_emlrtRTEI = {
     199,         /* lineNo */
     25,          /* colNo */
     "eml_setop", /* fName */
@@ -169,7 +107,7 @@ static emlrtRTEInfo bx_emlrtRTEI = {
     "m" /* pName */
 };
 
-static emlrtRTEInfo cx_emlrtRTEI = {
+static emlrtRTEInfo ay_emlrtRTEI = {
     389,         /* lineNo */
     9,           /* colNo */
     "eml_setop", /* fName */
@@ -178,7 +116,7 @@ static emlrtRTEInfo cx_emlrtRTEI = {
     "m" /* pName */
 };
 
-static emlrtRTEInfo dx_emlrtRTEI = {
+static emlrtRTEInfo by_emlrtRTEI = {
     400,         /* lineNo */
     13,          /* colNo */
     "eml_setop", /* fName */
@@ -187,7 +125,7 @@ static emlrtRTEInfo dx_emlrtRTEI = {
     "m" /* pName */
 };
 
-static emlrtRTEInfo ex_emlrtRTEI = {
+static emlrtRTEInfo cy_emlrtRTEI = {
     425,         /* lineNo */
     9,           /* colNo */
     "eml_setop", /* fName */
@@ -196,7 +134,7 @@ static emlrtRTEInfo ex_emlrtRTEI = {
     "m" /* pName */
 };
 
-static emlrtRTEInfo fx_emlrtRTEI = {
+static emlrtRTEInfo dy_emlrtRTEI = {
     185,         /* lineNo */
     24,          /* colNo */
     "eml_setop", /* fName */
@@ -205,7 +143,7 @@ static emlrtRTEInfo fx_emlrtRTEI = {
     "m" /* pName */
 };
 
-static emlrtRTEInfo gx_emlrtRTEI = {
+static emlrtRTEInfo ey_emlrtRTEI = {
     192,         /* lineNo */
     29,          /* colNo */
     "eml_setop", /* fName */
@@ -214,7 +152,7 @@ static emlrtRTEInfo gx_emlrtRTEI = {
     "m" /* pName */
 };
 
-static emlrtRTEInfo hx_emlrtRTEI = {
+static emlrtRTEInfo fy_emlrtRTEI = {
     423,         /* lineNo */
     9,           /* colNo */
     "eml_setop", /* fName */
@@ -326,19 +264,19 @@ void b_do_vectors(const emlrtStack *sp, const emxArray_real_T *a,
   iblast = c->size[0] * c->size[1];
   c->size[0] = 1;
   c->size[1] = a->size[1];
-  emxEnsureCapacity_real_T(sp, c, iblast, &fx_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, c, iblast, &dy_emlrtRTEI);
   iblast = ia->size[0];
   ia->size[0] = a->size[1];
-  emxEnsureCapacity_int32_T(sp, ia, iblast, &gx_emlrtRTEI);
+  emxEnsureCapacity_int32_T(sp, ia, iblast, &ey_emlrtRTEI);
   *ib_size = 0;
   if (!b_issorted(a)) {
-    emlrtErrorWithMessageIdR2018a(sp, &kc_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(sp, &lc_emlrtRTEI,
                                   "Coder:toolbox:eml_setop_unsortedA",
                                   "Coder:toolbox:eml_setop_unsortedA", 0);
   }
-  st.site = &tdb_emlrtRSI;
+  st.site = &beb_emlrtRSI;
   if (!issorted(&st, b)) {
-    emlrtErrorWithMessageIdR2018a(sp, &jc_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(sp, &kc_emlrtRTEI,
                                   "Coder:toolbox:eml_setop_unsortedB",
                                   "Coder:toolbox:eml_setop_unsortedB", 0);
   }
@@ -406,7 +344,7 @@ void b_do_vectors(const emlrtStack *sp, const emxArray_real_T *a,
   }
   if (a->size[1] > 0) {
     if (nia > a->size[1]) {
-      emlrtErrorWithMessageIdR2018a(sp, &lc_emlrtRTEI,
+      emlrtErrorWithMessageIdR2018a(sp, &mc_emlrtRTEI,
                                     "Coder:builtins:AssertionFailed",
                                     "Coder:builtins:AssertionFailed", 0);
     }
@@ -416,9 +354,9 @@ void b_do_vectors(const emlrtStack *sp, const emxArray_real_T *a,
     } else {
       ia->size[0] = nia;
     }
-    emxEnsureCapacity_int32_T(sp, ia, iblast, &cx_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, ia, iblast, &ay_emlrtRTEI);
     if (nc > a->size[1]) {
-      emlrtErrorWithMessageIdR2018a(sp, &mc_emlrtRTEI,
+      emlrtErrorWithMessageIdR2018a(sp, &nc_emlrtRTEI,
                                     "Coder:builtins:AssertionFailed",
                                     "Coder:builtins:AssertionFailed", 0);
     }
@@ -428,7 +366,7 @@ void b_do_vectors(const emlrtStack *sp, const emxArray_real_T *a,
     } else {
       c->size[1] = nc;
     }
-    emxEnsureCapacity_real_T(sp, c, iblast, &hx_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, c, iblast, &fy_emlrtRTEI);
   }
 }
 
@@ -459,21 +397,21 @@ void c_do_vectors(const emlrtStack *sp, const emxArray_real_T *a,
   ncmax = muIntScalarMin_sint32(na, nb);
   iafirst = c->size[0];
   c->size[0] = ncmax;
-  emxEnsureCapacity_real_T(sp, c, iafirst, &yw_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, c, iafirst, &wx_emlrtRTEI);
   iafirst = ia->size[0];
   ia->size[0] = ncmax;
-  emxEnsureCapacity_int32_T(sp, ia, iafirst, &ax_emlrtRTEI);
+  emxEnsureCapacity_int32_T(sp, ia, iafirst, &xx_emlrtRTEI);
   iafirst = ib->size[0];
   ib->size[0] = ncmax;
-  emxEnsureCapacity_int32_T(sp, ib, iafirst, &bx_emlrtRTEI);
+  emxEnsureCapacity_int32_T(sp, ib, iafirst, &yx_emlrtRTEI);
   if (!b_issorted(a)) {
-    emlrtErrorWithMessageIdR2018a(sp, &kc_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(sp, &lc_emlrtRTEI,
                                   "Coder:toolbox:eml_setop_unsortedA",
                                   "Coder:toolbox:eml_setop_unsortedA", 0);
   }
-  st.site = &tdb_emlrtRSI;
+  st.site = &beb_emlrtRSI;
   if (!issorted(&st, b)) {
-    emlrtErrorWithMessageIdR2018a(sp, &jc_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(sp, &kc_emlrtRTEI,
                                   "Coder:toolbox:eml_setop_unsortedB",
                                   "Coder:toolbox:eml_setop_unsortedB", 0);
   }
@@ -535,7 +473,7 @@ void c_do_vectors(const emlrtStack *sp, const emxArray_real_T *a,
   }
   if (ncmax > 0) {
     if (nc > ncmax) {
-      emlrtErrorWithMessageIdR2018a(sp, &lc_emlrtRTEI,
+      emlrtErrorWithMessageIdR2018a(sp, &mc_emlrtRTEI,
                                     "Coder:builtins:AssertionFailed",
                                     "Coder:builtins:AssertionFailed", 0);
     }
@@ -545,9 +483,9 @@ void c_do_vectors(const emlrtStack *sp, const emxArray_real_T *a,
     } else {
       ia->size[0] = nc;
     }
-    emxEnsureCapacity_int32_T(sp, ia, iafirst, &cx_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, ia, iafirst, &ay_emlrtRTEI);
     if (nc > ncmax) {
-      emlrtErrorWithMessageIdR2018a(sp, &pc_emlrtRTEI,
+      emlrtErrorWithMessageIdR2018a(sp, &qc_emlrtRTEI,
                                     "Coder:builtins:AssertionFailed",
                                     "Coder:builtins:AssertionFailed", 0);
     }
@@ -557,9 +495,9 @@ void c_do_vectors(const emlrtStack *sp, const emxArray_real_T *a,
     } else {
       ib->size[0] = nc;
     }
-    emxEnsureCapacity_int32_T(sp, ib, iafirst, &dx_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, ib, iafirst, &by_emlrtRTEI);
     if (nc > ncmax) {
-      emlrtErrorWithMessageIdR2018a(sp, &mc_emlrtRTEI,
+      emlrtErrorWithMessageIdR2018a(sp, &nc_emlrtRTEI,
                                     "Coder:builtins:AssertionFailed",
                                     "Coder:builtins:AssertionFailed", 0);
     }
@@ -569,7 +507,7 @@ void c_do_vectors(const emlrtStack *sp, const emxArray_real_T *a,
     } else {
       c->size[0] = nc;
     }
-    emxEnsureCapacity_real_T(sp, c, iafirst, &ex_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, c, iafirst, &cy_emlrtRTEI);
   }
 }
 
@@ -595,7 +533,7 @@ void d_do_vectors(const emlrtStack *sp, real_T a, const emxArray_real_T *b,
   *ia_size = (int8_T)ncmax;
   *ib_size = (int8_T)ncmax;
   if (!b_issorted(b)) {
-    emlrtErrorWithMessageIdR2018a(sp, &jc_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(sp, &kc_emlrtRTEI,
                                   "Coder:toolbox:eml_setop_unsortedB",
                                   "Coder:toolbox:eml_setop_unsortedB", 0);
   }
@@ -674,9 +612,9 @@ void do_vectors(const emlrtStack *sp, real_T a, const emxArray_real_T *b,
   *c_size = muIntScalarMin_sint32(1, nb);
   *ia_size = (int8_T)*c_size;
   *ib_size = (int8_T)*c_size;
-  st.site = &tdb_emlrtRSI;
+  st.site = &beb_emlrtRSI;
   if (!issorted(&st, b)) {
-    emlrtErrorWithMessageIdR2018a(sp, &jc_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(sp, &kc_emlrtRTEI,
                                   "Coder:toolbox:eml_setop_unsortedB",
                                   "Coder:toolbox:eml_setop_unsortedB", 0);
   }
@@ -756,20 +694,20 @@ void e_do_vectors(const emlrtStack *sp, const emxArray_real_T *a,
   na = a->size[0];
   iblast = c->size[0];
   c->size[0] = a->size[0];
-  emxEnsureCapacity_real_T(sp, c, iblast, &yw_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, c, iblast, &wx_emlrtRTEI);
   iblast = ia->size[0];
   ia->size[0] = a->size[0];
-  emxEnsureCapacity_int32_T(sp, ia, iblast, &ax_emlrtRTEI);
+  emxEnsureCapacity_int32_T(sp, ia, iblast, &xx_emlrtRTEI);
   *ib_size = 0;
-  st.site = &beb_emlrtRSI;
+  st.site = &ieb_emlrtRSI;
   if (!issorted(&st, a)) {
-    emlrtErrorWithMessageIdR2018a(sp, &kc_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(sp, &lc_emlrtRTEI,
                                   "Coder:toolbox:eml_setop_unsortedA",
                                   "Coder:toolbox:eml_setop_unsortedA", 0);
   }
-  st.site = &tdb_emlrtRSI;
+  st.site = &beb_emlrtRSI;
   if (!issorted(&st, b)) {
-    emlrtErrorWithMessageIdR2018a(sp, &jc_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(sp, &kc_emlrtRTEI,
                                   "Coder:toolbox:eml_setop_unsortedB",
                                   "Coder:toolbox:eml_setop_unsortedB", 0);
   }
@@ -837,7 +775,7 @@ void e_do_vectors(const emlrtStack *sp, const emxArray_real_T *a,
   }
   if (a->size[0] > 0) {
     if (nia > a->size[0]) {
-      emlrtErrorWithMessageIdR2018a(sp, &lc_emlrtRTEI,
+      emlrtErrorWithMessageIdR2018a(sp, &mc_emlrtRTEI,
                                     "Coder:builtins:AssertionFailed",
                                     "Coder:builtins:AssertionFailed", 0);
     }
@@ -847,9 +785,9 @@ void e_do_vectors(const emlrtStack *sp, const emxArray_real_T *a,
     } else {
       ia->size[0] = nia;
     }
-    emxEnsureCapacity_int32_T(sp, ia, iblast, &cx_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, ia, iblast, &ay_emlrtRTEI);
     if (nc > a->size[0]) {
-      emlrtErrorWithMessageIdR2018a(sp, &mc_emlrtRTEI,
+      emlrtErrorWithMessageIdR2018a(sp, &nc_emlrtRTEI,
                                     "Coder:builtins:AssertionFailed",
                                     "Coder:builtins:AssertionFailed", 0);
     }
@@ -859,247 +797,11 @@ void e_do_vectors(const emlrtStack *sp, const emxArray_real_T *a,
     } else {
       c->size[0] = nc;
     }
-    emxEnsureCapacity_real_T(sp, c, iblast, &ex_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, c, iblast, &cy_emlrtRTEI);
   }
 }
 
 void f_do_vectors(const emlrtStack *sp, const emxArray_real_T *a,
-                  const emxArray_real32_T *b, emxArray_real_T *c,
-                  emxArray_int32_T *ia, int32_T *ib_size)
-{
-  emlrtStack b_st;
-  emlrtStack c_st;
-  emlrtStack d_st;
-  emlrtStack e_st;
-  emlrtStack st;
-  real_T ak;
-  real_T b_absx;
-  int32_T subs[2];
-  int32_T b_exponent;
-  int32_T b_n;
-  int32_T dim;
-  int32_T exponent;
-  int32_T iafirst;
-  int32_T n;
-  int32_T na;
-  int32_T nc;
-  int32_T nia;
-  real32_T absx;
-  real32_T bk;
-  boolean_T exitg1;
-  boolean_T exitg2;
-  boolean_T y;
-  st.prev = sp;
-  st.tls = sp->tls;
-  b_st.prev = &st;
-  b_st.tls = st.tls;
-  c_st.prev = &b_st;
-  c_st.tls = b_st.tls;
-  d_st.prev = &c_st;
-  d_st.tls = c_st.tls;
-  e_st.prev = &d_st;
-  e_st.tls = d_st.tls;
-  na = a->size[1];
-  dim = c->size[0] * c->size[1];
-  c->size[0] = 1;
-  c->size[1] = a->size[1];
-  emxEnsureCapacity_real_T(sp, c, dim, &fx_emlrtRTEI);
-  dim = ia->size[0];
-  ia->size[0] = a->size[1];
-  emxEnsureCapacity_int32_T(sp, ia, dim, &gx_emlrtRTEI);
-  *ib_size = 0;
-  st.site = &beb_emlrtRSI;
-  if (!b_issorted(a)) {
-    emlrtErrorWithMessageIdR2018a(sp, &kc_emlrtRTEI,
-                                  "Coder:toolbox:eml_setop_unsortedA",
-                                  "Coder:toolbox:eml_setop_unsortedA", 0);
-  }
-  st.site = &tdb_emlrtRSI;
-  y = true;
-  dim = 2;
-  if (b->size[0] != 1) {
-    dim = 1;
-  }
-  if (b->size[0] != 0) {
-    if (dim <= 1) {
-      n = b->size[0];
-    } else {
-      n = 1;
-    }
-    if (n != 1) {
-      b_st.site = &udb_emlrtRSI;
-      if (dim == 2) {
-        n = -1;
-      } else {
-        n = 0;
-      }
-      c_st.site = &wdb_emlrtRSI;
-      iafirst = 0;
-      exitg1 = false;
-      while ((!exitg1) && (iafirst <= n)) {
-        c_st.site = &vdb_emlrtRSI;
-        if (dim == 1) {
-          b_n = b->size[0] - 1;
-        } else {
-          b_n = b->size[0];
-        }
-        d_st.site = &wdb_emlrtRSI;
-        if ((1 <= b_n) && (b_n > 2147483646)) {
-          e_st.site = &ab_emlrtRSI;
-          check_forloop_overflow_error(&e_st);
-        }
-        iafirst = 0;
-        exitg2 = false;
-        while ((!exitg2) && (iafirst <= b_n - 1)) {
-          subs[0] = iafirst + 1;
-          subs[1] = 1;
-          subs[dim - 1]++;
-          absx = b->data[subs[0] - 1];
-          if ((b->data[iafirst] <= absx) || muSingleScalarIsNaN(absx)) {
-            iafirst++;
-          } else {
-            y = false;
-            exitg2 = true;
-          }
-        }
-        if (!y) {
-          exitg1 = true;
-        } else {
-          iafirst = 1;
-        }
-      }
-    }
-  }
-  if (!y) {
-    emlrtErrorWithMessageIdR2018a(sp, &jc_emlrtRTEI,
-                                  "Coder:toolbox:eml_setop_unsortedB",
-                                  "Coder:toolbox:eml_setop_unsortedB", 0);
-  }
-  nc = 0;
-  nia = 0;
-  iafirst = 0;
-  b_n = 1;
-  dim = 1;
-  while ((b_n <= na) && (dim <= b->size[0])) {
-    n = b_n;
-    st.site = &sdb_emlrtRSI;
-    ak = b_skip_to_last_equal_value(&n, a);
-    b_n = n;
-    st.site = &rdb_emlrtRSI;
-    bk = b->data[dim - 1];
-    exitg1 = false;
-    while ((!exitg1) && (dim < b->size[0])) {
-      b_st.site = &xdb_emlrtRSI;
-      c_st.site = &ydb_emlrtRSI;
-      d_st.site = &tc_emlrtRSI;
-      absx = muSingleScalarAbs(bk / 2.0F);
-      if (!muSingleScalarIsNaN(absx)) {
-        if (absx <= 1.17549435E-38F) {
-          absx = 1.4013E-45F;
-        } else {
-          frexpf(absx, &exponent);
-          absx = ldexpf(1.0F, exponent - 24);
-        }
-      } else {
-        absx = rtNaNF;
-      }
-      if (muSingleScalarAbs(bk - b->data[dim]) < absx) {
-        y = true;
-      } else {
-        y = false;
-      }
-      if (y) {
-        dim++;
-      } else {
-        exitg1 = true;
-      }
-    }
-    st.site = &qdb_emlrtRSI;
-    b_st.site = &imb_emlrtRSI;
-    c_st.site = &ydb_emlrtRSI;
-    d_st.site = &tc_emlrtRSI;
-    b_absx = muDoubleScalarAbs(bk / 2.0);
-    if ((!muDoubleScalarIsInf(b_absx)) && (!muDoubleScalarIsNaN(b_absx))) {
-      if (b_absx <= 2.2250738585072014E-308) {
-        b_absx = 4.94065645841247E-324;
-      } else {
-        frexp(b_absx, &b_exponent);
-        b_absx = ldexp(1.0, b_exponent - 53);
-      }
-    } else {
-      b_absx = rtNaN;
-    }
-    if ((muDoubleScalarAbs(bk - ak) < b_absx) ||
-        (muDoubleScalarIsInf(ak) && muDoubleScalarIsInf(bk) &&
-         ((ak > 0.0) == (bk > 0.0F)))) {
-      y = true;
-    } else {
-      y = false;
-    }
-    if (y) {
-      b_n = n + 1;
-      iafirst = n;
-      dim++;
-    } else {
-      if (muSingleScalarIsNaN(bk)) {
-        y = !muDoubleScalarIsNaN(ak);
-      } else if (muDoubleScalarIsNaN(ak)) {
-        y = false;
-      } else {
-        y = (ak < bk);
-      }
-      if (y) {
-        nc++;
-        nia++;
-        c->data[nc - 1] = ak;
-        ia->data[nia - 1] = iafirst + 1;
-        b_n = n + 1;
-        iafirst = n;
-      } else {
-        dim++;
-      }
-    }
-  }
-  while (b_n <= na) {
-    dim = b_n;
-    st.site = &ceb_emlrtRSI;
-    ak = b_skip_to_last_equal_value(&dim, a);
-    nc++;
-    nia++;
-    c->data[nc - 1] = ak;
-    ia->data[nia - 1] = iafirst + 1;
-    b_n = dim + 1;
-    iafirst = dim;
-  }
-  if (a->size[1] > 0) {
-    if (nia > a->size[1]) {
-      emlrtErrorWithMessageIdR2018a(sp, &lc_emlrtRTEI,
-                                    "Coder:builtins:AssertionFailed",
-                                    "Coder:builtins:AssertionFailed", 0);
-    }
-    dim = ia->size[0];
-    if (1 > nia) {
-      ia->size[0] = 0;
-    } else {
-      ia->size[0] = nia;
-    }
-    emxEnsureCapacity_int32_T(sp, ia, dim, &cx_emlrtRTEI);
-    if (nc > a->size[1]) {
-      emlrtErrorWithMessageIdR2018a(sp, &mc_emlrtRTEI,
-                                    "Coder:builtins:AssertionFailed",
-                                    "Coder:builtins:AssertionFailed", 0);
-    }
-    dim = c->size[0] * c->size[1];
-    if (1 > nc) {
-      c->size[1] = 0;
-    } else {
-      c->size[1] = nc;
-    }
-    emxEnsureCapacity_real_T(sp, c, dim, &hx_emlrtRTEI);
-  }
-}
-
-void g_do_vectors(const emlrtStack *sp, const emxArray_real_T *a,
                   const emxArray_real_T *b, emxArray_real_T *c,
                   emxArray_int32_T *ia, int32_T *ib_size)
 {
@@ -1119,18 +821,18 @@ void g_do_vectors(const emlrtStack *sp, const emxArray_real_T *a,
   iblast = c->size[0] * c->size[1];
   c->size[0] = 1;
   c->size[1] = a->size[1];
-  emxEnsureCapacity_real_T(sp, c, iblast, &fx_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, c, iblast, &dy_emlrtRTEI);
   iblast = ia->size[0];
   ia->size[0] = a->size[1];
-  emxEnsureCapacity_int32_T(sp, ia, iblast, &gx_emlrtRTEI);
+  emxEnsureCapacity_int32_T(sp, ia, iblast, &ey_emlrtRTEI);
   *ib_size = 0;
   if (!b_issorted(a)) {
-    emlrtErrorWithMessageIdR2018a(sp, &kc_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(sp, &lc_emlrtRTEI,
                                   "Coder:toolbox:eml_setop_unsortedA",
                                   "Coder:toolbox:eml_setop_unsortedA", 0);
   }
   if (!b_issorted(b)) {
-    emlrtErrorWithMessageIdR2018a(sp, &jc_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(sp, &kc_emlrtRTEI,
                                   "Coder:toolbox:eml_setop_unsortedB",
                                   "Coder:toolbox:eml_setop_unsortedB", 0);
   }
@@ -1198,7 +900,7 @@ void g_do_vectors(const emlrtStack *sp, const emxArray_real_T *a,
   }
   if (a->size[1] > 0) {
     if (nia > a->size[1]) {
-      emlrtErrorWithMessageIdR2018a(sp, &lc_emlrtRTEI,
+      emlrtErrorWithMessageIdR2018a(sp, &mc_emlrtRTEI,
                                     "Coder:builtins:AssertionFailed",
                                     "Coder:builtins:AssertionFailed", 0);
     }
@@ -1208,9 +910,9 @@ void g_do_vectors(const emlrtStack *sp, const emxArray_real_T *a,
     } else {
       ia->size[0] = nia;
     }
-    emxEnsureCapacity_int32_T(sp, ia, iblast, &cx_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, ia, iblast, &ay_emlrtRTEI);
     if (nc > a->size[1]) {
-      emlrtErrorWithMessageIdR2018a(sp, &mc_emlrtRTEI,
+      emlrtErrorWithMessageIdR2018a(sp, &nc_emlrtRTEI,
                                     "Coder:builtins:AssertionFailed",
                                     "Coder:builtins:AssertionFailed", 0);
     }
@@ -1220,7 +922,7 @@ void g_do_vectors(const emlrtStack *sp, const emxArray_real_T *a,
     } else {
       c->size[1] = nc;
     }
-    emxEnsureCapacity_real_T(sp, c, iblast, &hx_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, c, iblast, &fy_emlrtRTEI);
   }
 }
 

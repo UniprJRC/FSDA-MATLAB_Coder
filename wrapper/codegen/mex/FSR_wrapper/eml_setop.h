@@ -43,10 +43,6 @@ void e_do_vectors(const emlrtStack *sp, const emxArray_real_T *a,
                   emxArray_int32_T *ia, int32_T *ib_size);
 
 void f_do_vectors(const emlrtStack *sp, const emxArray_real_T *a,
-                  const emxArray_real32_T *b, emxArray_real_T *c,
-                  emxArray_int32_T *ia, int32_T *ib_size);
-
-void g_do_vectors(const emlrtStack *sp, const emxArray_real_T *a,
                   const emxArray_real_T *b, emxArray_real_T *c,
                   emxArray_int32_T *ia, int32_T *ib_size);
 

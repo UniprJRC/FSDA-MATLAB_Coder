@@ -18,7 +18,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRSInfo hd_emlrtRSI = {
+static emlrtRSInfo gd_emlrtRSI = {
     29,               /* lineNo */
     "nullAssignment", /* fcnName */
     "C:\\Program "
@@ -26,7 +26,7 @@ static emlrtRSInfo hd_emlrtRSI = {
     "internal\\nullAssignment.m" /* pathName */
 };
 
-static emlrtRSInfo id_emlrtRSI = {
+static emlrtRSInfo hd_emlrtRSI = {
     33,               /* lineNo */
     "nullAssignment", /* fcnName */
     "C:\\Program "
@@ -34,7 +34,7 @@ static emlrtRSInfo id_emlrtRSI = {
     "internal\\nullAssignment.m" /* pathName */
 };
 
-static emlrtRSInfo jd_emlrtRSI = {
+static emlrtRSInfo id_emlrtRSI = {
     356,              /* lineNo */
     "delete_columns", /* fcnName */
     "C:\\Program "
@@ -42,7 +42,7 @@ static emlrtRSInfo jd_emlrtRSI = {
     "internal\\nullAssignment.m" /* pathName */
 };
 
-static emlrtRSInfo kd_emlrtRSI = {
+static emlrtRSInfo jd_emlrtRSI = {
     357,              /* lineNo */
     "delete_columns", /* fcnName */
     "C:\\Program "
@@ -50,7 +50,7 @@ static emlrtRSInfo kd_emlrtRSI = {
     "internal\\nullAssignment.m" /* pathName */
 };
 
-static emlrtRSInfo ld_emlrtRSI = {
+static emlrtRSInfo kd_emlrtRSI = {
     365,              /* lineNo */
     "delete_columns", /* fcnName */
     "C:\\Program "
@@ -58,7 +58,7 @@ static emlrtRSInfo ld_emlrtRSI = {
     "internal\\nullAssignment.m" /* pathName */
 };
 
-static emlrtRSInfo md_emlrtRSI = {
+static emlrtRSInfo ld_emlrtRSI = {
     367,              /* lineNo */
     "delete_columns", /* fcnName */
     "C:\\Program "
@@ -66,7 +66,7 @@ static emlrtRSInfo md_emlrtRSI = {
     "internal\\nullAssignment.m" /* pathName */
 };
 
-static emlrtRSInfo nd_emlrtRSI = {
+static emlrtRSInfo md_emlrtRSI = {
     370,              /* lineNo */
     "delete_columns", /* fcnName */
     "C:\\Program "
@@ -74,7 +74,7 @@ static emlrtRSInfo nd_emlrtRSI = {
     "internal\\nullAssignment.m" /* pathName */
 };
 
-static emlrtRSInfo od_emlrtRSI = {
+static emlrtRSInfo nd_emlrtRSI = {
     372,              /* lineNo */
     "delete_columns", /* fcnName */
     "C:\\Program "
@@ -82,7 +82,7 @@ static emlrtRSInfo od_emlrtRSI = {
     "internal\\nullAssignment.m" /* pathName */
 };
 
-static emlrtRSInfo pd_emlrtRSI = {
+static emlrtRSInfo od_emlrtRSI = {
     259,             /* lineNo */
     "make_bitarray", /* fcnName */
     "C:\\Program "
@@ -90,7 +90,7 @@ static emlrtRSInfo pd_emlrtRSI = {
     "internal\\nullAssignment.m" /* pathName */
 };
 
-static emlrtRSInfo qd_emlrtRSI = {
+static emlrtRSInfo pd_emlrtRSI = {
     132,        /* lineNo */
     "num_true", /* fcnName */
     "C:\\Program "
@@ -116,7 +116,7 @@ static emlrtRTEInfo fb_emlrtRTEI = {
     "internal\\nullAssignment.m" /* pName */
 };
 
-static emlrtRTEInfo ih_emlrtRTEI = {
+static emlrtRTEInfo th_emlrtRTEI = {
     365,              /* lineNo */
     9,                /* colNo */
     "nullAssignment", /* fName */
@@ -125,7 +125,7 @@ static emlrtRTEInfo ih_emlrtRTEI = {
     "internal\\nullAssignment.m" /* pName */
 };
 
-static emlrtRTEInfo jh_emlrtRTEI = {
+static emlrtRTEInfo uh_emlrtRTEI = {
     33,               /* lineNo */
     13,               /* colNo */
     "nullAssignment", /* fName */
@@ -134,7 +134,7 @@ static emlrtRTEInfo jh_emlrtRTEI = {
     "internal\\nullAssignment.m" /* pName */
 };
 
-static emlrtRTEInfo kh_emlrtRTEI = {
+static emlrtRTEInfo vh_emlrtRTEI = {
     363,              /* lineNo */
     9,                /* colNo */
     "nullAssignment", /* fName */
@@ -170,7 +170,7 @@ void nullAssignment(const emlrtStack *sp, emxArray_real_T *x,
   d_st.prev = &c_st;
   d_st.tls = c_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  st.site = &hd_emlrtRSI;
+  st.site = &gd_emlrtRSI;
   overflow = true;
   k = 0;
   exitg1 = false;
@@ -187,26 +187,26 @@ void nullAssignment(const emlrtStack *sp, emxArray_real_T *x,
                                   "MATLAB:subsdeldimmismatch",
                                   "MATLAB:subsdeldimmismatch", 0);
   }
-  st.site = &id_emlrtRSI;
+  st.site = &hd_emlrtRSI;
   nrowx = x->size[0];
   ncolx = x->size[1];
   if (idx->size[1] == 1) {
     ncols = x->size[1] - 1;
     b_b = idx->data[0];
-    b_st.site = &jd_emlrtRSI;
+    b_st.site = &id_emlrtRSI;
     if (idx->data[0] > x->size[1] - 1) {
       overflow = false;
     } else {
       overflow = (x->size[1] - 1 > 2147483646);
     }
     if (overflow) {
-      c_st.site = &pc_emlrtRSI;
+      c_st.site = &oc_emlrtRSI;
       check_forloop_overflow_error(&c_st);
     }
     for (j = b_b; j <= ncols; j++) {
-      b_st.site = &kd_emlrtRSI;
+      b_st.site = &jd_emlrtRSI;
       if ((1 <= nrowx) && (nrowx > 2147483646)) {
-        c_st.site = &pc_emlrtRSI;
+        c_st.site = &oc_emlrtRSI;
         check_forloop_overflow_error(&c_st);
       }
       for (i = 0; i < nrowx; i++) {
@@ -214,31 +214,31 @@ void nullAssignment(const emlrtStack *sp, emxArray_real_T *x,
       }
     }
   } else {
-    emxInit_boolean_T(&st, &b, 2, &kh_emlrtRTEI, true);
-    b_st.site = &ld_emlrtRSI;
+    emxInit_boolean_T(&st, &b, 2, &vh_emlrtRTEI, true);
+    b_st.site = &kd_emlrtRSI;
     i = b->size[0] * b->size[1];
     b->size[0] = 1;
     b->size[1] = x->size[1];
-    emxEnsureCapacity_boolean_T(&b_st, b, i, &ih_emlrtRTEI);
+    emxEnsureCapacity_boolean_T(&b_st, b, i, &th_emlrtRTEI);
     j = x->size[1];
     for (i = 0; i < j; i++) {
       b->data[i] = false;
     }
     b_b = idx->size[1];
-    c_st.site = &pd_emlrtRSI;
+    c_st.site = &od_emlrtRSI;
     if ((1 <= idx->size[1]) && (idx->size[1] > 2147483646)) {
-      d_st.site = &pc_emlrtRSI;
+      d_st.site = &oc_emlrtRSI;
       check_forloop_overflow_error(&d_st);
     }
     for (k = 0; k < b_b; k++) {
       b->data[idx->data[k] - 1] = true;
     }
-    b_st.site = &md_emlrtRSI;
+    b_st.site = &ld_emlrtRSI;
     ncols = 0;
     b_b = b->size[1];
-    c_st.site = &qd_emlrtRSI;
+    c_st.site = &pd_emlrtRSI;
     if ((1 <= b->size[1]) && (b->size[1] > 2147483646)) {
-      d_st.site = &pc_emlrtRSI;
+      d_st.site = &oc_emlrtRSI;
       check_forloop_overflow_error(&d_st);
     }
     for (k = 0; k < b_b; k++) {
@@ -246,16 +246,16 @@ void nullAssignment(const emlrtStack *sp, emxArray_real_T *x,
     }
     ncols = x->size[1] - ncols;
     j = 0;
-    b_st.site = &nd_emlrtRSI;
+    b_st.site = &md_emlrtRSI;
     if ((1 <= x->size[1]) && (x->size[1] > 2147483646)) {
-      c_st.site = &pc_emlrtRSI;
+      c_st.site = &oc_emlrtRSI;
       check_forloop_overflow_error(&c_st);
     }
     for (k = 0; k < ncolx; k++) {
       if ((k + 1 > b->size[1]) || (!b->data[k])) {
-        b_st.site = &od_emlrtRSI;
+        b_st.site = &nd_emlrtRSI;
         if ((1 <= nrowx) && (nrowx > 2147483646)) {
-          c_st.site = &pc_emlrtRSI;
+          c_st.site = &oc_emlrtRSI;
           check_forloop_overflow_error(&c_st);
         }
         for (i = 0; i < nrowx; i++) {
@@ -286,7 +286,7 @@ void nullAssignment(const emlrtStack *sp, emxArray_real_T *x,
   i = x->size[0] * x->size[1];
   x->size[0] = b_b + 1;
   x->size[1] = j;
-  emxEnsureCapacity_real_T(&st, x, i, &jh_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, x, i, &uh_emlrtRTEI);
   emlrtHeapReferenceStackLeaveFcnR2012b((emlrtCTX)sp);
 }
 

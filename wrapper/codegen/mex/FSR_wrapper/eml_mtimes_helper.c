@@ -24,7 +24,7 @@ void b_dynamic_size_checks(const emlrtStack *sp, const emxArray_real_T *a,
     if (((a->size[0] == 1) && (a->size[1] == 1)) ||
         ((b->size[0] == 1) && (b->size[1] == 1))) {
       emlrtErrorWithMessageIdR2018a(
-          sp, &j_emlrtRTEI, "Coder:toolbox:mtimes_noDynamicScalarExpansion",
+          sp, &l_emlrtRTEI, "Coder:toolbox:mtimes_noDynamicScalarExpansion",
           "Coder:toolbox:mtimes_noDynamicScalarExpansion", 0);
     } else {
       emlrtErrorWithMessageIdR2018a(sp, &k_emlrtRTEI, "MATLAB:innerdim",
@@ -40,7 +40,7 @@ void c_dynamic_size_checks(const emlrtStack *sp, const emxArray_real_T *a,
   if (innerDimA != innerDimB) {
     if ((a->size[0] == 1) || (b->size[0] == 1)) {
       emlrtErrorWithMessageIdR2018a(
-          sp, &j_emlrtRTEI, "Coder:toolbox:mtimes_noDynamicScalarExpansion",
+          sp, &l_emlrtRTEI, "Coder:toolbox:mtimes_noDynamicScalarExpansion",
           "Coder:toolbox:mtimes_noDynamicScalarExpansion", 0);
     } else {
       emlrtErrorWithMessageIdR2018a(sp, &k_emlrtRTEI, "MATLAB:innerdim",
@@ -56,7 +56,7 @@ void d_dynamic_size_checks(const emlrtStack *sp, const emxArray_real_T *a,
   if (innerDimA != innerDimB) {
     if (((a->size[0] == 1) && (a->size[1] == 1)) || (b->size[1] == 1)) {
       emlrtErrorWithMessageIdR2018a(
-          sp, &j_emlrtRTEI, "Coder:toolbox:mtimes_noDynamicScalarExpansion",
+          sp, &l_emlrtRTEI, "Coder:toolbox:mtimes_noDynamicScalarExpansion",
           "Coder:toolbox:mtimes_noDynamicScalarExpansion", 0);
     } else {
       emlrtErrorWithMessageIdR2018a(sp, &k_emlrtRTEI, "MATLAB:innerdim",
@@ -72,7 +72,7 @@ void dynamic_size_checks(const emlrtStack *sp, const emxArray_real_T *a,
   if (innerDimA != innerDimB) {
     if (((a->size[0] == 1) && (a->size[1] == 1)) || (b->size[0] == 1)) {
       emlrtErrorWithMessageIdR2018a(
-          sp, &j_emlrtRTEI, "Coder:toolbox:mtimes_noDynamicScalarExpansion",
+          sp, &l_emlrtRTEI, "Coder:toolbox:mtimes_noDynamicScalarExpansion",
           "Coder:toolbox:mtimes_noDynamicScalarExpansion", 0);
     } else {
       emlrtErrorWithMessageIdR2018a(sp, &k_emlrtRTEI, "MATLAB:innerdim",
@@ -88,7 +88,7 @@ void e_dynamic_size_checks(const emlrtStack *sp, const emxArray_real_T *a,
   if (innerDimA != innerDimB) {
     if ((a->size[1] == 1) || (b->size[0] == 1)) {
       emlrtErrorWithMessageIdR2018a(
-          sp, &j_emlrtRTEI, "Coder:toolbox:mtimes_noDynamicScalarExpansion",
+          sp, &l_emlrtRTEI, "Coder:toolbox:mtimes_noDynamicScalarExpansion",
           "Coder:toolbox:mtimes_noDynamicScalarExpansion", 0);
     } else {
       emlrtErrorWithMessageIdR2018a(sp, &k_emlrtRTEI, "MATLAB:innerdim",

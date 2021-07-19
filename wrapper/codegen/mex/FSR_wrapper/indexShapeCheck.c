@@ -14,7 +14,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRSInfo gf_emlrtRSI = {
+static emlrtRSInfo nf_emlrtRSI = {
     38,                /* lineNo */
     "indexShapeCheck", /* fcnName */
     "C:\\Program "
@@ -22,7 +22,7 @@ static emlrtRSInfo gf_emlrtRSI = {
     "internal\\indexShapeCheck.m" /* pathName */
 };
 
-static emlrtRSInfo tf_emlrtRSI = {
+static emlrtRSInfo bg_emlrtRSI = {
     43,                /* lineNo */
     "indexShapeCheck", /* fcnName */
     "C:\\Program "
@@ -30,7 +30,7 @@ static emlrtRSInfo tf_emlrtRSI = {
     "internal\\indexShapeCheck.m" /* pathName */
 };
 
-static emlrtRTEInfo ab_emlrtRTEI = {
+static emlrtRTEInfo bb_emlrtRTEI = {
     121,           /* lineNo */
     5,             /* colNo */
     "errOrWarnIf", /* fName */
@@ -64,9 +64,9 @@ void b_indexShapeCheck(const emlrtStack *sp, int32_T matrixSize,
   } else {
     nonSingletonDimFound = false;
   }
-  st.site = &tf_emlrtRSI;
+  st.site = &bg_emlrtRSI;
   if (nonSingletonDimFound) {
-    emlrtErrorWithMessageIdR2018a(&st, &ab_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(&st, &bb_emlrtRTEI,
                                   "Coder:FE:PotentialVectorVector",
                                   "Coder:FE:PotentialVectorVector", 0);
   }
@@ -77,9 +77,9 @@ void c_indexShapeCheck(const emlrtStack *sp, int32_T matrixSize)
   emlrtStack st;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &tf_emlrtRSI;
+  st.site = &bg_emlrtRSI;
   if (matrixSize == 1) {
-    emlrtErrorWithMessageIdR2018a(&st, &ab_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(&st, &bb_emlrtRTEI,
                                   "Coder:FE:PotentialVectorVector",
                                   "Coder:FE:PotentialVectorVector", 0);
   }
@@ -116,9 +116,9 @@ void indexShapeCheck(const emlrtStack *sp, const int32_T matrixSize[2],
       } else {
         nonSingletonDimFound = false;
       }
-      st.site = &gf_emlrtRSI;
+      st.site = &nf_emlrtRSI;
       if (nonSingletonDimFound) {
-        emlrtErrorWithMessageIdR2018a(&st, &ab_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&st, &bb_emlrtRTEI,
                                       "Coder:FE:PotentialMatrixMatrix_VM",
                                       "Coder:FE:PotentialMatrixMatrix_VM", 0);
       }

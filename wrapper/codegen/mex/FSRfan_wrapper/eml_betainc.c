@@ -18,7 +18,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo ip_emlrtRSI = {
+static emlrtRSInfo gp_emlrtRSI = {
     128,           /* lineNo */
     "eml_betainc", /* fcnName */
     "C:\\Program "
@@ -26,7 +26,7 @@ static emlrtRSInfo ip_emlrtRSI = {
     "betainc.m" /* pathName */
 };
 
-static emlrtRSInfo jp_emlrtRSI = {
+static emlrtRSInfo hp_emlrtRSI = {
     126,           /* lineNo */
     "eml_betainc", /* fcnName */
     "C:\\Program "
@@ -34,7 +34,7 @@ static emlrtRSInfo jp_emlrtRSI = {
     "betainc.m" /* pathName */
 };
 
-static emlrtRSInfo kp_emlrtRSI = {
+static emlrtRSInfo ip_emlrtRSI = {
     125,           /* lineNo */
     "eml_betainc", /* fcnName */
     "C:\\Program "
@@ -42,7 +42,7 @@ static emlrtRSInfo kp_emlrtRSI = {
     "betainc.m" /* pathName */
 };
 
-static emlrtRSInfo lp_emlrtRSI = {
+static emlrtRSInfo jp_emlrtRSI = {
     118,           /* lineNo */
     "eml_betainc", /* fcnName */
     "C:\\Program "
@@ -50,7 +50,7 @@ static emlrtRSInfo lp_emlrtRSI = {
     "betainc.m" /* pathName */
 };
 
-static emlrtRSInfo mp_emlrtRSI = {
+static emlrtRSInfo kp_emlrtRSI = {
     115,           /* lineNo */
     "eml_betainc", /* fcnName */
     "C:\\Program "
@@ -58,7 +58,7 @@ static emlrtRSInfo mp_emlrtRSI = {
     "betainc.m" /* pathName */
 };
 
-static emlrtRSInfo np_emlrtRSI = {
+static emlrtRSInfo lp_emlrtRSI = {
     114,           /* lineNo */
     "eml_betainc", /* fcnName */
     "C:\\Program "
@@ -66,7 +66,7 @@ static emlrtRSInfo np_emlrtRSI = {
     "betainc.m" /* pathName */
 };
 
-static emlrtRSInfo op_emlrtRSI = {
+static emlrtRSInfo mp_emlrtRSI = {
     102,           /* lineNo */
     "eml_betainc", /* fcnName */
     "C:\\Program "
@@ -74,7 +74,7 @@ static emlrtRSInfo op_emlrtRSI = {
     "betainc.m" /* pathName */
 };
 
-static emlrtRSInfo pp_emlrtRSI = {
+static emlrtRSInfo np_emlrtRSI = {
     97,            /* lineNo */
     "eml_betainc", /* fcnName */
     "C:\\Program "
@@ -82,7 +82,7 @@ static emlrtRSInfo pp_emlrtRSI = {
     "betainc.m" /* pathName */
 };
 
-static emlrtRSInfo qp_emlrtRSI = {
+static emlrtRSInfo op_emlrtRSI = {
     92,            /* lineNo */
     "eml_betainc", /* fcnName */
     "C:\\Program "
@@ -90,7 +90,7 @@ static emlrtRSInfo qp_emlrtRSI = {
     "betainc.m" /* pathName */
 };
 
-static emlrtRSInfo rp_emlrtRSI = {
+static emlrtRSInfo pp_emlrtRSI = {
     89,            /* lineNo */
     "eml_betainc", /* fcnName */
     "C:\\Program "
@@ -169,16 +169,16 @@ real_T eml_betainc(const emlrtStack *sp, real_T x, real_T a, real_T b,
     } else {
       guard1 = false;
       if (a + 0.5 < 1.0E+7) {
-        st.site = &rp_emlrtRSI;
+        st.site = &pp_emlrtRSI;
         logx = muDoubleScalarLog(x);
         if (1.0 - x != 1.0) {
-          st.site = &qp_emlrtRSI;
+          st.site = &op_emlrtRSI;
           log1mx = muDoubleScalarLog(1.0 - x) * (-x / ((1.0 - x) - 1.0));
         } else {
           log1mx = -x;
         }
         if (x < (a + 1.0) / ((a + 0.5) + 2.0)) {
-          st.site = &pp_emlrtRSI;
+          st.site = &np_emlrtRSI;
           if (a < 0.0) {
             emlrtErrorWithMessageIdR2018a(
                 &st, &jb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
@@ -192,7 +192,7 @@ real_T eml_betainc(const emlrtStack *sp, real_T x, real_T a, real_T b,
             rval = 1.0 - rval;
           }
         } else {
-          st.site = &op_emlrtRSI;
+          st.site = &mp_emlrtRSI;
           if (b < 0.0) {
             emlrtErrorWithMessageIdR2018a(
                 &st, &jb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
@@ -213,11 +213,11 @@ real_T eml_betainc(const emlrtStack *sp, real_T x, real_T a, real_T b,
         guard1 = true;
       }
       if (guard1) {
-        st.site = &np_emlrtRSI;
+        st.site = &lp_emlrtRSI;
         log1mx = muDoubleScalarPower(0.5 * x, 0.33333333333333331);
-        st.site = &mp_emlrtRSI;
+        st.site = &kp_emlrtRSI;
         logx = a * (1.0 - x);
-        b_st.site = &rf_emlrtRSI;
+        b_st.site = &qf_emlrtRSI;
         w2 = muDoubleScalarPower(logx, 0.33333333333333331);
         if (logx < 0.0) {
           emlrtErrorWithMessageIdR2018a(&b_st, &eb_emlrtRTEI,
@@ -225,7 +225,7 @@ real_T eml_betainc(const emlrtStack *sp, real_T x, real_T a, real_T b,
                                         "Coder:toolbox:power_domainError", 0);
         }
         if (((a + 0.5) - 1.0) * (1.0 - x) > 0.8) {
-          st.site = &lp_emlrtRSI;
+          st.site = &jp_emlrtRSI;
           b_x = log1mx * log1mx / 0.5 + w2 * w2 / a;
           if (b_x < 0.0) {
             emlrtErrorWithMessageIdR2018a(
@@ -344,16 +344,16 @@ real_T eml_betainc(const emlrtStack *sp, real_T x, real_T a, real_T b,
             }
           }
         } else {
-          st.site = &kp_emlrtRSI;
+          st.site = &ip_emlrtRSI;
           if (b < 0.0) {
             emlrtErrorWithMessageIdR2018a(
                 &st, &jb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
                 "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
           }
           logx = 0.5;
-          st.site = &jp_emlrtRSI;
+          st.site = &hp_emlrtRSI;
           gammaln(&st, &logx);
-          st.site = &ip_emlrtRSI;
+          st.site = &gp_emlrtRSI;
           rval = eml_gammainc(
               &st, 0.5 * (((a + 0.5) - 1.0) * (3.0 - x) - -0.5) * (1.0 - x),
               logx, !upper);

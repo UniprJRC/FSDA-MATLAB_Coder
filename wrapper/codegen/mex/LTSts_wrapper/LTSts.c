@@ -445,37 +445,37 @@ static emlrtRSInfo fs_emlrtRSI = { 3277,/* lineNo */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo nab_emlrtRSI = { 2947,/* lineNo */
+static emlrtRSInfo mab_emlrtRSI = { 2947,/* lineNo */
   "LTSts/likyhat",                     /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo oab_emlrtRSI = { 2953,/* lineNo */
+static emlrtRSInfo nab_emlrtRSI = { 2953,/* lineNo */
   "LTSts/likyhat",                     /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo pab_emlrtRSI = { 2956,/* lineNo */
+static emlrtRSInfo oab_emlrtRSI = { 2956,/* lineNo */
   "LTSts/likyhat",                     /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo qab_emlrtRSI = { 2961,/* lineNo */
+static emlrtRSInfo pab_emlrtRSI = { 2961,/* lineNo */
   "LTSts/likyhat",                     /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo rab_emlrtRSI = { 2973,/* lineNo */
+static emlrtRSInfo qab_emlrtRSI = { 2973,/* lineNo */
   "LTSts/likyhat",                     /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo scb_emlrtRSI = { 3327,/* lineNo */
+static emlrtRSInfo rcb_emlrtRSI = { 3327,/* lineNo */
   "corfactorREW",                      /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo tcb_emlrtRSI = { 3328,/* lineNo */
+static emlrtRSInfo scb_emlrtRSI = { 3328,/* lineNo */
   "corfactorREW",                      /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
@@ -3193,1051 +3193,1051 @@ static emlrtBCInfo yo_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
-static emlrtRTEInfo hm_emlrtRTEI = { 2702,/* lineNo */
+static emlrtRTEInfo gm_emlrtRTEI = { 2702,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo im_emlrtRTEI = { 2703,/* lineNo */
+static emlrtRTEInfo hm_emlrtRTEI = { 2703,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo jm_emlrtRTEI = { 2709,/* lineNo */
+static emlrtRTEInfo im_emlrtRTEI = { 2709,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo km_emlrtRTEI = { 2710,/* lineNo */
+static emlrtRTEInfo jm_emlrtRTEI = { 2710,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo lm_emlrtRTEI = { 2711,/* lineNo */
+static emlrtRTEInfo km_emlrtRTEI = { 2711,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo mm_emlrtRTEI = { 2712,/* lineNo */
+static emlrtRTEInfo lm_emlrtRTEI = { 2712,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo nm_emlrtRTEI = { 2713,/* lineNo */
+static emlrtRTEInfo mm_emlrtRTEI = { 2713,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo om_emlrtRTEI = { 2714,/* lineNo */
+static emlrtRTEInfo nm_emlrtRTEI = { 2714,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo pm_emlrtRTEI = { 2728,/* lineNo */
+static emlrtRTEInfo om_emlrtRTEI = { 2728,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo qm_emlrtRTEI = { 2718,/* lineNo */
+static emlrtRTEInfo pm_emlrtRTEI = { 2718,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo rm_emlrtRTEI = { 2723,/* lineNo */
+static emlrtRTEInfo qm_emlrtRTEI = { 2723,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo sm_emlrtRTEI = { 2729,/* lineNo */
+static emlrtRTEInfo rm_emlrtRTEI = { 2729,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo tm_emlrtRTEI = { 2725,/* lineNo */
+static emlrtRTEInfo sm_emlrtRTEI = { 2725,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo um_emlrtRTEI = { 2719,/* lineNo */
+static emlrtRTEInfo tm_emlrtRTEI = { 2719,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo vm_emlrtRTEI = { 2731,/* lineNo */
+static emlrtRTEInfo um_emlrtRTEI = { 2731,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo wm_emlrtRTEI = { 2746,/* lineNo */
+static emlrtRTEInfo vm_emlrtRTEI = { 2746,/* lineNo */
   19,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo xm_emlrtRTEI = { 2754,/* lineNo */
+static emlrtRTEInfo wm_emlrtRTEI = { 2754,/* lineNo */
   40,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ym_emlrtRTEI = { 2736,/* lineNo */
+static emlrtRTEInfo xm_emlrtRTEI = { 2736,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo an_emlrtRTEI = { 2754,/* lineNo */
+static emlrtRTEInfo ym_emlrtRTEI = { 2754,/* lineNo */
   52,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo bn_emlrtRTEI = { 2720,/* lineNo */
+static emlrtRTEInfo an_emlrtRTEI = { 2720,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo cn_emlrtRTEI = { 2732,/* lineNo */
+static emlrtRTEInfo bn_emlrtRTEI = { 2732,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo dn_emlrtRTEI = { 2758,/* lineNo */
+static emlrtRTEInfo cn_emlrtRTEI = { 2758,/* lineNo */
   45,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo en_emlrtRTEI = { 2721,/* lineNo */
+static emlrtRTEInfo dn_emlrtRTEI = { 2721,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo fn_emlrtRTEI = { 2765,/* lineNo */
+static emlrtRTEInfo en_emlrtRTEI = { 2765,/* lineNo */
   52,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo gn_emlrtRTEI = { 2737,/* lineNo */
+static emlrtRTEInfo fn_emlrtRTEI = { 2737,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo hn_emlrtRTEI = { 2765,/* lineNo */
+static emlrtRTEInfo gn_emlrtRTEI = { 2765,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo in_emlrtRTEI = { 2738,/* lineNo */
+static emlrtRTEInfo hn_emlrtRTEI = { 2738,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo jn_emlrtRTEI = { 2766,/* lineNo */
+static emlrtRTEInfo in_emlrtRTEI = { 2766,/* lineNo */
   84,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo kn_emlrtRTEI = { 2733,/* lineNo */
+static emlrtRTEInfo jn_emlrtRTEI = { 2733,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ln_emlrtRTEI = { 2766,/* lineNo */
+static emlrtRTEInfo kn_emlrtRTEI = { 2766,/* lineNo */
   49,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo mn_emlrtRTEI = { 2769,/* lineNo */
+static emlrtRTEInfo ln_emlrtRTEI = { 2769,/* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo nn_emlrtRTEI = { 2734,/* lineNo */
+static emlrtRTEInfo mn_emlrtRTEI = { 2734,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo on_emlrtRTEI = { 2770,/* lineNo */
+static emlrtRTEInfo nn_emlrtRTEI = { 2770,/* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo pn_emlrtRTEI = { 2776,/* lineNo */
+static emlrtRTEInfo on_emlrtRTEI = { 2776,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo qn_emlrtRTEI = { 2782,/* lineNo */
+static emlrtRTEInfo pn_emlrtRTEI = { 2782,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo rn_emlrtRTEI = { 2699,/* lineNo */
+static emlrtRTEInfo qn_emlrtRTEI = { 2699,/* lineNo */
   33,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo sn_emlrtRTEI = { 2734,/* lineNo */
+static emlrtRTEInfo rn_emlrtRTEI = { 2734,/* lineNo */
   30,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo tn_emlrtRTEI = { 2877,/* lineNo */
+static emlrtRTEInfo sn_emlrtRTEI = { 2877,/* lineNo */
   19,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo un_emlrtRTEI = { 2877,/* lineNo */
+static emlrtRTEInfo tn_emlrtRTEI = { 2877,/* lineNo */
   33,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo vn_emlrtRTEI = { 2897,/* lineNo */
+static emlrtRTEInfo un_emlrtRTEI = { 2897,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo wn_emlrtRTEI = { 2882,/* lineNo */
+static emlrtRTEInfo vn_emlrtRTEI = { 2882,/* lineNo */
   47,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo xn_emlrtRTEI = { 2912,/* lineNo */
+static emlrtRTEInfo wn_emlrtRTEI = { 2912,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo yn_emlrtRTEI = { 2882,/* lineNo */
+static emlrtRTEInfo xn_emlrtRTEI = { 2882,/* lineNo */
   27,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ao_emlrtRTEI = { 2910,/* lineNo */
+static emlrtRTEInfo yn_emlrtRTEI = { 2910,/* lineNo */
   38,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo bo_emlrtRTEI = { 2885,/* lineNo */
+static emlrtRTEInfo ao_emlrtRTEI = { 2885,/* lineNo */
   27,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo co_emlrtRTEI = { 2902,/* lineNo */
+static emlrtRTEInfo bo_emlrtRTEI = { 2902,/* lineNo */
   19,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo do_emlrtRTEI = { 2918,/* lineNo */
+static emlrtRTEInfo co_emlrtRTEI = { 2918,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo eo_emlrtRTEI = { 2882,/* lineNo */
+static emlrtRTEInfo do_emlrtRTEI = { 2882,/* lineNo */
   41,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo fo_emlrtRTEI = { 2885,/* lineNo */
+static emlrtRTEInfo eo_emlrtRTEI = { 2885,/* lineNo */
   41,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo go_emlrtRTEI = { 2902,/* lineNo */
+static emlrtRTEInfo fo_emlrtRTEI = { 2902,/* lineNo */
   28,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ho_emlrtRTEI = { 2934,/* lineNo */
+static emlrtRTEInfo go_emlrtRTEI = { 2934,/* lineNo */
   18,                                  /* colNo */
+  "LTSts",                             /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
+};
+
+static emlrtRTEInfo ho_emlrtRTEI = { 2890,/* lineNo */
+  24,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
 static emlrtRTEInfo io_emlrtRTEI = { 2890,/* lineNo */
-  24,                                  /* colNo */
-  "LTSts",                             /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
-};
-
-static emlrtRTEInfo jo_emlrtRTEI = { 2890,/* lineNo */
   45,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ko_emlrtRTEI = { 2891,/* lineNo */
+static emlrtRTEInfo jo_emlrtRTEI = { 2891,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo lo_emlrtRTEI = { 2877,/* lineNo */
+static emlrtRTEInfo ko_emlrtRTEI = { 2877,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo mo_emlrtRTEI = { 2890,/* lineNo */
+static emlrtRTEInfo lo_emlrtRTEI = { 2890,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo no_emlrtRTEI = { 2910,/* lineNo */
+static emlrtRTEInfo mo_emlrtRTEI = { 2910,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo oo_emlrtRTEI = { 2875,/* lineNo */
+static emlrtRTEInfo no_emlrtRTEI = { 2875,/* lineNo */
   18,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo po_emlrtRTEI = { 3037,/* lineNo */
+static emlrtRTEInfo oo_emlrtRTEI = { 3037,/* lineNo */
   15,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo qo_emlrtRTEI = { 3047,/* lineNo */
+static emlrtRTEInfo po_emlrtRTEI = { 3047,/* lineNo */
   29,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ro_emlrtRTEI = { 3051,/* lineNo */
+static emlrtRTEInfo qo_emlrtRTEI = { 3051,/* lineNo */
   27,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo so_emlrtRTEI = { 3057,/* lineNo */
+static emlrtRTEInfo ro_emlrtRTEI = { 3057,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo to_emlrtRTEI = { 3055,/* lineNo */
+static emlrtRTEInfo so_emlrtRTEI = { 3055,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo uo_emlrtRTEI = { 3095,/* lineNo */
+static emlrtRTEInfo to_emlrtRTEI = { 3095,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo vo_emlrtRTEI = { 3231,/* lineNo */
+static emlrtRTEInfo uo_emlrtRTEI = { 3231,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo wo_emlrtRTEI = { 3217,/* lineNo */
+static emlrtRTEInfo vo_emlrtRTEI = { 3217,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo xo_emlrtRTEI = { 3082,/* lineNo */
+static emlrtRTEInfo wo_emlrtRTEI = { 3082,/* lineNo */
   27,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo yo_emlrtRTEI = { 3071,/* lineNo */
+static emlrtRTEInfo xo_emlrtRTEI = { 3071,/* lineNo */
   24,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ap_emlrtRTEI = { 3232,/* lineNo */
+static emlrtRTEInfo yo_emlrtRTEI = { 3232,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo bp_emlrtRTEI = { 3192,/* lineNo */
+static emlrtRTEInfo ap_emlrtRTEI = { 3192,/* lineNo */
   24,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo cp_emlrtRTEI = { 3219,/* lineNo */
+static emlrtRTEInfo bp_emlrtRTEI = { 3219,/* lineNo */
   29,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo dp_emlrtRTEI = { 3204,/* lineNo */
+static emlrtRTEInfo cp_emlrtRTEI = { 3204,/* lineNo */
   27,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ep_emlrtRTEI = { 3101,/* lineNo */
+static emlrtRTEInfo dp_emlrtRTEI = { 3101,/* lineNo */
   27,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo fp_emlrtRTEI = { 3120,/* lineNo */
+static emlrtRTEInfo ep_emlrtRTEI = { 3120,/* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo gp_emlrtRTEI = { 3154,/* lineNo */
+static emlrtRTEInfo fp_emlrtRTEI = { 3154,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo hp_emlrtRTEI = { 3101,/* lineNo */
+static emlrtRTEInfo gp_emlrtRTEI = { 3101,/* lineNo */
   41,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ip_emlrtRTEI = { 3239,/* lineNo */
+static emlrtRTEInfo hp_emlrtRTEI = { 3239,/* lineNo */
   51,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo jp_emlrtRTEI = { 3239,/* lineNo */
+static emlrtRTEInfo ip_emlrtRTEI = { 3239,/* lineNo */
   66,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo kp_emlrtRTEI = { 3072,/* lineNo */
+static emlrtRTEInfo jp_emlrtRTEI = { 3072,/* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo lp_emlrtRTEI = { 3193,/* lineNo */
+static emlrtRTEInfo kp_emlrtRTEI = { 3193,/* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo mp_emlrtRTEI = { 3083,/* lineNo */
+static emlrtRTEInfo lp_emlrtRTEI = { 3083,/* lineNo */
   31,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo np_emlrtRTEI = { 3075,/* lineNo */
+static emlrtRTEInfo mp_emlrtRTEI = { 3075,/* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo op_emlrtRTEI = { 3196,/* lineNo */
+static emlrtRTEInfo np_emlrtRTEI = { 3196,/* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo pp_emlrtRTEI = { 3161,/* lineNo */
+static emlrtRTEInfo op_emlrtRTEI = { 3161,/* lineNo */
   29,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo qp_emlrtRTEI = { 3205,/* lineNo */
+static emlrtRTEInfo pp_emlrtRTEI = { 3205,/* lineNo */
   31,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo rp_emlrtRTEI = { 3161,/* lineNo */
+static emlrtRTEInfo qp_emlrtRTEI = { 3161,/* lineNo */
   54,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo sp_emlrtRTEI = { 3125,/* lineNo */
+static emlrtRTEInfo rp_emlrtRTEI = { 3125,/* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo tp_emlrtRTEI = { 3086,/* lineNo */
+static emlrtRTEInfo sp_emlrtRTEI = { 3086,/* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo up_emlrtRTEI = { 3088,/* lineNo */
+static emlrtRTEInfo tp_emlrtRTEI = { 3088,/* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo vp_emlrtRTEI = { 3092,/* lineNo */
+static emlrtRTEInfo up_emlrtRTEI = { 3092,/* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo wp_emlrtRTEI = { 3090,/* lineNo */
+static emlrtRTEInfo vp_emlrtRTEI = { 3090,/* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo xp_emlrtRTEI = { 3208,/* lineNo */
+static emlrtRTEInfo wp_emlrtRTEI = { 3208,/* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo yp_emlrtRTEI = { 3210,/* lineNo */
+static emlrtRTEInfo xp_emlrtRTEI = { 3210,/* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo aq_emlrtRTEI = { 3214,/* lineNo */
+static emlrtRTEInfo yp_emlrtRTEI = { 3214,/* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo bq_emlrtRTEI = { 3212,/* lineNo */
+static emlrtRTEInfo aq_emlrtRTEI = { 3212,/* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo cq_emlrtRTEI = { 3167,/* lineNo */
+static emlrtRTEInfo bq_emlrtRTEI = { 3167,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo dq_emlrtRTEI = { 3129,/* lineNo */
+static emlrtRTEInfo cq_emlrtRTEI = { 3129,/* lineNo */
   28,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo eq_emlrtRTEI = { 3173,/* lineNo */
+static emlrtRTEInfo dq_emlrtRTEI = { 3173,/* lineNo */
   19,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo fq_emlrtRTEI = { 3129,/* lineNo */
+static emlrtRTEInfo eq_emlrtRTEI = { 3129,/* lineNo */
   42,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo gq_emlrtRTEI = { 3135,/* lineNo */
+static emlrtRTEInfo fq_emlrtRTEI = { 3135,/* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo hq_emlrtRTEI = { 3178,/* lineNo */
+static emlrtRTEInfo gq_emlrtRTEI = { 3178,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo iq_emlrtRTEI = { 3040,/* lineNo */
+static emlrtRTEInfo hq_emlrtRTEI = { 3040,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo jq_emlrtRTEI = { 3043,/* lineNo */
+static emlrtRTEInfo iq_emlrtRTEI = { 3043,/* lineNo */
   16,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo kq_emlrtRTEI = { 3129,/* lineNo */
+static emlrtRTEInfo jq_emlrtRTEI = { 3129,/* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo lq_emlrtRTEI = { 2792,/* lineNo */
+static emlrtRTEInfo kq_emlrtRTEI = { 2792,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo mq_emlrtRTEI = { 2793,/* lineNo */
+static emlrtRTEInfo lq_emlrtRTEI = { 2793,/* lineNo */
   9,                                   /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo nq_emlrtRTEI = { 2802,/* lineNo */
+static emlrtRTEInfo mq_emlrtRTEI = { 2802,/* lineNo */
   19,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo oq_emlrtRTEI = { 2805,/* lineNo */
+static emlrtRTEInfo nq_emlrtRTEI = { 2805,/* lineNo */
   16,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo pq_emlrtRTEI = { 2820,/* lineNo */
+static emlrtRTEInfo oq_emlrtRTEI = { 2820,/* lineNo */
   41,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo qq_emlrtRTEI = { 2814,/* lineNo */
+static emlrtRTEInfo pq_emlrtRTEI = { 2814,/* lineNo */
   41,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo rq_emlrtRTEI = { 2818,/* lineNo */
+static emlrtRTEInfo qq_emlrtRTEI = { 2818,/* lineNo */
   41,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo sq_emlrtRTEI = { 2812,/* lineNo */
+static emlrtRTEInfo rq_emlrtRTEI = { 2812,/* lineNo */
   41,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo tq_emlrtRTEI = { 2820,/* lineNo */
+static emlrtRTEInfo sq_emlrtRTEI = { 2820,/* lineNo */
   55,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo uq_emlrtRTEI = { 2814,/* lineNo */
+static emlrtRTEInfo tq_emlrtRTEI = { 2814,/* lineNo */
   72,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo vq_emlrtRTEI = { 2818,/* lineNo */
+static emlrtRTEInfo uq_emlrtRTEI = { 2818,/* lineNo */
   55,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo wq_emlrtRTEI = { 2812,/* lineNo */
+static emlrtRTEInfo vq_emlrtRTEI = { 2812,/* lineNo */
   72,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo xq_emlrtRTEI = { 2820,/* lineNo */
+static emlrtRTEInfo wq_emlrtRTEI = { 2820,/* lineNo */
   81,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo yq_emlrtRTEI = { 2812,/* lineNo */
+static emlrtRTEInfo xq_emlrtRTEI = { 2812,/* lineNo */
   94,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ar_emlrtRTEI = { 2818,/* lineNo */
+static emlrtRTEInfo yq_emlrtRTEI = { 2818,/* lineNo */
   81,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo br_emlrtRTEI = { 2818,/* lineNo */
+static emlrtRTEInfo ar_emlrtRTEI = { 2818,/* lineNo */
   64,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo cr_emlrtRTEI = { 2818,/* lineNo */
+static emlrtRTEInfo br_emlrtRTEI = { 2818,/* lineNo */
   103,                                 /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo dr_emlrtRTEI = { 2814,/* lineNo */
+static emlrtRTEInfo cr_emlrtRTEI = { 2814,/* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo er_emlrtRTEI = { 2825,/* lineNo */
+static emlrtRTEInfo dr_emlrtRTEI = { 2825,/* lineNo */
   39,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo fr_emlrtRTEI = { 2820,/* lineNo */
+static emlrtRTEInfo er_emlrtRTEI = { 2820,/* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo gr_emlrtRTEI = { 2812,/* lineNo */
+static emlrtRTEInfo fr_emlrtRTEI = { 2812,/* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo hr_emlrtRTEI = { 2818,/* lineNo */
+static emlrtRTEInfo gr_emlrtRTEI = { 2818,/* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ir_emlrtRTEI = { 2832,/* lineNo */
+static emlrtRTEInfo hr_emlrtRTEI = { 2832,/* lineNo */
   25,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo jr_emlrtRTEI = { 2832,/* lineNo */
+static emlrtRTEInfo ir_emlrtRTEI = { 2832,/* lineNo */
   37,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo kr_emlrtRTEI = { 2832,/* lineNo */
+static emlrtRTEInfo jr_emlrtRTEI = { 2832,/* lineNo */
   58,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo lr_emlrtRTEI = { 2847,/* lineNo */
+static emlrtRTEInfo kr_emlrtRTEI = { 2847,/* lineNo */
   27,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo mr_emlrtRTEI = { 2844,/* lineNo */
+static emlrtRTEInfo lr_emlrtRTEI = { 2844,/* lineNo */
   27,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo nr_emlrtRTEI = { 2839,/* lineNo */
+static emlrtRTEInfo mr_emlrtRTEI = { 2839,/* lineNo */
   27,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo or_emlrtRTEI = { 2836,/* lineNo */
+static emlrtRTEInfo nr_emlrtRTEI = { 2836,/* lineNo */
   27,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo pr_emlrtRTEI = { 2847,/* lineNo */
+static emlrtRTEInfo or_emlrtRTEI = { 2847,/* lineNo */
   36,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo qr_emlrtRTEI = { 2844,/* lineNo */
+static emlrtRTEInfo pr_emlrtRTEI = { 2844,/* lineNo */
   36,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo rr_emlrtRTEI = { 2839,/* lineNo */
+static emlrtRTEInfo qr_emlrtRTEI = { 2839,/* lineNo */
   36,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo sr_emlrtRTEI = { 2836,/* lineNo */
+static emlrtRTEInfo rr_emlrtRTEI = { 2836,/* lineNo */
   36,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo tr_emlrtRTEI = { 2847,/* lineNo */
+static emlrtRTEInfo sr_emlrtRTEI = { 2847,/* lineNo */
   50,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ur_emlrtRTEI = { 2844,/* lineNo */
+static emlrtRTEInfo tr_emlrtRTEI = { 2844,/* lineNo */
   50,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo vr_emlrtRTEI = { 2839,/* lineNo */
+static emlrtRTEInfo ur_emlrtRTEI = { 2839,/* lineNo */
+  50,                                  /* colNo */
+  "LTSts",                             /* fName */
+  "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
+};
+
+static emlrtRTEInfo vr_emlrtRTEI = { 2836,/* lineNo */
   50,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
 static emlrtRTEInfo wr_emlrtRTEI = { 2836,/* lineNo */
-  50,                                  /* colNo */
-  "LTSts",                             /* fName */
-  "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
-};
-
-static emlrtRTEInfo xr_emlrtRTEI = { 2836,/* lineNo */
   67,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo yr_emlrtRTEI = { 2838,/* lineNo */
+static emlrtRTEInfo xr_emlrtRTEI = { 2838,/* lineNo */
   53,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo as_emlrtRTEI = { 2847,/* lineNo */
+static emlrtRTEInfo yr_emlrtRTEI = { 2847,/* lineNo */
   67,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo bs_emlrtRTEI = { 2844,/* lineNo */
+static emlrtRTEInfo as_emlrtRTEI = { 2844,/* lineNo */
   67,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo cs_emlrtRTEI = { 2851,/* lineNo */
+static emlrtRTEInfo bs_emlrtRTEI = { 2851,/* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ds_emlrtRTEI = { 2835,/* lineNo */
+static emlrtRTEInfo cs_emlrtRTEI = { 2835,/* lineNo */
   53,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo es_emlrtRTEI = { 2847,/* lineNo */
+static emlrtRTEInfo ds_emlrtRTEI = { 2847,/* lineNo */
   76,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo fs_emlrtRTEI = { 2844,/* lineNo */
+static emlrtRTEInfo es_emlrtRTEI = { 2844,/* lineNo */
   76,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo gs_emlrtRTEI = { 2853,/* lineNo */
+static emlrtRTEInfo fs_emlrtRTEI = { 2853,/* lineNo */
   21,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo hs_emlrtRTEI = { 2844,/* lineNo */
+static emlrtRTEInfo gs_emlrtRTEI = { 2844,/* lineNo */
   111,                                 /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo is_emlrtRTEI = { 2846,/* lineNo */
+static emlrtRTEInfo hs_emlrtRTEI = { 2846,/* lineNo */
   53,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo js_emlrtRTEI = { 2858,/* lineNo */
+static emlrtRTEInfo is_emlrtRTEI = { 2858,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ks_emlrtRTEI = { 2843,/* lineNo */
+static emlrtRTEInfo js_emlrtRTEI = { 2843,/* lineNo */
   53,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ls_emlrtRTEI = { 2864,/* lineNo */
+static emlrtRTEInfo ks_emlrtRTEI = { 2864,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ms_emlrtRTEI = { 2805,/* lineNo */
+static emlrtRTEInfo ls_emlrtRTEI = { 2805,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ns_emlrtRTEI = { 2825,/* lineNo */
+static emlrtRTEInfo ms_emlrtRTEI = { 2825,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo os_emlrtRTEI = { 2832,/* lineNo */
+static emlrtRTEInfo ns_emlrtRTEI = { 2832,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ps_emlrtRTEI = { 2789,/* lineNo */
+static emlrtRTEInfo os_emlrtRTEI = { 2789,/* lineNo */
   33,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo dw_emlrtRTEI = { 2947,/* lineNo */
+static emlrtRTEInfo cw_emlrtRTEI = { 2947,/* lineNo */
   27,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ew_emlrtRTEI = { 2968,/* lineNo */
+static emlrtRTEInfo dw_emlrtRTEI = { 2968,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo fw_emlrtRTEI = { 2953,/* lineNo */
+static emlrtRTEInfo ew_emlrtRTEI = { 2953,/* lineNo */
   41,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo gw_emlrtRTEI = { 2984,/* lineNo */
+static emlrtRTEInfo fw_emlrtRTEI = { 2984,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo hw_emlrtRTEI = { 2953,/* lineNo */
+static emlrtRTEInfo gw_emlrtRTEI = { 2953,/* lineNo */
   27,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo iw_emlrtRTEI = { 2982,/* lineNo */
+static emlrtRTEInfo hw_emlrtRTEI = { 2982,/* lineNo */
   13,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo jw_emlrtRTEI = { 2956,/* lineNo */
+static emlrtRTEInfo iw_emlrtRTEI = { 2956,/* lineNo */
   27,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo kw_emlrtRTEI = { 2973,/* lineNo */
+static emlrtRTEInfo jw_emlrtRTEI = { 2973,/* lineNo */
   19,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo lw_emlrtRTEI = { 2953,/* lineNo */
+static emlrtRTEInfo kw_emlrtRTEI = { 2953,/* lineNo */
   35,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo mw_emlrtRTEI = { 2956,/* lineNo */
+static emlrtRTEInfo lw_emlrtRTEI = { 2956,/* lineNo */
   35,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo nw_emlrtRTEI = { 2973,/* lineNo */
+static emlrtRTEInfo mw_emlrtRTEI = { 2973,/* lineNo */
   27,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo ow_emlrtRTEI = { 2961,/* lineNo */
+static emlrtRTEInfo nw_emlrtRTEI = { 2961,/* lineNo */
   24,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo pw_emlrtRTEI = { 2961,/* lineNo */
+static emlrtRTEInfo ow_emlrtRTEI = { 2961,/* lineNo */
   44,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo qw_emlrtRTEI = { 2962,/* lineNo */
+static emlrtRTEInfo pw_emlrtRTEI = { 2962,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo rw_emlrtRTEI = { 2961,/* lineNo */
+static emlrtRTEInfo qw_emlrtRTEI = { 2961,/* lineNo */
   17,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
 };
 
-static emlrtRTEInfo sw_emlrtRTEI = { 2945,/* lineNo */
+static emlrtRTEInfo rw_emlrtRTEI = { 2945,/* lineNo */
   22,                                  /* colNo */
   "LTSts",                             /* fName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pName */
@@ -4261,42 +4261,42 @@ static const char_T cv5[51] = { 'T', 'h', 'i', 's', ' ', 'm', 'a', 'y', ' ', 'h'
   'v', 'e', 'r', 'y', ' ', 's', 'm', 'a', 'l', 'l', ' ', 'a', 'n', 'd', ' ', 'p',
   ' ', 'i', 's', ' ', 'l', 'a', 'r', 'g', 'e' };
 
-static emlrtRSInfo ieb_emlrtRSI = { 3345,/* lineNo */
+static emlrtRSInfo heb_emlrtRSI = { 3345,/* lineNo */
   "corfactorREW",                      /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo jeb_emlrtRSI = { 3344,/* lineNo */
+static emlrtRSInfo ieb_emlrtRSI = { 3344,/* lineNo */
   "corfactorREW",                      /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo keb_emlrtRSI = { 3343,/* lineNo */
+static emlrtRSInfo jeb_emlrtRSI = { 3343,/* lineNo */
   "corfactorREW",                      /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo leb_emlrtRSI = { 3342,/* lineNo */
+static emlrtRSInfo keb_emlrtRSI = { 3342,/* lineNo */
   "corfactorREW",                      /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo neb_emlrtRSI = { 3294,/* lineNo */
+static emlrtRSInfo meb_emlrtRSI = { 3294,/* lineNo */
   "corfactorRAW",                      /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo oeb_emlrtRSI = { 3293,/* lineNo */
+static emlrtRSInfo neb_emlrtRSI = { 3293,/* lineNo */
   "corfactorRAW",                      /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo peb_emlrtRSI = { 3292,/* lineNo */
+static emlrtRSInfo oeb_emlrtRSI = { 3292,/* lineNo */
   "corfactorRAW",                      /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
 
-static emlrtRSInfo qeb_emlrtRSI = { 3291,/* lineNo */
+static emlrtRSInfo peb_emlrtRSI = { 3291,/* lineNo */
   "corfactorRAW",                      /* fcnName */
   "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\LTSts.m"/* pathName */
 };
@@ -4384,16 +4384,16 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
   betadiff = 9999.0;
   i = newbeta->size[0];
   newbeta->size[0] = beta0->size[0];
-  emxEnsureCapacity_real_T(sp, newbeta, i, &lq_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, newbeta, i, &kq_emlrtRTEI);
   loop_ub = beta0->size[0];
   for (i = 0; i < loop_ub; i++) {
     newbeta->data[i] = beta0->data[i];
   }
 
-  emxInit_real_T(sp, &oldbeta, 1, &mq_emlrtRTEI, true);
+  emxInit_real_T(sp, &oldbeta, 1, &lq_emlrtRTEI, true);
   i = oldbeta->size[0];
   oldbeta->size[0] = beta0->size[0];
-  emxEnsureCapacity_real_T(sp, oldbeta, i, &mq_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, oldbeta, i, &lq_emlrtRTEI);
   loop_ub = beta0->size[0];
   for (i = 0; i < loop_ub; i++) {
     oldbeta->data[i] = beta0->data[i];
@@ -4402,20 +4402,20 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
   /*  exitflag = flag which informs about convergence. exitflag =0 */
   /*  implies normal convergence, else no convergence has been obtained */
   b_exitflag = 0;
-  emxInit_real_T(sp, &at, 1, &ms_emlrtRTEI, true);
-  emxInit_real_T(sp, &tr_expl_nls_lshift, 2, &gr_emlrtRTEI, true);
-  emxInit_real_T(sp, &b0145, 1, &ns_emlrtRTEI, true);
-  emxInit_real_T(sp, &yhatnlseaso, 1, &os_emlrtRTEI, true);
-  emxInit_real_T(sp, &r, 1, &er_emlrtRTEI, true);
-  emxInit_real_T(sp, &r1, 1, &ps_emlrtRTEI, true);
-  emxInit_int32_T(sp, &r2, 2, &ps_emlrtRTEI, true);
-  emxInit_real_T(sp, &a, 2, &oq_emlrtRTEI, true);
-  emxInit_real_T(sp, &varargin_1, 2, &pq_emlrtRTEI, true);
-  emxInit_real_T(sp, &varargin_2, 2, &tq_emlrtRTEI, true);
-  emxInit_real_T(sp, &varargin_3, 2, &br_emlrtRTEI, true);
-  emxInit_real_T(sp, &b_a, 1, &hs_emlrtRTEI, true);
-  emxInit_boolean_T(sp, &r3, 1, &ef_emlrtRTEI, true);
-  emxInit_real_T(sp, &b_b0145, 2, &kr_emlrtRTEI, true);
+  emxInit_real_T(sp, &at, 1, &ls_emlrtRTEI, true);
+  emxInit_real_T(sp, &tr_expl_nls_lshift, 2, &fr_emlrtRTEI, true);
+  emxInit_real_T(sp, &b0145, 1, &ms_emlrtRTEI, true);
+  emxInit_real_T(sp, &yhatnlseaso, 1, &ns_emlrtRTEI, true);
+  emxInit_real_T(sp, &r, 1, &dr_emlrtRTEI, true);
+  emxInit_real_T(sp, &r1, 1, &os_emlrtRTEI, true);
+  emxInit_int32_T(sp, &r2, 2, &os_emlrtRTEI, true);
+  emxInit_real_T(sp, &a, 2, &nq_emlrtRTEI, true);
+  emxInit_real_T(sp, &varargin_1, 2, &oq_emlrtRTEI, true);
+  emxInit_real_T(sp, &varargin_2, 2, &sq_emlrtRTEI, true);
+  emxInit_real_T(sp, &varargin_3, 2, &ar_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_a, 1, &gs_emlrtRTEI, true);
+  emxInit_boolean_T(sp, &r3, 1, &df_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_b0145, 2, &jr_emlrtRTEI, true);
   exitg1 = false;
   while ((!exitg1) && ((betadiff > reftolALS->contents) && (iter <
            refstepsALS->contents))) {
@@ -4428,7 +4428,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
     i = b_b0145->size[0] * b_b0145->size[1];
     b_b0145->size[0] = 1;
     b_b0145->size[1] = indlinsc->contents->size[1];
-    emxEnsureCapacity_real_T(sp, b_b0145, i, &nq_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_b0145, i, &mq_emlrtRTEI);
     loop_ub = indlinsc->contents->size[1];
     for (i = 0; i < loop_ub; i++) {
       if (indlinsc->contents->data[i] != (int32_T)muDoubleScalarFloor
@@ -4454,7 +4454,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
     i = a->size[0] * a->size[1];
     a->size[0] = bsb->contents->size[0];
     a->size[1] = loop_ub;
-    emxEnsureCapacity_real_T(&st, a, i, &oq_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, a, i, &nq_emlrtRTEI);
     for (i = 0; i < loop_ub; i++) {
       b_loop_ub = bsb->contents->size[0];
       for (i1 = 0; i1 < b_loop_ub; i1++) {
@@ -4511,7 +4511,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
         i2 = varargin_1->size[0] * varargin_1->size[1];
         varargin_1->size[0] = bsb->contents->size[0];
         varargin_1->size[1] = loop_ub;
-        emxEnsureCapacity_real_T(&st, varargin_1, i2, &sq_emlrtRTEI);
+        emxEnsureCapacity_real_T(&st, varargin_1, i2, &rq_emlrtRTEI);
         for (i2 = 0; i2 < loop_ub; i2++) {
           b_loop_ub = bsb->contents->size[0];
           for (i3 = 0; i3 < b_loop_ub; i3++) {
@@ -4536,7 +4536,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
         tr_expl_nls_lshift->size[0] = bsb->contents->size[0];
         loop_ub = i1 - i;
         tr_expl_nls_lshift->size[1] = loop_ub;
-        emxEnsureCapacity_real_T(&st, tr_expl_nls_lshift, i2, &wq_emlrtRTEI);
+        emxEnsureCapacity_real_T(&st, tr_expl_nls_lshift, i2, &vq_emlrtRTEI);
         for (i1 = 0; i1 < loop_ub; i1++) {
           b_loop_ub = bsb->contents->size[0];
           for (i2 = 0; i2 < b_loop_ub; i2++) {
@@ -4560,7 +4560,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
         b_Xseaso = Xlshift->contents->size[0] * Xlshift->contents->size[1];
         i = yhatnlseaso->size[0];
         yhatnlseaso->size[0] = bsb->contents->size[0];
-        emxEnsureCapacity_real_T(&st, yhatnlseaso, i, &yq_emlrtRTEI);
+        emxEnsureCapacity_real_T(&st, yhatnlseaso, i, &xq_emlrtRTEI);
         loop_ub = bsb->contents->size[0];
         for (i = 0; i < loop_ub; i++) {
           if (bsb->contents->data[i] != (int32_T)muDoubleScalarFloor
@@ -4593,20 +4593,20 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
         c_st.site = &sf_emlrtRSI;
         if ((varargin_1->size[0] != b_Xseaso) && ((varargin_1->size[0] != 0) &&
              (varargin_1->size[1] != 0))) {
-          emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+          emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
             "MATLAB:catenate:matrixDimensionMismatch",
             "MATLAB:catenate:matrixDimensionMismatch", 0);
         }
 
         if ((varargin_2->size[0] != b_Xseaso) && ((varargin_2->size[0] != 0) &&
              (varargin_2->size[1] != 0))) {
-          emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+          emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
             "MATLAB:catenate:matrixDimensionMismatch",
             "MATLAB:catenate:matrixDimensionMismatch", 0);
         }
 
         if ((yhatnlseaso->size[0] != b_Xseaso) && (yhatnlseaso->size[0] != 0)) {
-          emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+          emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
             "MATLAB:catenate:matrixDimensionMismatch",
             "MATLAB:catenate:matrixDimensionMismatch", 0);
         }
@@ -4636,7 +4636,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
         tr_expl_nls_lshift->size[0] = b_Xseaso;
         i1 = input_sizes_idx_1 + b_input_sizes_idx_1;
         tr_expl_nls_lshift->size[1] = i1 + sizes[1];
-        emxEnsureCapacity_real_T(&b_st, tr_expl_nls_lshift, i, &gr_emlrtRTEI);
+        emxEnsureCapacity_real_T(&b_st, tr_expl_nls_lshift, i, &fr_emlrtRTEI);
         for (i = 0; i < input_sizes_idx_1; i++) {
           for (i2 = 0; i2 < b_Xseaso; i2++) {
             tr_expl_nls_lshift->data[i2 + tr_expl_nls_lshift->size[0] * i] =
@@ -4683,7 +4683,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
         i2 = varargin_1->size[0] * varargin_1->size[1];
         varargin_1->size[0] = bsb->contents->size[0];
         varargin_1->size[1] = loop_ub;
-        emxEnsureCapacity_real_T(&st, varargin_1, i2, &qq_emlrtRTEI);
+        emxEnsureCapacity_real_T(&st, varargin_1, i2, &pq_emlrtRTEI);
         for (i2 = 0; i2 < loop_ub; i2++) {
           b_loop_ub = bsb->contents->size[0];
           for (i3 = 0; i3 < b_loop_ub; i3++) {
@@ -4708,7 +4708,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
         tr_expl_nls_lshift->size[0] = bsb->contents->size[0];
         loop_ub = i1 - i;
         tr_expl_nls_lshift->size[1] = loop_ub;
-        emxEnsureCapacity_real_T(&st, tr_expl_nls_lshift, i2, &uq_emlrtRTEI);
+        emxEnsureCapacity_real_T(&st, tr_expl_nls_lshift, i2, &tq_emlrtRTEI);
         for (i1 = 0; i1 < loop_ub; i1++) {
           b_loop_ub = bsb->contents->size[0];
           for (i2 = 0; i2 < b_loop_ub; i2++) {
@@ -4744,14 +4744,14 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
         c_st.site = &sf_emlrtRSI;
         if ((varargin_1->size[0] != b_Xseaso) && ((varargin_1->size[0] != 0) &&
              (varargin_1->size[1] != 0))) {
-          emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+          emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
             "MATLAB:catenate:matrixDimensionMismatch",
             "MATLAB:catenate:matrixDimensionMismatch", 0);
         }
 
         if ((varargin_2->size[0] != b_Xseaso) && ((varargin_2->size[0] != 0) &&
              (varargin_2->size[1] != 0))) {
-          emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+          emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
             "MATLAB:catenate:matrixDimensionMismatch",
             "MATLAB:catenate:matrixDimensionMismatch", 0);
         }
@@ -4774,7 +4774,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
         i = tr_expl_nls_lshift->size[0] * tr_expl_nls_lshift->size[1];
         tr_expl_nls_lshift->size[0] = b_Xseaso;
         tr_expl_nls_lshift->size[1] = input_sizes_idx_1 + sizes[1];
-        emxEnsureCapacity_real_T(&b_st, tr_expl_nls_lshift, i, &dr_emlrtRTEI);
+        emxEnsureCapacity_real_T(&b_st, tr_expl_nls_lshift, i, &cr_emlrtRTEI);
         for (i = 0; i < input_sizes_idx_1; i++) {
           for (i1 = 0; i1 < b_Xseaso; i1++) {
             tr_expl_nls_lshift->data[i1 + tr_expl_nls_lshift->size[0] * i] =
@@ -4818,7 +4818,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       i2 = varargin_1->size[0] * varargin_1->size[1];
       varargin_1->size[0] = bsb->contents->size[0];
       varargin_1->size[1] = loop_ub;
-      emxEnsureCapacity_real_T(&st, varargin_1, i2, &rq_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, varargin_1, i2, &qq_emlrtRTEI);
       for (i2 = 0; i2 < loop_ub; i2++) {
         b_loop_ub = bsb->contents->size[0];
         for (i3 = 0; i3 < b_loop_ub; i3++) {
@@ -4843,7 +4843,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       i2 = varargin_2->size[0] * varargin_2->size[1];
       varargin_2->size[0] = bsb->contents->size[0];
       varargin_2->size[1] = loop_ub;
-      emxEnsureCapacity_real_T(&st, varargin_2, i2, &vq_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, varargin_2, i2, &uq_emlrtRTEI);
       for (i2 = 0; i2 < loop_ub; i2++) {
         b_loop_ub = bsb->contents->size[0];
         for (i3 = 0; i3 < b_loop_ub; i3++) {
@@ -4867,7 +4867,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       tr_expl_nls_lshift->size[0] = bsb->contents->size[0];
       loop_ub = i1 - i;
       tr_expl_nls_lshift->size[1] = loop_ub;
-      emxEnsureCapacity_real_T(&st, tr_expl_nls_lshift, i2, &ar_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, tr_expl_nls_lshift, i2, &yq_emlrtRTEI);
       for (i1 = 0; i1 < loop_ub; i1++) {
         b_loop_ub = bsb->contents->size[0];
         for (i2 = 0; i2 < b_loop_ub; i2++) {
@@ -4891,7 +4891,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       i = varargin_3->size[0] * varargin_3->size[1];
       varargin_3->size[0] = a->size[0];
       varargin_3->size[1] = a->size[1];
-      emxEnsureCapacity_real_T(&st, varargin_3, i, &br_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, varargin_3, i, &ar_emlrtRTEI);
       loop_ub = a->size[0] * a->size[1];
       for (i = 0; i < loop_ub; i++) {
         varargin_3->data[i] = a->data[i];
@@ -4900,7 +4900,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       b_Xseaso = Xlshift->contents->size[0] * Xlshift->contents->size[1];
       i = yhatnlseaso->size[0];
       yhatnlseaso->size[0] = bsb->contents->size[0];
-      emxEnsureCapacity_real_T(&st, yhatnlseaso, i, &cr_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, yhatnlseaso, i, &br_emlrtRTEI);
       loop_ub = bsb->contents->size[0];
       for (i = 0; i < loop_ub; i++) {
         if (bsb->contents->data[i] != (int32_T)muDoubleScalarFloor(bsb->
@@ -4939,27 +4939,27 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       c_st.site = &sf_emlrtRSI;
       if ((varargin_1->size[0] != b_Xseaso) && ((varargin_1->size[0] != 0) &&
            (varargin_1->size[1] != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
 
       if ((varargin_2->size[0] != b_Xseaso) && ((varargin_2->size[0] != 0) &&
            (varargin_2->size[1] != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
 
       if ((varargin_3->size[0] != b_Xseaso) && ((varargin_3->size[0] != 0) &&
            (varargin_3->size[1] != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
 
       if ((yhatnlseaso->size[0] != b_Xseaso) && (yhatnlseaso->size[0] != 0)) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
@@ -4996,7 +4996,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       tr_expl_nls_lshift->size[0] = b_Xseaso;
       i1 = (input_sizes_idx_1 + b_input_sizes_idx_1) + c_input_sizes_idx_1;
       tr_expl_nls_lshift->size[1] = i1 + sizes[1];
-      emxEnsureCapacity_real_T(&b_st, tr_expl_nls_lshift, i, &hr_emlrtRTEI);
+      emxEnsureCapacity_real_T(&b_st, tr_expl_nls_lshift, i, &gr_emlrtRTEI);
       for (i = 0; i < input_sizes_idx_1; i++) {
         for (i2 = 0; i2 < b_Xseaso; i2++) {
           tr_expl_nls_lshift->data[i2 + tr_expl_nls_lshift->size[0] * i] =
@@ -5052,7 +5052,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       i2 = varargin_1->size[0] * varargin_1->size[1];
       varargin_1->size[0] = bsb->contents->size[0];
       varargin_1->size[1] = loop_ub;
-      emxEnsureCapacity_real_T(&st, varargin_1, i2, &pq_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, varargin_1, i2, &oq_emlrtRTEI);
       for (i2 = 0; i2 < loop_ub; i2++) {
         b_loop_ub = bsb->contents->size[0];
         for (i3 = 0; i3 < b_loop_ub; i3++) {
@@ -5077,7 +5077,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       i2 = varargin_2->size[0] * varargin_2->size[1];
       varargin_2->size[0] = bsb->contents->size[0];
       varargin_2->size[1] = loop_ub;
-      emxEnsureCapacity_real_T(&st, varargin_2, i2, &tq_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, varargin_2, i2, &sq_emlrtRTEI);
       for (i2 = 0; i2 < loop_ub; i2++) {
         b_loop_ub = bsb->contents->size[0];
         for (i3 = 0; i3 < b_loop_ub; i3++) {
@@ -5101,7 +5101,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       tr_expl_nls_lshift->size[0] = bsb->contents->size[0];
       loop_ub = i1 - i;
       tr_expl_nls_lshift->size[1] = loop_ub;
-      emxEnsureCapacity_real_T(&st, tr_expl_nls_lshift, i2, &xq_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, tr_expl_nls_lshift, i2, &wq_emlrtRTEI);
       for (i1 = 0; i1 < loop_ub; i1++) {
         b_loop_ub = bsb->contents->size[0];
         for (i2 = 0; i2 < b_loop_ub; i2++) {
@@ -5143,21 +5143,21 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       c_st.site = &sf_emlrtRSI;
       if ((varargin_1->size[0] != b_Xseaso) && ((varargin_1->size[0] != 0) &&
            (varargin_1->size[1] != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
 
       if ((varargin_2->size[0] != b_Xseaso) && ((varargin_2->size[0] != 0) &&
            (varargin_2->size[1] != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
 
       if ((a->size[0] != b_Xseaso) && ((a->size[0] != 0) && (a->size[1] != 0)))
       {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
@@ -5187,7 +5187,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       tr_expl_nls_lshift->size[0] = b_Xseaso;
       tr_expl_nls_lshift->size[1] = (input_sizes_idx_1 + b_input_sizes_idx_1) +
         sizes[1];
-      emxEnsureCapacity_real_T(&b_st, tr_expl_nls_lshift, i, &fr_emlrtRTEI);
+      emxEnsureCapacity_real_T(&b_st, tr_expl_nls_lshift, i, &er_emlrtRTEI);
       for (i = 0; i < input_sizes_idx_1; i++) {
         for (i1 = 0; i1 < b_Xseaso; i1++) {
           tr_expl_nls_lshift->data[i1 + tr_expl_nls_lshift->size[0] * i] =
@@ -5217,7 +5217,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
     b_Xseaso = yin->contents->size[0];
     i = r->size[0];
     r->size[0] = bsb->contents->size[0];
-    emxEnsureCapacity_real_T(sp, r, i, &er_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, r, i, &dr_emlrtRTEI);
     loop_ub = bsb->contents->size[0];
     for (i = 0; i < loop_ub; i++) {
       if (bsb->contents->data[i] != (int32_T)muDoubleScalarFloor(bsb->
@@ -5307,7 +5307,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
     b_Xseaso = Seq->contents->size[0];
     i4 = yhatnlseaso->size[0];
     yhatnlseaso->size[0] = bsb->contents->size[0];
-    emxEnsureCapacity_real_T(sp, yhatnlseaso, i4, &ir_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, yhatnlseaso, i4, &hr_emlrtRTEI);
     loop_ub = bsb->contents->size[0];
     for (i4 = 0; i4 < loop_ub; i4++) {
       if (bsb->contents->data[i4] != (int32_T)muDoubleScalarFloor(bsb->
@@ -5331,7 +5331,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
     a->size[0] = bsb->contents->size[0];
     loop_ub = i1 - i;
     a->size[1] = loop_ub;
-    emxEnsureCapacity_real_T(&st, a, i4, &jr_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, a, i4, &ir_emlrtRTEI);
     for (i1 = 0; i1 < loop_ub; i1++) {
       b_loop_ub = bsb->contents->size[0];
       for (i4 = 0; i4 < b_loop_ub; i4++) {
@@ -5354,7 +5354,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
     i = b_b0145->size[0] * b_b0145->size[1];
     b_b0145->size[0] = 1;
     b_b0145->size[1] = b_input_sizes_idx_1;
-    emxEnsureCapacity_real_T(&st, b_b0145, i, &kr_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, b_b0145, i, &jr_emlrtRTEI);
     for (i = 0; i < b_input_sizes_idx_1; i++) {
       b_b0145->data[i] = b0145->data[(i2 + i) + 1];
     }
@@ -5364,7 +5364,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
     i = b_b0145->size[0] * b_b0145->size[1];
     b_b0145->size[0] = 1;
     b_b0145->size[1] = b_input_sizes_idx_1;
-    emxEnsureCapacity_real_T(&st, b_b0145, i, &kr_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, b_b0145, i, &jr_emlrtRTEI);
     for (i = 0; i < b_input_sizes_idx_1; i++) {
       b_b0145->data[i] = b0145->data[(i2 + i) + 1];
     }
@@ -5411,7 +5411,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
         b_Xseaso = yin->contents->size[0];
         i = r->size[0];
         r->size[0] = bsb->contents->size[0];
-        emxEnsureCapacity_real_T(sp, r, i, &or_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, r, i, &nr_emlrtRTEI);
         b_loop_ub = bsb->contents->size[0];
         for (i = 0; i < b_loop_ub; i++) {
           if (bsb->contents->data[i] != (int32_T)muDoubleScalarFloor
@@ -5435,7 +5435,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
         i = a->size[0] * a->size[1];
         a->size[0] = bsb->contents->size[0];
         a->size[1] = b_loop_ub;
-        emxEnsureCapacity_real_T(&st, a, i, &sr_emlrtRTEI);
+        emxEnsureCapacity_real_T(&st, a, i, &rr_emlrtRTEI);
         for (i = 0; i < b_loop_ub; i++) {
           b_Xseaso = bsb->contents->size[0];
           for (i1 = 0; i1 < b_Xseaso; i1++) {
@@ -5458,7 +5458,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
         i = b_b0145->size[0] * b_b0145->size[1];
         b_b0145->size[0] = 1;
         b_b0145->size[1] = loop_ub;
-        emxEnsureCapacity_real_T(&st, b_b0145, i, &wr_emlrtRTEI);
+        emxEnsureCapacity_real_T(&st, b_b0145, i, &vr_emlrtRTEI);
         for (i = 0; i < loop_ub; i++) {
           b_b0145->data[i] = b0145->data[i];
         }
@@ -5468,7 +5468,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
         i = b_b0145->size[0] * b_b0145->size[1];
         b_b0145->size[0] = 1;
         b_b0145->size[1] = loop_ub;
-        emxEnsureCapacity_real_T(&st, b_b0145, i, &wr_emlrtRTEI);
+        emxEnsureCapacity_real_T(&st, b_b0145, i, &vr_emlrtRTEI);
         for (i = 0; i < loop_ub; i++) {
           b_b0145->data[i] = b0145->data[i];
         }
@@ -5486,7 +5486,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
         b_Xseaso = Xlshift->contents->size[0] * Xlshift->contents->size[1];
         i = b_a->size[0];
         b_a->size[0] = bsb->contents->size[0];
-        emxEnsureCapacity_real_T(sp, b_a, i, &xr_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, b_a, i, &wr_emlrtRTEI);
         loop_ub = bsb->contents->size[0];
         for (i = 0; i < loop_ub; i++) {
           if (bsb->contents->data[i] != (int32_T)muDoubleScalarFloor
@@ -5524,7 +5524,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
         i = tr_expl_nls_lshift->size[0] * tr_expl_nls_lshift->size[1];
         tr_expl_nls_lshift->size[0] = bsb->contents->size[0];
         tr_expl_nls_lshift->size[1] = loop_ub;
-        emxEnsureCapacity_real_T(sp, tr_expl_nls_lshift, i, &ds_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, tr_expl_nls_lshift, i, &cs_emlrtRTEI);
         for (i = 0; i < loop_ub; i++) {
           b_loop_ub = bsb->contents->size[0];
           for (i1 = 0; i1 < b_loop_ub; i1++) {
@@ -5583,7 +5583,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
         b_Xseaso = yin->contents->size[0];
         i = r->size[0];
         r->size[0] = bsb->contents->size[0];
-        emxEnsureCapacity_real_T(sp, r, i, &nr_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, r, i, &mr_emlrtRTEI);
         b_loop_ub = bsb->contents->size[0];
         for (i = 0; i < b_loop_ub; i++) {
           if (bsb->contents->data[i] != (int32_T)muDoubleScalarFloor
@@ -5607,7 +5607,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
         i = a->size[0] * a->size[1];
         a->size[0] = bsb->contents->size[0];
         a->size[1] = b_loop_ub;
-        emxEnsureCapacity_real_T(&st, a, i, &rr_emlrtRTEI);
+        emxEnsureCapacity_real_T(&st, a, i, &qr_emlrtRTEI);
         for (i = 0; i < b_loop_ub; i++) {
           b_Xseaso = bsb->contents->size[0];
           for (i1 = 0; i1 < b_Xseaso; i1++) {
@@ -5630,7 +5630,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
         i = b_b0145->size[0] * b_b0145->size[1];
         b_b0145->size[0] = 1;
         b_b0145->size[1] = loop_ub;
-        emxEnsureCapacity_real_T(&st, b_b0145, i, &vr_emlrtRTEI);
+        emxEnsureCapacity_real_T(&st, b_b0145, i, &ur_emlrtRTEI);
         for (i = 0; i < loop_ub; i++) {
           b_b0145->data[i] = b0145->data[i];
         }
@@ -5640,7 +5640,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
         i = b_b0145->size[0] * b_b0145->size[1];
         b_b0145->size[0] = 1;
         b_b0145->size[1] = loop_ub;
-        emxEnsureCapacity_real_T(&st, b_b0145, i, &vr_emlrtRTEI);
+        emxEnsureCapacity_real_T(&st, b_b0145, i, &ur_emlrtRTEI);
         for (i = 0; i < loop_ub; i++) {
           b_b0145->data[i] = b0145->data[i];
         }
@@ -5657,7 +5657,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
         i = tr_expl_nls_lshift->size[0] * tr_expl_nls_lshift->size[1];
         tr_expl_nls_lshift->size[0] = bsb->contents->size[0];
         tr_expl_nls_lshift->size[1] = loop_ub;
-        emxEnsureCapacity_real_T(sp, tr_expl_nls_lshift, i, &yr_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, tr_expl_nls_lshift, i, &xr_emlrtRTEI);
         for (i = 0; i < loop_ub; i++) {
           b_loop_ub = bsb->contents->size[0];
           for (i1 = 0; i1 < b_loop_ub; i1++) {
@@ -5717,7 +5717,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       b_Xseaso = yin->contents->size[0];
       i = r->size[0];
       r->size[0] = bsb->contents->size[0];
-      emxEnsureCapacity_real_T(sp, r, i, &mr_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, r, i, &lr_emlrtRTEI);
       b_loop_ub = bsb->contents->size[0];
       for (i = 0; i < b_loop_ub; i++) {
         if (bsb->contents->data[i] != (int32_T)muDoubleScalarFloor(bsb->
@@ -5741,7 +5741,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       i = a->size[0] * a->size[1];
       a->size[0] = bsb->contents->size[0];
       a->size[1] = b_loop_ub;
-      emxEnsureCapacity_real_T(&st, a, i, &qr_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, a, i, &pr_emlrtRTEI);
       for (i = 0; i < b_loop_ub; i++) {
         b_Xseaso = bsb->contents->size[0];
         for (i1 = 0; i1 < b_Xseaso; i1++) {
@@ -5764,7 +5764,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       i = b_b0145->size[0] * b_b0145->size[1];
       b_b0145->size[0] = 1;
       b_b0145->size[1] = loop_ub;
-      emxEnsureCapacity_real_T(&st, b_b0145, i, &ur_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, b_b0145, i, &tr_emlrtRTEI);
       for (i = 0; i < loop_ub; i++) {
         b_b0145->data[i] = b0145->data[i];
       }
@@ -5774,7 +5774,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       i = b_b0145->size[0] * b_b0145->size[1];
       b_b0145->size[0] = 1;
       b_b0145->size[1] = loop_ub;
-      emxEnsureCapacity_real_T(&st, b_b0145, i, &ur_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, b_b0145, i, &tr_emlrtRTEI);
       for (i = 0; i < loop_ub; i++) {
         b_b0145->data[i] = b0145->data[i];
       }
@@ -5825,7 +5825,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       i2 = a->size[0] * a->size[1];
       a->size[0] = bsb->contents->size[0];
       a->size[1] = loop_ub;
-      emxEnsureCapacity_real_T(&st, a, i2, &bs_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, a, i2, &as_emlrtRTEI);
       for (i2 = 0; i2 < loop_ub; i2++) {
         b_loop_ub = bsb->contents->size[0];
         for (i3 = 0; i3 < b_loop_ub; i3++) {
@@ -5847,7 +5847,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       i2 = b_b0145->size[0] * b_b0145->size[1];
       b_b0145->size[0] = 1;
       b_b0145->size[1] = b_input_sizes_idx_1;
-      emxEnsureCapacity_real_T(&st, b_b0145, i2, &fs_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, b_b0145, i2, &es_emlrtRTEI);
       for (i2 = 0; i2 < b_input_sizes_idx_1; i2++) {
         b_b0145->data[i2] = b0145->data[(i + i2) + 1];
       }
@@ -5857,7 +5857,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       i1 = b_b0145->size[0] * b_b0145->size[1];
       b_b0145->size[0] = 1;
       b_b0145->size[1] = b_input_sizes_idx_1;
-      emxEnsureCapacity_real_T(&st, b_b0145, i1, &fs_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, b_b0145, i1, &es_emlrtRTEI);
       for (i1 = 0; i1 < b_input_sizes_idx_1; i1++) {
         b_b0145->data[i1] = b0145->data[(i + i1) + 1];
       }
@@ -5875,7 +5875,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       b_Xseaso = Xlshift->contents->size[0] * Xlshift->contents->size[1];
       i = b_a->size[0];
       b_a->size[0] = bsb->contents->size[0];
-      emxEnsureCapacity_real_T(sp, b_a, i, &hs_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, b_a, i, &gs_emlrtRTEI);
       loop_ub = bsb->contents->size[0];
       for (i = 0; i < loop_ub; i++) {
         if (bsb->contents->data[i] != (int32_T)muDoubleScalarFloor(bsb->
@@ -5913,7 +5913,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       i = tr_expl_nls_lshift->size[0] * tr_expl_nls_lshift->size[1];
       tr_expl_nls_lshift->size[0] = bsb->contents->size[0];
       tr_expl_nls_lshift->size[1] = loop_ub;
-      emxEnsureCapacity_real_T(sp, tr_expl_nls_lshift, i, &ks_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, tr_expl_nls_lshift, i, &js_emlrtRTEI);
       for (i = 0; i < loop_ub; i++) {
         b_loop_ub = bsb->contents->size[0];
         for (i1 = 0; i1 < b_loop_ub; i1++) {
@@ -5972,7 +5972,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       b_Xseaso = yin->contents->size[0];
       i = r->size[0];
       r->size[0] = bsb->contents->size[0];
-      emxEnsureCapacity_real_T(sp, r, i, &lr_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, r, i, &kr_emlrtRTEI);
       b_loop_ub = bsb->contents->size[0];
       for (i = 0; i < b_loop_ub; i++) {
         if (bsb->contents->data[i] != (int32_T)muDoubleScalarFloor(bsb->
@@ -5996,7 +5996,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       i = a->size[0] * a->size[1];
       a->size[0] = bsb->contents->size[0];
       a->size[1] = b_loop_ub;
-      emxEnsureCapacity_real_T(&st, a, i, &pr_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, a, i, &or_emlrtRTEI);
       for (i = 0; i < b_loop_ub; i++) {
         b_Xseaso = bsb->contents->size[0];
         for (i1 = 0; i1 < b_Xseaso; i1++) {
@@ -6019,7 +6019,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       i = b_b0145->size[0] * b_b0145->size[1];
       b_b0145->size[0] = 1;
       b_b0145->size[1] = loop_ub;
-      emxEnsureCapacity_real_T(&st, b_b0145, i, &tr_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, b_b0145, i, &sr_emlrtRTEI);
       for (i = 0; i < loop_ub; i++) {
         b_b0145->data[i] = b0145->data[i];
       }
@@ -6029,7 +6029,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       i = b_b0145->size[0] * b_b0145->size[1];
       b_b0145->size[0] = 1;
       b_b0145->size[1] = loop_ub;
-      emxEnsureCapacity_real_T(&st, b_b0145, i, &tr_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, b_b0145, i, &sr_emlrtRTEI);
       for (i = 0; i < loop_ub; i++) {
         b_b0145->data[i] = b0145->data[i];
       }
@@ -6080,7 +6080,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       i2 = a->size[0] * a->size[1];
       a->size[0] = bsb->contents->size[0];
       a->size[1] = loop_ub;
-      emxEnsureCapacity_real_T(&st, a, i2, &as_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, a, i2, &yr_emlrtRTEI);
       for (i2 = 0; i2 < loop_ub; i2++) {
         b_loop_ub = bsb->contents->size[0];
         for (i3 = 0; i3 < b_loop_ub; i3++) {
@@ -6102,7 +6102,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       i2 = b_b0145->size[0] * b_b0145->size[1];
       b_b0145->size[0] = 1;
       b_b0145->size[1] = b_input_sizes_idx_1;
-      emxEnsureCapacity_real_T(&st, b_b0145, i2, &es_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, b_b0145, i2, &ds_emlrtRTEI);
       for (i2 = 0; i2 < b_input_sizes_idx_1; i2++) {
         b_b0145->data[i2] = b0145->data[(i + i2) + 1];
       }
@@ -6112,7 +6112,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       i1 = b_b0145->size[0] * b_b0145->size[1];
       b_b0145->size[0] = 1;
       b_b0145->size[1] = b_input_sizes_idx_1;
-      emxEnsureCapacity_real_T(&st, b_b0145, i1, &es_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, b_b0145, i1, &ds_emlrtRTEI);
       for (i1 = 0; i1 < b_input_sizes_idx_1; i1++) {
         b_b0145->data[i1] = b0145->data[(i + i1) + 1];
       }
@@ -6129,7 +6129,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
       i = tr_expl_nls_lshift->size[0] * tr_expl_nls_lshift->size[1];
       tr_expl_nls_lshift->size[0] = bsb->contents->size[0];
       tr_expl_nls_lshift->size[1] = loop_ub;
-      emxEnsureCapacity_real_T(sp, tr_expl_nls_lshift, i, &is_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, tr_expl_nls_lshift, i, &hs_emlrtRTEI);
       for (i = 0; i < loop_ub; i++) {
         b_loop_ub = bsb->contents->size[0];
         for (i1 = 0; i1 < b_loop_ub; i1++) {
@@ -6164,7 +6164,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
     i = r2->size[0] * r2->size[1];
     r2->size[0] = 1;
     r2->size[1] = indlinsc->contents->size[1];
-    emxEnsureCapacity_int32_T(sp, r2, i, &cs_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, r2, i, &bs_emlrtRTEI);
     loop_ub = indlinsc->contents->size[1];
     for (i = 0; i < loop_ub; i++) {
       if (indlinsc->contents->data[i] != (int32_T)muDoubleScalarFloor
@@ -6195,7 +6195,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
     i = r2->size[0] * r2->size[1];
     r2->size[0] = 1;
     r2->size[1] = otherind->contents->size[1];
-    emxEnsureCapacity_int32_T(sp, r2, i, &gs_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, r2, i, &fs_emlrtRTEI);
     loop_ub = otherind->contents->size[1];
     for (i = 0; i < loop_ub; i++) {
       if (otherind->contents->data[i] != (int32_T)muDoubleScalarFloor
@@ -6257,7 +6257,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
     betadiff /= y;
     i = oldbeta->size[0];
     oldbeta->size[0] = newbeta->size[0];
-    emxEnsureCapacity_real_T(sp, oldbeta, i, &js_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, oldbeta, i, &is_emlrtRTEI);
     loop_ub = newbeta->size[0];
     for (i = 0; i < loop_ub; i++) {
       oldbeta->data[i] = newbeta->data[i];
@@ -6272,7 +6272,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
 
     i = r3->size[0];
     r3->size[0] = newbeta->size[0];
-    emxEnsureCapacity_boolean_T(sp, r3, i, &ef_emlrtRTEI);
+    emxEnsureCapacity_boolean_T(sp, r3, i, &df_emlrtRTEI);
     loop_ub = newbeta->size[0];
     for (i = 0; i < loop_ub; i++) {
       r3->data[i] = muDoubleScalarIsNaN(newbeta->data[i]);
@@ -6282,7 +6282,7 @@ static void ALSbsxfun(const emlrtStack *sp, const captured_var *reftolALS, const
     if (any(&st, r3)) {
       i = newbeta->size[0];
       newbeta->size[0] = beta0->size[0];
-      emxEnsureCapacity_real_T(sp, newbeta, i, &ls_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, newbeta, i, &ks_emlrtRTEI);
       loop_ub = beta0->size[0];
       for (i = 0; i < loop_ub; i++) {
         newbeta->data[i] = beta0->data[i];
@@ -6377,22 +6377,22 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
   betadiff = 9999.0;
   i = newbeta->size[0];
   newbeta->size[0] = beta0->size[0];
-  emxEnsureCapacity_real_T(sp, newbeta, i, &hm_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, newbeta, i, &gm_emlrtRTEI);
   loop_ub = beta0->size[0];
   for (i = 0; i < loop_ub; i++) {
     newbeta->data[i] = beta0->data[i];
   }
 
-  emxInit_real_T(sp, &oldbeta, 1, &im_emlrtRTEI, true);
+  emxInit_real_T(sp, &oldbeta, 1, &hm_emlrtRTEI, true);
   i = oldbeta->size[0];
   oldbeta->size[0] = beta0->size[0];
-  emxEnsureCapacity_real_T(sp, oldbeta, i, &im_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, oldbeta, i, &hm_emlrtRTEI);
   loop_ub = beta0->size[0];
   for (i = 0; i < loop_ub; i++) {
     oldbeta->data[i] = beta0->data[i];
   }
 
-  emxInit_real_T(sp, &Seqbsb, 1, &jm_emlrtRTEI, true);
+  emxInit_real_T(sp, &Seqbsb, 1, &im_emlrtRTEI, true);
 
   /*  exitflag = flag which informs about convergence. exitflag =0 */
   /*  implies normal convergence, else no convergence has been obtained */
@@ -6402,7 +6402,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
   input_sizes_idx_1 = Seq->contents->size[0];
   i = Seqbsb->size[0];
   Seqbsb->size[0] = bsb->contents->size[0];
-  emxEnsureCapacity_real_T(sp, Seqbsb, i, &jm_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, Seqbsb, i, &im_emlrtRTEI);
   loop_ub = bsb->contents->size[0];
   for (i = 0; i < loop_ub; i++) {
     if (bsb->contents->data[i] != (int32_T)muDoubleScalarFloor(bsb->
@@ -6419,13 +6419,13 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
     Seqbsb->data[i] = Seq->contents->data[i1 - 1];
   }
 
-  emxInit_real_T(sp, &Xseasobsb, 2, &km_emlrtRTEI, true);
+  emxInit_real_T(sp, &Xseasobsb, 2, &jm_emlrtRTEI, true);
   input_sizes_idx_1 = Xseaso->contents->size[0];
   loop_ub = Xseaso->contents->size[1];
   i = Xseasobsb->size[0] * Xseasobsb->size[1];
   Xseasobsb->size[0] = bsb->contents->size[0];
   Xseasobsb->size[1] = loop_ub;
-  emxEnsureCapacity_real_T(sp, Xseasobsb, i, &km_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, Xseasobsb, i, &jm_emlrtRTEI);
   for (i = 0; i < loop_ub; i++) {
     b_input_sizes_idx_1 = bsb->contents->size[0];
     for (i1 = 0; i1 < b_input_sizes_idx_1; i1++) {
@@ -6446,13 +6446,13 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
     }
   }
 
-  emxInit_real_T(sp, &Xtrendbsb, 2, &lm_emlrtRTEI, true);
+  emxInit_real_T(sp, &Xtrendbsb, 2, &km_emlrtRTEI, true);
   input_sizes_idx_1 = Xtrend->contents->size[0];
   loop_ub = Xtrend->contents->size[1];
   i = Xtrendbsb->size[0] * Xtrendbsb->size[1];
   Xtrendbsb->size[0] = bsb->contents->size[0];
   Xtrendbsb->size[1] = loop_ub;
-  emxEnsureCapacity_real_T(sp, Xtrendbsb, i, &lm_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, Xtrendbsb, i, &km_emlrtRTEI);
   for (i = 0; i < loop_ub; i++) {
     b_input_sizes_idx_1 = bsb->contents->size[0];
     for (i1 = 0; i1 < b_input_sizes_idx_1; i1++) {
@@ -6473,11 +6473,11 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
     }
   }
 
-  emxInit_real_T(sp, &yinbsb, 1, &mm_emlrtRTEI, true);
+  emxInit_real_T(sp, &yinbsb, 1, &lm_emlrtRTEI, true);
   input_sizes_idx_1 = yin->contents->size[0];
   i = yinbsb->size[0];
   yinbsb->size[0] = bsb->contents->size[0];
-  emxEnsureCapacity_real_T(sp, yinbsb, i, &mm_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, yinbsb, i, &lm_emlrtRTEI);
   loop_ub = bsb->contents->size[0];
   for (i = 0; i < loop_ub; i++) {
     if (bsb->contents->data[i] != (int32_T)muDoubleScalarFloor(bsb->
@@ -6498,12 +6498,12 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
   b2378 = (trend->contents + 2.0) + nexpl->contents;
   b_tmp = b2378 + varampl->contents;
   b_st.site = &rg_emlrtRSI;
-  emxInit_real_T(&b_st, &indnlseaso, 2, &nm_emlrtRTEI, true);
+  emxInit_real_T(&b_st, &indnlseaso, 2, &mm_emlrtRTEI, true);
   if (muDoubleScalarIsNaN(b2378) || muDoubleScalarIsNaN(b_tmp - 1.0)) {
     i = indnlseaso->size[0] * indnlseaso->size[1];
     indnlseaso->size[0] = 1;
     indnlseaso->size[1] = 1;
-    emxEnsureCapacity_real_T(&b_st, indnlseaso, i, &nm_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, indnlseaso, i, &mm_emlrtRTEI);
     indnlseaso->data[0] = rtNaN;
   } else if (b_tmp - 1.0 < b2378) {
     indnlseaso->size[0] = 1;
@@ -6513,14 +6513,14 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
     i = indnlseaso->size[0] * indnlseaso->size[1];
     indnlseaso->size[0] = 1;
     indnlseaso->size[1] = 1;
-    emxEnsureCapacity_real_T(&b_st, indnlseaso, i, &nm_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, indnlseaso, i, &mm_emlrtRTEI);
     indnlseaso->data[0] = rtNaN;
   } else if (muDoubleScalarFloor(b2378) == b2378) {
     i = indnlseaso->size[0] * indnlseaso->size[1];
     indnlseaso->size[0] = 1;
     loop_ub = (int32_T)muDoubleScalarFloor((b_tmp - 1.0) - b2378);
     indnlseaso->size[1] = loop_ub + 1;
-    emxEnsureCapacity_real_T(&b_st, indnlseaso, i, &nm_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, indnlseaso, i, &mm_emlrtRTEI);
     for (i = 0; i <= loop_ub; i++) {
       indnlseaso->data[i] = b2378 + (real_T)i;
     }
@@ -6547,13 +6547,13 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
     i1 = (int32_T)b2378;
   }
 
-  emxInit_real_T(sp, &Seqbsbvarampl, 2, &om_emlrtRTEI, true);
+  emxInit_real_T(sp, &Seqbsbvarampl, 2, &nm_emlrtRTEI, true);
   input_sizes_idx_1 = Seq->contents->size[0];
   i2 = Seqbsbvarampl->size[0] * Seqbsbvarampl->size[1];
   Seqbsbvarampl->size[0] = bsb->contents->size[0];
   loop_ub = i1 - i;
   Seqbsbvarampl->size[1] = loop_ub;
-  emxEnsureCapacity_real_T(sp, Seqbsbvarampl, i2, &om_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, Seqbsbvarampl, i2, &nm_emlrtRTEI);
   for (i1 = 0; i1 < loop_ub; i1++) {
     b_input_sizes_idx_1 = bsb->contents->size[0];
     for (i2 = 0; i2 < b_input_sizes_idx_1; i2++) {
@@ -6574,10 +6574,10 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
     }
   }
 
-  emxInit_real_T(sp, &Xlshiftbsb, 1, &qm_emlrtRTEI, true);
-  emxInit_real_T(sp, &XtrendXbsbXseasonXlshift, 2, &um_emlrtRTEI, true);
-  emxInit_real_T(sp, &indnlseasoc, 2, &en_emlrtRTEI, true);
-  emxInit_real_T(sp, &y, 2, &sn_emlrtRTEI, true);
+  emxInit_real_T(sp, &Xlshiftbsb, 1, &pm_emlrtRTEI, true);
+  emxInit_real_T(sp, &XtrendXbsbXseasonXlshift, 2, &tm_emlrtRTEI, true);
+  emxInit_real_T(sp, &indnlseasoc, 2, &dn_emlrtRTEI, true);
+  emxInit_real_T(sp, &y, 2, &rn_emlrtRTEI, true);
   if (isemptyX->contents) {
     if (lshiftYN->contents == 1.0) {
       st.site = &cn_emlrtRSI;
@@ -6586,7 +6586,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
       input_sizes_idx_1 = Xlshift->contents->size[0] * Xlshift->contents->size[1];
       i = Xlshiftbsb->size[0];
       Xlshiftbsb->size[0] = bsb->contents->size[0];
-      emxEnsureCapacity_real_T(sp, Xlshiftbsb, i, &qm_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, Xlshiftbsb, i, &pm_emlrtRTEI);
       loop_ub = bsb->contents->size[0];
       for (i = 0; i < loop_ub; i++) {
         if (bsb->contents->data[i] != (int32_T)muDoubleScalarFloor(bsb->
@@ -6623,20 +6623,20 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
       c_st.site = &sf_emlrtRSI;
       if ((Xtrendbsb->size[0] != result) && ((Xtrendbsb->size[0] != 0) &&
            (Xtrendbsb->size[1] != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
 
       if ((Seqbsbvarampl->size[0] != result) && ((Seqbsbvarampl->size[0] != 0) &&
            (Seqbsbvarampl->size[1] != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
 
       if ((Xlshiftbsb->size[0] != result) && (Xlshiftbsb->size[0] != 0)) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
@@ -6667,7 +6667,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
       XtrendXbsbXseasonXlshift->size[0] = result;
       i1 = result_idx_1 + b_input_sizes_idx_1;
       XtrendXbsbXseasonXlshift->size[1] = i1 + sizes_idx_1;
-      emxEnsureCapacity_real_T(&b_st, XtrendXbsbXseasonXlshift, i, &um_emlrtRTEI);
+      emxEnsureCapacity_real_T(&b_st, XtrendXbsbXseasonXlshift, i, &tm_emlrtRTEI);
       for (i = 0; i < result_idx_1; i++) {
         for (i2 = 0; i2 < result; i2++) {
           XtrendXbsbXseasonXlshift->data[i2 + XtrendXbsbXseasonXlshift->size[0] *
@@ -6702,13 +6702,13 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
       c_st.site = &sf_emlrtRSI;
       if ((Xtrendbsb->size[0] != result) && ((Xtrendbsb->size[0] != 0) &&
            (Xtrendbsb->size[1] != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
 
       if ((Xlshiftbsb->size[0] != result) && (Xlshiftbsb->size[0] != 0)) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
@@ -6737,7 +6737,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
       i = Xtrendbsb->size[0] * Xtrendbsb->size[1];
       Xtrendbsb->size[0] = result;
       Xtrendbsb->size[1] = input_sizes_idx_1 + sizes_idx_1;
-      emxEnsureCapacity_real_T(&b_st, Xtrendbsb, i, &bn_emlrtRTEI);
+      emxEnsureCapacity_real_T(&b_st, Xtrendbsb, i, &an_emlrtRTEI);
       for (i = 0; i < sizes_idx_1; i++) {
         for (i1 = 0; i1 < result; i1++) {
           Xtrendbsb->data[i1 + Xtrendbsb->size[0] * input_sizes_idx_1] =
@@ -6750,7 +6750,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
         i = y->size[0] * y->size[1];
         y->size[0] = 1;
         y->size[1] = 1;
-        emxEnsureCapacity_real_T(sp, y, i, &wc_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, y, i, &vc_emlrtRTEI);
         y->data[0] = rtNaN;
       } else if (b2378 < 1.0) {
         y->size[0] = 1;
@@ -6759,14 +6759,14 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
         i = y->size[0] * y->size[1];
         y->size[0] = 1;
         y->size[1] = 1;
-        emxEnsureCapacity_real_T(sp, y, i, &wc_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, y, i, &vc_emlrtRTEI);
         y->data[0] = rtNaN;
       } else {
         i = y->size[0] * y->size[1];
         y->size[0] = 1;
         loop_ub = (int32_T)muDoubleScalarFloor(b2378 - 1.0);
         y->size[1] = loop_ub + 1;
-        emxEnsureCapacity_real_T(sp, y, i, &wc_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, y, i, &vc_emlrtRTEI);
         for (i = 0; i <= loop_ub; i++) {
           y->data[i] = (real_T)i + 1.0;
         }
@@ -6775,7 +6775,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
       i = indnlseasoc->size[0] * indnlseasoc->size[1];
       indnlseasoc->size[0] = 1;
       indnlseasoc->size[1] = y->size[1] + 1;
-      emxEnsureCapacity_real_T(sp, indnlseasoc, i, &en_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, indnlseasoc, i, &dn_emlrtRTEI);
       loop_ub = y->size[1];
       for (i = 0; i < loop_ub; i++) {
         indnlseasoc->data[i] = y->data[i];
@@ -6800,14 +6800,14 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
       c_st.site = &sf_emlrtRSI;
       if ((Xtrendbsb->size[0] != result) && ((Xtrendbsb->size[0] != 0) &&
            (Xtrendbsb->size[1] != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
 
       if ((Seqbsbvarampl->size[0] != result) && ((Seqbsbvarampl->size[0] != 0) &&
            (Seqbsbvarampl->size[1] != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
@@ -6831,7 +6831,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
       i = XtrendXbsbXseasonXlshift->size[0] * XtrendXbsbXseasonXlshift->size[1];
       XtrendXbsbXseasonXlshift->size[0] = result;
       XtrendXbsbXseasonXlshift->size[1] = input_sizes[1] + sizes_idx_1;
-      emxEnsureCapacity_real_T(&b_st, XtrendXbsbXseasonXlshift, i, &rm_emlrtRTEI);
+      emxEnsureCapacity_real_T(&b_st, XtrendXbsbXseasonXlshift, i, &qm_emlrtRTEI);
       loop_ub = input_sizes[1];
       for (i = 0; i < loop_ub; i++) {
         for (i1 = 0; i1 < result; i1++) {
@@ -6852,7 +6852,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
         i = indnlseasoc->size[0] * indnlseasoc->size[1];
         indnlseasoc->size[0] = 1;
         indnlseasoc->size[1] = 1;
-        emxEnsureCapacity_real_T(sp, indnlseasoc, i, &tm_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, indnlseasoc, i, &sm_emlrtRTEI);
         indnlseasoc->data[0] = rtNaN;
       } else if (b2378 < 1.0) {
         indnlseasoc->size[0] = 1;
@@ -6861,27 +6861,27 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
         i = indnlseasoc->size[0] * indnlseasoc->size[1];
         indnlseasoc->size[0] = 1;
         indnlseasoc->size[1] = 1;
-        emxEnsureCapacity_real_T(sp, indnlseasoc, i, &tm_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, indnlseasoc, i, &sm_emlrtRTEI);
         indnlseasoc->data[0] = rtNaN;
       } else {
         i = indnlseasoc->size[0] * indnlseasoc->size[1];
         indnlseasoc->size[0] = 1;
         loop_ub = (int32_T)muDoubleScalarFloor(b2378 - 1.0);
         indnlseasoc->size[1] = loop_ub + 1;
-        emxEnsureCapacity_real_T(sp, indnlseasoc, i, &tm_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, indnlseasoc, i, &sm_emlrtRTEI);
         for (i = 0; i <= loop_ub; i++) {
           indnlseasoc->data[i] = (real_T)i + 1.0;
         }
       }
     }
   } else {
-    emxInit_real_T(sp, &Xbsb, 2, &pm_emlrtRTEI, true);
+    emxInit_real_T(sp, &Xbsb, 2, &om_emlrtRTEI, true);
     input_sizes_idx_1 = X->contents->size[0];
     loop_ub = X->contents->size[1];
     i = Xbsb->size[0] * Xbsb->size[1];
     Xbsb->size[0] = bsb->contents->size[0];
     Xbsb->size[1] = loop_ub;
-    emxEnsureCapacity_real_T(sp, Xbsb, i, &pm_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, Xbsb, i, &om_emlrtRTEI);
     for (i = 0; i < loop_ub; i++) {
       b_input_sizes_idx_1 = bsb->contents->size[0];
       for (i1 = 0; i1 < b_input_sizes_idx_1; i1++) {
@@ -6918,14 +6918,14 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
     c_st.site = &sf_emlrtRSI;
     if ((Xtrendbsb->size[0] != result) && ((Xtrendbsb->size[0] != 0) &&
          (Xtrendbsb->size[1] != 0))) {
-      emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+      emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
         "MATLAB:catenate:matrixDimensionMismatch",
         "MATLAB:catenate:matrixDimensionMismatch", 0);
     }
 
     if ((Xbsb->size[0] != result) && ((Xbsb->size[0] != 0) && (Xbsb->size[1] !=
           0))) {
-      emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+      emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
         "MATLAB:catenate:matrixDimensionMismatch",
         "MATLAB:catenate:matrixDimensionMismatch", 0);
     }
@@ -6945,12 +6945,12 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
       sizes_idx_1 = 0;
     }
 
-    emxInit_real_T(&b_st, &XtrendbsbXbsb, 2, &sm_emlrtRTEI, true);
+    emxInit_real_T(&b_st, &XtrendbsbXbsb, 2, &rm_emlrtRTEI, true);
     result_idx_1 = input_sizes[1];
     i = XtrendbsbXbsb->size[0] * XtrendbsbXbsb->size[1];
     XtrendbsbXbsb->size[0] = result;
     XtrendbsbXbsb->size[1] = input_sizes[1] + sizes_idx_1;
-    emxEnsureCapacity_real_T(&b_st, XtrendbsbXbsb, i, &sm_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, XtrendbsbXbsb, i, &rm_emlrtRTEI);
     loop_ub = input_sizes[1];
     for (i = 0; i < loop_ub; i++) {
       for (i1 = 0; i1 < result; i1++) {
@@ -6973,7 +6973,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
       input_sizes_idx_1 = Xlshift->contents->size[0] * Xlshift->contents->size[1];
       i = Xlshiftbsb->size[0];
       Xlshiftbsb->size[0] = bsb->contents->size[0];
-      emxEnsureCapacity_real_T(sp, Xlshiftbsb, i, &vm_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, Xlshiftbsb, i, &um_emlrtRTEI);
       loop_ub = bsb->contents->size[0];
       for (i = 0; i < loop_ub; i++) {
         if (bsb->contents->data[i] != (int32_T)muDoubleScalarFloor(bsb->
@@ -7010,20 +7010,20 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
       c_st.site = &sf_emlrtRSI;
       if ((XtrendbsbXbsb->size[0] != result) && ((XtrendbsbXbsb->size[0] != 0) &&
            (XtrendbsbXbsb->size[1] != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
 
       if ((Seqbsbvarampl->size[0] != result) && ((Seqbsbvarampl->size[0] != 0) &&
            (Seqbsbvarampl->size[1] != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
 
       if ((Xlshiftbsb->size[0] != result) && (Xlshiftbsb->size[0] != 0)) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
@@ -7053,7 +7053,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
       XtrendXbsbXseasonXlshift->size[0] = result;
       i1 = b_input_sizes_idx_1 + input_sizes_idx_1;
       XtrendXbsbXseasonXlshift->size[1] = i1 + sizes_idx_1;
-      emxEnsureCapacity_real_T(&b_st, XtrendXbsbXseasonXlshift, i, &cn_emlrtRTEI);
+      emxEnsureCapacity_real_T(&b_st, XtrendXbsbXseasonXlshift, i, &bn_emlrtRTEI);
       for (i = 0; i < b_input_sizes_idx_1; i++) {
         for (i2 = 0; i2 < result; i2++) {
           XtrendXbsbXseasonXlshift->data[i2 + XtrendXbsbXseasonXlshift->size[0] *
@@ -7093,20 +7093,20 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
       c_st.site = &sf_emlrtRSI;
       if ((Xtrendbsb->size[0] != result) && ((Xtrendbsb->size[0] != 0) &&
            (Xtrendbsb->size[1] != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
 
       if ((Xbsb->size[0] != result) && ((Xbsb->size[0] != 0) && (Xbsb->size[1]
             != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
 
       if ((Xlshiftbsb->size[0] != result) && (Xlshiftbsb->size[0] != 0)) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
@@ -7143,7 +7143,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
       Xtrendbsb->size[0] = result;
       i1 = b_input_sizes_idx_1 + input_sizes_idx_1;
       Xtrendbsb->size[1] = i1 + sizes_idx_1;
-      emxEnsureCapacity_real_T(&b_st, Xtrendbsb, i, &kn_emlrtRTEI);
+      emxEnsureCapacity_real_T(&b_st, Xtrendbsb, i, &jn_emlrtRTEI);
       for (i = 0; i < input_sizes_idx_1; i++) {
         for (i2 = 0; i2 < result; i2++) {
           Xtrendbsb->data[i2 + Xtrendbsb->size[0] * (i + b_input_sizes_idx_1)] =
@@ -7162,7 +7162,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
         i = y->size[0] * y->size[1];
         y->size[0] = 1;
         y->size[1] = 1;
-        emxEnsureCapacity_real_T(sp, y, i, &wc_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, y, i, &vc_emlrtRTEI);
         y->data[0] = rtNaN;
       } else if (b2378 < 1.0) {
         y->size[0] = 1;
@@ -7171,14 +7171,14 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
         i = y->size[0] * y->size[1];
         y->size[0] = 1;
         y->size[1] = 1;
-        emxEnsureCapacity_real_T(sp, y, i, &wc_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, y, i, &vc_emlrtRTEI);
         y->data[0] = rtNaN;
       } else {
         i = y->size[0] * y->size[1];
         y->size[0] = 1;
         loop_ub = (int32_T)muDoubleScalarFloor(b2378 - 1.0);
         y->size[1] = loop_ub + 1;
-        emxEnsureCapacity_real_T(sp, y, i, &wc_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, y, i, &vc_emlrtRTEI);
         for (i = 0; i <= loop_ub; i++) {
           y->data[i] = (real_T)i + 1.0;
         }
@@ -7187,7 +7187,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
       i = indnlseasoc->size[0] * indnlseasoc->size[1];
       indnlseasoc->size[0] = 1;
       indnlseasoc->size[1] = y->size[1] + 1;
-      emxEnsureCapacity_real_T(sp, indnlseasoc, i, &nn_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, indnlseasoc, i, &mn_emlrtRTEI);
       loop_ub = y->size[1];
       for (i = 0; i < loop_ub; i++) {
         indnlseasoc->data[i] = y->data[i];
@@ -7212,14 +7212,14 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
       c_st.site = &sf_emlrtRSI;
       if ((XtrendbsbXbsb->size[0] != result) && ((XtrendbsbXbsb->size[0] != 0) &&
            (XtrendbsbXbsb->size[1] != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
 
       if ((Seqbsbvarampl->size[0] != result) && ((Seqbsbvarampl->size[0] != 0) &&
            (Seqbsbvarampl->size[1] != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
@@ -7242,7 +7242,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
       i = XtrendXbsbXseasonXlshift->size[0] * XtrendXbsbXseasonXlshift->size[1];
       XtrendXbsbXseasonXlshift->size[0] = result;
       XtrendXbsbXseasonXlshift->size[1] = b_input_sizes_idx_1 + sizes_idx_1;
-      emxEnsureCapacity_real_T(&b_st, XtrendXbsbXseasonXlshift, i, &ym_emlrtRTEI);
+      emxEnsureCapacity_real_T(&b_st, XtrendXbsbXseasonXlshift, i, &xm_emlrtRTEI);
       for (i = 0; i < b_input_sizes_idx_1; i++) {
         for (i1 = 0; i1 < result; i1++) {
           XtrendXbsbXseasonXlshift->data[i1 + XtrendXbsbXseasonXlshift->size[0] *
@@ -7273,14 +7273,14 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
       c_st.site = &sf_emlrtRSI;
       if ((Xtrendbsb->size[0] != result) && ((Xtrendbsb->size[0] != 0) &&
            (Xtrendbsb->size[1] != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
 
       if ((Xbsb->size[0] != result) && ((Xbsb->size[0] != 0) && (Xbsb->size[1]
             != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
@@ -7310,7 +7310,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
       i = Xtrendbsb->size[0] * Xtrendbsb->size[1];
       Xtrendbsb->size[0] = result;
       Xtrendbsb->size[1] = input_sizes_idx_1 + sizes_idx_1;
-      emxEnsureCapacity_real_T(&b_st, Xtrendbsb, i, &gn_emlrtRTEI);
+      emxEnsureCapacity_real_T(&b_st, Xtrendbsb, i, &fn_emlrtRTEI);
       for (i = 0; i < sizes_idx_1; i++) {
         for (i1 = 0; i1 < result; i1++) {
           Xtrendbsb->data[i1 + Xtrendbsb->size[0] * (i + input_sizes_idx_1)] =
@@ -7323,7 +7323,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
         i = indnlseasoc->size[0] * indnlseasoc->size[1];
         indnlseasoc->size[0] = 1;
         indnlseasoc->size[1] = 1;
-        emxEnsureCapacity_real_T(sp, indnlseasoc, i, &in_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, indnlseasoc, i, &hn_emlrtRTEI);
         indnlseasoc->data[0] = rtNaN;
       } else if (b2378 < 1.0) {
         indnlseasoc->size[0] = 1;
@@ -7332,14 +7332,14 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
         i = indnlseasoc->size[0] * indnlseasoc->size[1];
         indnlseasoc->size[0] = 1;
         indnlseasoc->size[1] = 1;
-        emxEnsureCapacity_real_T(sp, indnlseasoc, i, &in_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, indnlseasoc, i, &hn_emlrtRTEI);
         indnlseasoc->data[0] = rtNaN;
       } else {
         i = indnlseasoc->size[0] * indnlseasoc->size[1];
         indnlseasoc->size[0] = 1;
         loop_ub = (int32_T)muDoubleScalarFloor(b2378 - 1.0);
         indnlseasoc->size[1] = loop_ub + 1;
-        emxEnsureCapacity_real_T(sp, indnlseasoc, i, &in_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, indnlseasoc, i, &hn_emlrtRTEI);
         for (i = 0; i <= loop_ub; i++) {
           indnlseasoc->data[i] = (real_T)i + 1.0;
         }
@@ -7350,11 +7350,11 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
     emxFree_real_T(&Xbsb);
   }
 
-  emxInit_real_T(sp, &yhatnlseaso, 1, &hn_emlrtRTEI, true);
-  emxInit_int32_T(sp, &r, 1, &rn_emlrtRTEI, true);
-  emxInit_int32_T(sp, &r1, 2, &rn_emlrtRTEI, true);
-  emxInit_boolean_T(sp, &r2, 1, &ef_emlrtRTEI, true);
-  emxInit_real_T(sp, &b_yinbsb, 1, &dn_emlrtRTEI, true);
+  emxInit_real_T(sp, &yhatnlseaso, 1, &gn_emlrtRTEI, true);
+  emxInit_int32_T(sp, &r, 1, &qn_emlrtRTEI, true);
+  emxInit_int32_T(sp, &r1, 2, &qn_emlrtRTEI, true);
+  emxInit_boolean_T(sp, &r2, 1, &df_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_yinbsb, 1, &cn_emlrtRTEI, true);
   exitg1 = false;
   while ((!exitg1) && ((betadiff > reftolALS->contents) && (iter <
            refstepsALS->contents))) {
@@ -7367,7 +7367,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
     i = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = indlinsc->contents->size[1];
-    emxEnsureCapacity_real_T(sp, y, i, &wm_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, y, i, &vm_emlrtRTEI);
     loop_ub = indlinsc->contents->size[1];
     for (i = 0; i < loop_ub; i++) {
       if (indlinsc->contents->data[i] != (int32_T)muDoubleScalarFloor
@@ -7409,7 +7409,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
 
     i = r->size[0];
     r->size[0] = indnlseaso->size[1];
-    emxEnsureCapacity_int32_T(sp, r, i, &xm_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, r, i, &wm_emlrtRTEI);
     loop_ub = indnlseaso->size[1];
     for (i = 0; i < loop_ub; i++) {
       if (indnlseaso->data[i] != (int32_T)muDoubleScalarFloor(indnlseaso->data[i]))
@@ -7428,7 +7428,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
 
     i = b_yinbsb->size[0];
     b_yinbsb->size[0] = Xlshiftbsb->size[0];
-    emxEnsureCapacity_real_T(sp, b_yinbsb, i, &an_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_yinbsb, i, &ym_emlrtRTEI);
     loop_ub = Xlshiftbsb->size[0];
     for (i = 0; i < loop_ub; i++) {
       b_yinbsb->data[i] = Xlshiftbsb->data[i] * Seqbsbvarampl->data[i];
@@ -7457,7 +7457,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
 
     i = b_yinbsb->size[0];
     b_yinbsb->size[0] = yinbsb->size[0];
-    emxEnsureCapacity_real_T(sp, b_yinbsb, i, &dn_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_yinbsb, i, &cn_emlrtRTEI);
     loop_ub = yinbsb->size[0];
     for (i = 0; i < loop_ub; i++) {
       b_yinbsb->data[i] = yinbsb->data[i] - Xlshiftbsb->data[i];
@@ -7476,7 +7476,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
     i = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = indnlseaso->size[1];
-    emxEnsureCapacity_real_T(sp, y, i, &fn_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, y, i, &en_emlrtRTEI);
     loop_ub = indnlseaso->size[1];
     for (i = 0; i < loop_ub; i++) {
       i1 = (int32_T)indnlseaso->data[i];
@@ -7501,7 +7501,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
 
     i = yhatnlseaso->size[0];
     yhatnlseaso->size[0] = Seqbsb->size[0];
-    emxEnsureCapacity_real_T(sp, yhatnlseaso, i, &hn_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, yhatnlseaso, i, &gn_emlrtRTEI);
     loop_ub = Seqbsb->size[0];
     for (i = 0; i < loop_ub; i++) {
       yhatnlseaso->data[i] += Seqbsb->data[i];
@@ -7522,7 +7522,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
     i = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = indnlseasoc->size[1];
-    emxEnsureCapacity_real_T(sp, y, i, &jn_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, y, i, &in_emlrtRTEI);
     loop_ub = indnlseasoc->size[1];
     for (i = 0; i < loop_ub; i++) {
       if (indnlseasoc->data[i] != (int32_T)muDoubleScalarFloor(indnlseasoc->
@@ -7557,7 +7557,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
 
     i = b_yinbsb->size[0];
     b_yinbsb->size[0] = yinbsb->size[0];
-    emxEnsureCapacity_real_T(sp, b_yinbsb, i, &ln_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_yinbsb, i, &kn_emlrtRTEI);
     loop_ub = yinbsb->size[0];
     for (i = 0; i < loop_ub; i++) {
       b_yinbsb->data[i] = yinbsb->data[i] - b_yinbsb->data[i];
@@ -7570,7 +7570,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
     i = r1->size[0] * r1->size[1];
     r1->size[0] = 1;
     r1->size[1] = indlinsc->contents->size[1];
-    emxEnsureCapacity_int32_T(sp, r1, i, &mn_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, r1, i, &ln_emlrtRTEI);
     loop_ub = indlinsc->contents->size[1];
     for (i = 0; i < loop_ub; i++) {
       if (indlinsc->contents->data[i] != (int32_T)muDoubleScalarFloor
@@ -7596,7 +7596,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
     i = r1->size[0] * r1->size[1];
     r1->size[0] = 1;
     r1->size[1] = otherind->contents->size[1];
-    emxEnsureCapacity_int32_T(sp, r1, i, &on_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, r1, i, &nn_emlrtRTEI);
     loop_ub = otherind->contents->size[1];
     for (i = 0; i < loop_ub; i++) {
       if (otherind->contents->data[i] != (int32_T)muDoubleScalarFloor
@@ -7659,7 +7659,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
     betadiff = b2378 / betadiff;
     i = oldbeta->size[0];
     oldbeta->size[0] = newbeta->size[0];
-    emxEnsureCapacity_real_T(sp, oldbeta, i, &pn_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, oldbeta, i, &on_emlrtRTEI);
     loop_ub = newbeta->size[0];
     for (i = 0; i < loop_ub; i++) {
       oldbeta->data[i] = newbeta->data[i];
@@ -7674,7 +7674,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
 
     i = r2->size[0];
     r2->size[0] = newbeta->size[0];
-    emxEnsureCapacity_boolean_T(sp, r2, i, &ef_emlrtRTEI);
+    emxEnsureCapacity_boolean_T(sp, r2, i, &df_emlrtRTEI);
     loop_ub = newbeta->size[0];
     for (i = 0; i < loop_ub; i++) {
       r2->data[i] = muDoubleScalarIsNaN(newbeta->data[i]);
@@ -7684,7 +7684,7 @@ static void b_ALS(const emlrtStack *sp, const c_captured_var *Seq, const
     if (any(&st, r2)) {
       i = newbeta->size[0];
       newbeta->size[0] = beta0->size[0];
-      emxEnsureCapacity_real_T(sp, newbeta, i, &qn_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, newbeta, i, &pn_emlrtRTEI);
       loop_ub = beta0->size[0];
       for (i = 0; i < loop_ub; i++) {
         newbeta->data[i] = beta0->data[i];
@@ -7777,22 +7777,22 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
   betadiff = 9999.0;
   i = newbeta->size[0];
   newbeta->size[0] = beta0->size[0];
-  emxEnsureCapacity_real_T(sp, newbeta, i, &hm_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, newbeta, i, &gm_emlrtRTEI);
   loop_ub = beta0->size[0];
   for (i = 0; i < loop_ub; i++) {
     newbeta->data[i] = beta0->data[i];
   }
 
-  emxInit_real_T(sp, &oldbeta, 1, &im_emlrtRTEI, true);
+  emxInit_real_T(sp, &oldbeta, 1, &hm_emlrtRTEI, true);
   i = oldbeta->size[0];
   oldbeta->size[0] = beta0->size[0];
-  emxEnsureCapacity_real_T(sp, oldbeta, i, &im_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, oldbeta, i, &hm_emlrtRTEI);
   loop_ub = beta0->size[0];
   for (i = 0; i < loop_ub; i++) {
     oldbeta->data[i] = beta0->data[i];
   }
 
-  emxInit_real_T(sp, &Seqbsb, 1, &jm_emlrtRTEI, true);
+  emxInit_real_T(sp, &Seqbsb, 1, &im_emlrtRTEI, true);
 
   /*  exitflag = flag which informs about convergence. exitflag =0 */
   /*  implies normal convergence, else no convergence has been obtained */
@@ -7800,7 +7800,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
   input_sizes_idx_1 = Seq->contents->size[0];
   i = Seqbsb->size[0];
   Seqbsb->size[0] = bsb->contents->size[0];
-  emxEnsureCapacity_real_T(sp, Seqbsb, i, &jm_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, Seqbsb, i, &im_emlrtRTEI);
   loop_ub = bsb->contents->size[0];
   for (i = 0; i < loop_ub; i++) {
     if (bsb->contents->data[i] != (int32_T)muDoubleScalarFloor(bsb->
@@ -7817,13 +7817,13 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
     Seqbsb->data[i] = Seq->contents->data[i1 - 1];
   }
 
-  emxInit_real_T(sp, &Xseasobsb, 2, &km_emlrtRTEI, true);
+  emxInit_real_T(sp, &Xseasobsb, 2, &jm_emlrtRTEI, true);
   input_sizes_idx_1 = Xseaso->contents->size[0];
   loop_ub = Xseaso->contents->size[1];
   i = Xseasobsb->size[0] * Xseasobsb->size[1];
   Xseasobsb->size[0] = bsb->contents->size[0];
   Xseasobsb->size[1] = loop_ub;
-  emxEnsureCapacity_real_T(sp, Xseasobsb, i, &km_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, Xseasobsb, i, &jm_emlrtRTEI);
   for (i = 0; i < loop_ub; i++) {
     b_input_sizes_idx_1 = bsb->contents->size[0];
     for (i1 = 0; i1 < b_input_sizes_idx_1; i1++) {
@@ -7844,13 +7844,13 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
     }
   }
 
-  emxInit_real_T(sp, &Xtrendbsb, 2, &lm_emlrtRTEI, true);
+  emxInit_real_T(sp, &Xtrendbsb, 2, &km_emlrtRTEI, true);
   input_sizes_idx_1 = Xtrend->contents->size[0];
   loop_ub = Xtrend->contents->size[1];
   i = Xtrendbsb->size[0] * Xtrendbsb->size[1];
   Xtrendbsb->size[0] = bsb->contents->size[0];
   Xtrendbsb->size[1] = loop_ub;
-  emxEnsureCapacity_real_T(sp, Xtrendbsb, i, &lm_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, Xtrendbsb, i, &km_emlrtRTEI);
   for (i = 0; i < loop_ub; i++) {
     b_input_sizes_idx_1 = bsb->contents->size[0];
     for (i1 = 0; i1 < b_input_sizes_idx_1; i1++) {
@@ -7871,11 +7871,11 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
     }
   }
 
-  emxInit_real_T(sp, &yinbsb, 1, &mm_emlrtRTEI, true);
+  emxInit_real_T(sp, &yinbsb, 1, &lm_emlrtRTEI, true);
   input_sizes_idx_1 = yin->contents->size[0];
   i = yinbsb->size[0];
   yinbsb->size[0] = bsb->contents->size[0];
-  emxEnsureCapacity_real_T(sp, yinbsb, i, &mm_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, yinbsb, i, &lm_emlrtRTEI);
   loop_ub = bsb->contents->size[0];
   for (i = 0; i < loop_ub; i++) {
     if (bsb->contents->data[i] != (int32_T)muDoubleScalarFloor(bsb->
@@ -7896,12 +7896,12 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
   b2378 = (trend->contents + 2.0) + nexpl->contents;
   b_tmp = b2378 + varampl->contents;
   b_st.site = &rg_emlrtRSI;
-  emxInit_real_T(&b_st, &indnlseaso, 2, &nm_emlrtRTEI, true);
+  emxInit_real_T(&b_st, &indnlseaso, 2, &mm_emlrtRTEI, true);
   if (muDoubleScalarIsNaN(b2378) || muDoubleScalarIsNaN(b_tmp - 1.0)) {
     i = indnlseaso->size[0] * indnlseaso->size[1];
     indnlseaso->size[0] = 1;
     indnlseaso->size[1] = 1;
-    emxEnsureCapacity_real_T(&b_st, indnlseaso, i, &nm_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, indnlseaso, i, &mm_emlrtRTEI);
     indnlseaso->data[0] = rtNaN;
   } else if (b_tmp - 1.0 < b2378) {
     indnlseaso->size[0] = 1;
@@ -7911,14 +7911,14 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
     i = indnlseaso->size[0] * indnlseaso->size[1];
     indnlseaso->size[0] = 1;
     indnlseaso->size[1] = 1;
-    emxEnsureCapacity_real_T(&b_st, indnlseaso, i, &nm_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, indnlseaso, i, &mm_emlrtRTEI);
     indnlseaso->data[0] = rtNaN;
   } else if (muDoubleScalarFloor(b2378) == b2378) {
     i = indnlseaso->size[0] * indnlseaso->size[1];
     indnlseaso->size[0] = 1;
     loop_ub = (int32_T)muDoubleScalarFloor((b_tmp - 1.0) - b2378);
     indnlseaso->size[1] = loop_ub + 1;
-    emxEnsureCapacity_real_T(&b_st, indnlseaso, i, &nm_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, indnlseaso, i, &mm_emlrtRTEI);
     for (i = 0; i <= loop_ub; i++) {
       indnlseaso->data[i] = b2378 + (real_T)i;
     }
@@ -7945,13 +7945,13 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
     i1 = (int32_T)b2378;
   }
 
-  emxInit_real_T(sp, &Seqbsbvarampl, 2, &om_emlrtRTEI, true);
+  emxInit_real_T(sp, &Seqbsbvarampl, 2, &nm_emlrtRTEI, true);
   input_sizes_idx_1 = Seq->contents->size[0];
   i2 = Seqbsbvarampl->size[0] * Seqbsbvarampl->size[1];
   Seqbsbvarampl->size[0] = bsb->contents->size[0];
   loop_ub = i1 - i;
   Seqbsbvarampl->size[1] = loop_ub;
-  emxEnsureCapacity_real_T(sp, Seqbsbvarampl, i2, &om_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, Seqbsbvarampl, i2, &nm_emlrtRTEI);
   for (i1 = 0; i1 < loop_ub; i1++) {
     b_input_sizes_idx_1 = bsb->contents->size[0];
     for (i2 = 0; i2 < b_input_sizes_idx_1; i2++) {
@@ -7972,10 +7972,10 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
     }
   }
 
-  emxInit_real_T(sp, &Xlshiftbsb, 1, &qm_emlrtRTEI, true);
-  emxInit_real_T(sp, &XtrendXbsbXseasonXlshift, 2, &um_emlrtRTEI, true);
-  emxInit_real_T(sp, &indnlseasoc, 2, &en_emlrtRTEI, true);
-  emxInit_real_T(sp, &y, 2, &sn_emlrtRTEI, true);
+  emxInit_real_T(sp, &Xlshiftbsb, 1, &pm_emlrtRTEI, true);
+  emxInit_real_T(sp, &XtrendXbsbXseasonXlshift, 2, &tm_emlrtRTEI, true);
+  emxInit_real_T(sp, &indnlseasoc, 2, &dn_emlrtRTEI, true);
+  emxInit_real_T(sp, &y, 2, &rn_emlrtRTEI, true);
   if (isemptyX->contents) {
     if (lshiftYN->contents == 1.0) {
       st.site = &cn_emlrtRSI;
@@ -7984,7 +7984,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
       input_sizes_idx_1 = Xlshift->contents->size[0] * Xlshift->contents->size[1];
       i = Xlshiftbsb->size[0];
       Xlshiftbsb->size[0] = bsb->contents->size[0];
-      emxEnsureCapacity_real_T(sp, Xlshiftbsb, i, &qm_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, Xlshiftbsb, i, &pm_emlrtRTEI);
       loop_ub = bsb->contents->size[0];
       for (i = 0; i < loop_ub; i++) {
         if (bsb->contents->data[i] != (int32_T)muDoubleScalarFloor(bsb->
@@ -8021,20 +8021,20 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
       c_st.site = &sf_emlrtRSI;
       if ((Xtrendbsb->size[0] != result) && ((Xtrendbsb->size[0] != 0) &&
            (Xtrendbsb->size[1] != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
 
       if ((Seqbsbvarampl->size[0] != result) && ((Seqbsbvarampl->size[0] != 0) &&
            (Seqbsbvarampl->size[1] != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
 
       if ((Xlshiftbsb->size[0] != result) && (Xlshiftbsb->size[0] != 0)) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
@@ -8065,7 +8065,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
       XtrendXbsbXseasonXlshift->size[0] = result;
       i1 = result_idx_1 + b_input_sizes_idx_1;
       XtrendXbsbXseasonXlshift->size[1] = i1 + sizes_idx_1;
-      emxEnsureCapacity_real_T(&b_st, XtrendXbsbXseasonXlshift, i, &um_emlrtRTEI);
+      emxEnsureCapacity_real_T(&b_st, XtrendXbsbXseasonXlshift, i, &tm_emlrtRTEI);
       for (i = 0; i < result_idx_1; i++) {
         for (i2 = 0; i2 < result; i2++) {
           XtrendXbsbXseasonXlshift->data[i2 + XtrendXbsbXseasonXlshift->size[0] *
@@ -8100,13 +8100,13 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
       c_st.site = &sf_emlrtRSI;
       if ((Xtrendbsb->size[0] != result) && ((Xtrendbsb->size[0] != 0) &&
            (Xtrendbsb->size[1] != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
 
       if ((Xlshiftbsb->size[0] != result) && (Xlshiftbsb->size[0] != 0)) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
@@ -8135,7 +8135,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
       i = Xtrendbsb->size[0] * Xtrendbsb->size[1];
       Xtrendbsb->size[0] = result;
       Xtrendbsb->size[1] = input_sizes_idx_1 + sizes_idx_1;
-      emxEnsureCapacity_real_T(&b_st, Xtrendbsb, i, &bn_emlrtRTEI);
+      emxEnsureCapacity_real_T(&b_st, Xtrendbsb, i, &an_emlrtRTEI);
       for (i = 0; i < sizes_idx_1; i++) {
         for (i1 = 0; i1 < result; i1++) {
           Xtrendbsb->data[i1 + Xtrendbsb->size[0] * input_sizes_idx_1] =
@@ -8148,7 +8148,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
         i = y->size[0] * y->size[1];
         y->size[0] = 1;
         y->size[1] = 1;
-        emxEnsureCapacity_real_T(sp, y, i, &wc_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, y, i, &vc_emlrtRTEI);
         y->data[0] = rtNaN;
       } else if (b2378 < 1.0) {
         y->size[0] = 1;
@@ -8157,14 +8157,14 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
         i = y->size[0] * y->size[1];
         y->size[0] = 1;
         y->size[1] = 1;
-        emxEnsureCapacity_real_T(sp, y, i, &wc_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, y, i, &vc_emlrtRTEI);
         y->data[0] = rtNaN;
       } else {
         i = y->size[0] * y->size[1];
         y->size[0] = 1;
         loop_ub = (int32_T)muDoubleScalarFloor(b2378 - 1.0);
         y->size[1] = loop_ub + 1;
-        emxEnsureCapacity_real_T(sp, y, i, &wc_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, y, i, &vc_emlrtRTEI);
         for (i = 0; i <= loop_ub; i++) {
           y->data[i] = (real_T)i + 1.0;
         }
@@ -8173,7 +8173,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
       i = indnlseasoc->size[0] * indnlseasoc->size[1];
       indnlseasoc->size[0] = 1;
       indnlseasoc->size[1] = y->size[1] + 1;
-      emxEnsureCapacity_real_T(sp, indnlseasoc, i, &en_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, indnlseasoc, i, &dn_emlrtRTEI);
       loop_ub = y->size[1];
       for (i = 0; i < loop_ub; i++) {
         indnlseasoc->data[i] = y->data[i];
@@ -8198,14 +8198,14 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
       c_st.site = &sf_emlrtRSI;
       if ((Xtrendbsb->size[0] != result) && ((Xtrendbsb->size[0] != 0) &&
            (Xtrendbsb->size[1] != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
 
       if ((Seqbsbvarampl->size[0] != result) && ((Seqbsbvarampl->size[0] != 0) &&
            (Seqbsbvarampl->size[1] != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
@@ -8229,7 +8229,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
       i = XtrendXbsbXseasonXlshift->size[0] * XtrendXbsbXseasonXlshift->size[1];
       XtrendXbsbXseasonXlshift->size[0] = result;
       XtrendXbsbXseasonXlshift->size[1] = input_sizes[1] + sizes_idx_1;
-      emxEnsureCapacity_real_T(&b_st, XtrendXbsbXseasonXlshift, i, &rm_emlrtRTEI);
+      emxEnsureCapacity_real_T(&b_st, XtrendXbsbXseasonXlshift, i, &qm_emlrtRTEI);
       loop_ub = input_sizes[1];
       for (i = 0; i < loop_ub; i++) {
         for (i1 = 0; i1 < result; i1++) {
@@ -8250,7 +8250,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
         i = indnlseasoc->size[0] * indnlseasoc->size[1];
         indnlseasoc->size[0] = 1;
         indnlseasoc->size[1] = 1;
-        emxEnsureCapacity_real_T(sp, indnlseasoc, i, &tm_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, indnlseasoc, i, &sm_emlrtRTEI);
         indnlseasoc->data[0] = rtNaN;
       } else if (b2378 < 1.0) {
         indnlseasoc->size[0] = 1;
@@ -8259,27 +8259,27 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
         i = indnlseasoc->size[0] * indnlseasoc->size[1];
         indnlseasoc->size[0] = 1;
         indnlseasoc->size[1] = 1;
-        emxEnsureCapacity_real_T(sp, indnlseasoc, i, &tm_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, indnlseasoc, i, &sm_emlrtRTEI);
         indnlseasoc->data[0] = rtNaN;
       } else {
         i = indnlseasoc->size[0] * indnlseasoc->size[1];
         indnlseasoc->size[0] = 1;
         loop_ub = (int32_T)muDoubleScalarFloor(b2378 - 1.0);
         indnlseasoc->size[1] = loop_ub + 1;
-        emxEnsureCapacity_real_T(sp, indnlseasoc, i, &tm_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, indnlseasoc, i, &sm_emlrtRTEI);
         for (i = 0; i <= loop_ub; i++) {
           indnlseasoc->data[i] = (real_T)i + 1.0;
         }
       }
     }
   } else {
-    emxInit_real_T(sp, &Xbsb, 2, &pm_emlrtRTEI, true);
+    emxInit_real_T(sp, &Xbsb, 2, &om_emlrtRTEI, true);
     input_sizes_idx_1 = X->contents->size[0];
     loop_ub = X->contents->size[1];
     i = Xbsb->size[0] * Xbsb->size[1];
     Xbsb->size[0] = bsb->contents->size[0];
     Xbsb->size[1] = loop_ub;
-    emxEnsureCapacity_real_T(sp, Xbsb, i, &pm_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, Xbsb, i, &om_emlrtRTEI);
     for (i = 0; i < loop_ub; i++) {
       b_input_sizes_idx_1 = bsb->contents->size[0];
       for (i1 = 0; i1 < b_input_sizes_idx_1; i1++) {
@@ -8316,14 +8316,14 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
     c_st.site = &sf_emlrtRSI;
     if ((Xtrendbsb->size[0] != result) && ((Xtrendbsb->size[0] != 0) &&
          (Xtrendbsb->size[1] != 0))) {
-      emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+      emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
         "MATLAB:catenate:matrixDimensionMismatch",
         "MATLAB:catenate:matrixDimensionMismatch", 0);
     }
 
     if ((Xbsb->size[0] != result) && ((Xbsb->size[0] != 0) && (Xbsb->size[1] !=
           0))) {
-      emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+      emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
         "MATLAB:catenate:matrixDimensionMismatch",
         "MATLAB:catenate:matrixDimensionMismatch", 0);
     }
@@ -8343,12 +8343,12 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
       sizes_idx_1 = 0;
     }
 
-    emxInit_real_T(&b_st, &XtrendbsbXbsb, 2, &sm_emlrtRTEI, true);
+    emxInit_real_T(&b_st, &XtrendbsbXbsb, 2, &rm_emlrtRTEI, true);
     result_idx_1 = input_sizes[1];
     i = XtrendbsbXbsb->size[0] * XtrendbsbXbsb->size[1];
     XtrendbsbXbsb->size[0] = result;
     XtrendbsbXbsb->size[1] = input_sizes[1] + sizes_idx_1;
-    emxEnsureCapacity_real_T(&b_st, XtrendbsbXbsb, i, &sm_emlrtRTEI);
+    emxEnsureCapacity_real_T(&b_st, XtrendbsbXbsb, i, &rm_emlrtRTEI);
     loop_ub = input_sizes[1];
     for (i = 0; i < loop_ub; i++) {
       for (i1 = 0; i1 < result; i1++) {
@@ -8371,7 +8371,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
       input_sizes_idx_1 = Xlshift->contents->size[0] * Xlshift->contents->size[1];
       i = Xlshiftbsb->size[0];
       Xlshiftbsb->size[0] = bsb->contents->size[0];
-      emxEnsureCapacity_real_T(sp, Xlshiftbsb, i, &vm_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, Xlshiftbsb, i, &um_emlrtRTEI);
       loop_ub = bsb->contents->size[0];
       for (i = 0; i < loop_ub; i++) {
         if (bsb->contents->data[i] != (int32_T)muDoubleScalarFloor(bsb->
@@ -8408,20 +8408,20 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
       c_st.site = &sf_emlrtRSI;
       if ((XtrendbsbXbsb->size[0] != result) && ((XtrendbsbXbsb->size[0] != 0) &&
            (XtrendbsbXbsb->size[1] != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
 
       if ((Seqbsbvarampl->size[0] != result) && ((Seqbsbvarampl->size[0] != 0) &&
            (Seqbsbvarampl->size[1] != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
 
       if ((Xlshiftbsb->size[0] != result) && (Xlshiftbsb->size[0] != 0)) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
@@ -8451,7 +8451,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
       XtrendXbsbXseasonXlshift->size[0] = result;
       i1 = b_input_sizes_idx_1 + input_sizes_idx_1;
       XtrendXbsbXseasonXlshift->size[1] = i1 + sizes_idx_1;
-      emxEnsureCapacity_real_T(&b_st, XtrendXbsbXseasonXlshift, i, &cn_emlrtRTEI);
+      emxEnsureCapacity_real_T(&b_st, XtrendXbsbXseasonXlshift, i, &bn_emlrtRTEI);
       for (i = 0; i < b_input_sizes_idx_1; i++) {
         for (i2 = 0; i2 < result; i2++) {
           XtrendXbsbXseasonXlshift->data[i2 + XtrendXbsbXseasonXlshift->size[0] *
@@ -8491,20 +8491,20 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
       c_st.site = &sf_emlrtRSI;
       if ((Xtrendbsb->size[0] != result) && ((Xtrendbsb->size[0] != 0) &&
            (Xtrendbsb->size[1] != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
 
       if ((Xbsb->size[0] != result) && ((Xbsb->size[0] != 0) && (Xbsb->size[1]
             != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
 
       if ((Xlshiftbsb->size[0] != result) && (Xlshiftbsb->size[0] != 0)) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
@@ -8541,7 +8541,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
       Xtrendbsb->size[0] = result;
       i1 = b_input_sizes_idx_1 + input_sizes_idx_1;
       Xtrendbsb->size[1] = i1 + sizes_idx_1;
-      emxEnsureCapacity_real_T(&b_st, Xtrendbsb, i, &kn_emlrtRTEI);
+      emxEnsureCapacity_real_T(&b_st, Xtrendbsb, i, &jn_emlrtRTEI);
       for (i = 0; i < input_sizes_idx_1; i++) {
         for (i2 = 0; i2 < result; i2++) {
           Xtrendbsb->data[i2 + Xtrendbsb->size[0] * (i + b_input_sizes_idx_1)] =
@@ -8560,7 +8560,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
         i = y->size[0] * y->size[1];
         y->size[0] = 1;
         y->size[1] = 1;
-        emxEnsureCapacity_real_T(sp, y, i, &wc_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, y, i, &vc_emlrtRTEI);
         y->data[0] = rtNaN;
       } else if (b2378 < 1.0) {
         y->size[0] = 1;
@@ -8569,14 +8569,14 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
         i = y->size[0] * y->size[1];
         y->size[0] = 1;
         y->size[1] = 1;
-        emxEnsureCapacity_real_T(sp, y, i, &wc_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, y, i, &vc_emlrtRTEI);
         y->data[0] = rtNaN;
       } else {
         i = y->size[0] * y->size[1];
         y->size[0] = 1;
         loop_ub = (int32_T)muDoubleScalarFloor(b2378 - 1.0);
         y->size[1] = loop_ub + 1;
-        emxEnsureCapacity_real_T(sp, y, i, &wc_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, y, i, &vc_emlrtRTEI);
         for (i = 0; i <= loop_ub; i++) {
           y->data[i] = (real_T)i + 1.0;
         }
@@ -8585,7 +8585,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
       i = indnlseasoc->size[0] * indnlseasoc->size[1];
       indnlseasoc->size[0] = 1;
       indnlseasoc->size[1] = y->size[1] + 1;
-      emxEnsureCapacity_real_T(sp, indnlseasoc, i, &nn_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, indnlseasoc, i, &mn_emlrtRTEI);
       loop_ub = y->size[1];
       for (i = 0; i < loop_ub; i++) {
         indnlseasoc->data[i] = y->data[i];
@@ -8610,14 +8610,14 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
       c_st.site = &sf_emlrtRSI;
       if ((XtrendbsbXbsb->size[0] != result) && ((XtrendbsbXbsb->size[0] != 0) &&
            (XtrendbsbXbsb->size[1] != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
 
       if ((Seqbsbvarampl->size[0] != result) && ((Seqbsbvarampl->size[0] != 0) &&
            (Seqbsbvarampl->size[1] != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
@@ -8640,7 +8640,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
       i = XtrendXbsbXseasonXlshift->size[0] * XtrendXbsbXseasonXlshift->size[1];
       XtrendXbsbXseasonXlshift->size[0] = result;
       XtrendXbsbXseasonXlshift->size[1] = b_input_sizes_idx_1 + sizes_idx_1;
-      emxEnsureCapacity_real_T(&b_st, XtrendXbsbXseasonXlshift, i, &ym_emlrtRTEI);
+      emxEnsureCapacity_real_T(&b_st, XtrendXbsbXseasonXlshift, i, &xm_emlrtRTEI);
       for (i = 0; i < b_input_sizes_idx_1; i++) {
         for (i1 = 0; i1 < result; i1++) {
           XtrendXbsbXseasonXlshift->data[i1 + XtrendXbsbXseasonXlshift->size[0] *
@@ -8671,14 +8671,14 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
       c_st.site = &sf_emlrtRSI;
       if ((Xtrendbsb->size[0] != result) && ((Xtrendbsb->size[0] != 0) &&
            (Xtrendbsb->size[1] != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
 
       if ((Xbsb->size[0] != result) && ((Xbsb->size[0] != 0) && (Xbsb->size[1]
             != 0))) {
-        emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
           "MATLAB:catenate:matrixDimensionMismatch",
           "MATLAB:catenate:matrixDimensionMismatch", 0);
       }
@@ -8708,7 +8708,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
       i = Xtrendbsb->size[0] * Xtrendbsb->size[1];
       Xtrendbsb->size[0] = result;
       Xtrendbsb->size[1] = input_sizes_idx_1 + sizes_idx_1;
-      emxEnsureCapacity_real_T(&b_st, Xtrendbsb, i, &gn_emlrtRTEI);
+      emxEnsureCapacity_real_T(&b_st, Xtrendbsb, i, &fn_emlrtRTEI);
       for (i = 0; i < sizes_idx_1; i++) {
         for (i1 = 0; i1 < result; i1++) {
           Xtrendbsb->data[i1 + Xtrendbsb->size[0] * (i + input_sizes_idx_1)] =
@@ -8721,7 +8721,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
         i = indnlseasoc->size[0] * indnlseasoc->size[1];
         indnlseasoc->size[0] = 1;
         indnlseasoc->size[1] = 1;
-        emxEnsureCapacity_real_T(sp, indnlseasoc, i, &in_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, indnlseasoc, i, &hn_emlrtRTEI);
         indnlseasoc->data[0] = rtNaN;
       } else if (b2378 < 1.0) {
         indnlseasoc->size[0] = 1;
@@ -8730,14 +8730,14 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
         i = indnlseasoc->size[0] * indnlseasoc->size[1];
         indnlseasoc->size[0] = 1;
         indnlseasoc->size[1] = 1;
-        emxEnsureCapacity_real_T(sp, indnlseasoc, i, &in_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, indnlseasoc, i, &hn_emlrtRTEI);
         indnlseasoc->data[0] = rtNaN;
       } else {
         i = indnlseasoc->size[0] * indnlseasoc->size[1];
         indnlseasoc->size[0] = 1;
         loop_ub = (int32_T)muDoubleScalarFloor(b2378 - 1.0);
         indnlseasoc->size[1] = loop_ub + 1;
-        emxEnsureCapacity_real_T(sp, indnlseasoc, i, &in_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, indnlseasoc, i, &hn_emlrtRTEI);
         for (i = 0; i <= loop_ub; i++) {
           indnlseasoc->data[i] = (real_T)i + 1.0;
         }
@@ -8748,11 +8748,11 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
     emxFree_real_T(&Xbsb);
   }
 
-  emxInit_real_T(sp, &yhatnlseaso, 1, &hn_emlrtRTEI, true);
-  emxInit_int32_T(sp, &r, 1, &rn_emlrtRTEI, true);
-  emxInit_int32_T(sp, &r1, 2, &rn_emlrtRTEI, true);
-  emxInit_boolean_T(sp, &r2, 1, &ef_emlrtRTEI, true);
-  emxInit_real_T(sp, &b_yinbsb, 1, &dn_emlrtRTEI, true);
+  emxInit_real_T(sp, &yhatnlseaso, 1, &gn_emlrtRTEI, true);
+  emxInit_int32_T(sp, &r, 1, &qn_emlrtRTEI, true);
+  emxInit_int32_T(sp, &r1, 2, &qn_emlrtRTEI, true);
+  emxInit_boolean_T(sp, &r2, 1, &df_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_yinbsb, 1, &cn_emlrtRTEI, true);
   exitg1 = false;
   while ((!exitg1) && ((betadiff > reftolALS->contents) && (iter <
            refstepsALS->contents))) {
@@ -8765,7 +8765,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
     i = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = indlinsc->contents->size[1];
-    emxEnsureCapacity_real_T(sp, y, i, &wm_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, y, i, &vm_emlrtRTEI);
     loop_ub = indlinsc->contents->size[1];
     for (i = 0; i < loop_ub; i++) {
       if (indlinsc->contents->data[i] != (int32_T)muDoubleScalarFloor
@@ -8807,7 +8807,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
 
     i = r->size[0];
     r->size[0] = indnlseaso->size[1];
-    emxEnsureCapacity_int32_T(sp, r, i, &xm_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, r, i, &wm_emlrtRTEI);
     loop_ub = indnlseaso->size[1];
     for (i = 0; i < loop_ub; i++) {
       if (indnlseaso->data[i] != (int32_T)muDoubleScalarFloor(indnlseaso->data[i]))
@@ -8826,7 +8826,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
 
     i = b_yinbsb->size[0];
     b_yinbsb->size[0] = Xlshiftbsb->size[0];
-    emxEnsureCapacity_real_T(sp, b_yinbsb, i, &an_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_yinbsb, i, &ym_emlrtRTEI);
     loop_ub = Xlshiftbsb->size[0];
     for (i = 0; i < loop_ub; i++) {
       b_yinbsb->data[i] = Xlshiftbsb->data[i] * Seqbsbvarampl->data[i];
@@ -8855,7 +8855,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
 
     i = b_yinbsb->size[0];
     b_yinbsb->size[0] = yinbsb->size[0];
-    emxEnsureCapacity_real_T(sp, b_yinbsb, i, &dn_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_yinbsb, i, &cn_emlrtRTEI);
     loop_ub = yinbsb->size[0];
     for (i = 0; i < loop_ub; i++) {
       b_yinbsb->data[i] = yinbsb->data[i] - Xlshiftbsb->data[i];
@@ -8874,7 +8874,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
     i = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = indnlseaso->size[1];
-    emxEnsureCapacity_real_T(sp, y, i, &fn_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, y, i, &en_emlrtRTEI);
     loop_ub = indnlseaso->size[1];
     for (i = 0; i < loop_ub; i++) {
       i1 = (int32_T)indnlseaso->data[i];
@@ -8899,7 +8899,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
 
     i = yhatnlseaso->size[0];
     yhatnlseaso->size[0] = Seqbsb->size[0];
-    emxEnsureCapacity_real_T(sp, yhatnlseaso, i, &hn_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, yhatnlseaso, i, &gn_emlrtRTEI);
     loop_ub = Seqbsb->size[0];
     for (i = 0; i < loop_ub; i++) {
       yhatnlseaso->data[i] += Seqbsb->data[i];
@@ -8920,7 +8920,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
     i = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = indnlseasoc->size[1];
-    emxEnsureCapacity_real_T(sp, y, i, &jn_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, y, i, &in_emlrtRTEI);
     loop_ub = indnlseasoc->size[1];
     for (i = 0; i < loop_ub; i++) {
       if (indnlseasoc->data[i] != (int32_T)muDoubleScalarFloor(indnlseasoc->
@@ -8955,7 +8955,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
 
     i = b_yinbsb->size[0];
     b_yinbsb->size[0] = yinbsb->size[0];
-    emxEnsureCapacity_real_T(sp, b_yinbsb, i, &ln_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_yinbsb, i, &kn_emlrtRTEI);
     loop_ub = yinbsb->size[0];
     for (i = 0; i < loop_ub; i++) {
       b_yinbsb->data[i] = yinbsb->data[i] - b_yinbsb->data[i];
@@ -8968,7 +8968,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
     i = r1->size[0] * r1->size[1];
     r1->size[0] = 1;
     r1->size[1] = indlinsc->contents->size[1];
-    emxEnsureCapacity_int32_T(sp, r1, i, &mn_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, r1, i, &ln_emlrtRTEI);
     loop_ub = indlinsc->contents->size[1];
     for (i = 0; i < loop_ub; i++) {
       if (indlinsc->contents->data[i] != (int32_T)muDoubleScalarFloor
@@ -8994,7 +8994,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
     i = r1->size[0] * r1->size[1];
     r1->size[0] = 1;
     r1->size[1] = otherind->contents->size[1];
-    emxEnsureCapacity_int32_T(sp, r1, i, &on_emlrtRTEI);
+    emxEnsureCapacity_int32_T(sp, r1, i, &nn_emlrtRTEI);
     loop_ub = otherind->contents->size[1];
     for (i = 0; i < loop_ub; i++) {
       if (otherind->contents->data[i] != (int32_T)muDoubleScalarFloor
@@ -9057,7 +9057,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
     betadiff = b2378 / betadiff;
     i = oldbeta->size[0];
     oldbeta->size[0] = newbeta->size[0];
-    emxEnsureCapacity_real_T(sp, oldbeta, i, &pn_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, oldbeta, i, &on_emlrtRTEI);
     loop_ub = newbeta->size[0];
     for (i = 0; i < loop_ub; i++) {
       oldbeta->data[i] = newbeta->data[i];
@@ -9072,7 +9072,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
 
     i = r2->size[0];
     r2->size[0] = newbeta->size[0];
-    emxEnsureCapacity_boolean_T(sp, r2, i, &ef_emlrtRTEI);
+    emxEnsureCapacity_boolean_T(sp, r2, i, &df_emlrtRTEI);
     loop_ub = newbeta->size[0];
     for (i = 0; i < loop_ub; i++) {
       r2->data[i] = muDoubleScalarIsNaN(newbeta->data[i]);
@@ -9082,7 +9082,7 @@ void ALS(const emlrtStack *sp, const c_captured_var *Seq, const c_captured_var
     if (any(&st, r2)) {
       i = newbeta->size[0];
       newbeta->size[0] = beta0->size[0];
-      emxEnsureCapacity_real_T(sp, newbeta, i, &qn_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, newbeta, i, &pn_emlrtRTEI);
       loop_ub = beta0->size[0];
       for (i = 0; i < loop_ub; i++) {
         newbeta->data[i] = beta0->data[i];
@@ -9204,19 +9204,19 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
     emlrtSizeEqCheck1DR2012b(y->size[0], i, &gc_emlrtECI, (emlrtCTX)sp);
   }
 
-  emxInit_real_T(sp, &b_y, 1, &po_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_y, 1, &oo_emlrtRTEI, true);
 
   /*  Squared residuals for all the observations */
   i = b_y->size[0];
   b_y->size[0] = y->size[0];
-  emxEnsureCapacity_real_T(sp, b_y, i, &po_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, b_y, i, &oo_emlrtRTEI);
   loop_ub = y->size[0];
   for (i = 0; i < loop_ub; i++) {
     b_y->data[i] = y->data[i] - yhat->contents->data[i];
   }
 
-  emxInit_real_T(sp, &r2, 1, &iq_emlrtRTEI, true);
-  emxInit_real_T(sp, &newb, 1, &kq_emlrtRTEI, true);
+  emxInit_real_T(sp, &r2, 1, &hq_emlrtRTEI, true);
+  emxInit_real_T(sp, &newb, 1, &jq_emlrtRTEI, true);
   st.site = &no_emlrtRSI;
   power(&st, b_y, r2);
 
@@ -9224,13 +9224,13 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
   st.site = &oo_emlrtRSI;
   i = newb->size[0];
   newb->size[0] = r2->size[0];
-  emxEnsureCapacity_real_T(&st, newb, i, &se_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, newb, i, &re_emlrtRTEI);
   loop_ub = r2->size[0];
   for (i = 0; i < loop_ub; i++) {
     newb->data[i] = r2->data[i];
   }
 
-  emxInit_int32_T(&st, &i_r2s, 1, &jq_emlrtRTEI, true);
+  emxInit_int32_T(&st, &i_r2s, 1, &iq_emlrtRTEI, true);
   b_st.site = &cq_emlrtRSI;
   sort(&b_st, newb, i_r2s);
 
@@ -9262,7 +9262,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
   indexShapeCheck(&st, newb->size[0], sizes);
   i1 = newb->size[0];
   newb->size[0] = i;
-  emxEnsureCapacity_real_T(sp, newb, i1, &qo_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, newb, i1, &po_emlrtRTEI);
   st.site = &po_emlrtRSI;
   ininumscale2 = sum(&st, newb);
 
@@ -9270,7 +9270,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
   exitfl = 0.0;
   i = outIRWLS->betarw->size[0];
   outIRWLS->betarw->size[0] = 1;
-  emxEnsureCapacity_real_T(sp, outIRWLS->betarw, i, &ro_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, outIRWLS->betarw, i, &qo_emlrtRTEI);
   outIRWLS->betarw->data[0] = 0.0;
   outIRWLS->numscale2rw = 0.0;
 
@@ -9290,23 +9290,23 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
     indexShapeCheck(&st, initialbeta->size[0], sizes);
     i = beta->contents->size[0];
     beta->contents->size[0] = loop_ub;
-    emxEnsureCapacity_real_T(sp, beta->contents, i, &to_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, beta->contents, i, &so_emlrtRTEI);
     for (i = 0; i < loop_ub; i++) {
       beta->contents->data[i] = initialbeta->data[i];
     }
   } else {
     i = beta->contents->size[0];
     beta->contents->size[0] = initialbeta->size[0];
-    emxEnsureCapacity_real_T(sp, beta->contents, i, &so_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, beta->contents, i, &ro_emlrtRTEI);
     loop_ub = initialbeta->size[0];
     for (i = 0; i < loop_ub; i++) {
       beta->contents->data[i] = initialbeta->data[i];
     }
   }
 
-  emxInit_real_T(sp, &Xseld, 2, &sp_emlrtRTEI, true);
-  emxInit_boolean_T(sp, &x, 1, &xo_emlrtRTEI, true);
-  emxInit_real_T(sp, &b_Xseld, 2, &dq_emlrtRTEI, true);
+  emxInit_real_T(sp, &Xseld, 2, &rp_emlrtRTEI, true);
+  emxInit_boolean_T(sp, &x, 1, &wo_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_Xseld, 2, &cq_emlrtRTEI, true);
   exitg1 = false;
   while ((!exitg1) && ((betadiff > reftol) && (iter < refsteps))) {
     iter++;
@@ -9348,7 +9348,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
 
       i = x->size[0];
       x->size[0] = loop_ub;
-      emxEnsureCapacity_boolean_T(&st, x, i, &yo_emlrtRTEI);
+      emxEnsureCapacity_boolean_T(&st, x, i, &xo_emlrtRTEI);
       for (i = 0; i < loop_ub; i++) {
         x->data[i] = (i_r2s->data[i] == initialbeta->data[initialbeta->size[0] -
                       1]);
@@ -9385,7 +9385,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
         indexShapeCheck(&st, i_r2s->size[0], sizes);
         i = bsb->contents->size[0];
         bsb->contents->size[0] = loop_ub + 1;
-        emxEnsureCapacity_real_T(sp, bsb->contents, i, &kp_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, bsb->contents, i, &jp_emlrtRTEI);
         for (i = 0; i < loop_ub; i++) {
           bsb->contents->data[i] = i_r2s->data[i];
         }
@@ -9425,7 +9425,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
         indexShapeCheck(&st, i_r2s->size[0], sizes);
         i = bsb->contents->size[0];
         bsb->contents->size[0] = loop_ub;
-        emxEnsureCapacity_real_T(sp, bsb->contents, i, &np_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, bsb->contents, i, &mp_emlrtRTEI);
         for (i = 0; i < loop_ub; i++) {
           bsb->contents->data[i] = i_r2s->data[i];
         }
@@ -9468,7 +9468,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
 
       i = x->size[0];
       x->size[0] = loop_ub;
-      emxEnsureCapacity_boolean_T(&st, x, i, &xo_emlrtRTEI);
+      emxEnsureCapacity_boolean_T(&st, x, i, &wo_emlrtRTEI);
       for (i = 0; i < loop_ub; i++) {
         x->data[i] = (i_r2s->data[i] == initialbeta->data[initialbeta->size[0] -
                       1]);
@@ -9509,7 +9509,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
 
       i = x->size[0];
       x->size[0] = loop_ub;
-      emxEnsureCapacity_boolean_T(&st, x, i, &mp_emlrtRTEI);
+      emxEnsureCapacity_boolean_T(&st, x, i, &lp_emlrtRTEI);
       for (i = 0; i < loop_ub; i++) {
         x->data[i] = (i_r2s->data[i] == initialbeta->data[initialbeta->size[0] -
                       1] - 1.0);
@@ -9546,7 +9546,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
         indexShapeCheck(&st, i_r2s->size[0], sizes);
         i = bsb->contents->size[0];
         bsb->contents->size[0] = loop_ub + 2;
-        emxEnsureCapacity_real_T(sp, bsb->contents, i, &tp_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, bsb->contents, i, &sp_emlrtRTEI);
         for (i = 0; i < loop_ub; i++) {
           bsb->contents->data[i] = i_r2s->data[i];
         }
@@ -9593,7 +9593,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
         indexShapeCheck(&st, i_r2s->size[0], sizes);
         i = bsb->contents->size[0];
         bsb->contents->size[0] = loop_ub + 1;
-        emxEnsureCapacity_real_T(sp, bsb->contents, i, &up_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, bsb->contents, i, &tp_emlrtRTEI);
         for (i = 0; i < loop_ub; i++) {
           bsb->contents->data[i] = i_r2s->data[i];
         }
@@ -9633,7 +9633,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
         indexShapeCheck(&st, i_r2s->size[0], sizes);
         i = bsb->contents->size[0];
         bsb->contents->size[0] = loop_ub + 1;
-        emxEnsureCapacity_real_T(sp, bsb->contents, i, &wp_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, bsb->contents, i, &vp_emlrtRTEI);
         for (i = 0; i < loop_ub; i++) {
           bsb->contents->data[i] = i_r2s->data[i];
         }
@@ -9672,7 +9672,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
         indexShapeCheck(&st, i_r2s->size[0], sizes);
         i = bsb->contents->size[0];
         bsb->contents->size[0] = loop_ub;
-        emxEnsureCapacity_real_T(sp, bsb->contents, i, &vp_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, bsb->contents, i, &up_emlrtRTEI);
         for (i = 0; i < loop_ub; i++) {
           bsb->contents->data[i] = i_r2s->data[i];
         }
@@ -9704,7 +9704,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
       indexShapeCheck(&st, i_r2s->size[0], sizes);
       i = bsb->contents->size[0];
       bsb->contents->size[0] = loop_ub;
-      emxEnsureCapacity_real_T(sp, bsb->contents, i, &uo_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, bsb->contents, i, &to_emlrtRTEI);
       for (i = 0; i < loop_ub; i++) {
         bsb->contents->data[i] = i_r2s->data[i];
       }
@@ -9719,7 +9719,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
       i = Xseld->size[0] * Xseld->size[1];
       Xseld->size[0] = bsb->contents->size[0];
       Xseld->size[1] = loop_ub;
-      emxEnsureCapacity_real_T(sp, Xseld, i, &ep_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, Xseld, i, &dp_emlrtRTEI);
       for (i = 0; i < loop_ub; i++) {
         b_nz = bsb->contents->size[0];
         for (i1 = 0; i1 < b_nz; i1++) {
@@ -9742,7 +9742,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
 
       i = b_y->size[0];
       b_y->size[0] = bsb->contents->size[0];
-      emxEnsureCapacity_real_T(sp, b_y, i, &hp_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, b_y, i, &gp_emlrtRTEI);
       loop_ub = bsb->contents->size[0];
       for (i = 0; i < loop_ub; i++) {
         if (bsb->contents->data[i] != (int32_T)muDoubleScalarFloor(bsb->
@@ -9790,7 +9790,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
         /*  observations */
         i = bsb->contents->size[0];
         bsb->contents->size[0] = seq->contents->size[0];
-        emxEnsureCapacity_real_T(sp, bsb->contents, i, &fp_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, bsb->contents, i, &ep_emlrtRTEI);
         loop_ub = seq->contents->size[0];
         for (i = 0; i < loop_ub; i++) {
           bsb->contents->data[i] = seq->contents->data[i];
@@ -9820,14 +9820,14 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
         c_st.site = &sf_emlrtRSI;
         if ((Xsel->contents->size[0] != b_nz) && ((Xsel->contents->size[0] != 0)
              && (Xsel->contents->size[1] != 0))) {
-          emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+          emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
             "MATLAB:catenate:matrixDimensionMismatch",
             "MATLAB:catenate:matrixDimensionMismatch", 0);
         }
 
         if ((Xlshift->contents->size[0] != b_nz) && ((Xlshift->contents->size[0]
               != 0) && (Xlshift->contents->size[1] != 0))) {
-          emlrtErrorWithMessageIdR2018a(&c_st, &g_emlrtRTEI,
+          emlrtErrorWithMessageIdR2018a(&c_st, &f_emlrtRTEI,
             "MATLAB:catenate:matrixDimensionMismatch",
             "MATLAB:catenate:matrixDimensionMismatch", 0);
         }
@@ -9850,7 +9850,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
         i = Xseld->size[0] * Xseld->size[1];
         Xseld->size[0] = b_nz;
         Xseld->size[1] = nz + sizes[1];
-        emxEnsureCapacity_real_T(&b_st, Xseld, i, &sp_emlrtRTEI);
+        emxEnsureCapacity_real_T(&b_st, Xseld, i, &rp_emlrtRTEI);
         for (i = 0; i < nz; i++) {
           for (i1 = 0; i1 < b_nz; i1++) {
             Xseld->data[i1 + Xseld->size[0] * i] = Xsel->contents->data[i1 +
@@ -9873,7 +9873,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
         i = b_Xseld->size[0] * b_Xseld->size[1];
         b_Xseld->size[0] = bsb->contents->size[0];
         b_Xseld->size[1] = Xseld->size[1];
-        emxEnsureCapacity_real_T(sp, b_Xseld, i, &dq_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, b_Xseld, i, &cq_emlrtRTEI);
         for (i = 0; i < loop_ub; i++) {
           b_nz = bsb->contents->size[0];
           for (i1 = 0; i1 < b_nz; i1++) {
@@ -9896,7 +9896,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
 
         i = b_y->size[0];
         b_y->size[0] = bsb->contents->size[0];
-        emxEnsureCapacity_real_T(sp, b_y, i, &fq_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, b_y, i, &eq_emlrtRTEI);
         loop_ub = bsb->contents->size[0];
         for (i = 0; i < loop_ub; i++) {
           if (bsb->contents->data[i] != (int32_T)muDoubleScalarFloor
@@ -9929,7 +9929,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
         /*  the position of level shift) */
         i = outIRWLS->betarw->size[0];
         outIRWLS->betarw->size[0] = newb->size[0] + 1;
-        emxEnsureCapacity_real_T(sp, outIRWLS->betarw, i, &gq_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, outIRWLS->betarw, i, &fq_emlrtRTEI);
         loop_ub = newb->size[0];
         for (i = 0; i < loop_ub; i++) {
           outIRWLS->betarw->data[i] = newb->data[i];
@@ -9964,7 +9964,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
       /*  of fitted values (yhat) using all the observations */
       i = bsb->contents->size[0];
       bsb->contents->size[0] = seq->contents->size[0];
-      emxEnsureCapacity_real_T(sp, bsb->contents, i, &gp_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, bsb->contents, i, &fp_emlrtRTEI);
       loop_ub = seq->contents->size[0];
       for (i = 0; i < loop_ub; i++) {
         bsb->contents->data[i] = seq->contents->data[i];
@@ -9986,7 +9986,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
 
     i = newb->size[0];
     newb->size[0] = beta->contents->size[0];
-    emxEnsureCapacity_real_T(sp, newb, i, &pp_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, newb, i, &op_emlrtRTEI);
     loop_ub = beta->contents->size[0];
     for (i = 0; i < loop_ub; i++) {
       newb->data[i] = beta->contents->data[i] - outIRWLS->betarw->data[i];
@@ -10004,7 +10004,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
 
     i = newb->size[0];
     newb->size[0] = beta->contents->size[0];
-    emxEnsureCapacity_real_T(sp, newb, i, &rp_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, newb, i, &qp_emlrtRTEI);
     loop_ub = beta->contents->size[0];
     for (i = 0; i < loop_ub; i++) {
       newb->data[i] = beta->contents->data[i];
@@ -10027,7 +10027,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
     /*  can just keep the initialbeta and initial scale. */
     i = x->size[0];
     x->size[0] = outIRWLS->betarw->size[0];
-    emxEnsureCapacity_boolean_T(sp, x, i, &ef_emlrtRTEI);
+    emxEnsureCapacity_boolean_T(sp, x, i, &df_emlrtRTEI);
     loop_ub = outIRWLS->betarw->size[0];
     for (i = 0; i < loop_ub; i++) {
       x->data[i] = muDoubleScalarIsNaN(outIRWLS->betarw->data[i]);
@@ -10037,7 +10037,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
     if (any(&st, x) || (exitfl != 0.0)) {
       i = outIRWLS->betarw->size[0];
       outIRWLS->betarw->size[0] = initialbeta->size[0];
-      emxEnsureCapacity_real_T(sp, outIRWLS->betarw, i, &cq_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, outIRWLS->betarw, i, &bq_emlrtRTEI);
       loop_ub = initialbeta->size[0];
       for (i = 0; i < loop_ub; i++) {
         outIRWLS->betarw->data[i] = initialbeta->data[i];
@@ -10054,7 +10054,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
 
       i = b_y->size[0];
       b_y->size[0] = y->size[0];
-      emxEnsureCapacity_real_T(sp, b_y, i, &eq_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, b_y, i, &dq_emlrtRTEI);
       loop_ub = y->size[0];
       for (i = 0; i < loop_ub; i++) {
         b_y->data[i] = y->data[i] - yhat->contents->data[i];
@@ -10067,7 +10067,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
       st.site = &pp_emlrtRSI;
       i = newb->size[0];
       newb->size[0] = r2->size[0];
-      emxEnsureCapacity_real_T(&st, newb, i, &se_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, newb, i, &re_emlrtRTEI);
       loop_ub = r2->size[0];
       for (i = 0; i < loop_ub; i++) {
         newb->data[i] = r2->data[i];
@@ -10079,7 +10079,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
       /*  update beta */
       i = beta->contents->size[0];
       beta->contents->size[0] = outIRWLS->betarw->size[0];
-      emxEnsureCapacity_real_T(sp, beta->contents, i, &hq_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, beta->contents, i, &gq_emlrtRTEI);
       loop_ub = outIRWLS->betarw->size[0];
       for (i = 0; i < loop_ub; i++) {
         beta->contents->data[i] = outIRWLS->betarw->data[i];
@@ -10134,7 +10134,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
 
       i = x->size[0];
       x->size[0] = loop_ub;
-      emxEnsureCapacity_boolean_T(&st, x, i, &bp_emlrtRTEI);
+      emxEnsureCapacity_boolean_T(&st, x, i, &ap_emlrtRTEI);
       for (i = 0; i < loop_ub; i++) {
         x->data[i] = (i_r2s->data[i] == initialbeta->data[initialbeta->size[0] -
                       1]);
@@ -10171,7 +10171,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
         indexShapeCheck(&st, i_r2s->size[0], sizes);
         i = bsb->contents->size[0];
         bsb->contents->size[0] = loop_ub + 1;
-        emxEnsureCapacity_real_T(sp, bsb->contents, i, &lp_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, bsb->contents, i, &kp_emlrtRTEI);
         for (i = 0; i < loop_ub; i++) {
           bsb->contents->data[i] = i_r2s->data[i];
         }
@@ -10211,7 +10211,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
         indexShapeCheck(&st, i_r2s->size[0], sizes);
         i = bsb->contents->size[0];
         bsb->contents->size[0] = loop_ub;
-        emxEnsureCapacity_real_T(sp, bsb->contents, i, &op_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, bsb->contents, i, &np_emlrtRTEI);
         for (i = 0; i < loop_ub; i++) {
           bsb->contents->data[i] = i_r2s->data[i];
         }
@@ -10254,7 +10254,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
 
       i = x->size[0];
       x->size[0] = loop_ub;
-      emxEnsureCapacity_boolean_T(&st, x, i, &dp_emlrtRTEI);
+      emxEnsureCapacity_boolean_T(&st, x, i, &cp_emlrtRTEI);
       for (i = 0; i < loop_ub; i++) {
         x->data[i] = (i_r2s->data[i] == initialbeta->data[initialbeta->size[0] -
                       1]);
@@ -10295,7 +10295,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
 
       i = x->size[0];
       x->size[0] = loop_ub;
-      emxEnsureCapacity_boolean_T(&st, x, i, &qp_emlrtRTEI);
+      emxEnsureCapacity_boolean_T(&st, x, i, &pp_emlrtRTEI);
       for (i = 0; i < loop_ub; i++) {
         x->data[i] = (i_r2s->data[i] == initialbeta->data[initialbeta->size[0] -
                       1] - 1.0);
@@ -10332,7 +10332,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
         indexShapeCheck(&st, i_r2s->size[0], sizes);
         i = bsb->contents->size[0];
         bsb->contents->size[0] = loop_ub + 2;
-        emxEnsureCapacity_real_T(sp, bsb->contents, i, &xp_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, bsb->contents, i, &wp_emlrtRTEI);
         for (i = 0; i < loop_ub; i++) {
           bsb->contents->data[i] = i_r2s->data[i];
         }
@@ -10379,7 +10379,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
         indexShapeCheck(&st, i_r2s->size[0], sizes);
         i = bsb->contents->size[0];
         bsb->contents->size[0] = loop_ub + 1;
-        emxEnsureCapacity_real_T(sp, bsb->contents, i, &yp_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, bsb->contents, i, &xp_emlrtRTEI);
         for (i = 0; i < loop_ub; i++) {
           bsb->contents->data[i] = i_r2s->data[i];
         }
@@ -10419,7 +10419,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
         indexShapeCheck(&st, i_r2s->size[0], sizes);
         i = bsb->contents->size[0];
         bsb->contents->size[0] = loop_ub + 1;
-        emxEnsureCapacity_real_T(sp, bsb->contents, i, &bq_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, bsb->contents, i, &aq_emlrtRTEI);
         for (i = 0; i < loop_ub; i++) {
           bsb->contents->data[i] = i_r2s->data[i];
         }
@@ -10458,7 +10458,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
         indexShapeCheck(&st, i_r2s->size[0], sizes);
         i = bsb->contents->size[0];
         bsb->contents->size[0] = loop_ub;
-        emxEnsureCapacity_real_T(sp, bsb->contents, i, &aq_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, bsb->contents, i, &yp_emlrtRTEI);
         for (i = 0; i < loop_ub; i++) {
           bsb->contents->data[i] = i_r2s->data[i];
         }
@@ -10490,7 +10490,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
       indexShapeCheck(&st, i_r2s->size[0], sizes);
       i = bsb->contents->size[0];
       bsb->contents->size[0] = loop_ub;
-      emxEnsureCapacity_real_T(sp, bsb->contents, i, &wo_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, bsb->contents, i, &vo_emlrtRTEI);
       for (i = 0; i < loop_ub; i++) {
         bsb->contents->data[i] = i_r2s->data[i];
       }
@@ -10498,7 +10498,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
 
     i = b_y->size[0];
     b_y->size[0] = bsb->contents->size[0];
-    emxEnsureCapacity_real_T(sp, b_y, i, &cp_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_y, i, &bp_emlrtRTEI);
     loop_ub = bsb->contents->size[0];
     for (i = 0; i < loop_ub; i++) {
       if (bsb->contents->data[i] != (int32_T)muDoubleScalarFloor(bsb->
@@ -10536,7 +10536,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
   /*  iteration 0 for the other units. */
   i = weights->contents->size[0];
   weights->contents->size[0] = zerT1->contents->size[0];
-  emxEnsureCapacity_boolean_T(sp, weights->contents, i, &vo_emlrtRTEI);
+  emxEnsureCapacity_boolean_T(sp, weights->contents, i, &uo_emlrtRTEI);
   loop_ub = zerT1->contents->size[0];
   for (i = 0; i < loop_ub; i++) {
     weights->contents->data[i] = zerT1->contents->data[i];
@@ -10545,7 +10545,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
   b_nz = weights->contents->size[0];
   i = i_r2s->size[0];
   i_r2s->size[0] = bsb->contents->size[0];
-  emxEnsureCapacity_int32_T(sp, i_r2s, i, &ap_emlrtRTEI);
+  emxEnsureCapacity_int32_T(sp, i_r2s, i, &yo_emlrtRTEI);
   loop_ub = bsb->contents->size[0];
   for (i = 0; i < loop_ub; i++) {
     if (bsb->contents->data[i] != (int32_T)muDoubleScalarFloor(bsb->
@@ -10575,7 +10575,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
   /*  Store all output variables */
   i = outIRWLS->yhat->size[0];
   outIRWLS->yhat->size[0] = yhat->contents->size[0];
-  emxEnsureCapacity_real_T(sp, outIRWLS->yhat, i, &ip_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, outIRWLS->yhat, i, &hp_emlrtRTEI);
   loop_ub = yhat->contents->size[0];
   for (i = 0; i < loop_ub; i++) {
     outIRWLS->yhat->data[i] = yhat->contents->data[i];
@@ -10583,7 +10583,7 @@ void IRWLSreg(const emlrtStack *sp, const captured_var *reftolALS, const
 
   i = outIRWLS->weights->size[0];
   outIRWLS->weights->size[0] = weights->contents->size[0];
-  emxEnsureCapacity_boolean_T(sp, outIRWLS->weights, i, &jp_emlrtRTEI);
+  emxEnsureCapacity_boolean_T(sp, outIRWLS->weights, i, &ip_emlrtRTEI);
   loop_ub = weights->contents->size[0];
   for (i = 0; i < loop_ub; i++) {
     outIRWLS->weights->data[i] = weights->contents->data[i];
@@ -10631,7 +10631,7 @@ real_T corfactorRAW(const emlrtStack *sp, real_T n, real_T alpha)
   b_st.site = &ds_emlrtRSI;
   c_st.site = &lf_emlrtRSI;
   if (n < 0.0) {
-    emlrtErrorWithMessageIdR2018a(&c_st, &vb_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(&c_st, &ub_emlrtRTEI,
       "Coder:toolbox:power_domainError", "Coder:toolbox:power_domainError", 0);
   }
 
@@ -10656,25 +10656,25 @@ real_T corfactorRAW(const emlrtStack *sp, real_T n, real_T alpha)
     m = emlrtCreateCharArray(2, &iv[0]);
     emlrtInitCharArrayR2013a((emlrtCTX)sp, 44, m, &u[0]);
     emlrtAssign(&y, m);
-    st.site = &qeb_emlrtRSI;
+    st.site = &peb_emlrtRSI;
     disp(&st, y, &r_emlrtMCI);
     b_y = NULL;
     m = emlrtCreateCharArray(2, &iv1[0]);
     emlrtInitCharArrayR2013a((emlrtCTX)sp, 69, m, &cv3[0]);
     emlrtAssign(&b_y, m);
-    st.site = &peb_emlrtRSI;
+    st.site = &oeb_emlrtRSI;
     disp(&st, b_y, &s_emlrtMCI);
     c_y = NULL;
     m = emlrtCreateCharArray(2, &iv2[0]);
     emlrtInitCharArrayR2013a((emlrtCTX)sp, 75, m, &cv4[0]);
     emlrtAssign(&c_y, m);
-    st.site = &oeb_emlrtRSI;
+    st.site = &neb_emlrtRSI;
     disp(&st, c_y, &t_emlrtMCI);
     d_y = NULL;
     m = emlrtCreateCharArray(2, &iv3[0]);
     emlrtInitCharArrayR2013a((emlrtCTX)sp, 51, m, &cv5[0]);
     emlrtAssign(&d_y, m);
-    st.site = &neb_emlrtRSI;
+    st.site = &meb_emlrtRSI;
     disp(&st, d_y, &u_emlrtMCI);
 
     /*  end */
@@ -10717,16 +10717,16 @@ real_T corfactorREW(const emlrtStack *sp, real_T n, real_T alpha)
   c_st.tls = b_st.tls;
 
   /*  corfactorREW function */
-  st.site = &scb_emlrtRSI;
+  st.site = &rcb_emlrtRSI;
   b_st.site = &ds_emlrtRSI;
   c_st.site = &lf_emlrtRSI;
   if (n < 0.0) {
-    emlrtErrorWithMessageIdR2018a(&c_st, &vb_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(&c_st, &ub_emlrtRTEI,
       "Coder:toolbox:power_domainError", "Coder:toolbox:power_domainError", 0);
   }
 
   fp_500_n = 1.0 - 3.0373378792330419 / muDoubleScalarPower(n, 1.5182890270453);
-  st.site = &tcb_emlrtRSI;
+  st.site = &scb_emlrtRSI;
   b_st.site = &ds_emlrtRSI;
   fp_875_n = 1.0 - 0.51660962465337334 / muDoubleScalarPower(n, 0.88939595831888);
   if ((0.5 <= alpha) && (alpha <= 0.875)) {
@@ -10746,25 +10746,25 @@ real_T corfactorREW(const emlrtStack *sp, real_T n, real_T alpha)
     m = emlrtCreateCharArray(2, &iv[0]);
     emlrtInitCharArrayR2013a((emlrtCTX)sp, 44, m, &u[0]);
     emlrtAssign(&y, m);
-    st.site = &leb_emlrtRSI;
+    st.site = &keb_emlrtRSI;
     disp(&st, y, &w_emlrtMCI);
     b_y = NULL;
     m = emlrtCreateCharArray(2, &iv1[0]);
     emlrtInitCharArrayR2013a((emlrtCTX)sp, 69, m, &cv3[0]);
     emlrtAssign(&b_y, m);
-    st.site = &keb_emlrtRSI;
+    st.site = &jeb_emlrtRSI;
     disp(&st, b_y, &x_emlrtMCI);
     c_y = NULL;
     m = emlrtCreateCharArray(2, &iv2[0]);
     emlrtInitCharArrayR2013a((emlrtCTX)sp, 75, m, &cv4[0]);
     emlrtAssign(&c_y, m);
-    st.site = &jeb_emlrtRSI;
+    st.site = &ieb_emlrtRSI;
     disp(&st, c_y, &y_emlrtMCI);
     d_y = NULL;
     m = emlrtCreateCharArray(2, &iv3[0]);
     emlrtInitCharArrayR2013a((emlrtCTX)sp, 51, m, &cv5[0]);
     emlrtAssign(&d_y, m);
-    st.site = &ieb_emlrtRSI;
+    st.site = &heb_emlrtRSI;
     disp(&st, d_y, &ab_emlrtMCI);
 
     /*   end */
@@ -10834,7 +10834,7 @@ void lik(const emlrtStack *sp, const c_captured_var *Xtrend, const
     loop_ub = (int32_T)npar;
   }
 
-  emxInit_real_T(sp, &a, 2, &tn_emlrtRTEI, true);
+  emxInit_real_T(sp, &a, 2, &sn_emlrtRTEI, true);
   iv[0] = 1;
   iv[1] = loop_ub;
   st.site = &sn_emlrtRSI;
@@ -10845,7 +10845,7 @@ void lik(const emlrtStack *sp, const c_captured_var *Xtrend, const
   i = a->size[0] * a->size[1];
   a->size[0] = bsb->contents->size[0];
   a->size[1] = b_loop_ub;
-  emxEnsureCapacity_real_T(&st, a, i, &tn_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, a, i, &sn_emlrtRTEI);
   for (i = 0; i < b_loop_ub; i++) {
     c_loop_ub = bsb->contents->size[0];
     for (i1 = 0; i1 < c_loop_ub; i1++) {
@@ -10867,37 +10867,37 @@ void lik(const emlrtStack *sp, const c_captured_var *Xtrend, const
   b_st.site = &rj_emlrtRSI;
   if (a->size[1] != loop_ub) {
     if (((a->size[0] == 1) && (a->size[1] == 1)) || (loop_ub == 1)) {
-      emlrtErrorWithMessageIdR2018a(&b_st, &jb_emlrtRTEI,
+      emlrtErrorWithMessageIdR2018a(&b_st, &ib_emlrtRTEI,
         "Coder:toolbox:mtimes_noDynamicScalarExpansion",
         "Coder:toolbox:mtimes_noDynamicScalarExpansion", 0);
     } else {
-      emlrtErrorWithMessageIdR2018a(&b_st, &ib_emlrtRTEI, "MATLAB:innerdim",
+      emlrtErrorWithMessageIdR2018a(&b_st, &hb_emlrtRTEI, "MATLAB:innerdim",
         "MATLAB:innerdim", 0);
     }
   }
 
-  emxInit_real_T(&b_st, &b_beta0, 2, &un_emlrtRTEI, true);
+  emxInit_real_T(&b_st, &b_beta0, 2, &tn_emlrtRTEI, true);
   i = b_beta0->size[0] * b_beta0->size[1];
   b_beta0->size[0] = 1;
   b_beta0->size[1] = loop_ub;
-  emxEnsureCapacity_real_T(&st, b_beta0, i, &un_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, b_beta0, i, &tn_emlrtRTEI);
   for (i = 0; i < loop_ub; i++) {
     b_beta0->data[i] = beta0->data[i];
   }
 
-  emxInit_real_T(&st, &yhattrend, 1, &lo_emlrtRTEI, true);
+  emxInit_real_T(&st, &yhattrend, 1, &ko_emlrtRTEI, true);
   b_st.site = &qj_emlrtRSI;
   mtimes(&b_st, a, b_beta0, yhattrend);
-  emxInit_real_T(sp, &Xtre, 1, &mo_emlrtRTEI, true);
+  emxInit_real_T(sp, &Xtre, 1, &lo_emlrtRTEI, true);
   if (seasonal->contents > 0.0) {
     if (seasonal->contents < s->contents / 2.0) {
-      emxInit_uint32_T(sp, &r, 2, &oo_emlrtRTEI, true);
+      emxInit_uint32_T(sp, &r, 2, &no_emlrtRTEI, true);
       d = seasonal->contents * 2.0;
       i = r->size[0] * r->size[1];
       r->size[0] = 1;
       loop_ub = (int32_T)muDoubleScalarFloor(d - 1.0);
       r->size[1] = loop_ub + 1;
-      emxEnsureCapacity_uint32_T(sp, r, i, &wn_emlrtRTEI);
+      emxEnsureCapacity_uint32_T(sp, r, i, &vn_emlrtRTEI);
       for (i = 0; i <= loop_ub; i++) {
         d1 = npar + ((real_T)i + 1.0);
         if (d1 != (int32_T)muDoubleScalarFloor(d1)) {
@@ -10921,7 +10921,7 @@ void lik(const emlrtStack *sp, const c_captured_var *Xtrend, const
       i = a->size[0] * a->size[1];
       a->size[0] = bsb->contents->size[0];
       a->size[1] = loop_ub;
-      emxEnsureCapacity_real_T(&st, a, i, &yn_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, a, i, &xn_emlrtRTEI);
       for (i = 0; i < loop_ub; i++) {
         b_loop_ub = bsb->contents->size[0];
         for (i1 = 0; i1 < b_loop_ub; i1++) {
@@ -10943,11 +10943,11 @@ void lik(const emlrtStack *sp, const c_captured_var *Xtrend, const
       b_st.site = &rj_emlrtRSI;
       if (a->size[1] != r->size[1]) {
         if (((a->size[0] == 1) && (a->size[1] == 1)) || (r->size[1] == 1)) {
-          emlrtErrorWithMessageIdR2018a(&b_st, &jb_emlrtRTEI,
+          emlrtErrorWithMessageIdR2018a(&b_st, &ib_emlrtRTEI,
             "Coder:toolbox:mtimes_noDynamicScalarExpansion",
             "Coder:toolbox:mtimes_noDynamicScalarExpansion", 0);
         } else {
-          emlrtErrorWithMessageIdR2018a(&b_st, &ib_emlrtRTEI, "MATLAB:innerdim",
+          emlrtErrorWithMessageIdR2018a(&b_st, &hb_emlrtRTEI, "MATLAB:innerdim",
             "MATLAB:innerdim", 0);
         }
       }
@@ -10955,7 +10955,7 @@ void lik(const emlrtStack *sp, const c_captured_var *Xtrend, const
       i = b_beta0->size[0] * b_beta0->size[1];
       b_beta0->size[0] = 1;
       b_beta0->size[1] = r->size[1];
-      emxEnsureCapacity_real_T(&st, b_beta0, i, &eo_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, b_beta0, i, &do_emlrtRTEI);
       loop_ub = r->size[1];
       for (i = 0; i < loop_ub; i++) {
         b_beta0->data[i] = beta0->data[(int32_T)r->data[i] - 1];
@@ -11006,7 +11006,7 @@ void lik(const emlrtStack *sp, const c_captured_var *Xtrend, const
       i1 = a->size[0] * a->size[1];
       a->size[0] = bsb->contents->size[0];
       a->size[1] = b_loop_ub;
-      emxEnsureCapacity_real_T(&st, a, i1, &bo_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, a, i1, &ao_emlrtRTEI);
       for (i1 = 0; i1 < b_loop_ub; i1++) {
         c_loop_ub = bsb->contents->size[0];
         for (i2 = 0; i2 < c_loop_ub; i2++) {
@@ -11028,11 +11028,11 @@ void lik(const emlrtStack *sp, const c_captured_var *Xtrend, const
       b_st.site = &rj_emlrtRSI;
       if (a->size[1] != loop_ub) {
         if (((a->size[0] == 1) && (a->size[1] == 1)) || (loop_ub == 1)) {
-          emlrtErrorWithMessageIdR2018a(&b_st, &jb_emlrtRTEI,
+          emlrtErrorWithMessageIdR2018a(&b_st, &ib_emlrtRTEI,
             "Coder:toolbox:mtimes_noDynamicScalarExpansion",
             "Coder:toolbox:mtimes_noDynamicScalarExpansion", 0);
         } else {
-          emlrtErrorWithMessageIdR2018a(&b_st, &ib_emlrtRTEI, "MATLAB:innerdim",
+          emlrtErrorWithMessageIdR2018a(&b_st, &hb_emlrtRTEI, "MATLAB:innerdim",
             "MATLAB:innerdim", 0);
         }
       }
@@ -11040,7 +11040,7 @@ void lik(const emlrtStack *sp, const c_captured_var *Xtrend, const
       i1 = b_beta0->size[0] * b_beta0->size[1];
       b_beta0->size[0] = 1;
       b_beta0->size[1] = loop_ub;
-      emxEnsureCapacity_real_T(&st, b_beta0, i1, &fo_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, b_beta0, i1, &eo_emlrtRTEI);
       for (i1 = 0; i1 < loop_ub; i1++) {
         b_beta0->data[i1] = beta0->data[(i + i1) + 1];
       }
@@ -11109,7 +11109,7 @@ void lik(const emlrtStack *sp, const c_captured_var *Xtrend, const
       a->size[0] = bsb->contents->size[0];
       b_loop_ub = i1 - i;
       a->size[1] = b_loop_ub;
-      emxEnsureCapacity_real_T(&st, a, i3, &io_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, a, i3, &ho_emlrtRTEI);
       for (i1 = 0; i1 < b_loop_ub; i1++) {
         c_loop_ub = bsb->contents->size[0];
         for (i3 = 0; i3 < c_loop_ub; i3++) {
@@ -11131,11 +11131,11 @@ void lik(const emlrtStack *sp, const c_captured_var *Xtrend, const
       b_st.site = &rj_emlrtRSI;
       if (a->size[1] != loop_ub) {
         if (((a->size[0] == 1) && (a->size[1] == 1)) || (loop_ub == 1)) {
-          emlrtErrorWithMessageIdR2018a(&b_st, &jb_emlrtRTEI,
+          emlrtErrorWithMessageIdR2018a(&b_st, &ib_emlrtRTEI,
             "Coder:toolbox:mtimes_noDynamicScalarExpansion",
             "Coder:toolbox:mtimes_noDynamicScalarExpansion", 0);
         } else {
-          emlrtErrorWithMessageIdR2018a(&b_st, &ib_emlrtRTEI, "MATLAB:innerdim",
+          emlrtErrorWithMessageIdR2018a(&b_st, &hb_emlrtRTEI, "MATLAB:innerdim",
             "MATLAB:innerdim", 0);
         }
       }
@@ -11143,7 +11143,7 @@ void lik(const emlrtStack *sp, const c_captured_var *Xtrend, const
       i = b_beta0->size[0] * b_beta0->size[1];
       b_beta0->size[0] = 1;
       b_beta0->size[1] = loop_ub;
-      emxEnsureCapacity_real_T(&st, b_beta0, i, &jo_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, b_beta0, i, &io_emlrtRTEI);
       for (i = 0; i < loop_ub; i++) {
         b_beta0->data[i] = beta0->data[(i2 + i) + 1];
       }
@@ -11162,7 +11162,7 @@ void lik(const emlrtStack *sp, const c_captured_var *Xtrend, const
 
       i = yhatseaso->contents->size[0];
       yhatseaso->contents->size[0] = Xtre->size[0];
-      emxEnsureCapacity_real_T(sp, yhatseaso->contents, i, &ko_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, yhatseaso->contents, i, &jo_emlrtRTEI);
       loop_ub = Xtre->size[0];
       for (i = 0; i < loop_ub; i++) {
         yhatseaso->contents->data[i] *= Xtre->data[i];
@@ -11173,7 +11173,7 @@ void lik(const emlrtStack *sp, const c_captured_var *Xtrend, const
   if (isemptyX->contents) {
     i = Xtre->size[0];
     Xtre->size[0] = 1;
-    emxEnsureCapacity_real_T(sp, Xtre, i, &vn_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, Xtre, i, &un_emlrtRTEI);
     Xtre->data[0] = 0.0;
   } else {
     /*  Note the order of coefficients is trend, linear part of */
@@ -11219,7 +11219,7 @@ void lik(const emlrtStack *sp, const c_captured_var *Xtrend, const
     i1 = a->size[0] * a->size[1];
     a->size[0] = bsb->contents->size[0];
     a->size[1] = b_loop_ub;
-    emxEnsureCapacity_real_T(&st, a, i1, &co_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, a, i1, &bo_emlrtRTEI);
     for (i1 = 0; i1 < b_loop_ub; i1++) {
       c_loop_ub = bsb->contents->size[0];
       for (i2 = 0; i2 < c_loop_ub; i2++) {
@@ -11241,11 +11241,11 @@ void lik(const emlrtStack *sp, const c_captured_var *Xtrend, const
     b_st.site = &rj_emlrtRSI;
     if (a->size[1] != loop_ub) {
       if (((a->size[0] == 1) && (a->size[1] == 1)) || (loop_ub == 1)) {
-        emlrtErrorWithMessageIdR2018a(&b_st, &jb_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&b_st, &ib_emlrtRTEI,
           "Coder:toolbox:mtimes_noDynamicScalarExpansion",
           "Coder:toolbox:mtimes_noDynamicScalarExpansion", 0);
       } else {
-        emlrtErrorWithMessageIdR2018a(&b_st, &ib_emlrtRTEI, "MATLAB:innerdim",
+        emlrtErrorWithMessageIdR2018a(&b_st, &hb_emlrtRTEI, "MATLAB:innerdim",
           "MATLAB:innerdim", 0);
       }
     }
@@ -11253,7 +11253,7 @@ void lik(const emlrtStack *sp, const c_captured_var *Xtrend, const
     i1 = b_beta0->size[0] * b_beta0->size[1];
     b_beta0->size[0] = 1;
     b_beta0->size[1] = loop_ub;
-    emxEnsureCapacity_real_T(&st, b_beta0, i1, &go_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, b_beta0, i1, &fo_emlrtRTEI);
     for (i1 = 0; i1 < loop_ub; i1++) {
       b_beta0->data[i1] = beta0->data[(i + i1) + 1];
     }
@@ -11264,7 +11264,7 @@ void lik(const emlrtStack *sp, const c_captured_var *Xtrend, const
 
   emxFree_real_T(&b_beta0);
   emxFree_real_T(&a);
-  emxInit_real_T(sp, &yhatlshift, 1, &no_emlrtRTEI, true);
+  emxInit_real_T(sp, &yhatlshift, 1, &mo_emlrtRTEI, true);
   if (lshiftYN->contents == 1.0) {
     /*   \beta_(npar+1)* I(t \geq \beta_(npar+2)) where beta_(npar+1) */
     /*   is a real number and \beta_(npar+2) is a integer which */
@@ -11285,7 +11285,7 @@ void lik(const emlrtStack *sp, const c_captured_var *Xtrend, const
     b_Xtrend = Xlshift->contents->size[0] * Xlshift->contents->size[1];
     i = yhatlshift->size[0];
     yhatlshift->size[0] = bsb->contents->size[0];
-    emxEnsureCapacity_real_T(sp, yhatlshift, i, &ao_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, yhatlshift, i, &yn_emlrtRTEI);
     loop_ub = bsb->contents->size[0];
     for (i = 0; i < loop_ub; i++) {
       if (bsb->contents->data[i] != (int32_T)muDoubleScalarFloor(bsb->
@@ -11310,7 +11310,7 @@ void lik(const emlrtStack *sp, const c_captured_var *Xtrend, const
   } else {
     i = yhatlshift->size[0];
     yhatlshift->size[0] = 1;
-    emxEnsureCapacity_real_T(sp, yhatlshift, i, &xn_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, yhatlshift, i, &wn_emlrtRTEI);
     yhatlshift->data[0] = 0.0;
   }
 
@@ -11334,7 +11334,7 @@ void lik(const emlrtStack *sp, const c_captured_var *Xtrend, const
 
   i = yhat->contents->size[0];
   yhat->contents->size[0] = yhattrend->size[0];
-  emxEnsureCapacity_real_T(sp, yhat->contents, i, &do_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, yhat->contents, i, &co_emlrtRTEI);
   loop_ub = yhattrend->size[0];
   for (i = 0; i < loop_ub; i++) {
     yhat->contents->data[i] = ((yhattrend->data[i] + yhatseaso->contents->data[i])
@@ -11359,7 +11359,7 @@ void lik(const emlrtStack *sp, const c_captured_var *Xtrend, const
   b_Xtrend = yin->contents->size[0];
   i = Xtre->size[0];
   Xtre->size[0] = bsb->contents->size[0];
-  emxEnsureCapacity_real_T(sp, Xtre, i, &ho_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, Xtre, i, &go_emlrtRTEI);
   loop_ub = bsb->contents->size[0];
   for (i = 0; i < loop_ub; i++) {
     if (bsb->contents->data[i] != (int32_T)muDoubleScalarFloor(bsb->
@@ -11382,7 +11382,7 @@ void lik(const emlrtStack *sp, const c_captured_var *Xtrend, const
 
   i = yhattrend->size[0];
   yhattrend->size[0] = Xtre->size[0];
-  emxEnsureCapacity_real_T(sp, yhattrend, i, &ho_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, yhattrend, i, &go_emlrtRTEI);
   loop_ub = Xtre->size[0];
   for (i = 0; i < loop_ub; i++) {
     yhattrend->data[i] = Xtre->data[i] - yhat->contents->data[i];
@@ -11461,44 +11461,44 @@ void likyhat(const emlrtStack *sp, const captured_var *trend, const captured_var
 
   iv[0] = 1;
   iv[1] = loop_ub;
-  st.site = &nab_emlrtRSI;
+  st.site = &mab_emlrtRSI;
   indexShapeCheck(&st, beta0->size[0], iv);
-  st.site = &nab_emlrtRSI;
+  st.site = &mab_emlrtRSI;
   b_st.site = &rj_emlrtRSI;
   if (Xtrendf->size[1] != loop_ub) {
     if (((Xtrendf->size[0] == 1) && (Xtrendf->size[1] == 1)) || (loop_ub == 1))
     {
-      emlrtErrorWithMessageIdR2018a(&b_st, &jb_emlrtRTEI,
+      emlrtErrorWithMessageIdR2018a(&b_st, &ib_emlrtRTEI,
         "Coder:toolbox:mtimes_noDynamicScalarExpansion",
         "Coder:toolbox:mtimes_noDynamicScalarExpansion", 0);
     } else {
-      emlrtErrorWithMessageIdR2018a(&b_st, &ib_emlrtRTEI, "MATLAB:innerdim",
+      emlrtErrorWithMessageIdR2018a(&b_st, &hb_emlrtRTEI, "MATLAB:innerdim",
         "MATLAB:innerdim", 0);
     }
   }
 
-  emxInit_real_T(&b_st, &b_beta0, 2, &dw_emlrtRTEI, true);
+  emxInit_real_T(&b_st, &b_beta0, 2, &cw_emlrtRTEI, true);
   i = b_beta0->size[0] * b_beta0->size[1];
   b_beta0->size[0] = 1;
   b_beta0->size[1] = loop_ub;
-  emxEnsureCapacity_real_T(&st, b_beta0, i, &dw_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, b_beta0, i, &cw_emlrtRTEI);
   for (i = 0; i < loop_ub; i++) {
     b_beta0->data[i] = beta0->data[i];
   }
 
   b_st.site = &qj_emlrtRSI;
   mtimes(&b_st, Xtrendf, b_beta0, objyhat);
-  emxInit_real_T(sp, &Xtre, 1, &rw_emlrtRTEI, true);
-  emxInit_real_T(sp, &a, 2, &jw_emlrtRTEI, true);
+  emxInit_real_T(sp, &Xtre, 1, &qw_emlrtRTEI, true);
+  emxInit_real_T(sp, &a, 2, &iw_emlrtRTEI, true);
   if (seasonal->contents > 0.0) {
     if (seasonal->contents < s->contents / 2.0) {
-      emxInit_uint32_T(sp, &r, 2, &sw_emlrtRTEI, true);
+      emxInit_uint32_T(sp, &r, 2, &rw_emlrtRTEI, true);
       d = seasonal->contents * 2.0;
       i = r->size[0] * r->size[1];
       r->size[0] = 1;
       loop_ub = (int32_T)muDoubleScalarFloor(d - 1.0);
       r->size[1] = loop_ub + 1;
-      emxEnsureCapacity_uint32_T(sp, r, i, &fw_emlrtRTEI);
+      emxEnsureCapacity_uint32_T(sp, r, i, &ew_emlrtRTEI);
       for (i = 0; i <= loop_ub; i++) {
         d1 = npar + ((real_T)i + 1.0);
         if (d1 != (int32_T)muDoubleScalarFloor(d1)) {
@@ -11514,13 +11514,13 @@ void likyhat(const emlrtStack *sp, const captured_var *trend, const captured_var
         r->data[i] = (uint32_T)d1;
       }
 
-      st.site = &oab_emlrtRSI;
+      st.site = &nab_emlrtRSI;
       indexShapeCheck(&st, beta0->size[0], *(int32_T (*)[2])r->size);
-      st.site = &oab_emlrtRSI;
+      st.site = &nab_emlrtRSI;
       i = a->size[0] * a->size[1];
       a->size[0] = Xseasof->contents->size[0];
       a->size[1] = Xseasof->contents->size[1];
-      emxEnsureCapacity_real_T(&st, a, i, &hw_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, a, i, &gw_emlrtRTEI);
       loop_ub = Xseasof->contents->size[0] * Xseasof->contents->size[1];
       for (i = 0; i < loop_ub; i++) {
         a->data[i] = Xseasof->contents->data[i];
@@ -11529,11 +11529,11 @@ void likyhat(const emlrtStack *sp, const captured_var *trend, const captured_var
       b_st.site = &rj_emlrtRSI;
       if (a->size[1] != r->size[1]) {
         if (((a->size[0] == 1) && (a->size[1] == 1)) || (r->size[1] == 1)) {
-          emlrtErrorWithMessageIdR2018a(&b_st, &jb_emlrtRTEI,
+          emlrtErrorWithMessageIdR2018a(&b_st, &ib_emlrtRTEI,
             "Coder:toolbox:mtimes_noDynamicScalarExpansion",
             "Coder:toolbox:mtimes_noDynamicScalarExpansion", 0);
         } else {
-          emlrtErrorWithMessageIdR2018a(&b_st, &ib_emlrtRTEI, "MATLAB:innerdim",
+          emlrtErrorWithMessageIdR2018a(&b_st, &hb_emlrtRTEI, "MATLAB:innerdim",
             "MATLAB:innerdim", 0);
         }
       }
@@ -11541,7 +11541,7 @@ void likyhat(const emlrtStack *sp, const captured_var *trend, const captured_var
       i = b_beta0->size[0] * b_beta0->size[1];
       b_beta0->size[0] = 1;
       b_beta0->size[1] = r->size[1];
-      emxEnsureCapacity_real_T(&st, b_beta0, i, &lw_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, b_beta0, i, &kw_emlrtRTEI);
       loop_ub = r->size[1];
       for (i = 0; i < loop_ub; i++) {
         b_beta0->data[i] = beta0->data[(int32_T)r->data[i] - 1];
@@ -11584,13 +11584,13 @@ void likyhat(const emlrtStack *sp, const captured_var *trend, const captured_var
       iv[0] = 1;
       loop_ub = i1 - i;
       iv[1] = loop_ub;
-      st.site = &pab_emlrtRSI;
+      st.site = &oab_emlrtRSI;
       indexShapeCheck(&st, beta0->size[0], iv);
-      st.site = &pab_emlrtRSI;
+      st.site = &oab_emlrtRSI;
       i1 = a->size[0] * a->size[1];
       a->size[0] = Xseasof->contents->size[0];
       a->size[1] = Xseasof->contents->size[1];
-      emxEnsureCapacity_real_T(&st, a, i1, &jw_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, a, i1, &iw_emlrtRTEI);
       b_loop_ub = Xseasof->contents->size[0] * Xseasof->contents->size[1];
       for (i1 = 0; i1 < b_loop_ub; i1++) {
         a->data[i1] = Xseasof->contents->data[i1];
@@ -11599,11 +11599,11 @@ void likyhat(const emlrtStack *sp, const captured_var *trend, const captured_var
       b_st.site = &rj_emlrtRSI;
       if (a->size[1] != loop_ub) {
         if (((a->size[0] == 1) && (a->size[1] == 1)) || (loop_ub == 1)) {
-          emlrtErrorWithMessageIdR2018a(&b_st, &jb_emlrtRTEI,
+          emlrtErrorWithMessageIdR2018a(&b_st, &ib_emlrtRTEI,
             "Coder:toolbox:mtimes_noDynamicScalarExpansion",
             "Coder:toolbox:mtimes_noDynamicScalarExpansion", 0);
         } else {
-          emlrtErrorWithMessageIdR2018a(&b_st, &ib_emlrtRTEI, "MATLAB:innerdim",
+          emlrtErrorWithMessageIdR2018a(&b_st, &hb_emlrtRTEI, "MATLAB:innerdim",
             "MATLAB:innerdim", 0);
         }
       }
@@ -11611,7 +11611,7 @@ void likyhat(const emlrtStack *sp, const captured_var *trend, const captured_var
       i1 = b_beta0->size[0] * b_beta0->size[1];
       b_beta0->size[0] = 1;
       b_beta0->size[1] = loop_ub;
-      emxEnsureCapacity_real_T(&st, b_beta0, i1, &mw_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, b_beta0, i1, &lw_emlrtRTEI);
       for (i1 = 0; i1 < loop_ub; i1++) {
         b_beta0->data[i1] = beta0->data[(i + i1) + 1];
       }
@@ -11672,15 +11672,15 @@ void likyhat(const emlrtStack *sp, const captured_var *trend, const captured_var
       iv[0] = 1;
       loop_ub = i3 - i2;
       iv[1] = loop_ub;
-      st.site = &qab_emlrtRSI;
+      st.site = &pab_emlrtRSI;
       indexShapeCheck(&st, beta0->size[0], iv);
-      st.site = &qab_emlrtRSI;
+      st.site = &pab_emlrtRSI;
       b_loop_ub = Seqf->contents->size[0];
       i3 = a->size[0] * a->size[1];
       a->size[0] = b_loop_ub;
       c_loop_ub = i1 - i;
       a->size[1] = c_loop_ub;
-      emxEnsureCapacity_real_T(&st, a, i3, &ow_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, a, i3, &nw_emlrtRTEI);
       for (i1 = 0; i1 < c_loop_ub; i1++) {
         for (i3 = 0; i3 < b_loop_ub; i3++) {
           a->data[i3 + a->size[0] * i1] = Seqf->contents->data[i3 +
@@ -11691,11 +11691,11 @@ void likyhat(const emlrtStack *sp, const captured_var *trend, const captured_var
       b_st.site = &rj_emlrtRSI;
       if (a->size[1] != loop_ub) {
         if (((a->size[0] == 1) && (a->size[1] == 1)) || (loop_ub == 1)) {
-          emlrtErrorWithMessageIdR2018a(&b_st, &jb_emlrtRTEI,
+          emlrtErrorWithMessageIdR2018a(&b_st, &ib_emlrtRTEI,
             "Coder:toolbox:mtimes_noDynamicScalarExpansion",
             "Coder:toolbox:mtimes_noDynamicScalarExpansion", 0);
         } else {
-          emlrtErrorWithMessageIdR2018a(&b_st, &ib_emlrtRTEI, "MATLAB:innerdim",
+          emlrtErrorWithMessageIdR2018a(&b_st, &hb_emlrtRTEI, "MATLAB:innerdim",
             "MATLAB:innerdim", 0);
         }
       }
@@ -11703,7 +11703,7 @@ void likyhat(const emlrtStack *sp, const captured_var *trend, const captured_var
       i = b_beta0->size[0] * b_beta0->size[1];
       b_beta0->size[0] = 1;
       b_beta0->size[1] = loop_ub;
-      emxEnsureCapacity_real_T(&st, b_beta0, i, &pw_emlrtRTEI);
+      emxEnsureCapacity_real_T(&st, b_beta0, i, &ow_emlrtRTEI);
       for (i = 0; i < loop_ub; i++) {
         b_beta0->data[i] = beta0->data[(i2 + i) + 1];
       }
@@ -11722,7 +11722,7 @@ void likyhat(const emlrtStack *sp, const captured_var *trend, const captured_var
 
       i = yhatseaso->contents->size[0];
       yhatseaso->contents->size[0] = Xtre->size[0];
-      emxEnsureCapacity_real_T(sp, yhatseaso->contents, i, &qw_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, yhatseaso->contents, i, &pw_emlrtRTEI);
       loop_ub = Xtre->size[0];
       for (i = 0; i < loop_ub; i++) {
         yhatseaso->contents->data[i] *= Xtre->data[i];
@@ -11733,7 +11733,7 @@ void likyhat(const emlrtStack *sp, const captured_var *trend, const captured_var
   if (isemptyX->contents) {
     i = Xtre->size[0];
     Xtre->size[0] = 1;
-    emxEnsureCapacity_real_T(sp, Xtre, i, &ew_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, Xtre, i, &dw_emlrtRTEI);
     Xtre->data[0] = 0.0;
   } else {
     /*  Note the order of coefficients is trend, linear part of */
@@ -11771,15 +11771,15 @@ void likyhat(const emlrtStack *sp, const captured_var *trend, const captured_var
     iv[0] = 1;
     loop_ub = i1 - i;
     iv[1] = loop_ub;
-    st.site = &rab_emlrtRSI;
+    st.site = &qab_emlrtRSI;
     indexShapeCheck(&st, beta0->size[0], iv);
-    st.site = &rab_emlrtRSI;
+    st.site = &qab_emlrtRSI;
     b_loop_ub = Xf->contents->size[0];
     c_loop_ub = Xf->contents->size[1];
     i1 = a->size[0] * a->size[1];
     a->size[0] = b_loop_ub;
     a->size[1] = c_loop_ub;
-    emxEnsureCapacity_real_T(&st, a, i1, &kw_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, a, i1, &jw_emlrtRTEI);
     for (i1 = 0; i1 < c_loop_ub; i1++) {
       for (i2 = 0; i2 < b_loop_ub; i2++) {
         a->data[i2 + a->size[0] * i1] = Xf->contents->data[i2 + Xf->
@@ -11790,11 +11790,11 @@ void likyhat(const emlrtStack *sp, const captured_var *trend, const captured_var
     b_st.site = &rj_emlrtRSI;
     if (a->size[1] != loop_ub) {
       if (((a->size[0] == 1) && (a->size[1] == 1)) || (loop_ub == 1)) {
-        emlrtErrorWithMessageIdR2018a(&b_st, &jb_emlrtRTEI,
+        emlrtErrorWithMessageIdR2018a(&b_st, &ib_emlrtRTEI,
           "Coder:toolbox:mtimes_noDynamicScalarExpansion",
           "Coder:toolbox:mtimes_noDynamicScalarExpansion", 0);
       } else {
-        emlrtErrorWithMessageIdR2018a(&b_st, &ib_emlrtRTEI, "MATLAB:innerdim",
+        emlrtErrorWithMessageIdR2018a(&b_st, &hb_emlrtRTEI, "MATLAB:innerdim",
           "MATLAB:innerdim", 0);
       }
     }
@@ -11802,7 +11802,7 @@ void likyhat(const emlrtStack *sp, const captured_var *trend, const captured_var
     i1 = b_beta0->size[0] * b_beta0->size[1];
     b_beta0->size[0] = 1;
     b_beta0->size[1] = loop_ub;
-    emxEnsureCapacity_real_T(&st, b_beta0, i1, &nw_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, b_beta0, i1, &mw_emlrtRTEI);
     for (i1 = 0; i1 < loop_ub; i1++) {
       b_beta0->data[i1] = beta0->data[(i + i1) + 1];
     }
@@ -11813,7 +11813,7 @@ void likyhat(const emlrtStack *sp, const captured_var *trend, const captured_var
 
   emxFree_real_T(&b_beta0);
   emxFree_real_T(&a);
-  emxInit_real_T(sp, &yhatlshift, 1, &iw_emlrtRTEI, true);
+  emxInit_real_T(sp, &yhatlshift, 1, &hw_emlrtRTEI, true);
   if (lshiftYN->contents == 1.0) {
     /*   \beta_(npar+1)* I(t \geq \beta_(npar+2)) where beta_(npar+1) */
     /*   is a real number and \beta_(npar+2) is a integer which */
@@ -11830,7 +11830,7 @@ void likyhat(const emlrtStack *sp, const captured_var *trend, const captured_var
 
     i = yhatlshift->size[0];
     yhatlshift->size[0] = Xlshiftf->contents->size[0];
-    emxEnsureCapacity_real_T(sp, yhatlshift, i, &iw_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, yhatlshift, i, &hw_emlrtRTEI);
     loop_ub = Xlshiftf->contents->size[0];
     for (i = 0; i < loop_ub; i++) {
       yhatlshift->data[i] = beta0->data[(int32_T)(npar + 1.0) - 1] *
@@ -11839,7 +11839,7 @@ void likyhat(const emlrtStack *sp, const captured_var *trend, const captured_var
   } else {
     i = yhatlshift->size[0];
     yhatlshift->size[0] = 1;
-    emxEnsureCapacity_real_T(sp, yhatlshift, i, &gw_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, yhatlshift, i, &fw_emlrtRTEI);
     yhatlshift->data[0] = 0.0;
   }
 

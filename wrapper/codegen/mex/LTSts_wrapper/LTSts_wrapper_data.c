@@ -661,14 +661,6 @@ emlrtRSInfo bs_emlrtRSI = {
     "internal\\applyScalarFunction.m" /* pathName */
 };
 
-emlrtRSInfo cs_emlrtRSI = {
-    38,        /* lineNo */
-    "fprintf", /* fcnName */
-    "C:\\Program "
-    "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\iofun\\fprintf.m" /* pathName
-                                                                          */
-};
-
 emlrtRSInfo gs_emlrtRSI = {
     15,    /* lineNo */
     "min", /* fcnName */
@@ -815,7 +807,7 @@ emlrtRSInfo
             "c.m" /* pathName */
 };
 
-emlrtRSInfo bab_emlrtRSI = {
+emlrtRSInfo aab_emlrtRSI = {
     11,                                /* lineNo */
     "function_handle/function_handle", /* fcnName */
     "C:\\Program "
@@ -824,7 +816,7 @@ emlrtRSInfo bab_emlrtRSI = {
 };
 
 emlrtRSInfo
-    cab_emlrtRSI =
+    bab_emlrtRSI =
         {
             1,             /* lineNo */
             "lsqcurvefit", /* fcnName */
@@ -833,7 +825,7 @@ emlrtRSInfo
                                                                          */
 };
 
-emlrtRSInfo fab_emlrtRSI =
+emlrtRSInfo eab_emlrtRSI =
     {
         57,         /* lineNo */
         "allOrAny", /* fcnName */
@@ -842,7 +834,7 @@ emlrtRSInfo fab_emlrtRSI =
         "m" /* pathName */
 };
 
-emlrtRSInfo gab_emlrtRSI = {
+emlrtRSInfo fab_emlrtRSI = {
     106,                   /* lineNo */
     "applyToMultipleDims", /* fcnName */
     "C:\\Program "
@@ -850,7 +842,7 @@ emlrtRSInfo gab_emlrtRSI = {
     "internal\\applyToMultipleDims.m" /* pathName */
 };
 
-emlrtRSInfo hab_emlrtRSI =
+emlrtRSInfo gab_emlrtRSI =
     {
         56, /* lineNo */
         "@(x)coder.internal.allOrAny(op,x,coder.internal.indexInt(1))", /* fcnName
@@ -860,7 +852,7 @@ emlrtRSInfo hab_emlrtRSI =
         "m" /* pathName */
 };
 
-emlrtRSInfo kab_emlrtRSI = {
+emlrtRSInfo jab_emlrtRSI = {
     16,                                      /* lineNo */
     "anonymous_function/anonymous_function", /* fcnName */
     "C:\\Program "
@@ -868,7 +860,7 @@ emlrtRSInfo kab_emlrtRSI = {
     "function.m" /* pathName */
 };
 
-emlrtRSInfo bbb_emlrtRSI = {
+emlrtRSInfo abb_emlrtRSI = {
     76,                   /* lineNo */
     "validateattributes", /* fcnName */
     "C:\\Program "
@@ -876,28 +868,28 @@ emlrtRSInfo bbb_emlrtRSI = {
     ".m" /* pathName */
 };
 
-emlrtRSInfo wbb_emlrtRSI = {
+emlrtRSInfo vbb_emlrtRSI = {
     46,     /* lineNo */
     "tcdf", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\tcdf.m" /* pathName
                                                                       */
 };
 
-emlrtRSInfo xbb_emlrtRSI = {
+emlrtRSInfo wbb_emlrtRSI = {
     44,     /* lineNo */
     "tcdf", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\tcdf.m" /* pathName
                                                                       */
 };
 
-emlrtRSInfo rdb_emlrtRSI = {
+emlrtRSInfo qdb_emlrtRSI = {
     55,     /* lineNo */
     "fcdf", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\fcdf.m" /* pathName
                                                                       */
 };
 
-emlrtRSInfo sdb_emlrtRSI = {
+emlrtRSInfo rdb_emlrtRSI = {
     59,     /* lineNo */
     "fcdf", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\fcdf.m" /* pathName
@@ -924,20 +916,11 @@ emlrtMCInfo
             "internal\\flt2str.m" /* pName */
 };
 
-emlrtMCInfo q_emlrtMCI = {
-    66,        /* lineNo */
-    18,        /* colNo */
-    "fprintf", /* fName */
-    "C:\\Program "
-    "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\iofun\\fprintf.m" /* pName
-                                                                          */
-};
-
 omp_lock_t emlrtLockGlobal;
 
 omp_nest_lock_t emlrtNestLockGlobal;
 
-emlrtRTEInfo d_emlrtRTEI = {
+emlrtRTEInfo c_emlrtRTEI = {
     19,             /* lineNo */
     23,             /* colNo */
     "scalexpAlloc", /* fName */
@@ -946,7 +929,7 @@ emlrtRTEInfo d_emlrtRTEI = {
     "m" /* pName */
 };
 
-emlrtRTEInfo f_emlrtRTEI = {
+emlrtRTEInfo e_emlrtRTEI = {
     124,             /* lineNo */
     27,              /* colNo */
     "unaryMinOrMax", /* fName */
@@ -955,7 +938,7 @@ emlrtRTEInfo f_emlrtRTEI = {
     "internal\\unaryMinOrMax.m" /* pName */
 };
 
-emlrtRTEInfo g_emlrtRTEI = {
+emlrtRTEInfo f_emlrtRTEI = {
     271,                   /* lineNo */
     27,                    /* colNo */
     "check_non_axis_size", /* fName */
@@ -964,7 +947,7 @@ emlrtRTEInfo g_emlrtRTEI = {
                                                                           */
 };
 
-emlrtRTEInfo o_emlrtRTEI = {
+emlrtRTEInfo n_emlrtRTEI = {
     15,                      /* lineNo */
     9,                       /* colNo */
     "assertSupportedString", /* fName */
@@ -982,7 +965,7 @@ emlrtDCInfo rd_emlrtDCI = {
 };
 
 emlrtRTEInfo
-    bb_emlrtRTEI =
+    ab_emlrtRTEI =
         {
             12,         /* lineNo */
             15,         /* colNo */
@@ -992,7 +975,7 @@ emlrtRTEInfo
             "m.m" /* pName */
 };
 
-emlrtRTEInfo ib_emlrtRTEI =
+emlrtRTEInfo hb_emlrtRTEI =
     {
         135,                   /* lineNo */
         23,                    /* colNo */
@@ -1002,7 +985,7 @@ emlrtRTEInfo ib_emlrtRTEI =
         "helper.m" /* pName */
 };
 
-emlrtRTEInfo jb_emlrtRTEI =
+emlrtRTEInfo ib_emlrtRTEI =
     {
         130,                   /* lineNo */
         23,                    /* colNo */
@@ -1012,7 +995,7 @@ emlrtRTEInfo jb_emlrtRTEI =
         "helper.m" /* pName */
 };
 
-emlrtRTEInfo qb_emlrtRTEI = {
+emlrtRTEInfo pb_emlrtRTEI = {
     47,          /* lineNo */
     13,          /* colNo */
     "infocheck", /* fName */
@@ -1021,7 +1004,7 @@ emlrtRTEInfo qb_emlrtRTEI = {
     "lapack\\infocheck.m" /* pName */
 };
 
-emlrtRTEInfo rb_emlrtRTEI = {
+emlrtRTEInfo qb_emlrtRTEI = {
     44,          /* lineNo */
     13,          /* colNo */
     "infocheck", /* fName */
@@ -1030,7 +1013,7 @@ emlrtRTEInfo rb_emlrtRTEI = {
     "lapack\\infocheck.m" /* pName */
 };
 
-emlrtRTEInfo ub_emlrtRTEI = {
+emlrtRTEInfo tb_emlrtRTEI = {
     53,       /* lineNo */
     15,       /* colNo */
     "bsxfun", /* fName */
@@ -1039,7 +1022,7 @@ emlrtRTEInfo ub_emlrtRTEI = {
                                                                          */
 };
 
-emlrtRTEInfo vb_emlrtRTEI =
+emlrtRTEInfo ub_emlrtRTEI =
     {
         83,         /* lineNo */
         5,          /* colNo */
@@ -1049,7 +1032,7 @@ emlrtRTEInfo vb_emlrtRTEI =
                                                                           */
 };
 
-emlrtRTEInfo xb_emlrtRTEI = {
+emlrtRTEInfo wb_emlrtRTEI = {
     13,     /* lineNo */
     9,      /* colNo */
     "sqrt", /* fName */
@@ -1118,7 +1101,7 @@ emlrtBCInfo ho_emlrtBCI = {
     0 /* checkKind */
 };
 
-emlrtRTEInfo dc_emlrtRTEI =
+emlrtRTEInfo cc_emlrtRTEI =
     {
         14,    /* lineNo */
         9,     /* colNo */
@@ -1128,7 +1111,7 @@ emlrtRTEInfo dc_emlrtRTEI =
                                                                           */
 };
 
-emlrtRTEInfo ec_emlrtRTEI = {
+emlrtRTEInfo dc_emlrtRTEI = {
     276,            /* lineNo */
     13,             /* colNo */
     "eml_gammainc", /* fName */
@@ -1137,7 +1120,7 @@ emlrtRTEInfo ec_emlrtRTEI = {
     "gammainc.m" /* pName */
 };
 
-emlrtRTEInfo fc_emlrtRTEI = {
+emlrtRTEInfo ec_emlrtRTEI = {
     356,            /* lineNo */
     13,             /* colNo */
     "eml_gammainc", /* fName */
@@ -1158,7 +1141,7 @@ emlrtECInfo
                                                                          */
 };
 
-emlrtRTEInfo wc_emlrtRTEI =
+emlrtRTEInfo vc_emlrtRTEI =
     {
         28,      /* lineNo */
         9,       /* colNo */
@@ -1168,7 +1151,7 @@ emlrtRTEInfo wc_emlrtRTEI =
                                                                           */
 };
 
-emlrtRTEInfo se_emlrtRTEI = {
+emlrtRTEInfo re_emlrtRTEI = {
     27,     /* lineNo */
     6,      /* colNo */
     "sort", /* fName */
@@ -1177,7 +1160,7 @@ emlrtRTEInfo se_emlrtRTEI = {
                                                                          */
 };
 
-emlrtRTEInfo ue_emlrtRTEI = {
+emlrtRTEInfo te_emlrtRTEI = {
     28,     /* lineNo */
     5,      /* colNo */
     "sort", /* fName */
@@ -1186,7 +1169,7 @@ emlrtRTEInfo ue_emlrtRTEI = {
                                                                          */
 };
 
-emlrtRTEInfo ef_emlrtRTEI = {
+emlrtRTEInfo df_emlrtRTEI = {
     15,      /* lineNo */
     13,      /* colNo */
     "isnan", /* fName */
@@ -1195,7 +1178,7 @@ emlrtRTEInfo ef_emlrtRTEI = {
                                                                         */
 };
 
-emlrtRTEInfo bk_emlrtRTEI = {
+emlrtRTEInfo ak_emlrtRTEI = {
     127,                         /* lineNo */
     6,                           /* colNo */
     "applyBinaryScalarFunction", /* fName */
@@ -1204,7 +1187,7 @@ emlrtRTEInfo bk_emlrtRTEI = {
     "internal\\applyBinaryScalarFunction.m" /* pName */
 };
 
-emlrtRTEInfo hl_emlrtRTEI = {
+emlrtRTEInfo gl_emlrtRTEI = {
     218,      /* lineNo */
     20,       /* colNo */
     "mtimes", /* fName */
@@ -1213,7 +1196,7 @@ emlrtRTEInfo hl_emlrtRTEI = {
     "blas\\mtimes.m" /* pName */
 };
 
-emlrtRTEInfo wl_emlrtRTEI = {
+emlrtRTEInfo vl_emlrtRTEI = {
     92,       /* lineNo */
     22,       /* colNo */
     "xgeqp3", /* fName */
@@ -1222,7 +1205,7 @@ emlrtRTEInfo wl_emlrtRTEI = {
     "lapack\\xgeqp3.m" /* pName */
 };
 
-emlrtRTEInfo yl_emlrtRTEI = {
+emlrtRTEInfo xl_emlrtRTEI = {
     105,      /* lineNo */
     1,        /* colNo */
     "xgeqp3", /* fName */
@@ -1231,7 +1214,7 @@ emlrtRTEInfo yl_emlrtRTEI = {
     "lapack\\xgeqp3.m" /* pName */
 };
 
-emlrtRTEInfo gm_emlrtRTEI = {
+emlrtRTEInfo fm_emlrtRTEI = {
     60,       /* lineNo */
     20,       /* colNo */
     "bsxfun", /* fName */
@@ -1240,7 +1223,7 @@ emlrtRTEInfo gm_emlrtRTEI = {
                                                                          */
 };
 
-emlrtRTEInfo us_emlrtRTEI = {
+emlrtRTEInfo ts_emlrtRTEI = {
     30,                    /* lineNo */
     21,                    /* colNo */
     "applyScalarFunction", /* fName */
@@ -1249,7 +1232,7 @@ emlrtRTEInfo us_emlrtRTEI = {
     "internal\\applyScalarFunction.m" /* pName */
 };
 
-emlrtRTEInfo ru_emlrtRTEI = {
+emlrtRTEInfo qu_emlrtRTEI = {
     134,       /* lineNo */
     5,         /* colNo */
     "prctile", /* fName */
@@ -1258,7 +1241,7 @@ emlrtRTEInfo ru_emlrtRTEI = {
 };
 
 emlrtRTEInfo
-    bw_emlrtRTEI =
+    aw_emlrtRTEI =
         {
             1,             /* lineNo */
             1,             /* colNo */
@@ -1269,7 +1252,7 @@ emlrtRTEInfo
 };
 
 emlrtRTEInfo
-    jx_emlrtRTEI =
+    ix_emlrtRTEI =
         {
             386,       /* lineNo */
             1,         /* colNo */
@@ -1280,7 +1263,7 @@ emlrtRTEInfo
 };
 
 emlrtRTEInfo
-    kx_emlrtRTEI =
+    jx_emlrtRTEI =
         {
             388,       /* lineNo */
             1,         /* colNo */
@@ -1291,7 +1274,7 @@ emlrtRTEInfo
 };
 
 emlrtRTEInfo
-    lx_emlrtRTEI =
+    kx_emlrtRTEI =
         {
             308,       /* lineNo */
             14,        /* colNo */
@@ -1302,7 +1285,7 @@ emlrtRTEInfo
 };
 
 emlrtRTEInfo
-    mx_emlrtRTEI =
+    lx_emlrtRTEI =
         {
             308,       /* lineNo */
             20,        /* colNo */
@@ -1364,15 +1347,7 @@ const real_T dv[31] = {0.0,
                        0.0057462165130101155,
                        0.0055547335519628011};
 
-emlrtRSInfo ydb_emlrtRSI = {
-    66,        /* lineNo */
-    "fprintf", /* fcnName */
-    "C:\\Program "
-    "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\iofun\\fprintf.m" /* pathName
-                                                                          */
-};
-
-emlrtRSInfo teb_emlrtRSI = {
+emlrtRSInfo seb_emlrtRSI = {
     27,      /* lineNo */
     "error", /* fcnName */
     "C:\\Program "
@@ -1381,7 +1356,7 @@ emlrtRSInfo teb_emlrtRSI = {
 };
 
 emlrtRSInfo
-    yeb_emlrtRSI =
+    xeb_emlrtRSI =
         {
             53,        /* lineNo */
             "flt2str", /* fcnName */

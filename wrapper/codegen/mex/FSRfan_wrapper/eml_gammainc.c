@@ -16,7 +16,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo rn_emlrtRSI = {
+static emlrtRSInfo pn_emlrtRSI = {
     242,            /* lineNo */
     "eml_gammainc", /* fcnName */
     "C:\\Program "
@@ -24,7 +24,7 @@ static emlrtRSInfo rn_emlrtRSI = {
     "gammainc.m" /* pathName */
 };
 
-static emlrtRSInfo sn_emlrtRSI = {
+static emlrtRSInfo qn_emlrtRSI = {
     220,            /* lineNo */
     "eml_gammainc", /* fcnName */
     "C:\\Program "
@@ -64,7 +64,7 @@ real_T eml_gammainc(const emlrtStack *sp, real_T x, real_T lgap1,
       if (0.5 < 2.2250738585072014E-308 * x) {
         xD0 = x;
       } else if ((x < 1.0) && (0.5 > 1.7976931348623157E+308 * x)) {
-        st.site = &xn_emlrtRSI;
+        st.site = &vn_emlrtRSI;
         if (x < 0.0) {
           emlrtErrorWithMessageIdR2018a(
               &st, &jb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
@@ -73,7 +73,7 @@ real_T eml_gammainc(const emlrtStack *sp, real_T x, real_T lgap1,
         xD0 = (-0.34657359027997264 - 0.5 * muDoubleScalarLog(x)) - 0.5;
       } else {
         v = 0.5 / x;
-        st.site = &wn_emlrtRSI;
+        st.site = &un_emlrtRSI;
         if (v < 0.0) {
           emlrtErrorWithMessageIdR2018a(
               &st, &jb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
@@ -176,7 +176,7 @@ real_T eml_gammainc(const emlrtStack *sp, real_T x, real_T lgap1,
       if (-0.72579135264472727 - xD0 < 709.782712893384) {
         rval = muDoubleScalarExp(-0.72579135264472727 - xD0) * v;
       } else {
-        st.site = &tn_emlrtRSI;
+        st.site = &rn_emlrtRSI;
         if (v < 0.0) {
           emlrtErrorWithMessageIdR2018a(
               &st, &jb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
@@ -204,7 +204,7 @@ real_T eml_gammainc(const emlrtStack *sp, real_T x, real_T lgap1,
           dj++;
         }
       } while (exitg1 == 0);
-      st.site = &sn_emlrtRSI;
+      st.site = &qn_emlrtRSI;
       if (x < 0.0) {
         emlrtErrorWithMessageIdR2018a(
             &st, &jb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
@@ -216,7 +216,7 @@ real_T eml_gammainc(const emlrtStack *sp, real_T x, real_T lgap1,
         if (dj - 1.0 == -1.0) {
           v = -1.0;
         } else {
-          st.site = &rn_emlrtRSI;
+          st.site = &pn_emlrtRSI;
           if (dj < 0.0) {
             emlrtErrorWithMessageIdR2018a(
                 &st, &jb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
@@ -255,7 +255,7 @@ real_T eml_gammainc(const emlrtStack *sp, real_T x, real_T lgap1,
       if (-0.72579135264472727 - xD0 < 709.782712893384) {
         rval = muDoubleScalarExp(-0.72579135264472727 - xD0) * v;
       } else {
-        st.site = &qn_emlrtRSI;
+        st.site = &on_emlrtRSI;
         if (v < 0.0) {
           emlrtErrorWithMessageIdR2018a(
               &st, &jb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
@@ -351,7 +351,7 @@ real_T eml_gammainc(const emlrtStack *sp, real_T x, real_T lgap1,
       if (-0.72579135264472727 - xD0 < 709.782712893384) {
         rval = muDoubleScalarExp(-0.72579135264472727 - xD0) * v;
       } else {
-        st.site = &nn_emlrtRSI;
+        st.site = &ln_emlrtRSI;
         if (v < 0.0) {
           emlrtErrorWithMessageIdR2018a(
               &st, &jb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",

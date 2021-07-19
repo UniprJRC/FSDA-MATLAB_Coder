@@ -19,7 +19,7 @@
 #include "sumMatrixIncludeNaN.h"
 
 /* Variable Definitions */
-static emlrtRSInfo oh_emlrtRSI = {
+static emlrtRSInfo tg_emlrtRSI = {
     20,    /* lineNo */
     "sum", /* fcnName */
     "C:\\Program "
@@ -27,7 +27,7 @@ static emlrtRSInfo oh_emlrtRSI = {
                                                                         */
 };
 
-static emlrtRSInfo ph_emlrtRSI = {
+static emlrtRSInfo ug_emlrtRSI = {
     99,        /* lineNo */
     "sumprod", /* fcnName */
     "C:\\Program "
@@ -35,7 +35,7 @@ static emlrtRSInfo ph_emlrtRSI = {
     "d.m" /* pathName */
 };
 
-static emlrtRSInfo qh_emlrtRSI = {
+static emlrtRSInfo vg_emlrtRSI = {
     74,                      /* lineNo */
     "combineVectorElements", /* fcnName */
     "C:\\Program "
@@ -43,7 +43,7 @@ static emlrtRSInfo qh_emlrtRSI = {
     "eVectorElements.m" /* pathName */
 };
 
-static emlrtRSInfo rh_emlrtRSI = {
+static emlrtRSInfo wg_emlrtRSI = {
     107,                /* lineNo */
     "blockedSummation", /* fcnName */
     "C:\\Program "
@@ -51,7 +51,7 @@ static emlrtRSInfo rh_emlrtRSI = {
     "dSummation.m" /* pathName */
 };
 
-static emlrtRSInfo sh_emlrtRSI = {
+static emlrtRSInfo xg_emlrtRSI = {
     22,                    /* lineNo */
     "sumMatrixIncludeNaN", /* fcnName */
     "C:\\Program "
@@ -59,7 +59,7 @@ static emlrtRSInfo sh_emlrtRSI = {
     "rixIncludeNaN.m" /* pathName */
 };
 
-static emlrtRSInfo th_emlrtRSI = {
+static emlrtRSInfo yg_emlrtRSI = {
     42,                 /* lineNo */
     "sumMatrixColumns", /* fcnName */
     "C:\\Program "
@@ -67,7 +67,7 @@ static emlrtRSInfo th_emlrtRSI = {
     "rixIncludeNaN.m" /* pathName */
 };
 
-static emlrtRSInfo uh_emlrtRSI = {
+static emlrtRSInfo ah_emlrtRSI = {
     57,                 /* lineNo */
     "sumMatrixColumns", /* fcnName */
     "C:\\Program "
@@ -75,7 +75,7 @@ static emlrtRSInfo uh_emlrtRSI = {
     "rixIncludeNaN.m" /* pathName */
 };
 
-static emlrtRSInfo oi_emlrtRSI = {
+static emlrtRSInfo gi_emlrtRSI = {
     112,                /* lineNo */
     "blockedSummation", /* fcnName */
     "C:\\Program "
@@ -83,7 +83,7 @@ static emlrtRSInfo oi_emlrtRSI = {
     "dSummation.m" /* pathName */
 };
 
-static emlrtRSInfo pi_emlrtRSI = {
+static emlrtRSInfo hi_emlrtRSI = {
     173,                /* lineNo */
     "colMajorFlatIter", /* fcnName */
     "C:\\Program "
@@ -91,7 +91,7 @@ static emlrtRSInfo pi_emlrtRSI = {
     "dSummation.m" /* pathName */
 };
 
-static emlrtRSInfo qi_emlrtRSI = {
+static emlrtRSInfo ii_emlrtRSI = {
     192,                /* lineNo */
     "colMajorFlatIter", /* fcnName */
     "C:\\Program "
@@ -99,7 +99,7 @@ static emlrtRSInfo qi_emlrtRSI = {
     "dSummation.m" /* pathName */
 };
 
-static emlrtRSInfo ri_emlrtRSI = {
+static emlrtRSInfo ji_emlrtRSI = {
     207,                /* lineNo */
     "colMajorFlatIter", /* fcnName */
     "C:\\Program "
@@ -107,7 +107,7 @@ static emlrtRSInfo ri_emlrtRSI = {
     "dSummation.m" /* pathName */
 };
 
-static emlrtRSInfo si_emlrtRSI = {
+static emlrtRSInfo ki_emlrtRSI = {
     227,                /* lineNo */
     "colMajorFlatIter", /* fcnName */
     "C:\\Program "
@@ -115,7 +115,7 @@ static emlrtRSInfo si_emlrtRSI = {
     "dSummation.m" /* pathName */
 };
 
-static emlrtRSInfo ti_emlrtRSI = {
+static emlrtRSInfo li_emlrtRSI = {
     238,                /* lineNo */
     "colMajorFlatIter", /* fcnName */
     "C:\\Program "
@@ -123,7 +123,7 @@ static emlrtRSInfo ti_emlrtRSI = {
     "dSummation.m" /* pathName */
 };
 
-static emlrtRTEInfo ig_emlrtRTEI = {
+static emlrtRTEInfo tg_emlrtRTEI = {
     20,    /* lineNo */
     1,     /* colNo */
     "sum", /* fName */
@@ -132,7 +132,7 @@ static emlrtRTEInfo ig_emlrtRTEI = {
                                                                         */
 };
 
-static emlrtRTEInfo jg_emlrtRTEI = {
+static emlrtRTEInfo ug_emlrtRTEI = {
     146,                /* lineNo */
     24,                 /* colNo */
     "blockedSummation", /* fName */
@@ -141,7 +141,7 @@ static emlrtRTEInfo jg_emlrtRTEI = {
     "dSummation.m" /* pName */
 };
 
-static emlrtRTEInfo kg_emlrtRTEI = {
+static emlrtRTEInfo vg_emlrtRTEI = {
     153,                /* lineNo */
     23,                 /* colNo */
     "blockedSummation", /* fName */
@@ -150,7 +150,7 @@ static emlrtRTEInfo kg_emlrtRTEI = {
     "dSummation.m" /* pName */
 };
 
-static emlrtRTEInfo lg_emlrtRTEI = {
+static emlrtRTEInfo wg_emlrtRTEI = {
     153,                /* lineNo */
     1,                  /* colNo */
     "blockedSummation", /* fName */
@@ -192,28 +192,28 @@ void b_sum(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   f_st.prev = &e_st;
   f_st.tls = e_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  st.site = &oh_emlrtRSI;
-  b_st.site = &ph_emlrtRSI;
-  c_st.site = &qh_emlrtRSI;
+  st.site = &tg_emlrtRSI;
+  b_st.site = &ug_emlrtRSI;
+  c_st.site = &vg_emlrtRSI;
   if ((x->size[0] == 0) || (x->size[1] == 0)) {
     hi = y->size[0];
     y->size[0] = x->size[0];
-    emxEnsureCapacity_real_T(&c_st, y, hi, &ig_emlrtRTEI);
+    emxEnsureCapacity_real_T(&c_st, y, hi, &tg_emlrtRTEI);
     firstBlockLength = x->size[0];
     for (hi = 0; hi < firstBlockLength; hi++) {
       y->data[hi] = 0.0;
     }
   } else {
-    emxInit_real_T(&c_st, &bsum, 1, &lg_emlrtRTEI, true);
-    d_st.site = &oi_emlrtRSI;
+    emxInit_real_T(&c_st, &bsum, 1, &wg_emlrtRTEI, true);
+    d_st.site = &gi_emlrtRSI;
     vstride = x->size[0];
     bvstride = x->size[0] << 10;
     hi = y->size[0];
     y->size[0] = x->size[0];
-    emxEnsureCapacity_real_T(&d_st, y, hi, &jg_emlrtRTEI);
+    emxEnsureCapacity_real_T(&d_st, y, hi, &ug_emlrtRTEI);
     hi = bsum->size[0];
     bsum->size[0] = x->size[0];
-    emxEnsureCapacity_real_T(&d_st, bsum, hi, &kg_emlrtRTEI);
+    emxEnsureCapacity_real_T(&d_st, bsum, hi, &vg_emlrtRTEI);
     if (x->size[1] <= 1024) {
       firstBlockLength = x->size[1];
       lastBlockLength = 0;
@@ -228,9 +228,9 @@ void b_sum(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
         lastBlockLength = 1024;
       }
     }
-    e_st.site = &pi_emlrtRSI;
+    e_st.site = &hi_emlrtRSI;
     if (x->size[0] > 2147483646) {
-      f_st.site = &pc_emlrtRSI;
+      f_st.site = &oc_emlrtRSI;
       check_forloop_overflow_error(&f_st);
     }
     for (xj = 0; xj < vstride; xj++) {
@@ -239,9 +239,9 @@ void b_sum(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
     }
     for (k = 2; k <= firstBlockLength; k++) {
       xoffset = (k - 1) * vstride;
-      e_st.site = &qi_emlrtRSI;
+      e_st.site = &ii_emlrtRSI;
       if (vstride > 2147483646) {
-        f_st.site = &pc_emlrtRSI;
+        f_st.site = &oc_emlrtRSI;
         check_forloop_overflow_error(&f_st);
       }
       for (xj = 0; xj < vstride; xj++) {
@@ -250,9 +250,9 @@ void b_sum(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
     }
     for (ib = 2; ib <= nblocks; ib++) {
       firstBlockLength = (ib - 1) * bvstride;
-      e_st.site = &ri_emlrtRSI;
+      e_st.site = &ji_emlrtRSI;
       if (vstride > 2147483646) {
-        f_st.site = &pc_emlrtRSI;
+        f_st.site = &oc_emlrtRSI;
         check_forloop_overflow_error(&f_st);
       }
       for (xj = 0; xj < vstride; xj++) {
@@ -265,12 +265,12 @@ void b_sum(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
       }
       for (k = 2; k <= hi; k++) {
         xoffset = firstBlockLength + (k - 1) * vstride;
-        e_st.site = &si_emlrtRSI;
+        e_st.site = &ki_emlrtRSI;
         for (xj = 0; xj < vstride; xj++) {
           bsum->data[xj] += x->data[xoffset + xj];
         }
       }
-      e_st.site = &ti_emlrtRSI;
+      e_st.site = &li_emlrtRSI;
       for (xj = 0; xj < vstride; xj++) {
         y->data[xj] += bsum->data[xj];
       }
@@ -295,7 +295,7 @@ real_T sum(const emlrtStack *sp, const emxArray_real_T *x)
   int32_T nleft;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &oh_emlrtRSI;
+  st.site = &tg_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
@@ -306,15 +306,15 @@ real_T sum(const emlrtStack *sp, const emxArray_real_T *x)
   e_st.tls = d_st.tls;
   f_st.prev = &e_st;
   f_st.tls = e_st.tls;
-  b_st.site = &ph_emlrtRSI;
-  c_st.site = &qh_emlrtRSI;
+  b_st.site = &ug_emlrtRSI;
+  c_st.site = &vg_emlrtRSI;
   if (x->size[0] == 0) {
     y = 0.0;
   } else {
-    d_st.site = &rh_emlrtRSI;
-    e_st.site = &sh_emlrtRSI;
+    d_st.site = &wg_emlrtRSI;
+    e_st.site = &xg_emlrtRSI;
     if (x->size[0] < 4096) {
-      f_st.site = &th_emlrtRSI;
+      f_st.site = &yg_emlrtRSI;
       y = sumColumnB(&f_st, x, x->size[0]);
     } else {
       nfb = x->size[0] / 4096;
@@ -325,7 +325,7 @@ real_T sum(const emlrtStack *sp, const emxArray_real_T *x)
         y += sumColumnB4(x, ((ib - 1) << 12) + 1);
       }
       if (nleft > 0) {
-        f_st.site = &uh_emlrtRSI;
+        f_st.site = &ah_emlrtRSI;
         y += b_sumColumnB(&f_st, x, nleft, inb + 1);
       }
     }

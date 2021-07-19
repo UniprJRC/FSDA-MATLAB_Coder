@@ -18,7 +18,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRSInfo hc_emlrtRSI = {
+static emlrtRSInfo gc_emlrtRSI = {
     29,               /* lineNo */
     "nullAssignment", /* fcnName */
     "C:\\Program "
@@ -26,7 +26,7 @@ static emlrtRSInfo hc_emlrtRSI = {
     "internal\\nullAssignment.m" /* pathName */
 };
 
-static emlrtRSInfo ic_emlrtRSI = {
+static emlrtRSInfo hc_emlrtRSI = {
     33,               /* lineNo */
     "nullAssignment", /* fcnName */
     "C:\\Program "
@@ -34,7 +34,7 @@ static emlrtRSInfo ic_emlrtRSI = {
     "internal\\nullAssignment.m" /* pathName */
 };
 
-static emlrtRSInfo jc_emlrtRSI = {
+static emlrtRSInfo ic_emlrtRSI = {
     356,              /* lineNo */
     "delete_columns", /* fcnName */
     "C:\\Program "
@@ -42,7 +42,7 @@ static emlrtRSInfo jc_emlrtRSI = {
     "internal\\nullAssignment.m" /* pathName */
 };
 
-static emlrtRSInfo kc_emlrtRSI = {
+static emlrtRSInfo jc_emlrtRSI = {
     357,              /* lineNo */
     "delete_columns", /* fcnName */
     "C:\\Program "
@@ -50,7 +50,7 @@ static emlrtRSInfo kc_emlrtRSI = {
     "internal\\nullAssignment.m" /* pathName */
 };
 
-static emlrtRSInfo lc_emlrtRSI = {
+static emlrtRSInfo kc_emlrtRSI = {
     365,              /* lineNo */
     "delete_columns", /* fcnName */
     "C:\\Program "
@@ -58,7 +58,7 @@ static emlrtRSInfo lc_emlrtRSI = {
     "internal\\nullAssignment.m" /* pathName */
 };
 
-static emlrtRSInfo mc_emlrtRSI = {
+static emlrtRSInfo lc_emlrtRSI = {
     367,              /* lineNo */
     "delete_columns", /* fcnName */
     "C:\\Program "
@@ -66,7 +66,7 @@ static emlrtRSInfo mc_emlrtRSI = {
     "internal\\nullAssignment.m" /* pathName */
 };
 
-static emlrtRSInfo nc_emlrtRSI = {
+static emlrtRSInfo mc_emlrtRSI = {
     370,              /* lineNo */
     "delete_columns", /* fcnName */
     "C:\\Program "
@@ -74,7 +74,7 @@ static emlrtRSInfo nc_emlrtRSI = {
     "internal\\nullAssignment.m" /* pathName */
 };
 
-static emlrtRSInfo oc_emlrtRSI = {
+static emlrtRSInfo nc_emlrtRSI = {
     372,              /* lineNo */
     "delete_columns", /* fcnName */
     "C:\\Program "
@@ -82,7 +82,7 @@ static emlrtRSInfo oc_emlrtRSI = {
     "internal\\nullAssignment.m" /* pathName */
 };
 
-static emlrtRSInfo pc_emlrtRSI = {
+static emlrtRSInfo oc_emlrtRSI = {
     259,             /* lineNo */
     "make_bitarray", /* fcnName */
     "C:\\Program "
@@ -90,7 +90,7 @@ static emlrtRSInfo pc_emlrtRSI = {
     "internal\\nullAssignment.m" /* pathName */
 };
 
-static emlrtRSInfo qc_emlrtRSI = {
+static emlrtRSInfo pc_emlrtRSI = {
     132,        /* lineNo */
     "num_true", /* fcnName */
     "C:\\Program "
@@ -98,7 +98,7 @@ static emlrtRSInfo qc_emlrtRSI = {
     "internal\\nullAssignment.m" /* pathName */
 };
 
-static emlrtRSInfo he_emlrtRSI = {
+static emlrtRSInfo ge_emlrtRSI = {
     13,               /* lineNo */
     "nullAssignment", /* fcnName */
     "C:\\Program "
@@ -106,7 +106,7 @@ static emlrtRSInfo he_emlrtRSI = {
     "internal\\nullAssignment.m" /* pathName */
 };
 
-static emlrtRSInfo ie_emlrtRSI = {
+static emlrtRSInfo he_emlrtRSI = {
     17,               /* lineNo */
     "nullAssignment", /* fcnName */
     "C:\\Program "
@@ -114,7 +114,7 @@ static emlrtRSInfo ie_emlrtRSI = {
     "internal\\nullAssignment.m" /* pathName */
 };
 
-static emlrtRSInfo je_emlrtRSI = {
+static emlrtRSInfo ie_emlrtRSI = {
     169,                      /* lineNo */
     "onearg_null_assignment", /* fcnName */
     "C:\\Program "
@@ -122,7 +122,7 @@ static emlrtRSInfo je_emlrtRSI = {
     "internal\\nullAssignment.m" /* pathName */
 };
 
-static emlrtRTEInfo rb_emlrtRTEI = {
+static emlrtRTEInfo sb_emlrtRTEI = {
     379,              /* lineNo */
     1,                /* colNo */
     "delete_columns", /* fName */
@@ -131,7 +131,7 @@ static emlrtRTEInfo rb_emlrtRTEI = {
     "internal\\nullAssignment.m" /* pName */
 };
 
-static emlrtRTEInfo sb_emlrtRTEI = {
+static emlrtRTEInfo tb_emlrtRTEI = {
     81,                /* lineNo */
     27,                /* colNo */
     "validate_inputs", /* fName */
@@ -140,7 +140,7 @@ static emlrtRTEInfo sb_emlrtRTEI = {
     "internal\\nullAssignment.m" /* pName */
 };
 
-static emlrtRTEInfo tb_emlrtRTEI = {
+static emlrtRTEInfo ub_emlrtRTEI = {
     184,                      /* lineNo */
     9,                        /* colNo */
     "onearg_null_assignment", /* fName */
@@ -149,7 +149,7 @@ static emlrtRTEInfo tb_emlrtRTEI = {
     "internal\\nullAssignment.m" /* pName */
 };
 
-static emlrtRTEInfo ub_emlrtRTEI = {
+static emlrtRTEInfo vb_emlrtRTEI = {
     85,                /* lineNo */
     27,                /* colNo */
     "validate_inputs", /* fName */
@@ -158,7 +158,7 @@ static emlrtRTEInfo ub_emlrtRTEI = {
     "internal\\nullAssignment.m" /* pName */
 };
 
-static emlrtRTEInfo sl_emlrtRTEI = {
+static emlrtRTEInfo bm_emlrtRTEI = {
     365,              /* lineNo */
     9,                /* colNo */
     "nullAssignment", /* fName */
@@ -167,7 +167,7 @@ static emlrtRTEInfo sl_emlrtRTEI = {
     "internal\\nullAssignment.m" /* pName */
 };
 
-static emlrtRTEInfo tl_emlrtRTEI = {
+static emlrtRTEInfo cm_emlrtRTEI = {
     33,               /* lineNo */
     13,               /* colNo */
     "nullAssignment", /* fName */
@@ -176,7 +176,7 @@ static emlrtRTEInfo tl_emlrtRTEI = {
     "internal\\nullAssignment.m" /* pName */
 };
 
-static emlrtRTEInfo ul_emlrtRTEI = {
+static emlrtRTEInfo dm_emlrtRTEI = {
     363,              /* lineNo */
     9,                /* colNo */
     "nullAssignment", /* fName */
@@ -185,7 +185,7 @@ static emlrtRTEInfo ul_emlrtRTEI = {
     "internal\\nullAssignment.m" /* pName */
 };
 
-static emlrtRTEInfo vl_emlrtRTEI = {
+static emlrtRTEInfo em_emlrtRTEI = {
     17,               /* lineNo */
     9,                /* colNo */
     "nullAssignment", /* fName */
@@ -211,9 +211,9 @@ static int32_T num_true(const emlrtStack *sp, const emxArray_boolean_T *b)
   b_st.tls = st.tls;
   n = 0;
   b_b = b->size[1];
-  st.site = &qc_emlrtRSI;
+  st.site = &pc_emlrtRSI;
   if ((1 <= b->size[1]) && (b->size[1] > 2147483646)) {
-    b_st.site = &pb_emlrtRSI;
+    b_st.site = &ob_emlrtRSI;
     check_forloop_overflow_error(&b_st);
   }
   for (k = 0; k < b_b; k++) {
@@ -233,7 +233,7 @@ void b_nullAssignment(const emlrtStack *sp, emxArray_real_T *x,
   int32_T nxout;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &he_emlrtRSI;
+  st.site = &ge_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   k = idx->size[1];
@@ -241,13 +241,13 @@ void b_nullAssignment(const emlrtStack *sp, emxArray_real_T *x,
     k--;
   }
   if (k > x->size[1]) {
-    emlrtErrorWithMessageIdR2018a(&st, &ub_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(&st, &vb_emlrtRTEI,
                                   "MATLAB:subsdeldimmismatch",
                                   "MATLAB:subsdeldimmismatch", 0);
   }
-  st.site = &ie_emlrtRSI;
+  st.site = &he_emlrtRSI;
   nxin = x->size[1];
-  b_st.site = &je_emlrtRSI;
+  b_st.site = &ie_emlrtRSI;
   nxout = x->size[1] - num_true(&b_st, idx);
   k0 = -1;
   for (k = 0; k < nxin; k++) {
@@ -257,7 +257,7 @@ void b_nullAssignment(const emlrtStack *sp, emxArray_real_T *x,
     }
   }
   if (nxout > nxin) {
-    emlrtErrorWithMessageIdR2018a(&st, &tb_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(&st, &ub_emlrtRTEI,
                                   "Coder:builtins:AssertionFailed",
                                   "Coder:builtins:AssertionFailed", 0);
   }
@@ -267,7 +267,7 @@ void b_nullAssignment(const emlrtStack *sp, emxArray_real_T *x,
   } else {
     x->size[1] = nxout;
   }
-  emxEnsureCapacity_real_T(&st, x, nxin, &vl_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, x, nxin, &em_emlrtRTEI);
 }
 
 void nullAssignment(const emlrtStack *sp, emxArray_real_T *x,
@@ -296,7 +296,7 @@ void nullAssignment(const emlrtStack *sp, emxArray_real_T *x,
   d_st.prev = &c_st;
   d_st.tls = c_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  st.site = &hc_emlrtRSI;
+  st.site = &gc_emlrtRSI;
   overflow = true;
   k = 0;
   exitg1 = false;
@@ -309,30 +309,30 @@ void nullAssignment(const emlrtStack *sp, emxArray_real_T *x,
     }
   }
   if (!overflow) {
-    emlrtErrorWithMessageIdR2018a(&st, &sb_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(&st, &tb_emlrtRTEI,
                                   "MATLAB:subsdeldimmismatch",
                                   "MATLAB:subsdeldimmismatch", 0);
   }
-  st.site = &ic_emlrtRSI;
+  st.site = &hc_emlrtRSI;
   nrowx = x->size[0];
   ncolx = x->size[1];
   if (idx->size[1] == 1) {
     ncols = x->size[1] - 1;
     b_b = idx->data[0];
-    b_st.site = &jc_emlrtRSI;
+    b_st.site = &ic_emlrtRSI;
     if (idx->data[0] > x->size[1] - 1) {
       overflow = false;
     } else {
       overflow = (x->size[1] - 1 > 2147483646);
     }
     if (overflow) {
-      c_st.site = &pb_emlrtRSI;
+      c_st.site = &ob_emlrtRSI;
       check_forloop_overflow_error(&c_st);
     }
     for (j = b_b; j <= ncols; j++) {
-      b_st.site = &kc_emlrtRSI;
+      b_st.site = &jc_emlrtRSI;
       if ((1 <= nrowx) && (nrowx > 2147483646)) {
-        c_st.site = &pb_emlrtRSI;
+        c_st.site = &ob_emlrtRSI;
         check_forloop_overflow_error(&c_st);
       }
       for (i = 0; i < nrowx; i++) {
@@ -340,38 +340,38 @@ void nullAssignment(const emlrtStack *sp, emxArray_real_T *x,
       }
     }
   } else {
-    emxInit_boolean_T(&st, &b, 2, &ul_emlrtRTEI, true);
-    b_st.site = &lc_emlrtRSI;
+    emxInit_boolean_T(&st, &b, 2, &dm_emlrtRTEI, true);
+    b_st.site = &kc_emlrtRSI;
     j = b->size[0] * b->size[1];
     b->size[0] = 1;
     b->size[1] = x->size[1];
-    emxEnsureCapacity_boolean_T(&b_st, b, j, &sl_emlrtRTEI);
+    emxEnsureCapacity_boolean_T(&b_st, b, j, &bm_emlrtRTEI);
     k = x->size[1];
     for (j = 0; j < k; j++) {
       b->data[j] = false;
     }
     b_b = idx->size[1];
-    c_st.site = &pc_emlrtRSI;
+    c_st.site = &oc_emlrtRSI;
     if ((1 <= idx->size[1]) && (idx->size[1] > 2147483646)) {
-      d_st.site = &pb_emlrtRSI;
+      d_st.site = &ob_emlrtRSI;
       check_forloop_overflow_error(&d_st);
     }
     for (k = 0; k < b_b; k++) {
       b->data[idx->data[k] - 1] = true;
     }
-    b_st.site = &mc_emlrtRSI;
+    b_st.site = &lc_emlrtRSI;
     ncols = x->size[1] - num_true(&b_st, b);
     j = 0;
-    b_st.site = &nc_emlrtRSI;
+    b_st.site = &mc_emlrtRSI;
     if ((1 <= x->size[1]) && (x->size[1] > 2147483646)) {
-      c_st.site = &pb_emlrtRSI;
+      c_st.site = &ob_emlrtRSI;
       check_forloop_overflow_error(&c_st);
     }
     for (k = 0; k < ncolx; k++) {
       if ((k + 1 > b->size[1]) || (!b->data[k])) {
-        b_st.site = &oc_emlrtRSI;
+        b_st.site = &nc_emlrtRSI;
         if ((1 <= nrowx) && (nrowx > 2147483646)) {
-          c_st.site = &pb_emlrtRSI;
+          c_st.site = &ob_emlrtRSI;
           check_forloop_overflow_error(&c_st);
         }
         for (i = 0; i < nrowx; i++) {
@@ -383,7 +383,7 @@ void nullAssignment(const emlrtStack *sp, emxArray_real_T *x,
     emxFree_boolean_T(&b);
   }
   if (ncols > ncolx) {
-    emlrtErrorWithMessageIdR2018a(&st, &rb_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(&st, &sb_emlrtRTEI,
                                   "Coder:builtins:AssertionFailed",
                                   "Coder:builtins:AssertionFailed", 0);
   }
@@ -402,7 +402,7 @@ void nullAssignment(const emlrtStack *sp, emxArray_real_T *x,
   j = x->size[0] * x->size[1];
   x->size[0] = b_b + 1;
   x->size[1] = k;
-  emxEnsureCapacity_real_T(&st, x, j, &tl_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, x, j, &cm_emlrtRTEI);
   emlrtHeapReferenceStackLeaveFcnR2012b((emlrtCTX)sp);
 }
 

@@ -128,7 +128,7 @@ static emlrtBCInfo qn_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtRTEInfo cu_emlrtRTEI = {
+static emlrtRTEInfo bu_emlrtRTEI = {
     157,     /* lineNo */
     1,       /* colNo */
     "pdist", /* fName */
@@ -136,7 +136,7 @@ static emlrtRTEInfo cu_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo du_emlrtRTEI = {
+static emlrtRTEInfo cu_emlrtRTEI = {
     157,     /* lineNo */
     5,       /* colNo */
     "pdist", /* fName */
@@ -144,7 +144,7 @@ static emlrtRTEInfo du_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo eu_emlrtRTEI = {
+static emlrtRTEInfo du_emlrtRTEI = {
     249,     /* lineNo */
     5,       /* colNo */
     "pdist", /* fName */
@@ -152,7 +152,7 @@ static emlrtRTEInfo eu_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo fu_emlrtRTEI = {
+static emlrtRTEInfo eu_emlrtRTEI = {
     248,     /* lineNo */
     5,       /* colNo */
     "pdist", /* fName */
@@ -188,38 +188,38 @@ void pdist(const emlrtStack *sp, const emxArray_real_T *Xin, emxArray_real_T *Y)
     Y->size[0] = 1;
     Y->size[1] = 0;
   } else {
-    emxInit_real_T(sp, &X, 2, &cu_emlrtRTEI, true);
+    emxInit_real_T(sp, &X, 2, &bu_emlrtRTEI, true);
     i = X->size[0] * X->size[1];
     X->size[0] = 1;
     X->size[1] = Xin->size[0];
-    emxEnsureCapacity_real_T(sp, X, i, &cu_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, X, i, &bu_emlrtRTEI);
     loop_ub = Xin->size[0];
     for (i = 0; i < loop_ub; i++) {
       X->data[i] = Xin->data[i];
     }
-    emxInit_real_T(sp, &b_Xin, 2, &du_emlrtRTEI, true);
+    emxInit_real_T(sp, &b_Xin, 2, &cu_emlrtRTEI, true);
     i = b_Xin->size[0] * b_Xin->size[1];
     b_Xin->size[0] = 1;
     b_Xin->size[1] = Xin->size[0];
-    emxEnsureCapacity_real_T(sp, b_Xin, i, &du_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, b_Xin, i, &cu_emlrtRTEI);
     loop_ub = Xin->size[0];
     for (i = 0; i < loop_ub; i++) {
       b_Xin->data[i] = Xin->data[i];
     }
-    emxInit_boolean_T(sp, &logIndX, 2, &fu_emlrtRTEI, true);
+    emxInit_boolean_T(sp, &logIndX, 2, &eu_emlrtRTEI, true);
     st.site = &tu_emlrtRSI;
     scanfornan(&st, b_Xin, Xin->size[0], logIndX);
     st.site = &uu_emlrtRSI;
     i = Y->size[0] * Y->size[1];
     Y->size[0] = 1;
-    emxEnsureCapacity_real_T(&st, Y, i, &eu_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, Y, i, &du_emlrtRTEI);
     emxFree_real_T(&b_Xin);
     if (nd < 0) {
       emlrtNonNegativeCheckR2012b(nd, &oi_emlrtDCI, &st);
     }
     i = Y->size[0] * Y->size[1];
     Y->size[1] = nd;
-    emxEnsureCapacity_real_T(&st, Y, i, &eu_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, Y, i, &du_emlrtRTEI);
     for (i = 0; i < nd; i++) {
       Y->data[i] = rtNaN;
     }
@@ -254,7 +254,7 @@ void pdist(const emlrtStack *sp, const emxArray_real_T *Xin, emxArray_real_T *Y)
                7.0;
           if (qq < 0.0) {
             emlrtErrorWithMessageIdR2018a(
-                &c_st, &xb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+                &c_st, &wb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
                 "Coder:toolbox:ElFunDomainError", 3, 4, 4, "sqrt");
           }
           qq = muDoubleScalarSqrt(qq);

@@ -54,14 +54,16 @@ void o_error(const emlrtStack *sp);
 
 void p_error(const emlrtStack *sp);
 
-void q_error(const emlrtStack *sp, real_T varargin_3, real_T varargin_4);
+void q_error(const emlrtStack *sp);
 
-void r_error(const emlrtStack *sp);
+void r_error(const emlrtStack *sp, real_T varargin_3, real_T varargin_4);
 
 void s_error(const emlrtStack *sp);
 
-void t_error(const emlrtStack *sp, real_T varargin_3, real_T varargin_4);
+void t_error(const emlrtStack *sp);
 
-void u_error(const emlrtStack *sp);
+void u_error(const emlrtStack *sp, real_T varargin_3, real_T varargin_4);
+
+void v_error(const emlrtStack *sp);
 
 /* End of code generation (error.h) */

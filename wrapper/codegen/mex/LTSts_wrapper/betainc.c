@@ -19,7 +19,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo ccb_emlrtRSI = {
+static emlrtRSInfo bcb_emlrtRSI = {
     22,        /* lineNo */
     "betainc", /* fcnName */
     "C:\\Program "
@@ -27,7 +27,7 @@ static emlrtRSInfo ccb_emlrtRSI = {
                                                                             */
 };
 
-static emlrtRSInfo dcb_emlrtRSI = {
+static emlrtRSInfo ccb_emlrtRSI = {
     33,        /* lineNo */
     "betainc", /* fcnName */
     "C:\\Program "
@@ -35,7 +35,7 @@ static emlrtRSInfo dcb_emlrtRSI = {
                                                                             */
 };
 
-static emlrtRSInfo ecb_emlrtRSI = {
+static emlrtRSInfo dcb_emlrtRSI = {
     37,        /* lineNo */
     "betainc", /* fcnName */
     "C:\\Program "
@@ -43,7 +43,7 @@ static emlrtRSInfo ecb_emlrtRSI = {
                                                                             */
 };
 
-static emlrtRSInfo fcb_emlrtRSI = {
+static emlrtRSInfo ecb_emlrtRSI = {
     40,        /* lineNo */
     "betainc", /* fcnName */
     "C:\\Program "
@@ -51,7 +51,7 @@ static emlrtRSInfo fcb_emlrtRSI = {
                                                                             */
 };
 
-static emlrtRSInfo gcb_emlrtRSI = {
+static emlrtRSInfo fcb_emlrtRSI = {
     98,        /* lineNo */
     "betainc", /* fcnName */
     "C:\\Program "
@@ -59,7 +59,7 @@ static emlrtRSInfo gcb_emlrtRSI = {
                                                                             */
 };
 
-static emlrtRSInfo hcb_emlrtRSI = {
+static emlrtRSInfo gcb_emlrtRSI = {
     128,           /* lineNo */
     "eml_betainc", /* fcnName */
     "C:\\Program "
@@ -67,7 +67,7 @@ static emlrtRSInfo hcb_emlrtRSI = {
     "betainc.m" /* pathName */
 };
 
-static emlrtRSInfo icb_emlrtRSI = {
+static emlrtRSInfo hcb_emlrtRSI = {
     126,           /* lineNo */
     "eml_betainc", /* fcnName */
     "C:\\Program "
@@ -75,7 +75,7 @@ static emlrtRSInfo icb_emlrtRSI = {
     "betainc.m" /* pathName */
 };
 
-static emlrtRSInfo jcb_emlrtRSI = {
+static emlrtRSInfo icb_emlrtRSI = {
     125,           /* lineNo */
     "eml_betainc", /* fcnName */
     "C:\\Program "
@@ -83,7 +83,7 @@ static emlrtRSInfo jcb_emlrtRSI = {
     "betainc.m" /* pathName */
 };
 
-static emlrtRSInfo kcb_emlrtRSI = {
+static emlrtRSInfo jcb_emlrtRSI = {
     118,           /* lineNo */
     "eml_betainc", /* fcnName */
     "C:\\Program "
@@ -91,7 +91,7 @@ static emlrtRSInfo kcb_emlrtRSI = {
     "betainc.m" /* pathName */
 };
 
-static emlrtRSInfo lcb_emlrtRSI = {
+static emlrtRSInfo kcb_emlrtRSI = {
     115,           /* lineNo */
     "eml_betainc", /* fcnName */
     "C:\\Program "
@@ -99,7 +99,7 @@ static emlrtRSInfo lcb_emlrtRSI = {
     "betainc.m" /* pathName */
 };
 
-static emlrtRSInfo mcb_emlrtRSI = {
+static emlrtRSInfo lcb_emlrtRSI = {
     114,           /* lineNo */
     "eml_betainc", /* fcnName */
     "C:\\Program "
@@ -107,7 +107,7 @@ static emlrtRSInfo mcb_emlrtRSI = {
     "betainc.m" /* pathName */
 };
 
-static emlrtRSInfo ncb_emlrtRSI = {
+static emlrtRSInfo mcb_emlrtRSI = {
     102,           /* lineNo */
     "eml_betainc", /* fcnName */
     "C:\\Program "
@@ -115,7 +115,7 @@ static emlrtRSInfo ncb_emlrtRSI = {
     "betainc.m" /* pathName */
 };
 
-static emlrtRSInfo ocb_emlrtRSI = {
+static emlrtRSInfo ncb_emlrtRSI = {
     97,            /* lineNo */
     "eml_betainc", /* fcnName */
     "C:\\Program "
@@ -123,7 +123,7 @@ static emlrtRSInfo ocb_emlrtRSI = {
     "betainc.m" /* pathName */
 };
 
-static emlrtRSInfo pcb_emlrtRSI = {
+static emlrtRSInfo ocb_emlrtRSI = {
     92,            /* lineNo */
     "eml_betainc", /* fcnName */
     "C:\\Program "
@@ -131,7 +131,7 @@ static emlrtRSInfo pcb_emlrtRSI = {
     "betainc.m" /* pathName */
 };
 
-static emlrtRSInfo qcb_emlrtRSI = {
+static emlrtRSInfo pcb_emlrtRSI = {
     89,            /* lineNo */
     "eml_betainc", /* fcnName */
     "C:\\Program "
@@ -139,7 +139,7 @@ static emlrtRSInfo qcb_emlrtRSI = {
     "betainc.m" /* pathName */
 };
 
-static emlrtRTEInfo pc_emlrtRTEI = {
+static emlrtRTEInfo oc_emlrtRTEI = {
     117,                    /* lineNo */
     9,                      /* colNo */
     "check_betainc_inputs", /* fName */
@@ -162,28 +162,28 @@ creal_T b_betainc(const emlrtStack *sp, real_T x, real_T a, real_T b)
   boolean_T guard1 = false;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &ccb_emlrtRSI;
+  st.site = &bcb_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   if ((!(0.0 <= x)) || (!(x <= 1.0))) {
-    emlrtErrorWithMessageIdR2018a(&st, &pc_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(&st, &oc_emlrtRTEI,
                                   "Coder:MATLAB:betainc_XOutOfRange",
                                   "Coder:MATLAB:betainc_XOutOfRange", 0);
   }
   glna1 = a;
-  st.site = &dcb_emlrtRSI;
+  st.site = &ccb_emlrtRSI;
   gammaln(&st, &glna1);
   glnb1 = b;
-  st.site = &ecb_emlrtRSI;
+  st.site = &dcb_emlrtRSI;
   gammaln(&st, &glnb1);
   b_x = a + b;
   log1mx = b_x;
-  st.site = &fcb_emlrtRSI;
+  st.site = &ecb_emlrtRSI;
   gammaln(&st, &log1mx);
   glna1 = (glna1 + glnb1) - log1mx;
-  st.site = &gcb_emlrtRSI;
+  st.site = &fcb_emlrtRSI;
   if ((0.0 < x) && (x < 1.0)) {
     if (muDoubleScalarIsInf(a)) {
       if (!muDoubleScalarIsInf(b)) {
@@ -196,19 +196,19 @@ creal_T b_betainc(const emlrtStack *sp, real_T x, real_T a, real_T b)
     } else {
       guard1 = false;
       if (b_x < 1.0E+7) {
-        b_st.site = &qcb_emlrtRSI;
+        b_st.site = &pcb_emlrtRSI;
         glnb1 = muDoubleScalarLog(x);
         if (1.0 - x != 1.0) {
-          b_st.site = &pcb_emlrtRSI;
+          b_st.site = &ocb_emlrtRSI;
           log1mx = muDoubleScalarLog(1.0 - x) * (-x / ((1.0 - x) - 1.0));
         } else {
           log1mx = -x;
         }
         if (x < (a + 1.0) / (b_x + 2.0)) {
-          b_st.site = &ocb_emlrtRSI;
+          b_st.site = &ncb_emlrtRSI;
           if (a < 0.0) {
             emlrtErrorWithMessageIdR2018a(
-                &b_st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+                &b_st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
                 "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
           }
           glna1 = 1.0 - muDoubleScalarExp(
@@ -216,10 +216,10 @@ creal_T b_betainc(const emlrtStack *sp, real_T x, real_T a, real_T b)
                             glna1) *
                             betainc_cf(x, a, b);
         } else {
-          b_st.site = &ncb_emlrtRSI;
+          b_st.site = &mcb_emlrtRSI;
           if (b < 0.0) {
             emlrtErrorWithMessageIdR2018a(
-                &b_st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+                &b_st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
                 "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
           }
           glna1 =
@@ -234,30 +234,30 @@ creal_T b_betainc(const emlrtStack *sp, real_T x, real_T a, real_T b)
         guard1 = true;
       }
       if (guard1) {
-        b_st.site = &mcb_emlrtRSI;
+        b_st.site = &lcb_emlrtRSI;
         glna1 = b * x;
         c_st.site = &lf_emlrtRSI;
         glnb1 = muDoubleScalarPower(glna1, 0.33333333333333331);
         if (glna1 < 0.0) {
-          emlrtErrorWithMessageIdR2018a(&c_st, &vb_emlrtRTEI,
+          emlrtErrorWithMessageIdR2018a(&c_st, &ub_emlrtRTEI,
                                         "Coder:toolbox:power_domainError",
                                         "Coder:toolbox:power_domainError", 0);
         }
-        b_st.site = &lcb_emlrtRSI;
+        b_st.site = &kcb_emlrtRSI;
         glna1 = a * (1.0 - x);
         c_st.site = &lf_emlrtRSI;
         log1mx = muDoubleScalarPower(glna1, 0.33333333333333331);
         if (glna1 < 0.0) {
-          emlrtErrorWithMessageIdR2018a(&c_st, &vb_emlrtRTEI,
+          emlrtErrorWithMessageIdR2018a(&c_st, &ub_emlrtRTEI,
                                         "Coder:toolbox:power_domainError",
                                         "Coder:toolbox:power_domainError", 0);
         }
         if ((b_x - 1.0) * (1.0 - x) > 0.8) {
-          b_st.site = &kcb_emlrtRSI;
+          b_st.site = &jcb_emlrtRSI;
           b_x = glnb1 * glnb1 / b + log1mx * log1mx / a;
           if (b_x < 0.0) {
             emlrtErrorWithMessageIdR2018a(
-                &b_st, &xb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+                &b_st, &wb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
                 "Coder:toolbox:ElFunDomainError", 3, 4, 4, "sqrt");
           }
           b_x = muDoubleScalarSqrt(b_x);
@@ -317,16 +317,16 @@ creal_T b_betainc(const emlrtStack *sp, real_T x, real_T a, real_T b)
             glna1 = 1.0 - glna1;
           }
         } else {
-          b_st.site = &jcb_emlrtRSI;
+          b_st.site = &icb_emlrtRSI;
           if (b < 0.0) {
             emlrtErrorWithMessageIdR2018a(
-                &b_st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+                &b_st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
                 "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
           }
           glna1 = b;
-          b_st.site = &icb_emlrtRSI;
-          gammaln(&b_st, &glna1);
           b_st.site = &hcb_emlrtRSI;
+          gammaln(&b_st, &glna1);
+          b_st.site = &gcb_emlrtRSI;
           glna1 = c_eml_gammainc(
               &b_st,
               0.5 * (((a + b) - 1.0) * (3.0 - x) - (b - 1.0)) * (1.0 - x), b,
@@ -357,28 +357,28 @@ creal_T betainc(const emlrtStack *sp, real_T x, real_T a, real_T b)
   boolean_T guard1 = false;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &ccb_emlrtRSI;
+  st.site = &bcb_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   if ((!(0.0 <= x)) || (!(x <= 1.0))) {
-    emlrtErrorWithMessageIdR2018a(&st, &pc_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(&st, &oc_emlrtRTEI,
                                   "Coder:MATLAB:betainc_XOutOfRange",
                                   "Coder:MATLAB:betainc_XOutOfRange", 0);
   }
   glna1 = a;
-  st.site = &dcb_emlrtRSI;
+  st.site = &ccb_emlrtRSI;
   gammaln(&st, &glna1);
   glnb1 = b;
-  st.site = &ecb_emlrtRSI;
+  st.site = &dcb_emlrtRSI;
   gammaln(&st, &glnb1);
   b_x = a + b;
   log1mx = b_x;
-  st.site = &fcb_emlrtRSI;
+  st.site = &ecb_emlrtRSI;
   gammaln(&st, &log1mx);
   glna1 = (glna1 + glnb1) - log1mx;
-  st.site = &gcb_emlrtRSI;
+  st.site = &fcb_emlrtRSI;
   if ((0.0 < x) && (x < 1.0)) {
     if (muDoubleScalarIsInf(a)) {
       if (!muDoubleScalarIsInf(b)) {
@@ -391,19 +391,19 @@ creal_T betainc(const emlrtStack *sp, real_T x, real_T a, real_T b)
     } else {
       guard1 = false;
       if (b_x < 1.0E+7) {
-        b_st.site = &qcb_emlrtRSI;
+        b_st.site = &pcb_emlrtRSI;
         glnb1 = muDoubleScalarLog(x);
         if (1.0 - x != 1.0) {
-          b_st.site = &pcb_emlrtRSI;
+          b_st.site = &ocb_emlrtRSI;
           log1mx = muDoubleScalarLog(1.0 - x) * (-x / ((1.0 - x) - 1.0));
         } else {
           log1mx = -x;
         }
         if (x < (a + 1.0) / (b_x + 2.0)) {
-          b_st.site = &ocb_emlrtRSI;
+          b_st.site = &ncb_emlrtRSI;
           if (a < 0.0) {
             emlrtErrorWithMessageIdR2018a(
-                &b_st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+                &b_st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
                 "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
           }
           glna1 =
@@ -411,10 +411,10 @@ creal_T betainc(const emlrtStack *sp, real_T x, real_T a, real_T b)
                   ((a * glnb1 + b * log1mx) - muDoubleScalarLog(a)) - glna1) *
               betainc_cf(x, a, b);
         } else {
-          b_st.site = &ncb_emlrtRSI;
+          b_st.site = &mcb_emlrtRSI;
           if (b < 0.0) {
             emlrtErrorWithMessageIdR2018a(
-                &b_st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+                &b_st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
                 "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
           }
           glna1 = 1.0 - muDoubleScalarExp(
@@ -429,30 +429,30 @@ creal_T betainc(const emlrtStack *sp, real_T x, real_T a, real_T b)
         guard1 = true;
       }
       if (guard1) {
-        b_st.site = &mcb_emlrtRSI;
+        b_st.site = &lcb_emlrtRSI;
         glna1 = b * x;
         c_st.site = &lf_emlrtRSI;
         glnb1 = muDoubleScalarPower(glna1, 0.33333333333333331);
         if (glna1 < 0.0) {
-          emlrtErrorWithMessageIdR2018a(&c_st, &vb_emlrtRTEI,
+          emlrtErrorWithMessageIdR2018a(&c_st, &ub_emlrtRTEI,
                                         "Coder:toolbox:power_domainError",
                                         "Coder:toolbox:power_domainError", 0);
         }
-        b_st.site = &lcb_emlrtRSI;
+        b_st.site = &kcb_emlrtRSI;
         glna1 = a * (1.0 - x);
         c_st.site = &lf_emlrtRSI;
         log1mx = muDoubleScalarPower(glna1, 0.33333333333333331);
         if (glna1 < 0.0) {
-          emlrtErrorWithMessageIdR2018a(&c_st, &vb_emlrtRTEI,
+          emlrtErrorWithMessageIdR2018a(&c_st, &ub_emlrtRTEI,
                                         "Coder:toolbox:power_domainError",
                                         "Coder:toolbox:power_domainError", 0);
         }
         if ((b_x - 1.0) * (1.0 - x) > 0.8) {
-          b_st.site = &kcb_emlrtRSI;
+          b_st.site = &jcb_emlrtRSI;
           b_x = glnb1 * glnb1 / b + log1mx * log1mx / a;
           if (b_x < 0.0) {
             emlrtErrorWithMessageIdR2018a(
-                &b_st, &xb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+                &b_st, &wb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
                 "Coder:toolbox:ElFunDomainError", 3, 4, 4, "sqrt");
           }
           b_x = muDoubleScalarSqrt(b_x);
@@ -512,16 +512,16 @@ creal_T betainc(const emlrtStack *sp, real_T x, real_T a, real_T b)
             glna1 = 1.0 - glna1;
           }
         } else {
-          b_st.site = &jcb_emlrtRSI;
+          b_st.site = &icb_emlrtRSI;
           if (b < 0.0) {
             emlrtErrorWithMessageIdR2018a(
-                &b_st, &dc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+                &b_st, &cc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
                 "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
           }
           glna1 = b;
-          b_st.site = &icb_emlrtRSI;
-          gammaln(&b_st, &glna1);
           b_st.site = &hcb_emlrtRSI;
+          gammaln(&b_st, &glna1);
+          b_st.site = &gcb_emlrtRSI;
           glna1 = b_eml_gammainc(
               &b_st,
               0.5 * (((a + b) - 1.0) * (3.0 - x) - (b - 1.0)) * (1.0 - x), b,

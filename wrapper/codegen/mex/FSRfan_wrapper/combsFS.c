@@ -22,25 +22,25 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo te_emlrtRSI = {
+static emlrtRSInfo se_emlrtRSI = {
     92,                                                   /* lineNo */
     "combsFS",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pathName */
 };
 
-static emlrtRSInfo ue_emlrtRSI = {
+static emlrtRSInfo te_emlrtRSI = {
     103,                                                  /* lineNo */
     "combsFS",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pathName */
 };
 
-static emlrtRSInfo ve_emlrtRSI = {
+static emlrtRSInfo ue_emlrtRSI = {
     109,                                                  /* lineNo */
     "combsFS",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pathName */
 };
 
-static emlrtRSInfo we_emlrtRSI = {
+static emlrtRSInfo ve_emlrtRSI = {
     123,                                                  /* lineNo */
     "combsFS",                                            /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pathName */
@@ -362,56 +362,56 @@ static emlrtDCInfo bb_emlrtDCI = {
     1                                                      /* checkKind */
 };
 
-static emlrtRTEInfo we_emlrtRTEI = {
-    69,                                                   /* lineNo */
-    5,                                                    /* colNo */
-    "combsFS",                                            /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pName */
-};
-
-static emlrtRTEInfo xe_emlrtRTEI = {
-    69,                                                   /* lineNo */
-    1,                                                    /* colNo */
-    "combsFS",                                            /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pName */
-};
-
-static emlrtRTEInfo ye_emlrtRTEI = {
-    96,                                                   /* lineNo */
-    9,                                                    /* colNo */
-    "combsFS",                                            /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pName */
-};
-
-static emlrtRTEInfo af_emlrtRTEI = {
-    94,                                                   /* lineNo */
-    5,                                                    /* colNo */
-    "combsFS",                                            /* fName */
-    "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pName */
-};
-
 static emlrtRTEInfo bf_emlrtRTEI = {
-    96,                                                   /* lineNo */
+    69,                                                   /* lineNo */
     5,                                                    /* colNo */
     "combsFS",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pName */
 };
 
 static emlrtRTEInfo cf_emlrtRTEI = {
+    69,                                                   /* lineNo */
+    1,                                                    /* colNo */
+    "combsFS",                                            /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pName */
+};
+
+static emlrtRTEInfo df_emlrtRTEI = {
+    96,                                                   /* lineNo */
+    9,                                                    /* colNo */
+    "combsFS",                                            /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pName */
+};
+
+static emlrtRTEInfo ef_emlrtRTEI = {
+    94,                                                   /* lineNo */
+    5,                                                    /* colNo */
+    "combsFS",                                            /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pName */
+};
+
+static emlrtRTEInfo ff_emlrtRTEI = {
+    96,                                                   /* lineNo */
+    5,                                                    /* colNo */
+    "combsFS",                                            /* fName */
+    "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pName */
+};
+
+static emlrtRTEInfo gf_emlrtRTEI = {
     105,                                                  /* lineNo */
     5,                                                    /* colNo */
     "combsFS",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pName */
 };
 
-static emlrtRTEInfo df_emlrtRTEI = {
+static emlrtRTEInfo hf_emlrtRTEI = {
     109,                                                  /* lineNo */
     22,                                                   /* colNo */
     "combsFS",                                            /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\combinatorial\\combsFS.m" /* pName */
 };
 
-static emlrtRTEInfo ef_emlrtRTEI = {
+static emlrtRTEInfo if_emlrtRTEI = {
     118,                                                  /* lineNo */
     40,                                                   /* colNo */
     "combsFS",                                            /* fName */
@@ -469,7 +469,7 @@ void combsFS(const emlrtStack *sp, emxArray_real_T *v, real_T m,
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  emxInit_real_T(sp, &b_v, 2, &we_emlrtRTEI, true);
+  emxInit_real_T(sp, &b_v, 2, &bf_emlrtRTEI, true);
   /* combsFS is an iterative algorithm equivalent to the MATLAB combs.m */
   /*  */
   /*  It generates m-combinations without repetition taken in lexicographic */
@@ -534,7 +534,7 @@ void combsFS(const emlrtStack *sp, emxArray_real_T *v, real_T m,
   i = b_v->size[0] * b_v->size[1];
   b_v->size[0] = 1;
   b_v->size[1] = v->size[1];
-  emxEnsureCapacity_real_T(sp, b_v, i, &we_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, b_v, i, &bf_emlrtRTEI);
   loop_ub = v->size[1];
   for (i = 0; i < loop_ub; i++) {
     b_v->data[i] = v->data[i];
@@ -542,7 +542,7 @@ void combsFS(const emlrtStack *sp, emxArray_real_T *v, real_T m,
   i = v->size[0] * v->size[1];
   v->size[0] = 1;
   v->size[1] = b_v->size[1];
-  emxEnsureCapacity_real_T(sp, v, i, &xe_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, v, i, &cf_emlrtRTEI);
   loop_ub = b_v->size[1];
   for (i = 0; i < loop_ub; i++) {
     v->data[i] = b_v->data[i];
@@ -551,7 +551,7 @@ void combsFS(const emlrtStack *sp, emxArray_real_T *v, real_T m,
   n = v->size[1];
   /*  Elements of v. */
   if (m > v->size[1]) {
-    st.site = &te_emlrtRSI;
+    st.site = &se_emlrtRSI;
     y = NULL;
     b_m = emlrtCreateCharArray(2, &iv[0]);
     emlrtInitCharArrayR2013a(&st, 26, b_m, &varargin_1[0]);
@@ -560,23 +560,23 @@ void combsFS(const emlrtStack *sp, emxArray_real_T *v, real_T m,
     b_m = emlrtCreateCharArray(2, &iv1[0]);
     emlrtInitCharArrayR2013a(&st, 8, b_m, &varargin_2[0]);
     emlrtAssign(&b_y, b_m);
-    b_st.site = &ku_emlrtRSI;
+    b_st.site = &ju_emlrtRSI;
     h_error(&b_st, y, b_y, &e_emlrtMCI);
   } else if (v->size[1] == m) {
     i = P->size[0] * P->size[1];
     P->size[0] = 1;
     P->size[1] = v->size[1];
-    emxEnsureCapacity_real_T(sp, P, i, &af_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, P, i, &ef_emlrtRTEI);
     loop_ub = v->size[1];
     for (i = 0; i < loop_ub; i++) {
       P->data[i] = v->data[i];
     }
   } else {
-    emxInit_real_T(sp, &c_v, 1, &ye_emlrtRTEI, true);
+    emxInit_real_T(sp, &c_v, 1, &df_emlrtRTEI, true);
     if (m == 1.0) {
       i = c_v->size[0];
       c_v->size[0] = v->size[1];
-      emxEnsureCapacity_real_T(sp, c_v, i, &ye_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, c_v, i, &df_emlrtRTEI);
       loop_ub = v->size[1];
       for (i = 0; i < loop_ub; i++) {
         c_v->data[i] = v->data[i];
@@ -584,7 +584,7 @@ void combsFS(const emlrtStack *sp, emxArray_real_T *v, real_T m,
       i = P->size[0] * P->size[1];
       P->size[0] = v->size[1];
       P->size[1] = 1;
-      emxEnsureCapacity_real_T(sp, P, i, &bf_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, P, i, &ff_emlrtRTEI);
       loop_ub = v->size[1];
       for (i = 0; i < loop_ub; i++) {
         P->data[i] = c_v->data[i];
@@ -596,7 +596,7 @@ void combsFS(const emlrtStack *sp, emxArray_real_T *v, real_T m,
       /* The binomial coefficient (n choose m) can be computed using */
       /* prod(np1-m:n)/prod(1:m). For large number of combinations */
       /* our function 'bc' is better. */
-      st.site = &ue_emlrtRSI;
+      st.site = &te_emlrtRSI;
       bcn = bc(&st, v->size[1], m);
       /*  initialise the matrix of all m-combinations */
       if (!(bcn >= 0.0)) {
@@ -609,7 +609,7 @@ void combsFS(const emlrtStack *sp, emxArray_real_T *v, real_T m,
       i = P->size[0] * P->size[1];
       P->size[0] = (int32_T)bcn;
       P->size[1] = (int32_T)m;
-      emxEnsureCapacity_real_T(sp, P, i, &cf_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, P, i, &gf_emlrtRTEI);
       if (bcn != d) {
         emlrtIntegerCheckR2012b(bcn, &ab_emlrtDCI, (emlrtCTX)sp);
       }
@@ -637,13 +637,13 @@ void combsFS(const emlrtStack *sp, emxArray_real_T *v, real_T m,
         emlrtDynamicBoundsCheckR2012b((int32_T)m, 1, (int32_T)m, &bc_emlrtBCI,
                                       (emlrtCTX)sp);
       }
-      st.site = &ve_emlrtRSI;
-      b_st.site = &md_emlrtRSI;
+      st.site = &ue_emlrtRSI;
+      b_st.site = &ld_emlrtRSI;
       if (muDoubleScalarIsNaN(m)) {
         i1 = b_v->size[0] * b_v->size[1];
         b_v->size[0] = 1;
         b_v->size[1] = 1;
-        emxEnsureCapacity_real_T(&b_st, b_v, i1, &yb_emlrtRTEI);
+        emxEnsureCapacity_real_T(&b_st, b_v, i1, &ac_emlrtRTEI);
         b_v->data[0] = rtNaN;
       } else if (v->size[1] < m) {
         b_v->size[0] = 1;
@@ -652,18 +652,18 @@ void combsFS(const emlrtStack *sp, emxArray_real_T *v, real_T m,
         i1 = b_v->size[0] * b_v->size[1];
         b_v->size[0] = 1;
         b_v->size[1] = (int32_T)((real_T)v->size[1] - m) + 1;
-        emxEnsureCapacity_real_T(&b_st, b_v, i1, &yb_emlrtRTEI);
+        emxEnsureCapacity_real_T(&b_st, b_v, i1, &ac_emlrtRTEI);
         loop_ub = (int32_T)((real_T)v->size[1] - m);
         for (i1 = 0; i1 <= loop_ub; i1++) {
           b_v->data[i1] = m + (real_T)i1;
         }
       } else {
-        c_st.site = &nd_emlrtRSI;
+        c_st.site = &md_emlrtRSI;
         eml_float_colon(&c_st, m, v->size[1], b_v);
       }
       i1 = c_v->size[0];
       c_v->size[0] = b_v->size[1];
-      emxEnsureCapacity_real_T(sp, c_v, i1, &df_emlrtRTEI);
+      emxEnsureCapacity_real_T(sp, c_v, i1, &hf_emlrtRTEI);
       loop_ub = b_v->size[1];
       for (i1 = 0; i1 < loop_ub; i1++) {
         c_v->data[i1] = b_v->data[i1];
@@ -677,7 +677,7 @@ void combsFS(const emlrtStack *sp, emxArray_real_T *v, real_T m,
       i = (int32_T)(((-1.0 - (m - 1.0)) + 1.0) / -1.0);
       emlrtForLoopVectorCheckR2021a(m - 1.0, -1.0, 1.0, mxDOUBLE_CLASS, i,
                                     &q_emlrtRTEI, (emlrtCTX)sp);
-      emxInit_real_T(sp, &b_P, 2, &ef_emlrtRTEI, true);
+      emxInit_real_T(sp, &b_P, 2, &if_emlrtRTEI, true);
       for (b_i = 0; b_i < i; b_i++) {
         bcn = (m - 1.0) + -(real_T)b_i;
         /*  external loop over colums */
@@ -804,7 +804,7 @@ void combsFS(const emlrtStack *sp, emxArray_real_T *v, real_T m,
           i3 = b_P->size[0] * b_P->size[1];
           b_P->size[0] = loop_ub;
           b_P->size[1] = b_loop_ub;
-          emxEnsureCapacity_real_T(sp, b_P, i3, &ef_emlrtRTEI);
+          emxEnsureCapacity_real_T(sp, b_P, i3, &if_emlrtRTEI);
           for (i3 = 0; i3 < b_loop_ub; i3++) {
             for (i5 = 0; i5 < loop_ub; i5++) {
               b_P->data[i5 + b_P->size[0] * i3] =
@@ -866,7 +866,7 @@ void combsFS(const emlrtStack *sp, emxArray_real_T *v, real_T m,
         i = b_v->size[0] * b_v->size[1];
         b_v->size[0] = 1;
         b_v->size[1] = v->size[1];
-        emxEnsureCapacity_real_T(sp, b_v, i, &yb_emlrtRTEI);
+        emxEnsureCapacity_real_T(sp, b_v, i, &ac_emlrtRTEI);
         loop_ub = v->size[1] - 1;
         for (i = 0; i <= loop_ub; i++) {
           b_v->data[i] = (real_T)i + 1.0;
@@ -890,7 +890,7 @@ void combsFS(const emlrtStack *sp, emxArray_real_T *v, real_T m,
       }
       b_p = (int32_T)p;
       if (!b_p) {
-        st.site = &we_emlrtRSI;
+        st.site = &ve_emlrtRSI;
         indexShapeCheck(&st, *(int32_T(*)[2])v->size, *(int32_T(*)[2])P->size);
         loop_ub = P->size[1];
         for (i = 0; i < loop_ub; i++) {

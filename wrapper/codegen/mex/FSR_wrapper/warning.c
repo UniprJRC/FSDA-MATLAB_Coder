@@ -15,7 +15,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtMCInfo q_emlrtMCI = {
+static emlrtMCInfo s_emlrtMCI = {
     14,        /* lineNo */
     25,        /* colNo */
     "warning", /* fName */
@@ -24,7 +24,7 @@ static emlrtMCInfo q_emlrtMCI = {
     "internal\\warning.m" /* pName */
 };
 
-static emlrtMCInfo r_emlrtMCI = {
+static emlrtMCInfo t_emlrtMCI = {
     14,        /* lineNo */
     9,         /* colNo */
     "warning", /* fName */
@@ -33,11 +33,11 @@ static emlrtMCInfo r_emlrtMCI = {
     "internal\\warning.m" /* pName */
 };
 
-static const char_T cv2[26] = {'s', 't', 'a', 't', 's', ':', 'g', 'a', 'm',
+static const char_T cv8[26] = {'s', 't', 'a', 't', 's', ':', 'g', 'a', 'm',
                                'i', 'n', 'v', ':', 'N', 'o', 'C', 'o', 'n',
                                'v', 'e', 'r', 'g', 'e', 'n', 'c', 'e'};
 
-static emlrtRSInfo xpb_emlrtRSI = {
+static emlrtRSInfo sqb_emlrtRSI = {
     14,        /* lineNo */
     "warning", /* fcnName */
     "C:\\Program "
@@ -108,7 +108,7 @@ void b_warning(const emlrtStack *sp, const char_T varargin_2[12])
   emlrtAssign(&b_y, m);
   c_y = NULL;
   m = emlrtCreateCharArray(2, &iv2[0]);
-  emlrtInitCharArrayR2013a((emlrtCTX)sp, 26, m, &cv2[0]);
+  emlrtInitCharArrayR2013a((emlrtCTX)sp, 26, m, &cv8[0]);
   emlrtAssign(&c_y, m);
   d_y = NULL;
   m = emlrtCreateCharArray(2, &iv3[0]);
@@ -122,9 +122,9 @@ void b_warning(const emlrtStack *sp, const char_T varargin_2[12])
   m = emlrtCreateCharArray(2, &iv5[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 12, m, &varargin_3[0]);
   emlrtAssign(&f_y, m);
-  st.site = &xpb_emlrtRSI;
-  c_feval(&st, y, e_feval(&st, b_y, c_y, d_y, e_y, f_y, &q_emlrtMCI),
-          &r_emlrtMCI);
+  st.site = &sqb_emlrtRSI;
+  c_feval(&st, y, e_feval(&st, b_y, c_y, d_y, e_y, f_y, &s_emlrtMCI),
+          &t_emlrtMCI);
 }
 
 void c_warning(const emlrtStack *sp, const char_T varargin_1[23],
@@ -176,9 +176,9 @@ void c_warning(const emlrtStack *sp, const char_T varargin_1[23],
   m = emlrtCreateCharArray(2, &iv5[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 23, m, &varargin_3[0]);
   emlrtAssign(&f_y, m);
-  st.site = &xpb_emlrtRSI;
-  c_feval(&st, y, e_feval(&st, b_y, c_y, d_y, e_y, f_y, &q_emlrtMCI),
-          &r_emlrtMCI);
+  st.site = &sqb_emlrtRSI;
+  c_feval(&st, y, e_feval(&st, b_y, c_y, d_y, e_y, f_y, &s_emlrtMCI),
+          &t_emlrtMCI);
 }
 
 void d_warning(const emlrtStack *sp)
@@ -210,8 +210,8 @@ void d_warning(const emlrtStack *sp)
   m = emlrtCreateCharArray(2, &iv2[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 26, m, &msgID[0]);
   emlrtAssign(&c_y, m);
-  st.site = &xpb_emlrtRSI;
-  c_feval(&st, y, b_feval(&st, b_y, c_y, &q_emlrtMCI), &r_emlrtMCI);
+  st.site = &sqb_emlrtRSI;
+  c_feval(&st, y, b_feval(&st, b_y, c_y, &s_emlrtMCI), &t_emlrtMCI);
 }
 
 void e_warning(const emlrtStack *sp)
@@ -243,8 +243,8 @@ void e_warning(const emlrtStack *sp)
   m = emlrtCreateCharArray(2, &iv2[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 24, m, &msgID[0]);
   emlrtAssign(&c_y, m);
-  st.site = &xpb_emlrtRSI;
-  c_feval(&st, y, b_feval(&st, b_y, c_y, &q_emlrtMCI), &r_emlrtMCI);
+  st.site = &sqb_emlrtRSI;
+  c_feval(&st, y, b_feval(&st, b_y, c_y, &s_emlrtMCI), &t_emlrtMCI);
 }
 
 void f_warning(const emlrtStack *sp)
@@ -276,8 +276,8 @@ void f_warning(const emlrtStack *sp)
   m = emlrtCreateCharArray(2, &iv2[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 21, m, &msgID[0]);
   emlrtAssign(&c_y, m);
-  st.site = &xpb_emlrtRSI;
-  c_feval(&st, y, b_feval(&st, b_y, c_y, &q_emlrtMCI), &r_emlrtMCI);
+  st.site = &sqb_emlrtRSI;
+  c_feval(&st, y, b_feval(&st, b_y, c_y, &s_emlrtMCI), &t_emlrtMCI);
 }
 
 void g_warning(const emlrtStack *sp, const char_T varargin_1[14])
@@ -316,8 +316,8 @@ void g_warning(const emlrtStack *sp, const char_T varargin_1[14])
   m = emlrtCreateCharArray(2, &iv3[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 14, m, &varargin_1[0]);
   emlrtAssign(&d_y, m);
-  st.site = &xpb_emlrtRSI;
-  c_feval(&st, y, feval(&st, b_y, c_y, d_y, &q_emlrtMCI), &r_emlrtMCI);
+  st.site = &sqb_emlrtRSI;
+  c_feval(&st, y, feval(&st, b_y, c_y, d_y, &s_emlrtMCI), &t_emlrtMCI);
 }
 
 void h_warning(const emlrtStack *sp, int32_T varargin_1,
@@ -362,8 +362,8 @@ void h_warning(const emlrtStack *sp, int32_T varargin_1,
   m = emlrtCreateCharArray(2, &iv3[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 14, m, &varargin_2[0]);
   emlrtAssign(&e_y, m);
-  st.site = &xpb_emlrtRSI;
-  c_feval(&st, y, d_feval(&st, b_y, c_y, d_y, e_y, &q_emlrtMCI), &r_emlrtMCI);
+  st.site = &sqb_emlrtRSI;
+  c_feval(&st, y, d_feval(&st, b_y, c_y, d_y, e_y, &s_emlrtMCI), &t_emlrtMCI);
 }
 
 void i_warning(const emlrtStack *sp, const char_T varargin_1[12],
@@ -397,7 +397,7 @@ void i_warning(const emlrtStack *sp, const char_T varargin_1[12],
   emlrtAssign(&b_y, m);
   c_y = NULL;
   m = emlrtCreateCharArray(2, &iv2[0]);
-  emlrtInitCharArrayR2013a((emlrtCTX)sp, 26, m, &cv2[0]);
+  emlrtInitCharArrayR2013a((emlrtCTX)sp, 26, m, &cv8[0]);
   emlrtAssign(&c_y, m);
   d_y = NULL;
   m = emlrtCreateCharArray(2, &iv3[0]);
@@ -411,9 +411,9 @@ void i_warning(const emlrtStack *sp, const char_T varargin_1[12],
   m = emlrtCreateCharArray(2, &iv5[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 12, m, &varargin_3[0]);
   emlrtAssign(&f_y, m);
-  st.site = &xpb_emlrtRSI;
-  c_feval(&st, y, e_feval(&st, b_y, c_y, d_y, e_y, f_y, &q_emlrtMCI),
-          &r_emlrtMCI);
+  st.site = &sqb_emlrtRSI;
+  c_feval(&st, y, e_feval(&st, b_y, c_y, d_y, e_y, f_y, &s_emlrtMCI),
+          &t_emlrtMCI);
 }
 
 void warning(const emlrtStack *sp, const char_T varargin_1[23],
@@ -459,8 +459,8 @@ void warning(const emlrtStack *sp, const char_T varargin_1[23],
   m = emlrtCreateCharArray(2, &iv4[0]);
   emlrtInitCharArrayR2013a((emlrtCTX)sp, 23, m, &varargin_2[0]);
   emlrtAssign(&e_y, m);
-  st.site = &xpb_emlrtRSI;
-  c_feval(&st, y, d_feval(&st, b_y, c_y, d_y, e_y, &q_emlrtMCI), &r_emlrtMCI);
+  st.site = &sqb_emlrtRSI;
+  c_feval(&st, y, d_feval(&st, b_y, c_y, d_y, e_y, &s_emlrtMCI), &t_emlrtMCI);
 }
 
 /* End of code generation (warning.c) */

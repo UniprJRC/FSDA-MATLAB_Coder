@@ -440,7 +440,7 @@ void chkinputR(const emlrtStack *sp, emxArray_real_T *y, emxArray_real_T *X,
       m = emlrtCreateCharArray(2, &iv2[0]);
       emlrtInitCharArrayR2013a(&st, 29, m, &varargin_2[0]);
       emlrtAssign(&e_y, m);
-      b_st.site = &yib_emlrtRSI;
+      b_st.site = &xib_emlrtRSI;
       o_error(&b_st, b_y, e_y, &d_emlrtMCI);
     }
     /*  The second argument which is passed is X */
@@ -454,7 +454,7 @@ void chkinputR(const emlrtStack *sp, emxArray_real_T *y, emxArray_real_T *X,
       m = emlrtCreateCharArray(2, &iv4[0]);
       emlrtInitCharArrayR2013a(&st, 29, m, &cv18[0]);
       emlrtAssign(&g_y, m);
-      b_st.site = &yib_emlrtRSI;
+      b_st.site = &xib_emlrtRSI;
       o_error(&b_st, c_y, g_y, &d_emlrtMCI);
     }
     if (isequal(y, X)) {
@@ -467,7 +467,7 @@ void chkinputR(const emlrtStack *sp, emxArray_real_T *y, emxArray_real_T *X,
       m = emlrtCreateCharArray(2, &iv5[0]);
       emlrtInitCharArrayR2013a(&st, 33, m, &b_varargin_2[0]);
       emlrtAssign(&h_y, m);
-      b_st.site = &yib_emlrtRSI;
+      b_st.site = &xib_emlrtRSI;
       o_error(&b_st, f_y, h_y, &d_emlrtMCI);
     }
     emxInit_real_T(sp, &d_y, 1, &ny_emlrtRTEI, true);
@@ -539,7 +539,7 @@ void chkinputR(const emlrtStack *sp, emxArray_real_T *y, emxArray_real_T *X,
       m = emlrtCreateCharArray(2, &iv7[0]);
       emlrtInitCharArrayR2013a(&st, 44, m, &c_varargin_2[0]);
       emlrtAssign(&j_y, m);
-      b_st.site = &yib_emlrtRSI;
+      b_st.site = &xib_emlrtRSI;
       o_error(&b_st, i_y, j_y, &d_emlrtMCI);
     }
     /*  Observations with missing or infinite values are removed from X and y */
@@ -843,7 +843,7 @@ void chkinputR(const emlrtStack *sp, emxArray_real_T *y, emxArray_real_T *X,
       m = emlrtCreateCharArray(2, &tmp_size[0]);
       emlrtInitCharArrayR2013a(&st, b_m, m, &varargin_2_data[0]);
       emlrtAssign(&l_y, m);
-      b_st.site = &yib_emlrtRSI;
+      b_st.site = &xib_emlrtRSI;
       o_error(&b_st, k_y, l_y, &d_emlrtMCI);
     }
     st.site = &sb_emlrtRSI;

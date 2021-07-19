@@ -32,7 +32,8 @@ void b_chi2inv(const emxArray_real_T *p, double v, emxArray_real_T *x)
   emxEnsureCapacity_real_T(x, i);
   i = p->size[0] * p->size[1];
   for (k = 0; k < i; k++) {
-    if ((!rtIsInf(a)) && (p->data[k] >= 0.0) && (p->data[k] <= 1.0)) {
+    if ((0.0 <= a) && (!rtIsInf(a)) && (p->data[k] >= 0.0) &&
+        (p->data[k] <= 1.0)) {
       if ((p->data[k] > 0.0) && (p->data[k] < 1.0) && (a > 0.0)) {
         dc = gammaincinv(p->data[k], a);
         x->data[k] = dc.re * 2.0;

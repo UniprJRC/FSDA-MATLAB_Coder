@@ -19,7 +19,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRTEInfo og_emlrtRTEI = {
+static emlrtRTEInfo ah_emlrtRTEI = {
     1,                           /* lineNo */
     1,                           /* colNo */
     "_coder_FSRmdr_wrapper_api", /* fName */
@@ -314,16 +314,16 @@ void FSRmdr_wrapper_api(const mxArray *const prhs[12], int32_T nlhs,
   boolean_T nocheck;
   st.tls = emlrtRootTLSGlobal;
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
-  emxInit_real_T(&st, &y, 1, &og_emlrtRTEI, true);
-  emxInit_real_T(&st, &X, 2, &og_emlrtRTEI, true);
-  emxInit_real_T(&st, &bsb, 1, &og_emlrtRTEI, true);
-  emxInit_real_T(&st, &bsbsteps, 2, &og_emlrtRTEI, true);
-  emxInit_real_T(&st, &constr, 2, &og_emlrtRTEI, true);
-  emxInit_real_T(&st, &mdr, 2, &og_emlrtRTEI, true);
-  emxInit_real_T(&st, &Un, 2, &og_emlrtRTEI, true);
-  emxInit_real_T(&st, &BB, 2, &og_emlrtRTEI, true);
-  emxInit_real_T(&st, &Bols, 2, &og_emlrtRTEI, true);
-  emxInit_real_T(&st, &S2, 2, &og_emlrtRTEI, true);
+  emxInit_real_T(&st, &y, 1, &ah_emlrtRTEI, true);
+  emxInit_real_T(&st, &X, 2, &ah_emlrtRTEI, true);
+  emxInit_real_T(&st, &bsb, 1, &ah_emlrtRTEI, true);
+  emxInit_real_T(&st, &bsbsteps, 2, &ah_emlrtRTEI, true);
+  emxInit_real_T(&st, &constr, 2, &ah_emlrtRTEI, true);
+  emxInit_real_T(&st, &mdr, 2, &ah_emlrtRTEI, true);
+  emxInit_real_T(&st, &Un, 2, &ah_emlrtRTEI, true);
+  emxInit_real_T(&st, &BB, 2, &ah_emlrtRTEI, true);
+  emxInit_real_T(&st, &Bols, 2, &ah_emlrtRTEI, true);
+  emxInit_real_T(&st, &S2, 2, &ah_emlrtRTEI, true);
   /* Marshall function inputs */
   y->canFreeData = false;
   i_emlrt_marshallIn(&st, emlrtAlias(prhs[0]), "y", y);

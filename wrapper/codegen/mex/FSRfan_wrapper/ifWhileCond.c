@@ -17,7 +17,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRSInfo mh_emlrtRSI =
+static emlrtRSInfo lh_emlrtRSI =
     {
         18,            /* lineNo */
         "ifWhileCond", /* fcnName */
@@ -26,7 +26,7 @@ static emlrtRSInfo mh_emlrtRSI =
         "internal\\ifWhileCond.m" /* pathName */
 };
 
-static emlrtRSInfo nh_emlrtRSI =
+static emlrtRSInfo mh_emlrtRSI =
     {
         31,            /* lineNo */
         "checkNoNaNs", /* fcnName */
@@ -53,11 +53,11 @@ boolean_T ifWhileCond(const emlrtStack *sp, const emxArray_boolean_T *x)
   c_st.tls = b_st.tls;
   y = ((x->size[0] != 0) && (x->size[1] != 0));
   if (y) {
-    st.site = &mh_emlrtRSI;
+    st.site = &lh_emlrtRSI;
     b = x->size[0] * x->size[1];
-    b_st.site = &nh_emlrtRSI;
+    b_st.site = &mh_emlrtRSI;
     if ((1 <= b) && (b > 2147483646)) {
-      c_st.site = &pb_emlrtRSI;
+      c_st.site = &ob_emlrtRSI;
       check_forloop_overflow_error(&c_st);
     }
     k = 0;

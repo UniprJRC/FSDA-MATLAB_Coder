@@ -60,7 +60,7 @@ static emlrtDCInfo hd_emlrtDCI = {
     4 /* checkKind */
 };
 
-static emlrtRSInfo veb_emlrtRSI = {
+static emlrtRSInfo ueb_emlrtRSI = {
     26,                 /* lineNo */
     "printNumToBuffer", /* fcnName */
     "C:\\Program "
@@ -176,7 +176,7 @@ void int2str(const emlrtStack *sp, real_T xin, char_T s_data[],
     c_y = NULL;
     m = emlrtCreateDoubleScalar(x);
     emlrtAssign(&c_y, m);
-    b_st.site = &veb_emlrtRSI;
+    b_st.site = &ueb_emlrtRSI;
     e_emlrt_marshallIn(&b_st, feval(&b_st, y, b_y, c_y, &g_emlrtMCI),
                        "<output of feval>", s_data, s_size);
   }

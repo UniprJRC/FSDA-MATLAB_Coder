@@ -20,21 +20,21 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo ev_emlrtRSI = {
+static emlrtRSInfo lv_emlrtRSI = {
     117,          /* lineNo */
     "randsample", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\randsample.m" /* pathName
                                                                             */
 };
 
-static emlrtRSInfo fv_emlrtRSI = {
+static emlrtRSInfo mv_emlrtRSI = {
     126,          /* lineNo */
     "randsample", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\randsample.m" /* pathName
                                                                             */
 };
 
-static emlrtRSInfo gv_emlrtRSI = {
+static emlrtRSInfo nv_emlrtRSI = {
     138,          /* lineNo */
     "randsample", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\randsample.m" /* pathName
@@ -42,7 +42,7 @@ static emlrtRSInfo gv_emlrtRSI = {
 };
 
 static emlrtRSInfo
-    hv_emlrtRSI =
+    ov_emlrtRSI =
         {
             16,         /* lineNo */
             "randperm", /* fcnName */
@@ -52,7 +52,7 @@ static emlrtRSInfo
 };
 
 static emlrtRSInfo
-    iv_emlrtRSI =
+    pv_emlrtRSI =
         {
             15,         /* lineNo */
             "randperm", /* fcnName */
@@ -61,7 +61,7 @@ static emlrtRSInfo
             "m.m" /* pathName */
 };
 
-static emlrtRSInfo jv_emlrtRSI = {
+static emlrtRSInfo qv_emlrtRSI = {
     61,      /* lineNo */
     "randi", /* fcnName */
     "C:\\Program "
@@ -69,7 +69,7 @@ static emlrtRSInfo jv_emlrtRSI = {
                                                                           */
 };
 
-static emlrtRTEInfo ec_emlrtRTEI = {
+static emlrtRTEInfo fc_emlrtRTEI = {
     109,          /* lineNo */
     9,            /* colNo */
     "randsample", /* fName */
@@ -77,7 +77,7 @@ static emlrtRTEInfo ec_emlrtRTEI = {
                                                                             */
 };
 
-static emlrtRTEInfo fc_emlrtRTEI = {
+static emlrtRTEInfo gc_emlrtRTEI = {
     25,           /* lineNo */
     27,           /* colNo */
     "randsample", /* fName */
@@ -86,7 +86,7 @@ static emlrtRTEInfo fc_emlrtRTEI = {
 };
 
 static emlrtBCInfo
-    mo_emlrtBCI =
+    to_emlrtBCI =
         {
             -1,           /* iFirst */
             -1,           /* iLast */
@@ -101,7 +101,7 @@ static emlrtBCInfo
 };
 
 static emlrtDCInfo
-    ub_emlrtDCI =
+    bc_emlrtDCI =
         {
             142,          /* lineNo */
             17,           /* colNo */
@@ -113,7 +113,7 @@ static emlrtDCInfo
 };
 
 static emlrtBCInfo
-    no_emlrtBCI =
+    uo_emlrtBCI =
         {
             -1,           /* iFirst */
             -1,           /* iLast */
@@ -128,7 +128,7 @@ static emlrtBCInfo
 };
 
 static emlrtBCInfo
-    oo_emlrtBCI =
+    vo_emlrtBCI =
         {
             -1,           /* iFirst */
             -1,           /* iLast */
@@ -143,7 +143,7 @@ static emlrtBCInfo
 };
 
 static emlrtBCInfo
-    po_emlrtBCI =
+    wo_emlrtBCI =
         {
             -1,           /* iFirst */
             -1,           /* iLast */
@@ -158,7 +158,7 @@ static emlrtBCInfo
 };
 
 static emlrtBCInfo
-    qo_emlrtBCI =
+    xo_emlrtBCI =
         {
             -1,           /* iFirst */
             -1,           /* iLast */
@@ -172,7 +172,7 @@ static emlrtBCInfo
             0 /* checkKind */
 };
 
-static emlrtRTEInfo rp_emlrtRTEI = {
+static emlrtRTEInfo qq_emlrtRTEI = {
     75,           /* lineNo */
     24,           /* colNo */
     "randsample", /* fName */
@@ -180,7 +180,7 @@ static emlrtRTEInfo rp_emlrtRTEI = {
                                                                             */
 };
 
-static emlrtRTEInfo sp_emlrtRTEI = {
+static emlrtRTEInfo rq_emlrtRTEI = {
     134,          /* lineNo */
     9,            /* colNo */
     "randsample", /* fName */
@@ -189,7 +189,7 @@ static emlrtRTEInfo sp_emlrtRTEI = {
 };
 
 static emlrtRTEInfo
-    tp_emlrtRTEI =
+    sq_emlrtRTEI =
         {
             16,         /* lineNo */
             5,          /* colNo */
@@ -199,7 +199,7 @@ static emlrtRTEInfo
             "m.m" /* pName */
 };
 
-static emlrtRTEInfo up_emlrtRTEI = {
+static emlrtRTEInfo tq_emlrtRTEI = {
     117,          /* lineNo */
     13,           /* colNo */
     "randsample", /* fName */
@@ -248,7 +248,7 @@ void randsample(const emlrtStack *sp, real_T varargin_1, real_T varargin_2,
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
   n = muDoubleScalarFloor(varargin_1);
   if (!(n == varargin_1)) {
-    emlrtErrorWithMessageIdR2018a(sp, &fc_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(sp, &gc_emlrtRTEI,
                                   "Coder:stats:RandsampleBadN",
                                   "Coder:stats:RandsampleBadN", 0);
   }
@@ -256,43 +256,43 @@ void randsample(const emlrtStack *sp, real_T varargin_1, real_T varargin_2,
   k_tmp_tmp = (int32_T)muDoubleScalarFloor(varargin_2);
   i = y->size[0];
   y->size[0] = (int32_T)x_tmp;
-  emxEnsureCapacity_real_T(sp, y, i, &rp_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, y, i, &qq_emlrtRTEI);
   if (!((int32_T)x_tmp <= n)) {
-    emlrtErrorWithMessageIdR2018a(sp, &ec_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(sp, &fc_emlrtRTEI,
                                   "stats:randsample:SampleTooLarge",
                                   "stats:randsample:SampleTooLarge", 2, 6, n);
   }
   if (((int32_T)x_tmp << 2) > n) {
-    st.site = &ev_emlrtRSI;
+    st.site = &lv_emlrtRSI;
     if (!(n == n)) {
-      emlrtErrorWithMessageIdR2018a(&st, &cb_emlrtRTEI,
+      emlrtErrorWithMessageIdR2018a(&st, &db_emlrtRTEI,
                                     "MATLAB:randperm:inputType",
                                     "MATLAB:randperm:inputType", 0);
     }
-    emxInit_real_T(&st, &rp, 2, &up_emlrtRTEI, true);
-    emxInit_int32_T(&st, &idx, 2, &tp_emlrtRTEI, true);
-    b_st.site = &iv_emlrtRSI;
+    emxInit_real_T(&st, &rp, 2, &tq_emlrtRTEI, true);
+    emxInit_int32_T(&st, &idx, 2, &sq_emlrtRTEI, true);
+    b_st.site = &pv_emlrtRSI;
     c_rand(&b_st, n, rp);
-    b_st.site = &hv_emlrtRSI;
+    b_st.site = &ov_emlrtRSI;
     b_n = rp->size[1] + 1;
     i = idx->size[0] * idx->size[1];
     idx->size[0] = 1;
     idx->size[1] = rp->size[1];
-    emxEnsureCapacity_int32_T(&b_st, idx, i, &tp_emlrtRTEI);
+    emxEnsureCapacity_int32_T(&b_st, idx, i, &sq_emlrtRTEI);
     nsel = rp->size[1];
     for (i = 0; i < nsel; i++) {
       idx->data[i] = 0;
     }
     if (rp->size[1] != 0) {
-      emxInit_int32_T(&b_st, &iwork, 1, &pk_emlrtRTEI, true);
-      c_st.site = &lk_emlrtRSI;
+      emxInit_int32_T(&b_st, &iwork, 1, &ol_emlrtRTEI, true);
+      c_st.site = &sk_emlrtRSI;
       i = iwork->size[0];
       iwork->size[0] = rp->size[1];
-      emxEnsureCapacity_int32_T(&c_st, iwork, i, &ok_emlrtRTEI);
+      emxEnsureCapacity_int32_T(&c_st, iwork, i, &nl_emlrtRTEI);
       nsel = rp->size[1] - 1;
-      d_st.site = &mk_emlrtRSI;
+      d_st.site = &tk_emlrtRSI;
       if ((1 <= rp->size[1] - 1) && (rp->size[1] - 1 > 2147483645)) {
-        e_st.site = &ab_emlrtRSI;
+        e_st.site = &hb_emlrtRSI;
         check_forloop_overflow_error(&e_st);
       }
       for (k = 1; k <= nsel; k += 2) {
@@ -347,7 +347,7 @@ void randsample(const emlrtStack *sp, real_T varargin_1, real_T varargin_2,
             }
             k++;
           }
-          d_st.site = &nk_emlrtRSI;
+          d_st.site = &uk_emlrtRSI;
           for (k = 0; k < kEnd; k++) {
             idx->data[(j + k) - 1] = iwork->data[k];
           }
@@ -361,63 +361,63 @@ void randsample(const emlrtStack *sp, real_T varargin_1, real_T varargin_2,
     i = rp->size[0] * rp->size[1];
     rp->size[0] = 1;
     rp->size[1] = nsel;
-    emxEnsureCapacity_real_T(&st, rp, i, &up_emlrtRTEI);
+    emxEnsureCapacity_real_T(&st, rp, i, &tq_emlrtRTEI);
     for (i = 0; i < nsel; i++) {
       rp->data[i] = idx->data[i];
     }
     emxFree_int32_T(&idx);
-    st.site = &fv_emlrtRSI;
+    st.site = &mv_emlrtRSI;
     if ((1 <= (int32_T)x_tmp) && ((int32_T)x_tmp > 2147483646)) {
-      b_st.site = &ab_emlrtRSI;
+      b_st.site = &hb_emlrtRSI;
       check_forloop_overflow_error(&b_st);
     }
     for (j = 0; j < k_tmp_tmp; j++) {
       if ((j + 1 < 1) || (j + 1 > rp->size[1])) {
-        emlrtDynamicBoundsCheckR2012b(j + 1, 1, rp->size[1], &po_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b(j + 1, 1, rp->size[1], &wo_emlrtBCI,
                                       (emlrtCTX)sp);
       }
       if (j + 1 > y->size[0]) {
-        emlrtDynamicBoundsCheckR2012b(j + 1, 1, y->size[0], &qo_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b(j + 1, 1, y->size[0], &xo_emlrtBCI,
                                       (emlrtCTX)sp);
       }
       y->data[j] = (int32_T)rp->data[j];
     }
     emxFree_real_T(&rp);
   } else {
-    emxInit_boolean_T(sp, &selected, 2, &sp_emlrtRTEI, true);
+    emxInit_boolean_T(sp, &selected, 2, &rq_emlrtRTEI, true);
     i = selected->size[0] * selected->size[1];
     selected->size[0] = 1;
     nsel = (int32_T)n;
     selected->size[1] = (int32_T)n;
-    emxEnsureCapacity_boolean_T(sp, selected, i, &sp_emlrtRTEI);
+    emxEnsureCapacity_boolean_T(sp, selected, i, &rq_emlrtRTEI);
     for (i = 0; i < nsel; i++) {
       selected->data[i] = false;
     }
     nsel = 0;
     while (nsel < (int32_T)x_tmp) {
-      st.site = &gv_emlrtRSI;
-      b_st.site = &jv_emlrtRSI;
+      st.site = &nv_emlrtRSI;
+      b_st.site = &qv_emlrtRSI;
       r = b_rand();
       r = muDoubleScalarFloor(r * n);
       if (r + 1.0 != (int32_T)(r + 1.0)) {
-        emlrtIntegerCheckR2012b(r + 1.0, &ub_emlrtDCI, (emlrtCTX)sp);
+        emlrtIntegerCheckR2012b(r + 1.0, &bc_emlrtDCI, (emlrtCTX)sp);
       }
       if (((int32_T)(r + 1.0) < 1) ||
           ((int32_T)(r + 1.0) > selected->size[1])) {
         emlrtDynamicBoundsCheckR2012b((int32_T)(r + 1.0), 1, selected->size[1],
-                                      &mo_emlrtBCI, (emlrtCTX)sp);
+                                      &to_emlrtBCI, (emlrtCTX)sp);
       }
       if (!selected->data[(int32_T)(r + 1.0) - 1]) {
         if (((int32_T)(r + 1.0) < 1) ||
             ((int32_T)(r + 1.0) > selected->size[1])) {
           emlrtDynamicBoundsCheckR2012b((int32_T)(r + 1.0), 1,
-                                        selected->size[1], &no_emlrtBCI,
+                                        selected->size[1], &uo_emlrtBCI,
                                         (emlrtCTX)sp);
         }
         selected->data[(int32_T)(r + 1.0) - 1] = true;
         nsel++;
         if (nsel > y->size[0]) {
-          emlrtDynamicBoundsCheckR2012b(nsel, 1, y->size[0], &oo_emlrtBCI,
+          emlrtDynamicBoundsCheckR2012b(nsel, 1, y->size[0], &vo_emlrtBCI,
                                         (emlrtCTX)sp);
         }
         y->data[nsel - 1] = r + 1.0;

@@ -20,7 +20,7 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo up_emlrtRSI =
+static emlrtRSInfo cq_emlrtRSI =
     {
         22,           /* lineNo */
         "betaincinv", /* fcnName */
@@ -29,7 +29,7 @@ static emlrtRSInfo up_emlrtRSI =
         "m" /* pathName */
 };
 
-static emlrtRSInfo vp_emlrtRSI =
+static emlrtRSInfo dq_emlrtRSI =
     {
         33,           /* lineNo */
         "betaincinv", /* fcnName */
@@ -38,7 +38,7 @@ static emlrtRSInfo vp_emlrtRSI =
         "m" /* pathName */
 };
 
-static emlrtRSInfo wp_emlrtRSI =
+static emlrtRSInfo eq_emlrtRSI =
     {
         37,           /* lineNo */
         "betaincinv", /* fcnName */
@@ -47,7 +47,7 @@ static emlrtRSInfo wp_emlrtRSI =
         "m" /* pathName */
 };
 
-static emlrtRSInfo xp_emlrtRSI =
+static emlrtRSInfo fq_emlrtRSI =
     {
         40,           /* lineNo */
         "betaincinv", /* fcnName */
@@ -56,7 +56,7 @@ static emlrtRSInfo xp_emlrtRSI =
         "m" /* pathName */
 };
 
-static emlrtRSInfo yp_emlrtRSI =
+static emlrtRSInfo gq_emlrtRSI =
     {
         98,           /* lineNo */
         "betaincinv", /* fcnName */
@@ -65,7 +65,7 @@ static emlrtRSInfo yp_emlrtRSI =
         "m" /* pathName */
 };
 
-static emlrtRSInfo aq_emlrtRSI =
+static emlrtRSInfo hq_emlrtRSI =
     {
         321,              /* lineNo */
         "eml_betaincinv", /* fcnName */
@@ -74,7 +74,7 @@ static emlrtRSInfo aq_emlrtRSI =
         "m" /* pathName */
 };
 
-static emlrtRSInfo bq_emlrtRSI =
+static emlrtRSInfo iq_emlrtRSI =
     {
         322,              /* lineNo */
         "eml_betaincinv", /* fcnName */
@@ -83,7 +83,7 @@ static emlrtRSInfo bq_emlrtRSI =
         "m" /* pathName */
 };
 
-static emlrtRSInfo cq_emlrtRSI =
+static emlrtRSInfo jq_emlrtRSI =
     {
         304,              /* lineNo */
         "eml_betaincinv", /* fcnName */
@@ -92,7 +92,7 @@ static emlrtRSInfo cq_emlrtRSI =
         "m" /* pathName */
 };
 
-static emlrtRSInfo dq_emlrtRSI =
+static emlrtRSInfo kq_emlrtRSI =
     {
         294,              /* lineNo */
         "eml_betaincinv", /* fcnName */
@@ -101,7 +101,7 @@ static emlrtRSInfo dq_emlrtRSI =
         "m" /* pathName */
 };
 
-static emlrtRSInfo eq_emlrtRSI =
+static emlrtRSInfo lq_emlrtRSI =
     {
         284,              /* lineNo */
         "eml_betaincinv", /* fcnName */
@@ -110,7 +110,7 @@ static emlrtRSInfo eq_emlrtRSI =
         "m" /* pathName */
 };
 
-static emlrtRSInfo fq_emlrtRSI =
+static emlrtRSInfo mq_emlrtRSI =
     {
         281,              /* lineNo */
         "eml_betaincinv", /* fcnName */
@@ -119,7 +119,7 @@ static emlrtRSInfo fq_emlrtRSI =
         "m" /* pathName */
 };
 
-static emlrtRSInfo gq_emlrtRSI =
+static emlrtRSInfo nq_emlrtRSI =
     {
         260,              /* lineNo */
         "eml_betaincinv", /* fcnName */
@@ -128,7 +128,7 @@ static emlrtRSInfo gq_emlrtRSI =
         "m" /* pathName */
 };
 
-static emlrtRSInfo hq_emlrtRSI =
+static emlrtRSInfo oq_emlrtRSI =
     {
         255,              /* lineNo */
         "eml_betaincinv", /* fcnName */
@@ -137,7 +137,7 @@ static emlrtRSInfo hq_emlrtRSI =
         "m" /* pathName */
 };
 
-static emlrtRSInfo iq_emlrtRSI =
+static emlrtRSInfo pq_emlrtRSI =
     {
         225,              /* lineNo */
         "eml_betaincinv", /* fcnName */
@@ -146,7 +146,7 @@ static emlrtRSInfo iq_emlrtRSI =
         "m" /* pathName */
 };
 
-static emlrtRSInfo jq_emlrtRSI =
+static emlrtRSInfo qq_emlrtRSI =
     {
         222,              /* lineNo */
         "eml_betaincinv", /* fcnName */
@@ -155,7 +155,7 @@ static emlrtRSInfo jq_emlrtRSI =
         "m" /* pathName */
 };
 
-static emlrtRSInfo kq_emlrtRSI =
+static emlrtRSInfo rq_emlrtRSI =
     {
         215,              /* lineNo */
         "eml_betaincinv", /* fcnName */
@@ -164,7 +164,7 @@ static emlrtRSInfo kq_emlrtRSI =
         "m" /* pathName */
 };
 
-static emlrtRSInfo lq_emlrtRSI =
+static emlrtRSInfo sq_emlrtRSI =
     {
         211,              /* lineNo */
         "eml_betaincinv", /* fcnName */
@@ -173,7 +173,7 @@ static emlrtRSInfo lq_emlrtRSI =
         "m" /* pathName */
 };
 
-static emlrtRSInfo mq_emlrtRSI =
+static emlrtRSInfo tq_emlrtRSI =
     {
         204,              /* lineNo */
         "eml_betaincinv", /* fcnName */
@@ -222,22 +222,22 @@ creal_T b_betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
   boolean_T upper;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &up_emlrtRSI;
+  st.site = &cq_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   glna1 = a;
-  st.site = &vp_emlrtRSI;
+  st.site = &dq_emlrtRSI;
   gammaln(&st, &glna1);
   glnb1 = b;
-  st.site = &wp_emlrtRSI;
+  st.site = &eq_emlrtRSI;
   gammaln(&st, &glnb1);
   r = a + b;
-  st.site = &xp_emlrtRSI;
+  st.site = &fq_emlrtRSI;
   gammaln(&st, &r);
   lbeta = (glna1 + glnb1) - r;
-  st.site = &yp_emlrtRSI;
+  st.site = &gq_emlrtRSI;
   p = x;
   upper = false;
   if ((0.0 < x) && (x < 1.0)) {
@@ -265,8 +265,8 @@ creal_T b_betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
       } else {
         glna1 = x;
       }
-      b_st.site = &mq_emlrtRSI;
-      b_st.site = &mq_emlrtRSI;
+      b_st.site = &tq_emlrtRSI;
+      b_st.site = &tq_emlrtRSI;
       r = muDoubleScalarSqrt(-2.0 * muDoubleScalarLog(glna1));
       b_y = r - (0.27061 * r + 2.30753) / ((0.04481 * r + 0.99229) * r + 1.0);
       if ((a > 1.0) && (b > 1.0)) {
@@ -274,11 +274,11 @@ creal_T b_betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
         glna1 = 1.0 / (2.0 * a - 1.0);
         t = 1.0 / (2.0 * b - 1.0);
         glnb1 = 2.0 / (glna1 + t);
-        b_st.site = &lq_emlrtRSI;
+        b_st.site = &sq_emlrtRSI;
         b_x = glnb1 + r;
         if (b_x < 0.0) {
           emlrtErrorWithMessageIdR2018a(
-              &b_st, &ac_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+              &b_st, &bc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
               "Coder:toolbox:ElFunDomainError", 3, 4, 4, "sqrt");
         }
         b_x = muDoubleScalarSqrt(b_x);
@@ -290,10 +290,10 @@ creal_T b_betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
       } else {
         r = 2.0 * b;
         t = 1.0 / (9.0 * b);
-        b_st.site = &kq_emlrtRSI;
+        b_st.site = &rq_emlrtRSI;
         if (t < 0.0) {
           emlrtErrorWithMessageIdR2018a(
-              &b_st, &ac_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+              &b_st, &bc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
               "Coder:toolbox:ElFunDomainError", 3, 4, 4, "sqrt");
         }
         t = (1.0 - t) + b_y * muDoubleScalarSqrt(t);
@@ -303,22 +303,22 @@ creal_T b_betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
           if (t > 1.0) {
             glna1 = 1.0 - 2.0 / (t + 1.0);
           } else {
-            b_st.site = &jq_emlrtRSI;
+            b_st.site = &qq_emlrtRSI;
             b_x = glna1 * a;
             if (b_x < 0.0) {
               emlrtErrorWithMessageIdR2018a(
-                  &b_st, &xb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+                  &b_st, &yb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
                   "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
             }
             b_x = muDoubleScalarLog(b_x);
             glna1 = muDoubleScalarExp((b_x + lbeta) / a);
           }
         } else {
-          b_st.site = &iq_emlrtRSI;
+          b_st.site = &pq_emlrtRSI;
           b_x = (1.0 - glna1) * b;
           if (b_x < 0.0) {
             emlrtErrorWithMessageIdR2018a(
-                &b_st, &xb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+                &b_st, &yb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
                 "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
           }
           b_x = muDoubleScalarLog(b_x);
@@ -343,13 +343,13 @@ creal_T b_betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
       i = 0;
       exitg1 = false;
       while ((!exitg1) && (i < 1000)) {
-        b_st.site = &hq_emlrtRSI;
+        b_st.site = &oq_emlrtRSI;
         glnb1 =
             (real_T)sgn * (eml_betainc(&b_st, glna1, a, b, lbeta, upper) - p);
         if ((glnb1 * b_y < 0.0) &&
             (muDoubleScalarAbs(b_y) <= muDoubleScalarAbs(glnb1))) {
           glna1 = 0.5 * (glna1 + t);
-          b_st.site = &gq_emlrtRSI;
+          b_st.site = &nq_emlrtRSI;
           glnb1 =
               (real_T)sgn * (eml_betainc(&b_st, glna1, a, b, lbeta, upper) - p);
         }
@@ -368,17 +368,17 @@ creal_T b_betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
           if (i < 200) {
             t = glna1;
             b_y = glnb1;
-            b_st.site = &fq_emlrtRSI;
+            b_st.site = &mq_emlrtRSI;
             if (glna1 < 0.0) {
               emlrtErrorWithMessageIdR2018a(
-                  &b_st, &xb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+                  &b_st, &yb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
                   "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
             }
             if (1.0 - glna1 != 1.0) {
-              b_st.site = &eq_emlrtRSI;
+              b_st.site = &lq_emlrtRSI;
               if (1.0 - glna1 < 0.0) {
                 emlrtErrorWithMessageIdR2018a(
-                    &b_st, &xb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+                    &b_st, &yb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
                     "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
               }
               r = muDoubleScalarLog(1.0 - glna1) *
@@ -392,7 +392,7 @@ creal_T b_betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
                                        lbeta);
             if (glna1 <= zlo) {
               if (zlo == 0.0) {
-                b_st.site = &dq_emlrtRSI;
+                b_st.site = &kq_emlrtRSI;
                 b_x = eml_betainc(&b_st, 2.2250738585072014E-308, a, b, lbeta,
                                   upper) -
                       p;
@@ -409,7 +409,7 @@ creal_T b_betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
               }
             } else if (glna1 >= zhi) {
               if (zhi == 1.0) {
-                b_st.site = &cq_emlrtRSI;
+                b_st.site = &jq_emlrtRSI;
                 b_x = eml_betainc(&b_st, 0.99999999999999989, a, b, lbeta,
                                   upper) -
                       p;
@@ -442,7 +442,7 @@ creal_T b_betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
         }
       }
       if (i >= 1000) {
-        b_st.site = &bq_emlrtRSI;
+        b_st.site = &iq_emlrtRSI;
         c_y = NULL;
         m = emlrtCreateCharArray(2, &b_iv[0]);
         emlrtInitCharArrayR2013a(&b_st, 7, m, &rfmt[0]);
@@ -450,10 +450,10 @@ creal_T b_betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
         d_y = NULL;
         m = emlrtCreateDoubleScalar(x);
         emlrtAssign(&d_y, m);
-        c_st.site = &aqb_emlrtRSI;
-        c_emlrt_marshallIn(&c_st, d_sprintf(&c_st, c_y, d_y, &s_emlrtMCI),
+        c_st.site = &uqb_emlrtRSI;
+        c_emlrt_marshallIn(&c_st, d_sprintf(&c_st, c_y, d_y, &u_emlrtMCI),
                            "<output of sprintf>", str);
-        b_st.site = &bq_emlrtRSI;
+        b_st.site = &iq_emlrtRSI;
         e_y = NULL;
         m = emlrtCreateCharArray(2, &iv1[0]);
         emlrtInitCharArrayR2013a(&b_st, 7, m, &rfmt[0]);
@@ -461,10 +461,10 @@ creal_T b_betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
         f_y = NULL;
         m = emlrtCreateDoubleScalar(a);
         emlrtAssign(&f_y, m);
-        c_st.site = &aqb_emlrtRSI;
-        c_emlrt_marshallIn(&c_st, d_sprintf(&c_st, e_y, f_y, &s_emlrtMCI),
+        c_st.site = &uqb_emlrtRSI;
+        c_emlrt_marshallIn(&c_st, d_sprintf(&c_st, e_y, f_y, &u_emlrtMCI),
                            "<output of sprintf>", b_str);
-        b_st.site = &bq_emlrtRSI;
+        b_st.site = &iq_emlrtRSI;
         g_y = NULL;
         m = emlrtCreateCharArray(2, &iv2[0]);
         emlrtInitCharArrayR2013a(&b_st, 7, m, &rfmt[0]);
@@ -472,10 +472,10 @@ creal_T b_betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
         h_y = NULL;
         m = emlrtCreateDoubleScalar(b);
         emlrtAssign(&h_y, m);
-        c_st.site = &aqb_emlrtRSI;
-        c_emlrt_marshallIn(&c_st, d_sprintf(&c_st, g_y, h_y, &s_emlrtMCI),
+        c_st.site = &uqb_emlrtRSI;
+        c_emlrt_marshallIn(&c_st, d_sprintf(&c_st, g_y, h_y, &u_emlrtMCI),
                            "<output of sprintf>", c_str);
-        b_st.site = &aq_emlrtRSI;
+        b_st.site = &hq_emlrtRSI;
         c_warning(&b_st, str, b_str, c_str);
       }
     }
@@ -530,22 +530,22 @@ creal_T betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
   boolean_T upper;
   st.prev = sp;
   st.tls = sp->tls;
-  st.site = &up_emlrtRSI;
+  st.site = &cq_emlrtRSI;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   glna1 = a;
-  st.site = &vp_emlrtRSI;
+  st.site = &dq_emlrtRSI;
   gammaln(&st, &glna1);
   glnb1 = b;
-  st.site = &wp_emlrtRSI;
+  st.site = &eq_emlrtRSI;
   gammaln(&st, &glnb1);
   r = a + b;
-  st.site = &xp_emlrtRSI;
+  st.site = &fq_emlrtRSI;
   gammaln(&st, &r);
   lbeta = (glna1 + glnb1) - r;
-  st.site = &yp_emlrtRSI;
+  st.site = &gq_emlrtRSI;
   p = x;
   upper = true;
   if ((0.0 < x) && (x < 1.0)) {
@@ -576,8 +576,8 @@ creal_T betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
           glna1 = 0.9999999999999778;
         }
       }
-      b_st.site = &mq_emlrtRSI;
-      b_st.site = &mq_emlrtRSI;
+      b_st.site = &tq_emlrtRSI;
+      b_st.site = &tq_emlrtRSI;
       r = muDoubleScalarSqrt(-2.0 * muDoubleScalarLog(glna1));
       b_y = r - (0.27061 * r + 2.30753) / ((0.04481 * r + 0.99229) * r + 1.0);
       if ((a > 1.0) && (b > 1.0)) {
@@ -585,11 +585,11 @@ creal_T betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
         glna1 = 1.0 / (2.0 * a - 1.0);
         t = 1.0 / (2.0 * b - 1.0);
         glnb1 = 2.0 / (glna1 + t);
-        b_st.site = &lq_emlrtRSI;
+        b_st.site = &sq_emlrtRSI;
         b_x = glnb1 + r;
         if (b_x < 0.0) {
           emlrtErrorWithMessageIdR2018a(
-              &b_st, &ac_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+              &b_st, &bc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
               "Coder:toolbox:ElFunDomainError", 3, 4, 4, "sqrt");
         }
         b_x = muDoubleScalarSqrt(b_x);
@@ -601,10 +601,10 @@ creal_T betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
       } else {
         r = 2.0 * b;
         t = 1.0 / (9.0 * b);
-        b_st.site = &kq_emlrtRSI;
+        b_st.site = &rq_emlrtRSI;
         if (t < 0.0) {
           emlrtErrorWithMessageIdR2018a(
-              &b_st, &ac_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+              &b_st, &bc_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
               "Coder:toolbox:ElFunDomainError", 3, 4, 4, "sqrt");
         }
         t = (1.0 - t) + b_y * muDoubleScalarSqrt(t);
@@ -614,22 +614,22 @@ creal_T betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
           if (t > 1.0) {
             glna1 = 1.0 - 2.0 / (t + 1.0);
           } else {
-            b_st.site = &jq_emlrtRSI;
+            b_st.site = &qq_emlrtRSI;
             b_x = glna1 * a;
             if (b_x < 0.0) {
               emlrtErrorWithMessageIdR2018a(
-                  &b_st, &xb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+                  &b_st, &yb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
                   "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
             }
             b_x = muDoubleScalarLog(b_x);
             glna1 = muDoubleScalarExp((b_x + lbeta) / a);
           }
         } else {
-          b_st.site = &iq_emlrtRSI;
+          b_st.site = &pq_emlrtRSI;
           b_x = (1.0 - glna1) * b;
           if (b_x < 0.0) {
             emlrtErrorWithMessageIdR2018a(
-                &b_st, &xb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+                &b_st, &yb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
                 "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
           }
           b_x = muDoubleScalarLog(b_x);
@@ -654,13 +654,13 @@ creal_T betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
       i = 0;
       exitg1 = false;
       while ((!exitg1) && (i < 1000)) {
-        b_st.site = &hq_emlrtRSI;
+        b_st.site = &oq_emlrtRSI;
         glnb1 =
             (real_T)sgn * (eml_betainc(&b_st, glna1, a, b, lbeta, upper) - p);
         if ((glnb1 * b_y < 0.0) &&
             (muDoubleScalarAbs(b_y) <= muDoubleScalarAbs(glnb1))) {
           glna1 = 0.5 * (glna1 + t);
-          b_st.site = &gq_emlrtRSI;
+          b_st.site = &nq_emlrtRSI;
           glnb1 =
               (real_T)sgn * (eml_betainc(&b_st, glna1, a, b, lbeta, upper) - p);
         }
@@ -679,17 +679,17 @@ creal_T betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
           if (i < 200) {
             t = glna1;
             b_y = glnb1;
-            b_st.site = &fq_emlrtRSI;
+            b_st.site = &mq_emlrtRSI;
             if (glna1 < 0.0) {
               emlrtErrorWithMessageIdR2018a(
-                  &b_st, &xb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+                  &b_st, &yb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
                   "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
             }
             if (1.0 - glna1 != 1.0) {
-              b_st.site = &eq_emlrtRSI;
+              b_st.site = &lq_emlrtRSI;
               if (1.0 - glna1 < 0.0) {
                 emlrtErrorWithMessageIdR2018a(
-                    &b_st, &xb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+                    &b_st, &yb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
                     "Coder:toolbox:ElFunDomainError", 3, 4, 3, "log");
               }
               r = muDoubleScalarLog(1.0 - glna1) *
@@ -703,7 +703,7 @@ creal_T betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
                                        lbeta);
             if (glna1 <= zlo) {
               if (zlo == 0.0) {
-                b_st.site = &dq_emlrtRSI;
+                b_st.site = &kq_emlrtRSI;
                 b_x = eml_betainc(&b_st, 2.2250738585072014E-308, a, b, lbeta,
                                   upper) -
                       p;
@@ -720,7 +720,7 @@ creal_T betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
               }
             } else if (glna1 >= zhi) {
               if (zhi == 1.0) {
-                b_st.site = &cq_emlrtRSI;
+                b_st.site = &jq_emlrtRSI;
                 b_x = eml_betainc(&b_st, 0.99999999999999989, a, b, lbeta,
                                   upper) -
                       p;
@@ -753,7 +753,7 @@ creal_T betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
         }
       }
       if (i >= 1000) {
-        b_st.site = &bq_emlrtRSI;
+        b_st.site = &iq_emlrtRSI;
         c_y = NULL;
         m = emlrtCreateCharArray(2, &b_iv[0]);
         emlrtInitCharArrayR2013a(&b_st, 7, m, &rfmt[0]);
@@ -761,10 +761,10 @@ creal_T betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
         d_y = NULL;
         m = emlrtCreateDoubleScalar(x);
         emlrtAssign(&d_y, m);
-        c_st.site = &aqb_emlrtRSI;
-        c_emlrt_marshallIn(&c_st, d_sprintf(&c_st, c_y, d_y, &s_emlrtMCI),
+        c_st.site = &uqb_emlrtRSI;
+        c_emlrt_marshallIn(&c_st, d_sprintf(&c_st, c_y, d_y, &u_emlrtMCI),
                            "<output of sprintf>", str);
-        b_st.site = &bq_emlrtRSI;
+        b_st.site = &iq_emlrtRSI;
         e_y = NULL;
         m = emlrtCreateCharArray(2, &iv1[0]);
         emlrtInitCharArrayR2013a(&b_st, 7, m, &rfmt[0]);
@@ -772,10 +772,10 @@ creal_T betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
         f_y = NULL;
         m = emlrtCreateDoubleScalar(a);
         emlrtAssign(&f_y, m);
-        c_st.site = &aqb_emlrtRSI;
-        c_emlrt_marshallIn(&c_st, d_sprintf(&c_st, e_y, f_y, &s_emlrtMCI),
+        c_st.site = &uqb_emlrtRSI;
+        c_emlrt_marshallIn(&c_st, d_sprintf(&c_st, e_y, f_y, &u_emlrtMCI),
                            "<output of sprintf>", b_str);
-        b_st.site = &bq_emlrtRSI;
+        b_st.site = &iq_emlrtRSI;
         g_y = NULL;
         m = emlrtCreateCharArray(2, &iv2[0]);
         emlrtInitCharArrayR2013a(&b_st, 7, m, &rfmt[0]);
@@ -783,10 +783,10 @@ creal_T betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
         h_y = NULL;
         m = emlrtCreateDoubleScalar(b);
         emlrtAssign(&h_y, m);
-        c_st.site = &aqb_emlrtRSI;
-        c_emlrt_marshallIn(&c_st, d_sprintf(&c_st, g_y, h_y, &s_emlrtMCI),
+        c_st.site = &uqb_emlrtRSI;
+        c_emlrt_marshallIn(&c_st, d_sprintf(&c_st, g_y, h_y, &u_emlrtMCI),
                            "<output of sprintf>", c_str);
-        b_st.site = &aq_emlrtRSI;
+        b_st.site = &hq_emlrtRSI;
         c_warning(&b_st, str, b_str, c_str);
       }
     }

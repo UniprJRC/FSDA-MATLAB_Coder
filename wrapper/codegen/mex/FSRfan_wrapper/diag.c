@@ -26,7 +26,7 @@ static emlrtRTEInfo qb_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo wi_emlrtRTEI = {
+static emlrtRTEInfo dj_emlrtRTEI = {
     100,    /* lineNo */
     5,      /* colNo */
     "diag", /* fName */
@@ -35,7 +35,7 @@ static emlrtRTEInfo wi_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo xi_emlrtRTEI = {
+static emlrtRTEInfo ej_emlrtRTEI = {
     109,    /* lineNo */
     24,     /* colNo */
     "diag", /* fName */
@@ -52,7 +52,7 @@ void diag(const emlrtStack *sp, const emxArray_real_T *v, emxArray_real_T *d)
   if ((v->size[0] == 1) && (v->size[1] == 1)) {
     n = d->size[0];
     d->size[0] = 1;
-    emxEnsureCapacity_real_T(sp, d, n, &wi_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, d, n, &dj_emlrtRTEI);
     d->data[0] = v->data[0];
   } else {
     if ((v->size[0] == 1) || (v->size[1] == 1)) {
@@ -69,7 +69,7 @@ void diag(const emlrtStack *sp, const emxArray_real_T *v, emxArray_real_T *d)
     }
     n = d->size[0];
     d->size[0] = m;
-    emxEnsureCapacity_real_T(sp, d, n, &xi_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, d, n, &ej_emlrtRTEI);
     n = m - 1;
     for (m = 0; m <= n; m++) {
       d->data[m] = v->data[m + v->size[0] * m];

@@ -18,7 +18,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRSInfo cb_emlrtRSI =
+static emlrtRSInfo jb_emlrtRSI =
     {
         87,    /* lineNo */
         "cat", /* fcnName */
@@ -27,7 +27,7 @@ static emlrtRSInfo cb_emlrtRSI =
                                                                           */
 };
 
-static emlrtRTEInfo m_emlrtRTEI =
+static emlrtRTEInfo n_emlrtRTEI =
     {
         71,    /* lineNo */
         27,    /* colNo */
@@ -37,7 +37,7 @@ static emlrtRTEInfo m_emlrtRTEI =
                                                                           */
 };
 
-static emlrtRTEInfo de_emlrtRTEI =
+static emlrtRTEInfo cf_emlrtRTEI =
     {
         56,    /* lineNo */
         20,    /* colNo */
@@ -64,13 +64,13 @@ void b_cat(const emlrtStack *sp, const emxArray_real_T *varargin_1,
   b = y->size[0] * y->size[1];
   y->size[0] = varargin_1->size[0];
   y->size[1] = 11;
-  emxEnsureCapacity_real_T(sp, y, b, &de_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, y, b, &cf_emlrtRTEI);
   j = 0;
   exitg1 = false;
   while ((!exitg1) && (j < 2)) {
     if ((j + 1 != 2) && (y->size[0] != varargin_1->size[0])) {
       emlrtErrorWithMessageIdR2018a(
-          sp, &m_emlrtRTEI, "Coder:MATLAB:catenate_dimensionMismatch",
+          sp, &n_emlrtRTEI, "Coder:MATLAB:catenate_dimensionMismatch",
           "Coder:MATLAB:catenate_dimensionMismatch", 0);
     } else {
       j++;
@@ -81,25 +81,25 @@ void b_cat(const emlrtStack *sp, const emxArray_real_T *varargin_1,
   while ((!exitg1) && (j < 2)) {
     if ((j + 1 != 2) && (y->size[0] != varargin_2->size[0])) {
       emlrtErrorWithMessageIdR2018a(
-          sp, &m_emlrtRTEI, "Coder:MATLAB:catenate_dimensionMismatch",
+          sp, &n_emlrtRTEI, "Coder:MATLAB:catenate_dimensionMismatch",
           "Coder:MATLAB:catenate_dimensionMismatch", 0);
     } else {
       j++;
     }
   }
   b = varargin_1->size[0];
-  st.site = &cb_emlrtRSI;
+  st.site = &jb_emlrtRSI;
   if ((1 <= varargin_1->size[0]) && (varargin_1->size[0] > 2147483646)) {
-    b_st.site = &ab_emlrtRSI;
+    b_st.site = &hb_emlrtRSI;
     check_forloop_overflow_error(&b_st);
   }
   for (j = 0; j < b; j++) {
     y->data[j] = varargin_1->data[j];
   }
   b_b = varargin_2->size[0] * 10;
-  st.site = &cb_emlrtRSI;
+  st.site = &jb_emlrtRSI;
   if ((1 <= b_b) && (b_b > 2147483646)) {
-    b_st.site = &ab_emlrtRSI;
+    b_st.site = &hb_emlrtRSI;
     check_forloop_overflow_error(&b_st);
   }
   for (j = 0; j < b_b; j++) {
@@ -123,13 +123,13 @@ void cat(const emlrtStack *sp, const emxArray_real_T *varargin_1,
   b = y->size[0] * y->size[1];
   y->size[0] = varargin_1->size[0];
   y->size[1] = varargin_2->size[1] + 1;
-  emxEnsureCapacity_real_T(sp, y, b, &de_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, y, b, &cf_emlrtRTEI);
   j = 0;
   exitg1 = false;
   while ((!exitg1) && (j < 2)) {
     if ((j + 1 != 2) && (y->size[0] != varargin_1->size[0])) {
       emlrtErrorWithMessageIdR2018a(
-          sp, &m_emlrtRTEI, "Coder:MATLAB:catenate_dimensionMismatch",
+          sp, &n_emlrtRTEI, "Coder:MATLAB:catenate_dimensionMismatch",
           "Coder:MATLAB:catenate_dimensionMismatch", 0);
     } else {
       j++;
@@ -140,25 +140,25 @@ void cat(const emlrtStack *sp, const emxArray_real_T *varargin_1,
   while ((!exitg1) && (j < 2)) {
     if ((j + 1 != 2) && (y->size[0] != varargin_2->size[0])) {
       emlrtErrorWithMessageIdR2018a(
-          sp, &m_emlrtRTEI, "Coder:MATLAB:catenate_dimensionMismatch",
+          sp, &n_emlrtRTEI, "Coder:MATLAB:catenate_dimensionMismatch",
           "Coder:MATLAB:catenate_dimensionMismatch", 0);
     } else {
       j++;
     }
   }
   b = varargin_1->size[0];
-  st.site = &cb_emlrtRSI;
+  st.site = &jb_emlrtRSI;
   if ((1 <= varargin_1->size[0]) && (varargin_1->size[0] > 2147483646)) {
-    b_st.site = &ab_emlrtRSI;
+    b_st.site = &hb_emlrtRSI;
     check_forloop_overflow_error(&b_st);
   }
   for (j = 0; j < b; j++) {
     y->data[j] = 1.0;
   }
   b_b = varargin_2->size[0] * varargin_2->size[1];
-  st.site = &cb_emlrtRSI;
+  st.site = &jb_emlrtRSI;
   if ((1 <= b_b) && (b_b > 2147483646)) {
-    b_st.site = &ab_emlrtRSI;
+    b_st.site = &hb_emlrtRSI;
     check_forloop_overflow_error(&b_st);
   }
   for (j = 0; j < b_b; j++) {

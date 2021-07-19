@@ -21,7 +21,7 @@
 #include <string.h>
 
 /* Variable Definitions */
-static emlrtRSInfo ks_emlrtRSI = {
+static emlrtRSInfo rs_emlrtRSI = {
     436,       /* lineNo */
     "xzhgeqz", /* fcnName */
     "C:\\Program "
@@ -29,7 +29,7 @@ static emlrtRSInfo ks_emlrtRSI = {
     "reflapack\\xzhgeqz.m" /* pathName */
 };
 
-static emlrtRSInfo ls_emlrtRSI = {
+static emlrtRSInfo ss_emlrtRSI = {
     424,       /* lineNo */
     "xzhgeqz", /* fcnName */
     "C:\\Program "
@@ -37,7 +37,7 @@ static emlrtRSInfo ls_emlrtRSI = {
     "reflapack\\xzhgeqz.m" /* pathName */
 };
 
-static emlrtRSInfo ms_emlrtRSI = {
+static emlrtRSInfo ts_emlrtRSI = {
     410,       /* lineNo */
     "xzhgeqz", /* fcnName */
     "C:\\Program "
@@ -45,7 +45,7 @@ static emlrtRSInfo ms_emlrtRSI = {
     "reflapack\\xzhgeqz.m" /* pathName */
 };
 
-static emlrtRSInfo ns_emlrtRSI = {
+static emlrtRSInfo us_emlrtRSI = {
     401,       /* lineNo */
     "xzhgeqz", /* fcnName */
     "C:\\Program "
@@ -53,7 +53,7 @@ static emlrtRSInfo ns_emlrtRSI = {
     "reflapack\\xzhgeqz.m" /* pathName */
 };
 
-static emlrtRSInfo os_emlrtRSI = {
+static emlrtRSInfo vs_emlrtRSI = {
     391,       /* lineNo */
     "xzhgeqz", /* fcnName */
     "C:\\Program "
@@ -61,7 +61,7 @@ static emlrtRSInfo os_emlrtRSI = {
     "reflapack\\xzhgeqz.m" /* pathName */
 };
 
-static emlrtRSInfo ps_emlrtRSI = {
+static emlrtRSInfo ws_emlrtRSI = {
     111,       /* lineNo */
     "xzhgeqz", /* fcnName */
     "C:\\Program "
@@ -69,7 +69,7 @@ static emlrtRSInfo ps_emlrtRSI = {
     "reflapack\\xzhgeqz.m" /* pathName */
 };
 
-static emlrtRSInfo qs_emlrtRSI = {
+static emlrtRSInfo xs_emlrtRSI = {
     37,        /* lineNo */
     "xzhgeqz", /* fcnName */
     "C:\\Program "
@@ -144,7 +144,7 @@ void xzhgeqz(const emlrtStack *sp, const creal_T A[4], int32_T ilo, int32_T ihi,
   eshift_im = 0.0;
   ctemp.re = 0.0;
   ctemp.im = 0.0;
-  st.site = &qs_emlrtRSI;
+  st.site = &xs_emlrtRSI;
   anorm = xzlanhs(&st, A, ilo, ihi);
   temp = 2.2204460492503131E-16 * anorm;
   b_atol = 2.2250738585072014E-308;
@@ -173,9 +173,9 @@ void xzhgeqz(const emlrtStack *sp, const creal_T A[4], int32_T ilo, int32_T ihi,
     goto60 = false;
     goto70 = false;
     goto90 = false;
-    st.site = &ps_emlrtRSI;
+    st.site = &ws_emlrtRSI;
     if ((1 <= maxit) && (maxit > 2147483646)) {
-      b_st.site = &ab_emlrtRSI;
+      b_st.site = &hb_emlrtRSI;
       check_forloop_overflow_error(&b_st);
     }
     jiter = 0;
@@ -390,14 +390,14 @@ void xzhgeqz(const emlrtStack *sp, const creal_T A[4], int32_T ilo, int32_T ihi,
               jp1 = ((istart - 1) << 1) + 1;
               b_ascale.re = ascale * b_A[jp1].re;
               b_ascale.im = ascale * b_A[jp1].im;
-              st.site = &os_emlrtRSI;
+              st.site = &vs_emlrtRSI;
               xzlartg(&st, ctemp, b_ascale, &ascale_im, &shift);
               j = istart;
               while (j < ilast + 1) {
-                st.site = &ns_emlrtRSI;
-                b_st.site = &is_emlrtRSI;
+                st.site = &us_emlrtRSI;
+                b_st.site = &ps_emlrtRSI;
                 if ((1 <= ilastm) && (ilastm > 2147483646)) {
-                  c_st.site = &ab_emlrtRSI;
+                  c_st.site = &hb_emlrtRSI;
                   check_forloop_overflow_error(&c_st);
                 }
                 for (j = 1; j <= ilastm; j++) {
@@ -419,8 +419,8 @@ void xzhgeqz(const emlrtStack *sp, const creal_T A[4], int32_T ilo, int32_T ihi,
                 }
                 shift.re = -shift.re;
                 shift.im = -shift.im;
-                st.site = &ms_emlrtRSI;
-                b_st.site = &js_emlrtRSI;
+                st.site = &ts_emlrtRSI;
+                b_st.site = &qs_emlrtRSI;
                 for (jp1 = ifirst; jp1 < 3; jp1++) {
                   anorm = b_A[jp1 + 1].re;
                   temp = b_A[jp1 - 1].re;
@@ -454,9 +454,9 @@ void xzhgeqz(const emlrtStack *sp, const creal_T A[4], int32_T ilo, int32_T ihi,
   if (guard2) {
     if (failed) {
       *info = ilast + 1;
-      st.site = &ls_emlrtRSI;
+      st.site = &ss_emlrtRSI;
       if ((1 <= ilast + 1) && (ilast + 1 > 2147483646)) {
-        b_st.site = &ab_emlrtRSI;
+        b_st.site = &hb_emlrtRSI;
         check_forloop_overflow_error(&b_st);
       }
       for (jp1 = 0; jp1 <= ilast; jp1++) {
@@ -470,9 +470,9 @@ void xzhgeqz(const emlrtStack *sp, const creal_T A[4], int32_T ilo, int32_T ihi,
     }
   }
   if (guard1) {
-    st.site = &ks_emlrtRSI;
+    st.site = &rs_emlrtRSI;
     if ((1 <= ilo - 1) && (ilo - 1 > 2147483646)) {
-      b_st.site = &ab_emlrtRSI;
+      b_st.site = &hb_emlrtRSI;
       check_forloop_overflow_error(&b_st);
     }
     for (j = 0; j <= ilo - 2; j++) {

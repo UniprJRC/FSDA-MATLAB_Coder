@@ -25,6 +25,15 @@
 void b_tinv(const emlrtStack *sp, const emxArray_real_T *p,
             const emxArray_real_T *v, emxArray_real_T *x);
 
+void c_tinv(const emlrtStack *sp, const emxArray_real_T *p,
+            const emxArray_real_T *v, emxArray_real_T *x);
+
+void d_tinv(const emlrtStack *sp, const emxArray_real_T *p,
+            const emxArray_real_T *v, emxArray_real_T *x);
+
+void e_tinv(const emlrtStack *sp, const emxArray_real_T *p,
+            const emxArray_real_T *v, emxArray_real_T *x);
+
 real_T tinv(const emlrtStack *sp, real_T v);
 
 /* End of code generation (tinv.h) */

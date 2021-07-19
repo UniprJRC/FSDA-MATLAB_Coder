@@ -22,14 +22,14 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo ebb_emlrtRSI = {
+static emlrtRSInfo lbb_emlrtRSI = {
     43,       /* lineNo */
     "gaminv", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\gaminv.m" /* pathName
                                                                         */
 };
 
-static emlrtBCInfo sp_emlrtBCI = {
+static emlrtBCInfo aq_emlrtBCI = {
     -1,       /* iFirst */
     -1,       /* iLast */
     34,       /* lineNo */
@@ -41,7 +41,7 @@ static emlrtBCInfo sp_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtBCInfo tp_emlrtBCI = {
+static emlrtBCInfo bq_emlrtBCI = {
     -1,       /* iFirst */
     -1,       /* iLast */
     81,       /* lineNo */
@@ -53,7 +53,7 @@ static emlrtBCInfo tp_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtBCInfo up_emlrtBCI = {
+static emlrtBCInfo cq_emlrtBCI = {
     -1,       /* iFirst */
     -1,       /* iLast */
     69,       /* lineNo */
@@ -65,7 +65,7 @@ static emlrtBCInfo up_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtBCInfo vp_emlrtBCI = {
+static emlrtBCInfo dq_emlrtBCI = {
     -1,       /* iFirst */
     -1,       /* iLast */
     73,       /* lineNo */
@@ -77,7 +77,7 @@ static emlrtBCInfo vp_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtBCInfo wp_emlrtBCI = {
+static emlrtBCInfo eq_emlrtBCI = {
     -1,       /* iFirst */
     -1,       /* iLast */
     71,       /* lineNo */
@@ -89,7 +89,7 @@ static emlrtBCInfo wp_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtBCInfo xp_emlrtBCI = {
+static emlrtBCInfo fq_emlrtBCI = {
     -1,       /* iFirst */
     -1,       /* iLast */
     47,       /* lineNo */
@@ -101,7 +101,7 @@ static emlrtBCInfo xp_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtRTEInfo os_emlrtRTEI = {
+static emlrtRTEInfo mt_emlrtRTEI = {
     27,       /* lineNo */
     5,        /* colNo */
     "gaminv", /* fName */
@@ -143,28 +143,28 @@ void b_chi2inv(const emlrtStack *sp, const emxArray_real_T *p, real_T v,
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   a = v / 2.0;
-  st.site = &fn_emlrtRSI;
+  st.site = &mn_emlrtRSI;
   i = x->size[0] * x->size[1];
   x->size[0] = p->size[0];
   x->size[1] = p->size[1];
-  emxEnsureCapacity_real_T(&st, x, i, &os_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, x, i, &mt_emlrtRTEI);
   i = p->size[0] * p->size[1];
   for (k = 0; k < i; k++) {
     i1 = p->size[0] * p->size[1];
     if ((k + 1 < 1) || (k + 1 > i1)) {
-      emlrtDynamicBoundsCheckR2012b(k + 1, 1, i1, &sp_emlrtBCI, &st);
+      emlrtDynamicBoundsCheckR2012b(k + 1, 1, i1, &aq_emlrtBCI, &st);
     }
     if ((!muDoubleScalarIsInf(a)) && (p->data[k] >= 0.0) &&
         (p->data[k] <= 1.0)) {
       if ((p->data[k] > 0.0) && (p->data[k] < 1.0) && (a > 0.0)) {
-        b_st.site = &jn_emlrtRSI;
+        b_st.site = &qn_emlrtRSI;
         dc = gammaincinv(&b_st, p->data[k], a);
-        b_st.site = &in_emlrtRSI;
+        b_st.site = &pn_emlrtRSI;
         dc1 = gammainc(&b_st, dc.re, a);
-        b_st.site = &in_emlrtRSI;
+        b_st.site = &pn_emlrtRSI;
         if (muDoubleScalarHypot(dc1.re - p->data[k], dc1.im) >
             p->data[k] * 1.4901161193847656E-8) {
-          b_st.site = &ebb_emlrtRSI;
+          b_st.site = &lbb_emlrtRSI;
           y = NULL;
           m = emlrtCreateCharArray(2, &b_iv[0]);
           emlrtInitCharArrayR2013a(&b_st, 6, m, &rfmt[0]);
@@ -172,10 +172,10 @@ void b_chi2inv(const emlrtStack *sp, const emxArray_real_T *p, real_T v,
           b_y = NULL;
           m = emlrtCreateDoubleScalar(a);
           emlrtAssign(&b_y, m);
-          c_st.site = &aqb_emlrtRSI;
-          e_emlrt_marshallIn(&c_st, d_sprintf(&c_st, y, b_y, &s_emlrtMCI),
+          c_st.site = &uqb_emlrtRSI;
+          e_emlrt_marshallIn(&c_st, d_sprintf(&c_st, y, b_y, &u_emlrtMCI),
                              "<output of sprintf>", str);
-          b_st.site = &hn_emlrtRSI;
+          b_st.site = &on_emlrtRSI;
           c_y = NULL;
           m = emlrtCreateCharArray(2, &iv1[0]);
           emlrtInitCharArrayR2013a(&b_st, 6, m, &rfmt[0]);
@@ -183,10 +183,10 @@ void b_chi2inv(const emlrtStack *sp, const emxArray_real_T *p, real_T v,
           d_y = NULL;
           m = emlrtCreateDoubleScalar(2.0);
           emlrtAssign(&d_y, m);
-          c_st.site = &aqb_emlrtRSI;
-          e_emlrt_marshallIn(&c_st, d_sprintf(&c_st, c_y, d_y, &s_emlrtMCI),
+          c_st.site = &uqb_emlrtRSI;
+          e_emlrt_marshallIn(&c_st, d_sprintf(&c_st, c_y, d_y, &u_emlrtMCI),
                              "<output of sprintf>", b_str);
-          b_st.site = &dbb_emlrtRSI;
+          b_st.site = &kbb_emlrtRSI;
           e_y = NULL;
           m = emlrtCreateCharArray(2, &iv2[0]);
           emlrtInitCharArrayR2013a(&b_st, 6, m, &rfmt[0]);
@@ -194,36 +194,36 @@ void b_chi2inv(const emlrtStack *sp, const emxArray_real_T *p, real_T v,
           f_y = NULL;
           m = emlrtCreateDoubleScalar(p->data[k]);
           emlrtAssign(&f_y, m);
-          c_st.site = &aqb_emlrtRSI;
-          e_emlrt_marshallIn(&c_st, d_sprintf(&c_st, e_y, f_y, &s_emlrtMCI),
+          c_st.site = &uqb_emlrtRSI;
+          e_emlrt_marshallIn(&c_st, d_sprintf(&c_st, e_y, f_y, &u_emlrtMCI),
                              "<output of sprintf>", c_str);
-          b_st.site = &gn_emlrtRSI;
+          b_st.site = &nn_emlrtRSI;
           i_warning(&b_st, str, b_str, c_str);
         }
         i1 = x->size[0] * x->size[1];
         if (((int32_T)(k + 1U) < 1) || ((int32_T)(k + 1U) > i1)) {
-          emlrtDynamicBoundsCheckR2012b((int32_T)(k + 1U), 1, i1, &xp_emlrtBCI,
+          emlrtDynamicBoundsCheckR2012b((int32_T)(k + 1U), 1, i1, &fq_emlrtBCI,
                                         &st);
         }
         x->data[k] = dc.re * 2.0;
       } else if ((a == 0.0) || (p->data[k] == 0.0)) {
         i1 = x->size[0] * x->size[1];
         if (((int32_T)(k + 1U) < 1) || ((int32_T)(k + 1U) > i1)) {
-          emlrtDynamicBoundsCheckR2012b((int32_T)(k + 1U), 1, i1, &up_emlrtBCI,
+          emlrtDynamicBoundsCheckR2012b((int32_T)(k + 1U), 1, i1, &cq_emlrtBCI,
                                         &st);
         }
         x->data[k] = 0.0;
       } else if (p->data[k] == 1.0) {
         i1 = x->size[0] * x->size[1];
         if (((int32_T)(k + 1U) < 1) || ((int32_T)(k + 1U) > i1)) {
-          emlrtDynamicBoundsCheckR2012b((int32_T)(k + 1U), 1, i1, &wp_emlrtBCI,
+          emlrtDynamicBoundsCheckR2012b((int32_T)(k + 1U), 1, i1, &eq_emlrtBCI,
                                         &st);
         }
         x->data[k] = rtInf;
       } else {
         i1 = x->size[0] * x->size[1];
         if (((int32_T)(k + 1U) < 1) || ((int32_T)(k + 1U) > i1)) {
-          emlrtDynamicBoundsCheckR2012b((int32_T)(k + 1U), 1, i1, &vp_emlrtBCI,
+          emlrtDynamicBoundsCheckR2012b((int32_T)(k + 1U), 1, i1, &dq_emlrtBCI,
                                         &st);
         }
         x->data[k] = rtNaN;
@@ -231,7 +231,7 @@ void b_chi2inv(const emlrtStack *sp, const emxArray_real_T *p, real_T v,
     } else {
       i1 = x->size[0] * x->size[1];
       if (((int32_T)(k + 1U) < 1) || ((int32_T)(k + 1U) > i1)) {
-        emlrtDynamicBoundsCheckR2012b((int32_T)(k + 1U), 1, i1, &tp_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b((int32_T)(k + 1U), 1, i1, &bq_emlrtBCI,
                                       &st);
       }
       x->data[k] = rtNaN;
@@ -269,16 +269,16 @@ real_T chi2inv(const emlrtStack *sp, real_T p, real_T v)
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   a = v / 2.0;
-  st.site = &fn_emlrtRSI;
+  st.site = &mn_emlrtRSI;
   if (!muDoubleScalarIsInf(a)) {
     if ((p > 0.0) && (p < 1.0) && (a > 0.0)) {
-      b_st.site = &jn_emlrtRSI;
+      b_st.site = &qn_emlrtRSI;
       dc = gammaincinv(&b_st, p, a);
-      b_st.site = &in_emlrtRSI;
+      b_st.site = &pn_emlrtRSI;
       dc1 = gammainc(&b_st, dc.re, a);
-      b_st.site = &in_emlrtRSI;
+      b_st.site = &pn_emlrtRSI;
       if (muDoubleScalarHypot(dc1.re - p, dc1.im) > p * 1.4901161193847656E-8) {
-        b_st.site = &ebb_emlrtRSI;
+        b_st.site = &lbb_emlrtRSI;
         y = NULL;
         m = emlrtCreateCharArray(2, &b_iv[0]);
         emlrtInitCharArrayR2013a(&b_st, 6, m, &rfmt[0]);
@@ -286,10 +286,10 @@ real_T chi2inv(const emlrtStack *sp, real_T p, real_T v)
         b_y = NULL;
         m = emlrtCreateDoubleScalar(a);
         emlrtAssign(&b_y, m);
-        c_st.site = &aqb_emlrtRSI;
-        e_emlrt_marshallIn(&c_st, d_sprintf(&c_st, y, b_y, &s_emlrtMCI),
+        c_st.site = &uqb_emlrtRSI;
+        e_emlrt_marshallIn(&c_st, d_sprintf(&c_st, y, b_y, &u_emlrtMCI),
                            "<output of sprintf>", str);
-        b_st.site = &hn_emlrtRSI;
+        b_st.site = &on_emlrtRSI;
         c_y = NULL;
         m = emlrtCreateCharArray(2, &iv1[0]);
         emlrtInitCharArrayR2013a(&b_st, 6, m, &rfmt[0]);
@@ -297,10 +297,10 @@ real_T chi2inv(const emlrtStack *sp, real_T p, real_T v)
         d_y = NULL;
         m = emlrtCreateDoubleScalar(2.0);
         emlrtAssign(&d_y, m);
-        c_st.site = &aqb_emlrtRSI;
-        e_emlrt_marshallIn(&c_st, d_sprintf(&c_st, c_y, d_y, &s_emlrtMCI),
+        c_st.site = &uqb_emlrtRSI;
+        e_emlrt_marshallIn(&c_st, d_sprintf(&c_st, c_y, d_y, &u_emlrtMCI),
                            "<output of sprintf>", b_str);
-        b_st.site = &dbb_emlrtRSI;
+        b_st.site = &kbb_emlrtRSI;
         e_y = NULL;
         m = emlrtCreateCharArray(2, &iv2[0]);
         emlrtInitCharArrayR2013a(&b_st, 6, m, &rfmt[0]);
@@ -308,10 +308,10 @@ real_T chi2inv(const emlrtStack *sp, real_T p, real_T v)
         f_y = NULL;
         m = emlrtCreateDoubleScalar(p);
         emlrtAssign(&f_y, m);
-        c_st.site = &aqb_emlrtRSI;
-        e_emlrt_marshallIn(&c_st, d_sprintf(&c_st, e_y, f_y, &s_emlrtMCI),
+        c_st.site = &uqb_emlrtRSI;
+        e_emlrt_marshallIn(&c_st, d_sprintf(&c_st, e_y, f_y, &u_emlrtMCI),
                            "<output of sprintf>", c_str);
-        b_st.site = &gn_emlrtRSI;
+        b_st.site = &nn_emlrtRSI;
         i_warning(&b_st, str, b_str, c_str);
       }
       x = dc.re * 2.0;

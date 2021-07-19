@@ -26,4 +26,8 @@ void b_abs(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y);
 
 void c_abs(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y);
 
+void d_abs(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y);
+
+void e_abs(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y);
+
 /* End of code generation (abs.h) */

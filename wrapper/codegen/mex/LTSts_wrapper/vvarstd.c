@@ -46,7 +46,7 @@ static emlrtRSInfo kt_emlrtRSI = {
     "d.m" /* pathName */
 };
 
-static emlrtRTEInfo ht_emlrtRTEI = {
+static emlrtRTEInfo gt_emlrtRTEI = {
     126,       /* lineNo */
     34,        /* colNo */
     "vvarstd", /* fName */
@@ -55,7 +55,7 @@ static emlrtRTEInfo ht_emlrtRTEI = {
     "d.m" /* pName */
 };
 
-static emlrtRTEInfo it_emlrtRTEI = {
+static emlrtRTEInfo ht_emlrtRTEI = {
     126,       /* lineNo */
     9,         /* colNo */
     "vvarstd", /* fName */
@@ -90,14 +90,14 @@ real_T vvarstd(const emlrtStack *sp, const emxArray_real_T *v, int32_T n)
       s = rtNaN;
     }
   } else {
-    emxInit_real_T(sp, &absdiff, 1, &it_emlrtRTEI, true);
+    emxInit_real_T(sp, &absdiff, 1, &ht_emlrtRTEI, true);
     st.site = &it_emlrtRSI;
     b_st.site = &bo_emlrtRSI;
     xbar = blockedSummation(&b_st, v, n);
     xbar /= (real_T)n;
     k = absdiff->size[0];
     absdiff->size[0] = v->size[0];
-    emxEnsureCapacity_real_T(sp, absdiff, k, &ht_emlrtRTEI);
+    emxEnsureCapacity_real_T(sp, absdiff, k, &gt_emlrtRTEI);
     st.site = &jt_emlrtRSI;
     if ((1 <= n) && (n > 2147483646)) {
       b_st.site = &qf_emlrtRSI;
@@ -113,7 +113,7 @@ real_T vvarstd(const emlrtStack *sp, const emxArray_real_T *v, int32_T n)
     emxFree_real_T(&absdiff);
     if (n - 1 < 0) {
       emlrtErrorWithMessageIdR2018a(
-          &st, &xb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+          &st, &wb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
           "Coder:toolbox:ElFunDomainError", 3, 4, 4, "sqrt");
     }
     s /= muDoubleScalarSqrt(n - 1);

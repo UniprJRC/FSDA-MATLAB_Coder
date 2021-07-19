@@ -58,10 +58,10 @@ tic
     'SmallSampleCor',SmallSampleCor,'yxsave',yxsave);
 tottime=toc;
 
-% LTSts wrapper
+% LTSts wrapper_mex
 rng(100);
 tic
-[outMEX,CMEX]=LTSts_wrapper(y,  conflev,dispresults,h,intercept,lshiftlocref,lts,model,msg,nbestindexes,nocheck,nsamp,refstepsALS,reftolALS,SmallSampleCor,yxsave);
+[outMEX,CMEX]=LTSts_wrapper_mex(y,  conflev,dispresults,h,intercept,lshiftlocref,lts,model,msg,nbestindexes,nocheck,nsamp,refstepsALS,reftolALS,SmallSampleCor,yxsave);
 tottimeMEX=toc;
 
 % Compare mex time with .m time

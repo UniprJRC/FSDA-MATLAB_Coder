@@ -450,7 +450,7 @@ creal_T b_betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
         d_y = NULL;
         m = emlrtCreateDoubleScalar(x);
         emlrtAssign(&d_y, m);
-        c_st.site = &cjb_emlrtRSI;
+        c_st.site = &bjb_emlrtRSI;
         c_emlrt_marshallIn(&c_st, b_sprintf(&c_st, c_y, d_y, &r_emlrtMCI),
                            "<output of sprintf>", str);
         b_st.site = &cq_emlrtRSI;
@@ -461,7 +461,7 @@ creal_T b_betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
         f_y = NULL;
         m = emlrtCreateDoubleScalar(a);
         emlrtAssign(&f_y, m);
-        c_st.site = &cjb_emlrtRSI;
+        c_st.site = &bjb_emlrtRSI;
         c_emlrt_marshallIn(&c_st, b_sprintf(&c_st, e_y, f_y, &r_emlrtMCI),
                            "<output of sprintf>", b_str);
         b_st.site = &cq_emlrtRSI;
@@ -472,7 +472,7 @@ creal_T b_betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
         h_y = NULL;
         m = emlrtCreateDoubleScalar(b);
         emlrtAssign(&h_y, m);
-        c_st.site = &cjb_emlrtRSI;
+        c_st.site = &bjb_emlrtRSI;
         c_emlrt_marshallIn(&c_st, b_sprintf(&c_st, g_y, h_y, &r_emlrtMCI),
                            "<output of sprintf>", c_str);
         b_st.site = &bq_emlrtRSI;
@@ -761,7 +761,7 @@ creal_T betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
         d_y = NULL;
         m = emlrtCreateDoubleScalar(x);
         emlrtAssign(&d_y, m);
-        c_st.site = &cjb_emlrtRSI;
+        c_st.site = &bjb_emlrtRSI;
         c_emlrt_marshallIn(&c_st, b_sprintf(&c_st, c_y, d_y, &r_emlrtMCI),
                            "<output of sprintf>", str);
         b_st.site = &cq_emlrtRSI;
@@ -772,7 +772,7 @@ creal_T betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
         f_y = NULL;
         m = emlrtCreateDoubleScalar(a);
         emlrtAssign(&f_y, m);
-        c_st.site = &cjb_emlrtRSI;
+        c_st.site = &bjb_emlrtRSI;
         c_emlrt_marshallIn(&c_st, b_sprintf(&c_st, e_y, f_y, &r_emlrtMCI),
                            "<output of sprintf>", b_str);
         b_st.site = &cq_emlrtRSI;
@@ -783,7 +783,7 @@ creal_T betaincinv(const emlrtStack *sp, real_T x, real_T a, real_T b)
         h_y = NULL;
         m = emlrtCreateDoubleScalar(b);
         emlrtAssign(&h_y, m);
-        c_st.site = &cjb_emlrtRSI;
+        c_st.site = &bjb_emlrtRSI;
         c_emlrt_marshallIn(&c_st, b_sprintf(&c_st, g_y, h_y, &r_emlrtMCI),
                            "<output of sprintf>", c_str);
         b_st.site = &bq_emlrtRSI;

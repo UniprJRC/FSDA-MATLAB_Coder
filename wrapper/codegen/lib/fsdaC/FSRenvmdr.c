@@ -11,12 +11,15 @@
 
 /* Include files */
 #include "FSRenvmdr.h"
+#include "betainc.h"
+#include "betaincinv.h"
+#include "chi2inv.h"
 #include "colon.h"
 #include "erfcinv.h"
 #include "finv.h"
 #include "fsdaC_emxutil.h"
+#include "fsdaC_rtwutil.h"
 #include "fsdaC_types.h"
-#include "repmat.h"
 #include "rt_nonfinite.h"
 #include "tinv.h"
 #include "rt_nonfinite.h"
@@ -26,23 +29,29 @@
 /* Function Definitions */
 void FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
 {
-  static const double options_prob[7] = {0.99, 0.999, 0.9999, 0.99999,
-                                         0.01, 0.5,   1.0E-5};
+  static const double b_dv[7] = {0.010000000000000009,
+                                 0.0010000000000000009,
+                                 9.9999999999988987E-5,
+                                 9.99999999995449E-6,
+                                 0.99,
+                                 0.5,
+                                 0.99999};
+  emxArray_real_T *MinSca;
   emxArray_real_T *a;
-  emxArray_real_T *b;
   emxArray_real_T *b_b_tmp;
   emxArray_real_T *b_tmp;
   emxArray_real_T *m;
+  emxArray_real_T *mm;
   emxArray_real_T *quant;
   emxArray_real_T *r;
-  emxArray_real_T *r1;
-  emxArray_real_T *r2;
-  emxArray_real_T *r3;
+  emxArray_real_T *v1;
+  emxArray_real_T *v2;
   emxArray_real_T *x;
   emxArray_real_T *y;
-  double options_prob_data[49];
-  double tmp_data[7];
-  int tmp_size[2];
+  creal_T dc;
+  double t;
+  double xn5;
+  double xn7;
   int i;
   int ibtile;
   int k;
@@ -178,7 +187,6 @@ void FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   /* } */
   /*  Beginning of code */
   /*  Input parameters checks */
-  /*  Notice that prob must be a row vector */
   /*  Check that the initial subset size is not greater than n-1 */
   /*  Envelopes generation */
   /*  Make sure that prob is a row vector. */
@@ -221,120 +229,221 @@ void FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
     m->data[i] = y->data[i];
   }
   emxFree_real_T(&y);
-  emxInit_real_T(&b, 2);
+  emxInit_real_T(&mm, 2);
   /*  mm = fwd search index replicated lp times. */
-  i = b->size[0] * b->size[1];
-  b->size[0] = m->size[0];
-  b->size[1] = 7;
-  emxEnsureCapacity_real_T(b, i);
+  i = mm->size[0] * mm->size[1];
+  mm->size[0] = m->size[0];
+  mm->size[1] = 7;
+  emxEnsureCapacity_real_T(mm, i);
   nrows = m->size[0];
   for (outsize_idx_1 = 0; outsize_idx_1 < 7; outsize_idx_1++) {
     ibtile = outsize_idx_1 * nrows;
     for (k = 0; k < nrows; k++) {
-      b->data[ibtile + k] = m->data[k];
+      mm->data[ibtile + k] = m->data[k];
     }
   }
   emxInit_real_T(&b_tmp, 2);
   /*  finv finds the inverse of the F distribution. */
   i = b_tmp->size[0] * b_tmp->size[1];
-  b_tmp->size[0] = b->size[0];
+  b_tmp->size[0] = mm->size[0];
   b_tmp->size[1] = 7;
   emxEnsureCapacity_real_T(b_tmp, i);
-  nrows = b->size[0] * 7;
+  nrows = mm->size[0] * 7;
   for (i = 0; i < nrows; i++) {
-    b_tmp->data[i] = n - b->data[i];
+    b_tmp->data[i] = n - mm->data[i];
   }
   emxInit_real_T(&b_b_tmp, 2);
   i = b_b_tmp->size[0] * b_b_tmp->size[1];
-  b_b_tmp->size[0] = b->size[0];
+  b_b_tmp->size[0] = mm->size[0];
   b_b_tmp->size[1] = 7;
   emxEnsureCapacity_real_T(b_b_tmp, i);
-  nrows = b->size[0] * 7;
+  nrows = mm->size[0] * 7;
   for (i = 0; i < nrows; i++) {
-    b_b_tmp->data[i] = b->data[i] + 1.0;
+    b_b_tmp->data[i] = mm->data[i] + 1.0;
   }
-  for (i = 0; i < 7; i++) {
-    options_prob_data[i] = options_prob[i];
+  emxInit_real_T(&MinSca, 2);
+  i = MinSca->size[0] * MinSca->size[1];
+  MinSca->size[0] = m->size[0];
+  MinSca->size[1] = 7;
+  emxEnsureCapacity_real_T(MinSca, i);
+  nrows = m->size[0];
+  for (outsize_idx_1 = 0; outsize_idx_1 < 7; outsize_idx_1++) {
+    ibtile = outsize_idx_1 * nrows;
+    for (k = 0; k < nrows; k++) {
+      MinSca->data[ibtile + k] = b_dv[outsize_idx_1];
+    }
   }
-  tmp_size[0] = 1;
-  tmp_size[1] = 7;
-  for (i = 0; i < 7; i++) {
-    tmp_data[i] = 1.0 - options_prob_data[i];
-  }
-  emxInit_real_T(&r, 2);
-  i = r->size[0] * r->size[1];
-  r->size[0] = b_tmp->size[0];
-  r->size[1] = 7;
-  emxEnsureCapacity_real_T(r, i);
+  emxInit_real_T(&v1, 2);
+  i = v1->size[0] * v1->size[1];
+  v1->size[0] = b_tmp->size[0];
+  v1->size[1] = 7;
+  emxEnsureCapacity_real_T(v1, i);
   nrows = b_tmp->size[0] * 7;
   for (i = 0; i < nrows; i++) {
-    r->data[i] = 2.0 * b_tmp->data[i];
+    v1->data[i] = 2.0 * b_tmp->data[i];
   }
-  emxInit_real_T(&r1, 2);
-  i = r1->size[0] * r1->size[1];
-  r1->size[0] = b_b_tmp->size[0];
-  r1->size[1] = 7;
-  emxEnsureCapacity_real_T(r1, i);
+  emxInit_real_T(&v2, 2);
+  i = v2->size[0] * v2->size[1];
+  v2->size[0] = b_b_tmp->size[0];
+  v2->size[1] = 7;
+  emxEnsureCapacity_real_T(v2, i);
   nrows = b_b_tmp->size[0] * 7;
   for (i = 0; i < nrows; i++) {
-    r1->data[i] = 2.0 * b_b_tmp->data[i];
+    v2->data[i] = 2.0 * b_b_tmp->data[i];
   }
   emxInit_real_T(&quant, 2);
-  emxInit_real_T(&r2, 2);
-  repmat(tmp_data, tmp_size, m->size[0], r2);
-  b_finv(r2, r, r1, quant);
+  if (MinSca->size[0] <= v1->size[0]) {
+    nrows = MinSca->size[0];
+  } else {
+    nrows = v1->size[0];
+  }
+  if (nrows > v2->size[0]) {
+    nrows = v2->size[0];
+  }
+  i = quant->size[0] * quant->size[1];
+  quant->size[0] = nrows;
+  quant->size[1] = 7;
+  emxEnsureCapacity_real_T(quant, i);
+  i = nrows * 7;
+  for (k = 0; k < i; k++) {
+    if ((v1->data[k] > 0.0) && (v2->data[k] > 0.0)) {
+      if (rtIsInf(v1->data[k])) {
+        if (rtIsInf(v2->data[k])) {
+          quant->data[k] = 1.0;
+        } else {
+          quant->data[k] =
+              v2->data[k] / chi2inv(1.0 - MinSca->data[k], v2->data[k]);
+        }
+      } else if (rtIsInf(v2->data[k])) {
+        quant->data[k] = chi2inv(MinSca->data[k], v1->data[k]) / v1->data[k];
+      } else {
+        dc = betainc(0.5, v1->data[k] / 2.0, v2->data[k] / 2.0);
+        if (MinSca->data[k] > dc.re) {
+          dc =
+              betaincinv(MinSca->data[k], v2->data[k] / 2.0, v1->data[k] / 2.0);
+          t = (1.0 - dc.re) / dc.re;
+        } else {
+          dc = b_betaincinv(MinSca->data[k], v1->data[k] / 2.0,
+                            v2->data[k] / 2.0);
+          t = dc.re / (1.0 - dc.re);
+        }
+        quant->data[k] = t * v2->data[k] / v1->data[k];
+      }
+    } else {
+      quant->data[k] = rtNaN;
+    }
+  }
+  emxFree_real_T(&v2);
+  emxFree_real_T(&v1);
   /*  from the equivalence with Incomplete beta distribution. */
   /*  Minsca = matrix of the scaled MDR envelopes in each step of the search. */
-  i = r->size[0] * r->size[1];
-  r->size[0] = b_b_tmp->size[0];
-  r->size[1] = 7;
-  emxEnsureCapacity_real_T(r, i);
   nrows = b_b_tmp->size[0] * 7;
-  emxFree_real_T(&r2);
+  i = b_b_tmp->size[0] * b_b_tmp->size[1];
+  b_b_tmp->size[1] = 7;
+  emxEnsureCapacity_real_T(b_b_tmp, i);
   for (i = 0; i < nrows; i++) {
-    r->data[i] = 0.5 * (b_b_tmp->data[i] / ((b->data[i] + 1.0) +
-                                            b_tmp->data[i] * quant->data[i]) +
-                        1.0);
+    b_b_tmp->data[i] =
+        0.5 * (b_b_tmp->data[i] /
+                   ((mm->data[i] + 1.0) + b_tmp->data[i] * quant->data[i]) +
+               1.0);
   }
   emxFree_real_T(&quant);
   i = b_tmp->size[0] * b_tmp->size[1];
-  b_tmp->size[0] = b->size[0];
+  b_tmp->size[0] = mm->size[0];
   b_tmp->size[1] = 7;
   emxEnsureCapacity_real_T(b_tmp, i);
-  nrows = b->size[0] * 7;
+  nrows = mm->size[0] * 7;
   for (i = 0; i < nrows; i++) {
-    b_tmp->data[i] = b->data[i] - p;
+    b_tmp->data[i] = mm->data[i] - p;
   }
   emxInit_real_T(&x, 2);
-  b_tinv(r, b_tmp, r1);
-  i = x->size[0] * x->size[1];
-  x->size[0] = r1->size[0];
-  x->size[1] = r1->size[1];
-  emxEnsureCapacity_real_T(x, i);
-  nrows = r1->size[0] * r1->size[1];
-  emxFree_real_T(&r);
-  for (i = 0; i < nrows; i++) {
-    x->data[i] = r1->data[i];
+  if (b_b_tmp->size[0] <= b_tmp->size[0]) {
+    nrows = b_b_tmp->size[0];
+  } else {
+    nrows = b_tmp->size[0];
   }
-  emxFree_real_T(&r1);
-  nrows = x->size[0] * x->size[1];
-  i = b_b_tmp->size[0] * b_b_tmp->size[1];
-  b_b_tmp->size[0] = x->size[0];
-  b_b_tmp->size[1] = x->size[1];
-  emxEnsureCapacity_real_T(b_b_tmp, i);
+  i = x->size[0] * x->size[1];
+  x->size[0] = nrows;
+  x->size[1] = 7;
+  emxEnsureCapacity_real_T(x, i);
+  i = nrows * 7;
+  for (k = 0; k < i; k++) {
+    if ((b_tmp->data[k] > 0.0) && (0.0 <= b_b_tmp->data[k]) &&
+        (b_b_tmp->data[k] <= 1.0)) {
+      if (b_b_tmp->data[k] == 0.0) {
+        x->data[k] = rtMinusInf;
+      } else if (b_b_tmp->data[k] == 1.0) {
+        x->data[k] = rtInf;
+      } else if (b_tmp->data[k] == 1.0) {
+        x->data[k] = tan(3.1415926535897931 * (b_b_tmp->data[k] - 0.5));
+      } else if (b_tmp->data[k] < 1000.0) {
+        t = fabs(b_b_tmp->data[k] - 0.5);
+        if (t < 0.25) {
+          dc = b_betaincinv(2.0 * t, 0.5, b_tmp->data[k] / 2.0);
+          xn7 = dc.re;
+          dc = b_betaincinv(2.0 * t, 0.5, b_tmp->data[k] / 2.0);
+          xn5 = 1.0 - dc.re;
+        } else {
+          dc = betaincinv(2.0 * t, b_tmp->data[k] / 2.0, 0.5);
+          xn5 = dc.re;
+          dc = betaincinv(2.0 * t, b_tmp->data[k] / 2.0, 0.5);
+          xn7 = 1.0 - dc.re;
+        }
+        t = b_b_tmp->data[k] - 0.5;
+        if (b_b_tmp->data[k] - 0.5 < 0.0) {
+          t = -1.0;
+        } else if (b_b_tmp->data[k] - 0.5 > 0.0) {
+          t = 1.0;
+        } else if (b_b_tmp->data[k] - 0.5 == 0.0) {
+          t = 0.0;
+        }
+        x->data[k] = t * sqrt(b_tmp->data[k] * (xn7 / xn5));
+      } else {
+        if ((b_b_tmp->data[k] >= 0.0) && (b_b_tmp->data[k] <= 1.0)) {
+          x->data[k] = -1.4142135623730951 * erfcinv(2.0 * b_b_tmp->data[k]);
+        } else {
+          x->data[k] = rtNaN;
+        }
+        if (b_tmp->data[k] < 6.6457388829771584E+75) {
+          t = rt_powd_snf(x->data[k], 3.0);
+          xn5 = rt_powd_snf(x->data[k], 5.0);
+          xn7 = rt_powd_snf(x->data[k], 7.0);
+          x->data[k] =
+              (((x->data[k] + (t + x->data[k]) / (4.0 * b_tmp->data[k])) +
+                ((5.0 * xn5 + 16.0 * t) + 3.0 * x->data[k]) /
+                    (96.0 * (b_tmp->data[k] * b_tmp->data[k]))) +
+               (((3.0 * xn7 + 19.0 * xn5) + 17.0 * t) - 15.0 * x->data[k]) /
+                   (384.0 * rt_powd_snf(b_tmp->data[k], 3.0))) +
+              ((((79.0 * rt_powd_snf(x->data[k], 9.0) + 776.0 * xn7) +
+                 1482.0 * xn5) -
+                1920.0 * t) -
+               945.0 * x->data[k]) /
+                  (92160.0 * rt_powd_snf(b_tmp->data[k], 4.0));
+        }
+      }
+    } else {
+      x->data[k] = rtNaN;
+    }
+  }
+  emxFree_real_T(&b_b_tmp);
+  nrows = x->size[0] * 7;
+  i = MinSca->size[0] * MinSca->size[1];
+  MinSca->size[0] = x->size[0];
+  MinSca->size[1] = 7;
+  emxEnsureCapacity_real_T(MinSca, i);
   for (k = 0; k < nrows; k++) {
-    b_b_tmp->data[k] = fabs(x->data[k]);
+    MinSca->data[k] = fabs(x->data[k]);
   }
   emxFree_real_T(&x);
   /*  Compute variance of the truncated normal distribution. */
   /*  mm/n is the percentage of observations inside subset. */
   i = b_tmp->size[0] * b_tmp->size[1];
-  b_tmp->size[0] = b->size[0];
+  b_tmp->size[0] = mm->size[0];
   b_tmp->size[1] = 7;
   emxEnsureCapacity_real_T(b_tmp, i);
-  nrows = b->size[0] * 7;
+  nrows = mm->size[0] * 7;
   for (i = 0; i < nrows; i++) {
-    b_tmp->data[i] = 0.5 * (b->data[i] / n + 1.0);
+    b_tmp->data[i] = 0.5 * (mm->data[i] / n + 1.0);
   }
   emxInit_real_T(&a, 2);
   i = a->size[0] * a->size[1];
@@ -350,39 +459,41 @@ void FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
     }
   }
   emxFree_real_T(&b_tmp);
-  emxInit_real_T(&r3, 2);
+  emxInit_real_T(&r, 2);
   /* corr=1-(2*a.*normpdf(a))./(2*normcdf(a)-1); */
-  i = r3->size[0] * r3->size[1];
-  r3->size[0] = a->size[0];
-  r3->size[1] = 7;
-  emxEnsureCapacity_real_T(r3, i);
+  i = r->size[0] * r->size[1];
+  r->size[0] = a->size[0];
+  r->size[1] = 7;
+  emxEnsureCapacity_real_T(r, i);
   i = a->size[0] * 7;
   for (k = 0; k < i; k++) {
-    r3->data[k] = exp(-0.5 * a->data[k] * a->data[k]) / 2.5066282746310002;
+    r->data[k] = exp(-0.5 * a->data[k] * a->data[k]) / 2.5066282746310002;
   }
-  nrows = b->size[0] * 7;
-  i = a->size[0] * a->size[1];
-  a->size[0] = b->size[0];
-  a->size[1] = 7;
-  emxEnsureCapacity_real_T(a, i);
+  nrows = mm->size[0] * 7;
+  i = mm->size[0] * mm->size[1];
+  mm->size[1] = 7;
+  emxEnsureCapacity_real_T(mm, i);
   for (i = 0; i < nrows; i++) {
-    a->data[i] = 1.0 - 2.0 * (n / b->data[i]) * a->data[i] * r3->data[i];
+    mm->data[i] = 1.0 - 2.0 * (n / mm->data[i]) * a->data[i] * r->data[i];
   }
-  emxFree_real_T(&b);
-  emxFree_real_T(&r3);
-  nrows = a->size[0] * 7;
-  for (k = 0; k < nrows; k++) {
-    a->data[k] = sqrt(a->data[k]);
-  }
-  nrows = b_b_tmp->size[0] * b_b_tmp->size[1];
-  for (i = 0; i < nrows; i++) {
-    b_b_tmp->data[i] /= a->data[i];
-  }
+  emxFree_real_T(&r);
   emxFree_real_T(&a);
+  nrows = mm->size[0] * 7;
+  for (k = 0; k < nrows; k++) {
+    mm->data[k] = sqrt(mm->data[k]);
+  }
+  nrows = MinSca->size[0] * 7;
+  i = MinSca->size[0] * MinSca->size[1];
+  MinSca->size[1] = 7;
+  emxEnsureCapacity_real_T(MinSca, i);
+  for (i = 0; i < nrows; i++) {
+    MinSca->data[i] /= mm->data[i];
+  }
+  emxFree_real_T(&mm);
   if (m->size[0] != 0) {
     ibtile = m->size[0];
-  } else if (b_b_tmp->size[0] != 0) {
-    ibtile = b_b_tmp->size[0];
+  } else if (MinSca->size[0] != 0) {
+    ibtile = MinSca->size[0];
   } else {
     ibtile = 0;
   }
@@ -392,7 +503,7 @@ void FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   } else {
     input_sizes_idx_1 = 0;
   }
-  if (empty_non_axis_sizes || (b_b_tmp->size[0] != 0)) {
+  if (empty_non_axis_sizes || (MinSca->size[0] != 0)) {
     outsize_idx_1 = 7;
   } else {
     outsize_idx_1 = 0;
@@ -411,31 +522,33 @@ void FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   for (i = 0; i < outsize_idx_1; i++) {
     for (k = 0; k < ibtile; k++) {
       MDRenv->data[k + MDRenv->size[0] * (i + input_sizes_idx_1)] =
-          b_b_tmp->data[k + ibtile * i];
+          MinSca->data[k + ibtile * i];
     }
   }
-  emxFree_real_T(&b_b_tmp);
+  emxFree_real_T(&MinSca);
 }
 
 void b_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
 {
-  emxArray_real_T *b;
-  emxArray_real_T *b_b;
+  emxArray_real_T *MinSca;
+  emxArray_real_T *a;
   emxArray_real_T *b_b_tmp;
-  emxArray_real_T *b_p;
   emxArray_real_T *b_tmp;
-  emxArray_real_T *c_b;
   emxArray_real_T *m;
+  emxArray_real_T *mm;
   emxArray_real_T *quant;
   emxArray_real_T *r;
+  emxArray_real_T *v2;
+  emxArray_real_T *x;
   emxArray_real_T *y;
+  creal_T dc;
+  double t;
+  double xn3;
+  double xn5;
+  double xn7;
   int i;
-  int i1;
-  int itilerow;
+  int k;
   int nrows;
-  int outsize_idx_1;
-  signed char input_sizes_idx_1;
-  bool empty_non_axis_sizes;
   /* FSRenvmdr computes the theoretical envelopes of Minimum Deletion Residual
    * outside subset during the search */
   /*  */
@@ -564,7 +677,6 @@ void b_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   /* } */
   /*  Beginning of code */
   /*  Input parameters checks */
-  /*  Notice that prob must be a row vector */
   /*  Check that the initial subset size is not greater than n-1 */
   /*  Envelopes generation */
   /*  Make sure that prob is a row vector. */
@@ -607,223 +719,254 @@ void b_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
     m->data[i] = y->data[i];
   }
   emxFree_real_T(&y);
-  emxInit_real_T(&b, 2);
+  emxInit_real_T(&mm, 1);
   /*  mm = fwd search index replicated lp times. */
-  i = b->size[0] * b->size[1];
-  b->size[0] = m->size[0];
-  b->size[1] = 1;
-  emxEnsureCapacity_real_T(b, i);
+  i = mm->size[0];
+  mm->size[0] = m->size[0];
+  emxEnsureCapacity_real_T(mm, i);
   nrows = m->size[0];
-  for (outsize_idx_1 = 0; outsize_idx_1 < nrows; outsize_idx_1++) {
-    b->data[outsize_idx_1] = m->data[outsize_idx_1];
+  for (k = 0; k < nrows; k++) {
+    mm->data[k] = m->data[k];
   }
-  emxInit_real_T(&b_tmp, 2);
+  emxInit_real_T(&b_tmp, 1);
   /*  finv finds the inverse of the F distribution. */
-  i = b_tmp->size[0] * b_tmp->size[1];
-  b_tmp->size[0] = b->size[0];
-  b_tmp->size[1] = 1;
+  i = b_tmp->size[0];
+  b_tmp->size[0] = mm->size[0];
   emxEnsureCapacity_real_T(b_tmp, i);
-  nrows = b->size[0];
+  nrows = mm->size[0];
   for (i = 0; i < nrows; i++) {
-    b_tmp->data[i] = n - b->data[i];
+    b_tmp->data[i] = n - mm->data[i];
   }
-  emxInit_real_T(&b_b_tmp, 2);
-  i = b_b_tmp->size[0] * b_b_tmp->size[1];
-  b_b_tmp->size[0] = b->size[0];
-  b_b_tmp->size[1] = 1;
+  emxInit_real_T(&b_b_tmp, 1);
+  i = b_b_tmp->size[0];
+  b_b_tmp->size[0] = mm->size[0];
   emxEnsureCapacity_real_T(b_b_tmp, i);
-  nrows = b->size[0];
+  nrows = mm->size[0];
   for (i = 0; i < nrows; i++) {
-    b_b_tmp->data[i] = b->data[i] + 1.0;
+    b_b_tmp->data[i] = mm->data[i] + 1.0;
   }
-  emxInit_real_T(&b_b, 2);
-  i = b_b->size[0] * b_b->size[1];
-  b_b->size[0] = m->size[0];
-  b_b->size[1] = 1;
-  emxEnsureCapacity_real_T(b_b, i);
-  nrows = m->size[0];
-  for (itilerow = 0; itilerow < nrows; itilerow++) {
-    b_b->data[itilerow] = 0.99;
-  }
-  emxInit_real_T(&r, 2);
-  i = r->size[0] * r->size[1];
-  r->size[0] = b_tmp->size[0];
-  r->size[1] = 1;
-  emxEnsureCapacity_real_T(r, i);
+  emxInit_real_T(&MinSca, 1);
+  i = MinSca->size[0];
+  MinSca->size[0] = b_tmp->size[0];
+  emxEnsureCapacity_real_T(MinSca, i);
   nrows = b_tmp->size[0];
   for (i = 0; i < nrows; i++) {
-    r->data[i] = 2.0 * b_tmp->data[i];
+    MinSca->data[i] = 2.0 * b_tmp->data[i];
   }
-  emxInit_real_T(&c_b, 2);
-  i = c_b->size[0] * c_b->size[1];
-  c_b->size[0] = b_b_tmp->size[0];
-  c_b->size[1] = 1;
-  emxEnsureCapacity_real_T(c_b, i);
+  emxInit_real_T(&v2, 1);
+  i = v2->size[0];
+  v2->size[0] = b_b_tmp->size[0];
+  emxEnsureCapacity_real_T(v2, i);
   nrows = b_b_tmp->size[0];
   for (i = 0; i < nrows; i++) {
-    c_b->data[i] = 2.0 * b_b_tmp->data[i];
+    v2->data[i] = 2.0 * b_b_tmp->data[i];
   }
-  emxInit_real_T(&quant, 2);
-  emxInit_real_T(&b_p, 2);
-  b_finv(b_b, r, c_b, b_p);
-  i = quant->size[0] * quant->size[1];
-  quant->size[0] = b_p->size[0];
-  quant->size[1] = b_p->size[1];
+  emxInit_real_T(&quant, 1);
+  if (m->size[0] <= MinSca->size[0]) {
+    nrows = m->size[0];
+  } else {
+    nrows = MinSca->size[0];
+  }
+  if (nrows > v2->size[0]) {
+    nrows = v2->size[0];
+  }
+  i = quant->size[0];
+  quant->size[0] = nrows;
   emxEnsureCapacity_real_T(quant, i);
-  nrows = b_p->size[0] * b_p->size[1];
-  for (i = 0; i < nrows; i++) {
-    quant->data[i] = b_p->data[i];
+  for (k = 0; k < nrows; k++) {
+    if ((MinSca->data[k] > 0.0) && (v2->data[k] > 0.0)) {
+      if (rtIsInf(MinSca->data[k])) {
+        if (rtIsInf(v2->data[k])) {
+          quant->data[k] = 1.0;
+        } else {
+          quant->data[k] =
+              v2->data[k] / chi2inv(0.010000000000000009, v2->data[k]);
+        }
+      } else if (rtIsInf(v2->data[k])) {
+        quant->data[k] = chi2inv(0.99, MinSca->data[k]) / MinSca->data[k];
+      } else {
+        dc = betainc(0.5, MinSca->data[k] / 2.0, v2->data[k] / 2.0);
+        if (0.99 > dc.re) {
+          dc = betaincinv(0.99, v2->data[k] / 2.0, MinSca->data[k] / 2.0);
+          t = (1.0 - dc.re) / dc.re;
+        } else {
+          dc = b_betaincinv(0.99, MinSca->data[k] / 2.0, v2->data[k] / 2.0);
+          t = dc.re / (1.0 - dc.re);
+        }
+        quant->data[k] = t * v2->data[k] / MinSca->data[k];
+      }
+    } else {
+      quant->data[k] = rtNaN;
+    }
   }
+  emxFree_real_T(&v2);
   /*  from the equivalence with Incomplete beta distribution. */
   /*  Minsca = matrix of the scaled MDR envelopes in each step of the search. */
-  i = r->size[0] * r->size[1];
-  r->size[0] = b_b_tmp->size[0];
-  r->size[1] = 1;
-  emxEnsureCapacity_real_T(r, i);
   nrows = b_b_tmp->size[0];
   for (i = 0; i < nrows; i++) {
-    r->data[i] = 0.5 * (b_b_tmp->data[i] / ((b->data[i] + 1.0) +
-                                            b_tmp->data[i] * quant->data[i]) +
-                        1.0);
+    b_b_tmp->data[i] =
+        0.5 * (b_b_tmp->data[i] /
+                   ((mm->data[i] + 1.0) + b_tmp->data[i] * quant->data[i]) +
+               1.0);
   }
-  emxFree_real_T(&b_tmp);
   emxFree_real_T(&quant);
-  i = c_b->size[0] * c_b->size[1];
-  c_b->size[0] = b->size[0];
-  c_b->size[1] = 1;
-  emxEnsureCapacity_real_T(c_b, i);
-  nrows = b->size[0];
+  i = b_tmp->size[0];
+  b_tmp->size[0] = mm->size[0];
+  emxEnsureCapacity_real_T(b_tmp, i);
+  nrows = mm->size[0];
   for (i = 0; i < nrows; i++) {
-    c_b->data[i] = b->data[i] - p;
+    b_tmp->data[i] = mm->data[i] - p;
   }
-  b_tinv(r, c_b, b_p);
-  i = b_b->size[0] * b_b->size[1];
-  b_b->size[0] = b_p->size[0];
-  b_b->size[1] = b_p->size[1];
-  emxEnsureCapacity_real_T(b_b, i);
-  nrows = b_p->size[0] * b_p->size[1];
-  emxFree_real_T(&r);
-  for (i = 0; i < nrows; i++) {
-    b_b->data[i] = b_p->data[i];
+  emxInit_real_T(&x, 1);
+  if (b_b_tmp->size[0] <= b_tmp->size[0]) {
+    nrows = b_b_tmp->size[0];
+  } else {
+    nrows = b_tmp->size[0];
   }
-  nrows = b_b->size[0] * b_b->size[1];
-  i = b_b_tmp->size[0] * b_b_tmp->size[1];
-  b_b_tmp->size[0] = b_b->size[0];
-  b_b_tmp->size[1] = b_b->size[1];
-  emxEnsureCapacity_real_T(b_b_tmp, i);
-  for (outsize_idx_1 = 0; outsize_idx_1 < nrows; outsize_idx_1++) {
-    b_b_tmp->data[outsize_idx_1] = fabs(b_b->data[outsize_idx_1]);
-  }
-  emxFree_real_T(&b_b);
-  /*  Compute variance of the truncated normal distribution. */
-  /*  mm/n is the percentage of observations inside subset. */
-  i = b_p->size[0] * b_p->size[1];
-  b_p->size[0] = b->size[0];
-  b_p->size[1] = 1;
-  emxEnsureCapacity_real_T(b_p, i);
-  nrows = b->size[0];
-  for (i = 0; i < nrows; i++) {
-    b_p->data[i] = 0.5 * (b->data[i] / n + 1.0);
-  }
-  i = c_b->size[0] * c_b->size[1];
-  c_b->size[0] = b_p->size[0];
-  c_b->size[1] = 1;
-  emxEnsureCapacity_real_T(c_b, i);
-  i = b_p->size[0];
-  for (outsize_idx_1 = 0; outsize_idx_1 < i; outsize_idx_1++) {
-    if ((b_p->data[outsize_idx_1] >= 0.0) &&
-        (b_p->data[outsize_idx_1] <= 1.0)) {
-      c_b->data[outsize_idx_1] =
-          -1.4142135623730951 * erfcinv(2.0 * b_p->data[outsize_idx_1]);
+  i = x->size[0];
+  x->size[0] = nrows;
+  emxEnsureCapacity_real_T(x, i);
+  for (k = 0; k < nrows; k++) {
+    if ((b_tmp->data[k] > 0.0) && (0.0 <= b_b_tmp->data[k]) &&
+        (b_b_tmp->data[k] <= 1.0)) {
+      if (b_b_tmp->data[k] == 0.0) {
+        x->data[k] = rtMinusInf;
+      } else if (b_b_tmp->data[k] == 1.0) {
+        x->data[k] = rtInf;
+      } else if (b_tmp->data[k] == 1.0) {
+        x->data[k] = tan(3.1415926535897931 * (b_b_tmp->data[k] - 0.5));
+      } else if (b_tmp->data[k] < 1000.0) {
+        t = fabs(b_b_tmp->data[k] - 0.5);
+        if (t < 0.25) {
+          dc = b_betaincinv(2.0 * t, 0.5, b_tmp->data[k] / 2.0);
+          xn5 = dc.re;
+          dc = b_betaincinv(2.0 * t, 0.5, b_tmp->data[k] / 2.0);
+          xn3 = 1.0 - dc.re;
+        } else {
+          dc = betaincinv(2.0 * t, b_tmp->data[k] / 2.0, 0.5);
+          xn3 = dc.re;
+          dc = betaincinv(2.0 * t, b_tmp->data[k] / 2.0, 0.5);
+          xn5 = 1.0 - dc.re;
+        }
+        t = b_b_tmp->data[k] - 0.5;
+        if (b_b_tmp->data[k] - 0.5 < 0.0) {
+          t = -1.0;
+        } else if (b_b_tmp->data[k] - 0.5 > 0.0) {
+          t = 1.0;
+        } else if (b_b_tmp->data[k] - 0.5 == 0.0) {
+          t = 0.0;
+        }
+        x->data[k] = t * sqrt(b_tmp->data[k] * (xn5 / xn3));
+      } else {
+        if ((b_b_tmp->data[k] >= 0.0) && (b_b_tmp->data[k] <= 1.0)) {
+          t = -1.4142135623730951 * erfcinv(2.0 * b_b_tmp->data[k]);
+          x->data[k] = t;
+        } else {
+          t = rtNaN;
+          x->data[k] = rtNaN;
+        }
+        if (b_tmp->data[k] < 6.6457388829771584E+75) {
+          xn3 = rt_powd_snf(t, 3.0);
+          xn5 = rt_powd_snf(t, 5.0);
+          xn7 = rt_powd_snf(t, 7.0);
+          t = (((t + (xn3 + t) / (4.0 * b_tmp->data[k])) +
+                ((5.0 * xn5 + 16.0 * xn3) + 3.0 * t) /
+                    (96.0 * (b_tmp->data[k] * b_tmp->data[k]))) +
+               (((3.0 * xn7 + 19.0 * xn5) + 17.0 * xn3) - 15.0 * t) /
+                   (384.0 * rt_powd_snf(b_tmp->data[k], 3.0))) +
+              ((((79.0 * rt_powd_snf(t, 9.0) + 776.0 * xn7) + 1482.0 * xn5) -
+                1920.0 * xn3) -
+               945.0 * t) /
+                  (92160.0 * rt_powd_snf(b_tmp->data[k], 4.0));
+          x->data[k] = t;
+        }
+      }
     } else {
-      c_b->data[outsize_idx_1] = rtNaN;
-    }
-  }
-  /* corr=1-(2*a.*normpdf(a))./(2*normcdf(a)-1); */
-  i = b_p->size[0] * b_p->size[1];
-  b_p->size[0] = c_b->size[0];
-  b_p->size[1] = 1;
-  emxEnsureCapacity_real_T(b_p, i);
-  i = c_b->size[0];
-  for (outsize_idx_1 = 0; outsize_idx_1 < i; outsize_idx_1++) {
-    b_p->data[outsize_idx_1] =
-        exp(-0.5 * c_b->data[outsize_idx_1] * c_b->data[outsize_idx_1]) /
-        2.5066282746310002;
-  }
-  nrows = b->size[0];
-  i = c_b->size[0] * c_b->size[1];
-  c_b->size[0] = b->size[0];
-  c_b->size[1] = 1;
-  emxEnsureCapacity_real_T(c_b, i);
-  for (i = 0; i < nrows; i++) {
-    c_b->data[i] = 1.0 - 2.0 * (n / b->data[i]) * c_b->data[i] * b_p->data[i];
-  }
-  emxFree_real_T(&b_p);
-  emxFree_real_T(&b);
-  nrows = c_b->size[0];
-  for (outsize_idx_1 = 0; outsize_idx_1 < nrows; outsize_idx_1++) {
-    c_b->data[outsize_idx_1] = sqrt(c_b->data[outsize_idx_1]);
-  }
-  nrows = b_b_tmp->size[0] * b_b_tmp->size[1];
-  for (i = 0; i < nrows; i++) {
-    b_b_tmp->data[i] /= c_b->data[i];
-  }
-  emxFree_real_T(&c_b);
-  if (m->size[0] != 0) {
-    itilerow = m->size[0];
-  } else if (b_b_tmp->size[0] != 0) {
-    itilerow = b_b_tmp->size[0];
-  } else {
-    itilerow = 0;
-  }
-  empty_non_axis_sizes = (itilerow == 0);
-  if (empty_non_axis_sizes || (m->size[0] != 0)) {
-    input_sizes_idx_1 = 1;
-  } else {
-    input_sizes_idx_1 = 0;
-  }
-  if (empty_non_axis_sizes || (b_b_tmp->size[0] != 0)) {
-    outsize_idx_1 = 1;
-  } else {
-    outsize_idx_1 = 0;
-  }
-  i = MDRenv->size[0] * MDRenv->size[1];
-  MDRenv->size[0] = itilerow;
-  MDRenv->size[1] = input_sizes_idx_1 + outsize_idx_1;
-  emxEnsureCapacity_real_T(MDRenv, i);
-  nrows = input_sizes_idx_1;
-  for (i = 0; i < nrows; i++) {
-    for (i1 = 0; i1 < itilerow; i1++) {
-      MDRenv->data[i1] = m->data[i1];
-    }
-  }
-  emxFree_real_T(&m);
-  for (i = 0; i < outsize_idx_1; i++) {
-    for (i1 = 0; i1 < itilerow; i1++) {
-      MDRenv->data[i1 + MDRenv->size[0] * input_sizes_idx_1] =
-          b_b_tmp->data[i1];
+      x->data[k] = rtNaN;
     }
   }
   emxFree_real_T(&b_b_tmp);
+  nrows = x->size[0];
+  i = MinSca->size[0];
+  MinSca->size[0] = x->size[0];
+  emxEnsureCapacity_real_T(MinSca, i);
+  for (k = 0; k < nrows; k++) {
+    MinSca->data[k] = fabs(x->data[k]);
+  }
+  emxFree_real_T(&x);
+  /*  Compute variance of the truncated normal distribution. */
+  /*  mm/n is the percentage of observations inside subset. */
+  i = b_tmp->size[0];
+  b_tmp->size[0] = mm->size[0];
+  emxEnsureCapacity_real_T(b_tmp, i);
+  nrows = mm->size[0];
+  for (i = 0; i < nrows; i++) {
+    b_tmp->data[i] = 0.5 * (mm->data[i] / n + 1.0);
+  }
+  emxInit_real_T(&a, 1);
+  i = a->size[0];
+  a->size[0] = b_tmp->size[0];
+  emxEnsureCapacity_real_T(a, i);
+  i = b_tmp->size[0];
+  for (k = 0; k < i; k++) {
+    if ((b_tmp->data[k] >= 0.0) && (b_tmp->data[k] <= 1.0)) {
+      a->data[k] = -1.4142135623730951 * erfcinv(2.0 * b_tmp->data[k]);
+    } else {
+      a->data[k] = rtNaN;
+    }
+  }
+  emxFree_real_T(&b_tmp);
+  emxInit_real_T(&r, 1);
+  /* corr=1-(2*a.*normpdf(a))./(2*normcdf(a)-1); */
+  i = r->size[0];
+  r->size[0] = a->size[0];
+  emxEnsureCapacity_real_T(r, i);
+  i = a->size[0];
+  for (k = 0; k < i; k++) {
+    r->data[k] = exp(-0.5 * a->data[k] * a->data[k]) / 2.5066282746310002;
+  }
+  nrows = mm->size[0];
+  for (i = 0; i < nrows; i++) {
+    mm->data[i] = 1.0 - 2.0 * (n / mm->data[i]) * a->data[i] * r->data[i];
+  }
+  emxFree_real_T(&r);
+  emxFree_real_T(&a);
+  nrows = mm->size[0];
+  for (k = 0; k < nrows; k++) {
+    mm->data[k] = sqrt(mm->data[k]);
+  }
+  i = MDRenv->size[0] * MDRenv->size[1];
+  MDRenv->size[0] = m->size[0];
+  MDRenv->size[1] = 2;
+  emxEnsureCapacity_real_T(MDRenv, i);
+  nrows = m->size[0];
+  for (i = 0; i < nrows; i++) {
+    MDRenv->data[i] = m->data[i];
+  }
+  emxFree_real_T(&m);
+  nrows = MinSca->size[0];
+  for (i = 0; i < nrows; i++) {
+    MDRenv->data[i + MDRenv->size[0]] = MinSca->data[i] / mm->data[i];
+  }
+  emxFree_real_T(&MinSca);
+  emxFree_real_T(&mm);
 }
 
 void c_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
 {
+  static const double b_dv[4] = {0.010000000000000009, 0.0010000000000000009,
+                                 0.99, 0.5};
+  emxArray_real_T *MinSca;
   emxArray_real_T *a;
   emxArray_real_T *b;
-  emxArray_real_T *b_b_tmp;
   emxArray_real_T *b_tmp;
   emxArray_real_T *m;
+  emxArray_real_T *mm;
   emxArray_real_T *quant;
   emxArray_real_T *r;
   emxArray_real_T *r1;
   emxArray_real_T *r2;
-  emxArray_real_T *r3;
-  emxArray_real_T *x;
   emxArray_real_T *y;
-  double options_prob_data[16];
-  double tmp_data[4];
-  int tmp_size[2];
   int i;
   int ibtile;
   int k;
@@ -959,7 +1102,6 @@ void c_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   /* } */
   /*  Beginning of code */
   /*  Input parameters checks */
-  /*  Notice that prob must be a row vector */
   /*  Check that the initial subset size is not greater than n-1 */
   /*  Envelopes generation */
   /*  Make sure that prob is a row vector. */
@@ -1002,8 +1144,39 @@ void c_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
     m->data[i] = y->data[i];
   }
   emxFree_real_T(&y);
-  emxInit_real_T(&b, 2);
+  emxInit_real_T(&mm, 2);
   /*  mm = fwd search index replicated lp times. */
+  i = mm->size[0] * mm->size[1];
+  mm->size[0] = m->size[0];
+  mm->size[1] = 4;
+  emxEnsureCapacity_real_T(mm, i);
+  nrows = m->size[0];
+  for (outsize_idx_1 = 0; outsize_idx_1 < 4; outsize_idx_1++) {
+    ibtile = outsize_idx_1 * nrows;
+    for (k = 0; k < nrows; k++) {
+      mm->data[ibtile + k] = m->data[k];
+    }
+  }
+  emxInit_real_T(&b_tmp, 2);
+  /*  finv finds the inverse of the F distribution. */
+  i = b_tmp->size[0] * b_tmp->size[1];
+  b_tmp->size[0] = mm->size[0];
+  b_tmp->size[1] = 4;
+  emxEnsureCapacity_real_T(b_tmp, i);
+  nrows = mm->size[0] * 4;
+  for (i = 0; i < nrows; i++) {
+    b_tmp->data[i] = n - mm->data[i];
+  }
+  emxInit_real_T(&MinSca, 2);
+  i = MinSca->size[0] * MinSca->size[1];
+  MinSca->size[0] = mm->size[0];
+  MinSca->size[1] = 4;
+  emxEnsureCapacity_real_T(MinSca, i);
+  nrows = mm->size[0] * 4;
+  for (i = 0; i < nrows; i++) {
+    MinSca->data[i] = mm->data[i] + 1.0;
+  }
+  emxInit_real_T(&b, 2);
   i = b->size[0] * b->size[1];
   b->size[0] = m->size[0];
   b->size[1] = 4;
@@ -1012,36 +1185,8 @@ void c_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   for (outsize_idx_1 = 0; outsize_idx_1 < 4; outsize_idx_1++) {
     ibtile = outsize_idx_1 * nrows;
     for (k = 0; k < nrows; k++) {
-      b->data[ibtile + k] = m->data[k];
+      b->data[ibtile + k] = b_dv[outsize_idx_1];
     }
-  }
-  emxInit_real_T(&b_tmp, 2);
-  /*  finv finds the inverse of the F distribution. */
-  i = b_tmp->size[0] * b_tmp->size[1];
-  b_tmp->size[0] = b->size[0];
-  b_tmp->size[1] = 4;
-  emxEnsureCapacity_real_T(b_tmp, i);
-  nrows = b->size[0] * 4;
-  for (i = 0; i < nrows; i++) {
-    b_tmp->data[i] = n - b->data[i];
-  }
-  emxInit_real_T(&b_b_tmp, 2);
-  i = b_b_tmp->size[0] * b_b_tmp->size[1];
-  b_b_tmp->size[0] = b->size[0];
-  b_b_tmp->size[1] = 4;
-  emxEnsureCapacity_real_T(b_b_tmp, i);
-  nrows = b->size[0] * 4;
-  for (i = 0; i < nrows; i++) {
-    b_b_tmp->data[i] = b->data[i] + 1.0;
-  }
-  options_prob_data[0] = 0.99;
-  options_prob_data[1] = 0.999;
-  options_prob_data[2] = 0.01;
-  options_prob_data[3] = 0.5;
-  tmp_size[0] = 1;
-  tmp_size[1] = 4;
-  for (i = 0; i < 4; i++) {
-    tmp_data[i] = 1.0 - options_prob_data[i];
   }
   emxInit_real_T(&r, 2);
   i = r->size[0] * r->size[1];
@@ -1054,69 +1199,57 @@ void c_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   }
   emxInit_real_T(&r1, 2);
   i = r1->size[0] * r1->size[1];
-  r1->size[0] = b_b_tmp->size[0];
+  r1->size[0] = MinSca->size[0];
   r1->size[1] = 4;
   emxEnsureCapacity_real_T(r1, i);
-  nrows = b_b_tmp->size[0] * 4;
+  nrows = MinSca->size[0] * 4;
   for (i = 0; i < nrows; i++) {
-    r1->data[i] = 2.0 * b_b_tmp->data[i];
+    r1->data[i] = 2.0 * MinSca->data[i];
   }
   emxInit_real_T(&quant, 2);
-  emxInit_real_T(&r2, 2);
-  repmat(tmp_data, tmp_size, m->size[0], r2);
-  b_finv(r2, r, r1, quant);
+  d_finv(b, r, r1, quant);
   /*  from the equivalence with Incomplete beta distribution. */
   /*  Minsca = matrix of the scaled MDR envelopes in each step of the search. */
   i = r->size[0] * r->size[1];
-  r->size[0] = b_b_tmp->size[0];
+  r->size[0] = MinSca->size[0];
   r->size[1] = 4;
   emxEnsureCapacity_real_T(r, i);
-  nrows = b_b_tmp->size[0] * 4;
-  emxFree_real_T(&r2);
+  nrows = MinSca->size[0] * 4;
+  emxFree_real_T(&r1);
+  emxFree_real_T(&b);
   for (i = 0; i < nrows; i++) {
-    r->data[i] = 0.5 * (b_b_tmp->data[i] / ((b->data[i] + 1.0) +
-                                            b_tmp->data[i] * quant->data[i]) +
+    r->data[i] = 0.5 * (MinSca->data[i] / ((mm->data[i] + 1.0) +
+                                           b_tmp->data[i] * quant->data[i]) +
                         1.0);
   }
   emxFree_real_T(&quant);
-  i = b_tmp->size[0] * b_tmp->size[1];
-  b_tmp->size[0] = b->size[0];
-  b_tmp->size[1] = 4;
-  emxEnsureCapacity_real_T(b_tmp, i);
-  nrows = b->size[0] * 4;
+  i = MinSca->size[0] * MinSca->size[1];
+  MinSca->size[0] = mm->size[0];
+  MinSca->size[1] = 4;
+  emxEnsureCapacity_real_T(MinSca, i);
+  nrows = mm->size[0] * 4;
   for (i = 0; i < nrows; i++) {
-    b_tmp->data[i] = b->data[i] - p;
+    MinSca->data[i] = mm->data[i] - p;
   }
-  emxInit_real_T(&x, 2);
-  b_tinv(r, b_tmp, r1);
-  i = x->size[0] * x->size[1];
-  x->size[0] = r1->size[0];
-  x->size[1] = r1->size[1];
-  emxEnsureCapacity_real_T(x, i);
-  nrows = r1->size[0] * r1->size[1];
+  c_tinv(r, MinSca, b_tmp);
+  nrows = b_tmp->size[0] << 2;
+  i = MinSca->size[0] * MinSca->size[1];
+  MinSca->size[0] = b_tmp->size[0];
+  MinSca->size[1] = 4;
+  emxEnsureCapacity_real_T(MinSca, i);
   emxFree_real_T(&r);
-  for (i = 0; i < nrows; i++) {
-    x->data[i] = r1->data[i];
-  }
-  emxFree_real_T(&r1);
-  nrows = x->size[0] * x->size[1];
-  i = b_b_tmp->size[0] * b_b_tmp->size[1];
-  b_b_tmp->size[0] = x->size[0];
-  b_b_tmp->size[1] = x->size[1];
-  emxEnsureCapacity_real_T(b_b_tmp, i);
   for (k = 0; k < nrows; k++) {
-    b_b_tmp->data[k] = fabs(x->data[k]);
+    MinSca->data[k] = fabs(b_tmp->data[k]);
   }
-  emxFree_real_T(&x);
   /*  Compute variance of the truncated normal distribution. */
   /*  mm/n is the percentage of observations inside subset. */
   i = b_tmp->size[0] * b_tmp->size[1];
-  b_tmp->size[0] = b->size[0];
+  b_tmp->size[0] = mm->size[0];
   b_tmp->size[1] = 4;
   emxEnsureCapacity_real_T(b_tmp, i);
-  nrows = b->size[0] * 4;
+  nrows = mm->size[0] * 4;
   for (i = 0; i < nrows; i++) {
-    b_tmp->data[i] = 0.5 * (b->data[i] / n + 1.0);
+    b_tmp->data[i] = 0.5 * (mm->data[i] / n + 1.0);
   }
   emxInit_real_T(&a, 2);
   i = a->size[0] * a->size[1];
@@ -1132,39 +1265,41 @@ void c_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
     }
   }
   emxFree_real_T(&b_tmp);
-  emxInit_real_T(&r3, 2);
+  emxInit_real_T(&r2, 2);
   /* corr=1-(2*a.*normpdf(a))./(2*normcdf(a)-1); */
-  i = r3->size[0] * r3->size[1];
-  r3->size[0] = a->size[0];
-  r3->size[1] = 4;
-  emxEnsureCapacity_real_T(r3, i);
+  i = r2->size[0] * r2->size[1];
+  r2->size[0] = a->size[0];
+  r2->size[1] = 4;
+  emxEnsureCapacity_real_T(r2, i);
   i = a->size[0] << 2;
   for (k = 0; k < i; k++) {
-    r3->data[k] = exp(-0.5 * a->data[k] * a->data[k]) / 2.5066282746310002;
+    r2->data[k] = exp(-0.5 * a->data[k] * a->data[k]) / 2.5066282746310002;
   }
-  nrows = b->size[0] * 4;
-  i = a->size[0] * a->size[1];
-  a->size[0] = b->size[0];
-  a->size[1] = 4;
-  emxEnsureCapacity_real_T(a, i);
+  nrows = mm->size[0] * 4;
+  i = mm->size[0] * mm->size[1];
+  mm->size[1] = 4;
+  emxEnsureCapacity_real_T(mm, i);
   for (i = 0; i < nrows; i++) {
-    a->data[i] = 1.0 - 2.0 * (n / b->data[i]) * a->data[i] * r3->data[i];
+    mm->data[i] = 1.0 - 2.0 * (n / mm->data[i]) * a->data[i] * r2->data[i];
   }
-  emxFree_real_T(&b);
-  emxFree_real_T(&r3);
-  nrows = a->size[0] << 2;
-  for (k = 0; k < nrows; k++) {
-    a->data[k] = sqrt(a->data[k]);
-  }
-  nrows = b_b_tmp->size[0] * b_b_tmp->size[1];
-  for (i = 0; i < nrows; i++) {
-    b_b_tmp->data[i] /= a->data[i];
-  }
+  emxFree_real_T(&r2);
   emxFree_real_T(&a);
+  nrows = mm->size[0] << 2;
+  for (k = 0; k < nrows; k++) {
+    mm->data[k] = sqrt(mm->data[k]);
+  }
+  nrows = MinSca->size[0] * 4;
+  i = MinSca->size[0] * MinSca->size[1];
+  MinSca->size[1] = 4;
+  emxEnsureCapacity_real_T(MinSca, i);
+  for (i = 0; i < nrows; i++) {
+    MinSca->data[i] /= mm->data[i];
+  }
+  emxFree_real_T(&mm);
   if (m->size[0] != 0) {
     ibtile = m->size[0];
-  } else if (b_b_tmp->size[0] != 0) {
-    ibtile = b_b_tmp->size[0];
+  } else if (MinSca->size[0] != 0) {
+    ibtile = MinSca->size[0];
   } else {
     ibtile = 0;
   }
@@ -1174,7 +1309,7 @@ void c_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   } else {
     input_sizes_idx_1 = 0;
   }
-  if (empty_non_axis_sizes || (b_b_tmp->size[0] != 0)) {
+  if (empty_non_axis_sizes || (MinSca->size[0] != 0)) {
     outsize_idx_1 = 4;
   } else {
     outsize_idx_1 = 0;
@@ -1193,29 +1328,27 @@ void c_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   for (i = 0; i < outsize_idx_1; i++) {
     for (k = 0; k < ibtile; k++) {
       MDRenv->data[k + MDRenv->size[0] * (i + input_sizes_idx_1)] =
-          b_b_tmp->data[k + ibtile * i];
+          MinSca->data[k + ibtile * i];
     }
   }
-  emxFree_real_T(&b_b_tmp);
+  emxFree_real_T(&MinSca);
 }
 
 void d_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
 {
+  static const double b_dv[4] = {1.0000000000287557E-6, 9.9999999947364415E-8,
+                                 0.99, 0.5};
+  emxArray_real_T *MinSca;
   emxArray_real_T *a;
   emxArray_real_T *b;
-  emxArray_real_T *b_b_tmp;
   emxArray_real_T *b_tmp;
   emxArray_real_T *m;
+  emxArray_real_T *mm;
   emxArray_real_T *quant;
   emxArray_real_T *r;
   emxArray_real_T *r1;
   emxArray_real_T *r2;
-  emxArray_real_T *r3;
-  emxArray_real_T *x;
   emxArray_real_T *y;
-  double options_prob_data[16];
-  double tmp_data[4];
-  int tmp_size[2];
   int i;
   int ibtile;
   int k;
@@ -1351,7 +1484,6 @@ void d_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   /* } */
   /*  Beginning of code */
   /*  Input parameters checks */
-  /*  Notice that prob must be a row vector */
   /*  Check that the initial subset size is not greater than n-1 */
   /*  Envelopes generation */
   /*  Make sure that prob is a row vector. */
@@ -1394,8 +1526,39 @@ void d_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
     m->data[i] = y->data[i];
   }
   emxFree_real_T(&y);
-  emxInit_real_T(&b, 2);
+  emxInit_real_T(&mm, 2);
   /*  mm = fwd search index replicated lp times. */
+  i = mm->size[0] * mm->size[1];
+  mm->size[0] = m->size[0];
+  mm->size[1] = 4;
+  emxEnsureCapacity_real_T(mm, i);
+  nrows = m->size[0];
+  for (outsize_idx_1 = 0; outsize_idx_1 < 4; outsize_idx_1++) {
+    ibtile = outsize_idx_1 * nrows;
+    for (k = 0; k < nrows; k++) {
+      mm->data[ibtile + k] = m->data[k];
+    }
+  }
+  emxInit_real_T(&b_tmp, 2);
+  /*  finv finds the inverse of the F distribution. */
+  i = b_tmp->size[0] * b_tmp->size[1];
+  b_tmp->size[0] = mm->size[0];
+  b_tmp->size[1] = 4;
+  emxEnsureCapacity_real_T(b_tmp, i);
+  nrows = mm->size[0] * 4;
+  for (i = 0; i < nrows; i++) {
+    b_tmp->data[i] = n - mm->data[i];
+  }
+  emxInit_real_T(&MinSca, 2);
+  i = MinSca->size[0] * MinSca->size[1];
+  MinSca->size[0] = mm->size[0];
+  MinSca->size[1] = 4;
+  emxEnsureCapacity_real_T(MinSca, i);
+  nrows = mm->size[0] * 4;
+  for (i = 0; i < nrows; i++) {
+    MinSca->data[i] = mm->data[i] + 1.0;
+  }
+  emxInit_real_T(&b, 2);
   i = b->size[0] * b->size[1];
   b->size[0] = m->size[0];
   b->size[1] = 4;
@@ -1404,36 +1567,8 @@ void d_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   for (outsize_idx_1 = 0; outsize_idx_1 < 4; outsize_idx_1++) {
     ibtile = outsize_idx_1 * nrows;
     for (k = 0; k < nrows; k++) {
-      b->data[ibtile + k] = m->data[k];
+      b->data[ibtile + k] = b_dv[outsize_idx_1];
     }
-  }
-  emxInit_real_T(&b_tmp, 2);
-  /*  finv finds the inverse of the F distribution. */
-  i = b_tmp->size[0] * b_tmp->size[1];
-  b_tmp->size[0] = b->size[0];
-  b_tmp->size[1] = 4;
-  emxEnsureCapacity_real_T(b_tmp, i);
-  nrows = b->size[0] * 4;
-  for (i = 0; i < nrows; i++) {
-    b_tmp->data[i] = n - b->data[i];
-  }
-  emxInit_real_T(&b_b_tmp, 2);
-  i = b_b_tmp->size[0] * b_b_tmp->size[1];
-  b_b_tmp->size[0] = b->size[0];
-  b_b_tmp->size[1] = 4;
-  emxEnsureCapacity_real_T(b_b_tmp, i);
-  nrows = b->size[0] * 4;
-  for (i = 0; i < nrows; i++) {
-    b_b_tmp->data[i] = b->data[i] + 1.0;
-  }
-  options_prob_data[0] = 0.999999;
-  options_prob_data[1] = 0.9999999;
-  options_prob_data[2] = 0.01;
-  options_prob_data[3] = 0.5;
-  tmp_size[0] = 1;
-  tmp_size[1] = 4;
-  for (i = 0; i < 4; i++) {
-    tmp_data[i] = 1.0 - options_prob_data[i];
   }
   emxInit_real_T(&r, 2);
   i = r->size[0] * r->size[1];
@@ -1446,69 +1581,57 @@ void d_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   }
   emxInit_real_T(&r1, 2);
   i = r1->size[0] * r1->size[1];
-  r1->size[0] = b_b_tmp->size[0];
+  r1->size[0] = MinSca->size[0];
   r1->size[1] = 4;
   emxEnsureCapacity_real_T(r1, i);
-  nrows = b_b_tmp->size[0] * 4;
+  nrows = MinSca->size[0] * 4;
   for (i = 0; i < nrows; i++) {
-    r1->data[i] = 2.0 * b_b_tmp->data[i];
+    r1->data[i] = 2.0 * MinSca->data[i];
   }
   emxInit_real_T(&quant, 2);
-  emxInit_real_T(&r2, 2);
-  repmat(tmp_data, tmp_size, m->size[0], r2);
-  b_finv(r2, r, r1, quant);
+  d_finv(b, r, r1, quant);
   /*  from the equivalence with Incomplete beta distribution. */
   /*  Minsca = matrix of the scaled MDR envelopes in each step of the search. */
   i = r->size[0] * r->size[1];
-  r->size[0] = b_b_tmp->size[0];
+  r->size[0] = MinSca->size[0];
   r->size[1] = 4;
   emxEnsureCapacity_real_T(r, i);
-  nrows = b_b_tmp->size[0] * 4;
-  emxFree_real_T(&r2);
+  nrows = MinSca->size[0] * 4;
+  emxFree_real_T(&r1);
+  emxFree_real_T(&b);
   for (i = 0; i < nrows; i++) {
-    r->data[i] = 0.5 * (b_b_tmp->data[i] / ((b->data[i] + 1.0) +
-                                            b_tmp->data[i] * quant->data[i]) +
+    r->data[i] = 0.5 * (MinSca->data[i] / ((mm->data[i] + 1.0) +
+                                           b_tmp->data[i] * quant->data[i]) +
                         1.0);
   }
   emxFree_real_T(&quant);
-  i = b_tmp->size[0] * b_tmp->size[1];
-  b_tmp->size[0] = b->size[0];
-  b_tmp->size[1] = 4;
-  emxEnsureCapacity_real_T(b_tmp, i);
-  nrows = b->size[0] * 4;
+  i = MinSca->size[0] * MinSca->size[1];
+  MinSca->size[0] = mm->size[0];
+  MinSca->size[1] = 4;
+  emxEnsureCapacity_real_T(MinSca, i);
+  nrows = mm->size[0] * 4;
   for (i = 0; i < nrows; i++) {
-    b_tmp->data[i] = b->data[i] - p;
+    MinSca->data[i] = mm->data[i] - p;
   }
-  emxInit_real_T(&x, 2);
-  b_tinv(r, b_tmp, r1);
-  i = x->size[0] * x->size[1];
-  x->size[0] = r1->size[0];
-  x->size[1] = r1->size[1];
-  emxEnsureCapacity_real_T(x, i);
-  nrows = r1->size[0] * r1->size[1];
+  c_tinv(r, MinSca, b_tmp);
+  nrows = b_tmp->size[0] << 2;
+  i = MinSca->size[0] * MinSca->size[1];
+  MinSca->size[0] = b_tmp->size[0];
+  MinSca->size[1] = 4;
+  emxEnsureCapacity_real_T(MinSca, i);
   emxFree_real_T(&r);
-  for (i = 0; i < nrows; i++) {
-    x->data[i] = r1->data[i];
-  }
-  emxFree_real_T(&r1);
-  nrows = x->size[0] * x->size[1];
-  i = b_b_tmp->size[0] * b_b_tmp->size[1];
-  b_b_tmp->size[0] = x->size[0];
-  b_b_tmp->size[1] = x->size[1];
-  emxEnsureCapacity_real_T(b_b_tmp, i);
   for (k = 0; k < nrows; k++) {
-    b_b_tmp->data[k] = fabs(x->data[k]);
+    MinSca->data[k] = fabs(b_tmp->data[k]);
   }
-  emxFree_real_T(&x);
   /*  Compute variance of the truncated normal distribution. */
   /*  mm/n is the percentage of observations inside subset. */
   i = b_tmp->size[0] * b_tmp->size[1];
-  b_tmp->size[0] = b->size[0];
+  b_tmp->size[0] = mm->size[0];
   b_tmp->size[1] = 4;
   emxEnsureCapacity_real_T(b_tmp, i);
-  nrows = b->size[0] * 4;
+  nrows = mm->size[0] * 4;
   for (i = 0; i < nrows; i++) {
-    b_tmp->data[i] = 0.5 * (b->data[i] / n + 1.0);
+    b_tmp->data[i] = 0.5 * (mm->data[i] / n + 1.0);
   }
   emxInit_real_T(&a, 2);
   i = a->size[0] * a->size[1];
@@ -1524,39 +1647,41 @@ void d_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
     }
   }
   emxFree_real_T(&b_tmp);
-  emxInit_real_T(&r3, 2);
+  emxInit_real_T(&r2, 2);
   /* corr=1-(2*a.*normpdf(a))./(2*normcdf(a)-1); */
-  i = r3->size[0] * r3->size[1];
-  r3->size[0] = a->size[0];
-  r3->size[1] = 4;
-  emxEnsureCapacity_real_T(r3, i);
+  i = r2->size[0] * r2->size[1];
+  r2->size[0] = a->size[0];
+  r2->size[1] = 4;
+  emxEnsureCapacity_real_T(r2, i);
   i = a->size[0] << 2;
   for (k = 0; k < i; k++) {
-    r3->data[k] = exp(-0.5 * a->data[k] * a->data[k]) / 2.5066282746310002;
+    r2->data[k] = exp(-0.5 * a->data[k] * a->data[k]) / 2.5066282746310002;
   }
-  nrows = b->size[0] * 4;
-  i = a->size[0] * a->size[1];
-  a->size[0] = b->size[0];
-  a->size[1] = 4;
-  emxEnsureCapacity_real_T(a, i);
+  nrows = mm->size[0] * 4;
+  i = mm->size[0] * mm->size[1];
+  mm->size[1] = 4;
+  emxEnsureCapacity_real_T(mm, i);
   for (i = 0; i < nrows; i++) {
-    a->data[i] = 1.0 - 2.0 * (n / b->data[i]) * a->data[i] * r3->data[i];
+    mm->data[i] = 1.0 - 2.0 * (n / mm->data[i]) * a->data[i] * r2->data[i];
   }
-  emxFree_real_T(&b);
-  emxFree_real_T(&r3);
-  nrows = a->size[0] << 2;
-  for (k = 0; k < nrows; k++) {
-    a->data[k] = sqrt(a->data[k]);
-  }
-  nrows = b_b_tmp->size[0] * b_b_tmp->size[1];
-  for (i = 0; i < nrows; i++) {
-    b_b_tmp->data[i] /= a->data[i];
-  }
+  emxFree_real_T(&r2);
   emxFree_real_T(&a);
+  nrows = mm->size[0] << 2;
+  for (k = 0; k < nrows; k++) {
+    mm->data[k] = sqrt(mm->data[k]);
+  }
+  nrows = MinSca->size[0] * 4;
+  i = MinSca->size[0] * MinSca->size[1];
+  MinSca->size[1] = 4;
+  emxEnsureCapacity_real_T(MinSca, i);
+  for (i = 0; i < nrows; i++) {
+    MinSca->data[i] /= mm->data[i];
+  }
+  emxFree_real_T(&mm);
   if (m->size[0] != 0) {
     ibtile = m->size[0];
-  } else if (b_b_tmp->size[0] != 0) {
-    ibtile = b_b_tmp->size[0];
+  } else if (MinSca->size[0] != 0) {
+    ibtile = MinSca->size[0];
   } else {
     ibtile = 0;
   }
@@ -1566,7 +1691,7 @@ void d_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   } else {
     input_sizes_idx_1 = 0;
   }
-  if (empty_non_axis_sizes || (b_b_tmp->size[0] != 0)) {
+  if (empty_non_axis_sizes || (MinSca->size[0] != 0)) {
     outsize_idx_1 = 4;
   } else {
     outsize_idx_1 = 0;
@@ -1585,10 +1710,10 @@ void d_FSRenvmdr(double n, double p, double varargin_4, emxArray_real_T *MDRenv)
   for (i = 0; i < outsize_idx_1; i++) {
     for (k = 0; k < ibtile; k++) {
       MDRenv->data[k + MDRenv->size[0] * (i + input_sizes_idx_1)] =
-          b_b_tmp->data[k + ibtile * i];
+          MinSca->data[k + ibtile * i];
     }
   }
-  emxFree_real_T(&b_b_tmp);
+  emxFree_real_T(&MinSca);
 }
 
 /* End of code generation (FSRenvmdr.c) */

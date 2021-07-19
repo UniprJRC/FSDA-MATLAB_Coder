@@ -33,14 +33,23 @@ void unsafe_FSM_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[1],
 void unsafe_FSMbsb_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[2],
                                        int32_T nrhs, const mxArray *prhs[6]);
 
+void unsafe_FSMenvmmd_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[1],
+                                          int32_T nrhs, const mxArray *prhs[5]);
+
 void unsafe_FSMmmd_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[3],
                                        int32_T nrhs, const mxArray *prhs[6]);
+
+void unsafe_FSR_wrapper1_mexFunction(int32_T nlhs, mxArray *plhs[1],
+                                     int32_T nrhs, const mxArray *prhs[13]);
 
 void unsafe_FSR_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[1],
                                     int32_T nrhs, const mxArray *prhs[13]);
 
 void unsafe_FSRbsb_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[2],
                                        int32_T nrhs, const mxArray *prhs[8]);
+
+void unsafe_FSRenvmdr_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[1],
+                                          int32_T nrhs, const mxArray *prhs[4]);
 
 void unsafe_FSRfan_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[1],
                                        int32_T nrhs, const mxArray *prhs[11]);
@@ -65,6 +74,9 @@ void unsafe_tclust_wrapper1_mexFunction(int32_T nlhs, mxArray *plhs[2],
 
 void unsafe_tclust_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[2],
                                        int32_T nrhs, const mxArray *prhs[14]);
+
+void unsafe_unibiv_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[1],
+                                       int32_T nrhs, const mxArray *prhs[4]);
 
 #ifdef __cplusplus
 }

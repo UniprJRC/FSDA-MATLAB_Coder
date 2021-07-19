@@ -19,7 +19,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRSInfo fc_emlrtRSI = {
+static emlrtRSInfo ec_emlrtRSI = {
     144,        /* lineNo */
     "eml_find", /* fcnName */
     "C:\\Program "
@@ -27,7 +27,7 @@ static emlrtRSInfo fc_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRSInfo gc_emlrtRSI = {
+static emlrtRSInfo fc_emlrtRSI = {
     382,                  /* lineNo */
     "find_first_indices", /* fcnName */
     "C:\\Program "
@@ -35,7 +35,7 @@ static emlrtRSInfo gc_emlrtRSI = {
                                                                        */
 };
 
-static emlrtRSInfo kf_emlrtRSI = {
+static emlrtRSInfo jf_emlrtRSI = {
     402,                  /* lineNo */
     "find_first_indices", /* fcnName */
     "C:\\Program "
@@ -61,7 +61,7 @@ static emlrtRTEInfo cb_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo ae_emlrtRTEI = {
+static emlrtRTEInfo ee_emlrtRTEI = {
     364,    /* lineNo */
     24,     /* colNo */
     "find", /* fName */
@@ -70,7 +70,7 @@ static emlrtRTEInfo ae_emlrtRTEI = {
                                                                        */
 };
 
-static emlrtRTEInfo be_emlrtRTEI = {
+static emlrtRTEInfo fe_emlrtRTEI = {
     144,    /* lineNo */
     9,      /* colNo */
     "find", /* fName */
@@ -102,11 +102,11 @@ void b_eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
                                   "Coder:builtins:AssertionFailed",
                                   "Coder:builtins:AssertionFailed", 0);
   }
-  st.site = &fc_emlrtRSI;
+  st.site = &ec_emlrtRSI;
   idx = 0;
-  b_st.site = &gc_emlrtRSI;
+  b_st.site = &fc_emlrtRSI;
   if ((1 <= x->size[0]) && (x->size[0] > 2147483646)) {
-    c_st.site = &pb_emlrtRSI;
+    c_st.site = &ob_emlrtRSI;
     check_forloop_overflow_error(&c_st);
   }
   ii = 0;
@@ -133,7 +133,7 @@ void b_eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
     *i_size = (1 <= idx);
     iv[0] = 1;
     iv[1] = *i_size;
-    b_st.site = &kf_emlrtRSI;
+    b_st.site = &jf_emlrtRSI;
     b_indexShapeCheck(&b_st, 0, iv);
   }
 }
@@ -155,15 +155,15 @@ void eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
   nx = x->size[1];
-  st.site = &fc_emlrtRSI;
+  st.site = &ec_emlrtRSI;
   idx = 0;
   ii = i->size[0] * i->size[1];
   i->size[0] = 1;
   i->size[1] = x->size[1];
-  emxEnsureCapacity_int32_T(&st, i, ii, &ae_emlrtRTEI);
-  b_st.site = &gc_emlrtRSI;
+  emxEnsureCapacity_int32_T(&st, i, ii, &ee_emlrtRTEI);
+  b_st.site = &fc_emlrtRSI;
   if ((1 <= x->size[1]) && (x->size[1] > 2147483646)) {
-    c_st.site = &pb_emlrtRSI;
+    c_st.site = &ob_emlrtRSI;
     check_forloop_overflow_error(&c_st);
   }
   ii = 0;
@@ -198,7 +198,7 @@ void eml_find(const emlrtStack *sp, const emxArray_boolean_T *x,
     } else {
       i->size[1] = idx;
     }
-    emxEnsureCapacity_int32_T(&st, i, ii, &be_emlrtRTEI);
+    emxEnsureCapacity_int32_T(&st, i, ii, &fe_emlrtRTEI);
   }
 }
 

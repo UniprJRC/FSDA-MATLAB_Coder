@@ -77,11 +77,12 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
   emxArray_real_T *outliers;
   emxArray_real_T *seq;
   emxArray_real_T *y;
+  emxArray_uint32_T *nout;
   double d;
   double incre;
   double init_contents;
   double tr;
-  unsigned int nout[10];
+  unsigned int uv[10];
   int b_bonflev_size[2];
   int nout_size[2];
   int b_i;
@@ -101,8 +102,8 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
   int irank;
   int loop_ub;
   int n;
-  int partialTrueCount;
   int sto;
+  int trueCount;
   unsigned int u;
   int v;
   signed char tmp_data[5];
@@ -672,8 +673,8 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
     out->mmd->size[1] = 0;
     out->Un->size[0] = 0;
     out->Un->size[1] = 0;
-    out->nout.size[0] = 0;
-    out->nout.size[1] = 0;
+    out->nout->size[0] = 0;
+    out->nout->size[1] = 0;
     out->class.size[0] = 1;
     out->class.size[1] = 0;
     /*  all(structfun(@isempty,out)) */
@@ -684,6 +685,7 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
     emxInit_real_T(&gbonf, 2);
     emxInit_real_T(&gmin, 2);
     emxInit_real_T(&gmin1, 2);
+    emxInit_uint32_T(&nout, 2);
     emxInit_int32_T(&ia, 1);
     if ((bonflev_size[0] != 0) && (bonflev_size[1] != 0)) {
       b_bonflev_size[0] = 1;
@@ -698,7 +700,15 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
       nout_data.canFreeData = false;
       if (b_ifWhileCond(&nout_data)) {
         FSMbonfbound(b_Y->size[0], b_Y->size[1], bonflev_data, bonflev_size,
-                     init_contents, gbonf);
+                     init_contents, gmin1);
+        i = gbonf->size[0] * gbonf->size[1];
+        gbonf->size[0] = gmin1->size[0];
+        gbonf->size[1] = gmin1->size[1];
+        emxEnsureCapacity_real_T(gbonf, i);
+        loop_ub = gmin1->size[0] * gmin1->size[1];
+        for (i = 0; i < loop_ub; i++) {
+          gbonf->data[i] = gmin1->data[i];
+        }
       } else {
         i = c_m0->size[0];
         c_m0->size[0] = (int)((double)b_Y->size[0] - init_contents);
@@ -725,7 +735,7 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
         emxFree_real_T(&y);
       }
       /*  declarations necessary for MATLAB C coder */
-      partialTrueCount = 0;
+      trueCount = 0;
       c99 = -1;
       c999 = -1;
       c9999 = -1;
@@ -744,8 +754,13 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
       gmin1->size[1] = 1;
       emxEnsureCapacity_real_T(gmin1, i);
       gmin1->data[0] = 0.0;
-      for (i = 0; i < 10; i++) {
-        nout[i] = 0U;
+      i = nout->size[0] * nout->size[1];
+      nout->size[0] = b_Y->size[0];
+      nout->size[1] = 5;
+      emxEnsureCapacity_uint32_T(nout, i);
+      loop_ub = b_Y->size[0] * 5;
+      for (i = 0; i < loop_ub; i++) {
+        nout->data[i] = 0U;
       }
     } else {
       /*  declaration necessary for C coder */
@@ -783,103 +798,103 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
       c001 = 5;
       /*  Store in nout the number of times the observed mmd (d_min) lies above:
        */
-      irank = out->mmd->size[0] - 1;
-      b_loop_ub = 0;
-      for (b_i = 0; b_i <= irank; b_i++) {
+      b_loop_ub = out->mmd->size[0] - 1;
+      trueCount = 0;
+      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
         if (out->mmd->data[b_i + out->mmd->size[0]] >
             gmin->data[b_i + gmin->size[0]]) {
-          b_loop_ub++;
+          trueCount++;
         }
       }
       i = ia->size[0];
-      ia->size[0] = b_loop_ub;
+      ia->size[0] = trueCount;
       emxEnsureCapacity_int32_T(ia, i);
-      partialTrueCount = 0;
-      for (b_i = 0; b_i <= irank; b_i++) {
+      irank = 0;
+      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
         if (out->mmd->data[b_i + out->mmd->size[0]] >
             gmin->data[b_i + gmin->size[0]]) {
-          ia->data[partialTrueCount] = b_i + 1;
-          partialTrueCount++;
+          ia->data[irank] = b_i + 1;
+          irank++;
         }
       }
-      irank = out->mmd->size[0] - 1;
-      b_loop_ub = 0;
-      for (b_i = 0; b_i <= irank; b_i++) {
+      b_loop_ub = out->mmd->size[0] - 1;
+      trueCount = 0;
+      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
         if (out->mmd->data[b_i + out->mmd->size[0]] >
             gmin->data[b_i + gmin->size[0] * 2]) {
-          b_loop_ub++;
+          trueCount++;
         }
       }
       emxInit_int32_T(&r1, 1);
       i = r1->size[0];
-      r1->size[0] = b_loop_ub;
+      r1->size[0] = trueCount;
       emxEnsureCapacity_int32_T(r1, i);
-      partialTrueCount = 0;
-      for (b_i = 0; b_i <= irank; b_i++) {
+      irank = 0;
+      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
         if (out->mmd->data[b_i + out->mmd->size[0]] >
             gmin->data[b_i + gmin->size[0] * 2]) {
-          r1->data[partialTrueCount] = b_i + 1;
-          partialTrueCount++;
+          r1->data[irank] = b_i + 1;
+          irank++;
         }
       }
-      irank = out->mmd->size[0] - 1;
-      b_loop_ub = 0;
-      for (b_i = 0; b_i <= irank; b_i++) {
+      b_loop_ub = out->mmd->size[0] - 1;
+      trueCount = 0;
+      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
         if (out->mmd->data[b_i + out->mmd->size[0]] >
             gmin->data[b_i + gmin->size[0] * 3]) {
-          b_loop_ub++;
+          trueCount++;
         }
       }
       emxInit_int32_T(&r2, 1);
       i = r2->size[0];
-      r2->size[0] = b_loop_ub;
+      r2->size[0] = trueCount;
       emxEnsureCapacity_int32_T(r2, i);
-      partialTrueCount = 0;
-      for (b_i = 0; b_i <= irank; b_i++) {
+      irank = 0;
+      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
         if (out->mmd->data[b_i + out->mmd->size[0]] >
             gmin->data[b_i + gmin->size[0] * 3]) {
-          r2->data[partialTrueCount] = b_i + 1;
-          partialTrueCount++;
+          r2->data[irank] = b_i + 1;
+          irank++;
         }
       }
-      irank = out->mmd->size[0] - 1;
-      b_loop_ub = 0;
-      for (b_i = 0; b_i <= irank; b_i++) {
+      b_loop_ub = out->mmd->size[0] - 1;
+      trueCount = 0;
+      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
         if (out->mmd->data[b_i + out->mmd->size[0]] >
             gmin->data[b_i + gmin->size[0] * 4]) {
-          b_loop_ub++;
+          trueCount++;
         }
       }
       emxInit_int32_T(&r3, 1);
       i = r3->size[0];
-      r3->size[0] = b_loop_ub;
+      r3->size[0] = trueCount;
       emxEnsureCapacity_int32_T(r3, i);
-      partialTrueCount = 0;
-      for (b_i = 0; b_i <= irank; b_i++) {
+      irank = 0;
+      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
         if (out->mmd->data[b_i + out->mmd->size[0]] >
             gmin->data[b_i + gmin->size[0] * 4]) {
-          r3->data[partialTrueCount] = b_i + 1;
-          partialTrueCount++;
+          r3->data[irank] = b_i + 1;
+          irank++;
         }
       }
-      irank = out->mmd->size[0] - 1;
-      b_loop_ub = 0;
-      for (b_i = 0; b_i <= irank; b_i++) {
+      b_loop_ub = out->mmd->size[0] - 1;
+      trueCount = 0;
+      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
         if (out->mmd->data[b_i + out->mmd->size[0]] <
             gmin->data[b_i + gmin->size[0] * 5]) {
-          b_loop_ub++;
+          trueCount++;
         }
       }
       emxInit_int32_T(&r4, 1);
       i = r4->size[0];
-      r4->size[0] = b_loop_ub;
+      r4->size[0] = trueCount;
       emxEnsureCapacity_int32_T(r4, i);
-      partialTrueCount = 0;
-      for (b_i = 0; b_i <= irank; b_i++) {
+      irank = 0;
+      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
         if (out->mmd->data[b_i + out->mmd->size[0]] <
             gmin->data[b_i + gmin->size[0] * 5]) {
-          r4->data[partialTrueCount] = b_i + 1;
-          partialTrueCount++;
+          r4->data[irank] = b_i + 1;
+          irank++;
         }
       }
       /*        % the 99% envelope */
@@ -887,36 +902,45 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
       /*      % the 99.99% envelope */
       /*     % the 99.999% envelope */
       /*  the 1% envelope */
-      nout[1] = (unsigned int)r4->size[0];
-      nout[3] = (unsigned int)ia->size[0];
-      nout[5] = (unsigned int)r1->size[0];
-      nout[7] = (unsigned int)r2->size[0];
-      nout[9] = (unsigned int)r3->size[0];
+      for (i = 0; i < 5; i++) {
+        uv[i << 1] = (unsigned int)iv[i];
+      }
+      uv[1] = (unsigned int)r4->size[0];
+      uv[3] = (unsigned int)ia->size[0];
+      uv[5] = (unsigned int)r1->size[0];
+      uv[7] = (unsigned int)r2->size[0];
+      uv[9] = (unsigned int)r3->size[0];
+      i = nout->size[0] * nout->size[1];
+      nout->size[0] = 2;
+      nout->size[1] = 5;
+      emxEnsureCapacity_uint32_T(nout, i);
+      emxFree_int32_T(&r4);
+      emxFree_int32_T(&r3);
+      emxFree_int32_T(&r2);
+      emxFree_int32_T(&r1);
+      for (i = 0; i < 10; i++) {
+        nout->data[i] = uv[i];
+      }
       /*  NoFalseSig = boolean linked to the fact that the signal is good or not
        */
       /*  NoFalseSig is set to 1 if the condition for an INCONTROVERTIBLE SIGNAL
        * is */
       /*  fulfilled. */
-      b_loop_ub = 0;
-      emxFree_int32_T(&r4);
-      emxFree_int32_T(&r3);
-      emxFree_int32_T(&r2);
-      emxFree_int32_T(&r1);
-      partialTrueCount = 0;
+      trueCount = 0;
+      irank = 0;
       for (b_i = 0; b_i < 5; b_i++) {
-        i = iv[b_i];
-        nout[b_i << 1] = (unsigned int)i;
-        NoFalseSig = (i == 9999);
+        NoFalseSig = ((int)nout->data[nout->size[0] * b_i] == 9999);
         if (NoFalseSig) {
-          b_loop_ub++;
-          tmp_data[partialTrueCount] = (signed char)(b_i + 1);
-          partialTrueCount++;
+          trueCount++;
+          tmp_data[irank] = (signed char)(b_i + 1);
+          irank++;
         }
       }
       nout_size[0] = 1;
-      nout_size[1] = b_loop_ub;
-      for (i = 0; i < b_loop_ub; i++) {
-        b_nout_data[i] = ((int)nout[((tmp_data[i] - 1) << 1) + 1] >= 10);
+      nout_size[1] = trueCount;
+      for (i = 0; i < trueCount; i++) {
+        b_nout_data[i] =
+            ((int)nout->data[nout->size[0] * (tmp_data[i] - 1) + 1] >= 10);
       }
       nout_data.data = &b_nout_data[0];
       nout_data.size = &nout_size[0];
@@ -925,7 +949,7 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
       nout_data.canFreeData = false;
       NoFalseSig = c_ifWhileCond(&nout_data);
       /*  Divide central part from final part of the search */
-      partialTrueCount =
+      trueCount =
           b_Y->size[0] - (int)floor(13.0 * sqrt((double)b_Y->size[0] / 200.0));
     }
     /*  Stage 1a: signal detection */
@@ -942,7 +966,7 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
       b_i = c_i + 1;
       if ((bonflev_size[0] == 0) || (bonflev_size[1] == 0)) {
         if ((double)(c_i - 2) + 3.0 <
-            ((double)partialTrueCount - init_contents) + 1.0) {
+            ((double)trueCount - init_contents) + 1.0) {
           /*  CENTRAL PART OF THE SEARCH */
           /*  Extreme triplet or an extreme single value */
           /*  Three consecutive values of d_min above the 99.99% threshold or 1
@@ -1399,22 +1423,22 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
             for (i = 0; i < loop_ub; i++) {
               x->data[i] = (gfind->data[i + gfind->size[0]] > 0.0);
             }
-            irank = x->size[0] - 1;
-            b_loop_ub = 0;
-            for (c_i = 0; c_i <= irank; c_i++) {
+            b_loop_ub = x->size[0] - 1;
+            trueCount = 0;
+            for (c_i = 0; c_i <= b_loop_ub; c_i++) {
               if (x->data[c_i]) {
-                b_loop_ub++;
+                trueCount++;
               }
             }
             emxInit_int32_T(&r5, 1);
             i = r5->size[0];
-            r5->size[0] = b_loop_ub;
+            r5->size[0] = trueCount;
             emxEnsureCapacity_int32_T(r5, i);
-            partialTrueCount = 0;
-            for (c_i = 0; c_i <= irank; c_i++) {
+            irank = 0;
+            for (c_i = 0; c_i <= b_loop_ub; c_i++) {
               if (x->data[c_i]) {
-                r5->data[partialTrueCount] = c_i + 1;
-                partialTrueCount++;
+                r5->data[irank] = c_i + 1;
+                irank++;
               }
             }
             d = gfind->data[r5->data[0] - 1] - out->mmd->data[0];
@@ -1484,21 +1508,21 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
         for (i = 0; i < loop_ub; i++) {
           x->data[i] = rtIsNaN(b_m0->data[i]);
         }
-        irank = x->size[0] - 1;
-        b_loop_ub = 0;
-        for (b_i = 0; b_i <= irank; b_i++) {
+        b_loop_ub = x->size[0] - 1;
+        trueCount = 0;
+        for (b_i = 0; b_i <= b_loop_ub; b_i++) {
           if (x->data[b_i]) {
-            b_loop_ub++;
+            trueCount++;
           }
         }
         i = outliers->size[0];
-        outliers->size[0] = b_loop_ub;
+        outliers->size[0] = trueCount;
         emxEnsureCapacity_real_T(outliers, i);
-        partialTrueCount = 0;
-        for (b_i = 0; b_i <= irank; b_i++) {
+        irank = 0;
+        for (b_i = 0; b_i <= b_loop_ub; b_i++) {
           if (x->data[b_i]) {
-            outliers->data[partialTrueCount] = seq->data[b_i];
-            partialTrueCount++;
+            outliers->data[irank] = seq->data[b_i];
+            irank++;
           }
         }
       } else {
@@ -1514,21 +1538,21 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
         for (i = 0; i < loop_ub; i++) {
           r->data[i] = rtIsNaN(bb->data[i]);
         }
-        irank = r->size[0] * r->size[1] - 1;
-        b_loop_ub = 0;
-        for (b_i = 0; b_i <= irank; b_i++) {
+        b_loop_ub = r->size[0] * r->size[1] - 1;
+        trueCount = 0;
+        for (b_i = 0; b_i <= b_loop_ub; b_i++) {
           if (r->data[b_i]) {
-            b_loop_ub++;
+            trueCount++;
           }
         }
         i = outliers->size[0];
-        outliers->size[0] = b_loop_ub;
+        outliers->size[0] = trueCount;
         emxEnsureCapacity_real_T(outliers, i);
-        partialTrueCount = 0;
-        for (b_i = 0; b_i <= irank; b_i++) {
+        irank = 0;
+        for (b_i = 0; b_i <= b_loop_ub; b_i++) {
           if (r->data[b_i]) {
-            outliers->data[partialTrueCount] = seq->data[b_i];
-            partialTrueCount++;
+            outliers->data[irank] = seq->data[b_i];
+            irank++;
           }
         }
       }
@@ -1708,15 +1732,19 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
       out->md->data[i] = b_m0->data[i];
     }
     if ((bonflev_size[0] == 0) || (bonflev_size[1] == 0)) {
-      out->nout.size[0] = 2;
-      out->nout.size[1] = 5;
-      for (i = 0; i < 10; i++) {
-        out->nout.data[i] = nout[i];
+      i = out->nout->size[0] * out->nout->size[1];
+      out->nout->size[0] = nout->size[0];
+      out->nout->size[1] = 5;
+      emxEnsureCapacity_real_T(out->nout, i);
+      loop_ub = nout->size[0] * 5;
+      for (i = 0; i < loop_ub; i++) {
+        out->nout->data[i] = nout->data[i];
       }
     } else {
-      out->nout.size[0] = 0;
-      out->nout.size[1] = 0;
+      out->nout->size[0] = 0;
+      out->nout->size[1] = 0;
     }
+    emxFree_uint32_T(&nout);
     out->class.size[0] = 1;
     out->class.size[1] = 3;
     out->class.data[0] = 'F';

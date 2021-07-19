@@ -181,7 +181,7 @@ void c_sort(const emlrtStack *sp, emxArray_real_T *x)
 {
   emlrtStack b_st;
   emlrtStack st;
-  emxArray_int32_T *nib_emlrtRSI;
+  emxArray_int32_T *mib_emlrtRSI;
   emxArray_real_T *vwork;
   int32_T dim;
   int32_T i;
@@ -218,7 +218,7 @@ void c_sort(const emlrtStack *sp, emxArray_real_T *x)
     b_st.site = &ic_emlrtRSI;
     check_forloop_overflow_error(&b_st);
   }
-  emxInit_int32_T(sp, &nib_emlrtRSI, 1, &ey_emlrtRTEI, true);
+  emxInit_int32_T(sp, &mib_emlrtRSI, 1, &ey_emlrtRTEI, true);
   for (dim = 0; dim < vstride; dim++) {
     st.site = &pl_emlrtRSI;
     if ((1 <= i) && (i > 2147483646)) {
@@ -229,13 +229,13 @@ void c_sort(const emlrtStack *sp, emxArray_real_T *x)
       vwork->data[k] = x->data[dim + k * vstride];
     }
     st.site = &ql_emlrtRSI;
-    b_sortIdx(&st, vwork, nib_emlrtRSI);
+    b_sortIdx(&st, vwork, mib_emlrtRSI);
     st.site = &rl_emlrtRSI;
     for (k = 0; k <= vlen; k++) {
       x->data[dim + k * vstride] = vwork->data[k];
     }
   }
-  emxFree_int32_T(&nib_emlrtRSI);
+  emxFree_int32_T(&mib_emlrtRSI);
   emxFree_real_T(&vwork);
   emlrtHeapReferenceStackLeaveFcnR2012b((emlrtCTX)sp);
 }

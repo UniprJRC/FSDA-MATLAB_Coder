@@ -41,7 +41,7 @@ static emlrtBCInfo ip_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtRTEInfo yw_emlrtRTEI = {
+static emlrtRTEInfo xw_emlrtRTEI = {
     43,        /* lineNo */
     5,         /* colNo */
     "normcdf", /* fName */
@@ -57,7 +57,7 @@ void normcdf(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *p)
   int32_T k;
   i = p->size[0];
   p->size[0] = x->size[0];
-  emxEnsureCapacity_real_T(sp, p, i, &yw_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, p, i, &xw_emlrtRTEI);
   i = x->size[0];
   for (k = 0; k < i; k++) {
     if (k + 1 > x->size[0]) {

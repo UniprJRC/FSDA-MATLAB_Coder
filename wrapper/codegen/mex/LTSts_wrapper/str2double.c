@@ -128,7 +128,7 @@ creal_T b_str2double(const emlrtStack *sp, const char_T s[2])
     nread = (uint8_T)s[k];
     if (nread > 127) {
       emlrtErrorWithMessageIdR2018a(
-          &f_st, &o_emlrtRTEI, "Coder:toolbox:unsupportedString",
+          &f_st, &n_emlrtRTEI, "Coder:toolbox:unsupportedString",
           "Coder:toolbox:unsupportedString", 2, 12, 127);
     }
     if (bv[nread] || (s[k] == '\x00')) {
@@ -163,7 +163,7 @@ creal_T b_str2double(const emlrtStack *sp, const char_T s[2])
       nread = (uint8_T)s[k];
       if (nread > 127) {
         emlrtErrorWithMessageIdR2018a(
-            &g_st, &o_emlrtRTEI, "Coder:toolbox:unsupportedString",
+            &g_st, &n_emlrtRTEI, "Coder:toolbox:unsupportedString",
             "Coder:toolbox:unsupportedString", 2, 12, 127);
       }
       if (!bv[nread]) {
@@ -328,7 +328,7 @@ creal_T str2double(const emlrtStack *sp, char_T s)
   f_st.site = &eg_emlrtRSI;
   if ((uint8_T)s > 127) {
     emlrtErrorWithMessageIdR2018a(
-        &f_st, &o_emlrtRTEI, "Coder:toolbox:unsupportedString",
+        &f_st, &n_emlrtRTEI, "Coder:toolbox:unsupportedString",
         "Coder:toolbox:unsupportedString", 2, 12, 127);
   }
   i = (uint8_T)s & 127;
@@ -359,7 +359,7 @@ creal_T str2double(const emlrtStack *sp, char_T s)
       g_st.site = &eg_emlrtRSI;
       if ((uint8_T)s > 127) {
         emlrtErrorWithMessageIdR2018a(
-            &g_st, &o_emlrtRTEI, "Coder:toolbox:unsupportedString",
+            &g_st, &n_emlrtRTEI, "Coder:toolbox:unsupportedString",
             "Coder:toolbox:unsupportedString", 2, 12, 127);
       }
       if (!bv[i]) {

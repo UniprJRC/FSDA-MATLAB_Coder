@@ -2871,7 +2871,7 @@ void FSM(LXS_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
   emxArray_boolean_T b_varargin_4_data;
   emxArray_boolean_T *r;
   emxArray_boolean_T *x;
-  emxArray_char_T_1x310 nib_emlrtRSI;
+  emxArray_char_T_1x310 mib_emlrtRSI;
   emxArray_int32_T *ia;
   emxArray_int32_T *r1;
   emxArray_int32_T *r2;
@@ -2922,17 +2922,14 @@ void FSM(LXS_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
   int32_T k;
   int32_T loop_ub;
   int32_T n;
-  int32_T nout_size_idx_0;
-  int32_T nout_size_idx_1;
   int32_T sto;
   int32_T v;
   uint32_T uv[31];
-  uint32_T nout_data[10];
-  uint32_T uv1[10];
+  uint32_T nout[10];
   uint32_T ii;
   int8_T tmp_data[5];
   boolean_T b_x[31];
-  boolean_T b_nout_data[5];
+  boolean_T nout_data[5];
   boolean_T NoFalseSig;
   boolean_T b_b;
   boolean_T b_guard1 = false;
@@ -3779,9 +3776,9 @@ void FSM(LXS_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       gmin1->size[1] = 1;
       emxEnsureCapacity_real_T(sp, gmin1, i, &tg_emlrtRTEI);
       gmin1->data[0] = 0.0;
-      nout_size_idx_0 = 1;
-      nout_size_idx_1 = 1;
-      nout_data[0] = 0U;
+      for (i = 0; i < 10; i++) {
+        nout[i] = 0U;
+      }
     } else {
       /*  declaration necessary for C coder */
       i = gbonf->size[0] * gbonf->size[1];
@@ -3897,112 +3894,112 @@ void FSM(LXS_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
           (emlrtCTX)sp);
       }
 
-      idx = out_mmd->size[0] - 1;
-      a = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
+      irank = out_mmd->size[0] - 1;
+      idx = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] > gmin->data[b_i + gmin->size
             [0]]) {
-          a++;
+          idx++;
         }
       }
 
       i = ia->size[0];
-      ia->size[0] = a;
+      ia->size[0] = idx;
       emxEnsureCapacity_int32_T(sp, ia, i, &yg_emlrtRTEI);
-      irank = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
+      a = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] > gmin->data[b_i + gmin->size
             [0]]) {
-          ia->data[irank] = b_i + 1;
-          irank++;
+          ia->data[a] = b_i + 1;
+          a++;
         }
       }
 
-      idx = out_mmd->size[0] - 1;
-      a = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
+      irank = out_mmd->size[0] - 1;
+      idx = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] > gmin->data[b_i + gmin->size
             [0] * 2]) {
-          a++;
+          idx++;
         }
       }
 
       emxInit_int32_T(sp, &r1, 1, &th_emlrtRTEI, true);
       i = r1->size[0];
-      r1->size[0] = a;
+      r1->size[0] = idx;
       emxEnsureCapacity_int32_T(sp, r1, i, &yg_emlrtRTEI);
-      irank = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
+      a = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] > gmin->data[b_i + gmin->size
             [0] * 2]) {
-          r1->data[irank] = b_i + 1;
-          irank++;
+          r1->data[a] = b_i + 1;
+          a++;
         }
       }
 
-      idx = out_mmd->size[0] - 1;
-      a = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
+      irank = out_mmd->size[0] - 1;
+      idx = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] > gmin->data[b_i + gmin->size
             [0] * 3]) {
-          a++;
+          idx++;
         }
       }
 
       emxInit_int32_T(sp, &r2, 1, &uh_emlrtRTEI, true);
       i = r2->size[0];
-      r2->size[0] = a;
+      r2->size[0] = idx;
       emxEnsureCapacity_int32_T(sp, r2, i, &yg_emlrtRTEI);
-      irank = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
+      a = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] > gmin->data[b_i + gmin->size
             [0] * 3]) {
-          r2->data[irank] = b_i + 1;
-          irank++;
+          r2->data[a] = b_i + 1;
+          a++;
         }
       }
 
-      idx = out_mmd->size[0] - 1;
-      a = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
+      irank = out_mmd->size[0] - 1;
+      idx = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] > gmin->data[b_i + gmin->size
             [0] * 4]) {
-          a++;
+          idx++;
         }
       }
 
       emxInit_int32_T(sp, &r3, 1, &vh_emlrtRTEI, true);
       i = r3->size[0];
-      r3->size[0] = a;
+      r3->size[0] = idx;
       emxEnsureCapacity_int32_T(sp, r3, i, &yg_emlrtRTEI);
-      irank = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
+      a = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] > gmin->data[b_i + gmin->size
             [0] * 4]) {
-          r3->data[irank] = b_i + 1;
-          irank++;
+          r3->data[a] = b_i + 1;
+          a++;
         }
       }
 
-      idx = out_mmd->size[0] - 1;
-      a = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
+      irank = out_mmd->size[0] - 1;
+      idx = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] < gmin->data[b_i + gmin->size
             [0] * 5]) {
-          a++;
+          idx++;
         }
       }
 
       emxInit_int32_T(sp, &r4, 1, &wh_emlrtRTEI, true);
       i = r4->size[0];
-      r4->size[0] = a;
+      r4->size[0] = idx;
       emxEnsureCapacity_int32_T(sp, r4, i, &yg_emlrtRTEI);
-      irank = 0;
-      for (b_i = 0; b_i <= idx; b_i++) {
+      a = 0;
+      for (b_i = 0; b_i <= irank; b_i++) {
         if (out_mmd->data[b_i + out_mmd->size[0]] < gmin->data[b_i + gmin->size
             [0] * 5]) {
-          r4->data[irank] = b_i + 1;
-          irank++;
+          r4->data[a] = b_i + 1;
+          a++;
         }
       }
 
@@ -4051,49 +4048,42 @@ void FSM(LXS_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
       /*      % the 99.99% envelope */
       /*     % the 99.999% envelope */
       /*  the 1% envelope */
-      for (i = 0; i < 5; i++) {
-        uv1[i << 1] = (uint32_T)iv2[i];
-      }
-
-      uv1[1] = (uint32_T)r4->size[0];
-      uv1[3] = (uint32_T)ia->size[0];
-      uv1[5] = (uint32_T)r1->size[0];
-      uv1[7] = (uint32_T)r2->size[0];
-      uv1[9] = (uint32_T)r3->size[0];
-      nout_size_idx_0 = 2;
-      nout_size_idx_1 = 5;
-      emxFree_int32_T(&r4);
-      emxFree_int32_T(&r3);
-      emxFree_int32_T(&r2);
-      emxFree_int32_T(&r1);
-      for (i = 0; i < 10; i++) {
-        nout_data[i] = uv1[i];
-      }
+      nout[1] = (uint32_T)r4->size[0];
+      nout[3] = (uint32_T)ia->size[0];
+      nout[5] = (uint32_T)r1->size[0];
+      nout[7] = (uint32_T)r2->size[0];
+      nout[9] = (uint32_T)r3->size[0];
 
       /*  NoFalseSig = boolean linked to the fact that the signal is good or not */
       NoFalseSig = false;
 
       /*  NoFalseSig is set to 1 if the condition for an INCONTROVERTIBLE SIGNAL is */
       /*  fulfilled. */
+      idx = 0;
+      emxFree_int32_T(&r4);
+      emxFree_int32_T(&r3);
+      emxFree_int32_T(&r2);
+      emxFree_int32_T(&r1);
       a = 0;
-      irank = 0;
       for (b_i = 0; b_i < 5; b_i++) {
-        b_b = ((int32_T)nout_data[2 * b_i] == 9999);
+        i = iv2[b_i];
+        nout[b_i << 1] = (uint32_T)i;
+        b_b = (i == 9999);
         if (b_b) {
+          idx++;
+          tmp_data[a] = (int8_T)(b_i + 1);
           a++;
-          tmp_data[irank] = (int8_T)(b_i + 1);
-          irank++;
         }
       }
 
       nout_size[0] = 1;
-      nout_size[1] = a;
-      for (i = 0; i < a; i++) {
-        b_nout_data[i] = ((int32_T)nout_data[2 * (tmp_data[i] - 1) + 1] >= 10);
+      nout_size[1] = idx;
+      for (i = 0; i < idx; i++) {
+        nout_data[i] = ((int32_T)nout[((tmp_data[i] - 1) << 1) + 1] >= 10);
       }
 
       st.site = &bh_emlrtRSI;
-      if (c_ifWhileCond(b_nout_data, nout_size)) {
+      if (c_ifWhileCond(nout_data, nout_size)) {
         NoFalseSig = true;
       }
 
@@ -4559,10 +4549,10 @@ void FSM(LXS_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
               }
 
               st.site = &rg_emlrtRSI;
-              int2str(&st, out_mmd->data[c_i - 1], nib_emlrtRSI.data,
-                      nib_emlrtRSI.size);
+              int2str(&st, out_mmd->data[c_i - 1], mib_emlrtRSI.data,
+                      mib_emlrtRSI.size);
               st.site = &rg_emlrtRSI;
-              int2str(&st, n, nib_emlrtRSI.data, nib_emlrtRSI.size);
+              int2str(&st, n, mib_emlrtRSI.data, mib_emlrtRSI.size);
             }
 
             if (2 > out_mmd->size[1]) {
@@ -4593,10 +4583,10 @@ void FSM(LXS_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
               }
 
               st.site = &qg_emlrtRSI;
-              int2str(&st, out_mmd->data[c_i - 1], nib_emlrtRSI.data,
-                      nib_emlrtRSI.size);
+              int2str(&st, out_mmd->data[c_i - 1], mib_emlrtRSI.data,
+                      mib_emlrtRSI.size);
               st.site = &qg_emlrtRSI;
-              int2str(&st, n, nib_emlrtRSI.data, nib_emlrtRSI.size);
+              int2str(&st, n, mib_emlrtRSI.data, mib_emlrtRSI.size);
             }
 
             if (c_i > out_mmd->size[0]) {
@@ -4692,20 +4682,20 @@ void FSM(LXS_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
                 }
 
                 st.site = &yg_emlrtRSI;
-                int2str(&st, out_mmd->data[c_i - 1], nib_emlrtRSI.data,
-                        nib_emlrtRSI.size);
+                int2str(&st, out_mmd->data[c_i - 1], mib_emlrtRSI.data,
+                        mib_emlrtRSI.size);
                 st.site = &yg_emlrtRSI;
-                int2str(&st, n, nib_emlrtRSI.data, nib_emlrtRSI.size);
+                int2str(&st, n, mib_emlrtRSI.data, mib_emlrtRSI.size);
                 if ((c_i - 1 < 1) || (c_i - 1 > out_mmd->size[0])) {
                   emlrtDynamicBoundsCheckR2012b(c_i - 1, 1, out_mmd->size[0],
                     &pi_emlrtBCI, (emlrtCTX)sp);
                 }
 
                 st.site = &yg_emlrtRSI;
-                int2str(&st, out_mmd->data[c_i - 2], nib_emlrtRSI.data,
-                        nib_emlrtRSI.size);
+                int2str(&st, out_mmd->data[c_i - 2], mib_emlrtRSI.data,
+                        mib_emlrtRSI.size);
                 st.site = &yg_emlrtRSI;
-                int2str(&st, n, nib_emlrtRSI.data, nib_emlrtRSI.size);
+                int2str(&st, n, mib_emlrtRSI.data, mib_emlrtRSI.size);
                 if (((int32_T)(c_i + 1U) < 1) || ((int32_T)(c_i + 1U) >
                      out_mmd->size[0])) {
                   emlrtDynamicBoundsCheckR2012b((int32_T)(c_i + 1U), 1,
@@ -4713,10 +4703,10 @@ void FSM(LXS_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
                 }
 
                 st.site = &yg_emlrtRSI;
-                int2str(&st, out_mmd->data[c_i], nib_emlrtRSI.data,
-                        nib_emlrtRSI.size);
+                int2str(&st, out_mmd->data[c_i], mib_emlrtRSI.data,
+                        mib_emlrtRSI.size);
                 st.site = &yg_emlrtRSI;
-                int2str(&st, n, nib_emlrtRSI.data, nib_emlrtRSI.size);
+                int2str(&st, n, mib_emlrtRSI.data, mib_emlrtRSI.size);
                 if ((c_i + -1 < 1) || (c_i + -1 > out_mmd->size[0])) {
                   emlrtDynamicBoundsCheckR2012b(c_i + -1, 1, out_mmd->size[0],
                     &qk_emlrtBCI, (emlrtCTX)sp);
@@ -4772,10 +4762,10 @@ void FSM(LXS_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
             }
 
             st.site = &xg_emlrtRSI;
-            int2str(&st, out_mmd->data[c_i - 1], nib_emlrtRSI.data,
-                    nib_emlrtRSI.size);
+            int2str(&st, out_mmd->data[c_i - 1], mib_emlrtRSI.data,
+                    mib_emlrtRSI.size);
             st.site = &xg_emlrtRSI;
-            int2str(&st, n, nib_emlrtRSI.data, nib_emlrtRSI.size);
+            int2str(&st, n, mib_emlrtRSI.data, mib_emlrtRSI.size);
             if ((c_i + -1 < 1) || (c_i + -1 > out_mmd->size[0])) {
               emlrtDynamicBoundsCheckR2012b(c_i + -1, 1, out_mmd->size[0],
                 &ok_emlrtBCI, (emlrtCTX)sp);
@@ -4829,10 +4819,10 @@ void FSM(LXS_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
             }
 
             st.site = &wg_emlrtRSI;
-            int2str(&st, out_mmd->data[c_i - 1], nib_emlrtRSI.data,
-                    nib_emlrtRSI.size);
+            int2str(&st, out_mmd->data[c_i - 1], mib_emlrtRSI.data,
+                    mib_emlrtRSI.size);
             st.site = &wg_emlrtRSI;
-            int2str(&st, n, nib_emlrtRSI.data, nib_emlrtRSI.size);
+            int2str(&st, n, mib_emlrtRSI.data, mib_emlrtRSI.size);
             if (c_i > out_mmd->size[0]) {
               emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
                 &gd_emlrtBCI, (emlrtCTX)sp);
@@ -4933,30 +4923,30 @@ void FSM(LXS_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
                 }
 
                 st.site = &vg_emlrtRSI;
-                int2str(&st, out_mmd->data[c_i - 1], nib_emlrtRSI.data,
-                        nib_emlrtRSI.size);
+                int2str(&st, out_mmd->data[c_i - 1], mib_emlrtRSI.data,
+                        mib_emlrtRSI.size);
                 st.site = &vg_emlrtRSI;
-                int2str(&st, n, nib_emlrtRSI.data, nib_emlrtRSI.size);
+                int2str(&st, n, mib_emlrtRSI.data, mib_emlrtRSI.size);
                 if ((c_i - 1 < 1) || (c_i - 1 > out_mmd->size[0])) {
                   emlrtDynamicBoundsCheckR2012b(c_i - 1, 1, out_mmd->size[0],
                     &xi_emlrtBCI, (emlrtCTX)sp);
                 }
 
                 st.site = &vg_emlrtRSI;
-                int2str(&st, out_mmd->data[c_i - 2], nib_emlrtRSI.data,
-                        nib_emlrtRSI.size);
+                int2str(&st, out_mmd->data[c_i - 2], mib_emlrtRSI.data,
+                        mib_emlrtRSI.size);
                 st.site = &vg_emlrtRSI;
-                int2str(&st, n, nib_emlrtRSI.data, nib_emlrtRSI.size);
+                int2str(&st, n, mib_emlrtRSI.data, mib_emlrtRSI.size);
                 if ((int32_T)(c_i + 1U) > out_mmd->size[0]) {
                   emlrtDynamicBoundsCheckR2012b((int32_T)(c_i + 1U), 1,
                     out_mmd->size[0], &gj_emlrtBCI, (emlrtCTX)sp);
                 }
 
                 st.site = &vg_emlrtRSI;
-                int2str(&st, out_mmd->data[c_i], nib_emlrtRSI.data,
-                        nib_emlrtRSI.size);
+                int2str(&st, out_mmd->data[c_i], mib_emlrtRSI.data,
+                        mib_emlrtRSI.size);
                 st.site = &vg_emlrtRSI;
-                int2str(&st, n, nib_emlrtRSI.data, nib_emlrtRSI.size);
+                int2str(&st, n, mib_emlrtRSI.data, mib_emlrtRSI.size);
                 if ((c_i + -1 < 1) || (c_i + -1 > out_mmd->size[0])) {
                   emlrtDynamicBoundsCheckR2012b(c_i + -1, 1, out_mmd->size[0],
                     &wk_emlrtBCI, (emlrtCTX)sp);
@@ -5056,30 +5046,30 @@ void FSM(LXS_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
                 }
 
                 st.site = &ug_emlrtRSI;
-                int2str(&st, out_mmd->data[c_i - 1], nib_emlrtRSI.data,
-                        nib_emlrtRSI.size);
+                int2str(&st, out_mmd->data[c_i - 1], mib_emlrtRSI.data,
+                        mib_emlrtRSI.size);
                 st.site = &ug_emlrtRSI;
-                int2str(&st, n, nib_emlrtRSI.data, nib_emlrtRSI.size);
+                int2str(&st, n, mib_emlrtRSI.data, mib_emlrtRSI.size);
                 if ((c_i - 1 < 1) || (c_i - 1 > out_mmd->size[0])) {
                   emlrtDynamicBoundsCheckR2012b(c_i - 1, 1, out_mmd->size[0],
                     &rj_emlrtBCI, (emlrtCTX)sp);
                 }
 
                 st.site = &ug_emlrtRSI;
-                int2str(&st, out_mmd->data[c_i - 2], nib_emlrtRSI.data,
-                        nib_emlrtRSI.size);
+                int2str(&st, out_mmd->data[c_i - 2], mib_emlrtRSI.data,
+                        mib_emlrtRSI.size);
                 st.site = &ug_emlrtRSI;
-                int2str(&st, n, nib_emlrtRSI.data, nib_emlrtRSI.size);
+                int2str(&st, n, mib_emlrtRSI.data, mib_emlrtRSI.size);
                 if ((int32_T)(c_i + 1U) > out_mmd->size[0]) {
                   emlrtDynamicBoundsCheckR2012b((int32_T)(c_i + 1U), 1,
                     out_mmd->size[0], &xj_emlrtBCI, (emlrtCTX)sp);
                 }
 
                 st.site = &ug_emlrtRSI;
-                int2str(&st, out_mmd->data[c_i], nib_emlrtRSI.data,
-                        nib_emlrtRSI.size);
+                int2str(&st, out_mmd->data[c_i], mib_emlrtRSI.data,
+                        mib_emlrtRSI.size);
                 st.site = &ug_emlrtRSI;
-                int2str(&st, n, nib_emlrtRSI.data, nib_emlrtRSI.size);
+                int2str(&st, n, mib_emlrtRSI.data, mib_emlrtRSI.size);
                 if ((c_i + -1 < 1) || (c_i + -1 > out_mmd->size[0])) {
                   emlrtDynamicBoundsCheckR2012b(c_i + -1, 1, out_mmd->size[0],
                     &uk_emlrtBCI, (emlrtCTX)sp);
@@ -5135,10 +5125,10 @@ void FSM(LXS_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
             }
 
             st.site = &tg_emlrtRSI;
-            int2str(&st, out_mmd->data[c_i - 1], nib_emlrtRSI.data,
-                    nib_emlrtRSI.size);
+            int2str(&st, out_mmd->data[c_i - 1], mib_emlrtRSI.data,
+                    mib_emlrtRSI.size);
             st.site = &tg_emlrtRSI;
-            int2str(&st, n, nib_emlrtRSI.data, nib_emlrtRSI.size);
+            int2str(&st, n, mib_emlrtRSI.data, mib_emlrtRSI.size);
             if (c_i > out_mmd->size[0]) {
               emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
                 &xd_emlrtBCI, (emlrtCTX)sp);
@@ -5183,10 +5173,10 @@ void FSM(LXS_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
             }
 
             st.site = &sg_emlrtRSI;
-            int2str(&st, out_mmd->data[c_i - 1], nib_emlrtRSI.data,
-                    nib_emlrtRSI.size);
+            int2str(&st, out_mmd->data[c_i - 1], mib_emlrtRSI.data,
+                    mib_emlrtRSI.size);
             st.site = &sg_emlrtRSI;
-            int2str(&st, n, nib_emlrtRSI.data, nib_emlrtRSI.size);
+            int2str(&st, n, mib_emlrtRSI.data, mib_emlrtRSI.size);
             if (c_i > out_mmd->size[0]) {
               emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
                 &ae_emlrtBCI, (emlrtCTX)sp);
@@ -5240,10 +5230,10 @@ void FSM(LXS_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
             }
 
             st.site = &pg_emlrtRSI;
-            int2str(&st, out_mmd->data[c_i - 1], nib_emlrtRSI.data,
-                    nib_emlrtRSI.size);
+            int2str(&st, out_mmd->data[c_i - 1], mib_emlrtRSI.data,
+                    mib_emlrtRSI.size);
             st.site = &pg_emlrtRSI;
-            int2str(&st, n, nib_emlrtRSI.data, nib_emlrtRSI.size);
+            int2str(&st, n, mib_emlrtRSI.data, mib_emlrtRSI.size);
             if (c_i > out_mmd->size[0]) {
               emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0],
                 &he_emlrtBCI, (emlrtCTX)sp);
@@ -5563,10 +5553,10 @@ void FSM(LXS_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
           }
 
           st.site = &mg_emlrtRSI;
-          int2str(&st, out_mmd->data[c_i - 1], nib_emlrtRSI.data,
-                  nib_emlrtRSI.size);
+          int2str(&st, out_mmd->data[c_i - 1], mib_emlrtRSI.data,
+                  mib_emlrtRSI.size);
           st.site = &mg_emlrtRSI;
-          int2str(&st, n, nib_emlrtRSI.data, nib_emlrtRSI.size);
+          int2str(&st, n, mib_emlrtRSI.data, mib_emlrtRSI.size);
           if (c_i > out_mmd->size[0]) {
             emlrtDynamicBoundsCheckR2012b(c_i, 1, out_mmd->size[0], &ye_emlrtBCI,
               (emlrtCTX)sp);
@@ -5663,10 +5653,10 @@ void FSM(LXS_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
               }
 
               st.site = &kg_emlrtRSI;
-              int2str(&st, out_mmd->data[(int32_T)ii - 1], nib_emlrtRSI.data,
-                      nib_emlrtRSI.size);
+              int2str(&st, out_mmd->data[(int32_T)ii - 1], mib_emlrtRSI.data,
+                      mib_emlrtRSI.size);
               st.site = &kg_emlrtRSI;
-              int2str(&st, ndecl, nib_emlrtRSI.data, nib_emlrtRSI.size);
+              int2str(&st, ndecl, mib_emlrtRSI.data, mib_emlrtRSI.size);
               sto = 1;
               exitg3 = true;
             } else {
@@ -5701,10 +5691,10 @@ void FSM(LXS_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
                   }
 
                   st.site = &jg_emlrtRSI;
-                  int2str(&st, out_mmd->data[(int32_T)ii - 1], nib_emlrtRSI.data,
-                          nib_emlrtRSI.size);
+                  int2str(&st, out_mmd->data[(int32_T)ii - 1], mib_emlrtRSI.data,
+                          mib_emlrtRSI.size);
                   st.site = &jg_emlrtRSI;
-                  int2str(&st, ndecl, nib_emlrtRSI.data, nib_emlrtRSI.size);
+                  int2str(&st, ndecl, mib_emlrtRSI.data, mib_emlrtRSI.size);
                   sto = 1;
                   exitg3 = true;
                 } else {
@@ -5928,8 +5918,8 @@ void FSM(LXS_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
               x->data[i] = (gfind->data[i + gfind->size[0]] > 0.0);
             }
 
-            idx = x->size[0];
-            for (c_i = 0; c_i < idx; c_i++) {
+            irank = x->size[0];
+            for (c_i = 0; c_i < irank; c_i++) {
               if (x->data[c_i] && (c_i + 1 > gfind->size[0])) {
                 emlrtDynamicBoundsCheckR2012b(c_i + 1, 1, gfind->size[0],
                   &gc_emlrtBCI, (emlrtCTX)sp);
@@ -5946,23 +5936,23 @@ void FSM(LXS_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
               x->data[i] = (gfind->data[i + gfind->size[0]] > 0.0);
             }
 
-            idx = x->size[0] - 1;
-            a = 0;
-            for (c_i = 0; c_i <= idx; c_i++) {
+            irank = x->size[0] - 1;
+            idx = 0;
+            for (c_i = 0; c_i <= irank; c_i++) {
               if (x->data[c_i]) {
-                a++;
+                idx++;
               }
             }
 
             emxInit_int32_T(sp, &r5, 1, &kh_emlrtRTEI, true);
             i = r5->size[0];
-            r5->size[0] = a;
+            r5->size[0] = idx;
             emxEnsureCapacity_int32_T(sp, r5, i, &yg_emlrtRTEI);
-            irank = 0;
-            for (c_i = 0; c_i <= idx; c_i++) {
+            a = 0;
+            for (c_i = 0; c_i <= irank; c_i++) {
               if (x->data[c_i]) {
-                r5->data[irank] = c_i + 1;
-                irank++;
+                r5->data[a] = c_i + 1;
+                a++;
               }
             }
 
@@ -5985,23 +5975,23 @@ void FSM(LXS_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
               x->data[i] = (gfind->data[i + gfind->size[0]] > 0.0);
             }
 
-            idx = x->size[0] - 1;
-            a = 0;
-            for (c_i = 0; c_i <= idx; c_i++) {
+            irank = x->size[0] - 1;
+            idx = 0;
+            for (c_i = 0; c_i <= irank; c_i++) {
               if (x->data[c_i]) {
-                a++;
+                idx++;
               }
             }
 
             emxInit_int32_T(sp, &r6, 1, &kh_emlrtRTEI, true);
             i = r6->size[0];
-            r6->size[0] = a;
+            r6->size[0] = idx;
             emxEnsureCapacity_int32_T(sp, r6, i, &yg_emlrtRTEI);
-            irank = 0;
-            for (c_i = 0; c_i <= idx; c_i++) {
+            a = 0;
+            for (c_i = 0; c_i <= irank; c_i++) {
               if (x->data[c_i]) {
-                r6->data[irank] = c_i + 1;
-                irank++;
+                r6->data[a] = c_i + 1;
+                a++;
               }
             }
 
@@ -6109,27 +6099,27 @@ void FSM(LXS_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
           x->data[i] = muDoubleScalarIsNaN(bs->data[i]);
         }
 
-        idx = x->size[0] - 1;
-        a = 0;
-        for (b_i = 0; b_i <= idx; b_i++) {
+        irank = x->size[0] - 1;
+        idx = 0;
+        for (b_i = 0; b_i <= irank; b_i++) {
           if (x->data[b_i]) {
-            a++;
+            idx++;
           }
         }
 
         i = outliers->size[0];
-        outliers->size[0] = a;
+        outliers->size[0] = idx;
         emxEnsureCapacity_real_T(sp, outliers, i, &yg_emlrtRTEI);
-        irank = 0;
-        for (b_i = 0; b_i <= idx; b_i++) {
+        a = 0;
+        for (b_i = 0; b_i <= irank; b_i++) {
           if (x->data[b_i]) {
             if (b_i + 1 > seq->size[0]) {
               emlrtDynamicBoundsCheckR2012b(b_i + 1, 1, seq->size[0],
                 &lj_emlrtBCI, (emlrtCTX)sp);
             }
 
-            outliers->data[irank] = seq->data[b_i];
-            irank++;
+            outliers->data[a] = seq->data[b_i];
+            a++;
           }
         }
       } else {
@@ -6147,27 +6137,27 @@ void FSM(LXS_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
           r->data[i] = muDoubleScalarIsNaN(out_cov->data[i]);
         }
 
-        idx = r->size[0] * r->size[1] - 1;
-        a = 0;
-        for (b_i = 0; b_i <= idx; b_i++) {
+        irank = r->size[0] * r->size[1] - 1;
+        idx = 0;
+        for (b_i = 0; b_i <= irank; b_i++) {
           if (r->data[b_i]) {
-            a++;
+            idx++;
           }
         }
 
         i = outliers->size[0];
-        outliers->size[0] = a;
+        outliers->size[0] = idx;
         emxEnsureCapacity_real_T(sp, outliers, i, &yg_emlrtRTEI);
-        irank = 0;
-        for (b_i = 0; b_i <= idx; b_i++) {
+        a = 0;
+        for (b_i = 0; b_i <= irank; b_i++) {
           if (r->data[b_i]) {
             if ((b_i + 1 < 1) || (b_i + 1 > seq->size[0])) {
               emlrtDynamicBoundsCheckR2012b(b_i + 1, 1, seq->size[0],
                 &yj_emlrtBCI, (emlrtCTX)sp);
             }
 
-            outliers->data[irank] = seq->data[b_i];
-            irank++;
+            outliers->data[a] = seq->data[b_i];
+            a++;
           }
         }
       }
@@ -6296,16 +6286,14 @@ void FSM(LXS_wrapperStackData *SD, const emlrtStack *sp, emxArray_real_T *Y,
     }
 
     if ((varargin_4_size[0] == 0) || (varargin_4_size[1] == 0)) {
-      out_nout_size[0] = nout_size_idx_0;
-      out_nout_size[1] = nout_size_idx_1;
-      loop_ub = nout_size_idx_0 * nout_size_idx_1;
-      for (i = 0; i < loop_ub; i++) {
-        out_nout_data[i] = nout_data[i];
+      out_nout_size[0] = 2;
+      out_nout_size[1] = 5;
+      for (i = 0; i < 10; i++) {
+        out_nout_data[i] = nout[i];
       }
     } else {
-      out_nout_size[0] = 1;
-      out_nout_size[1] = 1;
-      out_nout_data[0] = rtNaN;
+      out_nout_size[0] = 0;
+      out_nout_size[1] = 0;
     }
 
     out_class_size[0] = 1;

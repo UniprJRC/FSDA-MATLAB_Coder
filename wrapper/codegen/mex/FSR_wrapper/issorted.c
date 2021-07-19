@@ -17,6 +17,37 @@
 #include "rt_nonfinite.h"
 #include "mwmathutil.h"
 
+/* Variable Definitions */
+static emlrtRSInfo
+    ceb_emlrtRSI =
+        {
+            74,         /* lineNo */
+            "issorted", /* fcnName */
+            "C:\\Program "
+            "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\datafun\\issorte"
+            "d.m" /* pathName */
+};
+
+static emlrtRSInfo
+    deb_emlrtRSI =
+        {
+            112,      /* lineNo */
+            "looper", /* fcnName */
+            "C:\\Program "
+            "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\datafun\\issorte"
+            "d.m" /* pathName */
+};
+
+static emlrtRSInfo
+    eeb_emlrtRSI =
+        {
+            95,       /* lineNo */
+            "looper", /* fcnName */
+            "C:\\Program "
+            "Files\\MATLAB\\R2021a\\toolbox\\eml\\lib\\matlab\\datafun\\issorte"
+            "d.m" /* pathName */
+};
+
 /* Function Definitions */
 boolean_T b_issorted(const emxArray_real_T *x)
 {
@@ -76,25 +107,25 @@ boolean_T issorted(const emlrtStack *sp, const emxArray_real_T *x)
       n = 1;
     }
     if (n != 1) {
-      st.site = &udb_emlrtRSI;
+      st.site = &ceb_emlrtRSI;
       if (dim == 2) {
         n = -1;
       } else {
         n = 0;
       }
-      b_st.site = &wdb_emlrtRSI;
+      b_st.site = &eeb_emlrtRSI;
       k = 0;
       exitg1 = false;
       while ((!exitg1) && (k <= n)) {
-        b_st.site = &vdb_emlrtRSI;
+        b_st.site = &deb_emlrtRSI;
         if (dim == 1) {
           b_n = x->size[0] - 1;
         } else {
           b_n = x->size[0];
         }
-        c_st.site = &wdb_emlrtRSI;
+        c_st.site = &eeb_emlrtRSI;
         if ((1 <= b_n) && (b_n > 2147483646)) {
-          d_st.site = &ab_emlrtRSI;
+          d_st.site = &hb_emlrtRSI;
           check_forloop_overflow_error(&d_st);
         }
         k = 0;

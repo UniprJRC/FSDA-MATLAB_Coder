@@ -19,14 +19,14 @@
 #include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo sbb_emlrtRSI = {
+static emlrtRSInfo acb_emlrtRSI = {
     20,        /* lineNo */
     "chi2cdf", /* fcnName */
     "C:\\Program Files\\MATLAB\\R2021a\\toolbox\\stats\\eml\\chi2cdf.m" /* pathName
                                                                          */
 };
 
-static emlrtBCInfo yp_emlrtBCI = {
+static emlrtBCInfo gq_emlrtBCI = {
     -1,       /* iFirst */
     -1,       /* iLast */
     40,       /* lineNo */
@@ -38,7 +38,7 @@ static emlrtBCInfo yp_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtBCInfo aq_emlrtBCI = {
+static emlrtBCInfo hq_emlrtBCI = {
     -1,       /* iFirst */
     -1,       /* iLast */
     76,       /* lineNo */
@@ -50,7 +50,7 @@ static emlrtBCInfo aq_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtBCInfo bq_emlrtBCI = {
+static emlrtBCInfo iq_emlrtBCI = {
     -1,       /* iFirst */
     -1,       /* iLast */
     77,       /* lineNo */
@@ -62,7 +62,7 @@ static emlrtBCInfo bq_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtBCInfo cq_emlrtBCI = {
+static emlrtBCInfo jq_emlrtBCI = {
     -1,       /* iFirst */
     -1,       /* iLast */
     78,       /* lineNo */
@@ -74,7 +74,7 @@ static emlrtBCInfo cq_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtBCInfo dq_emlrtBCI = {
+static emlrtBCInfo kq_emlrtBCI = {
     -1,       /* iFirst */
     -1,       /* iLast */
     51,       /* lineNo */
@@ -86,7 +86,7 @@ static emlrtBCInfo dq_emlrtBCI = {
     0 /* checkKind */
 };
 
-static emlrtRTEInfo ps_emlrtRTEI = {
+static emlrtRTEInfo nt_emlrtRTEI = {
     36,       /* lineNo */
     5,        /* colNo */
     "gamcdf", /* fName */
@@ -94,7 +94,7 @@ static emlrtRTEInfo ps_emlrtRTEI = {
                                                                         */
 };
 
-static emlrtRTEInfo qs_emlrtRTEI = {
+static emlrtRTEInfo ot_emlrtRTEI = {
     37,       /* lineNo */
     22,       /* colNo */
     "gamcdf", /* fName */
@@ -102,7 +102,7 @@ static emlrtRTEInfo qs_emlrtRTEI = {
                                                                         */
 };
 
-static emlrtRTEInfo rs_emlrtRTEI = {
+static emlrtRTEInfo pt_emlrtRTEI = {
     38,       /* lineNo */
     22,       /* colNo */
     "gamcdf", /* fName */
@@ -110,7 +110,7 @@ static emlrtRTEInfo rs_emlrtRTEI = {
                                                                         */
 };
 
-static emlrtRTEInfo ss_emlrtRTEI = {
+static emlrtRTEInfo qt_emlrtRTEI = {
     1,        /* lineNo */
     13,       /* colNo */
     "gamcdf", /* fName */
@@ -118,7 +118,7 @@ static emlrtRTEInfo ss_emlrtRTEI = {
                                                                         */
 };
 
-static emlrtRTEInfo ts_emlrtRTEI = {
+static emlrtRTEInfo rt_emlrtRTEI = {
     1,        /* lineNo */
     17,       /* colNo */
     "gamcdf", /* fName */
@@ -145,27 +145,27 @@ void chi2cdf(const emlrtStack *sp, const emxArray_real_T *x, real_T v,
   b_st.prev = &st;
   b_st.tls = st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
-  emxInit_real_T(sp, &plo, 2, &ss_emlrtRTEI, true);
-  emxInit_real_T(sp, &pup, 2, &ts_emlrtRTEI, true);
+  emxInit_real_T(sp, &plo, 2, &qt_emlrtRTEI, true);
+  emxInit_real_T(sp, &pup, 2, &rt_emlrtRTEI, true);
   a = v / 2.0;
-  st.site = &sbb_emlrtRSI;
+  st.site = &acb_emlrtRSI;
   i = p->size[0] * p->size[1];
   p->size[0] = x->size[0];
   p->size[1] = x->size[1];
-  emxEnsureCapacity_real_T(&st, p, i, &ps_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, p, i, &nt_emlrtRTEI);
   i = plo->size[0] * plo->size[1];
   plo->size[0] = x->size[0];
   plo->size[1] = x->size[1];
-  emxEnsureCapacity_real_T(&st, plo, i, &qs_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, plo, i, &ot_emlrtRTEI);
   i = pup->size[0] * pup->size[1];
   pup->size[0] = x->size[0];
   pup->size[1] = x->size[1];
-  emxEnsureCapacity_real_T(&st, pup, i, &rs_emlrtRTEI);
+  emxEnsureCapacity_real_T(&st, pup, i, &pt_emlrtRTEI);
   i = x->size[0] * x->size[1];
   for (k = 0; k < i; k++) {
     i1 = x->size[0] * x->size[1];
     if (((int32_T)(k + 1U) < 1) || ((int32_T)(k + 1U) > i1)) {
-      emlrtDynamicBoundsCheckR2012b((int32_T)(k + 1U), 1, i1, &yp_emlrtBCI,
+      emlrtDynamicBoundsCheckR2012b((int32_T)(k + 1U), 1, i1, &gq_emlrtBCI,
                                     &st);
     }
     xk = x->data[k];
@@ -173,30 +173,30 @@ void chi2cdf(const emlrtStack *sp, const emxArray_real_T *x, real_T v,
       if (x->data[k] < 0.0) {
         xk = 0.0;
       }
-      b_st.site = &tbb_emlrtRSI;
+      b_st.site = &bcb_emlrtRSI;
       dc = gammainc(&b_st, xk / 2.0, a);
       i1 = p->size[0] * p->size[1];
       if (((int32_T)(k + 1U) < 1) || ((int32_T)(k + 1U) > i1)) {
-        emlrtDynamicBoundsCheckR2012b((int32_T)(k + 1U), 1, i1, &dq_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b((int32_T)(k + 1U), 1, i1, &kq_emlrtBCI,
                                       &st);
       }
       p->data[k] = dc.re;
     } else {
       i1 = p->size[0] * p->size[1];
       if (((int32_T)(k + 1U) < 1) || ((int32_T)(k + 1U) > i1)) {
-        emlrtDynamicBoundsCheckR2012b((int32_T)(k + 1U), 1, i1, &aq_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b((int32_T)(k + 1U), 1, i1, &hq_emlrtBCI,
                                       &st);
       }
       p->data[k] = rtNaN;
       i1 = plo->size[0] * plo->size[1];
       if (((int32_T)(k + 1U) < 1) || ((int32_T)(k + 1U) > i1)) {
-        emlrtDynamicBoundsCheckR2012b((int32_T)(k + 1U), 1, i1, &bq_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b((int32_T)(k + 1U), 1, i1, &iq_emlrtBCI,
                                       &st);
       }
       plo->data[k] = rtNaN;
       i1 = pup->size[0] * pup->size[1];
       if (((int32_T)(k + 1U) < 1) || ((int32_T)(k + 1U) > i1)) {
-        emlrtDynamicBoundsCheckR2012b((int32_T)(k + 1U), 1, i1, &cq_emlrtBCI,
+        emlrtDynamicBoundsCheckR2012b((int32_T)(k + 1U), 1, i1, &jq_emlrtBCI,
                                       &st);
       }
       pup->data[k] = rtNaN;

@@ -123,49 +123,49 @@ static emlrtBCInfo io_emlrtBCI = {
     0                                                       /* checkKind */
 };
 
-static emlrtRTEInfo uu_emlrtRTEI = {
+static emlrtRTEInfo tu_emlrtRTEI = {
     531,                                                   /* lineNo */
     9,                                                     /* colNo */
     "RobRegrSize",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\RobRegrSize.m" /* pName */
 };
 
-static emlrtRTEInfo vu_emlrtRTEI = {
+static emlrtRTEInfo uu_emlrtRTEI = {
     539,                                                   /* lineNo */
     17,                                                    /* colNo */
     "RobRegrSize",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\RobRegrSize.m" /* pName */
 };
 
-static emlrtRTEInfo wu_emlrtRTEI = {
+static emlrtRTEInfo vu_emlrtRTEI = {
     536,                                                   /* lineNo */
     17,                                                    /* colNo */
     "RobRegrSize",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\RobRegrSize.m" /* pName */
 };
 
-static emlrtRTEInfo xu_emlrtRTEI = {
+static emlrtRTEInfo wu_emlrtRTEI = {
     527,                                                   /* lineNo */
     9,                                                     /* colNo */
     "RobRegrSize",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\RobRegrSize.m" /* pName */
 };
 
-static emlrtRTEInfo yu_emlrtRTEI = {
+static emlrtRTEInfo xu_emlrtRTEI = {
     390,                                                   /* lineNo */
     13,                                                    /* colNo */
     "RobRegrSize",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\RobRegrSize.m" /* pName */
 };
 
-static emlrtRTEInfo av_emlrtRTEI = {
+static emlrtRTEInfo yu_emlrtRTEI = {
     527,                                                   /* lineNo */
     34,                                                    /* colNo */
     "RobRegrSize",                                         /* fName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\RobRegrSize.m" /* pName */
 };
 
-static emlrtRSInfo meb_emlrtRSI = {
+static emlrtRSInfo leb_emlrtRSI = {
     244,                                                   /* lineNo */
     "RobRegrSize",                                         /* fcnName */
     "D:\\MATLAB\\FSDAgit\\FSDA\\regression\\RobRegrSize.m" /* pathName */
@@ -551,7 +551,7 @@ void RobRegrSize(const emlrtStack *sp, real_T n, real_T p, real_T bdp)
     m = emlrtCreateCharArray(2, &iv[0]);
     emlrtInitCharArrayR2013a((emlrtCTX)sp, 56, m, &u[0]);
     emlrtAssign(&y, m);
-    st.site = &meb_emlrtRSI;
+    st.site = &leb_emlrtRSI;
     disp(&st, y, &v_emlrtMCI);
     st.site = &uv_emlrtRSI;
     b_y = NULL;
@@ -562,7 +562,7 @@ void RobRegrSize(const emlrtStack *sp, real_T n, real_T p, real_T bdp)
     m = emlrtCreateCharArray(2, &iv2[0]);
     emlrtInitCharArrayR2013a(&st, 37, m, &varargin_2[0]);
     emlrtAssign(&c_y, m);
-    b_st.site = &teb_emlrtRSI;
+    b_st.site = &seb_emlrtRSI;
     l_error(&b_st, b_y, c_y, &d_emlrtMCI);
   }
   /*  Vector which contains the labels for the estimators whose size has to */
@@ -695,7 +695,7 @@ void RobRegrSize(const emlrtStack *sp, real_T n, real_T p, real_T bdp)
     m = emlrtCreateCharArray(2, &iv4[0]);
     emlrtInitCharArrayR2013a(&st, 52, m, &b_varargin_2[0]);
     emlrtAssign(&e_y, m);
-    b_st.site = &teb_emlrtRSI;
+    b_st.site = &seb_emlrtRSI;
     l_error(&b_st, d_y, e_y, &d_emlrtMCI);
   }
   if (bdp < 0.375) {
@@ -707,7 +707,7 @@ void RobRegrSize(const emlrtStack *sp, real_T n, real_T p, real_T bdp)
                        (muDoubleScalarExp(-0.5 * a * a) / 2.5066282746310002)) <
         0.0) {
       emlrtErrorWithMessageIdR2018a(
-          &st, &xb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+          &st, &wb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
           "Coder:toolbox:ElFunDomainError", 3, 4, 4, "sqrt");
     }
   } else {
@@ -719,7 +719,7 @@ void RobRegrSize(const emlrtStack *sp, real_T n, real_T p, real_T bdp)
                        (muDoubleScalarExp(-0.5 * a * a) / 2.5066282746310002)) <
         0.0) {
       emlrtErrorWithMessageIdR2018a(
-          &st, &xb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
+          &st, &wb_emlrtRTEI, "Coder:toolbox:ElFunDomainError",
           "Coder:toolbox:ElFunDomainError", 3, 4, 4, "sqrt");
     }
   }
@@ -757,16 +757,16 @@ void RobRegrSize(const emlrtStack *sp, real_T n, real_T p, real_T bdp)
       }
     }
   }
-  emxInit_char_T(sp, &namefile1, 2, &yu_emlrtRTEI, true);
+  emxInit_char_T(sp, &namefile1, 2, &xu_emlrtRTEI, true);
   if (f_y) {
-    emxInit_char_T(sp, &r24, 2, &av_emlrtRTEI, true);
+    emxInit_char_T(sp, &r24, 2, &yu_emlrtRTEI, true);
     /*  namefile1=[robest 'bdp0' num2str(100*bdp) rhofunc]; */
     st.site = &nv_emlrtRSI;
     b_sprintf(&st, 100.0 * bdp, r24);
     ib_data = namefile1->size[0] * namefile1->size[1];
     namefile1->size[0] = 1;
     namefile1->size[1] = r24->size[1] + 7;
-    emxEnsureCapacity_char_T(sp, namefile1, ib_data, &xu_emlrtRTEI);
+    emxEnsureCapacity_char_T(sp, namefile1, ib_data, &wu_emlrtRTEI);
     namefile1->data[0] = 'L';
     namefile1->data[1] = 'T';
     namefile1->data[2] = 'S';
@@ -783,7 +783,7 @@ void RobRegrSize(const emlrtStack *sp, real_T n, real_T p, real_T bdp)
     ib_data = namefile1->size[0] * namefile1->size[1];
     namefile1->size[0] = 1;
     namefile1->size[1] = 9;
-    emxEnsureCapacity_char_T(sp, namefile1, ib_data, &uu_emlrtRTEI);
+    emxEnsureCapacity_char_T(sp, namefile1, ib_data, &tu_emlrtRTEI);
     for (ib_data = 0; ib_data < 9; ib_data++) {
       namefile1->data[ib_data] = b_cv1[ib_data];
     }
@@ -791,7 +791,7 @@ void RobRegrSize(const emlrtStack *sp, real_T n, real_T p, real_T bdp)
     ib_data = namefile1->size[0] * namefile1->size[1];
     namefile1->size[0] = 1;
     namefile1->size[1] = 9;
-    emxEnsureCapacity_char_T(sp, namefile1, ib_data, &wu_emlrtRTEI);
+    emxEnsureCapacity_char_T(sp, namefile1, ib_data, &vu_emlrtRTEI);
     for (ib_data = 0; ib_data < 9; ib_data++) {
       namefile1->data[ib_data] = b_cv1[ib_data];
     }
@@ -799,7 +799,7 @@ void RobRegrSize(const emlrtStack *sp, real_T n, real_T p, real_T bdp)
     ib_data = namefile1->size[0] * namefile1->size[1];
     namefile1->size[0] = 1;
     namefile1->size[1] = 9;
-    emxEnsureCapacity_char_T(sp, namefile1, ib_data, &vu_emlrtRTEI);
+    emxEnsureCapacity_char_T(sp, namefile1, ib_data, &uu_emlrtRTEI);
     for (ib_data = 0; ib_data < 9; ib_data++) {
       namefile1->data[ib_data] = b_cv[ib_data];
     }

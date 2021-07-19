@@ -26,6 +26,9 @@ extern "C" {
 void b_tinv(const emxArray_real_T *p, const emxArray_real_T *v,
             emxArray_real_T *x);
 
+void c_tinv(const emxArray_real_T *p, const emxArray_real_T *v,
+            emxArray_real_T *x);
+
 double tinv(double p, double v);
 
 #ifdef __cplusplus

@@ -19,7 +19,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRSInfo qm_emlrtRSI = {
+static emlrtRSInfo xm_emlrtRSI = {
     49,     /* lineNo */
     "mean", /* fcnName */
     "C:\\Program "
@@ -27,7 +27,7 @@ static emlrtRSInfo qm_emlrtRSI = {
                                                                          */
 };
 
-static emlrtRTEInfo vb_emlrtRTEI = {
+static emlrtRTEInfo wb_emlrtRTEI = {
     18,     /* lineNo */
     15,     /* colNo */
     "mean", /* fName */
@@ -36,7 +36,7 @@ static emlrtRTEInfo vb_emlrtRTEI = {
                                                                          */
 };
 
-static emlrtRTEInfo nc_emlrtRTEI = {
+static emlrtRTEInfo oc_emlrtRTEI = {
     22,     /* lineNo */
     5,      /* colNo */
     "mean", /* fName */
@@ -45,7 +45,7 @@ static emlrtRTEInfo nc_emlrtRTEI = {
                                                                          */
 };
 
-static emlrtRTEInfo ix_emlrtRTEI = {
+static emlrtRTEInfo gy_emlrtRTEI = {
     49,     /* lineNo */
     5,      /* colNo */
     "mean", /* fName */
@@ -63,20 +63,20 @@ void b_mean(const emlrtStack *sp, const emxArray_real_T *x, emxArray_real_T *y)
   st.prev = sp;
   st.tls = sp->tls;
   if (((x->size[0] != 1) || (x->size[1] != 1)) && (x->size[0] == 1)) {
-    emlrtErrorWithMessageIdR2018a(sp, &vb_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(sp, &wb_emlrtRTEI,
                                   "Coder:toolbox:autoDimIncompatibility",
                                   "Coder:toolbox:autoDimIncompatibility", 0);
   }
   if ((x->size[0] == 0) && (x->size[1] == 0)) {
-    emlrtErrorWithMessageIdR2018a(sp, &nc_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(sp, &oc_emlrtRTEI,
                                   "Coder:toolbox:UnsupportedSpecialEmpty",
                                   "Coder:toolbox:UnsupportedSpecialEmpty", 0);
   }
-  st.site = &qm_emlrtRSI;
+  st.site = &xm_emlrtRSI;
   b_combineVectorElements(&st, x, y);
   i = y->size[0] * y->size[1];
   y->size[0] = 1;
-  emxEnsureCapacity_real_T(sp, y, i, &ix_emlrtRTEI);
+  emxEnsureCapacity_real_T(sp, y, i, &gy_emlrtRTEI);
   loop_ub = y->size[1] - 1;
   for (i = 0; i <= loop_ub; i++) {
     y->data[i] /= (real_T)x->size[0];
@@ -92,8 +92,8 @@ real_T mean(const emlrtStack *sp, const emxArray_real_T *x)
   st.tls = sp->tls;
   b_st.prev = &st;
   b_st.tls = st.tls;
-  st.site = &qm_emlrtRSI;
-  b_st.site = &mm_emlrtRSI;
+  st.site = &xm_emlrtRSI;
+  b_st.site = &tm_emlrtRSI;
   y = blockedSummation(&b_st, x, x->size[0]);
   y /= (real_T)x->size[0];
   return y;

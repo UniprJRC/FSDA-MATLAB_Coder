@@ -25,9 +25,12 @@ extern "C" {
 /* Function Declarations */
 void b_eml_find(const emxArray_boolean_T *x, emxArray_int32_T *i);
 
-void c_eml_find(const emxArray_boolean_T *x, emxArray_int32_T *i);
+void c_eml_find(const emxArray_uint8_T *x, emxArray_int32_T *i,
+                emxArray_int32_T *j);
 
-void d_eml_find(const emxArray_boolean_T *x, int i_data[], int i_size[2]);
+void d_eml_find(const emxArray_boolean_T *x, emxArray_int32_T *i);
+
+void e_eml_find(const emxArray_boolean_T *x, int i_data[], int i_size[2]);
 
 void eml_find(const emxArray_boolean_T *x, emxArray_int32_T *i);
 

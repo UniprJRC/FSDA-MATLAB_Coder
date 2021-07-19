@@ -24,6 +24,20 @@ void b_error(const emlrtStack *sp, const mxArray *b, const mxArray *c,
                         (const char_T *)"error", true, location);
 }
 
+const mxArray *b_feval(const emlrtStack *sp, const mxArray *b, const mxArray *c,
+                       const mxArray *d, const mxArray *e,
+                       emlrtMCInfo *location)
+{
+  const mxArray *pArrays[4];
+  const mxArray *m;
+  pArrays[0] = b;
+  pArrays[1] = c;
+  pArrays[2] = d;
+  pArrays[3] = e;
+  return emlrtCallMATLABR2012b((emlrtCTX)sp, 1, &m, 4, &pArrays[0],
+                               (const char_T *)"feval", true, location);
+}
+
 real_T c_emlrt_marshallIn(const emlrtStack *sp,
                           const mxArray *a__output_of_feval_,
                           const char_T *identifier)
@@ -45,20 +59,6 @@ real_T d_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u,
   y = t_emlrt_marshallIn(sp, emlrtAlias(u), parentId);
   emlrtDestroyArray(&u);
   return y;
-}
-
-const mxArray *d_feval(const emlrtStack *sp, const mxArray *b, const mxArray *c,
-                       const mxArray *d, const mxArray *e,
-                       emlrtMCInfo *location)
-{
-  const mxArray *pArrays[4];
-  const mxArray *m;
-  pArrays[0] = b;
-  pArrays[1] = c;
-  pArrays[2] = d;
-  pArrays[3] = e;
-  return emlrtCallMATLABR2012b((emlrtCTX)sp, 1, &m, 4, &pArrays[0],
-                               (const char_T *)"feval", true, location);
 }
 
 const mxArray *feval(const emlrtStack *sp, const mxArray *b, const mxArray *c,
