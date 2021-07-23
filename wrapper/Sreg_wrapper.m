@@ -1,7 +1,7 @@
 function [out,C]=Sreg_wrapper(y,X,  bdp,bestr,conflev,intercept,minsctol,...
     msg,nocheck,nsamp,refsteps,refstepsbestr,reftol,reftolbestr,...
     rhofunc,rhofuncparam,yxsave)
-% Wrapper function for LXS (when lms is a scalar). NV pair names are not taken as
+% Sreg wrapper. NV pair names are not taken as
 % inputs. Instead, just the values are taken as inputs.
 
 % Required input arguments
