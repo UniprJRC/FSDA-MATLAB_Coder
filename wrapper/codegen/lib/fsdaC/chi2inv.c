@@ -50,6 +50,23 @@ void b_chi2inv(const emxArray_real_T *p, double v, emxArray_real_T *x)
   }
 }
 
+double c_chi2inv(double p)
+{
+  double x;
+  if ((p >= 0.0) && (p <= 1.0)) {
+    if ((p > 0.0) && (p < 1.0)) {
+      x = (gammaincinv(p, 0.5)).re * 2.0;
+    } else if (p == 0.0) {
+      x = 0.0;
+    } else {
+      x = rtInf;
+    }
+  } else {
+    x = rtNaN;
+  }
+  return x;
+}
+
 double chi2inv(double p, double v)
 {
   double a;

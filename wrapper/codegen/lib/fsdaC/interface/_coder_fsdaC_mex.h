@@ -66,6 +66,12 @@ void unsafe_LXS_wrapper1_mexFunction(int32_T nlhs, mxArray *plhs[2],
 void unsafe_LXS_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[2],
                                     int32_T nrhs, const mxArray *prhs[13]);
 
+void unsafe_MMreg_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[2],
+                                      int32_T nrhs, const mxArray *prhs[23]);
+
+void unsafe_Sreg_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[2],
+                                     int32_T nrhs, const mxArray *prhs[17]);
+
 void unsafe_addt_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[1],
                                      int32_T nrhs, const mxArray *prhs[6]);
 

@@ -25,6 +25,8 @@ extern "C" {
 /* Function Declarations */
 void b_chi2inv(const emxArray_real_T *p, double v, emxArray_real_T *x);
 
+double c_chi2inv(double p);
+
 double chi2inv(double p, double v);
 
 #ifdef __cplusplus

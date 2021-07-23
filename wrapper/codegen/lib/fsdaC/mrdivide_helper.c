@@ -19,6 +19,24 @@
 #include <string.h>
 
 /* Function Definitions */
+void b_mrdiv(const emxArray_real_T *A, const double B_data[],
+             emxArray_real_T *Y)
+{
+  int i;
+  int loop_ub;
+  if (A->size[0] == 0) {
+    Y->size[0] = 0;
+  } else {
+    loop_ub = A->size[0];
+    i = Y->size[0];
+    Y->size[0] = A->size[0];
+    emxEnsureCapacity_real_T(Y, i);
+    for (i = 0; i < loop_ub; i++) {
+      Y->data[i] = A->data[i] / B_data[0];
+    }
+  }
+}
+
 void mrdiv(const emxArray_real_T *A, const emxArray_real_T *B,
            emxArray_real_T *Y)
 {

@@ -129,7 +129,6 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   captured_var varampl;
   d_captured_var weights;
   d_captured_var zerT1;
-  e_struct_T a__24;
   emxArray_boolean_T b_varargin_22_data;
   emxArray_boolean_T *Weights;
   emxArray_boolean_T *r1;
@@ -165,6 +164,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   emxArray_real_T *selWithoutLastHarmonic;
   emxArray_real_T *selWithoutLastHarmonic_tmp;
   emxArray_real_T *yhatrob;
+  f_struct_T a__24;
   creal_T dc;
   double numscale2LSH[3];
   double varargin_22_data[2];
@@ -3243,9 +3243,9 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     out->Likloc->size[1] = input_sizes_idx_1 + b_sizes_idx_1;
     emxEnsureCapacity_real_T(out->Likloc, i);
     loop_ub = input_sizes_idx_1;
-    if (0 <= loop_ub - 1) {
-      for (i = 0; i < result; i++) {
-        out->Likloc->data[i] = betaini->data[i];
+    for (i = 0; i < loop_ub; i++) {
+      for (i1 = 0; i1 < result; i1++) {
+        out->Likloc->data[i1] = betaini->data[i1];
       }
     }
     for (i = 0; i < b_sizes_idx_1; i++) {

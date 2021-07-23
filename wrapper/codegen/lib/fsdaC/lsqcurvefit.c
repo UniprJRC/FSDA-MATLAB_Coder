@@ -42,12 +42,12 @@ void lsqcurvefit(
     const emxArray_real_T *xdata, const emxArray_real_T *ydata,
     const emxArray_real_T *lb, const emxArray_real_T *ub, emxArray_real_T *x,
     double *resnorm, emxArray_real_T *residual, double *exitflag,
-    e_struct_T *output, b_struct_T *lambda, emxArray_real_T *jacobian)
+    f_struct_T *output, b_struct_T *lambda, emxArray_real_T *jacobian)
 {
   static const char b_cv[19] = {'l', 'e', 'v', 'e', 'n', 'b', 'e',
                                 'r', 'g', '-', 'm', 'a', 'r', 'q',
                                 'u', 'a', 'r', 'd', 't'};
-  static const char t1_FiniteDifferenceType[7] = {'f', 'o', 'r', 'w',
+  static const char t2_FiniteDifferenceType[7] = {'f', 'o', 'r', 'w',
                                                   'a', 'r', 'd'};
   c_captured_var *c_this_workspace_fun_workspace_;
   emxArray_boolean_T *hasLB;
@@ -61,8 +61,8 @@ void lsqcurvefit(
   emxArray_real_T *gradf;
   emxArray_real_T *rhs;
   emxArray_real_T *xp;
-  h_struct_T FiniteDifferences;
-  h_struct_T b_FiniteDifferences;
+  i_struct_T FiniteDifferences;
+  i_struct_T b_FiniteDifferences;
   double b_gamma;
   double funDiff;
   double minWidth;
@@ -201,9 +201,9 @@ void lsqcurvefit(
       fun_workspace_varampl, fun_workspace_Seqf, fun_workspace_nexpl,
       fun_workspace_isemptyX, fun_workspace_Xf, fun_workspace_lshiftYN,
       fun_workspace_Xlshiftf, xdata, ydata, x0->size[0], F_temp->size[0], lb,
-      ub, t1_FiniteDifferenceType, &b_FiniteDifferences);
+      ub, t2_FiniteDifferenceType, &b_FiniteDifferences);
   emxCopyStruct_struct_T(&FiniteDifferences, &b_FiniteDifferences);
-  jacobianFiniteDifference(augJacobian, residual, x, t1_FiniteDifferenceType,
+  jacobianFiniteDifference(augJacobian, residual, x, t2_FiniteDifferenceType,
                            &FiniteDifferences, &funcCount, &stepSuccessful);
   b_gamma = 0.01;
   for (b_exitflag = 0; b_exitflag < n; b_exitflag++) {
@@ -348,7 +348,7 @@ void lsqcurvefit(
       }
       emxCopyStruct_struct_T(&b_FiniteDifferences, &FiniteDifferences);
       evalOK = b_jacobianFiniteDifference(augJacobian, residual, &funcCount, xp,
-                                          t1_FiniteDifferenceType,
+                                          t2_FiniteDifferenceType,
                                           &b_FiniteDifferences);
       for (b_exitflag = 0; b_exitflag < n; b_exitflag++) {
         ixlast = (m_temp + n) * b_exitflag;

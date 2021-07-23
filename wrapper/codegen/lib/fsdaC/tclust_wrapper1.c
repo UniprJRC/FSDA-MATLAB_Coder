@@ -111,7 +111,7 @@ void tclust_wrapper1(const emxArray_real_T *Y, double k, double alpha,
   double b_v;
   double b_y;
   double c_v;
-  double detpar=0;;
+  double detpar=0;
   double h;
   double ilow;
   double iup;
@@ -128,8 +128,8 @@ void tclust_wrapper1(const emxArray_real_T *Y, double k, double alpha,
   double restrfactorSTRUCT_tolS;
   double restrfactorSTRUCT_userepmat;
   double restrfactorSTRUCT_zerotol;
-  double rotpar=0;;
-  double shapepar=0;;
+  double rotpar=0;
+  double shapepar=0;
   double tsampling;
   double tstart_tv_nsec;
   double tstart_tv_sec;
@@ -5604,12 +5604,12 @@ void tclust_wrapper1(const emxArray_real_T *Y, double k, double alpha,
   /*  Find number of restricted eigenvalues for each group */
   /*  Compute INFORMATION CRITERIA */
   /*  add to npar the number of free covariance parameters */
-  if (q_strcmp(restrfactorSTRUCT_pars)) {
+  if (bb_strcmp(restrfactorSTRUCT_pars)) {
     detpar = 1.0;
     shapepar = 0.0;
     rotpar = 0.0;
     /*  nParam=npar+1; */
-  } else if (r_strcmp(restrfactorSTRUCT_pars)) {
+  } else if (cb_strcmp(restrfactorSTRUCT_pars)) {
     detpar =
         (k - 1.0) * (1.0 - 1.0 / rt_powd_snf(restrfactor->cdet,
                                              1.0 / (double)out->Y->size[1])) +
@@ -5617,12 +5617,12 @@ void tclust_wrapper1(const emxArray_real_T *Y, double k, double alpha,
     shapepar = 0.0;
     rotpar = 0.0;
     /*  nParam=npar+k; */
-  } else if (s_strcmp(restrfactorSTRUCT_pars)) {
+  } else if (db_strcmp(restrfactorSTRUCT_pars)) {
     detpar = 1.0;
     shapepar = (double)out->Y->size[1] - 1.0;
     rotpar = 0.0;
     /*  nParam=npar+v; */
-  } else if (t_strcmp(restrfactorSTRUCT_pars)) {
+  } else if (eb_strcmp(restrfactorSTRUCT_pars)) {
     detpar =
         (k - 1.0) * (1.0 - 1.0 / rt_powd_snf(restrfactor->cdet,
                                              1.0 / (double)out->Y->size[1])) +
@@ -5630,14 +5630,14 @@ void tclust_wrapper1(const emxArray_real_T *Y, double k, double alpha,
     shapepar = (double)out->Y->size[1] - 1.0;
     rotpar = 0.0;
     /*  nParam=npar+k+v-1; */
-  } else if (u_strcmp(restrfactorSTRUCT_pars)) {
+  } else if (fb_strcmp(restrfactorSTRUCT_pars)) {
     detpar = 1.0;
     rotpar = 0.0;
     shapepar = ((double)out->Y->size[1] - 1.0) *
                (1.0 - 1.0 / restrfactor->shw) *
                ((k - 1.0) * (1.0 - 1.0 / restrfactor->shb) + 1.0);
     /*  nParam=npar+1+k*(v-1); */
-  } else if (v_strcmp(restrfactorSTRUCT_pars)) {
+  } else if (gb_strcmp(restrfactorSTRUCT_pars)) {
     detpar =
         (k - 1.0) * (1.0 - 1.0 / rt_powd_snf(restrfactor->cdet,
                                              1.0 / (double)out->Y->size[1])) +
@@ -5647,12 +5647,12 @@ void tclust_wrapper1(const emxArray_real_T *Y, double k, double alpha,
                ((k - 1.0) * (1.0 - 1.0 / restrfactor->shb) + 1.0);
     rotpar = 0.0;
     /*  nParam=npar+k*v; */
-  } else if (w_strcmp(restrfactorSTRUCT_pars)) {
+  } else if (hb_strcmp(restrfactorSTRUCT_pars)) {
     detpar = 1.0;
     shapepar = (double)out->Y->size[1] - 1.0;
     rotpar = 0.5 * (double)out->Y->size[1] * ((double)out->Y->size[1] - 1.0);
     /*  nParam=npar+0.5*v*(v+1); */
-  } else if (x_strcmp(restrfactorSTRUCT_pars)) {
+  } else if (ib_strcmp(restrfactorSTRUCT_pars)) {
     detpar =
         (k - 1.0) * (1.0 - 1.0 / rt_powd_snf(restrfactor->cdet,
                                              1.0 / (double)out->Y->size[1])) +
@@ -5660,20 +5660,20 @@ void tclust_wrapper1(const emxArray_real_T *Y, double k, double alpha,
     shapepar = (double)out->Y->size[1] - 1.0;
     rotpar = 0.5 * (double)out->Y->size[1] * ((double)out->Y->size[1] - 1.0);
     /*  nParam=npar+k+v-1+0.5*v*(v-1); */
-  } else if (p_strcmp(restrfactorSTRUCT_pars)) {
+  } else if (ab_strcmp(restrfactorSTRUCT_pars)) {
     detpar = 1.0;
     shapepar = ((double)out->Y->size[1] - 1.0) *
                (1.0 - 1.0 / restrfactor->shw) *
                ((k - 1.0) * (1.0 - 1.0 / restrfactor->shb) + 1.0);
     rotpar = 0.5 * (double)out->Y->size[1] * ((double)out->Y->size[1] - 1.0);
     /*  nParam=npar+1+k*(v-1)+0.5*v*(v-1); */
-  } else if (y_strcmp(restrfactorSTRUCT_pars)) {
+  } else if (jb_strcmp(restrfactorSTRUCT_pars)) {
     detpar = 1.0;
     shapepar = (double)out->Y->size[1] - 1.0;
     rotpar =
         0.5 * k * (double)out->Y->size[1] * ((double)out->Y->size[1] - 1.0);
     /*  nParam=npar+v+0.5*k*v*(v-1); */
-  } else if (o_strcmp(restrfactorSTRUCT_pars)) {
+  } else if (y_strcmp(restrfactorSTRUCT_pars)) {
     detpar =
         (k - 1.0) * (1.0 - 1.0 / rt_powd_snf(restrfactor->cdet,
                                              1.0 / (double)out->Y->size[1])) +
@@ -5683,7 +5683,7 @@ void tclust_wrapper1(const emxArray_real_T *Y, double k, double alpha,
                ((k - 1.0) * (1.0 - 1.0 / restrfactor->shb) + 1.0);
     rotpar = 0.5 * (double)out->Y->size[1] * ((double)out->Y->size[1] - 1.0);
     /*  nParam=npar+k*v+0.5*v*(v-1); */
-  } else if (ab_strcmp(restrfactorSTRUCT_pars)) {
+  } else if (kb_strcmp(restrfactorSTRUCT_pars)) {
     detpar =
         (k - 1.0) * (1.0 - 1.0 / rt_powd_snf(restrfactor->cdet,
                                              1.0 / (double)out->Y->size[1])) +
@@ -5692,7 +5692,7 @@ void tclust_wrapper1(const emxArray_real_T *Y, double k, double alpha,
     rotpar =
         0.5 * k * (double)out->Y->size[1] * ((double)out->Y->size[1] - 1.0);
     /*  nParam=npar+k+v-1+0.5*k*v*(v-1); */
-  } else if (bb_strcmp(restrfactorSTRUCT_pars)) {
+  } else if (lb_strcmp(restrfactorSTRUCT_pars)) {
     detpar = 1.0;
     shapepar = ((double)out->Y->size[1] - 1.0) *
                (1.0 - 1.0 / restrfactor->shw) *
@@ -5700,7 +5700,7 @@ void tclust_wrapper1(const emxArray_real_T *Y, double k, double alpha,
     rotpar =
         0.5 * k * (double)out->Y->size[1] * ((double)out->Y->size[1] - 1.0);
     /*  nParam=npar+1+k*(v-1) +0.5*k*v*(v-1); */
-  } else if (cb_strcmp(restrfactorSTRUCT_pars)) {
+  } else if (mb_strcmp(restrfactorSTRUCT_pars)) {
     detpar =
         (k - 1.0) * (1.0 - 1.0 / rt_powd_snf(restrfactor->cdet,
                                              1.0 / (double)out->Y->size[1])) +

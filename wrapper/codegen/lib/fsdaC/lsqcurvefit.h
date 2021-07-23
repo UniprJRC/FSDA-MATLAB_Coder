@@ -35,7 +35,7 @@ void lsqcurvefit(
     const emxArray_real_T *xdata, const emxArray_real_T *ydata,
     const emxArray_real_T *lb, const emxArray_real_T *ub, emxArray_real_T *x,
     double *resnorm, emxArray_real_T *residual, double *exitflag,
-    e_struct_T *output, b_struct_T *lambda, emxArray_real_T *jacobian);
+    f_struct_T *output, b_struct_T *lambda, emxArray_real_T *jacobian);
 
 #ifdef __cplusplus
 }

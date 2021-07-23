@@ -17,6 +17,19 @@
 #include <string.h>
 
 /* Function Definitions */
+void b_power(const emxArray_real_T *a, emxArray_real_T *y)
+{
+  int k;
+  int nx;
+  nx = y->size[0];
+  y->size[0] = a->size[0];
+  emxEnsureCapacity_real_T(y, nx);
+  nx = a->size[0];
+  for (k = 0; k < nx; k++) {
+    y->data[k] = 1.0 / a->data[k];
+  }
+}
+
 void power(const emxArray_real_T *a, emxArray_real_T *y)
 {
   int k;

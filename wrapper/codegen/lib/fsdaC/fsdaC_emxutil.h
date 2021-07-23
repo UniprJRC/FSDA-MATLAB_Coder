@@ -47,11 +47,11 @@ extern void d_emxInitStruct_anonymous_funct(anonymous_function *pStruct);
 extern void
 d_emxInitStruct_matlab_internal(f_matlab_internal_coder_tabular *pStruct);
 
-extern void emxCopyStruct_struct_T(h_struct_T *dst, const h_struct_T *src);
+extern void emxCopyStruct_struct_T(i_struct_T *dst, const i_struct_T *src);
 
-extern void emxCopyStruct_struct_T1(g_struct_T *dst, const g_struct_T *src);
+extern void emxCopyStruct_struct_T1(h_struct_T *dst, const h_struct_T *src);
 
-extern void emxCopyStruct_struct_T2(f_struct_T *dst, const f_struct_T *src);
+extern void emxCopyStruct_struct_T2(g_struct_T *dst, const g_struct_T *src);
 
 extern void emxCopy_boolean_T(emxArray_boolean_T **dst,
                               emxArray_boolean_T *const *src);
@@ -94,6 +94,8 @@ extern void emxFreeStruct_cell_wrap_6(cell_wrap_6 *pStruct);
 
 extern void emxFreeStruct_struct0_T(struct0_T *pStruct);
 
+extern void emxFreeStruct_struct2_T(struct2_T *pStruct);
+
 extern void emxFreeStruct_struct_FSM_T(struct_FSM_T *pStruct);
 
 extern void emxFreeStruct_struct_FSR_T(struct_FSR_T *pStruct);
@@ -106,17 +108,25 @@ extern void emxFreeStruct_struct_LTSts_T(struct_LTSts_T *pStruct);
 
 extern void emxFreeStruct_struct_LXS_T(struct_LXS_T *pStruct);
 
+extern void emxFreeStruct_struct_MMreg_T(struct_MMreg_T *pStruct);
+
+extern void emxFreeStruct_struct_Sreg_T(struct_Sreg_T *pStruct);
+
 extern void emxFreeStruct_struct_T(struct_T *pStruct);
 
 extern void emxFreeStruct_struct_T1(b_struct_T *pStruct);
 
 extern void emxFreeStruct_struct_T2(c_struct_T *pStruct);
 
-extern void emxFreeStruct_struct_T3(f_struct_T *pStruct);
+extern void emxFreeStruct_struct_T3(g_struct_T *pStruct);
 
-extern void emxFreeStruct_struct_T4(g_struct_T *pStruct);
+extern void emxFreeStruct_struct_T4(h_struct_T *pStruct);
 
-extern void emxFreeStruct_struct_T5(h_struct_T *pStruct);
+extern void emxFreeStruct_struct_T5(i_struct_T *pStruct);
+
+extern void emxFreeStruct_struct_T6(j_struct_T *pStruct);
+
+extern void emxFreeStruct_struct_T7(e_struct_T *pStruct);
 
 extern void emxFreeStruct_struct_tclust_T(struct_tclust_T *pStruct);
 
@@ -164,6 +174,8 @@ extern void emxInitStruct_struct0_T(struct0_T *pStruct);
 
 extern void emxInitStruct_struct1_T(struct1_T *pStruct);
 
+extern void emxInitStruct_struct2_T(struct2_T *pStruct);
+
 extern void emxInitStruct_struct_FSM_T(struct_FSM_T *pStruct);
 
 extern void emxInitStruct_struct_FSR_T(struct_FSR_T *pStruct);
@@ -176,17 +188,25 @@ extern void emxInitStruct_struct_LTSts_T(struct_LTSts_T *pStruct);
 
 extern void emxInitStruct_struct_LXS_T(struct_LXS_T *pStruct);
 
+extern void emxInitStruct_struct_MMreg_T(struct_MMreg_T *pStruct);
+
+extern void emxInitStruct_struct_Sreg_T(struct_Sreg_T *pStruct);
+
 extern void emxInitStruct_struct_T(struct_T *pStruct);
 
 extern void emxInitStruct_struct_T1(b_struct_T *pStruct);
 
 extern void emxInitStruct_struct_T2(c_struct_T *pStruct);
 
-extern void emxInitStruct_struct_T3(h_struct_T *pStruct);
+extern void emxInitStruct_struct_T3(i_struct_T *pStruct);
 
-extern void emxInitStruct_struct_T4(g_struct_T *pStruct);
+extern void emxInitStruct_struct_T4(h_struct_T *pStruct);
 
-extern void emxInitStruct_struct_T5(f_struct_T *pStruct);
+extern void emxInitStruct_struct_T5(g_struct_T *pStruct);
+
+extern void emxInitStruct_struct_T6(j_struct_T *pStruct);
+
+extern void emxInitStruct_struct_T7(e_struct_T *pStruct);
 
 extern void emxInitStruct_struct_tclust_T(struct_tclust_T *pStruct);
 

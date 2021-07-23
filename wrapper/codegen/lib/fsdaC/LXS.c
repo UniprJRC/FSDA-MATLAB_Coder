@@ -1196,8 +1196,10 @@ double asvar(double h, double n)
   /* asvar computes the new degrees of freedom for the Student T */
   hn = h / n;
   if ((hn >= 0.0) && (hn <= 1.0)) {
-    if (hn < 1.0) {
+    if ((hn > 0.0) && (hn < 1.0)) {
       qalfa = (gammaincinv(hn, 0.5)).re * 2.0;
+    } else if (hn == 0.0) {
+      qalfa = 0.0;
     } else {
       qalfa = rtInf;
     }

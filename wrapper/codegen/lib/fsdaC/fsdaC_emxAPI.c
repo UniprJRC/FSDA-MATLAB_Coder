@@ -298,6 +298,11 @@ void emxDestroy_struct0_T(struct0_T emxArray)
   emxFreeStruct_struct0_T(&emxArray);
 }
 
+void emxDestroy_struct2_T(struct2_T emxArray)
+{
+  emxFreeStruct_struct2_T(&emxArray);
+}
+
 void emxDestroy_struct_FSM_T(struct_FSM_T emxArray)
 {
   emxFreeStruct_struct_FSM_T(&emxArray);
@@ -333,6 +338,16 @@ void emxDestroy_struct_LXS_T(struct_LXS_T emxArray)
   emxFreeStruct_struct_LXS_T(&emxArray);
 }
 
+void emxDestroy_struct_MMreg_T(struct_MMreg_T emxArray)
+{
+  emxFreeStruct_struct_MMreg_T(&emxArray);
+}
+
+void emxDestroy_struct_Sreg_T(struct_Sreg_T emxArray)
+{
+  emxFreeStruct_struct_Sreg_T(&emxArray);
+}
+
 void emxDestroy_struct_tclust_T(struct_tclust_T emxArray)
 {
   emxFreeStruct_struct_tclust_T(&emxArray);
@@ -351,6 +366,11 @@ void emxInitArray_real_T(emxArray_real_T **pEmxArray, int numDimensions)
 void emxInit_struct0_T(struct0_T *pStruct)
 {
   emxInitStruct_struct0_T(pStruct);
+}
+
+void emxInit_struct2_T(struct2_T *pStruct)
+{
+  emxInitStruct_struct2_T(pStruct);
 }
 
 void emxInit_struct_FSM_T(struct_FSM_T *pStruct)
@@ -386,6 +406,16 @@ void emxInit_struct_LTStsmodel_T(struct_LTStsmodel_T *pStruct)
 void emxInit_struct_LXS_T(struct_LXS_T *pStruct)
 {
   emxInitStruct_struct_LXS_T(pStruct);
+}
+
+void emxInit_struct_MMreg_T(struct_MMreg_T *pStruct)
+{
+  emxInitStruct_struct_MMreg_T(pStruct);
+}
+
+void emxInit_struct_Sreg_T(struct_Sreg_T *pStruct)
+{
+  emxInitStruct_struct_Sreg_T(pStruct);
 }
 
 void emxInit_struct_tclust_T(struct_tclust_T *pStruct)

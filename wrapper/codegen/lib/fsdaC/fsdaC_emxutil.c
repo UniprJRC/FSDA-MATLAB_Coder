@@ -72,7 +72,7 @@ void d_emxInitStruct_matlab_internal(f_matlab_internal_coder_tabular *pStruct)
   emxInitMatrix_cell_wrap_53(pStruct->units);
 }
 
-void emxCopyStruct_struct_T(h_struct_T *dst, const h_struct_T *src)
+void emxCopyStruct_struct_T(i_struct_T *dst, const i_struct_T *src)
 {
   c_emxCopyStruct_anonymous_funct(&dst->nonlin, &src->nonlin);
   dst->f_1 = src->f_1;
@@ -92,12 +92,12 @@ void emxCopyStruct_struct_T(h_struct_T *dst, const h_struct_T *src)
   dst->FiniteDifferenceType = src->FiniteDifferenceType;
 }
 
-void emxCopyStruct_struct_T1(g_struct_T *dst, const g_struct_T *src)
+void emxCopyStruct_struct_T1(h_struct_T *dst, const h_struct_T *src)
 {
   d_emxCopyStruct_anonymous_funct(&dst->fun, &src->fun);
 }
 
-void emxCopyStruct_struct_T2(f_struct_T *dst, const f_struct_T *src)
+void emxCopyStruct_struct_T2(g_struct_T *dst, const g_struct_T *src)
 {
   dst->fun = src->fun;
   emxCopy_real_T(&dst->xdata, &src->xdata);
@@ -535,6 +535,11 @@ void emxFreeStruct_struct0_T(struct0_T *pStruct)
   emxFree_real_T(&pStruct->residuals);
 }
 
+void emxFreeStruct_struct2_T(struct2_T *pStruct)
+{
+  emxFree_real_T(&pStruct->beta);
+}
+
 void emxFreeStruct_struct_FSM_T(struct_FSM_T *pStruct)
 {
   emxFree_real_T(&pStruct->outliers);
@@ -610,6 +615,36 @@ void emxFreeStruct_struct_LXS_T(struct_LXS_T *pStruct)
   emxFree_real_T(&pStruct->y);
 }
 
+void emxFreeStruct_struct_MMreg_T(struct_MMreg_T *pStruct)
+{
+  emxFree_real_T(&pStruct->beta);
+  emxFree_real_T(&pStruct->fittedvalues);
+  emxFree_real_T(&pStruct->residuals);
+  emxFree_real_T(&pStruct->Sbeta);
+  emxFree_real_T(&pStruct->weights);
+  emxFree_real_T(&pStruct->outliers);
+  emxFree_char_T(&pStruct->rhofuncS);
+  emxFree_real_T(&pStruct->rhofuncparamS);
+  emxFree_char_T(&pStruct->rhofunc);
+  emxFree_real_T(&pStruct->rhofuncparam);
+  emxFree_real_T(&pStruct->X);
+  emxFree_real_T(&pStruct->y);
+}
+
+void emxFreeStruct_struct_Sreg_T(struct_Sreg_T *pStruct)
+{
+  emxFree_real_T(&pStruct->beta);
+  emxFree_real_T(&pStruct->bs);
+  emxFree_real_T(&pStruct->weights);
+  emxFree_real_T(&pStruct->fittedvalues);
+  emxFree_real_T(&pStruct->residuals);
+  emxFree_real_T(&pStruct->outliers);
+  emxFree_char_T(&pStruct->rhofunc);
+  emxFree_real_T(&pStruct->rhofuncparam);
+  emxFree_real_T(&pStruct->X);
+  emxFree_real_T(&pStruct->y);
+}
+
 void emxFreeStruct_struct_T(struct_T *pStruct)
 {
   emxFree_real_T(&pStruct->ListOut);
@@ -634,24 +669,46 @@ void emxFreeStruct_struct_T2(c_struct_T *pStruct)
   emxFree_boolean_T(&pStruct->weights);
 }
 
-void emxFreeStruct_struct_T3(f_struct_T *pStruct)
+void emxFreeStruct_struct_T3(g_struct_T *pStruct)
 {
   emxFree_real_T(&pStruct->xdata);
   emxFree_real_T(&pStruct->ydata);
 }
 
-void emxFreeStruct_struct_T4(g_struct_T *pStruct)
+void emxFreeStruct_struct_T4(h_struct_T *pStruct)
 {
   c_emxFreeStruct_anonymous_funct(&pStruct->fun);
 }
 
-void emxFreeStruct_struct_T5(h_struct_T *pStruct)
+void emxFreeStruct_struct_T5(i_struct_T *pStruct)
 {
   d_emxFreeStruct_anonymous_funct(&pStruct->nonlin);
   emxFree_real_T(&pStruct->cEq_1);
   emxFree_real_T(&pStruct->cEq_2);
   emxFree_boolean_T(&pStruct->hasLB);
   emxFree_boolean_T(&pStruct->hasUB);
+}
+
+void emxFreeStruct_struct_T6(j_struct_T *pStruct)
+{
+  emxFree_real_T(&pStruct->beta);
+  emxFree_real_T(&pStruct->bs);
+  emxFree_real_T(&pStruct->weights);
+  emxFree_real_T(&pStruct->fittedvalues);
+  emxFree_real_T(&pStruct->residuals);
+  emxFree_real_T(&pStruct->outliers);
+  emxFree_char_T(&pStruct->rhofunc);
+  emxFree_real_T(&pStruct->rhofuncparam);
+}
+
+void emxFreeStruct_struct_T7(e_struct_T *pStruct)
+{
+  emxFree_real_T(&pStruct->beta);
+  emxFree_real_T(&pStruct->weights);
+  emxFree_real_T(&pStruct->residuals);
+  emxFree_real_T(&pStruct->outliers);
+  emxFree_char_T(&pStruct->rhofunc);
+  emxFree_real_T(&pStruct->rhofuncparam);
 }
 
 void emxFreeStruct_struct_tclust_T(struct_tclust_T *pStruct)
@@ -874,6 +931,11 @@ void emxInitStruct_struct1_T(struct1_T *pStruct)
   pStruct->Description.size[1] = 0;
 }
 
+void emxInitStruct_struct2_T(struct2_T *pStruct)
+{
+  emxInit_real_T(&pStruct->beta, 1);
+}
+
 void emxInitStruct_struct_FSM_T(struct_FSM_T *pStruct)
 {
   emxInit_real_T(&pStruct->outliers, 2);
@@ -957,6 +1019,36 @@ void emxInitStruct_struct_LXS_T(struct_LXS_T *pStruct)
   emxInit_real_T(&pStruct->y, 2);
 }
 
+void emxInitStruct_struct_MMreg_T(struct_MMreg_T *pStruct)
+{
+  emxInit_real_T(&pStruct->beta, 1);
+  emxInit_real_T(&pStruct->fittedvalues, 1);
+  emxInit_real_T(&pStruct->residuals, 1);
+  emxInit_real_T(&pStruct->Sbeta, 1);
+  emxInit_real_T(&pStruct->weights, 2);
+  emxInit_real_T(&pStruct->outliers, 2);
+  emxInit_char_T(&pStruct->rhofuncS, 2);
+  emxInit_real_T(&pStruct->rhofuncparamS, 2);
+  emxInit_char_T(&pStruct->rhofunc, 2);
+  emxInit_real_T(&pStruct->rhofuncparam, 2);
+  emxInit_real_T(&pStruct->X, 2);
+  emxInit_real_T(&pStruct->y, 2);
+}
+
+void emxInitStruct_struct_Sreg_T(struct_Sreg_T *pStruct)
+{
+  emxInit_real_T(&pStruct->beta, 1);
+  emxInit_real_T(&pStruct->bs, 2);
+  emxInit_real_T(&pStruct->weights, 2);
+  emxInit_real_T(&pStruct->fittedvalues, 1);
+  emxInit_real_T(&pStruct->residuals, 1);
+  emxInit_real_T(&pStruct->outliers, 2);
+  emxInit_char_T(&pStruct->rhofunc, 2);
+  emxInit_real_T(&pStruct->rhofuncparam, 2);
+  emxInit_real_T(&pStruct->X, 2);
+  emxInit_real_T(&pStruct->y, 2);
+}
+
 void emxInitStruct_struct_T(struct_T *pStruct)
 {
   emxInit_real_T(&pStruct->ListOut, 2);
@@ -985,7 +1077,7 @@ void emxInitStruct_struct_T2(c_struct_T *pStruct)
   emxInit_boolean_T(&pStruct->weights, 1);
 }
 
-void emxInitStruct_struct_T3(h_struct_T *pStruct)
+void emxInitStruct_struct_T3(i_struct_T *pStruct)
 {
   c_emxInitStruct_anonymous_funct(&pStruct->nonlin);
   emxInit_real_T(&pStruct->cEq_1, 1);
@@ -994,15 +1086,37 @@ void emxInitStruct_struct_T3(h_struct_T *pStruct)
   emxInit_boolean_T(&pStruct->hasUB, 1);
 }
 
-void emxInitStruct_struct_T4(g_struct_T *pStruct)
+void emxInitStruct_struct_T4(h_struct_T *pStruct)
 {
   d_emxInitStruct_anonymous_funct(&pStruct->fun);
 }
 
-void emxInitStruct_struct_T5(f_struct_T *pStruct)
+void emxInitStruct_struct_T5(g_struct_T *pStruct)
 {
   emxInit_real_T(&pStruct->xdata, 2);
   emxInit_real_T(&pStruct->ydata, 1);
+}
+
+void emxInitStruct_struct_T6(j_struct_T *pStruct)
+{
+  emxInit_real_T(&pStruct->beta, 1);
+  emxInit_real_T(&pStruct->bs, 2);
+  emxInit_real_T(&pStruct->weights, 2);
+  emxInit_real_T(&pStruct->fittedvalues, 1);
+  emxInit_real_T(&pStruct->residuals, 1);
+  emxInit_real_T(&pStruct->outliers, 2);
+  emxInit_char_T(&pStruct->rhofunc, 2);
+  emxInit_real_T(&pStruct->rhofuncparam, 2);
+}
+
+void emxInitStruct_struct_T7(e_struct_T *pStruct)
+{
+  emxInit_real_T(&pStruct->beta, 1);
+  emxInit_real_T(&pStruct->weights, 2);
+  emxInit_real_T(&pStruct->residuals, 1);
+  emxInit_real_T(&pStruct->outliers, 2);
+  emxInit_char_T(&pStruct->rhofunc, 2);
+  emxInit_real_T(&pStruct->rhofuncparam, 2);
 }
 
 void emxInitStruct_struct_tclust_T(struct_tclust_T *pStruct)

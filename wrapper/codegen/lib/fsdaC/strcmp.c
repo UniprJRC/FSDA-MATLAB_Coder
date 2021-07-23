@@ -19,7 +19,7 @@
 /* Function Definitions */
 bool ab_strcmp(const char a[3])
 {
-  static const char b[3] = {'V', 'E', 'V'};
+  static const char b[3] = {'E', 'V', 'E'};
   int ret;
   ret = memcmp(&a[0], &b[0], 3);
   return ret == 0;
@@ -53,7 +53,7 @@ bool b_strcmp(const emxArray_char_T *a)
 
 bool bb_strcmp(const char a[3])
 {
-  static const char b[3] = {'E', 'V', 'V'};
+  static const char b[3] = {'E', 'I', 'I'};
   int ret;
   ret = memcmp(&a[0], &b[0], 3);
   return ret == 0;
@@ -87,11 +87,8 @@ bool c_strcmp(const emxArray_char_T *a)
 
 bool cb_strcmp(const char a[3])
 {
+  static const char b[3] = {'V', 'I', 'I'};
   int ret;
-  char b[3];
-  b[0] = 'V';
-  b[1] = 'V';
-  b[2] = 'V';
   ret = memcmp(&a[0], &b[0], 3);
   return ret == 0;
 }
@@ -122,6 +119,14 @@ bool d_strcmp(const emxArray_char_T *a)
   return b_bool;
 }
 
+bool db_strcmp(const char a[3])
+{
+  static const char b[3] = {'E', 'E', 'I'};
+  int ret;
+  ret = memcmp(&a[0], &b[0], 3);
+  return ret == 0;
+}
+
 bool e_strcmp(const char a_data[], const int a_size[2])
 {
   static const char b_cv[2] = {'m', 'd'};
@@ -146,6 +151,14 @@ bool e_strcmp(const char a_data[], const int a_size[2])
     } while (exitg1 == 0);
   }
   return b_bool;
+}
+
+bool eb_strcmp(const char a[3])
+{
+  static const char b[3] = {'V', 'E', 'I'};
+  int ret;
+  ret = memcmp(&a[0], &b[0], 3);
+  return ret == 0;
 }
 
 bool f_strcmp(const char a_data[], const int a_size[2])
@@ -174,6 +187,14 @@ bool f_strcmp(const char a_data[], const int a_size[2])
   return b_bool;
 }
 
+bool fb_strcmp(const char a[3])
+{
+  static const char b[3] = {'E', 'V', 'I'};
+  int ret;
+  ret = memcmp(&a[0], &b[0], 3);
+  return ret == 0;
+}
+
 bool g_strcmp(const char a_data[], const int a_size[2])
 {
   static const char b_cv[3] = {'u', 'n', 'i'};
@@ -198,6 +219,14 @@ bool g_strcmp(const char a_data[], const int a_size[2])
     } while (exitg1 == 0);
   }
   return b_bool;
+}
+
+bool gb_strcmp(const char a[3])
+{
+  static const char b[3] = {'V', 'V', 'I'};
+  int ret;
+  ret = memcmp(&a[0], &b[0], 3);
+  return ret == 0;
 }
 
 bool h_strcmp(const emxArray_char_T *a)
@@ -226,6 +255,17 @@ bool h_strcmp(const emxArray_char_T *a)
   return b_bool;
 }
 
+bool hb_strcmp(const char a[3])
+{
+  int ret;
+  char b[3];
+  b[0] = 'E';
+  b[1] = 'E';
+  b[2] = 'E';
+  ret = memcmp(&a[0], &b[0], 3);
+  return ret == 0;
+}
+
 bool i_strcmp(const emxArray_char_T *a)
 {
   static const char b_cv[2] = {'Y', 'J'};
@@ -250,6 +290,14 @@ bool i_strcmp(const emxArray_char_T *a)
     } while (exitg1 == 0);
   }
   return b_bool;
+}
+
+bool ib_strcmp(const char a[3])
+{
+  static const char b[3] = {'V', 'E', 'E'};
+  int ret;
+  ret = memcmp(&a[0], &b[0], 3);
+  return ret == 0;
 }
 
 bool j_strcmp(const emxArray_char_T *a)
@@ -278,6 +326,14 @@ bool j_strcmp(const emxArray_char_T *a)
   return b_bool;
 }
 
+bool jb_strcmp(const char a[3])
+{
+  static const char b[3] = {'E', 'E', 'V'};
+  int ret;
+  ret = memcmp(&a[0], &b[0], 3);
+  return ret == 0;
+}
+
 bool k_strcmp(const emxArray_char_T *a)
 {
   static const char b_cv[5] = {'Y', 'J', 'a', 'l', 'l'};
@@ -304,7 +360,295 @@ bool k_strcmp(const emxArray_char_T *a)
   return b_bool;
 }
 
-void l_strcmp(const char a[3], bool b_bool[7])
+bool kb_strcmp(const char a[3])
+{
+  static const char b[3] = {'V', 'E', 'V'};
+  int ret;
+  ret = memcmp(&a[0], &b[0], 3);
+  return ret == 0;
+}
+
+bool l_strcmp(const emxArray_char_T *a)
+{
+  static const char b_cv[8] = {'b', 'i', 's', 'q', 'u', 'a', 'r', 'e'};
+  int exitg1;
+  int kstr;
+  bool b_bool;
+  b_bool = false;
+  if ((a->size[0] == 1) && (a->size[1] == 8)) {
+    kstr = 0;
+    do {
+      exitg1 = 0;
+      if (kstr < 8) {
+        if (a->data[kstr] != b_cv[kstr]) {
+          exitg1 = 1;
+        } else {
+          kstr++;
+        }
+      } else {
+        b_bool = true;
+        exitg1 = 1;
+      }
+    } while (exitg1 == 0);
+  }
+  return b_bool;
+}
+
+bool lb_strcmp(const char a[3])
+{
+  static const char b[3] = {'E', 'V', 'V'};
+  int ret;
+  ret = memcmp(&a[0], &b[0], 3);
+  return ret == 0;
+}
+
+bool m_strcmp(const emxArray_char_T *a)
+{
+  static const char b_cv[7] = {'o', 'p', 't', 'i', 'm', 'a', 'l'};
+  int exitg1;
+  int kstr;
+  bool b_bool;
+  b_bool = false;
+  if ((a->size[0] == 1) && (a->size[1] == 7)) {
+    kstr = 0;
+    do {
+      exitg1 = 0;
+      if (kstr < 7) {
+        if (a->data[kstr] != b_cv[kstr]) {
+          exitg1 = 1;
+        } else {
+          kstr++;
+        }
+      } else {
+        b_bool = true;
+        exitg1 = 1;
+      }
+    } while (exitg1 == 0);
+  }
+  return b_bool;
+}
+
+bool mb_strcmp(const char a[3])
+{
+  int ret;
+  char b[3];
+  b[0] = 'V';
+  b[1] = 'V';
+  b[2] = 'V';
+  ret = memcmp(&a[0], &b[0], 3);
+  return ret == 0;
+}
+
+bool n_strcmp(const emxArray_char_T *a)
+{
+  static const char b_cv[10] = {'h', 'y', 'p', 'e', 'r',
+                                'b', 'o', 'l', 'i', 'c'};
+  int exitg1;
+  int kstr;
+  bool b_bool;
+  b_bool = false;
+  if ((a->size[0] == 1) && (a->size[1] == 10)) {
+    kstr = 0;
+    do {
+      exitg1 = 0;
+      if (kstr < 10) {
+        if (a->data[kstr] != b_cv[kstr]) {
+          exitg1 = 1;
+        } else {
+          kstr++;
+        }
+      } else {
+        b_bool = true;
+        exitg1 = 1;
+      }
+    } while (exitg1 == 0);
+  }
+  return b_bool;
+}
+
+bool o_strcmp(const emxArray_char_T *a)
+{
+  static const char b_cv[6] = {'h', 'a', 'm', 'p', 'e', 'l'};
+  int exitg1;
+  int kstr;
+  bool b_bool;
+  b_bool = false;
+  if ((a->size[0] == 1) && (a->size[1] == 6)) {
+    kstr = 0;
+    do {
+      exitg1 = 0;
+      if (kstr < 6) {
+        if (a->data[kstr] != b_cv[kstr]) {
+          exitg1 = 1;
+        } else {
+          kstr++;
+        }
+      } else {
+        b_bool = true;
+        exitg1 = 1;
+      }
+    } while (exitg1 == 0);
+  }
+  return b_bool;
+}
+
+bool p_strcmp(const emxArray_char_T *a)
+{
+  static const char b_cv[4] = {'m', 'd', 'p', 'd'};
+  int exitg1;
+  int kstr;
+  bool b_bool;
+  b_bool = false;
+  if ((a->size[0] == 1) && (a->size[1] == 4)) {
+    kstr = 0;
+    do {
+      exitg1 = 0;
+      if (kstr < 4) {
+        if (a->data[kstr] != b_cv[kstr]) {
+          exitg1 = 1;
+        } else {
+          kstr++;
+        }
+      } else {
+        b_bool = true;
+        exitg1 = 1;
+      }
+    } while (exitg1 == 0);
+  }
+  return b_bool;
+}
+
+bool q_strcmp(const char a_data[], const int a_size[2])
+{
+  static const char b_cv[2] = {'T', 'B'};
+  int exitg1;
+  int kstr;
+  bool b_bool;
+  b_bool = false;
+  if (a_size[1] == 2) {
+    kstr = 0;
+    do {
+      exitg1 = 0;
+      if (kstr < 2) {
+        if (a_data[kstr] != b_cv[kstr]) {
+          exitg1 = 1;
+        } else {
+          kstr++;
+        }
+      } else {
+        b_bool = true;
+        exitg1 = 1;
+      }
+    } while (exitg1 == 0);
+  }
+  return b_bool;
+}
+
+bool r_strcmp(const char a_data[], const int a_size[2])
+{
+  static const char b_cv[3] = {'O', 'P', 'T'};
+  int exitg1;
+  int kstr;
+  bool b_bool;
+  b_bool = false;
+  if (a_size[1] == 3) {
+    kstr = 0;
+    do {
+      exitg1 = 0;
+      if (kstr < 3) {
+        if (a_data[kstr] != b_cv[kstr]) {
+          exitg1 = 1;
+        } else {
+          kstr++;
+        }
+      } else {
+        b_bool = true;
+        exitg1 = 1;
+      }
+    } while (exitg1 == 0);
+  }
+  return b_bool;
+}
+
+bool s_strcmp(const char a_data[], const int a_size[2])
+{
+  static const char b_cv[2] = {'H', 'A'};
+  int exitg1;
+  int kstr;
+  bool b_bool;
+  b_bool = false;
+  if (a_size[1] == 2) {
+    kstr = 0;
+    do {
+      exitg1 = 0;
+      if (kstr < 2) {
+        if (a_data[kstr] != b_cv[kstr]) {
+          exitg1 = 1;
+        } else {
+          kstr++;
+        }
+      } else {
+        b_bool = true;
+        exitg1 = 1;
+      }
+    } while (exitg1 == 0);
+  }
+  return b_bool;
+}
+
+bool t_strcmp(const char a_data[], const int a_size[2])
+{
+  static const char b_cv[3] = {'H', 'Y', 'P'};
+  int exitg1;
+  int kstr;
+  bool b_bool;
+  b_bool = false;
+  if (a_size[1] == 3) {
+    kstr = 0;
+    do {
+      exitg1 = 0;
+      if (kstr < 3) {
+        if (a_data[kstr] != b_cv[kstr]) {
+          exitg1 = 1;
+        } else {
+          kstr++;
+        }
+      } else {
+        b_bool = true;
+        exitg1 = 1;
+      }
+    } while (exitg1 == 0);
+  }
+  return b_bool;
+}
+
+bool u_strcmp(const char a_data[], const int a_size[2])
+{
+  static const char b_cv[2] = {'P', 'D'};
+  int exitg1;
+  int kstr;
+  bool b_bool;
+  b_bool = false;
+  if (a_size[1] == 2) {
+    kstr = 0;
+    do {
+      exitg1 = 0;
+      if (kstr < 2) {
+        if (a_data[kstr] != b_cv[kstr]) {
+          exitg1 = 1;
+        } else {
+          kstr++;
+        }
+      } else {
+        b_bool = true;
+        exitg1 = 1;
+      }
+    } while (exitg1 == 0);
+  }
+  return b_bool;
+}
+
+void v_strcmp(const char a[3], bool b_bool[7])
 {
   static const char b[3] = {'E', 'V', 'E'};
   static const char b_b[3] = {'V', 'E', 'E'};
@@ -337,7 +681,7 @@ void l_strcmp(const char a[3], bool b_bool[7])
   b_bool[6] = (ret == 0);
 }
 
-void m_strcmp(const char a[3], bool b_bool[6])
+void w_strcmp(const char a[3], bool b_bool[6])
 {
   static const char b[3] = {'V', 'V', 'E'};
   static const char b_b[3] = {'E', 'V', 'E'};
@@ -367,7 +711,7 @@ void m_strcmp(const char a[3], bool b_bool[6])
   b_bool[5] = (ret == 0);
 }
 
-void n_strcmp(const char a[3], bool b_bool[2])
+void x_strcmp(const char a[3], bool b_bool[2])
 {
   static const char b[3] = {'E', 'V', 'E'};
   static const char b_b[3] = {'V', 'V', 'E'};
@@ -382,92 +726,9 @@ void n_strcmp(const char a[3], bool b_bool[2])
   b_bool[1] = (ret == 0);
 }
 
-bool o_strcmp(const char a[3])
-{
-  static const char b[3] = {'V', 'V', 'E'};
-  int ret;
-  ret = memcmp(&a[0], &b[0], 3);
-  return ret == 0;
-}
-
-bool p_strcmp(const char a[3])
-{
-  static const char b[3] = {'E', 'V', 'E'};
-  int ret;
-  ret = memcmp(&a[0], &b[0], 3);
-  return ret == 0;
-}
-
-bool q_strcmp(const char a[3])
-{
-  static const char b[3] = {'E', 'I', 'I'};
-  int ret;
-  ret = memcmp(&a[0], &b[0], 3);
-  return ret == 0;
-}
-
-bool r_strcmp(const char a[3])
-{
-  static const char b[3] = {'V', 'I', 'I'};
-  int ret;
-  ret = memcmp(&a[0], &b[0], 3);
-  return ret == 0;
-}
-
-bool s_strcmp(const char a[3])
-{
-  static const char b[3] = {'E', 'E', 'I'};
-  int ret;
-  ret = memcmp(&a[0], &b[0], 3);
-  return ret == 0;
-}
-
-bool t_strcmp(const char a[3])
-{
-  static const char b[3] = {'V', 'E', 'I'};
-  int ret;
-  ret = memcmp(&a[0], &b[0], 3);
-  return ret == 0;
-}
-
-bool u_strcmp(const char a[3])
-{
-  static const char b[3] = {'E', 'V', 'I'};
-  int ret;
-  ret = memcmp(&a[0], &b[0], 3);
-  return ret == 0;
-}
-
-bool v_strcmp(const char a[3])
-{
-  static const char b[3] = {'V', 'V', 'I'};
-  int ret;
-  ret = memcmp(&a[0], &b[0], 3);
-  return ret == 0;
-}
-
-bool w_strcmp(const char a[3])
-{
-  int ret;
-  char b[3];
-  b[0] = 'E';
-  b[1] = 'E';
-  b[2] = 'E';
-  ret = memcmp(&a[0], &b[0], 3);
-  return ret == 0;
-}
-
-bool x_strcmp(const char a[3])
-{
-  static const char b[3] = {'V', 'E', 'E'};
-  int ret;
-  ret = memcmp(&a[0], &b[0], 3);
-  return ret == 0;
-}
-
 bool y_strcmp(const char a[3])
 {
-  static const char b[3] = {'E', 'E', 'V'};
+  static const char b[3] = {'V', 'V', 'E'};
   int ret;
   ret = memcmp(&a[0], &b[0], 3);
   return ret == 0;
