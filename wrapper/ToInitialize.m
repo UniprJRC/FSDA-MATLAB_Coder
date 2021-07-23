@@ -83,6 +83,17 @@ for i=1:n
             fstring=fscanf(fileID,'%c');
             fclose(fileID);
             
+            % Transform non breaking space into space
+            fstringd=fstring+0;
+            fstringd(fstringd==160)=32;
+            fstring=char(fstringd);
+            strTofindd=strTofind+0;
+            strTofindd(strTofindd==160)=32;
+            strTofind=char(strTofindd);
+            strToReplaced=strToReplace+0;
+            strToReplaced(strToReplaced==160)=32;
+            strToReplace=char(strToReplaced);
+            
             sIndexTofind = regexp(fstring,strTofind);
             sIndexToreplace = regexp(fstring,strToReplace);
             
