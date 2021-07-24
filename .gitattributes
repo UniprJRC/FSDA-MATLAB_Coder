@@ -6,6 +6,8 @@
 *.sh text eol=lf
 *.c text eol=lf
 *.h text eol=lf
+*.R
+*.save
 
 # Declare files that will always have CRLF line endings on checkout.
 *.m text eol=crlf
