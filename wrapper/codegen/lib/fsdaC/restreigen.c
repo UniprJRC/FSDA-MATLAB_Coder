@@ -816,7 +816,7 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
     emxFree_real_T(&oo);
     emxInit_real_T(&r1, 3);
     d_sum(b_c, r1);
-    f_minimum(r1, &dimsor, &varargin_3);
+    h_minimum(r1, &dimsor, &varargin_3);
     /*  m is the optimum value for the eigenvalues procedure */
     dimsor = solmp->data[varargin_3 - 1];
     /*  plot(1:dimsor,obj) */
@@ -1774,7 +1774,7 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
         y->data[ibtile] = c_x->data[ibtile];
       }
       emxFree_real_T(&c_x);
-      f_minimum(y, &n, &acoef);
+      h_minimum(y, &n, &acoef);
       /*  m is the optimum value for the eigenvalues procedure */
       n = solmp->data[acoef - 1];
       /*  plot(1:dimsor,obj) */
@@ -2691,7 +2691,7 @@ void restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
       emxInit_real_T(&r7, 3);
       c_sum(c_c, r6);
       d_sum(r6, r7);
-      f_minimum(r7, &n, &ibtile);
+      h_minimum(r7, &n, &ibtile);
       /*  m is the optimum value for the eigenvalues procedure */
       n = solmp->data[ibtile - 1];
       /*  plot(1:dimsor,obj) */

@@ -20,7 +20,6 @@
 #include "OPTbdp.h"
 #include "OPTrho.h"
 #include "Sreg.h"
-#include "TBbdp.h"
 #include "TBrho.h"
 #include "bc.h"
 #include "blockedSummation.h"
@@ -31,6 +30,7 @@
 #include "fsdaC_initialize.h"
 #include "fsdaC_rtwutil.h"
 #include "fsdaC_types.h"
+#include "gammainc.h"
 #include "median.h"
 #include "minOrMax.h"
 #include "mldivide.h"
@@ -66,25 +66,31 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   emxArray_real_T *resrw;
   emxArray_real_T *seq;
   emxArray_real_T *tmp_weights;
+  creal_T dc;
   double time_data[1000];
-  double psifunc_c1_data[5];
+  double varargin_1[50];
+  double row[5];
   double c_data[4];
+  double b_varargin_1[3];
   double A=0;
   double B=0;
-  double c;
-  double d;
+  double b_step;
+  double c=0;
+  double d=0;
   double kc=0;
   double kdef;
   double n;
   double p;
   double scaletest=0;
-  double singsub;
+  double sworst;
+  double tsampling;
   int c_size[2];
   int psifunc_c1_size[2];
   int psifunc_class_size[2];
   int b_i;
   int i;
   int i1;
+  int i2;
   unsigned int ij;
   int k;
   int loop_ub;
@@ -415,7 +421,7 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*     [out]=Sreg(ycont,X,'rhofunc','optimal'); */
   /* } */
   /* { */
-  /*     % Sreg with hyperbolic rho function. */
+  /*     %% Sreg with hyperbolic rho function. */
   /*     % Run this code to see the output shown in the help file */
   /*     n=200; */
   /*     p=3; */
@@ -426,7 +432,7 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*     % Contaminated data */
   /*     ycont=y; */
   /*     ycont(1:5)=ycont(1:5)+6; */
-  /*     [out]=Sreg(ycont,X,'rhofunc','hyperbolic'); */
+  /*     [out]=Sreg(ycont,X,'rhofunc','hyperbolic','plots',1); */
   /* } */
   /*  Beginning of code */
   i = b_y->size[0];
@@ -491,7 +497,122 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     /*  Remark: given that in function OPTbdp rho function is defined in the
      * interval 0---2c/3, 2c/3---3c/3, >3c/3 */
     /*  it is necessary to divide the output of OPTbdp by 3 */
-    c = TBbdp(bdp);
+    /* TBbdp finds the constant c associated to the supplied breakdown point for
+     * Tukey's biweight */
+    /*  The constant is found through a dichotomic search */
+    /*  */
+    /*  */
+    /* <a href="matlab: docsearchFS('TBbdp')">Link to the help function</a> */
+    /*  */
+    /*   Required input arguments: */
+    /*  */
+    /*       bdp    : breakdown point. Scalar. Scalar defining breakdown point
+     */
+    /*                (i.e a number between 0 and 0.5) */
+    /*                Data Types - single|double */
+    /*         v    : number of response variables. Scalar. e.g. in regression
+     * v=1 */
+    /*                Data Types - single|double|int32|int64 */
+    /*  */
+    /*   Optional input arguments: */
+    /*  */
+    /*  Output: */
+    /*  */
+    /*   c : Requested tuning constant. Scalar. Tuning constatnt of Tukey
+     * Biweight */
+    /*          function associated to requested breakdown point */
+    /*  */
+    /*  */
+    /*  See also: OPTbdp, HYPbdp, HAbdp, PDbdp */
+    /*  */
+    /*  References: */
+    /*  */
+    /*  Maronna, R.A., Martin D. and Yohai V.J. (2006), "Robust Statistics,
+     * Theory */
+    /*  and Methods", Wiley, New York. */
+    /*  */
+    /*  Copyright 2008-2021. */
+    /*  Written by FSDA team */
+    /*  */
+    /*  */
+    /* <a href="matlab: docsearchFS('TBbdp')">Link to the help page for this
+     * function</a> */
+    /*  */
+    /* $LastChangedDate::                      $: Date of the last commit */
+    /*  */
+    /*  */
+    /*  */
+    /*  Examples: */
+    /*  */
+    /* { */
+    /*     % Find c given bdp. */
+    /*     % The constant c associated to a breakdown point of 50% in regression
+     * is */
+    /*     % c=1.547644980928226 */
+    /*     c=TBbdp(0.5,1) */
+    /* } */
+    /*  */
+    /*  Beginning of code */
+    /*  c = starting point of the iteration */
+    c = 5.0;
+    /*  if bdp>0.0001 */
+    /*      c=5; */
+    /*  elseif bdp>=0.00003 */
+    /*      c=270; */
+    /*  else */
+    /*      c=350; */
+    /*  end */
+    /*  step = width of the dichotomic search (it decreases by half at each */
+    /*  iteration). Generally it can be smaller. A large value ensures converge
+     */
+    /*  when bdp is very small and p is very large. */
+    b_step = 200.0;
+    /*  Convergence condition is E(\rho) = \rho(c) bdp */
+    /*   where \rho(c) for TBW is c^2/6 */
+    kdef = 10.0;
+    while (fabs(kdef - 1.0) > 1.0E-11) {
+      A = c * c;
+      B = A / 2.0;
+      dc = gammainc(B, 1.5);
+      if (dc.im == 0.0) {
+        d = dc.re / 2.0;
+      } else if (dc.re == 0.0) {
+        d = 0.0;
+      } else {
+        d = dc.re / 2.0;
+      }
+      dc = gammainc(B, 2.5);
+      sworst = 3.0 * dc.re;
+      tsampling = 4.0 * B;
+      if (3.0 * dc.im == 0.0) {
+        kc = sworst / tsampling;
+      } else if (sworst == 0.0) {
+        kc = 0.0;
+      } else {
+        kc = sworst / tsampling;
+      }
+      dc = gammainc(B, 3.5);
+      sworst = 15.0 * dc.re;
+      tsampling = 6.0 * rt_powd_snf(c, 4.0);
+      if (15.0 * dc.im == 0.0) {
+        kdef = sworst / tsampling;
+      } else if (sworst == 0.0) {
+        kdef = 0.0;
+      } else {
+        kdef = sworst / tsampling;
+      }
+      kdef = (((d - kc) + kdef) + A / 6.0 * (1.0 - (gammainc(B, 0.5)).re)) / A *
+             (6.0 / bdp);
+      b_step /= 2.0;
+      if (kdef > 1.0) {
+        c += b_step;
+      } else {
+        c = fmax(c - b_step, 0.1);
+      }
+      /*  disp([step c Erho1]) */
+    }
+    /*  Remark: */
+    /*  chi2cdf(x,v) = gamcdf(x,v/2,2) = gammainc(x ./ 2, v/2); */
     /*  kc1 = E(rho) = sup(rho)*bdp */
     /* TBrho computes rho function for Tukey's biweight */
     /*  */
@@ -603,13 +724,14 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     /*  Beginning of code */
     w = (fabs(c) <= c);
     kdef = c * c;
-    A = rt_powd_snf(c, 4.0);
-    kc = (kdef / 2.0 * ((1.0 - kdef / kdef) + A / (3.0 * A)) * (double)w +
-          (1.0 - (double)w) * (kdef / 6.0)) *
+    sworst = rt_powd_snf(c, 4.0);
+    kc = (c * c / 2.0 * ((1.0 - kdef / kdef) + sworst / (3.0 * sworst)) *
+              (double)w +
+          (1.0 - (double)w) * (c * c / 6.0)) *
          bdp;
     psifunc_c1_size[0] = 1;
     psifunc_c1_size[1] = 1;
-    psifunc_c1_data[0] = c;
+    row[0] = c;
     psifunc_class_size[0] = 1;
     psifunc_class_size[1] = 2;
     psifunc_class_data[0] = 'T';
@@ -632,7 +754,7 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     kc = OPTrho(3.0 * c, c) * bdp;
     psifunc_c1_size[0] = 1;
     psifunc_c1_size[1] = 1;
-    psifunc_c1_data[0] = c;
+    row[0] = c;
     psifunc_class_size[0] = 1;
     psifunc_class_size[1] = 3;
     psifunc_class_data[0] = 'O';
@@ -653,38 +775,58 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     emxEnsureCapacity_real_T(out->rhofuncparam, i);
     out->rhofuncparam->data[0] = kdef;
     /*  Use (if possible) precalculated values of c,A,b,d and kc */
-    if ((kdef == 4.0) && (bdp == 0.5)) {
-      c = 2.1583250313997269;
-      A = 0.0001627074124322223;
-      B = 0.006991738279441;
-      d = 0.016982948780061;
-      kc = 0.010460153813287;
-    } else if ((kdef == 4.5) && (bdp == 0.5)) {
-      c = 2.0103110820055008;
-      A = 0.008931591866092;
-      B = 0.051928487236632;
-      d = 0.132017481327058;
-      kc = 0.074478627985759;
-    } else if ((kdef == 5.0) && (bdp == 0.5)) {
-      c = 1.9007099688053131;
-      A = 0.023186529890225;
-      B = 0.083526860351552;
-      d = 0.221246910095216;
-      kc = 0.116380290077336;
-    } else if ((kdef == 4.5) && (bdp == 0.25)) {
-      c = 2.6794526457786558;
-      A = 0.4641741451154;
-      B = 0.588821276233494;
-      d = 1.092639541625978;
-      kc = 0.410853066399912;
+    for (k = 0; k < 50; k++) {
+      varargin_1[k] = fabs(bdp - dv3[k]);
+    }
+    e_minimum(varargin_1, &sworst, &k);
+    b_varargin_1[0] = fabs(kdef - 4.0);
+    b_varargin_1[1] = fabs(kdef - 4.5);
+    b_varargin_1[2] = fabs(kdef - 5.0);
+    f_minimum(b_varargin_1, &tsampling, &nx);
+    if ((sworst < 1.0E-6) && (tsampling < 1.0E-6)) {
+      /*  Load precalculated values of tuning constants */
+      for (i = 0; i < 5; i++) {
+        row[i] = dv4[((k + 50 * (i + 1)) + 300 * (nx - 1)) - 1];
+      }
+      c = row[0];
+      A = row[1];
+      B = row[2];
+      d = row[3];
+      kc = row[4];
+      /*      % Use (if possible) precalculated values of c,A,b,d and kc */
+      /*      if kdef == 4 && bdp==0.5 */
+      /*          c =2.158325031399727; */
+      /*          A =1.627074124322223e-04; */
+      /*          B =0.006991738279441; */
+      /*          d =0.016982948780061; */
+      /*          kc=0.010460153813287; */
+      /*  */
+      /*      elseif kdef == 4.5 && bdp==0.5 */
+      /*          c =2.010311082005501; */
+      /*          A =0.008931591866092; */
+      /*          B =0.051928487236632; */
+      /*          d =0.132017481327058; */
+      /*          kc=0.074478627985759; */
+      /*      elseif kdef == 5 && bdp==0.5 */
+      /*          c =1.900709968805313; */
+      /*          A =0.023186529890225; */
+      /*          B =0.083526860351552; */
+      /*          d =0.221246910095216; */
+      /*          kc=0.116380290077336; */
+      /*      elseif kdef == 4.5 && bdp==0.25 */
+      /*          c =2.679452645778656; */
+      /*          A =0.464174145115400; */
+      /*          B =0.588821276233494; */
+      /*          d =1.092639541625978; */
+      /*          kc=0.410853066399912; */
     }
     psifunc_c1_size[0] = 1;
     psifunc_c1_size[1] = 5;
-    psifunc_c1_data[0] = c;
-    psifunc_c1_data[1] = kdef;
-    psifunc_c1_data[2] = A;
-    psifunc_c1_data[3] = B;
-    psifunc_c1_data[4] = d;
+    row[0] = c;
+    row[1] = kdef;
+    row[2] = A;
+    row[3] = B;
+    row[4] = d;
     psifunc_class_size[0] = 1;
     psifunc_class_size[1] = 3;
     psifunc_class_data[0] = 'H';
@@ -723,10 +865,10 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     kc = HArho(c_data, c_size) * bdp;
     psifunc_c1_size[0] = 1;
     psifunc_c1_size[1] = (signed char)out->rhofuncparam->size[1] + 1;
-    psifunc_c1_data[0] = c;
+    row[0] = c;
     loop_ub = (signed char)out->rhofuncparam->size[1];
     for (i = 0; i < loop_ub; i++) {
-      psifunc_c1_data[i + 1] = out->rhofuncparam->data[i];
+      row[i + 1] = out->rhofuncparam->data[i];
     }
     psifunc_class_size[0] = 1;
     psifunc_class_size[1] = 2;
@@ -795,7 +937,7 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     kc = bdp;
     psifunc_c1_size[0] = 1;
     psifunc_c1_size[1] = 1;
-    psifunc_c1_data[0] = 1.0 / ((1.0 - bdp) * (1.0 - bdp)) - 1.0;
+    row[0] = 1.0 / ((1.0 - bdp) * (1.0 - bdp)) - 1.0;
     psifunc_class_size[0] = 1;
     psifunc_class_size[1] = 2;
     psifunc_class_data[0] = 'P';
@@ -828,31 +970,31 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   for (i = 0; i < loop_ub_tmp; i++) {
     bestscales->data[i] = rtInf;
   }
-  A = rtInf;
+  sworst = rtInf;
   /*  singsub = scalar which will contain the number of singular subsets which
    */
   /*  are extracted (that is the subsets of size p which are not full rank) */
-  singsub = 0.0;
+  d = 0.0;
   /*  ij is a scalar used to ensure that the best first bestr non singular */
   /*  subsets are stored */
   ij = 1U;
   /*  Extract in the rows of matrix C the indexes of all required subsets */
-  subsets(nsamp, n, p, bc(n, p), C, &d);
+  subsets(nsamp, n, p, bc(n, p), C, &A);
   /*  Store the indices in varargout */
   /*  initialise and start timer. */
-  B = ceil(fmin(d / 100.0, 1000.0));
-  nx = (int)B;
-  time_size = (int)B;
+  tsampling = ceil(fmin(A / 100.0, 1000.0));
+  nx = (int)tsampling;
+  time_size = (int)tsampling;
   if (0 <= nx - 1) {
     memset(&time_data[0], 0, nx * sizeof(double));
   }
-  i = (int)d;
+  i = (int)A;
   emxInit_real_T(&Xb, 2);
   emxInit_real_T(&tmp_weights, 2);
   emxInit_real_T(&resrw, 1);
   emxInit_real_T(&c_y, 1);
   for (b_i = 0; b_i < i; b_i++) {
-    if (b_i + 1U <= (unsigned int)B) {
+    if (b_i + 1U <= (unsigned int)tsampling) {
       b_tic();
     }
     /*  extract a subset of size p */
@@ -863,9 +1005,9 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     Xb->size[1] = out->X->size[1];
     emxEnsureCapacity_real_T(Xb, i1);
     for (i1 = 0; i1 < nx; i1++) {
-      for (k = 0; k < loop_ub; k++) {
-        Xb->data[k + Xb->size[0] * i1] =
-            out->X->data[((int)C->data[b_i + C->size[0] * k] +
+      for (i2 = 0; i2 < loop_ub; i2++) {
+        Xb->data[i2 + Xb->size[0] * i1] =
+            out->X->data[((int)C->data[b_i + C->size[0] * i2] +
                           out->X->size[0] * i1) -
                          1];
       }
@@ -900,9 +1042,9 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
         for (i1 = 0; i1 <= loop_ub; i1++) {
           c_y->data[i1] = out->residuals->data[i1];
         }
-        IRWLSregS(b_y, Xb, c_y, psifunc_c1_data, psifunc_c1_size, kc,
-                  psifunc_class_data, psifunc_class_size, refsteps, reftol,
-                  out->residuals, &c, tmp_weights);
+        IRWLSregS(b_y, Xb, c_y, row, psifunc_c1_size, kc, psifunc_class_data,
+                  psifunc_class_size, refsteps, reftol, out->residuals, &B,
+                  tmp_weights);
         mtimes(out->X, out->residuals, resrw);
         loop_ub = b_y->size[0];
         i1 = resrw->size[0];
@@ -928,7 +1070,7 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
         for (k = 0; k < nx; k++) {
           c_y->data[k] = fabs(resrw->data[k]);
         }
-        c = median(c_y) / 0.6745;
+        B = median(c_y) / 0.6745;
       }
       /*  to find s, save first the best bestr scales (deriving from non */
       /*  singular subsets) and, from iteration bestr+1 (associated to */
@@ -947,18 +1089,18 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           emxEnsureCapacity_real_T(c_y, i1);
           loop_ub = resrw->size[0];
           for (i1 = 0; i1 < loop_ub; i1++) {
-            c_y->data[i1] = resrw->data[i1] / A;
+            c_y->data[i1] = resrw->data[i1] / sworst;
           }
-          scaletest = TBrho(c_y, psifunc_c1_data, psifunc_c1_size);
+          scaletest = TBrho(c_y, row, psifunc_c1_size);
         } else if (r_strcmp(psifunc_class_data, psifunc_class_size)) {
           i1 = c_y->size[0];
           c_y->size[0] = resrw->size[0];
           emxEnsureCapacity_real_T(c_y, i1);
           loop_ub = resrw->size[0];
           for (i1 = 0; i1 < loop_ub; i1++) {
-            c_y->data[i1] = resrw->data[i1] / A;
+            c_y->data[i1] = resrw->data[i1] / sworst;
           }
-          b_OPTrho(c_y, psifunc_c1_data, psifunc_c1_size, out->beta);
+          b_OPTrho(c_y, row, psifunc_c1_size, out->beta);
           scaletest = blockedSummation(out->beta, out->beta->size[0]) /
                       (double)out->beta->size[0];
         } else if (s_strcmp(psifunc_class_data, psifunc_class_size)) {
@@ -967,9 +1109,9 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           emxEnsureCapacity_real_T(c_y, i1);
           loop_ub = resrw->size[0];
           for (i1 = 0; i1 < loop_ub; i1++) {
-            c_y->data[i1] = resrw->data[i1] / A;
+            c_y->data[i1] = resrw->data[i1] / sworst;
           }
-          b_HArho(c_y, psifunc_c1_data, psifunc_c1_size, out->beta);
+          b_HArho(c_y, row, psifunc_c1_size, out->beta);
           scaletest = blockedSummation(out->beta, out->beta->size[0]) /
                       (double)out->beta->size[0];
         } else if (t_strcmp(psifunc_class_data, psifunc_class_size)) {
@@ -978,9 +1120,9 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           emxEnsureCapacity_real_T(c_y, i1);
           loop_ub = resrw->size[0];
           for (i1 = 0; i1 < loop_ub; i1++) {
-            c_y->data[i1] = resrw->data[i1] / A;
+            c_y->data[i1] = resrw->data[i1] / sworst;
           }
-          HYPrho(c_y, psifunc_c1_data, psifunc_c1_size, out->beta);
+          HYPrho(c_y, row, psifunc_c1_size, out->beta);
           scaletest = blockedSummation(out->beta, out->beta->size[0]) /
                       (double)out->beta->size[0];
         } else if (u_strcmp(psifunc_class_data, psifunc_class_size)) {
@@ -989,7 +1131,7 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           emxEnsureCapacity_real_T(out->beta, i1);
           loop_ub = resrw->size[0];
           for (i1 = 0; i1 < loop_ub; i1++) {
-            out->beta->data[i1] = resrw->data[i1] / A;
+            out->beta->data[i1] = resrw->data[i1] / sworst;
           }
           /* PDrho computes rho function for minimum density power divergence
            * estimator  */
@@ -1110,7 +1252,7 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           kdef = 0.0;
           loop_ub = psifunc_c1_size[1];
           for (i1 = 0; i1 < loop_ub; i1++) {
-            kdef += -psifunc_c1_data[i1] * (c_y->data[i1] / 2.0);
+            kdef += -row[i1] * (c_y->data[i1] / 2.0);
           }
           scaletest = 1.0 - exp(kdef);
         }
@@ -1119,8 +1261,8 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           /*  best scales */
           c_maximum(bestscales, &kdef, &k);
           bestscales->data[k - 1] =
-              Mscale(resrw, psifunc_c1_data, psifunc_c1_size, kc,
-                     psifunc_class_data, psifunc_class_size, c, minsctol);
+              Mscale(resrw, row, psifunc_c1_size, kc, psifunc_class_data,
+                     psifunc_class_size, B, minsctol);
           /* sbest1 = Mscale1(resrw,psifunc,scalerw,minsctol); */
           /* sbest2 = minscale(resrw,psifunc.c1,psifunc.kc1,scalerw,minsctol);
            */
@@ -1140,13 +1282,13 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                 C->data[b_i + C->size[0] * i1];
           }
           /*  sworst = the best scale among the bestr found up to now */
-          A = b_maximum(bestscales);
+          sworst = b_maximum(bestscales);
         }
       } else {
         /* bestscales(ij) = minscale(resrw,psifunc,scalerw,minsctol); */
         bestscales->data[(int)ij - 1] =
-            Mscale(resrw, psifunc_c1_data, psifunc_c1_size, kc,
-                   psifunc_class_data, psifunc_class_size, c, minsctol);
+            Mscale(resrw, row, psifunc_c1_size, kc, psifunc_class_data,
+                   psifunc_class_size, B, minsctol);
         loop_ub = out->residuals->size[0];
         for (i1 = 0; i1 < loop_ub; i1++) {
           bestbetas->data[((int)ij + bestbetas->size[0] * i1) - 1] =
@@ -1160,13 +1302,13 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
         ij++;
       }
     } else {
-      singsub++;
+      d++;
     }
     /*  Write total estimate time to compute final estimate */
-    if (b_i + 1U <= (unsigned int)B) {
+    if (b_i + 1U <= (unsigned int)tsampling) {
       /*  sampling time until step tsampling */
       time_data[b_i] = b_toc();
-    } else if ((b_i + 1U == (unsigned int)((int)B + 1)) && msg) {
+    } else if ((b_i + 1U == (unsigned int)((int)tsampling + 1)) && msg) {
       /*  stop sampling and print the estimated time */
       b_time_data.data = &time_data[0];
       b_time_data.size = &time_size;
@@ -1174,7 +1316,7 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
       b_time_data.numDimensions = 1;
       b_time_data.canFreeData = false;
       Rprintf("Total estimated time to complete S estimate: %5.2f seconds \n",
-             d * median(&b_time_data));
+             A * median(&b_time_data));
       //fflush(stdout);
     }
   }
@@ -1225,11 +1367,11 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     for (i = 0; i <= loop_ub; i++) {
       Xb->data[i] = out->X->data[i];
     }
-    IRWLSregS(b_y, Xb, c_y, psifunc_c1_data, psifunc_c1_size, kc,
-              psifunc_class_data, psifunc_class_size, refstepsbestr,
-              reftolbestr, out->residuals, &c, tmp_weights);
-    if (c < kdef) {
-      kdef = c;
+    IRWLSregS(b_y, Xb, c_y, row, psifunc_c1_size, kc, psifunc_class_data,
+              psifunc_class_size, refstepsbestr, reftolbestr, out->residuals,
+              &B, tmp_weights);
+    if (B < kdef) {
+      kdef = B;
       loop_ub = out->residuals->size[0];
       i = out->beta->size[0];
       out->beta->size[0] = out->residuals->size[0];
@@ -1278,7 +1420,7 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     out->residuals->data[i] = (b_y->data[i] - out->residuals->data[i]) / kdef;
   }
   /*  Store in output structure the number of singular subsets */
-  out->singsub = singsub;
+  out->singsub = d;
   /*  Store in output structure the outliers found with confidence level conflev
    */
   out->conflev = conflev;
@@ -1381,17 +1523,17 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
         i = 1;
         i1 = out->X->size[1];
       }
-      nx = out->X->size[0] - 1;
+      k = out->X->size[0] - 1;
       loop_ub = out->X->size[0];
       loop_ub_tmp = i1 - i;
       for (i1 = 0; i1 < loop_ub_tmp; i1++) {
-        for (k = 0; k < loop_ub; k++) {
-          out->X->data[k + (nx + 1) * i1] =
-              out->X->data[k + out->X->size[0] * (i + i1)];
+        for (i2 = 0; i2 < loop_ub; i2++) {
+          out->X->data[i2 + (k + 1) * i1] =
+              out->X->data[i2 + out->X->size[0] * (i + i1)];
         }
       }
       i = out->X->size[0] * out->X->size[1];
-      out->X->size[0] = nx + 1;
+      out->X->size[0] = k + 1;
       out->X->size[1] = loop_ub_tmp;
       emxEnsureCapacity_real_T(out->X, i);
     }

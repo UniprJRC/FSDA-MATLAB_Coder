@@ -373,53 +373,41 @@ double e_maximum(const emxArray_real_T *x)
   return ex;
 }
 
-double e_minimum(const emxArray_real_T *x)
+void e_minimum(const double x[50], double *ex, int *idx)
 {
-  double ex;
-  int idx;
+  double d;
+  int i;
   int k;
-  int last;
   bool exitg1;
-  last = x->size[0] * x->size[1];
-  if (x->size[0] * x->size[1] <= 2) {
-    if (x->size[0] * x->size[1] == 1) {
-      ex = x->data[0];
-    } else if ((x->data[0] > x->data[x->size[0] * x->size[1] - 1]) ||
-               (rtIsNaN(x->data[0]) &&
-                (!rtIsNaN(x->data[x->size[0] * x->size[1] - 1])))) {
-      ex = x->data[x->size[0] * x->size[1] - 1];
-    } else {
-      ex = x->data[0];
-    }
+  if (!rtIsNaN(x[0])) {
+    *idx = 1;
   } else {
-    if (!rtIsNaN(x->data[0])) {
-      idx = 1;
-    } else {
-      idx = 0;
-      k = 2;
-      exitg1 = false;
-      while ((!exitg1) && (k <= last)) {
-        if (!rtIsNaN(x->data[k - 1])) {
-          idx = k;
-          exitg1 = true;
-        } else {
-          k++;
-        }
-      }
-    }
-    if (idx == 0) {
-      ex = x->data[0];
-    } else {
-      ex = x->data[idx - 1];
-      idx++;
-      for (k = idx; k <= last; k++) {
-        if (ex > x->data[k - 1]) {
-          ex = x->data[k - 1];
-        }
+    *idx = 0;
+    k = 2;
+    exitg1 = false;
+    while ((!exitg1) && (k < 51)) {
+      if (!rtIsNaN(x[k - 1])) {
+        *idx = k;
+        exitg1 = true;
+      } else {
+        k++;
       }
     }
   }
-  return ex;
+  if (*idx == 0) {
+    *ex = x[0];
+    *idx = 1;
+  } else {
+    *ex = x[*idx - 1];
+    i = *idx + 1;
+    for (k = i; k < 51; k++) {
+      d = x[k - 1];
+      if (*ex > d) {
+        *ex = d;
+        *idx = k;
+      }
+    }
+  }
 }
 
 void f_maximum(const emxArray_real_T *x, emxArray_real_T *ex)
@@ -457,27 +445,39 @@ void f_maximum(const emxArray_real_T *x, emxArray_real_T *ex)
   }
 }
 
-void f_minimum(const emxArray_real_T *x, double *ex, int *idx)
+void f_minimum(const double x[3], double *ex, int *idx)
 {
-  double b_tmp;
+  double d;
   int i;
-  int vlen;
-  bool p;
-  *idx = 1;
-  vlen = x->size[2];
-  *ex = x->data[0];
-  for (i = 2; i <= vlen; i++) {
-    b_tmp = x->data[i - 1];
-    if (rtIsNaN(b_tmp)) {
-      p = false;
-    } else if (rtIsNaN(*ex)) {
-      p = true;
-    } else {
-      p = (*ex > b_tmp);
+  int k;
+  bool exitg1;
+  if (!rtIsNaN(x[0])) {
+    *idx = 1;
+  } else {
+    *idx = 0;
+    k = 2;
+    exitg1 = false;
+    while ((!exitg1) && (k < 4)) {
+      if (!rtIsNaN(x[k - 1])) {
+        *idx = k;
+        exitg1 = true;
+      } else {
+        k++;
+      }
     }
-    if (p) {
-      *ex = b_tmp;
-      *idx = i;
+  }
+  if (*idx == 0) {
+    *ex = x[0];
+    *idx = 1;
+  } else {
+    *ex = x[*idx - 1];
+    i = *idx + 1;
+    for (k = i; k < 4; k++) {
+      d = x[k - 1];
+      if (*ex > d) {
+        *ex = d;
+        *idx = k;
+      }
     }
   }
 }
@@ -526,6 +526,55 @@ void g_maximum(const emxArray_real_T *x, emxArray_real_T *ex,
   }
 }
 
+double g_minimum(const emxArray_real_T *x)
+{
+  double ex;
+  int idx;
+  int k;
+  int last;
+  bool exitg1;
+  last = x->size[0] * x->size[1];
+  if (x->size[0] * x->size[1] <= 2) {
+    if (x->size[0] * x->size[1] == 1) {
+      ex = x->data[0];
+    } else if ((x->data[0] > x->data[x->size[0] * x->size[1] - 1]) ||
+               (rtIsNaN(x->data[0]) &&
+                (!rtIsNaN(x->data[x->size[0] * x->size[1] - 1])))) {
+      ex = x->data[x->size[0] * x->size[1] - 1];
+    } else {
+      ex = x->data[0];
+    }
+  } else {
+    if (!rtIsNaN(x->data[0])) {
+      idx = 1;
+    } else {
+      idx = 0;
+      k = 2;
+      exitg1 = false;
+      while ((!exitg1) && (k <= last)) {
+        if (!rtIsNaN(x->data[k - 1])) {
+          idx = k;
+          exitg1 = true;
+        } else {
+          k++;
+        }
+      }
+    }
+    if (idx == 0) {
+      ex = x->data[0];
+    } else {
+      ex = x->data[idx - 1];
+      idx++;
+      for (k = idx; k <= last; k++) {
+        if (ex > x->data[k - 1]) {
+          ex = x->data[k - 1];
+        }
+      }
+    }
+  }
+  return ex;
+}
+
 bool h_maximum(const bool x[6])
 {
   int k;
@@ -537,6 +586,31 @@ bool h_maximum(const bool x[6])
     }
   }
   return ex;
+}
+
+void h_minimum(const emxArray_real_T *x, double *ex, int *idx)
+{
+  double b_tmp;
+  int i;
+  int vlen;
+  bool p;
+  *idx = 1;
+  vlen = x->size[2];
+  *ex = x->data[0];
+  for (i = 2; i <= vlen; i++) {
+    b_tmp = x->data[i - 1];
+    if (rtIsNaN(b_tmp)) {
+      p = false;
+    } else if (rtIsNaN(*ex)) {
+      p = true;
+    } else {
+      p = (*ex > b_tmp);
+    }
+    if (p) {
+      *ex = b_tmp;
+      *idx = i;
+    }
+  }
 }
 
 bool i_maximum(const bool x[2])

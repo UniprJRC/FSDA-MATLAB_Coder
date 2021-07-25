@@ -27,6 +27,8 @@ extern const double dv1[3601];
 extern const double dv2[31];
 extern const bool bv[128];
 extern const char cv[128];
+extern const double dv3[50];
+extern const double dv4[900];
 extern bool isInitialized_fsdaC;
 
 #endif
