@@ -32,14 +32,11 @@ void FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   emxArray_real_T *b_b;
   emxArray_real_T *b_b_tmp;
   emxArray_real_T *b_tmp;
-  emxArray_real_T *b_x;
   emxArray_real_T *m;
   emxArray_real_T *quant;
   emxArray_real_T *r;
   emxArray_real_T *r1;
   emxArray_real_T *r2;
-  emxArray_real_T *r3;
-  emxArray_real_T *x;
   emxArray_real_T *y;
   double b_options_prob_data[36];
   double options_prob_data[18];
@@ -82,14 +79,14 @@ void FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   /*                  Example - 'prob',[0.05 0.95] */
   /*                  Data Types - double */
   /*  */
-  /*    scaled:  It indicates how to compute the envelopes. Scalar. */
-  /*                If scaled>0 the envelopes are produced for */
+  /*    scaled:  It indicates how to compute the envelopes. Boolean. */
+  /*                If scaled=true0 the envelopes are produced for */
   /*                scaled Mahalanobis distances (no consistency factor is */
   /*                applied) else the traditional consistency factor is applied
    */
   /*                (this is the default) */
-  /*                  Example - 'scaled',0 */
-  /*                  Data Types - double */
+  /*                  Example - 'scaled',false */
+  /*                  Data Types - logical */
   /*  */
   /*  */
   /*  Output: */
@@ -280,40 +277,38 @@ void FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   for (k = 0; k < 6; k++) {
     tmp_data[k] = 1.0 - b_options_prob_data[k];
   }
-  emxInit_real_T(&x, 2);
-  k = x->size[0] * x->size[1];
-  x->size[0] = a->size[0];
-  x->size[1] = 6;
-  emxEnsureCapacity_real_T(x, k);
+  emxInit_real_T(&b_b_tmp, 2);
+  k = b_b_tmp->size[0] * b_b_tmp->size[1];
+  b_b_tmp->size[0] = a->size[0];
+  b_b_tmp->size[1] = 6;
+  emxEnsureCapacity_real_T(b_b_tmp, k);
   nrows = a->size[0] * 6;
   for (k = 0; k < nrows; k++) {
-    x->data[k] = 2.0 * a->data[k];
+    b_b_tmp->data[k] = 2.0 * a->data[k];
   }
-  emxInit_real_T(&r, 2);
-  k = r->size[0] * r->size[1];
-  r->size[0] = b_tmp->size[0];
-  r->size[1] = 6;
-  emxEnsureCapacity_real_T(r, k);
+  emxInit_real_T(&b_b, 2);
+  k = b_b->size[0] * b_b->size[1];
+  b_b->size[0] = b_tmp->size[0];
+  b_b->size[1] = 6;
+  emxEnsureCapacity_real_T(b_b, k);
   nrows = b_tmp->size[0] * 6;
   for (k = 0; k < nrows; k++) {
-    r->data[k] = 2.0 * b_tmp->data[k];
+    b_b->data[k] = 2.0 * b_tmp->data[k];
   }
   emxInit_real_T(&quant, 2);
-  emxInit_real_T(&b_x, 2);
+  emxInit_real_T(&r, 2);
   emxInit_real_T(&r1, 2);
   repmat(tmp_data, tmp_size, m->size[0], r1);
-  b_finv(r1, x, r, b_x);
+  c_finv(r1, b_b_tmp, b_b, r);
   k = quant->size[0] * quant->size[1];
-  quant->size[0] = b_x->size[0];
-  quant->size[1] = b_x->size[1];
+  quant->size[0] = r->size[0];
+  quant->size[1] = r->size[1];
   emxEnsureCapacity_real_T(quant, k);
-  nrows = b_x->size[0] * b_x->size[1];
+  nrows = r->size[0] * r->size[1];
   emxFree_real_T(&r1);
-  emxFree_real_T(&r);
   for (k = 0; k < nrows; k++) {
-    quant->data[k] = b_x->data[k];
+    quant->data[k] = r->data[k];
   }
-  emxInit_real_T(&b_b_tmp, 2);
   /*  from the equivalence with the incomplete beta distribution. */
   /*  cor=(n/(n-1))*v*(mm-1)./(mm-v); */
   /* cor=v*((mm.^2-1)./mm)./(mm-v); */
@@ -328,7 +323,6 @@ void FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
     b_b_tmp->data[k] =
         b_tmp->data[k] / ((b->data[k] + 1.0) + a->data[k] * quant->data[k]);
   }
-  emxInit_real_T(&b_b, 2);
   k = b_b->size[0] * b_b->size[1];
   b_b->size[0] = b->size[0];
   b_b->size[1] = 6;
@@ -338,16 +332,15 @@ void FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
     b_b->data[k] = b->data[k] - v;
   }
   emxInit_real_T(&r2, 2);
-  emxInit_real_T(&r3, 2);
-  finv(b_b_tmp, v, b_b, r3);
+  b_finv(b_b_tmp, v, b_b, r);
   k = r2->size[0] * r2->size[1];
-  r2->size[0] = r3->size[0];
-  r2->size[1] = r3->size[1];
+  r2->size[0] = r->size[0];
+  r2->size[1] = r->size[1];
   emxEnsureCapacity_real_T(r2, k);
-  nrows = r3->size[0] * r3->size[1];
+  nrows = r->size[0] * r->size[1];
   emxFree_real_T(&b_b_tmp);
   for (k = 0; k < nrows; k++) {
-    r2->data[k] = r3->data[k];
+    r2->data[k] = r->data[k];
   }
   /*  Compute Tallis correction factor based on the chi^2 distribution */
   /*  mm/n is the percentage of observations inside subset if scaled is not
@@ -360,69 +353,55 @@ void FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   for (k = 0; k < nrows; k++) {
     b_b->data[k] = b->data[k] / n;
   }
-  b_chi2inv(b_b, v, r3);
+  b_chi2inv(b_b, v, r);
   k = a->size[0] * a->size[1];
-  a->size[0] = r3->size[0];
-  a->size[1] = r3->size[1];
+  a->size[0] = r->size[0];
+  a->size[1] = r->size[1];
   emxEnsureCapacity_real_T(a, k);
-  nrows = r3->size[0] * r3->size[1];
+  nrows = r->size[0] * r->size[1];
   emxFree_real_T(&b_b);
   for (k = 0; k < nrows; k++) {
-    a->data[k] = r3->data[k];
+    a->data[k] = r->data[k];
   }
-  chi2cdf(a, v + 2.0, r3);
+  chi2cdf(a, v + 2.0, r);
   k = quant->size[0] * quant->size[1];
-  quant->size[0] = r3->size[0];
-  quant->size[1] = r3->size[1];
+  quant->size[0] = r->size[0];
+  quant->size[1] = r->size[1];
   emxEnsureCapacity_real_T(quant, k);
-  nrows = r3->size[0] * r3->size[1];
+  nrows = r->size[0] * r->size[1];
   emxFree_real_T(&a);
   for (k = 0; k < nrows; k++) {
-    quant->data[k] = r3->data[k];
+    quant->data[k] = r->data[k];
   }
-  emxFree_real_T(&r3);
-  k = x->size[0] * x->size[1];
-  x->size[0] = b_tmp->size[0];
-  x->size[1] = 6;
-  emxEnsureCapacity_real_T(x, k);
+  emxFree_real_T(&r);
   nrows = b_tmp->size[0] * 6;
   for (k = 0; k < nrows; k++) {
-    x->data[k] = v * (b_tmp->data[k] / b->data[k]) * (b->data[k] - 1.0) /
-                 (b->data[k] - v) * r2->data[k];
+    b_tmp->data[k] = v * (b_tmp->data[k] / b->data[k]) * (b->data[k] - 1.0) /
+                     (b->data[k] - v) * r2->data[k];
   }
-  emxFree_real_T(&b_tmp);
   emxFree_real_T(&r2);
-  nrows = x->size[0] * 6;
+  nrows = b_tmp->size[0] * 6;
   for (k = 0; k < nrows; k++) {
-    x->data[k] = sqrt(x->data[k]);
+    b_tmp->data[k] = sqrt(b_tmp->data[k]);
   }
-  k = b_x->size[0] * b_x->size[1];
-  b_x->size[0] = b->size[0];
-  b_x->size[1] = 6;
-  emxEnsureCapacity_real_T(b_x, k);
   nrows = b->size[0] * 6;
   for (k = 0; k < nrows; k++) {
-    b_x->data[k] = n / b->data[k] * quant->data[k];
+    b->data[k] = n / b->data[k] * quant->data[k];
   }
   emxFree_real_T(&quant);
-  nrows = b_x->size[0] * 6;
+  nrows = b->size[0] * 6;
   for (k = 0; k < nrows; k++) {
-    b_x->data[k] = sqrt(b_x->data[k]);
+    b->data[k] = sqrt(b->data[k]);
   }
-  k = b->size[0] * b->size[1];
-  b->size[0] = x->size[0];
-  b->size[1] = 6;
-  emxEnsureCapacity_real_T(b, k);
-  nrows = x->size[0] * 6;
+  nrows = b_tmp->size[0] * 6;
   for (k = 0; k < nrows; k++) {
-    b->data[k] = x->data[k] / b_x->data[k];
+    b_tmp->data[k] /= b->data[k];
   }
-  emxFree_real_T(&b_x);
-  emxFree_real_T(&x);
+  emxFree_real_T(&b);
   if (m->size[0] != 0) {
     ibtile = m->size[0];
-  } else if (b->size[0] != 0) {
-    ibtile = b->size[0];
+  } else if (b_tmp->size[0] != 0) {
+    ibtile = b_tmp->size[0];
   } else {
     ibtile = 0;
   }
@@ -432,7 +411,7 @@ void FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   } else {
     input_sizes_idx_1 = 0;
   }
-  if (empty_non_axis_sizes || (b->size[0] != 0)) {
+  if (empty_non_axis_sizes || (b_tmp->size[0] != 0)) {
     outsize_idx_1 = 6;
   } else {
     outsize_idx_1 = 0;
@@ -451,10 +430,10 @@ void FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   for (k = 0; k < outsize_idx_1; k++) {
     for (i = 0; i < ibtile; i++) {
       MMDenv->data[i + MMDenv->size[0] * (k + input_sizes_idx_1)] =
-          b->data[i + ibtile * k];
+          b_tmp->data[i + ibtile * k];
     }
   }
-  emxFree_real_T(&b);
+  emxFree_real_T(&b_tmp);
 }
 
 void b_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
@@ -464,14 +443,11 @@ void b_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   emxArray_real_T *b_b;
   emxArray_real_T *b_b_tmp;
   emxArray_real_T *b_tmp;
-  emxArray_real_T *b_x;
-  emxArray_real_T *c_b;
   emxArray_real_T *m;
   emxArray_real_T *quant;
   emxArray_real_T *r;
   emxArray_real_T *r1;
   emxArray_real_T *r2;
-  emxArray_real_T *x;
   emxArray_real_T *y;
   int i;
   int i1;
@@ -510,14 +486,14 @@ void b_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   /*                  Example - 'prob',[0.05 0.95] */
   /*                  Data Types - double */
   /*  */
-  /*    scaled:  It indicates how to compute the envelopes. Scalar. */
-  /*                If scaled>0 the envelopes are produced for */
+  /*    scaled:  It indicates how to compute the envelopes. Boolean. */
+  /*                If scaled=true0 the envelopes are produced for */
   /*                scaled Mahalanobis distances (no consistency factor is */
   /*                applied) else the traditional consistency factor is applied
    */
   /*                (this is the default) */
-  /*                  Example - 'scaled',0 */
-  /*                  Data Types - double */
+  /*                  Example - 'scaled',false */
+  /*                  Data Types - logical */
   /*  */
   /*  */
   /*  Output: */
@@ -703,14 +679,14 @@ void b_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   for (itilerow = 0; itilerow < nrows; itilerow++) {
     b_b->data[itilerow] = 0.99;
   }
-  emxInit_real_T(&x, 2);
-  i = x->size[0] * x->size[1];
-  x->size[0] = a->size[0];
-  x->size[1] = 1;
-  emxEnsureCapacity_real_T(x, i);
+  emxInit_real_T(&b_b_tmp, 2);
+  i = b_b_tmp->size[0] * b_b_tmp->size[1];
+  b_b_tmp->size[0] = a->size[0];
+  b_b_tmp->size[1] = 1;
+  emxEnsureCapacity_real_T(b_b_tmp, i);
   nrows = a->size[0];
   for (i = 0; i < nrows; i++) {
-    x->data[i] = 2.0 * a->data[i];
+    b_b_tmp->data[i] = 2.0 * a->data[i];
   }
   emxInit_real_T(&r, 2);
   i = r->size[0] * r->size[1];
@@ -722,19 +698,17 @@ void b_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
     r->data[i] = 2.0 * b_tmp->data[i];
   }
   emxInit_real_T(&quant, 2);
-  emxInit_real_T(&b_x, 2);
-  b_finv(b_b, x, r, b_x);
+  emxInit_real_T(&r1, 2);
+  c_finv(b_b, b_b_tmp, r, r1);
   i = quant->size[0] * quant->size[1];
-  quant->size[0] = b_x->size[0];
-  quant->size[1] = b_x->size[1];
+  quant->size[0] = r1->size[0];
+  quant->size[1] = r1->size[1];
   emxEnsureCapacity_real_T(quant, i);
-  nrows = b_x->size[0] * b_x->size[1];
+  nrows = r1->size[0] * r1->size[1];
   emxFree_real_T(&r);
-  emxFree_real_T(&b_b);
   for (i = 0; i < nrows; i++) {
-    quant->data[i] = b_x->data[i];
+    quant->data[i] = r1->data[i];
   }
-  emxInit_real_T(&b_b_tmp, 2);
   /*  from the equivalence with the incomplete beta distribution. */
   /*  cor=(n/(n-1))*v*(mm-1)./(mm-v); */
   /* cor=v*((mm.^2-1)./mm)./(mm-v); */
@@ -749,101 +723,85 @@ void b_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
     b_b_tmp->data[i] =
         b_tmp->data[i] / ((b->data[i] + 1.0) + a->data[i] * quant->data[i]);
   }
-  emxInit_real_T(&c_b, 2);
-  i = c_b->size[0] * c_b->size[1];
-  c_b->size[0] = b->size[0];
-  c_b->size[1] = 1;
-  emxEnsureCapacity_real_T(c_b, i);
+  i = b_b->size[0] * b_b->size[1];
+  b_b->size[0] = b->size[0];
+  b_b->size[1] = 1;
+  emxEnsureCapacity_real_T(b_b, i);
   nrows = b->size[0];
   for (i = 0; i < nrows; i++) {
-    c_b->data[i] = b->data[i] - v;
+    b_b->data[i] = b->data[i] - v;
   }
-  emxInit_real_T(&r1, 2);
   emxInit_real_T(&r2, 2);
-  finv(b_b_tmp, v, c_b, r2);
-  i = r1->size[0] * r1->size[1];
-  r1->size[0] = r2->size[0];
-  r1->size[1] = r2->size[1];
-  emxEnsureCapacity_real_T(r1, i);
-  nrows = r2->size[0] * r2->size[1];
+  b_finv(b_b_tmp, v, b_b, r1);
+  i = r2->size[0] * r2->size[1];
+  r2->size[0] = r1->size[0];
+  r2->size[1] = r1->size[1];
+  emxEnsureCapacity_real_T(r2, i);
+  nrows = r1->size[0] * r1->size[1];
   emxFree_real_T(&b_b_tmp);
   for (i = 0; i < nrows; i++) {
-    r1->data[i] = r2->data[i];
+    r2->data[i] = r1->data[i];
   }
   /*  Compute Tallis correction factor based on the chi^2 distribution */
   /*  mm/n is the percentage of observations inside subset if scaled is not
    * equal to 1. */
-  i = c_b->size[0] * c_b->size[1];
-  c_b->size[0] = b->size[0];
-  c_b->size[1] = 1;
-  emxEnsureCapacity_real_T(c_b, i);
+  i = b_b->size[0] * b_b->size[1];
+  b_b->size[0] = b->size[0];
+  b_b->size[1] = 1;
+  emxEnsureCapacity_real_T(b_b, i);
   nrows = b->size[0];
   for (i = 0; i < nrows; i++) {
-    c_b->data[i] = b->data[i] / n;
+    b_b->data[i] = b->data[i] / n;
   }
-  b_chi2inv(c_b, v, r2);
+  b_chi2inv(b_b, v, r1);
   i = a->size[0] * a->size[1];
-  a->size[0] = r2->size[0];
-  a->size[1] = r2->size[1];
+  a->size[0] = r1->size[0];
+  a->size[1] = r1->size[1];
   emxEnsureCapacity_real_T(a, i);
-  nrows = r2->size[0] * r2->size[1];
-  emxFree_real_T(&c_b);
+  nrows = r1->size[0] * r1->size[1];
+  emxFree_real_T(&b_b);
   for (i = 0; i < nrows; i++) {
-    a->data[i] = r2->data[i];
+    a->data[i] = r1->data[i];
   }
-  chi2cdf(a, v + 2.0, r2);
+  chi2cdf(a, v + 2.0, r1);
   i = quant->size[0] * quant->size[1];
-  quant->size[0] = r2->size[0];
-  quant->size[1] = r2->size[1];
+  quant->size[0] = r1->size[0];
+  quant->size[1] = r1->size[1];
   emxEnsureCapacity_real_T(quant, i);
-  nrows = r2->size[0] * r2->size[1];
+  nrows = r1->size[0] * r1->size[1];
   emxFree_real_T(&a);
   for (i = 0; i < nrows; i++) {
-    quant->data[i] = r2->data[i];
+    quant->data[i] = r1->data[i];
   }
-  emxFree_real_T(&r2);
-  i = b_x->size[0] * b_x->size[1];
-  b_x->size[0] = b_tmp->size[0];
-  b_x->size[1] = 1;
-  emxEnsureCapacity_real_T(b_x, i);
+  emxFree_real_T(&r1);
   nrows = b_tmp->size[0];
   for (i = 0; i < nrows; i++) {
-    b_x->data[i] = v * (b_tmp->data[i] / b->data[i]) * (b->data[i] - 1.0) /
-                   (b->data[i] - v) * r1->data[i];
+    b_tmp->data[i] = v * (b_tmp->data[i] / b->data[i]) * (b->data[i] - 1.0) /
+                     (b->data[i] - v) * r2->data[i];
   }
-  emxFree_real_T(&b_tmp);
-  emxFree_real_T(&r1);
-  nrows = b_x->size[0];
+  emxFree_real_T(&r2);
+  nrows = b_tmp->size[0];
   for (outsize_idx_1 = 0; outsize_idx_1 < nrows; outsize_idx_1++) {
-    b_x->data[outsize_idx_1] = sqrt(b_x->data[outsize_idx_1]);
+    b_tmp->data[outsize_idx_1] = sqrt(b_tmp->data[outsize_idx_1]);
   }
-  i = x->size[0] * x->size[1];
-  x->size[0] = b->size[0];
-  x->size[1] = 1;
-  emxEnsureCapacity_real_T(x, i);
   nrows = b->size[0];
   for (i = 0; i < nrows; i++) {
-    x->data[i] = n / b->data[i] * quant->data[i];
+    b->data[i] = n / b->data[i] * quant->data[i];
   }
   emxFree_real_T(&quant);
-  nrows = x->size[0];
+  nrows = b->size[0];
   for (outsize_idx_1 = 0; outsize_idx_1 < nrows; outsize_idx_1++) {
-    x->data[outsize_idx_1] = sqrt(x->data[outsize_idx_1]);
+    b->data[outsize_idx_1] = sqrt(b->data[outsize_idx_1]);
   }
-  i = b->size[0] * b->size[1];
-  b->size[0] = b_x->size[0];
-  b->size[1] = 1;
-  emxEnsureCapacity_real_T(b, i);
-  nrows = b_x->size[0];
+  nrows = b_tmp->size[0];
   for (i = 0; i < nrows; i++) {
-    b->data[i] = b_x->data[i] / x->data[i];
+    b_tmp->data[i] /= b->data[i];
   }
-  emxFree_real_T(&x);
-  emxFree_real_T(&b_x);
+  emxFree_real_T(&b);
   if (m->size[0] != 0) {
     itilerow = m->size[0];
-  } else if (b->size[0] != 0) {
-    itilerow = b->size[0];
+  } else if (b_tmp->size[0] != 0) {
+    itilerow = b_tmp->size[0];
   } else {
     itilerow = 0;
   }
@@ -853,7 +811,7 @@ void b_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   } else {
     input_sizes_idx_1 = 0;
   }
-  if (empty_non_axis_sizes || (b->size[0] != 0)) {
+  if (empty_non_axis_sizes || (b_tmp->size[0] != 0)) {
     outsize_idx_1 = 1;
   } else {
     outsize_idx_1 = 0;
@@ -871,10 +829,10 @@ void b_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   emxFree_real_T(&m);
   for (i = 0; i < outsize_idx_1; i++) {
     for (i1 = 0; i1 < itilerow; i1++) {
-      MMDenv->data[i1 + MMDenv->size[0] * input_sizes_idx_1] = b->data[i1];
+      MMDenv->data[i1 + MMDenv->size[0] * input_sizes_idx_1] = b_tmp->data[i1];
     }
   }
-  emxFree_real_T(&b);
+  emxFree_real_T(&b_tmp);
 }
 
 void c_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
@@ -883,13 +841,11 @@ void c_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   emxArray_real_T *b_b;
   emxArray_real_T *b_b_tmp;
   emxArray_real_T *b_tmp;
-  emxArray_real_T *b_x;
   emxArray_real_T *c_b_tmp;
   emxArray_real_T *m;
   emxArray_real_T *quant;
   emxArray_real_T *r;
   emxArray_real_T *r1;
-  emxArray_real_T *x;
   emxArray_real_T *y;
   double options_prob_data[18];
   double b_options_prob_data[16];
@@ -932,14 +888,14 @@ void c_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   /*                  Example - 'prob',[0.05 0.95] */
   /*                  Data Types - double */
   /*  */
-  /*    scaled:  It indicates how to compute the envelopes. Scalar. */
-  /*                If scaled>0 the envelopes are produced for */
+  /*    scaled:  It indicates how to compute the envelopes. Boolean. */
+  /*                If scaled=true0 the envelopes are produced for */
   /*                scaled Mahalanobis distances (no consistency factor is */
   /*                applied) else the traditional consistency factor is applied
    */
   /*                (this is the default) */
-  /*                  Example - 'scaled',0 */
-  /*                  Data Types - double */
+  /*                  Example - 'scaled',false */
+  /*                  Data Types - logical */
   /*  */
   /*  */
   /*  Output: */
@@ -1131,40 +1087,37 @@ void c_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   for (k = 0; k < 4; k++) {
     tmp_data[k] = 1.0 - b_options_prob_data[k];
   }
-  emxInit_real_T(&x, 2);
-  k = x->size[0] * x->size[1];
-  x->size[0] = b_tmp->size[0];
-  x->size[1] = 4;
-  emxEnsureCapacity_real_T(x, k);
+  emxInit_real_T(&c_b_tmp, 2);
+  k = c_b_tmp->size[0] * c_b_tmp->size[1];
+  c_b_tmp->size[0] = b_tmp->size[0];
+  c_b_tmp->size[1] = 4;
+  emxEnsureCapacity_real_T(c_b_tmp, k);
   nrows = b_tmp->size[0] * 4;
   for (k = 0; k < nrows; k++) {
-    x->data[k] = 2.0 * b_tmp->data[k];
+    c_b_tmp->data[k] = 2.0 * b_tmp->data[k];
   }
-  emxInit_real_T(&r, 2);
-  k = r->size[0] * r->size[1];
-  r->size[0] = b_b_tmp->size[0];
-  r->size[1] = 4;
-  emxEnsureCapacity_real_T(r, k);
+  emxInit_real_T(&b_b, 2);
+  k = b_b->size[0] * b_b->size[1];
+  b_b->size[0] = b_b_tmp->size[0];
+  b_b->size[1] = 4;
+  emxEnsureCapacity_real_T(b_b, k);
   nrows = b_b_tmp->size[0] * 4;
   for (k = 0; k < nrows; k++) {
-    r->data[k] = 2.0 * b_b_tmp->data[k];
+    b_b->data[k] = 2.0 * b_b_tmp->data[k];
   }
   emxInit_real_T(&quant, 2);
-  emxInit_real_T(&b_x, 2);
+  emxInit_real_T(&r, 2);
   emxInit_real_T(&r1, 2);
   repmat(tmp_data, tmp_size, m->size[0], r1);
-  b_finv(r1, x, r, b_x);
+  c_finv(r1, c_b_tmp, b_b, r);
   k = quant->size[0] * quant->size[1];
-  quant->size[0] = b_x->size[0];
-  quant->size[1] = b_x->size[1];
+  quant->size[0] = r->size[0];
+  quant->size[1] = r->size[1];
   emxEnsureCapacity_real_T(quant, k);
-  nrows = b_x->size[0] * b_x->size[1];
-  emxFree_real_T(&r1);
-  emxFree_real_T(&r);
+  nrows = r->size[0] * r->size[1];
   for (k = 0; k < nrows; k++) {
-    quant->data[k] = b_x->data[k];
+    quant->data[k] = r->data[k];
   }
-  emxInit_real_T(&c_b_tmp, 2);
   /*  from the equivalence with the incomplete beta distribution. */
   /*  cor=(n/(n-1))*v*(mm-1)./(mm-v); */
   /* cor=v*((mm.^2-1)./mm)./(mm-v); */
@@ -1179,7 +1132,7 @@ void c_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
     c_b_tmp->data[k] = b_b_tmp->data[k] /
                        ((b->data[k] + 1.0) + b_tmp->data[k] * quant->data[k]);
   }
-  emxInit_real_T(&b_b, 2);
+  emxFree_real_T(&b_tmp);
   k = b_b->size[0] * b_b->size[1];
   b_b->size[0] = b->size[0];
   b_b->size[1] = 4;
@@ -1188,7 +1141,16 @@ void c_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   for (k = 0; k < nrows; k++) {
     b_b->data[k] = b->data[k] - v;
   }
-  finv(c_b_tmp, v, b_b, b_tmp);
+  b_finv(c_b_tmp, v, b_b, r);
+  k = r1->size[0] * r1->size[1];
+  r1->size[0] = r->size[0];
+  r1->size[1] = r->size[1];
+  emxEnsureCapacity_real_T(r1, k);
+  nrows = r->size[0] * r->size[1];
+  emxFree_real_T(&c_b_tmp);
+  for (k = 0; k < nrows; k++) {
+    r1->data[k] = r->data[k];
+  }
   /*  Compute Tallis correction factor based on the chi^2 distribution */
   /*  mm/n is the percentage of observations inside subset if scaled is not
    * equal to 1. */
@@ -1200,52 +1162,54 @@ void c_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   for (k = 0; k < nrows; k++) {
     b_b->data[k] = b->data[k] / n;
   }
-  b_chi2inv(b_b, v, quant);
-  chi2cdf(quant, v + 2.0, c_b_tmp);
-  k = x->size[0] * x->size[1];
-  x->size[0] = b_b_tmp->size[0];
-  x->size[1] = 4;
-  emxEnsureCapacity_real_T(x, k);
-  nrows = b_b_tmp->size[0] * 4;
+  b_chi2inv(b_b, v, r);
+  k = quant->size[0] * quant->size[1];
+  quant->size[0] = r->size[0];
+  quant->size[1] = r->size[1];
+  emxEnsureCapacity_real_T(quant, k);
+  nrows = r->size[0] * r->size[1];
   emxFree_real_T(&b_b);
-  emxFree_real_T(&quant);
   for (k = 0; k < nrows; k++) {
-    x->data[k] = v * (b_b_tmp->data[k] / b->data[k]) * (b->data[k] - 1.0) /
-                 (b->data[k] - v) * b_tmp->data[k];
+    quant->data[k] = r->data[k];
   }
-  emxFree_real_T(&b_b_tmp);
-  emxFree_real_T(&b_tmp);
-  nrows = x->size[0] << 2;
+  chi2cdf(quant, v + 2.0, r);
+  k = quant->size[0] * quant->size[1];
+  quant->size[0] = r->size[0];
+  quant->size[1] = r->size[1];
+  emxEnsureCapacity_real_T(quant, k);
+  nrows = r->size[0] * r->size[1];
   for (k = 0; k < nrows; k++) {
-    x->data[k] = sqrt(x->data[k]);
+    quant->data[k] = r->data[k];
   }
-  k = b_x->size[0] * b_x->size[1];
-  b_x->size[0] = b->size[0];
-  b_x->size[1] = 4;
-  emxEnsureCapacity_real_T(b_x, k);
+  emxFree_real_T(&r);
+  nrows = b_b_tmp->size[0] * 4;
+  for (k = 0; k < nrows; k++) {
+    b_b_tmp->data[k] = v * (b_b_tmp->data[k] / b->data[k]) *
+                       (b->data[k] - 1.0) / (b->data[k] - v) * r1->data[k];
+  }
+  emxFree_real_T(&r1);
+  nrows = b_b_tmp->size[0] << 2;
+  for (k = 0; k < nrows; k++) {
+    b_b_tmp->data[k] = sqrt(b_b_tmp->data[k]);
+  }
   nrows = b->size[0] * 4;
   for (k = 0; k < nrows; k++) {
-    b_x->data[k] = n / b->data[k] * c_b_tmp->data[k];
+    b->data[k] = n / b->data[k] * quant->data[k];
   }
-  emxFree_real_T(&c_b_tmp);
-  nrows = b_x->size[0] << 2;
+  emxFree_real_T(&quant);
+  nrows = b->size[0] << 2;
   for (k = 0; k < nrows; k++) {
-    b_x->data[k] = sqrt(b_x->data[k]);
+    b->data[k] = sqrt(b->data[k]);
   }
-  k = b->size[0] * b->size[1];
-  b->size[0] = x->size[0];
-  b->size[1] = 4;
-  emxEnsureCapacity_real_T(b, k);
-  nrows = x->size[0] * 4;
+  nrows = b_b_tmp->size[0] * 4;
   for (k = 0; k < nrows; k++) {
-    b->data[k] = x->data[k] / b_x->data[k];
+    b_b_tmp->data[k] /= b->data[k];
   }
-  emxFree_real_T(&b_x);
-  emxFree_real_T(&x);
+  emxFree_real_T(&b);
   if (m->size[0] != 0) {
     ibtile = m->size[0];
-  } else if (b->size[0] != 0) {
-    ibtile = b->size[0];
+  } else if (b_b_tmp->size[0] != 0) {
+    ibtile = b_b_tmp->size[0];
   } else {
     ibtile = 0;
   }
@@ -1255,7 +1219,7 @@ void c_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   } else {
     input_sizes_idx_1 = 0;
   }
-  if (empty_non_axis_sizes || (b->size[0] != 0)) {
+  if (empty_non_axis_sizes || (b_b_tmp->size[0] != 0)) {
     outsize_idx_1 = 4;
   } else {
     outsize_idx_1 = 0;
@@ -1274,10 +1238,10 @@ void c_FSMenvmmd(double n, double v, double varargin_4, emxArray_real_T *MMDenv)
   for (k = 0; k < outsize_idx_1; k++) {
     for (i = 0; i < ibtile; i++) {
       MMDenv->data[i + MMDenv->size[0] * (k + input_sizes_idx_1)] =
-          b->data[i + ibtile * k];
+          b_b_tmp->data[i + ibtile * k];
     }
   }
-  emxFree_real_T(&b);
+  emxFree_real_T(&b_b_tmp);
 }
 
 /* End of code generation (FSMenvmmd.c) */

@@ -25,22 +25,28 @@ creal_T gammainc(double x, double a)
   double Iax;
   double a1;
   double d;
-  double fac;
   double logpax;
   double n;
   double pax_modulus;
   double pax_r;
   double r;
   double stirlerr;
+  double t;
   double term;
-  int b_i;
+  int afrac_tmp_tmp;
   int exitg1;
   int i;
   r = a + 1.0;
   gammaln(&r);
   if (!(x < 0.0)) {
-    fac = log(a);
-    if (!(x > 0.0)) {
+    n = log(a);
+    if (!(a > 0.0)) {
+      if (x == x) {
+        r = 1.0;
+      } else {
+        r = rtNaN;
+      }
+    } else if (!(x > 0.0)) {
       if (x == 0.0) {
         r = 0.0;
       } else {
@@ -60,7 +66,7 @@ creal_T gammainc(double x, double a)
         if (pax_r == floor(pax_r)) {
           stirlerr = dv2[(int)(pax_r + 1.0) - 1];
         } else {
-          stirlerr = ((r - (a + 0.5) * fac) + a) - 0.91893853320467267;
+          stirlerr = ((r - (a + 0.5) * n) + a) - 0.91893853320467267;
         }
       } else {
         r = a * a;
@@ -79,13 +85,13 @@ creal_T gammainc(double x, double a)
         if (a < 2.2250738585072014E-308 * x) {
           pax_r = x;
         } else if ((x < 1.0) && (a > 1.7976931348623157E+308 * x)) {
-          pax_r = (a * fac - a * log(x)) - a;
+          pax_r = (a * n - a * log(x)) - a;
         } else {
           pax_r = (a * log(a / x) + x) - a;
         }
       } else {
-        term = x / a;
-        r = (1.0 - term) / (term + 1.0);
+        t = x / a;
+        r = (1.0 - t) / (t + 1.0);
         pax_modulus = r * r;
         pax_r = d * r;
         Iax = pax_r;
@@ -103,75 +109,75 @@ creal_T gammainc(double x, double a)
           }
         } while (exitg1 == 0);
       }
-      logpax = (-0.5 * (fac + 1.8378770664093453) - stirlerr) - pax_r;
+      logpax = (-0.5 * (n + 1.8378770664093453) - stirlerr) - pax_r;
       if (x > 1.0E+6) {
         stirlerr = sqrt(x);
-        term = fabs(d - 1.0) / stirlerr;
-        Iax = term * term;
-        if (term < 15.0) {
-          pax_r = 0.70710678118654746 * term;
-          r = 3.97886080735226 / (pax_r + 3.97886080735226);
+        t = fabs(d - 1.0) / stirlerr;
+        Iax = t * t;
+        if (t < 15.0) {
+          r = 0.70710678118654746 * t;
+          pax_r = 3.97886080735226 / (r + 3.97886080735226);
           a1 = 0.5 *
-               ((((((((((((((((((((((0.0012710976495261409 * (r - 0.5) +
+               ((((((((((((((((((((((0.0012710976495261409 * (pax_r - 0.5) +
                                      0.00011931402283834095) *
-                                        (r - 0.5) +
+                                        (pax_r - 0.5) +
                                     -0.0039638509736051354) *
-                                       (r - 0.5) +
+                                       (pax_r - 0.5) +
                                    -0.00087077963531729586) *
-                                      (r - 0.5) +
+                                      (pax_r - 0.5) +
                                   0.0077367252831352668) *
-                                     (r - 0.5) +
+                                     (pax_r - 0.5) +
                                  0.0038333512626488732) *
-                                    (r - 0.5) +
+                                    (pax_r - 0.5) +
                                 -0.012722381378212275) *
-                                   (r - 0.5) +
+                                   (pax_r - 0.5) +
                                -0.013382364453346007) *
-                                  (r - 0.5) +
+                                  (pax_r - 0.5) +
                               0.016131532973325226) *
-                                 (r - 0.5) +
+                                 (pax_r - 0.5) +
                              0.039097684558848406) *
-                                (r - 0.5) +
+                                (pax_r - 0.5) +
                             0.0024936720005350331) *
-                               (r - 0.5) +
+                               (pax_r - 0.5) +
                            -0.0838864557023002) *
-                              (r - 0.5) +
+                              (pax_r - 0.5) +
                           -0.11946395996432542) *
-                             (r - 0.5) +
+                             (pax_r - 0.5) +
                          0.016620792496936737) *
-                            (r - 0.5) +
+                            (pax_r - 0.5) +
                         0.35752427444953105) *
-                           (r - 0.5) +
+                           (pax_r - 0.5) +
                        0.80527640875291062) *
-                          (r - 0.5) +
+                          (pax_r - 0.5) +
                       1.1890298290927332) *
-                         (r - 0.5) +
+                         (pax_r - 0.5) +
                      1.3704021768233816) *
-                        (r - 0.5) +
+                        (pax_r - 0.5) +
                     1.313146538310231) *
-                       (r - 0.5) +
+                       (pax_r - 0.5) +
                    1.0792551515585667) *
-                      (r - 0.5) +
+                      (pax_r - 0.5) +
                   0.77436819911953858) *
-                     (r - 0.5) +
+                     (pax_r - 0.5) +
                  0.49016508058531844) *
-                    (r - 0.5) +
+                    (pax_r - 0.5) +
                 0.27537474159737679) *
-               r * exp(-pax_r * pax_r) * 2.5066282746310002 * exp(0.5 * Iax);
-          pax_modulus = (a1 * ((Iax - 3.0) * term) - (Iax - 4.0)) / 6.0;
+               pax_r * exp(-r * r) * 2.5066282746310002 * exp(0.5 * Iax);
+          pax_modulus = (a1 * ((Iax - 3.0) * t) - (Iax - 4.0)) / 6.0;
           pax_r = (a1 * ((Iax * Iax - 9.0) * Iax + 6.0) -
-                   ((Iax - 1.0) * Iax - 6.0) * term) /
+                   ((Iax - 1.0) * Iax - 6.0) * t) /
                   72.0;
           r = (a1 * (((((5.0 * Iax + 45.0) * Iax - 81.0) * Iax - 315.0) * Iax +
                       270.0) *
-                     term) -
+                     t) -
                ((((5.0 * Iax + 40.0) * Iax - 111.0) * Iax - 174.0) * Iax +
                 192.0)) /
               6480.0;
         } else {
-          a1 = (((3.0 - 15.0 / Iax) / Iax + -1.0) / Iax + 1.0) / term;
+          a1 = (((3.0 - 15.0 / Iax) / Iax + -1.0) / Iax + 1.0) / t;
           pax_modulus = (((25.0 - 210.0 / Iax) / Iax + -4.0) / Iax + 1.0) / Iax;
-          pax_r = (((130.0 - 1750.0 / Iax) / Iax + -11.0) / Iax + 1.0) /
-                  (Iax * term);
+          pax_r =
+              (((130.0 - 1750.0 / Iax) / Iax + -11.0) / Iax + 1.0) / (Iax * t);
           r = (((546.0 - 11368.0 / Iax) / Iax + -26.0) / Iax + 1.0) /
               (Iax * Iax);
         }
@@ -202,12 +208,12 @@ creal_T gammainc(double x, double a)
           r = 1.0;
         } else {
           if (x > 2.2204460492503131E-16 * a) {
-            fac = x / a;
+            pax_modulus = x / a;
             n = 2.0;
             do {
               exitg1 = 0;
-              fac = x * fac / (a + (n - 1.0));
-              if (fac < 2.2204460492503131E-16) {
+              pax_modulus = x * pax_modulus / (a + (n - 1.0));
+              if (pax_modulus < 2.2204460492503131E-16) {
                 exitg1 = 1;
               } else {
                 n++;
@@ -215,9 +221,9 @@ creal_T gammainc(double x, double a)
             } while (exitg1 == 0);
           }
           Iax = 0.0;
-          i = (int)(((-1.0 - (n - 1.0)) + 1.0) / -1.0);
-          for (b_i = 0; b_i < i; b_i++) {
-            Iax = x * (Iax + 1.0) / (a + ((n - 1.0) + -(double)b_i));
+          afrac_tmp_tmp = (int)(((-1.0 - (n - 1.0)) + 1.0) / -1.0);
+          for (i = 0; i < afrac_tmp_tmp; i++) {
+            Iax = x * (Iax + 1.0) / (a + ((n - 1.0) + -(double)i));
           }
           Iax++;
           if (logpax < 709.782712893384) {
@@ -230,14 +236,14 @@ creal_T gammainc(double x, double a)
           }
         }
       } else {
-        fac = 1.0;
+        pax_modulus = 1.0;
         n = 1.0;
         do {
           exitg1 = 0;
-          d = floor(a1);
-          if (n <= d) {
-            fac = (a - n) * fac / x;
-            if (fabs(fac) < 2.2204460492503131E-16) {
+          afrac_tmp_tmp = (int)floor(a1);
+          if ((int)n <= afrac_tmp_tmp) {
+            pax_modulus = (a - n) * pax_modulus / x;
+            if (fabs(pax_modulus) < 2.2204460492503131E-16) {
               exitg1 = 1;
             } else {
               n++;
@@ -246,93 +252,94 @@ creal_T gammainc(double x, double a)
             exitg1 = 1;
           }
         } while (exitg1 == 0);
-        if (n <= d) {
+        if ((int)n <= afrac_tmp_tmp) {
           r = 1.0;
         } else {
-          n = floor(a);
-          pax_modulus = a - n;
-          if (pax_modulus == 0.0) {
+          afrac_tmp_tmp = (int)floor(a);
+          pax_r = a - (double)afrac_tmp_tmp;
+          if (pax_r == 0.0) {
             r = 1.0;
-          } else if (pax_modulus == 0.5) {
-            pax_r = 0.70710678118654746 * sqrt(2.0 * x);
-            term = 3.97886080735226 / (pax_r + 3.97886080735226);
+            n = afrac_tmp_tmp;
+          } else if (pax_r == 0.5) {
+            r = 0.70710678118654746 * sqrt(2.0 * x);
+            t = 3.97886080735226 / (r + 3.97886080735226);
             r = sqrt(3.1415926535897931 * x) * exp(x) *
                 (2.0 *
                  (0.5 *
-                  ((((((((((((((((((((((0.0012710976495261409 * (term - 0.5) +
+                  ((((((((((((((((((((((0.0012710976495261409 * (t - 0.5) +
                                         0.00011931402283834095) *
-                                           (term - 0.5) +
+                                           (t - 0.5) +
                                        -0.0039638509736051354) *
-                                          (term - 0.5) +
+                                          (t - 0.5) +
                                       -0.00087077963531729586) *
-                                         (term - 0.5) +
+                                         (t - 0.5) +
                                      0.0077367252831352668) *
-                                        (term - 0.5) +
+                                        (t - 0.5) +
                                     0.0038333512626488732) *
-                                       (term - 0.5) +
+                                       (t - 0.5) +
                                    -0.012722381378212275) *
-                                      (term - 0.5) +
+                                      (t - 0.5) +
                                   -0.013382364453346007) *
-                                     (term - 0.5) +
+                                     (t - 0.5) +
                                  0.016131532973325226) *
-                                    (term - 0.5) +
+                                    (t - 0.5) +
                                 0.039097684558848406) *
-                                   (term - 0.5) +
+                                   (t - 0.5) +
                                0.0024936720005350331) *
-                                  (term - 0.5) +
+                                  (t - 0.5) +
                               -0.0838864557023002) *
-                                 (term - 0.5) +
+                                 (t - 0.5) +
                              -0.11946395996432542) *
-                                (term - 0.5) +
+                                (t - 0.5) +
                             0.016620792496936737) *
-                               (term - 0.5) +
+                               (t - 0.5) +
                            0.35752427444953105) *
-                              (term - 0.5) +
+                              (t - 0.5) +
                           0.80527640875291062) *
-                             (term - 0.5) +
+                             (t - 0.5) +
                          1.1890298290927332) *
-                            (term - 0.5) +
+                            (t - 0.5) +
                         1.3704021768233816) *
-                           (term - 0.5) +
+                           (t - 0.5) +
                        1.313146538310231) *
-                          (term - 0.5) +
+                          (t - 0.5) +
                       1.0792551515585667) *
-                         (term - 0.5) +
+                         (t - 0.5) +
                      0.77436819911953858) *
-                        (term - 0.5) +
+                        (t - 0.5) +
                     0.49016508058531844) *
-                       (term - 0.5) +
+                       (t - 0.5) +
                    0.27537474159737679) *
-                  term * exp(-pax_r * pax_r)));
-            n++;
+                  t * exp(-r * r)));
+            n = (double)afrac_tmp_tmp + 1.0;
           } else {
-            pax_r = 1.0;
+            Iax = 1.0;
             a1 = x;
-            Iax = 0.0;
-            stirlerr = 1.0;
-            fac = 1.0 / x;
+            stirlerr = 0.0;
+            term = 1.0;
+            pax_modulus = 1.0 / x;
             n = 1.0;
-            r = fac;
-            term = 0.0;
-            while (fabs(r - term) > 2.2204460492503131E-16 * r) {
-              term = r;
-              r = n - pax_modulus;
-              pax_r = (a1 + pax_r * r) * fac;
-              Iax = (stirlerr + Iax * r) * fac;
-              r = n * fac;
-              a1 = x * pax_r + r * a1;
-              stirlerr = x * Iax + r * stirlerr;
-              fac = 1.0 / a1;
-              r = stirlerr * fac;
+            r = pax_modulus;
+            t = 0.0;
+            while (fabs(r - t) > 2.2204460492503131E-16 * r) {
+              t = r;
+              r = n - pax_r;
+              Iax = (a1 + Iax * r) * pax_modulus;
+              stirlerr = (term + stirlerr * r) * pax_modulus;
+              r = n * pax_modulus;
+              a1 = x * Iax + r * a1;
+              term = x * stirlerr + r * term;
+              pax_modulus = 1.0 / a1;
+              r = term * pax_modulus;
               n++;
             }
             r *= x;
-            n = floor(a) + 1.0;
+            n = (double)afrac_tmp_tmp + 1.0;
           }
         }
-        i = (int)(((-1.0 - (n - 1.0)) + 1.0) / -1.0);
-        for (b_i = 0; b_i < i; b_i++) {
-          r = (a - ((n - 1.0) + -(double)b_i)) * r / x + 1.0;
+        afrac_tmp_tmp = (int)(((-1.0 - (n - 1.0)) + 1.0) / -1.0);
+        for (i = 0; i < afrac_tmp_tmp; i++) {
+          r = (a - ((n - 1.0) + -(double)i)) * r / x + 1.0;
         }
         r = r * a / x;
         if (logpax < 709.782712893384) {

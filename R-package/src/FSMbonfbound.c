@@ -28,12 +28,10 @@ void FSMbonfbound(double n, double p, const double varargin_2_data[],
 {
   emxArray_real_T *b;
   emxArray_real_T *b_b;
-  emxArray_real_T *b_x;
   emxArray_real_T *b_y;
   emxArray_real_T *m;
   emxArray_real_T *r;
   emxArray_real_T *r1;
-  emxArray_real_T *r2;
   emxArray_real_T *x;
   emxArray_real_T *y;
   double n_tmp;
@@ -240,16 +238,16 @@ void FSMbonfbound(double n, double p, const double varargin_2_data[],
   for (k = 0; k < nrows; k++) {
     b_y->data[k] = b->data[k] - p;
   }
-  emxInit_real_T(&b_x, 2);
   emxInit_real_T(&r, 2);
-  repmat(varargin_2_data, varargin_2_size, m->size[0], b_x);
-  k = r->size[0] * r->size[1];
-  r->size[0] = b_x->size[0];
-  r->size[1] = b_x->size[1];
-  emxEnsureCapacity_real_T(r, k);
-  nrows = b_x->size[0] * b_x->size[1];
+  emxInit_real_T(&r1, 2);
+  repmat(varargin_2_data, varargin_2_size, m->size[0], r);
+  k = r1->size[0] * r1->size[1];
+  r1->size[0] = r->size[0];
+  r1->size[1] = r->size[1];
+  emxEnsureCapacity_real_T(r1, k);
+  nrows = r->size[0] * r->size[1];
   for (k = 0; k < nrows; k++) {
-    r->data[k] = 1.0 - (1.0 - b_x->data[k]) / (b->data[k] + 1.0);
+    r1->data[k] = 1.0 - (1.0 - r->data[k]) / (b->data[k] + 1.0);
   }
   emxInit_real_T(&b_b, 2);
   k = b_b->size[0] * b_b->size[1];
@@ -260,44 +258,40 @@ void FSMbonfbound(double n, double p, const double varargin_2_data[],
   for (k = 0; k < nrows; k++) {
     b_b->data[k] = b->data[k] - p;
   }
-  emxFree_real_T(&b);
-  emxInit_real_T(&r1, 2);
-  emxInit_real_T(&r2, 2);
-  finv(r, p, b_b, r2);
-  k = r1->size[0] * r1->size[1];
-  r1->size[0] = r2->size[0];
-  r1->size[1] = r2->size[1];
-  emxEnsureCapacity_real_T(r1, k);
-  nrows = r2->size[0] * r2->size[1];
+  b_finv(r1, p, b_b, b);
+  k = r->size[0] * r->size[1];
+  r->size[0] = b->size[0];
+  r->size[1] = b->size[1];
+  emxEnsureCapacity_real_T(r, k);
+  nrows = b->size[0] * b->size[1];
   emxFree_real_T(&b_b);
-  emxFree_real_T(&r);
+  emxFree_real_T(&r1);
   for (k = 0; k < nrows; k++) {
-    r1->data[k] = r2->data[k];
+    r->data[k] = b->data[k];
   }
-  emxFree_real_T(&r2);
-  k = b_x->size[0] * b_x->size[1];
-  b_x->size[0] = x->size[0];
-  b_x->size[1] = x->size[1];
-  emxEnsureCapacity_real_T(b_x, k);
+  k = b->size[0] * b->size[1];
+  b->size[0] = x->size[0];
+  b->size[1] = x->size[1];
+  emxEnsureCapacity_real_T(b, k);
   n_tmp = n / (n - 1.0) * p;
   nrows = x->size[0] * x->size[1];
   for (k = 0; k < nrows; k++) {
-    b_x->data[k] = n_tmp * (x->data[k] / b_y->data[k]) * r1->data[k];
+    b->data[k] = n_tmp * (x->data[k] / b_y->data[k]) * r->data[k];
   }
-  nrows = b_x->size[0] * b_x->size[1];
+  nrows = b->size[0] * b->size[1];
   for (k = 0; k < nrows; k++) {
-    b_x->data[k] = sqrt(b_x->data[k]);
+    b->data[k] = sqrt(b->data[k]);
   }
   /* MinBonf =
    * sqrt(((m-1).^2./m).*betainv(1-((1-probm)./(mm+1)),p/2,(mm-p-1)/2)); */
   if (m->size[0] != 0) {
     b_n = m->size[0];
-  } else if ((b_x->size[0] != 0) && (b_x->size[1] != 0)) {
-    b_n = b_x->size[0];
+  } else if ((b->size[0] != 0) && (b->size[1] != 0)) {
+    b_n = b->size[0];
   } else {
     b_n = 0;
-    if (b_x->size[0] > 0) {
-      b_n = b_x->size[0];
+    if (b->size[0] > 0) {
+      b_n = b->size[0];
     }
   }
   empty_non_axis_sizes = (b_n == 0);
@@ -306,25 +300,21 @@ void FSMbonfbound(double n, double p, const double varargin_2_data[],
   } else {
     input_sizes_idx_1 = 0;
   }
-  if (empty_non_axis_sizes || ((b_x->size[0] != 0) && (b_x->size[1] != 0))) {
-    sizes_idx_1 = (signed char)b_x->size[1];
+  if (empty_non_axis_sizes || ((b->size[0] != 0) && (b->size[1] != 0))) {
+    sizes_idx_1 = (signed char)b->size[1];
   } else {
     sizes_idx_1 = 0;
   }
-  k = b_x->size[0] * b_x->size[1];
-  b_x->size[0] = x->size[0];
-  b_x->size[1] = x->size[1];
-  emxEnsureCapacity_real_T(b_x, k);
+  emxFree_real_T(&b);
   nrows = x->size[0] * x->size[1];
   for (k = 0; k < nrows; k++) {
-    b_x->data[k] = n_tmp * (x->data[k] / b_y->data[k]) * r1->data[k];
+    x->data[k] = n_tmp * (x->data[k] / b_y->data[k]) * r->data[k];
   }
+  emxFree_real_T(&r);
   emxFree_real_T(&b_y);
-  emxFree_real_T(&x);
-  emxFree_real_T(&r1);
-  nrows = b_x->size[0] * b_x->size[1];
+  nrows = x->size[0] * x->size[1];
   for (k = 0; k < nrows; k++) {
-    b_x->data[k] = sqrt(b_x->data[k]);
+    x->data[k] = sqrt(x->data[k]);
   }
   k = Bbound->size[0] * Bbound->size[1];
   Bbound->size[0] = b_n;
@@ -341,10 +331,10 @@ void FSMbonfbound(double n, double p, const double varargin_2_data[],
   for (k = 0; k < nrows; k++) {
     for (jtilecol = 0; jtilecol < b_n; jtilecol++) {
       Bbound->data[jtilecol + Bbound->size[0] * input_sizes_idx_1] =
-          b_x->data[jtilecol];
+          x->data[jtilecol];
     }
   }
-  emxFree_real_T(&b_x);
+  emxFree_real_T(&x);
 }
 
 /* End of code generation (FSMbonfbound.c) */

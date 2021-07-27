@@ -16,74 +16,14 @@
 #include "chi2inv.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
+#include "gammaincinv.h"
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 #include <string.h>
 
 /* Function Definitions */
-void b_finv(const emxArray_real_T *p, const emxArray_real_T *v1,
-            const emxArray_real_T *v2, emxArray_real_T *x)
-{
-  creal_T dc;
-  double t;
-  int csz_idx_0;
-  int csz_idx_1;
-  int i;
-  if (p->size[0] <= v1->size[0]) {
-    csz_idx_0 = p->size[0];
-  } else {
-    csz_idx_0 = v1->size[0];
-  }
-  if (p->size[1] <= v1->size[1]) {
-    csz_idx_1 = p->size[1];
-  } else {
-    csz_idx_1 = v1->size[1];
-  }
-  if (csz_idx_0 > v2->size[0]) {
-    csz_idx_0 = v2->size[0];
-  }
-  if (csz_idx_1 > v2->size[1]) {
-    csz_idx_1 = v2->size[1];
-  }
-  i = x->size[0] * x->size[1];
-  x->size[0] = csz_idx_0;
-  x->size[1] = csz_idx_1;
-  emxEnsureCapacity_real_T(x, i);
-  i = csz_idx_0 * csz_idx_1;
-  for (csz_idx_0 = 0; csz_idx_0 < i; csz_idx_0++) {
-    if ((v1->data[csz_idx_0] > 0.0) && (v2->data[csz_idx_0] > 0.0)) {
-      if (rtIsInf(v1->data[csz_idx_0])) {
-        if (rtIsInf(v2->data[csz_idx_0])) {
-          x->data[csz_idx_0] = 1.0;
-        } else {
-          x->data[csz_idx_0] =
-              v2->data[csz_idx_0] /
-              chi2inv(1.0 - p->data[csz_idx_0], v2->data[csz_idx_0]);
-        }
-      } else if (rtIsInf(v2->data[csz_idx_0])) {
-        x->data[csz_idx_0] = chi2inv(p->data[csz_idx_0], v1->data[csz_idx_0]) /
-                             v1->data[csz_idx_0];
-      } else {
-        dc = betainc(0.5, v1->data[csz_idx_0] / 2.0, v2->data[csz_idx_0] / 2.0);
-        if (p->data[csz_idx_0] > dc.re) {
-          dc = betaincinv(p->data[csz_idx_0], v2->data[csz_idx_0] / 2.0,
-                          v1->data[csz_idx_0] / 2.0);
-          t = (1.0 - dc.re) / dc.re;
-        } else {
-          dc = b_betaincinv(p->data[csz_idx_0], v1->data[csz_idx_0] / 2.0,
-                            v2->data[csz_idx_0] / 2.0);
-          t = dc.re / (1.0 - dc.re);
-        }
-        x->data[csz_idx_0] = t * v2->data[csz_idx_0] / v1->data[csz_idx_0];
-      }
-    } else {
-      x->data[csz_idx_0] = rtNaN;
-    }
-  }
-}
-
-void finv(const emxArray_real_T *p, double v1, const emxArray_real_T *v2,
-          emxArray_real_T *x)
+void b_finv(const emxArray_real_T *p, double v1, const emxArray_real_T *v2,
+            emxArray_real_T *x)
 {
   creal_T dc;
   double t;
@@ -139,6 +79,148 @@ void finv(const emxArray_real_T *p, double v1, const emxArray_real_T *v2,
       x->data[csz_idx_0] = rtNaN;
     }
   }
+}
+
+void c_finv(const emxArray_real_T *p, const emxArray_real_T *v1,
+            const emxArray_real_T *v2, emxArray_real_T *x)
+{
+  creal_T dc;
+  double t;
+  int csz_idx_0;
+  int csz_idx_1;
+  int i;
+  if (p->size[0] <= v1->size[0]) {
+    csz_idx_0 = p->size[0];
+  } else {
+    csz_idx_0 = v1->size[0];
+  }
+  if (p->size[1] <= v1->size[1]) {
+    csz_idx_1 = p->size[1];
+  } else {
+    csz_idx_1 = v1->size[1];
+  }
+  if (csz_idx_0 > v2->size[0]) {
+    csz_idx_0 = v2->size[0];
+  }
+  if (csz_idx_1 > v2->size[1]) {
+    csz_idx_1 = v2->size[1];
+  }
+  i = x->size[0] * x->size[1];
+  x->size[0] = csz_idx_0;
+  x->size[1] = csz_idx_1;
+  emxEnsureCapacity_real_T(x, i);
+  i = csz_idx_0 * csz_idx_1;
+  for (csz_idx_0 = 0; csz_idx_0 < i; csz_idx_0++) {
+    if ((v1->data[csz_idx_0] > 0.0) && (v2->data[csz_idx_0] > 0.0) &&
+        (p->data[csz_idx_0] >= 0.0) && (p->data[csz_idx_0] <= 1.0)) {
+      if (rtIsInf(v1->data[csz_idx_0])) {
+        if (rtIsInf(v2->data[csz_idx_0])) {
+          if (p->data[csz_idx_0] > 0.0) {
+            x->data[csz_idx_0] = 1.0;
+          } else {
+            x->data[csz_idx_0] = 0.0;
+          }
+        } else {
+          x->data[csz_idx_0] =
+              v2->data[csz_idx_0] /
+              chi2inv(1.0 - p->data[csz_idx_0], v2->data[csz_idx_0]);
+        }
+      } else if (rtIsInf(v2->data[csz_idx_0])) {
+        x->data[csz_idx_0] = chi2inv(p->data[csz_idx_0], v1->data[csz_idx_0]) /
+                             v1->data[csz_idx_0];
+      } else {
+        dc = betainc(0.5, v1->data[csz_idx_0] / 2.0, v2->data[csz_idx_0] / 2.0);
+        if (p->data[csz_idx_0] > dc.re) {
+          dc = betaincinv(p->data[csz_idx_0], v2->data[csz_idx_0] / 2.0,
+                          v1->data[csz_idx_0] / 2.0);
+          t = (1.0 - dc.re) / dc.re;
+        } else {
+          dc = b_betaincinv(p->data[csz_idx_0], v1->data[csz_idx_0] / 2.0,
+                            v2->data[csz_idx_0] / 2.0);
+          t = dc.re / (1.0 - dc.re);
+        }
+        x->data[csz_idx_0] = t * v2->data[csz_idx_0] / v1->data[csz_idx_0];
+      }
+    } else {
+      x->data[csz_idx_0] = rtNaN;
+    }
+  }
+}
+
+void d_finv(const emxArray_real_T *p, const emxArray_real_T *v1,
+            const emxArray_real_T *v2, emxArray_real_T *x)
+{
+  creal_T dc;
+  double t;
+  int csz_idx_0;
+  int i;
+  if (p->size[0] <= v1->size[0]) {
+    csz_idx_0 = p->size[0];
+  } else {
+    csz_idx_0 = v1->size[0];
+  }
+  if (csz_idx_0 > v2->size[0]) {
+    csz_idx_0 = v2->size[0];
+  }
+  i = x->size[0] * x->size[1];
+  x->size[0] = csz_idx_0;
+  x->size[1] = 4;
+  emxEnsureCapacity_real_T(x, i);
+  i = csz_idx_0 << 2;
+  for (csz_idx_0 = 0; csz_idx_0 < i; csz_idx_0++) {
+    if ((v1->data[csz_idx_0] > 0.0) && (v2->data[csz_idx_0] > 0.0)) {
+      if (rtIsInf(v1->data[csz_idx_0])) {
+        if (rtIsInf(v2->data[csz_idx_0])) {
+          x->data[csz_idx_0] = 1.0;
+        } else {
+          x->data[csz_idx_0] =
+              v2->data[csz_idx_0] /
+              chi2inv(1.0 - p->data[csz_idx_0], v2->data[csz_idx_0]);
+        }
+      } else if (rtIsInf(v2->data[csz_idx_0])) {
+        x->data[csz_idx_0] = chi2inv(p->data[csz_idx_0], v1->data[csz_idx_0]) /
+                             v1->data[csz_idx_0];
+      } else {
+        dc = betainc(0.5, v1->data[csz_idx_0] / 2.0, v2->data[csz_idx_0] / 2.0);
+        if (p->data[csz_idx_0] > dc.re) {
+          dc = betaincinv(p->data[csz_idx_0], v2->data[csz_idx_0] / 2.0,
+                          v1->data[csz_idx_0] / 2.0);
+          t = (1.0 - dc.re) / dc.re;
+        } else {
+          dc = b_betaincinv(p->data[csz_idx_0], v1->data[csz_idx_0] / 2.0,
+                            v2->data[csz_idx_0] / 2.0);
+          t = dc.re / (1.0 - dc.re);
+        }
+        x->data[csz_idx_0] = t * v2->data[csz_idx_0] / v1->data[csz_idx_0];
+      }
+    } else {
+      x->data[csz_idx_0] = rtNaN;
+    }
+  }
+}
+
+double finv(double p, double v2)
+{
+  creal_T dc;
+  double t;
+  double x;
+  if ((v2 > 0.0) && (p >= 0.0)) {
+    if (rtIsInf(v2)) {
+      x = (gammaincinv(p, 1.0)).re * 2.0 / 2.0;
+    } else {
+      if (p > (betainc(0.5, 1.0, v2 / 2.0)).re) {
+        dc = betaincinv(p, v2 / 2.0, 1.0);
+        t = (1.0 - dc.re) / dc.re;
+      } else {
+        dc = b_betaincinv(p, 1.0, v2 / 2.0);
+        t = dc.re / (1.0 - dc.re);
+      }
+      x = t * v2 / 2.0;
+    }
+  } else {
+    x = rtNaN;
+  }
+  return x;
 }
 
 /* End of code generation (finv.c) */

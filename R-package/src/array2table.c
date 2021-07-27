@@ -20,7 +20,7 @@
 /* Function Definitions */
 void array2table(const emxArray_real_T *x, const char varargin_2_Value_data[],
                  const int varargin_2_Value_size[2], double *t_metaDim_length,
-                 cell_wrap_50 *t_rowDim_labels, double *t_rowDim_length,
+                 cell_wrap_51 *t_rowDim_labels, double *t_rowDim_length,
                  f_matlab_internal_coder_tabular *t_varDim,
                  cell_wrap_6 t_data[4], int t_arrayProps_Description_size[2])
 {

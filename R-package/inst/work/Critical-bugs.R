@@ -41,7 +41,7 @@
     X <- xx1[, 1:5]
     ## X[,2]=X[,1]
 
-    (out <- FSRmdr(y, X))
+    (out <- FSR(y, X))
 
 ##  3. Example 3.
 ##      The crash of FSR from the previous example was fixed, in the same way this was done for FSRmdr.

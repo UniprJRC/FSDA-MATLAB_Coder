@@ -32,6 +32,15 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
              const int options_bonflev_size[2], bool options_msg,
              struct_T *out);
 
+void b_FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
+               double INP_n, double INP_p, const emxArray_real_T *INP_mdr,
+               double INP_init, const emxArray_real_T *INP_Un,
+               const emxArray_real_T *INP_bb, const emxArray_real_T *INP_Bcoeff,
+               const emxArray_real_T *INP_S2, bool INP_weak,
+               const double options_bonflev_data[],
+               const int options_bonflev_size[2], bool options_msg,
+               struct_T *out);
+
 #ifdef __cplusplus
 }
 #endif

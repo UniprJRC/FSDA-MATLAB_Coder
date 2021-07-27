@@ -1,6 +1,6 @@
 Package: fsdac
-Title: Robust Data Analysis through monitoring 
-Version: 0.5-19
+Title: Robust Data Analysis through monitoring
+Version: 0.5-20
 Date: 2021-07-16
 VersionNote: Released ... on CRAN
 Authors@R: c(person("Valentin", "Todorov", role = c("aut", "cre"), email = "valentin@todorov.at", comment=c(ORCID = "0000-0003-4215-0245"))
@@ -10,7 +10,7 @@ Authors@R: c(person("Valentin", "Todorov", role = c("aut", "cre"), email = "vale
          , person("Emmanuele", "Sordini", role = "ctb")
          , person("Domenico", "Perrotta", role = "ctb")
           )
-Description: The 'Flexible Statistical Data Analysis - FSDA' software aims to provide 
+Description: The 'Flexible Statistical Data Analysis - FSDA' software aims to provide
     the data science community with principled methods for robust statistical analysis.
     The distinctive feature of FSDA is that, differently from the traditional robust
     packages which given a fixed value of breakdown point (in case of S estimator,
@@ -33,7 +33,7 @@ Description: The 'Flexible Statistical Data Analysis - FSDA' software aims to pr
     as dynamic brushing, linking, particularly useful for exploratory
     data analysis.
 Depends: R (>= 3.0.2)
-Suggests: robustbase
+Imports: robustbase
 LazyLoad: yes
 LazyData: yes
 License: GPL (>= 2)

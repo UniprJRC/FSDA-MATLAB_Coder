@@ -25,6 +25,8 @@ extern "C" {
 /* Function Declarations */
 void b_unibiv(const emxArray_real_T *Y, emxArray_real_T *fre);
 
+void tiedrankFS(const emxArray_real_T *x, emxArray_real_T *r);
+
 void unibiv(const emxArray_real_T *Y, double varargin_2, emxArray_real_T *fre);
 
 #ifdef __cplusplus

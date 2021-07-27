@@ -17,12 +17,12 @@
 #include "rtwtypes.h"
 
 /* Type Definitions */
-#ifndef typedef_cell_wrap_60
-#define typedef_cell_wrap_60
+#ifndef typedef_cell_wrap_61
+#define typedef_cell_wrap_61
 typedef struct {
   char f1[3];
-} cell_wrap_60;
-#endif /* typedef_cell_wrap_60 */
+} cell_wrap_61;
+#endif /* typedef_cell_wrap_61 */
 
 #ifndef struct_emxArray_char_T_1x310
 #define struct_emxArray_char_T_1x310
@@ -36,16 +36,16 @@ struct emxArray_char_T_1x310 {
 typedef struct emxArray_char_T_1x310 emxArray_char_T_1x310;
 #endif /* typedef_emxArray_char_T_1x310 */
 
-#ifndef typedef_e_struct_T
-#define typedef_e_struct_T
+#ifndef typedef_f_struct_T
+#define typedef_f_struct_T
 typedef struct {
   double iterations;
   double funcCount;
   double stepsize;
   double firstorderopt;
   char algorithm[19];
-} e_struct_T;
-#endif /* typedef_e_struct_T */
+} f_struct_T;
+#endif /* typedef_f_struct_T */
 
 #endif
 /* End of code generation (fsdaC_internal_types.h) */

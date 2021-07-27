@@ -440,7 +440,7 @@ void b_lexunrank(double n, double k, double N, emxArray_real_T *kcomb)
     for (i2 = 0; i2 < loop_ub_tmp; i2++) {
       b_pas_col->data[i2] = (pas_col->data[i1 + i2] > N_kk);
     }
-    c_eml_find(b_pas_col, x);
+    d_eml_find(b_pas_col, x);
     if (x->size[0] == 0) {
       maxx = n - 1.0;
     } else {
@@ -803,7 +803,7 @@ void lexunrank(double n, double k, double N, const emxArray_real_T *pascalM,
     pascalM_data.allocatedSize = 20000;
     pascalM_data.numDimensions = 1;
     pascalM_data.canFreeData = false;
-    c_eml_find(&pascalM_data, b_i);
+    d_eml_find(&pascalM_data, b_i);
     /*  seqnmkk=1:n-kk; */
     /*  x=seqnmkk(pascalM(seqnmkk,kk+1) > N_kk); */
     if (b_i->size[0] == 0) {

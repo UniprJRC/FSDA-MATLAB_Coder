@@ -1,4 +1,9 @@
-2021-07-16  Valentin Todorov  <valentin@todorov.at>
+2021-07-27  Valentin Todorov  <valentin@todorov.at>
+    *
+    * DESCRIPTION (Version): 0.5-20:
+    *   Added FSM() and unibiv() R functions (not completely tested and documented)
+    *   Added chkinputR() for FSR
+    *   Compiled Sreg and MMreg
     *
     * DESCRIPTION (Version): 0.5-19:
     *

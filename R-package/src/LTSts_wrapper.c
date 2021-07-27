@@ -129,7 +129,6 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   captured_var varampl;
   d_captured_var weights;
   d_captured_var zerT1;
-  e_struct_T a__24;
   emxArray_boolean_T b_varargin_22_data;
   emxArray_boolean_T *Weights;
   emxArray_boolean_T *r1;
@@ -165,6 +164,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   emxArray_real_T *selWithoutLastHarmonic;
   emxArray_real_T *selWithoutLastHarmonic_tmp;
   emxArray_real_T *yhatrob;
+  f_struct_T a__24;
   creal_T dc;
   double numscale2LSH[3];
   double varargin_22_data[2];

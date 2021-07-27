@@ -46,8 +46,8 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
 {
   static const char b[3] = {'E', 'V', 'E'};
   static const char b_b[3] = {'V', 'V', 'E'};
-  cell_wrap_60 r;
-  cell_wrap_60 r1;
+  cell_wrap_61 r;
+  cell_wrap_61 r1;
   emxArray_boolean_T *x;
   emxArray_creal_T *r2;
   emxArray_real_T *GAM;
@@ -435,7 +435,7 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   /*  EVE VEE VVE VVV VEV VVI and VEI require iterations */
   /*  All the other specification do not */
   /*  Model which require more than one iteration in the main loop */
-  l_strcmp(pa_pars, varargin_1);
+  v_strcmp(pa_pars, varargin_1);
   cpc = varargin_1[0];
   for (ret = 0; ret < 6; ret++) {
     if ((int)cpc < (int)varargin_1[ret + 1]) {
@@ -448,7 +448,7 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
     maxiterDSR = 1.0;
   }
   /*  Cases with different shape (they require iteration for the shape) */
-  m_strcmp(pa_pars, b_varargin_1);
+  w_strcmp(pa_pars, b_varargin_1);
   cpc = b_varargin_1[0];
   for (ret = 0; ret < 5; ret++) {
     if ((int)cpc < (int)b_varargin_1[ret + 1]) {
@@ -1577,7 +1577,7 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   /*  EVE VEE VVE VVV VEV VVI and VEI require iterations */
   /*  All the other specification do not */
   /*  Model which require more than one iteration in the main loop */
-  l_strcmp(pa_pars, varargin_1);
+  v_strcmp(pa_pars, varargin_1);
   maxval = varargin_1[0];
   for (loop_ub = 0; loop_ub < 6; loop_ub++) {
     if ((int)maxval < (int)varargin_1[loop_ub + 1]) {
@@ -1590,12 +1590,12 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
     maxiterDSR = 1.0;
   }
   /*  Cases with different shape (they require iteration for the shape) */
-  m_strcmp(pa_pars, b_bv);
+  w_strcmp(pa_pars, b_bv);
   if (!h_maximum(b_bv)) {
     pa_maxiterS = 1.0;
   }
   pa_maxiterR = 20;
-  n_strcmp(pa_pars, bv1);
+  x_strcmp(pa_pars, bv1);
   if (i_maximum(bv1)) {
     /*  maxiterR=pa.maxiterR; */
     cpc = true;
@@ -1877,7 +1877,7 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
     /*  wk(j) contains largest eigenvalue of Wk(:,:,j) */
     /*  These two matrices will be used inside routine cpcV */
     emxInit_creal_T(&r4, 1);
-    if (o_strcmp(pa_pars) || p_strcmp(pa_pars)) {
+    if (y_strcmp(pa_pars) || ab_strcmp(pa_pars)) {
       i = niini->size[0];
       i1 = Wk->size[0] * Wk->size[1] * Wk->size[2];
       Wk->size[0] = unnamed_idx_0;

@@ -9,7 +9,7 @@
     y <- XX[, ncol(XX)]
     X <- XX[, 1:(ncol(XX)-1), drop=FALSE]
 
-    (out <- FSR(y, X, trace=TRUE))
+    (out <- FSR(y, X))
 
 ##===============================================================
 ##
@@ -91,14 +91,12 @@
     ##  [out]=FSR(y,X, 'labeladd','1','bivarfit','1','multivarfit','1');
 
 ##  #7. Example with Hawkins data
-    library(fsdaR)
     data(hawkins)
-
     y <- hawkins$y
     X <- hawkins[, -ncol(hawkins)]
 
     ## Use of FSR starting with 1000 subsamples
-    (out <- FSR(y, X, nsamp=1000)
+    (out <- FSR(y, X, nsamp=1000))
 
     ## Replace this by formula:
     ##  (out <- FSR(y~., data=X, nsamp=1000)

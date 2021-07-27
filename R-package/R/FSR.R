@@ -120,36 +120,41 @@
 #' @author FSDA team, \email{valentin@@todorov.at}
 #'
 FSR <- function(y, x, intercept=TRUE, lms=1,
-    bsbmfullrank=TRUE, bonflev, alpha=0.5, h, nsamp=1000, threshoutX, weak=FALSE, init, msg=TRUE, nocheck=FALSE,
-    trace=FALSE)
+    bsbmfullrank=TRUE, bonflev, alpha=0.5, h, nsamp=1000, threshoutX, weak=FALSE,
+    init, msg=TRUE, nocheck=FALSE, trace=FALSE)
 {
 
     ## Preprocess y and x
-    y <- data.matrix(y)
-    if (!is.numeric(y)) stop("y is not a numeric")
-    if (!is.null(dim(y)) && dim(y)[2] != 1) stop("y is not onedimensional")
+    if(nocheck) {
+        ## no checks will be performed: x must be a numerics matrix or
+        ##  a data frame that can be coerced to a numeric matrix and y is
+        ##  a vector or a one-dimensional numerical matrix or data frame.
+        n1 <- n <- nrow(x)
+        p1 <- p <- ncol(x)
+    } else {
+        ## Here we call chkinputR(), which might change n and p, especially,
+        ##  p will become p+1 of intercept is TRUE. We take these n and p in
+        ##  n1 and p1 and use them whenever preliminary calculations are necessary,
+        ##  e.g. to find default values for 'init'.
+        ##
+        chk <- chkinputR(y, x, intercept)
+        n <- chk$n
+        p <- chk$p
+        n1 <- chk$n1
+        p1 <- chk$p1
 
-    if(is.data.frame(x))
-        x <- data.matrix(x)
-    else if (!is.matrix(x))
-        x <- matrix(x, length(x), 1,
-              dimnames = list(names(x), deparse(substitute(x))))
-    n <- nrow(x)
-    p <- ncol(x)
+        ## Further the original y and x will be used, therefore, take care
+        ##  both y and x to ba data.matrix. We do this after calling chkinputR(),
+        ##  because other wise data.matrix() will kill the dimnames.
+        y <- data.matrix(y)
+        if(is.data.frame(x)) {
+    	    x <- data.matrix(x)
+        } else if (!is.matrix(x))
+    	    x <- matrix(x, length(x), 1,
+    			dimnames = list(names(x), deparse(substitute(x))))
+    }
 
-    ## Here we call chkinputR(), which might change n and p, especially,
-    ##  p will become p+1 of intercept is TRUE. We take these n and p in
-    ##  n1 and p1 and use them whenever preliminary calculations are necessary,
-    ##  e.g. to find devault values for 'init'.
-    ##
-    ##  chk <- chkinputR(y, Y, intercept, nochek)
-    n1 <- n
-    p1 <- if(intercept && !nocheck) p+1 else p
-    y1 <- y
-    x1 <- x         # what is returned from chkinputR(), but with the 1-s for the intercept removed.
-
-
-    ##  Process the input parameters and initial values
+    ##  Process the input parameters and initial values =========
 
     ## The default value of init depends on n and p
     if(missing(init)) {

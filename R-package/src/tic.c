@@ -13,10 +13,22 @@
 #include "tic.h"
 #include "fsdaC_data.h"
 #include "rt_nonfinite.h"
+#include "timeKeeper.h"
 #include "coder_posix_time.h"
 #include <string.h>
 
 /* Function Definitions */
+void b_tic(void)
+{
+  coderTimespec b_timespec;
+  if (!freq_not_empty) {
+    freq_not_empty = true;
+    coderInitTimeFunctions(&freq);
+  }
+  coderTimeClockGettimeMonotonic(&b_timespec, freq);
+  timeKeeper(b_timespec.tv_sec, b_timespec.tv_nsec);
+}
+
 void tic(double *tstart_tv_sec, double *tstart_tv_nsec)
 {
   coderTimespec b_timespec;

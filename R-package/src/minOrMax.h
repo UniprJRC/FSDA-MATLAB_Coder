@@ -37,16 +37,20 @@ void d_minimum(const emxArray_real_T *x, double *ex, int *idx);
 
 double e_maximum(const emxArray_real_T *x);
 
-double e_minimum(const emxArray_real_T *x);
+void e_minimum(const double x[50], double *ex, int *idx);
 
 void f_maximum(const emxArray_real_T *x, emxArray_real_T *ex);
 
-void f_minimum(const emxArray_real_T *x, double *ex, int *idx);
+void f_minimum(const double x[3], double *ex, int *idx);
 
 void g_maximum(const emxArray_real_T *x, emxArray_real_T *ex,
                emxArray_int32_T *idx);
 
+double g_minimum(const emxArray_real_T *x);
+
 bool h_maximum(const bool x[6]);
+
+void h_minimum(const emxArray_real_T *x, double *ex, int *idx);
 
 bool i_maximum(const bool x[2]);
 

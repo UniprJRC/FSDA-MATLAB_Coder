@@ -1643,7 +1643,7 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
       }
       /*  check on negative eigenvalues */
       /*  Check first if the eigenvalues do not satisy the constraint */
-      if (fabs(e_maximum(Lambda_vk) / e_minimum(Lambda_vk)) > b_restrfactor) {
+      if (fabs(e_maximum(Lambda_vk) / g_minimum(Lambda_vk)) > b_restrfactor) {
         if (use_restreigen) {
           i1 = Yselj->size[0] * Yselj->size[1];
           Yselj->size[0] = Lambda_vk->size[0];
@@ -3177,7 +3177,7 @@ void tclust_wrapper(const emxArray_real_T *Y, double k, double alpha,
       }
       /*  check on negative eigenvalues */
       /*  Check first if the eigenvalues do not satisy the constraint */
-      if (fabs(e_maximum(Lambda_vk) / e_minimum(Lambda_vk)) > b_restrfactor) {
+      if (fabs(e_maximum(Lambda_vk) / g_minimum(Lambda_vk)) > b_restrfactor) {
         if (use_restreigen) {
           i1 = Yselj->size[0] * Yselj->size[1];
           Yselj->size[0] = Lambda_vk->size[0];

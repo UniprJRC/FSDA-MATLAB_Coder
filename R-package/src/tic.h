@@ -22,6 +22,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
+void b_tic(void);
+
 void tic(double *tstart_tv_sec, double *tstart_tv_nsec);
 
 #ifdef __cplusplus

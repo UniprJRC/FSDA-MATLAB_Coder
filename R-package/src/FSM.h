@@ -29,7 +29,7 @@ void FSM(emxArray_real_T *Y, const double varargin_4_data[],
          double varargin_12, emxArray_real_T *out_outliers,
          emxArray_real_T *out_loc, emxArray_real_T *out_cov,
          emxArray_real_T *out_md, emxArray_real_T *out_mmd,
-         emxArray_real_T *out_Un, double out_nout_data[], int out_nout_size[2],
+         emxArray_real_T *out_Un, emxArray_real_T *out_nout,
          char out_class_data[], int out_class_size[2]);
 
 #ifdef __cplusplus

@@ -33,15 +33,14 @@ void FSRbonfbound(double n, double p, const double varargin_2_data[],
   emxArray_real_T *mm;
   emxArray_real_T *mmminusp;
   emxArray_real_T *r2;
-  emxArray_real_T *r3;
   emxArray_real_T *x;
   emxArray_real_T *y;
   int b_n;
-  int jtilecol;
+  int i;
   int k;
   int nrows;
+  int sizes_idx_1;
   signed char input_sizes_idx_1;
-  signed char sizes_idx_1;
   bool empty_non_axis_sizes;
   /* FSRbonfbound computes Bonferroni bounds for each step of the search (in
    * linear regression) */
@@ -142,40 +141,40 @@ void FSRbonfbound(double n, double p, const double varargin_2_data[],
   /*  m = column vector which contains fwd search index. */
   emxInit_real_T(&y, 2);
   if (rtIsNaN(varargin_4) || rtIsNaN(n - 1.0)) {
-    k = y->size[0] * y->size[1];
+    i = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = 1;
-    emxEnsureCapacity_real_T(y, k);
+    emxEnsureCapacity_real_T(y, i);
     y->data[0] = rtNaN;
   } else if (n - 1.0 < varargin_4) {
     y->size[0] = 1;
     y->size[1] = 0;
   } else if ((rtIsInf(varargin_4) || rtIsInf(n - 1.0)) &&
              (varargin_4 == n - 1.0)) {
-    k = y->size[0] * y->size[1];
+    i = y->size[0] * y->size[1];
     y->size[0] = 1;
     y->size[1] = 1;
-    emxEnsureCapacity_real_T(y, k);
+    emxEnsureCapacity_real_T(y, i);
     y->data[0] = rtNaN;
   } else if (floor(varargin_4) == varargin_4) {
-    k = y->size[0] * y->size[1];
+    i = y->size[0] * y->size[1];
     y->size[0] = 1;
     nrows = (int)floor((n - 1.0) - varargin_4);
     y->size[1] = nrows + 1;
-    emxEnsureCapacity_real_T(y, k);
-    for (k = 0; k <= nrows; k++) {
-      y->data[k] = varargin_4 + (double)k;
+    emxEnsureCapacity_real_T(y, i);
+    for (i = 0; i <= nrows; i++) {
+      y->data[i] = varargin_4 + (double)i;
     }
   } else {
     eml_float_colon(varargin_4, n - 1.0, y);
   }
   emxInit_real_T(&m, 1);
-  k = m->size[0];
+  i = m->size[0];
   m->size[0] = y->size[1];
-  emxEnsureCapacity_real_T(m, k);
+  emxEnsureCapacity_real_T(m, i);
   nrows = y->size[1];
-  for (k = 0; k < nrows; k++) {
-    m->data[k] = y->data[k];
+  for (i = 0; i < nrows; i++) {
+    m->data[i] = y->data[i];
   }
   emxFree_real_T(&y);
   /*  mm = fwd search index replicated lp times. */
@@ -185,111 +184,101 @@ void FSRbonfbound(double n, double p, const double varargin_2_data[],
     b_n = 0;
   }
   emxInit_real_T(&b, 2);
-  k = b->size[0] * b->size[1];
+  i = b->size[0] * b->size[1];
   b->size[0] = m->size[0];
   b->size[1] = b_n + 1;
-  emxEnsureCapacity_real_T(b, k);
+  emxEnsureCapacity_real_T(b, i);
   nrows = m->size[0];
-  for (jtilecol = 0; jtilecol <= b_n; jtilecol++) {
+  for (sizes_idx_1 = 0; sizes_idx_1 <= b_n; sizes_idx_1++) {
     for (k = 0; k < nrows; k++) {
       b->data[k] = m->data[k];
     }
   }
   emxInit_real_T(&mm, 2);
-  k = mm->size[0] * mm->size[1];
+  i = mm->size[0] * mm->size[1];
   mm->size[0] = b->size[0];
   mm->size[1] = b->size[1];
-  emxEnsureCapacity_real_T(mm, k);
+  emxEnsureCapacity_real_T(mm, i);
   nrows = b->size[0] * b->size[1];
-  for (k = 0; k < nrows; k++) {
-    mm->data[k] = b->data[k];
+  for (i = 0; i < nrows; i++) {
+    mm->data[i] = b->data[i];
   }
   emxInit_real_T(&mmminusp, 2);
   /*  Set to 1 all m-p not greater than 0 */
-  k = mmminusp->size[0] * mmminusp->size[1];
+  i = mmminusp->size[0] * mmminusp->size[1];
   mmminusp->size[0] = b->size[0];
   mmminusp->size[1] = b->size[1];
-  emxEnsureCapacity_real_T(mmminusp, k);
+  emxEnsureCapacity_real_T(mmminusp, i);
   nrows = b->size[0] * b->size[1];
-  for (k = 0; k < nrows; k++) {
-    mmminusp->data[k] = b->data[k] - p;
+  for (i = 0; i < nrows; i++) {
+    mmminusp->data[i] = b->data[i] - p;
   }
   b_n = b->size[0] * b->size[1] - 1;
   nrows = 0;
-  for (jtilecol = 0; jtilecol <= b_n; jtilecol++) {
-    if (b->data[jtilecol] - p <= 0.0) {
+  for (sizes_idx_1 = 0; sizes_idx_1 <= b_n; sizes_idx_1++) {
+    if (b->data[sizes_idx_1] - p <= 0.0) {
       nrows++;
     }
   }
   emxInit_int32_T(&r, 1);
-  k = r->size[0];
+  i = r->size[0];
   r->size[0] = nrows;
-  emxEnsureCapacity_int32_T(r, k);
+  emxEnsureCapacity_int32_T(r, i);
   nrows = 0;
-  for (jtilecol = 0; jtilecol <= b_n; jtilecol++) {
-    if (b->data[jtilecol] - p <= 0.0) {
-      r->data[nrows] = jtilecol + 1;
+  for (sizes_idx_1 = 0; sizes_idx_1 <= b_n; sizes_idx_1++) {
+    if (b->data[sizes_idx_1] - p <= 0.0) {
+      r->data[nrows] = sizes_idx_1 + 1;
       nrows++;
     }
   }
   nrows = r->size[0];
-  for (k = 0; k < nrows; k++) {
-    mm->data[r->data[k] - 1] = 1.0;
+  for (i = 0; i < nrows; i++) {
+    mm->data[r->data[i] - 1] = 1.0;
   }
   emxFree_int32_T(&r);
   b_n = mmminusp->size[0] * mmminusp->size[1] - 1;
   nrows = 0;
-  for (jtilecol = 0; jtilecol <= b_n; jtilecol++) {
-    if (mmminusp->data[jtilecol] <= 0.0) {
+  for (sizes_idx_1 = 0; sizes_idx_1 <= b_n; sizes_idx_1++) {
+    if (mmminusp->data[sizes_idx_1] <= 0.0) {
       nrows++;
     }
   }
   emxInit_int32_T(&r1, 1);
-  k = r1->size[0];
+  i = r1->size[0];
   r1->size[0] = nrows;
-  emxEnsureCapacity_int32_T(r1, k);
+  emxEnsureCapacity_int32_T(r1, i);
   nrows = 0;
-  for (jtilecol = 0; jtilecol <= b_n; jtilecol++) {
-    if (mmminusp->data[jtilecol] <= 0.0) {
-      r1->data[nrows] = jtilecol + 1;
+  for (sizes_idx_1 = 0; sizes_idx_1 <= b_n; sizes_idx_1++) {
+    if (mmminusp->data[sizes_idx_1] <= 0.0) {
+      r1->data[nrows] = sizes_idx_1 + 1;
       nrows++;
     }
   }
   nrows = r1->size[0] - 1;
-  for (k = 0; k <= nrows; k++) {
-    mmminusp->data[r1->data[k] - 1] = 1.0;
+  for (i = 0; i <= nrows; i++) {
+    mmminusp->data[r1->data[i] - 1] = 1.0;
   }
   emxFree_int32_T(&r1);
   emxInit_real_T(&r2, 2);
-  emxInit_real_T(&r3, 2);
   repmat(varargin_2_data, varargin_2_size, m->size[0], r2);
-  k = r3->size[0] * r3->size[1];
-  r3->size[0] = r2->size[0];
-  r3->size[1] = r2->size[1];
-  emxEnsureCapacity_real_T(r3, k);
+  i = b->size[0] * b->size[1];
+  b->size[0] = r2->size[0];
+  b->size[1] = r2->size[1];
+  emxEnsureCapacity_real_T(b, i);
   nrows = r2->size[0] * r2->size[1];
-  for (k = 0; k < nrows; k++) {
-    r3->data[k] = (1.0 - r2->data[k]) / (mm->data[k] + 1.0);
-  }
-  emxFree_real_T(&mm);
-  emxInit_real_T(&x, 2);
-  b_tinv(r3, mmminusp, r2);
-  k = x->size[0] * x->size[1];
-  x->size[0] = r2->size[0];
-  x->size[1] = r2->size[1];
-  emxEnsureCapacity_real_T(x, k);
-  nrows = r2->size[0] * r2->size[1];
-  emxFree_real_T(&r3);
-  emxFree_real_T(&mmminusp);
-  for (k = 0; k < nrows; k++) {
-    x->data[k] = r2->data[k];
+  for (i = 0; i < nrows; i++) {
+    b->data[i] = (1.0 - r2->data[i]) / (mm->data[i] + 1.0);
   }
   emxFree_real_T(&r2);
+  emxFree_real_T(&mm);
+  emxInit_real_T(&x, 2);
+  b_tinv(b, mmminusp, x);
   nrows = x->size[0] * x->size[1];
-  k = b->size[0] * b->size[1];
+  i = b->size[0] * b->size[1];
   b->size[0] = x->size[0];
   b->size[1] = x->size[1];
-  emxEnsureCapacity_real_T(b, k);
+  emxEnsureCapacity_real_T(b, i);
+  emxFree_real_T(&mmminusp);
   for (k = 0; k < nrows; k++) {
     b->data[k] = fabs(x->data[k]);
   }
@@ -311,26 +300,25 @@ void FSRbonfbound(double n, double p, const double varargin_2_data[],
     input_sizes_idx_1 = 0;
   }
   if (empty_non_axis_sizes || ((b->size[0] != 0) && (b->size[1] != 0))) {
-    sizes_idx_1 = (signed char)b->size[1];
+    sizes_idx_1 = b->size[1];
   } else {
     sizes_idx_1 = 0;
   }
-  k = Bbound->size[0] * Bbound->size[1];
+  i = Bbound->size[0] * Bbound->size[1];
   Bbound->size[0] = b_n;
   Bbound->size[1] = input_sizes_idx_1 + sizes_idx_1;
-  emxEnsureCapacity_real_T(Bbound, k);
+  emxEnsureCapacity_real_T(Bbound, i);
   nrows = input_sizes_idx_1;
-  for (k = 0; k < nrows; k++) {
-    for (jtilecol = 0; jtilecol < b_n; jtilecol++) {
-      Bbound->data[jtilecol] = m->data[jtilecol];
+  for (i = 0; i < nrows; i++) {
+    for (k = 0; k < b_n; k++) {
+      Bbound->data[k] = m->data[k];
     }
   }
   emxFree_real_T(&m);
-  nrows = sizes_idx_1;
-  for (k = 0; k < nrows; k++) {
-    for (jtilecol = 0; jtilecol < b_n; jtilecol++) {
-      Bbound->data[jtilecol + Bbound->size[0] * (k + input_sizes_idx_1)] =
-          b->data[jtilecol + b_n * k];
+  for (i = 0; i < sizes_idx_1; i++) {
+    for (k = 0; k < b_n; k++) {
+      Bbound->data[k + Bbound->size[0] * (i + input_sizes_idx_1)] =
+          b->data[k + b_n * i];
     }
   }
   emxFree_real_T(&b);
