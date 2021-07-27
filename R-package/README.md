@@ -14,7 +14,7 @@ You can install ‘fsdac’ from github with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("UniprJRC/FSDA-MATLAB_Coder", subdir="R-package")
+remotes::install_github("UniprJRC/FSDA-MATLAB_Coder", subdir="R-package", INSTALL_opts=c("--no-multiarch"))
 ```
 
 ## Example
@@ -63,7 +63,7 @@ library(fsdac)
     y <- fishery[,2, drop=FALSE]
     X <- fishery[,1, drop=FALSE]
     out <- LXS(y, X, nsamp=10000)
-#> Total estimated time to complete LTS:  0.73 seconds
+#> Total estimated time to complete LTS:  0.42 seconds
     bsb <- out$bs
     ## bsb <- c(371, 450)                       # found by LTS
 

@@ -24,7 +24,7 @@ You can install 'fsdac' from github with:
 
 ```{r gh-installation, eval = FALSE}
 # install.packages("remotes")
-remotes::install_github("UniprJRC/FSDA-MATLAB_Coder", subdir="R-package")
+remotes::install_github("UniprJRC/FSDA-MATLAB_Coder", subdir="R-package", INSTALL_opts=c("--no-multiarch"))
 ```
 
 ## Example
