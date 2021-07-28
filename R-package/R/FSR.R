@@ -24,9 +24,18 @@
 #' @param h The number of observations that have determined the least trimmed squares
 #'  estimator,  scalar. \code{h} is an integer greater or equal than \code{p} but smaller
 #'  then \code{n}. Generally \code{h=[0.5*(n+p+1)]} (default value).
-#' @param lms estimation method, If \code{lms=1} (default) Least Median of Squares is computed,
-#'  else if \code{lms=2} or  \code{lms='lts'} fast LTS with all default options is used else
-#'  if \code{lms} is a scalar different from 1 and 2 standard LTS is used (without concentration steps).
+#' @param lms criterion to use to find the initial subset to initialize the search (LMS, LTS with concentration steps,
+#'  LTS without concentration steps or a subset supplied directly by the user). The default value is \code{lms="lms"}
+#'  (or \code{lms=1}) (Least Median of Squares is computed to initialize the search). If the user wants to initialze
+#'  the search with LTS with all the default options for concentration steps then, \code{lms=2} or \code{lms="lts"}.
+#'  If the user wants to use LTS without concentration steps, \code{lms} can
+#'  be any value different from 1 or 2. If \code{lms} is a list it is possible
+#'  to control a series of options for concentration steps (for more details
+#'  see the option \code{lms} in LXS()). It is also possible to initialize the
+#'  search with a prespecified set of units and in such case \code{lms} is a list
+#'  which contains a field named \code{bsb} which contains the list of units.
+#'  For example, in the case of simple regression through the origin with just
+#' one explanatory variable, to initialize the search with unit 3 then \code{lms=list(bsb=3)}.
 #' @param bsbmfullrank how to deal with singular \code{x} matrix. This option tells what to do
 #'  in case when a subset at step \code{m} (say \code{bsbm}) produces a singular \code{x}.
 #'  In other words, this options controls what to do when \code{rank(X[bsbm,]} is smaller
@@ -156,6 +165,55 @@ FSR <- function(y, x, intercept=TRUE, lms=1,
 
     ##  Process the input parameters and initial values =========
 
+    ## 'lms' can be 1="lms" or 2="lts" or 3 (anything else) = standard LTS without concentration steps
+    ##  or, alternatively a structure with options or a vector with a list of units.
+    refsteps <- 3
+    reftol  <- 1e-6
+    bestr  <- 5
+    refstepsbestr  <- 50
+    reftolbestr <- 1e-8
+    bsb <- c()
+
+    if(length(lms) == 1)
+    {
+        if(is.numeric(lms))
+        {
+            if(lms != 1 | lms != 2)         # Standard LTS (without concentration steps)
+                lms <- 3
+        } else if(toupper(lms) == "LMS")    # LMS (default)
+            lms <- 1
+        else if(toupper(lms) == "LTS")      #  Fast LTS with the all default options
+            lms <- 2
+        else
+            stop("'lms' must be a list or either numeric or a character string 'LMS' or 'LTS'")
+    } else if(is.list(lms) | is.vector(lms))     # lms is a structure
+    {
+        if(is.vector(lms) && is.numeric(lms)) {
+            bsb <- lms
+            if(!all(bsb >= 1 & bsb <= n1))
+                stop("The initial subset must contain valid unit indexes!")
+
+        } else {
+            lms <- unlist(lms)
+            if(is.null(names(lms)) | !is.numeric(lms))
+                stop("'lms' must be a list or a named numeric vector")
+
+            cnames <- c("refsteps", "reftol", "bestr", "refstepsbestr", "reftolbest")
+            for(cx in names(lms))
+                if(cx %in% cnames)
+                    assign(cx, lms[cx])
+                else
+                    stop(paste("Unknown option in 'lms':", cx, ". Must be one of: ", paste(cnames, collapse =",")))
+        }
+
+        lms <- 0                            # Fast LTS (with concentration steps) with options
+
+    } else
+        stop("'lms' must be a list or either numeric or a character string 'LMS' or 'LTS'")
+
+    if(trace && lms == 0)
+        message("\nLTS with options (refsteps, reftol, bestr, refstepsbestr, reftolbestr): ", refsteps, reftol, bestr, refstepsbestr, reftolbestr, "\n")
+
     ## The default value of init depends on n and p
     if(missing(init)) {
         init <- if(n1 < 40) p1 + 1 else min(3*p1 + 1, floor(0.5*(n1 + p1 + 1)))
@@ -205,7 +263,16 @@ FSR <- function(y, x, intercept=TRUE, lms=1,
         p1 = as.integer(p1),                            # new p, returned by chkinputR()
 
         intercept = as.integer(intercept),
+
         lms = if(is.double(lms)) lms else as.double(lms),
+        refsteps <- as.double(refsteps),
+        reftol  <- as.double(reftol),
+        bestr  <- as.double(bestr),
+        refstepsbestr  <- as.double(refstepsbestr),
+        reftolbestr <- as.double(reftolbestr),
+        bsb <- as.double(bsb),
+        nbsb <- as.integer(length(bsb)),
+
         bsbmfullrank = as.integer(bsbmfullrank),
         bonflev = as.double(bonflev),
 

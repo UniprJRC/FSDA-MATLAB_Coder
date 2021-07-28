@@ -5,7 +5,8 @@
 #include "_utils.h"
 #include "FSR_wrapper.h"
 
-void r_fsr(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int *intercept, double *lms,
+void r_fsr(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int *intercept, 
+             double *lms, double *refsteps, double *reftol, double *bestr, double *refstepsbestr, double *reftolbestr, double *bsb, int *nbsb,
              int *bsbmfullrank, double *bonflev,
              double *h, double * init, double *nsamp,
              double *threshoutX, int *weak,
@@ -26,6 +27,8 @@ void r_fsr(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int *in
     bool b_nocheck = *nocheck != 0;
     bool b_trace = *trace != 0;
      
+    struct_FSRlms_T lmsstr;
+
     emxArray_real_T *y;
     emxArray_real_T *X;
 
@@ -35,6 +38,9 @@ void r_fsr(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int *in
     int bonflev_size[2], threshoutX_size[2];
 
     // Initialize the input arguments. ==============================
+    
+    lmsstr.bsb = argInit_vector(bsb, nbsb);
+
     y = argInit_vector(yy, nn);                 //  Initialize function input argument 'y'    
     X = argInit_matrix(xx, nn, pp);             //  Initialize function input argument 'X'    
     
@@ -59,10 +65,17 @@ void r_fsr(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int *in
     }
 
     // Call the FSR wrapper
-    FSR_wrapper(y, X,
-                 b_bsbmfullrank, bonflev_data, bonflev_size, *h, *init,
-                 b_intercept, *lms, b_msg, b_nocheck,
-                 *nsamp, threshoutX_data, threshoutX_size, b_weak, &out);
+
+    if(*lms == 0)   
+        FSR_wrapper1(y, X,
+                     b_bsbmfullrank, bonflev_data, bonflev_size, *h, *init,
+                     b_intercept, &lms, b_msg, b_nocheck,
+                     *nsamp, threshoutX_data, threshoutX_size, b_weak, &out);
+    else
+        FSR_wrapper(y, X,
+                     b_bsbmfullrank, bonflev_data, bonflev_size, *h, *init,
+                     b_intercept, *lms, b_msg, b_nocheck,
+                     *nsamp, threshoutX_data, threshoutX_size, b_weak, &out);
 
     if(b_trace) {
        Rprintf("%s ", "Returning from FSR...\n");

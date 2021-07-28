@@ -203,7 +203,7 @@ FSRfan <- function(y, x, intercept=TRUE, family=c("BoxCox", "YJ", "YJpn", "YJall
     }
 
     ## The default value depends on n and p and init cannot be smaller
-    ##  than the length of bsb
+    ##  than p+1
     if(missing(init))
     {
         init <- if(n1 < 40) p1 + 1 else min(3*p1 + 1, floor(0.5*(n1 + p1 + 1)))

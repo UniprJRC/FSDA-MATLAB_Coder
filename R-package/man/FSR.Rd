@@ -39,9 +39,18 @@ FSR(
 
 \item{intercept}{Indicator for the constant term (intercept) in the fit, defaults to \code{intercept=TRUE}.}
 
-\item{lms}{estimation method, If \code{lms=1} (default) Least Median of Squares is computed,
-else if \code{lms=2} or  \code{lms='lts'} fast LTS with all default options is used else
-if \code{lms} is a scalar different from 1 and 2 standard LTS is used (without concentration steps).}
+\item{lms}{criterion to use to find the initial subset to initialize the search (LMS, LTS with concentration steps,
+ LTS without concentration steps or a subset supplied directly by the user). The default value is \code{lms="lms"}
+ (or \code{lms=1}) (Least Median of Squares is computed to initialize the search). If the user wants to initialze
+ the search with LTS with all the default options for concentration steps then, \code{lms=2} or \code{lms="lts"}.
+ If the user wants to use LTS without concentration steps, \code{lms} can
+ be any value different from 1 or 2. If \code{lms} is a list it is possible
+ to control a series of options for concentration steps (for more details
+ see the option \code{lms} in LXS()). It is also possible to initialize the
+ search with a prespecified set of units and in such case \code{lms} is a list
+ which contains a field named \code{bsb} which contains the list of units.
+ For example, in the case of simple regression through the origin with just
+one explanatory variable, to initialize the search with unit 3 then \code{lms=list(bsb=3)}.}
 
 \item{bsbmfullrank}{how to deal with singular \code{x} matrix. This option tells what to do
 in case when a subset at step \code{m} (say \code{bsbm}) produces a singular \code{x}.
