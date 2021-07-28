@@ -2570,7 +2570,7 @@ void tclust_wrapper1(const emxArray_real_T *Y, double k, double alpha,
         /*  Sort the n likelihood contributions */
         /*  qq contains the largest n*(1-alpha) (weighted) likelihood
          * contributions */
-        f_sort(y, idx);
+        g_sort(y, idx);
         i1 = qq->size[0];
         qq->size[0] = idx->size[0];
         emxEnsureCapacity_int32_T(qq, i1);
@@ -2661,7 +2661,7 @@ void tclust_wrapper1(const emxArray_real_T *Y, double k, double alpha,
         /*  Sort the n likelihood contributions */
         /*  qq contains the largest n*(1-alpha) (weighted) likelihood
          * contributions */
-        f_sort(ex, idx);
+        g_sort(ex, idx);
         i1 = qq->size[0];
         qq->size[0] = idx->size[0];
         emxEnsureCapacity_int32_T(qq, i1);
@@ -2787,7 +2787,7 @@ void tclust_wrapper1(const emxArray_real_T *Y, double k, double alpha,
               y->data[i1] =
                   out->postprob->data[i1 + out->postprob->size[0] * j];
             }
-            h_bsxfun(out->Y, y, r3);
+            d_bsxfun(out->Y, y, r3);
             combineVectorElements(r3, b_cini);
             loop_ub = b_cini->size[1];
             for (i1 = 0; i1 < loop_ub; i1++) {
@@ -2813,7 +2813,7 @@ void tclust_wrapper1(const emxArray_real_T *Y, double k, double alpha,
               b_cini->data[i1] = cini->data[j + cini->size[0] * i1];
             }
             bsxfun(out->Y, b_cini, r3);
-            h_bsxfun(r3, y, Yselj);
+            d_bsxfun(r3, y, Yselj);
             c_mtimes(Yselj, Yselj, r3);
             loop_ub = r3->size[1];
             for (i1 = 0; i1 < loop_ub; i1++) {
@@ -4421,7 +4421,7 @@ void tclust_wrapper1(const emxArray_real_T *Y, double k, double alpha,
       }
     }
     emxFree_int32_T(&r13);
-    b_cat(eyk, sigmaini, out->sigmaopt);
+    c_cat(eyk, sigmaini, out->sigmaopt);
   }
   emxFree_boolean_T(&NanGroups);
   emxFree_real_T(&sigmaini);
@@ -5407,7 +5407,7 @@ void tclust_wrapper1(const emxArray_real_T *Y, double k, double alpha,
   for (i = 0; i < loop_ub; i++) {
     qqunassigned->data[i] = ex->data[i];
   }
-  f_sort(qqunassigned, idx);
+  g_sort(qqunassigned, idx);
   i = qq->size[0];
   qq->size[0] = idx->size[0];
   emxEnsureCapacity_int32_T(qq, i);
@@ -5422,7 +5422,7 @@ void tclust_wrapper1(const emxArray_real_T *Y, double k, double alpha,
     /*  Sort the n likelihood contributions */
     /*  qq contains the largest n*(1-alpha) (weighted) likelihood contributions
      */
-    f_sort(y, idx);
+    g_sort(y, idx);
     i = qqunassigned->size[0];
     qqunassigned->size[0] = idx->size[0];
     emxEnsureCapacity_real_T(qqunassigned, i);

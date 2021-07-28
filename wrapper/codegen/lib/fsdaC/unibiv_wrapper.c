@@ -142,6 +142,16 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
   /*                    than the MD (mean absolute deviation) is used.  In */
   /*                    other words MD=mean(abs(y-mean(Y)) */
   /*  */
+  /*            rf  :  It specifies the confidence */
+  /*                   level of the robust bivariate ellipses. Scalar. 0<rf<1.
+   */
+  /*                   The default value is 0.95 that is the outer contour in */
+  /*                   presence of normality for each ellipse should leave */
+  /*                   outside 5% of the values. */
+  /*                  Example - 'rf',0.99 */
+  /*                  Data Types - double */
+  /*  */
+  /*  */
   /*       robscale :   how to compute dispersion. Scalar. It specifies the */
   /*                    statistical indexes to use to compute the dispersion of
    */
@@ -170,15 +180,6 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
   /*                  Example - 'robscale',2 */
   /*                  Data Types - double */
   /*  */
-  /*            rf  :  It specifies the confidence */
-  /*                   level of the robust bivariate ellipses. Scalar. 0<rf<1.
-   */
-  /*                   The default value is 0.95 that is the outer contour in */
-  /*                   presence of normality for each ellipse should leave */
-  /*                   outside 5% of the values. */
-  /*                  Example - 'rf',0.99 */
-  /*                  Data Types - double */
-  /*  */
   /*  */
   /*          plots :   Plot on the screen. Scalar. It specifies whether it is
    */
@@ -198,17 +199,6 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
   /*                  Example - 'plots',2 */
   /*                  Data Types - double */
   /*  */
-  /*        textlab : plot labels. Scalar.  Scalar which controls the labels in
-   */
-  /*                    the plots. If textlab=1 and */
-  /*                    plots=1 the labels associated */
-  /*                    to the units which are univariate outliers or which are
-   */
-  /*                    outside the confidence levels of the contours are */
-  /*                    displayed on the screen. */
-  /*                  Example - 'textlab',0 */
-  /*                  Data Types - double */
-  /*  */
   /*        tag     :   plot tag.  Character. It identifies the handle of the
    * plot which */
   /*                    is about to be created. The default is to use tag */
@@ -221,6 +211,17 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
   /*                    in the same window else a new window is created. */
   /*                  Example - 'tag','new_tag' */
   /*                  Data Types - char */
+  /*  */
+  /*        textlab : plot labels. Scalar.  Scalar which controls the labels in
+   */
+  /*                    the plots. If textlab=1 and */
+  /*                    plots=1 the labels associated */
+  /*                    to the units which are univariate outliers or which are
+   */
+  /*                    outside the confidence levels of the contours are */
+  /*                    displayed on the screen. */
+  /*                  Example - 'textlab',0 */
+  /*                  Data Types - double */
   /*  */
   /*  Output: */
   /*  */

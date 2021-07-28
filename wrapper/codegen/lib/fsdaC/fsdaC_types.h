@@ -504,6 +504,26 @@ typedef struct {
 } struct_MMreg_T;
 #endif /* typedef_struct_MMreg_T */
 
+#ifndef typedef_struct_MMregeda_T
+#define typedef_struct_MMregeda_T
+typedef struct {
+  emxArray_real_T *Beta;
+  emxArray_real_T *RES;
+  emxArray_real_T *Weights;
+  emxArray_boolean_T *Outliers;
+  emxArray_real_T *Sbeta;
+  double auxscale;
+  double Ssingsub;
+  double conflev;
+  char class[8];
+  emxArray_char_T *rhofunc;
+  emxArray_real_T *rhofuncparam;
+  emxArray_real_T *eff;
+  emxArray_real_T *X;
+  emxArray_real_T *y;
+} struct_MMregeda_T;
+#endif /* typedef_struct_MMregeda_T */
+
 #ifndef typedef_e_struct_T
 #define typedef_e_struct_T
 typedef struct {
@@ -537,6 +557,26 @@ typedef struct {
   char class[4];
 } struct_Sreg_T;
 #endif /* typedef_struct_Sreg_T */
+
+#ifndef typedef_struct_Sregeda_T
+#define typedef_struct_Sregeda_T
+typedef struct {
+  double conflev;
+  emxArray_real_T *Beta;
+  emxArray_real_T *Scale;
+  emxArray_real_T *BS;
+  emxArray_real_T *Weights;
+  emxArray_real_T *RES;
+  emxArray_real_T *Singsub;
+  emxArray_boolean_T *Outliers;
+  emxArray_real_T *bdp;
+  char class[7];
+  emxArray_char_T *rhofunc;
+  emxArray_real_T *rhofuncparam;
+  emxArray_real_T *X;
+  emxArray_real_T *y;
+} struct_Sregeda_T;
+#endif /* typedef_struct_Sregeda_T */
 
 #ifndef typedef_struct_addt_T
 #define typedef_struct_addt_T

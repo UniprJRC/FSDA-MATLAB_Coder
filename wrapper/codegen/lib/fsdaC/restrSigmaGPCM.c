@@ -754,7 +754,7 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
         for (i1 = 0; i1 < ret; i1++) {
           diff->data[i1] = GAM->data[i1 + GAM->size[0] * j];
         }
-        h_sort(diff);
+        f_sort(diff);
         ret = diff->size[0];
         for (i1 = 0; i1 < ret; i1++) {
           GAMfc->data[i1 + GAMfc->size[0] * j] = diff->data[i1];
@@ -1846,7 +1846,7 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
         b_SigmaB->data[i] = eigunsorted->data[i].re;
       }
       diag(b_SigmaB, GAMold);
-      f_sort(GAMold, iidx);
+      g_sort(GAMold, iidx);
       nx = eyep->size[0] - 1;
       i = b_SigmaB->size[0] * b_SigmaB->size[1];
       b_SigmaB->size[0] = eyep->size[0];
@@ -1978,7 +1978,7 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
         for (i1 = 0; i1 < loop_ub; i1++) {
           GAMold->data[i1] = diageigunsorted->data[i1];
         }
-        f_sort(GAMold, iidx);
+        g_sort(GAMold, iidx);
         loop_ub = V->size[0];
         nx = iidx->size[0];
         for (i1 = 0; i1 < nx; i1++) {
@@ -2197,7 +2197,7 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
         for (i1 = 0; i1 < loop_ub; i1++) {
           diageigunsorted->data[i1] = eyep->data[i1 + eyep->size[0] * j];
         }
-        h_sort(diageigunsorted);
+        f_sort(diageigunsorted);
         loop_ub = diageigunsorted->size[0];
         for (i1 = 0; i1 < loop_ub; i1++) {
           GAMfc->data[i1 + GAMfc->size[0] * j] = diageigunsorted->data[i1];

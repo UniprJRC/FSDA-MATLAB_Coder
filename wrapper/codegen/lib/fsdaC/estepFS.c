@@ -159,7 +159,7 @@ void b_estepFS(const emxArray_real_T *log_lh, double *obj,
   /*  Beginning of code */
   f_maximum(log_lh, maxll);
   /*  minus maxll to avoid underflow */
-  f_bsxfun(log_lh, maxll, post);
+  g_bsxfun(log_lh, maxll, post);
   nx = post->size[0] * post->size[1];
   for (k = 0; k < nx; k++) {
     post->data[k] = exp(post->data[k]);
@@ -175,7 +175,7 @@ void b_estepFS(const emxArray_real_T *log_lh, double *obj,
   /* normalize posteriors */
   /*  varargout1 is a size(log_lh,1)-by-p matrix which contains posterior */
   /*  probabilities */
-  g_bsxfun(post, density, varargout1);
+  h_bsxfun(post, density, varargout1);
   /*  logpdf is a size(log_lh,1)-by-1 vector which contains the contributions */
   /*  to the loglikelihood of the mixture model of each observation */
   /*  Note that give that maxll was substracted now it must be added */
@@ -335,7 +335,7 @@ double c_estepFS(const emxArray_real_T *log_lh)
   /*  Beginning of code */
   f_maximum(log_lh, maxll);
   /*  minus maxll to avoid underflow */
-  f_bsxfun(log_lh, maxll, post);
+  g_bsxfun(log_lh, maxll, post);
   nx = post->size[0] * post->size[1];
   for (k = 0; k < nx; k++) {
     post->data[k] = exp(post->data[k]);
@@ -507,7 +507,7 @@ void estepFS(const emxArray_real_T *log_lh, double *obj,
   /*  Beginning of code */
   f_maximum(log_lh, maxll);
   /*  minus maxll to avoid underflow */
-  f_bsxfun(log_lh, maxll, post);
+  g_bsxfun(log_lh, maxll, post);
   nx = post->size[0] * post->size[1];
   for (k = 0; k < nx; k++) {
     post->data[k] = exp(post->data[k]);
@@ -522,7 +522,7 @@ void estepFS(const emxArray_real_T *log_lh, double *obj,
   /* normalize posteriors */
   /*  varargout1 is a size(log_lh,1)-by-p matrix which contains posterior */
   /*  probabilities */
-  g_bsxfun(post, varargout2, varargout1);
+  h_bsxfun(post, varargout2, varargout1);
   /*  logpdf is a size(log_lh,1)-by-1 vector which contains the contributions */
   /*  to the loglikelihood of the mixture model of each observation */
   /*  Note that give that maxll was substracted now it must be added */

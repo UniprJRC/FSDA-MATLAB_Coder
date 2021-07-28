@@ -26,7 +26,7 @@ extern "C" {
 double OPTrho(double u, double c);
 
 void b_OPTrho(const emxArray_real_T *u, const double c_data[],
-              const int c_size[2], emxArray_real_T *rhoOPT);
+              emxArray_real_T *rhoOPT);
 
 #ifdef __cplusplus
 }

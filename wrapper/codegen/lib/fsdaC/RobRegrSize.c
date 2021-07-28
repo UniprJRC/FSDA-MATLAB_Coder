@@ -927,7 +927,7 @@ double RobRegrSize(double n, double p, double bdp)
   static const char cv8[10] = {'M', 'M', 'e', 'f', 'f',
                                '0', '9', '5', 'T', 'B'};
   static const char b_cv[9] = {'L', 'T', 'S', 'b', 'd', 'p', '0', '5', '0'};
-  static const char cv1[9] = {'L', 'T', 'S', 'b', 'd', 'p', '0', '2', '5'};
+  static const char b_cv1[9] = {'L', 'T', 'S', 'b', 'd', 'p', '0', '2', '5'};
   static const char cv10[9] = {'S', 'b', 'd', 'p', '0', '5', '0', 'O', 'P'};
   static const char cv14[9] = {'S', 'b', 'd', 'p', '0', '2', '5', 'H', 'Y'};
   static const char cv15[9] = {'S', 'b', 'd', 'p', '0', '5', '0', 'H', 'Y'};
@@ -1245,7 +1245,7 @@ double RobRegrSize(double n, double p, double bdp)
   r1.f1.size[1] = 9;
   for (ib_size = 0; ib_size < 9; ib_size++) {
     r.f1.data[ib_size] = b_cv[ib_size];
-    r1.f1.data[ib_size] = cv1[ib_size];
+    r1.f1.data[ib_size] = b_cv1[ib_size];
   }
   r2.f1.size[0] = 1;
   r2.f1.size[1] = 10;
@@ -1451,7 +1451,7 @@ double RobRegrSize(double n, double p, double bdp)
     namefile1->size[1] = 9;
     emxEnsureCapacity_char_T(namefile1, ib_size);
     for (ib_size = 0; ib_size < 9; ib_size++) {
-      namefile1->data[ib_size] = cv1[ib_size];
+      namefile1->data[ib_size] = b_cv1[ib_size];
     }
   } else if (bdp < 0.375) {
     ib_size = namefile1->size[0] * namefile1->size[1];
@@ -1459,7 +1459,7 @@ double RobRegrSize(double n, double p, double bdp)
     namefile1->size[1] = 9;
     emxEnsureCapacity_char_T(namefile1, ib_size);
     for (ib_size = 0; ib_size < 9; ib_size++) {
-      namefile1->data[ib_size] = cv1[ib_size];
+      namefile1->data[ib_size] = b_cv1[ib_size];
     }
   } else {
     ib_size = namefile1->size[0] * namefile1->size[1];

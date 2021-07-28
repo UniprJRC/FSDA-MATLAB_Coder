@@ -26,7 +26,7 @@ bool b_jacobianFiniteDifference(emxArray_real_T *augJacobian,
                                 const i_struct_T *FiniteDifferences)
 {
   static const char b_cv[7] = {'f', 'o', 'r', 'w', 'a', 'r', 'd'};
-  static const char cv1[7] = {'c', 'e', 'n', 't', 'r', 'a', 'l'};
+  static const char b_cv1[7] = {'c', 'e', 'n', 't', 'r', 'a', 'l'};
   emxArray_real_T *JacCeqTrans;
   emxArray_real_T *a__3;
   i_struct_T b_FiniteDifferences;
@@ -80,7 +80,7 @@ bool b_jacobianFiniteDifference(emxArray_real_T *augJacobian,
       exitg1 = 0;
       if (loop_ub < 7) {
         if (cv[(unsigned char)options_FiniteDifferenceType[loop_ub]] !=
-            cv[(int)cv1[loop_ub]]) {
+            cv[(int)b_cv1[loop_ub]]) {
           exitg1 = 1;
         } else {
           loop_ub++;
@@ -115,7 +115,7 @@ void jacobianFiniteDifference(emxArray_real_T *augJacobian,
                               bool *evalOK)
 {
   static const char b_cv[7] = {'f', 'o', 'r', 'w', 'a', 'r', 'd'};
-  static const char cv1[7] = {'c', 'e', 'n', 't', 'r', 'a', 'l'};
+  static const char b_cv1[7] = {'c', 'e', 'n', 't', 'r', 'a', 'l'};
   emxArray_real_T *JacCeqTrans;
   emxArray_real_T *a__3;
   i_struct_T b_FiniteDifferences;
@@ -170,7 +170,7 @@ void jacobianFiniteDifference(emxArray_real_T *augJacobian,
       exitg1 = 0;
       if (loop_ub < 7) {
         if (cv[(unsigned char)options_FiniteDifferenceType[loop_ub]] !=
-            cv[(int)cv1[loop_ub]]) {
+            cv[(int)b_cv1[loop_ub]]) {
           exitg1 = 1;
         } else {
           loop_ub++;

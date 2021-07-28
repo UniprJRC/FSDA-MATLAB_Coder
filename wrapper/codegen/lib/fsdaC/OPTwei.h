@@ -24,7 +24,7 @@ extern "C" {
 
 /* Function Declarations */
 void OPTwei(const emxArray_real_T *u, const double c_data[],
-            const int c_size[2], emxArray_real_T *w);
+            emxArray_real_T *w);
 
 #ifdef __cplusplus
 }

@@ -110,7 +110,11 @@ extern void emxFreeStruct_struct_LXS_T(struct_LXS_T *pStruct);
 
 extern void emxFreeStruct_struct_MMreg_T(struct_MMreg_T *pStruct);
 
+extern void emxFreeStruct_struct_MMregeda_T(struct_MMregeda_T *pStruct);
+
 extern void emxFreeStruct_struct_Sreg_T(struct_Sreg_T *pStruct);
+
+extern void emxFreeStruct_struct_Sregeda_T(struct_Sregeda_T *pStruct);
 
 extern void emxFreeStruct_struct_T(struct_T *pStruct);
 
@@ -190,7 +194,11 @@ extern void emxInitStruct_struct_LXS_T(struct_LXS_T *pStruct);
 
 extern void emxInitStruct_struct_MMreg_T(struct_MMreg_T *pStruct);
 
+extern void emxInitStruct_struct_MMregeda_T(struct_MMregeda_T *pStruct);
+
 extern void emxInitStruct_struct_Sreg_T(struct_Sreg_T *pStruct);
+
+extern void emxInitStruct_struct_Sregeda_T(struct_Sregeda_T *pStruct);
 
 extern void emxInitStruct_struct_T(struct_T *pStruct);
 

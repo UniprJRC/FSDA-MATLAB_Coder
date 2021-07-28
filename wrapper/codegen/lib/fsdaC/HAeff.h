@@ -3,14 +3,14 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * mrdivide_helper.h
+ * HAeff.h
  *
- * Code generation for function 'mrdivide_helper'
+ * Code generation for function 'HAeff'
  *
  */
 
-#ifndef MRDIVIDE_HELPER_H
-#define MRDIVIDE_HELPER_H
+#ifndef HAEFF_H
+#define HAEFF_H
 
 /* Include files */
 #include "fsdaC_types.h"
@@ -23,12 +23,11 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void mrdiv(const emxArray_real_T *A, const emxArray_real_T *B,
-           emxArray_real_T *Y);
+double HAeff(double eff, const emxArray_real_T *abc);
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-/* End of code generation (mrdivide_helper.h) */
+/* End of code generation (HAeff.h) */

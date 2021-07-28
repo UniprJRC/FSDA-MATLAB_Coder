@@ -3,17 +3,16 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * mrdivide_helper.h
+ * OPTeff.h
  *
- * Code generation for function 'mrdivide_helper'
+ * Code generation for function 'OPTeff'
  *
  */
 
-#ifndef MRDIVIDE_HELPER_H
-#define MRDIVIDE_HELPER_H
+#ifndef OPTEFF_H
+#define OPTEFF_H
 
 /* Include files */
-#include "fsdaC_types.h"
 #include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -23,12 +22,11 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void mrdiv(const emxArray_real_T *A, const emxArray_real_T *B,
-           emxArray_real_T *Y);
+double OPTeff(double eff);
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-/* End of code generation (mrdivide_helper.h) */
+/* End of code generation (OPTeff.h) */

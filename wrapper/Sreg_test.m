@@ -5,13 +5,13 @@ randn('state', 123456);
 X=randn(n,p);
 y=randn(n,1);
 y(1:5)=y(1:5)+6;
-bdp=0.5;
-bestr=10;
+bdp=0.01;
+bestr=3;
 conflev=0.99;
 intercept=true;
 minsctol=1e-8;
 msg=true;
-nsamp=5000;
+nsamp=4;
 nocheck=false;
 refsteps=10;
 refstepsbestr=5;
@@ -53,7 +53,9 @@ save('CompTimes','CompTimes')
 tol=1e-7;
 assert(max(abs(out.beta-outMEX.beta))<tol,'beta not equal')
 assert(max(abs(out.scale-outMEX.scale))<tol,'scale not equal')
-assert(isequal(out.bs,outMEX.bs),'bs not equal')
+% bs is not checked because with multiple initial subset you can end up
+% with the same solution after the concentration steps.
+% assert(isequal(out.bs,outMEX.bs),'bs not equal')
 assert(max(abs(out.weights-outMEX.weights),[],'all')<toc,'weights not equal')
 assert(max(abs(out.fittedvalues-outMEX.fittedvalues))<toc,'fittedvalues not equal')
 assert(max(abs(out.residuals-outMEX.residuals))<toc,'residuals not equal')

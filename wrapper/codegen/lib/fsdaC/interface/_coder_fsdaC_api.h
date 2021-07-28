@@ -338,6 +338,26 @@ typedef struct {
 } struct_MMreg_T;
 #endif /* typedef_struct_MMreg_T */
 
+#ifndef typedef_struct_MMregeda_T
+#define typedef_struct_MMregeda_T
+typedef struct {
+  emxArray_real_T *Beta;
+  emxArray_real_T *RES;
+  emxArray_real_T *Weights;
+  emxArray_boolean_T *Outliers;
+  emxArray_real_T *Sbeta;
+  real_T auxscale;
+  real_T Ssingsub;
+  real_T conflev;
+  char_T class[8];
+  emxArray_char_T *rhofunc;
+  emxArray_real_T *rhofuncparam;
+  emxArray_real_T *eff;
+  emxArray_real_T *X;
+  emxArray_real_T *y;
+} struct_MMregeda_T;
+#endif /* typedef_struct_MMregeda_T */
+
 #ifndef typedef_struct_Sreg_T
 #define typedef_struct_Sreg_T
 typedef struct {
@@ -357,6 +377,26 @@ typedef struct {
   char_T class[4];
 } struct_Sreg_T;
 #endif /* typedef_struct_Sreg_T */
+
+#ifndef typedef_struct_Sregeda_T
+#define typedef_struct_Sregeda_T
+typedef struct {
+  real_T conflev;
+  emxArray_real_T *Beta;
+  emxArray_real_T *Scale;
+  emxArray_real_T *BS;
+  emxArray_real_T *Weights;
+  emxArray_real_T *RES;
+  emxArray_real_T *Singsub;
+  emxArray_boolean_T *Outliers;
+  emxArray_real_T *bdp;
+  char_T class[7];
+  emxArray_char_T *rhofunc;
+  emxArray_real_T *rhofuncparam;
+  emxArray_real_T *X;
+  emxArray_real_T *y;
+} struct_Sregeda_T;
+#endif /* typedef_struct_Sregeda_T */
 
 #ifndef struct_emxArray_real_T_1
 #define struct_emxArray_real_T_1
@@ -615,6 +655,20 @@ void MMreg_wrapper(emxArray_real_T *y, emxArray_real_T *X, real_T conflev,
 void MMreg_wrapper_api(const mxArray *const prhs[23], int32_T nlhs,
                        const mxArray *plhs[2]);
 
+void MMregeda_wrapper(emxArray_real_T *y, emxArray_real_T *X, real_T conflev,
+                      emxArray_real_T *eff, struct2_T *InitialEst,
+                      boolean_T intercept, boolean_T nocheck, real_T refsteps,
+                      emxArray_char_T *rhofunc, emxArray_real_T *rhofuncparam,
+                      real_T Sbdp, real_T Sbestr, real_T Sminsctol,
+                      boolean_T Smsg, real_T Snsamp, real_T Srefsteps,
+                      real_T Srefstepsbestr, real_T Sreftol,
+                      real_T Sreftolbestr, emxArray_char_T *Srhofunc,
+                      emxArray_real_T *Srhofuncparam, real_T tol,
+                      struct_MMregeda_T *out, emxArray_real_T *C);
+
+void MMregeda_wrapper_api(const mxArray *const prhs[22], int32_T nlhs,
+                          const mxArray *plhs[2]);
+
 void Sreg_wrapper(emxArray_real_T *y, emxArray_real_T *X, real_T bdp,
                   real_T bestr, real_T conflev, boolean_T intercept,
                   real_T minsctol, boolean_T msg, boolean_T nocheck,
@@ -625,6 +679,17 @@ void Sreg_wrapper(emxArray_real_T *y, emxArray_real_T *X, real_T bdp,
 
 void Sreg_wrapper_api(const mxArray *const prhs[17], int32_T nlhs,
                       const mxArray *plhs[2]);
+
+void Sregeda_wrapper(emxArray_real_T *y, emxArray_real_T *X,
+                     emxArray_real_T *bdp, real_T bestr, real_T conflev,
+                     boolean_T intercept, real_T minsctol, boolean_T msg,
+                     boolean_T nocheck, real_T nsamp, real_T refsteps,
+                     real_T refstepsbestr, real_T reftol, real_T reftolbestr,
+                     emxArray_char_T *rhofunc, emxArray_real_T *rhofuncparam,
+                     struct_Sregeda_T *out, emxArray_real_T *C);
+
+void Sregeda_wrapper_api(const mxArray *const prhs[16], int32_T nlhs,
+                         const mxArray *plhs[2]);
 
 void addt_wrapper(emxArray_real_T *y, emxArray_real_T *X, emxArray_real_T *w,
                   boolean_T intercept, real_T la_data[], int32_T la_size[2],

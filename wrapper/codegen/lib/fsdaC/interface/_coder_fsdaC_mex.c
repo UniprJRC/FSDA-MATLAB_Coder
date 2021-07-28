@@ -17,14 +17,14 @@
 void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
                  const mxArray *prhs[])
 {
-  static const char_T *emlrtEntryPoints[19] = {
+  static const char_T *emlrtEntryPoints[21] = {
       "FSM_wrapper",    "FSMbsb_wrapper",    "FSMenvmmd_wrapper",
       "FSMmmd_wrapper", "FSR_wrapper",       "FSR_wrapper1",
       "FSRbsb_wrapper", "FSRenvmdr_wrapper", "FSRfan_wrapper",
       "FSRmdr_wrapper", "LTSts_wrapper",     "LXS_wrapper",
-      "LXS_wrapper1",   "MMreg_wrapper",     "Sreg_wrapper",
-      "addt_wrapper",   "tclust_wrapper",    "tclust_wrapper1",
-      "unibiv_wrapper"};
+      "LXS_wrapper1",   "MMreg_wrapper",     "MMregeda_wrapper",
+      "Sreg_wrapper",   "Sregeda_wrapper",   "addt_wrapper",
+      "tclust_wrapper", "tclust_wrapper1",   "unibiv_wrapper"};
   emlrtStack st = {
       NULL, /* site */
       NULL, /* tls */
@@ -36,7 +36,7 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
   st.tls = emlrtRootTLSGlobal;
   /* Dispatch the entry-point. */
   switch (emlrtGetEntryPointIndexR2016a(
-      &st, nrhs, &prhs[0], (const char_T **)&emlrtEntryPoints[0], 19)) {
+      &st, nrhs, &prhs[0], (const char_T **)&emlrtEntryPoints[0], 21)) {
   case 0:
     unsafe_FSM_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
@@ -80,18 +80,24 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
     unsafe_MMreg_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   case 14:
-    unsafe_Sreg_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    unsafe_MMregeda_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   case 15:
-    unsafe_addt_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    unsafe_Sreg_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   case 16:
-    unsafe_tclust_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    unsafe_Sregeda_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   case 17:
-    unsafe_tclust_wrapper1_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    unsafe_addt_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   case 18:
+    unsafe_tclust_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    break;
+  case 19:
+    unsafe_tclust_wrapper1_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
+    break;
+  case 20:
     unsafe_unibiv_wrapper_mexFunction(nlhs, plhs, nrhs - 1, &prhs[1]);
     break;
   }
@@ -504,6 +510,37 @@ void unsafe_MMreg_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[2],
   emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
 }
 
+void unsafe_MMregeda_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[2],
+                                         int32_T nrhs, const mxArray *prhs[22])
+{
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
+  };
+  const mxArray *outputs[2];
+  int32_T b_nlhs;
+  st.tls = emlrtRootTLSGlobal;
+  /* Check for proper number of arguments. */
+  if (nrhs != 22) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 22, 4,
+                        16, "MMregeda_wrapper");
+  }
+  if (nlhs > 2) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:TooManyOutputArguments", 3, 4, 16,
+                        "MMregeda_wrapper");
+  }
+  /* Call the function. */
+  MMregeda_wrapper_api(prhs, nlhs, outputs);
+  /* Copy over outputs to the caller. */
+  if (nlhs < 1) {
+    b_nlhs = 1;
+  } else {
+    b_nlhs = nlhs;
+  }
+  emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
+}
+
 void unsafe_Sreg_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[2],
                                      int32_T nrhs, const mxArray *prhs[17])
 {
@@ -526,6 +563,37 @@ void unsafe_Sreg_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[2],
   }
   /* Call the function. */
   Sreg_wrapper_api(prhs, nlhs, outputs);
+  /* Copy over outputs to the caller. */
+  if (nlhs < 1) {
+    b_nlhs = 1;
+  } else {
+    b_nlhs = nlhs;
+  }
+  emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
+}
+
+void unsafe_Sregeda_wrapper_mexFunction(int32_T nlhs, mxArray *plhs[2],
+                                        int32_T nrhs, const mxArray *prhs[16])
+{
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
+  };
+  const mxArray *outputs[2];
+  int32_T b_nlhs;
+  st.tls = emlrtRootTLSGlobal;
+  /* Check for proper number of arguments. */
+  if (nrhs != 16) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 16, 4,
+                        15, "Sregeda_wrapper");
+  }
+  if (nlhs > 2) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:TooManyOutputArguments", 3, 4, 15,
+                        "Sregeda_wrapper");
+  }
+  /* Call the function. */
+  Sregeda_wrapper_api(prhs, nlhs, outputs);
   /* Copy over outputs to the caller. */
   if (nlhs < 1) {
     b_nlhs = 1;

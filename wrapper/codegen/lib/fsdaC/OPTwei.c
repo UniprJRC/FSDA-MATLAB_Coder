@@ -19,29 +19,23 @@
 #include <string.h>
 
 /* Function Definitions */
-void OPTwei(const emxArray_real_T *u, const double c_data[],
-            const int c_size[2], emxArray_real_T *w)
+void OPTwei(const emxArray_real_T *u, const double c_data[], emxArray_real_T *w)
 {
-  emxArray_real_T *Y;
+  emxArray_boolean_T *r1;
+  emxArray_boolean_T *r2;
+  emxArray_int32_T *r;
   emxArray_real_T *absx;
-  emxArray_real_T *b_Y;
-  emxArray_real_T *b_w;
+  emxArray_real_T *b_y;
+  emxArray_real_T *x1;
   emxArray_real_T *y;
-  double B_data[5];
-  double aBuffer_data[5];
-  double b_tmp_data[5];
-  double aBuffer;
+  double b_c;
   double c;
-  double x1_data=0;
-  double z1_data;
-  int b_tmp_size_idx_1;
+  double c_c;
+  double c_tmp;
+  double d;
   int i;
-  int loop_ub;
+  int k;
   int nx;
-  int trueCount;
-  bool b;
-  bool b1;
-  emxInit_real_T(&b_w, 1);
   /* OPTwei computes weight function psi(u)/u for optimal weight function */
   /*  */
   /* <a href="matlab: docsearchFS('OPTwei')">Link to the help function</a> */
@@ -123,168 +117,140 @@ void OPTwei(const emxArray_real_T *u, const double c_data[],
   /*  */
   /* } */
   /*  Beginning of code */
+  /*  MATLAB Ccoder instruction to enforce that c is a scalar */
   /*  weights are = 0 if r >3*c */
-  i = b_w->size[0];
-  b_w->size[0] = u->size[0];
-  emxEnsureCapacity_real_T(b_w, i);
-  loop_ub = u->size[0];
-  for (i = 0; i < loop_ub; i++) {
-    b_w->data[i] = 0.0;
+  i = w->size[0];
+  w->size[0] = u->size[0];
+  emxEnsureCapacity_real_T(w, i);
+  nx = u->size[0];
+  for (i = 0; i < nx; i++) {
+    w->data[i] = 0.0;
   }
   emxInit_real_T(&absx, 1);
   nx = u->size[0];
   i = absx->size[0];
   absx->size[0] = u->size[0];
   emxEnsureCapacity_real_T(absx, i);
-  for (loop_ub = 0; loop_ub < nx; loop_ub++) {
-    absx->data[loop_ub] = fabs(u->data[loop_ub]);
+  for (k = 0; k < nx; k++) {
+    absx->data[k] = fabs(u->data[k]);
   }
-  emxInit_real_T(&y, 2);
   /*  weights are 1 /(3.25c^2) if |x| <=2*c */
-  i = y->size[0] * y->size[1];
-  y->size[0] = 1;
-  y->size[1] = c_size[1];
-  emxEnsureCapacity_real_T(y, i);
-  loop_ub = c_size[1];
-  for (i = 0; i < loop_ub; i++) {
-    y->data[i] = 2.0 * c_data[i];
-  }
-  trueCount = 0;
-  if (absx->data[0] <= y->data[0]) {
-    trueCount = 1;
-  }
-  b_tmp_size_idx_1 = c_size[1];
-  c = c_data[0];
-  loop_ub = c_size[1];
-  for (i = 0; i < loop_ub; i++) {
-    b_tmp_data[i] = c * c_data[i];
-  }
-  c = 1.0 / (3.25 * b_tmp_data[0]);
-  for (i = 0; i < trueCount; i++) {
-    b_w->data[0] = c;
-  }
-  /*  weights are 1/(3.25) * (-1.944* (1/c^2)+1.728 * (x^2/c^4) .... +8*0.002 *
-   * (x^6/c^8) )    if    2c< |x| <3c */
-  b = (absx->data[0] > y->data[0]);
-  b1 = (absx->data[0] <= 3.0 * c_data[0]);
-  trueCount = 0;
-  emxFree_real_T(&y);
-  if (b && b1) {
-    trueCount = 1;
-  }
-  for (i = 0; i < trueCount; i++) {
-    x1_data = u->data[0];
-  }
-  i = absx->size[0];
-  absx->size[0] = trueCount;
-  emxEnsureCapacity_real_T(absx, i);
-  if (0 <= trueCount - 1) {
-    absx->data[0] = x1_data * x1_data;
-  }
-  for (i = 0; i < trueCount; i++) {
-    absx->data[0] *= 1.728;
-  }
-  emxInit_real_T(&Y, 1);
-  c = c_data[0];
-  loop_ub = c_size[1];
-  for (i = 0; i < loop_ub; i++) {
-    aBuffer_data[i] = c * c_data[i];
-  }
-  aBuffer = aBuffer_data[0];
-  loop_ub = c_size[1] - 1;
-  for (i = 0; i <= loop_ub; i++) {
-    aBuffer_data[i] *= aBuffer;
-  }
-  if (trueCount == 0) {
-    Y->size[0] = 0;
-  } else {
-    i = Y->size[0];
-    Y->size[0] = 1;
-    emxEnsureCapacity_real_T(Y, i);
-    Y->data[0] = absx->data[0] / aBuffer_data[0];
-  }
-  i = absx->size[0];
-  absx->size[0] = trueCount;
-  emxEnsureCapacity_real_T(absx, i);
-  if (0 <= trueCount - 1) {
-    absx->data[0] = rt_powd_snf(x1_data, 4.0);
-  }
-  for (i = 0; i < trueCount; i++) {
-    absx->data[0] *= 0.312;
-  }
-  emxInit_real_T(&b_Y, 1);
-  nx = c_size[1];
-  c = c_data[0];
-  loop_ub = c_size[1];
-  for (i = 0; i < loop_ub; i++) {
-    aBuffer_data[i] = c * c_data[i];
-  }
-  aBuffer = aBuffer_data[0];
-  c = aBuffer_data[0];
-  for (i = 0; i < nx; i++) {
-    B_data[i] = aBuffer * (c * aBuffer_data[i]);
-  }
-  if (trueCount == 0) {
-    b_Y->size[0] = 0;
-  } else {
-    i = b_Y->size[0];
-    b_Y->size[0] = 1;
-    emxEnsureCapacity_real_T(b_Y, i);
-    b_Y->data[0] = absx->data[0] / B_data[0];
-    z1_data = rt_powd_snf(u->data[0], 6.0);
-  }
-  i = absx->size[0];
-  absx->size[0] = trueCount;
-  emxEnsureCapacity_real_T(absx, i);
-  for (i = 0; i < trueCount; i++) {
-    absx->data[0] = 0.016 * z1_data;
-  }
-  c = c_data[0];
-  loop_ub = c_size[1];
-  for (i = 0; i < loop_ub; i++) {
-    aBuffer_data[i] = c * c_data[i];
-  }
-  aBuffer = aBuffer_data[0];
-  nx = c_size[1] - 1;
-  for (i = 0; i <= nx; i++) {
-    aBuffer_data[i] *= aBuffer;
-  }
-  aBuffer = aBuffer_data[0];
-  for (i = 0; i <= nx; i++) {
-    aBuffer_data[i] *= aBuffer;
-  }
-  if (trueCount == 0) {
-    absx->size[0] = 0;
-  } else {
-    c = absx->data[0];
-    i = absx->size[0];
-    absx->size[0] = 1;
-    emxEnsureCapacity_real_T(absx, i);
-    absx->data[0] = c / aBuffer_data[0];
-  }
-  c = -1.944 / b_tmp_data[0];
-  loop_ub = Y->size[0];
-  for (i = 0; i < loop_ub; i++) {
-    x1_data = (((c + Y->data[0]) - b_Y->data[0]) + absx->data[0]) / 3.25;
-  }
-  emxFree_real_T(&b_Y);
-  emxFree_real_T(&Y);
-  emxFree_real_T(&absx);
-  if (b && b1) {
-    b_w->data[0] = x1_data;
-  }
-  /*  Rescaled weights so that their maximum is 1 */
-  i = w->size[0] * w->size[1];
-  w->size[0] = b_w->size[0];
-  w->size[1] = c_size[1];
-  emxEnsureCapacity_real_T(w, i);
-  for (i = 0; i < b_tmp_size_idx_1; i++) {
-    loop_ub = b_w->size[0];
-    for (nx = 0; nx < loop_ub; nx++) {
-      w->data[nx + w->size[0] * i] = b_w->data[nx] * (3.25 * b_tmp_data[i]);
+  k = absx->size[0] - 1;
+  nx = 0;
+  for (i = 0; i <= k; i++) {
+    if (absx->data[i] <= 2.0 * c_data[0]) {
+      nx++;
     }
   }
-  emxFree_real_T(&b_w);
+  emxInit_int32_T(&r, 1);
+  i = r->size[0];
+  r->size[0] = nx;
+  emxEnsureCapacity_int32_T(r, i);
+  nx = 0;
+  for (i = 0; i <= k; i++) {
+    if (absx->data[i] <= 2.0 * c_data[0]) {
+      r->data[nx] = i + 1;
+      nx++;
+    }
+  }
+  c_tmp = c_data[0] * c_data[0];
+  nx = r->size[0];
+  for (i = 0; i < nx; i++) {
+    w->data[r->data[i] - 1] = 1.0 / (3.25 * c_tmp);
+  }
+  emxFree_int32_T(&r);
+  emxInit_boolean_T(&r1, 1);
+  /*  weights are 1/(3.25) * (-1.944* (1/c^2)+1.728 * (x^2/c^4) .... +8*0.002 *
+   * (x^6/c^8) )    if    2c< |x| <3c */
+  d = 2.0 * c_data[0];
+  i = r1->size[0];
+  r1->size[0] = absx->size[0];
+  emxEnsureCapacity_boolean_T(r1, i);
+  nx = absx->size[0];
+  for (i = 0; i < nx; i++) {
+    r1->data[i] = (absx->data[i] > d);
+  }
+  emxInit_boolean_T(&r2, 1);
+  d = 3.0 * c_data[0];
+  i = r2->size[0];
+  r2->size[0] = absx->size[0];
+  emxEnsureCapacity_boolean_T(r2, i);
+  nx = absx->size[0];
+  for (i = 0; i < nx; i++) {
+    r2->data[i] = (absx->data[i] <= d);
+  }
+  k = r1->size[0] - 1;
+  nx = 0;
+  for (i = 0; i <= k; i++) {
+    if (r1->data[i] && r2->data[i]) {
+      nx++;
+    }
+  }
+  emxInit_real_T(&x1, 1);
+  i = x1->size[0];
+  x1->size[0] = nx;
+  emxEnsureCapacity_real_T(x1, i);
+  nx = 0;
+  for (i = 0; i <= k; i++) {
+    if (r1->data[i] && r2->data[i]) {
+      x1->data[nx] = u->data[i];
+      nx++;
+    }
+  }
+  c = rt_powd_snf(c_data[0], 4.0);
+  b_c = rt_powd_snf(c_data[0], 6.0);
+  c_c = rt_powd_snf(c_data[0], 8.0);
+  i = absx->size[0];
+  absx->size[0] = x1->size[0];
+  emxEnsureCapacity_real_T(absx, i);
+  nx = x1->size[0];
+  for (k = 0; k < nx; k++) {
+    absx->data[k] = x1->data[k] * x1->data[k];
+  }
+  emxInit_real_T(&y, 1);
+  i = y->size[0];
+  y->size[0] = x1->size[0];
+  emxEnsureCapacity_real_T(y, i);
+  nx = x1->size[0];
+  for (k = 0; k < nx; k++) {
+    y->data[k] = rt_powd_snf(x1->data[k], 4.0);
+  }
+  emxInit_real_T(&b_y, 1);
+  i = b_y->size[0];
+  b_y->size[0] = x1->size[0];
+  emxEnsureCapacity_real_T(b_y, i);
+  nx = x1->size[0];
+  for (k = 0; k < nx; k++) {
+    b_y->data[k] = rt_powd_snf(x1->data[k], 6.0);
+  }
+  emxFree_real_T(&x1);
+  d = -1.944 / c_tmp;
+  nx = absx->size[0];
+  for (i = 0; i < nx; i++) {
+    absx->data[i] =
+        (((d + 1.728 * absx->data[i] / c) - 0.312 * y->data[i] / b_c) +
+         0.016 * b_y->data[i] / c_c) /
+        3.25;
+  }
+  emxFree_real_T(&b_y);
+  emxFree_real_T(&y);
+  k = r1->size[0];
+  nx = 0;
+  for (i = 0; i < k; i++) {
+    if (r1->data[i] && r2->data[i]) {
+      w->data[i] = absx->data[nx];
+      nx++;
+    }
+  }
+  emxFree_boolean_T(&r2);
+  emxFree_boolean_T(&r1);
+  emxFree_real_T(&absx);
+  /*  Rescaled weights so that their maximum is 1 */
+  c_tmp = 3.25 * (c_data[0] * c_data[0]);
+  nx = w->size[0];
+  for (i = 0; i < nx; i++) {
+    w->data[i] *= c_tmp;
+  }
   /*  0 for |x| >3c */
 }
 
