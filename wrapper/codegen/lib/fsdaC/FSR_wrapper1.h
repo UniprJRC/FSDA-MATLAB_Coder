@@ -30,7 +30,7 @@ extern void FSR_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
                          bool nocheck, double nsamp,
                          const double threshoutX_data[],
                          const int threshoutX_size[2], bool weak,
-                         struct0_T *out);
+                         struct_FSR_T *out);
 
 #ifdef __cplusplus
 }

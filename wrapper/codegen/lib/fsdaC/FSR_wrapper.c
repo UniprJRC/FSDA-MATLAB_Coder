@@ -36,7 +36,7 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
 {
   emxArray_boolean_T *x;
   emxArray_int32_T *ia;
-  emxArray_real_T b_out;
+  emxArray_real_T b_mdr;
   emxArray_real_T *Bols;
   emxArray_real_T *INP_S2;
   emxArray_real_T *S2;
@@ -51,6 +51,7 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   emxArray_real_T *c_y;
   emxArray_real_T *constr;
   emxArray_real_T *iniseq;
+  emxArray_real_T *mdr;
   emxArray_real_T *seq;
   struct_LXS_T c_expl_temp;
   struct_LXS_T expl_temp;
@@ -64,8 +65,8 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   int bonflevoutX_size[2];
   int threshlevoutX_size[2];
   int aoffset;
-  int c_out;
-  int d_out;
+  int c_mdr;
+  int d_mdr;
   int exitg1;
   int i;
   int iter;
@@ -460,7 +461,7 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*          out:   structure which contains the following fields */
   /*  */
   /*  out.ListOut  = row vector containing the list of the units declared as */
-  /*                 outliers or NaN if the sample is homogeneous */
+  /*                 outliers or NaN if the sample is homogeneous. If */
   /*  out.outliers = out.ListOut. This field is added for homogeneity with the
    */
   /*                 other robust estimators and is equal to out.ListOut. */
@@ -920,14 +921,15 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     seq->data[i] = c_y->data[i];
   }
   emxFree_real_T(&c_y);
+  emxInit_real_T(&mdr, 2);
   emxInit_real_T(&bs, 1);
   emxInitStruct_struct_LXS_T(&expl_temp);
   iter = 0;
-  i = out->mdr->size[0] * out->mdr->size[1];
-  out->mdr->size[0] = 1;
-  out->mdr->size[1] = 1;
-  emxEnsureCapacity_real_T(out->mdr, i);
-  out->mdr->data[0] = 0.0;
+  i = mdr->size[0] * mdr->size[1];
+  mdr->size[0] = 1;
+  mdr->size[1] = 1;
+  emxEnsureCapacity_real_T(mdr, i);
+  mdr->data[0] = 0.0;
   /*  Initialization necessary for MATLAB C-Coder */
   /*  Use as initial subset the one supplied by the user or the best according
    */
@@ -963,8 +965,8 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
         bsb->data[i] = bs->data[i];
       }
       FSRmdr(b_y, b_X, bsb, init, msg, constr, bsbmfullrank,
-             (double *)&threshlevoutX_data, threshlevoutX_size, bsbstepdef,
-             out->mdr, Un, bb, Bols, S2);
+             (double *)&threshlevoutX_data, threshlevoutX_size, bsbstepdef, mdr,
+             Un, bb, Bols, S2);
       /*  If FSRmdr runs without problems mdr has two columns. In the second */
       /*  column it contains the value of the minimum deletion residual */
       /*  monitored in each step of the search */
@@ -976,31 +978,27 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
       /*     m<n/2 a list of units which produce a singular matrix. In this */
       /*     case LXS is rerun excluding these units which gave rise to a */
       /*     singular matrix */
-      if (out->mdr->size[1] < 2) {
-        aoffset = out->mdr->size[0];
+      if (mdr->size[1] < 2) {
+        aoffset = mdr->size[0];
         if (aoffset <= 1) {
           aoffset = 1;
         }
-        if (out->mdr->size[0] == 0) {
+        if (mdr->size[0] == 0) {
           aoffset = 0;
         }
         if (aoffset >= n / 2.0) {
-          loop_ub = out->mdr->size[0];
-          i = bs->size[0];
-          bs->size[0] = out->mdr->size[0];
-          emxEnsureCapacity_real_T(bs, i);
-          for (i = 0; i < loop_ub; i++) {
-            bs->data[i] = out->mdr->data[i];
-          }
-          e_do_vectors(seq, bs, constr, ia, &aoffset);
+          /*  In this case ListOut contains the list of units which */
+          /*  produced a singular matrix. */
+          /*  out.ListOut = setdiff(seq,mdr(:,1))'; */
+          loop_ub = mdr->size[0];
           i = out->ListOut->size[0] * out->ListOut->size[1];
           out->ListOut->size[0] = 1;
-          out->ListOut->size[1] = constr->size[0];
+          out->ListOut->size[1] = mdr->size[0];
           emxEnsureCapacity_real_T(out->ListOut, i);
-          loop_ub = constr->size[0];
           for (i = 0; i < loop_ub; i++) {
-            out->ListOut->data[i] = constr->data[i];
+            out->ListOut->data[i] = mdr->data[i];
           }
+          /*  if ~coder.target('MATLAB') */
           varsize = ceil(n / 1.0E+6);
           i = out->outliers->size[0] * out->outliers->size[1];
           out->outliers->size[0] = 1;
@@ -1009,6 +1007,13 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           emxEnsureCapacity_real_T(out->outliers, i);
           for (i = 0; i < partialTrueCount; i++) {
             out->outliers->data[i] = rtNaN;
+          }
+          i = out->mdr->size[0] * out->mdr->size[1];
+          out->mdr->size[0] = 1;
+          out->mdr->size[1] = (int)varsize;
+          emxEnsureCapacity_real_T(out->mdr, i);
+          for (i = 0; i < partialTrueCount; i++) {
+            out->mdr->data[i] = rtNaN;
           }
           i = out->Un->size[0] * out->Un->size[1];
           out->Un->size[0] = (int)varsize;
@@ -1061,18 +1066,19 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           out->class[0] = 'F';
           out->class[1] = 'S';
           out->class[2] = 'R';
+          /*  end */
           exitg1 = 1;
         } else {
-          if (rtIsNaN(out->mdr->data[0])) {
+          if (rtIsNaN(mdr->data[0])) {
             /*  INITIAL SUBSET WAS NOT FULL RANK */
             /*  restart LXS without the units forming */
             /*  initial subset */
             aoffset = expl_temp.bs->size[1];
-            b_out = *expl_temp.bs;
-            c_out = aoffset;
-            b_out.size = &c_out;
-            b_out.numDimensions = 1;
-            e_do_vectors(seq, &b_out, bsb, ia, &aoffset);
+            b_mdr = *expl_temp.bs;
+            c_mdr = aoffset;
+            b_mdr.size = &c_mdr;
+            b_mdr.numDimensions = 1;
+            e_do_vectors(seq, &b_mdr, bsb, ia, &aoffset);
             i = bs->size[0];
             bs->size[0] = bsb->size[0];
             emxEnsureCapacity_real_T(bs, i);
@@ -1115,18 +1121,18 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
             /*  MATRIX. IN THIS CASE NEW LXS IS BASED ON  n-constr OBSERVATIONS
              */
             iter++;
-            aoffset = out->mdr->size[0];
-            b_out = *out->mdr;
-            d_out = aoffset;
-            b_out.size = &d_out;
-            b_out.numDimensions = 1;
-            e_do_vectors(seq, &b_out, bsb, ia, &aoffset);
+            aoffset = mdr->size[0];
+            b_mdr = *mdr;
+            d_mdr = aoffset;
+            b_mdr.size = &d_mdr;
+            b_mdr.numDimensions = 1;
+            e_do_vectors(seq, &b_mdr, bsb, ia, &aoffset);
             i = constr->size[0];
-            constr->size[0] = out->mdr->size[0];
+            constr->size[0] = mdr->size[0];
             emxEnsureCapacity_real_T(constr, i);
-            loop_ub = out->mdr->size[0];
+            loop_ub = mdr->size[0];
             for (i = 0; i < loop_ub; i++) {
-              constr->data[i] = out->mdr->data[i];
+              constr->data[i] = mdr->data[i];
             }
             i = bs->size[0];
             bs->size[0] = bsb->size[0];
@@ -1189,7 +1195,7 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
       }
     }
     /*  Call core function which computes exceedances to thresholds of mdr */
-    FSRcore(b_y, b_X, n, varsize, out->mdr, init, Un, bb, Bols, INP_S2, weak,
+    FSRcore(b_y, b_X, n, varsize, mdr, init, Un, bb, Bols, INP_S2, weak,
             bonflev_data, bonflev_size, msg, &b_expl_temp);
     i = out->ListOut->size[0] * out->ListOut->size[1];
     out->ListOut->size[0] = 1;
@@ -1313,6 +1319,7 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   emxFree_real_T(&INP_S2);
   emxFree_real_T(&bsb);
   emxFree_real_T(&bs);
+  emxFree_real_T(&mdr);
   emxFree_real_T(&seq);
   emxFree_real_T(&S2);
   emxFree_real_T(&Bols);

@@ -73,9 +73,7 @@ extern void emxDestroyArray_char_T(emxArray_char_T *emxArray);
 
 extern void emxDestroyArray_real_T(emxArray_real_T *emxArray);
 
-extern void emxDestroy_struct0_T(struct0_T emxArray);
-
-extern void emxDestroy_struct2_T(struct2_T emxArray);
+extern void emxDestroy_struct1_T(struct1_T emxArray);
 
 extern void emxDestroy_struct_FSM_T(struct_FSM_T emxArray);
 
@@ -105,9 +103,7 @@ extern void emxInitArray_char_T(emxArray_char_T **pEmxArray, int numDimensions);
 
 extern void emxInitArray_real_T(emxArray_real_T **pEmxArray, int numDimensions);
 
-extern void emxInit_struct0_T(struct0_T *pStruct);
-
-extern void emxInit_struct2_T(struct2_T *pStruct);
+extern void emxInit_struct1_T(struct1_T *pStruct);
 
 extern void emxInit_struct_FSM_T(struct_FSM_T *pStruct);
 

@@ -15,7 +15,6 @@
 #include "FSRmdr.h"
 #include "chkinputR.h"
 #include "colon.h"
-#include "eml_setop.h"
 #include "fsdaC_data.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_initialize.h"
@@ -31,10 +30,9 @@ void FSR_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
                   const int bonflev_size[2], double h, double init,
                   bool intercept, const struct_FSRlms_T *lms, bool msg,
                   bool nocheck, double nsamp, const double threshoutX_data[],
-                  const int threshoutX_size[2], bool weak, struct0_T *out)
+                  const int threshoutX_size[2], bool weak, struct_FSR_T *out)
 {
   emxArray_boolean_T *x;
-  emxArray_int32_T *ia;
   emxArray_real_T *Bols;
   emxArray_real_T *INP_S2;
   emxArray_real_T *S2;
@@ -45,7 +43,6 @@ void FSR_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
   emxArray_real_T *bb;
   emxArray_real_T *bsbstepdef;
   emxArray_real_T *c_y;
-  emxArray_real_T *e_y;
   emxArray_real_T *fittedvalues;
   emxArray_real_T *iniseq;
   emxArray_real_T *mdr;
@@ -453,7 +450,7 @@ void FSR_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
   /*          out:   structure which contains the following fields */
   /*  */
   /*  out.ListOut  = row vector containing the list of the units declared as */
-  /*                 outliers or NaN if the sample is homogeneous */
+  /*                 outliers or NaN if the sample is homogeneous. If */
   /*  out.outliers = out.ListOut. This field is added for homogeneity with the
    */
   /*                 other robust estimators and is equal to out.ListOut. */
@@ -843,32 +840,6 @@ void FSR_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
   }
   /*  Matlab C Coder initializations. */
   /*  Start of the forward search */
-  emxInit_real_T(&e_y, 2);
-  if (rtIsNaN(n)) {
-    k = e_y->size[0] * e_y->size[1];
-    e_y->size[0] = 1;
-    e_y->size[1] = 1;
-    emxEnsureCapacity_real_T(e_y, k);
-    e_y->data[0] = rtNaN;
-  } else if (n < 1.0) {
-    e_y->size[0] = 1;
-    e_y->size[1] = 0;
-  } else if (rtIsInf(n) && (1.0 == n)) {
-    k = e_y->size[0] * e_y->size[1];
-    e_y->size[0] = 1;
-    e_y->size[1] = 1;
-    emxEnsureCapacity_real_T(e_y, k);
-    e_y->data[0] = rtNaN;
-  } else {
-    k = e_y->size[0] * e_y->size[1];
-    e_y->size[0] = 1;
-    aoffset = (int)floor(n - 1.0);
-    e_y->size[1] = aoffset + 1;
-    emxEnsureCapacity_real_T(e_y, k);
-    for (k = 0; k <= aoffset; k++) {
-      e_y->data[k] = (double)k + 1.0;
-    }
-  }
   /*  Initialization necessary for MATLAB C-Coder */
   /*  Use as initial subset the one supplied by the user or the best according
    */
@@ -902,45 +873,25 @@ void FSR_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
   FSRmdr(b_y, b_X, b_lms, b_init, msg, fittedvalues, bsbmfullrank,
          (double *)&threshlevoutX_data, threshlevoutX_size, bsbstepdef, mdr, Un,
          bb, Bols, S2);
+  emxFree_real_T(&b_lms);
   emxFree_real_T(&bsbstepdef);
   if (mdr->size[1] < 2) {
+    /*  In this case ListOut contains the list of units which */
+    /*  produced a singular matrix or NaN if the initial subset was not full
+     * rank. */
+    /*  ListOut  = setdiff(seq,mdr(:,1))'; */
     aoffset = mdr->size[0];
-    if (aoffset <= 1) {
-      aoffset = 1;
-    }
-    if (mdr->size[0] == 0) {
-      aoffset = 0;
-    }
-    if (aoffset >= n / 2.0) {
-      k = fittedvalues->size[0];
-      fittedvalues->size[0] = e_y->size[1];
-      emxEnsureCapacity_real_T(fittedvalues, k);
-      aoffset = e_y->size[1];
-      for (k = 0; k < aoffset; k++) {
-        fittedvalues->data[k] = e_y->data[k];
-      }
-      aoffset = mdr->size[0];
-      k = b_lms->size[0];
-      b_lms->size[0] = mdr->size[0];
-      emxEnsureCapacity_real_T(b_lms, k);
-      for (k = 0; k < aoffset; k++) {
-        b_lms->data[k] = mdr->data[k];
-      }
-      emxInit_int32_T(&ia, 1);
-      e_do_vectors(fittedvalues, b_lms, b_y, ia, &aoffset);
-      emxFree_int32_T(&ia);
-    }
-    varsize = ceil(n / 1.0E+6);
     k = out->ListOut->size[0] * out->ListOut->size[1];
     out->ListOut->size[0] = 1;
-    partialTrueCount = (int)ceil(n / 1.0E+6);
-    out->ListOut->size[1] = (int)varsize;
+    out->ListOut->size[1] = mdr->size[0];
     emxEnsureCapacity_real_T(out->ListOut, k);
-    for (k = 0; k < partialTrueCount; k++) {
-      out->ListOut->data[k] = rtNaN;
+    for (k = 0; k < aoffset; k++) {
+      out->ListOut->data[k] = mdr->data[k];
     }
+    varsize = ceil(n / 1.0E+6);
     k = out->outliers->size[0] * out->outliers->size[1];
     out->outliers->size[0] = 1;
+    partialTrueCount = (int)ceil(n / 1.0E+6);
     out->outliers->size[1] = (int)varsize;
     emxEnsureCapacity_real_T(out->outliers, k);
     for (k = 0; k < partialTrueCount; k++) {
@@ -1136,8 +1087,6 @@ void FSR_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
     out->class[1] = 'S';
     out->class[2] = 'R';
   }
-  emxFree_real_T(&b_lms);
-  emxFree_real_T(&e_y);
   emxFree_real_T(&S2);
   emxFree_real_T(&Bols);
   emxFree_real_T(&bb);

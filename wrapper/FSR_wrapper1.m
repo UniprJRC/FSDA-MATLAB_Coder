@@ -60,5 +60,6 @@ assert(isa(weak, 'logical'));
     'h',h,'init',init,'intercept',intercept,'lms',lms,'msg',msg,...
     'nocheck',nocheck,'nsamp',nsamp','threshoutX',threshoutX,'weak',weak);
 
+coder.cstructname(out,'struct_FSR_T');
 
 end

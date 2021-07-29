@@ -30,7 +30,7 @@
 /* Function Definitions */
 void MMregeda_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                       double conflev, const emxArray_real_T *eff,
-                      const struct2_T *InitialEst, bool intercept, bool nocheck,
+                      const struct1_T *InitialEst, bool intercept, bool nocheck,
                       double refsteps, const emxArray_char_T *rhofunc,
                       const emxArray_real_T *rhofuncparam, double Sbdp,
                       double Sbestr, double Sminsctol, bool Smsg, double Snsamp,

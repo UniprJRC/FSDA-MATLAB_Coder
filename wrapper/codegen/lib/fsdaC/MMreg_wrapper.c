@@ -44,7 +44,7 @@
 
 /* Function Definitions */
 void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
-                   double conflev, double eff, const struct2_T *InitialEst,
+                   double conflev, double eff, const struct1_T *InitialEst,
                    bool intercept, bool msg, bool nocheck, double refsteps,
                    const emxArray_char_T *rhofunc,
                    const emxArray_real_T *rhofuncparam, double Sbdp,

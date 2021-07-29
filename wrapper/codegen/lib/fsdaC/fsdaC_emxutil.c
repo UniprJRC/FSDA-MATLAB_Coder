@@ -520,22 +520,7 @@ void emxFreeStruct_cell_wrap_6(cell_wrap_6 *pStruct)
   emxFree_real_T(&pStruct->f1);
 }
 
-void emxFreeStruct_struct0_T(struct0_T *pStruct)
-{
-  emxFree_real_T(&pStruct->ListOut);
-  emxFree_real_T(&pStruct->outliers);
-  emxFree_real_T(&pStruct->mdr);
-  emxFree_real_T(&pStruct->Un);
-  emxFree_real_T(&pStruct->nout);
-  emxFree_real_T(&pStruct->beta);
-  emxFree_real_T(&pStruct->mdag);
-  emxFree_real_T(&pStruct->ListCl);
-  emxFree_real_T(&pStruct->VIOMout);
-  emxFree_real_T(&pStruct->fittedvalues);
-  emxFree_real_T(&pStruct->residuals);
-}
-
-void emxFreeStruct_struct2_T(struct2_T *pStruct)
+void emxFreeStruct_struct1_T(struct1_T *pStruct)
 {
   emxFree_real_T(&pStruct->beta);
 }
@@ -942,26 +927,11 @@ void emxInitStruct_cell_wrap_6(cell_wrap_6 *pStruct)
 
 void emxInitStruct_struct0_T(struct0_T *pStruct)
 {
-  emxInit_real_T(&pStruct->ListOut, 2);
-  emxInit_real_T(&pStruct->outliers, 2);
-  emxInit_real_T(&pStruct->mdr, 2);
-  emxInit_real_T(&pStruct->Un, 2);
-  emxInit_real_T(&pStruct->nout, 2);
-  emxInit_real_T(&pStruct->beta, 1);
-  emxInit_real_T(&pStruct->mdag, 2);
-  emxInit_real_T(&pStruct->ListCl, 2);
-  emxInit_real_T(&pStruct->VIOMout, 2);
-  emxInit_real_T(&pStruct->fittedvalues, 2);
-  emxInit_real_T(&pStruct->residuals, 2);
-}
-
-void emxInitStruct_struct1_T(struct1_T *pStruct)
-{
   pStruct->Description.size[0] = 0;
   pStruct->Description.size[1] = 0;
 }
 
-void emxInitStruct_struct2_T(struct2_T *pStruct)
+void emxInitStruct_struct1_T(struct1_T *pStruct)
 {
   emxInit_real_T(&pStruct->beta, 1);
 }
@@ -1201,7 +1171,7 @@ void emxInitStruct_table(table *pStruct)
   c_emxInitStruct_matlab_internal(&pStruct->rowDim);
   d_emxInitStruct_matlab_internal(&pStruct->varDim);
   emxInitMatrix_cell_wrap_6(pStruct->data);
-  emxInitStruct_struct1_T(&pStruct->arrayProps);
+  emxInitStruct_struct0_T(&pStruct->arrayProps);
 }
 
 void emxInit_boolean_T(emxArray_boolean_T **pEmxArray, int numDimensions)

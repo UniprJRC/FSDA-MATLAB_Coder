@@ -92,9 +92,7 @@ extern void emxFreeStruct_cell_wrap_39(cell_wrap_39 *pStruct);
 
 extern void emxFreeStruct_cell_wrap_6(cell_wrap_6 *pStruct);
 
-extern void emxFreeStruct_struct0_T(struct0_T *pStruct);
-
-extern void emxFreeStruct_struct2_T(struct2_T *pStruct);
+extern void emxFreeStruct_struct1_T(struct1_T *pStruct);
 
 extern void emxFreeStruct_struct_FSM_T(struct_FSM_T *pStruct);
 
@@ -177,8 +175,6 @@ extern void emxInitStruct_cell_wrap_6(cell_wrap_6 *pStruct);
 extern void emxInitStruct_struct0_T(struct0_T *pStruct);
 
 extern void emxInitStruct_struct1_T(struct1_T *pStruct);
-
-extern void emxInitStruct_struct2_T(struct2_T *pStruct);
 
 extern void emxInitStruct_struct_FSM_T(struct_FSM_T *pStruct);
 

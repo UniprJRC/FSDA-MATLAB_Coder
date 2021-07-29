@@ -25,7 +25,7 @@ extern "C" {
 /* Function Declarations */
 extern void MMreg_wrapper(
     const emxArray_real_T *y, const emxArray_real_T *X, double conflev,
-    double eff, const struct2_T *InitialEst, bool intercept, bool msg,
+    double eff, const struct1_T *InitialEst, bool intercept, bool msg,
     bool nocheck, double refsteps, const emxArray_char_T *rhofunc,
     const emxArray_real_T *rhofuncparam, double Sbdp, double Sbestr,
     double Sminsctol, double Snsamp, double Srefsteps, double Srefstepsbestr,
