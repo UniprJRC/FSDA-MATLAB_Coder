@@ -23,8 +23,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-double TBrho(const emxArray_real_T *u, const double c_data[],
-             const int c_size[2]);
+void TBrho(const emxArray_real_T *u, const double c_data[],
+           emxArray_real_T *rhoTB);
 
 #ifdef __cplusplus
 }

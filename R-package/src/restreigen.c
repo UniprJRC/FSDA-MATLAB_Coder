@@ -424,7 +424,7 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
     }
     emxInit_real_T(&r, 2);
     b_i = eigenvalues->size[0];
-    d_bsxfun(dltm, x, r);
+    e_bsxfun(dltm, x, r);
     c_dltm = *r;
     iv1[0] = 1;
     iv1[1] = b_i;
@@ -442,7 +442,7 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
       x->data[i] = eigenvalues->data[i];
     }
     b_i = eigenvalues->size[0];
-    d_bsxfun(dgtcm, x, r);
+    e_bsxfun(dgtcm, x, r);
     c_dltm = *r;
     iv2[0] = 1;
     iv2[1] = b_i;
@@ -671,7 +671,7 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
     b_eigenvalues[1] = (int)dimsor;
     d_dltm.size = &b_eigenvalues[0];
     d_dltm.numDimensions = 2;
-    e_bsxfun(&d_dltm, solmp, b_dltm);
+    f_bsxfun(&d_dltm, solmp, b_dltm);
     b_i = eigenvalues->size[0];
     outsize_idx_1 = eigenvalues->size[0];
     i = r->size[0] * r->size[1];
@@ -1389,7 +1389,7 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
       emxInit_real_T(&nininmat, 2);
       /*  Matrix version of s(:,mp)=sum(d.*(d<edmp),2) for mp=1, ..., dimsor */
       b_i = eigenvalues->size[1];
-      d_bsxfun(dltm, d, nininmat);
+      e_bsxfun(dltm, d, nininmat);
       b_ss = *nininmat;
       c_eigenvalues[0] = b_i;
       c_eigenvalues[1] = 1;
@@ -1405,7 +1405,7 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
       emxInit_real_T(&tt, 2);
       /*  Matrix version of t(:,mp)=sum(d.*(d>edmpc),2) for mp=1, ..., dimsor */
       b_i = eigenvalues->size[1];
-      d_bsxfun(dgtcm, d, nininmat);
+      e_bsxfun(dgtcm, d, nininmat);
       b_ss = *nininmat;
       d_eigenvalues[0] = b_i;
       d_eigenvalues[1] = 1;
@@ -1473,9 +1473,9 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
         for (i = 0; i < ibtile; i++) {
           c_ss->data[i] = ss->data[i] + tt->data[i] / restr;
         }
-        h_bsxfun(c_ss, ninin, nininmat);
+        d_bsxfun(c_ss, ninin, nininmat);
         combineVectorElements(nininmat, solmp);
-        h_bsxfun(rr, ninin, nininmat);
+        d_bsxfun(rr, ninin, nininmat);
         combineVectorElements(nininmat, ed);
         i = solmp->size[0] * solmp->size[1];
         solmp->size[0] = 1;
@@ -1637,7 +1637,7 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
       e_eigenvalues[1] = (int)dimsor;
       b_dltm.size = &e_eigenvalues[0];
       b_dltm.numDimensions = 2;
-      e_bsxfun(&b_dltm, solmp, nininmat);
+      f_bsxfun(&b_dltm, solmp, nininmat);
       b_i = eigenvalues->size[1];
       nrows = eigenvalues->size[1];
       i = ss->size[0] * ss->size[1];
@@ -2357,7 +2357,7 @@ void restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
       c_d = ntilecols;
       b_d.size = &c_d;
       b_d.numDimensions = 1;
-      d_bsxfun(dltm, &b_d, r4);
+      e_bsxfun(dltm, &b_d, r4);
       b_d = *r4;
       b_eigenvalues[0] = eigenvalues_idx_0;
       b_eigenvalues[1] = eigenvalues_idx_1;
@@ -2373,7 +2373,7 @@ void restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
       d_d = ntilecols;
       b_d.size = &d_d;
       b_d.numDimensions = 1;
-      d_bsxfun(dgtcm, &b_d, r4);
+      e_bsxfun(dgtcm, &b_d, r4);
       b_d = *r4;
       c_eigenvalues[0] = eigenvalues_idx_0;
       c_eigenvalues[1] = eigenvalues_idx_1;
@@ -2612,7 +2612,7 @@ void restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
       b_kv[1] = (int)dimsor;
       c_dltm.size = &b_kv[0];
       c_dltm.numDimensions = 2;
-      e_bsxfun(&c_dltm, solmp, b_dltm);
+      f_bsxfun(&c_dltm, solmp, b_dltm);
       eigenvalues_idx_0 = eigenvalues->size[1];
       eigenvalues_idx_1 = eigenvalues->size[0];
       i = r4->size[0] * r4->size[1];

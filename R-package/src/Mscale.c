@@ -14,9 +14,9 @@
 #include "HArho.h"
 #include "HYPrho.h"
 #include "OPTrho.h"
-#include "TBrho.h"
 #include "blockedSummation.h"
 #include "fsdaC_emxutil.h"
+#include "fsdaC_rtwutil.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
 #include <math.h>
@@ -28,13 +28,16 @@ double Mscale(const emxArray_real_T *u, const double psifunc_c1_data[],
               const char psifunc_class_data[], const int psifunc_class_size[2],
               double initialsc, double tol)
 {
-  static const char cv1[3] = {'O', 'P', 'T'};
+  static const char b_cv1[3] = {'O', 'P', 'T'};
   static const char cv3[3] = {'H', 'Y', 'P'};
   static const char b_cv[2] = {'T', 'B'};
   static const char cv2[2] = {'H', 'A'};
   static const char cv4[2] = {'P', 'D'};
+  emxArray_boolean_T *w;
   emxArray_real_T *a;
+  emxArray_real_T *r;
   emxArray_real_T *y;
+  double d;
   double err;
   double sc;
   double scnew=0;
@@ -227,6 +230,8 @@ double Mscale(const emxArray_real_T *u, const double psifunc_c1_data[],
   sc = initialsc;
   loop = 0;
   err = 1.0;
+  emxInit_boolean_T(&w, 1);
+  emxInit_real_T(&r, 1);
   emxInit_real_T(&y, 1);
   emxInit_real_T(&a, 1);
   while ((loop < 200) && (err > tol)) {
@@ -255,8 +260,160 @@ double Mscale(const emxArray_real_T *u, const double psifunc_c1_data[],
       for (k = 0; k < nx; k++) {
         a->data[k] = u->data[k] / sc;
       }
-      scnew =
-          sc * sqrt(TBrho(a, psifunc_c1_data, psifunc_c1_size) / psifunc_kc1);
+      /* TBrho computes rho function for Tukey's biweight */
+      /*  */
+      /* <a href="matlab: docsearchFS('TBrho')">Link to the help function</a> */
+      /*  */
+      /*   Required input arguments: */
+      /*  */
+      /*     u:         scaled residuals or Mahalanobis distances. Vector. n x 1
+       */
+      /*                vector containing residuals or Mahalanobis distances */
+      /*                for the n units of the sample */
+      /*     c :        tuning parameter. Scalar. Scalar greater than 0 which */
+      /*                controls the robustness/efficiency of the estimator */
+      /*                (beta in regression or mu in the location case ...)  */
+      /*  */
+      /*   Optional input arguments: */
+      /*  */
+      /*  */
+      /*   Output: */
+      /*  */
+      /*  */
+      /*    rhoTB :      n x 1 vector which contains the Tukey's biweight rho */
+      /*                 associated to the residuals or Mahalanobis distances
+       * for */
+      /*                 the n units of the sample. */
+      /*  */
+      /*  More About: */
+      /*  */
+      /*  */
+      /*  function TBrho transforms vector u as follows  */
+      /*  \[ */
+      /*  TBrho(u)= \left\{ */
+      /*     \begin{array}{cc} */
+      /*   (c^2/6) \left\{ 1-[1-(u/c)^2]^3 \right\}  &  |u/c| \leq 1  \\ */
+      /*   (c^2/6)                      &  |u/c| >1   \\ */
+      /*  \end{array} */
+      /*     \right. */
+      /*   \] */
+      /*    */
+      /*  See equation (2.37) p. 29 of Maronna et al. (2006). */
+      /*  Remark: equation (2.37) is written in standardized terms in such a way
+       */
+      /*  that $\rho(c)=1$, so it is the previous expression divided by
+       * $(c^2/6)$ */
+      /*  */
+      /*  See also HYPrho, HArho, OPTrho */
+      /*  */
+      /*  References: */
+      /*  */
+      /*  Maronna, R.A., Martin D. and Yohai V.J. (2006), "Robust Statistics,
+       * Theory */
+      /*  and Methods", Wiley, New York. */
+      /*  Riani, M., Cerioli, A. and Torti, F. (2014), On consistency factors
+       * and */
+      /*  efficiency of robust S-estimators, "TEST", Vol. 23, pp. 356-387. */
+      /*  http://dx.doi.org/10.1007/s11749-014-0357-7 */
+      /*  */
+      /*  Copyright 2008-2021. */
+      /*  Written by FSDA team */
+      /*  */
+      /*  */
+      /* <a href="matlab: docsearchFS('TBrho')">Link to the help page for this
+       * function</a> */
+      /*  */
+      /* $LastChangedDate::                      $: Date of the last commit */
+      /*  Examples: */
+      /* { */
+      /*     % Plot of rho function. */
+      /*     close all */
+      /*     x=-6:0.01:6; */
+      /*     rhoTB=TBrho(x,2); */
+      /*     plot(x,rhoTB,'LineWidth',2) */
+      /*     xlabel('$u$','Interpreter','Latex') */
+      /*     ylabel('$\rho (u,2)$','Interpreter','Latex') */
+      /*     text(x(1)-0.8,rhoTB(1),'c^2/6') */
+      /*     text(x(end)+0.2,rhoTB(end),'c^2/6') */
+      /*     title('$\rho (u,c)$','Interpreter','Latex') */
+      /*     hold('on') */
+      /*     c=2; */
+      /*     stem(c,c^2/6,'LineStyle',':','LineWidth',1) */
+      /*     stem(-c,c^2/6,'LineStyle',':','LineWidth',1) */
+      /*  */
+      /* } */
+      /* { */
+      /*     %% Compare two rho functions for 2 different values of c.   */
+      /*     % In the first we fix the bdp (value of efficiency is automatically
+       * given), */
+      /*     % while in the second we find the efficiency (the value of bdp is
+       */
+      /*     % automatically given) */
+      /*     close all */
+      /*     x=-6:0.01:6; */
+      /*     lwd=2; */
+      /*     hold('on') */
+      /*     c=TBbdp(0.5,1); */
+      /*     rhoTB=TBrho(x,c); */
+      /*     rhoTB=rhoTB/max(rhoTB); */
+      /*     plot(x,rhoTB,'LineStyle','-','LineWidth',lwd) */
+      /*     c=TBeff(0.95,1); */
+      /*     rhoTB=TBrho(x,c); */
+      /*     rhoTB=rhoTB/max(rhoTB); */
+      /*     plot(x,rhoTB,'LineStyle','-.','LineWidth',lwd) */
+      /*     xlabel('$x$','Interpreter','Latex','FontSize',16) */
+      /*     ylabel('TB. Normalized
+       * $\rho_c(x)$','Interpreter','Latex','FontSize',20) */
+      /*     legend({'$c_{(bdp=0.5 \mapsto eff=0.29)}$', '$c_{(eff=0.95 \mapsto
+       * bdp=0.12)}$'},'Interpreter','Latex','Location','SouthEast','FontSize',16)
+       */
+      /* } */
+      /*  Beginning of code */
+      /*  MATLAB Ccoder instruction to enforce that c is a scalar */
+      nx = a->size[0];
+      k = y->size[0];
+      y->size[0] = a->size[0];
+      emxEnsureCapacity_real_T(y, k);
+      for (k = 0; k < nx; k++) {
+        y->data[k] = fabs(a->data[k]);
+      }
+      err = psifunc_c1_data[0];
+      k = w->size[0];
+      w->size[0] = y->size[0];
+      emxEnsureCapacity_boolean_T(w, k);
+      nx = y->size[0];
+      for (k = 0; k < nx; k++) {
+        w->data[k] = (y->data[k] <= err);
+      }
+      err = psifunc_c1_data[0] * psifunc_c1_data[0];
+      k = r->size[0];
+      r->size[0] = a->size[0];
+      emxEnsureCapacity_real_T(r, k);
+      nx = a->size[0];
+      for (k = 0; k < nx; k++) {
+        r->data[k] = a->data[k] * a->data[k];
+      }
+      scnew = err / 6.0;
+      k = y->size[0];
+      y->size[0] = a->size[0];
+      emxEnsureCapacity_real_T(y, k);
+      nx = a->size[0];
+      for (k = 0; k < nx; k++) {
+        y->data[k] = rt_powd_snf(a->data[k], 4.0);
+      }
+      d = 3.0 * rt_powd_snf(psifunc_c1_data[0], 4.0);
+      k = y->size[0];
+      y->size[0] = r->size[0];
+      emxEnsureCapacity_real_T(y, k);
+      nx = r->size[0];
+      for (k = 0; k < nx; k++) {
+        y->data[k] = r->data[k] / 2.0 *
+                         ((1.0 - r->data[k] / err) + y->data[k] / d) *
+                         (double)w->data[k] +
+                     (1.0 - (double)w->data[k]) * scnew;
+      }
+      scnew = sc * sqrt(blockedSummation(y, y->size[0]) / (double)y->size[0] /
+                        psifunc_kc1);
     } else {
       b_bool = false;
       if (psifunc_class_size[1] == 3) {
@@ -264,7 +421,7 @@ double Mscale(const emxArray_real_T *u, const double psifunc_c1_data[],
         do {
           exitg1 = 0;
           if (nx < 3) {
-            if (psifunc_class_data[nx] != cv1[nx]) {
+            if (psifunc_class_data[nx] != b_cv1[nx]) {
               exitg1 = 1;
             } else {
               nx++;
@@ -276,15 +433,15 @@ double Mscale(const emxArray_real_T *u, const double psifunc_c1_data[],
         } while (exitg1 == 0);
       }
       if (b_bool) {
-        k = a->size[0];
-        a->size[0] = u->size[0];
-        emxEnsureCapacity_real_T(a, k);
+        k = y->size[0];
+        y->size[0] = u->size[0];
+        emxEnsureCapacity_real_T(y, k);
         nx = u->size[0];
         for (k = 0; k < nx; k++) {
-          a->data[k] = u->data[k] / sc;
+          y->data[k] = u->data[k] / sc;
         }
-        b_OPTrho(a, psifunc_c1_data, psifunc_c1_size, y);
-        scnew = sc * sqrt(blockedSummation(y, y->size[0]) / (double)y->size[0] /
+        b_OPTrho(y, psifunc_c1_data, a);
+        scnew = sc * sqrt(blockedSummation(a, a->size[0]) / (double)a->size[0] /
                           psifunc_kc1);
       } else {
         b_bool = false;
@@ -305,16 +462,16 @@ double Mscale(const emxArray_real_T *u, const double psifunc_c1_data[],
           } while (exitg1 == 0);
         }
         if (b_bool) {
-          k = a->size[0];
-          a->size[0] = u->size[0];
-          emxEnsureCapacity_real_T(a, k);
+          k = y->size[0];
+          y->size[0] = u->size[0];
+          emxEnsureCapacity_real_T(y, k);
           nx = u->size[0];
           for (k = 0; k < nx; k++) {
-            a->data[k] = u->data[k] / sc;
+            y->data[k] = u->data[k] / sc;
           }
-          b_HArho(a, psifunc_c1_data, psifunc_c1_size, y);
-          scnew = sc * sqrt(blockedSummation(y, y->size[0]) /
-                            (double)y->size[0] / psifunc_kc1);
+          b_HArho(y, psifunc_c1_data, psifunc_c1_size, a);
+          scnew = sc * sqrt(blockedSummation(a, a->size[0]) /
+                            (double)a->size[0] / psifunc_kc1);
         } else {
           b_bool = false;
           if (psifunc_class_size[1] == 3) {
@@ -334,16 +491,16 @@ double Mscale(const emxArray_real_T *u, const double psifunc_c1_data[],
             } while (exitg1 == 0);
           }
           if (b_bool) {
-            k = a->size[0];
-            a->size[0] = u->size[0];
-            emxEnsureCapacity_real_T(a, k);
+            k = y->size[0];
+            y->size[0] = u->size[0];
+            emxEnsureCapacity_real_T(y, k);
             nx = u->size[0];
             for (k = 0; k < nx; k++) {
-              a->data[k] = u->data[k] / sc;
+              y->data[k] = u->data[k] / sc;
             }
-            HYPrho(a, psifunc_c1_data, psifunc_c1_size, y);
-            scnew = sc * sqrt(blockedSummation(y, y->size[0]) /
-                              (double)y->size[0] / psifunc_kc1);
+            HYPrho(y, psifunc_c1_data, psifunc_c1_size, a);
+            scnew = sc * sqrt(blockedSummation(a, a->size[0]) /
+                              (double)a->size[0] / psifunc_kc1);
           } else {
             b_bool = false;
             if (psifunc_class_size[1] == 2) {
@@ -507,6 +664,8 @@ double Mscale(const emxArray_real_T *u, const double psifunc_c1_data[],
   }
   emxFree_real_T(&a);
   emxFree_real_T(&y);
+  emxFree_real_T(&r);
+  emxFree_boolean_T(&w);
   /*  disp(loop) */
   /*  sc=sc; */
   return sc;

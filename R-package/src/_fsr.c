@@ -4,9 +4,10 @@
 
 #include "_utils.h"
 #include "FSR_wrapper.h"
+#include "FSR_wrapper1.h"
 
 void r_fsr(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int *intercept, 
-             double *lms, double *refsteps, double *reftol, double *bestr, double *refstepsbestr, double *reftolbestr, double *bsb, int *nbsb,
+             double *lms, double *bsb, int *nbsb,
              int *bsbmfullrank, double *bonflev,
              double *h, double * init, double *nsamp,
              double *threshoutX, int *weak,
@@ -40,7 +41,6 @@ void r_fsr(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int *in
     // Initialize the input arguments. ==============================
     
     lmsstr.bsb = argInit_vector(bsb, nbsb);
-
     y = argInit_vector(yy, nn);                 //  Initialize function input argument 'y'    
     X = argInit_matrix(xx, nn, pp);             //  Initialize function input argument 'X'    
     
@@ -69,7 +69,7 @@ void r_fsr(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int *in
     if(*lms == 0)   
         FSR_wrapper1(y, X,
                      b_bsbmfullrank, bonflev_data, bonflev_size, *h, *init,
-                     b_intercept, &lms, b_msg, b_nocheck,
+                     b_intercept, &lmsstr, b_msg, b_nocheck,
                      *nsamp, threshoutX_data, threshoutX_size, b_weak, &out);
     else
         FSR_wrapper(y, X,
@@ -107,59 +107,93 @@ void r_fsr(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int *in
         Rprintf("ListCl dimensions: %d, %d \n", out.ListCl->size[0], out.ListCl->size[1]); 
         Rprintf("VIOMout dimensions: %d, %d \n", out.VIOMout->size[0], out.VIOMout->size[1]); 
     }
+    
+    
 
     // Copy the output vectors beta, residuals, fittedvalues and outliers
-    for(i=0; i < out.beta->size[0]; i++) {
-        beta[i] = out.beta->data[i];
-    }
-    for(i=0; i < out.residuals->size[0]; i++) {
-        residuals[i] = out.residuals->data[i];
-        fittedvalues[i] = out.fittedvalues->data[i];
-    }
-
-    *noutliers = out.outliers->size[1];
-    for(i=0; i < out.outliers->size[1]; i++) {
-        outliers[i] = out.outliers->data[i];
-    }
-
-    // Copy the output matrices Un, mdr and nout
-    if(out.Un->size[0] != *retnUn || out.Un->size[1] != *retpUn)
-        Rprintf("\nWARNING: the size of output matrix 'Un' changed: was %d, %d, now is %d, %d \n", *retnUn, *retpUn, out.Un->size[0], out.Un->size[1]); 
-    if(out.mdr->size[0] != *retnUn || out.mdr->size[1] != *retpmdr)
-        Rprintf("\nWARNING: the size of output matrix 'mdr' changed: was %d, %d, now is %d, %d \n", *retnUn, *retpmdr, out.mdr->size[0], out.mdr->size[1]); 
-
-    loop_ub = out.Un->size[0] * out.Un->size[1];
-    for(i=0; i < loop_ub; i++) {
-        Un[i] = out.Un->data[i];
-    }
-
-    loop_ub = out.mdr->size[0] * out.mdr->size[1];
-    for(i=0; i < loop_ub; i++) {
-        mdr[i] = out.mdr->data[i];
-    }
- 
-    loop_ub = out.nout->size[0] * out.nout->size[1];
-    for(i=0; i < loop_ub; i++) {
-        nout[i] = out.nout->data[i];
-    }
-
-    // Copy the output vectors ListCl and VIOMout - only if weak=TRUE
-    if(b_weak)
+    if(out.mdr->size[0] == 1 && out.mdr->size[1] == 1 && isnan(out.mdr->data[0]))
     {
-        *nListCl = out.ListCl->size[1];
-        *nVIOMout = out.VIOMout->size[1];
-        for(i=0; i < out.ListCl->size[1]; i++) {
-            ListCl[i] = out.ListCl->data[i];
-        }
-        for(i=0; i < out.VIOMout->size[1]; i++) {
-            VIOMout[i] = out.VIOMout->data[i];
-        }
-    }    
- 
-    // Return n and p calculated by chkinputR()
-    *nn1 = out.beta->size[0];
-    *pp1 = out.residuals->size[0];
+        // Singularity condition, we have two cases: mdr=ListOut=NaN and ListOut is a vector.
+        if(out.ListOut->size[0] == 1 && out.ListOut->size[1] == 1 && isnan(out.ListOut->data[0]))
+        {
+            *retnUn = *retpUn = *retpmdr = 0;
+        } else
+        {
+            // We are copuing the list of units that gave singular matrix to mdr to be compatible with FSMRmdr.
+            *retnUn = out.ListOut->size[1];
+            *retpUn = 0;
+            *retpmdr = 1;
 
+            loop_ub = out.ListOut->size[0] * out.ListOut->size[1];
+            for(i=0; i < loop_ub; i++) {
+                mdr[i] = out.ListOut->data[i];
+            }
+        }
+    } else
+    {
+        for(i=0; i < out.beta->size[0]; i++) {
+            beta[i] = out.beta->data[i];
+        }
+        for(i=0; i < out.residuals->size[0]; i++) {
+            residuals[i] = out.residuals->data[i];
+            fittedvalues[i] = out.fittedvalues->data[i];
+        }
+
+        if(out.outliers->size[0] == 1 && out.outliers->size[1] == 1 && isnan(out.outliers->data[0]))
+        {
+            *noutliers = 0;
+        } else
+        {
+            *noutliers = out.outliers->size[1];
+            for(i=0; i < out.outliers->size[1]; i++) {
+                outliers[i] = out.outliers->data[i];
+            }
+        }
+        
+        // Copy the output matrices Un, mdr and nout
+        if(out.Un->size[0] != *retnUn && out.Un->size[0] == *retnUn - 1)
+        {
+            *retnUn = out.Un->size[0];
+        }
+        
+        if(out.Un->size[0] != *retnUn || out.Un->size[1] != *retpUn)
+            Rprintf("\nWARNING: the size of output matrix 'Un' changed: was %d, %d, now is %d, %d \n", *retnUn, *retpUn, out.Un->size[0], out.Un->size[1]); 
+        if(out.mdr->size[0] != *retnUn || out.mdr->size[1] != *retpmdr)
+            Rprintf("\nWARNING: the size of output matrix 'mdr' changed: was %d, %d, now is %d, %d \n", *retnUn, *retpmdr, out.mdr->size[0], out.mdr->size[1]); 
+    
+        loop_ub = out.Un->size[0] * out.Un->size[1];
+        for(i=0; i < loop_ub; i++) {
+            Un[i] = out.Un->data[i];
+        }
+    
+        loop_ub = out.mdr->size[0] * out.mdr->size[1];
+        for(i=0; i < loop_ub; i++) {
+            mdr[i] = out.mdr->data[i];
+        }
+     
+        loop_ub = out.nout->size[0] * out.nout->size[1];
+        for(i=0; i < loop_ub; i++) {
+            nout[i] = out.nout->data[i];
+        }
+    
+        // Copy the output vectors ListCl and VIOMout - only if weak=TRUE
+        if(b_weak)
+        {
+            *nListCl = out.ListCl->size[1];
+            *nVIOMout = out.VIOMout->size[1];
+            for(i=0; i < out.ListCl->size[1]; i++) {
+                ListCl[i] = out.ListCl->data[i];
+            }
+            for(i=0; i < out.VIOMout->size[1]; i++) {
+                VIOMout[i] = out.VIOMout->data[i];
+            }
+        }    
+
+        // Return n and p calculated by chkinputR()
+        *nn1 = out.beta->size[0];
+        *pp1 = out.residuals->size[0];
+    }
+     
     // Destroy the allocated objetcs
     emxDestroy_struct_FSR_T(out);
     emxDestroyArray_real_T(X);    

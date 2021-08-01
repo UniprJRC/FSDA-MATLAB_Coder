@@ -318,25 +318,6 @@ typedef struct {
 } struct_FSRlms_T;
 #endif /* typedef_struct_FSRlms_T */
 
-#ifndef typedef_struct0_T
-#define typedef_struct0_T
-typedef struct {
-  emxArray_real_T *ListOut;
-  emxArray_real_T *outliers;
-  emxArray_real_T *mdr;
-  emxArray_real_T *Un;
-  emxArray_real_T *nout;
-  emxArray_real_T *beta;
-  double scale;
-  emxArray_real_T *mdag;
-  emxArray_real_T *ListCl;
-  emxArray_real_T *VIOMout;
-  emxArray_real_T *fittedvalues;
-  emxArray_real_T *residuals;
-  char class[3];
-} struct0_T;
-#endif /* typedef_struct0_T */
-
 #ifndef typedef_cell_wrap_39
 #define typedef_cell_wrap_39
 typedef struct {
@@ -474,13 +455,13 @@ typedef struct {
 } nested_function;
 #endif /* typedef_nested_function */
 
-#ifndef typedef_struct2_T
-#define typedef_struct2_T
+#ifndef typedef_struct1_T
+#define typedef_struct1_T
 typedef struct {
   emxArray_real_T *beta;
   double scale;
-} struct2_T;
-#endif /* typedef_struct2_T */
+} struct1_T;
+#endif /* typedef_struct1_T */
 
 #ifndef typedef_struct_MMreg_T
 #define typedef_struct_MMreg_T
@@ -503,6 +484,26 @@ typedef struct {
   emxArray_real_T *y;
 } struct_MMreg_T;
 #endif /* typedef_struct_MMreg_T */
+
+#ifndef typedef_struct_MMregeda_T
+#define typedef_struct_MMregeda_T
+typedef struct {
+  emxArray_real_T *Beta;
+  emxArray_real_T *RES;
+  emxArray_real_T *Weights;
+  emxArray_boolean_T *Outliers;
+  emxArray_real_T *Sbeta;
+  double auxscale;
+  double Ssingsub;
+  double conflev;
+  char class[8];
+  emxArray_char_T *rhofunc;
+  emxArray_real_T *rhofuncparam;
+  emxArray_real_T *eff;
+  emxArray_real_T *X;
+  emxArray_real_T *y;
+} struct_MMregeda_T;
+#endif /* typedef_struct_MMregeda_T */
 
 #ifndef typedef_e_struct_T
 #define typedef_e_struct_T
@@ -537,6 +538,26 @@ typedef struct {
   char class[4];
 } struct_Sreg_T;
 #endif /* typedef_struct_Sreg_T */
+
+#ifndef typedef_struct_Sregeda_T
+#define typedef_struct_Sregeda_T
+typedef struct {
+  double conflev;
+  emxArray_real_T *Beta;
+  emxArray_real_T *Scale;
+  emxArray_real_T *BS;
+  emxArray_real_T *Weights;
+  emxArray_real_T *RES;
+  emxArray_real_T *Singsub;
+  emxArray_boolean_T *Outliers;
+  emxArray_real_T *bdp;
+  char class[7];
+  emxArray_char_T *rhofunc;
+  emxArray_real_T *rhofuncparam;
+  emxArray_real_T *X;
+  emxArray_real_T *y;
+} struct_Sregeda_T;
+#endif /* typedef_struct_Sregeda_T */
 
 #ifndef typedef_struct_addt_T
 #define typedef_struct_addt_T
@@ -602,12 +623,12 @@ typedef struct {
 } cell_wrap_53;
 #endif /* typedef_cell_wrap_53 */
 
-#ifndef typedef_struct1_T
-#define typedef_struct1_T
+#ifndef typedef_struct0_T
+#define typedef_struct0_T
 typedef struct {
   emxArray_char_T_1x0 Description;
-} struct1_T;
-#endif /* typedef_struct1_T */
+} struct0_T;
+#endif /* typedef_struct0_T */
 
 #ifndef typedef_g_struct_T
 #define typedef_g_struct_T
@@ -700,7 +721,7 @@ typedef struct {
   e_matlab_internal_coder_tabular rowDim;
   f_matlab_internal_coder_tabular varDim;
   cell_wrap_6 data[4];
-  struct1_T arrayProps;
+  struct0_T arrayProps;
 } table;
 #endif /* typedef_table */
 

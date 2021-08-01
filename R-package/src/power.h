@@ -23,8 +23,6 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void b_power(const emxArray_real_T *a, emxArray_real_T *y);
-
 void power(const emxArray_real_T *a, emxArray_real_T *y);
 
 #ifdef __cplusplus

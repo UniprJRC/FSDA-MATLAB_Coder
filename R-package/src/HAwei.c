@@ -13,8 +13,6 @@
 #include "HAwei.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
-#include "mrdivide_helper.h"
-#include "power.h"
 #include "rt_nonfinite.h"
 #include <math.h>
 #include <string.h>
@@ -23,13 +21,16 @@
 void HAwei(const emxArray_real_T *u, const double ctuning_data[],
            const int ctuning_size[2], emxArray_real_T *w)
 {
+  emxArray_int32_T *r;
+  emxArray_int32_T *r1;
   emxArray_real_T *absu;
-  emxArray_real_T *r;
-  emxArray_real_T *r1;
+  emxArray_real_T *b_b;
+  emxArray_real_T *r2;
   emxArray_real_T *y;
-  double a_data;
-  double b_data=0;
-  double c_data=0;
+  double a;
+  double b;
+  double c;
+  int i;
   int k;
   int nx;
   /* HAwei computes weight function psi(u)/u using Hampel proposal */
@@ -133,90 +134,139 @@ void HAwei(const emxArray_real_T *u, const double ctuning_data[],
   /* } */
   /*  Beginning of code */
   if (ctuning_size[1] > 1) {
-    a_data = ctuning_data[0] * ctuning_data[1];
-    b_data = ctuning_data[0] * ctuning_data[2];
-    c_data = ctuning_data[0] * ctuning_data[3];
+    a = ctuning_data[0] * ctuning_data[1];
+    b = ctuning_data[0] * ctuning_data[2];
+    c = ctuning_data[0] * ctuning_data[3];
   } else {
-    nx = ctuning_size[1];
-    for (k = 0; k < nx; k++) {
-      a_data = 2.0 * ctuning_data[0];
-    }
-    nx = ctuning_size[1];
-    for (k = 0; k < nx; k++) {
-      b_data = 4.0 * ctuning_data[0];
-    }
-    nx = ctuning_size[1];
-    for (k = 0; k < nx; k++) {
-      c_data = 8.0 * ctuning_data[0];
-    }
+    a = 2.0 * ctuning_data[0];
+    b = 4.0 * ctuning_data[0];
+    c = 8.0 * ctuning_data[0];
   }
-  k = w->size[0];
+  i = w->size[0];
   w->size[0] = u->size[0];
-  emxEnsureCapacity_real_T(w, k);
+  emxEnsureCapacity_real_T(w, i);
   nx = u->size[0];
-  for (k = 0; k < nx; k++) {
-    w->data[k] = 1.0;
+  for (i = 0; i < nx; i++) {
+    w->data[i] = 1.0;
   }
   emxInit_real_T(&absu, 1);
   nx = u->size[0];
-  k = absu->size[0];
+  i = absu->size[0];
   absu->size[0] = u->size[0];
-  emxEnsureCapacity_real_T(absu, k);
+  emxEnsureCapacity_real_T(absu, i);
   for (k = 0; k < nx; k++) {
     absu->data[k] = fabs(u->data[k]);
   }
   /*  a/|u|,		 a <= |u| < b, */
+  k = absu->size[0] - 1;
   nx = 0;
-  if (absu->data[0] >= a_data) {
-    nx = 1;
+  for (i = 0; i <= k; i++) {
+    if (absu->data[i] >= a) {
+      nx++;
+    }
+  }
+  emxInit_int32_T(&r, 1);
+  i = r->size[0];
+  r->size[0] = nx;
+  emxEnsureCapacity_int32_T(r, i);
+  nx = 0;
+  for (i = 0; i <= k; i++) {
+    if (absu->data[i] >= a) {
+      r->data[nx] = i + 1;
+      nx++;
+    }
   }
   emxInit_real_T(&y, 1);
-  k = y->size[0];
-  y->size[0] = nx;
-  emxEnsureCapacity_real_T(y, k);
-  if (0 <= nx - 1) {
-    y->data[0] = fabs(u->data[0]);
-  }
-  emxInit_real_T(&r, 1);
-  b_power(y, r);
-  a_data *= r->data[0];
-  emxFree_real_T(&r);
+  nx = r->size[0];
+  i = y->size[0];
+  y->size[0] = r->size[0];
+  emxEnsureCapacity_real_T(y, i);
   for (k = 0; k < nx; k++) {
-    w->data[0] = a_data;
+    y->data[k] = fabs(u->data[r->data[k] - 1]);
   }
+  emxFree_int32_T(&r);
+  emxInit_real_T(&b_b, 1);
+  i = b_b->size[0];
+  b_b->size[0] = y->size[0];
+  emxEnsureCapacity_real_T(b_b, i);
+  nx = y->size[0];
+  for (k = 0; k < nx; k++) {
+    b_b->data[k] = 1.0 / y->data[k];
+  }
+  nx = b_b->size[0];
+  for (i = 0; i < nx; i++) {
+    b_b->data[i] *= a;
+  }
+  k = absu->size[0];
+  nx = 0;
+  for (i = 0; i < k; i++) {
+    if (absu->data[i] >= a) {
+      w->data[i] = b_b->data[nx];
+      nx++;
+    }
+  }
+  emxFree_real_T(&b_b);
   /* a/|u| * (c-|u|)/(c-b),	 b <= |u| <  c, */
+  k = absu->size[0] - 1;
   nx = 0;
-  if (absu->data[0] >= b_data) {
-    nx = 1;
+  for (i = 0; i <= k; i++) {
+    if (absu->data[i] >= b) {
+      nx++;
+    }
   }
-  k = y->size[0];
-  y->size[0] = nx;
-  emxEnsureCapacity_real_T(y, k);
-  if (0 <= nx - 1) {
-    y->data[0] = fabs(u->data[0]);
-  }
+  emxInit_int32_T(&r1, 1);
+  i = r1->size[0];
+  r1->size[0] = nx;
+  emxEnsureCapacity_int32_T(r1, i);
   nx = 0;
-  if (absu->data[0] >= b_data) {
-    nx = 1;
+  for (i = 0; i <= k; i++) {
+    if (absu->data[i] >= b) {
+      r1->data[nx] = i + 1;
+      nx++;
+    }
   }
-  a_data = c_data - y->data[0];
-  k = y->size[0];
-  y->size[0] = nx;
-  emxEnsureCapacity_real_T(y, k);
+  nx = r1->size[0];
+  i = y->size[0];
+  y->size[0] = r1->size[0];
+  emxEnsureCapacity_real_T(y, i);
   for (k = 0; k < nx; k++) {
-    y->data[0] = w->data[0] * a_data;
+    y->data[k] = fabs(u->data[r1->data[k] - 1]);
   }
-  a_data = c_data - b_data;
-  if (absu->data[0] >= b_data) {
-    emxInit_real_T(&r1, 1);
-    b_mrdiv(y, (double *)&a_data, r1);
-    w->data[0] = r1->data[0];
-    emxFree_real_T(&r1);
+  emxFree_int32_T(&r1);
+  k = absu->size[0] - 1;
+  nx = 0;
+  for (i = 0; i <= k; i++) {
+    if (absu->data[i] >= b) {
+      nx++;
+    }
+  }
+  emxInit_real_T(&r2, 1);
+  i = r2->size[0];
+  r2->size[0] = nx;
+  emxEnsureCapacity_real_T(r2, i);
+  nx = 0;
+  for (i = 0; i <= k; i++) {
+    if (absu->data[i] >= b) {
+      r2->data[nx] = w->data[i] * (c - y->data[nx]) / (c - b);
+      nx++;
+    }
   }
   emxFree_real_T(&y);
+  k = absu->size[0];
+  nx = 0;
+  for (i = 0; i < k; i++) {
+    if (absu->data[i] >= b) {
+      w->data[i] = r2->data[nx];
+      nx++;
+    }
+  }
+  emxFree_real_T(&r2);
   /*  0,			 |u| >= c */
-  if (absu->data[0] > c_data) {
-    w->data[0] = 0.0;
+  k = absu->size[0];
+  for (i = 0; i < k; i++) {
+    if (absu->data[i] > c) {
+      w->data[i] = 0.0;
+    }
   }
   emxFree_real_T(&absu);
 }

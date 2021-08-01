@@ -25,9 +25,9 @@ extern "C" {
 /* Function Declarations */
 void MMregcore(const emxArray_real_T *y, const emxArray_real_T *X,
                const emxArray_real_T *b0, double auxscale, double varargin_2,
-               const emxArray_char_T *varargin_6,
-               const emxArray_real_T *varargin_8, double varargin_10,
-               double varargin_12, double varargin_14, e_struct_T *out);
+               double varargin_6, double varargin_8, double varargin_10,
+               const emxArray_char_T *varargin_16,
+               const emxArray_real_T *varargin_18, e_struct_T *out);
 
 #ifdef __cplusplus
 }

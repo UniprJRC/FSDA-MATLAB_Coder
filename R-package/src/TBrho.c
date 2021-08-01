@@ -19,22 +19,17 @@
 #include <string.h>
 
 /* Function Definitions */
-double TBrho(const emxArray_real_T *u, const double c_data[],
-             const int c_size[2])
+void TBrho(const emxArray_real_T *u, const double c_data[],
+           emxArray_real_T *rhoTB)
 {
-  emxArray_real_T *A;
-  emxArray_real_T *A_tmp;
-  emxArray_real_T *r;
-  double B_tmp_data[5];
-  double aBuffer_data[5];
-  double b_aBuffer_data[5];
+  emxArray_boolean_T *w;
+  emxArray_real_T *y;
+  double b;
   double c;
-  double rhoTB;
-  int i;
+  double d;
   int k;
   int nx;
-  bool w;
-  emxInit_real_T(&r, 1);
+  emxInit_real_T(&y, 1);
   /* TBrho computes rho function for Tukey's biweight */
   /*  */
   /* <a href="matlab: docsearchFS('TBrho')">Link to the help function</a> */
@@ -138,77 +133,49 @@ double TBrho(const emxArray_real_T *u, const double c_data[],
    */
   /* } */
   /*  Beginning of code */
+  /*  MATLAB Ccoder instruction to enforce that c is a scalar */
   nx = u->size[0];
-  i = r->size[0];
-  r->size[0] = u->size[0];
-  emxEnsureCapacity_real_T(r, i);
+  k = y->size[0];
+  y->size[0] = u->size[0];
+  emxEnsureCapacity_real_T(y, k);
   for (k = 0; k < nx; k++) {
-    r->data[k] = fabs(u->data[k]);
+    y->data[k] = fabs(u->data[k]);
   }
-  emxInit_real_T(&A_tmp, 1);
-  w = (r->data[0] <= c_data[0]);
-  i = A_tmp->size[0];
-  A_tmp->size[0] = u->size[0];
-  emxEnsureCapacity_real_T(A_tmp, i);
-  nx = u->size[0];
-  for (k = 0; k < nx; k++) {
-    A_tmp->data[k] = u->data[k] * u->data[k];
-  }
+  emxInit_boolean_T(&w, 1);
   c = c_data[0];
-  nx = c_size[1];
-  for (i = 0; i < nx; i++) {
-    B_tmp_data[i] = c * c_data[i];
+  k = w->size[0];
+  w->size[0] = y->size[0];
+  emxEnsureCapacity_boolean_T(w, k);
+  nx = y->size[0];
+  for (k = 0; k < nx; k++) {
+    w->data[k] = (y->data[k] <= c);
   }
-  if (A_tmp->size[0] == 0) {
-    r->size[0] = 0;
-  } else {
-    nx = A_tmp->size[0];
-    i = r->size[0];
-    r->size[0] = A_tmp->size[0];
-    emxEnsureCapacity_real_T(r, i);
-    for (i = 0; i < nx; i++) {
-      r->data[i] = A_tmp->data[i] / B_tmp_data[0];
-    }
-  }
-  emxInit_real_T(&A, 1);
-  i = A->size[0];
-  A->size[0] = u->size[0];
-  emxEnsureCapacity_real_T(A, i);
+  c = c_data[0] * c_data[0];
+  k = rhoTB->size[0];
+  rhoTB->size[0] = u->size[0];
+  emxEnsureCapacity_real_T(rhoTB, k);
   nx = u->size[0];
   for (k = 0; k < nx; k++) {
-    A->data[k] = rt_powd_snf(u->data[k], 4.0);
+    rhoTB->data[k] = u->data[k] * u->data[k];
   }
-  k = c_size[1];
-  c = c_data[0];
-  nx = c_size[1];
-  for (i = 0; i < nx; i++) {
-    aBuffer_data[i] = c * c_data[i];
+  b = c / 6.0;
+  k = y->size[0];
+  y->size[0] = u->size[0];
+  emxEnsureCapacity_real_T(y, k);
+  nx = u->size[0];
+  for (k = 0; k < nx; k++) {
+    y->data[k] = rt_powd_snf(u->data[k], 4.0);
   }
-  c = aBuffer_data[0];
-  for (i = 0; i < k; i++) {
-    b_aBuffer_data[i] = c * aBuffer_data[i];
+  d = 3.0 * rt_powd_snf(c_data[0], 4.0);
+  nx = rhoTB->size[0];
+  for (k = 0; k < nx; k++) {
+    rhoTB->data[k] = rhoTB->data[k] / 2.0 *
+                         ((1.0 - rhoTB->data[k] / c) + y->data[k] / d) *
+                         (double)w->data[k] +
+                     (1.0 - (double)w->data[k]) * b;
   }
-  nx = (signed char)c_size[1];
-  for (i = 0; i < nx; i++) {
-    aBuffer_data[i] = 3.0 * b_aBuffer_data[i];
-  }
-  if (A->size[0] == 0) {
-    A->size[0] = 0;
-  } else {
-    nx = A->size[0] - 1;
-    for (i = 0; i <= nx; i++) {
-      A->data[i] /= aBuffer_data[0];
-    }
-    i = A->size[0];
-    A->size[0] = nx + 1;
-    emxEnsureCapacity_real_T(A, i);
-  }
-  rhoTB = A_tmp->data[0] / 2.0 * ((1.0 - r->data[0]) + A->data[0]) * (double)w +
-          (1.0 - (double)w) * (B_tmp_data[0] / 6.0);
-  emxFree_real_T(&A_tmp);
-  emxFree_real_T(&A);
-  emxFree_real_T(&r);
-  return rhoTB;
+  emxFree_real_T(&y);
+  emxFree_boolean_T(&w);
 }
 
 /* End of code generation (TBrho.c) */

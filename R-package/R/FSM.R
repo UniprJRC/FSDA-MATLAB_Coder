@@ -157,7 +157,7 @@ FSM <- function(Y, bonflev, crit=c("md", "biv", "uni"), init, m0, msg=TRUE, noch
     n1 <- n
     p1 <- p
 
-    Y1 <- Y         # what is returned from chkinputRM().
+    Y1 <- Y         # what is returned from chkinputM().
 
 
     ##  Process the input parameters and initial values

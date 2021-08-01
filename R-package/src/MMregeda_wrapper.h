@@ -3,14 +3,14 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * MMreg_wrapper.h
+ * MMregeda_wrapper.h
  *
- * Code generation for function 'MMreg_wrapper'
+ * Code generation for function 'MMregeda_wrapper'
  *
  */
 
-#ifndef MMREG_WRAPPER_H
-#define MMREG_WRAPPER_H
+#ifndef MMREGEDA_WRAPPER_H
+#define MMREGEDA_WRAPPER_H
 
 /* Include files */
 #include "fsdaC_types.h"
@@ -23,19 +23,19 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-extern void MMreg_wrapper(
+extern void MMregeda_wrapper(
     const emxArray_real_T *y, const emxArray_real_T *X, double conflev,
-    double eff, const struct1_T *InitialEst, bool intercept, bool msg,
+    const emxArray_real_T *eff, const struct1_T *InitialEst, bool intercept,
     bool nocheck, double refsteps, const emxArray_char_T *rhofunc,
     const emxArray_real_T *rhofuncparam, double Sbdp, double Sbestr,
-    double Sminsctol, double Snsamp, double Srefsteps, double Srefstepsbestr,
-    double Sreftol, double Sreftolbestr, const emxArray_char_T *Srhofunc,
-    const emxArray_real_T *Srhofuncparam, double tol, bool yxsave,
-    struct_MMreg_T *out, emxArray_real_T *C);
+    double Sminsctol, bool Smsg, double Snsamp, double Srefsteps,
+    double Srefstepsbestr, double Sreftol, double Sreftolbestr,
+    const emxArray_char_T *Srhofunc, const emxArray_real_T *Srhofuncparam,
+    double tol, struct_MMregeda_T *out, emxArray_real_T *C);
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-/* End of code generation (MMreg_wrapper.h) */
+/* End of code generation (MMregeda_wrapper.h) */

@@ -29,13 +29,11 @@
 #'  (or \code{lms=1}) (Least Median of Squares is computed to initialize the search). If the user wants to initialze
 #'  the search with LTS with all the default options for concentration steps then, \code{lms=2} or \code{lms="lts"}.
 #'  If the user wants to use LTS without concentration steps, \code{lms} can
-#'  be any value different from 1 or 2. If \code{lms} is a list it is possible
-#'  to control a series of options for concentration steps (for more details
-#'  see the option \code{lms} in LXS()). It is also possible to initialize the
-#'  search with a prespecified set of units and in such case \code{lms} is a list
+#'  be any value different from 1 or 2. If \code{lms} is a vector or a list it is possible
+#'  to initialize the search with a prespecified set of units and in such case \code{lms} is a list
 #'  which contains a field named \code{bsb} which contains the list of units.
 #'  For example, in the case of simple regression through the origin with just
-#' one explanatory variable, to initialize the search with unit 3 then \code{lms=list(bsb=3)}.
+#'  one explanatory variable, to initialize the search with unit 3 then \code{lms=list(bsb=3)}.
 #' @param bsbmfullrank how to deal with singular \code{x} matrix. This option tells what to do
 #'  in case when a subset at step \code{m} (say \code{bsbm}) produces a singular \code{x}.
 #'  In other words, this options controls what to do when \code{rank(X[bsbm,]} is smaller
@@ -110,6 +108,11 @@
 #'  \item \code{nout} a \code{2 x 5} matrix containing the number of times \code{mdr}
 #'      went out of particular quantiles. The first row contains the quantiles
 #'      \code{c(1, 99, 99.9, 99.99, 99.999)}. The second row contains the frequency distribution.
+#'  \item \code{singularity} if present, this element indicatres a singularity condition - either
+#'      on the initial set or a set reached during the forward search. Contains the indexes
+#'      of units that result in a singular matrix.
+#'  \item \code{y}: the responce variable.
+#'  \item \code{X}: the predictor matrix.
 #'  }
 #'
 #' @references
@@ -198,7 +201,7 @@ FSR <- function(y, x, intercept=TRUE, lms=1,
             if(is.null(names(lms)) | !is.numeric(lms))
                 stop("'lms' must be a list or a named numeric vector")
 
-            cnames <- c("refsteps", "reftol", "bestr", "refstepsbestr", "reftolbest")
+            cnames <- c("bsb")
             for(cx in names(lms))
                 if(cx %in% cnames)
                     assign(cx, lms[cx])
@@ -253,6 +256,8 @@ FSR <- function(y, x, intercept=TRUE, lms=1,
     ListCl <- rep(0, n1)
     VIOMout <- rep(0, n1)
 
+    ## cat("\nn, p, n1, p1, init, retnUn: ", n, p, n1, p1, init, retnUn)
+
     ##  Call the C wrapper function
     tmp <- .C('r_fsr',
         y = if(is.double(y)) y else as.double(y),
@@ -265,11 +270,6 @@ FSR <- function(y, x, intercept=TRUE, lms=1,
         intercept = as.integer(intercept),
 
         lms = if(is.double(lms)) lms else as.double(lms),
-        refsteps <- as.double(refsteps),
-        reftol  <- as.double(reftol),
-        bestr  <- as.double(bestr),
-        refstepsbestr  <- as.double(refstepsbestr),
-        reftolbestr <- as.double(reftolbestr),
         bsb <- as.double(bsb),
         nbsb <- as.integer(length(bsb)),
 
@@ -307,15 +307,50 @@ FSR <- function(y, x, intercept=TRUE, lms=1,
         PACKAGE="fsdac")
 
     ##  Copy the output parameters into the output class FSR and return it.
-    outliers <- tmp$outliers[1:tmp$noutliers]
-    Un <- matrix(tmp$Un, nrow=tmp$retnUn, ncol=tmp$retpUn)
-    mdr <- matrix(tmp$mdr, nrow=tmp$retnUn, ncol=tmp$retpmdr)
-    nout <- matrix(tmp$nout, nrow=2, ncol=5)
+    singularity <- NULL
+    if(tmp$retnUn == 0)             # singularity condition, user choice of initial subset
+    {
+        mdr <- Un <- nout <- outliers <- tmp$beta <- tmp$residuals <- tmp$fittedvalues <- tmp$scale <- NULL
+        singularity <- "Singular initial subset"
+    	message(paste("Singularity issue! The initial subset results in a singular matrix:\n", paste(bsb, collapse=",")))
 
-    ans <- list(outliers=outliers, mdr=mdr, Un=Un, nout=nout, coefficients=tmp$beta,
-        scale=tmp$scale, fitted.values=tmp$fitted.values, residuals=tmp$residuals)
+    } else if(tmp$retpmdr == 1)     # singularity condition occured during FS, the list of units is returned in mdr
+    {
+        mdr <- Un <- nout <- outliers <- tmp$beta <- tmp$residuals <- tmp$fittedvalues <- tmp$scale <- NULL
+        singularity <- tmp$mdr[1:tmp$retnUn]
+    	message(paste("Singularity issue! The following", length(singularity), "observations produce singular matrix:"))
+        print(singularity)
+    } else {
+        outliers <- if(tmp$noutliers == 0) NULL else tmp$outliers[1:tmp$noutliers]
+        Un <- matrix(tmp$Un[1:(tmp$retnUn * tmp$retpUn)], nrow=tmp$retnUn, ncol=tmp$retpUn)
+        mdr <- matrix(tmp$mdr[1:(tmp$retnUn * tmp$retpmdr)], nrow=tmp$retnUn, ncol=tmp$retpmdr)
+        nout <- matrix(tmp$nout, nrow=2, ncol=5)
+        cf <- tmp$beta
+        if(!nocheck) {
+            names(tmp$beta) <- if(intercept) c("Intercept", colnames(chk$x)) else colnames(chk$x)
+            names(tmp$residuals) <- names(tmp$fitted.values) <- rownames(chk$x)
+        }
+        dimnames(mdr) <- list(1:nrow(mdr), c("Step", "MDR"))
+        dimnames(Un) <- list(1:nrow(Un), c("Step", paste0("Unit", 1:10)))
 
-    if(weak==TRUE){
+    }
+
+    ans <- if(!is.null(singularity))
+                list(singularity=singularity)
+            else list(mdr=mdr, Un=Un, nout=nout, coefficients=tmp$beta, scale=tmp$scale,
+                    fitted.values=tmp$fitted.values, residuals=tmp$residuals)
+    if(!is.null(outliers))
+        ans$outliers <- outliers
+
+    if(!nocheck) {
+        ans$y <- chk$y
+        ans$X <- chk$X
+    } else {
+        ans$y <- y
+        ans$X <- X
+    }
+
+    if(weak == TRUE && is.null(singularity)){
         ans$ListCl <- tmp$ListCl[1:tmp$nListCl]
         ans$VIOMout <- tmp$VIOMout[1:tmp$nVIOMout]
     }

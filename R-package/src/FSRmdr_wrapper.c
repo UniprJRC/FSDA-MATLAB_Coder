@@ -116,7 +116,6 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   bool bonflevout;
   bool exitg2;
   bool guard1 = false;
-  bool guard2 = false;
   if (!isInitialized_fsdaC) {
     fsdaC_initialize();
   }
@@ -1385,30 +1384,23 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   resBSB->data[0] = 0.0;
   /*  opts is a structure which contains the options to use in linsolve */
   /*  Start of the forward search */
+  /*  if nocheck==false && rank(Xb)~=p */
+  nx = local_rank(Xb);
   emxInit_real_T(&e, 1);
   emxInit_boolean_T(&unitstopenalize, 1);
   emxInit_uint32_T(&truerownamestopenalize, 1);
   emxInit_real_T(&unit, 1);
   emxInit_real_T(&r4, 2);
   emxInit_real_T(&r5, 2);
-  guard1 = false;
-  if (!nocheck) {
-    nx = local_rank(Xb);
-    if (nx != p) {
-      i = mdr->size[0] * mdr->size[1];
-      mdr->size[0] = 1;
-      mdr->size[1] = 1;
-      emxEnsureCapacity_real_T(mdr, i);
-      mdr->data[0] = rtNaN;
-      /*  FS loop will not be performed */
-      /*  rank check */
-    } else {
-      guard1 = true;
-    }
+  if (nx != p) {
+    i = mdr->size[0] * mdr->size[1];
+    mdr->size[0] = 1;
+    mdr->size[1] = 1;
+    emxEnsureCapacity_real_T(mdr, i);
+    mdr->data[0] = rtNaN;
+    /*  FS loop will not be performed */
+    /*  rank check */
   } else {
-    guard1 = true;
-  }
-  if (guard1) {
     mm = 0;
     do {
       exitg1 = 0;
@@ -1429,7 +1421,7 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
         linsolve(Xb, yb, b_b, &initdef);
         /*  disp([mm condNumber]) */
         Ra = !(initdef < p);
-        guard2 = false;
+        guard1 = false;
         if (Ra) {
           /*  rank is ok */
           mtimes(Xb, b_b, resBSB);
@@ -1448,7 +1440,7 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
             blast->data[i] = b_b->data[i];
           }
           /*  Store correctly computed b for the case of rank problem */
-          guard2 = true;
+          guard1 = true;
 
           /*  number of independent columns is smaller than number of parameters
            */
@@ -1517,7 +1509,7 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                 }
               }
               nx = local_rank(Xbb);
-              if (nx == p) {
+              if (nx == (int)p) {
                 nx = 0;
                 b_i++;
               } else {
@@ -1565,10 +1557,12 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                 for (i = 0; i < loop_ub; i++) {
                   d_bsbsteps->data[i] = b_b->data[i];
                 }
-                
+
+
                 // VT::14.07.2021 - added sorting with c_sort() because otherwise e_do_vectors() does not work
                 c_sort(d_bsbsteps);
-                
+
+
                 e_do_vectors(seq, d_bsbsteps, ncl, ia, &result);
                 nx = 1;
                 exitg2 = true;
@@ -1624,9 +1618,9 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
             b_b->data[i] = blast->data[i];
           }
           /*  disp([mm b']) */
-          guard2 = true;
+          guard1 = true;
         }
-        if (guard2) {
+        if (guard1) {
           mtimes(b_X, b_b, e);
           i = e->size[0];
           e->size[0] = b_y->size[0];

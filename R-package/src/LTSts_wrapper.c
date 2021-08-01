@@ -93,7 +93,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   static const char b_varampl[24] = {'b', 'b', 'b', '_', '_', '_', 'v', 'v',
                                      'v', 'a', 'a', 'a', 'r', 'r', 'r', 'a',
                                      'a', 'a', 'm', 'm', 'm', 'l', '2', '3'};
-  static const char cv1[8] = {'b', '_', 'l', 's', 'h', 'i', 'f', 't'};
+  static const char b_cv1[8] = {'b', '_', 'l', 's', 'h', 'i', 'f', 't'};
   static const char b_cv[5] = {'L', 'T', 'S', 't', 's'};
   b_captured_var isemptyX;
   b_captured_var verLess2016b;
@@ -4548,7 +4548,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
       for (i1 = 0; i1 < loop_ub; i1++) {
         b_lab_data[i1 + sizes_idx_1 * i] = lab_data[i1 + lab_size[0] * i];
       }
-      b_lab_data[lab_size[0] + sizes_idx_1 * i] = cv1[i];
+      b_lab_data[lab_size[0] + sizes_idx_1 * i] = b_cv1[i];
     }
     lab_size[0]++;
     lab_size[1] = 8;

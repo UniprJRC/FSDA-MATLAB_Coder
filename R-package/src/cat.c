@@ -21,6 +21,26 @@ void b_cat(const emxArray_real_T *varargin_1, const emxArray_real_T *varargin_2,
            emxArray_real_T *y)
 {
   int i;
+  int i1;
+  int j;
+  i = y->size[0] * y->size[1];
+  y->size[0] = varargin_1->size[0];
+  y->size[1] = varargin_2->size[1] + 1;
+  emxEnsureCapacity_real_T(y, i);
+  i = varargin_1->size[0];
+  for (j = 0; j < i; j++) {
+    y->data[j] = 1.0;
+  }
+  i1 = varargin_2->size[0] * varargin_2->size[1];
+  for (j = 0; j < i1; j++) {
+    y->data[i + j] = varargin_2->data[j];
+  }
+}
+
+void c_cat(const emxArray_real_T *varargin_1, const emxArray_real_T *varargin_2,
+           emxArray_real_T *y)
+{
+  int i;
   int iy;
   int j;
   i = y->size[0] * y->size[1] * y->size[2];

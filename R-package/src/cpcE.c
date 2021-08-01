@@ -167,7 +167,7 @@ void cpcE(const emxArray_real_T *lmdc, const emxArray_real_T *SigmaB,
   }
   emxFree_real_T(&y);
   emxInit_int32_T(&iidx, 1);
-  f_sort(d, iidx);
+  g_sort(d, iidx);
   /*  First column of V is first eigenvector associated to largest */
   /*  eigenvalue .... */
   loop_ub = V->size[0];

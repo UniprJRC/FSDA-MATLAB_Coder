@@ -1,4 +1,4 @@
-chkinputR <- function(y, x, intercept=TRUE, nocheck=FALSE)
+chkinputR <- function(y, x, intercept=TRUE)
 {
     if(missing(y))
         stop("Response variable 'y' must be provided!")
@@ -38,10 +38,6 @@ chkinputR <- function(y, x, intercept=TRUE, nocheck=FALSE)
     n <- nrow(x)
     p <- ncol(x)
 
-##  here starts the checking, return if nocheck==TRUE
-    if(nocheck)
-        return(list(y=y, x=x, n1=n, p1=p))
-
     if (nrow(x) != nrow(y))
 	   stop("Number of observations in x and y not equal")
 
@@ -52,8 +48,8 @@ chkinputR <- function(y, x, intercept=TRUE, nocheck=FALSE)
     x <- x[ok, , drop = FALSE]
     y <- y[ok, , drop = FALSE]
     dx <- dim(x)
-    n <- dx[1]
-    if (n == 0)
+    n1 <- dx[1]
+    if(n1 == 0)
 	   stop("All observations have missing values!")
 
     storage.mode(y) <- "double"

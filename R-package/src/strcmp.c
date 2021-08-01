@@ -11,6 +11,7 @@
 
 /* Include files */
 #include "strcmp.h"
+#include "fsdaC_data.h"
 #include "fsdaC_internal_types.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
@@ -441,8 +442,6 @@ bool mb_strcmp(const char a[3])
 
 bool n_strcmp(const emxArray_char_T *a)
 {
-  static const char b_cv[10] = {'h', 'y', 'p', 'e', 'r',
-                                'b', 'o', 'l', 'i', 'c'};
   int exitg1;
   int kstr;
   bool b_bool;
@@ -452,7 +451,7 @@ bool n_strcmp(const emxArray_char_T *a)
     do {
       exitg1 = 0;
       if (kstr < 10) {
-        if (a->data[kstr] != b_cv[kstr]) {
+        if (a->data[kstr] != cv1[kstr]) {
           exitg1 = 1;
         } else {
           kstr++;

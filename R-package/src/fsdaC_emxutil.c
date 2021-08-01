@@ -520,22 +520,7 @@ void emxFreeStruct_cell_wrap_6(cell_wrap_6 *pStruct)
   emxFree_real_T(&pStruct->f1);
 }
 
-void emxFreeStruct_struct0_T(struct0_T *pStruct)
-{
-  emxFree_real_T(&pStruct->ListOut);
-  emxFree_real_T(&pStruct->outliers);
-  emxFree_real_T(&pStruct->mdr);
-  emxFree_real_T(&pStruct->Un);
-  emxFree_real_T(&pStruct->nout);
-  emxFree_real_T(&pStruct->beta);
-  emxFree_real_T(&pStruct->mdag);
-  emxFree_real_T(&pStruct->ListCl);
-  emxFree_real_T(&pStruct->VIOMout);
-  emxFree_real_T(&pStruct->fittedvalues);
-  emxFree_real_T(&pStruct->residuals);
-}
-
-void emxFreeStruct_struct2_T(struct2_T *pStruct)
+void emxFreeStruct_struct1_T(struct1_T *pStruct)
 {
   emxFree_real_T(&pStruct->beta);
 }
@@ -631,6 +616,20 @@ void emxFreeStruct_struct_MMreg_T(struct_MMreg_T *pStruct)
   emxFree_real_T(&pStruct->y);
 }
 
+void emxFreeStruct_struct_MMregeda_T(struct_MMregeda_T *pStruct)
+{
+  emxFree_real_T(&pStruct->Beta);
+  emxFree_real_T(&pStruct->RES);
+  emxFree_real_T(&pStruct->Weights);
+  emxFree_boolean_T(&pStruct->Outliers);
+  emxFree_real_T(&pStruct->Sbeta);
+  emxFree_char_T(&pStruct->rhofunc);
+  emxFree_real_T(&pStruct->rhofuncparam);
+  emxFree_real_T(&pStruct->eff);
+  emxFree_real_T(&pStruct->X);
+  emxFree_real_T(&pStruct->y);
+}
+
 void emxFreeStruct_struct_Sreg_T(struct_Sreg_T *pStruct)
 {
   emxFree_real_T(&pStruct->beta);
@@ -639,6 +638,22 @@ void emxFreeStruct_struct_Sreg_T(struct_Sreg_T *pStruct)
   emxFree_real_T(&pStruct->fittedvalues);
   emxFree_real_T(&pStruct->residuals);
   emxFree_real_T(&pStruct->outliers);
+  emxFree_char_T(&pStruct->rhofunc);
+  emxFree_real_T(&pStruct->rhofuncparam);
+  emxFree_real_T(&pStruct->X);
+  emxFree_real_T(&pStruct->y);
+}
+
+void emxFreeStruct_struct_Sregeda_T(struct_Sregeda_T *pStruct)
+{
+  emxFree_real_T(&pStruct->Beta);
+  emxFree_real_T(&pStruct->Scale);
+  emxFree_real_T(&pStruct->BS);
+  emxFree_real_T(&pStruct->Weights);
+  emxFree_real_T(&pStruct->RES);
+  emxFree_real_T(&pStruct->Singsub);
+  emxFree_boolean_T(&pStruct->Outliers);
+  emxFree_real_T(&pStruct->bdp);
   emxFree_char_T(&pStruct->rhofunc);
   emxFree_real_T(&pStruct->rhofuncparam);
   emxFree_real_T(&pStruct->X);
@@ -912,26 +927,11 @@ void emxInitStruct_cell_wrap_6(cell_wrap_6 *pStruct)
 
 void emxInitStruct_struct0_T(struct0_T *pStruct)
 {
-  emxInit_real_T(&pStruct->ListOut, 2);
-  emxInit_real_T(&pStruct->outliers, 2);
-  emxInit_real_T(&pStruct->mdr, 2);
-  emxInit_real_T(&pStruct->Un, 2);
-  emxInit_real_T(&pStruct->nout, 2);
-  emxInit_real_T(&pStruct->beta, 1);
-  emxInit_real_T(&pStruct->mdag, 2);
-  emxInit_real_T(&pStruct->ListCl, 2);
-  emxInit_real_T(&pStruct->VIOMout, 2);
-  emxInit_real_T(&pStruct->fittedvalues, 2);
-  emxInit_real_T(&pStruct->residuals, 2);
-}
-
-void emxInitStruct_struct1_T(struct1_T *pStruct)
-{
   pStruct->Description.size[0] = 0;
   pStruct->Description.size[1] = 0;
 }
 
-void emxInitStruct_struct2_T(struct2_T *pStruct)
+void emxInitStruct_struct1_T(struct1_T *pStruct)
 {
   emxInit_real_T(&pStruct->beta, 1);
 }
@@ -1025,7 +1025,7 @@ void emxInitStruct_struct_MMreg_T(struct_MMreg_T *pStruct)
   emxInit_real_T(&pStruct->fittedvalues, 1);
   emxInit_real_T(&pStruct->residuals, 1);
   emxInit_real_T(&pStruct->Sbeta, 1);
-  emxInit_real_T(&pStruct->weights, 2);
+  emxInit_real_T(&pStruct->weights, 1);
   emxInit_real_T(&pStruct->outliers, 2);
   emxInit_char_T(&pStruct->rhofuncS, 2);
   emxInit_real_T(&pStruct->rhofuncparamS, 2);
@@ -1035,11 +1035,25 @@ void emxInitStruct_struct_MMreg_T(struct_MMreg_T *pStruct)
   emxInit_real_T(&pStruct->y, 2);
 }
 
+void emxInitStruct_struct_MMregeda_T(struct_MMregeda_T *pStruct)
+{
+  emxInit_real_T(&pStruct->Beta, 2);
+  emxInit_real_T(&pStruct->RES, 2);
+  emxInit_real_T(&pStruct->Weights, 2);
+  emxInit_boolean_T(&pStruct->Outliers, 2);
+  emxInit_real_T(&pStruct->Sbeta, 1);
+  emxInit_char_T(&pStruct->rhofunc, 2);
+  emxInit_real_T(&pStruct->rhofuncparam, 2);
+  emxInit_real_T(&pStruct->eff, 2);
+  emxInit_real_T(&pStruct->X, 2);
+  emxInit_real_T(&pStruct->y, 1);
+}
+
 void emxInitStruct_struct_Sreg_T(struct_Sreg_T *pStruct)
 {
   emxInit_real_T(&pStruct->beta, 1);
   emxInit_real_T(&pStruct->bs, 2);
-  emxInit_real_T(&pStruct->weights, 2);
+  emxInit_real_T(&pStruct->weights, 1);
   emxInit_real_T(&pStruct->fittedvalues, 1);
   emxInit_real_T(&pStruct->residuals, 1);
   emxInit_real_T(&pStruct->outliers, 2);
@@ -1047,6 +1061,22 @@ void emxInitStruct_struct_Sreg_T(struct_Sreg_T *pStruct)
   emxInit_real_T(&pStruct->rhofuncparam, 2);
   emxInit_real_T(&pStruct->X, 2);
   emxInit_real_T(&pStruct->y, 2);
+}
+
+void emxInitStruct_struct_Sregeda_T(struct_Sregeda_T *pStruct)
+{
+  emxInit_real_T(&pStruct->Beta, 2);
+  emxInit_real_T(&pStruct->Scale, 1);
+  emxInit_real_T(&pStruct->BS, 2);
+  emxInit_real_T(&pStruct->Weights, 2);
+  emxInit_real_T(&pStruct->RES, 2);
+  emxInit_real_T(&pStruct->Singsub, 1);
+  emxInit_boolean_T(&pStruct->Outliers, 2);
+  emxInit_real_T(&pStruct->bdp, 1);
+  emxInit_char_T(&pStruct->rhofunc, 2);
+  emxInit_real_T(&pStruct->rhofuncparam, 2);
+  emxInit_real_T(&pStruct->X, 2);
+  emxInit_real_T(&pStruct->y, 1);
 }
 
 void emxInitStruct_struct_T(struct_T *pStruct)
@@ -1101,7 +1131,7 @@ void emxInitStruct_struct_T6(j_struct_T *pStruct)
 {
   emxInit_real_T(&pStruct->beta, 1);
   emxInit_real_T(&pStruct->bs, 2);
-  emxInit_real_T(&pStruct->weights, 2);
+  emxInit_real_T(&pStruct->weights, 1);
   emxInit_real_T(&pStruct->fittedvalues, 1);
   emxInit_real_T(&pStruct->residuals, 1);
   emxInit_real_T(&pStruct->outliers, 2);
@@ -1112,7 +1142,7 @@ void emxInitStruct_struct_T6(j_struct_T *pStruct)
 void emxInitStruct_struct_T7(e_struct_T *pStruct)
 {
   emxInit_real_T(&pStruct->beta, 1);
-  emxInit_real_T(&pStruct->weights, 2);
+  emxInit_real_T(&pStruct->weights, 1);
   emxInit_real_T(&pStruct->residuals, 1);
   emxInit_real_T(&pStruct->outliers, 2);
   emxInit_char_T(&pStruct->rhofunc, 2);
@@ -1141,7 +1171,7 @@ void emxInitStruct_table(table *pStruct)
   c_emxInitStruct_matlab_internal(&pStruct->rowDim);
   d_emxInitStruct_matlab_internal(&pStruct->varDim);
   emxInitMatrix_cell_wrap_6(pStruct->data);
-  emxInitStruct_struct1_T(&pStruct->arrayProps);
+  emxInitStruct_struct0_T(&pStruct->arrayProps);
 }
 
 void emxInit_boolean_T(emxArray_boolean_T **pEmxArray, int numDimensions)
