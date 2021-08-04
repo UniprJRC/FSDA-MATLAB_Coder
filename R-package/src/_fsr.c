@@ -65,7 +65,6 @@ void r_fsr(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int *in
     }
 
     // Call the FSR wrapper
-
     if(*lms == 0)   
         FSR_wrapper1(y, X,
                      b_bsbmfullrank, bonflev_data, bonflev_size, *h, *init,
@@ -113,13 +112,14 @@ void r_fsr(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int *in
     // Copy the output vectors beta, residuals, fittedvalues and outliers
     if(out.mdr->size[0] == 1 && out.mdr->size[1] == 1 && isnan(out.mdr->data[0]))
     {
-        // Singularity condition, we have two cases: mdr=ListOut=NaN and ListOut is a vector.
+        // Singularity condition, we have two cases: (a) mdr=ListOut=NaN and (b) ListOut is a vector.
+        
         if(out.ListOut->size[0] == 1 && out.ListOut->size[1] == 1 && isnan(out.ListOut->data[0]))
         {
             *retnUn = *retpUn = *retpmdr = 0;
         } else
         {
-            // We are copuing the list of units that gave singular matrix to mdr to be compatible with FSMRmdr.
+            // We are copying the list of units that gave singular matrix to mdr to be compatible with FSRmdr.
             *retnUn = out.ListOut->size[1];
             *retpUn = 0;
             *retpmdr = 1;
@@ -150,17 +150,12 @@ void r_fsr(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int *in
             }
         }
         
-        // Copy the output matrices Un, mdr and nout
-        if(out.Un->size[0] != *retnUn && out.Un->size[0] == *retnUn - 1)
-        {
-            *retnUn = out.Un->size[0];
-        }
-        
         if(out.Un->size[0] != *retnUn || out.Un->size[1] != *retpUn)
             Rprintf("\nWARNING: the size of output matrix 'Un' changed: was %d, %d, now is %d, %d \n", *retnUn, *retpUn, out.Un->size[0], out.Un->size[1]); 
         if(out.mdr->size[0] != *retnUn || out.mdr->size[1] != *retpmdr)
             Rprintf("\nWARNING: the size of output matrix 'mdr' changed: was %d, %d, now is %d, %d \n", *retnUn, *retpmdr, out.mdr->size[0], out.mdr->size[1]); 
     
+        *retnUn = out.Un->size[0];
         loop_ub = out.Un->size[0] * out.Un->size[1];
         for(i=0; i < loop_ub; i++) {
             Un[i] = out.Un->data[i];

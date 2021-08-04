@@ -63,7 +63,7 @@
 #' @param la a vector with the values of the transformation parameter for which the score test is to be computed.
 #'  By default \code{la=c(-1, -0.5, 0, 0.5, 1)}, i.e. the five most common values of lambda.
 #' @param lms how to find the initlal subset to initialize the search. If \code{lms=1} (default)
-#'  Least Median of Squares (LMS) is computed, else Least trimmed of Squares (LTS)is computed.
+#'  Least Median of Squares (LMS) is computed, else Least Trimmed Squares (LTS) is computed.
 #'  If, \code{lms} is matrix of size \code{p - 1 + intercept X length(la)} it contains in column
 #'  \code{j=1,..., lenght(la)} the list of units forming the initial subset for the search
 #'  associated with \code{la(j)}. In this case the input option \code{nsamp} is ignored.
@@ -149,7 +149,7 @@
 #'    y <- XX[, ncol(XX)]
 #'    X <- XX[, 1:(ncol(XX)-1), drop=FALSE]
 #'
-#'    ##out <- FSRfan(y, X)                    # call 'FSRfan' with all default parameters
+#'    out <- FSRfan(y, X)                    # call 'FSRfan' with all default parameters
 #'
 #' @export
 #' @author FSDA team, \email{valentin.todorov@@chello.at}
@@ -158,28 +158,46 @@ FSRfan <- function(y, x, intercept=TRUE, family=c("BoxCox", "YJ", "YJpn", "YJall
     alpha=0.75, h, nsamp=1000, init,  msg=TRUE, nocheck=FALSE,
     trace)
 {
-    y <- data.matrix(y)
-    if (!is.numeric(y)) stop("y is not a numeric")
-    if (dim(y)[2] != 1) stop("y is not onedimensional")
+    ## Preprocess y and x
+    if(nocheck) {
+        ## no checks will be performed: x must be a numerics matrix or
+        ##  a data frame that can be coerced to a numeric matrix and y is
+        ##  a vector or a one-dimensional numerical matrix or data frame.
+        y <- data.matrix(y)
+        if(is.data.frame(x)) {
+    	    x <- data.matrix(x)
+        } else if (!is.matrix(x))
+    	    x <- matrix(x, length(x), 1,
+    			dimnames = list(names(x), deparse(substitute(x))))
 
-    if(is.data.frame(x))
-        x <- data.matrix(x)
-    else if (!is.matrix(x))
-        x <- matrix(x, length(x), 1,
-              dimnames = list(names(x), deparse(substitute(x))))
-    n <- nrow(x)
-    p <- ncol(x)
+        n1 <- n <- nrow(x)
+        p1 <- p <- ncol(x)
+    } else {
+        ## Here we call chkinputR(), which might change n and p, especially,
+        ##  p will become p+1 of intercept is TRUE. We take these n and p in
+        ##  n1 and p1 and use them whenever preliminary calculations are necessary,
+        ##  e.g. to find default values for 'init'.
+        ##
+        chk <- chkinputR(y, x, intercept)
+        n <- chk$n
+        p <- chk$p
+        n1 <- chk$n1
+        p1 <- chk$p1
+
+        ## Further the original y and x will be used, therefore, take care
+        ##  both y and x to ba data.matrix. We do this after calling chkinputR(),
+        ##  because other wise data.matrix() will kill the dimnames.
+        y <- data.matrix(y)
+        if(is.data.frame(x)) {
+    	    x <- data.matrix(x)
+        } else if (!is.matrix(x))
+    	    x <- matrix(x, length(x), 1,
+    			dimnames = list(names(x), deparse(substitute(x))))
+    }
+
+    ##  Process the input parameters and initial values =========
 
     family <- match.arg(family)
-
-    ## Here we call chkinputR(), which might change n and p, especially,
-    ##  p will become p+1 of intercept is TRUE. We take these n and p in
-    ##  n1 and p1 and use them whenever preliminary calculations are necessary,
-    ##  e.g. to find devault values for 'init'.
-    ##
-    ##  chk <- chkinputR(y, Y, intercept, nochek)
-    n1 <- n
-    p1 <- if(intercept && !nocheck) p+1 else p
 
     ## Default value of lambda is la=c(-1, -0.5, 0, 0.5, 1), these are the five most common values of lambda
     if(missing(la))
@@ -301,8 +319,9 @@ FSRfan <- function(y, x, intercept=TRUE, family=c("BoxCox", "YJ", "YJpn", "YJall
     Score <- matrix(tmp$Score, nrow=tmp$retn1, ncol=tmp$retp1)
     bs <- matrix(tmp$bs, nrow=tmp$p1, ncol=length(la))
     aUn <- array(tmp$Un, dim=c(tmp$retnUn, tmp$retpUn, length(la)))
+    dimnames(aUn) <- list(aUn[,1,1], c("Step", 1:10), la)
 
-    ans <- list(la=tmp$la, bs=bs, Score=Score, Un=aUn)
+    ans <- list(call=match.call(), la=tmp$la, bs=bs, Score=Score, Un=aUn)
 
     if(family %in% c("YJpn", "YJall")) {
         Scorep <- matrix(tmp$Scorep, nrow=tmp$retn1, ncol=tmp$retp1)

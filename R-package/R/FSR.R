@@ -12,9 +12,9 @@
 #'  (also called 'regressors') of dimension n x (p-1) where p denotes the number of
 #'  explanatory variables including the intercept.
 #'
-#'  Rows of \code{X} represent observations, and columns represent variables. By default,
+#'  Rows of \code{x} represent observations, and columns represent variables. By default,
 #'  there is a constant term in the model, unless you explicitly remove it using input
-#'  option intercept, so do not include a column of 1s in \code{X}.
+#'  option intercept, so do not include a column of 1s in \code{x}.
 #'  Missing values (NaN's)
 #'  and infinite values (Inf's) are allowed, since observations (rows) with missing or
 #'  infinite values will automatically be excluded from the computations.
@@ -36,7 +36,7 @@
 #'  one explanatory variable, to initialize the search with unit 3 then \code{lms=list(bsb=3)}.
 #' @param bsbmfullrank how to deal with singular \code{x} matrix. This option tells what to do
 #'  in case when a subset at step \code{m} (say \code{bsbm}) produces a singular \code{x}.
-#'  In other words, this options controls what to do when \code{rank(X[bsbm,]} is smaller
+#'  In other words, this options controls what to do when \code{rank(x[bsbm,]} is smaller
 #'  then number of explanatory variables. If \code{bsbmfullrank=TRUE} (default) these units
 #'  (whose number is say \code{mnofullrank}) are constrained to enter the search in the final
 #'  \code{n-mnofullrank} steps else the search continues using as estimate of \code{beta} at step \code{m}
@@ -57,13 +57,13 @@
 #'
 #'  Remark: if the number of all possible subset is <1000 the default is to extract all subsets
 #'  otherwise just 1000.
-#' @param threshoutX threshold to bound the effect of high leverage units. If the design matrix \code{X}
+#' @param threshoutX threshold to bound the effect of high leverage units. If the design matrix \code{x}
 #'  contains several high leverage units (that is units which are very far from the bulk of the data),
 #'  it may happen that the best subset of LXS may include some of these units, or it may happen that
 #'  these units have a deletion residual which is very small due to their extremely high value of \code{hi}.
 #'  \code{threshoutX=1} imposes the constraints that:
 #'  \enumerate{
-#'  \item the extracted subsets which contain at least one unit declared as outlier in the \code{X} space by
+#'  \item the extracted subsets which contain at least one unit declared as outlier in the \code{x} space by
 #'      FSM using a Bonferronized confidence level of 0.99 are removed from the list of candidate subsets
 #'      to find the LXS solution.
 #'  \item imposes the constraint that \eqn{h_i(m^*)} cannot exceed \eqn{10 \times p/m}.
@@ -80,7 +80,7 @@
 #'   If \code{msg=TRUE} (default) messages are displayed on the screen about step of the fwd search else
 #'  no message is displayed on the screen.
 #' @param nocheck Wheather to check the input arguments. If \code{nocheck=TRUE} no check is performed on
-#'  matrix \code{y} and matrix \code{X}. Notice that \code{y} and \code{X} are left unchanged. In other words
+#'  matrix \code{y} and matrix \code{x}. Notice that \code{y} and \code{x} are left unchanged. In other words
 #'  the additional column of ones for the intercept is not added. By default \code{nocheck=FALSE}.
 #' @param trace Whether to print intermediate results. Default is \code{trace=FALSE}.
 #'
@@ -111,7 +111,7 @@
 #'  \item \code{singularity} if present, this element indicatres a singularity condition - either
 #'      on the initial set or a set reached during the forward search. Contains the indexes
 #'      of units that result in a singular matrix.
-#'  \item \code{y}: the responce variable.
+#'  \item \code{y}: the response variable.
 #'  \item \code{X}: the predictor matrix.
 #'  }
 #'
@@ -141,6 +141,13 @@ FSR <- function(y, x, intercept=TRUE, lms=1,
         ## no checks will be performed: x must be a numerics matrix or
         ##  a data frame that can be coerced to a numeric matrix and y is
         ##  a vector or a one-dimensional numerical matrix or data frame.
+        y <- data.matrix(y)
+        if(is.data.frame(x)) {
+    	    x <- data.matrix(x)
+        } else if (!is.matrix(x))
+    	    x <- matrix(x, length(x), 1,
+    			dimnames = list(names(x), deparse(substitute(x))))
+
         n1 <- n <- nrow(x)
         p1 <- p <- ncol(x)
     } else {
@@ -170,13 +177,7 @@ FSR <- function(y, x, intercept=TRUE, lms=1,
 
     ## 'lms' can be 1="lms" or 2="lts" or 3 (anything else) = standard LTS without concentration steps
     ##  or, alternatively a structure with options or a vector with a list of units.
-    refsteps <- 3
-    reftol  <- 1e-6
-    bestr  <- 5
-    refstepsbestr  <- 50
-    reftolbestr <- 1e-8
     bsb <- c()
-
     if(length(lms) == 1)
     {
         if(is.numeric(lms))
@@ -214,9 +215,6 @@ FSR <- function(y, x, intercept=TRUE, lms=1,
     } else
         stop("'lms' must be a list or either numeric or a character string 'LMS' or 'LTS'")
 
-    if(trace && lms == 0)
-        message("\nLTS with options (refsteps, reftol, bestr, refstepsbestr, reftolbestr): ", refsteps, reftol, bestr, refstepsbestr, reftolbestr, "\n")
-
     ## The default value of init depends on n and p
     if(missing(init)) {
         init <- if(n1 < 40) p1 + 1 else min(3*p1 + 1, floor(0.5*(n1 + p1 + 1)))
@@ -225,6 +223,9 @@ FSR <- function(y, x, intercept=TRUE, lms=1,
         warning("Attention : 'init' should be larger than p+1. It is set to p+2.")
         init <- p + 2
     }
+    if(init < length(bsb))
+        init <- length(bsb)
+
     if(!missing(h))          alpha <- h/n1
     else                     h <- ceiling(alpha*n1)
     if(alpha < 1/2 | alpha > 1)
@@ -344,10 +345,10 @@ FSR <- function(y, x, intercept=TRUE, lms=1,
 
     if(!nocheck) {
         ans$y <- chk$y
-        ans$X <- chk$X
+        ans$X <- chk$x
     } else {
         ans$y <- y
-        ans$X <- X
+        ans$X <- x
     }
 
     if(weak == TRUE && is.null(singularity)){

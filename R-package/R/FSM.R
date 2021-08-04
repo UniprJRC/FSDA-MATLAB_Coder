@@ -118,18 +118,11 @@
 #' library(fsdac)
 #' data(swissbanknotes)
 #' Y = swissbanknotes
-#' Y = Y[1:200,1:6]
+#' Y = Y[,1:6]
 #'
-#' bonflev=c(0.0, 0.0)
-#' crit="md"
-#' init=60
-#' m0=0
-#' msg=FALSE
-#' nocheck=FALSE
-#' rf=0.95
-#' trace=TRUE
-#'
-#' (out = FSM(Y, bonflev,   crit, init, m0, msg, nocheck, rf, trace))
+#' \dontrun{
+#' (out = FSM(Y, crit="md", init=60))
+#' }
 #'
 #' @export
 #' @author FSDA team, \email{valentin@@todorov.at}
@@ -162,6 +155,10 @@ FSM <- function(Y, bonflev, crit=c("md", "biv", "uni"), init, m0, msg=TRUE, noch
 
     ##  Process the input parameters and initial values
 
+    ## The default value of m0 depends on p
+    if(missing(m0))
+        m0 <- p+1
+
     ## The default value of init depends on n and p
     if(missing(init)) {
         init <- if(n1 < 40) p1 + 1 else min(3*p1 + 1, floor(0.5*(n1 + p1 + 1)))
@@ -171,12 +168,9 @@ FSM <- function(Y, bonflev, crit=c("md", "biv", "uni"), init, m0, msg=TRUE, noch
         init <- p + 2
     }
 
-
     bonflev <- if(missing(bonflev)) c(0.0, 0.0)
                else                 c(bonflev, 1)
-
     crit <- match.arg(crit)
-
 
     ##  mmd and Un: matrices, with retnUn=(n-init) rows and 2 or 11 columns respectively.
     outliers <- rep(0, n1)

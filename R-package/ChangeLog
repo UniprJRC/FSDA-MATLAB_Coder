@@ -1,9 +1,12 @@
 2021-07-27  Valentin Todorov  <valentin@todorov.at>
     *
+    * DESCRIPTION (Version): 0.5-21:
     * DESCRIPTION (Version): 0.5-20:
+    *   Special cases with singularity fixed for FSR and FSRmdr
+    *   Added chkinputR() and implemented in all regression functions
     *   Added FSM() and unibiv() R functions (not completely tested and documented)
     *   Added chkinputR() for FSR
-    *   Compiled Sreg and MMreg
+    *   Compiled with Sreg, MMreg, Sregeda and MMregeda
     *
     * DESCRIPTION (Version): 0.5-19:
     *

@@ -382,3 +382,24 @@ NULL
 #'
 #' @keywords datasets
 NULL
+#' Poison
+#'
+#' The poison data (by Box and Cox, 1964) are about the time to death of animals in a \code{3 x 4}
+#'  factorial experiment with four observations at each factor combination. There are no outliers
+#'  or influential observations that cannot be reconciled with the greater part of the data by a
+#'  suitable transformation.
+#'
+#' @name poison
+#' @docType data
+#' @usage data(poison)
+#' @format A data frame with 48 rows and 7 variables: six explanatory and one response variable.
+#'
+#' @source G. E. P. Box and D. R. Cox (1964). An Analysis of Transformations,
+#'  \emph{ournal of the Royal Statistical Society. Series B}, \bold{26}2 pp. 211--252.
+#'
+#' @examples
+#'  data(poison)
+#'  head(poison)
+#'
+#' @keywords datasets
+NULL

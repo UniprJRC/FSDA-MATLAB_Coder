@@ -54,7 +54,7 @@ for positive and negative observations.}
 By default \code{la=c(-1, -0.5, 0, 0.5, 1)}, i.e. the five most common values of lambda.}
 
 \item{lms}{how to find the initlal subset to initialize the search. If \code{lms=1} (default)
-Least Median of Squares (LMS) is computed, else Least trimmed of Squares (LTS)is computed.
+Least Median of Squares (LMS) is computed, else Least Trimmed Squares (LTS) is computed.
 If, \code{lms} is matrix of size \code{p - 1 + intercept X length(la)} it contains in column
 \code{j=1,..., lenght(la)} the list of units forming the initial subset for the search
 associated with \code{la(j)}. In this case the input option \code{nsamp} is ignored.}
@@ -165,7 +165,7 @@ The transformations for negative and positive responses were determined
    y <- XX[, ncol(XX)]
    X <- XX[, 1:(ncol(XX)-1), drop=FALSE]
 
-   ##out <- FSRfan(y, X)                    # call 'FSRfan' with all default parameters
+   out <- FSRfan(y, X)                    # call 'FSRfan' with all default parameters
 
 }
 \references{

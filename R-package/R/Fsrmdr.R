@@ -180,28 +180,44 @@ FSRmdr <- function(y, x, bsb, intercept=TRUE, init, nocheck=FALSE,
     bsbsteps, bsbmfullrank=TRUE, constr, threshlevoutX, internationaltrade=FALSE, msg=TRUE, trace=FALSE)
 {
 
+    ## Preprocess y and x
+    if(nocheck) {
+        ## no checks will be performed: x must be a numerics matrix or
+        ##  a data frame that can be coerced to a numeric matrix and y is
+        ##  a vector or a one-dimensional numerical matrix or data frame.
+        y <- data.matrix(y)
+        if(is.data.frame(x)) {
+    	    x <- data.matrix(x)
+        } else if (!is.matrix(x))
+    	    x <- matrix(x, length(x), 1,
+    			dimnames = list(names(x), deparse(substitute(x))))
 
-    y <- data.matrix(y)
-    if (!is.numeric(y)) stop("y is not a numeric")
-    if (dim(y)[2] != 1) stop("y is not onedimensional")
+        n1 <- n <- nrow(x)
+        p1 <- p <- ncol(x)
+    } else {
+        ## Here we call chkinputR(), which might change n and p, especially,
+        ##  p will become p+1 of intercept is TRUE. We take these n and p in
+        ##  n1 and p1 and use them whenever preliminary calculations are necessary,
+        ##  e.g. to find default values for 'init'.
+        ##
+        chk <- chkinputR(y, x, intercept)
+        n <- chk$n
+        p <- chk$p
+        n1 <- chk$n1
+        p1 <- chk$p1
 
-    if(is.data.frame(x))
-        x <- data.matrix(x)
-    else if (!is.matrix(x))
-        x <- matrix(x, length(x), 1,
-              dimnames = list(names(x), deparse(substitute(x))))
-    n <- nrow(x)
-    p <- ncol(x)
+        ## Further the original y and x will be used, therefore, take care
+        ##  both y and x to ba data.matrix. We do this after calling chkinputR(),
+        ##  because other wise data.matrix() will kill the dimnames.
+        y <- data.matrix(y)
+        if(is.data.frame(x)) {
+    	    x <- data.matrix(x)
+        } else if (!is.matrix(x))
+    	    x <- matrix(x, length(x), 1,
+    			dimnames = list(names(x), deparse(substitute(x))))
+    }
 
-    ## Here we call chkinputR(), which might change n and p, especially,
-    ##  p will become p+1 of intercept is TRUE. We take these n and p in
-    ##  n1 and p1 and use them whenever preliminary calculations are necessary,
-    ##  e.g. to find devault values for 'init'.
-    ##
-    ##  chk <- chkinputR(y, Y, intercept, nochek)
-    n1 <- n
-    p1 <- if(intercept && !nocheck) p+1 else p
-
+    ##  Process the input parameters and initial values =========
 
     ## bsb can contain a list of the units forming the initial subset.
     ##  If missing, a random sample of p observations will be chosen
@@ -220,7 +236,7 @@ FSRmdr <- function(y, x, bsb, intercept=TRUE, init, nocheck=FALSE,
     ##  and init cannot be smaller than the length of bsb
     if(missing(init))
     {
-        init <- if(n < 40) p1 + 1 else min(3*p1 + 1, floor(0.5*(n1 + p1 + 1)))
+        init <- if(n1 < 40) p1 + 1 else min(3*p1 + 1, floor(0.5*(n1 + p1 + 1)))
     }
     if(init < lbsb)
         init <- lbsb
@@ -231,7 +247,7 @@ FSRmdr <- function(y, x, bsb, intercept=TRUE, init, nocheck=FALSE,
     {
         ## Default for vector bsbsteps which indicates for which steps of the fwd
         ##  search the units forming the subset have to be saved
-        bsbsteps <- if(n1 <= 5000) init:n1 else c(init, seq(init + 100 - init %% 100, 100*floor(n/100), 100))
+        bsbsteps <- if(n1 <= 5000) init:n1 else c(init, seq(init + 100 - init %% 100, 100*floor(n1/100), 100))
     }
     if(min(bsbsteps) < init)
         warning("FSDA:FSRmdr:WrongInit: It is impossible to monitor the subset for values smaller than init")
@@ -304,23 +320,39 @@ FSRmdr <- function(y, x, bsb, intercept=TRUE, init, nocheck=FALSE,
         NAOK=TRUE,
         PACKAGE="fsdac")
 
-    mdr <- matrix(tmp$mdr[1:(tmp$nmdr*tmp$pmdr)], nrow=tmp$nmdr, ncol=tmp$pmdr)
-    Un <- matrix(tmp$Un, nrow=tmp$nUn, ncol=tmp$pUn)
-    BB <- matrix(tmp$BB, nrow=tmp$nBB, ncol=tmp$pBB)
-    Bols <- matrix(tmp$Bols, nrow=tmp$nBols, ncol=tmp$pBols)
-    S2 <- matrix(tmp$S2, nrow=tmp$nS2, ncol=tmp$pS2)
+    ##  Copy the output parameters into the output class FSR and return it.
+    singularity <- NULL
 
-    if(tmp$pmdr == 2) {
+    if(tmp$nmdr == 0)             # singularity condition, user choice of initial subset
+    {
+        mdr <- Un <- BB <- Bols <- S2 <- NULL
+        singularity <- "Singular initial subset"
+    	message(paste("Singularity issue! The initial subset results in a singular matrix:\n", paste(bsb, collapse=",")))
+
+    } else if(tmp$pmdr == 1)     # singularity condition occured during FS, the list of units is returned in mdr
+    {
+        mdr <- Un <- BB <- Bols <- S2 <- NULL
+        singularity <- tmp$mdr[1:tmp$nmdr]
+    	message(paste("Singularity issue! The following", length(singularity), "observations produce singular matrix:"))
+        print(singularity)
+    } else if(tmp$pmdr == 2) {
+        mdr <- matrix(tmp$mdr[1:(tmp$nmdr*tmp$pmdr)], nrow=tmp$nmdr, ncol=tmp$pmdr)
+        Un <- matrix(tmp$Un, nrow=tmp$nUn, ncol=tmp$pUn)
+        BB <- matrix(tmp$BB, nrow=tmp$nBB, ncol=tmp$pBB)
+        Bols <- matrix(tmp$Bols, nrow=tmp$nBols, ncol=tmp$pBols)
+        S2 <- matrix(tmp$S2, nrow=tmp$nS2, ncol=tmp$pS2)
+
         dimnames(mdr) <- list(1:nrow(mdr), c("Step", "MDR"))
         dimnames(Un) <- list(1:nrow(Un), c("Step", paste0("Unit", 1:10)))
         dimnames(Bols) <- list(1:nrow(Bols), c("Step", paste0("V", 1:p1)))
         dimnames(S2) <- list(1:nrow(S2), c("Step", "S2", "R2"))
-    } else {
-    	message(paste("Singularity issue! The vector 'mdr' does not contain the minimum deletion residuals!\n It contains a list of ",
-        nrow(tmp$mdr), "observations which produce singular matrix:"))
-        print(as.vector(tmp$mdr[1:tmp$nmdr]))
-    }
-    ans <- list(mdr=mdr, Un=Un, BB=BB, Bols=Bols, S2=S2)
+    } else
+        stop("Wrong 'mdr' dimensions!")
+
+    ans <- if(!is.null(singularity))
+                list(singularity=singularity)
+            else list(mdr=mdr, Un=Un, BB=BB, Bols=Bols, S2=S2)
+
     class(ans) <- "FSRmdr"
     ans$call <- match.call()
 
@@ -344,5 +376,5 @@ plot.FSRmdr <- function(x, col, xlab, ylab, main, ...) {
         main <- "Monitoring of the minimum deletion residual"
     plot(x$mdr[,"Step"], x$mdr[,"MDR"], type="l", col=col,  xlab=xlab, ylab=ylab, main=main, ...)
 
-     return(invisible(x))
+    return(invisible(x))
 }

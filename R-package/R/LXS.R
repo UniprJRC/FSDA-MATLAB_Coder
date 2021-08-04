@@ -91,7 +91,7 @@
 #'  \item \code{conflev}: confidence level which is used to declare outliers.
 #'  \item \code{singsub}: number of subsets wihtout full rank. Notice that if this number is greater than
 #'      \code{0.1*(number of subsamples)} a warning is produced on the screen.
-#'  \item \code{y}: the responce variable.
+#'  \item \code{y}: the response variable.
 #'  \item \code{X}: the predictor matrix.
 #'  \item \code{C}: the matrix containing the indexes of the subsamples extracted for computing
 #'      the estimate (the so called elemental sets) (only of \code{csave=TRUE}).
@@ -122,28 +122,44 @@ LXS <- function(y, x, intercept=TRUE, lms=1, rew=FALSE, bonflevoutX,
     trace=FALSE)
 {
 
-    y <- data.matrix(y)
-    if (!is.numeric(y)) stop("y is not a numeric")
-    if (!is.null(dim(y)) && dim(y)[2] != 1) stop("y is not onedimensional")
+    ## Preprocess y and x
+    if(nocheck) {
+        ## no checks will be performed: x must be a numerics matrix or
+        ##  a data frame that can be coerced to a numeric matrix and y is
+        ##  a vector or a one-dimensional numerical matrix or data frame.
+        y <- data.matrix(y)
+        if(is.data.frame(x)) {
+    	    x <- data.matrix(x)
+        } else if (!is.matrix(x))
+    	    x <- matrix(x, length(x), 1,
+    			dimnames = list(names(x), deparse(substitute(x))))
 
-    if(is.data.frame(x))
-        x <- data.matrix(x)
-    else if (!is.matrix(x))
-        x <- matrix(x, length(x), 1,
-              dimnames = list(names(x), deparse(substitute(x))))
-    n <- nrow(x)
-    p <- ncol(x)
+        n1 <- n <- nrow(x)
+        p1 <- p <- ncol(x)
+    } else {
+        ## Here we call chkinputR(), which might change n and p, especially,
+        ##  p will become p+1 of intercept is TRUE. We take these n and p in
+        ##  n1 and p1 and use them whenever preliminary calculations are necessary,
+        ##  e.g. to find default values for 'init'.
+        ##
+        chk <- chkinputR(y, x, intercept)
+        n <- chk$n
+        p <- chk$p
+        n1 <- chk$n1
+        p1 <- chk$p1
 
-    ## Here we call chkinputR(), which might change n and p, especially,
-    ##  p will become p+1 of intercept is TRUE. We take these n and p in
-    ##  n1 and p1 and use them whenever preliminary calculations are necessary,
-    ##  e.g. to find default values for 'init'.
-    ##
-    ##  chk <- chkinputR(y, Y, intercept, nochek)
-    n1 <- n
-    p1 <- if(intercept && !nocheck) p+1 else p
-    y1 <- y
-    x1 <- x         # what is returned from chkinputR(), but with the 1-s for the intercept removed.
+        ## Further the original y and x will be used, therefore, take care
+        ##  both y and x to ba data.matrix. We do this after calling chkinputR(),
+        ##  because other wise data.matrix() will kill the dimnames.
+        y <- data.matrix(y)
+        if(is.data.frame(x)) {
+    	    x <- data.matrix(x)
+        } else if (!is.matrix(x))
+    	    x <- matrix(x, length(x), 1,
+    			dimnames = list(names(x), deparse(substitute(x))))
+    }
+
+    ##  Process the input parameters and initial values =========
 
     if(missing(bonflevoutX))
         bonflevoutX <- c(0.0, 0.0)
@@ -291,7 +307,7 @@ LXS <- function(y, x, intercept=TRUE, lms=1, rew=FALSE, bonflevoutX,
 
     ans <- list(rew=rew, coefficients=tmp$beta, bs=tmp$bs, residuals=tmp$residuals, scale=tmp$scale, weights=tmp$weights,
         h=tmp$h, outliers=outliers, conflev=tmp$conflev, singsub=tmp$singsub,
-        y=y1, X=x1)
+        y=chk$y, X=chk$x)
 
         if(csave)
             ans$C <- tmp$C

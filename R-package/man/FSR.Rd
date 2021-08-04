@@ -30,9 +30,9 @@ FSR(
  (also called 'regressors') of dimension n x (p-1) where p denotes the number of
  explanatory variables including the intercept.
 
- Rows of \code{X} represent observations, and columns represent variables. By default,
+ Rows of \code{x} represent observations, and columns represent variables. By default,
  there is a constant term in the model, unless you explicitly remove it using input
- option intercept, so do not include a column of 1s in \code{X}.
+ option intercept, so do not include a column of 1s in \code{x}.
  Missing values (NaN's)
  and infinite values (Inf's) are allowed, since observations (rows) with missing or
  infinite values will automatically be excluded from the computations.}
@@ -40,21 +40,19 @@ FSR(
 \item{intercept}{Indicator for the constant term (intercept) in the fit, defaults to \code{intercept=TRUE}.}
 
 \item{lms}{criterion to use to find the initial subset to initialize the search (LMS, LTS with concentration steps,
- LTS without concentration steps or a subset supplied directly by the user). The default value is \code{lms="lms"}
- (or \code{lms=1}) (Least Median of Squares is computed to initialize the search). If the user wants to initialze
- the search with LTS with all the default options for concentration steps then, \code{lms=2} or \code{lms="lts"}.
- If the user wants to use LTS without concentration steps, \code{lms} can
- be any value different from 1 or 2. If \code{lms} is a list it is possible
- to control a series of options for concentration steps (for more details
- see the option \code{lms} in LXS()). It is also possible to initialize the
- search with a prespecified set of units and in such case \code{lms} is a list
- which contains a field named \code{bsb} which contains the list of units.
- For example, in the case of simple regression through the origin with just
+LTS without concentration steps or a subset supplied directly by the user). The default value is \code{lms="lms"}
+(or \code{lms=1}) (Least Median of Squares is computed to initialize the search). If the user wants to initialze
+the search with LTS with all the default options for concentration steps then, \code{lms=2} or \code{lms="lts"}.
+If the user wants to use LTS without concentration steps, \code{lms} can
+be any value different from 1 or 2. If \code{lms} is a vector or a list it is possible
+to initialize the search with a prespecified set of units and in such case \code{lms} is a list
+which contains a field named \code{bsb} which contains the list of units.
+For example, in the case of simple regression through the origin with just
 one explanatory variable, to initialize the search with unit 3 then \code{lms=list(bsb=3)}.}
 
 \item{bsbmfullrank}{how to deal with singular \code{x} matrix. This option tells what to do
 in case when a subset at step \code{m} (say \code{bsbm}) produces a singular \code{x}.
-In other words, this options controls what to do when \code{rank(X[bsbm,]} is smaller
+In other words, this options controls what to do when \code{rank(x[bsbm,]} is smaller
 then number of explanatory variables. If \code{bsbmfullrank=TRUE} (default) these units
 (whose number is say \code{mnofullrank}) are constrained to enter the search in the final
 \code{n-mnofullrank} steps else the search continues using as estimate of \code{beta} at step \code{m}
@@ -85,13 +83,13 @@ then \code{n}. Generally \code{h=[0.5*(n+p+1)]} (default value).}
  Remark: if the number of all possible subset is <1000 the default is to extract all subsets
  otherwise just 1000.}
 
-\item{threshoutX}{threshold to bound the effect of high leverage units. If the design matrix \code{X}
+\item{threshoutX}{threshold to bound the effect of high leverage units. If the design matrix \code{x}
 contains several high leverage units (that is units which are very far from the bulk of the data),
 it may happen that the best subset of LXS may include some of these units, or it may happen that
 these units have a deletion residual which is very small due to their extremely high value of \code{hi}.
 \code{threshoutX=1} imposes the constraints that:
 \enumerate{
-\item the extracted subsets which contain at least one unit declared as outlier in the \code{X} space by
+\item the extracted subsets which contain at least one unit declared as outlier in the \code{x} space by
     FSM using a Bonferronized confidence level of 0.99 are removed from the list of candidate subsets
     to find the LXS solution.
 \item imposes the constraint that \eqn{h_i(m^*)} cannot exceed \eqn{10 \times p/m}.
@@ -111,7 +109,7 @@ By default, \code{init=p+1}, if the sample size is smaller than 40 or
 no message is displayed on the screen.}
 
 \item{nocheck}{Wheather to check the input arguments. If \code{nocheck=TRUE} no check is performed on
-matrix \code{y} and matrix \code{X}. Notice that \code{y} and \code{X} are left unchanged. In other words
+matrix \code{y} and matrix \code{x}. Notice that \code{y} and \code{x} are left unchanged. In other words
 the additional column of ones for the intercept is not added. By default \code{nocheck=FALSE}.}
 
 \item{trace}{Whether to print intermediate results. Default is \code{trace=FALSE}.}
@@ -141,6 +139,11 @@ An object of class \code{FSR} will be returned which is basically a list
  \item \code{nout} a \code{2 x 5} matrix containing the number of times \code{mdr}
      went out of particular quantiles. The first row contains the quantiles
      \code{c(1, 99, 99.9, 99.99, 99.999)}. The second row contains the frequency distribution.
+ \item \code{singularity} if present, this element indicatres a singularity condition - either
+     on the initial set or a set reached during the forward search. Contains the indexes
+     of units that result in a singular matrix.
+ \item \code{y}: the response variable.
+ \item \code{X}: the predictor matrix.
  }
 }
 \description{

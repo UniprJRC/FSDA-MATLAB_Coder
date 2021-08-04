@@ -120,7 +120,7 @@ An object of class \code{lts} or \code{lms} will be returned which is basically 
  \item \code{conflev}: confidence level which is used to declare outliers.
  \item \code{singsub}: number of subsets wihtout full rank. Notice that if this number is greater than
      \code{0.1*(number of subsamples)} a warning is produced on the screen.
- \item \code{y}: the responce variable.
+ \item \code{y}: the response variable.
  \item \code{X}: the predictor matrix.
  \item \code{C}: the matrix containing the indexes of the subsamples extracted for computing
      the estimate (the so called elemental sets) (only of \code{csave=TRUE}).

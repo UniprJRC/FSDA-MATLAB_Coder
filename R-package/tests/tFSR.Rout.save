@@ -23,118 +23,138 @@ Type 'q()' to quit R.
 > X <- XX[, 1:(ncol(XX)-1), drop=FALSE]
 > 
 > (out <- FSR(y, X))
-Signal in final part of the search: step 71 because
-rmin(71,75)>99% at final step: Bonferroni signal in the final part of the search.
-rmin(71,75)>99.999%
-------------------------------------------------
+
 -------------------
 
 Call:
 FSR(y = y, x = X)
 
 Coefficients:
-[1]  -0.9297   0.1431   0.1907   0.1845
+Intercept         X1         X2         X3  
+ -0.18046    0.08138    0.03990   -0.05167  
 
-Scale estimate 0.6739 
+Scale estimate 0.5572 
 
 > out$outliers
-[1] 11 12 13 14
+ [1]  1  2  3  4  5  6  7  8  9 10
 > out$Un
-      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11]
- [1,]   14   18  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [2,]   15   31  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [3,]   16   30  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [4,]   17    2  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [5,]   18   19  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [6,]   19   72  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [7,]   20   52  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [8,]   21   20  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [9,]   22    6  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[10,]   23   41  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[11,]   24   22   47  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[12,]   25   55  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[13,]   26   44  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[14,]   27   31  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[15,]   28   59  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[16,]   29   34  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[17,]   30   45  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[18,]   31   17  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[19,]   32   58  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[20,]   33   66  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[21,]   34   67  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[22,]   35    5  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[23,]   36   61  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[24,]   37   74  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[25,]   38   60  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[26,]   39    9   37  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[27,]   40   50  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[28,]   41   23  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[29,]   42   33  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[30,]   43   15  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[31,]   44   17  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[32,]   45    8  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[33,]   46    7  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[34,]   47   36  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[35,]   48   16  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[36,]   49   49  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[37,]   50   26  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[38,]   51   25  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[39,]   52   28  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[40,]   53   21  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[41,]   54   69  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[42,]   55   70  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[43,]   56   65  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[44,]   57   73  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[45,]   58   75  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[46,]   59   29  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[47,]   60   43  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[48,]   61   54  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[49,]   62   24   51  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[50,]   63   36  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[51,]   64    4  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[52,]   65   64  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[53,]   66   57  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[54,]   67   53  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[55,]   68   27  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[56,]   69   38  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[57,]   70   62  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[58,]   71   68  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[59,]   72   13  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[60,]   73   14  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[61,]   74   11  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[62,]   75   12  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
+   Step Unit1 Unit2 Unit3 Unit4 Unit5 Unit6 Unit7 Unit8 Unit9 Unit10
+1    14    35   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+2    15    69   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+3    16    34   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+4    17    74   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+5    18    63   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+6    19    42   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+7    20    71   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+8    21    11   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+9    22    37   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+10   23    30   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+11   24    72   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+12   25    50   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+13   26    58   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+14   27    26   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+15   28    66   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+16   29    44   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+17   30    41   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+18   31    31   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+19   32    17   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+20   33    61   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+21   34    45   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+22   35    33   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+23   36    55   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+24   37    19   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+25   38    64   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+26   39    67   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+27   40    36   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+28   41    39   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+29   42    15   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+30   43    52   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+31   44    27   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+32   45    23   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+33   46    29   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+34   47    28   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+35   48    13   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+36   49    22   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+37   50    51   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+38   51    47   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+39   52    75   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+40   53    73   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+41   54    54   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+42   55    24   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+43   56    43   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+44   57    62   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+45   58    57   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+46   59    65   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+47   60    49   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+48   61    21   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+49   62    38   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+50   63    70   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+51   64    68   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+52   65    53   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+53   66     4   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+54   67     9   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+55   68    10   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+56   69     5   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+57   70     1     3   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+58   71     2     6     8   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+59   72     7   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+60   73    13   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+61   74    11   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+62   75    12   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
 > out$residuals
- [1]   0.33453395   0.63655154   0.18851096  -1.38810827  -0.45372183
- [6]   0.15829118   1.29492555   1.13040519  -0.77927244   0.22538246
-[11] -17.62521957 -18.39886340 -16.79432063 -19.73589232  -1.33150820
-[16]   0.90680016   0.57519506  -0.10919149   0.09936640  -0.24962312
-[21]   1.02011744   0.31405338  -1.10209327   1.35436148   0.61244733
-[26]  -1.61683467  -1.86122565   0.66848461   1.09609378  -0.44933061
-[31]   0.05126740  -0.08147655  -1.11714786   0.06421589  -0.33404374
-[36]  -1.69956067  -1.09268567   2.00202523  -0.43364953  -0.36304522
-[41]  -0.73752560  -0.74499780   1.06834615  -1.05891573   0.04153070
-[46]  -0.55902904  -0.84031831  -0.40443748   0.82905656  -1.24615692
-[51]   1.39575230  -0.56148269   1.33783557   1.25351148   0.34779211
-[56]  -0.00624615   1.64616707  -0.65125242  -0.82090930  -1.34748175
-[61]  -0.93393362   1.96817343  -0.11801849  -1.59977103   0.90782540
-[66]  -0.72676753  -0.89338667   1.94735053   0.99959588   0.78937011
-[71]  -0.12798241  -0.02126659   0.82597690  -1.01647727   0.78756242
+          1           2           3           4           5           6 
+17.47762347 18.27430684 18.67418536 17.32709552 18.13902457 17.93995432 
+          7           8           9          10          11          12 
+19.37443171 18.63000006 17.52815535 18.13168217 -0.11495345 -0.36288026 
+         13          14          15          16          17          18 
+ 1.11826171 -0.38538183 -0.90351788  0.81819860 -0.13109775  0.05882740 
+         19          20          21          22          23          24 
+ 0.32718433  0.54950410  1.57798225  0.75087247 -1.49449377  1.27193680 
+         25          26          27          28          29          30 
+-0.32349183 -1.24782232 -1.32449307  0.72754297  0.69674338 -0.12466020 
+         31          32          33          34          35          36 
+-0.13641211 -0.61107345 -1.05491701 -0.92591619  0.51582571 -1.53865066 
+         37          38          39          40          41          42 
+-0.74129292  1.65261727 -1.12783698 -0.67844603 -0.19784274 -0.79747625 
+         43          44          45          46          47          48 
+ 1.23320567 -0.93438196 -0.80248702 -0.41452383 -1.66246595  0.21417921 
+         49          50          51          52          53          54 
+ 1.48347480 -0.63231552  1.17390476 -0.98712640  1.81367002  1.23247431 
+         55          56          57          58          59          60 
+ 0.16243061  0.09474662  1.33203449 -0.31050595 -0.32042389 -1.13658303 
+         61          62          63          64          65          66 
+-0.23825987  1.28988778 -0.54999045 -0.92833913  1.30880315 -1.37526882 
+         67          68          69          70          71          72 
+-1.19803441  1.48806595  0.37555885  1.54544749  0.39573454 -0.12683127 
+         73          74          75 
+ 1.08017799 -1.30052510  0.85142609 
 > out$fitted.values
- [1]  9.474541102  9.670996586 10.172953188 10.435514488 10.305785475
- [6]  9.893319783  9.927285933  9.538164299 10.125190051  9.748103664
-[11] 11.678503014 11.999899672 12.018519317 13.400989271  0.497368917
-[16] -0.011137263 -0.587652260  0.073589517  0.033032093  0.568233306
-[21]  0.212492648  0.088343972 -0.057245101 -0.212770867 -0.712758404
-[26]  0.289664470  0.554371575 -0.150524684 -0.438711552  0.002826012
-[31] -0.034551622 -0.345088939  0.152900929 -0.743278250  0.525128519
-[36]  0.145417591  0.136414658 -0.449263344 -0.407742235 -0.255325960
-[41]  0.397054805 -0.197909311 -0.120011054  0.013655429 -0.527989581
-[46] -0.023242810 -0.333668131  0.372570322  0.341257976  0.439846487
-[51] -0.240666173 -0.121589177 -0.201633240 -0.144803086 -0.234394221
-[56]  0.104209588 -0.409433015  0.338911061  0.253251181  0.008134280
-[61]  0.329423838 -0.726448950 -0.220461530  0.578164443 -0.011828218
-[66] -0.410195591 -0.097902749 -0.712415374 -0.473676867  0.168004630
-[71]  0.286253646 -0.185667400 -0.156666488 -0.214945937 -0.330777078
+           1            2            3            4            5            6 
+-0.038596957 -0.082511898 -0.105325701 -0.154722217 -0.107132111  0.003790572 
+           7            8            9           10           11           12 
+ 0.004494422 -0.080705487 -0.166753505 -0.203040898 -0.135947508 -0.197801764 
+          13           14           15           16           17           18 
+ 0.076900405  0.314736194  0.103443532  0.144096689 -0.126951844 -0.032778848 
+          19           20           21           22           23           24 
+-0.082308327  0.093814267  0.020742410 -0.118388941  0.032737500 -0.008727924 
+          25           26           27           28           29           30 
+-0.119749149 -0.104708750  0.038012474 -0.105389654 -0.088228006 -0.230538869 
+          31           32           33           34           35           36 
+ 0.076009335 -0.059507596 -0.012196309 -0.184076048  0.012579993 -0.142658117 
+          37           38           39           40           41           42 
+-0.186948820 -0.020844503 -0.071565029 -0.121967341  0.010238714 -0.255643261 
+          43           44           45           46           47           48 
+-0.087146796 -0.179358890 -0.052851243 -0.169025774  0.026332223 -0.019341457 
+          49           50           51           52           53           54 
+ 0.073402309 -0.047671435  0.045895894  0.050030512 -0.310583695  0.013260718 
+          55           56           57           58           59           60 
+-0.090506943  0.047206831 -0.042214585  0.073015074 -0.121458616 -0.266691701 
+          61           62           63           64           65           66 
+-0.167240713 -0.118730281  0.006456732  0.017274025 -0.129269997 -0.133695086 
+          67           68           69           70           71           72 
+-0.032450759 -0.229155892 -0.009262793 -0.161129104 -0.020504761 -0.129329143 
+          73           74           75 
+-0.201879204 -0.175342564 -0.274417791 
 > 
 > n <- 200
 > p <- 3
@@ -157,277 +177,352 @@ Call:
 FSR(y = ycont, x = X)
 
 Coefficients:
-[1]  -0.063295   0.114162   0.008352   0.049730
+Intercept         V1         V2         V3  
+-0.063295   0.114162   0.008352   0.049730  
 
 Scale estimate 0.989 
 
 > out$outliers
 [1] 1 2 3 4 5
 > out$Un
-       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11]
-  [1,]   14  149  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-  [2,]   15  175  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-  [3,]   16  123  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-  [4,]   17  168  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-  [5,]   18  174  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-  [6,]   19  114  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-  [7,]   20  125  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-  [8,]   21  127  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-  [9,]   22   30  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [10,]   23   70  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [11,]   24  150  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [12,]   25   26  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [13,]   26   86  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [14,]   27  136  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [15,]   28  177  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [16,]   29  198  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [17,]   30   51  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [18,]   31   36  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [19,]   32  154  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [20,]   33   27  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [21,]   34    7  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [22,]   35  142  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [23,]   36  112  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [24,]   37   40  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [25,]   38   82  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [26,]   39   74  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [27,]   40  183  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [28,]   41   96  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [29,]   42  126  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [30,]   43   97  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [31,]   44  200  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [32,]   45   83  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [33,]   46  110  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [34,]   47  148  173  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [35,]   48    9  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [36,]   49   75  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [37,]   50   64  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [38,]   51   37  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [39,]   52   81  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [40,]   53  199  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [41,]   54  172  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [42,]   55   90  194  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [43,]   56   99  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [44,]   57  146  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [45,]   58  157  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [46,]   59  143  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [47,]   60   43  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [48,]   61  136  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [49,]   62  187  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [50,]   63  176  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [51,]   64  188  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [52,]   65  101  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [53,]   66   46  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [54,]   67  137  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [55,]   68   66  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [56,]   69   45   51  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [57,]   70  113  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [58,]   71   20  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [59,]   72  135  182  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [60,]   73   24   95  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [61,]   74   39  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [62,]   75   28  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [63,]   76   65  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [64,]   77   99  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [65,]   78   52  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [66,]   79  143  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [67,]   80  157  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [68,]   81  195  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [69,]   82   17  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [70,]   83  191  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [71,]   84   50  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [72,]   85  140  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [73,]   86   19  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [74,]   87   87  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [75,]   88   67  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [76,]   89  109  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [77,]   90  139  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [78,]   91   13   25  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [79,]   92   16  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [80,]   93   21  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [81,]   94  141  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [82,]   95   85  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [83,]   96   68  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [84,]   97   42  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [85,]   98  195  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [86,]   99   38  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [87,]  100  186  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [88,]  101   60  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [89,]  102   59  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [90,]  103   94  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [91,]  104  185  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [92,]  105   48  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [93,]  106  179  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [94,]  107   98  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [95,]  108   55  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [96,]  109   18  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [97,]  110   56  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [98,]  111  181  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [99,]  112   73  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[100,]  113   63  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[101,]  114   69  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[102,]  115  156  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[103,]  116   31  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[104,]  117  105  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[105,]  118   72  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[106,]  119  178  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[107,]  120   80  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[108,]  121   14  167  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[109,]  122   41  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[110,]  123  124  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[111,]  124  153  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[112,]  125  103  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[113,]  126  107  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[114,]  127  160  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[115,]  128   22  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[116,]  129   63  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[117,]  130   89  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[118,]  131  158  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[119,]  132   62   91  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[120,]  133   44  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[121,]  134  128  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[122,]  135   78  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[123,]  136   32  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[124,]  137  133  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[125,]  138   88  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[126,]  139  134  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[127,]  140  132  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[128,]  141  119  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[129,]  142  116  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[130,]  143  196  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[131,]  144   53  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[132,]  145  162  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[133,]  146   49  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[134,]  147  138  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[135,]  148  144  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[136,]  149  148  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[137,]  150   61  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[138,]  151   35  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[139,]  152  170  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[140,]  153   23  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[141,]  154  117  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[142,]  155  100  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[143,]  156  169  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[144,]  157  147  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[145,]  158  190  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[146,]  159  129  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[147,]  160   34  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[148,]  161  122  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[149,]  162   79  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[150,]  163  104  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[151,]  164  180  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[152,]  165   33  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[153,]  166   57  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[154,]  167  155  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[155,]  168   92  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[156,]  169  163  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[157,]  170  152  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[158,]  171   58  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[159,]  172  171  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[160,]  173    6  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[161,]  174   54  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[162,]  175  145  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[163,]  176   84  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[164,]  177  120  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[165,]  178   76  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[166,]  179  130  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[167,]  180  193  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[168,]  181   15  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[169,]  182   47  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[170,]  183   71  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[171,]  184   77  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[172,]  185   29  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[173,]  186  197  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[174,]  187  131  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[175,]  188  189  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[176,]  189  115  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[177,]  190  166  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[178,]  191  102  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[179,]  192   93  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[180,]  193  151  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[181,]  194  164  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[182,]  195  159  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[183,]  196    4  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[184,]  197    1  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[185,]  198    2  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[186,]  199    3  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[187,]  200    5  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
+    Step Unit1 Unit2 Unit3 Unit4 Unit5 Unit6 Unit7 Unit8 Unit9 Unit10
+1     14   149   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+2     15   175   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+3     16   123   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+4     17   168   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+5     18   174   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+6     19   114   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+7     20   125   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+8     21   127   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+9     22    30   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+10    23    70   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+11    24   150   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+12    25    26   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+13    26    86   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+14    27   136   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+15    28   177   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+16    29   198   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+17    30    51   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+18    31    36   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+19    32   154   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+20    33    27   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+21    34     7   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+22    35   142   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+23    36   112   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+24    37    40   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+25    38    82   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+26    39    74   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+27    40   183   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+28    41    96   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+29    42   126   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+30    43    97   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+31    44   200   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+32    45    83   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+33    46   110   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+34    47   148   173   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+35    48     9   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+36    49    75   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+37    50    64   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+38    51    37   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+39    52    81   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+40    53   199   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+41    54   172   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+42    55    90   194   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+43    56    99   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+44    57   146   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+45    58   157   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+46    59   143   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+47    60    43   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+48    61   136   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+49    62   187   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+50    63   176   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+51    64   188   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+52    65   101   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+53    66    46   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+54    67   137   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+55    68    66   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+56    69    45    51   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+57    70   113   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+58    71    20   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+59    72   135   182   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+60    73    24    95   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+61    74    39   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+62    75    28   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+63    76    65   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+64    77    99   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+65    78    52   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+66    79   143   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+67    80   157   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+68    81   195   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+69    82    17   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+70    83   191   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+71    84    50   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+72    85   140   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+73    86    19   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+74    87    87   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+75    88    67   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+76    89   109   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+77    90   139   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+78    91    13    25   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+79    92    16   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+80    93    21   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+81    94   141   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+82    95    85   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+83    96    68   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+84    97    42   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+85    98   195   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+86    99    38   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+87   100   186   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+88   101    60   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+89   102    59   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+90   103    94   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+91   104   185   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+92   105    48   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+93   106   179   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+94   107    98   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+95   108    55   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+96   109    18   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+97   110    56   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+98   111   181   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+99   112    73   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+100  113    63   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+101  114    69   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+102  115   156   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+103  116    31   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+104  117   105   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+105  118    72   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+106  119   178   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+107  120    80   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+108  121    14   167   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+109  122    41   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+110  123   124   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+111  124   153   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+112  125   103   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+113  126   107   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+114  127   160   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+115  128    22   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+116  129    63   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+117  130    89   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+118  131   158   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+119  132    62    91   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+120  133    44   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+121  134   128   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+122  135    78   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+123  136    32   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+124  137   133   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+125  138    88   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+126  139   134   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+127  140   132   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+128  141   119   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+129  142   116   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+130  143   196   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+131  144    53   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+132  145   162   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+133  146    49   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+134  147   138   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+135  148   144   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+136  149   148   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+137  150    61   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+138  151    35   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+139  152   170   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+140  153    23   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+141  154   117   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+142  155   100   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+143  156   169   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+144  157   147   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+145  158   190   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+146  159   129   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+147  160    34   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+148  161   122   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+149  162    79   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+150  163   104   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+151  164   180   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+152  165    33   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+153  166    57   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+154  167   155   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+155  168    92   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+156  169   163   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+157  170   152   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+158  171    58   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+159  172   171   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+160  173     6   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+161  174    54   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+162  175   145   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+163  176    84   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+164  177   120   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+165  178    76   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+166  179   130   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+167  180   193   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+168  181    15   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+169  182    47   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+170  183    71   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+171  184    77   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+172  185    29   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+173  186   197   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+174  187   131   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+175  188   189   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+176  189   115   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+177  190   166   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+178  191   102   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+179  192    93   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+180  193   151   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+181  194   164   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+182  195   159   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+183  196     4   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+184  197     1   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+185  198     2   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+186  199     3   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+187  200     5   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
 > out$residuals
-  [1]  6.18684070  6.47155328  7.05690431  5.02165018  8.07432389 -1.20714536
-  [7]  0.10719841 -0.35398649 -0.32199562  0.61887746  0.60305813  0.91224943
- [13] -0.02815926  0.84460404 -1.63842467 -0.01381599  0.02984038  0.86111952
- [19]  0.18636623 -0.42788616 -0.17234735  1.20823943  1.45839585 -0.25930160
- [25]  0.45990768  0.51756137  0.33007347 -0.32490555 -1.92703812  0.73726664
- [31] -0.26121438 -0.59386625  1.57803055 -1.35441904  1.28111012  0.58791787
- [37] -0.14004560  0.71145293 -0.72994137  0.61673238 -0.42281177  0.57411327
- [43]  0.26317433 -0.61827654  0.14876801 -0.01946533  1.71797308  1.03903110
- [49]  1.44291204  0.30776409  0.20231118  0.01257565  1.28165418 -1.27781743
- [55]  1.11841520 -0.53948455  1.48757789 -1.48579922 -0.37586836  0.94674329
- [61]  1.41983685  1.04800776  1.18624588  0.98182844 -0.44820104 -0.39042899
- [67] -0.10106648 -0.17594397 -0.13429533  0.41971426 -1.81684953 -0.38235847
- [73] -0.17958290  0.03638017  1.05348176 -1.55095757 -1.72265424 -0.50228052
- [79] -1.39767678 -0.32882512 -0.04052978  0.31469622  1.01310530 -1.39670124
- [85] -0.09571385  0.95576089  0.38106250  1.20888948  1.08573117  0.15310940
- [91] -0.68576398 -1.20147471 -2.61405230 -0.49506533 -0.41418716  0.17820746
- [97]  0.10406085  0.75829448  0.45079895 -1.00813657  0.24496037  2.44064910
-[103] -0.67910460 -1.32173381 -0.50475917 -0.41838005 -0.54156960  0.47092656
-[109] -0.04502998 -0.17528000  0.61357232  0.26742609 -0.53045318  0.25114769
-[115]  2.26468533 -0.94975484 -1.04308975 -0.09070397 -0.94849644 -1.40910853
-[121] -0.02384287 -1.18406578  0.38482704 -0.46681929 -0.17528047  0.48435159
-[127]  0.45701359 -0.62333772 -1.13656776 -1.63608631 -2.15560623 -0.91344761
-[133] -0.60144860  1.36095215  0.31998998  0.42893248  0.21238710  1.46013831
-[139]  0.30023943  0.29821622  0.12046201  0.13349430  0.72156656  1.29664992
-[145] -1.39571585  0.82180172 -1.18837751  1.23352758  0.70778703  0.56793248
-[151] -2.69396275 -1.20037228 -0.64364060  0.14228976 -1.63721460  0.89842079
-[157]  0.83372088  1.01499996  2.91395939  1.05724770  0.65087424 -0.75377235
-[163] -1.42517925 -2.51323632  0.51101386  2.44928515 -0.64643093  0.78066512
-[169] -1.37644975  1.23974898  1.51478825 -0.13740852 -0.43394106  0.14308576
-[175] -0.65926951  0.23907836  0.09675193 -0.55574706  0.73595852 -1.39597688
-[181] -0.66640258 -0.35193277  0.02061459  0.26012428  0.77784663  0.57647216
-[187]  0.54123381  0.18597252 -2.13043214 -0.99619730  0.23174613  0.78007830
-[193] -1.69748103  0.38885601  1.03527823 -0.60220408 -2.01760823  0.76627108
-[199]  0.18759419  0.48984126
+          1           2           3           4           5           6 
+ 6.18684070  6.47155328  7.05690431  5.02165018  8.07432389 -1.20714536 
+          7           8           9          10          11          12 
+ 0.10719841 -0.35398649 -0.32199562  0.61887746  0.60305813  0.91224943 
+         13          14          15          16          17          18 
+-0.02815926  0.84460404 -1.63842467 -0.01381599  0.02984038  0.86111952 
+         19          20          21          22          23          24 
+ 0.18636623 -0.42788616 -0.17234735  1.20823943  1.45839585 -0.25930160 
+         25          26          27          28          29          30 
+ 0.45990768  0.51756137  0.33007347 -0.32490555 -1.92703812  0.73726664 
+         31          32          33          34          35          36 
+-0.26121438 -0.59386625  1.57803055 -1.35441904  1.28111012  0.58791787 
+         37          38          39          40          41          42 
+-0.14004560  0.71145293 -0.72994137  0.61673238 -0.42281177  0.57411327 
+         43          44          45          46          47          48 
+ 0.26317433 -0.61827654  0.14876801 -0.01946533  1.71797308  1.03903110 
+         49          50          51          52          53          54 
+ 1.44291204  0.30776409  0.20231118  0.01257565  1.28165418 -1.27781743 
+         55          56          57          58          59          60 
+ 1.11841520 -0.53948455  1.48757789 -1.48579922 -0.37586836  0.94674329 
+         61          62          63          64          65          66 
+ 1.41983685  1.04800776  1.18624588  0.98182844 -0.44820104 -0.39042899 
+         67          68          69          70          71          72 
+-0.10106648 -0.17594397 -0.13429533  0.41971426 -1.81684953 -0.38235847 
+         73          74          75          76          77          78 
+-0.17958290  0.03638017  1.05348176 -1.55095757 -1.72265424 -0.50228052 
+         79          80          81          82          83          84 
+-1.39767678 -0.32882512 -0.04052978  0.31469622  1.01310530 -1.39670124 
+         85          86          87          88          89          90 
+-0.09571385  0.95576089  0.38106250  1.20888948  1.08573117  0.15310940 
+         91          92          93          94          95          96 
+-0.68576398 -1.20147471 -2.61405230 -0.49506533 -0.41418716  0.17820746 
+         97          98          99         100         101         102 
+ 0.10406085  0.75829448  0.45079895 -1.00813657  0.24496037  2.44064910 
+        103         104         105         106         107         108 
+-0.67910460 -1.32173381 -0.50475917 -0.41838005 -0.54156960  0.47092656 
+        109         110         111         112         113         114 
+-0.04502998 -0.17528000  0.61357232  0.26742609 -0.53045318  0.25114769 
+        115         116         117         118         119         120 
+ 2.26468533 -0.94975484 -1.04308975 -0.09070397 -0.94849644 -1.40910853 
+        121         122         123         124         125         126 
+-0.02384287 -1.18406578  0.38482704 -0.46681929 -0.17528047  0.48435159 
+        127         128         129         130         131         132 
+ 0.45701359 -0.62333772 -1.13656776 -1.63608631 -2.15560623 -0.91344761 
+        133         134         135         136         137         138 
+-0.60144860  1.36095215  0.31998998  0.42893248  0.21238710  1.46013831 
+        139         140         141         142         143         144 
+ 0.30023943  0.29821622  0.12046201  0.13349430  0.72156656  1.29664992 
+        145         146         147         148         149         150 
+-1.39571585  0.82180172 -1.18837751  1.23352758  0.70778703  0.56793248 
+        151         152         153         154         155         156 
+-2.69396275 -1.20037228 -0.64364060  0.14228976 -1.63721460  0.89842079 
+        157         158         159         160         161         162 
+ 0.83372088  1.01499996  2.91395939  1.05724770  0.65087424 -0.75377235 
+        163         164         165         166         167         168 
+-1.42517925 -2.51323632  0.51101386  2.44928515 -0.64643093  0.78066512 
+        169         170         171         172         173         174 
+-1.37644975  1.23974898  1.51478825 -0.13740852 -0.43394106  0.14308576 
+        175         176         177         178         179         180 
+-0.65926951  0.23907836  0.09675193 -0.55574706  0.73595852 -1.39597688 
+        181         182         183         184         185         186 
+-0.66640258 -0.35193277  0.02061459  0.26012428  0.77784663  0.57647216 
+        187         188         189         190         191         192 
+ 0.54123381  0.18597252 -2.13043214 -0.99619730  0.23174613  0.78007830 
+        193         194         195         196         197         198 
+-1.69748103  0.38885601  1.03527823 -0.60220408 -2.01760823  0.76627108 
+        199         200 
+ 0.18759419  0.48984126 
 > out$fitted.values
-  [1]  0.0348288862 -0.0769011206 -0.0583536400 -0.0462935805  0.1921301634
-  [6] -0.0355016801  0.0916724131  0.2575768836  0.0994102942 -0.1663732667
- [11] -0.1332535161 -0.2525094570 -0.1349278159  0.1340610825  0.0313155746
- [16] -0.1381013049 -0.1611624093  0.0605243352  0.1621014067  0.0155092030
- [21] -0.1689989986  0.0421649585 -0.0677299551 -0.0160814781  0.0584984392
- [26] -0.0870804317 -0.0613765569  0.0365082952  0.0644443425 -0.1702277585
- [31] -0.2400144673 -0.1112857971 -0.1841326020 -0.3960127584 -0.1774359441
- [36] -0.1836085235  0.0972664628  0.0316803629  0.1365017336 -0.2157784744
- [41] -0.2311845523  0.0866006455 -0.1081597097 -0.1978348319 -0.1070449704
- [46] -0.0943203194 -0.1137244771 -0.0837186784  0.0331873530 -0.2536311427
- [51] -0.1987916434 -0.1194387572 -0.0160631521  0.0715660504  0.0444067001
- [56] -0.0760707321 -0.1503573928 -0.2944133481 -0.0626992271 -0.0859518563
- [61] -0.1768017062  0.0009662657 -0.0969498531 -0.2001166934  0.0695729028
- [66] -0.0261252233 -0.1085142344 -0.1284749866 -0.1964865443 -0.1082499342
- [71]  0.0921058473 -0.0749270092 -0.2664032281 -0.0016555852 -0.2489472168
- [76]  0.1623110647 -0.1539321077 -0.1365096973 -0.2309718693 -0.3627894719
- [81]  0.0463068760 -0.1636583122 -0.2555620693 -0.0193035780 -0.2082683894
- [86] -0.1194475213  0.0821355555  0.0002207688 -0.0079997670  0.0287413095
- [91] -0.1124466736  0.0357560899  0.0841880878 -0.0642548222  0.0625403100
- [96]  0.0437689957 -0.0281604251  0.1304194854 -0.0449954242 -0.0537702233
-[101] -0.1785883486  0.1170362722 -0.1930120067  0.0799138075  0.0134708453
-[106]  0.1779743688 -0.2013780720 -0.0686722536 -0.1862336476  0.0969084937
-[111] -0.1021840649 -0.0374574767  0.0234937558 -0.0979634877 -0.0683291128
-[116] -0.0721929144 -0.1908825131  0.0892700996 -0.0832035581 -0.1237375106
-[121]  0.1029281397 -0.3135505847 -0.2320717641 -0.2576871347 -0.0396413401
-[126] -0.0439123099 -0.0882824500 -0.0465151605 -0.2150637239 -0.0100250357
-[131]  0.0074856321 -0.1619717596 -0.0297937134 -0.0512182094 -0.2345550079
-[136]  0.0562089547 -0.1357806547  0.1401345192  0.0623154762 -0.2336001219
-[141]  0.2329245238 -0.0439578830 -0.0840440714  0.1039683756  0.0812164234
-[146] -0.1323928282  0.1002898371 -0.3086114073 -0.1414508496 -0.0173775436
-[151] -0.0132746442 -0.0050921192 -0.0889103695 -0.0239999004 -0.0290673992
-[156]  0.0973020623 -0.1405971912  0.1344628862  0.1084357340  0.0361835312
-[161] -0.1019887576 -0.1119354514 -0.0701995620 -0.3323432924 -0.0872411069
-[166] -0.1712663159 -0.2519398652 -0.0660985098 -0.1567735171 -0.0253326313
-[171] -0.2116362194  0.0921795116  0.0930223180 -0.0766797898  0.1830276240
-[176] -0.1458915713  0.0191824460 -0.1383086088  0.1402321749  0.0279224797
-[181] -0.0713419777 -0.0284324663  0.0731399604 -0.0371534624  0.0161149975
-[186]  0.0770295567 -0.2462373193 -0.1438319947 -0.2277435011 -0.0163010106
-[191] -0.2397520174 -0.1546698941  0.0049431718 -0.1166388783 -0.1416633109
-[196] -0.1469467698 -0.0173938636 -0.1043808801  0.0079825791 -0.0718415541
+            1             2             3             4             5 
+ 0.0348288862 -0.0769011206 -0.0583536400 -0.0462935805  0.1921301634 
+            6             7             8             9            10 
+-0.0355016801  0.0916724131  0.2575768836  0.0994102942 -0.1663732667 
+           11            12            13            14            15 
+-0.1332535161 -0.2525094570 -0.1349278159  0.1340610825  0.0313155746 
+           16            17            18            19            20 
+-0.1381013049 -0.1611624093  0.0605243352  0.1621014067  0.0155092030 
+           21            22            23            24            25 
+-0.1689989986  0.0421649585 -0.0677299551 -0.0160814781  0.0584984392 
+           26            27            28            29            30 
+-0.0870804317 -0.0613765569  0.0365082952  0.0644443425 -0.1702277585 
+           31            32            33            34            35 
+-0.2400144673 -0.1112857971 -0.1841326020 -0.3960127584 -0.1774359441 
+           36            37            38            39            40 
+-0.1836085235  0.0972664628  0.0316803629  0.1365017336 -0.2157784744 
+           41            42            43            44            45 
+-0.2311845523  0.0866006455 -0.1081597097 -0.1978348319 -0.1070449704 
+           46            47            48            49            50 
+-0.0943203194 -0.1137244771 -0.0837186784  0.0331873530 -0.2536311427 
+           51            52            53            54            55 
+-0.1987916434 -0.1194387572 -0.0160631521  0.0715660504  0.0444067001 
+           56            57            58            59            60 
+-0.0760707321 -0.1503573928 -0.2944133481 -0.0626992271 -0.0859518563 
+           61            62            63            64            65 
+-0.1768017062  0.0009662657 -0.0969498531 -0.2001166934  0.0695729028 
+           66            67            68            69            70 
+-0.0261252233 -0.1085142344 -0.1284749866 -0.1964865443 -0.1082499342 
+           71            72            73            74            75 
+ 0.0921058473 -0.0749270092 -0.2664032281 -0.0016555852 -0.2489472168 
+           76            77            78            79            80 
+ 0.1623110647 -0.1539321077 -0.1365096973 -0.2309718693 -0.3627894719 
+           81            82            83            84            85 
+ 0.0463068760 -0.1636583122 -0.2555620693 -0.0193035780 -0.2082683894 
+           86            87            88            89            90 
+-0.1194475213  0.0821355555  0.0002207688 -0.0079997670  0.0287413095 
+           91            92            93            94            95 
+-0.1124466736  0.0357560899  0.0841880878 -0.0642548222  0.0625403100 
+           96            97            98            99           100 
+ 0.0437689957 -0.0281604251  0.1304194854 -0.0449954242 -0.0537702233 
+          101           102           103           104           105 
+-0.1785883486  0.1170362722 -0.1930120067  0.0799138075  0.0134708453 
+          106           107           108           109           110 
+ 0.1779743688 -0.2013780720 -0.0686722536 -0.1862336476  0.0969084937 
+          111           112           113           114           115 
+-0.1021840649 -0.0374574767  0.0234937558 -0.0979634877 -0.0683291128 
+          116           117           118           119           120 
+-0.0721929144 -0.1908825131  0.0892700996 -0.0832035581 -0.1237375106 
+          121           122           123           124           125 
+ 0.1029281397 -0.3135505847 -0.2320717641 -0.2576871347 -0.0396413401 
+          126           127           128           129           130 
+-0.0439123099 -0.0882824500 -0.0465151605 -0.2150637239 -0.0100250357 
+          131           132           133           134           135 
+ 0.0074856321 -0.1619717596 -0.0297937134 -0.0512182094 -0.2345550079 
+          136           137           138           139           140 
+ 0.0562089547 -0.1357806547  0.1401345192  0.0623154762 -0.2336001219 
+          141           142           143           144           145 
+ 0.2329245238 -0.0439578830 -0.0840440714  0.1039683756  0.0812164234 
+          146           147           148           149           150 
+-0.1323928282  0.1002898371 -0.3086114073 -0.1414508496 -0.0173775436 
+          151           152           153           154           155 
+-0.0132746442 -0.0050921192 -0.0889103695 -0.0239999004 -0.0290673992 
+          156           157           158           159           160 
+ 0.0973020623 -0.1405971912  0.1344628862  0.1084357340  0.0361835312 
+          161           162           163           164           165 
+-0.1019887576 -0.1119354514 -0.0701995620 -0.3323432924 -0.0872411069 
+          166           167           168           169           170 
+-0.1712663159 -0.2519398652 -0.0660985098 -0.1567735171 -0.0253326313 
+          171           172           173           174           175 
+-0.2116362194  0.0921795116  0.0930223180 -0.0766797898  0.1830276240 
+          176           177           178           179           180 
+-0.1458915713  0.0191824460 -0.1383086088  0.1402321749  0.0279224797 
+          181           182           183           184           185 
+-0.0713419777 -0.0284324663  0.0731399604 -0.0371534624  0.0161149975 
+          186           187           188           189           190 
+ 0.0770295567 -0.2462373193 -0.1438319947 -0.2277435011 -0.0163010106 
+          191           192           193           194           195 
+-0.2397520174 -0.1546698941  0.0049431718 -0.1166388783 -0.1416633109 
+          196           197           198           199           200 
+-0.1469467698 -0.0173938636 -0.1043808801  0.0079825791 -0.0718415541 
 > 
 > n <- 200
 > p <- 3
@@ -440,237 +535,318 @@ Call:
 FSR(y = y, x = X, init = 60)
 
 Coefficients:
-[1]  -0.03782   0.06411  -0.01600  -0.03393
+Intercept         V1         V2         V3  
+ -0.03782    0.06411   -0.01600   -0.03393  
 
 Scale estimate 1.006 
 
 > out$outliers
-[1] NaN
+NULL
 > out$Un
-       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11]
-  [1,]   61  107  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-  [2,]   62   26   59  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-  [3,]   63  194  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-  [4,]   64    2  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-  [5,]   65   65  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-  [6,]   66   48  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-  [7,]   67  177  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-  [8,]   68  170  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-  [9,]   69   74  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [10,]   70  143  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [11,]   71   87  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [12,]   72   86  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [13,]   73    1  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [14,]   74    5  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [15,]   75   88  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [16,]   76   76  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [17,]   77   31  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [18,]   78   23  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [19,]   79   37  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [20,]   80  159  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [21,]   81    9  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [22,]   82   18  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [23,]   83   22  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [24,]   84  126  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [25,]   85    7  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [26,]   86   63  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [27,]   87   85  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [28,]   88  106  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [29,]   89   80  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [30,]   90  121  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [31,]   91  137  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [32,]   92   52  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [33,]   93  113  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [34,]   94  160  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [35,]   95  151  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [36,]   96   72  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [37,]   97  178  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [38,]   98  100  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [39,]   99  175  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [40,]  100   83  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [41,]  101   44  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [42,]  102  188  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [43,]  103  134  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [44,]  104  130  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [45,]  105   75  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [46,]  106   41  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [47,]  107   27  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [48,]  108   56  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [49,]  109   28  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [50,]  110  181  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [51,]  111  114  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [52,]  112  142  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [53,]  113    3  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [54,]  114   14  122  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [55,]  115   10  104  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [56,]  116  118  196  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [57,]  117  184  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [58,]  118   82  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [59,]  119   49  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [60,]  120  119  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [61,]  121  163  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [62,]  122  151  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [63,]  123   52  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [64,]  124   73  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [65,]  125  200  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [66,]  126  123  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [67,]  127   43  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [68,]  128  198  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [69,]  129  156  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [70,]  130   60  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [71,]  131   92  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [72,]  132   98  138  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [73,]  133   15  108  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [74,]  134  165  193  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [75,]  135   98  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [76,]  136  168  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [77,]  137   32  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [78,]  138  149  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [79,]  139  105  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [80,]  140  123  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [81,]  141  109  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [82,]  142   43  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [83,]  143   45  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [84,]  144   11  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [85,]  145   16  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [86,]  146  179  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [87,]  147    8  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [88,]  148   64  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [89,]  149  131  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [90,]  150  113  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [91,]  151  166  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [92,]  152  102  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [93,]  153   95  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [94,]  154    4  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [95,]  155  135  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [96,]  156  144  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [97,]  157   68  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [98,]  158  183  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
- [99,]  159   40   89  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[100,]  160    4   51  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[101,]  161  123  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[102,]  162   24  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[103,]  163   91  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[104,]  164  101  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[105,]  165   57  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[106,]  166   69  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[107,]  167  171  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[108,]  168   79  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[109,]  169  141  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[110,]  170  133  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[111,]  171  127  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[112,]  172  136  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[113,]  173  174  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[114,]  174   58  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[115,]  175  169  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[116,]  176   34  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[117,]  177  150  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[118,]  178   42  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[119,]  179   66  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[120,]  180  182  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[121,]  181   94  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[122,]  182  192  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[123,]  183   93  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[124,]  184   99  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[125,]  185   78  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[126,]  186   97  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[127,]  187  161  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[128,]  188   47  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[129,]  189  162  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[130,]  190    6  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[131,]  191  112  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[132,]  192  157  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[133,]  193  129  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[134,]  194  190  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[135,]  195   30  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[136,]  196  117  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[137,]  197  128  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[138,]  198   61  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[139,]  199   38  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
-[140,]  200  199  NaN  NaN  NaN  NaN  NaN  NaN  NaN   NaN   NaN
+    Step Unit1 Unit2 Unit3 Unit4 Unit5 Unit6 Unit7 Unit8 Unit9 Unit10
+1     61   107   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+2     62    26    59   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+3     63   194   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+4     64     2   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+5     65    65   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+6     66    48   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+7     67   177   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+8     68   170   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+9     69    74   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+10    70   143   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+11    71    87   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+12    72    86   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+13    73     1   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+14    74     5   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+15    75    88   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+16    76    76   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+17    77    31   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+18    78    23   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+19    79    37   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+20    80   159   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+21    81     9   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+22    82    18   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+23    83    22   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+24    84   126   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+25    85     7   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+26    86    63   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+27    87    85   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+28    88   106   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+29    89    80   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+30    90   121   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+31    91   137   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+32    92    52   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+33    93   113   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+34    94   160   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+35    95   151   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+36    96    72   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+37    97   178   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+38    98   100   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+39    99   175   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+40   100    83   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+41   101    44   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+42   102   188   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+43   103   134   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+44   104   130   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+45   105    75   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+46   106    41   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+47   107    27   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+48   108    56   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+49   109    28   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+50   110   181   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+51   111   114   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+52   112   142   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+53   113     3   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+54   114    14   122   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+55   115    10   104   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+56   116   118   196   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+57   117   184   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+58   118    82   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+59   119    49   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+60   120   119   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+61   121   163   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+62   122   151   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+63   123    52   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+64   124    73   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+65   125   200   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+66   126   123   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+67   127    43   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+68   128   198   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+69   129   156   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+70   130    60   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+71   131    92   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+72   132    98   138   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+73   133    15   108   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+74   134   165   193   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+75   135    98   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+76   136   168   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+77   137    32   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+78   138   149   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+79   139   105   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+80   140   123   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+81   141   109   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+82   142    43   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+83   143    45   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+84   144    11   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+85   145    16   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+86   146   179   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+87   147     8   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+88   148    64   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+89   149   131   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+90   150   113   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+91   151   166   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+92   152   102   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+93   153    95   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+94   154     4   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+95   155   135   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+96   156   144   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+97   157    68   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+98   158   183   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+99   159    40    89   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+100  160     4    51   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+101  161   123   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+102  162    24   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+103  163    91   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+104  164   101   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+105  165    57   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+106  166    69   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+107  167   171   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+108  168    79   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+109  169   141   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+110  170   133   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+111  171   127   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+112  172   136   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+113  173   174   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+114  174    58   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+115  175   169   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+116  176    34   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+117  177   150   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+118  178    42   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+119  179    66   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+120  180   182   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+121  181    94   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+122  182   192   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+123  183    93   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+124  184    99   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+125  185    78   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+126  186    97   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+127  187   161   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+128  188    47   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+129  189   162   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+130  190     6   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+131  191   112   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+132  192   157   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+133  193   129   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+134  194   190   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+135  195    30   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+136  196   117   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+137  197   128   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+138  198    61   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+139  199    38   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
+140  200   199   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN
 > out$residuals
-  [1] -0.0916638498  0.0153864060  0.7614335520 -1.2397425930 -0.4913622213
-  [6] -1.9515297233 -0.4888702151  1.2308552592 -0.5834387362  1.0100639348
- [11] -1.0475178736  0.2555601726  0.8533432045  0.7933951126 -0.6522397371
- [16] -1.0567966347 -0.2297438993 -0.3697832718  0.5101929859 -0.0917683467
- [21]  0.3398342921  0.0387531881 -0.6688371568 -1.1510696825  0.7217345511
- [26]  0.3006398238  0.6791401502  1.0035258789  0.3033611654  2.1013933221
- [31] -0.0726434534  0.9246486749  0.0937106448 -1.7893325992  0.0799089345
- [36] -0.0063655396 -0.5637129022 -2.3969926256 -0.0818845093 -1.3242061277
- [41]  0.9620665451 -1.5965450986  1.2877371876  0.4753042148 -0.9861452549
- [46] -0.0231022421  1.8273350440  0.4901447376  0.8205191763  0.6580606340
- [51]  1.1915841048 -0.7817868617  0.1471336757  0.0483458044  0.3875314751
- [56]  0.5440582319  1.1749748930  1.5801500499 -0.2193924670 -0.5628898696
- [61]  2.1771088170 -0.2393895190 -0.9611920851  1.2418663429 -0.0095486618
- [66] -1.6566129888  0.6142720745  1.1513416560 -1.0980831788 -0.0692035841
- [71]  0.2924319848 -0.8645142294 -0.9001414334 -0.5735768448  0.6418336232
- [76] -0.3560125724  0.6499235864  1.6929993710 -1.4584204179  0.7631123414
- [81] -0.5178083987 -0.5052424942 -0.1658985254 -0.7825924115 -0.7267102382
- [86] -0.5328950542 -0.4165737640 -0.7584128276  1.2645278217 -0.4813316918
- [91] -1.3830009060 -0.5806602809  1.6643396774  1.4629542061 -1.2791217800
- [96]  0.5697756830  1.7793051413  0.8767340523 -1.7519454605 -0.6182894055
-[101]  1.3949437425 -1.2525644329  0.1394005412 -0.2302406343 -0.9477677026
-[106] -0.6425738818  0.1524144349 -0.5738961700  1.0595469190 -0.4035630502
-[111] -0.2193289741 -1.8563181476 -1.4105271632  0.6683019275 -0.1973925005
-[116]  0.4177928797  2.1418341175  0.7365333723 -0.6873218352  0.4550363701
-[121]  0.7044745858  0.8708832154 -1.0860054143 -0.4708579584  0.9804569834
-[126] -0.0898755285  1.5663557668  2.1027883595 -1.9547032517  0.1813150043
-[131] -1.2178248507  0.0986769882 -1.4150052156  0.3528085717 -1.0240639317
-[136] -1.5673506947  0.6706666007 -0.8027118296  0.2558834165  0.4637789041
-[141] -1.4887486179  0.2294268136 -0.6769850352  1.1889302845  0.7232876865
-[146]  0.8164302043  0.2097575985  0.2841265448  1.0235256269 -1.6727041075
-[151] -0.6792858942 -0.2512028855 -0.1389962907  0.4614205690  0.4895628164
-[156] -0.3933149791 -1.8823646646  0.2560282742 -0.7989531530  1.1153415601
-[161]  1.8193249531  1.9270986195  0.5734175026  0.8552744059 -0.9096406084
-[166] -1.1239252226 -0.3521698188  0.9482966663  1.4990612766 -0.4842322560
-[171]  1.2528224031 -0.0001062603 -0.0825561713 -1.3351392998  0.6630928502
-[176]  0.9928331676  0.8276516768 -0.8353280041 -1.0907644975 -0.2190480714
-[181]  0.2696784120 -1.7083243112  1.2803812887 -0.4511991723  0.2739757522
-[186] -0.6152422957  0.4742151064  0.4621749640 -0.7852190522 -1.9950054982
-[191]  0.2364295444  1.5697275592 -0.6489643650  0.5637233027  0.3860172960
-[196]  0.1156949214  0.6885775297  0.7749811499 -2.8683546962 -0.3763237923
+            1             2             3             4             5 
+-0.0916638498  0.0153864060  0.7614335520 -1.2397425930 -0.4913622213 
+            6             7             8             9            10 
+-1.9515297233 -0.4888702151  1.2308552592 -0.5834387362  1.0100639348 
+           11            12            13            14            15 
+-1.0475178736  0.2555601726  0.8533432045  0.7933951126 -0.6522397371 
+           16            17            18            19            20 
+-1.0567966347 -0.2297438993 -0.3697832718  0.5101929859 -0.0917683467 
+           21            22            23            24            25 
+ 0.3398342921  0.0387531881 -0.6688371568 -1.1510696825  0.7217345511 
+           26            27            28            29            30 
+ 0.3006398238  0.6791401502  1.0035258789  0.3033611654  2.1013933221 
+           31            32            33            34            35 
+-0.0726434534  0.9246486749  0.0937106448 -1.7893325992  0.0799089345 
+           36            37            38            39            40 
+-0.0063655396 -0.5637129022 -2.3969926256 -0.0818845093 -1.3242061277 
+           41            42            43            44            45 
+ 0.9620665451 -1.5965450986  1.2877371876  0.4753042148 -0.9861452549 
+           46            47            48            49            50 
+-0.0231022421  1.8273350440  0.4901447376  0.8205191763  0.6580606340 
+           51            52            53            54            55 
+ 1.1915841048 -0.7817868617  0.1471336757  0.0483458044  0.3875314751 
+           56            57            58            59            60 
+ 0.5440582319  1.1749748930  1.5801500499 -0.2193924670 -0.5628898696 
+           61            62            63            64            65 
+ 2.1771088170 -0.2393895190 -0.9611920851  1.2418663429 -0.0095486618 
+           66            67            68            69            70 
+-1.6566129888  0.6142720745  1.1513416560 -1.0980831788 -0.0692035841 
+           71            72            73            74            75 
+ 0.2924319848 -0.8645142294 -0.9001414334 -0.5735768448  0.6418336232 
+           76            77            78            79            80 
+-0.3560125724  0.6499235864  1.6929993710 -1.4584204179  0.7631123414 
+           81            82            83            84            85 
+-0.5178083987 -0.5052424942 -0.1658985254 -0.7825924115 -0.7267102382 
+           86            87            88            89            90 
+-0.5328950542 -0.4165737640 -0.7584128276  1.2645278217 -0.4813316918 
+           91            92            93            94            95 
+-1.3830009060 -0.5806602809  1.6643396774  1.4629542061 -1.2791217800 
+           96            97            98            99           100 
+ 0.5697756830  1.7793051413  0.8767340523 -1.7519454605 -0.6182894055 
+          101           102           103           104           105 
+ 1.3949437425 -1.2525644329  0.1394005412 -0.2302406343 -0.9477677026 
+          106           107           108           109           110 
+-0.6425738818  0.1524144349 -0.5738961700  1.0595469190 -0.4035630502 
+          111           112           113           114           115 
+-0.2193289741 -1.8563181476 -1.4105271632  0.6683019275 -0.1973925005 
+          116           117           118           119           120 
+ 0.4177928797  2.1418341175  0.7365333723 -0.6873218352  0.4550363701 
+          121           122           123           124           125 
+ 0.7044745858  0.8708832154 -1.0860054143 -0.4708579584  0.9804569834 
+          126           127           128           129           130 
+-0.0898755285  1.5663557668  2.1027883595 -1.9547032517  0.1813150043 
+          131           132           133           134           135 
+-1.2178248507  0.0986769882 -1.4150052156  0.3528085717 -1.0240639317 
+          136           137           138           139           140 
+-1.5673506947  0.6706666007 -0.8027118296  0.2558834165  0.4637789041 
+          141           142           143           144           145 
+-1.4887486179  0.2294268136 -0.6769850352  1.1889302845  0.7232876865 
+          146           147           148           149           150 
+ 0.8164302043  0.2097575985  0.2841265448  1.0235256269 -1.6727041075 
+          151           152           153           154           155 
+-0.6792858942 -0.2512028855 -0.1389962907  0.4614205690  0.4895628164 
+          156           157           158           159           160 
+-0.3933149791 -1.8823646646  0.2560282742 -0.7989531530  1.1153415601 
+          161           162           163           164           165 
+ 1.8193249531  1.9270986195  0.5734175026  0.8552744059 -0.9096406084 
+          166           167           168           169           170 
+-1.1239252226 -0.3521698188  0.9482966663  1.4990612766 -0.4842322560 
+          171           172           173           174           175 
+ 1.2528224031 -0.0001062603 -0.0825561713 -1.3351392998  0.6630928502 
+          176           177           178           179           180 
+ 0.9928331676  0.8276516768 -0.8353280041 -1.0907644975 -0.2190480714 
+          181           182           183           184           185 
+ 0.2696784120 -1.7083243112  1.2803812887 -0.4511991723  0.2739757522 
+          186           187           188           189           190 
+-0.6152422957  0.4742151064  0.4621749640 -0.7852190522 -1.9950054982 
+          191           192           193           194           195 
+ 0.2364295444  1.5697275592 -0.6489643650  0.5637233027  0.3860172960 
+          196           197           198           199           200 
+ 0.1156949214  0.6885775297  0.7749811499 -2.8683546962 -0.3763237923 
 > out$fitted.values
-  [1] -0.0588027462 -0.1208692331 -0.0065683448  0.0045533599 -0.0955192522
-  [6] -0.0758071930 -0.0693631972  0.0222537405 -0.0633096941 -0.1135937290
- [11] -0.0988381838 -0.0934635046  0.0195414706 -0.0086513878 -0.0835107693
- [16]  0.0094389619 -0.0452095119 -0.0115579322 -0.1347400047 -0.0048056269
- [21]  0.2400728038 -0.0633398023  0.0340995102  0.0204023868 -0.0937639968
- [26] -0.0058643526 -0.1469100275 -0.0051143387  0.0298081580  0.0734746325
- [31] -0.0060214438 -0.0105542229 -0.1352533530 -0.0390465131 -0.1435673110
- [36] -0.0488400657 -0.0795926717  0.0062134520 -0.1415140439 -0.0969382333
- [41] -0.0401116363  0.0318136243  0.0120467286 -0.0746365959 -0.0253984305
- [46]  0.0730213917 -0.0814779005 -0.0437895682 -0.1821102725 -0.0563444966
- [51] -0.0859719318 -0.1246117994 -0.0332435747 -0.1276899443 -0.0231868901
- [56] -0.0005087206 -0.2083453670 -0.0055585438  0.1404754007 -0.0630949681
- [61]  0.0043819106 -0.0829661626  0.0249830427  0.0216512507 -0.0847493496
- [66] -0.0755475268 -0.0184726824  0.0063308250 -0.0767189510 -0.0398120775
- [71] -0.1069991583 -0.0170701021 -0.0321253643  0.0571923080 -0.0538504269
- [76] -0.0528607041  0.0224479926  0.0635195942  0.0089769293 -0.0179018219
- [81]  0.0178297873 -0.0091465986  0.0013647142  0.0161321925 -0.0403747012
- [86] -0.0914052206 -0.0755638216 -0.2252330485 -0.1955714595  0.0824232254
- [91]  0.1088924950 -0.1346013808  0.0104855312 -0.0273114296 -0.0171058181
- [96]  0.0608914278 -0.0082583715 -0.0088725222 -0.0442221418  0.1248580097
-[101] -0.1591533639 -0.0237031367 -0.0426044135  0.0853842771 -0.0234390104
-[106] -0.0170516557  0.0010612759 -0.1388979698  0.0273851147  0.0552395917
-[111]  0.0270737067 -0.0229652555 -0.0641572523 -0.0663234023  0.0841716907
-[116] -0.0511629445 -0.0435833853 -0.1740694819  0.1374662020 -0.0289515128
-[121]  0.0202838868 -0.0754352597 -0.0448081702  0.0319061443  0.0411809962
-[126] -0.0637592985 -0.1125833989 -0.1486645819 -0.0170339162 -0.1255622930
-[131] -0.0547598652 -0.0332289505  0.0071535234 -0.0411269372 -0.0115178299
-[136] -0.1264987639  0.0368613584 -0.1355213999 -0.1305827269 -0.0201191656
-[141] -0.0127369140 -0.0434920436 -0.1495126734  0.0054383634 -0.0753199540
-[146]  0.0020820683  0.0334850652  0.1073411306 -0.0409952078  0.0230268516
-[151] -0.0933704483  0.0514355052 -0.0256559786  0.0903014826 -0.0143929686
-[156] -0.1158801613 -0.0785838340 -0.0032690944 -0.0410837953 -0.0877229268
-[161] -0.0289044931  0.0367091104  0.0884620621 -0.0169344731 -0.0392231549
-[166] -0.0317754488 -0.0652261441 -0.0344906181 -0.0910676933 -0.0643488374
-[171] -0.0223225943 -0.1238228772 -0.0460469700 -0.1383815570 -0.1746721030
-[176] -0.0914093691  0.1256567959  0.0104700245 -0.0090350293 -0.0614750403
-[181]  0.0250479595 -0.0535856816 -0.0018095942  0.0816133474  0.0326532848
-[186] -0.1246581242 -0.0614180890  0.0144278771 -0.0105203372 -0.0746924520
-[191] -0.1105676665 -0.0896502933 -0.0261293473  0.0205381003 -0.0271636752
-[196]  0.1885290572  0.0404600504 -0.0725624540 -0.0157619190 -0.0641841244
+            1             2             3             4             5 
+-0.0588027462 -0.1208692331 -0.0065683448  0.0045533599 -0.0955192522 
+            6             7             8             9            10 
+-0.0758071930 -0.0693631972  0.0222537405 -0.0633096941 -0.1135937290 
+           11            12            13            14            15 
+-0.0988381838 -0.0934635046  0.0195414706 -0.0086513878 -0.0835107693 
+           16            17            18            19            20 
+ 0.0094389619 -0.0452095119 -0.0115579322 -0.1347400047 -0.0048056269 
+           21            22            23            24            25 
+ 0.2400728038 -0.0633398023  0.0340995102  0.0204023868 -0.0937639968 
+           26            27            28            29            30 
+-0.0058643526 -0.1469100275 -0.0051143387  0.0298081580  0.0734746325 
+           31            32            33            34            35 
+-0.0060214438 -0.0105542229 -0.1352533530 -0.0390465131 -0.1435673110 
+           36            37            38            39            40 
+-0.0488400657 -0.0795926717  0.0062134520 -0.1415140439 -0.0969382333 
+           41            42            43            44            45 
+-0.0401116363  0.0318136243  0.0120467286 -0.0746365959 -0.0253984305 
+           46            47            48            49            50 
+ 0.0730213917 -0.0814779005 -0.0437895682 -0.1821102725 -0.0563444966 
+           51            52            53            54            55 
+-0.0859719318 -0.1246117994 -0.0332435747 -0.1276899443 -0.0231868901 
+           56            57            58            59            60 
+-0.0005087206 -0.2083453670 -0.0055585438  0.1404754007 -0.0630949681 
+           61            62            63            64            65 
+ 0.0043819106 -0.0829661626  0.0249830427  0.0216512507 -0.0847493496 
+           66            67            68            69            70 
+-0.0755475268 -0.0184726824  0.0063308250 -0.0767189510 -0.0398120775 
+           71            72            73            74            75 
+-0.1069991583 -0.0170701021 -0.0321253643  0.0571923080 -0.0538504269 
+           76            77            78            79            80 
+-0.0528607041  0.0224479926  0.0635195942  0.0089769293 -0.0179018219 
+           81            82            83            84            85 
+ 0.0178297873 -0.0091465986  0.0013647142  0.0161321925 -0.0403747012 
+           86            87            88            89            90 
+-0.0914052206 -0.0755638216 -0.2252330485 -0.1955714595  0.0824232254 
+           91            92            93            94            95 
+ 0.1088924950 -0.1346013808  0.0104855312 -0.0273114296 -0.0171058181 
+           96            97            98            99           100 
+ 0.0608914278 -0.0082583715 -0.0088725222 -0.0442221418  0.1248580097 
+          101           102           103           104           105 
+-0.1591533639 -0.0237031367 -0.0426044135  0.0853842771 -0.0234390104 
+          106           107           108           109           110 
+-0.0170516557  0.0010612759 -0.1388979698  0.0273851147  0.0552395917 
+          111           112           113           114           115 
+ 0.0270737067 -0.0229652555 -0.0641572523 -0.0663234023  0.0841716907 
+          116           117           118           119           120 
+-0.0511629445 -0.0435833853 -0.1740694819  0.1374662020 -0.0289515128 
+          121           122           123           124           125 
+ 0.0202838868 -0.0754352597 -0.0448081702  0.0319061443  0.0411809962 
+          126           127           128           129           130 
+-0.0637592985 -0.1125833989 -0.1486645819 -0.0170339162 -0.1255622930 
+          131           132           133           134           135 
+-0.0547598652 -0.0332289505  0.0071535234 -0.0411269372 -0.0115178299 
+          136           137           138           139           140 
+-0.1264987639  0.0368613584 -0.1355213999 -0.1305827269 -0.0201191656 
+          141           142           143           144           145 
+-0.0127369140 -0.0434920436 -0.1495126734  0.0054383634 -0.0753199540 
+          146           147           148           149           150 
+ 0.0020820683  0.0334850652  0.1073411306 -0.0409952078  0.0230268516 
+          151           152           153           154           155 
+-0.0933704483  0.0514355052 -0.0256559786  0.0903014826 -0.0143929686 
+          156           157           158           159           160 
+-0.1158801613 -0.0785838340 -0.0032690944 -0.0410837953 -0.0877229268 
+          161           162           163           164           165 
+-0.0289044931  0.0367091104  0.0884620621 -0.0169344731 -0.0392231549 
+          166           167           168           169           170 
+-0.0317754488 -0.0652261441 -0.0344906181 -0.0910676933 -0.0643488374 
+          171           172           173           174           175 
+-0.0223225943 -0.1238228772 -0.0460469700 -0.1383815570 -0.1746721030 
+          176           177           178           179           180 
+-0.0914093691  0.1256567959  0.0104700245 -0.0090350293 -0.0614750403 
+          181           182           183           184           185 
+ 0.0250479595 -0.0535856816 -0.0018095942  0.0816133474  0.0326532848 
+          186           187           188           189           190 
+-0.1246581242 -0.0614180890  0.0144278771 -0.0105203372 -0.0746924520 
+          191           192           193           194           195 
+-0.1105676665 -0.0896502933 -0.0261293473  0.0205381003 -0.0271636752 
+          196           197           198           199           200 
+ 0.1885290572  0.0404600504 -0.0725624540 -0.0157619190 -0.0641841244 
 > 
 > proc.time()
    user  system elapsed 
-   0.56    0.17    0.90 
+   0.46    0.21    0.79 

@@ -7,41 +7,43 @@
 unibiv(Y, madcoef = 1.4815, rf = 0.95, robscale = 1, trace = FALSE)
 }
 \arguments{
-\item{Y}{Input data. A \code{n x v} data matrix; \code{n} observations and \code{v} variables.
-Rows of Y represent observations, and columns represent variables. Missing values (NaN's) and
+\item{Y}{input data. A \code{n x p} data matrix; \code{n} observations and \code{p} variables.
+The rows of Y represent observations, and the columns represent variables. Missing values (NAs, NaN's) and
 infinite values (Inf's) are allowed, since observations (rows) with missing or infinite values
 will automatically be excluded from the computations.}
 
-\item{madcoef}{scaled MAD. Scalar. Coefficient which is used to scale MAD
-coefficient to have a robust estimate of dispersion.  The
-default is \code{1.4815} so that \code{1.4815*MAD(N(0,1))=1}.
-Remark: if \code{mad=median(y-median(y))=0} then the interquartile
-range is used. If also the interquartile range is 0
-than the \code{MD} (mean absolute deviation) is used.  In
-other words \code{MD=mean(abs(y-mean(Y)))}.}
+\item{madcoef}{scaled MAD, a coefficient which is used to scale MAD to a robust estimate
+ of dispersion.  The default is \code{madcoef=1.4815} so that \code{1.4815 * MAD(N(0,1))=1}.
 
-\item{robscale}{how to compute dispersion. Specifies the
-                 statistical indexes to use to compute the dispersion of
-                 each variable and the correlation among each pair of variables.
+ Remark: if \code{mad = median(y - median(y)) = 0} then the interquartile range is used.
+ If also the interquartile range is 0 than \code{MD = mean(abs(y-mean(Y)))} (mean absolute deviation).}
+
+\item{rf}{specifies the confidence level of the robust bivariate ellipses, \code{0 < rf < 1}.
+The default value is \code{rf = 0.95}, that is the outer contour in the presence of
+normality for each ellipse should leave outside 5 per cent of the values.}
+
+\item{robscale}{how to compute dispersion. Specifies the statistical indexes to use to
+compute the dispersion of each variable and the correlation among each pair of variables.
+\code{robscale} can be one of:
 \enumerate{
-  \item robscale=1 (default): the program uses the median correlation
-                 and the MAD as estimate of the dispersion of each variable;
-  \item robscale=2: the correlation coefficient among ranks is used
-                 (Spearman's rho) and the MAD as estimate of the dispersion
-                 of each variable;
-  \item robscale=3: the correlation coefficient is based on Kendall's tau b
-                 and the MAD as estimate of the dispersion of each variable;
-  \item  robscale=4: tetracoric correlation coefficient is used and the MAD
-                 as estimate of the dispersion of each variable;
-                 otherwise the correlation and the dispersion of the variables are
-                 computed using the traditional (non robust) formulae
-                 around the univariate medians.
+  \item \code{robscale=1} (default): the program uses the median correlation and the MAD
+    as estimate of the dispersion of each variable;
+  \item \code{robscale=2}: the correlation coefficient among ranks is used (Spearman's rho) and
+    the MAD as estimate of the dispersion of each variable;
+  \item \code{robscale=3}: the correlation coefficient is based on Kendall's tau and the
+    MAD as estimate of the dispersion of each variable;
+  \item \code{robscale=4}: tetracoric correlation coefficient is used and the MAD as estimate
+    of the dispersion of each variable;
+  \item otherwise: the correlation and the dispersion of the variables are
+    computed using the traditional (non robust) formulae around the univariate medians.
  }}
+
+\item{trace}{Whether to print intermediate results. Default is \code{trace=FALSE}.}
 }
 \value{
-\item \code{fre}   \code{n x 4} matrix which contains details about the univariate and
-          bivariate outliers.
- \itemize {
+an \code{n x 4} matrix, with four columns which contains details about the univariate and
+ bivariate outliers. The columns are defined as follows:
+ \itemize{
   \item        1st col = index of the units;
   \item        2nd col = number of times unit has been declared
                univariate outliers;

@@ -105,28 +105,44 @@
 FSRbsb <- function(y, x, bsb, init, intercept=TRUE, nocheck=FALSE, bsbsteps, msg=TRUE, trace)
 {
 
+    ## Preprocess y and x
+    if(nocheck) {
+        ## no checks will be performed: x must be a numerics matrix or
+        ##  a data frame that can be coerced to a numeric matrix and y is
+        ##  a vector or a one-dimensional numerical matrix or data frame.
+        y <- data.matrix(y)
+        if(is.data.frame(x)) {
+    	    x <- data.matrix(x)
+        } else if (!is.matrix(x))
+    	    x <- matrix(x, length(x), 1,
+    			dimnames = list(names(x), deparse(substitute(x))))
 
-    y <- data.matrix(y)
-    if (!is.numeric(y)) stop("y is not a numeric")
-    if (dim(y)[2] != 1) stop("y is not onedimensional")
+        n1 <- n <- nrow(x)
+        p1 <- p <- ncol(x)
+    } else {
+        ## Here we call chkinputR(), which might change n and p, especially,
+        ##  p will become p+1 of intercept is TRUE. We take these n and p in
+        ##  n1 and p1 and use them whenever preliminary calculations are necessary,
+        ##  e.g. to find default values for 'init'.
+        ##
+        chk <- chkinputR(y, x, intercept)
+        n <- chk$n
+        p <- chk$p
+        n1 <- chk$n1
+        p1 <- chk$p1
 
-    if(is.data.frame(x))
-        x <- data.matrix(x)
-    else if (!is.matrix(x))
-        x <- matrix(x, length(x), 1,
-              dimnames = list(names(x), deparse(substitute(x))))
-    n <- nrow(x)
-    p <- ncol(x)
+        ## Further the original y and x will be used, therefore, take care
+        ##  both y and x to ba data.matrix. We do this after calling chkinputR(),
+        ##  because other wise data.matrix() will kill the dimnames.
+        y <- data.matrix(y)
+        if(is.data.frame(x)) {
+    	    x <- data.matrix(x)
+        } else if (!is.matrix(x))
+    	    x <- matrix(x, length(x), 1,
+    			dimnames = list(names(x), deparse(substitute(x))))
+    }
 
-    ## Here we call chkinputR(), which might change n and p, especially,
-    ##  p will become p+1 of intercept is TRUE. We take these n and p in
-    ##  n1 and p1 and use them whenever preliminary calculations are necessary,
-    ##  e.g. to find devault values for 'init'.
-    ##
-    ##  chk <- chkinputR(y, Y, intercept, nochek)
-    n1 <- n
-    p1 <- if(intercept && !nocheck) p+1 else p
-
+    ##  Process the input parameters and initial values =========
 
     ## If missing bsb, a random sample of p observations will be chosen
     ##  - therefore ste the length of bsb to p, if missing, it will be used for init.
@@ -143,7 +159,7 @@ FSRbsb <- function(y, x, bsb, init, intercept=TRUE, nocheck=FALSE, bsbsteps, msg
     ##  than the length of bsb
     if(missing(init))
     {
-        init <- if(n < 40) p1 + 1 else min(3*p1 + 1, floor(0.5*(n1 + p1 + 1)))
+        init <- if(n1 < 40) p1 + 1 else min(3*p1 + 1, floor(0.5*(n1 + p1 + 1)))
     }
     if(init < lbsb)
         init <- lbsb
@@ -154,7 +170,7 @@ FSRbsb <- function(y, x, bsb, init, intercept=TRUE, nocheck=FALSE, bsbsteps, msg
     {
         ## Default for vector bsbsteps which indicates for which steps of the fwd
         ##  search the units forming the subset have to be saved
-        bsbsteps <- if(n1 <= 5000) init:n1 else c(init, seq(init + 100 - init %% 100, 100*floor(n/100), 100))
+        bsbsteps <- if(n1 <= 5000) init:n1 else c(init, seq(init + 100 - init %% 100, 100*floor(n1/100), 100))
     }
     if(min(bsbsteps) < init)
         warning("FSDA:FSRbsb:WrongInit: It is impossible to monitor the subset for values smaller than init")
