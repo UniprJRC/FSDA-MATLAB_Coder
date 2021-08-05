@@ -782,7 +782,7 @@ void FSMbsb(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     for (i = 0; i < loop_ub; i++) {
       mi->data[i] = ym->data[i] - mibsbr->data[i];
     }
-    if (b_minimum(mi) == 0.0) {
+    if (c_minimum(mi) == 0.0) {
       guard1 = true;
     } else {
       /*  ij = index which is linked with the columns of matrix BB. During the

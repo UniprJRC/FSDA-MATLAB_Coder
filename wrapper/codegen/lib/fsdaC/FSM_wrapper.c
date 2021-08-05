@@ -10,6 +10,8 @@
  */
 
 /* Include files */
+#include <R.h>
+
 #include "FSM_wrapper.h"
 #include "FSMbonfbound.h"
 #include "FSMbsb.h"
@@ -30,6 +32,7 @@
 #include "minOrMax.h"
 #include "mrdivide_helper.h"
 #include "mtimes.h"
+#include "nullAssignment.h"
 #include "rank.h"
 #include "rt_nonfinite.h"
 #include "sortrows.h"
@@ -38,6 +41,7 @@
 #include "unibiv.h"
 #include "rt_nonfinite.h"
 #include <math.h>
+#include <stdio.h>
 #include <string.h>
 
 /* Function Definitions */
@@ -47,8 +51,8 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
                  double rf, struct_FSM_T *out)
 {
   emxArray_boolean_T nout_data;
+  emxArray_boolean_T *b_m0;
   emxArray_boolean_T *r;
-  emxArray_boolean_T *x;
   emxArray_char_T_1x310 b_out;
   emxArray_int32_T *ia;
   emxArray_int32_T *r1;
@@ -61,11 +65,11 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
   emxArray_real_T *a__1;
   emxArray_real_T *b_Y;
   emxArray_real_T *b_bb;
+  emxArray_real_T *b_bs;
   emxArray_real_T *b_loc;
-  emxArray_real_T *b_m0;
   emxArray_real_T *bb;
+  emxArray_real_T *bs;
   emxArray_real_T *c_Y;
-  emxArray_real_T *c_m0;
   emxArray_real_T *fre;
   emxArray_real_T *gbonf;
   emxArray_real_T *gfind;
@@ -107,7 +111,7 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
   unsigned int u;
   int v;
   signed char tmp_data[5];
-  bool b_x[31];
+  bool x[31];
   bool b_nout_data[5];
   bool NoFalseSig;
   bool b_bonflev_data;
@@ -179,15 +183,17 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
   /*  */
   /*  */
   /*        crit    : It specified the criterion to be used to */
-  /*                  initialize the search. Character. */
-  /*                  if crit='md' the units which form initial subset are */
-  /*                   those which have the smallest m0 pseudo Mahalanobis */
-  /*                   distances computed using procedure unibiv (bivariate */
-  /*                   robust ellipses). */
+  /*                  initialize the search. 'md' (default) | 'biv' | 'uni. */
+  /*                  if crit='md' (default) the units which form initial subset
+   * are */
+  /*                   those which have the smallest m0 Mahalanobis */
+  /*                   distances (defined as sum of bivariate robust */
+  /*                   Mahalanobis distances) computed using procedure unibiv */
+  /*                   (bivariate robust ellipses). */
   /*                  if crit='biv' sorting is done first in */
   /*                   terms of times units fell outside robust bivariate */
-  /*                   ellipses and then in terms of pseudoMD. In other words,
-   */
+  /*                   ellipses and then in terms of Mahalanobis distances. In
+   * other words, */
   /*                   the units forming initial subset are chosen first among
    */
   /*                   the set of those which never fell outside robust */
@@ -195,8 +201,10 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
    */
   /*                   outside bivariate ellipses ... up to reach m0. */
   /*                  if crit='uni' sorting is done first in */
-  /*                   terms of times units fell outside univariate boxplots */
-  /*                   and then in terms of pseudoMD. In other words, */
+  /*                   terms of number of times units fell outside univariate
+   * boxplots */
+  /*                   and then in terms of Mahalanobis distances. In other
+   * words, */
   /*                   the units forming initial subset are chosen first among
    */
   /*                   the set of those which never fell outside */
@@ -216,7 +224,9 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
   /*  */
   /*        init    : Point where to start monitoring required diagnostics.
    * Scalar. */
-  /*                  Note that if bsb is suppliedinit>=length(bsb). If init is
+  /*                  Note that if initial subset is supplied (that is input */
+  /*                  option m0 is a vector of length greater than 1) */
+  /*                  init must be greater or equal than length(m0). If init is
    * not */
   /*                  specified it will be set equal to floor(n*0.6). */
   /*                  Example - 'init',50 */
@@ -225,14 +235,17 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
   /*           m0   : Initial subset size or vector which contains the list of
    */
   /*                  the units forming initial subset. Scalar or vector. */
-  /*                  The default is to start the search with v+1 units which */
-  /*                  consisting of those observations which are not outlying */
-  /*                  on any scatterplot, found as the intersection of all */
-  /*                  points lying within a robust contour containing a */
-  /*                  specified portion of the data (Riani and Zani 1997) and */
-  /*                  inside the univariate boxplot. Remark: if m0 is a vector
+  /*                  The default is $m0=v+1$, that is we start the search with
+   * v+1 units.   */
+  /*                  The v+1 units are chosen according to input option 'crit'.
    */
-  /*                  option below crit is ignored. */
+  /*                  If on the other hand, m0 is a vector of length greater */
+  /*                  than 1 it contains the indexes of the units which must */
+  /*                  form the initial susbet. For example if m0=[1;3;10;23;45];
+   */
+  /*                  the initial subset is formed by units 1, 3, 10, 23 and */
+  /*                  45. Note that if  m0 is a vector */
+  /*                  of length greater than 1, option crit is ignored. */
   /*                  Example - 'm0',5 */
   /*                  Data Types - double */
   /*  */
@@ -254,7 +267,8 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
   /*  */
   /*         rf     : confidence level for bivariate ellipses. Scalar. The
    * default is */
-  /*                  0.95. This option is useful only if crit='biv'. */
+  /*                  0.95. This option is used only if crit='biv' and input */
+  /*                  option m0 is not a vector with length greater than 1. */
   /*                  Example - 'rf',0.9 */
   /*                  Data Types - double */
   /*  */
@@ -481,22 +495,37 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
   for (i = 0; i < loop_ub; i++) {
     seq->data[i] = loc->data[i];
   }
-  emxInit_real_T(&b_m0, 1);
   /*  Write in structure 'options' the options chosen by the user */
   init_contents = init;
-  i = b_m0->size[0];
-  b_m0->size[0] = m0->size[0];
-  emxEnsureCapacity_real_T(b_m0, i);
-  loop_ub = m0->size[0];
-  for (i = 0; i < loop_ub; i++) {
-    b_m0->data[i] = m0->data[i];
-  }
   /*  fsizeannot is a scalar which Font Size of the annotations which are */
   /*  shown on the screen */
   /*  Start of the forward search */
+  emxInit_real_T(&bs, 1);
   emxInit_real_T(&goodobs, 2);
+  emxInit_boolean_T(&b_m0, 1);
   emxInit_real_T(&c_Y, 2);
-  if (m0->size[0] <= 1) {
+  if (m0->size[0] > 1) {
+    i = bs->size[0];
+    bs->size[0] = m0->size[0];
+    emxEnsureCapacity_real_T(bs, i);
+    loop_ub = m0->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      bs->data[i] = m0->data[i];
+    }
+    if ((b_maximum(m0) > b_Y->size[0]) || (b_minimum(m0) < 1.0)) {
+      Rprintf("%s\n", "Attention : Initial subset contains indexes outside the "
+                     "interval 1,...,n. \nExternal indexes are removed.");
+      //fflush(stdout);
+      i = b_m0->size[0];
+      b_m0->size[0] = m0->size[0];
+      emxEnsureCapacity_boolean_T(b_m0, i);
+      loop_ub = m0->size[0];
+      for (i = 0; i < loop_ub; i++) {
+        b_m0->data[i] = ((m0->data[i] > b_Y->size[0]) || (m0->data[i] < 1.0));
+      }
+      b_nullAssignment(bs, b_m0);
+    }
+  } else {
     emxInit_real_T(&fre, 2);
     /*  m0(1) necessary for MATLAB C coder */
     /*  Confidence level for robust bivariate ellipses */
@@ -504,12 +533,25 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
     unibiv(b_Y, rf, fre);
     if (b_strcmp(crit)) {
       /*  The user has chosen to select the intial subset according to the */
-      /*  smallest m0 pseudo MD Select only the potential bivariate outliers */
+      /*  smallest m0 robust Mahalanobis distances.  */
       sortrows(fre);
     } else if (c_strcmp(crit)) {
+      /*  The user has chosen to select the intial subset with the units */
+      /*  which never fell outside robust bivariate confidence ellipses, */
+      /*  fell just once, ... up to reach m0 */
+      /*  Among the units which fell the same number of times outside bivariate
+       * ellipses, */
+      /*  we select first those with the smallest robust Mahalanobis distances.
+       */
       b_sortrows(fre);
     } else if (d_strcmp(crit)) {
       c_sortrows(fre);
+      /*  The user has chosen to select the intial subset with the units */
+      /*  which never fell outside univariate boxplots, */
+      /*  fell just once, ... up to reach m0 */
+      /*  Among the units which fell the same number of times outside */
+      /*  univariate boxplots, we select first those with the smallest */
+      /*  robust Mahalanobis distances. */
     }
     /*  initial subset */
     if (1.0 > m0->data[0]) {
@@ -517,11 +559,11 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
     } else {
       loop_ub = (int)m0->data[0];
     }
-    i = b_m0->size[0];
-    b_m0->size[0] = loop_ub;
-    emxEnsureCapacity_real_T(b_m0, i);
+    i = bs->size[0];
+    bs->size[0] = loop_ub;
+    emxEnsureCapacity_real_T(bs, i);
     for (i = 0; i < loop_ub; i++) {
-      b_m0->data[i] = fre->data[i];
+      bs->data[i] = fre->data[i];
     }
     /*  the subset need to be incremented if it is not full rank. We also */
     /*  treat the unfortunate case when the rank of the matrix is v but a */
@@ -535,14 +577,14 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
     do {
       exitg1 = 0;
       i = c_Y->size[0] * c_Y->size[1];
-      c_Y->size[0] = b_m0->size[0];
+      c_Y->size[0] = bs->size[0];
       c_Y->size[1] = loop_ub;
       emxEnsureCapacity_real_T(c_Y, i);
       for (i = 0; i < loop_ub; i++) {
-        irank = b_m0->size[0];
+        irank = bs->size[0];
         for (i1 = 0; i1 < irank; i1++) {
           c_Y->data[i1 + c_Y->size[0] * i] =
-              b_Y->data[((int)b_m0->data[i1] + b_Y->size[0] * i) - 1];
+              b_Y->data[((int)bs->data[i1] + b_Y->size[0] * i) - 1];
         }
       }
       irank = local_rank(c_Y);
@@ -552,27 +594,27 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
       } else {
         irank = b_Y->size[1];
         i = c_Y->size[0] * c_Y->size[1];
-        c_Y->size[0] = b_m0->size[0];
+        c_Y->size[0] = bs->size[0];
         c_Y->size[1] = b_Y->size[1];
         emxEnsureCapacity_real_T(c_Y, i);
         for (i = 0; i < irank; i++) {
-          b_loop_ub = b_m0->size[0];
+          b_loop_ub = bs->size[0];
           for (i1 = 0; i1 < b_loop_ub; i1++) {
             c_Y->data[i1 + c_Y->size[0] * i] =
-                b_Y->data[((int)b_m0->data[i1] + b_Y->size[0] * i) - 1];
+                b_Y->data[((int)bs->data[i1] + b_Y->size[0] * i) - 1];
           }
         }
         maximum(c_Y, loc);
         irank = b_Y->size[1];
         i = c_Y->size[0] * c_Y->size[1];
-        c_Y->size[0] = b_m0->size[0];
+        c_Y->size[0] = bs->size[0];
         c_Y->size[1] = b_Y->size[1];
         emxEnsureCapacity_real_T(c_Y, i);
         for (i = 0; i < irank; i++) {
-          b_loop_ub = b_m0->size[0];
+          b_loop_ub = bs->size[0];
           for (i1 = 0; i1 < b_loop_ub; i1++) {
             c_Y->data[i1 + c_Y->size[0] * i] =
-                b_Y->data[((int)b_m0->data[i1] + b_Y->size[0] * i) - 1];
+                b_Y->data[((int)bs->data[i1] + b_Y->size[0] * i) - 1];
           }
         }
         minimum(c_Y, goodobs);
@@ -584,7 +626,7 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
         for (i = 0; i < irank; i++) {
           b_loc->data[i] = loc->data[i] - goodobs->data[i];
         }
-        if (b_minimum(b_loc) == 0.0) {
+        if (c_minimum(b_loc) == 0.0) {
           guard1 = true;
         } else {
           exitg1 = 1;
@@ -597,11 +639,11 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
         } else {
           irank = (int)d;
         }
-        i = b_m0->size[0];
-        b_m0->size[0] = irank;
-        emxEnsureCapacity_real_T(b_m0, i);
+        i = bs->size[0];
+        bs->size[0] = irank;
+        emxEnsureCapacity_real_T(bs, i);
         for (i = 0; i < irank; i++) {
-          b_m0->data[i] = fre->data[i];
+          bs->data[i] = fre->data[i];
         }
         incre++;
       }
@@ -610,23 +652,23 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
     emxFree_real_T(&fre);
     /*  To make sure that new value of init is minimum lenght of bs for which */
     /*  the Y matrix is full rank */
-    if (init < b_m0->size[0]) {
-      init_contents = b_m0->size[0];
+    if (init < bs->size[0]) {
+      init_contents = bs->size[0];
     }
   }
   /*  Compute Minimum Mahalanobis Distance for each step of the search */
   emxInit_real_T(&bb, 2);
-  emxInit_real_T(&c_m0, 1);
+  emxInit_real_T(&b_bs, 1);
   if (b_Y->size[0] < 5000) {
-    i = c_m0->size[0];
-    c_m0->size[0] = b_m0->size[0];
-    emxEnsureCapacity_real_T(c_m0, i);
-    loop_ub = b_m0->size[0] - 1;
+    i = b_bs->size[0];
+    b_bs->size[0] = bs->size[0];
+    emxEnsureCapacity_real_T(b_bs, i);
+    loop_ub = bs->size[0] - 1;
     for (i = 0; i <= loop_ub; i++) {
-      c_m0->data[i] = b_m0->data[i];
+      b_bs->data[i] = bs->data[i];
     }
     emxInit_real_T(&b_bb, 2);
-    FSMmmd(b_Y, c_m0, init_contents, msg, out->mmd, out->Un, b_bb);
+    FSMmmd(b_Y, b_bs, init_contents, msg, out->mmd, out->Un, b_bb);
     i = bb->size[0] * bb->size[1];
     bb->size[0] = b_bb->size[0];
     bb->size[1] = b_bb->size[1];
@@ -637,14 +679,14 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
     }
     emxFree_real_T(&b_bb);
   } else {
-    i = c_m0->size[0];
-    c_m0->size[0] = b_m0->size[0];
-    emxEnsureCapacity_real_T(c_m0, i);
-    loop_ub = b_m0->size[0] - 1;
+    i = b_bs->size[0];
+    b_bs->size[0] = bs->size[0];
+    emxEnsureCapacity_real_T(b_bs, i);
+    loop_ub = bs->size[0] - 1;
     for (i = 0; i <= loop_ub; i++) {
-      c_m0->data[i] = b_m0->data[i];
+      b_bs->data[i] = bs->data[i];
     }
-    b_FSMmmd(b_Y, c_m0, init_contents, msg, out->mmd, out->Un);
+    b_FSMmmd(b_Y, b_bs, init_contents, msg, out->mmd, out->Un);
     i = bb->size[0] * bb->size[1];
     bb->size[0] = 1;
     bb->size[1] = 1;
@@ -710,12 +752,12 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
           gbonf->data[i] = gmin1->data[i];
         }
       } else {
-        i = c_m0->size[0];
-        c_m0->size[0] = (int)((double)b_Y->size[0] - init_contents);
-        emxEnsureCapacity_real_T(c_m0, i);
+        i = b_bs->size[0];
+        b_bs->size[0] = (int)((double)b_Y->size[0] - init_contents);
+        emxEnsureCapacity_real_T(b_bs, i);
         loop_ub = (int)((double)b_Y->size[0] - init_contents);
         for (i = 0; i < loop_ub; i++) {
-          c_m0->data[i] = 1.0;
+          b_bs->data[i] = 1.0;
         }
         emxInit_real_T(&y, 1);
         c_bonflev_data.data = (double *)&bonflev_data[0];
@@ -723,7 +765,7 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
         c_bonflev_data.allocatedSize = -1;
         c_bonflev_data.numDimensions = 2;
         c_bonflev_data.canFreeData = false;
-        mtimes(&c_bonflev_data, c_m0, y);
+        mtimes(&c_bonflev_data, b_bs, y);
         i = gbonf->size[0] * gbonf->size[1];
         gbonf->size[0] = y->size[0];
         gbonf->size[1] = 1;
@@ -960,7 +1002,6 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
     b_i = 3;
     c_i = 2;
     emxInit_real_T(&gval, 2);
-    emxInit_boolean_T(&x, 1);
     exitg2 = false;
     while ((!exitg2) && (c_i - 2 <= out->mmd->size[0] - 3)) {
       b_i = c_i + 1;
@@ -1175,12 +1216,12 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
           if (out->mmd->size[0] > (incre - out->mmd->data[0]) + 31.0) {
             for (i = 0; i < 31; i++) {
               u = ((unsigned int)i + c_i) + 2U;
-              b_x[i] = (out->mmd->data[((int)u + out->mmd->size[0]) - 1] <
-                        gmin->data[((int)u + gmin->size[0] * c001) - 1]);
+              x[i] = (out->mmd->data[((int)u + out->mmd->size[0]) - 1] <
+                      gmin->data[((int)u + gmin->size[0] * c001) - 1]);
             }
-            b_loop_ub = b_x[0];
+            b_loop_ub = x[0];
             for (loop_ub = 0; loop_ub < 30; loop_ub++) {
-              b_loop_ub += b_x[loop_ub + 1];
+              b_loop_ub += x[loop_ub + 1];
             }
             if (b_loop_ub >= 2) {
               NoFalseSig = true;
@@ -1200,21 +1241,21 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
               i2 = c_i;
             }
             loop_ub = i1 - i;
-            i1 = x->size[0];
-            x->size[0] = loop_ub + 1;
-            emxEnsureCapacity_boolean_T(x, i1);
+            i1 = b_m0->size[0];
+            b_m0->size[0] = loop_ub + 1;
+            emxEnsureCapacity_boolean_T(b_m0, i1);
             for (i1 = 0; i1 <= loop_ub; i1++) {
-              x->data[i1] =
+              b_m0->data[i1] =
                   (out->mmd->data[((i + i1) + out->mmd->size[0]) + 1] <
                    gmin->data[((i2 + i1) + gmin->size[0] * c001) + 1]);
             }
-            irank = x->size[0];
-            if (x->size[0] == 0) {
+            irank = b_m0->size[0];
+            if (b_m0->size[0] == 0) {
               b_loop_ub = 0;
             } else {
-              b_loop_ub = x->data[0];
+              b_loop_ub = b_m0->data[0];
               for (loop_ub = 2; loop_ub <= irank; loop_ub++) {
-                b_loop_ub += x->data[loop_ub - 1];
+                b_loop_ub += b_m0->data[loop_ub - 1];
               }
             }
             if (b_loop_ub >= 2) {
@@ -1361,20 +1402,20 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
             i2 = (int)ii;
           }
           loop_ub = i1 - i;
-          i1 = x->size[0];
-          x->size[0] = loop_ub;
-          emxEnsureCapacity_boolean_T(x, i1);
+          i1 = b_m0->size[0];
+          b_m0->size[0] = loop_ub;
+          emxEnsureCapacity_boolean_T(b_m0, i1);
           for (i1 = 0; i1 < loop_ub; i1++) {
-            x->data[i1] = (gmin1->data[(i + i1) + gmin1->size[0] * 3] >
-                           out->mmd->data[(i2 + i1) + out->mmd->size[0]]);
+            b_m0->data[i1] = (gmin1->data[(i + i1) + gmin1->size[0] * 3] >
+                              out->mmd->data[(i2 + i1) + out->mmd->size[0]]);
           }
-          irank = x->size[0];
-          if (x->size[0] == 0) {
+          irank = b_m0->size[0];
+          if (b_m0->size[0] == 0) {
             b_loop_ub = 0;
           } else {
-            b_loop_ub = x->data[0];
+            b_loop_ub = b_m0->data[0];
             for (loop_ub = 2; loop_ub <= irank; loop_ub++) {
-              b_loop_ub += x->data[loop_ub - 1];
+              b_loop_ub += b_m0->data[loop_ub - 1];
             }
           }
           if (b_loop_ub > 0) {
@@ -1417,16 +1458,16 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
             /*  find maximum in the interval m^\dagger=mmd(i,1) to the step */
             /*  prior to the one where mmd goes below 1% envelope */
             loop_ub = gfind->size[0];
-            i = x->size[0];
-            x->size[0] = gfind->size[0];
-            emxEnsureCapacity_boolean_T(x, i);
+            i = b_m0->size[0];
+            b_m0->size[0] = gfind->size[0];
+            emxEnsureCapacity_boolean_T(b_m0, i);
             for (i = 0; i < loop_ub; i++) {
-              x->data[i] = (gfind->data[i + gfind->size[0]] > 0.0);
+              b_m0->data[i] = (gfind->data[i + gfind->size[0]] > 0.0);
             }
-            b_loop_ub = x->size[0] - 1;
+            b_loop_ub = b_m0->size[0] - 1;
             trueCount = 0;
             for (c_i = 0; c_i <= b_loop_ub; c_i++) {
-              if (x->data[c_i]) {
+              if (b_m0->data[c_i]) {
                 trueCount++;
               }
             }
@@ -1436,7 +1477,7 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
             emxEnsureCapacity_int32_T(r5, i);
             irank = 0;
             for (c_i = 0; c_i <= b_loop_ub; c_i++) {
-              if (x->data[c_i]) {
+              if (b_m0->data[c_i]) {
                 r5->data[irank] = c_i + 1;
                 irank++;
               }
@@ -1495,23 +1536,23 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
       if (b_Y->size[0] < 5000) {
         irank = (int)((double)bb->size[1] - incre);
         loop_ub = bb->size[0];
+        i = bs->size[0];
+        bs->size[0] = bb->size[0];
+        emxEnsureCapacity_real_T(bs, i);
+        for (i = 0; i < loop_ub; i++) {
+          bs->data[i] = bb->data[i + bb->size[0] * (irank - 1)];
+        }
         i = b_m0->size[0];
-        b_m0->size[0] = bb->size[0];
-        emxEnsureCapacity_real_T(b_m0, i);
+        b_m0->size[0] = bs->size[0];
+        emxEnsureCapacity_boolean_T(b_m0, i);
+        loop_ub = bs->size[0];
         for (i = 0; i < loop_ub; i++) {
-          b_m0->data[i] = bb->data[i + bb->size[0] * (irank - 1)];
+          b_m0->data[i] = rtIsNaN(bs->data[i]);
         }
-        i = x->size[0];
-        x->size[0] = b_m0->size[0];
-        emxEnsureCapacity_boolean_T(x, i);
-        loop_ub = b_m0->size[0];
-        for (i = 0; i < loop_ub; i++) {
-          x->data[i] = rtIsNaN(b_m0->data[i]);
-        }
-        b_loop_ub = x->size[0] - 1;
+        b_loop_ub = b_m0->size[0] - 1;
         trueCount = 0;
         for (b_i = 0; b_i <= b_loop_ub; b_i++) {
-          if (x->data[b_i]) {
+          if (b_m0->data[b_i]) {
             trueCount++;
           }
         }
@@ -1520,14 +1561,14 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
         emxEnsureCapacity_real_T(outliers, i);
         irank = 0;
         for (b_i = 0; b_i <= b_loop_ub; b_i++) {
-          if (x->data[b_i]) {
+          if (b_m0->data[b_i]) {
             outliers->data[irank] = seq->data[b_i];
             irank++;
           }
         }
       } else {
         emxInit_real_T(&a__1, 2);
-        FSMbsb(b_Y, b_m0, (double)b_Y->size[0] - incre,
+        FSMbsb(b_Y, bs, (double)b_Y->size[0] - incre,
                (double)b_Y->size[0] - incre, a__1, bb);
         i = r->size[0] * r->size[1];
         r->size[0] = bb->size[0];
@@ -1562,7 +1603,6 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
       emxEnsureCapacity_real_T(outliers, i);
       outliers->data[0] = rtNaN;
     }
-    emxFree_boolean_T(&x);
     /* compute locatione and covariance matrix */
     if (b_Y->size[0] < 1) {
       loc->size[0] = 1;
@@ -1578,24 +1618,24 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
       }
     }
     b_do_vectors(loc, outliers, goodobs, ia, &irank);
-    i = b_m0->size[0];
-    b_m0->size[0] = goodobs->size[1];
-    emxEnsureCapacity_real_T(b_m0, i);
+    i = bs->size[0];
+    bs->size[0] = goodobs->size[1];
+    emxEnsureCapacity_real_T(bs, i);
     loop_ub = goodobs->size[1];
     emxFree_int32_T(&ia);
     for (i = 0; i < loop_ub; i++) {
-      b_m0->data[i] = goodobs->data[i];
+      bs->data[i] = goodobs->data[i];
     }
     loop_ub = b_Y->size[1];
     i = c_Y->size[0] * c_Y->size[1];
-    c_Y->size[0] = b_m0->size[0];
+    c_Y->size[0] = bs->size[0];
     c_Y->size[1] = b_Y->size[1];
     emxEnsureCapacity_real_T(c_Y, i);
     for (i = 0; i < loop_ub; i++) {
-      irank = b_m0->size[0];
+      irank = bs->size[0];
       for (i1 = 0; i1 < irank; i1++) {
         c_Y->data[i1 + c_Y->size[0] * i] =
-            b_Y->data[((int)b_m0->data[i1] + b_Y->size[0] * i) - 1];
+            b_Y->data[((int)bs->data[i1] + b_Y->size[0] * i) - 1];
       }
     }
     combineVectorElements(c_Y, loc);
@@ -1604,18 +1644,18 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
     emxEnsureCapacity_real_T(loc, i);
     loop_ub = loc->size[1] - 1;
     for (i = 0; i <= loop_ub; i++) {
-      loc->data[i] /= (double)b_m0->size[0];
+      loc->data[i] /= (double)bs->size[0];
     }
     loop_ub = b_Y->size[1];
     i = c_Y->size[0] * c_Y->size[1];
-    c_Y->size[0] = b_m0->size[0];
+    c_Y->size[0] = bs->size[0];
     c_Y->size[1] = b_Y->size[1];
     emxEnsureCapacity_real_T(c_Y, i);
     for (i = 0; i < loop_ub; i++) {
-      irank = b_m0->size[0];
+      irank = bs->size[0];
       for (i1 = 0; i1 < irank; i1++) {
         c_Y->data[i1 + c_Y->size[0] * i] =
-            b_Y->data[((int)b_m0->data[i1] + b_Y->size[0] * i) - 1];
+            b_Y->data[((int)bs->data[i1] + b_Y->size[0] * i) - 1];
       }
     }
     emxInit_real_T(&Ytilde, 2);
@@ -1698,7 +1738,7 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
       c_Y->data[i] = bb->data[i] * Ytilde->data[i];
     }
     emxFree_real_T(&Ytilde);
-    sum(c_Y, b_m0);
+    sum(c_Y, bs);
     /*  Scatter plot matrix with the outliers shown with a different symbol */
     /*  Structure returned by function FSM */
     /*  If you wish that the output also contains the list of units not declared
@@ -1724,12 +1764,12 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
       out->loc->data[i] = loc->data[i];
     }
     i = out->md->size[0] * out->md->size[1];
-    out->md->size[0] = b_m0->size[0];
+    out->md->size[0] = bs->size[0];
     out->md->size[1] = 1;
     emxEnsureCapacity_real_T(out->md, i);
-    loop_ub = b_m0->size[0];
+    loop_ub = bs->size[0];
     for (i = 0; i < loop_ub; i++) {
-      out->md->data[i] = b_m0->data[i];
+      out->md->data[i] = bs->data[i];
     }
     if ((bonflev_size[0] == 0) || (bonflev_size[1] == 0)) {
       i = out->nout->size[0] * out->nout->size[1];
@@ -1751,13 +1791,14 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
     out->class.data[1] = 'S';
     out->class.data[2] = 'M';
   }
-  emxFree_real_T(&c_m0);
+  emxFree_real_T(&b_bs);
   emxFree_real_T(&c_Y);
+  emxFree_boolean_T(&b_m0);
   emxFree_boolean_T(&r);
   emxFree_real_T(&loc);
   emxFree_real_T(&goodobs);
   emxFree_real_T(&bb);
-  emxFree_real_T(&b_m0);
+  emxFree_real_T(&bs);
   emxFree_real_T(&seq);
   emxFree_real_T(&b_Y);
 }

@@ -257,7 +257,7 @@ void FSRfan_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                  computed, else Least trimmed of Squares is computed. */
   /*                  If, lms is matrix with size */
   /*                  p-1+intercept-by-length(la) it contains in column */
-  /*                  j=1,..., lenght(la) the list of units forming the initial
+  /*                  j=1,..., length(la) the list of units forming the initial
    */
   /*                  subset for the search associated with la(j). In this last
    */
@@ -1115,7 +1115,7 @@ void FSRfan_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   }
   emxFree_real_T(&b_y);
   emxInit_int32_T(&r2, 2);
-  b_nullAssignment(r1, c_y);
+  c_nullAssignment(r1, c_y);
   i = r2->size[0] * r2->size[1];
   r2->size[0] = 1;
   r2->size[1] = r1->size[1];

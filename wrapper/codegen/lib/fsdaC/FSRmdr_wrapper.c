@@ -1812,7 +1812,7 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                     d_bsbsteps->data[i] = ord->data[i];
                   }
                   mdr->data[i1 + mdr->size[0]] =
-                      sqrt(fabs(c_minimum(d_bsbsteps)) / initdef);
+                      sqrt(fabs(b_minimum(d_bsbsteps)) / initdef);
                 }
               }
               /* if mm<n */

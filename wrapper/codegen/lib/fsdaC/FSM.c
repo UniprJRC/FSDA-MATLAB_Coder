@@ -163,15 +163,17 @@ void FSM(emxArray_real_T *Y, const double varargin_4_data[],
   /*  */
   /*  */
   /*        crit    : It specified the criterion to be used to */
-  /*                  initialize the search. Character. */
-  /*                  if crit='md' the units which form initial subset are */
-  /*                   those which have the smallest m0 pseudo Mahalanobis */
-  /*                   distances computed using procedure unibiv (bivariate */
-  /*                   robust ellipses). */
+  /*                  initialize the search. 'md' (default) | 'biv' | 'uni. */
+  /*                  if crit='md' (default) the units which form initial subset
+   * are */
+  /*                   those which have the smallest m0 Mahalanobis */
+  /*                   distances (defined as sum of bivariate robust */
+  /*                   Mahalanobis distances) computed using procedure unibiv */
+  /*                   (bivariate robust ellipses). */
   /*                  if crit='biv' sorting is done first in */
   /*                   terms of times units fell outside robust bivariate */
-  /*                   ellipses and then in terms of pseudoMD. In other words,
-   */
+  /*                   ellipses and then in terms of Mahalanobis distances. In
+   * other words, */
   /*                   the units forming initial subset are chosen first among
    */
   /*                   the set of those which never fell outside robust */
@@ -179,8 +181,10 @@ void FSM(emxArray_real_T *Y, const double varargin_4_data[],
    */
   /*                   outside bivariate ellipses ... up to reach m0. */
   /*                  if crit='uni' sorting is done first in */
-  /*                   terms of times units fell outside univariate boxplots */
-  /*                   and then in terms of pseudoMD. In other words, */
+  /*                   terms of number of times units fell outside univariate
+   * boxplots */
+  /*                   and then in terms of Mahalanobis distances. In other
+   * words, */
   /*                   the units forming initial subset are chosen first among
    */
   /*                   the set of those which never fell outside */
@@ -200,7 +204,9 @@ void FSM(emxArray_real_T *Y, const double varargin_4_data[],
   /*  */
   /*        init    : Point where to start monitoring required diagnostics.
    * Scalar. */
-  /*                  Note that if bsb is suppliedinit>=length(bsb). If init is
+  /*                  Note that if initial subset is supplied (that is input */
+  /*                  option m0 is a vector of length greater than 1) */
+  /*                  init must be greater or equal than length(m0). If init is
    * not */
   /*                  specified it will be set equal to floor(n*0.6). */
   /*                  Example - 'init',50 */
@@ -209,14 +215,17 @@ void FSM(emxArray_real_T *Y, const double varargin_4_data[],
   /*           m0   : Initial subset size or vector which contains the list of
    */
   /*                  the units forming initial subset. Scalar or vector. */
-  /*                  The default is to start the search with v+1 units which */
-  /*                  consisting of those observations which are not outlying */
-  /*                  on any scatterplot, found as the intersection of all */
-  /*                  points lying within a robust contour containing a */
-  /*                  specified portion of the data (Riani and Zani 1997) and */
-  /*                  inside the univariate boxplot. Remark: if m0 is a vector
+  /*                  The default is $m0=v+1$, that is we start the search with
+   * v+1 units.   */
+  /*                  The v+1 units are chosen according to input option 'crit'.
    */
-  /*                  option below crit is ignored. */
+  /*                  If on the other hand, m0 is a vector of length greater */
+  /*                  than 1 it contains the indexes of the units which must */
+  /*                  form the initial susbet. For example if m0=[1;3;10;23;45];
+   */
+  /*                  the initial subset is formed by units 1, 3, 10, 23 and */
+  /*                  45. Note that if  m0 is a vector */
+  /*                  of length greater than 1, option crit is ignored. */
   /*                  Example - 'm0',5 */
   /*                  Data Types - double */
   /*  */
@@ -238,7 +247,8 @@ void FSM(emxArray_real_T *Y, const double varargin_4_data[],
   /*  */
   /*         rf     : confidence level for bivariate ellipses. Scalar. The
    * default is */
-  /*                  0.95. This option is useful only if crit='biv'. */
+  /*                  0.95. This option is used only if crit='biv' and input */
+  /*                  option m0 is not a vector with length greater than 1. */
   /*                  Example - 'rf',0.9 */
   /*                  Data Types - double */
   /*  */
@@ -468,12 +478,24 @@ void FSM(emxArray_real_T *Y, const double varargin_4_data[],
   b_unibiv(Y, fre);
   if (e_strcmp(varargin_10_data, varargin_10_size)) {
     /*  The user has chosen to select the intial subset according to the */
-    /*  smallest m0 pseudo MD Select only the potential bivariate outliers */
+    /*  smallest m0 robust Mahalanobis distances.  */
     sortrows(fre);
   } else if (f_strcmp(varargin_10_data, varargin_10_size)) {
+    /*  The user has chosen to select the intial subset with the units */
+    /*  which never fell outside robust bivariate confidence ellipses, */
+    /*  fell just once, ... up to reach m0 */
+    /*  Among the units which fell the same number of times outside bivariate
+     * ellipses, */
+    /*  we select first those with the smallest robust Mahalanobis distances. */
     b_sortrows(fre);
   } else if (g_strcmp(varargin_10_data, varargin_10_size)) {
     c_sortrows(fre);
+    /*  The user has chosen to select the intial subset with the units */
+    /*  which never fell outside univariate boxplots, */
+    /*  fell just once, ... up to reach m0 */
+    /*  Among the units which fell the same number of times outside */
+    /*  univariate boxplots, we select first those with the smallest */
+    /*  robust Mahalanobis distances. */
   }
   emxInit_real_T(&bs, 1);
   /*  initial subset */
@@ -547,7 +569,7 @@ void FSM(emxArray_real_T *Y, const double varargin_4_data[],
       for (i = 0; i < irank; i++) {
         b_loc->data[i] = loc->data[i] - goodobs->data[i];
       }
-      if (b_minimum(b_loc) == 0.0) {
+      if (c_minimum(b_loc) == 0.0) {
         guard1 = true;
       } else {
         exitg1 = 1;

@@ -3173,7 +3173,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
     }
     /*  Reduce width of tloc dinamically */
     /*  make sure that tloc is in the range LSHmin and LSHmax */
-    while (((d_maximum(Cr) > LSH) || (b_minimum(Cr) < LSH)) &&
+    while (((d_maximum(Cr) > LSH) || (c_minimum(Cr) < LSH)) &&
            (!(ncomb == 0.0))) {
       ncomb--;
       ij = brobLSH->data[brobLSH->size[0] - 1] - ncomb;
