@@ -11,6 +11,7 @@
 
 /* Include files */
 #include <R.h>
+#include "_utils.h"
 
 #include "Sreg_wrapper.h"
 #include "HAbdp.h"
@@ -717,6 +718,14 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     psifunc_class_data[1] = 'Y';
     psifunc_class_data[2] = 'P';
   } else if (o_strcmp(rhofunc)) {
+  
+  
+  
+     Rprintf("\nHampel: rhofuncparam: %d %d\n", rhofuncparam->size[0], rhofuncparam->size[1]);  
+     disp_dble(rhofuncparam->data, rhofuncparam->size[0]);
+ 
+  
+  
     if ((rhofuncparam->size[0] == 0) || (rhofuncparam->size[1] == 0)) {
       i = out->rhofuncparam->size[0] * out->rhofuncparam->size[1];
       out->rhofuncparam->size[0] = 1;
@@ -727,17 +736,30 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
       out->rhofuncparam->data[2] = 8.0;
     } else {
       i = out->rhofuncparam->size[0] * out->rhofuncparam->size[1];
-      out->rhofuncparam->size[0] = rhofuncparam->size[0];
-      out->rhofuncparam->size[1] = 1;
+
+// VT::06.08.2021 - row-column vector confussion
+//      out->rhofuncparam->size[0] = rhofuncparam->size[0];
+//      out->rhofuncparam->size[1] = 1;
+      out->rhofuncparam->size[1] = rhofuncparam->size[0];
+      out->rhofuncparam->size[0] = 1;
+
       emxEnsureCapacity_real_T(out->rhofuncparam, i);
       loop_ub = rhofuncparam->size[0];
+
       for (i = 0; i < loop_ub; i++) {
         out->rhofuncparam->data[i] = rhofuncparam->data[i];
       }
+
+     Rprintf("\nC: Hampel: out->rhofuncparam: %d %d\n", out->rhofuncparam->size[0], out->rhofuncparam->size[1]);  
+     disp_dble(out->rhofuncparam->data, out->rhofuncparam->size[1]);
     }
     /*  Compute tuning constant associated to the requested breakdown */
     /*  point */
     c = HAbdp(bdp, out->rhofuncparam);
+
+
+     Rprintf("\nHampel: computed tuning constant for bdp %f: %f\n", bdp, c);  
+
     /*  kc = E(rho) = sup(rho)*bdp */
     c_size[0] = 1;
     c_size[1] = (signed char)out->rhofuncparam->size[1] + 1;

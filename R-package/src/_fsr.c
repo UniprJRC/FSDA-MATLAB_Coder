@@ -185,8 +185,8 @@ void r_fsr(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int *in
         }    
 
         // Return n and p calculated by chkinputR()
-        *nn1 = out.beta->size[0];
-        *pp1 = out.residuals->size[0];
+        *pp1 = out.beta->size[0];
+        *nn1 = out.residuals->size[0];
     }
      
     // Destroy the allocated objetcs

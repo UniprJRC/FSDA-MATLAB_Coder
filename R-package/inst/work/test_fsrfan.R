@@ -1,6 +1,6 @@
-##  test_fsrbsb
+##  test_fsrfan
 
-## Call FSRbsb() with all default options.
+## Call FSRfan() with all default options.
 
     ##  %% FSRfan with all default options.
     ##  % Store values of the score test statistic

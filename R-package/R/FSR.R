@@ -19,6 +19,7 @@
 #'  and infinite values (Inf's) are allowed, since observations (rows) with missing or
 #'  infinite values will automatically be excluded from the computations.
 #'
+#' @param intercept Indicator for the constant term (intercept) in the fit, defaults to \code{intercept=TRUE}.
 #' @param alpha the percentage (roughly) of squared residuals whose sum will be minimized,
 #'  by default \code{alpha=0.5}. In general, alpha must be between 0.5 and 1.
 #' @param h The number of observations that have determined the least trimmed squares
@@ -75,7 +76,6 @@
 #' @param init Search initialization. It specifies the initial subset size to start monitoring units forming subset.
 #'  By default, \code{init=p+1}, if the sample size is smaller than 40 or
 #'  \code{init=min(3*p+1, floor(0.5*(n+p+1)))}, otherwise.
-#' @param intercept Indicator for the constant term (intercept) in the fit, defaults to \code{intercept=TRUE}.
 #' @param msg Level of output to display. It controls whether to display or not messages on the screen.
 #'   If \code{msg=TRUE} (default) messages are displayed on the screen about step of the fwd search else
 #'  no message is displayed on the screen.
@@ -326,14 +326,12 @@ FSR <- function(y, x, intercept=TRUE, lms=1,
         Un <- matrix(tmp$Un[1:(tmp$retnUn * tmp$retpUn)], nrow=tmp$retnUn, ncol=tmp$retpUn)
         mdr <- matrix(tmp$mdr[1:(tmp$retnUn * tmp$retpmdr)], nrow=tmp$retnUn, ncol=tmp$retpmdr)
         nout <- matrix(tmp$nout, nrow=2, ncol=5)
-        cf <- tmp$beta
         if(!nocheck) {
             names(tmp$beta) <- if(intercept) c("Intercept", colnames(chk$x)) else colnames(chk$x)
             names(tmp$residuals) <- names(tmp$fitted.values) <- rownames(chk$x)
         }
         dimnames(mdr) <- list(1:nrow(mdr), c("Step", "MDR"))
         dimnames(Un) <- list(1:nrow(Un), c("Step", paste0("Unit", 1:10)))
-
     }
 
     ans <- if(!is.null(singularity))
@@ -346,9 +344,6 @@ FSR <- function(y, x, intercept=TRUE, lms=1,
     if(!nocheck) {
         ans$y <- chk$y
         ans$X <- chk$x
-    } else {
-        ans$y <- y
-        ans$X <- x
     }
 
     if(weak == TRUE && is.null(singularity)){

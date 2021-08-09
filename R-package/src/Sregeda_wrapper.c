@@ -879,8 +879,13 @@ void Sregeda_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
         out->rhofuncparam->data[2] = 8.0;
       } else {
         i1 = out->rhofuncparam->size[0] * out->rhofuncparam->size[1];
-        out->rhofuncparam->size[0] = rhofuncparam->size[0];
-        out->rhofuncparam->size[1] = 1;
+
+// VT::06.08.2021 - row-column vector confussion
+//      out->rhofuncparam->size[0] = rhofuncparam->size[0];
+//      out->rhofuncparam->size[1] = 1;
+        out->rhofuncparam->size[1] = rhofuncparam->size[0];
+        out->rhofuncparam->size[0] = 1;
+        
         emxEnsureCapacity_real_T(out->rhofuncparam, i1);
         loop_ub = rhofuncparam->size[0];
         for (i1 = 0; i1 < loop_ub; i1++) {
