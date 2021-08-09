@@ -1000,7 +1000,7 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
     /*  d_{j1}^{***}, \ldots, d_{jp}^{***} */
     /*  lmdc = row vector containing the restricted determinants */
     /*  Make sure niini is a column vector */
-    if (d_maximum(lmd) / b_minimum(lmd) >
+    if (d_maximum(lmd) / c_minimum(lmd) >
         rt_powd_snf(pa_cdet, 1.0 / (double)pa_v)) {
       c_restreigen(lmd, niini, rt_powd_snf(pa_cdet, 1.0 / (double)pa_v),
                    pa_zerotol, pa_userepmat);
@@ -2416,7 +2416,7 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
     /*  d_{j1}^{***}, \ldots, d_{jp}^{***} */
     /*  lmdc = row vector containing the restricted determinants */
     /*  Make sure niini is a column vector */
-    if (d_maximum(lmd) / b_minimum(lmd) >
+    if (d_maximum(lmd) / c_minimum(lmd) >
         rt_powd_snf(pa_cdet, 1.0 / (double)pa_v)) {
       c_restreigen(lmd, niini, rt_powd_snf(pa_cdet, 1.0 / (double)pa_v),
                    pa_zerotol, pa_userepmat);

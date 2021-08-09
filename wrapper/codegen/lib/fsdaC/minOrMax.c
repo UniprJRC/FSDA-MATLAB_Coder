@@ -76,13 +76,13 @@ double b_minimum(const emxArray_real_T *x)
   int k;
   int last;
   bool exitg1;
-  last = x->size[1];
-  if (x->size[1] <= 2) {
-    if (x->size[1] == 1) {
+  last = x->size[0];
+  if (x->size[0] <= 2) {
+    if (x->size[0] == 1) {
       ex = x->data[0];
-    } else if ((x->data[0] > x->data[x->size[1] - 1]) ||
-               (rtIsNaN(x->data[0]) && (!rtIsNaN(x->data[x->size[1] - 1])))) {
-      ex = x->data[x->size[1] - 1];
+    } else if ((x->data[0] > x->data[x->size[0] - 1]) ||
+               (rtIsNaN(x->data[0]) && (!rtIsNaN(x->data[x->size[0] - 1])))) {
+      ex = x->data[x->size[0] - 1];
     } else {
       ex = x->data[0];
     }
@@ -179,13 +179,13 @@ double c_minimum(const emxArray_real_T *x)
   int k;
   int last;
   bool exitg1;
-  last = x->size[0];
-  if (x->size[0] <= 2) {
-    if (x->size[0] == 1) {
+  last = x->size[1];
+  if (x->size[1] <= 2) {
+    if (x->size[1] == 1) {
       ex = x->data[0];
-    } else if ((x->data[0] > x->data[x->size[0] - 1]) ||
-               (rtIsNaN(x->data[0]) && (!rtIsNaN(x->data[x->size[0] - 1])))) {
-      ex = x->data[x->size[0] - 1];
+    } else if ((x->data[0] > x->data[x->size[1] - 1]) ||
+               (rtIsNaN(x->data[0]) && (!rtIsNaN(x->data[x->size[1] - 1])))) {
+      ex = x->data[x->size[1] - 1];
     } else {
       ex = x->data[0];
     }

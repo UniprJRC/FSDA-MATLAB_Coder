@@ -1698,7 +1698,7 @@ void FSRmdr(const emxArray_real_T *y, const emxArray_real_T *X,
                     e->data[i] = ord->data[i];
                   }
                   mdr->data[i1 + mdr->size[0]] =
-                      sqrt(fabs(c_minimum(e)) / thpmm_data);
+                      sqrt(fabs(b_minimum(e)) / thpmm_data);
                 }
               }
               /* if mm<n */

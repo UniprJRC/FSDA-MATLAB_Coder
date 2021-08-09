@@ -527,7 +527,7 @@ void Sregeda_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  tolerance for refining steps for the best subsets */
   /*  Scalar which controls the messages displayed on the screen */
   /*  String which specifies the function to use to weight the residuals */
-  if ((!(c_minimum(bdp) < 0.0)) && (!(b_maximum(bdp) > 0.5))) {
+  if ((!(b_minimum(bdp) < 0.0)) && (!(b_maximum(bdp) > 0.5))) {
     f_sort(out->bdp);
   }
   /*  Extract in the rows of matrix C the indexes of all required subsets */

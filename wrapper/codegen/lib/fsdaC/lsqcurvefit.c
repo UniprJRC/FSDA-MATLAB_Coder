@@ -113,7 +113,7 @@ void lsqcurvefit(
     for (k = 0; k < loop_ub; k++) {
       F_temp->data[k] = ub->data[k] - lb->data[k];
     }
-    minWidth = c_minimum(F_temp);
+    minWidth = b_minimum(F_temp);
   } else {
     minWidth = rtInf;
   }

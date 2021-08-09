@@ -998,7 +998,6 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           for (i = 0; i < loop_ub; i++) {
             out->ListOut->data[i] = mdr->data[i];
           }
-          /*  if ~coder.target('MATLAB') */
           varsize = ceil(n / 1.0E+6);
           i = out->outliers->size[0] * out->outliers->size[1];
           out->outliers->size[0] = 1;
@@ -1066,7 +1065,6 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           out->class[0] = 'F';
           out->class[1] = 'S';
           out->class[2] = 'R';
-          /*  end */
           exitg1 = 1;
         } else {
           if (rtIsNaN(mdr->data[0])) {

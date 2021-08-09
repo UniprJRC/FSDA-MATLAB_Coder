@@ -857,7 +857,7 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     for (i = 0; i < loop_ub; i++) {
       mi->data[i] = ym->data[i] - mibsbr->data[i];
     }
-    if (b_minimum(mi) == 0.0) {
+    if (c_minimum(mi) == 0.0) {
       guard1 = true;
     } else {
       /*  ij = index which is linked with the columns of matrix BB. During the
@@ -930,7 +930,7 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (b_loop_ub = 0; b_loop_ub < irank; b_loop_ub++) {
             Szi->data[b_loop_ub] = fabs(MD->data[b_loop_ub]);
           }
-          if (c_minimum(Szi) == 0.0) {
+          if (b_minimum(Szi) == 0.0) {
             /*  intersect(mm,bsbsteps)==mm */
             if (b_mm <= percn) {
               loop_ub = bsb->size[0];
@@ -2751,7 +2751,7 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     for (i = 0; i < loop_ub; i++) {
       mi->data[i] = ym->data[i] - mibsbr->data[i];
     }
-    if (b_minimum(mi) == 0.0) {
+    if (c_minimum(mi) == 0.0) {
       guard1 = true;
     } else {
       /*  ij = index which is linked with the columns of matrix BB. During the
@@ -4675,7 +4675,7 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     for (i = 0; i < loop_ub; i++) {
       mi->data[i] = ym->data[i] - mibsbr->data[i];
     }
-    if (b_minimum(mi) == 0.0) {
+    if (c_minimum(mi) == 0.0) {
       guard1 = true;
     } else {
       /*  ij = index which is linked with the columns of matrix BB. During the
@@ -4748,7 +4748,7 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           for (b_loop_ub = 0; b_loop_ub < irank; b_loop_ub++) {
             Szi->data[b_loop_ub] = fabs(MD->data[b_loop_ub]);
           }
-          if (c_minimum(Szi) == 0.0) {
+          if (b_minimum(Szi) == 0.0) {
             /*  intersect(mm,bsbsteps)==mm */
             if (b_mm <= percn) {
               loop_ub = bsb->size[0];
@@ -6564,7 +6564,7 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     for (i = 0; i < loop_ub; i++) {
       mi->data[i] = ym->data[i] - mibsbr->data[i];
     }
-    if (b_minimum(mi) == 0.0) {
+    if (c_minimum(mi) == 0.0) {
       guard1 = true;
     } else {
       /*  ij = index which is linked with the columns of matrix BB. During the
