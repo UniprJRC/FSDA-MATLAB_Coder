@@ -28,7 +28,7 @@ double Mscale(const emxArray_real_T *u, const double psifunc_c1_data[],
               const char psifunc_class_data[], const int psifunc_class_size[2],
               double initialsc, double tol)
 {
-  static const char b_cv1[3] = {'O', 'P', 'T'};
+  static const char cv1[3] = {'O', 'P', 'T'};
   static const char cv3[3] = {'H', 'Y', 'P'};
   static const char b_cv[2] = {'T', 'B'};
   static const char cv2[2] = {'H', 'A'};
@@ -421,7 +421,7 @@ double Mscale(const emxArray_real_T *u, const double psifunc_c1_data[],
         do {
           exitg1 = 0;
           if (nx < 3) {
-            if (psifunc_class_data[nx] != b_cv1[nx]) {
+            if (psifunc_class_data[nx] != cv1[nx]) {
               exitg1 = 1;
             } else {
               nx++;

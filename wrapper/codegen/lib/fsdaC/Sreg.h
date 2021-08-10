@@ -35,7 +35,7 @@ void Sreg(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
           double varargin_4, double varargin_6, double varargin_8,
           double varargin_10, double varargin_12, double varargin_14,
           double varargin_16, const emxArray_char_T *varargin_18,
-          const emxArray_real_T *varargin_20, bool varargin_24, j_struct_T *out,
+          const emxArray_real_T *varargin_20, bool varargin_24, i_struct_T *out,
           emxArray_real_T *varargout_1);
 
 void b_Sreg(const emxArray_real_T *y, const emxArray_real_T *X,
@@ -43,7 +43,7 @@ void b_Sreg(const emxArray_real_T *y, const emxArray_real_T *X,
             double varargin_8, double varargin_10, double varargin_12,
             double varargin_14, double varargin_16,
             const emxArray_char_T *varargin_18,
-            const emxArray_real_T *varargin_20, j_struct_T *out,
+            const emxArray_real_T *varargin_20, i_struct_T *out,
             emxArray_real_T *varargout_1);
 
 #ifdef __cplusplus

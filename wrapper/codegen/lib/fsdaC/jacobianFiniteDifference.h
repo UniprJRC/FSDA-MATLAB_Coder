@@ -27,13 +27,13 @@ bool b_jacobianFiniteDifference(emxArray_real_T *augJacobian,
                                 const emxArray_real_T *fCurrent, int *funcCount,
                                 const emxArray_real_T *x,
                                 const char options_FiniteDifferenceType[7],
-                                const i_struct_T *FiniteDifferences);
+                                const h_struct_T *FiniteDifferences);
 
 void jacobianFiniteDifference(emxArray_real_T *augJacobian,
                               const emxArray_real_T *fCurrent,
                               const emxArray_real_T *x,
                               const char options_FiniteDifferenceType[7],
-                              i_struct_T *FiniteDifferences, int *funcCount,
+                              h_struct_T *FiniteDifferences, int *funcCount,
                               bool *evalOK);
 
 #ifdef __cplusplus

@@ -927,7 +927,7 @@ double RobRegrSize(double n, double p, double bdp)
   static const char cv8[10] = {'M', 'M', 'e', 'f', 'f',
                                '0', '9', '5', 'T', 'B'};
   static const char b_cv[9] = {'L', 'T', 'S', 'b', 'd', 'p', '0', '5', '0'};
-  static const char b_cv1[9] = {'L', 'T', 'S', 'b', 'd', 'p', '0', '2', '5'};
+  static const char cv1[9] = {'L', 'T', 'S', 'b', 'd', 'p', '0', '2', '5'};
   static const char cv10[9] = {'S', 'b', 'd', 'p', '0', '5', '0', 'O', 'P'};
   static const char cv14[9] = {'S', 'b', 'd', 'p', '0', '2', '5', 'H', 'Y'};
   static const char cv15[9] = {'S', 'b', 'd', 'p', '0', '5', '0', 'H', 'Y'};
@@ -936,31 +936,31 @@ double RobRegrSize(double n, double p, double bdp)
   static const char cv4[9] = {'S', 'b', 'd', 'p', '0', '2', '5', 'T', 'B'};
   static const char cv5[9] = {'S', 'b', 'd', 'p', '0', '5', '0', 'T', 'B'};
   static const char cv9[9] = {'S', 'b', 'd', 'p', '0', '2', '5', 'O', 'P'};
-  cell_wrap_51 labest[24];
-  cell_wrap_51 r;
-  cell_wrap_51 r1;
-  cell_wrap_51 r10;
-  cell_wrap_51 r11;
-  cell_wrap_51 r12;
-  cell_wrap_51 r13;
-  cell_wrap_51 r14;
-  cell_wrap_51 r15;
-  cell_wrap_51 r16;
-  cell_wrap_51 r17;
-  cell_wrap_51 r18;
-  cell_wrap_51 r19;
-  cell_wrap_51 r2;
-  cell_wrap_51 r20;
-  cell_wrap_51 r21;
-  cell_wrap_51 r22;
-  cell_wrap_51 r23;
-  cell_wrap_51 r3;
-  cell_wrap_51 r4;
-  cell_wrap_51 r5;
-  cell_wrap_51 r6;
-  cell_wrap_51 r7;
-  cell_wrap_51 r8;
-  cell_wrap_51 r9;
+  cell_wrap_55 labest[24];
+  cell_wrap_55 r;
+  cell_wrap_55 r1;
+  cell_wrap_55 r10;
+  cell_wrap_55 r11;
+  cell_wrap_55 r12;
+  cell_wrap_55 r13;
+  cell_wrap_55 r14;
+  cell_wrap_55 r15;
+  cell_wrap_55 r16;
+  cell_wrap_55 r17;
+  cell_wrap_55 r18;
+  cell_wrap_55 r19;
+  cell_wrap_55 r2;
+  cell_wrap_55 r20;
+  cell_wrap_55 r21;
+  cell_wrap_55 r22;
+  cell_wrap_55 r23;
+  cell_wrap_55 r3;
+  cell_wrap_55 r4;
+  cell_wrap_55 r5;
+  cell_wrap_55 r6;
+  cell_wrap_55 r7;
+  cell_wrap_55 r8;
+  cell_wrap_55 r9;
   emxArray_boolean_T *x;
   emxArray_char_T *namefile1;
   emxArray_char_T *str;
@@ -1245,7 +1245,7 @@ double RobRegrSize(double n, double p, double bdp)
   r1.f1.size[1] = 9;
   for (ib_size = 0; ib_size < 9; ib_size++) {
     r.f1.data[ib_size] = b_cv[ib_size];
-    r1.f1.data[ib_size] = b_cv1[ib_size];
+    r1.f1.data[ib_size] = cv1[ib_size];
   }
   r2.f1.size[0] = 1;
   r2.f1.size[1] = 10;
@@ -1387,7 +1387,7 @@ double RobRegrSize(double n, double p, double bdp)
    * threshold */
   /*  RAW LTS */
   /*  If breakdown point is the one supplied by the user */
-  h_do_vectors(bdp, (double *)&a, c_size, (int *)&nbytes, &ia_size,
+  g_do_vectors(bdp, (double *)&a, c_size, (int *)&nbytes, &ia_size,
                (int *)&ib_data, &ib_size);
   ib_size = x->size[0] * x->size[1];
   x->size[0] = 1;
@@ -1451,7 +1451,7 @@ double RobRegrSize(double n, double p, double bdp)
     namefile1->size[1] = 9;
     emxEnsureCapacity_char_T(namefile1, ib_size);
     for (ib_size = 0; ib_size < 9; ib_size++) {
-      namefile1->data[ib_size] = b_cv1[ib_size];
+      namefile1->data[ib_size] = cv1[ib_size];
     }
   } else if (bdp < 0.375) {
     ib_size = namefile1->size[0] * namefile1->size[1];
@@ -1459,7 +1459,7 @@ double RobRegrSize(double n, double p, double bdp)
     namefile1->size[1] = 9;
     emxEnsureCapacity_char_T(namefile1, ib_size);
     for (ib_size = 0; ib_size < 9; ib_size++) {
-      namefile1->data[ib_size] = b_cv1[ib_size];
+      namefile1->data[ib_size] = cv1[ib_size];
     }
   } else {
     ib_size = namefile1->size[0] * namefile1->size[1];

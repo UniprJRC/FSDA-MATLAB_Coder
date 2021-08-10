@@ -68,8 +68,8 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   double time_data[1000];
   double varargin_1[50];
   double row[5];
-  double c_data[4];
   double b_varargin_1[3];
+  double c_data[2];
   double A=0;
   double B=0;
   double c=0;
@@ -719,8 +719,8 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   } else if (o_strcmp(rhofunc)) {
     if ((rhofuncparam->size[0] == 0) || (rhofuncparam->size[1] == 0)) {
       i = out->rhofuncparam->size[0] * out->rhofuncparam->size[1];
-      out->rhofuncparam->size[0] = 1;
-      out->rhofuncparam->size[1] = 3;
+      out->rhofuncparam->size[0] = 3;
+      out->rhofuncparam->size[1] = 1;
       emxEnsureCapacity_real_T(out->rhofuncparam, i);
       out->rhofuncparam->data[0] = 2.0;
       out->rhofuncparam->data[1] = 4.0;
@@ -740,20 +740,14 @@ void Sreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     c = HAbdp(bdp, out->rhofuncparam);
     /*  kc = E(rho) = sup(rho)*bdp */
     c_size[0] = 1;
-    c_size[1] = (signed char)out->rhofuncparam->size[1] + 1;
+    c_size[1] = 2;
     c_data[0] = c;
-    loop_ub = (signed char)out->rhofuncparam->size[1];
-    for (i = 0; i < loop_ub; i++) {
-      c_data[i + 1] = out->rhofuncparam->data[i];
-    }
+    c_data[1] = out->rhofuncparam->data[0];
     kc = HArho(c * out->rhofuncparam->data[2], c_data, c_size) * bdp;
     psifunc_c1_size[0] = 1;
-    psifunc_c1_size[1] = (signed char)out->rhofuncparam->size[1] + 1;
+    psifunc_c1_size[1] = 2;
     row[0] = c;
-    loop_ub = (signed char)out->rhofuncparam->size[1];
-    for (i = 0; i < loop_ub; i++) {
-      row[i + 1] = out->rhofuncparam->data[i];
-    }
+    row[1] = out->rhofuncparam->data[0];
     psifunc_class_size[0] = 1;
     psifunc_class_size[1] = 2;
     psifunc_class_data[0] = 'H';

@@ -36,7 +36,7 @@ void factoryConstruct(captured_var *c_nonlin_workspace_fun_workspac,
                       int nVar, int mCeq, const emxArray_real_T *lb,
                       const emxArray_real_T *ub,
                       const char options_FiniteDifferenceType[7],
-                      i_struct_T *obj)
+                      h_struct_T *obj)
 {
   static const char b_cv[7] = {'f', 'o', 'r', 'w', 'a', 'r', 'd'};
   int exitg1;

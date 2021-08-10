@@ -93,7 +93,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   static const char b_varampl[24] = {'b', 'b', 'b', '_', '_', '_', 'v', 'v',
                                      'v', 'a', 'a', 'a', 'r', 'r', 'r', 'a',
                                      'a', 'a', 'm', 'm', 'm', 'l', '2', '3'};
-  static const char b_cv1[8] = {'b', '_', 'l', 's', 'h', 'i', 'f', 't'};
+  static const char cv1[8] = {'b', '_', 'l', 's', 'h', 'i', 'f', 't'};
   static const char b_cv[5] = {'L', 'T', 'S', 't', 's'};
   b_captured_var isemptyX;
   b_captured_var verLess2016b;
@@ -129,6 +129,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   captured_var varampl;
   d_captured_var weights;
   d_captured_var zerT1;
+  e_struct_T a__24;
   emxArray_boolean_T b_varargin_22_data;
   emxArray_boolean_T *Weights;
   emxArray_boolean_T *r1;
@@ -164,7 +165,6 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   emxArray_real_T *selWithoutLastHarmonic;
   emxArray_real_T *selWithoutLastHarmonic_tmp;
   emxArray_real_T *yhatrob;
-  f_struct_T a__24;
   creal_T dc;
   double numscale2LSH[3];
   double varargin_22_data[2];
@@ -1698,7 +1698,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   /*  tentative position of level shift */
   /*  Check if the optional user parameters are valid. */
   ij = trend.contents;
-  g_do_vectors(ij, (double *)&sworst, c_size, (int *)&nx, &sizes_idx_1,
+  f_do_vectors(ij, (double *)&sworst, c_size, (int *)&nx, &sizes_idx_1,
                (int *)&vlen, &ib_size);
   /*  Construct the matrices which are fixed in each step of the minimization */
   /*  procedure */
@@ -2075,7 +2075,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   }
   emxInitStruct_captured_var1(&otherind);
   emxInit_int32_T(&ia, 1);
-  f_do_vectors(Cr, indlinsc.contents, otherind.contents, ia, &ib_size);
+  e_do_vectors(Cr, indlinsc.contents, otherind.contents, ia, &ib_size);
   if (lshiftYN.contents == 1.0) {
     i = otherind.contents->size[0] * otherind.contents->size[1];
     if (1 > otherind.contents->size[1] - 1) {
@@ -4548,7 +4548,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
       for (i1 = 0; i1 < loop_ub; i1++) {
         b_lab_data[i1 + sizes_idx_1 * i] = lab_data[i1 + lab_size[0] * i];
       }
-      b_lab_data[lab_size[0] + sizes_idx_1 * i] = b_cv1[i];
+      b_lab_data[lab_size[0] + sizes_idx_1 * i] = cv1[i];
     }
     lab_size[0]++;
     lab_size[1] = 8;
@@ -4930,7 +4930,7 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
         for (i = 0; i <= loop_ub; i++) {
           Cr->data[i] = selWithoutLastHarmonic->data[i];
         }
-        f_do_vectors(Cr, posvarampl, selWithoutLastHarmonic, ia, &ib_size);
+        e_do_vectors(Cr, posvarampl, selWithoutLastHarmonic, ia, &ib_size);
         varampl.contents = 0.0;
       }
       /*  TODO nlinfit not supported by MATLAB C Coder */

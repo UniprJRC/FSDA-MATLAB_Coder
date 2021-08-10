@@ -34,6 +34,7 @@
 #include "rank.h"
 #include "repelem.h"
 #include "rt_nonfinite.h"
+#include "setdiffFS.h"
 #include "sort.h"
 #include "sprintf.h"
 #include "sum.h"
@@ -59,7 +60,7 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   emxArray_boolean_T *unitstopenalize;
   emxArray_char_T_1x310 c_mm;
   emxArray_int32_T *b_r;
-  emxArray_int32_T *ia;
+  emxArray_int32_T *iidx;
   emxArray_int32_T *r1;
   emxArray_real_T b_constr;
   emxArray_real_T *Xb;
@@ -853,17 +854,17 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   for (i = 0; i < loop_ub_tmp; i++) {
     bsbT->data[i] = false;
   }
-  emxInit_int32_T(&ia, 1);
-  i = ia->size[0];
-  ia->size[0] = b_bsb->size[0];
-  emxEnsureCapacity_int32_T(ia, i);
+  emxInit_int32_T(&iidx, 1);
+  i = iidx->size[0];
+  iidx->size[0] = b_bsb->size[0];
+  emxEnsureCapacity_int32_T(iidx, i);
   loop_ub = b_bsb->size[0];
   for (i = 0; i < loop_ub; i++) {
-    ia->data[i] = (int)b_bsb->data[i];
+    iidx->data[i] = (int)b_bsb->data[i];
   }
-  loop_ub = ia->size[0];
+  loop_ub = iidx->size[0];
   for (i = 0; i < loop_ub; i++) {
-    bsbT->data[ia->data[i] - 1] = true;
+    bsbT->data[iidx->data[i] - 1] = true;
   }
   /*  sequence from 1 to n. */
   emxInit_real_T(&c_y, 2);
@@ -1557,7 +1558,7 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                 for (i = 0; i < loop_ub; i++) {
                   d_bsbsteps->data[i] = b_b->data[i];
                 }
-                e_do_vectors(seq, d_bsbsteps, ncl, ia, &result);
+                setdiffFS(seq, d_bsbsteps, ncl);
                 nx = 1;
                 exitg2 = true;
               }
@@ -1834,16 +1835,16 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
             /*  the final k steps */
             if ((constr->size[0] != 0) && (constr->size[1] != 0) &&
                 (b_mm < n - (double)constr->size[0])) {
-              i = ia->size[0];
-              ia->size[0] = constr->size[0];
-              emxEnsureCapacity_int32_T(ia, i);
+              i = iidx->size[0];
+              iidx->size[0] = constr->size[0];
+              emxEnsureCapacity_int32_T(iidx, i);
               loop_ub = constr->size[0];
               for (i = 0; i < loop_ub; i++) {
-                ia->data[i] = (int)constr->data[i];
+                iidx->data[i] = (int)constr->data[i];
               }
-              loop_ub = ia->size[0];
+              loop_ub = iidx->size[0];
               for (i = 0; i < loop_ub; i++) {
-                r->data[(ia->data[i] + r->size[0]) - 1] = rtInf;
+                r->data[(iidx->data[i] + r->size[0]) - 1] = rtInf;
               }
             }
             /*  If internationaltrade is true residuals which have large of */
@@ -1860,13 +1861,13 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
               for (i = 0; i < loop_ub; i++) {
                 b_b->data[i] = r->data[i + r->size[0]];
               }
-              sort(b_b, ia);
+              sort(b_b, iidx);
               i = b_b->size[0];
-              b_b->size[0] = ia->size[0];
+              b_b->size[0] = iidx->size[0];
               emxEnsureCapacity_real_T(b_b, i);
-              loop_ub = ia->size[0];
+              loop_ub = iidx->size[0];
               for (i = 0; i < loop_ub; i++) {
-                b_b->data[i] = ia->data[i];
+                b_b->data[i] = iidx->data[i];
               }
             } else {
               loop_ub = r->size[0];
@@ -1876,13 +1877,13 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
               for (i = 0; i < loop_ub; i++) {
                 b_b->data[i] = r->data[i + r->size[0]] / weight->data[i];
               }
-              sort(b_b, ia);
+              sort(b_b, iidx);
               i = b_b->size[0];
-              b_b->size[0] = ia->size[0];
+              b_b->size[0] = iidx->size[0];
               emxEnsureCapacity_real_T(b_b, i);
-              loop_ub = ia->size[0];
+              loop_ub = iidx->size[0];
               for (i = 0; i < loop_ub; i++) {
-                b_b->data[i] = ia->data[i];
+                b_b->data[i] = iidx->data[i];
               }
             }
             /*  bsb= units forming the new  subset */
@@ -1899,15 +1900,15 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
             for (i = 0; i < loop_ub_tmp; i++) {
               bsbT->data[i] = false;
             }
-            i = ia->size[0];
-            ia->size[0] = (int)(b_mm + 1.0);
-            emxEnsureCapacity_int32_T(ia, i);
+            i = iidx->size[0];
+            iidx->size[0] = (int)(b_mm + 1.0);
+            emxEnsureCapacity_int32_T(iidx, i);
             for (i = 0; i < nx; i++) {
-              ia->data[i] = (int)b_b->data[i];
+              iidx->data[i] = (int)b_b->data[i];
             }
-            loop_ub = ia->size[0];
+            loop_ub = iidx->size[0];
             for (i = 0; i < loop_ub; i++) {
-              bsbT->data[ia->data[i] - 1] = true;
+              bsbT->data[iidx->data[i] - 1] = true;
             }
             loop_ub = b_X->size[1];
             i = Xb->size[0] * Xb->size[1];
@@ -2003,7 +2004,7 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                 b_n = nwhile;
                 b_constr.size = &b_n;
                 b_constr.numDimensions = 1;
-                e_do_vectors(b_b, &b_constr, ncl, ia, &result);
+                setdiffFS(b_b, &b_constr, ncl);
               } else {
                 if (b_mm + 2.0 > n) {
                   i = 0;
@@ -2037,7 +2038,7 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   emxFree_real_T(&r5);
   emxFree_real_T(&d_bsbsteps);
   emxFree_real_T(&r4);
-  emxFree_int32_T(&ia);
+  emxFree_int32_T(&iidx);
   emxFree_real_T(&c_y);
   emxFree_real_T(&b_X);
   emxFree_real_T(&b_y);

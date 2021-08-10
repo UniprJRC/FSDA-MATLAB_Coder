@@ -41,13 +41,10 @@ void do_vectors(double a, const emxArray_real_T *b, double c_data[],
 void e_do_vectors(const emxArray_real_T *a, const emxArray_real_T *b,
                   emxArray_real_T *c, emxArray_int32_T *ia, int *ib_size);
 
-void f_do_vectors(const emxArray_real_T *a, const emxArray_real_T *b,
-                  emxArray_real_T *c, emxArray_int32_T *ia, int *ib_size);
-
-void g_do_vectors(double a, double c_data[], int c_size[2], int ia_data[],
+void f_do_vectors(double a, double c_data[], int c_size[2], int ia_data[],
                   int *ia_size, int ib_data[], int *ib_size);
 
-void h_do_vectors(double a, double c_data[], int c_size[2], int ia_data[],
+void g_do_vectors(double a, double c_data[], int c_size[2], int ia_data[],
                   int *ia_size, int ib_data[], int *ib_size);
 
 #ifdef __cplusplus

@@ -84,6 +84,7 @@ D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\tinv.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\FSRmdr.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\sprintf.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\linsolve.c
+D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\setdiffFS.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\repelem.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\any.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\FSRcore.c
@@ -141,7 +142,6 @@ D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\TBeff.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\OPTeff.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\HAeff.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\MMregeda_wrapper.c
-D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\MMregcore.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\Sreg_wrapper.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\Sregeda_wrapper.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\addt_wrapper.c
@@ -293,6 +293,7 @@ D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\tinv.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\FSRmdr.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\sprintf.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\linsolve.h
+D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\setdiffFS.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\repelem.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\any.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\FSRcore.h
@@ -350,7 +351,6 @@ D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\TBeff.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\OPTeff.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\HAeff.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\MMregeda_wrapper.h
-D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\MMregcore.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\Sreg_wrapper.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\Sregeda_wrapper.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\addt_wrapper.h

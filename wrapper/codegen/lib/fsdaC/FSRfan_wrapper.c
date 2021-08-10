@@ -1142,7 +1142,7 @@ void FSRfan_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  loop over the values of \lambda */
   i = out->Un->size[0];
   out->Un->size[0] = b_n;
-  emxEnsureCapacity_cell_wrap_39(out->Un, i);
+  emxEnsureCapacity_cell_wrap_43(out->Un, i);
   emxInit_real_T(&z, 1);
   emxInit_real_T(&bsb, 1);
   emxInit_real_T(&zb, 1);

@@ -58,7 +58,6 @@ if ispc
     a=system(['"c:\Program Files\R\R-' Rversion '\bin\x64\R" CMD INSTALL --clean --no-multiarch fsdac']);
     
     if a ~= 0
-        disp(str)
         error('FSDA:Create_Rpackage_fsdaC:Wrongcmd','System command returned an error, check the syntax above.');
     end
     

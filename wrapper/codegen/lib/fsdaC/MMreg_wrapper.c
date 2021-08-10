@@ -55,7 +55,7 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                    bool yxsave, struct_MMreg_T *out, emxArray_real_T *C)
 {
   static const char cv3[5] = {'M', 'M', 'r', 'e', 'g'};
-  static const char b_cv1[3] = {'O', 'P', 'T'};
+  static const char cv1[3] = {'O', 'P', 'T'};
   static const char b_cv[2] = {'T', 'B'};
   static const char cv2[2] = {'H', 'A'};
   emxArray_boolean_T *b_constcols;
@@ -74,7 +74,7 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   emxArray_real_T *constcols;
   emxArray_real_T *d_y;
   emxArray_real_T *r2;
-  j_struct_T Sresult;
+  i_struct_T Sresult;
   double varargin_1[50];
   double row[5];
   double b_varargin_1[3];
@@ -1419,8 +1419,8 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   } else if (o_strcmp(rhofunc)) {
     if ((rhofuncparam->size[0] == 0) || (rhofuncparam->size[1] == 0)) {
       i = out->rhofuncparam->size[0] * out->rhofuncparam->size[1];
-      out->rhofuncparam->size[0] = 1;
-      out->rhofuncparam->size[1] = 3;
+      out->rhofuncparam->size[0] = 3;
+      out->rhofuncparam->size[1] = 1;
       emxEnsureCapacity_real_T(out->rhofuncparam, i);
       out->rhofuncparam->data[0] = 2.0;
       out->rhofuncparam->data[1] = 4.0;
@@ -1445,12 +1445,11 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     psifunc_class_data[1] = 'A';
     i = c->size[0] * c->size[1];
     c->size[0] = 1;
-    c->size[1] = (signed char)out->rhofuncparam->size[1] + 1;
+    c->size[1] = 2;
     emxEnsureCapacity_real_T(c, i);
     c->data[0] = F;
-    loop_ub = (signed char)out->rhofuncparam->size[1];
-    for (i = 0; i < loop_ub; i++) {
-      c->data[i + 1] = out->rhofuncparam->data[i];
+    for (i = 0; i < 1; i++) {
+      c->data[1] = out->rhofuncparam->data[0];
     }
   } else if (p_strcmp(rhofunc)) {
     /*  Compute tuning constant associated to the requested nominal efficiency
@@ -1634,7 +1633,7 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
         do {
           exitg1 = 0;
           if (nx < 3) {
-            if (psifunc_class_data[nx] != b_cv1[nx]) {
+            if (psifunc_class_data[nx] != cv1[nx]) {
               exitg1 = 1;
             } else {
               nx++;

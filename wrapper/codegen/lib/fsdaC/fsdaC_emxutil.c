@@ -40,7 +40,7 @@ void c_emxInitStruct_anonymous_funct(b_anonymous_function *pStruct)
 
 void c_emxInitStruct_matlab_internal(e_matlab_internal_coder_tabular *pStruct)
 {
-  emxInitMatrix_cell_wrap_51(&pStruct->labels[0]);
+  emxInitMatrix_cell_wrap_55(&pStruct->labels[0]);
 }
 
 void c_emxInitStruct_struct_LTStsmod(struct_LTStsmodel_T *pStruct)
@@ -68,11 +68,11 @@ void d_emxInitStruct_anonymous_funct(anonymous_function *pStruct)
 
 void d_emxInitStruct_matlab_internal(f_matlab_internal_coder_tabular *pStruct)
 {
-  emxInitMatrix_cell_wrap_53(pStruct->descrs);
-  emxInitMatrix_cell_wrap_53(pStruct->units);
+  emxInitMatrix_cell_wrap_57(pStruct->descrs);
+  emxInitMatrix_cell_wrap_57(pStruct->units);
 }
 
-void emxCopyStruct_struct_T(i_struct_T *dst, const i_struct_T *src)
+void emxCopyStruct_struct_T(h_struct_T *dst, const h_struct_T *src)
 {
   c_emxCopyStruct_anonymous_funct(&dst->nonlin, &src->nonlin);
   dst->f_1 = src->f_1;
@@ -92,12 +92,12 @@ void emxCopyStruct_struct_T(i_struct_T *dst, const i_struct_T *src)
   dst->FiniteDifferenceType = src->FiniteDifferenceType;
 }
 
-void emxCopyStruct_struct_T1(h_struct_T *dst, const h_struct_T *src)
+void emxCopyStruct_struct_T1(g_struct_T *dst, const g_struct_T *src)
 {
   d_emxCopyStruct_anonymous_funct(&dst->fun, &src->fun);
 }
 
-void emxCopyStruct_struct_T2(g_struct_T *dst, const g_struct_T *src)
+void emxCopyStruct_struct_T2(f_struct_T *dst, const f_struct_T *src)
 {
   dst->fun = src->fun;
   emxCopy_real_T(&dst->xdata, &src->xdata);
@@ -181,7 +181,7 @@ void emxEnsureCapacity_boolean_T(emxArray_boolean_T *emxArray, int oldNumel)
   }
 }
 
-void emxEnsureCapacity_cell_wrap_39(emxArray_cell_wrap_39 *emxArray,
+void emxEnsureCapacity_cell_wrap_43(emxArray_cell_wrap_43 *emxArray,
                                     int oldNumel)
 {
   int i;
@@ -206,21 +206,21 @@ void emxEnsureCapacity_cell_wrap_39(emxArray_cell_wrap_39 *emxArray,
         i *= 2;
       }
     }
-    newData = calloc((unsigned int)i, sizeof(cell_wrap_39));
+    newData = calloc((unsigned int)i, sizeof(cell_wrap_43));
     if (emxArray->data != NULL) {
-      memcpy(newData, emxArray->data, sizeof(cell_wrap_39) * oldNumel);
+      memcpy(newData, emxArray->data, sizeof(cell_wrap_43) * oldNumel);
       if (emxArray->canFreeData) {
         free(emxArray->data);
       }
     }
-    emxArray->data = (cell_wrap_39 *)newData;
+    emxArray->data = (cell_wrap_43 *)newData;
     emxArray->allocatedSize = i;
     emxArray->canFreeData = true;
   }
   if (oldNumel > newNumel) {
-    emxTrim_cell_wrap_39(emxArray, newNumel, oldNumel);
+    emxTrim_cell_wrap_43(emxArray, newNumel, oldNumel);
   } else if (oldNumel < newNumel) {
-    emxExpand_cell_wrap_39(emxArray, oldNumel, newNumel);
+    emxExpand_cell_wrap_43(emxArray, oldNumel, newNumel);
   }
 }
 
@@ -483,12 +483,12 @@ void emxEnsureCapacity_uint8_T(emxArray_uint8_T *emxArray, int oldNumel)
   }
 }
 
-void emxExpand_cell_wrap_39(emxArray_cell_wrap_39 *emxArray, int fromIndex,
+void emxExpand_cell_wrap_43(emxArray_cell_wrap_43 *emxArray, int fromIndex,
                             int toIndex)
 {
   int i;
   for (i = fromIndex; i < toIndex; i++) {
-    emxInitStruct_cell_wrap_39(&emxArray->data[i]);
+    emxInitStruct_cell_wrap_43(&emxArray->data[i]);
   }
 }
 
@@ -510,7 +510,7 @@ void emxFreeStruct_captured_var1(d_captured_var *pStruct)
   emxFree_boolean_T(&pStruct->contents);
 }
 
-void emxFreeStruct_cell_wrap_39(cell_wrap_39 *pStruct)
+void emxFreeStruct_cell_wrap_43(cell_wrap_43 *pStruct)
 {
   emxFree_real_T(&pStruct->f1);
 }
@@ -556,7 +556,7 @@ void emxFreeStruct_struct_FSRfan_T(struct_FSRfan_T *pStruct)
   emxFree_real_T(&pStruct->Score);
   emxFree_real_T(&pStruct->la);
   emxFree_real_T(&pStruct->bs);
-  emxFree_cell_wrap_39(&pStruct->Un);
+  emxFree_cell_wrap_43(&pStruct->Un);
   emxFree_real_T(&pStruct->y);
   emxFree_real_T(&pStruct->X);
   emxFree_real_T(&pStruct->Scorep);
@@ -684,18 +684,18 @@ void emxFreeStruct_struct_T2(c_struct_T *pStruct)
   emxFree_boolean_T(&pStruct->weights);
 }
 
-void emxFreeStruct_struct_T3(g_struct_T *pStruct)
+void emxFreeStruct_struct_T3(f_struct_T *pStruct)
 {
   emxFree_real_T(&pStruct->xdata);
   emxFree_real_T(&pStruct->ydata);
 }
 
-void emxFreeStruct_struct_T4(h_struct_T *pStruct)
+void emxFreeStruct_struct_T4(g_struct_T *pStruct)
 {
   c_emxFreeStruct_anonymous_funct(&pStruct->fun);
 }
 
-void emxFreeStruct_struct_T5(i_struct_T *pStruct)
+void emxFreeStruct_struct_T5(h_struct_T *pStruct)
 {
   d_emxFreeStruct_anonymous_funct(&pStruct->nonlin);
   emxFree_real_T(&pStruct->cEq_1);
@@ -704,22 +704,12 @@ void emxFreeStruct_struct_T5(i_struct_T *pStruct)
   emxFree_boolean_T(&pStruct->hasUB);
 }
 
-void emxFreeStruct_struct_T6(j_struct_T *pStruct)
+void emxFreeStruct_struct_T6(i_struct_T *pStruct)
 {
   emxFree_real_T(&pStruct->beta);
   emxFree_real_T(&pStruct->bs);
   emxFree_real_T(&pStruct->weights);
   emxFree_real_T(&pStruct->fittedvalues);
-  emxFree_real_T(&pStruct->residuals);
-  emxFree_real_T(&pStruct->outliers);
-  emxFree_char_T(&pStruct->rhofunc);
-  emxFree_real_T(&pStruct->rhofuncparam);
-}
-
-void emxFreeStruct_struct_T7(e_struct_T *pStruct)
-{
-  emxFree_real_T(&pStruct->beta);
-  emxFree_real_T(&pStruct->weights);
   emxFree_real_T(&pStruct->residuals);
   emxFree_real_T(&pStruct->outliers);
   emxFree_char_T(&pStruct->rhofunc);
@@ -754,18 +744,18 @@ void emxFree_boolean_T(emxArray_boolean_T **pEmxArray)
   }
 }
 
-void emxFree_cell_wrap_39(emxArray_cell_wrap_39 **pEmxArray)
+void emxFree_cell_wrap_43(emxArray_cell_wrap_43 **pEmxArray)
 {
   int i;
   int numEl;
-  if (*pEmxArray != (emxArray_cell_wrap_39 *)NULL) {
-    if ((*pEmxArray)->data != (cell_wrap_39 *)NULL) {
+  if (*pEmxArray != (emxArray_cell_wrap_43 *)NULL) {
+    if ((*pEmxArray)->data != (cell_wrap_43 *)NULL) {
       numEl = 1;
       for (i = 0; i < (*pEmxArray)->numDimensions; i++) {
         numEl *= (*pEmxArray)->size[i];
       }
       for (i = 0; i < numEl; i++) {
-        emxFreeStruct_cell_wrap_39(&(*pEmxArray)->data[i]);
+        emxFreeStruct_cell_wrap_43(&(*pEmxArray)->data[i]);
       }
       if ((*pEmxArray)->canFreeData) {
         free((*pEmxArray)->data);
@@ -773,7 +763,7 @@ void emxFree_cell_wrap_39(emxArray_cell_wrap_39 **pEmxArray)
     }
     free((*pEmxArray)->size);
     free(*pEmxArray);
-    *pEmxArray = (emxArray_cell_wrap_39 *)NULL;
+    *pEmxArray = (emxArray_cell_wrap_43 *)NULL;
   }
 }
 
@@ -864,19 +854,19 @@ void emxFree_uint8_T(emxArray_uint8_T **pEmxArray)
   }
 }
 
-void emxInitMatrix_cell_wrap_51(cell_wrap_51 *pMatrix)
+void emxInitMatrix_cell_wrap_55(cell_wrap_55 *pMatrix)
 {
   int i;
   for (i = 0; i < 1; i++) {
-    emxInitStruct_cell_wrap_51(pMatrix);
+    emxInitStruct_cell_wrap_55(pMatrix);
   }
 }
 
-void emxInitMatrix_cell_wrap_53(cell_wrap_53 pMatrix[4])
+void emxInitMatrix_cell_wrap_57(cell_wrap_57 pMatrix[4])
 {
   int i;
   for (i = 0; i < 4; i++) {
-    emxInitStruct_cell_wrap_53(&pMatrix[i]);
+    emxInitStruct_cell_wrap_57(&pMatrix[i]);
   }
 }
 
@@ -903,18 +893,18 @@ void emxInitStruct_captured_var2(d_captured_var *pStruct)
   emxInit_boolean_T(&pStruct->contents, 1);
 }
 
-void emxInitStruct_cell_wrap_39(cell_wrap_39 *pStruct)
+void emxInitStruct_cell_wrap_43(cell_wrap_43 *pStruct)
 {
   emxInit_real_T(&pStruct->f1, 2);
 }
 
-void emxInitStruct_cell_wrap_51(cell_wrap_51 *pStruct)
+void emxInitStruct_cell_wrap_55(cell_wrap_55 *pStruct)
 {
   pStruct->f1.size[0] = 0;
   pStruct->f1.size[1] = 0;
 }
 
-void emxInitStruct_cell_wrap_53(cell_wrap_53 *pStruct)
+void emxInitStruct_cell_wrap_57(cell_wrap_57 *pStruct)
 {
   pStruct->f1.size[0] = 0;
   pStruct->f1.size[1] = 0;
@@ -969,7 +959,7 @@ void emxInitStruct_struct_FSRfan_T(struct_FSRfan_T *pStruct)
   emxInit_real_T(&pStruct->Score, 2);
   emxInit_real_T(&pStruct->la, 2);
   emxInit_real_T(&pStruct->bs, 2);
-  emxInit_cell_wrap_39(&pStruct->Un, 1);
+  emxInit_cell_wrap_43(&pStruct->Un, 1);
   emxInit_real_T(&pStruct->y, 1);
   emxInit_real_T(&pStruct->X, 2);
   emxInit_real_T(&pStruct->Scorep, 2);
@@ -1107,7 +1097,7 @@ void emxInitStruct_struct_T2(c_struct_T *pStruct)
   emxInit_boolean_T(&pStruct->weights, 1);
 }
 
-void emxInitStruct_struct_T3(i_struct_T *pStruct)
+void emxInitStruct_struct_T3(h_struct_T *pStruct)
 {
   c_emxInitStruct_anonymous_funct(&pStruct->nonlin);
   emxInit_real_T(&pStruct->cEq_1, 1);
@@ -1116,33 +1106,23 @@ void emxInitStruct_struct_T3(i_struct_T *pStruct)
   emxInit_boolean_T(&pStruct->hasUB, 1);
 }
 
-void emxInitStruct_struct_T4(h_struct_T *pStruct)
+void emxInitStruct_struct_T4(g_struct_T *pStruct)
 {
   d_emxInitStruct_anonymous_funct(&pStruct->fun);
 }
 
-void emxInitStruct_struct_T5(g_struct_T *pStruct)
+void emxInitStruct_struct_T5(f_struct_T *pStruct)
 {
   emxInit_real_T(&pStruct->xdata, 2);
   emxInit_real_T(&pStruct->ydata, 1);
 }
 
-void emxInitStruct_struct_T6(j_struct_T *pStruct)
+void emxInitStruct_struct_T6(i_struct_T *pStruct)
 {
   emxInit_real_T(&pStruct->beta, 1);
   emxInit_real_T(&pStruct->bs, 2);
   emxInit_real_T(&pStruct->weights, 1);
   emxInit_real_T(&pStruct->fittedvalues, 1);
-  emxInit_real_T(&pStruct->residuals, 1);
-  emxInit_real_T(&pStruct->outliers, 2);
-  emxInit_char_T(&pStruct->rhofunc, 2);
-  emxInit_real_T(&pStruct->rhofuncparam, 2);
-}
-
-void emxInitStruct_struct_T7(e_struct_T *pStruct)
-{
-  emxInit_real_T(&pStruct->beta, 1);
-  emxInit_real_T(&pStruct->weights, 1);
   emxInit_real_T(&pStruct->residuals, 1);
   emxInit_real_T(&pStruct->outliers, 2);
   emxInit_char_T(&pStruct->rhofunc, 2);
@@ -1190,13 +1170,13 @@ void emxInit_boolean_T(emxArray_boolean_T **pEmxArray, int numDimensions)
   }
 }
 
-void emxInit_cell_wrap_39(emxArray_cell_wrap_39 **pEmxArray, int numDimensions)
+void emxInit_cell_wrap_43(emxArray_cell_wrap_43 **pEmxArray, int numDimensions)
 {
-  emxArray_cell_wrap_39 *emxArray;
+  emxArray_cell_wrap_43 *emxArray;
   int i;
-  *pEmxArray = (emxArray_cell_wrap_39 *)malloc(sizeof(emxArray_cell_wrap_39));
+  *pEmxArray = (emxArray_cell_wrap_43 *)malloc(sizeof(emxArray_cell_wrap_43));
   emxArray = *pEmxArray;
-  emxArray->data = (cell_wrap_39 *)NULL;
+  emxArray->data = (cell_wrap_43 *)NULL;
   emxArray->numDimensions = numDimensions;
   emxArray->size = (int *)malloc(sizeof(int) * numDimensions);
   emxArray->allocatedSize = 0;
@@ -1318,12 +1298,12 @@ void emxInit_uint8_T(emxArray_uint8_T **pEmxArray, int numDimensions)
   }
 }
 
-void emxTrim_cell_wrap_39(emxArray_cell_wrap_39 *emxArray, int fromIndex,
+void emxTrim_cell_wrap_43(emxArray_cell_wrap_43 *emxArray, int fromIndex,
                           int toIndex)
 {
   int i;
   for (i = fromIndex; i < toIndex; i++) {
-    emxFreeStruct_cell_wrap_39(&emxArray->data[i]);
+    emxFreeStruct_cell_wrap_43(&emxArray->data[i]);
   }
 }
 
