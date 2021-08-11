@@ -63,10 +63,11 @@ assert(isscalar(lts.reftolbestr));
 % model: a struct (with 6 fields of type scalar double)
 assert(isa(model,'struct'));
 
-% field lshift  a column vector of type double
+% field lshift  a row vector of type double
 assert(isa(model.lshift,'double'));
-% assert(all(size(model.lshift) <= [Inf Inf]));
-assert(size(model.lshift,1) == 1);
+assert(all(size(model.lshift) <= [1 Inf]));
+% assert(size(model.lshift,1) == 1);
+% assert(all(size(model.lshift) <= [Inf 1]));
 
 % field s a scalar of type double
 assert(isscalar(model.s));
@@ -79,7 +80,10 @@ assert(isa(model.seasonal,'double'));
 assert(isscalar(model.seasonal));
 % field ARp a scalar of type double
 assert(isa(model.ARp,'double'));
-assert(all(size(model.ARp) <= [1 1]));
+% assert(size(model.ARp,1) == 1);
+assert(all(size(model.ARp) <= [1 Inf]));
+
+
 % field X a missing value or a matrix of any dimension
 assert(isfield(model,'X'));
 assert(isa(model.X,'double'));
