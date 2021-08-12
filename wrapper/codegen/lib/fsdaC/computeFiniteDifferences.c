@@ -19,7 +19,7 @@
 #include <string.h>
 
 /* Function Definitions */
-bool computeFiniteDifferences(h_struct_T *obj,
+bool computeFiniteDifferences(i_struct_T *obj,
                               const emxArray_real_T *cEqCurrent,
                               emxArray_real_T *xk, emxArray_real_T *JacCeqTrans,
                               int ldJE)

@@ -9194,6 +9194,8 @@ const double dv6[900] = {0.5,
                          0.13844662494473656,
                          0.069223312472368279};
 
+const char cv1[10] = {'h', 'y', 'p', 'e', 'r', 'b', 'o', 'l', 'i', 'c'};
+
 bool isInitialized_fsdaC = false;
 
 /* End of code generation (fsdaC_data.c) */

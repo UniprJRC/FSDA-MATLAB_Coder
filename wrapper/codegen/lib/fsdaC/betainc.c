@@ -302,7 +302,7 @@ creal_T b_betainc(double x, double a, double b)
                 }
                 betai = 1.0 - logpax;
               }
-            } else if (b_x < b) {
+            } else if ((b_x < b) || (b_x < 1.0)) {
               n = 1.0;
               if (b_x > 2.2204460492503131E-16 * b) {
                 fac = b_x / b;

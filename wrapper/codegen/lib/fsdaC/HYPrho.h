@@ -23,8 +23,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void HYPrho(const emxArray_real_T *u, const double cktuning_data[],
-            const int cktuning_size[2], emxArray_real_T *rhoHYP);
+void HYPrho(const emxArray_real_T *u, const emxArray_real_T *cktuning,
+            emxArray_real_T *rhoHYP);
 
 #ifdef __cplusplus
 }

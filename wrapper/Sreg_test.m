@@ -17,8 +17,11 @@ refsteps=10;
 refstepsbestr=5;
 reftol=1e-7;
 reftolbestr=1e-7;
+rhofunc='hampel';
+rhofuncparam=[2;4;6];
+
 rhofunc='hyperbolic';
-rhofuncparam=[];
+rhofuncparam=4;
 yxsave=true;
 rng('default')
 rng(100);

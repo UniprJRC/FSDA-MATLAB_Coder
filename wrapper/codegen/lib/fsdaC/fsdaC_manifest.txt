@@ -105,8 +105,8 @@ D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\ScoreYJ.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\ScoreYJall.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\FSRmdr_wrapper.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\LTSts_wrapper.c
-D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\str2double.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\LTSts.c
+D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\str2double.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\HUrho.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\zscore.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\zscoreFS.c
@@ -117,7 +117,6 @@ D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\lsqcurvefit.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\factoryConstruct.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\checkStoppingCriteria.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\tcdf.c
-D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\string1.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\array2table.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\fcdf.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\FSRinvmdr.c
@@ -142,6 +141,7 @@ D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\TBeff.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\OPTeff.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\HAeff.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\MMregeda_wrapper.c
+D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\MMregcore.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\Sreg_wrapper.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\Sregeda_wrapper.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\addt_wrapper.c
@@ -184,6 +184,7 @@ D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\xgeqp3.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\chkinputR.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\xunormqr.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\str2double1.c
+D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\round.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\hasFiniteBounds.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\jacobianFiniteDifference.c
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\computeFiniteDifferences.c
@@ -314,8 +315,8 @@ D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\ScoreYJ.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\ScoreYJall.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\FSRmdr_wrapper.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\LTSts_wrapper.h
-D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\str2double.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\LTSts.h
+D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\str2double.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\HUrho.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\zscore.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\zscoreFS.h
@@ -326,7 +327,6 @@ D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\lsqcurvefit.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\factoryConstruct.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\checkStoppingCriteria.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\tcdf.h
-D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\string1.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\array2table.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\fcdf.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\FSRinvmdr.h
@@ -351,6 +351,7 @@ D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\TBeff.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\OPTeff.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\HAeff.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\MMregeda_wrapper.h
+D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\MMregcore.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\Sreg_wrapper.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\Sregeda_wrapper.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\addt_wrapper.h
@@ -393,6 +394,7 @@ D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\xgeqp3.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\chkinputR.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\xunormqr.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\str2double1.h
+D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\round.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\hasFiniteBounds.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\jacobianFiniteDifference.h
 D:\MATLAB\FSDAgit\FSDA-MATLAB_Coder\wrapper\codegen\lib\fsdaC\computeFiniteDifferences.h

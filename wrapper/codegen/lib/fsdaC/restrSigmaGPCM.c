@@ -46,8 +46,8 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
 {
   static const char b[3] = {'E', 'V', 'E'};
   static const char b_b[3] = {'V', 'V', 'E'};
-  cell_wrap_65 r;
-  cell_wrap_65 r1;
+  cell_wrap_64 r;
+  cell_wrap_64 r1;
   emxArray_boolean_T *x;
   emxArray_creal_T *r2;
   emxArray_real_T *GAM;

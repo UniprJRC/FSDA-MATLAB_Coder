@@ -23,13 +23,13 @@ bool b_jacobianFiniteDifference(emxArray_real_T *augJacobian,
                                 const emxArray_real_T *fCurrent, int *funcCount,
                                 const emxArray_real_T *x,
                                 const char options_FiniteDifferenceType[7],
-                                const h_struct_T *FiniteDifferences)
+                                const i_struct_T *FiniteDifferences)
 {
   static const char b_cv[7] = {'f', 'o', 'r', 'w', 'a', 'r', 'd'};
-  static const char cv1[7] = {'c', 'e', 'n', 't', 'r', 'a', 'l'};
+  static const char b_cv1[7] = {'c', 'e', 'n', 't', 'r', 'a', 'l'};
   emxArray_real_T *JacCeqTrans;
   emxArray_real_T *a__3;
-  h_struct_T b_FiniteDifferences;
+  i_struct_T b_FiniteDifferences;
   int b_loop_ub;
   int exitg1;
   int i;
@@ -80,7 +80,7 @@ bool b_jacobianFiniteDifference(emxArray_real_T *augJacobian,
       exitg1 = 0;
       if (loop_ub < 7) {
         if (cv[(unsigned char)options_FiniteDifferenceType[loop_ub]] !=
-            cv[(int)cv1[loop_ub]]) {
+            cv[(int)b_cv1[loop_ub]]) {
           exitg1 = 1;
         } else {
           loop_ub++;
@@ -111,14 +111,14 @@ void jacobianFiniteDifference(emxArray_real_T *augJacobian,
                               const emxArray_real_T *fCurrent,
                               const emxArray_real_T *x,
                               const char options_FiniteDifferenceType[7],
-                              h_struct_T *FiniteDifferences, int *funcCount,
+                              i_struct_T *FiniteDifferences, int *funcCount,
                               bool *evalOK)
 {
   static const char b_cv[7] = {'f', 'o', 'r', 'w', 'a', 'r', 'd'};
-  static const char cv1[7] = {'c', 'e', 'n', 't', 'r', 'a', 'l'};
+  static const char b_cv1[7] = {'c', 'e', 'n', 't', 'r', 'a', 'l'};
   emxArray_real_T *JacCeqTrans;
   emxArray_real_T *a__3;
-  h_struct_T b_FiniteDifferences;
+  i_struct_T b_FiniteDifferences;
   int b_loop_ub;
   int exitg1;
   int i;
@@ -170,7 +170,7 @@ void jacobianFiniteDifference(emxArray_real_T *augJacobian,
       exitg1 = 0;
       if (loop_ub < 7) {
         if (cv[(unsigned char)options_FiniteDifferenceType[loop_ub]] !=
-            cv[(int)cv1[loop_ub]]) {
+            cv[(int)b_cv1[loop_ub]]) {
           exitg1 = 1;
         } else {
           loop_ub++;

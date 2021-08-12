@@ -19,7 +19,8 @@
 #include <string.h>
 
 /* Function Definitions */
-void OPTwei(const emxArray_real_T *u, const double c_data[], emxArray_real_T *w)
+void OPTwei(const emxArray_real_T *u, const emxArray_real_T *c,
+            emxArray_real_T *w)
 {
   emxArray_boolean_T *r1;
   emxArray_boolean_T *r2;
@@ -29,10 +30,10 @@ void OPTwei(const emxArray_real_T *u, const double c_data[], emxArray_real_T *w)
   emxArray_real_T *x1;
   emxArray_real_T *y;
   double b_c;
-  double c;
   double c_c;
   double c_tmp;
   double d;
+  double d_c;
   int i;
   int k;
   int nx;
@@ -138,7 +139,7 @@ void OPTwei(const emxArray_real_T *u, const double c_data[], emxArray_real_T *w)
   k = absx->size[0] - 1;
   nx = 0;
   for (i = 0; i <= k; i++) {
-    if (absx->data[i] <= 2.0 * c_data[0]) {
+    if (absx->data[i] <= 2.0 * c->data[0]) {
       nx++;
     }
   }
@@ -148,12 +149,12 @@ void OPTwei(const emxArray_real_T *u, const double c_data[], emxArray_real_T *w)
   emxEnsureCapacity_int32_T(r, i);
   nx = 0;
   for (i = 0; i <= k; i++) {
-    if (absx->data[i] <= 2.0 * c_data[0]) {
+    if (absx->data[i] <= 2.0 * c->data[0]) {
       r->data[nx] = i + 1;
       nx++;
     }
   }
-  c_tmp = c_data[0] * c_data[0];
+  c_tmp = c->data[0] * c->data[0];
   nx = r->size[0];
   for (i = 0; i < nx; i++) {
     w->data[r->data[i] - 1] = 1.0 / (3.25 * c_tmp);
@@ -162,7 +163,7 @@ void OPTwei(const emxArray_real_T *u, const double c_data[], emxArray_real_T *w)
   emxInit_boolean_T(&r1, 1);
   /*  weights are 1/(3.25) * (-1.944* (1/c^2)+1.728 * (x^2/c^4) .... +8*0.002 *
    * (x^6/c^8) )    if    2c< |x| <3c */
-  d = 2.0 * c_data[0];
+  d = 2.0 * c->data[0];
   i = r1->size[0];
   r1->size[0] = absx->size[0];
   emxEnsureCapacity_boolean_T(r1, i);
@@ -171,7 +172,7 @@ void OPTwei(const emxArray_real_T *u, const double c_data[], emxArray_real_T *w)
     r1->data[i] = (absx->data[i] > d);
   }
   emxInit_boolean_T(&r2, 1);
-  d = 3.0 * c_data[0];
+  d = 3.0 * c->data[0];
   i = r2->size[0];
   r2->size[0] = absx->size[0];
   emxEnsureCapacity_boolean_T(r2, i);
@@ -197,9 +198,9 @@ void OPTwei(const emxArray_real_T *u, const double c_data[], emxArray_real_T *w)
       nx++;
     }
   }
-  c = rt_powd_snf(c_data[0], 4.0);
-  b_c = rt_powd_snf(c_data[0], 6.0);
-  c_c = rt_powd_snf(c_data[0], 8.0);
+  b_c = rt_powd_snf(c->data[0], 4.0);
+  c_c = rt_powd_snf(c->data[0], 6.0);
+  d_c = rt_powd_snf(c->data[0], 8.0);
   i = absx->size[0];
   absx->size[0] = x1->size[0];
   emxEnsureCapacity_real_T(absx, i);
@@ -228,8 +229,8 @@ void OPTwei(const emxArray_real_T *u, const double c_data[], emxArray_real_T *w)
   nx = absx->size[0];
   for (i = 0; i < nx; i++) {
     absx->data[i] =
-        (((d + 1.728 * absx->data[i] / c) - 0.312 * y->data[i] / b_c) +
-         0.016 * b_y->data[i] / c_c) /
+        (((d + 1.728 * absx->data[i] / b_c) - 0.312 * y->data[i] / c_c) +
+         0.016 * b_y->data[i] / d_c) /
         3.25;
   }
   emxFree_real_T(&b_y);
@@ -246,7 +247,7 @@ void OPTwei(const emxArray_real_T *u, const double c_data[], emxArray_real_T *w)
   emxFree_boolean_T(&r1);
   emxFree_real_T(&absx);
   /*  Rescaled weights so that their maximum is 1 */
-  c_tmp = 3.25 * (c_data[0] * c_data[0]);
+  c_tmp = 3.25 * (c->data[0] * c->data[0]);
   nx = w->size[0];
   for (i = 0; i < nx; i++) {
     w->data[i] *= c_tmp;

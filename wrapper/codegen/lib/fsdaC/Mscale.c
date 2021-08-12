@@ -23,12 +23,11 @@
 #include <string.h>
 
 /* Function Definitions */
-double Mscale(const emxArray_real_T *u, const double psifunc_c1_data[],
-              const int psifunc_c1_size[2], double psifunc_kc1,
-              const char psifunc_class_data[], const int psifunc_class_size[2],
-              double initialsc, double tol)
+double Mscale(const emxArray_real_T *u, const emxArray_real_T *psifunc_c1,
+              double psifunc_kc1, const char psifunc_class_data[],
+              const int psifunc_class_size[2], double initialsc, double tol)
 {
-  static const char cv1[3] = {'O', 'P', 'T'};
+  static const char b_cv1[3] = {'O', 'P', 'T'};
   static const char cv3[3] = {'H', 'Y', 'P'};
   static const char b_cv[2] = {'T', 'B'};
   static const char cv2[2] = {'H', 'A'};
@@ -205,7 +204,7 @@ double Mscale(const emxArray_real_T *u, const double psifunc_c1_data[],
   /*     c=HAbdp(bdp,1,abc); */
   /*     % kc = E(rho) = sup(rho)*bdp */
   /*     kc=HArho(c*abc(3),[c, abc])*bdp; */
-  /*     psifunc.c1=[c abc]; */
+  /*     psifunc.c1=[c; abc]; */
   /*     psifunc.kc1=kc; */
   /*     n=10000; */
   /*     shift=100; */
@@ -377,15 +376,14 @@ double Mscale(const emxArray_real_T *u, const double psifunc_c1_data[],
       for (k = 0; k < nx; k++) {
         y->data[k] = fabs(a->data[k]);
       }
-      err = psifunc_c1_data[0];
       k = w->size[0];
       w->size[0] = y->size[0];
       emxEnsureCapacity_boolean_T(w, k);
       nx = y->size[0];
       for (k = 0; k < nx; k++) {
-        w->data[k] = (y->data[k] <= err);
+        w->data[k] = (y->data[k] <= psifunc_c1->data[0]);
       }
-      err = psifunc_c1_data[0] * psifunc_c1_data[0];
+      err = psifunc_c1->data[0] * psifunc_c1->data[0];
       k = r->size[0];
       r->size[0] = a->size[0];
       emxEnsureCapacity_real_T(r, k);
@@ -401,7 +399,7 @@ double Mscale(const emxArray_real_T *u, const double psifunc_c1_data[],
       for (k = 0; k < nx; k++) {
         y->data[k] = rt_powd_snf(a->data[k], 4.0);
       }
-      d = 3.0 * rt_powd_snf(psifunc_c1_data[0], 4.0);
+      d = 3.0 * rt_powd_snf(psifunc_c1->data[0], 4.0);
       k = y->size[0];
       y->size[0] = r->size[0];
       emxEnsureCapacity_real_T(y, k);
@@ -421,7 +419,7 @@ double Mscale(const emxArray_real_T *u, const double psifunc_c1_data[],
         do {
           exitg1 = 0;
           if (nx < 3) {
-            if (psifunc_class_data[nx] != cv1[nx]) {
+            if (psifunc_class_data[nx] != b_cv1[nx]) {
               exitg1 = 1;
             } else {
               nx++;
@@ -440,7 +438,7 @@ double Mscale(const emxArray_real_T *u, const double psifunc_c1_data[],
         for (k = 0; k < nx; k++) {
           y->data[k] = u->data[k] / sc;
         }
-        b_OPTrho(y, psifunc_c1_data, a);
+        b_OPTrho(y, psifunc_c1, a);
         scnew = sc * sqrt(blockedSummation(a, a->size[0]) / (double)a->size[0] /
                           psifunc_kc1);
       } else {
@@ -469,7 +467,7 @@ double Mscale(const emxArray_real_T *u, const double psifunc_c1_data[],
           for (k = 0; k < nx; k++) {
             y->data[k] = u->data[k] / sc;
           }
-          b_HArho(y, psifunc_c1_data, psifunc_c1_size, a);
+          b_HArho(y, psifunc_c1, a);
           scnew = sc * sqrt(blockedSummation(a, a->size[0]) /
                             (double)a->size[0] / psifunc_kc1);
         } else {
@@ -498,7 +496,7 @@ double Mscale(const emxArray_real_T *u, const double psifunc_c1_data[],
             for (k = 0; k < nx; k++) {
               y->data[k] = u->data[k] / sc;
             }
-            HYPrho(y, psifunc_c1_data, psifunc_c1_size, a);
+            HYPrho(y, psifunc_c1, a);
             scnew = sc * sqrt(blockedSummation(a, a->size[0]) /
                               (double)a->size[0] / psifunc_kc1);
           } else {
@@ -629,6 +627,7 @@ double Mscale(const emxArray_real_T *u, const double psifunc_c1_data[],
                */
               /* } */
               /*  Beginning of code */
+              /*  MATLAB Ccoder instruction to enforce that alpha is a scalar */
               k = a->size[0];
               a->size[0] = u->size[0];
               emxEnsureCapacity_real_T(a, k);
@@ -643,12 +642,20 @@ double Mscale(const emxArray_real_T *u, const double psifunc_c1_data[],
               for (k = 0; k < nx; k++) {
                 y->data[k] = a->data[k] * a->data[k];
               }
-              err = 0.0;
-              nx = psifunc_c1_size[1];
+              nx = y->size[0];
               for (k = 0; k < nx; k++) {
-                err += -psifunc_c1_data[k] * (y->data[k] / 2.0);
+                y->data[k] = -psifunc_c1->data[0] * (y->data[k] / 2.0);
               }
-              scnew = sc * sqrt((1.0 - exp(err)) / psifunc_kc1);
+              nx = y->size[0];
+              for (k = 0; k < nx; k++) {
+                y->data[k] = exp(y->data[k]);
+              }
+              nx = y->size[0];
+              for (k = 0; k < nx; k++) {
+                y->data[k] = 1.0 - y->data[k];
+              }
+              scnew = sc * sqrt(blockedSummation(y, y->size[0]) /
+                                (double)y->size[0] / psifunc_kc1);
             }
           }
         }

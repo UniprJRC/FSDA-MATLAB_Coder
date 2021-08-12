@@ -42,7 +42,7 @@ void lsqcurvefit(
     const emxArray_real_T *xdata, const emxArray_real_T *ydata,
     const emxArray_real_T *lb, const emxArray_real_T *ub, emxArray_real_T *x,
     double *resnorm, emxArray_real_T *residual, double *exitflag,
-    e_struct_T *output, b_struct_T *lambda, emxArray_real_T *jacobian)
+    f_struct_T *output, b_struct_T *lambda, emxArray_real_T *jacobian)
 {
   static const char b_cv[19] = {'l', 'e', 'v', 'e', 'n', 'b', 'e',
                                 'r', 'g', '-', 'm', 'a', 'r', 'q',
@@ -61,8 +61,8 @@ void lsqcurvefit(
   emxArray_real_T *gradf;
   emxArray_real_T *rhs;
   emxArray_real_T *xp;
-  h_struct_T FiniteDifferences;
-  h_struct_T b_FiniteDifferences;
+  i_struct_T FiniteDifferences;
+  i_struct_T b_FiniteDifferences;
   double b_gamma;
   double funDiff;
   double minWidth;

@@ -18,18 +18,17 @@
 #include <string.h>
 
 /* Function Definitions */
-void TBwei(const emxArray_real_T *u, const double c_data[], emxArray_real_T *w)
+void TBwei(const emxArray_real_T *u, const emxArray_real_T *c,
+           emxArray_real_T *w)
 {
   emxArray_boolean_T *r;
   emxArray_int32_T *r1;
-  emxArray_real_T *a;
+  emxArray_real_T *w_tmp;
   emxArray_real_T *y;
-  double c;
   int i;
   int k;
   int nx;
-  emxInit_real_T(&y, 1);
-  emxInit_real_T(&a, 1);
+  emxInit_real_T(&w_tmp, 1);
   /* TBwei computes weight function psi(u)/u for Tukey's biweight   */
   /*  */
   /* <a href="matlab: docsearchFS('TBwei')">Link to the help function</a> */
@@ -177,20 +176,20 @@ void TBwei(const emxArray_real_T *u, const double c_data[], emxArray_real_T *w)
   /* } */
   /*  beginning of code */
   /*  MATLAB Ccoder instruction to enforce that c is a scalar */
-  c = c_data[0];
-  i = a->size[0];
-  a->size[0] = u->size[0];
-  emxEnsureCapacity_real_T(a, i);
+  i = w_tmp->size[0];
+  w_tmp->size[0] = u->size[0];
+  emxEnsureCapacity_real_T(w_tmp, i);
   nx = u->size[0];
   for (i = 0; i < nx; i++) {
-    a->data[i] = u->data[i] / c;
+    w_tmp->data[i] = u->data[i] / c->data[0];
   }
+  emxInit_real_T(&y, 1);
   i = y->size[0];
-  y->size[0] = a->size[0];
+  y->size[0] = w_tmp->size[0];
   emxEnsureCapacity_real_T(y, i);
-  nx = a->size[0];
+  nx = w_tmp->size[0];
   for (k = 0; k < nx; k++) {
-    y->data[k] = a->data[k] * a->data[k];
+    y->data[k] = w_tmp->data[k] * w_tmp->data[k];
   }
   nx = y->size[0];
   for (i = 0; i < nx; i++) {
@@ -207,22 +206,14 @@ void TBwei(const emxArray_real_T *u, const double c_data[], emxArray_real_T *w)
   /*  however it is the proper expression for the weights */
   /*  if we start with the normalized \rho (\infty)=1 */
   /*  w = w .* (c^2/6); */
-  c = c_data[0];
-  i = a->size[0];
-  a->size[0] = u->size[0];
-  emxEnsureCapacity_real_T(a, i);
-  nx = u->size[0];
-  for (i = 0; i < nx; i++) {
-    a->data[i] = u->data[i] / c;
-  }
-  nx = a->size[0];
+  nx = w_tmp->size[0];
   i = y->size[0];
-  y->size[0] = a->size[0];
+  y->size[0] = w_tmp->size[0];
   emxEnsureCapacity_real_T(y, i);
   for (k = 0; k < nx; k++) {
-    y->data[k] = fabs(a->data[k]);
+    y->data[k] = fabs(w_tmp->data[k]);
   }
-  emxFree_real_T(&a);
+  emxFree_real_T(&w_tmp);
   emxInit_boolean_T(&r, 1);
   i = r->size[0];
   r->size[0] = y->size[0];

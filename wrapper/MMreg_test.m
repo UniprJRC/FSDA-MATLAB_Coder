@@ -19,6 +19,8 @@ refsteps=100;
 rhofunc='hyperbolic';
 rhofuncparam=[];
 
+rhofunc='hampel';
+rhofuncparam=[2; 3; 8.2];
 
 Sbdp=0.5;
 Sbestr=10;
@@ -57,7 +59,7 @@ tottimeMEX=toc;
 
 % Compare mex time with .m time
 CompTimes=array2table([tottime tottimeMEX],'VariableNames',{'.m time' 'mex time'},...
-    'RowNames',{'Sreg'});
+    'RowNames',{'MMreg'});
 disp(CompTimes)
 % Save table CompTimes
 save('CompTimes','CompTimes')

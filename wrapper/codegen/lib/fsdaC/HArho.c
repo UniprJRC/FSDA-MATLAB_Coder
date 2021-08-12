@@ -18,7 +18,7 @@
 #include <string.h>
 
 /* Function Definitions */
-double HArho(double u, const double ctuning_data[], const int ctuning_size[2])
+double HArho(double u, const emxArray_real_T *ctuning)
 {
   emxArray_real_T *c_a;
   emxArray_real_T *y;
@@ -140,16 +140,16 @@ double HArho(double u, const double ctuning_data[], const int ctuning_size[2])
   /*  */
   /* } */
   /*  Beginning of code */
-  if (ctuning_size[1] > 1) {
-    a = ctuning_data[0] * ctuning_data[1];
-    b = ctuning_data[0] * ctuning_data[2];
-    c = ctuning_data[0] * ctuning_data[3];
+  if (ctuning->size[0] > 1) {
+    a = ctuning->data[0] * ctuning->data[1];
+    b = ctuning->data[0] * ctuning->data[2];
+    c = ctuning->data[0] * ctuning->data[3];
   } else {
     /*  Note ctuning(1) instead of ctuning to convince MATLAB Ccoder that a, */
     /*  b and c are scalar. */
-    a = 2.0 * ctuning_data[0];
-    b = 4.0 * ctuning_data[0];
-    c = 8.0 * ctuning_data[0];
+    a = 2.0 * ctuning->data[0];
+    b = 4.0 * ctuning->data[0];
+    c = 8.0 * ctuning->data[0];
   }
   rhoHA = 1.0;
   absu_tmp = fabs(u);
@@ -237,8 +237,8 @@ double HArho(double u, const double ctuning_data[], const int ctuning_size[2])
   return rhoHA;
 }
 
-void b_HArho(const emxArray_real_T *u, const double ctuning_data[],
-             const int ctuning_size[2], emxArray_real_T *rhoHA)
+void b_HArho(const emxArray_real_T *u, const emxArray_real_T *ctuning,
+             emxArray_real_T *rhoHA)
 {
   emxArray_boolean_T *r1;
   emxArray_boolean_T *r2;
@@ -371,16 +371,16 @@ void b_HArho(const emxArray_real_T *u, const double ctuning_data[],
   /*  */
   /* } */
   /*  Beginning of code */
-  if (ctuning_size[1] > 1) {
-    a = ctuning_data[0] * ctuning_data[1];
-    b = ctuning_data[0] * ctuning_data[2];
-    c = ctuning_data[0] * ctuning_data[3];
+  if (ctuning->size[0] > 1) {
+    a = ctuning->data[0] * ctuning->data[1];
+    b = ctuning->data[0] * ctuning->data[2];
+    c = ctuning->data[0] * ctuning->data[3];
   } else {
     /*  Note ctuning(1) instead of ctuning to convince MATLAB Ccoder that a, */
     /*  b and c are scalar. */
-    a = 2.0 * ctuning_data[0];
-    b = 4.0 * ctuning_data[0];
-    c = 8.0 * ctuning_data[0];
+    a = 2.0 * ctuning->data[0];
+    b = 4.0 * ctuning->data[0];
+    c = 8.0 * ctuning->data[0];
   }
   i = rhoHA->size[0];
   rhoHA->size[0] = u->size[0];

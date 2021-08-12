@@ -28,8 +28,16 @@ void c_emxFreeStruct_anonymous_funct(anonymous_function *pStruct)
   emxFreeStruct_struct_T3(&pStruct->workspace);
 }
 
+void c_emxFreeStruct_matlab_internal(f_matlab_internal_coder_tabular *pStruct)
+{
+  emxFreeMatrix_cell_wrap_56(pStruct->descrs);
+  emxFreeMatrix_cell_wrap_56(pStruct->units);
+}
+
 void c_emxFreeStruct_struct_LTStsmod(struct_LTStsmodel_T *pStruct)
 {
+  emxFree_real_T(&pStruct->lshift);
+  emxFree_real_T(&pStruct->ARp);
   emxFree_real_T(&pStruct->X);
 }
 
@@ -38,15 +46,16 @@ void c_emxInitStruct_anonymous_funct(b_anonymous_function *pStruct)
   emxInitStruct_struct_T4(&pStruct->workspace);
 }
 
-void c_emxInitStruct_matlab_internal(e_matlab_internal_coder_tabular *pStruct)
+void c_emxInitStruct_matlab_internal(f_matlab_internal_coder_tabular *pStruct)
 {
-  emxInitMatrix_cell_wrap_55(&pStruct->labels[0]);
+  emxInitMatrix_cell_wrap_56(pStruct->descrs);
+  emxInitMatrix_cell_wrap_56(pStruct->units);
 }
 
 void c_emxInitStruct_struct_LTStsmod(struct_LTStsmodel_T *pStruct)
 {
-  pStruct->ARp.size[0] = 0;
-  pStruct->ARp.size[1] = 0;
+  emxInit_real_T(&pStruct->lshift, 2);
+  emxInit_real_T(&pStruct->ARp, 2);
   emxInit_real_T(&pStruct->X, 2);
 }
 
@@ -66,13 +75,7 @@ void d_emxInitStruct_anonymous_funct(anonymous_function *pStruct)
   emxInitStruct_struct_T5(&pStruct->workspace);
 }
 
-void d_emxInitStruct_matlab_internal(f_matlab_internal_coder_tabular *pStruct)
-{
-  emxInitMatrix_cell_wrap_57(pStruct->descrs);
-  emxInitMatrix_cell_wrap_57(pStruct->units);
-}
-
-void emxCopyStruct_struct_T(h_struct_T *dst, const h_struct_T *src)
+void emxCopyStruct_struct_T(i_struct_T *dst, const i_struct_T *src)
 {
   c_emxCopyStruct_anonymous_funct(&dst->nonlin, &src->nonlin);
   dst->f_1 = src->f_1;
@@ -92,12 +95,12 @@ void emxCopyStruct_struct_T(h_struct_T *dst, const h_struct_T *src)
   dst->FiniteDifferenceType = src->FiniteDifferenceType;
 }
 
-void emxCopyStruct_struct_T1(g_struct_T *dst, const g_struct_T *src)
+void emxCopyStruct_struct_T1(h_struct_T *dst, const h_struct_T *src)
 {
   d_emxCopyStruct_anonymous_funct(&dst->fun, &src->fun);
 }
 
-void emxCopyStruct_struct_T2(f_struct_T *dst, const f_struct_T *src)
+void emxCopyStruct_struct_T2(g_struct_T *dst, const g_struct_T *src)
 {
   dst->fun = src->fun;
   emxCopy_real_T(&dst->xdata, &src->xdata);
@@ -492,6 +495,14 @@ void emxExpand_cell_wrap_43(emxArray_cell_wrap_43 *emxArray, int fromIndex,
   }
 }
 
+void emxFreeMatrix_cell_wrap_56(cell_wrap_56 pMatrix[4])
+{
+  int i;
+  for (i = 0; i < 4; i++) {
+    emxFreeStruct_cell_wrap_56(&pMatrix[i]);
+  }
+}
+
 void emxFreeMatrix_cell_wrap_6(cell_wrap_6 pMatrix[4])
 {
   int i;
@@ -513,6 +524,11 @@ void emxFreeStruct_captured_var1(d_captured_var *pStruct)
 void emxFreeStruct_cell_wrap_43(cell_wrap_43 *pStruct)
 {
   emxFree_real_T(&pStruct->f1);
+}
+
+void emxFreeStruct_cell_wrap_56(cell_wrap_56 *pStruct)
+{
+  emxFree_char_T(&pStruct->f1);
 }
 
 void emxFreeStruct_cell_wrap_6(cell_wrap_6 *pStruct)
@@ -684,18 +700,18 @@ void emxFreeStruct_struct_T2(c_struct_T *pStruct)
   emxFree_boolean_T(&pStruct->weights);
 }
 
-void emxFreeStruct_struct_T3(f_struct_T *pStruct)
+void emxFreeStruct_struct_T3(g_struct_T *pStruct)
 {
   emxFree_real_T(&pStruct->xdata);
   emxFree_real_T(&pStruct->ydata);
 }
 
-void emxFreeStruct_struct_T4(g_struct_T *pStruct)
+void emxFreeStruct_struct_T4(h_struct_T *pStruct)
 {
   c_emxFreeStruct_anonymous_funct(&pStruct->fun);
 }
 
-void emxFreeStruct_struct_T5(h_struct_T *pStruct)
+void emxFreeStruct_struct_T5(i_struct_T *pStruct)
 {
   d_emxFreeStruct_anonymous_funct(&pStruct->nonlin);
   emxFree_real_T(&pStruct->cEq_1);
@@ -704,12 +720,22 @@ void emxFreeStruct_struct_T5(h_struct_T *pStruct)
   emxFree_boolean_T(&pStruct->hasUB);
 }
 
-void emxFreeStruct_struct_T6(i_struct_T *pStruct)
+void emxFreeStruct_struct_T6(j_struct_T *pStruct)
 {
   emxFree_real_T(&pStruct->beta);
   emxFree_real_T(&pStruct->bs);
   emxFree_real_T(&pStruct->weights);
   emxFree_real_T(&pStruct->fittedvalues);
+  emxFree_real_T(&pStruct->residuals);
+  emxFree_real_T(&pStruct->outliers);
+  emxFree_char_T(&pStruct->rhofunc);
+  emxFree_real_T(&pStruct->rhofuncparam);
+}
+
+void emxFreeStruct_struct_T7(e_struct_T *pStruct)
+{
+  emxFree_real_T(&pStruct->beta);
+  emxFree_real_T(&pStruct->weights);
   emxFree_real_T(&pStruct->residuals);
   emxFree_real_T(&pStruct->outliers);
   emxFree_char_T(&pStruct->rhofunc);
@@ -729,6 +755,7 @@ void emxFreeStruct_struct_tclust_T(struct_tclust_T *pStruct)
 
 void emxFreeStruct_table(table *pStruct)
 {
+  c_emxFreeStruct_matlab_internal(&pStruct->varDim);
   emxFreeMatrix_cell_wrap_6(pStruct->data);
 }
 
@@ -854,19 +881,11 @@ void emxFree_uint8_T(emxArray_uint8_T **pEmxArray)
   }
 }
 
-void emxInitMatrix_cell_wrap_55(cell_wrap_55 *pMatrix)
-{
-  int i;
-  for (i = 0; i < 1; i++) {
-    emxInitStruct_cell_wrap_55(pMatrix);
-  }
-}
-
-void emxInitMatrix_cell_wrap_57(cell_wrap_57 pMatrix[4])
+void emxInitMatrix_cell_wrap_56(cell_wrap_56 pMatrix[4])
 {
   int i;
   for (i = 0; i < 4; i++) {
-    emxInitStruct_cell_wrap_57(&pMatrix[i]);
+    emxInitStruct_cell_wrap_56(&pMatrix[i]);
   }
 }
 
@@ -898,16 +917,9 @@ void emxInitStruct_cell_wrap_43(cell_wrap_43 *pStruct)
   emxInit_real_T(&pStruct->f1, 2);
 }
 
-void emxInitStruct_cell_wrap_55(cell_wrap_55 *pStruct)
+void emxInitStruct_cell_wrap_56(cell_wrap_56 *pStruct)
 {
-  pStruct->f1.size[0] = 0;
-  pStruct->f1.size[1] = 0;
-}
-
-void emxInitStruct_cell_wrap_57(cell_wrap_57 *pStruct)
-{
-  pStruct->f1.size[0] = 0;
-  pStruct->f1.size[1] = 0;
+  emxInit_char_T(&pStruct->f1, 2);
 }
 
 void emxInitStruct_cell_wrap_6(cell_wrap_6 *pStruct)
@@ -974,16 +986,16 @@ void emxInitStruct_struct_FSRlms_T(struct_FSRlms_T *pStruct)
 
 void emxInitStruct_struct_LTSts_T(struct_LTSts_T *pStruct)
 {
-  emxInit_real_T(&pStruct->RES, 1);
-  emxInit_real_T(&pStruct->Hsubset, 1);
+  emxInit_real_T(&pStruct->RES, 2);
+  emxInit_real_T(&pStruct->Hsubset, 2);
   emxInit_real_T(&pStruct->B, 2);
   pStruct->posLS.size[0] = 0;
   pStruct->posLS.size[1] = 0;
   emxInit_real_T(&pStruct->yhat, 1);
   emxInit_real_T(&pStruct->outliers, 1);
   emxInit_real_T(&pStruct->outliersPval, 1);
-  emxInit_real_T(&pStruct->numscale2, 1);
-  emxInit_real_T(&pStruct->BestIndexes, 1);
+  emxInit_real_T(&pStruct->numscale2, 2);
+  emxInit_real_T(&pStruct->BestIndexes, 2);
   emxInit_real_T(&pStruct->residuals, 1);
   emxInit_real_T(&pStruct->bs, 1);
   emxInit_boolean_T(&pStruct->weights, 1);
@@ -1097,7 +1109,7 @@ void emxInitStruct_struct_T2(c_struct_T *pStruct)
   emxInit_boolean_T(&pStruct->weights, 1);
 }
 
-void emxInitStruct_struct_T3(h_struct_T *pStruct)
+void emxInitStruct_struct_T3(i_struct_T *pStruct)
 {
   c_emxInitStruct_anonymous_funct(&pStruct->nonlin);
   emxInit_real_T(&pStruct->cEq_1, 1);
@@ -1106,23 +1118,33 @@ void emxInitStruct_struct_T3(h_struct_T *pStruct)
   emxInit_boolean_T(&pStruct->hasUB, 1);
 }
 
-void emxInitStruct_struct_T4(g_struct_T *pStruct)
+void emxInitStruct_struct_T4(h_struct_T *pStruct)
 {
   d_emxInitStruct_anonymous_funct(&pStruct->fun);
 }
 
-void emxInitStruct_struct_T5(f_struct_T *pStruct)
+void emxInitStruct_struct_T5(g_struct_T *pStruct)
 {
   emxInit_real_T(&pStruct->xdata, 2);
   emxInit_real_T(&pStruct->ydata, 1);
 }
 
-void emxInitStruct_struct_T6(i_struct_T *pStruct)
+void emxInitStruct_struct_T6(j_struct_T *pStruct)
 {
   emxInit_real_T(&pStruct->beta, 1);
   emxInit_real_T(&pStruct->bs, 2);
   emxInit_real_T(&pStruct->weights, 1);
   emxInit_real_T(&pStruct->fittedvalues, 1);
+  emxInit_real_T(&pStruct->residuals, 1);
+  emxInit_real_T(&pStruct->outliers, 2);
+  emxInit_char_T(&pStruct->rhofunc, 2);
+  emxInit_real_T(&pStruct->rhofuncparam, 2);
+}
+
+void emxInitStruct_struct_T7(e_struct_T *pStruct)
+{
+  emxInit_real_T(&pStruct->beta, 1);
+  emxInit_real_T(&pStruct->weights, 1);
   emxInit_real_T(&pStruct->residuals, 1);
   emxInit_real_T(&pStruct->outliers, 2);
   emxInit_char_T(&pStruct->rhofunc, 2);
@@ -1148,8 +1170,7 @@ void emxInitStruct_struct_tclust_T(struct_tclust_T *pStruct)
 
 void emxInitStruct_table(table *pStruct)
 {
-  c_emxInitStruct_matlab_internal(&pStruct->rowDim);
-  d_emxInitStruct_matlab_internal(&pStruct->varDim);
+  c_emxInitStruct_matlab_internal(&pStruct->varDim);
   emxInitMatrix_cell_wrap_6(pStruct->data);
   emxInitStruct_struct0_T(&pStruct->arrayProps);
 }

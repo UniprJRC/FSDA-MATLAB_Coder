@@ -18,8 +18,8 @@
 #include <string.h>
 
 /* Function Definitions */
-void HAwei(const emxArray_real_T *u, const double ctuning_data[],
-           const int ctuning_size[2], emxArray_real_T *w)
+void HAwei(const emxArray_real_T *u, const emxArray_real_T *ctuning,
+           emxArray_real_T *w)
 {
   emxArray_int32_T *r;
   emxArray_int32_T *r1;
@@ -133,14 +133,14 @@ void HAwei(const emxArray_real_T *u, const double ctuning_data[],
   /*  */
   /* } */
   /*  Beginning of code */
-  if (ctuning_size[1] > 1) {
-    a = ctuning_data[0] * ctuning_data[1];
-    b = ctuning_data[0] * ctuning_data[2];
-    c = ctuning_data[0] * ctuning_data[3];
+  if (ctuning->size[0] > 1) {
+    a = ctuning->data[0] * ctuning->data[1];
+    b = ctuning->data[0] * ctuning->data[2];
+    c = ctuning->data[0] * ctuning->data[3];
   } else {
-    a = 2.0 * ctuning_data[0];
-    b = 4.0 * ctuning_data[0];
-    c = 8.0 * ctuning_data[0];
+    a = 2.0 * ctuning->data[0];
+    b = 4.0 * ctuning->data[0];
+    c = 8.0 * ctuning->data[0];
   }
   i = w->size[0];
   w->size[0] = u->size[0];

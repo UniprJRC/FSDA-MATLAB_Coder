@@ -23,16 +23,13 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-extern void LTSts_wrapper(const emxArray_real_T *y, double conflev,
-                          bool dispresults, double h, bool intercept,
-                          const struct_LTStslshiftlocref_T *lshiftlocref,
-                          const struct_LXSlms_T *lts,
-                          const struct_LTStsmodel_T *model, bool msg,
-                          double nbestindexes, bool nocheck,
-                          const double nsamp_data[], const int nsamp_size[2],
-                          double refstepsALS, double reftolALS,
-                          double SmallSampleCor, bool yxsave,
-                          struct_LTSts_T *out, emxArray_real_T *C);
+extern void LTSts_wrapper(
+    const emxArray_real_T *y, double conflev, bool dispresults, double h,
+    bool intercept, const struct_LTStslshiftlocref_T *lshiftlocref,
+    const struct_LXSlms_T *lts, const struct_LTStsmodel_T *model, bool msg,
+    double nbestindexes, bool nocheck, const double nsamp_data[],
+    const int nsamp_size[2], double refstepsALS, double reftolALS,
+    double SmallSampleCor, bool yxsave, struct_LTSts_T *out, double *C);
 
 #ifdef __cplusplus
 }
