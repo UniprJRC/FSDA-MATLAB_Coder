@@ -23,10 +23,9 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-double Mscale(const emxArray_real_T *u, const double psifunc_c1_data[],
-              const int psifunc_c1_size[2], double psifunc_kc1,
-              const char psifunc_class_data[], const int psifunc_class_size[2],
-              double initialsc, double tol);
+double Mscale(const emxArray_real_T *u, const emxArray_real_T *psifunc_c1,
+              double psifunc_kc1, const char psifunc_class_data[],
+              const int psifunc_class_size[2], double initialsc, double tol);
 
 #ifdef __cplusplus
 }

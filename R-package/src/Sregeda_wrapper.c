@@ -62,11 +62,13 @@ void Sregeda_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   emxArray_int32_T *r2;
   emxArray_real_T b_time_data;
   emxArray_real_T *Xb;
-  emxArray_real_T *b_out;
+  emxArray_real_T *abc;
   emxArray_real_T *bestbetas;
   emxArray_real_T *bestscales;
   emxArray_real_T *bestsubset;
   emxArray_real_T *beta;
+  emxArray_real_T *c;
+  emxArray_real_T *psifunc_c1;
   emxArray_real_T *residuals;
   emxArray_real_T *resrw;
   emxArray_real_T *seq;
@@ -74,25 +76,22 @@ void Sregeda_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   double time_data[1000];
   double varargin_1[50];
   double row[5];
-  double c_data[4];
   double b_varargin_1[3];
   double A=0;
   double B=0;
+  double b_c=0;
   double b_conflev;
-  double c=0;
   double d=0;
   double kc=0;
   double kdef;
-  double n;
   double nselected;
   double p;
   double psifunc_kc1=0;
   double scalerw;
   double scaletest=1;
   double singsub;
+  double sworst;
   double tsampling;
-  int c_size[2];
-  int psifunc_c1_size[2];
   int psifunc_class_size[2];
   int b_i;
   int i;
@@ -493,7 +492,7 @@ void Sregeda_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   for (i = 0; i < loop_ub; i++) {
     out->X->data[i] = X->data[i];
   }
-  chkinputR(out->y, out->X, intercept, nocheck, &n, &p);
+  chkinputR(out->y, out->X, intercept, nocheck, &sworst, &p);
   /*  default value of break down point */
   /*  default values of subsamples to extract */
   /*  default value of number of refining iterations (C steps) for each
@@ -527,27 +526,27 @@ void Sregeda_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  tolerance for refining steps for the best subsets */
   /*  Scalar which controls the messages displayed on the screen */
   /*  String which specifies the function to use to weight the residuals */
-  if ((!(c_minimum(bdp) < 0.0)) && (!(b_maximum(bdp) > 0.5))) {
+  if ((!(b_minimum(bdp) < 0.0)) && (!(b_maximum(bdp) > 0.5))) {
     f_sort(out->bdp);
   }
   /*  Extract in the rows of matrix C the indexes of all required subsets */
-  subsets(nsamp, n, p, bc(n, p), C, &nselected);
+  subsets(nsamp, sworst, p, bc(sworst, p), C, &nselected);
   /*  Store the indices in varargout */
   /*  Store in output structure the outliers found with confidence level conflev
    */
   out->conflev = conflev;
   b_conflev = (conflev + 1.0) / 2.0;
   emxInit_real_T(&seq, 2);
-  if (rtIsNaN(n)) {
+  if (rtIsNaN(sworst)) {
     i = seq->size[0] * seq->size[1];
     seq->size[0] = 1;
     seq->size[1] = 1;
     emxEnsureCapacity_real_T(seq, i);
     seq->data[0] = rtNaN;
-  } else if (n < 1.0) {
+  } else if (sworst < 1.0) {
     seq->size[0] = 1;
     seq->size[1] = 0;
-  } else if (rtIsInf(n) && (1.0 == n)) {
+  } else if (rtIsInf(sworst) && (1.0 == sworst)) {
     i = seq->size[0] * seq->size[1];
     seq->size[0] = 1;
     seq->size[1] = 1;
@@ -556,7 +555,7 @@ void Sregeda_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   } else {
     i = seq->size[0] * seq->size[1];
     seq->size[0] = 1;
-    loop_ub = (int)floor(n - 1.0);
+    loop_ub = (int)floor(sworst - 1.0);
     seq->size[1] = loop_ub + 1;
     emxEnsureCapacity_real_T(seq, i);
     for (i = 0; i <= loop_ub; i++) {
@@ -590,18 +589,18 @@ void Sregeda_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     out->BS->data[i] = 0.0;
   }
   i = out->Weights->size[0] * out->Weights->size[1];
-  out->Weights->size[0] = (int)n;
+  out->Weights->size[0] = (int)sworst;
   out->Weights->size[1] = out->bdp->size[0];
   emxEnsureCapacity_real_T(out->Weights, i);
-  loop_ub = (int)n * out->bdp->size[0];
+  loop_ub = (int)sworst * out->bdp->size[0];
   for (i = 0; i < loop_ub; i++) {
     out->Weights->data[i] = 0.0;
   }
   i = out->RES->size[0] * out->RES->size[1];
-  out->RES->size[0] = (int)n;
+  out->RES->size[0] = (int)sworst;
   out->RES->size[1] = out->bdp->size[0];
   emxEnsureCapacity_real_T(out->RES, i);
-  loop_ub = (int)n * out->bdp->size[0];
+  loop_ub = (int)sworst * out->bdp->size[0];
   for (i = 0; i < loop_ub; i++) {
     out->RES->data[i] = 0.0;
   }
@@ -613,16 +612,18 @@ void Sregeda_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     out->Singsub->data[i] = 0.0;
   }
   i = out->Outliers->size[0] * out->Outliers->size[1];
-  out->Outliers->size[0] = (int)n;
+  out->Outliers->size[0] = (int)sworst;
   out->Outliers->size[1] = out->bdp->size[0];
   emxEnsureCapacity_boolean_T(out->Outliers, i);
-  loop_ub = (int)n * out->bdp->size[0];
+  loop_ub = (int)sworst * out->bdp->size[0];
   for (i = 0; i < loop_ub; i++) {
     out->Outliers->data[i] = false;
   }
   out->rhofuncparam->size[0] = 0;
   out->rhofuncparam->size[1] = 0;
   i = out->bdp->size[0];
+  emxInit_real_T(&psifunc_c1, 1);
+  emxInit_real_T(&abc, 2);
   emxInit_real_T(&bestbetas, 2);
   emxInit_real_T(&bestsubset, 2);
   emxInit_real_T(&bestscales, 1);
@@ -634,7 +635,7 @@ void Sregeda_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   emxInit_int32_T(&r, 1);
   emxInit_boolean_T(&r1, 1);
   emxInit_int32_T(&r2, 1);
-  emxInit_real_T(&b_out, 1);
+  emxInit_real_T(&c, 1);
   for (jj = 0; jj < i; jj++) {
     if (l_strcmp(rhofunc)) {
       /*  Tukey's biweight is strictly increasing on [0 c] and constant (equal
@@ -648,7 +649,7 @@ void Sregeda_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
       /*  Remark: given that in function OPTbdp rho function is defined in the
        * interval 0---2c/3, 2c/3---3c/3, >3c/3 */
       /*  it is necessary to divide the output of OPTbdp by 3 */
-      c = TBbdp(out->bdp->data[jj]);
+      b_c = TBbdp(out->bdp->data[jj]);
       /*  kc1 = E(rho) = sup(rho)*bdp */
       /* TBrho computes rho function for Tukey's biweight */
       /*  */
@@ -760,15 +761,17 @@ void Sregeda_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
       /* } */
       /*  Beginning of code */
       /*  MATLAB Ccoder instruction to enforce that c is a scalar */
-      w = (fabs(c) <= c);
-      n = c * c;
-      kdef = rt_powd_snf(c, 4.0);
-      kc = (n / 2.0 * ((1.0 - n / n) + kdef / (3.0 * kdef)) * (double)w +
-            (1.0 - (double)w) * (n / 6.0)) *
+      w = (fabs(b_c) <= b_c);
+      sworst = b_c * b_c;
+      kdef = rt_powd_snf(b_c, 4.0);
+      kc = (sworst / 2.0 * ((1.0 - sworst / sworst) + kdef / (3.0 * kdef)) *
+                (double)w +
+            (1.0 - (double)w) * (sworst / 6.0)) *
            out->bdp->data[jj];
-      psifunc_c1_size[0] = 1;
-      psifunc_c1_size[1] = 1;
-      row[0] = c;
+      i1 = psifunc_c1->size[0];
+      psifunc_c1->size[0] = 1;
+      emxEnsureCapacity_real_T(psifunc_c1, i1);
+      psifunc_c1->data[0] = b_c;
       psifunc_kc1 = kc;
       psifunc_class_size[0] = 1;
       psifunc_class_size[1] = 2;
@@ -785,12 +788,13 @@ void Sregeda_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
       /*  Remark: given that in function OPTbdp rho function is defined in the
        * interval 0---2c/3, 2c/3---3c/3, >3c/3 */
       /*  it is necessary to divide the output of OPTbdp by 3 */
-      c = OPTbdp(out->bdp->data[jj]) / 3.0;
+      b_c = OPTbdp(out->bdp->data[jj]) / 3.0;
       /*  kc1 = E(rho) = sup(rho)*bdp */
-      kc = OPTrho(3.0 * c, c) * out->bdp->data[jj];
-      psifunc_c1_size[0] = 1;
-      psifunc_c1_size[1] = 1;
-      row[0] = c;
+      kc = OPTrho(3.0 * b_c, b_c) * out->bdp->data[jj];
+      i1 = psifunc_c1->size[0];
+      psifunc_c1->size[0] = 1;
+      emxEnsureCapacity_real_T(psifunc_c1, i1);
+      psifunc_c1->data[0] = b_c;
       psifunc_kc1 = kc;
       psifunc_class_size[0] = 1;
       psifunc_class_size[1] = 3;
@@ -813,17 +817,17 @@ void Sregeda_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
       for (k = 0; k < 50; k++) {
         varargin_1[k] = fabs(out->bdp->data[jj] - dv5[k]);
       }
-      e_minimum(varargin_1, &n, &k);
+      e_minimum(varargin_1, &sworst, &k);
       b_varargin_1[0] = fabs(kdef - 4.0);
       b_varargin_1[1] = fabs(kdef - 4.5);
       b_varargin_1[2] = fabs(kdef - 5.0);
       f_minimum(b_varargin_1, &tsampling, &nx);
-      if ((n < 1.0E-6) && (tsampling < 1.0E-6)) {
+      if ((sworst < 1.0E-6) && (tsampling < 1.0E-6)) {
         /*  Load precalculated values of tuning constants */
         for (i1 = 0; i1 < 5; i1++) {
           row[i1] = dv6[((k + 50 * (i1 + 1)) + 300 * (nx - 1)) - 1];
         }
-        c = row[0];
+        b_c = row[0];
         A = row[1];
         B = row[2];
         d = row[3];
@@ -855,13 +859,17 @@ void Sregeda_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
         /*          d =1.092639541625978; */
         /*          kc=0.410853066399912; */
       }
-      psifunc_c1_size[0] = 1;
-      psifunc_c1_size[1] = 5;
-      row[0] = c;
+      row[0] = b_c;
       row[1] = kdef;
       row[2] = A;
       row[3] = B;
       row[4] = d;
+      i1 = psifunc_c1->size[0];
+      psifunc_c1->size[0] = 5;
+      emxEnsureCapacity_real_T(psifunc_c1, i1);
+      for (i1 = 0; i1 < 5; i1++) {
+        psifunc_c1->data[i1] = row[i1];
+      }
       psifunc_kc1 = kc;
       psifunc_class_size[0] = 1;
       psifunc_class_size[1] = 3;
@@ -870,47 +878,51 @@ void Sregeda_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
       psifunc_class_data[2] = 'P';
     } else if (o_strcmp(rhofunc)) {
       if ((rhofuncparam->size[0] == 0) || (rhofuncparam->size[1] == 0)) {
-        i1 = out->rhofuncparam->size[0] * out->rhofuncparam->size[1];
-        out->rhofuncparam->size[0] = 1;
-        out->rhofuncparam->size[1] = 3;
-        emxEnsureCapacity_real_T(out->rhofuncparam, i1);
-        out->rhofuncparam->data[0] = 2.0;
-        out->rhofuncparam->data[1] = 4.0;
-        out->rhofuncparam->data[2] = 8.0;
+        i1 = abc->size[0] * abc->size[1];
+        abc->size[0] = 3;
+        abc->size[1] = 1;
+        emxEnsureCapacity_real_T(abc, i1);
+        abc->data[0] = 2.0;
+        abc->data[1] = 4.0;
+        abc->data[2] = 8.0;
       } else {
-        i1 = out->rhofuncparam->size[0] * out->rhofuncparam->size[1];
-
-// VT::06.08.2021 - row-column vector confussion
-//      out->rhofuncparam->size[0] = rhofuncparam->size[0];
-//      out->rhofuncparam->size[1] = 1;
-        out->rhofuncparam->size[1] = rhofuncparam->size[0];
-        out->rhofuncparam->size[0] = 1;
-        
-        emxEnsureCapacity_real_T(out->rhofuncparam, i1);
+        i1 = abc->size[0] * abc->size[1];
+        abc->size[0] = rhofuncparam->size[0];
+        abc->size[1] = 1;
+        emxEnsureCapacity_real_T(abc, i1);
         loop_ub = rhofuncparam->size[0];
         for (i1 = 0; i1 < loop_ub; i1++) {
-          out->rhofuncparam->data[i1] = rhofuncparam->data[i1];
+          abc->data[i1] = rhofuncparam->data[i1];
         }
+      }
+      i1 = out->rhofuncparam->size[0] * out->rhofuncparam->size[1];
+      out->rhofuncparam->size[0] = abc->size[0];
+      out->rhofuncparam->size[1] = 1;
+      emxEnsureCapacity_real_T(out->rhofuncparam, i1);
+      loop_ub = abc->size[0];
+      for (i1 = 0; i1 < loop_ub; i1++) {
+        out->rhofuncparam->data[i1] = abc->data[i1];
       }
       /*  Compute tuning constant associated to the requested breakdown */
       /*  point */
-      c = HAbdp(out->bdp->data[jj], out->rhofuncparam);
+      b_c = HAbdp(out->bdp->data[jj], abc);
       /*  kc = E(rho) = sup(rho)*bdp */
-      c_size[0] = 1;
-      c_size[1] = (signed char)out->rhofuncparam->size[1] + 1;
-      c_data[0] = c;
-      loop_ub = (signed char)out->rhofuncparam->size[1];
+      i1 = c->size[0];
+      c->size[0] = abc->size[0] + 1;
+      emxEnsureCapacity_real_T(c, i1);
+      c->data[0] = b_c;
+      loop_ub = abc->size[0];
       for (i1 = 0; i1 < loop_ub; i1++) {
-        c_data[i1 + 1] = out->rhofuncparam->data[i1];
+        c->data[i1 + 1] = abc->data[i1];
       }
-      kc = HArho(c * out->rhofuncparam->data[2], c_data, c_size) *
-           out->bdp->data[jj];
-      psifunc_c1_size[0] = 1;
-      psifunc_c1_size[1] = (signed char)out->rhofuncparam->size[1] + 1;
-      row[0] = c;
-      loop_ub = (signed char)out->rhofuncparam->size[1];
+      kc = HArho(b_c * abc->data[2], c) * out->bdp->data[jj];
+      loop_ub = abc->size[0];
+      i1 = psifunc_c1->size[0];
+      psifunc_c1->size[0] = abc->size[0] + 1;
+      emxEnsureCapacity_real_T(psifunc_c1, i1);
+      psifunc_c1->data[0] = b_c;
       for (i1 = 0; i1 < loop_ub; i1++) {
-        row[i1 + 1] = out->rhofuncparam->data[i1];
+        psifunc_c1->data[i1 + 1] = abc->data[i1];
       }
       psifunc_kc1 = kc;
       psifunc_class_size[0] = 1;
@@ -977,12 +989,14 @@ void Sregeda_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
       /*  Beginning of code */
       /*  Convergence condition is E(\rho) = sup(\rho(x)) bdp */
       /*   where sup(\rho(x)) is 1 */
-      c = 1.0 / ((1.0 - out->bdp->data[jj]) * (1.0 - out->bdp->data[jj])) - 1.0;
+      b_c =
+          1.0 / ((1.0 - out->bdp->data[jj]) * (1.0 - out->bdp->data[jj])) - 1.0;
       /*  kc1 = E(rho) = sup(rho)*bdp */
       kc = out->bdp->data[jj];
-      psifunc_c1_size[0] = 1;
-      psifunc_c1_size[1] = 1;
-      row[0] = c;
+      i1 = psifunc_c1->size[0];
+      psifunc_c1->size[0] = 1;
+      emxEnsureCapacity_real_T(psifunc_c1, i1);
+      psifunc_c1->data[0] = b_c;
       psifunc_kc1 = out->bdp->data[jj];
       psifunc_class_size[0] = 1;
       psifunc_class_size[1] = 2;
@@ -1009,7 +1023,7 @@ void Sregeda_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     for (i1 = 0; i1 < loop_ub_tmp; i1++) {
       bestscales->data[i1] = rtInf;
     }
-    kdef = rtInf;
+    sworst = rtInf;
     /*  singsub = scalar which will contain the number of singular subsets which
      */
     /*  are extracted (that is the subsets of size p which are not full rank) */
@@ -1046,29 +1060,29 @@ void Sregeda_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
       }
       /*  beta estimate */
       loop_ub = C->size[1];
-      i2 = b_out->size[0];
-      b_out->size[0] = C->size[1];
-      emxEnsureCapacity_real_T(b_out, i2);
+      i2 = c->size[0];
+      c->size[0] = C->size[1];
+      emxEnsureCapacity_real_T(c, i2);
       for (i2 = 0; i2 < loop_ub; i2++) {
-        b_out->data[i2] = out->y->data[(int)C->data[b_i + C->size[0] * i2] - 1];
+        c->data[i2] = out->y->data[(int)C->data[b_i + C->size[0] * i2] - 1];
       }
-      mldivide(Xb, b_out, beta);
+      mldivide(Xb, c, beta);
       if ((!rtIsNaN(beta->data[0])) && (!rtIsInf(beta->data[0]))) {
         if (refsteps > 0.0) {
           /*  do the refsteps refining steps */
           /*  kc determines the breakdown point */
           /*  c is linked to the biweight function */
-          IRWLSregS(out->y, out->X, beta, row, psifunc_c1_size, psifunc_kc1,
-                    psifunc_class_data, psifunc_class_size, refsteps, reftol,
-                    b_out, &scalerw, residuals);
+          IRWLSregS(out->y, out->X, beta, psifunc_c1, psifunc_kc1,
+                    psifunc_class_data, psifunc_class_size, refsteps, reftol, c,
+                    &scalerw, residuals);
           i2 = beta->size[0];
-          beta->size[0] = b_out->size[0];
+          beta->size[0] = c->size[0];
           emxEnsureCapacity_real_T(beta, i2);
-          loop_ub = b_out->size[0];
+          loop_ub = c->size[0];
           for (i2 = 0; i2 < loop_ub; i2++) {
-            beta->data[i2] = b_out->data[i2];
+            beta->data[i2] = c->data[i2];
           }
-          mtimes(out->X, b_out, resrw);
+          mtimes(out->X, c, resrw);
           i2 = resrw->size[0];
           resrw->size[0] = out->y->size[0];
           emxEnsureCapacity_real_T(resrw, i2);
@@ -1087,13 +1101,13 @@ void Sregeda_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
             resrw->data[i2] = out->y->data[i2] - resrw->data[i2];
           }
           nx = resrw->size[0];
-          i2 = b_out->size[0];
-          b_out->size[0] = resrw->size[0];
-          emxEnsureCapacity_real_T(b_out, i2);
+          i2 = c->size[0];
+          c->size[0] = resrw->size[0];
+          emxEnsureCapacity_real_T(c, i2);
           for (k = 0; k < nx; k++) {
-            b_out->data[k] = fabs(resrw->data[k]);
+            c->data[k] = fabs(resrw->data[k]);
           }
-          scalerw = median(b_out) / 0.6745;
+          scalerw = median(c) / 0.6745;
         }
         /*  to find s, save first the best bestr scales (deriving from non */
         /*  singular subsets) and, from iteration bestr+1 (associated to */
@@ -1107,57 +1121,50 @@ void Sregeda_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           /*  Use function handle hrho. For example if */
           /*  for optimal psi hrho=OPTrho */
           if (q_strcmp(psifunc_class_data, psifunc_class_size)) {
-            i2 = b_out->size[0];
-            b_out->size[0] = resrw->size[0];
-            emxEnsureCapacity_real_T(b_out, i2);
+            i2 = c->size[0];
+            c->size[0] = resrw->size[0];
+            emxEnsureCapacity_real_T(c, i2);
             loop_ub = resrw->size[0];
             for (i2 = 0; i2 < loop_ub; i2++) {
-              b_out->data[i2] = resrw->data[i2] / kdef;
+              c->data[i2] = resrw->data[i2] / sworst;
             }
-            TBrho(b_out, row, residuals);
+            TBrho(c, psifunc_c1, residuals);
             scaletest = blockedSummation(residuals, residuals->size[0]) /
                         (double)residuals->size[0];
           } else if (r_strcmp(psifunc_class_data, psifunc_class_size)) {
-            i2 = b_out->size[0];
-            b_out->size[0] = resrw->size[0];
-            emxEnsureCapacity_real_T(b_out, i2);
+            i2 = c->size[0];
+            c->size[0] = resrw->size[0];
+            emxEnsureCapacity_real_T(c, i2);
             loop_ub = resrw->size[0];
             for (i2 = 0; i2 < loop_ub; i2++) {
-              b_out->data[i2] = resrw->data[i2] / kdef;
+              c->data[i2] = resrw->data[i2] / sworst;
             }
-            b_OPTrho(b_out, row, residuals);
+            b_OPTrho(c, psifunc_c1, residuals);
             scaletest = blockedSummation(residuals, residuals->size[0]) /
                         (double)residuals->size[0];
           } else if (s_strcmp(psifunc_class_data, psifunc_class_size)) {
-            i2 = b_out->size[0];
-            b_out->size[0] = resrw->size[0];
-            emxEnsureCapacity_real_T(b_out, i2);
+            i2 = c->size[0];
+            c->size[0] = resrw->size[0];
+            emxEnsureCapacity_real_T(c, i2);
             loop_ub = resrw->size[0];
             for (i2 = 0; i2 < loop_ub; i2++) {
-              b_out->data[i2] = resrw->data[i2] / kdef;
+              c->data[i2] = resrw->data[i2] / sworst;
             }
-            b_HArho(b_out, row, psifunc_c1_size, residuals);
+            b_HArho(c, psifunc_c1, residuals);
             scaletest = blockedSummation(residuals, residuals->size[0]) /
                         (double)residuals->size[0];
           } else if (t_strcmp(psifunc_class_data, psifunc_class_size)) {
-            i2 = b_out->size[0];
-            b_out->size[0] = resrw->size[0];
-            emxEnsureCapacity_real_T(b_out, i2);
+            i2 = c->size[0];
+            c->size[0] = resrw->size[0];
+            emxEnsureCapacity_real_T(c, i2);
             loop_ub = resrw->size[0];
             for (i2 = 0; i2 < loop_ub; i2++) {
-              b_out->data[i2] = resrw->data[i2] / kdef;
+              c->data[i2] = resrw->data[i2] / sworst;
             }
-            HYPrho(b_out, row, psifunc_c1_size, residuals);
+            HYPrho(c, psifunc_c1, residuals);
             scaletest = blockedSummation(residuals, residuals->size[0]) /
                         (double)residuals->size[0];
           } else if (u_strcmp(psifunc_class_data, psifunc_class_size)) {
-            i2 = residuals->size[0];
-            residuals->size[0] = resrw->size[0];
-            emxEnsureCapacity_real_T(residuals, i2);
-            loop_ub = resrw->size[0];
-            for (i2 = 0; i2 < loop_ub; i2++) {
-              residuals->data[i2] = resrw->data[i2] / kdef;
-            }
             /* PDrho computes rho function for minimum density power divergence
              * estimator  */
             /*  */
@@ -1267,27 +1274,42 @@ void Sregeda_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
              */
             /* } */
             /*  Beginning of code */
-            i2 = b_out->size[0];
-            b_out->size[0] = residuals->size[0];
-            emxEnsureCapacity_real_T(b_out, i2);
+            /*  MATLAB Ccoder instruction to enforce that alpha is a scalar */
+            i2 = residuals->size[0];
+            residuals->size[0] = resrw->size[0];
+            emxEnsureCapacity_real_T(residuals, i2);
+            loop_ub = resrw->size[0];
+            for (i2 = 0; i2 < loop_ub; i2++) {
+              residuals->data[i2] = resrw->data[i2] / sworst;
+            }
+            i2 = c->size[0];
+            c->size[0] = residuals->size[0];
+            emxEnsureCapacity_real_T(c, i2);
             nx = residuals->size[0];
             for (k = 0; k < nx; k++) {
-              b_out->data[k] = residuals->data[k] * residuals->data[k];
+              c->data[k] = residuals->data[k] * residuals->data[k];
             }
-            n = 0.0;
-            loop_ub = psifunc_c1_size[1];
+            loop_ub = c->size[0];
             for (i2 = 0; i2 < loop_ub; i2++) {
-              n += -row[i2] * (b_out->data[i2] / 2.0);
+              c->data[i2] = -psifunc_c1->data[0] * (c->data[i2] / 2.0);
             }
-            scaletest = 1.0 - exp(n);
+            nx = c->size[0];
+            for (k = 0; k < nx; k++) {
+              c->data[k] = exp(c->data[k]);
+            }
+            loop_ub = c->size[0];
+            for (i2 = 0; i2 < loop_ub; i2++) {
+              c->data[i2] = 1.0 - c->data[i2];
+            }
+            scaletest = blockedSummation(c, c->size[0]) / (double)c->size[0];
           }
           if (scaletest < kc) {
             /*  Find position of the maximum value of previously stored */
             /*  best scales */
-            c_maximum(bestscales, &n, &k);
-            bestscales->data[k - 1] = Mscale(
-                resrw, row, psifunc_c1_size, psifunc_kc1, psifunc_class_data,
-                psifunc_class_size, scalerw, minsctol);
+            c_maximum(bestscales, &kdef, &k);
+            bestscales->data[k - 1] =
+                Mscale(resrw, psifunc_c1, psifunc_kc1, psifunc_class_data,
+                       psifunc_class_size, scalerw, minsctol);
             /* sbest1 = Mscale1(resrw,psifunc,scalerw,minsctol); */
             /* sbest2 = minscale(resrw,psifunc.c1,psifunc.kc1,scalerw,minsctol);
              */
@@ -1307,13 +1329,13 @@ void Sregeda_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                   C->data[b_i + C->size[0] * i2];
             }
             /*  sworst = the best scale among the bestr found up to now */
-            kdef = b_maximum(bestscales);
+            sworst = b_maximum(bestscales);
           }
         } else {
           /* bestscales(ij) = minscale(resrw,psifunc,scalerw,minsctol); */
           bestscales->data[(int)ij - 1] =
-              Mscale(resrw, row, psifunc_c1_size, psifunc_kc1,
-                     psifunc_class_data, psifunc_class_size, scalerw, minsctol);
+              Mscale(resrw, psifunc_c1, psifunc_kc1, psifunc_class_data,
+                     psifunc_class_size, scalerw, minsctol);
           loop_ub = beta->size[0];
           for (i2 = 0; i2 < loop_ub; i2++) {
             bestbetas->data[((int)ij + bestbetas->size[0] * i2) - 1] =
@@ -1381,17 +1403,17 @@ void Sregeda_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
       for (i1 = 0; i1 < loop_ub; i1++) {
         bestscales->data[i1] = bestbetas->data[b_i + bestbetas->size[0] * i1];
       }
-      IRWLSregS(out->y, out->X, bestscales, row, psifunc_c1_size, psifunc_kc1,
+      IRWLSregS(out->y, out->X, bestscales, psifunc_c1, psifunc_kc1,
                 psifunc_class_data, psifunc_class_size, refstepsbestr,
-                reftolbestr, b_out, &scalerw, residuals);
+                reftolbestr, c, &scalerw, residuals);
       if (scalerw < kdef) {
         kdef = scalerw;
-        loop_ub = b_out->size[0];
+        loop_ub = c->size[0];
         i1 = beta->size[0];
-        beta->size[0] = b_out->size[0];
+        beta->size[0] = c->size[0];
         emxEnsureCapacity_real_T(beta, i1);
         for (i1 = 0; i1 < loop_ub; i1++) {
-          beta->data[i1] = b_out->data[i1];
+          beta->data[i1] = c->data[i1];
         }
         loop_ub = bestsubset->size[1];
         i1 = superbestsubset->size[0] * superbestsubset->size[1];
@@ -1420,23 +1442,23 @@ void Sregeda_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
       residuals->data[i1] = (out->y->data[i1] - residuals->data[i1]) / kdef;
     }
     nx = residuals->size[0];
-    i1 = b_out->size[0];
-    b_out->size[0] = residuals->size[0];
-    emxEnsureCapacity_real_T(b_out, i1);
+    i1 = c->size[0];
+    c->size[0] = residuals->size[0];
+    emxEnsureCapacity_real_T(c, i1);
     for (k = 0; k < nx; k++) {
-      b_out->data[k] = fabs(residuals->data[k]);
+      c->data[k] = fabs(residuals->data[k]);
     }
     if ((b_conflev >= 0.0) && (b_conflev <= 1.0)) {
-      n = -1.4142135623730951 * erfcinv(2.0 * b_conflev);
+      sworst = -1.4142135623730951 * erfcinv(2.0 * b_conflev);
     } else {
-      n = rtNaN;
+      sworst = rtNaN;
     }
     i1 = r1->size[0];
-    r1->size[0] = b_out->size[0];
+    r1->size[0] = c->size[0];
     emxEnsureCapacity_boolean_T(r1, i1);
-    loop_ub = b_out->size[0];
+    loop_ub = c->size[0];
     for (i1 = 0; i1 < loop_ub; i1++) {
-      r1->data[i1] = (b_out->data[i1] > n);
+      r1->data[i1] = (c->data[i1] > sworst);
     }
     k = r1->size[0] - 1;
     nx = 0;
@@ -1486,7 +1508,7 @@ void Sregeda_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           true;
     }
   }
-  emxFree_real_T(&b_out);
+  emxFree_real_T(&c);
   emxFree_int32_T(&r2);
   emxFree_boolean_T(&r1);
   emxFree_int32_T(&r);
@@ -1498,6 +1520,8 @@ void Sregeda_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   emxFree_real_T(&bestscales);
   emxFree_real_T(&bestsubset);
   emxFree_real_T(&bestbetas);
+  emxFree_real_T(&abc);
+  emxFree_real_T(&psifunc_c1);
   emxFree_real_T(&seq);
   /*  Store in output structure monitored \beta, s, best subset, vector of */
   /*  S-weights and residuals */

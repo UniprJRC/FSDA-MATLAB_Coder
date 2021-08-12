@@ -3,14 +3,14 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * HYPrho.h
+ * setdiffFS.h
  *
- * Code generation for function 'HYPrho'
+ * Code generation for function 'setdiffFS'
  *
  */
 
-#ifndef HYPRHO_H
-#define HYPRHO_H
+#ifndef SETDIFFFS_H
+#define SETDIFFFS_H
 
 /* Include files */
 #include "fsdaC_types.h"
@@ -23,12 +23,12 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void HYPrho(const emxArray_real_T *u, const emxArray_real_T *cktuning,
-            emxArray_real_T *rhoHYP);
+void setdiffFS(const emxArray_real_T *a, const emxArray_real_T *b,
+               emxArray_real_T *c);
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-/* End of code generation (HYPrho.h) */
+/* End of code generation (setdiffFS.h) */

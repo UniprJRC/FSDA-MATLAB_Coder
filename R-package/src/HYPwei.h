@@ -23,8 +23,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void HYPwei(const emxArray_real_T *u, const double cktuning_data[],
-            const int cktuning_size[2], emxArray_real_T *w);
+void HYPwei(const emxArray_real_T *u, const emxArray_real_T *cktuning,
+            emxArray_real_T *w);
 
 #ifdef __cplusplus
 }

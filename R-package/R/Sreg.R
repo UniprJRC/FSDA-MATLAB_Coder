@@ -31,7 +31,7 @@
 #'  'hampel' uses Hampel \eqn{\rho} and \eqn{\psi} functions;
 #'  'mdpd' uses Minimum Density Power Divergence \eqn{\rho} and \eqn{\psi} functions.
 #'  The default is \code{rhofunc='bisquare'}.
-#' @param rhofuncparam: additional parameters for the specified rho function (one or more double numbers).
+#' @param rhofuncparam additional parameters for the specified rho function (one or more double numbers).
 #'  For the hyperbolic rho function it is possible to set the value of \code{k = sup CVC}
 #'  (the default value is \code{k=4.5}).
 #'  For the Hampel rho function it is possible to define the parameters \code{a}, \code{b} and \code{c}
@@ -59,6 +59,8 @@
 #' @param nocheck Wheather to check the input arguments. If \code{nocheck=TRUE} no check is performed on
 #'  matrix \code{y} and matrix \code{x}. Notice that \code{y} and \code{x} are left unchanged. In other words
 #'  the additional column of ones for the intercept is not added. By default \code{nocheck=FALSE}.
+#' @param csave wheather to return the optional matrix \code{C} containing the indexes of
+#'  the subsamples extracted for computing the estimate (the so called elemental sets).
 #' @param trace Whether to print intermediate results. Default is \code{trace=FALSE}.
 #'
 #' @return  An object of class \code{Sreg} will be returned which is basically a list

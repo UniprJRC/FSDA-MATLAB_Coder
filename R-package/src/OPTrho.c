@@ -173,7 +173,7 @@ double OPTrho(double u, double c)
   return rhoOPT;
 }
 
-void b_OPTrho(const emxArray_real_T *u, const double c_data[],
+void b_OPTrho(const emxArray_real_T *u, const emxArray_real_T *c,
               emxArray_real_T *rhoOPT)
 {
   emxArray_boolean_T *r1;
@@ -185,8 +185,8 @@ void b_OPTrho(const emxArray_real_T *u, const double c_data[],
   emxArray_real_T *x1;
   emxArray_real_T *y;
   double b_c;
-  double c;
   double c_c;
+  double d_c;
   double y_tmp;
   int i;
   int k;
@@ -267,7 +267,7 @@ void b_OPTrho(const emxArray_real_T *u, const double c_data[],
   /*  */
   /* } */
   /*  Beginning of code */
-  c = c_data[0];
+  b_c = c->data[0];
   /*  MATLAB Ccoder instruction to enforce that c is a scalar */
   i = rhoOPT->size[0];
   rhoOPT->size[0] = u->size[0];
@@ -288,7 +288,7 @@ void b_OPTrho(const emxArray_real_T *u, const double c_data[],
   k = absx->size[0] - 1;
   nx = 0;
   for (i = 0; i <= k; i++) {
-    if (absx->data[i] <= 2.0 * c) {
+    if (absx->data[i] <= 2.0 * b_c) {
       nx++;
     }
   }
@@ -298,7 +298,7 @@ void b_OPTrho(const emxArray_real_T *u, const double c_data[],
   emxEnsureCapacity_int32_T(r, i);
   nx = 0;
   for (i = 0; i <= k; i++) {
-    if (absx->data[i] <= 2.0 * c) {
+    if (absx->data[i] <= 2.0 * b_c) {
       r->data[nx] = i + 1;
       nx++;
     }
@@ -313,8 +313,8 @@ void b_OPTrho(const emxArray_real_T *u, const double c_data[],
     y->data[k] = y_tmp * y_tmp;
   }
   emxFree_int32_T(&r);
-  b_c = c_data[0] * c_data[0];
-  y_tmp = 3.25 * b_c;
+  c_c = c->data[0] * c->data[0];
+  y_tmp = 3.25 * c_c;
   nx = y->size[0];
   for (i = 0; i < nx; i++) {
     y->data[i] = y->data[i] / 2.0 / y_tmp;
@@ -322,14 +322,14 @@ void b_OPTrho(const emxArray_real_T *u, const double c_data[],
   k = absx->size[0];
   nx = 0;
   for (i = 0; i < k; i++) {
-    if (absx->data[i] <= 2.0 * c) {
+    if (absx->data[i] <= 2.0 * b_c) {
       rhoOPT->data[i] = y->data[nx];
       nx++;
     }
   }
   emxInit_boolean_T(&r1, 1);
   /*  1/(3.25) * ( 1.792 .... +0.002 (r/c)^8 )    if    2c< |x| <3c */
-  y_tmp = 2.0 * c_data[0];
+  y_tmp = 2.0 * c->data[0];
   i = r1->size[0];
   r1->size[0] = absx->size[0];
   emxEnsureCapacity_boolean_T(r1, i);
@@ -338,7 +338,7 @@ void b_OPTrho(const emxArray_real_T *u, const double c_data[],
     r1->data[i] = (absx->data[i] > y_tmp);
   }
   emxInit_boolean_T(&r2, 1);
-  y_tmp = 3.0 * c_data[0];
+  y_tmp = 3.0 * c->data[0];
   i = r2->size[0];
   r2->size[0] = absx->size[0];
   emxEnsureCapacity_boolean_T(r2, i);
@@ -365,8 +365,8 @@ void b_OPTrho(const emxArray_real_T *u, const double c_data[],
     }
   }
   emxInit_real_T(&b, 1);
-  c = rt_powd_snf(c_data[0], 4.0);
-  y_tmp = rt_powd_snf(c_data[0], 6.0);
+  b_c = rt_powd_snf(c->data[0], 4.0);
+  y_tmp = rt_powd_snf(c->data[0], 6.0);
   i = b->size[0];
   b->size[0] = x1->size[0];
   emxEnsureCapacity_real_T(b, i);
@@ -374,7 +374,7 @@ void b_OPTrho(const emxArray_real_T *u, const double c_data[],
   for (k = 0; k < nx; k++) {
     b->data[k] = rt_powd_snf(x1->data[k], 8.0);
   }
-  c_c = rt_powd_snf(c_data[0], 8.0);
+  d_c = rt_powd_snf(c->data[0], 8.0);
   i = y->size[0];
   y->size[0] = x1->size[0];
   emxEnsureCapacity_real_T(y, i);
@@ -401,9 +401,9 @@ void b_OPTrho(const emxArray_real_T *u, const double c_data[],
   nx = y->size[0];
   for (i = 0; i < nx; i++) {
     y->data[i] =
-        ((((1.792 - 0.972 * y->data[i] / b_c) + 0.432 * absx->data[i] / c) -
+        ((((1.792 - 0.972 * y->data[i] / c_c) + 0.432 * absx->data[i] / b_c) -
           0.052 * b_y->data[i] / y_tmp) +
-         0.002 * b->data[i] / c_c) /
+         0.002 * b->data[i] / d_c) /
         3.25;
   }
   emxFree_real_T(&b_y);

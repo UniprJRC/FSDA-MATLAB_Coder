@@ -18,8 +18,8 @@
 #include <string.h>
 
 /* Function Definitions */
-void HYPrho(const emxArray_real_T *u, const double cktuning_data[],
-            const int cktuning_size[2], emxArray_real_T *rhoHYP)
+void HYPrho(const emxArray_real_T *u, const emxArray_real_T *cktuning,
+            emxArray_real_T *rhoHYP)
 {
   emxArray_boolean_T *r1;
   emxArray_boolean_T *r2;
@@ -34,7 +34,6 @@ void HYPrho(const emxArray_real_T *u, const double cktuning_data[],
   double A;
   double B;
   double a_tmp;
-  double b_a_tmp;
   double c;
   double c_tmp;
   double d;
@@ -166,10 +165,10 @@ void HYPrho(const emxArray_real_T *u, const double cktuning_data[],
   /*  */
   /* } */
   /*  Beginning of code */
-  if (cktuning_size[1] > 2) {
-    A = cktuning_data[2];
-    B = cktuning_data[3];
-    d = cktuning_data[4];
+  if (cktuning->size[0] > 2) {
+    A = cktuning->data[2];
+    B = cktuning->data[3];
+    d = cktuning->data[4];
   } else {
     A = 1.0;
     B = 1.0;
@@ -247,13 +246,12 @@ void HYPrho(const emxArray_real_T *u, const double cktuning_data[],
     r1->data[i] = (absu->data[i] > d);
   }
   emxInit_boolean_T(&r2, 1);
-  y_tmp = cktuning_data[0];
   i = r2->size[0];
   r2->size[0] = absu->size[0];
   emxEnsureCapacity_boolean_T(r2, i);
   nx = absu->size[0];
   for (i = 0; i < nx; i++) {
-    r2->data[i] = (absu->data[i] <= y_tmp);
+    r2->data[i] = (absu->data[i] <= cktuning->data[0]);
   }
   emxInit_boolean_T(&r3, 1);
   i = r3->size[0];
@@ -264,13 +262,12 @@ void HYPrho(const emxArray_real_T *u, const double cktuning_data[],
     r3->data[i] = (absu->data[i] > d);
   }
   emxInit_boolean_T(&r4, 1);
-  y_tmp = cktuning_data[0];
   i = r4->size[0];
   r4->size[0] = absu->size[0];
   emxEnsureCapacity_boolean_T(r4, i);
   nx = absu->size[0];
   for (i = 0; i < nx; i++) {
-    r4->data[i] = (absu->data[i] <= y_tmp);
+    r4->data[i] = (absu->data[i] <= cktuning->data[0]);
   }
   k = r1->size[0] - 1;
   nx = 0;
@@ -292,17 +289,16 @@ void HYPrho(const emxArray_real_T *u, const double cktuning_data[],
   }
   emxFree_boolean_T(&r2);
   emxFree_boolean_T(&r1);
-  a_tmp = 0.5 * sqrt((cktuning_data[1] - 1.0) * (B * B) / A);
-  y_tmp = cktuning_data[0];
+  y_tmp = 0.5 * sqrt((cktuning->data[1] - 1.0) * (B * B) / A);
   i = y->size[0];
   y->size[0] = r5->size[0];
   emxEnsureCapacity_real_T(y, i);
   nx = r5->size[0];
   for (i = 0; i < nx; i++) {
-    y->data[i] = a_tmp * (y_tmp - absu->data[r5->data[i] - 1]);
+    y->data[i] = y_tmp * (cktuning->data[0] - absu->data[r5->data[i] - 1]);
   }
   emxFree_int32_T(&r5);
-  b_a_tmp = 2.0 * (A / B);
+  a_tmp = 2.0 * (A / B);
   nx = y->size[0];
   for (k = 0; k < nx; k++) {
     y->data[k] = cosh(y->data[k]);
@@ -333,11 +329,11 @@ void HYPrho(const emxArray_real_T *u, const double cktuning_data[],
   }
   c_tmp = d * d;
   c = c_tmp / 2.0;
-  a_tmp = log(cosh(a_tmp * (cktuning_data[0] - d)));
-  y_tmp = 2.0 * A / B * a_tmp;
+  d = log(cosh(y_tmp * (cktuning->data[0] - d)));
+  y_tmp = 2.0 * A / B * d;
   nx = y->size[0];
   for (i = 0; i < nx; i++) {
-    rhoHYP->data[r6->data[i] - 1] = (c - b_a_tmp * y->data[i]) + y_tmp;
+    rhoHYP->data[r6->data[i] - 1] = (c - a_tmp * y->data[i]) + y_tmp;
   }
   emxFree_real_T(&y);
   emxFree_int32_T(&r6);
@@ -345,7 +341,7 @@ void HYPrho(const emxArray_real_T *u, const double cktuning_data[],
   k = absu->size[0] - 1;
   nx = 0;
   for (i = 0; i <= k; i++) {
-    if (absu->data[i] > cktuning_data[0]) {
+    if (absu->data[i] > cktuning->data[0]) {
       nx++;
     }
   }
@@ -355,7 +351,7 @@ void HYPrho(const emxArray_real_T *u, const double cktuning_data[],
   emxEnsureCapacity_int32_T(r7, i);
   nx = 0;
   for (i = 0; i <= k; i++) {
-    if (absu->data[i] > cktuning_data[0]) {
+    if (absu->data[i] > cktuning->data[0]) {
       r7->data[nx] = i + 1;
       nx++;
     }
@@ -363,7 +359,7 @@ void HYPrho(const emxArray_real_T *u, const double cktuning_data[],
   emxFree_real_T(&absu);
   nx = r7->size[0];
   for (i = 0; i < nx; i++) {
-    rhoHYP->data[r7->data[i] - 1] = c_tmp / 2.0 + b_a_tmp * a_tmp;
+    rhoHYP->data[r7->data[i] - 1] = c_tmp / 2.0 + a_tmp * d;
   }
   emxFree_int32_T(&r7);
 }

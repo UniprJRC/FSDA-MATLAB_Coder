@@ -343,7 +343,7 @@ void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
   }
   maxdnis = d_maximum(dnis);
   if ((!(userepmat == 2.0)) && (!(maxdnis <= tol)) &&
-      (!(fabs(maxdnis / b_minimum(dnis)) <= restr))) {
+      (!(fabs(maxdnis / c_minimum(dnis)) <= restr))) {
     /*  we check if the  eigenvalues verify the restrictions */
     /*  abs here is just for computational purposes */
     emxInit_boolean_T(&dltm, 2);
@@ -1216,7 +1216,7 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
   maxdnis = b_maximum(dnis);
   emxInit_int32_T(&r1, 1);
   if (userepmat == 2.0) {
-    if ((!(maxdnis <= tol)) && (fabs(maxdnis / c_minimum(dnis)) <= restr)) {
+    if ((!(maxdnis <= tol)) && (fabs(maxdnis / b_minimum(dnis)) <= restr)) {
       /*  we check if the  eigenvalues verify the restrictions */
       /*  abs here is just for computational purposes */
       /*  If all eigenvalues satisy the constraint */
@@ -1224,7 +1224,7 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
        * immediately! */
       /*  Simply replace the 0 eigenvalues with the mean of the eigenvalues */
       /*  which are greater than zero */
-      if (c_minimum(nis) == 0.0) {
+      if (b_minimum(nis) == 0.0) {
         ibtile = nis->size[0] - 1;
         nrows = 0;
         for (b_i = 0; b_i <= ibtile; b_i++) {
@@ -1267,13 +1267,13 @@ void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
   } else if (!(maxdnis <= tol)) {
     /*  we check if the  eigenvalues verify the restrictions */
     /*  abs here is just for computational purposes */
-    if (fabs(maxdnis / c_minimum(dnis)) <= restr) {
+    if (fabs(maxdnis / b_minimum(dnis)) <= restr) {
       /*  If all eigenvalues satisy the constraint */
       /*  no further changes on the eigenvalues required, so return them
        * immediately! */
       /*  Simply replace the 0 eigenvalues with the mean of the eigenvalues */
       /*  which are greater than zero */
-      if (c_minimum(nis) == 0.0) {
+      if (b_minimum(nis) == 0.0) {
         ibtile = nis->size[0] - 1;
         nrows = 0;
         for (b_i = 0; b_i <= ibtile; b_i++) {
@@ -2201,7 +2201,7 @@ void restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
     /*  we check if the  eigenvalues verify the restrictions */
     /*  abs here is just for computational purposes */
     emxInit_int32_T(&r2, 1);
-    if (fabs(maxdnis / c_minimum(dnis)) <= restr) {
+    if (fabs(maxdnis / b_minimum(dnis)) <= restr) {
       emxInit_boolean_T(&x, 2);
       /*  If all eigenvalues satisy the constraint */
       /*  no further changes on the eigenvalues required, so return them

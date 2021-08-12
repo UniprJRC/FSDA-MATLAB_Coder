@@ -25,7 +25,7 @@ extern "C" {
 /* Function Declarations */
 double OPTrho(double u, double c);
 
-void b_OPTrho(const emxArray_real_T *u, const double c_data[],
+void b_OPTrho(const emxArray_real_T *u, const emxArray_real_T *c,
               emxArray_real_T *rhoOPT);
 
 #ifdef __cplusplus

@@ -55,6 +55,12 @@ The choice 'bisquare' uses Tukey's \eqn{\rho} and \eqn{\psi} functions,
 'mdpd' uses Minimum Density Power Divergence \eqn{\rho} and \eqn{\psi} functions.
 The default is \code{rhofunc='bisquare'}.}
 
+\item{rhofuncparam}{additional parameters for the specified rho function (one or more double numbers).
+For the hyperbolic rho function it is possible to set the value of \code{k = sup CVC}
+(the default value is \code{k=4.5}).
+For the Hampel rho function it is possible to define the parameters \code{a}, \code{b} and \code{c}
+(the default values are \code{a=2, b=4, c=8} or \code{rhofuncparam=c(2, 4, 8)}).}
+
 \item{nsamp}{number of subsamples which will be extracted to find the robust estimator.
 If \code{nsamp=0} all subsets will be extracted. They will be \code{(n choose p)}.
 Remark: if the number of all possible subset is <1000 the default is to extract all subsets
@@ -88,13 +94,10 @@ no message is displayed on the screen.}
 matrix \code{y} and matrix \code{x}. Notice that \code{y} and \code{x} are left unchanged. In other words
 the additional column of ones for the intercept is not added. By default \code{nocheck=FALSE}.}
 
-\item{trace}{Whether to print intermediate results. Default is \code{trace=FALSE}.}
+\item{csave}{wheather to return the optional matrix \code{C} containing the indexes of
+the subsamples extracted for computing the estimate (the so called elemental sets).}
 
-\item{rhofuncparam:}{additional parameters for the specified rho function (one or more double numbers).
-For the hyperbolic rho function it is possible to set the value of \code{k = sup CVC}
-(the default value is \code{k=4.5}).
-For the Hampel rho function it is possible to define the parameters \code{a}, \code{b} and \code{c}
-(the default values are \code{a=2, b=4, c=8} or \code{rhofuncparam=c(2, 4, 8)}).}
+\item{trace}{Whether to print intermediate results. Default is \code{trace=FALSE}.}
 }
 \value{
 An object of class \code{Sreg} will be returned which is basically a list

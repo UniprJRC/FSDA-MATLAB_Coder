@@ -25,6 +25,8 @@ extern "C" {
 /* Function Declarations */
 void b_nullAssignment(emxArray_real_T *x, const emxArray_boolean_T *idx);
 
+void c_nullAssignment(emxArray_real_T *x, const emxArray_boolean_T *idx);
+
 void nullAssignment(emxArray_real_T *x, const emxArray_int32_T *idx);
 
 #ifdef __cplusplus

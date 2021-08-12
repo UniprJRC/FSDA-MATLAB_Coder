@@ -23,43 +23,17 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void ALS(const c_captured_var *Seq, const c_captured_var *bsb,
-         const c_captured_var *Xseaso, const c_captured_var *Xtrend,
-         const c_captured_var *yin, const captured_var *trend,
-         const captured_var *nexpl, const captured_var *varampl,
-         const b_captured_var *isemptyX, const captured_var *lshiftYN,
-         const c_captured_var *Xlshift, const c_captured_var *X,
-         const captured_var *reftolALS, const captured_var *refstepsALS,
-         const c_captured_var *indlinsc, const c_captured_var *otherind,
-         const emxArray_real_T *beta0, emxArray_real_T *newbeta);
-
-void IRWLSreg(const captured_var *reftolALS, const captured_var *refstepsALS,
-              const c_captured_var *indlinsc, const c_captured_var *Xseaso,
-              c_captured_var *bsb, const b_captured_var *isemptyX,
-              const captured_var *lshiftYN, const c_captured_var *Xtrend,
-              const c_captured_var *Seq, const captured_var *varampl,
-              const c_captured_var *Xlshift, const c_captured_var *X,
-              const c_captured_var *yin, const captured_var *trend,
-              const captured_var *nexpl, const c_captured_var *otherind,
-              const captured_var *seasonal, const captured_var *s,
-              c_captured_var *yhatseaso, c_captured_var *yhat,
-              c_captured_var *beta, const captured_var *constr,
-              const c_captured_var *Xsel, const b_captured_var *verLess2016b,
-              const c_captured_var *seq, d_captured_var *weights,
-              const d_captured_var *zerT1, const emxArray_real_T *y,
-              const emxArray_real_T *initialbeta, double refsteps,
-              double reftol, double h, c_struct_T *outIRWLS);
-
-double b_corfactorRAW(double n, double alpha);
-
-void lik(const c_captured_var *Xtrend, const c_captured_var *bsb,
-         const captured_var *trend, const captured_var *seasonal,
-         const captured_var *s, c_captured_var *yhatseaso,
-         const c_captured_var *Xseaso, const captured_var *varampl,
-         const c_captured_var *Seq, const captured_var *nexpl,
-         const b_captured_var *isemptyX, const c_captured_var *X,
-         const captured_var *lshiftYN, const c_captured_var *Xlshift,
-         c_captured_var *yhat, const emxArray_real_T *beta0);
+void LTSts(const emxArray_real_T *y, double varargin_2, bool varargin_4,
+           double varargin_6, bool varargin_8, double varargin_10_wlength,
+           double varargin_10_typeres, double varargin_10_huberc,
+           double varargin_12_bestr, double varargin_12_refsteps,
+           double varargin_12_refstepsbestr, double varargin_12_reftol,
+           double varargin_12_reftolbestr,
+           const struct_LTStsmodel_T varargin_14, bool varargin_16,
+           double varargin_18, const double varargin_22_data[],
+           const int varargin_22_size[2], double varargin_24,
+           double varargin_26, double varargin_28, bool varargin_30,
+           struct_LTSts_T *out);
 
 void likyhat(const captured_var *trend, const captured_var *seasonal,
              const captured_var *s, c_captured_var *yhatseaso,

@@ -655,7 +655,7 @@ void v_strcmp(const char a[3], bool b_bool[7])
   static const char e_b[3] = {'V', 'E', 'V'};
   static const char f_b[3] = {'V', 'V', 'I'};
   static const char g_b[3] = {'V', 'E', 'I'};
-  cell_wrap_61 r;
+  cell_wrap_64 r;
   int ret;
   char d_b[3];
   r.f1[0] = a[0];
@@ -687,7 +687,7 @@ void w_strcmp(const char a[3], bool b_bool[6])
   static const char d_b[3] = {'E', 'V', 'V'};
   static const char e_b[3] = {'V', 'V', 'I'};
   static const char f_b[3] = {'E', 'V', 'I'};
-  cell_wrap_61 r;
+  cell_wrap_64 r;
   int ret;
   char c_b[3];
   r.f1[0] = a[0];
@@ -714,7 +714,7 @@ void x_strcmp(const char a[3], bool b_bool[2])
 {
   static const char b[3] = {'E', 'V', 'E'};
   static const char b_b[3] = {'V', 'V', 'E'};
-  cell_wrap_61 r;
+  cell_wrap_64 r;
   int ret;
   r.f1[0] = a[0];
   r.f1[1] = a[1];

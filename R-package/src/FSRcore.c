@@ -1616,7 +1616,7 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
     for (i = 0; i < end; i++) {
       add->data[i] = 0.0;
     }
-    f_do_vectors(out->ListCl, out->ListOut, good, ia, &end);
+    e_do_vectors(out->ListCl, out->ListOut, good, ia, &end);
     if ((INP_X->size[0] != 0) && (INP_X->size[1] != 0)) {
       end = INP_X->size[0];
     } else if (INP_y->size[0] != 0) {
@@ -1896,7 +1896,7 @@ void FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
       for (i = 0; i < loop_ub; i++) {
         Xy->data[i + good->size[1]] = out->ListOut->data[i];
       }
-      f_do_vectors(beta, Xy, out->VIOMout, ia, &end);
+      e_do_vectors(beta, Xy, out->VIOMout, ia, &end);
     } else {
       out->mdag.size[0] = 1;
       out->mdag.size[1] = 1;
@@ -3490,7 +3490,7 @@ void b_FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
     for (i = 0; i < end; i++) {
       add->data[i] = 0.0;
     }
-    f_do_vectors(out->ListCl, out->ListOut, good, ia, &end);
+    e_do_vectors(out->ListCl, out->ListOut, good, ia, &end);
     if ((INP_X->size[0] != 0) && (INP_X->size[1] != 0)) {
       end = INP_X->size[0];
     } else if (INP_y->size[0] != 0) {
@@ -3779,7 +3779,7 @@ void b_FSRcore(const emxArray_real_T *INP_y, const emxArray_real_T *INP_X,
       for (i = 0; i < loop_ub; i++) {
         Xy->data[i + good->size[1]] = out->ListOut->data[i];
       }
-      f_do_vectors(beta, Xy, out->VIOMout, ia, &end);
+      e_do_vectors(beta, Xy, out->VIOMout, ia, &end);
     } else {
       out->mdag.size[0] = 1;
       out->mdag.size[1] = 1;

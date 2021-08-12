@@ -395,7 +395,7 @@ void restreigeneasy(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
     /*  we check if the  eigenvalues verify the restrictions */
     /*  abs here is just for computational purposes */
     emxInit_int32_T(&r2, 1);
-    if (fabs(maxdnis / c_minimum(dnis)) <= restr) {
+    if (fabs(maxdnis / b_minimum(dnis)) <= restr) {
       emxInit_boolean_T(&x, 2);
       /*  If all eigenvalues satisy the constraint */
       /*  no further changes on the eigenvalues required, so return them

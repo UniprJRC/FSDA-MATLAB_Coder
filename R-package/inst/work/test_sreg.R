@@ -15,6 +15,7 @@
 
     (out <- Sreg(y, X, nsamp=100, rhofunc='hyperbolic'))
     (out <- Sreg(y, X, nsamp=100, rhofunc='hyperbolic', rhofuncparam=4.5))
+    (out <- Sreg(y, X, nsamp=100, rhofunc='hyperbolic', rhofuncparam=3.5))
 
 ##===============================================================
 ##

@@ -55,6 +55,7 @@ void MMregcore(const emxArray_real_T *y, const emxArray_real_T *X,
   emxArray_real_T *b_r1;
   emxArray_real_T *c;
   emxArray_real_T *r1;
+  emxArray_real_T *seq;
   double varargin_1[50];
   double row[5];
   double b_varargin_1[3];
@@ -62,9 +63,9 @@ void MMregcore(const emxArray_real_T *y, const emxArray_real_T *X,
   double B2=0;
   double F;
   double c2=0;
+  double crit;
   double d2=0;
   double diffk;
-  double iter;
   int aoffset;
   int exitg1;
   int i;
@@ -464,14 +465,13 @@ void MMregcore(const emxArray_real_T *y, const emxArray_real_T *X,
       }
     } while (exitg1 == 0);
   }
-  emxInit_real_T(&c, 2);
+  emxInit_real_T(&c, 1);
   if (b_bool) {
     /*  Compute tuning constant associated to the requested nominal efficiency
      */
     /*  c = consistency factor for a given value of efficiency */
-    k = c->size[0] * c->size[1];
+    k = c->size[0];
     c->size[0] = 1;
-    c->size[1] = 1;
     emxEnsureCapacity_real_T(c, k);
     c->data[0] = TBeff(varargin_2);
     /* TODO:MMregcore:shapeff */
@@ -505,9 +505,8 @@ void MMregcore(const emxArray_real_T *y, const emxArray_real_T *X,
       /*  Remark: given that in function OPTeff rho function is defined in the
        * interval 0---2c/3, 2c/3---3c/3, >3c/3 */
       /*  it is necessary to divide the output of OPTeff by 3 */
-      k = c->size[0] * c->size[1];
+      k = c->size[0];
       c->size[0] = 1;
-      c->size[1] = 1;
       emxEnsureCapacity_real_T(c, k);
       c->data[0] = OPTeff(varargin_2) / 3.0;
       psifunc_class_size_idx_1 = 3;
@@ -550,12 +549,12 @@ void MMregcore(const emxArray_real_T *y, const emxArray_real_T *X,
         for (k = 0; k < 50; k++) {
           varargin_1[k] = fabs(varargin_2 - dv3[k]);
         }
-        e_minimum(varargin_1, &iter, &nx);
+        e_minimum(varargin_1, &crit, &nx);
         b_varargin_1[0] = fabs(F - 4.0);
         b_varargin_1[1] = fabs(F - 4.5);
         b_varargin_1[2] = fabs(F - 5.0);
         f_minimum(b_varargin_1, &diffk, &aoffset);
-        if ((iter < 1.0E-6) && (diffk < 1.0E-6)) {
+        if ((crit < 1.0E-6) && (diffk < 1.0E-6)) {
           /*  Load precalculated values of tuning constants */
           for (k = 0; k < 5; k++) {
             row[k] = dv4[((nx + 50 * (k + 1)) + 300 * (aoffset - 1)) - 1];
@@ -616,20 +615,22 @@ void MMregcore(const emxArray_real_T *y, const emxArray_real_T *X,
         psifunc_class_data[0] = 'H';
         psifunc_class_data[1] = 'Y';
         psifunc_class_data[2] = 'P';
-        k = c->size[0] * c->size[1];
-        c->size[0] = 1;
-        c->size[1] = 5;
+        row[0] = c2;
+        row[1] = F;
+        row[2] = A2;
+        row[3] = B2;
+        row[4] = d2;
+        k = c->size[0];
+        c->size[0] = 5;
         emxEnsureCapacity_real_T(c, k);
-        c->data[0] = c2;
-        c->data[1] = F;
-        c->data[2] = A2;
-        c->data[3] = B2;
-        c->data[4] = d2;
+        for (k = 0; k < 5; k++) {
+          c->data[k] = row[k];
+        }
       } else if (o_strcmp(varargin_16)) {
         if ((varargin_18->size[0] == 0) || (varargin_18->size[1] == 0)) {
           k = out->rhofuncparam->size[0] * out->rhofuncparam->size[1];
-          out->rhofuncparam->size[0] = 1;
-          out->rhofuncparam->size[1] = 3;
+          out->rhofuncparam->size[0] = 3;
+          out->rhofuncparam->size[1] = 1;
           emxEnsureCapacity_real_T(out->rhofuncparam, k);
           out->rhofuncparam->data[0] = 2.0;
           out->rhofuncparam->data[1] = 4.0;
@@ -651,12 +652,11 @@ void MMregcore(const emxArray_real_T *y, const emxArray_real_T *X,
         psifunc_class_size_idx_1 = 2;
         psifunc_class_data[0] = 'H';
         psifunc_class_data[1] = 'A';
-        k = c->size[0] * c->size[1];
-        c->size[0] = 1;
-        c->size[1] = (signed char)out->rhofuncparam->size[1] + 1;
+        k = c->size[0];
+        c->size[0] = out->rhofuncparam->size[0] + 1;
         emxEnsureCapacity_real_T(c, k);
         c->data[0] = F;
-        nx = (signed char)out->rhofuncparam->size[1];
+        nx = out->rhofuncparam->size[0];
         for (k = 0; k < nx; k++) {
           c->data[k + 1] = out->rhofuncparam->data[k];
         }
@@ -736,9 +736,8 @@ void MMregcore(const emxArray_real_T *y, const emxArray_real_T *X,
         psifunc_class_size_idx_1 = 2;
         psifunc_class_data[0] = 'P';
         psifunc_class_data[1] = 'D';
-        k = c->size[0] * c->size[1];
+        k = c->size[0];
         c->size[0] = 1;
-        c->size[1] = 1;
         emxEnsureCapacity_real_T(c, k);
         c->data[0] = ((1.0 - F) + sqrt(1.0 - F)) / F;
         out->rhofuncparam->size[0] = 0;
@@ -747,8 +746,8 @@ void MMregcore(const emxArray_real_T *y, const emxArray_real_T *X,
     }
   }
   emxInit_real_T(&b1, 1);
-  iter = 0.0;
-  F = rtInf;
+  F = 0.0;
+  crit = rtInf;
   k = b1->size[0];
   b1->size[0] = b0->size[0];
   emxEnsureCapacity_real_T(b1, k);
@@ -776,7 +775,7 @@ void MMregcore(const emxArray_real_T *y, const emxArray_real_T *X,
   emxInit_int32_T(&r, 1);
   emxInit_boolean_T(&b_b2, 1);
   emxInit_real_T(&b_r1, 2);
-  while ((iter <= varargin_6) && (F > varargin_8)) {
+  while ((F <= varargin_6) && (crit > varargin_8)) {
     nx = X->size[0] - 1;
     inner = X->size[1];
     k = r1->size[0];
@@ -855,7 +854,7 @@ void MMregcore(const emxArray_real_T *y, const emxArray_real_T *X,
       } while (exitg1 == 0);
     }
     if (b_bool) {
-      TBwei(r1, (double *)c->data, out->weights);
+      TBwei(r1, c, out->weights);
     } else {
       b_bool = false;
       if (psifunc_class_size_idx_1 == 3) {
@@ -875,7 +874,7 @@ void MMregcore(const emxArray_real_T *y, const emxArray_real_T *X,
         } while (exitg1 == 0);
       }
       if (b_bool) {
-        OPTwei(r1, (double *)c->data, out->weights);
+        OPTwei(r1, c, out->weights);
       } else {
         b_bool = false;
         if (psifunc_class_size_idx_1 == 2) {
@@ -895,7 +894,7 @@ void MMregcore(const emxArray_real_T *y, const emxArray_real_T *X,
           } while (exitg1 == 0);
         }
         if (b_bool) {
-          HAwei(r1, (double *)c->data, *(int(*)[2])c->size, out->weights);
+          HAwei(r1, c, out->weights);
         } else {
           b_bool = false;
           if (psifunc_class_size_idx_1 == 3) {
@@ -915,7 +914,7 @@ void MMregcore(const emxArray_real_T *y, const emxArray_real_T *X,
             } while (exitg1 == 0);
           }
           if (b_bool) {
-            HYPwei(r1, (double *)c->data, *(int(*)[2])c->size, out->weights);
+            HYPwei(r1, c, out->weights);
           } else {
             b_bool = false;
             if (psifunc_class_size_idx_1 == 2) {
@@ -1096,25 +1095,26 @@ void MMregcore(const emxArray_real_T *y, const emxArray_real_T *X,
               /*     xlim([xlim1 xlim2]) */
               /* } */
               /*  Beginning of code */
+              /*  MATLAB Ccoder instruction to enforce that alpha is a scalar */
               /*  normalized wights in such a way that when u=0 w=1 */
-              k = b2->size[0];
-              b2->size[0] = r1->size[0];
-              emxEnsureCapacity_real_T(b2, k);
+              k = out->weights->size[0];
+              out->weights->size[0] = r1->size[0];
+              emxEnsureCapacity_real_T(out->weights, k);
               nx = r1->size[0];
               for (k = 0; k < nx; k++) {
-                b2->data[k] = r1->data[k] * r1->data[k];
+                out->weights->data[k] = r1->data[k] * r1->data[k];
               }
-              F = 0.0;
-              nx = c->size[1];
+              nx = out->weights->size[0];
               for (k = 0; k < nx; k++) {
-                F += -c->data[k] * (b2->data[k] / 2.0);
+                out->weights->data[k] =
+                    -c->data[0] * (out->weights->data[k] / 2.0);
+              }
+              nx = out->weights->size[0];
+              for (k = 0; k < nx; k++) {
+                out->weights->data[k] = exp(out->weights->data[k]);
               }
               /*  Unnormalized weights are */
               /*  w = alpha * exp(- alpha *(u.^2/2)); */
-              k = out->weights->size[0];
-              out->weights->size[0] = 1;
-              emxEnsureCapacity_real_T(out->weights, k);
-              out->weights->data[0] = exp(F);
             }
           }
         }
@@ -1159,8 +1159,8 @@ void MMregcore(const emxArray_real_T *y, const emxArray_real_T *X,
     for (k = 0; k < nx; k++) {
       out->residuals->data[k] = fabs(b1->data[k]);
     }
-    F = b_maximum(out->residuals);
-    iter++;
+    crit = b_maximum(out->residuals);
+    F++;
     k = b1->size[0];
     b1->size[0] = b2->size[0];
     emxEnsureCapacity_real_T(b1, k);
@@ -1173,6 +1173,7 @@ void MMregcore(const emxArray_real_T *y, const emxArray_real_T *X,
   emxFree_int32_T(&r);
   emxFree_real_T(&r1);
   emxFree_real_T(&b1);
+  emxFree_real_T(&c);
   for (k = 0; k < 5; k++) {
     out->class[k] = cv2[k];
   }
@@ -1207,17 +1208,18 @@ void MMregcore(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  Store in output structure the outliers found with confidence level conflev
    */
   /*  which has been usedto declared the outliers */
+  emxInit_real_T(&seq, 2);
   if (X->size[0] < 1) {
-    c->size[0] = 1;
-    c->size[1] = 0;
+    seq->size[0] = 1;
+    seq->size[1] = 0;
   } else {
-    k = c->size[0] * c->size[1];
-    c->size[0] = 1;
-    c->size[1] = X->size[0];
-    emxEnsureCapacity_real_T(c, k);
+    k = seq->size[0] * seq->size[1];
+    seq->size[0] = 1;
+    seq->size[1] = X->size[0];
+    emxEnsureCapacity_real_T(seq, k);
     nx = X->size[0] - 1;
     for (k = 0; k <= nx; k++) {
-      c->data[k] = (double)k + 1.0;
+      seq->data[k] = (double)k + 1.0;
     }
   }
   nx = out->residuals->size[0];
@@ -1272,10 +1274,10 @@ void MMregcore(const emxArray_real_T *y, const emxArray_real_T *X,
   emxEnsureCapacity_real_T(out->outliers, k);
   nx = r2->size[0];
   for (k = 0; k < nx; k++) {
-    out->outliers->data[k] = c->data[r2->data[k] - 1];
+    out->outliers->data[k] = seq->data[r2->data[k] - 1];
   }
   emxFree_int32_T(&r2);
-  emxFree_real_T(&c);
+  emxFree_real_T(&seq);
   out->conflev = varargin_10;
   k = out->rhofunc->size[0] * out->rhofunc->size[1];
   out->rhofunc->size[0] = varargin_16->size[0];

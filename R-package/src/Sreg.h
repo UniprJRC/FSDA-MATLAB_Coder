@@ -25,11 +25,10 @@ extern "C" {
 /* Function Declarations */
 void IRWLSregS(const emxArray_real_T *y, const emxArray_real_T *X,
                const emxArray_real_T *initialbeta,
-               const double psifunc_c1_data[], const int psifunc_c1_size[2],
-               double psifunc_kc1, const char psifunc_class_data[],
-               const int psifunc_class_size[2], double refsteps, double reftol,
-               emxArray_real_T *outIRWLS_betarw, double *outIRWLS_scalerw,
-               emxArray_real_T *outIRWLS_weights);
+               const emxArray_real_T *psifunc_c1, double psifunc_kc1,
+               const char psifunc_class_data[], const int psifunc_class_size[2],
+               double refsteps, double reftol, emxArray_real_T *outIRWLS_betarw,
+               double *outIRWLS_scalerw, emxArray_real_T *outIRWLS_weights);
 
 void Sreg(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
           double varargin_4, double varargin_6, double varargin_8,

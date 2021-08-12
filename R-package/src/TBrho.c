@@ -19,13 +19,13 @@
 #include <string.h>
 
 /* Function Definitions */
-void TBrho(const emxArray_real_T *u, const double c_data[],
+void TBrho(const emxArray_real_T *u, const emxArray_real_T *c,
            emxArray_real_T *rhoTB)
 {
   emxArray_boolean_T *w;
   emxArray_real_T *y;
   double b;
-  double c;
+  double c_tmp;
   double d;
   int k;
   int nx;
@@ -142,15 +142,14 @@ void TBrho(const emxArray_real_T *u, const double c_data[],
     y->data[k] = fabs(u->data[k]);
   }
   emxInit_boolean_T(&w, 1);
-  c = c_data[0];
   k = w->size[0];
   w->size[0] = y->size[0];
   emxEnsureCapacity_boolean_T(w, k);
   nx = y->size[0];
   for (k = 0; k < nx; k++) {
-    w->data[k] = (y->data[k] <= c);
+    w->data[k] = (y->data[k] <= c->data[0]);
   }
-  c = c_data[0] * c_data[0];
+  c_tmp = c->data[0] * c->data[0];
   k = rhoTB->size[0];
   rhoTB->size[0] = u->size[0];
   emxEnsureCapacity_real_T(rhoTB, k);
@@ -158,7 +157,7 @@ void TBrho(const emxArray_real_T *u, const double c_data[],
   for (k = 0; k < nx; k++) {
     rhoTB->data[k] = u->data[k] * u->data[k];
   }
-  b = c / 6.0;
+  b = c_tmp / 6.0;
   k = y->size[0];
   y->size[0] = u->size[0];
   emxEnsureCapacity_real_T(y, k);
@@ -166,11 +165,11 @@ void TBrho(const emxArray_real_T *u, const double c_data[],
   for (k = 0; k < nx; k++) {
     y->data[k] = rt_powd_snf(u->data[k], 4.0);
   }
-  d = 3.0 * rt_powd_snf(c_data[0], 4.0);
+  d = 3.0 * rt_powd_snf(c->data[0], 4.0);
   nx = rhoTB->size[0];
   for (k = 0; k < nx; k++) {
     rhoTB->data[k] = rhoTB->data[k] / 2.0 *
-                         ((1.0 - rhoTB->data[k] / c) + y->data[k] / d) *
+                         ((1.0 - rhoTB->data[k] / c_tmp) + y->data[k] / d) *
                          (double)w->data[k] +
                      (1.0 - (double)w->data[k]) * b;
   }

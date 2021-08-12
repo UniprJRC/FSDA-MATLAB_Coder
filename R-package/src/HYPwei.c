@@ -18,8 +18,8 @@
 #include <string.h>
 
 /* Function Definitions */
-void HYPwei(const emxArray_real_T *u, const double cktuning_data[],
-            const int cktuning_size[2], emxArray_real_T *w)
+void HYPwei(const emxArray_real_T *u, const emxArray_real_T *cktuning,
+            emxArray_real_T *w)
 {
   emxArray_boolean_T *r;
   emxArray_boolean_T *r1;
@@ -34,7 +34,6 @@ void HYPwei(const emxArray_real_T *u, const double cktuning_data[],
   double A;
   double a;
   double b_a;
-  double cktuning;
   double d;
   int i;
   int k;
@@ -144,10 +143,10 @@ void HYPwei(const emxArray_real_T *u, const double cktuning_data[],
   /*  */
   /* } */
   /*  Beginning of code */
-  if (cktuning_size[1] > 2) {
-    A = cktuning_data[2];
-    a = cktuning_data[3];
-    d = cktuning_data[4];
+  if (cktuning->size[0] > 2) {
+    A = cktuning->data[2];
+    a = cktuning->data[3];
+    d = cktuning->data[4];
   } else {
     A = 1.0;
     a = 1.0;
@@ -192,13 +191,12 @@ void HYPwei(const emxArray_real_T *u, const double cktuning_data[],
     r->data[i] = (absu->data[i] > d);
   }
   emxInit_boolean_T(&r1, 1);
-  cktuning = cktuning_data[0];
   i = r1->size[0];
   r1->size[0] = absu->size[0];
   emxEnsureCapacity_boolean_T(r1, i);
   nx = absu->size[0];
   for (i = 0; i < nx; i++) {
-    r1->data[i] = (absu->data[i] <= cktuning);
+    r1->data[i] = (absu->data[i] <= cktuning->data[0]);
   }
   emxInit_boolean_T(&r2, 1);
   i = r2->size[0];
@@ -209,13 +207,12 @@ void HYPwei(const emxArray_real_T *u, const double cktuning_data[],
     r2->data[i] = (absu->data[i] > d);
   }
   emxInit_boolean_T(&r3, 1);
-  cktuning = cktuning_data[0];
   i = r3->size[0];
   r3->size[0] = absu->size[0];
   emxEnsureCapacity_boolean_T(r3, i);
   nx = absu->size[0];
   for (i = 0; i < nx; i++) {
-    r3->data[i] = (absu->data[i] <= cktuning);
+    r3->data[i] = (absu->data[i] <= cktuning->data[0]);
   }
   k = r->size[0] - 1;
   nx = 0;
@@ -236,15 +233,14 @@ void HYPwei(const emxArray_real_T *u, const double cktuning_data[],
     }
   }
   emxInit_real_T(&x, 1);
-  a = sqrt((cktuning_data[1] - 1.0) * (a * a) / A);
-  b_a = sqrt(A * (cktuning_data[1] - 1.0));
-  cktuning = cktuning_data[0];
+  a = sqrt((cktuning->data[1] - 1.0) * (a * a) / A);
+  b_a = sqrt(A * (cktuning->data[1] - 1.0));
   i = x->size[0];
   x->size[0] = r4->size[0];
   emxEnsureCapacity_real_T(x, i);
   nx = r4->size[0];
   for (i = 0; i < nx; i++) {
-    x->data[i] = a * (cktuning - absu->data[r4->data[i] - 1]) / 2.0;
+    x->data[i] = a * (cktuning->data[0] - absu->data[r4->data[i] - 1]) / 2.0;
   }
   emxFree_int32_T(&r4);
   nx = x->size[0];
@@ -297,13 +293,12 @@ void HYPwei(const emxArray_real_T *u, const double cktuning_data[],
   for (i = 0; i < nx; i++) {
     r->data[i] = (absu->data[i] > d);
   }
-  cktuning = cktuning_data[0];
   i = r1->size[0];
   r1->size[0] = absu->size[0];
   emxEnsureCapacity_boolean_T(r1, i);
   nx = absu->size[0];
   for (i = 0; i < nx; i++) {
-    r1->data[i] = (absu->data[i] <= cktuning);
+    r1->data[i] = (absu->data[i] <= cktuning->data[0]);
   }
   i = r2->size[0];
   r2->size[0] = absu->size[0];
@@ -312,13 +307,12 @@ void HYPwei(const emxArray_real_T *u, const double cktuning_data[],
   for (i = 0; i < nx; i++) {
     r2->data[i] = (absu->data[i] > d);
   }
-  cktuning = cktuning_data[0];
   i = r3->size[0];
   r3->size[0] = absu->size[0];
   emxEnsureCapacity_boolean_T(r3, i);
   nx = absu->size[0];
   for (i = 0; i < nx; i++) {
-    r3->data[i] = (absu->data[i] <= cktuning);
+    r3->data[i] = (absu->data[i] <= cktuning->data[0]);
   }
   k = r->size[0] - 1;
   nx = 0;

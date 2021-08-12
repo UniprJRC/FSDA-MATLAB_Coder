@@ -36,7 +36,7 @@ void r_sreg(double *yy, double *xx, int *nn, int *pp, int *nn1, int *pp1, int *i
     y = argInit_vector(yy, nn);                 //  Initialize function input argument 'y'    
     X = argInit_matrix(xx, nn, pp);             //  Initialize function input argument 'X'    
     rhofuncparam = argInit_vector(xrhofuncparam, nrhofuncparam);   //  Initialize function input argument 'rhofuncparam'    
-    Rprintf("\nrhofuncparam: %d %d\n", rhofuncparam->size[0], rhofuncparam->size[1]);  
+    // Rprintf("\nrhofuncparam: %d %d\n", rhofuncparam->size[0], rhofuncparam->size[1]);  
     disp_dble(rhofuncparam->data, rhofuncparam->size[0]);
     
     //  Initialize function input argument 'family'

@@ -22,6 +22,26 @@
 #include <stdio.h>
 #include <string.h>
 
+/* Type Definitions */
+#ifndef struct_emxArray_char_T_1x10
+#define struct_emxArray_char_T_1x10
+struct emxArray_char_T_1x10 {
+  char data[10];
+  int size[2];
+};
+#endif /* struct_emxArray_char_T_1x10 */
+#ifndef typedef_emxArray_char_T_1x10
+#define typedef_emxArray_char_T_1x10
+typedef struct emxArray_char_T_1x10 emxArray_char_T_1x10;
+#endif /* typedef_emxArray_char_T_1x10 */
+
+#ifndef typedef_cell_wrap_65
+#define typedef_cell_wrap_65
+typedef struct {
+  emxArray_char_T_1x10 f1;
+} cell_wrap_65;
+#endif /* typedef_cell_wrap_65 */
+
 /* Function Definitions */
 double RobRegrSize(double n, double p, double bdp)
 {
@@ -936,31 +956,31 @@ double RobRegrSize(double n, double p, double bdp)
   static const char cv4[9] = {'S', 'b', 'd', 'p', '0', '2', '5', 'T', 'B'};
   static const char cv5[9] = {'S', 'b', 'd', 'p', '0', '5', '0', 'T', 'B'};
   static const char cv9[9] = {'S', 'b', 'd', 'p', '0', '2', '5', 'O', 'P'};
-  cell_wrap_51 labest[24];
-  cell_wrap_51 r;
-  cell_wrap_51 r1;
-  cell_wrap_51 r10;
-  cell_wrap_51 r11;
-  cell_wrap_51 r12;
-  cell_wrap_51 r13;
-  cell_wrap_51 r14;
-  cell_wrap_51 r15;
-  cell_wrap_51 r16;
-  cell_wrap_51 r17;
-  cell_wrap_51 r18;
-  cell_wrap_51 r19;
-  cell_wrap_51 r2;
-  cell_wrap_51 r20;
-  cell_wrap_51 r21;
-  cell_wrap_51 r22;
-  cell_wrap_51 r23;
-  cell_wrap_51 r3;
-  cell_wrap_51 r4;
-  cell_wrap_51 r5;
-  cell_wrap_51 r6;
-  cell_wrap_51 r7;
-  cell_wrap_51 r8;
-  cell_wrap_51 r9;
+  cell_wrap_65 labest[24];
+  cell_wrap_65 r;
+  cell_wrap_65 r1;
+  cell_wrap_65 r10;
+  cell_wrap_65 r11;
+  cell_wrap_65 r12;
+  cell_wrap_65 r13;
+  cell_wrap_65 r14;
+  cell_wrap_65 r15;
+  cell_wrap_65 r16;
+  cell_wrap_65 r17;
+  cell_wrap_65 r18;
+  cell_wrap_65 r19;
+  cell_wrap_65 r2;
+  cell_wrap_65 r20;
+  cell_wrap_65 r21;
+  cell_wrap_65 r22;
+  cell_wrap_65 r23;
+  cell_wrap_65 r3;
+  cell_wrap_65 r4;
+  cell_wrap_65 r5;
+  cell_wrap_65 r6;
+  cell_wrap_65 r7;
+  cell_wrap_65 r8;
+  cell_wrap_65 r9;
   emxArray_boolean_T *x;
   emxArray_char_T *namefile1;
   emxArray_char_T *str;
@@ -1387,7 +1407,7 @@ double RobRegrSize(double n, double p, double bdp)
    * threshold */
   /*  RAW LTS */
   /*  If breakdown point is the one supplied by the user */
-  h_do_vectors(bdp, (double *)&a, c_size, (int *)&nbytes, &ia_size,
+  g_do_vectors(bdp, (double *)&a, c_size, (int *)&nbytes, &ia_size,
                (int *)&ib_data, &ib_size);
   ib_size = x->size[0] * x->size[1];
   x->size[0] = 1;

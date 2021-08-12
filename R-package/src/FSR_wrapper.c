@@ -16,11 +16,12 @@
 #include "LXS.h"
 #include "chkinputR.h"
 #include "colon.h"
-#include "eml_setop.h"
+#include "find.h"
 #include "fsdaC_data.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_initialize.h"
 #include "fsdaC_types.h"
+#include "minOrMax.h"
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 #include <math.h>
@@ -34,18 +35,19 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                  double nsamp, const double threshoutX_data[],
                  const int threshoutX_size[2], bool weak, struct_FSR_T *out)
 {
+  emxArray_boolean_T *aT;
+  emxArray_boolean_T *bT;
   emxArray_boolean_T *x;
-  emxArray_int32_T *ia;
-  emxArray_real_T b_mdr;
+  emxArray_int32_T *bsb;
   emxArray_real_T *Bols;
   emxArray_real_T *INP_S2;
   emxArray_real_T *S2;
   emxArray_real_T *Un;
   emxArray_real_T *b_X;
+  emxArray_real_T *b_bs;
   emxArray_real_T *b_y;
   emxArray_real_T *bb;
   emxArray_real_T *bs;
-  emxArray_real_T *bsb;
   emxArray_real_T *bsbstepdef;
   emxArray_real_T *c_X;
   emxArray_real_T *c_y;
@@ -56,17 +58,15 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   struct_LXS_T c_expl_temp;
   struct_LXS_T expl_temp;
   struct_T b_expl_temp;
-  double b;
   double bonflevoutX_data;
   double initdef;
+  double ma;
   double n;
+  double p;
   double threshlevoutX_data;
-  double varsize;
   int bonflevoutX_size[2];
   int threshlevoutX_size[2];
   int aoffset;
-  int c_mdr;
-  int d_mdr;
   int exitg1;
   int i;
   int iter;
@@ -74,6 +74,7 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   int partialTrueCount;
   bool d_y;
   bool guard1 = false;
+  bool varargin_2;
   if (!isInitialized_fsdaC) {
     fsdaC_initialize();
   }
@@ -723,7 +724,7 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   for (i = 0; i < loop_ub; i++) {
     b_X->data[i] = X->data[i];
   }
-  chkinputR(b_y, b_X, intercept, nocheck, &n, &varsize);
+  chkinputR(b_y, b_X, intercept, nocheck, &n, &p);
   /*  User options */
   /*  If the number of all possible subsets is <1000 the default is to extract
    */
@@ -766,17 +767,17 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  Initialize constr as a column vector of variable size whose elements */
   /*  are greater than n is such a way that no unit is constrained to enter the
    * final steps */
-  b = 2.0 * n;
-  if (rtIsNaN(n + 1.0) || rtIsNaN(b)) {
+  ma = 2.0 * n;
+  if (rtIsNaN(n + 1.0) || rtIsNaN(ma)) {
     i = c_y->size[0] * c_y->size[1];
     c_y->size[0] = 1;
     c_y->size[1] = 1;
     emxEnsureCapacity_real_T(c_y, i);
     c_y->data[0] = rtNaN;
-  } else if (b < n + 1.0) {
+  } else if (ma < n + 1.0) {
     c_y->size[0] = 1;
     c_y->size[1] = 0;
-  } else if ((rtIsInf(n + 1.0) || rtIsInf(b)) && (n + 1.0 == b)) {
+  } else if ((rtIsInf(n + 1.0) || rtIsInf(ma)) && (n + 1.0 == ma)) {
     i = c_y->size[0] * c_y->size[1];
     c_y->size[0] = 1;
     c_y->size[1] = 1;
@@ -785,14 +786,14 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   } else if (floor(n + 1.0) == n + 1.0) {
     i = c_y->size[0] * c_y->size[1];
     c_y->size[0] = 1;
-    loop_ub = (int)floor(b - (n + 1.0));
+    loop_ub = (int)floor(ma - (n + 1.0));
     c_y->size[1] = loop_ub + 1;
     emxEnsureCapacity_real_T(c_y, i);
     for (i = 0; i <= loop_ub; i++) {
       c_y->data[i] = (n + 1.0) + (double)i;
     }
   } else {
-    eml_float_colon(n + 1.0, b, c_y);
+    eml_float_colon(n + 1.0, ma, c_y);
   }
   emxInit_real_T(&constr, 1);
   i = constr->size[0];
@@ -803,9 +804,9 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     constr->data[i] = c_y->data[i];
   }
   if (n < 40.0) {
-    initdef = varsize + 1.0;
+    initdef = p + 1.0;
   } else {
-    initdef = fmin(3.0 * varsize + 1.0, floor(0.5 * ((n + varsize) + 1.0)));
+    initdef = fmin(3.0 * p + 1.0, floor(0.5 * ((n + p) + 1.0)));
   }
   emxInit_real_T(&bsbstepdef, 2);
   if (n <= 5000.0) {
@@ -815,9 +816,9 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     emxEnsureCapacity_real_T(bsbstepdef, i);
     bsbstepdef->data[0] = 0.0;
   } else {
-    b = 100.0 * floor(n / 100.0);
+    ma = 100.0 * floor(n / 100.0);
     emxInit_real_T(&iniseq, 2);
-    if (rtIsNaN(b)) {
+    if (rtIsNaN(ma)) {
       i = iniseq->size[0] * iniseq->size[1];
       iniseq->size[0] = 1;
       iniseq->size[1] = 1;
@@ -826,7 +827,7 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     } else {
       i = iniseq->size[0] * iniseq->size[1];
       iniseq->size[0] = 1;
-      loop_ub = (int)floor((b - 100.0) / 100.0);
+      loop_ub = (int)floor((ma - 100.0) / 100.0);
       iniseq->size[1] = loop_ub + 1;
       emxEnsureCapacity_real_T(iniseq, i);
       for (i = 0; i <= loop_ub; i++) {
@@ -945,26 +946,28 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   for (i = 0; i < loop_ub; i++) {
     bs->data[i] = expl_temp.bs->data[i];
   }
-  emxInit_real_T(&bsb, 1);
+  emxInit_int32_T(&bsb, 1);
   emxInit_real_T(&INP_S2, 2);
-  emxInit_int32_T(&ia, 1);
+  emxInit_boolean_T(&aT, 1);
+  emxInit_boolean_T(&bT, 1);
   emxInitStruct_struct_T(&b_expl_temp);
   emxInitStruct_struct_LXS_T(&c_expl_temp);
   emxInit_real_T(&c_X, 2);
+  emxInit_real_T(&b_bs, 1);
   guard1 = false;
   do {
     exitg1 = 0;
     if (iter < 6) {
       /*  Compute Minimum Deletion Residual for each step of the search */
       /*  The instruction below is surely executed once. */
-      i = bsb->size[0];
-      bsb->size[0] = bs->size[0];
-      emxEnsureCapacity_real_T(bsb, i);
+      i = b_bs->size[0];
+      b_bs->size[0] = bs->size[0];
+      emxEnsureCapacity_real_T(b_bs, i);
       loop_ub = bs->size[0] - 1;
       for (i = 0; i <= loop_ub; i++) {
-        bsb->data[i] = bs->data[i];
+        b_bs->data[i] = bs->data[i];
       }
-      FSRmdr(b_y, b_X, bsb, init, msg, constr, bsbmfullrank,
+      FSRmdr(b_y, b_X, b_bs, init, msg, constr, bsbmfullrank,
              (double *)&threshlevoutX_data, threshlevoutX_size, bsbstepdef, mdr,
              Un, bb, Bols, S2);
       /*  If FSRmdr runs without problems mdr has two columns. In the second */
@@ -998,63 +1001,62 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           for (i = 0; i < loop_ub; i++) {
             out->ListOut->data[i] = mdr->data[i];
           }
-          /*  if ~coder.target('MATLAB') */
-          varsize = ceil(n / 1.0E+6);
+          ma = ceil(n / 1.0E+6);
           i = out->outliers->size[0] * out->outliers->size[1];
           out->outliers->size[0] = 1;
           partialTrueCount = (int)ceil(n / 1.0E+6);
-          out->outliers->size[1] = (int)varsize;
+          out->outliers->size[1] = (int)ma;
           emxEnsureCapacity_real_T(out->outliers, i);
           for (i = 0; i < partialTrueCount; i++) {
             out->outliers->data[i] = rtNaN;
           }
           i = out->mdr->size[0] * out->mdr->size[1];
           out->mdr->size[0] = 1;
-          out->mdr->size[1] = (int)varsize;
+          out->mdr->size[1] = (int)ma;
           emxEnsureCapacity_real_T(out->mdr, i);
           for (i = 0; i < partialTrueCount; i++) {
             out->mdr->data[i] = rtNaN;
           }
           i = out->Un->size[0] * out->Un->size[1];
-          out->Un->size[0] = (int)varsize;
+          out->Un->size[0] = (int)ma;
           out->Un->size[1] = 11;
           emxEnsureCapacity_real_T(out->Un, i);
-          loop_ub = (int)varsize * 11;
+          loop_ub = (int)ma * 11;
           for (i = 0; i < loop_ub; i++) {
             out->Un->data[i] = rtNaN;
           }
           i = out->nout->size[0] * out->nout->size[1];
-          out->nout->size[0] = (int)varsize;
-          out->nout->size[1] = (int)varsize;
+          out->nout->size[0] = (int)ma;
+          out->nout->size[1] = (int)ma;
           emxEnsureCapacity_real_T(out->nout, i);
-          aoffset = (int)varsize * (int)varsize;
+          aoffset = (int)ma * (int)ma;
           for (i = 0; i < aoffset; i++) {
             out->nout->data[i] = rtNaN;
           }
           i = out->beta->size[0];
-          out->beta->size[0] = (int)varsize;
+          out->beta->size[0] = (int)ma;
           emxEnsureCapacity_real_T(out->beta, i);
           for (i = 0; i < partialTrueCount; i++) {
             out->beta->data[i] = rtNaN;
           }
           out->scale = rtNaN;
           i = out->mdag->size[0] * out->mdag->size[1];
-          out->mdag->size[0] = (int)varsize;
-          out->mdag->size[1] = (int)varsize;
+          out->mdag->size[0] = (int)ma;
+          out->mdag->size[1] = (int)ma;
           emxEnsureCapacity_real_T(out->mdag, i);
           for (i = 0; i < aoffset; i++) {
             out->mdag->data[i] = rtNaN;
           }
           i = out->ListCl->size[0] * out->ListCl->size[1];
           out->ListCl->size[0] = 1;
-          out->ListCl->size[1] = (int)varsize;
+          out->ListCl->size[1] = (int)ma;
           emxEnsureCapacity_real_T(out->ListCl, i);
           for (i = 0; i < partialTrueCount; i++) {
             out->ListCl->data[i] = rtNaN;
           }
           i = out->VIOMout->size[0] * out->VIOMout->size[1];
           out->VIOMout->size[0] = 1;
-          out->VIOMout->size[1] = (int)varsize;
+          out->VIOMout->size[1] = (int)ma;
           emxEnsureCapacity_real_T(out->VIOMout, i);
           for (i = 0; i < partialTrueCount; i++) {
             out->VIOMout->data[i] = rtNaN;
@@ -1066,25 +1068,175 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           out->class[0] = 'F';
           out->class[1] = 'S';
           out->class[2] = 'R';
-          /*  end */
           exitg1 = 1;
         } else {
           if (rtIsNaN(mdr->data[0])) {
             /*  INITIAL SUBSET WAS NOT FULL RANK */
             /*  restart LXS without the units forming */
             /*  initial subset */
-            aoffset = expl_temp.bs->size[1];
-            b_mdr = *expl_temp.bs;
-            c_mdr = aoffset;
-            b_mdr.size = &c_mdr;
-            b_mdr.numDimensions = 1;
-            e_do_vectors(seq, &b_mdr, bsb, ia, &aoffset);
+            /* setdiffFS finds the positive integers in a which are not present
+             * in the positive integers in b */
+            /*  */
+            /*  This is a faster special case of function setdiff when */
+            /*  both vectors in a and b just contain positive integer numbers.
+             */
+            /*  */
+            /* <a href="matlab: docsearchFS('setdiffFS')">Link to the help
+             * function</a> */
+            /*  */
+            /*  Required input arguments: */
+            /*  */
+            /*     a:         vector containing positive integer elements.
+             * Vector. A */
+            /*                vector of length na containing positive integer
+             * numbers. */
+            /*  */
+            /*     b:         vector containing positive integer elements.
+             * Vector. A */
+            /*                vector of length nb containing positive integer
+             * numbers. */
+            /*  */
+            /*  */
+            /*  Optional input arguments: */
+            /*  */
+            /*  */
+            /*  Output: */
+            /*  */
+            /*     c:         vector containing positive integer elements thare
+             * are on a but not in b. */
+            /*                Column vector.  */
+            /*                Note that the elements of c contain no repetitions
+             * and are sorted. */
+            /*  */
+            /*  */
+            /*  See also: setdiff */
+            /*  */
+            /*  References: */
+            /*  */
+            /*  */
+            /*  Riani, M., Perrotta, D. and Cerioli, A. (2015), The Forward
+             * Search for */
+            /*  Very Large Datasets, "Journal of Statistical Software" */
+            /*  */
+            /*  */
+            /*  Copyright 2008-2021. */
+            /*  Written by FSDA team */
+            /*  */
+            /*  */
+            /* <a href="matlab: docsearchFS('setdiffFS')">Link to the help page
+             * for this function</a> */
+            /*  */
+            /*  */
+            /* $LastChangedDate::                      $: Date of the last
+             * commit */
+            /*  Examples: */
+            /* { */
+            /*     %% Example of use of setdiffFS. */
+            /*     % Define two vectors (containing positive integers) with
+             * values in */
+            /*     % common. */
+            /*     A = [3 6 2 1 5 1 1];  */
+            /*     B = [2 4 6]; */
+            /*     C=setdiffFS(A,B); */
+            /*     disp(C); */
+            /* } */
+            /* { */
+            /*     % Time comparison with setdiff. */
+            /*     % 20000 calls to setdiff and to setdiffFS. */
+            /*     % Analysis of computational time. */
+            /*     n=100; */
+            /*     nsimul=20000; */
+            /*     tSETDIFF=0; */
+            /*     tSETDIFFFS=0; */
+            /*     for j=1:nsimul */
+            /*         a=randi(n,[300,1]); */
+            /*         b=randi(n,[40,1]); */
+            /*  */
+            /*         tsetdiff = tic; */
+            /*         c=setdiff(a,b); */
+            /*         tSETDIFF = tSETDIFF + toc(tsetdiff); */
+            /*  */
+            /*         tsetdiffFS = tic; */
+            /*         cFS=setdiffFS(a,b); */
+            /*         tSETDIFFFS = tSETDIFFFS + toc(tsetdiffFS); */
+            /*  */
+            /*         if ~isequal(c,cFS) */
+            /*             error('FSDA:setdiffFS:WrongOutput','c and cFS are
+             * different') */
+            /*         end */
+            /*  */
+            /*     end */
+            /*  */
+            /*     disp(array2table([tSETDIFF
+             * tSETDIFFFS],'VariableNames',{'setdiff time' 'setdiffFS time'}))
+             */
+            /* } */
+            /*  Beginning of code */
+            i = bs->size[0];
+            bs->size[0] = seq->size[0] + expl_temp.bs->size[1];
+            emxEnsureCapacity_real_T(bs, i);
+            loop_ub = seq->size[0];
+            for (i = 0; i < loop_ub; i++) {
+              bs->data[i] = seq->data[i];
+            }
+            loop_ub = expl_temp.bs->size[1];
+            for (i = 0; i < loop_ub; i++) {
+              bs->data[i + seq->size[0]] = expl_temp.bs->data[i];
+            }
+            ma = b_maximum(bs);
+            loop_ub = (int)b_maximum(bs);
+            i = aT->size[0];
+            aT->size[0] = (int)ma;
+            emxEnsureCapacity_boolean_T(aT, i);
+            for (i = 0; i < loop_ub; i++) {
+              aT->data[i] = false;
+            }
+            i = bT->size[0];
+            bT->size[0] = (int)ma;
+            emxEnsureCapacity_boolean_T(bT, i);
+            for (i = 0; i < loop_ub; i++) {
+              bT->data[i] = false;
+            }
+            i = bsb->size[0];
+            bsb->size[0] = seq->size[0];
+            emxEnsureCapacity_int32_T(bsb, i);
+            loop_ub = seq->size[0];
+            for (i = 0; i < loop_ub; i++) {
+              bsb->data[i] = (int)seq->data[i];
+            }
+            loop_ub = bsb->size[0];
+            for (i = 0; i < loop_ub; i++) {
+              aT->data[bsb->data[i] - 1] = true;
+            }
+            i = bsb->size[0];
+            bsb->size[0] = expl_temp.bs->size[1];
+            emxEnsureCapacity_int32_T(bsb, i);
+            loop_ub = expl_temp.bs->size[1];
+            for (i = 0; i < loop_ub; i++) {
+              bsb->data[i] = (int)expl_temp.bs->data[i];
+            }
+            loop_ub = bsb->size[0];
+            for (i = 0; i < loop_ub; i++) {
+              bT->data[bsb->data[i] - 1] = true;
+            }
+            /*  c = vector containing numbers which are inside vector a which
+             * are not present in b */
+            /*  Elements in c are sorted and contain no repetitions */
+            loop_ub = aT->size[0];
+            for (i = 0; i < loop_ub; i++) {
+              d_y = aT->data[i];
+              varargin_2 = !bT->data[i];
+              aT->data[i] = (d_y && varargin_2);
+            }
+            b_eml_find(aT, bsb);
+            /*  The instruction above is faster than the one below */
+            /*  c=find(aT & ~bT); */
             i = bs->size[0];
             bs->size[0] = bsb->size[0];
             emxEnsureCapacity_real_T(bs, i);
             loop_ub = bsb->size[0];
             for (i = 0; i < loop_ub; i++) {
-              bs->data[i] = b_y->data[(int)bsb->data[i] - 1];
+              bs->data[i] = b_y->data[bsb->data[i] - 1];
             }
             loop_ub = b_X->size[1];
             i = c_X->size[0] * c_X->size[1];
@@ -1095,7 +1247,7 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
               partialTrueCount = bsb->size[0];
               for (aoffset = 0; aoffset < partialTrueCount; aoffset++) {
                 c_X->data[aoffset + c_X->size[0] * i] =
-                    b_X->data[((int)bsb->data[aoffset] + b_X->size[0] * i) - 1];
+                    b_X->data[(bsb->data[aoffset] + b_X->size[0] * i) - 1];
               }
             }
             b_LXS(bs, c_X, h, lms, nsamp, msg, (double *)&bonflevoutX_data,
@@ -1121,12 +1273,163 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
             /*  MATRIX. IN THIS CASE NEW LXS IS BASED ON  n-constr OBSERVATIONS
              */
             iter++;
-            aoffset = mdr->size[0];
-            b_mdr = *mdr;
-            d_mdr = aoffset;
-            b_mdr.size = &d_mdr;
-            b_mdr.numDimensions = 1;
-            e_do_vectors(seq, &b_mdr, bsb, ia, &aoffset);
+            /* setdiffFS finds the positive integers in a which are not present
+             * in the positive integers in b */
+            /*  */
+            /*  This is a faster special case of function setdiff when */
+            /*  both vectors in a and b just contain positive integer numbers.
+             */
+            /*  */
+            /* <a href="matlab: docsearchFS('setdiffFS')">Link to the help
+             * function</a> */
+            /*  */
+            /*  Required input arguments: */
+            /*  */
+            /*     a:         vector containing positive integer elements.
+             * Vector. A */
+            /*                vector of length na containing positive integer
+             * numbers. */
+            /*  */
+            /*     b:         vector containing positive integer elements.
+             * Vector. A */
+            /*                vector of length nb containing positive integer
+             * numbers. */
+            /*  */
+            /*  */
+            /*  Optional input arguments: */
+            /*  */
+            /*  */
+            /*  Output: */
+            /*  */
+            /*     c:         vector containing positive integer elements thare
+             * are on a but not in b. */
+            /*                Column vector.  */
+            /*                Note that the elements of c contain no repetitions
+             * and are sorted. */
+            /*  */
+            /*  */
+            /*  See also: setdiff */
+            /*  */
+            /*  References: */
+            /*  */
+            /*  */
+            /*  Riani, M., Perrotta, D. and Cerioli, A. (2015), The Forward
+             * Search for */
+            /*  Very Large Datasets, "Journal of Statistical Software" */
+            /*  */
+            /*  */
+            /*  Copyright 2008-2021. */
+            /*  Written by FSDA team */
+            /*  */
+            /*  */
+            /* <a href="matlab: docsearchFS('setdiffFS')">Link to the help page
+             * for this function</a> */
+            /*  */
+            /*  */
+            /* $LastChangedDate::                      $: Date of the last
+             * commit */
+            /*  Examples: */
+            /* { */
+            /*     %% Example of use of setdiffFS. */
+            /*     % Define two vectors (containing positive integers) with
+             * values in */
+            /*     % common. */
+            /*     A = [3 6 2 1 5 1 1];  */
+            /*     B = [2 4 6]; */
+            /*     C=setdiffFS(A,B); */
+            /*     disp(C); */
+            /* } */
+            /* { */
+            /*     % Time comparison with setdiff. */
+            /*     % 20000 calls to setdiff and to setdiffFS. */
+            /*     % Analysis of computational time. */
+            /*     n=100; */
+            /*     nsimul=20000; */
+            /*     tSETDIFF=0; */
+            /*     tSETDIFFFS=0; */
+            /*     for j=1:nsimul */
+            /*         a=randi(n,[300,1]); */
+            /*         b=randi(n,[40,1]); */
+            /*  */
+            /*         tsetdiff = tic; */
+            /*         c=setdiff(a,b); */
+            /*         tSETDIFF = tSETDIFF + toc(tsetdiff); */
+            /*  */
+            /*         tsetdiffFS = tic; */
+            /*         cFS=setdiffFS(a,b); */
+            /*         tSETDIFFFS = tSETDIFFFS + toc(tsetdiffFS); */
+            /*  */
+            /*         if ~isequal(c,cFS) */
+            /*             error('FSDA:setdiffFS:WrongOutput','c and cFS are
+             * different') */
+            /*         end */
+            /*  */
+            /*     end */
+            /*  */
+            /*     disp(array2table([tSETDIFF
+             * tSETDIFFFS],'VariableNames',{'setdiff time' 'setdiffFS time'}))
+             */
+            /* } */
+            /*  Beginning of code */
+            i = bs->size[0];
+            bs->size[0] = seq->size[0] + mdr->size[0];
+            emxEnsureCapacity_real_T(bs, i);
+            loop_ub = seq->size[0];
+            for (i = 0; i < loop_ub; i++) {
+              bs->data[i] = seq->data[i];
+            }
+            loop_ub = mdr->size[0];
+            for (i = 0; i < loop_ub; i++) {
+              bs->data[i + seq->size[0]] = mdr->data[i];
+            }
+            ma = b_maximum(bs);
+            loop_ub = (int)b_maximum(bs);
+            i = aT->size[0];
+            aT->size[0] = (int)ma;
+            emxEnsureCapacity_boolean_T(aT, i);
+            for (i = 0; i < loop_ub; i++) {
+              aT->data[i] = false;
+            }
+            i = bT->size[0];
+            bT->size[0] = (int)ma;
+            emxEnsureCapacity_boolean_T(bT, i);
+            for (i = 0; i < loop_ub; i++) {
+              bT->data[i] = false;
+            }
+            i = bsb->size[0];
+            bsb->size[0] = seq->size[0];
+            emxEnsureCapacity_int32_T(bsb, i);
+            loop_ub = seq->size[0];
+            for (i = 0; i < loop_ub; i++) {
+              bsb->data[i] = (int)seq->data[i];
+            }
+            loop_ub = bsb->size[0];
+            for (i = 0; i < loop_ub; i++) {
+              aT->data[bsb->data[i] - 1] = true;
+            }
+            i = bsb->size[0];
+            bsb->size[0] = mdr->size[0];
+            emxEnsureCapacity_int32_T(bsb, i);
+            loop_ub = mdr->size[0];
+            for (i = 0; i < loop_ub; i++) {
+              bsb->data[i] = (int)mdr->data[i];
+            }
+            loop_ub = bsb->size[0];
+            for (i = 0; i < loop_ub; i++) {
+              bT->data[bsb->data[i] - 1] = true;
+            }
+            /*  c = vector containing numbers which are inside vector a which
+             * are not present in b */
+            /*  Elements in c are sorted and contain no repetitions */
+            loop_ub = aT->size[0];
+            for (i = 0; i < loop_ub; i++) {
+              d_y = aT->data[i];
+              varargin_2 = !bT->data[i];
+              aT->data[i] = (d_y && varargin_2);
+            }
+            b_eml_find(aT, bsb);
+            /*  The instruction above is faster than the one below */
+            /*  c=find(aT & ~bT); */
             i = constr->size[0];
             constr->size[0] = mdr->size[0];
             emxEnsureCapacity_real_T(constr, i);
@@ -1139,7 +1442,7 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
             emxEnsureCapacity_real_T(bs, i);
             loop_ub = bsb->size[0];
             for (i = 0; i < loop_ub; i++) {
-              bs->data[i] = b_y->data[(int)bsb->data[i] - 1];
+              bs->data[i] = b_y->data[bsb->data[i] - 1];
             }
             loop_ub = b_X->size[1];
             i = c_X->size[0] * c_X->size[1];
@@ -1150,7 +1453,7 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
               partialTrueCount = bsb->size[0];
               for (aoffset = 0; aoffset < partialTrueCount; aoffset++) {
                 c_X->data[aoffset + c_X->size[0] * i] =
-                    b_X->data[((int)bsb->data[aoffset] + b_X->size[0] * i) - 1];
+                    b_X->data[(bsb->data[aoffset] + b_X->size[0] * i) - 1];
               }
             }
             b_LXS(bs, c_X, h, lms, nsamp, msg, (double *)&bonflevoutX_data,
@@ -1195,8 +1498,8 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
       }
     }
     /*  Call core function which computes exceedances to thresholds of mdr */
-    FSRcore(b_y, b_X, n, varsize, mdr, init, Un, bb, Bols, INP_S2, weak,
-            bonflev_data, bonflev_size, msg, &b_expl_temp);
+    FSRcore(b_y, b_X, n, p, mdr, init, Un, bb, Bols, INP_S2, weak, bonflev_data,
+            bonflev_size, msg, &b_expl_temp);
     i = out->ListOut->size[0] * out->ListOut->size[1];
     out->ListOut->size[0] = 1;
     out->ListOut->size[1] = b_expl_temp.ListOut->size[1];
@@ -1309,15 +1612,17 @@ void FSR_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     out->class[1] = 'S';
     out->class[2] = 'R';
   }
+  emxFree_real_T(&b_bs);
   emxFree_real_T(&c_X);
   emxFreeStruct_struct_LXS_T(&expl_temp);
   emxFreeStruct_struct_LXS_T(&c_expl_temp);
   emxFreeStruct_struct_T(&b_expl_temp);
-  emxFree_int32_T(&ia);
+  emxFree_boolean_T(&bT);
+  emxFree_boolean_T(&aT);
   emxFree_real_T(&b_X);
   emxFree_real_T(&b_y);
   emxFree_real_T(&INP_S2);
-  emxFree_real_T(&bsb);
+  emxFree_int32_T(&bsb);
   emxFree_real_T(&bs);
   emxFree_real_T(&mdr);
   emxFree_real_T(&seq);

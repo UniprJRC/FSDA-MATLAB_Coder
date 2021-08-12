@@ -23,8 +23,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void HAwei(const emxArray_real_T *u, const double ctuning_data[],
-           const int ctuning_size[2], emxArray_real_T *w);
+void HAwei(const emxArray_real_T *u, const emxArray_real_T *ctuning,
+           emxArray_real_T *w);
 
 #ifdef __cplusplus
 }
