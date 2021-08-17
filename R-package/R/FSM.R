@@ -18,7 +18,7 @@
 #'                \item - a number smaller than 1, which specifies the confidence
 #'                  level for a signal and a stopping rule based on the
 #'                  comparison of the minimum deletion residual with a
-#'                  Bonferroni bound. For example if bonflev=0.99 the
+#'                  Bonferroni bound. For example if \code{bonflev=0.99} the
 #'                  procedure stops when the trajectory exceeds for the
 #'                  first time the 99% bonferroni bound.
 #'                \item - A number greater than 1. In this case the
@@ -92,7 +92,7 @@
 #'      the final step of the search.
 #'
 #'  \item \code{nout}: a \code{2 x 5} matrix containing the number of times \code{mmd} went out
-#'      of particular quantiles. The first row contains the quantiles \code{1, 99, 99.9, 99.99, 99.999} per cent;
+#'      of particular quantiles. The first row contains the quantiles \code{c(1, 99, 99.9, 99.99, 99.999)} per cent;
 #'      The second row contains the frequency distribution.
 #'
 #'      It is NaN if \code{bonflev} threshold is used.
@@ -118,11 +118,17 @@
 #' library(fsdac)
 #' data(swissbanknotes)
 #' Y = swissbanknotes
-#' Y = Y[,1:6]
+#' Y = Y[1:200,1:6]
 #'
-#' \dontrun{
-#' (out = FSM(Y, crit="md", init=60))
-#' }
+#' # FSM with all default arguments
+#' (out = FSM(Y))
+#'
+#'
+#' crit="md"
+#' init=60
+#' rf=0.95
+#'
+#' (out = FSM(Y, crit=crit, init=init, rf=rf, msg=FALSE, nocheck=FALSE, trace=FALSE))
 #'
 #' @export
 #' @author FSDA team, \email{valentin@@todorov.at}
@@ -150,44 +156,55 @@ FSM <- function(Y, bonflev, crit=c("md", "biv", "uni"), init, m0, msg=TRUE, noch
     n1 <- n
     p1 <- p
 
-    Y1 <- Y         # what is returned from chkinputM().
-
+    Y1 <- Y         # what is returned from chkinputRM().
 
     ##  Process the input parameters and initial values
 
-    ## The default value of m0 depends on p
-    if(missing(m0))
-        m0 <- p+1
-
     ## The default value of init depends on n and p
     if(missing(init)) {
-        init <- if(n1 < 40) p1 + 1 else min(3*p1 + 1, floor(0.5*(n1 + p1 + 1)))
+        init <-  floor(n*0.6)
     }
     if(init < p+1) {
         warning("Attention : 'init' should be larger than p+1. It is set to p+2.")
         init <- p + 2
     }
 
+
     bonflev <- if(missing(bonflev)) c(0.0, 0.0)
                else                 c(bonflev, 1)
-    crit <- match.arg(crit)
 
+  
+    
+    if(missing(m0) && crit==c("md", "biv", "uni")){
+      crit = "md"
+      m0=p+1
+    } else {
+      # m0 is ignored
+      crit <- match.arg(crit)   
+    }
+   
+    if (length(m0)==1){ 
+    if (m0 < p+1 || m0 > n){
+      warning("Attention: 'm0' should be set in the interval [p+1, n], now it is set to p+1")
+      m0=p+1
+    } else if (length(m0)>1) {
+      # m0 is a vector of indexes
+      m0=m0
+      }
+    }    
     ##  mmd and Un: matrices, with retnUn=(n-init) rows and 2 or 11 columns respectively.
     outliers <- rep(0, n1)
     retnUn <- n1-init
     mmd <- matrix(0., nrow=retnUn, ncol=2)
     Un <- matrix(0., nrow=retnUn, ncol=11)
     nout <- matrix(0., nrow=2, ncol=5)
-    loc <- matrix(0., nrow=1, ncol=p)
+    loc <- rep(0., p)
     xcov <- matrix(0., nrow=p, ncol=p)
-    md <- matrix(0., nrow=n1, ncol=1)
+    md <- rep(0., n1)
 
 
     nm <- length(m0)
-    m0 <- matrix(0., nrow=nm, ncol=1)
-
-
-
+    
     ##  Call the C wrapper function
     tmp <- .C('r_fsm',
         Y = if(is.double(Y)) Y else as.double(Y),
@@ -198,7 +215,7 @@ FSM <- function(Y, bonflev, crit=c("md", "biv", "uni"), init, m0, msg=TRUE, noch
         crit = as.character(crit),
         init = as.double(init),
 
-        m0 = as.integer(m0),
+        m0 = as.double(m0),
         nm = as.integer(nm),                            # number of elements of m0
 
 
@@ -223,7 +240,6 @@ FSM <- function(Y, bonflev, crit=c("md", "biv", "uni"), init, m0, msg=TRUE, noch
 
     ##  Copy the output parameters into the output class FSM and return it.
 
-
     outliers <- tmp$outliers[1:tmp$noutliers]
     Un <- matrix(tmp$Un, nrow=retnUn, ncol=11)
     mmd <- matrix(tmp$mmd, nrow=retnUn, ncol=2)
@@ -243,7 +259,7 @@ FSM <- function(Y, bonflev, crit=c("md", "biv", "uni"), init, m0, msg=TRUE, noch
 
 plot.FSM <- function(x, col, xlab, ylab, main, ...) {
   if (!inherits(x, "FSM"))
-    stop("Use only with 'FSMmmd' objects")
+    stop("Use only with 'FSM' objects")
 
   if(ncol(x$mmd) != 2)
     stop("Singularity issue - the 'FSM' object does not contain the minimum Mahalanobis distances.")
