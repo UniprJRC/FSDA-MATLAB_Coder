@@ -24,6 +24,7 @@
 #include "fsdaC_types.h"
 #include "gammainc.h"
 #include "gammaincinv.h"
+#include "gammaln.h"
 #include "int2str.h"
 #include "median.h"
 #include "mldivide.h"
@@ -33,6 +34,8 @@
 #include "tic.h"
 #include "tinv.h"
 #include "toc.h"
+#include "unibiv.h"
+#include "unsafeSxfun.h"
 #include "rt_nonfinite.h"
 #include <math.h>
 #include <stdio.h>
@@ -52,7 +55,6 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
   emxArray_int32_T *r1;
   emxArray_real_T *C;
   emxArray_real_T *Xb;
-  emxArray_real_T *b;
   emxArray_real_T *b_C;
   emxArray_real_T *b_expl_temp;
   emxArray_real_T *c_X;
@@ -64,12 +66,18 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
   emxArray_real_T *outliers;
   emxArray_real_T *r2;
   emxArray_real_T *seq;
+  const double *X_data;
+  const double *y_data;
   double ncomb;
   double nselected;
   double rmin;
   double sh0;
   double singsub;
   double tsampling;
+  double *C_data;
+  double *outFSM_outliers_data;
+  double *outliers_data;
+  double *seq_data;
   int critdef_size[2];
   int expl_temp_size[2];
   int aoffset;
@@ -80,10 +88,14 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
   int k;
   int lmsopt;
   int loop_ub;
+  int *ia_data;
   char critdef_data[3];
   char expl_temp_data[3];
   bool bonflevout;
   bool guard1 = false;
+  bool *weights_data;
+  X_data = X->data;
+  y_data = y->data;
   /* LXS computes the Least Median of Squares (LMS) or Least Trimmed Squares
    * (LTS) estimators */
   /*  */
@@ -108,7 +120,6 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
   /*  */
   /*   Optional input arguments: */
   /*  */
-  /*  */
   /*          bdp :  breakdown point. Scalar. */
   /*                It measures the fraction of outliers */
   /*                the algorithm should */
@@ -121,8 +132,6 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
   /*                given. Please specify h or bdp not both. */
   /*                  Example - 'bdp',0.4 */
   /*                  Data Types - double */
-  /*  */
-  /*  */
   /*  */
   /*   bonflevoutX : remote units in the X space. Scalar or empty (default). */
   /*                If the design matrix X contains several high leverage units
@@ -237,7 +246,6 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
   /*                Example - 'nomes',true */
   /*                Data Types - logical */
   /*  */
-  /*  */
   /*         msg  : It controls whether to display or not messages on the
    * screen. Boolean. */
   /*                 If msg==true (default) messages are displayed */
@@ -285,7 +293,6 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
   /*                Example - 'yxsave',1 */
   /*                Data Types - double */
   /*  */
-  /*  */
   /*        plots : Plot on the screen. Scalar or structure. */
   /*                If plots = 1, a plot which shows the */
   /*                robust residuals against index number is shown on the */
@@ -305,7 +312,6 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
   /*                needs to be followed by their value. The order of the input
    */
   /*                arguments is of no importance. */
-  /*  */
   /*  */
   /*   Output: */
   /*  */
@@ -364,7 +370,6 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
   /*                        implies that the third extracted subsample is */
   /*                        formed by units 2, 5 and 20. */
   /*  */
-  /*  */
   /*  See also FSReda, Sreg, MMreg, LTSts */
   /*  */
   /*  References: */
@@ -374,7 +379,6 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('LXS')">Link to the help function</a> */
   /*  */
@@ -584,7 +588,6 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
   /*                specified for the */
   /*                caller function. */
   /*  */
-  /*  */
   /*   Optional input arguments: */
   /*  */
   /*  Output: */
@@ -599,7 +602,6 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
   /*                rows after listwise exclusion. */
   /*  p:            Number of columns of X (variables). Scalar. */
   /*                Number of parameters to be estimated. */
-  /*  */
   /*  */
   /*  More About: */
   /*  */
@@ -621,8 +623,6 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
-  /*  */
   /*  */
   /* $LastChangedDate::                      $: Date of the last commit */
   /*  */
@@ -647,6 +647,7 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
   /*  chkint = strmatch('intercept',chklist,'exact'); */
   /*  If nocheck=true, then skip checks on y and X */
   emxInit_real_T(&seq, 2);
+  seq_data = seq->data;
   if (X->size[0] < 1) {
     seq->size[0] = 1;
     seq->size[1] = 0;
@@ -655,9 +656,10 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
     seq->size[0] = 1;
     seq->size[1] = X->size[0];
     emxEnsureCapacity_real_T(seq, i);
+    seq_data = seq->data;
     aoffset = X->size[0] - 1;
     for (i = 0; i <= aoffset; i++) {
-      seq->data[i] = (double)i + 1.0;
+      seq_data[i] = (double)i + 1.0;
     }
   }
   /*  User options */
@@ -714,6 +716,7 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
    * displayed */
   /*  Extract in the rows of matrix C the indexes of all required subsets */
   subsets(sh0, X->size[0], X->size[1], ncomb, C, &nselected);
+  C_data = C->data;
   /*  Store the indices in varargout */
   /*  rmin will contain the minimum value of LMS (LTS) */
   rmin = rtInf;
@@ -741,9 +744,10 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
     c_X->size[0] = X->size[0];
     c_X->size[1] = X->size[1];
     emxEnsureCapacity_real_T(c_X, i);
+    outliers_data = c_X->data;
     aoffset = X->size[0] * X->size[1] - 1;
     for (i = 0; i <= aoffset; i++) {
-      c_X->data[i] = X->data[i];
+      outliers_data[i] = X_data[i];
     }
     emxInit_real_T(&outFSM_outliers, 2);
     emxInit_real_T(&expl_temp, 2);
@@ -755,9 +759,11 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
         floor((double)X->size[0] * 0.6), critdef_data, critdef_size,
         (double)X->size[1] + 1.0, outFSM_outliers, expl_temp, Xb, b_expl_temp,
         c_expl_temp, d_expl_temp, e_expl_temp, expl_temp_data, expl_temp_size);
+    outFSM_outliers_data = outFSM_outliers->data;
     i = outliers->size[0];
     outliers->size[0] = outFSM_outliers->size[0] * outFSM_outliers->size[1];
     emxEnsureCapacity_real_T(outliers, i);
+    outliers_data = outliers->data;
     aoffset = outFSM_outliers->size[0] * outFSM_outliers->size[1];
     emxFree_real_T(&c_X);
     emxFree_real_T(&e_expl_temp);
@@ -766,7 +772,7 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
     emxFree_real_T(&b_expl_temp);
     emxFree_real_T(&expl_temp);
     for (i = 0; i < aoffset; i++) {
-      outliers->data[i] = outFSM_outliers->data[i];
+      outliers_data[i] = outFSM_outliers_data[i];
     }
     emxFree_real_T(&outFSM_outliers);
   } else {
@@ -774,7 +780,8 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
     i = outliers->size[0];
     outliers->size[0] = 1;
     emxEnsureCapacity_real_T(outliers, i);
-    outliers->data[0] = 0.0;
+    outliers_data = outliers->data;
+    outliers_data[0] = 0.0;
   }
   /*  Computation of LMS (LTS) */
   tic(&ncomb, &sh0);
@@ -787,7 +794,6 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
     out->bs->data[i] = 0.0;
   }
   i = (int)nselected;
-  emxInit_real_T(&b, 1);
   emxInit_real_T(&r2, 1);
   emxInit_int32_T(&ia, 1);
   emxInit_int32_T(&ib, 1);
@@ -804,15 +810,16 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
       b_C->size[0] = 1;
       b_C->size[1] = C->size[1];
       emxEnsureCapacity_real_T(b_C, c_i);
+      outliers_data = b_C->data;
       for (c_i = 0; c_i < aoffset; c_i++) {
-        b_C->data[c_i] = C->data[b_i + C->size[0] * c_i];
+        outliers_data[c_i] = C_data[b_i + C->size[0] * c_i];
       }
-      c_do_vectors(b_C, outliers, b, ia, ib);
-      if (b->size[0] != 0) {
-        c_i = b->size[0];
-        b->size[0] = 1;
-        emxEnsureCapacity_real_T(b, c_i);
-        b->data[0] = rtNaN;
+      c_do_vectors(b_C, outliers, r2, ia, ib);
+      if (r2->size[0] != 0) {
+        c_i = out->residuals->size[0];
+        out->residuals->size[0] = 1;
+        emxEnsureCapacity_real_T(out->residuals, c_i);
+        out->residuals->data[0] = rtNaN;
       } else {
         guard1 = true;
       }
@@ -826,12 +833,11 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
       Xb->size[0] = C->size[1];
       Xb->size[1] = X->size[1];
       emxEnsureCapacity_real_T(Xb, c_i);
+      outliers_data = Xb->data;
       for (c_i = 0; c_i < loop_ub; c_i++) {
         for (inner = 0; inner < aoffset; inner++) {
-          Xb->data[inner + Xb->size[0] * c_i] =
-              X->data[((int)C->data[b_i + C->size[0] * inner] +
-                       X->size[0] * c_i) -
-                      1];
+          outliers_data[inner + Xb->size[0] * c_i] = X_data
+              [((int)C_data[b_i + C->size[0] * inner] + X->size[0] * c_i) - 1];
         }
       }
       /*  if rank(Xb)==p Warning: this instruction has been replaced by a */
@@ -841,47 +847,50 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
       c_i = r2->size[0];
       r2->size[0] = C->size[1];
       emxEnsureCapacity_real_T(r2, c_i);
+      outliers_data = r2->data;
       for (c_i = 0; c_i < aoffset; c_i++) {
-        r2->data[c_i] = y->data[(int)C->data[b_i + C->size[0] * c_i] - 1];
+        outliers_data[c_i] = y_data[(int)C_data[b_i + C->size[0] * c_i] - 1];
       }
-      mldivide(Xb, r2, b);
+      mldivide(Xb, r2, out->residuals);
     }
-    if ((!rtIsNaN(b->data[0])) && (!rtIsInf(b->data[0]))) {
+    if ((!rtIsNaN(out->residuals->data[0])) &&
+        (!rtIsInf(out->residuals->data[0]))) {
       /*  Residuals for all observations using b based on subset */
       /*  Squared residuals for all the observations */
       /*  Ordering of squared residuals */
       loop_ub = X->size[0] - 1;
       inner = X->size[1];
-      c_i = out->residuals->size[0];
-      out->residuals->size[0] = X->size[0];
-      emxEnsureCapacity_real_T(out->residuals, c_i);
+      c_i = r2->size[0];
+      r2->size[0] = X->size[0];
+      emxEnsureCapacity_real_T(r2, c_i);
+      outliers_data = r2->data;
       for (c_i = 0; c_i <= loop_ub; c_i++) {
-        out->residuals->data[c_i] = 0.0;
+        outliers_data[c_i] = 0.0;
       }
       for (k = 0; k < inner; k++) {
         aoffset = k * X->size[0];
         for (c_i = 0; c_i <= loop_ub; c_i++) {
-          out->residuals->data[c_i] += X->data[aoffset + c_i] * b->data[k];
+          outliers_data[c_i] += X_data[aoffset + c_i] * out->residuals->data[k];
         }
       }
       aoffset = y->size[0];
-      c_i = out->residuals->size[0];
-      out->residuals->size[0] = y->size[0];
-      emxEnsureCapacity_real_T(out->residuals, c_i);
-      for (c_i = 0; c_i < aoffset; c_i++) {
-        out->residuals->data[c_i] = y->data[c_i] - out->residuals->data[c_i];
-      }
-      c_i = r2->size[0];
-      r2->size[0] = out->residuals->size[0];
-      emxEnsureCapacity_real_T(r2, c_i);
-      aoffset = out->residuals->size[0];
-      for (k = 0; k < aoffset; k++) {
-        r2->data[k] = out->residuals->data[k] * out->residuals->data[k];
+      if (y->size[0] == r2->size[0]) {
+        c_i = r2->size[0];
+        r2->size[0] = y->size[0];
+        emxEnsureCapacity_real_T(r2, c_i);
+        outliers_data = r2->data;
+        for (c_i = 0; c_i < aoffset; c_i++) {
+          ncomb = y_data[c_i] - outliers_data[c_i];
+          outliers_data[c_i] = ncomb * ncomb;
+        }
+      } else {
+        jb_binary_expand_op(r2, y);
       }
       c_sort(r2);
+      outliers_data = r2->data;
       if (varargin_2 == 1.0) {
         /*  LMS */
-        ncomb = r2->data[(int)varargin_4 - 1];
+        ncomb = outliers_data[(int)varargin_4 - 1];
       } else {
         /*  STANDARD LTS without concentration steps */
         c_i = r2->size[0];
@@ -894,11 +903,11 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
         rmin = ncomb;
         /*  brob = \beta_lms or \beta_lts */
         c_i = out->beta->size[0];
-        out->beta->size[0] = b->size[0];
+        out->beta->size[0] = out->residuals->size[0];
         emxEnsureCapacity_real_T(out->beta, c_i);
-        aoffset = b->size[0];
+        aoffset = out->residuals->size[0];
         for (c_i = 0; c_i < aoffset; c_i++) {
-          out->beta->data[c_i] = b->data[c_i];
+          out->beta->data[c_i] = out->residuals->data[c_i];
         }
         /*  bs = units forming best subset according to lms or lts */
         aoffset = C->size[1];
@@ -907,7 +916,7 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
         out->bs->size[1] = C->size[1];
         emxEnsureCapacity_real_T(out->bs, c_i);
         for (c_i = 0; c_i < aoffset; c_i++) {
-          out->bs->data[c_i] = C->data[b_i + C->size[0] * c_i];
+          out->bs->data[c_i] = C_data[b_i + C->size[0] * c_i];
         }
       }
     } else {
@@ -917,7 +926,6 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
   emxFree_real_T(&b_C);
   emxFree_int32_T(&ib);
   emxFree_real_T(&C);
-  emxFree_real_T(&r2);
   emxFree_real_T(&Xb);
   emxFree_real_T(&outliers);
   if (varargin_2 == 1.0) {
@@ -939,15 +947,19 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
   for (k = 0; k < inner; k++) {
     aoffset = k * X->size[0];
     for (b_i = 0; b_i <= loop_ub; b_i++) {
-      out->residuals->data[b_i] += X->data[aoffset + b_i] * out->beta->data[k];
+      out->residuals->data[b_i] += X_data[aoffset + b_i] * out->beta->data[k];
     }
   }
-  i = out->residuals->size[0];
-  out->residuals->size[0] = y->size[0];
-  emxEnsureCapacity_real_T(out->residuals, i);
-  aoffset = y->size[0];
-  for (i = 0; i < aoffset; i++) {
-    out->residuals->data[i] = y->data[i] - out->residuals->data[i];
+  if (y->size[0] == out->residuals->size[0]) {
+    i = out->residuals->size[0];
+    out->residuals->size[0] = y->size[0];
+    emxEnsureCapacity_real_T(out->residuals, i);
+    aoffset = y->size[0];
+    for (i = 0; i < aoffset; i++) {
+      out->residuals->data[i] = y_data[i] - out->residuals->data[i];
+    }
+  } else {
+    kb_binary_expand_op(out, y);
   }
   /*  Consistency factor */
   if (lmsopt == 1) {
@@ -958,7 +970,7 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
      */
     /*  Leroy (1987), see p. 202 */
     /*  Apply the consistency factor to the preliminary scale estimate */
-    ncomb = sh0 * (1.4826 * (5.0 / (double)(X->size[0] - X->size[1]) + 1.0));
+    sh0 *= 1.4826 * (5.0 / (double)(X->size[0] - X->size[1]) + 1.0);
   } else {
     /*  Consistency factor based on the variance of the truncated normal
      * distribution. */
@@ -977,13 +989,12 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
     /*      factor1=(h/n)/(chi2cdf(a,1+2)); */
     /*  Apply the asymptotic consistency factor to the preliminary scale
      * estimate */
-    ncomb = sh0 *
-            (1.0 /
-             sqrt(1.0 - 2.0 * ((double)X->size[0] / varargin_4) * ncomb *
-                            (exp(-0.5 * ncomb * ncomb) / 2.5066282746310002)));
+    sh0 *=
+        1.0 / sqrt(1.0 - 2.0 * ((double)X->size[0] / varargin_4) * ncomb *
+                             (exp(-0.5 * ncomb * ncomb) / 2.5066282746310002));
     /*  Apply small sample correction factor of Pison et al. */
     if (varargin_4 < X->size[0]) {
-      ncomb *= sqrt(corfactorRAW(X->size[0], varargin_4 / (double)X->size[0]));
+      sh0 *= sqrt(b_corfactorRAW(X->size[0], varargin_4 / (double)X->size[0]));
     }
     /*          % Analysis of the small sample correction factor of Pison et al.
      */
@@ -997,23 +1008,27 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
     /*          disp(s0) */
   }
   emxInit_boolean_T(&weights, 1);
-  if (fabs(ncomb) > 1.0E-7) {
+  if (fabs(sh0) > 1.0E-7) {
     /*  Assign weight=1 to the h units which show the smallest h squared */
     /*  residuals */
-    i = b->size[0];
-    b->size[0] = out->residuals->size[0];
-    emxEnsureCapacity_real_T(b, i);
+    i = r2->size[0];
+    r2->size[0] = out->residuals->size[0];
+    emxEnsureCapacity_real_T(r2, i);
+    outliers_data = r2->data;
     aoffset = out->residuals->size[0];
-    for (k = 0; k < aoffset; k++) {
-      b->data[k] = out->residuals->data[k] * out->residuals->data[k];
+    for (i = 0; i < aoffset; i++) {
+      ncomb = out->residuals->data[i];
+      outliers_data[i] = ncomb * ncomb;
     }
-    sort(b, ia);
-    i = b->size[0];
-    b->size[0] = ia->size[0];
-    emxEnsureCapacity_real_T(b, i);
+    sort(r2, ia);
+    ia_data = ia->data;
+    i = r2->size[0];
+    r2->size[0] = ia->size[0];
+    emxEnsureCapacity_real_T(r2, i);
+    outliers_data = r2->data;
     aoffset = ia->size[0];
     for (i = 0; i < aoffset; i++) {
-      b->data[i] = ia->data[i];
+      outliers_data[i] = ia_data[i];
     }
     i = out->weights->size[0];
     out->weights->size[0] = X->size[0];
@@ -1028,12 +1043,13 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
     r->size[0] = 1;
     r->size[1] = (int)varargin_4;
     emxEnsureCapacity_int32_T(r, i);
+    ia_data = r->data;
     for (i = 0; i < aoffset; i++) {
-      r->data[i] = (int)b->data[i];
+      ia_data[i] = (int)outliers_data[i];
     }
     aoffset = r->size[1];
     for (i = 0; i < aoffset; i++) {
-      out->weights->data[r->data[i] - 1] = true;
+      out->weights->data[ia_data[i] - 1] = true;
     }
     emxFree_int32_T(&r);
     /*  Initialize structure out */
@@ -1044,7 +1060,7 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
     /*  m = factor which modifies the degrees of freedom used for computing */
     /*  the quantile. */
     /*  Confidence level which is used for outlier detection */
-    sh0 =
+    ncomb =
         tinv(0.9875, 2.0 * (double)X->size[0] / asvar(varargin_4, X->size[0]));
     /*  Observations with a standardized residual smaller than the quantile */
     /*  threshold have a weight equal to 1, else the weight is equal to 0. */
@@ -1053,21 +1069,23 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
     /*  Remark: sqrt(chi2inv(0.975,1)) = tinv(0.9875,\infinity) = quantile */
     aoffset = out->residuals->size[0];
     for (i = 0; i < aoffset; i++) {
-      out->residuals->data[i] /= ncomb;
+      out->residuals->data[i] /= sh0;
     }
     aoffset = out->residuals->size[0];
-    i = b->size[0];
-    b->size[0] = out->residuals->size[0];
-    emxEnsureCapacity_real_T(b, i);
+    i = r2->size[0];
+    r2->size[0] = out->residuals->size[0];
+    emxEnsureCapacity_real_T(r2, i);
+    outliers_data = r2->data;
     for (k = 0; k < aoffset; k++) {
-      b->data[k] = fabs(out->residuals->data[k]);
+      outliers_data[k] = fabs(out->residuals->data[k]);
     }
     i = weights->size[0];
-    weights->size[0] = b->size[0];
+    weights->size[0] = r2->size[0];
     emxEnsureCapacity_boolean_T(weights, i);
-    aoffset = b->size[0];
+    weights_data = weights->data;
+    aoffset = r2->size[0];
     for (i = 0; i < aoffset; i++) {
-      weights->data[i] = (b->data[i] <= sh0);
+      weights_data[i] = (outliers_data[i] <= ncomb);
     }
     /*  weights is a boolean vector. */
     /*     %% Reweighting part */
@@ -1079,18 +1097,20 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
     /*  There is an approximate perfect fit for the first h observations. */
     /*  We consider as outliers all units with residual greater than 1e-7. */
     aoffset = out->residuals->size[0];
-    i = b->size[0];
-    b->size[0] = out->residuals->size[0];
-    emxEnsureCapacity_real_T(b, i);
+    i = r2->size[0];
+    r2->size[0] = out->residuals->size[0];
+    emxEnsureCapacity_real_T(r2, i);
+    outliers_data = r2->data;
     for (k = 0; k < aoffset; k++) {
-      b->data[k] = fabs(out->residuals->data[k]);
+      outliers_data[k] = fabs(out->residuals->data[k]);
     }
     i = weights->size[0];
-    weights->size[0] = b->size[0];
+    weights->size[0] = r2->size[0];
     emxEnsureCapacity_boolean_T(weights, i);
-    aoffset = b->size[0];
+    weights_data = weights->data;
+    aoffset = r2->size[0];
     for (i = 0; i < aoffset; i++) {
-      weights->data[i] = (b->data[i] <= 1.0E-7);
+      weights_data[i] = (outliers_data[i] <= 1.0E-7);
     }
     /*  Store the weights */
     i = out->weights->size[0];
@@ -1098,26 +1118,26 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
     emxEnsureCapacity_boolean_T(out->weights, i);
     aoffset = weights->size[0];
     for (i = 0; i < aoffset; i++) {
-      out->weights->data[i] = weights->data[i];
+      out->weights->data[i] = weights_data[i];
     }
     out->rew = false;
     /*  s is set to 0 */
-    ncomb = 0.0;
+    sh0 = 0.0;
     /*  Standardized residuals are artificially set equal to raw residuals. */
   }
   emxFree_int32_T(&ia);
-  emxFree_real_T(&b);
+  emxFree_real_T(&r2);
   /*  Store quantities in the out structure */
   /*  Store robust estimate of beta coefficients */
   /*  Store robust estimate of s */
-  out->scale = ncomb;
+  out->scale = sh0;
   /*  Store standardized residuals */
   /*  Store units forming initial subset */
   /*  Store list of units declared as outliers */
   loop_ub = weights->size[0] - 1;
   aoffset = 0;
   for (b_i = 0; b_i <= loop_ub; b_i++) {
-    if (!weights->data[b_i]) {
+    if (!weights_data[b_i]) {
       aoffset++;
     }
   }
@@ -1125,10 +1145,11 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
   i = r1->size[0];
   r1->size[0] = aoffset;
   emxEnsureCapacity_int32_T(r1, i);
+  ia_data = r1->data;
   aoffset = 0;
   for (b_i = 0; b_i <= loop_ub; b_i++) {
-    if (!weights->data[b_i]) {
-      r1->data[aoffset] = b_i + 1;
+    if (!weights_data[b_i]) {
+      ia_data[aoffset] = b_i + 1;
       aoffset++;
     }
   }
@@ -1139,7 +1160,7 @@ void LXS(const emxArray_real_T *y, const emxArray_real_T *X, double varargin_2,
   emxEnsureCapacity_real_T(out->outliers, i);
   aoffset = r1->size[0];
   for (i = 0; i < aoffset; i++) {
-    out->outliers->data[i] = seq->data[r1->data[i] - 1];
+    out->outliers->data[i] = seq_data[ia_data[i] - 1];
   }
   emxFree_int32_T(&r1);
   emxFree_real_T(&seq);
@@ -1187,6 +1208,7 @@ double asvar(double h, double n)
   double a;
   double b_xk;
   double c2;
+  double d;
   double hn;
   double qalfa;
   double xk;
@@ -1197,7 +1219,11 @@ double asvar(double h, double n)
   hn = h / n;
   if ((hn >= 0.0) && (hn <= 1.0)) {
     if ((hn > 0.0) && (hn < 1.0)) {
-      qalfa = (gammaincinv(hn, 0.5)).re * 2.0;
+      d = 0.5;
+      gammaln(&d);
+      b_xk = 1.5;
+      gammaln(&b_xk);
+      qalfa = eml_gammaincinv(hn, 0.5, -0.69314718055994529, d, b_xk) * 2.0;
     } else if (hn == 0.0) {
       qalfa = 0.0;
     } else {
@@ -1213,7 +1239,9 @@ double asvar(double h, double n)
     if (xk < 0.0) {
       b_xk = 0.0;
     }
-    c2 = (gammainc(b_xk, 1.5)).re;
+    d = 2.5;
+    gammaln(&d);
+    c2 = (scalar_gammainc(b_xk, 1.5, 0.40546510810816438, d)).re;
   } else {
     c2 = rtNaN;
   }
@@ -1222,7 +1250,9 @@ double asvar(double h, double n)
     if (xk < 0.0) {
       xk = 0.0;
     }
-    b_xk = (gammainc(xk, 2.5)).re;
+    d = 3.5;
+    gammaln(&d);
+    b_xk = (scalar_gammainc(xk, 2.5, 0.91629073187415511, d)).re;
   } else {
     b_xk = rtNaN;
   }
@@ -1240,22 +1270,35 @@ void b_IRWLSreg(const emxArray_real_T *y, const emxArray_real_T *X,
   emxArray_int32_T *i_r2s;
   emxArray_int32_T *r;
   emxArray_real_T *b_X;
+  emxArray_real_T *b_y;
   emxArray_real_T *beta;
   emxArray_real_T *r2;
+  const double *X_data;
+  const double *initialbeta_data;
+  const double *y_data;
   double betadiff;
-  double c_y;
   double initialscale;
   double iter;
+  double varargin_1;
+  double *beta_data;
+  double *outIRWLS_betarw_data;
+  double *r2_data;
   int aoffset;
   int i;
   int inner;
   int k;
-  int loop_ub_tmp;
+  int loop_ub_tmp_tmp;
   int mc;
-  bool b_y;
+  int *i_r2s_data;
+  int *r1;
+  bool c_y;
   bool exitg1;
   bool exitg2;
-  emxInit_real_T(&beta, 1);
+  bool *x_data;
+  initialbeta_data = initialbeta->data;
+  X_data = X->data;
+  y_data = y->data;
+  emxInit_real_T(&r2, 1);
   /*  ------------------------------------------------------------------- */
   /*  subfunction IRWLSreg */
   /*  ------------------------------------------------------------------- */
@@ -1300,57 +1343,65 @@ void b_IRWLSreg(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  Ordering of squared residuals */
   mc = X->size[0] - 1;
   inner = X->size[1];
-  i = beta->size[0];
-  beta->size[0] = X->size[0];
-  emxEnsureCapacity_real_T(beta, i);
+  i = r2->size[0];
+  r2->size[0] = X->size[0];
+  emxEnsureCapacity_real_T(r2, i);
+  r2_data = r2->data;
   for (i = 0; i <= mc; i++) {
-    beta->data[i] = 0.0;
+    r2_data[i] = 0.0;
   }
   for (k = 0; k < inner; k++) {
     aoffset = k * X->size[0];
     for (i = 0; i <= mc; i++) {
-      beta->data[i] += X->data[aoffset + i] * initialbeta->data[k];
+      r2_data[i] += X_data[aoffset + i] * initialbeta_data[k];
     }
   }
-  emxInit_real_T(&r2, 1);
-  i = beta->size[0];
-  beta->size[0] = y->size[0];
-  emxEnsureCapacity_real_T(beta, i);
-  aoffset = y->size[0];
-  for (i = 0; i < aoffset; i++) {
-    beta->data[i] = y->data[i] - beta->data[i];
-  }
-  i = r2->size[0];
-  r2->size[0] = beta->size[0];
-  emxEnsureCapacity_real_T(r2, i);
-  aoffset = beta->size[0];
-  for (k = 0; k < aoffset; k++) {
-    r2->data[k] = beta->data[k] * beta->data[k];
+  if (y->size[0] == r2->size[0]) {
+    i = r2->size[0];
+    r2->size[0] = y->size[0];
+    emxEnsureCapacity_real_T(r2, i);
+    r2_data = r2->data;
+    aoffset = y->size[0];
+    for (i = 0; i < aoffset; i++) {
+      varargin_1 = y_data[i] - r2_data[i];
+      r2_data[i] = varargin_1 * varargin_1;
+    }
+  } else {
+    jb_binary_expand_op(r2, y);
   }
   emxInit_int32_T(&i_r2s, 1);
+  emxInit_real_T(&beta, 1);
   sort(r2, i_r2s);
-  loop_ub_tmp = (int)h;
-  i = r2->size[0];
-  r2->size[0] = (int)h;
-  emxEnsureCapacity_real_T(r2, i);
-  initialscale = blockedSummation(r2, (int)h);
+  i_r2s_data = i_r2s->data;
+  r2_data = r2->data;
+  loop_ub_tmp_tmp = (int)h;
+  i = beta->size[0];
+  beta->size[0] = (int)h;
+  emxEnsureCapacity_real_T(beta, i);
+  beta_data = beta->data;
+  for (i = 0; i < loop_ub_tmp_tmp; i++) {
+    beta_data[i] = r2_data[i];
+  }
+  initialscale = blockedSummation(beta, (int)h);
   /*  Initialize parameters for the refining steps loop */
   iter = 0.0;
   betadiff = 9999.0;
   i = beta->size[0];
   beta->size[0] = initialbeta->size[0];
   emxEnsureCapacity_real_T(beta, i);
+  beta_data = beta->data;
   aoffset = initialbeta->size[0];
   for (i = 0; i < aoffset; i++) {
-    beta->data[i] = initialbeta->data[i];
+    beta_data[i] = initialbeta_data[i];
   }
   *outIRWLS_numscale2rw = rtInf;
   i = outIRWLS_betarw->size[0];
   outIRWLS_betarw->size[0] = initialbeta->size[0];
   emxEnsureCapacity_real_T(outIRWLS_betarw, i);
+  outIRWLS_betarw_data = outIRWLS_betarw->data;
   aoffset = initialbeta->size[0];
   for (i = 0; i < aoffset; i++) {
-    outIRWLS_betarw->data[i] = initialbeta->data[i];
+    outIRWLS_betarw_data[i] = initialbeta_data[i];
   }
   /*  Initialization for MATLAB Ccoder */
   /*  update of weights moved at the end of the function */
@@ -1358,6 +1409,7 @@ void b_IRWLSreg(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  weights(i_r2s(1:h))=1; */
   emxInit_boolean_T(&x, 1);
   emxInit_real_T(&b_X, 2);
+  emxInit_real_T(&b_y, 1);
   exitg1 = false;
   while ((!exitg1) && ((betadiff > reftol) && (iter < refsteps))) {
     iter++;
@@ -1365,6 +1417,7 @@ void b_IRWLSreg(const emxArray_real_T *y, const emxArray_real_T *X,
     i = i_r2s->size[0];
     i_r2s->size[0] = (int)h;
     emxEnsureCapacity_int32_T(i_r2s, i);
+    i_r2s_data = i_r2s->data;
     /*  new coefficients based on units with smallest h squared */
     /*  residuals */
     aoffset = X->size[1];
@@ -1372,124 +1425,143 @@ void b_IRWLSreg(const emxArray_real_T *y, const emxArray_real_T *X,
     b_X->size[0] = (int)h;
     b_X->size[1] = X->size[1];
     emxEnsureCapacity_real_T(b_X, i);
+    r2_data = b_X->data;
     for (i = 0; i < aoffset; i++) {
-      for (mc = 0; mc < loop_ub_tmp; mc++) {
-        b_X->data[mc + b_X->size[0] * i] =
-            X->data[(i_r2s->data[mc] + X->size[0] * i) - 1];
+      for (mc = 0; mc < loop_ub_tmp_tmp; mc++) {
+        r2_data[mc + b_X->size[0] * i] =
+            X_data[(i_r2s_data[mc] + X->size[0] * i) - 1];
       }
     }
-    i = r2->size[0];
-    r2->size[0] = (int)h;
-    emxEnsureCapacity_real_T(r2, i);
-    for (i = 0; i < loop_ub_tmp; i++) {
-      r2->data[i] = y->data[i_r2s->data[i] - 1];
+    i = b_y->size[0];
+    b_y->size[0] = (int)h;
+    emxEnsureCapacity_real_T(b_y, i);
+    r2_data = b_y->data;
+    for (i = 0; i < loop_ub_tmp_tmp; i++) {
+      r2_data[i] = y_data[i_r2s_data[i] - 1];
     }
-    mldivide(b_X, r2, outIRWLS_betarw);
+    mldivide(b_X, b_y, outIRWLS_betarw);
+    outIRWLS_betarw_data = outIRWLS_betarw->data;
     /*  exit from the loop if the new beta has singular values. In such a */
     /*  case, any intermediate estimate is not reliable and we can just */
     /*  keep the initialbeta and initial scale. */
     i = x->size[0];
     x->size[0] = outIRWLS_betarw->size[0];
     emxEnsureCapacity_boolean_T(x, i);
+    x_data = x->data;
     aoffset = outIRWLS_betarw->size[0];
     for (i = 0; i < aoffset; i++) {
-      x->data[i] = rtIsNaN(outIRWLS_betarw->data[i]);
+      x_data[i] = rtIsNaN(outIRWLS_betarw_data[i]);
     }
-    b_y = false;
+    c_y = false;
     aoffset = 1;
     exitg2 = false;
     while ((!exitg2) && (aoffset <= x->size[0])) {
-      if (!x->data[aoffset - 1]) {
-        aoffset++;
-      } else {
-        b_y = true;
+      if (x_data[aoffset - 1]) {
+        c_y = true;
         exitg2 = true;
+      } else {
+        aoffset++;
       }
     }
-    if (b_y) {
+    if (c_y) {
       i = outIRWLS_betarw->size[0];
       outIRWLS_betarw->size[0] = initialbeta->size[0];
       emxEnsureCapacity_real_T(outIRWLS_betarw, i);
+      outIRWLS_betarw_data = outIRWLS_betarw->data;
       aoffset = initialbeta->size[0];
       for (i = 0; i < aoffset; i++) {
-        outIRWLS_betarw->data[i] = initialbeta->data[i];
+        outIRWLS_betarw_data[i] = initialbeta_data[i];
       }
       *outIRWLS_numscale2rw = initialscale;
       exitg1 = true;
     } else {
       /*  betadiff is linked to the tolerance (specified in scalar reftol) */
-      i = r2->size[0];
-      r2->size[0] = beta->size[0];
-      emxEnsureCapacity_real_T(r2, i);
-      aoffset = beta->size[0];
-      for (i = 0; i < aoffset; i++) {
-        r2->data[i] = beta->data[i] - outIRWLS_betarw->data[i];
+      if (beta->size[0] == outIRWLS_betarw->size[0]) {
+        i = r2->size[0];
+        r2->size[0] = beta->size[0];
+        emxEnsureCapacity_real_T(r2, i);
+        r2_data = r2->data;
+        aoffset = beta->size[0];
+        for (i = 0; i < aoffset; i++) {
+          r2_data[i] = beta_data[i] - outIRWLS_betarw_data[i];
+        }
+      } else {
+        minus(r2, beta, outIRWLS_betarw);
+        r2_data = r2->data;
       }
       if (r2->size[0] == 0) {
-        betadiff = 0.0;
+        varargin_1 = 0.0;
       } else {
-        betadiff = 0.0;
+        varargin_1 = 0.0;
         i = r2->size[0];
         for (k = 0; k < i; k++) {
-          betadiff += fabs(r2->data[k]);
+          varargin_1 += fabs(r2_data[k]);
         }
       }
       if (beta->size[0] == 0) {
-        c_y = 0.0;
+        betadiff = 0.0;
       } else {
-        c_y = 0.0;
+        betadiff = 0.0;
         i = beta->size[0];
         for (k = 0; k < i; k++) {
-          c_y += fabs(beta->data[k]);
+          betadiff += fabs(beta_data[k]);
         }
       }
-      betadiff /= c_y;
+      betadiff = varargin_1 / betadiff;
       /*  update residuals */
       /*  Ordering of all new squared residuals */
       mc = X->size[0] - 1;
       inner = X->size[1];
-      i = beta->size[0];
-      beta->size[0] = X->size[0];
-      emxEnsureCapacity_real_T(beta, i);
+      i = r2->size[0];
+      r2->size[0] = X->size[0];
+      emxEnsureCapacity_real_T(r2, i);
+      r2_data = r2->data;
       for (i = 0; i <= mc; i++) {
-        beta->data[i] = 0.0;
+        r2_data[i] = 0.0;
       }
       for (k = 0; k < inner; k++) {
         aoffset = k * X->size[0];
         for (i = 0; i <= mc; i++) {
-          beta->data[i] += X->data[aoffset + i] * outIRWLS_betarw->data[k];
+          r2_data[i] += X_data[aoffset + i] * outIRWLS_betarw_data[k];
         }
       }
-      i = beta->size[0];
-      beta->size[0] = y->size[0];
-      emxEnsureCapacity_real_T(beta, i);
-      aoffset = y->size[0];
-      for (i = 0; i < aoffset; i++) {
-        beta->data[i] = y->data[i] - beta->data[i];
-      }
-      i = r2->size[0];
-      r2->size[0] = beta->size[0];
-      emxEnsureCapacity_real_T(r2, i);
-      aoffset = beta->size[0];
-      for (k = 0; k < aoffset; k++) {
-        r2->data[k] = beta->data[k] * beta->data[k];
+      if (y->size[0] == r2->size[0]) {
+        i = r2->size[0];
+        r2->size[0] = y->size[0];
+        emxEnsureCapacity_real_T(r2, i);
+        r2_data = r2->data;
+        aoffset = y->size[0];
+        for (i = 0; i < aoffset; i++) {
+          varargin_1 = y_data[i] - r2_data[i];
+          r2_data[i] = varargin_1 * varargin_1;
+        }
+      } else {
+        jb_binary_expand_op(r2, y);
       }
       sort(r2, i_r2s);
+      i_r2s_data = i_r2s->data;
+      r2_data = r2->data;
       /*  sum of the smallest new squared residuals */
-      i = r2->size[0];
-      r2->size[0] = (int)h;
-      emxEnsureCapacity_real_T(r2, i);
-      *outIRWLS_numscale2rw = blockedSummation(r2, (int)h);
+      i = beta->size[0];
+      beta->size[0] = (int)h;
+      emxEnsureCapacity_real_T(beta, i);
+      beta_data = beta->data;
+      for (i = 0; i < loop_ub_tmp_tmp; i++) {
+        beta_data[i] = r2_data[i];
+      }
+      *outIRWLS_numscale2rw = blockedSummation(beta, (int)h);
       /*  update beta */
       i = beta->size[0];
       beta->size[0] = outIRWLS_betarw->size[0];
       emxEnsureCapacity_real_T(beta, i);
+      beta_data = beta->data;
       aoffset = outIRWLS_betarw->size[0];
       for (i = 0; i < aoffset; i++) {
-        beta->data[i] = outIRWLS_betarw->data[i];
+        beta_data[i] = outIRWLS_betarw_data[i];
       }
     }
   }
+  emxFree_real_T(&b_y);
   emxFree_real_T(&b_X);
   emxFree_boolean_T(&x);
   emxFree_real_T(&beta);
@@ -1504,22 +1576,24 @@ void b_IRWLSreg(const emxArray_real_T *y, const emxArray_real_T *X,
   i = outIRWLS_weights->size[0];
   outIRWLS_weights->size[0] = y->size[0];
   emxEnsureCapacity_real_T(outIRWLS_weights, i);
+  r2_data = outIRWLS_weights->data;
   aoffset = y->size[0];
   for (i = 0; i < aoffset; i++) {
-    outIRWLS_weights->data[i] = 0.0;
+    r2_data[i] = 0.0;
   }
   emxInit_int32_T(&r, 2);
   i = r->size[0] * r->size[1];
   r->size[0] = 1;
   r->size[1] = (int)h;
   emxEnsureCapacity_int32_T(r, i);
-  for (i = 0; i < loop_ub_tmp; i++) {
-    r->data[i] = i_r2s->data[i];
+  r1 = r->data;
+  for (i = 0; i < loop_ub_tmp_tmp; i++) {
+    r1[i] = i_r2s_data[i];
   }
   emxFree_int32_T(&i_r2s);
   aoffset = r->size[1];
   for (i = 0; i < aoffset; i++) {
-    outIRWLS_weights->data[r->data[i] - 1] = 1.0;
+    r2_data[r1[i] - 1] = 1.0;
   }
   emxFree_int32_T(&r);
 }
@@ -1537,7 +1611,6 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   emxArray_int32_T *r1;
   emxArray_real_T *C;
   emxArray_real_T *Xb;
-  emxArray_real_T *b;
   emxArray_real_T *b_C;
   emxArray_real_T *b_expl_temp;
   emxArray_real_T *c_X;
@@ -1549,12 +1622,18 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   emxArray_real_T *outliers;
   emxArray_real_T *r2;
   emxArray_real_T *seq;
+  const double *X_data;
+  const double *y_data;
   double ncomb;
   double nselected;
   double rmin;
   double sh0;
   double singsub;
   double tsampling;
+  double *C_data;
+  double *outFSM_outliers_data;
+  double *outliers_data;
+  double *seq_data;
   int critdef_size[2];
   int expl_temp_size[2];
   int aoffset;
@@ -1565,10 +1644,14 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   int k;
   int lmsopt;
   int loop_ub;
+  int *ia_data;
   char critdef_data[3];
   char expl_temp_data[3];
   bool bonflevout;
   bool guard1 = false;
+  bool *weights_data;
+  X_data = X->data;
+  y_data = y->data;
   /* LXS computes the Least Median of Squares (LMS) or Least Trimmed Squares
    * (LTS) estimators */
   /*  */
@@ -1593,7 +1676,6 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  */
   /*   Optional input arguments: */
   /*  */
-  /*  */
   /*          bdp :  breakdown point. Scalar. */
   /*                It measures the fraction of outliers */
   /*                the algorithm should */
@@ -1606,8 +1688,6 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                given. Please specify h or bdp not both. */
   /*                  Example - 'bdp',0.4 */
   /*                  Data Types - double */
-  /*  */
-  /*  */
   /*  */
   /*   bonflevoutX : remote units in the X space. Scalar or empty (default). */
   /*                If the design matrix X contains several high leverage units
@@ -1722,7 +1802,6 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                Example - 'nomes',true */
   /*                Data Types - logical */
   /*  */
-  /*  */
   /*         msg  : It controls whether to display or not messages on the
    * screen. Boolean. */
   /*                 If msg==true (default) messages are displayed */
@@ -1770,7 +1849,6 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                Example - 'yxsave',1 */
   /*                Data Types - double */
   /*  */
-  /*  */
   /*        plots : Plot on the screen. Scalar or structure. */
   /*                If plots = 1, a plot which shows the */
   /*                robust residuals against index number is shown on the */
@@ -1790,7 +1868,6 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                needs to be followed by their value. The order of the input
    */
   /*                arguments is of no importance. */
-  /*  */
   /*  */
   /*   Output: */
   /*  */
@@ -1849,7 +1926,6 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                        implies that the third extracted subsample is */
   /*                        formed by units 2, 5 and 20. */
   /*  */
-  /*  */
   /*  See also FSReda, Sreg, MMreg, LTSts */
   /*  */
   /*  References: */
@@ -1859,7 +1935,6 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('LXS')">Link to the help function</a> */
   /*  */
@@ -2069,7 +2144,6 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                specified for the */
   /*                caller function. */
   /*  */
-  /*  */
   /*   Optional input arguments: */
   /*  */
   /*  Output: */
@@ -2084,7 +2158,6 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                rows after listwise exclusion. */
   /*  p:            Number of columns of X (variables). Scalar. */
   /*                Number of parameters to be estimated. */
-  /*  */
   /*  */
   /*  More About: */
   /*  */
@@ -2106,8 +2179,6 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
-  /*  */
   /*  */
   /* $LastChangedDate::                      $: Date of the last commit */
   /*  */
@@ -2132,6 +2203,7 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  chkint = strmatch('intercept',chklist,'exact'); */
   /*  If nocheck=true, then skip checks on y and X */
   emxInit_real_T(&seq, 2);
+  seq_data = seq->data;
   if (X->size[0] < 1) {
     seq->size[0] = 1;
     seq->size[1] = 0;
@@ -2140,9 +2212,10 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
     seq->size[0] = 1;
     seq->size[1] = X->size[0];
     emxEnsureCapacity_real_T(seq, i);
+    seq_data = seq->data;
     aoffset = X->size[0] - 1;
     for (i = 0; i <= aoffset; i++) {
-      seq->data[i] = (double)i + 1.0;
+      seq_data[i] = (double)i + 1.0;
     }
   }
   /*  User options */
@@ -2199,6 +2272,7 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
    * displayed */
   /*  Extract in the rows of matrix C the indexes of all required subsets */
   subsets(sh0, X->size[0], X->size[1], ncomb, C, &nselected);
+  C_data = C->data;
   /*  Store the indices in varargout */
   /*  rmin will contain the minimum value of LMS (LTS) */
   rmin = rtInf;
@@ -2226,9 +2300,10 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
     c_X->size[0] = X->size[0];
     c_X->size[1] = X->size[1];
     emxEnsureCapacity_real_T(c_X, i);
+    outliers_data = c_X->data;
     aoffset = X->size[0] * X->size[1] - 1;
     for (i = 0; i <= aoffset; i++) {
-      c_X->data[i] = X->data[i];
+      outliers_data[i] = X_data[i];
     }
     emxInit_real_T(&outFSM_outliers, 2);
     emxInit_real_T(&expl_temp, 2);
@@ -2240,9 +2315,11 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
         floor((double)X->size[0] * 0.6), critdef_data, critdef_size,
         (double)X->size[1] + 1.0, outFSM_outliers, expl_temp, Xb, b_expl_temp,
         c_expl_temp, d_expl_temp, e_expl_temp, expl_temp_data, expl_temp_size);
+    outFSM_outliers_data = outFSM_outliers->data;
     i = outliers->size[0];
     outliers->size[0] = outFSM_outliers->size[0] * outFSM_outliers->size[1];
     emxEnsureCapacity_real_T(outliers, i);
+    outliers_data = outliers->data;
     aoffset = outFSM_outliers->size[0] * outFSM_outliers->size[1];
     emxFree_real_T(&c_X);
     emxFree_real_T(&e_expl_temp);
@@ -2251,7 +2328,7 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
     emxFree_real_T(&b_expl_temp);
     emxFree_real_T(&expl_temp);
     for (i = 0; i < aoffset; i++) {
-      outliers->data[i] = outFSM_outliers->data[i];
+      outliers_data[i] = outFSM_outliers_data[i];
     }
     emxFree_real_T(&outFSM_outliers);
   } else {
@@ -2259,7 +2336,8 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
     i = outliers->size[0];
     outliers->size[0] = 1;
     emxEnsureCapacity_real_T(outliers, i);
-    outliers->data[0] = 0.0;
+    outliers_data = outliers->data;
+    outliers_data[0] = 0.0;
   }
   /*  Computation of LMS (LTS) */
   tic(&ncomb, &sh0);
@@ -2272,7 +2350,6 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
     out->bs->data[i] = 0.0;
   }
   i = (int)nselected;
-  emxInit_real_T(&b, 1);
   emxInit_real_T(&r2, 1);
   emxInit_int32_T(&ia, 1);
   emxInit_int32_T(&ib, 1);
@@ -2289,15 +2366,16 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
       b_C->size[0] = 1;
       b_C->size[1] = C->size[1];
       emxEnsureCapacity_real_T(b_C, c_i);
+      outliers_data = b_C->data;
       for (c_i = 0; c_i < aoffset; c_i++) {
-        b_C->data[c_i] = C->data[b_i + C->size[0] * c_i];
+        outliers_data[c_i] = C_data[b_i + C->size[0] * c_i];
       }
-      c_do_vectors(b_C, outliers, b, ia, ib);
-      if (b->size[0] != 0) {
-        c_i = b->size[0];
-        b->size[0] = 1;
-        emxEnsureCapacity_real_T(b, c_i);
-        b->data[0] = rtNaN;
+      c_do_vectors(b_C, outliers, r2, ia, ib);
+      if (r2->size[0] != 0) {
+        c_i = out->residuals->size[0];
+        out->residuals->size[0] = 1;
+        emxEnsureCapacity_real_T(out->residuals, c_i);
+        out->residuals->data[0] = rtNaN;
       } else {
         guard1 = true;
       }
@@ -2311,12 +2389,11 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
       Xb->size[0] = C->size[1];
       Xb->size[1] = X->size[1];
       emxEnsureCapacity_real_T(Xb, c_i);
+      outliers_data = Xb->data;
       for (c_i = 0; c_i < loop_ub; c_i++) {
         for (inner = 0; inner < aoffset; inner++) {
-          Xb->data[inner + Xb->size[0] * c_i] =
-              X->data[((int)C->data[b_i + C->size[0] * inner] +
-                       X->size[0] * c_i) -
-                      1];
+          outliers_data[inner + Xb->size[0] * c_i] = X_data
+              [((int)C_data[b_i + C->size[0] * inner] + X->size[0] * c_i) - 1];
         }
       }
       /*  if rank(Xb)==p Warning: this instruction has been replaced by a */
@@ -2326,47 +2403,50 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
       c_i = r2->size[0];
       r2->size[0] = C->size[1];
       emxEnsureCapacity_real_T(r2, c_i);
+      outliers_data = r2->data;
       for (c_i = 0; c_i < aoffset; c_i++) {
-        r2->data[c_i] = y->data[(int)C->data[b_i + C->size[0] * c_i] - 1];
+        outliers_data[c_i] = y_data[(int)C_data[b_i + C->size[0] * c_i] - 1];
       }
-      mldivide(Xb, r2, b);
+      mldivide(Xb, r2, out->residuals);
     }
-    if ((!rtIsNaN(b->data[0])) && (!rtIsInf(b->data[0]))) {
+    if ((!rtIsNaN(out->residuals->data[0])) &&
+        (!rtIsInf(out->residuals->data[0]))) {
       /*  Residuals for all observations using b based on subset */
       /*  Squared residuals for all the observations */
       /*  Ordering of squared residuals */
       loop_ub = X->size[0] - 1;
       inner = X->size[1];
-      c_i = out->residuals->size[0];
-      out->residuals->size[0] = X->size[0];
-      emxEnsureCapacity_real_T(out->residuals, c_i);
+      c_i = r2->size[0];
+      r2->size[0] = X->size[0];
+      emxEnsureCapacity_real_T(r2, c_i);
+      outliers_data = r2->data;
       for (c_i = 0; c_i <= loop_ub; c_i++) {
-        out->residuals->data[c_i] = 0.0;
+        outliers_data[c_i] = 0.0;
       }
       for (k = 0; k < inner; k++) {
         aoffset = k * X->size[0];
         for (c_i = 0; c_i <= loop_ub; c_i++) {
-          out->residuals->data[c_i] += X->data[aoffset + c_i] * b->data[k];
+          outliers_data[c_i] += X_data[aoffset + c_i] * out->residuals->data[k];
         }
       }
       aoffset = y->size[0];
-      c_i = out->residuals->size[0];
-      out->residuals->size[0] = y->size[0];
-      emxEnsureCapacity_real_T(out->residuals, c_i);
-      for (c_i = 0; c_i < aoffset; c_i++) {
-        out->residuals->data[c_i] = y->data[c_i] - out->residuals->data[c_i];
-      }
-      c_i = r2->size[0];
-      r2->size[0] = out->residuals->size[0];
-      emxEnsureCapacity_real_T(r2, c_i);
-      aoffset = out->residuals->size[0];
-      for (k = 0; k < aoffset; k++) {
-        r2->data[k] = out->residuals->data[k] * out->residuals->data[k];
+      if (y->size[0] == r2->size[0]) {
+        c_i = r2->size[0];
+        r2->size[0] = y->size[0];
+        emxEnsureCapacity_real_T(r2, c_i);
+        outliers_data = r2->data;
+        for (c_i = 0; c_i < aoffset; c_i++) {
+          ncomb = y_data[c_i] - outliers_data[c_i];
+          outliers_data[c_i] = ncomb * ncomb;
+        }
+      } else {
+        jb_binary_expand_op(r2, y);
       }
       c_sort(r2);
+      outliers_data = r2->data;
       if (varargin_4 == 1.0) {
         /*  LMS */
-        ncomb = r2->data[(int)varargin_2 - 1];
+        ncomb = outliers_data[(int)varargin_2 - 1];
       } else {
         /*  STANDARD LTS without concentration steps */
         c_i = r2->size[0];
@@ -2379,11 +2459,11 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
         rmin = ncomb;
         /*  brob = \beta_lms or \beta_lts */
         c_i = out->beta->size[0];
-        out->beta->size[0] = b->size[0];
+        out->beta->size[0] = out->residuals->size[0];
         emxEnsureCapacity_real_T(out->beta, c_i);
-        aoffset = b->size[0];
+        aoffset = out->residuals->size[0];
         for (c_i = 0; c_i < aoffset; c_i++) {
-          out->beta->data[c_i] = b->data[c_i];
+          out->beta->data[c_i] = out->residuals->data[c_i];
         }
         /*  bs = units forming best subset according to lms or lts */
         aoffset = C->size[1];
@@ -2392,7 +2472,7 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
         out->bs->size[1] = C->size[1];
         emxEnsureCapacity_real_T(out->bs, c_i);
         for (c_i = 0; c_i < aoffset; c_i++) {
-          out->bs->data[c_i] = C->data[b_i + C->size[0] * c_i];
+          out->bs->data[c_i] = C_data[b_i + C->size[0] * c_i];
         }
       }
     } else {
@@ -2402,7 +2482,6 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   emxFree_real_T(&b_C);
   emxFree_int32_T(&ib);
   emxFree_real_T(&C);
-  emxFree_real_T(&r2);
   emxFree_real_T(&Xb);
   emxFree_real_T(&outliers);
   if (varargin_4 == 1.0) {
@@ -2424,15 +2503,19 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   for (k = 0; k < inner; k++) {
     aoffset = k * X->size[0];
     for (b_i = 0; b_i <= loop_ub; b_i++) {
-      out->residuals->data[b_i] += X->data[aoffset + b_i] * out->beta->data[k];
+      out->residuals->data[b_i] += X_data[aoffset + b_i] * out->beta->data[k];
     }
   }
-  i = out->residuals->size[0];
-  out->residuals->size[0] = y->size[0];
-  emxEnsureCapacity_real_T(out->residuals, i);
-  aoffset = y->size[0];
-  for (i = 0; i < aoffset; i++) {
-    out->residuals->data[i] = y->data[i] - out->residuals->data[i];
+  if (y->size[0] == out->residuals->size[0]) {
+    i = out->residuals->size[0];
+    out->residuals->size[0] = y->size[0];
+    emxEnsureCapacity_real_T(out->residuals, i);
+    aoffset = y->size[0];
+    for (i = 0; i < aoffset; i++) {
+      out->residuals->data[i] = y_data[i] - out->residuals->data[i];
+    }
+  } else {
+    kb_binary_expand_op(out, y);
   }
   /*  Consistency factor */
   if (lmsopt == 1) {
@@ -2443,7 +2526,7 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
      */
     /*  Leroy (1987), see p. 202 */
     /*  Apply the consistency factor to the preliminary scale estimate */
-    ncomb = sh0 * (1.4826 * (5.0 / (double)(X->size[0] - X->size[1]) + 1.0));
+    sh0 *= 1.4826 * (5.0 / (double)(X->size[0] - X->size[1]) + 1.0);
   } else {
     /*  Consistency factor based on the variance of the truncated normal
      * distribution. */
@@ -2462,13 +2545,12 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
     /*      factor1=(h/n)/(chi2cdf(a,1+2)); */
     /*  Apply the asymptotic consistency factor to the preliminary scale
      * estimate */
-    ncomb = sh0 *
-            (1.0 /
-             sqrt(1.0 - 2.0 * ((double)X->size[0] / varargin_2) * ncomb *
-                            (exp(-0.5 * ncomb * ncomb) / 2.5066282746310002)));
+    sh0 *=
+        1.0 / sqrt(1.0 - 2.0 * ((double)X->size[0] / varargin_2) * ncomb *
+                             (exp(-0.5 * ncomb * ncomb) / 2.5066282746310002));
     /*  Apply small sample correction factor of Pison et al. */
     if (varargin_2 < X->size[0]) {
-      ncomb *= sqrt(corfactorRAW(X->size[0], varargin_2 / (double)X->size[0]));
+      sh0 *= sqrt(b_corfactorRAW(X->size[0], varargin_2 / (double)X->size[0]));
     }
     /*          % Analysis of the small sample correction factor of Pison et al.
      */
@@ -2482,23 +2564,27 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
     /*          disp(s0) */
   }
   emxInit_boolean_T(&weights, 1);
-  if (fabs(ncomb) > 1.0E-7) {
+  if (fabs(sh0) > 1.0E-7) {
     /*  Assign weight=1 to the h units which show the smallest h squared */
     /*  residuals */
-    i = b->size[0];
-    b->size[0] = out->residuals->size[0];
-    emxEnsureCapacity_real_T(b, i);
+    i = r2->size[0];
+    r2->size[0] = out->residuals->size[0];
+    emxEnsureCapacity_real_T(r2, i);
+    outliers_data = r2->data;
     aoffset = out->residuals->size[0];
-    for (k = 0; k < aoffset; k++) {
-      b->data[k] = out->residuals->data[k] * out->residuals->data[k];
+    for (i = 0; i < aoffset; i++) {
+      ncomb = out->residuals->data[i];
+      outliers_data[i] = ncomb * ncomb;
     }
-    sort(b, ia);
-    i = b->size[0];
-    b->size[0] = ia->size[0];
-    emxEnsureCapacity_real_T(b, i);
+    sort(r2, ia);
+    ia_data = ia->data;
+    i = r2->size[0];
+    r2->size[0] = ia->size[0];
+    emxEnsureCapacity_real_T(r2, i);
+    outliers_data = r2->data;
     aoffset = ia->size[0];
     for (i = 0; i < aoffset; i++) {
-      b->data[i] = ia->data[i];
+      outliers_data[i] = ia_data[i];
     }
     i = out->weights->size[0];
     out->weights->size[0] = X->size[0];
@@ -2513,12 +2599,13 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
     r->size[0] = 1;
     r->size[1] = (int)varargin_2;
     emxEnsureCapacity_int32_T(r, i);
+    ia_data = r->data;
     for (i = 0; i < aoffset; i++) {
-      r->data[i] = (int)b->data[i];
+      ia_data[i] = (int)outliers_data[i];
     }
     aoffset = r->size[1];
     for (i = 0; i < aoffset; i++) {
-      out->weights->data[r->data[i] - 1] = true;
+      out->weights->data[ia_data[i] - 1] = true;
     }
     emxFree_int32_T(&r);
     /*  Initialize structure out */
@@ -2529,7 +2616,7 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
     /*  m = factor which modifies the degrees of freedom used for computing */
     /*  the quantile. */
     /*  Confidence level which is used for outlier detection */
-    sh0 =
+    ncomb =
         tinv(0.9875, 2.0 * (double)X->size[0] / asvar(varargin_2, X->size[0]));
     /*  Observations with a standardized residual smaller than the quantile */
     /*  threshold have a weight equal to 1, else the weight is equal to 0. */
@@ -2538,21 +2625,23 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
     /*  Remark: sqrt(chi2inv(0.975,1)) = tinv(0.9875,\infinity) = quantile */
     aoffset = out->residuals->size[0];
     for (i = 0; i < aoffset; i++) {
-      out->residuals->data[i] /= ncomb;
+      out->residuals->data[i] /= sh0;
     }
     aoffset = out->residuals->size[0];
-    i = b->size[0];
-    b->size[0] = out->residuals->size[0];
-    emxEnsureCapacity_real_T(b, i);
+    i = r2->size[0];
+    r2->size[0] = out->residuals->size[0];
+    emxEnsureCapacity_real_T(r2, i);
+    outliers_data = r2->data;
     for (k = 0; k < aoffset; k++) {
-      b->data[k] = fabs(out->residuals->data[k]);
+      outliers_data[k] = fabs(out->residuals->data[k]);
     }
     i = weights->size[0];
-    weights->size[0] = b->size[0];
+    weights->size[0] = r2->size[0];
     emxEnsureCapacity_boolean_T(weights, i);
-    aoffset = b->size[0];
+    weights_data = weights->data;
+    aoffset = r2->size[0];
     for (i = 0; i < aoffset; i++) {
-      weights->data[i] = (b->data[i] <= sh0);
+      weights_data[i] = (outliers_data[i] <= ncomb);
     }
     /*  weights is a boolean vector. */
     /*     %% Reweighting part */
@@ -2564,18 +2653,20 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
     /*  There is an approximate perfect fit for the first h observations. */
     /*  We consider as outliers all units with residual greater than 1e-7. */
     aoffset = out->residuals->size[0];
-    i = b->size[0];
-    b->size[0] = out->residuals->size[0];
-    emxEnsureCapacity_real_T(b, i);
+    i = r2->size[0];
+    r2->size[0] = out->residuals->size[0];
+    emxEnsureCapacity_real_T(r2, i);
+    outliers_data = r2->data;
     for (k = 0; k < aoffset; k++) {
-      b->data[k] = fabs(out->residuals->data[k]);
+      outliers_data[k] = fabs(out->residuals->data[k]);
     }
     i = weights->size[0];
-    weights->size[0] = b->size[0];
+    weights->size[0] = r2->size[0];
     emxEnsureCapacity_boolean_T(weights, i);
-    aoffset = b->size[0];
+    weights_data = weights->data;
+    aoffset = r2->size[0];
     for (i = 0; i < aoffset; i++) {
-      weights->data[i] = (b->data[i] <= 1.0E-7);
+      weights_data[i] = (outliers_data[i] <= 1.0E-7);
     }
     /*  Store the weights */
     i = out->weights->size[0];
@@ -2583,26 +2674,26 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
     emxEnsureCapacity_boolean_T(out->weights, i);
     aoffset = weights->size[0];
     for (i = 0; i < aoffset; i++) {
-      out->weights->data[i] = weights->data[i];
+      out->weights->data[i] = weights_data[i];
     }
     out->rew = false;
     /*  s is set to 0 */
-    ncomb = 0.0;
+    sh0 = 0.0;
     /*  Standardized residuals are artificially set equal to raw residuals. */
   }
   emxFree_int32_T(&ia);
-  emxFree_real_T(&b);
+  emxFree_real_T(&r2);
   /*  Store quantities in the out structure */
   /*  Store robust estimate of beta coefficients */
   /*  Store robust estimate of s */
-  out->scale = ncomb;
+  out->scale = sh0;
   /*  Store standardized residuals */
   /*  Store units forming initial subset */
   /*  Store list of units declared as outliers */
   loop_ub = weights->size[0] - 1;
   aoffset = 0;
   for (b_i = 0; b_i <= loop_ub; b_i++) {
-    if (!weights->data[b_i]) {
+    if (!weights_data[b_i]) {
       aoffset++;
     }
   }
@@ -2610,10 +2701,11 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   i = r1->size[0];
   r1->size[0] = aoffset;
   emxEnsureCapacity_int32_T(r1, i);
+  ia_data = r1->data;
   aoffset = 0;
   for (b_i = 0; b_i <= loop_ub; b_i++) {
-    if (!weights->data[b_i]) {
-      r1->data[aoffset] = b_i + 1;
+    if (!weights_data[b_i]) {
+      ia_data[aoffset] = b_i + 1;
       aoffset++;
     }
   }
@@ -2624,7 +2716,7 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   emxEnsureCapacity_real_T(out->outliers, i);
   aoffset = r1->size[0];
   for (i = 0; i < aoffset; i++) {
-    out->outliers->data[i] = seq->data[r1->data[i] - 1];
+    out->outliers->data[i] = seq_data[ia_data[i] - 1];
   }
   emxFree_int32_T(&r1);
   emxFree_real_T(&seq);
@@ -2667,6 +2759,31 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  Create plots */
 }
 
+double b_corfactorRAW(double n, double alpha)
+{
+  double fp_500_n;
+  double fp_875_n;
+  double rawcorfac;
+  /*  corfactorRAW function */
+  fp_500_n = 1.0 - 1.2995580068132053 / rt_powd_snf(n, 0.604756680630497);
+  fp_875_n = 1.0 - 0.70357229237653807 / rt_powd_snf(n, 1.01646567502486);
+  if ((0.5 <= alpha) && (alpha <= 0.875)) {
+    fp_500_n += (fp_875_n - fp_500_n) / 0.375 * (alpha - 0.5);
+  } else if ((0.875 < alpha) && (alpha < 1.0)) {
+    fp_500_n = fp_875_n + (1.0 - fp_875_n) / 0.125 * (alpha - 0.875);
+  } else {
+    fp_500_n = 1.0;
+    /*  Initialization necessary for MATLAB C-coder */
+  }
+  rawcorfac = 1.0 / fp_500_n;
+  if ((rawcorfac <= 0.0) || (rawcorfac > 50.0)) {
+    rawcorfac = 1.0;
+    /*  if msg==1 */
+    /*  end */
+  }
+  return rawcorfac;
+}
+
 void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
            const emxArray_real_T *varargin_2, double varargin_4,
            const emxArray_real_T *varargin_6, bool varargin_10,
@@ -2682,18 +2799,24 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   emxArray_real_T c_time_data;
   emxArray_real_T d_time_data;
   emxArray_real_T *Xb;
-  emxArray_real_T *b;
   emxArray_real_T *nsamp;
   emxArray_real_T *r2;
   emxArray_real_T *seq;
   double time_data[1000];
+  const double *X_data;
+  const double *varargin_2_data;
+  const double *varargin_6_data;
+  const double *y_data;
   double ncomb;
   double nselected;
-  double rrob;
+  double rmin;
   double singsub;
   double tsampling;
   double ttic_tv_nsec;
   double ttic_tv_sec;
+  double *Xb_data;
+  double *nsamp_data;
+  double *seq_data;
   int aoffset;
   int b_i;
   int c_i;
@@ -2703,8 +2826,14 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   int lmsopt;
   int loop_ub;
   int time_size;
+  int *iidx_data;
   bool b_y;
   bool exitg1;
+  bool *weights_data;
+  varargin_6_data = varargin_6->data;
+  varargin_2_data = varargin_2->data;
+  X_data = X->data;
+  y_data = y->data;
   /* LXS computes the Least Median of Squares (LMS) or Least Trimmed Squares
    * (LTS) estimators */
   /*  */
@@ -2729,7 +2858,6 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  */
   /*   Optional input arguments: */
   /*  */
-  /*  */
   /*          bdp :  breakdown point. Scalar. */
   /*                It measures the fraction of outliers */
   /*                the algorithm should */
@@ -2742,8 +2870,6 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                given. Please specify h or bdp not both. */
   /*                  Example - 'bdp',0.4 */
   /*                  Data Types - double */
-  /*  */
-  /*  */
   /*  */
   /*   bonflevoutX : remote units in the X space. Scalar or empty (default). */
   /*                If the design matrix X contains several high leverage units
@@ -2858,7 +2984,6 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                Example - 'nomes',true */
   /*                Data Types - logical */
   /*  */
-  /*  */
   /*         msg  : It controls whether to display or not messages on the
    * screen. Boolean. */
   /*                 If msg==true (default) messages are displayed */
@@ -2906,7 +3031,6 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                Example - 'yxsave',1 */
   /*                Data Types - double */
   /*  */
-  /*  */
   /*        plots : Plot on the screen. Scalar or structure. */
   /*                If plots = 1, a plot which shows the */
   /*                robust residuals against index number is shown on the */
@@ -2926,7 +3050,6 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                needs to be followed by their value. The order of the input
    */
   /*                arguments is of no importance. */
-  /*  */
   /*  */
   /*   Output: */
   /*  */
@@ -2985,7 +3108,6 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                        implies that the third extracted subsample is */
   /*                        formed by units 2, 5 and 20. */
   /*  */
-  /*  */
   /*  See also FSReda, Sreg, MMreg, LTSts */
   /*  */
   /*  References: */
@@ -2995,7 +3117,6 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('LXS')">Link to the help function</a> */
   /*  */
@@ -3205,7 +3326,6 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                specified for the */
   /*                caller function. */
   /*  */
-  /*  */
   /*   Optional input arguments: */
   /*  */
   /*  Output: */
@@ -3220,7 +3340,6 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                rows after listwise exclusion. */
   /*  p:            Number of columns of X (variables). Scalar. */
   /*                Number of parameters to be estimated. */
-  /*  */
   /*  */
   /*  More About: */
   /*  */
@@ -3242,8 +3361,6 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
-  /*  */
   /*  */
   /* $LastChangedDate::                      $: Date of the last commit */
   /*  */
@@ -3268,6 +3385,7 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  chkint = strmatch('intercept',chklist,'exact'); */
   /*  If nocheck=true, then skip checks on y and X */
   emxInit_real_T(&seq, 2);
+  seq_data = seq->data;
   if (X->size[0] < 1) {
     seq->size[0] = 1;
     seq->size[1] = 0;
@@ -3276,9 +3394,10 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
     seq->size[0] = 1;
     seq->size[1] = X->size[0];
     emxEnsureCapacity_real_T(seq, i);
+    seq_data = seq->data;
     aoffset = X->size[0] - 1;
     for (i = 0; i <= aoffset; i++) {
-      seq->data[i] = (double)i + 1.0;
+      seq_data[i] = (double)i + 1.0;
     }
   }
   /*  User options */
@@ -3307,9 +3426,10 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   nsamp->size[0] = varargin_6->size[0];
   nsamp->size[1] = varargin_6->size[1];
   emxEnsureCapacity_real_T(nsamp, i);
+  nsamp_data = nsamp->data;
   aoffset = varargin_6->size[0] * varargin_6->size[1];
   for (i = 0; i < aoffset; i++) {
-    nsamp->data[i] = varargin_6->data[i];
+    nsamp_data[i] = varargin_6_data[i];
   }
   /*  And check if the optional user parameters are reasonable. */
   /*  Check h and bdp */
@@ -3325,13 +3445,15 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
     x->size[0] = 1;
     x->size[1] = 1;
     emxEnsureCapacity_boolean_T(x, i);
-    x->data[0] = (varargin_6->data[0] > ncomb);
-    if (x->data[0]) {
+    weights_data = x->data;
+    weights_data[0] = (varargin_6_data[0] > ncomb);
+    if (weights_data[0]) {
       i = nsamp->size[0] * nsamp->size[1];
       nsamp->size[0] = 1;
       nsamp->size[1] = 1;
       emxEnsureCapacity_real_T(nsamp, i);
-      nsamp->data[0] = 0.0;
+      nsamp_data = nsamp->data;
+      nsamp_data[0] = 0.0;
     }
   } else {
     /*  in this case nsamp is the matrix of prextracted subsamples */
@@ -3345,10 +3467,11 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
     nsamp->size[0] = 1;
     nsamp->size[1] = 1;
     emxEnsureCapacity_real_T(nsamp, i);
-    nsamp->data[0] = fmin(3000.0, ncomb);
+    nsamp_data = nsamp->data;
+    nsamp_data[0] = fmin(3000.0, ncomb);
   }
   /*  if options.lms==1 then LMS, else LTS */
-  if (varargin_2->data[0] == 2.0) {
+  if (varargin_2_data[0] == 2.0) {
     /*  lms=struct; */
     /*  ij is a scalar used to ensure that the best first bestr non singular */
     /*  subsets are stored */
@@ -3360,16 +3483,17 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
     x->size[0] = 1;
     x->size[1] = varargin_2->size[1];
     emxEnsureCapacity_boolean_T(x, i);
+    weights_data = x->data;
     aoffset = varargin_2->size[1];
     for (i = 0; i < aoffset; i++) {
-      x->data[i] = (varargin_2->data[i] == 1.0);
+      weights_data[i] = (varargin_2_data[i] == 1.0);
     }
     b_y = (x->size[1] != 0);
     if (b_y) {
       k = 0;
       exitg1 = false;
       while ((!exitg1) && (k <= x->size[1] - 1)) {
-        if (!x->data[k]) {
+        if (!weights_data[k]) {
           b_y = false;
           exitg1 = true;
         } else {
@@ -3389,17 +3513,19 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
     Xb->size[0] = nsamp->size[0];
     Xb->size[1] = nsamp->size[1];
     emxEnsureCapacity_real_T(Xb, i);
+    Xb_data = Xb->data;
     aoffset = nsamp->size[0] * nsamp->size[1] - 1;
     for (i = 0; i <= aoffset; i++) {
-      Xb->data[i] = nsamp->data[i];
+      Xb_data[i] = nsamp_data[i];
     }
     c_subsets(Xb, X->size[0], X->size[1], ncomb, nsamp, &nselected);
+    nsamp_data = nsamp->data;
   } else {
     nselected = nsamp->size[0];
   }
   /*  Store the indices in varargout */
   /*  rmin will contain the minimum value of LMS (LTS) */
-  ncomb = rtInf;
+  rmin = rtInf;
   /*  initialise and start timer. */
   tsampling = ceil(fmin(nselected / 100.0, 1000.0));
   aoffset = (int)tsampling;
@@ -3419,7 +3545,6 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
     out->bs->data[i] = 0.0;
   }
   i = (int)nselected;
-  emxInit_real_T(&b, 1);
   emxInit_real_T(&r2, 1);
   for (b_i = 0; b_i < i; b_i++) {
     if (b_i + 1U <= (unsigned int)tsampling) {
@@ -3432,12 +3557,13 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
     Xb->size[0] = nsamp->size[1];
     Xb->size[1] = X->size[1];
     emxEnsureCapacity_real_T(Xb, c_i);
+    Xb_data = Xb->data;
     for (c_i = 0; c_i < loop_ub; c_i++) {
       for (inner = 0; inner < aoffset; inner++) {
-        Xb->data[inner + Xb->size[0] * c_i] =
-            X->data[((int)nsamp->data[b_i + nsamp->size[0] * inner] +
-                     X->size[0] * c_i) -
-                    1];
+        Xb_data[inner + Xb->size[0] * c_i] =
+            X_data[((int)nsamp_data[b_i + nsamp->size[0] * inner] +
+                    X->size[0] * c_i) -
+                   1];
       }
     }
     /*  if rank(Xb)==p Warning: this instruction has been replaced by a */
@@ -3447,57 +3573,61 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
     c_i = r2->size[0];
     r2->size[0] = nsamp->size[1];
     emxEnsureCapacity_real_T(r2, c_i);
+    Xb_data = r2->data;
     for (c_i = 0; c_i < aoffset; c_i++) {
-      r2->data[c_i] = y->data[(int)nsamp->data[b_i + nsamp->size[0] * c_i] - 1];
+      Xb_data[c_i] = y_data[(int)nsamp_data[b_i + nsamp->size[0] * c_i] - 1];
     }
-    mldivide(Xb, r2, b);
-    if ((!rtIsNaN(b->data[0])) && (!rtIsInf(b->data[0]))) {
+    mldivide(Xb, r2, out->residuals);
+    if ((!rtIsNaN(out->residuals->data[0])) &&
+        (!rtIsInf(out->residuals->data[0]))) {
       /*  Residuals for all observations using b based on subset */
       /*  Squared residuals for all the observations */
       /*  Ordering of squared residuals */
       loop_ub = X->size[0] - 1;
       inner = X->size[1];
-      c_i = out->residuals->size[0];
-      out->residuals->size[0] = X->size[0];
-      emxEnsureCapacity_real_T(out->residuals, c_i);
+      c_i = r2->size[0];
+      r2->size[0] = X->size[0];
+      emxEnsureCapacity_real_T(r2, c_i);
+      Xb_data = r2->data;
       for (c_i = 0; c_i <= loop_ub; c_i++) {
-        out->residuals->data[c_i] = 0.0;
+        Xb_data[c_i] = 0.0;
       }
       for (k = 0; k < inner; k++) {
         aoffset = k * X->size[0];
         for (c_i = 0; c_i <= loop_ub; c_i++) {
-          out->residuals->data[c_i] += X->data[aoffset + c_i] * b->data[k];
+          Xb_data[c_i] += X_data[aoffset + c_i] * out->residuals->data[k];
         }
       }
       aoffset = y->size[0];
-      c_i = out->residuals->size[0];
-      out->residuals->size[0] = y->size[0];
-      emxEnsureCapacity_real_T(out->residuals, c_i);
-      for (c_i = 0; c_i < aoffset; c_i++) {
-        out->residuals->data[c_i] = y->data[c_i] - out->residuals->data[c_i];
-      }
-      c_i = r2->size[0];
-      r2->size[0] = out->residuals->size[0];
-      emxEnsureCapacity_real_T(r2, c_i);
-      aoffset = out->residuals->size[0];
-      for (k = 0; k < aoffset; k++) {
-        r2->data[k] = out->residuals->data[k] * out->residuals->data[k];
+      if (y->size[0] == r2->size[0]) {
+        c_i = r2->size[0];
+        r2->size[0] = y->size[0];
+        emxEnsureCapacity_real_T(r2, c_i);
+        Xb_data = r2->data;
+        for (c_i = 0; c_i < aoffset; c_i++) {
+          ncomb = y_data[c_i] - Xb_data[c_i];
+          Xb_data[c_i] = ncomb * ncomb;
+        }
+      } else {
+        jb_binary_expand_op(r2, y);
       }
       c_sort(r2);
+      Xb_data = r2->data;
       c_i = x->size[0] * x->size[1];
       x->size[0] = 1;
       x->size[1] = varargin_2->size[1];
       emxEnsureCapacity_boolean_T(x, c_i);
+      weights_data = x->data;
       aoffset = varargin_2->size[1];
       for (c_i = 0; c_i < aoffset; c_i++) {
-        x->data[c_i] = (varargin_2->data[c_i] == 1.0);
+        weights_data[c_i] = (varargin_2_data[c_i] == 1.0);
       }
       b_y = (x->size[1] != 0);
       if (b_y) {
         k = 0;
         exitg1 = false;
         while ((!exitg1) && (k <= x->size[1] - 1)) {
-          if (!x->data[k]) {
+          if (!weights_data[k]) {
             b_y = false;
             exitg1 = true;
           } else {
@@ -3507,24 +3637,24 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
       }
       if (b_y) {
         /*  LMS */
-        rrob = r2->data[(int)varargin_4 - 1];
+        ncomb = Xb_data[(int)varargin_4 - 1];
       } else {
         /*  STANDARD LTS without concentration steps */
         c_i = r2->size[0];
         r2->size[0] = (int)varargin_4;
         emxEnsureCapacity_real_T(r2, c_i);
-        rrob = blockedSummation(r2, (int)varargin_4);
+        ncomb = blockedSummation(r2, (int)varargin_4);
       }
-      if (rrob < ncomb) {
+      if (ncomb < rmin) {
         /*  rmin = smallest ordered quantile or smallest truncated sum. */
-        ncomb = rrob;
+        rmin = ncomb;
         /*  brob = \beta_lms or \beta_lts */
         c_i = out->beta->size[0];
-        out->beta->size[0] = b->size[0];
+        out->beta->size[0] = out->residuals->size[0];
         emxEnsureCapacity_real_T(out->beta, c_i);
-        aoffset = b->size[0];
+        aoffset = out->residuals->size[0];
         for (c_i = 0; c_i < aoffset; c_i++) {
-          out->beta->data[c_i] = b->data[c_i];
+          out->beta->data[c_i] = out->residuals->data[c_i];
         }
         /*  bs = units forming best subset according to lms or lts */
         aoffset = nsamp->size[1];
@@ -3533,7 +3663,7 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
         out->bs->size[1] = nsamp->size[1];
         emxEnsureCapacity_real_T(out->bs, c_i);
         for (c_i = 0; c_i < aoffset; c_i++) {
-          out->bs->data[c_i] = nsamp->data[b_i + nsamp->size[0] * c_i];
+          out->bs->data[c_i] = nsamp_data[b_i + nsamp->size[0] * c_i];
         }
       }
     } else {
@@ -3579,23 +3709,23 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
       }
     }
   }
-  emxFree_real_T(&r2);
   emxFree_real_T(&Xb);
   emxFree_real_T(&nsamp);
   i = x->size[0] * x->size[1];
   x->size[0] = 1;
   x->size[1] = varargin_2->size[1];
   emxEnsureCapacity_boolean_T(x, i);
+  weights_data = x->data;
   aoffset = varargin_2->size[1];
   for (i = 0; i < aoffset; i++) {
-    x->data[i] = (varargin_2->data[i] == 1.0);
+    weights_data[i] = (varargin_2_data[i] == 1.0);
   }
   b_y = (x->size[1] != 0);
   if (b_y) {
     k = 0;
     exitg1 = false;
     while ((!exitg1) && (k <= x->size[1] - 1)) {
-      if (!x->data[k]) {
+      if (!weights_data[k]) {
         b_y = false;
         exitg1 = true;
       } else {
@@ -3606,10 +3736,10 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   emxFree_boolean_T(&x);
   if (b_y) {
     /*  Estimate of scale based on h-quantile of all squared residuals */
-    tsampling = sqrt(ncomb);
+    rmin = sqrt(rmin);
   } else {
     /*  Estimate of scale based on the first h squared smallest residuals */
-    tsampling = sqrt(ncomb / varargin_4);
+    rmin = sqrt(rmin / varargin_4);
   }
   /*  residuals = Raw residuals using robust estimate of beta */
   loop_ub = X->size[0] - 1;
@@ -3623,15 +3753,19 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   for (k = 0; k < inner; k++) {
     aoffset = k * X->size[0];
     for (b_i = 0; b_i <= loop_ub; b_i++) {
-      out->residuals->data[b_i] += X->data[aoffset + b_i] * out->beta->data[k];
+      out->residuals->data[b_i] += X_data[aoffset + b_i] * out->beta->data[k];
     }
   }
-  i = out->residuals->size[0];
-  out->residuals->size[0] = y->size[0];
-  emxEnsureCapacity_real_T(out->residuals, i);
-  aoffset = y->size[0];
-  for (i = 0; i < aoffset; i++) {
-    out->residuals->data[i] = y->data[i] - out->residuals->data[i];
+  if (y->size[0] == out->residuals->size[0]) {
+    i = out->residuals->size[0];
+    out->residuals->size[0] = y->size[0];
+    emxEnsureCapacity_real_T(out->residuals, i);
+    aoffset = y->size[0];
+    for (i = 0; i < aoffset; i++) {
+      out->residuals->data[i] = y_data[i] - out->residuals->data[i];
+    }
+  } else {
+    kb_binary_expand_op(out, y);
   }
   /*  Consistency factor */
   if (lmsopt == 1) {
@@ -3642,8 +3776,7 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
      */
     /*  Leroy (1987), see p. 202 */
     /*  Apply the consistency factor to the preliminary scale estimate */
-    ncomb =
-        tsampling * (1.4826 * (5.0 / (double)(X->size[0] - X->size[1]) + 1.0));
+    rmin *= 1.4826 * (5.0 / (double)(X->size[0] - X->size[1]) + 1.0);
   } else {
     /*  Consistency factor based on the variance of the truncated normal
      * distribution. */
@@ -3662,13 +3795,12 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
     /*      factor1=(h/n)/(chi2cdf(a,1+2)); */
     /*  Apply the asymptotic consistency factor to the preliminary scale
      * estimate */
-    ncomb = tsampling *
-            (1.0 /
-             sqrt(1.0 - 2.0 * ((double)X->size[0] / varargin_4) * ncomb *
-                            (exp(-0.5 * ncomb * ncomb) / 2.5066282746310002)));
+    rmin *=
+        1.0 / sqrt(1.0 - 2.0 * ((double)X->size[0] / varargin_4) * ncomb *
+                             (exp(-0.5 * ncomb * ncomb) / 2.5066282746310002));
     /*  Apply small sample correction factor of Pison et al. */
     if (varargin_4 < X->size[0]) {
-      ncomb *= sqrt(corfactorRAW(X->size[0], varargin_4 / (double)X->size[0]));
+      rmin *= sqrt(b_corfactorRAW(X->size[0], varargin_4 / (double)X->size[0]));
     }
     /*          % Analysis of the small sample correction factor of Pison et al.
      */
@@ -3682,24 +3814,28 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
     /*          disp(s0) */
   }
   emxInit_boolean_T(&weights, 1);
-  if (fabs(ncomb) > 1.0E-7) {
+  if (fabs(rmin) > 1.0E-7) {
     /*  Assign weight=1 to the h units which show the smallest h squared */
     /*  residuals */
-    i = b->size[0];
-    b->size[0] = out->residuals->size[0];
-    emxEnsureCapacity_real_T(b, i);
+    i = r2->size[0];
+    r2->size[0] = out->residuals->size[0];
+    emxEnsureCapacity_real_T(r2, i);
+    Xb_data = r2->data;
     aoffset = out->residuals->size[0];
-    for (k = 0; k < aoffset; k++) {
-      b->data[k] = out->residuals->data[k] * out->residuals->data[k];
+    for (i = 0; i < aoffset; i++) {
+      ncomb = out->residuals->data[i];
+      Xb_data[i] = ncomb * ncomb;
     }
     emxInit_int32_T(&iidx, 1);
-    sort(b, iidx);
-    i = b->size[0];
-    b->size[0] = iidx->size[0];
-    emxEnsureCapacity_real_T(b, i);
+    sort(r2, iidx);
+    iidx_data = iidx->data;
+    i = r2->size[0];
+    r2->size[0] = iidx->size[0];
+    emxEnsureCapacity_real_T(r2, i);
+    Xb_data = r2->data;
     aoffset = iidx->size[0];
     for (i = 0; i < aoffset; i++) {
-      b->data[i] = iidx->data[i];
+      Xb_data[i] = iidx_data[i];
     }
     emxFree_int32_T(&iidx);
     i = out->weights->size[0];
@@ -3715,12 +3851,13 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
     r->size[0] = 1;
     r->size[1] = (int)varargin_4;
     emxEnsureCapacity_int32_T(r, i);
+    iidx_data = r->data;
     for (i = 0; i < aoffset; i++) {
-      r->data[i] = (int)b->data[i];
+      iidx_data[i] = (int)Xb_data[i];
     }
     aoffset = r->size[1];
     for (i = 0; i < aoffset; i++) {
-      out->weights->data[r->data[i] - 1] = true;
+      out->weights->data[iidx_data[i] - 1] = true;
     }
     emxFree_int32_T(&r);
     /*  Initialize structure out */
@@ -3731,7 +3868,7 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
     /*  m = factor which modifies the degrees of freedom used for computing */
     /*  the quantile. */
     /*  Confidence level which is used for outlier detection */
-    tsampling =
+    ncomb =
         tinv(0.995, 2.0 * (double)X->size[0] / asvar(varargin_4, X->size[0]));
     /*  Observations with a standardized residual smaller than the quantile */
     /*  threshold have a weight equal to 1, else the weight is equal to 0. */
@@ -3740,21 +3877,23 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
     /*  Remark: sqrt(chi2inv(0.975,1)) = tinv(0.9875,\infinity) = quantile */
     aoffset = out->residuals->size[0];
     for (i = 0; i < aoffset; i++) {
-      out->residuals->data[i] /= ncomb;
+      out->residuals->data[i] /= rmin;
     }
     aoffset = out->residuals->size[0];
-    i = b->size[0];
-    b->size[0] = out->residuals->size[0];
-    emxEnsureCapacity_real_T(b, i);
+    i = r2->size[0];
+    r2->size[0] = out->residuals->size[0];
+    emxEnsureCapacity_real_T(r2, i);
+    Xb_data = r2->data;
     for (k = 0; k < aoffset; k++) {
-      b->data[k] = fabs(out->residuals->data[k]);
+      Xb_data[k] = fabs(out->residuals->data[k]);
     }
     i = weights->size[0];
-    weights->size[0] = b->size[0];
+    weights->size[0] = r2->size[0];
     emxEnsureCapacity_boolean_T(weights, i);
-    aoffset = b->size[0];
+    weights_data = weights->data;
+    aoffset = r2->size[0];
     for (i = 0; i < aoffset; i++) {
-      weights->data[i] = (b->data[i] <= tsampling);
+      weights_data[i] = (Xb_data[i] <= ncomb);
     }
     /*  weights is a boolean vector. */
     /*     %% Reweighting part */
@@ -3766,18 +3905,20 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
     /*  There is an approximate perfect fit for the first h observations. */
     /*  We consider as outliers all units with residual greater than 1e-7. */
     aoffset = out->residuals->size[0];
-    i = b->size[0];
-    b->size[0] = out->residuals->size[0];
-    emxEnsureCapacity_real_T(b, i);
+    i = r2->size[0];
+    r2->size[0] = out->residuals->size[0];
+    emxEnsureCapacity_real_T(r2, i);
+    Xb_data = r2->data;
     for (k = 0; k < aoffset; k++) {
-      b->data[k] = fabs(out->residuals->data[k]);
+      Xb_data[k] = fabs(out->residuals->data[k]);
     }
     i = weights->size[0];
-    weights->size[0] = b->size[0];
+    weights->size[0] = r2->size[0];
     emxEnsureCapacity_boolean_T(weights, i);
-    aoffset = b->size[0];
+    weights_data = weights->data;
+    aoffset = r2->size[0];
     for (i = 0; i < aoffset; i++) {
-      weights->data[i] = (b->data[i] <= 1.0E-7);
+      weights_data[i] = (Xb_data[i] <= 1.0E-7);
     }
     /*  Store the weights */
     i = out->weights->size[0];
@@ -3785,25 +3926,25 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
     emxEnsureCapacity_boolean_T(out->weights, i);
     aoffset = weights->size[0];
     for (i = 0; i < aoffset; i++) {
-      out->weights->data[i] = weights->data[i];
+      out->weights->data[i] = weights_data[i];
     }
     out->rew = false;
     /*  s is set to 0 */
-    ncomb = 0.0;
+    rmin = 0.0;
     /*  Standardized residuals are artificially set equal to raw residuals. */
   }
-  emxFree_real_T(&b);
+  emxFree_real_T(&r2);
   /*  Store quantities in the out structure */
   /*  Store robust estimate of beta coefficients */
   /*  Store robust estimate of s */
-  out->scale = ncomb;
+  out->scale = rmin;
   /*  Store standardized residuals */
   /*  Store units forming initial subset */
   /*  Store list of units declared as outliers */
   loop_ub = weights->size[0] - 1;
   aoffset = 0;
   for (b_i = 0; b_i <= loop_ub; b_i++) {
-    if (!weights->data[b_i]) {
+    if (!weights_data[b_i]) {
       aoffset++;
     }
   }
@@ -3811,10 +3952,11 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   i = r1->size[0];
   r1->size[0] = aoffset;
   emxEnsureCapacity_int32_T(r1, i);
+  iidx_data = r1->data;
   aoffset = 0;
   for (b_i = 0; b_i <= loop_ub; b_i++) {
-    if (!weights->data[b_i]) {
-      r1->data[aoffset] = b_i + 1;
+    if (!weights_data[b_i]) {
+      iidx_data[aoffset] = b_i + 1;
       aoffset++;
     }
   }
@@ -3825,7 +3967,7 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   emxEnsureCapacity_real_T(out->outliers, i);
   aoffset = r1->size[0];
   for (i = 0; i < aoffset; i++) {
-    out->outliers->data[i] = seq->data[r1->data[i] - 1];
+    out->outliers->data[i] = seq_data[iidx_data[i] - 1];
   }
   emxFree_int32_T(&r1);
   emxFree_real_T(&seq);
@@ -3860,53 +4002,86 @@ void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  Create plots */
 }
 
-double corfactorRAW(double n, double alpha)
+void he_binary_expand_op(emxArray_real_T *r2, const emxArray_boolean_T *weights)
 {
-  double fp_500_n;
-  double fp_875_n;
-  double rawcorfac;
-  /*  corfactorRAW function */
-  fp_500_n = 1.0 - 1.2995580068132053 / rt_powd_snf(n, 0.604756680630497);
-  fp_875_n = 1.0 - 0.70357229237653807 / rt_powd_snf(n, 1.01646567502486);
-  if ((0.5 <= alpha) && (alpha <= 0.875)) {
-    fp_500_n += (fp_875_n - fp_500_n) / 0.375 * (alpha - 0.5);
-  } else if ((0.875 < alpha) && (alpha < 1.0)) {
-    fp_500_n = fp_875_n + (1.0 - fp_875_n) / 0.125 * (alpha - 0.875);
+  emxArray_real_T *b_weights;
+  double *b_weights_data;
+  double *r2_data;
+  int i;
+  int loop_ub;
+  int stride_0_0;
+  int stride_1_0;
+  const bool *weights_data;
+  weights_data = weights->data;
+  r2_data = r2->data;
+  emxInit_real_T(&b_weights, 1);
+  i = b_weights->size[0];
+  if (r2->size[0] == 1) {
+    b_weights->size[0] = weights->size[0];
   } else {
-    fp_500_n = 1.0;
-    /*  Initialization necessary for MATLAB C-coder */
+    b_weights->size[0] = r2->size[0];
   }
-  rawcorfac = 1.0 / fp_500_n;
-  if ((rawcorfac <= 0.0) || (rawcorfac > 50.0)) {
-    rawcorfac = 1.0;
-    /*  if msg==1 */
-    /*  end */
+  emxEnsureCapacity_real_T(b_weights, i);
+  b_weights_data = b_weights->data;
+  stride_0_0 = (weights->size[0] != 1);
+  stride_1_0 = (r2->size[0] != 1);
+  if (r2->size[0] == 1) {
+    loop_ub = weights->size[0];
+  } else {
+    loop_ub = r2->size[0];
   }
-  return rawcorfac;
+  for (i = 0; i < loop_ub; i++) {
+    b_weights_data[i] =
+        (double)weights_data[i * stride_0_0] * r2_data[i * stride_1_0];
+  }
+  i = r2->size[0];
+  r2->size[0] = b_weights->size[0];
+  emxEnsureCapacity_real_T(r2, i);
+  r2_data = r2->data;
+  loop_ub = b_weights->size[0];
+  for (i = 0; i < loop_ub; i++) {
+    r2_data[i] = b_weights_data[i];
+  }
+  emxFree_real_T(&b_weights);
 }
 
-double corfactorREW(double n, double alpha)
+void kb_binary_expand_op(struct_LXS_T *out, const emxArray_real_T *y)
 {
-  double fp_500_n;
-  double fp_875_n;
-  double rewcorfac;
-  /*  corfactorREW function */
-  fp_500_n = 1.0 - 3.0373378792330419 / rt_powd_snf(n, 1.5182890270453);
-  fp_875_n = 1.0 - 0.51660962465337334 / rt_powd_snf(n, 0.88939595831888);
-  if ((0.5 <= alpha) && (alpha <= 0.875)) {
-    fp_500_n += (fp_875_n - fp_500_n) / 0.375 * (alpha - 0.5);
-  } else if ((0.875 < alpha) && (alpha < 1.0)) {
-    fp_500_n = fp_875_n + (1.0 - fp_875_n) / 0.125 * (alpha - 0.875);
+  emxArray_real_T *b_y;
+  const double *y_data;
+  double *b_y_data;
+  int i;
+  int loop_ub;
+  int stride_0_0;
+  int stride_1_0;
+  y_data = y->data;
+  emxInit_real_T(&b_y, 1);
+  i = b_y->size[0];
+  if (out->residuals->size[0] == 1) {
+    b_y->size[0] = y->size[0];
   } else {
-    fp_500_n = 1.0;
+    b_y->size[0] = out->residuals->size[0];
   }
-  rewcorfac = 1.0 / fp_500_n;
-  if ((rewcorfac <= 0.0) || (rewcorfac > 50.0)) {
-    rewcorfac = 1.0;
-    /*  if msg==1 */
-    /*  end */
+  emxEnsureCapacity_real_T(b_y, i);
+  b_y_data = b_y->data;
+  stride_0_0 = (y->size[0] != 1);
+  stride_1_0 = (out->residuals->size[0] != 1);
+  if (out->residuals->size[0] == 1) {
+    loop_ub = y->size[0];
+  } else {
+    loop_ub = out->residuals->size[0];
   }
-  return rewcorfac;
+  for (i = 0; i < loop_ub; i++) {
+    b_y_data[i] = y_data[i * stride_0_0] - out->residuals->data[i * stride_1_0];
+  }
+  i = out->residuals->size[0];
+  out->residuals->size[0] = b_y->size[0];
+  emxEnsureCapacity_real_T(out->residuals, i);
+  loop_ub = b_y->size[0];
+  for (i = 0; i < loop_ub; i++) {
+    out->residuals->data[i] = b_y_data[i];
+  }
+  emxFree_real_T(&b_y);
 }
 
 /* End of code generation (LXS.c) */

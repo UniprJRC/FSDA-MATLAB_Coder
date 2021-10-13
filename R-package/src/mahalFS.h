@@ -3,14 +3,14 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * xztgevc.h
+ * mahalFS.h
  *
- * Code generation for function 'xztgevc'
+ * Code generation for function 'mahalFS'
  *
  */
 
-#ifndef XZTGEVC_H
-#define XZTGEVC_H
+#ifndef MAHALFS_H
+#define MAHALFS_H
 
 /* Include files */
 #include "fsdaC_types.h"
@@ -23,11 +23,12 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void xztgevc(const emxArray_creal_T *A, emxArray_creal_T *V);
+void binary_expand_op(emxArray_real_T *bs, const emxArray_real_T *bb,
+                      const emxArray_real_T *Ytilde);
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-/* End of code generation (xztgevc.h) */
+/* End of code generation (mahalFS.h) */

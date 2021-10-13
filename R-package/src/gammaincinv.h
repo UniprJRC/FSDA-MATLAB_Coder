@@ -22,7 +22,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-creal_T gammaincinv(double x, double a);
+double eml_gammaincinv(double p, double a, double la, double lga, double lgap1);
 
 #ifdef __cplusplus
 }

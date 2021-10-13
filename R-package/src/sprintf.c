@@ -24,6 +24,7 @@ void b_sprintf(double varargin_1)
   emxArray_char_T *charStr;
   int i;
   int nbytes;
+  char *charStr_data;
   emxInit_char_T(&charStr, 2);
   nbytes = (int)snprintf(NULL, 0,
                          "Attention : init1 should be >= length of supplied "
@@ -34,7 +35,8 @@ void b_sprintf(double varargin_1)
   charStr->size[0] = 1;
   charStr->size[1] = nbytes;
   emxEnsureCapacity_char_T(charStr, i);
-  snprintf(&charStr->data[0], (size_t)nbytes,
+  charStr_data = charStr->data;
+  snprintf(&charStr_data[0], (size_t)nbytes,
            "Attention : init1 should be >= length of supplied subset. It is "
            "set equal to %.0f",
            varargin_1);
@@ -46,6 +48,7 @@ void c_sprintf(double varargin_1)
   emxArray_char_T *charStr;
   int i;
   int nbytes;
+  char *charStr_data;
   emxInit_char_T(&charStr, 2);
   nbytes =
       (int)snprintf(NULL, 0, "Value of S2 at step %.0f is zero, mdr is NaN",
@@ -55,7 +58,8 @@ void c_sprintf(double varargin_1)
   charStr->size[0] = 1;
   charStr->size[1] = nbytes;
   emxEnsureCapacity_char_T(charStr, i);
-  snprintf(&charStr->data[0], (size_t)nbytes,
+  charStr_data = charStr->data;
+  snprintf(&charStr_data[0], (size_t)nbytes,
            "Value of S2 at step %.0f is zero, mdr is NaN", varargin_1);
   emxFree_char_T(&charStr);
 }
@@ -64,12 +68,14 @@ void d_sprintf(double varargin_1, emxArray_char_T *str)
 {
   int i;
   int nbytes;
+  char *str_data;
   nbytes = snprintf(NULL, 0, "%.0f", varargin_1);
   i = str->size[0] * str->size[1];
   str->size[0] = 1;
   str->size[1] = nbytes + 1;
   emxEnsureCapacity_char_T(str, i);
-  snprintf(&str->data[0], (size_t)(nbytes + 1), "%.0f", varargin_1);
+  str_data = str->data;
+  snprintf(&str_data[0], (size_t)(nbytes + 1), "%.0f", varargin_1);
   i = str->size[0] * str->size[1];
   if (1 > nbytes) {
     str->size[1] = 0;

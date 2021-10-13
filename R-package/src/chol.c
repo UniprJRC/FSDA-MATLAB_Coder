@@ -22,6 +22,7 @@ int cholesky(emxArray_real_T *A)
 {
   double c;
   double ssq;
+  double *A_data;
   int b_info;
   int i;
   int i1;
@@ -36,6 +37,7 @@ int cholesky(emxArray_real_T *A)
   int n;
   int nmj;
   bool exitg1;
+  A_data = A->data;
   n = A->size[1];
   info = 0;
   if (A->size[1] != 0) {
@@ -49,13 +51,13 @@ int cholesky(emxArray_real_T *A)
       if (j >= 1) {
         for (nmj = 0; nmj < j; nmj++) {
           jmax = idxA1j + nmj;
-          ssq += A->data[jmax] * A->data[jmax];
+          ssq += A_data[jmax] * A_data[jmax];
         }
       }
-      ssq = A->data[idxAjj] - ssq;
+      ssq = A_data[idxAjj] - ssq;
       if (ssq > 0.0) {
         ssq = sqrt(ssq);
-        A->data[idxAjj] = ssq;
+        A_data[idxAjj] = ssq;
         if (j + 1 < n) {
           nmj = (n - j) - 2;
           ia0 = (idxA1j + n) + 1;
@@ -67,21 +69,21 @@ int cholesky(emxArray_real_T *A)
               c = 0.0;
               i1 = (iac + j) - 1;
               for (ia = iac; ia <= i1; ia++) {
-                c += A->data[ia - 1] * A->data[(idxA1j + ia) - iac];
+                c += A_data[ia - 1] * A_data[(idxA1j + ia) - iac];
               }
-              A->data[jmax] += -c;
+              A_data[jmax] += -c;
               jmax += n;
             }
           }
           ssq = 1.0 / ssq;
           i = (idxAjj + n * nmj) + 1;
           for (nmj = idxAjj + 1; n < 0 ? nmj >= i : nmj <= i; nmj += n) {
-            A->data[nmj - 1] *= ssq;
+            A_data[nmj - 1] *= ssq;
           }
         }
         j++;
       } else {
-        A->data[idxAjj] = ssq;
+        A_data[idxAjj] = ssq;
         b_info = j;
         exitg1 = true;
       }
@@ -95,7 +97,7 @@ int cholesky(emxArray_real_T *A)
     for (j = 0; j < jmax; j++) {
       i = j + 2;
       for (idxAjj = i; idxAjj <= jmax; idxAjj++) {
-        A->data[(idxAjj + A->size[0] * j) - 1] = 0.0;
+        A_data[(idxAjj + A->size[0] * j) - 1] = 0.0;
       }
     }
     if (1 > jmax) {
@@ -106,7 +108,7 @@ int cholesky(emxArray_real_T *A)
     }
     for (i = 0; i < jmax; i++) {
       for (i1 = 0; i1 < idxAjj; i1++) {
-        A->data[i1 + idxAjj * i] = A->data[i1 + A->size[0] * i];
+        A_data[i1 + idxAjj * i] = A_data[i1 + A->size[0] * i];
       }
     }
     i = A->size[0] * A->size[1];

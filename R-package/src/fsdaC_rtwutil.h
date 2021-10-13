@@ -22,6 +22,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
+extern int div_nde_s32_floor(int numerator, int denominator);
+
 extern double rt_hypotd_snf(double u0, double u1);
 
 extern double rt_powd_snf(double u0, double u1);

@@ -24,9 +24,11 @@ double b_xzlarfg(int n, double *alpha1, emxArray_real_T *x, int ix0)
   double beta1;
   double tau;
   double xnorm;
+  double *x_data;
   int i;
   int k;
   int knt;
+  x_data = x->data;
   tau = 0.0;
   if (n > 0) {
     xnorm = xnrm2(n - 1, x, ix0);
@@ -41,7 +43,7 @@ double b_xzlarfg(int n, double *alpha1, emxArray_real_T *x, int ix0)
         do {
           knt++;
           for (k = ix0; k <= i; k++) {
-            x->data[k - 1] *= 9.9792015476736E+291;
+            x_data[k - 1] *= 9.9792015476736E+291;
           }
           beta1 *= 9.9792015476736E+291;
           *alpha1 *= 9.9792015476736E+291;
@@ -53,7 +55,7 @@ double b_xzlarfg(int n, double *alpha1, emxArray_real_T *x, int ix0)
         tau = (beta1 - *alpha1) / beta1;
         xnorm = 1.0 / (*alpha1 - beta1);
         for (k = ix0; k <= i; k++) {
-          x->data[k - 1] *= xnorm;
+          x_data[k - 1] *= xnorm;
         }
         for (k = 0; k <= knt; k++) {
           beta1 *= 1.0020841800044864E-292;
@@ -64,7 +66,7 @@ double b_xzlarfg(int n, double *alpha1, emxArray_real_T *x, int ix0)
         xnorm = 1.0 / (*alpha1 - beta1);
         i = (ix0 + n) - 2;
         for (k = ix0; k <= i; k++) {
-          x->data[k - 1] *= xnorm;
+          x_data[k - 1] *= xnorm;
         }
         *alpha1 = beta1;
       }

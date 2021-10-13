@@ -23,7 +23,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-bool finDiffEvalAndChkErr(
+void finDiffEvalAndChkErr(
     const captured_var *c_obj_nonlin_workspace_fun_work,
     const captured_var *d_obj_nonlin_workspace_fun_work,
     const captured_var *e_obj_nonlin_workspace_fun_work,
@@ -38,8 +38,8 @@ bool finDiffEvalAndChkErr(
     const c_captured_var *n_obj_nonlin_workspace_fun_work,
     const emxArray_real_T *o_obj_nonlin_workspace_fun_work,
     const emxArray_real_T *p_obj_nonlin_workspace_fun_work, int obj_mEq,
-    double *fplus, emxArray_real_T *cEqPlus, int dim, double delta,
-    emxArray_real_T *xk);
+    emxArray_real_T *cEqPlus, int dim, double delta, emxArray_real_T *xk,
+    bool *evalOK, double *fplus);
 
 #ifdef __cplusplus
 }

@@ -19,6 +19,7 @@
 /* Function Definitions */
 double xzlanhs(const emxArray_creal_T *A, int ilo, int ihi)
 {
+  const creal_T *A_data;
   double absxk;
   double colscale;
   double colssq;
@@ -31,6 +32,7 @@ double xzlanhs(const emxArray_creal_T *A, int ilo, int ihi)
   int nm1;
   int row;
   int u0;
+  A_data = A->data;
   f = 0.0;
   if (ilo <= ihi) {
     scale = 3.3121686421112381E-170;
@@ -41,12 +43,12 @@ double xzlanhs(const emxArray_creal_T *A, int ilo, int ihi)
       colssq = 0.0;
       col = (ilo + j) - 1;
       u0 = j + 1;
-      if (u0 >= nm1) {
+      if (u0 > nm1) {
         u0 = nm1;
       }
       u0 += ilo;
       for (row = ilo; row <= u0; row++) {
-        absxk = fabs(A->data[(row + A->size[0] * col) - 1].re);
+        absxk = fabs(A_data[(row + A->size[0] * col) - 1].re);
         if (absxk > colscale) {
           t = colscale / absxk;
           colssq = colssq * t * t + 1.0;
@@ -55,7 +57,7 @@ double xzlanhs(const emxArray_creal_T *A, int ilo, int ihi)
           t = absxk / colscale;
           colssq += t * t;
         }
-        absxk = fabs(A->data[(row + A->size[0] * col) - 1].im);
+        absxk = fabs(A_data[(row + A->size[0] * col) - 1].im);
         if (absxk > colscale) {
           t = colscale / absxk;
           colssq = colssq * t * t + 1.0;

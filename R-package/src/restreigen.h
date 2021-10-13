@@ -23,14 +23,14 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void b_restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
-                  double userepmat);
-
-void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
+void b_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
                   double restr, double tol, double userepmat);
 
-void restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
-                double restr);
+void c_restreigen(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
+                  double restr);
+
+void restreigen(emxArray_real_T *eigenvalues, double restr, double tol,
+                double userepmat);
 
 #ifdef __cplusplus
 }

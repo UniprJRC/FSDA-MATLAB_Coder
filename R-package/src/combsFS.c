@@ -25,12 +25,14 @@ void combsFS(emxArray_real_T *v, double m, emxArray_real_T *P)
 {
   emxArray_real_T *b_P;
   emxArray_real_T *b_v;
-  emxArray_real_T *c_v;
   double bcn;
   double d;
   double fromRow;
   double s1;
   double s2;
+  double *P_data;
+  double *b_v_data;
+  double *v_data;
   int b_i;
   unsigned int b_j;
   int b_loop_ub;
@@ -48,6 +50,7 @@ void combsFS(emxArray_real_T *v, double m, emxArray_real_T *P)
   int j;
   int loop_ub;
   int n;
+  v_data = v->data;
   emxInit_real_T(&b_v, 2);
   /* combsFS is an iterative algorithm equivalent to the MATLAB combs.m */
   /*  */
@@ -99,9 +102,7 @@ void combsFS(emxArray_real_T *v, double m, emxArray_real_T *P)
   /*  */
   /* <a href="matlab: docsearchFS('combsFS')">Link to the help function</a> */
   /*  */
-  /*  */
   /* $LastChangedDate::                      $: Date of the last commit */
-  /*  */
   /*  */
   /*  Examples: */
   /* { */
@@ -114,17 +115,19 @@ void combsFS(emxArray_real_T *v, double m, emxArray_real_T *P)
   b_v->size[0] = 1;
   b_v->size[1] = v->size[1];
   emxEnsureCapacity_real_T(b_v, i);
+  b_v_data = b_v->data;
   loop_ub = v->size[1];
   for (i = 0; i < loop_ub; i++) {
-    b_v->data[i] = v->data[i];
+    b_v_data[i] = v_data[i];
   }
   i = v->size[0] * v->size[1];
   v->size[0] = 1;
   v->size[1] = b_v->size[1];
   emxEnsureCapacity_real_T(v, i);
+  v_data = v->data;
   loop_ub = b_v->size[1];
   for (i = 0; i < loop_ub; i++) {
-    v->data[i] = b_v->data[i];
+    v_data[i] = b_v_data[i];
   }
   /*  Make sure v is a row vector. */
   n = v->size[1];
@@ -135,28 +138,31 @@ void combsFS(emxArray_real_T *v, double m, emxArray_real_T *P)
       P->size[0] = 1;
       P->size[1] = v->size[1];
       emxEnsureCapacity_real_T(P, i);
+      P_data = P->data;
       loop_ub = v->size[1];
       for (i = 0; i < loop_ub; i++) {
-        P->data[i] = v->data[i];
+        P_data[i] = v_data[i];
       }
     } else if (m == 1.0) {
-      emxInit_real_T(&c_v, 1);
-      i = c_v->size[0];
-      c_v->size[0] = v->size[1];
-      emxEnsureCapacity_real_T(c_v, i);
+      emxInit_real_T(&b_P, 1);
+      i = b_P->size[0];
+      b_P->size[0] = v->size[1];
+      emxEnsureCapacity_real_T(b_P, i);
+      b_v_data = b_P->data;
       loop_ub = v->size[1];
       for (i = 0; i < loop_ub; i++) {
-        c_v->data[i] = v->data[i];
+        b_v_data[i] = v_data[i];
       }
       i = P->size[0] * P->size[1];
       P->size[0] = v->size[1];
       P->size[1] = 1;
       emxEnsureCapacity_real_T(P, i);
+      P_data = P->data;
       loop_ub = v->size[1];
       for (i = 0; i < loop_ub; i++) {
-        P->data[i] = c_v->data[i];
+        P_data[i] = b_v_data[i];
       }
-      emxFree_real_T(&c_v);
+      emxFree_real_T(&b_P);
     } else if (m == 0.0) {
       P->size[0] = 0;
       P->size[1] = 0;
@@ -168,11 +174,13 @@ void combsFS(emxArray_real_T *v, double m, emxArray_real_T *P)
       /*  initialise the matrix of all m-combinations */
       i = P->size[0] * P->size[1];
       P->size[0] = (int)bcn;
+      i1 = (int)m;
       P->size[1] = (int)m;
       emxEnsureCapacity_real_T(P, i);
+      P_data = P->data;
       loop_ub = (int)bcn * (int)m;
       for (i = 0; i < loop_ub; i++) {
-        P->data[i] = 0.0;
+        P_data[i] = 0.0;
       }
       /*  do once here n+1 (needed in the internal loop) */
       bcn = ((double)v->size[1] + 1.0) - m;
@@ -185,20 +193,21 @@ void combsFS(emxArray_real_T *v, double m, emxArray_real_T *P)
         b_v->size[0] = 1;
         b_v->size[1] = (int)floor((double)v->size[1] - m) + 1;
         emxEnsureCapacity_real_T(b_v, i);
+        b_v_data = b_v->data;
         loop_ub = (int)floor((double)v->size[1] - m);
         for (i = 0; i <= loop_ub; i++) {
-          b_v->data[i] = m + (double)i;
+          b_v_data[i] = m + (double)i;
         }
       } else {
         eml_float_colon(m, v->size[1], b_v);
+        b_v_data = b_v->data;
       }
       loop_ub = b_v->size[1];
       for (i = 0; i < loop_ub; i++) {
-        P->data[i + P->size[0] * ((int)m - 1)] = b_v->data[i];
+        P_data[i + P->size[0] * ((int)m - 1)] = b_v_data[i];
       }
-      i = (int)(((-1.0 - (m - 1.0)) + 1.0) / -1.0);
       emxInit_real_T(&b_P, 2);
-      for (b_i = 0; b_i < i; b_i++) {
+      for (b_i = 0; b_i <= i1 - 2; b_i++) {
         c_i = (int)m - b_i;
         /*  external loop over colums */
         s1 = bcn;
@@ -209,11 +218,11 @@ void combsFS(emxArray_real_T *v, double m, emxArray_real_T *P)
         } else {
           loop_ub = (int)bcn;
         }
-        for (i1 = 0; i1 < loop_ub; i1++) {
-          P->data[i1 + P->size[0] * (c_i - 2)] = c_i - 1;
+        for (i = 0; i < loop_ub; i++) {
+          P_data[i + P->size[0] * (c_i - 2)] = c_i - 1;
         }
-        i1 = ((c_i + n) - (int)m) - c_i;
-        if (0 <= i1 - 1) {
+        i = ((c_i + n) - (int)m) - c_i;
+        if (0 <= i - 1) {
           if (c_i > (int)m) {
             i2 = 0;
             i3 = 0;
@@ -226,7 +235,7 @@ void combsFS(emxArray_real_T *v, double m, emxArray_real_T *P)
           b_loop_ub = i3 - i2;
           d_i = c_i;
         }
-        for (j = 0; j < i1; j++) {
+        for (j = 0; j < i; j++) {
           b_j = (unsigned int)c_i + j;
           /*  internal loop */
           s1 = s1 * (((double)((unsigned int)n + c_i) - (double)b_j) - m) /
@@ -251,18 +260,19 @@ void combsFS(emxArray_real_T *v, double m, emxArray_real_T *P)
           b_P->size[0] = loop_ub;
           b_P->size[1] = i3 - i2;
           emxEnsureCapacity_real_T(b_P, i6);
+          b_v_data = b_P->data;
           for (i6 = 0; i6 < b_loop_ub; i6++) {
             for (c_loop_ub = 0; c_loop_ub < loop_ub; c_loop_ub++) {
-              b_P->data[c_loop_ub + b_P->size[0] * i6] =
-                  P->data[(i5 + c_loop_ub) + P->size[0] * (i2 + i6)];
+              b_v_data[c_loop_ub + b_P->size[0] * i6] =
+                  P_data[(i5 + c_loop_ub) + P->size[0] * (i2 + i6)];
             }
           }
           loop_ub = b_P->size[1];
           for (i5 = 0; i5 < loop_ub; i5++) {
             c_loop_ub = b_P->size[0];
             for (i6 = 0; i6 < c_loop_ub; i6++) {
-              P->data[((i7 + i6) + P->size[0] * ((i4 + i5) - 1)) - 1] =
-                  b_P->data[i6 + b_P->size[0] * i5];
+              P_data[((i7 + i6) + P->size[0] * ((i4 + i5) - 1)) - 1] =
+                  b_v_data[i6 + b_P->size[0] * i5];
             }
           }
           if (fromRow > bcn) {
@@ -274,7 +284,7 @@ void combsFS(emxArray_real_T *v, double m, emxArray_real_T *P)
           }
           loop_ub = i6 - i5;
           for (i6 = 0; i6 < loop_ub; i6++) {
-            P->data[(i5 + i6) + P->size[0] * (d_i - 2)] = b_j;
+            P_data[(i5 + i6) + P->size[0] * (d_i - 2)] = b_j;
           }
         }
       }
@@ -289,9 +299,10 @@ void combsFS(emxArray_real_T *v, double m, emxArray_real_T *P)
         b_v->size[0] = 1;
         b_v->size[1] = v->size[1];
         emxEnsureCapacity_real_T(b_v, i);
+        b_v_data = b_v->data;
         loop_ub = v->size[1] - 1;
         for (i = 0; i <= loop_ub; i++) {
-          b_v->data[i] = (double)i + 1.0;
+          b_v_data[i] = (double)i + 1.0;
         }
       }
       if (!isequal(v, b_v)) {
@@ -299,8 +310,8 @@ void combsFS(emxArray_real_T *v, double m, emxArray_real_T *P)
         for (i = 0; i < loop_ub; i++) {
           b_loop_ub = P->size[0];
           for (i1 = 0; i1 < b_loop_ub; i1++) {
-            P->data[i1 + P->size[0] * i] =
-                v->data[(int)P->data[i1 + P->size[0] * i] - 1];
+            P_data[i1 + P->size[0] * i] =
+                v_data[(int)P_data[i1 + P->size[0] * i] - 1];
           }
         }
       }

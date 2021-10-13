@@ -14,6 +14,7 @@
 #include "fsdaC_data.h"
 #include "fsdaC_rtwutil.h"
 #include "gammainc.h"
+#include "gammaln.h"
 #include "rt_nonfinite.h"
 #include <math.h>
 #include <string.h>
@@ -29,11 +30,12 @@ double TBbdp(double bdp)
   double c;
   double c2;
   double c2_tmp;
+  double d;
+  double d1;
   double re;
   /* TBbdp finds the constant c associated to the supplied breakdown point for
    * Tukey's biweight */
   /*  The constant is found through a dichotomic search */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('TBbdp')">Link to the help function</a> */
   /*  */
@@ -54,7 +56,6 @@ double TBbdp(double bdp)
    */
   /*          function associated to requested breakdown point */
   /*  */
-  /*  */
   /*  See also: OPTbdp, HYPbdp, HAbdp, PDbdp */
   /*  */
   /*  References: */
@@ -66,13 +67,10 @@ double TBbdp(double bdp)
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
   /*  */
-  /*  */
   /* <a href="matlab: docsearchFS('TBbdp')">Link to the help page for this
    * function</a> */
   /*  */
   /* $LastChangedDate::                      $: Date of the last commit */
-  /*  */
-  /*  */
   /*  */
   /*  Examples: */
   /*  */
@@ -102,9 +100,17 @@ double TBbdp(double bdp)
   /*   where \rho(c) for TBW is c^2/6 */
   Erho1 = 10.0;
   while (fabs(Erho1 - 1.0) > 1.0E-11) {
-    c2_tmp = c * c;
+    c2_tmp = rt_powd_snf(c, 2.0);
     c2 = c2_tmp / 2.0;
-    dc = gammainc(c2, 1.5);
+    Erho1 = 2.5;
+    gammaln(&Erho1);
+    br = 3.5;
+    gammaln(&br);
+    d = 4.5;
+    gammaln(&d);
+    d1 = 1.5;
+    gammaln(&d1);
+    dc = scalar_gammainc(c2, 1.5, 0.40546510810816438, Erho1);
     if (dc.im == 0.0) {
       re = dc.re / 2.0;
     } else if (dc.re == 0.0) {
@@ -112,7 +118,7 @@ double TBbdp(double bdp)
     } else {
       re = dc.re / 2.0;
     }
-    dc = gammainc(c2, 2.5);
+    dc = scalar_gammainc(c2, 2.5, 0.91629073187415511, br);
     Erho1 = 3.0 * dc.re;
     br = 4.0 * c2;
     if (3.0 * dc.im == 0.0) {
@@ -122,7 +128,7 @@ double TBbdp(double bdp)
     } else {
       b_re = Erho1 / br;
     }
-    dc = gammainc(c2, 3.5);
+    dc = scalar_gammainc(c2, 3.5, 1.2527629684953681, d);
     Erho1 = 15.0 * dc.re;
     br = 6.0 * rt_powd_snf(c, 4.0);
     if (15.0 * dc.im == 0.0) {
@@ -132,9 +138,11 @@ double TBbdp(double bdp)
     } else {
       Erho1 /= br;
     }
-    Erho1 = (((re - b_re) + Erho1) +
-             c2_tmp / 6.0 * (1.0 - (gammainc(c2, 0.5)).re)) /
-            c2_tmp * (6.0 / bdp);
+    Erho1 =
+        (((re - b_re) + Erho1) +
+         c2_tmp / 6.0 *
+             (1.0 - (scalar_gammainc(c2, 0.5, -0.69314718055994529, d1)).re)) /
+        c2_tmp * (6.0 / bdp);
     b_step /= 2.0;
     if (Erho1 > 1.0) {
       c += b_step;

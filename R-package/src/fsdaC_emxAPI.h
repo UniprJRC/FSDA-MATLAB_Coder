@@ -26,7 +26,7 @@ extern "C" {
 extern emxArray_boolean_T *emxCreateND_boolean_T(int numDimensions,
                                                  const int *size);
 
-extern emxArray_cell_wrap_43 *emxCreateND_cell_wrap_43(int numDimensions,
+extern emxArray_cell_wrap_45 *emxCreateND_cell_wrap_45(int numDimensions,
                                                        const int *size);
 
 extern emxArray_char_T *emxCreateND_char_T(int numDimensions, const int *size);
@@ -36,8 +36,8 @@ extern emxArray_real_T *emxCreateND_real_T(int numDimensions, const int *size);
 extern emxArray_boolean_T *
 emxCreateWrapperND_boolean_T(bool *data, int numDimensions, const int *size);
 
-extern emxArray_cell_wrap_43 *
-emxCreateWrapperND_cell_wrap_43(cell_wrap_43 *data, int numDimensions,
+extern emxArray_cell_wrap_45 *
+emxCreateWrapperND_cell_wrap_45(cell_wrap_45 *data, int numDimensions,
                                 const int *size);
 
 extern emxArray_char_T *emxCreateWrapperND_char_T(char *data, int numDimensions,
@@ -49,7 +49,7 @@ emxCreateWrapperND_real_T(double *data, int numDimensions, const int *size);
 extern emxArray_boolean_T *emxCreateWrapper_boolean_T(bool *data, int rows,
                                                       int cols);
 
-extern emxArray_cell_wrap_43 *emxCreateWrapper_cell_wrap_43(cell_wrap_43 *data,
+extern emxArray_cell_wrap_45 *emxCreateWrapper_cell_wrap_45(cell_wrap_45 *data,
                                                             int rows, int cols);
 
 extern emxArray_char_T *emxCreateWrapper_char_T(char *data, int rows, int cols);
@@ -59,7 +59,7 @@ extern emxArray_real_T *emxCreateWrapper_real_T(double *data, int rows,
 
 extern emxArray_boolean_T *emxCreate_boolean_T(int rows, int cols);
 
-extern emxArray_cell_wrap_43 *emxCreate_cell_wrap_43(int rows, int cols);
+extern emxArray_cell_wrap_45 *emxCreate_cell_wrap_45(int rows, int cols);
 
 extern emxArray_char_T *emxCreate_char_T(int rows, int cols);
 
@@ -67,7 +67,7 @@ extern emxArray_real_T *emxCreate_real_T(int rows, int cols);
 
 extern void emxDestroyArray_boolean_T(emxArray_boolean_T *emxArray);
 
-extern void emxDestroyArray_cell_wrap_43(emxArray_cell_wrap_43 *emxArray);
+extern void emxDestroyArray_cell_wrap_45(emxArray_cell_wrap_45 *emxArray);
 
 extern void emxDestroyArray_char_T(emxArray_char_T *emxArray);
 
@@ -96,6 +96,8 @@ extern void emxDestroy_struct_MMregeda_T(struct_MMregeda_T emxArray);
 extern void emxDestroy_struct_Sreg_T(struct_Sreg_T emxArray);
 
 extern void emxDestroy_struct_Sregeda_T(struct_Sregeda_T emxArray);
+
+extern void emxDestroy_struct_addt_T(struct_addt_T emxArray);
 
 extern void emxDestroy_struct_tclust_T(struct_tclust_T emxArray);
 
@@ -126,6 +128,8 @@ extern void emxInit_struct_MMregeda_T(struct_MMregeda_T *pStruct);
 extern void emxInit_struct_Sreg_T(struct_Sreg_T *pStruct);
 
 extern void emxInit_struct_Sregeda_T(struct_Sregeda_T *pStruct);
+
+extern void emxInit_struct_addt_T(struct_addt_T *pStruct);
 
 extern void emxInit_struct_tclust_T(struct_tclust_T *pStruct);
 

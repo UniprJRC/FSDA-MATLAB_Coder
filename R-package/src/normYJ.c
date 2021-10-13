@@ -23,13 +23,19 @@ void normYJ(const emxArray_real_T *Y, double la, emxArray_real_T *Ytra)
 {
   emxArray_int32_T *r;
   emxArray_int32_T *r1;
-  emxArray_int32_T *r2;
-  emxArray_int32_T *r3;
-  emxArray_real_T *a;
+  emxArray_int32_T *r4;
+  emxArray_int32_T *r5;
   emxArray_real_T *x;
+  const double *Y_data;
+  double varargin_1;
+  double *Ytra_data;
+  double *x_data;
   int end;
   int i;
   int nx;
+  int *r2;
+  int *r3;
+  Y_data = Y->data;
   /* normYJ computes (normalized) Yeo-Johnson transformation */
   /*  */
   /* <a href="matlab: docsearchFS('normYJ')">Link to the help function</a> */
@@ -57,7 +63,6 @@ void normYJ(const emxArray_real_T *Y, double la, emxArray_real_T *Ytra)
   /*                parameters for the k ColtoTra. */
   /*                 Data Types - single|double */
   /*  */
-  /*  */
   /*  Optional input arguments: */
   /*  */
   /*   inverse :    Inverse transformation. Logical. If inverse is true, the */
@@ -83,7 +88,6 @@ void normYJ(const emxArray_real_T *Y, double la, emxArray_real_T *Ytra)
   /*              of y+1 for nonnegative values, and of |y|+1 with parameter */
   /*              2-lambda for y negative. */
   /*  */
-  /*  */
   /*  See also normBoxCox, normYJpn */
   /*  */
   /*  References: */
@@ -92,11 +96,8 @@ void normYJ(const emxArray_real_T *Y, double la, emxArray_real_T *Ytra)
    */
   /*  improve normality or symmetry, "Biometrika", Vol. 87, pp. 954-959. */
   /*  */
-  /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('normYJ')">Link to the help function</a> */
   /*  */
@@ -167,234 +168,233 @@ void normYJ(const emxArray_real_T *Y, double la, emxArray_real_T *Ytra)
   i = Ytra->size[0];
   Ytra->size[0] = Y->size[0];
   emxEnsureCapacity_real_T(Ytra, i);
+  Ytra_data = Ytra->data;
   nx = Y->size[0];
   for (i = 0; i < nx; i++) {
-    Ytra->data[i] = Y->data[i];
+    Ytra_data[i] = Y_data[i];
   }
   /*  YJ transformation is the Box-Cox transformation of */
   /*  y+1 for nonnegative values of y */
   emxInit_int32_T(&r, 1);
   emxInit_int32_T(&r1, 1);
   emxInit_real_T(&x, 1);
-  emxInit_real_T(&a, 1);
   if (la != 0.0) {
     end = Y->size[0] - 1;
     nx = 0;
     for (i = 0; i <= end; i++) {
-      if (Y->data[i] >= 0.0) {
+      if (Y_data[i] >= 0.0) {
         nx++;
       }
     }
     i = r->size[0];
     r->size[0] = nx;
     emxEnsureCapacity_int32_T(r, i);
+    r2 = r->data;
     nx = 0;
     for (i = 0; i <= end; i++) {
-      if (Y->data[i] >= 0.0) {
-        r->data[nx] = i + 1;
+      if (Y_data[i] >= 0.0) {
+        r2[nx] = i + 1;
         nx++;
       }
     }
     end = Y->size[0] - 1;
     nx = 0;
     for (i = 0; i <= end; i++) {
-      if (Y->data[i] >= 0.0) {
+      if (Y_data[i] >= 0.0) {
         nx++;
       }
     }
     i = r1->size[0];
     r1->size[0] = nx;
     emxEnsureCapacity_int32_T(r1, i);
+    r3 = r1->data;
     nx = 0;
     for (i = 0; i <= end; i++) {
-      if (Y->data[i] >= 0.0) {
-        r1->data[nx] = i + 1;
-        nx++;
-      }
-    }
-    i = a->size[0];
-    a->size[0] = r->size[0];
-    emxEnsureCapacity_real_T(a, i);
-    nx = r->size[0];
-    for (i = 0; i < nx; i++) {
-      a->data[i] = Y->data[r->data[i] - 1] + 1.0;
-    }
-    i = x->size[0];
-    x->size[0] = a->size[0];
-    emxEnsureCapacity_real_T(x, i);
-    nx = a->size[0];
-    for (end = 0; end < nx; end++) {
-      x->data[end] = rt_powd_snf(a->data[end], la);
-    }
-    nx = x->size[0];
-    for (i = 0; i < nx; i++) {
-      Ytra->data[r1->data[i] - 1] = (x->data[i] - 1.0) / la;
-    }
-  } else {
-    end = Y->size[0] - 1;
-    nx = 0;
-    for (i = 0; i <= end; i++) {
-      if (Y->data[i] >= 0.0) {
-        nx++;
-      }
-    }
-    i = r->size[0];
-    r->size[0] = nx;
-    emxEnsureCapacity_int32_T(r, i);
-    nx = 0;
-    for (i = 0; i <= end; i++) {
-      if (Y->data[i] >= 0.0) {
-        r->data[nx] = i + 1;
-        nx++;
-      }
-    }
-    end = Y->size[0] - 1;
-    nx = 0;
-    for (i = 0; i <= end; i++) {
-      if (Y->data[i] >= 0.0) {
-        nx++;
-      }
-    }
-    i = r1->size[0];
-    r1->size[0] = nx;
-    emxEnsureCapacity_int32_T(r1, i);
-    nx = 0;
-    for (i = 0; i <= end; i++) {
-      if (Y->data[i] >= 0.0) {
-        r1->data[nx] = i + 1;
+      if (Y_data[i] >= 0.0) {
+        r3[nx] = i + 1;
         nx++;
       }
     }
     i = x->size[0];
     x->size[0] = r->size[0];
     emxEnsureCapacity_real_T(x, i);
+    x_data = x->data;
     nx = r->size[0];
     for (i = 0; i < nx; i++) {
-      x->data[i] = Y->data[r->data[i] - 1] + 1.0;
+      varargin_1 = Y_data[r2[i] - 1] + 1.0;
+      x_data[i] = rt_powd_snf(varargin_1, la);
+    }
+    nx = x->size[0];
+    for (i = 0; i < nx; i++) {
+      Ytra_data[r3[i] - 1] = (x_data[i] - 1.0) / la;
+    }
+  } else {
+    end = Y->size[0] - 1;
+    nx = 0;
+    for (i = 0; i <= end; i++) {
+      if (Y_data[i] >= 0.0) {
+        nx++;
+      }
+    }
+    i = r->size[0];
+    r->size[0] = nx;
+    emxEnsureCapacity_int32_T(r, i);
+    r2 = r->data;
+    nx = 0;
+    for (i = 0; i <= end; i++) {
+      if (Y_data[i] >= 0.0) {
+        r2[nx] = i + 1;
+        nx++;
+      }
+    }
+    end = Y->size[0] - 1;
+    nx = 0;
+    for (i = 0; i <= end; i++) {
+      if (Y_data[i] >= 0.0) {
+        nx++;
+      }
+    }
+    i = r1->size[0];
+    r1->size[0] = nx;
+    emxEnsureCapacity_int32_T(r1, i);
+    r3 = r1->data;
+    nx = 0;
+    for (i = 0; i <= end; i++) {
+      if (Y_data[i] >= 0.0) {
+        r3[nx] = i + 1;
+        nx++;
+      }
+    }
+    i = x->size[0];
+    x->size[0] = r->size[0];
+    emxEnsureCapacity_real_T(x, i);
+    x_data = x->data;
+    nx = r->size[0];
+    for (i = 0; i < nx; i++) {
+      x_data[i] = Y_data[r2[i] - 1] + 1.0;
     }
     nx = x->size[0];
     for (end = 0; end < nx; end++) {
-      x->data[end] = log(x->data[end]);
+      x_data[end] = log(x_data[end]);
     }
     nx = x->size[0];
     for (i = 0; i < nx; i++) {
-      Ytra->data[r1->data[i] - 1] = x->data[i];
+      Ytra_data[r3[i] - 1] = x_data[i];
     }
   }
   emxFree_int32_T(&r1);
   emxFree_int32_T(&r);
   /*  YJ transformation is the Box-Cox transformation of */
   /*   |y|+1 with parameter 2-lambda for y negative. */
-  emxInit_int32_T(&r2, 1);
-  emxInit_int32_T(&r3, 1);
+  emxInit_int32_T(&r4, 1);
+  emxInit_int32_T(&r5, 1);
   if (2.0 - la != 0.0) {
     end = Y->size[0] - 1;
     nx = 0;
     for (i = 0; i <= end; i++) {
-      if (!(Y->data[i] >= 0.0)) {
+      if (!(Y_data[i] >= 0.0)) {
         nx++;
       }
     }
-    i = r2->size[0];
-    r2->size[0] = nx;
-    emxEnsureCapacity_int32_T(r2, i);
+    i = r4->size[0];
+    r4->size[0] = nx;
+    emxEnsureCapacity_int32_T(r4, i);
+    r2 = r4->data;
     nx = 0;
     for (i = 0; i <= end; i++) {
-      if (!(Y->data[i] >= 0.0)) {
-        r2->data[nx] = i + 1;
+      if (!(Y_data[i] >= 0.0)) {
+        r2[nx] = i + 1;
         nx++;
       }
     }
     end = Y->size[0] - 1;
     nx = 0;
     for (i = 0; i <= end; i++) {
-      if (!(Y->data[i] >= 0.0)) {
+      if (!(Y_data[i] >= 0.0)) {
         nx++;
       }
     }
-    i = r3->size[0];
-    r3->size[0] = nx;
-    emxEnsureCapacity_int32_T(r3, i);
+    i = r5->size[0];
+    r5->size[0] = nx;
+    emxEnsureCapacity_int32_T(r5, i);
+    r3 = r5->data;
     nx = 0;
     for (i = 0; i <= end; i++) {
-      if (!(Y->data[i] >= 0.0)) {
-        r3->data[nx] = i + 1;
+      if (!(Y_data[i] >= 0.0)) {
+        r3[nx] = i + 1;
         nx++;
       }
     }
-    i = a->size[0];
-    a->size[0] = r2->size[0];
-    emxEnsureCapacity_real_T(a, i);
-    nx = r2->size[0];
-    for (i = 0; i < nx; i++) {
-      a->data[i] = -Y->data[r2->data[i] - 1] + 1.0;
-    }
     i = x->size[0];
-    x->size[0] = a->size[0];
+    x->size[0] = r4->size[0];
     emxEnsureCapacity_real_T(x, i);
-    nx = a->size[0];
-    for (end = 0; end < nx; end++) {
-      x->data[end] = rt_powd_snf(a->data[end], 2.0 - la);
+    x_data = x->data;
+    nx = r4->size[0];
+    for (i = 0; i < nx; i++) {
+      varargin_1 = -Y_data[r2[i] - 1] + 1.0;
+      x_data[i] = rt_powd_snf(varargin_1, 2.0 - la);
     }
     nx = x->size[0];
     for (i = 0; i < nx; i++) {
-      Ytra->data[r3->data[i] - 1] = -(x->data[i] - 1.0) / (2.0 - la);
+      Ytra_data[r3[i] - 1] = -(x_data[i] - 1.0) / (2.0 - la);
     }
   } else {
     end = Y->size[0] - 1;
     nx = 0;
     for (i = 0; i <= end; i++) {
-      if (!(Y->data[i] >= 0.0)) {
+      if (!(Y_data[i] >= 0.0)) {
         nx++;
       }
     }
-    i = r2->size[0];
-    r2->size[0] = nx;
-    emxEnsureCapacity_int32_T(r2, i);
+    i = r4->size[0];
+    r4->size[0] = nx;
+    emxEnsureCapacity_int32_T(r4, i);
+    r2 = r4->data;
     nx = 0;
     for (i = 0; i <= end; i++) {
-      if (!(Y->data[i] >= 0.0)) {
-        r2->data[nx] = i + 1;
+      if (!(Y_data[i] >= 0.0)) {
+        r2[nx] = i + 1;
         nx++;
       }
     }
     end = Y->size[0] - 1;
     nx = 0;
     for (i = 0; i <= end; i++) {
-      if (!(Y->data[i] >= 0.0)) {
+      if (!(Y_data[i] >= 0.0)) {
         nx++;
       }
     }
-    i = r3->size[0];
-    r3->size[0] = nx;
-    emxEnsureCapacity_int32_T(r3, i);
+    i = r5->size[0];
+    r5->size[0] = nx;
+    emxEnsureCapacity_int32_T(r5, i);
+    r3 = r5->data;
     nx = 0;
     for (i = 0; i <= end; i++) {
-      if (!(Y->data[i] >= 0.0)) {
-        r3->data[nx] = i + 1;
+      if (!(Y_data[i] >= 0.0)) {
+        r3[nx] = i + 1;
         nx++;
       }
     }
     i = x->size[0];
-    x->size[0] = r2->size[0];
+    x->size[0] = r4->size[0];
     emxEnsureCapacity_real_T(x, i);
-    nx = r2->size[0];
+    x_data = x->data;
+    nx = r4->size[0];
     for (i = 0; i < nx; i++) {
-      x->data[i] = -Y->data[r2->data[i] - 1] + 1.0;
+      x_data[i] = -Y_data[r2[i] - 1] + 1.0;
     }
     nx = x->size[0];
     for (end = 0; end < nx; end++) {
-      x->data[end] = log(x->data[end]);
+      x_data[end] = log(x_data[end]);
     }
     nx = x->size[0];
     for (i = 0; i < nx; i++) {
-      Ytra->data[r3->data[i] - 1] = -x->data[i];
+      Ytra_data[r3[i] - 1] = -x_data[i];
     }
   }
-  emxFree_real_T(&a);
   emxFree_real_T(&x);
-  emxFree_int32_T(&r3);
-  emxFree_int32_T(&r2);
+  emxFree_int32_T(&r5);
+  emxFree_int32_T(&r4);
   /*  If Jacobian ==true the transformation is normalized so that its */
   /*  Jacobian will be 1 */
 }

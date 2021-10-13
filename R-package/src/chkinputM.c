@@ -26,21 +26,27 @@
 /* Function Definitions */
 void b_chkinputM(emxArray_real_T *X)
 {
-  emxArray_boolean_T *b_constcols;
+  emxArray_boolean_T *c_constcols;
   emxArray_boolean_T *ok;
   emxArray_boolean_T *r;
   emxArray_char_T_1x310 c_X;
-  emxArray_int32_T *c_constcols;
-  emxArray_int32_T *r1;
+  emxArray_int32_T *b_constcols;
+  emxArray_int32_T *r2;
   emxArray_real_T *b_X;
   emxArray_real_T *constcols;
-  emxArray_real_T *r2;
+  emxArray_real_T *r3;
   emxArray_real_T *y;
+  double *X_data;
+  double *constcols_data;
   int aoffset;
   int i;
   int inner;
   int k;
   int mc;
+  int *b_constcols_data;
+  bool *ok_data;
+  bool *r1;
+  X_data = X->data;
   emxInit_real_T(&y, 1);
   /* chkinputM makes some input parameters and user options checking in
    * multivariate analysis */
@@ -66,7 +72,6 @@ void b_chkinputM(emxArray_real_T *X)
   /*                specified for the */
   /*                caller function. */
   /*  */
-  /*  */
   /*   Optional input arguments: */
   /*  */
   /*  Output: */
@@ -83,8 +88,6 @@ void b_chkinputM(emxArray_real_T *X)
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
-  /*  */
   /*  */
   /* $LastChangedDate::                      $: Date of the last commit */
   /*  */
@@ -112,13 +115,14 @@ void b_chkinputM(emxArray_real_T *X)
   k = y->size[0];
   y->size[0] = X->size[0];
   emxEnsureCapacity_real_T(y, k);
+  constcols_data = y->data;
   for (i = 0; i <= mc; i++) {
-    y->data[i] = 0.0;
+    constcols_data[i] = 0.0;
   }
   for (k = 0; k < inner; k++) {
     aoffset = k * X->size[0];
     for (i = 0; i <= mc; i++) {
-      y->data[i] += X->data[aoffset + i];
+      constcols_data[i] += X_data[aoffset + i];
     }
   }
   emxInit_boolean_T(&ok, 1);
@@ -126,39 +130,42 @@ void b_chkinputM(emxArray_real_T *X)
   k = ok->size[0];
   ok->size[0] = y->size[0];
   emxEnsureCapacity_boolean_T(ok, k);
+  ok_data = ok->data;
   inner = y->size[0];
   for (k = 0; k < inner; k++) {
-    ok->data[k] = rtIsInf(y->data[k]);
+    ok_data[k] = rtIsInf(constcols_data[k]);
   }
   emxInit_boolean_T(&r, 1);
   k = r->size[0];
   r->size[0] = y->size[0];
   emxEnsureCapacity_boolean_T(r, k);
+  r1 = r->data;
   inner = y->size[0];
   for (k = 0; k < inner; k++) {
-    r->data[k] = rtIsNaN(y->data[k]);
+    r1[k] = rtIsNaN(constcols_data[k]);
   }
   emxFree_real_T(&y);
   inner = ok->size[0];
   for (k = 0; k < inner; k++) {
-    ok->data[k] = ((!ok->data[k]) && (!r->data[k]));
+    ok_data[k] = ((!ok_data[k]) && (!r1[k]));
   }
   emxFree_boolean_T(&r);
   mc = ok->size[0] - 1;
   aoffset = 0;
   for (i = 0; i <= mc; i++) {
-    if (ok->data[i]) {
+    if (ok_data[i]) {
       aoffset++;
     }
   }
-  emxInit_int32_T(&r1, 1);
-  k = r1->size[0];
-  r1->size[0] = aoffset;
-  emxEnsureCapacity_int32_T(r1, k);
+  emxInit_int32_T(&r2, 1);
+  k = r2->size[0];
+  r2->size[0] = aoffset;
+  emxEnsureCapacity_int32_T(r2, k);
+  b_constcols_data = r2->data;
   aoffset = 0;
   for (i = 0; i <= mc; i++) {
-    if (ok->data[i]) {
-      r1->data[aoffset] = i + 1;
+    if (ok_data[i]) {
+      b_constcols_data[aoffset] = i + 1;
       aoffset++;
     }
   }
@@ -166,26 +173,28 @@ void b_chkinputM(emxArray_real_T *X)
   emxInit_real_T(&b_X, 2);
   aoffset = X->size[1] - 1;
   k = b_X->size[0] * b_X->size[1];
-  b_X->size[0] = r1->size[0];
+  b_X->size[0] = r2->size[0];
   b_X->size[1] = aoffset + 1;
   emxEnsureCapacity_real_T(b_X, k);
+  constcols_data = b_X->data;
   for (k = 0; k <= aoffset; k++) {
-    inner = r1->size[0];
+    inner = r2->size[0];
     for (mc = 0; mc < inner; mc++) {
-      b_X->data[mc + b_X->size[0] * k] =
-          X->data[(r1->data[mc] + X->size[0] * k) - 1];
+      constcols_data[mc + b_X->size[0] * k] =
+          X_data[(b_constcols_data[mc] + X->size[0] * k) - 1];
     }
   }
-  emxFree_int32_T(&r1);
+  emxFree_int32_T(&r2);
   k = X->size[0] * X->size[1];
   X->size[0] = b_X->size[0];
   X->size[1] = b_X->size[1];
   emxEnsureCapacity_real_T(X, k);
+  X_data = X->data;
   inner = b_X->size[1];
   for (k = 0; k < inner; k++) {
     aoffset = b_X->size[0];
     for (mc = 0; mc < aoffset; mc++) {
-      X->data[mc + X->size[0] * k] = b_X->data[mc + b_X->size[0] * k];
+      X_data[mc + X->size[0] * k] = constcols_data[mc + b_X->size[0] * k];
     }
   }
   emxFree_real_T(&b_X);
@@ -195,48 +204,59 @@ void b_chkinputM(emxArray_real_T *X)
   } else {
     aoffset = X->size[0];
     mc = X->size[1];
-    if (aoffset > mc) {
+    if (aoffset >= mc) {
       mc = aoffset;
     }
   }
   emxInit_real_T(&constcols, 2);
-  emxInit_real_T(&r2, 2);
-  emxInit_boolean_T(&b_constcols, 2);
+  emxInit_real_T(&r3, 2);
   /*  constcols = scalar vector of the indices of possible constant columns. */
   maximum(X, constcols);
-  minimum(X, r2);
-  k = b_constcols->size[0] * b_constcols->size[1];
-  b_constcols->size[0] = 1;
-  b_constcols->size[1] = constcols->size[1];
-  emxEnsureCapacity_boolean_T(b_constcols, k);
-  inner = constcols->size[1];
-  for (k = 0; k < inner; k++) {
-    b_constcols->data[k] = (constcols->data[k] - r2->data[k] == 0.0);
-  }
-  emxFree_real_T(&r2);
-  emxInit_int32_T(&c_constcols, 2);
-  eml_find(b_constcols, c_constcols);
-  k = constcols->size[0] * constcols->size[1];
-  constcols->size[0] = 1;
-  constcols->size[1] = c_constcols->size[1];
-  emxEnsureCapacity_real_T(constcols, k);
-  inner = c_constcols->size[1];
-  emxFree_boolean_T(&b_constcols);
-  for (k = 0; k < inner; k++) {
-    constcols->data[k] = c_constcols->data[k];
-  }
-  if (constcols->size[1] >= 1) {
-    inner = constcols->size[1];
+  constcols_data = constcols->data;
+  minimum(X, r3);
+  X_data = r3->data;
+  emxInit_int32_T(&b_constcols, 2);
+  if (constcols->size[1] == r3->size[1]) {
+    emxInit_boolean_T(&c_constcols, 2);
     k = c_constcols->size[0] * c_constcols->size[1];
     c_constcols->size[0] = 1;
     c_constcols->size[1] = constcols->size[1];
-    emxEnsureCapacity_int32_T(c_constcols, k);
+    emxEnsureCapacity_boolean_T(c_constcols, k);
+    ok_data = c_constcols->data;
+    inner = constcols->size[1];
     for (k = 0; k < inner; k++) {
-      c_constcols->data[k] = (int)constcols->data[k];
+      ok_data[k] = (constcols_data[k] - X_data[k] == 0.0);
     }
-    nullAssignment(X, c_constcols);
+    eml_find(c_constcols, b_constcols);
+    b_constcols_data = b_constcols->data;
+    emxFree_boolean_T(&c_constcols);
+  } else {
+    hb_binary_expand_op(b_constcols, constcols, r3);
+    b_constcols_data = b_constcols->data;
   }
-  emxFree_int32_T(&c_constcols);
+  emxFree_real_T(&r3);
+  k = constcols->size[0] * constcols->size[1];
+  constcols->size[0] = 1;
+  constcols->size[1] = b_constcols->size[1];
+  emxEnsureCapacity_real_T(constcols, k);
+  constcols_data = constcols->data;
+  inner = b_constcols->size[1];
+  for (k = 0; k < inner; k++) {
+    constcols_data[k] = b_constcols_data[k];
+  }
+  if (constcols->size[1] >= 1) {
+    inner = constcols->size[1];
+    k = b_constcols->size[0] * b_constcols->size[1];
+    b_constcols->size[0] = 1;
+    b_constcols->size[1] = constcols->size[1];
+    emxEnsureCapacity_int32_T(b_constcols, k);
+    b_constcols_data = b_constcols->data;
+    for (k = 0; k < inner; k++) {
+      b_constcols_data[k] = (int)constcols_data[k];
+    }
+    nullAssignment(X, b_constcols);
+  }
+  emxFree_int32_T(&b_constcols);
   emxFree_real_T(&constcols);
   /*  p is the number of parameters to be estimated */
   if (mc < X->size[1]) {
@@ -248,21 +268,27 @@ void b_chkinputM(emxArray_real_T *X)
 
 void chkinputM(emxArray_real_T *X, bool vvarargin_f12)
 {
-  emxArray_boolean_T *b_constcols;
+  emxArray_boolean_T *c_constcols;
   emxArray_boolean_T *ok;
   emxArray_boolean_T *r;
   emxArray_char_T_1x310 c_X;
-  emxArray_int32_T *c_constcols;
-  emxArray_int32_T *r1;
+  emxArray_int32_T *b_constcols;
+  emxArray_int32_T *r2;
   emxArray_real_T *b_X;
   emxArray_real_T *constcols;
-  emxArray_real_T *r2;
+  emxArray_real_T *r3;
   emxArray_real_T *y;
+  double *X_data;
+  double *constcols_data;
   int aoffset;
   int i;
   int inner;
   int k;
   int mc;
+  int *b_constcols_data;
+  bool *ok_data;
+  bool *r1;
+  X_data = X->data;
   /* chkinputM makes some input parameters and user options checking in
    * multivariate analysis */
   /*  */
@@ -287,7 +313,6 @@ void chkinputM(emxArray_real_T *X, bool vvarargin_f12)
   /*                specified for the */
   /*                caller function. */
   /*  */
-  /*  */
   /*   Optional input arguments: */
   /*  */
   /*  Output: */
@@ -304,8 +329,6 @@ void chkinputM(emxArray_real_T *X, bool vvarargin_f12)
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
-  /*  */
   /*  */
   /* $LastChangedDate::                      $: Date of the last commit */
   /*  */
@@ -335,13 +358,14 @@ void chkinputM(emxArray_real_T *X, bool vvarargin_f12)
     k = y->size[0];
     y->size[0] = X->size[0];
     emxEnsureCapacity_real_T(y, k);
+    constcols_data = y->data;
     for (i = 0; i <= mc; i++) {
-      y->data[i] = 0.0;
+      constcols_data[i] = 0.0;
     }
     for (k = 0; k < inner; k++) {
       aoffset = k * X->size[0];
       for (i = 0; i <= mc; i++) {
-        y->data[i] += X->data[aoffset + i];
+        constcols_data[i] += X_data[aoffset + i];
       }
     }
     emxInit_boolean_T(&ok, 1);
@@ -349,39 +373,42 @@ void chkinputM(emxArray_real_T *X, bool vvarargin_f12)
     k = ok->size[0];
     ok->size[0] = y->size[0];
     emxEnsureCapacity_boolean_T(ok, k);
+    ok_data = ok->data;
     inner = y->size[0];
     for (k = 0; k < inner; k++) {
-      ok->data[k] = rtIsInf(y->data[k]);
+      ok_data[k] = rtIsInf(constcols_data[k]);
     }
     emxInit_boolean_T(&r, 1);
     k = r->size[0];
     r->size[0] = y->size[0];
     emxEnsureCapacity_boolean_T(r, k);
+    r1 = r->data;
     inner = y->size[0];
     for (k = 0; k < inner; k++) {
-      r->data[k] = rtIsNaN(y->data[k]);
+      r1[k] = rtIsNaN(constcols_data[k]);
     }
     emxFree_real_T(&y);
     inner = ok->size[0];
     for (k = 0; k < inner; k++) {
-      ok->data[k] = ((!ok->data[k]) && (!r->data[k]));
+      ok_data[k] = ((!ok_data[k]) && (!r1[k]));
     }
     emxFree_boolean_T(&r);
     mc = ok->size[0] - 1;
     aoffset = 0;
     for (i = 0; i <= mc; i++) {
-      if (ok->data[i]) {
+      if (ok_data[i]) {
         aoffset++;
       }
     }
-    emxInit_int32_T(&r1, 1);
-    k = r1->size[0];
-    r1->size[0] = aoffset;
-    emxEnsureCapacity_int32_T(r1, k);
+    emxInit_int32_T(&r2, 1);
+    k = r2->size[0];
+    r2->size[0] = aoffset;
+    emxEnsureCapacity_int32_T(r2, k);
+    b_constcols_data = r2->data;
     aoffset = 0;
     for (i = 0; i <= mc; i++) {
-      if (ok->data[i]) {
-        r1->data[aoffset] = i + 1;
+      if (ok_data[i]) {
+        b_constcols_data[aoffset] = i + 1;
         aoffset++;
       }
     }
@@ -389,26 +416,28 @@ void chkinputM(emxArray_real_T *X, bool vvarargin_f12)
     emxInit_real_T(&b_X, 2);
     aoffset = X->size[1] - 1;
     k = b_X->size[0] * b_X->size[1];
-    b_X->size[0] = r1->size[0];
+    b_X->size[0] = r2->size[0];
     b_X->size[1] = aoffset + 1;
     emxEnsureCapacity_real_T(b_X, k);
+    constcols_data = b_X->data;
     for (k = 0; k <= aoffset; k++) {
-      inner = r1->size[0];
+      inner = r2->size[0];
       for (mc = 0; mc < inner; mc++) {
-        b_X->data[mc + b_X->size[0] * k] =
-            X->data[(r1->data[mc] + X->size[0] * k) - 1];
+        constcols_data[mc + b_X->size[0] * k] =
+            X_data[(b_constcols_data[mc] + X->size[0] * k) - 1];
       }
     }
-    emxFree_int32_T(&r1);
+    emxFree_int32_T(&r2);
     k = X->size[0] * X->size[1];
     X->size[0] = b_X->size[0];
     X->size[1] = b_X->size[1];
     emxEnsureCapacity_real_T(X, k);
+    X_data = X->data;
     inner = b_X->size[1];
     for (k = 0; k < inner; k++) {
       aoffset = b_X->size[0];
       for (mc = 0; mc < aoffset; mc++) {
-        X->data[mc + X->size[0] * k] = b_X->data[mc + b_X->size[0] * k];
+        X_data[mc + X->size[0] * k] = constcols_data[mc + b_X->size[0] * k];
       }
     }
     emxFree_real_T(&b_X);
@@ -418,49 +447,60 @@ void chkinputM(emxArray_real_T *X, bool vvarargin_f12)
     } else {
       aoffset = X->size[0];
       mc = X->size[1];
-      if (aoffset > mc) {
+      if (aoffset >= mc) {
         mc = aoffset;
       }
     }
     emxInit_real_T(&constcols, 2);
-    emxInit_real_T(&r2, 2);
-    emxInit_boolean_T(&b_constcols, 2);
+    emxInit_real_T(&r3, 2);
     /*  constcols = scalar vector of the indices of possible constant columns.
      */
     maximum(X, constcols);
-    minimum(X, r2);
-    k = b_constcols->size[0] * b_constcols->size[1];
-    b_constcols->size[0] = 1;
-    b_constcols->size[1] = constcols->size[1];
-    emxEnsureCapacity_boolean_T(b_constcols, k);
-    inner = constcols->size[1];
-    for (k = 0; k < inner; k++) {
-      b_constcols->data[k] = (constcols->data[k] - r2->data[k] == 0.0);
-    }
-    emxFree_real_T(&r2);
-    emxInit_int32_T(&c_constcols, 2);
-    eml_find(b_constcols, c_constcols);
-    k = constcols->size[0] * constcols->size[1];
-    constcols->size[0] = 1;
-    constcols->size[1] = c_constcols->size[1];
-    emxEnsureCapacity_real_T(constcols, k);
-    inner = c_constcols->size[1];
-    emxFree_boolean_T(&b_constcols);
-    for (k = 0; k < inner; k++) {
-      constcols->data[k] = c_constcols->data[k];
-    }
-    if (constcols->size[1] >= 1) {
-      inner = constcols->size[1];
+    constcols_data = constcols->data;
+    minimum(X, r3);
+    X_data = r3->data;
+    emxInit_int32_T(&b_constcols, 2);
+    if (constcols->size[1] == r3->size[1]) {
+      emxInit_boolean_T(&c_constcols, 2);
       k = c_constcols->size[0] * c_constcols->size[1];
       c_constcols->size[0] = 1;
       c_constcols->size[1] = constcols->size[1];
-      emxEnsureCapacity_int32_T(c_constcols, k);
+      emxEnsureCapacity_boolean_T(c_constcols, k);
+      ok_data = c_constcols->data;
+      inner = constcols->size[1];
       for (k = 0; k < inner; k++) {
-        c_constcols->data[k] = (int)constcols->data[k];
+        ok_data[k] = (constcols_data[k] - X_data[k] == 0.0);
       }
-      nullAssignment(X, c_constcols);
+      eml_find(c_constcols, b_constcols);
+      b_constcols_data = b_constcols->data;
+      emxFree_boolean_T(&c_constcols);
+    } else {
+      hb_binary_expand_op(b_constcols, constcols, r3);
+      b_constcols_data = b_constcols->data;
     }
-    emxFree_int32_T(&c_constcols);
+    emxFree_real_T(&r3);
+    k = constcols->size[0] * constcols->size[1];
+    constcols->size[0] = 1;
+    constcols->size[1] = b_constcols->size[1];
+    emxEnsureCapacity_real_T(constcols, k);
+    constcols_data = constcols->data;
+    inner = b_constcols->size[1];
+    for (k = 0; k < inner; k++) {
+      constcols_data[k] = b_constcols_data[k];
+    }
+    if (constcols->size[1] >= 1) {
+      inner = constcols->size[1];
+      k = b_constcols->size[0] * b_constcols->size[1];
+      b_constcols->size[0] = 1;
+      b_constcols->size[1] = constcols->size[1];
+      emxEnsureCapacity_int32_T(b_constcols, k);
+      b_constcols_data = b_constcols->data;
+      for (k = 0; k < inner; k++) {
+        b_constcols_data[k] = (int)constcols_data[k];
+      }
+      nullAssignment(X, b_constcols);
+    }
+    emxFree_int32_T(&b_constcols);
     emxFree_real_T(&constcols);
     /*  p is the number of parameters to be estimated */
     if (mc < X->size[1]) {

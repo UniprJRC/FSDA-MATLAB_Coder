@@ -23,6 +23,9 @@ extern "C" {
 #endif
 
 /* Function Declarations */
+void jf_binary_expand_op(emxArray_real_T *diff, const emxArray_real_T *GAMc,
+                         const emxArray_real_T *GAMold);
+
 void restrshapeGPCM(const emxArray_real_T *lmd, const emxArray_real_T *Omega,
                     const emxArray_real_T *SigmaB, const emxArray_real_T *niini,
                     const char pa_pars[3], double pa_shw, double pa_shb,

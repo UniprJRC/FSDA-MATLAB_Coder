@@ -28,6 +28,10 @@ void b_xzhgeqz(emxArray_creal_T *A, int ilo, int ihi, emxArray_creal_T *Z,
   creal_T b_ascale;
   creal_T ctemp;
   creal_T shift;
+  creal_T *A_data;
+  creal_T *Z_data;
+  creal_T *alpha1_data;
+  creal_T *beta1_data;
   double ad22_im;
   double ad22_re;
   double anorm;
@@ -57,7 +61,6 @@ void b_xzhgeqz(emxArray_creal_T *A, int ilo, int ihi, emxArray_creal_T *Z,
   int jm1;
   int jp1;
   int n;
-  int x;
   bool b_guard1 = false;
   bool compz;
   bool exitg2;
@@ -68,27 +71,31 @@ void b_xzhgeqz(emxArray_creal_T *A, int ilo, int ihi, emxArray_creal_T *Z,
   bool guard1 = false;
   bool guard2 = false;
   bool guard3 = false;
+  Z_data = Z->data;
+  A_data = A->data;
   *info = 0;
   compz = ((Z->size[0] != 0) && (Z->size[1] != 0));
   if ((A->size[0] == 1) && (A->size[1] == 1)) {
     ihi = 1;
   }
   n = A->size[0];
-  ifirst = alpha1->size[0];
+  istart = alpha1->size[0];
   alpha1->size[0] = A->size[0];
-  emxEnsureCapacity_creal_T(alpha1, ifirst);
+  emxEnsureCapacity_creal_T(alpha1, istart);
+  alpha1_data = alpha1->data;
   jp1 = A->size[0];
-  for (ifirst = 0; ifirst < jp1; ifirst++) {
-    alpha1->data[ifirst].re = 0.0;
-    alpha1->data[ifirst].im = 0.0;
+  for (istart = 0; istart < jp1; istart++) {
+    alpha1_data[istart].re = 0.0;
+    alpha1_data[istart].im = 0.0;
   }
-  ifirst = beta1->size[0];
+  istart = beta1->size[0];
   beta1->size[0] = A->size[0];
-  emxEnsureCapacity_creal_T(beta1, ifirst);
+  emxEnsureCapacity_creal_T(beta1, istart);
+  beta1_data = beta1->data;
   jp1 = A->size[0];
-  for (ifirst = 0; ifirst < jp1; ifirst++) {
-    beta1->data[ifirst].re = 1.0;
-    beta1->data[ifirst].im = 0.0;
+  for (istart = 0; istart < jp1; istart++) {
+    beta1_data[istart].re = 1.0;
+    beta1_data[istart].im = 0.0;
   }
   eshift_re = 0.0;
   eshift_im = 0.0;
@@ -107,9 +114,9 @@ void b_xzhgeqz(emxArray_creal_T *A, int ilo, int ihi, emxArray_creal_T *Z,
   ascale = 1.0 / temp;
   bscale = 1.0 / sqrt(A->size[0]);
   failed = true;
-  ifirst = ihi + 1;
-  for (j = ifirst; j <= n; j++) {
-    alpha1->data[j - 1] = A->data[(j + A->size[0] * (j - 1)) - 1];
+  istart = ihi + 1;
+  for (j = istart; j <= n; j++) {
+    alpha1_data[j - 1] = A_data[(j + A->size[0] * (j - 1)) - 1];
   }
   guard1 = false;
   guard2 = false;
@@ -137,11 +144,11 @@ void b_xzhgeqz(emxArray_creal_T *A, int ilo, int ihi, emxArray_creal_T *Z,
         if (ilast + 1 == ilo) {
           goto60 = true;
           b_guard1 = true;
-        } else if (fabs(A->data[ilast + A->size[0] * ilastm1].re) +
-                       fabs(A->data[ilast + A->size[0] * ilastm1].im) <=
+        } else if (fabs(A_data[ilast + A->size[0] * ilastm1].re) +
+                       fabs(A_data[ilast + A->size[0] * ilastm1].im) <=
                    b_atol) {
-          A->data[ilast + A->size[0] * ilastm1].re = 0.0;
-          A->data[ilast + A->size[0] * ilastm1].im = 0.0;
+          A_data[ilast + A->size[0] * ilastm1].re = 0.0;
+          A_data[ilast + A->size[0] * ilastm1].im = 0.0;
           goto60 = true;
           b_guard1 = true;
         } else {
@@ -152,11 +159,11 @@ void b_xzhgeqz(emxArray_creal_T *A, int ilo, int ihi, emxArray_creal_T *Z,
             if (j + 1 == ilo) {
               guard3 = true;
               exitg2 = true;
-            } else if (fabs(A->data[j + A->size[0] * (j - 1)].re) +
-                           fabs(A->data[j + A->size[0] * (j - 1)].im) <=
+            } else if (fabs(A_data[j + A->size[0] * (j - 1)].re) +
+                           fabs(A_data[j + A->size[0] * (j - 1)].im) <=
                        b_atol) {
-              A->data[j + A->size[0] * (j - 1)].re = 0.0;
-              A->data[j + A->size[0] * (j - 1)].im = 0.0;
+              A_data[j + A->size[0] * (j - 1)].re = 0.0;
+              A_data[j + A->size[0] * (j - 1)].im = 0.0;
               guard3 = true;
               exitg2 = true;
             } else {
@@ -172,32 +179,35 @@ void b_xzhgeqz(emxArray_creal_T *A, int ilo, int ihi, emxArray_creal_T *Z,
             b_guard1 = true;
           } else {
             jp1 = alpha1->size[0];
-            ifirst = alpha1->size[0];
+            istart = alpha1->size[0];
             alpha1->size[0] = jp1;
-            emxEnsureCapacity_creal_T(alpha1, ifirst);
-            for (ifirst = 0; ifirst < jp1; ifirst++) {
-              alpha1->data[ifirst].re = rtNaN;
-              alpha1->data[ifirst].im = 0.0;
+            emxEnsureCapacity_creal_T(alpha1, istart);
+            alpha1_data = alpha1->data;
+            for (istart = 0; istart < jp1; istart++) {
+              alpha1_data[istart].re = rtNaN;
+              alpha1_data[istart].im = 0.0;
             }
             jp1 = beta1->size[0];
-            ifirst = beta1->size[0];
+            istart = beta1->size[0];
             beta1->size[0] = jp1;
-            emxEnsureCapacity_creal_T(beta1, ifirst);
-            for (ifirst = 0; ifirst < jp1; ifirst++) {
-              beta1->data[ifirst].re = rtNaN;
-              beta1->data[ifirst].im = 0.0;
+            emxEnsureCapacity_creal_T(beta1, istart);
+            beta1_data = beta1->data;
+            for (istart = 0; istart < jp1; istart++) {
+              beta1_data[istart].re = rtNaN;
+              beta1_data[istart].im = 0.0;
             }
             if (compz) {
               jp1 = Z->size[0];
               jm1 = Z->size[1];
-              ifirst = Z->size[0] * Z->size[1];
+              istart = Z->size[0] * Z->size[1];
               Z->size[0] = jp1;
               Z->size[1] = jm1;
-              emxEnsureCapacity_creal_T(Z, ifirst);
-              for (ifirst = 0; ifirst < jm1; ifirst++) {
-                for (x = 0; x < jp1; x++) {
-                  Z->data[x + Z->size[0] * ifirst].re = rtNaN;
-                  Z->data[x + Z->size[0] * ifirst].im = 0.0;
+              emxEnsureCapacity_creal_T(Z, istart);
+              Z_data = Z->data;
+              for (istart = 0; istart < jm1; istart++) {
+                for (ifirst = 0; ifirst < jp1; ifirst++) {
+                  Z_data[ifirst + Z->size[0] * istart].re = rtNaN;
+                  Z_data[ifirst + Z->size[0] * istart].im = 0.0;
                 }
               }
             }
@@ -208,7 +218,7 @@ void b_xzhgeqz(emxArray_creal_T *A, int ilo, int ihi, emxArray_creal_T *Z,
         if (b_guard1) {
           if (goto60) {
             goto60 = false;
-            alpha1->data[ilast] = A->data[ilast + A->size[0] * ilast];
+            alpha1_data[ilast] = A_data[ilast + A->size[0] * ilast];
             ilast = ilastm1;
             ilastm1--;
             if (ilast + 1 < ilo) {
@@ -235,8 +245,8 @@ void b_xzhgeqz(emxArray_creal_T *A, int ilo, int ihi, emxArray_creal_T *Z,
                 ifrstm = ifirst;
               }
               if (iiter - iiter / 10 * 10 != 0) {
-                anorm = ascale * A->data[ilastm1 + A->size[0] * ilastm1].re;
-                temp = ascale * A->data[ilastm1 + A->size[0] * ilastm1].im;
+                anorm = ascale * A_data[ilastm1 + A->size[0] * ilastm1].re;
+                temp = ascale * A_data[ilastm1 + A->size[0] * ilastm1].im;
                 if (temp == 0.0) {
                   shift.re = anorm / bscale;
                   shift.im = 0.0;
@@ -247,8 +257,8 @@ void b_xzhgeqz(emxArray_creal_T *A, int ilo, int ihi, emxArray_creal_T *Z,
                   shift.re = anorm / bscale;
                   shift.im = temp / bscale;
                 }
-                anorm = ascale * A->data[ilast + A->size[0] * ilast].re;
-                temp = ascale * A->data[ilast + A->size[0] * ilast].im;
+                anorm = ascale * A_data[ilast + A->size[0] * ilast].re;
+                temp = ascale * A_data[ilast + A->size[0] * ilast].im;
                 if (temp == 0.0) {
                   ad22_re = anorm / bscale;
                   ad22_im = 0.0;
@@ -262,8 +272,8 @@ void b_xzhgeqz(emxArray_creal_T *A, int ilo, int ihi, emxArray_creal_T *Z,
                 t1_re = 0.5 * (shift.re + ad22_re);
                 t1_im = 0.5 * (shift.im + ad22_im);
                 t1_im_tmp = t1_re * t1_im;
-                anorm = ascale * A->data[ilastm1 + A->size[0] * ilast].re;
-                temp = ascale * A->data[ilastm1 + A->size[0] * ilast].im;
+                anorm = ascale * A_data[ilastm1 + A->size[0] * ilast].re;
+                temp = ascale * A_data[ilastm1 + A->size[0] * ilast].im;
                 if (temp == 0.0) {
                   ascale_re = anorm / bscale;
                   ascale_im = 0.0;
@@ -274,8 +284,8 @@ void b_xzhgeqz(emxArray_creal_T *A, int ilo, int ihi, emxArray_creal_T *Z,
                   ascale_re = anorm / bscale;
                   ascale_im = temp / bscale;
                 }
-                anorm = ascale * A->data[ilast + A->size[0] * ilastm1].re;
-                temp = ascale * A->data[ilast + A->size[0] * ilastm1].im;
+                anorm = ascale * A_data[ilast + A->size[0] * ilastm1].re;
+                temp = ascale * A_data[ilast + A->size[0] * ilastm1].im;
                 if (temp == 0.0) {
                   b_ascale_re = anorm / bscale;
                   anorm = 0.0;
@@ -305,8 +315,8 @@ void b_xzhgeqz(emxArray_creal_T *A, int ilo, int ihi, emxArray_creal_T *Z,
                   shift.im = t1_im - shift.im;
                 }
               } else {
-                anorm = ascale * A->data[ilast + A->size[0] * ilastm1].re;
-                temp = ascale * A->data[ilast + A->size[0] * ilastm1].im;
+                anorm = ascale * A_data[ilast + A->size[0] * ilastm1].re;
+                temp = ascale * A_data[ilast + A->size[0] * ilastm1].im;
                 if (temp == 0.0) {
                   ascale_re = anorm / bscale;
                   ascale_im = 0.0;
@@ -328,12 +338,12 @@ void b_xzhgeqz(emxArray_creal_T *A, int ilo, int ihi, emxArray_creal_T *Z,
               while ((!exitg2) && (j + 1 > ifirst)) {
                 istart = j + 1;
                 ctemp.re =
-                    ascale * A->data[j + A->size[0] * j].re - shift.re * bscale;
+                    ascale * A_data[j + A->size[0] * j].re - shift.re * bscale;
                 ctemp.im =
-                    ascale * A->data[j + A->size[0] * j].im - shift.im * bscale;
+                    ascale * A_data[j + A->size[0] * j].im - shift.im * bscale;
                 temp = fabs(ctemp.re) + fabs(ctemp.im);
-                anorm = ascale * (fabs(A->data[jp1 + A->size[0] * j].re) +
-                                  fabs(A->data[jp1 + A->size[0] * j].im));
+                anorm = ascale * (fabs(A_data[jp1 + A->size[0] * j].re) +
+                                  fabs(A_data[jp1 + A->size[0] * j].im));
                 tempr = temp;
                 if (anorm > temp) {
                   tempr = anorm;
@@ -342,8 +352,8 @@ void b_xzhgeqz(emxArray_creal_T *A, int ilo, int ihi, emxArray_creal_T *Z,
                   temp /= tempr;
                   anorm /= tempr;
                 }
-                if ((fabs(A->data[j + A->size[0] * (j - 1)].re) +
-                     fabs(A->data[j + A->size[0] * (j - 1)].im)) *
+                if ((fabs(A_data[j + A->size[0] * (j - 1)].re) +
+                     fabs(A_data[j + A->size[0] * (j - 1)].im)) *
                         anorm <=
                     temp * b_atol) {
                   goto90 = true;
@@ -357,102 +367,87 @@ void b_xzhgeqz(emxArray_creal_T *A, int ilo, int ihi, emxArray_creal_T *Z,
                 istart = ifirst;
                 ctemp.re =
                     ascale *
-                        A->data[(ifirst + A->size[0] * (ifirst - 1)) - 1].re -
+                        A_data[(ifirst + A->size[0] * (ifirst - 1)) - 1].re -
                     shift.re * bscale;
                 ctemp.im =
                     ascale *
-                        A->data[(ifirst + A->size[0] * (ifirst - 1)) - 1].im -
+                        A_data[(ifirst + A->size[0] * (ifirst - 1)) - 1].im -
                     shift.im * bscale;
               }
               goto90 = false;
               b_ascale.re =
-                  ascale * A->data[istart + A->size[0] * (istart - 1)].re;
+                  ascale * A_data[istart + A->size[0] * (istart - 1)].re;
               b_ascale.im =
-                  ascale * A->data[istart + A->size[0] * (istart - 1)].im;
+                  ascale * A_data[istart + A->size[0] * (istart - 1)].im;
               b_xzlartg(ctemp, b_ascale, &anorm, &shift);
               j = istart;
               jm1 = istart - 2;
               while (j < ilast + 1) {
                 if (j > istart) {
-                  xzlartg(A->data[(j + A->size[0] * jm1) - 1],
-                          A->data[j + A->size[0] * jm1], &anorm, &shift,
-                          &A->data[(j + A->size[0] * jm1) - 1]);
-                  A->data[j + A->size[0] * jm1].re = 0.0;
-                  A->data[j + A->size[0] * jm1].im = 0.0;
+                  xzlartg(A_data[(j + A->size[0] * jm1) - 1],
+                          A_data[j + A->size[0] * jm1], &anorm, &shift,
+                          &A_data[(j + A->size[0] * jm1) - 1]);
+                  A_data[j + A->size[0] * jm1].re = 0.0;
+                  A_data[j + A->size[0] * jm1].im = 0.0;
                 }
                 for (jp1 = j; jp1 <= ilastm; jp1++) {
-                  ad22_re =
-                      anorm * A->data[(j + A->size[0] * (jp1 - 1)) - 1].re +
-                      (shift.re * A->data[j + A->size[0] * (jp1 - 1)].re -
-                       shift.im * A->data[j + A->size[0] * (jp1 - 1)].im);
-                  ad22_im =
-                      anorm * A->data[(j + A->size[0] * (jp1 - 1)) - 1].im +
-                      (shift.re * A->data[j + A->size[0] * (jp1 - 1)].im +
-                       shift.im * A->data[j + A->size[0] * (jp1 - 1)].re);
-                  temp = A->data[(j + A->size[0] * (jp1 - 1)) - 1].im;
-                  tempr = A->data[(j + A->size[0] * (jp1 - 1)) - 1].re;
-                  A->data[j + A->size[0] * (jp1 - 1)].re =
-                      anorm * A->data[j + A->size[0] * (jp1 - 1)].re -
-                      (shift.re * A->data[(j + A->size[0] * (jp1 - 1)) - 1].re +
-                       shift.im * A->data[(j + A->size[0] * (jp1 - 1)) - 1].im);
-                  A->data[j + A->size[0] * (jp1 - 1)].im =
-                      anorm * A->data[j + A->size[0] * (jp1 - 1)].im -
-                      (shift.re * temp - shift.im * tempr);
-                  A->data[(j + A->size[0] * (jp1 - 1)) - 1].re = ad22_re;
-                  A->data[(j + A->size[0] * (jp1 - 1)) - 1].im = ad22_im;
+                  temp = A_data[j + A->size[0] * (jp1 - 1)].im;
+                  tempr = A_data[j + A->size[0] * (jp1 - 1)].re;
+                  b_ascale_re = A_data[(j + A->size[0] * (jp1 - 1)) - 1].re;
+                  ascale_re = A_data[(j + A->size[0] * (jp1 - 1)) - 1].im;
+                  A_data[j + A->size[0] * (jp1 - 1)].re =
+                      anorm * tempr -
+                      (shift.re * b_ascale_re + shift.im * ascale_re);
+                  A_data[j + A->size[0] * (jp1 - 1)].im =
+                      anorm * A_data[j + A->size[0] * (jp1 - 1)].im -
+                      (shift.re * ascale_re - shift.im * b_ascale_re);
+                  A_data[(j + A->size[0] * (jp1 - 1)) - 1].re =
+                      anorm * b_ascale_re +
+                      (shift.re * tempr - shift.im * temp);
+                  A_data[(j + A->size[0] * (jp1 - 1)) - 1].im =
+                      anorm * ascale_re + (shift.re * temp + shift.im * tempr);
                 }
                 shift.re = -shift.re;
                 shift.im = -shift.im;
-                x = j;
+                jp1 = j;
                 if (ilast + 1 < j + 2) {
-                  x = ilast - 1;
+                  jp1 = ilast - 1;
                 }
-                for (jp1 = ifrstm; jp1 <= x + 2; jp1++) {
-                  ad22_re =
-                      anorm * A->data[(jp1 + A->size[0] * j) - 1].re +
-                      (shift.re * A->data[(jp1 + A->size[0] * (j - 1)) - 1].re -
-                       shift.im * A->data[(jp1 + A->size[0] * (j - 1)) - 1].im);
-                  ad22_im =
-                      anorm * A->data[(jp1 + A->size[0] * j) - 1].im +
-                      (shift.re * A->data[(jp1 + A->size[0] * (j - 1)) - 1].im +
-                       shift.im * A->data[(jp1 + A->size[0] * (j - 1)) - 1].re);
-                  temp = A->data[(jp1 + A->size[0] * j) - 1].im;
-                  tempr = A->data[(jp1 + A->size[0] * j) - 1].re;
-                  A->data[(jp1 + A->size[0] * (j - 1)) - 1].re =
-                      anorm * A->data[(jp1 + A->size[0] * (j - 1)) - 1].re -
-                      (shift.re * A->data[(jp1 + A->size[0] * j) - 1].re +
-                       shift.im * A->data[(jp1 + A->size[0] * j) - 1].im);
-                  A->data[(jp1 + A->size[0] * (j - 1)) - 1].im =
-                      anorm * A->data[(jp1 + A->size[0] * (j - 1)) - 1].im -
-                      (shift.re * temp - shift.im * tempr);
-                  A->data[(jp1 + A->size[0] * j) - 1].re = ad22_re;
-                  A->data[(jp1 + A->size[0] * j) - 1].im = ad22_im;
+                for (jm1 = ifrstm; jm1 <= jp1 + 2; jm1++) {
+                  temp = A_data[(jm1 + A->size[0] * (j - 1)) - 1].im;
+                  tempr = A_data[(jm1 + A->size[0] * (j - 1)) - 1].re;
+                  b_ascale_re = A_data[(jm1 + A->size[0] * j) - 1].re;
+                  ascale_re = A_data[(jm1 + A->size[0] * j) - 1].im;
+                  A_data[(jm1 + A->size[0] * (j - 1)) - 1].re =
+                      anorm * tempr -
+                      (shift.re * b_ascale_re + shift.im * ascale_re);
+                  A_data[(jm1 + A->size[0] * (j - 1)) - 1].im =
+                      anorm * A_data[(jm1 + A->size[0] * (j - 1)) - 1].im -
+                      (shift.re * ascale_re - shift.im * b_ascale_re);
+                  A_data[(jm1 + A->size[0] * j) - 1].re =
+                      anorm * b_ascale_re +
+                      (shift.re * tempr - shift.im * temp);
+                  A_data[(jm1 + A->size[0] * j) - 1].im =
+                      anorm * ascale_re + (shift.re * temp + shift.im * tempr);
                 }
                 if (compz) {
-                  for (jp1 = 1; jp1 <= n; jp1++) {
-                    ad22_re =
-                        anorm * Z->data[(jp1 + Z->size[0] * j) - 1].re +
-                        (shift.re *
-                             Z->data[(jp1 + Z->size[0] * (j - 1)) - 1].re -
-                         shift.im *
-                             Z->data[(jp1 + Z->size[0] * (j - 1)) - 1].im);
-                    ad22_im =
-                        anorm * Z->data[(jp1 + Z->size[0] * j) - 1].im +
-                        (shift.re *
-                             Z->data[(jp1 + Z->size[0] * (j - 1)) - 1].im +
-                         shift.im *
-                             Z->data[(jp1 + Z->size[0] * (j - 1)) - 1].re);
-                    temp = Z->data[(jp1 + Z->size[0] * j) - 1].im;
-                    tempr = Z->data[(jp1 + Z->size[0] * j) - 1].re;
-                    Z->data[(jp1 + Z->size[0] * (j - 1)) - 1].re =
-                        anorm * Z->data[(jp1 + Z->size[0] * (j - 1)) - 1].re -
-                        (shift.re * Z->data[(jp1 + Z->size[0] * j) - 1].re +
-                         shift.im * Z->data[(jp1 + Z->size[0] * j) - 1].im);
-                    Z->data[(jp1 + Z->size[0] * (j - 1)) - 1].im =
-                        anorm * Z->data[(jp1 + Z->size[0] * (j - 1)) - 1].im -
-                        (shift.re * temp - shift.im * tempr);
-                    Z->data[(jp1 + Z->size[0] * j) - 1].re = ad22_re;
-                    Z->data[(jp1 + Z->size[0] * j) - 1].im = ad22_im;
+                  for (jm1 = 1; jm1 <= n; jm1++) {
+                    temp = Z_data[(jm1 + Z->size[0] * (j - 1)) - 1].im;
+                    tempr = Z_data[(jm1 + Z->size[0] * (j - 1)) - 1].re;
+                    b_ascale_re = Z_data[(jm1 + Z->size[0] * j) - 1].re;
+                    ascale_re = Z_data[(jm1 + Z->size[0] * j) - 1].im;
+                    Z_data[(jm1 + Z->size[0] * (j - 1)) - 1].re =
+                        anorm * tempr -
+                        (shift.re * b_ascale_re + shift.im * ascale_re);
+                    Z_data[(jm1 + Z->size[0] * (j - 1)) - 1].im =
+                        anorm * Z_data[(jm1 + Z->size[0] * (j - 1)) - 1].im -
+                        (shift.re * ascale_re - shift.im * b_ascale_re);
+                    Z_data[(jm1 + Z->size[0] * j) - 1].re =
+                        anorm * b_ascale_re +
+                        (shift.re * tempr - shift.im * temp);
+                    Z_data[(jm1 + Z->size[0] * j) - 1].im =
+                        anorm * ascale_re +
+                        (shift.re * temp + shift.im * tempr);
                   }
                 }
                 jm1 = j - 1;
@@ -474,22 +469,23 @@ void b_xzhgeqz(emxArray_creal_T *A, int ilo, int ihi, emxArray_creal_T *Z,
     if (failed) {
       *info = ilast + 1;
       for (jp1 = 0; jp1 <= ilast; jp1++) {
-        alpha1->data[jp1].re = rtNaN;
-        alpha1->data[jp1].im = 0.0;
-        beta1->data[jp1].re = rtNaN;
-        beta1->data[jp1].im = 0.0;
+        alpha1_data[jp1].re = rtNaN;
+        alpha1_data[jp1].im = 0.0;
+        beta1_data[jp1].re = rtNaN;
+        beta1_data[jp1].im = 0.0;
       }
       if (compz) {
         jp1 = Z->size[0];
         jm1 = Z->size[1];
-        ifirst = Z->size[0] * Z->size[1];
+        istart = Z->size[0] * Z->size[1];
         Z->size[0] = jp1;
         Z->size[1] = jm1;
-        emxEnsureCapacity_creal_T(Z, ifirst);
-        for (ifirst = 0; ifirst < jm1; ifirst++) {
-          for (x = 0; x < jp1; x++) {
-            Z->data[x + Z->size[0] * ifirst].re = rtNaN;
-            Z->data[x + Z->size[0] * ifirst].im = 0.0;
+        emxEnsureCapacity_creal_T(Z, istart);
+        Z_data = Z->data;
+        for (istart = 0; istart < jm1; istart++) {
+          for (ifirst = 0; ifirst < jp1; ifirst++) {
+            Z_data[ifirst + Z->size[0] * istart].re = rtNaN;
+            Z_data[ifirst + Z->size[0] * istart].im = 0.0;
           }
         }
       }
@@ -499,7 +495,7 @@ void b_xzhgeqz(emxArray_creal_T *A, int ilo, int ihi, emxArray_creal_T *Z,
   }
   if (guard1) {
     for (j = 0; j <= ilo - 2; j++) {
-      alpha1->data[j] = A->data[j + A->size[0] * j];
+      alpha1_data[j] = A_data[j + A->size[0] * j];
     }
   }
 }
@@ -854,20 +850,18 @@ void xzhgeqz(const creal_T A[4], int ilo, int ihi, int *info, creal_T alpha1[2],
                 shift.re = -shift.re;
                 shift.im = -shift.im;
                 for (nm1 = col; nm1 < 3; nm1++) {
-                  anorm = b_A[nm1 + 1].re;
+                  anorm = b_A[nm1 - 1].im;
                   t = b_A[nm1 - 1].re;
-                  scale = b_A[nm1 - 1].im;
-                  ad22_im = colscale * b_A[nm1 + 1].im +
-                            (shift.re * scale + shift.im * t);
+                  scale = b_A[nm1 + 1].re;
+                  ssq = b_A[nm1 + 1].im;
                   b_A[nm1 - 1].re =
-                      colscale * b_A[nm1 - 1].re -
-                      (shift.re * b_A[nm1 + 1].re + shift.im * b_A[nm1 + 1].im);
+                      colscale * t - (shift.re * scale + shift.im * ssq);
                   b_A[nm1 - 1].im =
-                      colscale * b_A[nm1 - 1].im -
-                      (shift.re * b_A[nm1 + 1].im - shift.im * anorm);
+                      colscale * anorm - (shift.re * ssq - shift.im * scale);
                   b_A[nm1 + 1].re =
-                      colscale * anorm + (shift.re * t - shift.im * scale);
-                  b_A[nm1 + 1].im = ad22_im;
+                      colscale * scale + (shift.re * t - shift.im * anorm);
+                  b_A[nm1 + 1].im =
+                      colscale * ssq + (shift.re * anorm + shift.im * t);
                 }
                 j = 2;
               }

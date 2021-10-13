@@ -19,15 +19,21 @@
 void xgemv(int m, int n, const emxArray_real_T *A, int lda,
            const emxArray_real_T *x, emxArray_real_T *y)
 {
+  const double *A_data;
+  const double *x_data;
   double c;
+  double *y_data;
   int i;
   int i1;
   int ia;
   int iac;
   int iy;
+  y_data = y->data;
+  x_data = x->data;
+  A_data = A->data;
   if ((m != 0) && (n != 0)) {
     for (iy = 0; iy < n; iy++) {
-      y->data[iy] = 0.0;
+      y_data[iy] = 0.0;
     }
     iy = 0;
     i = lda * (n - 1) + 1;
@@ -35,9 +41,9 @@ void xgemv(int m, int n, const emxArray_real_T *A, int lda,
       c = 0.0;
       i1 = (iac + m) - 1;
       for (ia = iac; ia <= i1; ia++) {
-        c += A->data[ia - 1] * x->data[ia - iac];
+        c += A_data[ia - 1] * x_data[ia - iac];
       }
-      y->data[iy] += c;
+      y_data[iy] += c;
       iy++;
     }
   }

@@ -22,35 +22,37 @@ void array2table(const emxArray_real_T *x, double *t_metaDim_length,
                  f_matlab_internal_coder_tabular *t_varDim,
                  cell_wrap_6 t_data[4], int t_arrayProps_Description_size[2])
 {
+  const double *x_data;
   int i;
   int loop_ub;
+  x_data = x->data;
   loop_ub = x->size[0];
   i = t_data[0].f1->size[0];
   t_data[0].f1->size[0] = x->size[0];
   emxEnsureCapacity_real_T(t_data[0].f1, i);
   for (i = 0; i < loop_ub; i++) {
-    t_data[0].f1->data[i] = x->data[i];
+    t_data[0].f1->data[i] = x_data[i];
   }
   loop_ub = x->size[0];
   i = t_data[1].f1->size[0];
   t_data[1].f1->size[0] = x->size[0];
   emxEnsureCapacity_real_T(t_data[1].f1, i);
   for (i = 0; i < loop_ub; i++) {
-    t_data[1].f1->data[i] = x->data[i + x->size[0]];
+    t_data[1].f1->data[i] = x_data[i + x->size[0]];
   }
   loop_ub = x->size[0];
   i = t_data[2].f1->size[0];
   t_data[2].f1->size[0] = x->size[0];
   emxEnsureCapacity_real_T(t_data[2].f1, i);
   for (i = 0; i < loop_ub; i++) {
-    t_data[2].f1->data[i] = x->data[i + x->size[0] * 2];
+    t_data[2].f1->data[i] = x_data[i + x->size[0] * 2];
   }
   loop_ub = x->size[0];
   i = t_data[3].f1->size[0];
   t_data[3].f1->size[0] = x->size[0];
   emxEnsureCapacity_real_T(t_data[3].f1, i);
   for (i = 0; i < loop_ub; i++) {
-    t_data[3].f1->data[i] = x->data[i + x->size[0] * 3];
+    t_data[3].f1->data[i] = x_data[i + x->size[0] * 3];
   }
   loop_ub = x->size[0];
   t_varDim->length = 4.0;

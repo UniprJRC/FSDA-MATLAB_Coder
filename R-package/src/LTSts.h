@@ -35,6 +35,8 @@ void LTSts(const emxArray_real_T *y, double varargin_2, bool varargin_4,
            double varargin_26, double varargin_28, bool varargin_30,
            struct_LTSts_T *out);
 
+double corfactorREW(double n, double alpha);
+
 void likyhat(const captured_var *trend, const captured_var *seasonal,
              const captured_var *s, c_captured_var *yhatseaso,
              const c_captured_var *Xseasof, const captured_var *varampl,

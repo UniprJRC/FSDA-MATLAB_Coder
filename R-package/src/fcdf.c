@@ -13,6 +13,7 @@
 #include "fcdf.h"
 #include "betainc.h"
 #include "gammainc.h"
+#include "gammaln.h"
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 #include <string.h>
@@ -27,7 +28,9 @@ double fcdf(double x, double v2)
       if (rtIsInf(x)) {
         p = 1.0;
       } else if (rtIsInf(v2)) {
-        p = (gammainc(2.0 * x / 2.0, 1.0)).re;
+        num = 2.0;
+        gammaln(&num);
+        p = (scalar_gammainc(2.0 * x / 2.0, 1.0, 0.0, num)).re;
       } else if (v2 <= x * 2.0) {
         p = (b_betainc(v2 / (v2 + x * 2.0), v2 / 2.0, 1.0)).re;
       } else {

@@ -72,7 +72,11 @@ creal_T b_str2double(const char s[2])
   }
   b_k = k + 1;
   if (success) {
-    if ((k + 1 <= 2) && ((s[k] == 'j') || (s[k] == 'i'))) {
+    isneg = false;
+    if (k + 1 <= 2) {
+      isneg = ((s[k] == 'j') || (s[k] == 'i'));
+    }
+    if (isneg) {
       isimag1 = true;
       b_k = k + 2;
       while ((b_k <= 2) && (bv[(unsigned char)s[1] & 127] || (s[1] == '\x00') ||

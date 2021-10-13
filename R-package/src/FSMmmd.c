@@ -18,6 +18,7 @@
 #include "colon.h"
 #include "combineVectorElements.h"
 #include "cov.h"
+#include "eml_mtimes_helper.h"
 #include "find.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_internal_types.h"
@@ -25,11 +26,11 @@
 #include "ifWhileCond.h"
 #include "int2str.h"
 #include "inv.h"
+#include "mahalFS.h"
 #include "minOrMax.h"
 #include "mod.h"
 #include "mrdivide_helper.h"
 #include "mtimes.h"
-#include "power.h"
 #include "qr.h"
 #include "quickselectFS.h"
 #include "randsample.h"
@@ -46,21 +47,24 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             bool varargin_6, emxArray_real_T *mmd, emxArray_real_T *Un,
             emxArray_real_T *varargout_1)
 {
-  emxArray_boolean_T *MDltminT;
   emxArray_boolean_T *MDltminbsb;
+  emxArray_boolean_T *b_bsbT;
   emxArray_boolean_T *bsbT;
   emxArray_boolean_T *bsbriniT;
   emxArray_boolean_T *oldbsbT;
+  emxArray_boolean_T *unitoutT;
   emxArray_char_T_1x310 c_mm;
+  emxArray_int32_T *bsbr;
   emxArray_int32_T *r1;
   emxArray_int32_T *r10;
   emxArray_int32_T *r11;
-  emxArray_int32_T *r4;
+  emxArray_int32_T *r12;
   emxArray_int32_T *r5;
   emxArray_int32_T *r6;
   emxArray_int32_T *r7;
   emxArray_int32_T *r8;
   emxArray_int32_T *r9;
+  emxArray_int32_T *unit;
   emxArray_real_T *MD;
   emxArray_real_T *R;
   emxArray_real_T *S;
@@ -68,23 +72,20 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   emxArray_real_T *Yb;
   emxArray_real_T *Ym;
   emxArray_real_T *b_Ym;
-  emxArray_real_T *bsbr;
   emxArray_real_T *bsbsteps;
   emxArray_real_T *meoldbsb;
   emxArray_real_T *mi;
   emxArray_real_T *mibsbr;
   emxArray_real_T *r;
-  emxArray_real_T *r2;
   emxArray_real_T *r3;
+  emxArray_real_T *r4;
   emxArray_real_T *seq;
-  emxArray_real_T *unit;
   emxArray_real_T *unitout;
   emxArray_real_T *y;
   emxArray_real_T *ym;
   emxArray_real_T *zi;
   emxArray_uint32_T *bsbrini;
-  double bsbradd[10];
-  double unitadd[10];
+  const double *Y_data;
   double b_mm;
   double d;
   double init1;
@@ -92,10 +93,26 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   double minMD;
   double percn;
   double rankgap;
+  double *MD_data;
+  double *S_data;
+  double *Szi_data;
+  double *Un_data;
+  double *Ym_data;
+  double *bsb_data;
+  double *bsbsteps_data;
+  double *meoldbsb_data;
+  double *mi_data;
+  double *mibsbr_data;
+  double *mmd_data;
+  double *seq_data;
+  double *unitout_data;
+  double *varargout_1_data;
+  double *ym_data;
+  int bsbradd[10];
   int tmp_data[10];
+  int unitadd[10];
   int b_i;
   int b_loop_ub;
-  int end;
   int i;
   int ij;
   int ini0;
@@ -105,13 +122,26 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   int mm;
   int n;
   int nwhile;
+  int partialTrueCount;
   int trueCount;
   int v;
+  int *bsbr_data;
+  unsigned int *bsbrini_data;
+  int *r13;
+  int *r2;
+  int *unit_data;
   bool Ra;
   bool b_guard1 = false;
   bool exitg1;
   bool guard1 = false;
-  emxInit_boolean_T(&MDltminT, 1);
+  bool *MDltminbsb_data;
+  bool *bsbT_data;
+  bool *bsbriniT_data;
+  bool *oldbsbT_data;
+  bool *unitoutT_data;
+  bsb_data = bsb->data;
+  Y_data = Y->data;
+  emxInit_boolean_T(&bsbT, 1);
   /* FSMmmd monitors minMD */
   /*  */
   /* <a href="matlab: docsearchFS('FSMmmd')">Link to the help function</a> */
@@ -136,7 +166,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*                chosen else if bsb is not 0 the search will start with */
   /*                m0=length(bsb) */
   /*                Data Types - single | double */
-  /*  */
   /*  */
   /*  Optional input arguments: */
   /*  */
@@ -177,7 +206,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*                  Example - 'nocheck',false */
   /*                  Data Types - logical */
   /*  */
-  /*  */
   /*  plots :     It specify whether it is necessary to produce the plots of
    * minimum Mahalanobis */
   /*                  distance. Scalar. If plots=1, a plot of the monitoring of
@@ -187,7 +215,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*                else (default) no plot is produced. */
   /*                  Example - 'plots',0 */
   /*                  Data Types - double */
-  /*  */
   /*  */
   /*  Remark :      The user should only give the input arguments that have to
    */
@@ -346,7 +373,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*                specified for the */
   /*                caller function. */
   /*  */
-  /*  */
   /*   Optional input arguments: */
   /*  */
   /*  Output: */
@@ -363,8 +389,6 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
-  /*  */
   /*  */
   /* $LastChangedDate::                      $: Date of the last commit */
   /*  */
@@ -393,32 +417,36 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /* init1=options.init; */
   /*  Write in structure 'options' the options chosen by the user */
   /*  And check if the optional user parameters are reasonable. */
-  i = MDltminT->size[0];
-  MDltminT->size[0] = bsb->size[0];
-  emxEnsureCapacity_boolean_T(MDltminT, i);
+  i = bsbT->size[0];
+  bsbT->size[0] = bsb->size[0];
+  emxEnsureCapacity_boolean_T(bsbT, i);
+  bsbT_data = bsbT->data;
   loop_ub = bsb->size[0];
   for (i = 0; i < loop_ub; i++) {
-    MDltminT->data[i] = (bsb->data[i] == 0.0);
+    bsbT_data[i] = (bsb_data[i] == 0.0);
   }
   emxInit_real_T(&Yb, 2);
   emxInit_real_T(&r, 2);
-  if (ifWhileCond(MDltminT)) {
+  if (ifWhileCond(bsbT)) {
     Ra = true;
     nwhile = 1;
     while (Ra && (nwhile < 100)) {
       /*  Extract a random sample of size v+1 */
       randsample(n, (double)v + 1.0, bsb);
+      bsb_data = bsb->data;
       /*  Check if the var-cov matrix of the random sample is full (i.e =v) */
       loop_ub = Y->size[1];
       i = Yb->size[0] * Yb->size[1];
       Yb->size[0] = bsb->size[0];
       Yb->size[1] = Y->size[1];
       emxEnsureCapacity_real_T(Yb, i);
+      S_data = Yb->data;
       for (i = 0; i < loop_ub; i++) {
         b_loop_ub = bsb->size[0];
-        for (end = 0; end < b_loop_ub; end++) {
-          Yb->data[end + Yb->size[0] * i] =
-              Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
+        for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+             partialTrueCount++) {
+          S_data[partialTrueCount + Yb->size[0] * i] =
+              Y_data[((int)bsb_data[partialTrueCount] + Y->size[0] * i) - 1];
         }
       }
       cov(Yb, r);
@@ -428,6 +456,7 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     }
   }
   emxInit_real_T(&ym, 2);
+  ym_data = ym->data;
   /*  percn = scalar which controls up to which point of the search it is */
   /*  better to use linear indexing to extract the units forming subset. For */
   /*  example percn=0.85*n means that units belonging to susbet are found using
@@ -445,42 +474,47 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     ym->size[0] = 1;
     ym->size[1] = Y->size[0];
     emxEnsureCapacity_real_T(ym, i);
+    ym_data = ym->data;
     loop_ub = Y->size[0] - 1;
     for (i = 0; i <= loop_ub; i++) {
-      ym->data[i] = (double)i + 1.0;
+      ym_data[i] = (double)i + 1.0;
     }
   }
   emxInit_real_T(&seq, 1);
   i = seq->size[0];
   seq->size[0] = ym->size[1];
   emxEnsureCapacity_real_T(seq, i);
+  seq_data = seq->data;
   loop_ub = ym->size[1];
   for (i = 0; i < loop_ub; i++) {
-    seq->data[i] = ym->data[i];
+    seq_data[i] = ym_data[i];
   }
-  memset(&unitadd[0], 0, 10U * sizeof(double));
-  memset(&bsbradd[0], 0, 10U * sizeof(double));
-  emxInit_boolean_T(&bsbT, 1);
+  for (b_i = 0; b_i < 10; b_i++) {
+    unitadd[b_i] = 0;
+    bsbradd[b_i] = 0;
+  }
   /*  Initialization of the n x 1 Boolean vector which contains a true in */
   /*  correspondence of the units belonging to subset in each step */
   i = bsbT->size[0];
   bsbT->size[0] = Y->size[0];
   emxEnsureCapacity_boolean_T(bsbT, i);
+  bsbT_data = bsbT->data;
   loop_ub = Y->size[0];
   for (i = 0; i < loop_ub; i++) {
-    bsbT->data[i] = false;
+    bsbT_data[i] = false;
   }
   emxInit_int32_T(&r1, 1);
   i = r1->size[0];
   r1->size[0] = bsb->size[0];
   emxEnsureCapacity_int32_T(r1, i);
+  r2 = r1->data;
   loop_ub = bsb->size[0];
   for (i = 0; i < loop_ub; i++) {
-    r1->data[i] = (int)bsb->data[i];
+    r2[i] = (int)bsb_data[i];
   }
   loop_ub = r1->size[0];
   for (i = 0; i < loop_ub; i++) {
-    bsbT->data[r1->data[i] - 1] = true;
+    bsbT_data[r2[i] - 1] = true;
   }
   emxInit_real_T(&S, 2);
   /*  Initialization for Matlab coder */
@@ -489,58 +523,65 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   S->size[0] = Y->size[1];
   S->size[1] = Y->size[1];
   emxEnsureCapacity_real_T(S, i);
+  S_data = S->data;
   loop_ub = Y->size[1] * Y->size[1];
   for (i = 0; i < loop_ub; i++) {
-    S->data[i] = 0.0;
+    S_data[i] = 0.0;
   }
   emxInit_real_T(&meoldbsb, 2);
   i = meoldbsb->size[0] * meoldbsb->size[1];
   meoldbsb->size[0] = 1;
   meoldbsb->size[1] = Y->size[1];
   emxEnsureCapacity_real_T(meoldbsb, i);
+  meoldbsb_data = meoldbsb->data;
   loop_ub = Y->size[1];
   for (i = 0; i < loop_ub; i++) {
-    meoldbsb->data[i] = 0.0;
+    meoldbsb_data[i] = 0.0;
   }
   emxInit_boolean_T(&oldbsbT, 1);
   i = oldbsbT->size[0];
   oldbsbT->size[0] = bsbT->size[0];
   emxEnsureCapacity_boolean_T(oldbsbT, i);
+  oldbsbT_data = oldbsbT->data;
   loop_ub = bsbT->size[0];
   for (i = 0; i < loop_ub; i++) {
-    oldbsbT->data[i] = bsbT->data[i];
+    oldbsbT_data[i] = bsbT_data[i];
   }
-  emxInit_real_T(&bsbr, 1);
+  emxInit_int32_T(&bsbr, 1);
   i = bsbr->size[0];
   bsbr->size[0] = Y->size[0];
-  emxEnsureCapacity_real_T(bsbr, i);
+  emxEnsureCapacity_int32_T(bsbr, i);
+  bsbr_data = bsbr->data;
   loop_ub = Y->size[0];
   for (i = 0; i < loop_ub; i++) {
-    bsbr->data[i] = 0.0;
+    bsbr_data[i] = 0;
   }
   emxInit_real_T(&unitout, 1);
   i = unitout->size[0];
   unitout->size[0] = Y->size[0];
   emxEnsureCapacity_real_T(unitout, i);
+  unitout_data = unitout->data;
   loop_ub = Y->size[0];
   for (i = 0; i < loop_ub; i++) {
-    unitout->data[i] = 0.0;
+    unitout_data[i] = 0.0;
   }
   emxInit_boolean_T(&bsbriniT, 1);
   i = bsbriniT->size[0];
   bsbriniT->size[0] = bsbT->size[0];
   emxEnsureCapacity_boolean_T(bsbriniT, i);
+  bsbriniT_data = bsbriniT->data;
   loop_ub = bsbT->size[0];
   for (i = 0; i < loop_ub; i++) {
-    bsbriniT->data[i] = bsbT->data[i];
+    bsbriniT_data[i] = bsbT_data[i];
   }
   emxInit_uint32_T(&bsbrini, 1);
   i = bsbrini->size[0];
   bsbrini->size[0] = Y->size[0];
   emxEnsureCapacity_uint32_T(bsbrini, i);
+  bsbrini_data = bsbrini->data;
   loop_ub = Y->size[0];
   for (i = 0; i < loop_ub; i++) {
-    bsbrini->data[i] = 0U;
+    bsbrini_data[i] = 0U;
   }
   ini0 = bsb->size[0];
   /*  check init */
@@ -563,6 +604,7 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  information about units forming subset at step init1. */
   /*  Default for vector bsbsteps which indicates for which steps of the fwd */
   /*  search units forming subset have to be saved */
+  emxInit_real_T(&mi, 2);
   emxInit_real_T(&Szi, 1);
   emxInit_real_T(&bsbsteps, 1);
   if (Y->size[0] <= 5000) {
@@ -572,7 +614,8 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
       ym->size[0] = 1;
       ym->size[1] = 1;
       emxEnsureCapacity_real_T(ym, i);
-      ym->data[0] = rtNaN;
+      ym_data = ym->data;
+      ym_data[0] = rtNaN;
     } else if (Y->size[0] < init1) {
       irank = 0;
       ym->size[0] = 1;
@@ -583,43 +626,49 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
       } else if (floor(init1) == init1) {
         irank = (int)((double)Y->size[0] - init1) + 1;
       } else {
-        eml_float_colon(init1, Y->size[0], ym);
-        irank = ym->size[1];
+        eml_float_colon(init1, Y->size[0], mi);
+        irank = mi->size[1];
       }
       if (rtIsInf(init1) && (init1 == Y->size[0])) {
         i = ym->size[0] * ym->size[1];
         ym->size[0] = 1;
         ym->size[1] = 1;
         emxEnsureCapacity_real_T(ym, i);
-        ym->data[0] = rtNaN;
+        ym_data = ym->data;
+        ym_data[0] = rtNaN;
       } else if (floor(init1) == init1) {
         i = ym->size[0] * ym->size[1];
         ym->size[0] = 1;
         ym->size[1] = (int)((double)Y->size[0] - init1) + 1;
         emxEnsureCapacity_real_T(ym, i);
+        ym_data = ym->data;
         loop_ub = (int)((double)Y->size[0] - init1);
         for (i = 0; i <= loop_ub; i++) {
-          ym->data[i] = init1 + (double)i;
+          ym_data[i] = init1 + (double)i;
         }
       } else {
         eml_float_colon(init1, Y->size[0], ym);
+        ym_data = ym->data;
       }
     }
     i = Szi->size[0];
     Szi->size[0] = ym->size[1];
     emxEnsureCapacity_real_T(Szi, i);
+    Szi_data = Szi->data;
     loop_ub = ym->size[1];
     for (i = 0; i < loop_ub; i++) {
-      Szi->data[i] = ym->data[i];
+      Szi_data[i] = ym_data[i];
     }
     i = bsbsteps->size[0];
     bsbsteps->size[0] = irank;
     emxEnsureCapacity_real_T(bsbsteps, i);
+    bsbsteps_data = bsbsteps->data;
     for (i = 0; i < irank; i++) {
-      bsbsteps->data[i] = Szi->data[i];
+      bsbsteps_data[i] = Szi_data[i];
     }
   } else {
     emxInit_real_T(&y, 2);
+    MD_data = y->data;
     ksor = (init1 + 100.0) - b_mod(init1);
     irank = 100 * (int)floor((double)Y->size[0] / 100.0);
     if (rtIsNaN(ksor)) {
@@ -627,7 +676,8 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
       y->size[0] = 1;
       y->size[1] = 1;
       emxEnsureCapacity_real_T(y, i);
-      y->data[0] = rtNaN;
+      MD_data = y->data;
+      MD_data[0] = rtNaN;
     } else if (irank < ksor) {
       y->size[0] = 1;
       y->size[1] = 0;
@@ -636,26 +686,30 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
       y->size[0] = 1;
       y->size[1] = 1;
       emxEnsureCapacity_real_T(y, i);
-      y->data[0] = rtNaN;
+      MD_data = y->data;
+      MD_data[0] = rtNaN;
     } else if (floor(ksor) == ksor) {
       i = y->size[0] * y->size[1];
       y->size[0] = 1;
       loop_ub = (int)floor(((double)irank - ksor) / 100.0);
       y->size[1] = loop_ub + 1;
       emxEnsureCapacity_real_T(y, i);
+      MD_data = y->data;
       for (i = 0; i <= loop_ub; i++) {
-        y->data[i] = ksor + 100.0 * (double)i;
+        MD_data[i] = ksor + 100.0 * (double)i;
       }
     } else {
       b_eml_float_colon(ksor, irank, y);
+      MD_data = y->data;
     }
     i = bsbsteps->size[0];
     bsbsteps->size[0] = y->size[1] + 1;
     emxEnsureCapacity_real_T(bsbsteps, i);
-    bsbsteps->data[0] = init1;
+    bsbsteps_data = bsbsteps->data;
+    bsbsteps_data[0] = init1;
     loop_ub = y->size[1];
     for (i = 0; i < loop_ub; i++) {
-      bsbsteps->data[i + 1] = y->data[i];
+      bsbsteps_data[i + 1] = MD_data[i];
     }
     emxFree_real_T(&y);
   }
@@ -663,9 +717,10 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   varargout_1->size[0] = Y->size[0];
   varargout_1->size[1] = bsbsteps->size[0];
   emxEnsureCapacity_real_T(varargout_1, i);
+  varargout_1_data = varargout_1->data;
   loop_ub = Y->size[0] * bsbsteps->size[0];
   for (i = 0; i < loop_ub; i++) {
-    varargout_1->data[i] = rtNaN;
+    varargout_1_data[i] = rtNaN;
   }
   /*   Un is a Matrix whose 2nd column:11th col contain the unit(s) just */
   /*   included. */
@@ -674,7 +729,8 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     ym->size[0] = 1;
     ym->size[1] = 1;
     emxEnsureCapacity_real_T(ym, i);
-    ym->data[0] = rtNaN;
+    ym_data = ym->data;
+    ym_data[0] = rtNaN;
   } else if (Y->size[0] < init1 + 1.0) {
     ym->size[0] = 1;
     ym->size[1] = 0;
@@ -683,48 +739,55 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     ym->size[0] = 1;
     ym->size[1] = 1;
     emxEnsureCapacity_real_T(ym, i);
-    ym->data[0] = rtNaN;
+    ym_data = ym->data;
+    ym_data[0] = rtNaN;
   } else if (floor(init1 + 1.0) == init1 + 1.0) {
     i = ym->size[0] * ym->size[1];
     ym->size[0] = 1;
     ym->size[1] = (int)floor((double)Y->size[0] - (init1 + 1.0)) + 1;
     emxEnsureCapacity_real_T(ym, i);
+    ym_data = ym->data;
     loop_ub = (int)floor((double)Y->size[0] - (init1 + 1.0));
     for (i = 0; i <= loop_ub; i++) {
-      ym->data[i] = (init1 + 1.0) + (double)i;
+      ym_data[i] = (init1 + 1.0) + (double)i;
     }
   } else {
     eml_float_colon(init1 + 1.0, Y->size[0], ym);
+    ym_data = ym->data;
   }
   irank = (int)((double)Y->size[0] - init1);
   i = Szi->size[0];
   Szi->size[0] = ym->size[1];
   emxEnsureCapacity_real_T(Szi, i);
+  Szi_data = Szi->data;
   loop_ub = ym->size[1];
   for (i = 0; i < loop_ub; i++) {
-    Szi->data[i] = ym->data[i];
-  }
-  emxInit_real_T(&r2, 2);
-  i = r2->size[0] * r2->size[1];
-  r2->size[0] = irank;
-  r2->size[1] = 10;
-  emxEnsureCapacity_real_T(r2, i);
-  loop_ub = irank * 10;
-  for (i = 0; i < loop_ub; i++) {
-    r2->data[i] = rtNaN;
+    Szi_data[i] = ym_data[i];
   }
   emxInit_real_T(&r3, 2);
-  cat(Szi, r2, r3);
+  i = r3->size[0] * r3->size[1];
+  r3->size[0] = irank;
+  r3->size[1] = 10;
+  emxEnsureCapacity_real_T(r3, i);
+  MD_data = r3->data;
+  loop_ub = irank * 10;
+  for (i = 0; i < loop_ub; i++) {
+    MD_data[i] = rtNaN;
+  }
+  emxInit_real_T(&r4, 2);
+  cat(Szi, r3, r4);
+  MD_data = r4->data;
   i = Un->size[0] * Un->size[1];
-  Un->size[0] = r3->size[0];
+  Un->size[0] = r4->size[0];
   Un->size[1] = 11;
   emxEnsureCapacity_real_T(Un, i);
-  loop_ub = r3->size[0] * 11;
-  emxFree_real_T(&r2);
-  for (i = 0; i < loop_ub; i++) {
-    Un->data[i] = r3->data[i];
-  }
+  Un_data = Un->data;
+  loop_ub = r4->size[0] * 11;
   emxFree_real_T(&r3);
+  for (i = 0; i < loop_ub; i++) {
+    Un_data[i] = MD_data[i];
+  }
+  emxFree_real_T(&r4);
   /*   mmd has two columns */
   /*   1st col = dimension of the subset */
   /*   2nd col min. Mahalanobis distances among the units */
@@ -734,7 +797,8 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     ym->size[0] = 1;
     ym->size[1] = 1;
     emxEnsureCapacity_real_T(ym, i);
-    ym->data[0] = rtNaN;
+    ym_data = ym->data;
+    ym_data[0] = rtNaN;
   } else if ((double)Y->size[0] - 1.0 < init1) {
     ym->size[0] = 1;
     ym->size[1] = 0;
@@ -743,48 +807,54 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     ym->size[0] = 1;
     ym->size[1] = 1;
     emxEnsureCapacity_real_T(ym, i);
-    ym->data[0] = rtNaN;
+    ym_data = ym->data;
+    ym_data[0] = rtNaN;
   } else if (floor(init1) == init1) {
     i = ym->size[0] * ym->size[1];
     ym->size[0] = 1;
     ym->size[1] = (int)(((double)Y->size[0] - 1.0) - init1) + 1;
     emxEnsureCapacity_real_T(ym, i);
+    ym_data = ym->data;
     loop_ub = (int)(((double)Y->size[0] - 1.0) - init1);
     for (i = 0; i <= loop_ub; i++) {
-      ym->data[i] = init1 + (double)i;
+      ym_data[i] = init1 + (double)i;
     }
   } else {
     eml_float_colon(init1, (double)Y->size[0] - 1.0, ym);
+    ym_data = ym->data;
   }
   i = Szi->size[0];
   Szi->size[0] = (int)((double)Y->size[0] - init1);
   emxEnsureCapacity_real_T(Szi, i);
+  Szi_data = Szi->data;
   loop_ub = (int)((double)Y->size[0] - init1);
   for (i = 0; i < loop_ub; i++) {
-    Szi->data[i] = 0.0;
+    Szi_data[i] = 0.0;
   }
   i = mmd->size[0] * mmd->size[1];
   mmd->size[0] = ym->size[1];
   mmd->size[1] = 2;
   emxEnsureCapacity_real_T(mmd, i);
+  mmd_data = mmd->data;
   loop_ub = ym->size[1];
   for (i = 0; i < loop_ub; i++) {
-    mmd->data[i] = ym->data[i];
+    mmd_data[i] = ym_data[i];
   }
   loop_ub = Szi->size[0];
   for (i = 0; i < loop_ub; i++) {
-    mmd->data[i + mmd->size[0]] = 0.0;
+    mmd_data[i + mmd->size[0]] = 0.0;
   }
-  emxInit_real_T(&unit, 1);
+  emxInit_int32_T(&unit, 1);
   /*  unit is the vector which will contain the units which enter subset at each
    */
   /*  step. It is initialized as a vector of zeros */
   i = unit->size[0];
   unit->size[0] = bsb->size[0];
-  emxEnsureCapacity_real_T(unit, i);
+  emxEnsureCapacity_int32_T(unit, i);
+  unit_data = unit->data;
   loop_ub = bsb->size[0];
   for (i = 0; i < loop_ub; i++) {
-    unit->data[i] = 0.0;
+    unit_data[i] = 0;
   }
   lunit = bsb->size[0];
   /*  If the subset Y(bsb,:) is not full rank or a column is constant, then we
@@ -795,22 +865,23 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   Yb->size[0] = bsb->size[0];
   Yb->size[1] = Y->size[1];
   emxEnsureCapacity_real_T(Yb, i);
+  S_data = Yb->data;
   for (i = 0; i < loop_ub; i++) {
     b_loop_ub = bsb->size[0];
-    for (end = 0; end < b_loop_ub; end++) {
-      Yb->data[end + Yb->size[0] * i] =
-          Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
+    for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+         partialTrueCount++) {
+      S_data[partialTrueCount + Yb->size[0] * i] =
+          Y_data[((int)bsb_data[partialTrueCount] + Y->size[0] * i) - 1];
     }
   }
   irank = local_rank(Yb);
   emxInit_real_T(&Ym, 2);
-  emxInit_real_T(&mi, 2);
+  emxInit_boolean_T(&unitoutT, 1);
   emxInit_real_T(&mibsbr, 2);
   emxInit_real_T(&zi, 2);
   emxInit_real_T(&MD, 1);
   emxInit_real_T(&R, 2);
   emxInit_boolean_T(&MDltminbsb, 1);
-  emxInit_int32_T(&r4, 1);
   emxInit_int32_T(&r5, 1);
   emxInit_int32_T(&r6, 1);
   emxInit_int32_T(&r7, 1);
@@ -818,7 +889,9 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   emxInit_int32_T(&r9, 1);
   emxInit_int32_T(&r10, 1);
   emxInit_int32_T(&r11, 1);
+  emxInit_int32_T(&r12, 1);
   emxInit_real_T(&b_Ym, 2);
+  emxInit_boolean_T(&b_bsbT, 1);
   guard1 = false;
   if (irank < v) {
     guard1 = true;
@@ -828,36 +901,62 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     Yb->size[0] = bsb->size[0];
     Yb->size[1] = Y->size[1];
     emxEnsureCapacity_real_T(Yb, i);
+    S_data = Yb->data;
     for (i = 0; i < loop_ub; i++) {
       b_loop_ub = bsb->size[0];
-      for (end = 0; end < b_loop_ub; end++) {
-        Yb->data[end + Yb->size[0] * i] =
-            Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
+      for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+           partialTrueCount++) {
+        S_data[partialTrueCount + Yb->size[0] * i] =
+            Y_data[((int)bsb_data[partialTrueCount] + Y->size[0] * i) - 1];
       }
     }
     maximum(Yb, ym);
+    ym_data = ym->data;
     loop_ub = Y->size[1];
     i = Yb->size[0] * Yb->size[1];
     Yb->size[0] = bsb->size[0];
     Yb->size[1] = Y->size[1];
     emxEnsureCapacity_real_T(Yb, i);
+    S_data = Yb->data;
     for (i = 0; i < loop_ub; i++) {
       b_loop_ub = bsb->size[0];
-      for (end = 0; end < b_loop_ub; end++) {
-        Yb->data[end + Yb->size[0] * i] =
-            Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
+      for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+           partialTrueCount++) {
+        S_data[partialTrueCount + Yb->size[0] * i] =
+            Y_data[((int)bsb_data[partialTrueCount] + Y->size[0] * i) - 1];
       }
     }
     minimum(Yb, mibsbr);
+    mibsbr_data = mibsbr->data;
     i = mi->size[0] * mi->size[1];
     mi->size[0] = 1;
-    mi->size[1] = ym->size[1];
-    emxEnsureCapacity_real_T(mi, i);
-    loop_ub = ym->size[1];
-    for (i = 0; i < loop_ub; i++) {
-      mi->data[i] = ym->data[i] - mibsbr->data[i];
+    if (mibsbr->size[1] == 1) {
+      mi->size[1] = ym->size[1];
+    } else {
+      mi->size[1] = mibsbr->size[1];
     }
-    if (c_minimum(mi) == 0.0) {
+    emxEnsureCapacity_real_T(mi, i);
+    mi_data = mi->data;
+    irank = (ym->size[1] != 1);
+    nwhile = (mibsbr->size[1] != 1);
+    if (mibsbr->size[1] == 1) {
+      loop_ub = ym->size[1];
+    } else {
+      loop_ub = mibsbr->size[1];
+    }
+    for (i = 0; i < loop_ub; i++) {
+      mi_data[i] = ym_data[i * irank] - mibsbr_data[i * nwhile];
+    }
+    i = ym->size[0] * ym->size[1];
+    ym->size[0] = 1;
+    ym->size[1] = mi->size[1];
+    emxEnsureCapacity_real_T(ym, i);
+    ym_data = ym->data;
+    loop_ub = mi->size[1];
+    for (i = 0; i < loop_ub; i++) {
+      ym_data[i] = mi_data[i];
+    }
+    if (c_minimum(ym) == 0.0) {
       guard1 = true;
     } else {
       /*  ij = index which is linked with the columns of matrix BB. During the
@@ -876,41 +975,47 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           Yb->size[0] = bsb->size[0];
           Yb->size[1] = Y->size[1];
           emxEnsureCapacity_real_T(Yb, i);
+          S_data = Yb->data;
           for (i = 0; i < loop_ub; i++) {
             b_loop_ub = bsb->size[0];
-            for (end = 0; end < b_loop_ub; end++) {
-              Yb->data[end + Yb->size[0] * i] =
-                  Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
+            for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                 partialTrueCount++) {
+              S_data[partialTrueCount + Yb->size[0] * i] =
+                  Y_data[((int)bsb_data[partialTrueCount] + Y->size[0] * i) -
+                         1];
             }
           }
         } else {
-          end = bsbT->size[0] - 1;
+          b_loop_ub = bsbT->size[0] - 1;
           trueCount = 0;
-          for (b_i = 0; b_i <= end; b_i++) {
-            if (bsbT->data[b_i]) {
+          for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+            if (bsbT_data[b_i]) {
               trueCount++;
             }
           }
-          i = r4->size[0];
-          r4->size[0] = trueCount;
-          emxEnsureCapacity_int32_T(r4, i);
-          b_loop_ub = 0;
-          for (b_i = 0; b_i <= end; b_i++) {
-            if (bsbT->data[b_i]) {
-              r4->data[b_loop_ub] = b_i + 1;
-              b_loop_ub++;
+          i = r5->size[0];
+          r5->size[0] = trueCount;
+          emxEnsureCapacity_int32_T(r5, i);
+          r2 = r5->data;
+          partialTrueCount = 0;
+          for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+            if (bsbT_data[b_i]) {
+              r2[partialTrueCount] = b_i + 1;
+              partialTrueCount++;
             }
           }
           loop_ub = Y->size[1];
           i = Yb->size[0] * Yb->size[1];
-          Yb->size[0] = r4->size[0];
+          Yb->size[0] = r5->size[0];
           Yb->size[1] = Y->size[1];
           emxEnsureCapacity_real_T(Yb, i);
+          S_data = Yb->data;
           for (i = 0; i < loop_ub; i++) {
-            b_loop_ub = r4->size[0];
-            for (end = 0; end < b_loop_ub; end++) {
-              Yb->data[end + Yb->size[0] * i] =
-                  Y->data[(r4->data[end] + Y->size[0] * i) - 1];
+            b_loop_ub = r5->size[0];
+            for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                 partialTrueCount++) {
+              S_data[partialTrueCount + Yb->size[0] * i] =
+                  Y_data[(r2[partialTrueCount] + Y->size[0] * i) - 1];
             }
           }
         }
@@ -919,49 +1024,51 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           i = MD->size[0];
           MD->size[0] = bsbsteps->size[0];
           emxEnsureCapacity_real_T(MD, i);
+          MD_data = MD->data;
           loop_ub = bsbsteps->size[0];
           for (i = 0; i < loop_ub; i++) {
-            MD->data[i] = b_mm - bsbsteps->data[i];
+            MD_data[i] = b_mm - bsbsteps_data[i];
           }
           irank = MD->size[0];
           i = Szi->size[0];
           Szi->size[0] = MD->size[0];
           emxEnsureCapacity_real_T(Szi, i);
+          Szi_data = Szi->data;
           for (b_loop_ub = 0; b_loop_ub < irank; b_loop_ub++) {
-            Szi->data[b_loop_ub] = fabs(MD->data[b_loop_ub]);
+            Szi_data[b_loop_ub] = fabs(MD_data[b_loop_ub]);
           }
           if (b_minimum(Szi) == 0.0) {
             /*  intersect(mm,bsbsteps)==mm */
             if (b_mm <= percn) {
               loop_ub = bsb->size[0];
               for (i = 0; i < loop_ub; i++) {
-                varargout_1
-                    ->data[((int)bsb->data[i] + varargout_1->size[0] * ij) -
-                           1] = bsb->data[i];
+                varargout_1_data[((int)bsb_data[i] +
+                                  varargout_1->size[0] * ij) -
+                                 1] = bsb_data[i];
               }
             } else {
-              end = bsbT->size[0] - 1;
+              b_loop_ub = bsbT->size[0] - 1;
               trueCount = 0;
-              for (b_i = 0; b_i <= end; b_i++) {
-                if (bsbT->data[b_i]) {
+              for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                if (bsbT_data[b_i]) {
                   trueCount++;
                 }
               }
-              i = r5->size[0];
-              r5->size[0] = trueCount;
-              emxEnsureCapacity_int32_T(r5, i);
-              b_loop_ub = 0;
-              for (b_i = 0; b_i <= end; b_i++) {
-                if (bsbT->data[b_i]) {
-                  r5->data[b_loop_ub] = b_i + 1;
-                  b_loop_ub++;
+              i = r6->size[0];
+              r6->size[0] = trueCount;
+              emxEnsureCapacity_int32_T(r6, i);
+              r2 = r6->data;
+              partialTrueCount = 0;
+              for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                if (bsbT_data[b_i]) {
+                  r2[partialTrueCount] = b_i + 1;
+                  partialTrueCount++;
                 }
               }
-              loop_ub = r5->size[0];
+              loop_ub = r6->size[0];
               for (i = 0; i < loop_ub; i++) {
-                varargout_1
-                    ->data[(r5->data[i] + varargout_1->size[0] * ij) - 1] =
-                    seq->data[r5->data[i] - 1];
+                varargout_1_data[(r2[i] + varargout_1->size[0] * ij) - 1] =
+                    seq_data[r2[i] - 1];
               }
             }
             ij++;
@@ -973,14 +1080,16 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
         i = ym->size[0] * ym->size[1];
         ym->size[0] = 1;
         emxEnsureCapacity_real_T(ym, i);
+        ym_data = ym->data;
         loop_ub = ym->size[1] - 1;
         for (i = 0; i <= loop_ub; i++) {
-          ym->data[i] /= b_mm;
+          ym_data[i] /= b_mm;
         }
         /*  Ym = n-by-v matrix containing deviations from the means computed */
         /*  using units forming subset */
         /*  Ym=Y-one*ym; */
         bsxfun(Y, ym, Ym);
+        Ym_data = Ym->data;
         b_guard1 = false;
         if (b_mm - (double)lunit > (double)v + 1.0) {
           /*  Find new S */
@@ -996,28 +1105,35 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             /*  Given that \not A intersect \not B = \not (A U B) */
             if ((b_mm > percn) || (rankgap > 10.0)) {
               /*  unitoutT=~(~oldbsbT | bsbT); */
-              i = MDltminT->size[0];
-              MDltminT->size[0] = bsbT->size[0];
-              emxEnsureCapacity_boolean_T(MDltminT, i);
-              loop_ub = bsbT->size[0];
-              for (i = 0; i < loop_ub; i++) {
-                MDltminT->data[i] = !bsbT->data[i];
+              if (oldbsbT->size[0] == bsbT->size[0]) {
+                i = unitoutT->size[0];
+                unitoutT->size[0] = oldbsbT->size[0];
+                emxEnsureCapacity_boolean_T(unitoutT, i);
+                unitoutT_data = unitoutT->data;
+                loop_ub = oldbsbT->size[0];
+                for (i = 0; i < loop_ub; i++) {
+                  unitoutT_data[i] = (oldbsbT_data[i] && (!bsbT_data[i]));
+                }
+              } else {
+                t_binary_expand_op(unitoutT, oldbsbT, bsbT);
+                unitoutT_data = unitoutT->data;
               }
-              end = oldbsbT->size[0] - 1;
+              b_loop_ub = unitoutT->size[0] - 1;
               trueCount = 0;
-              for (b_i = 0; b_i <= end; b_i++) {
-                if (oldbsbT->data[b_i] && MDltminT->data[b_i]) {
+              for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                if (unitoutT_data[b_i]) {
                   trueCount++;
                 }
               }
               i = unitout->size[0];
               unitout->size[0] = trueCount;
               emxEnsureCapacity_real_T(unitout, i);
-              b_loop_ub = 0;
-              for (b_i = 0; b_i <= end; b_i++) {
-                if (oldbsbT->data[b_i] && MDltminT->data[b_i]) {
-                  unitout->data[b_loop_ub] = seq->data[b_i];
-                  b_loop_ub++;
+              unitout_data = unitout->data;
+              partialTrueCount = 0;
+              for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                if (unitoutT_data[b_i]) {
+                  unitout_data[partialTrueCount] = seq_data[b_i];
+                  partialTrueCount++;
                 }
               }
             }
@@ -1027,20 +1143,25 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             Yb->size[0] = unitout->size[0];
             Yb->size[1] = Y->size[1];
             emxEnsureCapacity_real_T(Yb, i);
+            S_data = Yb->data;
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = unitout->size[0];
-              for (end = 0; end < b_loop_ub; end++) {
-                Yb->data[end + Yb->size[0] * i] =
-                    Y->data[((int)unitout->data[end] + Y->size[0] * i) - 1];
+              for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                   partialTrueCount++) {
+                S_data[partialTrueCount + Yb->size[0] * i] =
+                    Y_data[((int)unitout_data[partialTrueCount] +
+                            Y->size[0] * i) -
+                           1];
               }
             }
             combineVectorElements(Yb, mi);
             i = mi->size[0] * mi->size[1];
             mi->size[0] = 1;
             emxEnsureCapacity_real_T(mi, i);
+            mi_data = mi->data;
             loop_ub = mi->size[1] - 1;
             for (i = 0; i <= loop_ub; i++) {
-              mi->data[i] /= (double)unitout->size[0];
+              mi_data[i] /= (double)unitout->size[0];
             }
             /*  bsbr units which remained in subset */
             /*  old inefficient code */
@@ -1053,43 +1174,60 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             if ((b_mm > percn) || (rankgap > 10.0)) {
               /*  oldbsbT = units which were in previous subset */
               /*  bsbT = units which are in current subset */
-              end = oldbsbT->size[0] - 1;
+              if (oldbsbT->size[0] == bsbT->size[0]) {
+                i = unitoutT->size[0];
+                unitoutT->size[0] = oldbsbT->size[0];
+                emxEnsureCapacity_boolean_T(unitoutT, i);
+                unitoutT_data = unitoutT->data;
+                loop_ub = oldbsbT->size[0];
+                for (i = 0; i < loop_ub; i++) {
+                  unitoutT_data[i] = (oldbsbT_data[i] && bsbT_data[i]);
+                }
+              } else {
+                and(unitoutT, oldbsbT, bsbT);
+                unitoutT_data = unitoutT->data;
+              }
+              b_loop_ub = unitoutT->size[0] - 1;
               trueCount = 0;
-              for (b_i = 0; b_i <= end; b_i++) {
-                if (oldbsbT->data[b_i] && bsbT->data[b_i]) {
+              for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                if (unitoutT_data[b_i]) {
                   trueCount++;
                 }
               }
-              i = r9->size[0];
-              r9->size[0] = trueCount;
-              emxEnsureCapacity_int32_T(r9, i);
-              b_loop_ub = 0;
-              for (b_i = 0; b_i <= end; b_i++) {
-                if (oldbsbT->data[b_i] && bsbT->data[b_i]) {
-                  r9->data[b_loop_ub] = b_i + 1;
-                  b_loop_ub++;
+              i = r10->size[0];
+              r10->size[0] = trueCount;
+              emxEnsureCapacity_int32_T(r10, i);
+              r2 = r10->data;
+              partialTrueCount = 0;
+              for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                if (unitoutT_data[b_i]) {
+                  r2[partialTrueCount] = b_i + 1;
+                  partialTrueCount++;
                 }
               }
               loop_ub = Y->size[1];
               i = Yb->size[0] * Yb->size[1];
-              Yb->size[0] = r9->size[0];
+              Yb->size[0] = r10->size[0];
               Yb->size[1] = Y->size[1];
               emxEnsureCapacity_real_T(Yb, i);
+              S_data = Yb->data;
               for (i = 0; i < loop_ub; i++) {
-                b_loop_ub = r9->size[0];
-                for (end = 0; end < b_loop_ub; end++) {
-                  Yb->data[end + Yb->size[0] * i] =
-                      Y->data[(r9->data[end] + Y->size[0] * i) - 1];
+                b_loop_ub = r10->size[0];
+                for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                     partialTrueCount++) {
+                  S_data[partialTrueCount + Yb->size[0] * i] =
+                      Y_data[(r2[partialTrueCount] + Y->size[0] * i) - 1];
                 }
               }
               combineVectorElements(Yb, mibsbr);
               i = mibsbr->size[0] * mibsbr->size[1];
               mibsbr->size[0] = 1;
               emxEnsureCapacity_real_T(mibsbr, i);
+              mibsbr_data = mibsbr->data;
               ksor = (b_mm - 1.0) - (double)unitout->size[0];
               loop_ub = mibsbr->size[1] - 1;
               for (i = 0; i <= loop_ub; i++) {
-                mibsbr->data[i] /= ksor;
+                mibsbr_data[i] /= ksor;
               }
             } else {
               loop_ub = Y->size[1];
@@ -1097,85 +1235,160 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               Yb->size[0] = bsbr->size[0];
               Yb->size[1] = Y->size[1];
               emxEnsureCapacity_real_T(Yb, i);
+              S_data = Yb->data;
               for (i = 0; i < loop_ub; i++) {
                 b_loop_ub = bsbr->size[0];
-                for (end = 0; end < b_loop_ub; end++) {
-                  Yb->data[end + Yb->size[0] * i] =
-                      Y->data[((int)bsbr->data[end] + Y->size[0] * i) - 1];
+                for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                     partialTrueCount++) {
+                  S_data[partialTrueCount + Yb->size[0] * i] =
+                      Y_data[(bsbr_data[partialTrueCount] + Y->size[0] * i) -
+                             1];
                 }
               }
               combineVectorElements(Yb, mibsbr);
               i = mibsbr->size[0] * mibsbr->size[1];
               mibsbr->size[0] = 1;
               emxEnsureCapacity_real_T(mibsbr, i);
+              mibsbr_data = mibsbr->data;
               ksor = (b_mm - 1.0) - (double)unitout->size[0];
               loop_ub = mibsbr->size[1] - 1;
               for (i = 0; i <= loop_ub; i++) {
-                mibsbr->data[i] /= ksor;
+                mibsbr_data[i] /= ksor;
               }
             }
             ksor =
                 sqrt((double)unitout->size[0] *
                      ((b_mm - 1.0) - (double)unitout->size[0]) / (b_mm - 1.0));
-            i = zi->size[0] * zi->size[1];
-            zi->size[0] = 1;
-            zi->size[1] = mi->size[1];
-            emxEnsureCapacity_real_T(zi, i);
-            loop_ub = mi->size[1];
-            for (i = 0; i < loop_ub; i++) {
-              zi->data[i] = ksor * (mi->data[i] - mibsbr->data[i]);
+            if (mi->size[1] == mibsbr->size[1]) {
+              i = zi->size[0] * zi->size[1];
+              zi->size[0] = 1;
+              zi->size[1] = mi->size[1];
+              emxEnsureCapacity_real_T(zi, i);
+              MD_data = zi->data;
+              loop_ub = mi->size[1];
+              for (i = 0; i < loop_ub; i++) {
+                MD_data[i] = ksor * (mi_data[i] - mibsbr_data[i]);
+              }
+            } else {
+              s_binary_expand_op(zi, ksor, mi, mibsbr);
+              MD_data = zi->data;
             }
             mtimes(S, zi, Szi);
+            Szi_data = Szi->data;
             /*  S=S+(S*(zi')*zi*S)/(1-zi*S*(zi')); */
             ksor = 0.0;
             loop_ub = zi->size[1];
             for (i = 0; i < loop_ub; i++) {
-              ksor += zi->data[i] * Szi->data[i];
+              ksor += MD_data[i] * Szi_data[i];
             }
-            i = S->size[0] * S->size[1];
-            S->size[0] = Szi->size[0];
-            S->size[1] = Szi->size[0];
-            emxEnsureCapacity_real_T(S, i);
+            i = r->size[0] * r->size[1];
+            r->size[0] = Szi->size[0];
+            r->size[1] = Szi->size[0];
+            emxEnsureCapacity_real_T(r, i);
+            MD_data = r->data;
             loop_ub = Szi->size[0];
+            i = Yb->size[0] * Yb->size[1];
+            Yb->size[0] = Szi->size[0];
+            Yb->size[1] = Szi->size[0];
+            emxEnsureCapacity_real_T(Yb, i);
+            S_data = Yb->data;
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = Szi->size[0];
-              for (end = 0; end < b_loop_ub; end++) {
-                S->data[end + S->size[0] * i] +=
-                    Szi->data[end] * Szi->data[i] / (1.0 - ksor);
+              for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                   partialTrueCount++) {
+                d = Szi_data[partialTrueCount] * Szi_data[i];
+                MD_data[partialTrueCount + r->size[0] * i] = d;
+                S_data[partialTrueCount + Yb->size[0] * i] = d;
               }
+            }
+            if ((S->size[0] == r->size[0]) && (S->size[1] == Yb->size[1])) {
+              i = S->size[0] * S->size[1];
+              S->size[0] = Szi->size[0];
+              S->size[1] = Szi->size[0];
+              emxEnsureCapacity_real_T(S, i);
+              S_data = S->data;
+              loop_ub = Szi->size[0];
+              for (i = 0; i < loop_ub; i++) {
+                b_loop_ub = Szi->size[0];
+                for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                     partialTrueCount++) {
+                  S_data[partialTrueCount + S->size[0] * i] +=
+                      Szi_data[partialTrueCount] * Szi_data[i] / (1.0 - ksor);
+                }
+              }
+            } else {
+              n_binary_expand_op(S, Szi, ksor);
             }
             if (unitout->size[0] > 1) {
               i = unitout->size[0];
               for (b_i = 0; b_i < i; b_i++) {
                 loop_ub = Y->size[1];
-                end = zi->size[0] * zi->size[1];
-                zi->size[0] = 1;
-                zi->size[1] = Y->size[1];
-                emxEnsureCapacity_real_T(zi, end);
-                for (end = 0; end < loop_ub; end++) {
-                  zi->data[end] =
-                      Y->data[((int)unitout->data[b_i] + Y->size[0] * end) -
-                              1] -
-                      mi->data[end];
+                if (Y->size[1] == mi->size[1]) {
+                  partialTrueCount = zi->size[0] * zi->size[1];
+                  zi->size[0] = 1;
+                  zi->size[1] = Y->size[1];
+                  emxEnsureCapacity_real_T(zi, partialTrueCount);
+                  MD_data = zi->data;
+                  for (partialTrueCount = 0; partialTrueCount < loop_ub;
+                       partialTrueCount++) {
+                    MD_data[partialTrueCount] =
+                        Y_data[((int)unitout_data[b_i] +
+                                Y->size[0] * partialTrueCount) -
+                               1] -
+                        mi_data[partialTrueCount];
+                  }
+                } else {
+                  o_binary_expand_op(zi, Y, unitout, b_i, mi);
+                  MD_data = zi->data;
                 }
                 mtimes(S, zi, Szi);
+                Szi_data = Szi->data;
                 /*  S=S+(S*(zi')*zi*S)/(1-zi*S*(zi')); */
                 ksor = 0.0;
                 loop_ub = zi->size[1];
-                for (end = 0; end < loop_ub; end++) {
-                  ksor += zi->data[end] * Szi->data[end];
+                for (partialTrueCount = 0; partialTrueCount < loop_ub;
+                     partialTrueCount++) {
+                  ksor +=
+                      MD_data[partialTrueCount] * Szi_data[partialTrueCount];
                 }
-                end = S->size[0] * S->size[1];
-                S->size[0] = Szi->size[0];
-                S->size[1] = Szi->size[0];
-                emxEnsureCapacity_real_T(S, end);
+                partialTrueCount = r->size[0] * r->size[1];
+                r->size[0] = Szi->size[0];
+                r->size[1] = Szi->size[0];
+                emxEnsureCapacity_real_T(r, partialTrueCount);
+                MD_data = r->data;
                 loop_ub = Szi->size[0];
-                for (end = 0; end < loop_ub; end++) {
+                partialTrueCount = Yb->size[0] * Yb->size[1];
+                Yb->size[0] = Szi->size[0];
+                Yb->size[1] = Szi->size[0];
+                emxEnsureCapacity_real_T(Yb, partialTrueCount);
+                S_data = Yb->data;
+                for (partialTrueCount = 0; partialTrueCount < loop_ub;
+                     partialTrueCount++) {
                   b_loop_ub = Szi->size[0];
                   for (nwhile = 0; nwhile < b_loop_ub; nwhile++) {
-                    S->data[nwhile + S->size[0] * end] +=
-                        Szi->data[nwhile] * Szi->data[end] / (1.0 - ksor);
+                    d = Szi_data[nwhile] * Szi_data[partialTrueCount];
+                    MD_data[nwhile + r->size[0] * partialTrueCount] = d;
+                    S_data[nwhile + Yb->size[0] * partialTrueCount] = d;
                   }
+                }
+                if ((S->size[0] == r->size[0]) && (S->size[1] == Yb->size[1])) {
+                  partialTrueCount = S->size[0] * S->size[1];
+                  S->size[0] = Szi->size[0];
+                  S->size[1] = Szi->size[0];
+                  emxEnsureCapacity_real_T(S, partialTrueCount);
+                  S_data = S->data;
+                  loop_ub = Szi->size[0];
+                  for (partialTrueCount = 0; partialTrueCount < loop_ub;
+                       partialTrueCount++) {
+                    b_loop_ub = Szi->size[0];
+                    for (nwhile = 0; nwhile < b_loop_ub; nwhile++) {
+                      S_data[nwhile + S->size[0] * partialTrueCount] +=
+                          Szi_data[nwhile] * Szi_data[partialTrueCount] /
+                          (1.0 - ksor);
+                    }
+                  }
+                } else {
+                  n_binary_expand_op(S, Szi, ksor);
                 }
               }
             }
@@ -1185,9 +1398,10 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             mibsbr->size[0] = 1;
             mibsbr->size[1] = meoldbsb->size[1];
             emxEnsureCapacity_real_T(mibsbr, i);
+            mibsbr_data = mibsbr->data;
             loop_ub = meoldbsb->size[1];
             for (i = 0; i < loop_ub; i++) {
-              mibsbr->data[i] = meoldbsb->data[i];
+              mibsbr_data[i] = meoldbsb_data[i];
             }
           }
           /*  mi = mean of units entering subset */
@@ -1196,82 +1410,150 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           Yb->size[0] = unit->size[0];
           Yb->size[1] = Y->size[1];
           emxEnsureCapacity_real_T(Yb, i);
+          S_data = Yb->data;
           for (i = 0; i < loop_ub; i++) {
             b_loop_ub = unit->size[0];
-            for (end = 0; end < b_loop_ub; end++) {
-              Yb->data[end + Yb->size[0] * i] =
-                  Y->data[((int)unit->data[end] + Y->size[0] * i) - 1];
+            for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                 partialTrueCount++) {
+              S_data[partialTrueCount + Yb->size[0] * i] =
+                  Y_data[(unit_data[partialTrueCount] + Y->size[0] * i) - 1];
             }
           }
           combineVectorElements(Yb, mi);
           i = mi->size[0] * mi->size[1];
           mi->size[0] = 1;
           emxEnsureCapacity_real_T(mi, i);
+          mi_data = mi->data;
           loop_ub = mi->size[1] - 1;
           for (i = 0; i <= loop_ub; i++) {
-            mi->data[i] /= (double)lunit;
+            mi_data[i] /= (double)lunit;
           }
           /*  zi=sqrt(kin*(mm-1-k)/(mm-1-k+kin))*(mi-mean(Y(bsbr,:),1)); */
           ksor = (b_mm - 1.0) - (double)irank;
           ksor = sqrt((double)lunit * ksor / (ksor + (double)lunit));
-          i = zi->size[0] * zi->size[1];
-          zi->size[0] = 1;
-          zi->size[1] = mi->size[1];
-          emxEnsureCapacity_real_T(zi, i);
-          loop_ub = mi->size[1];
-          for (i = 0; i < loop_ub; i++) {
-            zi->data[i] = ksor * (mi->data[i] - mibsbr->data[i]);
+          if (mi->size[1] == mibsbr->size[1]) {
+            i = zi->size[0] * zi->size[1];
+            zi->size[0] = 1;
+            zi->size[1] = mi->size[1];
+            emxEnsureCapacity_real_T(zi, i);
+            MD_data = zi->data;
+            loop_ub = mi->size[1];
+            for (i = 0; i < loop_ub; i++) {
+              MD_data[i] = ksor * (mi_data[i] - mibsbr_data[i]);
+            }
+          } else {
+            s_binary_expand_op(zi, ksor, mi, mibsbr);
+            MD_data = zi->data;
           }
           mtimes(S, zi, Szi);
+          Szi_data = Szi->data;
           /*  S=S+(S*(zi')*zi*S)/(1-zi*S*(zi')); */
           ksor = 0.0;
           loop_ub = zi->size[1];
           for (i = 0; i < loop_ub; i++) {
-            ksor += zi->data[i] * Szi->data[i];
+            ksor += MD_data[i] * Szi_data[i];
           }
-          i = S->size[0] * S->size[1];
-          S->size[0] = Szi->size[0];
-          S->size[1] = Szi->size[0];
-          emxEnsureCapacity_real_T(S, i);
+          i = r->size[0] * r->size[1];
+          r->size[0] = Szi->size[0];
+          r->size[1] = Szi->size[0];
+          emxEnsureCapacity_real_T(r, i);
+          MD_data = r->data;
           loop_ub = Szi->size[0];
+          i = Yb->size[0] * Yb->size[1];
+          Yb->size[0] = Szi->size[0];
+          Yb->size[1] = Szi->size[0];
+          emxEnsureCapacity_real_T(Yb, i);
+          S_data = Yb->data;
           for (i = 0; i < loop_ub; i++) {
             b_loop_ub = Szi->size[0];
-            for (end = 0; end < b_loop_ub; end++) {
-              S->data[end + S->size[0] * i] -=
-                  Szi->data[end] * Szi->data[i] / (ksor + 1.0);
+            for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                 partialTrueCount++) {
+              d = Szi_data[partialTrueCount] * Szi_data[i];
+              MD_data[partialTrueCount + r->size[0] * i] = d;
+              S_data[partialTrueCount + Yb->size[0] * i] = d;
             }
+          }
+          if ((S->size[0] == r->size[0]) && (S->size[1] == Yb->size[1])) {
+            i = S->size[0] * S->size[1];
+            S->size[0] = Szi->size[0];
+            S->size[1] = Szi->size[0];
+            emxEnsureCapacity_real_T(S, i);
+            S_data = S->data;
+            loop_ub = Szi->size[0];
+            for (i = 0; i < loop_ub; i++) {
+              b_loop_ub = Szi->size[0];
+              for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                   partialTrueCount++) {
+                S_data[partialTrueCount + S->size[0] * i] -=
+                    Szi_data[partialTrueCount] * Szi_data[i] / (ksor + 1.0);
+              }
+            }
+          } else {
+            p_binary_expand_op(S, Szi, ksor);
           }
           if (lunit > 1) {
             /* mi=mean(Y(unit,:),1); */
             for (b_i = 0; b_i < lunit; b_i++) {
               loop_ub = Y->size[1];
-              i = zi->size[0] * zi->size[1];
-              zi->size[0] = 1;
-              zi->size[1] = Y->size[1];
-              emxEnsureCapacity_real_T(zi, i);
-              for (i = 0; i < loop_ub; i++) {
-                zi->data[i] =
-                    Y->data[((int)unit->data[b_i] + Y->size[0] * i) - 1] -
-                    mi->data[i];
+              if (Y->size[1] == mi->size[1]) {
+                i = zi->size[0] * zi->size[1];
+                zi->size[0] = 1;
+                zi->size[1] = Y->size[1];
+                emxEnsureCapacity_real_T(zi, i);
+                MD_data = zi->data;
+                for (i = 0; i < loop_ub; i++) {
+                  MD_data[i] = Y_data[(unit_data[b_i] + Y->size[0] * i) - 1] -
+                               mi_data[i];
+                }
+              } else {
+                q_binary_expand_op(zi, Y, unit, b_i, mi);
+                MD_data = zi->data;
               }
               mtimes(S, zi, Szi);
+              Szi_data = Szi->data;
               /*  S=S-(S*(zi')*zi*S)/(1+zi*S*(zi')); */
               ksor = 0.0;
               loop_ub = zi->size[1];
               for (i = 0; i < loop_ub; i++) {
-                ksor += zi->data[i] * Szi->data[i];
+                ksor += MD_data[i] * Szi_data[i];
               }
-              i = S->size[0] * S->size[1];
-              S->size[0] = Szi->size[0];
-              S->size[1] = Szi->size[0];
-              emxEnsureCapacity_real_T(S, i);
+              i = r->size[0] * r->size[1];
+              r->size[0] = Szi->size[0];
+              r->size[1] = Szi->size[0];
+              emxEnsureCapacity_real_T(r, i);
+              MD_data = r->data;
               loop_ub = Szi->size[0];
+              i = Yb->size[0] * Yb->size[1];
+              Yb->size[0] = Szi->size[0];
+              Yb->size[1] = Szi->size[0];
+              emxEnsureCapacity_real_T(Yb, i);
+              S_data = Yb->data;
               for (i = 0; i < loop_ub; i++) {
                 b_loop_ub = Szi->size[0];
-                for (end = 0; end < b_loop_ub; end++) {
-                  S->data[end + S->size[0] * i] -=
-                      Szi->data[end] * Szi->data[i] / (ksor + 1.0);
+                for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                     partialTrueCount++) {
+                  d = Szi_data[partialTrueCount] * Szi_data[i];
+                  MD_data[partialTrueCount + r->size[0] * i] = d;
+                  S_data[partialTrueCount + Yb->size[0] * i] = d;
                 }
+              }
+              if ((S->size[0] == r->size[0]) && (S->size[1] == Yb->size[1])) {
+                i = S->size[0] * S->size[1];
+                S->size[0] = Szi->size[0];
+                S->size[1] = Szi->size[0];
+                emxEnsureCapacity_real_T(S, i);
+                S_data = S->data;
+                loop_ub = Szi->size[0];
+                for (i = 0; i < loop_ub; i++) {
+                  b_loop_ub = Szi->size[0];
+                  for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                       partialTrueCount++) {
+                    S_data[partialTrueCount + S->size[0] * i] -=
+                        Szi_data[partialTrueCount] * Szi_data[i] / (ksor + 1.0);
+                  }
+                }
+              } else {
+                p_binary_expand_op(S, Szi, ksor);
               }
             }
           }
@@ -1280,26 +1562,35 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           /*  than .* */
           if (n < 30000) {
             b_mtimes(Ym, S, r);
-            i = Yb->size[0] * Yb->size[1];
-            Yb->size[0] = r->size[0];
-            Yb->size[1] = r->size[1];
-            emxEnsureCapacity_real_T(Yb, i);
-            loop_ub = r->size[0] * r->size[1];
-            for (i = 0; i < loop_ub; i++) {
-              Yb->data[i] = r->data[i] * Ym->data[i];
+            MD_data = r->data;
+            if ((r->size[0] == Ym->size[0]) && (r->size[1] == Ym->size[1])) {
+              i = Yb->size[0] * Yb->size[1];
+              Yb->size[0] = r->size[0];
+              Yb->size[1] = r->size[1];
+              emxEnsureCapacity_real_T(Yb, i);
+              S_data = Yb->data;
+              loop_ub = r->size[0] * r->size[1];
+              for (i = 0; i < loop_ub; i++) {
+                S_data[i] = MD_data[i] * Ym_data[i];
+              }
+              sum(Yb, MD);
+              MD_data = MD->data;
+            } else {
+              binary_expand_op(MD, r, Ym);
+              MD_data = MD->data;
             }
-            sum(Yb, MD);
             loop_ub = MD->size[0];
             for (i = 0; i < loop_ub; i++) {
-              MD->data[i] *= b_mm - 1.0;
+              MD_data[i] *= b_mm - 1.0;
             }
           } else {
             b_mtimes(Ym, S, r);
             b_bsxfun(r, Ym, Yb);
             sum(Yb, MD);
+            MD_data = MD->data;
             loop_ub = MD->size[0];
             for (i = 0; i < loop_ub; i++) {
-              MD->data[i] *= b_mm - 1.0;
+              MD_data[i] *= b_mm - 1.0;
             }
           }
           b_guard1 = true;
@@ -1307,145 +1598,163 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           /*  In the initial step of the search the inverse is computed directly
            */
           if (b_mm > percn) {
-            end = bsbT->size[0] - 1;
+            b_loop_ub = bsbT->size[0] - 1;
             trueCount = 0;
-            for (b_i = 0; b_i <= end; b_i++) {
-              if (bsbT->data[b_i]) {
-                trueCount++;
-              }
-            }
-            i = r6->size[0];
-            r6->size[0] = trueCount;
-            emxEnsureCapacity_int32_T(r6, i);
-            b_loop_ub = 0;
-            for (b_i = 0; b_i <= end; b_i++) {
-              if (bsbT->data[b_i]) {
-                r6->data[b_loop_ub] = b_i + 1;
-                b_loop_ub++;
-              }
-            }
-            end = bsbT->size[0] - 1;
-            trueCount = 0;
-            for (b_i = 0; b_i <= end; b_i++) {
-              if (bsbT->data[b_i]) {
+            for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+              if (bsbT_data[b_i]) {
                 trueCount++;
               }
             }
             i = r7->size[0];
             r7->size[0] = trueCount;
             emxEnsureCapacity_int32_T(r7, i);
-            b_loop_ub = 0;
-            for (b_i = 0; b_i <= end; b_i++) {
-              if (bsbT->data[b_i]) {
-                r7->data[b_loop_ub] = b_i + 1;
-                b_loop_ub++;
+            r2 = r7->data;
+            partialTrueCount = 0;
+            for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+              if (bsbT_data[b_i]) {
+                r2[partialTrueCount] = b_i + 1;
+                partialTrueCount++;
               }
             }
-            loop_ub = Ym->size[1];
-            i = b_Ym->size[0] * b_Ym->size[1];
-            b_Ym->size[0] = r6->size[0];
-            b_Ym->size[1] = Ym->size[1];
-            emxEnsureCapacity_real_T(b_Ym, i);
-            i = Yb->size[0] * Yb->size[1];
-            Yb->size[0] = r7->size[0];
-            Yb->size[1] = Ym->size[1];
-            emxEnsureCapacity_real_T(Yb, i);
-            for (i = 0; i < loop_ub; i++) {
-              b_loop_ub = r6->size[0];
-              for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] =
-                    Ym->data[(r6->data[end] + Ym->size[0] * i) - 1];
-              }
-              b_loop_ub = r7->size[0];
-              for (end = 0; end < b_loop_ub; end++) {
-                Yb->data[end + Yb->size[0] * i] =
-                    Ym->data[(r7->data[end] + Ym->size[0] * i) - 1];
-              }
-            }
-            c_mtimes(b_Ym, Yb, r);
-            inv(r, S);
-            end = bsbT->size[0] - 1;
+            b_loop_ub = bsbT->size[0] - 1;
             trueCount = 0;
-            for (b_i = 0; b_i <= end; b_i++) {
-              if (bsbT->data[b_i]) {
+            for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+              if (bsbT_data[b_i]) {
                 trueCount++;
               }
             }
             i = r8->size[0];
             r8->size[0] = trueCount;
             emxEnsureCapacity_int32_T(r8, i);
-            b_loop_ub = 0;
-            for (b_i = 0; b_i <= end; b_i++) {
-              if (bsbT->data[b_i]) {
-                r8->data[b_loop_ub] = b_i + 1;
-                b_loop_ub++;
+            r13 = r8->data;
+            partialTrueCount = 0;
+            for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+              if (bsbT_data[b_i]) {
+                r13[partialTrueCount] = b_i + 1;
+                partialTrueCount++;
               }
             }
             loop_ub = Ym->size[1];
             i = b_Ym->size[0] * b_Ym->size[1];
-            b_Ym->size[0] = r8->size[0];
+            b_Ym->size[0] = r7->size[0];
             b_Ym->size[1] = Ym->size[1];
             emxEnsureCapacity_real_T(b_Ym, i);
-            for (i = 0; i < loop_ub; i++) {
-              b_loop_ub = r8->size[0];
-              for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] =
-                    Ym->data[(r8->data[end] + Ym->size[0] * i) - 1];
-              }
-            }
-            qr(b_Ym, Yb, R);
-          } else {
-            loop_ub = Ym->size[1];
-            i = b_Ym->size[0] * b_Ym->size[1];
-            b_Ym->size[0] = bsb->size[0];
-            b_Ym->size[1] = Ym->size[1];
-            emxEnsureCapacity_real_T(b_Ym, i);
+            MD_data = b_Ym->data;
             i = Yb->size[0] * Yb->size[1];
-            Yb->size[0] = bsb->size[0];
+            Yb->size[0] = r8->size[0];
             Yb->size[1] = Ym->size[1];
             emxEnsureCapacity_real_T(Yb, i);
+            S_data = Yb->data;
             for (i = 0; i < loop_ub; i++) {
-              b_loop_ub = bsb->size[0];
-              for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] =
-                    Ym->data[((int)bsb->data[end] + Ym->size[0] * i) - 1];
+              b_loop_ub = r7->size[0];
+              for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                   partialTrueCount++) {
+                MD_data[partialTrueCount + b_Ym->size[0] * i] =
+                    Ym_data[(r2[partialTrueCount] + Ym->size[0] * i) - 1];
               }
-              b_loop_ub = bsb->size[0];
-              for (end = 0; end < b_loop_ub; end++) {
-                Yb->data[end + Yb->size[0] * i] =
-                    Ym->data[((int)bsb->data[end] + Ym->size[0] * i) - 1];
+              b_loop_ub = r8->size[0];
+              for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                   partialTrueCount++) {
+                S_data[partialTrueCount + Yb->size[0] * i] =
+                    Ym_data[(r13[partialTrueCount] + Ym->size[0] * i) - 1];
               }
             }
             c_mtimes(b_Ym, Yb, r);
             inv(r, S);
+            S_data = S->data;
+            b_loop_ub = bsbT->size[0] - 1;
+            trueCount = 0;
+            for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+              if (bsbT_data[b_i]) {
+                trueCount++;
+              }
+            }
+            i = r9->size[0];
+            r9->size[0] = trueCount;
+            emxEnsureCapacity_int32_T(r9, i);
+            r2 = r9->data;
+            partialTrueCount = 0;
+            for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+              if (bsbT_data[b_i]) {
+                r2[partialTrueCount] = b_i + 1;
+                partialTrueCount++;
+              }
+            }
+            loop_ub = Ym->size[1];
+            i = b_Ym->size[0] * b_Ym->size[1];
+            b_Ym->size[0] = r9->size[0];
+            b_Ym->size[1] = Ym->size[1];
+            emxEnsureCapacity_real_T(b_Ym, i);
+            MD_data = b_Ym->data;
+            for (i = 0; i < loop_ub; i++) {
+              b_loop_ub = r9->size[0];
+              for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                   partialTrueCount++) {
+                MD_data[partialTrueCount + b_Ym->size[0] * i] =
+                    Ym_data[(r2[partialTrueCount] + Ym->size[0] * i) - 1];
+              }
+            }
+            qr(b_Ym, Yb, R);
+          } else {
             loop_ub = Ym->size[1];
             i = b_Ym->size[0] * b_Ym->size[1];
             b_Ym->size[0] = bsb->size[0];
             b_Ym->size[1] = Ym->size[1];
             emxEnsureCapacity_real_T(b_Ym, i);
+            MD_data = b_Ym->data;
+            i = Yb->size[0] * Yb->size[1];
+            Yb->size[0] = bsb->size[0];
+            Yb->size[1] = Ym->size[1];
+            emxEnsureCapacity_real_T(Yb, i);
+            S_data = Yb->data;
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = bsb->size[0];
-              for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] =
-                    Ym->data[((int)bsb->data[end] + Ym->size[0] * i) - 1];
+              for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                   partialTrueCount++) {
+                MD_data[partialTrueCount + b_Ym->size[0] * i] = Ym_data
+                    [((int)bsb_data[partialTrueCount] + Ym->size[0] * i) - 1];
+              }
+              b_loop_ub = bsb->size[0];
+              for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                   partialTrueCount++) {
+                S_data[partialTrueCount + Yb->size[0] * i] = Ym_data
+                    [((int)bsb_data[partialTrueCount] + Ym->size[0] * i) - 1];
+              }
+            }
+            c_mtimes(b_Ym, Yb, r);
+            inv(r, S);
+            S_data = S->data;
+            loop_ub = Ym->size[1];
+            i = b_Ym->size[0] * b_Ym->size[1];
+            b_Ym->size[0] = bsb->size[0];
+            b_Ym->size[1] = Ym->size[1];
+            emxEnsureCapacity_real_T(b_Ym, i);
+            MD_data = b_Ym->data;
+            for (i = 0; i < loop_ub; i++) {
+              b_loop_ub = bsb->size[0];
+              for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                   partialTrueCount++) {
+                MD_data[partialTrueCount + b_Ym->size[0] * i] = Ym_data
+                    [((int)bsb_data[partialTrueCount] + Ym->size[0] * i) - 1];
               }
             }
             qr(b_Ym, Yb, R);
           }
-          i = MDltminT->size[0];
-          MDltminT->size[0] = S->size[0] * S->size[1];
-          emxEnsureCapacity_boolean_T(MDltminT, i);
+          i = unitoutT->size[0];
+          unitoutT->size[0] = S->size[0] * S->size[1];
+          emxEnsureCapacity_boolean_T(unitoutT, i);
+          unitoutT_data = unitoutT->data;
           loop_ub = S->size[0] * S->size[1];
           for (i = 0; i < loop_ub; i++) {
-            MDltminT->data[i] = rtIsInf(S->data[i]);
+            unitoutT_data[i] = rtIsInf(S_data[i]);
           }
-          irank = MDltminT->size[0];
-          if (MDltminT->size[0] == 0) {
+          irank = unitoutT->size[0];
+          if (unitoutT->size[0] == 0) {
             nwhile = 0;
           } else {
-            nwhile = MDltminT->data[0];
+            nwhile = unitoutT_data[0];
             for (b_loop_ub = 2; b_loop_ub <= irank; b_loop_ub++) {
-              nwhile += MDltminT->data[b_loop_ub - 1];
+              nwhile += unitoutT_data[b_loop_ub - 1];
             }
           }
           if (nwhile > 0) {
@@ -1453,26 +1762,35 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             mmd->size[0] = 1;
             mmd->size[1] = 1;
             emxEnsureCapacity_real_T(mmd, i);
-            mmd->data[0] = rtNaN;
+            mmd_data = mmd->data;
+            mmd_data[0] = rtNaN;
             i = Un->size[0] * Un->size[1];
             Un->size[0] = 1;
             Un->size[1] = 1;
             emxEnsureCapacity_real_T(Un, i);
-            Un->data[0] = rtNaN;
+            Un_data = Un->data;
+            Un_data[0] = rtNaN;
             i = varargout_1->size[0] * varargout_1->size[1];
             varargout_1->size[0] = 1;
             varargout_1->size[1] = 1;
             emxEnsureCapacity_real_T(varargout_1, i);
-            varargout_1->data[0] = rtNaN;
+            varargout_1_data = varargout_1->data;
+            varargout_1_data[0] = rtNaN;
             exitg1 = true;
           } else {
             /*  Compute squared Mahalanobis distances */
             mrdiv(Ym, R, r);
-            power(r, Yb);
-            sum(Yb, MD);
+            MD_data = r->data;
+            loop_ub = r->size[0] * r->size[1];
+            for (i = 0; i < loop_ub; i++) {
+              ksor = MD_data[i];
+              MD_data[i] = ksor * ksor;
+            }
+            sum(r, MD);
+            MD_data = MD->data;
             loop_ub = MD->size[0];
             for (i = 0; i < loop_ub; i++) {
-              MD->data[i] *= b_mm - 1.0;
+              MD_data[i] *= b_mm - 1.0;
             }
             b_guard1 = true;
           }
@@ -1486,49 +1804,53 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             i = Szi->size[0];
             Szi->size[0] = MD->size[0];
             emxEnsureCapacity_real_T(Szi, i);
+            Szi_data = Szi->data;
             loop_ub = MD->size[0];
             for (i = 0; i < loop_ub; i++) {
-              Szi->data[i] = MD->data[i];
+              Szi_data[i] = MD_data[i];
             }
             if (b_mm > percn) {
-              end = bsbT->size[0];
-              for (b_i = 0; b_i < end; b_i++) {
-                if (bsbT->data[b_i]) {
-                  Szi->data[b_i] = rtInf;
+              b_loop_ub = bsbT->size[0];
+              for (b_i = 0; b_i < b_loop_ub; b_i++) {
+                if (bsbT_data[b_i]) {
+                  Szi_data[b_i] = rtInf;
                 }
               }
             } else {
               i = r1->size[0];
               r1->size[0] = bsb->size[0];
               emxEnsureCapacity_int32_T(r1, i);
+              r2 = r1->data;
               loop_ub = bsb->size[0];
               for (i = 0; i < loop_ub; i++) {
-                r1->data[i] = (int)bsb->data[i];
+                r2[i] = (int)bsb_data[i];
               }
               loop_ub = r1->size[0];
               for (i = 0; i < loop_ub; i++) {
-                Szi->data[r1->data[i] - 1] = rtInf;
+                Szi_data[r2[i] - 1] = rtInf;
               }
             }
             /*  oldbsbF=bsbF; */
             i = oldbsbT->size[0];
             oldbsbT->size[0] = bsbT->size[0];
             emxEnsureCapacity_boolean_T(oldbsbT, i);
+            oldbsbT_data = oldbsbT->data;
             loop_ub = bsbT->size[0];
             for (i = 0; i < loop_ub; i++) {
-              oldbsbT->data[i] = bsbT->data[i];
+              oldbsbT_data[i] = bsbT_data[i];
             }
             /*  Take minimum distance of the units not belonging to subset */
             d_minimum(Szi, &minMD, &lunit);
             /*  MDltminT = n x 1 Boolean vector which is true if corresponding
              * MD is */
             /*  smaller or equal minMD */
-            i = MDltminT->size[0];
-            MDltminT->size[0] = MD->size[0];
-            emxEnsureCapacity_boolean_T(MDltminT, i);
+            i = unitoutT->size[0];
+            unitoutT->size[0] = MD->size[0];
+            emxEnsureCapacity_boolean_T(unitoutT, i);
+            unitoutT_data = unitoutT->data;
             loop_ub = MD->size[0];
             for (i = 0; i < loop_ub; i++) {
-              MDltminT->data[i] = (MD->data[i] <= minMD);
+              unitoutT_data[i] = (MD_data[i] <= minMD);
             }
             /*  MDltminbsb = n x 1 Boolean vector (if m>percn) or */
             /*  int32 vector containing the units which certainly remain inside
@@ -1536,20 +1858,27 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             /*  i.e. those which have a true in MDltminT and belong to previous
              * subset */
             if (b_mm > percn) {
-              i = MDltminbsb->size[0];
-              MDltminbsb->size[0] = MDltminT->size[0];
-              emxEnsureCapacity_boolean_T(MDltminbsb, i);
-              loop_ub = MDltminT->size[0];
-              for (i = 0; i < loop_ub; i++) {
-                MDltminbsb->data[i] = (MDltminT->data[i] && bsbT->data[i]);
+              if (unitoutT->size[0] == bsbT->size[0]) {
+                i = MDltminbsb->size[0];
+                MDltminbsb->size[0] = unitoutT->size[0];
+                emxEnsureCapacity_boolean_T(MDltminbsb, i);
+                MDltminbsb_data = MDltminbsb->data;
+                loop_ub = unitoutT->size[0];
+                for (i = 0; i < loop_ub; i++) {
+                  MDltminbsb_data[i] = (unitoutT_data[i] && bsbT_data[i]);
+                }
+              } else {
+                and(MDltminbsb, unitoutT, bsbT);
+                MDltminbsb_data = MDltminbsb->data;
               }
             } else {
               i = MDltminbsb->size[0];
               MDltminbsb->size[0] = bsb->size[0];
               emxEnsureCapacity_boolean_T(MDltminbsb, i);
+              MDltminbsb_data = MDltminbsb->data;
               loop_ub = bsb->size[0];
               for (i = 0; i < loop_ub; i++) {
-                MDltminbsb->data[i] = MDltminT->data[(int)bsb->data[i] - 1];
+                MDltminbsb_data[i] = unitoutT_data[(int)bsb_data[i] - 1];
               }
             }
             /*  Find number of units of old subset which have a MD <= minMD */
@@ -1561,9 +1890,9 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             if (MDltminbsb->size[0] == 0) {
               nwhile = 0;
             } else {
-              nwhile = MDltminbsb->data[0];
+              nwhile = MDltminbsb_data[0];
               for (b_loop_ub = 2; b_loop_ub <= irank; b_loop_ub++) {
-                nwhile += MDltminbsb->data[b_loop_ub - 1];
+                nwhile += MDltminbsb_data[b_loop_ub - 1];
               }
             }
             rankgap = (b_mm + 1.0) - (double)nwhile;
@@ -1571,20 +1900,22 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               /*  Just one new unit entered subset */
               i = unit->size[0];
               unit->size[0] = 1;
-              emxEnsureCapacity_real_T(unit, i);
-              unit->data[0] = lunit;
+              emxEnsureCapacity_int32_T(unit, i);
+              unit_data = unit->data;
+              unit_data[0] = lunit;
               /*  Compute new bsbT and new bsb */
               if (b_mm <= percn) {
                 /*  new bsb is equal to oldbsb plus unit which just entered */
                 i = bsb->size[0];
-                end = bsb->size[0];
+                partialTrueCount = bsb->size[0];
                 bsb->size[0]++;
-                emxEnsureCapacity_real_T(bsb, end);
-                bsb->data[i] = lunit;
+                emxEnsureCapacity_real_T(bsb, partialTrueCount);
+                bsb_data = bsb->data;
+                bsb_data[i] = lunit;
               }
               /*  bsbT is equal to old bsbT after adding a single true in */
               /*  correspondence of the unit which entered subset */
-              bsbT->data[lunit - 1] = true;
+              bsbT_data[lunit - 1] = true;
             } else if ((rankgap > 1.0) && (rankgap <= 10.0)) {
               /*  MDmod is the vector of Mahalanobis distance which will have */
               /*  a Inf in correspondence of the units of old subset which */
@@ -1592,9 +1923,10 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               i = Szi->size[0];
               Szi->size[0] = MD->size[0];
               emxEnsureCapacity_real_T(Szi, i);
+              Szi_data = Szi->data;
               loop_ub = MD->size[0];
               for (i = 0; i < loop_ub; i++) {
-                Szi->data[i] = MD->data[i];
+                Szi_data[i] = MD_data[i];
               }
               /*  Find bsbrini, i.e. the vector which will contain the */
               /*  units which remain in the subset in the next step */
@@ -1607,54 +1939,58 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 /*  which have a MD smaller than minMD). In order to find */
                 /*  bsbr we must check whether the k units which will be */
                 /*  included were or not in the previous subset */
-                end = bsb->size[0] - 1;
+                b_loop_ub = bsb->size[0] - 1;
                 trueCount = 0;
-                for (b_i = 0; b_i <= end; b_i++) {
-                  if (MDltminT->data[(int)bsb->data[b_i] - 1]) {
+                for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                  if (unitoutT_data[(int)bsb_data[b_i] - 1]) {
                     trueCount++;
                   }
                 }
                 i = bsbrini->size[0];
                 bsbrini->size[0] = trueCount;
                 emxEnsureCapacity_uint32_T(bsbrini, i);
-                b_loop_ub = 0;
-                for (b_i = 0; b_i <= end; b_i++) {
-                  if (MDltminT->data[(int)bsb->data[b_i] - 1]) {
-                    bsbrini->data[b_loop_ub] = (unsigned int)bsb->data[b_i];
-                    b_loop_ub++;
+                bsbrini_data = bsbrini->data;
+                partialTrueCount = 0;
+                for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                  if (unitoutT_data[(int)bsb_data[b_i] - 1]) {
+                    bsbrini_data[partialTrueCount] =
+                        (unsigned int)bsb_data[b_i];
+                    partialTrueCount++;
                   }
                 }
                 /*  unitout = list of the units which potentially left */
                 /*  subset. We say potentially because there are still k */
                 /*  units to be included */
                 /*  unitout=bsb(~bsbini); */
-                end = bsb->size[0] - 1;
+                b_loop_ub = bsb->size[0] - 1;
                 trueCount = 0;
-                for (b_i = 0; b_i <= end; b_i++) {
-                  if (!MDltminT->data[(int)bsb->data[b_i] - 1]) {
+                for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                  if (!unitoutT_data[(int)bsb_data[b_i] - 1]) {
                     trueCount++;
                   }
                 }
                 i = unitout->size[0];
                 unitout->size[0] = trueCount;
                 emxEnsureCapacity_real_T(unitout, i);
-                b_loop_ub = 0;
-                for (b_i = 0; b_i <= end; b_i++) {
-                  if (!MDltminT->data[(int)bsb->data[b_i] - 1]) {
-                    unitout->data[b_loop_ub] = bsb->data[b_i];
-                    b_loop_ub++;
+                unitout_data = unitout->data;
+                partialTrueCount = 0;
+                for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                  if (!unitoutT_data[(int)bsb_data[b_i] - 1]) {
+                    unitout_data[partialTrueCount] = bsb_data[b_i];
+                    partialTrueCount++;
                   }
                 }
                 i = r1->size[0];
                 r1->size[0] = bsbrini->size[0];
                 emxEnsureCapacity_int32_T(r1, i);
+                r2 = r1->data;
                 loop_ub = bsbrini->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  r1->data[i] = (int)bsbrini->data[i];
+                  r2[i] = (int)bsbrini_data[i];
                 }
                 loop_ub = r1->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  Szi->data[r1->data[i] - 1] = rtInf;
+                  Szi_data[r2[i] - 1] = rtInf;
                 }
               } else {
                 /*  bsbriniT = Boolean vector which is true if the */
@@ -1665,14 +2001,15 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 i = bsbriniT->size[0];
                 bsbriniT->size[0] = MDltminbsb->size[0];
                 emxEnsureCapacity_boolean_T(bsbriniT, i);
+                bsbriniT_data = bsbriniT->data;
                 loop_ub = MDltminbsb->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  bsbriniT->data[i] = MDltminbsb->data[i];
+                  bsbriniT_data[i] = MDltminbsb_data[i];
                 }
-                end = MDltminbsb->size[0];
-                for (b_i = 0; b_i < end; b_i++) {
-                  if (MDltminbsb->data[b_i]) {
-                    Szi->data[b_i] = rtInf;
+                b_loop_ub = MDltminbsb->size[0];
+                for (b_i = 0; b_i < b_loop_ub; b_i++) {
+                  if (MDltminbsb_data[b_i]) {
+                    Szi_data[b_i] = rtInf;
                   }
                 }
               }
@@ -1694,39 +2031,40 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 /*  vector bsbriniT and the unit is included in vector */
                 /*  bsbradd If unit minMDindex did not belong to previous */
                 /*  subset, than minMDindex is included in vector unitadd */
-                if (bsbT->data[lunit - 1]) {
+                if (bsbT_data[lunit - 1]) {
                   if (b_mm <= percn) {
                     bsbradd[nwhile] = lunit;
                     nwhile++;
                     /*  Delete from vector unitout (containing the */
                     /*  list of the units which went out of the */
                     /*  subset) element minMDindex */
-                    end = unitout->size[0] - 1;
+                    b_loop_ub = unitout->size[0] - 1;
                     trueCount = 0;
-                    for (b_i = 0; b_i <= end; b_i++) {
-                      if ((int)unitout->data[b_i] != lunit) {
+                    for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                      if ((int)unitout_data[b_i] != lunit) {
                         trueCount++;
                       }
                     }
-                    b_loop_ub = 0;
-                    for (b_i = 0; b_i <= end; b_i++) {
-                      if ((int)unitout->data[b_i] != lunit) {
-                        unitout->data[b_loop_ub] = unitout->data[b_i];
-                        b_loop_ub++;
+                    partialTrueCount = 0;
+                    for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                      if ((int)unitout_data[b_i] != lunit) {
+                        unitout_data[partialTrueCount] = unitout_data[b_i];
+                        partialTrueCount++;
                       }
                     }
-                    end = unitout->size[0];
+                    partialTrueCount = unitout->size[0];
                     unitout->size[0] = trueCount;
-                    emxEnsureCapacity_real_T(unitout, end);
+                    emxEnsureCapacity_real_T(unitout, partialTrueCount);
+                    unitout_data = unitout->data;
                   } else {
-                    bsbriniT->data[lunit - 1] = true;
+                    bsbriniT_data[lunit - 1] = true;
                   }
                 } else {
                   unitadd[irank] = lunit;
                   irank++;
                 }
                 /*  disp(posunit(posncl1)) */
-                Szi->data[lunit - 1] = rtInf;
+                Szi_data[lunit - 1] = rtInf;
               }
               /*  unit = vector containing all units which enter the new subset
                */
@@ -1738,9 +2076,10 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               }
               i = unit->size[0];
               unit->size[0] = loop_ub;
-              emxEnsureCapacity_real_T(unit, i);
+              emxEnsureCapacity_int32_T(unit, i);
+              unit_data = unit->data;
               for (i = 0; i < loop_ub; i++) {
-                unit->data[i] = unitadd[i];
+                unit_data[i] = unitadd[i];
               }
               /*  bsbr = vector containing all units which enter the new */
               /*  subset and were also in the previous subset */
@@ -1753,40 +2092,44 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 }
                 i = bsbr->size[0];
                 bsbr->size[0] = bsbrini->size[0] + b_loop_ub;
-                emxEnsureCapacity_real_T(bsbr, i);
+                emxEnsureCapacity_int32_T(bsbr, i);
+                bsbr_data = bsbr->data;
                 irank = bsbrini->size[0];
                 for (i = 0; i < irank; i++) {
-                  bsbr->data[i] = bsbrini->data[i];
+                  bsbr_data[i] = (int)bsbrini_data[i];
                 }
                 for (i = 0; i < b_loop_ub; i++) {
-                  bsbr->data[i + bsbrini->size[0]] = bsbradd[i];
+                  bsbr_data[i + bsbrini->size[0]] = bsbradd[i];
                 }
                 i = bsb->size[0];
                 bsb->size[0] = bsbr->size[0] + loop_ub;
                 emxEnsureCapacity_real_T(bsb, i);
+                bsb_data = bsb->data;
                 b_loop_ub = bsbr->size[0];
                 for (i = 0; i < b_loop_ub; i++) {
-                  bsb->data[i] = bsbr->data[i];
+                  bsb_data[i] = bsbr_data[i];
                 }
                 for (i = 0; i < loop_ub; i++) {
-                  bsb->data[i + bsbr->size[0]] = unitadd[i];
+                  bsb_data[i + bsbr->size[0]] = unitadd[i];
                 }
                 i = bsbT->size[0];
                 bsbT->size[0] = n;
                 emxEnsureCapacity_boolean_T(bsbT, i);
+                bsbT_data = bsbT->data;
                 for (i = 0; i < n; i++) {
-                  bsbT->data[i] = false;
+                  bsbT_data[i] = false;
                 }
                 i = r1->size[0];
                 r1->size[0] = bsb->size[0];
                 emxEnsureCapacity_int32_T(r1, i);
+                r2 = r1->data;
                 loop_ub = bsb->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  r1->data[i] = (int)bsb->data[i];
+                  r2[i] = (int)bsb_data[i];
                 }
                 loop_ub = r1->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  bsbT->data[r1->data[i] - 1] = true;
+                  bsbT_data[r2[i] - 1] = true;
                 }
               } else {
                 /*  After the instruction which follows bsbriniT */
@@ -1796,18 +2139,19 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 /*  -----------    bsbriniT=MDltminT & bsbT; */
                 /*  -----------    bsbriniT(minMDindex)=true; */
                 /*  -----------    bsbriniT(unit)=true; */
-                for (i = 0; i < loop_ub; i++) {
-                  tmp_data[i] = (int)unitadd[i];
+                if (0 <= loop_ub - 1) {
+                  memcpy(&tmp_data[0], &unitadd[0], loop_ub * sizeof(int));
                 }
                 for (i = 0; i < loop_ub; i++) {
-                  bsbriniT->data[tmp_data[i] - 1] = true;
+                  bsbriniT_data[tmp_data[i] - 1] = true;
                 }
                 i = bsbT->size[0];
                 bsbT->size[0] = bsbriniT->size[0];
                 emxEnsureCapacity_boolean_T(bsbT, i);
+                bsbT_data = bsbT->data;
                 loop_ub = bsbriniT->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  bsbT->data[i] = bsbriniT->data[i];
+                  bsbT_data[i] = bsbriniT_data[i];
                 }
               }
               /*  Compute bsbT (Boolean vector which identifies new subset) */
@@ -1822,56 +2166,56 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               i = Szi->size[0];
               Szi->size[0] = MD->size[0];
               emxEnsureCapacity_real_T(Szi, i);
+              Szi_data = Szi->data;
               loop_ub = MD->size[0] - 1;
               for (i = 0; i <= loop_ub; i++) {
-                Szi->data[i] = MD->data[i];
+                Szi_data[i] = MD_data[i];
               }
               ksor = quickselectFS(Szi, b_mm + 1.0, lunit);
               i = bsbT->size[0];
               bsbT->size[0] = MD->size[0];
               emxEnsureCapacity_boolean_T(bsbT, i);
+              bsbT_data = bsbT->data;
               loop_ub = MD->size[0];
               for (i = 0; i < loop_ub; i++) {
-                bsbT->data[i] = (MD->data[i] <= ksor);
+                bsbT_data[i] = (MD_data[i] <= ksor);
               }
               irank = bsbT->size[0];
               if (bsbT->size[0] == 0) {
                 nwhile = 0;
               } else {
-                nwhile = bsbT->data[0];
+                nwhile = bsbT_data[0];
                 for (b_loop_ub = 2; b_loop_ub <= irank; b_loop_ub++) {
-                  nwhile += bsbT->data[b_loop_ub - 1];
+                  nwhile += bsbT_data[b_loop_ub - 1];
                 }
               }
               if (nwhile == (int)b_mm + 1) {
                 if (b_mm <= percn) {
-                  end = bsbT->size[0] - 1;
+                  b_loop_ub = bsbT->size[0] - 1;
                   trueCount = 0;
-                  for (b_i = 0; b_i <= end; b_i++) {
-                    if (bsbT->data[b_i]) {
+                  for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                    if (bsbT_data[b_i]) {
                       trueCount++;
                     }
                   }
                   i = bsb->size[0];
                   bsb->size[0] = trueCount;
                   emxEnsureCapacity_real_T(bsb, i);
-                  b_loop_ub = 0;
-                  for (b_i = 0; b_i <= end; b_i++) {
-                    if (bsbT->data[b_i]) {
-                      bsb->data[b_loop_ub] = seq->data[b_i];
-                      b_loop_ub++;
+                  bsb_data = bsb->data;
+                  partialTrueCount = 0;
+                  for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                    if (bsbT_data[b_i]) {
+                      bsb_data[partialTrueCount] = seq_data[b_i];
+                      partialTrueCount++;
                     }
                   }
                 }
               } else {
-                end = MD->size[0];
+                b_loop_ub = MD->size[0];
                 trueCount = 0;
-                nwhile = MD->size[0] - 1;
-                irank = 0;
-                for (b_i = 0; b_i < end; b_i++) {
-                  if (MD->data[b_i] < ksor) {
+                for (b_i = 0; b_i < b_loop_ub; b_i++) {
+                  if (MD_data[b_i] < ksor) {
                     trueCount++;
-                    irank++;
                   }
                 }
                 d = (b_mm + 1.0) - (double)trueCount;
@@ -1880,80 +2224,102 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 } else {
                   loop_ub = (int)d;
                 }
-                i = r10->size[0];
-                r10->size[0] = irank;
-                emxEnsureCapacity_int32_T(r10, i);
-                b_loop_ub = 0;
-                end = MD->size[0] - 1;
+                b_loop_ub = MD->size[0] - 1;
                 trueCount = 0;
-                for (b_i = 0; b_i <= nwhile; b_i++) {
-                  if (MD->data[b_i] < ksor) {
-                    r10->data[b_loop_ub] = b_i + 1;
-                    b_loop_ub++;
-                  }
-                  if (MD->data[b_i] == ksor) {
+                for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                  if (MD_data[b_i] < ksor) {
                     trueCount++;
                   }
                 }
                 i = r11->size[0];
                 r11->size[0] = trueCount;
                 emxEnsureCapacity_int32_T(r11, i);
-                b_loop_ub = 0;
-                for (b_i = 0; b_i <= end; b_i++) {
-                  if (MD->data[b_i] == ksor) {
-                    r11->data[b_loop_ub] = b_i + 1;
-                    b_loop_ub++;
+                r2 = r11->data;
+                partialTrueCount = 0;
+                for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                  if (MD_data[b_i] < ksor) {
+                    r2[partialTrueCount] = b_i + 1;
+                    partialTrueCount++;
+                  }
+                }
+                b_loop_ub = MD->size[0] - 1;
+                trueCount = 0;
+                for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                  if (MD_data[b_i] == ksor) {
+                    trueCount++;
+                  }
+                }
+                i = r12->size[0];
+                r12->size[0] = trueCount;
+                emxEnsureCapacity_int32_T(r12, i);
+                r13 = r12->data;
+                partialTrueCount = 0;
+                for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                  if (MD_data[b_i] == ksor) {
+                    r13[partialTrueCount] = b_i + 1;
+                    partialTrueCount++;
                   }
                 }
                 i = bsb->size[0];
-                bsb->size[0] = r10->size[0] + loop_ub;
+                bsb->size[0] = r11->size[0] + loop_ub;
                 emxEnsureCapacity_real_T(bsb, i);
-                b_loop_ub = r10->size[0];
+                bsb_data = bsb->data;
+                b_loop_ub = r11->size[0];
                 for (i = 0; i < b_loop_ub; i++) {
-                  bsb->data[i] = seq->data[r10->data[i] - 1];
+                  bsb_data[i] = seq_data[r2[i] - 1];
                 }
                 for (i = 0; i < loop_ub; i++) {
-                  bsb->data[i + r10->size[0]] = seq->data[r11->data[i] - 1];
+                  bsb_data[i + r11->size[0]] = seq_data[r13[i] - 1];
                 }
                 i = bsbT->size[0];
                 bsbT->size[0] = n;
                 emxEnsureCapacity_boolean_T(bsbT, i);
+                bsbT_data = bsbT->data;
                 for (i = 0; i < n; i++) {
-                  bsbT->data[i] = false;
+                  bsbT_data[i] = false;
                 }
                 i = r1->size[0];
                 r1->size[0] = bsb->size[0];
                 emxEnsureCapacity_int32_T(r1, i);
+                r2 = r1->data;
                 loop_ub = bsb->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  r1->data[i] = (int)bsb->data[i];
+                  r2[i] = (int)bsb_data[i];
                 }
                 loop_ub = r1->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  bsbT->data[r1->data[i] - 1] = true;
+                  bsbT_data[r2[i] - 1] = true;
                 }
               }
               /*  unit = vector containing units which just entered subset; */
-              i = MDltminT->size[0];
-              MDltminT->size[0] = bsbT->size[0];
-              emxEnsureCapacity_boolean_T(MDltminT, i);
-              loop_ub = bsbT->size[0];
-              for (i = 0; i < loop_ub; i++) {
-                MDltminT->data[i] = (bsbT->data[i] && (!oldbsbT->data[i]));
+              if (bsbT->size[0] == oldbsbT->size[0]) {
+                i = b_bsbT->size[0];
+                b_bsbT->size[0] = bsbT->size[0];
+                emxEnsureCapacity_boolean_T(b_bsbT, i);
+                unitoutT_data = b_bsbT->data;
+                loop_ub = bsbT->size[0];
+                for (i = 0; i < loop_ub; i++) {
+                  unitoutT_data[i] = (bsbT_data[i] && (!oldbsbT_data[i]));
+                }
+                b_eml_find(b_bsbT, r1);
+                r2 = r1->data;
+              } else {
+                r_binary_expand_op(r1, bsbT, oldbsbT);
+                r2 = r1->data;
               }
-              b_eml_find(MDltminT, r1);
               i = unit->size[0];
               unit->size[0] = r1->size[0];
-              emxEnsureCapacity_real_T(unit, i);
+              emxEnsureCapacity_int32_T(unit, i);
+              unit_data = unit->data;
               loop_ub = r1->size[0];
               for (i = 0; i < loop_ub; i++) {
-                unit->data[i] = r1->data[i];
+                unit_data[i] = r2[i];
               }
             }
             if (b_mm >= init1) {
               /*  mmd contains minimum of Mahalanobis distances among */
               /*  the units which are not in the subset at step m */
-              mmd->data[((int)((b_mm - init1) + 1.0) + mmd->size[0]) - 1] =
+              mmd_data[((int)((b_mm - init1) + 1.0) + mmd->size[0]) - 1] =
                   sqrt(minMD);
             }
             /*  store mean of units forming old subset */
@@ -1961,25 +2327,27 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             meoldbsb->size[0] = 1;
             meoldbsb->size[1] = ym->size[1];
             emxEnsureCapacity_real_T(meoldbsb, i);
+            meoldbsb_data = meoldbsb->data;
             loop_ub = ym->size[1];
             for (i = 0; i < loop_ub; i++) {
-              meoldbsb->data[i] = ym->data[i];
+              meoldbsb_data[i] = ym_data[i];
             }
             lunit = unit->size[0];
             if (b_mm >= init1) {
               if (unit->size[0] <= 10) {
                 if (2 > unit->size[0] + 1) {
                   i = -1;
-                  end = -1;
+                  partialTrueCount = -1;
                 } else {
                   i = 0;
-                  end = unit->size[0];
+                  partialTrueCount = unit->size[0];
                 }
                 nwhile = (int)((b_mm - init1) + 1.0) - 1;
-                irank = end - i;
-                for (end = 0; end < irank; end++) {
-                  Un->data[nwhile + Un->size[0] * ((i + end) + 1)] =
-                      unit->data[end];
+                irank = partialTrueCount - i;
+                for (partialTrueCount = 0; partialTrueCount < irank;
+                     partialTrueCount++) {
+                  Un_data[nwhile + Un->size[0] * ((i + partialTrueCount) + 1)] =
+                      unit_data[partialTrueCount];
                 }
               } else {
                 if (varargin_6) {
@@ -1987,8 +2355,10 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   int2str(unit->size[0], c_mm.data, c_mm.size);
                 }
                 i = (int)((b_mm - init1) + 1.0) - 1;
-                for (end = 0; end < 10; end++) {
-                  Un->data[i + Un->size[0] * (end + 1)] = unit->data[end];
+                for (partialTrueCount = 0; partialTrueCount < 10;
+                     partialTrueCount++) {
+                  Un_data[i + Un->size[0] * (partialTrueCount + 1)] =
+                      unit_data[partialTrueCount];
                 }
               }
             }
@@ -2003,20 +2373,25 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     mmd->size[0] = 1;
     mmd->size[1] = 1;
     emxEnsureCapacity_real_T(mmd, i);
-    mmd->data[0] = rtNaN;
+    mmd_data = mmd->data;
+    mmd_data[0] = rtNaN;
     i = Un->size[0] * Un->size[1];
     Un->size[0] = 1;
     Un->size[1] = 1;
     emxEnsureCapacity_real_T(Un, i);
-    Un->data[0] = rtNaN;
+    Un_data = Un->data;
+    Un_data[0] = rtNaN;
     i = varargout_1->size[0] * varargout_1->size[1];
     varargout_1->size[0] = 1;
     varargout_1->size[1] = 1;
     emxEnsureCapacity_real_T(varargout_1, i);
-    varargout_1->data[0] = rtNaN;
+    varargout_1_data = varargout_1->data;
+    varargout_1_data[0] = rtNaN;
   }
   emxFree_real_T(&r);
+  emxFree_boolean_T(&b_bsbT);
   emxFree_real_T(&b_Ym);
+  emxFree_int32_T(&r12);
   emxFree_int32_T(&r11);
   emxFree_int32_T(&r10);
   emxFree_int32_T(&r9);
@@ -2024,25 +2399,24 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   emxFree_int32_T(&r7);
   emxFree_int32_T(&r6);
   emxFree_int32_T(&r5);
-  emxFree_int32_T(&r4);
   emxFree_int32_T(&r1);
   emxFree_real_T(&bsbsteps);
   emxFree_boolean_T(&MDltminbsb);
-  emxFree_boolean_T(&MDltminT);
   emxFree_real_T(&R);
   emxFree_real_T(&MD);
   emxFree_real_T(&Szi);
   emxFree_real_T(&zi);
   emxFree_real_T(&mibsbr);
   emxFree_real_T(&mi);
+  emxFree_boolean_T(&unitoutT);
   emxFree_real_T(&Ym);
   emxFree_real_T(&ym);
   emxFree_real_T(&Yb);
-  emxFree_real_T(&unit);
+  emxFree_int32_T(&unit);
   emxFree_uint32_T(&bsbrini);
   emxFree_boolean_T(&bsbriniT);
   emxFree_real_T(&unitout);
-  emxFree_real_T(&bsbr);
+  emxFree_int32_T(&bsbr);
   emxFree_boolean_T(&oldbsbT);
   emxFree_real_T(&meoldbsb);
   emxFree_real_T(&S);
@@ -2050,23 +2424,59 @@ void FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   emxFree_real_T(&seq);
 }
 
+void and (emxArray_boolean_T * MDltminbsb, const emxArray_boolean_T *unitoutT,
+          const emxArray_boolean_T *bsbT)
+{
+  int i;
+  int loop_ub;
+  int stride_0_0;
+  int stride_1_0;
+  const bool *bsbT_data;
+  const bool *unitoutT_data;
+  bool *MDltminbsb_data;
+  bsbT_data = bsbT->data;
+  unitoutT_data = unitoutT->data;
+  i = MDltminbsb->size[0];
+  if (bsbT->size[0] == 1) {
+    MDltminbsb->size[0] = unitoutT->size[0];
+  } else {
+    MDltminbsb->size[0] = bsbT->size[0];
+  }
+  emxEnsureCapacity_boolean_T(MDltminbsb, i);
+  MDltminbsb_data = MDltminbsb->data;
+  stride_0_0 = (unitoutT->size[0] != 1);
+  stride_1_0 = (bsbT->size[0] != 1);
+  if (bsbT->size[0] == 1) {
+    loop_ub = unitoutT->size[0];
+  } else {
+    loop_ub = bsbT->size[0];
+  }
+  for (i = 0; i < loop_ub; i++) {
+    MDltminbsb_data[i] =
+        (unitoutT_data[i * stride_0_0] && bsbT_data[i * stride_1_0]);
+  }
+}
+
 void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               bool varargin_6, emxArray_real_T *mmd, emxArray_real_T *Un)
 {
-  emxArray_boolean_T *MDltminT;
   emxArray_boolean_T *MDltminbsb;
+  emxArray_boolean_T *b_bsbT;
   emxArray_boolean_T *bsbT;
   emxArray_boolean_T *bsbriniT;
   emxArray_boolean_T *oldbsbT;
+  emxArray_boolean_T *unitoutT;
   emxArray_char_T_1x310 c_mm;
+  emxArray_int32_T *bsbr;
   emxArray_int32_T *r1;
   emxArray_int32_T *r10;
-  emxArray_int32_T *r4;
+  emxArray_int32_T *r11;
   emxArray_int32_T *r5;
   emxArray_int32_T *r6;
   emxArray_int32_T *r7;
   emxArray_int32_T *r8;
   emxArray_int32_T *r9;
+  emxArray_int32_T *unit;
   emxArray_real_T *MD;
   emxArray_real_T *R;
   emxArray_real_T *S;
@@ -2074,21 +2484,18 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   emxArray_real_T *Yb;
   emxArray_real_T *Ym;
   emxArray_real_T *b_Ym;
-  emxArray_real_T *bsbr;
   emxArray_real_T *meoldbsb;
   emxArray_real_T *mi;
   emxArray_real_T *mibsbr;
   emxArray_real_T *r;
-  emxArray_real_T *r2;
   emxArray_real_T *r3;
+  emxArray_real_T *r4;
   emxArray_real_T *seq;
-  emxArray_real_T *unit;
   emxArray_real_T *unitout;
   emxArray_real_T *ym;
   emxArray_real_T *zi;
   emxArray_uint32_T *bsbrini;
-  double bsbradd[10];
-  double unitadd[10];
+  const double *Y_data;
   double b_mm;
   double d;
   double init1;
@@ -2096,7 +2503,22 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   double minMD;
   double percn;
   double rankgap;
+  double *MD_data;
+  double *S_data;
+  double *Szi_data;
+  double *Un_data;
+  double *Ym_data;
+  double *bsb_data;
+  double *meoldbsb_data;
+  double *mi_data;
+  double *mibsbr_data;
+  double *mmd_data;
+  double *seq_data;
+  double *unitout_data;
+  double *ym_data;
+  int bsbradd[10];
   int tmp_data[10];
+  int unitadd[10];
   int b_i;
   int b_loop_ub;
   int end;
@@ -2110,11 +2532,23 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   int nwhile;
   int trueCount;
   int v;
+  int *bsbr_data;
+  unsigned int *bsbrini_data;
+  int *r12;
+  int *r2;
+  int *unit_data;
   bool Ra;
   bool b_guard1 = false;
   bool exitg1;
   bool guard1 = false;
-  emxInit_boolean_T(&MDltminT, 1);
+  bool *MDltminbsb_data;
+  bool *bsbT_data;
+  bool *bsbriniT_data;
+  bool *oldbsbT_data;
+  bool *unitoutT_data;
+  bsb_data = bsb->data;
+  Y_data = Y->data;
+  emxInit_boolean_T(&bsbT, 1);
   /* FSMmmd monitors minMD */
   /*  */
   /* <a href="matlab: docsearchFS('FSMmmd')">Link to the help function</a> */
@@ -2139,7 +2573,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*                chosen else if bsb is not 0 the search will start with */
   /*                m0=length(bsb) */
   /*                Data Types - single | double */
-  /*  */
   /*  */
   /*  Optional input arguments: */
   /*  */
@@ -2180,7 +2613,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*                  Example - 'nocheck',false */
   /*                  Data Types - logical */
   /*  */
-  /*  */
   /*  plots :     It specify whether it is necessary to produce the plots of
    * minimum Mahalanobis */
   /*                  distance. Scalar. If plots=1, a plot of the monitoring of
@@ -2190,7 +2622,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*                else (default) no plot is produced. */
   /*                  Example - 'plots',0 */
   /*                  Data Types - double */
-  /*  */
   /*  */
   /*  Remark :      The user should only give the input arguments that have to
    */
@@ -2349,7 +2780,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*                specified for the */
   /*                caller function. */
   /*  */
-  /*  */
   /*   Optional input arguments: */
   /*  */
   /*  Output: */
@@ -2366,8 +2796,6 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
-  /*  */
   /*  */
   /* $LastChangedDate::                      $: Date of the last commit */
   /*  */
@@ -2396,32 +2824,35 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /* init1=options.init; */
   /*  Write in structure 'options' the options chosen by the user */
   /*  And check if the optional user parameters are reasonable. */
-  i = MDltminT->size[0];
-  MDltminT->size[0] = bsb->size[0];
-  emxEnsureCapacity_boolean_T(MDltminT, i);
+  i = bsbT->size[0];
+  bsbT->size[0] = bsb->size[0];
+  emxEnsureCapacity_boolean_T(bsbT, i);
+  bsbT_data = bsbT->data;
   loop_ub = bsb->size[0];
   for (i = 0; i < loop_ub; i++) {
-    MDltminT->data[i] = (bsb->data[i] == 0.0);
+    bsbT_data[i] = (bsb_data[i] == 0.0);
   }
   emxInit_real_T(&Yb, 2);
   emxInit_real_T(&r, 2);
-  if (ifWhileCond(MDltminT)) {
+  if (ifWhileCond(bsbT)) {
     Ra = true;
     nwhile = 1;
     while (Ra && (nwhile < 100)) {
       /*  Extract a random sample of size v+1 */
       randsample(n, (double)v + 1.0, bsb);
+      bsb_data = bsb->data;
       /*  Check if the var-cov matrix of the random sample is full (i.e =v) */
       loop_ub = Y->size[1];
       i = Yb->size[0] * Yb->size[1];
       Yb->size[0] = bsb->size[0];
       Yb->size[1] = Y->size[1];
       emxEnsureCapacity_real_T(Yb, i);
+      S_data = Yb->data;
       for (i = 0; i < loop_ub; i++) {
         b_loop_ub = bsb->size[0];
         for (end = 0; end < b_loop_ub; end++) {
-          Yb->data[end + Yb->size[0] * i] =
-              Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
+          S_data[end + Yb->size[0] * i] =
+              Y_data[((int)bsb_data[end] + Y->size[0] * i) - 1];
         }
       }
       cov(Yb, r);
@@ -2431,6 +2862,7 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     }
   }
   emxInit_real_T(&ym, 2);
+  ym_data = ym->data;
   /*  percn = scalar which controls up to which point of the search it is */
   /*  better to use linear indexing to extract the units forming subset. For */
   /*  example percn=0.85*n means that units belonging to susbet are found using
@@ -2448,42 +2880,47 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     ym->size[0] = 1;
     ym->size[1] = Y->size[0];
     emxEnsureCapacity_real_T(ym, i);
+    ym_data = ym->data;
     loop_ub = Y->size[0] - 1;
     for (i = 0; i <= loop_ub; i++) {
-      ym->data[i] = (double)i + 1.0;
+      ym_data[i] = (double)i + 1.0;
     }
   }
   emxInit_real_T(&seq, 1);
   i = seq->size[0];
   seq->size[0] = ym->size[1];
   emxEnsureCapacity_real_T(seq, i);
+  seq_data = seq->data;
   loop_ub = ym->size[1];
   for (i = 0; i < loop_ub; i++) {
-    seq->data[i] = ym->data[i];
+    seq_data[i] = ym_data[i];
   }
-  memset(&unitadd[0], 0, 10U * sizeof(double));
-  memset(&bsbradd[0], 0, 10U * sizeof(double));
-  emxInit_boolean_T(&bsbT, 1);
+  for (b_i = 0; b_i < 10; b_i++) {
+    unitadd[b_i] = 0;
+    bsbradd[b_i] = 0;
+  }
   /*  Initialization of the n x 1 Boolean vector which contains a true in */
   /*  correspondence of the units belonging to subset in each step */
   i = bsbT->size[0];
   bsbT->size[0] = Y->size[0];
   emxEnsureCapacity_boolean_T(bsbT, i);
+  bsbT_data = bsbT->data;
   loop_ub = Y->size[0];
   for (i = 0; i < loop_ub; i++) {
-    bsbT->data[i] = false;
+    bsbT_data[i] = false;
   }
   emxInit_int32_T(&r1, 1);
   i = r1->size[0];
   r1->size[0] = bsb->size[0];
   emxEnsureCapacity_int32_T(r1, i);
+  r2 = r1->data;
   loop_ub = bsb->size[0];
   for (i = 0; i < loop_ub; i++) {
-    r1->data[i] = (int)bsb->data[i];
+    r2[i] = (int)bsb_data[i];
   }
   loop_ub = r1->size[0];
   for (i = 0; i < loop_ub; i++) {
-    bsbT->data[r1->data[i] - 1] = true;
+    bsbT_data[r2[i] - 1] = true;
   }
   emxInit_real_T(&S, 2);
   /*  Initialization for Matlab coder */
@@ -2492,58 +2929,65 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   S->size[0] = Y->size[1];
   S->size[1] = Y->size[1];
   emxEnsureCapacity_real_T(S, i);
+  S_data = S->data;
   loop_ub = Y->size[1] * Y->size[1];
   for (i = 0; i < loop_ub; i++) {
-    S->data[i] = 0.0;
+    S_data[i] = 0.0;
   }
   emxInit_real_T(&meoldbsb, 2);
   i = meoldbsb->size[0] * meoldbsb->size[1];
   meoldbsb->size[0] = 1;
   meoldbsb->size[1] = Y->size[1];
   emxEnsureCapacity_real_T(meoldbsb, i);
+  meoldbsb_data = meoldbsb->data;
   loop_ub = Y->size[1];
   for (i = 0; i < loop_ub; i++) {
-    meoldbsb->data[i] = 0.0;
+    meoldbsb_data[i] = 0.0;
   }
   emxInit_boolean_T(&oldbsbT, 1);
   i = oldbsbT->size[0];
   oldbsbT->size[0] = bsbT->size[0];
   emxEnsureCapacity_boolean_T(oldbsbT, i);
+  oldbsbT_data = oldbsbT->data;
   loop_ub = bsbT->size[0];
   for (i = 0; i < loop_ub; i++) {
-    oldbsbT->data[i] = bsbT->data[i];
+    oldbsbT_data[i] = bsbT_data[i];
   }
-  emxInit_real_T(&bsbr, 1);
+  emxInit_int32_T(&bsbr, 1);
   i = bsbr->size[0];
   bsbr->size[0] = Y->size[0];
-  emxEnsureCapacity_real_T(bsbr, i);
+  emxEnsureCapacity_int32_T(bsbr, i);
+  bsbr_data = bsbr->data;
   loop_ub = Y->size[0];
   for (i = 0; i < loop_ub; i++) {
-    bsbr->data[i] = 0.0;
+    bsbr_data[i] = 0;
   }
   emxInit_real_T(&unitout, 1);
   i = unitout->size[0];
   unitout->size[0] = Y->size[0];
   emxEnsureCapacity_real_T(unitout, i);
+  unitout_data = unitout->data;
   loop_ub = Y->size[0];
   for (i = 0; i < loop_ub; i++) {
-    unitout->data[i] = 0.0;
+    unitout_data[i] = 0.0;
   }
   emxInit_boolean_T(&bsbriniT, 1);
   i = bsbriniT->size[0];
   bsbriniT->size[0] = bsbT->size[0];
   emxEnsureCapacity_boolean_T(bsbriniT, i);
+  bsbriniT_data = bsbriniT->data;
   loop_ub = bsbT->size[0];
   for (i = 0; i < loop_ub; i++) {
-    bsbriniT->data[i] = bsbT->data[i];
+    bsbriniT_data[i] = bsbT_data[i];
   }
   emxInit_uint32_T(&bsbrini, 1);
   i = bsbrini->size[0];
   bsbrini->size[0] = Y->size[0];
   emxEnsureCapacity_uint32_T(bsbrini, i);
+  bsbrini_data = bsbrini->data;
   loop_ub = Y->size[0];
   for (i = 0; i < loop_ub; i++) {
-    bsbrini->data[i] = 0U;
+    bsbrini_data[i] = 0U;
   }
   ini0 = bsb->size[0];
   /*  check init */
@@ -2568,7 +3012,8 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     ym->size[0] = 1;
     ym->size[1] = 1;
     emxEnsureCapacity_real_T(ym, i);
-    ym->data[0] = rtNaN;
+    ym_data = ym->data;
+    ym_data[0] = rtNaN;
   } else if (Y->size[0] < init1 + 1.0) {
     ym->size[0] = 1;
     ym->size[1] = 0;
@@ -2577,49 +3022,56 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     ym->size[0] = 1;
     ym->size[1] = 1;
     emxEnsureCapacity_real_T(ym, i);
-    ym->data[0] = rtNaN;
+    ym_data = ym->data;
+    ym_data[0] = rtNaN;
   } else if (floor(init1 + 1.0) == init1 + 1.0) {
     i = ym->size[0] * ym->size[1];
     ym->size[0] = 1;
     ym->size[1] = (int)floor((double)Y->size[0] - (init1 + 1.0)) + 1;
     emxEnsureCapacity_real_T(ym, i);
+    ym_data = ym->data;
     loop_ub = (int)floor((double)Y->size[0] - (init1 + 1.0));
     for (i = 0; i <= loop_ub; i++) {
-      ym->data[i] = (init1 + 1.0) + (double)i;
+      ym_data[i] = (init1 + 1.0) + (double)i;
     }
   } else {
     eml_float_colon(init1 + 1.0, Y->size[0], ym);
+    ym_data = ym->data;
   }
   emxInit_real_T(&Szi, 1);
   irank = (int)((double)Y->size[0] - init1);
   i = Szi->size[0];
   Szi->size[0] = ym->size[1];
   emxEnsureCapacity_real_T(Szi, i);
+  Szi_data = Szi->data;
   loop_ub = ym->size[1];
   for (i = 0; i < loop_ub; i++) {
-    Szi->data[i] = ym->data[i];
-  }
-  emxInit_real_T(&r2, 2);
-  i = r2->size[0] * r2->size[1];
-  r2->size[0] = irank;
-  r2->size[1] = 10;
-  emxEnsureCapacity_real_T(r2, i);
-  loop_ub = irank * 10;
-  for (i = 0; i < loop_ub; i++) {
-    r2->data[i] = rtNaN;
+    Szi_data[i] = ym_data[i];
   }
   emxInit_real_T(&r3, 2);
-  cat(Szi, r2, r3);
+  i = r3->size[0] * r3->size[1];
+  r3->size[0] = irank;
+  r3->size[1] = 10;
+  emxEnsureCapacity_real_T(r3, i);
+  MD_data = r3->data;
+  loop_ub = irank * 10;
+  for (i = 0; i < loop_ub; i++) {
+    MD_data[i] = rtNaN;
+  }
+  emxInit_real_T(&r4, 2);
+  cat(Szi, r3, r4);
+  MD_data = r4->data;
   i = Un->size[0] * Un->size[1];
-  Un->size[0] = r3->size[0];
+  Un->size[0] = r4->size[0];
   Un->size[1] = 11;
   emxEnsureCapacity_real_T(Un, i);
-  loop_ub = r3->size[0] * 11;
-  emxFree_real_T(&r2);
-  for (i = 0; i < loop_ub; i++) {
-    Un->data[i] = r3->data[i];
-  }
+  Un_data = Un->data;
+  loop_ub = r4->size[0] * 11;
   emxFree_real_T(&r3);
+  for (i = 0; i < loop_ub; i++) {
+    Un_data[i] = MD_data[i];
+  }
+  emxFree_real_T(&r4);
   /*   mmd has two columns */
   /*   1st col = dimension of the subset */
   /*   2nd col min. Mahalanobis distances among the units */
@@ -2629,7 +3081,8 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     ym->size[0] = 1;
     ym->size[1] = 1;
     emxEnsureCapacity_real_T(ym, i);
-    ym->data[0] = rtNaN;
+    ym_data = ym->data;
+    ym_data[0] = rtNaN;
   } else if ((double)Y->size[0] - 1.0 < init1) {
     ym->size[0] = 1;
     ym->size[1] = 0;
@@ -2638,48 +3091,54 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     ym->size[0] = 1;
     ym->size[1] = 1;
     emxEnsureCapacity_real_T(ym, i);
-    ym->data[0] = rtNaN;
+    ym_data = ym->data;
+    ym_data[0] = rtNaN;
   } else if (floor(init1) == init1) {
     i = ym->size[0] * ym->size[1];
     ym->size[0] = 1;
     ym->size[1] = (int)(((double)Y->size[0] - 1.0) - init1) + 1;
     emxEnsureCapacity_real_T(ym, i);
+    ym_data = ym->data;
     loop_ub = (int)(((double)Y->size[0] - 1.0) - init1);
     for (i = 0; i <= loop_ub; i++) {
-      ym->data[i] = init1 + (double)i;
+      ym_data[i] = init1 + (double)i;
     }
   } else {
     eml_float_colon(init1, (double)Y->size[0] - 1.0, ym);
+    ym_data = ym->data;
   }
   i = Szi->size[0];
   Szi->size[0] = (int)((double)Y->size[0] - init1);
   emxEnsureCapacity_real_T(Szi, i);
+  Szi_data = Szi->data;
   loop_ub = (int)((double)Y->size[0] - init1);
   for (i = 0; i < loop_ub; i++) {
-    Szi->data[i] = 0.0;
+    Szi_data[i] = 0.0;
   }
   i = mmd->size[0] * mmd->size[1];
   mmd->size[0] = ym->size[1];
   mmd->size[1] = 2;
   emxEnsureCapacity_real_T(mmd, i);
+  mmd_data = mmd->data;
   loop_ub = ym->size[1];
   for (i = 0; i < loop_ub; i++) {
-    mmd->data[i] = ym->data[i];
+    mmd_data[i] = ym_data[i];
   }
   loop_ub = Szi->size[0];
   for (i = 0; i < loop_ub; i++) {
-    mmd->data[i + mmd->size[0]] = 0.0;
+    mmd_data[i + mmd->size[0]] = 0.0;
   }
-  emxInit_real_T(&unit, 1);
+  emxInit_int32_T(&unit, 1);
   /*  unit is the vector which will contain the units which enter subset at each
    */
   /*  step. It is initialized as a vector of zeros */
   i = unit->size[0];
   unit->size[0] = bsb->size[0];
-  emxEnsureCapacity_real_T(unit, i);
+  emxEnsureCapacity_int32_T(unit, i);
+  unit_data = unit->data;
   loop_ub = bsb->size[0];
   for (i = 0; i < loop_ub; i++) {
-    unit->data[i] = 0.0;
+    unit_data[i] = 0;
   }
   lunit = bsb->size[0];
   /*  If the subset Y(bsb,:) is not full rank or a column is constant, then we
@@ -2690,29 +3149,32 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   Yb->size[0] = bsb->size[0];
   Yb->size[1] = Y->size[1];
   emxEnsureCapacity_real_T(Yb, i);
+  S_data = Yb->data;
   for (i = 0; i < loop_ub; i++) {
     b_loop_ub = bsb->size[0];
     for (end = 0; end < b_loop_ub; end++) {
-      Yb->data[end + Yb->size[0] * i] =
-          Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
+      S_data[end + Yb->size[0] * i] =
+          Y_data[((int)bsb_data[end] + Y->size[0] * i) - 1];
     }
   }
   irank = local_rank(Yb);
   emxInit_real_T(&Ym, 2);
+  emxInit_boolean_T(&unitoutT, 1);
   emxInit_real_T(&mi, 2);
   emxInit_real_T(&mibsbr, 2);
   emxInit_real_T(&zi, 2);
   emxInit_real_T(&MD, 1);
   emxInit_real_T(&R, 2);
   emxInit_boolean_T(&MDltminbsb, 1);
-  emxInit_int32_T(&r4, 1);
   emxInit_int32_T(&r5, 1);
   emxInit_int32_T(&r6, 1);
   emxInit_int32_T(&r7, 1);
   emxInit_int32_T(&r8, 1);
   emxInit_int32_T(&r9, 1);
   emxInit_int32_T(&r10, 1);
+  emxInit_int32_T(&r11, 1);
   emxInit_real_T(&b_Ym, 2);
+  emxInit_boolean_T(&b_bsbT, 1);
   guard1 = false;
   if (irank < v) {
     guard1 = true;
@@ -2722,36 +3184,60 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     Yb->size[0] = bsb->size[0];
     Yb->size[1] = Y->size[1];
     emxEnsureCapacity_real_T(Yb, i);
+    S_data = Yb->data;
     for (i = 0; i < loop_ub; i++) {
       b_loop_ub = bsb->size[0];
       for (end = 0; end < b_loop_ub; end++) {
-        Yb->data[end + Yb->size[0] * i] =
-            Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
+        S_data[end + Yb->size[0] * i] =
+            Y_data[((int)bsb_data[end] + Y->size[0] * i) - 1];
       }
     }
     maximum(Yb, ym);
+    ym_data = ym->data;
     loop_ub = Y->size[1];
     i = Yb->size[0] * Yb->size[1];
     Yb->size[0] = bsb->size[0];
     Yb->size[1] = Y->size[1];
     emxEnsureCapacity_real_T(Yb, i);
+    S_data = Yb->data;
     for (i = 0; i < loop_ub; i++) {
       b_loop_ub = bsb->size[0];
       for (end = 0; end < b_loop_ub; end++) {
-        Yb->data[end + Yb->size[0] * i] =
-            Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
+        S_data[end + Yb->size[0] * i] =
+            Y_data[((int)bsb_data[end] + Y->size[0] * i) - 1];
       }
     }
     minimum(Yb, mibsbr);
+    mibsbr_data = mibsbr->data;
     i = mi->size[0] * mi->size[1];
     mi->size[0] = 1;
-    mi->size[1] = ym->size[1];
-    emxEnsureCapacity_real_T(mi, i);
-    loop_ub = ym->size[1];
-    for (i = 0; i < loop_ub; i++) {
-      mi->data[i] = ym->data[i] - mibsbr->data[i];
+    if (mibsbr->size[1] == 1) {
+      mi->size[1] = ym->size[1];
+    } else {
+      mi->size[1] = mibsbr->size[1];
     }
-    if (c_minimum(mi) == 0.0) {
+    emxEnsureCapacity_real_T(mi, i);
+    mi_data = mi->data;
+    irank = (ym->size[1] != 1);
+    nwhile = (mibsbr->size[1] != 1);
+    if (mibsbr->size[1] == 1) {
+      loop_ub = ym->size[1];
+    } else {
+      loop_ub = mibsbr->size[1];
+    }
+    for (i = 0; i < loop_ub; i++) {
+      mi_data[i] = ym_data[i * irank] - mibsbr_data[i * nwhile];
+    }
+    i = ym->size[0] * ym->size[1];
+    ym->size[0] = 1;
+    ym->size[1] = mi->size[1];
+    emxEnsureCapacity_real_T(ym, i);
+    ym_data = ym->data;
+    loop_ub = mi->size[1];
+    for (i = 0; i < loop_ub; i++) {
+      ym_data[i] = mi_data[i];
+    }
+    if (c_minimum(ym) == 0.0) {
       guard1 = true;
     } else {
       /*  ij = index which is linked with the columns of matrix BB. During the
@@ -2769,41 +3255,44 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           Yb->size[0] = bsb->size[0];
           Yb->size[1] = Y->size[1];
           emxEnsureCapacity_real_T(Yb, i);
+          S_data = Yb->data;
           for (i = 0; i < loop_ub; i++) {
             b_loop_ub = bsb->size[0];
             for (end = 0; end < b_loop_ub; end++) {
-              Yb->data[end + Yb->size[0] * i] =
-                  Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
+              S_data[end + Yb->size[0] * i] =
+                  Y_data[((int)bsb_data[end] + Y->size[0] * i) - 1];
             }
           }
         } else {
           end = bsbT->size[0] - 1;
           trueCount = 0;
           for (b_i = 0; b_i <= end; b_i++) {
-            if (bsbT->data[b_i]) {
+            if (bsbT_data[b_i]) {
               trueCount++;
             }
           }
-          i = r4->size[0];
-          r4->size[0] = trueCount;
-          emxEnsureCapacity_int32_T(r4, i);
+          i = r5->size[0];
+          r5->size[0] = trueCount;
+          emxEnsureCapacity_int32_T(r5, i);
+          r2 = r5->data;
           b_loop_ub = 0;
           for (b_i = 0; b_i <= end; b_i++) {
-            if (bsbT->data[b_i]) {
-              r4->data[b_loop_ub] = b_i + 1;
+            if (bsbT_data[b_i]) {
+              r2[b_loop_ub] = b_i + 1;
               b_loop_ub++;
             }
           }
           loop_ub = Y->size[1];
           i = Yb->size[0] * Yb->size[1];
-          Yb->size[0] = r4->size[0];
+          Yb->size[0] = r5->size[0];
           Yb->size[1] = Y->size[1];
           emxEnsureCapacity_real_T(Yb, i);
+          S_data = Yb->data;
           for (i = 0; i < loop_ub; i++) {
-            b_loop_ub = r4->size[0];
+            b_loop_ub = r5->size[0];
             for (end = 0; end < b_loop_ub; end++) {
-              Yb->data[end + Yb->size[0] * i] =
-                  Y->data[(r4->data[end] + Y->size[0] * i) - 1];
+              S_data[end + Yb->size[0] * i] =
+                  Y_data[(r2[end] + Y->size[0] * i) - 1];
             }
           }
         }
@@ -2814,14 +3303,16 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
         i = ym->size[0] * ym->size[1];
         ym->size[0] = 1;
         emxEnsureCapacity_real_T(ym, i);
+        ym_data = ym->data;
         loop_ub = ym->size[1] - 1;
         for (i = 0; i <= loop_ub; i++) {
-          ym->data[i] /= b_mm;
+          ym_data[i] /= b_mm;
         }
         /*  Ym = n-by-v matrix containing deviations from the means computed */
         /*  using units forming subset */
         /*  Ym=Y-one*ym; */
         bsxfun(Y, ym, Ym);
+        Ym_data = Ym->data;
         b_guard1 = false;
         if (b_mm - (double)lunit > (double)v + 1.0) {
           /*  Find new S */
@@ -2837,27 +3328,34 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             /*  Given that \not A intersect \not B = \not (A U B) */
             if ((b_mm > percn) || (rankgap > 10.0)) {
               /*  unitoutT=~(~oldbsbT | bsbT); */
-              i = MDltminT->size[0];
-              MDltminT->size[0] = bsbT->size[0];
-              emxEnsureCapacity_boolean_T(MDltminT, i);
-              loop_ub = bsbT->size[0];
-              for (i = 0; i < loop_ub; i++) {
-                MDltminT->data[i] = !bsbT->data[i];
+              if (oldbsbT->size[0] == bsbT->size[0]) {
+                i = unitoutT->size[0];
+                unitoutT->size[0] = oldbsbT->size[0];
+                emxEnsureCapacity_boolean_T(unitoutT, i);
+                unitoutT_data = unitoutT->data;
+                loop_ub = oldbsbT->size[0];
+                for (i = 0; i < loop_ub; i++) {
+                  unitoutT_data[i] = (oldbsbT_data[i] && (!bsbT_data[i]));
+                }
+              } else {
+                t_binary_expand_op(unitoutT, oldbsbT, bsbT);
+                unitoutT_data = unitoutT->data;
               }
-              end = oldbsbT->size[0] - 1;
+              end = unitoutT->size[0] - 1;
               trueCount = 0;
               for (b_i = 0; b_i <= end; b_i++) {
-                if (oldbsbT->data[b_i] && MDltminT->data[b_i]) {
+                if (unitoutT_data[b_i]) {
                   trueCount++;
                 }
               }
               i = unitout->size[0];
               unitout->size[0] = trueCount;
               emxEnsureCapacity_real_T(unitout, i);
+              unitout_data = unitout->data;
               b_loop_ub = 0;
               for (b_i = 0; b_i <= end; b_i++) {
-                if (oldbsbT->data[b_i] && MDltminT->data[b_i]) {
-                  unitout->data[b_loop_ub] = seq->data[b_i];
+                if (unitoutT_data[b_i]) {
+                  unitout_data[b_loop_ub] = seq_data[b_i];
                   b_loop_ub++;
                 }
               }
@@ -2868,20 +3366,22 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             Yb->size[0] = unitout->size[0];
             Yb->size[1] = Y->size[1];
             emxEnsureCapacity_real_T(Yb, i);
+            S_data = Yb->data;
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = unitout->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                Yb->data[end + Yb->size[0] * i] =
-                    Y->data[((int)unitout->data[end] + Y->size[0] * i) - 1];
+                S_data[end + Yb->size[0] * i] =
+                    Y_data[((int)unitout_data[end] + Y->size[0] * i) - 1];
               }
             }
             combineVectorElements(Yb, mi);
             i = mi->size[0] * mi->size[1];
             mi->size[0] = 1;
             emxEnsureCapacity_real_T(mi, i);
+            mi_data = mi->data;
             loop_ub = mi->size[1] - 1;
             for (i = 0; i <= loop_ub; i++) {
-              mi->data[i] /= (double)unitout->size[0];
+              mi_data[i] /= (double)unitout->size[0];
             }
             /*  bsbr units which remained in subset */
             /*  old inefficient code */
@@ -2894,43 +3394,59 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             if ((b_mm > percn) || (rankgap > 10.0)) {
               /*  oldbsbT = units which were in previous subset */
               /*  bsbT = units which are in current subset */
-              end = oldbsbT->size[0] - 1;
+              if (oldbsbT->size[0] == bsbT->size[0]) {
+                i = unitoutT->size[0];
+                unitoutT->size[0] = oldbsbT->size[0];
+                emxEnsureCapacity_boolean_T(unitoutT, i);
+                unitoutT_data = unitoutT->data;
+                loop_ub = oldbsbT->size[0];
+                for (i = 0; i < loop_ub; i++) {
+                  unitoutT_data[i] = (oldbsbT_data[i] && bsbT_data[i]);
+                }
+              } else {
+                and(unitoutT, oldbsbT, bsbT);
+                unitoutT_data = unitoutT->data;
+              }
+              end = unitoutT->size[0] - 1;
               trueCount = 0;
               for (b_i = 0; b_i <= end; b_i++) {
-                if (oldbsbT->data[b_i] && bsbT->data[b_i]) {
+                if (unitoutT_data[b_i]) {
                   trueCount++;
                 }
               }
-              i = r8->size[0];
-              r8->size[0] = trueCount;
-              emxEnsureCapacity_int32_T(r8, i);
+              i = r9->size[0];
+              r9->size[0] = trueCount;
+              emxEnsureCapacity_int32_T(r9, i);
+              r2 = r9->data;
               b_loop_ub = 0;
               for (b_i = 0; b_i <= end; b_i++) {
-                if (oldbsbT->data[b_i] && bsbT->data[b_i]) {
-                  r8->data[b_loop_ub] = b_i + 1;
+                if (unitoutT_data[b_i]) {
+                  r2[b_loop_ub] = b_i + 1;
                   b_loop_ub++;
                 }
               }
               loop_ub = Y->size[1];
               i = Yb->size[0] * Yb->size[1];
-              Yb->size[0] = r8->size[0];
+              Yb->size[0] = r9->size[0];
               Yb->size[1] = Y->size[1];
               emxEnsureCapacity_real_T(Yb, i);
+              S_data = Yb->data;
               for (i = 0; i < loop_ub; i++) {
-                b_loop_ub = r8->size[0];
+                b_loop_ub = r9->size[0];
                 for (end = 0; end < b_loop_ub; end++) {
-                  Yb->data[end + Yb->size[0] * i] =
-                      Y->data[(r8->data[end] + Y->size[0] * i) - 1];
+                  S_data[end + Yb->size[0] * i] =
+                      Y_data[(r2[end] + Y->size[0] * i) - 1];
                 }
               }
               combineVectorElements(Yb, mibsbr);
               i = mibsbr->size[0] * mibsbr->size[1];
               mibsbr->size[0] = 1;
               emxEnsureCapacity_real_T(mibsbr, i);
+              mibsbr_data = mibsbr->data;
               ksor = (b_mm - 1.0) - (double)unitout->size[0];
               loop_ub = mibsbr->size[1] - 1;
               for (i = 0; i <= loop_ub; i++) {
-                mibsbr->data[i] /= ksor;
+                mibsbr_data[i] /= ksor;
               }
             } else {
               loop_ub = Y->size[1];
@@ -2938,85 +3454,149 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               Yb->size[0] = bsbr->size[0];
               Yb->size[1] = Y->size[1];
               emxEnsureCapacity_real_T(Yb, i);
+              S_data = Yb->data;
               for (i = 0; i < loop_ub; i++) {
                 b_loop_ub = bsbr->size[0];
                 for (end = 0; end < b_loop_ub; end++) {
-                  Yb->data[end + Yb->size[0] * i] =
-                      Y->data[((int)bsbr->data[end] + Y->size[0] * i) - 1];
+                  S_data[end + Yb->size[0] * i] =
+                      Y_data[(bsbr_data[end] + Y->size[0] * i) - 1];
                 }
               }
               combineVectorElements(Yb, mibsbr);
               i = mibsbr->size[0] * mibsbr->size[1];
               mibsbr->size[0] = 1;
               emxEnsureCapacity_real_T(mibsbr, i);
+              mibsbr_data = mibsbr->data;
               ksor = (b_mm - 1.0) - (double)unitout->size[0];
               loop_ub = mibsbr->size[1] - 1;
               for (i = 0; i <= loop_ub; i++) {
-                mibsbr->data[i] /= ksor;
+                mibsbr_data[i] /= ksor;
               }
             }
             ksor =
                 sqrt((double)unitout->size[0] *
                      ((b_mm - 1.0) - (double)unitout->size[0]) / (b_mm - 1.0));
-            i = zi->size[0] * zi->size[1];
-            zi->size[0] = 1;
-            zi->size[1] = mi->size[1];
-            emxEnsureCapacity_real_T(zi, i);
-            loop_ub = mi->size[1];
-            for (i = 0; i < loop_ub; i++) {
-              zi->data[i] = ksor * (mi->data[i] - mibsbr->data[i]);
+            if (mi->size[1] == mibsbr->size[1]) {
+              i = zi->size[0] * zi->size[1];
+              zi->size[0] = 1;
+              zi->size[1] = mi->size[1];
+              emxEnsureCapacity_real_T(zi, i);
+              MD_data = zi->data;
+              loop_ub = mi->size[1];
+              for (i = 0; i < loop_ub; i++) {
+                MD_data[i] = ksor * (mi_data[i] - mibsbr_data[i]);
+              }
+            } else {
+              s_binary_expand_op(zi, ksor, mi, mibsbr);
+              MD_data = zi->data;
             }
             mtimes(S, zi, Szi);
+            Szi_data = Szi->data;
             /*  S=S+(S*(zi')*zi*S)/(1-zi*S*(zi')); */
             ksor = 0.0;
             loop_ub = zi->size[1];
             for (i = 0; i < loop_ub; i++) {
-              ksor += zi->data[i] * Szi->data[i];
+              ksor += MD_data[i] * Szi_data[i];
             }
-            i = S->size[0] * S->size[1];
-            S->size[0] = Szi->size[0];
-            S->size[1] = Szi->size[0];
-            emxEnsureCapacity_real_T(S, i);
+            i = r->size[0] * r->size[1];
+            r->size[0] = Szi->size[0];
+            r->size[1] = Szi->size[0];
+            emxEnsureCapacity_real_T(r, i);
+            MD_data = r->data;
             loop_ub = Szi->size[0];
+            i = Yb->size[0] * Yb->size[1];
+            Yb->size[0] = Szi->size[0];
+            Yb->size[1] = Szi->size[0];
+            emxEnsureCapacity_real_T(Yb, i);
+            S_data = Yb->data;
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = Szi->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                S->data[end + S->size[0] * i] +=
-                    Szi->data[end] * Szi->data[i] / (1.0 - ksor);
+                d = Szi_data[end] * Szi_data[i];
+                MD_data[end + r->size[0] * i] = d;
+                S_data[end + Yb->size[0] * i] = d;
               }
+            }
+            if ((S->size[0] == r->size[0]) && (S->size[1] == Yb->size[1])) {
+              i = S->size[0] * S->size[1];
+              S->size[0] = Szi->size[0];
+              S->size[1] = Szi->size[0];
+              emxEnsureCapacity_real_T(S, i);
+              S_data = S->data;
+              loop_ub = Szi->size[0];
+              for (i = 0; i < loop_ub; i++) {
+                b_loop_ub = Szi->size[0];
+                for (end = 0; end < b_loop_ub; end++) {
+                  S_data[end + S->size[0] * i] +=
+                      Szi_data[end] * Szi_data[i] / (1.0 - ksor);
+                }
+              }
+            } else {
+              n_binary_expand_op(S, Szi, ksor);
             }
             if (unitout->size[0] > 1) {
               i = unitout->size[0];
               for (b_i = 0; b_i < i; b_i++) {
                 loop_ub = Y->size[1];
-                end = zi->size[0] * zi->size[1];
-                zi->size[0] = 1;
-                zi->size[1] = Y->size[1];
-                emxEnsureCapacity_real_T(zi, end);
-                for (end = 0; end < loop_ub; end++) {
-                  zi->data[end] =
-                      Y->data[((int)unitout->data[b_i] + Y->size[0] * end) -
-                              1] -
-                      mi->data[end];
+                if (Y->size[1] == mi->size[1]) {
+                  end = zi->size[0] * zi->size[1];
+                  zi->size[0] = 1;
+                  zi->size[1] = Y->size[1];
+                  emxEnsureCapacity_real_T(zi, end);
+                  MD_data = zi->data;
+                  for (end = 0; end < loop_ub; end++) {
+                    MD_data[end] =
+                        Y_data[((int)unitout_data[b_i] + Y->size[0] * end) -
+                               1] -
+                        mi_data[end];
+                  }
+                } else {
+                  o_binary_expand_op(zi, Y, unitout, b_i, mi);
+                  MD_data = zi->data;
                 }
                 mtimes(S, zi, Szi);
+                Szi_data = Szi->data;
                 /*  S=S+(S*(zi')*zi*S)/(1-zi*S*(zi')); */
                 ksor = 0.0;
                 loop_ub = zi->size[1];
                 for (end = 0; end < loop_ub; end++) {
-                  ksor += zi->data[end] * Szi->data[end];
+                  ksor += MD_data[end] * Szi_data[end];
                 }
-                end = S->size[0] * S->size[1];
-                S->size[0] = Szi->size[0];
-                S->size[1] = Szi->size[0];
-                emxEnsureCapacity_real_T(S, end);
+                end = r->size[0] * r->size[1];
+                r->size[0] = Szi->size[0];
+                r->size[1] = Szi->size[0];
+                emxEnsureCapacity_real_T(r, end);
+                MD_data = r->data;
                 loop_ub = Szi->size[0];
+                end = Yb->size[0] * Yb->size[1];
+                Yb->size[0] = Szi->size[0];
+                Yb->size[1] = Szi->size[0];
+                emxEnsureCapacity_real_T(Yb, end);
+                S_data = Yb->data;
                 for (end = 0; end < loop_ub; end++) {
                   b_loop_ub = Szi->size[0];
                   for (nwhile = 0; nwhile < b_loop_ub; nwhile++) {
-                    S->data[nwhile + S->size[0] * end] +=
-                        Szi->data[nwhile] * Szi->data[end] / (1.0 - ksor);
+                    d = Szi_data[nwhile] * Szi_data[end];
+                    MD_data[nwhile + r->size[0] * end] = d;
+                    S_data[nwhile + Yb->size[0] * end] = d;
                   }
+                }
+                if ((S->size[0] == r->size[0]) && (S->size[1] == Yb->size[1])) {
+                  end = S->size[0] * S->size[1];
+                  S->size[0] = Szi->size[0];
+                  S->size[1] = Szi->size[0];
+                  emxEnsureCapacity_real_T(S, end);
+                  S_data = S->data;
+                  loop_ub = Szi->size[0];
+                  for (end = 0; end < loop_ub; end++) {
+                    b_loop_ub = Szi->size[0];
+                    for (nwhile = 0; nwhile < b_loop_ub; nwhile++) {
+                      S_data[nwhile + S->size[0] * end] +=
+                          Szi_data[nwhile] * Szi_data[end] / (1.0 - ksor);
+                    }
+                  }
+                } else {
+                  n_binary_expand_op(S, Szi, ksor);
                 }
               }
             }
@@ -3026,9 +3606,10 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             mibsbr->size[0] = 1;
             mibsbr->size[1] = meoldbsb->size[1];
             emxEnsureCapacity_real_T(mibsbr, i);
+            mibsbr_data = mibsbr->data;
             loop_ub = meoldbsb->size[1];
             for (i = 0; i < loop_ub; i++) {
-              mibsbr->data[i] = meoldbsb->data[i];
+              mibsbr_data[i] = meoldbsb_data[i];
             }
           }
           /*  mi = mean of units entering subset */
@@ -3037,82 +3618,145 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           Yb->size[0] = unit->size[0];
           Yb->size[1] = Y->size[1];
           emxEnsureCapacity_real_T(Yb, i);
+          S_data = Yb->data;
           for (i = 0; i < loop_ub; i++) {
             b_loop_ub = unit->size[0];
             for (end = 0; end < b_loop_ub; end++) {
-              Yb->data[end + Yb->size[0] * i] =
-                  Y->data[((int)unit->data[end] + Y->size[0] * i) - 1];
+              S_data[end + Yb->size[0] * i] =
+                  Y_data[(unit_data[end] + Y->size[0] * i) - 1];
             }
           }
           combineVectorElements(Yb, mi);
           i = mi->size[0] * mi->size[1];
           mi->size[0] = 1;
           emxEnsureCapacity_real_T(mi, i);
+          mi_data = mi->data;
           loop_ub = mi->size[1] - 1;
           for (i = 0; i <= loop_ub; i++) {
-            mi->data[i] /= (double)lunit;
+            mi_data[i] /= (double)lunit;
           }
           /*  zi=sqrt(kin*(mm-1-k)/(mm-1-k+kin))*(mi-mean(Y(bsbr,:),1)); */
           ksor = (b_mm - 1.0) - (double)irank;
           ksor = sqrt((double)lunit * ksor / (ksor + (double)lunit));
-          i = zi->size[0] * zi->size[1];
-          zi->size[0] = 1;
-          zi->size[1] = mi->size[1];
-          emxEnsureCapacity_real_T(zi, i);
-          loop_ub = mi->size[1];
-          for (i = 0; i < loop_ub; i++) {
-            zi->data[i] = ksor * (mi->data[i] - mibsbr->data[i]);
+          if (mi->size[1] == mibsbr->size[1]) {
+            i = zi->size[0] * zi->size[1];
+            zi->size[0] = 1;
+            zi->size[1] = mi->size[1];
+            emxEnsureCapacity_real_T(zi, i);
+            MD_data = zi->data;
+            loop_ub = mi->size[1];
+            for (i = 0; i < loop_ub; i++) {
+              MD_data[i] = ksor * (mi_data[i] - mibsbr_data[i]);
+            }
+          } else {
+            s_binary_expand_op(zi, ksor, mi, mibsbr);
+            MD_data = zi->data;
           }
           mtimes(S, zi, Szi);
+          Szi_data = Szi->data;
           /*  S=S+(S*(zi')*zi*S)/(1-zi*S*(zi')); */
           ksor = 0.0;
           loop_ub = zi->size[1];
           for (i = 0; i < loop_ub; i++) {
-            ksor += zi->data[i] * Szi->data[i];
+            ksor += MD_data[i] * Szi_data[i];
           }
-          i = S->size[0] * S->size[1];
-          S->size[0] = Szi->size[0];
-          S->size[1] = Szi->size[0];
-          emxEnsureCapacity_real_T(S, i);
+          i = r->size[0] * r->size[1];
+          r->size[0] = Szi->size[0];
+          r->size[1] = Szi->size[0];
+          emxEnsureCapacity_real_T(r, i);
+          MD_data = r->data;
           loop_ub = Szi->size[0];
+          i = Yb->size[0] * Yb->size[1];
+          Yb->size[0] = Szi->size[0];
+          Yb->size[1] = Szi->size[0];
+          emxEnsureCapacity_real_T(Yb, i);
+          S_data = Yb->data;
           for (i = 0; i < loop_ub; i++) {
             b_loop_ub = Szi->size[0];
             for (end = 0; end < b_loop_ub; end++) {
-              S->data[end + S->size[0] * i] -=
-                  Szi->data[end] * Szi->data[i] / (ksor + 1.0);
+              d = Szi_data[end] * Szi_data[i];
+              MD_data[end + r->size[0] * i] = d;
+              S_data[end + Yb->size[0] * i] = d;
             }
+          }
+          if ((S->size[0] == r->size[0]) && (S->size[1] == Yb->size[1])) {
+            i = S->size[0] * S->size[1];
+            S->size[0] = Szi->size[0];
+            S->size[1] = Szi->size[0];
+            emxEnsureCapacity_real_T(S, i);
+            S_data = S->data;
+            loop_ub = Szi->size[0];
+            for (i = 0; i < loop_ub; i++) {
+              b_loop_ub = Szi->size[0];
+              for (end = 0; end < b_loop_ub; end++) {
+                S_data[end + S->size[0] * i] -=
+                    Szi_data[end] * Szi_data[i] / (ksor + 1.0);
+              }
+            }
+          } else {
+            p_binary_expand_op(S, Szi, ksor);
           }
           if (lunit > 1) {
             /* mi=mean(Y(unit,:),1); */
             for (b_i = 0; b_i < lunit; b_i++) {
               loop_ub = Y->size[1];
-              i = zi->size[0] * zi->size[1];
-              zi->size[0] = 1;
-              zi->size[1] = Y->size[1];
-              emxEnsureCapacity_real_T(zi, i);
-              for (i = 0; i < loop_ub; i++) {
-                zi->data[i] =
-                    Y->data[((int)unit->data[b_i] + Y->size[0] * i) - 1] -
-                    mi->data[i];
+              if (Y->size[1] == mi->size[1]) {
+                i = zi->size[0] * zi->size[1];
+                zi->size[0] = 1;
+                zi->size[1] = Y->size[1];
+                emxEnsureCapacity_real_T(zi, i);
+                MD_data = zi->data;
+                for (i = 0; i < loop_ub; i++) {
+                  MD_data[i] = Y_data[(unit_data[b_i] + Y->size[0] * i) - 1] -
+                               mi_data[i];
+                }
+              } else {
+                q_binary_expand_op(zi, Y, unit, b_i, mi);
+                MD_data = zi->data;
               }
               mtimes(S, zi, Szi);
+              Szi_data = Szi->data;
               /*  S=S-(S*(zi')*zi*S)/(1+zi*S*(zi')); */
               ksor = 0.0;
               loop_ub = zi->size[1];
               for (i = 0; i < loop_ub; i++) {
-                ksor += zi->data[i] * Szi->data[i];
+                ksor += MD_data[i] * Szi_data[i];
               }
-              i = S->size[0] * S->size[1];
-              S->size[0] = Szi->size[0];
-              S->size[1] = Szi->size[0];
-              emxEnsureCapacity_real_T(S, i);
+              i = r->size[0] * r->size[1];
+              r->size[0] = Szi->size[0];
+              r->size[1] = Szi->size[0];
+              emxEnsureCapacity_real_T(r, i);
+              MD_data = r->data;
               loop_ub = Szi->size[0];
+              i = Yb->size[0] * Yb->size[1];
+              Yb->size[0] = Szi->size[0];
+              Yb->size[1] = Szi->size[0];
+              emxEnsureCapacity_real_T(Yb, i);
+              S_data = Yb->data;
               for (i = 0; i < loop_ub; i++) {
                 b_loop_ub = Szi->size[0];
                 for (end = 0; end < b_loop_ub; end++) {
-                  S->data[end + S->size[0] * i] -=
-                      Szi->data[end] * Szi->data[i] / (ksor + 1.0);
+                  d = Szi_data[end] * Szi_data[i];
+                  MD_data[end + r->size[0] * i] = d;
+                  S_data[end + Yb->size[0] * i] = d;
                 }
+              }
+              if ((S->size[0] == r->size[0]) && (S->size[1] == Yb->size[1])) {
+                i = S->size[0] * S->size[1];
+                S->size[0] = Szi->size[0];
+                S->size[1] = Szi->size[0];
+                emxEnsureCapacity_real_T(S, i);
+                S_data = S->data;
+                loop_ub = Szi->size[0];
+                for (i = 0; i < loop_ub; i++) {
+                  b_loop_ub = Szi->size[0];
+                  for (end = 0; end < b_loop_ub; end++) {
+                    S_data[end + S->size[0] * i] -=
+                        Szi_data[end] * Szi_data[i] / (ksor + 1.0);
+                  }
+                }
+              } else {
+                p_binary_expand_op(S, Szi, ksor);
               }
             }
           }
@@ -3121,26 +3765,35 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           /*  than .* */
           if (n < 30000) {
             b_mtimes(Ym, S, r);
-            i = Yb->size[0] * Yb->size[1];
-            Yb->size[0] = r->size[0];
-            Yb->size[1] = r->size[1];
-            emxEnsureCapacity_real_T(Yb, i);
-            loop_ub = r->size[0] * r->size[1];
-            for (i = 0; i < loop_ub; i++) {
-              Yb->data[i] = r->data[i] * Ym->data[i];
+            MD_data = r->data;
+            if ((r->size[0] == Ym->size[0]) && (r->size[1] == Ym->size[1])) {
+              i = Yb->size[0] * Yb->size[1];
+              Yb->size[0] = r->size[0];
+              Yb->size[1] = r->size[1];
+              emxEnsureCapacity_real_T(Yb, i);
+              S_data = Yb->data;
+              loop_ub = r->size[0] * r->size[1];
+              for (i = 0; i < loop_ub; i++) {
+                S_data[i] = MD_data[i] * Ym_data[i];
+              }
+              sum(Yb, MD);
+              MD_data = MD->data;
+            } else {
+              binary_expand_op(MD, r, Ym);
+              MD_data = MD->data;
             }
-            sum(Yb, MD);
             loop_ub = MD->size[0];
             for (i = 0; i < loop_ub; i++) {
-              MD->data[i] *= b_mm - 1.0;
+              MD_data[i] *= b_mm - 1.0;
             }
           } else {
             b_mtimes(Ym, S, r);
             b_bsxfun(r, Ym, Yb);
             sum(Yb, MD);
+            MD_data = MD->data;
             loop_ub = MD->size[0];
             for (i = 0; i < loop_ub; i++) {
-              MD->data[i] *= b_mm - 1.0;
+              MD_data[i] *= b_mm - 1.0;
             }
           }
           b_guard1 = true;
@@ -3151,142 +3804,154 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             end = bsbT->size[0] - 1;
             trueCount = 0;
             for (b_i = 0; b_i <= end; b_i++) {
-              if (bsbT->data[b_i]) {
-                trueCount++;
-              }
-            }
-            i = r5->size[0];
-            r5->size[0] = trueCount;
-            emxEnsureCapacity_int32_T(r5, i);
-            b_loop_ub = 0;
-            for (b_i = 0; b_i <= end; b_i++) {
-              if (bsbT->data[b_i]) {
-                r5->data[b_loop_ub] = b_i + 1;
-                b_loop_ub++;
-              }
-            }
-            end = bsbT->size[0] - 1;
-            trueCount = 0;
-            for (b_i = 0; b_i <= end; b_i++) {
-              if (bsbT->data[b_i]) {
+              if (bsbT_data[b_i]) {
                 trueCount++;
               }
             }
             i = r6->size[0];
             r6->size[0] = trueCount;
             emxEnsureCapacity_int32_T(r6, i);
+            r2 = r6->data;
             b_loop_ub = 0;
             for (b_i = 0; b_i <= end; b_i++) {
-              if (bsbT->data[b_i]) {
-                r6->data[b_loop_ub] = b_i + 1;
+              if (bsbT_data[b_i]) {
+                r2[b_loop_ub] = b_i + 1;
                 b_loop_ub++;
               }
             }
-            loop_ub = Ym->size[1];
-            i = b_Ym->size[0] * b_Ym->size[1];
-            b_Ym->size[0] = r5->size[0];
-            b_Ym->size[1] = Ym->size[1];
-            emxEnsureCapacity_real_T(b_Ym, i);
-            i = Yb->size[0] * Yb->size[1];
-            Yb->size[0] = r6->size[0];
-            Yb->size[1] = Ym->size[1];
-            emxEnsureCapacity_real_T(Yb, i);
-            for (i = 0; i < loop_ub; i++) {
-              b_loop_ub = r5->size[0];
-              for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] =
-                    Ym->data[(r5->data[end] + Ym->size[0] * i) - 1];
-              }
-              b_loop_ub = r6->size[0];
-              for (end = 0; end < b_loop_ub; end++) {
-                Yb->data[end + Yb->size[0] * i] =
-                    Ym->data[(r6->data[end] + Ym->size[0] * i) - 1];
-              }
-            }
-            c_mtimes(b_Ym, Yb, r);
-            inv(r, S);
             end = bsbT->size[0] - 1;
             trueCount = 0;
             for (b_i = 0; b_i <= end; b_i++) {
-              if (bsbT->data[b_i]) {
+              if (bsbT_data[b_i]) {
                 trueCount++;
               }
             }
             i = r7->size[0];
             r7->size[0] = trueCount;
             emxEnsureCapacity_int32_T(r7, i);
+            r12 = r7->data;
             b_loop_ub = 0;
             for (b_i = 0; b_i <= end; b_i++) {
-              if (bsbT->data[b_i]) {
-                r7->data[b_loop_ub] = b_i + 1;
+              if (bsbT_data[b_i]) {
+                r12[b_loop_ub] = b_i + 1;
                 b_loop_ub++;
               }
             }
             loop_ub = Ym->size[1];
             i = b_Ym->size[0] * b_Ym->size[1];
-            b_Ym->size[0] = r7->size[0];
+            b_Ym->size[0] = r6->size[0];
             b_Ym->size[1] = Ym->size[1];
             emxEnsureCapacity_real_T(b_Ym, i);
-            for (i = 0; i < loop_ub; i++) {
-              b_loop_ub = r7->size[0];
-              for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] =
-                    Ym->data[(r7->data[end] + Ym->size[0] * i) - 1];
-              }
-            }
-            qr(b_Ym, Yb, R);
-          } else {
-            loop_ub = Ym->size[1];
-            i = b_Ym->size[0] * b_Ym->size[1];
-            b_Ym->size[0] = bsb->size[0];
-            b_Ym->size[1] = Ym->size[1];
-            emxEnsureCapacity_real_T(b_Ym, i);
+            MD_data = b_Ym->data;
             i = Yb->size[0] * Yb->size[1];
-            Yb->size[0] = bsb->size[0];
+            Yb->size[0] = r7->size[0];
             Yb->size[1] = Ym->size[1];
             emxEnsureCapacity_real_T(Yb, i);
+            S_data = Yb->data;
             for (i = 0; i < loop_ub; i++) {
-              b_loop_ub = bsb->size[0];
+              b_loop_ub = r6->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] =
-                    Ym->data[((int)bsb->data[end] + Ym->size[0] * i) - 1];
+                MD_data[end + b_Ym->size[0] * i] =
+                    Ym_data[(r2[end] + Ym->size[0] * i) - 1];
               }
-              b_loop_ub = bsb->size[0];
+              b_loop_ub = r7->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                Yb->data[end + Yb->size[0] * i] =
-                    Ym->data[((int)bsb->data[end] + Ym->size[0] * i) - 1];
+                S_data[end + Yb->size[0] * i] =
+                    Ym_data[(r12[end] + Ym->size[0] * i) - 1];
               }
             }
             c_mtimes(b_Ym, Yb, r);
             inv(r, S);
+            S_data = S->data;
+            end = bsbT->size[0] - 1;
+            trueCount = 0;
+            for (b_i = 0; b_i <= end; b_i++) {
+              if (bsbT_data[b_i]) {
+                trueCount++;
+              }
+            }
+            i = r8->size[0];
+            r8->size[0] = trueCount;
+            emxEnsureCapacity_int32_T(r8, i);
+            r2 = r8->data;
+            b_loop_ub = 0;
+            for (b_i = 0; b_i <= end; b_i++) {
+              if (bsbT_data[b_i]) {
+                r2[b_loop_ub] = b_i + 1;
+                b_loop_ub++;
+              }
+            }
+            loop_ub = Ym->size[1];
+            i = b_Ym->size[0] * b_Ym->size[1];
+            b_Ym->size[0] = r8->size[0];
+            b_Ym->size[1] = Ym->size[1];
+            emxEnsureCapacity_real_T(b_Ym, i);
+            MD_data = b_Ym->data;
+            for (i = 0; i < loop_ub; i++) {
+              b_loop_ub = r8->size[0];
+              for (end = 0; end < b_loop_ub; end++) {
+                MD_data[end + b_Ym->size[0] * i] =
+                    Ym_data[(r2[end] + Ym->size[0] * i) - 1];
+              }
+            }
+            qr(b_Ym, Yb, R);
+          } else {
             loop_ub = Ym->size[1];
             i = b_Ym->size[0] * b_Ym->size[1];
             b_Ym->size[0] = bsb->size[0];
             b_Ym->size[1] = Ym->size[1];
             emxEnsureCapacity_real_T(b_Ym, i);
+            MD_data = b_Ym->data;
+            i = Yb->size[0] * Yb->size[1];
+            Yb->size[0] = bsb->size[0];
+            Yb->size[1] = Ym->size[1];
+            emxEnsureCapacity_real_T(Yb, i);
+            S_data = Yb->data;
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = bsb->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] =
-                    Ym->data[((int)bsb->data[end] + Ym->size[0] * i) - 1];
+                MD_data[end + b_Ym->size[0] * i] =
+                    Ym_data[((int)bsb_data[end] + Ym->size[0] * i) - 1];
+              }
+              b_loop_ub = bsb->size[0];
+              for (end = 0; end < b_loop_ub; end++) {
+                S_data[end + Yb->size[0] * i] =
+                    Ym_data[((int)bsb_data[end] + Ym->size[0] * i) - 1];
+              }
+            }
+            c_mtimes(b_Ym, Yb, r);
+            inv(r, S);
+            S_data = S->data;
+            loop_ub = Ym->size[1];
+            i = b_Ym->size[0] * b_Ym->size[1];
+            b_Ym->size[0] = bsb->size[0];
+            b_Ym->size[1] = Ym->size[1];
+            emxEnsureCapacity_real_T(b_Ym, i);
+            MD_data = b_Ym->data;
+            for (i = 0; i < loop_ub; i++) {
+              b_loop_ub = bsb->size[0];
+              for (end = 0; end < b_loop_ub; end++) {
+                MD_data[end + b_Ym->size[0] * i] =
+                    Ym_data[((int)bsb_data[end] + Ym->size[0] * i) - 1];
               }
             }
             qr(b_Ym, Yb, R);
           }
-          i = MDltminT->size[0];
-          MDltminT->size[0] = S->size[0] * S->size[1];
-          emxEnsureCapacity_boolean_T(MDltminT, i);
+          i = unitoutT->size[0];
+          unitoutT->size[0] = S->size[0] * S->size[1];
+          emxEnsureCapacity_boolean_T(unitoutT, i);
+          unitoutT_data = unitoutT->data;
           loop_ub = S->size[0] * S->size[1];
           for (i = 0; i < loop_ub; i++) {
-            MDltminT->data[i] = rtIsInf(S->data[i]);
+            unitoutT_data[i] = rtIsInf(S_data[i]);
           }
-          irank = MDltminT->size[0];
-          if (MDltminT->size[0] == 0) {
+          irank = unitoutT->size[0];
+          if (unitoutT->size[0] == 0) {
             nwhile = 0;
           } else {
-            nwhile = MDltminT->data[0];
+            nwhile = unitoutT_data[0];
             for (b_loop_ub = 2; b_loop_ub <= irank; b_loop_ub++) {
-              nwhile += MDltminT->data[b_loop_ub - 1];
+              nwhile += unitoutT_data[b_loop_ub - 1];
             }
           }
           if (nwhile > 0) {
@@ -3294,21 +3959,29 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             mmd->size[0] = 1;
             mmd->size[1] = 1;
             emxEnsureCapacity_real_T(mmd, i);
-            mmd->data[0] = rtNaN;
+            mmd_data = mmd->data;
+            mmd_data[0] = rtNaN;
             i = Un->size[0] * Un->size[1];
             Un->size[0] = 1;
             Un->size[1] = 1;
             emxEnsureCapacity_real_T(Un, i);
-            Un->data[0] = rtNaN;
+            Un_data = Un->data;
+            Un_data[0] = rtNaN;
             exitg1 = true;
           } else {
             /*  Compute squared Mahalanobis distances */
             mrdiv(Ym, R, r);
-            power(r, Yb);
-            sum(Yb, MD);
+            MD_data = r->data;
+            loop_ub = r->size[0] * r->size[1];
+            for (i = 0; i < loop_ub; i++) {
+              ksor = MD_data[i];
+              MD_data[i] = ksor * ksor;
+            }
+            sum(r, MD);
+            MD_data = MD->data;
             loop_ub = MD->size[0];
             for (i = 0; i < loop_ub; i++) {
-              MD->data[i] *= b_mm - 1.0;
+              MD_data[i] *= b_mm - 1.0;
             }
             b_guard1 = true;
           }
@@ -3322,49 +3995,53 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             i = Szi->size[0];
             Szi->size[0] = MD->size[0];
             emxEnsureCapacity_real_T(Szi, i);
+            Szi_data = Szi->data;
             loop_ub = MD->size[0];
             for (i = 0; i < loop_ub; i++) {
-              Szi->data[i] = MD->data[i];
+              Szi_data[i] = MD_data[i];
             }
             if (b_mm > percn) {
               end = bsbT->size[0];
               for (b_i = 0; b_i < end; b_i++) {
-                if (bsbT->data[b_i]) {
-                  Szi->data[b_i] = rtInf;
+                if (bsbT_data[b_i]) {
+                  Szi_data[b_i] = rtInf;
                 }
               }
             } else {
               i = r1->size[0];
               r1->size[0] = bsb->size[0];
               emxEnsureCapacity_int32_T(r1, i);
+              r2 = r1->data;
               loop_ub = bsb->size[0];
               for (i = 0; i < loop_ub; i++) {
-                r1->data[i] = (int)bsb->data[i];
+                r2[i] = (int)bsb_data[i];
               }
               loop_ub = r1->size[0];
               for (i = 0; i < loop_ub; i++) {
-                Szi->data[r1->data[i] - 1] = rtInf;
+                Szi_data[r2[i] - 1] = rtInf;
               }
             }
             /*  oldbsbF=bsbF; */
             i = oldbsbT->size[0];
             oldbsbT->size[0] = bsbT->size[0];
             emxEnsureCapacity_boolean_T(oldbsbT, i);
+            oldbsbT_data = oldbsbT->data;
             loop_ub = bsbT->size[0];
             for (i = 0; i < loop_ub; i++) {
-              oldbsbT->data[i] = bsbT->data[i];
+              oldbsbT_data[i] = bsbT_data[i];
             }
             /*  Take minimum distance of the units not belonging to subset */
             d_minimum(Szi, &minMD, &lunit);
             /*  MDltminT = n x 1 Boolean vector which is true if corresponding
              * MD is */
             /*  smaller or equal minMD */
-            i = MDltminT->size[0];
-            MDltminT->size[0] = MD->size[0];
-            emxEnsureCapacity_boolean_T(MDltminT, i);
+            i = unitoutT->size[0];
+            unitoutT->size[0] = MD->size[0];
+            emxEnsureCapacity_boolean_T(unitoutT, i);
+            unitoutT_data = unitoutT->data;
             loop_ub = MD->size[0];
             for (i = 0; i < loop_ub; i++) {
-              MDltminT->data[i] = (MD->data[i] <= minMD);
+              unitoutT_data[i] = (MD_data[i] <= minMD);
             }
             /*  MDltminbsb = n x 1 Boolean vector (if m>percn) or */
             /*  int32 vector containing the units which certainly remain inside
@@ -3372,20 +4049,27 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             /*  i.e. those which have a true in MDltminT and belong to previous
              * subset */
             if (b_mm > percn) {
-              i = MDltminbsb->size[0];
-              MDltminbsb->size[0] = MDltminT->size[0];
-              emxEnsureCapacity_boolean_T(MDltminbsb, i);
-              loop_ub = MDltminT->size[0];
-              for (i = 0; i < loop_ub; i++) {
-                MDltminbsb->data[i] = (MDltminT->data[i] && bsbT->data[i]);
+              if (unitoutT->size[0] == bsbT->size[0]) {
+                i = MDltminbsb->size[0];
+                MDltminbsb->size[0] = unitoutT->size[0];
+                emxEnsureCapacity_boolean_T(MDltminbsb, i);
+                MDltminbsb_data = MDltminbsb->data;
+                loop_ub = unitoutT->size[0];
+                for (i = 0; i < loop_ub; i++) {
+                  MDltminbsb_data[i] = (unitoutT_data[i] && bsbT_data[i]);
+                }
+              } else {
+                and(MDltminbsb, unitoutT, bsbT);
+                MDltminbsb_data = MDltminbsb->data;
               }
             } else {
               i = MDltminbsb->size[0];
               MDltminbsb->size[0] = bsb->size[0];
               emxEnsureCapacity_boolean_T(MDltminbsb, i);
+              MDltminbsb_data = MDltminbsb->data;
               loop_ub = bsb->size[0];
               for (i = 0; i < loop_ub; i++) {
-                MDltminbsb->data[i] = MDltminT->data[(int)bsb->data[i] - 1];
+                MDltminbsb_data[i] = unitoutT_data[(int)bsb_data[i] - 1];
               }
             }
             /*  Find number of units of old subset which have a MD <= minMD */
@@ -3397,9 +4081,9 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             if (MDltminbsb->size[0] == 0) {
               nwhile = 0;
             } else {
-              nwhile = MDltminbsb->data[0];
+              nwhile = MDltminbsb_data[0];
               for (b_loop_ub = 2; b_loop_ub <= irank; b_loop_ub++) {
-                nwhile += MDltminbsb->data[b_loop_ub - 1];
+                nwhile += MDltminbsb_data[b_loop_ub - 1];
               }
             }
             rankgap = (b_mm + 1.0) - (double)nwhile;
@@ -3407,8 +4091,9 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               /*  Just one new unit entered subset */
               i = unit->size[0];
               unit->size[0] = 1;
-              emxEnsureCapacity_real_T(unit, i);
-              unit->data[0] = lunit;
+              emxEnsureCapacity_int32_T(unit, i);
+              unit_data = unit->data;
+              unit_data[0] = lunit;
               /*  Compute new bsbT and new bsb */
               if (b_mm <= percn) {
                 /*  new bsb is equal to oldbsb plus unit which just entered */
@@ -3416,11 +4101,12 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 end = bsb->size[0];
                 bsb->size[0]++;
                 emxEnsureCapacity_real_T(bsb, end);
-                bsb->data[i] = lunit;
+                bsb_data = bsb->data;
+                bsb_data[i] = lunit;
               }
               /*  bsbT is equal to old bsbT after adding a single true in */
               /*  correspondence of the unit which entered subset */
-              bsbT->data[lunit - 1] = true;
+              bsbT_data[lunit - 1] = true;
             } else if ((rankgap > 1.0) && (rankgap <= 10.0)) {
               /*  MDmod is the vector of Mahalanobis distance which will have */
               /*  a Inf in correspondence of the units of old subset which */
@@ -3428,9 +4114,10 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               i = Szi->size[0];
               Szi->size[0] = MD->size[0];
               emxEnsureCapacity_real_T(Szi, i);
+              Szi_data = Szi->data;
               loop_ub = MD->size[0];
               for (i = 0; i < loop_ub; i++) {
-                Szi->data[i] = MD->data[i];
+                Szi_data[i] = MD_data[i];
               }
               /*  Find bsbrini, i.e. the vector which will contain the */
               /*  units which remain in the subset in the next step */
@@ -3446,17 +4133,18 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 end = bsb->size[0] - 1;
                 trueCount = 0;
                 for (b_i = 0; b_i <= end; b_i++) {
-                  if (MDltminT->data[(int)bsb->data[b_i] - 1]) {
+                  if (unitoutT_data[(int)bsb_data[b_i] - 1]) {
                     trueCount++;
                   }
                 }
                 i = bsbrini->size[0];
                 bsbrini->size[0] = trueCount;
                 emxEnsureCapacity_uint32_T(bsbrini, i);
+                bsbrini_data = bsbrini->data;
                 b_loop_ub = 0;
                 for (b_i = 0; b_i <= end; b_i++) {
-                  if (MDltminT->data[(int)bsb->data[b_i] - 1]) {
-                    bsbrini->data[b_loop_ub] = (unsigned int)bsb->data[b_i];
+                  if (unitoutT_data[(int)bsb_data[b_i] - 1]) {
+                    bsbrini_data[b_loop_ub] = (unsigned int)bsb_data[b_i];
                     b_loop_ub++;
                   }
                 }
@@ -3467,30 +4155,32 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 end = bsb->size[0] - 1;
                 trueCount = 0;
                 for (b_i = 0; b_i <= end; b_i++) {
-                  if (!MDltminT->data[(int)bsb->data[b_i] - 1]) {
+                  if (!unitoutT_data[(int)bsb_data[b_i] - 1]) {
                     trueCount++;
                   }
                 }
                 i = unitout->size[0];
                 unitout->size[0] = trueCount;
                 emxEnsureCapacity_real_T(unitout, i);
+                unitout_data = unitout->data;
                 b_loop_ub = 0;
                 for (b_i = 0; b_i <= end; b_i++) {
-                  if (!MDltminT->data[(int)bsb->data[b_i] - 1]) {
-                    unitout->data[b_loop_ub] = bsb->data[b_i];
+                  if (!unitoutT_data[(int)bsb_data[b_i] - 1]) {
+                    unitout_data[b_loop_ub] = bsb_data[b_i];
                     b_loop_ub++;
                   }
                 }
                 i = r1->size[0];
                 r1->size[0] = bsbrini->size[0];
                 emxEnsureCapacity_int32_T(r1, i);
+                r2 = r1->data;
                 loop_ub = bsbrini->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  r1->data[i] = (int)bsbrini->data[i];
+                  r2[i] = (int)bsbrini_data[i];
                 }
                 loop_ub = r1->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  Szi->data[r1->data[i] - 1] = rtInf;
+                  Szi_data[r2[i] - 1] = rtInf;
                 }
               } else {
                 /*  bsbriniT = Boolean vector which is true if the */
@@ -3501,14 +4191,15 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 i = bsbriniT->size[0];
                 bsbriniT->size[0] = MDltminbsb->size[0];
                 emxEnsureCapacity_boolean_T(bsbriniT, i);
+                bsbriniT_data = bsbriniT->data;
                 loop_ub = MDltminbsb->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  bsbriniT->data[i] = MDltminbsb->data[i];
+                  bsbriniT_data[i] = MDltminbsb_data[i];
                 }
                 end = MDltminbsb->size[0];
                 for (b_i = 0; b_i < end; b_i++) {
-                  if (MDltminbsb->data[b_i]) {
-                    Szi->data[b_i] = rtInf;
+                  if (MDltminbsb_data[b_i]) {
+                    Szi_data[b_i] = rtInf;
                   }
                 }
               }
@@ -3530,7 +4221,7 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 /*  vector bsbriniT and the unit is included in vector */
                 /*  bsbradd If unit minMDindex did not belong to previous */
                 /*  subset, than minMDindex is included in vector unitadd */
-                if (bsbT->data[lunit - 1]) {
+                if (bsbT_data[lunit - 1]) {
                   if (b_mm <= percn) {
                     bsbradd[nwhile] = lunit;
                     nwhile++;
@@ -3540,29 +4231,30 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     end = unitout->size[0] - 1;
                     trueCount = 0;
                     for (b_i = 0; b_i <= end; b_i++) {
-                      if ((int)unitout->data[b_i] != lunit) {
+                      if ((int)unitout_data[b_i] != lunit) {
                         trueCount++;
                       }
                     }
                     b_loop_ub = 0;
                     for (b_i = 0; b_i <= end; b_i++) {
-                      if ((int)unitout->data[b_i] != lunit) {
-                        unitout->data[b_loop_ub] = unitout->data[b_i];
+                      if ((int)unitout_data[b_i] != lunit) {
+                        unitout_data[b_loop_ub] = unitout_data[b_i];
                         b_loop_ub++;
                       }
                     }
                     end = unitout->size[0];
                     unitout->size[0] = trueCount;
                     emxEnsureCapacity_real_T(unitout, end);
+                    unitout_data = unitout->data;
                   } else {
-                    bsbriniT->data[lunit - 1] = true;
+                    bsbriniT_data[lunit - 1] = true;
                   }
                 } else {
                   unitadd[irank] = lunit;
                   irank++;
                 }
                 /*  disp(posunit(posncl1)) */
-                Szi->data[lunit - 1] = rtInf;
+                Szi_data[lunit - 1] = rtInf;
               }
               /*  unit = vector containing all units which enter the new subset
                */
@@ -3574,9 +4266,10 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               }
               i = unit->size[0];
               unit->size[0] = loop_ub;
-              emxEnsureCapacity_real_T(unit, i);
+              emxEnsureCapacity_int32_T(unit, i);
+              unit_data = unit->data;
               for (i = 0; i < loop_ub; i++) {
-                unit->data[i] = unitadd[i];
+                unit_data[i] = unitadd[i];
               }
               /*  bsbr = vector containing all units which enter the new */
               /*  subset and were also in the previous subset */
@@ -3589,40 +4282,44 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 }
                 i = bsbr->size[0];
                 bsbr->size[0] = bsbrini->size[0] + b_loop_ub;
-                emxEnsureCapacity_real_T(bsbr, i);
+                emxEnsureCapacity_int32_T(bsbr, i);
+                bsbr_data = bsbr->data;
                 irank = bsbrini->size[0];
                 for (i = 0; i < irank; i++) {
-                  bsbr->data[i] = bsbrini->data[i];
+                  bsbr_data[i] = (int)bsbrini_data[i];
                 }
                 for (i = 0; i < b_loop_ub; i++) {
-                  bsbr->data[i + bsbrini->size[0]] = bsbradd[i];
+                  bsbr_data[i + bsbrini->size[0]] = bsbradd[i];
                 }
                 i = bsb->size[0];
                 bsb->size[0] = bsbr->size[0] + loop_ub;
                 emxEnsureCapacity_real_T(bsb, i);
+                bsb_data = bsb->data;
                 b_loop_ub = bsbr->size[0];
                 for (i = 0; i < b_loop_ub; i++) {
-                  bsb->data[i] = bsbr->data[i];
+                  bsb_data[i] = bsbr_data[i];
                 }
                 for (i = 0; i < loop_ub; i++) {
-                  bsb->data[i + bsbr->size[0]] = unitadd[i];
+                  bsb_data[i + bsbr->size[0]] = unitadd[i];
                 }
                 i = bsbT->size[0];
                 bsbT->size[0] = n;
                 emxEnsureCapacity_boolean_T(bsbT, i);
+                bsbT_data = bsbT->data;
                 for (i = 0; i < n; i++) {
-                  bsbT->data[i] = false;
+                  bsbT_data[i] = false;
                 }
                 i = r1->size[0];
                 r1->size[0] = bsb->size[0];
                 emxEnsureCapacity_int32_T(r1, i);
+                r2 = r1->data;
                 loop_ub = bsb->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  r1->data[i] = (int)bsb->data[i];
+                  r2[i] = (int)bsb_data[i];
                 }
                 loop_ub = r1->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  bsbT->data[r1->data[i] - 1] = true;
+                  bsbT_data[r2[i] - 1] = true;
                 }
               } else {
                 /*  After the instruction which follows bsbriniT */
@@ -3632,18 +4329,19 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 /*  -----------    bsbriniT=MDltminT & bsbT; */
                 /*  -----------    bsbriniT(minMDindex)=true; */
                 /*  -----------    bsbriniT(unit)=true; */
-                for (i = 0; i < loop_ub; i++) {
-                  tmp_data[i] = (int)unitadd[i];
+                if (0 <= loop_ub - 1) {
+                  memcpy(&tmp_data[0], &unitadd[0], loop_ub * sizeof(int));
                 }
                 for (i = 0; i < loop_ub; i++) {
-                  bsbriniT->data[tmp_data[i] - 1] = true;
+                  bsbriniT_data[tmp_data[i] - 1] = true;
                 }
                 i = bsbT->size[0];
                 bsbT->size[0] = bsbriniT->size[0];
                 emxEnsureCapacity_boolean_T(bsbT, i);
+                bsbT_data = bsbT->data;
                 loop_ub = bsbriniT->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  bsbT->data[i] = bsbriniT->data[i];
+                  bsbT_data[i] = bsbriniT_data[i];
                 }
               }
               /*  Compute bsbT (Boolean vector which identifies new subset) */
@@ -3658,25 +4356,27 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               i = Szi->size[0];
               Szi->size[0] = MD->size[0];
               emxEnsureCapacity_real_T(Szi, i);
+              Szi_data = Szi->data;
               loop_ub = MD->size[0] - 1;
               for (i = 0; i <= loop_ub; i++) {
-                Szi->data[i] = MD->data[i];
+                Szi_data[i] = MD_data[i];
               }
               ksor = quickselectFS(Szi, b_mm + 1.0, lunit);
               i = bsbT->size[0];
               bsbT->size[0] = MD->size[0];
               emxEnsureCapacity_boolean_T(bsbT, i);
+              bsbT_data = bsbT->data;
               loop_ub = MD->size[0];
               for (i = 0; i < loop_ub; i++) {
-                bsbT->data[i] = (MD->data[i] <= ksor);
+                bsbT_data[i] = (MD_data[i] <= ksor);
               }
               irank = bsbT->size[0];
               if (bsbT->size[0] == 0) {
                 nwhile = 0;
               } else {
-                nwhile = bsbT->data[0];
+                nwhile = bsbT_data[0];
                 for (b_loop_ub = 2; b_loop_ub <= irank; b_loop_ub++) {
-                  nwhile += bsbT->data[b_loop_ub - 1];
+                  nwhile += bsbT_data[b_loop_ub - 1];
                 }
               }
               if (nwhile == (int)b_mm + 1) {
@@ -3684,17 +4384,18 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   end = bsbT->size[0] - 1;
                   trueCount = 0;
                   for (b_i = 0; b_i <= end; b_i++) {
-                    if (bsbT->data[b_i]) {
+                    if (bsbT_data[b_i]) {
                       trueCount++;
                     }
                   }
                   i = bsb->size[0];
                   bsb->size[0] = trueCount;
                   emxEnsureCapacity_real_T(bsb, i);
+                  bsb_data = bsb->data;
                   b_loop_ub = 0;
                   for (b_i = 0; b_i <= end; b_i++) {
-                    if (bsbT->data[b_i]) {
-                      bsb->data[b_loop_ub] = seq->data[b_i];
+                    if (bsbT_data[b_i]) {
+                      bsb_data[b_loop_ub] = seq_data[b_i];
                       b_loop_ub++;
                     }
                   }
@@ -3705,8 +4406,10 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 nwhile = MD->size[0] - 1;
                 irank = 0;
                 for (b_i = 0; b_i < end; b_i++) {
-                  if (MD->data[b_i] < ksor) {
+                  if (MD_data[b_i] < ksor) {
                     trueCount++;
+                  }
+                  if (MD_data[b_i] < ksor) {
                     irank++;
                   }
                 }
@@ -3716,80 +4419,93 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 } else {
                   loop_ub = (int)d;
                 }
-                i = r9->size[0];
-                r9->size[0] = irank;
-                emxEnsureCapacity_int32_T(r9, i);
+                i = r10->size[0];
+                r10->size[0] = irank;
+                emxEnsureCapacity_int32_T(r10, i);
+                r2 = r10->data;
                 b_loop_ub = 0;
                 end = MD->size[0] - 1;
                 trueCount = 0;
                 for (b_i = 0; b_i <= nwhile; b_i++) {
-                  if (MD->data[b_i] < ksor) {
-                    r9->data[b_loop_ub] = b_i + 1;
+                  if (MD_data[b_i] < ksor) {
+                    r2[b_loop_ub] = b_i + 1;
                     b_loop_ub++;
                   }
-                  if (MD->data[b_i] == ksor) {
+                  if (MD_data[b_i] == ksor) {
                     trueCount++;
                   }
                 }
-                i = r10->size[0];
-                r10->size[0] = trueCount;
-                emxEnsureCapacity_int32_T(r10, i);
+                i = r11->size[0];
+                r11->size[0] = trueCount;
+                emxEnsureCapacity_int32_T(r11, i);
+                r12 = r11->data;
                 b_loop_ub = 0;
                 for (b_i = 0; b_i <= end; b_i++) {
-                  if (MD->data[b_i] == ksor) {
-                    r10->data[b_loop_ub] = b_i + 1;
+                  if (MD_data[b_i] == ksor) {
+                    r12[b_loop_ub] = b_i + 1;
                     b_loop_ub++;
                   }
                 }
                 i = bsb->size[0];
-                bsb->size[0] = r9->size[0] + loop_ub;
+                bsb->size[0] = r10->size[0] + loop_ub;
                 emxEnsureCapacity_real_T(bsb, i);
-                b_loop_ub = r9->size[0];
+                bsb_data = bsb->data;
+                b_loop_ub = r10->size[0];
                 for (i = 0; i < b_loop_ub; i++) {
-                  bsb->data[i] = seq->data[r9->data[i] - 1];
+                  bsb_data[i] = seq_data[r2[i] - 1];
                 }
                 for (i = 0; i < loop_ub; i++) {
-                  bsb->data[i + r9->size[0]] = seq->data[r10->data[i] - 1];
+                  bsb_data[i + r10->size[0]] = seq_data[r12[i] - 1];
                 }
                 i = bsbT->size[0];
                 bsbT->size[0] = n;
                 emxEnsureCapacity_boolean_T(bsbT, i);
+                bsbT_data = bsbT->data;
                 for (i = 0; i < n; i++) {
-                  bsbT->data[i] = false;
+                  bsbT_data[i] = false;
                 }
                 i = r1->size[0];
                 r1->size[0] = bsb->size[0];
                 emxEnsureCapacity_int32_T(r1, i);
+                r2 = r1->data;
                 loop_ub = bsb->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  r1->data[i] = (int)bsb->data[i];
+                  r2[i] = (int)bsb_data[i];
                 }
                 loop_ub = r1->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  bsbT->data[r1->data[i] - 1] = true;
+                  bsbT_data[r2[i] - 1] = true;
                 }
               }
               /*  unit = vector containing units which just entered subset; */
-              i = MDltminT->size[0];
-              MDltminT->size[0] = bsbT->size[0];
-              emxEnsureCapacity_boolean_T(MDltminT, i);
-              loop_ub = bsbT->size[0];
-              for (i = 0; i < loop_ub; i++) {
-                MDltminT->data[i] = (bsbT->data[i] && (!oldbsbT->data[i]));
+              if (bsbT->size[0] == oldbsbT->size[0]) {
+                i = b_bsbT->size[0];
+                b_bsbT->size[0] = bsbT->size[0];
+                emxEnsureCapacity_boolean_T(b_bsbT, i);
+                unitoutT_data = b_bsbT->data;
+                loop_ub = bsbT->size[0];
+                for (i = 0; i < loop_ub; i++) {
+                  unitoutT_data[i] = (bsbT_data[i] && (!oldbsbT_data[i]));
+                }
+                b_eml_find(b_bsbT, r1);
+                r2 = r1->data;
+              } else {
+                r_binary_expand_op(r1, bsbT, oldbsbT);
+                r2 = r1->data;
               }
-              b_eml_find(MDltminT, r1);
               i = unit->size[0];
               unit->size[0] = r1->size[0];
-              emxEnsureCapacity_real_T(unit, i);
+              emxEnsureCapacity_int32_T(unit, i);
+              unit_data = unit->data;
               loop_ub = r1->size[0];
               for (i = 0; i < loop_ub; i++) {
-                unit->data[i] = r1->data[i];
+                unit_data[i] = r2[i];
               }
             }
             if (b_mm >= init1) {
               /*  mmd contains minimum of Mahalanobis distances among */
               /*  the units which are not in the subset at step m */
-              mmd->data[((int)((b_mm - init1) + 1.0) + mmd->size[0]) - 1] =
+              mmd_data[((int)((b_mm - init1) + 1.0) + mmd->size[0]) - 1] =
                   sqrt(minMD);
             }
             /*  store mean of units forming old subset */
@@ -3797,9 +4513,10 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             meoldbsb->size[0] = 1;
             meoldbsb->size[1] = ym->size[1];
             emxEnsureCapacity_real_T(meoldbsb, i);
+            meoldbsb_data = meoldbsb->data;
             loop_ub = ym->size[1];
             for (i = 0; i < loop_ub; i++) {
-              meoldbsb->data[i] = ym->data[i];
+              meoldbsb_data[i] = ym_data[i];
             }
             lunit = unit->size[0];
             if (b_mm >= init1) {
@@ -3814,8 +4531,8 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 nwhile = (int)((b_mm - init1) + 1.0) - 1;
                 irank = end - i;
                 for (end = 0; end < irank; end++) {
-                  Un->data[nwhile + Un->size[0] * ((i + end) + 1)] =
-                      unit->data[end];
+                  Un_data[nwhile + Un->size[0] * ((i + end) + 1)] =
+                      unit_data[end];
                 }
               } else {
                 if (varargin_6) {
@@ -3824,7 +4541,7 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 }
                 i = (int)((b_mm - init1) + 1.0) - 1;
                 for (end = 0; end < 10; end++) {
-                  Un->data[i + Un->size[0] * (end + 1)] = unit->data[end];
+                  Un_data[i + Un->size[0] * (end + 1)] = unit_data[end];
                 }
               }
             }
@@ -3839,39 +4556,42 @@ void b_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     mmd->size[0] = 1;
     mmd->size[1] = 1;
     emxEnsureCapacity_real_T(mmd, i);
-    mmd->data[0] = rtNaN;
+    mmd_data = mmd->data;
+    mmd_data[0] = rtNaN;
     i = Un->size[0] * Un->size[1];
     Un->size[0] = 1;
     Un->size[1] = 1;
     emxEnsureCapacity_real_T(Un, i);
-    Un->data[0] = rtNaN;
+    Un_data = Un->data;
+    Un_data[0] = rtNaN;
   }
   emxFree_real_T(&r);
+  emxFree_boolean_T(&b_bsbT);
   emxFree_real_T(&b_Ym);
+  emxFree_int32_T(&r11);
   emxFree_int32_T(&r10);
   emxFree_int32_T(&r9);
   emxFree_int32_T(&r8);
   emxFree_int32_T(&r7);
   emxFree_int32_T(&r6);
   emxFree_int32_T(&r5);
-  emxFree_int32_T(&r4);
   emxFree_int32_T(&r1);
   emxFree_boolean_T(&MDltminbsb);
-  emxFree_boolean_T(&MDltminT);
   emxFree_real_T(&R);
   emxFree_real_T(&MD);
   emxFree_real_T(&Szi);
   emxFree_real_T(&zi);
   emxFree_real_T(&mibsbr);
   emxFree_real_T(&mi);
+  emxFree_boolean_T(&unitoutT);
   emxFree_real_T(&Ym);
   emxFree_real_T(&ym);
   emxFree_real_T(&Yb);
-  emxFree_real_T(&unit);
+  emxFree_int32_T(&unit);
   emxFree_uint32_T(&bsbrini);
   emxFree_boolean_T(&bsbriniT);
   emxFree_real_T(&unitout);
-  emxFree_real_T(&bsbr);
+  emxFree_int32_T(&bsbr);
   emxFree_boolean_T(&oldbsbT);
   emxFree_real_T(&meoldbsb);
   emxFree_real_T(&S);
@@ -3883,20 +4603,23 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               emxArray_real_T *mmd, emxArray_real_T *Un,
               emxArray_real_T *varargout_1)
 {
-  emxArray_boolean_T *MDltminT;
   emxArray_boolean_T *MDltminbsb;
+  emxArray_boolean_T *b_bsbT;
   emxArray_boolean_T *bsbT;
   emxArray_boolean_T *bsbriniT;
   emxArray_boolean_T *oldbsbT;
+  emxArray_boolean_T *unitoutT;
+  emxArray_int32_T *bsbr;
   emxArray_int32_T *r1;
   emxArray_int32_T *r10;
   emxArray_int32_T *r11;
-  emxArray_int32_T *r4;
+  emxArray_int32_T *r12;
   emxArray_int32_T *r5;
   emxArray_int32_T *r6;
   emxArray_int32_T *r7;
   emxArray_int32_T *r8;
   emxArray_int32_T *r9;
+  emxArray_int32_T *unit;
   emxArray_real_T *MD;
   emxArray_real_T *R;
   emxArray_real_T *S;
@@ -3904,23 +4627,20 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   emxArray_real_T *Yb;
   emxArray_real_T *Ym;
   emxArray_real_T *b_Ym;
-  emxArray_real_T *bsbr;
   emxArray_real_T *bsbsteps;
   emxArray_real_T *meoldbsb;
   emxArray_real_T *mi;
   emxArray_real_T *mibsbr;
   emxArray_real_T *r;
-  emxArray_real_T *r2;
   emxArray_real_T *r3;
+  emxArray_real_T *r4;
   emxArray_real_T *seq;
-  emxArray_real_T *unit;
   emxArray_real_T *unitout;
   emxArray_real_T *y;
   emxArray_real_T *ym;
   emxArray_real_T *zi;
   emxArray_uint32_T *bsbrini;
-  double bsbradd[10];
-  double unitadd[10];
+  const double *Y_data;
   double b_mm;
   double d;
   double init1;
@@ -3928,10 +4648,26 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   double minMD;
   double percn;
   double rankgap;
+  double *MD_data;
+  double *S_data;
+  double *Szi_data;
+  double *Un_data;
+  double *Ym_data;
+  double *bsb_data;
+  double *bsbsteps_data;
+  double *meoldbsb_data;
+  double *mi_data;
+  double *mibsbr_data;
+  double *mmd_data;
+  double *seq_data;
+  double *unitout_data;
+  double *varargout_1_data;
+  double *ym_data;
+  int bsbradd[10];
   int tmp_data[10];
+  int unitadd[10];
   int b_i;
   int b_loop_ub;
-  int end;
   int i;
   unsigned int ij;
   int ini0;
@@ -3941,13 +4677,26 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   int mm;
   int n;
   int nwhile;
+  int partialTrueCount;
   int trueCount;
   int v;
+  int *bsbr_data;
+  unsigned int *bsbrini_data;
+  int *r13;
+  int *r2;
+  int *unit_data;
   bool Ra;
   bool b_guard1 = false;
   bool exitg1;
   bool guard1 = false;
-  emxInit_boolean_T(&MDltminT, 1);
+  bool *MDltminbsb_data;
+  bool *bsbT_data;
+  bool *bsbriniT_data;
+  bool *oldbsbT_data;
+  bool *unitoutT_data;
+  bsb_data = bsb->data;
+  Y_data = Y->data;
+  emxInit_boolean_T(&bsbT, 1);
   /* FSMmmd monitors minMD */
   /*  */
   /* <a href="matlab: docsearchFS('FSMmmd')">Link to the help function</a> */
@@ -3972,7 +4721,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*                chosen else if bsb is not 0 the search will start with */
   /*                m0=length(bsb) */
   /*                Data Types - single | double */
-  /*  */
   /*  */
   /*  Optional input arguments: */
   /*  */
@@ -4013,7 +4761,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*                  Example - 'nocheck',false */
   /*                  Data Types - logical */
   /*  */
-  /*  */
   /*  plots :     It specify whether it is necessary to produce the plots of
    * minimum Mahalanobis */
   /*                  distance. Scalar. If plots=1, a plot of the monitoring of
@@ -4023,7 +4770,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*                else (default) no plot is produced. */
   /*                  Example - 'plots',0 */
   /*                  Data Types - double */
-  /*  */
   /*  */
   /*  Remark :      The user should only give the input arguments that have to
    */
@@ -4182,7 +4928,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*                specified for the */
   /*                caller function. */
   /*  */
-  /*  */
   /*   Optional input arguments: */
   /*  */
   /*  Output: */
@@ -4199,8 +4944,6 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
-  /*  */
   /*  */
   /* $LastChangedDate::                      $: Date of the last commit */
   /*  */
@@ -4229,32 +4972,36 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /* init1=options.init; */
   /*  Write in structure 'options' the options chosen by the user */
   /*  And check if the optional user parameters are reasonable. */
-  i = MDltminT->size[0];
-  MDltminT->size[0] = bsb->size[0];
-  emxEnsureCapacity_boolean_T(MDltminT, i);
+  i = bsbT->size[0];
+  bsbT->size[0] = bsb->size[0];
+  emxEnsureCapacity_boolean_T(bsbT, i);
+  bsbT_data = bsbT->data;
   loop_ub = bsb->size[0];
   for (i = 0; i < loop_ub; i++) {
-    MDltminT->data[i] = (bsb->data[i] == 0.0);
+    bsbT_data[i] = (bsb_data[i] == 0.0);
   }
   emxInit_real_T(&Yb, 2);
   emxInit_real_T(&r, 2);
-  if (ifWhileCond(MDltminT)) {
+  if (ifWhileCond(bsbT)) {
     Ra = true;
     nwhile = 1;
     while (Ra && (nwhile < 100)) {
       /*  Extract a random sample of size v+1 */
       randsample(n, (double)v + 1.0, bsb);
+      bsb_data = bsb->data;
       /*  Check if the var-cov matrix of the random sample is full (i.e =v) */
       loop_ub = Y->size[1];
       i = Yb->size[0] * Yb->size[1];
       Yb->size[0] = bsb->size[0];
       Yb->size[1] = Y->size[1];
       emxEnsureCapacity_real_T(Yb, i);
+      S_data = Yb->data;
       for (i = 0; i < loop_ub; i++) {
         b_loop_ub = bsb->size[0];
-        for (end = 0; end < b_loop_ub; end++) {
-          Yb->data[end + Yb->size[0] * i] =
-              Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
+        for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+             partialTrueCount++) {
+          S_data[partialTrueCount + Yb->size[0] * i] =
+              Y_data[((int)bsb_data[partialTrueCount] + Y->size[0] * i) - 1];
         }
       }
       cov(Yb, r);
@@ -4264,6 +5011,7 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     }
   }
   emxInit_real_T(&ym, 2);
+  ym_data = ym->data;
   /*  percn = scalar which controls up to which point of the search it is */
   /*  better to use linear indexing to extract the units forming subset. For */
   /*  example percn=0.85*n means that units belonging to susbet are found using
@@ -4281,42 +5029,47 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     ym->size[0] = 1;
     ym->size[1] = Y->size[0];
     emxEnsureCapacity_real_T(ym, i);
+    ym_data = ym->data;
     loop_ub = Y->size[0] - 1;
     for (i = 0; i <= loop_ub; i++) {
-      ym->data[i] = (double)i + 1.0;
+      ym_data[i] = (double)i + 1.0;
     }
   }
   emxInit_real_T(&seq, 1);
   i = seq->size[0];
   seq->size[0] = ym->size[1];
   emxEnsureCapacity_real_T(seq, i);
+  seq_data = seq->data;
   loop_ub = ym->size[1];
   for (i = 0; i < loop_ub; i++) {
-    seq->data[i] = ym->data[i];
+    seq_data[i] = ym_data[i];
   }
-  memset(&unitadd[0], 0, 10U * sizeof(double));
-  memset(&bsbradd[0], 0, 10U * sizeof(double));
-  emxInit_boolean_T(&bsbT, 1);
+  for (b_i = 0; b_i < 10; b_i++) {
+    unitadd[b_i] = 0;
+    bsbradd[b_i] = 0;
+  }
   /*  Initialization of the n x 1 Boolean vector which contains a true in */
   /*  correspondence of the units belonging to subset in each step */
   i = bsbT->size[0];
   bsbT->size[0] = Y->size[0];
   emxEnsureCapacity_boolean_T(bsbT, i);
+  bsbT_data = bsbT->data;
   loop_ub = Y->size[0];
   for (i = 0; i < loop_ub; i++) {
-    bsbT->data[i] = false;
+    bsbT_data[i] = false;
   }
   emxInit_int32_T(&r1, 1);
   i = r1->size[0];
   r1->size[0] = bsb->size[0];
   emxEnsureCapacity_int32_T(r1, i);
+  r2 = r1->data;
   loop_ub = bsb->size[0];
   for (i = 0; i < loop_ub; i++) {
-    r1->data[i] = (int)bsb->data[i];
+    r2[i] = (int)bsb_data[i];
   }
   loop_ub = r1->size[0];
   for (i = 0; i < loop_ub; i++) {
-    bsbT->data[r1->data[i] - 1] = true;
+    bsbT_data[r2[i] - 1] = true;
   }
   emxInit_real_T(&S, 2);
   /*  Initialization for Matlab coder */
@@ -4325,58 +5078,65 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   S->size[0] = Y->size[1];
   S->size[1] = Y->size[1];
   emxEnsureCapacity_real_T(S, i);
+  S_data = S->data;
   loop_ub = Y->size[1] * Y->size[1];
   for (i = 0; i < loop_ub; i++) {
-    S->data[i] = 0.0;
+    S_data[i] = 0.0;
   }
   emxInit_real_T(&meoldbsb, 2);
   i = meoldbsb->size[0] * meoldbsb->size[1];
   meoldbsb->size[0] = 1;
   meoldbsb->size[1] = Y->size[1];
   emxEnsureCapacity_real_T(meoldbsb, i);
+  meoldbsb_data = meoldbsb->data;
   loop_ub = Y->size[1];
   for (i = 0; i < loop_ub; i++) {
-    meoldbsb->data[i] = 0.0;
+    meoldbsb_data[i] = 0.0;
   }
   emxInit_boolean_T(&oldbsbT, 1);
   i = oldbsbT->size[0];
   oldbsbT->size[0] = bsbT->size[0];
   emxEnsureCapacity_boolean_T(oldbsbT, i);
+  oldbsbT_data = oldbsbT->data;
   loop_ub = bsbT->size[0];
   for (i = 0; i < loop_ub; i++) {
-    oldbsbT->data[i] = bsbT->data[i];
+    oldbsbT_data[i] = bsbT_data[i];
   }
-  emxInit_real_T(&bsbr, 1);
+  emxInit_int32_T(&bsbr, 1);
   i = bsbr->size[0];
   bsbr->size[0] = Y->size[0];
-  emxEnsureCapacity_real_T(bsbr, i);
+  emxEnsureCapacity_int32_T(bsbr, i);
+  bsbr_data = bsbr->data;
   loop_ub = Y->size[0];
   for (i = 0; i < loop_ub; i++) {
-    bsbr->data[i] = 0.0;
+    bsbr_data[i] = 0;
   }
   emxInit_real_T(&unitout, 1);
   i = unitout->size[0];
   unitout->size[0] = Y->size[0];
   emxEnsureCapacity_real_T(unitout, i);
+  unitout_data = unitout->data;
   loop_ub = Y->size[0];
   for (i = 0; i < loop_ub; i++) {
-    unitout->data[i] = 0.0;
+    unitout_data[i] = 0.0;
   }
   emxInit_boolean_T(&bsbriniT, 1);
   i = bsbriniT->size[0];
   bsbriniT->size[0] = bsbT->size[0];
   emxEnsureCapacity_boolean_T(bsbriniT, i);
+  bsbriniT_data = bsbriniT->data;
   loop_ub = bsbT->size[0];
   for (i = 0; i < loop_ub; i++) {
-    bsbriniT->data[i] = bsbT->data[i];
+    bsbriniT_data[i] = bsbT_data[i];
   }
   emxInit_uint32_T(&bsbrini, 1);
   i = bsbrini->size[0];
   bsbrini->size[0] = Y->size[0];
   emxEnsureCapacity_uint32_T(bsbrini, i);
+  bsbrini_data = bsbrini->data;
   loop_ub = Y->size[0];
   for (i = 0; i < loop_ub; i++) {
-    bsbrini->data[i] = 0U;
+    bsbrini_data[i] = 0U;
   }
   ini0 = bsb->size[0];
   /*  check init */
@@ -4406,7 +5166,8 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
       ym->size[0] = 1;
       ym->size[1] = 1;
       emxEnsureCapacity_real_T(ym, i);
-      ym->data[0] = rtNaN;
+      ym_data = ym->data;
+      ym_data[0] = rtNaN;
     } else if (Y->size[0] < init1) {
       ym->size[0] = 1;
       ym->size[1] = 0;
@@ -4415,28 +5176,33 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
       ym->size[0] = 1;
       ym->size[1] = 1;
       emxEnsureCapacity_real_T(ym, i);
-      ym->data[0] = rtNaN;
+      ym_data = ym->data;
+      ym_data[0] = rtNaN;
     } else if (floor(init1) == init1) {
       i = ym->size[0] * ym->size[1];
       ym->size[0] = 1;
       ym->size[1] = (int)((double)Y->size[0] - init1) + 1;
       emxEnsureCapacity_real_T(ym, i);
+      ym_data = ym->data;
       loop_ub = (int)((double)Y->size[0] - init1);
       for (i = 0; i <= loop_ub; i++) {
-        ym->data[i] = init1 + (double)i;
+        ym_data[i] = init1 + (double)i;
       }
     } else {
       eml_float_colon(init1, Y->size[0], ym);
+      ym_data = ym->data;
     }
     i = bsbsteps->size[0];
     bsbsteps->size[0] = ym->size[1];
     emxEnsureCapacity_real_T(bsbsteps, i);
+    bsbsteps_data = bsbsteps->data;
     loop_ub = ym->size[1];
     for (i = 0; i < loop_ub; i++) {
-      bsbsteps->data[i] = ym->data[i];
+      bsbsteps_data[i] = ym_data[i];
     }
   } else {
     emxInit_real_T(&y, 2);
+    MD_data = y->data;
     ksor = (init1 + 100.0) - b_mod(init1);
     irank = 100 * (int)floor((double)Y->size[0] / 100.0);
     if (rtIsNaN(ksor)) {
@@ -4444,7 +5210,8 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
       y->size[0] = 1;
       y->size[1] = 1;
       emxEnsureCapacity_real_T(y, i);
-      y->data[0] = rtNaN;
+      MD_data = y->data;
+      MD_data[0] = rtNaN;
     } else if (irank < ksor) {
       y->size[0] = 1;
       y->size[1] = 0;
@@ -4453,26 +5220,30 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
       y->size[0] = 1;
       y->size[1] = 1;
       emxEnsureCapacity_real_T(y, i);
-      y->data[0] = rtNaN;
+      MD_data = y->data;
+      MD_data[0] = rtNaN;
     } else if (floor(ksor) == ksor) {
       i = y->size[0] * y->size[1];
       y->size[0] = 1;
       loop_ub = (int)floor(((double)irank - ksor) / 100.0);
       y->size[1] = loop_ub + 1;
       emxEnsureCapacity_real_T(y, i);
+      MD_data = y->data;
       for (i = 0; i <= loop_ub; i++) {
-        y->data[i] = ksor + 100.0 * (double)i;
+        MD_data[i] = ksor + 100.0 * (double)i;
       }
     } else {
       b_eml_float_colon(ksor, irank, y);
+      MD_data = y->data;
     }
     i = bsbsteps->size[0];
     bsbsteps->size[0] = y->size[1] + 1;
     emxEnsureCapacity_real_T(bsbsteps, i);
-    bsbsteps->data[0] = init1;
+    bsbsteps_data = bsbsteps->data;
+    bsbsteps_data[0] = init1;
     loop_ub = y->size[1];
     for (i = 0; i < loop_ub; i++) {
-      bsbsteps->data[i + 1] = y->data[i];
+      bsbsteps_data[i + 1] = MD_data[i];
     }
     emxFree_real_T(&y);
   }
@@ -4480,9 +5251,10 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   varargout_1->size[0] = Y->size[0];
   varargout_1->size[1] = bsbsteps->size[0];
   emxEnsureCapacity_real_T(varargout_1, i);
+  varargout_1_data = varargout_1->data;
   loop_ub = Y->size[0] * bsbsteps->size[0];
   for (i = 0; i < loop_ub; i++) {
-    varargout_1->data[i] = rtNaN;
+    varargout_1_data[i] = rtNaN;
   }
   /*   Un is a Matrix whose 2nd column:11th col contain the unit(s) just */
   /*   included. */
@@ -4491,7 +5263,8 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     ym->size[0] = 1;
     ym->size[1] = 1;
     emxEnsureCapacity_real_T(ym, i);
-    ym->data[0] = rtNaN;
+    ym_data = ym->data;
+    ym_data[0] = rtNaN;
   } else if (Y->size[0] < init1 + 1.0) {
     ym->size[0] = 1;
     ym->size[1] = 0;
@@ -4500,49 +5273,56 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     ym->size[0] = 1;
     ym->size[1] = 1;
     emxEnsureCapacity_real_T(ym, i);
-    ym->data[0] = rtNaN;
+    ym_data = ym->data;
+    ym_data[0] = rtNaN;
   } else if (floor(init1 + 1.0) == init1 + 1.0) {
     i = ym->size[0] * ym->size[1];
     ym->size[0] = 1;
     ym->size[1] = (int)floor((double)Y->size[0] - (init1 + 1.0)) + 1;
     emxEnsureCapacity_real_T(ym, i);
+    ym_data = ym->data;
     loop_ub = (int)floor((double)Y->size[0] - (init1 + 1.0));
     for (i = 0; i <= loop_ub; i++) {
-      ym->data[i] = (init1 + 1.0) + (double)i;
+      ym_data[i] = (init1 + 1.0) + (double)i;
     }
   } else {
     eml_float_colon(init1 + 1.0, Y->size[0], ym);
+    ym_data = ym->data;
   }
   emxInit_real_T(&Szi, 1);
   irank = (int)((double)Y->size[0] - init1);
   i = Szi->size[0];
   Szi->size[0] = ym->size[1];
   emxEnsureCapacity_real_T(Szi, i);
+  Szi_data = Szi->data;
   loop_ub = ym->size[1];
   for (i = 0; i < loop_ub; i++) {
-    Szi->data[i] = ym->data[i];
-  }
-  emxInit_real_T(&r2, 2);
-  i = r2->size[0] * r2->size[1];
-  r2->size[0] = irank;
-  r2->size[1] = 10;
-  emxEnsureCapacity_real_T(r2, i);
-  loop_ub = irank * 10;
-  for (i = 0; i < loop_ub; i++) {
-    r2->data[i] = rtNaN;
+    Szi_data[i] = ym_data[i];
   }
   emxInit_real_T(&r3, 2);
-  cat(Szi, r2, r3);
+  i = r3->size[0] * r3->size[1];
+  r3->size[0] = irank;
+  r3->size[1] = 10;
+  emxEnsureCapacity_real_T(r3, i);
+  MD_data = r3->data;
+  loop_ub = irank * 10;
+  for (i = 0; i < loop_ub; i++) {
+    MD_data[i] = rtNaN;
+  }
+  emxInit_real_T(&r4, 2);
+  cat(Szi, r3, r4);
+  MD_data = r4->data;
   i = Un->size[0] * Un->size[1];
-  Un->size[0] = r3->size[0];
+  Un->size[0] = r4->size[0];
   Un->size[1] = 11;
   emxEnsureCapacity_real_T(Un, i);
-  loop_ub = r3->size[0] * 11;
-  emxFree_real_T(&r2);
-  for (i = 0; i < loop_ub; i++) {
-    Un->data[i] = r3->data[i];
-  }
+  Un_data = Un->data;
+  loop_ub = r4->size[0] * 11;
   emxFree_real_T(&r3);
+  for (i = 0; i < loop_ub; i++) {
+    Un_data[i] = MD_data[i];
+  }
+  emxFree_real_T(&r4);
   /*   mmd has two columns */
   /*   1st col = dimension of the subset */
   /*   2nd col min. Mahalanobis distances among the units */
@@ -4552,7 +5332,8 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     ym->size[0] = 1;
     ym->size[1] = 1;
     emxEnsureCapacity_real_T(ym, i);
-    ym->data[0] = rtNaN;
+    ym_data = ym->data;
+    ym_data[0] = rtNaN;
   } else if ((double)Y->size[0] - 1.0 < init1) {
     ym->size[0] = 1;
     ym->size[1] = 0;
@@ -4561,48 +5342,54 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     ym->size[0] = 1;
     ym->size[1] = 1;
     emxEnsureCapacity_real_T(ym, i);
-    ym->data[0] = rtNaN;
+    ym_data = ym->data;
+    ym_data[0] = rtNaN;
   } else if (floor(init1) == init1) {
     i = ym->size[0] * ym->size[1];
     ym->size[0] = 1;
     ym->size[1] = (int)(((double)Y->size[0] - 1.0) - init1) + 1;
     emxEnsureCapacity_real_T(ym, i);
+    ym_data = ym->data;
     loop_ub = (int)(((double)Y->size[0] - 1.0) - init1);
     for (i = 0; i <= loop_ub; i++) {
-      ym->data[i] = init1 + (double)i;
+      ym_data[i] = init1 + (double)i;
     }
   } else {
     eml_float_colon(init1, (double)Y->size[0] - 1.0, ym);
+    ym_data = ym->data;
   }
   i = Szi->size[0];
   Szi->size[0] = (int)((double)Y->size[0] - init1);
   emxEnsureCapacity_real_T(Szi, i);
+  Szi_data = Szi->data;
   loop_ub = (int)((double)Y->size[0] - init1);
   for (i = 0; i < loop_ub; i++) {
-    Szi->data[i] = 0.0;
+    Szi_data[i] = 0.0;
   }
   i = mmd->size[0] * mmd->size[1];
   mmd->size[0] = ym->size[1];
   mmd->size[1] = 2;
   emxEnsureCapacity_real_T(mmd, i);
+  mmd_data = mmd->data;
   loop_ub = ym->size[1];
   for (i = 0; i < loop_ub; i++) {
-    mmd->data[i] = ym->data[i];
+    mmd_data[i] = ym_data[i];
   }
   loop_ub = Szi->size[0];
   for (i = 0; i < loop_ub; i++) {
-    mmd->data[i + mmd->size[0]] = 0.0;
+    mmd_data[i + mmd->size[0]] = 0.0;
   }
-  emxInit_real_T(&unit, 1);
+  emxInit_int32_T(&unit, 1);
   /*  unit is the vector which will contain the units which enter subset at each
    */
   /*  step. It is initialized as a vector of zeros */
   i = unit->size[0];
   unit->size[0] = bsb->size[0];
-  emxEnsureCapacity_real_T(unit, i);
+  emxEnsureCapacity_int32_T(unit, i);
+  unit_data = unit->data;
   loop_ub = bsb->size[0];
   for (i = 0; i < loop_ub; i++) {
-    unit->data[i] = 0.0;
+    unit_data[i] = 0;
   }
   lunit = bsb->size[0];
   /*  If the subset Y(bsb,:) is not full rank or a column is constant, then we
@@ -4613,22 +5400,24 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   Yb->size[0] = bsb->size[0];
   Yb->size[1] = Y->size[1];
   emxEnsureCapacity_real_T(Yb, i);
+  S_data = Yb->data;
   for (i = 0; i < loop_ub; i++) {
     b_loop_ub = bsb->size[0];
-    for (end = 0; end < b_loop_ub; end++) {
-      Yb->data[end + Yb->size[0] * i] =
-          Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
+    for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+         partialTrueCount++) {
+      S_data[partialTrueCount + Yb->size[0] * i] =
+          Y_data[((int)bsb_data[partialTrueCount] + Y->size[0] * i) - 1];
     }
   }
   irank = local_rank(Yb);
   emxInit_real_T(&Ym, 2);
+  emxInit_boolean_T(&unitoutT, 1);
   emxInit_real_T(&mi, 2);
   emxInit_real_T(&mibsbr, 2);
   emxInit_real_T(&zi, 2);
   emxInit_real_T(&MD, 1);
   emxInit_real_T(&R, 2);
   emxInit_boolean_T(&MDltminbsb, 1);
-  emxInit_int32_T(&r4, 1);
   emxInit_int32_T(&r5, 1);
   emxInit_int32_T(&r6, 1);
   emxInit_int32_T(&r7, 1);
@@ -4636,7 +5425,9 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   emxInit_int32_T(&r9, 1);
   emxInit_int32_T(&r10, 1);
   emxInit_int32_T(&r11, 1);
+  emxInit_int32_T(&r12, 1);
   emxInit_real_T(&b_Ym, 2);
+  emxInit_boolean_T(&b_bsbT, 1);
   guard1 = false;
   if (irank < v) {
     guard1 = true;
@@ -4646,36 +5437,62 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     Yb->size[0] = bsb->size[0];
     Yb->size[1] = Y->size[1];
     emxEnsureCapacity_real_T(Yb, i);
+    S_data = Yb->data;
     for (i = 0; i < loop_ub; i++) {
       b_loop_ub = bsb->size[0];
-      for (end = 0; end < b_loop_ub; end++) {
-        Yb->data[end + Yb->size[0] * i] =
-            Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
+      for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+           partialTrueCount++) {
+        S_data[partialTrueCount + Yb->size[0] * i] =
+            Y_data[((int)bsb_data[partialTrueCount] + Y->size[0] * i) - 1];
       }
     }
     maximum(Yb, ym);
+    ym_data = ym->data;
     loop_ub = Y->size[1];
     i = Yb->size[0] * Yb->size[1];
     Yb->size[0] = bsb->size[0];
     Yb->size[1] = Y->size[1];
     emxEnsureCapacity_real_T(Yb, i);
+    S_data = Yb->data;
     for (i = 0; i < loop_ub; i++) {
       b_loop_ub = bsb->size[0];
-      for (end = 0; end < b_loop_ub; end++) {
-        Yb->data[end + Yb->size[0] * i] =
-            Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
+      for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+           partialTrueCount++) {
+        S_data[partialTrueCount + Yb->size[0] * i] =
+            Y_data[((int)bsb_data[partialTrueCount] + Y->size[0] * i) - 1];
       }
     }
     minimum(Yb, mibsbr);
+    mibsbr_data = mibsbr->data;
     i = mi->size[0] * mi->size[1];
     mi->size[0] = 1;
-    mi->size[1] = ym->size[1];
-    emxEnsureCapacity_real_T(mi, i);
-    loop_ub = ym->size[1];
-    for (i = 0; i < loop_ub; i++) {
-      mi->data[i] = ym->data[i] - mibsbr->data[i];
+    if (mibsbr->size[1] == 1) {
+      mi->size[1] = ym->size[1];
+    } else {
+      mi->size[1] = mibsbr->size[1];
     }
-    if (c_minimum(mi) == 0.0) {
+    emxEnsureCapacity_real_T(mi, i);
+    mi_data = mi->data;
+    irank = (ym->size[1] != 1);
+    nwhile = (mibsbr->size[1] != 1);
+    if (mibsbr->size[1] == 1) {
+      loop_ub = ym->size[1];
+    } else {
+      loop_ub = mibsbr->size[1];
+    }
+    for (i = 0; i < loop_ub; i++) {
+      mi_data[i] = ym_data[i * irank] - mibsbr_data[i * nwhile];
+    }
+    i = ym->size[0] * ym->size[1];
+    ym->size[0] = 1;
+    ym->size[1] = mi->size[1];
+    emxEnsureCapacity_real_T(ym, i);
+    ym_data = ym->data;
+    loop_ub = mi->size[1];
+    for (i = 0; i < loop_ub; i++) {
+      ym_data[i] = mi_data[i];
+    }
+    if (c_minimum(ym) == 0.0) {
       guard1 = true;
     } else {
       /*  ij = index which is linked with the columns of matrix BB. During the
@@ -4694,41 +5511,47 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           Yb->size[0] = bsb->size[0];
           Yb->size[1] = Y->size[1];
           emxEnsureCapacity_real_T(Yb, i);
+          S_data = Yb->data;
           for (i = 0; i < loop_ub; i++) {
             b_loop_ub = bsb->size[0];
-            for (end = 0; end < b_loop_ub; end++) {
-              Yb->data[end + Yb->size[0] * i] =
-                  Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
+            for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                 partialTrueCount++) {
+              S_data[partialTrueCount + Yb->size[0] * i] =
+                  Y_data[((int)bsb_data[partialTrueCount] + Y->size[0] * i) -
+                         1];
             }
           }
         } else {
-          end = bsbT->size[0] - 1;
+          b_loop_ub = bsbT->size[0] - 1;
           trueCount = 0;
-          for (b_i = 0; b_i <= end; b_i++) {
-            if (bsbT->data[b_i]) {
+          for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+            if (bsbT_data[b_i]) {
               trueCount++;
             }
           }
-          i = r4->size[0];
-          r4->size[0] = trueCount;
-          emxEnsureCapacity_int32_T(r4, i);
-          b_loop_ub = 0;
-          for (b_i = 0; b_i <= end; b_i++) {
-            if (bsbT->data[b_i]) {
-              r4->data[b_loop_ub] = b_i + 1;
-              b_loop_ub++;
+          i = r5->size[0];
+          r5->size[0] = trueCount;
+          emxEnsureCapacity_int32_T(r5, i);
+          r2 = r5->data;
+          partialTrueCount = 0;
+          for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+            if (bsbT_data[b_i]) {
+              r2[partialTrueCount] = b_i + 1;
+              partialTrueCount++;
             }
           }
           loop_ub = Y->size[1];
           i = Yb->size[0] * Yb->size[1];
-          Yb->size[0] = r4->size[0];
+          Yb->size[0] = r5->size[0];
           Yb->size[1] = Y->size[1];
           emxEnsureCapacity_real_T(Yb, i);
+          S_data = Yb->data;
           for (i = 0; i < loop_ub; i++) {
-            b_loop_ub = r4->size[0];
-            for (end = 0; end < b_loop_ub; end++) {
-              Yb->data[end + Yb->size[0] * i] =
-                  Y->data[(r4->data[end] + Y->size[0] * i) - 1];
+            b_loop_ub = r5->size[0];
+            for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                 partialTrueCount++) {
+              S_data[partialTrueCount + Yb->size[0] * i] =
+                  Y_data[(r2[partialTrueCount] + Y->size[0] * i) - 1];
             }
           }
         }
@@ -4737,49 +5560,52 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           i = MD->size[0];
           MD->size[0] = bsbsteps->size[0];
           emxEnsureCapacity_real_T(MD, i);
+          MD_data = MD->data;
           loop_ub = bsbsteps->size[0];
           for (i = 0; i < loop_ub; i++) {
-            MD->data[i] = b_mm - bsbsteps->data[i];
+            MD_data[i] = b_mm - bsbsteps_data[i];
           }
           irank = MD->size[0];
           i = Szi->size[0];
           Szi->size[0] = MD->size[0];
           emxEnsureCapacity_real_T(Szi, i);
+          Szi_data = Szi->data;
           for (b_loop_ub = 0; b_loop_ub < irank; b_loop_ub++) {
-            Szi->data[b_loop_ub] = fabs(MD->data[b_loop_ub]);
+            Szi_data[b_loop_ub] = fabs(MD_data[b_loop_ub]);
           }
           if (b_minimum(Szi) == 0.0) {
             /*  intersect(mm,bsbsteps)==mm */
             if (b_mm <= percn) {
               loop_ub = bsb->size[0];
               for (i = 0; i < loop_ub; i++) {
-                varargout_1->data[((int)bsb->data[i] +
-                                   varargout_1->size[0] * ((int)ij - 1)) -
-                                  1] = bsb->data[i];
+                varargout_1_data[((int)bsb_data[i] +
+                                  varargout_1->size[0] * ((int)ij - 1)) -
+                                 1] = bsb_data[i];
               }
             } else {
-              end = bsbT->size[0] - 1;
+              b_loop_ub = bsbT->size[0] - 1;
               trueCount = 0;
-              for (b_i = 0; b_i <= end; b_i++) {
-                if (bsbT->data[b_i]) {
+              for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                if (bsbT_data[b_i]) {
                   trueCount++;
                 }
               }
-              i = r5->size[0];
-              r5->size[0] = trueCount;
-              emxEnsureCapacity_int32_T(r5, i);
-              b_loop_ub = 0;
-              for (b_i = 0; b_i <= end; b_i++) {
-                if (bsbT->data[b_i]) {
-                  r5->data[b_loop_ub] = b_i + 1;
-                  b_loop_ub++;
+              i = r6->size[0];
+              r6->size[0] = trueCount;
+              emxEnsureCapacity_int32_T(r6, i);
+              r2 = r6->data;
+              partialTrueCount = 0;
+              for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                if (bsbT_data[b_i]) {
+                  r2[partialTrueCount] = b_i + 1;
+                  partialTrueCount++;
                 }
               }
-              loop_ub = r5->size[0];
+              loop_ub = r6->size[0];
               for (i = 0; i < loop_ub; i++) {
-                varargout_1->data[(r5->data[i] +
-                                   varargout_1->size[0] * ((int)ij - 1)) -
-                                  1] = seq->data[r5->data[i] - 1];
+                varargout_1_data[(r2[i] +
+                                  varargout_1->size[0] * ((int)ij - 1)) -
+                                 1] = seq_data[r2[i] - 1];
               }
             }
             ij++;
@@ -4791,14 +5617,16 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
         i = ym->size[0] * ym->size[1];
         ym->size[0] = 1;
         emxEnsureCapacity_real_T(ym, i);
+        ym_data = ym->data;
         loop_ub = ym->size[1] - 1;
         for (i = 0; i <= loop_ub; i++) {
-          ym->data[i] /= b_mm;
+          ym_data[i] /= b_mm;
         }
         /*  Ym = n-by-v matrix containing deviations from the means computed */
         /*  using units forming subset */
         /*  Ym=Y-one*ym; */
         bsxfun(Y, ym, Ym);
+        Ym_data = Ym->data;
         b_guard1 = false;
         if (b_mm - (double)lunit > (double)v + 1.0) {
           /*  Find new S */
@@ -4814,28 +5642,35 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             /*  Given that \not A intersect \not B = \not (A U B) */
             if ((b_mm > percn) || (rankgap > 10.0)) {
               /*  unitoutT=~(~oldbsbT | bsbT); */
-              i = MDltminT->size[0];
-              MDltminT->size[0] = bsbT->size[0];
-              emxEnsureCapacity_boolean_T(MDltminT, i);
-              loop_ub = bsbT->size[0];
-              for (i = 0; i < loop_ub; i++) {
-                MDltminT->data[i] = !bsbT->data[i];
+              if (oldbsbT->size[0] == bsbT->size[0]) {
+                i = unitoutT->size[0];
+                unitoutT->size[0] = oldbsbT->size[0];
+                emxEnsureCapacity_boolean_T(unitoutT, i);
+                unitoutT_data = unitoutT->data;
+                loop_ub = oldbsbT->size[0];
+                for (i = 0; i < loop_ub; i++) {
+                  unitoutT_data[i] = (oldbsbT_data[i] && (!bsbT_data[i]));
+                }
+              } else {
+                t_binary_expand_op(unitoutT, oldbsbT, bsbT);
+                unitoutT_data = unitoutT->data;
               }
-              end = oldbsbT->size[0] - 1;
+              b_loop_ub = unitoutT->size[0] - 1;
               trueCount = 0;
-              for (b_i = 0; b_i <= end; b_i++) {
-                if (oldbsbT->data[b_i] && MDltminT->data[b_i]) {
+              for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                if (unitoutT_data[b_i]) {
                   trueCount++;
                 }
               }
               i = unitout->size[0];
               unitout->size[0] = trueCount;
               emxEnsureCapacity_real_T(unitout, i);
-              b_loop_ub = 0;
-              for (b_i = 0; b_i <= end; b_i++) {
-                if (oldbsbT->data[b_i] && MDltminT->data[b_i]) {
-                  unitout->data[b_loop_ub] = seq->data[b_i];
-                  b_loop_ub++;
+              unitout_data = unitout->data;
+              partialTrueCount = 0;
+              for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                if (unitoutT_data[b_i]) {
+                  unitout_data[partialTrueCount] = seq_data[b_i];
+                  partialTrueCount++;
                 }
               }
             }
@@ -4845,20 +5680,25 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             Yb->size[0] = unitout->size[0];
             Yb->size[1] = Y->size[1];
             emxEnsureCapacity_real_T(Yb, i);
+            S_data = Yb->data;
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = unitout->size[0];
-              for (end = 0; end < b_loop_ub; end++) {
-                Yb->data[end + Yb->size[0] * i] =
-                    Y->data[((int)unitout->data[end] + Y->size[0] * i) - 1];
+              for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                   partialTrueCount++) {
+                S_data[partialTrueCount + Yb->size[0] * i] =
+                    Y_data[((int)unitout_data[partialTrueCount] +
+                            Y->size[0] * i) -
+                           1];
               }
             }
             combineVectorElements(Yb, mi);
             i = mi->size[0] * mi->size[1];
             mi->size[0] = 1;
             emxEnsureCapacity_real_T(mi, i);
+            mi_data = mi->data;
             loop_ub = mi->size[1] - 1;
             for (i = 0; i <= loop_ub; i++) {
-              mi->data[i] /= (double)unitout->size[0];
+              mi_data[i] /= (double)unitout->size[0];
             }
             /*  bsbr units which remained in subset */
             /*  old inefficient code */
@@ -4871,43 +5711,60 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             if ((b_mm > percn) || (rankgap > 10.0)) {
               /*  oldbsbT = units which were in previous subset */
               /*  bsbT = units which are in current subset */
-              end = oldbsbT->size[0] - 1;
+              if (oldbsbT->size[0] == bsbT->size[0]) {
+                i = unitoutT->size[0];
+                unitoutT->size[0] = oldbsbT->size[0];
+                emxEnsureCapacity_boolean_T(unitoutT, i);
+                unitoutT_data = unitoutT->data;
+                loop_ub = oldbsbT->size[0];
+                for (i = 0; i < loop_ub; i++) {
+                  unitoutT_data[i] = (oldbsbT_data[i] && bsbT_data[i]);
+                }
+              } else {
+                and(unitoutT, oldbsbT, bsbT);
+                unitoutT_data = unitoutT->data;
+              }
+              b_loop_ub = unitoutT->size[0] - 1;
               trueCount = 0;
-              for (b_i = 0; b_i <= end; b_i++) {
-                if (oldbsbT->data[b_i] && bsbT->data[b_i]) {
+              for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                if (unitoutT_data[b_i]) {
                   trueCount++;
                 }
               }
-              i = r9->size[0];
-              r9->size[0] = trueCount;
-              emxEnsureCapacity_int32_T(r9, i);
-              b_loop_ub = 0;
-              for (b_i = 0; b_i <= end; b_i++) {
-                if (oldbsbT->data[b_i] && bsbT->data[b_i]) {
-                  r9->data[b_loop_ub] = b_i + 1;
-                  b_loop_ub++;
+              i = r10->size[0];
+              r10->size[0] = trueCount;
+              emxEnsureCapacity_int32_T(r10, i);
+              r2 = r10->data;
+              partialTrueCount = 0;
+              for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                if (unitoutT_data[b_i]) {
+                  r2[partialTrueCount] = b_i + 1;
+                  partialTrueCount++;
                 }
               }
               loop_ub = Y->size[1];
               i = Yb->size[0] * Yb->size[1];
-              Yb->size[0] = r9->size[0];
+              Yb->size[0] = r10->size[0];
               Yb->size[1] = Y->size[1];
               emxEnsureCapacity_real_T(Yb, i);
+              S_data = Yb->data;
               for (i = 0; i < loop_ub; i++) {
-                b_loop_ub = r9->size[0];
-                for (end = 0; end < b_loop_ub; end++) {
-                  Yb->data[end + Yb->size[0] * i] =
-                      Y->data[(r9->data[end] + Y->size[0] * i) - 1];
+                b_loop_ub = r10->size[0];
+                for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                     partialTrueCount++) {
+                  S_data[partialTrueCount + Yb->size[0] * i] =
+                      Y_data[(r2[partialTrueCount] + Y->size[0] * i) - 1];
                 }
               }
               combineVectorElements(Yb, mibsbr);
               i = mibsbr->size[0] * mibsbr->size[1];
               mibsbr->size[0] = 1;
               emxEnsureCapacity_real_T(mibsbr, i);
+              mibsbr_data = mibsbr->data;
               ksor = (b_mm - 1.0) - (double)unitout->size[0];
               loop_ub = mibsbr->size[1] - 1;
               for (i = 0; i <= loop_ub; i++) {
-                mibsbr->data[i] /= ksor;
+                mibsbr_data[i] /= ksor;
               }
             } else {
               loop_ub = Y->size[1];
@@ -4915,85 +5772,160 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               Yb->size[0] = bsbr->size[0];
               Yb->size[1] = Y->size[1];
               emxEnsureCapacity_real_T(Yb, i);
+              S_data = Yb->data;
               for (i = 0; i < loop_ub; i++) {
                 b_loop_ub = bsbr->size[0];
-                for (end = 0; end < b_loop_ub; end++) {
-                  Yb->data[end + Yb->size[0] * i] =
-                      Y->data[((int)bsbr->data[end] + Y->size[0] * i) - 1];
+                for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                     partialTrueCount++) {
+                  S_data[partialTrueCount + Yb->size[0] * i] =
+                      Y_data[(bsbr_data[partialTrueCount] + Y->size[0] * i) -
+                             1];
                 }
               }
               combineVectorElements(Yb, mibsbr);
               i = mibsbr->size[0] * mibsbr->size[1];
               mibsbr->size[0] = 1;
               emxEnsureCapacity_real_T(mibsbr, i);
+              mibsbr_data = mibsbr->data;
               ksor = (b_mm - 1.0) - (double)unitout->size[0];
               loop_ub = mibsbr->size[1] - 1;
               for (i = 0; i <= loop_ub; i++) {
-                mibsbr->data[i] /= ksor;
+                mibsbr_data[i] /= ksor;
               }
             }
             ksor =
                 sqrt((double)unitout->size[0] *
                      ((b_mm - 1.0) - (double)unitout->size[0]) / (b_mm - 1.0));
-            i = zi->size[0] * zi->size[1];
-            zi->size[0] = 1;
-            zi->size[1] = mi->size[1];
-            emxEnsureCapacity_real_T(zi, i);
-            loop_ub = mi->size[1];
-            for (i = 0; i < loop_ub; i++) {
-              zi->data[i] = ksor * (mi->data[i] - mibsbr->data[i]);
+            if (mi->size[1] == mibsbr->size[1]) {
+              i = zi->size[0] * zi->size[1];
+              zi->size[0] = 1;
+              zi->size[1] = mi->size[1];
+              emxEnsureCapacity_real_T(zi, i);
+              MD_data = zi->data;
+              loop_ub = mi->size[1];
+              for (i = 0; i < loop_ub; i++) {
+                MD_data[i] = ksor * (mi_data[i] - mibsbr_data[i]);
+              }
+            } else {
+              s_binary_expand_op(zi, ksor, mi, mibsbr);
+              MD_data = zi->data;
             }
             mtimes(S, zi, Szi);
+            Szi_data = Szi->data;
             /*  S=S+(S*(zi')*zi*S)/(1-zi*S*(zi')); */
             ksor = 0.0;
             loop_ub = zi->size[1];
             for (i = 0; i < loop_ub; i++) {
-              ksor += zi->data[i] * Szi->data[i];
+              ksor += MD_data[i] * Szi_data[i];
             }
-            i = S->size[0] * S->size[1];
-            S->size[0] = Szi->size[0];
-            S->size[1] = Szi->size[0];
-            emxEnsureCapacity_real_T(S, i);
+            i = r->size[0] * r->size[1];
+            r->size[0] = Szi->size[0];
+            r->size[1] = Szi->size[0];
+            emxEnsureCapacity_real_T(r, i);
+            MD_data = r->data;
             loop_ub = Szi->size[0];
+            i = Yb->size[0] * Yb->size[1];
+            Yb->size[0] = Szi->size[0];
+            Yb->size[1] = Szi->size[0];
+            emxEnsureCapacity_real_T(Yb, i);
+            S_data = Yb->data;
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = Szi->size[0];
-              for (end = 0; end < b_loop_ub; end++) {
-                S->data[end + S->size[0] * i] +=
-                    Szi->data[end] * Szi->data[i] / (1.0 - ksor);
+              for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                   partialTrueCount++) {
+                d = Szi_data[partialTrueCount] * Szi_data[i];
+                MD_data[partialTrueCount + r->size[0] * i] = d;
+                S_data[partialTrueCount + Yb->size[0] * i] = d;
               }
+            }
+            if ((S->size[0] == r->size[0]) && (S->size[1] == Yb->size[1])) {
+              i = S->size[0] * S->size[1];
+              S->size[0] = Szi->size[0];
+              S->size[1] = Szi->size[0];
+              emxEnsureCapacity_real_T(S, i);
+              S_data = S->data;
+              loop_ub = Szi->size[0];
+              for (i = 0; i < loop_ub; i++) {
+                b_loop_ub = Szi->size[0];
+                for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                     partialTrueCount++) {
+                  S_data[partialTrueCount + S->size[0] * i] +=
+                      Szi_data[partialTrueCount] * Szi_data[i] / (1.0 - ksor);
+                }
+              }
+            } else {
+              n_binary_expand_op(S, Szi, ksor);
             }
             if (unitout->size[0] > 1) {
               i = unitout->size[0];
               for (b_i = 0; b_i < i; b_i++) {
                 loop_ub = Y->size[1];
-                end = zi->size[0] * zi->size[1];
-                zi->size[0] = 1;
-                zi->size[1] = Y->size[1];
-                emxEnsureCapacity_real_T(zi, end);
-                for (end = 0; end < loop_ub; end++) {
-                  zi->data[end] =
-                      Y->data[((int)unitout->data[b_i] + Y->size[0] * end) -
-                              1] -
-                      mi->data[end];
+                if (Y->size[1] == mi->size[1]) {
+                  partialTrueCount = zi->size[0] * zi->size[1];
+                  zi->size[0] = 1;
+                  zi->size[1] = Y->size[1];
+                  emxEnsureCapacity_real_T(zi, partialTrueCount);
+                  MD_data = zi->data;
+                  for (partialTrueCount = 0; partialTrueCount < loop_ub;
+                       partialTrueCount++) {
+                    MD_data[partialTrueCount] =
+                        Y_data[((int)unitout_data[b_i] +
+                                Y->size[0] * partialTrueCount) -
+                               1] -
+                        mi_data[partialTrueCount];
+                  }
+                } else {
+                  o_binary_expand_op(zi, Y, unitout, b_i, mi);
+                  MD_data = zi->data;
                 }
                 mtimes(S, zi, Szi);
+                Szi_data = Szi->data;
                 /*  S=S+(S*(zi')*zi*S)/(1-zi*S*(zi')); */
                 ksor = 0.0;
                 loop_ub = zi->size[1];
-                for (end = 0; end < loop_ub; end++) {
-                  ksor += zi->data[end] * Szi->data[end];
+                for (partialTrueCount = 0; partialTrueCount < loop_ub;
+                     partialTrueCount++) {
+                  ksor +=
+                      MD_data[partialTrueCount] * Szi_data[partialTrueCount];
                 }
-                end = S->size[0] * S->size[1];
-                S->size[0] = Szi->size[0];
-                S->size[1] = Szi->size[0];
-                emxEnsureCapacity_real_T(S, end);
+                partialTrueCount = r->size[0] * r->size[1];
+                r->size[0] = Szi->size[0];
+                r->size[1] = Szi->size[0];
+                emxEnsureCapacity_real_T(r, partialTrueCount);
+                MD_data = r->data;
                 loop_ub = Szi->size[0];
-                for (end = 0; end < loop_ub; end++) {
+                partialTrueCount = Yb->size[0] * Yb->size[1];
+                Yb->size[0] = Szi->size[0];
+                Yb->size[1] = Szi->size[0];
+                emxEnsureCapacity_real_T(Yb, partialTrueCount);
+                S_data = Yb->data;
+                for (partialTrueCount = 0; partialTrueCount < loop_ub;
+                     partialTrueCount++) {
                   b_loop_ub = Szi->size[0];
                   for (nwhile = 0; nwhile < b_loop_ub; nwhile++) {
-                    S->data[nwhile + S->size[0] * end] +=
-                        Szi->data[nwhile] * Szi->data[end] / (1.0 - ksor);
+                    d = Szi_data[nwhile] * Szi_data[partialTrueCount];
+                    MD_data[nwhile + r->size[0] * partialTrueCount] = d;
+                    S_data[nwhile + Yb->size[0] * partialTrueCount] = d;
                   }
+                }
+                if ((S->size[0] == r->size[0]) && (S->size[1] == Yb->size[1])) {
+                  partialTrueCount = S->size[0] * S->size[1];
+                  S->size[0] = Szi->size[0];
+                  S->size[1] = Szi->size[0];
+                  emxEnsureCapacity_real_T(S, partialTrueCount);
+                  S_data = S->data;
+                  loop_ub = Szi->size[0];
+                  for (partialTrueCount = 0; partialTrueCount < loop_ub;
+                       partialTrueCount++) {
+                    b_loop_ub = Szi->size[0];
+                    for (nwhile = 0; nwhile < b_loop_ub; nwhile++) {
+                      S_data[nwhile + S->size[0] * partialTrueCount] +=
+                          Szi_data[nwhile] * Szi_data[partialTrueCount] /
+                          (1.0 - ksor);
+                    }
+                  }
+                } else {
+                  n_binary_expand_op(S, Szi, ksor);
                 }
               }
             }
@@ -5003,9 +5935,10 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             mibsbr->size[0] = 1;
             mibsbr->size[1] = meoldbsb->size[1];
             emxEnsureCapacity_real_T(mibsbr, i);
+            mibsbr_data = mibsbr->data;
             loop_ub = meoldbsb->size[1];
             for (i = 0; i < loop_ub; i++) {
-              mibsbr->data[i] = meoldbsb->data[i];
+              mibsbr_data[i] = meoldbsb_data[i];
             }
           }
           /*  mi = mean of units entering subset */
@@ -5014,82 +5947,150 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           Yb->size[0] = unit->size[0];
           Yb->size[1] = Y->size[1];
           emxEnsureCapacity_real_T(Yb, i);
+          S_data = Yb->data;
           for (i = 0; i < loop_ub; i++) {
             b_loop_ub = unit->size[0];
-            for (end = 0; end < b_loop_ub; end++) {
-              Yb->data[end + Yb->size[0] * i] =
-                  Y->data[((int)unit->data[end] + Y->size[0] * i) - 1];
+            for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                 partialTrueCount++) {
+              S_data[partialTrueCount + Yb->size[0] * i] =
+                  Y_data[(unit_data[partialTrueCount] + Y->size[0] * i) - 1];
             }
           }
           combineVectorElements(Yb, mi);
           i = mi->size[0] * mi->size[1];
           mi->size[0] = 1;
           emxEnsureCapacity_real_T(mi, i);
+          mi_data = mi->data;
           loop_ub = mi->size[1] - 1;
           for (i = 0; i <= loop_ub; i++) {
-            mi->data[i] /= (double)lunit;
+            mi_data[i] /= (double)lunit;
           }
           /*  zi=sqrt(kin*(mm-1-k)/(mm-1-k+kin))*(mi-mean(Y(bsbr,:),1)); */
           ksor = (b_mm - 1.0) - (double)irank;
           ksor = sqrt((double)lunit * ksor / (ksor + (double)lunit));
-          i = zi->size[0] * zi->size[1];
-          zi->size[0] = 1;
-          zi->size[1] = mi->size[1];
-          emxEnsureCapacity_real_T(zi, i);
-          loop_ub = mi->size[1];
-          for (i = 0; i < loop_ub; i++) {
-            zi->data[i] = ksor * (mi->data[i] - mibsbr->data[i]);
+          if (mi->size[1] == mibsbr->size[1]) {
+            i = zi->size[0] * zi->size[1];
+            zi->size[0] = 1;
+            zi->size[1] = mi->size[1];
+            emxEnsureCapacity_real_T(zi, i);
+            MD_data = zi->data;
+            loop_ub = mi->size[1];
+            for (i = 0; i < loop_ub; i++) {
+              MD_data[i] = ksor * (mi_data[i] - mibsbr_data[i]);
+            }
+          } else {
+            s_binary_expand_op(zi, ksor, mi, mibsbr);
+            MD_data = zi->data;
           }
           mtimes(S, zi, Szi);
+          Szi_data = Szi->data;
           /*  S=S+(S*(zi')*zi*S)/(1-zi*S*(zi')); */
           ksor = 0.0;
           loop_ub = zi->size[1];
           for (i = 0; i < loop_ub; i++) {
-            ksor += zi->data[i] * Szi->data[i];
+            ksor += MD_data[i] * Szi_data[i];
           }
-          i = S->size[0] * S->size[1];
-          S->size[0] = Szi->size[0];
-          S->size[1] = Szi->size[0];
-          emxEnsureCapacity_real_T(S, i);
+          i = r->size[0] * r->size[1];
+          r->size[0] = Szi->size[0];
+          r->size[1] = Szi->size[0];
+          emxEnsureCapacity_real_T(r, i);
+          MD_data = r->data;
           loop_ub = Szi->size[0];
+          i = Yb->size[0] * Yb->size[1];
+          Yb->size[0] = Szi->size[0];
+          Yb->size[1] = Szi->size[0];
+          emxEnsureCapacity_real_T(Yb, i);
+          S_data = Yb->data;
           for (i = 0; i < loop_ub; i++) {
             b_loop_ub = Szi->size[0];
-            for (end = 0; end < b_loop_ub; end++) {
-              S->data[end + S->size[0] * i] -=
-                  Szi->data[end] * Szi->data[i] / (ksor + 1.0);
+            for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                 partialTrueCount++) {
+              d = Szi_data[partialTrueCount] * Szi_data[i];
+              MD_data[partialTrueCount + r->size[0] * i] = d;
+              S_data[partialTrueCount + Yb->size[0] * i] = d;
             }
+          }
+          if ((S->size[0] == r->size[0]) && (S->size[1] == Yb->size[1])) {
+            i = S->size[0] * S->size[1];
+            S->size[0] = Szi->size[0];
+            S->size[1] = Szi->size[0];
+            emxEnsureCapacity_real_T(S, i);
+            S_data = S->data;
+            loop_ub = Szi->size[0];
+            for (i = 0; i < loop_ub; i++) {
+              b_loop_ub = Szi->size[0];
+              for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                   partialTrueCount++) {
+                S_data[partialTrueCount + S->size[0] * i] -=
+                    Szi_data[partialTrueCount] * Szi_data[i] / (ksor + 1.0);
+              }
+            }
+          } else {
+            p_binary_expand_op(S, Szi, ksor);
           }
           if (lunit > 1) {
             /* mi=mean(Y(unit,:),1); */
             for (b_i = 0; b_i < lunit; b_i++) {
               loop_ub = Y->size[1];
-              i = zi->size[0] * zi->size[1];
-              zi->size[0] = 1;
-              zi->size[1] = Y->size[1];
-              emxEnsureCapacity_real_T(zi, i);
-              for (i = 0; i < loop_ub; i++) {
-                zi->data[i] =
-                    Y->data[((int)unit->data[b_i] + Y->size[0] * i) - 1] -
-                    mi->data[i];
+              if (Y->size[1] == mi->size[1]) {
+                i = zi->size[0] * zi->size[1];
+                zi->size[0] = 1;
+                zi->size[1] = Y->size[1];
+                emxEnsureCapacity_real_T(zi, i);
+                MD_data = zi->data;
+                for (i = 0; i < loop_ub; i++) {
+                  MD_data[i] = Y_data[(unit_data[b_i] + Y->size[0] * i) - 1] -
+                               mi_data[i];
+                }
+              } else {
+                q_binary_expand_op(zi, Y, unit, b_i, mi);
+                MD_data = zi->data;
               }
               mtimes(S, zi, Szi);
+              Szi_data = Szi->data;
               /*  S=S-(S*(zi')*zi*S)/(1+zi*S*(zi')); */
               ksor = 0.0;
               loop_ub = zi->size[1];
               for (i = 0; i < loop_ub; i++) {
-                ksor += zi->data[i] * Szi->data[i];
+                ksor += MD_data[i] * Szi_data[i];
               }
-              i = S->size[0] * S->size[1];
-              S->size[0] = Szi->size[0];
-              S->size[1] = Szi->size[0];
-              emxEnsureCapacity_real_T(S, i);
+              i = r->size[0] * r->size[1];
+              r->size[0] = Szi->size[0];
+              r->size[1] = Szi->size[0];
+              emxEnsureCapacity_real_T(r, i);
+              MD_data = r->data;
               loop_ub = Szi->size[0];
+              i = Yb->size[0] * Yb->size[1];
+              Yb->size[0] = Szi->size[0];
+              Yb->size[1] = Szi->size[0];
+              emxEnsureCapacity_real_T(Yb, i);
+              S_data = Yb->data;
               for (i = 0; i < loop_ub; i++) {
                 b_loop_ub = Szi->size[0];
-                for (end = 0; end < b_loop_ub; end++) {
-                  S->data[end + S->size[0] * i] -=
-                      Szi->data[end] * Szi->data[i] / (ksor + 1.0);
+                for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                     partialTrueCount++) {
+                  d = Szi_data[partialTrueCount] * Szi_data[i];
+                  MD_data[partialTrueCount + r->size[0] * i] = d;
+                  S_data[partialTrueCount + Yb->size[0] * i] = d;
                 }
+              }
+              if ((S->size[0] == r->size[0]) && (S->size[1] == Yb->size[1])) {
+                i = S->size[0] * S->size[1];
+                S->size[0] = Szi->size[0];
+                S->size[1] = Szi->size[0];
+                emxEnsureCapacity_real_T(S, i);
+                S_data = S->data;
+                loop_ub = Szi->size[0];
+                for (i = 0; i < loop_ub; i++) {
+                  b_loop_ub = Szi->size[0];
+                  for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                       partialTrueCount++) {
+                    S_data[partialTrueCount + S->size[0] * i] -=
+                        Szi_data[partialTrueCount] * Szi_data[i] / (ksor + 1.0);
+                  }
+                }
+              } else {
+                p_binary_expand_op(S, Szi, ksor);
               }
             }
           }
@@ -5098,26 +6099,35 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           /*  than .* */
           if (n < 30000) {
             b_mtimes(Ym, S, r);
-            i = Yb->size[0] * Yb->size[1];
-            Yb->size[0] = r->size[0];
-            Yb->size[1] = r->size[1];
-            emxEnsureCapacity_real_T(Yb, i);
-            loop_ub = r->size[0] * r->size[1];
-            for (i = 0; i < loop_ub; i++) {
-              Yb->data[i] = r->data[i] * Ym->data[i];
+            MD_data = r->data;
+            if ((r->size[0] == Ym->size[0]) && (r->size[1] == Ym->size[1])) {
+              i = Yb->size[0] * Yb->size[1];
+              Yb->size[0] = r->size[0];
+              Yb->size[1] = r->size[1];
+              emxEnsureCapacity_real_T(Yb, i);
+              S_data = Yb->data;
+              loop_ub = r->size[0] * r->size[1];
+              for (i = 0; i < loop_ub; i++) {
+                S_data[i] = MD_data[i] * Ym_data[i];
+              }
+              sum(Yb, MD);
+              MD_data = MD->data;
+            } else {
+              binary_expand_op(MD, r, Ym);
+              MD_data = MD->data;
             }
-            sum(Yb, MD);
             loop_ub = MD->size[0];
             for (i = 0; i < loop_ub; i++) {
-              MD->data[i] *= b_mm - 1.0;
+              MD_data[i] *= b_mm - 1.0;
             }
           } else {
             b_mtimes(Ym, S, r);
             b_bsxfun(r, Ym, Yb);
             sum(Yb, MD);
+            MD_data = MD->data;
             loop_ub = MD->size[0];
             for (i = 0; i < loop_ub; i++) {
-              MD->data[i] *= b_mm - 1.0;
+              MD_data[i] *= b_mm - 1.0;
             }
           }
           b_guard1 = true;
@@ -5125,145 +6135,163 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           /*  In the initial step of the search the inverse is computed directly
            */
           if (b_mm > percn) {
-            end = bsbT->size[0] - 1;
+            b_loop_ub = bsbT->size[0] - 1;
             trueCount = 0;
-            for (b_i = 0; b_i <= end; b_i++) {
-              if (bsbT->data[b_i]) {
-                trueCount++;
-              }
-            }
-            i = r6->size[0];
-            r6->size[0] = trueCount;
-            emxEnsureCapacity_int32_T(r6, i);
-            b_loop_ub = 0;
-            for (b_i = 0; b_i <= end; b_i++) {
-              if (bsbT->data[b_i]) {
-                r6->data[b_loop_ub] = b_i + 1;
-                b_loop_ub++;
-              }
-            }
-            end = bsbT->size[0] - 1;
-            trueCount = 0;
-            for (b_i = 0; b_i <= end; b_i++) {
-              if (bsbT->data[b_i]) {
+            for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+              if (bsbT_data[b_i]) {
                 trueCount++;
               }
             }
             i = r7->size[0];
             r7->size[0] = trueCount;
             emxEnsureCapacity_int32_T(r7, i);
-            b_loop_ub = 0;
-            for (b_i = 0; b_i <= end; b_i++) {
-              if (bsbT->data[b_i]) {
-                r7->data[b_loop_ub] = b_i + 1;
-                b_loop_ub++;
+            r2 = r7->data;
+            partialTrueCount = 0;
+            for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+              if (bsbT_data[b_i]) {
+                r2[partialTrueCount] = b_i + 1;
+                partialTrueCount++;
               }
             }
-            loop_ub = Ym->size[1];
-            i = b_Ym->size[0] * b_Ym->size[1];
-            b_Ym->size[0] = r6->size[0];
-            b_Ym->size[1] = Ym->size[1];
-            emxEnsureCapacity_real_T(b_Ym, i);
-            i = Yb->size[0] * Yb->size[1];
-            Yb->size[0] = r7->size[0];
-            Yb->size[1] = Ym->size[1];
-            emxEnsureCapacity_real_T(Yb, i);
-            for (i = 0; i < loop_ub; i++) {
-              b_loop_ub = r6->size[0];
-              for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] =
-                    Ym->data[(r6->data[end] + Ym->size[0] * i) - 1];
-              }
-              b_loop_ub = r7->size[0];
-              for (end = 0; end < b_loop_ub; end++) {
-                Yb->data[end + Yb->size[0] * i] =
-                    Ym->data[(r7->data[end] + Ym->size[0] * i) - 1];
-              }
-            }
-            c_mtimes(b_Ym, Yb, r);
-            inv(r, S);
-            end = bsbT->size[0] - 1;
+            b_loop_ub = bsbT->size[0] - 1;
             trueCount = 0;
-            for (b_i = 0; b_i <= end; b_i++) {
-              if (bsbT->data[b_i]) {
+            for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+              if (bsbT_data[b_i]) {
                 trueCount++;
               }
             }
             i = r8->size[0];
             r8->size[0] = trueCount;
             emxEnsureCapacity_int32_T(r8, i);
-            b_loop_ub = 0;
-            for (b_i = 0; b_i <= end; b_i++) {
-              if (bsbT->data[b_i]) {
-                r8->data[b_loop_ub] = b_i + 1;
-                b_loop_ub++;
+            r13 = r8->data;
+            partialTrueCount = 0;
+            for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+              if (bsbT_data[b_i]) {
+                r13[partialTrueCount] = b_i + 1;
+                partialTrueCount++;
               }
             }
             loop_ub = Ym->size[1];
             i = b_Ym->size[0] * b_Ym->size[1];
-            b_Ym->size[0] = r8->size[0];
+            b_Ym->size[0] = r7->size[0];
             b_Ym->size[1] = Ym->size[1];
             emxEnsureCapacity_real_T(b_Ym, i);
-            for (i = 0; i < loop_ub; i++) {
-              b_loop_ub = r8->size[0];
-              for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] =
-                    Ym->data[(r8->data[end] + Ym->size[0] * i) - 1];
-              }
-            }
-            qr(b_Ym, Yb, R);
-          } else {
-            loop_ub = Ym->size[1];
-            i = b_Ym->size[0] * b_Ym->size[1];
-            b_Ym->size[0] = bsb->size[0];
-            b_Ym->size[1] = Ym->size[1];
-            emxEnsureCapacity_real_T(b_Ym, i);
+            MD_data = b_Ym->data;
             i = Yb->size[0] * Yb->size[1];
-            Yb->size[0] = bsb->size[0];
+            Yb->size[0] = r8->size[0];
             Yb->size[1] = Ym->size[1];
             emxEnsureCapacity_real_T(Yb, i);
+            S_data = Yb->data;
             for (i = 0; i < loop_ub; i++) {
-              b_loop_ub = bsb->size[0];
-              for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] =
-                    Ym->data[((int)bsb->data[end] + Ym->size[0] * i) - 1];
+              b_loop_ub = r7->size[0];
+              for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                   partialTrueCount++) {
+                MD_data[partialTrueCount + b_Ym->size[0] * i] =
+                    Ym_data[(r2[partialTrueCount] + Ym->size[0] * i) - 1];
               }
-              b_loop_ub = bsb->size[0];
-              for (end = 0; end < b_loop_ub; end++) {
-                Yb->data[end + Yb->size[0] * i] =
-                    Ym->data[((int)bsb->data[end] + Ym->size[0] * i) - 1];
+              b_loop_ub = r8->size[0];
+              for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                   partialTrueCount++) {
+                S_data[partialTrueCount + Yb->size[0] * i] =
+                    Ym_data[(r13[partialTrueCount] + Ym->size[0] * i) - 1];
               }
             }
             c_mtimes(b_Ym, Yb, r);
             inv(r, S);
+            S_data = S->data;
+            b_loop_ub = bsbT->size[0] - 1;
+            trueCount = 0;
+            for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+              if (bsbT_data[b_i]) {
+                trueCount++;
+              }
+            }
+            i = r9->size[0];
+            r9->size[0] = trueCount;
+            emxEnsureCapacity_int32_T(r9, i);
+            r2 = r9->data;
+            partialTrueCount = 0;
+            for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+              if (bsbT_data[b_i]) {
+                r2[partialTrueCount] = b_i + 1;
+                partialTrueCount++;
+              }
+            }
+            loop_ub = Ym->size[1];
+            i = b_Ym->size[0] * b_Ym->size[1];
+            b_Ym->size[0] = r9->size[0];
+            b_Ym->size[1] = Ym->size[1];
+            emxEnsureCapacity_real_T(b_Ym, i);
+            MD_data = b_Ym->data;
+            for (i = 0; i < loop_ub; i++) {
+              b_loop_ub = r9->size[0];
+              for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                   partialTrueCount++) {
+                MD_data[partialTrueCount + b_Ym->size[0] * i] =
+                    Ym_data[(r2[partialTrueCount] + Ym->size[0] * i) - 1];
+              }
+            }
+            qr(b_Ym, Yb, R);
+          } else {
             loop_ub = Ym->size[1];
             i = b_Ym->size[0] * b_Ym->size[1];
             b_Ym->size[0] = bsb->size[0];
             b_Ym->size[1] = Ym->size[1];
             emxEnsureCapacity_real_T(b_Ym, i);
+            MD_data = b_Ym->data;
+            i = Yb->size[0] * Yb->size[1];
+            Yb->size[0] = bsb->size[0];
+            Yb->size[1] = Ym->size[1];
+            emxEnsureCapacity_real_T(Yb, i);
+            S_data = Yb->data;
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = bsb->size[0];
-              for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] =
-                    Ym->data[((int)bsb->data[end] + Ym->size[0] * i) - 1];
+              for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                   partialTrueCount++) {
+                MD_data[partialTrueCount + b_Ym->size[0] * i] = Ym_data
+                    [((int)bsb_data[partialTrueCount] + Ym->size[0] * i) - 1];
+              }
+              b_loop_ub = bsb->size[0];
+              for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                   partialTrueCount++) {
+                S_data[partialTrueCount + Yb->size[0] * i] = Ym_data
+                    [((int)bsb_data[partialTrueCount] + Ym->size[0] * i) - 1];
+              }
+            }
+            c_mtimes(b_Ym, Yb, r);
+            inv(r, S);
+            S_data = S->data;
+            loop_ub = Ym->size[1];
+            i = b_Ym->size[0] * b_Ym->size[1];
+            b_Ym->size[0] = bsb->size[0];
+            b_Ym->size[1] = Ym->size[1];
+            emxEnsureCapacity_real_T(b_Ym, i);
+            MD_data = b_Ym->data;
+            for (i = 0; i < loop_ub; i++) {
+              b_loop_ub = bsb->size[0];
+              for (partialTrueCount = 0; partialTrueCount < b_loop_ub;
+                   partialTrueCount++) {
+                MD_data[partialTrueCount + b_Ym->size[0] * i] = Ym_data
+                    [((int)bsb_data[partialTrueCount] + Ym->size[0] * i) - 1];
               }
             }
             qr(b_Ym, Yb, R);
           }
-          i = MDltminT->size[0];
-          MDltminT->size[0] = S->size[0] * S->size[1];
-          emxEnsureCapacity_boolean_T(MDltminT, i);
+          i = unitoutT->size[0];
+          unitoutT->size[0] = S->size[0] * S->size[1];
+          emxEnsureCapacity_boolean_T(unitoutT, i);
+          unitoutT_data = unitoutT->data;
           loop_ub = S->size[0] * S->size[1];
           for (i = 0; i < loop_ub; i++) {
-            MDltminT->data[i] = rtIsInf(S->data[i]);
+            unitoutT_data[i] = rtIsInf(S_data[i]);
           }
-          irank = MDltminT->size[0];
-          if (MDltminT->size[0] == 0) {
+          irank = unitoutT->size[0];
+          if (unitoutT->size[0] == 0) {
             nwhile = 0;
           } else {
-            nwhile = MDltminT->data[0];
+            nwhile = unitoutT_data[0];
             for (b_loop_ub = 2; b_loop_ub <= irank; b_loop_ub++) {
-              nwhile += MDltminT->data[b_loop_ub - 1];
+              nwhile += unitoutT_data[b_loop_ub - 1];
             }
           }
           if (nwhile > 0) {
@@ -5271,26 +6299,35 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             mmd->size[0] = 1;
             mmd->size[1] = 1;
             emxEnsureCapacity_real_T(mmd, i);
-            mmd->data[0] = rtNaN;
+            mmd_data = mmd->data;
+            mmd_data[0] = rtNaN;
             i = Un->size[0] * Un->size[1];
             Un->size[0] = 1;
             Un->size[1] = 1;
             emxEnsureCapacity_real_T(Un, i);
-            Un->data[0] = rtNaN;
+            Un_data = Un->data;
+            Un_data[0] = rtNaN;
             i = varargout_1->size[0] * varargout_1->size[1];
             varargout_1->size[0] = 1;
             varargout_1->size[1] = 1;
             emxEnsureCapacity_real_T(varargout_1, i);
-            varargout_1->data[0] = rtNaN;
+            varargout_1_data = varargout_1->data;
+            varargout_1_data[0] = rtNaN;
             exitg1 = true;
           } else {
             /*  Compute squared Mahalanobis distances */
             mrdiv(Ym, R, r);
-            power(r, Yb);
-            sum(Yb, MD);
+            MD_data = r->data;
+            loop_ub = r->size[0] * r->size[1];
+            for (i = 0; i < loop_ub; i++) {
+              ksor = MD_data[i];
+              MD_data[i] = ksor * ksor;
+            }
+            sum(r, MD);
+            MD_data = MD->data;
             loop_ub = MD->size[0];
             for (i = 0; i < loop_ub; i++) {
-              MD->data[i] *= b_mm - 1.0;
+              MD_data[i] *= b_mm - 1.0;
             }
             b_guard1 = true;
           }
@@ -5304,49 +6341,53 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             i = Szi->size[0];
             Szi->size[0] = MD->size[0];
             emxEnsureCapacity_real_T(Szi, i);
+            Szi_data = Szi->data;
             loop_ub = MD->size[0];
             for (i = 0; i < loop_ub; i++) {
-              Szi->data[i] = MD->data[i];
+              Szi_data[i] = MD_data[i];
             }
             if (b_mm > percn) {
-              end = bsbT->size[0];
-              for (b_i = 0; b_i < end; b_i++) {
-                if (bsbT->data[b_i]) {
-                  Szi->data[b_i] = rtInf;
+              b_loop_ub = bsbT->size[0];
+              for (b_i = 0; b_i < b_loop_ub; b_i++) {
+                if (bsbT_data[b_i]) {
+                  Szi_data[b_i] = rtInf;
                 }
               }
             } else {
               i = r1->size[0];
               r1->size[0] = bsb->size[0];
               emxEnsureCapacity_int32_T(r1, i);
+              r2 = r1->data;
               loop_ub = bsb->size[0];
               for (i = 0; i < loop_ub; i++) {
-                r1->data[i] = (int)bsb->data[i];
+                r2[i] = (int)bsb_data[i];
               }
               loop_ub = r1->size[0];
               for (i = 0; i < loop_ub; i++) {
-                Szi->data[r1->data[i] - 1] = rtInf;
+                Szi_data[r2[i] - 1] = rtInf;
               }
             }
             /*  oldbsbF=bsbF; */
             i = oldbsbT->size[0];
             oldbsbT->size[0] = bsbT->size[0];
             emxEnsureCapacity_boolean_T(oldbsbT, i);
+            oldbsbT_data = oldbsbT->data;
             loop_ub = bsbT->size[0];
             for (i = 0; i < loop_ub; i++) {
-              oldbsbT->data[i] = bsbT->data[i];
+              oldbsbT_data[i] = bsbT_data[i];
             }
             /*  Take minimum distance of the units not belonging to subset */
             d_minimum(Szi, &minMD, &lunit);
             /*  MDltminT = n x 1 Boolean vector which is true if corresponding
              * MD is */
             /*  smaller or equal minMD */
-            i = MDltminT->size[0];
-            MDltminT->size[0] = MD->size[0];
-            emxEnsureCapacity_boolean_T(MDltminT, i);
+            i = unitoutT->size[0];
+            unitoutT->size[0] = MD->size[0];
+            emxEnsureCapacity_boolean_T(unitoutT, i);
+            unitoutT_data = unitoutT->data;
             loop_ub = MD->size[0];
             for (i = 0; i < loop_ub; i++) {
-              MDltminT->data[i] = (MD->data[i] <= minMD);
+              unitoutT_data[i] = (MD_data[i] <= minMD);
             }
             /*  MDltminbsb = n x 1 Boolean vector (if m>percn) or */
             /*  int32 vector containing the units which certainly remain inside
@@ -5354,20 +6395,27 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             /*  i.e. those which have a true in MDltminT and belong to previous
              * subset */
             if (b_mm > percn) {
-              i = MDltminbsb->size[0];
-              MDltminbsb->size[0] = MDltminT->size[0];
-              emxEnsureCapacity_boolean_T(MDltminbsb, i);
-              loop_ub = MDltminT->size[0];
-              for (i = 0; i < loop_ub; i++) {
-                MDltminbsb->data[i] = (MDltminT->data[i] && bsbT->data[i]);
+              if (unitoutT->size[0] == bsbT->size[0]) {
+                i = MDltminbsb->size[0];
+                MDltminbsb->size[0] = unitoutT->size[0];
+                emxEnsureCapacity_boolean_T(MDltminbsb, i);
+                MDltminbsb_data = MDltminbsb->data;
+                loop_ub = unitoutT->size[0];
+                for (i = 0; i < loop_ub; i++) {
+                  MDltminbsb_data[i] = (unitoutT_data[i] && bsbT_data[i]);
+                }
+              } else {
+                and(MDltminbsb, unitoutT, bsbT);
+                MDltminbsb_data = MDltminbsb->data;
               }
             } else {
               i = MDltminbsb->size[0];
               MDltminbsb->size[0] = bsb->size[0];
               emxEnsureCapacity_boolean_T(MDltminbsb, i);
+              MDltminbsb_data = MDltminbsb->data;
               loop_ub = bsb->size[0];
               for (i = 0; i < loop_ub; i++) {
-                MDltminbsb->data[i] = MDltminT->data[(int)bsb->data[i] - 1];
+                MDltminbsb_data[i] = unitoutT_data[(int)bsb_data[i] - 1];
               }
             }
             /*  Find number of units of old subset which have a MD <= minMD */
@@ -5379,9 +6427,9 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             if (MDltminbsb->size[0] == 0) {
               nwhile = 0;
             } else {
-              nwhile = MDltminbsb->data[0];
+              nwhile = MDltminbsb_data[0];
               for (b_loop_ub = 2; b_loop_ub <= irank; b_loop_ub++) {
-                nwhile += MDltminbsb->data[b_loop_ub - 1];
+                nwhile += MDltminbsb_data[b_loop_ub - 1];
               }
             }
             rankgap = (b_mm + 1.0) - (double)nwhile;
@@ -5389,20 +6437,22 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               /*  Just one new unit entered subset */
               i = unit->size[0];
               unit->size[0] = 1;
-              emxEnsureCapacity_real_T(unit, i);
-              unit->data[0] = lunit;
+              emxEnsureCapacity_int32_T(unit, i);
+              unit_data = unit->data;
+              unit_data[0] = lunit;
               /*  Compute new bsbT and new bsb */
               if (b_mm <= percn) {
                 /*  new bsb is equal to oldbsb plus unit which just entered */
                 i = bsb->size[0];
-                end = bsb->size[0];
+                partialTrueCount = bsb->size[0];
                 bsb->size[0]++;
-                emxEnsureCapacity_real_T(bsb, end);
-                bsb->data[i] = lunit;
+                emxEnsureCapacity_real_T(bsb, partialTrueCount);
+                bsb_data = bsb->data;
+                bsb_data[i] = lunit;
               }
               /*  bsbT is equal to old bsbT after adding a single true in */
               /*  correspondence of the unit which entered subset */
-              bsbT->data[lunit - 1] = true;
+              bsbT_data[lunit - 1] = true;
             } else if ((rankgap > 1.0) && (rankgap <= 10.0)) {
               /*  MDmod is the vector of Mahalanobis distance which will have */
               /*  a Inf in correspondence of the units of old subset which */
@@ -5410,9 +6460,10 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               i = Szi->size[0];
               Szi->size[0] = MD->size[0];
               emxEnsureCapacity_real_T(Szi, i);
+              Szi_data = Szi->data;
               loop_ub = MD->size[0];
               for (i = 0; i < loop_ub; i++) {
-                Szi->data[i] = MD->data[i];
+                Szi_data[i] = MD_data[i];
               }
               /*  Find bsbrini, i.e. the vector which will contain the */
               /*  units which remain in the subset in the next step */
@@ -5425,54 +6476,58 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 /*  which have a MD smaller than minMD). In order to find */
                 /*  bsbr we must check whether the k units which will be */
                 /*  included were or not in the previous subset */
-                end = bsb->size[0] - 1;
+                b_loop_ub = bsb->size[0] - 1;
                 trueCount = 0;
-                for (b_i = 0; b_i <= end; b_i++) {
-                  if (MDltminT->data[(int)bsb->data[b_i] - 1]) {
+                for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                  if (unitoutT_data[(int)bsb_data[b_i] - 1]) {
                     trueCount++;
                   }
                 }
                 i = bsbrini->size[0];
                 bsbrini->size[0] = trueCount;
                 emxEnsureCapacity_uint32_T(bsbrini, i);
-                b_loop_ub = 0;
-                for (b_i = 0; b_i <= end; b_i++) {
-                  if (MDltminT->data[(int)bsb->data[b_i] - 1]) {
-                    bsbrini->data[b_loop_ub] = (unsigned int)bsb->data[b_i];
-                    b_loop_ub++;
+                bsbrini_data = bsbrini->data;
+                partialTrueCount = 0;
+                for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                  if (unitoutT_data[(int)bsb_data[b_i] - 1]) {
+                    bsbrini_data[partialTrueCount] =
+                        (unsigned int)bsb_data[b_i];
+                    partialTrueCount++;
                   }
                 }
                 /*  unitout = list of the units which potentially left */
                 /*  subset. We say potentially because there are still k */
                 /*  units to be included */
                 /*  unitout=bsb(~bsbini); */
-                end = bsb->size[0] - 1;
+                b_loop_ub = bsb->size[0] - 1;
                 trueCount = 0;
-                for (b_i = 0; b_i <= end; b_i++) {
-                  if (!MDltminT->data[(int)bsb->data[b_i] - 1]) {
+                for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                  if (!unitoutT_data[(int)bsb_data[b_i] - 1]) {
                     trueCount++;
                   }
                 }
                 i = unitout->size[0];
                 unitout->size[0] = trueCount;
                 emxEnsureCapacity_real_T(unitout, i);
-                b_loop_ub = 0;
-                for (b_i = 0; b_i <= end; b_i++) {
-                  if (!MDltminT->data[(int)bsb->data[b_i] - 1]) {
-                    unitout->data[b_loop_ub] = bsb->data[b_i];
-                    b_loop_ub++;
+                unitout_data = unitout->data;
+                partialTrueCount = 0;
+                for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                  if (!unitoutT_data[(int)bsb_data[b_i] - 1]) {
+                    unitout_data[partialTrueCount] = bsb_data[b_i];
+                    partialTrueCount++;
                   }
                 }
                 i = r1->size[0];
                 r1->size[0] = bsbrini->size[0];
                 emxEnsureCapacity_int32_T(r1, i);
+                r2 = r1->data;
                 loop_ub = bsbrini->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  r1->data[i] = (int)bsbrini->data[i];
+                  r2[i] = (int)bsbrini_data[i];
                 }
                 loop_ub = r1->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  Szi->data[r1->data[i] - 1] = rtInf;
+                  Szi_data[r2[i] - 1] = rtInf;
                 }
               } else {
                 /*  bsbriniT = Boolean vector which is true if the */
@@ -5483,14 +6538,15 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 i = bsbriniT->size[0];
                 bsbriniT->size[0] = MDltminbsb->size[0];
                 emxEnsureCapacity_boolean_T(bsbriniT, i);
+                bsbriniT_data = bsbriniT->data;
                 loop_ub = MDltminbsb->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  bsbriniT->data[i] = MDltminbsb->data[i];
+                  bsbriniT_data[i] = MDltminbsb_data[i];
                 }
-                end = MDltminbsb->size[0];
-                for (b_i = 0; b_i < end; b_i++) {
-                  if (MDltminbsb->data[b_i]) {
-                    Szi->data[b_i] = rtInf;
+                b_loop_ub = MDltminbsb->size[0];
+                for (b_i = 0; b_i < b_loop_ub; b_i++) {
+                  if (MDltminbsb_data[b_i]) {
+                    Szi_data[b_i] = rtInf;
                   }
                 }
               }
@@ -5512,39 +6568,40 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 /*  vector bsbriniT and the unit is included in vector */
                 /*  bsbradd If unit minMDindex did not belong to previous */
                 /*  subset, than minMDindex is included in vector unitadd */
-                if (bsbT->data[lunit - 1]) {
+                if (bsbT_data[lunit - 1]) {
                   if (b_mm <= percn) {
                     bsbradd[nwhile] = lunit;
                     nwhile++;
                     /*  Delete from vector unitout (containing the */
                     /*  list of the units which went out of the */
                     /*  subset) element minMDindex */
-                    end = unitout->size[0] - 1;
+                    b_loop_ub = unitout->size[0] - 1;
                     trueCount = 0;
-                    for (b_i = 0; b_i <= end; b_i++) {
-                      if ((int)unitout->data[b_i] != lunit) {
+                    for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                      if ((int)unitout_data[b_i] != lunit) {
                         trueCount++;
                       }
                     }
-                    b_loop_ub = 0;
-                    for (b_i = 0; b_i <= end; b_i++) {
-                      if ((int)unitout->data[b_i] != lunit) {
-                        unitout->data[b_loop_ub] = unitout->data[b_i];
-                        b_loop_ub++;
+                    partialTrueCount = 0;
+                    for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                      if ((int)unitout_data[b_i] != lunit) {
+                        unitout_data[partialTrueCount] = unitout_data[b_i];
+                        partialTrueCount++;
                       }
                     }
-                    end = unitout->size[0];
+                    partialTrueCount = unitout->size[0];
                     unitout->size[0] = trueCount;
-                    emxEnsureCapacity_real_T(unitout, end);
+                    emxEnsureCapacity_real_T(unitout, partialTrueCount);
+                    unitout_data = unitout->data;
                   } else {
-                    bsbriniT->data[lunit - 1] = true;
+                    bsbriniT_data[lunit - 1] = true;
                   }
                 } else {
                   unitadd[irank] = lunit;
                   irank++;
                 }
                 /*  disp(posunit(posncl1)) */
-                Szi->data[lunit - 1] = rtInf;
+                Szi_data[lunit - 1] = rtInf;
               }
               /*  unit = vector containing all units which enter the new subset
                */
@@ -5556,9 +6613,10 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               }
               i = unit->size[0];
               unit->size[0] = loop_ub;
-              emxEnsureCapacity_real_T(unit, i);
+              emxEnsureCapacity_int32_T(unit, i);
+              unit_data = unit->data;
               for (i = 0; i < loop_ub; i++) {
-                unit->data[i] = unitadd[i];
+                unit_data[i] = unitadd[i];
               }
               /*  bsbr = vector containing all units which enter the new */
               /*  subset and were also in the previous subset */
@@ -5571,40 +6629,44 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 }
                 i = bsbr->size[0];
                 bsbr->size[0] = bsbrini->size[0] + b_loop_ub;
-                emxEnsureCapacity_real_T(bsbr, i);
+                emxEnsureCapacity_int32_T(bsbr, i);
+                bsbr_data = bsbr->data;
                 irank = bsbrini->size[0];
                 for (i = 0; i < irank; i++) {
-                  bsbr->data[i] = bsbrini->data[i];
+                  bsbr_data[i] = (int)bsbrini_data[i];
                 }
                 for (i = 0; i < b_loop_ub; i++) {
-                  bsbr->data[i + bsbrini->size[0]] = bsbradd[i];
+                  bsbr_data[i + bsbrini->size[0]] = bsbradd[i];
                 }
                 i = bsb->size[0];
                 bsb->size[0] = bsbr->size[0] + loop_ub;
                 emxEnsureCapacity_real_T(bsb, i);
+                bsb_data = bsb->data;
                 b_loop_ub = bsbr->size[0];
                 for (i = 0; i < b_loop_ub; i++) {
-                  bsb->data[i] = bsbr->data[i];
+                  bsb_data[i] = bsbr_data[i];
                 }
                 for (i = 0; i < loop_ub; i++) {
-                  bsb->data[i + bsbr->size[0]] = unitadd[i];
+                  bsb_data[i + bsbr->size[0]] = unitadd[i];
                 }
                 i = bsbT->size[0];
                 bsbT->size[0] = n;
                 emxEnsureCapacity_boolean_T(bsbT, i);
+                bsbT_data = bsbT->data;
                 for (i = 0; i < n; i++) {
-                  bsbT->data[i] = false;
+                  bsbT_data[i] = false;
                 }
                 i = r1->size[0];
                 r1->size[0] = bsb->size[0];
                 emxEnsureCapacity_int32_T(r1, i);
+                r2 = r1->data;
                 loop_ub = bsb->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  r1->data[i] = (int)bsb->data[i];
+                  r2[i] = (int)bsb_data[i];
                 }
                 loop_ub = r1->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  bsbT->data[r1->data[i] - 1] = true;
+                  bsbT_data[r2[i] - 1] = true;
                 }
               } else {
                 /*  After the instruction which follows bsbriniT */
@@ -5614,18 +6676,19 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 /*  -----------    bsbriniT=MDltminT & bsbT; */
                 /*  -----------    bsbriniT(minMDindex)=true; */
                 /*  -----------    bsbriniT(unit)=true; */
-                for (i = 0; i < loop_ub; i++) {
-                  tmp_data[i] = (int)unitadd[i];
+                if (0 <= loop_ub - 1) {
+                  memcpy(&tmp_data[0], &unitadd[0], loop_ub * sizeof(int));
                 }
                 for (i = 0; i < loop_ub; i++) {
-                  bsbriniT->data[tmp_data[i] - 1] = true;
+                  bsbriniT_data[tmp_data[i] - 1] = true;
                 }
                 i = bsbT->size[0];
                 bsbT->size[0] = bsbriniT->size[0];
                 emxEnsureCapacity_boolean_T(bsbT, i);
+                bsbT_data = bsbT->data;
                 loop_ub = bsbriniT->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  bsbT->data[i] = bsbriniT->data[i];
+                  bsbT_data[i] = bsbriniT_data[i];
                 }
               }
               /*  Compute bsbT (Boolean vector which identifies new subset) */
@@ -5640,56 +6703,56 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               i = Szi->size[0];
               Szi->size[0] = MD->size[0];
               emxEnsureCapacity_real_T(Szi, i);
+              Szi_data = Szi->data;
               loop_ub = MD->size[0] - 1;
               for (i = 0; i <= loop_ub; i++) {
-                Szi->data[i] = MD->data[i];
+                Szi_data[i] = MD_data[i];
               }
               ksor = quickselectFS(Szi, b_mm + 1.0, lunit);
               i = bsbT->size[0];
               bsbT->size[0] = MD->size[0];
               emxEnsureCapacity_boolean_T(bsbT, i);
+              bsbT_data = bsbT->data;
               loop_ub = MD->size[0];
               for (i = 0; i < loop_ub; i++) {
-                bsbT->data[i] = (MD->data[i] <= ksor);
+                bsbT_data[i] = (MD_data[i] <= ksor);
               }
               irank = bsbT->size[0];
               if (bsbT->size[0] == 0) {
                 nwhile = 0;
               } else {
-                nwhile = bsbT->data[0];
+                nwhile = bsbT_data[0];
                 for (b_loop_ub = 2; b_loop_ub <= irank; b_loop_ub++) {
-                  nwhile += bsbT->data[b_loop_ub - 1];
+                  nwhile += bsbT_data[b_loop_ub - 1];
                 }
               }
               if (nwhile == (int)b_mm + 1) {
                 if (b_mm <= percn) {
-                  end = bsbT->size[0] - 1;
+                  b_loop_ub = bsbT->size[0] - 1;
                   trueCount = 0;
-                  for (b_i = 0; b_i <= end; b_i++) {
-                    if (bsbT->data[b_i]) {
+                  for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                    if (bsbT_data[b_i]) {
                       trueCount++;
                     }
                   }
                   i = bsb->size[0];
                   bsb->size[0] = trueCount;
                   emxEnsureCapacity_real_T(bsb, i);
-                  b_loop_ub = 0;
-                  for (b_i = 0; b_i <= end; b_i++) {
-                    if (bsbT->data[b_i]) {
-                      bsb->data[b_loop_ub] = seq->data[b_i];
-                      b_loop_ub++;
+                  bsb_data = bsb->data;
+                  partialTrueCount = 0;
+                  for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                    if (bsbT_data[b_i]) {
+                      bsb_data[partialTrueCount] = seq_data[b_i];
+                      partialTrueCount++;
                     }
                   }
                 }
               } else {
-                end = MD->size[0];
+                b_loop_ub = MD->size[0];
                 trueCount = 0;
-                nwhile = MD->size[0] - 1;
-                irank = 0;
-                for (b_i = 0; b_i < end; b_i++) {
-                  if (MD->data[b_i] < ksor) {
+                for (b_i = 0; b_i < b_loop_ub; b_i++) {
+                  if (MD_data[b_i] < ksor) {
                     trueCount++;
-                    irank++;
                   }
                 }
                 d = (b_mm + 1.0) - (double)trueCount;
@@ -5698,80 +6761,102 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 } else {
                   loop_ub = (int)d;
                 }
-                i = r10->size[0];
-                r10->size[0] = irank;
-                emxEnsureCapacity_int32_T(r10, i);
-                b_loop_ub = 0;
-                end = MD->size[0] - 1;
+                b_loop_ub = MD->size[0] - 1;
                 trueCount = 0;
-                for (b_i = 0; b_i <= nwhile; b_i++) {
-                  if (MD->data[b_i] < ksor) {
-                    r10->data[b_loop_ub] = b_i + 1;
-                    b_loop_ub++;
-                  }
-                  if (MD->data[b_i] == ksor) {
+                for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                  if (MD_data[b_i] < ksor) {
                     trueCount++;
                   }
                 }
                 i = r11->size[0];
                 r11->size[0] = trueCount;
                 emxEnsureCapacity_int32_T(r11, i);
-                b_loop_ub = 0;
-                for (b_i = 0; b_i <= end; b_i++) {
-                  if (MD->data[b_i] == ksor) {
-                    r11->data[b_loop_ub] = b_i + 1;
-                    b_loop_ub++;
+                r2 = r11->data;
+                partialTrueCount = 0;
+                for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                  if (MD_data[b_i] < ksor) {
+                    r2[partialTrueCount] = b_i + 1;
+                    partialTrueCount++;
+                  }
+                }
+                b_loop_ub = MD->size[0] - 1;
+                trueCount = 0;
+                for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                  if (MD_data[b_i] == ksor) {
+                    trueCount++;
+                  }
+                }
+                i = r12->size[0];
+                r12->size[0] = trueCount;
+                emxEnsureCapacity_int32_T(r12, i);
+                r13 = r12->data;
+                partialTrueCount = 0;
+                for (b_i = 0; b_i <= b_loop_ub; b_i++) {
+                  if (MD_data[b_i] == ksor) {
+                    r13[partialTrueCount] = b_i + 1;
+                    partialTrueCount++;
                   }
                 }
                 i = bsb->size[0];
-                bsb->size[0] = r10->size[0] + loop_ub;
+                bsb->size[0] = r11->size[0] + loop_ub;
                 emxEnsureCapacity_real_T(bsb, i);
-                b_loop_ub = r10->size[0];
+                bsb_data = bsb->data;
+                b_loop_ub = r11->size[0];
                 for (i = 0; i < b_loop_ub; i++) {
-                  bsb->data[i] = seq->data[r10->data[i] - 1];
+                  bsb_data[i] = seq_data[r2[i] - 1];
                 }
                 for (i = 0; i < loop_ub; i++) {
-                  bsb->data[i + r10->size[0]] = seq->data[r11->data[i] - 1];
+                  bsb_data[i + r11->size[0]] = seq_data[r13[i] - 1];
                 }
                 i = bsbT->size[0];
                 bsbT->size[0] = n;
                 emxEnsureCapacity_boolean_T(bsbT, i);
+                bsbT_data = bsbT->data;
                 for (i = 0; i < n; i++) {
-                  bsbT->data[i] = false;
+                  bsbT_data[i] = false;
                 }
                 i = r1->size[0];
                 r1->size[0] = bsb->size[0];
                 emxEnsureCapacity_int32_T(r1, i);
+                r2 = r1->data;
                 loop_ub = bsb->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  r1->data[i] = (int)bsb->data[i];
+                  r2[i] = (int)bsb_data[i];
                 }
                 loop_ub = r1->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  bsbT->data[r1->data[i] - 1] = true;
+                  bsbT_data[r2[i] - 1] = true;
                 }
               }
               /*  unit = vector containing units which just entered subset; */
-              i = MDltminT->size[0];
-              MDltminT->size[0] = bsbT->size[0];
-              emxEnsureCapacity_boolean_T(MDltminT, i);
-              loop_ub = bsbT->size[0];
-              for (i = 0; i < loop_ub; i++) {
-                MDltminT->data[i] = (bsbT->data[i] && (!oldbsbT->data[i]));
+              if (bsbT->size[0] == oldbsbT->size[0]) {
+                i = b_bsbT->size[0];
+                b_bsbT->size[0] = bsbT->size[0];
+                emxEnsureCapacity_boolean_T(b_bsbT, i);
+                unitoutT_data = b_bsbT->data;
+                loop_ub = bsbT->size[0];
+                for (i = 0; i < loop_ub; i++) {
+                  unitoutT_data[i] = (bsbT_data[i] && (!oldbsbT_data[i]));
+                }
+                b_eml_find(b_bsbT, r1);
+                r2 = r1->data;
+              } else {
+                r_binary_expand_op(r1, bsbT, oldbsbT);
+                r2 = r1->data;
               }
-              b_eml_find(MDltminT, r1);
               i = unit->size[0];
               unit->size[0] = r1->size[0];
-              emxEnsureCapacity_real_T(unit, i);
+              emxEnsureCapacity_int32_T(unit, i);
+              unit_data = unit->data;
               loop_ub = r1->size[0];
               for (i = 0; i < loop_ub; i++) {
-                unit->data[i] = r1->data[i];
+                unit_data[i] = r2[i];
               }
             }
             if (b_mm >= init1) {
               /*  mmd contains minimum of Mahalanobis distances among */
               /*  the units which are not in the subset at step m */
-              mmd->data[((int)((b_mm - init1) + 1.0) + mmd->size[0]) - 1] =
+              mmd_data[((int)((b_mm - init1) + 1.0) + mmd->size[0]) - 1] =
                   sqrt(minMD);
             }
             /*  store mean of units forming old subset */
@@ -5779,30 +6864,34 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             meoldbsb->size[0] = 1;
             meoldbsb->size[1] = ym->size[1];
             emxEnsureCapacity_real_T(meoldbsb, i);
+            meoldbsb_data = meoldbsb->data;
             loop_ub = ym->size[1];
             for (i = 0; i < loop_ub; i++) {
-              meoldbsb->data[i] = ym->data[i];
+              meoldbsb_data[i] = ym_data[i];
             }
             lunit = unit->size[0];
             if (b_mm >= init1) {
               if (unit->size[0] <= 10) {
                 if (2 > unit->size[0] + 1) {
                   i = -1;
-                  end = -1;
+                  partialTrueCount = -1;
                 } else {
                   i = 0;
-                  end = unit->size[0];
+                  partialTrueCount = unit->size[0];
                 }
                 nwhile = (int)((b_mm - init1) + 1.0) - 1;
-                irank = end - i;
-                for (end = 0; end < irank; end++) {
-                  Un->data[nwhile + Un->size[0] * ((i + end) + 1)] =
-                      unit->data[end];
+                irank = partialTrueCount - i;
+                for (partialTrueCount = 0; partialTrueCount < irank;
+                     partialTrueCount++) {
+                  Un_data[nwhile + Un->size[0] * ((i + partialTrueCount) + 1)] =
+                      unit_data[partialTrueCount];
                 }
               } else {
                 i = (int)((b_mm - init1) + 1.0) - 1;
-                for (end = 0; end < 10; end++) {
-                  Un->data[i + Un->size[0] * (end + 1)] = unit->data[end];
+                for (partialTrueCount = 0; partialTrueCount < 10;
+                     partialTrueCount++) {
+                  Un_data[i + Un->size[0] * (partialTrueCount + 1)] =
+                      unit_data[partialTrueCount];
                 }
               }
             }
@@ -5817,20 +6906,25 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     mmd->size[0] = 1;
     mmd->size[1] = 1;
     emxEnsureCapacity_real_T(mmd, i);
-    mmd->data[0] = rtNaN;
+    mmd_data = mmd->data;
+    mmd_data[0] = rtNaN;
     i = Un->size[0] * Un->size[1];
     Un->size[0] = 1;
     Un->size[1] = 1;
     emxEnsureCapacity_real_T(Un, i);
-    Un->data[0] = rtNaN;
+    Un_data = Un->data;
+    Un_data[0] = rtNaN;
     i = varargout_1->size[0] * varargout_1->size[1];
     varargout_1->size[0] = 1;
     varargout_1->size[1] = 1;
     emxEnsureCapacity_real_T(varargout_1, i);
-    varargout_1->data[0] = rtNaN;
+    varargout_1_data = varargout_1->data;
+    varargout_1_data[0] = rtNaN;
   }
   emxFree_real_T(&r);
+  emxFree_boolean_T(&b_bsbT);
   emxFree_real_T(&b_Ym);
+  emxFree_int32_T(&r12);
   emxFree_int32_T(&r11);
   emxFree_int32_T(&r10);
   emxFree_int32_T(&r9);
@@ -5838,25 +6932,24 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   emxFree_int32_T(&r7);
   emxFree_int32_T(&r6);
   emxFree_int32_T(&r5);
-  emxFree_int32_T(&r4);
   emxFree_int32_T(&r1);
   emxFree_real_T(&bsbsteps);
   emxFree_boolean_T(&MDltminbsb);
-  emxFree_boolean_T(&MDltminT);
   emxFree_real_T(&R);
   emxFree_real_T(&MD);
   emxFree_real_T(&Szi);
   emxFree_real_T(&zi);
   emxFree_real_T(&mibsbr);
   emxFree_real_T(&mi);
+  emxFree_boolean_T(&unitoutT);
   emxFree_real_T(&Ym);
   emxFree_real_T(&ym);
   emxFree_real_T(&Yb);
-  emxFree_real_T(&unit);
+  emxFree_int32_T(&unit);
   emxFree_uint32_T(&bsbrini);
   emxFree_boolean_T(&bsbriniT);
   emxFree_real_T(&unitout);
-  emxFree_real_T(&bsbr);
+  emxFree_int32_T(&bsbr);
   emxFree_boolean_T(&oldbsbT);
   emxFree_real_T(&meoldbsb);
   emxFree_real_T(&S);
@@ -5867,19 +6960,22 @@ void c_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
 void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               emxArray_real_T *mmd, emxArray_real_T *Un)
 {
-  emxArray_boolean_T *MDltminT;
   emxArray_boolean_T *MDltminbsb;
+  emxArray_boolean_T *b_bsbT;
   emxArray_boolean_T *bsbT;
   emxArray_boolean_T *bsbriniT;
   emxArray_boolean_T *oldbsbT;
+  emxArray_boolean_T *unitoutT;
+  emxArray_int32_T *bsbr;
   emxArray_int32_T *r1;
   emxArray_int32_T *r10;
-  emxArray_int32_T *r4;
+  emxArray_int32_T *r11;
   emxArray_int32_T *r5;
   emxArray_int32_T *r6;
   emxArray_int32_T *r7;
   emxArray_int32_T *r8;
   emxArray_int32_T *r9;
+  emxArray_int32_T *unit;
   emxArray_real_T *MD;
   emxArray_real_T *R;
   emxArray_real_T *S;
@@ -5887,21 +6983,18 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   emxArray_real_T *Yb;
   emxArray_real_T *Ym;
   emxArray_real_T *b_Ym;
-  emxArray_real_T *bsbr;
   emxArray_real_T *meoldbsb;
   emxArray_real_T *mi;
   emxArray_real_T *mibsbr;
   emxArray_real_T *r;
-  emxArray_real_T *r2;
   emxArray_real_T *r3;
+  emxArray_real_T *r4;
   emxArray_real_T *seq;
-  emxArray_real_T *unit;
   emxArray_real_T *unitout;
   emxArray_real_T *ym;
   emxArray_real_T *zi;
   emxArray_uint32_T *bsbrini;
-  double bsbradd[10];
-  double unitadd[10];
+  const double *Y_data;
   double b_mm;
   double d;
   double init1;
@@ -5909,7 +7002,22 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   double minMD;
   double percn;
   double rankgap;
+  double *MD_data;
+  double *S_data;
+  double *Szi_data;
+  double *Un_data;
+  double *Ym_data;
+  double *bsb_data;
+  double *meoldbsb_data;
+  double *mi_data;
+  double *mibsbr_data;
+  double *mmd_data;
+  double *seq_data;
+  double *unitout_data;
+  double *ym_data;
+  int bsbradd[10];
   int tmp_data[10];
+  int unitadd[10];
   int b_i;
   int b_loop_ub;
   int end;
@@ -5923,11 +7031,23 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   int nwhile;
   int trueCount;
   int v;
+  int *bsbr_data;
+  unsigned int *bsbrini_data;
+  int *r12;
+  int *r2;
+  int *unit_data;
   bool Ra;
   bool b_guard1 = false;
   bool exitg1;
   bool guard1 = false;
-  emxInit_boolean_T(&MDltminT, 1);
+  bool *MDltminbsb_data;
+  bool *bsbT_data;
+  bool *bsbriniT_data;
+  bool *oldbsbT_data;
+  bool *unitoutT_data;
+  bsb_data = bsb->data;
+  Y_data = Y->data;
+  emxInit_boolean_T(&bsbT, 1);
   /* FSMmmd monitors minMD */
   /*  */
   /* <a href="matlab: docsearchFS('FSMmmd')">Link to the help function</a> */
@@ -5952,7 +7072,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*                chosen else if bsb is not 0 the search will start with */
   /*                m0=length(bsb) */
   /*                Data Types - single | double */
-  /*  */
   /*  */
   /*  Optional input arguments: */
   /*  */
@@ -5993,7 +7112,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*                  Example - 'nocheck',false */
   /*                  Data Types - logical */
   /*  */
-  /*  */
   /*  plots :     It specify whether it is necessary to produce the plots of
    * minimum Mahalanobis */
   /*                  distance. Scalar. If plots=1, a plot of the monitoring of
@@ -6003,7 +7121,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*                else (default) no plot is produced. */
   /*                  Example - 'plots',0 */
   /*                  Data Types - double */
-  /*  */
   /*  */
   /*  Remark :      The user should only give the input arguments that have to
    */
@@ -6162,7 +7279,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*                specified for the */
   /*                caller function. */
   /*  */
-  /*  */
   /*   Optional input arguments: */
   /*  */
   /*  Output: */
@@ -6179,8 +7295,6 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
-  /*  */
   /*  */
   /* $LastChangedDate::                      $: Date of the last commit */
   /*  */
@@ -6209,32 +7323,35 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   /* init1=options.init; */
   /*  Write in structure 'options' the options chosen by the user */
   /*  And check if the optional user parameters are reasonable. */
-  i = MDltminT->size[0];
-  MDltminT->size[0] = bsb->size[0];
-  emxEnsureCapacity_boolean_T(MDltminT, i);
+  i = bsbT->size[0];
+  bsbT->size[0] = bsb->size[0];
+  emxEnsureCapacity_boolean_T(bsbT, i);
+  bsbT_data = bsbT->data;
   loop_ub = bsb->size[0];
   for (i = 0; i < loop_ub; i++) {
-    MDltminT->data[i] = (bsb->data[i] == 0.0);
+    bsbT_data[i] = (bsb_data[i] == 0.0);
   }
   emxInit_real_T(&Yb, 2);
   emxInit_real_T(&r, 2);
-  if (ifWhileCond(MDltminT)) {
+  if (ifWhileCond(bsbT)) {
     Ra = true;
     nwhile = 1;
     while (Ra && (nwhile < 100)) {
       /*  Extract a random sample of size v+1 */
       randsample(n, (double)v + 1.0, bsb);
+      bsb_data = bsb->data;
       /*  Check if the var-cov matrix of the random sample is full (i.e =v) */
       loop_ub = Y->size[1];
       i = Yb->size[0] * Yb->size[1];
       Yb->size[0] = bsb->size[0];
       Yb->size[1] = Y->size[1];
       emxEnsureCapacity_real_T(Yb, i);
+      S_data = Yb->data;
       for (i = 0; i < loop_ub; i++) {
         b_loop_ub = bsb->size[0];
         for (end = 0; end < b_loop_ub; end++) {
-          Yb->data[end + Yb->size[0] * i] =
-              Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
+          S_data[end + Yb->size[0] * i] =
+              Y_data[((int)bsb_data[end] + Y->size[0] * i) - 1];
         }
       }
       cov(Yb, r);
@@ -6244,6 +7361,7 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     }
   }
   emxInit_real_T(&ym, 2);
+  ym_data = ym->data;
   /*  percn = scalar which controls up to which point of the search it is */
   /*  better to use linear indexing to extract the units forming subset. For */
   /*  example percn=0.85*n means that units belonging to susbet are found using
@@ -6261,42 +7379,47 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     ym->size[0] = 1;
     ym->size[1] = Y->size[0];
     emxEnsureCapacity_real_T(ym, i);
+    ym_data = ym->data;
     loop_ub = Y->size[0] - 1;
     for (i = 0; i <= loop_ub; i++) {
-      ym->data[i] = (double)i + 1.0;
+      ym_data[i] = (double)i + 1.0;
     }
   }
   emxInit_real_T(&seq, 1);
   i = seq->size[0];
   seq->size[0] = ym->size[1];
   emxEnsureCapacity_real_T(seq, i);
+  seq_data = seq->data;
   loop_ub = ym->size[1];
   for (i = 0; i < loop_ub; i++) {
-    seq->data[i] = ym->data[i];
+    seq_data[i] = ym_data[i];
   }
-  memset(&unitadd[0], 0, 10U * sizeof(double));
-  memset(&bsbradd[0], 0, 10U * sizeof(double));
-  emxInit_boolean_T(&bsbT, 1);
+  for (b_i = 0; b_i < 10; b_i++) {
+    unitadd[b_i] = 0;
+    bsbradd[b_i] = 0;
+  }
   /*  Initialization of the n x 1 Boolean vector which contains a true in */
   /*  correspondence of the units belonging to subset in each step */
   i = bsbT->size[0];
   bsbT->size[0] = Y->size[0];
   emxEnsureCapacity_boolean_T(bsbT, i);
+  bsbT_data = bsbT->data;
   loop_ub = Y->size[0];
   for (i = 0; i < loop_ub; i++) {
-    bsbT->data[i] = false;
+    bsbT_data[i] = false;
   }
   emxInit_int32_T(&r1, 1);
   i = r1->size[0];
   r1->size[0] = bsb->size[0];
   emxEnsureCapacity_int32_T(r1, i);
+  r2 = r1->data;
   loop_ub = bsb->size[0];
   for (i = 0; i < loop_ub; i++) {
-    r1->data[i] = (int)bsb->data[i];
+    r2[i] = (int)bsb_data[i];
   }
   loop_ub = r1->size[0];
   for (i = 0; i < loop_ub; i++) {
-    bsbT->data[r1->data[i] - 1] = true;
+    bsbT_data[r2[i] - 1] = true;
   }
   emxInit_real_T(&S, 2);
   /*  Initialization for Matlab coder */
@@ -6305,58 +7428,65 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   S->size[0] = Y->size[1];
   S->size[1] = Y->size[1];
   emxEnsureCapacity_real_T(S, i);
+  S_data = S->data;
   loop_ub = Y->size[1] * Y->size[1];
   for (i = 0; i < loop_ub; i++) {
-    S->data[i] = 0.0;
+    S_data[i] = 0.0;
   }
   emxInit_real_T(&meoldbsb, 2);
   i = meoldbsb->size[0] * meoldbsb->size[1];
   meoldbsb->size[0] = 1;
   meoldbsb->size[1] = Y->size[1];
   emxEnsureCapacity_real_T(meoldbsb, i);
+  meoldbsb_data = meoldbsb->data;
   loop_ub = Y->size[1];
   for (i = 0; i < loop_ub; i++) {
-    meoldbsb->data[i] = 0.0;
+    meoldbsb_data[i] = 0.0;
   }
   emxInit_boolean_T(&oldbsbT, 1);
   i = oldbsbT->size[0];
   oldbsbT->size[0] = bsbT->size[0];
   emxEnsureCapacity_boolean_T(oldbsbT, i);
+  oldbsbT_data = oldbsbT->data;
   loop_ub = bsbT->size[0];
   for (i = 0; i < loop_ub; i++) {
-    oldbsbT->data[i] = bsbT->data[i];
+    oldbsbT_data[i] = bsbT_data[i];
   }
-  emxInit_real_T(&bsbr, 1);
+  emxInit_int32_T(&bsbr, 1);
   i = bsbr->size[0];
   bsbr->size[0] = Y->size[0];
-  emxEnsureCapacity_real_T(bsbr, i);
+  emxEnsureCapacity_int32_T(bsbr, i);
+  bsbr_data = bsbr->data;
   loop_ub = Y->size[0];
   for (i = 0; i < loop_ub; i++) {
-    bsbr->data[i] = 0.0;
+    bsbr_data[i] = 0;
   }
   emxInit_real_T(&unitout, 1);
   i = unitout->size[0];
   unitout->size[0] = Y->size[0];
   emxEnsureCapacity_real_T(unitout, i);
+  unitout_data = unitout->data;
   loop_ub = Y->size[0];
   for (i = 0; i < loop_ub; i++) {
-    unitout->data[i] = 0.0;
+    unitout_data[i] = 0.0;
   }
   emxInit_boolean_T(&bsbriniT, 1);
   i = bsbriniT->size[0];
   bsbriniT->size[0] = bsbT->size[0];
   emxEnsureCapacity_boolean_T(bsbriniT, i);
+  bsbriniT_data = bsbriniT->data;
   loop_ub = bsbT->size[0];
   for (i = 0; i < loop_ub; i++) {
-    bsbriniT->data[i] = bsbT->data[i];
+    bsbriniT_data[i] = bsbT_data[i];
   }
   emxInit_uint32_T(&bsbrini, 1);
   i = bsbrini->size[0];
   bsbrini->size[0] = Y->size[0];
   emxEnsureCapacity_uint32_T(bsbrini, i);
+  bsbrini_data = bsbrini->data;
   loop_ub = Y->size[0];
   for (i = 0; i < loop_ub; i++) {
-    bsbrini->data[i] = 0U;
+    bsbrini_data[i] = 0U;
   }
   ini0 = bsb->size[0];
   /*  check init */
@@ -6381,7 +7511,8 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     ym->size[0] = 1;
     ym->size[1] = 1;
     emxEnsureCapacity_real_T(ym, i);
-    ym->data[0] = rtNaN;
+    ym_data = ym->data;
+    ym_data[0] = rtNaN;
   } else if (Y->size[0] < init1 + 1.0) {
     ym->size[0] = 1;
     ym->size[1] = 0;
@@ -6390,49 +7521,56 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     ym->size[0] = 1;
     ym->size[1] = 1;
     emxEnsureCapacity_real_T(ym, i);
-    ym->data[0] = rtNaN;
+    ym_data = ym->data;
+    ym_data[0] = rtNaN;
   } else if (floor(init1 + 1.0) == init1 + 1.0) {
     i = ym->size[0] * ym->size[1];
     ym->size[0] = 1;
     ym->size[1] = (int)floor((double)Y->size[0] - (init1 + 1.0)) + 1;
     emxEnsureCapacity_real_T(ym, i);
+    ym_data = ym->data;
     loop_ub = (int)floor((double)Y->size[0] - (init1 + 1.0));
     for (i = 0; i <= loop_ub; i++) {
-      ym->data[i] = (init1 + 1.0) + (double)i;
+      ym_data[i] = (init1 + 1.0) + (double)i;
     }
   } else {
     eml_float_colon(init1 + 1.0, Y->size[0], ym);
+    ym_data = ym->data;
   }
   emxInit_real_T(&Szi, 1);
   irank = (int)((double)Y->size[0] - init1);
   i = Szi->size[0];
   Szi->size[0] = ym->size[1];
   emxEnsureCapacity_real_T(Szi, i);
+  Szi_data = Szi->data;
   loop_ub = ym->size[1];
   for (i = 0; i < loop_ub; i++) {
-    Szi->data[i] = ym->data[i];
-  }
-  emxInit_real_T(&r2, 2);
-  i = r2->size[0] * r2->size[1];
-  r2->size[0] = irank;
-  r2->size[1] = 10;
-  emxEnsureCapacity_real_T(r2, i);
-  loop_ub = irank * 10;
-  for (i = 0; i < loop_ub; i++) {
-    r2->data[i] = rtNaN;
+    Szi_data[i] = ym_data[i];
   }
   emxInit_real_T(&r3, 2);
-  cat(Szi, r2, r3);
+  i = r3->size[0] * r3->size[1];
+  r3->size[0] = irank;
+  r3->size[1] = 10;
+  emxEnsureCapacity_real_T(r3, i);
+  MD_data = r3->data;
+  loop_ub = irank * 10;
+  for (i = 0; i < loop_ub; i++) {
+    MD_data[i] = rtNaN;
+  }
+  emxInit_real_T(&r4, 2);
+  cat(Szi, r3, r4);
+  MD_data = r4->data;
   i = Un->size[0] * Un->size[1];
-  Un->size[0] = r3->size[0];
+  Un->size[0] = r4->size[0];
   Un->size[1] = 11;
   emxEnsureCapacity_real_T(Un, i);
-  loop_ub = r3->size[0] * 11;
-  emxFree_real_T(&r2);
-  for (i = 0; i < loop_ub; i++) {
-    Un->data[i] = r3->data[i];
-  }
+  Un_data = Un->data;
+  loop_ub = r4->size[0] * 11;
   emxFree_real_T(&r3);
+  for (i = 0; i < loop_ub; i++) {
+    Un_data[i] = MD_data[i];
+  }
+  emxFree_real_T(&r4);
   /*   mmd has two columns */
   /*   1st col = dimension of the subset */
   /*   2nd col min. Mahalanobis distances among the units */
@@ -6442,7 +7580,8 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     ym->size[0] = 1;
     ym->size[1] = 1;
     emxEnsureCapacity_real_T(ym, i);
-    ym->data[0] = rtNaN;
+    ym_data = ym->data;
+    ym_data[0] = rtNaN;
   } else if ((double)Y->size[0] - 1.0 < init1) {
     ym->size[0] = 1;
     ym->size[1] = 0;
@@ -6451,48 +7590,54 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     ym->size[0] = 1;
     ym->size[1] = 1;
     emxEnsureCapacity_real_T(ym, i);
-    ym->data[0] = rtNaN;
+    ym_data = ym->data;
+    ym_data[0] = rtNaN;
   } else if (floor(init1) == init1) {
     i = ym->size[0] * ym->size[1];
     ym->size[0] = 1;
     ym->size[1] = (int)(((double)Y->size[0] - 1.0) - init1) + 1;
     emxEnsureCapacity_real_T(ym, i);
+    ym_data = ym->data;
     loop_ub = (int)(((double)Y->size[0] - 1.0) - init1);
     for (i = 0; i <= loop_ub; i++) {
-      ym->data[i] = init1 + (double)i;
+      ym_data[i] = init1 + (double)i;
     }
   } else {
     eml_float_colon(init1, (double)Y->size[0] - 1.0, ym);
+    ym_data = ym->data;
   }
   i = Szi->size[0];
   Szi->size[0] = (int)((double)Y->size[0] - init1);
   emxEnsureCapacity_real_T(Szi, i);
+  Szi_data = Szi->data;
   loop_ub = (int)((double)Y->size[0] - init1);
   for (i = 0; i < loop_ub; i++) {
-    Szi->data[i] = 0.0;
+    Szi_data[i] = 0.0;
   }
   i = mmd->size[0] * mmd->size[1];
   mmd->size[0] = ym->size[1];
   mmd->size[1] = 2;
   emxEnsureCapacity_real_T(mmd, i);
+  mmd_data = mmd->data;
   loop_ub = ym->size[1];
   for (i = 0; i < loop_ub; i++) {
-    mmd->data[i] = ym->data[i];
+    mmd_data[i] = ym_data[i];
   }
   loop_ub = Szi->size[0];
   for (i = 0; i < loop_ub; i++) {
-    mmd->data[i + mmd->size[0]] = 0.0;
+    mmd_data[i + mmd->size[0]] = 0.0;
   }
-  emxInit_real_T(&unit, 1);
+  emxInit_int32_T(&unit, 1);
   /*  unit is the vector which will contain the units which enter subset at each
    */
   /*  step. It is initialized as a vector of zeros */
   i = unit->size[0];
   unit->size[0] = bsb->size[0];
-  emxEnsureCapacity_real_T(unit, i);
+  emxEnsureCapacity_int32_T(unit, i);
+  unit_data = unit->data;
   loop_ub = bsb->size[0];
   for (i = 0; i < loop_ub; i++) {
-    unit->data[i] = 0.0;
+    unit_data[i] = 0;
   }
   lunit = bsb->size[0];
   /*  If the subset Y(bsb,:) is not full rank or a column is constant, then we
@@ -6503,29 +7648,32 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
   Yb->size[0] = bsb->size[0];
   Yb->size[1] = Y->size[1];
   emxEnsureCapacity_real_T(Yb, i);
+  S_data = Yb->data;
   for (i = 0; i < loop_ub; i++) {
     b_loop_ub = bsb->size[0];
     for (end = 0; end < b_loop_ub; end++) {
-      Yb->data[end + Yb->size[0] * i] =
-          Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
+      S_data[end + Yb->size[0] * i] =
+          Y_data[((int)bsb_data[end] + Y->size[0] * i) - 1];
     }
   }
   irank = local_rank(Yb);
   emxInit_real_T(&Ym, 2);
+  emxInit_boolean_T(&unitoutT, 1);
   emxInit_real_T(&mi, 2);
   emxInit_real_T(&mibsbr, 2);
   emxInit_real_T(&zi, 2);
   emxInit_real_T(&MD, 1);
   emxInit_real_T(&R, 2);
   emxInit_boolean_T(&MDltminbsb, 1);
-  emxInit_int32_T(&r4, 1);
   emxInit_int32_T(&r5, 1);
   emxInit_int32_T(&r6, 1);
   emxInit_int32_T(&r7, 1);
   emxInit_int32_T(&r8, 1);
   emxInit_int32_T(&r9, 1);
   emxInit_int32_T(&r10, 1);
+  emxInit_int32_T(&r11, 1);
   emxInit_real_T(&b_Ym, 2);
+  emxInit_boolean_T(&b_bsbT, 1);
   guard1 = false;
   if (irank < v) {
     guard1 = true;
@@ -6535,36 +7683,60 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     Yb->size[0] = bsb->size[0];
     Yb->size[1] = Y->size[1];
     emxEnsureCapacity_real_T(Yb, i);
+    S_data = Yb->data;
     for (i = 0; i < loop_ub; i++) {
       b_loop_ub = bsb->size[0];
       for (end = 0; end < b_loop_ub; end++) {
-        Yb->data[end + Yb->size[0] * i] =
-            Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
+        S_data[end + Yb->size[0] * i] =
+            Y_data[((int)bsb_data[end] + Y->size[0] * i) - 1];
       }
     }
     maximum(Yb, ym);
+    ym_data = ym->data;
     loop_ub = Y->size[1];
     i = Yb->size[0] * Yb->size[1];
     Yb->size[0] = bsb->size[0];
     Yb->size[1] = Y->size[1];
     emxEnsureCapacity_real_T(Yb, i);
+    S_data = Yb->data;
     for (i = 0; i < loop_ub; i++) {
       b_loop_ub = bsb->size[0];
       for (end = 0; end < b_loop_ub; end++) {
-        Yb->data[end + Yb->size[0] * i] =
-            Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
+        S_data[end + Yb->size[0] * i] =
+            Y_data[((int)bsb_data[end] + Y->size[0] * i) - 1];
       }
     }
     minimum(Yb, mibsbr);
+    mibsbr_data = mibsbr->data;
     i = mi->size[0] * mi->size[1];
     mi->size[0] = 1;
-    mi->size[1] = ym->size[1];
-    emxEnsureCapacity_real_T(mi, i);
-    loop_ub = ym->size[1];
-    for (i = 0; i < loop_ub; i++) {
-      mi->data[i] = ym->data[i] - mibsbr->data[i];
+    if (mibsbr->size[1] == 1) {
+      mi->size[1] = ym->size[1];
+    } else {
+      mi->size[1] = mibsbr->size[1];
     }
-    if (c_minimum(mi) == 0.0) {
+    emxEnsureCapacity_real_T(mi, i);
+    mi_data = mi->data;
+    irank = (ym->size[1] != 1);
+    nwhile = (mibsbr->size[1] != 1);
+    if (mibsbr->size[1] == 1) {
+      loop_ub = ym->size[1];
+    } else {
+      loop_ub = mibsbr->size[1];
+    }
+    for (i = 0; i < loop_ub; i++) {
+      mi_data[i] = ym_data[i * irank] - mibsbr_data[i * nwhile];
+    }
+    i = ym->size[0] * ym->size[1];
+    ym->size[0] = 1;
+    ym->size[1] = mi->size[1];
+    emxEnsureCapacity_real_T(ym, i);
+    ym_data = ym->data;
+    loop_ub = mi->size[1];
+    for (i = 0; i < loop_ub; i++) {
+      ym_data[i] = mi_data[i];
+    }
+    if (c_minimum(ym) == 0.0) {
       guard1 = true;
     } else {
       /*  ij = index which is linked with the columns of matrix BB. During the
@@ -6582,41 +7754,44 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           Yb->size[0] = bsb->size[0];
           Yb->size[1] = Y->size[1];
           emxEnsureCapacity_real_T(Yb, i);
+          S_data = Yb->data;
           for (i = 0; i < loop_ub; i++) {
             b_loop_ub = bsb->size[0];
             for (end = 0; end < b_loop_ub; end++) {
-              Yb->data[end + Yb->size[0] * i] =
-                  Y->data[((int)bsb->data[end] + Y->size[0] * i) - 1];
+              S_data[end + Yb->size[0] * i] =
+                  Y_data[((int)bsb_data[end] + Y->size[0] * i) - 1];
             }
           }
         } else {
           end = bsbT->size[0] - 1;
           trueCount = 0;
           for (b_i = 0; b_i <= end; b_i++) {
-            if (bsbT->data[b_i]) {
+            if (bsbT_data[b_i]) {
               trueCount++;
             }
           }
-          i = r4->size[0];
-          r4->size[0] = trueCount;
-          emxEnsureCapacity_int32_T(r4, i);
+          i = r5->size[0];
+          r5->size[0] = trueCount;
+          emxEnsureCapacity_int32_T(r5, i);
+          r2 = r5->data;
           b_loop_ub = 0;
           for (b_i = 0; b_i <= end; b_i++) {
-            if (bsbT->data[b_i]) {
-              r4->data[b_loop_ub] = b_i + 1;
+            if (bsbT_data[b_i]) {
+              r2[b_loop_ub] = b_i + 1;
               b_loop_ub++;
             }
           }
           loop_ub = Y->size[1];
           i = Yb->size[0] * Yb->size[1];
-          Yb->size[0] = r4->size[0];
+          Yb->size[0] = r5->size[0];
           Yb->size[1] = Y->size[1];
           emxEnsureCapacity_real_T(Yb, i);
+          S_data = Yb->data;
           for (i = 0; i < loop_ub; i++) {
-            b_loop_ub = r4->size[0];
+            b_loop_ub = r5->size[0];
             for (end = 0; end < b_loop_ub; end++) {
-              Yb->data[end + Yb->size[0] * i] =
-                  Y->data[(r4->data[end] + Y->size[0] * i) - 1];
+              S_data[end + Yb->size[0] * i] =
+                  Y_data[(r2[end] + Y->size[0] * i) - 1];
             }
           }
         }
@@ -6627,14 +7802,16 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
         i = ym->size[0] * ym->size[1];
         ym->size[0] = 1;
         emxEnsureCapacity_real_T(ym, i);
+        ym_data = ym->data;
         loop_ub = ym->size[1] - 1;
         for (i = 0; i <= loop_ub; i++) {
-          ym->data[i] /= b_mm;
+          ym_data[i] /= b_mm;
         }
         /*  Ym = n-by-v matrix containing deviations from the means computed */
         /*  using units forming subset */
         /*  Ym=Y-one*ym; */
         bsxfun(Y, ym, Ym);
+        Ym_data = Ym->data;
         b_guard1 = false;
         if (b_mm - (double)lunit > (double)v + 1.0) {
           /*  Find new S */
@@ -6650,27 +7827,34 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             /*  Given that \not A intersect \not B = \not (A U B) */
             if ((b_mm > percn) || (rankgap > 10.0)) {
               /*  unitoutT=~(~oldbsbT | bsbT); */
-              i = MDltminT->size[0];
-              MDltminT->size[0] = bsbT->size[0];
-              emxEnsureCapacity_boolean_T(MDltminT, i);
-              loop_ub = bsbT->size[0];
-              for (i = 0; i < loop_ub; i++) {
-                MDltminT->data[i] = !bsbT->data[i];
+              if (oldbsbT->size[0] == bsbT->size[0]) {
+                i = unitoutT->size[0];
+                unitoutT->size[0] = oldbsbT->size[0];
+                emxEnsureCapacity_boolean_T(unitoutT, i);
+                unitoutT_data = unitoutT->data;
+                loop_ub = oldbsbT->size[0];
+                for (i = 0; i < loop_ub; i++) {
+                  unitoutT_data[i] = (oldbsbT_data[i] && (!bsbT_data[i]));
+                }
+              } else {
+                t_binary_expand_op(unitoutT, oldbsbT, bsbT);
+                unitoutT_data = unitoutT->data;
               }
-              end = oldbsbT->size[0] - 1;
+              end = unitoutT->size[0] - 1;
               trueCount = 0;
               for (b_i = 0; b_i <= end; b_i++) {
-                if (oldbsbT->data[b_i] && MDltminT->data[b_i]) {
+                if (unitoutT_data[b_i]) {
                   trueCount++;
                 }
               }
               i = unitout->size[0];
               unitout->size[0] = trueCount;
               emxEnsureCapacity_real_T(unitout, i);
+              unitout_data = unitout->data;
               b_loop_ub = 0;
               for (b_i = 0; b_i <= end; b_i++) {
-                if (oldbsbT->data[b_i] && MDltminT->data[b_i]) {
-                  unitout->data[b_loop_ub] = seq->data[b_i];
+                if (unitoutT_data[b_i]) {
+                  unitout_data[b_loop_ub] = seq_data[b_i];
                   b_loop_ub++;
                 }
               }
@@ -6681,20 +7865,22 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             Yb->size[0] = unitout->size[0];
             Yb->size[1] = Y->size[1];
             emxEnsureCapacity_real_T(Yb, i);
+            S_data = Yb->data;
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = unitout->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                Yb->data[end + Yb->size[0] * i] =
-                    Y->data[((int)unitout->data[end] + Y->size[0] * i) - 1];
+                S_data[end + Yb->size[0] * i] =
+                    Y_data[((int)unitout_data[end] + Y->size[0] * i) - 1];
               }
             }
             combineVectorElements(Yb, mi);
             i = mi->size[0] * mi->size[1];
             mi->size[0] = 1;
             emxEnsureCapacity_real_T(mi, i);
+            mi_data = mi->data;
             loop_ub = mi->size[1] - 1;
             for (i = 0; i <= loop_ub; i++) {
-              mi->data[i] /= (double)unitout->size[0];
+              mi_data[i] /= (double)unitout->size[0];
             }
             /*  bsbr units which remained in subset */
             /*  old inefficient code */
@@ -6707,43 +7893,59 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             if ((b_mm > percn) || (rankgap > 10.0)) {
               /*  oldbsbT = units which were in previous subset */
               /*  bsbT = units which are in current subset */
-              end = oldbsbT->size[0] - 1;
+              if (oldbsbT->size[0] == bsbT->size[0]) {
+                i = unitoutT->size[0];
+                unitoutT->size[0] = oldbsbT->size[0];
+                emxEnsureCapacity_boolean_T(unitoutT, i);
+                unitoutT_data = unitoutT->data;
+                loop_ub = oldbsbT->size[0];
+                for (i = 0; i < loop_ub; i++) {
+                  unitoutT_data[i] = (oldbsbT_data[i] && bsbT_data[i]);
+                }
+              } else {
+                and(unitoutT, oldbsbT, bsbT);
+                unitoutT_data = unitoutT->data;
+              }
+              end = unitoutT->size[0] - 1;
               trueCount = 0;
               for (b_i = 0; b_i <= end; b_i++) {
-                if (oldbsbT->data[b_i] && bsbT->data[b_i]) {
+                if (unitoutT_data[b_i]) {
                   trueCount++;
                 }
               }
-              i = r8->size[0];
-              r8->size[0] = trueCount;
-              emxEnsureCapacity_int32_T(r8, i);
+              i = r9->size[0];
+              r9->size[0] = trueCount;
+              emxEnsureCapacity_int32_T(r9, i);
+              r2 = r9->data;
               b_loop_ub = 0;
               for (b_i = 0; b_i <= end; b_i++) {
-                if (oldbsbT->data[b_i] && bsbT->data[b_i]) {
-                  r8->data[b_loop_ub] = b_i + 1;
+                if (unitoutT_data[b_i]) {
+                  r2[b_loop_ub] = b_i + 1;
                   b_loop_ub++;
                 }
               }
               loop_ub = Y->size[1];
               i = Yb->size[0] * Yb->size[1];
-              Yb->size[0] = r8->size[0];
+              Yb->size[0] = r9->size[0];
               Yb->size[1] = Y->size[1];
               emxEnsureCapacity_real_T(Yb, i);
+              S_data = Yb->data;
               for (i = 0; i < loop_ub; i++) {
-                b_loop_ub = r8->size[0];
+                b_loop_ub = r9->size[0];
                 for (end = 0; end < b_loop_ub; end++) {
-                  Yb->data[end + Yb->size[0] * i] =
-                      Y->data[(r8->data[end] + Y->size[0] * i) - 1];
+                  S_data[end + Yb->size[0] * i] =
+                      Y_data[(r2[end] + Y->size[0] * i) - 1];
                 }
               }
               combineVectorElements(Yb, mibsbr);
               i = mibsbr->size[0] * mibsbr->size[1];
               mibsbr->size[0] = 1;
               emxEnsureCapacity_real_T(mibsbr, i);
+              mibsbr_data = mibsbr->data;
               ksor = (b_mm - 1.0) - (double)unitout->size[0];
               loop_ub = mibsbr->size[1] - 1;
               for (i = 0; i <= loop_ub; i++) {
-                mibsbr->data[i] /= ksor;
+                mibsbr_data[i] /= ksor;
               }
             } else {
               loop_ub = Y->size[1];
@@ -6751,85 +7953,149 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               Yb->size[0] = bsbr->size[0];
               Yb->size[1] = Y->size[1];
               emxEnsureCapacity_real_T(Yb, i);
+              S_data = Yb->data;
               for (i = 0; i < loop_ub; i++) {
                 b_loop_ub = bsbr->size[0];
                 for (end = 0; end < b_loop_ub; end++) {
-                  Yb->data[end + Yb->size[0] * i] =
-                      Y->data[((int)bsbr->data[end] + Y->size[0] * i) - 1];
+                  S_data[end + Yb->size[0] * i] =
+                      Y_data[(bsbr_data[end] + Y->size[0] * i) - 1];
                 }
               }
               combineVectorElements(Yb, mibsbr);
               i = mibsbr->size[0] * mibsbr->size[1];
               mibsbr->size[0] = 1;
               emxEnsureCapacity_real_T(mibsbr, i);
+              mibsbr_data = mibsbr->data;
               ksor = (b_mm - 1.0) - (double)unitout->size[0];
               loop_ub = mibsbr->size[1] - 1;
               for (i = 0; i <= loop_ub; i++) {
-                mibsbr->data[i] /= ksor;
+                mibsbr_data[i] /= ksor;
               }
             }
             ksor =
                 sqrt((double)unitout->size[0] *
                      ((b_mm - 1.0) - (double)unitout->size[0]) / (b_mm - 1.0));
-            i = zi->size[0] * zi->size[1];
-            zi->size[0] = 1;
-            zi->size[1] = mi->size[1];
-            emxEnsureCapacity_real_T(zi, i);
-            loop_ub = mi->size[1];
-            for (i = 0; i < loop_ub; i++) {
-              zi->data[i] = ksor * (mi->data[i] - mibsbr->data[i]);
+            if (mi->size[1] == mibsbr->size[1]) {
+              i = zi->size[0] * zi->size[1];
+              zi->size[0] = 1;
+              zi->size[1] = mi->size[1];
+              emxEnsureCapacity_real_T(zi, i);
+              MD_data = zi->data;
+              loop_ub = mi->size[1];
+              for (i = 0; i < loop_ub; i++) {
+                MD_data[i] = ksor * (mi_data[i] - mibsbr_data[i]);
+              }
+            } else {
+              s_binary_expand_op(zi, ksor, mi, mibsbr);
+              MD_data = zi->data;
             }
             mtimes(S, zi, Szi);
+            Szi_data = Szi->data;
             /*  S=S+(S*(zi')*zi*S)/(1-zi*S*(zi')); */
             ksor = 0.0;
             loop_ub = zi->size[1];
             for (i = 0; i < loop_ub; i++) {
-              ksor += zi->data[i] * Szi->data[i];
+              ksor += MD_data[i] * Szi_data[i];
             }
-            i = S->size[0] * S->size[1];
-            S->size[0] = Szi->size[0];
-            S->size[1] = Szi->size[0];
-            emxEnsureCapacity_real_T(S, i);
+            i = r->size[0] * r->size[1];
+            r->size[0] = Szi->size[0];
+            r->size[1] = Szi->size[0];
+            emxEnsureCapacity_real_T(r, i);
+            MD_data = r->data;
             loop_ub = Szi->size[0];
+            i = Yb->size[0] * Yb->size[1];
+            Yb->size[0] = Szi->size[0];
+            Yb->size[1] = Szi->size[0];
+            emxEnsureCapacity_real_T(Yb, i);
+            S_data = Yb->data;
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = Szi->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                S->data[end + S->size[0] * i] +=
-                    Szi->data[end] * Szi->data[i] / (1.0 - ksor);
+                d = Szi_data[end] * Szi_data[i];
+                MD_data[end + r->size[0] * i] = d;
+                S_data[end + Yb->size[0] * i] = d;
               }
+            }
+            if ((S->size[0] == r->size[0]) && (S->size[1] == Yb->size[1])) {
+              i = S->size[0] * S->size[1];
+              S->size[0] = Szi->size[0];
+              S->size[1] = Szi->size[0];
+              emxEnsureCapacity_real_T(S, i);
+              S_data = S->data;
+              loop_ub = Szi->size[0];
+              for (i = 0; i < loop_ub; i++) {
+                b_loop_ub = Szi->size[0];
+                for (end = 0; end < b_loop_ub; end++) {
+                  S_data[end + S->size[0] * i] +=
+                      Szi_data[end] * Szi_data[i] / (1.0 - ksor);
+                }
+              }
+            } else {
+              n_binary_expand_op(S, Szi, ksor);
             }
             if (unitout->size[0] > 1) {
               i = unitout->size[0];
               for (b_i = 0; b_i < i; b_i++) {
                 loop_ub = Y->size[1];
-                end = zi->size[0] * zi->size[1];
-                zi->size[0] = 1;
-                zi->size[1] = Y->size[1];
-                emxEnsureCapacity_real_T(zi, end);
-                for (end = 0; end < loop_ub; end++) {
-                  zi->data[end] =
-                      Y->data[((int)unitout->data[b_i] + Y->size[0] * end) -
-                              1] -
-                      mi->data[end];
+                if (Y->size[1] == mi->size[1]) {
+                  end = zi->size[0] * zi->size[1];
+                  zi->size[0] = 1;
+                  zi->size[1] = Y->size[1];
+                  emxEnsureCapacity_real_T(zi, end);
+                  MD_data = zi->data;
+                  for (end = 0; end < loop_ub; end++) {
+                    MD_data[end] =
+                        Y_data[((int)unitout_data[b_i] + Y->size[0] * end) -
+                               1] -
+                        mi_data[end];
+                  }
+                } else {
+                  o_binary_expand_op(zi, Y, unitout, b_i, mi);
+                  MD_data = zi->data;
                 }
                 mtimes(S, zi, Szi);
+                Szi_data = Szi->data;
                 /*  S=S+(S*(zi')*zi*S)/(1-zi*S*(zi')); */
                 ksor = 0.0;
                 loop_ub = zi->size[1];
                 for (end = 0; end < loop_ub; end++) {
-                  ksor += zi->data[end] * Szi->data[end];
+                  ksor += MD_data[end] * Szi_data[end];
                 }
-                end = S->size[0] * S->size[1];
-                S->size[0] = Szi->size[0];
-                S->size[1] = Szi->size[0];
-                emxEnsureCapacity_real_T(S, end);
+                end = r->size[0] * r->size[1];
+                r->size[0] = Szi->size[0];
+                r->size[1] = Szi->size[0];
+                emxEnsureCapacity_real_T(r, end);
+                MD_data = r->data;
                 loop_ub = Szi->size[0];
+                end = Yb->size[0] * Yb->size[1];
+                Yb->size[0] = Szi->size[0];
+                Yb->size[1] = Szi->size[0];
+                emxEnsureCapacity_real_T(Yb, end);
+                S_data = Yb->data;
                 for (end = 0; end < loop_ub; end++) {
                   b_loop_ub = Szi->size[0];
                   for (nwhile = 0; nwhile < b_loop_ub; nwhile++) {
-                    S->data[nwhile + S->size[0] * end] +=
-                        Szi->data[nwhile] * Szi->data[end] / (1.0 - ksor);
+                    d = Szi_data[nwhile] * Szi_data[end];
+                    MD_data[nwhile + r->size[0] * end] = d;
+                    S_data[nwhile + Yb->size[0] * end] = d;
                   }
+                }
+                if ((S->size[0] == r->size[0]) && (S->size[1] == Yb->size[1])) {
+                  end = S->size[0] * S->size[1];
+                  S->size[0] = Szi->size[0];
+                  S->size[1] = Szi->size[0];
+                  emxEnsureCapacity_real_T(S, end);
+                  S_data = S->data;
+                  loop_ub = Szi->size[0];
+                  for (end = 0; end < loop_ub; end++) {
+                    b_loop_ub = Szi->size[0];
+                    for (nwhile = 0; nwhile < b_loop_ub; nwhile++) {
+                      S_data[nwhile + S->size[0] * end] +=
+                          Szi_data[nwhile] * Szi_data[end] / (1.0 - ksor);
+                    }
+                  }
+                } else {
+                  n_binary_expand_op(S, Szi, ksor);
                 }
               }
             }
@@ -6839,9 +8105,10 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             mibsbr->size[0] = 1;
             mibsbr->size[1] = meoldbsb->size[1];
             emxEnsureCapacity_real_T(mibsbr, i);
+            mibsbr_data = mibsbr->data;
             loop_ub = meoldbsb->size[1];
             for (i = 0; i < loop_ub; i++) {
-              mibsbr->data[i] = meoldbsb->data[i];
+              mibsbr_data[i] = meoldbsb_data[i];
             }
           }
           /*  mi = mean of units entering subset */
@@ -6850,82 +8117,145 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           Yb->size[0] = unit->size[0];
           Yb->size[1] = Y->size[1];
           emxEnsureCapacity_real_T(Yb, i);
+          S_data = Yb->data;
           for (i = 0; i < loop_ub; i++) {
             b_loop_ub = unit->size[0];
             for (end = 0; end < b_loop_ub; end++) {
-              Yb->data[end + Yb->size[0] * i] =
-                  Y->data[((int)unit->data[end] + Y->size[0] * i) - 1];
+              S_data[end + Yb->size[0] * i] =
+                  Y_data[(unit_data[end] + Y->size[0] * i) - 1];
             }
           }
           combineVectorElements(Yb, mi);
           i = mi->size[0] * mi->size[1];
           mi->size[0] = 1;
           emxEnsureCapacity_real_T(mi, i);
+          mi_data = mi->data;
           loop_ub = mi->size[1] - 1;
           for (i = 0; i <= loop_ub; i++) {
-            mi->data[i] /= (double)lunit;
+            mi_data[i] /= (double)lunit;
           }
           /*  zi=sqrt(kin*(mm-1-k)/(mm-1-k+kin))*(mi-mean(Y(bsbr,:),1)); */
           ksor = (b_mm - 1.0) - (double)irank;
           ksor = sqrt((double)lunit * ksor / (ksor + (double)lunit));
-          i = zi->size[0] * zi->size[1];
-          zi->size[0] = 1;
-          zi->size[1] = mi->size[1];
-          emxEnsureCapacity_real_T(zi, i);
-          loop_ub = mi->size[1];
-          for (i = 0; i < loop_ub; i++) {
-            zi->data[i] = ksor * (mi->data[i] - mibsbr->data[i]);
+          if (mi->size[1] == mibsbr->size[1]) {
+            i = zi->size[0] * zi->size[1];
+            zi->size[0] = 1;
+            zi->size[1] = mi->size[1];
+            emxEnsureCapacity_real_T(zi, i);
+            MD_data = zi->data;
+            loop_ub = mi->size[1];
+            for (i = 0; i < loop_ub; i++) {
+              MD_data[i] = ksor * (mi_data[i] - mibsbr_data[i]);
+            }
+          } else {
+            s_binary_expand_op(zi, ksor, mi, mibsbr);
+            MD_data = zi->data;
           }
           mtimes(S, zi, Szi);
+          Szi_data = Szi->data;
           /*  S=S+(S*(zi')*zi*S)/(1-zi*S*(zi')); */
           ksor = 0.0;
           loop_ub = zi->size[1];
           for (i = 0; i < loop_ub; i++) {
-            ksor += zi->data[i] * Szi->data[i];
+            ksor += MD_data[i] * Szi_data[i];
           }
-          i = S->size[0] * S->size[1];
-          S->size[0] = Szi->size[0];
-          S->size[1] = Szi->size[0];
-          emxEnsureCapacity_real_T(S, i);
+          i = r->size[0] * r->size[1];
+          r->size[0] = Szi->size[0];
+          r->size[1] = Szi->size[0];
+          emxEnsureCapacity_real_T(r, i);
+          MD_data = r->data;
           loop_ub = Szi->size[0];
+          i = Yb->size[0] * Yb->size[1];
+          Yb->size[0] = Szi->size[0];
+          Yb->size[1] = Szi->size[0];
+          emxEnsureCapacity_real_T(Yb, i);
+          S_data = Yb->data;
           for (i = 0; i < loop_ub; i++) {
             b_loop_ub = Szi->size[0];
             for (end = 0; end < b_loop_ub; end++) {
-              S->data[end + S->size[0] * i] -=
-                  Szi->data[end] * Szi->data[i] / (ksor + 1.0);
+              d = Szi_data[end] * Szi_data[i];
+              MD_data[end + r->size[0] * i] = d;
+              S_data[end + Yb->size[0] * i] = d;
             }
+          }
+          if ((S->size[0] == r->size[0]) && (S->size[1] == Yb->size[1])) {
+            i = S->size[0] * S->size[1];
+            S->size[0] = Szi->size[0];
+            S->size[1] = Szi->size[0];
+            emxEnsureCapacity_real_T(S, i);
+            S_data = S->data;
+            loop_ub = Szi->size[0];
+            for (i = 0; i < loop_ub; i++) {
+              b_loop_ub = Szi->size[0];
+              for (end = 0; end < b_loop_ub; end++) {
+                S_data[end + S->size[0] * i] -=
+                    Szi_data[end] * Szi_data[i] / (ksor + 1.0);
+              }
+            }
+          } else {
+            p_binary_expand_op(S, Szi, ksor);
           }
           if (lunit > 1) {
             /* mi=mean(Y(unit,:),1); */
             for (b_i = 0; b_i < lunit; b_i++) {
               loop_ub = Y->size[1];
-              i = zi->size[0] * zi->size[1];
-              zi->size[0] = 1;
-              zi->size[1] = Y->size[1];
-              emxEnsureCapacity_real_T(zi, i);
-              for (i = 0; i < loop_ub; i++) {
-                zi->data[i] =
-                    Y->data[((int)unit->data[b_i] + Y->size[0] * i) - 1] -
-                    mi->data[i];
+              if (Y->size[1] == mi->size[1]) {
+                i = zi->size[0] * zi->size[1];
+                zi->size[0] = 1;
+                zi->size[1] = Y->size[1];
+                emxEnsureCapacity_real_T(zi, i);
+                MD_data = zi->data;
+                for (i = 0; i < loop_ub; i++) {
+                  MD_data[i] = Y_data[(unit_data[b_i] + Y->size[0] * i) - 1] -
+                               mi_data[i];
+                }
+              } else {
+                q_binary_expand_op(zi, Y, unit, b_i, mi);
+                MD_data = zi->data;
               }
               mtimes(S, zi, Szi);
+              Szi_data = Szi->data;
               /*  S=S-(S*(zi')*zi*S)/(1+zi*S*(zi')); */
               ksor = 0.0;
               loop_ub = zi->size[1];
               for (i = 0; i < loop_ub; i++) {
-                ksor += zi->data[i] * Szi->data[i];
+                ksor += MD_data[i] * Szi_data[i];
               }
-              i = S->size[0] * S->size[1];
-              S->size[0] = Szi->size[0];
-              S->size[1] = Szi->size[0];
-              emxEnsureCapacity_real_T(S, i);
+              i = r->size[0] * r->size[1];
+              r->size[0] = Szi->size[0];
+              r->size[1] = Szi->size[0];
+              emxEnsureCapacity_real_T(r, i);
+              MD_data = r->data;
               loop_ub = Szi->size[0];
+              i = Yb->size[0] * Yb->size[1];
+              Yb->size[0] = Szi->size[0];
+              Yb->size[1] = Szi->size[0];
+              emxEnsureCapacity_real_T(Yb, i);
+              S_data = Yb->data;
               for (i = 0; i < loop_ub; i++) {
                 b_loop_ub = Szi->size[0];
                 for (end = 0; end < b_loop_ub; end++) {
-                  S->data[end + S->size[0] * i] -=
-                      Szi->data[end] * Szi->data[i] / (ksor + 1.0);
+                  d = Szi_data[end] * Szi_data[i];
+                  MD_data[end + r->size[0] * i] = d;
+                  S_data[end + Yb->size[0] * i] = d;
                 }
+              }
+              if ((S->size[0] == r->size[0]) && (S->size[1] == Yb->size[1])) {
+                i = S->size[0] * S->size[1];
+                S->size[0] = Szi->size[0];
+                S->size[1] = Szi->size[0];
+                emxEnsureCapacity_real_T(S, i);
+                S_data = S->data;
+                loop_ub = Szi->size[0];
+                for (i = 0; i < loop_ub; i++) {
+                  b_loop_ub = Szi->size[0];
+                  for (end = 0; end < b_loop_ub; end++) {
+                    S_data[end + S->size[0] * i] -=
+                        Szi_data[end] * Szi_data[i] / (ksor + 1.0);
+                  }
+                }
+              } else {
+                p_binary_expand_op(S, Szi, ksor);
               }
             }
           }
@@ -6934,26 +8264,35 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
           /*  than .* */
           if (n < 30000) {
             b_mtimes(Ym, S, r);
-            i = Yb->size[0] * Yb->size[1];
-            Yb->size[0] = r->size[0];
-            Yb->size[1] = r->size[1];
-            emxEnsureCapacity_real_T(Yb, i);
-            loop_ub = r->size[0] * r->size[1];
-            for (i = 0; i < loop_ub; i++) {
-              Yb->data[i] = r->data[i] * Ym->data[i];
+            MD_data = r->data;
+            if ((r->size[0] == Ym->size[0]) && (r->size[1] == Ym->size[1])) {
+              i = Yb->size[0] * Yb->size[1];
+              Yb->size[0] = r->size[0];
+              Yb->size[1] = r->size[1];
+              emxEnsureCapacity_real_T(Yb, i);
+              S_data = Yb->data;
+              loop_ub = r->size[0] * r->size[1];
+              for (i = 0; i < loop_ub; i++) {
+                S_data[i] = MD_data[i] * Ym_data[i];
+              }
+              sum(Yb, MD);
+              MD_data = MD->data;
+            } else {
+              binary_expand_op(MD, r, Ym);
+              MD_data = MD->data;
             }
-            sum(Yb, MD);
             loop_ub = MD->size[0];
             for (i = 0; i < loop_ub; i++) {
-              MD->data[i] *= b_mm - 1.0;
+              MD_data[i] *= b_mm - 1.0;
             }
           } else {
             b_mtimes(Ym, S, r);
             b_bsxfun(r, Ym, Yb);
             sum(Yb, MD);
+            MD_data = MD->data;
             loop_ub = MD->size[0];
             for (i = 0; i < loop_ub; i++) {
-              MD->data[i] *= b_mm - 1.0;
+              MD_data[i] *= b_mm - 1.0;
             }
           }
           b_guard1 = true;
@@ -6964,142 +8303,154 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             end = bsbT->size[0] - 1;
             trueCount = 0;
             for (b_i = 0; b_i <= end; b_i++) {
-              if (bsbT->data[b_i]) {
-                trueCount++;
-              }
-            }
-            i = r5->size[0];
-            r5->size[0] = trueCount;
-            emxEnsureCapacity_int32_T(r5, i);
-            b_loop_ub = 0;
-            for (b_i = 0; b_i <= end; b_i++) {
-              if (bsbT->data[b_i]) {
-                r5->data[b_loop_ub] = b_i + 1;
-                b_loop_ub++;
-              }
-            }
-            end = bsbT->size[0] - 1;
-            trueCount = 0;
-            for (b_i = 0; b_i <= end; b_i++) {
-              if (bsbT->data[b_i]) {
+              if (bsbT_data[b_i]) {
                 trueCount++;
               }
             }
             i = r6->size[0];
             r6->size[0] = trueCount;
             emxEnsureCapacity_int32_T(r6, i);
+            r2 = r6->data;
             b_loop_ub = 0;
             for (b_i = 0; b_i <= end; b_i++) {
-              if (bsbT->data[b_i]) {
-                r6->data[b_loop_ub] = b_i + 1;
+              if (bsbT_data[b_i]) {
+                r2[b_loop_ub] = b_i + 1;
                 b_loop_ub++;
               }
             }
-            loop_ub = Ym->size[1];
-            i = b_Ym->size[0] * b_Ym->size[1];
-            b_Ym->size[0] = r5->size[0];
-            b_Ym->size[1] = Ym->size[1];
-            emxEnsureCapacity_real_T(b_Ym, i);
-            i = Yb->size[0] * Yb->size[1];
-            Yb->size[0] = r6->size[0];
-            Yb->size[1] = Ym->size[1];
-            emxEnsureCapacity_real_T(Yb, i);
-            for (i = 0; i < loop_ub; i++) {
-              b_loop_ub = r5->size[0];
-              for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] =
-                    Ym->data[(r5->data[end] + Ym->size[0] * i) - 1];
-              }
-              b_loop_ub = r6->size[0];
-              for (end = 0; end < b_loop_ub; end++) {
-                Yb->data[end + Yb->size[0] * i] =
-                    Ym->data[(r6->data[end] + Ym->size[0] * i) - 1];
-              }
-            }
-            c_mtimes(b_Ym, Yb, r);
-            inv(r, S);
             end = bsbT->size[0] - 1;
             trueCount = 0;
             for (b_i = 0; b_i <= end; b_i++) {
-              if (bsbT->data[b_i]) {
+              if (bsbT_data[b_i]) {
                 trueCount++;
               }
             }
             i = r7->size[0];
             r7->size[0] = trueCount;
             emxEnsureCapacity_int32_T(r7, i);
+            r12 = r7->data;
             b_loop_ub = 0;
             for (b_i = 0; b_i <= end; b_i++) {
-              if (bsbT->data[b_i]) {
-                r7->data[b_loop_ub] = b_i + 1;
+              if (bsbT_data[b_i]) {
+                r12[b_loop_ub] = b_i + 1;
                 b_loop_ub++;
               }
             }
             loop_ub = Ym->size[1];
             i = b_Ym->size[0] * b_Ym->size[1];
-            b_Ym->size[0] = r7->size[0];
+            b_Ym->size[0] = r6->size[0];
             b_Ym->size[1] = Ym->size[1];
             emxEnsureCapacity_real_T(b_Ym, i);
-            for (i = 0; i < loop_ub; i++) {
-              b_loop_ub = r7->size[0];
-              for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] =
-                    Ym->data[(r7->data[end] + Ym->size[0] * i) - 1];
-              }
-            }
-            qr(b_Ym, Yb, R);
-          } else {
-            loop_ub = Ym->size[1];
-            i = b_Ym->size[0] * b_Ym->size[1];
-            b_Ym->size[0] = bsb->size[0];
-            b_Ym->size[1] = Ym->size[1];
-            emxEnsureCapacity_real_T(b_Ym, i);
+            MD_data = b_Ym->data;
             i = Yb->size[0] * Yb->size[1];
-            Yb->size[0] = bsb->size[0];
+            Yb->size[0] = r7->size[0];
             Yb->size[1] = Ym->size[1];
             emxEnsureCapacity_real_T(Yb, i);
+            S_data = Yb->data;
             for (i = 0; i < loop_ub; i++) {
-              b_loop_ub = bsb->size[0];
+              b_loop_ub = r6->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] =
-                    Ym->data[((int)bsb->data[end] + Ym->size[0] * i) - 1];
+                MD_data[end + b_Ym->size[0] * i] =
+                    Ym_data[(r2[end] + Ym->size[0] * i) - 1];
               }
-              b_loop_ub = bsb->size[0];
+              b_loop_ub = r7->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                Yb->data[end + Yb->size[0] * i] =
-                    Ym->data[((int)bsb->data[end] + Ym->size[0] * i) - 1];
+                S_data[end + Yb->size[0] * i] =
+                    Ym_data[(r12[end] + Ym->size[0] * i) - 1];
               }
             }
             c_mtimes(b_Ym, Yb, r);
             inv(r, S);
+            S_data = S->data;
+            end = bsbT->size[0] - 1;
+            trueCount = 0;
+            for (b_i = 0; b_i <= end; b_i++) {
+              if (bsbT_data[b_i]) {
+                trueCount++;
+              }
+            }
+            i = r8->size[0];
+            r8->size[0] = trueCount;
+            emxEnsureCapacity_int32_T(r8, i);
+            r2 = r8->data;
+            b_loop_ub = 0;
+            for (b_i = 0; b_i <= end; b_i++) {
+              if (bsbT_data[b_i]) {
+                r2[b_loop_ub] = b_i + 1;
+                b_loop_ub++;
+              }
+            }
+            loop_ub = Ym->size[1];
+            i = b_Ym->size[0] * b_Ym->size[1];
+            b_Ym->size[0] = r8->size[0];
+            b_Ym->size[1] = Ym->size[1];
+            emxEnsureCapacity_real_T(b_Ym, i);
+            MD_data = b_Ym->data;
+            for (i = 0; i < loop_ub; i++) {
+              b_loop_ub = r8->size[0];
+              for (end = 0; end < b_loop_ub; end++) {
+                MD_data[end + b_Ym->size[0] * i] =
+                    Ym_data[(r2[end] + Ym->size[0] * i) - 1];
+              }
+            }
+            qr(b_Ym, Yb, R);
+          } else {
             loop_ub = Ym->size[1];
             i = b_Ym->size[0] * b_Ym->size[1];
             b_Ym->size[0] = bsb->size[0];
             b_Ym->size[1] = Ym->size[1];
             emxEnsureCapacity_real_T(b_Ym, i);
+            MD_data = b_Ym->data;
+            i = Yb->size[0] * Yb->size[1];
+            Yb->size[0] = bsb->size[0];
+            Yb->size[1] = Ym->size[1];
+            emxEnsureCapacity_real_T(Yb, i);
+            S_data = Yb->data;
             for (i = 0; i < loop_ub; i++) {
               b_loop_ub = bsb->size[0];
               for (end = 0; end < b_loop_ub; end++) {
-                b_Ym->data[end + b_Ym->size[0] * i] =
-                    Ym->data[((int)bsb->data[end] + Ym->size[0] * i) - 1];
+                MD_data[end + b_Ym->size[0] * i] =
+                    Ym_data[((int)bsb_data[end] + Ym->size[0] * i) - 1];
+              }
+              b_loop_ub = bsb->size[0];
+              for (end = 0; end < b_loop_ub; end++) {
+                S_data[end + Yb->size[0] * i] =
+                    Ym_data[((int)bsb_data[end] + Ym->size[0] * i) - 1];
+              }
+            }
+            c_mtimes(b_Ym, Yb, r);
+            inv(r, S);
+            S_data = S->data;
+            loop_ub = Ym->size[1];
+            i = b_Ym->size[0] * b_Ym->size[1];
+            b_Ym->size[0] = bsb->size[0];
+            b_Ym->size[1] = Ym->size[1];
+            emxEnsureCapacity_real_T(b_Ym, i);
+            MD_data = b_Ym->data;
+            for (i = 0; i < loop_ub; i++) {
+              b_loop_ub = bsb->size[0];
+              for (end = 0; end < b_loop_ub; end++) {
+                MD_data[end + b_Ym->size[0] * i] =
+                    Ym_data[((int)bsb_data[end] + Ym->size[0] * i) - 1];
               }
             }
             qr(b_Ym, Yb, R);
           }
-          i = MDltminT->size[0];
-          MDltminT->size[0] = S->size[0] * S->size[1];
-          emxEnsureCapacity_boolean_T(MDltminT, i);
+          i = unitoutT->size[0];
+          unitoutT->size[0] = S->size[0] * S->size[1];
+          emxEnsureCapacity_boolean_T(unitoutT, i);
+          unitoutT_data = unitoutT->data;
           loop_ub = S->size[0] * S->size[1];
           for (i = 0; i < loop_ub; i++) {
-            MDltminT->data[i] = rtIsInf(S->data[i]);
+            unitoutT_data[i] = rtIsInf(S_data[i]);
           }
-          irank = MDltminT->size[0];
-          if (MDltminT->size[0] == 0) {
+          irank = unitoutT->size[0];
+          if (unitoutT->size[0] == 0) {
             nwhile = 0;
           } else {
-            nwhile = MDltminT->data[0];
+            nwhile = unitoutT_data[0];
             for (b_loop_ub = 2; b_loop_ub <= irank; b_loop_ub++) {
-              nwhile += MDltminT->data[b_loop_ub - 1];
+              nwhile += unitoutT_data[b_loop_ub - 1];
             }
           }
           if (nwhile > 0) {
@@ -7107,21 +8458,29 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             mmd->size[0] = 1;
             mmd->size[1] = 1;
             emxEnsureCapacity_real_T(mmd, i);
-            mmd->data[0] = rtNaN;
+            mmd_data = mmd->data;
+            mmd_data[0] = rtNaN;
             i = Un->size[0] * Un->size[1];
             Un->size[0] = 1;
             Un->size[1] = 1;
             emxEnsureCapacity_real_T(Un, i);
-            Un->data[0] = rtNaN;
+            Un_data = Un->data;
+            Un_data[0] = rtNaN;
             exitg1 = true;
           } else {
             /*  Compute squared Mahalanobis distances */
             mrdiv(Ym, R, r);
-            power(r, Yb);
-            sum(Yb, MD);
+            MD_data = r->data;
+            loop_ub = r->size[0] * r->size[1];
+            for (i = 0; i < loop_ub; i++) {
+              ksor = MD_data[i];
+              MD_data[i] = ksor * ksor;
+            }
+            sum(r, MD);
+            MD_data = MD->data;
             loop_ub = MD->size[0];
             for (i = 0; i < loop_ub; i++) {
-              MD->data[i] *= b_mm - 1.0;
+              MD_data[i] *= b_mm - 1.0;
             }
             b_guard1 = true;
           }
@@ -7135,49 +8494,53 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             i = Szi->size[0];
             Szi->size[0] = MD->size[0];
             emxEnsureCapacity_real_T(Szi, i);
+            Szi_data = Szi->data;
             loop_ub = MD->size[0];
             for (i = 0; i < loop_ub; i++) {
-              Szi->data[i] = MD->data[i];
+              Szi_data[i] = MD_data[i];
             }
             if (b_mm > percn) {
               end = bsbT->size[0];
               for (b_i = 0; b_i < end; b_i++) {
-                if (bsbT->data[b_i]) {
-                  Szi->data[b_i] = rtInf;
+                if (bsbT_data[b_i]) {
+                  Szi_data[b_i] = rtInf;
                 }
               }
             } else {
               i = r1->size[0];
               r1->size[0] = bsb->size[0];
               emxEnsureCapacity_int32_T(r1, i);
+              r2 = r1->data;
               loop_ub = bsb->size[0];
               for (i = 0; i < loop_ub; i++) {
-                r1->data[i] = (int)bsb->data[i];
+                r2[i] = (int)bsb_data[i];
               }
               loop_ub = r1->size[0];
               for (i = 0; i < loop_ub; i++) {
-                Szi->data[r1->data[i] - 1] = rtInf;
+                Szi_data[r2[i] - 1] = rtInf;
               }
             }
             /*  oldbsbF=bsbF; */
             i = oldbsbT->size[0];
             oldbsbT->size[0] = bsbT->size[0];
             emxEnsureCapacity_boolean_T(oldbsbT, i);
+            oldbsbT_data = oldbsbT->data;
             loop_ub = bsbT->size[0];
             for (i = 0; i < loop_ub; i++) {
-              oldbsbT->data[i] = bsbT->data[i];
+              oldbsbT_data[i] = bsbT_data[i];
             }
             /*  Take minimum distance of the units not belonging to subset */
             d_minimum(Szi, &minMD, &lunit);
             /*  MDltminT = n x 1 Boolean vector which is true if corresponding
              * MD is */
             /*  smaller or equal minMD */
-            i = MDltminT->size[0];
-            MDltminT->size[0] = MD->size[0];
-            emxEnsureCapacity_boolean_T(MDltminT, i);
+            i = unitoutT->size[0];
+            unitoutT->size[0] = MD->size[0];
+            emxEnsureCapacity_boolean_T(unitoutT, i);
+            unitoutT_data = unitoutT->data;
             loop_ub = MD->size[0];
             for (i = 0; i < loop_ub; i++) {
-              MDltminT->data[i] = (MD->data[i] <= minMD);
+              unitoutT_data[i] = (MD_data[i] <= minMD);
             }
             /*  MDltminbsb = n x 1 Boolean vector (if m>percn) or */
             /*  int32 vector containing the units which certainly remain inside
@@ -7185,20 +8548,27 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             /*  i.e. those which have a true in MDltminT and belong to previous
              * subset */
             if (b_mm > percn) {
-              i = MDltminbsb->size[0];
-              MDltminbsb->size[0] = MDltminT->size[0];
-              emxEnsureCapacity_boolean_T(MDltminbsb, i);
-              loop_ub = MDltminT->size[0];
-              for (i = 0; i < loop_ub; i++) {
-                MDltminbsb->data[i] = (MDltminT->data[i] && bsbT->data[i]);
+              if (unitoutT->size[0] == bsbT->size[0]) {
+                i = MDltminbsb->size[0];
+                MDltminbsb->size[0] = unitoutT->size[0];
+                emxEnsureCapacity_boolean_T(MDltminbsb, i);
+                MDltminbsb_data = MDltminbsb->data;
+                loop_ub = unitoutT->size[0];
+                for (i = 0; i < loop_ub; i++) {
+                  MDltminbsb_data[i] = (unitoutT_data[i] && bsbT_data[i]);
+                }
+              } else {
+                and(MDltminbsb, unitoutT, bsbT);
+                MDltminbsb_data = MDltminbsb->data;
               }
             } else {
               i = MDltminbsb->size[0];
               MDltminbsb->size[0] = bsb->size[0];
               emxEnsureCapacity_boolean_T(MDltminbsb, i);
+              MDltminbsb_data = MDltminbsb->data;
               loop_ub = bsb->size[0];
               for (i = 0; i < loop_ub; i++) {
-                MDltminbsb->data[i] = MDltminT->data[(int)bsb->data[i] - 1];
+                MDltminbsb_data[i] = unitoutT_data[(int)bsb_data[i] - 1];
               }
             }
             /*  Find number of units of old subset which have a MD <= minMD */
@@ -7210,9 +8580,9 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             if (MDltminbsb->size[0] == 0) {
               nwhile = 0;
             } else {
-              nwhile = MDltminbsb->data[0];
+              nwhile = MDltminbsb_data[0];
               for (b_loop_ub = 2; b_loop_ub <= irank; b_loop_ub++) {
-                nwhile += MDltminbsb->data[b_loop_ub - 1];
+                nwhile += MDltminbsb_data[b_loop_ub - 1];
               }
             }
             rankgap = (b_mm + 1.0) - (double)nwhile;
@@ -7220,8 +8590,9 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               /*  Just one new unit entered subset */
               i = unit->size[0];
               unit->size[0] = 1;
-              emxEnsureCapacity_real_T(unit, i);
-              unit->data[0] = lunit;
+              emxEnsureCapacity_int32_T(unit, i);
+              unit_data = unit->data;
+              unit_data[0] = lunit;
               /*  Compute new bsbT and new bsb */
               if (b_mm <= percn) {
                 /*  new bsb is equal to oldbsb plus unit which just entered */
@@ -7229,11 +8600,12 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 end = bsb->size[0];
                 bsb->size[0]++;
                 emxEnsureCapacity_real_T(bsb, end);
-                bsb->data[i] = lunit;
+                bsb_data = bsb->data;
+                bsb_data[i] = lunit;
               }
               /*  bsbT is equal to old bsbT after adding a single true in */
               /*  correspondence of the unit which entered subset */
-              bsbT->data[lunit - 1] = true;
+              bsbT_data[lunit - 1] = true;
             } else if ((rankgap > 1.0) && (rankgap <= 10.0)) {
               /*  MDmod is the vector of Mahalanobis distance which will have */
               /*  a Inf in correspondence of the units of old subset which */
@@ -7241,9 +8613,10 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               i = Szi->size[0];
               Szi->size[0] = MD->size[0];
               emxEnsureCapacity_real_T(Szi, i);
+              Szi_data = Szi->data;
               loop_ub = MD->size[0];
               for (i = 0; i < loop_ub; i++) {
-                Szi->data[i] = MD->data[i];
+                Szi_data[i] = MD_data[i];
               }
               /*  Find bsbrini, i.e. the vector which will contain the */
               /*  units which remain in the subset in the next step */
@@ -7259,17 +8632,18 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 end = bsb->size[0] - 1;
                 trueCount = 0;
                 for (b_i = 0; b_i <= end; b_i++) {
-                  if (MDltminT->data[(int)bsb->data[b_i] - 1]) {
+                  if (unitoutT_data[(int)bsb_data[b_i] - 1]) {
                     trueCount++;
                   }
                 }
                 i = bsbrini->size[0];
                 bsbrini->size[0] = trueCount;
                 emxEnsureCapacity_uint32_T(bsbrini, i);
+                bsbrini_data = bsbrini->data;
                 b_loop_ub = 0;
                 for (b_i = 0; b_i <= end; b_i++) {
-                  if (MDltminT->data[(int)bsb->data[b_i] - 1]) {
-                    bsbrini->data[b_loop_ub] = (unsigned int)bsb->data[b_i];
+                  if (unitoutT_data[(int)bsb_data[b_i] - 1]) {
+                    bsbrini_data[b_loop_ub] = (unsigned int)bsb_data[b_i];
                     b_loop_ub++;
                   }
                 }
@@ -7280,30 +8654,32 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 end = bsb->size[0] - 1;
                 trueCount = 0;
                 for (b_i = 0; b_i <= end; b_i++) {
-                  if (!MDltminT->data[(int)bsb->data[b_i] - 1]) {
+                  if (!unitoutT_data[(int)bsb_data[b_i] - 1]) {
                     trueCount++;
                   }
                 }
                 i = unitout->size[0];
                 unitout->size[0] = trueCount;
                 emxEnsureCapacity_real_T(unitout, i);
+                unitout_data = unitout->data;
                 b_loop_ub = 0;
                 for (b_i = 0; b_i <= end; b_i++) {
-                  if (!MDltminT->data[(int)bsb->data[b_i] - 1]) {
-                    unitout->data[b_loop_ub] = bsb->data[b_i];
+                  if (!unitoutT_data[(int)bsb_data[b_i] - 1]) {
+                    unitout_data[b_loop_ub] = bsb_data[b_i];
                     b_loop_ub++;
                   }
                 }
                 i = r1->size[0];
                 r1->size[0] = bsbrini->size[0];
                 emxEnsureCapacity_int32_T(r1, i);
+                r2 = r1->data;
                 loop_ub = bsbrini->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  r1->data[i] = (int)bsbrini->data[i];
+                  r2[i] = (int)bsbrini_data[i];
                 }
                 loop_ub = r1->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  Szi->data[r1->data[i] - 1] = rtInf;
+                  Szi_data[r2[i] - 1] = rtInf;
                 }
               } else {
                 /*  bsbriniT = Boolean vector which is true if the */
@@ -7314,14 +8690,15 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 i = bsbriniT->size[0];
                 bsbriniT->size[0] = MDltminbsb->size[0];
                 emxEnsureCapacity_boolean_T(bsbriniT, i);
+                bsbriniT_data = bsbriniT->data;
                 loop_ub = MDltminbsb->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  bsbriniT->data[i] = MDltminbsb->data[i];
+                  bsbriniT_data[i] = MDltminbsb_data[i];
                 }
                 end = MDltminbsb->size[0];
                 for (b_i = 0; b_i < end; b_i++) {
-                  if (MDltminbsb->data[b_i]) {
-                    Szi->data[b_i] = rtInf;
+                  if (MDltminbsb_data[b_i]) {
+                    Szi_data[b_i] = rtInf;
                   }
                 }
               }
@@ -7343,7 +8720,7 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 /*  vector bsbriniT and the unit is included in vector */
                 /*  bsbradd If unit minMDindex did not belong to previous */
                 /*  subset, than minMDindex is included in vector unitadd */
-                if (bsbT->data[lunit - 1]) {
+                if (bsbT_data[lunit - 1]) {
                   if (b_mm <= percn) {
                     bsbradd[nwhile] = lunit;
                     nwhile++;
@@ -7353,29 +8730,30 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                     end = unitout->size[0] - 1;
                     trueCount = 0;
                     for (b_i = 0; b_i <= end; b_i++) {
-                      if ((int)unitout->data[b_i] != lunit) {
+                      if ((int)unitout_data[b_i] != lunit) {
                         trueCount++;
                       }
                     }
                     b_loop_ub = 0;
                     for (b_i = 0; b_i <= end; b_i++) {
-                      if ((int)unitout->data[b_i] != lunit) {
-                        unitout->data[b_loop_ub] = unitout->data[b_i];
+                      if ((int)unitout_data[b_i] != lunit) {
+                        unitout_data[b_loop_ub] = unitout_data[b_i];
                         b_loop_ub++;
                       }
                     }
                     end = unitout->size[0];
                     unitout->size[0] = trueCount;
                     emxEnsureCapacity_real_T(unitout, end);
+                    unitout_data = unitout->data;
                   } else {
-                    bsbriniT->data[lunit - 1] = true;
+                    bsbriniT_data[lunit - 1] = true;
                   }
                 } else {
                   unitadd[irank] = lunit;
                   irank++;
                 }
                 /*  disp(posunit(posncl1)) */
-                Szi->data[lunit - 1] = rtInf;
+                Szi_data[lunit - 1] = rtInf;
               }
               /*  unit = vector containing all units which enter the new subset
                */
@@ -7387,9 +8765,10 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               }
               i = unit->size[0];
               unit->size[0] = loop_ub;
-              emxEnsureCapacity_real_T(unit, i);
+              emxEnsureCapacity_int32_T(unit, i);
+              unit_data = unit->data;
               for (i = 0; i < loop_ub; i++) {
-                unit->data[i] = unitadd[i];
+                unit_data[i] = unitadd[i];
               }
               /*  bsbr = vector containing all units which enter the new */
               /*  subset and were also in the previous subset */
@@ -7402,40 +8781,44 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 }
                 i = bsbr->size[0];
                 bsbr->size[0] = bsbrini->size[0] + b_loop_ub;
-                emxEnsureCapacity_real_T(bsbr, i);
+                emxEnsureCapacity_int32_T(bsbr, i);
+                bsbr_data = bsbr->data;
                 irank = bsbrini->size[0];
                 for (i = 0; i < irank; i++) {
-                  bsbr->data[i] = bsbrini->data[i];
+                  bsbr_data[i] = (int)bsbrini_data[i];
                 }
                 for (i = 0; i < b_loop_ub; i++) {
-                  bsbr->data[i + bsbrini->size[0]] = bsbradd[i];
+                  bsbr_data[i + bsbrini->size[0]] = bsbradd[i];
                 }
                 i = bsb->size[0];
                 bsb->size[0] = bsbr->size[0] + loop_ub;
                 emxEnsureCapacity_real_T(bsb, i);
+                bsb_data = bsb->data;
                 b_loop_ub = bsbr->size[0];
                 for (i = 0; i < b_loop_ub; i++) {
-                  bsb->data[i] = bsbr->data[i];
+                  bsb_data[i] = bsbr_data[i];
                 }
                 for (i = 0; i < loop_ub; i++) {
-                  bsb->data[i + bsbr->size[0]] = unitadd[i];
+                  bsb_data[i + bsbr->size[0]] = unitadd[i];
                 }
                 i = bsbT->size[0];
                 bsbT->size[0] = n;
                 emxEnsureCapacity_boolean_T(bsbT, i);
+                bsbT_data = bsbT->data;
                 for (i = 0; i < n; i++) {
-                  bsbT->data[i] = false;
+                  bsbT_data[i] = false;
                 }
                 i = r1->size[0];
                 r1->size[0] = bsb->size[0];
                 emxEnsureCapacity_int32_T(r1, i);
+                r2 = r1->data;
                 loop_ub = bsb->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  r1->data[i] = (int)bsb->data[i];
+                  r2[i] = (int)bsb_data[i];
                 }
                 loop_ub = r1->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  bsbT->data[r1->data[i] - 1] = true;
+                  bsbT_data[r2[i] - 1] = true;
                 }
               } else {
                 /*  After the instruction which follows bsbriniT */
@@ -7445,18 +8828,19 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 /*  -----------    bsbriniT=MDltminT & bsbT; */
                 /*  -----------    bsbriniT(minMDindex)=true; */
                 /*  -----------    bsbriniT(unit)=true; */
-                for (i = 0; i < loop_ub; i++) {
-                  tmp_data[i] = (int)unitadd[i];
+                if (0 <= loop_ub - 1) {
+                  memcpy(&tmp_data[0], &unitadd[0], loop_ub * sizeof(int));
                 }
                 for (i = 0; i < loop_ub; i++) {
-                  bsbriniT->data[tmp_data[i] - 1] = true;
+                  bsbriniT_data[tmp_data[i] - 1] = true;
                 }
                 i = bsbT->size[0];
                 bsbT->size[0] = bsbriniT->size[0];
                 emxEnsureCapacity_boolean_T(bsbT, i);
+                bsbT_data = bsbT->data;
                 loop_ub = bsbriniT->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  bsbT->data[i] = bsbriniT->data[i];
+                  bsbT_data[i] = bsbriniT_data[i];
                 }
               }
               /*  Compute bsbT (Boolean vector which identifies new subset) */
@@ -7471,25 +8855,27 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
               i = Szi->size[0];
               Szi->size[0] = MD->size[0];
               emxEnsureCapacity_real_T(Szi, i);
+              Szi_data = Szi->data;
               loop_ub = MD->size[0] - 1;
               for (i = 0; i <= loop_ub; i++) {
-                Szi->data[i] = MD->data[i];
+                Szi_data[i] = MD_data[i];
               }
               ksor = quickselectFS(Szi, b_mm + 1.0, lunit);
               i = bsbT->size[0];
               bsbT->size[0] = MD->size[0];
               emxEnsureCapacity_boolean_T(bsbT, i);
+              bsbT_data = bsbT->data;
               loop_ub = MD->size[0];
               for (i = 0; i < loop_ub; i++) {
-                bsbT->data[i] = (MD->data[i] <= ksor);
+                bsbT_data[i] = (MD_data[i] <= ksor);
               }
               irank = bsbT->size[0];
               if (bsbT->size[0] == 0) {
                 nwhile = 0;
               } else {
-                nwhile = bsbT->data[0];
+                nwhile = bsbT_data[0];
                 for (b_loop_ub = 2; b_loop_ub <= irank; b_loop_ub++) {
-                  nwhile += bsbT->data[b_loop_ub - 1];
+                  nwhile += bsbT_data[b_loop_ub - 1];
                 }
               }
               if (nwhile == (int)b_mm + 1) {
@@ -7497,17 +8883,18 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                   end = bsbT->size[0] - 1;
                   trueCount = 0;
                   for (b_i = 0; b_i <= end; b_i++) {
-                    if (bsbT->data[b_i]) {
+                    if (bsbT_data[b_i]) {
                       trueCount++;
                     }
                   }
                   i = bsb->size[0];
                   bsb->size[0] = trueCount;
                   emxEnsureCapacity_real_T(bsb, i);
+                  bsb_data = bsb->data;
                   b_loop_ub = 0;
                   for (b_i = 0; b_i <= end; b_i++) {
-                    if (bsbT->data[b_i]) {
-                      bsb->data[b_loop_ub] = seq->data[b_i];
+                    if (bsbT_data[b_i]) {
+                      bsb_data[b_loop_ub] = seq_data[b_i];
                       b_loop_ub++;
                     }
                   }
@@ -7518,8 +8905,10 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 nwhile = MD->size[0] - 1;
                 irank = 0;
                 for (b_i = 0; b_i < end; b_i++) {
-                  if (MD->data[b_i] < ksor) {
+                  if (MD_data[b_i] < ksor) {
                     trueCount++;
+                  }
+                  if (MD_data[b_i] < ksor) {
                     irank++;
                   }
                 }
@@ -7529,80 +8918,93 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 } else {
                   loop_ub = (int)d;
                 }
-                i = r9->size[0];
-                r9->size[0] = irank;
-                emxEnsureCapacity_int32_T(r9, i);
+                i = r10->size[0];
+                r10->size[0] = irank;
+                emxEnsureCapacity_int32_T(r10, i);
+                r2 = r10->data;
                 b_loop_ub = 0;
                 end = MD->size[0] - 1;
                 trueCount = 0;
                 for (b_i = 0; b_i <= nwhile; b_i++) {
-                  if (MD->data[b_i] < ksor) {
-                    r9->data[b_loop_ub] = b_i + 1;
+                  if (MD_data[b_i] < ksor) {
+                    r2[b_loop_ub] = b_i + 1;
                     b_loop_ub++;
                   }
-                  if (MD->data[b_i] == ksor) {
+                  if (MD_data[b_i] == ksor) {
                     trueCount++;
                   }
                 }
-                i = r10->size[0];
-                r10->size[0] = trueCount;
-                emxEnsureCapacity_int32_T(r10, i);
+                i = r11->size[0];
+                r11->size[0] = trueCount;
+                emxEnsureCapacity_int32_T(r11, i);
+                r12 = r11->data;
                 b_loop_ub = 0;
                 for (b_i = 0; b_i <= end; b_i++) {
-                  if (MD->data[b_i] == ksor) {
-                    r10->data[b_loop_ub] = b_i + 1;
+                  if (MD_data[b_i] == ksor) {
+                    r12[b_loop_ub] = b_i + 1;
                     b_loop_ub++;
                   }
                 }
                 i = bsb->size[0];
-                bsb->size[0] = r9->size[0] + loop_ub;
+                bsb->size[0] = r10->size[0] + loop_ub;
                 emxEnsureCapacity_real_T(bsb, i);
-                b_loop_ub = r9->size[0];
+                bsb_data = bsb->data;
+                b_loop_ub = r10->size[0];
                 for (i = 0; i < b_loop_ub; i++) {
-                  bsb->data[i] = seq->data[r9->data[i] - 1];
+                  bsb_data[i] = seq_data[r2[i] - 1];
                 }
                 for (i = 0; i < loop_ub; i++) {
-                  bsb->data[i + r9->size[0]] = seq->data[r10->data[i] - 1];
+                  bsb_data[i + r10->size[0]] = seq_data[r12[i] - 1];
                 }
                 i = bsbT->size[0];
                 bsbT->size[0] = n;
                 emxEnsureCapacity_boolean_T(bsbT, i);
+                bsbT_data = bsbT->data;
                 for (i = 0; i < n; i++) {
-                  bsbT->data[i] = false;
+                  bsbT_data[i] = false;
                 }
                 i = r1->size[0];
                 r1->size[0] = bsb->size[0];
                 emxEnsureCapacity_int32_T(r1, i);
+                r2 = r1->data;
                 loop_ub = bsb->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  r1->data[i] = (int)bsb->data[i];
+                  r2[i] = (int)bsb_data[i];
                 }
                 loop_ub = r1->size[0];
                 for (i = 0; i < loop_ub; i++) {
-                  bsbT->data[r1->data[i] - 1] = true;
+                  bsbT_data[r2[i] - 1] = true;
                 }
               }
               /*  unit = vector containing units which just entered subset; */
-              i = MDltminT->size[0];
-              MDltminT->size[0] = bsbT->size[0];
-              emxEnsureCapacity_boolean_T(MDltminT, i);
-              loop_ub = bsbT->size[0];
-              for (i = 0; i < loop_ub; i++) {
-                MDltminT->data[i] = (bsbT->data[i] && (!oldbsbT->data[i]));
+              if (bsbT->size[0] == oldbsbT->size[0]) {
+                i = b_bsbT->size[0];
+                b_bsbT->size[0] = bsbT->size[0];
+                emxEnsureCapacity_boolean_T(b_bsbT, i);
+                unitoutT_data = b_bsbT->data;
+                loop_ub = bsbT->size[0];
+                for (i = 0; i < loop_ub; i++) {
+                  unitoutT_data[i] = (bsbT_data[i] && (!oldbsbT_data[i]));
+                }
+                b_eml_find(b_bsbT, r1);
+                r2 = r1->data;
+              } else {
+                r_binary_expand_op(r1, bsbT, oldbsbT);
+                r2 = r1->data;
               }
-              b_eml_find(MDltminT, r1);
               i = unit->size[0];
               unit->size[0] = r1->size[0];
-              emxEnsureCapacity_real_T(unit, i);
+              emxEnsureCapacity_int32_T(unit, i);
+              unit_data = unit->data;
               loop_ub = r1->size[0];
               for (i = 0; i < loop_ub; i++) {
-                unit->data[i] = r1->data[i];
+                unit_data[i] = r2[i];
               }
             }
             if (b_mm >= init1) {
               /*  mmd contains minimum of Mahalanobis distances among */
               /*  the units which are not in the subset at step m */
-              mmd->data[((int)((b_mm - init1) + 1.0) + mmd->size[0]) - 1] =
+              mmd_data[((int)((b_mm - init1) + 1.0) + mmd->size[0]) - 1] =
                   sqrt(minMD);
             }
             /*  store mean of units forming old subset */
@@ -7610,9 +9012,10 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
             meoldbsb->size[0] = 1;
             meoldbsb->size[1] = ym->size[1];
             emxEnsureCapacity_real_T(meoldbsb, i);
+            meoldbsb_data = meoldbsb->data;
             loop_ub = ym->size[1];
             for (i = 0; i < loop_ub; i++) {
-              meoldbsb->data[i] = ym->data[i];
+              meoldbsb_data[i] = ym_data[i];
             }
             lunit = unit->size[0];
             if (b_mm >= init1) {
@@ -7627,13 +9030,13 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
                 nwhile = (int)((b_mm - init1) + 1.0) - 1;
                 irank = end - i;
                 for (end = 0; end < irank; end++) {
-                  Un->data[nwhile + Un->size[0] * ((i + end) + 1)] =
-                      unit->data[end];
+                  Un_data[nwhile + Un->size[0] * ((i + end) + 1)] =
+                      unit_data[end];
                 }
               } else {
                 i = (int)((b_mm - init1) + 1.0) - 1;
                 for (end = 0; end < 10; end++) {
-                  Un->data[i + Un->size[0] * (end + 1)] = unit->data[end];
+                  Un_data[i + Un->size[0] * (end + 1)] = unit_data[end];
                 }
               }
             }
@@ -7648,44 +9051,341 @@ void d_FSMmmd(const emxArray_real_T *Y, emxArray_real_T *bsb, double varargin_2,
     mmd->size[0] = 1;
     mmd->size[1] = 1;
     emxEnsureCapacity_real_T(mmd, i);
-    mmd->data[0] = rtNaN;
+    mmd_data = mmd->data;
+    mmd_data[0] = rtNaN;
     i = Un->size[0] * Un->size[1];
     Un->size[0] = 1;
     Un->size[1] = 1;
     emxEnsureCapacity_real_T(Un, i);
-    Un->data[0] = rtNaN;
+    Un_data = Un->data;
+    Un_data[0] = rtNaN;
   }
   emxFree_real_T(&r);
+  emxFree_boolean_T(&b_bsbT);
   emxFree_real_T(&b_Ym);
+  emxFree_int32_T(&r11);
   emxFree_int32_T(&r10);
   emxFree_int32_T(&r9);
   emxFree_int32_T(&r8);
   emxFree_int32_T(&r7);
   emxFree_int32_T(&r6);
   emxFree_int32_T(&r5);
-  emxFree_int32_T(&r4);
   emxFree_int32_T(&r1);
   emxFree_boolean_T(&MDltminbsb);
-  emxFree_boolean_T(&MDltminT);
   emxFree_real_T(&R);
   emxFree_real_T(&MD);
   emxFree_real_T(&Szi);
   emxFree_real_T(&zi);
   emxFree_real_T(&mibsbr);
   emxFree_real_T(&mi);
+  emxFree_boolean_T(&unitoutT);
   emxFree_real_T(&Ym);
   emxFree_real_T(&ym);
   emxFree_real_T(&Yb);
-  emxFree_real_T(&unit);
+  emxFree_int32_T(&unit);
   emxFree_uint32_T(&bsbrini);
   emxFree_boolean_T(&bsbriniT);
   emxFree_real_T(&unitout);
-  emxFree_real_T(&bsbr);
+  emxFree_int32_T(&bsbr);
   emxFree_boolean_T(&oldbsbT);
   emxFree_real_T(&meoldbsb);
   emxFree_real_T(&S);
   emxFree_boolean_T(&bsbT);
   emxFree_real_T(&seq);
+}
+
+void n_binary_expand_op(emxArray_real_T *S, const emxArray_real_T *Szi,
+                        double y)
+{
+  emxArray_real_T *b_S;
+  emxArray_real_T *b_Szi;
+  const double *Szi_data;
+  double *S_data;
+  double *b_S_data;
+  double *b_Szi_data;
+  int aux_0_1;
+  int aux_1_1;
+  int b_loop_ub;
+  int i;
+  int i1;
+  int loop_ub;
+  int stride_0_0;
+  int stride_0_1;
+  int stride_1_0;
+  int stride_1_1;
+  Szi_data = Szi->data;
+  S_data = S->data;
+  emxInit_real_T(&b_Szi, 2);
+  i = b_Szi->size[0] * b_Szi->size[1];
+  b_Szi->size[0] = Szi->size[0];
+  b_Szi->size[1] = Szi->size[0];
+  emxEnsureCapacity_real_T(b_Szi, i);
+  b_Szi_data = b_Szi->data;
+  loop_ub = Szi->size[0];
+  for (i = 0; i < loop_ub; i++) {
+    b_loop_ub = Szi->size[0];
+    for (i1 = 0; i1 < b_loop_ub; i1++) {
+      b_Szi_data[i1 + b_Szi->size[0] * i] =
+          Szi_data[i1] * Szi_data[i] / (1.0 - y);
+    }
+  }
+  emxInit_real_T(&b_S, 2);
+  i = b_S->size[0] * b_S->size[1];
+  if (b_Szi->size[0] == 1) {
+    b_S->size[0] = S->size[0];
+  } else {
+    b_S->size[0] = b_Szi->size[0];
+  }
+  if (b_Szi->size[1] == 1) {
+    b_S->size[1] = S->size[1];
+  } else {
+    b_S->size[1] = b_Szi->size[1];
+  }
+  emxEnsureCapacity_real_T(b_S, i);
+  b_S_data = b_S->data;
+  stride_0_0 = (S->size[0] != 1);
+  stride_0_1 = (S->size[1] != 1);
+  stride_1_0 = (b_Szi->size[0] != 1);
+  stride_1_1 = (b_Szi->size[1] != 1);
+  aux_0_1 = 0;
+  aux_1_1 = 0;
+  if (b_Szi->size[1] == 1) {
+    loop_ub = S->size[1];
+  } else {
+    loop_ub = b_Szi->size[1];
+  }
+  for (i = 0; i < loop_ub; i++) {
+    if (b_Szi->size[0] == 1) {
+      b_loop_ub = S->size[0];
+    } else {
+      b_loop_ub = b_Szi->size[0];
+    }
+    for (i1 = 0; i1 < b_loop_ub; i1++) {
+      b_S_data[i1 + b_S->size[0] * i] =
+          S_data[i1 * stride_0_0 + S->size[0] * aux_0_1] +
+          b_Szi_data[i1 * stride_1_0 + b_Szi->size[0] * aux_1_1];
+    }
+    aux_1_1 += stride_1_1;
+    aux_0_1 += stride_0_1;
+  }
+  emxFree_real_T(&b_Szi);
+  i = S->size[0] * S->size[1];
+  S->size[0] = b_S->size[0];
+  S->size[1] = b_S->size[1];
+  emxEnsureCapacity_real_T(S, i);
+  S_data = S->data;
+  loop_ub = b_S->size[1];
+  for (i = 0; i < loop_ub; i++) {
+    b_loop_ub = b_S->size[0];
+    for (i1 = 0; i1 < b_loop_ub; i1++) {
+      S_data[i1 + S->size[0] * i] = b_S_data[i1 + b_S->size[0] * i];
+    }
+  }
+  emxFree_real_T(&b_S);
+}
+
+void o_binary_expand_op(emxArray_real_T *zi, const emxArray_real_T *Y,
+                        const emxArray_real_T *unitout, int i,
+                        const emxArray_real_T *mi)
+{
+  const double *Y_data;
+  const double *mi_data;
+  const double *unitout_data;
+  double *zi_data;
+  int b_i;
+  int b_unitout;
+  int loop_ub;
+  int stride_0_1;
+  int stride_1_1;
+  mi_data = mi->data;
+  unitout_data = unitout->data;
+  Y_data = Y->data;
+  b_unitout = (int)unitout_data[i];
+  b_i = Y->size[1];
+  stride_0_1 = zi->size[0] * zi->size[1];
+  zi->size[0] = 1;
+  if (mi->size[1] == 1) {
+    zi->size[1] = b_i;
+  } else {
+    zi->size[1] = mi->size[1];
+  }
+  emxEnsureCapacity_real_T(zi, stride_0_1);
+  zi_data = zi->data;
+  stride_0_1 = (b_i != 1);
+  stride_1_1 = (mi->size[1] != 1);
+  if (mi->size[1] == 1) {
+    loop_ub = b_i;
+  } else {
+    loop_ub = mi->size[1];
+  }
+  for (b_i = 0; b_i < loop_ub; b_i++) {
+    zi_data[b_i] = Y_data[(b_unitout + Y->size[0] * (b_i * stride_0_1)) - 1] -
+                   mi_data[b_i * stride_1_1];
+  }
+}
+
+void p_binary_expand_op(emxArray_real_T *S, const emxArray_real_T *Szi,
+                        double y)
+{
+  emxArray_real_T *b_S;
+  emxArray_real_T *b_Szi;
+  const double *Szi_data;
+  double *S_data;
+  double *b_S_data;
+  double *b_Szi_data;
+  int aux_0_1;
+  int aux_1_1;
+  int b_loop_ub;
+  int i;
+  int i1;
+  int loop_ub;
+  int stride_0_0;
+  int stride_0_1;
+  int stride_1_0;
+  int stride_1_1;
+  Szi_data = Szi->data;
+  S_data = S->data;
+  emxInit_real_T(&b_Szi, 2);
+  i = b_Szi->size[0] * b_Szi->size[1];
+  b_Szi->size[0] = Szi->size[0];
+  b_Szi->size[1] = Szi->size[0];
+  emxEnsureCapacity_real_T(b_Szi, i);
+  b_Szi_data = b_Szi->data;
+  loop_ub = Szi->size[0];
+  for (i = 0; i < loop_ub; i++) {
+    b_loop_ub = Szi->size[0];
+    for (i1 = 0; i1 < b_loop_ub; i1++) {
+      b_Szi_data[i1 + b_Szi->size[0] * i] =
+          Szi_data[i1] * Szi_data[i] / (y + 1.0);
+    }
+  }
+  emxInit_real_T(&b_S, 2);
+  i = b_S->size[0] * b_S->size[1];
+  if (b_Szi->size[0] == 1) {
+    b_S->size[0] = S->size[0];
+  } else {
+    b_S->size[0] = b_Szi->size[0];
+  }
+  if (b_Szi->size[1] == 1) {
+    b_S->size[1] = S->size[1];
+  } else {
+    b_S->size[1] = b_Szi->size[1];
+  }
+  emxEnsureCapacity_real_T(b_S, i);
+  b_S_data = b_S->data;
+  stride_0_0 = (S->size[0] != 1);
+  stride_0_1 = (S->size[1] != 1);
+  stride_1_0 = (b_Szi->size[0] != 1);
+  stride_1_1 = (b_Szi->size[1] != 1);
+  aux_0_1 = 0;
+  aux_1_1 = 0;
+  if (b_Szi->size[1] == 1) {
+    loop_ub = S->size[1];
+  } else {
+    loop_ub = b_Szi->size[1];
+  }
+  for (i = 0; i < loop_ub; i++) {
+    if (b_Szi->size[0] == 1) {
+      b_loop_ub = S->size[0];
+    } else {
+      b_loop_ub = b_Szi->size[0];
+    }
+    for (i1 = 0; i1 < b_loop_ub; i1++) {
+      b_S_data[i1 + b_S->size[0] * i] =
+          S_data[i1 * stride_0_0 + S->size[0] * aux_0_1] -
+          b_Szi_data[i1 * stride_1_0 + b_Szi->size[0] * aux_1_1];
+    }
+    aux_1_1 += stride_1_1;
+    aux_0_1 += stride_0_1;
+  }
+  emxFree_real_T(&b_Szi);
+  i = S->size[0] * S->size[1];
+  S->size[0] = b_S->size[0];
+  S->size[1] = b_S->size[1];
+  emxEnsureCapacity_real_T(S, i);
+  S_data = S->data;
+  loop_ub = b_S->size[1];
+  for (i = 0; i < loop_ub; i++) {
+    b_loop_ub = b_S->size[0];
+    for (i1 = 0; i1 < b_loop_ub; i1++) {
+      S_data[i1 + S->size[0] * i] = b_S_data[i1 + b_S->size[0] * i];
+    }
+  }
+  emxFree_real_T(&b_S);
+}
+
+void q_binary_expand_op(emxArray_real_T *zi, const emxArray_real_T *Y,
+                        const emxArray_int32_T *unit, int i,
+                        const emxArray_real_T *mi)
+{
+  const double *Y_data;
+  const double *mi_data;
+  double *zi_data;
+  const int *unit_data;
+  int b_i;
+  int b_unit;
+  int loop_ub;
+  int stride_0_1;
+  int stride_1_1;
+  mi_data = mi->data;
+  unit_data = unit->data;
+  Y_data = Y->data;
+  b_unit = unit_data[i];
+  b_i = Y->size[1];
+  stride_0_1 = zi->size[0] * zi->size[1];
+  zi->size[0] = 1;
+  if (mi->size[1] == 1) {
+    zi->size[1] = b_i;
+  } else {
+    zi->size[1] = mi->size[1];
+  }
+  emxEnsureCapacity_real_T(zi, stride_0_1);
+  zi_data = zi->data;
+  stride_0_1 = (b_i != 1);
+  stride_1_1 = (mi->size[1] != 1);
+  if (mi->size[1] == 1) {
+    loop_ub = b_i;
+  } else {
+    loop_ub = mi->size[1];
+  }
+  for (b_i = 0; b_i < loop_ub; b_i++) {
+    zi_data[b_i] = Y_data[(b_unit + Y->size[0] * (b_i * stride_0_1)) - 1] -
+                   mi_data[b_i * stride_1_1];
+  }
+}
+
+void t_binary_expand_op(emxArray_boolean_T *unitoutT,
+                        const emxArray_boolean_T *oldbsbT,
+                        const emxArray_boolean_T *bsbT)
+{
+  int i;
+  int loop_ub;
+  int stride_0_0;
+  int stride_1_0;
+  const bool *bsbT_data;
+  const bool *oldbsbT_data;
+  bool *unitoutT_data;
+  bsbT_data = bsbT->data;
+  oldbsbT_data = oldbsbT->data;
+  i = unitoutT->size[0];
+  if (bsbT->size[0] == 1) {
+    unitoutT->size[0] = oldbsbT->size[0];
+  } else {
+    unitoutT->size[0] = bsbT->size[0];
+  }
+  emxEnsureCapacity_boolean_T(unitoutT, i);
+  unitoutT_data = unitoutT->data;
+  stride_0_0 = (oldbsbT->size[0] != 1);
+  stride_1_0 = (bsbT->size[0] != 1);
+  if (bsbT->size[0] == 1) {
+    loop_ub = oldbsbT->size[0];
+  } else {
+    loop_ub = bsbT->size[0];
+  }
+  for (i = 0; i < loop_ub; i++) {
+    unitoutT_data[i] =
+        (oldbsbT_data[i * stride_0_0] && (!bsbT_data[i * stride_1_0]));
+  }
 }
 
 /* End of code generation (FSMmmd.c) */

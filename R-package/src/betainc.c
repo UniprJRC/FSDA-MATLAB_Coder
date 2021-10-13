@@ -318,7 +318,7 @@ creal_T b_betainc(double x, double a, double b)
                 } while (exitg1 == 0);
               }
               betai = 0.0;
-              i = (int)(((-1.0 - (n - 1.0)) + 1.0) / -1.0);
+              i = (int)-((-1.0 - (n - 1.0)) + 1.0);
               for (b_i = 0; b_i < i; b_i++) {
                 betai = b_x * (betai + 1.0) / (b + ((n - 1.0) + -(double)b_i));
               }
@@ -434,7 +434,7 @@ creal_T b_betainc(double x, double a, double b)
                   n = floor(b) + 1.0;
                 }
               }
-              i = (int)(((-1.0 - (n - 1.0)) + 1.0) / -1.0);
+              i = (int)-((-1.0 - (n - 1.0)) + 1.0);
               for (b_i = 0; b_i < i; b_i++) {
                 betai = (b - ((n - 1.0) + -(double)b_i)) * betai / b_x + 1.0;
               }
@@ -804,7 +804,7 @@ creal_T betainc(double x, double a, double b)
                   } while (exitg1 == 0);
                 }
                 betai = 0.0;
-                i = (int)(((-1.0 - (n - 1.0)) + 1.0) / -1.0);
+                i = (int)-((-1.0 - (n - 1.0)) + 1.0);
                 for (b_i = 0; b_i < i; b_i++) {
                   betai =
                       b_x * (betai + 1.0) / (b + ((n - 1.0) + -(double)b_i));
@@ -922,7 +922,7 @@ creal_T betainc(double x, double a, double b)
                   n = floor(b) + 1.0;
                 }
               }
-              i = (int)(((-1.0 - (n - 1.0)) + 1.0) / -1.0);
+              i = (int)-((-1.0 - (n - 1.0)) + 1.0);
               for (b_i = 0; b_i < i; b_i++) {
                 betai = (b - ((n - 1.0) + -(double)b_i)) * betai / b_x + 1.0;
               }

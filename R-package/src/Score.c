@@ -22,7 +22,108 @@
 #include <math.h>
 #include <string.h>
 
+/* Function Declarations */
+static void xc_binary_expand_op(emxArray_real_T *ylai, const emxArray_real_T *z,
+                                const emxArray_real_T *logy, double logG);
+
+static void yc_binary_expand_op(emxArray_real_T *ylai,
+                                const emxArray_real_T *logy,
+                                const emxArray_real_T *ylaim1, double b,
+                                double laiGlaim1);
+
 /* Function Definitions */
+static void xc_binary_expand_op(emxArray_real_T *ylai, const emxArray_real_T *z,
+                                const emxArray_real_T *logy, double logG)
+{
+  const double *logy_data;
+  const double *z_data;
+  double *ylai_data;
+  int i;
+  int loop_ub;
+  int stride_0_0;
+  int stride_1_0;
+  logy_data = logy->data;
+  z_data = z->data;
+  i = ylai->size[0];
+  if (logy->size[0] == 1) {
+    ylai->size[0] = z->size[0];
+  } else {
+    ylai->size[0] = logy->size[0];
+  }
+  emxEnsureCapacity_real_T(ylai, i);
+  ylai_data = ylai->data;
+  stride_0_0 = (z->size[0] != 1);
+  stride_1_0 = (logy->size[0] != 1);
+  if (logy->size[0] == 1) {
+    loop_ub = z->size[0];
+  } else {
+    loop_ub = logy->size[0];
+  }
+  for (i = 0; i < loop_ub; i++) {
+    ylai_data[i] =
+        z_data[i * stride_0_0] * (logy_data[i * stride_1_0] / 2.0 - logG);
+  }
+}
+
+static void yc_binary_expand_op(emxArray_real_T *ylai,
+                                const emxArray_real_T *logy,
+                                const emxArray_real_T *ylaim1, double b,
+                                double laiGlaim1)
+{
+  emxArray_real_T *b_ylai;
+  const double *logy_data;
+  const double *ylaim1_data;
+  double *b_ylai_data;
+  double *ylai_data;
+  int i;
+  int loop_ub;
+  int stride_0_0;
+  int stride_1_0;
+  int stride_2_0;
+  ylaim1_data = ylaim1->data;
+  logy_data = logy->data;
+  ylai_data = ylai->data;
+  emxInit_real_T(&b_ylai, 1);
+  i = b_ylai->size[0];
+  if (ylaim1->size[0] == 1) {
+    if (logy->size[0] == 1) {
+      b_ylai->size[0] = ylai->size[0];
+    } else {
+      b_ylai->size[0] = logy->size[0];
+    }
+  } else {
+    b_ylai->size[0] = ylaim1->size[0];
+  }
+  emxEnsureCapacity_real_T(b_ylai, i);
+  b_ylai_data = b_ylai->data;
+  stride_0_0 = (ylai->size[0] != 1);
+  stride_1_0 = (logy->size[0] != 1);
+  stride_2_0 = (ylaim1->size[0] != 1);
+  if (ylaim1->size[0] == 1) {
+    if (logy->size[0] == 1) {
+      loop_ub = ylai->size[0];
+    } else {
+      loop_ub = logy->size[0];
+    }
+  } else {
+    loop_ub = ylaim1->size[0];
+  }
+  for (i = 0; i < loop_ub; i++) {
+    b_ylai_data[i] = (ylai_data[i * stride_0_0] * logy_data[i * stride_1_0] -
+                      ylaim1_data[i * stride_2_0] * b) /
+                     laiGlaim1;
+  }
+  i = ylai->size[0];
+  ylai->size[0] = b_ylai->size[0];
+  emxEnsureCapacity_real_T(ylai, i);
+  ylai_data = ylai->data;
+  loop_ub = b_ylai->size[0];
+  for (i = 0; i < loop_ub; i++) {
+    ylai_data[i] = b_ylai_data[i];
+  }
+  emxFree_real_T(&b_ylai);
+}
+
 void Score(const emxArray_real_T *y, const emxArray_real_T *X,
            double varargin_2, double outSC_Score_data[], int *outSC_Score_size,
            double *outSC_Lik)
@@ -34,10 +135,17 @@ void Score(const emxArray_real_T *y, const emxArray_real_T *X,
   emxArray_real_T *ylai;
   emxArray_real_T *ylaim1;
   emxArray_real_T *z;
+  const double *X_data;
+  const double *y_data;
   double G;
   double b_X;
   double laiGlaim1;
   double logG;
+  double *Xw_data;
+  double *logy_data;
+  double *ylai_data;
+  double *ylaim1_data;
+  double *z_data;
   int b_i;
   int b_loop_ub;
   int c_loop_ub;
@@ -48,6 +156,8 @@ void Score(const emxArray_real_T *y, const emxArray_real_T *X,
   int p;
   signed char i1;
   bool empty_non_axis_sizes;
+  X_data = X->data;
+  y_data = y->data;
   emxInit_real_T(&logy, 1);
   /* Score computes the score test for transformation */
   /*  */
@@ -135,7 +245,6 @@ void Score(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
   /*  */
-  /*  */
   /* <a href="matlab: docsearchFS('Score')">Link to the help function</a> */
   /*  */
   /* $LastChangedDate::                      $: Date of the last commit */
@@ -187,7 +296,6 @@ void Score(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                specified for the */
   /*                caller function. */
   /*  */
-  /*  */
   /*   Optional input arguments: */
   /*  */
   /*  Output: */
@@ -202,7 +310,6 @@ void Score(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                rows after listwise exclusion. */
   /*  p:            Number of columns of X (variables). Scalar. */
   /*                Number of parameters to be estimated. */
-  /*  */
   /*  */
   /*  More About: */
   /*  */
@@ -224,8 +331,6 @@ void Score(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
-  /*  */
   /*  */
   /* $LastChangedDate::                      $: Date of the last commit */
   /*  */
@@ -259,13 +364,14 @@ void Score(const emxArray_real_T *y, const emxArray_real_T *X,
   i = logy->size[0];
   logy->size[0] = y->size[0];
   emxEnsureCapacity_real_T(logy, i);
+  logy_data = logy->data;
   loop_ub = y->size[0];
   for (i = 0; i < loop_ub; i++) {
-    logy->data[i] = y->data[i];
+    logy_data[i] = y_data[i];
   }
   nx = y->size[0];
   for (k = 0; k < nx; k++) {
-    logy->data[k] = log(logy->data[k]);
+    logy_data[k] = log(logy_data[k]);
   }
   G = exp(blockedSummation(logy, logy->size[0]) / (double)X->size[0]);
   logG = log(G);
@@ -282,15 +388,22 @@ void Score(const emxArray_real_T *y, const emxArray_real_T *X,
     i = z->size[0];
     z->size[0] = logy->size[0];
     emxEnsureCapacity_real_T(z, i);
+    z_data = z->data;
     for (i = 0; i < b_loop_ub; i++) {
-      z->data[i] = G * logy->data[i];
+      z_data[i] = G * logy_data[i];
     }
-    i = ylai->size[0];
-    ylai->size[0] = z->size[0];
-    emxEnsureCapacity_real_T(ylai, i);
-    b_loop_ub = z->size[0];
-    for (i = 0; i < b_loop_ub; i++) {
-      ylai->data[i] = z->data[i] * (logy->data[i] / 2.0 - logG);
+    if (z->size[0] == logy->size[0]) {
+      i = ylai->size[0];
+      ylai->size[0] = z->size[0];
+      emxEnsureCapacity_real_T(ylai, i);
+      ylai_data = ylai->data;
+      b_loop_ub = z->size[0];
+      for (i = 0; i < b_loop_ub; i++) {
+        ylai_data[i] = z_data[i] * (logy_data[i] / 2.0 - logG);
+      }
+    } else {
+      xc_binary_expand_op(ylai, z, logy, logG);
+      ylai_data = ylai->data;
     }
   } else {
     /*  laiGlaim1=lai*G^(lai-1); */
@@ -300,32 +413,45 @@ void Score(const emxArray_real_T *y, const emxArray_real_T *X,
     i = ylai->size[0];
     ylai->size[0] = logy->size[0];
     emxEnsureCapacity_real_T(ylai, i);
+    ylai_data = ylai->data;
     for (i = 0; i < b_loop_ub; i++) {
-      ylai->data[i] = varargin_2 * logy->data[i];
+      ylai_data[i] = varargin_2 * logy_data[i];
     }
     nx = ylai->size[0];
     for (k = 0; k < nx; k++) {
-      ylai->data[k] = exp(ylai->data[k]);
+      ylai_data[k] = exp(ylai_data[k]);
     }
     i = ylaim1->size[0];
     ylaim1->size[0] = ylai->size[0];
     emxEnsureCapacity_real_T(ylaim1, i);
+    ylaim1_data = ylaim1->data;
     b_loop_ub = ylai->size[0];
     for (i = 0; i < b_loop_ub; i++) {
-      ylaim1->data[i] = ylai->data[i] - 1.0;
+      ylaim1_data[i] = ylai_data[i] - 1.0;
     }
     i = z->size[0];
     z->size[0] = ylaim1->size[0];
     emxEnsureCapacity_real_T(z, i);
+    z_data = z->data;
     b_loop_ub = ylaim1->size[0];
     for (i = 0; i < b_loop_ub; i++) {
-      z->data[i] = ylaim1->data[i] / laiGlaim1;
+      z_data[i] = ylaim1_data[i] / laiGlaim1;
     }
     G = 1.0 / varargin_2 + logG;
-    b_loop_ub = ylai->size[0];
-    for (i = 0; i < b_loop_ub; i++) {
-      ylai->data[i] =
-          (ylai->data[i] * logy->data[i] - ylaim1->data[i] * G) / laiGlaim1;
+    if (ylai->size[0] == 1) {
+      nx = logy->size[0];
+    } else {
+      nx = ylai->size[0];
+    }
+    if ((ylai->size[0] == logy->size[0]) && (nx == ylaim1->size[0])) {
+      b_loop_ub = ylai->size[0];
+      for (i = 0; i < b_loop_ub; i++) {
+        ylai_data[i] =
+            (ylai_data[i] * logy_data[i] - ylaim1_data[i] * G) / laiGlaim1;
+      }
+    } else {
+      yc_binary_expand_op(ylai, logy, ylaim1, G, laiGlaim1);
+      ylai_data = ylai->data;
     }
     /*  OLD slow code */
     /*  z=(y.^la(i)-1)/(la(i)*G^(la(i)-1)); */
@@ -357,51 +483,60 @@ void Score(const emxArray_real_T *y, const emxArray_real_T *X,
   Xw->size[0] = nx;
   Xw->size[1] = b_loop_ub + i1;
   emxEnsureCapacity_real_T(Xw, i);
+  Xw_data = Xw->data;
   for (i = 0; i < b_loop_ub; i++) {
     for (b_i = 0; b_i < nx; b_i++) {
-      Xw->data[b_i + Xw->size[0] * i] = X->data[b_i + nx * i];
+      Xw_data[b_i + Xw->size[0] * i] = X_data[b_i + nx * i];
     }
   }
   c_loop_ub = i1;
   for (i = 0; i < c_loop_ub; i++) {
     for (b_i = 0; b_i < nx; b_i++) {
-      Xw->data[b_i + Xw->size[0] * b_loop_ub] = ylai->data[b_i];
+      Xw_data[b_i + Xw->size[0] * b_loop_ub] = ylai_data[b_i];
     }
   }
   emxInit_real_T(&ri, 2);
   emxInit_real_T(&R, 2);
   qr(Xw, ri, R);
+  logy_data = ri->data;
   b_loop_ub = ri->size[1] - 1;
   c_loop_ub = ri->size[0];
   i = ylai->size[0];
   ylai->size[0] = ri->size[1];
   emxEnsureCapacity_real_T(ylai, i);
+  ylai_data = ylai->data;
   for (b_i = 0; b_i <= b_loop_ub; b_i++) {
-    ylai->data[b_i] = 0.0;
+    ylai_data[b_i] = 0.0;
   }
   for (k = 0; k < c_loop_ub; k++) {
     for (b_i = 0; b_i <= b_loop_ub; b_i++) {
-      ylai->data[b_i] += ri->data[b_i * ri->size[0] + k] * z->data[k];
+      ylai_data[b_i] += logy_data[b_i * ri->size[0] + k] * z_data[k];
     }
   }
   mldivide(R, ylai, ylaim1);
+  ylaim1_data = ylaim1->data;
   b_loop_ub = Xw->size[0] - 1;
   c_loop_ub = Xw->size[1];
   i = ylai->size[0];
   ylai->size[0] = Xw->size[0];
   emxEnsureCapacity_real_T(ylai, i);
+  ylai_data = ylai->data;
   for (b_i = 0; b_i <= b_loop_ub; b_i++) {
-    ylai->data[b_i] = 0.0;
+    ylai_data[b_i] = 0.0;
   }
   for (k = 0; k < c_loop_ub; k++) {
     nx = k * Xw->size[0];
     for (b_i = 0; b_i <= b_loop_ub; b_i++) {
-      ylai->data[b_i] += Xw->data[nx + b_i] * ylaim1->data[k];
+      ylai_data[b_i] += Xw_data[nx + b_i] * ylaim1_data[k];
     }
   }
-  b_loop_ub = z->size[0];
-  for (i = 0; i < b_loop_ub; i++) {
-    z->data[i] -= ylai->data[i];
+  if (z->size[0] == ylai->size[0]) {
+    b_loop_ub = z->size[0];
+    for (i = 0; i < b_loop_ub; i++) {
+      z_data[i] -= ylai_data[i];
+    }
+  } else {
+    c_minus(z, ylai);
   }
   /*  Sum of squares of residuals */
   if (z->size[0] == 0) {
@@ -409,38 +544,41 @@ void Score(const emxArray_real_T *y, const emxArray_real_T *X,
   } else {
     G = b_xnrm2(z->size[0], z);
   }
+  emxFree_real_T(&z);
   G *= G;
   /*  Compute t stat for constructed added variable */
   i = Xw->size[0] * Xw->size[1];
   Xw->size[0] = X->size[1] + 1;
   Xw->size[1] = X->size[1] + 1;
   emxEnsureCapacity_real_T(Xw, i);
-  emxFree_real_T(&z);
+  Xw_data = Xw->data;
   for (i = 0; i < loop_ub; i++) {
-    Xw->data[i] = 0.0;
+    Xw_data[i] = 0.0;
   }
   if (X->size[1] + 1 > 0) {
     for (k = 0; k < p; k++) {
-      Xw->data[k + Xw->size[0] * k] = 1.0;
+      Xw_data[k + Xw->size[0] * k] = 1.0;
     }
   }
   b_mldivide(R, Xw, ri);
   d_mtimes(ri, ri, Xw);
+  Xw_data = Xw->data;
   loop_ub = Xw->size[0] * Xw->size[1];
   emxFree_real_T(&R);
   emxFree_real_T(&ri);
   for (i = 0; i < loop_ub; i++) {
-    Xw->data[i] = Xw->data[i] * G / b_X;
+    Xw_data[i] = Xw_data[i] * G / b_X;
   }
   if ((Xw->size[0] == 1) && (Xw->size[1] == 1)) {
     i = ylai->size[0];
     ylai->size[0] = 1;
     emxEnsureCapacity_real_T(ylai, i);
-    ylai->data[0] = Xw->data[0];
+    ylai_data = ylai->data;
+    ylai_data[0] = Xw_data[0];
   } else {
     nx = Xw->size[0];
     b_loop_ub = Xw->size[1];
-    if (nx < b_loop_ub) {
+    if (nx <= b_loop_ub) {
       b_loop_ub = nx;
     }
     if (0 < Xw->size[1]) {
@@ -451,18 +589,19 @@ void Score(const emxArray_real_T *y, const emxArray_real_T *X,
     i = ylai->size[0];
     ylai->size[0] = nx;
     emxEnsureCapacity_real_T(ylai, i);
+    ylai_data = ylai->data;
     i = nx - 1;
     for (k = 0; k <= i; k++) {
-      ylai->data[k] = Xw->data[k + Xw->size[0] * k];
+      ylai_data[k] = Xw_data[k + Xw->size[0] * k];
     }
   }
   emxFree_real_T(&Xw);
   nx = ylai->size[0];
   for (k = 0; k < nx; k++) {
-    ylai->data[k] = sqrt(ylai->data[k]);
+    ylai_data[k] = sqrt(ylai_data[k]);
   }
   outSC_Score_data[0] =
-      -ylaim1->data[ylaim1->size[0] - 1] / ylai->data[ylai->size[0] - 1];
+      -ylaim1_data[ylaim1->size[0] - 1] / ylai_data[ylai->size[0] - 1];
   /*  Store the value of the likelihood for the model which also contains */
   /*  the constructed variable */
   /*  Store values of the score test inside structure outSC */
@@ -470,6 +609,48 @@ void Score(const emxArray_real_T *y, const emxArray_real_T *X,
   *outSC_Lik = rtNaN;
   emxFree_real_T(&ylaim1);
   emxFree_real_T(&ylai);
+}
+
+void c_minus(emxArray_real_T *z, const emxArray_real_T *ylai)
+{
+  emxArray_real_T *b_z;
+  const double *ylai_data;
+  double *b_z_data;
+  double *z_data;
+  int i;
+  int loop_ub;
+  int stride_0_0;
+  int stride_1_0;
+  ylai_data = ylai->data;
+  z_data = z->data;
+  emxInit_real_T(&b_z, 1);
+  i = b_z->size[0];
+  if (ylai->size[0] == 1) {
+    b_z->size[0] = z->size[0];
+  } else {
+    b_z->size[0] = ylai->size[0];
+  }
+  emxEnsureCapacity_real_T(b_z, i);
+  b_z_data = b_z->data;
+  stride_0_0 = (z->size[0] != 1);
+  stride_1_0 = (ylai->size[0] != 1);
+  if (ylai->size[0] == 1) {
+    loop_ub = z->size[0];
+  } else {
+    loop_ub = ylai->size[0];
+  }
+  for (i = 0; i < loop_ub; i++) {
+    b_z_data[i] = z_data[i * stride_0_0] - ylai_data[i * stride_1_0];
+  }
+  i = z->size[0];
+  z->size[0] = b_z->size[0];
+  emxEnsureCapacity_real_T(z, i);
+  z_data = z->data;
+  loop_ub = b_z->size[0];
+  for (i = 0; i < loop_ub; i++) {
+    z_data[i] = b_z_data[i];
+  }
+  emxFree_real_T(&b_z);
 }
 
 /* End of code generation (Score.c) */

@@ -12,8 +12,10 @@
 /* Include files */
 #include "HAeff.h"
 #include "fsdaC_data.h"
+#include "fsdaC_rtwutil.h"
 #include "fsdaC_types.h"
 #include "gammainc.h"
+#include "gammaln.h"
 #include "rt_nonfinite.h"
 #include <math.h>
 #include <string.h>
@@ -21,21 +23,24 @@
 /* Function Definitions */
 double HAeff(double eff, const emxArray_real_T *abc)
 {
-  creal_T a_tmp;
-  creal_T b_a_tmp;
-  creal_T bet_tmp;
+  creal_T dc;
+  creal_T dc1;
+  creal_T dc2;
+  const double *abc_data;
   double a;
   double a2;
   double a2_tmp;
-  double ar;
+  double b;
   double b2;
-  double b_a;
+  double b_lgap11_tmp;
   double b_step;
   double c;
   double c2;
   double c2_tmp;
   double ceff;
   double empeff;
+  double lgap11_tmp;
+  abc_data = abc->data;
   /* HAeff finds the tuning constant that guarrantees a requested asymptotic
    * efficiency */
   /*  */
@@ -52,7 +57,6 @@ double HAeff(double eff, const emxArray_real_T *abc)
   /*                UP TO NOW v=1 (JUST REGRESSION) TO DO FOR MULTIVARIATE */
   /*                ANALYSIS */
   /*  */
-  /*  */
   /*   Optional input arguments: */
   /*  */
   /*      abc     : parameters of Hampel estimator. Vector. Vector of length 3
@@ -62,13 +66,11 @@ double HAeff(double eff, const emxArray_real_T *abc)
   /*                Example - [1.5,3.5,8] */
   /*                Data Types - double */
   /*  */
-  /*  */
   /*  Output: */
   /*  */
   /*   ceff : Requested tuning constant. Scalar. Tuning constatnt of Hampel rho
    */
   /*          function associated to requested value of efficiency */
-  /*  */
   /*  */
   /*  More About: */
   /*  */
@@ -96,7 +98,6 @@ double HAeff(double eff, const emxArray_real_T *abc)
   /*  */
   /*  Parameter ctun multiplies parameters (a,b,c) of Hampel estimator. */
   /*  */
-  /*  */
   /*  See also: TBeff, HYPeff, OPTeff, RKeff, HUeff */
   /*  */
   /*  References: */
@@ -105,17 +106,13 @@ double HAeff(double eff, const emxArray_real_T *abc)
    * and */
   /*  Exploratory Data Analysis", Wiley, New York. */
   /*  */
-  /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('HAeff')">Link to the help page for this
    * function</a> */
   /*  */
   /* $LastChangedDate::                      $: Date of the last commit */
-  /*  */
-  /*  */
   /*  */
   /*  Examples: */
   /*  */
@@ -135,7 +132,6 @@ double HAeff(double eff, const emxArray_real_T *abc)
   /*     c=HAeff(0.95,1,tun); */
   /* } */
   /*  */
-  /*  */
   /*  Beginning of code */
   /*  LOCATION EFFICIENCY */
   /*  ctun = starting point of the iteration */
@@ -149,25 +145,26 @@ double HAeff(double eff, const emxArray_real_T *abc)
   b_step = 0.5;
   /*  Convergence condition is */
   /*   ....... */
-  /*  ctun=(0:0.01:1)'; */
   empeff = 1.0;
+  /*  ctun=(0:0.01:1)'; */
   while (fabs(empeff - eff) > 1.0E-14) {
-    a = abc->data[0] * ceff;
-    empeff = abc->data[1] * ceff;
-    c = abc->data[2] * ceff;
-    a2_tmp = a * a;
+    a = abc_data[0] * ceff;
+    b = abc_data[1] * ceff;
+    c = abc_data[2] * ceff;
+    a2_tmp = rt_powd_snf(a, 2.0);
     a2 = a2_tmp / 2.0;
-    b2 = empeff * empeff / 2.0;
-    c2_tmp = c * c;
+    b2 = rt_powd_snf(b, 2.0) / 2.0;
+    c2_tmp = rt_powd_snf(c, 2.0);
     c2 = c2_tmp / 2.0;
     /*  bet  = \int  \psi'(x) d \Phi(x) */
     /*  bet = \int_-a^a d \Phi(x) +2* \int_b^c -a/(c-b) */
-    a_tmp = gammainc(b2, 0.5);
-    b_a_tmp = gammainc(c2, 0.5);
-    bet_tmp = gammainc(a2, 0.5);
+    empeff = 1.5;
+    gammaln(&empeff);
     /*  alph = \int \psi^2(x) d \Phi(x) */
-    empeff = c - empeff;
-    b_a = a / empeff;
+    lgap11_tmp = 2.5;
+    gammaln(&lgap11_tmp);
+    b_lgap11_tmp = 2.0;
+    gammaln(&b_lgap11_tmp);
     /*                                         % 2* \int_0^a x^2 f(x) dx */
     /*                      % 2* a^2 \int_a^b f(x) dx */
     /*     %(a./(c-b)).^2 (2 c^2 \int_b^c f(x) dx */
@@ -177,22 +174,31 @@ double HAeff(double eff, const emxArray_real_T *abc)
     /*  -2*c*v*sqrt(2/pi)*(gammainc(c2,(v+1)/2)-gammainc(b2,(v+1)/2))); */
     /*      -4*c.*(normpdf(b)-normpdf(c))  ); */
     /*  empeff = bet^2/alph = 1 / [var (robust estimator of location)] */
-    ar = (a_tmp.re - b_a_tmp.re) * a;
-    if ((a_tmp.im - b_a_tmp.im) * a == 0.0) {
-      empeff = ar / empeff;
-    } else if (ar == 0.0) {
+    dc = scalar_gammainc(a2, 0.5, -0.69314718055994529, empeff);
+    dc1 = scalar_gammainc(b2, 0.5, -0.69314718055994529, empeff);
+    dc2 = scalar_gammainc(c2, 0.5, -0.69314718055994529, empeff);
+    empeff = (dc1.re - dc2.re) * a;
+    b = c - b;
+    if ((dc1.im - dc2.im) * a == 0.0) {
+      empeff /= b;
+    } else if (empeff == 0.0) {
       empeff = 0.0;
     } else {
-      empeff = ar / empeff;
+      empeff /= b;
     }
-    a = bet_tmp.re + empeff;
-    empeff = a * a /
-             (((gammainc(a2, 1.5)).re + a2_tmp * (a_tmp.re - bet_tmp.re)) +
-              b_a * b_a *
-                  ((c2_tmp * (b_a_tmp.re - a_tmp.re) +
-                    ((gammainc(c2, 1.5)).re - (gammainc(b2, 1.5)).re)) -
-                   2.0 * c * 0.79788456080286541 *
-                       ((gammainc(c2, 1.0)).re - (gammainc(b2, 1.0)).re)));
+    empeff += dc.re;
+    empeff =
+        empeff * empeff /
+        (((scalar_gammainc(a2, 1.5, 0.40546510810816438, lgap11_tmp)).re +
+          a2_tmp * (dc1.re - dc.re)) +
+         rt_powd_snf(a / b, 2.0) *
+             ((c2_tmp * (dc2.re - dc1.re) +
+               ((scalar_gammainc(c2, 1.5, 0.40546510810816438, lgap11_tmp)).re -
+                (scalar_gammainc(b2, 1.5, 0.40546510810816438, lgap11_tmp))
+                    .re)) -
+              2.0 * c * 0.79788456080286541 *
+                  ((scalar_gammainc(c2, 1.0, 0.0, b_lgap11_tmp)).re -
+                   (scalar_gammainc(b2, 1.0, 0.0, b_lgap11_tmp)).re)));
     b_step /= 2.0;
     if (empeff < eff) {
       ceff += b_step;

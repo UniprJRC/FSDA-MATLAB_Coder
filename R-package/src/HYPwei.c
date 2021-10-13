@@ -11,6 +11,7 @@
 
 /* Include files */
 #include "HYPwei.h"
+#include "div.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
 #include "rt_nonfinite.h"
@@ -22,28 +23,39 @@ void HYPwei(const emxArray_real_T *u, const emxArray_real_T *cktuning,
             emxArray_real_T *w)
 {
   emxArray_boolean_T *r;
-  emxArray_boolean_T *r1;
   emxArray_boolean_T *r2;
-  emxArray_boolean_T *r3;
-  emxArray_int32_T *r4;
-  emxArray_int32_T *r5;
-  emxArray_int32_T *r7;
+  emxArray_boolean_T *r4;
+  emxArray_boolean_T *r6;
+  emxArray_int32_T *r10;
+  emxArray_int32_T *r13;
+  emxArray_int32_T *r8;
   emxArray_real_T *absu;
-  emxArray_real_T *r6;
+  emxArray_real_T *r11;
   emxArray_real_T *x;
+  const double *cktuning_data;
+  const double *u_data;
   double A;
   double a;
   double b_a;
   double d;
+  double *absu_data;
+  double *r12;
+  double *w_data;
+  double *x_data;
   int i;
   int k;
   int nx;
+  int *r9;
+  bool *r1;
+  bool *r3;
+  bool *r5;
+  bool *r7;
+  cktuning_data = cktuning->data;
+  u_data = u->data;
   /* HYPwei computes weight function psi(u)/u for hyperbolic tangent estimator
    */
   /*  */
   /* <a href="matlab: docsearchFS('HYPwei')">Link to the help function</a> */
-  /*  */
-  /*  */
   /*  */
   /*   Required input arguments: */
   /*  */
@@ -75,7 +87,6 @@ void HYPwei(const emxArray_real_T *u, const emxArray_real_T *cktuning,
    */
   /*                 the scaled residuals or Mahalanobis distances for the n */
   /*                 units of the sample */
-  /*  */
   /*  */
   /*  More About: */
   /*  */
@@ -114,7 +125,6 @@ void HYPwei(const emxArray_real_T *u, const emxArray_real_T *cktuning,
   /*  */
   /*  References: */
   /*  */
-  /*  */
   /*  Hampel, F.R., Rousseeuw, P.J. and Ronchetti, E. (1981), */
   /*  The Change-of-Variance Curve and Optimal Redescending M-Estimators, */
   /*  "Journal of the American Statistical Association", Vol. 76, */
@@ -123,12 +133,10 @@ void HYPwei(const emxArray_real_T *u, const emxArray_real_T *cktuning,
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
   /*  */
-  /*  */
   /* <a href="matlab: docsearchFS('HYPwei')">Link to the help page for this
    * function</a> */
   /*  */
   /* $LastChangedDate::                      $: Date of the last commit */
-  /*  */
   /*  */
   /*  Examples: */
   /* { */
@@ -144,9 +152,9 @@ void HYPwei(const emxArray_real_T *u, const emxArray_real_T *cktuning,
   /* } */
   /*  Beginning of code */
   if (cktuning->size[0] > 2) {
-    A = cktuning->data[2];
-    a = cktuning->data[3];
-    d = cktuning->data[4];
+    A = cktuning_data[2];
+    a = cktuning_data[3];
+    d = cktuning_data[4];
   } else {
     A = 1.0;
     a = 1.0;
@@ -161,23 +169,25 @@ void HYPwei(const emxArray_real_T *u, const emxArray_real_T *cktuning,
   i = w->size[0];
   w->size[0] = u->size[0];
   emxEnsureCapacity_real_T(w, i);
+  w_data = w->data;
   nx = u->size[0];
   for (i = 0; i < nx; i++) {
-    w->data[i] = 0.0;
+    w_data[i] = 0.0;
   }
   emxInit_real_T(&absu, 1);
   nx = u->size[0];
   i = absu->size[0];
   absu->size[0] = u->size[0];
   emxEnsureCapacity_real_T(absu, i);
+  absu_data = absu->data;
   for (k = 0; k < nx; k++) {
-    absu->data[k] = fabs(u->data[k]);
+    absu_data[k] = fabs(u_data[k]);
   }
   /*   u,		   |u| <=d */
   k = absu->size[0];
   for (i = 0; i < k; i++) {
-    if (absu->data[i] <= d) {
-      w->data[i] = 1.0;
+    if (absu_data[i] <= d) {
+      w_data[i] = 1.0;
     }
   }
   emxInit_boolean_T(&r, 1);
@@ -186,174 +196,198 @@ void HYPwei(const emxArray_real_T *u, const emxArray_real_T *cktuning,
   i = r->size[0];
   r->size[0] = absu->size[0];
   emxEnsureCapacity_boolean_T(r, i);
+  r1 = r->data;
   nx = absu->size[0];
   for (i = 0; i < nx; i++) {
-    r->data[i] = (absu->data[i] > d);
-  }
-  emxInit_boolean_T(&r1, 1);
-  i = r1->size[0];
-  r1->size[0] = absu->size[0];
-  emxEnsureCapacity_boolean_T(r1, i);
-  nx = absu->size[0];
-  for (i = 0; i < nx; i++) {
-    r1->data[i] = (absu->data[i] <= cktuning->data[0]);
+    r1[i] = (absu_data[i] > d);
   }
   emxInit_boolean_T(&r2, 1);
   i = r2->size[0];
   r2->size[0] = absu->size[0];
   emxEnsureCapacity_boolean_T(r2, i);
+  r3 = r2->data;
   nx = absu->size[0];
   for (i = 0; i < nx; i++) {
-    r2->data[i] = (absu->data[i] > d);
+    r3[i] = (absu_data[i] <= cktuning_data[0]);
   }
-  emxInit_boolean_T(&r3, 1);
-  i = r3->size[0];
-  r3->size[0] = absu->size[0];
-  emxEnsureCapacity_boolean_T(r3, i);
+  emxInit_boolean_T(&r4, 1);
+  i = r4->size[0];
+  r4->size[0] = absu->size[0];
+  emxEnsureCapacity_boolean_T(r4, i);
+  r5 = r4->data;
   nx = absu->size[0];
   for (i = 0; i < nx; i++) {
-    r3->data[i] = (absu->data[i] <= cktuning->data[0]);
+    r5[i] = (absu_data[i] > d);
+  }
+  emxInit_boolean_T(&r6, 1);
+  i = r6->size[0];
+  r6->size[0] = absu->size[0];
+  emxEnsureCapacity_boolean_T(r6, i);
+  r7 = r6->data;
+  nx = absu->size[0];
+  for (i = 0; i < nx; i++) {
+    r7[i] = (absu_data[i] <= cktuning_data[0]);
   }
   k = r->size[0] - 1;
   nx = 0;
   for (i = 0; i <= k; i++) {
-    if (r->data[i] && r1->data[i]) {
+    if (r1[i] && r3[i]) {
       nx++;
     }
   }
-  emxInit_int32_T(&r4, 1);
-  i = r4->size[0];
-  r4->size[0] = nx;
-  emxEnsureCapacity_int32_T(r4, i);
+  emxInit_int32_T(&r8, 1);
+  i = r8->size[0];
+  r8->size[0] = nx;
+  emxEnsureCapacity_int32_T(r8, i);
+  r9 = r8->data;
   nx = 0;
   for (i = 0; i <= k; i++) {
-    if (r->data[i] && r1->data[i]) {
-      r4->data[nx] = i + 1;
+    if (r1[i] && r3[i]) {
+      r9[nx] = i + 1;
       nx++;
     }
   }
   emxInit_real_T(&x, 1);
-  a = sqrt((cktuning->data[1] - 1.0) * (a * a) / A);
-  b_a = sqrt(A * (cktuning->data[1] - 1.0));
+  a = sqrt((cktuning_data[1] - 1.0) * (a * a) / A);
+  b_a = sqrt(A * (cktuning_data[1] - 1.0));
   i = x->size[0];
-  x->size[0] = r4->size[0];
+  x->size[0] = r8->size[0];
   emxEnsureCapacity_real_T(x, i);
-  nx = r4->size[0];
+  x_data = x->data;
+  nx = r8->size[0];
   for (i = 0; i < nx; i++) {
-    x->data[i] = a * (cktuning->data[0] - absu->data[r4->data[i] - 1]) / 2.0;
+    x_data[i] = a * (cktuning_data[0] - absu_data[r9[i] - 1]) / 2.0;
   }
-  emxFree_int32_T(&r4);
+  emxFree_int32_T(&r8);
   nx = x->size[0];
   for (k = 0; k < nx; k++) {
-    x->data[k] = tanh(x->data[k]);
+    x_data[k] = tanh(x_data[k]);
   }
-  k = r2->size[0] - 1;
+  k = r4->size[0] - 1;
   nx = 0;
   for (i = 0; i <= k; i++) {
-    if (r2->data[i] && r3->data[i]) {
+    if (r5[i] && r7[i]) {
       nx++;
     }
   }
-  emxInit_int32_T(&r5, 1);
-  i = r5->size[0];
-  r5->size[0] = nx;
-  emxEnsureCapacity_int32_T(r5, i);
+  emxInit_int32_T(&r10, 1);
+  i = r10->size[0];
+  r10->size[0] = nx;
+  emxEnsureCapacity_int32_T(r10, i);
+  r9 = r10->data;
   nx = 0;
   for (i = 0; i <= k; i++) {
-    if (r2->data[i] && r3->data[i]) {
-      r5->data[nx] = i + 1;
+    if (r5[i] && r7[i]) {
+      r9[nx] = i + 1;
       nx++;
     }
   }
-  emxInit_real_T(&r6, 1);
-  i = r6->size[0];
-  r6->size[0] = r5->size[0];
-  emxEnsureCapacity_real_T(r6, i);
-  nx = r5->size[0];
+  emxInit_real_T(&r11, 1);
+  i = r11->size[0];
+  r11->size[0] = r10->size[0];
+  emxEnsureCapacity_real_T(r11, i);
+  r12 = r11->data;
+  nx = r10->size[0];
   for (i = 0; i < nx; i++) {
-    r6->data[i] = u->data[r5->data[i] - 1];
+    r12[i] = u_data[r9[i] - 1];
   }
-  nx = r5->size[0];
-  emxFree_int32_T(&r5);
+  nx = r10->size[0];
+  emxFree_int32_T(&r10);
   for (k = 0; k < nx; k++) {
-    A = r6->data[k];
-    if (r6->data[k] < 0.0) {
+    A = r12[k];
+    if (r12[k] < 0.0) {
       A = -1.0;
-    } else if (r6->data[k] > 0.0) {
+    } else if (r12[k] > 0.0) {
       A = 1.0;
-    } else if (r6->data[k] == 0.0) {
+    } else if (r12[k] == 0.0) {
       A = 0.0;
     }
-    r6->data[k] = A;
+    r12[k] = A;
   }
   i = r->size[0];
   r->size[0] = absu->size[0];
   emxEnsureCapacity_boolean_T(r, i);
+  r1 = r->data;
   nx = absu->size[0];
   for (i = 0; i < nx; i++) {
-    r->data[i] = (absu->data[i] > d);
-  }
-  i = r1->size[0];
-  r1->size[0] = absu->size[0];
-  emxEnsureCapacity_boolean_T(r1, i);
-  nx = absu->size[0];
-  for (i = 0; i < nx; i++) {
-    r1->data[i] = (absu->data[i] <= cktuning->data[0]);
+    r1[i] = (absu_data[i] > d);
   }
   i = r2->size[0];
   r2->size[0] = absu->size[0];
   emxEnsureCapacity_boolean_T(r2, i);
+  r3 = r2->data;
   nx = absu->size[0];
   for (i = 0; i < nx; i++) {
-    r2->data[i] = (absu->data[i] > d);
+    r3[i] = (absu_data[i] <= cktuning_data[0]);
   }
-  i = r3->size[0];
-  r3->size[0] = absu->size[0];
-  emxEnsureCapacity_boolean_T(r3, i);
+  i = r4->size[0];
+  r4->size[0] = absu->size[0];
+  emxEnsureCapacity_boolean_T(r4, i);
+  r5 = r4->data;
   nx = absu->size[0];
   for (i = 0; i < nx; i++) {
-    r3->data[i] = (absu->data[i] <= cktuning->data[0]);
+    r5[i] = (absu_data[i] > d);
+  }
+  i = r6->size[0];
+  r6->size[0] = absu->size[0];
+  emxEnsureCapacity_boolean_T(r6, i);
+  r7 = r6->data;
+  nx = absu->size[0];
+  for (i = 0; i < nx; i++) {
+    r7[i] = (absu_data[i] <= cktuning_data[0]);
   }
   k = r->size[0] - 1;
   nx = 0;
   for (i = 0; i <= k; i++) {
-    if (r->data[i] && r1->data[i]) {
+    if (r1[i] && r3[i]) {
       nx++;
     }
   }
-  emxInit_int32_T(&r7, 1);
-  i = r7->size[0];
-  r7->size[0] = nx;
-  emxEnsureCapacity_int32_T(r7, i);
+  emxInit_int32_T(&r13, 1);
+  i = r13->size[0];
+  r13->size[0] = nx;
+  emxEnsureCapacity_int32_T(r13, i);
+  r9 = r13->data;
   nx = 0;
   for (i = 0; i <= k; i++) {
-    if (r->data[i] && r1->data[i]) {
-      r7->data[nx] = i + 1;
+    if (r1[i] && r3[i]) {
+      r9[nx] = i + 1;
       nx++;
     }
   }
-  emxFree_boolean_T(&r1);
+  emxFree_boolean_T(&r2);
   emxFree_boolean_T(&r);
-  i = absu->size[0];
-  absu->size[0] = x->size[0];
-  emxEnsureCapacity_real_T(absu, i);
-  nx = x->size[0];
-  for (i = 0; i < nx; i++) {
-    absu->data[i] = b_a * x->data[i] * r6->data[i] / u->data[r7->data[i] - 1];
+  if (x->size[0] == 1) {
+    nx = r11->size[0];
+  } else {
+    nx = x->size[0];
+  }
+  if ((x->size[0] == r11->size[0]) && (nx == r13->size[0])) {
+    i = absu->size[0];
+    absu->size[0] = x->size[0];
+    emxEnsureCapacity_real_T(absu, i);
+    absu_data = absu->data;
+    nx = x->size[0];
+    for (i = 0; i < nx; i++) {
+      absu_data[i] = b_a * x_data[i] * r12[i] / u_data[r9[i] - 1];
+    }
+  } else {
+    ue_binary_expand_op(absu, b_a, x, r11, u, r13);
+    absu_data = absu->data;
   }
   emxFree_real_T(&x);
-  emxFree_int32_T(&r7);
-  emxFree_real_T(&r6);
-  k = r2->size[0];
+  emxFree_int32_T(&r13);
+  emxFree_real_T(&r11);
+  k = r4->size[0];
   nx = 0;
   for (i = 0; i < k; i++) {
-    if (r2->data[i] && r3->data[i]) {
-      w->data[i] = absu->data[nx];
+    if (r5[i] && r7[i]) {
+      w_data[i] = absu_data[nx];
       nx++;
     }
   }
-  emxFree_boolean_T(&r3);
-  emxFree_boolean_T(&r2);
+  emxFree_boolean_T(&r6);
+  emxFree_boolean_T(&r4);
   emxFree_real_T(&absu);
   /*  0,			              |u| >= c. */
 }

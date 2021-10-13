@@ -14,6 +14,7 @@
 #include "find.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
+#include "ixfun.h"
 #include "minOrMax.h"
 #include "rt_nonfinite.h"
 #include <string.h>
@@ -24,13 +25,23 @@ void setdiffFS(const emxArray_real_T *a, const emxArray_real_T *b,
 {
   emxArray_boolean_T *aT;
   emxArray_boolean_T *bT;
+  emxArray_boolean_T *b_c;
   emxArray_int32_T *r;
   emxArray_real_T *b_a;
+  const double *a_data;
+  const double *b_data;
   double ma;
+  double *c_data;
   int i;
   int loop_ub;
+  int *r1;
   bool varargin_1;
   bool varargin_2;
+  bool *aT_data;
+  bool *bT_data;
+  bool *b_c_data;
+  b_data = b->data;
+  a_data = a->data;
   emxInit_real_T(&b_a, 1);
   /* setdiffFS finds the positive integers in a which are not present in the
    * positive integers in b */
@@ -48,9 +59,7 @@ void setdiffFS(const emxArray_real_T *a, const emxArray_real_T *b,
   /*     b:         vector containing positive integer elements. Vector. A */
   /*                vector of length nb containing positive integer numbers. */
   /*  */
-  /*  */
   /*  Optional input arguments: */
-  /*  */
   /*  */
   /*  Output: */
   /*  */
@@ -60,23 +69,18 @@ void setdiffFS(const emxArray_real_T *a, const emxArray_real_T *b,
   /*                Note that the elements of c contain no repetitions and are
    * sorted. */
   /*  */
-  /*  */
   /*  See also: setdiff */
   /*  */
   /*  References: */
   /*  */
-  /*  */
   /*  Riani, M., Perrotta, D. and Cerioli, A. (2015), The Forward Search for */
   /*  Very Large Datasets, "Journal of Statistical Software" */
-  /*  */
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
   /*  */
-  /*  */
   /* <a href="matlab: docsearchFS('setdiffFS')">Link to the help page for this
    * function</a> */
-  /*  */
   /*  */
   /* $LastChangedDate::                      $: Date of the last commit */
   /*  Examples: */
@@ -123,13 +127,14 @@ void setdiffFS(const emxArray_real_T *a, const emxArray_real_T *b,
   i = b_a->size[0];
   b_a->size[0] = a->size[0] + b->size[0];
   emxEnsureCapacity_real_T(b_a, i);
+  c_data = b_a->data;
   loop_ub = a->size[0];
   for (i = 0; i < loop_ub; i++) {
-    b_a->data[i] = a->data[i];
+    c_data[i] = a_data[i];
   }
   loop_ub = b->size[0];
   for (i = 0; i < loop_ub; i++) {
-    b_a->data[i + a->size[0]] = b->data[i];
+    c_data[i + a->size[0]] = b_data[i];
   }
   emxInit_boolean_T(&aT, 1);
   ma = b_maximum(b_a);
@@ -137,62 +142,94 @@ void setdiffFS(const emxArray_real_T *a, const emxArray_real_T *b,
   i = aT->size[0];
   aT->size[0] = (int)ma;
   emxEnsureCapacity_boolean_T(aT, i);
+  aT_data = aT->data;
   emxFree_real_T(&b_a);
   for (i = 0; i < loop_ub; i++) {
-    aT->data[i] = false;
+    aT_data[i] = false;
   }
   emxInit_boolean_T(&bT, 1);
   i = bT->size[0];
   bT->size[0] = (int)ma;
   emxEnsureCapacity_boolean_T(bT, i);
+  bT_data = bT->data;
   for (i = 0; i < loop_ub; i++) {
-    bT->data[i] = false;
+    bT_data[i] = false;
   }
   emxInit_int32_T(&r, 1);
   i = r->size[0];
   r->size[0] = a->size[0];
   emxEnsureCapacity_int32_T(r, i);
+  r1 = r->data;
   loop_ub = a->size[0];
   for (i = 0; i < loop_ub; i++) {
-    r->data[i] = (int)a->data[i];
+    r1[i] = (int)a_data[i];
   }
   loop_ub = r->size[0];
   for (i = 0; i < loop_ub; i++) {
-    aT->data[r->data[i] - 1] = true;
+    aT_data[r1[i] - 1] = true;
   }
   i = r->size[0];
   r->size[0] = b->size[0];
   emxEnsureCapacity_int32_T(r, i);
+  r1 = r->data;
   loop_ub = b->size[0];
   for (i = 0; i < loop_ub; i++) {
-    r->data[i] = (int)b->data[i];
+    r1[i] = (int)b_data[i];
   }
   loop_ub = r->size[0];
   for (i = 0; i < loop_ub; i++) {
-    bT->data[r->data[i] - 1] = true;
+    bT_data[r1[i] - 1] = true;
   }
-  /*  c = vector containing numbers which are inside vector a which are not
-   * present in b */
-  /*  Elements in c are sorted and contain no repetitions */
-  loop_ub = aT->size[0];
-  for (i = 0; i < loop_ub; i++) {
-    varargin_1 = aT->data[i];
-    varargin_2 = !bT->data[i];
-    aT->data[i] = (varargin_1 && varargin_2);
+  /*  c = vector containing numbers which are inside vector a which are not */
+  /*  present in b. Elements in c are sorted and contain no repetitions. */
+  emxInit_boolean_T(&b_c, 1);
+  if (aT->size[0] == bT->size[0]) {
+    i = b_c->size[0];
+    b_c->size[0] = aT->size[0];
+    emxEnsureCapacity_boolean_T(b_c, i);
+    b_c_data = b_c->data;
+    loop_ub = aT->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      varargin_1 = aT_data[i];
+      varargin_2 = bT_data[i];
+      b_c_data[i] = (varargin_1 && varargin_2);
+    }
+  } else {
+    expand_bitand(aT, bT, b_c);
+    b_c_data = b_c->data;
   }
-  emxFree_boolean_T(&bT);
-  b_eml_find(aT, r);
+  if (aT->size[0] == b_c->size[0]) {
+    i = bT->size[0];
+    bT->size[0] = aT->size[0];
+    emxEnsureCapacity_boolean_T(bT, i);
+    bT_data = bT->data;
+    loop_ub = aT->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      varargin_1 = aT_data[i];
+      varargin_2 = b_c_data[i];
+      bT_data[i] = varargin_1 ^ varargin_2;
+    }
+  } else {
+    expand_bitxor(aT, b_c, bT);
+  }
+  emxFree_boolean_T(&b_c);
+  emxFree_boolean_T(&aT);
+  b_eml_find(bT, r);
+  r1 = r->data;
   i = c->size[0];
   c->size[0] = r->size[0];
   emxEnsureCapacity_real_T(c, i);
+  c_data = c->data;
   loop_ub = r->size[0];
-  emxFree_boolean_T(&aT);
+  emxFree_boolean_T(&bT);
   for (i = 0; i < loop_ub; i++) {
-    c->data[i] = r->data[i];
+    c_data[i] = r1[i];
   }
   emxFree_int32_T(&r);
   /*  The instruction above is faster than the one below */
-  /*  c=find(aT & ~bT); */
+  /*  c = find(bitand(aT , not(bT))); */
+  /*  The instruction above is faster than the one below */
+  /*  c = find(aT & ~bT); */
 }
 
 /* End of code generation (setdiffFS.c) */

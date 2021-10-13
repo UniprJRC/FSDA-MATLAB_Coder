@@ -21,26 +21,38 @@
 void HYPrho(const emxArray_real_T *u, const emxArray_real_T *cktuning,
             emxArray_real_T *rhoHYP)
 {
-  emxArray_boolean_T *r1;
   emxArray_boolean_T *r2;
-  emxArray_boolean_T *r3;
   emxArray_boolean_T *r4;
+  emxArray_boolean_T *r6;
+  emxArray_boolean_T *r8;
   emxArray_int32_T *r;
-  emxArray_int32_T *r5;
-  emxArray_int32_T *r6;
-  emxArray_int32_T *r7;
+  emxArray_int32_T *r10;
+  emxArray_int32_T *r11;
+  emxArray_int32_T *r12;
   emxArray_real_T *absu;
   emxArray_real_T *y;
+  const double *cktuning_data;
+  const double *u_data;
   double A;
   double B;
   double a_tmp;
   double c;
   double c_tmp;
   double d;
-  double y_tmp;
+  double varargin_1;
+  double *absu_data;
+  double *rhoHYP_data;
+  double *y_data;
   int i;
   int k;
   int nx;
+  int *r1;
+  bool *r3;
+  bool *r5;
+  bool *r7;
+  bool *r9;
+  cktuning_data = cktuning->data;
+  u_data = u->data;
   /* HYPrho computes rho function  using hyperbolic tangent estimator */
   /*  */
   /* <a href="matlab: docsearchFS('HYPrho')">Link to the help function</a> */
@@ -70,12 +82,10 @@ void HYPrho(const emxArray_real_T *u, const emxArray_real_T *cktuning,
   /*  */
   /*   Output: */
   /*  */
-  /*  */
   /*    rhoHYP :     rho function for hyperbolic tangent estimator. Vector. */
   /*                 n x 1 vector which contains the hyperbolic rho */
   /*                 associated to the residuals or Mahalanobis distances for */
   /*                 the n units of the sample. */
-  /*  */
   /*  */
   /*  More About: */
   /*  */
@@ -85,7 +95,6 @@ void HYPrho(const emxArray_real_T *u, const emxArray_real_T *cktuning,
   /*  estimate. This leads to the Hyperbolic Tangent $\rho$ */
   /*  function, which, for suitable constants $c$, $k$, $A$, $B$ and */
   /*  $d$, is defined as */
-  /*  */
   /*  */
   /*  \[ */
   /*   HYPrho(u) = */
@@ -131,7 +140,6 @@ void HYPrho(const emxArray_real_T *u, const emxArray_real_T *cktuning,
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
   /*  */
-  /*  */
   /* <a href="matlab: docsearchFS('HYPrho')">Link to the help page for this
    * function</a> */
   /*  */
@@ -166,9 +174,9 @@ void HYPrho(const emxArray_real_T *u, const emxArray_real_T *cktuning,
   /* } */
   /*  Beginning of code */
   if (cktuning->size[0] > 2) {
-    A = cktuning->data[2];
-    B = cktuning->data[3];
-    d = cktuning->data[4];
+    A = cktuning_data[2];
+    B = cktuning_data[3];
+    d = cktuning_data[4];
   } else {
     A = 1.0;
     B = 1.0;
@@ -183,23 +191,25 @@ void HYPrho(const emxArray_real_T *u, const emxArray_real_T *cktuning,
   i = rhoHYP->size[0];
   rhoHYP->size[0] = u->size[0];
   emxEnsureCapacity_real_T(rhoHYP, i);
+  rhoHYP_data = rhoHYP->data;
   nx = u->size[0];
   for (i = 0; i < nx; i++) {
-    rhoHYP->data[i] = 0.0;
+    rhoHYP_data[i] = 0.0;
   }
   emxInit_real_T(&absu, 1);
   nx = u->size[0];
   i = absu->size[0];
   absu->size[0] = u->size[0];
   emxEnsureCapacity_real_T(absu, i);
+  absu_data = absu->data;
   for (k = 0; k < nx; k++) {
-    absu->data[k] = fabs(u->data[k]);
+    absu_data[k] = fabs(u_data[k]);
   }
   /*   u,		   |u| <=d */
   k = absu->size[0] - 1;
   nx = 0;
   for (i = 0; i <= k; i++) {
-    if (absu->data[i] <= d) {
+    if (absu_data[i] <= d) {
       nx++;
     }
   }
@@ -207,10 +217,11 @@ void HYPrho(const emxArray_real_T *u, const emxArray_real_T *cktuning,
   i = r->size[0];
   r->size[0] = nx;
   emxEnsureCapacity_int32_T(r, i);
+  r1 = r->data;
   nx = 0;
   for (i = 0; i <= k; i++) {
-    if (absu->data[i] <= d) {
-      r->data[nx] = i + 1;
+    if (absu_data[i] <= d) {
+      r1[nx] = i + 1;
       nx++;
     }
   }
@@ -218,150 +229,159 @@ void HYPrho(const emxArray_real_T *u, const emxArray_real_T *cktuning,
   i = y->size[0];
   y->size[0] = r->size[0];
   emxEnsureCapacity_real_T(y, i);
+  y_data = y->data;
   nx = r->size[0];
-  for (k = 0; k < nx; k++) {
-    y_tmp = u->data[r->data[k] - 1];
-    y->data[k] = y_tmp * y_tmp;
+  for (i = 0; i < nx; i++) {
+    varargin_1 = u_data[r1[i] - 1];
+    y_data[i] = varargin_1 * varargin_1;
   }
   emxFree_int32_T(&r);
   nx = y->size[0];
   for (i = 0; i < nx; i++) {
-    y->data[i] /= 2.0;
+    y_data[i] /= 2.0;
   }
   k = absu->size[0];
   nx = 0;
   for (i = 0; i < k; i++) {
-    if (absu->data[i] <= d) {
-      rhoHYP->data[i] = y->data[nx];
+    if (absu_data[i] <= d) {
+      rhoHYP_data[i] = y_data[nx];
       nx++;
     }
   }
-  emxInit_boolean_T(&r1, 1);
-  /*                    d <= |u| < c, */
-  i = r1->size[0];
-  r1->size[0] = absu->size[0];
-  emxEnsureCapacity_boolean_T(r1, i);
-  nx = absu->size[0];
-  for (i = 0; i < nx; i++) {
-    r1->data[i] = (absu->data[i] > d);
-  }
   emxInit_boolean_T(&r2, 1);
+  /*                    d <= |u| < c, */
   i = r2->size[0];
   r2->size[0] = absu->size[0];
   emxEnsureCapacity_boolean_T(r2, i);
+  r3 = r2->data;
   nx = absu->size[0];
   for (i = 0; i < nx; i++) {
-    r2->data[i] = (absu->data[i] <= cktuning->data[0]);
-  }
-  emxInit_boolean_T(&r3, 1);
-  i = r3->size[0];
-  r3->size[0] = absu->size[0];
-  emxEnsureCapacity_boolean_T(r3, i);
-  nx = absu->size[0];
-  for (i = 0; i < nx; i++) {
-    r3->data[i] = (absu->data[i] > d);
+    r3[i] = (absu_data[i] > d);
   }
   emxInit_boolean_T(&r4, 1);
   i = r4->size[0];
   r4->size[0] = absu->size[0];
   emxEnsureCapacity_boolean_T(r4, i);
+  r5 = r4->data;
   nx = absu->size[0];
   for (i = 0; i < nx; i++) {
-    r4->data[i] = (absu->data[i] <= cktuning->data[0]);
+    r5[i] = (absu_data[i] <= cktuning_data[0]);
   }
-  k = r1->size[0] - 1;
-  nx = 0;
-  for (i = 0; i <= k; i++) {
-    if (r1->data[i] && r2->data[i]) {
-      nx++;
-    }
-  }
-  emxInit_int32_T(&r5, 1);
-  i = r5->size[0];
-  r5->size[0] = nx;
-  emxEnsureCapacity_int32_T(r5, i);
-  nx = 0;
-  for (i = 0; i <= k; i++) {
-    if (r1->data[i] && r2->data[i]) {
-      r5->data[nx] = i + 1;
-      nx++;
-    }
-  }
-  emxFree_boolean_T(&r2);
-  emxFree_boolean_T(&r1);
-  y_tmp = 0.5 * sqrt((cktuning->data[1] - 1.0) * (B * B) / A);
-  i = y->size[0];
-  y->size[0] = r5->size[0];
-  emxEnsureCapacity_real_T(y, i);
-  nx = r5->size[0];
-  for (i = 0; i < nx; i++) {
-    y->data[i] = y_tmp * (cktuning->data[0] - absu->data[r5->data[i] - 1]);
-  }
-  emxFree_int32_T(&r5);
-  a_tmp = 2.0 * (A / B);
-  nx = y->size[0];
-  for (k = 0; k < nx; k++) {
-    y->data[k] = cosh(y->data[k]);
-  }
-  k = r3->size[0] - 1;
-  nx = 0;
-  for (i = 0; i <= k; i++) {
-    if (r3->data[i] && r4->data[i]) {
-      nx++;
-    }
-  }
-  emxInit_int32_T(&r6, 1);
+  emxInit_boolean_T(&r6, 1);
   i = r6->size[0];
-  r6->size[0] = nx;
-  emxEnsureCapacity_int32_T(r6, i);
+  r6->size[0] = absu->size[0];
+  emxEnsureCapacity_boolean_T(r6, i);
+  r7 = r6->data;
+  nx = absu->size[0];
+  for (i = 0; i < nx; i++) {
+    r7[i] = (absu_data[i] > d);
+  }
+  emxInit_boolean_T(&r8, 1);
+  i = r8->size[0];
+  r8->size[0] = absu->size[0];
+  emxEnsureCapacity_boolean_T(r8, i);
+  r9 = r8->data;
+  nx = absu->size[0];
+  for (i = 0; i < nx; i++) {
+    r9[i] = (absu_data[i] <= cktuning_data[0]);
+  }
+  k = r2->size[0] - 1;
   nx = 0;
   for (i = 0; i <= k; i++) {
-    if (r3->data[i] && r4->data[i]) {
-      r6->data[nx] = i + 1;
+    if (r3[i] && r5[i]) {
+      nx++;
+    }
+  }
+  emxInit_int32_T(&r10, 1);
+  i = r10->size[0];
+  r10->size[0] = nx;
+  emxEnsureCapacity_int32_T(r10, i);
+  r1 = r10->data;
+  nx = 0;
+  for (i = 0; i <= k; i++) {
+    if (r3[i] && r5[i]) {
+      r1[nx] = i + 1;
       nx++;
     }
   }
   emxFree_boolean_T(&r4);
-  emxFree_boolean_T(&r3);
+  emxFree_boolean_T(&r2);
+  varargin_1 = 0.5 * sqrt((cktuning_data[1] - 1.0) * (B * B) / A);
+  i = y->size[0];
+  y->size[0] = r10->size[0];
+  emxEnsureCapacity_real_T(y, i);
+  y_data = y->data;
+  nx = r10->size[0];
+  for (i = 0; i < nx; i++) {
+    y_data[i] = varargin_1 * (cktuning_data[0] - absu_data[r1[i] - 1]);
+  }
+  emxFree_int32_T(&r10);
+  a_tmp = 2.0 * (A / B);
   nx = y->size[0];
   for (k = 0; k < nx; k++) {
-    y->data[k] = log(y->data[k]);
+    y_data[k] = cosh(y_data[k]);
+  }
+  k = r6->size[0] - 1;
+  nx = 0;
+  for (i = 0; i <= k; i++) {
+    if (r7[i] && r9[i]) {
+      nx++;
+    }
+  }
+  emxInit_int32_T(&r11, 1);
+  i = r11->size[0];
+  r11->size[0] = nx;
+  emxEnsureCapacity_int32_T(r11, i);
+  r1 = r11->data;
+  nx = 0;
+  for (i = 0; i <= k; i++) {
+    if (r7[i] && r9[i]) {
+      r1[nx] = i + 1;
+      nx++;
+    }
+  }
+  emxFree_boolean_T(&r8);
+  emxFree_boolean_T(&r6);
+  nx = y->size[0];
+  for (k = 0; k < nx; k++) {
+    y_data[k] = log(y_data[k]);
   }
   c_tmp = d * d;
   c = c_tmp / 2.0;
-  d = log(cosh(y_tmp * (cktuning->data[0] - d)));
-  y_tmp = 2.0 * A / B * d;
+  d = log(cosh(varargin_1 * (cktuning_data[0] - d)));
+  varargin_1 = 2.0 * A / B * d;
   nx = y->size[0];
   for (i = 0; i < nx; i++) {
-    rhoHYP->data[r6->data[i] - 1] = (c - a_tmp * y->data[i]) + y_tmp;
+    rhoHYP_data[r1[i] - 1] = (c - a_tmp * y_data[i]) + varargin_1;
   }
   emxFree_real_T(&y);
-  emxFree_int32_T(&r6);
+  emxFree_int32_T(&r11);
   /* |u| >= c. */
   k = absu->size[0] - 1;
   nx = 0;
   for (i = 0; i <= k; i++) {
-    if (absu->data[i] > cktuning->data[0]) {
+    if (absu_data[i] > cktuning_data[0]) {
       nx++;
     }
   }
-  emxInit_int32_T(&r7, 1);
-  i = r7->size[0];
-  r7->size[0] = nx;
-  emxEnsureCapacity_int32_T(r7, i);
+  emxInit_int32_T(&r12, 1);
+  i = r12->size[0];
+  r12->size[0] = nx;
+  emxEnsureCapacity_int32_T(r12, i);
+  r1 = r12->data;
   nx = 0;
   for (i = 0; i <= k; i++) {
-    if (absu->data[i] > cktuning->data[0]) {
-      r7->data[nx] = i + 1;
+    if (absu_data[i] > cktuning_data[0]) {
+      r1[nx] = i + 1;
       nx++;
     }
   }
   emxFree_real_T(&absu);
-  nx = r7->size[0];
+  nx = r12->size[0];
   for (i = 0; i < nx; i++) {
-    rhoHYP->data[r7->data[i] - 1] = c_tmp / 2.0 + a_tmp * d;
+    rhoHYP_data[r1[i] - 1] = c_tmp / 2.0 + a_tmp * d;
   }
-  emxFree_int32_T(&r7);
+  emxFree_int32_T(&r12);
 }
 
 /* End of code generation (HYPrho.c) */

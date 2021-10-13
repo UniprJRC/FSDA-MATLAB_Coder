@@ -27,6 +27,10 @@ void zscore(const emxArray_real_T *x, emxArray_real_T *z)
   emxArray_real_T *r1;
   emxArray_real_T *sigma;
   emxArray_real_T *xv;
+  const double *x_data;
+  double *sigma_data;
+  double *xv_data;
+  double *z_data;
   int acoef;
   int b_k;
   int bcoef;
@@ -36,14 +40,16 @@ void zscore(const emxArray_real_T *x, emxArray_real_T *z)
   int npages;
   int nx;
   int outsize_idx_0;
+  x_data = x->data;
   emxInit_real_T(&sigma, 2);
   i = sigma->size[0] * sigma->size[1];
   sigma->size[0] = 1;
   sigma->size[1] = x->size[1];
   emxEnsureCapacity_real_T(sigma, i);
+  sigma_data = sigma->data;
   nx = x->size[1];
   for (i = 0; i < nx; i++) {
-    sigma->data[i] = 0.0;
+    sigma_data[i] = 0.0;
   }
   nx = x->size[0];
   npages = x->size[1];
@@ -57,38 +63,42 @@ void zscore(const emxArray_real_T *x, emxArray_real_T *z)
     i = xv->size[0];
     xv->size[0] = outsize_idx_0;
     emxEnsureCapacity_real_T(xv, i);
+    xv_data = xv->data;
     for (i = 0; i < acoef; i++) {
-      xv->data[i] = 0.0;
+      xv_data[i] = 0.0;
     }
     for (k = 0; k < nx; k++) {
-      xv->data[k] = x->data[csz_idx_1 + k];
+      xv_data[k] = x_data[csz_idx_1 + k];
     }
-    sigma->data[bcoef] = vvarstd(xv, x->size[0]);
+    sigma_data[bcoef] = vvarstd(xv, x->size[0]);
   }
   emxFree_real_T(&xv);
   i = sigma->size[1];
   for (k = 0; k < i; k++) {
-    if (sigma->data[k] == 0.0) {
-      sigma->data[k] = 1.0;
+    if (sigma_data[k] == 0.0) {
+      sigma_data[k] = 1.0;
     }
   }
   emxInit_real_T(&r, 2);
   emxInit_real_T(&r1, 2);
   combineVectorElements(x, r);
+  xv_data = r->data;
   i = r1->size[0] * r1->size[1];
   r1->size[0] = 1;
   r1->size[1] = r->size[1];
   emxEnsureCapacity_real_T(r1, i);
+  z_data = r1->data;
   nx = r->size[1];
   for (i = 0; i < nx; i++) {
-    r1->data[i] = r->data[i] / (double)x->size[0];
+    z_data[i] = xv_data[i] / (double)x->size[0];
   }
   emxFree_real_T(&r);
   emxInit_real_T(&a, 2);
   bsxfun(x, r1, a);
+  xv_data = a->data;
   nx = sigma->size[1];
   npages = a->size[1];
-  if (nx < npages) {
+  if (nx <= npages) {
     npages = nx;
   }
   if (sigma->size[1] == 1) {
@@ -104,7 +114,7 @@ void zscore(const emxArray_real_T *x, emxArray_real_T *z)
   z->size[0] = a->size[0];
   nx = sigma->size[1];
   npages = a->size[1];
-  if (nx < npages) {
+  if (nx <= npages) {
     npages = nx;
   }
   if (sigma->size[1] == 1) {
@@ -117,6 +127,7 @@ void zscore(const emxArray_real_T *x, emxArray_real_T *z)
     z->size[1] = npages;
   }
   emxEnsureCapacity_real_T(z, i);
+  z_data = z->data;
   emxFree_real_T(&r1);
   if ((a->size[0] != 0) && (csz_idx_1 != 0)) {
     acoef = (a->size[1] != 1);
@@ -128,8 +139,8 @@ void zscore(const emxArray_real_T *x, emxArray_real_T *z)
       npages = (a->size[0] != 1);
       outsize_idx_0 = z->size[0] - 1;
       for (b_k = 0; b_k <= outsize_idx_0; b_k++) {
-        z->data[b_k + z->size[0] * k] =
-            a->data[npages * b_k + a->size[0] * csz_idx_1] / sigma->data[nx];
+        z_data[b_k + z->size[0] * k] =
+            xv_data[npages * b_k + a->size[0] * csz_idx_1] / sigma_data[nx];
       }
     }
   }

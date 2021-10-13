@@ -14,6 +14,7 @@
 #include "fsdaC_data.h"
 #include "fsdaC_rtwutil.h"
 #include "gammainc.h"
+#include "gammaln.h"
 #include "rt_nonfinite.h"
 #include <math.h>
 #include <string.h>
@@ -21,25 +22,25 @@
 /* Function Definitions */
 double TBeff(double eff)
 {
-  creal_T b_b_tmp;
-  creal_T b_tmp;
   creal_T dc;
+  creal_T dc1;
+  creal_T dc2;
   double a;
   double ar;
-  double b_re;
   double b_step;
   double br_tmp;
   double ceff;
   double cs;
+  double cs_tmp;
+  double d;
+  double d1;
   double empeff;
+  double lgap11_tmp;
   double re;
   /* Tbeff finds the constant c which is associated to the requested efficiency
    * for Tukey's biweight */
   /*  */
-  /*  */
-  /*  */
   /* <a href="matlab: docsearchFS('TBeff')">Link to the help function</a> */
-  /*  */
   /*  */
   /*   Required input arguments: */
   /*  */
@@ -68,7 +69,6 @@ double TBeff(double eff)
   /*                Example - 'approxsheff',1 */
   /*                Data Types - double */
   /*  */
-  /*  */
   /*  Output: */
   /*  */
   /*   ceff : Requested tuning constant. Scalar. Tuning constatnt of Tukey
@@ -86,12 +86,10 @@ double TBeff(double eff)
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
   /*  */
-  /*  */
   /* <a href="matlab: docsearchFS('TBeff')">Link to the help page for this
    * function</a> */
   /*  */
   /* $LastChangedDate::                      $: Date of the last commit */
-  /*  */
   /*  */
   /*  Examples: */
   /*  */
@@ -107,8 +105,6 @@ double TBeff(double eff)
   /*     % c= 5.490249208447494 */
   /*     c=TBeff(0.95,1,1) */
   /* } */
-  /*  */
-  /*  */
   /*  */
   /* { */
   /*     % Find shape efficiency. */
@@ -161,66 +157,79 @@ double TBeff(double eff)
   /*  empeff = bet^2/alph = 1 / [var (robust estimator of location)] */
   empeff = 10.0;
   while (fabs(empeff - eff) > 1.0E-12) {
-    empeff = ceff * ceff;
-    cs = empeff / 2.0;
-    b_tmp = gammainc(cs, 2.5);
-    b_b_tmp = gammainc(cs, 1.5);
-    ar = 15.0 * b_tmp.re;
+    cs_tmp = rt_powd_snf(ceff, 2.0);
+    cs = cs_tmp / 2.0;
+    empeff = 3.5;
+    gammaln(&empeff);
+    lgap11_tmp = 2.5;
+    gammaln(&lgap11_tmp);
+    d = 1.5;
+    gammaln(&d);
+    dc = scalar_gammainc(cs, 2.5, 0.91629073187415511, empeff);
+    ar = 15.0 * dc.re;
     br_tmp = rt_powd_snf(ceff, 4.0);
-    if (15.0 * b_tmp.im == 0.0) {
+    if (15.0 * dc.im == 0.0) {
       re = ar / br_tmp;
     } else if (ar == 0.0) {
       re = 0.0;
     } else {
       re = ar / br_tmp;
     }
-    ar = 6.0 * b_b_tmp.re;
-    if (6.0 * b_b_tmp.im == 0.0) {
-      b_re = ar / empeff;
+    dc1 = scalar_gammainc(cs, 1.5, 0.40546510810816438, lgap11_tmp);
+    ar = 6.0 * dc1.re;
+    if (6.0 * dc1.im == 0.0) {
+      lgap11_tmp = ar / cs_tmp;
     } else if (ar == 0.0) {
-      b_re = 0.0;
+      lgap11_tmp = 0.0;
     } else {
-      b_re = ar / empeff;
+      lgap11_tmp = ar / cs_tmp;
     }
-    a = (re - b_re) + (gammainc(cs, 0.5)).re;
-    dc = gammainc(cs, 5.5);
-    ar = 945.0 * dc.re;
+    a = (re - lgap11_tmp) +
+        (scalar_gammainc(cs, 0.5, -0.69314718055994529, d)).re;
+    d = 6.5;
+    gammaln(&d);
+    cs_tmp = 5.5;
+    gammaln(&cs_tmp);
+    d1 = 4.5;
+    gammaln(&d1);
+    dc2 = scalar_gammainc(cs, 5.5, 1.7047480922384253, d);
+    ar = 945.0 * dc2.re;
     empeff = rt_powd_snf(ceff, 8.0);
-    if (945.0 * dc.im == 0.0) {
+    if (945.0 * dc2.im == 0.0) {
       re = ar / empeff;
     } else if (ar == 0.0) {
       re = 0.0;
     } else {
       re = ar / empeff;
     }
-    dc = gammainc(cs, 4.5);
-    ar = 420.0 * dc.re;
+    dc2 = scalar_gammainc(cs, 4.5, 1.5040773967762742, cs_tmp);
+    ar = 420.0 * dc2.re;
     empeff = rt_powd_snf(ceff, 6.0);
-    if (420.0 * dc.im == 0.0) {
-      b_re = ar / empeff;
+    if (420.0 * dc2.im == 0.0) {
+      lgap11_tmp = ar / empeff;
     } else if (ar == 0.0) {
-      b_re = 0.0;
+      lgap11_tmp = 0.0;
     } else {
-      b_re = ar / empeff;
+      lgap11_tmp = ar / empeff;
     }
-    dc = gammainc(cs, 3.5);
-    ar = 90.0 * dc.re;
-    if (90.0 * dc.im == 0.0) {
-      br_tmp = ar / br_tmp;
+    dc2 = scalar_gammainc(cs, 3.5, 1.2527629684953681, d1);
+    ar = 90.0 * dc2.re;
+    if (90.0 * dc2.im == 0.0) {
+      cs_tmp = ar / br_tmp;
     } else if (ar == 0.0) {
-      br_tmp = 0.0;
+      cs_tmp = 0.0;
     } else {
-      br_tmp = ar / br_tmp;
+      cs_tmp = ar / br_tmp;
     }
-    ar = 6.0 * b_tmp.re;
-    if (6.0 * b_tmp.im == 0.0) {
+    ar = 6.0 * dc.re;
+    if (6.0 * dc.im == 0.0) {
       empeff = ar / cs;
     } else if (ar == 0.0) {
       empeff = 0.0;
     } else {
       empeff = ar / cs;
     }
-    empeff = a * a / ((((re - b_re) + br_tmp) - empeff) + b_b_tmp.re);
+    empeff = a * a / ((((re - lgap11_tmp) + cs_tmp) - empeff) + dc1.re);
     b_step /= 2.0;
     if (empeff < eff) {
       ceff += b_step;

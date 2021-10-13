@@ -24,13 +24,16 @@
 double vvarstd(const emxArray_real_T *v, int n)
 {
   emxArray_real_T *absdiff;
+  const double *v_data;
   double s;
   double xbar;
+  double *absdiff_data;
   int k;
+  v_data = v->data;
   if (n == 0) {
     s = rtNaN;
   } else if (n == 1) {
-    if ((!rtIsInf(v->data[0])) && (!rtIsNaN(v->data[0]))) {
+    if ((!rtIsInf(v_data[0])) && (!rtIsNaN(v_data[0]))) {
       s = 0.0;
     } else {
       s = rtNaN;
@@ -41,8 +44,9 @@ double vvarstd(const emxArray_real_T *v, int n)
     k = absdiff->size[0];
     absdiff->size[0] = v->size[0];
     emxEnsureCapacity_real_T(absdiff, k);
+    absdiff_data = absdiff->data;
     for (k = 0; k < n; k++) {
-      absdiff->data[k] = fabs(v->data[k] - xbar);
+      absdiff_data[k] = fabs(v_data[k] - xbar);
     }
     s = b_xnrm2(n, absdiff) / sqrt(n - 1);
     emxFree_real_T(&absdiff);

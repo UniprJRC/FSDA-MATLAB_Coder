@@ -23,6 +23,7 @@ void b_eml_float_colon(double a, double b, emxArray_real_T *y)
   double apnd;
   double cdiff;
   double ndbl;
+  double *y_data;
   int k;
   int n;
   int nm1d2;
@@ -46,22 +47,23 @@ void b_eml_float_colon(double a, double b, emxArray_real_T *y)
   y->size[0] = 1;
   y->size[1] = n;
   emxEnsureCapacity_real_T(y, nm1d2);
+  y_data = y->data;
   if (n > 0) {
-    y->data[0] = a;
+    y_data[0] = a;
     if (n > 1) {
-      y->data[n - 1] = apnd;
+      y_data[n - 1] = apnd;
       nm1d2 = (n - 1) / 2;
       for (k = 0; k <= nm1d2 - 2; k++) {
         ndbl = ((double)k + 1.0) * 100.0;
-        y->data[k + 1] = a + ndbl;
-        y->data[(n - k) - 2] = apnd - ndbl;
+        y_data[k + 1] = a + ndbl;
+        y_data[(n - k) - 2] = apnd - ndbl;
       }
       if (nm1d2 << 1 == n - 1) {
-        y->data[nm1d2] = (a + apnd) / 2.0;
+        y_data[nm1d2] = (a + apnd) / 2.0;
       } else {
         ndbl = (double)nm1d2 * 100.0;
-        y->data[nm1d2] = a + ndbl;
-        y->data[nm1d2 + 1] = apnd - ndbl;
+        y_data[nm1d2] = a + ndbl;
+        y_data[nm1d2 + 1] = apnd - ndbl;
       }
     }
   }
@@ -72,6 +74,7 @@ void eml_float_colon(double a, double b, emxArray_real_T *y)
   double apnd;
   double cdiff;
   double ndbl;
+  double *y_data;
   int k;
   int n;
   int nm1d2;
@@ -95,20 +98,21 @@ void eml_float_colon(double a, double b, emxArray_real_T *y)
   y->size[0] = 1;
   y->size[1] = n;
   emxEnsureCapacity_real_T(y, nm1d2);
+  y_data = y->data;
   if (n > 0) {
-    y->data[0] = a;
+    y_data[0] = a;
     if (n > 1) {
-      y->data[n - 1] = apnd;
+      y_data[n - 1] = apnd;
       nm1d2 = (n - 1) / 2;
       for (k = 0; k <= nm1d2 - 2; k++) {
-        y->data[k + 1] = a + ((double)k + 1.0);
-        y->data[(n - k) - 2] = apnd - ((double)k + 1.0);
+        y_data[k + 1] = a + ((double)k + 1.0);
+        y_data[(n - k) - 2] = apnd - ((double)k + 1.0);
       }
       if (nm1d2 << 1 == n - 1) {
-        y->data[nm1d2] = (a + apnd) / 2.0;
+        y_data[nm1d2] = (a + apnd) / 2.0;
       } else {
-        y->data[nm1d2] = a + (double)nm1d2;
-        y->data[nm1d2 + 1] = apnd - (double)nm1d2;
+        y_data[nm1d2] = a + (double)nm1d2;
+        y_data[nm1d2 + 1] = apnd - (double)nm1d2;
       }
     }
   }

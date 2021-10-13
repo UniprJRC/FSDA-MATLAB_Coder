@@ -41,15 +41,15 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
   static creal_T b_The1max[7202];
   static creal_T new1[7202];
   emxArray_boolean_T *r;
-  emxArray_boolean_T *r1;
   emxArray_creal_T *b_Xs;
   emxArray_creal_T *new2;
   emxArray_int32_T *ii;
   emxArray_int32_T *jj;
-  emxArray_int32_T *r2;
+  emxArray_int32_T *r1;
   emxArray_real_T *MDbiv;
   emxArray_real_T *Xs;
   emxArray_real_T *Ys;
+  emxArray_real_T *b_Y;
   emxArray_real_T *biv;
   emxArray_real_T *bivT;
   emxArray_real_T *datax;
@@ -59,24 +59,27 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
   emxArray_real_T *xrank;
   emxArray_real_T *y;
   emxArray_real_T *yrank;
-  emxArray_uint8_T *r3;
+  emxArray_uint8_T *r2;
   creal_T xnew[3601];
   creal_T ynew[3601];
   creal_T M[4];
   creal_T aut[2];
   creal_T b_a;
   creal_T sinth;
+  creal_T *b_Xs_data;
+  creal_T *new2_data;
   double The1max[3601];
   double The2max[3601];
   double rr[4];
   double quan[3];
+  const double *Y_data;
   double Sy;
   double Tx;
   double Ty;
   double a;
-  double a_im_tmp_tmp;
+  double a_tmp;
   double b_robscale;
-  double brm;
+  double ch_re;
   double costh_im;
   double costh_re;
   double fuo;
@@ -84,6 +87,15 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
   double s;
   double sgnbr;
   double uq;
+  double *MDbiv_data;
+  double *Xs_data;
+  double *Ys_data;
+  double *bivT_data;
+  double *biv_data;
+  double *seq_data;
+  double *univT_data;
+  double *xrank_data;
+  double *y_data;
   unsigned int b_jl;
   int boffset;
   int coffset;
@@ -95,16 +107,20 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
   int k;
   int n;
   int nx;
+  int *ii_data;
+  int *jj_data;
+  unsigned char *r4;
+  bool *r3;
   if (!isInitialized_fsdaC) {
     fsdaC_initialize();
   }
+  Y_data = Y->data;
   emxInit_real_T(&bivT, 1);
   /*  Wrapper function for FSM. NV pair names are not taken as */
   /*  inputs. Instead, just the values are taken as inputs. */
   /*  Y: an array of doubles of any dimensions */
   /*  Optional input arguments (name / pairs) in (case insensitive) */
   /*  alphabetical order */
-  /*  robscale a scalar double */
   /*  robscale a scalar double */
   /*  rf: a scalar of type double */
   /* unibiv has the purpose of detecting univariate and bivariate outliers */
@@ -125,9 +141,7 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
   /*                computations. */
   /*                 Data Types - single|double */
   /*  */
-  /*  */
   /*  Optional input arguments: */
-  /*  */
   /*  */
   /*        madcoef :  scaled MAD. Scalar. Coefficient which is used to scale
    * MAD */
@@ -150,7 +164,6 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
   /*                   outside 5% of the values. */
   /*                  Example - 'rf',0.99 */
   /*                  Data Types - double */
-  /*  */
   /*  */
   /*       robscale :   how to compute dispersion. Scalar. It specifies the */
   /*                    statistical indexes to use to compute the dispersion of
@@ -179,7 +192,6 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
   /*                    around the univariate medians. */
   /*                  Example - 'robscale',2 */
   /*                  Data Types - double */
-  /*  */
   /*  */
   /*          plots :   Plot on the screen. Scalar. It specifies whether it is
    */
@@ -234,7 +246,6 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
   /*            bivariate outlier; */
   /*            4th col = pseudo MD as sum of bivariate MD. */
   /*  */
-  /*  */
   /*  See also: FSMmmd */
   /*  */
   /*  References: */
@@ -245,8 +256,6 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('unibiv')">Link to the help page for this
    * function</a> */
@@ -279,18 +288,20 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
   i = bivT->size[0];
   bivT->size[0] = Y->size[0];
   emxEnsureCapacity_real_T(bivT, i);
-  nx = Y->size[0];
-  for (i = 0; i < nx; i++) {
-    bivT->data[i] = 0.0;
+  bivT_data = bivT->data;
+  coffset = Y->size[0];
+  for (i = 0; i < coffset; i++) {
+    bivT_data[i] = 0.0;
   }
   emxInit_real_T(&univT, 1);
   /*  univT contains the frequency distribution of univ. outliers */
   i = univT->size[0];
   univT->size[0] = Y->size[0];
   emxEnsureCapacity_real_T(univT, i);
-  nx = Y->size[0];
-  for (i = 0; i < nx; i++) {
-    univT->data[i] = 0.0;
+  univT_data = univT->data;
+  coffset = Y->size[0];
+  for (i = 0; i < coffset; i++) {
+    univT_data[i] = 0.0;
   }
   emxInit_real_T(&MDbiv, 1);
   /*  MDbiv= vector which contains the sum of the bivaraite Mahalanobis
@@ -298,12 +309,14 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
   i = MDbiv->size[0];
   MDbiv->size[0] = Y->size[0];
   emxEnsureCapacity_real_T(MDbiv, i);
-  nx = Y->size[0];
-  for (i = 0; i < nx; i++) {
-    MDbiv->data[i] = 0.0;
+  MDbiv_data = MDbiv->data;
+  coffset = Y->size[0];
+  for (i = 0; i < coffset; i++) {
+    MDbiv_data[i] = 0.0;
   }
   /*  madcoef=1; */
   emxInit_real_T(&biv, 2);
+  biv_data = biv->data;
   if (Y->size[0] < 1) {
     biv->size[0] = 1;
     biv->size[1] = 0;
@@ -312,18 +325,20 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
     biv->size[0] = 1;
     biv->size[1] = Y->size[0];
     emxEnsureCapacity_real_T(biv, i);
-    nx = Y->size[0] - 1;
-    for (i = 0; i <= nx; i++) {
-      biv->data[i] = (double)i + 1.0;
+    biv_data = biv->data;
+    coffset = Y->size[0] - 1;
+    for (i = 0; i <= coffset; i++) {
+      biv_data[i] = (double)i + 1.0;
     }
   }
   emxInit_real_T(&seq, 1);
   i = seq->size[0];
   seq->size[0] = biv->size[1];
   emxEnsureCapacity_real_T(seq, i);
-  nx = biv->size[1];
-  for (i = 0; i < nx; i++) {
-    seq->data[i] = biv->data[i];
+  seq_data = seq->data;
+  coffset = biv->size[1];
+  for (i = 0; i < coffset; i++) {
+    seq_data[i] = biv_data[i];
   }
   i = Y->size[1];
   emxInit_real_T(&y, 1);
@@ -335,121 +350,132 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
   emxInit_real_T(&yrank, 1);
   emxInit_creal_T(&new2, 2);
   emxInit_boolean_T(&r, 1);
-  emxInit_boolean_T(&r1, 1);
-  emxInit_int32_T(&r2, 1);
+  emxInit_int32_T(&r1, 1);
   emxInit_int32_T(&ii, 1);
   emxInit_int32_T(&jj, 1);
-  emxInit_uint8_T(&r3, 2);
+  emxInit_uint8_T(&r2);
+  emxInit_real_T(&b_Y, 1);
   emxInit_creal_T(&b_Xs, 2);
   for (il = 0; il < i; il++) {
     /*  il is linked to the rows */
     /*  Ys = vector which contains standardized data */
-    nx = Y->size[0];
+    coffset = Y->size[0];
     i1 = y->size[0];
     y->size[0] = Y->size[0];
     emxEnsureCapacity_real_T(y, i1);
-    i1 = yrank->size[0];
-    yrank->size[0] = Y->size[0];
-    emxEnsureCapacity_real_T(yrank, i1);
-    for (i1 = 0; i1 < nx; i1++) {
-      sgnbr = Y->data[i1 + Y->size[0] * il];
-      y->data[i1] = sgnbr;
-      yrank->data[i1] = sgnbr;
+    y_data = y->data;
+    i1 = b_Y->size[0];
+    b_Y->size[0] = Y->size[0];
+    emxEnsureCapacity_real_T(b_Y, i1);
+    biv_data = b_Y->data;
+    for (i1 = 0; i1 < coffset; i1++) {
+      Tx = Y_data[i1 + Y->size[0] * il];
+      y_data[i1] = Tx;
+      biv_data[i1] = Tx;
     }
-    Ty = median(yrank);
-    nx = Y->size[0];
-    i1 = yrank->size[0];
-    yrank->size[0] = Y->size[0];
-    emxEnsureCapacity_real_T(yrank, i1);
-    for (i1 = 0; i1 < nx; i1++) {
-      yrank->data[i1] = Y->data[i1 + Y->size[0] * il];
+    Ty = median(b_Y);
+    coffset = Y->size[0];
+    i1 = b_Y->size[0];
+    b_Y->size[0] = Y->size[0];
+    emxEnsureCapacity_real_T(b_Y, i1);
+    biv_data = b_Y->data;
+    for (i1 = 0; i1 < coffset; i1++) {
+      biv_data[i1] = Y_data[i1 + Y->size[0] * il];
     }
-    mady = mad(yrank);
+    mady = mad(b_Y);
     if (mady > 0.0) {
       mady *= madcoef;
-      nx = Y->size[0];
+      coffset = Y->size[0];
       i1 = Ys->size[0];
       Ys->size[0] = Y->size[0];
       emxEnsureCapacity_real_T(Ys, i1);
-      for (i1 = 0; i1 < nx; i1++) {
-        Ys->data[i1] = (Y->data[i1 + Y->size[0] * il] - Ty) / mady;
+      Ys_data = Ys->data;
+      for (i1 = 0; i1 < coffset; i1++) {
+        Ys_data[i1] = (Y_data[i1 + Y->size[0] * il] - Ty) / mady;
       }
     } else {
-      nx = Y->size[0];
-      i1 = yrank->size[0];
-      yrank->size[0] = Y->size[0];
-      emxEnsureCapacity_real_T(yrank, i1);
-      for (i1 = 0; i1 < nx; i1++) {
-        yrank->data[i1] = Y->data[i1 + Y->size[0] * il];
+      coffset = Y->size[0];
+      i1 = b_Y->size[0];
+      b_Y->size[0] = Y->size[0];
+      emxEnsureCapacity_real_T(b_Y, i1);
+      biv_data = b_Y->data;
+      for (i1 = 0; i1 < coffset; i1++) {
+        biv_data[i1] = Y_data[i1 + Y->size[0] * il];
       }
-      if (iqr(yrank) > 0.0) {
-        nx = Y->size[0];
-        i1 = yrank->size[0];
-        yrank->size[0] = Y->size[0];
-        emxEnsureCapacity_real_T(yrank, i1);
-        for (i1 = 0; i1 < nx; i1++) {
-          yrank->data[i1] = Y->data[i1 + Y->size[0] * il];
+      if (iqr(b_Y) > 0.0) {
+        coffset = Y->size[0];
+        i1 = b_Y->size[0];
+        b_Y->size[0] = Y->size[0];
+        emxEnsureCapacity_real_T(b_Y, i1);
+        biv_data = b_Y->data;
+        for (i1 = 0; i1 < coffset; i1++) {
+          biv_data[i1] = Y_data[i1 + Y->size[0] * il];
         }
-        mady = madcoef * (1.349 * iqr(yrank) / 0.6745);
-        nx = Y->size[0];
+        mady = madcoef * (1.349 * iqr(b_Y) / 0.6745);
+        coffset = Y->size[0];
         i1 = Ys->size[0];
         Ys->size[0] = Y->size[0];
         emxEnsureCapacity_real_T(Ys, i1);
-        for (i1 = 0; i1 < nx; i1++) {
-          Ys->data[i1] = (Y->data[i1 + Y->size[0] * il] - Ty) / mady;
+        Ys_data = Ys->data;
+        for (i1 = 0; i1 < coffset; i1++) {
+          Ys_data[i1] = (Y_data[i1 + Y->size[0] * il] - Ty) / mady;
         }
       } else {
-        nx = Y->size[0];
-        i1 = yrank->size[0];
-        yrank->size[0] = Y->size[0];
-        emxEnsureCapacity_real_T(yrank, i1);
-        for (i1 = 0; i1 < nx; i1++) {
-          yrank->data[i1] = Y->data[i1 + Y->size[0] * il];
+        coffset = Y->size[0];
+        i1 = b_Y->size[0];
+        b_Y->size[0] = Y->size[0];
+        emxEnsureCapacity_real_T(b_Y, i1);
+        biv_data = b_Y->data;
+        for (i1 = 0; i1 < coffset; i1++) {
+          biv_data[i1] = Y_data[i1 + Y->size[0] * il];
         }
-        mady = madcoef * (1.2533 * b_mad(yrank) / 0.6745);
-        nx = Y->size[0];
+        mady = madcoef * (1.2533 * b_mad(b_Y) / 0.6745);
+        coffset = Y->size[0];
         i1 = Ys->size[0];
         Ys->size[0] = Y->size[0];
         emxEnsureCapacity_real_T(Ys, i1);
-        for (i1 = 0; i1 < nx; i1++) {
-          Ys->data[i1] = (Y->data[i1 + Y->size[0] * il] - Ty) / mady;
+        Ys_data = Ys->data;
+        for (i1 = 0; i1 < coffset; i1++) {
+          Ys_data[i1] = (Y_data[i1 + Y->size[0] * il] - Ty) / mady;
         }
       }
     }
     if (b_robscale > 4.0) {
       /*  Sy is the unrobust standard deviation of y */
-      nx = Y->size[0];
+      coffset = Y->size[0];
       i1 = Ys->size[0];
       Ys->size[0] = Y->size[0];
       emxEnsureCapacity_real_T(Ys, i1);
-      for (i1 = 0; i1 < nx; i1++) {
-        Ys->data[i1] = Y->data[i1 + Y->size[0] * il] - Ty;
+      Ys_data = Ys->data;
+      for (i1 = 0; i1 < coffset; i1++) {
+        Ys_data[i1] = Y_data[i1 + Y->size[0] * il] - Ty;
       }
       mady = 0.0;
-      nx = Ys->size[0];
-      for (i1 = 0; i1 < nx; i1++) {
-        mady += Ys->data[i1] * Ys->data[i1];
+      coffset = Ys->size[0];
+      for (i1 = 0; i1 < coffset; i1++) {
+        mady += Ys_data[i1] * Ys_data[i1];
       }
       Sy = sqrt(mady / ((double)n - 1.0));
-      nx = Ys->size[0];
-      for (i1 = 0; i1 < nx; i1++) {
-        Ys->data[i1] /= Sy;
+      coffset = Ys->size[0];
+      for (i1 = 0; i1 < coffset; i1++) {
+        Ys_data[i1] /= Sy;
       }
     } else {
       Sy = 0.0;
     }
     /*  datax x add a sequence to standardized data */
-    nx = seq->size[0];
+    coffset = seq->size[0];
     i1 = datax->size[0] * datax->size[1];
     datax->size[0] = seq->size[0];
     datax->size[1] = 2;
     emxEnsureCapacity_real_T(datax, i1);
-    for (i1 = 0; i1 < nx; i1++) {
-      datax->data[i1] = seq->data[i1];
+    biv_data = datax->data;
+    for (i1 = 0; i1 < coffset; i1++) {
+      biv_data[i1] = seq_data[i1];
     }
-    nx = Ys->size[0];
-    for (i1 = 0; i1 < nx; i1++) {
-      datax->data[i1 + datax->size[0]] = Ys->data[i1];
+    coffset = Ys->size[0];
+    for (i1 = 0; i1 < coffset; i1++) {
+      biv_data[i1 + datax->size[0]] = Ys_data[i1];
     }
     /*  quan = 1 x 3 vector which contins 1% quartile median and 3rd */
     /*  quartile */
@@ -464,69 +490,72 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
     /*  the indexes of the units declared univariate */
     /*  outliers, the second columns gives the standardized */
     /*  values of the outliers */
-    nx = datax->size[0];
-    i1 = r->size[0];
-    r->size[0] = datax->size[0];
-    emxEnsureCapacity_boolean_T(r, i1);
-    for (i1 = 0; i1 < nx; i1++) {
-      sgnbr = datax->data[i1 + datax->size[0]];
-      r->data[i1] = ((sgnbr > uq) || (sgnbr < mady));
-    }
     nx = datax->size[0] - 1;
-    i1 = yrank->size[0];
-    yrank->size[0] = datax->size[0];
-    emxEnsureCapacity_real_T(yrank, i1);
+    i1 = xrank->size[0];
+    xrank->size[0] = datax->size[0];
+    emxEnsureCapacity_real_T(xrank, i1);
+    xrank_data = xrank->data;
     for (k = 0; k <= nx; k++) {
-      yrank->data[k] = fabs(datax->data[k + datax->size[0]]);
+      xrank_data[k] = fabs(biv_data[k + datax->size[0]]);
     }
-    i1 = r1->size[0];
-    r1->size[0] = yrank->size[0];
-    emxEnsureCapacity_boolean_T(r1, i1);
-    nx = yrank->size[0];
-    for (i1 = 0; i1 < nx; i1++) {
-      r1->data[i1] = (yrank->data[i1] > 3.0);
+    if (datax->size[0] == xrank->size[0]) {
+      coffset = datax->size[0];
+      i1 = r->size[0];
+      r->size[0] = datax->size[0];
+      emxEnsureCapacity_boolean_T(r, i1);
+      r3 = r->data;
+      for (i1 = 0; i1 < coffset; i1++) {
+        Tx = biv_data[i1 + datax->size[0]];
+        r3[i1] = ((Tx > uq) || (Tx < mady) || (xrank_data[i1] > 3.0));
+      }
+    } else {
+      l_binary_expand_op(r, datax, uq, mady, xrank);
+      r3 = r->data;
     }
     coffset = r->size[0] - 1;
     nx = 0;
     for (boffset = 0; boffset <= coffset; boffset++) {
-      if (r->data[boffset] || r1->data[boffset]) {
+      if (r3[boffset]) {
         nx++;
       }
     }
-    i1 = r2->size[0];
-    r2->size[0] = nx;
-    emxEnsureCapacity_int32_T(r2, i1);
+    i1 = r1->size[0];
+    r1->size[0] = nx;
+    emxEnsureCapacity_int32_T(r1, i1);
+    jj_data = r1->data;
     nx = 0;
     for (boffset = 0; boffset <= coffset; boffset++) {
-      if (r->data[boffset] || r1->data[boffset]) {
-        r2->data[nx] = boffset + 1;
+      if (r3[boffset]) {
+        jj_data[nx] = boffset + 1;
         nx++;
       }
     }
-    nx = r2->size[0];
+    coffset = r1->size[0];
     i1 = outy->size[0] * outy->size[1];
-    outy->size[0] = r2->size[0];
+    outy->size[0] = r1->size[0];
     outy->size[1] = 2;
     emxEnsureCapacity_real_T(outy, i1);
+    xrank_data = outy->data;
     for (i1 = 0; i1 < 2; i1++) {
-      for (k = 0; k < nx; k++) {
-        outy->data[k + outy->size[0] * i1] =
-            datax->data[(r2->data[k] + datax->size[0] * i1) - 1];
+      for (j = 0; j < coffset; j++) {
+        xrank_data[j + outy->size[0] * i1] =
+            biv_data[(jj_data[j] + datax->size[0] * i1) - 1];
       }
     }
-    nx = r2->size[0];
-    if (r2->size[0] != 0) {
+    coffset = r1->size[0];
+    if (r1->size[0] != 0) {
       /*  Increase by 1 the frequencey distribution of */
       /*  univariate outliers in vector univT */
-      i1 = yrank->size[0];
-      yrank->size[0] = r2->size[0];
-      emxEnsureCapacity_real_T(yrank, i1);
-      for (i1 = 0; i1 < nx; i1++) {
-        yrank->data[i1] = univT->data[(int)outy->data[i1] - 1] + 1.0;
+      i1 = b_Y->size[0];
+      b_Y->size[0] = r1->size[0];
+      emxEnsureCapacity_real_T(b_Y, i1);
+      biv_data = b_Y->data;
+      for (i1 = 0; i1 < coffset; i1++) {
+        biv_data[i1] = univT_data[(int)xrank_data[i1] - 1] + 1.0;
       }
-      nx = yrank->size[0];
-      for (i1 = 0; i1 < nx; i1++) {
-        univT->data[(int)outy->data[i1] - 1] = yrank->data[i1];
+      coffset = b_Y->size[0];
+      for (i1 = 0; i1 < coffset; i1++) {
+        univT_data[(int)xrank_data[i1] - 1] = biv_data[i1];
       }
     }
     i1 = Y->size[1] - il;
@@ -536,105 +565,125 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
       if ((unsigned int)(il + 1) != b_jl) {
         /*  beginning of bivariate part */
         /*  Tx is the coordinate of the  Median */
-        nx = Y->size[0];
-        k = yrank->size[0];
-        yrank->size[0] = Y->size[0];
-        emxEnsureCapacity_real_T(yrank, k);
-        for (k = 0; k < nx; k++) {
-          yrank->data[k] = Y->data[k + Y->size[0] * ((int)b_jl - 1)];
+        coffset = Y->size[0];
+        j = b_Y->size[0];
+        b_Y->size[0] = Y->size[0];
+        emxEnsureCapacity_real_T(b_Y, j);
+        biv_data = b_Y->data;
+        for (j = 0; j < coffset; j++) {
+          biv_data[j] = Y_data[j + Y->size[0] * ((int)b_jl - 1)];
         }
-        Tx = median(yrank);
-        nx = Y->size[0];
-        k = yrank->size[0];
-        yrank->size[0] = Y->size[0];
-        emxEnsureCapacity_real_T(yrank, k);
-        for (k = 0; k < nx; k++) {
-          yrank->data[k] = Y->data[k + Y->size[0] * ((int)b_jl - 1)];
+        Tx = median(b_Y);
+        coffset = Y->size[0];
+        j = b_Y->size[0];
+        b_Y->size[0] = Y->size[0];
+        emxEnsureCapacity_real_T(b_Y, j);
+        biv_data = b_Y->data;
+        for (j = 0; j < coffset; j++) {
+          biv_data[j] = Y_data[j + Y->size[0] * ((int)b_jl - 1)];
         }
-        mady = mad(yrank);
+        mady = mad(b_Y);
         if (mady > 0.0) {
           mady *= madcoef;
-          nx = Y->size[0];
-          k = Xs->size[0];
+          coffset = Y->size[0];
+          j = Xs->size[0];
           Xs->size[0] = Y->size[0];
-          emxEnsureCapacity_real_T(Xs, k);
-          for (k = 0; k < nx; k++) {
-            Xs->data[k] =
-                (Y->data[k + Y->size[0] * ((int)b_jl - 1)] - Tx) / mady;
+          emxEnsureCapacity_real_T(Xs, j);
+          Xs_data = Xs->data;
+          for (j = 0; j < coffset; j++) {
+            Xs_data[j] = (Y_data[j + Y->size[0] * ((int)b_jl - 1)] - Tx) / mady;
           }
         } else {
           if (b_robscale == 1.0) {
             b_robscale = 2.0;
           }
-          nx = Y->size[0];
-          k = yrank->size[0];
-          yrank->size[0] = Y->size[0];
-          emxEnsureCapacity_real_T(yrank, k);
-          for (k = 0; k < nx; k++) {
-            yrank->data[k] = Y->data[k + Y->size[0] * ((int)b_jl - 1)];
+          coffset = Y->size[0];
+          j = b_Y->size[0];
+          b_Y->size[0] = Y->size[0];
+          emxEnsureCapacity_real_T(b_Y, j);
+          biv_data = b_Y->data;
+          for (j = 0; j < coffset; j++) {
+            biv_data[j] = Y_data[j + Y->size[0] * ((int)b_jl - 1)];
           }
-          mady = iqr(yrank);
+          mady = iqr(b_Y);
           if (mady > 0.0) {
             mady = madcoef * (1.349 * mady / 0.6745);
-            nx = Y->size[0];
-            k = Xs->size[0];
+            coffset = Y->size[0];
+            j = Xs->size[0];
             Xs->size[0] = Y->size[0];
-            emxEnsureCapacity_real_T(Xs, k);
-            for (k = 0; k < nx; k++) {
-              Xs->data[k] =
-                  (Y->data[k + Y->size[0] * ((int)b_jl - 1)] - Tx) / mady;
+            emxEnsureCapacity_real_T(Xs, j);
+            Xs_data = Xs->data;
+            for (j = 0; j < coffset; j++) {
+              Xs_data[j] =
+                  (Y_data[j + Y->size[0] * ((int)b_jl - 1)] - Tx) / mady;
             }
           } else {
-            nx = Y->size[0];
-            k = yrank->size[0];
-            yrank->size[0] = Y->size[0];
-            emxEnsureCapacity_real_T(yrank, k);
-            for (k = 0; k < nx; k++) {
-              yrank->data[k] = Y->data[k + Y->size[0] * ((int)b_jl - 1)];
+            coffset = Y->size[0];
+            j = b_Y->size[0];
+            b_Y->size[0] = Y->size[0];
+            emxEnsureCapacity_real_T(b_Y, j);
+            biv_data = b_Y->data;
+            for (j = 0; j < coffset; j++) {
+              biv_data[j] = Y_data[j + Y->size[0] * ((int)b_jl - 1)];
             }
-            mady = madcoef * (1.2533 * b_mad(yrank) / 0.6745);
-            nx = Y->size[0];
-            k = Xs->size[0];
+            mady = madcoef * (1.2533 * b_mad(b_Y) / 0.6745);
+            coffset = Y->size[0];
+            j = Xs->size[0];
             Xs->size[0] = Y->size[0];
-            emxEnsureCapacity_real_T(Xs, k);
-            for (k = 0; k < nx; k++) {
-              Xs->data[k] =
-                  (Y->data[k + Y->size[0] * ((int)b_jl - 1)] - Tx) / mady;
+            emxEnsureCapacity_real_T(Xs, j);
+            Xs_data = Xs->data;
+            for (j = 0; j < coffset; j++) {
+              Xs_data[j] =
+                  (Y_data[j + Y->size[0] * ((int)b_jl - 1)] - Tx) / mady;
             }
           }
         }
         if (b_robscale == 1.0) {
-          k = xrank->size[0];
-          xrank->size[0] = Xs->size[0];
-          emxEnsureCapacity_real_T(xrank, k);
-          nx = Xs->size[0];
-          for (k = 0; k < nx; k++) {
-            xrank->data[k] = Xs->data[k] + Ys->data[k];
+          if (Xs->size[0] == Ys->size[0]) {
+            j = yrank->size[0];
+            yrank->size[0] = Xs->size[0];
+            emxEnsureCapacity_real_T(yrank, j);
+            biv_data = yrank->data;
+            coffset = Xs->size[0];
+            for (j = 0; j < coffset; j++) {
+              biv_data[j] = Xs_data[j] + Ys_data[j];
+            }
+          } else {
+            b_plus(yrank, Xs, Ys);
+            biv_data = yrank->data;
           }
-          nx = xrank->size[0];
-          k = yrank->size[0];
-          yrank->size[0] = xrank->size[0];
-          emxEnsureCapacity_real_T(yrank, k);
+          nx = yrank->size[0];
+          j = xrank->size[0];
+          xrank->size[0] = yrank->size[0];
+          emxEnsureCapacity_real_T(xrank, j);
+          xrank_data = xrank->data;
           for (k = 0; k < nx; k++) {
-            yrank->data[k] = fabs(xrank->data[k]);
+            xrank_data[k] = fabs(biv_data[k]);
           }
-          a = median(yrank);
+          a = median(xrank);
           Tx = a * a;
-          k = xrank->size[0];
-          xrank->size[0] = Xs->size[0];
-          emxEnsureCapacity_real_T(xrank, k);
-          nx = Xs->size[0];
-          for (k = 0; k < nx; k++) {
-            xrank->data[k] = Xs->data[k] - Ys->data[k];
+          if (Xs->size[0] == Ys->size[0]) {
+            j = yrank->size[0];
+            yrank->size[0] = Xs->size[0];
+            emxEnsureCapacity_real_T(yrank, j);
+            biv_data = yrank->data;
+            coffset = Xs->size[0];
+            for (j = 0; j < coffset; j++) {
+              biv_data[j] = Xs_data[j] - Ys_data[j];
+            }
+          } else {
+            minus(yrank, Xs, Ys);
+            biv_data = yrank->data;
           }
-          nx = xrank->size[0];
-          k = yrank->size[0];
-          yrank->size[0] = xrank->size[0];
-          emxEnsureCapacity_real_T(yrank, k);
+          nx = yrank->size[0];
+          j = xrank->size[0];
+          xrank->size[0] = yrank->size[0];
+          emxEnsureCapacity_real_T(xrank, j);
+          xrank_data = xrank->data;
           for (k = 0; k < nx; k++) {
-            yrank->data[k] = fabs(xrank->data[k]);
+            xrank_data[k] = fabs(biv_data[k]);
           }
-          a = median(yrank);
+          a = median(xrank);
           mady = a * a;
           Tx = (Tx - mady) / (Tx + mady);
           if (rtIsNaN(Tx)) {
@@ -642,22 +691,25 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
           }
         } else if (b_robscale == 2.0) {
           /*  r is computed using ranks */
-          nx = Y->size[0];
-          k = yrank->size[0];
-          yrank->size[0] = Y->size[0];
-          emxEnsureCapacity_real_T(yrank, k);
-          for (k = 0; k < nx; k++) {
-            yrank->data[k] = Y->data[k + Y->size[0] * ((int)b_jl - 1)];
+          coffset = Y->size[0];
+          j = b_Y->size[0];
+          b_Y->size[0] = Y->size[0];
+          emxEnsureCapacity_real_T(b_Y, j);
+          biv_data = b_Y->data;
+          for (j = 0; j < coffset; j++) {
+            biv_data[j] = Y_data[j + Y->size[0] * ((int)b_jl - 1)];
           }
-          tiedrankFS(yrank, xrank);
+          tiedrankFS(b_Y, xrank);
+          xrank_data = xrank->data;
           tiedrankFS(y, yrank);
+          biv_data = yrank->data;
           mady =
               blockedSummation(xrank, xrank->size[0]) / (double)xrank->size[0];
           Tx = blockedSummation(yrank, yrank->size[0]) / (double)yrank->size[0];
           uq = 0.0;
-          nx = xrank->size[0];
-          for (k = 0; k < nx; k++) {
-            uq += (xrank->data[k] - mady) * (yrank->data[k] - Tx);
+          coffset = xrank->size[0];
+          for (j = 0; j < coffset; j++) {
+            uq += (xrank_data[j] - mady) * (biv_data[j] - Tx);
           }
           Tx = uq / (((double)n - 1.0) * vvarstd(xrank, xrank->size[0]) *
                      vvarstd(yrank, yrank->size[0]));
@@ -670,53 +722,63 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
           /*  Manual computation of Kendall correlation */
           /*  coefficient. */
           /*  Prepare indexes for all combinations without repetition */
-          k = r3->size[0] * r3->size[1];
-          r3->size[0] = n;
-          r3->size[1] = n;
-          emxEnsureCapacity_uint8_T(r3, k);
-          nx = n * n;
-          for (k = 0; k < nx; k++) {
-            r3->data[k] = 1U;
+          j = r2->size[0] * r2->size[1];
+          r2->size[0] = n;
+          r2->size[1] = n;
+          emxEnsureCapacity_uint8_T(r2, j);
+          r4 = r2->data;
+          coffset = n * n;
+          for (j = 0; j < coffset; j++) {
+            r4[j] = 1U;
           }
-          tril(r3);
-          c_eml_find(r3, ii, jj);
-          nx = Y->size[0];
-          k = datax->size[0] * datax->size[1];
+          tril(r2);
+          c_eml_find(r2, ii, jj);
+          jj_data = jj->data;
+          ii_data = ii->data;
+          coffset = Y->size[0];
+          j = datax->size[0] * datax->size[1];
           datax->size[0] = Y->size[0];
           datax->size[1] = 2;
-          emxEnsureCapacity_real_T(datax, k);
-          for (k = 0; k < nx; k++) {
-            datax->data[k] = Y->data[k + Y->size[0] * ((int)b_jl - 1)];
+          emxEnsureCapacity_real_T(datax, j);
+          biv_data = datax->data;
+          for (j = 0; j < coffset; j++) {
+            biv_data[j] = Y_data[j + Y->size[0] * ((int)b_jl - 1)];
           }
-          nx = y->size[0];
-          for (k = 0; k < nx; k++) {
-            datax->data[k + datax->size[0]] = y->data[k];
+          coffset = y->size[0];
+          for (j = 0; j < coffset; j++) {
+            biv_data[j + datax->size[0]] = y_data[j];
           }
           /*  Now, this is just a linear correlation using the signs of */
           /*  [T * (T - 1) / 2] differences */
-          nx = jj->size[0];
-          k = outy->size[0] * outy->size[1];
-          outy->size[0] = jj->size[0];
-          outy->size[1] = 2;
-          emxEnsureCapacity_real_T(outy, k);
-          for (k = 0; k < 2; k++) {
-            for (j = 0; j < nx; j++) {
-              outy->data[j + outy->size[0] * k] =
-                  datax->data[(jj->data[j] + datax->size[0] * k) - 1] -
-                  datax->data[(ii->data[j] + datax->size[0] * k) - 1];
+          coffset = jj->size[0];
+          if (jj->size[0] == ii->size[0]) {
+            j = outy->size[0] * outy->size[1];
+            outy->size[0] = jj->size[0];
+            outy->size[1] = 2;
+            emxEnsureCapacity_real_T(outy, j);
+            xrank_data = outy->data;
+            for (j = 0; j < 2; j++) {
+              for (boffset = 0; boffset < coffset; boffset++) {
+                xrank_data[boffset + outy->size[0] * j] =
+                    biv_data[(jj_data[boffset] + datax->size[0] * j) - 1] -
+                    biv_data[(ii_data[boffset] + datax->size[0] * j) - 1];
+              }
             }
+          } else {
+            mf_binary_expand_op(outy, datax, jj, ii);
+            xrank_data = outy->data;
           }
           nx = outy->size[0] << 1;
           for (k = 0; k < nx; k++) {
-            mady = outy->data[k];
-            if (outy->data[k] < 0.0) {
+            mady = xrank_data[k];
+            if (xrank_data[k] < 0.0) {
               mady = -1.0;
-            } else if (outy->data[k] > 0.0) {
+            } else if (xrank_data[k] > 0.0) {
               mady = 1.0;
-            } else if (outy->data[k] == 0.0) {
+            } else if (xrank_data[k] == 0.0) {
               mady = 0.0;
             }
-            outy->data[k] = mady;
+            xrank_data[k] = mady;
           }
           nx = outy->size[0];
           for (j = 0; j < 2; j++) {
@@ -725,68 +787,76 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
             rr[coffset] = 0.0;
             rr[coffset + 1] = 0.0;
             for (k = 0; k < nx; k++) {
-              mady = outy->data[boffset + k];
-              rr[coffset] += outy->data[k] * mady;
-              rr[coffset + 1] += outy->data[outy->size[0] + k] * mady;
+              mady = xrank_data[boffset + k];
+              rr[coffset] += xrank_data[k] * mady;
+              rr[coffset + 1] += xrank_data[outy->size[0] + k] * mady;
             }
           }
           rr[2] /= sqrt(rr[0] * rr[3]);
           Tx = rr[2];
         } else if (b_robscale == 4.0) {
           /*  r is based on the tetracoric correlation */
-          nx = Y->size[0];
-          k = xrank->size[0];
-          xrank->size[0] = Y->size[0];
-          emxEnsureCapacity_real_T(xrank, k);
-          for (k = 0; k < nx; k++) {
-            xrank->data[k] = (Y->data[k + Y->size[0] * ((int)b_jl - 1)] - Tx) *
-                             (y->data[k] - Ty);
+          coffset = Y->size[0];
+          if (Y->size[0] == y->size[0]) {
+            j = yrank->size[0];
+            yrank->size[0] = Y->size[0];
+            emxEnsureCapacity_real_T(yrank, j);
+            biv_data = yrank->data;
+            for (j = 0; j < coffset; j++) {
+              biv_data[j] = (Y_data[j + Y->size[0] * ((int)b_jl - 1)] - Tx) *
+                            (y_data[j] - Ty);
+            }
+          } else {
+            nf_binary_expand_op(yrank, Y, b_jl, Tx, y, Ty);
+            biv_data = yrank->data;
           }
-          nx = xrank->size[0];
+          nx = yrank->size[0];
           for (k = 0; k < nx; k++) {
-            mady = xrank->data[k];
-            if (xrank->data[k] < 0.0) {
+            mady = biv_data[k];
+            if (biv_data[k] < 0.0) {
               mady = -1.0;
-            } else if (xrank->data[k] > 0.0) {
+            } else if (biv_data[k] > 0.0) {
               mady = 1.0;
-            } else if (xrank->data[k] == 0.0) {
+            } else if (biv_data[k] == 0.0) {
               mady = 0.0;
             }
-            xrank->data[k] = mady;
+            biv_data[k] = mady;
           }
-          Tx = blockedSummation(xrank, xrank->size[0]) / (double)n;
+          Tx = blockedSummation(yrank, yrank->size[0]) / (double)n;
         } else {
-          nx = Y->size[0];
-          k = Xs->size[0];
+          coffset = Y->size[0];
+          j = Xs->size[0];
           Xs->size[0] = Y->size[0];
-          emxEnsureCapacity_real_T(Xs, k);
-          for (k = 0; k < nx; k++) {
-            Xs->data[k] = Y->data[k + Y->size[0] * ((int)b_jl - 1)] - Tx;
+          emxEnsureCapacity_real_T(Xs, j);
+          Xs_data = Xs->data;
+          for (j = 0; j < coffset; j++) {
+            Xs_data[j] = Y_data[j + Y->size[0] * ((int)b_jl - 1)] - Tx;
           }
           mady = 0.0;
-          nx = Xs->size[0];
-          for (k = 0; k < nx; k++) {
-            mady += Xs->data[k] * Xs->data[k];
+          coffset = Xs->size[0];
+          for (j = 0; j < coffset; j++) {
+            mady += Xs_data[j] * Xs_data[j];
           }
           mady = sqrt(mady / ((double)n - 1.0));
           /*  Sx is the unrobust standard deviation of x */
-          nx = Xs->size[0];
-          for (k = 0; k < nx; k++) {
-            Xs->data[k] /= mady;
+          coffset = Xs->size[0];
+          for (j = 0; j < coffset; j++) {
+            Xs_data[j] /= mady;
           }
           /*  standardization of x */
-          nx = y->size[0];
-          k = Ys->size[0];
+          coffset = y->size[0];
+          j = Ys->size[0];
           Ys->size[0] = y->size[0];
-          emxEnsureCapacity_real_T(Ys, k);
-          for (k = 0; k < nx; k++) {
-            Ys->data[k] = (y->data[k] - Ty) / Sy;
+          emxEnsureCapacity_real_T(Ys, j);
+          Ys_data = Ys->data;
+          for (j = 0; j < coffset; j++) {
+            Ys_data[j] = (y_data[j] - Ty) / Sy;
           }
           /*  standardization of y */
           mady = 0.0;
-          nx = Xs->size[0];
-          for (k = 0; k < nx; k++) {
-            mady += Xs->data[k] * Ys->data[k];
+          coffset = Xs->size[0];
+          for (j = 0; j < coffset; j++) {
+            mady += Xs_data[j] * Ys_data[j];
           }
           Tx = mady / ((double)n - 1.0);
           /*  r= unrobust correlation */
@@ -809,33 +879,58 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
         /*  Create the vector of pseudoMahalanobis distances (based on the sum
          */
         /*  of each bivariate projection) */
-        k = yrank->size[0];
+        j = yrank->size[0];
         yrank->size[0] = Xs->size[0];
-        emxEnsureCapacity_real_T(yrank, k);
-        nx = Xs->size[0];
-        for (k = 0; k < nx; k++) {
-          yrank->data[k] = Xs->data[k] * Xs->data[k];
+        emxEnsureCapacity_real_T(yrank, j);
+        biv_data = yrank->data;
+        coffset = Xs->size[0];
+        for (j = 0; j < coffset; j++) {
+          uq = Xs_data[j];
+          biv_data[j] = uq * uq;
         }
-        k = xrank->size[0];
+        j = xrank->size[0];
         xrank->size[0] = Ys->size[0];
-        emxEnsureCapacity_real_T(xrank, k);
-        nx = Ys->size[0];
-        for (k = 0; k < nx; k++) {
-          xrank->data[k] = Ys->data[k] * Ys->data[k];
+        emxEnsureCapacity_real_T(xrank, j);
+        xrank_data = xrank->data;
+        coffset = Ys->size[0];
+        for (j = 0; j < coffset; j++) {
+          uq = Ys_data[j];
+          xrank_data[j] = uq * uq;
+        }
+        if (yrank->size[0] == 1) {
+          nx = xrank->size[0];
+        } else {
+          nx = yrank->size[0];
+        }
+        if (Xs->size[0] == 1) {
+          coffset = Ys->size[0];
+        } else {
+          coffset = Xs->size[0];
+        }
+        if ((yrank->size[0] == xrank->size[0]) &&
+            (Xs->size[0] == Ys->size[0]) && (nx == coffset)) {
+          coffset = yrank->size[0];
+          for (j = 0; j < coffset; j++) {
+            biv_data[j] =
+                ((biv_data[j] + xrank_data[j]) - a * Xs_data[j] * Ys_data[j]) /
+                (1.0 - mady);
+          }
+        } else {
+          k_binary_expand_op(yrank, xrank, a, Xs, Ys, mady);
+          biv_data = yrank->data;
         }
         nx = yrank->size[0];
         for (k = 0; k < nx; k++) {
-          yrank->data[k] = ((yrank->data[k] + xrank->data[k]) -
-                            a * Xs->data[k] * Ys->data[k]) /
-                           (1.0 - mady);
+          biv_data[k] = sqrt(biv_data[k]);
         }
-        nx = yrank->size[0];
-        for (k = 0; k < nx; k++) {
-          yrank->data[k] = sqrt(yrank->data[k]);
-        }
-        nx = MDbiv->size[0];
-        for (k = 0; k < nx; k++) {
-          MDbiv->data[k] += yrank->data[k];
+        coffset = MDbiv->size[0];
+        if (MDbiv->size[0] == yrank->size[0]) {
+          for (j = 0; j < coffset; j++) {
+            MDbiv_data[j] += biv_data[j];
+          }
+        } else {
+          plus(MDbiv, yrank);
+          MDbiv_data = MDbiv->data;
         }
         /*   Em  is the median  of vector E */
         mady = sqrt(2.0 * ((double)n - 1.0) / ((double)n - 2.0) *
@@ -844,9 +939,9 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
         /*  fence=ellipe containing (1-\alpha)% of the values */
         a = mady * sqrt((Tx + 1.0) / 2.0);
         uq = mady * sqrt((1.0 - Tx) / 2.0);
-        for (k = 0; k < 3601; k++) {
-          The1max[k] = a * dv[k];
-          The2max[k] = uq * dv1[k];
+        for (j = 0; j < 3601; j++) {
+          The1max[j] = a * dv[j];
+          The2max[j] = uq * dv1[j];
         }
         /*  rotation of the coordinates */
         a = 1.0 / (mady * mady * (1.0 - Tx * Tx));
@@ -857,11 +952,12 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
         rr[3] = a;
         eig(rr, aut);
         b_sort(aut);
-        Tx = a - aut[1].re;
-        a_im_tmp_tmp = Tx * (0.0 - aut[1].im);
-        Tx = (Tx * Tx - (0.0 - aut[1].im) * (0.0 - aut[1].im)) + mady * mady;
-        b_a.re = Tx;
-        b_a.im = a_im_tmp_tmp + a_im_tmp_tmp;
+        a_tmp = a - aut[1].re;
+        Tx = a_tmp * (0.0 - aut[1].im);
+        a_tmp = (a_tmp * a_tmp - (0.0 - aut[1].im) * (0.0 - aut[1].im)) +
+                mady * mady;
+        b_a.re = a_tmp;
+        b_a.im = Tx + Tx;
         b_sqrt(&b_a);
         if (b_a.im == 0.0) {
           costh_re = mady / b_a.re;
@@ -875,14 +971,14 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
             costh_im = -(mady / b_a.im);
           }
         } else {
-          brm = fabs(b_a.re);
+          ch_re = fabs(b_a.re);
           uq = fabs(b_a.im);
-          if (brm > uq) {
+          if (ch_re > uq) {
             s = b_a.im / b_a.re;
-            brm = b_a.re + s * b_a.im;
-            costh_re = (mady + s * 0.0) / brm;
-            costh_im = (0.0 - s * mady) / brm;
-          } else if (uq == brm) {
+            ch_re = b_a.re + s * b_a.im;
+            costh_re = (mady + s * 0.0) / ch_re;
+            costh_im = (0.0 - s * mady) / ch_re;
+          } else if (uq == ch_re) {
             if (b_a.re > 0.0) {
               sgnbr = 0.5;
             } else {
@@ -893,17 +989,17 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
             } else {
               s = -0.5;
             }
-            costh_re = (mady * sgnbr + 0.0 * s) / brm;
-            costh_im = (0.0 * sgnbr - mady * s) / brm;
+            costh_re = (mady * sgnbr + 0.0 * s) / ch_re;
+            costh_im = (0.0 * sgnbr - mady * s) / ch_re;
           } else {
             s = b_a.re / b_a.im;
-            brm = b_a.im + s * b_a.re;
-            costh_re = s * mady / brm;
-            costh_im = (s * 0.0 - mady) / brm;
+            ch_re = b_a.im + s * b_a.re;
+            costh_re = s * mady / ch_re;
+            costh_im = (s * 0.0 - mady) / ch_re;
           }
         }
-        b_a.re = Tx;
-        b_a.im = a_im_tmp_tmp + a_im_tmp_tmp;
+        b_a.re = a_tmp;
+        b_a.im = Tx + Tx;
         b_sqrt(&b_a);
         mady = aut[1].re - a;
         if (b_a.im == 0.0) {
@@ -929,14 +1025,14 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
             sinth.im = -(mady / b_a.im);
           }
         } else {
-          brm = fabs(b_a.re);
+          ch_re = fabs(b_a.re);
           uq = fabs(b_a.im);
-          if (brm > uq) {
+          if (ch_re > uq) {
             s = b_a.im / b_a.re;
-            brm = b_a.re + s * b_a.im;
-            sinth.re = (mady + s * aut[1].im) / brm;
-            sinth.im = (aut[1].im - s * mady) / brm;
-          } else if (uq == brm) {
+            ch_re = b_a.re + s * b_a.im;
+            sinth.re = (mady + s * aut[1].im) / ch_re;
+            sinth.im = (aut[1].im - s * mady) / ch_re;
+          } else if (uq == ch_re) {
             if (b_a.re > 0.0) {
               sgnbr = 0.5;
             } else {
@@ -947,13 +1043,13 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
             } else {
               s = -0.5;
             }
-            sinth.re = (mady * sgnbr + aut[1].im * s) / brm;
-            sinth.im = (aut[1].im * sgnbr - mady * s) / brm;
+            sinth.re = (mady * sgnbr + aut[1].im * s) / ch_re;
+            sinth.im = (aut[1].im * sgnbr - mady * s) / ch_re;
           } else {
             s = b_a.re / b_a.im;
-            brm = b_a.im + s * b_a.re;
-            sinth.re = (s * mady + aut[1].im) / brm;
-            sinth.im = (s * aut[1].im - mady) / brm;
+            ch_re = b_a.im + s * b_a.re;
+            sinth.re = (s * mady + aut[1].im) / ch_re;
+            sinth.im = (s * aut[1].im - mady) / ch_re;
           }
         }
         /*  M is the orthogonal matrix which enables the rotation of the axes */
@@ -972,14 +1068,14 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
           Tx = 0.0;
           a = -(1.0 / aut[0].im);
         } else {
-          brm = fabs(aut[0].re);
+          ch_re = fabs(aut[0].re);
           uq = fabs(aut[0].im);
-          if (brm > uq) {
+          if (ch_re > uq) {
             s = aut[0].im / aut[0].re;
-            brm = aut[0].re + s * aut[0].im;
-            Tx = (s * 0.0 + 1.0) / brm;
-            a = (0.0 - s) / brm;
-          } else if (uq == brm) {
+            ch_re = aut[0].re + s * aut[0].im;
+            Tx = (s * 0.0 + 1.0) / ch_re;
+            a = (0.0 - s) / ch_re;
+          } else if (uq == ch_re) {
             if (aut[0].re > 0.0) {
               sgnbr = 0.5;
             } else {
@@ -990,13 +1086,13 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
             } else {
               s = -0.5;
             }
-            Tx = (sgnbr + 0.0 * s) / brm;
-            a = (0.0 * sgnbr - s) / brm;
+            Tx = (sgnbr + 0.0 * s) / ch_re;
+            a = (0.0 * sgnbr - s) / ch_re;
           } else {
             s = aut[0].re / aut[0].im;
-            brm = aut[0].im + s * aut[0].re;
-            Tx = s / brm;
-            a = (s * 0.0 - 1.0) / brm;
+            ch_re = aut[0].im + s * aut[0].re;
+            Tx = s / ch_re;
+            a = (s * 0.0 - 1.0) / ch_re;
           }
         }
         if (aut[1].im == 0.0) {
@@ -1006,14 +1102,14 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
           uq = 0.0;
           mady = -(1.0 / aut[1].im);
         } else {
-          brm = fabs(aut[1].re);
+          ch_re = fabs(aut[1].re);
           uq = fabs(aut[1].im);
-          if (brm > uq) {
+          if (ch_re > uq) {
             s = aut[1].im / aut[1].re;
-            brm = aut[1].re + s * aut[1].im;
-            uq = (s * 0.0 + 1.0) / brm;
-            mady = (0.0 - s) / brm;
-          } else if (uq == brm) {
+            ch_re = aut[1].re + s * aut[1].im;
+            uq = (s * 0.0 + 1.0) / ch_re;
+            mady = (0.0 - s) / ch_re;
+          } else if (uq == ch_re) {
             if (aut[1].re > 0.0) {
               sgnbr = 0.5;
             } else {
@@ -1024,90 +1120,92 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
             } else {
               s = -0.5;
             }
-            uq = (sgnbr + 0.0 * s) / brm;
-            mady = (0.0 * sgnbr - s) / brm;
+            uq = (sgnbr + 0.0 * s) / ch_re;
+            mady = (0.0 * sgnbr - s) / ch_re;
           } else {
             s = aut[1].re / aut[1].im;
-            brm = aut[1].im + s * aut[1].re;
-            uq = s / brm;
-            mady = (s * 0.0 - 1.0) / brm;
+            ch_re = aut[1].im + s * aut[1].re;
+            uq = s / ch_re;
+            mady = (s * 0.0 - 1.0) / ch_re;
           }
         }
         fuo = sqrt(rt_hypotd_snf(Tx - uq, a - mady));
         /*  new1 = 2 x n matrix which contains the coordinates of the rotated
          * ellipse */
-        for (k = 0; k < 3601; k++) {
-          j = k << 1;
-          sgnbr = The1max[k];
-          mady = The2max[k];
-          b_The1max[j].re = sgnbr + mady;
-          b_The1max[j].im = 0.0;
-          b_The1max[j + 1].re = sgnbr - mady;
-          b_The1max[j + 1].im = 0.0;
+        for (j = 0; j < 3601; j++) {
+          boffset = j << 1;
+          Tx = The1max[j];
+          mady = The2max[j];
+          b_The1max[boffset].re = Tx + mady;
+          b_The1max[boffset].im = 0.0;
+          b_The1max[boffset + 1].re = Tx - mady;
+          b_The1max[boffset + 1].im = 0.0;
         }
-        for (k = 0; k < 2; k++) {
-          sgnbr = M[k].re;
-          mady = M[k].im;
-          uq = M[k + 2].re;
-          Tx = M[k + 2].im;
-          for (j = 0; j < 3601; j++) {
-            nx = j << 1;
-            boffset = k + nx;
+        for (j = 0; j < 2; j++) {
+          mady = M[j].re;
+          uq = M[j].im;
+          Tx = M[j + 2].re;
+          a = M[j + 2].im;
+          for (boffset = 0; boffset < 3601; boffset++) {
+            nx = boffset << 1;
+            costh_im = b_The1max[nx].im;
             s = b_The1max[nx].re;
-            brm = b_The1max[nx].im;
-            a = b_The1max[nx + 1].re;
-            a_im_tmp_tmp = b_The1max[nx + 1].im;
-            new1[boffset].re =
-                (sgnbr * s - mady * brm) + (uq * a - Tx * a_im_tmp_tmp);
-            new1[boffset].im =
-                (sgnbr * brm + mady * s) + (uq * a_im_tmp_tmp + Tx * a);
+            ch_re = b_The1max[nx + 1].im;
+            sgnbr = b_The1max[nx + 1].re;
+            nx += j;
+            new1[nx].re = (mady * s - uq * costh_im) + (Tx * sgnbr - a * ch_re);
+            new1[nx].im = (mady * costh_im + uq * s) + (Tx * ch_re + a * sgnbr);
           }
         }
         /*  xnew = n x 1 vector which contains x coord. of rotated points */
         /*  ynew = n x 1 vector which contains y coord. of rotated points */
-        for (k = 0; k < 3601; k++) {
-          j = k << 1;
-          xnew[k].re = new1[j].re;
-          xnew[k].im = -new1[j].im;
-          ynew[k].re = new1[j + 1].re;
-          ynew[k].im = -new1[j + 1].im;
+        for (j = 0; j < 3601; j++) {
+          boffset = j << 1;
+          xnew[j].re = new1[boffset].re;
+          xnew[j].im = -new1[boffset].im;
+          ynew[j].re = new1[boffset + 1].re;
+          ynew[j].im = -new1[boffset + 1].im;
         }
         /*  new2 = 2 x n matrix which contains the coordinates of the rotated
          * points */
-        k = b_Xs->size[0] * b_Xs->size[1];
+        j = b_Xs->size[0] * b_Xs->size[1];
         b_Xs->size[0] = 2;
         b_Xs->size[1] = Xs->size[0];
-        emxEnsureCapacity_creal_T(b_Xs, k);
-        nx = Xs->size[0];
-        for (k = 0; k < nx; k++) {
-          b_Xs->data[2 * k].re = Xs->data[k];
-          b_Xs->data[2 * k].im = 0.0;
+        emxEnsureCapacity_creal_T(b_Xs, j);
+        b_Xs_data = b_Xs->data;
+        coffset = Xs->size[0];
+        for (j = 0; j < coffset; j++) {
+          b_Xs_data[2 * j].re = Xs_data[j];
+          b_Xs_data[2 * j].im = 0.0;
         }
-        nx = Ys->size[0];
-        for (k = 0; k < nx; k++) {
-          j = 2 * k + 1;
-          b_Xs->data[j].re = Ys->data[k];
-          b_Xs->data[j].im = 0.0;
+        coffset = Ys->size[0];
+        for (j = 0; j < coffset; j++) {
+          boffset = 2 * j + 1;
+          b_Xs_data[boffset].re = Ys_data[j];
+          b_Xs_data[boffset].im = 0.0;
         }
-        k = new2->size[0] * new2->size[1];
+        j = new2->size[0] * new2->size[1];
         new2->size[0] = 2;
         new2->size[1] = b_Xs->size[1];
-        emxEnsureCapacity_creal_T(new2, k);
-        nx = b_Xs->size[1];
-        for (k = 0; k < 2; k++) {
-          for (j = 0; j < nx; j++) {
-            sgnbr = M[k].re;
-            mady = M[k].im;
-            uq = M[k + 2].re;
-            Tx = M[k + 2].im;
-            boffset = 2 * j + 1;
-            coffset = k + 2 * j;
-            new2->data[coffset].re =
-                (sgnbr * b_Xs->data[2 * j].re - mady * b_Xs->data[2 * j].im) +
-                (uq * b_Xs->data[boffset].re - Tx * b_Xs->data[boffset].im);
-            new2->data[coffset].im =
-                (sgnbr * b_Xs->data[2 * j].im + mady * b_Xs->data[2 * j].re) +
-                (uq * b_Xs->data[boffset].im + Tx * b_Xs->data[boffset].re);
+        emxEnsureCapacity_creal_T(new2, j);
+        new2_data = new2->data;
+        coffset = b_Xs->size[1];
+        for (j = 0; j < 2; j++) {
+          for (boffset = 0; boffset < coffset; boffset++) {
+            mady = M[j].re;
+            uq = b_Xs_data[2 * boffset].im;
+            Tx = M[j].im;
+            a = b_Xs_data[2 * boffset].re;
+            costh_im = M[j + 2].re;
+            nx = 2 * boffset + 1;
+            s = b_Xs_data[nx].im;
+            ch_re = M[j + 2].im;
+            sgnbr = b_Xs_data[nx].re;
+            nx = j + 2 * boffset;
+            new2_data[nx].re =
+                (mady * a - Tx * uq) + (costh_im * sgnbr - ch_re * s);
+            new2_data[nx].im =
+                (mady * uq + Tx * a) + (costh_im * s + ch_re * sgnbr);
           }
         }
         /*  ch is the fixed distance of each point lying on the ellipse */
@@ -1116,53 +1214,61 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
         sinth.im = mady + mady;
         b_a.re = xnew[9].re + fuo;
         costh_re = xnew[9].re - fuo;
-        mady = xnew[9].im * xnew[9].im;
-        uq = b_a.re * b_a.re - mady;
-        Tx = b_a.re * xnew[9].im;
-        b_a.re = uq + sinth.re;
-        b_a.im = (Tx + Tx) + sinth.im;
+        sgnbr = xnew[9].im * xnew[9].im;
+        Tx = b_a.re * b_a.re - sgnbr;
+        costh_im = b_a.re * xnew[9].im;
+        b_a.re = Tx + sinth.re;
+        b_a.im = (costh_im + costh_im) + sinth.im;
         b_sqrt(&b_a);
-        uq = costh_re * xnew[9].im;
-        sinth.re += costh_re * costh_re - mady;
-        sinth.im += uq + uq;
+        mady = costh_re * xnew[9].im;
+        sinth.re += costh_re * costh_re - sgnbr;
+        sinth.im += mady + mady;
         b_sqrt(&sinth);
-        mady = b_a.re + sinth.re;
+        ch_re = b_a.re + sinth.re;
         /*  biv is the 1 x n vector which contains potential bivariate outliers
          */
-        k = biv->size[0] * biv->size[1];
+        j = biv->size[0] * biv->size[1];
         biv->size[0] = 1;
         biv->size[1] = n;
-        emxEnsureCapacity_real_T(biv, k);
-        for (k = 0; k < n; k++) {
-          biv->data[k] = 0.0;
+        emxEnsureCapacity_real_T(biv, j);
+        biv_data = biv->data;
+        for (j = 0; j < n; j++) {
+          biv_data[j] = 0.0;
         }
         for (coffset = 0; coffset < n; coffset++) {
-          b_a.re = new2->data[2 * coffset].re + fuo;
-          b_a.im = new2->data[2 * coffset].im;
-          costh_re = new2->data[2 * coffset].re - fuo;
-          costh_im = new2->data[2 * coffset].im;
-          uq = b_a.re * b_a.re - b_a.im * b_a.im;
-          Tx = b_a.re * b_a.im;
+          a_tmp = new2_data[2 * coffset].re;
+          b_a.re = a_tmp + fuo;
+          a = new2_data[2 * coffset].im;
+          costh_re = a_tmp - fuo;
+          sgnbr = a * a;
+          Tx = b_a.re * b_a.re - sgnbr;
+          costh_im = b_a.re * a;
           nx = 2 * coffset + 1;
-          s = new2->data[nx].re * new2->data[nx].re -
-              new2->data[nx].im * new2->data[nx].im;
-          brm = new2->data[nx].re * new2->data[nx].im;
-          brm += brm;
-          b_a.re = uq + s;
-          b_a.im = (Tx + Tx) + brm;
+          mady = new2_data[nx].re;
+          uq = new2_data[nx].im;
+          s = mady * mady - uq * uq;
+          uq *= mady;
+          uq += uq;
+          b_a.re = Tx + s;
+          b_a.im = (costh_im + costh_im) + uq;
           b_sqrt(&b_a);
-          uq = costh_re * costh_im;
-          sinth.re = (costh_re * costh_re - costh_im * costh_im) + s;
-          sinth.im = (uq + uq) + brm;
+          mady = costh_re * a;
+          sinth.re = (costh_re * costh_re - sgnbr) + s;
+          sinth.im = (mady + mady) + uq;
           b_sqrt(&sinth);
-          if (b_a.re + sinth.re > mady) {
-            biv->data[coffset]++;
+          if (b_a.re + sinth.re > ch_re) {
+            biv_data[coffset]++;
           }
         }
         /*  bivT contains cumulative distribution of bivariate outliers */
-        nx = bivT->size[0];
-        for (k = 0; k < nx; k++) {
-          bivT->data[k] += biv->data[k];
+        coffset = bivT->size[0];
+        if (bivT->size[0] == biv->size[1]) {
+          for (j = 0; j < coffset; j++) {
+            bivT_data[j] += biv_data[j];
+          }
+        } else {
+          j_binary_expand_op(bivT, biv);
+          bivT_data = bivT->data;
         }
         /*  the following lines plot the hinge together with the fence */
       } else {
@@ -1175,11 +1281,11 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
     /*  endif of jl=1:v */
   }
   emxFree_creal_T(&b_Xs);
-  emxFree_uint8_T(&r3);
+  emxFree_real_T(&b_Y);
+  emxFree_uint8_T(&r2);
   emxFree_int32_T(&jj);
   emxFree_int32_T(&ii);
-  emxFree_int32_T(&r2);
-  emxFree_boolean_T(&r1);
+  emxFree_int32_T(&r1);
   emxFree_boolean_T(&r);
   emxFree_real_T(&biv);
   emxFree_creal_T(&new2);
@@ -1195,24 +1301,25 @@ void unibiv_wrapper(const emxArray_real_T *Y, double madcoef, double robscale,
   fre->size[0] = seq->size[0];
   fre->size[1] = 4;
   emxEnsureCapacity_real_T(fre, i);
-  nx = seq->size[0];
-  for (i = 0; i < nx; i++) {
-    fre->data[i] = seq->data[i];
+  biv_data = fre->data;
+  coffset = seq->size[0];
+  for (i = 0; i < coffset; i++) {
+    biv_data[i] = seq_data[i];
   }
   emxFree_real_T(&seq);
-  nx = univT->size[0];
-  for (i = 0; i < nx; i++) {
-    fre->data[i + fre->size[0]] = univT->data[i];
+  coffset = univT->size[0];
+  for (i = 0; i < coffset; i++) {
+    biv_data[i + fre->size[0]] = univT_data[i];
   }
   emxFree_real_T(&univT);
-  nx = bivT->size[0];
-  for (i = 0; i < nx; i++) {
-    fre->data[i + fre->size[0] * 2] = bivT->data[i];
+  coffset = bivT->size[0];
+  for (i = 0; i < coffset; i++) {
+    biv_data[i + fre->size[0] * 2] = bivT_data[i];
   }
   emxFree_real_T(&bivT);
-  nx = MDbiv->size[0];
-  for (i = 0; i < nx; i++) {
-    fre->data[i + fre->size[0] * 3] = MDbiv->data[i];
+  coffset = MDbiv->size[0];
+  for (i = 0; i < coffset; i++) {
+    biv_data[i + fre->size[0] * 3] = MDbiv_data[i];
   }
   emxFree_real_T(&MDbiv);
 }

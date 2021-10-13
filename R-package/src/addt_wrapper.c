@@ -11,7 +11,11 @@
 
 /* Include files */
 #include "addt_wrapper.h"
+#include "addt.h"
+#include "betainc.h"
 #include "blockedSummation.h"
+#include "chkinputR.h"
+#include "eml_erfcore.h"
 #include "find.h"
 #include "fsdaC_data.h"
 #include "fsdaC_emxutil.h"
@@ -27,7 +31,6 @@
 #include "qr.h"
 #include "rank.h"
 #include "rt_nonfinite.h"
-#include "tcdf.h"
 #include "rt_nonfinite.h"
 #include <math.h>
 #include <string.h>
@@ -38,41 +41,65 @@ void addt_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                   const double la_data[], const int la_size[2], bool nocheck,
                   struct_addt_T *out)
 {
-  emxArray_boolean_T *b_constcols;
-  emxArray_boolean_T *b_r;
-  emxArray_boolean_T *b_x;
-  emxArray_boolean_T *na_X;
+  emxArray_boolean_T *c_constcols;
+  emxArray_boolean_T *ok;
+  emxArray_boolean_T *r;
+  emxArray_boolean_T *r2;
+  emxArray_boolean_T *r4;
   emxArray_boolean_T *x;
-  emxArray_char_T_1x310 b_A;
-  emxArray_int32_T *jpvt;
-  emxArray_int32_T *r1;
-  emxArray_int32_T *r2;
+  emxArray_char_T_1x310 c_X;
+  emxArray_int32_T *b_constcols;
+  emxArray_int32_T *r6;
+  emxArray_int32_T *r7;
   emxArray_real_T *A;
   emxArray_real_T *Aw;
-  emxArray_real_T *C;
   emxArray_real_T *E;
+  emxArray_real_T *R;
+  emxArray_real_T *b_A;
+  emxArray_real_T *b_X;
+  emxArray_real_T *b_p;
   emxArray_real_T *b_y;
-  emxArray_real_T *c_y;
   emxArray_real_T *constcols;
-  emxArray_real_T *r;
-  emxArray_real_T *r3;
+  emxArray_real_T *la;
+  emxArray_real_T *r8;
   emxArray_real_T *z;
+  const double *X_data;
+  const double *w_data;
+  const double *y_data;
   double G;
-  double b_w;
-  int tmp_size[2];
+  double b;
+  double n_tmp;
+  double varargin_1;
+  double *A_data;
+  double *Aw_data;
+  double *E_data;
+  double *b_A_data;
+  double *b_X_data;
+  double *b_y_data;
+  double *constcols_data;
+  double *z_data;
   int aoffset;
   int i;
   int inner;
   int k;
-  int loop_ub;
   int n;
+  int nx;
   int p;
   unsigned int siz_idx_0;
-  bool d_y;
+  int *b_constcols_data;
+  bool c_y;
+  bool exitg1;
+  bool *ok_data;
+  bool *r1;
+  bool *r3;
+  bool *r5;
   if (!isInitialized_fsdaC) {
     fsdaC_initialize();
   }
-  emxInit_real_T(&A, 2);
+  w_data = w->data;
+  X_data = X->data;
+  y_data = y->data;
+  emxInit_real_T(&b_X, 2);
   /*  Example wrapper function for addt. NV pair names are not taken as */
   /*  inputs. Instead, just the values are taken as inputs. */
   /*  Required input arguments */
@@ -169,7 +196,6 @@ void addt_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                Example - 'units',[1,3] removes units 1 and 3 */
   /*                Data Types - double */
   /*  */
-  /*  */
   /*  Output: */
   /*  */
   /*          out:   structure which contains the following fields */
@@ -181,7 +207,6 @@ void addt_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*        out.Tadd=         t statistic for additional explanatory variable */
   /*        out.pval=         p-value of the t statistic */
   /*  */
-  /*  */
   /*  See also FSRaddt */
   /*  */
   /*  References: */
@@ -191,7 +216,6 @@ void addt_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('addt')">Link to the help page for this
    * function</a> */
@@ -239,23 +263,24 @@ void addt_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
    * 47]','textlab',true); */
   /* } */
   /*  */
-  /*  */
   /*  Beginning of code */
-  k = A->size[0] * A->size[1];
-  A->size[0] = X->size[0];
-  A->size[1] = X->size[1];
-  emxEnsureCapacity_real_T(A, k);
-  loop_ub = X->size[0] * X->size[1];
-  for (k = 0; k < loop_ub; k++) {
-    A->data[k] = X->data[k];
+  i = b_X->size[0] * b_X->size[1];
+  b_X->size[0] = X->size[0];
+  b_X->size[1] = X->size[1];
+  emxEnsureCapacity_real_T(b_X, i);
+  b_X_data = b_X->data;
+  nx = X->size[0] * X->size[1];
+  for (i = 0; i < nx; i++) {
+    b_X_data[i] = X_data[i];
   }
   emxInit_real_T(&b_y, 1);
-  k = b_y->size[0];
+  i = b_y->size[0];
   b_y->size[0] = y->size[0];
-  emxEnsureCapacity_real_T(b_y, k);
-  loop_ub = y->size[0];
-  for (k = 0; k < loop_ub; k++) {
-    b_y->data[k] = y->data[k];
+  emxEnsureCapacity_real_T(b_y, i);
+  b_y_data = b_y->data;
+  nx = y->size[0];
+  for (i = 0; i < nx; i++) {
+    b_y_data[i] = y_data[i];
   }
   /* chkinputR makes some input parameters and user options checking in
    * regression */
@@ -280,7 +305,6 @@ void addt_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                specified for the */
   /*                caller function. */
   /*  */
-  /*  */
   /*   Optional input arguments: */
   /*  */
   /*  Output: */
@@ -295,7 +319,6 @@ void addt_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                rows after listwise exclusion. */
   /*  p:            Number of columns of X (variables). Scalar. */
   /*                Number of parameters to be estimated. */
-  /*  */
   /*  */
   /*  More About: */
   /*  */
@@ -317,8 +340,6 @@ void addt_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
-  /*  */
   /*  */
   /* $LastChangedDate::                      $: Date of the last commit */
   /*  */
@@ -342,9 +363,8 @@ void addt_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  chkint is the position of the option intercept in vector chklist */
   /*  chkint = strmatch('intercept',chklist,'exact'); */
   /*  If nocheck=true, then skip checks on y and X */
-  emxInit_real_T(&E, 2);
+  emxInit_real_T(&A, 2);
   emxInit_real_T(&constcols, 2);
-  emxInit_boolean_T(&x, 1);
   if (nocheck) {
     p = X->size[1];
     n = X->size[0];
@@ -352,122 +372,133 @@ void addt_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     /*  The first argument which is passed is y */
     /*  The second argument which is passed is X */
     /*  Check dimension consistency of X and y */
-    loop_ub = X->size[0] - 1;
+    nx = X->size[0] - 1;
     inner = X->size[1];
-    k = b_y->size[0];
+    i = b_y->size[0];
     b_y->size[0] = X->size[0];
-    emxEnsureCapacity_real_T(b_y, k);
-    for (i = 0; i <= loop_ub; i++) {
-      b_y->data[i] = 0.0;
+    emxEnsureCapacity_real_T(b_y, i);
+    b_y_data = b_y->data;
+    for (i = 0; i <= nx; i++) {
+      b_y_data[i] = 0.0;
     }
     for (k = 0; k < inner; k++) {
       aoffset = k * X->size[0];
-      for (i = 0; i <= loop_ub; i++) {
-        b_y->data[i] += X->data[aoffset + i];
+      for (i = 0; i <= nx; i++) {
+        b_y_data[i] += X_data[aoffset + i];
       }
     }
-    k = x->size[0];
-    x->size[0] = b_y->size[0];
-    emxEnsureCapacity_boolean_T(x, k);
-    loop_ub = b_y->size[0];
-    for (k = 0; k < loop_ub; k++) {
-      x->data[k] = rtIsInf(b_y->data[k]);
-    }
-    emxInit_boolean_T(&b_r, 1);
-    k = b_r->size[0];
-    b_r->size[0] = b_y->size[0];
-    emxEnsureCapacity_boolean_T(b_r, k);
-    loop_ub = b_y->size[0];
-    for (k = 0; k < loop_ub; k++) {
-      b_r->data[k] = rtIsNaN(b_y->data[k]);
-    }
-    emxInit_boolean_T(&na_X, 1);
-    k = na_X->size[0];
-    na_X->size[0] = x->size[0];
-    emxEnsureCapacity_boolean_T(na_X, k);
-    loop_ub = x->size[0];
-    for (k = 0; k < loop_ub; k++) {
-      na_X->data[k] = (x->data[k] || b_r->data[k]);
-    }
-    k = x->size[0];
-    x->size[0] = y->size[0];
-    emxEnsureCapacity_boolean_T(x, k);
-    loop_ub = y->size[0];
-    for (k = 0; k < loop_ub; k++) {
-      x->data[k] = rtIsInf(y->data[k]);
-    }
-    k = b_r->size[0];
-    b_r->size[0] = y->size[0];
-    emxEnsureCapacity_boolean_T(b_r, k);
-    loop_ub = y->size[0];
-    for (k = 0; k < loop_ub; k++) {
-      b_r->data[k] = rtIsNaN(y->data[k]);
-    }
-    loop_ub = x->size[0];
-    for (k = 0; k < loop_ub; k++) {
-      x->data[k] = (x->data[k] || b_r->data[k]);
-    }
-    emxFree_boolean_T(&b_r);
+    emxInit_boolean_T(&ok, 1);
     /*  Observations with missing or infinite values are removed from X and y */
-    loop_ub = na_X->size[0] - 1;
-    aoffset = 0;
-    for (i = 0; i <= loop_ub; i++) {
-      if ((!na_X->data[i]) && (!x->data[i])) {
-        aoffset++;
+    i = ok->size[0];
+    ok->size[0] = b_y->size[0];
+    emxEnsureCapacity_boolean_T(ok, i);
+    ok_data = ok->data;
+    nx = b_y->size[0];
+    for (i = 0; i < nx; i++) {
+      ok_data[i] = rtIsInf(b_y_data[i]);
+    }
+    emxInit_boolean_T(&r, 1);
+    i = r->size[0];
+    r->size[0] = b_y->size[0];
+    emxEnsureCapacity_boolean_T(r, i);
+    r1 = r->data;
+    nx = b_y->size[0];
+    for (i = 0; i < nx; i++) {
+      r1[i] = rtIsNaN(b_y_data[i]);
+    }
+    emxInit_boolean_T(&r2, 1);
+    i = r2->size[0];
+    r2->size[0] = y->size[0];
+    emxEnsureCapacity_boolean_T(r2, i);
+    r3 = r2->data;
+    nx = y->size[0];
+    for (i = 0; i < nx; i++) {
+      r3[i] = rtIsInf(y_data[i]);
+    }
+    emxInit_boolean_T(&r4, 1);
+    i = r4->size[0];
+    r4->size[0] = y->size[0];
+    emxEnsureCapacity_boolean_T(r4, i);
+    r5 = r4->data;
+    nx = y->size[0];
+    for (i = 0; i < nx; i++) {
+      r5[i] = rtIsNaN(y_data[i]);
+    }
+    if (ok->size[0] == r2->size[0]) {
+      nx = ok->size[0];
+      for (i = 0; i < nx; i++) {
+        ok_data[i] = ((!ok_data[i]) && (!r1[i]) && ((!r3[i]) && (!r5[i])));
+      }
+    } else {
+      ib_binary_expand_op(ok, r, r2, r4);
+      ok_data = ok->data;
+    }
+    emxFree_boolean_T(&r4);
+    emxFree_boolean_T(&r2);
+    emxFree_boolean_T(&r);
+    aoffset = ok->size[0] - 1;
+    nx = 0;
+    for (i = 0; i <= aoffset; i++) {
+      if (ok_data[i]) {
+        nx++;
       }
     }
-    emxInit_int32_T(&r1, 1);
-    k = r1->size[0];
-    r1->size[0] = aoffset;
-    emxEnsureCapacity_int32_T(r1, k);
-    aoffset = 0;
-    for (i = 0; i <= loop_ub; i++) {
-      if ((!na_X->data[i]) && (!x->data[i])) {
-        r1->data[aoffset] = i + 1;
-        aoffset++;
+    emxInit_int32_T(&r6, 1);
+    i = r6->size[0];
+    r6->size[0] = nx;
+    emxEnsureCapacity_int32_T(r6, i);
+    b_constcols_data = r6->data;
+    nx = 0;
+    for (i = 0; i <= aoffset; i++) {
+      if (ok_data[i]) {
+        b_constcols_data[nx] = i + 1;
+        nx++;
       }
     }
-    loop_ub = X->size[1];
-    k = A->size[0] * A->size[1];
-    A->size[0] = r1->size[0];
-    A->size[1] = X->size[1];
-    emxEnsureCapacity_real_T(A, k);
-    for (k = 0; k < loop_ub; k++) {
-      aoffset = r1->size[0];
+    nx = X->size[1];
+    i = b_X->size[0] * b_X->size[1];
+    b_X->size[0] = r6->size[0];
+    b_X->size[1] = X->size[1];
+    emxEnsureCapacity_real_T(b_X, i);
+    b_X_data = b_X->data;
+    for (i = 0; i < nx; i++) {
+      aoffset = r6->size[0];
       for (inner = 0; inner < aoffset; inner++) {
-        A->data[inner + A->size[0] * k] =
-            X->data[(r1->data[inner] + X->size[0] * k) - 1];
+        b_X_data[inner + b_X->size[0] * i] =
+            X_data[(b_constcols_data[inner] + X->size[0] * i) - 1];
       }
     }
-    emxFree_int32_T(&r1);
-    loop_ub = na_X->size[0] - 1;
-    aoffset = 0;
-    for (i = 0; i <= loop_ub; i++) {
-      if ((!na_X->data[i]) && (!x->data[i])) {
-        aoffset++;
+    emxFree_int32_T(&r6);
+    aoffset = ok->size[0] - 1;
+    nx = 0;
+    for (i = 0; i <= aoffset; i++) {
+      if (ok_data[i]) {
+        nx++;
       }
     }
-    emxInit_int32_T(&r2, 1);
-    k = r2->size[0];
-    r2->size[0] = aoffset;
-    emxEnsureCapacity_int32_T(r2, k);
-    aoffset = 0;
-    for (i = 0; i <= loop_ub; i++) {
-      if ((!na_X->data[i]) && (!x->data[i])) {
-        r2->data[aoffset] = i + 1;
-        aoffset++;
+    emxInit_int32_T(&r7, 1);
+    i = r7->size[0];
+    r7->size[0] = nx;
+    emxEnsureCapacity_int32_T(r7, i);
+    b_constcols_data = r7->data;
+    nx = 0;
+    for (i = 0; i <= aoffset; i++) {
+      if (ok_data[i]) {
+        b_constcols_data[nx] = i + 1;
+        nx++;
       }
     }
-    emxFree_boolean_T(&na_X);
-    k = b_y->size[0];
-    b_y->size[0] = r2->size[0];
-    emxEnsureCapacity_real_T(b_y, k);
-    loop_ub = r2->size[0];
-    for (k = 0; k < loop_ub; k++) {
-      b_y->data[k] = y->data[r2->data[k] - 1];
+    emxFree_boolean_T(&ok);
+    i = b_y->size[0];
+    b_y->size[0] = r7->size[0];
+    emxEnsureCapacity_real_T(b_y, i);
+    b_y_data = b_y->data;
+    nx = r7->size[0];
+    for (i = 0; i < nx; i++) {
+      b_y_data[i] = y_data[b_constcols_data[i] - 1];
     }
     /*  Now n is the new number of non missing observations */
-    n = r2->size[0];
+    n = r7->size[0];
     /*  Now add to matrix X a column of ones for the intercept. */
     /*  If a value for the intercept has not been specified or if this value is
      */
@@ -480,344 +511,506 @@ void addt_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     /*     interceptPresent=vvarargin{2*chkint}==true; */
     /* end */
     if (intercept) {
-      k = E->size[0] * E->size[1];
-      E->size[0] = A->size[0];
-      E->size[1] = A->size[1];
-      emxEnsureCapacity_real_T(E, k);
-      loop_ub = A->size[0] * A->size[1];
-      for (k = 0; k < loop_ub; k++) {
-        E->data[k] = A->data[k];
+      i = A->size[0] * A->size[1];
+      A->size[0] = b_X->size[0];
+      A->size[1] = b_X->size[1];
+      emxEnsureCapacity_real_T(A, i);
+      A_data = A->data;
+      nx = b_X->size[0] * b_X->size[1];
+      for (i = 0; i < nx; i++) {
+        A_data[i] = b_X_data[i];
       }
-      k = A->size[0] * A->size[1];
-      A->size[0] = r2->size[0];
-      A->size[1] = X->size[1] + 1;
-      emxEnsureCapacity_real_T(A, k);
-      k = r2->size[0];
-      for (loop_ub = 0; loop_ub < k; loop_ub++) {
-        A->data[loop_ub] = 1.0;
+      i = b_X->size[0] * b_X->size[1];
+      b_X->size[0] = r7->size[0];
+      b_X->size[1] = X->size[1] + 1;
+      emxEnsureCapacity_real_T(b_X, i);
+      b_X_data = b_X->data;
+      i = r7->size[0];
+      for (nx = 0; nx < i; nx++) {
+        b_X_data[nx] = 1.0;
       }
-      inner = E->size[0] * E->size[1];
-      for (loop_ub = 0; loop_ub < inner; loop_ub++) {
-        A->data[k + loop_ub] = E->data[loop_ub];
+      inner = A->size[0] * A->size[1];
+      for (nx = 0; nx < inner; nx++) {
+        b_X_data[i + nx] = A_data[nx];
       }
     }
-    emxInit_real_T(&r3, 2);
-    emxInit_boolean_T(&b_constcols, 2);
+    emxInit_real_T(&r8, 2);
     /*  constcols = scalar vector of the indices of possible constant columns.
      */
-    maximum(A, constcols);
-    minimum(A, r3);
-    k = b_constcols->size[0] * b_constcols->size[1];
-    b_constcols->size[0] = 1;
-    b_constcols->size[1] = constcols->size[1];
-    emxEnsureCapacity_boolean_T(b_constcols, k);
-    loop_ub = constcols->size[1];
-    for (k = 0; k < loop_ub; k++) {
-      b_constcols->data[k] = (constcols->data[k] - r3->data[k] == 0.0);
+    maximum(b_X, constcols);
+    constcols_data = constcols->data;
+    minimum(b_X, r8);
+    b_A_data = r8->data;
+    emxInit_int32_T(&b_constcols, 2);
+    if (constcols->size[1] == r8->size[1]) {
+      emxInit_boolean_T(&c_constcols, 2);
+      i = c_constcols->size[0] * c_constcols->size[1];
+      c_constcols->size[0] = 1;
+      c_constcols->size[1] = constcols->size[1];
+      emxEnsureCapacity_boolean_T(c_constcols, i);
+      ok_data = c_constcols->data;
+      nx = constcols->size[1];
+      for (i = 0; i < nx; i++) {
+        ok_data[i] = (constcols_data[i] - b_A_data[i] == 0.0);
+      }
+      eml_find(c_constcols, b_constcols);
+      b_constcols_data = b_constcols->data;
+      emxFree_boolean_T(&c_constcols);
+    } else {
+      hb_binary_expand_op(b_constcols, constcols, r8);
+      b_constcols_data = b_constcols->data;
     }
-    emxFree_real_T(&r3);
-    emxInit_int32_T(&jpvt, 2);
-    eml_find(b_constcols, jpvt);
-    k = constcols->size[0] * constcols->size[1];
+    emxFree_real_T(&r8);
+    i = constcols->size[0] * constcols->size[1];
     constcols->size[0] = 1;
-    constcols->size[1] = jpvt->size[1];
-    emxEnsureCapacity_real_T(constcols, k);
-    loop_ub = jpvt->size[1];
-    emxFree_boolean_T(&b_constcols);
-    for (k = 0; k < loop_ub; k++) {
-      constcols->data[k] = jpvt->data[k];
+    constcols->size[1] = b_constcols->size[1];
+    emxEnsureCapacity_real_T(constcols, i);
+    constcols_data = constcols->data;
+    nx = b_constcols->size[1];
+    for (i = 0; i < nx; i++) {
+      constcols_data[i] = b_constcols_data[i];
     }
     if (constcols->size[1] > 1) {
-      loop_ub = constcols->size[1] - 2;
-      k = jpvt->size[0] * jpvt->size[1];
-      jpvt->size[0] = 1;
-      jpvt->size[1] = constcols->size[1] - 1;
-      emxEnsureCapacity_int32_T(jpvt, k);
-      for (k = 0; k <= loop_ub; k++) {
-        jpvt->data[k] = (int)constcols->data[k + 1];
+      nx = constcols->size[1] - 2;
+      i = b_constcols->size[0] * b_constcols->size[1];
+      b_constcols->size[0] = 1;
+      b_constcols->size[1] = constcols->size[1] - 1;
+      emxEnsureCapacity_int32_T(b_constcols, i);
+      b_constcols_data = b_constcols->data;
+      for (i = 0; i <= nx; i++) {
+        b_constcols_data[i] = (int)constcols_data[i + 1];
       }
-      nullAssignment(A, jpvt);
+      nullAssignment(b_X, b_constcols);
     }
-    emxFree_int32_T(&jpvt);
+    emxFree_int32_T(&b_constcols);
     /*  p is the number of parameters to be estimated */
-    p = A->size[1];
-    if (r2->size[0] < A->size[1]) {
-      int2str(A->size[0], b_A.data, b_A.size);
-      int2str(A->size[1], b_A.data, b_A.size);
+    p = b_X->size[1];
+    if (r7->size[0] < b_X->size[1]) {
+      int2str(b_X->size[0], c_X.data, c_X.size);
+      int2str(b_X->size[1], c_X.data, c_X.size);
     }
-    emxFree_int32_T(&r2);
-    local_rank(A);
+    emxFree_int32_T(&r7);
+    local_rank(b_X);
   }
-  emxInit_real_T(&r, 2);
+  emxInit_real_T(&E, 2);
+  emxInit_real_T(&R, 2);
   /*  Insert code for intercept */
   /*  t test for an additional explanatory variable */
-  qr(A, E, r);
-  mrdiv(A, r, E);
-  k = r->size[0] * r->size[1];
-  r->size[0] = E->size[0];
-  r->size[1] = E->size[1];
-  emxEnsureCapacity_real_T(r, k);
-  loop_ub = E->size[0] * E->size[1];
-  for (k = 0; k < loop_ub; k++) {
-    r->data[k] = -E->data[k];
+  qr(b_X, A, R);
+  mrdiv(b_X, R, E);
+  E_data = E->data;
+  i = b_X->size[0] * b_X->size[1];
+  b_X->size[0] = E->size[0];
+  b_X->size[1] = E->size[1];
+  emxEnsureCapacity_real_T(b_X, i);
+  b_X_data = b_X->data;
+  nx = E->size[0] * E->size[1];
+  for (i = 0; i < nx; i++) {
+    b_X_data[i] = -E_data[i];
   }
-  d_mtimes(r, E, A);
+  d_mtimes(b_X, E, A);
+  A_data = A->data;
   if (n < 1) {
     constcols->size[1] = 0;
   } else {
-    k = constcols->size[0] * constcols->size[1];
+    i = constcols->size[0] * constcols->size[1];
     constcols->size[0] = 1;
     constcols->size[1] = n;
-    emxEnsureCapacity_real_T(constcols, k);
-    loop_ub = n - 1;
-    for (k = 0; k <= loop_ub; k++) {
-      constcols->data[k] = (double)k + 1.0;
+    emxEnsureCapacity_real_T(constcols, i);
+    constcols_data = constcols->data;
+    nx = n - 1;
+    for (i = 0; i <= nx; i++) {
+      constcols_data[i] = (double)i + 1.0;
     }
   }
   siz_idx_0 = (unsigned int)A->size[0];
   /*  Find linear indexes */
   /*  It is better to compute linind directly rather than calling sub2ind */
   /*  linind=sub2ind(siz,sel,sel); */
-  k = constcols->size[0] * constcols->size[1];
+  nx = constcols->size[1] - 1;
+  i = constcols->size[0] * constcols->size[1];
   constcols->size[0] = 1;
-  emxEnsureCapacity_real_T(constcols, k);
-  loop_ub = constcols->size[1] - 1;
-  for (k = 0; k <= loop_ub; k++) {
-    G = constcols->data[k];
+  emxEnsureCapacity_real_T(constcols, i);
+  constcols_data = constcols->data;
+  for (i = 0; i <= nx; i++) {
+    G = constcols_data[i];
     G += (G - 1.0) * (double)siz_idx_0;
-    constcols->data[k] = G;
+    constcols_data[i] = G;
   }
-  emxInit_real_T(&Aw, 1);
-  loop_ub = constcols->size[1];
-  k = Aw->size[0];
-  Aw->size[0] = constcols->size[1];
-  emxEnsureCapacity_real_T(Aw, k);
-  for (k = 0; k < loop_ub; k++) {
-    Aw->data[k] = A->data[(int)constcols->data[k] - 1] + 1.0;
+  emxInit_real_T(&b_A, 1);
+  nx = constcols->size[1];
+  i = b_A->size[0];
+  b_A->size[0] = constcols->size[1];
+  emxEnsureCapacity_real_T(b_A, i);
+  b_A_data = b_A->data;
+  for (i = 0; i < nx; i++) {
+    b_A_data[i] = A_data[(int)constcols_data[i] - 1] + 1.0;
   }
-  loop_ub = Aw->size[0];
-  for (k = 0; k < loop_ub; k++) {
-    A->data[(int)constcols->data[k] - 1] = Aw->data[k];
+  nx = b_A->size[0];
+  for (i = 0; i < nx; i++) {
+    A_data[(int)constcols_data[i] - 1] = b_A_data[i];
   }
   emxFree_real_T(&constcols);
   /*  Notice that: */
   /*  -E*E' = matrix -H = -X*inv(X'X)*X' computed through qr decomposition */
   /*  A = Matrix I - H */
   emxInit_real_T(&z, 2);
-  emxInit_real_T(&c_y, 1);
+  emxInit_boolean_T(&x, 2);
+  emxInit_real_T(&la, 2);
   if ((la_size[0] != 0) && (la_size[1] != 0)) {
     /* geometric mean of the y */
-    k = Aw->size[0];
-    Aw->size[0] = b_y->size[0];
-    emxEnsureCapacity_real_T(Aw, k);
-    loop_ub = b_y->size[0];
-    for (k = 0; k < loop_ub; k++) {
-      Aw->data[k] = b_y->data[k];
+    i = b_A->size[0];
+    b_A->size[0] = b_y->size[0];
+    emxEnsureCapacity_real_T(b_A, i);
+    b_A_data = b_A->data;
+    nx = b_y->size[0];
+    for (i = 0; i < nx; i++) {
+      b_A_data[i] = b_y_data[i];
     }
-    aoffset = b_y->size[0];
-    for (k = 0; k < aoffset; k++) {
-      Aw->data[k] = log(Aw->data[k]);
+    nx = b_y->size[0];
+    for (k = 0; k < nx; k++) {
+      b_A_data[k] = log(b_A_data[k]);
     }
-    emxInit_boolean_T(&b_x, 2);
-    G = exp(blockedSummation(Aw, Aw->size[0]) / (double)Aw->size[0]);
+    G = exp(blockedSummation(b_A, b_A->size[0]) / (double)b_A->size[0]);
     /*   if la1==0 */
-    k = b_x->size[0] * b_x->size[1];
-    b_x->size[0] = 1;
-    b_x->size[1] = 1;
-    emxEnsureCapacity_boolean_T(b_x, k);
-    b_x->data[0] = (la_data[0] == 0.0);
-    d_y = true;
-    if (!b_x->data[0]) {
-      d_y = false;
-    }
-    emxFree_boolean_T(&b_x);
-    if (d_y) {
-      loop_ub = Aw->size[0];
-      for (k = 0; k < loop_ub; k++) {
-        Aw->data[k] *= G;
+    i = x->size[0] * x->size[1];
+    x->size[0] = 1;
+    x->size[1] = 1;
+    emxEnsureCapacity_boolean_T(x, i);
+    ok_data = x->data;
+    ok_data[0] = (la_data[0] == 0.0);
+    if (!ok_data[0]) {
+      i = b_A->size[0];
+      b_A->size[0] = b_y->size[0];
+      emxEnsureCapacity_real_T(b_A, i);
+      b_A_data = b_A->data;
+      nx = b_y->size[0];
+      for (i = 0; i < nx; i++) {
+        varargin_1 = b_y_data[i];
+        b_A_data[i] = rt_powd_snf(varargin_1, la_data[0]);
       }
-      k = z->size[0] * z->size[1];
-      z->size[0] = Aw->size[0];
-      z->size[1] = 1;
-      emxEnsureCapacity_real_T(z, k);
-      loop_ub = Aw->size[0];
-      for (k = 0; k < loop_ub; k++) {
-        z->data[k] = Aw->data[k];
+      nx = b_A->size[0];
+      for (i = 0; i < nx; i++) {
+        b_A_data[i]--;
+      }
+      i = la->size[0] * la->size[1];
+      la->size[0] = 1;
+      la->size[1] = 1;
+      emxEnsureCapacity_real_T(la, i);
+      b_A_data = la->data;
+      b_A_data[0] = la_data[0] * rt_powd_snf(G, la_data[0] - 1.0);
+      b_mrdiv(b_A, la, R);
+      constcols_data = R->data;
+      i = z->size[0] * z->size[1];
+      z->size[0] = R->size[0];
+      z->size[1] = R->size[1];
+      emxEnsureCapacity_real_T(z, i);
+      z_data = z->data;
+      nx = R->size[0] * R->size[1];
+      for (i = 0; i < nx; i++) {
+        z_data[i] = constcols_data[i];
       }
     } else {
-      G = rt_powd_snf(G, la_data[0] - 1.0);
-      k = c_y->size[0];
-      c_y->size[0] = b_y->size[0];
-      emxEnsureCapacity_real_T(c_y, k);
-      aoffset = b_y->size[0];
-      for (k = 0; k < aoffset; k++) {
-        c_y->data[k] = rt_powd_snf(b_y->data[k], la_data[0]);
+      nx = b_A->size[0];
+      for (i = 0; i < nx; i++) {
+        b_A_data[i] *= G;
       }
-      loop_ub = c_y->size[0];
-      for (k = 0; k < loop_ub; k++) {
-        c_y->data[k]--;
-      }
-      G *= la_data[0];
-      if (c_y->size[0] == 0) {
-        z->size[0] = 0;
-        z->size[1] = 1;
-      } else {
-        loop_ub = c_y->size[0];
-        k = Aw->size[0];
-        Aw->size[0] = c_y->size[0];
-        emxEnsureCapacity_real_T(Aw, k);
-        for (k = 0; k < loop_ub; k++) {
-          Aw->data[k] = c_y->data[k] / G;
-        }
-        k = z->size[0] * z->size[1];
-        z->size[0] = Aw->size[0];
-        z->size[1] = 1;
-        emxEnsureCapacity_real_T(z, k);
-        loop_ub = Aw->size[0];
-        for (k = 0; k < loop_ub; k++) {
-          z->data[k] = Aw->data[k];
-        }
+      i = z->size[0] * z->size[1];
+      z->size[0] = b_A->size[0];
+      z->size[1] = 1;
+      emxEnsureCapacity_real_T(z, i);
+      z_data = z->data;
+      nx = b_A->size[0];
+      for (i = 0; i < nx; i++) {
+        z_data[i] = b_A_data[i];
       }
     }
   } else {
-    k = z->size[0] * z->size[1];
+    i = z->size[0] * z->size[1];
     z->size[0] = b_y->size[0];
     z->size[1] = 1;
-    emxEnsureCapacity_real_T(z, k);
-    loop_ub = b_y->size[0];
-    for (k = 0; k < loop_ub; k++) {
-      z->data[k] = b_y->data[k];
+    emxEnsureCapacity_real_T(z, i);
+    z_data = z->data;
+    nx = b_y->size[0];
+    for (i = 0; i < nx; i++) {
+      z_data[i] = b_y_data[i];
     }
   }
-  b_mtimes(A, z, E);
-  c_mtimes(z, E, r);
-  loop_ub = A->size[0] - 1;
+  emxInit_real_T(&Aw, 1);
+  nx = A->size[0] - 1;
   inner = A->size[1];
-  k = Aw->size[0];
+  i = Aw->size[0];
   Aw->size[0] = A->size[0];
-  emxEnsureCapacity_real_T(Aw, k);
-  for (i = 0; i <= loop_ub; i++) {
-    Aw->data[i] = 0.0;
+  emxEnsureCapacity_real_T(Aw, i);
+  Aw_data = Aw->data;
+  for (i = 0; i <= nx; i++) {
+    Aw_data[i] = 0.0;
   }
   for (k = 0; k < inner; k++) {
     aoffset = k * A->size[0];
-    for (i = 0; i <= loop_ub; i++) {
-      Aw->data[i] += A->data[aoffset + i] * w->data[k];
+    for (i = 0; i <= nx; i++) {
+      Aw_data[i] += A_data[aoffset + i] * w_data[k];
     }
   }
-  emxFree_real_T(&A);
-  emxInit_real_T(&C, 1);
+  nx = z->size[1] - 1;
   inner = z->size[0];
-  k = C->size[0];
-  C->size[0] = 1;
-  emxEnsureCapacity_real_T(C, k);
-  C->data[0] = 0.0;
+  i = b_y->size[0];
+  b_y->size[0] = z->size[1];
+  emxEnsureCapacity_real_T(b_y, i);
+  b_y_data = b_y->data;
+  if (0 <= z->size[1] - 1) {
+    b_y_data[0] = 0.0;
+  }
   for (k = 0; k < inner; k++) {
-    C->data[0] += z->data[k] * Aw->data[k];
+    for (i = 0; i <= nx; i++) {
+      b_y_data[0] += z_data[k] * Aw_data[k];
+    }
   }
-  b_w = 0.0;
-  loop_ub = w->size[0];
-  for (k = 0; k < loop_ub; k++) {
-    b_w += w->data[k] * Aw->data[k];
+  varargin_1 = 0.0;
+  nx = w->size[0];
+  for (i = 0; i < nx; i++) {
+    varargin_1 += w_data[i] * Aw_data[i];
   }
-  if (b_w < 1.0E-12) {
-    out->S2add.size[0] = 1;
-    out->S2add.data[0] = rtNaN;
-    out->Tadd.size[0] = 1;
-    out->Tadd.size[1] = 1;
-    out->Tadd.data[0] = rtNaN;
+  if (varargin_1 < 1.0E-12) {
+    i = out->S2add->size[0] * out->S2add->size[1];
+    out->S2add->size[0] = 1;
+    out->S2add->size[1] = 1;
+    emxEnsureCapacity_real_T(out->S2add, i);
+    out->S2add->data[0] = rtNaN;
+    i = out->Tadd->size[0] * out->Tadd->size[1];
+    out->Tadd->size[0] = 1;
+    out->Tadd->size[1] = 1;
+    emxEnsureCapacity_real_T(out->Tadd, i);
+    out->Tadd->data[0] = rtNaN;
     out->b.size[0] = 1;
     out->b.data[0] = rtNaN;
-    out->pval.size[0] = 1;
-    out->pval.size[1] = 1;
-    out->pval.data[0] = rtNaN;
+    i = out->pval->size[0] * out->pval->size[1];
+    out->pval->size[0] = 1;
+    out->pval->size[1] = 1;
+    emxEnsureCapacity_real_T(out->pval, i);
+    out->pval->data[0] = rtNaN;
   } else {
     /*  b=regress(Az,Aw); */
-    inner = z->size[0];
-    k = c_y->size[0];
-    c_y->size[0] = 1;
-    emxEnsureCapacity_real_T(c_y, k);
-    c_y->data[0] = 0.0;
-    for (k = 0; k < inner; k++) {
-      c_y->data[0] += z->data[k] * Aw->data[k];
+    out->b.size[0] = z->size[1];
+    nx = z->size[1];
+    for (i = 0; i < nx; i++) {
+      out->b.data[0] = b_y_data[0] / varargin_1;
     }
-    out->b.size[0] = 1;
-    out->b.data[0] = c_y->data[0] / b_w;
-    k = c_y->size[0];
-    c_y->size[0] = r->size[0];
-    emxEnsureCapacity_real_T(c_y, k);
-    loop_ub = r->size[0];
-    for (k = 0; k < loop_ub; k++) {
-      c_y->data[k] = r->data[k] - C->data[k] * C->data[0] / b_w;
+    aoffset = z->size[1];
+    nx = z->size[1];
+    for (i = 0; i < nx; i++) {
+      G = b_y_data[0] * b_y_data[0] / varargin_1;
     }
-    c_y->data[0] = sqrt(c_y->data[0]);
-    /*  See Atkinson (1985) p. 98 */
-    G = ((double)n - (double)p) - 1.0;
-    out->S2add.size[0] = c_y->size[0];
-    loop_ub = c_y->size[0];
-    for (k = 0; k < loop_ub; k++) {
-      out->S2add.data[k] = c_y->data[k] * c_y->data[0] / G;
-    }
-    k = b_y->size[0];
-    b_y->size[0] = 1;
-    emxEnsureCapacity_real_T(b_y, k);
-    b_y->data[0] = fabs(c_y->data[0]);
-    k = x->size[0];
-    x->size[0] = 1;
-    emxEnsureCapacity_boolean_T(x, k);
-    x->data[0] = (b_y->data[0] > 1.0E-7);
-    if (!x->data[0]) {
-      out->Tadd.size[0] = 1;
-      out->Tadd.size[1] = 1;
-      out->Tadd.data[0] = rtNaN;
-      out->pval.size[0] = 1;
-      out->pval.size[1] = 1;
-      out->pval.data[0] = rtNaN;
+    b_mtimes(A, z, b_X);
+    c_mtimes(z, b_X, E);
+    E_data = E->data;
+    if (E->size[0] == z->size[1]) {
+      i = b_X->size[0] * b_X->size[1];
+      b_X->size[0] = E->size[0];
+      b_X->size[1] = E->size[1];
+      emxEnsureCapacity_real_T(b_X, i);
+      b_X_data = b_X->data;
+      nx = E->size[1];
+      for (i = 0; i < nx; i++) {
+        aoffset = E->size[0];
+        for (inner = 0; inner < aoffset; inner++) {
+          b_X_data[b_X->size[0] * i] = E_data[E->size[0] * i] - G;
+        }
+      }
+      i = E->size[0] * E->size[1];
+      E->size[0] = b_X->size[0];
+      E->size[1] = b_X->size[1];
+      emxEnsureCapacity_real_T(E, i);
+      E_data = E->data;
+      nx = b_X->size[0] * b_X->size[1];
+      for (i = 0; i < nx; i++) {
+        E_data[i] = b_X_data[i];
+      }
     } else {
+      ef_binary_expand_op(E, (double *)&G, &aoffset);
+      E_data = E->data;
+    }
+    nx = E->size[0] * E->size[1];
+    for (k = 0; k < nx; k++) {
+      E_data[k] = sqrt(E_data[k]);
+    }
+    /*  See Atkinson (1985) p. 98 */
+    b_mtimes(E, E, R);
+    constcols_data = R->data;
+    i = out->S2add->size[0] * out->S2add->size[1];
+    out->S2add->size[0] = R->size[0];
+    out->S2add->size[1] = R->size[1];
+    emxEnsureCapacity_real_T(out->S2add, i);
+    n_tmp = ((double)n - (double)p) - 1.0;
+    nx = R->size[0] * R->size[1];
+    for (i = 0; i < nx; i++) {
+      out->S2add->data[i] = constcols_data[i] / n_tmp;
+    }
+    nx = E->size[0] * E->size[1];
+    i = A->size[0] * A->size[1];
+    A->size[0] = E->size[0];
+    A->size[1] = E->size[1];
+    emxEnsureCapacity_real_T(A, i);
+    A_data = A->data;
+    for (k = 0; k < nx; k++) {
+      A_data[k] = fabs(E_data[k]);
+    }
+    i = x->size[0] * x->size[1];
+    x->size[0] = A->size[0];
+    x->size[1] = A->size[1];
+    emxEnsureCapacity_boolean_T(x, i);
+    ok_data = x->data;
+    nx = A->size[0] * A->size[1];
+    for (i = 0; i < nx; i++) {
+      ok_data[i] = (A_data[i] > 1.0E-7);
+    }
+    c_y = ((x->size[0] != 0) && (x->size[1] != 0));
+    if (c_y) {
+      i = x->size[0] * x->size[1];
+      k = 0;
+      exitg1 = false;
+      while ((!exitg1) && (k <= i - 1)) {
+        if (!ok_data[k]) {
+          c_y = false;
+          exitg1 = true;
+        } else {
+          k++;
+        }
+      }
+    }
+    if (c_y) {
       /*  Compute t-statistic */
-      G = sqrt(G);
-      for (k = 0; k < 1; k++) {
-        C->data[0] *= G;
+      b = sqrt(n_tmp);
+      G = sqrt(varargin_1);
+      nx = z->size[1];
+      for (i = 0; i < nx; i++) {
+        b_y_data[0] *= b;
       }
-      G = sqrt(b_w);
-      loop_ub = c_y->size[0];
-      for (k = 0; k < loop_ub; k++) {
-        c_y->data[k] *= G;
+      i = la->size[0] * la->size[1];
+      la->size[0] = E->size[0];
+      la->size[1] = E->size[1];
+      emxEnsureCapacity_real_T(la, i);
+      b_A_data = la->data;
+      nx = E->size[0] * E->size[1];
+      for (i = 0; i < nx; i++) {
+        b_A_data[i] = E_data[i] * G;
       }
-      out->Tadd.size[0] = 1;
-      out->Tadd.size[1] = 1;
-      out->Tadd.data[0] = C->data[0] / c_y->data[0];
+      b_mrdiv(b_y, la, b_X);
+      b_X_data = b_X->data;
+      nx = z->size[1] - 1;
+      inner = z->size[0];
+      i = b_A->size[0];
+      b_A->size[0] = z->size[1];
+      emxEnsureCapacity_real_T(b_A, i);
+      b_A_data = b_A->data;
+      if (0 <= z->size[1] - 1) {
+        b_A_data[0] = 0.0;
+      }
+      for (k = 0; k < inner; k++) {
+        for (i = 0; i <= nx; i++) {
+          b_A_data[0] += z_data[k] * Aw_data[k];
+        }
+      }
+      nx = z->size[1];
+      for (i = 0; i < nx; i++) {
+        b_A_data[0] *= b;
+      }
+      i = la->size[0] * la->size[1];
+      la->size[0] = E->size[0];
+      la->size[1] = E->size[1];
+      emxEnsureCapacity_real_T(la, i);
+      b_A_data = la->data;
+      nx = E->size[0] * E->size[1];
+      for (i = 0; i < nx; i++) {
+        b_A_data[i] = E_data[i] * G;
+      }
+      b_mrdiv(b_A, la, R);
+      constcols_data = R->data;
+      i = out->Tadd->size[0] * out->Tadd->size[1];
+      out->Tadd->size[0] = R->size[0];
+      out->Tadd->size[1] = R->size[1];
+      emxEnsureCapacity_real_T(out->Tadd, i);
+      nx = R->size[0] * R->size[1];
+      for (i = 0; i < nx; i++) {
+        out->Tadd->data[i] = constcols_data[i];
+      }
       /*  Compute p-value of t-statistic */
-      k = E->size[0] * E->size[1];
-      E->size[0] = 1;
-      E->size[1] = 1;
-      emxEnsureCapacity_real_T(E, k);
-      E->data[0] = fabs(out->Tadd.data[0]);
-      b_tcdf((double *)E->data, *(int(*)[2])E->size,
-             ((double)n - (double)p) - 1.0, (double *)&G, tmp_size);
-      k = E->size[0] * E->size[1];
-      E->size[0] = tmp_size[0];
-      E->size[1] = tmp_size[1];
-      emxEnsureCapacity_real_T(E, k);
-      loop_ub = tmp_size[0] * tmp_size[1];
-      for (k = 0; k < loop_ub; k++) {
-        E->data[0] = 1.0 - G;
+      nx = out->Tadd->size[0] * out->Tadd->size[1];
+      i = A->size[0] * A->size[1];
+      A->size[0] = out->Tadd->size[0];
+      A->size[1] = out->Tadd->size[1];
+      emxEnsureCapacity_real_T(A, i);
+      A_data = A->data;
+      for (k = 0; k < nx; k++) {
+        A_data[k] = fabs(b_X_data[k]);
       }
-      out->pval.size[0] = E->size[0];
-      out->pval.size[1] = E->size[1];
-      loop_ub = E->size[0] * E->size[1];
-      for (k = 0; k < loop_ub; k++) {
-        out->pval.data[0] = 2.0 * E->data[0];
+      emxInit_real_T(&b_p, 2);
+      i = b_p->size[0] * b_p->size[1];
+      b_p->size[0] = A->size[0];
+      b_p->size[1] = A->size[1];
+      emxEnsureCapacity_real_T(b_p, i);
+      b_A_data = b_p->data;
+      i = A->size[0] * A->size[1];
+      for (k = 0; k < i; k++) {
+        if ((n_tmp > 0.0) && (!rtIsNaN(A_data[k]))) {
+          if (A_data[k] == 0.0) {
+            b_A_data[k] = 0.5;
+          } else if (n_tmp > 1.0E+7) {
+            G = eml_erfcore(-A_data[k] / 1.4142135623730951);
+            b_A_data[k] = 0.5 * G;
+          } else if (n_tmp == 1.0) {
+            b_A_data[k] = atan(1.0 / -A_data[k]) / 3.1415926535897931;
+            if (A_data[k] > 0.0) {
+              b_A_data[k]++;
+            }
+          } else {
+            G = A_data[k] * A_data[k];
+            if (n_tmp < G) {
+              b_A_data[k] =
+                  (betainc(n_tmp / (n_tmp + G), n_tmp / 2.0, 0.5)).re / 2.0;
+            } else {
+              b_A_data[k] =
+                  (b_betainc(G / (n_tmp + G), 0.5, n_tmp / 2.0)).re / 2.0;
+            }
+            if (A_data[k] > 0.0) {
+              b_A_data[k] = 1.0 - b_A_data[k];
+            }
+          }
+        } else {
+          b_A_data[k] = rtNaN;
+        }
       }
+      i = out->pval->size[0] * out->pval->size[1];
+      out->pval->size[0] = b_p->size[0];
+      out->pval->size[1] = b_p->size[1];
+      emxEnsureCapacity_real_T(out->pval, i);
+      nx = b_p->size[0] * b_p->size[1];
+      for (i = 0; i < nx; i++) {
+        out->pval->data[i] = 2.0 * (1.0 - b_A_data[i]);
+      }
+      emxFree_real_T(&b_p);
+    } else {
+      i = out->Tadd->size[0] * out->Tadd->size[1];
+      out->Tadd->size[0] = 1;
+      out->Tadd->size[1] = 1;
+      emxEnsureCapacity_real_T(out->Tadd, i);
+      out->Tadd->data[0] = rtNaN;
+      i = out->pval->size[0] * out->pval->size[1];
+      out->pval->size[0] = 1;
+      out->pval->size[1] = 1;
+      emxEnsureCapacity_real_T(out->pval, i);
+      out->pval->data[0] = rtNaN;
     }
   }
-  emxFree_real_T(&c_y);
-  emxFree_real_T(&C);
+  emxFree_real_T(&la);
+  emxFree_real_T(&b_A);
   emxFree_boolean_T(&x);
+  emxFree_real_T(&R);
+  emxFree_real_T(&b_X);
   emxFree_real_T(&b_y);
   emxFree_real_T(&Aw);
-  emxFree_real_T(&r);
   emxFree_real_T(&z);
+  emxFree_real_T(&A);
   emxFree_real_T(&E);
   /*  Store results in structure out. */
   /*  Added variable plot */

@@ -22,10 +22,14 @@ double det(const emxArray_real_T *x)
 {
   emxArray_int32_T *ipiv;
   emxArray_real_T *b_x;
+  const double *x_data;
   double y;
+  double *b_x_data;
   int i;
   int loop_ub;
+  int *ipiv_data;
   bool isodd;
+  x_data = x->data;
   if ((x->size[0] == 0) || (x->size[1] == 0)) {
     y = 1.0;
   } else {
@@ -34,22 +38,25 @@ double det(const emxArray_real_T *x)
     b_x->size[0] = x->size[0];
     b_x->size[1] = x->size[1];
     emxEnsureCapacity_real_T(b_x, i);
+    b_x_data = b_x->data;
     loop_ub = x->size[0] * x->size[1];
     for (i = 0; i < loop_ub; i++) {
-      b_x->data[i] = x->data[i];
+      b_x_data[i] = x_data[i];
     }
     emxInit_int32_T(&ipiv, 2);
     xzgetrf(x->size[0], x->size[1], b_x, x->size[0], ipiv, &loop_ub);
-    y = b_x->data[0];
+    ipiv_data = ipiv->data;
+    b_x_data = b_x->data;
+    y = b_x_data[0];
     i = b_x->size[0];
     for (loop_ub = 0; loop_ub <= i - 2; loop_ub++) {
-      y *= b_x->data[(loop_ub + b_x->size[0] * (loop_ub + 1)) + 1];
+      y *= b_x_data[(loop_ub + b_x->size[0] * (loop_ub + 1)) + 1];
     }
     emxFree_real_T(&b_x);
     isodd = false;
     i = ipiv->size[1];
     for (loop_ub = 0; loop_ub <= i - 2; loop_ub++) {
-      if (ipiv->data[loop_ub] > loop_ub + 1) {
+      if (ipiv_data[loop_ub] > loop_ub + 1) {
         isodd = !isodd;
       }
     }

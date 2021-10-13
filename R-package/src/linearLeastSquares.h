@@ -24,8 +24,7 @@ extern "C" {
 
 /* Function Declarations */
 void linearLeastSquares(emxArray_real_T *lhs, emxArray_real_T *rhs,
-                        const emxArray_real_T *dx, int m, int n,
-                        emxArray_real_T *b_dx);
+                        emxArray_real_T *dx, int m, int n);
 
 #ifdef __cplusplus
 }

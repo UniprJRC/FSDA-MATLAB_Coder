@@ -19,20 +19,24 @@
 /* Function Definitions */
 void b_repmat(double a, double varargin_1, emxArray_real_T *b)
 {
+  double *b_data;
   int i;
   int loop_ub_tmp;
   loop_ub_tmp = (int)varargin_1;
   i = b->size[0];
   b->size[0] = (int)varargin_1;
   emxEnsureCapacity_real_T(b, i);
+  b_data = b->data;
   for (i = 0; i < loop_ub_tmp; i++) {
-    b->data[i] = a;
+    b_data[i] = a;
   }
 }
 
 void c_repmat(const emxArray_real_T *a, const double varargin_1[3],
               emxArray_real_T *b)
 {
+  const double *a_data;
+  double *b_data;
   int tile_size[3];
   int iacol_tmp;
   int ibmat;
@@ -43,6 +47,7 @@ void c_repmat(const emxArray_real_T *a, const double varargin_1[3],
   int ncols;
   int nrows;
   int ntilecols;
+  a_data = a->data;
   tile_size[0] = 1;
   tile_size[1] = 1;
   tile_size[2] = (int)varargin_1[2];
@@ -51,6 +56,7 @@ void c_repmat(const emxArray_real_T *a, const double varargin_1[3],
   b->size[1] = a->size[1];
   b->size[2] = (int)varargin_1[2];
   emxEnsureCapacity_real_T(b, ibtile);
+  b_data = b->data;
   nrows = a->size[0];
   ncols = a->size[1];
   ntilecols = 1;
@@ -67,7 +73,7 @@ void c_repmat(const emxArray_real_T *a, const double varargin_1[3],
       iacol_tmp = jcol * nrows;
       ibmat = ibtile + iacol_tmp;
       for (k = 0; k < nrows; k++) {
-        b->data[(ibmat + k) + 1] = a->data[iacol_tmp + k];
+        b_data[(ibmat + k) + 1] = a_data[iacol_tmp + k];
       }
     }
   }
@@ -75,6 +81,8 @@ void c_repmat(const emxArray_real_T *a, const double varargin_1[3],
 
 void d_repmat(const emxArray_real_T *a, double varargin_3, emxArray_real_T *b)
 {
+  const double *a_data;
+  double *b_data;
   int tile_size[3];
   int iacol_tmp;
   int ibmat;
@@ -85,6 +93,7 @@ void d_repmat(const emxArray_real_T *a, double varargin_3, emxArray_real_T *b)
   int ncols;
   int nrows;
   int ntilecols;
+  a_data = a->data;
   tile_size[0] = 1;
   tile_size[1] = 1;
   tile_size[2] = (int)varargin_3;
@@ -93,6 +102,7 @@ void d_repmat(const emxArray_real_T *a, double varargin_3, emxArray_real_T *b)
   b->size[1] = a->size[1];
   b->size[2] = (int)varargin_3;
   emxEnsureCapacity_real_T(b, ibtile);
+  b_data = b->data;
   nrows = a->size[0];
   ncols = a->size[1];
   ntilecols = 1;
@@ -109,7 +119,7 @@ void d_repmat(const emxArray_real_T *a, double varargin_3, emxArray_real_T *b)
       iacol_tmp = jcol * nrows;
       ibmat = ibtile + iacol_tmp;
       for (k = 0; k < nrows; k++) {
-        b->data[(ibmat + k) + 1] = a->data[iacol_tmp + k];
+        b_data[(ibmat + k) + 1] = a_data[iacol_tmp + k];
       }
     }
   }
@@ -118,12 +128,15 @@ void d_repmat(const emxArray_real_T *a, double varargin_3, emxArray_real_T *b)
 void e_repmat(const emxArray_real_T *a, const double varargin_1[3],
               emxArray_real_T *b)
 {
+  const double *a_data;
+  double *b_data;
   int tile_size[3];
   int b_k;
   int jcol;
   int k;
   int ncols;
   int ntilecols;
+  a_data = a->data;
   tile_size[0] = 1;
   tile_size[1] = 1;
   tile_size[2] = (int)varargin_1[2];
@@ -132,6 +145,7 @@ void e_repmat(const emxArray_real_T *a, const double varargin_1[3],
   b->size[1] = a->size[1];
   b->size[2] = (int)varargin_1[2];
   emxEnsureCapacity_real_T(b, k);
+  b_data = b->data;
   ncols = a->size[1];
   ntilecols = 1;
   k = 3;
@@ -144,7 +158,7 @@ void e_repmat(const emxArray_real_T *a, const double varargin_1[3],
   for (b_k = 0; b_k < ntilecols; b_k++) {
     k = b_k * ncols;
     for (jcol = 0; jcol < ncols; jcol++) {
-      b->data[k + jcol] = a->data[jcol];
+      b_data[k + jcol] = a_data[jcol];
     }
   }
 }
@@ -152,12 +166,15 @@ void e_repmat(const emxArray_real_T *a, const double varargin_1[3],
 void f_repmat(const emxArray_real_T *a, const double varargin_1[3],
               emxArray_real_T *b)
 {
+  const double *a_data;
+  double *b_data;
   int tile_size[3];
   int ibtile;
   int jtilecol;
   int k;
   int nrows;
   int ntilecols;
+  a_data = a->data;
   tile_size[0] = 1;
   tile_size[1] = 1;
   tile_size[2] = (int)varargin_1[2];
@@ -166,6 +183,7 @@ void f_repmat(const emxArray_real_T *a, const double varargin_1[3],
   b->size[1] = 1;
   b->size[2] = (int)varargin_1[2];
   emxEnsureCapacity_real_T(b, ibtile);
+  b_data = b->data;
   nrows = a->size[0];
   ntilecols = 1;
   k = 3;
@@ -178,7 +196,7 @@ void f_repmat(const emxArray_real_T *a, const double varargin_1[3],
   for (jtilecol = 0; jtilecol < ntilecols; jtilecol++) {
     ibtile = jtilecol * nrows;
     for (k = 0; k < nrows; k++) {
-      b->data[ibtile + k] = a->data[k];
+      b_data[ibtile + k] = a_data[k];
     }
   }
 }
@@ -186,6 +204,7 @@ void f_repmat(const emxArray_real_T *a, const double varargin_1[3],
 void repmat(const double a_data[], const int a_size[2], double varargin_1,
             emxArray_real_T *b)
 {
+  double *b_data;
   int iacol;
   int ibcol;
   int ibmat;
@@ -199,6 +218,7 @@ void repmat(const double a_data[], const int a_size[2], double varargin_1,
   b->size[0] = a_size[0] * (int)varargin_1;
   b->size[1] = a_size[1];
   emxEnsureCapacity_real_T(b, nrows);
+  b_data = b->data;
   nrows = a_size[0];
   ncols = a_size[1];
   ntilerows = (int)varargin_1;
@@ -208,7 +228,7 @@ void repmat(const double a_data[], const int a_size[2], double varargin_1,
     for (itilerow = 0; itilerow < ntilerows; itilerow++) {
       ibcol = ibmat + itilerow * nrows;
       for (k = 0; k < nrows; k++) {
-        b->data[ibcol] = a_data[iacol];
+        b_data[ibcol] = a_data[iacol];
       }
     }
   }

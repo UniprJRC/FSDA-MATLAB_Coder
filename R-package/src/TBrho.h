@@ -26,6 +26,17 @@ extern "C" {
 void TBrho(const emxArray_real_T *u, const emxArray_real_T *c,
            emxArray_real_T *rhoTB);
 
+void af_binary_expand_op(struct_Sreg_T *out, double c,
+                         const emxArray_real_T *abc, double b_c,
+                         const emxArray_boolean_T *w, double b);
+
+void ne_binary_expand_op(j_struct_T *out, double c, const emxArray_real_T *abc,
+                         double b_c, const emxArray_boolean_T *w, double b);
+
+void qe_binary_expand_op(emxArray_real_T *x, double c,
+                         const emxArray_real_T *outIRWLS_betarw, double b_c,
+                         const emxArray_boolean_T *w, double b);
+
 #ifdef __cplusplus
 }
 #endif

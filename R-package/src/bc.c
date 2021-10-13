@@ -12,6 +12,7 @@
 /* Include files */
 #include "bc.h"
 #include "colon.h"
+#include "div.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_rtwutil.h"
 #include "fsdaC_types.h"
@@ -26,6 +27,8 @@ double bc(double n, double k)
   emxArray_real_T *dens;
   emxArray_real_T *nums;
   double a;
+  double *dens_data;
+  double *nums_data;
   int b_k;
   int vlen;
   /* bc returns the Binomial coefficient */
@@ -72,7 +75,6 @@ double bc(double n, double k)
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
   /*  */
-  /*  */
   /* <a href="matlab: docsearchFS('bc')">Link to the help page for this
    * function</a> */
   /*  */
@@ -95,34 +97,40 @@ double bc(double n, double k)
     nums->size[0] = 1;
     nums->size[1] = 1;
     emxEnsureCapacity_real_T(nums, b_k);
-    nums->data[0] = rtNaN;
+    nums_data = nums->data;
+    nums_data[0] = rtNaN;
   } else if (n < a) {
+    nums->size[0] = 1;
     nums->size[1] = 0;
   } else if ((rtIsInf(a) || rtIsInf(n)) && (a == n)) {
     b_k = nums->size[0] * nums->size[1];
     nums->size[0] = 1;
     nums->size[1] = 1;
     emxEnsureCapacity_real_T(nums, b_k);
-    nums->data[0] = rtNaN;
+    nums_data = nums->data;
+    nums_data[0] = rtNaN;
   } else if (floor(a) == a) {
     b_k = nums->size[0] * nums->size[1];
     nums->size[0] = 1;
     vlen = (int)floor(n - a);
     nums->size[1] = vlen + 1;
     emxEnsureCapacity_real_T(nums, b_k);
+    nums_data = nums->data;
     for (b_k = 0; b_k <= vlen; b_k++) {
-      nums->data[b_k] = a + (double)b_k;
+      nums_data[b_k] = a + (double)b_k;
     }
   } else {
     eml_float_colon(a, n, nums);
   }
   emxInit_real_T(&dens, 2);
+  dens_data = dens->data;
   if (rtIsNaN(k)) {
     b_k = dens->size[0] * dens->size[1];
     dens->size[0] = 1;
     dens->size[1] = 1;
     emxEnsureCapacity_real_T(dens, b_k);
-    dens->data[0] = rtNaN;
+    dens_data = dens->data;
+    dens_data[0] = rtNaN;
   } else if (k < 1.0) {
     dens->size[0] = 1;
     dens->size[1] = 0;
@@ -131,32 +139,40 @@ double bc(double n, double k)
     dens->size[0] = 1;
     dens->size[1] = 1;
     emxEnsureCapacity_real_T(dens, b_k);
-    dens->data[0] = rtNaN;
+    dens_data = dens->data;
+    dens_data[0] = rtNaN;
   } else {
     b_k = dens->size[0] * dens->size[1];
     dens->size[0] = 1;
     vlen = (int)floor(k - 1.0);
     dens->size[1] = vlen + 1;
     emxEnsureCapacity_real_T(dens, b_k);
+    dens_data = dens->data;
     for (b_k = 0; b_k <= vlen; b_k++) {
-      dens->data[b_k] = (double)b_k + 1.0;
+      dens_data[b_k] = (double)b_k + 1.0;
     }
   }
-  b_k = nums->size[0] * nums->size[1];
-  nums->size[0] = 1;
-  emxEnsureCapacity_real_T(nums, b_k);
-  vlen = nums->size[1] - 1;
-  for (b_k = 0; b_k <= vlen; b_k++) {
-    nums->data[b_k] /= dens->data[b_k];
+  if (nums->size[1] == dens->size[1]) {
+    vlen = nums->size[1] - 1;
+    b_k = nums->size[0] * nums->size[1];
+    nums->size[0] = 1;
+    emxEnsureCapacity_real_T(nums, b_k);
+    nums_data = nums->data;
+    for (b_k = 0; b_k <= vlen; b_k++) {
+      nums_data[b_k] /= dens_data[b_k];
+    }
+  } else {
+    b_rdivide(nums, dens);
+    nums_data = nums->data;
   }
   emxFree_real_T(&dens);
   vlen = nums->size[1];
   if (nums->size[1] == 0) {
     a = 1.0;
   } else {
-    a = nums->data[0];
+    a = nums_data[0];
     for (b_k = 2; b_k <= vlen; b_k++) {
-      a *= nums->data[b_k - 1];
+      a *= nums_data[b_k - 1];
     }
   }
   emxFree_real_T(&nums);

@@ -27,20 +27,20 @@ int b_checkStoppingCriteria(double options_MaxFunctionEvaluations,
                             double projSteepestDescentInfNorm,
                             bool b_hasFiniteBounds)
 {
-  emxArray_real_T c_dx;
+  const double *gradf_data;
   double absx;
   double normGradF;
-  int b_dx;
-  int d_dx;
   int exitflag;
+  int i;
   int k;
+  gradf_data = gradf->data;
   if (gradf->size[0] == 0) {
     normGradF = 0.0;
   } else {
     normGradF = 0.0;
-    b_dx = gradf->size[0];
-    for (k = 0; k < b_dx; k++) {
-      absx = fabs(gradf->data[k]);
+    i = gradf->size[0];
+    for (k = 0; k < i; k++) {
+      absx = fabs(gradf_data[k]);
       if (rtIsNaN(absx) || (absx > normGradF)) {
         normGradF = absx;
       }
@@ -60,12 +60,7 @@ int b_checkStoppingCriteria(double options_MaxFunctionEvaluations,
     if (dx->size[0] == 0) {
       normGradF = 0.0;
     } else {
-      b_dx = dx->size[0];
-      c_dx = *dx;
-      d_dx = b_dx;
-      c_dx.size = &d_dx;
-      c_dx.numDimensions = 1;
-      normGradF = b_xnrm2(dx->size[0], &c_dx);
+      normGradF = b_xnrm2(dx->size[0], dx);
     }
     if (x->size[0] == 0) {
       absx = 0.0;
@@ -92,20 +87,20 @@ int checkStoppingCriteria(double options_MaxFunctionEvaluations,
                           int funcCount, double projSteepestDescentInfNorm,
                           bool b_hasFiniteBounds)
 {
-  emxArray_real_T c_dx;
+  const double *gradf_data;
   double absx;
   double normGradF;
-  int b_dx;
-  int d_dx;
   int exitflag;
+  int i;
   int k;
+  gradf_data = gradf->data;
   if (gradf->size[0] == 0) {
     normGradF = 0.0;
   } else {
     normGradF = 0.0;
-    b_dx = gradf->size[0];
-    for (k = 0; k < b_dx; k++) {
-      absx = fabs(gradf->data[k]);
+    i = gradf->size[0];
+    for (k = 0; k < i; k++) {
+      absx = fabs(gradf_data[k]);
       if (rtIsNaN(absx) || (absx > normGradF)) {
         normGradF = absx;
       }
@@ -123,12 +118,7 @@ int checkStoppingCriteria(double options_MaxFunctionEvaluations,
     if (dx->size[0] == 0) {
       normGradF = 0.0;
     } else {
-      b_dx = dx->size[0];
-      c_dx = *dx;
-      d_dx = b_dx;
-      c_dx.size = &d_dx;
-      c_dx.numDimensions = 1;
-      normGradF = b_xnrm2(dx->size[0], &c_dx);
+      normGradF = b_xnrm2(dx->size[0], dx);
     }
     if (x->size[0] == 0) {
       absx = 0.0;

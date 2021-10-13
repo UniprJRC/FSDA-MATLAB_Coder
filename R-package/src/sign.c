@@ -19,19 +19,21 @@
 void b_sign(emxArray_real_T *x)
 {
   double b_x;
+  double *x_data;
   int k;
   int nx;
+  x_data = x->data;
   nx = x->size[0];
   for (k = 0; k < nx; k++) {
-    b_x = x->data[k];
-    if (x->data[k] < 0.0) {
+    b_x = x_data[k];
+    if (x_data[k] < 0.0) {
       b_x = -1.0;
-    } else if (x->data[k] > 0.0) {
+    } else if (x_data[k] > 0.0) {
       b_x = 1.0;
-    } else if (x->data[k] == 0.0) {
+    } else if (x_data[k] == 0.0) {
       b_x = 0.0;
     }
-    x->data[k] = b_x;
+    x_data[k] = b_x;
   }
 }
 

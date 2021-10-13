@@ -20,7 +20,46 @@
 #include <math.h>
 #include <string.h>
 
+/* Function Declarations */
+static void lb_binary_expand_op(emxArray_real_T *pas_col, int i1, int i2,
+                                int i3, double kk, const emxArray_real_T *seq,
+                                int i4, int i5, int i6, int i7);
+
 /* Function Definitions */
+static void lb_binary_expand_op(emxArray_real_T *pas_col, int i1, int i2,
+                                int i3, double kk, const emxArray_real_T *seq,
+                                int i4, int i5, int i6, int i7)
+{
+  emxArray_real_T *b_pas_col;
+  const double *seq_data;
+  double *b_pas_col_data;
+  double *pas_col_data;
+  int i;
+  int stride_0_1;
+  int stride_1_1;
+  int unnamed_idx_1;
+  seq_data = seq->data;
+  pas_col_data = pas_col->data;
+  emxInit_real_T(&b_pas_col, 2);
+  unnamed_idx_1 = i6 - i7;
+  i = b_pas_col->size[0] * b_pas_col->size[1];
+  b_pas_col->size[0] = 1;
+  b_pas_col->size[1] = unnamed_idx_1;
+  emxEnsureCapacity_real_T(b_pas_col, i);
+  b_pas_col_data = b_pas_col->data;
+  stride_0_1 = ((i3 - i2) + 1 != 1);
+  stride_1_1 = ((i5 - i4) + 1 != 1);
+  for (i = 0; i < unnamed_idx_1; i++) {
+    b_pas_col_data[i] = pas_col_data[i2 + i * stride_0_1] * (kk + 1.0) /
+                        (seq_data[i4 + i * stride_1_1] - kk);
+  }
+  unnamed_idx_1 = b_pas_col->size[1];
+  for (i = 0; i < unnamed_idx_1; i++) {
+    pas_col_data[i1 + i] = b_pas_col_data[i];
+  }
+  emxFree_real_T(&b_pas_col);
+}
+
 void b_lexunrank(double n, double k, double N, emxArray_real_T *kcomb)
 {
   emxArray_boolean_T *b_pas_col;
@@ -31,13 +70,20 @@ void b_lexunrank(double n, double k, double N, emxArray_real_T *kcomb)
   double N_kk;
   double b_kk;
   double maxx;
+  double *kcomb_data;
+  double *pas_col_data;
+  double *seq_data;
+  double *y_data;
   int i;
   int i1;
   int i2;
   int i3;
   int i4;
+  int i5;
   int kk;
   int loop_ub_tmp;
+  int *x_data;
+  bool *b_pas_col_data;
   /* lexunrank gives the the $k$-combination of $n$ elements of position $N$ in
    * the lexicographic order of all combinations */
   /*  */
@@ -171,7 +217,6 @@ void b_lexunrank(double n, double k, double N, emxArray_real_T *kcomb)
    * similar  */
   /*    motivation. */
   /*  */
-  /*  */
   /*    ALGORITMIC DETAILS. */
   /*  */
   /*  Given the totally ordered set $S=\{1,2,\ldots,n\}$, a $k$-combination is
@@ -239,7 +284,6 @@ void b_lexunrank(double n, double k, double N, emxArray_real_T *kcomb)
   /*  Written by FSDA team */
   /*  */
   /* <a href="matlab: docsearchFS('lexunrank')">Link to the help function</a> */
-  /*  */
   /*  */
   /* $LastChangedDate::                      $: Date of the last commit */
   /*  */
@@ -338,8 +382,9 @@ void b_lexunrank(double n, double k, double N, emxArray_real_T *kcomb)
   loop_ub_tmp = (int)k;
   kcomb->size[1] = (int)k;
   emxEnsureCapacity_real_T(kcomb, i);
+  kcomb_data = kcomb->data;
   for (i = 0; i < loop_ub_tmp; i++) {
-    kcomb->data[i] = 0.0;
+    kcomb_data[i] = 0.0;
   }
   emxInit_real_T(&pas_col, 1);
   /*  initialise the count of the calls to binomial coefficient values (via */
@@ -350,10 +395,12 @@ void b_lexunrank(double n, double k, double N, emxArray_real_T *kcomb)
   i = pas_col->size[0];
   pas_col->size[0] = (int)n;
   emxEnsureCapacity_real_T(pas_col, i);
+  pas_col_data = pas_col->data;
   for (i = 0; i < loop_ub_tmp; i++) {
-    pas_col->data[i] = 1.0;
+    pas_col_data[i] = 1.0;
   }
   emxInit_real_T(&y, 2);
+  y_data = y->data;
   if (n < 1.0) {
     y->size[0] = 1;
     y->size[1] = 0;
@@ -362,26 +409,29 @@ void b_lexunrank(double n, double k, double N, emxArray_real_T *kcomb)
     y->size[0] = 1;
     y->size[1] = 1;
     emxEnsureCapacity_real_T(y, i);
-    y->data[0] = rtNaN;
+    y_data = y->data;
+    y_data[0] = rtNaN;
   } else {
     i = y->size[0] * y->size[1];
     y->size[0] = 1;
     loop_ub_tmp = (int)floor(n - 1.0);
     y->size[1] = loop_ub_tmp + 1;
     emxEnsureCapacity_real_T(y, i);
+    y_data = y->data;
     for (i = 0; i <= loop_ub_tmp; i++) {
-      y->data[i] = (double)i + 1.0;
+      y_data[i] = (double)i + 1.0;
     }
   }
   emxInit_real_T(&seq, 1);
   i = seq->size[0];
   seq->size[0] = y->size[1];
   emxEnsureCapacity_real_T(seq, i);
+  seq_data = seq->data;
   loop_ub_tmp = y->size[1];
   for (i = 0; i < loop_ub_tmp; i++) {
-    seq->data[i] = y->data[i];
+    seq_data[i] = y_data[i];
   }
-  i = (int)(((-1.0 - k) + 1.0) / -1.0);
+  i = (int)-((-1.0 - k) + 1.0);
   emxInit_int32_T(&x, 1);
   emxInit_boolean_T(&b_pas_col, 1);
   for (kk = 0; kk < i; kk++) {
@@ -397,33 +447,44 @@ void b_lexunrank(double n, double k, double N, emxArray_real_T *kcomb)
       i1 = (int)((n - 1.0) + (1.0 - b_kk));
       for (loop_ub_tmp = 0; loop_ub_tmp < i1; loop_ub_tmp++) {
         maxx = b_kk + (double)loop_ub_tmp;
-        pas_col->data[(int)(maxx + 1.0) - 1] =
-            pas_col->data[(int)maxx - 1] * (maxx + 1.0) / ((maxx + 1.0) - b_kk);
+        pas_col_data[(int)(unsigned int)maxx] =
+            pas_col_data[(int)maxx - 1] * (maxx + 1.0) / ((maxx + 1.0) - b_kk);
       }
     } else {
       if (b_kk + 1.0 > n) {
-        i1 = 1;
-        i2 = 1;
-        i3 = -1;
+        i1 = 0;
+        i2 = 0;
+        i3 = 0;
+        loop_ub_tmp = 0;
         i4 = 0;
+        i5 = -1;
       } else {
-        i1 = (int)(b_kk + 1.0);
-        i2 = (int)(b_kk + 1.0);
-        i3 = (int)(b_kk + 1.0) - 2;
-        i4 = (int)n;
+        i1 = (int)(b_kk + 1.0) - 1;
+        i2 = (int)n;
+        i3 = (int)(b_kk + 1.0) - 1;
+        loop_ub_tmp = (int)n;
+        i4 = (int)(b_kk + 1.0) - 1;
+        i5 = (int)n - 1;
       }
-      loop_ub_tmp = (i4 - i3) - 1;
-      i4 = y->size[0] * y->size[1];
-      y->size[0] = 1;
-      y->size[1] = loop_ub_tmp;
-      emxEnsureCapacity_real_T(y, i4);
-      for (i4 = 0; i4 < loop_ub_tmp; i4++) {
-        y->data[i4] = pas_col->data[(i1 + i4) - 1] * (b_kk + 1.0) /
-                      (seq->data[(i2 + i4) - 1] - b_kk);
-      }
-      loop_ub_tmp = y->size[1];
-      for (i1 = 0; i1 < loop_ub_tmp; i1++) {
-        pas_col->data[(i3 + i1) + 1] = y->data[i1];
+      if (i2 - i1 == loop_ub_tmp - i3) {
+        loop_ub_tmp = (i5 - i4) + 1;
+        i2 = y->size[0] * y->size[1];
+        y->size[0] = 1;
+        y->size[1] = loop_ub_tmp;
+        emxEnsureCapacity_real_T(y, i2);
+        y_data = y->data;
+        for (i2 = 0; i2 < loop_ub_tmp; i2++) {
+          y_data[i2] =
+              pas_col_data[i1 + i2] * (b_kk + 1.0) / (seq_data[i3 + i2] - b_kk);
+        }
+        loop_ub_tmp = y->size[1];
+        for (i1 = 0; i1 < loop_ub_tmp; i1++) {
+          pas_col_data[i4 + i1] = y_data[i1];
+        }
+      } else {
+        lb_binary_expand_op(pas_col, i4, i1, i2 - 1, b_kk, seq, i3,
+                            loop_ub_tmp - 1, i5, i4 - 1);
+        pas_col_data = pas_col->data;
       }
     }
     if (b_kk > pas_col->size[0]) {
@@ -437,16 +498,18 @@ void b_lexunrank(double n, double k, double N, emxArray_real_T *kcomb)
     i2 = b_pas_col->size[0];
     b_pas_col->size[0] = loop_ub_tmp;
     emxEnsureCapacity_boolean_T(b_pas_col, i2);
+    b_pas_col_data = b_pas_col->data;
     for (i2 = 0; i2 < loop_ub_tmp; i2++) {
-      b_pas_col->data[i2] = (pas_col->data[i1 + i2] > N_kk);
+      b_pas_col_data[i2] = (pas_col_data[i1 + i2] > N_kk);
     }
     d_eml_find(b_pas_col, x);
+    x_data = x->data;
     if (x->size[0] == 0) {
       maxx = n - 1.0;
     } else {
-      maxx = ((double)x->data[0] + b_kk) - 2.0;
+      maxx = ((double)x_data[0] + b_kk) - 2.0;
     }
-    kcomb->data[(int)b_kk - 1] = n - maxx;
+    kcomb_data[(int)b_kk - 1] = n - maxx;
     if (maxx >= b_kk) {
       N_kk -= bc(maxx, b_kk);
     }
@@ -461,17 +524,21 @@ void b_lexunrank(double n, double k, double N, emxArray_real_T *kcomb)
 void lexunrank(double n, double k, double N, const emxArray_real_T *pascalM,
                emxArray_real_T *kcomb)
 {
-  emxArray_boolean_T pascalM_data;
+  emxArray_boolean_T b_pascalM_data;
   emxArray_int32_T *b_i;
+  const double *pascalM_data;
   double N_kk;
   double b_kk;
   double maxx;
+  double *kcomb_data;
   int i;
   int i1;
   int kk;
   int loop_ub_tmp;
   int pascalM_size;
-  bool b_pascalM_data[20000];
+  int *i_data;
+  bool c_pascalM_data[20000];
+  pascalM_data = pascalM->data;
   /* lexunrank gives the the $k$-combination of $n$ elements of position $N$ in
    * the lexicographic order of all combinations */
   /*  */
@@ -605,7 +672,6 @@ void lexunrank(double n, double k, double N, const emxArray_real_T *pascalM,
    * similar  */
   /*    motivation. */
   /*  */
-  /*  */
   /*    ALGORITMIC DETAILS. */
   /*  */
   /*  Given the totally ordered set $S=\{1,2,\ldots,n\}$, a $k$-combination is
@@ -673,7 +739,6 @@ void lexunrank(double n, double k, double N, const emxArray_real_T *pascalM,
   /*  Written by FSDA team */
   /*  */
   /* <a href="matlab: docsearchFS('lexunrank')">Link to the help function</a> */
-  /*  */
   /*  */
   /* $LastChangedDate::                      $: Date of the last commit */
   /*  */
@@ -772,8 +837,9 @@ void lexunrank(double n, double k, double N, const emxArray_real_T *pascalM,
   loop_ub_tmp = (int)k;
   kcomb->size[1] = (int)k;
   emxEnsureCapacity_real_T(kcomb, i);
+  kcomb_data = kcomb->data;
   for (i = 0; i < loop_ub_tmp; i++) {
-    kcomb->data[i] = 0.0;
+    kcomb_data[i] = 0.0;
   }
   /*  initialise the count of the calls to binomial coefficient values (via */
   /*  call to bc function or access to Pascal matrix cells) */
@@ -781,7 +847,7 @@ void lexunrank(double n, double k, double N, const emxArray_real_T *pascalM,
   /*  binomial coefficients are taken from the pascal matrix rather than */
   /*  computing them using bc. Of course this option is space greedy. */
   N_kk = N;
-  i = (int)(((-1.0 - k) + 1.0) / -1.0);
+  i = (int)-((-1.0 - k) + 1.0);
   emxInit_int32_T(&b_i, 1);
   for (kk = 0; kk < i; kk++) {
     b_kk = k + -(double)kk;
@@ -794,29 +860,30 @@ void lexunrank(double n, double k, double N, const emxArray_real_T *pascalM,
     }
     pascalM_size = loop_ub_tmp;
     for (i1 = 0; i1 < loop_ub_tmp; i1++) {
-      b_pascalM_data[i1] =
-          (pascalM->data[i1 + pascalM->size[0] * ((int)(b_kk + 1.0) - 1)] >
+      c_pascalM_data[i1] =
+          (pascalM_data[i1 + pascalM->size[0] * ((int)(b_kk + 1.0) - 1)] >
            N_kk);
     }
-    pascalM_data.data = &b_pascalM_data[0];
-    pascalM_data.size = &pascalM_size;
-    pascalM_data.allocatedSize = 20000;
-    pascalM_data.numDimensions = 1;
-    pascalM_data.canFreeData = false;
-    d_eml_find(&pascalM_data, b_i);
+    b_pascalM_data.data = &c_pascalM_data[0];
+    b_pascalM_data.size = &pascalM_size;
+    b_pascalM_data.allocatedSize = 20000;
+    b_pascalM_data.numDimensions = 1;
+    b_pascalM_data.canFreeData = false;
+    d_eml_find(&b_pascalM_data, b_i);
+    i_data = b_i->data;
     /*  seqnmkk=1:n-kk; */
     /*  x=seqnmkk(pascalM(seqnmkk,kk+1) > N_kk); */
     if (b_i->size[0] == 0) {
       /*  || x1==n-kk */
       maxx = n - 1.0;
     } else {
-      maxx = ((double)b_i->data[0] + b_kk) - 2.0;
+      maxx = ((double)i_data[0] + b_kk) - 2.0;
     }
-    kcomb->data[(int)b_kk - 1] = n - maxx;
+    kcomb_data[(int)b_kk - 1] = n - maxx;
     if (maxx >= b_kk) {
-      N_kk -= pascalM->data[((int)((maxx - b_kk) + 1.0) +
-                             pascalM->size[0] * (int)(unsigned int)b_kk) -
-                            1];
+      N_kk -= pascalM_data[((int)((maxx - b_kk) + 1.0) +
+                            pascalM->size[0] * (int)(unsigned int)b_kk) -
+                           1];
       /*  this is: N_kk - bc(maxx,kk) */
     }
   }

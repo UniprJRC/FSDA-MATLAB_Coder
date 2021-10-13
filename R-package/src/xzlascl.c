@@ -19,6 +19,7 @@
 /* Function Definitions */
 void b_xzlascl(double cfrom, double cto, emxArray_creal_T *A)
 {
+  creal_T *A_data;
   double a;
   double cfrom1;
   double cfromc;
@@ -27,6 +28,7 @@ void b_xzlascl(double cfrom, double cto, emxArray_creal_T *A)
   int i;
   int loop_ub;
   bool notdone;
+  A_data = A->data;
   cfromc = cfrom;
   ctoc = cto;
   notdone = true;
@@ -45,14 +47,15 @@ void b_xzlascl(double cfrom, double cto, emxArray_creal_T *A)
     }
     loop_ub = A->size[0];
     for (i = 0; i < loop_ub; i++) {
-      A->data[i].re *= a;
-      A->data[i].im *= a;
+      A_data[i].re *= a;
+      A_data[i].im *= a;
     }
   }
 }
 
 void xzlascl(double cfrom, double cto, emxArray_creal_T *A)
 {
+  creal_T *A_data;
   double a;
   double cfrom1;
   double cfromc;
@@ -63,6 +66,7 @@ void xzlascl(double cfrom, double cto, emxArray_creal_T *A)
   int i1;
   int loop_ub;
   bool notdone;
+  A_data = A->data;
   cfromc = cfrom;
   ctoc = cto;
   notdone = true;
@@ -83,8 +87,8 @@ void xzlascl(double cfrom, double cto, emxArray_creal_T *A)
     for (i = 0; i < loop_ub; i++) {
       b_loop_ub = A->size[0];
       for (i1 = 0; i1 < b_loop_ub; i1++) {
-        A->data[i1 + A->size[0] * i].re *= a;
-        A->data[i1 + A->size[0] * i].im *= a;
+        A_data[i1 + A->size[0] * i].re *= a;
+        A_data[i1 + A->size[0] * i].im *= a;
       }
     }
   }

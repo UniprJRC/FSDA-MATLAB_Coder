@@ -21,6 +21,8 @@ void xzlarf(int m, int n, int iv0, double tau, emxArray_real_T *C, int ic0,
             int ldc, emxArray_real_T *work)
 {
   double c;
+  double *C_data;
+  double *work_data;
   int b_i;
   int exitg1;
   int i;
@@ -30,10 +32,12 @@ void xzlarf(int m, int n, int iv0, double tau, emxArray_real_T *C, int ic0,
   int lastc;
   int lastv;
   bool exitg2;
+  work_data = work->data;
+  C_data = C->data;
   if (tau != 0.0) {
     lastv = m;
     i = iv0 + m;
-    while ((lastv > 0) && (C->data[i - 2] == 0.0)) {
+    while ((lastv > 0) && (C_data[i - 2] == 0.0)) {
       lastv--;
       i--;
     }
@@ -45,7 +49,7 @@ void xzlarf(int m, int n, int iv0, double tau, emxArray_real_T *C, int ic0,
       do {
         exitg1 = 0;
         if (ia <= (i + lastv) - 1) {
-          if (C->data[ia - 1] != 0.0) {
+          if (C_data[ia - 1] != 0.0) {
             exitg1 = 1;
           } else {
             ia++;
@@ -66,7 +70,7 @@ void xzlarf(int m, int n, int iv0, double tau, emxArray_real_T *C, int ic0,
   if (lastv > 0) {
     if (lastc != 0) {
       for (iy = 0; iy < lastc; iy++) {
-        work->data[iy] = 0.0;
+        work_data[iy] = 0.0;
       }
       iy = 0;
       i = ic0 + ldc * (lastc - 1);
@@ -74,9 +78,9 @@ void xzlarf(int m, int n, int iv0, double tau, emxArray_real_T *C, int ic0,
         c = 0.0;
         b_i = (iac + lastv) - 1;
         for (ia = iac; ia <= b_i; ia++) {
-          c += C->data[ia - 1] * C->data[((iv0 + ia) - iac) - 1];
+          c += C_data[ia - 1] * C_data[((iv0 + ia) - iac) - 1];
         }
-        work->data[iy] += c;
+        work_data[iy] += c;
         iy++;
       }
     }

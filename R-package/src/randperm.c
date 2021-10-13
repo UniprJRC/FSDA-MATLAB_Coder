@@ -33,6 +33,11 @@ void b_randperm(double n, double k, emxArray_real_T *p)
   double nleftm1;
   double selectedLoc;
   double t;
+  double *hashTbl_data;
+  double *link_data;
+  double *loc_data;
+  double *p_data;
+  double *val_data;
   int i;
   int loop_ub_tmp;
   int m;
@@ -41,18 +46,19 @@ void b_randperm(double n, double k, emxArray_real_T *p)
   loop_ub_tmp = (int)k;
   p->size[1] = (int)k;
   emxEnsureCapacity_real_T(p, i);
+  p_data = p->data;
   for (i = 0; i < loop_ub_tmp; i++) {
-    p->data[i] = 0.0;
+    p_data[i] = 0.0;
   }
   if (!(k == 0.0)) {
     if (k >= n) {
-      p->data[0] = 1.0;
+      p_data[0] = 1.0;
       i = (int)(n - 1.0);
       for (loop_ub_tmp = 0; loop_ub_tmp < i; loop_ub_tmp++) {
         j = c_rand() * (((double)loop_ub_tmp + 1.0) + 1.0);
         j = floor(j);
-        p->data[loop_ub_tmp + 1] = p->data[(int)(j + 1.0) - 1];
-        p->data[(int)(j + 1.0) - 1] = ((double)loop_ub_tmp + 1.0) + 1.0;
+        p_data[loop_ub_tmp + 1] = p_data[(int)(j + 1.0) - 1];
+        p_data[(int)(j + 1.0) - 1] = ((double)loop_ub_tmp + 1.0) + 1.0;
       }
     } else if (k >= n / 4.0) {
       t = 0.0;
@@ -70,37 +76,41 @@ void b_randperm(double n, double k, emxArray_real_T *p)
         t++;
         j = c_rand() * ((double)m + 1.0);
         j = floor(j);
-        p->data[m] = p->data[(int)(j + 1.0) - 1];
-        p->data[(int)(j + 1.0) - 1] = t;
+        p_data[m] = p_data[(int)(j + 1.0) - 1];
+        p_data[(int)(j + 1.0) - 1] = t;
       }
     } else {
       emxInit_real_T(&hashTbl, 1);
       i = hashTbl->size[0];
       hashTbl->size[0] = (int)k;
       emxEnsureCapacity_real_T(hashTbl, i);
+      hashTbl_data = hashTbl->data;
       for (i = 0; i < loop_ub_tmp; i++) {
-        hashTbl->data[i] = 0.0;
+        hashTbl_data[i] = 0.0;
       }
       emxInit_real_T(&link, 1);
       i = link->size[0];
       link->size[0] = (int)k;
       emxEnsureCapacity_real_T(link, i);
+      link_data = link->data;
       for (i = 0; i < loop_ub_tmp; i++) {
-        link->data[i] = 0.0;
+        link_data[i] = 0.0;
       }
       emxInit_real_T(&val, 1);
       i = val->size[0];
       val->size[0] = (int)k;
       emxEnsureCapacity_real_T(val, i);
+      val_data = val->data;
       for (i = 0; i < loop_ub_tmp; i++) {
-        val->data[i] = 0.0;
+        val_data[i] = 0.0;
       }
       emxInit_real_T(&loc, 1);
       i = loc->size[0];
       loc->size[0] = (int)k;
       emxEnsureCapacity_real_T(loc, i);
+      loc_data = loc->data;
       for (i = 0; i < loop_ub_tmp; i++) {
-        loc->data[i] = 0.0;
+        loc_data[i] = 0.0;
       }
       newEntry = 1.0;
       for (m = 0; m < loop_ub_tmp; m++) {
@@ -108,30 +118,30 @@ void b_randperm(double n, double k, emxArray_real_T *p)
         selectedLoc = c_rand() * (nleftm1 + 1.0);
         selectedLoc = floor(selectedLoc);
         b_i = c_mod(selectedLoc, k) + 1.0;
-        j = hashTbl->data[(int)b_i - 1];
-        while ((j > 0.0) && (loc->data[(int)j - 1] != selectedLoc)) {
-          j = link->data[(int)j - 1];
+        j = hashTbl_data[(int)b_i - 1];
+        while ((j > 0.0) && (loc_data[(int)j - 1] != selectedLoc)) {
+          j = link_data[(int)j - 1];
         }
         if (j > 0.0) {
-          p->data[m] = val->data[(int)j - 1] + 1.0;
+          p_data[m] = val_data[(int)j - 1] + 1.0;
         } else {
-          p->data[m] = selectedLoc + 1.0;
+          p_data[m] = selectedLoc + 1.0;
           j = newEntry;
           newEntry++;
-          loc->data[(int)j - 1] = selectedLoc;
-          link->data[(int)j - 1] = hashTbl->data[(int)b_i - 1];
-          hashTbl->data[(int)b_i - 1] = j;
+          loc_data[(int)j - 1] = selectedLoc;
+          link_data[(int)j - 1] = hashTbl_data[(int)b_i - 1];
+          hashTbl_data[(int)b_i - 1] = j;
         }
         if ((double)m + 1.0 < k) {
-          selectedLoc = hashTbl->data[(int)(c_mod(nleftm1, k) + 1.0) - 1];
+          selectedLoc = hashTbl_data[(int)(c_mod(nleftm1, k) + 1.0) - 1];
           while ((selectedLoc > 0.0) &&
-                 (loc->data[(int)selectedLoc - 1] != nleftm1)) {
-            selectedLoc = link->data[(int)selectedLoc - 1];
+                 (loc_data[(int)selectedLoc - 1] != nleftm1)) {
+            selectedLoc = link_data[(int)selectedLoc - 1];
           }
           if (selectedLoc > 0.0) {
-            val->data[(int)j - 1] = val->data[(int)selectedLoc - 1];
+            val_data[(int)j - 1] = val_data[(int)selectedLoc - 1];
           } else {
-            val->data[(int)j - 1] = nleftm1;
+            val_data[(int)j - 1] = nleftm1;
           }
         }
       }
@@ -148,6 +158,7 @@ void randperm(double n, emxArray_real_T *p)
   emxArray_int32_T *idx;
   emxArray_int32_T *iwork;
   double d;
+  double *p_data;
   int b_i;
   int b_n;
   int b_p;
@@ -159,35 +170,40 @@ void randperm(double n, emxArray_real_T *p)
   int pEnd;
   int q;
   int qEnd;
+  int *idx_data;
+  int *iwork_data;
   emxInit_int32_T(&idx, 2);
   b_rand(n, p);
+  p_data = p->data;
   b_n = p->size[1] + 1;
   i = idx->size[0] * idx->size[1];
   idx->size[0] = 1;
   idx->size[1] = p->size[1];
   emxEnsureCapacity_int32_T(idx, i);
+  idx_data = idx->data;
   b_i = p->size[1];
   for (i = 0; i < b_i; i++) {
-    idx->data[i] = 0;
+    idx_data[i] = 0;
   }
   if (p->size[1] != 0) {
     emxInit_int32_T(&iwork, 1);
     i = iwork->size[0];
     iwork->size[0] = p->size[1];
     emxEnsureCapacity_int32_T(iwork, i);
+    iwork_data = iwork->data;
     i = p->size[1] - 1;
     for (k = 1; k <= i; k += 2) {
-      d = p->data[k];
-      if ((p->data[k - 1] <= d) || rtIsNaN(d)) {
-        idx->data[k - 1] = k;
-        idx->data[k] = k + 1;
+      d = p_data[k];
+      if ((p_data[k - 1] <= d) || rtIsNaN(d)) {
+        idx_data[k - 1] = k;
+        idx_data[k] = k + 1;
       } else {
-        idx->data[k - 1] = k + 1;
-        idx->data[k] = k;
+        idx_data[k - 1] = k + 1;
+        idx_data[k] = k;
       }
     }
     if ((p->size[1] & 1) != 0) {
-      idx->data[p->size[1] - 1] = p->size[1];
+      idx_data[p->size[1] - 1] = p->size[1];
     }
     b_i = 2;
     while (b_i < b_n - 1) {
@@ -203,25 +219,25 @@ void randperm(double n, emxArray_real_T *p)
         k = 0;
         kEnd = qEnd - j;
         while (k + 1 <= kEnd) {
-          d = p->data[idx->data[q] - 1];
-          i = idx->data[b_p - 1];
-          if ((p->data[i - 1] <= d) || rtIsNaN(d)) {
-            iwork->data[k] = i;
+          d = p_data[idx_data[q] - 1];
+          i = idx_data[b_p - 1];
+          if ((p_data[i - 1] <= d) || rtIsNaN(d)) {
+            iwork_data[k] = i;
             b_p++;
             if (b_p == pEnd) {
               while (q + 1 < qEnd) {
                 k++;
-                iwork->data[k] = idx->data[q];
+                iwork_data[k] = idx_data[q];
                 q++;
               }
             }
           } else {
-            iwork->data[k] = idx->data[q];
+            iwork_data[k] = idx_data[q];
             q++;
             if (q + 1 == qEnd) {
               while (b_p < pEnd) {
                 k++;
-                iwork->data[k] = idx->data[b_p - 1];
+                iwork_data[k] = idx_data[b_p - 1];
                 b_p++;
               }
             }
@@ -229,7 +245,7 @@ void randperm(double n, emxArray_real_T *p)
           k++;
         }
         for (k = 0; k < kEnd; k++) {
-          idx->data[(j + k) - 1] = iwork->data[k];
+          idx_data[(j + k) - 1] = iwork_data[k];
         }
         j = qEnd;
       }
@@ -242,8 +258,9 @@ void randperm(double n, emxArray_real_T *p)
   p->size[0] = 1;
   p->size[1] = b_i;
   emxEnsureCapacity_real_T(p, i);
+  p_data = p->data;
   for (i = 0; i < b_i; i++) {
-    p->data[i] = idx->data[i];
+    p_data[i] = idx_data[i];
   }
   emxFree_int32_T(&idx);
 }

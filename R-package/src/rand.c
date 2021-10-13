@@ -21,6 +21,7 @@
 /* Function Definitions */
 void b_rand(double varargin_2, emxArray_real_T *r)
 {
+  double *r_data;
   int i;
   int k;
   k = r->size[0] * r->size[1];
@@ -28,8 +29,9 @@ void b_rand(double varargin_2, emxArray_real_T *r)
   i = (int)varargin_2;
   r->size[1] = (int)varargin_2;
   emxEnsureCapacity_real_T(r, k);
+  r_data = r->data;
   for (k = 0; k < i; k++) {
-    r->data[k] = eml_rand_mt19937ar(state);
+    r_data[k] = eml_rand_mt19937ar(state);
   }
 }
 
@@ -40,14 +42,16 @@ double c_rand(void)
 
 void d_rand(double varargin_1, emxArray_real_T *r)
 {
+  double *r_data;
   int i;
   int k;
   i = (int)varargin_1;
   k = r->size[0];
   r->size[0] = (int)varargin_1;
   emxEnsureCapacity_real_T(r, k);
+  r_data = r->data;
   for (k = 0; k < i; k++) {
-    r->data[k] = eml_rand_mt19937ar(state);
+    r_data[k] = eml_rand_mt19937ar(state);
   }
 }
 

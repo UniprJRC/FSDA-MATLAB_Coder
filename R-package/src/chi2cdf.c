@@ -14,32 +14,41 @@
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
 #include "gammainc.h"
+#include "gammaln.h"
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
+#include <math.h>
 #include <string.h>
 
 /* Function Definitions */
 void chi2cdf(const emxArray_real_T *x, double v, emxArray_real_T *p)
 {
+  const double *x_data;
   double a;
+  double d;
   double xk;
+  double *p_data;
   int i;
   int k;
+  x_data = x->data;
   a = v / 2.0;
   i = p->size[0] * p->size[1];
   p->size[0] = x->size[0];
   p->size[1] = x->size[1];
   emxEnsureCapacity_real_T(p, i);
+  p_data = p->data;
   i = x->size[0] * x->size[1];
   for (k = 0; k < i; k++) {
-    xk = x->data[k];
-    if ((a >= 0.0) && (!rtIsNaN(x->data[k]))) {
-      if (x->data[k] < 0.0) {
+    xk = x_data[k];
+    if ((a >= 0.0) && (!rtIsNaN(x_data[k]))) {
+      if (x_data[k] < 0.0) {
         xk = 0.0;
       }
-      p->data[k] = (gammainc(xk / 2.0, a)).re;
+      d = a + 1.0;
+      gammaln(&d);
+      p_data[k] = (scalar_gammainc(xk / 2.0, a, log(a), d)).re;
     } else {
-      p->data[k] = rtNaN;
+      p_data[k] = rtNaN;
     }
   }
 }

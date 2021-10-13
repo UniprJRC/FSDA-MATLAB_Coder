@@ -3,14 +3,14 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * power.h
+ * tclust.h
  *
- * Code generation for function 'power'
+ * Code generation for function 'tclust'
  *
  */
 
-#ifndef POWER_H
-#define POWER_H
+#ifndef TCLUST_H
+#define TCLUST_H
 
 /* Include files */
 #include "fsdaC_types.h"
@@ -23,11 +23,15 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void power(const emxArray_real_T *a, emxArray_real_T *y);
+void ff_binary_expand_op(emxArray_real_T *r, const struct_tclust_T *out,
+                         const emxArray_real_T *postprobold);
+
+void gf_binary_expand_op(emxArray_real_T *x, const emxArray_int32_T *indold,
+                         const emxArray_int32_T *ind);
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-/* End of code generation (power.h) */
+/* End of code generation (tclust.h) */

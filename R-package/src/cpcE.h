@@ -27,6 +27,9 @@ void cpcE(const emxArray_real_T *lmdc, const emxArray_real_T *SigmaB,
           const emxArray_real_T *niini, double pa_k, double pa_v,
           emxArray_real_T *Omega);
 
+void if_binary_expand_op(emxArray_real_T *Sigma, double a,
+                         const emxArray_real_T *SigmaB, int j);
+
 #ifdef __cplusplus
 }
 #endif

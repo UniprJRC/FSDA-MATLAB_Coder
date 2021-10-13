@@ -11,6 +11,9 @@
 
 /* Include files */
 #include "ScoreYJall.h"
+#include "FSRmdr.h"
+#include "Score.h"
+#include "ScoreYJ.h"
 #include "blockedSummation.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_rtwutil.h"
@@ -23,7 +26,266 @@
 #include <math.h>
 #include <string.h>
 
+/* Function Declarations */
+static void dd_binary_expand_op(emxArray_real_T *r1,
+                                const emxArray_real_T *znonnegs,
+                                const emxArray_real_T *logvneg, double kN,
+                                double qneg);
+
+static void ed_binary_expand_op(emxArray_real_T *r1,
+                                const emxArray_real_T *logvneg, double logG,
+                                double G);
+
+static void fd_binary_expand_op(emxArray_real_T *vposlai,
+                                const emxArray_real_T *logvneg,
+                                const emxArray_real_T *r1, double logGneg,
+                                double G);
+
+static void gd_binary_expand_op(emxArray_real_T *r1,
+                                const emxArray_real_T *vposlai,
+                                const emxArray_real_T *logvpos, double kpos,
+                                double q);
+
+static void hd_binary_expand_op(emxArray_real_T *znonnegs,
+                                const emxArray_real_T *r1, double logG);
+
+static void id_binary_expand_op(emxArray_real_T *vposlai,
+                                const emxArray_real_T *znonnegs,
+                                const emxArray_real_T *r1, double logGpos);
+
 /* Function Definitions */
+static void dd_binary_expand_op(emxArray_real_T *r1,
+                                const emxArray_real_T *znonnegs,
+                                const emxArray_real_T *logvneg, double kN,
+                                double qneg)
+{
+  const double *logvneg_data;
+  const double *znonnegs_data;
+  double *r;
+  int i;
+  int loop_ub;
+  int stride_0_0;
+  int stride_1_0;
+  logvneg_data = logvneg->data;
+  znonnegs_data = znonnegs->data;
+  i = r1->size[0];
+  if (logvneg->size[0] == 1) {
+    r1->size[0] = znonnegs->size[0];
+  } else {
+    r1->size[0] = logvneg->size[0];
+  }
+  emxEnsureCapacity_real_T(r1, i);
+  r = r1->data;
+  stride_0_0 = (znonnegs->size[0] != 1);
+  stride_1_0 = (logvneg->size[0] != 1);
+  if (logvneg->size[0] == 1) {
+    loop_ub = znonnegs->size[0];
+  } else {
+    loop_ub = logvneg->size[0];
+  }
+  for (i = 0; i < loop_ub; i++) {
+    r[i] =
+        (znonnegs_data[i * stride_0_0] * (logvneg_data[i * stride_1_0] + kN) -
+         kN) /
+        qneg;
+  }
+}
+
+static void ed_binary_expand_op(emxArray_real_T *r1,
+                                const emxArray_real_T *logvneg, double logG,
+                                double G)
+{
+  emxArray_real_T *b_logvneg;
+  const double *logvneg_data;
+  double *b_logvneg_data;
+  double *r;
+  int i;
+  int loop_ub;
+  int stride_0_0;
+  int stride_1_0;
+  logvneg_data = logvneg->data;
+  r = r1->data;
+  emxInit_real_T(&b_logvneg, 1);
+  i = b_logvneg->size[0];
+  if (r1->size[0] == 1) {
+    b_logvneg->size[0] = logvneg->size[0];
+  } else {
+    b_logvneg->size[0] = r1->size[0];
+  }
+  emxEnsureCapacity_real_T(b_logvneg, i);
+  b_logvneg_data = b_logvneg->data;
+  stride_0_0 = (logvneg->size[0] != 1);
+  stride_1_0 = (r1->size[0] != 1);
+  if (r1->size[0] == 1) {
+    loop_ub = logvneg->size[0];
+  } else {
+    loop_ub = r1->size[0];
+  }
+  for (i = 0; i < loop_ub; i++) {
+    b_logvneg_data[i] =
+        logvneg_data[i * stride_0_0] * (r[i * stride_1_0] + logG) / G;
+  }
+  i = r1->size[0];
+  r1->size[0] = b_logvneg->size[0];
+  emxEnsureCapacity_real_T(r1, i);
+  r = r1->data;
+  loop_ub = b_logvneg->size[0];
+  for (i = 0; i < loop_ub; i++) {
+    r[i] = b_logvneg_data[i];
+  }
+  emxFree_real_T(&b_logvneg);
+}
+
+static void fd_binary_expand_op(emxArray_real_T *vposlai,
+                                const emxArray_real_T *logvneg,
+                                const emxArray_real_T *r1, double logGneg,
+                                double G)
+{
+  const double *logvneg_data;
+  const double *r;
+  double *vposlai_data;
+  int i;
+  int loop_ub;
+  int stride_0_0;
+  int stride_1_0;
+  r = r1->data;
+  logvneg_data = logvneg->data;
+  i = vposlai->size[0];
+  if (r1->size[0] == 1) {
+    vposlai->size[0] = logvneg->size[0];
+  } else {
+    vposlai->size[0] = r1->size[0];
+  }
+  emxEnsureCapacity_real_T(vposlai, i);
+  vposlai_data = vposlai->data;
+  stride_0_0 = (logvneg->size[0] != 1);
+  stride_1_0 = (r1->size[0] != 1);
+  if (r1->size[0] == 1) {
+    loop_ub = logvneg->size[0];
+  } else {
+    loop_ub = r1->size[0];
+  }
+  for (i = 0; i < loop_ub; i++) {
+    vposlai_data[i] =
+        logvneg_data[i * stride_0_0] * (r[i * stride_1_0] + logGneg) / G;
+  }
+}
+
+static void gd_binary_expand_op(emxArray_real_T *r1,
+                                const emxArray_real_T *vposlai,
+                                const emxArray_real_T *logvpos, double kpos,
+                                double q)
+{
+  const double *logvpos_data;
+  const double *vposlai_data;
+  double *r;
+  int i;
+  int loop_ub;
+  int stride_0_0;
+  int stride_1_0;
+  logvpos_data = logvpos->data;
+  vposlai_data = vposlai->data;
+  i = r1->size[0];
+  if (logvpos->size[0] == 1) {
+    r1->size[0] = vposlai->size[0];
+  } else {
+    r1->size[0] = logvpos->size[0];
+  }
+  emxEnsureCapacity_real_T(r1, i);
+  r = r1->data;
+  stride_0_0 = (vposlai->size[0] != 1);
+  stride_1_0 = (logvpos->size[0] != 1);
+  if (logvpos->size[0] == 1) {
+    loop_ub = vposlai->size[0];
+  } else {
+    loop_ub = logvpos->size[0];
+  }
+  for (i = 0; i < loop_ub; i++) {
+    r[i] =
+        (vposlai_data[i * stride_0_0] * (logvpos_data[i * stride_1_0] - kpos) +
+         kpos) /
+        q;
+  }
+}
+
+static void hd_binary_expand_op(emxArray_real_T *znonnegs,
+                                const emxArray_real_T *r1, double logG)
+{
+  emxArray_real_T *b_znonnegs;
+  const double *r;
+  double *b_znonnegs_data;
+  double *znonnegs_data;
+  int i;
+  int loop_ub;
+  int stride_0_0;
+  int stride_1_0;
+  r = r1->data;
+  znonnegs_data = znonnegs->data;
+  emxInit_real_T(&b_znonnegs, 1);
+  i = b_znonnegs->size[0];
+  if (r1->size[0] == 1) {
+    b_znonnegs->size[0] = znonnegs->size[0];
+  } else {
+    b_znonnegs->size[0] = r1->size[0];
+  }
+  emxEnsureCapacity_real_T(b_znonnegs, i);
+  b_znonnegs_data = b_znonnegs->data;
+  stride_0_0 = (znonnegs->size[0] != 1);
+  stride_1_0 = (r1->size[0] != 1);
+  if (r1->size[0] == 1) {
+    loop_ub = znonnegs->size[0];
+  } else {
+    loop_ub = r1->size[0];
+  }
+  for (i = 0; i < loop_ub; i++) {
+    b_znonnegs_data[i] =
+        znonnegs_data[i * stride_0_0] * (r[i * stride_1_0] - logG);
+  }
+  i = znonnegs->size[0];
+  znonnegs->size[0] = b_znonnegs->size[0];
+  emxEnsureCapacity_real_T(znonnegs, i);
+  znonnegs_data = znonnegs->data;
+  loop_ub = b_znonnegs->size[0];
+  for (i = 0; i < loop_ub; i++) {
+    znonnegs_data[i] = b_znonnegs_data[i];
+  }
+  emxFree_real_T(&b_znonnegs);
+}
+
+static void id_binary_expand_op(emxArray_real_T *vposlai,
+                                const emxArray_real_T *znonnegs,
+                                const emxArray_real_T *r1, double logGpos)
+{
+  const double *r;
+  const double *znonnegs_data;
+  double *vposlai_data;
+  int i;
+  int loop_ub;
+  int stride_0_0;
+  int stride_1_0;
+  r = r1->data;
+  znonnegs_data = znonnegs->data;
+  i = vposlai->size[0];
+  if (r1->size[0] == 1) {
+    vposlai->size[0] = znonnegs->size[0];
+  } else {
+    vposlai->size[0] = r1->size[0];
+  }
+  emxEnsureCapacity_real_T(vposlai, i);
+  vposlai_data = vposlai->data;
+  stride_0_0 = (znonnegs->size[0] != 1);
+  stride_1_0 = (r1->size[0] != 1);
+  if (r1->size[0] == 1) {
+    loop_ub = znonnegs->size[0];
+  } else {
+    loop_ub = r1->size[0];
+  }
+  for (i = 0; i < loop_ub; i++) {
+    vposlai_data[i] =
+        znonnegs_data[i * stride_0_0] * (r[i * stride_1_0] - logGpos);
+  }
+}
+
 void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
                 double varargin_2, double outSC_Score_data[],
                 int outSC_Score_size[2])
@@ -38,6 +300,8 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
   emxArray_real_T *w;
   emxArray_real_T *wneg;
   emxArray_real_T *znonnegs;
+  const double *X_data;
+  const double *y_data;
   double G;
   double Glaminus1;
   double kpos;
@@ -45,6 +309,15 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
   double logGneg;
   double logGpos;
   double q;
+  double *logvneg_data;
+  double *logvpos_data;
+  double *r1;
+  double *vneg_data;
+  double *vpos_data;
+  double *vposlai_data;
+  double *w_data;
+  double *wneg_data;
+  double *znonnegs_data;
   int i;
   int i2;
   int k;
@@ -56,6 +329,8 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
   bool empty_non_axis_sizes;
   bool vnegboo;
   bool vposboo;
+  X_data = X->data;
+  y_data = y->data;
   emxInit_real_T(&vposlai, 1);
   /* Computes all the 4 score tests for YJ transformation */
   /*  */
@@ -90,8 +365,6 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  call this test, "test for negative observations". */
   /*  4) the F test for the joint presence of the two constructed variables */
   /*  described in points 2) and 3. */
-  /*  */
-  /*  */
   /*  */
   /*   Required input arguments: */
   /*  */
@@ -171,7 +444,6 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                Example - 'usefmin',true */
   /*                Data Types - boolean or struct */
   /*  */
-  /*  */
   /*        nocheck : Check input arguments. Boolean. */
   /*                If nocheck is equal to true no check is performed on */
   /*                  matrix y and matrix X. Notice that y and X are left */
@@ -220,7 +492,6 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                             output is present only if input option */
   /*                             scoremle is true. */
   /*  */
-  /*  */
   /*  See also: FSRfan, Score, ScoreYJ, ScoreYjpn, fanBIC */
   /*  */
   /*  References: */
@@ -238,7 +509,6 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('ScoreYJall')">Link to the help function</a>
    */
@@ -333,7 +603,6 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                specified for the */
   /*                caller function. */
   /*  */
-  /*  */
   /*   Optional input arguments: */
   /*  */
   /*  Output: */
@@ -348,7 +617,6 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                rows after listwise exclusion. */
   /*  p:            Number of columns of X (variables). Scalar. */
   /*                Number of parameters to be estimated. */
-  /*  */
   /*  */
   /*  More About: */
   /*  */
@@ -370,8 +638,6 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
-  /*  */
   /*  */
   /* $LastChangedDate::                      $: Date of the last commit */
   /*  */
@@ -404,35 +670,42 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
   i = vposlai->size[0];
   vposlai->size[0] = y->size[0];
   emxEnsureCapacity_real_T(vposlai, i);
+  vposlai_data = vposlai->data;
   for (k = 0; k < nx; k++) {
-    vposlai->data[k] = fabs(y->data[k]);
+    vposlai_data[k] = fabs(y_data[k]);
   }
   loop_ub = vposlai->size[0];
   for (i = 0; i < loop_ub; i++) {
-    vposlai->data[i]++;
+    vposlai_data[i]++;
   }
   nx = vposlai->size[0];
   for (k = 0; k < nx; k++) {
-    vposlai->data[k] = log(vposlai->data[k]);
+    vposlai_data[k] = log(vposlai_data[k]);
   }
   emxInit_real_T(&znonnegs, 1);
   i = znonnegs->size[0];
   znonnegs->size[0] = y->size[0];
   emxEnsureCapacity_real_T(znonnegs, i);
+  znonnegs_data = znonnegs->data;
   loop_ub = y->size[0];
   for (i = 0; i < loop_ub; i++) {
-    znonnegs->data[i] = y->data[i];
+    znonnegs_data[i] = y_data[i];
   }
   b_sign(znonnegs);
-  loop_ub = znonnegs->size[0];
-  for (i = 0; i < loop_ub; i++) {
-    znonnegs->data[i] *= vposlai->data[i];
+  znonnegs_data = znonnegs->data;
+  if (znonnegs->size[0] == vposlai->size[0]) {
+    loop_ub = znonnegs->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      znonnegs_data[i] *= vposlai_data[i];
+    }
+  } else {
+    times(znonnegs, vposlai);
   }
   logG = blockedSummation(znonnegs, znonnegs->size[0]) / (double)X->size[0];
   k = y->size[0] - 1;
   nx = 0;
   for (loop_ub = 0; loop_ub <= k; loop_ub++) {
-    if (!(y->data[loop_ub] >= 0.0)) {
+    if (!(y_data[loop_ub] >= 0.0)) {
       nx++;
     }
   }
@@ -440,17 +713,18 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
   i = vneg->size[0];
   vneg->size[0] = nx;
   emxEnsureCapacity_real_T(vneg, i);
+  vneg_data = vneg->data;
   nx = 0;
   for (loop_ub = 0; loop_ub <= k; loop_ub++) {
-    if (!(y->data[loop_ub] >= 0.0)) {
-      vneg->data[nx] = -y->data[loop_ub] + 1.0;
+    if (!(y_data[loop_ub] >= 0.0)) {
+      vneg_data[nx] = -y_data[loop_ub] + 1.0;
       nx++;
     }
   }
   k = y->size[0] - 1;
   nx = 0;
   for (loop_ub = 0; loop_ub <= k; loop_ub++) {
-    if (y->data[loop_ub] >= 0.0) {
+    if (y_data[loop_ub] >= 0.0) {
       nx++;
     }
   }
@@ -458,10 +732,11 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
   i = vpos->size[0];
   vpos->size[0] = nx;
   emxEnsureCapacity_real_T(vpos, i);
+  vpos_data = vpos->data;
   nx = 0;
   for (loop_ub = 0; loop_ub <= k; loop_ub++) {
-    if (y->data[loop_ub] >= 0.0) {
-      vpos->data[nx] = y->data[loop_ub] + 1.0;
+    if (y_data[loop_ub] >= 0.0) {
+      vpos_data[nx] = y_data[loop_ub] + 1.0;
       nx++;
     }
   }
@@ -469,33 +744,36 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
   i = logvpos->size[0];
   logvpos->size[0] = vpos->size[0];
   emxEnsureCapacity_real_T(logvpos, i);
+  logvpos_data = logvpos->data;
   loop_ub = vpos->size[0];
   for (i = 0; i < loop_ub; i++) {
-    logvpos->data[i] = vpos->data[i];
+    logvpos_data[i] = vpos_data[i];
   }
   nx = vpos->size[0];
   for (k = 0; k < nx; k++) {
-    logvpos->data[k] = log(logvpos->data[k]);
+    logvpos_data[k] = log(logvpos_data[k]);
   }
   emxInit_real_T(&logvneg, 1);
   logGpos = blockedSummation(logvpos, logvpos->size[0]) / (double)X->size[0];
   i = logvneg->size[0];
   logvneg->size[0] = vneg->size[0];
   emxEnsureCapacity_real_T(logvneg, i);
+  logvneg_data = logvneg->data;
   loop_ub = vneg->size[0];
   for (i = 0; i < loop_ub; i++) {
-    logvneg->data[i] = vneg->data[i];
+    logvneg_data[i] = vneg_data[i];
   }
   nx = vneg->size[0];
   for (k = 0; k < nx; k++) {
-    logvneg->data[k] = log(logvneg->data[k]);
+    logvneg_data[k] = log(logvneg_data[k]);
   }
   i = znonnegs->size[0];
   znonnegs->size[0] = logvneg->size[0];
   emxEnsureCapacity_real_T(znonnegs, i);
+  znonnegs_data = znonnegs->data;
   loop_ub = logvneg->size[0];
   for (i = 0; i < loop_ub; i++) {
-    znonnegs->data[i] = -logvneg->data[i];
+    znonnegs_data[i] = -logvneg_data[i];
   }
   logGneg = blockedSummation(znonnegs, znonnegs->size[0]) / (double)X->size[0];
   G = exp(logG);
@@ -523,8 +801,9 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
   i = vneg->size[0];
   vneg->size[0] = y->size[0];
   emxEnsureCapacity_real_T(vneg, i);
+  vneg_data = vneg->data;
   for (i = 0; i < loop_ub; i++) {
-    vneg->data[i] = y->data[i];
+    vneg_data[i] = y_data[i];
   }
   emxInit_real_T(&wneg, 1);
   emxInit_real_T(&w, 1);
@@ -532,16 +811,19 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
   i = vpos->size[0];
   vpos->size[0] = X->size[0];
   emxEnsureCapacity_real_T(vpos, i);
+  vpos_data = vpos->data;
   i = wneg->size[0];
   wneg->size[0] = X->size[0];
   emxEnsureCapacity_real_T(wneg, i);
+  wneg_data = wneg->data;
   i = w->size[0];
   w->size[0] = X->size[0];
   emxEnsureCapacity_real_T(w, i);
+  w_data = w->data;
   for (i = 0; i < n; i++) {
-    vpos->data[i] = rtNaN;
-    wneg->data[i] = rtNaN;
-    w->data[i] = rtNaN;
+    vpos_data[i] = rtNaN;
+    wneg_data[i] = rtNaN;
+    w_data[i] = rtNaN;
   }
   /*  Compute transformed values and constructed variables depending on lambda
    */
@@ -554,67 +836,80 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
     i = vposlai->size[0];
     vposlai->size[0] = logvpos->size[0];
     emxEnsureCapacity_real_T(vposlai, i);
+    vposlai_data = vposlai->data;
     for (i = 0; i < loop_ub; i++) {
-      vposlai->data[i] = varargin_2 * logvpos->data[i];
+      vposlai_data[i] = varargin_2 * logvpos_data[i];
     }
     nx = vposlai->size[0];
     for (k = 0; k < nx; k++) {
-      vposlai->data[k] = exp(vposlai->data[k]);
+      vposlai_data[k] = exp(vposlai_data[k]);
     }
     kpos = 1.0 / varargin_2 + logGpos;
     i = znonnegs->size[0];
     znonnegs->size[0] = vposlai->size[0];
     emxEnsureCapacity_real_T(znonnegs, i);
+    znonnegs_data = znonnegs->data;
     loop_ub = vposlai->size[0];
     for (i = 0; i < loop_ub; i++) {
-      znonnegs->data[i] = (vposlai->data[i] - 1.0) / q;
+      znonnegs_data[i] = (vposlai_data[i] - 1.0) / q;
     }
     k = y->size[0];
     nx = 0;
     for (loop_ub = 0; loop_ub < k; loop_ub++) {
-      if (y->data[loop_ub] >= 0.0) {
-        vneg->data[loop_ub] = znonnegs->data[nx];
+      if (y_data[loop_ub] >= 0.0) {
+        vneg_data[loop_ub] = znonnegs_data[nx];
         nx++;
       }
     }
-    i = r->size[0];
-    r->size[0] = vposlai->size[0];
-    emxEnsureCapacity_real_T(r, i);
-    loop_ub = vposlai->size[0];
-    for (i = 0; i < loop_ub; i++) {
-      r->data[i] = (vposlai->data[i] * (logvpos->data[i] - kpos) + kpos) / q;
+    if (vposlai->size[0] == logvpos->size[0]) {
+      i = r->size[0];
+      r->size[0] = vposlai->size[0];
+      emxEnsureCapacity_real_T(r, i);
+      r1 = r->data;
+      loop_ub = vposlai->size[0];
+      for (i = 0; i < loop_ub; i++) {
+        r1[i] = (vposlai_data[i] * (logvpos_data[i] - kpos) + kpos) / q;
+      }
+    } else {
+      gd_binary_expand_op(r, vposlai, logvpos, kpos, q);
+      r1 = r->data;
     }
     k = y->size[0];
     nx = 0;
     for (loop_ub = 0; loop_ub < k; loop_ub++) {
-      if (y->data[loop_ub] >= 0.0) {
-        vpos->data[loop_ub] = r->data[nx];
+      if (y_data[loop_ub] >= 0.0) {
+        vpos_data[loop_ub] = r1[nx];
         nx++;
       }
     }
     loop_ub = znonnegs->size[0];
     for (i = 0; i < loop_ub; i++) {
-      znonnegs->data[i] = -znonnegs->data[i] * logGneg;
+      znonnegs_data[i] = -znonnegs_data[i] * logGneg;
     }
     k = y->size[0];
     nx = 0;
     for (loop_ub = 0; loop_ub < k; loop_ub++) {
-      if (y->data[loop_ub] >= 0.0) {
-        wneg->data[loop_ub] = znonnegs->data[nx];
+      if (y_data[loop_ub] >= 0.0) {
+        wneg_data[loop_ub] = znonnegs_data[nx];
         nx++;
       }
     }
     kpos = 1.0 / varargin_2 + logG;
-    loop_ub = vposlai->size[0];
-    for (i = 0; i < loop_ub; i++) {
-      vposlai->data[i] =
-          (vposlai->data[i] * (logvpos->data[i] - kpos) + kpos) / q;
+    if (vposlai->size[0] == logvpos->size[0]) {
+      loop_ub = vposlai->size[0];
+      for (i = 0; i < loop_ub; i++) {
+        vposlai_data[i] =
+            (vposlai_data[i] * (logvpos_data[i] - kpos) + kpos) / q;
+      }
+    } else {
+      bd_binary_expand_op(vposlai, logvpos, kpos, q);
+      vposlai_data = vposlai->data;
     }
     k = y->size[0];
     nx = 0;
     for (loop_ub = 0; loop_ub < k; loop_ub++) {
-      if (y->data[loop_ub] >= 0.0) {
-        w->data[loop_ub] = vposlai->data[nx];
+      if (y_data[loop_ub] >= 0.0) {
+        w_data[loop_ub] = vposlai_data[nx];
         nx++;
       }
     }
@@ -624,14 +919,15 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
     i = znonnegs->size[0];
     znonnegs->size[0] = logvpos->size[0];
     emxEnsureCapacity_real_T(znonnegs, i);
+    znonnegs_data = znonnegs->data;
     for (i = 0; i < loop_ub; i++) {
-      znonnegs->data[i] = G * logvpos->data[i];
+      znonnegs_data[i] = G * logvpos_data[i];
     }
     k = y->size[0];
     nx = 0;
     for (loop_ub = 0; loop_ub < k; loop_ub++) {
-      if (y->data[loop_ub] >= 0.0) {
-        vneg->data[loop_ub] = znonnegs->data[nx];
+      if (y_data[loop_ub] >= 0.0) {
+        vneg_data[loop_ub] = znonnegs_data[nx];
         nx++;
       }
     }
@@ -639,48 +935,61 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
     i = r->size[0];
     r->size[0] = logvpos->size[0];
     emxEnsureCapacity_real_T(r, i);
+    r1 = r->data;
     for (i = 0; i < loop_ub; i++) {
-      r->data[i] = logvpos->data[i] / 2.0;
+      r1[i] = logvpos_data[i] / 2.0;
     }
-    i = vposlai->size[0];
-    vposlai->size[0] = znonnegs->size[0];
-    emxEnsureCapacity_real_T(vposlai, i);
-    loop_ub = znonnegs->size[0];
-    for (i = 0; i < loop_ub; i++) {
-      vposlai->data[i] = znonnegs->data[i] * (r->data[i] - logGpos);
+    if (znonnegs->size[0] == r->size[0]) {
+      i = vposlai->size[0];
+      vposlai->size[0] = znonnegs->size[0];
+      emxEnsureCapacity_real_T(vposlai, i);
+      vposlai_data = vposlai->data;
+      loop_ub = znonnegs->size[0];
+      for (i = 0; i < loop_ub; i++) {
+        vposlai_data[i] = znonnegs_data[i] * (r1[i] - logGpos);
+      }
+    } else {
+      id_binary_expand_op(vposlai, znonnegs, r, logGpos);
+      vposlai_data = vposlai->data;
     }
     k = y->size[0];
     nx = 0;
     for (loop_ub = 0; loop_ub < k; loop_ub++) {
-      if (y->data[loop_ub] >= 0.0) {
-        vpos->data[loop_ub] = vposlai->data[nx];
+      if (y_data[loop_ub] >= 0.0) {
+        vpos_data[loop_ub] = vposlai_data[nx];
         nx++;
       }
     }
     i = vposlai->size[0];
     vposlai->size[0] = znonnegs->size[0];
     emxEnsureCapacity_real_T(vposlai, i);
+    vposlai_data = vposlai->data;
     loop_ub = znonnegs->size[0];
     for (i = 0; i < loop_ub; i++) {
-      vposlai->data[i] = -znonnegs->data[i] * logGneg;
+      vposlai_data[i] = -znonnegs_data[i] * logGneg;
     }
     k = y->size[0];
     nx = 0;
     for (loop_ub = 0; loop_ub < k; loop_ub++) {
-      if (y->data[loop_ub] >= 0.0) {
-        wneg->data[loop_ub] = vposlai->data[nx];
+      if (y_data[loop_ub] >= 0.0) {
+        wneg_data[loop_ub] = vposlai_data[nx];
         nx++;
       }
     }
-    loop_ub = znonnegs->size[0];
-    for (i = 0; i < loop_ub; i++) {
-      znonnegs->data[i] *= r->data[i] - logG;
+    if (znonnegs->size[0] == r->size[0]) {
+      loop_ub = znonnegs->size[0];
+      for (i = 0; i < loop_ub; i++) {
+        znonnegs_data[i] *= r1[i] - logG;
+      }
+    } else {
+      hd_binary_expand_op(znonnegs, r, logG);
+      znonnegs_data = znonnegs->data;
     }
     k = y->size[0];
     nx = 0;
     for (loop_ub = 0; loop_ub < k; loop_ub++) {
-      if (y->data[loop_ub] >= 0.0) {
-        w->data[loop_ub] = znonnegs->data[nx];
+      if (y_data[loop_ub] >= 0.0) {
+        w_data[loop_ub] = znonnegs_data[nx];
         nx++;
       }
     }
@@ -694,69 +1003,83 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
     i = znonnegs->size[0];
     znonnegs->size[0] = logvneg->size[0];
     emxEnsureCapacity_real_T(znonnegs, i);
+    znonnegs_data = znonnegs->data;
     for (i = 0; i < loop_ub; i++) {
-      znonnegs->data[i] = (2.0 - varargin_2) * logvneg->data[i];
+      znonnegs_data[i] = (2.0 - varargin_2) * logvneg_data[i];
     }
     nx = znonnegs->size[0];
     for (k = 0; k < nx; k++) {
-      znonnegs->data[k] = exp(znonnegs->data[k]);
+      znonnegs_data[k] = exp(znonnegs_data[k]);
     }
-    q = (2.0 - varargin_2) * Glaminus1;
-    Glaminus1 = 1.0 / (2.0 - varargin_2);
-    kpos = logGneg - Glaminus1;
+    Glaminus1 *= 2.0 - varargin_2;
+    G = 1.0 / (2.0 - varargin_2);
+    kpos = logGneg - G;
     i = vposlai->size[0];
     vposlai->size[0] = znonnegs->size[0];
     emxEnsureCapacity_real_T(vposlai, i);
+    vposlai_data = vposlai->data;
     loop_ub = znonnegs->size[0];
     for (i = 0; i < loop_ub; i++) {
-      vposlai->data[i] = (1.0 - znonnegs->data[i]) / q;
+      vposlai_data[i] = (1.0 - znonnegs_data[i]) / Glaminus1;
     }
     k = y->size[0];
     nx = 0;
     for (loop_ub = 0; loop_ub < k; loop_ub++) {
-      if (!(y->data[loop_ub] >= 0.0)) {
-        vneg->data[loop_ub] = vposlai->data[nx];
+      if (!(y_data[loop_ub] >= 0.0)) {
+        vneg_data[loop_ub] = vposlai_data[nx];
         nx++;
       }
     }
     loop_ub = vposlai->size[0];
     for (i = 0; i < loop_ub; i++) {
-      vposlai->data[i] = -vposlai->data[i] * logGpos;
+      vposlai_data[i] = -vposlai_data[i] * logGpos;
     }
     k = y->size[0];
     nx = 0;
     for (loop_ub = 0; loop_ub < k; loop_ub++) {
-      if (!(y->data[loop_ub] >= 0.0)) {
-        vpos->data[loop_ub] = vposlai->data[nx];
+      if (!(y_data[loop_ub] >= 0.0)) {
+        vpos_data[loop_ub] = vposlai_data[nx];
         nx++;
       }
     }
-    i = r->size[0];
-    r->size[0] = znonnegs->size[0];
-    emxEnsureCapacity_real_T(r, i);
-    loop_ub = znonnegs->size[0];
-    for (i = 0; i < loop_ub; i++) {
-      r->data[i] = (znonnegs->data[i] * (logvneg->data[i] + kpos) - kpos) / q;
+    if (znonnegs->size[0] == logvneg->size[0]) {
+      i = r->size[0];
+      r->size[0] = znonnegs->size[0];
+      emxEnsureCapacity_real_T(r, i);
+      r1 = r->data;
+      loop_ub = znonnegs->size[0];
+      for (i = 0; i < loop_ub; i++) {
+        r1[i] =
+            (znonnegs_data[i] * (logvneg_data[i] + kpos) - kpos) / Glaminus1;
+      }
+    } else {
+      dd_binary_expand_op(r, znonnegs, logvneg, kpos, Glaminus1);
+      r1 = r->data;
     }
     k = y->size[0];
     nx = 0;
     for (loop_ub = 0; loop_ub < k; loop_ub++) {
-      if (!(y->data[loop_ub] >= 0.0)) {
-        wneg->data[loop_ub] = r->data[nx];
+      if (!(y_data[loop_ub] >= 0.0)) {
+        wneg_data[loop_ub] = r1[nx];
         nx++;
       }
     }
-    kpos = logG - Glaminus1;
-    loop_ub = znonnegs->size[0];
-    for (i = 0; i < loop_ub; i++) {
-      znonnegs->data[i] =
-          (znonnegs->data[i] * (logvneg->data[i] + kpos) - kpos) / q;
+    kpos = logG - G;
+    if (znonnegs->size[0] == logvneg->size[0]) {
+      loop_ub = znonnegs->size[0];
+      for (i = 0; i < loop_ub; i++) {
+        znonnegs_data[i] =
+            (znonnegs_data[i] * (logvneg_data[i] + kpos) - kpos) / Glaminus1;
+      }
+    } else {
+      ad_binary_expand_op(znonnegs, logvneg, kpos, Glaminus1);
+      znonnegs_data = znonnegs->data;
     }
     k = y->size[0];
     nx = 0;
     for (loop_ub = 0; loop_ub < k; loop_ub++) {
-      if (!(y->data[loop_ub] >= 0.0)) {
-        w->data[loop_ub] = znonnegs->data[nx];
+      if (!(y_data[loop_ub] >= 0.0)) {
+        w_data[loop_ub] = znonnegs_data[nx];
         nx++;
       }
     }
@@ -766,26 +1089,27 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
     i = vposlai->size[0];
     vposlai->size[0] = logvneg->size[0];
     emxEnsureCapacity_real_T(vposlai, i);
+    vposlai_data = vposlai->data;
     for (i = 0; i < loop_ub; i++) {
-      vposlai->data[i] = -logvneg->data[i] / G;
+      vposlai_data[i] = -logvneg_data[i] / G;
     }
     k = y->size[0];
     nx = 0;
     for (loop_ub = 0; loop_ub < k; loop_ub++) {
-      if (!(y->data[loop_ub] >= 0.0)) {
-        vneg->data[loop_ub] = vposlai->data[nx];
+      if (!(y_data[loop_ub] >= 0.0)) {
+        vneg_data[loop_ub] = vposlai_data[nx];
         nx++;
       }
     }
     loop_ub = vposlai->size[0];
     for (i = 0; i < loop_ub; i++) {
-      vposlai->data[i] = -vposlai->data[i] * logGpos;
+      vposlai_data[i] = -vposlai_data[i] * logGpos;
     }
     k = y->size[0];
     nx = 0;
     for (loop_ub = 0; loop_ub < k; loop_ub++) {
-      if (!(y->data[loop_ub] >= 0.0)) {
-        vpos->data[loop_ub] = vposlai->data[nx];
+      if (!(y_data[loop_ub] >= 0.0)) {
+        vpos_data[loop_ub] = vposlai_data[nx];
         nx++;
       }
     }
@@ -793,34 +1117,49 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
     i = r->size[0];
     r->size[0] = logvneg->size[0];
     emxEnsureCapacity_real_T(r, i);
-    i = vposlai->size[0];
-    vposlai->size[0] = logvneg->size[0];
-    emxEnsureCapacity_real_T(vposlai, i);
+    r1 = r->data;
     for (i = 0; i < loop_ub; i++) {
-      kpos = logvneg->data[i] / 2.0;
-      r->data[i] = kpos;
-      vposlai->data[i] = logvneg->data[i] * (kpos + logGneg) / G;
+      r1[i] = logvneg_data[i] / 2.0;
+    }
+    loop_ub = logvneg->size[0];
+    if (logvneg->size[0] == r->size[0]) {
+      i = vposlai->size[0];
+      vposlai->size[0] = logvneg->size[0];
+      emxEnsureCapacity_real_T(vposlai, i);
+      vposlai_data = vposlai->data;
+      for (i = 0; i < loop_ub; i++) {
+        vposlai_data[i] = logvneg_data[i] * (r1[i] + logGneg) / G;
+      }
+    } else {
+      fd_binary_expand_op(vposlai, logvneg, r, logGneg, G);
+      vposlai_data = vposlai->data;
     }
     k = y->size[0];
     nx = 0;
     for (loop_ub = 0; loop_ub < k; loop_ub++) {
-      if (!(y->data[loop_ub] >= 0.0)) {
-        wneg->data[loop_ub] = vposlai->data[nx];
+      if (!(y_data[loop_ub] >= 0.0)) {
+        wneg_data[loop_ub] = vposlai_data[nx];
         nx++;
       }
     }
     loop_ub = logvneg->size[0];
-    i = r->size[0];
-    r->size[0] = logvneg->size[0];
-    emxEnsureCapacity_real_T(r, i);
-    for (i = 0; i < loop_ub; i++) {
-      r->data[i] = logvneg->data[i] * (r->data[i] + logG) / G;
+    if (logvneg->size[0] == r->size[0]) {
+      i = r->size[0];
+      r->size[0] = logvneg->size[0];
+      emxEnsureCapacity_real_T(r, i);
+      r1 = r->data;
+      for (i = 0; i < loop_ub; i++) {
+        r1[i] = logvneg_data[i] * (r1[i] + logG) / G;
+      }
+    } else {
+      ed_binary_expand_op(r, logvneg, logG, G);
+      r1 = r->data;
     }
     k = y->size[0];
     nx = 0;
     for (loop_ub = 0; loop_ub < k; loop_ub++) {
-      if (!(y->data[loop_ub] >= 0.0)) {
-        w->data[loop_ub] = r->data[nx];
+      if (!(y_data[loop_ub] >= 0.0)) {
+        w_data[loop_ub] = r1[nx];
         nx++;
       }
     }
@@ -829,12 +1168,17 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  Compute residual sum of squares for null (reduced) model */
   mldivide(X, vneg, r);
   mtimes(X, r, znonnegs);
-  i = znonnegs->size[0];
-  znonnegs->size[0] = vneg->size[0];
-  emxEnsureCapacity_real_T(znonnegs, i);
-  loop_ub = vneg->size[0];
-  for (i = 0; i < loop_ub; i++) {
-    znonnegs->data[i] = vneg->data[i] - znonnegs->data[i];
+  if (vneg->size[0] == znonnegs->size[0]) {
+    i = znonnegs->size[0];
+    znonnegs->size[0] = vneg->size[0];
+    emxEnsureCapacity_real_T(znonnegs, i);
+    znonnegs_data = znonnegs->data;
+    loop_ub = vneg->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      znonnegs_data[i] = vneg_data[i] - znonnegs_data[i];
+    }
+  } else {
+    b_minus(znonnegs, vneg);
   }
   /*  Sum of squares of residuals */
   if (znonnegs->size[0] == 0) {
@@ -842,7 +1186,7 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
   } else {
     kpos = b_xnrm2(znonnegs->size[0], znonnegs);
   }
-  q = kpos * kpos;
+  Glaminus1 = kpos * kpos;
   /*  Define augmented X matrix for overall constructed variable */
   if ((X->size[0] != 0) && (X->size[1] != 0)) {
     nx = X->size[0];
@@ -867,27 +1211,34 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
   Xw->size[0] = nx;
   Xw->size[1] = loop_ub + sizes_idx_1;
   emxEnsureCapacity_real_T(Xw, i);
+  vposlai_data = Xw->data;
   for (i = 0; i < loop_ub; i++) {
     for (n = 0; n < nx; n++) {
-      Xw->data[n + Xw->size[0] * i] = X->data[n + nx * i];
+      vposlai_data[n + Xw->size[0] * i] = X_data[n + nx * i];
     }
   }
   k = sizes_idx_1;
   for (i = 0; i < k; i++) {
     for (n = 0; n < nx; n++) {
-      Xw->data[n + Xw->size[0] * loop_ub] = w->data[n];
+      vposlai_data[n + Xw->size[0] * loop_ub] = w_data[n];
     }
   }
   emxFree_real_T(&w);
   /*  New code */
   mldivide(Xw, vneg, vposlai);
+  vposlai_data = vposlai->data;
   mtimes(Xw, vposlai, znonnegs);
-  i = znonnegs->size[0];
-  znonnegs->size[0] = vneg->size[0];
-  emxEnsureCapacity_real_T(znonnegs, i);
-  loop_ub = vneg->size[0];
-  for (i = 0; i < loop_ub; i++) {
-    znonnegs->data[i] = vneg->data[i] - znonnegs->data[i];
+  if (vneg->size[0] == znonnegs->size[0]) {
+    i = znonnegs->size[0];
+    znonnegs->size[0] = vneg->size[0];
+    emxEnsureCapacity_real_T(znonnegs, i);
+    znonnegs_data = znonnegs->data;
+    loop_ub = vneg->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      znonnegs_data[i] = vneg_data[i] - znonnegs_data[i];
+    }
+  } else {
+    b_minus(znonnegs, vneg);
   }
   /*  Sum of squares of residuals */
   if (znonnegs->size[0] == 0) {
@@ -896,17 +1247,17 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
     kpos = b_xnrm2(znonnegs->size[0], znonnegs);
   }
   kpos *= kpos;
-  Glaminus1 = vposlai->data[vposlai->size[0] - 1];
-  if (vposlai->data[vposlai->size[0] - 1] < 0.0) {
-    Glaminus1 = -1.0;
-  } else if (vposlai->data[vposlai->size[0] - 1] > 0.0) {
-    Glaminus1 = 1.0;
-  } else if (vposlai->data[vposlai->size[0] - 1] == 0.0) {
-    Glaminus1 = 0.0;
+  G = vposlai_data[vposlai->size[0] - 1];
+  if (vposlai_data[vposlai->size[0] - 1] < 0.0) {
+    G = -1.0;
+  } else if (vposlai_data[vposlai->size[0] - 1] > 0.0) {
+    G = 1.0;
+  } else if (vposlai_data[vposlai->size[0] - 1] == 0.0) {
+    G = 0.0;
   }
   outSC_Score_data[0] =
-      -Glaminus1 *
-      sqrt((q - kpos) / (kpos / ((double)(X->size[0] - X->size[1]) - 1.0)));
+      -G * sqrt((Glaminus1 - kpos) /
+                (kpos / ((double)(X->size[0] - X->size[1]) - 1.0)));
   /*  if vpos is empty all the observations are negative */
   if (vposboo) {
     /*  Define augmented X matrix */
@@ -932,15 +1283,16 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
     Xw->size[0] = nx;
     Xw->size[1] = loop_ub + sizes_idx_1;
     emxEnsureCapacity_real_T(Xw, i);
+    vposlai_data = Xw->data;
     for (i = 0; i < loop_ub; i++) {
       for (n = 0; n < nx; n++) {
-        Xw->data[n + Xw->size[0] * i] = X->data[n + nx * i];
+        vposlai_data[n + Xw->size[0] * i] = X_data[n + nx * i];
       }
     }
     k = sizes_idx_1;
     for (i = 0; i < k; i++) {
       for (n = 0; n < nx; n++) {
-        Xw->data[n + Xw->size[0] * loop_ub] = vpos->data[n];
+        vposlai_data[n + Xw->size[0] * loop_ub] = vpos_data[n];
       }
     }
     /*  OLD slow code */
@@ -956,13 +1308,19 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
     /*          Sc(i,1) = -beta(end)/se(end); */
     /*  New code */
     mldivide(Xw, vneg, vposlai);
+    vposlai_data = vposlai->data;
     mtimes(Xw, vposlai, znonnegs);
-    i = znonnegs->size[0];
-    znonnegs->size[0] = vneg->size[0];
-    emxEnsureCapacity_real_T(znonnegs, i);
-    loop_ub = vneg->size[0];
-    for (i = 0; i < loop_ub; i++) {
-      znonnegs->data[i] = vneg->data[i] - znonnegs->data[i];
+    if (vneg->size[0] == znonnegs->size[0]) {
+      i = znonnegs->size[0];
+      znonnegs->size[0] = vneg->size[0];
+      emxEnsureCapacity_real_T(znonnegs, i);
+      znonnegs_data = znonnegs->data;
+      loop_ub = vneg->size[0];
+      for (i = 0; i < loop_ub; i++) {
+        znonnegs_data[i] = vneg_data[i] - znonnegs_data[i];
+      }
+    } else {
+      b_minus(znonnegs, vneg);
     }
     /*  Sum of squares of residuals */
     if (znonnegs->size[0] == 0) {
@@ -971,17 +1329,17 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
       kpos = b_xnrm2(znonnegs->size[0], znonnegs);
     }
     kpos *= kpos;
-    Glaminus1 = vposlai->data[vposlai->size[0] - 1];
-    if (vposlai->data[vposlai->size[0] - 1] < 0.0) {
-      Glaminus1 = -1.0;
-    } else if (vposlai->data[vposlai->size[0] - 1] > 0.0) {
-      Glaminus1 = 1.0;
-    } else if (vposlai->data[vposlai->size[0] - 1] == 0.0) {
-      Glaminus1 = 0.0;
+    G = vposlai_data[vposlai->size[0] - 1];
+    if (vposlai_data[vposlai->size[0] - 1] < 0.0) {
+      G = -1.0;
+    } else if (vposlai_data[vposlai->size[0] - 1] > 0.0) {
+      G = 1.0;
+    } else if (vposlai_data[vposlai->size[0] - 1] == 0.0) {
+      G = 0.0;
     }
     outSC_Score_data[1] =
-        -Glaminus1 *
-        sqrt((q - kpos) / (kpos / ((double)(X->size[0] - X->size[1]) - 1.0)));
+        -G * sqrt((Glaminus1 - kpos) /
+                  (kpos / ((double)(X->size[0] - X->size[1]) - 1.0)));
   } else {
     outSC_Score_data[1] = rtNaN;
   }
@@ -1010,15 +1368,16 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
     Xw->size[0] = nx;
     Xw->size[1] = loop_ub + sizes_idx_1;
     emxEnsureCapacity_real_T(Xw, i);
+    vposlai_data = Xw->data;
     for (i = 0; i < loop_ub; i++) {
       for (n = 0; n < nx; n++) {
-        Xw->data[n + Xw->size[0] * i] = X->data[n + nx * i];
+        vposlai_data[n + Xw->size[0] * i] = X_data[n + nx * i];
       }
     }
     k = sizes_idx_1;
     for (i = 0; i < k; i++) {
       for (n = 0; n < nx; n++) {
-        Xw->data[n + Xw->size[0] * loop_ub] = wneg->data[n];
+        vposlai_data[n + Xw->size[0] * loop_ub] = wneg_data[n];
       }
     }
     /*  OLD slow code */
@@ -1034,13 +1393,19 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
     /*          Sc(i,2) = -beta(end)/se(end); */
     /*  New code */
     mldivide(Xw, vneg, vposlai);
+    vposlai_data = vposlai->data;
     mtimes(Xw, vposlai, znonnegs);
-    i = znonnegs->size[0];
-    znonnegs->size[0] = vneg->size[0];
-    emxEnsureCapacity_real_T(znonnegs, i);
-    loop_ub = vneg->size[0];
-    for (i = 0; i < loop_ub; i++) {
-      znonnegs->data[i] = vneg->data[i] - znonnegs->data[i];
+    if (vneg->size[0] == znonnegs->size[0]) {
+      i = znonnegs->size[0];
+      znonnegs->size[0] = vneg->size[0];
+      emxEnsureCapacity_real_T(znonnegs, i);
+      znonnegs_data = znonnegs->data;
+      loop_ub = vneg->size[0];
+      for (i = 0; i < loop_ub; i++) {
+        znonnegs_data[i] = vneg_data[i] - znonnegs_data[i];
+      }
+    } else {
+      b_minus(znonnegs, vneg);
     }
     /*  Sum of squares of residuals */
     if (znonnegs->size[0] == 0) {
@@ -1049,17 +1414,16 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
       kpos = b_xnrm2(znonnegs->size[0], znonnegs);
     }
     kpos *= kpos;
-    Glaminus1 = vposlai->data[vposlai->size[0] - 1];
-    if (vposlai->data[vposlai->size[0] - 1] < 0.0) {
-      Glaminus1 = -1.0;
-    } else if (vposlai->data[vposlai->size[0] - 1] > 0.0) {
-      Glaminus1 = 1.0;
-    } else if (vposlai->data[vposlai->size[0] - 1] == 0.0) {
-      Glaminus1 = 0.0;
+    G = vposlai_data[vposlai->size[0] - 1];
+    if (vposlai_data[vposlai->size[0] - 1] < 0.0) {
+      G = -1.0;
+    } else if (vposlai_data[vposlai->size[0] - 1] > 0.0) {
+      G = 1.0;
+    } else if (vposlai_data[vposlai->size[0] - 1] == 0.0) {
+      G = 0.0;
     }
-    kpos =
-        -Glaminus1 *
-        sqrt((q - kpos) / (kpos / ((double)(X->size[0] - X->size[1]) - 1.0)));
+    kpos = -G * sqrt((Glaminus1 - kpos) /
+                     (kpos / ((double)(X->size[0] - X->size[1]) - 1.0)));
     outSC_Score_data[2] = kpos;
   } else {
     kpos = rtNaN;
@@ -1100,28 +1464,34 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
     n = loop_ub + sizes_idx_1;
     Xw->size[1] = n + i1;
     emxEnsureCapacity_real_T(Xw, i);
+    vposlai_data = Xw->data;
     for (i = 0; i < loop_ub; i++) {
       for (i2 = 0; i2 < nx; i2++) {
-        Xw->data[i2 + Xw->size[0] * i] = X->data[i2 + nx * i];
+        vposlai_data[i2 + Xw->size[0] * i] = X_data[i2 + nx * i];
       }
     }
     k = sizes_idx_1;
     for (i = 0; i < k; i++) {
       for (i2 = 0; i2 < nx; i2++) {
-        Xw->data[i2 + Xw->size[0] * loop_ub] = vpos->data[i2];
+        vposlai_data[i2 + Xw->size[0] * loop_ub] = vpos_data[i2];
       }
     }
     loop_ub = i1;
     for (i = 0; i < loop_ub; i++) {
       for (i2 = 0; i2 < nx; i2++) {
-        Xw->data[i2 + Xw->size[0] * n] = wneg->data[i2];
+        vposlai_data[i2 + Xw->size[0] * n] = wneg_data[i2];
       }
     }
     mldivide(Xw, vneg, r);
     mtimes(Xw, r, vposlai);
-    loop_ub = vneg->size[0];
-    for (i = 0; i < loop_ub; i++) {
-      vneg->data[i] -= vposlai->data[i];
+    vposlai_data = vposlai->data;
+    if (vneg->size[0] == vposlai->size[0]) {
+      loop_ub = vneg->size[0];
+      for (i = 0; i < loop_ub; i++) {
+        vneg_data[i] -= vposlai_data[i];
+      }
+    } else {
+      c_minus(vneg, vposlai);
     }
     /*  Sum of squares of residuals */
     if (vneg->size[0] == 0) {
@@ -1130,8 +1500,8 @@ void ScoreYJall(const emxArray_real_T *y, const emxArray_real_T *X,
       kpos = b_xnrm2(vneg->size[0], vneg);
     }
     kpos *= kpos;
-    outSC_Score_data[3] =
-        (q - kpos) / 2.0 / (kpos / ((double)(X->size[0] - X->size[1]) - 2.0));
+    outSC_Score_data[3] = (Glaminus1 - kpos) / 2.0 /
+                          (kpos / ((double)(X->size[0] - X->size[1]) - 2.0));
   } else if (vposboo) {
     /*  If there are just positive observations F test is the square of */
     /*  the t test for positive */

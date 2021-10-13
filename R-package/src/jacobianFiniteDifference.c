@@ -30,6 +30,9 @@ bool b_jacobianFiniteDifference(emxArray_real_T *augJacobian,
   emxArray_real_T *JacCeqTrans;
   emxArray_real_T *a__3;
   i_struct_T b_FiniteDifferences;
+  const double *x_data;
+  double *JacCeqTrans_data;
+  double *augJacobian_data;
   int b_loop_ub;
   int exitg1;
   int i;
@@ -37,6 +40,8 @@ bool b_jacobianFiniteDifference(emxArray_real_T *augJacobian,
   int loop_ub;
   bool b_bool;
   bool evalOK;
+  x_data = x->data;
+  augJacobian_data = augJacobian->data;
   emxInit_real_T(&JacCeqTrans, 2);
   emxInit_real_T(&a__3, 1);
   emxInitStruct_struct_T3(&b_FiniteDifferences);
@@ -47,13 +52,15 @@ bool b_jacobianFiniteDifference(emxArray_real_T *augJacobian,
   i = a__3->size[0];
   a__3->size[0] = x->size[0];
   emxEnsureCapacity_real_T(a__3, i);
+  JacCeqTrans_data = a__3->data;
   loop_ub = x->size[0];
   for (i = 0; i < loop_ub; i++) {
-    a__3->data[i] = x->data[i];
+    JacCeqTrans_data[i] = x_data[i];
   }
   emxCopyStruct_struct_T(&b_FiniteDifferences, FiniteDifferences);
   evalOK = computeFiniteDifferences(&b_FiniteDifferences, fCurrent, a__3,
                                     JacCeqTrans, x->size[0]);
+  JacCeqTrans_data = JacCeqTrans->data;
   b_bool = false;
   loop_ub = 0;
   emxFree_real_T(&a__3);
@@ -98,8 +105,8 @@ bool b_jacobianFiniteDifference(emxArray_real_T *augJacobian,
   for (i = 0; i < loop_ub; i++) {
     b_loop_ub = JacCeqTrans->size[1];
     for (i1 = 0; i1 < b_loop_ub; i1++) {
-      augJacobian->data[i1 + augJacobian->size[0] * i] =
-          JacCeqTrans->data[i + JacCeqTrans->size[0] * i1];
+      augJacobian_data[i1 + augJacobian->size[0] * i] =
+          JacCeqTrans_data[i + JacCeqTrans->size[0] * i1];
     }
   }
   emxFree_real_T(&JacCeqTrans);
@@ -119,12 +126,17 @@ void jacobianFiniteDifference(emxArray_real_T *augJacobian,
   emxArray_real_T *JacCeqTrans;
   emxArray_real_T *a__3;
   i_struct_T b_FiniteDifferences;
+  const double *x_data;
+  double *JacCeqTrans_data;
+  double *augJacobian_data;
   int b_loop_ub;
   int exitg1;
   int i;
   int i1;
   int loop_ub;
   bool b_bool;
+  x_data = x->data;
+  augJacobian_data = augJacobian->data;
   emxInit_real_T(&JacCeqTrans, 2);
   emxInit_real_T(&a__3, 1);
   emxInitStruct_struct_T3(&b_FiniteDifferences);
@@ -136,13 +148,15 @@ void jacobianFiniteDifference(emxArray_real_T *augJacobian,
   i = a__3->size[0];
   a__3->size[0] = x->size[0];
   emxEnsureCapacity_real_T(a__3, i);
+  JacCeqTrans_data = a__3->data;
   loop_ub = x->size[0];
   for (i = 0; i < loop_ub; i++) {
-    a__3->data[i] = x->data[i];
+    JacCeqTrans_data[i] = x_data[i];
   }
   emxCopyStruct_struct_T(&b_FiniteDifferences, FiniteDifferences);
   *evalOK = computeFiniteDifferences(&b_FiniteDifferences, fCurrent, a__3,
                                      JacCeqTrans, x->size[0]);
+  JacCeqTrans_data = JacCeqTrans->data;
   emxCopyStruct_struct_T(FiniteDifferences, &b_FiniteDifferences);
   b_bool = false;
   loop_ub = 0;
@@ -188,8 +202,8 @@ void jacobianFiniteDifference(emxArray_real_T *augJacobian,
   for (i = 0; i < loop_ub; i++) {
     b_loop_ub = JacCeqTrans->size[1];
     for (i1 = 0; i1 < b_loop_ub; i1++) {
-      augJacobian->data[i1 + augJacobian->size[0] * i] =
-          JacCeqTrans->data[i + JacCeqTrans->size[0] * i1];
+      augJacobian_data[i1 + augJacobian->size[0] * i] =
+          JacCeqTrans_data[i + JacCeqTrans->size[0] * i1];
     }
   }
   emxFree_real_T(&JacCeqTrans);

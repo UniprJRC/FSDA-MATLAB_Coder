@@ -24,8 +24,7 @@
 
 /* Function Definitions */
 void linearLeastSquares(emxArray_real_T *lhs, emxArray_real_T *rhs,
-                        const emxArray_real_T *dx, int m, int n,
-                        emxArray_real_T *b_dx)
+                        emxArray_real_T *dx, int m, int n)
 {
   emxArray_int32_T *jpvt;
   emxArray_real_T *tau;
@@ -35,6 +34,10 @@ void linearLeastSquares(emxArray_real_T *lhs, emxArray_real_T *rhs,
   double d;
   double s;
   double temp;
+  double *lhs_data;
+  double *tau_data;
+  double *vn2_data;
+  double *work_data;
   int b_i;
   int i;
   int ii;
@@ -49,21 +52,24 @@ void linearLeastSquares(emxArray_real_T *lhs, emxArray_real_T *rhs,
   int nfxd;
   int nmi;
   int temp_tmp;
+  int *jpvt_data;
+  lhs_data = lhs->data;
   emxInit_int32_T(&jpvt, 1);
   i = jpvt->size[0];
   jpvt->size[0] = n;
   emxEnsureCapacity_int32_T(jpvt, i);
+  jpvt_data = jpvt->data;
   for (i = 0; i < n; i++) {
-    jpvt->data[i] = 0;
+    jpvt_data[i] = 0;
   }
   emxInit_real_T(&tau, 1);
   ma = lhs->size[0];
   ij = lhs->size[0];
   minmana = lhs->size[1];
-  if (ij < minmana) {
+  if (ij <= minmana) {
     minmana = ij;
   }
-  if (m < n) {
+  if (m <= n) {
     minmn_tmp = m;
   } else {
     minmn_tmp = n;
@@ -71,72 +77,78 @@ void linearLeastSquares(emxArray_real_T *lhs, emxArray_real_T *rhs,
   i = tau->size[0];
   tau->size[0] = minmana;
   emxEnsureCapacity_real_T(tau, i);
+  tau_data = tau->data;
   for (i = 0; i < minmana; i++) {
-    tau->data[i] = 0.0;
+    tau_data[i] = 0.0;
   }
   emxInit_real_T(&work, 1);
   emxInit_real_T(&vn1, 1);
   emxInit_real_T(&vn2, 1);
   if ((lhs->size[0] == 0) || (lhs->size[1] == 0) || (minmn_tmp < 1)) {
     for (ii = 0; ii < n; ii++) {
-      jpvt->data[ii] = ii + 1;
+      jpvt_data[ii] = ii + 1;
     }
   } else {
     nfxd = 0;
     for (ii = 0; ii < n; ii++) {
-      if (jpvt->data[ii] != 0) {
+      if (jpvt_data[ii] != 0) {
         nfxd++;
         if (ii + 1 != nfxd) {
           ix = ii * ma;
           minmana = (nfxd - 1) * ma;
           for (k = 0; k < m; k++) {
             temp_tmp = ix + k;
-            temp = lhs->data[temp_tmp];
+            temp = lhs_data[temp_tmp];
             i = minmana + k;
-            lhs->data[temp_tmp] = lhs->data[i];
-            lhs->data[i] = temp;
+            lhs_data[temp_tmp] = lhs_data[i];
+            lhs_data[i] = temp;
           }
-          jpvt->data[ii] = jpvt->data[nfxd - 1];
-          jpvt->data[nfxd - 1] = ii + 1;
+          jpvt_data[ii] = jpvt_data[nfxd - 1];
+          jpvt_data[nfxd - 1] = ii + 1;
         } else {
-          jpvt->data[ii] = ii + 1;
+          jpvt_data[ii] = ii + 1;
         }
       } else {
-        jpvt->data[ii] = ii + 1;
+        jpvt_data[ii] = ii + 1;
       }
     }
-    if (nfxd >= minmn_tmp) {
+    if (nfxd > minmn_tmp) {
       nfxd = minmn_tmp;
     }
     qrf(lhs, m, n, nfxd, tau);
+    tau_data = tau->data;
+    lhs_data = lhs->data;
     if (nfxd < minmn_tmp) {
       ma = lhs->size[0];
       i = work->size[0];
       work->size[0] = lhs->size[1];
       emxEnsureCapacity_real_T(work, i);
+      work_data = work->data;
       ij = lhs->size[1];
       for (i = 0; i < ij; i++) {
-        work->data[i] = 0.0;
+        work_data[i] = 0.0;
       }
       i = vn1->size[0];
       vn1->size[0] = lhs->size[1];
       emxEnsureCapacity_real_T(vn1, i);
+      work_data = vn1->data;
       ij = lhs->size[1];
       for (i = 0; i < ij; i++) {
-        vn1->data[i] = 0.0;
+        work_data[i] = 0.0;
       }
       i = vn2->size[0];
       vn2->size[0] = lhs->size[1];
       emxEnsureCapacity_real_T(vn2, i);
+      vn2_data = vn2->data;
       ij = lhs->size[1];
       for (i = 0; i < ij; i++) {
-        vn2->data[i] = 0.0;
+        vn2_data[i] = 0.0;
       }
       i = nfxd + 1;
       for (ii = i; ii <= n; ii++) {
         d = xnrm2(m - nfxd, lhs, (nfxd + (ii - 1) * ma) + 1);
-        vn1->data[ii - 1] = d;
-        vn2->data[ii - 1] = d;
+        work_data[ii - 1] = d;
+        vn2_data[ii - 1] = d;
       }
       for (b_i = i; b_i <= minmn_tmp; b_i++) {
         ip1 = b_i + 1;
@@ -149,9 +161,9 @@ void linearLeastSquares(emxArray_real_T *lhs, emxArray_real_T *rhs,
         } else {
           minmana = -1;
           if (nmi > 1) {
-            temp = fabs(vn1->data[b_i - 1]);
+            temp = fabs(work_data[b_i - 1]);
             for (k = 2; k <= nmi; k++) {
-              s = fabs(vn1->data[(b_i + k) - 2]);
+              s = fabs(work_data[(b_i + k) - 2]);
               if (s > temp) {
                 minmana = k - 2;
                 temp = s;
@@ -164,54 +176,56 @@ void linearLeastSquares(emxArray_real_T *lhs, emxArray_real_T *rhs,
           ix = nfxd * ma;
           for (k = 0; k < m; k++) {
             temp_tmp = ix + k;
-            temp = lhs->data[temp_tmp];
+            temp = lhs_data[temp_tmp];
             minmana = ij + k;
-            lhs->data[temp_tmp] = lhs->data[minmana];
-            lhs->data[minmana] = temp;
+            lhs_data[temp_tmp] = lhs_data[minmana];
+            lhs_data[minmana] = temp;
           }
-          minmana = jpvt->data[nfxd];
-          jpvt->data[nfxd] = jpvt->data[b_i - 1];
-          jpvt->data[b_i - 1] = minmana;
-          vn1->data[nfxd] = vn1->data[b_i - 1];
-          vn2->data[nfxd] = vn2->data[b_i - 1];
+          minmana = jpvt_data[nfxd];
+          jpvt_data[nfxd] = jpvt_data[b_i - 1];
+          jpvt_data[b_i - 1] = minmana;
+          work_data[nfxd] = work_data[b_i - 1];
+          vn2_data[nfxd] = vn2_data[b_i - 1];
         }
         if (b_i < m) {
-          temp = lhs->data[ii];
+          temp = lhs_data[ii];
           d = b_xzlarfg(mmi + 1, &temp, lhs, ii + 2);
-          tau->data[b_i - 1] = d;
-          lhs->data[ii] = temp;
+          lhs_data = lhs->data;
+          tau_data[b_i - 1] = d;
+          lhs_data[ii] = temp;
         } else {
           d = 0.0;
-          tau->data[b_i - 1] = 0.0;
+          tau_data[b_i - 1] = 0.0;
         }
         if (b_i < n) {
-          temp = lhs->data[ii];
-          lhs->data[ii] = 1.0;
+          temp = lhs_data[ii];
+          lhs_data[ii] = 1.0;
           xzlarf(mmi + 1, nmi - 1, ii + 1, d, lhs, (ii + ma) + 1, ma, work);
-          lhs->data[ii] = temp;
+          lhs_data = lhs->data;
+          lhs_data[ii] = temp;
         }
         for (ii = ip1; ii <= n; ii++) {
           ij = b_i + (ii - 1) * ma;
-          d = vn1->data[ii - 1];
+          d = work_data[ii - 1];
           if (d != 0.0) {
-            temp = fabs(lhs->data[ij - 1]) / d;
+            temp = fabs(lhs_data[ij - 1]) / d;
             temp = 1.0 - temp * temp;
             if (temp < 0.0) {
               temp = 0.0;
             }
-            s = d / vn2->data[ii - 1];
+            s = d / vn2_data[ii - 1];
             s = temp * (s * s);
             if (s <= 1.4901161193847656E-8) {
               if (b_i < m) {
                 d = xnrm2(mmi, lhs, ij + 1);
-                vn1->data[ii - 1] = d;
-                vn2->data[ii - 1] = d;
+                work_data[ii - 1] = d;
+                vn2_data[ii - 1] = d;
               } else {
-                vn1->data[ii - 1] = 0.0;
-                vn2->data[ii - 1] = 0.0;
+                work_data[ii - 1] = 0.0;
+                vn2_data[ii - 1] = 0.0;
               }
             } else {
-              vn1->data[ii - 1] = d * sqrt(temp);
+              work_data[ii - 1] = d * sqrt(temp);
             }
           }
         }
@@ -222,38 +236,40 @@ void linearLeastSquares(emxArray_real_T *lhs, emxArray_real_T *rhs,
   emxFree_real_T(&vn1);
   emxFree_real_T(&work);
   xunormqr(lhs, rhs, tau);
+  work_data = rhs->data;
   if (1 > n) {
     ij = 0;
   } else {
     ij = n;
   }
-  i = tau->size[0];
-  tau->size[0] = ij;
-  emxEnsureCapacity_real_T(tau, i);
+  i = dx->size[0];
+  dx->size[0] = ij;
+  emxEnsureCapacity_real_T(dx, i);
+  vn2_data = dx->data;
   for (i = 0; i < ij; i++) {
-    tau->data[i] = rhs->data[i];
+    vn2_data[i] = work_data[i];
   }
   if ((lhs->size[0] != 0) && (lhs->size[1] != 0) && (ij != 0) && (n != 0)) {
     for (ii = n; ii >= 1; ii--) {
       ij = (ii + (ii - 1) * m) - 1;
-      tau->data[ii - 1] /= lhs->data[ij];
+      vn2_data[ii - 1] /= lhs_data[ij];
       for (b_i = 0; b_i <= ii - 2; b_i++) {
         ix = (ii - b_i) - 2;
-        tau->data[ix] -= tau->data[ii - 1] * lhs->data[(ij - b_i) - 1];
+        vn2_data[ix] -= vn2_data[ii - 1] * lhs_data[(ij - b_i) - 1];
       }
     }
   }
-  i = b_dx->size[0] * b_dx->size[1];
-  b_dx->size[0] = dx->size[0];
-  b_dx->size[1] = 1;
-  emxEnsureCapacity_real_T(b_dx, i);
+  i = tau->size[0];
+  tau->size[0] = dx->size[0];
+  emxEnsureCapacity_real_T(tau, i);
+  tau_data = tau->data;
   ij = dx->size[0];
   for (i = 0; i < ij; i++) {
-    b_dx->data[i] = tau->data[i];
+    tau_data[i] = vn2_data[i];
   }
-  ij = jpvt->size[0];
+  ij = tau->size[0];
   for (i = 0; i < ij; i++) {
-    b_dx->data[jpvt->data[i] - 1] = tau->data[i];
+    vn2_data[jpvt_data[i] - 1] = tau_data[i];
   }
   emxFree_real_T(&tau);
   emxFree_int32_T(&jpvt);

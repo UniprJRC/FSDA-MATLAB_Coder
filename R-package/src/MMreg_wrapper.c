@@ -14,6 +14,8 @@
 #include "HAeff.h"
 #include "HAwei.h"
 #include "HYPwei.h"
+#include "MMreg.h"
+#include "MMregcore.h"
 #include "OPTeff.h"
 #include "OPTwei.h"
 #include "Sreg.h"
@@ -23,6 +25,7 @@
 #include "bsxfun.h"
 #include "cat.h"
 #include "chi2inv.h"
+#include "chkinputR.h"
 #include "find.h"
 #include "fsdaC_data.h"
 #include "fsdaC_emxutil.h"
@@ -58,34 +61,43 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   static const char b_cv1[3] = {'O', 'P', 'T'};
   static const char b_cv[2] = {'T', 'B'};
   static const char cv2[2] = {'H', 'A'};
-  emxArray_boolean_T *b_constcols;
-  emxArray_boolean_T *c_y;
-  emxArray_boolean_T *na_X;
-  emxArray_boolean_T *na_y;
+  emxArray_boolean_T *c_constcols;
+  emxArray_boolean_T *ok;
+  emxArray_boolean_T *r1;
+  emxArray_boolean_T *r3;
+  emxArray_boolean_T *r5;
   emxArray_char_T_1x310 c_out;
-  emxArray_int32_T *c_constcols;
+  emxArray_int32_T *b_constcols;
   emxArray_int32_T *r;
-  emxArray_int32_T *r1;
-  emxArray_int32_T *r3;
+  emxArray_int32_T *r7;
+  emxArray_int32_T *r9;
   emxArray_real_T *b1;
   emxArray_real_T *b_out;
   emxArray_real_T *b_y;
   emxArray_real_T *c;
+  emxArray_real_T *c_y;
   emxArray_real_T *constcols;
-  emxArray_real_T *d_y;
-  emxArray_real_T *r2;
+  emxArray_real_T *r8;
   j_struct_T Sresult;
   double varargin_1[50];
   double row[5];
   double b_varargin_1[3];
+  const double *Srhofuncparam_data;
+  const double *X_data;
+  const double *rhofuncparam_data;
+  const double *y_data;
   double A2=0;
   double B2=0;
   double F;
   double c2=0;
-  double crit;
   double d2=0;
   double diffk;
+  double iter;
   double ss;
+  double *b1_data;
+  double *b_y_data;
+  double *c_data;
+  double *constcols_data;
   int psifunc_class_size[2];
   int b_i;
   int exitg1;
@@ -94,11 +106,24 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   int loop_ub;
   int nx;
   int trueCount;
+  int *b_constcols_data;
   char psifunc_class_data[3];
+  const char *Srhofunc_data;
+  const char *rhofunc_data;
   bool b_bool;
+  bool *ok_data;
+  bool *r2;
+  bool *r4;
+  bool *r6;
   if (!isInitialized_fsdaC) {
     fsdaC_initialize();
   }
+  Srhofuncparam_data = Srhofuncparam->data;
+  Srhofunc_data = Srhofunc->data;
+  rhofuncparam_data = rhofuncparam->data;
+  rhofunc_data = rhofunc->data;
+  X_data = X->data;
+  y_data = y->data;
   /*  wrapper function for MMreg. NV pair names are not taken as */
   /*  inputs. Instead, just the values are taken as inputs. */
   /*  Required input arguments */
@@ -152,8 +177,6 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*        automatically be excluded from the computations. */
   /*  */
   /*   Optional input arguments: */
-  /*  */
-  /*  */
   /*  */
   /*      conflev :  Confidence level which is */
   /*                used to declare units as outliers. Scalar. */
@@ -210,7 +233,6 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                Example - 'msg',1 */
   /*                Data Types - double */
   /*  */
-  /*  */
   /*        nocheck : Check input arguments. Boolean. If nocheck is equal to */
   /*                true no check is performed on matrix y and matrix X. Notice
    */
@@ -249,7 +271,6 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                  Example - 'rhofunc','optimal' */
   /*                  Data Types - char */
   /*  */
-  /*  */
   /*  rhofuncparam: Additional parameters for the specified rho function. */
   /*                Scalar or vector. */
   /*                For hyperbolic rho function it is possible to set up the */
@@ -277,13 +298,11 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                Example - 'Snsamp',1000 */
   /*                Data Types - single | double */
   /*  */
-  /*  */
   /*        tol    : Tolerance. Scalar. */
   /*                  Scalar controlling tolerance in the MM loop. */
   /*                  Default value is 1e-7 */
   /*                  Example - 'tol',1e-10 */
   /*                  Data Types - double */
-  /*  */
   /*  */
   /*        yxsave : the response vector y and data matrix X are saved into the
    * output */
@@ -291,7 +310,6 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                Default is 0, i.e. no saving is done. */
   /*                Example - 'yxsave',1 */
   /*                Data Types - double */
-  /*  */
   /*  */
   /*        plots : Plot on the screen. Scalar or structure. */
   /*                If plots = 1, generates a plot with the robust residuals */
@@ -305,7 +323,6 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                  Data Types - single | double */
   /*  */
   /*   Output: */
-  /*  */
   /*  */
   /*   out :     A structure containing the following fields: */
   /*        out.beta        =   p x 1 vector containing MM estimate of */
@@ -361,14 +378,12 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                            yxsave is set to 1. */
   /*        out.class       =   'MMreg' */
   /*  */
-  /*  */
   /*   Optional Output: */
   /*  */
   /*             C        : matrix containing the indices of the subsamples */
   /*                        extracted for computing the estimate (the so called
    */
   /*                        elemental sets). */
-  /*  */
   /*  */
   /*  See also: Sreg */
   /*  */
@@ -391,7 +406,6 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('MMreg')">Link to the help page for this
    * function</a> */
@@ -531,15 +545,16 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   emxEnsureCapacity_real_T(out->X, i);
   loop_ub = X->size[0] * X->size[1];
   for (i = 0; i < loop_ub; i++) {
-    out->X->data[i] = X->data[i];
+    out->X->data[i] = X_data[i];
   }
   emxInit_real_T(&b_y, 1);
   i = b_y->size[0];
   b_y->size[0] = y->size[0];
   emxEnsureCapacity_real_T(b_y, i);
+  b_y_data = b_y->data;
   loop_ub = y->size[0];
   for (i = 0; i < loop_ub; i++) {
-    b_y->data[i] = y->data[i];
+    b_y_data[i] = y_data[i];
   }
   /* chkinputR makes some input parameters and user options checking in
    * regression */
@@ -564,7 +579,6 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                specified for the */
   /*                caller function. */
   /*  */
-  /*  */
   /*   Optional input arguments: */
   /*  */
   /*  Output: */
@@ -579,7 +593,6 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                rows after listwise exclusion. */
   /*  p:            Number of columns of X (variables). Scalar. */
   /*                Number of parameters to be estimated. */
-  /*  */
   /*  */
   /*  More About: */
   /*  */
@@ -601,8 +614,6 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
-  /*  */
   /*  */
   /* $LastChangedDate::                      $: Date of the last commit */
   /*  */
@@ -626,11 +637,12 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  chkint is the position of the option intercept in vector chklist */
   /*  chkint = strmatch('intercept',chklist,'exact'); */
   /*  If nocheck=true, then skip checks on y and X */
-  emxInit_boolean_T(&na_y, 1);
+  emxInit_boolean_T(&ok, 1);
   emxInit_real_T(&constcols, 2);
+  constcols_data = constcols->data;
   emxInit_int32_T(&r, 1);
   emxInit_real_T(&b1, 1);
-  emxInit_boolean_T(&c_y, 1);
+  emxInit_boolean_T(&r1, 1);
   emxInit_real_T(&b_out, 2);
   if (!nocheck) {
     /*  The first argument which is passed is y */
@@ -639,66 +651,74 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     i = b1->size[0];
     b1->size[0] = X->size[1];
     emxEnsureCapacity_real_T(b1, i);
+    b1_data = b1->data;
     loop_ub = X->size[1];
     for (i = 0; i < loop_ub; i++) {
-      b1->data[i] = 1.0;
+      b1_data[i] = 1.0;
     }
     mtimes(X, b1, b_y);
-    i = na_y->size[0];
-    na_y->size[0] = b_y->size[0];
-    emxEnsureCapacity_boolean_T(na_y, i);
-    loop_ub = b_y->size[0];
-    for (i = 0; i < loop_ub; i++) {
-      na_y->data[i] = rtIsInf(b_y->data[i]);
-    }
-    i = c_y->size[0];
-    c_y->size[0] = b_y->size[0];
-    emxEnsureCapacity_boolean_T(c_y, i);
-    loop_ub = b_y->size[0];
-    for (i = 0; i < loop_ub; i++) {
-      c_y->data[i] = rtIsNaN(b_y->data[i]);
-    }
-    emxInit_boolean_T(&na_X, 1);
-    i = na_X->size[0];
-    na_X->size[0] = na_y->size[0];
-    emxEnsureCapacity_boolean_T(na_X, i);
-    loop_ub = na_y->size[0];
-    for (i = 0; i < loop_ub; i++) {
-      na_X->data[i] = (na_y->data[i] || c_y->data[i]);
-    }
-    i = na_y->size[0];
-    na_y->size[0] = y->size[0];
-    emxEnsureCapacity_boolean_T(na_y, i);
-    loop_ub = y->size[0];
-    for (i = 0; i < loop_ub; i++) {
-      na_y->data[i] = rtIsInf(y->data[i]);
-    }
-    i = c_y->size[0];
-    c_y->size[0] = y->size[0];
-    emxEnsureCapacity_boolean_T(c_y, i);
-    loop_ub = y->size[0];
-    for (i = 0; i < loop_ub; i++) {
-      c_y->data[i] = rtIsNaN(y->data[i]);
-    }
-    loop_ub = na_y->size[0];
-    for (i = 0; i < loop_ub; i++) {
-      na_y->data[i] = (na_y->data[i] || c_y->data[i]);
-    }
+    b_y_data = b_y->data;
     /*  Observations with missing or infinite values are removed from X and y */
-    loop_ub = na_X->size[0] - 1;
+    i = ok->size[0];
+    ok->size[0] = b_y->size[0];
+    emxEnsureCapacity_boolean_T(ok, i);
+    ok_data = ok->data;
+    loop_ub = b_y->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      ok_data[i] = rtIsInf(b_y_data[i]);
+    }
+    i = r1->size[0];
+    r1->size[0] = b_y->size[0];
+    emxEnsureCapacity_boolean_T(r1, i);
+    r2 = r1->data;
+    loop_ub = b_y->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      r2[i] = rtIsNaN(b_y_data[i]);
+    }
+    emxInit_boolean_T(&r3, 1);
+    i = r3->size[0];
+    r3->size[0] = y->size[0];
+    emxEnsureCapacity_boolean_T(r3, i);
+    r4 = r3->data;
+    loop_ub = y->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      r4[i] = rtIsInf(y_data[i]);
+    }
+    emxInit_boolean_T(&r5, 1);
+    i = r5->size[0];
+    r5->size[0] = y->size[0];
+    emxEnsureCapacity_boolean_T(r5, i);
+    r6 = r5->data;
+    loop_ub = y->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      r6[i] = rtIsNaN(y_data[i]);
+    }
+    if (ok->size[0] == r3->size[0]) {
+      loop_ub = ok->size[0];
+      for (i = 0; i < loop_ub; i++) {
+        ok_data[i] = ((!ok_data[i]) && (!r2[i]) && ((!r4[i]) && (!r6[i])));
+      }
+    } else {
+      ib_binary_expand_op(ok, r1, r3, r5);
+      ok_data = ok->data;
+    }
+    emxFree_boolean_T(&r5);
+    emxFree_boolean_T(&r3);
+    loop_ub = ok->size[0] - 1;
     trueCount = 0;
     for (b_i = 0; b_i <= loop_ub; b_i++) {
-      if ((!na_X->data[b_i]) && (!na_y->data[b_i])) {
+      if (ok_data[b_i]) {
         trueCount++;
       }
     }
     i = r->size[0];
     r->size[0] = trueCount;
     emxEnsureCapacity_int32_T(r, i);
+    b_constcols_data = r->data;
     nx = 0;
     for (b_i = 0; b_i <= loop_ub; b_i++) {
-      if ((!na_X->data[b_i]) && (!na_y->data[b_i])) {
-        r->data[nx] = b_i + 1;
+      if (ok_data[b_i]) {
+        b_constcols_data[nx] = b_i + 1;
         nx++;
       }
     }
@@ -711,34 +731,35 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
       nx = r->size[0];
       for (i1 = 0; i1 < nx; i1++) {
         out->X->data[i1 + out->X->size[0] * i] =
-            X->data[(r->data[i1] + X->size[0] * i) - 1];
+            X_data[(b_constcols_data[i1] + X->size[0] * i) - 1];
       }
     }
-    loop_ub = na_X->size[0] - 1;
+    loop_ub = ok->size[0] - 1;
     trueCount = 0;
     for (b_i = 0; b_i <= loop_ub; b_i++) {
-      if ((!na_X->data[b_i]) && (!na_y->data[b_i])) {
+      if (ok_data[b_i]) {
         trueCount++;
       }
     }
-    emxInit_int32_T(&r1, 1);
-    i = r1->size[0];
-    r1->size[0] = trueCount;
-    emxEnsureCapacity_int32_T(r1, i);
+    emxInit_int32_T(&r7, 1);
+    i = r7->size[0];
+    r7->size[0] = trueCount;
+    emxEnsureCapacity_int32_T(r7, i);
+    b_constcols_data = r7->data;
     nx = 0;
     for (b_i = 0; b_i <= loop_ub; b_i++) {
-      if ((!na_X->data[b_i]) && (!na_y->data[b_i])) {
-        r1->data[nx] = b_i + 1;
+      if (ok_data[b_i]) {
+        b_constcols_data[nx] = b_i + 1;
         nx++;
       }
     }
-    emxFree_boolean_T(&na_X);
     i = b_y->size[0];
-    b_y->size[0] = r1->size[0];
+    b_y->size[0] = r7->size[0];
     emxEnsureCapacity_real_T(b_y, i);
-    loop_ub = r1->size[0];
+    b_y_data = b_y->data;
+    loop_ub = r7->size[0];
     for (i = 0; i < loop_ub; i++) {
-      b_y->data[i] = y->data[r1->data[i] - 1];
+      b_y_data[i] = y_data[b_constcols_data[i] - 1];
     }
     /*  Now n is the new number of non missing observations */
     /*  Now add to matrix X a column of ones for the intercept. */
@@ -754,66 +775,79 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     /* end */
     if (intercept) {
       i = b1->size[0];
-      b1->size[0] = r1->size[0];
+      b1->size[0] = r7->size[0];
       emxEnsureCapacity_real_T(b1, i);
-      loop_ub = r1->size[0];
+      b1_data = b1->data;
+      loop_ub = r7->size[0];
       for (i = 0; i < loop_ub; i++) {
-        b1->data[i] = 1.0;
+        b1_data[i] = 1.0;
       }
       i = b_out->size[0] * b_out->size[1];
       b_out->size[0] = out->X->size[0];
       b_out->size[1] = out->X->size[1];
       emxEnsureCapacity_real_T(b_out, i);
+      b1_data = b_out->data;
       loop_ub = out->X->size[0] * out->X->size[1] - 1;
       for (i = 0; i <= loop_ub; i++) {
-        b_out->data[i] = out->X->data[i];
+        b1_data[i] = out->X->data[i];
       }
       b_cat(b1, b_out, out->X);
     }
-    emxInit_real_T(&r2, 2);
-    emxInit_boolean_T(&b_constcols, 2);
+    emxInit_real_T(&r8, 2);
     /*  constcols = scalar vector of the indices of possible constant columns.
      */
     maximum(out->X, constcols);
-    minimum(out->X, r2);
-    i = b_constcols->size[0] * b_constcols->size[1];
-    b_constcols->size[0] = 1;
-    b_constcols->size[1] = constcols->size[1];
-    emxEnsureCapacity_boolean_T(b_constcols, i);
-    loop_ub = constcols->size[1];
-    for (i = 0; i < loop_ub; i++) {
-      b_constcols->data[i] = (constcols->data[i] - r2->data[i] == 0.0);
+    constcols_data = constcols->data;
+    minimum(out->X, r8);
+    b1_data = r8->data;
+    emxInit_int32_T(&b_constcols, 2);
+    if (constcols->size[1] == r8->size[1]) {
+      emxInit_boolean_T(&c_constcols, 2);
+      i = c_constcols->size[0] * c_constcols->size[1];
+      c_constcols->size[0] = 1;
+      c_constcols->size[1] = constcols->size[1];
+      emxEnsureCapacity_boolean_T(c_constcols, i);
+      ok_data = c_constcols->data;
+      loop_ub = constcols->size[1];
+      for (i = 0; i < loop_ub; i++) {
+        ok_data[i] = (constcols_data[i] - b1_data[i] == 0.0);
+      }
+      eml_find(c_constcols, b_constcols);
+      b_constcols_data = b_constcols->data;
+      emxFree_boolean_T(&c_constcols);
+    } else {
+      hb_binary_expand_op(b_constcols, constcols, r8);
+      b_constcols_data = b_constcols->data;
     }
-    emxFree_real_T(&r2);
-    emxInit_int32_T(&c_constcols, 2);
-    eml_find(b_constcols, c_constcols);
+    emxFree_real_T(&r8);
     i = constcols->size[0] * constcols->size[1];
     constcols->size[0] = 1;
-    constcols->size[1] = c_constcols->size[1];
+    constcols->size[1] = b_constcols->size[1];
     emxEnsureCapacity_real_T(constcols, i);
-    loop_ub = c_constcols->size[1];
-    emxFree_boolean_T(&b_constcols);
+    constcols_data = constcols->data;
+    loop_ub = b_constcols->size[1];
     for (i = 0; i < loop_ub; i++) {
-      constcols->data[i] = c_constcols->data[i];
+      constcols_data[i] = b_constcols_data[i];
     }
     if (constcols->size[1] > 1) {
       loop_ub = constcols->size[1] - 2;
-      i = c_constcols->size[0] * c_constcols->size[1];
-      c_constcols->size[0] = 1;
-      c_constcols->size[1] = constcols->size[1] - 1;
-      emxEnsureCapacity_int32_T(c_constcols, i);
+      i = b_constcols->size[0] * b_constcols->size[1];
+      b_constcols->size[0] = 1;
+      b_constcols->size[1] = constcols->size[1] - 1;
+      emxEnsureCapacity_int32_T(b_constcols, i);
+      b_constcols_data = b_constcols->data;
       for (i = 0; i <= loop_ub; i++) {
-        c_constcols->data[i] = (int)constcols->data[i + 1];
+        b_constcols_data[i] = (int)constcols_data[i + 1];
       }
-      nullAssignment(out->X, c_constcols);
+      nullAssignment(out->X, b_constcols);
     }
-    emxFree_int32_T(&c_constcols);
+    emxFree_int32_T(&b_constcols);
     /*  p is the number of parameters to be estimated */
-    if (r1->size[0] < out->X->size[1]) {
+    if (r7->size[0] < out->X->size[1]) {
       int2str(out->X->size[0], c_out.data, c_out.size);
       int2str(out->X->size[1], c_out.data, c_out.size);
     }
-    emxFree_int32_T(&r1);
+    emxFree_int32_T(&r7);
     local_rank(out->X);
   }
   /*  default values for the initial S estimate: */
@@ -838,15 +872,16 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  If InitialEst is empty then initial estimates of beta and sigma come from
    */
   /*  S-estimation */
-  i = na_y->size[0];
-  na_y->size[0] = InitialEst->beta->size[0];
-  emxEnsureCapacity_boolean_T(na_y, i);
+  i = r1->size[0];
+  r1->size[0] = InitialEst->beta->size[0];
+  emxEnsureCapacity_boolean_T(r1, i);
+  r2 = r1->data;
   loop_ub = InitialEst->beta->size[0];
   for (i = 0; i < loop_ub; i++) {
-    na_y->data[i] = rtIsNaN(InitialEst->beta->data[i]);
+    r2[i] = rtIsNaN(InitialEst->beta->data[i]);
   }
   emxInitStruct_struct_T6(&Sresult);
-  if (any(na_y)) {
+  if (b_any(r1)) {
     /*  break down point */
     /*  refining steps */
     /*  best locs for refining steps till convergence */
@@ -861,7 +896,7 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     emxEnsureCapacity_char_T(out->rhofuncS, i);
     loop_ub = Srhofunc->size[0] * Srhofunc->size[1];
     for (i = 0; i < loop_ub; i++) {
-      out->rhofuncS->data[i] = Srhofunc->data[i];
+      out->rhofuncS->data[i] = Srhofunc_data[i];
     }
     /*  rho function which must be used for S estimator */
     i = out->rhofuncparamS->size[0] * out->rhofuncparamS->size[1];
@@ -870,7 +905,7 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     emxEnsureCapacity_real_T(out->rhofuncparamS, i);
     loop_ub = Srhofuncparam->size[0] * Srhofuncparam->size[1];
     for (i = 0; i < loop_ub; i++) {
-      out->rhofuncparamS->data[i] = Srhofuncparam->data[i];
+      out->rhofuncparamS->data[i] = Srhofuncparam_data[i];
     }
     /*  eventual additional parameters associated to the rho function for S
      * estimator */
@@ -902,7 +937,8 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     C->size[0] = 1;
     C->size[1] = 1;
     emxEnsureCapacity_real_T(C, i);
-    C->data[0] = 0.0;
+    b1_data = C->data;
+    b1_data[0] = 0.0;
   }
   /*  rho function which must be used for MM loop */
   /*  eventual additional parameters associated to the rho function for MM loop
@@ -1077,7 +1113,6 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                    yxsave is set to 1. */
   /*      out.class   = 'MMreg' */
   /*  */
-  /*  */
   /*  More About: */
   /*  */
   /*  It does iterative reweighted least squares (IRWLS) steps from "initial */
@@ -1104,7 +1139,6 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('MMregcore')">Link to the help page for this
    * function</a> */
@@ -1214,7 +1248,6 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                specified for the */
   /*                caller function. */
   /*  */
-  /*  */
   /*   Optional input arguments: */
   /*  */
   /*  Output: */
@@ -1229,7 +1262,6 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                rows after listwise exclusion. */
   /*  p:            Number of columns of X (variables). Scalar. */
   /*                Number of parameters to be estimated. */
-  /*  */
   /*  */
   /*  More About: */
   /*  */
@@ -1251,8 +1283,6 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
-  /*  */
   /*  */
   /* $LastChangedDate::                      $: Date of the last commit */
   /*  */
@@ -1289,6 +1319,7 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  tolerance for refining iterations covergence */
   /*  String which specifies the function to use to weight the residuals */
   emxInit_real_T(&c, 1);
+  c_data = c->data;
   if (l_strcmp(rhofunc)) {
     /*  Compute tuning constant associated to the requested nominal efficiency
      */
@@ -1296,7 +1327,8 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     i = c->size[0];
     c->size[0] = 1;
     emxEnsureCapacity_real_T(c, i);
-    c->data[0] = TBeff(eff);
+    c_data = c->data;
+    c_data[0] = TBeff(eff);
     /* TODO:MMregcore:shapeff */
     psifunc_class_size[0] = 1;
     psifunc_class_size[1] = 2;
@@ -1314,7 +1346,8 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     i = c->size[0];
     c->size[0] = 1;
     emxEnsureCapacity_real_T(c, i);
-    c->data[0] = OPTeff(eff) / 3.0;
+    c_data = c->data;
+    c_data[0] = OPTeff(eff) / 3.0;
     psifunc_class_size[0] = 1;
     psifunc_class_size[1] = 3;
     psifunc_class_data[0] = 'O';
@@ -1326,7 +1359,7 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     if ((rhofuncparam->size[0] == 0) || (rhofuncparam->size[1] == 0)) {
       F = 4.5;
     } else {
-      F = rhofuncparam->data[0];
+      F = rhofuncparam_data[0];
       /*  Instruction necessary for Ccoder */
     }
     i = out->rhofuncparam->size[0] * out->rhofuncparam->size[1];
@@ -1338,12 +1371,12 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     for (trueCount = 0; trueCount < 50; trueCount++) {
       varargin_1[trueCount] = fabs(eff - dv3[trueCount]);
     }
-    e_minimum(varargin_1, &crit, &nx);
+    e_minimum(varargin_1, &iter, &nx);
     b_varargin_1[0] = fabs(F - 4.0);
     b_varargin_1[1] = fabs(F - 4.5);
     b_varargin_1[2] = fabs(F - 5.0);
     f_minimum(b_varargin_1, &diffk, &trueCount);
-    if ((crit < 1.0E-6) && (diffk < 1.0E-6)) {
+    if ((iter < 1.0E-6) && (diffk < 1.0E-6)) {
       /*  Load precalculated values of tuning constants */
       for (i = 0; i < 5; i++) {
         row[i] = dv4[((nx + 50 * (i + 1)) + 300 * (trueCount - 1)) - 1];
@@ -1413,8 +1446,9 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     i = c->size[0];
     c->size[0] = 5;
     emxEnsureCapacity_real_T(c, i);
+    c_data = c->data;
     for (i = 0; i < 5; i++) {
-      c->data[i] = row[i];
+      c_data[i] = row[i];
     }
   } else if (o_strcmp(rhofunc)) {
     if ((rhofuncparam->size[0] == 0) || (rhofuncparam->size[1] == 0)) {
@@ -1432,7 +1466,7 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
       emxEnsureCapacity_real_T(out->rhofuncparam, i);
       loop_ub = rhofuncparam->size[0];
       for (i = 0; i < loop_ub; i++) {
-        out->rhofuncparam->data[i] = rhofuncparam->data[i];
+        out->rhofuncparam->data[i] = rhofuncparam_data[i];
       }
     }
     /*  Compute tuning constant associated to the requested nominal efficiency
@@ -1446,10 +1480,11 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     i = c->size[0];
     c->size[0] = out->rhofuncparam->size[0] + 1;
     emxEnsureCapacity_real_T(c, i);
-    c->data[0] = F;
+    c_data = c->data;
+    c_data[0] = F;
     loop_ub = out->rhofuncparam->size[0];
     for (i = 0; i < loop_ub; i++) {
-      c->data[i + 1] = out->rhofuncparam->data[i];
+      c_data[i + 1] = out->rhofuncparam->data[i];
     }
   } else if (p_strcmp(rhofunc)) {
     /*  Compute tuning constant associated to the requested nominal efficiency
@@ -1458,10 +1493,7 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     /* PDeff finds the constant alpha which is associated to the requested
      * efficiency for minimum power divergence estimator */
     /*  */
-    /*  */
-    /*  */
     /* <a href="matlab: docsearchFS('PDeff')">Link to the help function</a> */
-    /*  */
     /*  */
     /*   Required input arguments: */
     /*  */
@@ -1473,8 +1505,6 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     /*                Data Types - single|double */
     /*  */
     /*   Optional input arguments: */
-    /*  */
-    /*  */
     /*  */
     /*  Output: */
     /*  */
@@ -1496,12 +1526,10 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     /*  Copyright 2008-2021. */
     /*  Written by FSDA team */
     /*  */
-    /*  */
     /* <a href="matlab: docsearchFS('PDeff')">Link to the help page for this
      * function</a> */
     /*  */
     /* $LastChangedDate::                      $: Date of the last commit */
-    /*  */
     /*  */
     /*  Examples: */
     /*  */
@@ -1512,7 +1540,6 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     /*     % alpha= 0.224515798935881 */
     /*     c=PDeff(0.95); */
     /* } */
-    /*  */
     /*  */
     /*  Beginning of code */
     F = rt_powd_snf(eff, 0.66666666666666663);
@@ -1529,18 +1556,20 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     i = c->size[0];
     c->size[0] = 1;
     emxEnsureCapacity_real_T(c, i);
-    c->data[0] = ((1.0 - F) + sqrt(1.0 - F)) / F;
+    c_data = c->data;
+    c_data[0] = ((1.0 - F) + sqrt(1.0 - F)) / F;
     out->rhofuncparam->size[0] = 0;
     out->rhofuncparam->size[1] = 0;
   }
-  F = 0.0;
-  crit = rtInf;
+  iter = 0.0;
+  F = rtInf;
   i = b1->size[0];
   b1->size[0] = Sresult.beta->size[0];
   emxEnsureCapacity_real_T(b1, i);
+  b1_data = b1->data;
   loop_ub = Sresult.beta->size[0];
   for (i = 0; i < loop_ub; i++) {
-    b1->data[i] = Sresult.beta->data[i];
+    b1_data[i] = Sresult.beta->data[i];
   }
   i = out->beta->size[0];
   out->beta->size[0] = Sresult.beta->size[0];
@@ -1554,52 +1583,60 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   emxEnsureCapacity_real_T(out->weights, i);
   loop_ub = b_y->size[0];
   for (i = 0; i < loop_ub; i++) {
-    out->weights->data[i] = b_y->data[i];
+    out->weights->data[i] = b_y_data[i];
   }
   /*  MATLAB Ccoder initialization */
-  emxInit_real_T(&d_y, 1);
-  while ((F <= refsteps) && (crit > tol)) {
+  emxInit_real_T(&c_y, 1);
+  while ((iter <= refsteps) && (F > tol)) {
     mtimes(out->X, b1, out->beta);
-    i = out->beta->size[0];
-    out->beta->size[0] = b_y->size[0];
-    emxEnsureCapacity_real_T(out->beta, i);
-    loop_ub = b_y->size[0];
-    for (i = 0; i < loop_ub; i++) {
-      out->beta->data[i] = (b_y->data[i] - out->beta->data[i]) / ss;
+    if (b_y->size[0] == out->beta->size[0]) {
+      i = out->beta->size[0];
+      out->beta->size[0] = b_y->size[0];
+      emxEnsureCapacity_real_T(out->beta, i);
+      loop_ub = b_y->size[0];
+      for (i = 0; i < loop_ub; i++) {
+        out->beta->data[i] = (b_y_data[i] - out->beta->data[i]) / ss;
+      }
+    } else {
+      ke_binary_expand_op(out, b_y, ss);
     }
     nx = out->beta->size[0];
-    i = d_y->size[0];
-    d_y->size[0] = out->beta->size[0];
-    emxEnsureCapacity_real_T(d_y, i);
-    for (trueCount = 0; trueCount < nx; trueCount++) {
-      d_y->data[trueCount] = fabs(out->beta->data[trueCount]);
-    }
     i = c_y->size[0];
-    c_y->size[0] = d_y->size[0];
-    emxEnsureCapacity_boolean_T(c_y, i);
-    loop_ub = d_y->size[0];
-    for (i = 0; i < loop_ub; i++) {
-      c_y->data[i] = (d_y->data[i] <= 2.2204460492503131E-16);
+    c_y->size[0] = out->beta->size[0];
+    emxEnsureCapacity_real_T(c_y, i);
+    b1_data = c_y->data;
+    for (trueCount = 0; trueCount < nx; trueCount++) {
+      b1_data[trueCount] = fabs(out->beta->data[trueCount]);
     }
-    b_eml_find(c_y, r);
+    i = ok->size[0];
+    ok->size[0] = c_y->size[0];
+    emxEnsureCapacity_boolean_T(ok, i);
+    ok_data = ok->data;
+    loop_ub = c_y->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      ok_data[i] = (b1_data[i] <= 2.2204460492503131E-16);
+    }
+    b_eml_find(ok, r);
+    b_constcols_data = r->data;
     i = out->fittedvalues->size[0];
     out->fittedvalues->size[0] = r->size[0];
     emxEnsureCapacity_real_T(out->fittedvalues, i);
     loop_ub = r->size[0];
     for (i = 0; i < loop_ub; i++) {
-      out->fittedvalues->data[i] = r->data[i];
+      out->fittedvalues->data[i] = b_constcols_data[i];
     }
     if (out->fittedvalues->size[0] != 0) {
       i = r->size[0];
       r->size[0] = out->fittedvalues->size[0];
       emxEnsureCapacity_int32_T(r, i);
+      b_constcols_data = r->data;
       loop_ub = out->fittedvalues->size[0];
       for (i = 0; i < loop_ub; i++) {
-        r->data[i] = (int)out->fittedvalues->data[i];
+        b_constcols_data[i] = (int)out->fittedvalues->data[i];
       }
       loop_ub = r->size[0];
       for (i = 0; i < loop_ub; i++) {
-        out->beta->data[r->data[i] - 1] = 2.2204460492503131E-16;
+        out->beta->data[b_constcols_data[i] - 1] = 2.2204460492503131E-16;
       }
     }
     /*  w is the weight vector \psi(x)/x Each observations receives a */
@@ -1674,7 +1711,6 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           /* <a href="matlab: docsearchFS('PDwei')">Link to the help
            * function</a> */
           /*  */
-          /*  */
           /*  Required input arguments: */
           /*  */
           /*     u:         scaled residuals or Mahalanobis distances. Vector. n
@@ -1709,9 +1745,6 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           /*  PDwei(u,alpha)=  \alpha \exp(-\alpha (u^2/2)); */
           /*       \] */
           /*  */
-          /*  */
-          /*  */
-          /*  */
           /*  See also: TBwei, HYPwei, HAwei, OPTwei */
           /*  */
           /*  References: */
@@ -1722,10 +1755,8 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
            * Data */
           /*   Analysis, submitted. */
           /*  */
-          /*  */
           /*  Copyright 2008-2021. */
           /*  Written by FSDA team */
-          /*  */
           /*  */
           /* <a href="matlab: docsearchFS('PDwei')">Link to the help page for
            * this function</a> */
@@ -1797,7 +1828,6 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           /*     ylim([ylim1 ylim2]) */
           /*     xlim([xlim1 xlim2]) */
           /*  */
-          /*  */
           /*     subplot(2,3,3) */
           /*     ceff095TB=TBeff(0.95,1); */
           /*     weiTB=TBwei(x,ceff095TB); */
@@ -1833,14 +1863,14 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           i = out->weights->size[0];
           out->weights->size[0] = out->beta->size[0];
           emxEnsureCapacity_real_T(out->weights, i);
-          nx = out->weights->size[0];
-          for (trueCount = 0; trueCount < nx; trueCount++) {
-            out->weights->data[trueCount] =
-                out->beta->data[trueCount] * out->beta->data[trueCount];
+          loop_ub = out->beta->size[0];
+          for (i = 0; i < loop_ub; i++) {
+            F = out->beta->data[i];
+            out->weights->data[i] = F * F;
           }
           loop_ub = out->weights->size[0];
           for (i = 0; i < loop_ub; i++) {
-            out->weights->data[i] = -c->data[0] * (out->weights->data[i] / 2.0);
+            out->weights->data[i] = -c_data[0] * (out->weights->data[i] / 2.0);
           }
           nx = out->weights->size[0];
           for (trueCount = 0; trueCount < nx; trueCount++) {
@@ -1867,53 +1897,69 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           sqrt(out->fittedvalues->data[trueCount]);
     }
     /*  b2 = inv(X'W*X)*X'W*y where W=w*ones(1,k) */
-    i = d_y->size[0];
-    d_y->size[0] = b_y->size[0];
-    emxEnsureCapacity_real_T(d_y, i);
-    loop_ub = b_y->size[0];
-    for (i = 0; i < loop_ub; i++) {
-      d_y->data[i] = b_y->data[i] * out->fittedvalues->data[i];
-    }
     d_bsxfun(out->X, out->fittedvalues, b_out);
-    mldivide(b_out, d_y, out->beta);
+    if (b_y->size[0] == out->fittedvalues->size[0]) {
+      i = c_y->size[0];
+      c_y->size[0] = b_y->size[0];
+      emxEnsureCapacity_real_T(c_y, i);
+      b1_data = c_y->data;
+      loop_ub = b_y->size[0];
+      for (i = 0; i < loop_ub; i++) {
+        b1_data[i] = b_y_data[i] * out->fittedvalues->data[i];
+      }
+      mldivide(b_out, c_y, out->beta);
+    } else {
+      je_binary_expand_op(out, b_out, b_y);
+    }
     /*  disp([b2-b22]) */
-    i = b1->size[0];
-    b1->size[0] = out->beta->size[0];
-    emxEnsureCapacity_real_T(b1, i);
-    loop_ub = out->beta->size[0];
-    for (i = 0; i < loop_ub; i++) {
-      b1->data[i] = out->beta->data[i] - b1->data[i];
+    if (out->beta->size[0] == b1->size[0]) {
+      i = b1->size[0];
+      b1->size[0] = out->beta->size[0];
+      emxEnsureCapacity_real_T(b1, i);
+      b1_data = b1->data;
+      loop_ub = out->beta->size[0];
+      for (i = 0; i < loop_ub; i++) {
+        b1_data[i] = out->beta->data[i] - b1_data[i];
+      }
+    } else {
+      ie_binary_expand_op(b1, out);
+      b1_data = b1->data;
     }
     nx = b1->size[0];
     i = out->fittedvalues->size[0];
     out->fittedvalues->size[0] = b1->size[0];
     emxEnsureCapacity_real_T(out->fittedvalues, i);
     for (trueCount = 0; trueCount < nx; trueCount++) {
-      out->fittedvalues->data[trueCount] = fabs(b1->data[trueCount]);
+      out->fittedvalues->data[trueCount] = fabs(b1_data[trueCount]);
     }
-    crit = b_maximum(out->fittedvalues);
-    F++;
+    F = b_maximum(out->fittedvalues);
+    iter++;
     i = b1->size[0];
     b1->size[0] = out->beta->size[0];
     emxEnsureCapacity_real_T(b1, i);
+    b1_data = b1->data;
     loop_ub = out->beta->size[0];
     for (i = 0; i < loop_ub; i++) {
-      b1->data[i] = out->beta->data[i];
+      b1_data[i] = out->beta->data[i];
     }
   }
   emxFree_real_T(&b_out);
-  emxFree_boolean_T(&c_y);
   emxFree_real_T(&b1);
   emxFree_real_T(&c);
   emxFree_int32_T(&r);
+  emxFree_boolean_T(&ok);
   mtimes(out->X, out->beta, out->fittedvalues);
-  i = out->fittedvalues->size[0];
-  out->fittedvalues->size[0] = b_y->size[0];
-  emxEnsureCapacity_real_T(out->fittedvalues, i);
-  loop_ub = b_y->size[0];
-  for (i = 0; i < loop_ub; i++) {
-    out->fittedvalues->data[i] =
-        (b_y->data[i] - out->fittedvalues->data[i]) / ss;
+  if (b_y->size[0] == out->fittedvalues->size[0]) {
+    i = out->fittedvalues->size[0];
+    out->fittedvalues->size[0] = b_y->size[0];
+    emxEnsureCapacity_real_T(out->fittedvalues, i);
+    loop_ub = b_y->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      out->fittedvalues->data[i] =
+          (b_y_data[i] - out->fittedvalues->data[i]) / ss;
+    }
+  } else {
+    me_binary_expand_op(out, b_y, ss);
   }
   /*  Store in output structure the outliers found with confidence level conflev
    */
@@ -1926,46 +1972,50 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     constcols->size[0] = 1;
     constcols->size[1] = out->X->size[0];
     emxEnsureCapacity_real_T(constcols, i);
+    constcols_data = constcols->data;
     loop_ub = out->X->size[0] - 1;
     for (i = 0; i <= loop_ub; i++) {
-      constcols->data[i] = (double)i + 1.0;
+      constcols_data[i] = (double)i + 1.0;
     }
   }
   nx = out->fittedvalues->size[0];
-  i = d_y->size[0];
-  d_y->size[0] = out->fittedvalues->size[0];
-  emxEnsureCapacity_real_T(d_y, i);
+  i = c_y->size[0];
+  c_y->size[0] = out->fittedvalues->size[0];
+  emxEnsureCapacity_real_T(c_y, i);
+  b1_data = c_y->data;
   for (trueCount = 0; trueCount < nx; trueCount++) {
-    d_y->data[trueCount] = fabs(out->fittedvalues->data[trueCount]);
+    b1_data[trueCount] = fabs(out->fittedvalues->data[trueCount]);
   }
   F = sqrt(c_chi2inv(conflev));
-  i = na_y->size[0];
-  na_y->size[0] = d_y->size[0];
-  emxEnsureCapacity_boolean_T(na_y, i);
-  loop_ub = d_y->size[0];
+  i = r1->size[0];
+  r1->size[0] = c_y->size[0];
+  emxEnsureCapacity_boolean_T(r1, i);
+  r2 = r1->data;
+  loop_ub = c_y->size[0];
   for (i = 0; i < loop_ub; i++) {
-    na_y->data[i] = (d_y->data[i] > F);
+    r2[i] = (b1_data[i] > F);
   }
-  emxFree_real_T(&d_y);
-  loop_ub = na_y->size[0] - 1;
+  emxFree_real_T(&c_y);
+  loop_ub = r1->size[0] - 1;
   trueCount = 0;
   for (b_i = 0; b_i <= loop_ub; b_i++) {
-    if (na_y->data[b_i]) {
+    if (r2[b_i]) {
       trueCount++;
     }
   }
-  emxInit_int32_T(&r3, 1);
-  i = r3->size[0];
-  r3->size[0] = trueCount;
-  emxEnsureCapacity_int32_T(r3, i);
+  emxInit_int32_T(&r9, 1);
+  i = r9->size[0];
+  r9->size[0] = trueCount;
+  emxEnsureCapacity_int32_T(r9, i);
+  b_constcols_data = r9->data;
   nx = 0;
   for (b_i = 0; b_i <= loop_ub; b_i++) {
-    if (na_y->data[b_i]) {
-      r3->data[nx] = b_i + 1;
+    if (r2[b_i]) {
+      b_constcols_data[nx] = b_i + 1;
       nx++;
     }
   }
-  emxFree_boolean_T(&na_y);
+  emxFree_boolean_T(&r1);
   /*  In case of Hampel or hyperbolic tangent estimator store the additional */
   /*  parameters which have been used */
   /*  For Hampel store a vector of length 3 containing parameters a, b and c */
@@ -1974,12 +2024,16 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  Plot of residual with outliers highlighted */
   out->auxscale = ss;
   mtimes(out->X, out->beta, out->fittedvalues);
-  i = out->residuals->size[0];
-  out->residuals->size[0] = b_y->size[0];
-  emxEnsureCapacity_real_T(out->residuals, i);
-  loop_ub = b_y->size[0];
-  for (i = 0; i < loop_ub; i++) {
-    out->residuals->data[i] = (b_y->data[i] - out->fittedvalues->data[i]) / ss;
+  if (b_y->size[0] == out->fittedvalues->size[0]) {
+    i = out->residuals->size[0];
+    out->residuals->size[0] = b_y->size[0];
+    emxEnsureCapacity_real_T(out->residuals, i);
+    loop_ub = b_y->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      out->residuals->data[i] = (b_y_data[i] - out->fittedvalues->data[i]) / ss;
+    }
+  } else {
+    le_binary_expand_op(out, b_y, ss);
   }
   /*  MM scaled residuals */
   i = out->Sbeta->size[0];
@@ -1992,13 +2046,13 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   emxFreeStruct_struct_T6(&Sresult);
   i = out->outliers->size[0] * out->outliers->size[1];
   out->outliers->size[0] = 1;
-  out->outliers->size[1] = r3->size[0];
+  out->outliers->size[1] = r9->size[0];
   emxEnsureCapacity_real_T(out->outliers, i);
-  loop_ub = r3->size[0];
+  loop_ub = r9->size[0];
   for (i = 0; i < loop_ub; i++) {
-    out->outliers->data[i] = constcols->data[r3->data[i] - 1];
+    out->outliers->data[i] = constcols_data[b_constcols_data[i] - 1];
   }
-  emxFree_int32_T(&r3);
+  emxFree_int32_T(&r9);
   emxFree_real_T(&constcols);
   out->conflev = conflev;
   for (i = 0; i < 5; i++) {
@@ -2014,7 +2068,7 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   emxEnsureCapacity_char_T(out->rhofunc, i);
   loop_ub = rhofunc->size[0] * rhofunc->size[1];
   for (i = 0; i < loop_ub; i++) {
-    out->rhofunc->data[i] = rhofunc->data[i];
+    out->rhofunc->data[i] = rhofunc_data[i];
   }
   /*  In case of Hampel or hyperbolic tangent estimator store the additional */
   /*  parameters which have been used */
@@ -2051,7 +2105,7 @@ void MMreg_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     emxEnsureCapacity_real_T(out->y, i);
     loop_ub = b_y->size[0];
     for (i = 0; i < loop_ub; i++) {
-      out->y->data[i] = b_y->data[i];
+      out->y->data[i] = b_y_data[i];
     }
   } else {
     out->X->size[0] = 0;

@@ -14,6 +14,7 @@
 #include "HArho.h"
 #include "HYPrho.h"
 #include "OPTrho.h"
+#include "TBrho.h"
 #include "blockedSummation.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_rtwutil.h"
@@ -33,20 +34,29 @@ double Mscale(const emxArray_real_T *u, const emxArray_real_T *psifunc_c1,
   static const char cv2[2] = {'H', 'A'};
   static const char cv4[2] = {'P', 'D'};
   emxArray_boolean_T *w;
-  emxArray_real_T *a;
-  emxArray_real_T *r;
+  emxArray_real_T *b_u;
+  emxArray_real_T *x;
   emxArray_real_T *y;
-  double d;
+  const double *psifunc_c1_data;
+  const double *u_data;
+  double b;
+  double c_tmp;
   double err;
   double sc;
   double scnew=0;
+  double *b_u_data;
+  double *x_data;
+  double *y_data;
+  int b_x;
   int exitg1;
   int k;
   int loop;
   int nx;
   bool b_bool;
+  bool *w_data;
+  psifunc_c1_data = psifunc_c1->data;
+  u_data = u->data;
   /* Mscale finds the M estimator of the scale */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('Mscale')">Link to the help function</a> */
   /*  */
@@ -129,10 +139,8 @@ double Mscale(const emxArray_real_T *u, const emxArray_real_T *psifunc_c1,
    */
   /*  Wiley. [equation 7.119,  p. 176]. */
   /*  */
-  /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('Mscale')">Link to the help page for this
    * function</a> */
@@ -204,7 +212,7 @@ double Mscale(const emxArray_real_T *u, const emxArray_real_T *psifunc_c1,
   /*     c=HAbdp(bdp,1,abc); */
   /*     % kc = E(rho) = sup(rho)*bdp */
   /*     kc=HArho(c*abc(3),[c, abc])*bdp; */
-  /*     psifunc.c1=[c; abc]; */
+  /*     psifunc.c1=[c, abc]; */
   /*     psifunc.kc1=kc; */
   /*     n=10000; */
   /*     shift=100; */
@@ -221,7 +229,7 @@ double Mscale(const emxArray_real_T *u, const emxArray_real_T *psifunc_c1,
   /*     sTB=Mscale(u,psifunc,3,1e-7,20); */
   /*     sMLE=std(u); */
   /*     cate=categorical({'Robust scale (Hampel)' 'Robust scale (TB)' 'Non
-   * robust scale'}) */
+   * robust scale'}); */
   /*     bar(cate,[sHA sTB sMLE]) */
   /* } */
   /*  Beginning of code */
@@ -229,10 +237,10 @@ double Mscale(const emxArray_real_T *u, const emxArray_real_T *psifunc_c1,
   sc = initialsc;
   loop = 0;
   err = 1.0;
-  emxInit_boolean_T(&w, 1);
-  emxInit_real_T(&r, 1);
   emxInit_real_T(&y, 1);
-  emxInit_real_T(&a, 1);
+  emxInit_real_T(&x, 1);
+  emxInit_boolean_T(&w, 1);
+  emxInit_real_T(&b_u, 1);
   while ((loop < 200) && (err > tol)) {
     b_bool = false;
     if (psifunc_class_size[1] == 2) {
@@ -252,12 +260,13 @@ double Mscale(const emxArray_real_T *u, const emxArray_real_T *psifunc_c1,
       } while (exitg1 == 0);
     }
     if (b_bool) {
-      k = a->size[0];
-      a->size[0] = u->size[0];
-      emxEnsureCapacity_real_T(a, k);
+      k = b_u->size[0];
+      b_u->size[0] = u->size[0];
+      emxEnsureCapacity_real_T(b_u, k);
+      b_u_data = b_u->data;
       nx = u->size[0];
       for (k = 0; k < nx; k++) {
-        a->data[k] = u->data[k] / sc;
+        b_u_data[k] = u_data[k] / sc;
       }
       /* TBrho computes rho function for Tukey's biweight */
       /*  */
@@ -275,9 +284,7 @@ double Mscale(const emxArray_real_T *u, const emxArray_real_T *psifunc_c1,
       /*  */
       /*   Optional input arguments: */
       /*  */
-      /*  */
       /*   Output: */
-      /*  */
       /*  */
       /*    rhoTB :      n x 1 vector which contains the Tukey's biweight rho */
       /*                 associated to the residuals or Mahalanobis distances
@@ -285,7 +292,6 @@ double Mscale(const emxArray_real_T *u, const emxArray_real_T *psifunc_c1,
       /*                 the n units of the sample. */
       /*  */
       /*  More About: */
-      /*  */
       /*  */
       /*  function TBrho transforms vector u as follows  */
       /*  \[ */
@@ -317,7 +323,6 @@ double Mscale(const emxArray_real_T *u, const emxArray_real_T *psifunc_c1,
       /*  */
       /*  Copyright 2008-2021. */
       /*  Written by FSDA team */
-      /*  */
       /*  */
       /* <a href="matlab: docsearchFS('TBrho')">Link to the help page for this
        * function</a> */
@@ -369,48 +374,79 @@ double Mscale(const emxArray_real_T *u, const emxArray_real_T *psifunc_c1,
       /* } */
       /*  Beginning of code */
       /*  MATLAB Ccoder instruction to enforce that c is a scalar */
-      nx = a->size[0];
+      nx = b_u->size[0];
       k = y->size[0];
-      y->size[0] = a->size[0];
+      y->size[0] = b_u->size[0];
       emxEnsureCapacity_real_T(y, k);
+      y_data = y->data;
       for (k = 0; k < nx; k++) {
-        y->data[k] = fabs(a->data[k]);
+        y_data[k] = fabs(b_u_data[k]);
       }
       k = w->size[0];
       w->size[0] = y->size[0];
       emxEnsureCapacity_boolean_T(w, k);
+      w_data = w->data;
       nx = y->size[0];
       for (k = 0; k < nx; k++) {
-        w->data[k] = (y->data[k] <= psifunc_c1->data[0]);
+        w_data[k] = (y_data[k] <= psifunc_c1_data[0]);
       }
-      err = psifunc_c1->data[0] * psifunc_c1->data[0];
-      k = r->size[0];
-      r->size[0] = a->size[0];
-      emxEnsureCapacity_real_T(r, k);
-      nx = a->size[0];
+      c_tmp = psifunc_c1_data[0] * psifunc_c1_data[0];
+      k = x->size[0];
+      x->size[0] = b_u->size[0];
+      emxEnsureCapacity_real_T(x, k);
+      x_data = x->data;
+      nx = b_u->size[0];
       for (k = 0; k < nx; k++) {
-        r->data[k] = a->data[k] * a->data[k];
+        err = b_u_data[k];
+        x_data[k] = err * err;
       }
-      scnew = err / 6.0;
+      scnew = rt_powd_snf(psifunc_c1_data[0], 4.0);
+      b = c_tmp / 6.0;
       k = y->size[0];
-      y->size[0] = a->size[0];
+      y->size[0] = b_u->size[0];
       emxEnsureCapacity_real_T(y, k);
-      nx = a->size[0];
+      y_data = y->data;
+      nx = b_u->size[0];
       for (k = 0; k < nx; k++) {
-        y->data[k] = rt_powd_snf(a->data[k], 4.0);
+        err = b_u_data[k];
+        y_data[k] = rt_powd_snf(err, 4.0);
       }
-      d = 3.0 * rt_powd_snf(psifunc_c1->data[0], 4.0);
-      k = y->size[0];
-      y->size[0] = r->size[0];
-      emxEnsureCapacity_real_T(y, k);
-      nx = r->size[0];
-      for (k = 0; k < nx; k++) {
-        y->data[k] = r->data[k] / 2.0 *
-                         ((1.0 - r->data[k] / err) + y->data[k] / d) *
-                         (double)w->data[k] +
-                     (1.0 - (double)w->data[k]) * scnew;
+      if (x->size[0] == 1) {
+        nx = y->size[0];
+      } else {
+        nx = x->size[0];
       }
-      scnew = sc * sqrt(blockedSummation(y, y->size[0]) / (double)y->size[0] /
+      if (x->size[0] == 1) {
+        k = y->size[0];
+      } else {
+        k = x->size[0];
+      }
+      if (x->size[0] == 1) {
+        b_x = y->size[0];
+      } else {
+        b_x = x->size[0];
+      }
+      if (b_x == 1) {
+        b_x = w->size[0];
+      } else if (x->size[0] == 1) {
+        b_x = y->size[0];
+      } else {
+        b_x = x->size[0];
+      }
+      if ((x->size[0] == y->size[0]) && (x->size[0] == nx) &&
+          (k == w->size[0]) && (b_x == w->size[0])) {
+        err = 3.0 * scnew;
+        nx = x->size[0];
+        for (k = 0; k < nx; k++) {
+          x_data[k] = x_data[k] / 2.0 *
+                          ((1.0 - x_data[k] / c_tmp) + y_data[k] / err) *
+                          (double)w_data[k] +
+                      (1.0 - (double)w_data[k]) * b;
+        }
+      } else {
+        qe_binary_expand_op(x, c_tmp, y, scnew, w, b);
+      }
+      scnew = sc * sqrt(blockedSummation(x, x->size[0]) / (double)x->size[0] /
                         psifunc_kc1);
     } else {
       b_bool = false;
@@ -431,15 +467,16 @@ double Mscale(const emxArray_real_T *u, const emxArray_real_T *psifunc_c1,
         } while (exitg1 == 0);
       }
       if (b_bool) {
-        k = y->size[0];
-        y->size[0] = u->size[0];
-        emxEnsureCapacity_real_T(y, k);
+        k = b_u->size[0];
+        b_u->size[0] = u->size[0];
+        emxEnsureCapacity_real_T(b_u, k);
+        b_u_data = b_u->data;
         nx = u->size[0];
         for (k = 0; k < nx; k++) {
-          y->data[k] = u->data[k] / sc;
+          b_u_data[k] = u_data[k] / sc;
         }
-        b_OPTrho(y, psifunc_c1, a);
-        scnew = sc * sqrt(blockedSummation(a, a->size[0]) / (double)a->size[0] /
+        b_OPTrho(b_u, psifunc_c1, x);
+        scnew = sc * sqrt(blockedSummation(x, x->size[0]) / (double)x->size[0] /
                           psifunc_kc1);
       } else {
         b_bool = false;
@@ -460,16 +497,17 @@ double Mscale(const emxArray_real_T *u, const emxArray_real_T *psifunc_c1,
           } while (exitg1 == 0);
         }
         if (b_bool) {
-          k = y->size[0];
-          y->size[0] = u->size[0];
-          emxEnsureCapacity_real_T(y, k);
+          k = b_u->size[0];
+          b_u->size[0] = u->size[0];
+          emxEnsureCapacity_real_T(b_u, k);
+          b_u_data = b_u->data;
           nx = u->size[0];
           for (k = 0; k < nx; k++) {
-            y->data[k] = u->data[k] / sc;
+            b_u_data[k] = u_data[k] / sc;
           }
-          b_HArho(y, psifunc_c1, a);
-          scnew = sc * sqrt(blockedSummation(a, a->size[0]) /
-                            (double)a->size[0] / psifunc_kc1);
+          b_HArho(b_u, psifunc_c1, x);
+          scnew = sc * sqrt(blockedSummation(x, x->size[0]) /
+                            (double)x->size[0] / psifunc_kc1);
         } else {
           b_bool = false;
           if (psifunc_class_size[1] == 3) {
@@ -489,16 +527,17 @@ double Mscale(const emxArray_real_T *u, const emxArray_real_T *psifunc_c1,
             } while (exitg1 == 0);
           }
           if (b_bool) {
-            k = y->size[0];
-            y->size[0] = u->size[0];
-            emxEnsureCapacity_real_T(y, k);
+            k = b_u->size[0];
+            b_u->size[0] = u->size[0];
+            emxEnsureCapacity_real_T(b_u, k);
+            b_u_data = b_u->data;
             nx = u->size[0];
             for (k = 0; k < nx; k++) {
-              y->data[k] = u->data[k] / sc;
+              b_u_data[k] = u_data[k] / sc;
             }
-            HYPrho(y, psifunc_c1, a);
-            scnew = sc * sqrt(blockedSummation(a, a->size[0]) /
-                              (double)a->size[0] / psifunc_kc1);
+            HYPrho(b_u, psifunc_c1, x);
+            scnew = sc * sqrt(blockedSummation(x, x->size[0]) /
+                              (double)x->size[0] / psifunc_kc1);
           } else {
             b_bool = false;
             if (psifunc_class_size[1] == 2) {
@@ -543,9 +582,7 @@ double Mscale(const emxArray_real_T *u, const emxArray_real_T *psifunc_c1,
               /*  */
               /*   Optional input arguments: */
               /*  */
-              /*  */
               /*   Output: */
-              /*  */
               /*  */
               /*    rhoPD :      n x 1 vector which contains the Minimum density
                * power */
@@ -555,7 +592,6 @@ double Mscale(const emxArray_real_T *u, const emxArray_real_T *psifunc_c1,
               /*                 distances for the n units of the sample. */
               /*  */
               /*  More About: */
-              /*  */
               /*  */
               /*  function PDrho transforms vector u as follows  */
               /*  \[ */
@@ -575,7 +611,6 @@ double Mscale(const emxArray_real_T *u, const emxArray_real_T *psifunc_c1,
               /*  */
               /*  Copyright 2008-2021. */
               /*  Written by FSDA team */
-              /*  */
               /*  */
               /* <a href="matlab: docsearchFS('PDrho')">Link to the help page
                * for this function</a> */
@@ -628,31 +663,26 @@ double Mscale(const emxArray_real_T *u, const emxArray_real_T *psifunc_c1,
               /* } */
               /*  Beginning of code */
               /*  MATLAB Ccoder instruction to enforce that alpha is a scalar */
-              k = a->size[0];
-              a->size[0] = u->size[0];
-              emxEnsureCapacity_real_T(a, k);
+              k = y->size[0];
+              y->size[0] = u->size[0];
+              emxEnsureCapacity_real_T(y, k);
+              y_data = y->data;
               nx = u->size[0];
               for (k = 0; k < nx; k++) {
-                a->data[k] = u->data[k] / sc;
-              }
-              k = y->size[0];
-              y->size[0] = a->size[0];
-              emxEnsureCapacity_real_T(y, k);
-              nx = a->size[0];
-              for (k = 0; k < nx; k++) {
-                y->data[k] = a->data[k] * a->data[k];
+                err = u_data[k] / sc;
+                y_data[k] = err * err;
               }
               nx = y->size[0];
               for (k = 0; k < nx; k++) {
-                y->data[k] = -psifunc_c1->data[0] * (y->data[k] / 2.0);
+                y_data[k] = -psifunc_c1_data[0] * (y_data[k] / 2.0);
               }
               nx = y->size[0];
               for (k = 0; k < nx; k++) {
-                y->data[k] = exp(y->data[k]);
+                y_data[k] = exp(y_data[k]);
               }
               nx = y->size[0];
               for (k = 0; k < nx; k++) {
-                y->data[k] = 1.0 - y->data[k];
+                y_data[k] = 1.0 - y_data[k];
               }
               scnew = sc * sqrt(blockedSummation(y, y->size[0]) /
                                 (double)y->size[0] / psifunc_kc1);
@@ -669,10 +699,10 @@ double Mscale(const emxArray_real_T *u, const emxArray_real_T *psifunc_c1,
     /*  disp(sc) */
     loop++;
   }
-  emxFree_real_T(&a);
-  emxFree_real_T(&y);
-  emxFree_real_T(&r);
+  emxFree_real_T(&b_u);
   emxFree_boolean_T(&w);
+  emxFree_real_T(&x);
+  emxFree_real_T(&y);
   /*  disp(loop) */
   /*  sc=sc; */
   return sc;

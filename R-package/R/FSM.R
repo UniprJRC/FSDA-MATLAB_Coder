@@ -52,8 +52,8 @@
 #'  (see below) the confidence level of the bivariate ellipses.
 #'
 #' @param init the point where to start the monitoring of the required diagnostics.
-#'  Note that if if initial subset is supplied (that is, input option \code{m0} is a vector 
-#'  of length greater than 1) init must be greater or equal than \code{length(m0)}. 
+#'  Note that if if initial subset is supplied (that is, input option \code{m0} is a vector
+#'  of length greater than 1) init must be greater or equal than \code{length(m0)}.
 #'  If \code{init} is not specified it will be set equal to \code{floor(n * 0.6)}.
 #'
 #' @param m0 initial subset size or a vector which contains a list of units forming initial subset.
@@ -170,18 +170,17 @@ FSM <- function(Y, bonflev, crit=c("md", "biv", "uni"), init, m0, msg=TRUE, noch
         init <- p + 2
     }
 
-    bonflev <- if(missing(bonflev)) 
+    bonflev <- if(missing(bonflev))
                   c(0.0, 0.0)
-               else                 
+               else
                   c(bonflev, 1)
-    
-    if(p > 1){ 
+
+    if(p > 1){
       critdef = "md"
     } else{
       critdef = "uni"
     }
-    
-    browser()
+
     if (missing(m0) && length(crit) > 2) {
       crit = critdef
       m0 = p + 1
@@ -192,8 +191,8 @@ FSM <- function(Y, bonflev, crit=c("md", "biv", "uni"), init, m0, msg=TRUE, noch
         m0 = p + 1
       }
     }
-    
-    
+
+
     if (length(m0) == 1) {
       if (m0 < p + 1 || m0 > n) {
         warning("Attention: 'm0' should be set in the interval [p+1, n], now it is set to p+1")
@@ -204,7 +203,7 @@ FSM <- function(Y, bonflev, crit=c("md", "biv", "uni"), init, m0, msg=TRUE, noch
       if (!all(m0 >= 1 & m0 <= n1))
         stop("The initial subset must contain valid unit indexes!")
     }
-        
+
     ##  mmd and Un: matrices, with retnUn=(n-init) rows and 2 or 11 columns respectively.
     outliers <- rep(0, n1)
     retnUn <- n1-init
@@ -217,7 +216,7 @@ FSM <- function(Y, bonflev, crit=c("md", "biv", "uni"), init, m0, msg=TRUE, noch
 
 
     nm <- length(m0)
-    
+
     ##  Call the C wrapper function
     tmp <- .C('r_fsm',
         Y = if(is.double(Y)) Y else as.double(Y),
@@ -259,7 +258,7 @@ FSM <- function(Y, bonflev, crit=c("md", "biv", "uni"), init, m0, msg=TRUE, noch
     cov <- matrix(tmp$xcov, nrow=p, ncol=p)
     nout <- matrix(tmp$nout, nrow=2, ncol=5)
     dimnames(mmd) <- list(mmd[,1], c("Step", "MMD"))
-  
+
     ans <- list(mmd=mmd, Un=Un, nout=nout, outliers=outliers, cov=cov, loc=tmp$loc, md=tmp$md)
 
     if (tmp$noutliers == 1 && tmp$outliers[1] == "NaN") {
@@ -268,10 +267,10 @@ FSM <- function(Y, bonflev, crit=c("md", "biv", "uni"), init, m0, msg=TRUE, noch
     else if (!missing(bonflev)) {
       ans$nout <- NULL
     }
-    
+
     ans$call <- match.call()
     class(ans) <- "FSM"
-    
+
     ans
 }
 

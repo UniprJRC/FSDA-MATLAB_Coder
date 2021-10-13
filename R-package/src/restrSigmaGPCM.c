@@ -18,6 +18,7 @@
 #include "cpcV.h"
 #include "det.h"
 #include "diag.h"
+#include "div.h"
 #include "eig.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_internal_types.h"
@@ -25,18 +26,56 @@
 #include "fsdaC_types.h"
 #include "minOrMax.h"
 #include "mtimes.h"
-#include "power.h"
 #include "repmat.h"
 #include "restreigen.h"
 #include "restrshapeGPCM.h"
 #include "rt_nonfinite.h"
 #include "sort.h"
 #include "strcmp.h"
+#include "sum.h"
 #include "rt_nonfinite.h"
 #include <math.h>
 #include <string.h>
 
+/* Function Declarations */
+static void qf_binary_expand_op(emxArray_real_T *diageigunsorted,
+                                const emxArray_real_T *lmd,
+                                const emxArray_real_T *lmdold);
+
 /* Function Definitions */
+static void qf_binary_expand_op(emxArray_real_T *diageigunsorted,
+                                const emxArray_real_T *lmd,
+                                const emxArray_real_T *lmdold)
+{
+  const double *lmd_data;
+  const double *lmdold_data;
+  double *diageigunsorted_data;
+  int i;
+  int lmd_idx_0;
+  int stride_0_0;
+  int stride_1_0;
+  lmdold_data = lmdold->data;
+  lmd_data = lmd->data;
+  lmd_idx_0 = lmd->size[1];
+  i = diageigunsorted->size[0];
+  if (lmdold->size[0] == 1) {
+    diageigunsorted->size[0] = lmd_idx_0;
+  } else {
+    diageigunsorted->size[0] = lmdold->size[0];
+  }
+  emxEnsureCapacity_real_T(diageigunsorted, i);
+  diageigunsorted_data = diageigunsorted->data;
+  stride_0_0 = (lmd_idx_0 != 1);
+  stride_1_0 = (lmdold->size[0] != 1);
+  if (lmdold->size[0] != 1) {
+    lmd_idx_0 = lmdold->size[0];
+  }
+  for (i = 0; i < lmd_idx_0; i++) {
+    diageigunsorted_data[i] =
+        lmd_data[i * stride_0_0] - lmdold_data[i * stride_1_0];
+  }
+}
+
 void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
                       const char pa_pars[3], double pa_cdet, double pa_shw,
                       double pa_shb, double pa_maxiterDSR, double pa_maxiterS,
@@ -46,8 +85,8 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
 {
   static const char b[3] = {'E', 'V', 'E'};
   static const char b_b[3] = {'V', 'V', 'E'};
-  cell_wrap_64 r;
-  cell_wrap_64 r1;
+  cell_wrap_67 r;
+  cell_wrap_67 r1;
   emxArray_boolean_T *x;
   emxArray_creal_T *r2;
   emxArray_real_T *GAM;
@@ -58,12 +97,13 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   emxArray_real_T *b_OMG;
   emxArray_real_T *b_Wk;
   emxArray_real_T *diff;
-  emxArray_real_T *eyep;
   emxArray_real_T *lmdold;
   emxArray_real_T *r3;
   emxArray_real_T *r4;
   emxArray_real_T *wk;
+  creal_T *r5;
   double difflmd[3];
+  const double *niini_data;
   double a;
   double b_GAMold;
   double b_diff;
@@ -71,6 +111,15 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   double iter;
   double maxiterDSR;
   double sumnini;
+  double *GAMfc_data;
+  double *GAMold_data;
+  double *OMG_data;
+  double *SigmaB_data;
+  double *Wk_data;
+  double *b_Wk_data;
+  double *lmd_data;
+  double *lmdold_data;
+  double *wk_data;
   int b_loop_ub;
   int b_ret;
   int b_unnamed_idx_1;
@@ -98,22 +147,23 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   int v;
   bool varargin_1[7];
   bool b_varargin_1[6];
-  bool b_bool;
   bool cpc;
   bool exitg1;
   bool guard1 = false;
+  bool *x_data;
+  OMG_data = OMG->data;
+  lmd_data = lmd->data;
+  niini_data = niini->data;
+  SigmaB_data = SigmaB->data;
   /* restrSigmaGPCM computes constrained covariance matrices for the 14 GPCM
    * specifications */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('restrSigmaGPCM')">Link to the help
    * function</a> */
   /*  */
-  /*  */
   /*   This routine applies the constraints to the covariance matrices using the
    */
   /*   specifications contained in input structure pa. */
-  /*  */
   /*  */
   /*  Required input arguments: */
   /*  */
@@ -227,7 +277,6 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   /*  */
   /*  Output: */
   /*  */
-  /*  */
   /*     Sigma  : constrained covariance matrices. p-by-p-by-k array. */
   /*              p-by-p-by-k array containing the k covariance matrices for */
   /*              the k groups. See section 'More About' for the notation for */
@@ -264,7 +313,6 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   /*            not greater than pa.shb. */
   /*            The ratio of the elements of each column is not greater than */
   /*            pa.shw. */
-  /*  */
   /*  */
   /*  More About: */
   /*  The notation for the eigen-decomposition of the */
@@ -325,20 +373,15 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   /*    greater than pa.cdet. All the elements of vector lmd are equal */
   /*    if modeltype is E** or if $c_{det}=1$ (pa.cdet=1). */
   /*  */
-  /*  */
-  /*  */
   /*  See also restrshapeGPCM, restrdeterGPCM, restreigen, tclust */
-  /*  */
   /*  */
   /*  References: */
   /*  */
   /*    Garcia-Escudero, L.A., Mayo-Iscar, A. and Riani M. (2019), */
   /*    Robust parsimonious clustering models. Submitted. */
   /*  */
-  /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('restrSigmaGPCM')">Link to the help
    * function</a> */
@@ -438,9 +481,7 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   v_strcmp(pa_pars, varargin_1);
   cpc = varargin_1[0];
   for (ret = 0; ret < 6; ret++) {
-    if ((int)cpc < (int)varargin_1[ret + 1]) {
-      cpc = true;
-    }
+    cpc = (((int)cpc < (int)varargin_1[ret + 1]) || cpc);
   }
   if (cpc) {
     maxiterDSR = pa_maxiterDSR;
@@ -451,9 +492,7 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   w_strcmp(pa_pars, b_varargin_1);
   cpc = b_varargin_1[0];
   for (ret = 0; ret < 5; ret++) {
-    if ((int)cpc < (int)b_varargin_1[ret + 1]) {
-      cpc = true;
-    }
+    cpc = (((int)cpc < (int)b_varargin_1[ret + 1]) || cpc);
   }
   if (!cpc) {
     pa_maxiterS = 1.0;
@@ -478,31 +517,22 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
     pa_maxiterR = 1;
   }
   /*  Parameters not set by the user */
-  b_bool = !(pa_pars[2] != 'E');
-  if (b_bool) {
+  if ((!(pa_pars[2] != 'E')) || (!(pa_pars[2] != 'I'))) {
     pa_sortsh = 1;
   } else {
-    b_bool = !(pa_pars[2] != 'I');
-    if (b_bool) {
-      pa_sortsh = 1;
-    } else {
-      pa_sortsh = 0;
-    }
+    pa_sortsh = 0;
   }
-  b_bool = !(pa_pars[0] != 'E');
-  if (b_bool) {
+  if (!(pa_pars[0] != 'E')) {
     pa_cdet = 1.0;
   }
   /*  If OMG is identity, shape restriction parameter within groups is set to 1
    */
-  b_bool = !(pa_pars[1] != 'I');
-  if (b_bool) {
+  if (!(pa_pars[1] != 'I')) {
     pa_shw = 1.0;
   }
   /*  if Equal shape is imposed shape restriction parameter between groups is */
   /*  set to 1 */
-  b_bool = !(pa_pars[1] != 'E');
-  if (b_bool) {
+  if (!(pa_pars[1] != 'E')) {
     pa_shb = 1.0;
   }
   emxInit_real_T(&Wk, 3);
@@ -514,31 +544,33 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   Wk->size[1] = unnamed_idx_1;
   Wk->size[2] = niini->size[0];
   emxEnsureCapacity_real_T(Wk, i);
+  Wk_data = Wk->data;
   ret = b_ret * unnamed_idx_1 * niini->size[0];
   for (i = 0; i < ret; i++) {
-    Wk->data[i] = 0.0;
+    Wk_data[i] = 0.0;
   }
   emxInit_real_T(&wk, 1);
   i = wk->size[0];
   wk->size[0] = niini->size[0];
   emxEnsureCapacity_real_T(wk, i);
+  wk_data = wk->data;
   ret = niini->size[0];
   for (i = 0; i < ret; i++) {
-    wk->data[i] = 0.0;
+    wk_data[i] = 0.0;
   }
   emxInit_real_T(&GAMfc, 2);
   i = GAMfc->size[0] * GAMfc->size[1];
   GAMfc->size[0] = SigmaB->size[0];
   GAMfc->size[1] = niini->size[0];
   emxEnsureCapacity_real_T(GAMfc, i);
+  GAMfc_data = GAMfc->data;
   ret = SigmaB->size[0] * niini->size[0];
   for (i = 0; i < ret; i++) {
-    GAMfc->data[i] = 0.0;
+    GAMfc_data[i] = 0.0;
   }
-  b_bool = !(pa_pars[2] != 'E');
   emxInit_real_T(&GAMold, 1);
   emxInit_real_T(&b_Wk, 2);
-  if (b_bool) {
+  if (!(pa_pars[2] != 'E')) {
     /*  In the common principal components case it is necessary to find */
     /*  initial values for OMG (rotation), and lmd (unconstrained */
     /*  determinants) */
@@ -577,19 +609,21 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
       Wk->size[1] = unnamed_idx_1;
       Wk->size[2] = niini->size[0];
       emxEnsureCapacity_real_T(Wk, i1);
+      Wk_data = Wk->data;
       i1 = wk->size[0];
       wk->size[0] = niini->size[0];
       emxEnsureCapacity_real_T(wk, i1);
+      wk_data = wk->data;
       for (j = 0; j < i; j++) {
-        a = niini->data[j] / sumnini;
+        a = niini_data[j] / sumnini;
         ret = SigmaB->size[0];
         b_ret = SigmaB->size[1];
         for (i1 = 0; i1 < b_ret; i1++) {
           for (unnamed_idx_1 = 0; unnamed_idx_1 < ret; unnamed_idx_1++) {
-            Wk->data[(unnamed_idx_1 + Wk->size[0] * i1) +
-                     Wk->size[0] * Wk->size[1] * j] =
-                a * SigmaB->data[(unnamed_idx_1 + SigmaB->size[0] * i1) +
-                                 SigmaB->size[0] * SigmaB->size[1] * j];
+            Wk_data[(unnamed_idx_1 + Wk->size[0] * i1) +
+                    Wk->size[0] * Wk->size[1] * j] =
+                a * SigmaB_data[(unnamed_idx_1 + SigmaB->size[0] * i1) +
+                                SigmaB->size[0] * SigmaB->size[1] * j];
           }
         }
         ret = Wk->size[0];
@@ -598,22 +632,25 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
         b_Wk->size[0] = Wk->size[0];
         b_Wk->size[1] = Wk->size[1];
         emxEnsureCapacity_real_T(b_Wk, i1);
+        b_Wk_data = b_Wk->data;
         for (i1 = 0; i1 < b_ret; i1++) {
           for (unnamed_idx_1 = 0; unnamed_idx_1 < ret; unnamed_idx_1++) {
-            b_Wk->data[unnamed_idx_1 + b_Wk->size[0] * i1] =
-                Wk->data[(unnamed_idx_1 + Wk->size[0] * i1) +
-                         Wk->size[0] * Wk->size[1] * j];
+            b_Wk_data[unnamed_idx_1 + b_Wk->size[0] * i1] =
+                Wk_data[(unnamed_idx_1 + Wk->size[0] * i1) +
+                        Wk->size[0] * Wk->size[1] * j];
           }
         }
         c_eig(b_Wk, r2);
+        r5 = r2->data;
         i1 = GAMold->size[0];
         GAMold->size[0] = r2->size[0];
         emxEnsureCapacity_real_T(GAMold, i1);
+        GAMold_data = GAMold->data;
         ret = r2->size[0];
         for (i1 = 0; i1 < ret; i1++) {
-          GAMold->data[i1] = r2->data[i1].re;
+          GAMold_data[i1] = r5[i1].re;
         }
-        wk->data[j] = b_maximum(GAMold);
+        wk_data[j] = b_maximum(GAMold);
       }
     }
     emxFree_creal_T(&r2);
@@ -623,9 +660,10 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   GAM->size[0] = SigmaB->size[0];
   GAM->size[1] = niini->size[0];
   emxEnsureCapacity_real_T(GAM, i);
+  wk_data = GAM->data;
   ret = SigmaB->size[0] * niini->size[0];
   for (i = 0; i < ret; i++) {
-    GAM->data[i] = 1.0;
+    wk_data[i] = 1.0;
   }
   emxInit_real_T(&OMGold, 2);
   /*  Immediately apply the restriction on vector lmd */
@@ -639,32 +677,34 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   OMGold->size[0] = ret;
   OMGold->size[1] = b_ret;
   emxEnsureCapacity_real_T(OMGold, i);
+  Wk_data = OMGold->data;
   for (i = 0; i < b_ret; i++) {
     for (i1 = 0; i1 < ret; i1++) {
-      OMGold->data[i1 + OMGold->size[0] * i] = OMG->data[i1 + OMG->size[0] * i];
+      Wk_data[i1 + OMGold->size[0] * i] = OMG_data[i1 + OMG->size[0] * i];
     }
   }
   i = GAMold->size[0];
   GAMold->size[0] = SigmaB->size[0] * niini->size[0];
   emxEnsureCapacity_real_T(GAMold, i);
+  GAMold_data = GAMold->data;
   ret = SigmaB->size[0] * niini->size[0];
   for (i = 0; i < ret; i++) {
-    GAMold->data[i] = 9999.0;
+    GAMold_data[i] = 9999.0;
   }
   emxInit_real_T(&lmdold, 1);
   i = lmdold->size[0];
   lmdold->size[0] = niini->size[0];
   emxEnsureCapacity_real_T(lmdold, i);
+  lmdold_data = lmdold->data;
   ret = niini->size[0];
   for (i = 0; i < ret; i++) {
-    lmdold->data[i] = 999.0;
+    lmdold_data[i] = 999.0;
   }
   /*  Beginning of iterative process */
   /*  Apply the iterative procedure to find Det, Shape and Rot matrices */
   iter = 0.0;
   sumnini = rtInf;
   emxInit_real_T(&diff, 1);
-  emxInit_real_T(&eyep, 2);
   emxInit_real_T(&b_OMG, 2);
   emxInit_real_T(&r3, 2);
   emxInit_real_T(&r4, 2);
@@ -673,69 +713,64 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
     /*  In the **E case (except for the case EEE) it is necessary to update in
      * each step of the */
     /*  iterative procedure OMG */
-    if (iter > 1.0) {
-      b_bool = !(pa_pars[2] != 'E');
-      if (b_bool) {
-        if (cpc) {
-          /*  Variable shape: update OMG (rotation) */
-          /*  parameter pa.maxiterR is used here */
-          b_ret = OMG->size[0] - 1;
-          ret = OMG->size[1] - 1;
-          i = b_OMG->size[0] * b_OMG->size[1];
-          b_OMG->size[0] = b_ret + 1;
-          b_OMG->size[1] = ret + 1;
-          emxEnsureCapacity_real_T(b_OMG, i);
-          for (i = 0; i <= ret; i++) {
-            for (i1 = 0; i1 <= b_ret; i1++) {
-              b_OMG->data[i1 + b_OMG->size[0] * i] =
-                  OMG->data[i1 + OMG->size[0] * i];
-            }
-          }
-          cpcV(lmd, GAM, b_OMG, Wk, wk, pa_k, pa_maxiterR, pa_tolR, pa_v, OMG);
-        } else {
-          /*  Equal shape: update OMG (rotation) */
-          cpcE(lmd, SigmaB, niini, pa_k, pa_v, OMG);
-          /*  In all the other cases OMG is not updated */
-        }
-        /*  diffOMG is the relative sum of squares of the differences between */
-        /*  the element of matrix Omega2D in two consecutive iterations */
-        ret = OMG->size[0];
-        b_ret = OMG->size[1];
+    if ((iter > 1.0) && (!(pa_pars[2] != 'E'))) {
+      if (cpc) {
+        /*  Variable shape: update OMG (rotation) */
+        /*  parameter pa.maxiterR is used here */
+        b_ret = OMG->size[0] - 1;
+        ret = OMG->size[1] - 1;
         i = b_OMG->size[0] * b_OMG->size[1];
-        b_OMG->size[0] = ret;
-        b_OMG->size[1] = b_ret;
+        b_OMG->size[0] = b_ret + 1;
+        b_OMG->size[1] = ret + 1;
         emxEnsureCapacity_real_T(b_OMG, i);
-        for (i = 0; i < b_ret; i++) {
-          for (i1 = 0; i1 < ret; i1++) {
-            b_OMG->data[i1 + b_OMG->size[0] * i] =
-                OMG->data[i1 + OMG->size[0] * i];
+        Wk_data = b_OMG->data;
+        for (i = 0; i <= ret; i++) {
+          for (i1 = 0; i1 <= b_ret; i1++) {
+            Wk_data[i1 + b_OMG->size[0] * i] = OMG_data[i1 + OMG->size[0] * i];
           }
         }
-        c_mtimes(b_OMG, OMGold, GAM);
-        i = eyep->size[0] * eyep->size[1];
-        eyep->size[0] = GAM->size[0];
-        eyep->size[1] = GAM->size[1];
-        emxEnsureCapacity_real_T(eyep, i);
-        b_ret = GAM->size[0] * GAM->size[1];
-        for (ret = 0; ret < b_ret; ret++) {
-          eyep->data[ret] = GAM->data[ret] * GAM->data[ret];
-        }
-        combineVectorElements(eyep, r3);
-        sumnini = fabs(((double)v - d_combineVectorElements(r3)) / (double)v);
-        ret = OMG->size[0];
-        b_ret = OMG->size[1];
-        i = OMGold->size[0] * OMGold->size[1];
-        OMGold->size[0] = ret;
-        OMGold->size[1] = b_ret;
-        emxEnsureCapacity_real_T(OMGold, i);
-        for (i = 0; i < b_ret; i++) {
-          for (i1 = 0; i1 < ret; i1++) {
-            OMGold->data[i1 + OMGold->size[0] * i] =
-                OMG->data[i1 + OMG->size[0] * i];
-          }
-        }
+        cpcV(lmd, GAM, b_OMG, Wk, wk, pa_k, pa_maxiterR, pa_tolR, pa_v, OMG);
+        OMG_data = OMG->data;
       } else {
-        sumnini = 0.0;
+        /*  Equal shape: update OMG (rotation) */
+        cpcE(lmd, SigmaB, niini, pa_k, pa_v, OMG);
+        OMG_data = OMG->data;
+        /*  In all the other cases OMG is not updated */
+      }
+      /*  diffOMG is the relative sum of squares of the differences between */
+      /*  the element of matrix Omega2D in two consecutive iterations */
+      ret = OMG->size[0];
+      b_ret = OMG->size[1];
+      i = b_OMG->size[0] * b_OMG->size[1];
+      b_OMG->size[0] = ret;
+      b_OMG->size[1] = b_ret;
+      emxEnsureCapacity_real_T(b_OMG, i);
+      Wk_data = b_OMG->data;
+      for (i = 0; i < b_ret; i++) {
+        for (i1 = 0; i1 < ret; i1++) {
+          Wk_data[i1 + b_OMG->size[0] * i] = OMG_data[i1 + OMG->size[0] * i];
+        }
+      }
+      c_mtimes(b_OMG, OMGold, r4);
+      Wk_data = r4->data;
+      ret = r4->size[0] * r4->size[1];
+      for (i = 0; i < ret; i++) {
+        sumnini = Wk_data[i];
+        Wk_data[i] = sumnini * sumnini;
+      }
+      combineVectorElements(r4, r3);
+      sumnini = fabs(((double)v - e_sum(r3)) / (double)v);
+      ret = OMG->size[0];
+      b_ret = OMG->size[1];
+      i = OMGold->size[0] * OMGold->size[1];
+      OMGold->size[0] = ret;
+      OMGold->size[1] = b_ret;
+      emxEnsureCapacity_real_T(OMGold, i);
+      Wk_data = OMGold->data;
+      for (i = 0; i < b_ret; i++) {
+        for (i1 = 0; i1 < ret; i1++) {
+          Wk_data[i1 + OMGold->size[0] * i] = OMG_data[i1 + OMG->size[0] * i];
+        }
       }
     } else {
       sumnini = 0.0;
@@ -743,6 +778,7 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
     /*  Update GAM */
     restrshapeGPCM(lmd, OMG, SigmaB, niini, pa_pars, pa_shw, pa_shb, pa_k,
                    pa_maxiterS, pa_tolS, pa_userepmat, pa_v, pa_zerotol, GAM);
+    wk_data = GAM->data;
     /*  GAMf=GAM; */
     if (pa_sortsh == 1) {
       i = niini->size[0];
@@ -751,13 +787,15 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
         i1 = diff->size[0];
         diff->size[0] = GAM->size[0];
         emxEnsureCapacity_real_T(diff, i1);
+        Wk_data = diff->data;
         for (i1 = 0; i1 < ret; i1++) {
-          diff->data[i1] = GAM->data[i1 + GAM->size[0] * j];
+          Wk_data[i1] = wk_data[i1 + GAM->size[0] * j];
         }
         f_sort(diff);
+        Wk_data = diff->data;
         ret = diff->size[0];
         for (i1 = 0; i1 < ret; i1++) {
-          GAMfc->data[i1 + GAMfc->size[0] * j] = diff->data[i1];
+          GAMfc_data[i1 + GAMfc->size[0] * j] = Wk_data[i1];
         }
       }
     } else {
@@ -765,50 +803,55 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
       GAMfc->size[0] = GAM->size[0];
       GAMfc->size[1] = GAM->size[1];
       emxEnsureCapacity_real_T(GAMfc, i);
+      GAMfc_data = GAMfc->data;
       ret = GAM->size[0] * GAM->size[1];
       for (i = 0; i < ret; i++) {
-        GAMfc->data[i] = GAM->data[i];
+        GAMfc_data[i] = wk_data[i];
       }
     }
     /*  GAMnew = new values of matrix GAM in vectorized form */
     /*  diff = (new values of GAM - old values of GAM) */
-    i = diff->size[0];
-    diff->size[0] = GAMfc->size[0] * GAMfc->size[1];
-    emxEnsureCapacity_real_T(diff, i);
-    ret = GAMfc->size[0] * GAMfc->size[1];
-    for (i = 0; i < ret; i++) {
-      diff->data[i] = GAMfc->data[i] - GAMold->data[i];
+    if (GAMfc->size[0] * GAMfc->size[1] == GAMold->size[0]) {
+      b_ret = GAMfc->size[0] * GAMfc->size[1];
+      i = diff->size[0];
+      diff->size[0] = b_ret;
+      emxEnsureCapacity_real_T(diff, i);
+      Wk_data = diff->data;
+      for (i = 0; i < b_ret; i++) {
+        Wk_data[i] = GAMfc_data[i] - GAMold_data[i];
+      }
+    } else {
+      jf_binary_expand_op(diff, GAMfc, GAMold);
+      Wk_data = diff->data;
     }
     /*  relative sum of squares of the differences */
     a = 0.0;
     ret = diff->size[0];
     for (i = 0; i < ret; i++) {
-      a += diff->data[i] * diff->data[i];
+      a += Wk_data[i] * Wk_data[i];
     }
     b_GAMold = 0.0;
     ret = GAMold->size[0];
     for (i = 0; i < ret; i++) {
-      b_GAMold += GAMold->data[i] * GAMold->data[i];
+      b_GAMold += GAMold_data[i] * GAMold_data[i];
     }
     i = GAMold->size[0];
     GAMold->size[0] = GAMfc->size[0] * GAMfc->size[1];
     emxEnsureCapacity_real_T(GAMold, i);
+    GAMold_data = GAMold->data;
     ret = GAMfc->size[0] * GAMfc->size[1];
     for (i = 0; i < ret; i++) {
-      GAMold->data[i] = GAMfc->data[i];
+      GAMold_data[i] = GAMfc_data[i];
     }
     /*  Update determinants in case of varying determinants (apart from VII) */
     /*  Update lmd */
     /* restrdeterGPCM applies determinat restrictions for the 14 GPCM */
     /*  */
-    /*  */
     /* <a href="matlab: docsearchFS('restrdeterGPCM')">Link to the help
      * function</a> */
     /*  */
-    /*  */
     /*   This routine applies the constraints to the determinants using the */
     /*   specification contained in field pa.cdet of input structure pa. */
-    /*  */
     /*  */
     /*   Required input arguments: */
     /*  */
@@ -853,7 +896,6 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
     /*  */
     /*   Optional input arguments: */
     /*  */
-    /*  */
     /*  Output: */
     /*  */
     /*  lmdc  : restricted determinants. Vector.  */
@@ -871,20 +913,15 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
      */
     /*          if modeltype is E** or if pa.cdet=1; */
     /*  */
-    /*  */
-    /*  */
     /*  See also: restrSigmaGPCM, restrdeterGPCM, restreigen, tclust */
-    /*  */
     /*  */
     /*  References: */
     /*  */
     /*    Garcia-Escudero, L.A., Mayo-Iscar, A. and Riani M. (2019), */
     /*    Robust parsimonious clustering models. Submitted. */
     /*  */
-    /*  */
     /*  Copyright 2008-2021. */
     /*  Written by FSDA team */
-    /*  */
     /*  */
     /* <a href="matlab: docsearchFS('restrdeterGPCM')">Link to the help
      * function</a> */
@@ -899,8 +936,9 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
     i = lmd->size[0] * lmd->size[1];
     lmd->size[1] = pa_k;
     emxEnsureCapacity_real_T(lmd, i);
+    lmd_data = lmd->data;
     for (i = 0; i < pa_k; i++) {
-      lmd->data[i] = rtNaN;
+      lmd_data[i] = rtNaN;
     }
     /*  Inefficient code to obtain lmd */
     /*  for j=1:pa.k */
@@ -925,22 +963,24 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
       b_OMG->size[0] = f_loop_ub;
       b_OMG->size[1] = g_loop_ub;
       emxEnsureCapacity_real_T(b_OMG, i);
+      Wk_data = b_OMG->data;
       for (i = 0; i < g_loop_ub; i++) {
         for (i1 = 0; i1 < f_loop_ub; i1++) {
-          b_OMG->data[i1 + b_OMG->size[0] * i] =
-              OMG->data[(i1 + OMG->size[0] * i) +
-                        OMG->size[0] * OMG->size[1] * j];
+          Wk_data[i1 + b_OMG->size[0] * i] =
+              OMG_data[(i1 + OMG->size[0] * i) +
+                       OMG->size[0] * OMG->size[1] * j];
         }
       }
       i = b_Wk->size[0] * b_Wk->size[1];
       b_Wk->size[0] = h_loop_ub;
       b_Wk->size[1] = i_loop_ub;
       emxEnsureCapacity_real_T(b_Wk, i);
+      b_Wk_data = b_Wk->data;
       for (i = 0; i < i_loop_ub; i++) {
         for (i1 = 0; i1 < h_loop_ub; i1++) {
-          b_Wk->data[i1 + b_Wk->size[0] * i] =
-              SigmaB->data[(i1 + SigmaB->size[0] * i) +
-                           SigmaB->size[0] * SigmaB->size[1] * j];
+          b_Wk_data[i1 + b_Wk->size[0] * i] =
+              SigmaB_data[(i1 + SigmaB->size[0] * i) +
+                          SigmaB->size[0] * SigmaB->size[1] * j];
         }
       }
       c_mtimes(b_OMG, b_Wk, r4);
@@ -948,26 +988,29 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
       b_OMG->size[0] = j_loop_ub;
       b_OMG->size[1] = k_loop_ub;
       emxEnsureCapacity_real_T(b_OMG, i);
+      Wk_data = b_OMG->data;
       for (i = 0; i < k_loop_ub; i++) {
         for (i1 = 0; i1 < j_loop_ub; i1++) {
-          b_OMG->data[i1 + b_OMG->size[0] * i] =
-              OMG->data[(i1 + OMG->size[0] * i) +
-                        OMG->size[0] * OMG->size[1] * j];
+          Wk_data[i1 + b_OMG->size[0] * i] =
+              OMG_data[(i1 + OMG->size[0] * i) +
+                       OMG->size[0] * OMG->size[1] * j];
         }
       }
-      b_mtimes(r4, b_OMG, eyep);
-      if ((eyep->size[0] == 1) && (eyep->size[1] == 1)) {
+      b_mtimes(r4, b_OMG, b_Wk);
+      b_Wk_data = b_Wk->data;
+      if ((b_Wk->size[0] == 1) && (b_Wk->size[1] == 1)) {
         i = diff->size[0];
         diff->size[0] = 1;
         emxEnsureCapacity_real_T(diff, i);
-        diff->data[0] = eyep->data[0];
+        Wk_data = diff->data;
+        Wk_data[0] = b_Wk_data[0];
       } else {
-        b_ret = eyep->size[0];
-        ret = eyep->size[1];
-        if (b_ret < ret) {
+        b_ret = b_Wk->size[0];
+        ret = b_Wk->size[1];
+        if (b_ret <= ret) {
           ret = b_ret;
         }
-        if (0 < eyep->size[1]) {
+        if (0 < b_Wk->size[1]) {
           b_ret = ret;
         } else {
           b_ret = 0;
@@ -975,16 +1018,21 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
         i = diff->size[0];
         diff->size[0] = b_ret;
         emxEnsureCapacity_real_T(diff, i);
+        Wk_data = diff->data;
         i = b_ret - 1;
         for (ret = 0; ret <= i; ret++) {
-          diff->data[ret] = eyep->data[ret + eyep->size[0] * ret];
+          Wk_data[ret] = b_Wk_data[ret + b_Wk->size[0] * ret];
         }
       }
-      ret = diff->size[0];
-      for (i = 0; i < ret; i++) {
-        diff->data[i] /= GAM->data[i + GAM->size[0] * j];
+      if (diff->size[0] == GAM->size[0]) {
+        ret = diff->size[0];
+        for (i = 0; i < ret; i++) {
+          Wk_data[i] /= wk_data[i + GAM->size[0] * j];
+        }
+      } else {
+        pf_binary_expand_op(diff, GAM, j);
       }
-      lmd->data[j] = blockedSummation(diff, diff->size[0]) / (double)pa_v;
+      lmd_data[j] = blockedSummation(diff, diff->size[0]) / (double)pa_v;
     }
     /*  Note that ((OMG(:,:,j))' * SigmaB(:,:,j) * OMG(:,:,j) computes */
     /*  (\lambda_j^(1/p)*\Gamma_j) where \Gamma_j is the UNCONSTRAINED shape */
@@ -1002,35 +1050,43 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
     /*  Make sure niini is a column vector */
     if (d_maximum(lmd) / c_minimum(lmd) >
         rt_powd_snf(pa_cdet, 1.0 / (double)pa_v)) {
-      c_restreigen(lmd, niini, rt_powd_snf(pa_cdet, 1.0 / (double)pa_v),
+      b_restreigen(lmd, niini, rt_powd_snf(pa_cdet, 1.0 / (double)pa_v),
                    pa_zerotol, pa_userepmat);
+      lmd_data = lmd->data;
     }
     /*  lmdnew = new values of vector lmd */
     /*  diff = (new values of lmd) - (old values of lmd) */
-    i = diff->size[0];
-    diff->size[0] = lmd->size[1];
-    emxEnsureCapacity_real_T(diff, i);
-    ret = lmd->size[1];
-    for (i = 0; i < ret; i++) {
-      diff->data[i] = lmd->data[i] - lmdold->data[i];
+    if (lmdold->size[0] == lmd->size[1]) {
+      b_ret = lmd->size[1];
+      i = diff->size[0];
+      diff->size[0] = b_ret;
+      emxEnsureCapacity_real_T(diff, i);
+      Wk_data = diff->data;
+      for (i = 0; i < b_ret; i++) {
+        Wk_data[i] = lmd_data[i] - lmdold_data[i];
+      }
+    } else {
+      qf_binary_expand_op(diff, lmd, lmdold);
+      Wk_data = diff->data;
     }
     /*  relative sum of squares of the differences */
     b_diff = 0.0;
     ret = diff->size[0];
     for (i = 0; i < ret; i++) {
-      b_diff += diff->data[i] * diff->data[i];
+      b_diff += Wk_data[i] * Wk_data[i];
     }
     b_lmdold = 0.0;
     ret = lmdold->size[0];
     for (i = 0; i < ret; i++) {
-      b_lmdold += lmdold->data[i] * lmdold->data[i];
+      b_lmdold += lmdold_data[i] * lmdold_data[i];
     }
     i = lmdold->size[0];
     lmdold->size[0] = lmd->size[1];
     emxEnsureCapacity_real_T(lmdold, i);
+    lmdold_data = lmdold->data;
     ret = lmd->size[1];
     for (i = 0; i < ret; i++) {
-      lmdold->data[i] = lmd->data[i];
+      lmdold_data[i] = lmd_data[i];
     }
     difflmd[0] = b_diff / b_lmdold;
     difflmd[1] = a / b_GAMold;
@@ -1043,25 +1099,25 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   emxFree_real_T(&OMGold);
   emxFree_real_T(&wk);
   emxFree_real_T(&Wk);
-  emxFree_real_T(&GAMfc);
   emxInit_boolean_T(&x, 1);
   /*  Check if all is well */
   i = x->size[0];
   x->size[0] = GAM->size[0] * GAM->size[1];
   emxEnsureCapacity_boolean_T(x, i);
+  x_data = x->data;
   ret = GAM->size[0] * GAM->size[1];
   for (i = 0; i < ret; i++) {
-    x->data[i] = rtIsNaN(GAM->data[i]);
+    x_data[i] = rtIsNaN(wk_data[i]);
   }
   cpc = false;
   b_ret = 1;
   exitg1 = false;
   while ((!exitg1) && (b_ret <= x->size[0])) {
-    if (!x->data[b_ret - 1]) {
-      b_ret++;
-    } else {
+    if (x_data[b_ret - 1]) {
       cpc = true;
       exitg1 = true;
+    } else {
+      b_ret++;
     }
   }
   emxFree_boolean_T(&x);
@@ -1082,49 +1138,53 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
         e_loop_ub = OMG->size[1];
       }
       for (j = 0; j < i; j++) {
-        i1 = eyep->size[0] * eyep->size[1];
-        eyep->size[0] = unnamed_idx_0;
-        eyep->size[1] = b_unnamed_idx_1;
-        emxEnsureCapacity_real_T(eyep, i1);
+        i1 = GAMfc->size[0] * GAMfc->size[1];
+        GAMfc->size[0] = unnamed_idx_0;
+        GAMfc->size[1] = b_unnamed_idx_1;
+        emxEnsureCapacity_real_T(GAMfc, i1);
+        GAMfc_data = GAMfc->data;
         for (i1 = 0; i1 < loop_ub; i1++) {
-          eyep->data[i1] = 0.0;
+          GAMfc_data[i1] = 0.0;
         }
         for (b_ret = 0; b_ret <= nv; b_ret++) {
-          eyep->data[b_ret + eyep->size[0] * b_ret] =
-              GAM->data[b_ret + GAM->size[0] * j];
+          GAMfc_data[b_ret + GAMfc->size[0] * b_ret] =
+              wk_data[b_ret + GAM->size[0] * j];
         }
-        sumnini = lmd->data[j];
+        sumnini = lmd_data[j];
         i1 = b_Wk->size[0] * b_Wk->size[1];
         b_Wk->size[0] = b_loop_ub;
         b_Wk->size[1] = c_loop_ub;
         emxEnsureCapacity_real_T(b_Wk, i1);
+        b_Wk_data = b_Wk->data;
         for (i1 = 0; i1 < c_loop_ub; i1++) {
           for (unnamed_idx_1 = 0; unnamed_idx_1 < b_loop_ub; unnamed_idx_1++) {
-            b_Wk->data[unnamed_idx_1 + b_Wk->size[0] * i1] =
-                sumnini * OMG->data[(unnamed_idx_1 + OMG->size[0] * i1) +
-                                    OMG->size[0] * OMG->size[1] * j];
+            b_Wk_data[unnamed_idx_1 + b_Wk->size[0] * i1] =
+                sumnini * OMG_data[(unnamed_idx_1 + OMG->size[0] * i1) +
+                                   OMG->size[0] * OMG->size[1] * j];
           }
         }
         i1 = b_OMG->size[0] * b_OMG->size[1];
         b_OMG->size[0] = d_loop_ub;
         b_OMG->size[1] = e_loop_ub;
         emxEnsureCapacity_real_T(b_OMG, i1);
+        Wk_data = b_OMG->data;
         for (i1 = 0; i1 < e_loop_ub; i1++) {
           for (unnamed_idx_1 = 0; unnamed_idx_1 < d_loop_ub; unnamed_idx_1++) {
-            b_OMG->data[unnamed_idx_1 + b_OMG->size[0] * i1] =
-                OMG->data[(unnamed_idx_1 + OMG->size[0] * i1) +
-                          OMG->size[0] * OMG->size[1] * j];
+            Wk_data[unnamed_idx_1 + b_OMG->size[0] * i1] =
+                OMG_data[(unnamed_idx_1 + OMG->size[0] * i1) +
+                         OMG->size[0] * OMG->size[1] * j];
           }
         }
-        b_mtimes(b_Wk, eyep, r4);
+        b_mtimes(b_Wk, GAMfc, r4);
         d_mtimes(r4, b_OMG, b_Wk);
+        b_Wk_data = b_Wk->data;
         ret = b_Wk->size[1];
         for (i1 = 0; i1 < ret; i1++) {
           b_ret = b_Wk->size[0];
           for (unnamed_idx_1 = 0; unnamed_idx_1 < b_ret; unnamed_idx_1++) {
-            SigmaB->data[(unnamed_idx_1 + SigmaB->size[0] * i1) +
-                         SigmaB->size[0] * SigmaB->size[1] * j] =
-                b_Wk->data[unnamed_idx_1 + b_Wk->size[0] * i1];
+            SigmaB_data[(unnamed_idx_1 + SigmaB->size[0] * i1) +
+                        SigmaB->size[0] * SigmaB->size[1] * j] =
+                b_Wk_data[unnamed_idx_1 + b_Wk->size[0] * i1];
           }
         }
       }
@@ -1137,28 +1197,29 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   if (guard1) {
     /*  In this case final Sigma is the identity matrix replicated k times */
     b_ret = SigmaB->size[0];
-    i = eyep->size[0] * eyep->size[1];
-    eyep->size[0] = SigmaB->size[0];
-    eyep->size[1] = SigmaB->size[0];
-    emxEnsureCapacity_real_T(eyep, i);
+    i = GAMfc->size[0] * GAMfc->size[1];
+    GAMfc->size[0] = SigmaB->size[0];
+    GAMfc->size[1] = SigmaB->size[0];
+    emxEnsureCapacity_real_T(GAMfc, i);
+    GAMfc_data = GAMfc->data;
     ret = SigmaB->size[0] * SigmaB->size[0];
     for (i = 0; i < ret; i++) {
-      eyep->data[i] = 0.0;
+      GAMfc_data[i] = 0.0;
     }
     if (SigmaB->size[0] > 0) {
       for (ret = 0; ret < b_ret; ret++) {
-        eyep->data[ret + eyep->size[0] * ret] = 1.0;
+        GAMfc_data[ret + GAMfc->size[0] * ret] = 1.0;
       }
     }
     i = niini->size[0];
     for (j = 0; j < i; j++) {
-      ret = eyep->size[1];
+      ret = GAMfc->size[1];
       for (i1 = 0; i1 < ret; i1++) {
-        b_ret = eyep->size[0];
+        b_ret = GAMfc->size[0];
         for (unnamed_idx_1 = 0; unnamed_idx_1 < b_ret; unnamed_idx_1++) {
-          SigmaB->data[(unnamed_idx_1 + SigmaB->size[0] * i1) +
-                       SigmaB->size[0] * SigmaB->size[1] * j] =
-              eyep->data[unnamed_idx_1 + eyep->size[0] * i1];
+          SigmaB_data[(unnamed_idx_1 + SigmaB->size[0] * i1) +
+                      SigmaB->size[0] * SigmaB->size[1] * j] =
+              GAMfc_data[unnamed_idx_1 + GAMfc->size[0] * i1];
         }
       }
     }
@@ -1167,8 +1228,8 @@ void b_restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   emxFree_real_T(&r3);
   emxFree_real_T(&b_OMG);
   emxFree_real_T(&b_Wk);
-  emxFree_real_T(&eyep);
   emxFree_real_T(&GAM);
+  emxFree_real_T(&GAMfc);
 }
 
 void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
@@ -1181,7 +1242,7 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   emxArray_boolean_T *r;
   emxArray_creal_T *V;
   emxArray_creal_T *eigunsorted;
-  emxArray_creal_T *r4;
+  emxArray_creal_T *r5;
   emxArray_int32_T *iidx;
   emxArray_real_T *GAMfc;
   emxArray_real_T *GAMold;
@@ -1196,7 +1257,10 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   emxArray_real_T *r2;
   emxArray_real_T *r3;
   emxArray_real_T *wk;
+  creal_T *V_data;
+  creal_T *eigunsorted_data;
   double difflmd[3];
+  const double *niini_data;
   double b_GAMold;
   double b_diageigunsorted;
   double b_lmdold;
@@ -1204,6 +1268,15 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   double diffglob;
   double iter;
   double maxiterDSR;
+  double *GAMfc_data;
+  double *GAMold_data;
+  double *OMG_data;
+  double *SigmaB_data;
+  double *Wk_data;
+  double *b_SigmaB_data;
+  double *eyep_data;
+  double *lmd_data;
+  double *wk_data;
   int b_loop_ub;
   int c_loop_ub;
   int d_loop_ub;
@@ -1225,24 +1298,25 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   int unnamed_idx_0;
   int unnamed_idx_1;
   int v;
+  int *iidx_data;
   bool varargin_1[7];
   bool b_bv[6];
   bool bv1[2];
   bool cpc;
   bool guard1 = false;
-  bool maxval;
+  bool maxsigma_;
+  bool *r4;
+  niini_data = niini->data;
+  SigmaB_data = SigmaB->data;
   /* restrSigmaGPCM computes constrained covariance matrices for the 14 GPCM
    * specifications */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('restrSigmaGPCM')">Link to the help
    * function</a> */
   /*  */
-  /*  */
   /*   This routine applies the constraints to the covariance matrices using the
    */
   /*   specifications contained in input structure pa. */
-  /*  */
   /*  */
   /*  Required input arguments: */
   /*  */
@@ -1356,7 +1430,6 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   /*  */
   /*  Output: */
   /*  */
-  /*  */
   /*     Sigma  : constrained covariance matrices. p-by-p-by-k array. */
   /*              p-by-p-by-k array containing the k covariance matrices for */
   /*              the k groups. See section 'More About' for the notation for */
@@ -1393,7 +1466,6 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   /*            not greater than pa.shb. */
   /*            The ratio of the elements of each column is not greater than */
   /*            pa.shw. */
-  /*  */
   /*  */
   /*  More About: */
   /*  The notation for the eigen-decomposition of the */
@@ -1454,20 +1526,15 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   /*    greater than pa.cdet. All the elements of vector lmd are equal */
   /*    if modeltype is E** or if $c_{det}=1$ (pa.cdet=1). */
   /*  */
-  /*  */
-  /*  */
   /*  See also restrshapeGPCM, restrdeterGPCM, restreigen, tclust */
-  /*  */
   /*  */
   /*  References: */
   /*  */
   /*    Garcia-Escudero, L.A., Mayo-Iscar, A. and Riani M. (2019), */
   /*    Robust parsimonious clustering models. Submitted. */
   /*  */
-  /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('restrSigmaGPCM')">Link to the help
    * function</a> */
@@ -1557,9 +1624,10 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   OMG->size[1] = unnamed_idx_1;
   OMG->size[2] = nx;
   emxEnsureCapacity_real_T(OMG, i);
+  OMG_data = OMG->data;
   loop_ub = unnamed_idx_0 * unnamed_idx_1 * nx;
   for (i = 0; i < loop_ub; i++) {
-    OMG->data[i] = 0.0;
+    OMG_data[i] = 0.0;
   }
   /*  Tolerance associated to the maximum of the elements which have to be */
   /*  constrained. If the maximum  is smaller than zerotol restreigen */
@@ -1578,13 +1646,11 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   /*  All the other specification do not */
   /*  Model which require more than one iteration in the main loop */
   v_strcmp(pa_pars, varargin_1);
-  maxval = varargin_1[0];
+  cpc = varargin_1[0];
   for (loop_ub = 0; loop_ub < 6; loop_ub++) {
-    if ((int)maxval < (int)varargin_1[loop_ub + 1]) {
-      maxval = true;
-    }
+    cpc = (((int)cpc < (int)varargin_1[loop_ub + 1]) || cpc);
   }
-  if (maxval) {
+  if (cpc) {
     maxiterDSR = pa_maxiterDSR;
   } else {
     maxiterDSR = 1.0;
@@ -1604,31 +1670,22 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
     pa_maxiterR = 1;
   }
   /*  Parameters not set by the user */
-  maxval = !(pa_pars[2] != 'E');
-  if (maxval) {
+  if ((!(pa_pars[2] != 'E')) || (!(pa_pars[2] != 'I'))) {
     pa_sortsh = 1;
   } else {
-    maxval = !(pa_pars[2] != 'I');
-    if (maxval) {
-      pa_sortsh = 1;
-    } else {
-      pa_sortsh = 0;
-    }
+    pa_sortsh = 0;
   }
-  maxval = !(pa_pars[0] != 'E');
-  if (maxval) {
+  if (!(pa_pars[0] != 'E')) {
     pa_cdet = 1.0;
   }
   /*  If OMG is identity, shape restriction parameter within groups is set to 1
    */
-  maxval = !(pa_pars[1] != 'I');
-  if (maxval) {
+  if (!(pa_pars[1] != 'I')) {
     pa_shw = 1.0;
   }
   /*  if Equal shape is imposed shape restriction parameter between groups is */
   /*  set to 1 */
-  maxval = !(pa_pars[1] != 'E');
-  if (maxval) {
+  if (!(pa_pars[1] != 'E')) {
     pa_shb = 1.0;
   }
   emxInit_real_T(&Wk, 3);
@@ -1640,28 +1697,30 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   Wk->size[1] = unnamed_idx_1;
   Wk->size[2] = niini->size[0];
   emxEnsureCapacity_real_T(Wk, i);
+  Wk_data = Wk->data;
   loop_ub = unnamed_idx_0 * unnamed_idx_1 * niini->size[0];
   for (i = 0; i < loop_ub; i++) {
-    Wk->data[i] = 0.0;
+    Wk_data[i] = 0.0;
   }
   emxInit_real_T(&wk, 1);
   i = wk->size[0];
   wk->size[0] = niini->size[0];
   emxEnsureCapacity_real_T(wk, i);
+  wk_data = wk->data;
   loop_ub = niini->size[0];
   for (i = 0; i < loop_ub; i++) {
-    wk->data[i] = 0.0;
+    wk_data[i] = 0.0;
   }
   emxInit_real_T(&GAMfc, 2);
   i = GAMfc->size[0] * GAMfc->size[1];
   GAMfc->size[0] = SigmaB->size[0];
   GAMfc->size[1] = niini->size[0];
   emxEnsureCapacity_real_T(GAMfc, i);
+  GAMfc_data = GAMfc->data;
   loop_ub = SigmaB->size[0] * niini->size[0];
   for (i = 0; i < loop_ub; i++) {
-    GAMfc->data[i] = 0.0;
+    GAMfc_data[i] = 0.0;
   }
-  maxval = !(pa_pars[2] != 'E');
   emxInit_real_T(&diageigunsorted, 1);
   emxInit_real_T(&eyep, 2);
   emxInit_real_T(&OMGold, 2);
@@ -1671,7 +1730,7 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   emxInit_int32_T(&iidx, 1);
   emxInit_boolean_T(&r, 1);
   emxInit_real_T(&b_SigmaB, 2);
-  if (maxval) {
+  if (!(pa_pars[2] != 'E')) {
     /*  In the common principal components case it is necessary to find */
     /*  initial values for OMG (rotation), and lmd (unconstrained */
     /*  determinants) */
@@ -1684,9 +1743,7 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
      */
     /*  estimate of the common rotation matrix. */
     /*  */
-    /*  */
     /*  Required input arguments: */
-    /*  */
     /*  */
     /*    SigmaB : p-by-p-by-k array containing the k covariance matrices for
      * the */
@@ -1717,13 +1774,13 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
     /* $LastChangedDate::                      $: Date of the last commit */
     /*  Beginning of code */
     /*  Initialize lmd */
-    maxval = !(pa_pars[0] != 'V');
-    if (maxval) {
+    if (!(pa_pars[0] != 'V')) {
       i = niini->size[0];
       i1 = lmd->size[0] * lmd->size[1];
       lmd->size[0] = 1;
       lmd->size[1] = niini->size[0];
       emxEnsureCapacity_real_T(lmd, i1);
+      lmd_data = lmd->data;
       for (j = 0; j < i; j++) {
         /*  lmd(j)=exp(log(det(SigmaB(:,:,j)))/v); */
         loop_ub = SigmaB->size[0];
@@ -1732,14 +1789,15 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
         b_SigmaB->size[0] = loop_ub;
         b_SigmaB->size[1] = nx;
         emxEnsureCapacity_real_T(b_SigmaB, i1);
+        b_SigmaB_data = b_SigmaB->data;
         for (i1 = 0; i1 < nx; i1++) {
           for (m = 0; m < loop_ub; m++) {
-            b_SigmaB->data[m + b_SigmaB->size[0] * i1] =
-                SigmaB->data[(m + SigmaB->size[0] * i1) +
-                             SigmaB->size[0] * SigmaB->size[1] * j];
+            b_SigmaB_data[m + b_SigmaB->size[0] * i1] =
+                SigmaB_data[(m + SigmaB->size[0] * i1) +
+                            SigmaB->size[0] * SigmaB->size[1] * j];
           }
         }
-        lmd->data[j] = rt_powd_snf(det(b_SigmaB), 1.0 / (double)v);
+        lmd_data[j] = rt_powd_snf(det(b_SigmaB), 1.0 / (double)v);
         /*  lmd(j) = real(complex(det(SigmaB(:,:,j)))^complex(1/v)); */
       }
     } else {
@@ -1747,9 +1805,10 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
       lmd->size[0] = 1;
       lmd->size[1] = niini->size[0];
       emxEnsureCapacity_real_T(lmd, i);
+      lmd_data = lmd->data;
       loop_ub = niini->size[0];
       for (i = 0; i < loop_ub; i++) {
-        lmd->data[i] = 1.0;
+        lmd_data[i] = 1.0;
       }
     }
     diffglob = blockedSummation(niini, niini->size[0]);
@@ -1765,75 +1824,88 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
     eyep->size[0] = SigmaB->size[0];
     eyep->size[1] = SigmaB->size[0];
     emxEnsureCapacity_real_T(eyep, i);
+    eyep_data = eyep->data;
     loop_ub = SigmaB->size[0] * SigmaB->size[0];
     for (i = 0; i < loop_ub; i++) {
-      eyep->data[i] = 0.0;
+      eyep_data[i] = 0.0;
     }
     i = niini->size[0];
     for (j = 0; j < i; j++) {
-      diffOMG = niini->data[j] / diffglob * (1.0 / lmd->data[j]);
+      diffOMG = niini_data[j] / diffglob * (1.0 / lmd_data[j]);
       loop_ub = eyep->size[1];
-      for (i1 = 0; i1 < loop_ub; i1++) {
-        nx = eyep->size[0];
-        for (m = 0; m < nx; m++) {
-          eyep->data[m + eyep->size[0] * i1] +=
-              diffOMG * SigmaB->data[(m + SigmaB->size[0] * i1) +
-                                     SigmaB->size[0] * SigmaB->size[1] * j];
+      if ((eyep->size[0] == SigmaB->size[0]) &&
+          (eyep->size[1] == SigmaB->size[1])) {
+        for (i1 = 0; i1 < loop_ub; i1++) {
+          nx = eyep->size[0];
+          for (m = 0; m < nx; m++) {
+            eyep_data[m + eyep->size[0] * i1] +=
+                diffOMG * SigmaB_data[(m + SigmaB->size[0] * i1) +
+                                      SigmaB->size[0] * SigmaB->size[1] * j];
+          }
         }
+      } else {
+        if_binary_expand_op(eyep, diffOMG, SigmaB, j);
+        eyep_data = eyep->data;
       }
     }
     i = r->size[0];
     r->size[0] = eyep->size[0] * eyep->size[1];
     emxEnsureCapacity_boolean_T(r, i);
+    r4 = r->data;
     loop_ub = eyep->size[0] * eyep->size[1];
     for (i = 0; i < loop_ub; i++) {
-      r->data[i] = rtIsNaN(eyep->data[i]);
+      r4[i] = rtIsNaN(eyep_data[i]);
     }
-    if (any(r)) {
-      maxval = true;
+    if (b_any(r)) {
+      maxsigma_ = true;
     } else {
       i = r->size[0];
       r->size[0] = eyep->size[0] * eyep->size[1];
       emxEnsureCapacity_boolean_T(r, i);
+      r4 = r->data;
       loop_ub = eyep->size[0] * eyep->size[1];
       for (i = 0; i < loop_ub; i++) {
-        r->data[i] = rtIsInf(eyep->data[i]);
+        r4[i] = rtIsInf(eyep_data[i]);
       }
-      if (any(r)) {
-        maxval = true;
+      if (b_any(r)) {
+        maxsigma_ = true;
       } else {
-        maxval = false;
+        maxsigma_ = false;
       }
     }
     /*  In case of missing or infinite values common rotation matrix is forced
      * to */
     /*  be the identity matrix */
-    if (maxval) {
+    if (maxsigma_) {
       m = SigmaB->size[0];
       i = eyep->size[0] * eyep->size[1];
       eyep->size[0] = SigmaB->size[0];
       eyep->size[1] = SigmaB->size[0];
       emxEnsureCapacity_real_T(eyep, i);
+      eyep_data = eyep->data;
       loop_ub = SigmaB->size[0] * SigmaB->size[0];
       for (i = 0; i < loop_ub; i++) {
-        eyep->data[i] = 0.0;
+        eyep_data[i] = 0.0;
       }
       if (SigmaB->size[0] > 0) {
         for (loop_ub = 0; loop_ub < m; loop_ub++) {
-          eyep->data[loop_ub + eyep->size[0] * loop_ub] = 1.0;
+          eyep_data[loop_ub + eyep->size[0] * loop_ub] = 1.0;
         }
       }
     } else {
       /*  The common rotation matrix is formed by the eigenvectors of the */
       /*  pooled within-group covariance matrix Sw */
       b_eig(eyep, V, eigunsorted);
+      eigunsorted_data = eigunsorted->data;
+      V_data = V->data;
       i = eyep->size[0] * eyep->size[1];
       eyep->size[0] = V->size[0];
       eyep->size[1] = V->size[1];
       emxEnsureCapacity_real_T(eyep, i);
+      eyep_data = eyep->data;
       loop_ub = V->size[0] * V->size[1];
       for (i = 0; i < loop_ub; i++) {
-        eyep->data[i] = V->data[i].re;
+        eyep_data[i] = V_data[i].re;
       }
       /*  Sort eigenvalues from largest to smallest and reorder the columns */
       /*  of the matrix of eigenvectors accordingly */
@@ -1841,42 +1913,47 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
       b_SigmaB->size[0] = eigunsorted->size[0];
       b_SigmaB->size[1] = eigunsorted->size[1];
       emxEnsureCapacity_real_T(b_SigmaB, i);
+      b_SigmaB_data = b_SigmaB->data;
       loop_ub = eigunsorted->size[0] * eigunsorted->size[1];
       for (i = 0; i < loop_ub; i++) {
-        b_SigmaB->data[i] = eigunsorted->data[i].re;
+        b_SigmaB_data[i] = eigunsorted_data[i].re;
       }
       diag(b_SigmaB, GAMold);
       g_sort(GAMold, iidx);
+      iidx_data = iidx->data;
       nx = eyep->size[0] - 1;
       i = b_SigmaB->size[0] * b_SigmaB->size[1];
       b_SigmaB->size[0] = eyep->size[0];
       b_SigmaB->size[1] = iidx->size[0];
       emxEnsureCapacity_real_T(b_SigmaB, i);
+      b_SigmaB_data = b_SigmaB->data;
       loop_ub = iidx->size[0];
       for (i = 0; i < loop_ub; i++) {
         for (i1 = 0; i1 <= nx; i1++) {
-          b_SigmaB->data[i1 + b_SigmaB->size[0] * i] =
-              eyep->data[i1 + eyep->size[0] * (iidx->data[i] - 1)];
+          b_SigmaB_data[i1 + b_SigmaB->size[0] * i] =
+              eyep_data[i1 + eyep->size[0] * (iidx_data[i] - 1)];
         }
       }
       i = eyep->size[0] * eyep->size[1];
       eyep->size[0] = b_SigmaB->size[0];
       eyep->size[1] = b_SigmaB->size[1];
       emxEnsureCapacity_real_T(eyep, i);
+      eyep_data = eyep->data;
       loop_ub = b_SigmaB->size[0] * b_SigmaB->size[1];
       for (i = 0; i < loop_ub; i++) {
-        eyep->data[i] = b_SigmaB->data[i];
+        eyep_data[i] = b_SigmaB_data[i];
       }
     }
     /*  Omega = array of size p-by-p-by-k */
     /*  containing k replicates of matrix V */
     d_repmat(eyep, niini->size[0], OMG);
+    OMG_data = OMG->data;
     /*  In presence of variable shape */
     /*  compute Wk and wk once and for all. */
     /*  Wk(:,:,j) contains (n_j/n) \Sigma_j */
     /*  wk(j) contains largest eigenvalue of Wk(:,:,j) */
     /*  These two matrices will be used inside routine cpcV */
-    emxInit_creal_T(&r4, 1);
+    emxInit_creal_T(&r5, 1);
     if (y_strcmp(pa_pars) || ab_strcmp(pa_pars)) {
       i = niini->size[0];
       i1 = Wk->size[0] * Wk->size[1] * Wk->size[2];
@@ -1884,18 +1961,20 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
       Wk->size[1] = unnamed_idx_1;
       Wk->size[2] = niini->size[0];
       emxEnsureCapacity_real_T(Wk, i1);
+      Wk_data = Wk->data;
       i1 = wk->size[0];
       wk->size[0] = niini->size[0];
       emxEnsureCapacity_real_T(wk, i1);
+      wk_data = wk->data;
       for (j = 0; j < i; j++) {
-        diffOMG = niini->data[j] / diffglob;
+        diffOMG = niini_data[j] / diffglob;
         loop_ub = SigmaB->size[0];
         nx = SigmaB->size[1];
         for (i1 = 0; i1 < nx; i1++) {
           for (m = 0; m < loop_ub; m++) {
-            Wk->data[(m + Wk->size[0] * i1) + Wk->size[0] * Wk->size[1] * j] =
-                diffOMG * SigmaB->data[(m + SigmaB->size[0] * i1) +
-                                       SigmaB->size[0] * SigmaB->size[1] * j];
+            Wk_data[(m + Wk->size[0] * i1) + Wk->size[0] * Wk->size[1] * j] =
+                diffOMG * SigmaB_data[(m + SigmaB->size[0] * i1) +
+                                      SigmaB->size[0] * SigmaB->size[1] * j];
           }
         }
         loop_ub = Wk->size[0];
@@ -1904,39 +1983,159 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
         b_SigmaB->size[0] = Wk->size[0];
         b_SigmaB->size[1] = Wk->size[1];
         emxEnsureCapacity_real_T(b_SigmaB, i1);
+        b_SigmaB_data = b_SigmaB->data;
         for (i1 = 0; i1 < nx; i1++) {
           for (m = 0; m < loop_ub; m++) {
-            b_SigmaB->data[m + b_SigmaB->size[0] * i1] =
-                Wk->data[(m + Wk->size[0] * i1) +
-                         Wk->size[0] * Wk->size[1] * j];
+            b_SigmaB_data[m + b_SigmaB->size[0] * i1] =
+                Wk_data[(m + Wk->size[0] * i1) + Wk->size[0] * Wk->size[1] * j];
           }
         }
-        c_eig(b_SigmaB, r4);
-        i1 = diageigunsorted->size[0];
-        diageigunsorted->size[0] = r4->size[0];
-        emxEnsureCapacity_real_T(diageigunsorted, i1);
-        loop_ub = r4->size[0];
+        c_eig(b_SigmaB, r5);
+        eigunsorted_data = r5->data;
+        i1 = GAMold->size[0];
+        GAMold->size[0] = r5->size[0];
+        emxEnsureCapacity_real_T(GAMold, i1);
+        GAMold_data = GAMold->data;
+        loop_ub = r5->size[0];
         for (i1 = 0; i1 < loop_ub; i1++) {
-          diageigunsorted->data[i1] = r4->data[i1].re;
+          GAMold_data[i1] = eigunsorted_data[i1].re;
         }
-        wk->data[j] = b_maximum(diageigunsorted);
+        wk_data[j] = b_maximum(GAMold);
       }
     }
-    emxFree_creal_T(&r4);
+    emxFree_creal_T(&r5);
+  } else if (!(pa_pars[2] != 'V')) {
+    /*  Initialize lmd */
+    i = lmd->size[0] * lmd->size[1];
+    lmd->size[0] = 1;
+    lmd->size[1] = niini->size[0];
+    emxEnsureCapacity_real_T(lmd, i);
+    lmd_data = lmd->data;
+    loop_ub = niini->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      lmd_data[i] = 1.0;
+    }
+    /*  Find initial (and final value for OMG) */
+    i = niini->size[0];
+    for (j = 0; j < i; j++) {
+      loop_ub = SigmaB->size[0];
+      nx = SigmaB->size[1];
+      i1 = b_SigmaB->size[0] * b_SigmaB->size[1];
+      b_SigmaB->size[0] = loop_ub;
+      b_SigmaB->size[1] = nx;
+      emxEnsureCapacity_real_T(b_SigmaB, i1);
+      b_SigmaB_data = b_SigmaB->data;
+      for (i1 = 0; i1 < nx; i1++) {
+        for (m = 0; m < loop_ub; m++) {
+          b_SigmaB_data[m + b_SigmaB->size[0] * i1] =
+              SigmaB_data[(m + SigmaB->size[0] * i1) +
+                          SigmaB->size[0] * SigmaB->size[1] * j];
+        }
+      }
+      b_eig(b_SigmaB, V, eigunsorted);
+      eigunsorted_data = eigunsorted->data;
+      V_data = V->data;
+      i1 = eyep->size[0] * eyep->size[1];
+      eyep->size[0] = eigunsorted->size[0];
+      eyep->size[1] = eigunsorted->size[1];
+      emxEnsureCapacity_real_T(eyep, i1);
+      eyep_data = eyep->data;
+      loop_ub = eigunsorted->size[0] * eigunsorted->size[1];
+      for (i1 = 0; i1 < loop_ub; i1++) {
+        eyep_data[i1] = eigunsorted_data[i1].re;
+      }
+      nx = eyep->size[0] * eyep->size[1];
+      i1 = OMGold->size[0] * OMGold->size[1];
+      OMGold->size[0] = eyep->size[0];
+      OMGold->size[1] = eyep->size[1];
+      emxEnsureCapacity_real_T(OMGold, i1);
+      Wk_data = OMGold->data;
+      for (loop_ub = 0; loop_ub < nx; loop_ub++) {
+        Wk_data[loop_ub] = fabs(eyep_data[loop_ub]);
+      }
+      diag(OMGold, diageigunsorted);
+      Wk_data = diageigunsorted->data;
+      /*  Sort eigenvalues from largest to smallest and reorder the columns */
+      /*  of the matrix of eigenvectors accordingly */
+      i1 = GAMold->size[0];
+      GAMold->size[0] = diageigunsorted->size[0];
+      emxEnsureCapacity_real_T(GAMold, i1);
+      GAMold_data = GAMold->data;
+      loop_ub = diageigunsorted->size[0];
+      for (i1 = 0; i1 < loop_ub; i1++) {
+        GAMold_data[i1] = Wk_data[i1];
+      }
+      g_sort(GAMold, iidx);
+      iidx_data = iidx->data;
+      loop_ub = V->size[0];
+      nx = iidx->size[0];
+      for (i1 = 0; i1 < nx; i1++) {
+        for (m = 0; m < loop_ub; m++) {
+          OMG_data[(m + OMG->size[0] * i1) + OMG->size[0] * OMG->size[1] * j] =
+              V_data[m + V->size[0] * (iidx_data[i1] - 1)].re;
+        }
+      }
+      if (!(pa_pars[0] != 'V')) {
+        /*  lmd(j) = (det(SigmaB(:,:,j))) ^ (1 / v); */
+        nx = diageigunsorted->size[0];
+        if (diageigunsorted->size[0] == 0) {
+          diffglob = 1.0;
+        } else {
+          diffglob = Wk_data[0];
+          for (loop_ub = 2; loop_ub <= nx; loop_ub++) {
+            diffglob *= Wk_data[loop_ub - 1];
+          }
+        }
+        lmd_data[j] = rt_powd_snf(diffglob, 1.0 / (double)v);
+      }
+    }
   } else {
-    maxval = !(pa_pars[2] != 'V');
-    if (maxval) {
-      /*  Initialize lmd */
-      i = lmd->size[0] * lmd->size[1];
+    /*  The remaining case is when **I */
+    /*  Find initial (and final value for OMG). */
+    /*  in this case OMG is a 3D arry contaning identity matrices */
+    m = SigmaB->size[0];
+    i = eyep->size[0] * eyep->size[1];
+    eyep->size[0] = SigmaB->size[0];
+    eyep->size[1] = SigmaB->size[0];
+    emxEnsureCapacity_real_T(eyep, i);
+    eyep_data = eyep->data;
+    loop_ub = SigmaB->size[0] * SigmaB->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      eyep_data[i] = 0.0;
+    }
+    if (SigmaB->size[0] > 0) {
+      for (loop_ub = 0; loop_ub < m; loop_ub++) {
+        eyep_data[loop_ub + eyep->size[0] * loop_ub] = 1.0;
+      }
+    }
+    i = niini->size[0];
+    for (j = 0; j < i; j++) {
+      loop_ub = eyep->size[1];
+      for (i1 = 0; i1 < loop_ub; i1++) {
+        nx = eyep->size[0];
+        for (m = 0; m < nx; m++) {
+          OMG_data[(m + OMG->size[0] * i1) + OMG->size[0] * OMG->size[1] * j] =
+              eyep_data[m + eyep->size[0] * i1];
+        }
+      }
+    }
+    /*  Initialize lmd */
+    i = lmd->size[0] * lmd->size[1];
+    lmd->size[0] = 1;
+    lmd->size[1] = niini->size[0];
+    emxEnsureCapacity_real_T(lmd, i);
+    lmd_data = lmd->data;
+    loop_ub = niini->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      lmd_data[i] = 1.0;
+    }
+    if (!(pa_pars[0] != 'V')) {
+      i = niini->size[0];
+      i1 = lmd->size[0] * lmd->size[1];
       lmd->size[0] = 1;
       lmd->size[1] = niini->size[0];
-      emxEnsureCapacity_real_T(lmd, i);
-      loop_ub = niini->size[0];
-      for (i = 0; i < loop_ub; i++) {
-        lmd->data[i] = 1.0;
-      }
-      /*  Find initial (and final value for OMG) */
-      i = niini->size[0];
+      emxEnsureCapacity_real_T(lmd, i1);
+      lmd_data = lmd->data;
       for (j = 0; j < i; j++) {
         loop_ub = SigmaB->size[0];
         nx = SigmaB->size[1];
@@ -1944,127 +2143,15 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
         b_SigmaB->size[0] = loop_ub;
         b_SigmaB->size[1] = nx;
         emxEnsureCapacity_real_T(b_SigmaB, i1);
+        b_SigmaB_data = b_SigmaB->data;
         for (i1 = 0; i1 < nx; i1++) {
           for (m = 0; m < loop_ub; m++) {
-            b_SigmaB->data[m + b_SigmaB->size[0] * i1] =
-                SigmaB->data[(m + SigmaB->size[0] * i1) +
-                             SigmaB->size[0] * SigmaB->size[1] * j];
+            b_SigmaB_data[m + b_SigmaB->size[0] * i1] =
+                SigmaB_data[(m + SigmaB->size[0] * i1) +
+                            SigmaB->size[0] * SigmaB->size[1] * j];
           }
         }
-        b_eig(b_SigmaB, V, eigunsorted);
-        i1 = eyep->size[0] * eyep->size[1];
-        eyep->size[0] = eigunsorted->size[0];
-        eyep->size[1] = eigunsorted->size[1];
-        emxEnsureCapacity_real_T(eyep, i1);
-        loop_ub = eigunsorted->size[0] * eigunsorted->size[1];
-        for (i1 = 0; i1 < loop_ub; i1++) {
-          eyep->data[i1] = eigunsorted->data[i1].re;
-        }
-        nx = eyep->size[0] * eyep->size[1];
-        i1 = OMGold->size[0] * OMGold->size[1];
-        OMGold->size[0] = eyep->size[0];
-        OMGold->size[1] = eyep->size[1];
-        emxEnsureCapacity_real_T(OMGold, i1);
-        for (loop_ub = 0; loop_ub < nx; loop_ub++) {
-          OMGold->data[loop_ub] = fabs(eyep->data[loop_ub]);
-        }
-        diag(OMGold, diageigunsorted);
-        /*  Sort eigenvalues from largest to smallest and reorder the columns */
-        /*  of the matrix of eigenvectors accordingly */
-        i1 = GAMold->size[0];
-        GAMold->size[0] = diageigunsorted->size[0];
-        emxEnsureCapacity_real_T(GAMold, i1);
-        loop_ub = diageigunsorted->size[0];
-        for (i1 = 0; i1 < loop_ub; i1++) {
-          GAMold->data[i1] = diageigunsorted->data[i1];
-        }
-        g_sort(GAMold, iidx);
-        loop_ub = V->size[0];
-        nx = iidx->size[0];
-        for (i1 = 0; i1 < nx; i1++) {
-          for (m = 0; m < loop_ub; m++) {
-            OMG->data[(m + OMG->size[0] * i1) +
-                      OMG->size[0] * OMG->size[1] * j] =
-                V->data[m + V->size[0] * (iidx->data[i1] - 1)].re;
-          }
-        }
-        maxval = !(pa_pars[0] != 'V');
-        if (maxval) {
-          /*  lmd(j) = (det(SigmaB(:,:,j))) ^ (1 / v); */
-          nx = diageigunsorted->size[0];
-          if (diageigunsorted->size[0] == 0) {
-            diffglob = 1.0;
-          } else {
-            diffglob = diageigunsorted->data[0];
-            for (loop_ub = 2; loop_ub <= nx; loop_ub++) {
-              diffglob *= diageigunsorted->data[loop_ub - 1];
-            }
-          }
-          lmd->data[j] = rt_powd_snf(diffglob, 1.0 / (double)v);
-        }
-      }
-    } else {
-      /*  The remaining case is when **I */
-      /*  Find initial (and final value for OMG). */
-      /*  in this case OMG is a 3D arry contaning identity matrices */
-      m = SigmaB->size[0];
-      i = eyep->size[0] * eyep->size[1];
-      eyep->size[0] = SigmaB->size[0];
-      eyep->size[1] = SigmaB->size[0];
-      emxEnsureCapacity_real_T(eyep, i);
-      loop_ub = SigmaB->size[0] * SigmaB->size[0];
-      for (i = 0; i < loop_ub; i++) {
-        eyep->data[i] = 0.0;
-      }
-      if (SigmaB->size[0] > 0) {
-        for (loop_ub = 0; loop_ub < m; loop_ub++) {
-          eyep->data[loop_ub + eyep->size[0] * loop_ub] = 1.0;
-        }
-      }
-      i = niini->size[0];
-      for (j = 0; j < i; j++) {
-        loop_ub = eyep->size[1];
-        for (i1 = 0; i1 < loop_ub; i1++) {
-          nx = eyep->size[0];
-          for (m = 0; m < nx; m++) {
-            OMG->data[(m + OMG->size[0] * i1) +
-                      OMG->size[0] * OMG->size[1] * j] =
-                eyep->data[m + eyep->size[0] * i1];
-          }
-        }
-      }
-      /*  Initialize lmd */
-      i = lmd->size[0] * lmd->size[1];
-      lmd->size[0] = 1;
-      lmd->size[1] = niini->size[0];
-      emxEnsureCapacity_real_T(lmd, i);
-      loop_ub = niini->size[0];
-      for (i = 0; i < loop_ub; i++) {
-        lmd->data[i] = 1.0;
-      }
-      maxval = !(pa_pars[0] != 'V');
-      if (maxval) {
-        i = niini->size[0];
-        i1 = lmd->size[0] * lmd->size[1];
-        lmd->size[0] = 1;
-        lmd->size[1] = niini->size[0];
-        emxEnsureCapacity_real_T(lmd, i1);
-        for (j = 0; j < i; j++) {
-          loop_ub = SigmaB->size[0];
-          nx = SigmaB->size[1];
-          i1 = b_SigmaB->size[0] * b_SigmaB->size[1];
-          b_SigmaB->size[0] = loop_ub;
-          b_SigmaB->size[1] = nx;
-          emxEnsureCapacity_real_T(b_SigmaB, i1);
-          for (i1 = 0; i1 < nx; i1++) {
-            for (m = 0; m < loop_ub; m++) {
-              b_SigmaB->data[m + b_SigmaB->size[0] * i1] =
-                  SigmaB->data[(m + SigmaB->size[0] * i1) +
-                               SigmaB->size[0] * SigmaB->size[1] * j];
-            }
-          }
-          lmd->data[j] = rt_powd_snf(det(b_SigmaB), 1.0 / (double)v);
-        }
+        lmd_data[j] = rt_powd_snf(det(b_SigmaB), 1.0 / (double)v);
       }
     }
   }
@@ -2075,9 +2162,10 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   eyep->size[0] = SigmaB->size[0];
   eyep->size[1] = niini->size[0];
   emxEnsureCapacity_real_T(eyep, i);
+  eyep_data = eyep->data;
   loop_ub = SigmaB->size[0] * niini->size[0];
   for (i = 0; i < loop_ub; i++) {
-    eyep->data[i] = 1.0;
+    eyep_data[i] = 1.0;
   }
   /*  Immediately apply the restriction on vector lmd */
   /*  if ~isequal(lmd,ones(1,k)) */
@@ -2090,25 +2178,28 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   OMGold->size[0] = OMG->size[0];
   OMGold->size[1] = OMG->size[1];
   emxEnsureCapacity_real_T(OMGold, i);
+  Wk_data = OMGold->data;
   for (i = 0; i < nx; i++) {
     for (i1 = 0; i1 < loop_ub; i1++) {
-      OMGold->data[i1 + OMGold->size[0] * i] = OMG->data[i1 + OMG->size[0] * i];
+      Wk_data[i1 + OMGold->size[0] * i] = OMG_data[i1 + OMG->size[0] * i];
     }
   }
   i = GAMold->size[0];
   GAMold->size[0] = SigmaB->size[0] * niini->size[0];
   emxEnsureCapacity_real_T(GAMold, i);
+  GAMold_data = GAMold->data;
   loop_ub = SigmaB->size[0] * niini->size[0];
   for (i = 0; i < loop_ub; i++) {
-    GAMold->data[i] = 9999.0;
+    GAMold_data[i] = 9999.0;
   }
   emxInit_real_T(&lmdold, 1);
   i = lmdold->size[0];
   lmdold->size[0] = niini->size[0];
   emxEnsureCapacity_real_T(lmdold, i);
+  wk_data = lmdold->data;
   loop_ub = niini->size[0];
   for (i = 0; i < loop_ub; i++) {
-    lmdold->data[i] = 999.0;
+    wk_data[i] = 999.0;
   }
   /*  Beginning of iterative process */
   /*  Apply the iterative procedure to find Det, Shape and Rot matrices */
@@ -2123,62 +2214,64 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
     /*  In the **E case (except for the case EEE) it is necessary to update in
      * each step of the */
     /*  iterative procedure OMG */
-    if (iter > 1.0) {
-      maxval = !(pa_pars[2] != 'E');
-      if (maxval) {
-        if (cpc) {
-          /*  Variable shape: update OMG (rotation) */
-          /*  parameter pa.maxiterR is used here */
-          nx = OMG->size[0] - 1;
-          m = OMG->size[1] - 1;
-          i = b_OMG->size[0] * b_OMG->size[1];
-          b_OMG->size[0] = OMG->size[0];
-          b_OMG->size[1] = OMG->size[1];
-          emxEnsureCapacity_real_T(b_OMG, i);
-          for (i = 0; i <= m; i++) {
-            for (i1 = 0; i1 <= nx; i1++) {
-              b_OMG->data[i1 + b_OMG->size[0] * i] =
-                  OMG->data[i1 + OMG->size[0] * i];
-            }
-          }
-          cpcV(lmd, eyep, b_OMG, Wk, wk, pa_k, pa_maxiterR, pa_tolR, pa_v, OMG);
-        } else {
-          /*  Equal shape: update OMG (rotation) */
-          cpcE(lmd, SigmaB, niini, pa_k, pa_v, OMG);
-          /*  In all the other cases OMG is not updated */
-        }
-        /*  diffOMG is the relative sum of squares of the differences between */
-        /*  the element of matrix Omega2D in two consecutive iterations */
-        loop_ub = OMG->size[0];
-        nx = OMG->size[1];
+    if ((iter > 1.0) && (!(pa_pars[2] != 'E'))) {
+      if (cpc) {
+        /*  Variable shape: update OMG (rotation) */
+        /*  parameter pa.maxiterR is used here */
+        nx = OMG->size[0] - 1;
+        m = OMG->size[1] - 1;
         i = b_OMG->size[0] * b_OMG->size[1];
         b_OMG->size[0] = OMG->size[0];
         b_OMG->size[1] = OMG->size[1];
         emxEnsureCapacity_real_T(b_OMG, i);
-        for (i = 0; i < nx; i++) {
-          for (i1 = 0; i1 < loop_ub; i1++) {
-            b_OMG->data[i1 + b_OMG->size[0] * i] =
-                OMG->data[i1 + OMG->size[0] * i];
+        Wk_data = b_OMG->data;
+        for (i = 0; i <= m; i++) {
+          for (i1 = 0; i1 <= nx; i1++) {
+            Wk_data[i1 + b_OMG->size[0] * i] = OMG_data[i1 + OMG->size[0] * i];
           }
         }
-        c_mtimes(b_OMG, OMGold, r2);
-        power(r2, r3);
-        combineVectorElements(r3, r1);
-        diffOMG = fabs(((double)v - d_combineVectorElements(r1)) / (double)v);
-        loop_ub = OMG->size[0];
-        nx = OMG->size[1];
-        i = OMGold->size[0] * OMGold->size[1];
-        OMGold->size[0] = OMG->size[0];
-        OMGold->size[1] = OMG->size[1];
-        emxEnsureCapacity_real_T(OMGold, i);
-        for (i = 0; i < nx; i++) {
-          for (i1 = 0; i1 < loop_ub; i1++) {
-            OMGold->data[i1 + OMGold->size[0] * i] =
-                OMG->data[i1 + OMG->size[0] * i];
-          }
-        }
+        cpcV(lmd, eyep, b_OMG, Wk, wk, pa_k, pa_maxiterR, pa_tolR, pa_v, OMG);
+        OMG_data = OMG->data;
       } else {
-        diffOMG = 0.0;
+        /*  Equal shape: update OMG (rotation) */
+        cpcE(lmd, SigmaB, niini, pa_k, pa_v, OMG);
+        OMG_data = OMG->data;
+        /*  In all the other cases OMG is not updated */
+      }
+      /*  diffOMG is the relative sum of squares of the differences between */
+      /*  the element of matrix Omega2D in two consecutive iterations */
+      loop_ub = OMG->size[0];
+      nx = OMG->size[1];
+      i = b_OMG->size[0] * b_OMG->size[1];
+      b_OMG->size[0] = OMG->size[0];
+      b_OMG->size[1] = OMG->size[1];
+      emxEnsureCapacity_real_T(b_OMG, i);
+      Wk_data = b_OMG->data;
+      for (i = 0; i < nx; i++) {
+        for (i1 = 0; i1 < loop_ub; i1++) {
+          Wk_data[i1 + b_OMG->size[0] * i] = OMG_data[i1 + OMG->size[0] * i];
+        }
+      }
+      c_mtimes(b_OMG, OMGold, r2);
+      Wk_data = r2->data;
+      loop_ub = r2->size[0] * r2->size[1];
+      for (i = 0; i < loop_ub; i++) {
+        diffOMG = Wk_data[i];
+        Wk_data[i] = diffOMG * diffOMG;
+      }
+      combineVectorElements(r2, r1);
+      diffOMG = fabs(((double)v - e_sum(r1)) / (double)v);
+      loop_ub = OMG->size[0];
+      nx = OMG->size[1];
+      i = OMGold->size[0] * OMGold->size[1];
+      OMGold->size[0] = OMG->size[0];
+      OMGold->size[1] = OMG->size[1];
+      emxEnsureCapacity_real_T(OMGold, i);
+      Wk_data = OMGold->data;
+      for (i = 0; i < nx; i++) {
+        for (i1 = 0; i1 < loop_ub; i1++) {
+          Wk_data[i1 + OMGold->size[0] * i] = OMG_data[i1 + OMG->size[0] * i];
+        }
       }
     } else {
       diffOMG = 0.0;
@@ -2186,6 +2279,7 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
     /*  Update GAM */
     restrshapeGPCM(lmd, OMG, SigmaB, niini, pa_pars, pa_shw, pa_shb, pa_k,
                    pa_maxiterS, pa_tolS, pa_userepmat, pa_v, pa_zerotol, eyep);
+    eyep_data = eyep->data;
     /*  GAMf=GAM; */
     if (pa_sortsh == 1) {
       i = niini->size[0];
@@ -2194,13 +2288,15 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
         i1 = diageigunsorted->size[0];
         diageigunsorted->size[0] = eyep->size[0];
         emxEnsureCapacity_real_T(diageigunsorted, i1);
+        Wk_data = diageigunsorted->data;
         for (i1 = 0; i1 < loop_ub; i1++) {
-          diageigunsorted->data[i1] = eyep->data[i1 + eyep->size[0] * j];
+          Wk_data[i1] = eyep_data[i1 + eyep->size[0] * j];
         }
         f_sort(diageigunsorted);
+        Wk_data = diageigunsorted->data;
         loop_ub = diageigunsorted->size[0];
         for (i1 = 0; i1 < loop_ub; i1++) {
-          GAMfc->data[i1 + GAMfc->size[0] * j] = diageigunsorted->data[i1];
+          GAMfc_data[i1 + GAMfc->size[0] * j] = Wk_data[i1];
         }
       }
     } else {
@@ -2208,50 +2304,55 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
       GAMfc->size[0] = eyep->size[0];
       GAMfc->size[1] = eyep->size[1];
       emxEnsureCapacity_real_T(GAMfc, i);
+      GAMfc_data = GAMfc->data;
       loop_ub = eyep->size[0] * eyep->size[1];
       for (i = 0; i < loop_ub; i++) {
-        GAMfc->data[i] = eyep->data[i];
+        GAMfc_data[i] = eyep_data[i];
       }
     }
     /*  GAMnew = new values of matrix GAM in vectorized form */
     /*  diff = (new values of GAM - old values of GAM) */
-    i = diageigunsorted->size[0];
-    diageigunsorted->size[0] = GAMfc->size[0] * GAMfc->size[1];
-    emxEnsureCapacity_real_T(diageigunsorted, i);
-    loop_ub = GAMfc->size[0] * GAMfc->size[1];
-    for (i = 0; i < loop_ub; i++) {
-      diageigunsorted->data[i] = GAMfc->data[i] - GAMold->data[i];
+    if (GAMfc->size[0] * GAMfc->size[1] == GAMold->size[0]) {
+      nx = GAMfc->size[0] * GAMfc->size[1];
+      i = diageigunsorted->size[0];
+      diageigunsorted->size[0] = nx;
+      emxEnsureCapacity_real_T(diageigunsorted, i);
+      Wk_data = diageigunsorted->data;
+      for (i = 0; i < nx; i++) {
+        Wk_data[i] = GAMfc_data[i] - GAMold_data[i];
+      }
+    } else {
+      jf_binary_expand_op(diageigunsorted, GAMfc, GAMold);
+      Wk_data = diageigunsorted->data;
     }
     /*  relative sum of squares of the differences */
     diffglob = 0.0;
     loop_ub = diageigunsorted->size[0];
     for (i = 0; i < loop_ub; i++) {
-      diffglob += diageigunsorted->data[i] * diageigunsorted->data[i];
+      diffglob += Wk_data[i] * Wk_data[i];
     }
     b_GAMold = 0.0;
     loop_ub = GAMold->size[0];
     for (i = 0; i < loop_ub; i++) {
-      b_GAMold += GAMold->data[i] * GAMold->data[i];
+      b_GAMold += GAMold_data[i] * GAMold_data[i];
     }
     i = GAMold->size[0];
     GAMold->size[0] = GAMfc->size[0] * GAMfc->size[1];
     emxEnsureCapacity_real_T(GAMold, i);
+    GAMold_data = GAMold->data;
     loop_ub = GAMfc->size[0] * GAMfc->size[1];
     for (i = 0; i < loop_ub; i++) {
-      GAMold->data[i] = GAMfc->data[i];
+      GAMold_data[i] = GAMfc_data[i];
     }
     /*  Update determinants in case of varying determinants (apart from VII) */
     /*  Update lmd */
     /* restrdeterGPCM applies determinat restrictions for the 14 GPCM */
     /*  */
-    /*  */
     /* <a href="matlab: docsearchFS('restrdeterGPCM')">Link to the help
      * function</a> */
     /*  */
-    /*  */
     /*   This routine applies the constraints to the determinants using the */
     /*   specification contained in field pa.cdet of input structure pa. */
-    /*  */
     /*  */
     /*   Required input arguments: */
     /*  */
@@ -2296,7 +2397,6 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
     /*  */
     /*   Optional input arguments: */
     /*  */
-    /*  */
     /*  Output: */
     /*  */
     /*  lmdc  : restricted determinants. Vector.  */
@@ -2314,20 +2414,15 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
      */
     /*          if modeltype is E** or if pa.cdet=1; */
     /*  */
-    /*  */
-    /*  */
     /*  See also: restrSigmaGPCM, restrdeterGPCM, restreigen, tclust */
-    /*  */
     /*  */
     /*  References: */
     /*  */
     /*    Garcia-Escudero, L.A., Mayo-Iscar, A. and Riani M. (2019), */
     /*    Robust parsimonious clustering models. Submitted. */
     /*  */
-    /*  */
     /*  Copyright 2008-2021. */
     /*  Written by FSDA team */
-    /*  */
     /*  */
     /* <a href="matlab: docsearchFS('restrdeterGPCM')">Link to the help
      * function</a> */
@@ -2340,6 +2435,10 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
     lmd->size[0] = 1;
     lmd->size[1] = pa_k;
     emxEnsureCapacity_real_T(lmd, i);
+    lmd_data = lmd->data;
+    for (i = 0; i < pa_k; i++) {
+      lmd_data[i] = rtNaN;
+    }
     /*  Inefficient code to obtain lmd */
     /*  for j=1:pa.k */
     /*      lmd(j) = sum( diag(  diag(1./GAM(:,j)) * (OMG(:,:,j))' *
@@ -2351,18 +2450,18 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
     /*  D=reshape(Lr(1:(pa.v+1):end,:),pa.v,pa.k); */
     /*  lmd=sum(D./GAM,1)/pa.v; */
     for (j = 0; j < pa_k; j++) {
-      lmd->data[j] = rtNaN;
       loop_ub = OMG->size[0];
       nx = OMG->size[1];
       i = b_OMG->size[0] * b_OMG->size[1];
       b_OMG->size[0] = OMG->size[0];
       b_OMG->size[1] = OMG->size[1];
       emxEnsureCapacity_real_T(b_OMG, i);
+      Wk_data = b_OMG->data;
       for (i = 0; i < nx; i++) {
         for (i1 = 0; i1 < loop_ub; i1++) {
-          b_OMG->data[i1 + b_OMG->size[0] * i] =
-              OMG->data[(i1 + OMG->size[0] * i) +
-                        OMG->size[0] * OMG->size[1] * j];
+          Wk_data[i1 + b_OMG->size[0] * i] =
+              OMG_data[(i1 + OMG->size[0] * i) +
+                       OMG->size[0] * OMG->size[1] * j];
         }
       }
       loop_ub = SigmaB->size[0];
@@ -2371,11 +2470,12 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
       b_SigmaB->size[0] = loop_ub;
       b_SigmaB->size[1] = nx;
       emxEnsureCapacity_real_T(b_SigmaB, i);
+      b_SigmaB_data = b_SigmaB->data;
       for (i = 0; i < nx; i++) {
         for (i1 = 0; i1 < loop_ub; i1++) {
-          b_SigmaB->data[i1 + b_SigmaB->size[0] * i] =
-              SigmaB->data[(i1 + SigmaB->size[0] * i) +
-                           SigmaB->size[0] * SigmaB->size[1] * j];
+          b_SigmaB_data[i1 + b_SigmaB->size[0] * i] =
+              SigmaB_data[(i1 + SigmaB->size[0] * i) +
+                          SigmaB->size[0] * SigmaB->size[1] * j];
         }
       }
       c_mtimes(b_OMG, b_SigmaB, r2);
@@ -2385,20 +2485,26 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
       b_OMG->size[0] = OMG->size[0];
       b_OMG->size[1] = OMG->size[1];
       emxEnsureCapacity_real_T(b_OMG, i);
+      Wk_data = b_OMG->data;
       for (i = 0; i < nx; i++) {
         for (i1 = 0; i1 < loop_ub; i1++) {
-          b_OMG->data[i1 + b_OMG->size[0] * i] =
-              OMG->data[(i1 + OMG->size[0] * i) +
-                        OMG->size[0] * OMG->size[1] * j];
+          Wk_data[i1 + b_OMG->size[0] * i] =
+              OMG_data[(i1 + OMG->size[0] * i) +
+                       OMG->size[0] * OMG->size[1] * j];
         }
       }
       b_mtimes(r2, b_OMG, r3);
       diag(r3, diageigunsorted);
-      loop_ub = diageigunsorted->size[0];
-      for (i = 0; i < loop_ub; i++) {
-        diageigunsorted->data[i] /= eyep->data[i + eyep->size[0] * j];
+      Wk_data = diageigunsorted->data;
+      if (diageigunsorted->size[0] == eyep->size[0]) {
+        loop_ub = diageigunsorted->size[0];
+        for (i = 0; i < loop_ub; i++) {
+          Wk_data[i] /= eyep_data[i + eyep->size[0] * j];
+        }
+      } else {
+        pf_binary_expand_op(diageigunsorted, eyep, j);
       }
-      lmd->data[j] =
+      lmd_data[j] =
           blockedSummation(diageigunsorted, diageigunsorted->size[0]) /
           (double)pa_v;
     }
@@ -2418,35 +2524,43 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
     /*  Make sure niini is a column vector */
     if (d_maximum(lmd) / c_minimum(lmd) >
         rt_powd_snf(pa_cdet, 1.0 / (double)pa_v)) {
-      c_restreigen(lmd, niini, rt_powd_snf(pa_cdet, 1.0 / (double)pa_v),
+      b_restreigen(lmd, niini, rt_powd_snf(pa_cdet, 1.0 / (double)pa_v),
                    pa_zerotol, pa_userepmat);
+      lmd_data = lmd->data;
     }
     /*  lmdnew = new values of vector lmd */
     /*  diff = (new values of lmd) - (old values of lmd) */
-    i = diageigunsorted->size[0];
-    diageigunsorted->size[0] = lmd->size[1];
-    emxEnsureCapacity_real_T(diageigunsorted, i);
-    loop_ub = lmd->size[1];
-    for (i = 0; i < loop_ub; i++) {
-      diageigunsorted->data[i] = lmd->data[i] - lmdold->data[i];
+    if (lmdold->size[0] == lmd->size[1]) {
+      i = diageigunsorted->size[0];
+      diageigunsorted->size[0] = lmd->size[1];
+      emxEnsureCapacity_real_T(diageigunsorted, i);
+      Wk_data = diageigunsorted->data;
+      loop_ub = lmd->size[1];
+      for (i = 0; i < loop_ub; i++) {
+        Wk_data[i] = lmd_data[i] - wk_data[i];
+      }
+    } else {
+      qf_binary_expand_op(diageigunsorted, lmd, lmdold);
+      Wk_data = diageigunsorted->data;
     }
     /*  relative sum of squares of the differences */
     b_diageigunsorted = 0.0;
     loop_ub = diageigunsorted->size[0];
     for (i = 0; i < loop_ub; i++) {
-      b_diageigunsorted += diageigunsorted->data[i] * diageigunsorted->data[i];
+      b_diageigunsorted += Wk_data[i] * Wk_data[i];
     }
     b_lmdold = 0.0;
     loop_ub = lmdold->size[0];
     for (i = 0; i < loop_ub; i++) {
-      b_lmdold += lmdold->data[i] * lmdold->data[i];
+      b_lmdold += wk_data[i] * wk_data[i];
     }
     i = lmdold->size[0];
     lmdold->size[0] = lmd->size[1];
     emxEnsureCapacity_real_T(lmdold, i);
+    wk_data = lmdold->data;
     loop_ub = lmd->size[1];
     for (i = 0; i < loop_ub; i++) {
-      lmdold->data[i] = lmd->data[i];
+      wk_data[i] = lmd_data[i];
     }
     difflmd[0] = b_diageigunsorted / b_lmdold;
     difflmd[1] = diffglob / b_GAMold;
@@ -2454,8 +2568,8 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
     diffglob = j_maximum(difflmd);
   }
   emxFree_real_T(&lmdold);
-  emxFree_real_T(&GAMold);
   emxFree_real_T(&OMGold);
+  emxFree_real_T(&diageigunsorted);
   emxFree_real_T(&wk);
   emxFree_real_T(&Wk);
   emxFree_real_T(&GAMfc);
@@ -2463,12 +2577,13 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   i = r->size[0];
   r->size[0] = eyep->size[0] * eyep->size[1];
   emxEnsureCapacity_boolean_T(r, i);
+  r4 = r->data;
   loop_ub = eyep->size[0] * eyep->size[1];
   for (i = 0; i < loop_ub; i++) {
-    r->data[i] = rtIsNaN(eyep->data[i]);
+    r4[i] = rtIsNaN(eyep_data[i]);
   }
   guard1 = false;
-  if (!any(r)) {
+  if (!b_any(r)) {
     maximum(eyep, r1);
     if (d_maximum(r1) > pa_zerotol) {
       /*  Reconstruct the cov matrices using final values of lmd, OMG and GAM */
@@ -2484,45 +2599,49 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
         f_loop_ub = OMG->size[1];
       }
       for (j = 0; j < i; j++) {
-        i1 = diageigunsorted->size[0];
-        diageigunsorted->size[0] = i2;
-        emxEnsureCapacity_real_T(diageigunsorted, i1);
+        i1 = GAMold->size[0];
+        GAMold->size[0] = i2;
+        emxEnsureCapacity_real_T(GAMold, i1);
+        GAMold_data = GAMold->data;
         for (i1 = 0; i1 < b_loop_ub; i1++) {
-          diageigunsorted->data[i1] = eyep->data[i1 + eyep->size[0] * j];
+          GAMold_data[i1] = eyep_data[i1 + eyep->size[0] * j];
         }
-        diffglob = lmd->data[j];
+        diffglob = lmd_data[j];
         i1 = b_SigmaB->size[0] * b_SigmaB->size[1];
         b_SigmaB->size[0] = c_loop_ub;
         b_SigmaB->size[1] = i3;
         emxEnsureCapacity_real_T(b_SigmaB, i1);
+        b_SigmaB_data = b_SigmaB->data;
         for (i1 = 0; i1 < d_loop_ub; i1++) {
           for (m = 0; m < c_loop_ub; m++) {
-            b_SigmaB->data[m + b_SigmaB->size[0] * i1] =
-                diffglob * OMG->data[(m + OMG->size[0] * i1) +
-                                     OMG->size[0] * OMG->size[1] * j];
+            b_SigmaB_data[m + b_SigmaB->size[0] * i1] =
+                diffglob * OMG_data[(m + OMG->size[0] * i1) +
+                                    OMG->size[0] * OMG->size[1] * j];
           }
         }
         i1 = b_OMG->size[0] * b_OMG->size[1];
         b_OMG->size[0] = e_loop_ub;
         b_OMG->size[1] = i4;
         emxEnsureCapacity_real_T(b_OMG, i1);
+        Wk_data = b_OMG->data;
         for (i1 = 0; i1 < f_loop_ub; i1++) {
           for (m = 0; m < e_loop_ub; m++) {
-            b_OMG->data[m + b_OMG->size[0] * i1] =
-                OMG->data[(m + OMG->size[0] * i1) +
-                          OMG->size[0] * OMG->size[1] * j];
+            Wk_data[m + b_OMG->size[0] * i1] =
+                OMG_data[(m + OMG->size[0] * i1) +
+                         OMG->size[0] * OMG->size[1] * j];
           }
         }
-        c_diag(diageigunsorted, r2);
+        c_diag(GAMold, r2);
         b_mtimes(b_SigmaB, r2, r3);
         d_mtimes(r3, b_OMG, r2);
+        Wk_data = r2->data;
         loop_ub = r2->size[1];
         for (i1 = 0; i1 < loop_ub; i1++) {
           nx = r2->size[0];
           for (m = 0; m < nx; m++) {
-            SigmaB->data[(m + SigmaB->size[0] * i1) +
-                         SigmaB->size[0] * SigmaB->size[1] * j] =
-                r2->data[m + r2->size[0] * i1];
+            SigmaB_data[(m + SigmaB->size[0] * i1) +
+                        SigmaB->size[0] * SigmaB->size[1] * j] =
+                Wk_data[m + r2->size[0] * i1];
           }
         }
       }
@@ -2539,13 +2658,14 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
     eyep->size[0] = SigmaB->size[0];
     eyep->size[1] = SigmaB->size[0];
     emxEnsureCapacity_real_T(eyep, i);
+    eyep_data = eyep->data;
     loop_ub = SigmaB->size[0] * SigmaB->size[0];
     for (i = 0; i < loop_ub; i++) {
-      eyep->data[i] = 0.0;
+      eyep_data[i] = 0.0;
     }
     if (SigmaB->size[0] > 0) {
       for (loop_ub = 0; loop_ub < m; loop_ub++) {
-        eyep->data[loop_ub + eyep->size[0] * loop_ub] = 1.0;
+        eyep_data[loop_ub + eyep->size[0] * loop_ub] = 1.0;
       }
     }
     i = niini->size[0];
@@ -2554,9 +2674,9 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
       for (i1 = 0; i1 < loop_ub; i1++) {
         nx = eyep->size[0];
         for (m = 0; m < nx; m++) {
-          SigmaB->data[(m + SigmaB->size[0] * i1) +
-                       SigmaB->size[0] * SigmaB->size[1] * j] =
-              eyep->data[m + eyep->size[0] * i1];
+          SigmaB_data[(m + SigmaB->size[0] * i1) +
+                      SigmaB->size[0] * SigmaB->size[1] * j] =
+              eyep_data[m + eyep->size[0] * i1];
         }
       }
     }
@@ -2567,8 +2687,8 @@ void restrSigmaGPCM(emxArray_real_T *SigmaB, const emxArray_real_T *niini,
   emxFree_real_T(&b_OMG);
   emxFree_real_T(&b_SigmaB);
   emxFree_boolean_T(&r);
+  emxFree_real_T(&GAMold);
   emxFree_real_T(&eyep);
-  emxFree_real_T(&diageigunsorted);
 }
 
 /* End of code generation (restrSigmaGPCM.c) */

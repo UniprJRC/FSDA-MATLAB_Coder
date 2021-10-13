@@ -18,6 +18,7 @@
 #include "minOrMax.h"
 #include "rt_nonfinite.h"
 #include "sum.h"
+#include "unibiv.h"
 #include <math.h>
 #include <string.h>
 
@@ -28,6 +29,8 @@ void b_estepFS(const emxArray_real_T *log_lh, double *obj,
   emxArray_real_T *density;
   emxArray_real_T *maxll;
   emxArray_real_T *post;
+  double *maxll_data;
+  double *post_data;
   int k;
   int nx;
   emxInit_real_T(&maxll, 1);
@@ -51,7 +54,6 @@ void b_estepFS(const emxArray_real_T *log_lh, double *obj,
   /*    obj =  \sum_{i=1}^n  \log   \left( \sum_{j=1}^k \pi_j \phi (y_i; \;
    * \theta_j)    \right). */
   /*    \end{equation} */
-  /*  */
   /*  */
   /*    k = number of components of the mixture */
   /*    \pi_j = component probabilitites */
@@ -96,8 +98,6 @@ void b_estepFS(const emxArray_real_T *log_lh, double *obj,
    * \theta_j)    \right) */
   /*                        = \log   \left( \sum_{j=1}^k  \exp( \log_lh )
    * \right) */
-  /*  */
-  /*  */
   /*  */
   /*  DETAILS. Formally a mixture model corresponds to the mixture distribution
    * that */
@@ -158,11 +158,13 @@ void b_estepFS(const emxArray_real_T *log_lh, double *obj,
   /* } */
   /*  Beginning of code */
   f_maximum(log_lh, maxll);
+  maxll_data = maxll->data;
   /*  minus maxll to avoid underflow */
   g_bsxfun(log_lh, maxll, post);
+  post_data = post->data;
   nx = post->size[0] * post->size[1];
   for (k = 0; k < nx; k++) {
-    post->data[k] = exp(post->data[k]);
+    post_data[k] = exp(post_data[k]);
   }
   emxInit_real_T(&density, 1);
   /*  density is a size(log_lh,1)-by-1 vector which contains the contribution */
@@ -172,6 +174,7 @@ void b_estepFS(const emxArray_real_T *log_lh, double *obj,
    */
   /*  i=1, 2, ..., size(log_lh,1) */
   sum(post, density);
+  post_data = density->data;
   /* normalize posteriors */
   /*  varargout1 is a size(log_lh,1)-by-p matrix which contains posterior */
   /*  probabilities */
@@ -185,11 +188,15 @@ void b_estepFS(const emxArray_real_T *log_lh, double *obj,
   nx = density->size[0];
   emxFree_real_T(&post);
   for (k = 0; k < nx; k++) {
-    density->data[k] = log(density->data[k]);
+    post_data[k] = log(post_data[k]);
   }
-  nx = density->size[0];
-  for (k = 0; k < nx; k++) {
-    density->data[k] += maxll->data[k];
+  if (density->size[0] == maxll->size[0]) {
+    nx = density->size[0];
+    for (k = 0; k < nx; k++) {
+      post_data[k] += maxll_data[k];
+    }
+  } else {
+    plus(density, maxll);
   }
   emxFree_real_T(&maxll);
   /*  obj is the value of the loglikelihood of the mixture model */
@@ -204,6 +211,8 @@ double c_estepFS(const emxArray_real_T *log_lh)
   emxArray_real_T *maxll;
   emxArray_real_T *post;
   double obj;
+  double *maxll_data;
+  double *post_data;
   int k;
   int nx;
   emxInit_real_T(&maxll, 1);
@@ -227,7 +236,6 @@ double c_estepFS(const emxArray_real_T *log_lh)
   /*    obj =  \sum_{i=1}^n  \log   \left( \sum_{j=1}^k \pi_j \phi (y_i; \;
    * \theta_j)    \right). */
   /*    \end{equation} */
-  /*  */
   /*  */
   /*    k = number of components of the mixture */
   /*    \pi_j = component probabilitites */
@@ -272,8 +280,6 @@ double c_estepFS(const emxArray_real_T *log_lh)
    * \theta_j)    \right) */
   /*                        = \log   \left( \sum_{j=1}^k  \exp( \log_lh )
    * \right) */
-  /*  */
-  /*  */
   /*  */
   /*  DETAILS. Formally a mixture model corresponds to the mixture distribution
    * that */
@@ -334,11 +340,13 @@ double c_estepFS(const emxArray_real_T *log_lh)
   /* } */
   /*  Beginning of code */
   f_maximum(log_lh, maxll);
+  maxll_data = maxll->data;
   /*  minus maxll to avoid underflow */
   g_bsxfun(log_lh, maxll, post);
+  post_data = post->data;
   nx = post->size[0] * post->size[1];
   for (k = 0; k < nx; k++) {
-    post->data[k] = exp(post->data[k]);
+    post_data[k] = exp(post_data[k]);
   }
   emxInit_real_T(&logpdf, 1);
   /*  density is a size(log_lh,1)-by-1 vector which contains the contribution */
@@ -354,14 +362,19 @@ double c_estepFS(const emxArray_real_T *log_lh)
   /*  lodpdf = \log   \left( \sum_{j=1}^k \pi_j \phi (y_i; \; \theta_j)
    * \right) */
   sum(post, logpdf);
+  post_data = logpdf->data;
   nx = logpdf->size[0];
   emxFree_real_T(&post);
   for (k = 0; k < nx; k++) {
-    logpdf->data[k] = log(logpdf->data[k]);
+    post_data[k] = log(post_data[k]);
   }
-  nx = logpdf->size[0];
-  for (k = 0; k < nx; k++) {
-    logpdf->data[k] += maxll->data[k];
+  if (logpdf->size[0] == maxll->size[0]) {
+    nx = logpdf->size[0];
+    for (k = 0; k < nx; k++) {
+      post_data[k] += maxll_data[k];
+    }
+  } else {
+    plus(logpdf, maxll);
   }
   emxFree_real_T(&maxll);
   /*  obj is the value of the loglikelihood of the mixture model */
@@ -376,6 +389,8 @@ void estepFS(const emxArray_real_T *log_lh, double *obj,
 {
   emxArray_real_T *maxll;
   emxArray_real_T *post;
+  double *maxll_data;
+  double *post_data;
   int k;
   int nx;
   emxInit_real_T(&maxll, 1);
@@ -399,7 +414,6 @@ void estepFS(const emxArray_real_T *log_lh, double *obj,
   /*    obj =  \sum_{i=1}^n  \log   \left( \sum_{j=1}^k \pi_j \phi (y_i; \;
    * \theta_j)    \right). */
   /*    \end{equation} */
-  /*  */
   /*  */
   /*    k = number of components of the mixture */
   /*    \pi_j = component probabilitites */
@@ -444,8 +458,6 @@ void estepFS(const emxArray_real_T *log_lh, double *obj,
    * \theta_j)    \right) */
   /*                        = \log   \left( \sum_{j=1}^k  \exp( \log_lh )
    * \right) */
-  /*  */
-  /*  */
   /*  */
   /*  DETAILS. Formally a mixture model corresponds to the mixture distribution
    * that */
@@ -506,11 +518,13 @@ void estepFS(const emxArray_real_T *log_lh, double *obj,
   /* } */
   /*  Beginning of code */
   f_maximum(log_lh, maxll);
+  maxll_data = maxll->data;
   /*  minus maxll to avoid underflow */
   g_bsxfun(log_lh, maxll, post);
+  post_data = post->data;
   nx = post->size[0] * post->size[1];
   for (k = 0; k < nx; k++) {
-    post->data[k] = exp(post->data[k]);
+    post_data[k] = exp(post_data[k]);
   }
   /*  density is a size(log_lh,1)-by-1 vector which contains the contribution */
   /*  of each observation to the likelihood  (each element is divided by the */
@@ -519,6 +533,7 @@ void estepFS(const emxArray_real_T *log_lh, double *obj,
    */
   /*  i=1, 2, ..., size(log_lh,1) */
   sum(post, varargout2);
+  post_data = varargout2->data;
   /* normalize posteriors */
   /*  varargout1 is a size(log_lh,1)-by-p matrix which contains posterior */
   /*  probabilities */
@@ -532,11 +547,15 @@ void estepFS(const emxArray_real_T *log_lh, double *obj,
   nx = varargout2->size[0];
   emxFree_real_T(&post);
   for (k = 0; k < nx; k++) {
-    varargout2->data[k] = log(varargout2->data[k]);
+    post_data[k] = log(post_data[k]);
   }
-  nx = varargout2->size[0];
-  for (k = 0; k < nx; k++) {
-    varargout2->data[k] += maxll->data[k];
+  if (varargout2->size[0] == maxll->size[0]) {
+    nx = varargout2->size[0];
+    for (k = 0; k < nx; k++) {
+      post_data[k] += maxll_data[k];
+    }
+  } else {
+    plus(varargout2, maxll);
   }
   emxFree_real_T(&maxll);
   /*  obj is the value of the loglikelihood of the mixture model */

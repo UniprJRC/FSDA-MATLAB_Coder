@@ -30,6 +30,9 @@ void b_subsets(double nsamp, double n, double p, emxArray_real_T *C)
   emxArray_real_T *s;
   emxArray_real_T *seq;
   double ncomb;
+  double *C_data;
+  double *pascalM_data;
+  double *seq_data;
   int b_i;
   int i;
   int i1;
@@ -87,9 +90,7 @@ void b_subsets(double nsamp, double n, double p, emxArray_real_T *C)
   /*             Example - randsampleFS(100,10,2) */
   /*             Data Types - single|double */
   /*  */
-  /*  */
   /*   Output: */
-  /*  */
   /*  */
   /*            C : The indices of the subsets which need to be extracted. */
   /*                Matrix with nselected rows and p columns (stored in int16
@@ -98,7 +99,6 @@ void b_subsets(double nsamp, double n, double p, emxArray_real_T *C)
   /*  */
   /*    nselected : Number of rows of matrix C. Scalar. */
   /*                Data Types - single|double */
-  /*  */
   /*  */
   /*  See also randsampleFS.m, lexunrank.m, bc.m */
   /*  */
@@ -116,13 +116,10 @@ void b_subsets(double nsamp, double n, double p, emxArray_real_T *C)
   /*        Sampling Without Replacement", SIAM Journal of Computing, */
   /*        9(1):111-113. */
   /*  */
-  /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
   /*  */
-  /*  */
   /* <a href="matlab: docsearchFS('subsets')">Link to the help function</a> */
-  /*  */
   /*  */
   /* $LastChangedDate::                      $: Date of the last commit */
   /*  */
@@ -186,7 +183,6 @@ void b_subsets(double nsamp, double n, double p, emxArray_real_T *C)
   /*         frC = tabulateFS(double(C(:))); */
   /*         hold on; plot(1:n,frC(:,3)/100,'r-','LineWidth',3); */
   /*     end */
-  /*  */
   /*  */
   /*     % The hypergeometric distribution hygepdf(X,M,K,N) computes the
    * probability */
@@ -359,7 +355,8 @@ void b_subsets(double nsamp, double n, double p, emxArray_real_T *C)
     seq->size[0] = 1;
     seq->size[1] = 1;
     emxEnsureCapacity_real_T(seq, i);
-    seq->data[0] = rtNaN;
+    seq_data = seq->data;
+    seq_data[0] = rtNaN;
   } else if (n < 1.0) {
     seq->size[0] = 1;
     seq->size[1] = 0;
@@ -368,15 +365,17 @@ void b_subsets(double nsamp, double n, double p, emxArray_real_T *C)
     seq->size[0] = 1;
     seq->size[1] = 1;
     emxEnsureCapacity_real_T(seq, i);
-    seq->data[0] = rtNaN;
+    seq_data = seq->data;
+    seq_data[0] = rtNaN;
   } else {
     i = seq->size[0] * seq->size[1];
     seq->size[0] = 1;
     loop_ub = (int)floor(n - 1.0);
     seq->size[1] = loop_ub + 1;
     emxEnsureCapacity_real_T(seq, i);
+    seq_data = seq->data;
     for (i = 0; i <= loop_ub; i++) {
-      seq->data[i] = (double)i + 1.0;
+      seq_data[i] = (double)i + 1.0;
     }
   }
   ncomb = bc(n, p);
@@ -396,6 +395,7 @@ void b_subsets(double nsamp, double n, double p, emxArray_real_T *C)
   if ((nsamp == 0.0) || (ncomb <= 5.0E+7)) {
     /*  If nsamp = 0 matrix C contains the indexes of all possible subsets */
     combsFS(seq, p, C);
+    C_data = C->data;
     /*  If nsamp is > 0 just select randomly ncomb rows from matrix C */
     if (nsamp > 0.0) {
       /*  Extract without replacement nsamp elements from ncomb */
@@ -432,7 +432,6 @@ void b_subsets(double nsamp, double n, double p, emxArray_real_T *C)
       /*             Example - randsampleFS(100,10,2) */
       /*             Data Types - single|double */
       /*  */
-      /*  */
       /*    Output: */
       /*  */
       /*    y :     A column vector of k values sampled at random from the
@@ -537,7 +536,6 @@ void b_subsets(double nsamp, double n, double p, emxArray_real_T *C)
       /* <a href="matlab: docsearchFS('randsampleFS')">Link to the help
        * function</a> */
       /*  */
-      /*  */
       /* $LastChangedDate::                      $: Date of the last commit */
       /*  */
       /*  Examples: */
@@ -591,26 +589,29 @@ void b_subsets(double nsamp, double n, double p, emxArray_real_T *C)
        */
       /*  Extract a random sample of k integers between 1 and n. */
       b_randperm(ncomb, nsamp, seq);
+      seq_data = seq->data;
       /*  METHOD: it was set to 2 */
       b_i = C->size[1] - 1;
       i = pascalM->size[0] * pascalM->size[1];
       pascalM->size[0] = seq->size[1];
       pascalM->size[1] = C->size[1];
       emxEnsureCapacity_real_T(pascalM, i);
+      pascalM_data = pascalM->data;
       for (i = 0; i <= b_i; i++) {
         loop_ub = seq->size[1];
         for (i1 = 0; i1 < loop_ub; i1++) {
-          pascalM->data[i1 + pascalM->size[0] * i] =
-              C->data[((int)seq->data[i1] + C->size[0] * i) - 1];
+          pascalM_data[i1 + pascalM->size[0] * i] =
+              C_data[((int)seq_data[i1] + C->size[0] * i) - 1];
         }
       }
       i = C->size[0] * C->size[1];
       C->size[0] = pascalM->size[0];
       C->size[1] = pascalM->size[1];
       emxEnsureCapacity_real_T(C, i);
+      C_data = C->data;
       loop_ub = pascalM->size[0] * pascalM->size[1];
       for (i = 0; i < loop_ub; i++) {
-        C->data[i] = pascalM->data[i];
+        C_data[i] = pascalM_data[i];
       }
     }
   } else {
@@ -652,7 +653,6 @@ void b_subsets(double nsamp, double n, double p, emxArray_real_T *C)
       /*             Example - randsampleFS(100,10,2) */
       /*             Data Types - single|double */
       /*  */
-      /*  */
       /*    Output: */
       /*  */
       /*    y :     A column vector of k values sampled at random from the
@@ -757,7 +757,6 @@ void b_subsets(double nsamp, double n, double p, emxArray_real_T *C)
       /* <a href="matlab: docsearchFS('randsampleFS')">Link to the help
        * function</a> */
       /*  */
-      /*  */
       /* $LastChangedDate::                      $: Date of the last commit */
       /*  */
       /*  Examples: */
@@ -811,6 +810,7 @@ void b_subsets(double nsamp, double n, double p, emxArray_real_T *C)
        */
       /*  Extract a random sample of k integers between 1 and n. */
       b_randperm(ncomb, nsamp, seq);
+      seq_data = seq->data;
       /*  METHOD: it was set to 2 */
       /*  The Pascal triangle can be used only if there is enough memory. */
       if (n <= 20000.0) {
@@ -821,7 +821,8 @@ void b_subsets(double nsamp, double n, double p, emxArray_real_T *C)
         pascalM->size[0] = 1;
         pascalM->size[1] = 1;
         emxEnsureCapacity_real_T(pascalM, i);
-        pascalM->data[0] = 0.0;
+        pascalM_data = pascalM->data;
+        pascalM_data[0] = 0.0;
         /*  C coder initialization */
       }
     } else {
@@ -829,13 +830,15 @@ void b_subsets(double nsamp, double n, double p, emxArray_real_T *C)
       seq->size[0] = 1;
       seq->size[1] = 1;
       emxEnsureCapacity_real_T(seq, i);
-      seq->data[0] = 0.0;
+      seq_data = seq->data;
+      seq_data[0] = 0.0;
       /*  C coder initialization */
       i = pascalM->size[0] * pascalM->size[1];
       pascalM->size[0] = 1;
       pascalM->size[1] = 1;
       emxEnsureCapacity_real_T(pascalM, i);
-      pascalM->data[0] = 0.0;
+      pascalM_data = pascalM->data;
+      pascalM_data[0] = 0.0;
       /*  C coder initialization */
     }
     /*  Create matrix C which will contain in each row the indexes forming the
@@ -847,12 +850,15 @@ void b_subsets(double nsamp, double n, double p, emxArray_real_T *C)
     C->size[0] = (int)nsamp;
     C->size[1] = (int)p;
     emxEnsureCapacity_real_T(C, i1);
+    C_data = C->data;
     for (b_i = 0; b_i < i; b_i++) {
       if ((ncomb > 5.0E+7) && (ncomb < 1.0E+8)) {
         if (usepascal) {
-          lexunrank(n, p, seq->data[b_i], pascalM, s);
+          lexunrank(n, p, seq_data[b_i], pascalM, s);
+          pascalM_data = s->data;
         } else {
-          b_lexunrank(n, p, seq->data[b_i], s);
+          b_lexunrank(n, p, seq_data[b_i], s);
+          pascalM_data = s->data;
         }
       } else {
         /* randsampleFS generates a random sample of k elements from the
@@ -887,7 +893,6 @@ void b_subsets(double nsamp, double n, double p, emxArray_real_T *C)
          * weights. */
         /*             Example - randsampleFS(100,10,2) */
         /*             Data Types - single|double */
-        /*  */
         /*  */
         /*    Output: */
         /*  */
@@ -994,7 +999,6 @@ void b_subsets(double nsamp, double n, double p, emxArray_real_T *C)
         /* <a href="matlab: docsearchFS('randsampleFS')">Link to the help
          * function</a> */
         /*  */
-        /*  */
         /* $LastChangedDate::                      $: Date of the last commit */
         /*  */
         /*  Examples: */
@@ -1050,10 +1054,11 @@ void b_subsets(double nsamp, double n, double p, emxArray_real_T *C)
          * weights. */
         /*  Extract a random sample of k integers between 1 and n. */
         b_randperm(n, p, s);
+        pascalM_data = s->data;
       }
       loop_ub = s->size[1];
       for (i1 = 0; i1 < loop_ub; i1++) {
-        C->data[b_i + C->size[0] * i1] = s->data[i1];
+        C_data[b_i + C->size[0] * i1] = pascalM_data[i1];
       }
     }
     /*          C=zeros(nselected,p); */
@@ -1074,12 +1079,18 @@ void c_subsets(emxArray_real_T *nsamp, double n, double p, double ncomb,
   emxArray_real_T *pascalM;
   emxArray_real_T *s;
   emxArray_real_T *seq;
+  double *C_data;
+  double *nsamp_data;
+  double *pascalM_data;
+  double *seq_data;
   int i;
   int i1;
   int k;
   int loop_ub;
   bool exitg1;
   bool usepascal;
+  bool *x_data;
+  nsamp_data = nsamp->data;
   /* subsets creates a matrix of indexes where rows are distinct p-subsets
    * extracted from a set of n elements */
   /*  */
@@ -1132,9 +1143,7 @@ void c_subsets(emxArray_real_T *nsamp, double n, double p, double ncomb,
   /*             Example - randsampleFS(100,10,2) */
   /*             Data Types - single|double */
   /*  */
-  /*  */
   /*   Output: */
-  /*  */
   /*  */
   /*            C : The indices of the subsets which need to be extracted. */
   /*                Matrix with nselected rows and p columns (stored in int16
@@ -1143,7 +1152,6 @@ void c_subsets(emxArray_real_T *nsamp, double n, double p, double ncomb,
   /*  */
   /*    nselected : Number of rows of matrix C. Scalar. */
   /*                Data Types - single|double */
-  /*  */
   /*  */
   /*  See also randsampleFS.m, lexunrank.m, bc.m */
   /*  */
@@ -1161,13 +1169,10 @@ void c_subsets(emxArray_real_T *nsamp, double n, double p, double ncomb,
   /*        Sampling Without Replacement", SIAM Journal of Computing, */
   /*        9(1):111-113. */
   /*  */
-  /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
   /*  */
-  /*  */
   /* <a href="matlab: docsearchFS('subsets')">Link to the help function</a> */
-  /*  */
   /*  */
   /* $LastChangedDate::                      $: Date of the last commit */
   /*  */
@@ -1231,7 +1236,6 @@ void c_subsets(emxArray_real_T *nsamp, double n, double p, double ncomb,
   /*         frC = tabulateFS(double(C(:))); */
   /*         hold on; plot(1:n,frC(:,3)/100,'r-','LineWidth',3); */
   /*     end */
-  /*  */
   /*  */
   /*     % The hypergeometric distribution hygepdf(X,M,K,N) computes the
    * probability */
@@ -1404,7 +1408,8 @@ void c_subsets(emxArray_real_T *nsamp, double n, double p, double ncomb,
     seq->size[0] = 1;
     seq->size[1] = 1;
     emxEnsureCapacity_real_T(seq, i);
-    seq->data[0] = rtNaN;
+    seq_data = seq->data;
+    seq_data[0] = rtNaN;
   } else if (n < 1.0) {
     seq->size[0] = 1;
     seq->size[1] = 0;
@@ -1413,15 +1418,17 @@ void c_subsets(emxArray_real_T *nsamp, double n, double p, double ncomb,
     seq->size[0] = 1;
     seq->size[1] = 1;
     emxEnsureCapacity_real_T(seq, i);
-    seq->data[0] = rtNaN;
+    seq_data = seq->data;
+    seq_data[0] = rtNaN;
   } else {
     i = seq->size[0] * seq->size[1];
     seq->size[0] = 1;
     loop_ub = (int)floor(n - 1.0);
     seq->size[1] = loop_ub + 1;
     emxEnsureCapacity_real_T(seq, i);
+    seq_data = seq->data;
     for (i = 0; i <= loop_ub; i++) {
-      seq->data[i] = (double)i + 1.0;
+      seq_data[i] = (double)i + 1.0;
     }
   }
   emxInit_boolean_T(&x, 2);
@@ -1429,9 +1436,10 @@ void c_subsets(emxArray_real_T *nsamp, double n, double p, double ncomb,
   x->size[0] = nsamp->size[0];
   x->size[1] = nsamp->size[1];
   emxEnsureCapacity_boolean_T(x, i);
+  x_data = x->data;
   loop_ub = nsamp->size[0] * nsamp->size[1];
   for (i = 0; i < loop_ub; i++) {
-    x->data[i] = (ncomb < nsamp->data[i]);
+    x_data[i] = (ncomb < nsamp_data[i]);
   }
   usepascal = ((x->size[0] != 0) && (x->size[1] != 0));
   if (usepascal) {
@@ -1439,7 +1447,7 @@ void c_subsets(emxArray_real_T *nsamp, double n, double p, double ncomb,
     k = 0;
     exitg1 = false;
     while ((!exitg1) && (k <= i - 1)) {
-      if (!x->data[k]) {
+      if (!x_data[k]) {
         usepascal = false;
         exitg1 = true;
       } else {
@@ -1453,7 +1461,8 @@ void c_subsets(emxArray_real_T *nsamp, double n, double p, double ncomb,
     nsamp->size[0] = 1;
     nsamp->size[1] = 1;
     emxEnsureCapacity_real_T(nsamp, i);
-    nsamp->data[0] = 0.0;
+    nsamp_data = nsamp->data;
+    nsamp_data[0] = 0.0;
   }
   /*  this check is used in combination of randsampleFS, for computational */
   /*  efficiency */
@@ -1465,16 +1474,17 @@ void c_subsets(emxArray_real_T *nsamp, double n, double p, double ncomb,
   /*  Constants that determine the method used to extract the p-subsets */
   emxInit_real_T(&pascalM, 2);
   emxInit_real_T(&s, 2);
-  if ((nsamp->data[0] == 0.0) || (ncomb <= 5.0E+7)) {
-    if (nsamp->data[0] == 0.0) {
+  if ((nsamp_data[0] == 0.0) || (ncomb <= 5.0E+7)) {
+    if (nsamp_data[0] == 0.0) {
       *nselected = ncomb;
     } else {
-      *nselected = nsamp->data[0];
+      *nselected = nsamp_data[0];
     }
     /*  If nsamp = 0 matrix C contains the indexes of all possible subsets */
     combsFS(seq, p, C);
+    C_data = C->data;
     /*  If nsamp is > 0 just select randomly ncomb rows from matrix C */
-    if (nsamp->data[0] > 0.0) {
+    if (nsamp_data[0] > 0.0) {
       /*  Extract without replacement nsamp elements from ncomb */
       /* randsampleFS generates a random sample of k elements from the integers
        * 1 to n (k<=n) */
@@ -1508,7 +1518,6 @@ void c_subsets(emxArray_real_T *nsamp, double n, double p, double ncomb,
        * weights. */
       /*             Example - randsampleFS(100,10,2) */
       /*             Data Types - single|double */
-      /*  */
       /*  */
       /*    Output: */
       /*  */
@@ -1614,7 +1623,6 @@ void c_subsets(emxArray_real_T *nsamp, double n, double p, double ncomb,
       /* <a href="matlab: docsearchFS('randsampleFS')">Link to the help
        * function</a> */
       /*  */
-      /*  */
       /* $LastChangedDate::                      $: Date of the last commit */
       /*  */
       /*  Examples: */
@@ -1667,31 +1675,34 @@ void c_subsets(emxArray_real_T *nsamp, double n, double p, double ncomb,
       /*  This is done if the third argument is provided as a vector of weights.
        */
       /*  Extract a random sample of k integers between 1 and n. */
-      b_randperm(ncomb, nsamp->data[0], seq);
+      b_randperm(ncomb, nsamp_data[0], seq);
+      seq_data = seq->data;
       /*  METHOD: it was set to 2 */
       k = C->size[1] - 1;
       i = pascalM->size[0] * pascalM->size[1];
       pascalM->size[0] = seq->size[1];
       pascalM->size[1] = C->size[1];
       emxEnsureCapacity_real_T(pascalM, i);
+      pascalM_data = pascalM->data;
       for (i = 0; i <= k; i++) {
         loop_ub = seq->size[1];
         for (i1 = 0; i1 < loop_ub; i1++) {
-          pascalM->data[i1 + pascalM->size[0] * i] =
-              C->data[((int)seq->data[i1] + C->size[0] * i) - 1];
+          pascalM_data[i1 + pascalM->size[0] * i] =
+              C_data[((int)seq_data[i1] + C->size[0] * i) - 1];
         }
       }
       i = C->size[0] * C->size[1];
       C->size[0] = pascalM->size[0];
       C->size[1] = pascalM->size[1];
       emxEnsureCapacity_real_T(C, i);
+      C_data = C->data;
       loop_ub = pascalM->size[0] * pascalM->size[1];
       for (i = 0; i < loop_ub; i++) {
-        C->data[i] = pascalM->data[i];
+        C_data[i] = pascalM_data[i];
       }
     }
   } else {
-    *nselected = nsamp->data[0];
+    *nselected = nsamp_data[0];
     /*  usepascal: flag used to decide whether to use the Pascal triangle */
     /*  tric, which allows to reduce considerably the computation time */
     usepascal = true;
@@ -1730,7 +1741,6 @@ void c_subsets(emxArray_real_T *nsamp, double n, double p, double ncomb,
       /*             Example - randsampleFS(100,10,2) */
       /*             Data Types - single|double */
       /*  */
-      /*  */
       /*    Output: */
       /*  */
       /*    y :     A column vector of k values sampled at random from the
@@ -1835,7 +1845,6 @@ void c_subsets(emxArray_real_T *nsamp, double n, double p, double ncomb,
       /* <a href="matlab: docsearchFS('randsampleFS')">Link to the help
        * function</a> */
       /*  */
-      /*  */
       /* $LastChangedDate::                      $: Date of the last commit */
       /*  */
       /*  Examples: */
@@ -1888,7 +1897,8 @@ void c_subsets(emxArray_real_T *nsamp, double n, double p, double ncomb,
       /*  This is done if the third argument is provided as a vector of weights.
        */
       /*  Extract a random sample of k integers between 1 and n. */
-      b_randperm(ncomb, nsamp->data[0], seq);
+      b_randperm(ncomb, nsamp_data[0], seq);
+      seq_data = seq->data;
       /*  METHOD: it was set to 2 */
       /*  The Pascal triangle can be used only if there is enough memory. */
       if (n <= 20000.0) {
@@ -1899,7 +1909,8 @@ void c_subsets(emxArray_real_T *nsamp, double n, double p, double ncomb,
         pascalM->size[0] = 1;
         pascalM->size[1] = 1;
         emxEnsureCapacity_real_T(pascalM, i);
-        pascalM->data[0] = 0.0;
+        pascalM_data = pascalM->data;
+        pascalM_data[0] = 0.0;
         /*  C coder initialization */
       }
     } else {
@@ -1907,13 +1918,15 @@ void c_subsets(emxArray_real_T *nsamp, double n, double p, double ncomb,
       seq->size[0] = 1;
       seq->size[1] = 1;
       emxEnsureCapacity_real_T(seq, i);
-      seq->data[0] = 0.0;
+      seq_data = seq->data;
+      seq_data[0] = 0.0;
       /*  C coder initialization */
       i = pascalM->size[0] * pascalM->size[1];
       pascalM->size[0] = 1;
       pascalM->size[1] = 1;
       emxEnsureCapacity_real_T(pascalM, i);
-      pascalM->data[0] = 0.0;
+      pascalM_data = pascalM->data;
+      pascalM_data[0] = 0.0;
       /*  C coder initialization */
     }
     /*  Create matrix C which will contain in each row the indexes forming the
@@ -1921,16 +1934,19 @@ void c_subsets(emxArray_real_T *nsamp, double n, double p, double ncomb,
     /*  subset which is extracted at step i, where i=1....number of selected */
     /*  subsamples (nselected) */
     i = C->size[0] * C->size[1];
-    C->size[0] = (int)nsamp->data[0];
+    C->size[0] = (int)nsamp_data[0];
     C->size[1] = (int)p;
     emxEnsureCapacity_real_T(C, i);
-    i = (int)nsamp->data[0];
+    C_data = C->data;
+    i = (int)nsamp_data[0];
     for (k = 0; k < i; k++) {
       if ((ncomb > 5.0E+7) && (ncomb < 1.0E+8)) {
         if (usepascal) {
-          lexunrank(n, p, seq->data[k], pascalM, s);
+          lexunrank(n, p, seq_data[k], pascalM, s);
+          nsamp_data = s->data;
         } else {
-          b_lexunrank(n, p, seq->data[k], s);
+          b_lexunrank(n, p, seq_data[k], s);
+          nsamp_data = s->data;
         }
       } else {
         /* randsampleFS generates a random sample of k elements from the
@@ -1965,7 +1981,6 @@ void c_subsets(emxArray_real_T *nsamp, double n, double p, double ncomb,
          * weights. */
         /*             Example - randsampleFS(100,10,2) */
         /*             Data Types - single|double */
-        /*  */
         /*  */
         /*    Output: */
         /*  */
@@ -2072,7 +2087,6 @@ void c_subsets(emxArray_real_T *nsamp, double n, double p, double ncomb,
         /* <a href="matlab: docsearchFS('randsampleFS')">Link to the help
          * function</a> */
         /*  */
-        /*  */
         /* $LastChangedDate::                      $: Date of the last commit */
         /*  */
         /*  Examples: */
@@ -2128,10 +2142,11 @@ void c_subsets(emxArray_real_T *nsamp, double n, double p, double ncomb,
          * weights. */
         /*  Extract a random sample of k integers between 1 and n. */
         b_randperm(n, p, s);
+        nsamp_data = s->data;
       }
       loop_ub = s->size[1];
       for (i1 = 0; i1 < loop_ub; i1++) {
-        C->data[k + C->size[0] * i1] = s->data[i1];
+        C_data[k + C->size[0] * i1] = nsamp_data[i1];
       }
     }
     /*          C=zeros(nselected,p); */
@@ -2151,6 +2166,9 @@ void subsets(double nsamp, double n, double p, double ncomb, emxArray_real_T *C,
   emxArray_real_T *pascalM;
   emxArray_real_T *s;
   emxArray_real_T *seq;
+  double *C_data;
+  double *pascalM_data;
+  double *seq_data;
   int b_i;
   int i;
   int i1;
@@ -2208,9 +2226,7 @@ void subsets(double nsamp, double n, double p, double ncomb, emxArray_real_T *C,
   /*             Example - randsampleFS(100,10,2) */
   /*             Data Types - single|double */
   /*  */
-  /*  */
   /*   Output: */
-  /*  */
   /*  */
   /*            C : The indices of the subsets which need to be extracted. */
   /*                Matrix with nselected rows and p columns (stored in int16
@@ -2219,7 +2235,6 @@ void subsets(double nsamp, double n, double p, double ncomb, emxArray_real_T *C,
   /*  */
   /*    nselected : Number of rows of matrix C. Scalar. */
   /*                Data Types - single|double */
-  /*  */
   /*  */
   /*  See also randsampleFS.m, lexunrank.m, bc.m */
   /*  */
@@ -2237,13 +2252,10 @@ void subsets(double nsamp, double n, double p, double ncomb, emxArray_real_T *C,
   /*        Sampling Without Replacement", SIAM Journal of Computing, */
   /*        9(1):111-113. */
   /*  */
-  /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
   /*  */
-  /*  */
   /* <a href="matlab: docsearchFS('subsets')">Link to the help function</a> */
-  /*  */
   /*  */
   /* $LastChangedDate::                      $: Date of the last commit */
   /*  */
@@ -2307,7 +2319,6 @@ void subsets(double nsamp, double n, double p, double ncomb, emxArray_real_T *C,
   /*         frC = tabulateFS(double(C(:))); */
   /*         hold on; plot(1:n,frC(:,3)/100,'r-','LineWidth',3); */
   /*     end */
-  /*  */
   /*  */
   /*     % The hypergeometric distribution hygepdf(X,M,K,N) computes the
    * probability */
@@ -2480,7 +2491,8 @@ void subsets(double nsamp, double n, double p, double ncomb, emxArray_real_T *C,
     seq->size[0] = 1;
     seq->size[1] = 1;
     emxEnsureCapacity_real_T(seq, i);
-    seq->data[0] = rtNaN;
+    seq_data = seq->data;
+    seq_data[0] = rtNaN;
   } else if (n < 1.0) {
     seq->size[0] = 1;
     seq->size[1] = 0;
@@ -2489,15 +2501,17 @@ void subsets(double nsamp, double n, double p, double ncomb, emxArray_real_T *C,
     seq->size[0] = 1;
     seq->size[1] = 1;
     emxEnsureCapacity_real_T(seq, i);
-    seq->data[0] = rtNaN;
+    seq_data = seq->data;
+    seq_data[0] = rtNaN;
   } else {
     i = seq->size[0] * seq->size[1];
     seq->size[0] = 1;
     loop_ub = (int)floor(n - 1.0);
     seq->size[1] = loop_ub + 1;
     emxEnsureCapacity_real_T(seq, i);
+    seq_data = seq->data;
     for (i = 0; i <= loop_ub; i++) {
-      seq->data[i] = (double)i + 1.0;
+      seq_data[i] = (double)i + 1.0;
     }
   }
   if (ncomb < nsamp) {
@@ -2521,6 +2535,7 @@ void subsets(double nsamp, double n, double p, double ncomb, emxArray_real_T *C,
     }
     /*  If nsamp = 0 matrix C contains the indexes of all possible subsets */
     combsFS(seq, p, C);
+    C_data = C->data;
     /*  If nsamp is > 0 just select randomly ncomb rows from matrix C */
     if (nsamp > 0.0) {
       /*  Extract without replacement nsamp elements from ncomb */
@@ -2556,7 +2571,6 @@ void subsets(double nsamp, double n, double p, double ncomb, emxArray_real_T *C,
        * weights. */
       /*             Example - randsampleFS(100,10,2) */
       /*             Data Types - single|double */
-      /*  */
       /*  */
       /*    Output: */
       /*  */
@@ -2662,7 +2676,6 @@ void subsets(double nsamp, double n, double p, double ncomb, emxArray_real_T *C,
       /* <a href="matlab: docsearchFS('randsampleFS')">Link to the help
        * function</a> */
       /*  */
-      /*  */
       /* $LastChangedDate::                      $: Date of the last commit */
       /*  */
       /*  Examples: */
@@ -2716,26 +2729,29 @@ void subsets(double nsamp, double n, double p, double ncomb, emxArray_real_T *C,
        */
       /*  Extract a random sample of k integers between 1 and n. */
       b_randperm(ncomb, nsamp, seq);
+      seq_data = seq->data;
       /*  METHOD: it was set to 2 */
       b_i = C->size[1] - 1;
       i = pascalM->size[0] * pascalM->size[1];
       pascalM->size[0] = seq->size[1];
       pascalM->size[1] = C->size[1];
       emxEnsureCapacity_real_T(pascalM, i);
+      pascalM_data = pascalM->data;
       for (i = 0; i <= b_i; i++) {
         loop_ub = seq->size[1];
         for (i1 = 0; i1 < loop_ub; i1++) {
-          pascalM->data[i1 + pascalM->size[0] * i] =
-              C->data[((int)seq->data[i1] + C->size[0] * i) - 1];
+          pascalM_data[i1 + pascalM->size[0] * i] =
+              C_data[((int)seq_data[i1] + C->size[0] * i) - 1];
         }
       }
       i = C->size[0] * C->size[1];
       C->size[0] = pascalM->size[0];
       C->size[1] = pascalM->size[1];
       emxEnsureCapacity_real_T(C, i);
+      C_data = C->data;
       loop_ub = pascalM->size[0] * pascalM->size[1];
       for (i = 0; i < loop_ub; i++) {
-        C->data[i] = pascalM->data[i];
+        C_data[i] = pascalM_data[i];
       }
     }
   } else {
@@ -2778,7 +2794,6 @@ void subsets(double nsamp, double n, double p, double ncomb, emxArray_real_T *C,
       /*             Example - randsampleFS(100,10,2) */
       /*             Data Types - single|double */
       /*  */
-      /*  */
       /*    Output: */
       /*  */
       /*    y :     A column vector of k values sampled at random from the
@@ -2883,7 +2898,6 @@ void subsets(double nsamp, double n, double p, double ncomb, emxArray_real_T *C,
       /* <a href="matlab: docsearchFS('randsampleFS')">Link to the help
        * function</a> */
       /*  */
-      /*  */
       /* $LastChangedDate::                      $: Date of the last commit */
       /*  */
       /*  Examples: */
@@ -2937,6 +2951,7 @@ void subsets(double nsamp, double n, double p, double ncomb, emxArray_real_T *C,
        */
       /*  Extract a random sample of k integers between 1 and n. */
       b_randperm(ncomb, nsamp, seq);
+      seq_data = seq->data;
       /*  METHOD: it was set to 2 */
       /*  The Pascal triangle can be used only if there is enough memory. */
       if (n <= 20000.0) {
@@ -2947,7 +2962,8 @@ void subsets(double nsamp, double n, double p, double ncomb, emxArray_real_T *C,
         pascalM->size[0] = 1;
         pascalM->size[1] = 1;
         emxEnsureCapacity_real_T(pascalM, i);
-        pascalM->data[0] = 0.0;
+        pascalM_data = pascalM->data;
+        pascalM_data[0] = 0.0;
         /*  C coder initialization */
       }
     } else {
@@ -2955,13 +2971,15 @@ void subsets(double nsamp, double n, double p, double ncomb, emxArray_real_T *C,
       seq->size[0] = 1;
       seq->size[1] = 1;
       emxEnsureCapacity_real_T(seq, i);
-      seq->data[0] = 0.0;
+      seq_data = seq->data;
+      seq_data[0] = 0.0;
       /*  C coder initialization */
       i = pascalM->size[0] * pascalM->size[1];
       pascalM->size[0] = 1;
       pascalM->size[1] = 1;
       emxEnsureCapacity_real_T(pascalM, i);
-      pascalM->data[0] = 0.0;
+      pascalM_data = pascalM->data;
+      pascalM_data[0] = 0.0;
       /*  C coder initialization */
     }
     /*  Create matrix C which will contain in each row the indexes forming the
@@ -2973,12 +2991,15 @@ void subsets(double nsamp, double n, double p, double ncomb, emxArray_real_T *C,
     C->size[0] = (int)nsamp;
     C->size[1] = (int)p;
     emxEnsureCapacity_real_T(C, i1);
+    C_data = C->data;
     for (b_i = 0; b_i < i; b_i++) {
       if ((ncomb > 5.0E+7) && (ncomb < 1.0E+8)) {
         if (usepascal) {
-          lexunrank(n, p, seq->data[b_i], pascalM, s);
+          lexunrank(n, p, seq_data[b_i], pascalM, s);
+          pascalM_data = s->data;
         } else {
-          b_lexunrank(n, p, seq->data[b_i], s);
+          b_lexunrank(n, p, seq_data[b_i], s);
+          pascalM_data = s->data;
         }
       } else {
         /* randsampleFS generates a random sample of k elements from the
@@ -3013,7 +3034,6 @@ void subsets(double nsamp, double n, double p, double ncomb, emxArray_real_T *C,
          * weights. */
         /*             Example - randsampleFS(100,10,2) */
         /*             Data Types - single|double */
-        /*  */
         /*  */
         /*    Output: */
         /*  */
@@ -3120,7 +3140,6 @@ void subsets(double nsamp, double n, double p, double ncomb, emxArray_real_T *C,
         /* <a href="matlab: docsearchFS('randsampleFS')">Link to the help
          * function</a> */
         /*  */
-        /*  */
         /* $LastChangedDate::                      $: Date of the last commit */
         /*  */
         /*  Examples: */
@@ -3176,10 +3195,11 @@ void subsets(double nsamp, double n, double p, double ncomb, emxArray_real_T *C,
          * weights. */
         /*  Extract a random sample of k integers between 1 and n. */
         b_randperm(n, p, s);
+        pascalM_data = s->data;
       }
       loop_ub = s->size[1];
       for (i1 = 0; i1 < loop_ub; i1++) {
-        C->data[b_i + C->size[0] * i1] = s->data[i1];
+        C_data[b_i + C->size[0] * i1] = pascalM_data[i1];
       }
     }
     /*          C=zeros(nselected,p); */

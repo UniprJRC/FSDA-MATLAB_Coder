@@ -27,6 +27,8 @@ void Score(const emxArray_real_T *y, const emxArray_real_T *X,
            double varargin_2, double outSC_Score_data[], int *outSC_Score_size,
            double *outSC_Lik);
 
+void c_minus(emxArray_real_T *z, const emxArray_real_T *ylai);
+
 #ifdef __cplusplus
 }
 #endif

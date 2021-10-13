@@ -20,8 +20,8 @@
 void repelem(const double x_data[], const int x_size[2], double varargin_1,
              emxArray_real_T *y)
 {
+  double *y_data;
   int i;
-  int j;
   int k;
   int mrows;
   int rowIdx;
@@ -31,17 +31,16 @@ void repelem(const double x_data[], const int x_size[2], double varargin_1,
   y->size[0] = rowIdx;
   y->size[1] = x_size[1];
   emxEnsureCapacity_real_T(y, mrows);
+  y_data = y->data;
   if ((rowIdx != 0) && (x_size[1] != 0)) {
     mrows = x_size[0];
-    for (j = 0; j < 1; j++) {
-      rowIdx = -1;
-      for (i = 0; i < mrows; i++) {
-        rowreps = (int)varargin_1;
-        for (k = 0; k < rowreps; k++) {
-          y->data[(rowIdx + k) + 1] = x_data[0];
-        }
-        rowIdx += (int)varargin_1;
+    rowIdx = -1;
+    for (i = 0; i < mrows; i++) {
+      rowreps = (int)varargin_1;
+      for (k = 0; k < rowreps; k++) {
+        y_data[(rowIdx + k) + 1] = x_data[0];
       }
+      rowIdx += (int)varargin_1;
     }
   }
 }

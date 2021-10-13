@@ -27,9 +27,7 @@ double b_xnrm2(int n, const emxArray_real_T *x);
 
 double c_xnrm2(int n, const double x[3]);
 
-double d_xnrm2(int n, const emxArray_real_T *x);
-
-double e_xnrm2(int n, const double x[27], int ix0);
+double d_xnrm2(int n, const double x[27], int ix0);
 
 double xnrm2(int n, const emxArray_real_T *x, int ix0);
 

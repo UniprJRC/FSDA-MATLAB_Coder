@@ -3,14 +3,14 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * eigStandard.h
+ * addt.h
  *
- * Code generation for function 'eigStandard'
+ * Code generation for function 'addt'
  *
  */
 
-#ifndef EIGSTANDARD_H
-#define EIGSTANDARD_H
+#ifndef ADDT_H
+#define ADDT_H
 
 /* Include files */
 #include "fsdaC_types.h"
@@ -23,12 +23,12 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void eigStandard(const emxArray_real_T *A, emxArray_creal_T *V,
-                 emxArray_creal_T *D);
+void ef_binary_expand_op(emxArray_real_T *E, const double _data[],
+                         const int *_size);
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-/* End of code generation (eigStandard.h) */
+/* End of code generation (addt.h) */

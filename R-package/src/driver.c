@@ -22,11 +22,13 @@ double computeFirstOrderOpt(const emxArray_real_T *gradf,
                             bool b_hasFiniteBounds,
                             const double *projSteepestDescentInfNorm)
 {
+  const double *gradf_data;
   double absx;
   double b;
   double firstOrderOpt;
   int i;
   int k;
+  gradf_data = gradf->data;
   if (b_hasFiniteBounds) {
     if (gradf->size[0] == 0) {
       b = 0.0;
@@ -34,7 +36,7 @@ double computeFirstOrderOpt(const emxArray_real_T *gradf,
       b = 0.0;
       i = gradf->size[0];
       for (k = 0; k < i; k++) {
-        absx = fabs(gradf->data[k]);
+        absx = fabs(gradf_data[k]);
         if (rtIsNaN(absx) || (absx > b)) {
           b = absx;
         }
@@ -54,7 +56,7 @@ double computeFirstOrderOpt(const emxArray_real_T *gradf,
     firstOrderOpt = 0.0;
     i = gradf->size[0];
     for (k = 0; k < i; k++) {
-      absx = fabs(gradf->data[k]);
+      absx = fabs(gradf_data[k]);
       if (rtIsNaN(absx) || (absx > firstOrderOpt)) {
         firstOrderOpt = absx;
       }

@@ -17,40 +17,25 @@
 #include <string.h>
 
 /* Function Definitions */
-bool any(const emxArray_boolean_T *x)
-{
-  int ix;
-  bool exitg1;
-  bool y;
-  y = false;
-  ix = 1;
-  exitg1 = false;
-  while ((!exitg1) && (ix <= x->size[0])) {
-    if (!x->data[ix - 1]) {
-      ix++;
-    } else {
-      y = true;
-      exitg1 = true;
-    }
-  }
-  return y;
-}
-
-void b_any(const emxArray_boolean_T *x, emxArray_boolean_T *y)
+void any(const emxArray_boolean_T *x, emxArray_boolean_T *y)
 {
   int a;
   int i;
   int i2;
   int ix;
   int npages;
+  const bool *x_data;
   bool exitg1;
+  bool *y_data;
+  x_data = x->data;
   i2 = y->size[0] * y->size[1];
   y->size[0] = 1;
   y->size[1] = x->size[1];
   emxEnsureCapacity_boolean_T(y, i2);
+  y_data = y->data;
   npages = x->size[1];
   for (i2 = 0; i2 < npages; i2++) {
-    y->data[i2] = false;
+    y_data[i2] = false;
   }
   npages = x->size[1];
   i2 = 0;
@@ -60,30 +45,53 @@ void b_any(const emxArray_boolean_T *x, emxArray_boolean_T *y)
     i2 += x->size[0];
     exitg1 = false;
     while ((!exitg1) && (ix + 1 <= a)) {
-      if (!x->data[ix]) {
-        ix++;
-      } else {
-        y->data[i] = true;
+      if (x_data[ix]) {
+        y_data[i] = true;
         exitg1 = true;
+      } else {
+        ix++;
       }
     }
   }
 }
 
+bool b_any(const emxArray_boolean_T *x)
+{
+  int ix;
+  const bool *x_data;
+  bool exitg1;
+  bool y;
+  x_data = x->data;
+  y = false;
+  ix = 1;
+  exitg1 = false;
+  while ((!exitg1) && (ix <= x->size[0])) {
+    if (x_data[ix - 1]) {
+      y = true;
+      exitg1 = true;
+    } else {
+      ix++;
+    }
+  }
+  return y;
+}
+
 bool c_any(const emxArray_boolean_T *x)
 {
   int ix;
+  const bool *x_data;
   bool exitg1;
   bool y;
+  x_data = x->data;
   y = false;
   ix = 1;
   exitg1 = false;
   while ((!exitg1) && (ix <= x->size[1])) {
-    if (!x->data[ix - 1]) {
-      ix++;
-    } else {
+    if (x_data[ix - 1]) {
       y = true;
       exitg1 = true;
+    } else {
+      ix++;
     }
   }
   return y;

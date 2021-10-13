@@ -107,7 +107,6 @@ void FSRinvmdr(const double mdr[2], double p, double MDRinv[3])
   /*                level becomes norminv(0.50)=0; 99% conf level becomes
    * norminv(0.99)=2.33. */
   /*  */
-  /*  */
   /*  See also FSRenvmdr, LXS.m, FSREDA.m */
   /*  */
   /*  References: */
@@ -119,10 +118,8 @@ void FSRinvmdr(const double mdr[2], double p, double MDRinv[3])
   /*  search for testing multiple outliers in regression, "Advances in Data */
   /*  Analysis and Classification", Vol. 1, pp. 123-141. */
   /*  */
-  /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('FSRinvmdr')">Link to the help function</a> */
   /*  */
@@ -212,8 +209,6 @@ void FSRinvmdr(const double mdr[2], double p, double MDRinv[3])
   /*         [MDRinv] = FSRinvmdr(out.mdr,5,'n',jn0); */
   /*         % Plot for each step of the fwd search the values of mdr translated
    * in */
-  /*         % Plot for each step of the fwd search the values of mdr translated
-   * in */
   /*         % terms of normal quantiles */
   /*         subplot(2,2,ij) */
   /*         plot(MDRinv(:,1),norminv(MDRinv(:,2)),'LineWidth',2) */
@@ -271,18 +266,18 @@ void FSRinvmdr(const double mdr[2], double p, double MDRinv[3])
   dj = (mdr[0] + 1.0) - mdr[0];
   x = ((-mdr[0] - 1.0) + (mdr[0] + 1.0) / (2.0 * xsq - 1.0)) / dj;
   /*  mdr= 1-confidence level */
-  xsq = 2.0 * dj;
-  dj = 2.0 * (mdr[0] + 1.0);
-  if ((xsq > 0.0) && (!rtIsNaN(x))) {
+  dj *= 2.0;
+  xsq = 2.0 * (mdr[0] + 1.0);
+  if ((dj > 0.0) && (!rtIsNaN(x))) {
     if (x > 0.0) {
       if (rtIsInf(x)) {
         xsq = 1.0;
-      } else if (rtIsInf(xsq)) {
-        if (rtIsInf(dj)) {
+      } else if (rtIsInf(dj)) {
+        if (rtIsInf(xsq)) {
           xsq = (x >= 1.0);
         } else {
-          x = dj / x / 2.0;
-          a = dj / 2.0;
+          x = xsq / x / 2.0;
+          a = xsq / 2.0;
           fac = log(a);
           if (!(x > 0.0)) {
             xsq = 1.0;
@@ -454,7 +449,7 @@ void FSRinvmdr(const double mdr[2], double p, double MDRinv[3])
                 } while (exitg1 == 0);
               }
               xsq = 0.0;
-              i = (int)(((-1.0 - (n - 1.0)) + 1.0) / -1.0);
+              i = (int)-((-1.0 - (n - 1.0)) + 1.0);
               for (b_i = 0; b_i < i; b_i++) {
                 xsq = x * (xsq + 1.0) / (a + ((n - 1.0) + -(double)b_i));
               }
@@ -569,7 +564,7 @@ void FSRinvmdr(const double mdr[2], double p, double MDRinv[3])
                   n = floor(a) + 1.0;
                 }
               }
-              i = (int)(((-1.0 - (n - 1.0)) + 1.0) / -1.0);
+              i = (int)-((-1.0 - (n - 1.0)) + 1.0);
               for (b_i = 0; b_i < i; b_i++) {
                 xsq = (a - ((n - 1.0) + -(double)b_i)) * xsq / x + 1.0;
               }
@@ -585,14 +580,17 @@ void FSRinvmdr(const double mdr[2], double p, double MDRinv[3])
             }
           }
         }
-      } else if (rtIsInf(dj)) {
-        xsq = (gammainc(xsq * x / 2.0, xsq / 2.0)).re;
+      } else if (rtIsInf(xsq)) {
+        a = dj / 2.0;
+        d = a + 1.0;
+        gammaln(&d);
+        xsq = (scalar_gammainc(dj * x / 2.0, a, log(a), d)).re;
       } else {
-        d = x * xsq;
-        if (dj <= d) {
-          xsq = (b_betainc(dj / (dj + d), dj / 2.0, xsq / 2.0)).re;
+        d = x * dj;
+        if (xsq <= d) {
+          xsq = (b_betainc(xsq / (xsq + d), xsq / 2.0, dj / 2.0)).re;
         } else {
-          xsq = (betainc(d / (d + dj), xsq / 2.0, dj / 2.0)).re;
+          xsq = (betainc(d / (d + xsq), dj / 2.0, xsq / 2.0)).re;
         }
       }
     } else {

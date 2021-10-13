@@ -19,18 +19,20 @@
 /* Function Definitions */
 double projectBox(const emxArray_real_T *x, const emxArray_real_T *dx)
 {
+  const double *dx_data;
   double dxInfNorm;
   int i;
   int n;
+  dx_data = dx->data;
   n = dx->size[0] - 1;
   dxInfNorm = 0.0;
   if (x->size[0] == 0) {
     for (i = 0; i <= n; i++) {
-      dxInfNorm = fmax(dxInfNorm, fabs(dx->data[i]));
+      dxInfNorm = fmax(dxInfNorm, fabs(dx_data[i]));
     }
   } else {
     for (i = 0; i <= n; i++) {
-      dxInfNorm = fmax(dxInfNorm, fabs(dx->data[i]));
+      dxInfNorm = fmax(dxInfNorm, fabs(dx_data[i]));
     }
   }
   return dxInfNorm;

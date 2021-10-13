@@ -23,8 +23,10 @@
 void unique_vector(const emxArray_real_T *a, emxArray_real_T *b)
 {
   emxArray_int32_T *idx;
+  const double *a_data;
   double absx;
   double x;
+  double *b_data;
   int b_k;
   int exitg2;
   int exponent;
@@ -32,25 +34,29 @@ void unique_vector(const emxArray_real_T *a, emxArray_real_T *b)
   int nNaN;
   int na;
   int nb;
+  int *idx_data;
   bool exitg1;
+  a_data = a->data;
   emxInit_int32_T(&idx, 1);
   na = a->size[0];
   sortIdx(a, idx);
+  idx_data = idx->data;
   nNaN = b->size[0];
   b->size[0] = a->size[0];
   emxEnsureCapacity_real_T(b, nNaN);
+  b_data = b->data;
   for (k = 0; k < na; k++) {
-    b->data[k] = a->data[idx->data[k] - 1];
+    b_data[k] = a_data[idx_data[k] - 1];
   }
   emxFree_int32_T(&idx);
   k = a->size[0];
-  while ((k >= 1) && rtIsNaN(b->data[k - 1])) {
+  while ((k >= 1) && rtIsNaN(b_data[k - 1])) {
     k--;
   }
   nNaN = a->size[0] - k;
   exitg1 = false;
   while ((!exitg1) && (k >= 1)) {
-    absx = b->data[k - 1];
+    absx = b_data[k - 1];
     if (rtIsInf(absx) && (absx > 0.0)) {
       k--;
     } else {
@@ -61,7 +67,7 @@ void unique_vector(const emxArray_real_T *a, emxArray_real_T *b)
   nb = -1;
   b_k = 0;
   while (b_k + 1 <= k) {
-    x = b->data[b_k];
+    x = b_data[b_k];
     do {
       exitg2 = 0;
       b_k++;
@@ -79,23 +85,23 @@ void unique_vector(const emxArray_real_T *a, emxArray_real_T *b)
         } else {
           absx = rtNaN;
         }
-        if ((!(fabs(x - b->data[b_k]) < absx)) &&
-            ((!rtIsInf(b->data[b_k])) || (!rtIsInf(x)) ||
-             ((b->data[b_k] > 0.0) != (x > 0.0)))) {
+        if ((!(fabs(x - b_data[b_k]) < absx)) &&
+            ((!rtIsInf(b_data[b_k])) || (!rtIsInf(x)) ||
+             ((b_data[b_k] > 0.0) != (x > 0.0)))) {
           exitg2 = 1;
         }
       }
     } while (exitg2 == 0);
     nb++;
-    b->data[nb] = x;
+    b_data[nb] = x;
   }
   if (na > 0) {
     nb++;
-    b->data[nb] = b->data[k];
+    b_data[nb] = b_data[k];
   }
   b_k = k + na;
   for (na = 0; na < nNaN; na++) {
-    b->data[(nb + na) + 1] = b->data[b_k + na];
+    b_data[(nb + na) + 1] = b_data[b_k + na];
   }
   nb += nNaN;
   nNaN = b->size[0];

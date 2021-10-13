@@ -11,7 +11,9 @@
 
 /* Include files */
 #include "FSRenvmdr_wrapper.h"
+#include "FSRenvmdr.h"
 #include "colon.h"
+#include "div.h"
 #include "erfcinv.h"
 #include "finv.h"
 #include "fsdaC_data.h"
@@ -39,6 +41,13 @@ void FSRenvmdr_wrapper(double n, double p, double init,
   emxArray_real_T *r1;
   emxArray_real_T *r2;
   emxArray_real_T *y;
+  const double *prob_data;
+  double *MinSca_data;
+  double *b_tmp_data;
+  double *m_data;
+  double *mm_data;
+  double *quant_data;
+  double *y_data;
   int ibtile;
   int itilerow;
   int jtilecol;
@@ -50,7 +59,9 @@ void FSRenvmdr_wrapper(double n, double p, double init,
   if (!isInitialized_fsdaC) {
     fsdaC_initialize();
   }
+  prob_data = prob->data;
   emxInit_real_T(&y, 2);
+  y_data = y->data;
   /*  Required input arguments */
   /*  n a scalar double */
   /*  p a scalar double */
@@ -101,7 +112,6 @@ void FSRenvmdr_wrapper(double n, double p, double init,
   /*                ... */
   /*                (k+1) col = envelope for quantile prob(k). */
   /*  */
-  /*  */
   /*  See also: LXS.m, FSReda.m */
   /*  */
   /*  References: */
@@ -113,10 +123,8 @@ void FSRenvmdr_wrapper(double n, double p, double init,
   /*  search for testing multiple outliers in regression, "Advances in Data */
   /*  Analysis and Classification", Vol. 1, pp. 123-141. */
   /*  */
-  /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('FSRenvmdr')">Link to the help function</a> */
   /*  */
@@ -194,7 +202,8 @@ void FSRenvmdr_wrapper(double n, double p, double init,
     y->size[0] = 1;
     y->size[1] = 1;
     emxEnsureCapacity_real_T(y, itilerow);
-    y->data[0] = rtNaN;
+    y_data = y->data;
+    y_data[0] = rtNaN;
   } else if (n - 1.0 < init) {
     y->size[0] = 1;
     y->size[1] = 0;
@@ -203,26 +212,30 @@ void FSRenvmdr_wrapper(double n, double p, double init,
     y->size[0] = 1;
     y->size[1] = 1;
     emxEnsureCapacity_real_T(y, itilerow);
-    y->data[0] = rtNaN;
+    y_data = y->data;
+    y_data[0] = rtNaN;
   } else if (floor(init) == init) {
     itilerow = y->size[0] * y->size[1];
     y->size[0] = 1;
     nrows = (int)floor((n - 1.0) - init);
     y->size[1] = nrows + 1;
     emxEnsureCapacity_real_T(y, itilerow);
+    y_data = y->data;
     for (itilerow = 0; itilerow <= nrows; itilerow++) {
-      y->data[itilerow] = init + (double)itilerow;
+      y_data[itilerow] = init + (double)itilerow;
     }
   } else {
     eml_float_colon(init, n - 1.0, y);
+    y_data = y->data;
   }
   emxInit_real_T(&m, 1);
   itilerow = m->size[0];
   m->size[0] = y->size[1];
   emxEnsureCapacity_real_T(m, itilerow);
+  m_data = m->data;
   nrows = y->size[1];
   for (itilerow = 0; itilerow < nrows; itilerow++) {
-    m->data[itilerow] = y->data[itilerow];
+    m_data[itilerow] = y_data[itilerow];
   }
   emxInit_real_T(&mm, 2);
   /*  mm = fwd search index replicated lp times. */
@@ -230,12 +243,13 @@ void FSRenvmdr_wrapper(double n, double p, double init,
   mm->size[0] = m->size[0];
   mm->size[1] = prob->size[1];
   emxEnsureCapacity_real_T(mm, itilerow);
+  mm_data = mm->data;
   nrows = m->size[0];
   ntilecols = prob->size[1];
   for (jtilecol = 0; jtilecol < ntilecols; jtilecol++) {
     ibtile = jtilecol * nrows;
     for (k = 0; k < nrows; k++) {
-      mm->data[ibtile + k] = m->data[k];
+      mm_data[ibtile + k] = m_data[k];
     }
   }
   emxInit_real_T(&b_tmp, 2);
@@ -244,38 +258,42 @@ void FSRenvmdr_wrapper(double n, double p, double init,
   b_tmp->size[0] = mm->size[0];
   b_tmp->size[1] = mm->size[1];
   emxEnsureCapacity_real_T(b_tmp, itilerow);
+  b_tmp_data = b_tmp->data;
   nrows = mm->size[0] * mm->size[1];
   for (itilerow = 0; itilerow < nrows; itilerow++) {
-    b_tmp->data[itilerow] = n - mm->data[itilerow];
+    b_tmp_data[itilerow] = n - mm_data[itilerow];
   }
   emxInit_real_T(&MinSca, 2);
   itilerow = MinSca->size[0] * MinSca->size[1];
   MinSca->size[0] = mm->size[0];
   MinSca->size[1] = mm->size[1];
   emxEnsureCapacity_real_T(MinSca, itilerow);
+  MinSca_data = MinSca->data;
   nrows = mm->size[0] * mm->size[1];
   for (itilerow = 0; itilerow < nrows; itilerow++) {
-    MinSca->data[itilerow] = mm->data[itilerow] + 1.0;
+    MinSca_data[itilerow] = mm_data[itilerow] + 1.0;
   }
   itilerow = y->size[0] * y->size[1];
   y->size[0] = 1;
   y->size[1] = prob->size[1];
   emxEnsureCapacity_real_T(y, itilerow);
+  y_data = y->data;
   nrows = prob->size[1];
   for (itilerow = 0; itilerow < nrows; itilerow++) {
-    y->data[itilerow] = 1.0 - prob->data[itilerow];
+    y_data[itilerow] = 1.0 - prob_data[itilerow];
   }
   emxInit_real_T(&b, 2);
   itilerow = b->size[0] * b->size[1];
   b->size[0] = m->size[0];
   b->size[1] = y->size[1];
   emxEnsureCapacity_real_T(b, itilerow);
+  quant_data = b->data;
   nrows = y->size[1];
   ntilecols = m->size[0];
   for (jtilecol = 0; jtilecol < nrows; jtilecol++) {
     ibtile = jtilecol * ntilecols;
     for (itilerow = 0; itilerow < ntilecols; itilerow++) {
-      b->data[ibtile + itilerow] = y->data[jtilecol];
+      quant_data[ibtile + itilerow] = y_data[jtilecol];
     }
   }
   emxFree_real_T(&y);
@@ -284,55 +302,98 @@ void FSRenvmdr_wrapper(double n, double p, double init,
   r->size[0] = b_tmp->size[0];
   r->size[1] = b_tmp->size[1];
   emxEnsureCapacity_real_T(r, itilerow);
+  y_data = r->data;
   nrows = b_tmp->size[0] * b_tmp->size[1];
   for (itilerow = 0; itilerow < nrows; itilerow++) {
-    r->data[itilerow] = 2.0 * b_tmp->data[itilerow];
+    y_data[itilerow] = 2.0 * b_tmp_data[itilerow];
   }
   emxInit_real_T(&r1, 2);
   itilerow = r1->size[0] * r1->size[1];
   r1->size[0] = MinSca->size[0];
   r1->size[1] = MinSca->size[1];
   emxEnsureCapacity_real_T(r1, itilerow);
+  y_data = r1->data;
   nrows = MinSca->size[0] * MinSca->size[1];
   for (itilerow = 0; itilerow < nrows; itilerow++) {
-    r1->data[itilerow] = 2.0 * MinSca->data[itilerow];
+    y_data[itilerow] = 2.0 * MinSca_data[itilerow];
   }
   emxInit_real_T(&quant, 2);
   c_finv(b, r, r1, quant);
+  quant_data = quant->data;
   /*  from the equivalence with Incomplete beta distribution. */
   /*  Minsca = matrix of the scaled MDR envelopes in each step of the search. */
-  itilerow = r->size[0] * r->size[1];
-  r->size[0] = MinSca->size[0];
-  r->size[1] = MinSca->size[1];
-  emxEnsureCapacity_real_T(r, itilerow);
-  nrows = MinSca->size[0] * MinSca->size[1];
   emxFree_real_T(&r1);
-  for (itilerow = 0; itilerow < nrows; itilerow++) {
-    r->data[itilerow] =
-        0.5 * (MinSca->data[itilerow] /
-                   ((mm->data[itilerow] + 1.0) +
-                    b_tmp->data[itilerow] * quant->data[itilerow]) +
-               1.0);
+  if (b_tmp->size[0] == 1) {
+    nrows = quant->size[0];
+  } else {
+    nrows = b_tmp->size[0];
   }
+  if (b_tmp->size[1] == 1) {
+    ntilecols = quant->size[1];
+  } else {
+    ntilecols = b_tmp->size[1];
+  }
+  if (mm->size[0] == 1) {
+    if (b_tmp->size[0] == 1) {
+      ibtile = quant->size[0];
+    } else {
+      ibtile = b_tmp->size[0];
+    }
+  } else {
+    ibtile = mm->size[0];
+  }
+  if (mm->size[1] == 1) {
+    if (b_tmp->size[1] == 1) {
+      itilerow = quant->size[1];
+    } else {
+      itilerow = b_tmp->size[1];
+    }
+  } else {
+    itilerow = mm->size[1];
+  }
+  if ((b_tmp->size[0] == quant->size[0]) &&
+      (b_tmp->size[1] == quant->size[1]) && (mm->size[0] == nrows) &&
+      (mm->size[1] == ntilecols) && (MinSca->size[0] == ibtile) &&
+      (MinSca->size[1] == itilerow)) {
+    itilerow = r->size[0] * r->size[1];
+    r->size[0] = MinSca->size[0];
+    r->size[1] = MinSca->size[1];
+    emxEnsureCapacity_real_T(r, itilerow);
+    y_data = r->data;
+    nrows = MinSca->size[0] * MinSca->size[1];
+    for (itilerow = 0; itilerow < nrows; itilerow++) {
+      y_data[itilerow] =
+          0.5 * (MinSca_data[itilerow] /
+                     ((mm_data[itilerow] + 1.0) +
+                      b_tmp_data[itilerow] * quant_data[itilerow]) +
+                 1.0);
+    }
+    itilerow = b->size[0] * b->size[1];
+    b->size[0] = mm->size[0];
+    b->size[1] = mm->size[1];
+    emxEnsureCapacity_real_T(b, itilerow);
+    quant_data = b->data;
+    nrows = mm->size[0] * mm->size[1];
+    for (itilerow = 0; itilerow < nrows; itilerow++) {
+      quant_data[itilerow] = mm_data[itilerow] - p;
+    }
+    b_tinv(r, b, b_tmp);
+    b_tmp_data = b_tmp->data;
+  } else {
+    wc_binary_expand_op(b_tmp, MinSca, mm, quant, p);
+    b_tmp_data = b_tmp->data;
+  }
+  emxFree_real_T(&r);
+  emxFree_real_T(&b);
   emxFree_real_T(&quant);
-  itilerow = b->size[0] * b->size[1];
-  b->size[0] = mm->size[0];
-  b->size[1] = mm->size[1];
-  emxEnsureCapacity_real_T(b, itilerow);
-  nrows = mm->size[0] * mm->size[1];
-  for (itilerow = 0; itilerow < nrows; itilerow++) {
-    b->data[itilerow] = mm->data[itilerow] - p;
-  }
-  b_tinv(r, b, b_tmp);
   nrows = b_tmp->size[0] * b_tmp->size[1];
   itilerow = MinSca->size[0] * MinSca->size[1];
   MinSca->size[0] = b_tmp->size[0];
   MinSca->size[1] = b_tmp->size[1];
   emxEnsureCapacity_real_T(MinSca, itilerow);
-  emxFree_real_T(&r);
-  emxFree_real_T(&b);
+  MinSca_data = MinSca->data;
   for (k = 0; k < nrows; k++) {
-    MinSca->data[k] = fabs(b_tmp->data[k]);
+    MinSca_data[k] = fabs(b_tmp_data[k]);
   }
   /*  Compute variance of the truncated normal distribution. */
   /*  mm/n is the percentage of observations inside subset. */
@@ -340,21 +401,23 @@ void FSRenvmdr_wrapper(double n, double p, double init,
   b_tmp->size[0] = mm->size[0];
   b_tmp->size[1] = mm->size[1];
   emxEnsureCapacity_real_T(b_tmp, itilerow);
+  b_tmp_data = b_tmp->data;
   nrows = mm->size[0] * mm->size[1];
   for (itilerow = 0; itilerow < nrows; itilerow++) {
-    b_tmp->data[itilerow] = 0.5 * (mm->data[itilerow] / n + 1.0);
+    b_tmp_data[itilerow] = 0.5 * (mm_data[itilerow] / n + 1.0);
   }
   emxInit_real_T(&a, 2);
   itilerow = a->size[0] * a->size[1];
   a->size[0] = b_tmp->size[0];
   a->size[1] = b_tmp->size[1];
   emxEnsureCapacity_real_T(a, itilerow);
+  quant_data = a->data;
   itilerow = b_tmp->size[0] * b_tmp->size[1];
   for (k = 0; k < itilerow; k++) {
-    if ((b_tmp->data[k] >= 0.0) && (b_tmp->data[k] <= 1.0)) {
-      a->data[k] = -1.4142135623730951 * erfcinv(2.0 * b_tmp->data[k]);
+    if ((b_tmp_data[k] >= 0.0) && (b_tmp_data[k] <= 1.0)) {
+      quant_data[k] = -1.4142135623730951 * erfcinv(2.0 * b_tmp_data[k]);
     } else {
-      a->data[k] = rtNaN;
+      quant_data[k] = rtNaN;
     }
   }
   emxFree_real_T(&b_tmp);
@@ -364,24 +427,46 @@ void FSRenvmdr_wrapper(double n, double p, double init,
   r2->size[0] = a->size[0];
   r2->size[1] = a->size[1];
   emxEnsureCapacity_real_T(r2, itilerow);
+  y_data = r2->data;
   itilerow = a->size[0] * a->size[1];
   for (k = 0; k < itilerow; k++) {
-    r2->data[k] = exp(-0.5 * a->data[k] * a->data[k]) / 2.5066282746310002;
+    y_data[k] = exp(-0.5 * quant_data[k] * quant_data[k]) / 2.5066282746310002;
   }
-  nrows = mm->size[0] * mm->size[1];
-  for (itilerow = 0; itilerow < nrows; itilerow++) {
-    mm->data[itilerow] = 1.0 - 2.0 * (n / mm->data[itilerow]) *
-                                   a->data[itilerow] * r2->data[itilerow];
+  if (mm->size[0] == 1) {
+    ibtile = a->size[0];
+  } else {
+    ibtile = mm->size[0];
+  }
+  if (mm->size[1] == 1) {
+    itilerow = a->size[1];
+  } else {
+    itilerow = mm->size[1];
+  }
+  if ((mm->size[0] == a->size[0]) && (mm->size[1] == a->size[1]) &&
+      (ibtile == r2->size[0]) && (itilerow == r2->size[1])) {
+    nrows = mm->size[0] * mm->size[1];
+    for (itilerow = 0; itilerow < nrows; itilerow++) {
+      mm_data[itilerow] = 1.0 - 2.0 * (n / mm_data[itilerow]) *
+                                    quant_data[itilerow] * y_data[itilerow];
+    }
+  } else {
+    vc_binary_expand_op(mm, n, a, r2);
+    mm_data = mm->data;
   }
   emxFree_real_T(&r2);
   emxFree_real_T(&a);
   nrows = mm->size[0] * mm->size[1];
   for (k = 0; k < nrows; k++) {
-    mm->data[k] = sqrt(mm->data[k]);
+    mm_data[k] = sqrt(mm_data[k]);
   }
-  nrows = MinSca->size[0] * MinSca->size[1];
-  for (itilerow = 0; itilerow < nrows; itilerow++) {
-    MinSca->data[itilerow] /= mm->data[itilerow];
+  if ((MinSca->size[0] == mm->size[0]) && (MinSca->size[1] == mm->size[1])) {
+    nrows = MinSca->size[0] * MinSca->size[1];
+    for (itilerow = 0; itilerow < nrows; itilerow++) {
+      MinSca_data[itilerow] /= mm_data[itilerow];
+    }
+  } else {
+    rdivide(MinSca, mm);
+    MinSca_data = MinSca->data;
   }
   emxFree_real_T(&mm);
   if (m->size[0] != 0) {
@@ -410,18 +495,18 @@ void FSRenvmdr_wrapper(double n, double p, double init,
   MDRenv->size[0] = ntilecols;
   MDRenv->size[1] = input_sizes_idx_1 + ibtile;
   emxEnsureCapacity_real_T(MDRenv, itilerow);
+  quant_data = MDRenv->data;
   nrows = input_sizes_idx_1;
   for (itilerow = 0; itilerow < nrows; itilerow++) {
     for (jtilecol = 0; jtilecol < ntilecols; jtilecol++) {
-      MDRenv->data[jtilecol] = m->data[jtilecol];
+      quant_data[jtilecol] = m_data[jtilecol];
     }
   }
   emxFree_real_T(&m);
   for (itilerow = 0; itilerow < ibtile; itilerow++) {
     for (jtilecol = 0; jtilecol < ntilecols; jtilecol++) {
-      MDRenv
-          ->data[jtilecol + MDRenv->size[0] * (itilerow + input_sizes_idx_1)] =
-          MinSca->data[jtilecol + ntilecols * itilerow];
+      quant_data[jtilecol + MDRenv->size[0] * (itilerow + input_sizes_idx_1)] =
+          MinSca_data[jtilecol + ntilecols * itilerow];
     }
   }
   emxFree_real_T(&MinSca);

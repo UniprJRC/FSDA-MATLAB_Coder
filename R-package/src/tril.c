@@ -23,13 +23,15 @@ void tril(emxArray_uint8_T *x)
   int j;
   int m;
   int n;
+  unsigned char *x_data;
+  x_data = x->data;
   m = x->size[0];
   n = x->size[1];
   if ((x->size[0] != 0) && (x->size[1] != 0) && (0 < x->size[1])) {
     iend = (1 <= x->size[0]);
     for (j = 0; j < n; j++) {
       for (i = 0; i < iend; i++) {
-        x->data[i + x->size[0] * j] = 0U;
+        x_data[i + x->size[0] * j] = 0U;
       }
       if (iend < m) {
         iend++;

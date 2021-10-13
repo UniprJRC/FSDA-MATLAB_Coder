@@ -19,18 +19,20 @@
 /* Function Definitions */
 double b_xnrm2(int n, const emxArray_real_T *x)
 {
+  const double *x_data;
   double absxk;
   double scale;
   double t;
   double y;
   int k;
+  x_data = x->data;
   y = 0.0;
   if (n == 1) {
-    y = fabs(x->data[0]);
+    y = fabs(x_data[0]);
   } else {
     scale = 3.3121686421112381E-170;
     for (k = 0; k < n; k++) {
-      absxk = fabs(x->data[k]);
+      absxk = fabs(x_data[k]);
       if (absxk > scale) {
         t = scale / absxk;
         y = y * t * t + 1.0;
@@ -80,39 +82,7 @@ double c_xnrm2(int n, const double x[3])
   return y;
 }
 
-double d_xnrm2(int n, const emxArray_real_T *x)
-{
-  double absxk;
-  double scale;
-  double t;
-  double y;
-  int k;
-  int kend;
-  y = 0.0;
-  if (n >= 1) {
-    if (n == 1) {
-      y = fabs(x->data[1]);
-    } else {
-      scale = 3.3121686421112381E-170;
-      kend = n + 1;
-      for (k = 2; k <= kend; k++) {
-        absxk = fabs(x->data[k - 1]);
-        if (absxk > scale) {
-          t = scale / absxk;
-          y = y * t * t + 1.0;
-          scale = absxk;
-        } else {
-          t = absxk / scale;
-          y += t * t;
-        }
-      }
-      y = scale * sqrt(y);
-    }
-  }
-  return y;
-}
-
-double e_xnrm2(int n, const double x[27], int ix0)
+double d_xnrm2(int n, const double x[27], int ix0)
 {
   double absxk;
   double scale;
@@ -139,21 +109,23 @@ double e_xnrm2(int n, const double x[27], int ix0)
 
 double xnrm2(int n, const emxArray_real_T *x, int ix0)
 {
+  const double *x_data;
   double absxk;
   double scale;
   double t;
   double y;
   int k;
   int kend;
+  x_data = x->data;
   y = 0.0;
   if (n >= 1) {
     if (n == 1) {
-      y = fabs(x->data[ix0 - 1]);
+      y = fabs(x_data[ix0 - 1]);
     } else {
       scale = 3.3121686421112381E-170;
       kend = (ix0 + n) - 1;
       for (k = ix0; k <= kend; k++) {
-        absxk = fabs(x->data[k - 1]);
+        absxk = fabs(x_data[k - 1]);
         if (absxk > scale) {
           t = scale / absxk;
           y = y * t * t + 1.0;

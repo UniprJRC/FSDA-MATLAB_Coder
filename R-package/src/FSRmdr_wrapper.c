@@ -13,9 +13,11 @@
 #include <R.h>
 
 #include "FSRmdr_wrapper.h"
+#include "FSRmdr.h"
 #include "any.h"
 #include "blockedSummation.h"
 #include "cat.h"
+#include "cat1.h"
 #include "chkinputR.h"
 #include "colon.h"
 #include "eml_setop.h"
@@ -27,6 +29,7 @@
 #include "ifWhileCond.h"
 #include "int2str.h"
 #include "linsolve.h"
+#include "mahalFS.h"
 #include "minOrMax.h"
 #include "mrdivide_helper.h"
 #include "mtimes.h"
@@ -43,7 +46,45 @@
 #include <stdio.h>
 #include <string.h>
 
+/* Function Declarations */
+static void jd_binary_expand_op(emxArray_real_T *b, const emxArray_real_T *r,
+                                const emxArray_real_T *weight);
+
 /* Function Definitions */
+static void jd_binary_expand_op(emxArray_real_T *b, const emxArray_real_T *r,
+                                const emxArray_real_T *weight)
+{
+  const double *r_data;
+  const double *weight_data;
+  double *b_data;
+  int i;
+  int loop_ub;
+  int stride_0_0;
+  int stride_1_0;
+  weight_data = weight->data;
+  r_data = r->data;
+  i = r->size[0];
+  stride_0_0 = b->size[0];
+  if (weight->size[0] == 1) {
+    b->size[0] = i;
+  } else {
+    b->size[0] = weight->size[0];
+  }
+  emxEnsureCapacity_real_T(b, stride_0_0);
+  b_data = b->data;
+  stride_0_0 = (i != 1);
+  stride_1_0 = (weight->size[0] != 1);
+  if (weight->size[0] == 1) {
+    loop_ub = i;
+  } else {
+    loop_ub = weight->size[0];
+  }
+  for (i = 0; i < loop_ub; i++) {
+    b_data[i] =
+        r_data[i * stride_0_0 + r->size[0]] / weight_data[i * stride_1_0];
+  }
+}
+
 void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                     const emxArray_real_T *bsb, bool bsbmfullrank,
                     const emxArray_real_T *bsbsteps,
@@ -57,6 +98,8 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   emxArray_boolean_T *boobsbsteps;
   emxArray_boolean_T *bsbT;
   emxArray_boolean_T *c_bsbsteps;
+  emxArray_boolean_T *oldbsbT;
+  emxArray_boolean_T *r5;
   emxArray_boolean_T *unitstopenalize;
   emxArray_char_T_1x310 c_mm;
   emxArray_int32_T *b_r;
@@ -73,7 +116,6 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   emxArray_real_T *blast;
   emxArray_real_T *bsbstepdef;
   emxArray_real_T *c_y;
-  emxArray_real_T *d_bsbsteps;
   emxArray_real_T *d_y;
   emxArray_real_T *e;
   emxArray_real_T *iniseq;
@@ -83,23 +125,51 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   emxArray_real_T *r2;
   emxArray_real_T *r3;
   emxArray_real_T *r4;
-  emxArray_real_T *r5;
+  emxArray_real_T *r6;
   emxArray_real_T *resBSB;
   emxArray_real_T *seq;
   emxArray_real_T *unit;
   emxArray_real_T *weight;
   emxArray_real_T *yb;
   emxArray_uint32_T *truerownamestopenalize;
+  const double *X_data;
+  const double *bsb_data;
+  const double *bsbsteps_data;
+  const double *constr_data;
+  const double *y_data;
   double b;
   double b_mm;
   double init1;
   double initdef;
   double n;
   double p;
+  double *BB_data;
+  double *Bols_data;
+  double *S2_data;
+  double *Un_data;
+  double *Xb_data;
+  double *b_X_data;
+  double *b_bsb_data;
+  double *b_bsbsteps_data;
+  double *b_data;
+  double *b_y_data;
+  double *blast_data;
+  double *bsbstepdef_data;
+  double *e_data;
+  double *iniseq_data;
+  double *mdr_data;
+  double *ncl_data;
+  double *r_data;
+  double *resBSB_data;
+  double *seq_data;
+  double *weight_data;
+  double *yb_data;
   int c_size[2];
   int thpmm_size[2];
   int b_i;
+  int b_loop_ub;
   int b_n;
+  int end;
   int exitg1;
   int i;
   int i1;
@@ -109,17 +179,25 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   int loop_ub_tmp;
   int mm;
   int nwhile;
-  int nx;
-  int result;
-  int trueCount;
+  int sizes_idx_1;
+  int *iidx_data;
+  unsigned int *truerownamestopenalize_data;
   signed char input_sizes_idx_1;
   bool Ra;
   bool bonflevout;
   bool exitg2;
   bool guard1 = false;
+  bool *boobsbsteps_data;
+  bool *bsbT_data;
+  bool *unitstopenalize_data;
   if (!isInitialized_fsdaC) {
     fsdaC_initialize();
   }
+  constr_data = constr->data;
+  bsbsteps_data = bsbsteps->data;
+  bsb_data = bsb->data;
+  X_data = X->data;
+  y_data = y->data;
   emxInit_real_T(&b_bsb, 1);
   /*  Required input arguments */
   /*  y: a column vector of doubles of any length */
@@ -140,9 +218,10 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   i = b_bsb->size[0];
   b_bsb->size[0] = bsb->size[0];
   emxEnsureCapacity_real_T(b_bsb, i);
+  b_bsb_data = b_bsb->data;
   loop_ub = bsb->size[0];
   for (i = 0; i < loop_ub; i++) {
-    b_bsb->data[i] = bsb->data[i];
+    b_bsb_data[i] = bsb_data[i];
   }
   emxInit_real_T(&b_y, 1);
   /* FSRmdr computes minimum deletion residual and other basic linear regression
@@ -181,7 +260,6 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                m0=length(bsb) */
   /*  */
   /*  Optional input arguments: */
-  /*  */
   /*  */
   /*  bsbmfullrank :What to do in case subset at step m (say bsbm) produces a */
   /*                non singular X. Scalar. */
@@ -306,7 +384,6 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                connect it dynamically to the other forward plots it is */
   /*                necessary to use function mdrplot. */
   /*  */
-  /*  */
   /*  Output: */
   /*  */
   /*   mdr:          n -init x 2 matrix which contains the monitoring of minimum
@@ -362,7 +439,6 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                column)and R2 (third column) in each step of the forward */
   /*                search. */
   /*  */
-  /*  */
   /*  More About: */
   /*  */
   /*                Let $S^{(m)}_* \in \cal{M}$ be the  optimum subset of size
@@ -413,7 +489,6 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  */
   /*  See also: FSR, FSReda */
   /*  */
-  /*  */
   /*  References: */
   /*  */
   /*  Atkinson, A.C. and Riani, M. (2000), "Robust Diagnostic Regression */
@@ -427,7 +502,6 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('FSRmdr')">Link to the help function</a> */
   /*  */
@@ -642,20 +716,24 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   i = b_y->size[0];
   b_y->size[0] = y->size[0];
   emxEnsureCapacity_real_T(b_y, i);
+  b_y_data = b_y->data;
   loop_ub = y->size[0];
   for (i = 0; i < loop_ub; i++) {
-    b_y->data[i] = y->data[i];
+    b_y_data[i] = y_data[i];
   }
   emxInit_real_T(&b_X, 2);
   i = b_X->size[0] * b_X->size[1];
   b_X->size[0] = X->size[0];
   b_X->size[1] = X->size[1];
   emxEnsureCapacity_real_T(b_X, i);
+  b_X_data = b_X->data;
   loop_ub = X->size[0] * X->size[1];
   for (i = 0; i < loop_ub; i++) {
-    b_X->data[i] = X->data[i];
+    b_X_data[i] = X_data[i];
   }
   chkinputR(b_y, b_X, intercept, nocheck, &n, &p);
+  b_X_data = b_X->data;
+  b_y_data = b_y->data;
   /*  User options */
   if (n < 40.0) {
     initdef = p + 1.0;
@@ -670,7 +748,8 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     bsbstepdef->size[0] = 1;
     bsbstepdef->size[1] = 1;
     emxEnsureCapacity_real_T(bsbstepdef, i);
-    bsbstepdef->data[0] = 0.0;
+    bsbstepdef_data = bsbstepdef->data;
+    bsbstepdef_data[0] = 0.0;
   } else {
     b = 100.0 * floor(n / 100.0);
     emxInit_real_T(&iniseq, 2);
@@ -679,42 +758,46 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
       iniseq->size[0] = 1;
       iniseq->size[1] = 1;
       emxEnsureCapacity_real_T(iniseq, i);
-      iniseq->data[0] = rtNaN;
+      iniseq_data = iniseq->data;
+      iniseq_data[0] = rtNaN;
     } else {
       i = iniseq->size[0] * iniseq->size[1];
       iniseq->size[0] = 1;
       loop_ub = (int)floor((b - 100.0) / 100.0);
       iniseq->size[1] = loop_ub + 1;
       emxEnsureCapacity_real_T(iniseq, i);
+      iniseq_data = iniseq->data;
       for (i = 0; i <= loop_ub; i++) {
-        iniseq->data[i] = 100.0 * (double)i + 100.0;
+        iniseq_data[i] = 100.0 * (double)i + 100.0;
       }
     }
-    nwhile = iniseq->size[1] - 1;
-    trueCount = 0;
-    for (b_i = 0; b_i <= nwhile; b_i++) {
-      if (iniseq->data[b_i] > initdef) {
-        trueCount++;
+    end = iniseq->size[1] - 1;
+    sizes_idx_1 = 0;
+    for (b_i = 0; b_i <= end; b_i++) {
+      if (iniseq_data[b_i] > initdef) {
+        sizes_idx_1++;
       }
     }
-    nx = 0;
-    for (b_i = 0; b_i <= nwhile; b_i++) {
-      if (iniseq->data[b_i] > initdef) {
-        iniseq->data[nx] = iniseq->data[b_i];
-        nx++;
+    nwhile = 0;
+    for (b_i = 0; b_i <= end; b_i++) {
+      if (iniseq_data[b_i] > initdef) {
+        iniseq_data[nwhile] = iniseq_data[b_i];
+        nwhile++;
       }
     }
     i = iniseq->size[0] * iniseq->size[1];
     iniseq->size[0] = 1;
-    iniseq->size[1] = trueCount;
+    iniseq->size[1] = sizes_idx_1;
     emxEnsureCapacity_real_T(iniseq, i);
+    iniseq_data = iniseq->data;
     i = bsbstepdef->size[0] * bsbstepdef->size[1];
     bsbstepdef->size[0] = 1;
-    bsbstepdef->size[1] = trueCount + 1;
+    bsbstepdef->size[1] = sizes_idx_1 + 1;
     emxEnsureCapacity_real_T(bsbstepdef, i);
-    bsbstepdef->data[0] = initdef;
-    for (i = 0; i < trueCount; i++) {
-      bsbstepdef->data[i + 1] = iniseq->data[i];
+    bsbstepdef_data = bsbstepdef->data;
+    bsbstepdef_data[0] = initdef;
+    for (i = 0; i < sizes_idx_1; i++) {
+      bsbstepdef_data[i + 1] = iniseq_data[i];
     }
     emxFree_real_T(&iniseq);
     /*  OLD WRONG statement */
@@ -727,9 +810,10 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   i = bsbT->size[0];
   bsbT->size[0] = bsb->size[0];
   emxEnsureCapacity_boolean_T(bsbT, i);
+  bsbT_data = bsbT->data;
   loop_ub = bsb->size[0];
   for (i = 0; i < loop_ub; i++) {
-    bsbT->data[i] = (bsb->data[i] == 0.0);
+    bsbT_data[i] = (bsb_data[i] == 0.0);
   }
   emxInit_real_T(&Xb, 2);
   emxInit_real_T(&yb, 1);
@@ -738,33 +822,37 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     Xb->size[0] = 1;
     Xb->size[1] = 1;
     emxEnsureCapacity_real_T(Xb, i);
-    Xb->data[0] = 0.0;
+    Xb_data = Xb->data;
+    Xb_data[0] = 0.0;
     Ra = true;
     nwhile = 1;
     while (Ra && (nwhile < 100)) {
       randsample(n, p, b_bsb);
+      b_bsb_data = b_bsb->data;
       loop_ub = b_X->size[1];
       i = Xb->size[0] * Xb->size[1];
       Xb->size[0] = b_bsb->size[0];
       Xb->size[1] = b_X->size[1];
       emxEnsureCapacity_real_T(Xb, i);
+      Xb_data = Xb->data;
       for (i = 0; i < loop_ub; i++) {
-        nx = b_bsb->size[0];
-        for (i1 = 0; i1 < nx; i1++) {
-          Xb->data[i1 + Xb->size[0] * i] =
-              b_X->data[((int)b_bsb->data[i1] + b_X->size[0] * i) - 1];
+        b_loop_ub = b_bsb->size[0];
+        for (i1 = 0; i1 < b_loop_ub; i1++) {
+          Xb_data[i1 + Xb->size[0] * i] =
+              b_X_data[((int)b_bsb_data[i1] + b_X->size[0] * i) - 1];
         }
       }
-      nx = local_rank(Xb);
-      Ra = (nx < p);
+      sizes_idx_1 = local_rank(Xb);
+      Ra = (sizes_idx_1 < p);
       nwhile++;
     }
     i = yb->size[0];
     yb->size[0] = b_bsb->size[0];
     emxEnsureCapacity_real_T(yb, i);
+    yb_data = yb->data;
     loop_ub = b_bsb->size[0];
     for (i = 0; i < loop_ub; i++) {
-      yb->data[i] = b_y->data[(int)b_bsb->data[i] - 1];
+      yb_data[i] = b_y_data[(int)b_bsb_data[i] - 1];
     }
   } else {
     loop_ub = b_X->size[1];
@@ -772,19 +860,21 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     Xb->size[0] = bsb->size[0];
     Xb->size[1] = b_X->size[1];
     emxEnsureCapacity_real_T(Xb, i);
+    Xb_data = Xb->data;
     for (i = 0; i < loop_ub; i++) {
-      nx = bsb->size[0];
-      for (i1 = 0; i1 < nx; i1++) {
-        Xb->data[i1 + Xb->size[0] * i] =
-            b_X->data[((int)bsb->data[i1] + b_X->size[0] * i) - 1];
+      b_loop_ub = bsb->size[0];
+      for (i1 = 0; i1 < b_loop_ub; i1++) {
+        Xb_data[i1 + Xb->size[0] * i] =
+            b_X_data[((int)bsb_data[i1] + b_X->size[0] * i) - 1];
       }
     }
     i = yb->size[0];
     yb->size[0] = bsb->size[0];
     emxEnsureCapacity_real_T(yb, i);
+    yb_data = yb->data;
     loop_ub = bsb->size[0];
     for (i = 0; i < loop_ub; i++) {
-      yb->data[i] = b_y->data[(int)bsb->data[i] - 1];
+      yb_data[i] = b_y_data[(int)bsb_data[i] - 1];
     }
   }
   ini0 = b_bsb->size[0];
@@ -811,37 +901,40 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   b_bsbsteps->size[0] = bsbsteps->size[0];
   b_bsbsteps->size[1] = bsbsteps->size[1];
   emxEnsureCapacity_real_T(b_bsbsteps, i);
+  b_bsbsteps_data = b_bsbsteps->data;
   loop_ub = bsbsteps->size[0] * bsbsteps->size[1];
   for (i = 0; i < loop_ub; i++) {
-    b_bsbsteps->data[i] = bsbsteps->data[i];
+    b_bsbsteps_data[i] = bsbsteps_data[i];
   }
   if ((bsbsteps->size[0] == 0) || (bsbsteps->size[1] == 0)) {
     i = b_bsbsteps->size[0] * b_bsbsteps->size[1];
     b_bsbsteps->size[0] = 1;
     b_bsbsteps->size[1] = bsbstepdef->size[1];
     emxEnsureCapacity_real_T(b_bsbsteps, i);
+    b_bsbsteps_data = b_bsbsteps->data;
     loop_ub = bsbstepdef->size[1];
     for (i = 0; i < loop_ub; i++) {
-      b_bsbsteps->data[i] = bsbstepdef->data[i];
+      b_bsbsteps_data[i] = bsbstepdef_data[i];
     }
   }
   emxFree_real_T(&bsbstepdef);
   emxInit_real_T(&weight, 1);
   if (internationaltrade) {
+    loop_ub = b_X->size[0];
     i = weight->size[0];
     weight->size[0] = b_X->size[0];
     emxEnsureCapacity_real_T(weight, i);
-    nx = b_X->size[0];
-    for (nwhile = 0; nwhile < nx; nwhile++) {
-      weight->data[nwhile] =
-          b_X->data[nwhile + b_X->size[0] * (b_X->size[1] - 1)] *
-          b_X->data[nwhile + b_X->size[0] * (b_X->size[1] - 1)];
+    weight_data = weight->data;
+    for (i = 0; i < loop_ub; i++) {
+      initdef = b_X_data[i + b_X->size[0] * (b_X->size[1] - 1)];
+      weight_data[i] = initdef * initdef;
     }
   } else {
     i = weight->size[0];
     weight->size[0] = 1;
     emxEnsureCapacity_real_T(weight, i);
-    weight->data[0] = 0.0;
+    weight_data = weight->data;
+    weight_data[0] = 0.0;
   }
   bonflevout = ((threshlevoutX_size[0] != 0) && (threshlevoutX_size[1] != 0));
   /*  Initialise key matrices */
@@ -851,29 +944,33 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   i = bsbT->size[0];
   bsbT->size[0] = (int)n;
   emxEnsureCapacity_boolean_T(bsbT, i);
+  bsbT_data = bsbT->data;
   for (i = 0; i < loop_ub_tmp; i++) {
-    bsbT->data[i] = false;
+    bsbT_data[i] = false;
   }
   emxInit_int32_T(&iidx, 1);
   i = iidx->size[0];
   iidx->size[0] = b_bsb->size[0];
   emxEnsureCapacity_int32_T(iidx, i);
+  iidx_data = iidx->data;
   loop_ub = b_bsb->size[0];
   for (i = 0; i < loop_ub; i++) {
-    iidx->data[i] = (int)b_bsb->data[i];
+    iidx_data[i] = (int)b_bsb_data[i];
   }
   loop_ub = iidx->size[0];
   for (i = 0; i < loop_ub; i++) {
-    bsbT->data[iidx->data[i] - 1] = true;
+    bsbT_data[iidx_data[i] - 1] = true;
   }
   /*  sequence from 1 to n. */
   emxInit_real_T(&c_y, 2);
+  bsbstepdef_data = c_y->data;
   if (rtIsNaN(n)) {
     i = c_y->size[0] * c_y->size[1];
     c_y->size[0] = 1;
     c_y->size[1] = 1;
     emxEnsureCapacity_real_T(c_y, i);
-    c_y->data[0] = rtNaN;
+    bsbstepdef_data = c_y->data;
+    bsbstepdef_data[0] = rtNaN;
   } else if (n < 1.0) {
     c_y->size[0] = 1;
     c_y->size[1] = 0;
@@ -882,43 +979,47 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     c_y->size[0] = 1;
     c_y->size[1] = 1;
     emxEnsureCapacity_real_T(c_y, i);
-    c_y->data[0] = rtNaN;
+    bsbstepdef_data = c_y->data;
+    bsbstepdef_data[0] = rtNaN;
   } else {
     i = c_y->size[0] * c_y->size[1];
     c_y->size[0] = 1;
     loop_ub = (int)floor(n - 1.0);
     c_y->size[1] = loop_ub + 1;
     emxEnsureCapacity_real_T(c_y, i);
+    bsbstepdef_data = c_y->data;
     for (i = 0; i <= loop_ub; i++) {
-      c_y->data[i] = (double)i + 1.0;
+      bsbstepdef_data[i] = (double)i + 1.0;
     }
   }
   emxInit_real_T(&seq, 1);
   i = seq->size[0];
   seq->size[0] = c_y->size[1];
   emxEnsureCapacity_real_T(seq, i);
+  seq_data = seq->data;
   loop_ub = c_y->size[1];
   for (i = 0; i < loop_ub; i++) {
-    seq->data[i] = c_y->data[i];
+    seq_data[i] = bsbstepdef_data[i];
   }
   /*  the set complementary to bsb. */
   /*  ncl=setdiff(seq,bsb); */
-  nwhile = bsbT->size[0] - 1;
-  trueCount = 0;
-  for (b_i = 0; b_i <= nwhile; b_i++) {
-    if (!bsbT->data[b_i]) {
-      trueCount++;
+  end = bsbT->size[0] - 1;
+  sizes_idx_1 = 0;
+  for (b_i = 0; b_i <= end; b_i++) {
+    if (!bsbT_data[b_i]) {
+      sizes_idx_1++;
     }
   }
   emxInit_real_T(&ncl, 1);
   i = ncl->size[0];
-  ncl->size[0] = trueCount;
+  ncl->size[0] = sizes_idx_1;
   emxEnsureCapacity_real_T(ncl, i);
-  nx = 0;
-  for (b_i = 0; b_i <= nwhile; b_i++) {
-    if (!bsbT->data[b_i]) {
-      ncl->data[nx] = seq->data[b_i];
-      nx++;
+  ncl_data = ncl->data;
+  nwhile = 0;
+  for (b_i = 0; b_i <= end; b_i++) {
+    if (!bsbT_data[b_i]) {
+      ncl_data[nwhile] = seq_data[b_i];
+      nwhile++;
     }
   }
   emxInit_real_T(&r, 2);
@@ -929,12 +1030,13 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   r->size[0] = seq->size[0];
   r->size[1] = 2;
   emxEnsureCapacity_real_T(r, i);
+  r_data = r->data;
   loop_ub = seq->size[0];
   for (i = 0; i < loop_ub; i++) {
-    r->data[i] = seq->data[i];
+    r_data[i] = seq_data[i];
   }
   for (i = 0; i < loop_ub_tmp; i++) {
-    r->data[i + r->size[0]] = 0.0;
+    r_data[i + r->size[0]] = 0.0;
   }
   /*  If n is very large (>500), the step of the search is printed every 500
    * step */
@@ -945,7 +1047,8 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     c_y->size[0] = 1;
     c_y->size[1] = 1;
     emxEnsureCapacity_real_T(c_y, i);
-    c_y->data[0] = rtNaN;
+    bsbstepdef_data = c_y->data;
+    bsbstepdef_data[0] = rtNaN;
   } else if (b < 1.0) {
     c_y->size[1] = 0;
   } else if (rtIsInf(b) && (1.0 == b)) {
@@ -953,33 +1056,38 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     c_y->size[0] = 1;
     c_y->size[1] = 1;
     emxEnsureCapacity_real_T(c_y, i);
-    c_y->data[0] = rtNaN;
+    bsbstepdef_data = c_y->data;
+    bsbstepdef_data[0] = rtNaN;
   } else {
     i = c_y->size[0] * c_y->size[1];
     c_y->size[0] = 1;
     c_y->size[1] = (int)(b - 1.0) + 1;
     emxEnsureCapacity_real_T(c_y, i);
+    bsbstepdef_data = c_y->data;
     loop_ub = (int)(b - 1.0);
     for (i = 0; i <= loop_ub; i++) {
-      c_y->data[i] = (double)i + 1.0;
+      bsbstepdef_data[i] = (double)i + 1.0;
     }
   }
   i = c_y->size[0] * c_y->size[1];
   c_y->size[0] = 1;
   emxEnsureCapacity_real_T(c_y, i);
+  bsbstepdef_data = c_y->data;
   loop_ub = c_y->size[1] - 1;
   for (i = 0; i <= loop_ub; i++) {
-    c_y->data[i] *= 500.0;
+    bsbstepdef_data[i] *= 500.0;
   }
   /*  Matrix Bols will contain the beta coefficients in each step of the fwd */
   /*  search. The first column of Bols contains the fwd search index */
   emxInit_real_T(&d_y, 2);
+  bsbstepdef_data = d_y->data;
   if (rtIsNaN(init1) || rtIsNaN(n)) {
     i = d_y->size[0] * d_y->size[1];
     d_y->size[0] = 1;
     d_y->size[1] = 1;
     emxEnsureCapacity_real_T(d_y, i);
-    d_y->data[0] = rtNaN;
+    bsbstepdef_data = d_y->data;
+    bsbstepdef_data[0] = rtNaN;
   } else if (n < init1) {
     d_y->size[0] = 1;
     d_y->size[1] = 0;
@@ -988,64 +1096,69 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     d_y->size[0] = 1;
     d_y->size[1] = 1;
     emxEnsureCapacity_real_T(d_y, i);
-    d_y->data[0] = rtNaN;
+    bsbstepdef_data = d_y->data;
+    bsbstepdef_data[0] = rtNaN;
   } else if (floor(init1) == init1) {
     i = d_y->size[0] * d_y->size[1];
     d_y->size[0] = 1;
     loop_ub = (int)floor(n - init1);
     d_y->size[1] = loop_ub + 1;
     emxEnsureCapacity_real_T(d_y, i);
+    bsbstepdef_data = d_y->data;
     for (i = 0; i <= loop_ub; i++) {
-      d_y->data[i] = init1 + (double)i;
+      bsbstepdef_data[i] = init1 + (double)i;
     }
   } else {
     eml_float_colon(init1, n, d_y);
+    bsbstepdef_data = d_y->data;
   }
   emxInit_real_T(&b_b, 1);
   i = b_b->size[0];
   b_b->size[0] = d_y->size[1];
   emxEnsureCapacity_real_T(b_b, i);
+  b_data = b_b->data;
   loop_ub = d_y->size[1];
   for (i = 0; i < loop_ub; i++) {
-    b_b->data[i] = d_y->data[i];
+    b_data[i] = bsbstepdef_data[i];
   }
   if (b_b->size[0] != 0) {
-    result = b_b->size[0];
+    b_loop_ub = b_b->size[0];
   } else {
     i = (int)((n - init1) + 1.0);
     if ((i != 0) && ((int)p != 0)) {
-      result = i;
+      b_loop_ub = i;
     } else {
-      result = 0;
+      b_loop_ub = 0;
       if (i > 0) {
-        result = i;
+        b_loop_ub = i;
       }
     }
   }
-  Ra = (result == 0);
+  Ra = (b_loop_ub == 0);
   if (Ra || (b_b->size[0] != 0)) {
     input_sizes_idx_1 = 1;
   } else {
     input_sizes_idx_1 = 0;
   }
   if (Ra || (((int)((n - init1) + 1.0) != 0) && ((int)p != 0))) {
-    nx = (int)p;
+    sizes_idx_1 = (int)p;
   } else {
-    nx = 0;
+    sizes_idx_1 = 0;
   }
   i = Bols->size[0] * Bols->size[1];
-  Bols->size[0] = result;
-  Bols->size[1] = input_sizes_idx_1 + nx;
+  Bols->size[0] = b_loop_ub;
+  Bols->size[1] = input_sizes_idx_1 + sizes_idx_1;
   emxEnsureCapacity_real_T(Bols, i);
+  Bols_data = Bols->data;
   loop_ub = input_sizes_idx_1;
   for (i = 0; i < loop_ub; i++) {
-    for (i1 = 0; i1 < result; i1++) {
-      Bols->data[i1] = b_b->data[i1];
+    for (i1 = 0; i1 < b_loop_ub; i1++) {
+      Bols_data[i1] = b_data[i1];
     }
   }
-  for (i = 0; i < nx; i++) {
-    for (i1 = 0; i1 < result; i1++) {
-      Bols->data[i1 + Bols->size[0] * (i + input_sizes_idx_1)] = rtNaN;
+  for (i = 0; i < sizes_idx_1; i++) {
+    for (i1 = 0; i1 < b_loop_ub; i1++) {
+      Bols_data[i1 + Bols->size[0] * (i + input_sizes_idx_1)] = rtNaN;
     }
   }
   /* initial value of beta coefficients is set to NaN */
@@ -1058,7 +1171,8 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     d_y->size[0] = 1;
     d_y->size[1] = 1;
     emxEnsureCapacity_real_T(d_y, i);
-    d_y->data[0] = rtNaN;
+    bsbstepdef_data = d_y->data;
+    bsbstepdef_data[0] = rtNaN;
   } else if (n < init1) {
     d_y->size[0] = 1;
     d_y->size[1] = 0;
@@ -1067,59 +1181,73 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     d_y->size[0] = 1;
     d_y->size[1] = 1;
     emxEnsureCapacity_real_T(d_y, i);
-    d_y->data[0] = rtNaN;
+    bsbstepdef_data = d_y->data;
+    bsbstepdef_data[0] = rtNaN;
   } else if (floor(init1) == init1) {
     i = d_y->size[0] * d_y->size[1];
     d_y->size[0] = 1;
     d_y->size[1] = (int)floor(n - init1) + 1;
     emxEnsureCapacity_real_T(d_y, i);
+    bsbstepdef_data = d_y->data;
     loop_ub = (int)floor(n - init1);
     for (i = 0; i <= loop_ub; i++) {
-      d_y->data[i] = init1 + (double)i;
+      bsbstepdef_data[i] = init1 + (double)i;
     }
   } else {
     eml_float_colon(init1, n, d_y);
+    bsbstepdef_data = d_y->data;
   }
   i = b_b->size[0];
   b_b->size[0] = d_y->size[1];
   emxEnsureCapacity_real_T(b_b, i);
+  b_data = b_b->data;
   loop_ub = d_y->size[1];
   for (i = 0; i < loop_ub; i++) {
-    b_b->data[i] = d_y->data[i];
+    b_data[i] = bsbstepdef_data[i];
   }
   emxInit_real_T(&ord, 2);
   i = (int)((n - init1) + 1.0);
-  if (b_b->size[0] != 0) {
-    result = b_b->size[0];
-  } else if (i != 0) {
-    result = i;
-  } else {
-    result = 0;
+  i1 = ord->size[0] * ord->size[1];
+  ord->size[0] = i;
+  ord->size[1] = 2;
+  emxEnsureCapacity_real_T(ord, i1);
+  iniseq_data = ord->data;
+  loop_ub = i << 1;
+  for (i1 = 0; i1 < loop_ub; i1++) {
+    iniseq_data[i1] = rtNaN;
   }
-  Ra = (result == 0);
+  if (b_b->size[0] != 0) {
+    b_loop_ub = b_b->size[0];
+  } else if (i != 0) {
+    b_loop_ub = i;
+  } else {
+    b_loop_ub = 0;
+  }
+  Ra = (b_loop_ub == 0);
   if (Ra || (b_b->size[0] != 0)) {
     input_sizes_idx_1 = 1;
   } else {
     input_sizes_idx_1 = 0;
   }
   if (Ra || (i != 0)) {
-    nx = 2;
+    sizes_idx_1 = 2;
   } else {
-    nx = 0;
+    sizes_idx_1 = 0;
   }
   i1 = S2->size[0] * S2->size[1];
-  S2->size[0] = result;
-  S2->size[1] = input_sizes_idx_1 + nx;
+  S2->size[0] = b_loop_ub;
+  S2->size[1] = input_sizes_idx_1 + sizes_idx_1;
   emxEnsureCapacity_real_T(S2, i1);
+  S2_data = S2->data;
   loop_ub = input_sizes_idx_1;
   for (i1 = 0; i1 < loop_ub; i1++) {
-    for (nwhile = 0; nwhile < result; nwhile++) {
-      S2->data[nwhile] = b_b->data[nwhile];
+    for (nwhile = 0; nwhile < b_loop_ub; nwhile++) {
+      S2_data[nwhile] = b_data[nwhile];
     }
   }
-  for (i1 = 0; i1 < nx; i1++) {
-    for (nwhile = 0; nwhile < result; nwhile++) {
-      S2->data[nwhile + S2->size[0] * (i1 + input_sizes_idx_1)] = rtNaN;
+  for (i1 = 0; i1 < sizes_idx_1; i1++) {
+    for (nwhile = 0; nwhile < b_loop_ub; nwhile++) {
+      S2_data[nwhile + S2->size[0] * (i1 + input_sizes_idx_1)] = rtNaN;
     }
   }
   /* initial value of S2 (R2) is set to NaN */
@@ -1130,7 +1258,8 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     d_y->size[0] = 1;
     d_y->size[1] = 1;
     emxEnsureCapacity_real_T(d_y, i1);
-    d_y->data[0] = rtNaN;
+    bsbstepdef_data = d_y->data;
+    bsbstepdef_data[0] = rtNaN;
   } else if (n - 1.0 < init1) {
     d_y->size[0] = 1;
     d_y->size[1] = 0;
@@ -1139,37 +1268,42 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     d_y->size[0] = 1;
     d_y->size[1] = 1;
     emxEnsureCapacity_real_T(d_y, i1);
-    d_y->data[0] = rtNaN;
+    bsbstepdef_data = d_y->data;
+    bsbstepdef_data[0] = rtNaN;
   } else if (floor(init1) == init1) {
     i1 = d_y->size[0] * d_y->size[1];
     d_y->size[0] = 1;
     loop_ub = (int)floor((n - 1.0) - init1);
     d_y->size[1] = loop_ub + 1;
     emxEnsureCapacity_real_T(d_y, i1);
+    bsbstepdef_data = d_y->data;
     for (i1 = 0; i1 <= loop_ub; i1++) {
-      d_y->data[i1] = init1 + (double)i1;
+      bsbstepdef_data[i1] = init1 + (double)i1;
     }
   } else {
     eml_float_colon(init1, n - 1.0, d_y);
+    bsbstepdef_data = d_y->data;
   }
   loop_ub = (int)(n - init1);
   i1 = b_b->size[0];
   b_b->size[0] = loop_ub;
   emxEnsureCapacity_real_T(b_b, i1);
+  b_data = b_b->data;
   for (i1 = 0; i1 < loop_ub; i1++) {
-    b_b->data[i1] = rtNaN;
+    b_data[i1] = rtNaN;
   }
   i1 = mdr->size[0] * mdr->size[1];
   mdr->size[0] = d_y->size[1];
   mdr->size[1] = 2;
   emxEnsureCapacity_real_T(mdr, i1);
-  nx = d_y->size[1];
-  for (i1 = 0; i1 < nx; i1++) {
-    mdr->data[i1] = d_y->data[i1];
+  mdr_data = mdr->data;
+  b_loop_ub = d_y->size[1];
+  for (i1 = 0; i1 < b_loop_ub; i1++) {
+    mdr_data[i1] = bsbstepdef_data[i1];
   }
-  nx = b_b->size[0];
-  for (i1 = 0; i1 < nx; i1++) {
-    mdr->data[i1 + mdr->size[0]] = rtNaN;
+  b_loop_ub = b_b->size[0];
+  for (i1 = 0; i1 < b_loop_ub; i1++) {
+    mdr_data[i1 + mdr->size[0]] = rtNaN;
   }
   emxInit_boolean_T(&c_bsbsteps, 2);
   /* initial value of mdr is set to NaN */
@@ -1180,18 +1314,20 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   c_bsbsteps->size[0] = b_bsbsteps->size[0];
   c_bsbsteps->size[1] = b_bsbsteps->size[1];
   emxEnsureCapacity_boolean_T(c_bsbsteps, i1);
-  nx = b_bsbsteps->size[0] * b_bsbsteps->size[1];
-  for (i1 = 0; i1 < nx; i1++) {
-    c_bsbsteps->data[i1] = (b_bsbsteps->data[i1] == 0.0);
+  unitstopenalize_data = c_bsbsteps->data;
+  b_loop_ub = b_bsbsteps->size[0] * b_bsbsteps->size[1];
+  for (i1 = 0; i1 < b_loop_ub; i1++) {
+    unitstopenalize_data[i1] = (b_bsbsteps_data[i1] == 0.0);
   }
-  emxInit_real_T(&d_bsbsteps, 1);
+  emxInit_real_T(&e, 1);
   if (b_ifWhileCond(c_bsbsteps)) {
     if (rtIsNaN(init1) || rtIsNaN(n)) {
       i1 = d_y->size[0] * d_y->size[1];
       d_y->size[0] = 1;
       d_y->size[1] = 1;
       emxEnsureCapacity_real_T(d_y, i1);
-      d_y->data[0] = rtNaN;
+      bsbstepdef_data = d_y->data;
+      bsbstepdef_data[0] = rtNaN;
     } else if (n < init1) {
       d_y->size[0] = 1;
       d_y->size[1] = 0;
@@ -1200,88 +1336,97 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
       d_y->size[0] = 1;
       d_y->size[1] = 1;
       emxEnsureCapacity_real_T(d_y, i1);
-      d_y->data[0] = rtNaN;
+      bsbstepdef_data = d_y->data;
+      bsbstepdef_data[0] = rtNaN;
     } else if (floor(init1) == init1) {
       i1 = d_y->size[0] * d_y->size[1];
       d_y->size[0] = 1;
       d_y->size[1] = (int)floor(n - init1) + 1;
       emxEnsureCapacity_real_T(d_y, i1);
-      nx = (int)floor(n - init1);
-      for (i1 = 0; i1 <= nx; i1++) {
-        d_y->data[i1] = init1 + (double)i1;
+      bsbstepdef_data = d_y->data;
+      b_loop_ub = (int)floor(n - init1);
+      for (i1 = 0; i1 <= b_loop_ub; i1++) {
+        bsbstepdef_data[i1] = init1 + (double)i1;
       }
     } else {
       eml_float_colon(init1, n, d_y);
+      bsbstepdef_data = d_y->data;
     }
     i1 = b_bsbsteps->size[0] * b_bsbsteps->size[1];
     b_bsbsteps->size[0] = 1;
     b_bsbsteps->size[1] = d_y->size[1];
     emxEnsureCapacity_real_T(b_bsbsteps, i1);
-    nx = d_y->size[1];
-    for (i1 = 0; i1 < nx; i1++) {
-      b_bsbsteps->data[i1] = d_y->data[i1];
+    b_bsbsteps_data = b_bsbsteps->data;
+    b_loop_ub = d_y->size[1];
+    for (i1 = 0; i1 < b_loop_ub; i1++) {
+      b_bsbsteps_data[i1] = bsbstepdef_data[i1];
     }
     i1 = BB->size[0] * BB->size[1];
     BB->size[0] = (int)n;
     BB->size[1] = i;
     emxEnsureCapacity_real_T(BB, i1);
-    nx = (int)n * i;
-    for (i = 0; i < nx; i++) {
-      BB->data[i] = rtNaN;
+    BB_data = BB->data;
+    b_loop_ub = (int)n * i;
+    for (i = 0; i < b_loop_ub; i++) {
+      BB_data[i] = rtNaN;
     }
   } else {
     /*  The number of columns of matrix BB is equal to the number of steps */
     /*  for which bsbsteps is greater or equal than init1 */
-    nwhile = b_bsbsteps->size[0] * b_bsbsteps->size[1] - 1;
-    trueCount = 0;
-    for (b_i = 0; b_i <= nwhile; b_i++) {
-      if (b_bsbsteps->data[b_i] >= init1) {
-        trueCount++;
+    end = b_bsbsteps->size[0] * b_bsbsteps->size[1] - 1;
+    sizes_idx_1 = 0;
+    for (b_i = 0; b_i <= end; b_i++) {
+      if (b_bsbsteps_data[b_i] >= init1) {
+        sizes_idx_1++;
       }
     }
     emxInit_int32_T(&b_r, 1);
     i = b_r->size[0];
-    b_r->size[0] = trueCount;
+    b_r->size[0] = sizes_idx_1;
     emxEnsureCapacity_int32_T(b_r, i);
-    nx = 0;
-    for (b_i = 0; b_i <= nwhile; b_i++) {
-      if (b_bsbsteps->data[b_i] >= init1) {
-        b_r->data[nx] = b_i + 1;
-        nx++;
+    iidx_data = b_r->data;
+    nwhile = 0;
+    for (b_i = 0; b_i <= end; b_i++) {
+      if (b_bsbsteps_data[b_i] >= init1) {
+        iidx_data[nwhile] = b_i + 1;
+        nwhile++;
       }
     }
-    i = d_bsbsteps->size[0];
-    d_bsbsteps->size[0] = b_r->size[0];
-    emxEnsureCapacity_real_T(d_bsbsteps, i);
-    nx = b_r->size[0];
-    for (i = 0; i < nx; i++) {
-      d_bsbsteps->data[i] = b_bsbsteps->data[b_r->data[i] - 1];
+    i = e->size[0];
+    e->size[0] = b_r->size[0];
+    emxEnsureCapacity_real_T(e, i);
+    e_data = e->data;
+    b_loop_ub = b_r->size[0];
+    for (i = 0; i < b_loop_ub; i++) {
+      e_data[i] = b_bsbsteps_data[iidx_data[i] - 1];
     }
     i = b_bsbsteps->size[0] * b_bsbsteps->size[1];
     b_bsbsteps->size[0] = b_r->size[0];
     b_bsbsteps->size[1] = 1;
     emxEnsureCapacity_real_T(b_bsbsteps, i);
-    nx = b_r->size[0];
+    b_bsbsteps_data = b_bsbsteps->data;
+    b_loop_ub = b_r->size[0];
     emxFree_int32_T(&b_r);
-    for (i = 0; i < nx; i++) {
-      b_bsbsteps->data[i] = d_bsbsteps->data[i];
+    for (i = 0; i < b_loop_ub; i++) {
+      b_bsbsteps_data[i] = e_data[i];
     }
-    nx = b_bsbsteps->size[0];
-    if (nx <= 1) {
-      nx = 1;
+    sizes_idx_1 = b_bsbsteps->size[0];
+    if (sizes_idx_1 < 1) {
+      sizes_idx_1 = 1;
     }
     if (b_bsbsteps->size[0] == 0) {
       nwhile = 0;
     } else {
-      nwhile = nx;
+      nwhile = sizes_idx_1;
     }
     i = BB->size[0] * BB->size[1];
     BB->size[0] = (int)n;
     BB->size[1] = nwhile;
     emxEnsureCapacity_real_T(BB, i);
-    nx = (int)n * nwhile;
-    for (i = 0; i < nx; i++) {
-      BB->data[i] = rtNaN;
+    BB_data = BB->data;
+    b_loop_ub = (int)n * nwhile;
+    for (i = 0; i < b_loop_ub; i++) {
+      BB_data[i] = rtNaN;
     }
     /*    BB = NaN(n, sum(bsbsteps>=init1)); */
   }
@@ -1290,21 +1435,23 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   i = boobsbsteps->size[0];
   boobsbsteps->size[0] = (int)n;
   emxEnsureCapacity_boolean_T(boobsbsteps, i);
+  boobsbsteps_data = boobsbsteps->data;
   for (i = 0; i < loop_ub_tmp; i++) {
-    boobsbsteps->data[i] = false;
+    boobsbsteps_data[i] = false;
   }
   emxInit_int32_T(&r1, 2);
   i = r1->size[0] * r1->size[1];
   r1->size[0] = b_bsbsteps->size[0];
   r1->size[1] = b_bsbsteps->size[1];
   emxEnsureCapacity_int32_T(r1, i);
-  nx = b_bsbsteps->size[0] * b_bsbsteps->size[1];
-  for (i = 0; i < nx; i++) {
-    r1->data[i] = (int)b_bsbsteps->data[i];
+  iidx_data = r1->data;
+  b_loop_ub = b_bsbsteps->size[0] * b_bsbsteps->size[1];
+  for (i = 0; i < b_loop_ub; i++) {
+    iidx_data[i] = (int)b_bsbsteps_data[i];
   }
-  nx = r1->size[0] * r1->size[1];
-  for (i = 0; i < nx; i++) {
-    boobsbsteps->data[r1->data[i] - 1] = true;
+  b_loop_ub = r1->size[0] * r1->size[1];
+  for (i = 0; i < b_loop_ub; i++) {
+    boobsbsteps_data[iidx_data[i] - 1] = true;
   }
   emxFree_int32_T(&r1);
   /*  ij = index which is linked with the columns of matrix BB. During the */
@@ -1318,7 +1465,8 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     d_y->size[0] = 1;
     d_y->size[1] = 1;
     emxEnsureCapacity_real_T(d_y, i);
-    d_y->data[0] = rtNaN;
+    bsbstepdef_data = d_y->data;
+    bsbstepdef_data[0] = rtNaN;
   } else if (n < init1 + 1.0) {
     d_y->size[0] = 1;
     d_y->size[1] = 0;
@@ -1327,25 +1475,29 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
     d_y->size[0] = 1;
     d_y->size[1] = 1;
     emxEnsureCapacity_real_T(d_y, i);
-    d_y->data[0] = rtNaN;
+    bsbstepdef_data = d_y->data;
+    bsbstepdef_data[0] = rtNaN;
   } else if (floor(init1 + 1.0) == init1 + 1.0) {
     i = d_y->size[0] * d_y->size[1];
     d_y->size[0] = 1;
-    nx = (int)floor(n - (init1 + 1.0));
-    d_y->size[1] = nx + 1;
+    b_loop_ub = (int)floor(n - (init1 + 1.0));
+    d_y->size[1] = b_loop_ub + 1;
     emxEnsureCapacity_real_T(d_y, i);
-    for (i = 0; i <= nx; i++) {
-      d_y->data[i] = (init1 + 1.0) + (double)i;
+    bsbstepdef_data = d_y->data;
+    for (i = 0; i <= b_loop_ub; i++) {
+      bsbstepdef_data[i] = (init1 + 1.0) + (double)i;
     }
   } else {
     eml_float_colon(init1 + 1.0, n, d_y);
+    bsbstepdef_data = d_y->data;
   }
-  i = d_bsbsteps->size[0];
-  d_bsbsteps->size[0] = d_y->size[1];
-  emxEnsureCapacity_real_T(d_bsbsteps, i);
-  nx = d_y->size[1];
-  for (i = 0; i < nx; i++) {
-    d_bsbsteps->data[i] = d_y->data[i];
+  i = e->size[0];
+  e->size[0] = d_y->size[1];
+  emxEnsureCapacity_real_T(e, i);
+  e_data = e->data;
+  b_loop_ub = d_y->size[1];
+  for (i = 0; i < b_loop_ub; i++) {
+    e_data[i] = bsbstepdef_data[i];
   }
   emxFree_real_T(&d_y);
   emxInit_real_T(&r2, 2);
@@ -1353,20 +1505,23 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   r2->size[0] = loop_ub;
   r2->size[1] = 10;
   emxEnsureCapacity_real_T(r2, i);
+  iniseq_data = r2->data;
   loop_ub *= 10;
   for (i = 0; i < loop_ub; i++) {
-    r2->data[i] = rtNaN;
+    iniseq_data[i] = rtNaN;
   }
   emxInit_real_T(&r3, 2);
-  cat(d_bsbsteps, r2, r3);
+  cat(e, r2, r3);
+  iniseq_data = r3->data;
   i = Un->size[0] * Un->size[1];
   Un->size[0] = r3->size[0];
   Un->size[1] = 11;
   emxEnsureCapacity_real_T(Un, i);
+  Un_data = Un->data;
   loop_ub = r3->size[0] * 11;
   emxFree_real_T(&r2);
   for (i = 0; i < loop_ub; i++) {
-    Un->data[i] = r3->data[i];
+    Un_data[i] = iniseq_data[i];
   }
   emxFree_real_T(&r3);
   emxInit_real_T(&blast, 1);
@@ -1375,30 +1530,34 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
   i = blast->size[0];
   blast->size[0] = 1;
   emxEnsureCapacity_real_T(blast, i);
-  blast->data[0] = 0.0;
+  blast_data = blast->data;
+  blast_data[0] = 0.0;
   i = Xbb->size[0] * Xbb->size[1];
   Xbb->size[0] = 1;
   emxEnsureCapacity_real_T(Xbb, i);
   i = resBSB->size[0];
   resBSB->size[0] = 1;
   emxEnsureCapacity_real_T(resBSB, i);
-  resBSB->data[0] = 0.0;
+  resBSB_data = resBSB->data;
+  resBSB_data[0] = 0.0;
   /*  opts is a structure which contains the options to use in linsolve */
   /*  Start of the forward search */
   /*  if nocheck==false && rank(Xb)~=p */
-  nx = local_rank(Xb);
-  emxInit_real_T(&e, 1);
-  emxInit_boolean_T(&unitstopenalize, 1);
+  sizes_idx_1 = local_rank(Xb);
+  emxInit_boolean_T(&unitstopenalize, 2);
   emxInit_uint32_T(&truerownamestopenalize, 1);
+  emxInit_boolean_T(&oldbsbT, 1);
   emxInit_real_T(&unit, 1);
   emxInit_real_T(&r4, 2);
-  emxInit_real_T(&r5, 2);
-  if (nx != p) {
+  emxInit_boolean_T(&r5, 2);
+  emxInit_real_T(&r6, 2);
+  if (sizes_idx_1 != p) {
     i = mdr->size[0] * mdr->size[1];
     mdr->size[0] = 1;
     mdr->size[1] = 1;
     emxEnsureCapacity_real_T(mdr, i);
-    mdr->data[0] = rtNaN;
+    mdr_data = mdr->data;
+    mdr_data[0] = rtNaN;
     /*  FS loop will not be performed */
     /*  rank check */
   } else {
@@ -1409,8 +1568,8 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
         b_mm = (double)ini0 + (double)mm;
         /*  if n>5000 show every 500 steps the fwd search index */
         if (msg && (n > 5000.0)) {
-          d_do_vectors(b_mm, c_y, (double *)&initdef, c_size, (int *)&nx,
-                       &nwhile, (int *)&trueCount, &result);
+          d_do_vectors(b_mm, c_y, (double *)&initdef, c_size,
+                       (int *)&sizes_idx_1, &nwhile, (int *)&b_loop_ub, &end);
           if (c_size[1] == 1) {
             int2str(b_mm, c_mm.data, c_mm.size);
           }
@@ -1420,25 +1579,33 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
         /*  nothing but the rank) */
         /*  Old instruction was b=Xb\yb; */
         linsolve(Xb, yb, b_b, &initdef);
+        b_data = b_b->data;
         /*  disp([mm condNumber]) */
         Ra = !(initdef < p);
         guard1 = false;
         if (Ra) {
           /*  rank is ok */
           mtimes(Xb, b_b, resBSB);
-          i = resBSB->size[0];
-          resBSB->size[0] = yb->size[0];
-          emxEnsureCapacity_real_T(resBSB, i);
-          loop_ub = yb->size[0];
-          for (i = 0; i < loop_ub; i++) {
-            resBSB->data[i] = yb->data[i] - resBSB->data[i];
+          if (yb->size[0] == resBSB->size[0]) {
+            i = resBSB->size[0];
+            resBSB->size[0] = yb->size[0];
+            emxEnsureCapacity_real_T(resBSB, i);
+            resBSB_data = resBSB->data;
+            loop_ub = yb->size[0];
+            for (i = 0; i < loop_ub; i++) {
+              resBSB_data[i] = yb_data[i] - resBSB_data[i];
+            }
+          } else {
+            b_minus(resBSB, yb);
+            resBSB_data = resBSB->data;
           }
           i = blast->size[0];
           blast->size[0] = b_b->size[0];
           emxEnsureCapacity_real_T(blast, i);
+          blast_data = blast->data;
           loop_ub = b_b->size[0];
           for (i = 0; i < loop_ub; i++) {
-            blast->data[i] = b_b->data[i];
+            blast_data[i] = b_data[i];
           }
           /*  Store correctly computed b for the case of rank problem */
           guard1 = true;
@@ -1449,8 +1616,9 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           i = b_b->size[0];
           b_b->size[0] = (int)n;
           emxEnsureCapacity_real_T(b_b, i);
+          b_data = b_b->data;
           for (i = 0; i < loop_ub_tmp; i++) {
-            b_b->data[i] = 0.0;
+            b_data[i] = 0.0;
           }
           if (1.0 > b_mm) {
             loop_ub = 0;
@@ -1458,10 +1626,10 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
             loop_ub = (int)b_mm;
           }
           for (i = 0; i < loop_ub; i++) {
-            b_b->data[i] = b_bsb->data[i];
+            b_data[i] = b_bsb_data[i];
           }
-          nx = 1;
-          while (nx == 1) {
+          sizes_idx_1 = 1;
+          while (sizes_idx_1 == 1) {
             /*  Increase the size of the subset by one unit iteratively until
              * you */
             /*  obtain a full rank matrix */
@@ -1469,17 +1637,17 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
             exitg2 = false;
             while ((!exitg2) && (b_i <= ncl->size[0] - 1)) {
               if ((Xb->size[0] != 0) && (Xb->size[1] != 0)) {
-                result = Xb->size[1];
+                b_loop_ub = Xb->size[1];
               } else if (b_X->size[1] != 0) {
-                result = b_X->size[1];
+                b_loop_ub = b_X->size[1];
               } else {
-                result = Xb->size[1];
+                b_loop_ub = Xb->size[1];
               }
-              Ra = (result == 0);
+              Ra = (b_loop_ub == 0);
               if (Ra || ((Xb->size[0] != 0) && (Xb->size[1] != 0))) {
-                nx = Xb->size[0];
+                sizes_idx_1 = Xb->size[0];
               } else {
-                nx = 0;
+                sizes_idx_1 = 0;
               }
               if (Ra || (b_X->size[1] != 0)) {
                 nwhile = 1;
@@ -1491,27 +1659,31 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
               c_y->size[0] = 1;
               c_y->size[1] = b_X->size[1];
               emxEnsureCapacity_real_T(c_y, i);
+              bsbstepdef_data = c_y->data;
               for (i = 0; i < loop_ub; i++) {
-                c_y->data[i] =
-                    b_X->data[((int)ncl->data[b_i] + b_X->size[0] * i) - 1];
+                bsbstepdef_data[i] =
+                    b_X_data[((int)ncl_data[b_i] + b_X->size[0] * i) - 1];
               }
               i = Xbb->size[0] * Xbb->size[1];
-              Xbb->size[0] = nx + nwhile;
-              Xbb->size[1] = result;
+              Xbb->size[0] = sizes_idx_1 + nwhile;
+              Xbb->size[1] = b_loop_ub;
               emxEnsureCapacity_real_T(Xbb, i);
-              for (i = 0; i < result; i++) {
-                for (i1 = 0; i1 < nx; i1++) {
-                  Xbb->data[i1 + Xbb->size[0] * i] = Xb->data[i1 + nx * i];
+              iniseq_data = Xbb->data;
+              for (i = 0; i < b_loop_ub; i++) {
+                for (i1 = 0; i1 < sizes_idx_1; i1++) {
+                  iniseq_data[i1 + Xbb->size[0] * i] =
+                      Xb_data[i1 + sizes_idx_1 * i];
                 }
               }
-              for (i = 0; i < result; i++) {
+              for (i = 0; i < b_loop_ub; i++) {
                 for (i1 = 0; i1 < nwhile; i1++) {
-                  Xbb->data[nx + Xbb->size[0] * i] = c_y->data[nwhile * i];
+                  iniseq_data[sizes_idx_1 + Xbb->size[0] * i] =
+                      bsbstepdef_data[nwhile * i];
                 }
               }
-              nx = local_rank(Xbb);
-              if (nx == (int)p) {
-                nx = 0;
+              sizes_idx_1 = local_rank(Xbb);
+              if (sizes_idx_1 == (int)p) {
+                sizes_idx_1 = 0;
                 b_i++;
               } else {
                 if (1 > Xbb->size[0] - 1) {
@@ -1523,28 +1695,30 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                 c_y->size[0] = 1;
                 c_y->size[1] = loop_ub + 1;
                 emxEnsureCapacity_real_T(c_y, i);
+                bsbstepdef_data = c_y->data;
                 for (i = 0; i < loop_ub; i++) {
-                  c_y->data[i] = b_b->data[i];
+                  bsbstepdef_data[i] = b_data[i];
                 }
-                c_y->data[loop_ub] = ncl->data[b_i];
+                bsbstepdef_data[loop_ub] = ncl_data[b_i];
                 loop_ub = c_y->size[1];
                 for (i = 0; i < loop_ub; i++) {
-                  b_b->data[i] = c_y->data[i];
+                  b_data[i] = bsbstepdef_data[i];
                 }
                 if (1 > Xbb->size[0]) {
                   loop_ub = 0;
                 } else {
                   loop_ub = Xbb->size[0];
                 }
-                nx = b_X->size[1];
+                b_loop_ub = b_X->size[1];
                 i = Xb->size[0] * Xb->size[1];
                 Xb->size[0] = loop_ub;
                 Xb->size[1] = b_X->size[1];
                 emxEnsureCapacity_real_T(Xb, i);
-                for (i = 0; i < nx; i++) {
+                Xb_data = Xb->data;
+                for (i = 0; i < b_loop_ub; i++) {
                   for (i1 = 0; i1 < loop_ub; i1++) {
-                    Xb->data[i1 + Xb->size[0] * i] =
-                        b_X->data[((int)b_b->data[i1] + b_X->size[0] * i) - 1];
+                    Xb_data[i1 + Xb->size[0] * i] =
+                        b_X_data[((int)b_data[i1] + b_X->size[0] * i) - 1];
                   }
                 }
                 if (1 > Xbb->size[0]) {
@@ -1552,14 +1726,16 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                 } else {
                   loop_ub = Xbb->size[0];
                 }
-                i = d_bsbsteps->size[0];
-                d_bsbsteps->size[0] = loop_ub;
-                emxEnsureCapacity_real_T(d_bsbsteps, i);
+                i = e->size[0];
+                e->size[0] = loop_ub;
+                emxEnsureCapacity_real_T(e, i);
+                e_data = e->data;
                 for (i = 0; i < loop_ub; i++) {
-                  d_bsbsteps->data[i] = b_b->data[i];
+                  e_data[i] = b_data[i];
                 }
-                setdiffFS(seq, d_bsbsteps, ncl);
-                nx = 1;
+                setdiffFS(seq, e, ncl);
+                ncl_data = ncl->data;
+                sizes_idx_1 = 1;
                 exitg2 = true;
               }
             }
@@ -1578,29 +1754,34 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           mdr->size[0] = loop_ub;
           mdr->size[1] = 1;
           emxEnsureCapacity_real_T(mdr, i);
+          mdr_data = mdr->data;
           for (i = 0; i < loop_ub; i++) {
-            mdr->data[i] = b_b->data[i];
+            mdr_data[i] = b_data[i];
           }
           i = Un->size[0] * Un->size[1];
           Un->size[0] = 1;
           Un->size[1] = 1;
           emxEnsureCapacity_real_T(Un, i);
-          Un->data[0] = rtNaN;
+          Un_data = Un->data;
+          Un_data[0] = rtNaN;
           i = BB->size[0] * BB->size[1];
           BB->size[0] = 1;
           BB->size[1] = 1;
           emxEnsureCapacity_real_T(BB, i);
-          BB->data[0] = rtNaN;
+          BB_data = BB->data;
+          BB_data[0] = rtNaN;
           i = Bols->size[0] * Bols->size[1];
           Bols->size[0] = 1;
           Bols->size[1] = 1;
           emxEnsureCapacity_real_T(Bols, i);
-          Bols->data[0] = rtNaN;
+          Bols_data = Bols->data;
+          Bols_data[0] = rtNaN;
           i = S2->size[0] * S2->size[1];
           S2->size[0] = 1;
           S2->size[1] = 1;
           emxEnsureCapacity_real_T(S2, i);
-          S2->data[0] = rtNaN;
+          S2_data = S2->data;
+          S2_data[0] = rtNaN;
           exitg1 = 1;
         } else {
           Rprintf("Matrix without full rank at step m= %.0f\n", b_mm);
@@ -1608,44 +1789,45 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           i = b_b->size[0];
           b_b->size[0] = blast->size[0];
           emxEnsureCapacity_real_T(b_b, i);
+          b_data = b_b->data;
           loop_ub = blast->size[0];
           for (i = 0; i < loop_ub; i++) {
-            b_b->data[i] = blast->data[i];
+            b_data[i] = blast_data[i];
           }
           /*  disp([mm b']) */
           guard1 = true;
         }
         if (guard1) {
           mtimes(b_X, b_b, e);
-          i = e->size[0];
-          e->size[0] = b_y->size[0];
-          emxEnsureCapacity_real_T(e, i);
-          loop_ub = b_y->size[0];
-          for (i = 0; i < loop_ub; i++) {
-            e->data[i] = b_y->data[i] - e->data[i];
+          if (b_y->size[0] == e->size[0]) {
+            i = e->size[0];
+            e->size[0] = b_y->size[0];
+            emxEnsureCapacity_real_T(e, i);
+            e_data = e->data;
+            loop_ub = b_y->size[0];
+            for (i = 0; i < loop_ub; i++) {
+              e_data[i] = b_y_data[i] - e_data[i];
+            }
+          } else {
+            b_minus(e, b_y);
+            e_data = e->data;
           }
           /*  e = vector of residual for all units using b estimated using
            * subset */
-          i = d_bsbsteps->size[0];
-          d_bsbsteps->size[0] = e->size[0];
-          emxEnsureCapacity_real_T(d_bsbsteps, i);
-          nx = e->size[0];
-          for (nwhile = 0; nwhile < nx; nwhile++) {
-            d_bsbsteps->data[nwhile] = e->data[nwhile] * e->data[nwhile];
-          }
-          loop_ub = d_bsbsteps->size[0];
+          loop_ub = e->size[0];
           for (i = 0; i < loop_ub; i++) {
-            r->data[i + r->size[0]] = d_bsbsteps->data[i];
+            initdef = e_data[i];
+            r_data[i + r->size[0]] = initdef * initdef;
           }
           if (b_mm >= init1) {
             /*  Store units belonging to the subset */
-            if (boobsbsteps->data[(int)b_mm - 1]) {
+            if (boobsbsteps_data[(int)b_mm - 1]) {
               /*  OLD CODE */
               /*  intersect(mm,bsbsteps)==mm */
               loop_ub = b_bsb->size[0];
               for (i = 0; i < loop_ub; i++) {
-                BB->data[((int)b_bsb->data[i] + BB->size[0] * ((int)ij - 1)) -
-                         1] = b_bsb->data[i];
+                BB_data[((int)b_bsb_data[i] + BB->size[0] * ((int)ij - 1)) -
+                        1] = b_bsb_data[i];
               }
               ij++;
             }
@@ -1655,37 +1837,37 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
               i1 = (int)((b_mm - init1) + 1.0) - 1;
               loop_ub = b_b->size[0];
               for (nwhile = 0; nwhile < loop_ub; nwhile++) {
-                Bols->data[i1 + Bols->size[0] * (i + nwhile)] =
-                    b_b->data[nwhile];
+                Bols_data[i1 + Bols->size[0] * (i + nwhile)] = b_data[nwhile];
               }
               /*  Compute and store estimate of sigma^2 */
               initdef = 0.0;
               loop_ub = resBSB->size[0];
               for (i = 0; i < loop_ub; i++) {
-                initdef += resBSB->data[i] * resBSB->data[i];
+                initdef += resBSB_data[i] * resBSB_data[i];
               }
-              S2->data[i1 + S2->size[0]] = initdef / (b_mm - p);
+              S2_data[i1 + S2->size[0]] = initdef / (b_mm - p);
               /*  Store R2 */
               /*  S2(mm-init1+1,3)=1-var(resBSB)/var(yb); */
               initdef = blockedSummation(yb, yb->size[0]) / b_mm;
               i = b_b->size[0];
               b_b->size[0] = yb->size[0];
               emxEnsureCapacity_real_T(b_b, i);
+              b_data = b_b->data;
               loop_ub = yb->size[0];
               for (i = 0; i < loop_ub; i++) {
-                b_b->data[i] = yb->data[i] - initdef;
+                b_data[i] = yb_data[i] - initdef;
               }
               initdef = 0.0;
               loop_ub = resBSB->size[0];
               for (i = 0; i < loop_ub; i++) {
-                initdef += resBSB->data[i] * resBSB->data[i];
+                initdef += resBSB_data[i] * resBSB_data[i];
               }
               b = 0.0;
               loop_ub = b_b->size[0];
               for (i = 0; i < loop_ub; i++) {
-                b += b_b->data[i] * b_b->data[i];
+                b += b_data[i] * b_data[i];
               }
-              S2->data[i1 + S2->size[0] * 2] = 1.0 - initdef / b;
+              S2_data[i1 + S2->size[0] * 2] = 1.0 - initdef / b;
               if (b_mm < n) {
                 /*  Take minimum deletion residual among noBSB */
                 /*  hi (the leverage for the units not belonging to the */
@@ -1697,27 +1879,37 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                 b_bsbsteps->size[0] = ncl->size[0];
                 b_bsbsteps->size[1] = b_X->size[1];
                 emxEnsureCapacity_real_T(b_bsbsteps, i);
+                b_bsbsteps_data = b_bsbsteps->data;
                 for (i = 0; i < loop_ub; i++) {
-                  nx = ncl->size[0];
-                  for (nwhile = 0; nwhile < nx; nwhile++) {
-                    b_bsbsteps->data[nwhile + b_bsbsteps->size[0] * i] =
-                        b_X->data[((int)ncl->data[nwhile] + b_X->size[0] * i) -
-                                  1];
+                  b_loop_ub = ncl->size[0];
+                  for (nwhile = 0; nwhile < b_loop_ub; nwhile++) {
+                    b_bsbsteps_data[nwhile + b_bsbsteps->size[0] * i] =
+                        b_X_data[((int)ncl_data[nwhile] + b_X->size[0] * i) -
+                                 1];
                   }
                 }
                 /*  mmX=inv(mAm); */
                 /*  hi = sum((Xncl*mmX).*Xncl,2); */
-                c_mtimes(Xb, Xb, r5);
-                mrdiv(b_bsbsteps, r5, r4);
-                i = r5->size[0] * r5->size[1];
-                r5->size[0] = r4->size[0];
-                r5->size[1] = r4->size[1];
-                emxEnsureCapacity_real_T(r5, i);
-                loop_ub = r4->size[0] * r4->size[1];
-                for (i = 0; i < loop_ub; i++) {
-                  r5->data[i] = r4->data[i] * b_bsbsteps->data[i];
+                c_mtimes(Xb, Xb, r6);
+                mrdiv(b_bsbsteps, r6, r4);
+                iniseq_data = r4->data;
+                if ((r4->size[0] == b_bsbsteps->size[0]) &&
+                    (r4->size[1] == b_bsbsteps->size[1])) {
+                  i = r6->size[0] * r6->size[1];
+                  r6->size[0] = r4->size[0];
+                  r6->size[1] = r4->size[1];
+                  emxEnsureCapacity_real_T(r6, i);
+                  bsbstepdef_data = r6->data;
+                  loop_ub = r4->size[0] * r4->size[1];
+                  for (i = 0; i < loop_ub; i++) {
+                    bsbstepdef_data[i] = iniseq_data[i] * b_bsbsteps_data[i];
+                  }
+                  sum(r6, b_b);
+                  b_data = b_b->data;
+                } else {
+                  binary_expand_op(b_b, r4, b_bsbsteps);
+                  b_data = b_b->data;
                 }
-                sum(r5, b_b);
                 /* hiall=sum((X/mAm).*X,2); */
                 if (bonflevout) {
                   thpmm_size[0] = threshlevoutX_size[0];
@@ -1726,94 +1918,120 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                   for (i = 0; i < loop_ub; i++) {
                     initdef = threshlevoutX_data[0] * p / b_mm;
                   }
-                  repelem((double *)&initdef, thpmm_size, n - b_mm, r5);
-                  i = unitstopenalize->size[0];
-                  unitstopenalize->size[0] = b_b->size[0];
-                  emxEnsureCapacity_boolean_T(unitstopenalize, i);
-                  loop_ub = b_b->size[0];
-                  for (i = 0; i < loop_ub; i++) {
-                    unitstopenalize->data[i] = (b_b->data[i] > r5->data[i]);
+                  repelem((double *)&initdef, thpmm_size, n - b_mm, r6);
+                  bsbstepdef_data = r6->data;
+                  if (b_b->size[0] == r6->size[0]) {
+                    i = unitstopenalize->size[0] * unitstopenalize->size[1];
+                    unitstopenalize->size[0] = b_b->size[0];
+                    unitstopenalize->size[1] = r6->size[1];
+                    emxEnsureCapacity_boolean_T(unitstopenalize, i);
+                    unitstopenalize_data = unitstopenalize->data;
+                    loop_ub = r6->size[1];
+                    for (i = 0; i < loop_ub; i++) {
+                      b_loop_ub = b_b->size[0];
+                      for (nwhile = 0; nwhile < b_loop_ub; nwhile++) {
+                        unitstopenalize_data[nwhile +
+                                             unitstopenalize->size[0] * i] =
+                            (b_data[nwhile] >
+                             bsbstepdef_data[nwhile + r6->size[0] * i]);
+                      }
+                    }
+                  } else {
+                    wb_binary_expand_op(unitstopenalize, b_b, r6);
+                    unitstopenalize_data = unitstopenalize->data;
                   }
-                  if (any(unitstopenalize)) {
-                    nwhile = unitstopenalize->size[0];
-                    for (b_i = 0; b_i < nwhile; b_i++) {
-                      if (unitstopenalize->data[b_i]) {
-                        b_b->data[b_i] = initdef;
+                  any(unitstopenalize, r5);
+                  if (c_ifWhileCond(r5)) {
+                    end = unitstopenalize->size[0] * unitstopenalize->size[1];
+                    for (b_i = 0; b_i < end; b_i++) {
+                      if (unitstopenalize_data[b_i]) {
+                        b_data[b_i] = initdef;
                       }
                     }
                   }
                 } else {
-                  i = unitstopenalize->size[0];
+                  i = unitstopenalize->size[0] * unitstopenalize->size[1];
                   unitstopenalize->size[0] = 1;
+                  unitstopenalize->size[1] = 1;
                   emxEnsureCapacity_boolean_T(unitstopenalize, i);
-                  unitstopenalize->data[0] = false;
+                  unitstopenalize_data = unitstopenalize->data;
+                  unitstopenalize_data[0] = false;
                 }
-                i = ord->size[0] * ord->size[1];
-                ord->size[0] = ncl->size[0];
-                ord->size[1] = 2;
-                emxEnsureCapacity_real_T(ord, i);
-                loop_ub = ncl->size[0];
-                for (i = 0; i < loop_ub; i++) {
-                  ord->data[i] = r->data[((int)ncl->data[i] + r->size[0]) - 1] /
-                                 (b_b->data[i] + 1.0);
-                }
-                loop_ub = ncl->size[0];
-                for (i = 0; i < loop_ub; i++) {
-                  ord->data[i + ord->size[0]] = e->data[(int)ncl->data[i] - 1];
+                if (ncl->size[0] == b_b->size[0]) {
+                  i = ord->size[0] * ord->size[1];
+                  ord->size[0] = ncl->size[0];
+                  ord->size[1] = 2;
+                  emxEnsureCapacity_real_T(ord, i);
+                  iniseq_data = ord->data;
+                  loop_ub = ncl->size[0];
+                  for (i = 0; i < loop_ub; i++) {
+                    iniseq_data[i] =
+                        r_data[((int)ncl_data[i] + r->size[0]) - 1] /
+                        (b_data[i] + 1.0);
+                  }
+                  loop_ub = ncl->size[0];
+                  for (i = 0; i < loop_ub; i++) {
+                    iniseq_data[i + ord->size[0]] =
+                        e_data[(int)ncl_data[i] - 1];
+                  }
+                } else {
+                  vb_binary_expand_op(ord, r, ncl, b_b, e);
+                  iniseq_data = ord->data;
                 }
                 if (bonflevout) {
-                  nwhile = unitstopenalize->size[0] - 1;
-                  trueCount = 0;
-                  for (b_i = 0; b_i <= nwhile; b_i++) {
-                    if (unitstopenalize->data[b_i]) {
-                      trueCount++;
+                  end = unitstopenalize->size[0] * unitstopenalize->size[1] - 1;
+                  sizes_idx_1 = 0;
+                  for (b_i = 0; b_i <= end; b_i++) {
+                    if (unitstopenalize_data[b_i]) {
+                      sizes_idx_1++;
                     }
                   }
                   i = truerownamestopenalize->size[0];
-                  truerownamestopenalize->size[0] = trueCount;
+                  truerownamestopenalize->size[0] = sizes_idx_1;
                   emxEnsureCapacity_uint32_T(truerownamestopenalize, i);
-                  nx = 0;
-                  for (b_i = 0; b_i <= nwhile; b_i++) {
-                    if (unitstopenalize->data[b_i]) {
-                      truerownamestopenalize->data[nx] =
-                          (unsigned int)ncl->data[b_i];
-                      nx++;
+                  truerownamestopenalize_data = truerownamestopenalize->data;
+                  nwhile = 0;
+                  for (b_i = 0; b_i <= end; b_i++) {
+                    if (unitstopenalize_data[b_i]) {
+                      truerownamestopenalize_data[nwhile] =
+                          (unsigned int)ncl_data[b_i];
+                      nwhile++;
                     }
                   }
                   /*  disp(ncl(unittopenalize)) */
-                  i = d_bsbsteps->size[0];
-                  d_bsbsteps->size[0] = truerownamestopenalize->size[0];
-                  emxEnsureCapacity_real_T(d_bsbsteps, i);
+                  i = e->size[0];
+                  e->size[0] = truerownamestopenalize->size[0];
+                  emxEnsureCapacity_real_T(e, i);
+                  e_data = e->data;
                   loop_ub = truerownamestopenalize->size[0];
                   for (i = 0; i < loop_ub; i++) {
-                    d_bsbsteps->data[i] =
-                        r->data[((int)truerownamestopenalize->data[i] +
-                                 r->size[0]) -
-                                1] *
-                        1.0E+7;
+                    e_data[i] = r_data[((int)truerownamestopenalize_data[i] +
+                                        r->size[0]) -
+                                       1] *
+                                1.0E+7;
                   }
-                  loop_ub = d_bsbsteps->size[0];
+                  loop_ub = e->size[0];
                   for (i = 0; i < loop_ub; i++) {
-                    r->data[((int)truerownamestopenalize->data[i] +
-                             r->size[0]) -
-                            1] = d_bsbsteps->data[i];
+                    r_data[((int)truerownamestopenalize_data[i] + r->size[0]) -
+                           1] = e_data[i];
                   }
                 }
                 /*  Store minimum deletion residual in matrix mdr */
                 /*  selmdr=sortrows(ord,1); */
-                initdef = S2->data[i1 + S2->size[0]];
+                initdef = S2_data[i1 + S2->size[0]];
                 if (initdef == 0.0) {
                   c_sprintf((b_mm - init1) + 1.0);
                 } else {
                   loop_ub = ord->size[0];
-                  i = d_bsbsteps->size[0];
-                  d_bsbsteps->size[0] = ord->size[0];
-                  emxEnsureCapacity_real_T(d_bsbsteps, i);
+                  i = e->size[0];
+                  e->size[0] = ord->size[0];
+                  emxEnsureCapacity_real_T(e, i);
+                  e_data = e->data;
                   for (i = 0; i < loop_ub; i++) {
-                    d_bsbsteps->data[i] = ord->data[i];
+                    e_data[i] = iniseq_data[i];
                   }
-                  mdr->data[i1 + mdr->size[0]] =
-                      sqrt(fabs(b_minimum(d_bsbsteps)) / initdef);
+                  mdr_data[i1 + mdr->size[0]] =
+                      sqrt(fabs(b_minimum(e)) / initdef);
                 }
               }
               /* if mm<n */
@@ -1823,12 +2041,13 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
           /* mm>=init1 */
           if (b_mm < n) {
             /*  store units forming old subset in vector oldbsb */
-            i = unitstopenalize->size[0];
-            unitstopenalize->size[0] = bsbT->size[0];
-            emxEnsureCapacity_boolean_T(unitstopenalize, i);
+            i = oldbsbT->size[0];
+            oldbsbT->size[0] = bsbT->size[0];
+            emxEnsureCapacity_boolean_T(oldbsbT, i);
+            unitstopenalize_data = oldbsbT->data;
             loop_ub = bsbT->size[0];
             for (i = 0; i < loop_ub; i++) {
-              unitstopenalize->data[i] = bsbT->data[i];
+              unitstopenalize_data[i] = bsbT_data[i];
             }
             /*  order the r_i */
             /*  units inside vector constr are forced to join the search in */
@@ -1838,13 +2057,14 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
               i = iidx->size[0];
               iidx->size[0] = constr->size[0];
               emxEnsureCapacity_int32_T(iidx, i);
+              iidx_data = iidx->data;
               loop_ub = constr->size[0];
               for (i = 0; i < loop_ub; i++) {
-                iidx->data[i] = (int)constr->data[i];
+                iidx_data[i] = (int)constr_data[i];
               }
               loop_ub = iidx->size[0];
               for (i = 0; i < loop_ub; i++) {
-                r->data[(iidx->data[i] + r->size[0]) - 1] = rtInf;
+                r_data[(iidx_data[i] + r->size[0]) - 1] = rtInf;
               }
             }
             /*  If internationaltrade is true residuals which have large of */
@@ -1858,100 +2078,126 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
               i = b_b->size[0];
               b_b->size[0] = r->size[0];
               emxEnsureCapacity_real_T(b_b, i);
+              b_data = b_b->data;
               for (i = 0; i < loop_ub; i++) {
-                b_b->data[i] = r->data[i + r->size[0]];
+                b_data[i] = r_data[i + r->size[0]];
               }
               sort(b_b, iidx);
+              iidx_data = iidx->data;
               i = b_b->size[0];
               b_b->size[0] = iidx->size[0];
               emxEnsureCapacity_real_T(b_b, i);
+              b_data = b_b->data;
               loop_ub = iidx->size[0];
               for (i = 0; i < loop_ub; i++) {
-                b_b->data[i] = iidx->data[i];
+                b_data[i] = iidx_data[i];
               }
             } else {
-              loop_ub = r->size[0];
-              i = b_b->size[0];
-              b_b->size[0] = r->size[0];
-              emxEnsureCapacity_real_T(b_b, i);
-              for (i = 0; i < loop_ub; i++) {
-                b_b->data[i] = r->data[i + r->size[0]] / weight->data[i];
+              if (r->size[0] == weight->size[0]) {
+                loop_ub = r->size[0];
+                i = b_b->size[0];
+                b_b->size[0] = r->size[0];
+                emxEnsureCapacity_real_T(b_b, i);
+                b_data = b_b->data;
+                for (i = 0; i < loop_ub; i++) {
+                  b_data[i] = r_data[i + r->size[0]] / weight_data[i];
+                }
+              } else {
+                jd_binary_expand_op(b_b, r, weight);
               }
               sort(b_b, iidx);
+              iidx_data = iidx->data;
               i = b_b->size[0];
               b_b->size[0] = iidx->size[0];
               emxEnsureCapacity_real_T(b_b, i);
+              b_data = b_b->data;
               loop_ub = iidx->size[0];
               for (i = 0; i < loop_ub; i++) {
-                b_b->data[i] = iidx->data[i];
+                b_data[i] = iidx_data[i];
               }
             }
             /*  bsb= units forming the new  subset */
-            nx = (int)(b_mm + 1.0);
+            sizes_idx_1 = (int)(b_mm + 1.0);
             i = b_bsb->size[0];
             b_bsb->size[0] = (int)(b_mm + 1.0);
             emxEnsureCapacity_real_T(b_bsb, i);
-            for (i = 0; i < nx; i++) {
-              b_bsb->data[i] = b_b->data[i];
+            b_bsb_data = b_bsb->data;
+            for (i = 0; i < sizes_idx_1; i++) {
+              b_bsb_data[i] = b_data[i];
             }
             i = bsbT->size[0];
             bsbT->size[0] = (int)n;
             emxEnsureCapacity_boolean_T(bsbT, i);
+            bsbT_data = bsbT->data;
             for (i = 0; i < loop_ub_tmp; i++) {
-              bsbT->data[i] = false;
+              bsbT_data[i] = false;
             }
             i = iidx->size[0];
             iidx->size[0] = (int)(b_mm + 1.0);
             emxEnsureCapacity_int32_T(iidx, i);
-            for (i = 0; i < nx; i++) {
-              iidx->data[i] = (int)b_b->data[i];
+            iidx_data = iidx->data;
+            for (i = 0; i < sizes_idx_1; i++) {
+              iidx_data[i] = (int)b_data[i];
             }
             loop_ub = iidx->size[0];
             for (i = 0; i < loop_ub; i++) {
-              bsbT->data[iidx->data[i] - 1] = true;
+              bsbT_data[iidx_data[i] - 1] = true;
             }
             loop_ub = b_X->size[1];
             i = Xb->size[0] * Xb->size[1];
             Xb->size[0] = (int)(b_mm + 1.0);
             Xb->size[1] = b_X->size[1];
             emxEnsureCapacity_real_T(Xb, i);
+            Xb_data = Xb->data;
             for (i = 0; i < loop_ub; i++) {
-              for (i1 = 0; i1 < nx; i1++) {
-                Xb->data[i1 + Xb->size[0] * i] =
-                    b_X->data[((int)b_b->data[i1] + b_X->size[0] * i) - 1];
+              for (i1 = 0; i1 < sizes_idx_1; i1++) {
+                Xb_data[i1 + Xb->size[0] * i] =
+                    b_X_data[((int)b_data[i1] + b_X->size[0] * i) - 1];
               }
             }
             /*  subset of X */
             i = yb->size[0];
             yb->size[0] = (int)(b_mm + 1.0);
             emxEnsureCapacity_real_T(yb, i);
-            for (i = 0; i < nx; i++) {
-              yb->data[i] = b_y->data[(int)b_b->data[i] - 1];
+            yb_data = yb->data;
+            for (i = 0; i < sizes_idx_1; i++) {
+              yb_data[i] = b_y_data[(int)b_data[i] - 1];
             }
             /*  subset of y */
             if (b_mm >= init1) {
               /*  unit = vector containing units which just entered subset; */
               /*  unit=setdiff(bsb,oldbsb); */
               /*  new instruction to find unit */
-              loop_ub = unitstopenalize->size[0];
-              for (i = 0; i < loop_ub; i++) {
-                unitstopenalize->data[i] = !unitstopenalize->data[i];
+              if (bsbT->size[0] == oldbsbT->size[0]) {
+                i = oldbsbT->size[0];
+                oldbsbT->size[0] = bsbT->size[0];
+                emxEnsureCapacity_boolean_T(oldbsbT, i);
+                unitstopenalize_data = oldbsbT->data;
+                loop_ub = bsbT->size[0];
+                for (i = 0; i < loop_ub; i++) {
+                  unitstopenalize_data[i] =
+                      (bsbT_data[i] && (!unitstopenalize_data[i]));
+                }
+              } else {
+                ub_binary_expand_op(oldbsbT, bsbT);
+                unitstopenalize_data = oldbsbT->data;
               }
-              nwhile = bsbT->size[0] - 1;
-              trueCount = 0;
-              for (b_i = 0; b_i <= nwhile; b_i++) {
-                if (bsbT->data[b_i] && unitstopenalize->data[b_i]) {
-                  trueCount++;
+              end = oldbsbT->size[0] - 1;
+              sizes_idx_1 = 0;
+              for (b_i = 0; b_i <= end; b_i++) {
+                if (unitstopenalize_data[b_i]) {
+                  sizes_idx_1++;
                 }
               }
               i = unit->size[0];
-              unit->size[0] = trueCount;
+              unit->size[0] = sizes_idx_1;
               emxEnsureCapacity_real_T(unit, i);
-              nx = 0;
-              for (b_i = 0; b_i <= nwhile; b_i++) {
-                if (bsbT->data[b_i] && unitstopenalize->data[b_i]) {
-                  unit->data[nx] = seq->data[b_i];
-                  nx++;
+              iniseq_data = unit->data;
+              nwhile = 0;
+              for (b_i = 0; b_i <= end; b_i++) {
+                if (unitstopenalize_data[b_i]) {
+                  iniseq_data[nwhile] = seq_data[b_i];
+                  nwhile++;
                 }
               }
               /*  If the interchange involves more than 10 units, store only the
@@ -1966,17 +2212,17 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                   i1 = unit->size[0];
                 }
                 nwhile = (int)((b_mm - init1) + 1.0) - 1;
-                nx = i1 - i;
-                for (i1 = 0; i1 < nx; i1++) {
-                  Un->data[nwhile + Un->size[0] * ((i + i1) + 1)] =
-                      unit->data[i1];
+                sizes_idx_1 = i1 - i;
+                for (i1 = 0; i1 < sizes_idx_1; i1++) {
+                  Un_data[nwhile + Un->size[0] * ((i + i1) + 1)] =
+                      iniseq_data[i1];
                 }
               } else if (msg) {
                 int2str(b_mm, c_mm.data, c_mm.size);
                 int2str(unit->size[0], c_mm.data, c_mm.size);
                 i = (int)((b_mm - init1) + 1.0) - 1;
                 for (i1 = 0; i1 < 10; i1++) {
-                  Un->data[i + Un->size[0] * (i1 + 1)] = unit->data[i1];
+                  Un_data[i + Un->size[0] * (i1 + 1)] = iniseq_data[i1];
                 }
               }
             }
@@ -1993,18 +2239,19 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                 }
                 /*  ncl= units forming the new noclean */
                 nwhile = constr->size[0];
-                nx = i1 - i;
-                for (i1 = 0; i1 < nx; i1++) {
-                  b_b->data[i1] = b_b->data[i + i1];
+                sizes_idx_1 = i1 - i;
+                for (i1 = 0; i1 < sizes_idx_1; i1++) {
+                  b_data[i1] = b_data[i + i1];
                 }
                 i = b_b->size[0];
-                b_b->size[0] = nx;
+                b_b->size[0] = sizes_idx_1;
                 emxEnsureCapacity_real_T(b_b, i);
                 b_constr = *constr;
                 b_n = nwhile;
                 b_constr.size = &b_n;
                 b_constr.numDimensions = 1;
                 setdiffFS(b_b, &b_constr, ncl);
+                ncl_data = ncl->data;
               } else {
                 if (b_mm + 2.0 > n) {
                   i = 0;
@@ -2017,8 +2264,9 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
                 i1 = ncl->size[0];
                 ncl->size[0] = loop_ub;
                 emxEnsureCapacity_real_T(ncl, i1);
+                ncl_data = ncl->data;
                 for (i1 = 0; i1 < loop_ub; i1++) {
-                  ncl->data[i1] = b_b->data[i + i1];
+                  ncl_data[i1] = b_data[i + i1];
                 }
                 /*  ncl= units forming the new noclean */
               }
@@ -2035,14 +2283,15 @@ void FSRmdr_wrapper(const emxArray_real_T *y, const emxArray_real_T *X,
       }
     } while (exitg1 == 0);
   }
-  emxFree_real_T(&r5);
-  emxFree_real_T(&d_bsbsteps);
+  emxFree_real_T(&r6);
+  emxFree_boolean_T(&r5);
   emxFree_real_T(&r4);
   emxFree_int32_T(&iidx);
   emxFree_real_T(&c_y);
   emxFree_real_T(&b_X);
   emxFree_real_T(&b_y);
   emxFree_real_T(&unit);
+  emxFree_boolean_T(&oldbsbT);
   emxFree_uint32_T(&truerownamestopenalize);
   emxFree_real_T(&ord);
   emxFree_boolean_T(&unitstopenalize);

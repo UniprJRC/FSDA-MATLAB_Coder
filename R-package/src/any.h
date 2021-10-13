@@ -23,9 +23,9 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-bool any(const emxArray_boolean_T *x);
+void any(const emxArray_boolean_T *x, emxArray_boolean_T *y);
 
-void b_any(const emxArray_boolean_T *x, emxArray_boolean_T *y);
+bool b_any(const emxArray_boolean_T *x);
 
 bool c_any(const emxArray_boolean_T *x);
 

@@ -23,7 +23,32 @@ extern "C" {
 #endif
 
 /* Function Declarations */
+void b_plus(emxArray_real_T *yrank, const emxArray_real_T *Xs,
+            const emxArray_real_T *Ys);
+
 void b_unibiv(const emxArray_real_T *Y, emxArray_real_T *fre);
+
+void j_binary_expand_op(emxArray_real_T *bivT, const emxArray_real_T *biv);
+
+void k_binary_expand_op(emxArray_real_T *yrank, const emxArray_real_T *xrank,
+                        double a, const emxArray_real_T *Xs,
+                        const emxArray_real_T *Ys, double c);
+
+void l_binary_expand_op(emxArray_boolean_T *r1, const emxArray_real_T *datax,
+                        double uq, double lq, const emxArray_real_T *xrank);
+
+void mf_binary_expand_op(emxArray_real_T *outy, const emxArray_real_T *datax,
+                         const emxArray_int32_T *jj,
+                         const emxArray_int32_T *ii);
+
+void minus(emxArray_real_T *yrank, const emxArray_real_T *Xs,
+           const emxArray_real_T *Ys);
+
+void nf_binary_expand_op(emxArray_real_T *yrank, const emxArray_real_T *Y,
+                         unsigned int jl, double Tx, const emxArray_real_T *y,
+                         double Ty);
+
+void plus(emxArray_real_T *MDbiv, const emxArray_real_T *yrank);
 
 void tiedrankFS(const emxArray_real_T *x, emxArray_real_T *r);
 

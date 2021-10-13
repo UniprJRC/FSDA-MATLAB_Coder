@@ -22,17 +22,26 @@ void TBwei(const emxArray_real_T *u, const emxArray_real_T *c,
            emxArray_real_T *w)
 {
   emxArray_boolean_T *r;
-  emxArray_int32_T *r1;
+  emxArray_int32_T *r2;
   emxArray_real_T *w_tmp;
   emxArray_real_T *y;
+  const double *c_data;
+  const double *u_data;
+  double varargin_1;
+  double *w_data;
+  double *w_tmp_data;
+  double *y_data;
   int i;
   int k;
   int nx;
+  int *r3;
+  bool *r1;
+  c_data = c->data;
+  u_data = u->data;
   emxInit_real_T(&w_tmp, 1);
   /* TBwei computes weight function psi(u)/u for Tukey's biweight   */
   /*  */
   /* <a href="matlab: docsearchFS('TBwei')">Link to the help function</a> */
-  /*  */
   /*  */
   /*  Required input arguments: */
   /*  */
@@ -66,7 +75,6 @@ void TBwei(const emxArray_real_T *u, const emxArray_real_T *c,
   /*  */
   /*  See p. 30 of Maronna et al. (2006) */
   /*  */
-  /*  */
   /*  Remark: Tukey's biweight  psi-function is almost linear around u = 0 in
    * accordance with */
   /*  Winsor's principle that all distributions are normal in the middle. */
@@ -85,10 +93,8 @@ void TBwei(const emxArray_real_T *u, const emxArray_real_T *c,
   /*  efficiency of robust S-estimators, "TEST", Vol. 23, pp. 356-387. */
   /*  http://dx.doi.org/10.1007/s11749-014-0357-7 */
   /*  */
-  /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('TBwei')">Link to the help page for this
    * function</a> */
@@ -132,7 +138,6 @@ void TBwei(const emxArray_real_T *u, const emxArray_real_T *c,
   /*     title('Hampel','FontSize',FontSize) */
   /*     ylim([ylim1 ylim2]) */
   /*     xlim([xlim1 xlim2]) */
-  /*  */
   /*  */
   /*     subplot(2,2,3) */
   /*     ceff095TB=TBeff(0.95,1); */
@@ -179,28 +184,29 @@ void TBwei(const emxArray_real_T *u, const emxArray_real_T *c,
   i = w_tmp->size[0];
   w_tmp->size[0] = u->size[0];
   emxEnsureCapacity_real_T(w_tmp, i);
+  w_tmp_data = w_tmp->data;
   nx = u->size[0];
   for (i = 0; i < nx; i++) {
-    w_tmp->data[i] = u->data[i] / c->data[0];
+    w_tmp_data[i] = u_data[i] / c_data[0];
   }
   emxInit_real_T(&y, 1);
   i = y->size[0];
   y->size[0] = w_tmp->size[0];
   emxEnsureCapacity_real_T(y, i);
+  y_data = y->data;
   nx = w_tmp->size[0];
-  for (k = 0; k < nx; k++) {
-    y->data[k] = w_tmp->data[k] * w_tmp->data[k];
-  }
-  nx = y->size[0];
   for (i = 0; i < nx; i++) {
-    y->data[i] = 1.0 - y->data[i];
+    varargin_1 = w_tmp_data[i];
+    y_data[i] = varargin_1 * varargin_1;
   }
   i = w->size[0];
   w->size[0] = y->size[0];
   emxEnsureCapacity_real_T(w, i);
+  w_data = w->data;
   nx = y->size[0];
-  for (k = 0; k < nx; k++) {
-    w->data[k] = y->data[k] * y->data[k];
+  for (i = 0; i < nx; i++) {
+    varargin_1 = 1.0 - y_data[i];
+    w_data[i] = varargin_1 * varargin_1;
   }
   /*  The following instruction is unnecessary */
   /*  however it is the proper expression for the weights */
@@ -210,43 +216,46 @@ void TBwei(const emxArray_real_T *u, const emxArray_real_T *c,
   i = y->size[0];
   y->size[0] = w_tmp->size[0];
   emxEnsureCapacity_real_T(y, i);
+  y_data = y->data;
   for (k = 0; k < nx; k++) {
-    y->data[k] = fabs(w_tmp->data[k]);
+    y_data[k] = fabs(w_tmp_data[k]);
   }
   emxFree_real_T(&w_tmp);
   emxInit_boolean_T(&r, 1);
   i = r->size[0];
   r->size[0] = y->size[0];
   emxEnsureCapacity_boolean_T(r, i);
+  r1 = r->data;
   nx = y->size[0];
   for (i = 0; i < nx; i++) {
-    r->data[i] = (y->data[i] > 1.0);
+    r1[i] = (y_data[i] > 1.0);
   }
   emxFree_real_T(&y);
   k = r->size[0] - 1;
   nx = 0;
   for (i = 0; i <= k; i++) {
-    if (r->data[i]) {
+    if (r1[i]) {
       nx++;
     }
   }
-  emxInit_int32_T(&r1, 1);
-  i = r1->size[0];
-  r1->size[0] = nx;
-  emxEnsureCapacity_int32_T(r1, i);
+  emxInit_int32_T(&r2, 1);
+  i = r2->size[0];
+  r2->size[0] = nx;
+  emxEnsureCapacity_int32_T(r2, i);
+  r3 = r2->data;
   nx = 0;
   for (i = 0; i <= k; i++) {
-    if (r->data[i]) {
-      r1->data[nx] = i + 1;
+    if (r1[i]) {
+      r3[nx] = i + 1;
       nx++;
     }
   }
   emxFree_boolean_T(&r);
-  nx = r1->size[0];
+  nx = r2->size[0];
   for (i = 0; i < nx; i++) {
-    w->data[r1->data[i] - 1] = 0.0;
+    w_data[r3[i] - 1] = 0.0;
   }
-  emxFree_int32_T(&r1);
+  emxFree_int32_T(&r2);
 }
 
 /* End of code generation (TBwei.c) */

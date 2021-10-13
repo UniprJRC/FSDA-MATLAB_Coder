@@ -184,21 +184,6 @@ struct emxArray_uint32_T {
 typedef struct emxArray_uint32_T emxArray_uint32_T;
 #endif /* typedef_emxArray_uint32_T */
 
-#ifndef struct_emxArray_int32_T
-#define struct_emxArray_int32_T
-struct emxArray_int32_T {
-  int *data;
-  int *size;
-  int allocatedSize;
-  int numDimensions;
-  bool canFreeData;
-};
-#endif /* struct_emxArray_int32_T */
-#ifndef typedef_emxArray_int32_T
-#define typedef_emxArray_int32_T
-typedef struct emxArray_int32_T emxArray_int32_T;
-#endif /* typedef_emxArray_int32_T */
-
 #ifndef struct_emxArray_boolean_T
 #define struct_emxArray_boolean_T
 struct emxArray_boolean_T {
@@ -214,6 +199,21 @@ struct emxArray_boolean_T {
 typedef struct emxArray_boolean_T emxArray_boolean_T;
 #endif /* typedef_emxArray_boolean_T */
 
+#ifndef struct_emxArray_int32_T
+#define struct_emxArray_int32_T
+struct emxArray_int32_T {
+  int *data;
+  int *size;
+  int allocatedSize;
+  int numDimensions;
+  bool canFreeData;
+};
+#endif /* struct_emxArray_int32_T */
+#ifndef typedef_emxArray_int32_T
+#define typedef_emxArray_int32_T
+typedef struct emxArray_int32_T emxArray_int32_T;
+#endif /* typedef_emxArray_int32_T */
+
 #ifndef typedef_emxArray_creal_T
 #define typedef_emxArray_creal_T
 typedef struct {
@@ -224,6 +224,21 @@ typedef struct {
   bool canFreeData;
 } emxArray_creal_T;
 #endif /* typedef_emxArray_creal_T */
+
+#ifndef struct_emxArray_int8_T
+#define struct_emxArray_int8_T
+struct emxArray_int8_T {
+  signed char *data;
+  int *size;
+  int allocatedSize;
+  int numDimensions;
+  bool canFreeData;
+};
+#endif /* struct_emxArray_int8_T */
+#ifndef typedef_emxArray_int8_T
+#define typedef_emxArray_int8_T
+typedef struct emxArray_int8_T emxArray_int8_T;
+#endif /* typedef_emxArray_int8_T */
 
 #ifndef struct_emxArray_uint8_T
 #define struct_emxArray_uint8_T
@@ -325,23 +340,23 @@ typedef struct {
 } struct_FSRlms_T;
 #endif /* typedef_struct_FSRlms_T */
 
-#ifndef typedef_cell_wrap_43
-#define typedef_cell_wrap_43
+#ifndef typedef_cell_wrap_45
+#define typedef_cell_wrap_45
 typedef struct {
   emxArray_real_T *f1;
-} cell_wrap_43;
-#endif /* typedef_cell_wrap_43 */
+} cell_wrap_45;
+#endif /* typedef_cell_wrap_45 */
 
-#ifndef typedef_emxArray_cell_wrap_43
-#define typedef_emxArray_cell_wrap_43
+#ifndef typedef_emxArray_cell_wrap_45
+#define typedef_emxArray_cell_wrap_45
 typedef struct {
-  cell_wrap_43 *data;
+  cell_wrap_45 *data;
   int *size;
   int allocatedSize;
   int numDimensions;
   bool canFreeData;
-} emxArray_cell_wrap_43;
-#endif /* typedef_emxArray_cell_wrap_43 */
+} emxArray_cell_wrap_45;
+#endif /* typedef_emxArray_cell_wrap_45 */
 
 #ifndef typedef_struct_FSRfan_T
 #define typedef_struct_FSRfan_T
@@ -349,7 +364,7 @@ typedef struct {
   emxArray_real_T *Score;
   emxArray_real_T *la;
   emxArray_real_T *bs;
-  emxArray_cell_wrap_43 *Un;
+  emxArray_cell_wrap_45 *Un;
   emxArray_real_T *y;
   emxArray_real_T *X;
   emxArray_real_T *Scorep;
@@ -370,12 +385,12 @@ typedef struct {
 } struct_LTStsmodel_T;
 #endif /* typedef_struct_LTStsmodel_T */
 
-#ifndef typedef_cell_wrap_56
-#define typedef_cell_wrap_56
+#ifndef typedef_cell_wrap_58
+#define typedef_cell_wrap_58
 typedef struct {
   emxArray_char_T *f1;
-} cell_wrap_56;
-#endif /* typedef_cell_wrap_56 */
+} cell_wrap_58;
+#endif /* typedef_cell_wrap_58 */
 
 #ifndef typedef_cell_wrap_6
 #define typedef_cell_wrap_6
@@ -550,9 +565,9 @@ typedef struct {
 #define typedef_struct_addt_T
 typedef struct {
   emxArray_real_T_1 b;
-  emxArray_real_T_1 S2add;
-  emxArray_real_T_1x1 Tadd;
-  emxArray_real_T_1x1 pval;
+  emxArray_real_T *S2add;
+  emxArray_real_T *Tadd;
+  emxArray_real_T *pval;
 } struct_addt_T;
 #endif /* typedef_struct_addt_T */
 
@@ -576,21 +591,6 @@ typedef struct {
   emxArray_real_T *Y;
 } struct_tclust_T;
 #endif /* typedef_struct_tclust_T */
-
-#ifndef struct_emxArray_int8_T
-#define struct_emxArray_int8_T
-struct emxArray_int8_T {
-  signed char *data;
-  int *size;
-  int allocatedSize;
-  int numDimensions;
-  bool canFreeData;
-};
-#endif /* struct_emxArray_int8_T */
-#ifndef typedef_emxArray_int8_T
-#define typedef_emxArray_int8_T
-typedef struct emxArray_int8_T emxArray_int8_T;
-#endif /* typedef_emxArray_int8_T */
 
 #ifndef struct_emxArray_char_T_1x0
 #define struct_emxArray_char_T_1x0
@@ -684,8 +684,8 @@ typedef struct {
 #define typedef_f_matlab_internal_coder_tabular
 typedef struct {
   double length;
-  cell_wrap_56 descrs[4];
-  cell_wrap_56 units[4];
+  cell_wrap_58 descrs[4];
+  cell_wrap_58 units[4];
   c_matlab_internal_coder_tabular continuity[4];
   bool hasDescrs;
   bool hasUnits;

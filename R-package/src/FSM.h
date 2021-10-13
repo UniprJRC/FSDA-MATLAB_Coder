@@ -32,6 +32,37 @@ void FSM(emxArray_real_T *Y, const double varargin_4_data[],
          emxArray_real_T *out_Un, emxArray_real_T *out_nout,
          char out_class_data[], int out_class_size[2]);
 
+void c_binary_expand_op(emxArray_boolean_T *x, const emxArray_real_T *gmin1,
+                        int i1, int i2, const struct_FSM_T *out, int i3,
+                        int i4);
+
+void d_binary_expand_op(emxArray_boolean_T *x, const struct_FSM_T *out, int i1,
+                        int i2, const emxArray_real_T *gmin, int i3, int i4,
+                        int c001);
+
+void e_binary_expand_op(emxArray_boolean_T *r1, const struct_FSM_T *out,
+                        const emxArray_real_T *gmin);
+
+void f_binary_expand_op(emxArray_boolean_T *r1, const struct_FSM_T *out,
+                        const emxArray_real_T *gmin);
+
+void g_binary_expand_op(emxArray_boolean_T *r1, const struct_FSM_T *out,
+                        const emxArray_real_T *gmin);
+
+void h_binary_expand_op(emxArray_boolean_T *r1, const struct_FSM_T *out,
+                        const emxArray_real_T *gmin);
+
+void i_binary_expand_op(emxArray_boolean_T *x, const struct_FSM_T *out,
+                        const emxArray_real_T *gmin);
+
+void nb_binary_expand_op(emxArray_boolean_T *x, const emxArray_real_T *gmin1,
+                         int i1, int i2, const emxArray_real_T *out_mmd, int i3,
+                         int i4);
+
+void ob_binary_expand_op(emxArray_boolean_T *x, const emxArray_real_T *out_mmd,
+                         int i1, int i2, const emxArray_real_T *gmin, int i3,
+                         int i4, int c001);
+
 #ifdef __cplusplus
 }
 #endif

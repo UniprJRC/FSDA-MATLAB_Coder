@@ -14,7 +14,6 @@
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
 #include "median.h"
-#include "mod.h"
 #include "rt_nonfinite.h"
 #include "sort.h"
 #include "vvarstd.h"
@@ -32,9 +31,13 @@ void b_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   emxArray_real_T *med_j;
   emxArray_real_T *xbinned;
   emxArray_real_T *xsor;
+  const double *X_data;
   double b_nbins;
   double d;
   double ninbins;
+  double *dist_xi_xj_sor_data;
+  double *xbinned_data;
+  double *xsor_data;
   int acoef;
   int b_k;
   int half;
@@ -43,11 +46,11 @@ void b_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   int k;
   int loop_ub;
   int nbins;
+  X_data = X->data;
   emxInit_real_T(&xsor, 1);
   /* zscoreFS computes (robust) standardized z scores */
   /*  */
   /* <a href="matlab: docsearchFS('zscoreFS')">Link to the help function</a> */
-  /*  */
   /*  */
   /*     X can be a vector of length(n) or data matrix containing n observations
    * on v */
@@ -70,7 +73,6 @@ void b_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
    */
   /*    normally distributed data).   */
   /*  */
-  /*  */
   /*    Z=zscoreFS(X,loc,scale) computes robust standardized zscores using the
    */
   /*    estimates of location and scale specified in loc and scale strings. If
@@ -83,11 +85,9 @@ void b_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   /*    loc='median'; n-by-r medians are computed for each of the n rows of X */
   /*    and each third dimension r. */
   /*  */
-  /*  */
   /*    Z=zscoreFS(X,loc) computes standardized zscores using the */
   /*    estimates of location specified in loc and the mad as measure of */
   /*    dispersion. */
-  /*  */
   /*  */
   /*    [Z,mu,sigma] = zscoreFS(X) also returns median(X) in mu and mad in */
   /*    sigma. */
@@ -112,7 +112,6 @@ void b_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   /*    because it enables to specify alternative measures of location and */
   /*    scale. */
   /*  */
-  /*  */
   /*   Required input arguments: */
   /*    */
   /*  X :           Input data. Vector or Matrix or 3D array. Vector  of */
@@ -125,7 +124,6 @@ void b_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   /*                values will automatically be excluded from the */
   /*                computations. */
   /*                 Data Types - single|double */
-  /*  */
   /*  */
   /*   Optional input arguments: */
   /*  */
@@ -173,7 +171,6 @@ void b_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   /*            Data Types -single | double | int8 | int16 | int32 | int64
    * |uint8 | uint16 | uint32 | uint64 */
   /*  */
-  /*  */
   /*   Output:  */
   /*  */
   /*        Z : centered, scaled version of X. Array with the same dimension as
@@ -193,14 +190,10 @@ void b_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   /*  */
   /*  See also: zscore, Qn, Sn, MCD, Smult, MMmult, FSM */
   /*  */
-  /*  */
   /*  References: */
-  /*  */
-  /*  */
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('zscoreFS')">Link to the help function</a> */
   /*  */
@@ -318,15 +311,17 @@ void b_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   i = xsor->size[0];
   xsor->size[0] = X->size[0];
   emxEnsureCapacity_real_T(xsor, i);
+  xsor_data = xsor->data;
   loop_ub = X->size[0];
   for (i = 0; i < loop_ub; i++) {
-    xsor->data[i] = X->data[i];
+    xsor_data[i] = X_data[i];
   }
   c_sort(xsor);
-  *mu = xsor->data[half];
+  xsor_data = xsor->data;
+  *mu = xsor_data[half];
   if (half << 1 == X->size[0]) {
     /*  Average if even number of elements */
-    *mu = (xsor->data[half - 1] + xsor->data[half]) / 2.0;
+    *mu = (xsor_data[half - 1] + xsor_data[half]) / 2.0;
   }
   /* Sn robust estimator of scale (robust version of Gini's average difference)
    */
@@ -410,7 +405,6 @@ void b_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
   /*  */
-  /*  */
   /* <a href="matlab: docsearchFS('Sn')">Link to the help function</a> */
   /*  */
   /* $LastChangedDate::                      $: Date of the last commit */
@@ -432,8 +426,9 @@ void b_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   i = xsor->size[0];
   xsor->size[0] = X->size[0];
   emxEnsureCapacity_real_T(xsor, i);
+  xsor_data = xsor->data;
   for (i = 0; i < loop_ub; i++) {
-    xsor->data[i] = X->data[i];
+    xsor_data[i] = X_data[i];
   }
   i = X->size[0] - 1;
   nbins = X->size[0];
@@ -441,14 +436,16 @@ void b_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   if (X->size[0] > 10000) {
     emxInit_real_T(&xbinned, 1);
     c_sort(xsor);
+    xsor_data = xsor->data;
     nbins = (int)floor((double)X->size[0] / 10.0);
     i1 = xbinned->size[0];
     xbinned->size[0] = nbins;
     emxEnsureCapacity_real_T(xbinned, i1);
+    xbinned_data = xbinned->data;
     ninbins = floor((double)X->size[0] / (double)nbins);
     emxInit_real_T(&b_xsor, 1);
     for (half = 0; half < nbins; half++) {
-      if ((c_mod((double)i + 1.0, nbins) != 0.0) && (half + 1 == nbins)) {
+      if ((fmod((double)i + 1.0, nbins) != 0.0) && (half + 1 == nbins)) {
         b_nbins = (((double)half + 1.0) - 1.0) * ninbins + 1.0;
         if (b_nbins > (double)i + 1.0) {
           i1 = 0;
@@ -461,10 +458,11 @@ void b_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
         acoef = b_xsor->size[0];
         b_xsor->size[0] = loop_ub + 1;
         emxEnsureCapacity_real_T(b_xsor, acoef);
+        dist_xi_xj_sor_data = b_xsor->data;
         for (acoef = 0; acoef <= loop_ub; acoef++) {
-          b_xsor->data[acoef] = xsor->data[i1 + acoef];
+          dist_xi_xj_sor_data[acoef] = xsor_data[i1 + acoef];
         }
-        xbinned->data[half] = median(b_xsor);
+        xbinned_data[half] = median(b_xsor);
       } else {
         b_nbins = (((double)half + 1.0) - 1.0) * ninbins + 1.0;
         d = ((double)half + 1.0) * ninbins;
@@ -479,19 +477,21 @@ void b_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
         acoef = b_xsor->size[0];
         b_xsor->size[0] = loop_ub;
         emxEnsureCapacity_real_T(b_xsor, acoef);
+        dist_xi_xj_sor_data = b_xsor->data;
         for (acoef = 0; acoef < loop_ub; acoef++) {
-          b_xsor->data[acoef] = xsor->data[i1 + acoef];
+          dist_xi_xj_sor_data[acoef] = xsor_data[i1 + acoef];
         }
-        xbinned->data[half] = median(b_xsor);
+        xbinned_data[half] = median(b_xsor);
       }
     }
     emxFree_real_T(&b_xsor);
     i = xsor->size[0];
     xsor->size[0] = xbinned->size[0];
     emxEnsureCapacity_real_T(xsor, i);
+    xsor_data = xsor->data;
     loop_ub = xbinned->size[0];
     for (i = 0; i < loop_ub; i++) {
-      xsor->data[i] = xbinned->data[i];
+      xsor_data[i] = xbinned_data[i];
     }
     emxFree_real_T(&xbinned);
     /*  Redefine x with binned x */
@@ -502,6 +502,7 @@ void b_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   c->size[0] = xsor->size[0];
   c->size[1] = xsor->size[0];
   emxEnsureCapacity_real_T(c, i);
+  xbinned_data = c->data;
   if (xsor->size[0] != 0) {
     half = (xsor->size[0] != 1);
     i = xsor->size[0] - 1;
@@ -510,8 +511,8 @@ void b_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
       acoef = (xsor->size[0] != 1);
       i1 = c->size[0] - 1;
       for (b_k = 0; b_k <= i1; b_k++) {
-        c->data[b_k + c->size[0] * k] =
-            xsor->data[acoef * b_k] - xsor->data[loop_ub];
+        xbinned_data[b_k + c->size[0] * k] =
+            xsor_data[acoef * b_k] - xsor_data[loop_ub];
       }
     }
   }
@@ -521,12 +522,14 @@ void b_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   dist_xi_xj_sor->size[0] = c->size[0];
   dist_xi_xj_sor->size[1] = c->size[1];
   emxEnsureCapacity_real_T(dist_xi_xj_sor, i);
+  dist_xi_xj_sor_data = dist_xi_xj_sor->data;
   for (k = 0; k < half; k++) {
-    dist_xi_xj_sor->data[k] = fabs(c->data[k]);
+    dist_xi_xj_sor_data[k] = fabs(xbinned_data[k]);
   }
   emxFree_real_T(&c);
   emxInit_real_T(&med_j, 2);
   e_sort(dist_xi_xj_sor);
+  dist_xi_xj_sor_data = dist_xi_xj_sor->data;
   /*  For each i compute the median of |x_i-x_j| that is take di order */
   /*  statistic of rank [(n+1)/2] */
   half = (int)floor(((double)nbins + 1.0) / 2.0);
@@ -535,12 +538,14 @@ void b_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   med_j->size[0] = 1;
   med_j->size[1] = dist_xi_xj_sor->size[1];
   emxEnsureCapacity_real_T(med_j, i);
+  xbinned_data = med_j->data;
   for (i = 0; i < loop_ub; i++) {
-    med_j->data[i] =
-        dist_xi_xj_sor->data[(half + dist_xi_xj_sor->size[0] * i) - 1];
+    xbinned_data[i] =
+        dist_xi_xj_sor_data[(half + dist_xi_xj_sor->size[0] * i) - 1];
   }
   emxFree_real_T(&dist_xi_xj_sor);
   d_sort(med_j);
+  xbinned_data = med_j->data;
   /*  Multiply the estimator also by cn a finite sample correction */
   /*  factor to make the estimator unbiased for finite samples (see p. 3 */
   /*  of Croux and Rousseeuw, 1992) or */
@@ -583,26 +588,28 @@ void b_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
     }
     break;
   }
-  *sigma = ninbins * (1.1926 * med_j->data[(int)floor((double)nbins / 2.0)]);
+  *sigma = ninbins * (1.1926 * xbinned_data[(int)floor((double)nbins / 2.0)]);
   i = xsor->size[0];
   xsor->size[0] = X->size[0];
   emxEnsureCapacity_real_T(xsor, i);
+  xsor_data = xsor->data;
   emxFree_real_T(&med_j);
   if (X->size[0] != 0) {
     acoef = (X->size[0] != 1);
     i = X->size[0] - 1;
     for (k = 0; k <= i; k++) {
-      xsor->data[k] = X->data[acoef * k] - *mu;
+      xsor_data[k] = X_data[acoef * k] - *mu;
     }
   }
   i = Z->size[0];
   Z->size[0] = xsor->size[0];
   emxEnsureCapacity_real_T(Z, i);
+  xbinned_data = Z->data;
   if (xsor->size[0] != 0) {
     acoef = (xsor->size[0] != 1);
     i = xsor->size[0] - 1;
     for (k = 0; k <= i; k++) {
-      Z->data[k] = xsor->data[acoef * k] / *sigma;
+      xbinned_data[k] = xsor_data[acoef * k] / *sigma;
     }
   }
   emxFree_real_T(&xsor);
@@ -612,14 +619,17 @@ void c_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
                 double *sigma)
 {
   emxArray_real_T *xsor;
+  const double *X_data;
+  double *Z_data;
+  double *xsor_data;
   int half;
   int i;
   int loop_ub;
+  X_data = X->data;
   emxInit_real_T(&xsor, 1);
   /* zscoreFS computes (robust) standardized z scores */
   /*  */
   /* <a href="matlab: docsearchFS('zscoreFS')">Link to the help function</a> */
-  /*  */
   /*  */
   /*     X can be a vector of length(n) or data matrix containing n observations
    * on v */
@@ -642,7 +652,6 @@ void c_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
    */
   /*    normally distributed data).   */
   /*  */
-  /*  */
   /*    Z=zscoreFS(X,loc,scale) computes robust standardized zscores using the
    */
   /*    estimates of location and scale specified in loc and scale strings. If
@@ -655,11 +664,9 @@ void c_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   /*    loc='median'; n-by-r medians are computed for each of the n rows of X */
   /*    and each third dimension r. */
   /*  */
-  /*  */
   /*    Z=zscoreFS(X,loc) computes standardized zscores using the */
   /*    estimates of location specified in loc and the mad as measure of */
   /*    dispersion. */
-  /*  */
   /*  */
   /*    [Z,mu,sigma] = zscoreFS(X) also returns median(X) in mu and mad in */
   /*    sigma. */
@@ -684,7 +691,6 @@ void c_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   /*    because it enables to specify alternative measures of location and */
   /*    scale. */
   /*  */
-  /*  */
   /*   Required input arguments: */
   /*    */
   /*  X :           Input data. Vector or Matrix or 3D array. Vector  of */
@@ -697,7 +703,6 @@ void c_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   /*                values will automatically be excluded from the */
   /*                computations. */
   /*                 Data Types - single|double */
-  /*  */
   /*  */
   /*   Optional input arguments: */
   /*  */
@@ -745,7 +750,6 @@ void c_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   /*            Data Types -single | double | int8 | int16 | int32 | int64
    * |uint8 | uint16 | uint32 | uint64 */
   /*  */
-  /*  */
   /*   Output:  */
   /*  */
   /*        Z : centered, scaled version of X. Array with the same dimension as
@@ -765,14 +769,10 @@ void c_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   /*  */
   /*  See also: zscore, Qn, Sn, MCD, Smult, MMmult, FSM */
   /*  */
-  /*  */
   /*  References: */
-  /*  */
-  /*  */
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('zscoreFS')">Link to the help function</a> */
   /*  */
@@ -890,35 +890,39 @@ void c_zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   i = xsor->size[0];
   xsor->size[0] = X->size[0];
   emxEnsureCapacity_real_T(xsor, i);
+  xsor_data = xsor->data;
   loop_ub = X->size[0];
   for (i = 0; i < loop_ub; i++) {
-    xsor->data[i] = X->data[i];
+    xsor_data[i] = X_data[i];
   }
   c_sort(xsor);
-  *mu = xsor->data[half];
+  xsor_data = xsor->data;
+  *mu = xsor_data[half];
   if (half << 1 == X->size[0]) {
     /*  Average if even number of elements */
-    *mu = (xsor->data[half - 1] + xsor->data[half]) / 2.0;
+    *mu = (xsor_data[half - 1] + xsor_data[half]) / 2.0;
   }
   *sigma = vvarstd(X, X->size[0]);
   i = xsor->size[0];
   xsor->size[0] = X->size[0];
   emxEnsureCapacity_real_T(xsor, i);
+  xsor_data = xsor->data;
   if (X->size[0] != 0) {
     half = (X->size[0] != 1);
     i = X->size[0] - 1;
     for (loop_ub = 0; loop_ub <= i; loop_ub++) {
-      xsor->data[loop_ub] = X->data[half * loop_ub] - *mu;
+      xsor_data[loop_ub] = X_data[half * loop_ub] - *mu;
     }
   }
   i = Z->size[0];
   Z->size[0] = xsor->size[0];
   emxEnsureCapacity_real_T(Z, i);
+  Z_data = Z->data;
   if (xsor->size[0] != 0) {
     half = (xsor->size[0] != 1);
     i = xsor->size[0] - 1;
     for (loop_ub = 0; loop_ub <= i; loop_ub++) {
-      Z->data[loop_ub] = xsor->data[half * loop_ub] / *sigma;
+      Z_data[loop_ub] = xsor_data[half * loop_ub] / *sigma;
     }
   }
   emxFree_real_T(&xsor);
@@ -932,9 +936,13 @@ void zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   emxArray_real_T *distord;
   emxArray_real_T *xbinned;
   emxArray_real_T *xsor;
+  const double *X_data;
   double d;
   double d1;
   double ninbins;
+  double *b_xsor_data;
+  double *xbinned_data;
+  double *xsor_data;
   int half;
   int i;
   int i1;
@@ -943,11 +951,12 @@ void zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   int loop_ub;
   int nbins;
   int x;
+  bool *logIndX_data;
+  X_data = X->data;
   emxInit_real_T(&xsor, 1);
   /* zscoreFS computes (robust) standardized z scores */
   /*  */
   /* <a href="matlab: docsearchFS('zscoreFS')">Link to the help function</a> */
-  /*  */
   /*  */
   /*     X can be a vector of length(n) or data matrix containing n observations
    * on v */
@@ -970,7 +979,6 @@ void zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
    */
   /*    normally distributed data).   */
   /*  */
-  /*  */
   /*    Z=zscoreFS(X,loc,scale) computes robust standardized zscores using the
    */
   /*    estimates of location and scale specified in loc and scale strings. If
@@ -983,11 +991,9 @@ void zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   /*    loc='median'; n-by-r medians are computed for each of the n rows of X */
   /*    and each third dimension r. */
   /*  */
-  /*  */
   /*    Z=zscoreFS(X,loc) computes standardized zscores using the */
   /*    estimates of location specified in loc and the mad as measure of */
   /*    dispersion. */
-  /*  */
   /*  */
   /*    [Z,mu,sigma] = zscoreFS(X) also returns median(X) in mu and mad in */
   /*    sigma. */
@@ -1012,7 +1018,6 @@ void zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   /*    because it enables to specify alternative measures of location and */
   /*    scale. */
   /*  */
-  /*  */
   /*   Required input arguments: */
   /*    */
   /*  X :           Input data. Vector or Matrix or 3D array. Vector  of */
@@ -1025,7 +1030,6 @@ void zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   /*                values will automatically be excluded from the */
   /*                computations. */
   /*                 Data Types - single|double */
-  /*  */
   /*  */
   /*   Optional input arguments: */
   /*  */
@@ -1073,7 +1077,6 @@ void zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   /*            Data Types -single | double | int8 | int16 | int32 | int64
    * |uint8 | uint16 | uint32 | uint64 */
   /*  */
-  /*  */
   /*   Output:  */
   /*  */
   /*        Z : centered, scaled version of X. Array with the same dimension as
@@ -1093,14 +1096,10 @@ void zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   /*  */
   /*  See also: zscore, Qn, Sn, MCD, Smult, MMmult, FSM */
   /*  */
-  /*  */
   /*  References: */
-  /*  */
-  /*  */
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('zscoreFS')">Link to the help function</a> */
   /*  */
@@ -1218,21 +1217,22 @@ void zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   i = xsor->size[0];
   xsor->size[0] = X->size[0];
   emxEnsureCapacity_real_T(xsor, i);
+  xsor_data = xsor->data;
   loop_ub = X->size[0];
   for (i = 0; i < loop_ub; i++) {
-    xsor->data[i] = X->data[i];
+    xsor_data[i] = X_data[i];
   }
   c_sort(xsor);
-  *mu = xsor->data[half];
+  xsor_data = xsor->data;
+  *mu = xsor_data[half];
   if (half << 1 == X->size[0]) {
     /*  Average if even number of elements */
-    *mu = (xsor->data[half - 1] + xsor->data[half]) / 2.0;
+    *mu = (xsor_data[half - 1] + xsor_data[half]) / 2.0;
   }
   /* Qn robust estimator of scale (first quartile of interpoint distances
    * $|x_i-x_j|$) */
   /*  */
   /* <a href="matlab: docsearchFS('Qn')">Link to the help function</a> */
-  /*  */
   /*  */
   /*  Required input arguments: */
   /*   */
@@ -1284,7 +1284,6 @@ void zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   /*    asymptotic consistency factor and is equal to 2.2219 while $c_n$ is a */
   /*    finite sample correction factor to make the estimator unbiased. */
   /*  */
-  /*  */
   /*  See also: Sn */
   /*  */
   /*  References: */
@@ -1300,7 +1299,6 @@ void zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('Qn')">Link to the help function</a> */
   /*  */
@@ -1323,8 +1321,9 @@ void zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   i = xsor->size[0];
   xsor->size[0] = X->size[0];
   emxEnsureCapacity_real_T(xsor, i);
+  xsor_data = xsor->data;
   for (i = 0; i < loop_ub; i++) {
-    xsor->data[i] = X->data[i];
+    xsor_data[i] = X_data[i];
   }
   i = X->size[0] - 1;
   nbins = X->size[0];
@@ -1332,14 +1331,16 @@ void zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
   if (X->size[0] > 10000) {
     emxInit_real_T(&xbinned, 1);
     c_sort(xsor);
+    xsor_data = xsor->data;
     nbins = (int)floor((double)X->size[0] / 10.0);
     i1 = xbinned->size[0];
     xbinned->size[0] = nbins;
     emxEnsureCapacity_real_T(xbinned, i1);
+    xbinned_data = xbinned->data;
     ninbins = floor((double)X->size[0] / (double)nbins);
     emxInit_real_T(&b_xsor, 1);
     for (ii = 0; ii < nbins; ii++) {
-      if ((c_mod((double)i + 1.0, nbins) != 0.0) && (ii + 1 == nbins)) {
+      if ((fmod((double)i + 1.0, nbins) != 0.0) && (ii + 1 == nbins)) {
         d = (((double)ii + 1.0) - 1.0) * ninbins + 1.0;
         if (d > (double)i + 1.0) {
           i1 = 0;
@@ -1352,10 +1353,11 @@ void zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
         i2 = b_xsor->size[0];
         b_xsor->size[0] = loop_ub + 1;
         emxEnsureCapacity_real_T(b_xsor, i2);
+        b_xsor_data = b_xsor->data;
         for (i2 = 0; i2 <= loop_ub; i2++) {
-          b_xsor->data[i2] = xsor->data[i1 + i2];
+          b_xsor_data[i2] = xsor_data[i1 + i2];
         }
-        xbinned->data[ii] = median(b_xsor);
+        xbinned_data[ii] = median(b_xsor);
       } else {
         d = (((double)ii + 1.0) - 1.0) * ninbins + 1.0;
         d1 = ((double)ii + 1.0) * ninbins;
@@ -1370,19 +1372,21 @@ void zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
         i2 = b_xsor->size[0];
         b_xsor->size[0] = loop_ub;
         emxEnsureCapacity_real_T(b_xsor, i2);
+        b_xsor_data = b_xsor->data;
         for (i2 = 0; i2 < loop_ub; i2++) {
-          b_xsor->data[i2] = xsor->data[i1 + i2];
+          b_xsor_data[i2] = xsor_data[i1 + i2];
         }
-        xbinned->data[ii] = median(b_xsor);
+        xbinned_data[ii] = median(b_xsor);
       }
     }
     emxFree_real_T(&b_xsor);
     i = xsor->size[0];
     xsor->size[0] = xbinned->size[0];
     emxEnsureCapacity_real_T(xsor, i);
+    xsor_data = xsor->data;
     loop_ub = xbinned->size[0];
     for (i = 0; i < loop_ub; i++) {
-      xsor->data[i] = xbinned->data[i];
+      xsor_data[i] = xbinned_data[i];
     }
     emxFree_real_T(&xbinned);
     /*  Redefine x with binned x */
@@ -1402,22 +1406,24 @@ void zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
     logIndX->size[0] = 1;
     logIndX->size[1] = xsor->size[0];
     emxEnsureCapacity_boolean_T(logIndX, i);
+    logIndX_data = logIndX->data;
     loop_ub = xsor->size[0];
     for (i = 0; i < loop_ub; i++) {
-      logIndX->data[i] = true;
+      logIndX_data[i] = true;
     }
     i = xsor->size[0];
     for (loop_ub = 0; loop_ub < i; loop_ub++) {
-      if (rtIsNaN(xsor->data[loop_ub])) {
-        logIndX->data[loop_ub] = false;
+      if (rtIsNaN(xsor_data[loop_ub])) {
+        logIndX_data[loop_ub] = false;
       }
     }
     i = distord->size[0] * distord->size[1];
     distord->size[0] = 1;
     distord->size[1] = half;
     emxEnsureCapacity_real_T(distord, i);
+    xbinned_data = distord->data;
     for (i = 0; i < half; i++) {
-      distord->data[i] = rtNaN;
+      xbinned_data[i] = rtNaN;
     }
     half = 0;
     i = xsor->size[0];
@@ -1425,9 +1431,9 @@ void zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
       i1 = ii + 2;
       i2 = xsor->size[0];
       for (loop_ub = i1; loop_ub <= i2; loop_ub++) {
-        if (logIndX->data[ii] && logIndX->data[loop_ub - 1]) {
-          distord->data[((half + loop_ub) - ii) - 2] =
-              fabs(xsor->data[ii] - xsor->data[loop_ub - 1]);
+        if (logIndX_data[ii] && logIndX_data[loop_ub - 1]) {
+          xbinned_data[((half + loop_ub) - ii) - 2] =
+              fabs(xsor_data[ii] - xsor_data[loop_ub - 1]);
         }
       }
       half = ((half + xsor->size[0]) - ii) - 1;
@@ -1435,6 +1441,7 @@ void zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
     emxFree_boolean_T(&logIndX);
   }
   d_sort(distord);
+  xbinned_data = distord->data;
   /*         If statistic toolbox is not present it is possible to use the
    * following code */
   /*          distord = zeros(1,n*(n-1)./2); */
@@ -1491,28 +1498,32 @@ void zscoreFS(const emxArray_real_T *X, emxArray_real_T *Z, double *mu,
     }
     break;
   }
-  *sigma = ninbins * (2.2219 * distord->data[(int)(0.5 * ((double)x + 1.0) *
-                                                   (((double)x + 1.0) - 1.0)) -
-                                             1]);
+  *sigma =
+      ninbins *
+      (2.2219 *
+       xbinned_data[(int)(0.5 * ((double)x + 1.0) * (((double)x + 1.0) - 1.0)) -
+                    1]);
   i = xsor->size[0];
   xsor->size[0] = X->size[0];
   emxEnsureCapacity_real_T(xsor, i);
+  xsor_data = xsor->data;
   emxFree_real_T(&distord);
   if (X->size[0] != 0) {
     half = (X->size[0] != 1);
     i = X->size[0] - 1;
     for (loop_ub = 0; loop_ub <= i; loop_ub++) {
-      xsor->data[loop_ub] = X->data[half * loop_ub] - *mu;
+      xsor_data[loop_ub] = X_data[half * loop_ub] - *mu;
     }
   }
   i = Z->size[0];
   Z->size[0] = xsor->size[0];
   emxEnsureCapacity_real_T(Z, i);
+  xbinned_data = Z->data;
   if (xsor->size[0] != 0) {
     half = (xsor->size[0] != 1);
     i = xsor->size[0] - 1;
     for (loop_ub = 0; loop_ub <= i; loop_ub++) {
-      Z->data[loop_ub] = xsor->data[half * loop_ub] / *sigma;
+      xbinned_data[loop_ub] = xsor_data[half * loop_ub] / *sigma;
     }
   }
   emxFree_real_T(&xsor);

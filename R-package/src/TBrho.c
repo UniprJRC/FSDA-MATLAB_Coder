@@ -24,11 +24,20 @@ void TBrho(const emxArray_real_T *u, const emxArray_real_T *c,
 {
   emxArray_boolean_T *w;
   emxArray_real_T *y;
+  const double *c_data;
+  const double *u_data;
   double b;
+  double b_c;
   double c_tmp;
-  double d;
+  double varargin_1;
+  double *rhoTB_data;
+  double *y_data;
+  int b_rhoTB;
   int k;
   int nx;
+  bool *w_data;
+  c_data = c->data;
+  u_data = u->data;
   emxInit_real_T(&y, 1);
   /* TBrho computes rho function for Tukey's biweight */
   /*  */
@@ -45,16 +54,13 @@ void TBrho(const emxArray_real_T *u, const emxArray_real_T *c,
   /*  */
   /*   Optional input arguments: */
   /*  */
-  /*  */
   /*   Output: */
-  /*  */
   /*  */
   /*    rhoTB :      n x 1 vector which contains the Tukey's biweight rho */
   /*                 associated to the residuals or Mahalanobis distances for */
   /*                 the n units of the sample. */
   /*  */
   /*  More About: */
-  /*  */
   /*  */
   /*  function TBrho transforms vector u as follows  */
   /*  \[ */
@@ -83,7 +89,6 @@ void TBrho(const emxArray_real_T *u, const emxArray_real_T *c,
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('TBrho')">Link to the help page for this
    * function</a> */
@@ -138,43 +143,311 @@ void TBrho(const emxArray_real_T *u, const emxArray_real_T *c,
   k = y->size[0];
   y->size[0] = u->size[0];
   emxEnsureCapacity_real_T(y, k);
+  y_data = y->data;
   for (k = 0; k < nx; k++) {
-    y->data[k] = fabs(u->data[k]);
+    y_data[k] = fabs(u_data[k]);
   }
   emxInit_boolean_T(&w, 1);
   k = w->size[0];
   w->size[0] = y->size[0];
   emxEnsureCapacity_boolean_T(w, k);
+  w_data = w->data;
   nx = y->size[0];
   for (k = 0; k < nx; k++) {
-    w->data[k] = (y->data[k] <= c->data[0]);
+    w_data[k] = (y_data[k] <= c_data[0]);
   }
-  c_tmp = c->data[0] * c->data[0];
+  c_tmp = c_data[0] * c_data[0];
   k = rhoTB->size[0];
   rhoTB->size[0] = u->size[0];
   emxEnsureCapacity_real_T(rhoTB, k);
+  rhoTB_data = rhoTB->data;
   nx = u->size[0];
   for (k = 0; k < nx; k++) {
-    rhoTB->data[k] = u->data[k] * u->data[k];
+    varargin_1 = u_data[k];
+    rhoTB_data[k] = varargin_1 * varargin_1;
   }
+  b_c = rt_powd_snf(c_data[0], 4.0);
   b = c_tmp / 6.0;
   k = y->size[0];
   y->size[0] = u->size[0];
   emxEnsureCapacity_real_T(y, k);
+  y_data = y->data;
   nx = u->size[0];
   for (k = 0; k < nx; k++) {
-    y->data[k] = rt_powd_snf(u->data[k], 4.0);
+    varargin_1 = u_data[k];
+    y_data[k] = rt_powd_snf(varargin_1, 4.0);
   }
-  d = 3.0 * rt_powd_snf(c->data[0], 4.0);
-  nx = rhoTB->size[0];
-  for (k = 0; k < nx; k++) {
-    rhoTB->data[k] = rhoTB->data[k] / 2.0 *
-                         ((1.0 - rhoTB->data[k] / c_tmp) + y->data[k] / d) *
-                         (double)w->data[k] +
-                     (1.0 - (double)w->data[k]) * b;
+  if (rhoTB->size[0] == 1) {
+    nx = y->size[0];
+  } else {
+    nx = rhoTB->size[0];
+  }
+  if (rhoTB->size[0] == 1) {
+    k = y->size[0];
+  } else {
+    k = rhoTB->size[0];
+  }
+  if (rhoTB->size[0] == 1) {
+    b_rhoTB = y->size[0];
+  } else {
+    b_rhoTB = rhoTB->size[0];
+  }
+  if (b_rhoTB == 1) {
+    b_rhoTB = w->size[0];
+  } else if (rhoTB->size[0] == 1) {
+    b_rhoTB = y->size[0];
+  } else {
+    b_rhoTB = rhoTB->size[0];
+  }
+  if ((rhoTB->size[0] == y->size[0]) && (rhoTB->size[0] == nx) &&
+      (k == w->size[0]) && (b_rhoTB == w->size[0])) {
+    varargin_1 = 3.0 * b_c;
+    nx = rhoTB->size[0];
+    for (k = 0; k < nx; k++) {
+      rhoTB_data[k] =
+          rhoTB_data[k] / 2.0 *
+              ((1.0 - rhoTB_data[k] / c_tmp) + y_data[k] / varargin_1) *
+              (double)w_data[k] +
+          (1.0 - (double)w_data[k]) * b;
+    }
+  } else {
+    qe_binary_expand_op(rhoTB, c_tmp, y, b_c, w, b);
   }
   emxFree_real_T(&y);
   emxFree_boolean_T(&w);
+}
+
+void af_binary_expand_op(struct_Sreg_T *out, double c,
+                         const emxArray_real_T *abc, double b_c,
+                         const emxArray_boolean_T *w, double b)
+{
+  emxArray_real_T *b_out;
+  const double *abc_data;
+  double d;
+  double *out_data;
+  int b_abc;
+  int i;
+  int stride_0_0;
+  int stride_1_0;
+  int stride_2_0;
+  int stride_3_0;
+  int stride_4_0;
+  const bool *w_data;
+  w_data = w->data;
+  abc_data = abc->data;
+  emxInit_real_T(&b_out, 1);
+  d = 3.0 * b_c;
+  i = b_out->size[0];
+  if (w->size[0] == 1) {
+    if (abc->size[0] == 1) {
+      b_abc = out->residuals->size[0];
+    } else {
+      b_abc = abc->size[0];
+    }
+    if (b_abc == 1) {
+      b_out->size[0] = out->residuals->size[0];
+    } else if (abc->size[0] == 1) {
+      b_out->size[0] = out->residuals->size[0];
+    } else {
+      b_out->size[0] = abc->size[0];
+    }
+  } else {
+    b_out->size[0] = w->size[0];
+  }
+  emxEnsureCapacity_real_T(b_out, i);
+  out_data = b_out->data;
+  stride_0_0 = (out->residuals->size[0] != 1);
+  stride_1_0 = (out->residuals->size[0] != 1);
+  stride_2_0 = (abc->size[0] != 1);
+  stride_3_0 = (w->size[0] != 1);
+  stride_4_0 = (w->size[0] != 1);
+  if (w->size[0] == 1) {
+    if (abc->size[0] == 1) {
+      b_abc = out->residuals->size[0];
+    } else {
+      b_abc = abc->size[0];
+    }
+    if (b_abc == 1) {
+      b_abc = out->residuals->size[0];
+    } else if (abc->size[0] == 1) {
+      b_abc = out->residuals->size[0];
+    } else {
+      b_abc = abc->size[0];
+    }
+  } else {
+    b_abc = w->size[0];
+  }
+  for (i = 0; i < b_abc; i++) {
+    out_data[i] = out->residuals->data[i * stride_0_0] / 2.0 *
+                      ((1.0 - out->residuals->data[i * stride_1_0] / c) +
+                       abc_data[i * stride_2_0] / d) *
+                      (double)w_data[i * stride_3_0] +
+                  (1.0 - (double)w_data[i * stride_4_0]) * b;
+  }
+  i = out->residuals->size[0];
+  out->residuals->size[0] = b_out->size[0];
+  emxEnsureCapacity_real_T(out->residuals, i);
+  b_abc = b_out->size[0];
+  for (i = 0; i < b_abc; i++) {
+    out->residuals->data[i] = out_data[i];
+  }
+  emxFree_real_T(&b_out);
+}
+
+void ne_binary_expand_op(j_struct_T *out, double c, const emxArray_real_T *abc,
+                         double b_c, const emxArray_boolean_T *w, double b)
+{
+  emxArray_real_T *b_out;
+  const double *abc_data;
+  double d;
+  double *out_data;
+  int b_abc;
+  int i;
+  int stride_0_0;
+  int stride_1_0;
+  int stride_2_0;
+  int stride_3_0;
+  int stride_4_0;
+  const bool *w_data;
+  w_data = w->data;
+  abc_data = abc->data;
+  emxInit_real_T(&b_out, 1);
+  d = 3.0 * b_c;
+  i = b_out->size[0];
+  if (w->size[0] == 1) {
+    if (abc->size[0] == 1) {
+      b_abc = out->residuals->size[0];
+    } else {
+      b_abc = abc->size[0];
+    }
+    if (b_abc == 1) {
+      b_out->size[0] = out->residuals->size[0];
+    } else if (abc->size[0] == 1) {
+      b_out->size[0] = out->residuals->size[0];
+    } else {
+      b_out->size[0] = abc->size[0];
+    }
+  } else {
+    b_out->size[0] = w->size[0];
+  }
+  emxEnsureCapacity_real_T(b_out, i);
+  out_data = b_out->data;
+  stride_0_0 = (out->residuals->size[0] != 1);
+  stride_1_0 = (out->residuals->size[0] != 1);
+  stride_2_0 = (abc->size[0] != 1);
+  stride_3_0 = (w->size[0] != 1);
+  stride_4_0 = (w->size[0] != 1);
+  if (w->size[0] == 1) {
+    if (abc->size[0] == 1) {
+      b_abc = out->residuals->size[0];
+    } else {
+      b_abc = abc->size[0];
+    }
+    if (b_abc == 1) {
+      b_abc = out->residuals->size[0];
+    } else if (abc->size[0] == 1) {
+      b_abc = out->residuals->size[0];
+    } else {
+      b_abc = abc->size[0];
+    }
+  } else {
+    b_abc = w->size[0];
+  }
+  for (i = 0; i < b_abc; i++) {
+    out_data[i] = out->residuals->data[i * stride_0_0] / 2.0 *
+                      ((1.0 - out->residuals->data[i * stride_1_0] / c) +
+                       abc_data[i * stride_2_0] / d) *
+                      (double)w_data[i * stride_3_0] +
+                  (1.0 - (double)w_data[i * stride_4_0]) * b;
+  }
+  i = out->residuals->size[0];
+  out->residuals->size[0] = b_out->size[0];
+  emxEnsureCapacity_real_T(out->residuals, i);
+  b_abc = b_out->size[0];
+  for (i = 0; i < b_abc; i++) {
+    out->residuals->data[i] = out_data[i];
+  }
+  emxFree_real_T(&b_out);
+}
+
+void qe_binary_expand_op(emxArray_real_T *x, double c,
+                         const emxArray_real_T *outIRWLS_betarw, double b_c,
+                         const emxArray_boolean_T *w, double b)
+{
+  emxArray_real_T *b_x;
+  const double *outIRWLS_betarw_data;
+  double d;
+  double *b_x_data;
+  double *x_data;
+  int b_outIRWLS_betarw;
+  int i;
+  int stride_0_0;
+  int stride_1_0;
+  int stride_2_0;
+  int stride_3_0;
+  int stride_4_0;
+  const bool *w_data;
+  w_data = w->data;
+  outIRWLS_betarw_data = outIRWLS_betarw->data;
+  x_data = x->data;
+  emxInit_real_T(&b_x, 1);
+  d = 3.0 * b_c;
+  i = b_x->size[0];
+  if (w->size[0] == 1) {
+    if (outIRWLS_betarw->size[0] == 1) {
+      b_outIRWLS_betarw = x->size[0];
+    } else {
+      b_outIRWLS_betarw = outIRWLS_betarw->size[0];
+    }
+    if (b_outIRWLS_betarw == 1) {
+      b_x->size[0] = x->size[0];
+    } else if (outIRWLS_betarw->size[0] == 1) {
+      b_x->size[0] = x->size[0];
+    } else {
+      b_x->size[0] = outIRWLS_betarw->size[0];
+    }
+  } else {
+    b_x->size[0] = w->size[0];
+  }
+  emxEnsureCapacity_real_T(b_x, i);
+  b_x_data = b_x->data;
+  stride_0_0 = (x->size[0] != 1);
+  stride_1_0 = (x->size[0] != 1);
+  stride_2_0 = (outIRWLS_betarw->size[0] != 1);
+  stride_3_0 = (w->size[0] != 1);
+  stride_4_0 = (w->size[0] != 1);
+  if (w->size[0] == 1) {
+    if (outIRWLS_betarw->size[0] == 1) {
+      b_outIRWLS_betarw = x->size[0];
+    } else {
+      b_outIRWLS_betarw = outIRWLS_betarw->size[0];
+    }
+    if (b_outIRWLS_betarw == 1) {
+      b_outIRWLS_betarw = x->size[0];
+    } else if (outIRWLS_betarw->size[0] == 1) {
+      b_outIRWLS_betarw = x->size[0];
+    } else {
+      b_outIRWLS_betarw = outIRWLS_betarw->size[0];
+    }
+  } else {
+    b_outIRWLS_betarw = w->size[0];
+  }
+  for (i = 0; i < b_outIRWLS_betarw; i++) {
+    b_x_data[i] = x_data[i * stride_0_0] / 2.0 *
+                      ((1.0 - x_data[i * stride_1_0] / c) +
+                       outIRWLS_betarw_data[i * stride_2_0] / d) *
+                      (double)w_data[i * stride_3_0] +
+                  (1.0 - (double)w_data[i * stride_4_0]) * b;
+  }
+  i = x->size[0];
+  x->size[0] = b_x->size[0];
+  emxEnsureCapacity_real_T(x, i);
+  x_data = x->data;
+  b_outIRWLS_betarw = b_x->size[0];
+  for (i = 0; i < b_outIRWLS_betarw; i++) {
+    x_data[i] = b_x_data[i];
+  }
+  emxFree_real_T(&b_x);
 }
 
 /* End of code generation (TBrho.c) */

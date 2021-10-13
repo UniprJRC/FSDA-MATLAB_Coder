@@ -11,14 +11,22 @@
 
 /* Include files */
 #include "FSR_wrapper1.h"
+#include "FSR.h"
 #include "FSRcore.h"
 #include "FSRmdr.h"
+#include "cat.h"
 #include "chkinputR.h"
-#include "colon.h"
+#include "find.h"
 #include "fsdaC_data.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_initialize.h"
+#include "fsdaC_internal_types.h"
+#include "fsdaC_rtwutil.h"
 #include "fsdaC_types.h"
+#include "int2str.h"
+#include "minOrMax.h"
+#include "nullAssignment.h"
+#include "rank.h"
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 #include <math.h>
@@ -32,7 +40,17 @@ void FSR_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
                   bool nocheck, double nsamp, const double threshoutX_data[],
                   const int threshoutX_size[2], bool weak, struct_FSR_T *out)
 {
+  emxArray_boolean_T *c_constcols;
+  emxArray_boolean_T *ok;
+  emxArray_boolean_T *r;
+  emxArray_boolean_T *r2;
+  emxArray_boolean_T *r4;
   emxArray_boolean_T *x;
+  emxArray_char_T_1x310 d_X;
+  emxArray_int32_T *b_constcols;
+  emxArray_int32_T *iniseq;
+  emxArray_int32_T *r6;
+  emxArray_int32_T *r7;
   emxArray_real_T *Bols;
   emxArray_real_T *INP_S2;
   emxArray_real_T *S2;
@@ -40,32 +58,44 @@ void FSR_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
   emxArray_real_T *b_X;
   emxArray_real_T *b_lms;
   emxArray_real_T *b_y;
-  emxArray_real_T *bb;
   emxArray_real_T *bsbstepdef;
-  emxArray_real_T *c_y;
+  emxArray_real_T *c_X;
+  emxArray_real_T *constcols;
   emxArray_real_T *fittedvalues;
-  emxArray_real_T *iniseq;
   emxArray_real_T *mdr;
+  emxArray_real_T *r8;
   struct_T expl_temp;
-  double b;
+  const double *X_data;
+  const double *y_data;
   double b_init;
   double initdef;
-  double n;
   double threshlevoutX_data;
-  double varsize;
+  double *b_X_data;
+  double *b_y_data;
+  double *constcols_data;
+  double *fittedvalues_data;
   int threshlevoutX_size[2];
   int aoffset;
+  unsigned int b;
   int i;
   int k;
-  int partialTrueCount;
-  int trueCount;
-  bool d_y;
+  int loop_ub;
+  int p;
+  int varsize;
+  int *iniseq_data;
+  bool c_y;
+  bool *ok_data;
+  bool *r1;
+  bool *r3;
+  bool *r5;
   (void)h;
   (void)nsamp;
   if (!isInitialized_fsdaC) {
     fsdaC_initialize();
   }
-  emxInit_real_T(&b_y, 1);
+  X_data = X->data;
+  y_data = y->data;
+  emxInit_real_T(&b_X, 2);
   /*  Required input arguments */
   /*  y: a column vector of doubles of any length */
   /*  X: an array of doubles of any dimension */
@@ -154,7 +184,6 @@ void FSR_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                Example - 'bonflev',0.99 */
   /*                Data Types - double */
   /*  */
-  /*  */
   /*            h   : The number of observations that have determined the least
    */
   /*                  trimmed squares estimator. Scalar. h is an integer */
@@ -188,7 +217,6 @@ void FSR_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                  the constant term from the model. */
   /*                  Example - 'intercept',false */
   /*                  Data Types - boolean */
-  /*  */
   /*  */
   /*        lms     : Criterion to use to find the initial */
   /*                  subset to initialize the search. Scalar,  vector or
@@ -228,7 +256,6 @@ void FSR_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                  Example - 'lms',1 */
   /*                  Data Types - double */
   /*  */
-  /*  */
   /*        msg    :  Level of output to display. Boolean. It controls whether
    */
   /*                  to display or not messages on the screen */
@@ -238,7 +265,6 @@ void FSR_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                  else no message is displayed on the screen. */
   /*                Example - 'msg',false */
   /*                Data Types - logical */
-  /*  */
   /*  */
   /*        nocheck : Check input arguments. Boolean. If nocheck is equal to */
   /*                  true no check is performed on matrix y and matrix X. */
@@ -386,7 +412,6 @@ void FSR_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                Example - 'multivarfit','1' */
   /*                Data Types - char */
   /*  */
-  /*  */
   /*        nameX  : Add variable labels in plot. Cell array of strings. Cell */
   /*                  array of strings of length p containing the labels of */
   /*                  the variables of the regression dataset. If it is empty */
@@ -444,7 +469,6 @@ void FSR_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
   /*                max to 10 on the y axis */
   /*                Data Types - double */
   /*  */
-  /*  */
   /*  Output: */
   /*  */
   /*          out:   structure which contains the following fields */
@@ -495,8 +519,6 @@ void FSR_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('FSR')">Link to the help page for this
    * function</a> */
@@ -696,23 +718,334 @@ void FSR_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
   /* } */
   /*  Beginning of code */
   /*  Input parameters checking */
-  k = b_y->size[0];
-  b_y->size[0] = y->size[0];
-  emxEnsureCapacity_real_T(b_y, k);
-  aoffset = y->size[0];
-  for (k = 0; k < aoffset; k++) {
-    b_y->data[k] = y->data[k];
-  }
-  emxInit_real_T(&b_X, 2);
-  k = b_X->size[0] * b_X->size[1];
+  i = b_X->size[0] * b_X->size[1];
   b_X->size[0] = X->size[0];
   b_X->size[1] = X->size[1];
-  emxEnsureCapacity_real_T(b_X, k);
-  aoffset = X->size[0] * X->size[1];
-  for (k = 0; k < aoffset; k++) {
-    b_X->data[k] = X->data[k];
+  emxEnsureCapacity_real_T(b_X, i);
+  b_X_data = b_X->data;
+  loop_ub = X->size[0] * X->size[1];
+  for (i = 0; i < loop_ub; i++) {
+    b_X_data[i] = X_data[i];
   }
-  chkinputR(b_y, b_X, intercept, nocheck, &n, &varsize);
+  emxInit_real_T(&b_y, 1);
+  i = b_y->size[0];
+  b_y->size[0] = y->size[0];
+  emxEnsureCapacity_real_T(b_y, i);
+  b_y_data = b_y->data;
+  loop_ub = y->size[0];
+  for (i = 0; i < loop_ub; i++) {
+    b_y_data[i] = y_data[i];
+  }
+  /* chkinputR makes some input parameters and user options checking in
+   * regression */
+  /*  */
+  /*  Required input arguments: */
+  /*  */
+  /*  y:            Response variable. Vector. */
+  /*                A vector with n elements that contains the response */
+  /*                variables, possibly with missing values (NaN's) and */
+  /*                infinite values (Inf's). */
+  /*  X :           Predictor variables. Matrix. */
+  /*                Data matrix of explanatory variables (also called */
+  /*                'regressors') of dimension (n x p-1), possibly with missing
+   */
+  /*                values (NaN's) and infinite values (Inf's). Rows of X */
+  /*                represent observations, and columns represent variables. */
+  /*  nnargin:      nargin. Scalar. The number of input arguments specified for
+   * the caller */
+  /*                function. */
+  /*  vvarargin:    nvarargin. Scalar. The variable length input argument list
+   */
+  /*                specified for the */
+  /*                caller function. */
+  /*  */
+  /*   Optional input arguments: */
+  /*  */
+  /*  Output: */
+  /*  */
+  /*  y:            response without missing and infs. Vector. The new response
+   * variable, with observations (rows) with */
+  /*                missing or infinite values excluded. */
+  /*  X:            Predictor variables without infs and missings. Matrix. */
+  /*                The new matrix of explanatory variables, with missing or */
+  /*                infinite values excluded. */
+  /*  n:            Number of rows of X (observations). Scalar.  Number of */
+  /*                rows after listwise exclusion. */
+  /*  p:            Number of columns of X (variables). Scalar. */
+  /*                Number of parameters to be estimated. */
+  /*  */
+  /*  More About: */
+  /*  */
+  /*  This routines preforms the following operations: */
+  /*  1) If y is a row vector it is transformed in a column vector; */
+  /*  2) Checks that X is a matrix that has not more than two dimensions; */
+  /*  3) Checks dimension consistency of X and y; */
+  /*  4) Removes observations with missing or infinite values from X or y */
+  /*  (listwise exclusion); */
+  /*  5) Adds to matrix X a column of ones if option intercept is 1; */
+  /*  6) Checks if there are constant columns in matrix X. In other words, if */
+  /*  Xj is a generic column of X (excluding the column which contains the */
+  /*  intercept) it removes it if max(Xj)=min(Xj) and produces a warning. */
+  /*  7) Computes final values of n and p after previous operations; */
+  /*  8) Makes sure than n>=p; */
+  /*  9) Makes sure that new X is full rank */
+  /*  */
+  /*  See also chkinputRB */
+  /*  */
+  /*  Copyright 2008-2021. */
+  /*  Written by FSDA team */
+  /*  */
+  /* $LastChangedDate::                      $: Date of the last commit */
+  /*  */
+  /*  Example: */
+  /* { */
+  /*  example_producing_error */
+  /*     %To examplify the behaviour of chkinputR, we call function FSR without
+   * a */
+  /*     %compulsory parameter ('y'). */
+  /*     n=200; */
+  /*     p=3; */
+  /*     state1=123498; */
+  /*     randn('state', state1); */
+  /*     X=randn(n,p); */
+  /*     [out]=FSR(X); */
+  /* } */
+  /*  Beginning of code */
+  /*  chklist is the vector containing the names of optional arguments */
+  /*  chkchk is the position of the option nocheck in vector chklist */
+  /*  chkchk = strmatch('nocheck',chklist,'exact'); */
+  /*  chkint is the position of the option intercept in vector chklist */
+  /*  chkint = strmatch('intercept',chklist,'exact'); */
+  /*  If nocheck=true, then skip checks on y and X */
+  emxInit_real_T(&fittedvalues, 1);
+  emxInit_real_T(&constcols, 2);
+  constcols_data = constcols->data;
+  emxInit_real_T(&c_X, 2);
+  if (nocheck) {
+    p = X->size[1];
+    k = X->size[0];
+  } else {
+    /*  The first argument which is passed is y */
+    /*  The second argument which is passed is X */
+    /*  Check dimension consistency of X and y */
+    varsize = X->size[0] - 1;
+    loop_ub = X->size[1];
+    i = b_y->size[0];
+    b_y->size[0] = X->size[0];
+    emxEnsureCapacity_real_T(b_y, i);
+    b_y_data = b_y->data;
+    for (i = 0; i <= varsize; i++) {
+      b_y_data[i] = 0.0;
+    }
+    for (k = 0; k < loop_ub; k++) {
+      aoffset = k * X->size[0];
+      for (i = 0; i <= varsize; i++) {
+        b_y_data[i] += X_data[aoffset + i];
+      }
+    }
+    emxInit_boolean_T(&ok, 1);
+    /*  Observations with missing or infinite values are removed from X and y */
+    i = ok->size[0];
+    ok->size[0] = b_y->size[0];
+    emxEnsureCapacity_boolean_T(ok, i);
+    ok_data = ok->data;
+    loop_ub = b_y->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      ok_data[i] = rtIsInf(b_y_data[i]);
+    }
+    emxInit_boolean_T(&r, 1);
+    i = r->size[0];
+    r->size[0] = b_y->size[0];
+    emxEnsureCapacity_boolean_T(r, i);
+    r1 = r->data;
+    loop_ub = b_y->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      r1[i] = rtIsNaN(b_y_data[i]);
+    }
+    emxInit_boolean_T(&r2, 1);
+    i = r2->size[0];
+    r2->size[0] = y->size[0];
+    emxEnsureCapacity_boolean_T(r2, i);
+    r3 = r2->data;
+    loop_ub = y->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      r3[i] = rtIsInf(y_data[i]);
+    }
+    emxInit_boolean_T(&r4, 1);
+    i = r4->size[0];
+    r4->size[0] = y->size[0];
+    emxEnsureCapacity_boolean_T(r4, i);
+    r5 = r4->data;
+    loop_ub = y->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      r5[i] = rtIsNaN(y_data[i]);
+    }
+    if (ok->size[0] == r2->size[0]) {
+      loop_ub = ok->size[0];
+      for (i = 0; i < loop_ub; i++) {
+        ok_data[i] = ((!ok_data[i]) && (!r1[i]) && ((!r3[i]) && (!r5[i])));
+      }
+    } else {
+      ib_binary_expand_op(ok, r, r2, r4);
+      ok_data = ok->data;
+    }
+    emxFree_boolean_T(&r4);
+    emxFree_boolean_T(&r2);
+    emxFree_boolean_T(&r);
+    aoffset = ok->size[0] - 1;
+    loop_ub = 0;
+    for (i = 0; i <= aoffset; i++) {
+      if (ok_data[i]) {
+        loop_ub++;
+      }
+    }
+    emxInit_int32_T(&r6, 1);
+    i = r6->size[0];
+    r6->size[0] = loop_ub;
+    emxEnsureCapacity_int32_T(r6, i);
+    iniseq_data = r6->data;
+    varsize = 0;
+    for (i = 0; i <= aoffset; i++) {
+      if (ok_data[i]) {
+        iniseq_data[varsize] = i + 1;
+        varsize++;
+      }
+    }
+    loop_ub = X->size[1];
+    i = b_X->size[0] * b_X->size[1];
+    b_X->size[0] = r6->size[0];
+    b_X->size[1] = X->size[1];
+    emxEnsureCapacity_real_T(b_X, i);
+    b_X_data = b_X->data;
+    for (i = 0; i < loop_ub; i++) {
+      aoffset = r6->size[0];
+      for (varsize = 0; varsize < aoffset; varsize++) {
+        b_X_data[varsize + b_X->size[0] * i] =
+            X_data[(iniseq_data[varsize] + X->size[0] * i) - 1];
+      }
+    }
+    emxFree_int32_T(&r6);
+    aoffset = ok->size[0] - 1;
+    loop_ub = 0;
+    for (i = 0; i <= aoffset; i++) {
+      if (ok_data[i]) {
+        loop_ub++;
+      }
+    }
+    emxInit_int32_T(&r7, 1);
+    i = r7->size[0];
+    r7->size[0] = loop_ub;
+    emxEnsureCapacity_int32_T(r7, i);
+    iniseq_data = r7->data;
+    varsize = 0;
+    for (i = 0; i <= aoffset; i++) {
+      if (ok_data[i]) {
+        iniseq_data[varsize] = i + 1;
+        varsize++;
+      }
+    }
+    emxFree_boolean_T(&ok);
+    i = b_y->size[0];
+    b_y->size[0] = r7->size[0];
+    emxEnsureCapacity_real_T(b_y, i);
+    b_y_data = b_y->data;
+    loop_ub = r7->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      b_y_data[i] = y_data[iniseq_data[i] - 1];
+    }
+    /*  Now n is the new number of non missing observations */
+    k = r7->size[0];
+    /*  Now add to matrix X a column of ones for the intercept. */
+    /*  If a value for the intercept has not been specified or if this value is
+     */
+    /*  equal to 1, add to matrix X the column of ones. The position of */
+    /*  the option intercept in chklist, which contains the optional is */
+    /*  given in chkint. chkint is empty if the option intercept is not */
+    /*  specified. */
+    /* if coder.target('MATLAB') */
+    /* else */
+    /*     interceptPresent=vvarargin{2*chkint}==true; */
+    /* end */
+    if (intercept) {
+      i = fittedvalues->size[0];
+      fittedvalues->size[0] = r7->size[0];
+      emxEnsureCapacity_real_T(fittedvalues, i);
+      fittedvalues_data = fittedvalues->data;
+      loop_ub = r7->size[0];
+      for (i = 0; i < loop_ub; i++) {
+        fittedvalues_data[i] = 1.0;
+      }
+      i = c_X->size[0] * c_X->size[1];
+      c_X->size[0] = b_X->size[0];
+      c_X->size[1] = b_X->size[1];
+      emxEnsureCapacity_real_T(c_X, i);
+      fittedvalues_data = c_X->data;
+      loop_ub = b_X->size[0] * b_X->size[1] - 1;
+      for (i = 0; i <= loop_ub; i++) {
+        fittedvalues_data[i] = b_X_data[i];
+      }
+      b_cat(fittedvalues, c_X, b_X);
+      b_X_data = b_X->data;
+    }
+    emxInit_real_T(&r8, 2);
+    /*  constcols = scalar vector of the indices of possible constant columns.
+     */
+    maximum(b_X, constcols);
+    constcols_data = constcols->data;
+    minimum(b_X, r8);
+    fittedvalues_data = r8->data;
+    emxInit_int32_T(&b_constcols, 2);
+    if (constcols->size[1] == r8->size[1]) {
+      emxInit_boolean_T(&c_constcols, 2);
+      i = c_constcols->size[0] * c_constcols->size[1];
+      c_constcols->size[0] = 1;
+      c_constcols->size[1] = constcols->size[1];
+      emxEnsureCapacity_boolean_T(c_constcols, i);
+      ok_data = c_constcols->data;
+      loop_ub = constcols->size[1];
+      for (i = 0; i < loop_ub; i++) {
+        ok_data[i] = (constcols_data[i] - fittedvalues_data[i] == 0.0);
+      }
+      eml_find(c_constcols, b_constcols);
+      iniseq_data = b_constcols->data;
+      emxFree_boolean_T(&c_constcols);
+    } else {
+      hb_binary_expand_op(b_constcols, constcols, r8);
+      iniseq_data = b_constcols->data;
+    }
+    emxFree_real_T(&r8);
+    i = constcols->size[0] * constcols->size[1];
+    constcols->size[0] = 1;
+    constcols->size[1] = b_constcols->size[1];
+    emxEnsureCapacity_real_T(constcols, i);
+    constcols_data = constcols->data;
+    loop_ub = b_constcols->size[1];
+    for (i = 0; i < loop_ub; i++) {
+      constcols_data[i] = iniseq_data[i];
+    }
+    if (constcols->size[1] > 1) {
+      loop_ub = constcols->size[1] - 2;
+      i = b_constcols->size[0] * b_constcols->size[1];
+      b_constcols->size[0] = 1;
+      b_constcols->size[1] = constcols->size[1] - 1;
+      emxEnsureCapacity_int32_T(b_constcols, i);
+      iniseq_data = b_constcols->data;
+      for (i = 0; i <= loop_ub; i++) {
+        iniseq_data[i] = (int)constcols_data[i + 1];
+      }
+      nullAssignment(b_X, b_constcols);
+      b_X_data = b_X->data;
+    }
+    emxFree_int32_T(&b_constcols);
+    /*  p is the number of parameters to be estimated */
+    p = b_X->size[1];
+    if (r7->size[0] < b_X->size[1]) {
+      int2str(b_X->size[0], d_X.data, d_X.size);
+      int2str(b_X->size[1], d_X.data, d_X.size);
+    }
+    emxFree_int32_T(&r7);
+    local_rank(b_X);
+  }
   /*  User options */
   /*  If the number of all possible subsets is <1000 the default is to extract
    */
@@ -730,113 +1063,94 @@ void FSR_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
     threshlevoutX_size[1] = 0;
   } else {
     emxInit_boolean_T(&x, 2);
-    k = x->size[0] * x->size[1];
+    i = x->size[0] * x->size[1];
     x->size[0] = 1;
     x->size[1] = 1;
-    emxEnsureCapacity_boolean_T(x, k);
-    x->data[0] = (threshoutX_data[0] == 1.0);
-    d_y = true;
-    if (!x->data[0]) {
-      d_y = false;
-    }
+    emxEnsureCapacity_boolean_T(x, i);
+    ok_data = x->data;
+    ok_data[0] = (threshoutX_data[0] == 1.0);
+    c_y = (int)ok_data[0];
     emxFree_boolean_T(&x);
-    if (d_y) {
+    if (c_y) {
       threshlevoutX_size[0] = 1;
       threshlevoutX_size[1] = 1;
       threshlevoutX_data = 10.0;
     }
   }
-  emxInit_real_T(&c_y, 2);
   /*  Necessary for MATLAb C Coder initialization */
   /*  Initialize constr as a column vector of variable size whose elements */
   /*  are greater than n is such a way that no unit is constrained to enter the
    * final steps */
-  b = 2.0 * n;
-  if (rtIsNaN(n + 1.0) || rtIsNaN(b)) {
-    k = c_y->size[0] * c_y->size[1];
-    c_y->size[0] = 1;
-    c_y->size[1] = 1;
-    emxEnsureCapacity_real_T(c_y, k);
-    c_y->data[0] = rtNaN;
-  } else if (b < n + 1.0) {
-    c_y->size[0] = 1;
-    c_y->size[1] = 0;
-  } else if ((rtIsInf(n + 1.0) || rtIsInf(b)) && (n + 1.0 == b)) {
-    k = c_y->size[0] * c_y->size[1];
-    c_y->size[0] = 1;
-    c_y->size[1] = 1;
-    emxEnsureCapacity_real_T(c_y, k);
-    c_y->data[0] = rtNaN;
-  } else if (floor(n + 1.0) == n + 1.0) {
-    k = c_y->size[0] * c_y->size[1];
-    c_y->size[0] = 1;
-    aoffset = (int)floor(b - (n + 1.0));
-    c_y->size[1] = aoffset + 1;
-    emxEnsureCapacity_real_T(c_y, k);
-    for (k = 0; k <= aoffset; k++) {
-      c_y->data[k] = (n + 1.0) + (double)k;
+  b = (unsigned int)k << 1;
+  if (b < k + 1U) {
+    constcols->size[0] = 1;
+    constcols->size[1] = 0;
+  } else {
+    i = constcols->size[0] * constcols->size[1];
+    constcols->size[0] = 1;
+    varsize = (int)b - k;
+    constcols->size[1] = varsize;
+    emxEnsureCapacity_real_T(constcols, i);
+    constcols_data = constcols->data;
+    loop_ub = varsize - 1;
+    for (i = 0; i <= loop_ub; i++) {
+      constcols_data[i] = ((unsigned int)k + i) + 1U;
     }
-  } else {
-    eml_float_colon(n + 1.0, b, c_y);
   }
-  if (n < 40.0) {
-    initdef = varsize + 1.0;
+  if (k < 40) {
+    initdef = (double)p + 1.0;
   } else {
-    initdef = fmin(3.0 * varsize + 1.0, floor(0.5 * ((n + varsize) + 1.0)));
+    initdef = fmin(3.0 * (double)p + 1.0,
+                   floor(0.5 * (((double)k + (double)p) + 1.0)));
   }
   emxInit_real_T(&bsbstepdef, 2);
-  if (n <= 5000.0) {
-    k = bsbstepdef->size[0] * bsbstepdef->size[1];
+  if (k <= 5000) {
+    i = bsbstepdef->size[0] * bsbstepdef->size[1];
     bsbstepdef->size[0] = 1;
     bsbstepdef->size[1] = 1;
-    emxEnsureCapacity_real_T(bsbstepdef, k);
-    bsbstepdef->data[0] = 0.0;
+    emxEnsureCapacity_real_T(bsbstepdef, i);
+    fittedvalues_data = bsbstepdef->data;
+    fittedvalues_data[0] = 0.0;
   } else {
-    b = 100.0 * floor(n / 100.0);
-    emxInit_real_T(&iniseq, 2);
-    if (rtIsNaN(b)) {
-      k = iniseq->size[0] * iniseq->size[1];
-      iniseq->size[0] = 1;
-      iniseq->size[1] = 1;
-      emxEnsureCapacity_real_T(iniseq, k);
-      iniseq->data[0] = rtNaN;
-    } else {
-      k = iniseq->size[0] * iniseq->size[1];
-      iniseq->size[0] = 1;
-      aoffset = (int)floor((b - 100.0) / 100.0);
-      iniseq->size[1] = aoffset + 1;
-      emxEnsureCapacity_real_T(iniseq, k);
-      for (k = 0; k <= aoffset; k++) {
-        iniseq->data[k] = 100.0 * (double)k + 100.0;
-      }
+    emxInit_int32_T(&iniseq, 2);
+    i = iniseq->size[0] * iniseq->size[1];
+    iniseq->size[0] = 1;
+    loop_ub = div_nde_s32_floor(100 * (int)floor((double)k / 100.0) - 100, 100);
+    iniseq->size[1] = loop_ub + 1;
+    emxEnsureCapacity_int32_T(iniseq, i);
+    iniseq_data = iniseq->data;
+    for (i = 0; i <= loop_ub; i++) {
+      iniseq_data[i] = 100 * i + 100;
     }
     aoffset = iniseq->size[1] - 1;
-    trueCount = 0;
+    loop_ub = 0;
     for (i = 0; i <= aoffset; i++) {
-      if (iniseq->data[i] > initdef) {
-        trueCount++;
+      if (iniseq_data[i] > initdef) {
+        loop_ub++;
       }
     }
-    partialTrueCount = 0;
+    varsize = 0;
     for (i = 0; i <= aoffset; i++) {
-      if (iniseq->data[i] > initdef) {
-        iniseq->data[partialTrueCount] = iniseq->data[i];
-        partialTrueCount++;
+      if (iniseq_data[i] > initdef) {
+        iniseq_data[varsize] = iniseq_data[i];
+        varsize++;
       }
     }
-    k = iniseq->size[0] * iniseq->size[1];
+    i = iniseq->size[0] * iniseq->size[1];
     iniseq->size[0] = 1;
-    iniseq->size[1] = trueCount;
-    emxEnsureCapacity_real_T(iniseq, k);
-    k = bsbstepdef->size[0] * bsbstepdef->size[1];
+    iniseq->size[1] = loop_ub;
+    emxEnsureCapacity_int32_T(iniseq, i);
+    iniseq_data = iniseq->data;
+    i = bsbstepdef->size[0] * bsbstepdef->size[1];
     bsbstepdef->size[0] = 1;
-    bsbstepdef->size[1] = trueCount + 1;
-    emxEnsureCapacity_real_T(bsbstepdef, k);
-    bsbstepdef->data[0] = initdef;
-    for (k = 0; k < trueCount; k++) {
-      bsbstepdef->data[k + 1] = iniseq->data[k];
+    bsbstepdef->size[1] = loop_ub + 1;
+    emxEnsureCapacity_real_T(bsbstepdef, i);
+    fittedvalues_data = bsbstepdef->data;
+    fittedvalues_data[0] = initdef;
+    for (i = 0; i < loop_ub; i++) {
+      fittedvalues_data[i + 1] = iniseq_data[i];
     }
-    emxFree_real_T(&iniseq);
+    emxFree_int32_T(&iniseq);
   }
   /*  Matlab C Coder initializations. */
   /*  Start of the forward search */
@@ -847,32 +1161,34 @@ void FSR_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
   if (init < lms->bsb->size[0]) {
     b_init = lms->bsb->size[0];
   }
-  emxInit_real_T(&fittedvalues, 1);
   /*  Compute Minimum Deletion Residual for each step of the search */
-  k = fittedvalues->size[0];
-  fittedvalues->size[0] = c_y->size[1];
-  emxEnsureCapacity_real_T(fittedvalues, k);
-  aoffset = c_y->size[1];
-  for (k = 0; k < aoffset; k++) {
-    fittedvalues->data[k] = c_y->data[k];
+  i = fittedvalues->size[0];
+  fittedvalues->size[0] = constcols->size[1];
+  emxEnsureCapacity_real_T(fittedvalues, i);
+  fittedvalues_data = fittedvalues->data;
+  loop_ub = constcols->size[1];
+  for (i = 0; i < loop_ub; i++) {
+    fittedvalues_data[i] = constcols_data[i];
   }
-  emxFree_real_T(&c_y);
+  emxFree_real_T(&constcols);
   emxInit_real_T(&b_lms, 1);
-  k = b_lms->size[0];
+  i = b_lms->size[0];
   b_lms->size[0] = lms->bsb->size[0];
-  emxEnsureCapacity_real_T(b_lms, k);
-  aoffset = lms->bsb->size[0] - 1;
-  for (k = 0; k <= aoffset; k++) {
-    b_lms->data[k] = lms->bsb->data[k];
+  emxEnsureCapacity_real_T(b_lms, i);
+  fittedvalues_data = b_lms->data;
+  loop_ub = lms->bsb->size[0] - 1;
+  for (i = 0; i <= loop_ub; i++) {
+    fittedvalues_data[i] = lms->bsb->data[i];
   }
   emxInit_real_T(&mdr, 2);
   emxInit_real_T(&Un, 2);
-  emxInit_real_T(&bb, 2);
   emxInit_real_T(&Bols, 2);
   emxInit_real_T(&S2, 2);
   FSRmdr(b_y, b_X, b_lms, b_init, msg, fittedvalues, bsbmfullrank,
          (double *)&threshlevoutX_data, threshlevoutX_size, bsbstepdef, mdr, Un,
-         bb, Bols, S2);
+         c_X, Bols, S2);
+  constcols_data = S2->data;
+  fittedvalues_data = mdr->data;
   emxFree_real_T(&b_lms);
   emxFree_real_T(&bsbstepdef);
   if (mdr->size[1] < 2) {
@@ -880,73 +1196,72 @@ void FSR_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
     /*  produced a singular matrix or NaN if the initial subset was not full
      * rank. */
     /*  ListOut  = setdiff(seq,mdr(:,1))'; */
-    aoffset = mdr->size[0];
-    k = out->ListOut->size[0] * out->ListOut->size[1];
+    loop_ub = mdr->size[0];
+    i = out->ListOut->size[0] * out->ListOut->size[1];
     out->ListOut->size[0] = 1;
     out->ListOut->size[1] = mdr->size[0];
-    emxEnsureCapacity_real_T(out->ListOut, k);
-    for (k = 0; k < aoffset; k++) {
-      out->ListOut->data[k] = mdr->data[k];
+    emxEnsureCapacity_real_T(out->ListOut, i);
+    for (i = 0; i < loop_ub; i++) {
+      out->ListOut->data[i] = fittedvalues_data[i];
     }
-    varsize = ceil(n / 1.0E+6);
-    k = out->outliers->size[0] * out->outliers->size[1];
+    varsize = (int)ceil((double)k / 1.0E+6);
+    i = out->outliers->size[0] * out->outliers->size[1];
     out->outliers->size[0] = 1;
-    partialTrueCount = (int)ceil(n / 1.0E+6);
-    out->outliers->size[1] = (int)varsize;
-    emxEnsureCapacity_real_T(out->outliers, k);
-    for (k = 0; k < partialTrueCount; k++) {
-      out->outliers->data[k] = rtNaN;
+    out->outliers->size[1] = varsize;
+    emxEnsureCapacity_real_T(out->outliers, i);
+    for (i = 0; i < varsize; i++) {
+      out->outliers->data[i] = rtNaN;
     }
-    k = out->mdr->size[0] * out->mdr->size[1];
+    i = out->mdr->size[0] * out->mdr->size[1];
     out->mdr->size[0] = 1;
-    out->mdr->size[1] = (int)varsize;
-    emxEnsureCapacity_real_T(out->mdr, k);
-    for (k = 0; k < partialTrueCount; k++) {
-      out->mdr->data[k] = rtNaN;
+    out->mdr->size[1] = varsize;
+    emxEnsureCapacity_real_T(out->mdr, i);
+    for (i = 0; i < varsize; i++) {
+      out->mdr->data[i] = rtNaN;
     }
-    k = out->Un->size[0] * out->Un->size[1];
-    out->Un->size[0] = (int)varsize;
+    i = out->Un->size[0] * out->Un->size[1];
+    out->Un->size[0] = varsize;
     out->Un->size[1] = 11;
-    emxEnsureCapacity_real_T(out->Un, k);
-    aoffset = (int)varsize * 11;
-    for (k = 0; k < aoffset; k++) {
-      out->Un->data[k] = rtNaN;
+    emxEnsureCapacity_real_T(out->Un, i);
+    loop_ub = varsize * 11;
+    for (i = 0; i < loop_ub; i++) {
+      out->Un->data[i] = rtNaN;
     }
-    k = out->nout->size[0] * out->nout->size[1];
-    out->nout->size[0] = (int)varsize;
-    out->nout->size[1] = (int)varsize;
-    emxEnsureCapacity_real_T(out->nout, k);
-    aoffset = (int)varsize * (int)varsize;
-    for (k = 0; k < aoffset; k++) {
-      out->nout->data[k] = rtNaN;
+    i = out->nout->size[0] * out->nout->size[1];
+    out->nout->size[0] = varsize;
+    out->nout->size[1] = varsize;
+    emxEnsureCapacity_real_T(out->nout, i);
+    aoffset = varsize * varsize;
+    for (i = 0; i < aoffset; i++) {
+      out->nout->data[i] = rtNaN;
     }
-    k = out->beta->size[0];
-    out->beta->size[0] = (int)varsize;
-    emxEnsureCapacity_real_T(out->beta, k);
-    for (k = 0; k < partialTrueCount; k++) {
-      out->beta->data[k] = rtNaN;
+    i = out->beta->size[0];
+    out->beta->size[0] = varsize;
+    emxEnsureCapacity_real_T(out->beta, i);
+    for (i = 0; i < varsize; i++) {
+      out->beta->data[i] = rtNaN;
     }
     out->scale = rtNaN;
-    k = out->mdag->size[0] * out->mdag->size[1];
-    out->mdag->size[0] = (int)varsize;
-    out->mdag->size[1] = (int)varsize;
-    emxEnsureCapacity_real_T(out->mdag, k);
-    for (k = 0; k < aoffset; k++) {
-      out->mdag->data[k] = rtNaN;
+    i = out->mdag->size[0] * out->mdag->size[1];
+    out->mdag->size[0] = varsize;
+    out->mdag->size[1] = varsize;
+    emxEnsureCapacity_real_T(out->mdag, i);
+    for (i = 0; i < aoffset; i++) {
+      out->mdag->data[i] = rtNaN;
     }
-    k = out->ListCl->size[0] * out->ListCl->size[1];
+    i = out->ListCl->size[0] * out->ListCl->size[1];
     out->ListCl->size[0] = 1;
-    out->ListCl->size[1] = (int)varsize;
-    emxEnsureCapacity_real_T(out->ListCl, k);
-    for (k = 0; k < partialTrueCount; k++) {
-      out->ListCl->data[k] = rtNaN;
+    out->ListCl->size[1] = varsize;
+    emxEnsureCapacity_real_T(out->ListCl, i);
+    for (i = 0; i < varsize; i++) {
+      out->ListCl->data[i] = rtNaN;
     }
-    k = out->VIOMout->size[0] * out->VIOMout->size[1];
+    i = out->VIOMout->size[0] * out->VIOMout->size[1];
     out->VIOMout->size[0] = 1;
-    out->VIOMout->size[1] = (int)varsize;
-    emxEnsureCapacity_real_T(out->VIOMout, k);
-    for (k = 0; k < partialTrueCount; k++) {
-      out->VIOMout->data[k] = rtNaN;
+    out->VIOMout->size[1] = varsize;
+    emxEnsureCapacity_real_T(out->VIOMout, i);
+    for (i = 0; i < varsize; i++) {
+      out->VIOMout->data[i] = rtNaN;
     }
     out->fittedvalues->size[0] = 0;
     out->fittedvalues->size[1] = 0;
@@ -957,139 +1272,144 @@ void FSR_wrapper1(const emxArray_real_T *y, const emxArray_real_T *X,
     out->class[2] = 'R';
   } else {
     emxInit_real_T(&INP_S2, 2);
-    aoffset = S2->size[0];
-    k = INP_S2->size[0] * INP_S2->size[1];
+    loop_ub = S2->size[0];
+    i = INP_S2->size[0] * INP_S2->size[1];
     INP_S2->size[0] = S2->size[0];
     INP_S2->size[1] = 2;
-    emxEnsureCapacity_real_T(INP_S2, k);
-    for (k = 0; k < 2; k++) {
-      for (partialTrueCount = 0; partialTrueCount < aoffset;
-           partialTrueCount++) {
-        INP_S2->data[partialTrueCount + INP_S2->size[0] * k] =
-            S2->data[partialTrueCount + S2->size[0] * k];
+    emxEnsureCapacity_real_T(INP_S2, i);
+    fittedvalues_data = INP_S2->data;
+    for (i = 0; i < 2; i++) {
+      for (varsize = 0; varsize < loop_ub; varsize++) {
+        fittedvalues_data[varsize + INP_S2->size[0] * i] =
+            constcols_data[varsize + S2->size[0] * i];
       }
     }
     emxInitStruct_struct_T(&expl_temp);
     /*  Call core function which computes exceedances to thresholds of mdr */
-    b_FSRcore(b_y, b_X, n, varsize, mdr, b_init, Un, bb, Bols, INP_S2, weak,
+    b_FSRcore(b_y, b_X, k, p, mdr, b_init, Un, c_X, Bols, INP_S2, weak,
               bonflev_data, bonflev_size, msg, &expl_temp);
-    k = out->ListOut->size[0] * out->ListOut->size[1];
+    i = out->ListOut->size[0] * out->ListOut->size[1];
     out->ListOut->size[0] = 1;
     out->ListOut->size[1] = expl_temp.ListOut->size[1];
-    emxEnsureCapacity_real_T(out->ListOut, k);
-    aoffset = expl_temp.ListOut->size[1];
+    emxEnsureCapacity_real_T(out->ListOut, i);
+    loop_ub = expl_temp.ListOut->size[1];
     emxFree_real_T(&INP_S2);
-    for (k = 0; k < aoffset; k++) {
-      out->ListOut->data[k] = expl_temp.ListOut->data[k];
+    for (i = 0; i < loop_ub; i++) {
+      out->ListOut->data[i] = expl_temp.ListOut->data[i];
     }
-    k = out->outliers->size[0] * out->outliers->size[1];
+    i = out->outliers->size[0] * out->outliers->size[1];
     out->outliers->size[0] = 1;
     out->outliers->size[1] = expl_temp.outliers->size[1];
-    emxEnsureCapacity_real_T(out->outliers, k);
-    aoffset = expl_temp.outliers->size[1];
-    for (k = 0; k < aoffset; k++) {
-      out->outliers->data[k] = expl_temp.outliers->data[k];
+    emxEnsureCapacity_real_T(out->outliers, i);
+    loop_ub = expl_temp.outliers->size[1];
+    for (i = 0; i < loop_ub; i++) {
+      out->outliers->data[i] = expl_temp.outliers->data[i];
     }
-    k = out->mdr->size[0] * out->mdr->size[1];
+    i = out->mdr->size[0] * out->mdr->size[1];
     out->mdr->size[0] = expl_temp.mdr->size[0];
     out->mdr->size[1] = expl_temp.mdr->size[1];
-    emxEnsureCapacity_real_T(out->mdr, k);
-    aoffset = expl_temp.mdr->size[0] * expl_temp.mdr->size[1];
-    for (k = 0; k < aoffset; k++) {
-      out->mdr->data[k] = expl_temp.mdr->data[k];
+    emxEnsureCapacity_real_T(out->mdr, i);
+    loop_ub = expl_temp.mdr->size[0] * expl_temp.mdr->size[1];
+    for (i = 0; i < loop_ub; i++) {
+      out->mdr->data[i] = expl_temp.mdr->data[i];
     }
-    k = out->Un->size[0] * out->Un->size[1];
+    i = out->Un->size[0] * out->Un->size[1];
     out->Un->size[0] = expl_temp.Un->size[0];
     out->Un->size[1] = expl_temp.Un->size[1];
-    emxEnsureCapacity_real_T(out->Un, k);
-    aoffset = expl_temp.Un->size[0] * expl_temp.Un->size[1];
-    for (k = 0; k < aoffset; k++) {
-      out->Un->data[k] = expl_temp.Un->data[k];
+    emxEnsureCapacity_real_T(out->Un, i);
+    loop_ub = expl_temp.Un->size[0] * expl_temp.Un->size[1];
+    for (i = 0; i < loop_ub; i++) {
+      out->Un->data[i] = expl_temp.Un->data[i];
     }
-    k = out->nout->size[0] * out->nout->size[1];
+    i = out->nout->size[0] * out->nout->size[1];
     out->nout->size[0] = expl_temp.nout.size[0];
     out->nout->size[1] = expl_temp.nout.size[1];
-    emxEnsureCapacity_real_T(out->nout, k);
-    aoffset = expl_temp.nout.size[0] * expl_temp.nout.size[1];
-    for (k = 0; k < aoffset; k++) {
-      out->nout->data[k] = expl_temp.nout.data[k];
+    emxEnsureCapacity_real_T(out->nout, i);
+    loop_ub = expl_temp.nout.size[0] * expl_temp.nout.size[1];
+    for (i = 0; i < loop_ub; i++) {
+      out->nout->data[i] = expl_temp.nout.data[i];
     }
-    k = out->beta->size[0];
+    i = out->beta->size[0];
     out->beta->size[0] = expl_temp.beta->size[0];
-    emxEnsureCapacity_real_T(out->beta, k);
-    aoffset = expl_temp.beta->size[0];
-    for (k = 0; k < aoffset; k++) {
-      out->beta->data[k] = expl_temp.beta->data[k];
+    emxEnsureCapacity_real_T(out->beta, i);
+    loop_ub = expl_temp.beta->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      out->beta->data[i] = expl_temp.beta->data[i];
     }
     out->scale = expl_temp.scale;
-    k = out->mdag->size[0] * out->mdag->size[1];
+    i = out->mdag->size[0] * out->mdag->size[1];
     out->mdag->size[0] = expl_temp.mdag.size[0];
     out->mdag->size[1] = expl_temp.mdag.size[1];
-    emxEnsureCapacity_real_T(out->mdag, k);
-    aoffset = expl_temp.mdag.size[0] * expl_temp.mdag.size[1];
-    for (k = 0; k < aoffset; k++) {
+    emxEnsureCapacity_real_T(out->mdag, i);
+    loop_ub = expl_temp.mdag.size[0] * expl_temp.mdag.size[1];
+    for (i = 0; i < loop_ub; i++) {
       out->mdag->data[0] = expl_temp.mdag.data[0];
     }
-    k = out->ListCl->size[0] * out->ListCl->size[1];
+    i = out->ListCl->size[0] * out->ListCl->size[1];
     out->ListCl->size[0] = 1;
     out->ListCl->size[1] = expl_temp.ListCl->size[1];
-    emxEnsureCapacity_real_T(out->ListCl, k);
-    aoffset = expl_temp.ListCl->size[1];
-    for (k = 0; k < aoffset; k++) {
-      out->ListCl->data[k] = expl_temp.ListCl->data[k];
+    emxEnsureCapacity_real_T(out->ListCl, i);
+    loop_ub = expl_temp.ListCl->size[1];
+    for (i = 0; i < loop_ub; i++) {
+      out->ListCl->data[i] = expl_temp.ListCl->data[i];
     }
-    k = out->VIOMout->size[0] * out->VIOMout->size[1];
+    i = out->VIOMout->size[0] * out->VIOMout->size[1];
     out->VIOMout->size[0] = 1;
     out->VIOMout->size[1] = expl_temp.VIOMout->size[1];
-    emxEnsureCapacity_real_T(out->VIOMout, k);
-    aoffset = expl_temp.VIOMout->size[1];
-    for (k = 0; k < aoffset; k++) {
-      out->VIOMout->data[k] = expl_temp.VIOMout->data[k];
+    emxEnsureCapacity_real_T(out->VIOMout, i);
+    loop_ub = expl_temp.VIOMout->size[1];
+    for (i = 0; i < loop_ub; i++) {
+      out->VIOMout->data[i] = expl_temp.VIOMout->data[i];
     }
     /*  compute and store in output structure the S robust scaled residuals */
-    partialTrueCount = b_X->size[0] - 1;
-    trueCount = b_X->size[1];
-    k = fittedvalues->size[0];
+    varsize = b_X->size[0] - 1;
+    loop_ub = b_X->size[1];
+    i = fittedvalues->size[0];
     fittedvalues->size[0] = b_X->size[0];
-    emxEnsureCapacity_real_T(fittedvalues, k);
-    for (i = 0; i <= partialTrueCount; i++) {
-      fittedvalues->data[i] = 0.0;
+    emxEnsureCapacity_real_T(fittedvalues, i);
+    fittedvalues_data = fittedvalues->data;
+    for (i = 0; i <= varsize; i++) {
+      fittedvalues_data[i] = 0.0;
     }
-    for (k = 0; k < trueCount; k++) {
+    for (k = 0; k < loop_ub; k++) {
       aoffset = k * b_X->size[0];
-      for (i = 0; i <= partialTrueCount; i++) {
-        fittedvalues->data[i] +=
-            b_X->data[aoffset + i] * expl_temp.beta->data[k];
+      for (i = 0; i <= varsize; i++) {
+        fittedvalues_data[i] += b_X_data[aoffset + i] * expl_temp.beta->data[k];
       }
     }
-    k = out->fittedvalues->size[0] * out->fittedvalues->size[1];
+    i = out->fittedvalues->size[0] * out->fittedvalues->size[1];
     out->fittedvalues->size[0] = fittedvalues->size[0];
     out->fittedvalues->size[1] = 1;
-    emxEnsureCapacity_real_T(out->fittedvalues, k);
-    aoffset = fittedvalues->size[0];
-    for (k = 0; k < aoffset; k++) {
-      out->fittedvalues->data[k] = fittedvalues->data[k];
+    emxEnsureCapacity_real_T(out->fittedvalues, i);
+    loop_ub = fittedvalues->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      out->fittedvalues->data[i] = fittedvalues_data[i];
     }
-    aoffset = b_y->size[0];
-    for (k = 0; k < aoffset; k++) {
-      b_y->data[k] = (b_y->data[k] - fittedvalues->data[k]) / expl_temp.scale;
+    if (b_y->size[0] == fittedvalues->size[0]) {
+      loop_ub = b_y->size[0];
+      for (i = 0; i < loop_ub; i++) {
+        b_y_data[i] = (b_y_data[i] - fittedvalues_data[i]) / expl_temp.scale;
+      }
+    } else {
+      gb_binary_expand_op(b_y, fittedvalues, expl_temp.scale);
+      b_y_data = b_y->data;
     }
     emxFreeStruct_struct_T(&expl_temp);
-    k = out->residuals->size[0] * out->residuals->size[1];
+    i = out->residuals->size[0] * out->residuals->size[1];
     out->residuals->size[0] = b_y->size[0];
     out->residuals->size[1] = 1;
-    emxEnsureCapacity_real_T(out->residuals, k);
-    aoffset = b_y->size[0];
-    for (k = 0; k < aoffset; k++) {
-      out->residuals->data[k] = b_y->data[k];
+    emxEnsureCapacity_real_T(out->residuals, i);
+    loop_ub = b_y->size[0];
+    for (i = 0; i < loop_ub; i++) {
+      out->residuals->data[i] = b_y_data[i];
     }
     out->class[0] = 'F';
     out->class[1] = 'S';
     out->class[2] = 'R';
   }
+  emxFree_real_T(&c_X);
   emxFree_real_T(&S2);
   emxFree_real_T(&Bols);
-  emxFree_real_T(&bb);
   emxFree_real_T(&Un);
   emxFree_real_T(&mdr);
   emxFree_real_T(&b_X);

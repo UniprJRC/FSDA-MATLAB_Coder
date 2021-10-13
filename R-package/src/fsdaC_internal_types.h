@@ -17,12 +17,12 @@
 #include "rtwtypes.h"
 
 /* Type Definitions */
-#ifndef typedef_cell_wrap_64
-#define typedef_cell_wrap_64
+#ifndef typedef_cell_wrap_67
+#define typedef_cell_wrap_67
 typedef struct {
   char f1[3];
-} cell_wrap_64;
-#endif /* typedef_cell_wrap_64 */
+} cell_wrap_67;
+#endif /* typedef_cell_wrap_67 */
 
 #ifndef struct_emxArray_char_T_1x310
 #define struct_emxArray_char_T_1x310

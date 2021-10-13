@@ -27,6 +27,9 @@ void FSRbsb(const emxArray_real_T *y, const emxArray_real_T *X,
             emxArray_real_T *bsb, double varargin_4, emxArray_real_T *Un,
             emxArray_real_T *BB);
 
+void pc_binary_expand_op(emxArray_real_T *r, const emxArray_real_T *y,
+                         const emxArray_real_T *C);
+
 #ifdef __cplusplus
 }
 #endif

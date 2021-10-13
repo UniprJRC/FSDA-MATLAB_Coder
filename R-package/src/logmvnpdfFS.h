@@ -23,8 +23,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-double logmvnpdfFS(const emxArray_real_T *X, const emxArray_real_T *Mu,
-                   const emxArray_real_T *Sigma);
+void logmvnpdfFS(const emxArray_real_T *X, const emxArray_real_T *Mu,
+                 const emxArray_real_T *Sigma, emxArray_real_T *y);
 
 #ifdef __cplusplus
 }

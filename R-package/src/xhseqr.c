@@ -34,6 +34,7 @@ int b_xhseqr(emxArray_real_T *h)
   double rt2r;
   double s;
   double tst;
+  double *h_data;
   int L;
   int b_k;
   int hoffset;
@@ -50,6 +51,7 @@ int b_xhseqr(emxArray_real_T *h)
   bool exitg2;
   bool exitg3;
   bool goto150;
+  h_data = h->data;
   n = h->size[0];
   ldh = h->size[0];
   info = 0;
@@ -58,11 +60,11 @@ int b_xhseqr(emxArray_real_T *h)
     v[1] = 0.0;
     v[2] = 0.0;
     for (j = 0; j <= n - 4; j++) {
-      h->data[(j + h->size[0] * j) + 2] = 0.0;
-      h->data[(j + h->size[0] * j) + 3] = 0.0;
+      h_data[(j + h->size[0] * j) + 2] = 0.0;
+      h_data[(j + h->size[0] * j) + 3] = 0.0;
     }
     if (1 <= n - 2) {
-      h->data[(n + h->size[0] * (n - 3)) - 1] = 0.0;
+      h_data[(n + h->size[0] * (n - 3)) - 1] = 0.0;
     }
     itmax = 30.0 * fmax(10.0, n);
     SMLNUM = 2.2250738585072014E-308 * ((double)n / 2.2204460492503131E-16);
@@ -77,30 +79,30 @@ int b_xhseqr(emxArray_real_T *h)
         k = i;
         exitg3 = false;
         while ((!exitg3) && (k + 1 > L)) {
-          ba = fabs(h->data[k + h->size[0] * (k - 1)]);
+          ba = fabs(h_data[k + h->size[0] * (k - 1)]);
           if (ba <= SMLNUM) {
             exitg3 = true;
           } else {
-            bb = fabs(h->data[k + h->size[0] * k]);
-            tst = fabs(h->data[(k + h->size[0] * (k - 1)) - 1]) + bb;
+            bb = fabs(h_data[k + h->size[0] * k]);
+            tst = fabs(h_data[(k + h->size[0] * (k - 1)) - 1]) + bb;
             if (tst == 0.0) {
               if (k - 1 >= 1) {
-                tst = fabs(h->data[(k + h->size[0] * (k - 2)) - 1]);
+                tst = fabs(h_data[(k + h->size[0] * (k - 2)) - 1]);
               }
               if (k + 2 <= n) {
-                tst += fabs(h->data[(k + h->size[0] * k) + 1]);
+                tst += fabs(h_data[(k + h->size[0] * k) + 1]);
               }
             }
             if (ba <= 2.2204460492503131E-16 * tst) {
-              tst = fabs(h->data[(k + h->size[0] * k) - 1]);
+              tst = fabs(h_data[(k + h->size[0] * k) - 1]);
               if (ba > tst) {
                 ab = ba;
                 ba = tst;
               } else {
                 ab = tst;
               }
-              tst = fabs(h->data[(k + h->size[0] * (k - 1)) - 1] -
-                         h->data[k + h->size[0] * k]);
+              tst = fabs(h_data[(k + h->size[0] * (k - 1)) - 1] -
+                         h_data[k + h->size[0] * k]);
               if (bb > tst) {
                 aa = bb;
                 bb = tst;
@@ -121,31 +123,31 @@ int b_xhseqr(emxArray_real_T *h)
         }
         L = k + 1;
         if (k + 1 > 1) {
-          h->data[k + h->size[0] * (k - 1)] = 0.0;
+          h_data[k + h->size[0] * (k - 1)] = 0.0;
         }
         if (k + 1 >= i) {
           goto150 = true;
           exitg2 = true;
         } else {
           if (iy == 10) {
-            s = fabs(h->data[(k + h->size[0] * k) + 1]) +
-                fabs(h->data[(k + h->size[0] * (k + 1)) + 2]);
-            tst = 0.75 * s + h->data[k + h->size[0] * k];
+            s = fabs(h_data[(k + h->size[0] * k) + 1]) +
+                fabs(h_data[(k + h->size[0] * (k + 1)) + 2]);
+            tst = 0.75 * s + h_data[k + h->size[0] * k];
             aa = -0.4375 * s;
             ab = s;
             bb = tst;
           } else if (iy == 20) {
-            s = fabs(h->data[i + h->size[0] * (i - 1)]) +
-                fabs(h->data[(i + h->size[0] * (i - 2)) - 1]);
-            tst = 0.75 * s + h->data[i + h->size[0] * i];
+            s = fabs(h_data[i + h->size[0] * (i - 1)]) +
+                fabs(h_data[(i + h->size[0] * (i - 2)) - 1]);
+            tst = 0.75 * s + h_data[i + h->size[0] * i];
             aa = -0.4375 * s;
             ab = s;
             bb = tst;
           } else {
-            tst = h->data[(i + h->size[0] * (i - 1)) - 1];
-            ab = h->data[i + h->size[0] * (i - 1)];
-            aa = h->data[(i + h->size[0] * i) - 1];
-            bb = h->data[i + h->size[0] * i];
+            tst = h_data[(i + h->size[0] * (i - 1)) - 1];
+            ab = h_data[i + h->size[0] * (i - 1)];
+            aa = h_data[(i + h->size[0] * i) - 1];
+            bb = h_data[i + h->size[0] * i];
           }
           s = ((fabs(tst) + fabs(aa)) + fabs(ab)) + fabs(bb);
           if (s == 0.0) {
@@ -183,27 +185,27 @@ int b_xhseqr(emxArray_real_T *h)
           m = i - 1;
           exitg3 = false;
           while ((!exitg3) && (m >= k + 1)) {
-            tst = h->data[m + h->size[0] * (m - 1)];
-            ba = h->data[(m + h->size[0] * (m - 1)) - 1];
+            tst = h_data[m + h->size[0] * (m - 1)];
+            ba = h_data[(m + h->size[0] * (m - 1)) - 1];
             bb = ba - rt2r;
             s = (fabs(bb) + fabs(aa)) + fabs(tst);
             tst /= s;
-            v[0] = (tst * h->data[(m + h->size[0] * m) - 1] +
+            v[0] = (tst * h_data[(m + h->size[0] * m) - 1] +
                     (ba - rt1r) * (bb / s)) -
                    ab * (aa / s);
-            v[1] = tst * (((ba + h->data[m + h->size[0] * m]) - rt1r) - rt2r);
-            v[2] = tst * h->data[(m + h->size[0] * m) + 1];
+            v[1] = tst * (((ba + h_data[m + h->size[0] * m]) - rt1r) - rt2r);
+            v[2] = tst * h_data[(m + h->size[0] * m) + 1];
             s = (fabs(v[0]) + fabs(v[1])) + fabs(v[2]);
             v[0] /= s;
             v[1] /= s;
             v[2] /= s;
             if ((m == k + 1) ||
-                (fabs(h->data[(m + h->size[0] * (m - 2)) - 1]) *
+                (fabs(h_data[(m + h->size[0] * (m - 2)) - 1]) *
                      (fabs(v[1]) + fabs(v[2])) <=
                  2.2204460492503131E-16 * fabs(v[0]) *
-                     ((fabs(h->data[(m + h->size[0] * (m - 2)) - 2]) +
+                     ((fabs(h_data[(m + h->size[0] * (m - 2)) - 2]) +
                        fabs(ba)) +
-                      fabs(h->data[m + h->size[0] * m])))) {
+                      fabs(h_data[m + h->size[0] * m])))) {
               exitg3 = true;
             } else {
               m--;
@@ -211,26 +213,26 @@ int b_xhseqr(emxArray_real_T *h)
           }
           for (b_k = m; b_k <= i; b_k++) {
             nr = (i - b_k) + 2;
-            if (3 < nr) {
+            if (3 <= nr) {
               nr = 3;
             }
             if (b_k > m) {
               hoffset = (b_k + ldh * (b_k - 2)) - 1;
               for (j = 0; j < nr; j++) {
-                v[j] = h->data[j + hoffset];
+                v[j] = h_data[j + hoffset];
               }
             }
             tst = v[0];
             ba = xzlarfg(nr, &tst, v);
             v[0] = tst;
             if (b_k > m) {
-              h->data[(b_k + h->size[0] * (b_k - 2)) - 1] = tst;
-              h->data[b_k + h->size[0] * (b_k - 2)] = 0.0;
+              h_data[(b_k + h->size[0] * (b_k - 2)) - 1] = tst;
+              h_data[b_k + h->size[0] * (b_k - 2)] = 0.0;
               if (b_k < i) {
-                h->data[(b_k + h->size[0] * (b_k - 2)) + 1] = 0.0;
+                h_data[(b_k + h->size[0] * (b_k - 2)) + 1] = 0.0;
               }
             } else if (m > k + 1) {
-              h->data[(b_k + h->size[0] * (b_k - 2)) - 1] *= 1.0 - ba;
+              h_data[(b_k + h->size[0] * (b_k - 2)) - 1] *= 1.0 - ba;
             }
             d = v[1];
             ab = ba * v[1];
@@ -238,38 +240,38 @@ int b_xhseqr(emxArray_real_T *h)
               s = v[2];
               tst = ba * v[2];
               for (j = b_k; j <= n; j++) {
-                aa = (h->data[(b_k + h->size[0] * (j - 1)) - 1] +
-                      d * h->data[b_k + h->size[0] * (j - 1)]) +
-                     s * h->data[(b_k + h->size[0] * (j - 1)) + 1];
-                h->data[(b_k + h->size[0] * (j - 1)) - 1] -= aa * ba;
-                h->data[b_k + h->size[0] * (j - 1)] -= aa * ab;
-                h->data[(b_k + h->size[0] * (j - 1)) + 1] -= aa * tst;
+                aa = (h_data[(b_k + h->size[0] * (j - 1)) - 1] +
+                      d * h_data[b_k + h->size[0] * (j - 1)]) +
+                     s * h_data[(b_k + h->size[0] * (j - 1)) + 1];
+                h_data[(b_k + h->size[0] * (j - 1)) - 1] -= aa * ba;
+                h_data[b_k + h->size[0] * (j - 1)] -= aa * ab;
+                h_data[(b_k + h->size[0] * (j - 1)) + 1] -= aa * tst;
               }
-              if (b_k + 3 < i + 1) {
+              if (b_k + 3 <= i + 1) {
                 nr = b_k + 2;
               } else {
                 nr = i;
               }
               for (j = 0; j <= nr; j++) {
-                aa = (h->data[j + h->size[0] * (b_k - 1)] +
-                      d * h->data[j + h->size[0] * b_k]) +
-                     s * h->data[j + h->size[0] * (b_k + 1)];
-                h->data[j + h->size[0] * (b_k - 1)] -= aa * ba;
-                h->data[j + h->size[0] * b_k] -= aa * ab;
-                h->data[j + h->size[0] * (b_k + 1)] -= aa * tst;
+                aa = (h_data[j + h->size[0] * (b_k - 1)] +
+                      d * h_data[j + h->size[0] * b_k]) +
+                     s * h_data[j + h->size[0] * (b_k + 1)];
+                h_data[j + h->size[0] * (b_k - 1)] -= aa * ba;
+                h_data[j + h->size[0] * b_k] -= aa * ab;
+                h_data[j + h->size[0] * (b_k + 1)] -= aa * tst;
               }
             } else if (nr == 2) {
               for (j = b_k; j <= n; j++) {
-                tst = h->data[(b_k + h->size[0] * (j - 1)) - 1];
-                aa = tst + d * h->data[b_k + h->size[0] * (j - 1)];
-                h->data[(b_k + h->size[0] * (j - 1)) - 1] = tst - aa * ba;
-                h->data[b_k + h->size[0] * (j - 1)] -= aa * ab;
+                tst = h_data[(b_k + h->size[0] * (j - 1)) - 1];
+                aa = tst + d * h_data[b_k + h->size[0] * (j - 1)];
+                h_data[(b_k + h->size[0] * (j - 1)) - 1] = tst - aa * ba;
+                h_data[b_k + h->size[0] * (j - 1)] -= aa * ab;
               }
               for (j = 0; j <= i; j++) {
-                aa = h->data[j + h->size[0] * (b_k - 1)] +
-                     d * h->data[j + h->size[0] * b_k];
-                h->data[j + h->size[0] * (b_k - 1)] -= aa * ba;
-                h->data[j + h->size[0] * b_k] -= aa * ab;
+                aa = h_data[j + h->size[0] * (b_k - 1)] +
+                     d * h_data[j + h->size[0] * b_k];
+                h_data[j + h->size[0] * (b_k - 1)] -= aa * ba;
+                h_data[j + h->size[0] * b_k] -= aa * ab;
               }
             }
           }
@@ -281,23 +283,23 @@ int b_xhseqr(emxArray_real_T *h)
         exitg1 = true;
       } else {
         if ((L != i + 1) && (L == i)) {
-          d = h->data[(i + h->size[0] * i) - 1];
-          s = h->data[i + h->size[0] * (i - 1)];
-          tst = h->data[i + h->size[0] * i];
-          xdlanv2(&h->data[(i + h->size[0] * (i - 1)) - 1], &d, &s, &tst, &ab,
+          d = h_data[(i + h->size[0] * i) - 1];
+          s = h_data[i + h->size[0] * (i - 1)];
+          tst = h_data[i + h->size[0] * i];
+          xdlanv2(&h_data[(i + h->size[0] * (i - 1)) - 1], &d, &s, &tst, &ab,
                   &aa, &ba, &bb, &rt2r, &rt1r);
-          h->data[(i + h->size[0] * i) - 1] = d;
-          h->data[i + h->size[0] * (i - 1)] = s;
-          h->data[i + h->size[0] * i] = tst;
+          h_data[(i + h->size[0] * i) - 1] = d;
+          h_data[i + h->size[0] * (i - 1)] = s;
+          h_data[i + h->size[0] * i] = tst;
           if (n > i + 1) {
             hoffset = (n - i) - 2;
             if (hoffset + 1 >= 1) {
               iy = i + (i + 1) * ldh;
               for (k = 0; k <= hoffset; k++) {
                 nr = iy + k * ldh;
-                tst = rt2r * h->data[nr - 1] + rt1r * h->data[nr];
-                h->data[nr] = rt2r * h->data[nr] - rt1r * h->data[nr - 1];
-                h->data[nr - 1] = tst;
+                tst = rt2r * h_data[nr - 1] + rt1r * h_data[nr];
+                h_data[nr] = rt2r * h_data[nr] - rt1r * h_data[nr - 1];
+                h_data[nr - 1] = tst;
               }
             }
           }
@@ -306,10 +308,10 @@ int b_xhseqr(emxArray_real_T *h)
             iy = i * ldh;
             for (k = 0; k <= i - 2; k++) {
               nr = iy + k;
-              b_k = hoffset + k;
-              tst = rt2r * h->data[b_k] + rt1r * h->data[nr];
-              h->data[nr] = rt2r * h->data[nr] - rt1r * h->data[b_k];
-              h->data[b_k] = tst;
+              m = hoffset + k;
+              tst = rt2r * h_data[m] + rt1r * h_data[nr];
+              h_data[nr] = rt2r * h_data[nr] - rt1r * h_data[m];
+              h_data[m] = tst;
             }
           }
         }
@@ -327,7 +329,7 @@ int b_xhseqr(emxArray_real_T *h)
     }
     for (j = 0; j < iy; j++) {
       for (i = hoffset; i <= m; i++) {
-        h->data[(i + h->size[0] * j) - 1] = 0.0;
+        h_data[(i + h->size[0] * j) - 1] = 0.0;
       }
       hoffset++;
     }
@@ -349,6 +351,8 @@ int xhseqr(emxArray_real_T *h, emxArray_real_T *z)
   double rt2r;
   double s;
   double tst;
+  double *h_data;
+  double *z_data;
   int L;
   int b_k;
   int hoffset;
@@ -366,6 +370,8 @@ int xhseqr(emxArray_real_T *h, emxArray_real_T *z)
   bool exitg2;
   bool exitg3;
   bool goto150;
+  z_data = z->data;
+  h_data = h->data;
   n = h->size[0];
   ldh = h->size[0];
   ldz = z->size[0];
@@ -375,11 +381,11 @@ int xhseqr(emxArray_real_T *h, emxArray_real_T *z)
     v[1] = 0.0;
     v[2] = 0.0;
     for (j = 0; j <= n - 4; j++) {
-      h->data[(j + h->size[0] * j) + 2] = 0.0;
-      h->data[(j + h->size[0] * j) + 3] = 0.0;
+      h_data[(j + h->size[0] * j) + 2] = 0.0;
+      h_data[(j + h->size[0] * j) + 3] = 0.0;
     }
     if (1 <= n - 2) {
-      h->data[(n + h->size[0] * (n - 3)) - 1] = 0.0;
+      h_data[(n + h->size[0] * (n - 3)) - 1] = 0.0;
     }
     itmax = 30.0 * fmax(10.0, n);
     SMLNUM = 2.2250738585072014E-308 * ((double)n / 2.2204460492503131E-16);
@@ -394,30 +400,30 @@ int xhseqr(emxArray_real_T *h, emxArray_real_T *z)
         k = i;
         exitg3 = false;
         while ((!exitg3) && (k + 1 > L)) {
-          ba = fabs(h->data[k + h->size[0] * (k - 1)]);
+          ba = fabs(h_data[k + h->size[0] * (k - 1)]);
           if (ba <= SMLNUM) {
             exitg3 = true;
           } else {
-            bb = fabs(h->data[k + h->size[0] * k]);
-            tst = fabs(h->data[(k + h->size[0] * (k - 1)) - 1]) + bb;
+            bb = fabs(h_data[k + h->size[0] * k]);
+            tst = fabs(h_data[(k + h->size[0] * (k - 1)) - 1]) + bb;
             if (tst == 0.0) {
               if (k - 1 >= 1) {
-                tst = fabs(h->data[(k + h->size[0] * (k - 2)) - 1]);
+                tst = fabs(h_data[(k + h->size[0] * (k - 2)) - 1]);
               }
               if (k + 2 <= n) {
-                tst += fabs(h->data[(k + h->size[0] * k) + 1]);
+                tst += fabs(h_data[(k + h->size[0] * k) + 1]);
               }
             }
             if (ba <= 2.2204460492503131E-16 * tst) {
-              tst = fabs(h->data[(k + h->size[0] * k) - 1]);
+              tst = fabs(h_data[(k + h->size[0] * k) - 1]);
               if (ba > tst) {
                 ab = ba;
                 ba = tst;
               } else {
                 ab = tst;
               }
-              tst = fabs(h->data[(k + h->size[0] * (k - 1)) - 1] -
-                         h->data[k + h->size[0] * k]);
+              tst = fabs(h_data[(k + h->size[0] * (k - 1)) - 1] -
+                         h_data[k + h->size[0] * k]);
               if (bb > tst) {
                 aa = bb;
                 bb = tst;
@@ -438,31 +444,31 @@ int xhseqr(emxArray_real_T *h, emxArray_real_T *z)
         }
         L = k + 1;
         if (k + 1 > 1) {
-          h->data[k + h->size[0] * (k - 1)] = 0.0;
+          h_data[k + h->size[0] * (k - 1)] = 0.0;
         }
         if (k + 1 >= i) {
           goto150 = true;
           exitg2 = true;
         } else {
           if (iy == 10) {
-            s = fabs(h->data[(k + h->size[0] * k) + 1]) +
-                fabs(h->data[(k + h->size[0] * (k + 1)) + 2]);
-            tst = 0.75 * s + h->data[k + h->size[0] * k];
+            s = fabs(h_data[(k + h->size[0] * k) + 1]) +
+                fabs(h_data[(k + h->size[0] * (k + 1)) + 2]);
+            tst = 0.75 * s + h_data[k + h->size[0] * k];
             aa = -0.4375 * s;
             ab = s;
             bb = tst;
           } else if (iy == 20) {
-            s = fabs(h->data[i + h->size[0] * (i - 1)]) +
-                fabs(h->data[(i + h->size[0] * (i - 2)) - 1]);
-            tst = 0.75 * s + h->data[i + h->size[0] * i];
+            s = fabs(h_data[i + h->size[0] * (i - 1)]) +
+                fabs(h_data[(i + h->size[0] * (i - 2)) - 1]);
+            tst = 0.75 * s + h_data[i + h->size[0] * i];
             aa = -0.4375 * s;
             ab = s;
             bb = tst;
           } else {
-            tst = h->data[(i + h->size[0] * (i - 1)) - 1];
-            ab = h->data[i + h->size[0] * (i - 1)];
-            aa = h->data[(i + h->size[0] * i) - 1];
-            bb = h->data[i + h->size[0] * i];
+            tst = h_data[(i + h->size[0] * (i - 1)) - 1];
+            ab = h_data[i + h->size[0] * (i - 1)];
+            aa = h_data[(i + h->size[0] * i) - 1];
+            bb = h_data[i + h->size[0] * i];
           }
           s = ((fabs(tst) + fabs(aa)) + fabs(ab)) + fabs(bb);
           if (s == 0.0) {
@@ -500,27 +506,27 @@ int xhseqr(emxArray_real_T *h, emxArray_real_T *z)
           m = i - 1;
           exitg3 = false;
           while ((!exitg3) && (m >= k + 1)) {
-            tst = h->data[m + h->size[0] * (m - 1)];
-            ba = h->data[(m + h->size[0] * (m - 1)) - 1];
+            tst = h_data[m + h->size[0] * (m - 1)];
+            ba = h_data[(m + h->size[0] * (m - 1)) - 1];
             bb = ba - rt2r;
             s = (fabs(bb) + fabs(aa)) + fabs(tst);
             tst /= s;
-            v[0] = (tst * h->data[(m + h->size[0] * m) - 1] +
+            v[0] = (tst * h_data[(m + h->size[0] * m) - 1] +
                     (ba - rt1r) * (bb / s)) -
                    ab * (aa / s);
-            v[1] = tst * (((ba + h->data[m + h->size[0] * m]) - rt1r) - rt2r);
-            v[2] = tst * h->data[(m + h->size[0] * m) + 1];
+            v[1] = tst * (((ba + h_data[m + h->size[0] * m]) - rt1r) - rt2r);
+            v[2] = tst * h_data[(m + h->size[0] * m) + 1];
             s = (fabs(v[0]) + fabs(v[1])) + fabs(v[2]);
             v[0] /= s;
             v[1] /= s;
             v[2] /= s;
             if ((m == k + 1) ||
-                (fabs(h->data[(m + h->size[0] * (m - 2)) - 1]) *
+                (fabs(h_data[(m + h->size[0] * (m - 2)) - 1]) *
                      (fabs(v[1]) + fabs(v[2])) <=
                  2.2204460492503131E-16 * fabs(v[0]) *
-                     ((fabs(h->data[(m + h->size[0] * (m - 2)) - 2]) +
+                     ((fabs(h_data[(m + h->size[0] * (m - 2)) - 2]) +
                        fabs(ba)) +
-                      fabs(h->data[m + h->size[0] * m])))) {
+                      fabs(h_data[m + h->size[0] * m])))) {
               exitg3 = true;
             } else {
               m--;
@@ -528,26 +534,26 @@ int xhseqr(emxArray_real_T *h, emxArray_real_T *z)
           }
           for (b_k = m; b_k <= i; b_k++) {
             nr = (i - b_k) + 2;
-            if (3 < nr) {
+            if (3 <= nr) {
               nr = 3;
             }
             if (b_k > m) {
               hoffset = (b_k + ldh * (b_k - 2)) - 1;
               for (j = 0; j < nr; j++) {
-                v[j] = h->data[j + hoffset];
+                v[j] = h_data[j + hoffset];
               }
             }
             tst = v[0];
             bb = xzlarfg(nr, &tst, v);
             v[0] = tst;
             if (b_k > m) {
-              h->data[(b_k + h->size[0] * (b_k - 2)) - 1] = tst;
-              h->data[b_k + h->size[0] * (b_k - 2)] = 0.0;
+              h_data[(b_k + h->size[0] * (b_k - 2)) - 1] = tst;
+              h_data[b_k + h->size[0] * (b_k - 2)] = 0.0;
               if (b_k < i) {
-                h->data[(b_k + h->size[0] * (b_k - 2)) + 1] = 0.0;
+                h_data[(b_k + h->size[0] * (b_k - 2)) + 1] = 0.0;
               }
             } else if (m > k + 1) {
-              h->data[(b_k + h->size[0] * (b_k - 2)) - 1] *= 1.0 - bb;
+              h_data[(b_k + h->size[0] * (b_k - 2)) - 1] *= 1.0 - bb;
             }
             s = v[1];
             tst = bb * v[1];
@@ -555,52 +561,52 @@ int xhseqr(emxArray_real_T *h, emxArray_real_T *z)
               d = v[2];
               ba = bb * v[2];
               for (j = b_k; j <= n; j++) {
-                aa = (h->data[(b_k + h->size[0] * (j - 1)) - 1] +
-                      s * h->data[b_k + h->size[0] * (j - 1)]) +
-                     d * h->data[(b_k + h->size[0] * (j - 1)) + 1];
-                h->data[(b_k + h->size[0] * (j - 1)) - 1] -= aa * bb;
-                h->data[b_k + h->size[0] * (j - 1)] -= aa * tst;
-                h->data[(b_k + h->size[0] * (j - 1)) + 1] -= aa * ba;
+                aa = (h_data[(b_k + h->size[0] * (j - 1)) - 1] +
+                      s * h_data[b_k + h->size[0] * (j - 1)]) +
+                     d * h_data[(b_k + h->size[0] * (j - 1)) + 1];
+                h_data[(b_k + h->size[0] * (j - 1)) - 1] -= aa * bb;
+                h_data[b_k + h->size[0] * (j - 1)] -= aa * tst;
+                h_data[(b_k + h->size[0] * (j - 1)) + 1] -= aa * ba;
               }
-              if (b_k + 3 < i + 1) {
+              if (b_k + 3 <= i + 1) {
                 nr = b_k + 2;
               } else {
                 nr = i;
               }
               for (j = 0; j <= nr; j++) {
-                aa = (h->data[j + h->size[0] * (b_k - 1)] +
-                      s * h->data[j + h->size[0] * b_k]) +
-                     d * h->data[j + h->size[0] * (b_k + 1)];
-                h->data[j + h->size[0] * (b_k - 1)] -= aa * bb;
-                h->data[j + h->size[0] * b_k] -= aa * tst;
-                h->data[j + h->size[0] * (b_k + 1)] -= aa * ba;
+                aa = (h_data[j + h->size[0] * (b_k - 1)] +
+                      s * h_data[j + h->size[0] * b_k]) +
+                     d * h_data[j + h->size[0] * (b_k + 1)];
+                h_data[j + h->size[0] * (b_k - 1)] -= aa * bb;
+                h_data[j + h->size[0] * b_k] -= aa * tst;
+                h_data[j + h->size[0] * (b_k + 1)] -= aa * ba;
               }
               for (j = 0; j < n; j++) {
-                ab = z->data[j + z->size[0] * (b_k - 1)];
-                aa = (ab + s * z->data[j + z->size[0] * b_k]) +
-                     d * z->data[j + z->size[0] * (b_k + 1)];
-                z->data[j + z->size[0] * (b_k - 1)] = ab - aa * bb;
-                z->data[j + z->size[0] * b_k] -= aa * tst;
-                z->data[j + z->size[0] * (b_k + 1)] -= aa * ba;
+                ab = z_data[j + z->size[0] * (b_k - 1)];
+                aa = (ab + s * z_data[j + z->size[0] * b_k]) +
+                     d * z_data[j + z->size[0] * (b_k + 1)];
+                z_data[j + z->size[0] * (b_k - 1)] = ab - aa * bb;
+                z_data[j + z->size[0] * b_k] -= aa * tst;
+                z_data[j + z->size[0] * (b_k + 1)] -= aa * ba;
               }
             } else if (nr == 2) {
               for (j = b_k; j <= n; j++) {
-                ab = h->data[(b_k + h->size[0] * (j - 1)) - 1];
-                aa = ab + s * h->data[b_k + h->size[0] * (j - 1)];
-                h->data[(b_k + h->size[0] * (j - 1)) - 1] = ab - aa * bb;
-                h->data[b_k + h->size[0] * (j - 1)] -= aa * tst;
+                ab = h_data[(b_k + h->size[0] * (j - 1)) - 1];
+                aa = ab + s * h_data[b_k + h->size[0] * (j - 1)];
+                h_data[(b_k + h->size[0] * (j - 1)) - 1] = ab - aa * bb;
+                h_data[b_k + h->size[0] * (j - 1)] -= aa * tst;
               }
               for (j = 0; j <= i; j++) {
-                aa = h->data[j + h->size[0] * (b_k - 1)] +
-                     s * h->data[j + h->size[0] * b_k];
-                h->data[j + h->size[0] * (b_k - 1)] -= aa * bb;
-                h->data[j + h->size[0] * b_k] -= aa * tst;
+                aa = h_data[j + h->size[0] * (b_k - 1)] +
+                     s * h_data[j + h->size[0] * b_k];
+                h_data[j + h->size[0] * (b_k - 1)] -= aa * bb;
+                h_data[j + h->size[0] * b_k] -= aa * tst;
               }
               for (j = 0; j < n; j++) {
-                ab = z->data[j + z->size[0] * (b_k - 1)];
-                aa = ab + s * z->data[j + z->size[0] * b_k];
-                z->data[j + z->size[0] * (b_k - 1)] = ab - aa * bb;
-                z->data[j + z->size[0] * b_k] -= aa * tst;
+                ab = z_data[j + z->size[0] * (b_k - 1)];
+                aa = ab + s * z_data[j + z->size[0] * b_k];
+                z_data[j + z->size[0] * (b_k - 1)] = ab - aa * bb;
+                z_data[j + z->size[0] * b_k] -= aa * tst;
               }
             }
           }
@@ -612,23 +618,23 @@ int xhseqr(emxArray_real_T *h, emxArray_real_T *z)
         exitg1 = true;
       } else {
         if ((L != i + 1) && (L == i)) {
-          s = h->data[(i + h->size[0] * i) - 1];
-          d = h->data[i + h->size[0] * (i - 1)];
-          tst = h->data[i + h->size[0] * i];
-          xdlanv2(&h->data[(i + h->size[0] * (i - 1)) - 1], &s, &d, &tst, &ab,
+          s = h_data[(i + h->size[0] * i) - 1];
+          d = h_data[i + h->size[0] * (i - 1)];
+          tst = h_data[i + h->size[0] * i];
+          xdlanv2(&h_data[(i + h->size[0] * (i - 1)) - 1], &s, &d, &tst, &ab,
                   &aa, &ba, &bb, &rt2r, &rt1r);
-          h->data[(i + h->size[0] * i) - 1] = s;
-          h->data[i + h->size[0] * (i - 1)] = d;
-          h->data[i + h->size[0] * i] = tst;
+          h_data[(i + h->size[0] * i) - 1] = s;
+          h_data[i + h->size[0] * (i - 1)] = d;
+          h_data[i + h->size[0] * i] = tst;
           if (n > i + 1) {
             hoffset = (n - i) - 2;
             if (hoffset + 1 >= 1) {
               iy = i + (i + 1) * ldh;
               for (k = 0; k <= hoffset; k++) {
                 nr = iy + k * ldh;
-                tst = rt2r * h->data[nr - 1] + rt1r * h->data[nr];
-                h->data[nr] = rt2r * h->data[nr] - rt1r * h->data[nr - 1];
-                h->data[nr - 1] = tst;
+                tst = rt2r * h_data[nr - 1] + rt1r * h_data[nr];
+                h_data[nr] = rt2r * h_data[nr] - rt1r * h_data[nr - 1];
+                h_data[nr - 1] = tst;
               }
             }
           }
@@ -638,9 +644,9 @@ int xhseqr(emxArray_real_T *h, emxArray_real_T *z)
             for (k = 0; k <= i - 2; k++) {
               nr = iy + k;
               m = hoffset + k;
-              tst = rt2r * h->data[m] + rt1r * h->data[nr];
-              h->data[nr] = rt2r * h->data[nr] - rt1r * h->data[m];
-              h->data[m] = tst;
+              tst = rt2r * h_data[m] + rt1r * h_data[nr];
+              h_data[nr] = rt2r * h_data[nr] - rt1r * h_data[m];
+              h_data[m] = tst;
             }
           }
           if (n >= 1) {
@@ -649,9 +655,9 @@ int xhseqr(emxArray_real_T *h, emxArray_real_T *z)
             for (k = 0; k < n; k++) {
               nr = iy + k;
               m = hoffset + k;
-              tst = rt2r * z->data[m] + rt1r * z->data[nr];
-              z->data[nr] = rt2r * z->data[nr] - rt1r * z->data[m];
-              z->data[m] = tst;
+              tst = rt2r * z_data[m] + rt1r * z_data[nr];
+              z_data[nr] = rt2r * z_data[nr] - rt1r * z_data[m];
+              z_data[m] = tst;
             }
           }
         }

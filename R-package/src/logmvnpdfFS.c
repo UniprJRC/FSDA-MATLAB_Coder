@@ -13,33 +13,87 @@
 #include "logmvnpdfFS.h"
 #include "blockedSummation.h"
 #include "chol.h"
-#include "combineVectorElements.h"
 #include "fsdaC_emxutil.h"
 #include "fsdaC_types.h"
 #include "mldivide.h"
+#include "mtimes.h"
 #include "rt_nonfinite.h"
+#include "sum.h"
 #include <math.h>
 #include <string.h>
 
+/* Function Declarations */
+static void d_minus(emxArray_real_T *X0, const emxArray_real_T *X,
+                    const emxArray_real_T *Mu);
+
 /* Function Definitions */
-double logmvnpdfFS(const emxArray_real_T *X, const emxArray_real_T *Mu,
-                   const emxArray_real_T *Sigma)
+static void d_minus(emxArray_real_T *X0, const emxArray_real_T *X,
+                    const emxArray_real_T *Mu)
+{
+  const double *Mu_data;
+  const double *X_data;
+  double *X0_data;
+  int aux_0_1;
+  int aux_1_1;
+  int b_loop_ub;
+  int i;
+  int i1;
+  int loop_ub;
+  int stride_0_1;
+  int stride_1_1;
+  Mu_data = Mu->data;
+  X_data = X->data;
+  i = X0->size[0] * X0->size[1];
+  X0->size[0] = X->size[0];
+  if (Mu->size[1] == 1) {
+    X0->size[1] = X->size[1];
+  } else {
+    X0->size[1] = Mu->size[1];
+  }
+  emxEnsureCapacity_real_T(X0, i);
+  X0_data = X0->data;
+  stride_0_1 = (X->size[1] != 1);
+  stride_1_1 = (Mu->size[1] != 1);
+  aux_0_1 = 0;
+  aux_1_1 = 0;
+  if (Mu->size[1] == 1) {
+    loop_ub = X->size[1];
+  } else {
+    loop_ub = Mu->size[1];
+  }
+  for (i = 0; i < loop_ub; i++) {
+    b_loop_ub = X->size[0];
+    for (i1 = 0; i1 < b_loop_ub; i1++) {
+      X0_data[i1 + X0->size[0] * i] =
+          X_data[i1 + X->size[0] * aux_0_1] - Mu_data[aux_1_1];
+    }
+    aux_1_1 += stride_1_1;
+    aux_0_1 += stride_0_1;
+  }
+}
+
+void logmvnpdfFS(const emxArray_real_T *X, const emxArray_real_T *Mu,
+                 const emxArray_real_T *Sigma, emxArray_real_T *y)
 {
   emxArray_real_T *A;
   emxArray_real_T *X0;
-  emxArray_real_T *b;
-  emxArray_real_T *b_y;
-  emxArray_real_T *c_y;
   emxArray_real_T *eyed;
+  emxArray_real_T *r;
   emxArray_real_T *x;
-  double d;
-  double y;
-  int boffset;
-  int j;
-  int k;
+  const double *Mu_data;
+  const double *Sigma_data;
+  const double *X_data;
+  double Const;
+  double varargin_1;
+  double *X0_data;
+  double *eyed_data;
+  int b_loop_ub;
+  int i;
+  int loop_ub;
   int m;
-  int nc;
-  emxInit_real_T(&X0, 2);
+  Sigma_data = Sigma->data;
+  Mu_data = Mu->data;
+  X_data = X->data;
   /* logmvnpdfFS produces log of Multivariate normal probability density
    * function (pdf) */
   /*  */
@@ -65,7 +119,6 @@ double logmvnpdfFS(const emxArray_real_T *X, const emxArray_real_T *Mu,
   /*  and d which are directly passed to the compiled mex function */
   /*  */
   /*   Required input arguments: */
-  /*  */
   /*  */
   /*  X :           Input data. Scalar, Vector or matrix. */
   /*                n x d data matrix; n observations and d variables. Rows of
@@ -141,8 +194,6 @@ double logmvnpdfFS(const emxArray_real_T *X, const emxArray_real_T *Mu,
   /*  */
   /*  References: */
   /*  */
-  /*  */
-  /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
   /*  */
@@ -197,11 +248,9 @@ double logmvnpdfFS(const emxArray_real_T *X, const emxArray_real_T *Mu,
   /*     ttFSwithMex=ttMat; */
   /*     ttFSnoMex=ttMat; */
   /*  */
-  /*  */
   /*     Mat=0; tMat=0; */
   /*     FSwithmex=0; tFSwithMex=0; */
   /*     FSnoMex=0; tFSnoMex=0; */
-  /*  */
   /*  */
   /*     in = 1; iv=1; */
   /*     for n = nn */
@@ -234,7 +283,6 @@ double logmvnpdfFS(const emxArray_real_T *X, const emxArray_real_T *Mu,
   /*                 yI = logmvnpdfFS(X, Mu, Sigma); */
   /*                 tFSnoMex = tFSnoMex + toc(FSnoMex); */
   /*  */
-  /*  */
   /*                 if (sum(sum(abs(y0-yD))))>10^-6  || (sum(sum(abs(y0-yI))))
    * >10^-6 */
   /*                    error('FSDA:logmvnpdfFS:ShouldBeEq','Difference in
@@ -251,7 +299,6 @@ double logmvnpdfFS(const emxArray_real_T *X, const emxArray_real_T *Mu,
   /*             FSwithmex=0; tFSwithMex=0; */
   /*             FSnoMex=0; tFSnoMex=0; */
   /*  */
-  /*  */
   /*             disp(['n=' num2str(n) ' -- v=' num2str(v)]); */
   /*             iv = iv+1; */
   /*  */
@@ -259,7 +306,6 @@ double logmvnpdfFS(const emxArray_real_T *X, const emxArray_real_T *Mu,
   /*         in = in+1; */
   /*         iv = 1; */
   /*     end */
-  /*  */
   /*  */
   /*     % Plotting part */
   /*     a=ver; */
@@ -315,7 +361,6 @@ double logmvnpdfFS(const emxArray_real_T *X, const emxArray_real_T *Mu,
   /*                 X0 = zeros(n,v); */
   /*                 eyed=eye(v); */
   /*  */
-  /*  */
   /*                 X = randn(n,v); */
   /*                 Mu = randn(1,v); */
   /*                 Sigma=cov(X); */
@@ -323,7 +368,6 @@ double logmvnpdfFS(const emxArray_real_T *X, const emxArray_real_T *Mu,
   /*                 %  Matlab function mvnpdf */
   /*                 yMat = @() log(mvnpdf(X, Mu, Sigma)); */
   /*                 tMat = timeit(yMat); */
-  /*  */
   /*  */
   /*                 % logmvnpdfFS using mex file for mean deviations. */
   /*                 yFSwithMex = @() logmvnpdfFS(X, Mu, Sigma,X0,eyed,n,v); */
@@ -344,7 +388,6 @@ double logmvnpdfFS(const emxArray_real_T *X, const emxArray_real_T *Mu,
   /*             in = in+1; */
   /*             iv = 1; */
   /*         end */
-  /*  */
   /*  */
   /*         % Plotting part */
   /*         a=ver; */
@@ -405,115 +448,123 @@ double logmvnpdfFS(const emxArray_real_T *X, const emxArray_real_T *Mu,
   /*    Note that X/Sigma ~ X*inv(Sigma) ~ mrdivide(X,Sigma) are equivalent. */
   /*  verLess2016b is a boolean which is true if current version is less then */
   /*  2016b */
-  j = X0->size[0] * X0->size[1];
-  X0->size[0] = X->size[0];
-  X0->size[1] = X->size[1];
-  emxEnsureCapacity_real_T(X0, j);
-  boffset = X->size[0] * X->size[1];
-  for (j = 0; j < boffset; j++) {
-    X0->data[j] = X->data[j] - Mu->data[j];
+  emxInit_real_T(&X0, 2);
+  if (X->size[1] == Mu->size[1]) {
+    i = X0->size[0] * X0->size[1];
+    X0->size[0] = X->size[0];
+    X0->size[1] = X->size[1];
+    emxEnsureCapacity_real_T(X0, i);
+    X0_data = X0->data;
+    loop_ub = X->size[1];
+    for (i = 0; i < loop_ub; i++) {
+      b_loop_ub = X->size[0];
+      for (m = 0; m < b_loop_ub; m++) {
+        X0_data[m + X0->size[0] * i] = X_data[m + X->size[0] * i] - Mu_data[i];
+      }
+    }
+  } else {
+    d_minus(X0, X, Mu);
   }
   emxInit_real_T(&eyed, 2);
   /*  Create an identity matrix of size d */
   m = X0->size[1];
-  j = eyed->size[0] * eyed->size[1];
+  i = eyed->size[0] * eyed->size[1];
   eyed->size[0] = X0->size[1];
   eyed->size[1] = X0->size[1];
-  emxEnsureCapacity_real_T(eyed, j);
-  boffset = X0->size[1] * X0->size[1];
-  for (j = 0; j < boffset; j++) {
-    eyed->data[j] = 0.0;
+  emxEnsureCapacity_real_T(eyed, i);
+  eyed_data = eyed->data;
+  loop_ub = X0->size[1] * X0->size[1];
+  for (i = 0; i < loop_ub; i++) {
+    eyed_data[i] = 0.0;
   }
   if (X0->size[1] > 0) {
-    for (k = 0; k < m; k++) {
-      eyed->data[k + eyed->size[0] * k] = 1.0;
+    for (b_loop_ub = 0; b_loop_ub < m; b_loop_ub++) {
+      eyed_data[b_loop_ub + eyed->size[0] * b_loop_ub] = 1.0;
     }
   }
   emxInit_real_T(&A, 2);
   /*  Take Choleski of Sigma */
-  j = A->size[0] * A->size[1];
+  i = A->size[0] * A->size[1];
   A->size[0] = Sigma->size[0];
   A->size[1] = Sigma->size[1];
-  emxEnsureCapacity_real_T(A, j);
-  boffset = Sigma->size[0] * Sigma->size[1];
-  for (j = 0; j < boffset; j++) {
-    A->data[j] = Sigma->data[j];
+  emxEnsureCapacity_real_T(A, i);
+  eyed_data = A->data;
+  loop_ub = Sigma->size[0] * Sigma->size[1];
+  for (i = 0; i < loop_ub; i++) {
+    eyed_data[i] = Sigma_data[i];
   }
   m = cholesky(A);
+  eyed_data = A->data;
   if (m != 0) {
-    y = rtMinusInf;
+    i = y->size[0];
+    y->size[0] = 1;
+    emxEnsureCapacity_real_T(y, i);
+    X0_data = y->data;
+    X0_data[0] = rtMinusInf;
   } else {
     /*  Define the following value: d*log(2*pi)/2 */
     /*  Compute log(sqrt(diag(Sigma))), and define a constant value. */
     emxInit_real_T(&x, 1);
     if ((A->size[0] == 1) && (A->size[1] == 1)) {
-      j = x->size[0];
+      i = x->size[0];
       x->size[0] = 1;
-      emxEnsureCapacity_real_T(x, j);
-      x->data[0] = A->data[0];
+      emxEnsureCapacity_real_T(x, i);
+      X0_data = x->data;
+      X0_data[0] = eyed_data[0];
     } else {
       m = A->size[0];
-      boffset = A->size[1];
-      if (m < boffset) {
-        boffset = m;
+      b_loop_ub = A->size[1];
+      if (m <= b_loop_ub) {
+        b_loop_ub = m;
       }
       if (0 < A->size[1]) {
-        m = boffset;
+        m = b_loop_ub;
       } else {
         m = 0;
       }
-      j = x->size[0];
+      i = x->size[0];
       x->size[0] = m;
-      emxEnsureCapacity_real_T(x, j);
-      j = m - 1;
-      for (k = 0; k <= j; k++) {
-        x->data[k] = A->data[k + A->size[0] * k];
+      emxEnsureCapacity_real_T(x, i);
+      X0_data = x->data;
+      i = m - 1;
+      for (b_loop_ub = 0; b_loop_ub <= i; b_loop_ub++) {
+        X0_data[b_loop_ub] = eyed_data[b_loop_ub + A->size[0] * b_loop_ub];
       }
     }
     m = x->size[0];
-    for (k = 0; k < m; k++) {
-      x->data[k] = log(x->data[k]);
+    for (b_loop_ub = 0; b_loop_ub < m; b_loop_ub++) {
+      X0_data[b_loop_ub] = log(X0_data[b_loop_ub]);
     }
-    emxInit_real_T(&b_y, 2);
-    emxInit_real_T(&b, 2);
-    b_mldivide(A, eyed, b);
-    m = X0->size[1];
-    nc = b->size[1];
-    j = b_y->size[0] * b_y->size[1];
-    b_y->size[0] = 1;
-    b_y->size[1] = b->size[1];
-    emxEnsureCapacity_real_T(b_y, j);
-    for (j = 0; j < nc; j++) {
-      boffset = j * b->size[0];
-      b_y->data[j] = 0.0;
-      for (k = 0; k < m; k++) {
-        b_y->data[j] += X0->data[k] * b->data[boffset + k];
-      }
+    emxInit_real_T(&r, 2);
+    Const = blockedSummation(x, x->size[0]) +
+            0.918938533204673 * (double)X0->size[1];
+    b_mldivide(A, eyed, r);
+    b_mtimes(X0, r, eyed);
+    eyed_data = eyed->data;
+    i = r->size[0] * r->size[1];
+    r->size[0] = eyed->size[0];
+    r->size[1] = eyed->size[1];
+    emxEnsureCapacity_real_T(r, i);
+    X0_data = r->data;
+    loop_ub = eyed->size[0] * eyed->size[1];
+    emxFree_real_T(&x);
+    for (i = 0; i < loop_ub; i++) {
+      varargin_1 = eyed_data[i];
+      X0_data[i] = varargin_1 * varargin_1;
     }
-    emxFree_real_T(&b);
-    emxInit_real_T(&c_y, 2);
-    j = c_y->size[0] * c_y->size[1];
-    c_y->size[0] = 1;
-    c_y->size[1] = b_y->size[1];
-    emxEnsureCapacity_real_T(c_y, j);
-    m = b_y->size[1];
-    for (k = 0; k < m; k++) {
-      d = b_y->data[k];
-      c_y->data[k] = d * d;
+    sum(r, y);
+    X0_data = y->data;
+    loop_ub = y->size[0];
+    emxFree_real_T(&r);
+    for (i = 0; i < loop_ub; i++) {
+      X0_data[i] = -0.5 * X0_data[i] - Const;
     }
-    emxFree_real_T(&b_y);
-    y = -0.5 * d_combineVectorElements(c_y) -
-        (blockedSummation(x, x->size[0]) +
-         0.918938533204673 * (double)X0->size[1]);
     /*  Note that the instruction above is slightly faster than */
     /*  y = -0.5*sum((X*inv(Sigma)).^2,2)- Const; %#ok<MINV> */
-    emxFree_real_T(&c_y);
-    emxFree_real_T(&x);
   }
   emxFree_real_T(&A);
   emxFree_real_T(&eyed);
   emxFree_real_T(&X0);
-  return y;
 }
 
 /* End of code generation (logmvnpdfFS.c) */

@@ -18,6 +18,7 @@
 /* Function Definitions */
 double blockedSummation(const emxArray_real_T *x, int vlen)
 {
+  const double *x_data;
   double bsum;
   double y;
   int firstBlockLength;
@@ -26,6 +27,7 @@ double blockedSummation(const emxArray_real_T *x, int vlen)
   int k;
   int lastBlockLength;
   int nblocks;
+  x_data = x->data;
   if ((x->size[0] == 0) || (vlen == 0)) {
     y = 0.0;
   } else {
@@ -43,20 +45,20 @@ double blockedSummation(const emxArray_real_T *x, int vlen)
         lastBlockLength = 1024;
       }
     }
-    y = x->data[0];
+    y = x_data[0];
     for (k = 2; k <= firstBlockLength; k++) {
-      y += x->data[k - 1];
+      y += x_data[k - 1];
     }
     for (ib = 2; ib <= nblocks; ib++) {
       firstBlockLength = (ib - 1) << 10;
-      bsum = x->data[firstBlockLength];
+      bsum = x_data[firstBlockLength];
       if (ib == nblocks) {
         hi = lastBlockLength;
       } else {
         hi = 1024;
       }
       for (k = 2; k <= hi; k++) {
-        bsum += x->data[(firstBlockLength + k) - 1];
+        bsum += x_data[(firstBlockLength + k) - 1];
       }
       y += bsum;
     }

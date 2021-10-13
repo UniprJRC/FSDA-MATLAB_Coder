@@ -49,10 +49,28 @@ void r_addt(double *yy, double *xx, double *ww, int *nn, int *pp,
     //  Initialize function input argument 'la'
     argInit_scalar(r_la, b_la, la_data, la_size);
 
-    addt_wrapper(y, X, w, b_intercept, la_data, la_size, b_nocheck, &out);
+    // Initialize the output structure ===========================
+    //  VT::13.10.2021 - upgrade to MATLAB 2021b - now the output structue 
+    //  is with dynamic allocation. The elements S2add, Tadd and pval are 
+    //  now not doubles but emxArray. 
     
+    emxInit_struct_addt_T(&out);
+
+    // Rprintf("\nCalling addt_wrapper()...\n"); 
+
+    addt_wrapper(y, X, w, b_intercept, la_data, la_size, b_nocheck, &out);
+
+    /*
+    
+    Rprintf("\nReturning from addt_wrapper()...\n"); 
+    Rprintf("\nS2add dimensions: %d, %d \n", out.S2add->size[0], out.S2add->size[1]); 
+    Rprintf("Tadd dimensions: %d, %d \n", out.Tadd->size[0], out.Tadd->size[1]); 
+    Rprintf("\npval dimensions: %d, %d \n", out.pval->size[0], out.pval->size[1]); 
+    
+    */
+        
     *b = out.b.data[0];
-    *S2add = out.S2add.data[0];
-    *Tadd = out.Tadd.data[0];
-    *pval = out.pval.data[0];
+    *S2add = out.S2add->data[0];
+    *Tadd = out.Tadd->data[0];
+    *pval = out.pval->data[0];
 }

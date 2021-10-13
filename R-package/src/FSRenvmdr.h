@@ -34,6 +34,13 @@ void c_FSRenvmdr(double n, double p, double varargin_4,
 void d_FSRenvmdr(double n, double p, double varargin_4,
                  emxArray_real_T *MDRenv);
 
+void vc_binary_expand_op(emxArray_real_T *mm, double n,
+                         const emxArray_real_T *a, const emxArray_real_T *r3);
+
+void wc_binary_expand_op(emxArray_real_T *b_tmp, const emxArray_real_T *MinSca,
+                         const emxArray_real_T *mm,
+                         const emxArray_real_T *quant, double p);
+
 #ifdef __cplusplus
 }
 #endif

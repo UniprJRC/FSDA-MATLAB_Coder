@@ -31,6 +31,14 @@ void FSRmdr(const emxArray_real_T *y, const emxArray_real_T *X,
             emxArray_real_T *Un, emxArray_real_T *BB, emxArray_real_T *Bols,
             emxArray_real_T *S2);
 
+void b_minus(emxArray_real_T *e, const emxArray_real_T *y);
+
+void ub_binary_expand_op(emxArray_boolean_T *oldbsbT,
+                         const emxArray_boolean_T *bsbT);
+
+void wb_binary_expand_op(emxArray_boolean_T *unitstopenalize,
+                         const emxArray_real_T *b, const emxArray_real_T *r1);
+
 #ifdef __cplusplus
 }
 #endif

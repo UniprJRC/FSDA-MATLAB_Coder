@@ -61,7 +61,7 @@ extern void emxCopy_real_T(emxArray_real_T **dst, emxArray_real_T *const *src);
 extern void emxEnsureCapacity_boolean_T(emxArray_boolean_T *emxArray,
                                         int oldNumel);
 
-extern void emxEnsureCapacity_cell_wrap_43(emxArray_cell_wrap_43 *emxArray,
+extern void emxEnsureCapacity_cell_wrap_45(emxArray_cell_wrap_45 *emxArray,
                                            int oldNumel);
 
 extern void emxEnsureCapacity_char_T(emxArray_char_T *emxArray, int oldNumel);
@@ -79,10 +79,10 @@ extern void emxEnsureCapacity_uint32_T(emxArray_uint32_T *emxArray,
 
 extern void emxEnsureCapacity_uint8_T(emxArray_uint8_T *emxArray, int oldNumel);
 
-extern void emxExpand_cell_wrap_43(emxArray_cell_wrap_43 *emxArray,
+extern void emxExpand_cell_wrap_45(emxArray_cell_wrap_45 *emxArray,
                                    int fromIndex, int toIndex);
 
-extern void emxFreeMatrix_cell_wrap_56(cell_wrap_56 pMatrix[4]);
+extern void emxFreeMatrix_cell_wrap_58(cell_wrap_58 pMatrix[4]);
 
 extern void emxFreeMatrix_cell_wrap_6(cell_wrap_6 pMatrix[4]);
 
@@ -90,9 +90,9 @@ extern void emxFreeStruct_captured_var(c_captured_var *pStruct);
 
 extern void emxFreeStruct_captured_var1(d_captured_var *pStruct);
 
-extern void emxFreeStruct_cell_wrap_43(cell_wrap_43 *pStruct);
+extern void emxFreeStruct_cell_wrap_45(cell_wrap_45 *pStruct);
 
-extern void emxFreeStruct_cell_wrap_56(cell_wrap_56 *pStruct);
+extern void emxFreeStruct_cell_wrap_58(cell_wrap_58 *pStruct);
 
 extern void emxFreeStruct_cell_wrap_6(cell_wrap_6 *pStruct);
 
@@ -134,13 +134,15 @@ extern void emxFreeStruct_struct_T6(j_struct_T *pStruct);
 
 extern void emxFreeStruct_struct_T7(e_struct_T *pStruct);
 
+extern void emxFreeStruct_struct_addt_T(struct_addt_T *pStruct);
+
 extern void emxFreeStruct_struct_tclust_T(struct_tclust_T *pStruct);
 
 extern void emxFreeStruct_table(table *pStruct);
 
 extern void emxFree_boolean_T(emxArray_boolean_T **pEmxArray);
 
-extern void emxFree_cell_wrap_43(emxArray_cell_wrap_43 **pEmxArray);
+extern void emxFree_cell_wrap_45(emxArray_cell_wrap_45 **pEmxArray);
 
 extern void emxFree_char_T(emxArray_char_T **pEmxArray);
 
@@ -156,7 +158,7 @@ extern void emxFree_uint32_T(emxArray_uint32_T **pEmxArray);
 
 extern void emxFree_uint8_T(emxArray_uint8_T **pEmxArray);
 
-extern void emxInitMatrix_cell_wrap_56(cell_wrap_56 pMatrix[4]);
+extern void emxInitMatrix_cell_wrap_58(cell_wrap_58 pMatrix[4]);
 
 extern void emxInitMatrix_cell_wrap_6(cell_wrap_6 pMatrix[4]);
 
@@ -166,9 +168,9 @@ extern void emxInitStruct_captured_var1(c_captured_var *pStruct);
 
 extern void emxInitStruct_captured_var2(d_captured_var *pStruct);
 
-extern void emxInitStruct_cell_wrap_43(cell_wrap_43 *pStruct);
+extern void emxInitStruct_cell_wrap_45(cell_wrap_45 *pStruct);
 
-extern void emxInitStruct_cell_wrap_56(cell_wrap_56 *pStruct);
+extern void emxInitStruct_cell_wrap_58(cell_wrap_58 *pStruct);
 
 extern void emxInitStruct_cell_wrap_6(cell_wrap_6 *pStruct);
 
@@ -212,6 +214,8 @@ extern void emxInitStruct_struct_T6(j_struct_T *pStruct);
 
 extern void emxInitStruct_struct_T7(e_struct_T *pStruct);
 
+extern void emxInitStruct_struct_addt_T(struct_addt_T *pStruct);
+
 extern void emxInitStruct_struct_tclust_T(struct_tclust_T *pStruct);
 
 extern void emxInitStruct_table(table *pStruct);
@@ -219,7 +223,7 @@ extern void emxInitStruct_table(table *pStruct);
 extern void emxInit_boolean_T(emxArray_boolean_T **pEmxArray,
                               int numDimensions);
 
-extern void emxInit_cell_wrap_43(emxArray_cell_wrap_43 **pEmxArray,
+extern void emxInit_cell_wrap_45(emxArray_cell_wrap_45 **pEmxArray,
                                  int numDimensions);
 
 extern void emxInit_char_T(emxArray_char_T **pEmxArray, int numDimensions);
@@ -228,15 +232,15 @@ extern void emxInit_creal_T(emxArray_creal_T **pEmxArray, int numDimensions);
 
 extern void emxInit_int32_T(emxArray_int32_T **pEmxArray, int numDimensions);
 
-extern void emxInit_int8_T(emxArray_int8_T **pEmxArray, int numDimensions);
+extern void emxInit_int8_T(emxArray_int8_T **pEmxArray);
 
 extern void emxInit_real_T(emxArray_real_T **pEmxArray, int numDimensions);
 
 extern void emxInit_uint32_T(emxArray_uint32_T **pEmxArray, int numDimensions);
 
-extern void emxInit_uint8_T(emxArray_uint8_T **pEmxArray, int numDimensions);
+extern void emxInit_uint8_T(emxArray_uint8_T **pEmxArray);
 
-extern void emxTrim_cell_wrap_43(emxArray_cell_wrap_43 *emxArray, int fromIndex,
+extern void emxTrim_cell_wrap_45(emxArray_cell_wrap_45 *emxArray, int fromIndex,
                                  int toIndex);
 
 #ifdef __cplusplus

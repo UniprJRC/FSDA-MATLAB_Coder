@@ -72,7 +72,6 @@ void LTSts_wrapper(const emxArray_real_T *y, double conflev, bool dispresults,
   /*  nocheck is a boolean */
   /*  nsamp: a column vector of maximum length equal to 2 */
   /*  refstepsALS a scalar double */
-  /*  refstepsALS a scalar double */
   /*  SmallSampleCor a scalar double */
   /*  yxsave is a boolean */
   b_nsamp_size[0] = nsamp_size[1];

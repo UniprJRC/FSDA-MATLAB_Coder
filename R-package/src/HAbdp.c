@@ -13,8 +13,10 @@
 #include "HAbdp.h"
 #include "eml_erfcore.h"
 #include "fsdaC_data.h"
+#include "fsdaC_rtwutil.h"
 #include "fsdaC_types.h"
 #include "gammainc.h"
+#include "gammaln.h"
 #include "rt_nonfinite.h"
 #include <math.h>
 #include <string.h>
@@ -24,6 +26,7 @@ double HAbdp(double bdp, const emxArray_real_T *abc)
 {
   creal_T dc;
   creal_T dc1;
+  const double *abc_data;
   double Erho1;
   double Erhoab_tmp;
   double a;
@@ -32,18 +35,19 @@ double HAbdp(double bdp, const emxArray_real_T *abc)
   double b_y;
   double c;
   double c2;
-  double c2_tmp;
   double c_phic_tmp;
   double c_y;
   double ctun;
+  double d;
   double d_phic_tmp;
   double d_y;
+  double lgap11_tmp;
   double phic;
   double phic_tmp;
   double y;
+  abc_data = abc->data;
   /* HAbdp finds the constant c associated to the supplied breakdown point */
   /*  The constant is found through a dichotomic search */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('HAbdp')">Link to the help function</a> */
   /*  */
@@ -70,7 +74,6 @@ double HAbdp(double bdp, const emxArray_real_T *abc)
   /*   ctun : Requested tuning constant. Scalar. Tuning constatnt of Hampel rho
    */
   /*          function associated to requested breakdown point */
-  /*  */
   /*  */
   /*  More About: */
   /*  */
@@ -107,13 +110,10 @@ double HAbdp(double bdp, const emxArray_real_T *abc)
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
   /*  */
-  /*  */
   /* <a href="matlab: docsearchFS('HAbdp')">Link to the help page for this
    * function</a> */
   /*  */
   /* $LastChangedDate::                      $: Date of the last commit */
-  /*  */
-  /*  */
   /*  */
   /*  Examples: */
   /*  */
@@ -142,11 +142,10 @@ double HAbdp(double bdp, const emxArray_real_T *abc)
   /*  Convergence condition is E(\rho) = \rho(\infty) bdp */
   Erho1 = 10.0;
   while (fabs(Erho1 - 1.0) > 1.0E-10) {
-    a = abc->data[0] * ctun;
-    Erho1 = abc->data[1] * ctun;
-    c = abc->data[2] * ctun;
-    c2_tmp = c * c;
-    c2 = c2_tmp / 2.0;
+    a = abc_data[0] * ctun;
+    Erho1 = abc_data[1] * ctun;
+    c = abc_data[2] * ctun;
+    c2 = rt_powd_snf(c, 2.0) / 2.0;
     phic_tmp = c - Erho1;
     b_phic_tmp = a * a;
     c_phic_tmp = 0.5 * phic_tmp * a;
@@ -154,6 +153,8 @@ double HAbdp(double bdp, const emxArray_real_T *abc)
     phic = d_phic_tmp + c_phic_tmp;
     /*  |u| <a */
     /*  Erhoa=  \int_-a^a u^2/2 */
+    lgap11_tmp = 2.5;
+    gammaln(&lgap11_tmp);
     /*  rhoa = @(u,a,b,c)(0.5*u.^2.*(1/sqrt(2*pi)).*exp(-0.5*u.^2)); */
     /*  Erhoack=integral(@(u)rhoa(u,a,b,c),-a,a); */
     /*  a< |u| <b */
@@ -183,8 +184,11 @@ double HAbdp(double bdp, const emxArray_real_T *abc)
      * .*(1/sqrt(2*pi)).*exp(-0.5*u.^2); */
     /*      Erhobc3ck=2*integral(@(u)psi2(u,a,b,c),b,c); */
     /*  |u| >c */
-    dc = gammainc(Erho1 * Erho1 / 2.0, 1.5);
-    dc1 = gammainc(c2, 1.5);
+    d = 1.5;
+    gammaln(&d);
+    dc = scalar_gammainc(rt_powd_snf(Erho1, 2.0) / 2.0, 1.5,
+                         0.40546510810816438, lgap11_tmp);
+    dc1 = scalar_gammainc(c2, 1.5, 0.40546510810816438, lgap11_tmp);
     Erho1 = 0.5 * a * (dc.re - dc1.re);
     if (0.5 * a * (dc.im - dc1.im) == 0.0) {
       Erho1 /= phic_tmp;
@@ -194,17 +198,20 @@ double HAbdp(double bdp, const emxArray_real_T *abc)
       Erho1 /= phic_tmp;
     }
     Erho1 =
-        (((0.5 * (gammainc(b_phic_tmp / 2.0, 1.5)).re +
+        (((0.5 * (scalar_gammainc(rt_powd_snf(a, 2.0) / 2.0, 1.5,
+                                  0.40546510810816438, lgap11_tmp))
+                     .re +
            (2.0 * a * (exp(-0.5 * a * a) / 2.5066282746310002 - Erhoab_tmp) -
             b_phic_tmp * (0.5 * y - 0.5 * b_y))) +
           ((2.0 *
                 (d_phic_tmp +
-                 c_phic_tmp * (1.0 - c2_tmp / (phic_tmp * phic_tmp))) *
+                 c_phic_tmp * (1.0 - c * c / (phic_tmp * phic_tmp))) *
                 (0.5 * c_y - 0.5 * d_y) +
             Erho1) +
            2.0 * a * c * (Erhoab_tmp - exp(-0.5 * c * c) / 2.5066282746310002) /
                phic_tmp)) +
-         phic * (1.0 - (gammainc(c2, 0.5)).re)) /
+         phic *
+             (1.0 - (scalar_gammainc(c2, 0.5, -0.69314718055994529, d)).re)) /
         (phic * bdp);
     b_step /= 2.0;
     if (Erho1 > 1.0) {

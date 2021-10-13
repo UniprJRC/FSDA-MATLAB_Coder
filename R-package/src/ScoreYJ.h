@@ -27,6 +27,14 @@ void ScoreYJ(const emxArray_real_T *y, const emxArray_real_T *X,
              double varargin_2, double outSC_Score_data[],
              int *outSC_Score_size, double *outSC_Lik);
 
+void ad_binary_expand_op(emxArray_real_T *vposlai, const emxArray_real_T *vneg,
+                         double k, double qneg);
+
+void bd_binary_expand_op(emxArray_real_T *vposlai, const emxArray_real_T *vpos,
+                         double k, double q);
+
+void times(emxArray_real_T *vposlai, const emxArray_real_T *znonnegs);
+
 #ifdef __cplusplus
 }
 #endif

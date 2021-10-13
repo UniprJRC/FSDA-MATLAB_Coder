@@ -23,6 +23,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
+bool b_ishermitian(const emxArray_real_T *A);
+
 bool ishermitian(const emxArray_real_T *A);
 
 #ifdef __cplusplus

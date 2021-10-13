@@ -22,7 +22,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-creal_T gammainc(double x, double a);
+creal_T scalar_gammainc(double x, double a, double la, double lgap1);
 
 #ifdef __cplusplus
 }

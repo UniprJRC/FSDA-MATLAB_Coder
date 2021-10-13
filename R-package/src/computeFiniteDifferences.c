@@ -38,10 +38,13 @@ bool computeFiniteDifferences(i_struct_T *obj,
   captured_var *o_t2_nonlin_workspace_fun_works;
   emxArray_real_T *c_t2_nonlin_workspace_fun_works;
   emxArray_real_T *d_t2_nonlin_workspace_fun_works;
+  const double *cEqCurrent_data;
   double d;
   double delta1;
   double delta2;
   double deltaX;
+  double *JacCeqTrans_data;
+  double *xk_data;
   int exitg3;
   int formulaType;
   int i;
@@ -51,21 +54,23 @@ bool computeFiniteDifferences(i_struct_T *obj,
   bool exitg1;
   bool exitg2;
   bool guard1 = false;
+  JacCeqTrans_data = JacCeqTrans->data;
+  xk_data = xk->data;
+  cEqCurrent_data = cEqCurrent->data;
   if (obj->isEmptyNonlcon) {
     evalOK = true;
   } else {
     emxInit_real_T(&c_t2_nonlin_workspace_fun_works, 2);
     emxInit_real_T(&d_t2_nonlin_workspace_fun_works, 1);
-    switch (obj->FiniteDifferenceType) {
-    case 0:
+    if (obj->FiniteDifferenceType == 0) {
       evalOK = true;
       obj->numEvals = 0;
       idx = 0;
       exitg2 = false;
       while ((!exitg2) && (idx <= obj->nVar - 1)) {
         deltaX = 1.4901161193847656E-8 *
-                 (1.0 - 2.0 * (double)(xk->data[idx] < 0.0)) *
-                 fmax(fabs(xk->data[idx]), 1.0);
+                 (1.0 - 2.0 * (double)(xk_data[idx] < 0.0)) *
+                 fmax(fabs(xk_data[idx]), 1.0);
         e_t2_nonlin_workspace_fun_works =
             obj->nonlin.workspace.fun.workspace.fun.workspace.trend;
         f_t2_nonlin_workspace_fun_works =
@@ -97,24 +102,23 @@ bool computeFiniteDifferences(i_struct_T *obj,
         c_t2_nonlin_workspace_fun_works->size[1] =
             obj->nonlin.workspace.fun.workspace.xdata->size[1];
         emxEnsureCapacity_real_T(c_t2_nonlin_workspace_fun_works, i);
+        xk_data = c_t2_nonlin_workspace_fun_works->data;
         loop_ub = obj->nonlin.workspace.fun.workspace.xdata->size[0] *
                   obj->nonlin.workspace.fun.workspace.xdata->size[1];
         for (i = 0; i < loop_ub; i++) {
-          c_t2_nonlin_workspace_fun_works->data[i] =
-              obj->nonlin.workspace.fun.workspace.xdata->data[i];
+          xk_data[i] = obj->nonlin.workspace.fun.workspace.xdata->data[i];
         }
         i = d_t2_nonlin_workspace_fun_works->size[0];
         d_t2_nonlin_workspace_fun_works->size[0] =
             obj->nonlin.workspace.fun.workspace.ydata->size[0];
         emxEnsureCapacity_real_T(d_t2_nonlin_workspace_fun_works, i);
+        xk_data = d_t2_nonlin_workspace_fun_works->data;
         loop_ub = obj->nonlin.workspace.fun.workspace.ydata->size[0];
         for (i = 0; i < loop_ub; i++) {
-          d_t2_nonlin_workspace_fun_works->data[i] =
-              obj->nonlin.workspace.fun.workspace.ydata->data[i];
+          xk_data[i] = obj->nonlin.workspace.fun.workspace.ydata->data[i];
         }
         loop_ub = obj->mEq;
-        d = 0.0;
-        evalOK = finDiffEvalAndChkErr(
+        finDiffEvalAndChkErr(
             e_t2_nonlin_workspace_fun_works, f_t2_nonlin_workspace_fun_works,
             g_t2_nonlin_workspace_fun_works, h_t2_nonlin_workspace_fun_works,
             i_t2_nonlin_workspace_fun_works, j_t2_nonlin_workspace_fun_works,
@@ -122,7 +126,8 @@ bool computeFiniteDifferences(i_struct_T *obj,
             m_t2_nonlin_workspace_fun_works, n_t2_nonlin_workspace_fun_works,
             o_t2_nonlin_workspace_fun_works, p_t2_nonlin_workspace_fun_works,
             c_t2_nonlin_workspace_fun_works, d_t2_nonlin_workspace_fun_works,
-            loop_ub, &d, obj->cEq_1, idx + 1, deltaX, xk);
+            loop_ub, obj->cEq_1, idx + 1, deltaX, xk, &evalOK, &d);
+        xk_data = xk->data;
         obj->f_1 = 0.0;
         obj->numEvals++;
         guard1 = false;
@@ -160,39 +165,38 @@ bool computeFiniteDifferences(i_struct_T *obj,
             c_t2_nonlin_workspace_fun_works->size[1] =
                 obj->nonlin.workspace.fun.workspace.xdata->size[1];
             emxEnsureCapacity_real_T(c_t2_nonlin_workspace_fun_works, i);
+            xk_data = c_t2_nonlin_workspace_fun_works->data;
             loop_ub = obj->nonlin.workspace.fun.workspace.xdata->size[0] *
                       obj->nonlin.workspace.fun.workspace.xdata->size[1];
             for (i = 0; i < loop_ub; i++) {
-              c_t2_nonlin_workspace_fun_works->data[i] =
-                  obj->nonlin.workspace.fun.workspace.xdata->data[i];
+              xk_data[i] = obj->nonlin.workspace.fun.workspace.xdata->data[i];
             }
             i = d_t2_nonlin_workspace_fun_works->size[0];
             d_t2_nonlin_workspace_fun_works->size[0] =
                 obj->nonlin.workspace.fun.workspace.ydata->size[0];
             emxEnsureCapacity_real_T(d_t2_nonlin_workspace_fun_works, i);
+            xk_data = d_t2_nonlin_workspace_fun_works->data;
             loop_ub = obj->nonlin.workspace.fun.workspace.ydata->size[0];
             for (i = 0; i < loop_ub; i++) {
-              d_t2_nonlin_workspace_fun_works->data[i] =
-                  obj->nonlin.workspace.fun.workspace.ydata->data[i];
+              xk_data[i] = obj->nonlin.workspace.fun.workspace.ydata->data[i];
             }
             loop_ub = obj->mEq;
-            d = 0.0;
-            evalOK =
-                finDiffEvalAndChkErr(e_t2_nonlin_workspace_fun_works,
-                                     f_t2_nonlin_workspace_fun_works,
-                                     g_t2_nonlin_workspace_fun_works,
-                                     h_t2_nonlin_workspace_fun_works,
-                                     i_t2_nonlin_workspace_fun_works,
-                                     j_t2_nonlin_workspace_fun_works,
-                                     k_t2_nonlin_workspace_fun_works,
-                                     l_t2_nonlin_workspace_fun_works,
-                                     m_t2_nonlin_workspace_fun_works,
-                                     n_t2_nonlin_workspace_fun_works,
-                                     o_t2_nonlin_workspace_fun_works,
-                                     p_t2_nonlin_workspace_fun_works,
-                                     c_t2_nonlin_workspace_fun_works,
-                                     d_t2_nonlin_workspace_fun_works, loop_ub,
-                                     &d, obj->cEq_1, idx + 1, deltaX, xk);
+            finDiffEvalAndChkErr(e_t2_nonlin_workspace_fun_works,
+                                 f_t2_nonlin_workspace_fun_works,
+                                 g_t2_nonlin_workspace_fun_works,
+                                 h_t2_nonlin_workspace_fun_works,
+                                 i_t2_nonlin_workspace_fun_works,
+                                 j_t2_nonlin_workspace_fun_works,
+                                 k_t2_nonlin_workspace_fun_works,
+                                 l_t2_nonlin_workspace_fun_works,
+                                 m_t2_nonlin_workspace_fun_works,
+                                 n_t2_nonlin_workspace_fun_works,
+                                 o_t2_nonlin_workspace_fun_works,
+                                 p_t2_nonlin_workspace_fun_works,
+                                 c_t2_nonlin_workspace_fun_works,
+                                 d_t2_nonlin_workspace_fun_works, loop_ub,
+                                 obj->cEq_1, idx + 1, deltaX, xk, &evalOK, &d);
+            xk_data = xk->data;
             obj->f_1 = 0.0;
             obj->numEvals++;
           }
@@ -207,21 +211,19 @@ bool computeFiniteDifferences(i_struct_T *obj,
         if (guard1) {
           i = obj->mEq;
           for (loop_ub = 0; loop_ub < i; loop_ub++) {
-            JacCeqTrans->data[idx + ldJE * loop_ub] =
-                (obj->cEq_1->data[loop_ub] - cEqCurrent->data[loop_ub]) /
-                deltaX;
+            JacCeqTrans_data[idx + ldJE * loop_ub] =
+                (obj->cEq_1->data[loop_ub] - cEqCurrent_data[loop_ub]) / deltaX;
           }
           idx++;
         }
       }
-      break;
-    default:
+    } else {
       evalOK = true;
       obj->numEvals = 0;
       idx = 0;
       exitg1 = false;
       while ((!exitg1) && (idx <= obj->nVar - 1)) {
-        deltaX = 1.4901161193847656E-8 * fmax(fabs(xk->data[idx]), 1.0);
+        deltaX = 1.4901161193847656E-8 * fmax(fabs(xk_data[idx]), 1.0);
         formulaType = 0;
         delta1 = -deltaX;
         delta2 = deltaX;
@@ -258,24 +260,23 @@ bool computeFiniteDifferences(i_struct_T *obj,
           c_t2_nonlin_workspace_fun_works->size[1] =
               obj->nonlin.workspace.fun.workspace.xdata->size[1];
           emxEnsureCapacity_real_T(c_t2_nonlin_workspace_fun_works, i);
+          xk_data = c_t2_nonlin_workspace_fun_works->data;
           loop_ub = obj->nonlin.workspace.fun.workspace.xdata->size[0] *
                     obj->nonlin.workspace.fun.workspace.xdata->size[1];
           for (i = 0; i < loop_ub; i++) {
-            c_t2_nonlin_workspace_fun_works->data[i] =
-                obj->nonlin.workspace.fun.workspace.xdata->data[i];
+            xk_data[i] = obj->nonlin.workspace.fun.workspace.xdata->data[i];
           }
           i = d_t2_nonlin_workspace_fun_works->size[0];
           d_t2_nonlin_workspace_fun_works->size[0] =
               obj->nonlin.workspace.fun.workspace.ydata->size[0];
           emxEnsureCapacity_real_T(d_t2_nonlin_workspace_fun_works, i);
+          xk_data = d_t2_nonlin_workspace_fun_works->data;
           loop_ub = obj->nonlin.workspace.fun.workspace.ydata->size[0];
           for (i = 0; i < loop_ub; i++) {
-            d_t2_nonlin_workspace_fun_works->data[i] =
-                obj->nonlin.workspace.fun.workspace.ydata->data[i];
+            xk_data[i] = obj->nonlin.workspace.fun.workspace.ydata->data[i];
           }
           loop_ub = obj->mEq;
-          d = 0.0;
-          evalOK = finDiffEvalAndChkErr(
+          finDiffEvalAndChkErr(
               e_t2_nonlin_workspace_fun_works, f_t2_nonlin_workspace_fun_works,
               g_t2_nonlin_workspace_fun_works, h_t2_nonlin_workspace_fun_works,
               i_t2_nonlin_workspace_fun_works, j_t2_nonlin_workspace_fun_works,
@@ -283,7 +284,8 @@ bool computeFiniteDifferences(i_struct_T *obj,
               m_t2_nonlin_workspace_fun_works, n_t2_nonlin_workspace_fun_works,
               o_t2_nonlin_workspace_fun_works, p_t2_nonlin_workspace_fun_works,
               c_t2_nonlin_workspace_fun_works, d_t2_nonlin_workspace_fun_works,
-              loop_ub, &d, obj->cEq_1, idx + 1, delta1, xk);
+              loop_ub, obj->cEq_1, idx + 1, delta1, xk, &evalOK, &d);
+          xk_data = xk->data;
           obj->f_1 = 0.0;
           obj->numEvals++;
           if (!evalOK) {
@@ -326,39 +328,38 @@ bool computeFiniteDifferences(i_struct_T *obj,
             c_t2_nonlin_workspace_fun_works->size[1] =
                 obj->nonlin.workspace.fun.workspace.xdata->size[1];
             emxEnsureCapacity_real_T(c_t2_nonlin_workspace_fun_works, i);
+            xk_data = c_t2_nonlin_workspace_fun_works->data;
             loop_ub = obj->nonlin.workspace.fun.workspace.xdata->size[0] *
                       obj->nonlin.workspace.fun.workspace.xdata->size[1];
             for (i = 0; i < loop_ub; i++) {
-              c_t2_nonlin_workspace_fun_works->data[i] =
-                  obj->nonlin.workspace.fun.workspace.xdata->data[i];
+              xk_data[i] = obj->nonlin.workspace.fun.workspace.xdata->data[i];
             }
             i = d_t2_nonlin_workspace_fun_works->size[0];
             d_t2_nonlin_workspace_fun_works->size[0] =
                 obj->nonlin.workspace.fun.workspace.ydata->size[0];
             emxEnsureCapacity_real_T(d_t2_nonlin_workspace_fun_works, i);
+            xk_data = d_t2_nonlin_workspace_fun_works->data;
             loop_ub = obj->nonlin.workspace.fun.workspace.ydata->size[0];
             for (i = 0; i < loop_ub; i++) {
-              d_t2_nonlin_workspace_fun_works->data[i] =
-                  obj->nonlin.workspace.fun.workspace.ydata->data[i];
+              xk_data[i] = obj->nonlin.workspace.fun.workspace.ydata->data[i];
             }
             loop_ub = obj->mEq;
-            d = 0.0;
-            evalOK =
-                finDiffEvalAndChkErr(e_t2_nonlin_workspace_fun_works,
-                                     f_t2_nonlin_workspace_fun_works,
-                                     g_t2_nonlin_workspace_fun_works,
-                                     h_t2_nonlin_workspace_fun_works,
-                                     i_t2_nonlin_workspace_fun_works,
-                                     j_t2_nonlin_workspace_fun_works,
-                                     k_t2_nonlin_workspace_fun_works,
-                                     l_t2_nonlin_workspace_fun_works,
-                                     m_t2_nonlin_workspace_fun_works,
-                                     n_t2_nonlin_workspace_fun_works,
-                                     o_t2_nonlin_workspace_fun_works,
-                                     p_t2_nonlin_workspace_fun_works,
-                                     c_t2_nonlin_workspace_fun_works,
-                                     d_t2_nonlin_workspace_fun_works, loop_ub,
-                                     &d, obj->cEq_2, idx + 1, delta2, xk);
+            finDiffEvalAndChkErr(e_t2_nonlin_workspace_fun_works,
+                                 f_t2_nonlin_workspace_fun_works,
+                                 g_t2_nonlin_workspace_fun_works,
+                                 h_t2_nonlin_workspace_fun_works,
+                                 i_t2_nonlin_workspace_fun_works,
+                                 j_t2_nonlin_workspace_fun_works,
+                                 k_t2_nonlin_workspace_fun_works,
+                                 l_t2_nonlin_workspace_fun_works,
+                                 m_t2_nonlin_workspace_fun_works,
+                                 n_t2_nonlin_workspace_fun_works,
+                                 o_t2_nonlin_workspace_fun_works,
+                                 p_t2_nonlin_workspace_fun_works,
+                                 c_t2_nonlin_workspace_fun_works,
+                                 d_t2_nonlin_workspace_fun_works, loop_ub,
+                                 obj->cEq_2, idx + 1, delta2, xk, &evalOK, &d);
+            xk_data = xk->data;
             obj->f_2 = 0.0;
             obj->numEvals++;
             if ((!evalOK) && (formulaType == 0) && (!obj->hasBounds)) {
@@ -378,7 +379,7 @@ bool computeFiniteDifferences(i_struct_T *obj,
             switch (formulaType) {
             case 0:
               for (formulaType = 0; formulaType <= loop_ub; formulaType++) {
-                JacCeqTrans->data[idx + ldJE * formulaType] =
+                JacCeqTrans_data[idx + ldJE * formulaType] =
                     (-obj->cEq_1->data[formulaType] +
                      obj->cEq_2->data[formulaType]) /
                     (2.0 * deltaX);
@@ -386,8 +387,8 @@ bool computeFiniteDifferences(i_struct_T *obj,
               break;
             case 1:
               for (formulaType = 0; formulaType <= loop_ub; formulaType++) {
-                JacCeqTrans->data[idx + ldJE * formulaType] =
-                    ((-3.0 * cEqCurrent->data[formulaType] +
+                JacCeqTrans_data[idx + ldJE * formulaType] =
+                    ((-3.0 * cEqCurrent_data[formulaType] +
                       4.0 * obj->cEq_1->data[formulaType]) -
                      obj->cEq_2->data[formulaType]) /
                     (2.0 * deltaX);
@@ -395,10 +396,10 @@ bool computeFiniteDifferences(i_struct_T *obj,
               break;
             default:
               for (formulaType = 0; formulaType <= loop_ub; formulaType++) {
-                JacCeqTrans->data[idx + ldJE * formulaType] =
+                JacCeqTrans_data[idx + ldJE * formulaType] =
                     ((obj->cEq_1->data[formulaType] -
                       4.0 * obj->cEq_2->data[formulaType]) +
-                     3.0 * cEqCurrent->data[formulaType]) /
+                     3.0 * cEqCurrent_data[formulaType]) /
                     (2.0 * deltaX);
               }
               break;
@@ -407,7 +408,6 @@ bool computeFiniteDifferences(i_struct_T *obj,
           idx++;
         }
       }
-      break;
     }
     emxFree_real_T(&d_t2_nonlin_workspace_fun_works);
     emxFree_real_T(&c_t2_nonlin_workspace_fun_works);

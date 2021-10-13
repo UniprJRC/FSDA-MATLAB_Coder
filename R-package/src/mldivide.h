@@ -26,9 +26,7 @@ extern "C" {
 void b_mldivide(const emxArray_real_T *A, const emxArray_real_T *B,
                 emxArray_real_T *Y);
 
-double c_mldivide(const emxArray_real_T *A, const emxArray_real_T *B);
-
-void d_mldivide(const double A[27], const double B[9], double Y[3]);
+void c_mldivide(const double B[9], double Y[3]);
 
 void mldivide(const emxArray_real_T *A, const emxArray_real_T *B,
               emxArray_real_T *Y);

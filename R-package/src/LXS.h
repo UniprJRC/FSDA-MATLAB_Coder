@@ -41,14 +41,17 @@ void b_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
            bool varargin_10, const double varargin_14_data[],
            const int varargin_14_size[2], struct_LXS_T *out);
 
+double b_corfactorRAW(double n, double alpha);
+
 void c_LXS(const emxArray_real_T *y, const emxArray_real_T *X,
            const emxArray_real_T *varargin_2, double varargin_4,
            const emxArray_real_T *varargin_6, bool varargin_10,
            struct_LXS_T *out);
 
-double corfactorRAW(double n, double alpha);
+void he_binary_expand_op(emxArray_real_T *r2,
+                         const emxArray_boolean_T *weights);
 
-double corfactorREW(double n, double alpha);
+void kb_binary_expand_op(struct_LXS_T *out, const emxArray_real_T *y);
 
 #ifdef __cplusplus
 }

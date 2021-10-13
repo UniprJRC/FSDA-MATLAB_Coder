@@ -29,6 +29,10 @@ void xgeqp3(emxArray_real_T *A, emxArray_real_T *tau, emxArray_int32_T *jpvt)
   double d;
   double s;
   double smax;
+  double *A_data;
+  double *tau_data;
+  double *vn2_data;
+  double *work_data;
   int b_i;
   int i;
   int ii;
@@ -44,19 +48,22 @@ void xgeqp3(emxArray_real_T *A, emxArray_real_T *tau, emxArray_int32_T *jpvt)
   int nmi;
   int pvt;
   int u0;
+  int *jpvt_data;
   bool guard1 = false;
+  A_data = A->data;
   m = A->size[0];
   n = A->size[1];
   u0 = A->size[0];
   minmana = A->size[1];
-  if (u0 < minmana) {
+  if (u0 <= minmana) {
     minmana = u0;
   }
   i = tau->size[0];
   tau->size[0] = minmana;
   emxEnsureCapacity_real_T(tau, i);
+  tau_data = tau->data;
   for (i = 0; i < minmana; i++) {
-    tau->data[i] = 0.0;
+    tau_data[i] = 0.0;
   }
   emxInit_real_T(&work, 1);
   emxInit_real_T(&vn1, 1);
@@ -67,7 +74,7 @@ void xgeqp3(emxArray_real_T *A, emxArray_real_T *tau, emxArray_int32_T *jpvt)
   } else {
     u0 = A->size[0];
     minmana = A->size[1];
-    if (u0 < minmana) {
+    if (u0 <= minmana) {
       minmana = u0;
     }
     if (minmana < 1) {
@@ -77,44 +84,48 @@ void xgeqp3(emxArray_real_T *A, emxArray_real_T *tau, emxArray_int32_T *jpvt)
       jpvt->size[0] = 1;
       jpvt->size[1] = A->size[1];
       emxEnsureCapacity_int32_T(jpvt, i);
+      jpvt_data = jpvt->data;
       minmana = A->size[1];
       for (i = 0; i < minmana; i++) {
-        jpvt->data[i] = 0;
+        jpvt_data[i] = 0;
       }
       for (k = 0; k < n; k++) {
-        jpvt->data[k] = k + 1;
+        jpvt_data[k] = k + 1;
       }
       ma = A->size[0];
       u0 = A->size[0];
       minmn = A->size[1];
-      if (u0 < minmn) {
+      if (u0 <= minmn) {
         minmn = u0;
       }
       i = work->size[0];
       work->size[0] = A->size[1];
       emxEnsureCapacity_real_T(work, i);
+      work_data = work->data;
       minmana = A->size[1];
       for (i = 0; i < minmana; i++) {
-        work->data[i] = 0.0;
+        work_data[i] = 0.0;
       }
       i = vn1->size[0];
       vn1->size[0] = A->size[1];
       emxEnsureCapacity_real_T(vn1, i);
+      work_data = vn1->data;
       minmana = A->size[1];
       for (i = 0; i < minmana; i++) {
-        vn1->data[i] = 0.0;
+        work_data[i] = 0.0;
       }
       i = vn2->size[0];
       vn2->size[0] = A->size[1];
       emxEnsureCapacity_real_T(vn2, i);
+      vn2_data = vn2->data;
       minmana = A->size[1];
       for (i = 0; i < minmana; i++) {
-        vn2->data[i] = 0.0;
+        vn2_data[i] = 0.0;
       }
       for (u0 = 0; u0 < n; u0++) {
         d = xnrm2(m, A, u0 * ma + 1);
-        vn1->data[u0] = d;
-        vn2->data[u0] = d;
+        work_data[u0] = d;
+        vn2_data[u0] = d;
       }
       for (b_i = 0; b_i < minmn; b_i++) {
         ip1 = b_i + 2;
@@ -127,9 +138,9 @@ void xgeqp3(emxArray_real_T *A, emxArray_real_T *tau, emxArray_int32_T *jpvt)
         } else {
           minmana = 0;
           if (nmi > 1) {
-            smax = fabs(vn1->data[b_i]);
+            smax = fabs(work_data[b_i]);
             for (k = 2; k <= nmi; k++) {
-              s = fabs(vn1->data[(b_i + k) - 1]);
+              s = fabs(work_data[(b_i + k) - 1]);
               if (s > smax) {
                 minmana = k - 1;
                 smax = s;
@@ -142,54 +153,56 @@ void xgeqp3(emxArray_real_T *A, emxArray_real_T *tau, emxArray_int32_T *jpvt)
           minmana = pvt * ma;
           for (k = 0; k < m; k++) {
             u0 = minmana + k;
-            smax = A->data[u0];
+            smax = A_data[u0];
             i = ii_tmp + k;
-            A->data[u0] = A->data[i];
-            A->data[i] = smax;
+            A_data[u0] = A_data[i];
+            A_data[i] = smax;
           }
-          minmana = jpvt->data[pvt];
-          jpvt->data[pvt] = jpvt->data[b_i];
-          jpvt->data[b_i] = minmana;
-          vn1->data[pvt] = vn1->data[b_i];
-          vn2->data[pvt] = vn2->data[b_i];
+          minmana = jpvt_data[pvt];
+          jpvt_data[pvt] = jpvt_data[b_i];
+          jpvt_data[b_i] = minmana;
+          work_data[pvt] = work_data[b_i];
+          vn2_data[pvt] = vn2_data[b_i];
         }
         if (b_i + 1 < m) {
-          smax = A->data[ii];
+          smax = A_data[ii];
           d = b_xzlarfg(mmi, &smax, A, ii + 2);
-          tau->data[b_i] = d;
-          A->data[ii] = smax;
+          A_data = A->data;
+          tau_data[b_i] = d;
+          A_data[ii] = smax;
         } else {
           d = 0.0;
-          tau->data[b_i] = 0.0;
+          tau_data[b_i] = 0.0;
         }
         if (b_i + 1 < n) {
-          smax = A->data[ii];
-          A->data[ii] = 1.0;
+          smax = A_data[ii];
+          A_data[ii] = 1.0;
           xzlarf(mmi, nmi - 1, ii + 1, d, A, (ii + ma) + 1, ma, work);
-          A->data[ii] = smax;
+          A_data = A->data;
+          A_data[ii] = smax;
         }
         for (u0 = ip1; u0 <= n; u0++) {
           minmana = b_i + (u0 - 1) * ma;
-          d = vn1->data[u0 - 1];
+          d = work_data[u0 - 1];
           if (d != 0.0) {
-            smax = fabs(A->data[minmana]) / d;
+            smax = fabs(A_data[minmana]) / d;
             smax = 1.0 - smax * smax;
             if (smax < 0.0) {
               smax = 0.0;
             }
-            s = d / vn2->data[u0 - 1];
+            s = d / vn2_data[u0 - 1];
             s = smax * (s * s);
             if (s <= 1.4901161193847656E-8) {
               if (b_i + 1 < m) {
                 d = xnrm2(mmi - 1, A, minmana + 2);
-                vn1->data[u0 - 1] = d;
-                vn2->data[u0 - 1] = d;
+                work_data[u0 - 1] = d;
+                vn2_data[u0 - 1] = d;
               } else {
-                vn1->data[u0 - 1] = 0.0;
-                vn2->data[u0 - 1] = 0.0;
+                work_data[u0 - 1] = 0.0;
+                vn2_data[u0 - 1] = 0.0;
               }
             } else {
-              vn1->data[u0 - 1] = d * sqrt(smax);
+              work_data[u0 - 1] = d * sqrt(smax);
             }
           }
         }
@@ -201,12 +214,13 @@ void xgeqp3(emxArray_real_T *A, emxArray_real_T *tau, emxArray_int32_T *jpvt)
     jpvt->size[0] = 1;
     jpvt->size[1] = A->size[1];
     emxEnsureCapacity_int32_T(jpvt, i);
+    jpvt_data = jpvt->data;
     minmana = A->size[1];
     for (i = 0; i < minmana; i++) {
-      jpvt->data[i] = 0;
+      jpvt_data[i] = 0;
     }
     for (u0 = 0; u0 < n; u0++) {
-      jpvt->data[u0] = u0 + 1;
+      jpvt_data[u0] = u0 + 1;
     }
   }
   emxFree_real_T(&vn2);

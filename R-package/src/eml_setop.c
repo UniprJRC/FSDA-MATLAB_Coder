@@ -28,11 +28,13 @@ static double skip_to_last_equal_value(int *k, double x);
 /* Function Definitions */
 static double b_skip_to_last_equal_value(int *k, const emxArray_real_T *x)
 {
+  const double *x_data;
   double absx;
   double xk;
   int exponent;
   bool exitg1;
-  xk = x->data[*k - 1];
+  x_data = x->data;
+  xk = x_data[*k - 1];
   exitg1 = false;
   while ((!exitg1) && (*k < x->size[0])) {
     absx = fabs(xk / 2.0);
@@ -46,9 +48,9 @@ static double b_skip_to_last_equal_value(int *k, const emxArray_real_T *x)
     } else {
       absx = rtNaN;
     }
-    if ((fabs(xk - x->data[*k]) < absx) ||
-        (rtIsInf(x->data[*k]) && rtIsInf(xk) &&
-         ((x->data[*k] > 0.0) == (xk > 0.0)))) {
+    if ((fabs(xk - x_data[*k]) < absx) ||
+        (rtIsInf(x_data[*k]) && rtIsInf(xk) &&
+         ((x_data[*k] > 0.0) == (xk > 0.0)))) {
       (*k)++;
     } else {
       exitg1 = true;
@@ -59,11 +61,13 @@ static double b_skip_to_last_equal_value(int *k, const emxArray_real_T *x)
 
 static double c_skip_to_last_equal_value(int *k, const emxArray_real_T *x)
 {
+  const double *x_data;
   double absx;
   double xk;
   int exponent;
   bool exitg1;
-  xk = x->data[*k - 1];
+  x_data = x->data;
+  xk = x_data[*k - 1];
   exitg1 = false;
   while ((!exitg1) && (*k < x->size[1])) {
     absx = fabs(xk / 2.0);
@@ -77,9 +81,9 @@ static double c_skip_to_last_equal_value(int *k, const emxArray_real_T *x)
     } else {
       absx = rtNaN;
     }
-    if ((fabs(xk - x->data[*k]) < absx) ||
-        (rtIsInf(x->data[*k]) && rtIsInf(xk) &&
-         ((x->data[*k] > 0.0) == (xk > 0.0)))) {
+    if ((fabs(xk - x_data[*k]) < absx) ||
+        (rtIsInf(x_data[*k]) && rtIsInf(xk) &&
+         ((x_data[*k] > 0.0) == (xk > 0.0)))) {
       (*k)++;
     } else {
       exitg1 = true;
@@ -123,6 +127,7 @@ void b_do_vectors(const emxArray_real_T *a, const emxArray_real_T *b,
   double absx;
   double ak;
   double bk;
+  double *c_data;
   int b_ialast;
   int exponent;
   int iafirst;
@@ -131,15 +136,18 @@ void b_do_vectors(const emxArray_real_T *a, const emxArray_real_T *b,
   int na;
   int nc;
   int nia;
+  int *ia_data;
   bool p;
   na = a->size[1];
   iblast = c->size[0] * c->size[1];
   c->size[0] = 1;
   c->size[1] = a->size[1];
   emxEnsureCapacity_real_T(c, iblast);
+  c_data = c->data;
   iblast = ia->size[0];
   ia->size[0] = a->size[1];
   emxEnsureCapacity_int32_T(ia, iblast);
+  ia_data = ia->data;
   *ib_size = 0;
   nc = 0;
   nia = 0;
@@ -178,8 +186,8 @@ void b_do_vectors(const emxArray_real_T *a, const emxArray_real_T *b,
       if (p) {
         nc++;
         nia++;
-        c->data[nc - 1] = ak;
-        ia->data[nia - 1] = iafirst + 1;
+        c_data[nc - 1] = ak;
+        ia_data[nia - 1] = iafirst + 1;
         ialast = b_ialast + 1;
         iafirst = b_ialast;
       } else {
@@ -192,8 +200,8 @@ void b_do_vectors(const emxArray_real_T *a, const emxArray_real_T *b,
     ak = c_skip_to_last_equal_value(&iblast, a);
     nc++;
     nia++;
-    c->data[nc - 1] = ak;
-    ia->data[nia - 1] = iafirst + 1;
+    c_data[nc - 1] = ak;
+    ia_data[nia - 1] = iafirst + 1;
     ialast = iblast + 1;
     iafirst = iblast;
   }
@@ -222,6 +230,7 @@ void c_do_vectors(const emxArray_real_T *a, const emxArray_real_T *b,
   double absx;
   double ak;
   double bk;
+  double *c_data;
   int b_ialast;
   int b_iblast;
   int exponent;
@@ -231,21 +240,26 @@ void c_do_vectors(const emxArray_real_T *a, const emxArray_real_T *b,
   int iblast;
   int nc;
   int ncmax;
+  int *ia_data;
+  int *ib_data;
   bool p;
   iafirst = a->size[1];
   ncmax = b->size[0];
-  if (iafirst < ncmax) {
+  if (iafirst <= ncmax) {
     ncmax = iafirst;
   }
   iafirst = c->size[0];
   c->size[0] = ncmax;
   emxEnsureCapacity_real_T(c, iafirst);
+  c_data = c->data;
   iafirst = ia->size[0];
   ia->size[0] = ncmax;
   emxEnsureCapacity_int32_T(ia, iafirst);
+  ia_data = ia->data;
   iafirst = ib->size[0];
   ib->size[0] = ncmax;
   emxEnsureCapacity_int32_T(ib, iafirst);
+  ib_data = ib->data;
   nc = 0;
   iafirst = 0;
   ialast = 1;
@@ -272,9 +286,9 @@ void c_do_vectors(const emxArray_real_T *a, const emxArray_real_T *b,
     if ((fabs(bk - ak) < absx) ||
         (rtIsInf(ak) && rtIsInf(bk) && ((ak > 0.0) == (bk > 0.0)))) {
       nc++;
-      c->data[nc - 1] = ak;
-      ia->data[nc - 1] = iafirst + 1;
-      ib->data[nc - 1] = ibfirst + 1;
+      c_data[nc - 1] = ak;
+      ia_data[nc - 1] = iafirst + 1;
+      ib_data[nc - 1] = ibfirst + 1;
       ialast = b_ialast + 1;
       iafirst = b_ialast;
       iblast = b_iblast + 1;
@@ -336,16 +350,11 @@ void d_do_vectors(double a, const emxArray_real_T *b, double c_data[],
   int ibfirst;
   int iblast;
   int nc;
-  int ncmax;
   bool p;
-  ncmax = b->size[1];
-  if (1 < ncmax) {
-    ncmax = 1;
-  }
+  *ia_size = (1 <= b->size[1]);
   c_size[0] = 1;
-  c_size[1] = ncmax;
-  *ia_size = (signed char)ncmax;
-  *ib_size = (signed char)ncmax;
+  c_size[1] = *ia_size;
+  *ib_size = *ia_size;
   nc = 0;
   iafirst = 0;
   ialast = 1;
@@ -396,7 +405,7 @@ void d_do_vectors(double a, const emxArray_real_T *b, double c_data[],
       }
     }
   }
-  if (ncmax > 0) {
+  if (*ia_size > 0) {
     *ia_size = (1 <= nc);
     *ib_size = (1 <= nc);
     c_size[1] = (1 <= nc);
@@ -419,12 +428,9 @@ void do_vectors(double a, const emxArray_real_T *b, double c_data[],
   int iblast;
   int nc;
   bool p;
-  *c_size = b->size[0];
-  if (1 < *c_size) {
-    *c_size = 1;
-  }
-  *ia_size = (signed char)*c_size;
-  *ib_size = (signed char)*c_size;
+  *c_size = (1 <= b->size[0]);
+  *ia_size = *c_size;
+  *ib_size = *c_size;
   nc = 0;
   iafirst = 0;
   ialast = 1;
@@ -488,6 +494,7 @@ void e_do_vectors(const emxArray_real_T *a, const emxArray_real_T *b,
   double absx;
   double ak;
   double bk;
+  double *c_data;
   int b_ialast;
   int exponent;
   int iafirst;
@@ -496,15 +503,18 @@ void e_do_vectors(const emxArray_real_T *a, const emxArray_real_T *b,
   int na;
   int nc;
   int nia;
+  int *ia_data;
   bool p;
   na = a->size[1];
   iblast = c->size[0] * c->size[1];
   c->size[0] = 1;
   c->size[1] = a->size[1];
   emxEnsureCapacity_real_T(c, iblast);
+  c_data = c->data;
   iblast = ia->size[0];
   ia->size[0] = a->size[1];
   emxEnsureCapacity_int32_T(ia, iblast);
+  ia_data = ia->data;
   *ib_size = 0;
   nc = 0;
   nia = 0;
@@ -543,8 +553,8 @@ void e_do_vectors(const emxArray_real_T *a, const emxArray_real_T *b,
       if (p) {
         nc++;
         nia++;
-        c->data[nc - 1] = ak;
-        ia->data[nia - 1] = iafirst + 1;
+        c_data[nc - 1] = ak;
+        ia_data[nia - 1] = iafirst + 1;
         ialast = b_ialast + 1;
         iafirst = b_ialast;
       } else {
@@ -557,8 +567,8 @@ void e_do_vectors(const emxArray_real_T *a, const emxArray_real_T *b,
     ak = c_skip_to_last_equal_value(&iblast, a);
     nc++;
     nia++;
-    c->data[nc - 1] = ak;
-    ia->data[nia - 1] = iafirst + 1;
+    c_data[nc - 1] = ak;
+    ia_data[nia - 1] = iafirst + 1;
     ialast = iblast + 1;
     iafirst = iblast;
   }

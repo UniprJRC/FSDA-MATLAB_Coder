@@ -29,6 +29,17 @@ void MMregcore(const emxArray_real_T *y, const emxArray_real_T *X,
                const emxArray_char_T *varargin_16,
                const emxArray_real_T *varargin_18, e_struct_T *out);
 
+void ie_binary_expand_op(emxArray_real_T *b1, const struct_MMreg_T *out);
+
+void je_binary_expand_op(struct_MMreg_T *out, const emxArray_real_T *r,
+                         const emxArray_real_T *y);
+
+void ke_binary_expand_op(struct_MMreg_T *out, const emxArray_real_T *y,
+                         double ss);
+
+void me_binary_expand_op(struct_MMreg_T *out, const emxArray_real_T *y,
+                         double ss);
+
 #ifdef __cplusplus
 }
 #endif

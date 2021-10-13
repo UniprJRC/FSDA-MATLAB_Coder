@@ -21,11 +21,13 @@ double quickselectFS(emxArray_real_T *A, double k, double kiniindex)
   double Ak;
   double d;
   double pivot;
+  double *A_data;
   int b_i;
   unsigned int c_i;
   int i;
   int left;
   int right;
+  A_data = A->data;
   /* quickselectFS finds the k-th order statistic */
   /*  */
   /* <a href="matlab: docsearchFS('quickselectFS')">Link to the help
@@ -41,8 +43,6 @@ double quickselectFS(emxArray_real_T *A, double k, double kiniindex)
   /*        desired order statistic. */
   /*                  Data Types - double */
   /*  */
-  /*  */
-  /*  */
   /*  Optional input arguments: */
   /*  */
   /*   kiniindex: Index of an element in A. Scalar. */
@@ -57,12 +57,13 @@ double quickselectFS(emxArray_real_T *A, double k, double kiniindex)
   /*  */
   /*  Output: */
   /*  */
-  /*  kE : k-th order statistic. Scalar. Element in A that is larger than
-   * exactly k - 1 other elements of A. */
+  /*  kE : k-th order statistic. Scalar. Element in A that is larger than */
+  /*  exactly k - 1 other elements of A. */
   /*  */
   /*  Optional Output: */
   /*      */
-  /*     Asor   : Sorted input. Vector. Input vector A sorted. */
+  /*     Asor   : Partially sorted vector. Vector. Elements of input vector  */
+  /*              A(1:k) are sorted in ascending order. */
   /*  */
   /*  See also:  FSMmmd */
   /*  */
@@ -73,7 +74,6 @@ double quickselectFS(emxArray_real_T *A, double k, double kiniindex)
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('quickselectFS')">Link to the help page for
    * this function</a> */
@@ -112,6 +112,15 @@ double quickselectFS(emxArray_real_T *A, double k, double kiniindex)
   /*     % Check the result */
   /*     disp([Y, Ysor]) */
   /* } */
+  /* { */
+  /*     %% quickselectFS: worst case scenario: see circshift */
+  /*     n=10; */
+  /*     Y=1:n; */
+  /*     Y = circshift(Y,-1); */
+  /*     k=n; */
+  /*     out=quickselectFS(Y,k); */
+  /*     disp(out); */
+  /* } */
   /*  Beginning of code */
   /*  Initialise the two sentinels */
   left = 0;
@@ -119,33 +128,33 @@ double quickselectFS(emxArray_real_T *A, double k, double kiniindex)
   /*  if we know that element in position kiniindex is "close" to the desired
    * order */
   /*  statistic k, than swap A(k) and A(kiniindex). */
-  Ak = A->data[(int)k - 1];
-  A->data[(int)k - 1] = A->data[(int)kiniindex - 1];
-  A->data[(int)kiniindex - 1] = Ak;
+  Ak = A_data[(int)k - 1];
+  A_data[(int)k - 1] = A_data[(int)kiniindex - 1];
+  A_data[(int)kiniindex - 1] = Ak;
   /*  pivot is chosen at fixed position k.  */
   Ak = -999.0;
   while (Ak != k) {
     /* while ((left < right) && (position ~= k)) */
-    pivot = A->data[(int)k - 1];
+    pivot = A_data[(int)k - 1];
     /*  Swap right sentinel and pivot element */
-    A->data[(int)k - 1] = A->data[right];
-    A->data[right] = pivot;
+    A_data[(int)k - 1] = A_data[right];
+    A_data[right] = pivot;
     Ak = left + 1;
     i = right - left;
     for (b_i = 0; b_i <= i; b_i++) {
       c_i = ((unsigned int)left + b_i) + 1U;
-      d = A->data[(int)c_i - 1];
+      d = A_data[(int)c_i - 1];
       if (d < pivot) {
         /*  Swap A(i) with A(position)! */
         /*  A([i,position])=A([position,i]) would be more elegant but slower */
-        A->data[(int)c_i - 1] = A->data[(int)Ak - 1];
-        A->data[(int)Ak - 1] = d;
+        A_data[(int)c_i - 1] = A_data[(int)Ak - 1];
+        A_data[(int)Ak - 1] = d;
         Ak++;
       }
     }
     /*  Swap A(right) with A(position) */
-    A->data[right] = A->data[(int)Ak - 1];
-    A->data[(int)Ak - 1] = pivot;
+    A_data[right] = A_data[(int)Ak - 1];
+    A_data[(int)Ak - 1] = pivot;
     if (Ak < k) {
       left = (int)Ak;
     } else {
@@ -153,9 +162,9 @@ double quickselectFS(emxArray_real_T *A, double k, double kiniindex)
       right = (int)Ak - 2;
     }
     /*  Pivot: extension to random choice has to be studied. */
-    /* pivotIndex = ceil(( left + right ) / 2); */
+    /*  pivotIndex = ceil(( left + right ) / 2); */
   }
-  return A->data[(int)k - 1];
+  return A_data[(int)k - 1];
 }
 
 /* End of code generation (quickselectFS.c) */

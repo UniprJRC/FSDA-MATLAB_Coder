@@ -141,11 +141,9 @@ void b_readfloat(char s1[4], int *idx, const char s[2], int *k, bool allowimag,
                  bool *success)
 {
   int b_idx;
-  int exitg3;
-  char c;
+  char p_tmp;
   bool a__3;
   bool exitg1;
-  bool guard1 = false;
   bool isneg;
   *isimag = false;
   *b_finite = true;
@@ -155,17 +153,17 @@ void b_readfloat(char s1[4], int *idx, const char s[2], int *k, bool allowimag,
   *foundsign = false;
   exitg1 = false;
   while ((!exitg1) && (*k <= 2)) {
-    c = s[*k - 1];
-    if (c == '-') {
+    p_tmp = s[*k - 1];
+    if (p_tmp == '-') {
       isneg = !isneg;
       *foundsign = true;
       (*k)++;
-    } else if (c == ',') {
+    } else if (p_tmp == ',') {
       (*k)++;
-    } else if (c == '+') {
+    } else if (p_tmp == '+') {
       *foundsign = true;
       (*k)++;
-    } else if (!bv[(unsigned char)c & 127]) {
+    } else if (!bv[(unsigned char)p_tmp & 127]) {
       exitg1 = true;
     } else {
       (*k)++;
@@ -182,40 +180,37 @@ void b_readfloat(char s1[4], int *idx, const char s[2], int *k, bool allowimag,
   }
   *idx = b_idx;
   if (*success) {
-    guard1 = false;
+    isneg = false;
     if (*k <= 2) {
-      c = s[*k - 1];
-      if ((c == 'j') || (c == 'i')) {
-        if (allowimag) {
-          *isimag = true;
-          (*k)++;
-          exitg1 = false;
-          while ((!exitg1) && (*k <= 2)) {
-            c = s[*k - 1];
-            if (bv[(unsigned char)c & 127] || (c == '\x00') || (c == ',')) {
-              (*k)++;
-            } else {
-              exitg1 = true;
-            }
-          }
-          if ((*k <= 2) && (s[*k - 1] == '*')) {
+      p_tmp = s[*k - 1];
+      isneg = ((p_tmp == 'j') || (p_tmp == 'i'));
+    }
+    if (isneg) {
+      if (allowimag) {
+        *isimag = true;
+        (*k)++;
+        exitg1 = false;
+        while ((!exitg1) && (*k <= 2)) {
+          p_tmp = s[*k - 1];
+          if (bv[(unsigned char)p_tmp & 127] || (p_tmp == '\x00') ||
+              (p_tmp == ',')) {
             (*k)++;
-            b_readfloat(s1, idx, s, k, false, &isneg, b_finite, nfv, &a__3,
-                        success);
           } else {
-            s1[b_idx - 1] = '1';
-            *idx = b_idx + 1;
+            exitg1 = true;
           }
+        }
+        if ((*k <= 2) && (s[*k - 1] == '*')) {
+          (*k)++;
+          b_readfloat(s1, idx, s, k, false, &isneg, b_finite, nfv, &a__3,
+                      success);
         } else {
-          *success = false;
+          s1[b_idx - 1] = '1';
+          *idx = b_idx + 1;
         }
       } else {
-        guard1 = true;
+        *success = false;
       }
     } else {
-      guard1 = true;
-    }
-    if (guard1) {
       b_readNonFinite(s, k, b_finite, nfv);
       if (*b_finite) {
         *success = b_copydigits(s1, idx, s, k, true);
@@ -232,8 +227,8 @@ void b_readfloat(char s1[4], int *idx, const char s[2], int *k, bool allowimag,
         if (bv[(unsigned char)s[*k - 1] & 127]) {
           (*k)++;
         } else {
-          c = s[*k - 1];
-          if ((c == '\x00') || (c == ',')) {
+          p_tmp = s[*k - 1];
+          if ((p_tmp == '\x00') || (p_tmp == ',')) {
             (*k)++;
           } else {
             exitg1 = true;
@@ -248,26 +243,23 @@ void b_readfloat(char s1[4], int *idx, const char s[2], int *k, bool allowimag,
         }
       }
       if (*k <= 2) {
-        c = s[*k - 1];
-        if ((c == 'i') || (c == 'j')) {
+        p_tmp = s[*k - 1];
+        if ((p_tmp == 'i') || (p_tmp == 'j')) {
           (*k)++;
           *isimag = true;
         }
       }
     }
-    do {
-      exitg3 = 0;
-      if (*k <= 2) {
-        c = s[*k - 1];
-        if (bv[(unsigned char)c & 127] || (c == '\x00') || (c == ',')) {
-          (*k)++;
-        } else {
-          exitg3 = 1;
-        }
+    exitg1 = false;
+    while ((!exitg1) && (*k <= 2)) {
+      p_tmp = s[*k - 1];
+      if (bv[(unsigned char)p_tmp & 127] || (p_tmp == '\x00') ||
+          (p_tmp == ',')) {
+        (*k)++;
       } else {
-        exitg3 = 1;
+        exitg1 = true;
       }
-    } while (exitg3 == 0);
+    }
   }
 }
 

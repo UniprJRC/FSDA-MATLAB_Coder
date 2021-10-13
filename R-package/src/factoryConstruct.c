@@ -39,10 +39,14 @@ void factoryConstruct(captured_var *c_nonlin_workspace_fun_workspac,
                       i_struct_T *obj)
 {
   static const char b_cv[7] = {'f', 'o', 'r', 'w', 'a', 'r', 'd'};
+  const double *q_nonlin_workspace_fun_workspac;
+  const double *r_nonlin_workspace_fun_workspac;
   int exitg1;
   int i;
   int loop_ub;
   bool b_bool;
+  q_nonlin_workspace_fun_workspac = p_nonlin_workspace_fun_workspac->data;
+  r_nonlin_workspace_fun_workspac = o_nonlin_workspace_fun_workspac->data;
   obj->nonlin.workspace.fun.workspace.fun.workspace.trend =
       c_nonlin_workspace_fun_workspac;
   obj->nonlin.workspace.fun.workspace.fun.workspace.seasonal =
@@ -78,7 +82,7 @@ void factoryConstruct(captured_var *c_nonlin_workspace_fun_workspac,
             o_nonlin_workspace_fun_workspac->size[1];
   for (i = 0; i < loop_ub; i++) {
     obj->nonlin.workspace.fun.workspace.xdata->data[i] =
-        o_nonlin_workspace_fun_workspac->data[i];
+        r_nonlin_workspace_fun_workspac[i];
   }
   i = obj->nonlin.workspace.fun.workspace.ydata->size[0];
   obj->nonlin.workspace.fun.workspace.ydata->size[0] =
@@ -87,7 +91,7 @@ void factoryConstruct(captured_var *c_nonlin_workspace_fun_workspac,
   loop_ub = p_nonlin_workspace_fun_workspac->size[0];
   for (i = 0; i < loop_ub; i++) {
     obj->nonlin.workspace.fun.workspace.ydata->data[i] =
-        p_nonlin_workspace_fun_workspac->data[i];
+        q_nonlin_workspace_fun_workspac[i];
   }
   obj->f_1 = 0.0;
   i = obj->cEq_1->size[0];

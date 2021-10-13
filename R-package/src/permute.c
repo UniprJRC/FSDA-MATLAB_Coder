@@ -20,6 +20,8 @@
 void b_permute(const emxArray_real_T *a, emxArray_real_T *b)
 {
   static const signed char b_iv[3] = {1, 3, 2};
+  const double *a_data;
+  double *b_data;
   int b_k;
   int i;
   int k;
@@ -27,6 +29,7 @@ void b_permute(const emxArray_real_T *a, emxArray_real_T *b)
   int subsa_idx_2;
   bool b_b;
   bool exitg1;
+  a_data = a->data;
   b_b = true;
   if (a->size[1] != 0) {
     plast = 0;
@@ -52,9 +55,10 @@ void b_permute(const emxArray_real_T *a, emxArray_real_T *b)
     b->size[1] = a->size[2];
     b->size[2] = a->size[1];
     emxEnsureCapacity_real_T(b, i);
+    b_data = b->data;
     plast = a->size[1] * a->size[2];
     for (i = 0; i < plast; i++) {
-      b->data[i] = a->data[i];
+      b_data[i] = a_data[i];
     }
   } else {
     i = b->size[0] * b->size[1] * b->size[2];
@@ -62,6 +66,7 @@ void b_permute(const emxArray_real_T *a, emxArray_real_T *b)
     b->size[1] = a->size[2];
     b->size[2] = a->size[1];
     emxEnsureCapacity_real_T(b, i);
+    b_data = b->data;
     i = a->size[2];
     for (k = 0; k < i; k++) {
       plast = a->size[1];
@@ -69,8 +74,8 @@ void b_permute(const emxArray_real_T *a, emxArray_real_T *b)
         subsa_idx_2 = k + 1;
       }
       for (b_k = 0; b_k < plast; b_k++) {
-        b->data[(subsa_idx_2 + b->size[1] * b_k) - 1] =
-            a->data[b_k + a->size[1] * (subsa_idx_2 - 1)];
+        b_data[(subsa_idx_2 + b->size[1] * b_k) - 1] =
+            a_data[b_k + a->size[1] * (subsa_idx_2 - 1)];
       }
     }
   }
@@ -79,6 +84,8 @@ void b_permute(const emxArray_real_T *a, emxArray_real_T *b)
 void c_permute(const emxArray_real_T *a, emxArray_real_T *b)
 {
   static const signed char b_iv[3] = {1, 3, 2};
+  const double *a_data;
+  double *b_data;
   int b_k;
   int i;
   int k;
@@ -86,6 +93,7 @@ void c_permute(const emxArray_real_T *a, emxArray_real_T *b)
   int subsa_idx_2;
   bool b_b;
   bool exitg1;
+  a_data = a->data;
   b_b = true;
   if (a->size[0] != 0) {
     plast = 0;
@@ -110,15 +118,17 @@ void c_permute(const emxArray_real_T *a, emxArray_real_T *b)
     b->size[0] = a->size[0];
     b->size[1] = a->size[2];
     emxEnsureCapacity_real_T(b, i);
+    b_data = b->data;
     plast = a->size[0] * a->size[2];
     for (i = 0; i < plast; i++) {
-      b->data[i] = a->data[i];
+      b_data[i] = a_data[i];
     }
   } else {
     i = b->size[0] * b->size[1];
     b->size[0] = a->size[0];
     b->size[1] = a->size[2];
     emxEnsureCapacity_real_T(b, i);
+    b_data = b->data;
     i = a->size[2];
     for (k = 0; k < i; k++) {
       plast = a->size[0];
@@ -126,8 +136,8 @@ void c_permute(const emxArray_real_T *a, emxArray_real_T *b)
         subsa_idx_2 = k + 1;
       }
       for (b_k = 0; b_k < plast; b_k++) {
-        b->data[b_k + b->size[0] * (subsa_idx_2 - 1)] =
-            a->data[b_k + a->size[0] * (subsa_idx_2 - 1)];
+        b_data[b_k + b->size[0] * (subsa_idx_2 - 1)] =
+            a_data[b_k + a->size[0] * (subsa_idx_2 - 1)];
       }
     }
   }
@@ -136,6 +146,8 @@ void c_permute(const emxArray_real_T *a, emxArray_real_T *b)
 void permute(const emxArray_real_T *a, emxArray_real_T *b)
 {
   static const signed char b_iv[3] = {1, 3, 2};
+  const double *a_data;
+  double *b_data;
   int b_k;
   int c_k;
   int i;
@@ -146,6 +158,7 @@ void permute(const emxArray_real_T *a, emxArray_real_T *b)
   int subsa_idx_2;
   bool b_b;
   bool exitg1;
+  a_data = a->data;
   b_b = true;
   if ((a->size[0] != 0) && (a->size[1] != 0)) {
     plast = 0;
@@ -171,9 +184,10 @@ void permute(const emxArray_real_T *a, emxArray_real_T *b)
     b->size[1] = a->size[2];
     b->size[2] = a->size[1];
     emxEnsureCapacity_real_T(b, i);
+    b_data = b->data;
     plast = a->size[0] * a->size[2] * a->size[1];
     for (i = 0; i < plast; i++) {
-      b->data[i] = a->data[i];
+      b_data[i] = a_data[i];
     }
   } else {
     i = b->size[0] * b->size[1] * b->size[2];
@@ -181,6 +195,7 @@ void permute(const emxArray_real_T *a, emxArray_real_T *b)
     b->size[1] = a->size[2];
     b->size[2] = a->size[1];
     emxEnsureCapacity_real_T(b, i);
+    b_data = b->data;
     i = a->size[2];
     for (k = 0; k < i; k++) {
       plast = a->size[1];
@@ -191,10 +206,10 @@ void permute(const emxArray_real_T *a, emxArray_real_T *b)
           subsa_idx_2 = k + 1;
         }
         for (c_k = 0; c_k < i1; c_k++) {
-          b->data[(c_k + b->size[0] * (subsa_idx_2 - 1)) +
-                  b->size[0] * b->size[1] * (subsa_idx_1 - 1)] =
-              a->data[(c_k + a->size[0] * (subsa_idx_1 - 1)) +
-                      a->size[0] * a->size[1] * (subsa_idx_2 - 1)];
+          b_data[(c_k + b->size[0] * (subsa_idx_2 - 1)) +
+                 b->size[0] * b->size[1] * (subsa_idx_1 - 1)] =
+              a_data[(c_k + a->size[0] * (subsa_idx_1 - 1)) +
+                     a->size[0] * a->size[1] * (subsa_idx_2 - 1)];
         }
       }
     }

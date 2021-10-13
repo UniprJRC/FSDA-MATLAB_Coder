@@ -31,6 +31,16 @@ void b_FSMenvmmd(double n, double v, double varargin_4,
 void c_FSMenvmmd(double n, double v, double varargin_4,
                  emxArray_real_T *MMDenv);
 
+void cb_binary_expand_op(emxArray_real_T *b_tmp, double v,
+                         const emxArray_real_T *b, const emxArray_real_T *r1);
+
+void eb_binary_expand_op(emxArray_real_T *quant, double n,
+                         const emxArray_real_T *mm);
+
+void fb_binary_expand_op(emxArray_real_T *b_tmp, const emxArray_real_T *b_b_tmp,
+                         const emxArray_real_T *mm,
+                         const emxArray_real_T *quant, double v);
+
 #ifdef __cplusplus
 }
 #endif

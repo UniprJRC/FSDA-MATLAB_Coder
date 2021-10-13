@@ -18,11 +18,13 @@
 /* Function Definitions */
 void triu(emxArray_real_T *x)
 {
+  double *x_data;
   int i;
   int istart;
   int j;
   int jend;
   int m;
+  x_data = x->data;
   m = x->size[0];
   if ((x->size[0] != 0) && (x->size[1] != 0) && (3 < x->size[0])) {
     istart = 4;
@@ -33,7 +35,7 @@ void triu(emxArray_real_T *x)
     }
     for (j = 0; j < jend; j++) {
       for (i = istart; i <= m; i++) {
-        x->data[(i + x->size[0] * j) - 1] = 0.0;
+        x_data[(i + x->size[0] * j) - 1] = 0.0;
       }
       istart++;
     }

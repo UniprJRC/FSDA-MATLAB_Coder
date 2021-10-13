@@ -13,11 +13,13 @@
 #include <R.h>
 
 #include "FSM_wrapper.h"
+#include "FSM.h"
 #include "FSMbonfbound.h"
 #include "FSMbsb.h"
 #include "FSMenvmmd.h"
 #include "FSMmmd.h"
 #include "bsxfun.h"
+#include "cat1.h"
 #include "chkinputM.h"
 #include "combineVectorElements.h"
 #include "cov.h"
@@ -29,6 +31,7 @@
 #include "fsdaC_types.h"
 #include "ifWhileCond.h"
 #include "int2str.h"
+#include "mahalFS.h"
 #include "minOrMax.h"
 #include "mrdivide_helper.h"
 #include "mtimes.h"
@@ -53,13 +56,18 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
   emxArray_boolean_T nout_data;
   emxArray_boolean_T *b_m0;
   emxArray_boolean_T *r;
+  emxArray_boolean_T *r1;
+  emxArray_boolean_T *r2;
+  emxArray_boolean_T *r4;
+  emxArray_boolean_T *r6;
+  emxArray_boolean_T *x;
   emxArray_char_T_1x310 b_out;
   emxArray_int32_T *ia;
-  emxArray_int32_T *r1;
-  emxArray_int32_T *r2;
-  emxArray_int32_T *r3;
-  emxArray_int32_T *r4;
-  emxArray_int32_T *r5;
+  emxArray_int32_T *r10;
+  emxArray_int32_T *r11;
+  emxArray_int32_T *r12;
+  emxArray_int32_T *r8;
+  emxArray_int32_T *r9;
   emxArray_real_T c_bonflev_data;
   emxArray_real_T *Ytilde;
   emxArray_real_T *a__1;
@@ -82,11 +90,23 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
   emxArray_real_T *seq;
   emxArray_real_T *y;
   emxArray_uint32_T *nout;
+  const double *Y_data;
+  const double *m0_data;
   double d;
   double incre;
   double init_contents;
   double tr;
-  unsigned int uv[10];
+  double *b_Y_data;
+  double *bb_data;
+  double *bs_data;
+  double *fre_data;
+  double *gmin1_data;
+  double *gmin_data;
+  double *goodobs_data;
+  double *loc_data;
+  double *seq_data;
+  unsigned int uv[31];
+  unsigned int uv1[10];
   int b_bonflev_size[2];
   int nout_size[2];
   int b_i;
@@ -104,23 +124,33 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
   int i2;
   unsigned int ii;
   int irank;
+  int istep_contents;
   int loop_ub;
   int n;
   int sto;
-  int trueCount;
-  unsigned int u;
+  int stride_1_1;
   int v;
+  unsigned int *b_nout_data;
+  int *ia_data;
   signed char tmp_data[5];
-  bool x[31];
-  bool b_nout_data[5];
+  bool b_x[31];
+  bool b_bv[5];
+  bool c_nout_data[5];
   bool NoFalseSig;
   bool b_bonflev_data;
   bool exitg2;
   bool exitg3;
   bool guard1 = false;
+  bool *b_m0_data;
+  bool *r3;
+  bool *r5;
+  bool *r7;
+  bool *x_data;
   if (!isInitialized_fsdaC) {
     fsdaC_initialize();
   }
+  m0_data = m0->data;
+  Y_data = Y->data;
   emxInit_real_T(&b_Y, 2);
   /*  Wrapper function for FSM. NV pair names are not taken as */
   /*  inputs. Instead, just the values are taken as inputs. */
@@ -156,7 +186,6 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
   /*  */
   /*  Optional input arguments: */
   /*  */
-  /*  */
   /*       bonflev  : option that might be used to identify extreme outliers */
   /*                  when the distribution of the data is strongly non normal.
    */
@@ -180,7 +209,6 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
   /*                  based on consecutive exceedances. */
   /*                  Example - 'bonflev',0.7 */
   /*                  Data Types - double */
-  /*  */
   /*  */
   /*        crit    : It specified the criterion to be used to */
   /*                  initialize the search. 'md' (default) | 'biv' | 'uni. */
@@ -328,7 +356,6 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
   /*                Example - 'plots',2 */
   /*                Data Types - double */
   /*  */
-  /*  */
   /*  Output: */
   /*  */
   /*          out:   structure which contains the following fields */
@@ -362,7 +389,6 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
   /*                location of the data, relative to the scatter matrix cov. */
   /*  out.class  =  'FSM'. */
   /*  */
-  /*  */
   /*  See also: FSMeda, unibiv.m, FSMmmd.m */
   /*  */
   /*  References: */
@@ -377,8 +403,6 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('FSM')">Link to the help page for this
    * function</a> */
@@ -466,12 +490,15 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
   b_Y->size[0] = Y->size[0];
   b_Y->size[1] = Y->size[1];
   emxEnsureCapacity_real_T(b_Y, i);
+  b_Y_data = b_Y->data;
   loop_ub = Y->size[0] * Y->size[1];
   for (i = 0; i < loop_ub; i++) {
-    b_Y->data[i] = Y->data[i];
+    b_Y_data[i] = Y_data[i];
   }
   emxInit_real_T(&loc, 2);
+  loc_data = loc->data;
   chkinputM(b_Y, nocheck);
+  b_Y_data = b_Y->data;
   v = b_Y->size[1];
   n = b_Y->size[0];
   if (b_Y->size[0] < 1) {
@@ -482,18 +509,20 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
     loc->size[0] = 1;
     loc->size[1] = b_Y->size[0];
     emxEnsureCapacity_real_T(loc, i);
+    loc_data = loc->data;
     loop_ub = b_Y->size[0] - 1;
     for (i = 0; i <= loop_ub; i++) {
-      loc->data[i] = (double)i + 1.0;
+      loc_data[i] = (double)i + 1.0;
     }
   }
   emxInit_real_T(&seq, 1);
   i = seq->size[0];
   seq->size[0] = loc->size[1];
   emxEnsureCapacity_real_T(seq, i);
+  seq_data = seq->data;
   loop_ub = loc->size[1];
   for (i = 0; i < loop_ub; i++) {
-    seq->data[i] = loc->data[i];
+    seq_data[i] = loc_data[i];
   }
   /*  Write in structure 'options' the options chosen by the user */
   init_contents = init;
@@ -502,16 +531,17 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
   /*  Start of the forward search */
   emxInit_real_T(&bs, 1);
   emxInit_real_T(&goodobs, 2);
-  emxInit_boolean_T(&b_m0, 1);
   emxInit_real_T(&c_Y, 2);
   if (m0->size[0] > 1) {
     i = bs->size[0];
     bs->size[0] = m0->size[0];
     emxEnsureCapacity_real_T(bs, i);
+    bs_data = bs->data;
     loop_ub = m0->size[0];
     for (i = 0; i < loop_ub; i++) {
-      bs->data[i] = m0->data[i];
+      bs_data[i] = m0_data[i];
     }
+    emxInit_boolean_T(&b_m0, 1);
     if ((b_maximum(m0) > b_Y->size[0]) || (b_minimum(m0) < 1.0)) {
       Rprintf("%s\n", "Attention : Initial subset contains indexes outside the "
                      "interval 1,...,n. \nExternal indexes are removed.");
@@ -519,22 +549,27 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
       i = b_m0->size[0];
       b_m0->size[0] = m0->size[0];
       emxEnsureCapacity_boolean_T(b_m0, i);
+      b_m0_data = b_m0->data;
       loop_ub = m0->size[0];
       for (i = 0; i < loop_ub; i++) {
-        b_m0->data[i] = ((m0->data[i] > b_Y->size[0]) || (m0->data[i] < 1.0));
+        b_m0_data[i] = ((m0_data[i] > b_Y->size[0]) || (m0_data[i] < 1.0));
       }
       b_nullAssignment(bs, b_m0);
+      bs_data = bs->data;
     }
+    emxFree_boolean_T(&b_m0);
   } else {
     emxInit_real_T(&fre, 2);
     /*  m0(1) necessary for MATLAB C coder */
     /*  Confidence level for robust bivariate ellipses */
     /*  Find initial subset to initialize the search */
     unibiv(b_Y, rf, fre);
+    fre_data = fre->data;
     if (b_strcmp(crit)) {
       /*  The user has chosen to select the intial subset according to the */
       /*  smallest m0 robust Mahalanobis distances.  */
       sortrows(fre);
+      fre_data = fre->data;
     } else if (c_strcmp(crit)) {
       /*  The user has chosen to select the intial subset with the units */
       /*  which never fell outside robust bivariate confidence ellipses, */
@@ -544,8 +579,10 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
       /*  we select first those with the smallest robust Mahalanobis distances.
        */
       b_sortrows(fre);
+      fre_data = fre->data;
     } else if (d_strcmp(crit)) {
       c_sortrows(fre);
+      fre_data = fre->data;
       /*  The user has chosen to select the intial subset with the units */
       /*  which never fell outside univariate boxplots, */
       /*  fell just once, ... up to reach m0 */
@@ -554,16 +591,17 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
       /*  robust Mahalanobis distances. */
     }
     /*  initial subset */
-    if (1.0 > m0->data[0]) {
+    if (1.0 > m0_data[0]) {
       loop_ub = 0;
     } else {
-      loop_ub = (int)m0->data[0];
+      loop_ub = (int)m0_data[0];
     }
     i = bs->size[0];
     bs->size[0] = loop_ub;
     emxEnsureCapacity_real_T(bs, i);
+    bs_data = bs->data;
     for (i = 0; i < loop_ub; i++) {
-      bs->data[i] = fre->data[i];
+      bs_data[i] = fre_data[i];
     }
     /*  the subset need to be incremented if it is not full rank. We also */
     /*  treat the unfortunate case when the rank of the matrix is v but a */
@@ -580,11 +618,12 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
       c_Y->size[0] = bs->size[0];
       c_Y->size[1] = loop_ub;
       emxEnsureCapacity_real_T(c_Y, i);
+      goodobs_data = c_Y->data;
       for (i = 0; i < loop_ub; i++) {
-        irank = bs->size[0];
-        for (i1 = 0; i1 < irank; i1++) {
-          c_Y->data[i1 + c_Y->size[0] * i] =
-              b_Y->data[((int)bs->data[i1] + b_Y->size[0] * i) - 1];
+        b_loop_ub = bs->size[0];
+        for (i1 = 0; i1 < b_loop_ub; i1++) {
+          goodobs_data[i1 + c_Y->size[0] * i] =
+              b_Y_data[((int)bs_data[i1] + b_Y->size[0] * i) - 1];
         }
       }
       irank = local_rank(c_Y);
@@ -592,58 +631,83 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
       if (irank < v) {
         guard1 = true;
       } else {
-        irank = b_Y->size[1];
+        b_loop_ub = b_Y->size[1];
         i = c_Y->size[0] * c_Y->size[1];
         c_Y->size[0] = bs->size[0];
         c_Y->size[1] = b_Y->size[1];
         emxEnsureCapacity_real_T(c_Y, i);
-        for (i = 0; i < irank; i++) {
-          b_loop_ub = bs->size[0];
-          for (i1 = 0; i1 < b_loop_ub; i1++) {
-            c_Y->data[i1 + c_Y->size[0] * i] =
-                b_Y->data[((int)bs->data[i1] + b_Y->size[0] * i) - 1];
+        goodobs_data = c_Y->data;
+        for (i = 0; i < b_loop_ub; i++) {
+          irank = bs->size[0];
+          for (i1 = 0; i1 < irank; i1++) {
+            goodobs_data[i1 + c_Y->size[0] * i] =
+                b_Y_data[((int)bs_data[i1] + b_Y->size[0] * i) - 1];
           }
         }
         maximum(c_Y, loc);
-        irank = b_Y->size[1];
+        loc_data = loc->data;
+        b_loop_ub = b_Y->size[1];
         i = c_Y->size[0] * c_Y->size[1];
         c_Y->size[0] = bs->size[0];
         c_Y->size[1] = b_Y->size[1];
         emxEnsureCapacity_real_T(c_Y, i);
-        for (i = 0; i < irank; i++) {
-          b_loop_ub = bs->size[0];
-          for (i1 = 0; i1 < b_loop_ub; i1++) {
-            c_Y->data[i1 + c_Y->size[0] * i] =
-                b_Y->data[((int)bs->data[i1] + b_Y->size[0] * i) - 1];
+        goodobs_data = c_Y->data;
+        for (i = 0; i < b_loop_ub; i++) {
+          irank = bs->size[0];
+          for (i1 = 0; i1 < irank; i1++) {
+            goodobs_data[i1 + c_Y->size[0] * i] =
+                b_Y_data[((int)bs_data[i1] + b_Y->size[0] * i) - 1];
           }
         }
         minimum(c_Y, goodobs);
+        goodobs_data = goodobs->data;
         i = b_loc->size[0] * b_loc->size[1];
         b_loc->size[0] = 1;
-        b_loc->size[1] = loc->size[1];
-        emxEnsureCapacity_real_T(b_loc, i);
-        irank = loc->size[1];
-        for (i = 0; i < irank; i++) {
-          b_loc->data[i] = loc->data[i] - goodobs->data[i];
+        if (goodobs->size[1] == 1) {
+          b_loc->size[1] = loc->size[1];
+        } else {
+          b_loc->size[1] = goodobs->size[1];
         }
-        if (c_minimum(b_loc) == 0.0) {
+        emxEnsureCapacity_real_T(b_loc, i);
+        gmin_data = b_loc->data;
+        irank = (loc->size[1] != 1);
+        stride_1_1 = (goodobs->size[1] != 1);
+        if (goodobs->size[1] == 1) {
+          b_loop_ub = loc->size[1];
+        } else {
+          b_loop_ub = goodobs->size[1];
+        }
+        for (i = 0; i < b_loop_ub; i++) {
+          gmin_data[i] = loc_data[i * irank] - goodobs_data[i * stride_1_1];
+        }
+        i = loc->size[0] * loc->size[1];
+        loc->size[0] = 1;
+        loc->size[1] = b_loc->size[1];
+        emxEnsureCapacity_real_T(loc, i);
+        loc_data = loc->data;
+        b_loop_ub = b_loc->size[1];
+        for (i = 0; i < b_loop_ub; i++) {
+          loc_data[i] = gmin_data[i];
+        }
+        if (c_minimum(loc) == 0.0) {
           guard1 = true;
         } else {
           exitg1 = 1;
         }
       }
       if (guard1) {
-        d = m0->data[0] + incre;
+        d = m0_data[0] + incre;
         if (1.0 > d) {
-          irank = 0;
+          b_loop_ub = 0;
         } else {
-          irank = (int)d;
+          b_loop_ub = (int)d;
         }
         i = bs->size[0];
-        bs->size[0] = irank;
+        bs->size[0] = b_loop_ub;
         emxEnsureCapacity_real_T(bs, i);
-        for (i = 0; i < irank; i++) {
-          bs->data[i] = fre->data[i];
+        bs_data = bs->data;
+        for (i = 0; i < b_loop_ub; i++) {
+          bs_data[i] = fre_data[i];
         }
         incre++;
       }
@@ -663,44 +727,50 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
     i = b_bs->size[0];
     b_bs->size[0] = bs->size[0];
     emxEnsureCapacity_real_T(b_bs, i);
+    gmin_data = b_bs->data;
     loop_ub = bs->size[0] - 1;
     for (i = 0; i <= loop_ub; i++) {
-      b_bs->data[i] = bs->data[i];
+      gmin_data[i] = bs_data[i];
     }
     emxInit_real_T(&b_bb, 2);
     FSMmmd(b_Y, b_bs, init_contents, msg, out->mmd, out->Un, b_bb);
+    gmin_data = b_bb->data;
     i = bb->size[0] * bb->size[1];
     bb->size[0] = b_bb->size[0];
     bb->size[1] = b_bb->size[1];
     emxEnsureCapacity_real_T(bb, i);
+    bb_data = bb->data;
     loop_ub = b_bb->size[0] * b_bb->size[1];
     for (i = 0; i < loop_ub; i++) {
-      bb->data[i] = b_bb->data[i];
+      bb_data[i] = gmin_data[i];
     }
     emxFree_real_T(&b_bb);
   } else {
     i = b_bs->size[0];
     b_bs->size[0] = bs->size[0];
     emxEnsureCapacity_real_T(b_bs, i);
+    gmin_data = b_bs->data;
     loop_ub = bs->size[0] - 1;
     for (i = 0; i <= loop_ub; i++) {
-      b_bs->data[i] = bs->data[i];
+      gmin_data[i] = bs_data[i];
     }
     b_FSMmmd(b_Y, b_bs, init_contents, msg, out->mmd, out->Un);
     i = bb->size[0] * bb->size[1];
     bb->size[0] = 1;
     bb->size[1] = 1;
     emxEnsureCapacity_real_T(bb, i);
-    bb->data[0] = 0.0;
+    bb_data = bb->data;
+    bb_data[0] = 0.0;
   }
   emxInit_boolean_T(&r, 2);
   i = r->size[0] * r->size[1];
   r->size[0] = out->mmd->size[0];
   r->size[1] = out->mmd->size[1];
   emxEnsureCapacity_boolean_T(r, i);
+  b_m0_data = r->data;
   loop_ub = out->mmd->size[0] * out->mmd->size[1];
   for (i = 0; i < loop_ub; i++) {
-    r->data[i] = rtIsNaN(out->mmd->data[i]);
+    b_m0_data[i] = rtIsNaN(out->mmd->data[i]);
   }
   if (b_ifWhileCond(r)) {
     out->outliers->size[0] = 0;
@@ -729,12 +799,11 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
     emxInit_real_T(&gmin1, 2);
     emxInit_uint32_T(&nout, 2);
     emxInit_int32_T(&ia, 1);
+    emxInit_boolean_T(&x, 1);
     if ((bonflev_size[0] != 0) && (bonflev_size[1] != 0)) {
       b_bonflev_size[0] = 1;
       b_bonflev_size[1] = 1;
-      for (i = 0; i < 1; i++) {
-        b_bonflev_data = (bonflev_data[0] < 1.0);
-      }
+      b_bonflev_data = (bonflev_data[0] < 1.0);
       nout_data.data = &b_bonflev_data;
       nout_data.size = &b_bonflev_size[0];
       nout_data.allocatedSize = 1;
@@ -743,21 +812,24 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
       if (b_ifWhileCond(&nout_data)) {
         FSMbonfbound(b_Y->size[0], b_Y->size[1], bonflev_data, bonflev_size,
                      init_contents, gmin1);
+        gmin1_data = gmin1->data;
         i = gbonf->size[0] * gbonf->size[1];
         gbonf->size[0] = gmin1->size[0];
         gbonf->size[1] = gmin1->size[1];
         emxEnsureCapacity_real_T(gbonf, i);
+        goodobs_data = gbonf->data;
         loop_ub = gmin1->size[0] * gmin1->size[1];
         for (i = 0; i < loop_ub; i++) {
-          gbonf->data[i] = gmin1->data[i];
+          goodobs_data[i] = gmin1_data[i];
         }
       } else {
         i = b_bs->size[0];
         b_bs->size[0] = (int)((double)b_Y->size[0] - init_contents);
         emxEnsureCapacity_real_T(b_bs, i);
+        gmin_data = b_bs->data;
         loop_ub = (int)((double)b_Y->size[0] - init_contents);
         for (i = 0; i < loop_ub; i++) {
-          b_bs->data[i] = 1.0;
+          gmin_data[i] = 1.0;
         }
         emxInit_real_T(&y, 1);
         c_bonflev_data.data = (double *)&bonflev_data[0];
@@ -766,18 +838,20 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
         c_bonflev_data.numDimensions = 2;
         c_bonflev_data.canFreeData = false;
         mtimes(&c_bonflev_data, b_bs, y);
+        gmin_data = y->data;
         i = gbonf->size[0] * gbonf->size[1];
         gbonf->size[0] = y->size[0];
         gbonf->size[1] = 1;
         emxEnsureCapacity_real_T(gbonf, i);
+        goodobs_data = gbonf->data;
         loop_ub = y->size[0];
         for (i = 0; i < loop_ub; i++) {
-          gbonf->data[i] = y->data[i];
+          goodobs_data[i] = gmin_data[i];
         }
         emxFree_real_T(&y);
       }
       /*  declarations necessary for MATLAB C coder */
-      trueCount = 0;
+      istep_contents = 0;
       c99 = -1;
       c999 = -1;
       c9999 = -1;
@@ -787,7 +861,8 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
       gmin->size[0] = 1;
       gmin->size[1] = 1;
       emxEnsureCapacity_real_T(gmin, i);
-      gmin->data[0] = 0.0;
+      gmin_data = gmin->data;
+      gmin_data[0] = 0.0;
       NoFalseSig = true;
       incre = 0.0;
       ii = 0U;
@@ -795,14 +870,16 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
       gmin1->size[0] = 1;
       gmin1->size[1] = 1;
       emxEnsureCapacity_real_T(gmin1, i);
-      gmin1->data[0] = 0.0;
+      gmin1_data = gmin1->data;
+      gmin1_data[0] = 0.0;
       i = nout->size[0] * nout->size[1];
       nout->size[0] = b_Y->size[0];
       nout->size[1] = 5;
       emxEnsureCapacity_uint32_T(nout, i);
+      b_nout_data = nout->data;
       loop_ub = b_Y->size[0] * 5;
       for (i = 0; i < loop_ub; i++) {
-        nout->data[i] = 0U;
+        b_nout_data[i] = 0U;
       }
     } else {
       /*  declaration necessary for C coder */
@@ -810,18 +887,21 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
       gbonf->size[0] = 1;
       gbonf->size[1] = 1;
       emxEnsureCapacity_real_T(gbonf, i);
-      gbonf->data[0] = 0.0;
+      goodobs_data = gbonf->data;
+      goodobs_data[0] = 0.0;
       incre = 0.0;
       ii = 0U;
       i = gmin1->size[0] * gmin1->size[1];
       gmin1->size[0] = 1;
       gmin1->size[1] = 1;
       emxEnsureCapacity_real_T(gmin1, i);
-      gmin1->data[0] = 0.0;
+      gmin1_data = gmin1->data;
+      gmin1_data[0] = 0.0;
       /*  Compute theoretical envelops for minimum Mahalanobis Distance based on
        * all */
       /*  the observations for the above quantiles. */
       FSMenvmmd(b_Y->size[0], b_Y->size[1], init_contents, gmin);
+      gmin_data = gmin->data;
       /*  gmin = the matrix which contains envelopes based on all observations.
        */
       /*  1st col of gmin = fwd search index */
@@ -840,158 +920,237 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
       c001 = 5;
       /*  Store in nout the number of times the observed mmd (d_min) lies above:
        */
-      b_loop_ub = out->mmd->size[0] - 1;
-      trueCount = 0;
-      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
-        if (out->mmd->data[b_i + out->mmd->size[0]] >
-            gmin->data[b_i + gmin->size[0]]) {
-          trueCount++;
+      if (out->mmd->size[0] == gmin->size[0]) {
+        loop_ub = out->mmd->size[0];
+        i = x->size[0];
+        x->size[0] = out->mmd->size[0];
+        emxEnsureCapacity_boolean_T(x, i);
+        x_data = x->data;
+        for (i = 0; i < loop_ub; i++) {
+          x_data[i] = (out->mmd->data[i + out->mmd->size[0]] >
+                       gmin_data[i + gmin->size[0]]);
+        }
+      } else {
+        i_binary_expand_op(x, out, gmin);
+        x_data = x->data;
+      }
+      emxInit_boolean_T(&r1, 1);
+      if (out->mmd->size[0] == gmin->size[0]) {
+        loop_ub = out->mmd->size[0];
+        i = r1->size[0];
+        r1->size[0] = out->mmd->size[0];
+        emxEnsureCapacity_boolean_T(r1, i);
+        b_m0_data = r1->data;
+        for (i = 0; i < loop_ub; i++) {
+          b_m0_data[i] = (out->mmd->data[i + out->mmd->size[0]] >
+                          gmin_data[i + gmin->size[0] * 2]);
+        }
+      } else {
+        h_binary_expand_op(r1, out, gmin);
+        b_m0_data = r1->data;
+      }
+      emxInit_boolean_T(&r2, 1);
+      if (out->mmd->size[0] == gmin->size[0]) {
+        loop_ub = out->mmd->size[0];
+        i = r2->size[0];
+        r2->size[0] = out->mmd->size[0];
+        emxEnsureCapacity_boolean_T(r2, i);
+        r3 = r2->data;
+        for (i = 0; i < loop_ub; i++) {
+          r3[i] = (out->mmd->data[i + out->mmd->size[0]] >
+                   gmin_data[i + gmin->size[0] * 3]);
+        }
+      } else {
+        g_binary_expand_op(r2, out, gmin);
+        r3 = r2->data;
+      }
+      emxInit_boolean_T(&r4, 1);
+      if (out->mmd->size[0] == gmin->size[0]) {
+        loop_ub = out->mmd->size[0];
+        i = r4->size[0];
+        r4->size[0] = out->mmd->size[0];
+        emxEnsureCapacity_boolean_T(r4, i);
+        r5 = r4->data;
+        for (i = 0; i < loop_ub; i++) {
+          r5[i] = (out->mmd->data[i + out->mmd->size[0]] >
+                   gmin_data[i + gmin->size[0] * 4]);
+        }
+      } else {
+        f_binary_expand_op(r4, out, gmin);
+        r5 = r4->data;
+      }
+      emxInit_boolean_T(&r6, 1);
+      if (out->mmd->size[0] == gmin->size[0]) {
+        loop_ub = out->mmd->size[0];
+        i = r6->size[0];
+        r6->size[0] = out->mmd->size[0];
+        emxEnsureCapacity_boolean_T(r6, i);
+        r7 = r6->data;
+        for (i = 0; i < loop_ub; i++) {
+          r7[i] = (out->mmd->data[i + out->mmd->size[0]] <
+                   gmin_data[i + gmin->size[0] * 5]);
+        }
+      } else {
+        e_binary_expand_op(r6, out, gmin);
+        r7 = r6->data;
+      }
+      stride_1_1 = x->size[0] - 1;
+      b_loop_ub = 0;
+      for (b_i = 0; b_i <= stride_1_1; b_i++) {
+        if (x_data[b_i]) {
+          b_loop_ub++;
         }
       }
       i = ia->size[0];
-      ia->size[0] = trueCount;
+      ia->size[0] = b_loop_ub;
       emxEnsureCapacity_int32_T(ia, i);
+      ia_data = ia->data;
       irank = 0;
-      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
-        if (out->mmd->data[b_i + out->mmd->size[0]] >
-            gmin->data[b_i + gmin->size[0]]) {
-          ia->data[irank] = b_i + 1;
+      for (b_i = 0; b_i <= stride_1_1; b_i++) {
+        if (x_data[b_i]) {
+          ia_data[irank] = b_i + 1;
           irank++;
         }
       }
-      b_loop_ub = out->mmd->size[0] - 1;
-      trueCount = 0;
-      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
-        if (out->mmd->data[b_i + out->mmd->size[0]] >
-            gmin->data[b_i + gmin->size[0] * 2]) {
-          trueCount++;
+      stride_1_1 = r1->size[0] - 1;
+      b_loop_ub = 0;
+      for (b_i = 0; b_i <= stride_1_1; b_i++) {
+        if (b_m0_data[b_i]) {
+          b_loop_ub++;
         }
       }
-      emxInit_int32_T(&r1, 1);
-      i = r1->size[0];
-      r1->size[0] = trueCount;
-      emxEnsureCapacity_int32_T(r1, i);
+      emxInit_int32_T(&r8, 1);
+      i = r8->size[0];
+      r8->size[0] = b_loop_ub;
+      emxEnsureCapacity_int32_T(r8, i);
+      ia_data = r8->data;
       irank = 0;
-      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
-        if (out->mmd->data[b_i + out->mmd->size[0]] >
-            gmin->data[b_i + gmin->size[0] * 2]) {
-          r1->data[irank] = b_i + 1;
+      for (b_i = 0; b_i <= stride_1_1; b_i++) {
+        if (b_m0_data[b_i]) {
+          ia_data[irank] = b_i + 1;
           irank++;
         }
       }
-      b_loop_ub = out->mmd->size[0] - 1;
-      trueCount = 0;
-      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
-        if (out->mmd->data[b_i + out->mmd->size[0]] >
-            gmin->data[b_i + gmin->size[0] * 3]) {
-          trueCount++;
+      emxFree_boolean_T(&r1);
+      stride_1_1 = r2->size[0] - 1;
+      b_loop_ub = 0;
+      for (b_i = 0; b_i <= stride_1_1; b_i++) {
+        if (r3[b_i]) {
+          b_loop_ub++;
         }
       }
-      emxInit_int32_T(&r2, 1);
-      i = r2->size[0];
-      r2->size[0] = trueCount;
-      emxEnsureCapacity_int32_T(r2, i);
+      emxInit_int32_T(&r9, 1);
+      i = r9->size[0];
+      r9->size[0] = b_loop_ub;
+      emxEnsureCapacity_int32_T(r9, i);
+      ia_data = r9->data;
       irank = 0;
-      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
-        if (out->mmd->data[b_i + out->mmd->size[0]] >
-            gmin->data[b_i + gmin->size[0] * 3]) {
-          r2->data[irank] = b_i + 1;
+      for (b_i = 0; b_i <= stride_1_1; b_i++) {
+        if (r3[b_i]) {
+          ia_data[irank] = b_i + 1;
           irank++;
         }
       }
-      b_loop_ub = out->mmd->size[0] - 1;
-      trueCount = 0;
-      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
-        if (out->mmd->data[b_i + out->mmd->size[0]] >
-            gmin->data[b_i + gmin->size[0] * 4]) {
-          trueCount++;
+      emxFree_boolean_T(&r2);
+      stride_1_1 = r4->size[0] - 1;
+      b_loop_ub = 0;
+      for (b_i = 0; b_i <= stride_1_1; b_i++) {
+        if (r5[b_i]) {
+          b_loop_ub++;
         }
       }
-      emxInit_int32_T(&r3, 1);
-      i = r3->size[0];
-      r3->size[0] = trueCount;
-      emxEnsureCapacity_int32_T(r3, i);
+      emxInit_int32_T(&r10, 1);
+      i = r10->size[0];
+      r10->size[0] = b_loop_ub;
+      emxEnsureCapacity_int32_T(r10, i);
+      ia_data = r10->data;
       irank = 0;
-      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
-        if (out->mmd->data[b_i + out->mmd->size[0]] >
-            gmin->data[b_i + gmin->size[0] * 4]) {
-          r3->data[irank] = b_i + 1;
+      for (b_i = 0; b_i <= stride_1_1; b_i++) {
+        if (r5[b_i]) {
+          ia_data[irank] = b_i + 1;
           irank++;
         }
       }
-      b_loop_ub = out->mmd->size[0] - 1;
-      trueCount = 0;
-      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
-        if (out->mmd->data[b_i + out->mmd->size[0]] <
-            gmin->data[b_i + gmin->size[0] * 5]) {
-          trueCount++;
+      emxFree_boolean_T(&r4);
+      stride_1_1 = r6->size[0] - 1;
+      b_loop_ub = 0;
+      for (b_i = 0; b_i <= stride_1_1; b_i++) {
+        if (r7[b_i]) {
+          b_loop_ub++;
         }
       }
-      emxInit_int32_T(&r4, 1);
-      i = r4->size[0];
-      r4->size[0] = trueCount;
-      emxEnsureCapacity_int32_T(r4, i);
+      emxInit_int32_T(&r11, 1);
+      i = r11->size[0];
+      r11->size[0] = b_loop_ub;
+      emxEnsureCapacity_int32_T(r11, i);
+      ia_data = r11->data;
       irank = 0;
-      for (b_i = 0; b_i <= b_loop_ub; b_i++) {
-        if (out->mmd->data[b_i + out->mmd->size[0]] <
-            gmin->data[b_i + gmin->size[0] * 5]) {
-          r4->data[irank] = b_i + 1;
+      for (b_i = 0; b_i <= stride_1_1; b_i++) {
+        if (r7[b_i]) {
+          ia_data[irank] = b_i + 1;
           irank++;
         }
       }
+      emxFree_boolean_T(&r6);
       /*        % the 99% envelope */
       /*       % the 99.9% envelope */
       /*      % the 99.99% envelope */
       /*     % the 99.999% envelope */
       /*  the 1% envelope */
       for (i = 0; i < 5; i++) {
-        uv[i << 1] = (unsigned int)iv[i];
+        uv1[i << 1] = (unsigned int)iv[i];
       }
-      uv[1] = (unsigned int)r4->size[0];
-      uv[3] = (unsigned int)ia->size[0];
-      uv[5] = (unsigned int)r1->size[0];
-      uv[7] = (unsigned int)r2->size[0];
-      uv[9] = (unsigned int)r3->size[0];
+      uv1[1] = (unsigned int)r11->size[0];
+      uv1[3] = (unsigned int)ia->size[0];
+      uv1[5] = (unsigned int)r8->size[0];
+      uv1[7] = (unsigned int)r9->size[0];
+      uv1[9] = (unsigned int)r10->size[0];
       i = nout->size[0] * nout->size[1];
       nout->size[0] = 2;
       nout->size[1] = 5;
       emxEnsureCapacity_uint32_T(nout, i);
-      emxFree_int32_T(&r4);
-      emxFree_int32_T(&r3);
-      emxFree_int32_T(&r2);
-      emxFree_int32_T(&r1);
+      b_nout_data = nout->data;
+      emxFree_int32_T(&r11);
+      emxFree_int32_T(&r10);
+      emxFree_int32_T(&r9);
+      emxFree_int32_T(&r8);
       for (i = 0; i < 10; i++) {
-        nout->data[i] = uv[i];
+        b_nout_data[i] = uv1[i];
       }
       /*  NoFalseSig = boolean linked to the fact that the signal is good or not
        */
       /*  NoFalseSig is set to 1 if the condition for an INCONTROVERTIBLE SIGNAL
        * is */
       /*  fulfilled. */
-      trueCount = 0;
+      b_loop_ub = 0;
+      for (b_i = 0; b_i < 5; b_i++) {
+        NoFalseSig = ((int)b_nout_data[nout->size[0] * b_i] == 9999);
+        b_bv[b_i] = NoFalseSig;
+        if (NoFalseSig) {
+          b_loop_ub++;
+        }
+      }
       irank = 0;
       for (b_i = 0; b_i < 5; b_i++) {
-        NoFalseSig = ((int)nout->data[nout->size[0] * b_i] == 9999);
-        if (NoFalseSig) {
-          trueCount++;
+        if (b_bv[b_i]) {
           tmp_data[irank] = (signed char)(b_i + 1);
           irank++;
         }
       }
       nout_size[0] = 1;
-      nout_size[1] = trueCount;
-      for (i = 0; i < trueCount; i++) {
-        b_nout_data[i] =
-            ((int)nout->data[nout->size[0] * (tmp_data[i] - 1) + 1] >= 10);
+      nout_size[1] = b_loop_ub;
+      for (i = 0; i < b_loop_ub; i++) {
+        c_nout_data[i] =
+            ((int)b_nout_data[nout->size[0] * (tmp_data[i] - 1) + 1] >= 10);
       }
-      nout_data.data = &b_nout_data[0];
+      nout_data.data = &c_nout_data[0];
       nout_data.size = &nout_size[0];
       nout_data.allocatedSize = 5;
       nout_data.numDimensions = 2;
       nout_data.canFreeData = false;
       NoFalseSig = c_ifWhileCond(&nout_data);
       /*  Divide central part from final part of the search */
-      trueCount =
+      istep_contents =
           b_Y->size[0] - (int)floor(13.0 * sqrt((double)b_Y->size[0] / 200.0));
     }
     /*  Stage 1a: signal detection */
@@ -1007,31 +1166,31 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
       b_i = c_i + 1;
       if ((bonflev_size[0] == 0) || (bonflev_size[1] == 0)) {
         if ((double)(c_i - 2) + 3.0 <
-            ((double)trueCount - init_contents) + 1.0) {
+            ((double)istep_contents - init_contents) + 1.0) {
           /*  CENTRAL PART OF THE SEARCH */
           /*  Extreme triplet or an extreme single value */
           /*  Three consecutive values of d_min above the 99.99% threshold or 1
            */
           /*  above 99.999% envelope */
           if (((out->mmd->data[c_i + out->mmd->size[0]] >
-                gmin->data[c_i + gmin->size[0] * c9999]) &&
+                gmin_data[c_i + gmin->size[0] * c9999]) &&
                (out->mmd->data[(c_i + out->mmd->size[0]) + 1] >
-                gmin->data[(c_i + gmin->size[0] * c9999) + 1]) &&
+                gmin_data[(c_i + gmin->size[0] * c9999) + 1]) &&
                (out->mmd->data[(c_i + out->mmd->size[0]) - 1] >
-                gmin->data[(c_i + gmin->size[0] * c9999) - 1])) ||
+                gmin_data[(c_i + gmin->size[0] * c9999) - 1])) ||
               (out->mmd->data[c_i + out->mmd->size[0]] >
-               gmin->data[(gmin->size[0] + gmin->size[0] * c99) - 1]) ||
+               gmin_data[(gmin->size[0] + gmin->size[0] * c99) - 1]) ||
               (out->mmd->data[c_i + out->mmd->size[0]] >
-               gmin->data[c_i + gmin->size[0] * c99999])) {
+               gmin_data[c_i + gmin->size[0] * c99999])) {
             if (msg) {
               int2str(out->mmd->data[c_i], b_out.data, b_out.size);
             }
             if ((out->mmd->data[c_i + out->mmd->size[0]] >
-                 gmin->data[c_i + gmin->size[0] * c9999]) &&
+                 gmin_data[c_i + gmin->size[0] * c9999]) &&
                 (out->mmd->data[(c_i + out->mmd->size[0]) + 1] >
-                 gmin->data[(c_i + gmin->size[0] * c9999) + 1]) &&
+                 gmin_data[(c_i + gmin->size[0] * c9999) + 1]) &&
                 (out->mmd->data[(c_i + out->mmd->size[0]) - 1] >
-                 gmin->data[(c_i + gmin->size[0] * c9999) - 1])) {
+                 gmin_data[(c_i + gmin->size[0] * c9999) - 1])) {
               if (msg) {
                 int2str(out->mmd->data[c_i], b_out.data, b_out.size);
                 int2str(n, b_out.data, b_out.size);
@@ -1048,7 +1207,7 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
               int2str(n, b_out.data, b_out.size);
             }
             if (out->mmd->data[c_i + out->mmd->size[0]] >
-                gmin->data[c_i + gmin->size[0] * c99999]) {
+                gmin_data[c_i + gmin->size[0] * c99999]) {
               if (msg) {
                 int2str(out->mmd->data[c_i], b_out.data, b_out.size);
                 int2str(n, b_out.data, b_out.size);
@@ -1057,7 +1216,7 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
               int2str(n, b_out.data, b_out.size);
             }
             if (out->mmd->data[c_i + out->mmd->size[0]] >
-                gmin->data[(gmin->size[0] + gmin->size[0] * c99) - 1]) {
+                gmin_data[(gmin->size[0] + gmin->size[0] * c99) - 1]) {
               if (msg) {
                 int2str(out->mmd->data[c_i], b_out.data, b_out.size);
                 int2str(n, b_out.data, b_out.size);
@@ -1075,27 +1234,27 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
           /*  Two consecutive values of mmd above the 99.99% envelope and 1
            * above 99% */
           if (((out->mmd->data[c_i + out->mmd->size[0]] >
-                gmin->data[c_i + gmin->size[0] * c999]) &&
+                gmin_data[c_i + gmin->size[0] * c999]) &&
                (out->mmd->data[(c_i + out->mmd->size[0]) + 1] >
-                gmin->data[(c_i + gmin->size[0] * c999) + 1]) &&
+                gmin_data[(c_i + gmin->size[0] * c999) + 1]) &&
                (out->mmd->data[(c_i + out->mmd->size[0]) - 1] >
-                gmin->data[(c_i + gmin->size[0] * c99) - 1])) ||
+                gmin_data[(c_i + gmin->size[0] * c99) - 1])) ||
               ((out->mmd->data[(c_i + out->mmd->size[0]) - 1] >
-                gmin->data[(c_i + gmin->size[0] * c999) - 1]) &&
+                gmin_data[(c_i + gmin->size[0] * c999) - 1]) &&
                (out->mmd->data[c_i + out->mmd->size[0]] >
-                gmin->data[c_i + gmin->size[0] * c999]) &&
+                gmin_data[c_i + gmin->size[0] * c999]) &&
                (out->mmd->data[(c_i + out->mmd->size[0]) + 1] >
-                gmin->data[(c_i + gmin->size[0] * c99) + 1])) ||
+                gmin_data[(c_i + gmin->size[0] * c99) + 1])) ||
               (out->mmd->data[c_i + out->mmd->size[0]] >
-               gmin->data[(gmin->size[0] + gmin->size[0] * c99) - 1]) ||
+               gmin_data[(gmin->size[0] + gmin->size[0] * c99) - 1]) ||
               (out->mmd->data[c_i + out->mmd->size[0]] >
-               gmin->data[c_i + gmin->size[0] * c99999])) {
+               gmin_data[c_i + gmin->size[0] * c99999])) {
             if ((out->mmd->data[c_i + out->mmd->size[0]] >
-                 gmin->data[c_i + gmin->size[0] * c999]) &&
+                 gmin_data[c_i + gmin->size[0] * c999]) &&
                 (out->mmd->data[(c_i + out->mmd->size[0]) + 1] >
-                 gmin->data[(c_i + gmin->size[0] * c999) + 1]) &&
+                 gmin_data[(c_i + gmin->size[0] * c999) + 1]) &&
                 (out->mmd->data[(c_i + out->mmd->size[0]) - 1] >
-                 gmin->data[(c_i + gmin->size[0] * c99) - 1])) {
+                 gmin_data[(c_i + gmin->size[0] * c99) - 1])) {
               if (msg) {
                 int2str(out->mmd->data[c_i], b_out.data, b_out.size);
                 int2str(n, b_out.data, b_out.size);
@@ -1112,11 +1271,11 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
               int2str(n, b_out.data, b_out.size);
             }
             if ((out->mmd->data[(c_i + out->mmd->size[0]) - 1] >
-                 gmin->data[(c_i + gmin->size[0] * c999) - 1]) &&
+                 gmin_data[(c_i + gmin->size[0] * c999) - 1]) &&
                 (out->mmd->data[c_i + out->mmd->size[0]] >
-                 gmin->data[c_i + gmin->size[0] * c999]) &&
+                 gmin_data[c_i + gmin->size[0] * c999]) &&
                 (out->mmd->data[(c_i + out->mmd->size[0]) + 1] >
-                 gmin->data[(c_i + gmin->size[0] * c99) + 1])) {
+                 gmin_data[(c_i + gmin->size[0] * c99) + 1])) {
               if (msg) {
                 int2str(out->mmd->data[c_i - 1], b_out.data, b_out.size);
                 int2str(n, b_out.data, b_out.size);
@@ -1133,7 +1292,7 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
               int2str(n, b_out.data, b_out.size);
             }
             if (out->mmd->data[c_i + out->mmd->size[0]] >
-                gmin->data[(gmin->size[0] + gmin->size[0] * c99) - 1]) {
+                gmin_data[(gmin->size[0] + gmin->size[0] * c99) - 1]) {
               if (msg) {
                 int2str(out->mmd->data[c_i], b_out.data, b_out.size);
                 int2str(n, b_out.data, b_out.size);
@@ -1143,7 +1302,7 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
             }
             /*  Extreme single value */
             if (out->mmd->data[c_i + out->mmd->size[0]] >
-                gmin->data[c_i + gmin->size[0] * c99999]) {
+                gmin_data[c_i + gmin->size[0] * c99999]) {
               if (msg) {
                 int2str(out->mmd->data[c_i], b_out.data, b_out.size);
                 int2str(n, b_out.data, b_out.size);
@@ -1157,14 +1316,14 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
             b_signal = 1;
           }
         } else if (((out->mmd->data[c_i + out->mmd->size[0]] >
-                     gmin->data[c_i + gmin->size[0] * c999]) ||
+                     gmin_data[c_i + gmin->size[0] * c999]) ||
                     (out->mmd->data[c_i + out->mmd->size[0]] >
-                     gmin->data[(gmin->size[0] + gmin->size[0] * c99) - 1])) &&
+                     gmin_data[(gmin->size[0] + gmin->size[0] * c99) - 1])) &&
                    (c_i + 1 == out->mmd->size[0] - 1)) {
           /*  potential couple of outliers */
           b_signal = 1;
           if (out->mmd->data[c_i + out->mmd->size[0]] >
-              gmin->data[c_i + gmin->size[0] * c999]) {
+              gmin_data[c_i + gmin->size[0] * c999]) {
             if (msg) {
               int2str(out->mmd->data[c_i], b_out.data, b_out.size);
               int2str(n, b_out.data, b_out.size);
@@ -1173,7 +1332,7 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
             int2str(n, b_out.data, b_out.size);
           }
           if (out->mmd->data[c_i + out->mmd->size[0]] >
-              gmin->data[(gmin->size[0] + gmin->size[0] * c99) - 1]) {
+              gmin_data[(gmin->size[0] + gmin->size[0] * c99) - 1]) {
             if (msg) {
               int2str(out->mmd->data[c_i], b_out.data, b_out.size);
               int2str(n, b_out.data, b_out.size);
@@ -1182,7 +1341,7 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
             int2str(n, b_out.data, b_out.size);
           }
         } else if ((out->mmd->data[c_i + out->mmd->size[0]] >
-                    gmin->data[c_i + gmin->size[0] * c99]) &&
+                    gmin_data[c_i + gmin->size[0] * c99]) &&
                    (c_i + 1 == out->mmd->size[0])) {
           /*  a single outlier */
           b_signal = 1;
@@ -1198,11 +1357,11 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
             /*  Incontrovertible signal = 3 consecutive values of d_min > */
             /*  99.999% threshold */
             if ((out->mmd->data[c_i + out->mmd->size[0]] >
-                 gmin->data[c_i + gmin->size[0] * c99999]) &&
+                 gmin_data[c_i + gmin->size[0] * c99999]) &&
                 (out->mmd->data[(c_i + out->mmd->size[0]) - 1] >
-                 gmin->data[(c_i + gmin->size[0] * c99999) - 1]) &&
+                 gmin_data[(c_i + gmin->size[0] * c99999) - 1]) &&
                 (out->mmd->data[(c_i + out->mmd->size[0]) + 1] >
-                 gmin->data[(c_i + gmin->size[0] * c99999) + 1])) {
+                 gmin_data[(c_i + gmin->size[0] * c99999) + 1])) {
               if (msg) {
                 int2str(out->mmd->data[c_i], b_out.data, b_out.size);
               }
@@ -1215,50 +1374,62 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
           /*  above 99.99% and later is below 1%: peak followed by dip */
           if (out->mmd->size[0] > (incre - out->mmd->data[0]) + 31.0) {
             for (i = 0; i < 31; i++) {
-              u = ((unsigned int)i + c_i) + 2U;
-              x[i] = (out->mmd->data[((int)u + out->mmd->size[0]) - 1] <
-                      gmin->data[((int)u + gmin->size[0] * c001) - 1]);
+              uv[i] = ((unsigned int)i + c_i) + 2U;
             }
-            b_loop_ub = x[0];
-            for (loop_ub = 0; loop_ub < 30; loop_ub++) {
-              b_loop_ub += x[loop_ub + 1];
+            for (i = 0; i < 31; i++) {
+              irank = (int)uv[i] - 1;
+              b_x[i] = (out->mmd->data[irank + out->mmd->size[0]] <
+                        gmin_data[irank + gmin->size[0] * c001]);
             }
-            if (b_loop_ub >= 2) {
+            stride_1_1 = b_x[0];
+            for (b_loop_ub = 0; b_loop_ub < 30; b_loop_ub++) {
+              stride_1_1 += b_x[b_loop_ub + 1];
+            }
+            if (stride_1_1 >= 2) {
               NoFalseSig = true;
               /*  Peak followed by dip */
             }
           } else {
             if (c_i + 2U > (unsigned int)out->mmd->size[0]) {
               i = -1;
-              i1 = -2;
+              i1 = -1;
             } else {
               i = c_i;
-              i1 = out->mmd->size[0] - 2;
+              i1 = out->mmd->size[0] - 1;
             }
             if (c_i + 2U > (unsigned int)gmin->size[0]) {
               i2 = -1;
+              b_loop_ub = -1;
             } else {
               i2 = c_i;
+              b_loop_ub = gmin->size[0] - 1;
             }
             loop_ub = i1 - i;
-            i1 = b_m0->size[0];
-            b_m0->size[0] = loop_ub + 1;
-            emxEnsureCapacity_boolean_T(b_m0, i1);
-            for (i1 = 0; i1 <= loop_ub; i1++) {
-              b_m0->data[i1] =
-                  (out->mmd->data[((i + i1) + out->mmd->size[0]) + 1] <
-                   gmin->data[((i2 + i1) + gmin->size[0] * c001) + 1]);
-            }
-            irank = b_m0->size[0];
-            if (b_m0->size[0] == 0) {
-              b_loop_ub = 0;
+            if (loop_ub == b_loop_ub - i2) {
+              i1 = x->size[0];
+              x->size[0] = loop_ub;
+              emxEnsureCapacity_boolean_T(x, i1);
+              x_data = x->data;
+              for (i1 = 0; i1 < loop_ub; i1++) {
+                x_data[i1] =
+                    (out->mmd->data[((i + i1) + out->mmd->size[0]) + 1] <
+                     gmin_data[((i2 + i1) + gmin->size[0] * c001) + 1]);
+              }
             } else {
-              b_loop_ub = b_m0->data[0];
-              for (loop_ub = 2; loop_ub <= irank; loop_ub++) {
-                b_loop_ub += b_m0->data[loop_ub - 1];
+              d_binary_expand_op(x, out, i + 1, i1, gmin, i2 + 1, b_loop_ub,
+                                 c001);
+              x_data = x->data;
+            }
+            irank = x->size[0];
+            if (x->size[0] == 0) {
+              stride_1_1 = 0;
+            } else {
+              stride_1_1 = x_data[0];
+              for (b_loop_ub = 2; b_loop_ub <= irank; b_loop_ub++) {
+                stride_1_1 += x_data[b_loop_ub - 1];
               }
             }
-            if (b_loop_ub >= 2) {
+            if (stride_1_1 >= 2) {
               NoFalseSig = true;
               /* Peak followed by dip in the final part of the search'; */
             }
@@ -1271,9 +1442,10 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
           if (!NoFalseSig) {
             /*  Compute the final value of the envelope based on */
             /*  mmd(i+1,1)=mdagger+1 observations */
-            b_FSMenvmmd(incre + 1.0, v, incre, gval);
+            c_FSMenvmmd(incre + 1.0, v, incre, gval);
+            fre_data = gval->data;
             if (out->mmd->data[c_i + out->mmd->size[0]] <
-                gval->data[gval->size[0]]) {
+                fre_data[gval->size[0]]) {
               if (msg) {
                 int2str(incre, b_out.data, b_out.size);
               }
@@ -1297,7 +1469,7 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
 
         /*  Outlier detection based on Bonferroni threshold */
       } else if (out->mmd->data[c_i + out->mmd->size[0]] >
-                 gbonf->data[c_i + gbonf->size[0] * (gbonf->size[1] - 1)]) {
+                 goodobs_data[c_i + gbonf->size[0] * (gbonf->size[1] - 1)]) {
         if (msg) {
           int2str(out->mmd->data[c_i], b_out.data, b_out.size);
           int2str(n, b_out.data, b_out.size);
@@ -1335,19 +1507,20 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
         while ((!exitg2) && (irank <= i - 1)) {
           tr = (incre - 1.0) + (double)irank;
           /*  Compute theoretical envelopes based on tr observations */
-          c_FSMenvmmd(tr, v, init_contents, gmin1);
+          b_FSMenvmmd(tr, v, init_contents, gmin1);
+          gmin1_data = gmin1->data;
           i1 = (gmin1->size[0] - b_i) + 1;
           ii = (unsigned int)(b_i - 1);
-          b_loop_ub = 0;
+          stride_1_1 = 0;
           exitg3 = false;
-          while ((!exitg3) && (b_loop_ub <= i1)) {
-            ii = ((unsigned int)b_i + b_loop_ub) - 1U;
+          while ((!exitg3) && (stride_1_1 <= i1)) {
+            ii = ((unsigned int)b_i + stride_1_1) - 1U;
             /*  CHECK IF STOPPING RULE IS FULFILLED */
             /*  ii>=size(gmin1,1)-2 = final, penultimate or antepenultimate
              * value */
             /*  of the resuperimposed envelope based on tr observations */
             d = out->mmd->data[((int)ii + out->mmd->size[0]) - 1];
-            if ((d > gmin1->data[((int)ii + gmin1->size[0] * c99) - 1]) &&
+            if ((d > gmin1_data[((int)ii + gmin1->size[0] * c99) - 1]) &&
                 ((int)ii >= gmin1->size[0] - 2)) {
               /*  Condition S1 */
               int2str(out->mmd->data[(int)ii - 1], b_out.data, b_out.size);
@@ -1360,7 +1533,7 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
               exitg3 = true;
             } else if (((int)ii < gmin1->size[0] - 2) &&
                        (d >
-                        gmin1->data[((int)ii + gmin1->size[0] * c999) - 1])) {
+                        gmin1_data[((int)ii + gmin1->size[0] * c999) - 1])) {
               /*  Condition S2 */
               int2str(out->mmd->data[(int)ii - 1], b_out.data, b_out.size);
               int2str(tr, b_out.data, b_out.size);
@@ -1372,7 +1545,7 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
               exitg3 = true;
             } else {
               /*  mmd is inside the envelopes, so keep resuperimposing */
-              b_loop_ub++;
+              stride_1_1++;
             }
           }
           /*  The following is the only one non graphical instruction */
@@ -1396,29 +1569,37 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
             i = 0;
             i1 = 0;
             i2 = 0;
+            b_loop_ub = 0;
           } else {
             i = (int)ii;
             i1 = gmin1->size[0];
             i2 = (int)ii;
+            b_loop_ub = gmin1->size[0];
           }
           loop_ub = i1 - i;
-          i1 = b_m0->size[0];
-          b_m0->size[0] = loop_ub;
-          emxEnsureCapacity_boolean_T(b_m0, i1);
-          for (i1 = 0; i1 < loop_ub; i1++) {
-            b_m0->data[i1] = (gmin1->data[(i + i1) + gmin1->size[0] * 3] >
-                              out->mmd->data[(i2 + i1) + out->mmd->size[0]]);
-          }
-          irank = b_m0->size[0];
-          if (b_m0->size[0] == 0) {
-            b_loop_ub = 0;
+          if (loop_ub == b_loop_ub - i2) {
+            i1 = x->size[0];
+            x->size[0] = loop_ub;
+            emxEnsureCapacity_boolean_T(x, i1);
+            x_data = x->data;
+            for (i1 = 0; i1 < loop_ub; i1++) {
+              x_data[i1] = (gmin1_data[(i + i1) + gmin1->size[0] * 3] >
+                            out->mmd->data[(i2 + i1) + out->mmd->size[0]]);
+            }
           } else {
-            b_loop_ub = b_m0->data[0];
-            for (loop_ub = 2; loop_ub <= irank; loop_ub++) {
-              b_loop_ub += b_m0->data[loop_ub - 1];
+            c_binary_expand_op(x, gmin1, i, i1 - 1, out, i2, b_loop_ub - 1);
+            x_data = x->data;
+          }
+          irank = x->size[0];
+          if (x->size[0] == 0) {
+            stride_1_1 = 0;
+          } else {
+            stride_1_1 = x_data[0];
+            for (b_loop_ub = 2; b_loop_ub <= irank; b_loop_ub++) {
+              stride_1_1 += x_data[b_loop_ub - 1];
             }
           }
-          if (b_loop_ub > 0) {
+          if (stride_1_1 > 0) {
             if (msg) {
               int2str(tr - 1.0, b_out.data, b_out.size);
             }
@@ -1429,61 +1610,72 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
               i = 0;
               i1 = 0;
               i2 = 0;
-              irank = 0;
               b_loop_ub = 0;
+              stride_1_1 = 0;
+              irank = 0;
             } else {
               i = b_i;
               i1 = gmin1->size[0];
               i2 = b_i;
+              b_loop_ub = gmin1->size[0];
+              stride_1_1 = b_i;
               irank = gmin1->size[0];
-              b_loop_ub = b_i;
             }
+            loop_ub = b_loop_ub - i2;
             emxInit_real_T(&gfind, 2);
-            loop_ub = i1 - i;
-            i1 = gfind->size[0] * gfind->size[1];
-            gfind->size[0] = loop_ub;
-            gfind->size[1] = 2;
-            emxEnsureCapacity_real_T(gfind, i1);
-            for (i1 = 0; i1 < loop_ub; i1++) {
-              gfind->data[i1] = gmin1->data[i + i1];
-            }
-            loop_ub = irank - i2;
-            for (i = 0; i < loop_ub; i++) {
-              gfind->data[i + gfind->size[0]] =
-                  (gmin1->data[(i2 + i) + gmin1->size[0] * 3] >
-                   out->mmd->data[(b_loop_ub + i) + out->mmd->size[0]]);
+            if (loop_ub == irank - stride_1_1) {
+              b_loop_ub = i1 - i;
+              i1 = gfind->size[0] * gfind->size[1];
+              gfind->size[0] = b_loop_ub;
+              gfind->size[1] = 2;
+              emxEnsureCapacity_real_T(gfind, i1);
+              gmin_data = gfind->data;
+              for (i1 = 0; i1 < b_loop_ub; i1++) {
+                gmin_data[i1] = gmin1_data[i + i1];
+              }
+              for (i = 0; i < loop_ub; i++) {
+                gmin_data[i + gfind->size[0]] =
+                    (gmin1_data[(i2 + i) + gmin1->size[0] * 3] >
+                     out->mmd->data[(stride_1_1 + i) + out->mmd->size[0]]);
+              }
+            } else {
+              b_binary_expand_op(gfind, gmin1, i, i1 - 1, i2, b_loop_ub - 1,
+                                 out, stride_1_1, irank - 1);
+              gmin_data = gfind->data;
             }
             /*  select from gfind the steps where mmd was below 1% threshold */
             /*  gfind(1,1) contains the first step where mmd was below 1% */
             /*  find maximum in the interval m^\dagger=mmd(i,1) to the step */
             /*  prior to the one where mmd goes below 1% envelope */
             loop_ub = gfind->size[0];
-            i = b_m0->size[0];
-            b_m0->size[0] = gfind->size[0];
-            emxEnsureCapacity_boolean_T(b_m0, i);
+            i = x->size[0];
+            x->size[0] = gfind->size[0];
+            emxEnsureCapacity_boolean_T(x, i);
+            x_data = x->data;
             for (i = 0; i < loop_ub; i++) {
-              b_m0->data[i] = (gfind->data[i + gfind->size[0]] > 0.0);
+              x_data[i] = (gmin_data[i + gfind->size[0]] > 0.0);
             }
-            b_loop_ub = b_m0->size[0] - 1;
-            trueCount = 0;
-            for (c_i = 0; c_i <= b_loop_ub; c_i++) {
-              if (b_m0->data[c_i]) {
-                trueCount++;
+            stride_1_1 = x->size[0] - 1;
+            b_loop_ub = 0;
+            for (c_i = 0; c_i <= stride_1_1; c_i++) {
+              if (x_data[c_i]) {
+                b_loop_ub++;
               }
             }
-            emxInit_int32_T(&r5, 1);
-            i = r5->size[0];
-            r5->size[0] = trueCount;
-            emxEnsureCapacity_int32_T(r5, i);
+            emxInit_int32_T(&r12, 1);
+            i = r12->size[0];
+            r12->size[0] = b_loop_ub;
+            emxEnsureCapacity_int32_T(r12, i);
+            ia_data = r12->data;
             irank = 0;
-            for (c_i = 0; c_i <= b_loop_ub; c_i++) {
-              if (b_m0->data[c_i]) {
-                r5->data[irank] = c_i + 1;
+            for (c_i = 0; c_i <= stride_1_1; c_i++) {
+              if (x_data[c_i]) {
+                ia_data[irank] = c_i + 1;
                 irank++;
               }
             }
-            d = gfind->data[r5->data[0] - 1] - out->mmd->data[0];
-            emxFree_int32_T(&r5);
+            d = gmin_data[ia_data[0] - 1] - out->mmd->data[0];
+            emxFree_int32_T(&r12);
             if (b_i > d) {
               i = 0;
               i1 = 0;
@@ -1496,14 +1688,16 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
             gfind->size[0] = loop_ub;
             gfind->size[1] = 2;
             emxEnsureCapacity_real_T(gfind, i1);
+            gmin_data = gfind->data;
             for (i1 = 0; i1 < 2; i1++) {
               for (i2 = 0; i2 < loop_ub; i2++) {
-                gfind->data[i2 + gfind->size[0] * i1] =
+                gmin_data[i2 + gfind->size[0] * i1] =
                     out->mmd->data[(i + i2) + out->mmd->size[0] * i1];
               }
             }
             d_sortrows(gfind);
-            tr = gfind->data[gfind->size[0] - 1];
+            gmin_data = gfind->data;
+            tr = gmin_data[gfind->size[0] - 1];
             emxFree_real_T(&gfind);
             if (msg) {
               int2str(tr, b_out.data, b_out.size);
@@ -1539,30 +1733,33 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
         i = bs->size[0];
         bs->size[0] = bb->size[0];
         emxEnsureCapacity_real_T(bs, i);
+        bs_data = bs->data;
         for (i = 0; i < loop_ub; i++) {
-          bs->data[i] = bb->data[i + bb->size[0] * (irank - 1)];
+          bs_data[i] = bb_data[i + bb->size[0] * (irank - 1)];
         }
-        i = b_m0->size[0];
-        b_m0->size[0] = bs->size[0];
-        emxEnsureCapacity_boolean_T(b_m0, i);
+        i = x->size[0];
+        x->size[0] = bs->size[0];
+        emxEnsureCapacity_boolean_T(x, i);
+        x_data = x->data;
         loop_ub = bs->size[0];
         for (i = 0; i < loop_ub; i++) {
-          b_m0->data[i] = rtIsNaN(bs->data[i]);
+          x_data[i] = rtIsNaN(bs_data[i]);
         }
-        b_loop_ub = b_m0->size[0] - 1;
-        trueCount = 0;
-        for (b_i = 0; b_i <= b_loop_ub; b_i++) {
-          if (b_m0->data[b_i]) {
-            trueCount++;
+        stride_1_1 = x->size[0] - 1;
+        b_loop_ub = 0;
+        for (b_i = 0; b_i <= stride_1_1; b_i++) {
+          if (x_data[b_i]) {
+            b_loop_ub++;
           }
         }
         i = outliers->size[0];
-        outliers->size[0] = trueCount;
+        outliers->size[0] = b_loop_ub;
         emxEnsureCapacity_real_T(outliers, i);
+        gmin1_data = outliers->data;
         irank = 0;
-        for (b_i = 0; b_i <= b_loop_ub; b_i++) {
-          if (b_m0->data[b_i]) {
-            outliers->data[irank] = seq->data[b_i];
+        for (b_i = 0; b_i <= stride_1_1; b_i++) {
+          if (x_data[b_i]) {
+            gmin1_data[irank] = seq_data[b_i];
             irank++;
           }
         }
@@ -1570,29 +1767,32 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
         emxInit_real_T(&a__1, 2);
         FSMbsb(b_Y, bs, (double)b_Y->size[0] - incre,
                (double)b_Y->size[0] - incre, a__1, bb);
+        bb_data = bb->data;
         i = r->size[0] * r->size[1];
         r->size[0] = bb->size[0];
         r->size[1] = bb->size[1];
         emxEnsureCapacity_boolean_T(r, i);
+        b_m0_data = r->data;
         loop_ub = bb->size[0] * bb->size[1];
         emxFree_real_T(&a__1);
         for (i = 0; i < loop_ub; i++) {
-          r->data[i] = rtIsNaN(bb->data[i]);
+          b_m0_data[i] = rtIsNaN(bb_data[i]);
         }
-        b_loop_ub = r->size[0] * r->size[1] - 1;
-        trueCount = 0;
-        for (b_i = 0; b_i <= b_loop_ub; b_i++) {
-          if (r->data[b_i]) {
-            trueCount++;
+        stride_1_1 = r->size[0] * r->size[1] - 1;
+        b_loop_ub = 0;
+        for (b_i = 0; b_i <= stride_1_1; b_i++) {
+          if (b_m0_data[b_i]) {
+            b_loop_ub++;
           }
         }
         i = outliers->size[0];
-        outliers->size[0] = trueCount;
+        outliers->size[0] = b_loop_ub;
         emxEnsureCapacity_real_T(outliers, i);
+        gmin1_data = outliers->data;
         irank = 0;
-        for (b_i = 0; b_i <= b_loop_ub; b_i++) {
-          if (r->data[b_i]) {
-            outliers->data[irank] = seq->data[b_i];
+        for (b_i = 0; b_i <= stride_1_1; b_i++) {
+          if (b_m0_data[b_i]) {
+            gmin1_data[irank] = seq_data[b_i];
             irank++;
           }
         }
@@ -1601,8 +1801,10 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
       i = outliers->size[0];
       outliers->size[0] = 1;
       emxEnsureCapacity_real_T(outliers, i);
-      outliers->data[0] = rtNaN;
+      gmin1_data = outliers->data;
+      gmin1_data[0] = rtNaN;
     }
+    emxFree_boolean_T(&x);
     /* compute locatione and covariance matrix */
     if (b_Y->size[0] < 1) {
       loc->size[0] = 1;
@@ -1612,50 +1814,56 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
       loc->size[0] = 1;
       loc->size[1] = b_Y->size[0];
       emxEnsureCapacity_real_T(loc, i);
+      loc_data = loc->data;
       loop_ub = b_Y->size[0] - 1;
       for (i = 0; i <= loop_ub; i++) {
-        loc->data[i] = (double)i + 1.0;
+        loc_data[i] = (double)i + 1.0;
       }
     }
     b_do_vectors(loc, outliers, goodobs, ia, &irank);
+    goodobs_data = goodobs->data;
     i = bs->size[0];
     bs->size[0] = goodobs->size[1];
     emxEnsureCapacity_real_T(bs, i);
+    bs_data = bs->data;
     loop_ub = goodobs->size[1];
     emxFree_int32_T(&ia);
     for (i = 0; i < loop_ub; i++) {
-      bs->data[i] = goodobs->data[i];
+      bs_data[i] = goodobs_data[i];
     }
     loop_ub = b_Y->size[1];
     i = c_Y->size[0] * c_Y->size[1];
     c_Y->size[0] = bs->size[0];
     c_Y->size[1] = b_Y->size[1];
     emxEnsureCapacity_real_T(c_Y, i);
+    goodobs_data = c_Y->data;
     for (i = 0; i < loop_ub; i++) {
-      irank = bs->size[0];
-      for (i1 = 0; i1 < irank; i1++) {
-        c_Y->data[i1 + c_Y->size[0] * i] =
-            b_Y->data[((int)bs->data[i1] + b_Y->size[0] * i) - 1];
+      b_loop_ub = bs->size[0];
+      for (i1 = 0; i1 < b_loop_ub; i1++) {
+        goodobs_data[i1 + c_Y->size[0] * i] =
+            b_Y_data[((int)bs_data[i1] + b_Y->size[0] * i) - 1];
       }
     }
     combineVectorElements(c_Y, loc);
     i = loc->size[0] * loc->size[1];
     loc->size[0] = 1;
     emxEnsureCapacity_real_T(loc, i);
+    loc_data = loc->data;
     loop_ub = loc->size[1] - 1;
     for (i = 0; i <= loop_ub; i++) {
-      loc->data[i] /= (double)bs->size[0];
+      loc_data[i] /= (double)bs->size[0];
     }
     loop_ub = b_Y->size[1];
     i = c_Y->size[0] * c_Y->size[1];
     c_Y->size[0] = bs->size[0];
     c_Y->size[1] = b_Y->size[1];
     emxEnsureCapacity_real_T(c_Y, i);
+    goodobs_data = c_Y->data;
     for (i = 0; i < loop_ub; i++) {
-      irank = bs->size[0];
-      for (i1 = 0; i1 < irank; i1++) {
-        c_Y->data[i1 + c_Y->size[0] * i] =
-            b_Y->data[((int)bs->data[i1] + b_Y->size[0] * i) - 1];
+      b_loop_ub = bs->size[0];
+      for (i1 = 0; i1 < b_loop_ub; i1++) {
+        goodobs_data[i1 + c_Y->size[0] * i] =
+            b_Y_data[((int)bs_data[i1] + b_Y->size[0] * i) - 1];
       }
     }
     emxInit_real_T(&Ytilde, 2);
@@ -1669,7 +1877,6 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
      * SIGMA */
     /*  */
     /*       d(i) = (Y(i,:)-MU) * SIGMA^(-1) * (Y(i,:)-MU)', */
-    /*  */
     /*  */
     /* <a href="matlab: docsearchFS('mahalFS')">Link to the help function</a> */
     /*  */
@@ -1706,13 +1913,10 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
     /*  */
     /*  See also: mahal */
     /*  */
-    /*  */
     /*  References: */
-    /*  */
     /*  */
     /*  Copyright 2008-2021. */
     /*  Written by FSDA team */
-    /*  */
     /*  */
     /* <a href="matlab: docsearchFS('mahalFS')">Link to the help function</a> */
     /*  */
@@ -1728,17 +1932,26 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
     /* } */
     /*  Beginning of code */
     bsxfun(b_Y, loc, Ytilde);
+    gmin_data = Ytilde->data;
     mrdiv(Ytilde, out->cov, bb);
-    i = c_Y->size[0] * c_Y->size[1];
-    c_Y->size[0] = bb->size[0];
-    c_Y->size[1] = bb->size[1];
-    emxEnsureCapacity_real_T(c_Y, i);
-    loop_ub = bb->size[0] * bb->size[1];
-    for (i = 0; i < loop_ub; i++) {
-      c_Y->data[i] = bb->data[i] * Ytilde->data[i];
+    bb_data = bb->data;
+    if ((bb->size[0] == Ytilde->size[0]) && (bb->size[1] == Ytilde->size[1])) {
+      i = c_Y->size[0] * c_Y->size[1];
+      c_Y->size[0] = bb->size[0];
+      c_Y->size[1] = bb->size[1];
+      emxEnsureCapacity_real_T(c_Y, i);
+      goodobs_data = c_Y->data;
+      loop_ub = bb->size[0] * bb->size[1];
+      for (i = 0; i < loop_ub; i++) {
+        goodobs_data[i] = bb_data[i] * gmin_data[i];
+      }
+      sum(c_Y, bs);
+      bs_data = bs->data;
+    } else {
+      binary_expand_op(bs, bb, Ytilde);
+      bs_data = bs->data;
     }
     emxFree_real_T(&Ytilde);
-    sum(c_Y, bs);
     /*  Scatter plot matrix with the outliers shown with a different symbol */
     /*  Structure returned by function FSM */
     /*  If you wish that the output also contains the list of units not declared
@@ -1752,7 +1965,7 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
     emxEnsureCapacity_real_T(out->outliers, i);
     loop_ub = outliers->size[0];
     for (i = 0; i < loop_ub; i++) {
-      out->outliers->data[i] = outliers->data[i];
+      out->outliers->data[i] = gmin1_data[i];
     }
     emxFree_real_T(&outliers);
     i = out->loc->size[0] * out->loc->size[1];
@@ -1761,7 +1974,7 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
     emxEnsureCapacity_real_T(out->loc, i);
     loop_ub = loc->size[1];
     for (i = 0; i < loop_ub; i++) {
-      out->loc->data[i] = loc->data[i];
+      out->loc->data[i] = loc_data[i];
     }
     i = out->md->size[0] * out->md->size[1];
     out->md->size[0] = bs->size[0];
@@ -1769,7 +1982,7 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
     emxEnsureCapacity_real_T(out->md, i);
     loop_ub = bs->size[0];
     for (i = 0; i < loop_ub; i++) {
-      out->md->data[i] = bs->data[i];
+      out->md->data[i] = bs_data[i];
     }
     if ((bonflev_size[0] == 0) || (bonflev_size[1] == 0)) {
       i = out->nout->size[0] * out->nout->size[1];
@@ -1778,7 +1991,7 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
       emxEnsureCapacity_real_T(out->nout, i);
       loop_ub = nout->size[0] * 5;
       for (i = 0; i < loop_ub; i++) {
-        out->nout->data[i] = nout->data[i];
+        out->nout->data[i] = b_nout_data[i];
       }
     } else {
       out->nout->size[0] = 0;
@@ -1793,7 +2006,6 @@ void FSM_wrapper(const emxArray_real_T *Y, const double bonflev_data[],
   }
   emxFree_real_T(&b_bs);
   emxFree_real_T(&c_Y);
-  emxFree_boolean_T(&b_m0);
   emxFree_boolean_T(&r);
   emxFree_real_T(&loc);
   emxFree_real_T(&goodobs);

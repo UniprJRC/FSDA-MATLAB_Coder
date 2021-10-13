@@ -50,7 +50,10 @@ void h_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
 void i_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
               emxArray_real_T *c);
 
-void j_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
+void j_bsxfun(const emxArray_boolean_T *a, const emxArray_real_T *b,
+              emxArray_real_T *c);
+
+void k_bsxfun(const emxArray_real_T *a, const emxArray_real_T *b,
               emxArray_real_T *c);
 
 #ifdef __cplusplus

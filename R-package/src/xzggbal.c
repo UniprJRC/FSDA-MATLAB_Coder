@@ -19,6 +19,7 @@
 /* Function Definitions */
 void xzggbal(emxArray_creal_T *A, int *ilo, int *ihi, emxArray_int32_T *rscale)
 {
+  creal_T *A_data;
   double atmp_im;
   double atmp_re;
   int exitg1;
@@ -28,15 +29,18 @@ void xzggbal(emxArray_creal_T *A, int *ilo, int *ihi, emxArray_int32_T *rscale)
   int j;
   int jj;
   int nzcount;
+  int *rscale_data;
   bool exitg3;
   bool exitg4;
   bool found;
-  ii = rscale->size[0];
+  A_data = A->data;
+  nzcount = rscale->size[0];
   rscale->size[0] = A->size[0];
-  emxEnsureCapacity_int32_T(rscale, ii);
-  nzcount = A->size[0];
-  for (ii = 0; ii < nzcount; ii++) {
-    rscale->data[ii] = 1;
+  emxEnsureCapacity_int32_T(rscale, nzcount);
+  rscale_data = rscale->data;
+  ii = A->size[0];
+  for (nzcount = 0; nzcount < ii; nzcount++) {
+    rscale_data[nzcount] = 1;
   }
   *ilo = 1;
   *ihi = A->size[0];
@@ -57,8 +61,8 @@ void xzggbal(emxArray_creal_T *A, int *ilo, int *ihi, emxArray_int32_T *rscale)
         jj = 0;
         exitg4 = false;
         while ((!exitg4) && (jj <= *ihi - 1)) {
-          if ((A->data[(ii + A->size[0] * jj) - 1].re != 0.0) ||
-              (A->data[(ii + A->size[0] * jj) - 1].im != 0.0) ||
+          if ((A_data[(ii + A->size[0] * jj) - 1].re != 0.0) ||
+              (A_data[(ii + A->size[0] * jj) - 1].im != 0.0) ||
               (ii == jj + 1)) {
             if (nzcount == 0) {
               j = jj + 1;
@@ -82,31 +86,31 @@ void xzggbal(emxArray_creal_T *A, int *ilo, int *ihi, emxArray_int32_T *rscale)
       if (!found) {
         exitg2 = 2;
       } else {
-        nzcount = A->size[0];
+        ii = A->size[0];
         if (i != *ihi) {
-          for (ii = 1; ii <= nzcount; ii++) {
-            atmp_re = A->data[(i + A->size[0] * (ii - 1)) - 1].re;
-            atmp_im = A->data[(i + A->size[0] * (ii - 1)) - 1].im;
-            A->data[(i + A->size[0] * (ii - 1)) - 1] =
-                A->data[(*ihi + A->size[0] * (ii - 1)) - 1];
-            A->data[(*ihi + A->size[0] * (ii - 1)) - 1].re = atmp_re;
-            A->data[(*ihi + A->size[0] * (ii - 1)) - 1].im = atmp_im;
+          for (nzcount = 1; nzcount <= ii; nzcount++) {
+            atmp_re = A_data[(i + A->size[0] * (nzcount - 1)) - 1].re;
+            atmp_im = A_data[(i + A->size[0] * (nzcount - 1)) - 1].im;
+            A_data[(i + A->size[0] * (nzcount - 1)) - 1] =
+                A_data[(*ihi + A->size[0] * (nzcount - 1)) - 1];
+            A_data[(*ihi + A->size[0] * (nzcount - 1)) - 1].re = atmp_re;
+            A_data[(*ihi + A->size[0] * (nzcount - 1)) - 1].im = atmp_im;
           }
         }
         if (j != *ihi) {
-          for (ii = 0; ii < *ihi; ii++) {
-            atmp_re = A->data[ii + A->size[0] * (j - 1)].re;
-            atmp_im = A->data[ii + A->size[0] * (j - 1)].im;
-            A->data[ii + A->size[0] * (j - 1)] =
-                A->data[ii + A->size[0] * (*ihi - 1)];
-            A->data[ii + A->size[0] * (*ihi - 1)].re = atmp_re;
-            A->data[ii + A->size[0] * (*ihi - 1)].im = atmp_im;
+          for (nzcount = 0; nzcount < *ihi; nzcount++) {
+            atmp_re = A_data[nzcount + A->size[0] * (j - 1)].re;
+            atmp_im = A_data[nzcount + A->size[0] * (j - 1)].im;
+            A_data[nzcount + A->size[0] * (j - 1)] =
+                A_data[nzcount + A->size[0] * (*ihi - 1)];
+            A_data[nzcount + A->size[0] * (*ihi - 1)].re = atmp_re;
+            A_data[nzcount + A->size[0] * (*ihi - 1)].im = atmp_im;
           }
         }
-        rscale->data[*ihi - 1] = j;
+        rscale_data[*ihi - 1] = j;
         (*ihi)--;
         if (*ihi == 1) {
-          rscale->data[0] = 1;
+          rscale_data[0] = 1;
           exitg2 = 1;
         }
       }
@@ -126,8 +130,8 @@ void xzggbal(emxArray_creal_T *A, int *ilo, int *ihi, emxArray_int32_T *rscale)
           ii = *ilo;
           exitg4 = false;
           while ((!exitg4) && (ii <= *ihi)) {
-            if ((A->data[(ii + A->size[0] * (jj - 1)) - 1].re != 0.0) ||
-                (A->data[(ii + A->size[0] * (jj - 1)) - 1].im != 0.0) ||
+            if ((A_data[(ii + A->size[0] * (jj - 1)) - 1].re != 0.0) ||
+                (A_data[(ii + A->size[0] * (jj - 1)) - 1].im != 0.0) ||
                 (ii == jj)) {
               if (nzcount == 0) {
                 i = ii;
@@ -151,31 +155,31 @@ void xzggbal(emxArray_creal_T *A, int *ilo, int *ihi, emxArray_int32_T *rscale)
         if (!found) {
           exitg1 = 1;
         } else {
-          nzcount = A->size[0];
+          ii = A->size[0];
           if (i != *ilo) {
-            for (ii = *ilo; ii <= nzcount; ii++) {
-              atmp_re = A->data[(i + A->size[0] * (ii - 1)) - 1].re;
-              atmp_im = A->data[(i + A->size[0] * (ii - 1)) - 1].im;
-              A->data[(i + A->size[0] * (ii - 1)) - 1] =
-                  A->data[(*ilo + A->size[0] * (ii - 1)) - 1];
-              A->data[(*ilo + A->size[0] * (ii - 1)) - 1].re = atmp_re;
-              A->data[(*ilo + A->size[0] * (ii - 1)) - 1].im = atmp_im;
+            for (nzcount = *ilo; nzcount <= ii; nzcount++) {
+              atmp_re = A_data[(i + A->size[0] * (nzcount - 1)) - 1].re;
+              atmp_im = A_data[(i + A->size[0] * (nzcount - 1)) - 1].im;
+              A_data[(i + A->size[0] * (nzcount - 1)) - 1] =
+                  A_data[(*ilo + A->size[0] * (nzcount - 1)) - 1];
+              A_data[(*ilo + A->size[0] * (nzcount - 1)) - 1].re = atmp_re;
+              A_data[(*ilo + A->size[0] * (nzcount - 1)) - 1].im = atmp_im;
             }
           }
           if (j != *ilo) {
-            for (ii = 0; ii < *ihi; ii++) {
-              atmp_re = A->data[ii + A->size[0] * (j - 1)].re;
-              atmp_im = A->data[ii + A->size[0] * (j - 1)].im;
-              A->data[ii + A->size[0] * (j - 1)] =
-                  A->data[ii + A->size[0] * (*ilo - 1)];
-              A->data[ii + A->size[0] * (*ilo - 1)].re = atmp_re;
-              A->data[ii + A->size[0] * (*ilo - 1)].im = atmp_im;
+            for (nzcount = 0; nzcount < *ihi; nzcount++) {
+              atmp_re = A_data[nzcount + A->size[0] * (j - 1)].re;
+              atmp_im = A_data[nzcount + A->size[0] * (j - 1)].im;
+              A_data[nzcount + A->size[0] * (j - 1)] =
+                  A_data[nzcount + A->size[0] * (*ilo - 1)];
+              A_data[nzcount + A->size[0] * (*ilo - 1)].re = atmp_re;
+              A_data[nzcount + A->size[0] * (*ilo - 1)].im = atmp_im;
             }
           }
-          rscale->data[*ilo - 1] = j;
+          rscale_data[*ilo - 1] = j;
           (*ilo)++;
           if (*ilo == *ihi) {
-            rscale->data[*ilo - 1] = *ilo;
+            rscale_data[*ilo - 1] = *ilo;
             exitg1 = 1;
           }
         }

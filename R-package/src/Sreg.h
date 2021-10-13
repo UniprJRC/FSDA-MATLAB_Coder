@@ -45,6 +45,9 @@ void b_Sreg(const emxArray_real_T *y, const emxArray_real_T *X,
             const emxArray_real_T *varargin_20, j_struct_T *out,
             emxArray_real_T *varargout_1);
 
+void bf_binary_expand_op(struct_Sreg_T *out, const emxArray_real_T *y,
+                         double superbestscale);
+
 #ifdef __cplusplus
 }
 #endif

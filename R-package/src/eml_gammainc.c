@@ -240,7 +240,7 @@ double eml_gammainc(double x, double a, double la, double lgap1, bool upper)
           } while (exitg1 == 0);
         }
         asq = 0.0;
-        i = (int)(((-1.0 - (n - 1.0)) + 1.0) / -1.0);
+        i = (int)-((-1.0 - (n - 1.0)) + 1.0);
         for (b_i = 0; b_i < i; b_i++) {
           asq = x * (asq + 1.0) / (a + ((n - 1.0) + -(double)b_i));
         }
@@ -358,7 +358,7 @@ double eml_gammainc(double x, double a, double la, double lgap1, bool upper)
           n = floor(a) + 1.0;
         }
       }
-      i = (int)(((-1.0 - (n - 1.0)) + 1.0) / -1.0);
+      i = (int)-((-1.0 - (n - 1.0)) + 1.0);
       for (b_i = 0; b_i < i; b_i++) {
         asq = (a - ((n - 1.0) + -(double)b_i)) * asq / x + 1.0;
       }

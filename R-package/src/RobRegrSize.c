@@ -14,6 +14,7 @@
 #include "eml_setop.h"
 #include "erfcinv.h"
 #include "fsdaC_emxutil.h"
+#include "fsdaC_rtwutil.h"
 #include "fsdaC_types.h"
 #include "mldivide.h"
 #include "rt_nonfinite.h"
@@ -35,12 +36,12 @@ struct emxArray_char_T_1x10 {
 typedef struct emxArray_char_T_1x10 emxArray_char_T_1x10;
 #endif /* typedef_emxArray_char_T_1x10 */
 
-#ifndef typedef_cell_wrap_65
-#define typedef_cell_wrap_65
+#ifndef typedef_cell_wrap_68
+#define typedef_cell_wrap_68
 typedef struct {
   emxArray_char_T_1x10 f1;
-} cell_wrap_65;
-#endif /* typedef_cell_wrap_65 */
+} cell_wrap_68;
+#endif /* typedef_cell_wrap_68 */
 
 /* Function Definitions */
 double RobRegrSize(double n, double p, double bdp)
@@ -910,10 +911,6 @@ double RobRegrSize(double n, double p, double bdp)
       14.755356373193239, 12.81278855783804,  11.667110202742979,
       9.1163754291330932, 8.2469405438349632, 7.8285143203449215,
       7.59970205255398,   7.3245401376114847, 7.1576382923702724};
-  static const double b_dv1[27] = {1.0,  1.0,  1.0,  1.0,  1.0,  1.0,  1.0,
-                                   1.0,  1.0,  2.0,  3.0,  4.0,  5.0,  6.0,
-                                   7.0,  8.0,  9.0,  10.0, 4.0,  9.0,  16.0,
-                                   25.0, 36.0, 49.0, 64.0, 81.0, 100.0};
   static const short b_iv[12] = {50,  60,  70,  80,  90,  100,
                                  150, 200, 250, 300, 400, 500};
   static const short nn[12] = {50,  60,  70,  80,  90,  100,
@@ -956,31 +953,31 @@ double RobRegrSize(double n, double p, double bdp)
   static const char cv4[9] = {'S', 'b', 'd', 'p', '0', '2', '5', 'T', 'B'};
   static const char cv5[9] = {'S', 'b', 'd', 'p', '0', '5', '0', 'T', 'B'};
   static const char cv9[9] = {'S', 'b', 'd', 'p', '0', '2', '5', 'O', 'P'};
-  cell_wrap_65 labest[24];
-  cell_wrap_65 r;
-  cell_wrap_65 r1;
-  cell_wrap_65 r10;
-  cell_wrap_65 r11;
-  cell_wrap_65 r12;
-  cell_wrap_65 r13;
-  cell_wrap_65 r14;
-  cell_wrap_65 r15;
-  cell_wrap_65 r16;
-  cell_wrap_65 r17;
-  cell_wrap_65 r18;
-  cell_wrap_65 r19;
-  cell_wrap_65 r2;
-  cell_wrap_65 r20;
-  cell_wrap_65 r21;
-  cell_wrap_65 r22;
-  cell_wrap_65 r23;
-  cell_wrap_65 r3;
-  cell_wrap_65 r4;
-  cell_wrap_65 r5;
-  cell_wrap_65 r6;
-  cell_wrap_65 r7;
-  cell_wrap_65 r8;
-  cell_wrap_65 r9;
+  cell_wrap_68 labest[24];
+  cell_wrap_68 r;
+  cell_wrap_68 r1;
+  cell_wrap_68 r10;
+  cell_wrap_68 r11;
+  cell_wrap_68 r12;
+  cell_wrap_68 r13;
+  cell_wrap_68 r14;
+  cell_wrap_68 r15;
+  cell_wrap_68 r16;
+  cell_wrap_68 r17;
+  cell_wrap_68 r18;
+  cell_wrap_68 r19;
+  cell_wrap_68 r2;
+  cell_wrap_68 r20;
+  cell_wrap_68 r21;
+  cell_wrap_68 r22;
+  cell_wrap_68 r23;
+  cell_wrap_68 r3;
+  cell_wrap_68 r4;
+  cell_wrap_68 r5;
+  cell_wrap_68 r6;
+  cell_wrap_68 r7;
+  cell_wrap_68 r8;
+  cell_wrap_68 r9;
   emxArray_boolean_T *x;
   emxArray_char_T *namefile1;
   emxArray_char_T *str;
@@ -989,7 +986,7 @@ double RobRegrSize(double n, double p, double bdp)
   double b_y[108];
   double THseln[20];
   double b_THseln[9];
-  double b_dv2[3];
+  double b_dv1[3];
   double a;
   double yhat_idx_0;
   double yhat_idx_1;
@@ -1002,14 +999,16 @@ double RobRegrSize(double n, double p, double bdp)
   int nbytes;
   signed char ii_data[12];
   signed char posint1[2];
+  char *namefile1_data;
+  char *str_data;
   bool exitg1;
   bool y;
+  bool *x_data;
   /* RobRegrSize provides proper threshold for robust estimators to obtain an
    * empirical size close to 1 per cent nominal size */
   /*  */
   /* <a href="matlab: docsearchFS('RobRegrSize')">Link to the help function</a>
    */
-  /*  */
   /*  */
   /*   Required input arguments: */
   /*  */
@@ -1023,7 +1022,6 @@ double RobRegrSize(double n, double p, double bdp)
   /*                Data Types -single | double | int8 | int16 | int32 | int64
    * |uint8 | uint16 | uint32 | uint64 */
   /*  */
-  /*  */
   /*            p : number of variables. Scalar integer. Number of explanatory
    * variables. */
   /*                REMARK - simulations have been done for p=2, 3, ..., 10. If
@@ -1033,7 +1031,6 @@ double RobRegrSize(double n, double p, double bdp)
   /*                quadratic model in p. */
   /*                Data Types -single | double | int8 | int16 | int32 | int64
    * |uint8 | uint16 | uint32 | uint64 */
-  /*  */
   /*  */
   /*        robest: robust estimator. String. String which identifies the robust
    * estimator which is used */
@@ -1086,14 +1083,12 @@ double RobRegrSize(double n, double p, double bdp)
   /*                (eff=0.95) is used.  In all the other cases an average */
   /*                is taken using the two closest values of eff. */
   /*  */
-  /*  */
   /*      sizesim : simultaneous or individual size. Scalar. */
   /*                Scalar which specifies whether simultaneous (sizesim=1) or
    */
   /*                individual size is used. If sizesim is missing or equal to
    */
   /*                1 a simultaneous size is used. */
-  /*  */
   /*  */
   /*      Tallis  : need to intermpolate. Scalar. */
   /*                Scalar which has an effect just if bdp is not equal to 0.25
@@ -1120,7 +1115,6 @@ double RobRegrSize(double n, double p, double bdp)
   /*  */
   /*  Optional input arguments: */
   /*  */
-  /*  */
   /*   Output: */
   /*  */
   /*     thresh :    Empirical threshold. Scalar. */
@@ -1128,7 +1122,6 @@ double RobRegrSize(double n, double p, double bdp)
   /*                 to have a test with en empirical size close to the nominal
    */
   /*                 size (1% individual or simultaneous) */
-  /*  */
   /*  */
   /*   More About: */
   /*  */
@@ -1177,7 +1170,6 @@ double RobRegrSize(double n, double p, double bdp)
   /*                  '23'    'MMeff090HA'; */
   /*                  '24'    'MMeff095HA'. */
   /*  */
-  /*  */
   /*  See also: Sreg , MMreg, LXS */
   /*  */
   /*  References: */
@@ -1189,7 +1181,6 @@ double RobRegrSize(double n, double p, double bdp)
   /*  */
   /*  Copyright 2008-2021. */
   /*  Written by FSDA team */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('RobRegrSize')">Link to the help function</a>
    */
@@ -1413,16 +1404,17 @@ double RobRegrSize(double n, double p, double bdp)
   x->size[0] = 1;
   x->size[1] = c_size[1];
   emxEnsureCapacity_boolean_T(x, ib_size);
+  x_data = x->data;
   nbytes = c_size[1];
   for (ib_size = 0; ib_size < nbytes; ib_size++) {
-    x->data[0] = (a == bdp);
+    x_data[0] = (a == bdp);
   }
   y = (c_size[1] != 0);
   if (y) {
     nbytes = 0;
     exitg1 = false;
     while ((!exitg1) && (nbytes <= x->size[1] - 1)) {
-      if (!x->data[0]) {
+      if (!x_data[0]) {
         y = false;
         exitg1 = true;
       } else {
@@ -1441,7 +1433,8 @@ double RobRegrSize(double n, double p, double bdp)
     str->size[0] = 1;
     str->size[1] = nbytes + 1;
     emxEnsureCapacity_char_T(str, ib_size);
-    snprintf(&str->data[0], (size_t)(nbytes + 1), "%.0f", a);
+    str_data = str->data;
+    snprintf(&str_data[0], (size_t)(nbytes + 1), "%.0f", a);
     ib_size = str->size[0] * str->size[1];
     if (1 > nbytes) {
       str->size[1] = 0;
@@ -1449,20 +1442,22 @@ double RobRegrSize(double n, double p, double bdp)
       str->size[1] = nbytes;
     }
     emxEnsureCapacity_char_T(str, ib_size);
+    str_data = str->data;
     ib_size = namefile1->size[0] * namefile1->size[1];
     namefile1->size[0] = 1;
     namefile1->size[1] = str->size[1] + 7;
     emxEnsureCapacity_char_T(namefile1, ib_size);
-    namefile1->data[0] = 'L';
-    namefile1->data[1] = 'T';
-    namefile1->data[2] = 'S';
-    namefile1->data[3] = 'b';
-    namefile1->data[4] = 'd';
-    namefile1->data[5] = 'p';
-    namefile1->data[6] = '0';
+    namefile1_data = namefile1->data;
+    namefile1_data[0] = 'L';
+    namefile1_data[1] = 'T';
+    namefile1_data[2] = 'S';
+    namefile1_data[3] = 'b';
+    namefile1_data[4] = 'd';
+    namefile1_data[5] = 'p';
+    namefile1_data[6] = '0';
     nbytes = str->size[1];
     for (ib_size = 0; ib_size < nbytes; ib_size++) {
-      namefile1->data[ib_size + 7] = str->data[ib_size];
+      namefile1_data[ib_size + 7] = str_data[ib_size];
     }
     emxFree_char_T(&str);
   } else if (bdp < 0.25) {
@@ -1470,24 +1465,27 @@ double RobRegrSize(double n, double p, double bdp)
     namefile1->size[0] = 1;
     namefile1->size[1] = 9;
     emxEnsureCapacity_char_T(namefile1, ib_size);
+    namefile1_data = namefile1->data;
     for (ib_size = 0; ib_size < 9; ib_size++) {
-      namefile1->data[ib_size] = b_cv1[ib_size];
+      namefile1_data[ib_size] = b_cv1[ib_size];
     }
   } else if (bdp < 0.375) {
     ib_size = namefile1->size[0] * namefile1->size[1];
     namefile1->size[0] = 1;
     namefile1->size[1] = 9;
     emxEnsureCapacity_char_T(namefile1, ib_size);
+    namefile1_data = namefile1->data;
     for (ib_size = 0; ib_size < 9; ib_size++) {
-      namefile1->data[ib_size] = b_cv1[ib_size];
+      namefile1_data[ib_size] = b_cv1[ib_size];
     }
   } else {
     ib_size = namefile1->size[0] * namefile1->size[1];
     namefile1->size[0] = 1;
     namefile1->size[1] = 9;
     emxEnsureCapacity_char_T(namefile1, ib_size);
+    namefile1_data = namefile1->data;
     for (ib_size = 0; ib_size < 9; ib_size++) {
-      namefile1->data[ib_size] = b_cv[ib_size];
+      namefile1_data[ib_size] = b_cv[ib_size];
     }
   }
   /*  Simulations have been performed for the values of n and p given in */
@@ -1504,7 +1502,7 @@ double RobRegrSize(double n, double p, double bdp)
       do {
         exitg2 = 0;
         if (ia_size <= namefile1->size[1] - 1) {
-          if (labest[ib_data].f1.data[ia_size] != namefile1->data[ia_size]) {
+          if (labest[ib_data].f1.data[ia_size] != namefile1_data[ia_size]) {
             exitg2 = 1;
           } else {
             ia_size++;
@@ -1587,17 +1585,17 @@ double RobRegrSize(double n, double p, double bdp)
   if (p > 10.0) {
     yhat_idx_0 = THseln[0];
     yhat_idx_1 = THseln[1];
-    a = p * p;
+    a = rt_powd_snf(p, 2.0);
     for (ib_size = 0; ib_size < 9; ib_size++) {
       b_THseln[ib_size] = THseln[(ib_size + 1) << 1];
     }
-    d_mldivide(b_dv1, b_THseln, b_dv2);
-    yhat_idx_2 = (b_dv2[0] + p * b_dv2[1]) + a * b_dv2[2];
+    c_mldivide(b_THseln, b_dv1);
+    yhat_idx_2 = (b_dv1[0] + p * b_dv1[1]) + a * b_dv1[2];
     for (ib_size = 0; ib_size < 9; ib_size++) {
       b_THseln[ib_size] = THseln[((ib_size + 1) << 1) + 1];
     }
-    d_mldivide(b_dv1, b_THseln, b_dv2);
-    a = (b_dv2[0] + p * b_dv2[1]) + a * b_dv2[2];
+    c_mldivide(b_THseln, b_dv1);
+    a = (b_dv1[0] + p * b_dv1[1]) + a * b_dv1[2];
   } else {
     yhat_idx_0 = THseln[0];
     yhat_idx_1 = THseln[1];

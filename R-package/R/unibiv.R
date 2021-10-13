@@ -42,6 +42,8 @@
 #'                  presence of normality for each ellipse should leave
 #'                  outside \code{5\%} of the values.
 #'
+#' @param trace Whether to print intermediate results. Default is \code{trace=FALSE}.
+#'
 #' @return
 #'
 #' \code{fre} a \code{n x 4} matrix which contains details about the univariate and

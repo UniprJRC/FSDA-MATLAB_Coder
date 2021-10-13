@@ -29,8 +29,6 @@ void c_combineVectorElements(const emxArray_boolean_T *x, emxArray_int32_T *y);
 
 void combineVectorElements(const emxArray_real_T *x, emxArray_real_T *y);
 
-double d_combineVectorElements(const emxArray_real_T *x);
-
 #ifdef __cplusplus
 }
 #endif

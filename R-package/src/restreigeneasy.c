@@ -19,22 +19,162 @@
 #include "rt_nonfinite.h"
 #include "sort.h"
 #include "sum.h"
+#include "sumprod.h"
 #include <math.h>
 #include <string.h>
 
+/* Function Declarations */
+static void rg_binary_expand_op(emxArray_real_T *x, const emxArray_real_T *r,
+                                int mp);
+
+static void sg_binary_expand_op(emxArray_real_T *dnis, const emxArray_real_T *x,
+                                const emxArray_real_T *s, int mp,
+                                const emxArray_real_T *t, double restr);
+
+static void tg_binary_expand_op(emxArray_real_T *r, int mp,
+                                const emxArray_int32_T *r2,
+                                const emxArray_int32_T *r3);
+
 /* Function Definitions */
+static void rg_binary_expand_op(emxArray_real_T *x, const emxArray_real_T *r,
+                                int mp)
+{
+  emxArray_real_T *b_x;
+  const double *r_data;
+  double *b_x_data;
+  double *x_data;
+  int i;
+  int loop_ub;
+  int stride_0_0;
+  int stride_1_0;
+  r_data = r->data;
+  x_data = x->data;
+  emxInit_real_T(&b_x, 1);
+  i = r->size[0];
+  stride_0_0 = b_x->size[0];
+  if (i == 1) {
+    b_x->size[0] = x->size[0];
+  } else {
+    b_x->size[0] = i;
+  }
+  emxEnsureCapacity_real_T(b_x, stride_0_0);
+  b_x_data = b_x->data;
+  stride_0_0 = (x->size[0] != 1);
+  stride_1_0 = (i != 1);
+  if (i == 1) {
+    loop_ub = x->size[0];
+  } else {
+    loop_ub = i;
+  }
+  for (i = 0; i < loop_ub; i++) {
+    b_x_data[i] =
+        x_data[i * stride_0_0] * r_data[i * stride_1_0 + r->size[0] * mp];
+  }
+  i = x->size[0];
+  x->size[0] = b_x->size[0];
+  emxEnsureCapacity_real_T(x, i);
+  x_data = x->data;
+  loop_ub = b_x->size[0];
+  for (i = 0; i < loop_ub; i++) {
+    x_data[i] = b_x_data[i];
+  }
+  emxFree_real_T(&b_x);
+}
+
+static void sg_binary_expand_op(emxArray_real_T *dnis, const emxArray_real_T *x,
+                                const emxArray_real_T *s, int mp,
+                                const emxArray_real_T *t, double restr)
+{
+  const double *s_data;
+  const double *t_data;
+  const double *x_data;
+  double *dnis_data;
+  int i;
+  int i1;
+  int i2;
+  int loop_ub;
+  int stride_0_0;
+  int stride_1_0;
+  int stride_2_0;
+  t_data = t->data;
+  s_data = s->data;
+  x_data = x->data;
+  i = s->size[0];
+  i1 = t->size[0];
+  loop_ub = dnis->size[0];
+  if (i1 == 1) {
+    i2 = i;
+  } else {
+    i2 = i1;
+  }
+  if (i2 == 1) {
+    dnis->size[0] = x->size[0];
+  } else if (i1 == 1) {
+    dnis->size[0] = i;
+  } else {
+    dnis->size[0] = i1;
+  }
+  emxEnsureCapacity_real_T(dnis, loop_ub);
+  dnis_data = dnis->data;
+  stride_0_0 = (x->size[0] != 1);
+  stride_1_0 = (i != 1);
+  stride_2_0 = (i1 != 1);
+  if (i1 == 1) {
+    i2 = i;
+  } else {
+    i2 = i1;
+  }
+  if (i2 == 1) {
+    loop_ub = x->size[0];
+  } else if (i1 == 1) {
+    loop_ub = i;
+  } else {
+    loop_ub = i1;
+  }
+  for (i = 0; i < loop_ub; i++) {
+    dnis_data[i] = x_data[i * stride_0_0] *
+                   (s_data[i * stride_1_0 + s->size[0] * mp] +
+                    t_data[i * stride_2_0 + t->size[0] * mp] / restr);
+  }
+}
+
+static void tg_binary_expand_op(emxArray_real_T *r, int mp,
+                                const emxArray_int32_T *r2,
+                                const emxArray_int32_T *r3)
+{
+  double *r_data;
+  const int *b_r;
+  const int *r1;
+  int i;
+  int loop_ub;
+  int stride_0_0;
+  int stride_1_0;
+  b_r = r3->data;
+  r1 = r2->data;
+  r_data = r->data;
+  stride_0_0 = (r2->size[0] != 1);
+  stride_1_0 = (r3->size[0] != 1);
+  if (r3->size[0] == 1) {
+    loop_ub = r2->size[0];
+  } else {
+    loop_ub = r3->size[0];
+  }
+  for (i = 0; i < loop_ub; i++) {
+    r_data[i + r->size[0] * mp] =
+        (double)r1[i * stride_0_0] + (double)b_r[i * stride_1_0];
+  }
+}
+
 void restreigeneasy(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
                     double restr)
 {
   emxArray_boolean_T *b_d;
-  emxArray_boolean_T *x;
   emxArray_int32_T *r1;
-  emxArray_int32_T *r2;
+  emxArray_int32_T *r3;
   emxArray_real_T *b_dnis;
   emxArray_real_T *b_nis;
   emxArray_real_T *b_r;
-  emxArray_real_T *b_x;
-  emxArray_real_T *c_x;
+  emxArray_real_T *c_d;
   emxArray_real_T *d;
   emxArray_real_T *dnis;
   emxArray_real_T *e;
@@ -45,18 +185,37 @@ void restreigeneasy(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
   emxArray_real_T *s;
   emxArray_real_T *sol;
   emxArray_real_T *t;
+  emxArray_real_T *x;
+  const double *niini_data;
   double a_tmp;
   double dimsor;
   double maxdnis;
   double n;
+  double *d_data;
+  double *dnis_data;
+  double *e_data;
+  double *ed_data;
+  double *eigenvalues_data;
+  double *nis_data;
+  double *obj_data;
+  double *r_data;
+  double *s_data;
+  double *sol_data;
+  double *t_data;
+  int d_d;
   int i;
   int ibtile;
   int jtilecol;
   int k;
   int nrows;
   int ntilecols;
+  int *r2;
+  int *r4;
   bool exitg1;
   bool y;
+  bool *b_d_data;
+  niini_data = niini->data;
+  eigenvalues_data = eigenvalues->data;
   emxInit_real_T(&d, 2);
   /* restreigeneasy computes eigenvalues restriction (without Dykstra algorithm)
    */
@@ -97,7 +256,6 @@ void restreigeneasy(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
   /*  */
   /*   Output: */
   /*  */
-  /*  */
   /*             out      : Restricted eigenvalues. Matrix. v-by-k matrix */
   /*                        containing restricted eigenvalues. */
   /*                        The ratio between two possible elements in matrix */
@@ -125,8 +283,6 @@ void restreigeneasy(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
   /*  Fritz H., Garcia Escudero L.A. and Mayo-Iscar A. (2012). (FGM2012 in the
    */
   /*  code below) */
-  /*  */
-  /*  */
   /*  */
   /* <a href="matlab: docsearchFS('restreigeneasy')">Link to the help
    * function</a> */
@@ -263,12 +419,13 @@ void restreigeneasy(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
   d->size[0] = eigenvalues->size[1];
   d->size[1] = eigenvalues->size[0];
   emxEnsureCapacity_real_T(d, i);
+  d_data = d->data;
   ntilecols = eigenvalues->size[0];
   for (i = 0; i < ntilecols; i++) {
     nrows = eigenvalues->size[1];
     for (ibtile = 0; ibtile < nrows; ibtile++) {
-      d->data[ibtile + d->size[0] * i] =
-          eigenvalues->data[i + eigenvalues->size[0] * ibtile];
+      d_data[ibtile + d->size[0] * i] =
+          eigenvalues_data[i + eigenvalues->size[0] * ibtile];
     }
   }
   emxInit_real_T(&nis, 2);
@@ -285,12 +442,13 @@ void restreigeneasy(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
   nis->size[0] = niini->size[0];
   nis->size[1] = eigenvalues->size[0];
   emxEnsureCapacity_real_T(nis, i);
+  nis_data = nis->data;
   nrows = niini->size[0];
   ntilecols = eigenvalues->size[0];
   for (jtilecol = 0; jtilecol < ntilecols; jtilecol++) {
     ibtile = jtilecol * nrows;
     for (k = 0; k < nrows; k++) {
-      nis->data[ibtile + k] = niini->data[k];
+      nis_data[ibtile + k] = niini_data[k];
     }
   }
   emxInit_real_T(&dnis, 1);
@@ -311,17 +469,19 @@ void restreigeneasy(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
   dnis->size[0] = eigenvalues->size[0] * eigenvalues->size[1] +
                   eigenvalues->size[0] * eigenvalues->size[1];
   emxEnsureCapacity_real_T(dnis, i);
+  dnis_data = dnis->data;
   ntilecols = eigenvalues->size[0] * eigenvalues->size[1];
   for (i = 0; i < ntilecols; i++) {
-    dnis->data[i] = eigenvalues->data[i] / restr;
+    dnis_data[i] = eigenvalues_data[i] / restr;
   }
   ntilecols = eigenvalues->size[0] * eigenvalues->size[1];
   for (i = 0; i < ntilecols; i++) {
-    dnis->data[i + eigenvalues->size[0] * eigenvalues->size[1]] =
-        eigenvalues->data[i];
+    dnis_data[i + eigenvalues->size[0] * eigenvalues->size[1]] =
+        eigenvalues_data[i];
   }
   emxInit_real_T(&b_dnis, 2);
   c_sort(dnis);
+  dnis_data = dnis->data;
   /*  dimsor=length(dsor); */
   dimsor = (double)eigenvalues->size[1] * (double)eigenvalues->size[0] * 2.0;
   /*  d1 is like dsor but contains an additional element which is larger than
@@ -335,29 +495,32 @@ void restreigeneasy(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
   b_dnis->size[0] = 1;
   b_dnis->size[1] = dnis->size[0] + 1;
   emxEnsureCapacity_real_T(b_dnis, i);
+  eigenvalues_data = b_dnis->data;
   ntilecols = dnis->size[0];
   for (i = 0; i < ntilecols; i++) {
-    b_dnis->data[i] = dnis->data[i];
+    eigenvalues_data[i] = dnis_data[i];
   }
   emxInit_real_T(&r, 2);
-  b_dnis->data[dnis->size[0]] = dnis->data[(int)dimsor - 1] * 2.0;
+  eigenvalues_data[dnis->size[0]] = dnis_data[(int)dimsor - 1] * 2.0;
   i = r->size[0] * r->size[1];
   r->size[0] = 1;
   r->size[1] = dnis->size[0] + 1;
   emxEnsureCapacity_real_T(r, i);
-  r->data[0] = 0.0;
+  e_data = r->data;
+  e_data[0] = 0.0;
   ntilecols = dnis->size[0];
   for (i = 0; i < ntilecols; i++) {
-    r->data[i + 1] = dnis->data[i];
+    e_data[i + 1] = dnis_data[i];
   }
   emxInit_real_T(&ed, 2);
   i = ed->size[0] * ed->size[1];
   ed->size[0] = 1;
   ed->size[1] = b_dnis->size[1];
   emxEnsureCapacity_real_T(ed, i);
+  ed_data = ed->data;
   ntilecols = b_dnis->size[1];
   for (i = 0; i < ntilecols; i++) {
-    ed->data[i] = (b_dnis->data[i] + r->data[i]) / 2.0;
+    ed_data[i] = (eigenvalues_data[i] + e_data[i]) / 2.0;
   }
   emxFree_real_T(&b_dnis);
   dimsor++;
@@ -368,7 +531,7 @@ void restreigeneasy(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
   ntilecols = nis->size[0] * nis->size[1] - 1;
   nrows = 0;
   for (ibtile = 0; ibtile <= ntilecols; ibtile++) {
-    if (nis->data[ibtile] > 0.0) {
+    if (nis_data[ibtile] > 0.0) {
       nrows++;
     }
   }
@@ -376,47 +539,51 @@ void restreigeneasy(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
   i = r1->size[0];
   r1->size[0] = nrows;
   emxEnsureCapacity_int32_T(r1, i);
+  r2 = r1->data;
   nrows = 0;
   for (ibtile = 0; ibtile <= ntilecols; ibtile++) {
-    if (nis->data[ibtile] > 0.0) {
-      r1->data[nrows] = ibtile + 1;
+    if (nis_data[ibtile] > 0.0) {
+      r2[nrows] = ibtile + 1;
       nrows++;
     }
   }
   i = dnis->size[0];
   dnis->size[0] = r1->size[0];
   emxEnsureCapacity_real_T(dnis, i);
+  dnis_data = dnis->data;
   ntilecols = r1->size[0];
   for (i = 0; i < ntilecols; i++) {
-    dnis->data[i] = d->data[r1->data[i] - 1];
+    dnis_data[i] = d_data[r2[i] - 1];
   }
   maxdnis = b_maximum(dnis);
   if (!(maxdnis <= 1.0E-8)) {
     /*  we check if the  eigenvalues verify the restrictions */
     /*  abs here is just for computational purposes */
-    emxInit_int32_T(&r2, 1);
+    emxInit_int32_T(&r3, 1);
     if (fabs(maxdnis / b_minimum(dnis)) <= restr) {
-      emxInit_boolean_T(&x, 2);
+      emxInit_boolean_T(&b_d, 2);
       /*  If all eigenvalues satisy the constraint */
       /*  no further changes on the eigenvalues required, so return them
        * immediately! */
       /*  Simply replace the 0 eigenvalues with the mean of the eigenvalues */
       /*  which are greater than zero */
       minimum(nis, r);
-      i = x->size[0] * x->size[1];
-      x->size[0] = 1;
-      x->size[1] = r->size[1];
-      emxEnsureCapacity_boolean_T(x, i);
+      e_data = r->data;
+      i = b_d->size[0] * b_d->size[1];
+      b_d->size[0] = 1;
+      b_d->size[1] = r->size[1];
+      emxEnsureCapacity_boolean_T(b_d, i);
+      b_d_data = b_d->data;
       ntilecols = r->size[1];
       for (i = 0; i < ntilecols; i++) {
-        x->data[i] = (r->data[i] == 0.0);
+        b_d_data[i] = (e_data[i] == 0.0);
       }
-      y = (x->size[1] != 0);
+      y = (b_d->size[1] != 0);
       if (y) {
         k = 0;
         exitg1 = false;
-        while ((!exitg1) && (k <= x->size[1] - 1)) {
-          if (!x->data[k]) {
+        while ((!exitg1) && (k <= b_d->size[1] - 1)) {
+          if (!b_d_data[k]) {
             y = false;
             exitg1 = true;
           } else {
@@ -424,41 +591,43 @@ void restreigeneasy(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
           }
         }
       }
-      emxFree_boolean_T(&x);
+      emxFree_boolean_T(&b_d);
       if (y) {
         ntilecols = nis->size[0] * nis->size[1] - 1;
         nrows = 0;
         for (ibtile = 0; ibtile <= ntilecols; ibtile++) {
-          if (nis->data[ibtile] == 0.0) {
+          if (nis_data[ibtile] == 0.0) {
             nrows++;
           }
         }
-        i = r2->size[0];
-        r2->size[0] = nrows;
-        emxEnsureCapacity_int32_T(r2, i);
+        i = r3->size[0];
+        r3->size[0] = nrows;
+        emxEnsureCapacity_int32_T(r3, i);
+        r4 = r3->data;
         nrows = 0;
         for (ibtile = 0; ibtile <= ntilecols; ibtile++) {
-          if (nis->data[ibtile] == 0.0) {
-            r2->data[nrows] = ibtile + 1;
+          if (nis_data[ibtile] == 0.0) {
+            r4[nrows] = ibtile + 1;
             nrows++;
           }
         }
         dimsor = blockedSummation(dnis, r1->size[0]) / (double)r1->size[0];
-        ntilecols = r2->size[0] - 1;
+        ntilecols = r3->size[0] - 1;
         for (i = 0; i <= ntilecols; i++) {
-          d->data[r2->data[i] - 1] = dimsor;
+          d_data[r4[i] - 1] = dimsor;
         }
       }
       i = eigenvalues->size[0] * eigenvalues->size[1];
       eigenvalues->size[0] = d->size[1];
       eigenvalues->size[1] = d->size[0];
       emxEnsureCapacity_real_T(eigenvalues, i);
+      eigenvalues_data = eigenvalues->data;
       ntilecols = d->size[0];
       for (i = 0; i < ntilecols; i++) {
         nrows = d->size[1];
         for (ibtile = 0; ibtile < nrows; ibtile++) {
-          eigenvalues->data[ibtile + eigenvalues->size[0] * i] =
-              d->data[i + d->size[0] * ibtile];
+          eigenvalues_data[ibtile + eigenvalues->size[0] * i] =
+              d_data[i + d->size[0] * ibtile];
         }
       }
     } else {
@@ -480,27 +649,30 @@ void restreigeneasy(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
       nrows = (int)dimsor;
       t->size[1] = (int)dimsor;
       emxEnsureCapacity_real_T(t, i);
+      t_data = t->data;
       ntilecols = eigenvalues->size[1] * (int)dimsor;
       for (i = 0; i < ntilecols; i++) {
-        t->data[i] = 0.0;
+        t_data[i] = 0.0;
       }
       emxInit_real_T(&s, 2);
       i = s->size[0] * s->size[1];
       s->size[0] = eigenvalues->size[1];
       s->size[1] = (int)dimsor;
       emxEnsureCapacity_real_T(s, i);
+      s_data = s->data;
       ntilecols = eigenvalues->size[1] * (int)dimsor;
       for (i = 0; i < ntilecols; i++) {
-        s->data[i] = 0.0;
+        s_data[i] = 0.0;
       }
       emxInit_real_T(&b_r, 2);
       i = b_r->size[0] * b_r->size[1];
       b_r->size[0] = eigenvalues->size[1];
       b_r->size[1] = (int)dimsor;
       emxEnsureCapacity_real_T(b_r, i);
+      r_data = b_r->data;
       ntilecols = eigenvalues->size[1] * (int)dimsor;
       for (i = 0; i < ntilecols; i++) {
-        b_r->data[i] = 0.0;
+        r_data[i] = 0.0;
       }
       emxInit_real_T(&sol, 1);
       /*  sol and obj are two column vectors of size 2*k*v+1 */
@@ -513,8 +685,9 @@ void restreigeneasy(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
       i = sol->size[0];
       sol->size[0] = (int)dimsor;
       emxEnsureCapacity_real_T(sol, i);
+      sol_data = sol->data;
       for (i = 0; i < nrows; i++) {
-        sol->data[i] = 0.0;
+        sol_data[i] = 0.0;
       }
       emxInit_real_T(&obj, 1);
       /*  obj is the vector which contains the function which must be */
@@ -527,8 +700,9 @@ void restreigeneasy(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
       i = obj->size[0];
       obj->size[0] = (int)dimsor;
       emxEnsureCapacity_real_T(obj, i);
+      obj_data = obj->data;
       for (i = 0; i < nrows; i++) {
-        obj->data[i] = 0.0;
+        obj_data[i] = 0.0;
       }
       /*  The candidates values of mp which minimize the objective function are
        */
@@ -536,12 +710,12 @@ void restreigeneasy(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
                     (double)eigenvalues->size[0] +
                 1.0);
       emxInit_real_T(&e, 2);
-      emxInit_real_T(&b_x, 1);
-      emxInit_real_T(&c_x, 2);
+      emxInit_real_T(&x, 1);
       emxInit_boolean_T(&b_d, 2);
+      emxInit_real_T(&c_d, 2);
       emxInit_real_T(&b_nis, 2);
       for (jtilecol = 0; jtilecol < i; jtilecol++) {
-        dimsor = ed->data[jtilecol];
+        dimsor = ed_data[jtilecol];
         maxdnis = dimsor * restr;
         /*  Computation of r s and t */
         /*  Note that the sum goes from 1 to v */
@@ -549,53 +723,66 @@ void restreigeneasy(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
         b_d->size[0] = d->size[0];
         b_d->size[1] = d->size[1];
         emxEnsureCapacity_boolean_T(b_d, ibtile);
+        b_d_data = b_d->data;
         ntilecols = d->size[0] * d->size[1];
         for (ibtile = 0; ibtile < ntilecols; ibtile++) {
-          b_d->data[ibtile] = (d->data[ibtile] < dimsor);
+          b_d_data[ibtile] = (d_data[ibtile] < dimsor);
         }
         c_combineVectorElements(b_d, r1);
+        r2 = r1->data;
         ibtile = b_d->size[0] * b_d->size[1];
         b_d->size[0] = d->size[0];
         b_d->size[1] = d->size[1];
         emxEnsureCapacity_boolean_T(b_d, ibtile);
+        b_d_data = b_d->data;
         ntilecols = d->size[0] * d->size[1];
         for (ibtile = 0; ibtile < ntilecols; ibtile++) {
-          b_d->data[ibtile] = (d->data[ibtile] > maxdnis);
+          b_d_data[ibtile] = (d_data[ibtile] > maxdnis);
         }
-        c_combineVectorElements(b_d, r2);
-        ntilecols = r1->size[0];
-        for (ibtile = 0; ibtile < ntilecols; ibtile++) {
-          b_r->data[ibtile + b_r->size[0] * jtilecol] =
-              (double)r1->data[ibtile] + (double)r2->data[ibtile];
+        c_combineVectorElements(b_d, r3);
+        r4 = r3->data;
+        if (r1->size[0] == r3->size[0]) {
+          ntilecols = r1->size[0];
+          for (ibtile = 0; ibtile < ntilecols; ibtile++) {
+            r_data[ibtile + b_r->size[0] * jtilecol] =
+                (double)r2[ibtile] + (double)r4[ibtile];
+          }
+        } else {
+          tg_binary_expand_op(b_r, jtilecol, r1, r3);
+          r_data = b_r->data;
         }
-        dimsor = ed->data[jtilecol];
-        ibtile = e->size[0] * e->size[1];
-        e->size[0] = d->size[0];
-        e->size[1] = d->size[1];
-        emxEnsureCapacity_real_T(e, ibtile);
+        dimsor = ed_data[jtilecol];
+        ibtile = c_d->size[0] * c_d->size[1];
+        c_d->size[0] = d->size[0];
+        c_d->size[1] = d->size[1];
+        emxEnsureCapacity_real_T(c_d, ibtile);
+        eigenvalues_data = c_d->data;
         ntilecols = d->size[0] * d->size[1];
         for (ibtile = 0; ibtile < ntilecols; ibtile++) {
-          e->data[ibtile] =
-              d->data[ibtile] * (double)(d->data[ibtile] < dimsor);
+          eigenvalues_data[ibtile] =
+              d_data[ibtile] * (double)(d_data[ibtile] < dimsor);
         }
-        sum(e, dnis);
-        ntilecols = dnis->size[0];
+        sum(c_d, x);
+        eigenvalues_data = x->data;
+        ntilecols = x->size[0];
         for (ibtile = 0; ibtile < ntilecols; ibtile++) {
-          s->data[ibtile + s->size[0] * jtilecol] = dnis->data[ibtile];
+          s_data[ibtile + s->size[0] * jtilecol] = eigenvalues_data[ibtile];
         }
-        ibtile = e->size[0] * e->size[1];
-        e->size[0] = d->size[0];
-        e->size[1] = d->size[1];
-        emxEnsureCapacity_real_T(e, ibtile);
+        ibtile = c_d->size[0] * c_d->size[1];
+        c_d->size[0] = d->size[0];
+        c_d->size[1] = d->size[1];
+        emxEnsureCapacity_real_T(c_d, ibtile);
+        eigenvalues_data = c_d->data;
         ntilecols = d->size[0] * d->size[1];
         for (ibtile = 0; ibtile < ntilecols; ibtile++) {
-          e->data[ibtile] =
-              d->data[ibtile] * (double)(d->data[ibtile] > maxdnis);
+          eigenvalues_data[ibtile] =
+              d_data[ibtile] * (double)(d_data[ibtile] > maxdnis);
         }
-        sum(e, dnis);
-        ntilecols = dnis->size[0];
+        sum(c_d, x);
+        eigenvalues_data = x->data;
+        ntilecols = x->size[0];
         for (ibtile = 0; ibtile < ntilecols; ibtile++) {
-          t->data[ibtile + t->size[0] * jtilecol] = dnis->data[ibtile];
+          t_data[ibtile + t->size[0] * jtilecol] = eigenvalues_data[ibtile];
         }
         /*  The natural loop is clearly slower */
         /*              for i=1:k */
@@ -607,29 +794,45 @@ void restreigeneasy(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
         /*  Note that here the sum goes from 1 to k */
         /*  sol(mp) \sum_{j=1}^k n_j (s_j +t_j/c)  / \sum_{j=1}^k n_j r_j */
         ntilecols = niini->size[0];
-        ibtile = b_x->size[0];
-        b_x->size[0] = niini->size[0];
-        emxEnsureCapacity_real_T(b_x, ibtile);
+        ibtile = x->size[0];
+        x->size[0] = niini->size[0];
+        emxEnsureCapacity_real_T(x, ibtile);
+        eigenvalues_data = x->data;
         for (ibtile = 0; ibtile < ntilecols; ibtile++) {
-          b_x->data[ibtile] = niini->data[ibtile] / n;
+          eigenvalues_data[ibtile] = niini_data[ibtile] / n;
         }
-        ibtile = dnis->size[0];
-        dnis->size[0] = b_x->size[0];
-        emxEnsureCapacity_real_T(dnis, ibtile);
-        ntilecols = b_x->size[0];
-        for (ibtile = 0; ibtile < ntilecols; ibtile++) {
-          dnis->data[ibtile] =
-              b_x->data[ibtile] *
-              (s->data[ibtile + s->size[0] * jtilecol] +
-               t->data[ibtile + t->size[0] * jtilecol] / restr);
+        if (s->size[0] == 1) {
+          ntilecols = t->size[0];
+        } else {
+          ntilecols = s->size[0];
         }
-        ntilecols = b_x->size[0];
-        for (ibtile = 0; ibtile < ntilecols; ibtile++) {
-          b_x->data[ibtile] *= b_r->data[ibtile + b_r->size[0] * jtilecol];
+        if ((s->size[0] == t->size[0]) && (x->size[0] == ntilecols)) {
+          ibtile = dnis->size[0];
+          dnis->size[0] = x->size[0];
+          emxEnsureCapacity_real_T(dnis, ibtile);
+          dnis_data = dnis->data;
+          ntilecols = x->size[0];
+          for (ibtile = 0; ibtile < ntilecols; ibtile++) {
+            dnis_data[ibtile] =
+                eigenvalues_data[ibtile] *
+                (s_data[ibtile + s->size[0] * jtilecol] +
+                 t_data[ibtile + t->size[0] * jtilecol] / restr);
+          }
+        } else {
+          sg_binary_expand_op(dnis, x, s, jtilecol, t, restr);
+        }
+        if (x->size[0] == b_r->size[0]) {
+          ntilecols = x->size[0];
+          for (ibtile = 0; ibtile < ntilecols; ibtile++) {
+            eigenvalues_data[ibtile] *=
+                r_data[ibtile + b_r->size[0] * jtilecol];
+          }
+        } else {
+          rg_binary_expand_op(x, b_r, jtilecol);
         }
         dimsor = blockedSummation(dnis, dnis->size[0]) /
-                 blockedSummation(b_x, b_x->size[0]);
-        sol->data[jtilecol] = dimsor;
+                 blockedSummation(x, x->size[0]);
+        sol_data[jtilecol] = dimsor;
         /*  solnum(mp)=sum(niini/n.*(s(:,mp)+t(:,mp)/c)); */
         /*  solden(mp)=(sum(niini/n.*(r(:,mp)))); */
         a_tmp = restr * dimsor;
@@ -637,66 +840,104 @@ void restreigeneasy(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
         e->size[0] = d->size[0];
         e->size[1] = d->size[1];
         emxEnsureCapacity_real_T(e, ibtile);
+        e_data = e->data;
         ntilecols = d->size[0] * d->size[1];
         for (ibtile = 0; ibtile < ntilecols; ibtile++) {
-          e->data[ibtile] =
-              (dimsor * (double)(d->data[ibtile] < dimsor) +
-               d->data[ibtile] * (double)(d->data[ibtile] >= dimsor) *
-                   (double)(d->data[ibtile] <= a_tmp)) +
-              a_tmp * (double)(d->data[ibtile] > a_tmp);
+          e_data[ibtile] =
+              (dimsor * (double)(d_data[ibtile] < dimsor) +
+               d_data[ibtile] * (double)(d_data[ibtile] >= dimsor) *
+                   (double)(d_data[ibtile] <= a_tmp)) +
+              a_tmp * (double)(d_data[ibtile] > a_tmp);
+        }
+        ibtile = c_d->size[0] * c_d->size[1];
+        c_d->size[0] = e->size[0];
+        c_d->size[1] = e->size[1];
+        emxEnsureCapacity_real_T(c_d, ibtile);
+        eigenvalues_data = c_d->data;
+        ntilecols = e->size[0] * e->size[1];
+        for (ibtile = 0; ibtile < ntilecols; ibtile++) {
+          eigenvalues_data[ibtile] = e_data[ibtile];
+        }
+        nrows = e->size[0] * e->size[1];
+        for (k = 0; k < nrows; k++) {
+          eigenvalues_data[k] = log(eigenvalues_data[k]);
         }
         /*  sol (mp) contains \sum_{j=1}^k \sum_{l=1}^v ( log d_{jl} + d_{jl}^m
          * / d_{jl} */
         /*  equation (3.4) */
-        ibtile = c_x->size[0] * c_x->size[1];
-        c_x->size[0] = e->size[0];
-        c_x->size[1] = e->size[1];
-        emxEnsureCapacity_real_T(c_x, ibtile);
-        ntilecols = e->size[0] * e->size[1];
-        for (ibtile = 0; ibtile < ntilecols; ibtile++) {
-          c_x->data[ibtile] = e->data[ibtile];
+        if (d->size[0] == 1) {
+          ntilecols = e->size[0];
+        } else {
+          ntilecols = d->size[0];
         }
-        nrows = e->size[0] * e->size[1];
-        for (k = 0; k < nrows; k++) {
-          c_x->data[k] = log(c_x->data[k]);
+        if (d->size[1] == 1) {
+          ibtile = e->size[1];
+        } else {
+          ibtile = d->size[1];
         }
-        ibtile = b_nis->size[0] * b_nis->size[1];
-        b_nis->size[0] = nis->size[0];
-        b_nis->size[1] = nis->size[1];
-        emxEnsureCapacity_real_T(b_nis, ibtile);
-        ntilecols = nis->size[0] * nis->size[1];
-        for (ibtile = 0; ibtile < ntilecols; ibtile++) {
-          b_nis->data[ibtile] =
-              nis->data[ibtile] / n *
-              (c_x->data[ibtile] + d->data[ibtile] / e->data[ibtile]);
+        if (c_d->size[0] == 1) {
+          if (d->size[0] == 1) {
+            k = e->size[0];
+          } else {
+            k = d->size[0];
+          }
+        } else {
+          k = c_d->size[0];
         }
-        combineVectorElements(b_nis, r);
-        obj->data[jtilecol] = d_combineVectorElements(r);
+        if (c_d->size[1] == 1) {
+          if (d->size[1] == 1) {
+            d_d = e->size[1];
+          } else {
+            d_d = d->size[1];
+          }
+        } else {
+          d_d = c_d->size[1];
+        }
+        if ((d->size[0] == e->size[0]) && (d->size[1] == e->size[1]) &&
+            (c_d->size[0] == ntilecols) && (c_d->size[1] == ibtile) &&
+            (nis->size[0] == k) && (nis->size[1] == d_d)) {
+          ibtile = b_nis->size[0] * b_nis->size[1];
+          b_nis->size[0] = nis->size[0];
+          b_nis->size[1] = nis->size[1];
+          emxEnsureCapacity_real_T(b_nis, ibtile);
+          dnis_data = b_nis->data;
+          ntilecols = nis->size[0] * nis->size[1];
+          for (ibtile = 0; ibtile < ntilecols; ibtile++) {
+            dnis_data[ibtile] =
+                nis_data[ibtile] / n *
+                (eigenvalues_data[ibtile] + d_data[ibtile] / e_data[ibtile]);
+          }
+          combineVectorElements(b_nis, r);
+        } else {
+          qg_binary_expand_op(r, nis, n, c_d, d, e);
+        }
+        obj_data[jtilecol] = e_sum(r);
       }
       emxFree_real_T(&b_nis);
+      emxFree_real_T(&c_d);
       emxFree_boolean_T(&b_d);
-      emxFree_real_T(&c_x);
-      emxFree_real_T(&b_x);
+      emxFree_real_T(&x);
       emxFree_real_T(&e);
       emxFree_real_T(&b_r);
       emxFree_real_T(&s);
       emxFree_real_T(&t);
       d_minimum(obj, &dimsor, &nrows);
       /*  m is the optimum value for the eigenvalues procedure */
-      dimsor = sol->data[nrows - 1];
+      dimsor = sol_data[nrows - 1];
       a_tmp = restr * dimsor;
       i = eigenvalues->size[0] * eigenvalues->size[1];
       eigenvalues->size[0] = d->size[1];
       eigenvalues->size[1] = d->size[0];
       emxEnsureCapacity_real_T(eigenvalues, i);
+      eigenvalues_data = eigenvalues->data;
       ntilecols = d->size[0];
       emxFree_real_T(&obj);
       emxFree_real_T(&sol);
       for (i = 0; i < ntilecols; i++) {
         nrows = d->size[1];
         for (ibtile = 0; ibtile < nrows; ibtile++) {
-          maxdnis = d->data[i + d->size[0] * ibtile];
-          eigenvalues->data[ibtile + eigenvalues->size[0] * i] =
+          maxdnis = d_data[i + d->size[0] * ibtile];
+          eigenvalues_data[ibtile + eigenvalues->size[0] * i] =
               (dimsor * (double)(maxdnis < dimsor) +
                maxdnis * (double)(maxdnis >= dimsor) *
                    (double)(maxdnis <= a_tmp)) +
@@ -704,7 +945,7 @@ void restreigeneasy(emxArray_real_T *eigenvalues, const emxArray_real_T *niini,
         }
       }
     }
-    emxFree_int32_T(&r2);
+    emxFree_int32_T(&r3);
   } else {
     /*  if all the eigenvalues are 0 this means all points are concentrated */
     /*  in k groups and there is a perfect fit */
