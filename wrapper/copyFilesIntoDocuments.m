@@ -34,7 +34,22 @@ cd(OldFolder)
 if ispc
     status=system('copy PersonalizedFiles\*.* %USERPROFILE%\Documents\fsdac\src');
 else
-    status=system('cp PersonalizedFiles/*.* ~/Documents/fsdac/src');
+
+    try
+        %system('cd ~')
+        %system('sudo chown -R $LOGNAME: ~/Documents/fsdac')
+        status=system('cp PersonalizedFiles/*.* ~/Documents/fsdac/src');
+    catch
+        disp('Due to write permission problems zip file in:')
+        disp(url)
+        disp('Due to write permission problems could not be copy needed files inside folder ')
+        disp('~/Documents/fsdac/src')
+        disp('To solve the problem, please run MATLAB as administrator')
+        disp('or manually from the terminal, type: "sudo chown -R $LOGNAME: ~/MATLAB/help/", otherwise the HTML FSDA graphical output will not be visible locally')
+        warning('FSDA:dowloadGraphicalOutput:NotExtracted','Impossible to extract FSDA graphical output')
+    end
+
+    
 end
 if status ~= 0
     error('FSDA:copyFilesIntoDocuments:Wrongcpy','Could not copy files inside PersonalizedFiles subfolder.');
@@ -76,5 +91,15 @@ if ispc
     %     disp(str)
     %     error('FSDA:Create_Rpackage_fsdaC:Wrongcmd','System command returned an error, check the syntax above.');
     % end
+else
+
+mydocpath = fullfile(getenv('USERPROFILE'), 'Documents');
+    cd(['~/' mydocpath])
+    a=system(['R CMD INSTALL --preclean --no-multiarch fsdac']);
     
+    if a ~= 0
+        error('FSDA:Create_Rpackage_fsdaC:Wrongcmd','System command returned an error, check the syntax above.');
+    end
+
+
 end
