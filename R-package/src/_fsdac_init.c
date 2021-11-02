@@ -7,6 +7,7 @@
 
 /* .C calls */
 extern void mycc(void *, void *);
+extern void r_fsmenvmmd(void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern void r_addt(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern void r_fsm(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern void r_fsmbsb(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
@@ -22,6 +23,7 @@ extern void r_unibiv(void *, void *, void *, void *, void *, void *, void *, voi
 
 static const R_CMethodDef CEntries[] = {
     {"mycc",      (DL_FUNC) &mycc,       2},
+    {"r_fsmenvmmd", (DL_FUNC) &r_fsmenvmmd,    9},
     {"r_addt",    (DL_FUNC) &r_addt,    12},
     {"r_fsm",     (DL_FUNC) &r_fsm,     20},
     {"r_fsmbsb",  (DL_FUNC) &r_fsmbsb,  16},
