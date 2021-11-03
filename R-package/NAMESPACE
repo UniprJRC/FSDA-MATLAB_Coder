@@ -4,7 +4,7 @@ importFrom("utils", "flush.console")
 importFrom("stats", "coef")
 importFrom("robustbase", "rankMM")
 
-export(myc, addt, FSRbsb, FSRfan, LXS, FSR, FSRmdr, Sreg, Sregeda, FSMenvmmd, FSMmmd, FSMbsb, FSM, unibiv
+export(myc, addt, FSRbsb, FSRfan, LXS, FSR, FSRmdr, Sreg, Sregeda, FSMenvmmd, FSRenvmdr, FSMmmd, FSMbsb, FSM, unibiv
 )
 
 ## S3 methods for ``our own'' S3 generics:
@@ -26,4 +26,5 @@ S3method(print, Sregeda)
 S3method(plot, FSRmdr)
 S3method(plot, FSMmmd)
 S3method(plot, FSMenvmmd)
+S3method(plot, FSRenvmdr)
 S3method(plot, FSM)
