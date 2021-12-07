@@ -121,6 +121,19 @@ function ComptimesAll = CreateTestCallFiles(varargin)
 %}
 
 %{
+    % CreateTestC with option ExcludeFile to skip some file(s) from the build
+    % process.  
+    % Note that you can provide a cell array of strings as follows:
+    CreateTestCallFiles('CreateMexFile',false, 'ExcludeFile', ...
+    {'FSMinvmmd_wrapper.m', 'FSRinvmdr_wrapper.m', 'tclust_wrapper.m', ...
+    'tclust_wrapper1.m'})
+    % or in alternative you can provide an array of strings:
+    ComptimesAll=CreateTestCallFiles('CreateMexFile',false, 'ExcludeFile', ...
+    ["FSMinvmmd_wrapper.m", "FSRinvmdr_wrapper.m", "tclust_wrapper.m", ...
+    "tclust_wrapper1.m"])
+%}
+
+%{
     % CreateTestC with option CreateMexFile set to false.
     % In this case mex files are not generated for testing that the output
     % of the conversion is the same as that of the original .m files.
@@ -177,8 +190,8 @@ end
 FileList=dir([InputPath '*_wrapper*.m']);
 
 if ~isempty(ExcludeFile)
-    sel=cellfun(@isempty,regexp({FileList.name},ExcludeFile));
-    FileList=FileList(sel);
+    [~, ia]=setdiff({FileList.name},ExcludeFile);
+    FileList=FileList(ia);
 end
 
 lFiles=length(FileList);
