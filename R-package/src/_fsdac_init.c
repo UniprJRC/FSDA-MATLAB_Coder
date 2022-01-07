@@ -9,7 +9,8 @@
 extern void mycc(void *, void *);
 extern void r_fsmenvmmd(void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern void r_fsrenvmdr(void *, void *, void *, void *, void *, void *, void *, void *);
-extern void r_addt(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
+extern void r_fsminvmmd(void *, void *, void *, void *, void *, void *, void *, void *);
+extern void r_fsrinvmdr(void *, void *, void *, void *, void *, void *, void *, void *);
 extern void r_fsm(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern void r_fsmbsb(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern void r_fsmmmd(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
@@ -26,7 +27,8 @@ static const R_CMethodDef CEntries[] = {
     {"mycc",      (DL_FUNC) &mycc,       2},
     {"r_fsmenvmmd", (DL_FUNC) &r_fsmenvmmd,    9},
     {"r_fsrenvmdr", (DL_FUNC) &r_fsrenvmdr,    8},
-    {"r_addt",    (DL_FUNC) &r_addt,    12},
+    {"r_fsrinvmdr", (DL_FUNC) &r_fsrinvmdr,    8},
+    {"r_fsminvmmd", (DL_FUNC) &r_fsminvmmd,    8},
     {"r_fsm",     (DL_FUNC) &r_fsm,     20},
     {"r_fsmbsb",  (DL_FUNC) &r_fsmbsb,  16},
     {"r_fsmmmd",  (DL_FUNC) &r_fsmmmd,  19},
