@@ -70,7 +70,7 @@ if ispc
     mydocpath = fullfile(getenv('USERPROFILE'), 'Documents');
     cd(mydocpath)
     % system('"c:\Program Files\R\R-4.1.0\bin\x64\R" CMD INSTALL --clean --no-multiarch fsdac')
-    a=system(['"c:\Program Files\R\R-' Rversion '\bin\x64\R" CMD INSTALL --clean --no-multiarch fsdac']);
+    a=system(['"c:\Program Files\R\R-' Rversion '\bin\x64\R" CMD INSTALL --preclean --no-multiarch fsdac']);
     
     if a ~= 0
         error('FSDA:Create_Rpackage_fsdaC:Wrongcmd','System command returned an error, check the syntax above.');
@@ -103,3 +103,4 @@ mydocpath = fullfile(getenv('USERPROFILE'), 'Documents');
 
 
 end
+cd(OldFolder)
