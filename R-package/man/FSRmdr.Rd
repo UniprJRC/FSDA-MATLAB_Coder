@@ -191,5 +191,5 @@ Atkinson, A.C. and Riani, M. (2000), \emph{Robust Diagnostic Regression Analysis
      in regression, \emph{Advances in Data Analysis and Classification}, \bold{1}, pp. 123--141.
 }
 \author{
-FSDA team, \email{valentin.todorov@chello.at}
+FSDA team, \email{valentin@todorov.at}
 }

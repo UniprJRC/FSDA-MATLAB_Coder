@@ -100,7 +100,7 @@
 #'    out <- FSRbsb(y, X, bsb)            # call 'FSRbsb' with all default parameters
 #'
 #' @export
-#' @author FSDA team, \email{valentin.todorov@@chello.at}
+#' @author FSDA team, \email{valentin@todorov.at}
 
 FSRbsb <- function(y, x, bsb, init, intercept=TRUE, nocheck=FALSE, bsbsteps, msg=TRUE, trace)
 {

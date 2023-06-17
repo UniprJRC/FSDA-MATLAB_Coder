@@ -38,7 +38,7 @@
 #'  \item \code{pval} p-value of the t-statistic
 #'  }
 #' @references
-#'       Atkinson A.C. and Riani M. (200), \emph{Robust Diagnostic Regression Analysis} Springer Verlag, New York.
+#'       Atkinson A.C. and Riani M. (2000), \emph{Robust Diagnostic Regression Analysis} Springer Verlag, New York.
 #'
 #' @examples
 #'
@@ -53,7 +53,7 @@
 #'    (out <- addt(y, X, w, intercept=TRUE, nocheck=FALSE))
 #'
 #' @export
-#' @author FSDA team, \email{valentin.todorov@@chello.at}
+#' @author FSDA team, \email{valentin@todorov.at}
 
 addt <- function(y, x, w, intercept=TRUE, la, nocheck=FALSE, trace)
 {

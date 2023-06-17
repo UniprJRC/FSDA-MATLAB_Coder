@@ -94,5 +94,5 @@ Atkinson, A.C., Riani, M. and Cerioli, A. (2004), \emph{Exploring multivariate
          data with the forward search}, Springer Verlag, New York.
 }
 \author{
-FSDA team, \email{valentin.todorov@chello.at}
+FSDA team, \email{valentin@todorov.at}
 }

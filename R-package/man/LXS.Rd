@@ -147,5 +147,5 @@ LXS computes the Least Median of Squares (LMS) or Least Trimmed Squares (LTS) es
 Rousseeuw P.J. and Leroy A.M. (1987), \emph{Robust regression and outlier detection}, Wiley.
 }
 \author{
-FSDA team, \email{valentin.todorov@chello.at}
+FSDA team, \email{valentin@todorov.at}
 }

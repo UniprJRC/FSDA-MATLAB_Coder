@@ -190,5 +190,5 @@ Rousseeuw, P.J., Perrotta, D., Riani, M. and Hubert, M. (2019), Robust Monitorin
  \doi{10.1016/j.ecosta.2018.05.001}.
 }
 \author{
-FSDA team, \email{valentin.todorov@chello.at}
+FSDA team, \email{valentin@todorov.at}
 }

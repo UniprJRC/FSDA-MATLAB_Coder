@@ -114,7 +114,7 @@
 #'  LXS(stackloss$stack.loss, stackloss[, -4])
 #'
 #' @export
-#' @author FSDA team, \email{valentin.todorov@@chello.at}
+#' @author FSDA team, \email{valentin@todorov.at}
 
 LXS <- function(y, x, intercept=TRUE, lms=1, rew=FALSE, bonflevoutX,
     alpha=0.5, h, conflev=0.975, nsamp, nomes=FALSE, msg=TRUE, nocheck=FALSE,

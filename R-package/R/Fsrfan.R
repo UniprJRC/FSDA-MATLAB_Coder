@@ -152,7 +152,7 @@
 #'    out <- FSRfan(y, X)                    # call 'FSRfan' with all default parameters
 #'
 #' @export
-#' @author FSDA team, \email{valentin.todorov@@chello.at}
+#' @author FSDA team, \email{valentin@todorov.at}
 
 FSRfan <- function(y, x, intercept=TRUE, family=c("BoxCox", "YJ", "YJpn", "YJall"), la, lms,
     alpha=0.75, h, nsamp=1000, init,  msg=TRUE, nocheck=FALSE,

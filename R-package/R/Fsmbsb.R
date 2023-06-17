@@ -58,7 +58,7 @@
 #'       forward search} Springer Verlag, New York.
 #'
 #' @export
-#' @author FSDA team, \email{valentin.todorov@@chello.at}
+#' @author FSDA team, \email{valentin@todorov.at}
 
 FSMbsb <- function(X, bsb, init, nocheck=FALSE, bsbsteps, msg=TRUE)
 {

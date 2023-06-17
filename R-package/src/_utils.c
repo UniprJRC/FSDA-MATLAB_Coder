@@ -105,6 +105,15 @@ emxArray_real_T *argInit_vector(double *yy, const int *nn)
     return ret;
 }
 
+emxArray_real_T *argInit_vector_row(double *yy, const int *nn)
+{
+
+    emxArray_real_T *ret = emxCreateWrapperND_real_T(yy, 1, nn);
+    ret->size[0] = 1;
+    ret->size[1] = *nn;
+    return ret;
+}
+
 emxArray_real_T *argInit_matrix(double *xx, const int *nn, const int *pp)
 {
     return emxCreateWrapper_real_T(xx, *nn, *pp);

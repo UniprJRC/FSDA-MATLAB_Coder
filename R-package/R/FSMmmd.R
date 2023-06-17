@@ -84,7 +84,7 @@
 #'  plot(mmd)
 #'
 #' @export
-#' @author FSDA team, \email{valentin.todorov@@chello.at}
+#' @author FSDA team, \email{valentin@todorov.at}
 
 ##  FSMmmd_wrapper arguments:
 ##      const emxArray_real_T *Y, const emxArray_real_T *bsb,

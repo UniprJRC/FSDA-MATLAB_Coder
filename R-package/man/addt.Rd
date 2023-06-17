@@ -62,8 +62,8 @@ Produces the t-test for an additional explanatory variable.
 
 }
 \references{
-Atkinson A.C. and Riani M. (200), \emph{Robust Diagnostic Regression Analysis} Springer Verlag, New York.
+Atkinson A.C. and Riani M. (2000), \emph{Robust Diagnostic Regression Analysis} Springer Verlag, New York.
 }
 \author{
-FSDA team, \email{valentin.todorov@chello.at}
+FSDA team, \email{valentin@todorov.at}
 }

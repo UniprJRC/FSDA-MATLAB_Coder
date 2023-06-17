@@ -160,7 +160,7 @@
 #'  LXS(stackloss$stack.loss, stackloss[, -4])
 #'
 #' @export
-#' @author FSDA team, \email{valentin.todorov@@chello.at}
+#' @author FSDA team, \email{valentin@todorov.at}
 
 ## These are the input parameters of LTSts_wrapper:
 ##  y, conflev,

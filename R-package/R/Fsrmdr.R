@@ -159,7 +159,7 @@
 #'    plot(out)                           # a very simple plot
 #'
 #' @export
-#' @author FSDA team, \email{valentin.todorov@@chello.at}
+#' @author FSDA team, \email{valentin@todorov.at}
 
 ##  FSRmdr_wrapper arguments:
 ##      const emxArray_real_T *y, const emxArray_real_T *X, const emxArray_real_T *bsb,

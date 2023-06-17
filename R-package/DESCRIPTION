@@ -1,7 +1,7 @@
 Package: fsdac
 Title: Robust Data Analysis through monitoring
 Version: 0.6-1
-Date: 2021-10-11
+Date: 2022-01-27
 VersionNote: Released ... on CRAN
 Authors@R: c(person("Valentin", "Todorov", role = c("aut", "cre"), email = "valentin@todorov.at", comment=c(ORCID = "0000-0003-4215-0245"))
          , person("Aldo", "Corbellini", role = "aut", email = "aldo.corbellini@unipr.it")
@@ -36,7 +36,7 @@ Depends: R (>= 3.0.2)
 Imports: robustbase
 LazyLoad: yes
 LazyData: yes
-License: GPL (>= 2)
+License: GPL (>= 3)
 Author: Valentin Todorov [aut, cre] (<https://orcid.org/0000-0003-4215-0245>),
   Aldo Corbellini [aut],
   Marco Riani [aut],
@@ -46,6 +46,4 @@ Author: Valentin Todorov [aut, cre] (<https://orcid.org/0000-0003-4215-0245>),
 Maintainer: Valentin Todorov <valentin@todorov.at>
 NeedsCompilation: yes
 Repository: CRAN
-RoxygenNote: 7.1.1
-
-
+RoxygenNote: 7.2.3
